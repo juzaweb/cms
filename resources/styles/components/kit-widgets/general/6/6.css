@@ -1,0 +1,22 @@
+.kit__g6 {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.kit__g6__status {
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    width: 6px;
+    z-index: 1;
+}
+
+.kit__g6__footer {
+    background: #f2f4f8;
+}
+
+[data-kit-theme='dark'] .kit__g6__footer {
+    background: #232135;
+}

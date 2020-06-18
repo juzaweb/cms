@@ -1,0 +1,18 @@
+.kit__c3__donut {
+    display: inline-block;
+    width: 1.06rem;
+    height: 1.06rem;
+    border-radius: 100%;
+    border: 4px solid #c8c4db;
+    position: relative;
+    top: 0.13rem;
+    margin-right: 0.26rem;
+}
+
+.kit__c3__donut--primary {
+    border-color: var(--kit-color-primary);
+}
+
+.kit__c3__donut--success {
+    border-color: #41b883;
+}

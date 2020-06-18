@@ -1,0 +1,81 @@
+/* MESSAGING APP */
+.kit__messaging {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 575px) {
+    .kit__messaging {
+        flex-direction: column;
+    }
+}
+
+.kit__messaging__sidebar {
+    width: 16.66rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 575px) {
+    .kit__messaging__sidebar {
+        width: auto;
+    }
+}
+
+.kit__messaging__searchIcon {
+    position: absolute;
+    color: #c8c4db;
+    font-size: 1.13rem;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+}
+
+.kit__messaging__searchInput {
+    border: 1px solid #e4e9f0;
+    border-radius: 5px;
+    background-color: #fff;
+    padding-left: 3rem;
+    padding-right: 1.33rem;
+    padding-top: 0.33rem;
+    padding-bottom: 0.26rem;
+    width: 100%;
+}
+
+.kit__messaging__dialogItems {
+    height: 100%;
+}
+
+@media (max-width: 575px) {
+    .kit__messaging__dialogItems {
+        max-height: 16rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.kit__messaging__dialogItem {
+    padding: 0.66rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.kit__messaging__dialogItem:last-child {
+    margin-bottom: 0;
+}
+
+.kit__messaging__dialogItem:hover, .kit__messaging__dialogItem--current {
+    background-color: #f2f4f8;
+}
+
+.kit__messaging__dialogInfo {
+    min-width: 0;
+}
+
+.kit__messaging__dialogBadge {
+    min-width: 15px;
+}
+
+[data-kit-theme='dark'] .kit__messaging__dialogItem:hover, [data-kit-theme='dark'] .kit__messaging__dialogItem--current {
+    background-color: #232135;
+}

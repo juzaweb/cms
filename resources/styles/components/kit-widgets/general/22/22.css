@@ -1,0 +1,27 @@
+.kit__g22__item {
+    position: relative;
+    padding-left: 3.66rem;
+    padding-bottom: 0.4rem;
+}
+
+.kit__g22__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 2.4rem;
+    color: #a1a1c2;
+}
+
+.kit__g22__title {
+    font-weight: bold;
+}
+
+.kit__g22__line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 100%;
+    border-radius: 2px;
+    background: #e4e9f0;
+}

@@ -1,0 +1,27 @@
+/*  JQUERY UI */
+.ui-sortable-placeholder {
+    border-color: #e4e9f0 !important;
+    visibility: visible !important;
+    background-size: 30px 30px;
+    background-image: linear-gradient(-45deg, #f2f4f8 25%, transparent 25%, transparent 50%, #f2f4f8 50%, #f2f4f8 75%, transparent 75%, transparent);
+    -webkit-animation: ui-placeholder-stripes 2s linear infinite;
+            animation: ui-placeholder-stripes 2s linear infinite;
+}
+
+@-webkit-keyframes ui-placeholder-stripes {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 60px 30px;
+    }
+}
+
+@keyframes ui-placeholder-stripes {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 60px 30px;
+    }
+}

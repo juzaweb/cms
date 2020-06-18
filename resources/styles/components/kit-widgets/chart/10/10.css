@@ -1,0 +1,18 @@
+.kit__c10__chartTooltip {
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: all 0.1s ease-in-out;
+}
+
+.kit__c10__tablet {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.66rem;
+    height: 0.53rem;
+    border-radius: 4px;
+    background-color: #a1a1c2;
+}

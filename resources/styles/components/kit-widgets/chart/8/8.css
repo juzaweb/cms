@@ -1,0 +1,29 @@
+.kit__c8__chartist {
+    display: inline-block;
+    height: 3.33rem;
+    width: 7.33rem;
+}
+
+.kit__c8__textDivider {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.kit__c8__textDivider::before, .kit__c8__textDivider::after {
+    content: '';
+    height: 1px;
+    width: 100%;
+    background-color: #e4e9f0;
+}
+
+.kit__c8__textDivider__content {
+    flex-shrink: 0;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+}
+
+[data-kit-theme='dark'] .kit__c8__textDivider::before, [data-kit-theme='dark'] .kit__c8__textDivider::after {
+    background-color: #232135;
+}

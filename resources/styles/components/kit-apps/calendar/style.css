@@ -1,0 +1,11 @@
+/* CALENDAR APP */
+.kit__calendar__event {
+    margin-top: 0.33rem;
+    margin-bottom: 0.33rem;
+    margin-right: 1.33rem;
+    white-space: nowrap;
+}
+
+.kit__calendar__event:last-child {
+    margin-right: 0;
+}

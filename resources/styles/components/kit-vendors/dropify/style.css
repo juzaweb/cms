@@ -1,0 +1,32 @@
+/*  DROPIFY */
+.dropify-wrapper {
+    border: 1px solid #e4e9f0;
+    border-radius: 5px;
+}
+
+.dropify-wrapper:hover {
+    background-image: linear-gradient(-45deg, #f2f4f8 25%, transparent 25%, transparent 50%, #f2f4f8 50%, #f2f4f8 75%, transparent 75%, transparent);
+}
+
+.dropify-wrapper.disabled {
+    opacity: 0.5;
+}
+
+[data-kit-theme='dark'] .dropify-wrapper {
+    background-color: #141322;
+    border-color: #232135;
+    color: #aeaee0;
+}
+
+[data-kit-theme='dark'] .dropify-wrapper:hover {
+    background-image: linear-gradient(-45deg, rgba(242, 244, 248, 0.03) 25%, transparent 25%, transparent 50%, rgba(242, 244, 248, 0.03) 50%, rgba(242, 244, 248, 0.03) 75%, transparent 75%, transparent);
+}
+
+[data-kit-theme='dark'] .dropify-wrapper .dropify-preview {
+    background-color: #141322;
+}
+
+[data-kit-theme='dark'] .dropify-wrapper .dropify-font-file,
+[data-kit-theme='dark'] .dropify-wrapper .file-icon {
+    color: #4f4f7a;
+}

@@ -1,0 +1,54 @@
+/* COLLAPSE */
+.accordion .card {
+    border-radius: 0;
+    margin-bottom: 0;
+    border-bottom-width: 0;
+}
+
+.accordion .card:first-child {
+    border-radius: 5px 5px 0 0;
+}
+
+.accordion .card:last-child {
+    border-radius: 0 0 5px 5px;
+    border-bottom-width: 1px;
+}
+
+.accordion .card .card-header {
+    cursor: pointer;
+}
+
+.accordion .card .card-header .card-title {
+    margin-bottom: 0;
+}
+
+.accordion .card .card-header.collapsed {
+    border: none;
+}
+
+.accordion.accordion-margin-bottom .card {
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    border-bottom-width: 1px;
+}
+
+.accordion .accordion-indicator {
+    padding-top: 1px;
+    color: #a1a1c2;
+}
+
+.accordion .accordion-indicator .plus {
+    display: none;
+}
+
+.accordion .accordion-indicator .minus {
+    display: inline;
+}
+
+.accordion .collapsed .accordion-indicator .plus {
+    display: inline;
+}
+
+.accordion .collapsed .accordion-indicator .minus {
+    display: none;
+}

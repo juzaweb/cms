@@ -1,0 +1,27 @@
+/*  PERFECT SCROLLBAR CUSTOM STYLES */
+.ps--theme_kit {
+    position: relative;
+    overflow: auto;
+}
+
+.ps--theme_kit.ps > .ps__scrollbar-y-rail > .ps__scrollbar-y {
+    width: 5px !important;
+}
+
+.ps--theme_kit.ps:hover > .ps__scrollbar-y-rail:hover,
+.ps--theme_kit.ps:hover > .ps__scrollbar-x-rail:hover {
+    background: none;
+    opacity: 0.7;
+}
+
+.ps--theme_kit.ps > .ps__scrollbar-y-rail > .ps__scrollbar-x,
+.ps--theme_kit.ps > .ps__scrollbar-y-rail > .ps__scrollbar-y {
+    background-color: #c8c4db !important;
+    opacity: 0.5;
+}
+
+.ps--theme_kit.ps.ps--in-scrolling.ps--x > .ps__scrollbar-x-rail,
+.ps--theme_kit.ps.ps--in-scrolling.ps--y > .ps__scrollbar-y-rail {
+    background-color: transparent;
+    opacity: 0.9;
+}

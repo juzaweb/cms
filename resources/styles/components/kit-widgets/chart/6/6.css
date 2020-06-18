@@ -1,0 +1,13 @@
+.kit__c6__progressIcon {
+    width: 3.33rem;
+    height: 3.33rem;
+    text-align: center;
+    border-radius: 5px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.kit__c6__progressIcon i {
+    vertical-align: middle;
+    line-height: 3.33rem;
+}

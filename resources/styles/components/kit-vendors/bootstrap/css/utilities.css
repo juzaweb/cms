@@ -1,0 +1,112 @@
+/* UTILITIES */
+.text-default {
+    color: #c8c4db !important;
+}
+
+.text-primary {
+    color: var(--kit-color-primary) !important;
+}
+
+.text-secondary {
+    color: #a1a1c2 !important;
+}
+
+.text-success {
+    color: #41b883 !important;
+}
+
+.text-danger {
+    color: #f5222e !important;
+}
+
+.text-warning {
+    color: #faad15 !important;
+}
+
+.text-info {
+    color: #42baf9 !important;
+}
+
+.text-light {
+    color: #f2f4f8 !important;
+}
+
+.text-dark {
+    color: #141322 !important;
+}
+
+.text-white {
+    color: #fff !important;
+}
+
+.text-muted {
+    color: #a1a1c2 !important;
+}
+
+.bg-default {
+    background-color: #c8c4db !important;
+}
+
+.bg-primary {
+    background-color: var(--kit-color-primary) !important;
+}
+
+.bg-secondary {
+    background-color: var(--kit-color-primary) !important;
+}
+
+.bg-success {
+    background-color: #41b883 !important;
+}
+
+.bg-danger {
+    background-color: #f5222e !important;
+}
+
+.bg-warning {
+    background-color: #faad15 !important;
+}
+
+.bg-info {
+    background-color: #42baf9 !important;
+}
+
+.bg-light {
+    background-color: #f2f4f8 !important;
+}
+
+.bg-dark {
+    background-color: #141322 !important;
+}
+
+.bg-white {
+    background-color: #fff !important;
+}
+
+[data-kit-theme='dark'] .text-light {
+    color: #141322 !important;
+}
+
+[data-kit-theme='dark'] .text-dark {
+    color: #aeaee0 !important;
+}
+
+[data-kit-theme='dark'] .text-muted {
+    color: #4f4f7a !important;
+}
+
+[data-kit-theme='dark'] .bg-light {
+    background-color: #141322 !important;
+}
+
+[data-kit-theme='dark'] .bg-dark {
+    background-color: #7575a3 !important;
+}
+
+[data-kit-theme='dark'] .border {
+    border-color: #232135 !important;
+}
+
+[data-kit-theme='dark'] .border-top, [data-kit-theme='dark'] .border-right, [data-kit-theme='dark'] .border-bottom, [data-kit-theme='dark'] .border-left {
+    border-color: #232135 !important;
+}

@@ -1,0 +1,7 @@
+.kit__g15__contentContainer {
+    border-bottom: 1px solid #e4e9f0;
+}
+
+[data-kit-theme='dark'] .kit__g15__contentContainer {
+    border-bottom: 1px solid #232135;
+}

@@ -1,0 +1,393 @@
+@charset "UTF-8";
+/* CRYPTO TERMINAL */
+.cui__crypto #cryptoChart text.version {
+    display: none;
+}
+
+.cui__crypto #cryptoChart .axis path,
+.cui__crypto #cryptoChart .axis line {
+    fill: none;
+    stroke: #141322;
+    shape-rendering: crispEdges;
+}
+
+.cui__crypto #cryptoChart text {
+    fill: #141322;
+}
+
+.cui__crypto #cryptoChart path {
+    fill: none;
+    stroke-width: 1px;
+}
+
+.cui__crypto #cryptoChart path.candle {
+    stroke: #000;
+}
+
+.cui__crypto #cryptoChart path.candle.body {
+    stroke-width: 0;
+}
+
+.cui__crypto #cryptoChart path.candle {
+    fill: #777;
+    stroke: #777;
+}
+
+.cui__crypto #cryptoChart path.candle.up {
+    fill: #06a35a;
+    stroke: #06a35a;
+}
+
+.cui__crypto #cryptoChart path.candle.down {
+    fill: #c23f3f;
+    stroke: #c23f3f;
+}
+
+.cui__crypto #cryptoChart .closeValue.annotation.up path {
+    fill: #06a35a;
+}
+
+.cui__crypto #cryptoChart .closeValue.annotation text {
+    fill: #fff;
+    font-size: 10px;
+}
+
+.cui__crypto #cryptoChart path.volume {
+    fill: #555;
+}
+
+.cui__crypto #cryptoChart .indicator-plot path.line {
+    fill: none;
+    stroke-width: 1;
+}
+
+.cui__crypto #cryptoChart .ma-0 path.line {
+    stroke: #1f77b4;
+}
+
+.cui__crypto #cryptoChart .ma-1 path.line {
+    stroke: #aec7e8;
+}
+
+.cui__crypto #cryptoChart .ma-2 path.line {
+    stroke: #ff7f0e;
+}
+
+.cui__crypto #cryptoChart button {
+    position: absolute;
+    right: 110px;
+    top: 25px;
+}
+
+.cui__crypto #cryptoChart path.macd {
+    stroke: #aec7e8;
+}
+
+.cui__crypto #cryptoChart path.signal {
+    stroke: #f99;
+}
+
+.cui__crypto #cryptoChart path.zero {
+    stroke: #bbb;
+    stroke-dasharray: 0;
+    stroke-opacity: 0.5;
+}
+
+.cui__crypto #cryptoChart path.difference {
+    fill: #555;
+}
+
+.cui__crypto #cryptoChart path.rsi {
+    stroke: #aec7e8;
+}
+
+.cui__crypto #cryptoChart path.overbought,
+.cui__crypto #cryptoChart path.oversold {
+    stroke: #f99;
+    stroke-dasharray: 5, 5;
+}
+
+.cui__crypto #cryptoChart path.middle,
+.cui__crypto #cryptoChart path.zero {
+    stroke: #bbb;
+    stroke-dasharray: 5, 5;
+}
+
+.cui__crypto #cryptoChart .analysis path,
+.cui__crypto #cryptoChart .analysis circle {
+    stroke: yellow;
+    stroke-width: 0.7;
+}
+
+.cui__crypto #cryptoChart .interaction path,
+.cui__crypto #cryptoChart .interaction circle {
+    pointer-events: all;
+}
+
+.cui__crypto #cryptoChart .interaction .body {
+    cursor: move;
+}
+
+.cui__crypto #cryptoChart .trendlines .interaction .start,
+.cui__crypto #cryptoChart .trendlines .interaction .end {
+    cursor: nwse-resize;
+}
+
+.cui__crypto #cryptoChart .trendline circle {
+    stroke-width: 0;
+    display: none;
+}
+
+.cui__crypto #cryptoChart .mouseover .trendline path {
+    stroke-width: 1;
+}
+
+.cui__crypto #cryptoChart .mouseover .trendline circle {
+    stroke-width: 1;
+    fill: yellow;
+    display: inline;
+}
+
+.cui__crypto #cryptoChart .supstance path {
+    stroke-dasharray: 2, 2;
+}
+
+.cui__crypto #cryptoChart .supstances .interaction path {
+    pointer-events: all;
+    cursor: ns-resize;
+}
+
+.cui__crypto #cryptoChart .supstances .axisannotation {
+    display: none;
+}
+
+.cui__crypto #cryptoChart .supstances .mouseover .axisannotation {
+    display: inline;
+}
+
+.cui__crypto #cryptoChart .supstances .axisannotation path {
+    fill: #806517;
+    stroke: none;
+}
+
+.cui__crypto #cryptoChart .mouseover .supstance path {
+    stroke-width: 1.5;
+}
+
+.cui__crypto #cryptoChart .crosshair {
+    cursor: crosshair;
+}
+
+.cui__crypto #cryptoChart .crosshair path.wire {
+    stroke: #555;
+    stroke-dasharray: 1, 1;
+}
+
+.cui__crypto #cryptoChart .crosshair .axisannotation path {
+    fill: #777;
+}
+
+.cui__crypto #cryptoChart .scope-composed-annotation text {
+    fill: #fff;
+    font-size: 10px;
+}
+
+.cui__crypto__table .table tr:first-child td {
+    border-top: 1px solid #e4e9f0;
+}
+
+.cui__crypto__table .table tr:last-child td {
+    border-bottom: 1px solid #e4e9f0;
+}
+
+.cui__crypto__table .table tr td:first-child {
+    border-left: 1px solid #e4e9f0;
+}
+
+.cui__crypto__table .table tr td:last-child {
+    border-right: 1px solid #e4e9f0;
+}
+
+.cui__crypto__list {
+    float: left;
+    width: 200px;
+}
+
+@media (max-width: 767px) {
+    .cui__crypto__list {
+        display: none;
+    }
+}
+
+.cui__crypto__list__mobile {
+    display: none;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 767px) {
+    .cui__crypto__list__mobile {
+        display: block;
+    }
+}
+
+.cui__crypto__list__title {
+    font-weight: bold;
+    display: block;
+}
+
+.cui__crypto__list__item {
+    display: block;
+    background: #f2f4f8;
+    padding: 0.66rem 1.33rem;
+    margin-bottom: 0.66rem;
+    border-radius: 5px;
+    color: #141322;
+    transition: all 0.1s ease-in-out;
+}
+
+body.cui__layout--grayBackground .cui__crypto__list__item {
+    background: #fff;
+}
+
+.cui__crypto__list__item:hover, .cui__crypto__list__item__current {
+    background: var(--kit-color-primary);
+    color: #fff;
+}
+
+.cui__crypto__list__item:hover .cui__crypto__list__percents span, .cui__crypto__list__item__current .cui__crypto__list__percents span {
+    color: #fff !important;
+}
+
+.cui__crypto__list__item:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.cui__crypto__list__item__negative .cui__crypto__list__percents span {
+    color: #f75535;
+}
+
+.cui__crypto__list__item__negative .cui__crypto__list__percents span:after {
+    content: ' ↓';
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.cui__crypto__list__currency {
+    float: left;
+}
+
+.cui__crypto__list__currency span {
+    display: block;
+    font-weight: bold;
+}
+
+.cui__crypto__list__percents {
+    float: right;
+    text-align: right;
+}
+
+.cui__crypto__list__percents span {
+    display: block;
+    font-weight: bold;
+    color: #00a45b;
+    transition: all 0.1s ease-in-out;
+}
+
+.cui__crypto__list__percents span:after {
+    content: ' ↑';
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.cui__crypto__content {
+    margin-left: 230px;
+}
+
+@media (max-width: 767px) {
+    .cui__crypto__content {
+        margin-left: 0;
+    }
+}
+
+.cui__crypto__warning {
+    padding-top: 1.33rem !important;
+    padding-bottom: 1.33rem !important;
+    cursor: pointer;
+}
+
+.cui__crypto__order {
+    display: flex;
+}
+
+@media (max-width: 1599px) {
+    .cui__crypto__order {
+        display: block;
+    }
+}
+
+.cui__crypto__order__left {
+    flex-grow: 1;
+}
+
+.cui__crypto__order__left .table {
+    text-align: right;
+}
+
+.cui__crypto__order__left .table td:last-child a {
+    color: var(--kit-color-primary);
+    font-weight: 700;
+}
+
+.cui__crypto__order__middle {
+    width: 16.66rem;
+    padding: 0 2rem;
+}
+
+@media (max-width: 1599px) {
+    .cui__crypto__order__middle {
+        width: auto;
+        margin: 1.33rem auto 2.66rem;
+    }
+}
+
+.cui__crypto__order__right {
+    flex-grow: 1;
+}
+
+.cui__crypto__order__right .table td:first-child a {
+    color: var(--kit-color-primary);
+    font-weight: 700;
+}
+
+.cui__crypto__form .form-control {
+    padding-left: 0.66rem;
+}
+
+.cui__crypto__form-label {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.cui__crypto__order__pagination {
+    display: flex;
+}
+
+.cui__crypto__order__pagination .pagination {
+    margin-left: auto;
+}
+
+[data-kit-theme='dark'] .cui__crypto__table .table tr td {
+    border-color: #232135;
+}
+
+[data-kit-theme='dark'] .cui__crypto__list__item {
+    background: #232135 !important;
+}
+
+[data-kit-theme='dark'] .cui__crypto__list__item:hover {
+    background: var(--kit-color-primary) !important;
+    color: #fff !important;
+}

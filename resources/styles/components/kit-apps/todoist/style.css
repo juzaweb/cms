@@ -1,0 +1,72 @@
+/* TODOIST */
+.kit__todoist {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 575px) {
+    .kit__todoist {
+        flex-direction: column;
+    }
+}
+
+.kit__todoist__sidebar {
+    width: 16.66rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 575px) {
+    .kit__todoist__sidebar {
+        width: auto;
+    }
+}
+
+.kit__todoist__searchIcon {
+    position: absolute;
+    color: #c8c4db;
+    font-size: 1.13rem;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+}
+
+.kit__todoist__searchInput {
+    border: 1px solid #e4e9f0;
+    border-radius: 5px;
+    background-color: #fff;
+    padding-left: 3rem;
+    padding-right: 1.33rem;
+    padding-top: 0.33rem;
+    padding-bottom: 0.26rem;
+    width: 100%;
+}
+
+.kit__todoist__categories {
+    height: 100%;
+}
+
+@media (max-width: 575px) {
+    .kit__todoist__categories {
+        margin-bottom: 1rem;
+    }
+}
+
+.kit__todoist__category {
+    padding-top: 0.33rem;
+    padding-bottom: 0.53rem;
+    padding-left: 0.66rem;
+    border-radius: 5px;
+}
+
+.kit__todoist__category:hover, .kit__todoist__category--current {
+    background-color: #f2f4f8;
+}
+
+.kit__todoist__category--title:hover {
+    background-color: initial;
+}
+
+[data-kit-theme='dark'] .kit__todoist__category:hover, [data-kit-theme='dark'] .kit__todoist__category--current {
+    background-color: #232135;
+}

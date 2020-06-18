@@ -1,0 +1,55 @@
+.kit__l12__donut {
+    display: inline-block;
+    width: 1.06rem;
+    height: 1.06rem;
+    border-radius: 100%;
+    border: 4px solid #c8c4db;
+    position: relative;
+    top: 0.13rem;
+    margin-right: 0.26rem;
+}
+
+.kit__l12__donut--md {
+    width: 1.73rem;
+    height: 1.73rem;
+}
+
+.kit__l12__donut--default {
+    border-color: #c8c4db;
+}
+
+.kit__l12__donut--primary {
+    border-color: var(--kit-color-primary);
+}
+
+.kit__l12__donut--secondary {
+    border-color: #a1a1c2;
+}
+
+.kit__l12__donut--success {
+    border-color: #41b883;
+}
+
+.kit__l12__donut--warning {
+    border-color: #faad15;
+}
+
+.kit__l12__donut--danger {
+    border-color: #f5222e;
+}
+
+.kit__l12__donut--info {
+    border-color: #42baf9;
+}
+
+.kit__l12__donut--yellow {
+    border-color: #ff0;
+}
+
+.kit__l12__donut--orange {
+    border-color: #faad15;
+}
+
+.kit__l12__donut--gray-2 {
+    border-color: #e4e9f0;
+}

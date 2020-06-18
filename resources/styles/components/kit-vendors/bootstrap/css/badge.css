@@ -1,0 +1,63 @@
+/* BADGE */
+.badge {
+    font-weight: normal;
+    background: #fff;
+    color: #a1a1c2;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.badge.badge-default {
+    background: #c8c4db;
+    color: #fff;
+}
+
+.badge.badge-primary {
+    background: var(--kit-color-primary);
+    color: #fff;
+}
+
+.badge.badge-secondary {
+    background: #a1a1c2;
+    color: #fff;
+}
+
+.badge.badge-success {
+    background: #41b883;
+    color: #fff;
+}
+
+.badge.badge-danger {
+    background: #f5222e;
+    color: #fff;
+}
+
+.badge.badge-warning {
+    background: #faad15;
+    color: #fff;
+}
+
+.badge.badge-info {
+    background: #42baf9;
+    color: #fff;
+}
+
+.badge.badge-light {
+    background: #f2f4f8;
+    color: #595c97;
+}
+
+.badge.badge-dark {
+    background: #141322;
+    color: #fff;
+}
+
+[data-kit-theme='dark'] .badge.badge-light {
+    background: #141322;
+    color: #fff;
+}
+
+[data-kit-theme='dark'] .badge.badge-dark {
+    background: #f2f4f8;
+    color: #595c97;
+}

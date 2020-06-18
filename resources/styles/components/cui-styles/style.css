@@ -1,0 +1,90 @@
+.cui__layout {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    min-height: 100vh;
+    min-width: 0;
+    /* SETTINGS */
+}
+
+.cui__layout--hasSider {
+    flex-direction: row;
+}
+
+.cui__layout__content {
+    flex: auto;
+    min-height: 0;
+}
+
+.cui__layout__footer {
+    flex: 0 0 auto;
+}
+
+.cui__layout__header {
+    flex: 0 0 auto;
+    height: 64px;
+}
+
+.cui__layout__header {
+    background: #fff !important;
+}
+
+.cui__layout--grayBackground {
+    background: #f2f4f8;
+}
+
+.cui__layout--contentMaxWidth .cui__utils__content {
+    max-width: 1420px;
+    margin: 0 auto;
+}
+
+.cui__layout--appMaxWidth {
+    max-width: 1420px;
+    margin: 0 auto;
+}
+
+.cui__layout--squaredBorders .card {
+    border-radius: 0 !important;
+}
+
+.cui__layout--cardsShadow .card {
+    box-shadow: 0 4px 10px 0 rgba(20, 19, 34, 0.03), 0 0 10px 0 rgba(20, 19, 34, 0.02);
+}
+
+.cui__layout--cardsShadow .card .card {
+    box-shadow: none;
+}
+
+.cui__layout--borderless .card {
+    border: none !important;
+}
+
+[data-kit-theme='dark'] .cui__layout__grayBackground, [data-kit-theme='dark'] .cui__layout__headerGray {
+    background: transparent !important;
+}
+
+.cui__utils__content {
+    padding: 2rem;
+    margin: 0 auto;
+}
+
+@media (max-width: 575px) {
+    .cui__utils__content {
+        padding: 2rem 1.06rem;
+    }
+}
+
+.cui__utils__heading {
+    color: #141322;
+    font-size: 1.13rem;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+}
+
+.cui__utils__shadow {
+    box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.15);
+}
+
+[data-kit-theme='dark'] .cui__utils__heading {
+    color: #aeaee0;
+}

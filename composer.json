@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
+        "livewire/livewire": "^1.2",
         "unisharp/laravel-filemanager": "^2.1"
     },
     "require-dev": {

@@ -1,0 +1,19 @@
+.kit__g17__flag {
+    position: absolute;
+    top: 0.66rem;
+    right: -0.67rem;
+    background: #41b883;
+    color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 100, 0.2);
+    padding: 0 0.86rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 767px) {
+    .kit__g17__flag {
+        right: auto;
+        left: 0.66rem;
+    }
+}

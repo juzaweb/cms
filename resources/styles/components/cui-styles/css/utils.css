@@ -1,0 +1,25 @@
+.cui__utils__content {
+    padding: 2rem;
+    margin: 0 auto;
+}
+
+@media (max-width: 575px) {
+    .cui__utils__content {
+        padding: 2rem 1.06rem;
+    }
+}
+
+.cui__utils__heading {
+    color: #141322;
+    font-size: 1.13rem;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+}
+
+.cui__utils__shadow {
+    box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.15);
+}
+
+[data-kit-theme='dark'] .cui__utils__heading {
+    color: #aeaee0;
+}

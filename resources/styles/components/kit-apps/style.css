@@ -1,0 +1,381 @@
+/* MESSAGING APP */
+.kit__messaging {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 575px) {
+    .kit__messaging {
+        flex-direction: column;
+    }
+}
+
+.kit__messaging__sidebar {
+    width: 16.66rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 575px) {
+    .kit__messaging__sidebar {
+        width: auto;
+    }
+}
+
+.kit__messaging__searchIcon {
+    position: absolute;
+    color: #c8c4db;
+    font-size: 1.13rem;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+}
+
+.kit__messaging__searchInput {
+    border: 1px solid #e4e9f0;
+    border-radius: 5px;
+    background-color: #fff;
+    padding-left: 3rem;
+    padding-right: 1.33rem;
+    padding-top: 0.33rem;
+    padding-bottom: 0.26rem;
+    width: 100%;
+}
+
+.kit__messaging__dialogItems {
+    height: 100%;
+}
+
+@media (max-width: 575px) {
+    .kit__messaging__dialogItems {
+        max-height: 16rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.kit__messaging__dialogItem {
+    padding: 0.66rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.kit__messaging__dialogItem:last-child {
+    margin-bottom: 0;
+}
+
+.kit__messaging__dialogItem:hover, .kit__messaging__dialogItem--current {
+    background-color: #f2f4f8;
+}
+
+.kit__messaging__dialogInfo {
+    min-width: 0;
+}
+
+.kit__messaging__dialogBadge {
+    min-width: 15px;
+}
+
+[data-kit-theme='dark'] .kit__messaging__dialogItem:hover, [data-kit-theme='dark'] .kit__messaging__dialogItem--current {
+    background-color: #232135;
+}
+
+/* CALENDAR APP */
+.kit__calendar__event {
+    margin-top: 0.33rem;
+    margin-bottom: 0.33rem;
+    margin-right: 1.33rem;
+    white-space: nowrap;
+}
+
+.kit__calendar__event:last-child {
+    margin-right: 0;
+}
+
+/* MAIL APP */
+.kit__mail {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 575px) {
+    .kit__mail {
+        flex-direction: column;
+    }
+}
+
+.kit__mail__sidebar {
+    width: 16.66rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 575px) {
+    .kit__mail__sidebar {
+        width: auto;
+    }
+}
+
+.kit__mail__searchIcon {
+    position: absolute;
+    color: #c8c4db;
+    font-size: 1.13rem;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+}
+
+.kit__mail__searchInput {
+    border: 1px solid #e4e9f0;
+    border-radius: 5px;
+    background-color: #fff;
+    padding-left: 3rem;
+    padding-right: 1.33rem;
+    padding-top: 0.33rem;
+    padding-bottom: 0.26rem;
+    width: 100%;
+}
+
+.kit__mail__categories {
+    height: 100%;
+}
+
+@media (max-width: 575px) {
+    .kit__mail__categories {
+        max-height: 16rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.kit__mail__category {
+    padding-top: 0.33rem;
+    padding-bottom: 0.53rem;
+    padding-left: 0.66rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.kit__mail__category:hover, .kit__mail__category--current {
+    background-color: #f2f4f8;
+}
+
+[data-kit-theme='dark'] .kit__mail__category:hover, [data-kit-theme='dark'] .kit__mail__category--current {
+    background-color: #232135;
+}
+
+/* GALLERY APP */
+.kit__gallery__control {
+    margin-right: 1.33rem;
+}
+
+.kit__gallery__control:last-child {
+    margin-right: 0;
+}
+
+.kit__gallery__items {
+    margin-right: -2.34rem;
+}
+
+.kit__gallery__item {
+    margin-bottom: 2rem;
+    margin-right: 2.33rem;
+}
+
+.kit__gallery__itemContent {
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    background-color: #f2f4f8;
+    width: 12.26rem;
+    height: 12.26rem;
+    margin-bottom: 1rem;
+}
+
+.kit__gallery__itemContent:hover .kit__gallery__itemControl {
+    z-index: 10;
+    opacity: 1;
+}
+
+.kit__gallery__itemContent img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 12.26rem;
+}
+
+.kit__gallery__itemControl {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    opacity: 0;
+    background-color: rgba(89, 92, 151, 0.5);
+    transition: all 0.2s ease-in-out;
+}
+
+.kit__gallery__itemControlContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+/* DIGITALOCEAN */
+.kit__digitalocean__hostname {
+    max-width: 33.33rem;
+}
+
+/* GITHUB */
+.kit__github__discuss__commentEditor {
+    background-color: red;
+}
+
+.kit__github__discuss__commentEditor .note-editor {
+    border: none;
+}
+
+.kit__github__discuss__commentEditor .note-editor.note-frame .note-editing-area .note-editable {
+    padding: 1rem;
+}
+
+.kit__github__discuss__commentEditor .note-style .dropdown-menu.dropdown-style {
+    min-width: 160px;
+}
+
+.kit__github__discuss__commentEditor .note-style pre {
+    padding: 0.33rem;
+}
+
+.kit__github__discuss__commentEditor .note-style p {
+    margin: 0;
+}
+
+.kit__github__discuss__commentEditor .note-color .btn-group {
+    display: inline-block;
+}
+
+/* TODOIST */
+.kit__todoist {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 575px) {
+    .kit__todoist {
+        flex-direction: column;
+    }
+}
+
+.kit__todoist__sidebar {
+    width: 16.66rem;
+    flex-shrink: 0;
+}
+
+@media (max-width: 575px) {
+    .kit__todoist__sidebar {
+        width: auto;
+    }
+}
+
+.kit__todoist__searchIcon {
+    position: absolute;
+    color: #c8c4db;
+    font-size: 1.13rem;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1rem;
+}
+
+.kit__todoist__searchInput {
+    border: 1px solid #e4e9f0;
+    border-radius: 5px;
+    background-color: #fff;
+    padding-left: 3rem;
+    padding-right: 1.33rem;
+    padding-top: 0.33rem;
+    padding-bottom: 0.26rem;
+    width: 100%;
+}
+
+.kit__todoist__categories {
+    height: 100%;
+}
+
+@media (max-width: 575px) {
+    .kit__todoist__categories {
+        margin-bottom: 1rem;
+    }
+}
+
+.kit__todoist__category {
+    padding-top: 0.33rem;
+    padding-bottom: 0.53rem;
+    padding-left: 0.66rem;
+    border-radius: 5px;
+}
+
+.kit__todoist__category:hover, .kit__todoist__category--current {
+    background-color: #f2f4f8;
+}
+
+.kit__todoist__category--title:hover {
+    background-color: initial;
+}
+
+[data-kit-theme='dark'] .kit__todoist__category:hover, [data-kit-theme='dark'] .kit__todoist__category--current {
+    background-color: #232135;
+}
+
+/* JIRA */
+.kit__jira__agile__boardCards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.kit__jira__agile__card {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 3px 5px rgba(22, 22, 53, 0.16);
+    margin-bottom: 1rem;
+    padding: 0.33rem;
+    min-height: 2.66rem;
+    cursor: move;
+}
+
+.kit__jira__agile__cardContent {
+    padding-left: 1rem;
+    position: relative;
+}
+
+.kit__jira__agile__cardFlag {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #d9dee9;
+    width: 3px;
+    border-radius: 2px;
+}
+
+.kit__jira__agile__emptyBoard {
+    border: 1px dashed #c8c4db;
+    min-height: 5.33rem;
+    background-color: #f2f4f8;
+    border-radius: 6px;
+}
+
+[data-kit-theme='dark'] .kit__jira__agile__card {
+    background: #232135;
+}
+
+[data-kit-theme='dark'] .kit__jira__agile__emptyBoard {
+    background: transparent;
+    border-color: #232135;
+}

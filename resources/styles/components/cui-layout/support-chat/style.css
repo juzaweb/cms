@@ -1,0 +1,105 @@
+/* CHAT */
+.kit__chat--open .kit__chat__container {
+    z-index: 10;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.kit__chat {
+    position: fixed;
+    z-index: 998;
+    bottom: 3rem;
+    right: 2.66rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.kit__chat__toggleButton {
+    font-size: 18px;
+    height: 2.66rem;
+    padding: 0.66rem 1.33rem;
+    background: #fff;
+    border: none;
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1) !important;
+    font-weight: bold;
+    border-radius: 30px;
+    color: var(--kit-color-primary);
+    transition: all 0.3s ease-in-out;
+}
+
+.kit__chat__toggleButton:hover {
+    background: var(--kit-color-primary);
+    color: #fff;
+}
+
+.kit__chat__toggleButton span {
+    font-size: 16px;
+    vertical-align: top;
+}
+
+.kit__chat__toggleButton .fe {
+    position: relative;
+    bottom: -1px;
+}
+
+.kit__chat__container {
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    bottom: calc(100% + 20px);
+    right: 0;
+    background-color: #fff;
+    width: 22rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 20px -5px rgba(20, 19, 34, 0.08), 0 5px 20px -5px rgba(20, 19, 34, 0.08);
+    padding-left: 1.66rem;
+    padding-right: 1.66rem;
+    padding-top: 1rem;
+    padding-bottom: 0.66rem;
+    transition: all 0.2s ease-in-out;
+}
+
+@media (max-width: 575px) {
+    .kit__chat__container {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+
+.kit__chat__container::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 3.46rem;
+    width: 0;
+    height: 0;
+    border-top: 7px solid white;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 0;
+}
+
+@media (max-width: 767px) {
+    .kit__chat__container::before {
+        right: 0.66rem;
+    }
+}
+
+[data-kit-theme='dark'] .kit__chat__container {
+    background: #232135;
+}
+
+[data-kit-theme='dark'] .kit__chat__container::before {
+    border-top: 7px solid #232135;
+}
+
+[data-kit-theme='dark'] .kit__chat__toggleButton {
+    background: #232135;
+}

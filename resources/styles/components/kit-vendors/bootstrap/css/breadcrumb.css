@@ -1,0 +1,17 @@
+/* BREADCRUMB */
+.breadcrumb {
+    background: #f2f4f8;
+}
+
+[data-kit-theme='dark'] .breadcrumb {
+    color: #aeaee0;
+    background: #232135;
+}
+
+[data-kit-theme='dark'] .breadcrumb .breadcrumb-item:before {
+    color: #4f4f7a;
+}
+
+[data-kit-theme='dark'] .breadcrumb .breadcrumb-item.active {
+    color: #aeaee0;
+}

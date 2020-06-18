@@ -1,0 +1,45 @@
+/* ECOMMERCE */
+.cui__ecommerce__productImage, .cui__ecommerce__productMainImage {
+    display: flex;
+    align-items: center;
+}
+
+.cui__ecommerce__productImage img, .cui__ecommerce__productMainImage img {
+    margin: auto;
+    max-height: 100%;
+    width: auto;
+}
+
+.cui__ecommerce__productFavorite {
+    position: absolute;
+    top: 1.33rem;
+    left: 1.66rem;
+    color: #d9dee9;
+}
+
+.cui__ecommerce__productMark {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #f5222e;
+    text-align: center;
+    color: #fff;
+    top: -50px;
+    right: -50px;
+    line-height: 163px;
+    transform: rotate(45deg);
+    text-transform: uppercase;
+}
+
+.cui__ecommerce__productThumb {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.cui__ecommerce__productThumb img {
+    margin: auto;
+    max-height: 100%;
+    width: auto;
+}

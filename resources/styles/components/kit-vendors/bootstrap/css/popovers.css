@@ -1,0 +1,83 @@
+/* POPOVERS */
+.popover {
+    border-color: #e4e9f0;
+}
+
+.popover .popover-inner {
+    border-width: 0.53rem;
+}
+
+.popover .popover-inner:after {
+    border-width: 0.46rem;
+}
+
+.popover .popover-header {
+    font-weight: 600;
+    background: #f2f4f8;
+    margin: -1px;
+    padding: 0.53rem 1rem;
+    border-radius: 3px 3px 0 0;
+}
+
+.popover.bs-popover-right .arrow:before {
+    border-right-color: #e4e9f0;
+}
+
+.popover.bs-popover-left .arrow:before {
+    border-left-color: #e4e9f0;
+}
+
+.popover.bs-popover-bottom .arrow:before {
+    border-bottom-color: #e4e9f0;
+}
+
+.popover.bs-popover-top .arrow:before {
+    border-top-color: #e4e9f0;
+}
+
+[data-kit-theme='dark'] .popover {
+    border-color: #232135;
+    background: #0c0c1b;
+}
+
+[data-kit-theme='dark'] .popover .popover-header {
+    background: #232135;
+    color: #fff;
+    border-color: #232135;
+}
+
+[data-kit-theme='dark'] .popover .popover-body {
+    color: #aeaee0;
+}
+
+[data-kit-theme='dark'] .popover.bs-popover-right .arrow:before {
+    border-right-color: #232135;
+}
+
+[data-kit-theme='dark'] .popover.bs-popover-right .arrow:after {
+    border-right-color: #0c0c1b;
+}
+
+[data-kit-theme='dark'] .popover.bs-popover-left .arrow:before {
+    border-left-color: #232135;
+}
+
+[data-kit-theme='dark'] .popover.bs-popover-left .arrow:after {
+    border-left-color: #0c0c1b;
+}
+
+[data-kit-theme='dark'] .popover.bs-popover-bottom .arrow:before {
+    border-bottom-color: #232135;
+}
+
+[data-kit-theme='dark'] .popover.bs-popover-bottom .arrow:after {
+    border-bottom-color: #0c0c1b;
+}
+
+[data-kit-theme='dark'] .popover.bs-popover-top .arrow:before {
+    border-top-color: #232135;
+}
+
+[data-kit-theme='dark'] .popover.bs-popover-top .arrow:after {
+    border-top-color: #0c0c1b;
+}

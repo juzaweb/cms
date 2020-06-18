@@ -1,0 +1,33 @@
+@charset "UTF-8";
+/* BREADCRUMBS */
+.cui__breadcrumbs {
+    padding: 1.33rem 2rem 0;
+    font-size: 1.13rem;
+}
+
+.cui__breadcrumbs__current {
+    color: #141322;
+}
+
+.cui__breadcrumbs__arrow {
+    display: inline-block;
+    margin: 0 0.66rem;
+}
+
+.cui__breadcrumbs__arrow:after {
+    display: inline-block;
+    content: '·';
+    color: #a1a1c2;
+}
+
+[data-kit-theme='dark'] .cui__breadcrumbs {
+    color: #aeaee0;
+}
+
+[data-kit-theme='dark'] .cui__breadcrumbs__current {
+    color: #fff;
+}
+
+[data-kit-theme='dark'] .cui__breadcrumbs__arrow:after {
+    color: #aeaee0;
+}

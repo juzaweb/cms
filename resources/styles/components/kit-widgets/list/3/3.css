@@ -1,0 +1,83 @@
+.kit__l3__itemLink {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.kit__l3__itemLink:hover {
+    color: inherit;
+}
+
+.kit__l3__itemLink:hover .kit__l3__itemAction span:first-child {
+    opacity: 1;
+}
+
+.kit__l3__itemLink:focus {
+    color: inherit;
+}
+
+.kit__l3__itemMeta {
+    flex-basis: 50px;
+    margin-right: 0.66rem;
+    font-size: 1.2rem;
+    line-height: 1.33rem;
+    align-self: flex-start;
+}
+
+.kit__l3__itemAction {
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.kit__l3__itemAction span {
+    transition: all 0.2s ease-in-out;
+    opacity: 0.9;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 15px;
+    height: 22px;
+}
+
+.kit__l3__itemAction span:before {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    transform: rotate(45deg);
+    content: '';
+    width: 15px;
+    height: 3px;
+    background-color: var(--kit-color-primary);
+    border-radius: 5px;
+}
+
+.kit__l3__itemAction span:after {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    transform: rotate(-45deg);
+    content: '';
+    width: 15px;
+    height: 3px;
+    background-color: var(--kit-color-primary);
+    border-radius: 5px;
+}
+
+.kit__l3__itemAction span:first-child {
+    opacity: 0.5;
+}
+
+.kit__l3__itemAction span:last-child {
+    margin-left: -9px;
+}
+
+.kit__l3__item {
+    display: block;
+    margin-bottom: 1rem;
+    color: #595c97;
+}
+
+.kit__l3__item:last-child {
+    margin-bottom: 0;
+}

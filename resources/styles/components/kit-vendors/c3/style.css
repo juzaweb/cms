@@ -1,0 +1,16 @@
+/*  C3 CHART */
+[data-kit-theme='dark'] .c3-grid line {
+    stroke: #4f4f7a;
+}
+
+[data-kit-theme='dark'] .c3 text {
+    fill: #aeaee0;
+}
+
+[data-kit-theme='dark'] .c3-target text {
+    fill: #fff;
+}
+
+[data-kit-theme='dark'] .c3-chart-arc path {
+    stroke: #232135;
+}

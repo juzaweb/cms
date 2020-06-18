@@ -1,0 +1,169 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="jquery.validation.css">
+
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="../jquery.validation.js"></script>
+
+</head>
+<body>
+
+<h1>Signup_v1 Demo</h1>
+
+<ul>
+    <li>
+        <a href="http://www.runningcoder.org/jqueryvalidation/documentation/">Documentation</a>
+    </li>
+    <li>
+        <a href="http://www.runningcoder.org/jqueryvalidation/demo/">Demos</a>
+    </li>
+</ul>
+
+<form id="form-signup_v1"
+      name="form-signup_v1"
+      method="POST"
+      class="validation-form-container">
+
+    <div class="field">
+        <label for="signup_v1-username">Username</label>
+        <div class="ui left labeled input">
+
+            <input id="signup_v1-username"
+                   name="signup_v1[username]"
+                   type="text"
+                   data-validation="[L>=6, L<=18, MIXED]"
+                   data-validation-message="$ must be between 6 and 18 characters. No special characters allowed."
+                   data-validation-regex="/admin/i"
+                   data-validation-regex-message="The word &quot;Admin&quot; is not allowed in the $" >
+
+            <div class="ui corner label">
+                <i class="asterisk icon">*</i>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label for="signup_v1-password">Password</label>
+        <div class="ui left labeled input">
+
+            <input id="signup_v1-password"
+                   name="signup_v1[password]"
+                   type="password" data-validation="[L>=6]"
+                   data-validation-message="$ must be at least 6 characters">
+
+            <div class="ui corner label">
+                <i class="asterisk icon">*</i>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label for="signup_v1-password-confirm">Confirm Password</label>
+        <div class="ui left labeled input">
+
+            <input id="signup_v1-password-confirm"
+                   name="signup_v1[password-confirm]"
+                   type="password"
+                   data-validation="[V==signup_v1[password]]"
+                   data-validation-message="$ does not match the password">
+
+            <div class="ui corner label">
+                <i class="asterisk icon">*</i>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label for="signup_v1-email">Email</label>
+        <div class="ui left labeled input">
+
+            <input id="signup_v1-email"
+                   name="signup_v1[email]"
+                   type="text"
+                   data-validation="[EMAIL]">
+
+            <div class="ui corner label">
+                <i class="asterisk icon">*</i>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label for="signup_v1-email-confirm">Confirm Email</label>
+        <div class="ui left labeled input">
+
+            <input id="signup_v1-email-confirm"
+                   name="signup_v1[email-confirm]"
+                   type="text"
+                   data-validation="[V==signup_v1[email]]"
+                   data-validation-message="$ does not match the email">
+
+            <div class="ui corner label">
+                <i class="asterisk icon">*</i>
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" class="ui blue submit button" value="Sign up!">
+
+    <button id="prefill-signup_v1" type="button" class="ui mini basic button">
+        Prefill
+    </button>
+
+</form>
+
+<script>
+
+    $('#form-signup_v1').validate({
+        submit: {
+            settings: {
+                inputContainer: '.field'
+            },
+            callback: {
+                onBeforeSubmit: function (node) {
+
+                    myBeforeSubmitFunction(':D', ':)', node);
+
+                },
+                onSubmit: function (node) {
+
+                    console.log('#' + node.id + ' has a submit override.');
+
+                    //node.submit();
+
+                }
+            }
+        },
+        debug: true
+    });
+
+    function myBeforeSubmitFunction(a, b, node) {
+
+        console.log(a, b);
+
+        $(node).find('input:not([type="submit"]), select, textarea').attr('readonly', 'true');
+        $(node).append('<div class="ui active loader"></div>');
+
+    }
+
+    $('#prefill-signup_v1').on('click', function () {
+
+        var form = $(this).closest('form');
+
+        form.find('#signup_v1-name').val('John Doe');
+        form.find('#signup_v1-username').val('RocketJoe');
+        form.find('#signup_v1-password').val('test123');
+        form.find('#signup_v1-password-confirm').val('test123');
+        form.find('#signup_v1-email').val('test@test.test');
+        form.find('#signup_v1-email-confirm').val('test@test.test');
+
+    });
+
+</script>
+
+</body>
+</html>

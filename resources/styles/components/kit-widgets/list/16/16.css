@@ -1,0 +1,19 @@
+.kit__l16__item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 1.33rem;
+}
+
+.kit__l16__item:last-child {
+    margin-bottom: 0;
+}
+
+.kit__l16__separator {
+    height: 2.13rem;
+    width: 0.26rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    background-color: #e4e9f0;
+}

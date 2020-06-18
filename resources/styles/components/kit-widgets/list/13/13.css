@@ -1,0 +1,29 @@
+.kit__l13__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-bottom: 1.33rem;
+}
+
+.kit__l13__item:last-child {
+    margin-bottom: 0;
+}
+
+.kit__l13__itemPic {
+    width: 2.66rem;
+    height: 2.66rem;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #f2f4f8;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 1.33rem;
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+.kit__l13__itemPic img {
+    width: 100%;
+    height: auto;
+}

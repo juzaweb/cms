@@ -1,0 +1,19 @@
+.kit__g8__items {
+    margin-left: -0.34rem;
+    margin-right: -0.34rem;
+    margin-bottom: -0.67rem;
+}
+
+.kit__g8__item {
+    flex-basis: calc(100% / 3);
+    padding-left: 0.33rem;
+    padding-right: 0.33rem;
+    margin-bottom: 0.66rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.kit__g8__item img {
+    width: 100%;
+    height: auto;
+}

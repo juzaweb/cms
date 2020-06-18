@@ -1,0 +1,7 @@
+/* TOOLTIPS */
+.tooltip .tooltip-inner {
+    background: #141322;
+    padding: 0.26rem 1rem;
+    color: #fff;
+    font-size: 0.93rem;
+}

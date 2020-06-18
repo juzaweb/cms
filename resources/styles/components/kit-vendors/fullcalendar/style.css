@@ -1,0 +1,326 @@
+/*  FULLCALENDAR */
+.fc-unthemed {
+    position: relative;
+    z-index: 50;
+}
+
+.fc-unthemed * {
+    outline: none !important;
+    -webkit-appearance: none !important;
+       -moz-appearance: none !important;
+            appearance: none !important;
+}
+
+.fc-unthemed .fc-axis {
+    padding: 0 15px;
+}
+
+.fc-unthemed .fc-divider,
+.fc-unthemed .fc-popover,
+.fc-unthemed .fc-row,
+.fc-unthemed tbody,
+.fc-unthemed td,
+.fc-unthemed th,
+.fc-unthemed thead {
+    border-color: #f2f4f8;
+}
+
+.fc-unthemed th {
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 10px 15px;
+}
+
+.fc-unthemed .jspVerticalBar {
+    z-index: 10;
+}
+
+.fc-unthemed .fc-toolbar {
+    margin-bottom: 0;
+}
+
+.fc-unthemed .fc-toolbar h1,
+.fc-unthemed .fc-toolbar h2,
+.fc-unthemed .fc-toolbar h3,
+.fc-unthemed .fc-toolbar h4,
+.fc-unthemed .fc-toolbar h5,
+.fc-unthemed .fc-toolbar h6 {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.fc-unthemed .fc-toolbar .fc-left,
+.fc-unthemed .fc-toolbar .fc-right,
+.fc-unthemed .fc-toolbar .fc-center {
+    margin-bottom: 10px;
+}
+
+.fc-unthemed .fc-toolbar .fc-center {
+    padding: 0 20px;
+}
+
+.fc-unthemed .fc-state-default {
+    background: #d9dee9;
+    border: none;
+    box-shadow: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 10px 10px;
+    border-radius: 3px !important;
+    text-shadow: none;
+    line-height: 18px;
+    color: #fff;
+}
+
+.fc-unthemed .fc-state-default:hover {
+    background: #e6e4ee;
+}
+
+.fc-unthemed .fc-state-active {
+    background-color: var(--kit-color-primary) !important;
+    color: #fff !important;
+    text-shadow: none;
+}
+
+.fc-unthemed .fc-unthemed .fc-today {
+    background-color: #fff6da;
+}
+
+.fc-unthemed .fc-highlight {
+    background-color: #a0dfff;
+    border: solid 1px var(--kit-color-primary);
+}
+
+.fc-unthemed .fc-widget-header,
+.fc-unthemed .fc-widget-content {
+    margin-right: 0 !important;
+}
+
+.fc-unthemed .fc-scroller.jspScrollable {
+    overflow: hidden !important;
+}
+
+.fc-unthemed .fc-ltr .fc-time-grid .fc-event-container {
+    margin: 0;
+}
+
+.fc-unthemed .fc-time-grid-event .fc-time {
+    font-size: 1rem;
+}
+
+.fc-unthemed .fc-day-grid-event .fc-time {
+    font-weight: 600;
+}
+
+.fc-unthemed .fc-event {
+    background-color: var(--kit-color-primary);
+    border-color: #fff;
+    color: #fff !important;
+    border-radius: 0;
+    font-size: 14px;
+    padding: 7px;
+}
+
+.fc-unthemed .fc-event.event-clicked {
+    opacity: 0.7;
+    z-index: 30 !important;
+}
+
+.fc-unthemed .fc-event.fc-event-success {
+    background-color: #41b883;
+}
+
+.fc-unthemed .fc-event.fc-event-secondary {
+    background-color: #a1a1c2;
+}
+
+.fc-unthemed .fc-event.fc-event-danger {
+    background-color: #f5222e;
+}
+
+.fc-unthemed .fc-event.fc-event-warning {
+    background-color: #faad15;
+}
+
+.fc-unthemed .fc-event.fc-event-info {
+    background-color: #42baf9;
+}
+
+.fc-unthemed .fc-event.fc-event-default {
+    background-color: #c8c4db;
+}
+
+.fc-unthemed a.fc-more {
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.fc-unthemed .fc-event {
+    border-radius: 10px;
+    padding: 0 8px;
+    margin: 1px 2px 0;
+}
+
+.fc-unthemed .fc-time-grid-event {
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.fc-unthemed hr.fc-divider {
+    padding: 0;
+}
+
+.fc-unthemed .fc-popover,
+.fc-popover {
+    width: 250px;
+    box-shadow: none;
+    background: none;
+    border: none;
+}
+
+.fc-unthemed .fc-popover .fc-header,
+.fc-popover .fc-header {
+    border-radius: 4px 4px 0 0;
+    color: #fff;
+    background: var(--kit-color-primary);
+    padding: 6px 10px 6px 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.fc-unthemed .fc-popover .fc-header .fc-title,
+.fc-popover .fc-header .fc-title {
+    margin: 0;
+}
+
+.fc-unthemed .fc-popover .fc-header .fc-close,
+.fc-popover .fc-header .fc-close {
+    color: #fff;
+    font-size: 0.875rem;
+}
+
+.fc-unthemed .fc-popover .fc-body,
+.fc-popover .fc-body {
+    background: #fbfcfd;
+    border: solid 1px #e4e9f0;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+.fc-unthemed .fc-popover .fc-event-container,
+.fc-popover .fc-event-container {
+    padding: 10px 12px;
+}
+
+.fc-unthemed .fc-popover .fc-h-event,
+.fc-popover .fc-h-event {
+    padding-left: 7px !important;
+    margin-left: 2px !important;
+}
+
+.fc-unthemed .fc-popover .text-center .btn,
+.fc-popover .text-center .btn {
+    margin: 0 4px;
+}
+
+.fc-popover.click {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    z-index: 50;
+    margin-left: -120px;
+    margin-top: 8px;
+    font-size: 0.9375rem;
+}
+
+.fc-popover.click .fc-header {
+    position: relative;
+    padding-right: 30px;
+}
+
+.fc-popover.click .fc-header:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    margin-left: -9px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 9px 9px 9px;
+    border-color: transparent transparent var(--kit-color-primary) transparent;
+}
+
+.fc-popover.click .fc-header .cl {
+    border: none;
+    background: none;
+    padding: 0;
+    color: #fff;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -7px;
+}
+
+.fc-popover.click .fc-body {
+    padding: 12px;
+}
+
+.fc-popover.click .fc-body p {
+    margin: 0 0 1em;
+}
+
+.fc-popover.click .fc-body .actions {
+    margin: 0 -12px 0 0;
+}
+
+.fc-popover.click .fc-body .actions li {
+    float: left;
+    margin: 0 12px 0 0;
+}
+
+.fc-popover.click .fc-body .actions li:last-child {
+    margin-right: 0;
+}
+
+.fc-popover.click .fc-body > .btn {
+    margin: 0 10px 0 0;
+}
+
+.fc-popover.click .fc-body .form-control {
+    font-size: 0.875rem;
+}
+
+.fc-popover.click .fc-body.remove-confirm, .fc-popover.click .fc-body.edit-event {
+    display: none;
+}
+
+[data-kit-theme='dark'] .fc-unthemed .fc-state-default {
+    background: #232135;
+}
+
+[data-kit-theme='dark'] .fc-unthemed .fc-event {
+    border-color: transparent;
+}
+
+[data-kit-theme='dark'] .fc-unthemed .fc-popover .fc-event-container {
+    background: #232135;
+}
+
+[data-kit-theme='dark'] .fc-unthemed .fc-popover .fc-widget-content {
+    border-color: #232135;
+}
+
+[data-kit-theme='dark'] .fc-unthemed .fc-divider,
+[data-kit-theme='dark'] .fc-unthemed .fc-popover,
+[data-kit-theme='dark'] .fc-unthemed .fc-row,
+[data-kit-theme='dark'] .fc-unthemed tbody,
+[data-kit-theme='dark'] .fc-unthemed td,
+[data-kit-theme='dark'] .fc-unthemed th,
+[data-kit-theme='dark'] .fc-unthemed thead {
+    border-color: #232135;
+}

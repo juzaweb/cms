@@ -1,0 +1,156 @@
+/*  EONASDAN BOOTSTRAP DATEPICKER */
+.bootstrap-datetimepicker-widget {
+    max-width: 19em;
+}
+
+.bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+    background: none;
+    color: var(--kit-color-primary) !important;
+}
+
+.bootstrap-datetimepicker-widget table thead tr:first-child th.prev, .bootstrap-datetimepicker-widget table thead tr:first-child th.next {
+    color: #c8c4db;
+}
+
+.bootstrap-datetimepicker-widget table td {
+    transition: all 0.1s ease-in-out;
+}
+
+.bootstrap-datetimepicker-widget table td span.active {
+    background: var(--kit-color-primary) !important;
+}
+
+.bootstrap-datetimepicker-widget table td span:hover {
+    background-color: #595c97;
+    color: #fff;
+}
+
+.bootstrap-datetimepicker-widget table td span.timepicker-hour, .bootstrap-datetimepicker-widget table td span.timepicker-minute {
+    color: #141322;
+    background: none !important;
+}
+
+.bootstrap-datetimepicker-widget table td.minute:hover {
+    background-color: #f2f4f8;
+}
+
+.bootstrap-datetimepicker-widget table th {
+    width: 32px;
+    height: 28px;
+    line-height: 28px;
+}
+
+.bootstrap-datetimepicker-widget table th.dow {
+    font-weight: 600;
+}
+
+.bootstrap-datetimepicker-widget table th.picker-switch {
+    width: 165px;
+}
+
+.bootstrap-datetimepicker-widget table td.day {
+    width: 32px;
+    height: 28px;
+    line-height: 28px;
+}
+
+.bootstrap-datetimepicker-widget table td.day:hover {
+    background: #595c97;
+    color: #fff;
+}
+
+.bootstrap-datetimepicker-widget table td.day.new {
+    color: #e4e9f0;
+}
+
+.bootstrap-datetimepicker-widget table td.day.new:hover {
+    color: #fff !important;
+}
+
+.bootstrap-datetimepicker-widget table td.day.old {
+    color: #e4e9f0;
+}
+
+.bootstrap-datetimepicker-widget table td.day.old:hover {
+    color: #fff !important;
+}
+
+.bootstrap-datetimepicker-widget table td.active.active, .bootstrap-datetimepicker-widget table td.active:active:hover,
+.bootstrap-datetimepicker-widget table table td.active:hover.active,
+.bootstrap-datetimepicker-widget table table td.active:hover:active:hover {
+    background-color: var(--kit-color-primary);
+    color: #fff !important;
+}
+
+.bootstrap-datetimepicker-widget .timepicker-hours td:hover,
+.bootstrap-datetimepicker-widget .timepicker-minutes td:hover {
+    background: #595c97 !important;
+    color: #fff;
+}
+
+.bootstrap-datetimepicker-widget a[data-action].btn {
+    padding: 0;
+    background: none;
+    color: #141322;
+    border: none !important;
+}
+
+.bootstrap-datetimepicker-widget a[data-action].btn:hover {
+    color: #fff;
+    background: #595c97;
+}
+
+.bootstrap-datetimepicker-widget a[data-action].btn:hover span {
+    background: none !important;
+}
+
+.bootstrap-datetimepicker-widget .accordion-toggle span {
+    color: #141322;
+    background: #e4e9f0;
+}
+
+.bootstrap-datetimepicker-widget .accordion-toggle span:hover {
+    color: #fff;
+    background-color: var(--kit-color-primary);
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    width: 300px;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu:before, .bootstrap-datetimepicker-widget.dropdown-menu:after {
+    display: none;
+}
+
+[data-kit-theme='dark'] .datepicker,
+[data-kit-theme='dark'] .timepicker {
+    background: #141322;
+    color: #aeaee0;
+}
+
+[data-kit-theme='dark'] .datepicker .timepicker-hour,
+[data-kit-theme='dark'] .datepicker .timepicker-minute,
+[data-kit-theme='dark'] .timepicker .timepicker-hour,
+[data-kit-theme='dark'] .timepicker .timepicker-minute {
+    color: #aeaee0;
+}
+
+[data-kit-theme='dark'] .bootstrap-datetimepicker-widget a[data-action].btn {
+    background: #141322;
+    color: #aeaee0;
+}
+
+[data-kit-theme='dark'] .bootstrap-datetimepicker-widget a[data-action].btn:hover {
+    background: var(--kit-color-primary);
+    color: #fff;
+}
+
+[data-kit-theme='dark'] .bootstrap-datetimepicker-widget a[data-action]:not(.btn) span {
+    background: #232135;
+    color: #aeaee0;
+}
+
+[data-kit-theme='dark'] .bootstrap-datetimepicker-widget a[data-action]:not(.btn) span:hover {
+    background: var(--kit-color-primary);
+    color: #fff;
+}

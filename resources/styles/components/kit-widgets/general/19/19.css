@@ -1,0 +1,25 @@
+.kit__g19__headerText {
+    position: absolute;
+    top: 1.33rem;
+    left: 1.33rem;
+    font-size: 2.4rem;
+}
+
+@media (max-width: 575px) {
+    .kit__g19__headerText {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .kit__g19__headerText {
+        font-size: 1.73rem;
+    }
+}
+
+.kit__g19__user {
+    text-align: center;
+    margin-top: -3.14rem;
+    position: relative;
+    z-index: 1;
+}

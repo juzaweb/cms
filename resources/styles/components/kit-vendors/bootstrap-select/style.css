@@ -1,0 +1,62 @@
+/*  BOOTSTRAP SELECT */
+.bootstrap-select .btn-default {
+    color: #595c97 !important;
+    background-color: #fff;
+    border-color: #e4e9f0;
+}
+
+.bootstrap-select .btn-default:hover {
+    border-color: #d9dee9;
+    background: #fff !important;
+}
+
+.bootstrap-select .btn-default:focus, .bootstrap-select .btn-default:active {
+    border-color: var(--kit-color-primary) !important;
+    background: #fff !important;
+    color: #595c97 !important;
+}
+
+.bootstrap-select.show .btn-default {
+    border-color: var(--kit-color-primary) !important;
+    background: #fff !important;
+    color: #595c97 !important;
+}
+
+.bootstrap-select .dropdown-menu li a {
+    padding: 0.33rem 1rem;
+    outline: none;
+    display: block;
+}
+
+.bootstrap-select .dropdown-menu li a:hover {
+    color: var(--kit-color-primary);
+}
+
+.bootstrap-select .dropdown-menu li a.opt {
+    padding-left: 1rem !important;
+}
+
+.bootstrap-select .dropdown-menu li.hidden {
+    display: none;
+}
+
+.bootstrap-select .dropdown-menu li.no-results {
+    margin-left: 0.53rem;
+    margin-right: 0.53rem;
+    padding: 0.53rem 0.66rem;
+    border-radius: 5px;
+    background: #f2f4f8;
+    color: #595c97;
+}
+
+.bootstrap-select .filter-option {
+    text-overflow: ellipsis;
+}
+
+.bootstrap-select .dropdown-toggle:focus {
+    outline: none !important;
+}
+
+[data-kit-theme='dark'] .dropdown-menu .no-results {
+    background: #141322;
+}

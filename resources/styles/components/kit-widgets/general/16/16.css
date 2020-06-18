@@ -1,0 +1,45 @@
+.kit__g16__productImage, .kit__g16__productMainImage {
+    display: flex;
+    align-items: center;
+    background: #fff;
+}
+
+.kit__g16__productImage img, .kit__g16__productMainImage img {
+    margin: auto;
+    max-height: 100%;
+    width: auto;
+}
+
+.kit__g16__productFavorite {
+    position: absolute;
+    top: 1.33rem;
+    left: 1.66rem;
+    color: #d9dee9;
+}
+
+.kit__g16__productMark {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #f5222e;
+    text-align: center;
+    color: #fff;
+    top: -50px;
+    right: -50px;
+    line-height: 163px;
+    transform: rotate(45deg);
+    text-transform: uppercase;
+}
+
+.kit__g16__productThumb {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.kit__g16__productThumb img {
+    margin: auto;
+    max-height: 100%;
+    width: auto;
+}

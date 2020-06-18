@@ -1,0 +1,13 @@
+/* CAROUSEL */
+.carousel-indicators li {
+    opacity: 0.5;
+}
+
+.carousel-indicators li.active {
+    opacity: 1;
+}
+
+[data-kit-theme='dark'] .carousel-indicators li.active {
+    opacity: 1;
+    background-color: var(--kit-color-primary);
+}

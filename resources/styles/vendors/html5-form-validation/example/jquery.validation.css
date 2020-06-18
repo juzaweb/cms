@@ -1,0 +1,385 @@
+/*------------------------------------*\
+    CONTENTS
+\*------------------------------------*/
+/*
+NORMALIZE BUTTON & INPUT - https://github.com/necolas/normalize.css
+LAYOUT
+INPUT, BUTTON & LABEL
+ERROR
+*/
+
+/*------------------------------------*\
+    NORMALIZE BUTTON & INPUT
+\*------------------------------------*/
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    color: inherit; /* 1 */
+    font: inherit; /* 2 */
+    margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+    overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+    text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+    cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+    line-height: normal;
+}
+
+
+/*------------------------------------*\
+    LAYOUT
+\*------------------------------------*/
+
+.validation-form-container {
+    position: relative;
+    background-color: #fff;
+    font-family: "Helvetica Neue", "Helvetica", Arial;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 16px;
+    padding: 16px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+    line-height: 16px;
+}
+
+.validation-form-container * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.validation-form-container :last-child {
+    margin-bottom: 0em;
+}
+
+.validation-form-container .field {
+    clear: both;
+    margin: 0em 0em 1em;
+}
+
+.validation-form-container ul {
+    list-style: none;
+    margin: 0.2em 0;
+    padding: 0;
+}
+
+.validation-form-container .ui.loader.active {
+    display: block;
+}
+.validation-form-container .ui.loader {
+    width: 32px;
+    height: 32px;
+    background: url(loader-medium.gif) no-repeat;
+    background-position: 48% 0px;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0px;
+    z-index: 1000;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+
+/*------------------------------------*\
+    INPUT, BUTTON & LABEL
+\*------------------------------------*/
+
+.validation-form-container .ui.button {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    min-height: 1em;
+    outline: none;
+    border: none;
+    background-color: #FAFAFA;
+    color: #808080;
+    margin: 0em;
+    padding: 0.8em 1.5em;
+    font-size: 1rem;
+    text-transform: uppercase;
+    line-height: 1;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.05)));
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+    border-radius: 0.25em;
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08) inset;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08) inset;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, background 0.25s ease, -webkit-box-shadow 0.25s ease;
+    transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.validation-form-container .ui.blue.button {
+    background-color: #6ECFF5;
+    color: #FFFFFF;
+}
+
+.validation-form-container .ui.blue.button:hover,
+.validation-form-container .ui.blue.button.active {
+    background-color: #1AB8F3;
+    color: #FFFFFF;
+}
+
+.validation-form-container .ui.blue.button:active {
+    background-color: #0AA5DF;
+    color: #FFFFFF;
+}
+
+.validation-form-container .ui.mini.button {
+    font-size: 0.8rem;
+    padding: 0.6em 0.8em;
+}
+
+.validation-form-container .ui.basic.button {
+    background-color: transparent !important;
+    background-image: none;
+    color: #808080 !important;
+    font-weight: normal;
+    text-transform: none;
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+.validation-form-container .ui.input {
+    width: 100%;
+    font-size: 1em;
+    display: inline-block;
+    position: relative;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.validation-form-container .ui.labeled.input input {
+    padding-right: 2.5em !important;
+}
+
+.validation-form-container textarea,
+.validation-form-container input[type="text"],
+.validation-form-container input[type="password"] {
+    width: 100%;
+    margin: 0em;
+    padding: 0.65em 1em;
+    font-size: 1em;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    outline: none;
+    color: rgba(0, 0, 0, 0.7);
+    border-radius: 0.3125em;
+    -webkit-transition: background-color 0.3s ease-out, -webkit-box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.3s ease-out, box-shadow 0.2s ease, border-color 0.2s ease;
+    -webkit-box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.3) inset;
+    box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.3) inset;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+.validation-form-container textarea:focus,
+.validation-form-container input[type="text"]:focus,
+.validation-form-container input[type="password"]:focus {
+    color: rgba(0, 0, 0, 0.85);
+    border-color: rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    -webkit-appearance: none;
+    -webkit-box-shadow: 0.3em 0em 0em 0em rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0.3em 0em 0em 0em rgba(0, 0, 0, 0.2) inset;
+}
+
+.validation-form-container textarea[readonly],
+.validation-form-container textarea[disabled],
+.validation-form-container input[readonly],
+.validation-form-container input[disabled] {
+    cursor: not-allowed;
+    background-color: #f7f7f7;
+    color: #999;
+}
+
+.validation-form-container .field > label {
+    margin: 0em 0em 0.3em;
+    display: block;
+    color: #555555;
+    font-size: 0.875em;
+    position: relative;
+}
+
+.validation-form-container .ui.label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: -0.25em 0.25em 0em;
+    background-color: #E8E8E8;
+    border-color: #E8E8E8;
+    padding: 0.5em 0.8em;
+    color: rgba(0, 0, 0, 0.65);
+    text-transform: uppercase;
+    font-weight: normal;
+    border-radius: 0.325em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background 0.1s linear;
+    transition: background 0.1s linear;
+}
+
+.validation-form-container .ui.corner.label {
+    top: 1px;
+    right: 1px;
+    overflow: hidden;
+    font-size: 0.7em;
+    border-radius: 0 0.3125em;
+    background-color: transparent;
+    position: absolute;
+    z-index: 10;
+    margin: 0em;
+    width: 3em;
+    height: 3em;
+    padding: 0em;
+    text-align: center;
+    -webkit-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+}
+
+.validation-form-container .ui.corner.label:after {
+    position: absolute;
+    content: "";
+    right: 0em;
+    top: 0em;
+    z-index: -1;
+    width: 0em;
+    height: 0em;
+    border-top: 0em solid transparent;
+    border-right: 3em solid transparent;
+    border-bottom: 3em solid transparent;
+    border-left: 0em solid transparent;
+    border-right-color: inherit;
+    -webkit-transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease;
+}
+
+.validation-form-container .ui.corner.label .icon {
+    font-size: 2em;
+    margin: 0.25em 0 0 0.5em;
+    width: auto;
+    display: inline-block;
+    height: 1em;
+    font-style: normal;
+    line-height: 1;
+    font-weight: normal;
+    text-decoration: inherit;
+    text-align: center;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+
+/*------------------------------------*\
+    ERROR
+\*------------------------------------*/
+
+div.error,
+div.error-list,
+label.error,
+input.error,
+select.error,
+textarea.error {
+    color: #D95C5C !important;
+    border-color: #D95C5C !important;
+}
+
+
+.validation-form-container .error .corner.label {
+    border-color: #D95C5C;
+    color: #FFFFFF;
+}

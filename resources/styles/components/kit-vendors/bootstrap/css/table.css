@@ -1,0 +1,166 @@
+/* TABLE */
+.table {
+    color: inherit;
+}
+
+.table thead th {
+    border-bottom: 1px solid #e4e9f0;
+    outline: none !important;
+}
+
+.table thead th:focus {
+    background: #e4e9f0;
+}
+
+.table td,
+.table th {
+    border-color: #e4e9f0;
+}
+
+.table td:focus,
+.table th:focus {
+    background-color: #e4e9f0;
+}
+
+.table tbody tr:first-child td {
+    border-top: none;
+}
+
+.table.table-hover tbody tr:hover {
+    background: #f2f4f8;
+}
+
+.table tr.active,
+.table th.active {
+    background: #f2f4f8;
+}
+
+.table .thead-dark th {
+    color: #fff;
+    background: #141322;
+}
+
+.table .thead-default th {
+    background: #f2f4f8;
+}
+
+.table.table-striped tbody tr:nth-of-type(odd) {
+    background: #f2f4f8;
+}
+
+.table.table-vertical-middle td,
+.table.table-vertical-middle th {
+    vertical-align: middle;
+}
+
+.table.table-dark {
+    color: #fff;
+}
+
+.table.table-dark.table-hover tr:hover td,
+.table.table-dark.table-hover tr:hover th {
+    color: #fff;
+}
+
+.table.table-dark thead th {
+    border-bottom-color: #23223c;
+    color: #fff;
+}
+
+.table.table-dark th,
+.table.table-dark td {
+    border-top-color: #23223c;
+}
+
+.table.table-dark th,
+.table.table-dark td,
+.table.table-dark thead th {
+    background: #141322;
+}
+
+.table.table-dark th:focus,
+.table.table-dark td:focus,
+.table.table-dark thead th:focus {
+    background: #141322;
+}
+
+.table.table-dark tr.active,
+.table.table-dark th.active {
+    background: #d9dee9;
+}
+
+[data-kit-theme='dark'] .table thead th {
+    border-color: #232135;
+}
+
+[data-kit-theme='dark'] .table thead.thead-default th {
+    background: #232135;
+    color: #fff;
+}
+
+[data-kit-theme='dark'] .table td,
+[data-kit-theme='dark'] .table th {
+    border-color: #232135;
+}
+
+[data-kit-theme='dark'] .table tr.active {
+    background: #232135;
+    color: #fff;
+}
+
+[data-kit-theme='dark'] .table .thead-dark th {
+    color: #595c97;
+    background: #fff;
+}
+
+[data-kit-theme='dark'] .table.table-hover tbody tr:hover {
+    background: #232135;
+    color: #fff;
+}
+
+[data-kit-theme='dark'] .table.table-striped tbody tr:nth-of-type(odd) {
+    background: #232135;
+}
+
+[data-kit-theme='dark'] .table.table-dark {
+    color: inherit;
+}
+
+[data-kit-theme='dark'] .table.table-dark thead th {
+    border-bottom: 1px solid #e4e9f0;
+    outline: none !important;
+    color: #595c97;
+}
+
+[data-kit-theme='dark'] .table.table-dark thead th:focus {
+    background: #e4e9f0;
+}
+
+[data-kit-theme='dark'] .table.table-dark td,
+[data-kit-theme='dark'] .table.table-dark th {
+    border-color: #e4e9f0;
+    background: #fff;
+}
+
+[data-kit-theme='dark'] .table.table-dark td:focus,
+[data-kit-theme='dark'] .table.table-dark th:focus {
+    background-color: #e4e9f0;
+}
+
+[data-kit-theme='dark'] .table.table-dark tbody tr:first-child td {
+    border-top: none;
+}
+
+[data-kit-theme='dark'] .table.table-dark.table-hover tbody tr:hover {
+    background: #f2f4f8;
+}
+
+[data-kit-theme='dark'] .table.table-dark.table-hover td,
+[data-kit-theme='dark'] .table.table-dark.table-hover th {
+    color: #595c97;
+}
+
+[data-kit-theme='dark'] .table.table-dark.table-hover tr:hover td,
+[data-kit-theme='dark'] .table.table-dark.table-hover tr:hover th {
+    background: #f2f4f8;
+}

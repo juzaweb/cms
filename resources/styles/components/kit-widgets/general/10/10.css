@@ -1,0 +1,24 @@
+.kit__g10__btn {
+    overflow: hidden;
+    position: relative;
+    padding-left: 3.33rem !important;
+    border: none;
+}
+
+.kit__g10__btnAddon {
+    position: absolute;
+    z-index: 1;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 2.66rem;
+}
+
+.kit__g10__btnAddonIcon {
+    font-size: 1.06rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,18 @@
+.kit__c11__chartContainer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.kit__c11__chart .ct-line {
+    stroke-width: 1px;
+}
+
+.kit__c11__chart .ct-series-a .ct-area {
+    fill: rgba(75, 124, 243, 0.1) !important;
+    fill-opacity: 1 !important;
+}
+
+.kit__c11__chart .ct-series-a .ct-line {
+    stroke: #4b7cf3 !important;
+}

@@ -1,0 +1,144 @@
+/*  ION RANGE SLIDER */
+.irs {
+    height: 55px;
+}
+
+.irs .irs-with-grid {
+    height: 75px;
+}
+
+.irs .irs-line {
+    height: 10px;
+    top: 33px;
+    background: #e4e9f0;
+    border-radius: 16px;
+}
+
+.irs .irs-line-left {
+    height: 10px;
+}
+
+.irs .irs-line-mid {
+    height: 10px;
+}
+
+.irs .irs-line-right {
+    height: 10px;
+}
+
+.irs .irs-bar {
+    height: 10px;
+    top: 33px;
+    background: var(--kit-color-primary);
+}
+
+.irs .irs-bar-edge {
+    height: 10px;
+    top: 33px;
+    width: 14px;
+    background: var(--kit-color-primary);
+    border-radius: 16px 0 0 16px;
+}
+
+.irs .irs-shadow {
+    height: 10px;
+    top: 33px;
+    background: #141322;
+    opacity: 0.3;
+    border-radius: 5px;
+}
+
+.irs .lt-ie9 .irs-shadow {
+    filter: alpha(opacity=30);
+}
+
+.irs .irs-slider {
+    top: 25px;
+    width: 27px;
+    height: 27px;
+    background: #fff;
+    border-radius: 27px;
+    -moz-border-radius: 27px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.irs .irs-slider.state_hover,
+.irs .irs-slider:hover {
+    background: #fff;
+}
+
+.irs .irs-min,
+.irs .irs-max {
+    color: #595c97;
+    font-size: 0.875rem;
+    line-height: 1.333;
+    text-shadow: none;
+    top: 0;
+    padding: 1px 5px;
+    background: #e1e4e9;
+    border-radius: 3px;
+}
+
+.irs .lt-ie9 .irs-min,
+.irs .lt-ie9 .irs-max {
+    background: #f2f4f8;
+}
+
+.irs .irs-from,
+.irs .irs-to,
+.irs .irs-single {
+    color: #fff;
+    font-size: 0.875rem;
+    line-height: 1.333;
+    text-shadow: none;
+    padding: 1px 5px;
+    background: var(--kit-color-primary);
+    border-radius: 3px;
+}
+
+.irs .lt-ie9 .irs-from,
+.irs .lt-ie9 .irs-to,
+.irs .lt-ie9 .irs-single {
+    background: #595c97;
+}
+
+.irs .irs-grid {
+    height: 27px;
+    bottom: -15px;
+}
+
+.irs .irs-grid-pol {
+    opacity: 0.5;
+    background: #d0d3d8;
+}
+
+.irs .irs-grid-pol.small {
+    background: #d0d3d8;
+}
+
+.irs .irs-grid-text {
+    bottom: 3px;
+    color: #99a4ac;
+    font-size: 0.75rem;
+}
+
+[data-kit-theme='dark'] .irs .irs-line {
+    background: #232135;
+}
+
+[data-kit-theme='dark'] .irs .irs-grid-pol {
+    background: #4f4f7a;
+}
+
+[data-kit-theme='dark'] .irs .irs-grid-text {
+    color: #aeaee0;
+}
+
+[data-kit-theme='dark'] .irs .irs-min,
+[data-kit-theme='dark'] .irs .irs-max,
+[data-kit-theme='dark'] .irs .irs-from,
+[data-kit-theme='dark'] .irs .irs-to {
+    background: #232135;
+    color: #aeaee0;
+}

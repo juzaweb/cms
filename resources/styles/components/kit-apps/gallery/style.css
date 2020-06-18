@@ -1,0 +1,61 @@
+/* GALLERY APP */
+.kit__gallery__control {
+    margin-right: 1.33rem;
+}
+
+.kit__gallery__control:last-child {
+    margin-right: 0;
+}
+
+.kit__gallery__items {
+    margin-right: -2.34rem;
+}
+
+.kit__gallery__item {
+    margin-bottom: 2rem;
+    margin-right: 2.33rem;
+}
+
+.kit__gallery__itemContent {
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    background-color: #f2f4f8;
+    width: 12.26rem;
+    height: 12.26rem;
+    margin-bottom: 1rem;
+}
+
+.kit__gallery__itemContent:hover .kit__gallery__itemControl {
+    z-index: 10;
+    opacity: 1;
+}
+
+.kit__gallery__itemContent img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 12.26rem;
+}
+
+.kit__gallery__itemControl {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    opacity: 0;
+    background-color: rgba(89, 92, 151, 0.5);
+    transition: all 0.2s ease-in-out;
+}
+
+.kit__gallery__itemControlContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}

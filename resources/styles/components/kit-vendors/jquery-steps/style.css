@@ -1,0 +1,165 @@
+/*  JQUERY STEPS */
+.wizard > .content {
+    background: #fff !important;
+}
+
+.wizard > .content > .body input.form-control {
+    font-family: 'Nunito Sans', sans-serif;
+    border-color: #d9dee9;
+}
+
+.wizard > .content > .body input.form-control:hover {
+    border-color: var(--kit-color-primary);
+}
+
+.wizard-steps-icon,
+.wizard .number {
+    border: 3px solid var(--kit-color-primary);
+    border-radius: 5px;
+    width: 3rem;
+    height: 3rem;
+    display: inline-block;
+    text-align: center;
+    line-height: 2.8rem;
+    color: var(--kit-color-primary);
+    font-size: 1.6rem;
+    background: #fff;
+}
+
+.wizard-steps-title {
+    display: block;
+}
+
+.wizard .steps ul {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.wizard .steps ul li {
+    flex-grow: 200;
+    margin-bottom: 0.66rem;
+    float: none;
+    width: auto;
+    position: relative;
+}
+
+.wizard .steps ul li a {
+    background: transparent !important;
+    margin: 0 !important;
+    text-align: center;
+    color: #141322 !important;
+    line-height: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.wizard .steps ul li a .number {
+    display: none;
+}
+
+.wizard .steps ul li:before, .wizard .steps ul li:after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 50%;
+    top: 2.4rem;
+    right: 0;
+    height: 0.2rem;
+    background: var(--kit-color-primary);
+    z-index: 1;
+}
+
+.wizard .steps ul li:after {
+    right: auto;
+    left: 0;
+}
+
+.wizard .steps ul li:first-child:after {
+    display: none;
+}
+
+.wizard .steps ul li:last-child:before {
+    display: none;
+}
+
+.wizard .steps ul li.disabled:before, .wizard .steps ul li.disabled:after {
+    background: #d9dee9;
+}
+
+.wizard .steps ul li.disabled .wizard-steps-icon,
+.wizard .steps ul li.disabled .number {
+    border-color: #d9dee9;
+    background: #d9dee9;
+    color: #fff;
+}
+
+.wizard .steps ul li.disabled a {
+    color: #d9dee9 !important;
+}
+
+.wizard .actions {
+    text-align: center;
+}
+
+.wizard .actions li {
+    margin-left: 0 !important;
+}
+
+.wizard .actions li a {
+    background-color: var(--kit-color-primary);
+    border-color: var(--kit-color-primary);
+    min-width: 8rem;
+    text-align: center;
+}
+
+.wizard .actions li a:hover, .wizard .actions li a:active {
+    background-color: #42baf9;
+    border-color: #42baf9;
+}
+
+.wizard .actions li.disabled a {
+    background-color: #d9dee9 !important;
+    border-color: #d9dee9 !important;
+    color: #fff !important;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.wizard-numbers .number {
+    padding-left: 3px;
+}
+
+.wizard-numbers .steps ul li a .number {
+    display: inline-block !important;
+    line-height: 2.8rem;
+}
+
+[data-kit-theme='dark'] .wizard > .content {
+    background: #141322 !important;
+}
+
+[data-kit-theme='dark'] .wizard .wizard-steps-icon,
+[data-kit-theme='dark'] .wizard .number {
+    background: #141322;
+}
+
+[data-kit-theme='dark'] .wizard .steps ul li a {
+    color: var(--kit-color-primary) !important;
+}
+
+[data-kit-theme='dark'] .wizard .steps ul li.disabled:before, [data-kit-theme='dark'] .wizard .steps ul li.disabled:after {
+    background: #232135;
+}
+
+[data-kit-theme='dark'] .wizard .steps ul li.disabled .wizard-steps-icon,
+[data-kit-theme='dark'] .wizard .steps ul li.disabled .number {
+    background: #141322;
+    border-color: #232135;
+    color: #4f4f7a;
+}
+
+[data-kit-theme='dark'] .wizard .actions li.disabled a {
+    background-color: #141322 !important;
+    opacity: 0.5;
+}

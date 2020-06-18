@@ -1,0 +1,86 @@
+/*  BOOTSTRAP SWEETALERT */
+body.stop-scrolling {
+    height: inherit;
+    overflow: inherit;
+}
+
+.sweet-overlay {
+    background: rgba(20, 19, 34, 0.3);
+}
+
+.sweet-alert h2 {
+    font-weight: 400;
+    position: relative;
+    margin: 30px 0 15px;
+}
+
+.sweet-alert p {
+    margin: 0 0 10px;
+}
+
+.sweet-alert .lead {
+    font-weight: 400;
+    font-size: 18px;
+    color: #141322;
+    margin-bottom: 20px;
+}
+
+.sweet-alert .btn {
+    min-width: 150px;
+    border-radius: 3px;
+    box-shadow: none !important;
+    margin: 0 5px 15px;
+    border: none !important;
+}
+
+.sweet-alert .btn-light {
+    color: #595c97 !important;
+}
+
+.sweet-alert .btn-success {
+    background: #41b883;
+}
+
+.sweet-alert .btn-warning {
+    border-color: #faad15;
+}
+
+.sweet-alert .btn-danger {
+    border-color: #f5222e;
+}
+
+.sweet-alert .btn-info {
+    border-color: #42baf9;
+}
+
+.sweet-alert .sa-icon.sa-success .line {
+    background-color: #41b883;
+}
+
+.sweet-alert .sa-icon.sa-success .placeholder {
+    border-color: #41b883;
+}
+
+.sweet-alert .sa-icon.sa-warning {
+    border-color: #faad15;
+}
+
+.sweet-alert .sa-icon.sa-warning span {
+    background: #faad15;
+}
+
+.sweet-alert .sa-icon.sa-error {
+    border-color: #f5222e;
+}
+
+.sweet-alert .sa-icon.sa-error .line {
+    background-color: #f5222e;
+}
+
+.sweet-alert .sa-icon.sa-info {
+    border-color: #42baf9;
+}
+
+.sweet-alert .sa-icon.sa-info:before, .sweet-alert .sa-icon.sa-info:after {
+    background-color: #42baf9;
+}

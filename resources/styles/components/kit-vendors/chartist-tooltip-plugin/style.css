@@ -1,0 +1,40 @@
+/*  CHARTIST TOOLTIP PLUGIN */
+.chartist-tooltip {
+    position: absolute;
+    display: none;
+    min-width: 5em;
+    padding: 8px 10px;
+    background: #141322;
+    color: #fff;
+    text-align: center;
+    pointer-events: none;
+    z-index: 100;
+    transition: opacity 0.2s linear;
+    border-radius: 3px;
+    transform: translate3d(3px, 4px, 0);
+}
+
+.chartist-tooltip.tooltip-show {
+    display: inline-block;
+}
+
+.chartist-tooltip:before {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    width: 0;
+    pointer-events: none;
+    border-color: transparent;
+    border-top-color: #141322;
+    border-width: 7px;
+    margin-left: -8px;
+}
+
+.chartist-tooltip.hide {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+}

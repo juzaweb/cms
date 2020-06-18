@@ -1,0 +1,34 @@
+/* MODAL */
+.modal .modal-content {
+    border: none;
+}
+
+.modal .modal-header .close {
+    background: #fff;
+}
+
+.modal-backdrop {
+    background: #141322;
+}
+
+.modal-backdrop.show {
+    opacity: 0.3;
+}
+
+[data-kit-theme='dark'] .modal-content {
+    background: #0c0c1b;
+}
+
+[data-kit-theme='dark'] .modal-header, [data-kit-theme='dark'] .modal-footer {
+    border-color: #232135;
+}
+
+[data-kit-theme='dark'] .modal-backdrop.show {
+    opacity: 0.7;
+}
+
+[data-kit-theme='dark'] .modal .close {
+    background: transparent;
+    color: #4f4f7a;
+    text-shadow: none;
+}
