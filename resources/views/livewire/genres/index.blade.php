@@ -1,0 +1,105 @@
+@section('title', trans('app.genres'))
+
+<div>
+    <div class="cui__breadcrumbs">
+        <div class="cui__breadcrumbs__path">
+            <a href="{{ route('admin.dashboard') }}">@lang('app.home')</a>
+            <span>
+                <span class="cui__breadcrumbs__arrow"></span>
+                <strong class="cui__breadcrumbs__current">@lang('app.genres')</strong>
+            </span>
+        </div>
+    </div>
+
+    <div class="cui__utils__content">
+        <div class="card">
+            <div class="card-header">
+                <div class="col">
+                    <h4 class="mb-0 card-title font-weight-bold">@lang('app.genres')</h4>
+                </div>
+
+                <div class="col col-auto">
+                    <div class="btn-group">
+                        <a href="{{ route('admin.genres.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                        <button type="button" class="btn btn-danger" wire:click=""><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                @if (session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                @endif
+
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <form method="get" class="form-inline" wire:submit.prevent="search">
+
+                            <div class="form-group mb-2 mr-1">
+                                <label for="inputName" class="sr-only">@lang('app.search')</label>
+                                <input name="query" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" wire:model="search">
+                            </div>
+
+                            <div class="form-group mb-2 mr-1">
+                                <label for="inputStatus" class="sr-only">@lang('app.status')</label>
+                                <select name="status" id="inputStatus" class="form-control" wire:model="status">
+                                    <option value="1">@lang('app.enabled')</option>
+                                    <option value="0">@lang('app.disabled')</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('app.search')</button>
+                        </form>
+                    </div>
+
+                    <div class="col-md-4 text-right">
+
+
+
+                    </div>
+                </div>
+
+                <div class="table-responsive mb-5">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox" class="checkedAll" value="1"></th>
+                            <th width="10%">@lang('app.thumbnail')</th>
+                            <th>@lang('app.name')</th>
+                            <th width="20%">@lang('app.description')</th>
+                            <th width="15%">@lang('app.created_at')</th>
+                            <th width="15%" align="center">@lang('app.status')</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if($genres->isEmpty())
+                            <tr><td colspan="5" align="center">Không có dữ liệu</td></tr>
+                        @else
+                            @foreach($genres as $item)
+                                <tr>
+                                    <td><input type="checkbox" name="ids" class="checked" value="{{ $item->id }}"></td>
+                                    <td>{{ $item->thumbnail }}</td>
+                                    <td><a href="{{ route('admin.genres.edit', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
+                                    <td>{{ $item->description }}</td>
+                                    <td>{{ $item->created_at->format('H:i m/d/Y') }}</td>
+                                    <td align="center">{{ $item->status == 1 ? trans('app.enabled') : trans('app.disabled') }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+
+                    <div class="float-right">
+                        {{ $genres->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

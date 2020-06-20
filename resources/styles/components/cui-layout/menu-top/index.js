@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 // "cui-menu-right" module scripts
 
-;(function($) {
+;$(document).on("turbolinks:load", function() {
   'use strict'
   $(function() {
     if ($('body').find('.cui__menuTop').length < 1) {

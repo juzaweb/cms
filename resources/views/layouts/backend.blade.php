@@ -17,93 +17,11 @@
 
     @livewireStyles
     <!-- PRELOADER STYLES-->
-    {{--<style>
-        .initial__loading {
-            position: fixed;
-            z-index: 99999;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDFweCIgIGhlaWdodD0iNDFweCIgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiBjbGFzcz0ibGRzLXJvbGxpbmciPiAgICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiBmaWxsPSJub25lIiBuZy1hdHRyLXN0cm9rZT0ie3tjb25maWcuY29sb3J9fSIgbmctYXR0ci1zdHJva2Utd2lkdGg9Int7Y29uZmlnLndpZHRofX0iIG5nLWF0dHItcj0ie3tjb25maWcucmFkaXVzfX0iIG5nLWF0dHItc3Ryb2tlLWRhc2hhcnJheT0ie3tjb25maWcuZGFzaGFycmF5fX0iIHN0cm9rZT0iIzAxOTBmZSIgc3Ryb2tlLXdpZHRoPSIxMCIgcj0iMzUiIHN0cm9rZS1kYXNoYXJyYXk9IjE2NC45MzM2MTQzMTM0NjQxNSA1Ni45Nzc4NzE0Mzc4MjEzOCIgdHJhbnNmb3JtPSJyb3RhdGUoODQgNTAgNTApIj4gICAgICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgY2FsY01vZGU9ImxpbmVhciIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCIga2V5VGltZXM9IjA7MSIgZHVyPSIxcyIgYmVnaW49IjBzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSI+PC9hbmltYXRlVHJhbnNmb3JtPiAgICA8L2NpcmNsZT4gIDwvc3ZnPg==);
-            background-color: #fff;
-        }
-
-        [data-kit-theme='dark'] .initial__loading {
-            background-color: #0c0c1b;
-        }
-    </style>--}}
-    {{--<script>
-        $(document).ready(function () {
-            $('.initial__loading').delay(200).fadeOut(400)
-        })
-    </script>--}}
 </head>
 
 <body class="cui__layout--cardsShadow cui__menuLeft--dark">
-{{--<div class="initial__loading"></div>--}}
 <div class="cui__layout cui__layout--hasSider">
-    <div class="kit__chat">
-        <button class="kit__chat__toggleButton kit__chat__actionToggle">
-            <i class="fe fe-message-square mr-md-2"></i>
-            <span class="d-none d-md-inline">Support Chat</span>
-        </button>
-        <div class="kit__chat__container">
-            <div class="d-flex flex-wrap mb-2">
-                <div class="text-dark font-size-18 font-weight-bold mr-auto">Support Chat1</div>
-                <button class="kit__g14__closeBtn btn btn-link">
-                    <i class="fe fe-x-square font-size-21 align-middle text-gray-6"></i>
-                </button>
-            </div>
-            <div class="height-300 d-flex flex-column justify-content-end">
-                <div class="kit__g14__contentWrapper kit__customScroll">
-                    <div class="kit__g14__message">
-                        <div class="kit__g14__messageContent">
-                            <div class="text-gray-4 font-size-12 text-uppercase">You, 5 min ago</div>
-                            <div>
-                                Hi! Anyone here? I want to know how I can buy Clean UI KIT Pro?
-                            </div>
-                        </div>
-                        <div class="kit__g14__messageAvatar kit__utils__avatar">
-                            <img src="../../components/kit-core/img/avatars/avatar-2.png" alt="You" />
-                        </div>
-                    </div>
-                    <div class="kit__g14__message kit__g14__message--answer">
-                        <div class="kit__g14__messageContent">
-                            <div class="text-gray-4 font-size-12 text-uppercase">Mary, 14 sec ago</div>
-                            <div>
-                                Please call us + 100 295 000
-                            </div>
-                        </div>
-                        <div class="kit__g14__messageAvatar kit__utils__avatar mr-3">
-                            <img src="../../components/kit-core/img/avatars/2.jpg" alt="Mary Stanform" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pt-2 pb-2">
-                Mary is typing...
-            </div>
-            <div>
-                <div class="input-group mb-3">
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Send message..."
-                            aria-label="Recipient's username"
-                    />
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fe fe-send align-middle"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </div>
 
     <div class="cui__sidebar kit__customScroll">
         <div class="cui__sidebar__inner">
@@ -286,53 +204,7 @@
             </div>
         </div>
     </div>
-    <a
-            href="javascript: void(0);"
-            style="bottom: calc(50% + 120px)"
-            class="cui__sidebar__toggleButton cui__sidebar__actionToggle"
-            data-toggle="tooltip"
-            data-placement="left"
-            title="Settings"
-    >
-        <i class="fe fe-settings"></i>
-    </a>
-    <a
-            href="javascript: void(0);"
-            style="bottom: calc(50% + 60px)"
-            class="cui__sidebar__toggleButton cui__sidebar__actionToggleTheme"
-            data-toggle="tooltip"
-            data-placement="left"
-            title="Switch Dark / Light Theme"
-    >
-        <i class=" fe fe-moon cui__sidebar__on"></i>
-        <i class="fe fe-sun cui__sidebar__off"></i>
-    </a>
-    <a
-            href="javascript: void(0);"
-            style="bottom: calc(50%)"
-            class="cui__sidebar__toggleButton color reset"
-            data-toggle="tooltip"
-            data-placement="left"
-            title="Set Primary Color"
-    >
-        <button type="button" id="resetColor" tabindex="0">
-            <i class="fe fe-x-circle"></i>
-        </button>
-        <input type="color" id="colorPicker" value="#4b7cf3" />
-        <i class="fe fe-package"></i>
-    </a>
-    <a
-            href="https://docs.cleanuitemplate.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style="bottom: calc(50% - 60px)"
-            class="cui__sidebar__toggleButton"
-            data-toggle="tooltip"
-            data-placement="left"
-            title="Documentation"
-    >
-        <i class=" fe fe-book-open"></i>
-    </a>
+
 
     <div class="cui__menuLeft">
         <div class="cui__menuLeft__mobileTrigger"><span></span></div>
@@ -340,23 +212,14 @@
         <div class="cui__menuLeft__outer">
             <div class="cui__menuLeft__logo__container">
                 <div class="cui__menuLeft__logo">
-                    <img src="../../components/kit-core/img/logo.svg" class="mr-2" alt="Clean UI" />
+                    <img src="https://html.cleanui.cloud/components/kit/core/img/logo.svg" class="mr-2" alt="Clean UI" />
                     <div class="cui__menuLeft__logo__name">Clean UI Pro</div>
                     <div class="cui__menuLeft__logo__descr">Html</div>
                 </div>
             </div>
             <div class="cui__menuLeft__scroll kit__customScroll">
                 @include('backend.menu')
-                <div class="cui__menuLeft__banner">
-                    <p>More components, more style, more themes, and premium support!</p>
-                    <a
-                            href="https://themeforest.net/item/clean-ui-react-admin-template/21938700"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-sm btn-success btn-rounded px-3"
-                    >Buy Bundle</a
-                    >
-                </div>
+
             </div>
         </div>
     </div>
@@ -806,7 +669,7 @@
                 </div>
                 <div class="dropdown">
                     <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="5,15">
-                        <img class="dropdown-toggle-avatar" src="../../components/kit-core/img/avatars/avatar-2.png" alt="User avatar" />
+                        <img class="dropdown-toggle-avatar" src="https://html.cleanui.cloud/components/kit/core/img/avatars/avatar-2.png" alt="User avatar" />
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" role="menu">
                         <a class="dropdown-item" href="javascript:void(0)">
