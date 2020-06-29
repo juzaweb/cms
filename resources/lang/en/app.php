@@ -19,4 +19,7 @@ return [
     'cancel' => 'Cancel',
     'choose_image' => 'Choose image',
     'save_successfully' => 'Save successfully.',
+    'countries' => 'Countries',
+    'stars' => 'Stars',
+    'there_is_no_data' => 'There is no data',
 ];

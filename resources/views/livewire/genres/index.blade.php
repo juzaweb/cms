@@ -1,7 +1,6 @@
 @section('title', trans('app.genres'))
 
 <div>
-    <p></p>
     {{ Breadcrumbs::render('genres-manager') }}
 
     <div class="cui__utils__content">
@@ -25,7 +24,7 @@
 
                 @if (session()->has('message'))
                     <div class="alert alert-success">
-                        {{ session('message') }}
+                        <i class="fa fa-check"></i> {{ session('message') }}
                     </div>
                 @endif
 
@@ -35,7 +34,7 @@
 
                             <div class="form-group mb-2 mr-1">
                                 <label for="inputName" class="sr-only">@lang('app.search')</label>
-                                <input name="query" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" wire:model="search">
+                                <input name="query" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" wire:model="search" autocomplete="off">
                             </div>
 
                             <div class="form-group mb-2 mr-1">
@@ -65,21 +64,21 @@
                                 <th>@lang('app.name')</th>
                                 <th width="20%">@lang('app.description')</th>
                                 <th width="15%">@lang('app.created_at')</th>
-                                <th width="15%" align="center">@lang('app.status')</th>
+                                <th width="15%">@lang('app.status')</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @if($genres->isEmpty())
-                            <tr><td colspan="5" align="center">Không có dữ liệu</td></tr>
+                        @if($items->isEmpty())
+                            <tr><td colspan="5" align="center">@lang('app.there_is_no_data')</td></tr>
                         @else
-                            @foreach($genres as $item)
+                            @foreach($items as $item)
                                 <tr>
-                                    <td><input type="checkbox" name="ids" class="checked" value="{{ $item->id }}"></td>
+                                    <td><input type="checkbox" wire:click="toggleTask({{ $item->id }})" class="checked ids" value="{{ $item->id }}" {{ in_array($item->id, $ids) ? 'checked' : '' }}></td>
                                     <td><img src="{{ $item->getThumbnail() }}" alt="" class="w-100"></td>
                                     <td><a href="{{ route('admin.genres.edit', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
                                     <td>{{ $item->description }}</td>
                                     <td>{{ $item->created_at->format('H:i m/d/Y') }}</td>
-                                    <td align="center">{{ $item->status == 1 ? trans('app.enabled') : trans('app.disabled') }}</td>
+                                    <td>{{ $item->status == 1 ? trans('app.enabled') : trans('app.disabled') }}</td>
                                 </tr>
                             @endforeach
                         @endif
@@ -87,7 +86,7 @@
                     </table>
 
                     <div class="float-right">
-                        {{ $genres->links() }}
+                        {{ $items->links() }}
                     </div>
                 </div>
             </div>

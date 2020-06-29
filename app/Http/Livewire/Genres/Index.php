@@ -12,6 +12,7 @@ class Index extends Component
     
     public $search;
     public $status;
+    public $ids = [];
     protected $updatesQueryString = ['search', 'status'];
     
     public function search() {
@@ -20,14 +21,21 @@ class Index extends Component
     }
     
     public function delete() {
+        dd($this->ids);
+    }
     
+    public function toggleTask($taskId) {
+        if (!in_array($taskId, $this->ids)) {
+            $this->ids[] = $taskId;
+        }
+        else {
+            $this->ids = array_diff($this->ids, [$taskId]);
+        }
     }
     
     public function render()
     {
         $query = Genres::query();
-        
-        
         if ($this->search) {
             $query->where(function ($builder) {
                 $builder->orWhere('name', 'like', '%'. $this->search .'%');
@@ -39,9 +47,9 @@ class Index extends Component
             $query->where('status', '=', $this->status);
         }
         //dd($query->toSql(), $query->getBindings());
-        $genres = $query->paginate(10);
+        $items = $query->paginate(10);
         return view('livewire.genres.index', [
-            'genres' => $genres
+            'items' => $items
         ]);
     }
 }

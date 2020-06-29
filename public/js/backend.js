@@ -11095,10 +11095,28 @@ $(document).on("turbolinks:load", function() {
 
     $(document).on('change', '.checkedAll', function () {
         if ($(this).is(':checked')) {
-            $("input[name=ids]").prop('checked', true);
+            $("input.ids").prop('checked', true);
         }
         else {
-            $("input[name=ids]").prop('checked', false);
+            $("input.ids").prop('checked', false);
         }
+    });
+
+    $(document).on('click', '.delete-items', function () {
+        let ids = $("input[name=ids]:checked").map(function(){return $(this).val();}).get();
+        $.ajax({
+            type: 'POST',
+            url: '',
+            dataType: 'json',
+            data: {
+                'ids': ids
+            }
+        }).done(function(data) {
+
+            return false;
+        }).fail(function(data) {
+
+            return false;
+        });
     });
 });

@@ -3,10 +3,10 @@ $(document).on("turbolinks:load", function() {
 
     $(document).on('change', '.checkedAll', function () {
         if ($(this).is(':checked')) {
-            $("input[name=ids]").prop('checked', true);
+            $("input.ids").prop('checked', true);
         }
         else {
-            $("input[name=ids]").prop('checked', false);
+            $("input.ids").prop('checked', false);
         }
     });
 

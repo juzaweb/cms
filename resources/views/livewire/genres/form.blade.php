@@ -1,7 +1,6 @@
 @section('title', $title_page)
 
 <div>
-    <p></p>
     {{ Breadcrumbs::render('genres-manager', $this) }}
 
     <div class="cui__utils__content">
