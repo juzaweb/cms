@@ -16,4 +16,7 @@ return [
     'add_new' => 'Add new',
     'delete' => 'Delete',
     'save' => 'Save',
+    'cancel' => 'Cancel',
+    'choose_image' => 'Choose image',
+    'save_successfully' => 'Save successfully.',
 ];

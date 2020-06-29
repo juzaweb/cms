@@ -39,8 +39,6 @@ class Genres extends Model
     ];
     
     public function getThumbnail() {
-        if ($this->thumbnail) {
-        
-        }
+        return image_url($this->thumbnail);
     }
 }

@@ -27,6 +27,7 @@ class Index extends Component
     {
         $query = Genres::query();
         
+        
         if ($this->search) {
             $query->where(function ($builder) {
                 $builder->orWhere('name', 'like', '%'. $this->search .'%');

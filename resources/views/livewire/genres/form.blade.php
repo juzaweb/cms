@@ -1,62 +1,74 @@
 @section('title', $title_page)
 
 <div>
-
-    <div class="cui__breadcrumbs">
-        <div class="cui__breadcrumbs__path">
-            <a href="{{ route('admin.dashboard') }}">@lang('app.home')</a>
-
-            <span>
-                <span class="cui__breadcrumbs__arrow"></span>
-                <a href="{{ route('admin.genres') }}">@lang('app.genres')</a>
-            </span>
-            <span>
-                <span class="cui__breadcrumbs__arrow"></span>
-                <strong class="cui__breadcrumbs__current">{{ $title_page }}</strong>
-            </span>
-        </div>
-    </div>
+    <p></p>
+    {{ Breadcrumbs::render('genres-manager', $this) }}
 
     <div class="cui__utils__content">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="mb-4">
-                    <strong>{{ $title_page }}</strong>
-                </h4>
-
-                <form wire:submit.prevent="save">
-                    <input type="hidden" wire:model="mid" value="">
-                    
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="baseName">@lang('app.name')</label>
+        <form wire:submit.prevent="save">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
                         <div class="col-md-6">
-                            <input type="text" wire:model="name" class="form-control" id="baseName" value=""/>
-                            @error('name') <span class="error">{{ $message }}</span> @enderror
+                            <h5 class="mb-0 card-title font-weight-bold">{{ $title_page }}</h5>
                         </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="baseDescription">@lang('app.description')</label>
                         <div class="col-md-6">
-                            <textarea class="form-control" wire:model="description" id="baseDescription" rows="4"></textarea>
-                            @error('description') <span class="error">{{ $message }}</span> @enderror
+                            <div class="btn-group float-right">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
+                                <a href="{{ route('admin.genres') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="baseStatus">@lang('app.status')</label>
-                        <div class="col-md-6 pt-2">
-                            <select wire:model="status" id="baseStatus" class="form-control">
-                                <option value="1">@lang('app.enabled')</option>
-                                <option value="0">@lang('app.disabled')</option>
-                            </select>
+                <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="baseName">@lang('app.name')</label>
+
+                                    <input type="text" wire:model="name" class="form-control" id="baseName" value="" autocomplete="off"/>
+                                    @error('name') <span class="error">{{ $message }}</span> @enderror
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-form-label" for="baseDescription">@lang('app.description')</label>
+                                    <textarea class="form-control" wire:model="description" id="baseDescription" rows="4"></textarea>
+                                    @error('description') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-form-label" for="baseStatus">@lang('app.status')</label>
+                                    <select wire:model="status" id="baseStatus" class="form-control">
+                                        <option value="">-- @lang('app.status') --</option>
+                                        <option value="1">@lang('app.enabled')</option>
+                                        <option value="0">@lang('app.disabled')</option>
+                                    </select>
+                                    @error('status') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-thumbnail text-center">
+                                    <input id="thumbnail" type="hidden" wire:model="thumbnail">
+                                    <img src="{{ asset('imgs/default.png') }}" id="holder" class="w-100">
+
+                                    <a href="javascript:void(0)" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                        <i class="fa fa-picture-o"></i> @lang('app.choose_image')
+                                    </a>
+
+                                    @error('thumbnail') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
 
-                    <button type="submit" class="btn btn-success px-5">@lang('app.save')</button>
-                </form>
+                        <input type="hidden" wire:model="mid" value="">
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-
 </div>

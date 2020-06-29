@@ -1,8 +1,13 @@
 <?php
+Route::group(['prefix' => 'filemanager', 'middleware' => ['web', 'admin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
-Route::get('/admin', 'Backend\DashboardController@index')->name('admin.dashboard');
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
+});
 
-Route::group(['prefix' => 'admin/genres'], function () {
+Route::group(['prefix' => 'admin/genres', 'middleware' => ['web', 'admin']], function () {
     Route::livewire('/', 'genres.index')->name('admin.genres')->layout('layouts.backend');
     
     Route::livewire('/create', 'genres.form')->name('admin.genres.create')->layout('layouts.backend');

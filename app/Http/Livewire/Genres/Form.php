@@ -12,6 +12,7 @@ class Form extends Component
     public $name;
     public $description;
     public $status;
+    public $thumbnail;
     
     public function mount($id = null)
     {
@@ -28,14 +29,15 @@ class Form extends Component
         $this->validate([
             'name' => 'required|string|max:250',
             'description' => 'nullable|string|max:250',
-            'status' => 'required|in:0,1'
+            'status' => 'required|in:0,1',
+            'thumbnail' => 'nullable|string|max:250',
         ]);
         
         $model = Genres::firstOrNew(['id' => $this->mid]);
         $model->fill((array) $this);
         $model->save();
     
-        session()->flash('message', 'Post successfully updated.');
+        session()->flash('message', trans('app.save_successfully'));
         return redirect()->route('admin.genres');
     }
     

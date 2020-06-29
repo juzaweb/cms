@@ -77,4 +77,6 @@ mix.combine([
     'resources/styles/components/cui-layout/sidebar/index.js',
     'resources/styles/components/cui-layout/support-chat/index.js',
     'resources/styles/components/cui-layout/topbar/index.js',
+    'public/vendor/laravel-filemanager/js/stand-alone-button.js',
+    'resources/js/customs.js',
 ], 'public/js/backend.js');

@@ -1,27 +1,22 @@
 @section('title', trans('app.genres'))
 
 <div>
-    <div class="cui__breadcrumbs">
-        <div class="cui__breadcrumbs__path">
-            <a href="{{ route('admin.dashboard') }}">@lang('app.home')</a>
-            <span>
-                <span class="cui__breadcrumbs__arrow"></span>
-                <strong class="cui__breadcrumbs__current">@lang('app.genres')</strong>
-            </span>
-        </div>
-    </div>
+    <p></p>
+    {{ Breadcrumbs::render('genres-manager') }}
 
     <div class="cui__utils__content">
         <div class="card">
             <div class="card-header">
-                <div class="col">
-                    <h4 class="mb-0 card-title font-weight-bold">@lang('app.genres')</h4>
-                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.genres')</h5>
+                    </div>
 
-                <div class="col col-auto">
-                    <div class="btn-group">
-                        <a href="{{ route('admin.genres.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
-                        <button type="button" class="btn btn-danger" wire:click=""><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                    <div class="col-md-6">
+                        <div class="btn-group float-right">
+                            <a href="{{ route('admin.genres.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <button type="button" class="btn btn-danger" wire:click="delete"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,22 +52,21 @@
 
                     <div class="col-md-4 text-right">
 
-
-
                     </div>
+
                 </div>
 
                 <div class="table-responsive mb-5">
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th width="3%"><input type="checkbox" class="checkedAll" value="1"></th>
-                            <th width="10%">@lang('app.thumbnail')</th>
-                            <th>@lang('app.name')</th>
-                            <th width="20%">@lang('app.description')</th>
-                            <th width="15%">@lang('app.created_at')</th>
-                            <th width="15%" align="center">@lang('app.status')</th>
-                        </tr>
+                            <tr>
+                                <th width="3%"><input type="checkbox" class="checkedAll" value="1"></th>
+                                <th width="10%">@lang('app.thumbnail')</th>
+                                <th>@lang('app.name')</th>
+                                <th width="20%">@lang('app.description')</th>
+                                <th width="15%">@lang('app.created_at')</th>
+                                <th width="15%" align="center">@lang('app.status')</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @if($genres->isEmpty())
@@ -81,7 +75,7 @@
                             @foreach($genres as $item)
                                 <tr>
                                     <td><input type="checkbox" name="ids" class="checked" value="{{ $item->id }}"></td>
-                                    <td>{{ $item->thumbnail }}</td>
+                                    <td><img src="{{ $item->getThumbnail() }}" alt="" class="w-100"></td>
                                     <td><a href="{{ route('admin.genres.edit', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
                                     <td>{{ $item->description }}</td>
                                     <td>{{ $item->created_at->format('H:i m/d/Y') }}</td>
@@ -98,8 +92,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-
 </div>
