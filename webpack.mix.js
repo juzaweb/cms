@@ -1,16 +1,5 @@
 const mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
@@ -35,6 +24,21 @@ mix.styles([
     'resources/styles/vendors/font-linearicons/style.css',
     'resources/styles/vendors/font-awesome/css/font-awesome.min.css',
     'resources/styles/vendors/font-icomoon/style.css',
+    'resources/styles/components/kit-vendors/style.css',
+    'resources/styles/components/kit-core/style.css',
+    'resources/styles/components/cui-styles/style.css',
+    'resources/styles/components/kit-widgets/style.css',
+    'resources/styles/components/kit-apps/style.css',
+    'resources/styles/components/cui-ecommerce/style.css',
+    'resources/styles/components/cui-dashboards/style.css',
+    'resources/styles/components/cui-system/auth/style.css',
+    'resources/styles/components/cui-layout/breadcrumbs/style.css',
+    'resources/styles/components/cui-layout/footer/style.css',
+    'resources/styles/components/cui-layout/menu-left/style.css',
+    'resources/styles/components/cui-layout/menu-top/style.css',
+    'resources/styles/components/cui-layout/sidebar/style.css',
+    'resources/styles/components/cui-layout/support-chat/style.css',
+    'resources/styles/components/cui-layout/topbar/style.css',
 ], 'public/css/backend.css');
 
 mix.combine([
@@ -55,7 +59,6 @@ mix.combine([
     'resources/styles/vendors/bootstrap-show-password/dist/bootstrap-show-password.min.js',
     'resources/styles/vendors/moment/min/moment.min.js',
     'resources/styles/vendors/tempus-dominus-bs4/build/js/tempusdominus-bootstrap-4.min.js',
-    'resources/styles/vendors/fullcalendar/dist/fullcalendar.min.js',
     'resources/styles/vendors/bootstrap-sweetalert/dist/sweetalert.min.js',
     'resources/styles/vendors/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js',
     'resources/styles/vendors/summernote/dist/summernote.min.js',
@@ -65,11 +68,17 @@ mix.combine([
     'resources/styles/vendors/c3/c3.min.js',
     'resources/styles/vendors/nprogress/nprogress.js',
     'resources/styles/vendors/jquery-steps/build/jquery.steps.min.js',
-    'resources/styles/vendors/chart.js/dist/Chart.bundle.min.js',
-    'resources/styles/vendors/dropify/dist/js/dropify.min.js',
     'resources/styles/vendors/d3-dsv/dist/d3-dsv.js',
     'resources/styles/vendors/d3-time-format/dist/d3-time-format.js',
     'resources/styles/vendors/techan/dist/techan.min.js',
+    'resources/styles/components/cui-layout/menu-left/index.js',
+    'resources/styles/components/cui-layout/menu-top/index.js',
+    'resources/styles/components/cui-layout/sidebar/index.js',
+    'resources/styles/components/cui-layout/support-chat/index.js',
+    'resources/styles/components/cui-layout/topbar/index.js',
+    'resources/styles/js/lazyload.min.js',
+    'public/vendor/laravel-filemanager/js/stand-alone-button.js',
+    'resources/js/customs.js',
 ], 'public/js/backend.js');
 
 mix.styles([

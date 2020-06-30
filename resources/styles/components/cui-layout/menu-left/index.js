@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 // "cui-menu-right" module scripts
 
-; (function ($) {
+; $(document).on("turbolinks:load", function() {
   'use strict'
   $(function () {
     if ($('body').find('.cui__menuLeft').length < 1) {
@@ -115,4 +115,4 @@
       }
     })
   })
-})(jQuery)
+});
