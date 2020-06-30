@@ -1,260 +1,135 @@
-
 <!DOCTYPE html>
-<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<html lang="vi-VN">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#234556">
     <meta name="msapplication-navbutton-color" content="#234556">
     <meta name="apple-mobile-web-app-status-bar-style" content="#234556">
-    <link rel="shortcut icon" href="/wp-content/themes/halimmovies/assets/images/favicon.ico" type="image/x-icon" />
-    <title>HaLimMovie 5.4 - Just another WordPress site</title>
-    <meta name="description" content="A group of pals have a vacation in the strange island with a simple schedule. Things hit a snag when they stumble cross a woman waving for help. They rescue her, so that they get into troubles which threaten their lives because she is a legendary siren." />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://play.halimthemes.com" />
-    <link rel="next" href="/page/2" />
-    <meta property="og:locale" content="en_US">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="HaLimMovie 5.4 - Just another WordPress site">
-    <meta property="og:url" content="https://play.halimthemes.com">
-    <meta property="og:site_name" content="HaLimMovie 5.4">
-    <meta property="og:image" content="/cdn.watch-series.co/cover/siren.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HaLimMovie 5.4 - Just another WordPress site">
-    <meta name="twitter:image" content="/cdn.watch-series.co/cover/siren.png">
+    <link rel="apple-touch-icon" sizes="152x152" href=""/>
+    <link rel="shortcut icon" href="{{ asset('uploads/2019/05/favicon.png') }}" type="image/x-icon"/>
 
-    <link rel='dns-prefetch' href='//s.w.org' />
-    <meta name="csrf-token" content="MTU5MjM2OTQ3MzZLOUw5TTZKQUtGTUZNR01CS0FOOUs2TTRNSUpITg==">
-    <link data-optimized="1" rel='stylesheet' id='bootstrap-css' href='wp-content/litespeed/cssjs/be281.css' media='all' />
-    <link data-optimized="1" rel='stylesheet' id='halimmovies-style-css' href='wp-content/litespeed/cssjs/35fa8.css' media='all' />
-    <link data-optimized="1" rel='stylesheet' id='halimmovie-style-css' href='wp-content/litespeed/cssjs/c3a41.css' media='all' />
-    <link data-optimized="1" rel='stylesheet' id='halimmovie-child-style-css' href='wp-content/litespeed/cssjs/35fa8.css' media='all' />
-    <script type='text/javascript' src='wp-includes/js/jquery/jquery.js'></script>
-    <link rel='https://api.w.org/' href='/wp-json/' />
-    <style></style>
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"Movie","name":"Siren","dateModified":"2020-06-16T13:58:42+00:00","dateCreated":"2020-04-19T06:57:33+00:00","url":"https://play.halimthemes.com","datePublished":"2020-04-19T06:57:33+00:00","aggregateRating":{"@type":"AggregateRating","bestRating":"5","worstRating":"2","ratingValue":3,"reviewCount":"2"},"image":"/cdn.watch-series.co/cover/siren.png","director":"HaLim"}</script>
-    <style>#header .site-title {background: url(wp-content/themes/halimmovies/assets/images/halim-dark-logo.png) no-repeat top left;background-size: contain;text-indent: -9999px;}</style>
+    <!-- This site is optimized with the Yoast SEO Premium plugin v14.0.4 - https://yoast.com/wordpress/plugins/seo/ -->
+    <title>XemPhimPlus | Phim Hay | Phim Mới</title>
+    <meta name="description"
+          content="Xem phim online miễn phí chất lượng cao. Xem phim Full HD Vietsub, Thuyết minh, Lồng tiếng. Xem phim hay, phim mới nhanh và hot nhất 2020"/>
+    <meta name="robots" content="index, follow"/>
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+    <link rel="canonical" href="/"/>
+    <link rel="next" href="/page/2"/>
+    <meta property="og:locale" content="vi_VN"/>
+    <meta property="og:title" content="XemPhimPlus | Phim Hay | Phim Mới"/>
+    <meta property="og:description"
+          content="Xem phim online miễn phí chất lượng cao. Xem phim Full HD Vietsub, Thuyết minh, Lồng tiếng. Xem phim hay, phim mới nhanh và hot nhất 2020"/>
+    <meta property="og:url" content="/"/>
+    <meta property="og:site_name" content="XemPhimPlus | Phim Hay | Phim Mới"/>
+    <meta property="fb:app_id" content="2401456150086560"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@XemPhimPlus"/>
+    <script type="application/ld+json" class="yoast-schema-graph">
+        {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"/#organization","name":"XemPhimPlus","url":"/","sameAs":["https://www.facebook.com/GalaPhimPage/","https://vn.linkedin.com/xemphimplus","https://myspace.com/xemphimplus","https://www.youtube.com/channel/UCZGvgvQcFNVrwgRcNKYNfkQ","https://pinterest.co.uk/XemPhimPlusOnline/","https://en.wikipedia.org/wiki/Phim","https://twitter.com/XemPhimPlus"],"logo":{"@type":"ImageObject","@id":"/#logo","inLanguage":"vi-VN","url":"wp-content/uploads/2019/05/logo-xemphimplus.png","width":361,"height":63,"caption":"XemPhimPlus"},"image":{"@id":"/#logo"}},{"@type":"WebSite","@id":"/#website","url":"/","name":"XemPhimPlus | Phim Hay | Phim M\u1edbi","description":"Trang web xem phim online mi\u1ec5n ph\u00ed d\u00e0nh co c\u00e1c t\u00edn \u0111\u1ed3 y\u00eau phim","publisher":{"@id":"/#organization"},"potentialAction":[{"@type":"SearchAction","target":"/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"vi-VN"},{"@type":"CollectionPage","@id":"/#webpage","url":"/","name":"XemPhimPlus | Phim Hay | Phim M\u1edbi","isPartOf":{"@id":"/#website"},"about":{"@id":"/#organization"},"description":"Xem phim online mi\u1ec5n ph\u00ed ch\u1ea5t l\u01b0\u1ee3ng cao. Xem phim Full HD Vietsub, Thuy\u1ebft minh, L\u1ed3ng ti\u1ebfng. Xem phim hay, phim m\u1edbi nhanh v\u00e0 hot nh\u1ea5t 2020","inLanguage":"vi-VN"}]}
+
+    </script>
+    <meta name="msvalidate.01" content="E418CD891F8A0EF369D03551D100FBEE"/>
+    <meta name="google-site-verification" content="FHhZvBzkQC2YlkrkDPerF8-7ZzqF_4uJDu72hBSQEBI"/>
+    <meta name="yandex-verification" content="8c5a988058ff4f3b"/>
+    <!-- / Yoast SEO Premium plugin. -->
+
+
+    <link rel='dns-prefetch' href='//s.w.org'/>
+    <meta property="fb:app_id" content="2401456150086560"/>
+    <meta name="csrf-token" content="{{ csrf_token()  }}">
+    <link rel='stylesheet' id='bootstrap-css' href='{{ asset('css/app.css') }}' media='all'/>
+    <script type='text/javascript' src='{{ asset('js/app.js') }}'></script>
+    {{--    <link rel='stylesheet' id='halimmovies-style-css'  href='wp-content/themes/halimmovies-child/style.css?ver=5.4.2' media='all' />--}}
+    {{--    <script type='text/javascript' src='wp-includes/js/jquery/jquery.js'></script>--}}
+    <link rel='https://api.w.org/' href='/wp-json/'/>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    {{--    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-103576265-6"></script>--}}
+    <script>
+        // window.dataLayer = window.dataLayer || [];
+        // function gtag(){dataLayer.push(arguments);}
+        // gtag('js', new Date());
+
+        // gtag('config', 'UA-103576265-6');
+    </script>
+
+
+    <!-- Google Analytics -->
+{{--    <script>--}}
+{{--        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){--}}
+{{--            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),--}}
+{{--            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)--}}
+{{--        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');--}}
+{{--        ga('create', 'UA-103576265-6', 'auto');--}}
+{{--        ga('send', 'pageview');--}}
+{{--        ga('create', 'UA-103576265-9', 'auto', 'clientTracker');--}}
+{{--        ga('clientTracker.send', 'pageview');--}}
+{{--    </script>--}}
+<!-- End Google Analytics -->
+    <style>
+        /*style 2*/
+        .halim-post-title-box {
+            position: unset !important;
+            padding: 50px 0 0 !important;
+            text-align: center !important;
+            background: transparent !important;
+        }
+
+        .halim-post-title > h2 {
+            color: #e6920e;
+        }
+
+        .halim-corner-rounded .halim_box .grid-item figure, .halim-corner-rounded .owl-carousel .grid-item figure {
+            border-radius: 8.5px;
+        }
+
+        .halim-post-title.title-2-line h2 {
+            -webkit-line-clamp: 2;
+        }
+
+        .grid-item .episode {
+            right: 5px;
+            bottom: 55px;
+        }
+    </style>
+
+    <script type="application/ld+json">
+        {"@context":"http://schema.org","@type":"TVSeries","name":"Bạn Gái 99 Điểm","dateModified":"2020-06-18T15:06:48+07:00","dateCreated":"2020-06-18T14:55:38+07:00","url":"http://xemphimplus.net","datePublished":"2020-06-18T14:55:38+07:00","aggregateRating":{"@type":"AggregateRating","bestRating":"5","worstRating":"2","ratingValue":5,"reviewCount":3},"image":"wp-content/uploads/2020/06/ban-gai-99-diem-21564-thumbnail.jpg","director":"HaLim"}
+
+    </script>
+    <link rel="icon" href="{{ asset('uploads/2019/05/favicon.png') }}" sizes="32x32"/>
+    <link rel="icon" href="{{ asset('uploads/2019/05/favicon.png') }}" sizes="192x192"/>
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('uploads/2019/05/favicon.png') }}"/>
+    <meta name="msapplication-TileImage" content="{{ asset('uploads/2019/05/favicon.png') }}"/>
+    <script>
+        // (function() {
+        //     var script = document.createElement('script');
+        //     script.src = 'https://api.trackpush.com/sdk/inpage/v1.js?pid=C7ClcNVSU6nVMkYA%2B7jmcA%3D%3D';
+        //     script.async = true;
+        //     script.onload = function () {
+        //         InPagePushSDK.init({"content_type":"all","time_to_show":"onload","delay_show":0,"max_ads":3,"max_showing":2,"max_showing_mobile":1,"ads_interval":5,"closeable":"1","position":"top","mobile_position":"top"});
+        //
+        //     }
+        //     document.head.append(script);
+        // })();
+    </script>
+
+    <style>#header .site-title {
+            background: url({{ asset('uploads/2019/05/logo-xemphimplus.png') }}) no-repeat top left;
+            background-size: contain;
+            text-indent: -9999px;
+        }</style>
 </head>
-<body class="home blog wp-embed-responsive halimthemes halimmovies" data-masonry="" data-nonce="e9ec0a312e">
-<header id="header">
-    <div class="container">
-        <div class="row" id="headwrap">
-            <div class="col-md-3 col-sm-6 slogan">
-                <h1 class="site-title">
-                    <a class="logo" href="/" rel="home">HaLimMovie 5.4</a>
-                </h1>
-            </div>
-            <div class="col-md-5 col-sm-6 halim-search-form hidden-xs">
-                <div class="header-nav">
-                    <div class="col-xs-12">
-                        <form id="search-form-pc" name="halimForm" role="search" action="/" method="GET">
-                            <div class="form-group">
-                                <div class="input-group col-xs-12">
-                                    <input id="search" type="text" name="s" value="" class="form-control" data-toggle="tooltip" data-placement="bottom" data-original-title="Press Enter to search" placeholder="Search with 28,641 movie..." autocomplete="off" required>
-                                    <i class="animate-spin hl-spin4 hidden"></i>
-                                </div>
-                            </div>
-                        </form>
-                        <ul class="ui-autocomplete ajax-results hidden"></ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 hidden-xs">
-                <div id="get-bookmark" class="box-shadow">
-                    <i class="hl-bookmark"></i>
-                    <span> Bookmarks</span>
-                    <span class="count">0</span>
-                </div>
-                <div id="bookmark-list" class="hidden bookmark-list-on-pc">
-                    <ul style="margin: 0;"></ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<div class="navbar-container">
-    <div class="container">
-        <nav class="navbar halim-navbar main-navigation" role="navigation" data-dropdown-hover="1">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#halim" aria-expanded="false">
-                    <span class="sr-only">Menu</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <button type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse" data-target="#user-info" aria-expanded="false">
-                    <span class="hl-dot-3 rotate" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="navbar-toggle collapsed pull-right expand-search-form" data-toggle="collapse" data-target="#search-form" aria-expanded="false">
-                    <span class="hl-search" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="navbar-toggle collapsed pull-right get-bookmark-on-mobile">
-                    <i class="hl-bookmark" aria-hidden="true"></i>
-                    <span class="count">0</span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="halim">
-                <div class="menu-menu-1-container">
-                    <ul id="menu-menu-1" class="nav navbar-nav navbar-left">
-                        <li class="current-menu-item active">
-                            <a title="Home" href="/">Home</a>
-                        </li>
-                        <li>
-                            <a title="Latest movie" href="/latest-movie">Latest movie</a>
-                        </li>
-                        <li>
-                            <a title="Movies" href="/movies">Movies</a>
-                        </li>
-                        <li>
-                            <a title="TV Series" href="/tv-series">TV Series</a>
-                        </li>
-                        <li class="mega dropdown">
-                            <a title="Genres" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Genres
-                                <span class="caret"></span>
-                            </a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li>
-                                    <a title="Action" href="/action">Action</a>
-                                </li>
-                                <li>
-                                    <a title="Adventure" href="/adventure">Adventure</a>
-                                </li>
-                                <li>
-                                    <a title="Animation" href="/animation">Animation</a>
-                                </li>
-                                <li>
-                                    <a title="Biography" href="/biography">Biography</a>
-                                </li>
-                                <li>
-                                    <a title="Comedy" href="/comedy">Comedy</a>
-                                </li>
-                                <li>
-                                    <a title="Costume" href="/costume">Costume</a>
-                                </li>
-                                <li>
-                                    <a title="Crime" href="/crime">Crime</a>
-                                </li>
-                                <li>
-                                    <a title="Documentary" href="/documentary">Documentary</a>
-                                </li>
-                                <li>
-                                    <a title="Drama" href="/drama">Drama</a>
-                                </li>
-                                <li>
-                                    <a title="Family" href="/family">Family</a>
-                                </li>
-                                <li>
-                                    <a title="Fantasy" href="/fantasy">Fantasy</a>
-                                </li>
-                                <li>
-                                    <a title="History" href="/history">History</a>
-                                </li>
-                                <li>
-                                    <a title="Horror" href="/horror">Horror</a>
-                                </li>
-                                <li>
-                                    <a title="Kungfu" href="/kungfu">Kungfu</a>
-                                </li>
-                                <li>
-                                    <a title="Musical" href="/musical">Musical</a>
-                                </li>
-                                <li>
-                                    <a title="Mystery" href="/mystery">Mystery</a>
-                                </li>
-                                <li>
-                                    <a title="Mythological" href="/mythological">Mythological</a>
-                                </li>
-                                <li>
-                                    <a title="Psychological" href="/psychological">Psychological</a>
-                                </li>
-                                <li>
-                                    <a title="Romance" href="/romance">Romance</a>
-                                </li>
-                                <li>
-                                    <a title="Sci-Fi" href="/sci-fi">Sci-Fi</a>
-                                </li>
-                                <li>
-                                    <a title="Sitcom" href="/sitcom">Sitcom</a>
-                                </li>
-                                <li>
-                                    <a title="Sport" href="/sport">Sport</a>
-                                </li>
-                                <li>
-                                    <a title="Thriller" href="/thriller">Thriller</a>
-                                </li>
-                                <li>
-                                    <a title="TV Show" href="/tv-show">TV Show</a>
-                                </li>
-                                <li>
-                                    <a title="War" href="/war">War</a>
-                                </li>
-                                <li>
-                                    <a title="Xmas" href="/xmas">Xmas</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="mega dropdown">
-                            <a title="Country" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Country
-                                <span class="caret"></span>
-                            </a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li>
-                                    <a title="Asia" href="/country/asia">Asia</a>
-                                </li>
-                                <li>
-                                    <a title="China" href="/country/china">China</a>
-                                </li>
-                                <li>
-                                    <a title="Hongkong" href="/country/hongkong">Hongkong</a>
-                                </li>
-                                <li>
-                                    <a title="United States" href="/country/united-states">United States</a>
-                                </li>
-                                <li>
-                                    <a title="United Kingdom" href="/country/united-kingdom">United Kingdom</a>
-                                </li>
-                                <li>
-                                    <a title="International" href="/country/international">International</a>
-                                </li>
-                                <li>
-                                    <a title="Korea" href="/country/korea">Korea</a>
-                                </li>
-                                <li>
-                                    <a title="Japan" href="/country/japan">Japan</a>
-                                </li>
-                                <li>
-                                    <a title="Euro" href="/country/euro">Euro</a>
-                                </li>
-                                <li>
-                                    <a title="India" href="/country/india">India</a>
-                                </li>
-                                <li>
-                                    <a title="Thailand" href="/country/thailand">Thailand</a>
-                                </li>
-                                <li>
-                                    <a title="France" href="/country/france">France</a>
-                                </li>
-                                <li>
-                                    <a title="Taiwan" href="/country/taiwan">Taiwan</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="collapse navbar-collapse" id="search-form">
-            <div id="mobile-search-form" class="halim-search-form"></div>
-        </div>
-        <div class="collapse navbar-collapse" id="user-info">
-            <div id="mobile-user-login"></div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row fullwith-slider"></div>
-</div>
+<body class="home blog wp-embed-responsive halimthemes halimmovies halim-corner-rounded" data-masonry=""
+      data-nonce="9d27ce22e4">
+
+@include('frontend.partials.header')
+@include('frontend.partials.menu')
+<!-- /header -->
+@include('frontend.partials.slider')
 <div class="container-fluid halim-full-player hidden halim-centered">
     <div id="halim-full-player" class="container col-md-offset-2s col-md-9"></div>
 </div>
@@ -264,11 +139,11 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-8 hidden-xs">
-                        HaLimMovie 5.4</div>
+                        XemPhimPlus | Phim Hay | Phim Mới
+                    </div>
                     <div class="col-xs-4 text-right">
-                        <a href="javascript:;" id="expand-ajax-filter">Filter movies
-                            <i id="ajax-filter-icon" class="hl-angle-down"></i>
-                        </a>
+                        <a href="javascript:;" id="expand-ajax-filter">Lọc phim <i id="ajax-filter-icon"
+                                                                                   class="hl-angle-down"></i></a>
                     </div>
                     <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
                 </div>
@@ -276,1806 +151,481 @@
             <div id="ajax-filter" class="panel-collapse collapse" aria-expanded="true" role="menu">
                 <div class="ajax"></div>
             </div>
-        </div>
-        <div class="text-center letter-filter" id="letter-filter">
-																					<span class="toggle-pagination">
-																						<i class="hl-menu"></i> A-Z list
-																					</span>
-            <ul class="pagination list-letter pagination-lg">
-                <li>
-                    <span data-href="/az-list/0" class="" data-text="All"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/A" class="letter-item " data-text="A"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/B" class="letter-item " data-text="B"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/C" class="letter-item " data-text="C"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/D" class="letter-item " data-text="D"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/E" class="letter-item " data-text="E"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/F" class="letter-item " data-text="F"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/G" class="letter-item " data-text="G"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/H" class="letter-item " data-text="H"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/I" class="letter-item " data-text="I"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/J" class="letter-item " data-text="J"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/K" class="letter-item " data-text="K"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/L" class="letter-item " data-text="L"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/M" class="letter-item " data-text="M"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/N" class="letter-item " data-text="N"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/O" class="letter-item " data-text="O"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/P" class="letter-item " data-text="P"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/Q" class="letter-item " data-text="Q"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/R" class="letter-item " data-text="R"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/S" class="letter-item " data-text="S"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/T" class="letter-item " data-text="T"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/U" class="letter-item " data-text="U"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/V" class="letter-item " data-text="V"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/W" class="letter-item " data-text="W"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/X" class="letter-item " data-text="X"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/Y" class="letter-item " data-text="Y"></span>
-                </li>
-                <li>
-                    <span data-href="/az-list/Z" class="letter-item " data-text="Z"></span>
-                </li>
-            </ul>
-        </div>
+        </div><!-- end panel-default -->
+
         <div class="col-xs-12 carausel-sliderWidget">
+            <div id="halim-carousel-widget-3xx" class="wrap-slider">
+                <div class="section-bar clearfix">
+                    <h3 class="section-title"><span>Phim đề cử</span></h3>
+                </div>
+                <div id="halim-carousel-widget-3" class="owl-carousel owl-theme">
+                    @for ($i = 0; $i < 10; $i++)
+                        <article class="thumb grid-item post-{{ $i }}">
+                            <div class="halim-item">
+                                <a class="halim-thumb" href="/dep-trai-la-so-1" title="Đẹp Trai Là Số 1">
+                                    <figure><img class="lazyload blur-up img-responsive" data-sizes="auto"
+                                                 data-src="{{ asset('uploads/2020/05/dep-trai-la-so-1-15425-thumbnail.jpg') }}"
+                                                 alt="Đẹp Trai Là Số 1" title="Đẹp Trai Là Số 1"></figure>
+                                    <span class="status">FULL HD</span><span class="episode">Tập 22</span>
+                                    <div class="icon_overlay" data-html="true"
+                                         data-toggle="halim-popover"
+                                         data-placement="top"
+                                         data-trigger="hover"
+                                         title="<span class=film-title>Đẹp Trai Là Số 1</span>"
+                                         data-content="<div class=org-title>Intense Love (2020)</div>                            <div class=film-meta>
+                                <div class=text-center>
+                                    <span class=released><i class=hl-calendar></i> 2020</span>                                                                    </div>
+                                <div class=film-content>Bộ phim là câu chuyện tình yêu hào môn hường phấn ngọt ngào giữa nữ minh tinh nóng&amp;hellip;</div>
+                                <p class=category>Quốc gia: <span class=category-name>Trung Quốc</span></p>                                <p class=category>Thể loại: <span class=category-name>Tâm Lý</span><span class=category-name>Tình Cảm</span></p>
+                            </div>">
+                                    </div>
+
+                                    <div class="halim-post-title-box">
+                                        <div class="halim-post-title ">
+                                            <h2 class="entry-title">Đẹp Trai Là Số 1</h2>
+                                            <p class="original_title">Intense Love (2020)</p></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </article>
+                    @endfor
+                </div>
+                <script>
+                    jQuery(document).ready(function ($) {
+                        var owl = $('#halim-carousel-widget-3');
+                        owl.owlCarousel({
+                            rtl: false,
+                            loop: true,
+                            margin: 4,
+                            autoplay: true,
+                            autoplayTimeout: 4000,
+                            autoplayHoverPause: true,
+                            nav: false,
+                            navText: ['<i class="hl-down-open rotate-left"></i>', '<i class="hl-down-open rotate-right"></i>'],
+                            responsiveClass: true,
+                            responsive: {0: {items: 2}, 480: {items: 3}, 600: {items: 4}, 1000: {items: 6}}
+                        })
+                    });
+                </script>
+            </div>
             <section id="halim-advanced-widget-2">
                 <h4 class="section-heading">
-                    <a href="/action" title="Newest movie">
-                        <span class="h-text">Newest movie</span>
+                    <a href="/phim-moi/" title="Phim mới nhất">
+                        <span class="h-text">Phim mới nhất</span>
                     </a>
                     <ul class="heading-nav pull-right hidden-xs">
-                        <li class="section-btn halim_ajax_get_post" data-catid="134" data-showpost="12" data-widgetid="halim-advanced-widget-2" data-layout="6col">
-                            <span data-text="Action"></span>
+                        <li class="section-btn halim_ajax_get_post" data-catid="752" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-2" data-layout="6col">
+                            <span data-text="Hài Hước"></span>
                         </li>
-                        <li class="section-btn halim_ajax_get_post" data-catid="453" data-showpost="12" data-widgetid="halim-advanced-widget-2" data-layout="6col">
-                            <span data-text="Animation"></span>
+                        <li class="section-btn halim_ajax_get_post" data-catid="84" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-2" data-layout="6col">
+                            <span data-text="Hành Động"></span>
                         </li>
-                        <li class="section-btn halim_ajax_get_post" data-catid="9" data-showpost="12" data-widgetid="halim-advanced-widget-2" data-layout="6col">
-                            <span data-text="Comedy"></span>
+                        <li class="section-btn halim_ajax_get_post" data-catid="762" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-2" data-layout="6col">
+                            <span data-text="Tình Cảm"></span>
                         </li>
-                        <li class="section-btn halim_ajax_get_post" data-catid="301" data-showpost="12" data-widgetid="halim-advanced-widget-2" data-layout="6col">
-                            <span data-text="Documentary"></span>
-                        </li>
-                        <li class="section-btn halim_ajax_get_post" data-catid="26" data-showpost="12" data-widgetid="halim-advanced-widget-2" data-layout="6col">
-                            <span data-text="Drama"></span>
-                        </li>
-                        <li class="section-btn halim_ajax_get_post" data-catid="69" data-showpost="12" data-widgetid="halim-advanced-widget-2" data-layout="6col">
-                            <span data-text="Fantasy"></span>
-                        </li>
-                        <li class="section-btn halim_ajax_get_post" data-catid="55" data-showpost="12" data-widgetid="halim-advanced-widget-2" data-layout="6col">
-                            <span data-text="Romance"></span>
-                        </li>
+                        <li class="section-btn halim_ajax_get_post" data-catid="753" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-2" data-layout="6col">
+                            <span data-text="Viễn Tưỏng"></span></li>
                     </ul>
                 </h4>
                 <div id="halim-advanced-widget-2-ajax-box" class="halim_box">
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33887">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/siren" title="Siren">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/siren.png" alt="Siren" title="Siren">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																												<span class=film-title>Siren</span>" data-content="
-																												<div class=film-meta>
-																													<div class=text-center>
-																														<span class=released>
-																															<i class=hl-calendar></i> 2010
-																														</span>
-																														<span class=runtime>
-																															<i class=hl-clock></i> 80 min
-																														</span>
-																													</div>
-																													<div class=film-content>A group of pals have a vacation in the strange island with a simple schedule. Things hit a&amp;hellip;</div>
-																													<p class=category>Country: 
-																														<span class=category-name>United Kingdom</span>
-																													</p>
-																													<p class=category>Genres: 
-																														<span class=category-name>Horror</span>
-																													</p>
-																												</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Siren</h2>
+                    @for ($i = 0; $i < 12; $i++)
+                        <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-21352">
+                            <div class="halim-item">
+                                <a class="halim-thumb" href="/hoi-ket-cua-sat-thu" title="Hồi Kết Của Sát Thủ">
+                                    <figure><img class="lazyload blur-up img-responsive" data-sizes="auto"
+                                                 data-src="{{ asset('uploads/2020/06/hoi-ket-cua-sat-thu-21352-thumbnail.jpg') }}"
+                                                 alt="Hồi Kết Của Sát Thủ" title="Hồi Kết Của Sát Thủ"></figure>
+                                    <span class="status">FHD</span><span class="episode">Full</span>
+                                    <div class="icon_overlay" data-html="true"
+                                         data-toggle="halim-popover"
+                                         data-placement="top"
+                                         data-trigger="hover"
+                                         title="<span class=film-title>Hồi Kết Của Sát Thủ</span>"
+                                         data-content="<div class=org-title>Sniper: Assassin&amp;#039;s End</div>                            <div class=film-meta>
+                                <div class=text-center>
+                                    <span class=released><i class=hl-calendar></i> 2020</span>                                    <span class=runtime><i class=hl-clock></i> 90 phút</span>                                </div>
+                                <div class=film-content>Tay bắn tỉa huyền thoại Thomas Beckett cùng con trai, đặc nhiệm bắn tỉa Brandon Beckett, đang chạy&amp;hellip;</div>
+                                <p class=category>Quốc gia: <span class=category-name>Mỹ</span></p>                                <p class=category>Thể loại: <span class=category-name>Hành Động</span></p>
+                            </div>">
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33886">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/bangkok-dangerous" title="Bangkok Dangerous">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/bangkok-dangerous.png" alt="Bangkok Dangerous" title="Bangkok Dangerous">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																													<span class=film-title>Bangkok Dangerous</span>" data-content="
-																													<div class=film-meta>
-																														<div class=text-center>
-																															<span class=released>
-																																<i class=hl-calendar></i> 2008
-																															</span>
-																															<span class=runtime>
-																																<i class=hl-clock></i> 99 min
-																															</span>
-																														</div>
-																														<div class=film-content>Remorseless assassin Joe (Nicolas Cage) is in Thailand to complete a series of contract killings for a crime&amp;hellip;</div>
-																														<p class=category>Country: 
-																															<span class=category-name>United States</span>
-																														</p>
-																														<p class=category>Genres: 
-																															<span class=category-name>Action</span>
-																															<span class=category-name>Crime</span>
-																															<span class=category-name>Thriller</span>
-																														</p>
-																													</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Bangkok Dangerous</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33885">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/banner-4th-of-july" title="Banner 4th of July">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/banner-4th-of-july.png" alt="Banner 4th of July" title="Banner 4th of July">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																														<span class=film-title>Banner 4th of July</span>" data-content="
-																														<div class=film-meta>
-																															<div class=text-center>
-																																<span class=released>
-																																	<i class=hl-calendar></i> 2013
-																																</span>
-																																<span class=runtime>
-																																	<i class=hl-clock></i> 82 min
-																																</span>
-																															</div>
-																															<div class=film-content>In their late teens and early 20's, the Banner siblings, Mitchell, Desiree and Danny, made it big as&amp;hellip;</div>
-																															<p class=category>Country: 
-																																<span class=category-name>United States</span>
-																															</p>
-																															<p class=category>Genres: 
-																																<span class=category-name>Drama</span>
-																															</p>
-																														</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Banner 4th of July</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33881">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/company" title="Company">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/company.png" alt="Company" title="Company">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																															<span class=film-title>Company</span>" data-content="
-																															<div class=film-meta>
-																																<div class=text-center>
-																																	<span class=released>
-																																		<i class=hl-calendar></i> 2011
-																																	</span>
-																																	<span class=runtime>
-																																		<i class=hl-clock></i> 145 min
-																																	</span>
-																																</div>
-																																<div class=film-content>The film is directed by Lonny Price. It is about the story of five couples and their friend&amp;hellip;</div>
-																																<p class=category>Country: 
-																																	<span class=category-name>United States</span>
-																																</p>
-																																<p class=category>Genres: 
-																																	<span class=category-name>Comedy</span>
-																																	<span class=category-name>Drama</span>
-																																	<span class=category-name>Musical</span>
-																																</p>
-																															</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Company</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33880">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/sin-reaper" title="Sin Reaper">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/sin-reaper.png" alt="Sin Reaper" title="Sin Reaper">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																<span class=film-title>Sin Reaper</span>" data-content="
-																																<div class=film-meta>
-																																	<div class=text-center>
-																																		<span class=released>
-																																			<i class=hl-calendar></i> 2012
-																																		</span>
-																																		<span class=runtime>
-																																			<i class=hl-clock></i> 90 min
-																																		</span>
-																																	</div>
-																																	<div class=film-content>Young Samantha Walker - the main character of an action film directed by Sebastian Bartolitius is obsessed by&amp;hellip;</div>
-																																	<p class=category>Country: 
-																																		<span class=category-name>United States</span>
-																																	</p>
-																																	<p class=category>Genres: 
-																																		<span class=category-name>Horror</span>
-																																		<span class=category-name>Thriller</span>
-																																	</p>
-																																</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Sin Reaper</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33879">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/cop-and-a-half" title="Cop and a Half">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/cop-and-a-half.png" alt="Cop and a Half" title="Cop and a Half">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																	<span class=film-title>Cop and a Half</span>" data-content="
-																																	<div class=film-meta>
-																																		<div class=text-center>
-																																			<span class=released>
-																																				<i class=hl-calendar></i> 1993
-																																			</span>
-																																			<span class=runtime>
-																																				<i class=hl-clock></i> 97 min
-																																			</span>
-																																		</div>
-																																		<div class=film-content>Devon Butler is an eight-year old who is always hungry to become a cop. Out of the blue,&amp;hellip;</div>
-																																		<p class=category>Country: 
-																																			<span class=category-name>United States</span>
-																																		</p>
-																																		<p class=category>Genres: 
-																																			<span class=category-name>Comedy</span>
-																																			<span class=category-name>Crime</span>
-																																			<span class=category-name>Family</span>
-																																		</p>
-																																	</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Cop and a Half</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33865">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/the-good-neighbor" title="The Good Neighbor">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/the-good-neighbor.png" alt="The Good Neighbor" title="The Good Neighbor">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																		<span class=film-title>The Good Neighbor</span>" data-content="
-																																		<div class=film-meta>
-																																			<div class=text-center>
-																																				<span class=released>
-																																					<i class=hl-calendar></i> 2016
-																																				</span>
-																																				<span class=runtime>
-																																					<i class=hl-clock></i> 98 min
-																																				</span>
-																																			</div>
-																																			<div class=film-content>A heart-warming film of Star Thrower Entertainment , is directed by Kasra Farahani, follows a couple of naughty&amp;hellip;</div>
-																																			<p class=category>Country: 
-																																				<span class=category-name>United States</span>
-																																			</p>
-																																			<p class=category>Genres: 
-																																				<span class=category-name>Thriller</span>
-																																			</p>
-																																		</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">The Good Neighbor</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33864">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/deserted" title="Deserted">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/deserted.png" alt="Deserted" title="Deserted">
-                                </figure>
-                                <span class="status">HD 720p</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																			<span class=film-title>Deserted</span>" data-content="
-																																			<div class=film-meta>
-																																				<div class=text-center>
-																																					<span class=released>
-																																						<i class=hl-calendar></i> 2016
-																																					</span>
-																																					<span class=runtime>
-																																						<i class=hl-clock></i> 92 min
-																																					</span>
-																																				</div>
-																																				<div class=film-content>Jae is twenty-four-year-old comes out prison because her fault is to kill her mom in the past. She&amp;hellip;</div>
-																																				<p class=category>Country: 
-																																					<span class=category-name>United States</span>
-																																				</p>
-																																				<p class=category>Genres: 
-																																					<span class=category-name>Drama</span>
-																																					<span class=category-name>Thriller</span>
-																																				</p>
-																																			</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Deserted</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33863">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/three-2016" title="Three 2016">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/three-2016.png" alt="Three 2016" title="Three 2016">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																				<span class=film-title>Three 2016</span>" data-content="
-																																				<div class=film-meta>
-																																					<div class=text-center>
-																																						<span class=released>
-																																							<i class=hl-calendar></i> 2016
-																																						</span>
-																																						<span class=runtime>
-																																							<i class=hl-clock></i> 88 min
-																																						</span>
-																																					</div>
-																																					<div class=film-content>A murderer is afraid of loosing when he confronts the police so he shoots himself. The police takes&amp;hellip;</div>
-																																					<p class=category>Country: 
-																																						<span class=category-name>China</span>
-																																					</p>
-																																					<p class=category>Genres: 
-																																						<span class=category-name>Action</span>
-																																						<span class=category-name>Crime</span>
-																																						<span class=category-name>Thriller</span>
-																																					</p>
-																																				</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Three 2016</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33862">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/bahubali-the-beginning" title="Bahubali: The Beginning">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/bahubali-the-beginning.png" alt="Bahubali: The Beginning" title="Bahubali: The Beginning">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																					<span class=film-title>Bahubali: The Beginning</span>" data-content="
-																																					<div class=film-meta>
-																																						<div class=text-center>
-																																							<span class=released>
-																																								<i class=hl-calendar></i> 2015
-																																							</span>
-																																							<span class=runtime>
-																																								<i class=hl-clock></i> 159 min
-																																							</span>
-																																						</div>
-																																						<div class=film-content>Set in the ancient Kingdom of Mahishmati in India, the film follows an adventurous and daring banished prince&amp;hellip;</div>
-																																						<p class=category>Country: 
-																																							<span class=category-name>India</span>
-																																						</p>
-																																						<p class=category>Genres: 
-																																							<span class=category-name>Action</span>
-																																							<span class=category-name>Adventure</span>
-																																							<span class=category-name>Drama</span>
-																																						</p>
-																																					</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Bahubali: The Beginning</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33850">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/macgruber" title="MacGruber">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/macgruber.png" alt="MacGruber" title="MacGruber">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																						<span class=film-title>MacGruber</span>" data-content="
-																																						<div class=film-meta>
-																																							<div class=text-center>
-																																								<span class=released>
-																																									<i class=hl-calendar></i> 2010
-																																								</span>
-																																								<span class=runtime>
-																																									<i class=hl-clock></i> 90 min
-																																								</span>
-																																							</div>
-																																							<div class=film-content>Former special operative MacGruber and his rival - Dieter Von Cunth, who's in possession of a nuclear warhead&amp;hellip;</div>
-																																							<p class=category>Country: 
-																																								<span class=category-name>United States</span>
-																																							</p>
-																																							<p class=category>Genres: 
-																																								<span class=category-name>Action</span>
-																																								<span class=category-name>Comedy</span>
-																																								<span class=category-name>Romance</span>
-																																							</p>
-																																						</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">MacGruber</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-33849">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/little-brother-big-trouble-a-christmas-adventure" title="Little Brother, Big Trouble: A Christmas Adventure">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/little-brother-big-trouble-a-christmas-adventure.png" alt="Little Brother, Big Trouble: A Christmas Adventure" title="Little Brother, Big Trouble: A Christmas Adventure">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																							<span class=film-title>Little Brother, Big Trouble: A Christmas Adventure</span>" data-content="
-																																							<div class=film-meta>
-																																								<div class=text-center>
-																																									<span class=released>
-																																										<i class=hl-calendar></i> 2012
-																																									</span>
-																																									<span class=runtime>
-																																										<i class=hl-clock></i> 79 min
-																																									</span>
-																																								</div>
-																																								<div class=film-content>Niko's mother gets re-married and his task is taking care of his little step brother.</div>
-																																								<p class=category>Country: 
-																																									<span class=category-name>International</span>
-																																								</p>
-																																								<p class=category>Genres: 
-																																									<span class=category-name>Adventure</span>
-																																									<span class=category-name>Animation</span>
-																																									<span class=category-name>Comedy</span>
-																																								</p>
-																																							</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Little Brother, Big Trouble: A Christmas Adventure</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <div class="clearfix"></div>
-                    <a href="/action" class="see-more">View all post »</a>
-                </div>
-            </section>
-            <div class="clearfix"></div>
-        </div>
-        <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
-            <div class="clearfix"></div>
-            <section id="halim-movies-widget-halim-movies-widget-2" class="halim-movies-widget-halim-movies-widget-2" style="position: relative;">
-                <div class="section-bar clearfix">
-                    <div class="section-title">
-                        <a href="#" title="Movies">
-                            <h3 class="section-title">
-                                <span>Movies</span>
-                            </h3>
-                        </a>
-                        <ul class="halim-popular-tab" role="tablist">
-                            <li role="presentation" class="active">
-                                <a onclick="HaLim.GetPostByWidgetType('movies', '4col', 8, 'latest', 'halim-movies-widget-2');" role="tab" data-toggle="tab">Latest</a>
-                            </li>
-                            <li role="presentation">
-                                <a onclick="HaLim.GetPostByWidgetType('movies', '4col', 8, 'lastupdate', 'halim-movies-widget-2');" role="tab" data-toggle="tab">Last Update</a>
-                            </li>
-                            <li role="presentation">
-                                <a onclick="HaLim.GetPostByWidgetType('movies', '4col', 8, 'mostview', 'halim-movies-widget-2');" role="tab" data-toggle="tab">Most viewed</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="halim-ajax-popular-post-loading hidden"></div>
-                <div class="halim_box" id="ajax-movies-widget-halim-movies-widget-2">
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-33887">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/siren" title="Siren">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/siren.png" alt="Siren" title="Siren">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																								<span class=film-title>Siren</span>" data-content="
-																																								<div class=film-meta>
-																																									<div class=text-center>
-																																										<span class=released>
-																																											<i class=hl-calendar></i> 2010
-																																										</span>
-																																										<span class=runtime>
-																																											<i class=hl-clock></i> 80 min
-																																										</span>
-																																									</div>
-																																									<div class=film-content>A group of pals have a vacation in the strange island with a simple schedule. Things hit a&amp;hellip;</div>
-																																									<p class=category>Country: 
-																																										<span class=category-name>United Kingdom</span>
-																																									</p>
-																																									<p class=category>Genres: 
-																																										<span class=category-name>Horror</span>
-																																									</p>
-																																								</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Siren</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-33886">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/bangkok-dangerous" title="Bangkok Dangerous">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/bangkok-dangerous.png" alt="Bangkok Dangerous" title="Bangkok Dangerous">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																									<span class=film-title>Bangkok Dangerous</span>" data-content="
-																																									<div class=film-meta>
-																																										<div class=text-center>
-																																											<span class=released>
-																																												<i class=hl-calendar></i> 2008
-																																											</span>
-																																											<span class=runtime>
-																																												<i class=hl-clock></i> 99 min
-																																											</span>
-																																										</div>
-																																										<div class=film-content>Remorseless assassin Joe (Nicolas Cage) is in Thailand to complete a series of contract killings for a crime&amp;hellip;</div>
-																																										<p class=category>Country: 
-																																											<span class=category-name>United States</span>
-																																										</p>
-																																										<p class=category>Genres: 
-																																											<span class=category-name>Action</span>
-																																											<span class=category-name>Crime</span>
-																																											<span class=category-name>Thriller</span>
-																																										</p>
-																																									</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Bangkok Dangerous</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-33885">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/banner-4th-of-july" title="Banner 4th of July">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/banner-4th-of-july.png" alt="Banner 4th of July" title="Banner 4th of July">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																										<span class=film-title>Banner 4th of July</span>" data-content="
-																																										<div class=film-meta>
-																																											<div class=text-center>
-																																												<span class=released>
-																																													<i class=hl-calendar></i> 2013
-																																												</span>
-																																												<span class=runtime>
-																																													<i class=hl-clock></i> 82 min
-																																												</span>
-																																											</div>
-																																											<div class=film-content>In their late teens and early 20's, the Banner siblings, Mitchell, Desiree and Danny, made it big as&amp;hellip;</div>
-																																											<p class=category>Country: 
-																																												<span class=category-name>United States</span>
-																																											</p>
-																																											<p class=category>Genres: 
-																																												<span class=category-name>Drama</span>
-																																											</p>
-																																										</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Banner 4th of July</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-33881">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/company" title="Company">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/company.png" alt="Company" title="Company">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																											<span class=film-title>Company</span>" data-content="
-																																											<div class=film-meta>
-																																												<div class=text-center>
-																																													<span class=released>
-																																														<i class=hl-calendar></i> 2011
-																																													</span>
-																																													<span class=runtime>
-																																														<i class=hl-clock></i> 145 min
-																																													</span>
-																																												</div>
-																																												<div class=film-content>The film is directed by Lonny Price. It is about the story of five couples and their friend&amp;hellip;</div>
-																																												<p class=category>Country: 
-																																													<span class=category-name>United States</span>
-																																												</p>
-																																												<p class=category>Genres: 
-																																													<span class=category-name>Comedy</span>
-																																													<span class=category-name>Drama</span>
-																																													<span class=category-name>Musical</span>
-																																												</p>
-																																											</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Company</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-33880">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/sin-reaper" title="Sin Reaper">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/sin-reaper.png" alt="Sin Reaper" title="Sin Reaper">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																												<span class=film-title>Sin Reaper</span>" data-content="
-																																												<div class=film-meta>
-																																													<div class=text-center>
-																																														<span class=released>
-																																															<i class=hl-calendar></i> 2012
-																																														</span>
-																																														<span class=runtime>
-																																															<i class=hl-clock></i> 90 min
-																																														</span>
-																																													</div>
-																																													<div class=film-content>Young Samantha Walker - the main character of an action film directed by Sebastian Bartolitius is obsessed by&amp;hellip;</div>
-																																													<p class=category>Country: 
-																																														<span class=category-name>United States</span>
-																																													</p>
-																																													<p class=category>Genres: 
-																																														<span class=category-name>Horror</span>
-																																														<span class=category-name>Thriller</span>
-																																													</p>
-																																												</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Sin Reaper</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-33879">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/cop-and-a-half" title="Cop and a Half">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/cop-and-a-half.png" alt="Cop and a Half" title="Cop and a Half">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																													<span class=film-title>Cop and a Half</span>" data-content="
-																																													<div class=film-meta>
-																																														<div class=text-center>
-																																															<span class=released>
-																																																<i class=hl-calendar></i> 1993
-																																															</span>
-																																															<span class=runtime>
-																																																<i class=hl-clock></i> 97 min
-																																															</span>
-																																														</div>
-																																														<div class=film-content>Devon Butler is an eight-year old who is always hungry to become a cop. Out of the blue,&amp;hellip;</div>
-																																														<p class=category>Country: 
-																																															<span class=category-name>United States</span>
-																																														</p>
-																																														<p class=category>Genres: 
-																																															<span class=category-name>Comedy</span>
-																																															<span class=category-name>Crime</span>
-																																															<span class=category-name>Family</span>
-																																														</p>
-																																													</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Cop and a Half</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-33865">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/the-good-neighbor" title="The Good Neighbor">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/the-good-neighbor.png" alt="The Good Neighbor" title="The Good Neighbor">
-                                </figure>
-                                <span class="status">HD</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																														<span class=film-title>The Good Neighbor</span>" data-content="
-																																														<div class=film-meta>
-																																															<div class=text-center>
-																																																<span class=released>
-																																																	<i class=hl-calendar></i> 2016
-																																																</span>
-																																																<span class=runtime>
-																																																	<i class=hl-clock></i> 98 min
-																																																</span>
-																																															</div>
-																																															<div class=film-content>A heart-warming film of Star Thrower Entertainment , is directed by Kasra Farahani, follows a couple of naughty&amp;hellip;</div>
-																																															<p class=category>Country: 
-																																																<span class=category-name>United States</span>
-																																															</p>
-																																															<p class=category>Genres: 
-																																																<span class=category-name>Thriller</span>
-																																															</p>
-																																														</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">The Good Neighbor</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-33864">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/deserted" title="Deserted">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co/cover/deserted.png" alt="Deserted" title="Deserted">
-                                </figure>
-                                <span class="status">HD 720p</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																															<span class=film-title>Deserted</span>" data-content="
-																																															<div class=film-meta>
-																																																<div class=text-center>
-																																																	<span class=released>
-																																																		<i class=hl-calendar></i> 2016
-																																																	</span>
-																																																	<span class=runtime>
-																																																		<i class=hl-clock></i> 92 min
-																																																	</span>
-																																																</div>
-																																																<div class=film-content>Jae is twenty-four-year-old comes out prison because her fault is to kill her mom in the past. She&amp;hellip;</div>
-																																																<p class=category>Country: 
-																																																	<span class=category-name>United States</span>
-																																																</p>
-																																																<p class=category>Genres: 
-																																																	<span class=category-name>Drama</span>
-																																																	<span class=category-name>Thriller</span>
-																																																</p>
-																																															</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Deserted</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                </div>
-            </section>
-            <div class="clearfix"></div>
-            <div class="clearfix"></div>
-            <section id="halim-tv_series-widget-halim-tv-series-widget-2" class="halim-tv_series-widget-halim-tv-series-widget-2" style="position: relative;">
-                <div class="section-bar clearfix">
-                    <div class="section-title">
-                        <a href="#" title="TV-Series">
-                            <h3 class="section-title">
-                                <span>TV-Series</span>
-                            </h3>
-                        </a>
-                        <ul class="halim-popular-tab" role="tablist">
-                            <li role="presentation">
-                                <a onclick="HaLim.GetPostByWidgetType('tv_series', '4col', 8, 'latest', 'halim-tv-series-widget-2');" role="tab" data-toggle="tab">Latest</a>
-                            </li>
-                            <li role="presentation" class="active">
-                                <a onclick="HaLim.GetPostByWidgetType('tv_series', '4col', 8, 'lastupdate', 'halim-tv-series-widget-2');" role="tab" data-toggle="tab">Last Update</a>
-                            </li>
-                            <li role="presentation">
-                                <a onclick="HaLim.GetPostByWidgetType('tv_series', '4col', 8, 'mostview', 'halim-tv-series-widget-2');" role="tab" data-toggle="tab">Most viewed</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="halim-ajax-popular-post-loading hidden"></div>
-                <div class="halim_box" id="ajax-tv_series-widget-halim-tv-series-widget-2">
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-131">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/baby-daddy-season-4" title="Baby Daddy - Season 4">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//baby-daddy-season-4-wwu/cover.png" alt="Baby Daddy - Season 4" title="Baby Daddy - Season 4">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 22</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																<span class=film-title>Baby Daddy - Season 4</span>" data-content="
-																																																<div class=film-meta>
-																																																	<div class=text-center>
-																																																		<span class=released>
-																																																			<i class=hl-calendar></i> 2014
-																																																		</span>
-																																																		<span class=runtime>
-																																																			<i class=hl-clock></i> 22 min
-																																																		</span>
-																																																	</div>
-																																																	<div class=film-content>Season 4 opens with Ben, Danny and Tucker all ending up in jail after crashing a bachelorette party. Bonnie&amp;hellip;</div>
-																																																	<p class=category>Country: 
-																																																		<span class=category-name>United States</span>
-																																																	</p>
-																																																	<p class=category>Genres: 
-																																																		<span class=category-name>Comedy</span>
-																																																		<span class=category-name>Drama</span>
-																																																		<span class=category-name>Fantasy</span>
-																																																	</p>
-																																																</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Baby Daddy - Season 4</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-128">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/baby-daddy-season-3" title="Baby Daddy - Season 3">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//baby-daddy-season-3-pkp/cover.png" alt="Baby Daddy - Season 3" title="Baby Daddy - Season 3">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 21</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																	<span class=film-title>Baby Daddy - Season 3</span>" data-content="
-																																																	<div class=film-meta>
-																																																		<div class=text-center>
-																																																			<span class=released>
-																																																				<i class=hl-calendar></i> 2014
-																																																			</span>
-																																																			<span class=runtime>
-																																																				<i class=hl-clock></i> 22 min
-																																																			</span>
-																																																		</div>
-																																																		<div class=film-content>Season 3 opens with Ben and Riley thinking about taking their relationship to the sexual level. Emma's mother, Angela tries&amp;hellip;</div>
-																																																		<p class=category>Country: 
-																																																			<span class=category-name>United States</span>
-																																																		</p>
-																																																		<p class=category>Genres: 
-																																																			<span class=category-name>Comedy</span>
-																																																			<span class=category-name>Drama</span>
-																																																			<span class=category-name>Fantasy</span>
-																																																		</p>
-																																																	</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Baby Daddy - Season 3</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-127">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/baby-daddy-season-2" title="Baby Daddy - Season 2">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//baby-daddy-season-2-ked/cover.png" alt="Baby Daddy - Season 2" title="Baby Daddy - Season 2">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 16</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																		<span class=film-title>Baby Daddy - Season 2</span>" data-content="
-																																																		<div class=film-meta>
-																																																			<div class=text-center>
-																																																				<span class=released>
-																																																					<i class=hl-calendar></i> 2013
-																																																				</span>
-																																																				<span class=runtime>
-																																																					<i class=hl-clock></i> 22 min
-																																																				</span>
-																																																			</div>
-																																																			<div class=film-content>Season 2 opens with Ben realizing his romantic feelings for Riley, trying to stop his playboy ways. Riley&amp;hellip;</div>
-																																																			<p class=category>Country: 
-																																																				<span class=category-name>United States</span>
-																																																			</p>
-																																																			<p class=category>Genres: 
-																																																				<span class=category-name>Comedy</span>
-																																																				<span class=category-name>Drama</span>
-																																																				<span class=category-name>Fantasy</span>
-																																																			</p>
-																																																		</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Baby Daddy - Season 2</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-125">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/scott-bailey-season-5" title="Scott &amp;amp; Bailey - Season 5">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//scott-bailey-season-5-hfz/cover.png" alt="Scott &amp;amp; Bailey - Season 5" title="Scott &amp;amp; Bailey - Season 5">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 3</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																			<span class=film-title>Scott &amp;amp; Bailey - Season 5</span>" data-content="
-																																																			<div class=film-meta>
-																																																				<div class=text-center>
-																																																					<span class=released>
-																																																						<i class=hl-calendar></i> 2016
-																																																					</span>
-																																																					<span class=runtime>
-																																																						<i class=hl-clock></i> 45 min
-																																																					</span>
-																																																				</div>
-																																																				<div class=film-content>Season 5 opens with Rachel stepping up to acting DI on a case that becomes bigger and more sinister&amp;hellip;</div>
-																																																				<p class=category>Country: 
-																																																					<span class=category-name>United Kingdom</span>
-																																																				</p>
-																																																				<p class=category>Genres: 
-																																																					<span class=category-name>Crime</span>
-																																																					<span class=category-name>Drama</span>
-																																																				</p>
-																																																			</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Scott &amp; Bailey - Season 5</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-121">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/burn-notice-season-7" title="Burn Notice - Season 7">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//burn-notice-season-7-rqt/cover.png" alt="Burn Notice - Season 7" title="Burn Notice - Season 7">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 13</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																				<span class=film-title>Burn Notice - Season 7</span>" data-content="
-																																																				<div class=film-meta>
-																																																					<div class=text-center>
-																																																						<span class=released>
-																																																							<i class=hl-calendar></i> 2013
-																																																						</span>
-																																																						<span class=runtime>
-																																																							<i class=hl-clock></i> 44 min
-																																																						</span>
-																																																					</div>
-																																																					<div class=film-content>Season 7 opens with Michael dealing with a terrorist who recruits him to steal hardware from the Department of&amp;hellip;</div>
-																																																					<p class=category>Country: 
-																																																						<span class=category-name>United States</span>
-																																																					</p>
-																																																					<p class=category>Genres: 
-																																																						<span class=category-name>Action</span>
-																																																						<span class=category-name>Crime</span>
-																																																						<span class=category-name>Drama</span>
-																																																					</p>
-																																																				</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Burn Notice - Season 7</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-122">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/burn-notice-season-6" title="Burn Notice - Season 6">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//burn-notice-season-6-orl/cover.png" alt="Burn Notice - Season 6" title="Burn Notice - Season 6">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 16</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																					<span class=film-title>Burn Notice - Season 6</span>" data-content="
-																																																					<div class=film-meta>
-																																																						<div class=text-center>
-																																																							<span class=released>
-																																																								<i class=hl-calendar></i> 2012
-																																																							</span>
-																																																							<span class=runtime>
-																																																								<i class=hl-clock></i> 44 min
-																																																							</span>
-																																																						</div>
-																																																						<div class=film-content>Season 6 opens with Fiona now in custody and facing an old foe inside prison, Michael pulls out all&amp;hellip;</div>
-																																																						<p class=category>Country: 
-																																																							<span class=category-name>United States</span>
-																																																						</p>
-																																																						<p class=category>Genres: 
-																																																							<span class=category-name>Action</span>
-																																																							<span class=category-name>Crime</span>
-																																																							<span class=category-name>Drama</span>
-																																																						</p>
-																																																					</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Burn Notice - Season 6</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-119">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/burn-notice-season-5" title="Burn Notice - Season 5">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//burn-notice-season-5-cgs/cover.png" alt="Burn Notice - Season 5" title="Burn Notice - Season 5">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 18</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																						<span class=film-title>Burn Notice - Season 5</span>" data-content="
-																																																						<div class=film-meta>
-																																																							<div class=text-center>
-																																																								<span class=released>
-																																																									<i class=hl-calendar></i> 2011
-																																																								</span>
-																																																								<span class=runtime>
-																																																									<i class=hl-clock></i> 44 min
-																																																								</span>
-																																																							</div>
-																																																							<div class=film-content>Season 5 opens with now employed as a CIA asset, Michael traveling to Caracas with Sam and Fi to find&amp;hellip;</div>
-																																																							<p class=category>Country: 
-																																																								<span class=category-name>United States</span>
-																																																							</p>
-																																																							<p class=category>Genres: 
-																																																								<span class=category-name>Action</span>
-																																																								<span class=category-name>Crime</span>
-																																																								<span class=category-name>Drama</span>
-																																																							</p>
-																																																						</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Burn Notice - Season 5</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-117">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/burn-notice-season-4" title="Burn Notice - Season 4">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//burn-notice-season-4-zbc/cover.png" alt="Burn Notice - Season 4" title="Burn Notice - Season 4">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 18</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																							<span class=film-title>Burn Notice - Season 4</span>" data-content="
-																																																							<div class=film-meta>
-																																																								<div class=text-center>
-																																																									<span class=released>
-																																																										<i class=hl-calendar></i> 2010
-																																																									</span>
-																																																									<span class=runtime>
-																																																										<i class=hl-clock></i> 44 min
-																																																									</span>
-																																																								</div>
-																																																								<div class=film-content>Season 4 opens with Michael contemplating working with a man who is trying to uncover the identity of the arms&amp;hellip;</div>
-																																																								<p class=category>Country: 
-																																																									<span class=category-name>United States</span>
-																																																								</p>
-																																																								<p class=category>Genres: 
-																																																									<span class=category-name>Action</span>
-																																																									<span class=category-name>Crime</span>
-																																																									<span class=category-name>Drama</span>
-																																																								</p>
-																																																							</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Burn Notice - Season 4</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                </div>
-            </section>
-            <div class="clearfix"></div>
-            <div class="clearfix"></div>
-            <section id="halim-category-widget-halim-category-widget-2" class="halim-category-widget-halim-category-widget-2" style="position: relative;">
-                <div class="section-bar clearfix">
-                    <div class="section-title">
-                        <a href="/drama" title="Drama">
-                            <h3 class="section-title">
-                                <span>Drama</span>
-                            </h3>
-                        </a>
-                        <ul class="halim-popular-tab" role="tablist">
-                            <li role="presentation">
-                                <a class="ajax-category-widget" role="tab" data-toggle="tab" data-showpost="8" data-layout="4col" data-type="movie" data-category="26" data-widget-id="halim-category-widget-2">Movie</a>
-                            </li>
-                            <li role="presentation" class="active">
-                                <a class="ajax-category-widget" role="tab" data-toggle="tab" data-showpost="8" data-layout="4col" data-type="tv_series" data-category="26" data-widget-id="halim-category-widget-2">TV Series</a>
-                            </li>
-                            <li role="presentation">
-                                <a class="ajax-category-widget" role="tab" data-toggle="tab" data-showpost="8" data-layout="4col" data-type="tv_shows" data-category="26" data-widget-id="halim-category-widget-2">TV Shows</a>
-                            </li>
-                            <li role="presentation">
-                                <a class="ajax-category-widget" role="tab" data-toggle="tab" data-showpost="8" data-layout="4col" data-type="theater_movie" data-category="26" data-widget-id="halim-category-widget-2">Theater movie</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="halim-ajax-popular-post-loading hidden"></div>
-                <div class="halim_box" id="ajax-category-widget-halim-category-widget-2">
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-30675">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/star-trek-deep-space-nine-season-7" title="Star Trek: Deep Space Nine - Season 7">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//star-trek-deep-space-nine-season-7-fof/cover.png" alt="Star Trek: Deep Space Nine - Season 7" title="Star Trek: Deep Space Nine - Season 7">
-                                </figure>
-                                <span class="status">SD</span>
-                                <span class="episode">Episode 25</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																								<span class=film-title>Star Trek: Deep Space Nine - Season 7</span>" data-content="
-																																																								<div class=film-meta>
-																																																									<div class=text-center>
-																																																										<span class=released>
-																																																											<i class=hl-calendar></i> 1998
-																																																										</span>
-																																																										<span class=runtime>
-																																																											<i class=hl-clock></i> 45 min
-																																																										</span>
-																																																									</div>
-																																																									<div class=film-content>The final season opens with Sisko waiting for the Prophets to instruct him on what to do next after&amp;hellip;</div>
-																																																									<p class=category>Country: 
-																																																										<span class=category-name>United States</span>
-																																																									</p>
-																																																									<p class=category>Genres: 
-																																																										<span class=category-name>Action</span>
-																																																										<span class=category-name>Adventure</span>
-																																																										<span class=category-name>Drama</span>
-																																																									</p>
-																																																								</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Star Trek: Deep Space Nine - Season 7</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-30624">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/party-of-five-season-2" title="Party of Five - Season 2">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//party-of-five-season-2-hab/cover.png" alt="Party of Five - Season 2" title="Party of Five - Season 2">
-                                </figure>
-                                <span class="status">SD</span>
-                                <span class="episode">Episode 22</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																									<span class=film-title>Party of Five - Season 2</span>" data-content="
-																																																									<div class=film-meta>
-																																																										<div class=text-center>
-																																																											<span class=released>
-																																																												<i class=hl-calendar></i> 1995
-																																																											</span>
-																																																											<span class=runtime>
-																																																												<i class=hl-clock></i> 60 min
-																																																											</span>
-																																																										</div>
-																																																										<div class=film-content>Season 2 opens with Charlie being shocked and furious when his ex from four years ago Pamela Rush turns up&amp;hellip;</div>
-																																																										<p class=category>Country: 
-																																																											<span class=category-name>United States</span>
-																																																										</p>
-																																																										<p class=category>Genres: 
-																																																											<span class=category-name>Drama</span>
-																																																										</p>
-																																																									</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Party of Five - Season 2</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-30623">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/party-of-five-season-1" title="Party of Five - Season 1">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//party-of-five-season-1-jzy/cover.png" alt="Party of Five - Season 1" title="Party of Five - Season 1">
-                                </figure>
-                                <span class="status">SD</span>
-                                <span class="episode">Episode 22</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																										<span class=film-title>Party of Five - Season 1</span>" data-content="
-																																																										<div class=film-meta>
-																																																											<div class=text-center>
-																																																												<span class=released>
-																																																													<i class=hl-calendar></i> 1994
-																																																												</span>
-																																																												<span class=runtime>
-																																																													<i class=hl-clock></i> 60 min
-																																																												</span>
-																																																											</div>
-																																																											<div class=film-content>The series focuses on five siblings who are left to find their own way in the world when&amp;hellip;</div>
-																																																											<p class=category>Country: 
-																																																												<span class=category-name>United States</span>
-																																																											</p>
-																																																											<p class=category>Genres: 
-																																																												<span class=category-name>Drama</span>
-																																																											</p>
-																																																										</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Party of Five - Season 1</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-30622">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/chicago-hope-season-6" title="Chicago Hope - Season 6">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//chicago-hope-season-6-lmy/cover.png" alt="Chicago Hope - Season 6" title="Chicago Hope - Season 6">
-                                </figure>
-                                <span class="status">SD</span>
-                                <span class="episode">Episode 22</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																											<span class=film-title>Chicago Hope - Season 6</span>" data-content="
-																																																											<div class=film-meta>
-																																																												<div class=text-center>
-																																																													<span class=released>
-																																																														<i class=hl-calendar></i> 1999
-																																																													</span>
-																																																													<span class=runtime>
-																																																														<i class=hl-clock></i> 60 min
-																																																													</span>
-																																																												</div>
-																																																												<div class=film-content>Season 6 opens with Dr. Simon ending up in the position of having to inform the family of his death&amp;hellip;</div>
-																																																												<p class=category>Country: 
-																																																													<span class=category-name>United States</span>
-																																																												</p>
-																																																												<p class=category>Genres: 
-																																																													<span class=category-name>Drama</span>
-																																																													<span class=category-name>Mystery</span>
-																																																													<span class=category-name>Thriller</span>
-																																																												</p>
-																																																											</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Chicago Hope - Season 6</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-30621">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/chicago-hope-season-5" title="Chicago Hope - Season 5">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//chicago-hope-season-5-qon/cover.png" alt="Chicago Hope - Season 5" title="Chicago Hope - Season 5">
-                                </figure>
-                                <span class="status">SD</span>
-                                <span class="episode">Episode 24</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																												<span class=film-title>Chicago Hope - Season 5</span>" data-content="
-																																																												<div class=film-meta>
-																																																													<div class=text-center>
-																																																														<span class=released>
-																																																															<i class=hl-calendar></i> 1998
-																																																														</span>
-																																																														<span class=runtime>
-																																																															<i class=hl-clock></i> 60 min
-																																																														</span>
-																																																													</div>
-																																																													<div class=film-content>Season 5 opens with Dr. Shutt beginning to do surgery again although his future in psychiatry is uncertain. A &quot;suicide&amp;hellip;</div>
-																																																													<p class=category>Country: 
-																																																														<span class=category-name>United States</span>
-																																																													</p>
-																																																													<p class=category>Genres: 
-																																																														<span class=category-name>Drama</span>
-																																																														<span class=category-name>Mystery</span>
-																																																														<span class=category-name>Thriller</span>
-																																																													</p>
-																																																												</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Chicago Hope - Season 5</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-30610">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/bosch-season-2" title="Bosch - Season 2">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//bosch-season-2-ajt/cover.png" alt="Bosch - Season 2" title="Bosch - Season 2">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 10</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																													<span class=film-title>Bosch - Season 2</span>" data-content="
-																																																													<div class=film-meta>
-																																																														<div class=text-center>
-																																																															<span class=released>
-																																																																<i class=hl-calendar></i> 2016
-																																																															</span>
-																																																															<span class=runtime>
-																																																																<i class=hl-clock></i> 51 min
-																																																															</span>
-																																																														</div>
-																																																														<div class=film-content>Season 2 opens with LAPD homicide detective Harry Bosch back on the job after a suspension. A dead body found&amp;hellip;</div>
-																																																														<p class=category>Country: 
-																																																															<span class=category-name>United States</span>
-																																																														</p>
-																																																														<p class=category>Genres: 
-																																																															<span class=category-name>Drama</span>
-																																																															<span class=category-name>Mystery</span>
-																																																														</p>
-																																																													</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Bosch - Season 2</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-30520">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/stella-season-5" title="Stella - Season 5">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//stella-season-5-jnr/cover.png" alt="Stella - Season 5" title="Stella - Season 5">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 10</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																														<span class=film-title>Stella - Season 5</span>" data-content="
-																																																														<div class=film-meta>
-																																																															<div class=text-center>
-																																																																<span class=released>
-																																																																	<i class=hl-calendar></i> 2016
-																																																																</span>
-																																																																<span class=runtime>
-																																																																	<i class=hl-clock></i> 60 min
-																																																																</span>
-																																																															</div>
-																																																															<div class=film-content>Season 5 opens with Michael working in London and returning to Pontyberry at weekends and Stella getting concerned about his&amp;hellip;</div>
-																																																															<p class=category>Country: 
-																																																																<span class=category-name>United Kingdom</span>
-																																																															</p>
-																																																															<p class=category>Genres: 
-																																																																<span class=category-name>Comedy</span>
-																																																																<span class=category-name>Drama</span>
-																																																															</p>
-																																																														</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Stella - Season 5</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-29257">
-                        <div class="halim-item">
-                            <a class="halim-thumb" href="/heartland-season-5" title="Heartland - Season 5">
-                                <figure>
-                                    <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="/cdn.watch-series.co//heartland-season-5-cfr/cover.png" alt="Heartland - Season 5" title="Heartland - Season 5">
-                                </figure>
-                                <span class="status">HD</span>
-                                <span class="episode">Episode 18</span>
-                                <div class="icon_overlay" data-html="true" data-toggle="halim-popover" data-placement="top" data-trigger="hover" title="
-																																																															<span class=film-title>Heartland - Season 5</span>" data-content="
-																																																															<div class=film-meta>
-																																																																<div class=text-center>
-																																																																	<span class=released>
-																																																																		<i class=hl-calendar></i> 2011
-																																																																	</span>
-																																																																	<span class=runtime>
-																																																																		<i class=hl-clock></i> 60 min
-																																																																	</span>
-																																																																</div>
-																																																																<div class=film-content>Season 5 opens with Shane coming back to Heartland without his mom's knowledge; Amy meeting a professional &quot;liberty&quot; horse trainer; Jack shanghaing Tim and&amp;hellip;</div>
-																																																																<p class=category>Country: 
-																																																																	<span class=category-name>International</span>
-																																																																</p>
-																																																																<p class=category>Genres: 
-																																																																	<span class=category-name>Drama</span>
-																																																																	<span class=category-name>Family</span>
-																																																																</p>
-																																																															</div>">
-                                </div>
-                                <div class="halim-post-title-box">
-                                    <div class="halim-post-title title-2-line">
-                                        <h2 class="entry-title">Heartland - Season 5</h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </article>
-                </div>
-            </section>
-            <div class="clearfix"></div>
-        </main>
-        <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
-            <div id="halim_tab_popular_videos-widget-2" class="widget halim_tab_popular_videos-widget">
-                <div class="section-bar clearfix">
-                    <div class="section-title">
-                        <span>Popular</span>
-                        <ul class="halim-popular-tab" role="tablist">
-                            <li role="presentation" class="active">
-                                <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="6" data-type="day">Day</a>
-                            </li>
-                            <li role="presentation">
-                                <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="6" data-type="week">Week</a>
-                            </li>
-                            <li role="presentation">
-                                <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="6" data-type="month">Month</a>
-                            </li>
-                            <li role="presentation">
-                                <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="6" data-type="all">All</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <section class="tab-content">
-                    <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
-                        <div class="halim-ajax-popular-post-loading hidden"></div>
-                        <div id="halim-ajax-popular-post" class="popular-post">
-                            <div class="item post-27049">
-                                <a href="/flip-or-flop-season-4" title="Flip or Flop - season 4">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/flip-or-flop-season-4.png" class="lazyload blur-up post-thumb" alt="Flip or Flop - season 4" title="Flip or Flop - season 4" />
-                                    </div>
-                                    <h3 class="title">Flip or Flop - season 4</h3>
-                                </a>
-                                <div class="viewsCount">2 view</div>
-                            </div>
-                            <div class="item post-27576">
-                                <a href="/lion-killer" title="Lion Killer">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/lion-killer.png" class="lazyload blur-up post-thumb" alt="Lion Killer" title="Lion Killer" />
-                                    </div>
-                                    <h3 class="title">Lion Killer</h3>
-                                </a>
-                                <div class="viewsCount">0 view</div>
-                            </div>
-                            <div class="item post-10056">
-                                <a href="/night-flight" title="Night Flight">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co//night-flight-vow/cover.png" class="lazyload blur-up post-thumb" alt="Night Flight" title="Night Flight" />
-                                    </div>
-                                    <h3 class="title">Night Flight</h3>
-                                </a>
-                                <div class="viewsCount">0 view</div>
-                            </div>
-                            <div class="item post-15846">
-                                <a href="/the-godsend" title="The Godsend">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/the-godsend.png" class="lazyload blur-up post-thumb" alt="The Godsend" title="The Godsend" />
-                                    </div>
-                                    <h3 class="title">The Godsend</h3>
-                                </a>
-                                <div class="viewsCount">0 view</div>
-                            </div>
-                            <div class="item post-20029">
-                                <a href="/rusty-rivets-season-1" title="Rusty Rivets - Season 1">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/rusty-rivets-season-1.png" class="lazyload blur-up post-thumb" alt="Rusty Rivets - Season 1" title="Rusty Rivets - Season 1" />
-                                    </div>
-                                    <h3 class="title">Rusty Rivets - Season 1</h3>
-                                </a>
-                                <div class="viewsCount">0 view</div>
-                            </div>
-                            <div class="item post-6376">
-                                <a href="/happy-ending-season-2" title="Happy Ending - Season 2">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/happy-ending-season-2.png" class="lazyload blur-up post-thumb" alt="Happy Ending - Season 2" title="Happy Ending - Season 2" />
-                                    </div>
-                                    <h3 class="title">Happy Ending - Season 2</h3>
-                                </a>
-                                <div class="viewsCount">0 view</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="clearfix"></div>
-            </div>
-            <div id="halim_popular_movie-widget-2" class="widget halim_popular_movie-widget">
-                <div class="section-bar clearfix">
-                    <div class="section-title">
-                        <span>TOP Movies</span>
-                    </div>
-                </div>
-                <section class="tab-content">
-                    <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
-                        <div class="popular-post">
-                            <div class="item post-33887">
-                                <a href="/siren" title="Siren">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/siren.png" class="lazyload blur-up post-thumb" alt="Siren" title="Siren" />
-                                    </div>
-                                    <h3 class="title">Siren</h3>
-                                </a>
-                                <div class="viewsCount">185 view</div>
-                            </div>
-                            <div class="item post-33886">
-                                <a href="/bangkok-dangerous" title="Bangkok Dangerous">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/bangkok-dangerous.png" class="lazyload blur-up post-thumb" alt="Bangkok Dangerous" title="Bangkok Dangerous" />
-                                    </div>
-                                    <h3 class="title">Bangkok Dangerous</h3>
-                                </a>
-                                <div class="viewsCount">86 view</div>
-                            </div>
-                            <div class="item post-33885">
-                                <a href="/banner-4th-of-july" title="Banner 4th of July">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/banner-4th-of-july.png" class="lazyload blur-up post-thumb" alt="Banner 4th of July" title="Banner 4th of July" />
-                                    </div>
-                                    <h3 class="title">Banner 4th of July</h3>
-                                </a>
-                                <div class="viewsCount">64 view</div>
-                            </div>
-                            <div class="item post-33862">
-                                <a href="/bahubali-the-beginning" title="Bahubali: The Beginning">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/bahubali-the-beginning.png" class="lazyload blur-up post-thumb" alt="Bahubali: The Beginning" title="Bahubali: The Beginning" />
-                                    </div>
-                                    <h3 class="title">Bahubali: The Beginning</h3>
-                                </a>
-                                <div class="viewsCount">46 view</div>
-                            </div>
-                            <div class="item post-20020">
-                                <a href="/kolonya-cumhuriyeti" title="Kolonya Cumhuriyeti">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/kolonya-cumhuriyeti.png" class="lazyload blur-up post-thumb" alt="Kolonya Cumhuriyeti" title="Kolonya Cumhuriyeti" />
-                                    </div>
-                                    <h3 class="title">Kolonya Cumhuriyeti</h3>
-                                </a>
-                                <div class="viewsCount">40 view</div>
-                            </div>
-                            <div class="item post-33881">
-                                <a href="/company" title="Company">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/company.png" class="lazyload blur-up post-thumb" alt="Company" title="Company" />
-                                    </div>
-                                    <h3 class="title">Company</h3>
-                                </a>
-                                <div class="viewsCount">38 view</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="clearfix"></div>
-            </div>
-            <div id="halim_popular_tv_series-widget-2" class="widget halim_popular_tv_series-widget">
-                <div class="section-bar clearfix">
-                    <div class="section-title">
-                        <span>TOP Series</span>
-                    </div>
-                </div>
-                <section class="tab-content">
-                    <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
-                        <div class="popular-post">
-                            <div class="item post-19287">
-                                <a href="/criminal-minds-season-13" title="Criminal Minds - Season 13">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/criminal-minds-season-13.png" class="lazyload blur-up post-thumb" alt="Criminal Minds - Season 13" title="Criminal Minds - Season 13" />
-                                    </div>
-                                    <h3 class="title">Criminal Minds - Season 13</h3>
-                                </a>
-                                <div class="viewsCount">113 view</div>
-                            </div>
-                            <div class="item post-4655">
-                                <a href="/pretty-little-liars-season-6" title="Pretty Little Liars - Season 6">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co//pretty-little-liars-season-6-xis/cover.png" class="lazyload blur-up post-thumb" alt="Pretty Little Liars - Season 6" title="Pretty Little Liars - Season 6" />
-                                    </div>
-                                    <h3 class="title">Pretty Little Liars - Season 6</h3>
-                                </a>
-                                <div class="viewsCount">108 view</div>
-                            </div>
-                            <div class="item post-128">
-                                <a href="/baby-daddy-season-3" title="Baby Daddy - Season 3">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co//baby-daddy-season-3-pkp/cover.png" class="lazyload blur-up post-thumb" alt="Baby Daddy - Season 3" title="Baby Daddy - Season 3" />
-                                    </div>
-                                    <h3 class="title">Baby Daddy - Season 3</h3>
-                                </a>
-                                <div class="viewsCount">90 view</div>
-                            </div>
-                            <div class="item post-4071">
-                                <a href="/narcos-season-1" title="Narcos - Season 1">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co//narcos-season-1-bxb/cover.png" class="lazyload blur-up post-thumb" alt="Narcos - Season 1" title="Narcos - Season 1" />
-                                    </div>
-                                    <h3 class="title">Narcos - Season 1</h3>
-                                </a>
-                                <div class="viewsCount">78 view</div>
-                            </div>
-                            <div class="item post-17044">
-                                <a href="/law-order-criminal-intent-season-2" title="Law &amp; Order: Criminal Intent season 2">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co/cover/law-order-criminal-intent-season-2.png" class="lazyload blur-up post-thumb" alt="Law &amp; Order: Criminal Intent season 2" title="Law &amp; Order: Criminal Intent season 2" />
-                                    </div>
-                                    <h3 class="title">Law &amp; Order: Criminal Intent season 2</h3>
-                                </a>
-                                <div class="viewsCount">70 view</div>
-                            </div>
-                            <div class="item post-30675">
-                                <a href="/star-trek-deep-space-nine-season-7" title="Star Trek: Deep Space Nine - Season 7">
-                                    <div class="item-link">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="/cdn.watch-series.co//star-trek-deep-space-nine-season-7-fof/cover.png" class="lazyload blur-up post-thumb" alt="Star Trek: Deep Space Nine - Season 7" title="Star Trek: Deep Space Nine - Season 7" />
-                                    </div>
-                                    <h3 class="title">Star Trek: Deep Space Nine - Season 7</h3>
-                                </a>
-                                <div class="viewsCount">67 view</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="clearfix"></div>
-            </div>
-        </aside>
-    </div>
-</div>
-<div class="clearfix"></div>
-<footer id="footer" class="clearfix">
-    <div class="container footer-columns">
-        <div class="row container">
-            <div class="widget about col-xs-12 col-sm-4 col-md-4">
-                <div class="footer-logo">
-                    <img class="img-responsive" src="wp-content/themes/halimmovies/assets/images/halim-dark-logo.png" alt="HaLimMovie 5.4" />
-                    <span class="social"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<div class="footer-credit">
-    <div class="container credit">
-        <div class="row container">
-            <div class="col-xs-12 col-sm-4 col-md-6">
-                ©
-                <a id="halimthemes" href="/" title="Theme developed by HaLimThemes.Com">Theme developed by HaLimThemes.Com</a>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-6 text-right pull-right">
-                <p class="blog-info">
-                    HaLimMovie 5.4</p>
-            </div>
-        </div>
-    </div>
-</div>
-<div id='easy-top'></div>
 
-<script data-optimized="1" type='text/javascript' src='wp-content/litespeed/cssjs/ad7db.js' defer data-deferred="1"></script>
-<script data-optimized="1" type='text/javascript' src='wp-content/litespeed/cssjs/3f6c2.js' defer data-deferred="1"></script>
-<script data-optimized="1" type='text/javascript' src='wp-content/litespeed/cssjs/25edd.js' defer data-deferred="1"></script>
-<script type='text/javascript'>/*  */
-    var halim = {"ajax_url":"https:\/\/play.halimthemes.com\/wp-content\/themes\/halimmovies\/halim-ajax.php","light_mode":"0","light_mode_btn":"1","ajax_live_search":"1","sync":null,"db_redirect_url":"https:\/\/halimthemes.com"};
-    /*  */</script>
-<script data-optimized="1" type='text/javascript' src='wp-content/litespeed/cssjs/f2f24.js' defer data-deferred="1"></script>
-<script type='text/javascript'>/*  */
-    var ajax_auth_object = {"ajaxurl":"https:\/\/play.halimthemes.com\/wp-content\/themes\/halimmovies\/halim-ajax.php","redirecturl":"https:\/\/play.halimthemes.com","loadingmessage":"Sending user info, please wait...","sitekey":null,"languages":{"login":"Login","register":"Register","forgotpassword":"Lost your password?","already_account":"Already have an account?","create_account":"Create account","reset_captcha":"Reset captcha","username":"Username","email":"Email","username_email":"Username or Email","password":"Password","reset_password":"Reset Password","login_with":"Login with","register_with":"Register with","or":"or"}};
-    /*  */</script>
-<script data-optimized="1" type='text/javascript' src='wp-content/litespeed/cssjs/3be23.js' defer data-deferred="1"></script>
+                                    <div class="halim-post-title-box">
+                                        <div class="halim-post-title ">
+                                            <h2 class="entry-title">Hồi Kết Của Sát Thủ</h2>
+                                            <p class="original_title">Sniper: Assassin&#039;s End</p></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </article>
+                    @endfor
+                    <a href="/phim-moi/" class="see-more">View all post »</a>
+                </div>
+            </section>
+            <div class="clearfix"></div>
+            <section id="halim-advanced-widget-4">
+                <h4 class="section-heading">
+                    <a href="/phim-bo/" title="Phim bộ mới nhất">
+                        <span class="h-text">Phim bộ mới nhất</span>
+                    </a>
+                    <ul class="heading-nav pull-right hidden-xs">
+                        <li class="section-btn halim_ajax_get_post" data-catid="766" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-4" data-layout="6col"><span
+                                data-text="Cổ Trang"></span></li>
+                        <li class="section-btn halim_ajax_get_post" data-catid="769" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-4" data-layout="6col"><span
+                                data-text="Gia Đình"></span></li>
+                        <li class="section-btn halim_ajax_get_post" data-catid="751" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-4" data-layout="6col"><span
+                                data-text="Hoạt Hình"></span></li>
+                        <li class="section-btn halim_ajax_get_post" data-catid="761" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-4" data-layout="6col"><span
+                                data-text="Phiêu Lưu"></span></li>
+                    </ul>
+                </h4>
+                <div id="halim-advanced-widget-4-ajax-box" class="halim_box">
+                    @for ($i = 0; $i < 12; $i++)
+                        <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-21128">
+                            <div class="halim-item">
+                                <a class="halim-thumb" href="/cam-ngon-truyen-phuong-quy-tu-thoi-ca"
+                                   title="Cẩm Ngôn Truyện (Phượng Quy Tứ Thời Ca)">
+                                    <figure><img class="blur-up img-responsive lazyautosizes lazyloaded"
+                                                 data-sizes="auto"
+                                                 data-src="{{ asset('uploads/2020/06/cam-ngon-truyen-phuong-quy-tu-thoi-ca-21128-thumbnail.jpg') }}"
+                                                 alt="Cẩm Ngôn Truyện (Phượng Quy Tứ Thời Ca)"
+                                                 title="Cẩm Ngôn Truyện (Phượng Quy Tứ Thời Ca)" sizes="185px"
+                                                 src="{{ asset('uploads/2020/06/cam-ngon-truyen-phuong-quy-tu-thoi-ca-21128-thumbnail.jpg') }}">
+                                    </figure>
+                                    <span class="status">HD</span><span class="episode">Tập 8</span>
+                                    <div class="icon_overlay" data-html="true" data-toggle="halim-popover"
+                                         data-placement="top" data-trigger="hover" title="" data-content="<div class=org-title>The Legend of Jin Yan (2020)</div>                            <div class=film-meta>
+                                <div class=text-center>
+                                    <span class=released><i class=hl-calendar></i> 2020</span>                                                                    </div>
+                                <div class=film-content>Phượng Quy Tứ Thời Ca / Cẩm Ngôn Truyện kể về con gái nhà tướng Văn Tố Cẩm&amp;hellip;</div>
+                                <p class=category>Quốc gia: <span class=category-name>Trung Quốc</span></p>                                <p class=category>Thể loại: <span class=category-name>Cổ Trang</span><span class=category-name>Hành Động</span><span class=category-name>Tình Cảm</span></p>
+                            </div>"
+                                         data-original-title="<span class=film-title>Cẩm Ngôn Truyện (Phượng Quy Tứ Thời Ca)</span>">
+                                    </div>
+
+                                    <div class="halim-post-title-box">
+                                        <div class="halim-post-title ">
+                                            <h2 class="entry-title">Cẩm Ngôn Truyện (Phượng Quy Tứ Thời Ca)</h2>
+                                            <p class="original_title">The Legend of Jin Yan (2020)</p></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </article>
+                    @endfor
+                    <a href="/phim-bo/" class="see-more">View all post »</a>
+                </div>
+            </section>
+            <div class="clearfix"></div>
+            <section id="halim-advanced-widget-3">
+                <h4 class="section-heading">
+                    <a href="/phim-le/" title="Phim lẻ mới nhất">
+                        <span class="h-text">Phim lẻ mới nhất</span>
+                    </a>
+                    <ul class="heading-nav pull-right hidden-xs">
+                        <li class="section-btn halim_ajax_get_post" data-catid="768" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-3" data-layout="6col"><span
+                                data-text="Khoa Học"></span></li>
+                        <li class="section-btn halim_ajax_get_post" data-catid="764" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-3" data-layout="6col"><span data-text="Tâm Lý"></span>
+                        </li>
+                        <li class="section-btn halim_ajax_get_post" data-catid="765" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-3" data-layout="6col"><span
+                                data-text="Thần Thoại"></span></li>
+                        <li class="section-btn halim_ajax_get_post" data-catid="763" data-showpost="12"
+                            data-widgetid="halim-advanced-widget-3" data-layout="6col"><span
+                                data-text="Võ Thuật"></span></li>
+                    </ul>
+                </h4>
+                <div id="halim-advanced-widget-3-ajax-box" class="halim_box">
+                    @for ($i = 0; $i < 12; $i++)
+                        <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-21112">
+                            <div class="halim-item">
+                                <a class="halim-thumb" href="/long-nhan-tu" title="Lòng Nhân Từ">
+                                    <figure><img class="lazyload blur-up img-responsive" data-sizes="auto"
+                                                 data-src="{{ asset('uploads/2020/06/long-nhan-tu-21112-thumbnail.jpg') }}"
+                                                 alt="Lòng Nhân Từ" title="Lòng Nhân Từ"></figure>
+                                    <span class="status">FHD</span><span class="episode">Full</span>
+                                    <div class="icon_overlay" data-html="true"
+                                         data-toggle="halim-popover"
+                                         data-placement="top"
+                                         data-trigger="hover"
+                                         title="<span class=film-title>Lòng Nhân Từ</span>"
+                                         data-content="<div class=org-title>Just Mercy</div>                            <div class=film-meta>
+                                <div class=text-center>
+                                    <span class=released><i class=hl-calendar></i> 2019</span>                                    <span class=runtime><i class=hl-clock></i> 137 phút</span>                                </div>
+                                <div class=film-content>Sau khi tốt nghiệp Harvard, Bryan đến Alabama để bảo vệ quyền lợi của những người bị kết&amp;hellip;</div>
+                                <p class=category>Quốc gia: <span class=category-name>Mỹ</span></p>                                <p class=category>Thể loại: <span class=category-name>Hình Sự</span><span class=category-name>Kịch Tính</span><span class=category-name>Tiểu Sử</span></p>
+                            </div>">
+                                    </div>
+
+                                    <div class="halim-post-title-box">
+                                        <div class="halim-post-title ">
+                                            <h2 class="entry-title">Lòng Nhân Từ</h2>
+                                            <p class="original_title">Just Mercy</p></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </article>
+                    @endfor
+                    <div class="clearfix"></div>
+                    <a href="/phim-le/" class="see-more">View all post »</a>
+                </div>
+            </section>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div><!--./End .container -->
+<div class="clearfix"></div>
+<div class="container">
+    <div class="row fcategory">
+        <h2 class="text-center section-title"><span>XemPhimPlus - Phim Mới - Xem Phim Online Miễn Phí</span></h2>
+        <div class="entry-content htmlwrap clearfix">
+            <div class="video-item halim-entry-box">
+                <article id="post-12728" class="item-content">
+                    <h2 style="text-align: center;">XEMPHIMPLUS - Phim Mới | Phim Hay | Xem Phim Nhanh | Xem Phim
+                        Online</h2>
+                    <p>Như các bạn đã biết hiện nay có rất nhiều trang <a href="/gioi-thieu"><strong>xem phim
+                                online</strong></a> cực hay mà mình tin là chưa có nhiều người biết tới.</p>
+                    <p>Có quá nhiều trang <strong>xem phim nhanh</strong>, <strong>phim mới</strong>, <strong>phim hay
+                            online</strong> trực tuyến miễn phí và cũng hỗ trợ <strong>xem phim <a
+                                href="https://vi.wikipedia.org/wiki/1080p">Full HD</a></strong>. Tuy nhiên họ quá lạm
+                        dụng quảng cáo trong quá trình <strong>xem phim</strong> gây ức chế cho người xem.</p>
+                    <p>Đặc biệt khi bạn là mọt phim bộ một khi không cày thì thôi, đã cày là cày bằng hết tập dù là có
+                        phải thức nguyên đêm. Đã không xem thì không sao chứ một khi xem là rất ham, do đó mình cũng hạn
+                        chế <strong>xem phim</strong> trừ những <strong>phim quá hay</strong>.</p>
+                    <p>Cũng vì nguyên nhân đó mà mình hay sưu tầm những <strong>trang web xem phim</strong> tốt và
+                        bookmark chúng lại, khi nào rảnh rỗi sẽ mở xem. Nhưng dạo gần đây những trang web <strong>xem
+                            phim online</strong> bị chết link quá nhiều.</p>
+                    <p>Không chết link thì bị khóa, không khóa thì quảng cáo nhiều, không quảng cáo thì lại không cập
+                        nhật <strong>phim mới</strong>, <a href="/"><strong>phim hay</strong></a>, không thì lại phải
+                        đăng kí thành viên này nọ rất là phiền phức</p>
+                    <p><img class="aligncenter size-full wp-image-12929"
+                            src="wp-content/uploads/2020/02/xem-phim-online.png" alt="xem-phim-online" width="1310"
+                            height="589"/>.</p>
+                    <p>Chính vì những lý do trên <strong>XemPhimPlus</strong> ra đời nhằm đáp ứng được các yêu cầu thiết
+                        yếu của người dùng. Ưu điểm khi <strong>xem phim</strong>, <strong>phim hay</strong>, <strong><a
+                                href="/tag/phimmoi">phim mới</a> </strong>với xemphimplus.net</p>
+                    <h3>Ưu điểm khi xem phim tại XemPhimPlus</h3>
+                    <ul>
+                        <li>Không bị giật, lag khi <strong>xem phim Online</strong></li>
+                        <li>Kho phim khổng lồ được nhiều thành viên chia sẻ và update liên tục</li>
+                        <li>Không lo die link vì có rất nhiều link dự phòng</li>
+                        <li>Chất lượng của nguồn <a href="/"><strong>phim online</strong></a> căng nét, chuẩn <strong>Full
+                                HD</strong></li>
+                        <li>Càng nhiều người xem thì tốc độ load càng nhanh hơn do có nhiều server dự phòng</li>
+                        <li>Cách sắp xếp phim khoa học, dễ tìm kiếm, tự động chuyển tập</li>
+                        <li><strong>Review phim</strong> chính xác và đầy đủ nhất</li>
+                        <li>Ít quảng cáo, hầu như là không có quảng cáo</li>
+                        <li>Có chế độ lọc phim theo sắp xếp, định dạng, tình trạng, quốc gia, năm hay theo thể loại
+                            phim
+                        </li>
+                        <li>Giao diện đẹp có thể thay đổi màu giao diện trang phim từ sáng đến tối để phù hợp với mắt
+                            bạn
+                        </li>
+                        <li>Có tủ phim lưu lại những phim bạn muốn xem.</li>
+                    </ul>
+                    <h3>XemPhimPlus - Xem phim Online HD hoàn toàn miễn phí</h3>
+                    <p><a href="https://bit.ly/xemphimplus"><strong>XemPhimPlus</strong></a> Tổng hợp những bộ phim <em>Việt
+                            Sub</em>, <em>Thuyết minh</em>, <em>Lồng Tiếng</em> hay và mới nhất, được cập nhật liên tục.
+                        Có đánh giá phim và lượt xem để bạn dễ dàng tham khảo ý kiến người coi trước để khỏi tốn thời
+                        gian tìm kiếm phim.</p>
+                    <p>Có phần bình luận dưới phim để bạn nêu cảm nghĩ hay đánh giá phim. <strong>Xem phim
+                            nhanh</strong>, <strong>phim hay miễn phí</strong>, <a href="/"><strong>phim
+                                mới</strong></a> với <strong>xemphimplus.net</strong> hiện là là <strong>trang web xem
+                            phim</strong> với số lượng truy cập khủng.</p>
+                    <p>Đây thực sự là <strong>trang phim hay</strong>, tuyệt vời dành cho các tín đồ mê film. Còn chần
+                        chờ gì nữa không nhanh tay bấm ngay <strong>xemphimplus.net</strong> để giải tỏa căng thẳng, vui
+                        chơi giải trí</p>
+
+                </article>
+                <div class="item-content-toggle">
+                    <div class="item-content-gradient"></div>
+                    <span class="show-more" data-single="true" data-showmore="Hiển thị thêm" data-showless="Rút gọn">Hiển thị thêm</span>
+                </div>
+            </div>
+        </div>
+        <ul id="f-menu" class="">
+            <li><a href="/phim-bo">Phim bộ</a></li>
+            <li><a href="/phim-chieu-rap">Phim chiếu rạp</a></li>
+            <li><a href="/tag/banhtv">BanhTV</a></li>
+            <li><a href="/tag/phimmoi">PhimMoi</a></li>
+            <li><a href="/phim-le">Phim lẻ</a></li>
+            <li><a href="/phim-moi-nhat">Phim mới nhất</a></li>
+            <li><a href="/tag/bilutv-org">Bilutv</a></li>
+            <li><a href="/tag/phim3s">Phim3s</a></li>
+            <li><a href="/tag/hdonline">Hdonline</a></li>
+            <li><a href="/tag/phimbathu-com">PhimBatHu</a></li>
+        </ul>
+    </div>
+</div>
+@include('frontend.partials.footer')
+<div id='easy-top'></div>
+<script>
+    jQuery('body').append('<div id="fb-root"></div>');
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '2401456150086560', cookie: true, xfbml: true, version: 'v3.0'
+        });
+    };
+    _loadFbSDk = function () {
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "/connect.facebook.net/vi_VN_VN/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
+    jQuery(window).load(function () {
+        setTimeout("_loadFbSDk()", 100);
+    });
+</script>
+<!-- <div  class="hidemobile" style="position: fixed; top: 0px; left: 0px; z-index: 999999">
+<a href="/link/floatleft.html" rel="nofollow" target="_blank">
+    <img src="banner/lixi88.gif" alt="Quảng cáo" class="img-fluid" width="100px">
+</a>
+</div> -->
+<script type="text/javascript">
+    function hide_float_left() {
+        var content = document.getElementById('float_content_left');
+        var hide = document.getElementById('hide_float_left');
+        if (content.style.display == "none") {
+            content.style.display = "block";
+            hide.innerHTML = '<a href="javascript:hide_float_left()">[X]</a>';
+        } else {
+            content.style.display = "none";
+            hide.innerHTML = '';
+        }
+    }
+</script>
+<style>
+    .float-ck {
+        position: fixed;
+        bottom: 0;
+        z-index: 9000;
+        left: 50%;
+        transform: translate(-50%, 0%);
+    }
+
+    * html .float-ck {
+        position: absolute;
+        bottom: auto;
+    }
+
+    #float_content_left {
+        border: 1px solid #01AEF0;
+    }
+
+    #hide_float_left {
+        text-align: right;
+        font-size: 11px;
+        position: absolute;
+        top: 0px;
+        right: 0;
+    }
+
+    #hide_float_left a {
+        background: #01AEF0;
+        padding: 4px 7px;
+        color: #FFF;
+        display: block
+    }
+
+    #float_content_left img {
+        width: 580px;
+        height: 90px;
+    }
+
+    #float_content_left a {
+        display: block;
+    }
+</style>
+<div class="float-ck hidemobile">
+    <div id="hide_float_left">
+        <a href="javascript:hide_float_left()">[X]</a></div>
+    <div id="float_content_left">
+        <!-- Start quang cao-->
+
+        <!-- End quang cao -->
+    </div>
+</div>
+
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var halim = {
+        "ajax_url": "http:\/\/xemphimplus.net\/wp-content\/themes\/halimmovies\/halim-ajax.php",
+        "light_mode": "0",
+        "light_mode_btn": "1",
+        "ajax_live_search": "1",
+        "sync": null,
+        "db_redirect_url": "http:\/\/xemphimplus.net\/"
+    };
+    /* ]]> */
+</script>
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var ajax_auth_object = {
+        "ajaxurl": "http:\/\/xemphimplus.net\/wp-content\/themes\/halimmovies\/halim-ajax.php",
+        "redirecturl": "http:\/\/xemphimplus.net",
+        "loadingmessage": "Sending user info, please wait...",
+        "sitekey": "6LfmlNAUAAAAAAXvPEz3vm6s8o9Q_C7M2VSJ0B2n",
+        "languages": {
+            "login": "\u0110\u0103ng nh\u1eadp",
+            "register": "\u0110\u0103ng k\u00fd",
+            "forgotpassword": "B\u1ea1n qu\u00ean m\u1eadt kh\u1ea9u?",
+            "already_account": "Already have an account?",
+            "create_account": "Create account",
+            "reset_captcha": "Reset captcha",
+            "username": "T\u00ean ng\u01b0\u1eddi d\u00f9ng",
+            "email": "Email",
+            "username_email": "Username or Email",
+            "password": "M\u1eadt kh\u1ea9u",
+            "reset_password": "Thi\u1ebft l\u1eadp l\u1ea1i m\u1eadt kh\u1ea9u",
+            "login_with": "\u0110\u0103ng nh\u1eadp b\u1eb1ng",
+            "register_with": "Register with",
+            "or": "or"
+        }
+    };
+    /* ]]> */
+</script>
+<script>var halim_ajax_login = {
+        "twitter_login_url": "http:\/\/xemphimplus.net\/wp-login.php?apsl_login_id=twitter_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg==",
+        "facebook_login_url": "http:\/\/xemphimplus.net\/wp-login.php?apsl_login_id=facebook_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg==",
+        "google_login_url": "http:\/\/xemphimplus.net\/wp-login.php?apsl_login_id=google_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg=="
+    }</script>
+<!-- Start Alexa Certify Javascript -->
+{{--<script type="text/javascript">--}}
+{{--    _atrk_opts = { atrk_acct:"BsAzt1Y1Mn20Io", domain:"xemphimplus.net",dynamic: true};--}}
+{{--    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();--}}
+{{--</script>--}}
+{{--<noscript><img src="https://certify.alexametrics.com/atrk.gif?account=BsAzt1Y1Mn20Io" style="display:none" height="1" width="1" alt="" /></noscript>--}}
+<!-- End Alexa Certify Javascript -->
+
+<!-- Facebook Pixel Code -->
+<script>
+    // !function(f,b,e,v,n,t,s)
+    // {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    //     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    //     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    //     n.queue=[];t=b.createElement(e);t.async=!0;
+    //     t.src=v;s=b.getElementsByTagName(e)[0];
+    //     s.parentNode.insertBefore(t,s)}(window, document,'script',
+    //     'https://connect.facebook.net/en_US/fbevents.js');
+    // fbq('init', '738779136606814');
+    // fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+               src="https://www.facebook.com/tr?id=738779136606814&ev=PageView&noscript=1"
+    /></noscript>
+<!-- End Facebook Pixel Code -->
+
 </body>
 </html>
-
-
