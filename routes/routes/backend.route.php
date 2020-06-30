@@ -14,3 +14,11 @@ Route::group(['prefix' => 'admin/genres', 'middleware' => ['web', 'admin']], fun
     
     Route::livewire('/edit/{id}', 'genres.form')->name('admin.genres.edit')->where('id', '[0-9]+')->layout('layouts.backend');
 });
+
+Route::group(['prefix' => 'admin/countries', 'middleware' => ['web', 'admin']], function () {
+    Route::livewire('/', 'countries.index')->name('admin.countries')->layout('layouts.backend');
+    
+    Route::livewire('/create', 'countries.form')->name('admin.countries.create')->layout('layouts.backend');
+    
+    Route::livewire('/edit/{id}', 'countries.form')->name('admin.countries.edit')->where('id', '[0-9]+')->layout('layouts.backend');
+});
