@@ -22,16 +22,29 @@ class Form extends Component
             $this->{$item} = $model->{$item};
         }
         
+        if (empty($this->status)) {
+            $this->status = 1;
+        }
+        
         $this->title_page = $model->name ?: trans('app.add_new');
     }
     
-    public function save() {
+    public function checkValidate()
+    {
         $this->validate([
             'name' => 'required|string|max:250',
             'description' => 'nullable|string|max:250',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
         ]);
+    }
+    
+    public function updated() {
+        $this->checkValidate();
+    }
+    
+    public function save() {
+        $this->checkValidate();
         
         $model = Genres::firstOrNew(['id' => $this->mid]);
         $model->fill((array) $this);

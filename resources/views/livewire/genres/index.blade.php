@@ -29,7 +29,7 @@
                 @endif
 
                 <div class="row mb-3">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <form method="get" class="form-inline" wire:submit.prevent="search">
 
                             <div class="form-group mb-2 mr-1">
@@ -49,17 +49,13 @@
                         </form>
                     </div>
 
-                    <div class="col-md-4 text-right">
-
-                    </div>
-
                 </div>
 
                 <div class="table-responsive mb-5">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th width="3%"><input type="checkbox" class="checkedAll" value="1"></th>
+                                <th width="3%"><input type="checkbox" wire:click="checkAll()" value="1"></th>
                                 <th width="10%">@lang('app.thumbnail')</th>
                                 <th>@lang('app.name')</th>
                                 <th width="20%">@lang('app.description')</th>
@@ -68,9 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @if($items->isEmpty())
-                            <tr><td colspan="5" align="center">@lang('app.there_is_no_data')</td></tr>
-                        @else
+                        @if(!$items->isEmpty())
                             @foreach($items as $item)
                                 <tr>
                                     <td><input type="checkbox" wire:click="toggleTask({{ $item->id }})" class="checked ids" value="{{ $item->id }}" {{ in_array($item->id, $ids) ? 'checked' : '' }}></td>
@@ -81,6 +75,8 @@
                                     <td>{{ $item->status == 1 ? trans('app.enabled') : trans('app.disabled') }}</td>
                                 </tr>
                             @endforeach
+                        @else
+                            <tr><td colspan="6" align="center">@lang('app.there_is_no_data')</td></tr>
                         @endif
                         </tbody>
                     </table>

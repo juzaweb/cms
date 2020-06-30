@@ -11,7 +11,7 @@ class Index extends Component
     use WithPagination;
     
     public $search;
-    public $status;
+    public $status = 1;
     public $ids = [];
     protected $updatesQueryString = ['search', 'status'];
     
@@ -22,6 +22,10 @@ class Index extends Component
     
     public function delete() {
         dd($this->ids);
+    }
+    
+    public function checkAll() {
+    
     }
     
     public function toggleTask($taskId) {

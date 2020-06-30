@@ -35,14 +35,13 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="baseDescription">@lang('app.description')</label>
-                                    <textarea class="form-control" wire:model="description" id="baseDescription" rows="4"></textarea>
+                                    <textarea class="form-control" wire:model="description" id="baseDescription" rows="6"></textarea>
                                     @error('description') <span class="error">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="baseStatus">@lang('app.status')</label>
                                     <select wire:model="status" id="baseStatus" class="form-control">
-                                        <option value="">-- @lang('app.status') --</option>
                                         <option value="1">@lang('app.enabled')</option>
                                         <option value="0">@lang('app.disabled')</option>
                                     </select>
@@ -65,7 +64,7 @@
                             </div>
                         </div>
 
-                        <input type="hidden" wire:model="mid" value="">
+                        <input type="hidden" wire:model="mid">
                 </div>
             </div>
         </form>
