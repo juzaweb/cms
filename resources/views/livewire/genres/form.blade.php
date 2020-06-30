@@ -55,7 +55,7 @@
                         <div class="col-md-4">
                             <div class="form-thumbnail text-center">
                                 <input id="thumbnail" type="hidden" wire:model="thumbnail">
-                                <img src="{{ asset('imgs/default.png') }}" id="holder" class="w-100">
+                                <img src="{{ asset('imgs/thumb-default.png') }}" id="holder" class="w-100">
 
                                 <a href="javascript:void(0)" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-capitalize">
                                     <i class="fa fa-picture-o"></i> @lang('app.choose_image')
