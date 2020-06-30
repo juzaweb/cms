@@ -59,7 +59,6 @@ mix.combine([
     'resources/styles/vendors/bootstrap-show-password/dist/bootstrap-show-password.min.js',
     'resources/styles/vendors/moment/min/moment.min.js',
     'resources/styles/vendors/tempus-dominus-bs4/build/js/tempusdominus-bootstrap-4.min.js',
-    'resources/styles/vendors/fullcalendar/dist/fullcalendar.min.js',
     'resources/styles/vendors/bootstrap-sweetalert/dist/sweetalert.min.js',
     'resources/styles/vendors/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js',
     'resources/styles/vendors/summernote/dist/summernote.min.js',
@@ -77,6 +76,7 @@ mix.combine([
     'resources/styles/components/cui-layout/sidebar/index.js',
     'resources/styles/components/cui-layout/support-chat/index.js',
     'resources/styles/components/cui-layout/topbar/index.js',
+    'resources/styles/js/lazyload.min.js',
     'public/vendor/laravel-filemanager/js/stand-alone-button.js',
     'resources/js/customs.js',
 ], 'public/js/backend.js');

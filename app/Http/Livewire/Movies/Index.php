@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Genres;
+namespace App\Http\Livewire\Movies;
 
-use App\Models\Genres;
+use App\Models\Movies;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -39,7 +39,7 @@ class Index extends Component
     
     public function render()
     {
-        $query = Genres::query();
+        $query = Movies::query();
         if ($this->search) {
             $query->where(function ($builder) {
                 $builder->orWhere('name', 'like', '%'. $this->search .'%');
@@ -53,7 +53,8 @@ class Index extends Component
         
         $query->orderBy('id', 'DESC');
         $items = $query->paginate(10);
-        return view('livewire.genres.index', [
+        
+        return view('livewire.movies.index', [
             'items' => $items
         ]);
     }

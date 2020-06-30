@@ -728,6 +728,10 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    var myLazyLoad = new LazyLoad();
+</script>
+
 @livewireScripts
 </body>
 </html>

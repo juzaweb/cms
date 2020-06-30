@@ -8,5 +8,5 @@ function image_url($path) {
         }
     }
     
-    return asset('imgs/default.png');
+    return asset('imgs/thumb-default.png');
 }

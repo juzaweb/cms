@@ -4,12 +4,12 @@ Breadcrumbs::for('admin', function ($trail) {
     $trail->push(trans('app.home'), route('admin.dashboard'));
 });
 
-Breadcrumbs::for('genres-manager', function ($trail, $genre = null) {
+Breadcrumbs::for('manager', function ($trail, $parent, $model = null) {
     $trail->parent('admin');
-    $trail->push(trans('app.genres'), route('admin.genres'));
-    if ($genre) {
-        if ($genre->name) {
-            $trail->push($genre->name);
+    $trail->push($parent['name'], $parent['url']);
+    if ($model) {
+        if ($model->name) {
+            $trail->push($model->name);
         }
         else {
             $trail->push(trans('app.add_new'));

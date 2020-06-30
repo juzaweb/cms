@@ -4,6 +4,7 @@ return [
     'home' => 'Home',
     'dashboard' => 'Dashboard',
     'movies' => 'Movies',
+    'tv_series' => 'TV Series',
     'genres' => 'Genres',
     'name' => 'Name',
     'thumbnail' => 'Thumbnail',

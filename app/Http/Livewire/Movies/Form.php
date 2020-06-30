@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Countries;
+namespace App\Http\Livewire\Movies;
 
-use App\Models\Countries;
+use App\Models\Genres;
 use Livewire\Component;
 
 class Form extends Component
@@ -12,11 +12,14 @@ class Form extends Component
     public $name;
     public $description;
     public $status;
+    public $thumbnail;
+    public $runtime;
+    public $video_quality;
     
     public function mount($id = null)
     {
         $this->mid = $id;
-        $model = Countries::firstOrNew(['id' => $id]);
+        $model = Genres::firstOrNew(['id' => $id]);
         foreach ($model->getFillable() as $item) {
             $this->{$item} = $model->{$item};
         }
@@ -34,6 +37,7 @@ class Form extends Component
             'name' => 'required|string|max:250',
             'description' => 'nullable|string|max:250',
             'status' => 'required|in:0,1',
+            'thumbnail' => 'nullable|string|max:250',
         ]);
     }
     
@@ -44,17 +48,16 @@ class Form extends Component
     public function save() {
         $this->checkValidate();
         
-        $model = Countries::firstOrNew(['id' => $this->mid]);
+        $model = Genres::firstOrNew(['id' => $this->mid]);
         $model->fill((array) $this);
-        
         $model->save();
     
         session()->flash('message', trans('app.save_successfully'));
-        return redirect()->route('admin.genres');
+        return redirect()->route('admin.movies');
     }
     
     public function render()
     {
-        return view('livewire.countries.form');
+        return view('livewire.movies.form');
     }
 }

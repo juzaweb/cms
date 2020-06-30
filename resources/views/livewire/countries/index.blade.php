@@ -1,19 +1,22 @@
-@section('title', trans('app.genres'))
+@section('title', trans('app.countries'))
 
 <div>
-    {{ Breadcrumbs::render('genres-manager') }}
+    {{ Breadcrumbs::render('manager', [
+        'name' => trans('app.countries'),
+        'url' => route('admin.countries')
+        ]) }}
 
     <div class="cui__utils__content">
         <div class="card">
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.genres')</h5>
+                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.countries')</h5>
                     </div>
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <a href="{{ route('admin.genres.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <a href="{{ route('admin.countries.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                             <button type="button" class="btn btn-danger" wire:click="delete"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
@@ -22,7 +25,7 @@
 
             <div class="card-body">
 
-                @if (session()->has('message'))
+                @if(session()->has('message'))
                     <div class="alert alert-success">
                         <i class="fa fa-check"></i> {{ session('message') }}
                     </div>
@@ -56,7 +59,6 @@
                         <thead>
                             <tr>
                                 <th width="3%"><input type="checkbox" wire:click="checkAll()" value="1"></th>
-                                <th width="10%">@lang('app.thumbnail')</th>
                                 <th>@lang('app.name')</th>
                                 <th width="20%">@lang('app.description')</th>
                                 <th width="15%">@lang('app.created_at')</th>
@@ -68,7 +70,6 @@
                             @foreach($items as $item)
                                 <tr>
                                     <td><input type="checkbox" wire:click="toggleTask({{ $item->id }})" class="checked ids" value="{{ $item->id }}" {{ in_array($item->id, $ids) ? 'checked' : '' }}></td>
-                                    <td><img src="{{ $item->getThumbnail() }}" alt="" class="w-100"></td>
                                     <td><a href="{{ route('admin.genres.edit', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
                                     <td>{{ $item->description }}</td>
                                     <td>{{ $item->created_at->format('H:i m/d/Y') }}</td>
@@ -76,7 +77,7 @@
                                 </tr>
                             @endforeach
                         @else
-                            <tr><td colspan="6" align="center">@lang('app.there_is_no_data')</td></tr>
+                            <tr><td colspan="5" align="center">@lang('app.there_is_no_data')</td></tr>
                         @endif
                         </tbody>
                     </table>

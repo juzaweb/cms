@@ -1,7 +1,10 @@
 @section('title', $title_page)
 
 <div>
-    {{ Breadcrumbs::render('genres-manager', $this) }}
+    {{ Breadcrumbs::render('manager', [
+        'name' => trans('app.countries'),
+        'url' => route('admin.countries')
+    ], $this) }}
 
     <div class="cui__utils__content">
         <form wire:submit.prevent="save">
@@ -15,7 +18,7 @@
                         <div class="col-md-6">
                             <div class="btn-group float-right">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                                <a href="{{ route('admin.genres') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                                <a href="{{ route('admin.countries') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
                             </div>
                         </div>
                     </div>
@@ -24,7 +27,7 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-form-label" for="baseName">@lang('app.name')</label>
 
@@ -47,20 +50,6 @@
                                 </select>
                                 @error('status') <span class="error">{{ $message }}</span> @enderror
                             </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-thumbnail text-center">
-                                <input id="thumbnail" type="hidden" wire:model="thumbnail">
-                                <img src="{{ asset('imgs/default.png') }}" id="holder" class="w-100">
-
-                                <a href="javascript:void(0)" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                                    <i class="fa fa-picture-o"></i> @lang('app.choose_image')
-                                </a>
-
-                                @error('thumbnail') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-
                         </div>
                     </div>
 

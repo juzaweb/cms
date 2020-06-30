@@ -2,8 +2,8 @@
 
 <div>
     {{ Breadcrumbs::render('manager', [
-            'name' => trans('app.genres'),
-            'url' => route('admin.genres')
+            'name' => trans('app.movies'),
+            'url' => route('admin.movies')
         ], $this) }}
 
     <div class="cui__utils__content">
@@ -18,7 +18,7 @@
                         <div class="col-md-6">
                             <div class="btn-group float-right">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                                <a href="{{ route('admin.genres') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                                <a href="{{ route('admin.movies') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
                             </div>
                         </div>
                     </div>

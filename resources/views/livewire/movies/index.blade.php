@@ -1,9 +1,9 @@
-@section('title', trans('app.genres'))
+@section('title', trans('app.movies'))
 
-<div>
+<div xmlns:wire="http://www.w3.org/1999/xhtml">
     {{ Breadcrumbs::render('manager', [
-            'name' => trans('app.genres'),
-            'url' => route('admin.genres')
+            'name' => trans('app.movies'),
+            'url' => route('admin.movies')
         ]) }}
 
     <div class="cui__utils__content">
@@ -11,13 +11,13 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.genres')</h5>
+                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.movies')</h5>
                     </div>
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <a href="{{ route('admin.genres.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
-                            <button type="button" class="btn btn-danger" wire:click="delete"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                            <a href="{{ route('admin.movies.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <button class="btn btn-danger" type="button" wire:click="delete"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
 
             <div class="card-body">
 
-                @if (session()->has('message'))
+                @if(session()->has('message'))
                     <div class="alert alert-success">
                         <i class="fa fa-check"></i> {{ session('message') }}
                     </div>
@@ -71,8 +71,8 @@
                             @foreach($items as $item)
                                 <tr>
                                     <td><input type="checkbox" wire:click="toggleTask({{ $item->id }})" class="checked ids" value="{{ $item->id }}" {{ in_array($item->id, $ids) ? 'checked' : '' }}></td>
-                                    <td><img src="{{ asset('imgs/thumb-default.png') }}" data-src="{{ $item->getThumbnail() }}" alt="" class="w-100 lazy"></td>
-                                    <td><a href="{{ route('admin.genres.edit', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
+                                    <td><img src="{{ asset('imgs/default.png') }}" alt="" class="w-100 lazy" data-src="{{ $item->getThumbnail() }}"></td>
+                                    <td><a href="{{ route('admin.movies.edit', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
                                     <td>{{ $item->description }}</td>
                                     <td>{{ $item->created_at->format('H:i m/d/Y') }}</td>
                                     <td>{{ $item->status == 1 ? trans('app.enabled') : trans('app.disabled') }}</td>

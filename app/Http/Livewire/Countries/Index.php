@@ -50,8 +50,10 @@ class Index extends Component
         if (!is_null($this->status)) {
             $query->where('status', '=', $this->status);
         }
-        
+    
+        $query->orderBy('id', 'DESC');
         $items = $query->paginate(10);
+        
         return view('livewire.countries.index', [
             'items' => $items
         ]);
