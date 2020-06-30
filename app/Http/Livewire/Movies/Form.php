@@ -50,6 +50,12 @@ class Form extends Component
         
         $model = Genres::firstOrNew(['id' => $this->mid]);
         $model->fill((array) $this);
+        $model->createSlug();
+        
+        if ($this->thumbnail) {
+            $model->thumbnail = explode('filemanager')[1];
+        }
+        
         $model->save();
     
         session()->flash('message', trans('app.save_successfully'));

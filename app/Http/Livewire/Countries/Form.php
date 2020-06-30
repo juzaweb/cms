@@ -46,7 +46,7 @@ class Form extends Component
         
         $model = Countries::firstOrNew(['id' => $this->mid]);
         $model->fill((array) $this);
-        
+        $model->createSlug();
         $model->save();
     
         session()->flash('message', trans('app.save_successfully'));

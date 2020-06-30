@@ -59,7 +59,7 @@ return [
         ],
         'image' => [
             'folder_name'  => 'photos',
-            'startup_view' => 'list',
+            'startup_view' => 'grid',
             'max_size'     => 50000, // size in KB
             'valid_mime'   => [
                 'image/jpeg',
@@ -89,7 +89,7 @@ return [
     |--------------------------------------------------------------------------
      */
 
-    'disk'                     => 'storage/uploads',
+    'disk'                     => 'uploads',
 
     'rename_file'              => false,
 
@@ -113,7 +113,7 @@ return [
      */
 
     // If true, image thumbnails would be created during upload
-    'should_create_thumbnails' => true,
+    'should_create_thumbnails' => false,
 
     'thumb_folder_name'        => 'thumbs',
 
