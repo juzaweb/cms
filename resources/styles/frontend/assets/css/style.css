@@ -1,16 +1,3 @@
-/*!
- Theme Name:   HaLimMovie Child
- Theme URI:    http://halimthemes.com
- Description:  HaLimMovie - Premium Wordpress Movie Theme
- Author:       HoangHa
- Author URI:   http://halimthemes.com
- Template:     halimmovies
- Version:      5.4.2
- Tags:         dark, two-columns, multi-sidebar, responsive-layout, accessibility-ready
- Text Domain:  halimthemes
-*/
-
-@import 'resources/styles/frontend/style.css';
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 body {
     font-family: "Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -46,6 +33,47 @@ ul#f-menu li a {
 .fcategory h2 {
     color: #fff;
     font-size: 18px;
+}
+
+.float-ck {
+    position: fixed;
+    bottom: 0;
+    z-index: 9000;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+* html .float-ck {
+    position: absolute;
+    bottom: auto;
+}
+
+#float_content_left {
+    border: 1px solid #01AEF0;
+}
+
+#hide_float_left {
+    text-align: right;
+    font-size: 11px;
+    position: absolute;
+    top: 0px;
+    right: 0;
+}
+
+#hide_float_left a {
+    background: #01AEF0;
+    padding: 4px 7px;
+    color: #FFF;
+    display: block;
+}
+
+#float_content_left img {
+    width: 580px;
+    height: 90px;
+}
+
+#float_content_left a {
+    display: block;
 }
 
 @media screen and (min-width: 1024px){

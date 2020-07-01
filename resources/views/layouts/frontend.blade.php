@@ -6,7 +6,6 @@
     <meta name="theme-color" content="#234556">
     <meta name="msapplication-navbutton-color" content="#234556">
     <meta name="apple-mobile-web-app-status-bar-style" content="#234556">
-    <link rel="apple-touch-icon" sizes="152x152" href=""/>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
 
     <title>XemPhimPlus | Phim Hay | Phim Mới</title>
@@ -17,25 +16,20 @@
     <link rel="canonical" href="/"/>
     <link rel="next" href="/page/2"/>
     <meta property="og:locale" content="vi_VN"/>
-    <meta property="og:title" content="XemPhimPlus | Phim Hay | Phim Mới"/>
-    <meta property="og:description" content="Xem phim online miễn phí chất lượng cao. Xem phim Full HD Vietsub, Thuyết minh, Lồng tiếng. Xem phim hay, phim mới nhanh và hot nhất 2020"/>
+    <meta property="og:title" content=""/>
+    <meta property="og:description" content=""/>
     <meta property="og:url" content="/"/>
-    <meta property="og:site_name" content="XemPhimPlus | Phim Hay | Phim Mới"/>
+    <meta property="og:site_name" content=""/>
     <meta property="fb:app_id" content="2401456150086560"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:site" content="@XemPhimPlus"/>
 
-    <meta name="msvalidate.01" content="E418CD891F8A0EF369D03551D100FBEE"/>
-    <meta name="google-site-verification" content="FHhZvBzkQC2YlkrkDPerF8-7ZzqF_4uJDu72hBSQEBI"/>
-    <meta name="yandex-verification" content="8c5a988058ff4f3b"/>
-    <!-- / Yoast SEO Premium plugin. -->
-
     <meta property="fb:app_id" content="2401456150086560"/>
     <meta name="csrf-token" content="{{ csrf_token()  }}">
-    <link rel='stylesheet' href="{{ asset('css/frontend.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/frontend.css') }}"/>
 
-    <script type='text/javascript' src="{{ asset('js/app.js') }}"></script>
-    <script type='text/javascript' src="{{ asset('js/frontend.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/frontend.js') }}"></script>
 
     <!-- Google Analytics -->
 
@@ -423,28 +417,7 @@
     </div>
 </div>
 @include('frontend.partials.footer')
-<div id='easy-top'></div>
-<script>
-    jQuery('body').append('<div id="fb-root"></div>');
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '2401456150086560', cookie: true, xfbml: true, version: 'v3.0'
-        });
-    };
-    _loadFbSDk = function () {
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "/connect.facebook.net/vi_VN_VN/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    }
-    jQuery(window).load(function () {
-        setTimeout("_loadFbSDk()", 100);
-    });
-</script>
+
 <!-- <div  class="hidemobile" style="position: fixed; top: 0px; left: 0px; z-index: 999999">
 <a href="/link/floatleft.html" rel="nofollow" target="_blank">
     <img src="banner/lixi88.gif" alt="Quảng cáo" class="img-fluid" width="100px">
@@ -463,48 +436,6 @@
         }
     }
 </script>
-<style>
-    .float-ck {
-        position: fixed;
-        bottom: 0;
-        z-index: 9000;
-        left: 50%;
-        transform: translate(-50%, 0%);
-    }
-
-    * html .float-ck {
-        position: absolute;
-        bottom: auto;
-    }
-
-    #float_content_left {
-        border: 1px solid #01AEF0;
-    }
-
-    #hide_float_left {
-        text-align: right;
-        font-size: 11px;
-        position: absolute;
-        top: 0px;
-        right: 0;
-    }
-
-    #hide_float_left a {
-        background: #01AEF0;
-        padding: 4px 7px;
-        color: #FFF;
-        display: block
-    }
-
-    #float_content_left img {
-        width: 580px;
-        height: 90px;
-    }
-
-    #float_content_left a {
-        display: block;
-    }
-</style>
 <div class="float-ck hidemobile">
     <div id="hide_float_left">
         <a href="javascript:hide_float_left()">[X]</a></div>
@@ -514,75 +445,6 @@
         <!-- End quang cao -->
     </div>
 </div>
-
-<script type='text/javascript'>
-    /* <![CDATA[ */
-    var halim = {
-        "ajax_url": "http:\/\/xemphimplus.net\/wp-content\/themes\/halimmovies\/halim-ajax.php",
-        "light_mode": "0",
-        "light_mode_btn": "1",
-        "ajax_live_search": "1",
-        "sync": null,
-        "db_redirect_url": "http:\/\/xemphimplus.net\/"
-    };
-    /* ]]> */
-</script>
-<script type='text/javascript'>
-    /* <![CDATA[ */
-    var ajax_auth_object = {
-        "ajaxurl": "http:\/\/xemphimplus.net\/wp-content\/themes\/halimmovies\/halim-ajax.php",
-        "redirecturl": "http:\/\/xemphimplus.net",
-        "loadingmessage": "Sending user info, please wait...",
-        "sitekey": "6LfmlNAUAAAAAAXvPEz3vm6s8o9Q_C7M2VSJ0B2n",
-        "languages": {
-            "login": "\u0110\u0103ng nh\u1eadp",
-            "register": "\u0110\u0103ng k\u00fd",
-            "forgotpassword": "B\u1ea1n qu\u00ean m\u1eadt kh\u1ea9u?",
-            "already_account": "Already have an account?",
-            "create_account": "Create account",
-            "reset_captcha": "Reset captcha",
-            "username": "T\u00ean ng\u01b0\u1eddi d\u00f9ng",
-            "email": "Email",
-            "username_email": "Username or Email",
-            "password": "M\u1eadt kh\u1ea9u",
-            "reset_password": "Thi\u1ebft l\u1eadp l\u1ea1i m\u1eadt kh\u1ea9u",
-            "login_with": "\u0110\u0103ng nh\u1eadp b\u1eb1ng",
-            "register_with": "Register with",
-            "or": "or"
-        }
-    };
-    /* ]]> */
-</script>
-<script>var halim_ajax_login = {
-        "twitter_login_url": "http:\/\/xemphimplus.net\/wp-login.php?apsl_login_id=twitter_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg==",
-        "facebook_login_url": "http:\/\/xemphimplus.net\/wp-login.php?apsl_login_id=facebook_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg==",
-        "google_login_url": "http:\/\/xemphimplus.net\/wp-login.php?apsl_login_id=google_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg=="
-    }</script>
-<!-- Start Alexa Certify Javascript -->
-{{--<script type="text/javascript">--}}
-{{--    _atrk_opts = { atrk_acct:"BsAzt1Y1Mn20Io", domain:"xemphimplus.net",dynamic: true};--}}
-{{--    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();--}}
-{{--</script>--}}
-{{--<noscript><img src="https://certify.alexametrics.com/atrk.gif?account=BsAzt1Y1Mn20Io" style="display:none" height="1" width="1" alt="" /></noscript>--}}
-<!-- End Alexa Certify Javascript -->
-
-<!-- Facebook Pixel Code -->
-<script>
-    // !function(f,b,e,v,n,t,s)
-    // {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    //     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    //     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    //     n.queue=[];t=b.createElement(e);t.async=!0;
-    //     t.src=v;s=b.getElementsByTagName(e)[0];
-    //     s.parentNode.insertBefore(t,s)}(window, document,'script',
-    //     'https://connect.facebook.net/en_US/fbevents.js');
-    // fbq('init', '738779136606814');
-    // fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-               src="https://www.facebook.com/tr?id=738779136606814&ev=PageView&noscript=1"
-    /></noscript>
-<!-- End Facebook Pixel Code -->
 
 </body>
 </html>
