@@ -15,8 +15,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/backend.js') }}"></script>
 
-    @livewireStyles
-    <!-- PRELOADER STYLES-->
 </head>
 
 <body class="cui__layout--cardsShadow cui__menuLeft--dark">
@@ -734,6 +732,5 @@
     });
 </script>
 
-@livewireScripts
 </body>
 </html>

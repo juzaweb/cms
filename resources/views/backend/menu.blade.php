@@ -6,7 +6,7 @@
         </a>
     </li>
 
-    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+    {{--<li class="cui__menuLeft__item cui__menuLeft__submenu">
       <span class="cui__menuLeft__item__link">
         <span class="cui__menuLeft__item__title">@lang('app.movies')</span>
         <i class="cui__menuLeft__item__icon fe fe-pie-chart"></i>
@@ -42,7 +42,7 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li>--}}
 
     <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link" href="{{ route('admin.genres') }}">
@@ -51,7 +51,7 @@
         </a>
     </li>
 
-    <li class="cui__menuLeft__item">
+    {{--<li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link" href="{{ route('admin.countries') }}">
             <span class="cui__menuLeft__item__title">@lang('app.countries')</span>
             <i class="cui__menuLeft__item__icon fe fe-feather"></i>
@@ -63,5 +63,5 @@
             <span class="cui__menuLeft__item__title">@lang('app.stars')</span>
             <i class="cui__menuLeft__item__icon fe fe-feather"></i>
         </a>
-    </li>
+    </li>--}}
 </ul>

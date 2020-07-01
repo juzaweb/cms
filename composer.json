@@ -14,7 +14,6 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "livewire/livewire": "^1.2",
         "nwidart/laravel-modules": "^6.2",
         "spatie/laravel-permission": "^3.10",
         "unisharp/laravel-filemanager": "^2.1"
