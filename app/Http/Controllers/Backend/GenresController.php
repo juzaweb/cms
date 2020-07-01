@@ -12,14 +12,45 @@ class GenresController extends Controller
         return view('backend.genres.index');
     }
     
-    public function getData() {
+    public function getData(Request $request) {
+        $search = $request->input('search');
+        $sort = $request->input('sort', 'a.id');
+        $order = $request->input('order', 'desc');
+        $offset = $request->input('offset', 0);
+        $limit = $request->input('limit', 20);
     
+        $query = Genres::query();
+    
+        if ($search) {
+            $query->where(function ($subquery) use ($search) {
+                $subquery->orWhere('name', 'like', '%'. $search .'%');
+                $subquery->orWhere('description', 'like', '%'. $search .'%');
+            });
+        }
+    
+        $count = $query->count();
+        $query->orderBy($sort, $order);
+        $query->offset($offset);
+        $query->limit($limit);
+        $rows = $query->get();
+    
+        foreach ($rows as $row) {
+            $row->thumb_url = $row->getThumbnail();
+            $row->created = $row->created_at->format('H:i d/m/Y');
+            $row->edit_url = route('admin.genres.edit', ['id' => $row->id]);
+        }
+    
+        return response()->json([
+            'total' => $count,
+            'rows' => $rows
+        ]);
     }
     
     public function form($id = null) {
         $model = Genres::firstOrNew(['id' => $id]);
         return view('backend.genres.form', [
-            'model' => $model
+            'model' => $model,
+            'title' => $model->name ?: trans('app.add_new')
         ]);
     }
     
@@ -37,7 +68,7 @@ class GenresController extends Controller
         return redirect()->route('admin.genres');
     }
     
-    public function delete() {
+    public function remove() {
     
     }
 }

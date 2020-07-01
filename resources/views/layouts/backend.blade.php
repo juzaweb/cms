@@ -729,8 +729,15 @@
 <script type="text/javascript">
     $(document).on("turbolinks:load", function() {
         var myLazyLoad = new LazyLoad();
+
     });
 </script>
+<script type="text/javascript">
+    $.extend( $.validator.messages, {
+        required: "{{ trans('app.this_field_is_required') }}",
+    } );
 
+    $(".form-ajax").validate();
+</script>
 </body>
 </html>

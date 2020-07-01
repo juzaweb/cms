@@ -28,6 +28,7 @@ mix.styles([
     'resources/styles/components/cui-layout/sidebar/style.css',
     'resources/styles/components/cui-layout/support-chat/style.css',
     'resources/styles/components/cui-layout/topbar/style.css',
+    'resources/styles/css/customs.css',
 ], 'public/css/backend.css');
 
 mix.combine([
@@ -36,6 +37,7 @@ mix.combine([
     'resources/styles/vendors/jquery-ui/jquery-ui.min.js',
     'resources/styles/vendors/bootstrap/dist/js/bootstrap.js',
     'resources/styles/vendors/select2/dist/js/select2.full.min.js',
+    'resources/styles/vendors/jquery-validation/jquery.validate.min.js',
     'resources/styles/vendors/bootstrap-table/bootstrap-table.min.js',
     'resources/styles/vendors/bootstrap-table/LoadBootstrapTable.js',
     'resources/styles/components/cui-layout/menu-left/index.js',

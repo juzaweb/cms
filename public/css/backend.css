@@ -16090,3 +16090,7 @@ body.cui__layout--grayBackground .cui__crypto__list__item {
 [data-kit-theme='dark'] .cui__topbar__favs__link:hover {
     background: #141322;
 }
+
+.error {
+    color: red;
+}

@@ -23,6 +23,10 @@ Route::group(['prefix' => 'admin/genres', 'middleware' => ['web', 'admin']], fun
     Route::get('/create', 'Backend\GenresController@form')->name('admin.genres.create');
 
     Route::get('/edit/{id}', 'Backend\GenresController@form')->name('admin.genres.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\GenresController@save')->name('admin.genres.save');
+    
+    Route::post('/remove', 'Backend\GenresController@remove')->name('admin.genres.remove');
 });
 
 //Route::group(['prefix' => 'admin/countries', 'middleware' => ['web', 'admin']], function () {
