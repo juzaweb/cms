@@ -12,8 +12,15 @@ class GenresController extends Controller
         return view('backend.genres.index');
     }
     
+    public function getData() {
+    
+    }
+    
     public function form($id = null) {
-        return view('backend.genres.form');
+        $model = Genres::firstOrNew(['id' => $id]);
+        return view('backend.genres.form', [
+            'model' => $model
+        ]);
     }
     
     public function save(Request $request) {

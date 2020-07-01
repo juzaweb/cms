@@ -29,7 +29,7 @@
 
             <div class="row mb-3">
                 <div class="col-md-12">
-                    <form method="get" class="form-inline" action="">
+                    <form method="get" class="form-inline" id="form-search">
 
                         <div class="form-group mb-2 mr-1">
                             <label for="inputName" class="sr-only">@lang('app.search')</label>
@@ -51,7 +51,7 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table">
+                <table class="table bootstrap-table">
                     <thead>
                         <tr>
                             <th width="3%"><input type="checkbox" wire:click="checkAll()" value="1"></th>
@@ -67,4 +67,10 @@
         </div>
     </div>
 </div>
+
+    <script type="text/javascript">
+        var table = new LoadBootstrapTable({
+            'url': '{{ route('admin.genres.getdata') }}',
+        });
+    </script>
 @endsection

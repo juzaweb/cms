@@ -17,7 +17,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function (
 
 Route::group(['prefix' => 'admin/genres', 'middleware' => ['web', 'admin']], function () {
     Route::get('/', 'Backend\GenresController@index')->name('admin.genres');
-
+    
+    Route::get('/getdata', 'Backend\GenresController@getData')->name('admin.genres.getdata');
+    
     Route::get('/create', 'Backend\GenresController@form')->name('admin.genres.create');
 
     Route::get('/edit/{id}', 'Backend\GenresController@form')->name('admin.genres.edit')->where('id', '[0-9]+');
