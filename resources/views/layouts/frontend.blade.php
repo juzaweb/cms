@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi-VN">
 <head>
-
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#234556">
     <meta name="msapplication-navbutton-color" content="#234556">
     <meta name="apple-mobile-web-app-status-bar-style" content="#234556">
     <link rel="apple-touch-icon" sizes="152x152" href=""/>
-    <link rel="shortcut icon" href="{{ asset('uploads/2019/05/favicon.png') }}" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
 
-    <!-- This site is optimized with the Yoast SEO Premium plugin v14.0.4 - https://yoast.com/wordpress/plugins/seo/ -->
     <title>XemPhimPlus | Phim Hay | Phim Mới</title>
-    <meta name="description"
-          content="Xem phim online miễn phí chất lượng cao. Xem phim Full HD Vietsub, Thuyết minh, Lồng tiếng. Xem phim hay, phim mới nhanh và hot nhất 2020"/>
+    <meta name="description" content=""/>
     <meta name="robots" content="index, follow"/>
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
@@ -21,54 +18,29 @@
     <link rel="next" href="/page/2"/>
     <meta property="og:locale" content="vi_VN"/>
     <meta property="og:title" content="XemPhimPlus | Phim Hay | Phim Mới"/>
-    <meta property="og:description"
-          content="Xem phim online miễn phí chất lượng cao. Xem phim Full HD Vietsub, Thuyết minh, Lồng tiếng. Xem phim hay, phim mới nhanh và hot nhất 2020"/>
+    <meta property="og:description" content="Xem phim online miễn phí chất lượng cao. Xem phim Full HD Vietsub, Thuyết minh, Lồng tiếng. Xem phim hay, phim mới nhanh và hot nhất 2020"/>
     <meta property="og:url" content="/"/>
     <meta property="og:site_name" content="XemPhimPlus | Phim Hay | Phim Mới"/>
     <meta property="fb:app_id" content="2401456150086560"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:site" content="@XemPhimPlus"/>
-    <script type="application/ld+json" class="yoast-schema-graph">
-        {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"/#organization","name":"XemPhimPlus","url":"/","sameAs":["https://www.facebook.com/GalaPhimPage/","https://vn.linkedin.com/xemphimplus","https://myspace.com/xemphimplus","https://www.youtube.com/channel/UCZGvgvQcFNVrwgRcNKYNfkQ","https://pinterest.co.uk/XemPhimPlusOnline/","https://en.wikipedia.org/wiki/Phim","https://twitter.com/XemPhimPlus"],"logo":{"@type":"ImageObject","@id":"/#logo","inLanguage":"vi-VN","url":"wp-content/uploads/2019/05/logo-xemphimplus.png","width":361,"height":63,"caption":"XemPhimPlus"},"image":{"@id":"/#logo"}},{"@type":"WebSite","@id":"/#website","url":"/","name":"XemPhimPlus | Phim Hay | Phim M\u1edbi","description":"Trang web xem phim online mi\u1ec5n ph\u00ed d\u00e0nh co c\u00e1c t\u00edn \u0111\u1ed3 y\u00eau phim","publisher":{"@id":"/#organization"},"potentialAction":[{"@type":"SearchAction","target":"/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"vi-VN"},{"@type":"CollectionPage","@id":"/#webpage","url":"/","name":"XemPhimPlus | Phim Hay | Phim M\u1edbi","isPartOf":{"@id":"/#website"},"about":{"@id":"/#organization"},"description":"Xem phim online mi\u1ec5n ph\u00ed ch\u1ea5t l\u01b0\u1ee3ng cao. Xem phim Full HD Vietsub, Thuy\u1ebft minh, L\u1ed3ng ti\u1ebfng. Xem phim hay, phim m\u1edbi nhanh v\u00e0 hot nh\u1ea5t 2020","inLanguage":"vi-VN"}]}
 
-    </script>
     <meta name="msvalidate.01" content="E418CD891F8A0EF369D03551D100FBEE"/>
     <meta name="google-site-verification" content="FHhZvBzkQC2YlkrkDPerF8-7ZzqF_4uJDu72hBSQEBI"/>
     <meta name="yandex-verification" content="8c5a988058ff4f3b"/>
     <!-- / Yoast SEO Premium plugin. -->
 
-
-    <link rel='dns-prefetch' href='//s.w.org'/>
     <meta property="fb:app_id" content="2401456150086560"/>
     <meta name="csrf-token" content="{{ csrf_token()  }}">
-    <link rel='stylesheet' id='bootstrap-css' href='{{ asset('css/app.css') }}' media='all'/>
-    <script type='text/javascript' src='{{ asset('js/app.js') }}'></script>
-    {{--    <link rel='stylesheet' id='halimmovies-style-css'  href='wp-content/themes/halimmovies-child/style.css?ver=5.4.2' media='all' />--}}
-    {{--    <script type='text/javascript' src='wp-includes/js/jquery/jquery.js'></script>--}}
-    <link rel='https://api.w.org/' href='/wp-json/'/>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    {{--    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-103576265-6"></script>--}}
-    <script>
-        // window.dataLayer = window.dataLayer || [];
-        // function gtag(){dataLayer.push(arguments);}
-        // gtag('js', new Date());
+    <link rel='stylesheet' href="{{ asset('css/frontend.css') }}"/>
 
-        // gtag('config', 'UA-103576265-6');
-    </script>
-
+    <script type='text/javascript' src="{{ asset('js/app.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/frontend.js') }}"></script>
 
     <!-- Google Analytics -->
-{{--    <script>--}}
-{{--        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){--}}
-{{--            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),--}}
-{{--            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)--}}
-{{--        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');--}}
-{{--        ga('create', 'UA-103576265-6', 'auto');--}}
-{{--        ga('send', 'pageview');--}}
-{{--        ga('create', 'UA-103576265-9', 'auto', 'clientTracker');--}}
-{{--        ga('clientTracker.send', 'pageview');--}}
-{{--    </script>--}}
-<!-- End Google Analytics -->
+
+    <!-- End Google Analytics -->
+
     <style>
         /*style 2*/
         .halim-post-title-box {
@@ -96,35 +68,20 @@
         }
     </style>
 
-    <script type="application/ld+json">
-        {"@context":"http://schema.org","@type":"TVSeries","name":"Bạn Gái 99 Điểm","dateModified":"2020-06-18T15:06:48+07:00","dateCreated":"2020-06-18T14:55:38+07:00","url":"http://xemphimplus.net","datePublished":"2020-06-18T14:55:38+07:00","aggregateRating":{"@type":"AggregateRating","bestRating":"5","worstRating":"2","ratingValue":5,"reviewCount":3},"image":"wp-content/uploads/2020/06/ban-gai-99-diem-21564-thumbnail.jpg","director":"HaLim"}
-
-    </script>
     <link rel="icon" href="{{ asset('uploads/2019/05/favicon.png') }}" sizes="32x32"/>
     <link rel="icon" href="{{ asset('uploads/2019/05/favicon.png') }}" sizes="192x192"/>
     <link rel="apple-touch-icon-precomposed" href="{{ asset('uploads/2019/05/favicon.png') }}"/>
     <meta name="msapplication-TileImage" content="{{ asset('uploads/2019/05/favicon.png') }}"/>
-    <script>
-        // (function() {
-        //     var script = document.createElement('script');
-        //     script.src = 'https://api.trackpush.com/sdk/inpage/v1.js?pid=C7ClcNVSU6nVMkYA%2B7jmcA%3D%3D';
-        //     script.async = true;
-        //     script.onload = function () {
-        //         InPagePushSDK.init({"content_type":"all","time_to_show":"onload","delay_show":0,"max_ads":3,"max_showing":2,"max_showing_mobile":1,"ads_interval":5,"closeable":"1","position":"top","mobile_position":"top"});
-        //
-        //     }
-        //     document.head.append(script);
-        // })();
-    </script>
 
-    <style>#header .site-title {
+    <style>
+        #header .site-title {
             background: url({{ asset('uploads/2019/05/logo-xemphimplus.png') }}) no-repeat top left;
             background-size: contain;
             text-indent: -9999px;
-        }</style>
+        }
+    </style>
 </head>
-<body class="home blog wp-embed-responsive halimthemes halimmovies halim-corner-rounded" data-masonry=""
-      data-nonce="9d27ce22e4">
+<body class="home blog wp-embed-responsive halimthemes halimmovies halim-corner-rounded" data-masonry="" data-nonce="9d27ce22e4">
 
 @include('frontend.partials.header')
 @include('frontend.partials.menu')

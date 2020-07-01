@@ -85,7 +85,7 @@ mix.styles([
     'resources/styles/frontend/style.css',
     'resources/styles/frontend/assets/css/bootstrap.min.css',
     'resources/styles/frontend/assets/css/style.css'
-],'public/css/app.css');
+], 'public/css/frontend.css');
 
 mix.combine([
     'resources/styles/frontend/assets/js/jquery.js',
@@ -96,7 +96,7 @@ mix.combine([
     'resources/styles/frontend/assets/js/ajax-auth-script.min.js',
     'resources/styles/frontend/player/assets/js/jwplayer-8.9.3.js',
     'resources/styles/frontend/player/assets/js/player.min.js'
-],'public/js/app.js');
+],'public/js/frontend.js');
 
 mix.copyDirectory('resources/styles/frontend/assets/images', 'public/images');
 mix.copyDirectory('resources/styles/frontend/assets/font', 'public/font');

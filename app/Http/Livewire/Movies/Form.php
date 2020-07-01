@@ -53,7 +53,7 @@ class Form extends Component
         $model->createSlug();
         
         if ($this->thumbnail) {
-            $model->thumbnail = explode('filemanager')[1];
+            $model->thumbnail = @explode('filemanager', $this->thumbnail)[1];
         }
         
         $model->save();
