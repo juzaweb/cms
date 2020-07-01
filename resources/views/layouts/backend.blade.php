@@ -729,7 +729,9 @@
 </div>
 
 <script type="text/javascript">
-    var myLazyLoad = new LazyLoad();
+    $(document).on("turbolinks:load", function() {
+        var myLazyLoad = new LazyLoad();
+    });
 </script>
 
 @livewireScripts

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Movies;
 
-use App\Models\Genres;
+use App\Models\Movies;
 use Livewire\Component;
 
 class Form extends Component
@@ -19,7 +19,7 @@ class Form extends Component
     public function mount($id = null)
     {
         $this->mid = $id;
-        $model = Genres::firstOrNew(['id' => $id]);
+        $model = Movies::firstOrNew(['id' => $id]);
         foreach ($model->getFillable() as $item) {
             $this->{$item} = $model->{$item};
         }
@@ -48,7 +48,7 @@ class Form extends Component
     public function save() {
         $this->checkValidate();
         
-        $model = Genres::firstOrNew(['id' => $this->mid]);
+        $model = Movies::firstOrNew(['id' => $this->mid]);
         $model->fill((array) $this);
         $model->createSlug();
         

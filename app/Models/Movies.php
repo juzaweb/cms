@@ -54,6 +54,12 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereVideoQuality($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereWriters($value)
  * @mixin \Eloquent
+ * @property string $name
+ * @property string|null $name_en
+ * @property string|null $thumbnail
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereThumbnail($value)
  */
 class Movies extends Model
 {

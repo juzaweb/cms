@@ -24,6 +24,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Countries whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Countries whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $description
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Countries whereDescription($value)
  */
 class Countries extends Model
 {

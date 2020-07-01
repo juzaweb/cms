@@ -2,15 +2,16 @@
 
 use Illuminate\Database\Seeder;
 
-class GenresSeeder extends Seeder
+class MoviesSeeder extends Seeder
 {
     public function run()
     {
         $faker = Faker\Factory::create();
-        foreach (range(1, 20) as $row) {
+        foreach (range(1, 50) as $row) {
             $name = $faker->name;
-            DB::table('genres')->insert([
+            DB::table('movies')->insert([
                 'name' => $name,
+                'name_en' => $faker->name,
                 'slug' => \Illuminate\Support\Str::slug($name),
                 'status' => 1,
                 'created_at' => $faker->dateTime(),
