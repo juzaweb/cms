@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>search</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="search">
+            <g id="Group-Copy-4">
+                <path d="M17.8929126,16.4786991 C18.5903306,15.4982449 19,14.2980382 19,13 C19,9.68 16.32,7 13,7 C9.68,7 7,9.68 7,13 C7,16.32 9.68,19 13,19 C14.2980382,19 15.4982449,18.5903306 16.4786991,17.8929126 L20.4142136,21.8284271 L21.8284271,20.4142136 L17.8929126,16.4786991 Z M13,17.5 C10.51,17.5 8.5,15.49 8.5,13 C8.5,10.51 10.51,8.5 13,8.5 C15.49,8.5 17.5,10.51 17.5,13 C17.5,15.49 15.49,17.5 13,17.5 Z" id="Path" fill="#FFFFFF"></path>
+                <rect id="Rectangle-73" x="0" y="0" width="30" height="30"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

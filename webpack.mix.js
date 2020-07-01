@@ -80,3 +80,23 @@ mix.combine([
     'public/vendor/laravel-filemanager/js/stand-alone-button.js',
     'resources/js/customs.js',
 ], 'public/js/backend.js');
+
+mix.styles([
+    'resources/styles/frontend/style.css',
+    'resources/styles/frontend/assets/css/bootstrap.min.css',
+    'resources/styles/frontend/assets/css/style.css'
+],'public/css/app.css');
+
+mix.combine([
+    'resources/styles/frontend/assets/js/jquery.js',
+    'resources/styles/frontend/assets/js/bootstrap.min.js',
+    'resources/styles/frontend/assets/js/core.min.js',
+    'resources/styles/frontend/assets/js/lazysizes.min.js',
+    'resources/styles/frontend/assets/js/owl.carousel.min.js',
+    'resources/styles/frontend/assets/js/ajax-auth-script.min.js',
+    'resources/styles/frontend/player/assets/js/jwplayer-8.9.3.js',
+    'resources/styles/frontend/player/assets/js/player.min.js'
+],'public/js/app.js');
+
+mix.copyDirectory('resources/styles/frontend/assets/images', 'public/images');
+mix.copyDirectory('resources/styles/frontend/assets/font', 'public/font');

@@ -1,0 +1,89 @@
+/*!
+ Theme Name:   HaLimMovie Child
+ Theme URI:    http://halimthemes.com
+ Description:  HaLimMovie - Premium Wordpress Movie Theme
+ Author:       HoangHa
+ Author URI:   http://halimthemes.com
+ Template:     halimmovies
+ Version:      5.4.2
+ Tags:         dark, two-columns, multi-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  halimthemes
+*/
+
+@import 'resources/styles/frontend/style.css';
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+body {
+    font-family: "Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.halim-light-mode-button {
+    display: none;
+}
+.jwplayer .jw-rightclick .jw-rightclick-list .jw-featured .jw-rightclick-link span + span.jw-reset::after{content:''!important;}
+.grid-item img {object-fit: cover;}
+
+.fcategory {
+    background: #151d25;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+ul#f-menu {
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+ul#f-menu li {
+    list-style: none;
+    width: 19.6%;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+ul#f-menu li a {
+    padding: 5px;
+}
+
+.fcategory h2 {
+    color: #fff;
+    font-size: 18px;
+}
+
+@media screen and (min-width: 1024px){
+    /*.hidemobile {
+        display: block;
+    }
+    .hidedesktop {
+        display: none;
+    }*/
+}
+
+@media screen and (max-width: 1024px){
+	ul#f-menu li {
+	    width: 24.5%;
+	}
+    /*.hidedesktop {
+        display: block;
+    }
+    .hidemobile {
+        display: none;
+    }*/
+}
+
+@media screen and (max-width: 768px){
+    ul#f-menu li {
+        width: 32.6%;
+    }
+}
+
+@media screen and (max-width: 480px){
+    ul#f-menu li {
+        width: 49%;
+    }
+}
+
+@media screen and (max-width: 320px){
+    ul#f-menu {
+        display: none;
+	}
+}
+
