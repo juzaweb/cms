@@ -35,7 +35,6 @@ class CountriesController extends Controller
         $rows = $query->get();
         
         foreach ($rows as $row) {
-            $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i d/m/Y');
             $row->edit_url = route('admin.countries.edit', ['id' => $row->id]);
         }

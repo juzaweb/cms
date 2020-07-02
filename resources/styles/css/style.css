@@ -1,7 +1,7 @@
 .form-ajax,
 .is-number,
 .number-format,
-.load-bootstrap-table,
+table.load-bootstrap-table,
 select[data-placeholder],
 th[data-formatter],
 th[data-field],

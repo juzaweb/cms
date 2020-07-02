@@ -33,7 +33,7 @@
 
                             <div class="form-group mb-2 mr-1">
                                 <label for="inputName" class="sr-only">@lang('app.search')</label>
-                                <input name="query" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" wire:model="search" autocomplete="off">
+                                <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
                             </div>
 
                             <div class="form-group mb-2 mr-1">
@@ -51,11 +51,11 @@
                 </div>
 
                 <div class="table-responsive mb-5">
-                    <table class="table">
+                    <table class="table load-bootstrap-table">
                         <thead>
                             <tr>
                                 <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                                <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('app.thumbnail')</th>
+
                                 <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
                                 <th data-width="20%" data-field="description">@lang('app.description')</th>
                                 <th data-width="15%" data-field="created">@lang('app.created_at')</th>
@@ -67,4 +67,22 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function name_formatter(value, row, index) {
+            return '<a href="'+ row.edit_url +'">'+ value +'</a>';
+        }
+
+        function status_formatter(value, row, index) {
+            if (value == 1) {
+                return '@lang('app.enabled')';
+            }
+            return '@lang('app.disabled')';
+        }
+
+        var table = new LoadBootstrapTable({
+            url: '{{ route('admin.countries.getdata') }}',
+            remove_url: '{{ route('admin.countries.remove') }}',
+        });
+    </script>
 @endsection

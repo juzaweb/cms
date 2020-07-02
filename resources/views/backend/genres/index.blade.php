@@ -70,7 +70,7 @@
 
     <script type="text/javascript">
         function thumbnail_formatter(value, row, index) {
-            return '<img src="'+ row.thumb_url +'" class="w-100 lazy">';
+            return '<img src="'+ row.thumb_url +'" class="w-100">';
         }
 
         function name_formatter(value, row, index) {
@@ -83,10 +83,10 @@
             }
             return '@lang('app.disabled')';
         }
-        
+
         var table = new LoadBootstrapTable({
             url: '{{ route('admin.genres.getdata') }}',
-            remove_url: '{{ route('admin.genres.remove') }}'
+            remove_url: '{{ route('admin.genres.remove') }}',
         });
     </script>
 @endsection

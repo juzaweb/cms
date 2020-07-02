@@ -1,3 +1,5 @@
+@extends('layouts.backend')
+
 @section('title', $title)
 
 @section('content')
@@ -7,7 +9,7 @@
 ], $model) }}
 
 <div class="cui__utils__content">
-    <form method="post" action="" class="form-ajax">
+    <form method="post" action="{{ route('admin.countries.save') }}" class="form-ajax">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -31,7 +33,7 @@
                         <div class="form-group">
                             <label class="col-form-label" for="baseName">@lang('app.name')</label>
 
-                            <input type="text" name="name" class="form-control" id="baseName" value="" autocomplete="off" required>
+                            <input type="text" name="name" class="form-control" id="baseName" value="{{ $model->name }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
@@ -42,8 +44,8 @@
                         <div class="form-group">
                             <label class="col-form-label" for="baseStatus">@lang('app.status')</label>
                             <select name="status" id="baseStatus" class="form-control">
-                                <option value="1">@lang('app.enabled')</option>
-                                <option value="0">@lang('app.disabled')</option>
+                                <option value="1" @if($model->status == 1) selected @endif>@lang('app.enabled')</option>
+                                <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
                             </select>
                         </div>
                     </div>

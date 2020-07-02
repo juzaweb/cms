@@ -3,14 +3,14 @@ class LoadBootstrapTable {
     constructor(e) {
         this.url = e.url;
         this.remove_url = e.remove_url;
-        this.remove_question = (e.remove_question) ? e.remove_question: "Are you sure you want to delete the selected items?";
-        this.detete_button = (e.detete_button) ? e.detete_button: "#delete-item";
+        this.remove_question = (e.remove_question) ? e.remove_question : "Are you sure you want to delete the selected items?";
+        this.detete_button = (e.detete_button) ? e.detete_button : "#delete-item";
         this.table = (e.table) ? e.table : '.load-bootstrap-table';
         this.field_id = (e.field_id) ? e.field_id : 'id';
         this.form_search = (e.form_search) ? e.form_search : "#form-search";
         this.sort_name = (e.sort_name) ? e.sort_name : 'id';
         this.sort_order = (e.sort_order) ? e.sort_order : 'desc';
-        this.page_size = (e.page_size) ? e.page_size: 10;
+        this.page_size = (e.page_size) ? e.page_size : 10;
         this.search = (e.search) ? e.search : false;
         this.method = (e.method) ? e.method : 'get';
         this.locale = (e.locale) ? e.locale : 'vi-VN';
@@ -74,7 +74,9 @@ class LoadBootstrapTable {
         });
 
         btn_delete.on('click', function () {
-            let ids = $("input[name=btSelectItem]:checked").map(function(){return $(this).val();}).get();
+            let ids = $("input[name=btSelectItem]:checked").map(function () {
+                return $(this).val();
+            }).get();
             Swal.fire({
                 title: '',
                 text: remove_question,
