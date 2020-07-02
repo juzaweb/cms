@@ -25,4 +25,8 @@ return [
     'stars' => 'Stars',
     'there_is_no_data' => 'There is no data',
     'this_field_is_required' => 'This field is required',
+    'type' => 'Type',
+    'director' => 'Director',
+    'actor' => 'Actor',
+    'writer' => 'Writer',
 ];

@@ -70,12 +70,9 @@ class GenresController extends Controller
         $model = Genres::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
         $model->createSlug();
-    
-        if ($request->thumbnail) {
-            $model->thumbnail = image_path($request->thumbnail);
-        }
-        
+        $model->createThumbnail($request->thumbnail);
         $model->save();
+        
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),

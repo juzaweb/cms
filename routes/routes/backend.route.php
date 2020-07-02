@@ -42,3 +42,17 @@ Route::group(['prefix' => 'admin/countries', 'middleware' => ['web', 'admin']], 
     
     Route::post('/remove', 'Backend\CountriesController@remove')->name('admin.countries.remove');
 });
+
+Route::group(['prefix' => 'admin/stars', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\StarsController@index')->name('admin.stars');
+    
+    Route::get('/getdata', 'Backend\StarsController@getData')->name('admin.stars.getdata');
+    
+    Route::get('/create', 'Backend\StarsController@form')->name('admin.stars.create');
+    
+    Route::get('/edit/{id}', 'Backend\StarsController@form')->name('admin.stars.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\StarsController@save')->name('admin.stars.save');
+    
+    Route::post('/remove', 'Backend\StarsController@remove')->name('admin.stars.remove');
+});

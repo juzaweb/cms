@@ -60,6 +60,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereNameEn($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereThumbnail($value)
+ * @property int $tv_series
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTvSeries($value)
  */
 class Movies extends Model
 {

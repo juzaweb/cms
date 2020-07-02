@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             GenresSeeder::class,
             MoviesSeeder::class,
+            StarsSeeder::class,
         ]);
         
     }

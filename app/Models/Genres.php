@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\UseSlug;
+use App\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 /**
  * App\Models\Genres
@@ -31,6 +32,8 @@ use Illuminate\Support\Str;
  */
 class Genres extends Model
 {
+    use UseThumbnail, UseSlug;
+    
     protected $table = 'genres';
     protected $primaryKey = 'id';
     protected $fillable = [
@@ -39,20 +42,4 @@ class Genres extends Model
         'status'
     ];
     
-    public function createSlug() {
-        if ($this->name) {
-            $this->slug = Str::slug($this->name);
-            $count = self::where('id', '!=', $this->id)
-                ->where('slug', '=', $this->slug)
-                ->count();
-            
-            if ($count > 0) {
-                $this->slug .= '-'. ($count + 1);
-            }
-        }
-    }
-    
-    public function getThumbnail() {
-        return image_url($this->thumbnail);
-    }
 }

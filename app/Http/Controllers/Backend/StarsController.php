@@ -58,6 +58,7 @@ class StarsController extends Controller
         $this->validateRequest([
             'name' => 'required|string|max:250',
             'description' => 'nullable|string|max:300',
+            'type' => 'required|string|in:director,actor,writer',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
         ], $request, [
@@ -70,10 +71,7 @@ class StarsController extends Controller
         $model = Stars::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
         $model->createSlug();
-        
-        if ($request->thumbnail) {
-            $model->thumbnail = explode('storage', $request->thumbnail)[1];
-        }
+        $model->createThumbnail($request->thumbnail);
         $model->save();
         
         return response()->json([

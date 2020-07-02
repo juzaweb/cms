@@ -59,7 +59,7 @@
     </li>
 
     <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link" href="{{ route('admin.genres') }}">
+        <a class="cui__menuLeft__item__link" href="{{ route('admin.stars') }}">
             <span class="cui__menuLeft__item__title">@lang('app.stars')</span>
             <i class="cui__menuLeft__item__icon fe fe-feather"></i>
         </a>

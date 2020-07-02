@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\UseSlug;
+use App\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -21,14 +23,27 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stars whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stars whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $description
+ * @property string|null $thumbnail
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stars whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stars whereThumbnail($value)
+ * @property string $type director/actor/writer
+ * @property int $status
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stars whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stars whereType($value)
  */
 class Stars extends Model
 {
+    use UseThumbnail, UseSlug;
+    
     protected $table = 'stars';
     protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'slug',
-        'description'
+        'description',
+        'type',
+        'status',
     ];
+    
 }
