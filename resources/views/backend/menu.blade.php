@@ -64,4 +64,11 @@
             <i class="cui__menuLeft__item__icon fe fe-feather"></i>
         </a>
     </li>
+
+    <li class="cui__menuLeft__item">
+        <a class="cui__menuLeft__item__link" href="{{ route('admin.pages') }}">
+            <span class="cui__menuLeft__item__title">@lang('app.pages')</span>
+            <i class="cui__menuLeft__item__icon fe fe-feather"></i>
+        </a>
+    </li>
 </ul>

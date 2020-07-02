@@ -11,12 +11,12 @@
     <link rel="icon" type="image/png" href="../../components/kit-core/img/favicon.png" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
 
-    <!-- VENDORS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/backend.css') }}">
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/backend.js') }}"></script>
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
 </head>
 

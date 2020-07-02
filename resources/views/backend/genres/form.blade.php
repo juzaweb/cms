@@ -3,6 +3,7 @@
 @section('title', $title)
 
 @section('content')
+
 {{ Breadcrumbs::render('manager', [
         'name' => trans('app.genres'),
         'url' => route('admin.genres')

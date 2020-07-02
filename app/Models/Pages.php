@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\UseSlug;
+use App\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -25,8 +27,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pages whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pages whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $thumbnail
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pages whereThumbnail($value)
  */
 class Pages extends Model
 {
-    //
+    use UseThumbnail, UseSlug;
+    
+    protected $table = 'pages';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'name',
+        'content',
+        'status',
+    ];
 }

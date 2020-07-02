@@ -9,6 +9,7 @@ return [
     'name' => 'Name',
     'thumbnail' => 'Thumbnail',
     'description' => 'Description',
+    'content' => 'Content',
     'status' => 'Status',
     'search' => 'Search',
     'enabled' => 'Enabled',
@@ -29,4 +30,5 @@ return [
     'director' => 'Director',
     'actor' => 'Actor',
     'writer' => 'Writer',
+    'pages' => 'Pages',
 ];
