@@ -65,7 +65,7 @@
                     </div>
                 </div>
 
-                <input type="hidden" name="mid">
+                <input type="hidden" name="id" value="{{ $model->id }}">
             </div>
         </div>
     </form>

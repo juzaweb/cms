@@ -55,6 +55,18 @@ class GenresController extends Controller
     }
     
     public function save(Request $request) {
+        $this->validateRequest([
+            'name' => 'required|string|max:250',
+            'description' => 'nullable|string|max:300',
+            'status' => 'required|in:0,1',
+            'thumbnail' => 'nullable|string|max:250',
+        ], $request, [
+            'name' => trans('app.name'),
+            'description' => trans('app.description'),
+            'status' => trans('app.status'),
+            'thumbnail' => trans('app.thumbnail'),
+        ]);
+        
         $model = Genres::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
         $model->createSlug();
@@ -64,11 +76,25 @@ class GenresController extends Controller
         }
     
         $model->save();
-        session()->flash('message', trans('app.save_successfully'));
-        return redirect()->route('admin.genres');
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('app.saved_successfully'),
+            'redirect' => route('admin.genres'),
+        ]);
     }
     
-    public function remove() {
-    
+    public function remove(Request $request) {
+        $this->validateRequest([
+            'ids' => 'required',
+        ], $request, [
+            'ids' => trans('app.genres')
+        ]);
+        
+        Genres::destroy($request->ids);
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('app.deleted_successfully'),
+        ]);
     }
 }

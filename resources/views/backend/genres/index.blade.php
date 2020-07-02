@@ -19,7 +19,7 @@
                 <div class="col-md-6">
                     <div class="btn-group float-right">
                         <a href="{{ route('admin.genres.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
-                        <button type="button" class="btn btn-danger" wire:click="delete"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                        <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,8 @@
         }
         
         var table = new LoadBootstrapTable({
-            'url': '{{ route('admin.genres.getdata') }}',
+            url: '{{ route('admin.genres.getdata') }}',
+            remove_url: '{{ route('admin.genres.remove') }}'
         });
     </script>
 @endsection
