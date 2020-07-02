@@ -31,4 +31,6 @@ return [
     'actor' => 'Actor',
     'writer' => 'Writer',
     'pages' => 'Pages',
+    'posts' => 'Posts',
+    'title' => 'Title',
 ];

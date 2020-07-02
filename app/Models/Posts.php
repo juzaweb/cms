@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\UseSlug;
+use App\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -28,5 +30,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Posts extends Model
 {
-    //
+    use UseThumbnail, UseSlug;
+    
+    protected $table = 'posts';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'title',
+        'content',
+        'status'
+    ];
 }

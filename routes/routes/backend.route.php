@@ -43,6 +43,20 @@ Route::group(['prefix' => 'admin/countries', 'middleware' => ['web', 'admin']], 
     Route::post('/remove', 'Backend\CountriesController@remove')->name('admin.countries.remove');
 });
 
+Route::group(['prefix' => 'admin/stars', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\StarsController@index')->name('admin.stars');
+    
+    Route::get('/getdata', 'Backend\StarsController@getData')->name('admin.stars.getdata');
+    
+    Route::get('/create', 'Backend\StarsController@form')->name('admin.stars.create');
+    
+    Route::get('/edit/{id}', 'Backend\StarsController@form')->name('admin.stars.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\StarsController@save')->name('admin.stars.save');
+    
+    Route::post('/remove', 'Backend\StarsController@remove')->name('admin.stars.remove');
+});
+
 Route::group(['prefix' => 'admin/pages', 'middleware' => ['web', 'admin']], function () {
     Route::get('/', 'Backend\PagesController@index')->name('admin.pages');
     
@@ -57,16 +71,16 @@ Route::group(['prefix' => 'admin/pages', 'middleware' => ['web', 'admin']], func
     Route::post('/remove', 'Backend\PagesController@remove')->name('admin.pages.remove');
 });
 
-Route::group(['prefix' => 'admin/stars', 'middleware' => ['web', 'admin']], function () {
-    Route::get('/', 'Backend\StarsController@index')->name('admin.stars');
+Route::group(['prefix' => 'admin/posts', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\PostsController@index')->name('admin.posts');
     
-    Route::get('/getdata', 'Backend\StarsController@getData')->name('admin.stars.getdata');
+    Route::get('/getdata', 'Backend\PostsController@getData')->name('admin.posts.getdata');
     
-    Route::get('/create', 'Backend\StarsController@form')->name('admin.stars.create');
+    Route::get('/create', 'Backend\PostsController@form')->name('admin.posts.create');
     
-    Route::get('/edit/{id}', 'Backend\StarsController@form')->name('admin.stars.edit')->where('id', '[0-9]+');
+    Route::get('/edit/{id}', 'Backend\PostsController@form')->name('admin.posts.edit')->where('id', '[0-9]+');
     
-    Route::post('/save', 'Backend\StarsController@save')->name('admin.stars.save');
+    Route::post('/save', 'Backend\PostsController@save')->name('admin.posts.save');
     
-    Route::post('/remove', 'Backend\StarsController@remove')->name('admin.stars.remove');
+    Route::post('/remove', 'Backend\PostsController@remove')->name('admin.posts.remove');
 });
