@@ -51,7 +51,7 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table bootstrap-table">
+                <table class="table load-bootstrap-table">
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>

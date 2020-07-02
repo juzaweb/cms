@@ -79,20 +79,6 @@ function replace_template( template, data ){
         }
     );
 }
-
-function open_center_popup(url, title, w, h, set_url = null) {
-    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
-    var dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
-
-    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-    var systemZoom = width / window.screen.availWidth;
-    var left = (width - w) / 2 / systemZoom + dualScreenLeft;
-    var top = (height - h) / 2 / systemZoom + dualScreenTop;
-    var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
-    window.SetUrl = set_url;
-    return newWindow;
-}
 class LoadBootstrapTable {
 
     constructor(e) {
@@ -100,7 +86,7 @@ class LoadBootstrapTable {
         this.remove_url = e.remove_url;
         this.remove_question = (e.remove_question) ? e.remove_question: "Are you sure you want to delete the selected items?";
         this.detete_button = (e.detete_button) ? e.detete_button: "#delete-item";
-        this.table = (e.table) ? e.table : '.bootstrap-table';
+        this.table = (e.table) ? e.table : '.load-bootstrap-table';
         this.field_id = (e.field_id) ? e.field_id : 'id';
         this.form_search = (e.form_search) ? e.form_search : "#form-search";
         this.sort_name = (e.sort_name) ? e.sort_name : 'id';
@@ -177,8 +163,8 @@ class LoadBootstrapTable {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Đồng ý!',
-                cancelButtonText: 'Hủy!',
+                confirmButtonText: 'Yes!',
+                cancelButtonText: 'Cancel!',
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
@@ -294,7 +280,7 @@ $(document).on("turbolinks:load", function() {
             btnsubmit.find('i').attr('class', currentIcon);
             btnsubmit.prop("disabled", false);
 
-            show_message('data error', 'error');
+            show_message('Data error', 'error');
             return false;
         });
     });

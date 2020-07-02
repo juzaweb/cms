@@ -72,9 +72,9 @@ class GenresController extends Controller
         $model->createSlug();
     
         if ($request->thumbnail) {
-            $model->thumbnail = explode('storage', $request->thumbnail)[1];
+            $model->thumbnail = image_path($request->thumbnail);
         }
-    
+        
         $model->save();
         return response()->json([
             'status' => 'success',

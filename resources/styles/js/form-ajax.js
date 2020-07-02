@@ -52,7 +52,7 @@ $(document).on("turbolinks:load", function() {
             btnsubmit.find('i').attr('class', currentIcon);
             btnsubmit.prop("disabled", false);
 
-            show_message('data error', 'error');
+            show_message('Data error', 'error');
             return false;
         });
     });

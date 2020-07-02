@@ -1,3 +1,13 @@
 .error {
     color: red;
 }
+
+#holder {
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#holder img{
+    width: 100%;
+}

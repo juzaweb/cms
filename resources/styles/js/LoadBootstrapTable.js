@@ -5,7 +5,7 @@ class LoadBootstrapTable {
         this.remove_url = e.remove_url;
         this.remove_question = (e.remove_question) ? e.remove_question: "Are you sure you want to delete the selected items?";
         this.detete_button = (e.detete_button) ? e.detete_button: "#delete-item";
-        this.table = (e.table) ? e.table : '.bootstrap-table';
+        this.table = (e.table) ? e.table : '.load-bootstrap-table';
         this.field_id = (e.field_id) ? e.field_id : 'id';
         this.form_search = (e.form_search) ? e.form_search : "#form-search";
         this.sort_name = (e.sort_name) ? e.sort_name : 'id';
@@ -82,8 +82,8 @@ class LoadBootstrapTable {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Đồng ý!',
-                cancelButtonText: 'Hủy!',
+                confirmButtonText: 'Yes!',
+                cancelButtonText: 'Cancel!',
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
