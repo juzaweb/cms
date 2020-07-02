@@ -68,8 +68,12 @@ mix.combine([
     'resources/styles/frontend/assets/js/owl.carousel.min.js',
     'resources/styles/frontend/assets/js/ajax-auth-script.min.js',
     'resources/styles/frontend/player/assets/js/jwplayer-8.9.3.js',
-    'resources/styles/frontend/player/assets/js/player.min.js'
+    'resources/styles/frontend/player/assets/js/player.min.js',
+    'resources/styles/js/load-ajax.js',
+    'resources/styles/js/LoadBootstrapTable.js',
+    'resources/styles/js/form-ajax.js',
+    'resources/styles/js/lazyload.min.js',
 ],'public/js/frontend.js');
 
 mix.copyDirectory('resources/styles/frontend/assets/images', 'public/images');
-mix.copyDirectory('resources/styles/frontend/assets/font', 'public/font');
+mix.copyDirectory('resources/styles/frontend/assets/font', 'public/fonts');

@@ -24,5 +24,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Stars extends Model
 {
-    //
+    protected $table = 'stars';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'name',
+        'slug',
+        'description'
+    ];
 }

@@ -1,4 +1,5 @@
 <?php
 
 Route::get('/login', 'Backend\DashboardController@index')->name('login');
-Route::get('/', 'HomeController@index');
+
+Route::get('/', 'Frontend\HomeController@index');

@@ -27,15 +27,9 @@
 
             <div class="card-body">
 
-                @if(session()->has('message'))
-                    <div class="alert alert-success">
-                        <i class="fa fa-check"></i> {{ session('message') }}
-                    </div>
-                @endif
-
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <form method="get" class="form-inline" wire:submit.prevent="search">
+                        <form method="get" class="form-inline" id="form-search">
 
                             <div class="form-group mb-2 mr-1">
                                 <label for="inputName" class="sr-only">@lang('app.search')</label>
@@ -60,33 +54,15 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th width="3%"><input type="checkbox" wire:click="checkAll()" value="1"></th>
-                                <th>@lang('app.name')</th>
-                                <th width="20%">@lang('app.description')</th>
-                                <th width="15%">@lang('app.created_at')</th>
-                                <th width="15%">@lang('app.status')</th>
+                                <th data-width="3%" data-field="state" data-checkbox="true"></th>
+                                <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('app.thumbnail')</th>
+                                <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
+                                <th data-width="20%" data-field="description">@lang('app.description')</th>
+                                <th data-width="15%" data-field="created">@lang('app.created_at')</th>
+                                <th data-width="15%" data-field="status" data-formatter="status_formatter">@lang('app.status')</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        @if(!$items->isEmpty())
-                            @foreach($items as $item)
-                                <tr>
-                                    <td><input type="checkbox" wire:click="toggleTask({{ $item->id }})" class="checked ids" value="{{ $item->id }}" {{ in_array($item->id, $ids) ? 'checked' : '' }}></td>
-                                    <td><a href="{{ route('admin.genres.edit', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
-                                    <td>{{ $item->description }}</td>
-                                    <td>{{ $item->created_at->format('H:i m/d/Y') }}</td>
-                                    <td>{{ $item->status == 1 ? trans('app.enabled') : trans('app.disabled') }}</td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr><td colspan="5" align="center">@lang('app.there_is_no_data')</td></tr>
-                        @endif
-                        </tbody>
                     </table>
-
-                    <div class="float-right">
-                        {{ $items->links() }}
-                    </div>
                 </div>
             </div>
         </div>

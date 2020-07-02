@@ -7,13 +7,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function (
     Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
 });
 
-//Route::group(['prefix' => 'admin/movies', 'middleware' => ['web', 'admin']], function () {
-//    Route::get('/', 'movies.index')->name('admin.movies');
-//
-//    Route::get('/create', 'movies.form')->name('admin.movies.create');
-//
-//    Route::get('/edit/{id}', 'movies.form')->name('admin.movies.edit')->where('id', '[0-9]+');
-//});
+Route::group(['prefix' => 'admin/movies', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\MoviesController@index')->name('admin.movies');
+
+    Route::get('/create', 'Backend\MoviesController@form')->name('admin.movies.create');
+
+    Route::get('/edit/{id}', 'Backend\MoviesController@form')->name('admin.movies.edit')->where('id', '[0-9]+');
+});
 
 Route::group(['prefix' => 'admin/genres', 'middleware' => ['web', 'admin']], function () {
     Route::get('/', 'Backend\GenresController@index')->name('admin.genres');
@@ -29,10 +29,16 @@ Route::group(['prefix' => 'admin/genres', 'middleware' => ['web', 'admin']], fun
     Route::post('/remove', 'Backend\GenresController@remove')->name('admin.genres.remove');
 });
 
-//Route::group(['prefix' => 'admin/countries', 'middleware' => ['web', 'admin']], function () {
-//    Route::get('/', 'countries.index')->name('admin.countries');
-//
-//    Route::get('/create', 'countries.form')->name('admin.countries.create');
-//
-//    Route::get('/edit/{id}', 'countries.form')->name('admin.countries.edit')->where('id', '[0-9]+');
-//});
+Route::group(['prefix' => 'admin/countries', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\CountriesController@index')->name('admin.countries');
+    
+    Route::get('/getdata', 'Backend\CountriesController@getData')->name('admin.countries.getdata');
+    
+    Route::get('/create', 'Backend\CountriesController@form')->name('admin.countries.create');
+
+    Route::get('/edit/{id}', 'Backend\CountriesController@form')->name('admin.countries.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\CountriesController@save')->name('admin.countries.save');
+    
+    Route::post('/remove', 'Backend\CountriesController@remove')->name('admin.countries.remove');
+});

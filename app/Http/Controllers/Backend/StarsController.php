@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Countries;
+use App\Models\Stars;
 
-class CountriesController extends Controller
+class StarsController extends Controller
 {
     public function index() {
-        return view('backend.countries.index');
+        return view('backend.stars.index');
     }
     
     public function getData(Request $request) {
@@ -19,7 +19,7 @@ class CountriesController extends Controller
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 20);
         
-        $query = Countries::query();
+        $query = Stars::query();
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -37,7 +37,7 @@ class CountriesController extends Controller
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->edit_url = route('admin.countries.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.stars.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -47,8 +47,8 @@ class CountriesController extends Controller
     }
     
     public function form($id = null) {
-        $model = Countries::firstOrNew(['id' => $id]);
-        return view('backend.countries.form', [
+        $model = Stars::firstOrNew(['id' => $id]);
+        return view('backend.stars.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new')
         ]);
@@ -67,15 +67,19 @@ class CountriesController extends Controller
             'thumbnail' => trans('app.thumbnail'),
         ]);
         
-        $model = Countries::firstOrNew(['id' => $request->id]);
+        $model = Stars::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
         $model->createSlug();
+        
+        if ($request->thumbnail) {
+            $model->thumbnail = explode('storage', $request->thumbnail)[1];
+        }
         $model->save();
         
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.countries'),
+            'redirect' => route('admin.stars'),
         ]);
     }
     
@@ -83,10 +87,10 @@ class CountriesController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.countries')
+            'ids' => trans('app.stars')
         ]);
         
-        Countries::destroy($request->ids);
+        Stars::destroy($request->ids);
         
         return response()->json([
             'status' => 'success',

@@ -27,6 +27,7 @@ class CreateMoviesTable extends Migration
             $table->string('trailer_link', 100)->nullable();
             $table->integer('current_episode')->nullable();
             $table->integer('max_episode')->nullable();
+            $table->tinyInteger('tv_series')->default(0);
             $table->tinyInteger('is_paid')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
