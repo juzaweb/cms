@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\UseSlug;
+use App\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 /**
  * App\Models\Movies
@@ -65,6 +66,8 @@ use Illuminate\Support\Str;
  */
 class Movies extends Model
 {
+    use UseThumbnail, UseSlug;
+    
     protected $table = 'movies';
     protected $primaryKey = 'id';
     protected $fillable = [
@@ -72,21 +75,4 @@ class Movies extends Model
         'description',
         'thumbnail',
     ];
-    
-    public function createSlug() {
-        if ($this->name) {
-            $this->slug = Str::slug($this->name);
-            $count = self::where('id', '!=', $this->id)
-                ->where('slug', '=', $this->slug)
-                ->count();
-            
-            if ($count > 0) {
-                $this->slug .= '-'. ($count + 1);
-            }
-        }
-    }
-    
-    public function getThumbnail() {
-        return image_url($this->thumbnail);
-    }
 }

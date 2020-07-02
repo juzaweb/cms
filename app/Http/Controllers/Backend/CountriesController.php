@@ -13,11 +13,13 @@ class CountriesController extends Controller
     }
     
     public function getData(Request $request) {
-        $search = $request->input('search');
-        $sort = $request->input('sort', 'a.id');
-        $order = $request->input('order', 'desc');
-        $offset = $request->input('offset', 0);
-        $limit = $request->input('limit', 20);
+        $search = $request->get('search');
+        $status = $request->get('status');
+    
+        $sort = $request->get('sort', 'a.id');
+        $order = $request->get('order', 'desc');
+        $offset = $request->get('offset', 0);
+        $limit = $request->get('limit', 20);
         
         $query = Countries::query();
         
@@ -26,6 +28,10 @@ class CountriesController extends Controller
                 $subquery->orWhere('name', 'like', '%'. $search .'%');
                 $subquery->orWhere('description', 'like', '%'. $search .'%');
             });
+        }
+    
+        if (!is_null($status)) {
+            $query->where('status', '=', $status);
         }
         
         $count = $query->count();
