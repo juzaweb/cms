@@ -33,4 +33,11 @@ return [
     'pages' => 'Pages',
     'posts' => 'Posts',
     'title' => 'Title',
+    'category' => 'Category',
+    'categories' => 'Categories',
+    'tags' => 'Tags',
+    'setting' => 'Setting',
+    'users' => 'Users',
+    'comments' => 'Comments',
+    'language' => 'Language',
 ];

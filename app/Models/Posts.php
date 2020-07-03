@@ -27,6 +27,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $thumbnail
+ * @property string|null $category
+ * @property string|null $tags
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereCategory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereTags($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereThumbnail($value)
  */
 class Posts extends Model
 {
@@ -37,6 +43,6 @@ class Posts extends Model
     protected $fillable = [
         'title',
         'content',
-        'status'
+        'status',
     ];
 }

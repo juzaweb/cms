@@ -55,6 +55,13 @@ return [
                 'image/png',
                 'image/gif',
                 'image/svg+xml',
+                'application/pdf',
+                'text/plain',
+                'application/zip',
+                'audio/mpeg',
+                'audio/mp3',
+                'video/mp4',
+                'video/mpeg',
             ],
         ],
         'image' => [
@@ -67,8 +74,6 @@ return [
                 'image/png',
                 'image/gif',
                 'image/svg+xml',
-                'application/pdf',
-                'text/plain',
             ],
         ],
     ],
@@ -93,13 +98,13 @@ return [
 
     'rename_file'              => false,
 
-    'alphanumeric_filename'    => false,
+    'alphanumeric_filename'    => true,
 
     'alphanumeric_directory'   => false,
 
-    'should_validate_size'     => false,
+    'should_validate_size'     => true,
 
-    'should_validate_mime'     => false,
+    'should_validate_mime'     => true,
 
     // behavior on files with identical name
     // setting it to true cause old file replace with new one
@@ -124,9 +129,9 @@ return [
         'image/png',
     ],
 
-    'thumb_img_width'          => 200, // px
+    'thumb_img_width'          => 100, // px
 
-    'thumb_img_height'         => 200, // px
+    'thumb_img_height'         => 100, // px
 
     /*
     |--------------------------------------------------------------------------

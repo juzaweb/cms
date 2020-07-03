@@ -71,4 +71,65 @@
             <i class="cui__menuLeft__item__icon fe fe-feather"></i>
         </a>
     </li>
+
+    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+        <span class="cui__menuLeft__item__link">
+            <span class="cui__menuLeft__item__title">@lang('app.posts')</span>
+            <i class="cui__menuLeft__item__icon fe fe-pie-chart"></i>
+        </span>
+        <ul class="cui__menuLeft__navigation">
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="{{ route('admin.posts') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.posts')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="{{ route('admin.posts.create') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.add_new')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="">
+                    <span class="cui__menuLeft__item__title">@lang('app.categories')</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+
+    <li class="cui__menuLeft__item">
+        <a class="cui__menuLeft__item__link" href="">
+            <span class="cui__menuLeft__item__title">@lang('app.users')</span>
+            <i class="cui__menuLeft__item__icon fe fe-feather"></i>
+        </a>
+    </li>
+
+    <li class="cui__menuLeft__item">
+        <a class="cui__menuLeft__item__link" href="">
+            <span class="cui__menuLeft__item__title">@lang('app.comments')</span>
+            <i class="cui__menuLeft__item__icon fe fe-feather"></i>
+        </a>
+    </li>
+
+    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+        <span class="cui__menuLeft__item__link">
+            <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
+            <i class="cui__menuLeft__item__icon fe fe-pie-chart"></i>
+        </span>
+        <ul class="cui__menuLeft__navigation">
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="{{ route('admin.posts') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.posts')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="">
+                    <span class="cui__menuLeft__item__title">@lang('app.language')</span>
+                </a>
+            </li>
+        </ul>
+    </li>
 </ul>

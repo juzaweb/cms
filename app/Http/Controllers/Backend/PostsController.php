@@ -65,16 +65,26 @@ class PostsController extends Controller
             'name' => 'required|string|max:250',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
+            'category' => 'nullable|string|max:200',
+            'tags' => 'nullable|string|max:300',
         ], $request, [
             'name' => trans('app.name'),
             'status' => trans('app.status'),
             'thumbnail' => trans('app.thumbnail'),
+            'category' => trans('app.categories'),
+            'tags' => trans('app.tags'),
         ]);
+        
+        $thumbnail = $request->post('thumbnail', null);
+        $category = $request->post('category', []);
+        $tags = $request->post('tags', []);
         
         $model = Posts::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
         $model->createSlug();
-        $model->createThumbnail($request->post('thumbnail'));
+        $model->createThumbnail($thumbnail);
+        $model->setAttribute('category', explode(',', $category));
+        $model->setAttribute('tags', explode(',', $tags));
         $model->save();
         
         return response()->json([

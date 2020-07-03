@@ -59,7 +59,7 @@
                                 <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
                                 <th data-width="20%" data-field="description">@lang('app.description')</th>
                                 <th data-width="15%" data-field="created">@lang('app.created_at')</th>
-                                <th data-width="15%" data-field="status" data-formatter="status_formatter">@lang('app.status')</th>
+                                <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                             </tr>
                         </thead>
                     </table>
@@ -75,9 +75,9 @@
 
         function status_formatter(value, row, index) {
             if (value == 1) {
-                return '@lang('app.enabled')';
+                return '<span class="text-success">@lang('app.enabled')</span>';
             }
-            return '@lang('app.disabled')';
+            return '<span class="text-danger">@lang('app.disabled')</span>';
         }
 
         var table = new LoadBootstrapTable({
