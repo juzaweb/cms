@@ -98,3 +98,30 @@ Route::group(['prefix' => 'admin/post-categories', 'middleware' => ['web', 'admi
     
     Route::post('/remove', 'Backend\PostCategoriesController@remove')->name('admin.post_categories.remove');
 });
+
+Route::group(['prefix' => 'admin/comments/movie', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\MovieCommentsController@index')->name('admin.movie_comments');
+    
+    Route::get('/getdata', 'Backend\MovieCommentsController@getData')->name('admin.movie_comments.getdata');
+    
+    Route::post('/remove', 'Backend\MovieCommentsController@remove')->name('admin.movie_comments.remove');
+    
+    Route::post('/approve', 'Backend\MovieCommentsController@approve')->name('admin.movie_comments.approve');
+    
+    Route::post('/', 'Backend\MovieCommentsController@publicis')->name('admin.movie_comments.publicis');
+});
+
+Route::group(['prefix' => 'admin/users', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\UsersController@index')->name('admin.users');
+    
+    Route::get('/getdata', 'Backend\UsersController@getData')->name('admin.users.getdata');
+    
+    Route::get('/create', 'Backend\UsersController@form')->name('admin.users.create');
+    
+    Route::get('/edit/{id}', 'Backend\UsersController@form')->name('admin.users.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\UsersController@save')->name('admin.users.save');
+    
+    Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
+});
+

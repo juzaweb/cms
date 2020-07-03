@@ -15,3 +15,7 @@
 .btn {
     text-transform: capitalize;
 }
+
+.cui__menuLeft__navigation .cui__menuLeft__navigation .cui__menuLeft__item__link {
+    text-transform: capitalize;
+}

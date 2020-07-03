@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
             GenresSeeder::class,
             MoviesSeeder::class,
             StarsSeeder::class,
+            PostsSeeder::class,
+            CommentsSeeder::class,
         ]);
         
     }

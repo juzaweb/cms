@@ -13,7 +13,11 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/backend.css') }}">
-
+    <script type="text/javascript">
+        var langs = {
+            'are_you_sure_delete_items': '@lang('app.are_you_sure_delete_items')',
+        }
+    </script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/backend.js') }}"></script>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>

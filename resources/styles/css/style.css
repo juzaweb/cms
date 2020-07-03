@@ -13,4 +13,5 @@ th[data-sort-name],
 form[data-success],
 form[data-submit-success],
 input[data-maxlength],
+button.status-button,
 button[type=submit][data-loading-text]{}

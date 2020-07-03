@@ -33,6 +33,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @mixin \Eloquent
  * @property int $is_admin
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsAdmin($value)
+ * @property string|null $avatar
+ * @property int $status
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereStatus($value)
  */
 class User extends Authenticatable
 {
@@ -44,7 +48,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'is_admin',
+        'status',
     ];
 
     /**
@@ -64,4 +70,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function getAvatar() {
+        
+        
+        return asset('images/thumb-default.png');
+    }
 }

@@ -96,27 +96,40 @@
                 </a>
             </li>
 
-            <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="">
-                    <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
-                </a>
-            </li>
-
         </ul>
     </li>
 
     <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link" href="">
+        <a class="cui__menuLeft__item__link" href="{{ route('admin.users') }}">
             <span class="cui__menuLeft__item__title">@lang('app.users')</span>
             <i class="cui__menuLeft__item__icon fe fe-users"></i>
         </a>
     </li>
 
-    <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link" href="">
+    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+        <span class="cui__menuLeft__item__link">
             <span class="cui__menuLeft__item__title">@lang('app.comments')</span>
             <i class="cui__menuLeft__item__icon fe fe-message-square"></i>
-        </a>
+        </span>
+        <ul class="cui__menuLeft__navigation">
+            <li class="cui__menuLeft__item">
+                <a href="{{ route('admin.movie_comments') }}" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.movie_comments')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a href="" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.post_comments')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a href="" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
+                </a>
+            </li>
+        </ul>
     </li>
 
     <li class="cui__menuLeft__item cui__menuLeft__submenu">

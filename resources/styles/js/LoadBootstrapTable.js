@@ -3,8 +3,10 @@ class LoadBootstrapTable {
     constructor(e) {
         this.url = e.url;
         this.remove_url = e.remove_url;
-        this.remove_question = (e.remove_question) ? e.remove_question : "Are you sure you want to delete the selected items?";
+        this.status_url = e.status_url;
+        this.remove_question = (e.remove_question) ? e.remove_question : langs.are_you_sure_delete_items;
         this.detete_button = (e.detete_button) ? e.detete_button : "#delete-item";
+        this.status_button = (e.status_button) ? e.status_button : ".status-button";
         this.table = (e.table) ? e.table : '.load-bootstrap-table';
         this.field_id = (e.field_id) ? e.field_id : 'id';
         this.form_search = (e.form_search) ? e.form_search : "#form-search";
@@ -20,10 +22,16 @@ class LoadBootstrapTable {
 
     init() {
         let btn_delete = $(this.detete_button);
+        let btn_status = $(this.status_button);
+
         btn_delete.prop('disabled', true);
+        btn_status.prop('disabled', true);
+        $('.items-checked').prop('disabled', true);
+
         let table = $(this.table);
         let form_search = this.form_search;
         let remove_url = this.remove_url;
+        let status_url = this.status_url;
         let remove_question = this.remove_question;
         let data_url = this.url;
         let field_id = this.field_id;
@@ -63,14 +71,15 @@ class LoadBootstrapTable {
             }
 
             event.preventDefault();
-
             table.bootstrapTable('refresh');
             return false;
         });
 
         table.on('check.bs.table uncheck.bs.table ' +
             'check-all.bs.table uncheck-all.bs.table', () => {
+            $('.items-checked').prop('disabled', !table.bootstrapTable('getSelections').length);
             btn_delete.prop('disabled', !table.bootstrapTable('getSelections').length);
+            btn_status.prop('disabled', !table.bootstrapTable('getSelections').length);
         });
 
         btn_delete.on('click', function () {
@@ -112,27 +121,30 @@ class LoadBootstrapTable {
             return false;
         });
 
-        table.on('click', '.remove-item', function () {
-            let ids = [$(this).data('id')];
-            if (!confirm(remove_question)) {
+        btn_status.on('click', function () {
+            let ids = $("input[name=btSelectItem]:checked").map(function () {return $(this).val();}).get();
+            let status = $(this).data('status');
+
+            if (ids.length <= 0) {
                 return false;
             }
 
             $.ajax({
                 type: "POST",
-                url: remove_url,
+                url: status_url,
                 dataType: 'json',
                 data: {
-                    'ids': ids
+                    'ids': ids,
+                    'status': status,
                 },
                 success: function (result) {
                     if (result.status === "success") {
                         table.bootstrapTable('refresh');
+
                         return false;
                     }
                     else {
-
-                        table.bootstrapTable('refresh');
+                        show_message(result.message, result.status);
                         return false;
                     }
                 }

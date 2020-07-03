@@ -28,5 +28,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Comments extends Model
 {
-    //
+    protected $table = 'comments';
+    protected $primaryKey = 'id';
+    protected $fillable = ['content', 'status'];
+    
+    public function user()
+    {
+        return $this->hasOne('App\User');
+    }
 }
