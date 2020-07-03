@@ -40,4 +40,9 @@ return [
     'users' => 'Users',
     'comments' => 'Comments',
     'language' => 'Language',
+    'post_categories' => 'Post categories',
+    'theme' => 'Theme',
+    'menu' => 'Menu',
+    'ads' => 'Ads',
+    'plugins' => 'Plugins',
 ];

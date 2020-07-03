@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UseSlug;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -23,8 +24,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostCategories whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostCategories whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $description
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostCategories whereDescription($value)
  */
 class PostCategories extends Model
 {
-    //
+    use UseSlug;
+    
+    protected $table = 'post_categories';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'name',
+        'description',
+        'status'
+    ];
 }

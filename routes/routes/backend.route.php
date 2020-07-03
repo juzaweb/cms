@@ -84,3 +84,17 @@ Route::group(['prefix' => 'admin/posts', 'middleware' => ['web', 'admin']], func
     
     Route::post('/remove', 'Backend\PostsController@remove')->name('admin.posts.remove');
 });
+
+Route::group(['prefix' => 'admin/post-categories', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\PostCategoriesController@index')->name('admin.post_categories');
+    
+    Route::get('/getdata', 'Backend\PostCategoriesController@getData')->name('admin.post_categories.getdata');
+    
+    Route::get('/create', 'Backend\PostCategoriesController@form')->name('admin.post_categories.create');
+    
+    Route::get('/edit/{id}', 'Backend\PostCategoriesController@form')->name('admin.post_categories.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\PostCategoriesController@save')->name('admin.post_categories.save');
+    
+    Route::post('/remove', 'Backend\PostCategoriesController@remove')->name('admin.post_categories.remove');
+});

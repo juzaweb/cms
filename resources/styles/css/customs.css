@@ -11,3 +11,7 @@
 #holder img{
     width: 100%;
 }
+
+.btn {
+    text-transform: capitalize;
+}

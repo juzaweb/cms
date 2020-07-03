@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.countries'))
+@section('title', trans('app.post_categories'))
 
 @section('content')
     {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.countries'),
-        'url' => route('admin.countries')
+        'name' => trans('app.post_categories'),
+        'url' => route('admin.post_categories')
         ]) }}
 
     <div class="cui__utils__content">
@@ -13,12 +13,12 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.countries')</h5>
+                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.post_categories')</h5>
                     </div>
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <a href="{{ route('admin.countries.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <a href="{{ route('admin.post_categories.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                             <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                             <tr>
                                 <th data-width="3%" data-field="state" data-checkbox="true"></th>
 
-                                <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
+                                <th data-field="name" data-formatter="name_formatter">@lang('app.title')</th>
                                 <th data-width="20%" data-field="description">@lang('app.description')</th>
                                 <th data-width="15%" data-field="created">@lang('app.created_at')</th>
                                 <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
@@ -82,8 +82,8 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.countries.getdata') }}',
-            remove_url: '{{ route('admin.countries.remove') }}',
+            url: '{{ route('admin.post_categories.getdata') }}',
+            remove_url: '{{ route('admin.post_categories.remove') }}',
         });
     </script>
 @endsection

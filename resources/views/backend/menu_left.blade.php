@@ -9,7 +9,7 @@
     <li class="cui__menuLeft__item cui__menuLeft__submenu">
       <span class="cui__menuLeft__item__link">
         <span class="cui__menuLeft__item__title">@lang('app.movies')</span>
-        <i class="cui__menuLeft__item__icon fe fe-pie-chart"></i>
+        <i class="cui__menuLeft__item__icon fe fe-film"></i>
       </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
@@ -28,7 +28,7 @@
     <li class="cui__menuLeft__item cui__menuLeft__submenu">
       <span class="cui__menuLeft__item__link">
         <span class="cui__menuLeft__item__title">@lang('app.tv_series')</span>
-        <i class="cui__menuLeft__item__icon fe fe-pie-chart"></i>
+        <i class="cui__menuLeft__item__icon fe fe-film"></i>
       </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
@@ -47,35 +47,35 @@
     <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link" href="{{ route('admin.genres') }}">
             <span class="cui__menuLeft__item__title">@lang('app.genres')</span>
-            <i class="cui__menuLeft__item__icon fe fe-feather"></i>
+            <i class="cui__menuLeft__item__icon fe fe-list"></i>
         </a>
     </li>
 
     <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link" href="{{ route('admin.countries') }}">
             <span class="cui__menuLeft__item__title">@lang('app.countries')</span>
-            <i class="cui__menuLeft__item__icon fe fe-feather"></i>
+            <i class="cui__menuLeft__item__icon fe fe-list"></i>
         </a>
     </li>
 
     <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link" href="{{ route('admin.stars') }}">
             <span class="cui__menuLeft__item__title">@lang('app.stars')</span>
-            <i class="cui__menuLeft__item__icon fe fe-feather"></i>
+            <i class="cui__menuLeft__item__icon fe fe-star"></i>
         </a>
     </li>
 
     <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link" href="{{ route('admin.pages') }}">
             <span class="cui__menuLeft__item__title">@lang('app.pages')</span>
-            <i class="cui__menuLeft__item__icon fe fe-feather"></i>
+            <i class="cui__menuLeft__item__icon fe fe-clipboard"></i>
         </a>
     </li>
 
     <li class="cui__menuLeft__item cui__menuLeft__submenu">
         <span class="cui__menuLeft__item__link">
             <span class="cui__menuLeft__item__title">@lang('app.posts')</span>
-            <i class="cui__menuLeft__item__icon fe fe-pie-chart"></i>
+            <i class="cui__menuLeft__item__icon fe fe-clipboard"></i>
         </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
@@ -91,8 +91,14 @@
             </li>
 
             <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="">
+                <a class="cui__menuLeft__item__link" href="{{ route('admin.post_categories') }}">
                     <span class="cui__menuLeft__item__title">@lang('app.categories')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="">
+                    <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
                 </a>
             </li>
 
@@ -102,21 +108,62 @@
     <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link" href="">
             <span class="cui__menuLeft__item__title">@lang('app.users')</span>
-            <i class="cui__menuLeft__item__icon fe fe-feather"></i>
+            <i class="cui__menuLeft__item__icon fe fe-users"></i>
         </a>
     </li>
 
     <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link" href="">
             <span class="cui__menuLeft__item__title">@lang('app.comments')</span>
-            <i class="cui__menuLeft__item__icon fe fe-feather"></i>
+            <i class="cui__menuLeft__item__icon fe fe-message-square"></i>
         </a>
     </li>
 
     <li class="cui__menuLeft__item cui__menuLeft__submenu">
         <span class="cui__menuLeft__item__link">
+            <span class="cui__menuLeft__item__title">@lang('app.theme')</span>
+            <i class="cui__menuLeft__item__icon fe fe-layout"></i>
+        </span>
+        <ul class="cui__menuLeft__navigation">
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="">
+                    <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="">
+                    <span class="cui__menuLeft__item__title">@lang('app.menu')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="">
+                    <span class="cui__menuLeft__item__title">@lang('app.ads')</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+        <span class="cui__menuLeft__item__link">
+            <span class="cui__menuLeft__item__title">@lang('app.plugins')</span>
+            <i class="cui__menuLeft__item__icon fe fe-file-plus"></i>
+        </span>
+        <ul class="cui__menuLeft__navigation">
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link" href="">
+                    <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+
+    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+        <span class="cui__menuLeft__item__link">
             <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
-            <i class="cui__menuLeft__item__icon fe fe-pie-chart"></i>
+            <i class="cui__menuLeft__item__icon fe fe-settings"></i>
         </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
