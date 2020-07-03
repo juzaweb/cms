@@ -28,6 +28,7 @@ class MovieCommentsController extends Controller
             'b.name AS author',
             'c.name AS movie'
         ]);
+        
         $query->from('comments AS a');
         $query->join('users AS b', 'b.id', '=', 'a.user_id');
         $query->join('movies AS c', 'c.id', '=', 'a.subject_id');

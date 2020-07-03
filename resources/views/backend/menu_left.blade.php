@@ -119,7 +119,7 @@
             </li>
 
             <li class="cui__menuLeft__item">
-                <a href="" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.post_comments') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.post_comments')</span>
                 </a>
             </li>

@@ -93,8 +93,8 @@ class LoadBootstrapTable {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes!',
-                cancelButtonText: 'Cancel!',
+                confirmButtonText: langs.yes + '!',
+                cancelButtonText: langs.cancel + '!',
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
@@ -107,6 +107,9 @@ class LoadBootstrapTable {
                         success: function (result) {
                             if (result.status === "success") {
                                 table.bootstrapTable('refresh');
+                                btn_delete.prop('disabled', true);
+                                btn_status.prop('disabled', true);
+                                $('.items-checked').prop('disabled', true);
                                 return false;
                             }
                             else {
@@ -140,7 +143,9 @@ class LoadBootstrapTable {
                 success: function (result) {
                     if (result.status === "success") {
                         table.bootstrapTable('refresh');
-
+                        btn_delete.prop('disabled', true);
+                        btn_status.prop('disabled', true);
+                        $('.items-checked').prop('disabled', true);
                         return false;
                     }
                     else {

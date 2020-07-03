@@ -16,6 +16,8 @@
     <script type="text/javascript">
         var langs = {
             'are_you_sure_delete_items': '@lang('app.are_you_sure_delete_items')',
+            'yes': '@lang('app.yes')',
+            'cancel': '@lang('app.cancel')',
         }
     </script>
     <script src="{{ asset('js/app.js') }}"></script>

@@ -38,6 +38,7 @@ return [
     'actor' => 'Actor',
     'writer' => 'Writer',
     'pages' => 'Pages',
+    'post' => 'Post',
     'posts' => 'Posts',
     'title' => 'Title',
     'category' => 'Category',
@@ -57,4 +58,5 @@ return [
     'author' => 'Author',
     'hidden' => 'Hidden',
     'show' => 'Show',
+    'yes' => 'Yes',
 ];
