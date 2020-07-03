@@ -15,6 +15,7 @@ class MovieCommentsController extends Controller
     public function getData(Request $request) {
         $search = $request->get('search');
         $status = $request->get('status');
+        $approve = $request->get('approve');
         
         $sort = $request->get('sort', 'a.id');
         $order = $request->get('order', 'desc');
@@ -24,10 +25,12 @@ class MovieCommentsController extends Controller
         $query = Comments::query();
         $query->select([
             'a.*',
-            'b.name AS author'
+            'b.name AS author',
+            'c.name AS movie'
         ]);
         $query->from('comments AS a');
         $query->join('users AS b', 'b.id', '=', 'a.user_id');
+        $query->join('movies AS c', 'c.id', '=', 'a.subject_id');
         $query->where('a.type', '=', 1);
         
         if ($search) {
@@ -38,7 +41,11 @@ class MovieCommentsController extends Controller
         }
         
         if (!is_null($status)) {
-            $query->where('status', '=', $status);
+            $query->where('a.status', '=', $status);
+        }
+    
+        if (!is_null($approve)) {
+            $query->where('a.approved', '=', $approve);
         }
         
         $count = $query->count();

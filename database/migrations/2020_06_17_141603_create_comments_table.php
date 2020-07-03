@@ -17,6 +17,7 @@ class CreateCommentsTable extends Migration
             $table->tinyInteger('approved')->default(1);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
+            $table->unique(['user_id', 'subject_id', 'type']);
         });
     }
     

@@ -49,11 +49,20 @@
                         </div>
 
                         <div class="form-group mb-2 mr-1">
+                            <label for="inputApprove" class="sr-only">@lang('app.approve')</label>
+                            <select name="approve" id="inputApprove" class="form-control">
+                                <option value="">--- @lang('app.approve') ---</option>
+                                <option value="1">@lang('app.approved')</option>
+                                <option value="0">@lang('app.deny')</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-2 mr-1">
                             <label for="inputStatus" class="sr-only">@lang('app.status')</label>
                             <select name="status" id="inputStatus" class="form-control">
                                 <option value="">--- @lang('app.status') ---</option>
-                                <option value="1">@lang('app.enabled')</option>
-                                <option value="0">@lang('app.disabled')</option>
+                                <option value="1">@lang('app.show')</option>
+                                <option value="0">@lang('app.hidden')</option>
                             </select>
                         </div>
 
@@ -68,10 +77,11 @@
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
                             <th data-field="author">@lang('app.author')</th>
-
+                            <th data-width="30%" data-field="content">@lang('app.content')</th>
+                            <th data-width="15%" data-field="movie">@lang('app.movie')</th>
                             <th data-width="15%" data-field="created">@lang('app.created_at')</th>
-                            <th data-width="15%" data-field="approved" data-align="center" data-formatter="approve_formatter">@lang('app.approve')</th>
-                            <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
+                            <th data-width="10%" data-field="approved" data-align="center" data-formatter="approve_formatter">@lang('app.approve')</th>
+                            <th data-width="10%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                         </tr>
                     </thead>
                 </table>

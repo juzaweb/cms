@@ -3,6 +3,7 @@
 return [
     'home' => 'Home',
     'dashboard' => 'Dashboard',
+    'movie' => 'Movie',
     'movies' => 'Movies',
     'tv_series' => 'TV Series',
     'genres' => 'Genres',
