@@ -74,7 +74,7 @@
                                 @php
                                 $selected = explode(',', $model->category);
                                 @endphp
-                                <ul class="mt-2">
+                                <ul class="mt-2 p-0">
                                 @foreach($categories as $item)
                                     <li class="m-1" id="item-category-{{ $item->id }}">
                                         <div class="custom-control custom-checkbox">
@@ -89,17 +89,34 @@
                             <div class="form-add-category box-hidden">
                                 <div class="form-group">
                                     <label class="col-form-label" for="categoryName">@lang('app.name')</label>
-                                    <input type="text" class="form-control" id="categoryName">
+                                    <input type="text" class="form-control" id="categoryName" autocomplete="off">
                                 </div>
 
-                                <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</button>
+                                <button type="button" class="btn btn-primary add-category"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</button>
                             </div>
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label class="col-form-label" for="tags">@lang('app.tags')</label>
+                            <label class="col-form-label" for="select-tags">@lang('app.tags') <span><a href="javascript:void(0)" class="add-new-tags float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_tags')</a></span></label>
 
-                            <select id="select-tags" class="form-control load-tags" data-placeholder="--- @lang('app.tags') ---"></select>
+                            <select id="select-tags" class="form-control load-tags select-tags" data-placeholder="--- @lang('app.tags') ---" data-explodes="tag-explode"></select>
+
+                            <div class="show-tags mt-2">
+                                @foreach($tags as $item)
+                                <span class="tag m-1">{{ $item->name }} <a href="javascript:void(0)" class="text-danger ml-1 remove-tag-item"><i class="fa fa-times-circle"></i></a>
+  <input type="hidden" name="tags[]" class="tag-explode" value="{{ $item->id }}">
+</span>
+                                @endforeach
+                            </div>
+
+                            <div class="form-add-tags box-hidden">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="tagsName">@lang('app.tags')</label>
+                                    <input type="text" class="form-control" id="tagsName" autocomplete="off">
+                                </div>
+
+                                <button type="button" class="btn btn-primary add-tags"><i class="fa fa-plus-circle"></i> @lang('app.add_tags')</button>
+                            </div>
                         </div>
                     </div>
                 </div>

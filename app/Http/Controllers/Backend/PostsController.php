@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\PostCategories;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
@@ -57,11 +58,13 @@ class PostsController extends Controller
         $model = Posts::firstOrNew(['id' => $id]);
         $categories = PostCategories::where('status', '=', 1)
             ->get();
+        $tags = Tags::whereIn('id', explode(',', $model->tags))->get();
         
         return view('backend.posts.form', [
             'model' => $model,
             'title' => $model->title ?: trans('app.add_new'),
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $tags
         ]);
     }
     
@@ -71,13 +74,11 @@ class PostsController extends Controller
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
             'category' => 'nullable|string|max:200',
-            'tags' => 'nullable|string|max:300',
         ], $request, [
             'title' => trans('app.title'),
             'status' => trans('app.status'),
             'thumbnail' => trans('app.thumbnail'),
             'category' => trans('app.categories'),
-            'tags' => trans('app.tags'),
         ]);
         
         $thumbnail = $request->post('thumbnail', null);

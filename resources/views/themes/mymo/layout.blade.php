@@ -76,10 +76,10 @@
 </head>
 <body class="home blog wp-embed-responsive halimthemes halimmovies halim-corner-rounded" data-masonry="" data-nonce="9d27ce22e4">
 
-@include('frontend.partials.header')
-@include('frontend.partials.menu')
+@include('themes.mymo.header')
+@include('themes.mymo.menu')
 <!-- /header -->
-@include('frontend.partials.slider')
+@include('themes.mymo.slider')
 
 <div class="container-fluid halim-full-player hidden halim-centered">
     <div id="halim-full-player" class="container col-md-offset-2s col-md-9"></div>
@@ -173,7 +173,7 @@
     </div>
 </div>
 
-@include('frontend.partials.footer')
+@include('themes.mymo.footer')
 
 <!-- <div  class="hidemobile" style="position: fixed; top: 0px; left: 0px; z-index: 999999">
 <a href="/link/floatleft.html" rel="nofollow" target="_blank">

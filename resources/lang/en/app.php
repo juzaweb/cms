@@ -67,5 +67,6 @@ return [
     'password' => 'Password',
     'confirm_password' => 'Confirm password',
     'add_category' => 'Add category',
+    'add_tags' => 'Add tags',
     'data_error' => 'Data error'
 ];

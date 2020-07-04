@@ -93,6 +93,10 @@ Route::group(['prefix' => 'admin/posts', 'middleware' => ['web', 'admin']], func
     Route::post('/remove', 'Backend\PostsController@remove')->name('admin.posts.remove');
 });
 
+Route::group(['prefix' => 'admin/tags', 'middleware' => ['web', 'admin']], function () {
+    Route::post('/save', 'Backend\TagsController@save')->name('admin.tags.save');
+});
+
 Route::group(['prefix' => 'admin/post-categories', 'middleware' => ['web', 'admin']], function () {
     Route::get('/', 'Backend\PostCategoriesController@index')->name('admin.post_categories');
     
