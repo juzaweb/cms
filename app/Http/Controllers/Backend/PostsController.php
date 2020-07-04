@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\PostCategories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
@@ -54,21 +55,25 @@ class PostsController extends Controller
     
     public function form($id = null) {
         $model = Posts::firstOrNew(['id' => $id]);
+        $categories = PostCategories::where('status', '=', 1)
+            ->get();
+        
         return view('backend.posts.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->title ?: trans('app.add_new'),
+            'categories' => $categories
         ]);
     }
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250',
+            'title' => 'required|string|max:250',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
             'category' => 'nullable|string|max:200',
             'tags' => 'nullable|string|max:300',
         ], $request, [
-            'name' => trans('app.name'),
+            'title' => trans('app.title'),
             'status' => trans('app.status'),
             'thumbnail' => trans('app.thumbnail'),
             'category' => trans('app.categories'),
@@ -76,15 +81,15 @@ class PostsController extends Controller
         ]);
         
         $thumbnail = $request->post('thumbnail', null);
-        $category = $request->post('category', []);
+        $category = $request->post('categories', []);
         $tags = $request->post('tags', []);
         
-        $model = Posts::firstOrNew(['id' => $request->id]);
+        $model = Posts::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->createSlug();
         $model->createThumbnail($thumbnail);
-        $model->setAttribute('category', explode(',', $category));
-        $model->setAttribute('tags', explode(',', $tags));
+        $model->setAttribute('category', implode(',', $category));
+        $model->setAttribute('tags', implode(',', $tags));
         $model->save();
         
         return response()->json([

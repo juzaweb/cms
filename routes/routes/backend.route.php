@@ -5,14 +5,22 @@ Route::group(['prefix' => 'filemanager', 'middleware' => ['web', 'admin']], func
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
     Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
+    
+    Route::get('/load-data/{func}', 'Backend\LoadDataController@loadData')->name('admin.load_data');
 });
 
 Route::group(['prefix' => 'admin/movies', 'middleware' => ['web', 'admin']], function () {
     Route::get('/', 'Backend\MoviesController@index')->name('admin.movies');
-
+    
+    Route::get('/getdata', 'Backend\MoviesController@getData')->name('admin.movies.getdata');
+    
     Route::get('/create', 'Backend\MoviesController@form')->name('admin.movies.create');
 
     Route::get('/edit/{id}', 'Backend\MoviesController@form')->name('admin.movies.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\MoviesController@save')->name('admin.movies.save');
+    
+    Route::post('/remove', 'Backend\MoviesController@remove')->name('admin.movies.remove');
 });
 
 Route::group(['prefix' => 'admin/genres', 'middleware' => ['web', 'admin']], function () {

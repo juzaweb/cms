@@ -61,7 +61,7 @@ class PostCategoriesController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250',
+            'name' => 'required|string|max:250|unique:post_categories,name',
             'description' => 'nullable|string|max:300',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
@@ -72,10 +72,15 @@ class PostCategoriesController extends Controller
             'thumbnail' => trans('app.thumbnail'),
         ]);
         
-        $model = PostCategories::firstOrNew(['id' => $request->id]);
+        $addtype = $request->post('addtype');
+        $model = PostCategories::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->createSlug();
         $model->save();
+        
+        if ($addtype == 2) {
+            return response()->json($model->toArray());
+        }
         
         return response()->json([
             'status' => 'success',

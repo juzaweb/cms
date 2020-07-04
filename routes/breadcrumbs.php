@@ -7,9 +7,15 @@ Breadcrumbs::for('admin', function ($trail) {
 Breadcrumbs::for('manager', function ($trail, $parent, $model = null) {
     $trail->parent('admin');
     $trail->push($parent['name'], $parent['url']);
+    
     if ($model) {
-        if ($model->name) {
-            $trail->push($model->name);
+        if ($model->name || $model->title) {
+            if ($model->name) {
+                $trail->push($model->name);
+            }
+            else {
+                $trail->push($model->title);
+            }
         }
         else {
             $trail->push(trans('app.add_new'));

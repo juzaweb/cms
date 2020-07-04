@@ -42,6 +42,7 @@
                             <textarea class="form-control" name="content" id="baseContent" rows="6">{{ $model->content }}</textarea>
                         </div>
 
+
                         <div class="form-group">
                             <label class="col-form-label" for="baseStatus">@lang('app.status')</label>
                             <select name="status" id="baseStatus" class="form-control">
@@ -52,17 +53,54 @@
                     </div>
 
                     <div class="col-md-4">
-                        <div class="form-thumbnail text-center">
-                            <input id="thumbnail" type="hidden" name="thumbnail">
-                            <div id="holder">
-                                <img src="{{ $model->getThumbnail() }}" class="w-100">
+                        <div class="form-group">
+                            <label class="col-form-label" for="baseStatus">@lang('app.thumbnail')</label>
+                            <div class="form-thumbnail text-center">
+                                <input id="thumbnail" type="hidden" name="thumbnail">
+                                <div id="holder">
+                                    <img src="{{ $model->getThumbnail() }}" class="w-100">
+                                </div>
+
+                                <a href="javascript:void(0)" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-capitalize">
+                                    <i class="fa fa-picture-o"></i> @lang('app.choose_image')
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-form-label" for="categories">@lang('app.categories') <span><a href="javascript:void(0)" class="add-new-category float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</a></span></label>
+
+                            <div class="show-categories">
+                                @php
+                                $selected = explode(',', $model->category);
+                                @endphp
+                                <ul class="mt-2">
+                                @foreach($categories as $item)
+                                    <li class="m-1" id="item-category-{{ $item->id }}">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" name="categories[]" class="custom-control-input" id="category-{{ $item->id }}" value="{{ $item->id }}" @if(in_array($item->id, $selected)) checked @endif>
+                                            <label class="custom-control-label" for="category-{{ $item->id }}">{{ $item->name }}</label>
+                                        </div>
+                                    </li>
+                                @endforeach
+                                </ul>
                             </div>
 
-                            <a href="javascript:void(0)" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-capitalize">
-                                <i class="fa fa-picture-o"></i> @lang('app.choose_image')
-                            </a>
-                        </div>
+                            <div class="form-add-category box-hidden">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="categoryName">@lang('app.name')</label>
+                                    <input type="text" class="form-control" id="categoryName">
+                                </div>
 
+                                <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</button>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-form-label" for="tags">@lang('app.tags')</label>
+
+                            <select id="select-tags" class="form-control load-tags" data-placeholder="--- @lang('app.tags') ---"></select>
+                        </div>
                     </div>
                 </div>
 

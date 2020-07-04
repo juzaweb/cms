@@ -9,7 +9,7 @@ use App\Models\Movies;
 class MoviesController extends Controller
 {
     public function index() {
-        return view('backend.genres.index');
+        return view('backend.movies.index');
     }
     
     public function getData(Request $request) {
@@ -43,7 +43,7 @@ class MoviesController extends Controller
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->edit_url = route('admin.genres.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.movies.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -54,7 +54,7 @@ class MoviesController extends Controller
     
     public function form($id = null) {
         $model = Movies::firstOrNew(['id' => $id]);
-        return view('backend.genres.form', [
+        return view('backend.movies.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new')
         ]);
@@ -82,7 +82,7 @@ class MoviesController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.genres'),
+            'redirect' => route('admin.movies'),
         ]);
     }
     
@@ -90,7 +90,7 @@ class MoviesController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.genres')
+            'ids' => trans('app.movies')
         ]);
         
         Movies::destroy($request->ids);

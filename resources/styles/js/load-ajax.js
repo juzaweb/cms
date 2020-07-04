@@ -28,7 +28,7 @@ function show_message(message, status = 'success') {
     }
 }
 
-function replace_template( template, data ){
+function replace_template(template, data){
     return template.replace(
         /{(\w*)}/g,
         function( m, key ){

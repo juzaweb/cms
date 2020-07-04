@@ -1,3 +1,5 @@
+@extends('layouts.backend')
+
 @section('title', trans('app.movies'))
 
 @section('content')
@@ -28,16 +30,17 @@
 
             <div class="row mb-3">
                 <div class="col-md-12">
-                    <form method="get" class="form-inline" >
+                    <form action="" method="get" class="form-inline" id="form-search">
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputName" class="sr-only">@lang('app.search')</label>
-                            <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
+                            <label for="inputSearch" class="sr-only">@lang('app.search')</label>
+                            <input name="search" type="text" id="inputSearch" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
                         </div>
 
                         <div class="form-group mb-2 mr-1">
                             <label for="inputStatus" class="sr-only">@lang('app.status')</label>
-                            <select name="status" id="inputStatus" class="form-control" wire:model="status">
+                            <select name="status" id="inputStatus" class="form-control">
+                                <option value="">--- @lang('app.status') ---</option>
                                 <option value="1">@lang('app.enabled')</option>
                                 <option value="0">@lang('app.disabled')</option>
                             </select>
@@ -50,15 +53,15 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table">
+                <table class="table load-bootstrap-table">
                     <thead>
                         <tr>
-                            <th width="3%"></th>
-                            <th width="10%">@lang('app.thumbnail')</th>
-                            <th>@lang('app.name')</th>
-                            <th width="20%">@lang('app.description')</th>
-                            <th width="15%">@lang('app.created_at')</th>
-                            <th width="15%">@lang('app.status')</th>
+                            <th data-width="3%" data-field="state" data-checkbox="true"></th>
+                            <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('app.thumbnail')</th>
+                            <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
+                            <th data-width="20%" data-field="description">@lang('app.description')</th>
+                            <th data-width="15%" data-field="created">@lang('app.created_at')</th>
+                            <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                         </tr>
                     </thead>
                 </table>
@@ -66,4 +69,26 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function thumbnail_formatter(value, row, index) {
+        return '<img src="'+ row.thumb_url +'" class="w-100">';
+    }
+
+    function name_formatter(value, row, index) {
+        return '<a href="'+ row.edit_url +'">'+ value +'</a>';
+    }
+
+    function status_formatter(value, row, index) {
+        if (value == 1) {
+            return '<span class="text-success">@lang('app.enabled')</span>';
+        }
+        return '<span class="text-danger">@lang('app.disabled')</span>';
+    }
+
+    var table = new LoadBootstrapTable({
+        url: '{{ route('admin.movies.getdata') }}',
+        remove_url: '{{ route('admin.movies.remove') }}',
+    });
+</script>
 @endsection

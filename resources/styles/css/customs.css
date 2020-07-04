@@ -1,3 +1,7 @@
+ul {
+    list-style: none;
+}
+
 .error {
     color: red;
 }
@@ -18,4 +22,38 @@
 
 .cui__menuLeft__navigation .cui__menuLeft__navigation .cui__menuLeft__item__link {
     text-transform: capitalize;
+}
+
+.col-form-label {
+    width: 100%;
+}
+
+.box-hidden {
+    display: none;
+}
+
+.btn i {
+    margin-right: 0.25rem;
+}
+
+.tag {
+    font-size: .75rem;
+    background-color: #f4f3f9;
+    color: #2e384d;
+    border-radius: 3px;
+    padding: 0 .5rem;
+    line-height: 2em;
+    display: inline-flex;
+    cursor: default;
+    font-weight: 400;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: .25rem;
+}
+
+.show-categories {
+    overflow: auto;
+    height: 200px;
 }

@@ -66,4 +66,6 @@ return [
     'no' => 'No',
     'password' => 'Password',
     'confirm_password' => 'Confirm password',
+    'add_category' => 'Add category',
+    'data_error' => 'Data error'
 ];
