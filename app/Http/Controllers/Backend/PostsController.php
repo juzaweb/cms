@@ -81,14 +81,11 @@ class PostsController extends Controller
             'category' => trans('app.categories'),
         ]);
         
-        $thumbnail = $request->post('thumbnail', null);
         $category = $request->post('categories', []);
         $tags = $request->post('tags', []);
         
         $model = Posts::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
-        $model->createSlug();
-        $model->createThumbnail($thumbnail);
         $model->setAttribute('category', implode(',', $category));
         $model->setAttribute('tags', implode(',', $tags));
         $model->save();

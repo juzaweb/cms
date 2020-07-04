@@ -31,6 +31,7 @@
 
                 <div class="row">
                     <div class="col-md-8">
+
                         <div class="form-group">
                             <label class="col-form-label" for="baseTitle">@lang('app.title')</label>
 
@@ -42,7 +43,6 @@
                             <textarea class="form-control" name="content" id="baseContent" rows="6">{{ $model->content }}</textarea>
                         </div>
 
-
                         <div class="form-group">
                             <label class="col-form-label" for="baseStatus">@lang('app.status')</label>
                             <select name="status" id="baseStatus" class="form-control">
@@ -50,6 +50,8 @@
                                 <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
                             </select>
                         </div>
+
+                        @include('backend.seo_form')
                     </div>
 
                     <div class="col-md-4">

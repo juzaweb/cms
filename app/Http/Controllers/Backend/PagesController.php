@@ -73,8 +73,6 @@ class PagesController extends Controller
         
         $model = Pages::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
-        $model->createSlug();
-        $model->createThumbnail($request->post('thumbnail'));
         $model->save();
         
         return response()->json([

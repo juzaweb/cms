@@ -14,6 +14,9 @@ class CreateCountriesTable extends Migration
             $table->string('slug', 150)->unique();
             $table->string('description', 300)->nullable();
             $table->tinyInteger('status')->default(0);
+            $table->string('meta_title', 70)->nullable();
+            $table->string('meta_description', 320)->nullable();
+            $table->string('keywords', 320)->nullable();
             $table->timestamps();
         });
     }

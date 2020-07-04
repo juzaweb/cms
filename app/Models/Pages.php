@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UseMetaSeo;
 use App\Traits\UseSlug;
 use App\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
@@ -32,7 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Pages extends Model
 {
-    use UseThumbnail, UseSlug;
+    use UseThumbnail, UseSlug, UseMetaSeo;
     
     protected $table = 'pages';
     protected $primaryKey = 'id';

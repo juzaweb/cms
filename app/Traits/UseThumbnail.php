@@ -4,14 +4,25 @@ namespace App\Traits;
 
 trait UseThumbnail {
     
+    public static function bootUseThumbnail()
+    {
+        $thumbnail = request()->post('thumbnail');
+        static::saving(function ($model) use ($thumbnail) {
+            $model->thumbnail = $model->generateThumbnail($thumbnail);
+        });
+    }
+    
     public function getThumbnail() {
         return image_url($this->thumbnail);
     }
     
-    public function createThumbnail($thumbnail = null) {
+    protected function generateThumbnail($thumbnail) {
         if ($thumbnail) {
-            $this->thumbnail = explode('uploads', $thumbnail)[1];
+            $upload_url = \Storage::disk('uploads')->url('/');
+            return str_replace($upload_url, '', $thumbnail);
         }
+        
+        return null;
     }
     
 }

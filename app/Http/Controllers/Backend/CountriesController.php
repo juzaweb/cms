@@ -74,7 +74,6 @@ class CountriesController extends Controller
         
         $model = Countries::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
-        $model->createSlug();
         $model->save();
         
         return response()->json([

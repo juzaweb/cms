@@ -48,6 +48,8 @@
                                 <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
                             </select>
                         </div>
+
+                        @include('backend.seo_form')
                     </div>
                 </div>
 

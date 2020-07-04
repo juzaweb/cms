@@ -10,6 +10,12 @@
         </div>
     </div>
 
+    <div class="mr-4 d-none d-md-block">
+        <a href="{{ route('home') }}" data-turbolinks="false" target="_blank" class="text-nowrap">
+            <span>VIEW WEBSITE</span>
+        </a>
+    </div>
+
     <div class="dropdown mr-4 d-none d-sm-block">
         <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" data-offset="5,15">
             <span class="dropdown-toggle-text">EN</span>

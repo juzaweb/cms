@@ -31,6 +31,7 @@
 
                 <div class="row">
                     <div class="col-md-8">
+
                         <div class="form-group">
                             <label class="col-form-label" for="baseName">@lang('app.name')</label>
 
@@ -49,6 +50,8 @@
                                 <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
                             </select>
                         </div>
+
+                        @include('backend.seo_form')
                     </div>
 
                     <div class="col-md-4">

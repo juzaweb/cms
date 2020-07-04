@@ -75,7 +75,6 @@ class PostCategoriesController extends Controller
         $addtype = $request->post('addtype');
         $model = PostCategories::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
-        $model->createSlug();
         $model->save();
         
         if ($addtype == 2) {

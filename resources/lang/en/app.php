@@ -68,5 +68,11 @@ return [
     'confirm_password' => 'Confirm password',
     'add_category' => 'Add category',
     'add_tags' => 'Add tags',
-    'data_error' => 'Data error'
+    'data_error' => 'Data error',
+    'seo_and_marketing' => 'SEO & Marketing',
+    'slug' => 'Slug',
+    'meta_title' => 'Meta Title',
+    'meta_description' => 'Meta Description',
+    'use_comma_to_separate_keyword' => 'Use comma(,) to separate keyword.',
+    'keywords' => 'Keywords',
 ];

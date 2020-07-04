@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7ef7d64a532e61902424c1ecf3874eb",
+    "content-hash": "2c5fbe3b198d49e740250ac8f18630e0",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -519,6 +519,48 @@
                 "parser"
             ],
             "time": "2019-12-30T22:54:17+00:00"
+        },
+        {
+            "name": "esemve/hook",
+            "version": "0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/esemve/Hook.git",
+                "reference": "ddbdf983776f08ef80335dca95e12917568403dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/esemve/Hook/zipball/ddbdf983776f08ef80335dca95e12917568403dc",
+                "reference": "ddbdf983776f08ef80335dca95e12917568403dc",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.* || 6.*",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Esemve\\Hook\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bence Kádár",
+                    "email": "esemve@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple hook engine for Laravel 5.*, 6.*",
+            "keywords": [
+                "HOOK",
+                "laravel"
+            ],
+            "time": "2019-09-24T12:16:44+00:00"
         },
         {
             "name": "facade/ignition-contracts",

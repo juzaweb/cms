@@ -6,42 +6,18 @@
         </a>
     </li>
 
-    <li class="cui__menuLeft__item cui__menuLeft__submenu">
-      <span class="cui__menuLeft__item__link">
-        <span class="cui__menuLeft__item__title">@lang('app.movies')</span>
-        <i class="cui__menuLeft__item__icon fe fe-film"></i>
-      </span>
-        <ul class="cui__menuLeft__navigation">
-            <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="{{ route('admin.movies') }}">
-                    <span class="cui__menuLeft__item__title">@lang('app.movies')</span>
-                </a>
-            </li>
-            <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="{{ route('admin.movies.create') }}">
-                    <span class="cui__menuLeft__item__title">@lang('app.add_new')</span>
-                </a>
-            </li>
-        </ul>
+    <li class="cui__menuLeft__item">
+        <a class="cui__menuLeft__item__link" href="{{ route('admin.movies') }}">
+            <span class="cui__menuLeft__item__title">@lang('app.movies')</span>
+            <i class="cui__menuLeft__item__icon fe fe-film"></i>
+        </a>
     </li>
 
-    <li class="cui__menuLeft__item cui__menuLeft__submenu">
-      <span class="cui__menuLeft__item__link">
-        <span class="cui__menuLeft__item__title">@lang('app.tv_series')</span>
-        <i class="cui__menuLeft__item__icon fe fe-film"></i>
-      </span>
-        <ul class="cui__menuLeft__navigation">
-            <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="{{ route('admin.movies') }}">
-                    <span class="cui__menuLeft__item__title">@lang('app.tv_series')</span>
-                </a>
-            </li>
-            <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="">
-                    <span class="cui__menuLeft__item__title">@lang('app.add_new')</span>
-                </a>
-            </li>
-        </ul>
+    <li class="cui__menuLeft__item">
+        <a class="cui__menuLeft__item__link" href="{{ route('admin.movies') }}">
+            <span class="cui__menuLeft__item__title">@lang('app.tv_series')</span>
+            <i class="cui__menuLeft__item__icon fe fe-film"></i>
+        </a>
     </li>
 
     <li class="cui__menuLeft__item">

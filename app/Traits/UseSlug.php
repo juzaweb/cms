@@ -6,19 +6,34 @@ use Illuminate\Support\Str;
 
 trait UseSlug {
     
-    public function createSlug() {
-        if ($this->name) {
-            $this->slug = Str::slug($this->name);
-            $this->slug = substr($this->slug, 0, 150);
-            
-            $count = self::where('id', '!=', $this->id)
-                ->where('slug', '=', $this->slug)
-                ->count();
-            
-            if ($count > 0) {
-                $this->slug .= '-'. ($count + 1);
-            }
+    public static function bootUseSlug()
+    {
+        static::saving(function ($model) {
+            $model->slug = $model->generateSlug($model->name ?: $model->title);
+        });
+    }
+    
+    protected function generateSlug($string) {
+        $slug = request()->post('slug');
+        
+        if ($slug) {
+            $slug = substr($slug, 0, 70);
+            $slug = Str::slug($slug);
         }
+        else {
+            $slug = substr($string, 0, 70);
+            $slug = Str::slug($slug);
+        }
+        
+        $count = self::where('id', '!=', $this->id)
+            ->where('slug', '=', $this->slug)
+            ->count();
+    
+        if ($count > 0) {
+            $slug .= '-'. ($count + 1);
+        }
+        
+        return $slug;
     }
     
 }
