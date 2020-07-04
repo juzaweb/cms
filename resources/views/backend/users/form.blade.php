@@ -38,37 +38,51 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseDescription">@lang('app.description')</label>
-                            <textarea class="form-control" name="description" id="baseDescription" rows="6">{{ $model->description }}</textarea>
+                            <label class="col-form-label" for="baseEmail">@lang('app.email')</label>
+                            <input type="text" class="form-control" id="baseEmail" value="{{ $model->email }}" autocomplete="off" @if($model->id) disabled @else name="email" required @endif>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseType">@lang('app.type')</label>
-                            <select name="type" id="baseType" class="form-control">
-                                <option value="actor" @if($model->type == 'actor') selected @endif>@lang('app.actor')</option>
-                                <option value="director" @if($model->type == 'director') selected @endif>@lang('app.director')</option>
-                                <option value="writer" @if($model->type == 'writer') selected @endif>@lang('app.writer')</option>
+                            <label class="col-form-label" for="is_admin">@lang('app.is_admin')</label>
+                            <select name="is_admin" id="is_admin" class="form-control" required>
+                                <option value="0" @if($model->type == 0) selected @endif>@lang('app.no')</option>
+                                <option value="1" @if($model->type == 1) selected @endif>@lang('app.yes')</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label class="col-form-label" for="baseStatus">@lang('app.status')</label>
-                            <select name="status" id="baseStatus" class="form-control">
+                            <select name="status" id="baseStatus" class="form-control" required>
                                 <option value="1" @if($model->status == 1) selected @endif>@lang('app.enabled')</option>
                                 <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
                             </select>
                         </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="password">@lang('app.password')</label>
+
+                            <input type="password" name="password" class="form-control" id="password" autocomplete="off" @if(empty($model->id)) required @endif>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="password_confirmation">@lang('app.confirm_password')</label>
+
+                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" autocomplete="off" @if(empty($model->id)) required @endif>
+                        </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
                         <div class="form-thumbnail text-center">
-                            <input id="thumbnail" type="hidden" name="thumbnail">
+                            <input id="avatar" type="file" name="avatar" class="d-none" accept="image/jpeg,image/png,image/gif">
                             <div id="holder">
                                 <img src="{{ $model->getAvatar() }}" class="w-100">
                             </div>
 
-                            <a href="javascript:void(0)" class="btn btn-primary text-capitalize">
-                                <i class="fa fa-picture-o"></i> @lang('app.choose_image')
+                            <a href="javascript:void(0)" class="btn btn-primary text-capitalize choose-avatar">
+                                <i class="fa fa-picture-o"></i> @lang('app.choose_avatar')
                             </a>
                         </div>
 
@@ -79,5 +93,27 @@
             </div>
         </div>
     </form>
+
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#holder img').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#avatar").change(function() {
+            readURL(this);
+        });
+
+        $('.choose-avatar').on('click', function () {
+            $("#avatar").trigger('click');
+        });
+    </script>
 </div>
 @endsection

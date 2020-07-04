@@ -100,7 +100,7 @@ return [
 
     'alphanumeric_filename'    => true,
 
-    'alphanumeric_directory'   => false,
+    'alphanumeric_directory'   => true,
 
     'should_validate_size'     => true,
 

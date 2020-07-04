@@ -40,6 +40,7 @@ class UsersController extends Controller
         $rows = $query->get();
         
         foreach ($rows as $row) {
+            $row->thumb_url = $row->getAvatar();
             $row->created = $row->created_at->format('H:i d/m/Y');
             $row->edit_url = route('admin.users.edit', ['id' => $row->id]);
         }
@@ -61,15 +62,53 @@ class UsersController extends Controller
     public function save(Request $request) {
         $this->validateRequest([
             'name' => 'required|string|max:250',
+            'password' => 'required_if:id,',
+            'avatar' => 'nullable|mimetypes:image/jpeg,image/png,image/gif',
+            'email' => 'required_if:id,|unique:users,email',
             'status' => 'required|in:0,1',
         ], $request, [
             'name' => trans('app.name'),
+            'email' => trans('app.email'),
+            'password' => trans('app.password'),
+            'avatar' => trans('app.avatar'),
             'status' => trans('app.status'),
         ]);
         
-        $model = User::firstOrNew(['id' => $request->id]);
+        $model = User::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
+        
+        if (empty($model->id)) {
+            
+            
+            $model->setAttribute('email', $request->post('email'));
+        }
+        
+        if ($request->post('password')) {
+            $this->validateRequest([
+                'password' => 'required|string|max:32|min:6|confirmed',
+                'password_confirmation' => 'required|string|max:32|min:6'
+            ], $request, [
+                'password' => trans('app.password'),
+                'password_confirmation' => trans('app.confirm_password')
+            ]);
+            
+            $model->setAttribute('password', \Hash::make($request->post('password')));
+        }
+        
         $model->save();
+        
+        if ($request->hasFile('avatar')) {
+            $path_upload = \Storage::disk('public')->path('/avatar');
+            $avatar = $request->file('avatar');
+            $extention = $avatar->getClientOriginalExtension();
+            $newname = $model->id . '.' . $extention;
+            $upload = $avatar->move($path_upload, $newname);
+            
+            if ($upload) {
+                User::where('id', '=', $model->id)
+                    ->update(['avatar' => $newname]);
+            }
+        }
         
         return response()->json([
             'status' => 'success',
@@ -85,7 +124,7 @@ class UsersController extends Controller
             'ids' => trans('app.users')
         ]);
         
-        User::destroy($request->ids);
+        User::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',

@@ -40,6 +40,7 @@
                         <div class="form-group mb-2 mr-1">
                             <label for="inputStatus" class="sr-only">@lang('app.status')</label>
                             <select name="status" id="inputStatus" class="form-control">
+                                <option value="">--- @lang('app.status') ---</option>
                                 <option value="1">@lang('app.enabled')</option>
                                 <option value="0">@lang('app.disabled')</option>
                             </select>
@@ -58,7 +59,7 @@
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
                             <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('app.thumbnail')</th>
                             <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
-                            <th data-width="20%" data-field="description">@lang('app.description')</th>
+                            <th data-width="15%" data-field="email">@lang('app.email')</th>
                             <th data-width="15%" data-field="created">@lang('app.created_at')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                         </tr>
