@@ -69,6 +69,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereKeywords($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereMetaDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereMetaTitle($value)
+ * @property string|null $other_name
+ * @property string|null $poster
+ * @property string|null $actors
+ * @property string|null $tags
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereActors($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereOtherName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies wherePoster($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTags($value)
  */
 class Movies extends Model
 {

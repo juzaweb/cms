@@ -14,7 +14,7 @@
     </li>
 
     <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link" href="{{ route('admin.movies') }}">
+        <a class="cui__menuLeft__item__link" href="{{ route('admin.tv_series') }}">
             <span class="cui__menuLeft__item__title">@lang('app.tv_series')</span>
             <i class="cui__menuLeft__item__icon fe fe-film"></i>
         </a>

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Movies;
 
-class MoviesController extends Controller
+class TVSeriesController extends Controller
 {
     public function index() {
         return view('backend.movies.index');
@@ -19,14 +19,14 @@ class MoviesController extends Controller
     public function getData(Request $request) {
         $search = $request->get('search');
         $status = $request->get('status');
-    
+        
         $sort = $request->get('sort', 'a.id');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
         $query = Movies::query();
-        $query->where('tv_series', '=', 0);
+        $query->where('tv_series', '=', 1);
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -34,7 +34,7 @@ class MoviesController extends Controller
                 $subquery->orWhere('description', 'like', '%'. $search .'%');
             });
         }
-    
+        
         if (!is_null($status)) {
             $query->where('status', '=', $status);
         }
@@ -49,7 +49,6 @@ class MoviesController extends Controller
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i d/m/Y');
             $row->edit_url = route('admin.movies.edit', ['id' => $row->id]);
-            $row->upload_url = route('admin.movies.upload', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -103,7 +102,7 @@ class MoviesController extends Controller
             'video_quality' => trans('app.video_quality'),
             'trailer_link' => trans('app.trailer'),
         ]);
-    
+        
         $genres = $request->post('genres', []);
         $countries = $request->post('countries', []);
         $actors = $request->post('actors', []);

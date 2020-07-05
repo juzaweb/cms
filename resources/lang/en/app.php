@@ -22,6 +22,8 @@ return [
     'disabled' => 'Disabled',
     'created_at' => 'Created at',
     'add_new' => 'Add new',
+    'add_server' => 'Add server',
+    'servers' => 'Servers',
     'delete' => 'Delete',
     'save' => 'Save',
     'cancel' => 'Cancel',
@@ -93,4 +95,8 @@ return [
     'add_actor' => 'Add actor',
     'add_director' => 'Add director',
     'add_writer' => 'Add writer',
+    'options' => 'Options',
+    'preview' => 'Preview',
+    'upload' => 'Upload',
+    'order' => 'Order',
 ];

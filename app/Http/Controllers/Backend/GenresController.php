@@ -74,7 +74,7 @@ class GenresController extends Controller
         ]);
     
         $addtype = $request->post('addtype');
-        $model = Genres::firstOrNew(['id' => $request->id]);
+        $model = Genres::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->save();
     

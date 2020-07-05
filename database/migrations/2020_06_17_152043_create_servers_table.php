@@ -10,13 +10,10 @@ class CreateServersTable extends Migration
     {
         Schema::create('servers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('stream_key', 100)->unique()->index();
             $table->string('name', 100);
-            $table->string('source_type', 100);
-            $table->string('file_source', 100);
-            $table->text('file_url');
             $table->integer('order')->default(1);
             $table->bigInteger('movie_id')->index();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

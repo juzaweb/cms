@@ -23,6 +23,30 @@ Route::group(['prefix' => 'admin/movies', 'middleware' => ['web', 'admin']], fun
     Route::post('/remove', 'Backend\MoviesController@remove')->name('admin.movies.remove');
 });
 
+Route::group(['prefix' => 'admin/movies/upload', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/{id}', 'Backend\MovieUploadController@index')->name('admin.movies.upload')->where('id', '[0-9]+');
+    
+    Route::get('/{id}/getdata', 'Backend\MovieUploadController@getData')->name('admin.movies.upload.getdata')->where('id', '[0-9]+');
+    
+    Route::post('/{id}/save', 'Backend\MovieUploadController@save')->name('admin.movies.upload.save')->where('id', '[0-9]+');
+    
+    Route::post('/{id}/remove', 'Backend\MovieUploadController@remove')->name('admin.movies.upload.remove')->where('id', '[0-9]+');
+});
+
+Route::group(['prefix' => 'admin/tv-series', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\TVSeriesController@index')->name('admin.tv_series');
+    
+    Route::get('/getdata', 'Backend\TVSeriesController@getData')->name('admin.tv_series.getdata');
+    
+    Route::get('/create', 'Backend\TVSeriesController@form')->name('admin.tv_series.create');
+    
+    Route::get('/edit/{id}', 'Backend\TVSeriesController@form')->name('admin.tv_series.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\TVSeriesController@save')->name('admin.tv_series.save');
+    
+    Route::post('/remove', 'Backend\TVSeriesController@remove')->name('admin.tv_series.remove');
+});
+
 Route::group(['prefix' => 'admin/genres', 'middleware' => ['web', 'admin']], function () {
     Route::get('/', 'Backend\GenresController@index')->name('admin.genres');
     

@@ -60,8 +60,8 @@
                             <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('app.thumbnail')</th>
                             <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
                             <th data-width="20%" data-field="description">@lang('app.description')</th>
-                            <th data-width="15%" data-field="created">@lang('app.created_at')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
+                            <th data-width="20%" data-field="options" data-align="center" data-formatter="options_formatter">@lang('app.options')</th>
                         </tr>
                     </thead>
                 </table>
@@ -84,6 +84,13 @@
             return '<span class="text-success">@lang('app.enabled')</span>';
         }
         return '<span class="text-danger">@lang('app.disabled')</span>';
+    }
+
+    function options_formatter(value, row, index) {
+        let result = '';
+        result += '<a href="" target="_blank" class="btn btn-success btn-sm mr-1" data-turbolinks="false"><i class="fa fa-eye"></i> @lang('app.preview')</a>';
+        result += '<a href="'+ row.upload_url +'" class="btn btn-success btn-sm"><i class="fa fa-upload"></i> @lang('app.upload')</a>';
+        return result;
     }
 
     var table = new LoadBootstrapTable({
