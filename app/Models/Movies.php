@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title_en
  * @property string $slug
  * @property string|null $description
- * @property string|null $stars
  * @property string|null $directors
  * @property string|null $writers
  * @property string|null $rating
@@ -64,6 +63,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereThumbnail($value)
  * @property int $tv_series
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTvSeries($value)
+ * @property string|null $meta_title
+ * @property string|null $meta_description
+ * @property string|null $keywords
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereMetaDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereMetaTitle($value)
  */
 class Movies extends Model
 {
@@ -73,7 +78,17 @@ class Movies extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'name',
+        'other_name',
         'description',
         'thumbnail',
+        'poster',
+        'rating',
+        'release',
+        'runtime',
+        'video_quality',
+        'trailer_link',
+        'current_episode',
+        'max_episode',
+        'status',
     ];
 }

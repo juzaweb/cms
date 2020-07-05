@@ -25,6 +25,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Comments whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Comments whereUserId($value)
  * @mixin \Eloquent
+ * @property int $subject_id
+ * @property int $type 1: movie / 2: post
+ * @property int $approved
+ * @property-read \App\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Comments whereApproved($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Comments whereSubjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Comments whereType($value)
  */
 class Comments extends Model
 {

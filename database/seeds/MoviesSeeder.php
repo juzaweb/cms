@@ -11,7 +11,7 @@ class MoviesSeeder extends Seeder
             $name = $faker->name;
             DB::table('movies')->insert([
                 'name' => $name,
-                'name_en' => $faker->name,
+                'other_name' => $faker->name,
                 'slug' => \Illuminate\Support\Str::slug($name),
                 'status' => 1,
                 'created_at' => $faker->dateTime(),

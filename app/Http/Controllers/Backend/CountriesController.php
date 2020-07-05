@@ -61,7 +61,7 @@ class CountriesController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250',
+            'name' => 'required|string|max:250:unique:countries,name',
             'description' => 'nullable|string|max:300',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
@@ -71,10 +71,15 @@ class CountriesController extends Controller
             'status' => trans('app.status'),
             'thumbnail' => trans('app.thumbnail'),
         ]);
-        
+    
+        $addtype = $request->post('addtype');
         $model = Countries::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
         $model->save();
+    
+        if ($addtype == 2) {
+            return response()->json($model->toArray());
+        }
         
         return response()->json([
             'status' => 'success',

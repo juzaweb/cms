@@ -1,8 +1,10 @@
 $(document).on("turbolinks:load", function() {
     $('#lfm').filemanager('image');
 
-    var tag_item = '<span class="tag m-1">{name} <a href="javascript:void(0)" class="text-danger ml-1 remove-tags"><i class="fa fa-times-circle"></i></a>\n' +
-        '  <input type="hidden" name="tags[]" class="tag-explode" value="{id}">\n' +
+    $('.lfm').filemanager('image');
+
+    var tag_item = '<span class="tag m-1">{name} <a href="javascript:void(0)" class="text-danger ml-1 remove-tag-item"><i class="fa fa-times-circle"></i></a>\n' +
+        '  <input type="hidden" name="{field}[]" class="{field}-explode" value="{id}">\n' +
         '</span>';
 
     $('.add-new-category').on('click', function () {
@@ -25,11 +27,11 @@ $(document).on("turbolinks:load", function() {
 
     $('.select-tags').on('change', function () {
         let id = $(this).val();
-        let name = $(this).text();
-
+        let name = $(this).find('option:selected').text();
         let item = replace_template(tag_item, {
             'name': name,
             'id': id,
+            'field': 'tags',
         });
 
         $(".show-tags").append(item);
@@ -99,9 +101,310 @@ $(document).on("turbolinks:load", function() {
                 return false;
             }
 
+            data.field = 'tags';
+
             let item = replace_template(tag_item, data);
             $(".show-tags").append(item);
             $("#tagsName").val('');
+
+            return false;
+        }).fail(function(data) {
+            show_message(langs.data_error, 'error');
+            return false;
+        });
+    });
+
+    /* genres */
+
+    $('.add-new-genres').on('click', function () {
+        if ($('.form-add-genres').is(":hidden")) {
+            $('.form-add-genres').show('slow');
+        }
+        else {
+            $('.form-add-genres').hide('slow');
+        }
+    });
+
+    $('.select-genres').on('change', function () {
+        let id = $(this).val();
+        let name = $(this).find('option:selected').text();
+
+        let item = replace_template(tag_item, {
+            'name': name,
+            'id': id,
+            'field': 'genres',
+        });
+
+        $(".show-genres").append(item);
+        $(this).val(null).trigger('change.select2');
+    });
+
+    $('.form-add-genres').on('click', '.add-genres', function () {
+        let name = $("#genresName").val();
+
+        if (!name) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin/genres/save',
+            dataType: 'json',
+            data: {
+                'name': name,
+                'status': 1,
+                'addtype': 2,
+            }
+        }).done(function(data) {
+
+            if (data.status === "error") {
+                show_message(data.message, 'error');
+                return false;
+            }
+
+            data.field = 'genres';
+            let item = replace_template(tag_item, data);
+            $(".show-genres").append(item);
+            $("#genresName").val('');
+
+            return false;
+        }).fail(function(data) {
+            show_message(langs.data_error, 'error');
+            return false;
+        });
+    });
+
+    /* countries */
+    $('.add-new-countries').on('click', function () {
+        if ($('.form-add-countries').is(":hidden")) {
+            $('.form-add-countries').show('slow');
+        }
+        else {
+            $('.form-add-countries').hide('slow');
+        }
+    });
+
+    $('.select-countries').on('change', function () {
+        let id = $(this).val();
+        let name = $(this).find('option:selected').text();
+
+        let item = replace_template(tag_item, {
+            'name': name,
+            'id': id,
+            'field': 'countries',
+        });
+
+        $(".show-countries").append(item);
+        $(this).val(null).trigger('change.select2');
+    });
+
+    $('.form-add-countries').on('click', '.add-countries', function () {
+        let name = $("#countriesName").val();
+
+        if (!name) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin/countries/save',
+            dataType: 'json',
+            data: {
+                'name': name,
+                'status': 1,
+                'addtype': 2,
+            }
+        }).done(function(data) {
+
+            if (data.status === "error") {
+                show_message(data.message, 'error');
+                return false;
+            }
+
+            data.field = 'countries';
+            let item = replace_template(tag_item, data);
+            $(".show-countries").append(item);
+            $("#countriesName").val('');
+
+            return false;
+        }).fail(function(data) {
+            show_message(langs.data_error, 'error');
+            return false;
+        });
+    });
+
+    /* actors */
+    $('.add-new-actors').on('click', function () {
+        if ($('.form-add-actors').is(":hidden")) {
+            $('.form-add-actors').show('slow');
+        }
+        else {
+            $('.form-add-actors').hide('slow');
+        }
+    });
+
+    $('.select-actors').on('change', function () {
+        let id = $(this).val();
+        let name = $(this).find('option:selected').text();
+
+        let item = replace_template(tag_item, {
+            'name': name,
+            'id': id,
+            'field': 'actors',
+        });
+
+        $(".show-actors").append(item);
+        $(this).val(null).trigger('change.select2');
+    });
+
+    $('.form-add-actors').on('click', '.add-actors', function () {
+        let name = $("#actorsName").val();
+
+        if (!name) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin/stars/save',
+            dataType: 'json',
+            data: {
+                'name': name,
+                'status': 1,
+                'addtype': 2,
+                'type': 'actor',
+                'field': 'actors',
+            }
+        }).done(function(data) {
+
+            if (data.status === "error") {
+                show_message(data.message, 'error');
+                return false;
+            }
+
+            let item = replace_template(tag_item, data);
+            $(".show-actors").append(item);
+            $("#actorsName").val('');
+
+            return false;
+        }).fail(function(data) {
+            show_message(langs.data_error, 'error');
+            return false;
+        });
+    });
+
+    /* directors */
+    $('.add-new-directors').on('click', function () {
+        if ($('.form-add-directors').is(":hidden")) {
+            $('.form-add-directors').show('slow');
+        }
+        else {
+            $('.form-add-directors').hide('slow');
+        }
+    });
+
+    $('.select-directors').on('change', function () {
+        let id = $(this).val();
+        let name = $(this).find('option:selected').text();
+
+        let item = replace_template(tag_item, {
+            'name': name,
+            'id': id,
+            'field': 'directors',
+        });
+
+        $(".show-directors").append(item);
+        $(this).val(null).trigger('change.select2');
+    });
+
+    $('.form-add-directors').on('click', '.add-directors', function () {
+        let name = $("#directorsName").val();
+
+        if (!name) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin/stars/save',
+            dataType: 'json',
+            data: {
+                'name': name,
+                'status': 1,
+                'addtype': 2,
+                'type': 'director',
+                'field': 'directors',
+            }
+        }).done(function(data) {
+
+            if (data.status === "error") {
+                show_message(data.message, 'error');
+                return false;
+            }
+
+            let item = replace_template(tag_item, data);
+            $(".show-directors").append(item);
+            $("#directorsName").val('');
+
+            return false;
+        }).fail(function(data) {
+            show_message(langs.data_error, 'error');
+            return false;
+        });
+    });
+
+    /* writers */
+    $('.add-new-writers').on('click', function () {
+        if ($('.form-add-writers').is(":hidden")) {
+            $('.form-add-writers').show('slow');
+        }
+        else {
+            $('.form-add-writers').hide('slow');
+        }
+    });
+
+    $('.select-writers').on('change', function () {
+        let id = $(this).val();
+        let name = $(this).find('option:selected').text();
+
+        let item = replace_template(tag_item, {
+            'name': name,
+            'id': id,
+            'field': 'writers',
+        });
+
+        $(".show-writers").append(item);
+        $(this).val(null).trigger('change.select2');
+    });
+
+    $('.form-add-writers').on('click', '.add-writers', function () {
+        let name = $("#writersName").val();
+
+        if (!name) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin/stars/save',
+            dataType: 'json',
+            data: {
+                'name': name,
+                'status': 1,
+                'addtype': 2,
+                'type': 'writer',
+                'field': 'writers',
+            }
+        }).done(function(data) {
+
+            if (data.status === "error") {
+                show_message(data.message, 'error');
+                return false;
+            }
+
+            let item = replace_template(tag_item, data);
+            $(".show-writers").append(item);
+            $("#writersName").val('');
 
             return false;
         }).fail(function(data) {

@@ -6,13 +6,13 @@ ul {
     color: red;
 }
 
-#holder {
+#holder, #holder-poster {
     padding: 5px;
     border: 1px solid #ccc;
     margin-bottom: 10px;
 }
 
-#holder img{
+.form-thumbnail img{
     width: 100%;
 }
 
@@ -56,4 +56,8 @@ ul {
 .show-categories {
     overflow: auto;
     height: 200px;
+}
+
+.table a{
+    color: #007bff;
 }

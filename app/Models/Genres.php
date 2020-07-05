@@ -30,6 +30,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Genres whereThumbnail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Genres whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $meta_title
+ * @property string|null $meta_description
+ * @property string|null $keywords
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Genres whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Genres whereMetaDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Genres whereMetaTitle($value)
  */
 class Genres extends Model
 {

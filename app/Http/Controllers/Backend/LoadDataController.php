@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Countries;
 use App\Models\Genres;
 use App\Models\PostCategories;
 use App\Models\Stars;
@@ -27,6 +28,33 @@ class LoadDataController extends Controller
         $explodes = $request->get('explodes');
         
         $query = Genres::query();
+        $query->select([
+            'id',
+            'name AS text'
+        ]);
+        
+        if ($search) {
+            $query->where('name', 'like', '%'. $search .'%');
+        }
+        
+        if ($explodes) {
+            $query->whereNotIn('id', $explodes);
+        }
+        
+        $paginate = $query->paginate(10);
+        $data['results'] = $query->get();
+        if ($paginate->nextPageUrl()) {
+            $data['pagination'] = ['more' => true];
+        }
+        
+        return response()->json($data);
+    }
+    
+    protected function loadCountries(Request $request) {
+        $search = $request->get('search');
+        $explodes = $request->get('explodes');
+        
+        $query = Countries::query();
         $query->select([
             'id',
             'name AS text'

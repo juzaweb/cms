@@ -34,6 +34,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereCategory($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereTags($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereThumbnail($value)
+ * @property string|null $meta_title
+ * @property string|null $meta_description
+ * @property string|null $keywords
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereMetaDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereMetaTitle($value)
  */
 class Posts extends Model
 {

@@ -26,7 +26,7 @@ trait UseSlug {
         }
         
         $count = self::where('id', '!=', $this->id)
-            ->where('slug', '=', $this->slug)
+            ->where('slug', 'like', $slug . '%')
             ->count();
     
         if ($count > 0) {

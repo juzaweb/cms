@@ -28,6 +28,12 @@ use Illuminate\Support\Str;
  * @mixin \Eloquent
  * @property string|null $description
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Countries whereDescription($value)
+ * @property string|null $meta_title
+ * @property string|null $meta_description
+ * @property string|null $keywords
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Countries whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Countries whereMetaDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Countries whereMetaTitle($value)
  */
 class Countries extends Model
 {

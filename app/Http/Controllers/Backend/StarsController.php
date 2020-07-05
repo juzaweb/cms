@@ -62,7 +62,7 @@ class StarsController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250',
+            'name' => 'required|string|max:250|unique:stars,name',
             'description' => 'nullable|string|max:300',
             'type' => 'required|string|in:director,actor,writer',
             'status' => 'required|in:0,1',
@@ -70,13 +70,19 @@ class StarsController extends Controller
         ], $request, [
             'name' => trans('app.name'),
             'description' => trans('app.description'),
+            'type' => trans('app.type'),
             'status' => trans('app.status'),
             'thumbnail' => trans('app.thumbnail'),
         ]);
-        
+    
+        $addtype = $request->post('addtype');
         $model = Stars::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
         $model->save();
+    
+        if ($addtype == 2) {
+            return response()->json($model->toArray());
+        }
         
         return response()->json([
             'status' => 'success',

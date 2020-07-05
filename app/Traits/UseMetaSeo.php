@@ -24,7 +24,7 @@ trait UseMetaSeo {
             return $this->generateString($string, 15, 70);
         }
         
-        return $this->generateString(isset($this->name) ?:$this->title, 15, 70);
+        return $this->generateString($this->name ?:$this->title, 15, 70);
     }
     
     protected function generateMetaDescription($string) {
