@@ -7,5 +7,11 @@ use App\Http\Controllers\Controller;
 
 class MovieEpisodesController extends Controller
 {
-    //
+    public function index() {
+    
+    }
+    
+    public function getData() {
+    
+    }
 }

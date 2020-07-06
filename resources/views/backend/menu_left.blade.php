@@ -162,7 +162,7 @@
             </li>
 
             <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="">
+                <a href="{{ route('admin.languages') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.language')</span>
                 </a>
             </li>

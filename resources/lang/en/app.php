@@ -9,6 +9,8 @@ return [
     'genre' => 'Genre',
     'genres' => 'Genres',
     'add_genres' => 'Add genres',
+    'key' => 'Key',
+    'code' => 'Code',
     'name' => 'Name',
     'other_name' => 'Other name',
     'email' => 'Email',
@@ -23,6 +25,7 @@ return [
     'created_at' => 'Created at',
     'add_new' => 'Add new',
     'add_server' => 'Add server',
+    'add_language' => 'Add language',
     'servers' => 'Servers',
     'delete' => 'Delete',
     'save' => 'Save',
@@ -99,4 +102,6 @@ return [
     'preview' => 'Preview',
     'upload' => 'Upload',
     'order' => 'Order',
+    'close' => 'Close',
+    'sync_language' => 'Sync language',
 ];

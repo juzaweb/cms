@@ -173,3 +173,14 @@ Route::group(['prefix' => 'admin/users', 'middleware' => ['web', 'admin']], func
     Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
 });
 
+Route::group(['prefix' => 'admin/settting/languages', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Backend\LanguagesController@index')->name('admin.languages');
+    
+    Route::get('/getdata', 'Backend\LanguagesController@getData')->name('admin.languages.getdata');
+    
+    Route::post('/save', 'Backend\LanguagesController@save')->name('admin.languages.save');
+    
+    Route::post('/remove', 'Backend\LanguagesController@remove')->name('admin.languages.remove');
+    
+    Route::post('/sync', 'Backend\LanguagesController@syncLanguage')->name('admin.languages.sync');
+});

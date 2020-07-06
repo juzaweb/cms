@@ -96,7 +96,7 @@ class GenresController extends Controller
             'ids' => trans('app.genres')
         ]);
         
-        Genres::destroy($request->ids);
+        Genres::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
