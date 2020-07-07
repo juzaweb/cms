@@ -22,3 +22,24 @@ Breadcrumbs::for('manager', function ($trail, $parent, $model = null) {
         }
     }
 });
+
+Breadcrumbs::for('multiple_parent', function ($trail, $parents, $model = null) {
+    $trail->parent('admin');
+    foreach ($parents as $parent) {
+        $trail->push($parent['name'], $parent['url']);
+    }
+    
+    if ($model) {
+        if ($model->name || $model->title) {
+            if ($model->name) {
+                $trail->push($model->name);
+            }
+            else {
+                $trail->push($model->title);
+            }
+        }
+        else {
+            $trail->push(trans('app.add_new'));
+        }
+    }
+});

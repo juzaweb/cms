@@ -130,8 +130,8 @@
 
     <script type="text/javascript">
         CKEDITOR.replace('baseContent', {
-            filebrowserImageBrowseUrl: '/filemanager?type=Images',
-            filebrowserBrowseUrl: '/filemanager?type=Files'
+            filebrowserImageBrowseUrl: '/admin/filemanager?type=Images',
+            filebrowserBrowseUrl: '/admin/filemanager?type=Files'
         });
     </script>
 </div>

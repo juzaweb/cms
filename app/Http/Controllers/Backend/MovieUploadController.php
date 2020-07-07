@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Movies;
 use App\Models\Servers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,8 +10,10 @@ use App\Http\Controllers\Controller;
 class MovieUploadController extends Controller
 {
     public function index($id) {
+        $movie = Movies::where('id', '=', $id)->firstOrFail();
         return view('backend.movie_upload.index', [
-            'id' => $id
+            'id' => $id,
+            'movie' => $movie
         ]);
     }
     

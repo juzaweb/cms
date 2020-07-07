@@ -1,7 +1,7 @@
 $(document).on("turbolinks:load", function() {
-    $('#lfm').filemanager('image');
+    $('#lfm').filemanager('image', {prefix: 'admin/filemanager'});
 
-    $('.lfm').filemanager('image');
+    $('.lfm').filemanager('image', {prefix: 'admin/filemanager'});
 
     var tag_item = '<span class="tag m-1">{name} <a href="javascript:void(0)" class="text-danger ml-1 remove-tag-item"><i class="fa fa-times-circle"></i></a>\n' +
         '  <input type="hidden" name="{field}[]" class="{field}-explode" value="{id}">\n' +

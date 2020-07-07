@@ -4,10 +4,16 @@
 
 @section('content')
 
-{{ Breadcrumbs::render('manager', [
+{{ Breadcrumbs::render('multiple_parent', [
+    [
+        'name' => trans('app.language'),
+        'url' => route('admin.languages')
+    ],
+    [
         'name' => trans('app.translate'),
         'url' => route('admin.translate', ['lang' => $lang])
-    ]) }}
+    ]
+]) }}
 
 <div class="cui__utils__content">
     <div class="card">

@@ -1,25 +1,35 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.pages'))
+@section('title', trans('app.upload'))
 
 @section('content')
 
-    {{ Breadcrumbs::render('manager', [
-            'name' => trans('app.pages'),
-            'url' => route('admin.pages')
-        ]) }}
+    {{ Breadcrumbs::render('multiple_parent', [
+        [
+            'name' => trans('app.movies'),
+            'url' => route('admin.movies')
+        ],
+        [
+            'name' => $movie->name,
+            'url' => route('admin.movies.edit', ['id' => $movie->id])
+        ],
+        [
+            'name' => trans('app.servers'),
+            'url' => route('admin.movies.upload')
+        ]
+    ]) }}
 
     <div class="cui__utils__content">
         <div class="card">
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.pages')</h5>
+                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.upload')</h5>
                     </div>
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <a href="javascript:void(0)" class="btn btn-success add-new-server"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <a href="" class="btn btn-success add-new-server"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                             <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
@@ -27,30 +37,6 @@
             </div>
 
             <div class="card-body">
-
-                <div class="form-add-servers mb-5 box-hidden">
-                    <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                            <form method="post" action="{{ route('admin.movies.upload.save', ['id' => $id]) }}" class="form-ajax">
-                                <div class="form-group">
-                                    <label class="col-form-label" for="name">@lang('app.name')</label>
-
-                                    <input type="text" name="name" class="form-control" id="name" autocomplete="off" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-form-label" for="order">@lang('app.order')</label>
-
-                                    <input type="text" name="order" class="form-control" id="order" autocomplete="off" value="1">
-                                </div>
-
-                                <button type="submit" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_server')</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <form method="get" class="form-inline" id="form-search">
