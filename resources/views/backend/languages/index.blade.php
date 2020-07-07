@@ -62,10 +62,11 @@
                         <thead>
                             <tr>
                                 <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                                <th data-field="key">@lang('app.code')</th>
+                                <th data-width="10%" data-field="key">@lang('app.code')</th>
                                 <th data-field="name">@lang('app.name')</th>
                                 <th data-width="15%" data-field="created">@lang('app.created_at')</th>
                                 <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
+                                <th data-width="20%" data-field="options" data-formatter="options_formatter" data-align="center">@lang('app.options')</th>
                             </tr>
                         </thead>
                     </table>
@@ -115,13 +116,18 @@
             return '<span class="text-danger">@lang('app.disabled')</span>';
         }
 
+        function options_formatter(value, row, index) {
+            let result = '';
+            result += '<a href="'+ row.tran_url +'"><i class="fa fa-edit"></i> @lang('app.translate')</a>';
+            return result;
+        }
+
         var table = new LoadBootstrapTable({
             url: '{{ route('admin.languages.getdata') }}',
             remove_url: '{{ route('admin.languages.remove') }}',
         });
 
         $('.sync-language').on('click', function () {
-
             let btn = $(this);
             let cIcon = btn.find('i').attr('class');
             btn.find('i').attr('class', 'fa fa-spinner fa-spin');

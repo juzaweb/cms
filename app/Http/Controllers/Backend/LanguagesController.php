@@ -42,9 +42,8 @@ class LanguagesController extends Controller
         $rows = $query->get();
         
         foreach ($rows as $row) {
-            $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->edit_url = route('admin.genres.edit', ['id' => $row->id]);
+            $row->tran_url = route('admin.translate', ['lang' => $row->key]);
         }
         
         return response()->json([
@@ -112,7 +111,7 @@ class LanguagesController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('app.sync_successfully'),
         ]);
     }
     

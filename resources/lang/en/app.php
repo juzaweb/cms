@@ -36,6 +36,7 @@ return [
     'saved_successfully' => 'Saved successfully.',
     'deleted_successfully' => 'Deleted successfully.',
     'approved_successfully' => 'Approved successfully.',
+    'sync_successfully' => 'Sync successfully.',
     'updated_status_successfully' => 'Updated status successfully.',
     'are_you_sure_delete_items' => 'Are you sure you want to delete the selected items?',
     'approve' => 'Approve',
@@ -104,4 +105,5 @@ return [
     'order' => 'Order',
     'close' => 'Close',
     'sync_language' => 'Sync language',
+    'translate' => 'Translate',
 ];

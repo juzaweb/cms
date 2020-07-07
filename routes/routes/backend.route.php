@@ -184,3 +184,11 @@ Route::group(['prefix' => 'admin/settting/languages', 'middleware' => ['web', 'a
     
     Route::post('/sync', 'Backend\LanguagesController@syncLanguage')->name('admin.languages.sync');
 });
+
+Route::group(['prefix' => 'admin/settting/translate', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/{lang}', 'Backend\TranslateController@index')->name('admin.translate')->where('lang', '[a-z]+');
+    
+    Route::get('/{lang}/getdata', 'Backend\TranslateController@getData')->name('admin.translate.getdata')->where('lang', '[a-z]+');
+    
+    Route::post('/{lang}/save', 'Backend\TranslateController@save')->name('admin.translate.save')->where('lang', '[a-z]+');
+});
