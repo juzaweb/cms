@@ -14,13 +14,13 @@
                 'url' => route('admin.movies.edit', ['id' => $movie->id])
             ],
             [
-                'name' => trans('app.servers'),
-                'url' => route('admin.movies.servers')
+                'name' => trans('app.servers_video'),
+                'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
             ]
         ], $model) }}
 
 <div class="cui__utils__content">
-    <form method="post" action="{{ route('admin.movies.servers.save') }}" class="form-ajax">
+    <form method="post" action="{{ route('admin.movies.servers.save', ['movie_id' => $movie->id]) }}" class="form-ajax">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <label class="col-form-label" for="order">@lang('app.order')</label>
 
-                            <input type="text" name="order" class="form-control" id="order" autocomplete="off" value="{{ $model->order }}" required>
+                            <input type="text" name="order" class="form-control" id="order" autocomplete="off" value="{{ $model->order ?: 1 }}" required>
                         </div>
 
                         <div class="form-group">

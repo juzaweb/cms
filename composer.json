@@ -44,8 +44,7 @@
           "app/Helpers/functions.php"
         ],
         "psr-4": {
-            "App\\": "app/",
-            "Modules\\": "Modules/"
+            "App\\": "app/"
         },
         "classmap": [
             "database/seeds",

@@ -64,7 +64,6 @@
                                 <th data-width="3%" data-field="state" data-checkbox="true"></th>
                                 <th data-width="10%" data-field="key">@lang('app.code')</th>
                                 <th data-field="name">@lang('app.name')</th>
-                                <th data-width="15%" data-field="created">@lang('app.created_at')</th>
                                 <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                                 <th data-width="20%" data-field="options" data-formatter="options_formatter" data-align="center">@lang('app.options')</th>
                             </tr>
@@ -118,7 +117,7 @@
 
         function options_formatter(value, row, index) {
             let result = '';
-            result += '<a href="'+ row.tran_url +'"><i class="fa fa-edit"></i> @lang('app.translate')</a>';
+            result += '<a href="'+ row.tran_url +'" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> @lang('app.translate')</a>';
             return result;
         }
 

@@ -14,8 +14,12 @@
             'url' => route('admin.movies.edit', ['id' => $movie->id])
         ],
         [
-            'name' => trans('app.servers'),
-            'url' => route('admin.movies.upload')
+            'name' => $server->name,
+            'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
+        ],
+        [
+            'name' => trans('app.upload_videos'),
+            'url' => route('admin.movies.servers.upload', ['server_id' => $server->id])
         ]
     ]) }}
 
@@ -24,12 +28,12 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.upload')</h5>
+                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.upload_videos')</h5>
                     </div>
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <a href="" class="btn btn-success add-new-server"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <a href="javascript:void(0)" class="btn btn-success add-new-video"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                             <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
@@ -37,6 +41,8 @@
             </div>
 
             <div class="card-body">
+                @include('backend.movie_upload.form_add')
+
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <form method="get" class="form-inline" id="form-search">
@@ -87,8 +93,28 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.movies.upload.getdata', ['id' => $id]) }}',
-            remove_url: '{{ route('admin.movies.upload.remove', ['id' => $id]) }}',
+            url: '{{ route('admin.movies.servers.upload.getdata', ['server_id' => $id]) }}',
+            remove_url: '{{ route('admin.movies.servers.upload.remove', ['server_id' => $id]) }}',
+        });
+        
+        $('.add-new-video').on('click', function () {
+            if ($('.form-upload-video').is(":hidden")) {
+                $('.form-upload-video').show('slow');
+            }
+            else {
+                $('.form-upload-video').hide('slow');
+            }
+        });
+
+        $('#source').on('change', function () {
+            if ($(this).val() === "upload") {
+                $('.form-url').hide('slow');
+                $('.form-upload').show('slow');
+            }
+            else {
+                $('.form-upload').hide('slow')
+                $('.form-url').show('slow');
+            }
         });
 
     </script>

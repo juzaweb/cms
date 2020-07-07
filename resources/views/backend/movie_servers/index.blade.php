@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.servers_files'))
+@section('title', trans('app.servers_video'))
 
 @section('content')
 
@@ -11,11 +11,11 @@
         ],
         [
             'name' => $movie->name,
-            'url' => route('admin.movies.edit', ['id' => $movie->id])
+            'url' => route('admin.movies.edit', ['movie_id' => $movie->id])
         ],
         [
-            'name' => trans('app.servers_files'),
-            'url' => route('admin.movies.servers')
+            'name' => trans('app.servers_video'),
+            'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
         ]
     ]) }}
 
@@ -29,7 +29,7 @@
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <a href="{{ route('admin.movies.servers.create') }}" class="btn btn-success add-new-server"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <a href="{{ route('admin.movies.servers.create', ['movie_id' => $movie->id]) }}" class="btn btn-success add-new-server"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                             <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
@@ -69,6 +69,7 @@
                             <th data-width="10%" data-field="order" data-align="center">@lang('app.order')</th>
                             <th data-width="15%" data-field="created">@lang('app.created_at')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
+                            <th data-width="20%" data-field="options" data-align="center" data-formatter="options_formatter">@lang('app.options')</th>
                         </tr>
                         </thead>
                     </table>
@@ -86,9 +87,14 @@
             return '<span class="text-danger">@lang('app.disabled')</span>';
         }
 
+        function options_formatter(value, row, index) {
+            let result = '<a href="'+ row.upload_url +'" class="btn btn-success btn-sm"><i class="fa fa-upload"></i> @lang('app.upload_videos')</a>';
+            return result;
+        }
+
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.movies.upload.getdata', ['id' => $id]) }}',
-            remove_url: '{{ route('admin.movies.upload.remove', ['id' => $id]) }}',
+            url: '{{ route('admin.movies.servers.getdata', ['movie_id' => $movie->id]) }}',
+            remove_url: '{{ route('admin.movies.servers.remove', ['movie_id' => $movie->id]) }}',
         });
 
     </script>

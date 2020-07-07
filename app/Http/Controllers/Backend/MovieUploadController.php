@@ -12,15 +12,18 @@ use App\Http\Controllers\Controller;
 
 class MovieUploadController extends Controller
 {
-    public function index($id) {
-        $movie = Movies::where('id', '=', $id)->firstOrFail();
+    public function index($server_id) {
+        $server = Servers::where('id', '=', $server_id)->firstOrFail();
+        $movie = Movies::where('id', '=', $server->movie_id)->firstOrFail();
+        
         return view('backend.movie_upload.index', [
-            'id' => $id,
-            'movie' => $movie
+            'id' => $server_id,
+            'server' => $server,
+            'movie' => $movie,
         ]);
     }
     
-    public function getData($id, Request $request) {
+    public function getData($server_id, Request $request) {
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -28,7 +31,7 @@ class MovieUploadController extends Controller
         $limit = $request->get('limit', 20);
         
         $query = Servers::query();
-        $query->where('movie_id', '=', $id);
+        $query->where('movie_id', '=', $server_id);
         
         if ($search) {
             $query->orWhere('name', 'like', '%'. $search .'%');
@@ -46,7 +49,6 @@ class MovieUploadController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->edit_url = route('admin.genres.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -55,7 +57,7 @@ class MovieUploadController extends Controller
         ]);
     }
     
-    public function save($id, Request $request) {
+    public function save($server_id, Request $request) {
         $this->validateRequest([
             'name' => 'required|string|max:100',
             'order' => 'required|numeric',
@@ -66,7 +68,7 @@ class MovieUploadController extends Controller
         
         $model = Servers::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
-        $model->movie_id = $id;
+        $model->movie_id = $server_id;
         $model->save();
         
         return response()->json([
@@ -75,19 +77,19 @@ class MovieUploadController extends Controller
         ]);
     }
     
-    public function remove($id, Request $request) {
+    public function remove($server_id, Request $request) {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
             'ids' => trans('app.servers'),
         ]);
         
-        $ids = Servers::where('movie_id', '=', $id)
+        $server_ids = Servers::where('movie_id', '=', $server_id)
             ->whereIn('id', $request->post('ids'))
             ->pluck('id')
             ->toArray();
         
-        Servers::destroy($ids);
+        Servers::destroy($server_ids);
         
         return response()->json([
             'status' => 'success',
@@ -107,8 +109,8 @@ class MovieUploadController extends Controller
         $slugifiedname = time().'_'.create_link($originalName);
         $resumable->setFilename($slugifiedname);
     
-        $resumable->tempFolder = 'tmps';
-        $resumable->uploadFolder = '/uploads/videos';
+        $resumable->tempFolder = storage_path() . '/tmps';
+        $resumable->uploadFolder = storage_path() . '/videos';
         $resumable->process();
     
         if ($resumable->isUploadComplete()) {

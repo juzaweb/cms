@@ -9,25 +9,24 @@ use App\Http\Controllers\Controller;
 
 class MovieServesController extends Controller
 {
-    public function index($id) {
-        $movie = Movies::where('id', '=', $id)->firstOrFail();
+    public function index($movie_id) {
+        $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
         return view('backend.movie_servers.index', [
-            'id' => $id,
             'movie' => $movie,
         ]);
     }
     
-    public function form($id, $server_id = null) {
-        $movie = Movies::where('id', '=', $id)->firstOrFail();
+    public function form($movie_id, $server_id = null) {
+        $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
         $model = Servers::firstOrNew(['id' => $server_id]);
         return view('backend.movie_servers.form', [
-            'id' => $id,
+            'title' => $model->name ?: trans('app.add_new'),
             'movie' => $movie,
             'model' => $model,
         ]);
     }
     
-    public function getData($id, Request $request) {
+    public function getData($movie_id, Request $request) {
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -35,7 +34,7 @@ class MovieServesController extends Controller
         $limit = $request->get('limit', 20);
         
         $query = Servers::query();
-        $query->where('movie_id', '=', $id);
+        $query->where('movie_id', '=', $movie_id);
         
         if ($search) {
             $query->orWhere('name', 'like', '%'. $search .'%');
@@ -53,7 +52,7 @@ class MovieServesController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->edit_url = route('admin.genres.edit', ['id' => $row->id]);
+            $row->upload_url = route('admin.movies.servers.upload', ['server_id' => $row->id]);
         }
         
         return response()->json([
@@ -62,7 +61,7 @@ class MovieServesController extends Controller
         ]);
     }
     
-    public function save($id, Request $request) {
+    public function save($movie_id, Request $request) {
         $this->validateRequest([
             'name' => 'required|string|max:100',
             'order' => 'required|numeric',
@@ -73,7 +72,7 @@ class MovieServesController extends Controller
         
         $model = Servers::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
-        $model->movie_id = $id;
+        $model->movie_id = $movie_id;
         $model->save();
         
         return response()->json([
@@ -82,19 +81,19 @@ class MovieServesController extends Controller
         ]);
     }
     
-    public function remove($id, Request $request) {
+    public function remove($movie_id, Request $request) {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
             'ids' => trans('app.servers'),
         ]);
         
-        $ids = Servers::where('movie_id', '=', $id)
+        $movie_ids = Servers::where('movie_id', '=', $movie_id)
             ->whereIn('id', $request->post('ids'))
             ->pluck('id')
             ->toArray();
         
-        Servers::destroy($ids);
+        Servers::destroy($movie_ids);
         
         return response()->json([
             'status' => 'success',

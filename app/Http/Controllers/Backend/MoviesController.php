@@ -49,7 +49,7 @@ class MoviesController extends Controller
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i d/m/Y');
             $row->edit_url = route('admin.movies.edit', ['id' => $row->id]);
-            $row->upload_url = route('admin.movies.upload', ['id' => $row->id]);
+            $row->upload_url = route('admin.movies.servers', ['id' => $row->id]);
         }
         
         return response()->json([
