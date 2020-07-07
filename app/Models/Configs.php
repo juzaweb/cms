@@ -24,5 +24,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Configs extends Model
 {
-    //
+    protected $table = 'configs';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'name'
+    ];
+    
+    public static function getConfig($key) {
+        $config = Configs::firstOrNew(['key' => $key]);
+        return $config->value;
+    }
+    
+    public static function setConfig($key, $value = null) {
+        $config = Configs::firstOrNew(['key' => $key]);
+        $config->value = $value;
+        return $config->save();
+    }
 }

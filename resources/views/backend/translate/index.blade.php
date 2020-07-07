@@ -86,7 +86,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('admin.translate.save') }}',
+                url: '{{ route('admin.translate.save', ['lang' => $lang]) }}',
                 dataType: 'json',
                 data: {
                     'key': key,

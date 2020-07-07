@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Movies;
 use App\Models\Servers;
+use Dilab\Network\SimpleRequest;
+use Dilab\Network\SimpleResponse;
+use Dilab\Resumable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,26 +29,26 @@ class MovieUploadController extends Controller
         
         $query = Servers::query();
         $query->where('movie_id', '=', $id);
-    
+        
         if ($search) {
             $query->orWhere('name', 'like', '%'. $search .'%');
         }
-    
+        
         if (!is_null($status)) {
             $query->where('status', '=', $status);
         }
-    
+        
         $count = $query->count();
         $query->orderBy('order', 'asc');
         $query->offset($offset);
         $query->limit($limit);
         $rows = $query->get();
-    
+        
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i d/m/Y');
             $row->edit_url = route('admin.genres.edit', ['id' => $row->id]);
         }
-    
+        
         return response()->json([
             'total' => $count,
             'rows' => $rows
@@ -60,12 +63,12 @@ class MovieUploadController extends Controller
             'name' => trans('app.name'),
             'order' => trans('app.order'),
         ]);
-    
+        
         $model = Servers::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->movie_id = $id;
         $model->save();
-    
+        
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
@@ -91,5 +94,25 @@ class MovieUploadController extends Controller
             'message' => trans('app.saved_successfully'),
             'redirect' => route('admin.genres'),
         ]);
+    }
+    
+    public function upload() {
+        $request = new SimpleRequest();
+        $response = new SimpleResponse();
+    
+        $resumable = new Resumable($request, $response);
+        $extension = $resumable->getExtension();
+    
+        $originalName = $resumable->getOriginalFilename(Resumable::WITHOUT_EXTENSION);
+        $slugifiedname = time().'_'.create_link($originalName);
+        $resumable->setFilename($slugifiedname);
+    
+        $resumable->tempFolder = 'tmps';
+        $resumable->uploadFolder = '/uploads/videos';
+        $resumable->process();
+    
+        if ($resumable->isUploadComplete()) {
+        
+        }
     }
 }

@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/autoupload",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\AutoUpload\\Providers\\AutoUploadServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\AutoUpload\\": ""
+        }
+    }
+}

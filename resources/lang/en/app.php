@@ -27,6 +27,7 @@ return [
     'add_server' => 'Add server',
     'add_language' => 'Add language',
     'servers' => 'Servers',
+    'servers_files' => 'Servers files',
     'delete' => 'Delete',
     'save' => 'Save',
     'cancel' => 'Cancel',
