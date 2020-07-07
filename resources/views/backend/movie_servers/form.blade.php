@@ -4,6 +4,7 @@
 
 @section('content')
 
+    @if($movie->tv_series == 0)
     {{ Breadcrumbs::render('multiple_parent', [
             [
                 'name' => trans('app.movies'),
@@ -18,6 +19,22 @@
                 'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
             ]
         ], $model) }}
+    @else
+        {{ Breadcrumbs::render('multiple_parent', [
+        [
+            'name' => trans('app.tv_series'),
+            'url' => route('admin.tv_series')
+        ],
+        [
+            'name' => $movie->name,
+            'url' => route('admin.tv_series.edit', ['id' => $movie->id])
+        ],
+        [
+            'name' => trans('app.servers_video'),
+            'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
+        ]
+    ], $model) }}
+    @endif
 
 <div class="cui__utils__content">
     <form method="post" action="{{ route('admin.movies.servers.save', ['movie_id' => $movie->id]) }}" class="form-ajax">

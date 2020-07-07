@@ -24,7 +24,7 @@ Route::group(['prefix' => 'movies'], function () {
 });
 
 Route::group(['prefix' => 'movies/servers'], function () {
-    Route::get('/{movie_id}', 'Backend\MovieServesController@index')->name('admin.movies.servers')->where('id', '[0-9]+');
+    Route::get('/{movie_id}', 'Backend\MovieServesController@index')->name('admin.movies.servers')->where('movie_id', '[0-9]+');
     
     Route::get('/{movie_id}/getdata', 'Backend\MovieServesController@getData')->name('admin.movies.servers.getdata')->where('movie_id', '[0-9]+');
     

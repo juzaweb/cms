@@ -18,9 +18,17 @@
                         </div>
 
                         <div class="col-md-6">
-                            <div class="btn-group float-right">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                                <a href="{{ route('admin.tv_series') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                            <div class="float-right">
+                            @if($model->id)
+                                <div class="btn-group mr-5">
+                                    <a href="{{ route('admin.movies.servers', ['movie_id' => $model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('app.upload_videos')</a>
+                                </div>
+                            @endif
+
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
+                                    <a href="{{ route('admin.tv_series') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                                </div>
                             </div>
                         </div>
                     </div>

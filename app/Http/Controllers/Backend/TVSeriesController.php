@@ -59,6 +59,7 @@ class TVSeriesController extends Controller
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i d/m/Y');
             $row->edit_url = route('admin.tv_series.edit', ['id' => $row->id]);
+            $row->upload_url = route('admin.movies.servers', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -145,7 +146,7 @@ class TVSeriesController extends Controller
             'ids' => trans('app.tv_series')
         ]);
         
-        Movies::destroy($request->ids);
+        Movies::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',

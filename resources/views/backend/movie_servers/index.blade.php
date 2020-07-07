@@ -4,27 +4,43 @@
 
 @section('content')
 
-    {{ Breadcrumbs::render('multiple_parent', [
+    @if($movie->tv_series == 0)
+        {{ Breadcrumbs::render('multiple_parent', [
+            [
+                'name' => trans('app.movies'),
+                'url' => route('admin.movies')
+            ],
+            [
+                'name' => $movie->name,
+                'url' => route('admin.movies.edit', ['id' => $movie->id])
+            ],
+            [
+                'name' => trans('app.servers_video'),
+                'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
+            ]
+        ]) }}
+    @else
+        {{ Breadcrumbs::render('multiple_parent', [
         [
-            'name' => trans('app.movies'),
-            'url' => route('admin.movies')
+            'name' => trans('app.tv_series'),
+            'url' => route('admin.tv_series')
         ],
         [
             'name' => $movie->name,
-            'url' => route('admin.movies.edit', ['movie_id' => $movie->id])
+            'url' => route('admin.tv_series.edit', ['id' => $movie->id])
         ],
         [
             'name' => trans('app.servers_video'),
             'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
         ]
     ]) }}
-
+    @endif
     <div class="cui__utils__content">
         <div class="card">
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.servers_files')</h5>
+                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.servers_video')</h5>
                     </div>
 
                     <div class="col-md-6">

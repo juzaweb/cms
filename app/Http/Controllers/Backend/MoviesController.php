@@ -145,7 +145,7 @@ class MoviesController extends Controller
             'ids' => trans('app.movies')
         ]);
         
-        Movies::destroy($request->ids);
+        Movies::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
