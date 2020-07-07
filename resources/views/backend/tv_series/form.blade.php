@@ -4,12 +4,12 @@
 
 @section('content')
     {{ Breadcrumbs::render('manager', [
-            'name' => trans('app.movies'),
-            'url' => route('admin.movies')
+            'name' => trans('app.tv_series'),
+            'url' => route('admin.tv_series')
         ], $model) }}
 
     <div class="cui__utils__content">
-        <form action="{{ route('admin.movies.save') }}" method="post" class="form-ajax">
+        <form action="{{ route('admin.tv_series.save') }}" method="post" class="form-ajax">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
@@ -20,7 +20,7 @@
                         <div class="col-md-6">
                             <div class="btn-group float-right">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                                <a href="{{ route('admin.movies') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                                <a href="{{ route('admin.tv_series') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
                             </div>
                         </div>
                     </div>
@@ -65,6 +65,22 @@
                                 <input type="text" name="runtime" class="form-control" id="runtime" value="{{ $model->runtime }}" autocomplete="off">
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="current_episode">@lang('app.current_episode')</label>
+                                        <input type="text" name="current_episode" class="form-control" id="current_episode" value="{{ $model->current_episode }}" autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="max_episode">@lang('app.max_episode')</label>
+                                        <input type="text" name="max_episode" class="form-control" id="max_episode" value="{{ $model->max_episode }}" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-form-label" for="trailer_link">@lang('app.trailer')</label>
                                 <input type="text" name="trailer_link" class="form-control" id="trailer_link" value="{{ $model->trailer_link }}" autocomplete="off">
@@ -94,7 +110,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            @include('backend.movies.form_sidebar')
+                            @include('backend.tv_series.form_sidebar')
                         </div>
                     </div>
 

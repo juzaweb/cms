@@ -13,12 +13,14 @@ use App\Models\Movies;
 class TVSeriesController extends Controller
 {
     public function index() {
-        return view('backend.movies.index');
+        return view('backend.tv_series.index');
     }
     
     public function getData(Request $request) {
         $search = $request->get('search');
         $status = $request->get('status');
+        $genre = $request->get('genre');
+        $country = $request->get('country');
         
         $sort = $request->get('sort', 'a.id');
         $order = $request->get('order', 'desc');
@@ -35,6 +37,14 @@ class TVSeriesController extends Controller
             });
         }
         
+        if ($genre) {
+            $query->whereRaw('find_in_set(?, genres)', [$genre]);
+        }
+    
+        if ($country) {
+            $query->whereRaw('find_in_set(?, countries)', [$country]);
+        }
+        
         if (!is_null($status)) {
             $query->where('status', '=', $status);
         }
@@ -48,7 +58,7 @@ class TVSeriesController extends Controller
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->edit_url = route('admin.movies.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.tv_series.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -66,7 +76,7 @@ class TVSeriesController extends Controller
         $writers = Stars::whereIn('id', explode(',', $model->writers))->get();
         $actors = Stars::whereIn('id', explode(',', $model->actors))->get();
         
-        return view('backend.movies.form', [
+        return view('backend.tv_series.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new'),
             'tags' => $tags,
@@ -118,12 +128,13 @@ class TVSeriesController extends Controller
         $model->setAttribute('directors', implode(',', $directors));
         $model->setAttribute('writers', implode(',', $writers));
         $model->setAttribute('tags', implode(',', $tags));
+        $model->setAttribute('tv_series', 1);
         $model->save();
         
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.movies'),
+            'redirect' => route('admin.tv_series'),
         ]);
     }
     
@@ -131,7 +142,7 @@ class TVSeriesController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.movies')
+            'ids' => trans('app.tv_series')
         ]);
         
         Movies::destroy($request->ids);

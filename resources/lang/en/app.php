@@ -45,6 +45,7 @@ return [
     'approve' => 'Approve',
     'approved' => 'Approved',
     'deny' => 'Deny',
+    'country' => 'Country',
     'countries' => 'Countries',
     'stars' => 'Stars',
     'there_is_no_data' => 'There is no data',
@@ -113,4 +114,7 @@ return [
     'source' => 'Source',
     'url' => 'URL',
     'choose_file_upload' => 'Drag & drop files here or click here to upload',
+    'current_episode' => 'Current episode',
+    'max_episode' => 'Max episode',
+    'add_countries' => 'Add countries',
 ];

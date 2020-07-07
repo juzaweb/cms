@@ -87,7 +87,7 @@ mix.combine([
     'resources/vendor/laravel-filemanager/js/stand-alone-button.js',
     'resources/styles/js/resumable.js',
     'resources/styles/js/load-ajax.js',
-    'resources/styles/js/uploads.js',
+    //'resources/styles/js/uploads.js',
     'resources/styles/js/load-select2.js',
     'resources/styles/js/LoadBootstrapTable.js',
     'resources/styles/js/form-ajax.js',

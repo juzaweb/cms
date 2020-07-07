@@ -19,7 +19,9 @@ class MoviesController extends Controller
     public function getData(Request $request) {
         $search = $request->get('search');
         $status = $request->get('status');
-    
+        $genre = $request->get('genre');
+        $country = $request->get('country');
+        
         $sort = $request->get('sort', 'a.id');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
@@ -35,6 +37,14 @@ class MoviesController extends Controller
             });
         }
     
+        if ($genre) {
+            $query->whereRaw('find_in_set(?, genres)', [$genre]);
+        }
+    
+        if ($country) {
+            $query->whereRaw('find_in_set(?, countries)', [$country]);
+        }
+        
         if (!is_null($status)) {
             $query->where('status', '=', $status);
         }

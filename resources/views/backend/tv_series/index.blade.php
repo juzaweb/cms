@@ -1,12 +1,12 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.movies'))
+@section('title', trans('app.tv_series'))
 
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.movies'),
-        'url' => route('admin.movies')
+        'name' => trans('app.tv_series'),
+        'url' => route('admin.tv_series')
     ]) }}
 
 <div class="cui__utils__content">
@@ -14,12 +14,12 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.movies')</h5>
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.tv_series')</h5>
                 </div>
 
                 <div class="col-md-6">
                     <div class="btn-group float-right">
-                        <a href="{{ route('admin.movies.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                        <a href="{{ route('admin.tv_series.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                         <button class="btn btn-danger" type="button"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                     </div>
                 </div>
@@ -31,7 +31,6 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <form action="" method="get" class="form-inline" id="form-search">
-
                         <div class="form-group mb-2 mr-1">
                             <label for="inputSearch" class="sr-only">@lang('app.search')</label>
                             <input name="search" type="text" id="inputSearch" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
@@ -104,8 +103,8 @@
     }
 
     var table = new LoadBootstrapTable({
-        url: '{{ route('admin.movies.getdata') }}',
-        remove_url: '{{ route('admin.movies.remove') }}',
+        url: '{{ route('admin.tv_series.getdata') }}',
+        remove_url: '{{ route('admin.tv_series.remove') }}',
     });
 </script>
 @endsection
