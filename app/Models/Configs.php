@@ -30,14 +30,29 @@ class Configs extends Model
         'name'
     ];
     
-    public static function getConfig($key) {
+    public static function getConfig(string $key) {
         $config = Configs::firstOrNew(['key' => $key]);
         return $config->value;
     }
     
-    public static function setConfig($key, $value = null) {
+    public static function setConfig(string $key, string $value = null) {
         $config = Configs::firstOrNew(['key' => $key]);
         $config->value = $value;
         return $config->save();
+    }
+    
+    public static function getConfigs() {
+        return [
+            'title',
+            'description',
+            'logo',
+            'icon',
+            'banner',
+            'user_registration',
+            'user_verification',
+            'google_recaptcha',
+            'google_recaptcha_key',
+            'google_recaptcha_secret',
+        ];
     }
 }

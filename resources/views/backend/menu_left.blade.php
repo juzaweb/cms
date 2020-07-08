@@ -126,15 +126,10 @@
                 </a>
             </li>
 
-            <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="">
-                    <span class="cui__menuLeft__item__title">@lang('app.ads')</span>
-                </a>
-            </li>
         </ul>
     </li>
 
-    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+    {{--<li class="cui__menuLeft__item cui__menuLeft__submenu">
         <span class="cui__menuLeft__item__link">
             <span class="cui__menuLeft__item__title">@lang('app.plugins')</span>
             <i class="cui__menuLeft__item__icon fe fe-file-plus"></i>
@@ -147,7 +142,7 @@
             </li>
 
         </ul>
-    </li>
+    </li>--}}
 
     <li class="cui__menuLeft__item cui__menuLeft__submenu">
         <span class="cui__menuLeft__item__link">
@@ -156,14 +151,20 @@
         </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="{{ route('admin.setting') }}">
+                <a href="{{ route('admin.setting') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.system_setting')</span>
                 </a>
             </li>
 
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.languages') }}" class="cui__menuLeft__item__link">
-                    <span class="cui__menuLeft__item__title">@lang('app.language')</span>
+                <a href="{{ route('admin.video_qualities') }}" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.video_qualities')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a href="" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.ads')</span>
                 </a>
             </li>
         </ul>
