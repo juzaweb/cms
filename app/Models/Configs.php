@@ -53,6 +53,10 @@ class Configs extends Model
             'google_recaptcha',
             'google_recaptcha_key',
             'google_recaptcha_secret',
+            'comment_able',
+            'comment_type',
+            'comments_per_page',
+            'comments_approval',
         ];
     }
 }

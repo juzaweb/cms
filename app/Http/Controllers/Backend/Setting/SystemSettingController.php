@@ -24,8 +24,8 @@ class SystemSettingController extends Controller
             'user_registration' => 'required|in:0,1',
             'user_verification' => 'required|in:0,1',
             'google_recaptcha' => 'required|in:0,1',
-            'google_recaptcha_key' => 'required_if:google_recaptcha,!=,|string|max:300',
-            'google_recaptcha_secret' => 'required_if:google_recaptcha,!=,|string|max:300',
+            'google_recaptcha_key' => 'required_if:google_recaptcha,!=,0|string|max:300',
+            'google_recaptcha_secret' => 'required_if:google_recaptcha,!=,0|string|max:300',
         ], $request, [
             'title' => trans('app.title'),
             'description' => trans('app.description'),
@@ -39,7 +39,7 @@ class SystemSettingController extends Controller
             'google_recaptcha_secret' => trans('app.google_recaptcha_secret'),
         ]);
         
-        $configs = $request->only([Configs::getConfigs()]);
+        $configs = $request->only(Configs::getConfigs());
         foreach ($configs as $key => $config) {
             Configs::setConfig($key, $config);
         }

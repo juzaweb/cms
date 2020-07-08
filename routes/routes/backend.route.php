@@ -195,6 +195,12 @@ Route::group(['prefix' => 'setting'], function () {
     Route::post('/save', 'Backend\Setting\SystemSettingController@save')->name('admin.setting.save');
 });
 
+Route::group(['prefix' => 'setting/comment'], function () {
+    Route::get('/', 'Backend\Setting\CommentController@index')->name('admin.setting.comment');
+    
+    Route::post('/save', 'Backend\Setting\CommentController@save')->name('admin.setting.comment.save');
+});
+
 Route::group(['prefix' => 'settting/languages'], function () {
     Route::get('/', 'Backend\Setting\LanguagesController@index')->name('admin.languages');
     
