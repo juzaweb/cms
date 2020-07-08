@@ -5,8 +5,8 @@
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.system_setting'),
-        'url' => route('admin.setting')
+        'name' => trans('app.comment_setting'),
+        'url' => route('admin.setting.comment')
     ]) }}
 
 <div class="cui__utils__content">
@@ -36,8 +36,8 @@
                         <div class="form-group">
                             <label class="col-form-label" for="comment_able">@lang('app.comment_able')</label>
                             <select name="comment_able" id="comment_able" class="form-control">
-                                <option value="1" @if($comment_able == 1) selected @endif></option>
-                                <option value="0" @if($comment_able == 0) selected @endif></option>
+                                <option value="1" @if($comment_able == 1) selected @endif>@lang('app.enabled')</option>
+                                <option value="0" @if($comment_able == 0) selected @endif>@lang('app.disabled')</option>
                             </select>
                         </div>
 

@@ -101,7 +101,7 @@
                                         @php
                                             $selected = ($model->video_quality == $item->name);
                                             if (empty($selected)) {
-                                                $selected = (empty($model->video_quality) && $item->default == 1)
+                                                $selected = (empty($model->video_quality) && $item->default == 1);
                                             }
                                         @endphp
                                         <option value="{{ $item->name }}" @if($selected) selected @endif>{{ $item->name }}</option>

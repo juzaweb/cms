@@ -14,7 +14,6 @@ class VideoQualityController extends Controller
     
     public function getData(Request $request) {
         $search = $request->get('search');
-        $status = $request->get('status');
         
         $sort = $request->get('sort', 'a.id');
         $order = $request->get('order', 'desc');
@@ -26,12 +25,7 @@ class VideoQualityController extends Controller
         if ($search) {
             $query->where(function ($subquery) use ($search) {
                 $subquery->orWhere('name', 'like', '%'. $search .'%');
-                $subquery->orWhere('description', 'like', '%'. $search .'%');
             });
-        }
-        
-        if (!is_null($status)) {
-            $query->where('status', '=', $status);
         }
         
         $count = $query->count();
@@ -41,7 +35,6 @@ class VideoQualityController extends Controller
         $rows = $query->get();
         
         foreach ($rows as $row) {
-            $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i d/m/Y');
             $row->edit_url = route('admin.video_qualities.edit', ['id' => $row->id]);
         }

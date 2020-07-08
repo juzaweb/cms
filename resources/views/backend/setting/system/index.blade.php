@@ -43,27 +43,27 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="logo">@lang('app.logo') <span class="float-right"><a data-input="logo" data-preview="preview-logo" class="lfm"><i class="fa fa-edit"></i> @lang('app.change_image')</a></span></label>
+                            <label class="col-form-label" for="logo">@lang('app.logo') <span class="float-right"><a href="javascript:void(0)" data-input="logo" data-preview="preview-logo" class="lfm"><i class="fa fa-edit"></i> @lang('app.change_image')</a></span></label>
                             <div id="preview-logo">
-                                <img src="{{ image_url(\App\Models\Configs::getConfig('logo')) }}" alt="" class="w-100">
+                                <img src="{{ image_url(\App\Models\Configs::getConfig('logo')) }}" alt="" class="w-25">
                             </div>
-                            <input id="logo" class="form-control" type="text" name="logo">
+                            <input id="logo" class="form-control" type="hidden" name="logo" value="{{ \App\Models\Configs::getConfig('logo') }}">
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="icon">@lang('app.icon') <span class="float-right"><a data-input="icon" data-preview="preview-icon" class="lfm"><i class="fa fa-edit"></i> @lang('app.change_image')</a></span></label>
+                            <label class="col-form-label" for="icon">@lang('app.icon') <span class="float-right"><a href="javascript:void(0)" data-input="icon" data-preview="preview-icon" class="lfm"><i class="fa fa-edit"></i> @lang('app.change_image')</a></span></label>
                             <div id="preview-icon">
-                                <img src="{{ image_url(\App\Models\Configs::getConfig('icon')) }}" alt="" class="w-100">
+                                <img src="{{ image_url(\App\Models\Configs::getConfig('icon')) }}" alt="" class="w-25">
                             </div>
-                            <input id="icon" class="form-control" type="text" name="icon">
+                            <input id="icon" class="form-control" type="hidden" name="icon" value="{{ \App\Models\Configs::getConfig('icon') }}">
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="banner">@lang('app.banner') <span class="float-right"><a data-input="banner" data-preview="preview-banner" class="lfm"><i class="fa fa-edit"></i> @lang('app.change_image')</a></span></label>
+                            <label class="col-form-label" for="banner">@lang('app.banner') <span class="float-right"><a href="javascript:void(0)" data-input="banner" data-preview="preview-banner" class="lfm"><i class="fa fa-edit"></i> @lang('app.change_image')</a></span></label>
                             <div id="preview-banner">
-                                <img src="{{ image_url(\App\Models\Configs::getConfig('banner')) }}" alt="" class="w-100">
+                                <img src="{{ image_url(\App\Models\Configs::getConfig('banner')) }}" alt="" class="w-25">
                             </div>
-                            <input id="banner" class="form-control" type="text" name="banner">
+                            <input id="banner" class="form-control" type="hidden" name="banner" value="{{ \App\Models\Configs::getConfig('banner') }}">
                         </div>
 
                         <h5>@lang('app.google_recaptcha')</h5>
@@ -79,13 +79,13 @@
                         <div class="form-group">
                             <label class="col-form-label" for="google_recaptcha_key">@lang('app.google_recaptcha_key')</label>
 
-                            <input type="text" name="google_recaptcha_key" class="form-control" id="google_recaptcha_key" value="{{ \App\Models\Configs::getConfig('google_recaptcha_key') }}" autocomplete="off" required>
+                            <input type="text" name="google_recaptcha_key" class="form-control" id="google_recaptcha_key" value="{{ \App\Models\Configs::getConfig('google_recaptcha_key') }}" autocomplete="off">
                         </div>
 
                         <div class="form-group">
                             <label class="col-form-label" for="google_recaptcha_secret">@lang('app.google_recaptcha_secret')</label>
 
-                            <input type="text" name="google_recaptcha_secret" class="form-control" id="google_recaptcha_secret" value="{{ \App\Models\Configs::getConfig('google_recaptcha_secret') }}" autocomplete="off" required>
+                            <input type="text" name="google_recaptcha_secret" class="form-control" id="google_recaptcha_secret" value="{{ \App\Models\Configs::getConfig('google_recaptcha_secret') }}" autocomplete="off">
                         </div>
                     </div>
 

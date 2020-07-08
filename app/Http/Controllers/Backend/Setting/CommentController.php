@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function index() {
         return view('backend.setting.comment.index', [
-            'title' => trans('app.system_setting')
+            'title' => trans('app.comment_setting')
         ]);
     }
     
