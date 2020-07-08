@@ -28,7 +28,7 @@ $(document).on("turbolinks:load", function() {
         },
         ajax: {
             method: 'GET',
-            url: '/admin/load-data/loadGenres',
+            url: '/admin-cp/load-data/loadGenres',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
@@ -58,7 +58,7 @@ $(document).on("turbolinks:load", function() {
         },
         ajax: {
             method: 'GET',
-            url: '/admin/load-data/loadCountries',
+            url: '/admin-cp/load-data/loadCountries',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
@@ -88,7 +88,7 @@ $(document).on("turbolinks:load", function() {
         },
         ajax: {
             method: 'GET',
-            url: '/admin/load-data/loadActors',
+            url: '/admin-cp/load-data/loadActors',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
@@ -118,7 +118,7 @@ $(document).on("turbolinks:load", function() {
         },
         ajax: {
             method: 'GET',
-            url: '/admin/load-data/loadDirectors',
+            url: '/admin-cp/load-data/loadDirectors',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
@@ -148,7 +148,7 @@ $(document).on("turbolinks:load", function() {
         },
         ajax: {
             method: 'GET',
-            url: '/admin/load-data/loadWriters',
+            url: '/admin-cp/load-data/loadWriters',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
@@ -178,7 +178,7 @@ $(document).on("turbolinks:load", function() {
         },
         ajax: {
             method: 'GET',
-            url: '/admin/load-data/loadTags',
+            url: '/admin-cp/load-data/loadTags',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
@@ -209,7 +209,7 @@ $(document).on("turbolinks:load", function() {
         },
         ajax: {
             method: 'GET',
-            url: '/admin/load-data/loadPostCategories',
+            url: '/admin-cp/load-data/loadPostCategories',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;

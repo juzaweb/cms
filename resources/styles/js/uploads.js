@@ -1,7 +1,7 @@
 $(document).on("turbolinks:load", function() {
 
     var r = new Resumable({
-        target: '/admin/movies/servers/upload',
+        target: '/admin-cp/movies/servers/upload',
         maxFiles: 1,
     });
 

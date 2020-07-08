@@ -1,7 +1,7 @@
 $(document).on("turbolinks:load", function() {
-    $('#lfm').filemanager('image', {prefix: '/admin/filemanager'});
+    $('#lfm').filemanager('image', {prefix: '/admin-cp/filemanager'});
 
-    $('.lfm').filemanager('image', {prefix: '/admin/filemanager'});
+    $('.lfm').filemanager('image', {prefix: '/admin-cp/filemanager'});
 
     var tag_item = '<span class="tag m-1">{name} <a href="javascript:void(0)" class="text-danger ml-1 remove-tag-item"><i class="fa fa-times-circle"></i></a>\n' +
         '  <input type="hidden" name="{field}[]" class="{field}-explode" value="{id}">\n' +
@@ -53,7 +53,7 @@ $(document).on("turbolinks:load", function() {
 
         $.ajax({
             type: 'POST',
-            url: '/admin/post-categories/save',
+            url: '/admin-cp/post-categories/save',
             dataType: 'json',
             data: {
                 'name': name,
@@ -87,7 +87,7 @@ $(document).on("turbolinks:load", function() {
 
         $.ajax({
             type: 'POST',
-            url: '/admin/tags/save',
+            url: '/admin-cp/tags/save',
             dataType: 'json',
             data: {
                 'name': name,
@@ -148,7 +148,7 @@ $(document).on("turbolinks:load", function() {
 
         $.ajax({
             type: 'POST',
-            url: '/admin/genres/save',
+            url: '/admin-cp/genres/save',
             dataType: 'json',
             data: {
                 'name': name,
@@ -207,7 +207,7 @@ $(document).on("turbolinks:load", function() {
 
         $.ajax({
             type: 'POST',
-            url: '/admin/countries/save',
+            url: '/admin-cp/countries/save',
             dataType: 'json',
             data: {
                 'name': name,
@@ -266,7 +266,7 @@ $(document).on("turbolinks:load", function() {
 
         $.ajax({
             type: 'POST',
-            url: '/admin/stars/save',
+            url: '/admin-cp/stars/save',
             dataType: 'json',
             data: {
                 'name': name,
@@ -326,7 +326,7 @@ $(document).on("turbolinks:load", function() {
 
         $.ajax({
             type: 'POST',
-            url: '/admin/stars/save',
+            url: '/admin-cp/stars/save',
             dataType: 'json',
             data: {
                 'name': name,
@@ -386,7 +386,7 @@ $(document).on("turbolinks:load", function() {
 
         $.ajax({
             type: 'POST',
-            url: '/admin/stars/save',
+            url: '/admin-cp/stars/save',
             dataType: 'json',
             data: {
                 'name': name,

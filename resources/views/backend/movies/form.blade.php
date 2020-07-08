@@ -117,8 +117,8 @@
 
     <script type="text/javascript">
         CKEDITOR.replace('baseDescription', {
-            filebrowserImageBrowseUrl: '/admin/filemanager?type=Images',
-            filebrowserBrowseUrl: '/admin/filemanager?type=Files'
+            filebrowserImageBrowseUrl: '/admin-cp/filemanager?type=Images',
+            filebrowserBrowseUrl: '/admin-cp/filemanager?type=Files'
         });
     </script>
 @endsection
