@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\Setting;
 
 use App\Models\Translation;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use App\Models\Languages;
 class LanguagesController extends Controller
 {
     public function index() {
-        return view('backend.languages.index');
+        return view('backend.setting.languages.index');
     }
     
     public function getData(Request $request) {

@@ -58,12 +58,7 @@
         <div class="cui__layout__footer">
             <div class="cui__footer">
                 <div class="cui__footer__inner">
-                    <a
-                            href="https://sellpixels.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="cui__footer__logo"
-                    >
+                    <a href="https://sellpixels.com" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
                         SELLPIXELS
                         <span></span>
                     </a>
@@ -79,12 +74,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    $(document).on("turbolinks:load", function() {
-        var myLazyLoad = new LazyLoad();
-
-    });
-</script>
 <script type="text/javascript">
     $.extend( $.validator.messages, {
         required: "{{ trans('app.this_field_is_required') }}",

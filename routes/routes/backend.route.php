@@ -189,22 +189,42 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
 });
 
+Route::group(['prefix' => 'setting'], function () {
+    Route::get('/', 'Backend\Setting\SystemSettingController@index')->name('admin.setting');
+    
+    Route::post('/save', 'Backend\Setting\SystemSettingController@save')->name('admin.setting.save');
+});
+
 Route::group(['prefix' => 'settting/languages'], function () {
-    Route::get('/', 'Backend\LanguagesController@index')->name('admin.languages');
+    Route::get('/', 'Backend\Setting\LanguagesController@index')->name('admin.languages');
     
-    Route::get('/getdata', 'Backend\LanguagesController@getData')->name('admin.languages.getdata');
+    Route::get('/getdata', 'Backend\Setting\LanguagesController@getData')->name('admin.languages.getdata');
     
-    Route::post('/save', 'Backend\LanguagesController@save')->name('admin.languages.save');
+    Route::post('/save', 'Backend\Setting\LanguagesController@save')->name('admin.languages.save');
     
-    Route::post('/remove', 'Backend\LanguagesController@remove')->name('admin.languages.remove');
+    Route::post('/remove', 'Backend\Setting\LanguagesController@remove')->name('admin.languages.remove');
     
-    Route::post('/sync', 'Backend\LanguagesController@syncLanguage')->name('admin.languages.sync');
+    Route::post('/sync', 'Backend\Setting\LanguagesController@syncLanguage')->name('admin.languages.sync');
 });
 
 Route::group(['prefix' => 'settting/translate'], function () {
-    Route::get('/{lang}', 'Backend\TranslateController@index')->name('admin.translate')->where('lang', '[a-z]+');
+    Route::get('/{lang}', 'Backend\Setting\TranslateController@index')->name('admin.translate')->where('lang', '[a-z]+');
     
-    Route::get('/{lang}/getdata', 'Backend\TranslateController@getData')->name('admin.translate.getdata')->where('lang', '[a-z]+');
+    Route::get('/{lang}/getdata', 'Backend\Setting\TranslateController@getData')->name('admin.translate.getdata')->where('lang', '[a-z]+');
     
-    Route::post('/{lang}/save', 'Backend\TranslateController@save')->name('admin.translate.save')->where('lang', '[a-z]+');
+    Route::post('/{lang}/save', 'Backend\Setting\TranslateController@save')->name('admin.translate.save')->where('lang', '[a-z]+');
+});
+
+Route::group(['prefix' => 'settting/video-qualities'], function () {
+    Route::get('/', 'Backend\VideoQualityController@index')->name('admin.video_qualities');
+    
+    Route::get('/getdata', 'Backend\VideoQualityController@getData')->name('admin.video_qualities.getdata');
+    
+    Route::get('/create', 'Backend\VideoQualityController@form')->name('admin.video_qualities.create');
+    
+    Route::get('/edit/{id}', 'Backend\VideoQualityController@form')->name('admin.video_qualities.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\VideoQualityController@save')->name('admin.video_qualities.save');
+    
+    Route::post('/remove', 'Backend\GenresController@remove')->name('admin.video_qualities.remove');
 });

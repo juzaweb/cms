@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\Setting;
 
 use App\Models\Languages;
 use App\Models\Translation;
@@ -12,7 +12,7 @@ class TranslateController extends Controller
     public function index($lang) {
         Languages::where('key', '=', $lang)->firstOrFail();
         
-        return view('backend.translate.index', [
+        return view('backend.setting.translate.index', [
             'lang' => $lang
         ]);
     }

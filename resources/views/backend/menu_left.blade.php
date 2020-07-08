@@ -156,8 +156,8 @@
         </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="{{ route('admin.posts') }}">
-                    <span class="cui__menuLeft__item__title">@lang('app.posts')</span>
+                <a class="cui__menuLeft__item__link" href="{{ route('admin.setting') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.system_setting')</span>
                 </a>
             </li>
 
