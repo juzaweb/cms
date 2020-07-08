@@ -37,6 +37,14 @@
 
                             <input type="text" name="name" class="form-control" id="baseName" value="{{ $model->name }}" autocomplete="off" required>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="default">@lang('app.default')</label>
+                            <select name="default" id="default" class="form-control">
+                                <option value="0" @if($model->default == 0) selected @endif>@lang('app.no')</option>
+                                <option value="1" @if($model->default == 1) selected @endif>@lang('app.yes')</option>
+                            </select>
+                        </div>
                     </div>
 
                 </div>

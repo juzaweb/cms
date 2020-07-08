@@ -118,4 +118,5 @@ return [
     'max_episode' => 'Max episode',
     'add_countries' => 'Add countries',
     'system_setting' => 'System setting',
+    'default' => 'Default',
 ];

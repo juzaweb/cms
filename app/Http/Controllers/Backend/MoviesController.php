@@ -6,6 +6,7 @@ use App\Models\Countries;
 use App\Models\Genres;
 use App\Models\Stars;
 use App\Models\Tags;
+use App\Models\VideoQualities;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Movies;
@@ -70,6 +71,7 @@ class MoviesController extends Controller
     
     public function form($id = null) {
         $model = Movies::firstOrNew(['id' => $id]);
+        $qualities = VideoQualities::get();
         $tags = Tags::whereIn('id', explode(',', $model->tags))->get();
         $genres = Genres::whereIn('id', explode(',', $model->genres))->get();
         $countries = Countries::whereIn('id', explode(',', $model->countries))->get();
@@ -80,6 +82,7 @@ class MoviesController extends Controller
         return view('backend.movies.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new'),
+            'qualities' => $qualities,
             'tags' => $tags,
             'genres' => $genres,
             'countries' => $countries,

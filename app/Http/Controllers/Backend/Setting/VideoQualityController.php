@@ -9,7 +9,7 @@ use App\Models\VideoQualities;
 class VideoQualityController extends Controller
 {
     public function index() {
-        return view('backend.video_qualities.index');
+        return view('backend.setting.video_qualities.index');
     }
     
     public function getData(Request $request) {
@@ -54,7 +54,7 @@ class VideoQualityController extends Controller
     
     public function form($id = null) {
         $model = VideoQualities::firstOrNew(['id' => $id]);
-        return view('backend.video_qualities.form', [
+        return view('backend.setting.video_qualities.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new')
         ]);
@@ -63,23 +63,22 @@ class VideoQualityController extends Controller
     public function save(Request $request) {
         $this->validateRequest([
             'name' => 'required|string|max:250|unique:video_qualities,name',
-            'description' => 'nullable|string|max:300',
-            'status' => 'required|in:0,1',
-            'thumbnail' => 'nullable|string|max:250',
+            'default' => 'required|in:0,1',
         ], $request, [
             'name' => trans('app.name'),
-            'description' => trans('app.description'),
-            'status' => trans('app.status'),
-            'thumbnail' => trans('app.thumbnail'),
+            'default' => trans('app.default'),
         ]);
         
-        $addtype = $request->post('addtype');
         $model = VideoQualities::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->save();
         
-        if ($addtype == 2) {
-            return response()->json($model->toArray());
+        if ($model->default == 1) {
+            VideoQualities::where('id', '!=', $model->id)
+                ->where('default', '=', 1)
+                ->update([
+                    'default' => 0
+                ]);
         }
         
         return response()->json([

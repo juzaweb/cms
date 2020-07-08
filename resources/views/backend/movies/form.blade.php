@@ -81,12 +81,15 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="video_quality">@lang('app.video_quality')</label>
                                 <select class="form-control" name="video_quality" id="video_quality">
-                                    <option value="4K" @if($model->video_quality == '4K') selected @endif>4K</option>
-                                    <option value="HD" @if($model->video_quality == 'HD' || empty($model->video_quality)) selected @endif>HD</option>
-                                    <option value="SD" @if($model->video_quality == 'SD') selected @endif>SD</option>
-                                    <option value="CAM" @if($model->video_quality == 'CAM') selected @endif>CAM</option>
-                                    <option value="LQ" @if($model->video_quality == 'LQ') selected @endif>LQ</option>
-                                    <option value="DVD" @if($model->video_quality == 'DVD') selected @endif>DVD</option>
+                                    @foreach($qualities as $item)
+                                        @php
+                                        $selected = ($model->video_quality == $item->name);
+                                        if (empty($selected)) {
+                                            $selected = (empty($model->video_quality) && $item->default == 1)
+                                        }
+                                        @endphp
+                                        <option value="{{ $item->name }}" @if($selected) selected @endif>{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
