@@ -159,4 +159,11 @@ return [
     'email_templates' => 'Email templates',
     'subject' => 'Subject',
     'video_url' => 'Video url',
+    'notify' => 'Notify',
+    'notify_and_email' => 'Notify & Email',
+    'sended' => 'Sended',
+    'send_for' => 'Sended for',
+    'sending' => 'Sending',
+    'pause' => 'Pause',
+    'all_users' => 'All users'
 ];

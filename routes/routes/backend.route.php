@@ -270,7 +270,7 @@ Route::group(['prefix' => 'setting/ads'], function () {
 Route::group(['prefix' => 'setting/video-ads'], function () {
     Route::get('/', 'Backend\Setting\VideoQualityController@index')->name('admin.setting.video_ads');
     
-    Route::get('/getdata', 'Backend\VideoQualityController@getData')->name('admin.setting.video_ads.getdata');
+    Route::get('/getdata', 'Backend\Setting\VideoQualityController@getData')->name('admin.setting.video_ads.getdata');
     
     Route::get('/create', 'Backend\Setting\VideoQualityController@form')->name('admin.setting.video_ads.create');
     
@@ -279,4 +279,18 @@ Route::group(['prefix' => 'setting/video-ads'], function () {
     Route::post('/save', 'Backend\Setting\VideoQualityController@save')->name('admin.setting.video_ads.save');
     
     Route::post('/remove', 'Backend\Setting\VideoQualityController@remove')->name('admin.setting.video_ads.remove');
+});
+
+Route::group(['prefix' => 'notification'], function () {
+    Route::get('/', 'Backend\SendNotificationController@index')->name('admin.notification');
+    
+    Route::get('/getdata', 'Backend\SendNotificationController@getData')->name('admin.notification.getdata');
+    
+    Route::get('/create', 'Backend\SendNotificationController@form')->name('admin.notification.create');
+    
+    Route::get('/edit/{id}', 'Backend\SendNotificationController@form')->name('admin.notification.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\SendNotificationController@save')->name('admin.notification.save');
+    
+    Route::post('/remove', 'Backend\SendNotificationController@remove')->name('admin.notification.remove');
 });

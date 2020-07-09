@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UseChangeBy;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -32,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class VideoAds extends Model
 {
+    use UseChangeBy;
+    
     protected $table = 'video_ads';
     protected $primaryKey = 'id';
     protected $fillable = [
