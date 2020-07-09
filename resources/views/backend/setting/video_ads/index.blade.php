@@ -6,7 +6,7 @@
 
 {{ Breadcrumbs::render('manager', [
         'name' => trans('app.video_ads'),
-        'url' => route('admin.video_ads')
+        'url' => route('admin.setting.video_ads')
     ]) }}
 
 <div class="cui__utils__content">
@@ -19,7 +19,7 @@
 
                 <div class="col-md-6">
                     <div class="btn-group float-right">
-                        <a href="{{ route('admin.video_ads.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                        <a href="{{ route('admin.setting.video_ads.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                         <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                     </div>
                 </div>
@@ -48,7 +48,6 @@
                         <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('app.search')</button>
                     </form>
                 </div>
-
             </div>
 
             <div class="table-responsive mb-5">
@@ -56,9 +55,7 @@
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                            <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('app.thumbnail')</th>
                             <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
-                            <th data-width="20%" data-field="description">@lang('app.description')</th>
                             <th data-width="15%" data-field="created">@lang('app.created_at')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                         </tr>
@@ -70,9 +67,6 @@
 </div>
 
     <script type="text/javascript">
-        function thumbnail_formatter(value, row, index) {
-            return '<img src="'+ row.thumb_url +'" class="w-100">';
-        }
 
         function name_formatter(value, row, index) {
             return '<a href="'+ row.edit_url +'">'+ value +'</a>';
@@ -86,8 +80,8 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.video_ads.getdata') }}',
-            remove_url: '{{ route('admin.video_ads.remove') }}',
+            url: '{{ route('admin.setting.video_ads.getdata') }}',
+            remove_url: '{{ route('admin.setting.video_ads.remove') }}',
         });
     </script>
 @endsection

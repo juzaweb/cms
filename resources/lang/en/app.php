@@ -158,4 +158,5 @@ return [
     'test_configuration' => 'TEST CONFIGURATION',
     'email_templates' => 'Email templates',
     'subject' => 'Subject',
+    'video_url' => 'Video url',
 ];

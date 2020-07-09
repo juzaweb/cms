@@ -9,7 +9,7 @@ use App\Models\VideoAds;
 class VideoAdsController extends Controller
 {
     public function index() {
-        return view('backend.video_ads.index');
+        return view('backend.setting.video_ads.index');
     }
     
     public function getData(Request $request) {
@@ -27,6 +27,7 @@ class VideoAdsController extends Controller
             $query->where(function ($subquery) use ($search) {
                 $subquery->orWhere('name', 'like', '%'. $search .'%');
                 $subquery->orWhere('title', 'like', '%'. $search .'%');
+                $subquery->orWhere('url', 'like', '%'. $search .'%');
                 $subquery->orWhere('description', 'like', '%'. $search .'%');
             });
         }
@@ -43,7 +44,7 @@ class VideoAdsController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->edit_url = route('admin.video_ads.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.setting.video_ads.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -54,7 +55,7 @@ class VideoAdsController extends Controller
     
     public function form($id = null) {
         $model = VideoAds::firstOrNew(['id' => $id]);
-        return view('backend.video_ads.form', [
+        return view('backend.setting.video_ads.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new')
         ]);
@@ -62,15 +63,19 @@ class VideoAdsController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250|unique:video_ads,name',
+            'name' => 'required|string|max:250',
+            'title' => 'required|string|max:250',
+            'url' => 'required|string|max:250',
+            'video_url' => 'required|string|max:250',
             'description' => 'nullable|string|max:300',
             'status' => 'required|in:0,1',
-            'thumbnail' => 'nullable|string|max:250',
         ], $request, [
             'name' => trans('app.name'),
+            'title' => trans('app.title'),
+            'url' => trans('app.url'),
+            'video_url' => trans('app.video_url'),
             'description' => trans('app.description'),
             'status' => trans('app.status'),
-            'thumbnail' => trans('app.thumbnail'),
         ]);
         
         $model = VideoAds::firstOrNew(['id' => $request->post('id')]);
@@ -80,7 +85,7 @@ class VideoAdsController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.video_ads'),
+            'redirect' => route('admin.setting.video_ads'),
         ]);
     }
     
