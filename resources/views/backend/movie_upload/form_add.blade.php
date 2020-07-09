@@ -1,6 +1,8 @@
 <div class="row form-upload-video mb-5 box-hidden">
     <div class="col-md-12">
         <form method="post" action="" class="form-ajax">
+            <input type="hidden" name="id" value="">
+
             <div class="form-group">
                 <label class="col-form-label" for="label">@lang('app.label')</label>
 
@@ -10,7 +12,7 @@
             <div class="form-group">
                 <label class="col-form-label" for="order">@lang('app.order')</label>
 
-                <input type="text" name="order" class="form-control" id="order" autocomplete="off" required>
+                <input type="text" name="order" class="form-control" id="order" autocomplete="off" required value="1">
             </div>
 
             <div class="form-group">
@@ -31,7 +33,7 @@
             </div>
 
             <div class="form-group form-url">
-                <label class="col-form-label" for="url">@lang('app.url')</label>
+                <label class="col-form-label" for="url">@lang('app.video_url')</label>
                 <input type="text" name="url" id="url" class="form-control" autocomplete="off">
             </div>
 

@@ -16,6 +16,7 @@ class CreateVideoFilesTable extends Migration
             $table->integer('order')->default(1);
             $table->string('source', 100);
             $table->string('url');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

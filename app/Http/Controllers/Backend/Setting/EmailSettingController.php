@@ -77,7 +77,7 @@ class EmailSettingController extends Controller
         $template = EmailTemplates::findCode('email_test');
         $subject = $template->subject;
         
-        Mail::send('mail.default', function ($message) use ($emails, $subject) {
+        Mail::send('emails.email_test', function ($message) use ($emails, $subject) {
             $message->to($emails)->subject($subject);
         });
     

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Movies;
 use App\Models\Servers;
+use App\Models\VideoFiles;
 use Dilab\Network\SimpleRequest;
 use Dilab\Network\SimpleResponse;
 use Dilab\Resumable;
@@ -59,15 +60,20 @@ class MovieUploadController extends Controller
     
     public function save($server_id, Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:100',
+            'label' => 'required|string|max:250',
+            'source' => 'required|string|max:100',
+            'url' => 'required|max:250',
             'order' => 'required|numeric',
         ], $request, [
-            'name' => trans('app.name'),
+            'label' => trans('app.label'),
+            'source' => trans('app.source'),
+            'url' => trans('app.video_url'),
             'order' => trans('app.order'),
         ]);
         
-        $model = Servers::firstOrNew(['id' => $request->post('id')]);
+        $model = VideoFiles::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
+        $model->server_id = $server_id;
         $model->movie_id = $server_id;
         $model->save();
         
@@ -83,18 +89,15 @@ class MovieUploadController extends Controller
         ], $request, [
             'ids' => trans('app.servers'),
         ]);
-        
-        $server_ids = Servers::where('movie_id', '=', $server_id)
-            ->whereIn('id', $request->post('ids'))
-            ->pluck('id')
-            ->toArray();
-        
-        Servers::destroy($server_ids);
+    
+        VideoFiles::destroy($request->post('ids', []));
         
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.genres'),
+            'redirect' => route('admin.movies.servers.upload', [
+                'server_id' => $server_id
+            ]),
         ]);
     }
     

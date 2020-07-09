@@ -194,4 +194,25 @@
             <i class="cui__menuLeft__item__icon fe fe-users"></i>
         </a>
     </li>
+
+    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+        <span class="cui__menuLeft__item__link">
+            <span class="cui__menuLeft__item__title">@lang('app.logs')</span>
+            <i class="cui__menuLeft__item__icon fe fe-layout"></i>
+        </span>
+        <ul class="cui__menuLeft__navigation">
+            <li class="cui__menuLeft__item">
+                <a href="" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.email_logs')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a href="/log-viewer" target="_blank" data-turbolinks="false" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.error_logs')</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
 </ul>

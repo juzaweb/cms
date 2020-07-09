@@ -39,5 +39,6 @@ class VideoFiles extends Model
         'order',
         'source',
         'url',
+        'status',
     ];
 }
