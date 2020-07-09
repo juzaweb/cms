@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * App\Models\EmailTemplates
  *
  * @property int $id
  * @property string $code
- * @property string $title
+ * @property string $subject
+ * @property string|null $params
  * @property string $template_file
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -19,8 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailTemplates whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailTemplates whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailTemplates whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailTemplates whereParams($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailTemplates whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailTemplates whereTemplateFile($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailTemplates whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailTemplates whereUpdatedAt($value)
  * @mixin \Eloquent
  */

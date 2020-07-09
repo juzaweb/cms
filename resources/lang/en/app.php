@@ -70,6 +70,8 @@ return [
     'theme' => 'Theme',
     'menu' => 'Menu',
     'ads' => 'Ads',
+    'banner_ads' => 'Banner ads',
+    'video_ads' => 'Video ads',
     'plugins' => 'Plugins',
     'movie_comments' => 'Movie comments',
     'post_comments' => 'Post comments',
@@ -154,4 +156,6 @@ return [
     'notification' => 'Notification',
     'send' => 'Send',
     'test_configuration' => 'TEST CONFIGURATION',
+    'email_templates' => 'Email templates',
+    'subject' => 'Subject',
 ];

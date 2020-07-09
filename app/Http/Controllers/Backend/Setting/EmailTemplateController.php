@@ -4,28 +4,29 @@ namespace App\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Ads;
+use App\Models\EmailTemplates;
 
-class AdsSettingController extends Controller
+class EmailTemplateController extends Controller
 {
     public function index() {
-        return view('backend.ads.index');
+        return view('backend.setting.email_templates.index');
     }
     
     public function getData(Request $request) {
         $search = $request->get('search');
+        $status = $request->get('status');
         
         $sort = $request->get('sort', 'a.id');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Ads::query();
+        $query = EmailTemplates::query();
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
-                $subquery->orWhere('name', 'like', '%'. $search .'%');
-                $subquery->orWhere('description', 'like', '%'. $search .'%');
+                $subquery->orWhere('code', 'like', '%'. $search .'%');
+                $subquery->orWhere('subject', 'like', '%'. $search .'%');
             });
         }
         
@@ -36,8 +37,7 @@ class AdsSettingController extends Controller
         $rows = $query->get();
         
         foreach ($rows as $row) {
-            $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->edit_url = route('admin.ads.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.setting.email_templates.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -47,34 +47,43 @@ class AdsSettingController extends Controller
     }
     
     public function form($id = null) {
-        $model = Ads::firstOrNew(['id' => $id]);
-        return view('backend.ads.form', [
+        $model = EmailTemplates::firstOrNew(['id' => $id]);
+        return view('backend.setting.email_templates.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->subject ?: trans('app.add_new')
         ]);
     }
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250|unique:ads,name',
-            'description' => 'nullable|string|max:300',
-            'status' => 'required|in:0,1',
-            'thumbnail' => 'nullable|string|max:250',
+            'subject' => 'required|string|max:300',
         ], $request, [
-            'name' => trans('app.name'),
-            'description' => trans('app.description'),
-            'status' => trans('app.status'),
-            'thumbnail' => trans('app.thumbnail'),
+            'subject' => trans('app.name'),
         ]);
         
-        $model = Ads::firstOrNew(['id' => $request->post('id')]);
+        $model = EmailTemplates::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->save();
         
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.ads'),
+            'redirect' => route('admin.setting.email_templates'),
+        ]);
+    }
+    
+    public function remove(Request $request) {
+        $this->validateRequest([
+            'ids' => 'required',
+        ], $request, [
+            'ids' => trans('app.setting.email_templates')
+        ]);
+        
+        EmailTemplates::destroy($request->post('ids'));
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('app.deleted_successfully'),
         ]);
     }
 }

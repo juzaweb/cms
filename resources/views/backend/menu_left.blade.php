@@ -170,7 +170,13 @@
 
             <li class="cui__menuLeft__item">
                 <a href="" class="cui__menuLeft__item__link">
-                    <span class="cui__menuLeft__item__title">@lang('app.ads')</span>
+                    <span class="cui__menuLeft__item__title">@lang('app.banner_ads')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a href="" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.video_ads')</span>
                 </a>
             </li>
         </ul>
