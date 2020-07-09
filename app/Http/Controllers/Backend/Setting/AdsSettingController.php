@@ -9,7 +9,7 @@ use App\Models\Ads;
 class AdsSettingController extends Controller
 {
     public function index() {
-        return view('backend.ads.index');
+        return view('backend.setting.ads.index');
     }
     
     public function getData(Request $request) {
@@ -24,8 +24,8 @@ class AdsSettingController extends Controller
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
+                $subquery->orWhere('key', 'like', '%'. $search .'%');
                 $subquery->orWhere('name', 'like', '%'. $search .'%');
-                $subquery->orWhere('description', 'like', '%'. $search .'%');
             });
         }
         
@@ -36,7 +36,6 @@ class AdsSettingController extends Controller
         $rows = $query->get();
         
         foreach ($rows as $row) {
-            $row->created = $row->created_at->format('H:i d/m/Y');
             $row->edit_url = route('admin.ads.edit', ['id' => $row->id]);
         }
         
@@ -48,7 +47,7 @@ class AdsSettingController extends Controller
     
     public function form($id = null) {
         $model = Ads::firstOrNew(['id' => $id]);
-        return view('backend.ads.form', [
+        return view('backend.setting.ads.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new')
         ]);
@@ -56,15 +55,13 @@ class AdsSettingController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250|unique:ads,name',
-            'description' => 'nullable|string|max:300',
+            'name' => 'required|string|max:250',
+            'body' => 'nullable',
             'status' => 'required|in:0,1',
-            'thumbnail' => 'nullable|string|max:250',
         ], $request, [
             'name' => trans('app.name'),
-            'description' => trans('app.description'),
+            'body' => trans('app.content'),
             'status' => trans('app.status'),
-            'thumbnail' => trans('app.thumbnail'),
         ]);
         
         $model = Ads::firstOrNew(['id' => $request->post('id')]);
