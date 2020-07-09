@@ -37,6 +37,7 @@ class Configs extends Model
     
     public static function setConfig(string $key, string $value = null) {
         $config = Configs::firstOrNew(['key' => $key]);
+        $config->key = $key;
         $config->value = $value;
         return $config->save();
     }
@@ -57,6 +58,13 @@ class Configs extends Model
             'comment_type',
             'comments_per_page',
             'comments_approval',
+            'mail_host',
+            'mail_driver',
+            'mail_port',
+            'mail_username',
+            'mail_password',
+            'mail_from_name',
+            'mail_from_address',
         ];
     }
 }

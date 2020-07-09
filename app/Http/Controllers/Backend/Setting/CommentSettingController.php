@@ -6,7 +6,7 @@ use App\Models\Configs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CommentController extends Controller
+class CommentSettingController extends Controller
 {
     public function index() {
         return view('backend.setting.comment.index', [
@@ -41,7 +41,7 @@ class CommentController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.setting'),
+            'redirect' => route('admin.setting.comment'),
         ]);
     }
 }

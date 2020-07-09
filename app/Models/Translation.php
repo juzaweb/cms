@@ -61,6 +61,7 @@ class Translation extends Model
                 foreach ($keywords as $key => $keyword) {
                     $key2 = $file_name . '.' . $key;
                     self::syncLanguageKey($key2, $keyword, $lang);
+                    
                 }
             }
         }
@@ -76,9 +77,11 @@ class Translation extends Model
             }
         }
         else {
-            $model = Translation::firstOrNew(['key' => $key]);
-            $model->{$lang} = $keyword;
-            $model->save();
+            if (!Translation::where('key', '=', $key)->exists()) {
+                $model = Translation::firstOrNew(['key' => $key]);
+                $model->{$lang} = $keyword;
+                $model->save();
+            }
         }
     }
 }

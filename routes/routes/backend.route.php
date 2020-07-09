@@ -196,9 +196,15 @@ Route::group(['prefix' => 'setting'], function () {
 });
 
 Route::group(['prefix' => 'setting/comment'], function () {
-    Route::get('/', 'Backend\Setting\CommentController@index')->name('admin.setting.comment');
+    Route::get('/', 'Backend\Setting\CommentSettingController@index')->name('admin.setting.comment');
     
-    Route::post('/save', 'Backend\Setting\CommentController@save')->name('admin.setting.comment.save');
+    Route::post('/save', 'Backend\Setting\CommentSettingController@save')->name('admin.setting.comment.save');
+});
+
+Route::group(['prefix' => 'setting/email'], function () {
+    Route::get('/', 'Backend\Setting\EmailSettingController@index')->name('admin.setting.email');
+    
+    Route::post('/save', 'Backend\Setting\EmailSettingController@save')->name('admin.setting.email.save');
 });
 
 Route::group(['prefix' => 'settting/languages'], function () {

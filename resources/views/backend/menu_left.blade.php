@@ -157,6 +157,12 @@
             </li>
 
             <li class="cui__menuLeft__item">
+                <a href="{{ route('admin.setting.email') }}" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.email_setting')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
                 <a href="{{ route('admin.video_qualities') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.video_qualities')</span>
                 </a>
@@ -168,5 +174,12 @@
                 </a>
             </li>
         </ul>
+    </li>
+
+    <li class="cui__menuLeft__item">
+        <a href="" class="cui__menuLeft__item__link">
+            <span class="cui__menuLeft__item__title">@lang('app.notification')</span>
+            <i class="cui__menuLeft__item__icon fe fe-users"></i>
+        </a>
     </li>
 </ul>

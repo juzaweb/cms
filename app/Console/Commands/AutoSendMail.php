@@ -20,8 +20,8 @@ class AutoSendMail extends Command
     public function handle()
     {
         \Config::set('mail.host', Configs::getConfig('mail_host'));
-        \Config::set('mail.driver', 'smtp');
-        \Config::set('mail.port', Configs::getConfig('mail_post'));
+        \Config::set('mail.driver', Configs::getConfig('mail_driver'));
+        \Config::set('mail.port', Configs::getConfig('mail_port'));
         \Config::set('mail.username', Configs::getConfig('mail_username'));
         \Config::set('mail.password', Configs::getConfig('mail_password'));
         \Config::set('mail.from.name', Configs::getConfig('mail_from_name'));
