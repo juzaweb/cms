@@ -54,7 +54,7 @@ class LanguagesController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'key' => 'required|string|max:2|unique:languages,key',
+            'key' => 'required|string|max:3|min:2|unique:languages,key',
             'name' => 'required|string|max:250|unique:languages,name',
         ], $request, [
             'key' => trans('app.key'),

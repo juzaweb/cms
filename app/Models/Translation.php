@@ -31,16 +31,88 @@ class Translation extends Model
     ];
     
     public static function syncLanguage() {
-        $dir_path = resource_path() . '/lang';
-        $columns = \Schema::getColumnListing('translation');
-        
-        self::syncLanguageDir($dir_path . '/en', 'en');
-        
+        self::fileToDatabase();
+        self::databaseToFile();
+    }
+    
+    protected static function varExportShort($var)
+    {
+        $output = json_decode(str_replace(array('(',')'), array('&#40','&#41'), json_encode($var)), true);
+        $output = var_export($output, true);
+        $output = str_replace(array('array (',')','&#40','&#41'), array('[',']','(',')'), $output);
+        return $output;
+    }
+    
+    protected static function databaseToFile() {
+        $lang_dir = resource_path() . '/lang';
+        $columns = self::getColumnsLanguage();
         foreach ($columns as $column) {
-            if (in_array($column, ['key', 'en', 'id', 'created_at', 'updated_at'])) {
+            $dir_path = $lang_dir . '/' . $column;
+            $trans_files = new \DirectoryIterator($dir_path);
+            
+            if (!is_dir($dir_path)) {
+                mkdir($dir_path);
+            }
+            
+            foreach ($trans_files as $file) {
+                if (!$file->isDot()) {
+                    $file_name = $file->getFilename();
+                    $group = explode('.', $file_name)[0];
+                    echo "__START GROUP: ". $group;
+                    $items = Languages::select([
+                        'code AS keylang',
+                        'en AS default',
+                        $column .' AS lang'
+                    ])->where('code', 'like', $group . '.%')
+                        ->get();
+            
+                    $arr = [];
+                    foreach ($items as $item) {
+                        $keylang = str_replace($group . '.', '', $item->keylang);
+                        $explode = explode('.', $keylang);
+                        $lang_text = $item->lang;
+                        if (empty($lang_text)) {
+                            $lang_text = $item->default;
+                        }
+                
+                        if (isset($explode[1]) && !empty($explode[1])) {
+                            $arr[$explode[0]][trim($explode[1])] = trim($lang_text);
+                        }
+                        else {
+                            $arr[\Str::slug($keylang, '_')] = trim($lang_text);
+                        }
+                    }
+            
+                    $str_arr = self::varExportShort($arr) . ";";
+                    $data = "<?php \n";
+                    $data .= "return $str_arr \n";
+                    $data .= "\n";
+            
+                    $handle = fopen($dir_path . '/' . $file_name, 'w+') or die('Cannot open file: '. $file_name);
+                    fwrite($handle, $data);
+                    fclose($handle);
+                    echo "__END GROUP: ". $group . "\n";;
+                }
+            }
+        }
+    }
+    
+    protected static function getColumnsLanguage() {
+        $columns = \Schema::getColumnListing('translation');
+        return array_merge(array_diff($columns, ['key', 'id', 'created_at', 'updated_at']));
+    }
+    
+    protected static function fileToDatabase() {
+        $dir_path = resource_path() . '/lang';
+        $columns = self::getColumnsLanguage();
+    
+        self::syncLanguageDir($dir_path . '/en', 'en');
+    
+        foreach ($columns as $column) {
+            if ($column == 'en') {
                 continue;
             }
-    
+            
             self::syncLanguageDir($dir_path . '/' . $column, $column);
         }
     }
@@ -61,7 +133,6 @@ class Translation extends Model
                 foreach ($keywords as $key => $keyword) {
                     $key2 = $file_name . '.' . $key;
                     self::syncLanguageKey($key2, $keyword, $lang);
-                    
                 }
             }
         }

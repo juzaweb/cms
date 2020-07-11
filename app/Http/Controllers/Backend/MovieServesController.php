@@ -27,6 +27,9 @@ class MovieServesController extends Controller
     }
     
     public function getData($movie_id, Request $request) {
+        $movie = Movies::where('id', '=', $movie_id)
+            ->firstOrFail();
+        
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -52,7 +55,12 @@ class MovieServesController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->upload_url = route('admin.movies.servers.upload', ['server_id' => $row->id]);
+            if ($movie->tv_series == 0) {
+                $row->upload_url = route('admin.movies.servers.upload', ['server_id' => $row->id]);
+            }
+            else {
+                $row->upload_url = route('admin.tv_series.servers.upload', ['server_id' => $row->id]);
+            }
         }
         
         return response()->json([

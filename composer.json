@@ -20,7 +20,8 @@
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^6.2",
         "spatie/laravel-permission": "^3.10",
-        "unisharp/laravel-filemanager": "^2.1"
+        "unisharp/laravel-filemanager": "^2.1",
+        "laravelium/sitemap": "3.1.*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",
