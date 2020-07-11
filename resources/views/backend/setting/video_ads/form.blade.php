@@ -55,7 +55,16 @@
 
                         <div class="form-group">
                             <label class="col-form-label" for="title">@lang('app.video_url')</label>
-                            <input type="text" name="video_url" class="form-control" id="video_url" value="{{ $model->video_url }}" autocomplete="off" required>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <input type="text" name="video_url" class="form-control" id="video_url" value="{{ $model->video_url }}" autocomplete="off" required>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <a href="javascript:void(0)" data-input="video_url" class="btn btn-primary lfm-file"><i class="fa fa-upload"></i> @lang('app.upload')</a>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="form-group">

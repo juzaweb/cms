@@ -43,4 +43,8 @@ class VideoFiles extends Model
         'url',
         'status',
     ];
+    
+    public function server() {
+        $this->belongsTo('App\Models\Servers', 'server_id', 'id');
+    }
 }

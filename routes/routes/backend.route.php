@@ -268,17 +268,17 @@ Route::group(['prefix' => 'setting/ads'], function () {
 });
 
 Route::group(['prefix' => 'setting/video-ads'], function () {
-    Route::get('/', 'Backend\Setting\VideoQualityController@index')->name('admin.setting.video_ads');
+    Route::get('/', 'Backend\Setting\VideoAdsController@index')->name('admin.setting.video_ads');
     
-    Route::get('/getdata', 'Backend\Setting\VideoQualityController@getData')->name('admin.setting.video_ads.getdata');
+    Route::get('/getdata', 'Backend\Setting\VideoAdsController@getData')->name('admin.setting.video_ads.getdata');
     
-    Route::get('/create', 'Backend\Setting\VideoQualityController@form')->name('admin.setting.video_ads.create');
+    Route::get('/create', 'Backend\Setting\VideoAdsController@form')->name('admin.setting.video_ads.create');
     
-    Route::get('/edit/{id}', 'Backend\Setting\VideoQualityController@form')->name('admin.setting.video_ads.edit')->where('id', '[0-9]+');
+    Route::get('/edit/{id}', 'Backend\Setting\VideoAdsController@form')->name('admin.setting.video_ads.edit')->where('id', '[0-9]+');
     
-    Route::post('/save', 'Backend\Setting\VideoQualityController@save')->name('admin.setting.video_ads.save');
+    Route::post('/save', 'Backend\Setting\VideoAdsController@save')->name('admin.setting.video_ads.save');
     
-    Route::post('/remove', 'Backend\Setting\VideoQualityController@remove')->name('admin.setting.video_ads.remove');
+    Route::post('/remove', 'Backend\Setting\VideoAdsController@remove')->name('admin.setting.video_ads.remove');
 });
 
 Route::group(['prefix' => 'notification'], function () {

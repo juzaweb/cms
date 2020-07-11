@@ -6,7 +6,7 @@
 
     {{ Breadcrumbs::render('manager', [
             'name' => trans('app.language'),
-            'url' => route('admin.languages')
+            'url' => route('admin.setting.languages')
         ]) }}
 
     <div class="cui__utils__content">
@@ -77,7 +77,7 @@
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.languages.save') }}" method="post" class="form-ajax">
+                <form action="{{ route('admin.setting.languages.save') }}" method="post" class="form-ajax">
                     <div class="modal-header">
                         <h5 class="modal-title" id="addModalLabel">@lang('app.add_language')</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -110,20 +110,20 @@
 
         function status_formatter(value, row, index) {
             if (value == 1) {
-                return '<span class="text-success">@lang('app.enabled')</span>';
+                return '<span class="text-success">'+ langs.enabled +'</span>';
             }
-            return '<span class="text-danger">@lang('app.disabled')</span>';
+            return '<span class="text-danger">'+ langs.disabled +'</span>';
         }
 
         function options_formatter(value, row, index) {
             let result = '';
-            result += '<a href="'+ row.tran_url +'" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> @lang('app.translate')</a>';
+            result += '<a href="'+ row.tran_url +'" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> '+ langs.translate +'</a>';
             return result;
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.languages.getdata') }}',
-            remove_url: '{{ route('admin.languages.remove') }}',
+            url: '{{ route('admin.setting.languages.getdata') }}',
+            remove_url: '{{ route('admin.setting.languages.remove') }}',
         });
 
         $('.sync-language').on('click', function () {
@@ -134,7 +134,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('admin.languages.sync') }}',
+                url: '{{ route('admin.setting.languages.sync') }}',
                 dataType: 'json',
                 data: {}
             }).done(function(data) {

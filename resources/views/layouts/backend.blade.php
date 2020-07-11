@@ -22,6 +22,9 @@
             'enabled': '@lang('app.enabled')',
             'disabled': '@lang('app.disabled')',
             'edit': '@lang('app.edit')',
+            'translate': '@lang('app.translate')',
+            'preview': '@lang('app.preview')',
+            'upload': '@lang('app.upload')',
         }
     </script>
     <script src="{{ asset('js/app.js') }}"></script>

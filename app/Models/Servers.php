@@ -35,4 +35,8 @@ class Servers extends Model
         'order',
         'status'
     ];
+    
+    public function movie() {
+        return $this->belongsTo('App\Models\Movies', 'movie_id', 'id');
+    }
 }
