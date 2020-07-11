@@ -15,7 +15,23 @@ function image_path($url) {
     return $img[0];
 }
 
+function is_url($string) {
+    if (substr($string, 0, 7) === 'http://') {
+        return true;
+    }
+    
+    if (substr($string, 0, 8) === 'https://') {
+        return true;
+    }
+    
+    return false;
+}
+
 function image_url($path) {
+    if (is_url($path)) {
+        return $path;
+    }
+    
     if ($path) {
         $storage_path = Storage::disk('uploads')->path('/');
         

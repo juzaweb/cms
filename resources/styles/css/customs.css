@@ -30,6 +30,7 @@ ul {
 
 .col-form-label {
     width: 100%;
+    text-transform: capitalize;
 }
 
 .box-hidden {
@@ -70,4 +71,16 @@ ul {
     padding: 30px;
     text-align: center;
     border: 1px dotted #ccc;
+}
+
+.description {
+    font-size: 12.5px;
+}
+
+.breadcrumb-item {
+    text-transform: uppercase;
+}
+
+.preview-image img {
+    max-width: 100%;
 }

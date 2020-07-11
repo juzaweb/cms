@@ -18,6 +18,7 @@ class SystemSettingController extends Controller
         $this->validateRequest([
             'title' => 'required|string|max:300',
             'description' => 'nullable|string|max:300',
+            'keyworks' => 'nullable|string|max:300',
             'logo' => 'required|string|max:300',
             'icon' => 'required|string|max:300',
             'banner' => 'nullable|string|max:300',
@@ -26,9 +27,12 @@ class SystemSettingController extends Controller
             'google_recaptcha' => 'required|in:0,1',
             'google_recaptcha_key' => 'required_if:google_recaptcha,!=,0|string|max:300',
             'google_recaptcha_secret' => 'required_if:google_recaptcha,!=,0|string|max:300',
+            'player_watermark' => 'required|in:0,1',
+            'player_watermark_logo' => 'required_if:player_watermark,!=,0',
         ], $request, [
-            'title' => trans('app.title'),
-            'description' => trans('app.description'),
+            'title' => trans('app.home_title'),
+            'description' => trans('app.home_description'),
+            'keyworks' => trans('app.keyworks'),
             'logo' => trans('app.logo'),
             'icon' => trans('app.icon'),
             'banner' => trans('app.banner'),

@@ -169,4 +169,10 @@ return [
     'logs' => 'Logs',
     'action' => 'Action',
     'edit' => 'Edit',
+    'home_title' => 'Home page title',
+    'home_description' => 'Home page description',
+    'keyworks' => 'Keyworks',
+    'player_setting' => 'Player setting',
+    'player_watermark' => 'Player watermark',
+    'player_watermark_logo' => 'Player watermark logo',
 ];

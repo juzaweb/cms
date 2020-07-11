@@ -12,7 +12,7 @@ class CreateGenresTable extends Migration
             $table->bigIncrements('id');
             $table->string('thumbnail', 150)->nullable();
             $table->string('name', 250);
-            $table->string('description', 250)->nullable();
+            $table->text('description')->nullable();
             $table->string('slug', 200)->unique()->index();
             $table->tinyInteger('status')->default(0);
             $table->string('meta_title', 70)->nullable();

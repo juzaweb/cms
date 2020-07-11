@@ -46,6 +46,7 @@ class Configs extends Model
         return [
             'title',
             'description',
+            'keyworks',
             'logo',
             'icon',
             'banner',
@@ -65,6 +66,8 @@ class Configs extends Model
             'mail_password',
             'mail_from_name',
             'mail_from_address',
+            'player_watermark',
+            'player_watermark_logo',
         ];
     }
 }
