@@ -165,5 +165,8 @@ return [
     'send_for' => 'Sended for',
     'sending' => 'Sending',
     'pause' => 'Pause',
-    'all_users' => 'All users'
+    'all_users' => 'All users',
+    'logs' => 'Logs',
+    'action' => 'Action',
+    'edit' => 'Edit',
 ];

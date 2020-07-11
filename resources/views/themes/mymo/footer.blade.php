@@ -39,7 +39,11 @@
                         <span class="show-more hl-angle-down" data-icon="hl-angle-down" data-single="false"></span>
                     </div>
                 </div>
-            </div><div id="text-2" class="widget widget_text col-xs-12 col-sm-6 col-md-4"><h4 class="widget-title">Theo dõi trên Facebook</h4>			<div class="textwidget"><div class="fb-page" data-href="https://www.facebook.com/GalaPhimPage/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
+            </div>
+            <div id="text-2" class="widget widget_text col-xs-12 col-sm-6 col-md-4">
+                <h4 class="widget-title">Theo dõi trên Facebook</h4>
+                <div class="textwidget">
+                    <div class="fb-page" data-href="https://www.facebook.com/GalaPhimPage/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
                         <blockquote cite="https://www.facebook.com/GalaPhimPage/" class="fb-xfbml-parse-ignore"><p><a href="https://www.facebook.com/GalaPhimPage/">Thích Xem Phim</a></p></blockquote>
                     </div>
                 </div>

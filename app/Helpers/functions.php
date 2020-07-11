@@ -8,11 +8,11 @@ function json_message($message, $status = 'success') {
 
 function image_path($url) {
     $img = explode('uploads/', $url);
-    if ($img[1]) {
+    if (isset($img[1])) {
         return $img[1];
     }
     
-    return null;
+    return $img[0];
 }
 
 function image_url($path) {

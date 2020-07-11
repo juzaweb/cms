@@ -1,7 +1,7 @@
 <div class="row form-upload-video mb-5 box-hidden">
     <div class="col-md-12">
-        <form method="post" action="" class="form-ajax">
-            <input type="hidden" name="id" value="">
+        <form method="post" action="{{ route('admin.movies.servers.upload.save', ['server_id' => $server->id]) }}" class="form-ajax" data-success="add_file_success">
+            <input type="hidden" name="id" id="id" value="">
 
             <div class="form-group">
                 <label class="col-form-label" for="label">@lang('app.label')</label>
@@ -37,13 +37,20 @@
                 <input type="text" name="url" id="url" class="form-control" autocomplete="off">
             </div>
 
-            <div class="form-group form-upload">
-                <div class="upload-file" id="dropTarget">
-                    <a href="javascript:void(0)" id="browseButton">@lang('app.choose_file_upload')</a>
+            <div class="form-group form-upload box-hidden">
+                <label class="col-form-label" for="url_upload">@lang('app.video_url')</label>
+                <div class="row">
+                    <div class="col-md-10">
+                        <input type="text" name="url_upload" id="url_upload" class="form-control" autocomplete="off">
+                    </div>
+
+                    <div class="col-md-2">
+                        <a href="javascript:void(0)" class="btn btn-primary lfm-file" data-input="url_upload"><i class="fa fa-upload"></i> @lang('app.upload')</a>
+                    </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary"><i class="fa fa-plus-circle"></i> @lang('app.add_video')</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> @lang('app.save')</button>
         </form>
     </div>
 </div>

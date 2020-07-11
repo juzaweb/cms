@@ -73,5 +73,12 @@
             </div>
         </div>
     </form>
+
+    <script type="text/javascript">
+        CKEDITOR.replace('baseDescription', {
+            filebrowserImageBrowseUrl: '/admin-cp/filemanager?type=Images',
+            filebrowserBrowseUrl: '/admin-cp/filemanager?type=Files'
+        });
+    </script>
 </div>
 @endsection

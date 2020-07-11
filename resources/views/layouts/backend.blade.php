@@ -19,6 +19,9 @@
             'yes': '@lang('app.yes')',
             'cancel': '@lang('app.cancel')',
             'data_error': '@lang('app.data_error')',
+            'enabled': '@lang('app.enabled')',
+            'disabled': '@lang('app.disabled')',
+            'edit': '@lang('app.edit')',
         }
     </script>
     <script src="{{ asset('js/app.js') }}"></script>

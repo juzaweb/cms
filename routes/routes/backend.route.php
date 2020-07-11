@@ -38,15 +38,15 @@ Route::group(['prefix' => 'movies/servers'], function () {
 });
 
 Route::group(['prefix' => 'movies/servers/upload'], function () {
-    Route::get('/{server_id}', 'Backend\MovieUploadController@index')->name('admin.movies.servers.upload')->where('id', '[0-9]+');
+    Route::get('/{server_id}', 'Backend\MovieUploadController@index')->name('admin.movies.servers.upload')->where('server_id', '[0-9]+');
     
-    Route::get('/{server_id}/getdata', 'Backend\MovieUploadController@getData')->name('admin.movies.servers.upload.getdata')->where('id', '[0-9]+');
+    Route::get('/{server_id}/getdata', 'Backend\MovieUploadController@getData')->name('admin.movies.servers.upload.getdata')->where('server_id', '[0-9]+');
     
-    Route::post('/{server_id}/save', 'Backend\MovieUploadController@save')->name('admin.movies.servers.upload.save')->where('id', '[0-9]+');
+    Route::post('/{server_id}/save', 'Backend\MovieUploadController@save')->name('admin.movies.servers.upload.save')->where('server_id', '[0-9]+');
     
-    Route::post('/{server_id}/remove', 'Backend\MovieUploadController@remove')->name('admin.movies.servers.upload.remove')->where('id', '[0-9]+');
+    Route::post('/{server_id}/remove', 'Backend\MovieUploadController@remove')->name('admin.movies.servers.upload.remove')->where('server_id', '[0-9]+');
     
-    Route::post('/', 'Backend\MovieUploadController@upload')->name('admin.movies.servers.upload.post');
+    Route::get('/get-file', 'Backend\MovieUploadController@getFile')->name('admin.movies.servers.upload.getfile');
 });
 
 Route::group(['prefix' => 'tv-series'], function () {

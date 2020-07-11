@@ -78,6 +78,7 @@ class MovieServesController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
+            'redirect' => route('admin.movies.servers', ['movie_id' => $movie_id]),
         ]);
     }
     
