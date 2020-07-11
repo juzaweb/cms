@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Configs;
 use App\Models\EmailList;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
 
 class AutoSendMail extends Command
@@ -41,23 +42,18 @@ class AutoSendMail extends Command
         $mail = $mailer
             ->to('user@laravel.com')
             ->send(new OrderShipped);*/
-    
-        $rows = \DB::select([
-            'a.',
-            'b.subject',
-            'b.template_file'
-        ])
-            ->table('email_list AS a')
-            ->join('email_templates AS b', 'b.id', '=', 'a.template_id')
-            ->where('a.status', '=', 0)
+        
+        $rows = EmailList::with('template')
+            ->has('template')
+            ->where('status', '=', 0)
             ->limit(10)
             ->get();
         
         foreach ($rows as $row) {
             $params = json_decode($row->params, true);
-            Mail::send('emails.' . $row->template_file, $params, function ($message) use ($row) {
+            Mail::send('emails.' . $row->template->template_file, $params, function ($message) use ($row) {
                 //                $message->from('elearn@kienlongbank.com', 'Đào tạo');
-                $message->to(explode(',', $row->emails))->subject($row->subject);
+                $message->to(explode(',', $row->emails))->subject($row->template->subject);
             });
     
             if (Mail::failures()) {

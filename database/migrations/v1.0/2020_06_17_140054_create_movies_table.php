@@ -16,6 +16,7 @@ class CreateMoviesTable extends Migration
             $table->string('poster', 250)->nullable();
             $table->string('slug', 200)->unique()->index();
             $table->longText('description')->nullable();
+            $table->string('short_description', 300)->nullable();
             $table->string('actors', 250)->nullable();
             $table->string('directors', 250)->nullable();
             $table->string('writers', 250)->nullable();
@@ -35,6 +36,9 @@ class CreateMoviesTable extends Migration
             $table->string('meta_title', 70)->nullable();
             $table->string('meta_description', 320)->nullable();
             $table->string('keywords', 320)->nullable();
+            $table->bigInteger('views')->default(0);
+            $table->bigInteger('created_by')->index();
+            $table->bigInteger('updated_by')->index();
             $table->timestamps();
         });
     }

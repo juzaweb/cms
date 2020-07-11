@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereTemplateId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\EmailTemplates|null $template
  */
 class EmailList extends Model
 {
@@ -37,4 +38,9 @@ class EmailList extends Model
         'params',
         'template',
     ];
+    
+    public function template()
+    {
+        return $this->hasOne('App\Models\EmailTemplates', 'id', 'template_id');
+    }
 }

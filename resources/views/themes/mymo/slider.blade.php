@@ -15,7 +15,7 @@
                 </div>
             @endfor
         </div><!-- End of Wrapper For Slides -->
-        <script>
+        <script type="text/javascript">
             jQuery(document).ready(function($) {
                 var owl = $('#halim-fullwith-slider-widget-2');
                 owl.owlCarousel({
@@ -24,7 +24,7 @@
                     loop: true,
                     animateOut: 'fadeOutLeft',
                     animateIn: 'fadeInRight',
-                    smartSpeed:450,
+                    smartSpeed: 450,
                     autoplay: true,
                     autoplayTimeout: 4000,
                     autoHeight: true,

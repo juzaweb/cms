@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0cb386559ef905e8ac91601d3eed55bb",
+    "content-hash": "9e75a5d4196516d5cbb63daad055ace5",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1106,6 +1106,89 @@
                 "watermark"
             ],
             "time": "2019-11-02T09:15:47+00:00"
+        },
+        {
+            "name": "ip2location/ip2location-laravel",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ip2location/ip2location-laravel.git",
+                "reference": "a0b748aa68fad7780345ac1552243240f11a4316"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ip2location/ip2location-laravel/zipball/a0b748aa68fad7780345ac1552243240f11a4316",
+                "reference": "a0b748aa68fad7780345ac1552243240f11a4316",
+                "shasum": ""
+            },
+            "require": {
+                "ip2location/ip2location-php": "8.*",
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ip2location\\IP2LocationLaravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "IP2Location",
+                    "email": "support@ip2location.com"
+                }
+            ],
+            "description": "Lookup for visitor's IP information, such as country, region, city, coordinates, zip code, time zone, ISP, domain name, connection type, area code, weather, MCC, MNC, mobile brand name, elevation and usage type.",
+            "keywords": [
+                "geolocation",
+                "ip2location",
+                "laravel",
+                "laravel 5"
+            ],
+            "time": "2017-08-25T05:49:27+00:00"
+        },
+        {
+            "name": "ip2location/ip2location-php",
+            "version": "8.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chrislim2888/IP2Location-PHP-Module.git",
+                "reference": "9cbb8ab32b940523ea5b08ca3bab7adc4dde019f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chrislim2888/IP2Location-PHP-Module/zipball/9cbb8ab32b940523ea5b08ca3bab7adc4dde019f",
+                "reference": "9cbb8ab32b940523ea5b08ca3bab7adc4dde019f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "IP2Location.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "IP2Location",
+                    "email": "support@ip2location.com",
+                    "homepage": "http://www.ip2location.com"
+                }
+            ],
+            "description": "[Official Release] IP2Location PHP API to get location info from IPv4 and IPv6 address.",
+            "homepage": "http://www.ip2location.com",
+            "keywords": [
+                "geolocation",
+                "ip2location",
+                "ip2locationlite"
+            ],
+            "time": "2020-03-25T00:20:36+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

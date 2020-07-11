@@ -85,20 +85,17 @@ mix.combine([
     'resources/styles/components/cui-layout/support-chat/index.js',
     'resources/styles/components/cui-layout/topbar/index.js',
     'resources/vendor/laravel-filemanager/js/stand-alone-button.js',
-    'resources/styles/js/resumable.js',
     'resources/styles/js/load-ajax.js',
-    //'resources/styles/js/uploads.js',
     'resources/styles/js/load-select2.js',
     'resources/styles/js/LoadBootstrapTable.js',
     'resources/styles/js/form-ajax.js',
-    'resources/styles/js/lazyload.min.js',
     'resources/js/customs.js',
 ], 'public/js/backend.js');
 
 mix.styles([
-    'resources/styles/frontend/style.css',
     'resources/styles/frontend/assets/css/bootstrap.min.css',
-    'resources/styles/frontend/assets/css/style.css'
+    'resources/styles/frontend/assets/css/style.css',
+    'resources/styles/frontend/style.css',
 ], 'public/css/frontend.css');
 
 mix.combine([
@@ -113,7 +110,6 @@ mix.combine([
     'resources/styles/js/load-ajax.js',
     'resources/styles/js/LoadBootstrapTable.js',
     'resources/styles/js/form-ajax.js',
-    'resources/styles/js/lazyload.min.js',
 ],'public/js/frontend.js');
 
 mix.copyDirectory('resources/styles/frontend/assets/images', 'public/images');

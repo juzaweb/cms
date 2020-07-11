@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereUrl($value)
  * @mixin \Eloquent
+ * @property int $status
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereStatus($value)
  */
 class VideoFiles extends Model
 {

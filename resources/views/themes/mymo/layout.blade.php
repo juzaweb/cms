@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html lang="vi-VN">
 <head>
+    @php
+    $icon = image_url(get_config('icon'));
+    $logo = image_url(get_config('logo'));
+    @endphp
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#234556">
-    <meta name="msapplication-navbutton-color" content="#234556">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#234556">
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
-
-    <title>XemPhimPlus | Phim Hay | Phim Mới</title>
-    <meta name="description" content=""/>
+    <link rel="shortcut icon" href="{{ $icon }}" type="image/x-icon"/>
+    <title>{{ @$title }}</title>
+    <meta name="description" content="{{ @$description }}"/>
     <meta name="robots" content="index, follow"/>
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
     <link rel="canonical" href="/"/>
-    <link rel="next" href="/page/2"/>
     <meta property="og:locale" content="vi_VN"/>
-    <meta property="og:title" content=""/>
-    <meta property="og:description" content=""/>
+    <meta property="og:title" content="{{ @$title }}"/>
+    <meta property="og:description" content="{{ @$description }}"/>
     <meta property="og:url" content="/"/>
     <meta property="og:site_name" content=""/>
     <meta property="fb:app_id" content="2401456150086560"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:site" content="@XemPhimPlus"/>
-
-    <meta property="fb:app_id" content="2401456150086560"/>
     <meta name="csrf-token" content="{{ csrf_token()  }}">
-    <link rel="stylesheet" href="{{ asset('css/frontend.css') }}"/>
 
+    <link rel="stylesheet" href="{{ asset('css/frontend.css') }}"/>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/frontend.js') }}"></script>
 
@@ -61,10 +59,10 @@
         }
     </style>
 
-    <link rel="icon" href="{{ asset('uploads/2019/05/favicon.png') }}" sizes="32x32"/>
-    <link rel="icon" href="{{ asset('uploads/2019/05/favicon.png') }}" sizes="192x192"/>
-    <link rel="apple-touch-icon-precomposed" href="{{ asset('uploads/2019/05/favicon.png') }}"/>
-    <meta name="msapplication-TileImage" content="{{ asset('uploads/2019/05/favicon.png') }}"/>
+    <link rel="icon" href="{{ $icon }}" sizes="32x32"/>
+    <link rel="icon" href="{{ $icon }}" sizes="192x192"/>
+    <link rel="apple-touch-icon-precomposed" href="{{ $icon }}"/>
+    <meta name="msapplication-TileImage" content="{{ $icon }}"/>
 
     <style>
         #header .site-title {
@@ -79,7 +77,9 @@
 @include('themes.mymo.header')
 @include('themes.mymo.menu')
 <!-- /header -->
+@if(request()->is('/'))
 @include('themes.mymo.slider')
+@endif
 
 <div class="container-fluid halim-full-player hidden halim-centered">
     <div id="halim-full-player" class="container col-md-offset-2s col-md-9"></div>
@@ -90,6 +90,7 @@
 </div><!--./End .container -->
 
 <div class="clearfix"></div>
+@if(request()->is('/'))
 <div class="container">
     <div class="row fcategory">
         <h2 class="text-center section-title"><span>XemPhimPlus - Phim Mới - Xem Phim Online Miễn Phí</span></h2>
@@ -172,6 +173,7 @@
         </ul>
     </div>
 </div>
+@endif
 
 @include('themes.mymo.footer')
 

@@ -14,6 +14,8 @@ class MoviesSeeder extends Seeder
                 'other_name' => $faker->name,
                 'slug' => \Illuminate\Support\Str::slug($name),
                 'status' => 1,
+                'created_by' => 1,
+                'updated_by' => 1,
                 'created_at' => $faker->dateTime(),
                 'updated_at' => $faker->dateTime(),
             ]);

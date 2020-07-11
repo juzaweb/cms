@@ -30,6 +30,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoAds whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoAds whereVideoUrl($value)
  * @mixin \Eloquent
+ * @property int $created_by
+ * @property int $updated_by
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoAds whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoAds whereUpdatedBy($value)
  */
 class VideoAds extends Model
 {

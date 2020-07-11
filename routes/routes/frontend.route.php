@@ -1,5 +1,31 @@
 <?php
 
-Route::get('/login', 'Backend\DashboardController@index')->name('login');
-
 Route::get('/', 'Frontend\HomeController@index')->name('home');
+
+Route::get('/login', 'Frontend\LoginController@index')->name('login');
+
+Route::get('/register', 'Frontend\RegisterController@index')->name('login');
+
+Route::get('/movies', 'Frontend\MoviesController@index')->name('movies');
+
+Route::get('/movies/page-{page}', 'Frontend\MoviesController@index')->name('movies.page');
+
+Route::get('/tv-series', 'Frontend\TVSeriesController@index')->name('tv_series');
+
+Route::get('/tv-series/page-{page}', 'Frontend\TVSeriesController@index')->name('tv_series.page');
+
+Route::get('/genre/{slug}', 'Frontend\GenreController@index')->name('genre');
+
+Route::get('/genre/{slug}/page-{page}', 'Frontend\GenreController@index')->name('genre.page')->where('page', '[0-9]+');
+
+Route::get('/country/{slug}', 'Frontend\GenreController@index')->name('genre');
+
+Route::get('/country/{slug}/page-{page}', 'Frontend\GenreController@index')->name('genre.page')->where('page', '[0-9]+');
+
+Route::get('/tag/{slug}', 'Frontend\TagController@index')->name('tag');
+
+Route::get('/tag/{slug}/page-{page}', 'Frontend\TagController@index')->name('tag');
+
+Route::get('/watch/{slug}', 'Frontend\WatchController@index')->name('watch');
+
+Route::get('/watch/{slug}/play.html', 'Frontend\WatchController@index')->name('watch.play');

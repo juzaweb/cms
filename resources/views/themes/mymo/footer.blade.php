@@ -5,15 +5,14 @@
                 <div class="footer-logo">
                     <img class="img-responsive" src="wp-content/uploads/2019/05/logo-xemphimplus.png" alt="XemPhimPlus | Phim Hay | Phim Mới"/>
                     <span class="social">
-												<a href="https://www.facebook.com/pg/GalaPhimPage" target="_blank" rel="nofollow"><i class="hl-facebook"></i></a>
-												<a href="https://youtube.com/channel/UCZGvgvQcFNVrwgRcNKYNfkQ/about" target="_blank" rel="nofollow"><i class="hl-gplus"></i></a>
-												<a href="https://twitter.com/XemPhimPlus" target="_blank" rel="nofollow"><i class="hl-twitter"></i></a>
-												<a href="https://www.pinterest.co.kr/XemPhimPlusOnline/" target="_blank" rel="nofollow"><i class="hl-pinterest"></i></a>
-
+                        <a href="https://www.facebook.com/pg/GalaPhimPage" target="_blank" rel="nofollow"><i class="hl-facebook"></i></a>
+                        <a href="https://youtube.com/channel/UCZGvgvQcFNVrwgRcNKYNfkQ/about" target="_blank" rel="nofollow"><i class="hl-gplus"></i></a>
+                        <a href="https://twitter.com/XemPhimPlus" target="_blank" rel="nofollow"><i class="hl-twitter"></i></a>
+                        <a href="https://www.pinterest.co.kr/XemPhimPlusOnline/" target="_blank" rel="nofollow"><i class="hl-pinterest"></i></a>
 					</span>
                 </div>
-                <p class="halim-about"><strong><a href="https://xemphimplus.net/">XemPhimPlus</a> </strong>- Xem phim Online HD hoàn toàn miễn phí. Tổng hợp những bộ phim hay và phim mới nhất, được cập nhật liên tục.
 
+                <p class="halim-about"><strong><a href="https://xemphimplus.net/">XemPhimPlus</a> </strong>- Xem phim Online HD hoàn toàn miễn phí. Tổng hợp những bộ phim hay và phim mới nhất, được cập nhật liên tục.
                     <strong>Hỗ trợ</strong>: <a href="mailto:xemphimplus.net@gmail.com">xemphimplus.net@gmail.com</a>
                     <strong>Quảng cáo</strong>: <a href="mailto:ads.xemphimplus.net@gmail.com">ads.xemphimplus.net@gmail.com</a></p>			</div>
             <div id="halim_tagcloud_widget-2" class="widget widget_halim_tagcloud_widget col-xs-12 col-sm-6 col-md-4"><h4 class="widget-title">Tag nổi bật</h4>

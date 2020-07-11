@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait UseChangeBy {
     
-    public static function bootUseMetaSeo()
+    public static function bootUseChangeBy()
     {
         static::saving(function ($model) {
             if (empty($model->id)) {

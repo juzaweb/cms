@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
+use App\Models\Movies;
 use App\Http\Controllers\Controller;
 
 class TVSeriesController extends Controller
 {
-    //
+    public function index() {
+        $items = Movies::where('status', '=', 1)
+            ->where('tv_series', '=', 1)
+            ->orderBy('id', 'DESC')
+            ->paginate(20);
+    
+        return view('themes.mymo.genre.index', [
+            'items' => $items
+        ]);
+    }
 }

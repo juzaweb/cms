@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Traits\UseChangeBy;
 use App\Traits\UseMetaSeo;
 use App\Traits\UseSlug;
 use App\Traits\UseThumbnail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -77,10 +79,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereOtherName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies wherePoster($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTags($value)
+ * @property int $views
+ * @property int $created_by
+ * @property int $updated_by
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereViews($value)
  */
 class Movies extends Model
 {
-    use UseThumbnail, UseSlug, UseMetaSeo;
+    use UseThumbnail, UseSlug, UseMetaSeo, UseChangeBy;
     
     protected $table = 'movies';
     protected $primaryKey = 'id';
@@ -99,4 +107,20 @@ class Movies extends Model
         'max_episode',
         'status',
     ];
+    
+    public static function getPopular($date) {
+        return Movies::select([
+            'id',
+            'name',
+            'thumbnail',
+        ])
+            ->where('status', '=', 1)
+            ->whereIn('id', function (Builder $builder) use ($date) {
+                $builder->select(['movie_id'])
+                    ->from('movie_views')
+                    ->where('created_at', 'like', $date . '%');
+            })
+            ->limit(5)
+            ->get();
+    }
 }
