@@ -23,7 +23,7 @@ Route::group(['prefix' => 'movies'], function () {
     Route::post('/remove', 'Backend\MoviesController@remove')->name('admin.movies.remove');
 });
 
-Route::group(['prefix' => 'movies/servers'], function () {
+Route::group(['prefix' => '{mtype}/servers'], function () {
     Route::get('/{movie_id}', 'Backend\MovieServesController@index')->name('admin.movies.servers')->where('movie_id', '[0-9]+');
     
     Route::get('/{movie_id}/getdata', 'Backend\MovieServesController@getData')->name('admin.movies.servers.getdata')->where('movie_id', '[0-9]+');
@@ -37,7 +37,7 @@ Route::group(['prefix' => 'movies/servers'], function () {
     Route::post('/{movie_id}/remove', 'Backend\MovieServesController@remove')->name('admin.movies.servers.remove')->where('movie_id', '[0-9]+');
 });
 
-Route::group(['prefix' => 'movies/servers/upload'], function () {
+Route::group(['prefix' => '{mtype}/servers/upload'], function () {
     Route::get('/{server_id}', 'Backend\MovieUploadController@index')->name('admin.movies.servers.upload')->where('server_id', '[0-9]+');
     
     Route::get('/{server_id}/getdata', 'Backend\MovieUploadController@getData')->name('admin.movies.servers.upload.getdata')->where('server_id', '[0-9]+');
@@ -175,6 +175,12 @@ Route::group(['prefix' => 'comments/post'], function () {
     Route::post('/', 'Backend\PostCommentsController@publicis')->name('admin.post_comments.publicis');
 });
 
+Route::group(['prefix' => 'comments/setting'], function () {
+    Route::get('/', 'Backend\Setting\CommentSettingController@index')->name('admin.setting.comment');
+    
+    Route::post('/save', 'Backend\Setting\CommentSettingController@save')->name('admin.setting.comment.save');
+});
+
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'Backend\UsersController@index')->name('admin.users');
     
@@ -189,16 +195,10 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
 });
 
-Route::group(['prefix' => 'setting'], function () {
+Route::group(['prefix' => 'setting/system'], function () {
     Route::get('/', 'Backend\Setting\SystemSettingController@index')->name('admin.setting');
     
     Route::post('/save', 'Backend\Setting\SystemSettingController@save')->name('admin.setting.save');
-});
-
-Route::group(['prefix' => 'setting/comment'], function () {
-    Route::get('/', 'Backend\Setting\CommentSettingController@index')->name('admin.setting.comment');
-    
-    Route::post('/save', 'Backend\Setting\CommentSettingController@save')->name('admin.setting.comment.save');
 });
 
 Route::group(['prefix' => 'setting/email'], function () {
@@ -293,4 +293,10 @@ Route::group(['prefix' => 'notification'], function () {
     Route::post('/save', 'Backend\SendNotificationController@save')->name('admin.notification.save');
     
     Route::post('/remove', 'Backend\SendNotificationController@remove')->name('admin.notification.remove');
+});
+
+Route::group(['prefix' => 'setting/seo'], function () {
+    Route::get('/', 'Backend\Setting\SeoSettingController@index')->name('admin.setting.seo');
+    
+    Route::post('/save', 'Backend\Setting\SeoSettingController@save')->name('admin.setting.seo.save');
 });

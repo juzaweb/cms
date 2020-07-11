@@ -18,7 +18,7 @@ class SystemSettingController extends Controller
         $this->validateRequest([
             'title' => 'required|string|max:300',
             'description' => 'nullable|string|max:300',
-            'keyworks' => 'nullable|string|max:300',
+            'keywords' => 'nullable|string|max:300',
             'logo' => 'required|string|max:300',
             'icon' => 'required|string|max:300',
             'banner' => 'nullable|string|max:300',
@@ -32,7 +32,7 @@ class SystemSettingController extends Controller
         ], $request, [
             'title' => trans('app.home_title'),
             'description' => trans('app.home_description'),
-            'keyworks' => trans('app.keyworks'),
+            'keywords' => trans('app.keywords'),
             'logo' => trans('app.logo'),
             'icon' => trans('app.icon'),
             'banner' => trans('app.banner'),

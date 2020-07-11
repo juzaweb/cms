@@ -6,9 +6,9 @@
 </div>
 
 <div class="form-group">
-    <label class="col-form-label" for="keyworks">@lang('app.keyworks')</label>
+    <label class="col-form-label" for="keywords">@lang('app.keywords')</label>
 
-    <input type="text" name="keyworks" id="keyworks" class="form-control" value="{{ get_config('keyworks') }}" autocomplete="off">
+    <input type="text" name="keywords" id="keywords" class="form-control" value="{{ get_config('keywords') }}" autocomplete="off">
     <em class="description">@lang('app.use_comma_to_separate_keyword')</em>
 </div>
 

@@ -1,6 +1,6 @@
 <div class="row form-upload-video mb-5 box-hidden">
     <div class="col-md-12">
-        <form method="post" action="{{ route('admin.movies.servers.upload.save', ['server_id' => $server->id]) }}" class="form-ajax" data-success="add_file_success">
+        <form method="post" action="{{ route('admin.movies.servers.upload.save', ['mtype' => 'tv-series', 'server_id' => $server->id]) }}" class="form-ajax" data-success="add_file_success">
             <input type="hidden" name="id" id="id" value="">
 
             <div class="form-group">

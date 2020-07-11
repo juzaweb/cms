@@ -46,7 +46,7 @@ class Configs extends Model
         return [
             'title',
             'description',
-            'keyworks',
+            'keywords',
             'logo',
             'icon',
             'banner',
@@ -68,6 +68,20 @@ class Configs extends Model
             'mail_from_address',
             'player_watermark',
             'player_watermark_logo',
+            'author_name',
+            'movies_title',
+            'movies_keywords',
+            'movies_description',
+            'tv_series_title',
+            'tv_series_keywords',
+            'tv_series_description',
+            'blog_title',
+            'blog_keywords',
+            'blog_description',
+            'facebook',
+            'twitter',
+            'linkedin',
+            'youtube',
         ];
     }
 }
