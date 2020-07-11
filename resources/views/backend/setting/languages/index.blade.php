@@ -64,7 +64,8 @@
                                 <th data-width="3%" data-field="state" data-checkbox="true"></th>
                                 <th data-width="10%" data-field="key">@lang('app.code')</th>
                                 <th data-field="name">@lang('app.name')</th>
-                                <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
+                                <th data-field="status" data-width="15%" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
+                                <th data-field="default" data-width="5%" data-formatter="default_formatter">@lang('app.default')</th>
                                 <th data-width="20%" data-field="options" data-formatter="options_formatter" data-align="center">@lang('app.options')</th>
                             </tr>
                         </thead>
@@ -115,6 +116,11 @@
             return '<span class="text-danger">'+ langs.disabled +'</span>';
         }
 
+        function default_formatter(value, row, index) {
+            let checked = value == 1 ? true : false;
+            return '<input type="radio" name="default" value="'+ row.id +'" class="form-control set-default" '+ (checked ? 'checked' : '') +'>';
+        }
+
         function options_formatter(value, row, index) {
             let result = '';
             result += '<a href="'+ row.tran_url +'" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> '+ langs.translate +'</a>';
@@ -148,6 +154,29 @@
                 show_message(langs.data_error, 'error');
                 btn.find('i').attr('class', cIcon);
                 btn.prop("disabled", false);
+                return false;
+            });
+        });
+
+        $('.table').on('change', '.set-default', function () {
+            let id = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.setting.languages.default') }}',
+                dataType: 'json',
+                data: {
+                    'id': id,
+                }
+            }).done(function(data) {
+
+                if (data.status === "error") {
+                    show_message(data.message, 'error');
+                    return false;
+                }
+
+                return false;
+            }).fail(function(data) {
+                show_message(langs.data_error, 'error');
                 return false;
             });
         });

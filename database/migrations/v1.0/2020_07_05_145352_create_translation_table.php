@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Models\Translation;
 
 class CreateTranslationTable extends Migration
 {
@@ -14,6 +15,8 @@ class CreateTranslationTable extends Migration
             $table->string('en', 300)->nullable();
             $table->timestamps();
         });
+    
+        Translation::syncLanguage();
     }
     
     public function down()

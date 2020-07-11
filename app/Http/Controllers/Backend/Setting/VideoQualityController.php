@@ -15,7 +15,7 @@ class VideoQualityController extends Controller
     public function getData(Request $request) {
         $search = $request->get('search');
         
-        $sort = $request->get('sort', 'a.id');
+        $sort = $request->get('sort', 'aid');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);

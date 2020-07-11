@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Setting;
 
 use App\Models\Translation;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Languages;
@@ -17,7 +18,7 @@ class LanguagesController extends Controller
         $search = $request->get('search');
         $status = $request->get('status');
         
-        $sort = $request->get('sort', 'a.id');
+        $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
@@ -43,7 +44,7 @@ class LanguagesController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i d/m/Y');
-            $row->tran_url = route('admin.translate', ['lang' => $row->key]);
+            $row->tran_url = route('admin.setting.translate', [$row->key]);
         }
         
         return response()->json([
@@ -54,25 +55,20 @@ class LanguagesController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'key' => 'required|string|max:3|min:2|unique:languages,key',
+            'key' => 'required|string|max:3|min:2|alpha|unique:languages,key',
             'name' => 'required|string|max:250|unique:languages,name',
         ], $request, [
             'key' => trans('app.key'),
             'name' => trans('app.name'),
         ]);
         
-        $columns = \Schema::getColumnListing('translation');
         $model = Languages::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
-        
         if ($model->save()) {
-            $src_path = resource_path() . '/lang/en';
-            $dst_path = resource_path() . '/lang/' . $model->key;
-            $this->recurseCopy($src_path, $dst_path);
-            
-            if (!in_array($model->key, $columns)) {
-                \Schema::table('translation', function($table) use ($model) {
-                    $table->integer($model->key);
+            $new_col = $model->key;
+            if (!\Schema::hasColumn('translation', $new_col)) {
+                \Schema::table('translation', function (Blueprint $table) use ($new_col) {
+                    $table->string($new_col, 300)->nullable();
                 });
             }
         }
@@ -80,6 +76,7 @@ class LanguagesController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
+            'redirect' => route('admin.setting.languages'),
         ]);
     }
     
@@ -103,6 +100,30 @@ class LanguagesController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.deleted_successfully'),
+            'redirect' => route('admin.setting.languages'),
+        ]);
+    }
+    
+    public function setDefault(Request $request) {
+        $this->validateRequest([
+            'id' => 'required|exists:languages,id',
+        ], $request, [
+            'id' => trans('app.language')
+        ]);
+        
+        Languages::where('id', '=', $request->post('id'))
+            ->update([
+                'default' => 1,
+            ]);
+    
+        Languages::where('id', '!=', $request->post('id'))
+            ->update([
+                'default' => 0,
+            ]);
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('app.saved_successfully'),
         ]);
     }
     
@@ -112,6 +133,7 @@ class LanguagesController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.sync_successfully'),
+            'redirect' => route('admin.setting.languages'),
         ]);
     }
     

@@ -7,11 +7,11 @@
 {{ Breadcrumbs::render('multiple_parent', [
     [
         'name' => trans('app.language'),
-        'url' => route('admin.languages')
+        'url' => route('admin.setting.languages')
     ],
     [
         'name' => trans('app.translate'),
-        'url' => route('admin.translate', ['lang' => $lang])
+        'url' => route('admin.setting.translate', [$lang])
     ]
 ]) }}
 
@@ -52,8 +52,8 @@
                 <table class="table load-bootstrap-table">
                     <thead>
                         <tr>
-                            <th data-width="35%" data-field="en">English</th>
-                            <th data-field="{{ $lang }}" data-formatter="translate_formatter">@lang('app.translate')</th>
+                            <th data-width="35%" data-field="en" data-sortable="true">English</th>
+                            <th data-field="{{ $lang }}" data-sortable="true" data-formatter="translate_formatter">@lang('app.translate')</th>
                         </tr>
                     </thead>
                 </table>
@@ -76,7 +76,7 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.translate.getdata', ['lang' => $lang]) }}',
+            url: '{{ route('admin.setting.translate.getdata', ['lang' => $lang]) }}',
         });
 
         $(document).on('change', '.text-trans', function () {
@@ -86,7 +86,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('admin.translate.save', ['lang' => $lang]) }}',
+                url: '{{ route('admin.setting.translate.save', ['lang' => $lang]) }}',
                 dataType: 'json',
                 data: {
                     'key': key,

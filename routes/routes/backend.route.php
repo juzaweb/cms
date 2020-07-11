@@ -257,6 +257,8 @@ Route::group(['prefix' => 'setting/languages'], function () {
     Route::post('/remove', 'Backend\Setting\LanguagesController@remove')->name('admin.setting.languages.remove');
     
     Route::post('/sync', 'Backend\Setting\LanguagesController@syncLanguage')->name('admin.setting.languages.sync');
+    
+    Route::post('/set-default', 'Backend\Setting\LanguagesController@setDefault')->name('admin.setting.languages.default');
 });
 
 Route::group(['prefix' => 'setting/translate'], function () {

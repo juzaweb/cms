@@ -35,20 +35,13 @@ class Translation extends Model
         self::databaseToFile();
     }
     
-    protected static function varExportShort($var)
-    {
-        $output = json_decode(str_replace(array('(',')'), array('&#40','&#41'), json_encode($var)), true);
-        $output = var_export($output, true);
-        $output = str_replace(array('array (',')','&#40','&#41'), array('[',']','(',')'), $output);
-        return $output;
-    }
-    
     protected static function databaseToFile() {
         $lang_dir = resource_path() . '/lang';
         $columns = self::getColumnsLanguage();
+        $trans_files = new \DirectoryIterator($lang_dir . '/en');
+        
         foreach ($columns as $column) {
             $dir_path = $lang_dir . '/' . $column;
-            $trans_files = new \DirectoryIterator($dir_path);
             
             if (!is_dir($dir_path)) {
                 mkdir($dir_path);
@@ -58,12 +51,11 @@ class Translation extends Model
                 if (!$file->isDot()) {
                     $file_name = $file->getFilename();
                     $group = explode('.', $file_name)[0];
-                    echo "__START GROUP: ". $group;
-                    $items = Languages::select([
-                        'code AS keylang',
+                    $items = Translation::select([
+                        'key AS keylang',
                         'en AS default',
                         $column .' AS lang'
-                    ])->where('code', 'like', $group . '.%')
+                    ])->where('key', 'like', $group . '.%')
                         ->get();
             
                     $arr = [];
@@ -91,7 +83,6 @@ class Translation extends Model
                     $handle = fopen($dir_path . '/' . $file_name, 'w+') or die('Cannot open file: '. $file_name);
                     fwrite($handle, $data);
                     fclose($handle);
-                    echo "__END GROUP: ". $group . "\n";;
                 }
             }
         }
@@ -154,5 +145,12 @@ class Translation extends Model
                 $model->save();
             }
         }
+    }
+    
+    protected static function varExportShort($var) {
+        $output = json_decode(str_replace(array('(',')'), array('&#40','&#41'), json_encode($var)), true);
+        $output = var_export($output, true);
+        $output = str_replace(array('array (',')','&#40','&#41'), array('[',']','(',')'), $output);
+        return $output;
     }
 }

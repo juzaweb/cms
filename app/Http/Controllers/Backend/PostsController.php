@@ -18,7 +18,7 @@ class PostsController extends Controller
         $search = $request->get('search');
         $status = $request->get('status');
         
-        $sort = $request->get('sort', 'a.id');
+        $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
