@@ -111,7 +111,7 @@ mix.styles([
 ], 'public/css/frontend.css');
 
 mix.combine([
-    'resources/styles/frontend/assets/js/jquery.js',
+    'resources/styles/vendors/jquery/dist/jquery.min.js',
     'resources/styles/frontend/assets/js/bootstrap.min.js',
     'resources/styles/frontend/assets/js/core.min.js',
     'resources/styles/frontend/assets/js/lazysizes.min.js',
@@ -119,10 +119,7 @@ mix.combine([
     'resources/styles/frontend/assets/js/ajax-auth-script.min.js',
     'resources/styles/frontend/player/assets/js/jwplayer-8.9.3.js',
     'resources/styles/frontend/player/assets/js/player.min.js',
-    'resources/styles/js/load-ajax.js',
-    'resources/styles/js/LoadBootstrapTable.js',
-    'resources/styles/js/form-ajax.js',
 ],'public/js/frontend.js');
 
-mix.copyDirectory('resources/styles/frontend/assets/images', 'public/images');
-mix.copyDirectory('resources/styles/frontend/assets/font', 'public/fonts');
+//mix.copyDirectory('resources/styles/frontend/assets/images', 'public/images');
+//mix.copyDirectory('resources/styles/frontend/assets/font', 'public/fonts');

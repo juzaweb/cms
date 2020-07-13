@@ -26,6 +26,12 @@
     <meta name="csrf-token" content="{{ csrf_token()  }}">
 
     <link rel="stylesheet" href="{{ asset('css/frontend.css') }}"/>
+
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var ajax_auth_object = {"ajaxurl":"http:\/\/xemphimplus.net\/wp-content\/themes\/halimmovies\/halim-ajax.php","redirecturl":"http:\/\/xemphimplus.net","loadingmessage":"Sending user info, please wait...","sitekey":"6LfmlNAUAAAAAAXvPEz3vm6s8o9Q_C7M2VSJ0B2n","languages":{"login":"\u0110\u0103ng nh\u1eadp","register":"\u0110\u0103ng k\u00fd","forgotpassword":"B\u1ea1n qu\u00ean m\u1eadt kh\u1ea9u?","already_account":"Already have an account?","create_account":"Create account","reset_captcha":"Reset captcha","username":"T\u00ean ng\u01b0\u1eddi d\u00f9ng","email":"Email","username_email":"Username or Email","password":"M\u1eadt kh\u1ea9u","reset_password":"Thi\u1ebft l\u1eadp l\u1ea1i m\u1eadt kh\u1ea9u","login_with":"\u0110\u0103ng nh\u1eadp b\u1eb1ng","register_with":"Register with","or":"or"}};
+        /* ]]> */
+    </script>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/frontend.js') }}"></script>
 

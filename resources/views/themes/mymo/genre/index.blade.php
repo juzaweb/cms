@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
+@extends('themes.mymo.layout')
 
 @section('content')
 

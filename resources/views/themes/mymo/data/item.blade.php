@@ -1,7 +1,7 @@
 <div class="halim-item">
         <a class="halim-thumb" href="{{ route('watch', ['slug' => $item->slug]) }}" title="{{ $item->name }}">
             <figure>
-                <img class="lazyload blur-up img-responsive" data-sizes="auto" data-src="{{ $item->getThumbnail() }}" alt="{{ $item->name }}" title="{{ $item->name }}">
+                <img class="lazyload blur-up img-responsive" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $item->getThumbnail() }}" alt="{{ $item->name }}" title="{{ $item->name }}">
             </figure>
             <span class="status">HD</span>
             <span class="episode">Tập 3</span>
@@ -20,7 +20,7 @@
 
             <div class="halim-post-title-box">
                 <div class="halim-post-title ">
-                    <h2 class="entry-title">{{ $item->name }}</h2><p class="original_title">{{ $item->other_name }} ({{ $item->format('Y') }})</p>
+                    <h2 class="entry-title">{{ $item->name }}</h2><p class="original_title">{{ $item->other_name }} {{ $item->release ? '(' . $item->release->format('Y') . ')' : '' }}</p>
                 </div>
             </div>
         </a>

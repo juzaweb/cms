@@ -1,10 +1,4 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/css/backend.css": "/css/backend.css",
-    "/css/theme-editor.css": "/css/theme-editor.css",
-    "/css/theme-editor.js": "/css/theme-editor.js",
-    "/js/backend.js": "/js/backend.js",
     "/css/frontend.css": "/css/frontend.css",
     "/js/frontend.js": "/js/frontend.js"
 }

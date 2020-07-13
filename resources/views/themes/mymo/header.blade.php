@@ -24,10 +24,10 @@
                 <div id="get-bookmark" class="box-shadow"><i class="hl-bookmark"></i><span> Tủ phim</span><span class="count">0</span></div>
                 <div class="user user-login-option box-shadow" id="pc-user-login">
                     <div class="dropdown">
-                        <a href="javascript:;" class="avt" id="userInfo" onclick="openLoginModal();">
+                        <a href="javascript:void(0)" class="avt" id="userInfo">
                             <img alt='' src='http://1.gravatar.com/avatar/?s=20&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/?s=40&#038;d=mm&#038;r=g 2x' class='avatar avatar-20 photo avatar-default' height='20' width='20' />                            <span class="name">Đăng nhập</span>
                         </a>
-                        <ul class="dropdown-menu login-box" aria-labelledby="userInfo">
+                        {{--<ul class="dropdown-menu login-box" aria-labelledby="userInfo">
                             <li class="twitter box-shadow">
                                 <a rel="nofollow" href="/wp-login.php?apsl_login_id=twitter_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg==" title='Đăng nhập bằng twitter'><i class="hl-twitter"></i> Login with <span>twitter</span>
                                 </a>
@@ -40,7 +40,7 @@
                                 <a rel="nofollow" href="/wp-login.php?apsl_login_id=google_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg==" title='Đăng nhập bằng google'><i class="hl-gplus"></i> Login with <span>google</span>
                                 </a>
                             </li>
-                        </ul>
+                        </ul>--}}
                     </div>
                 </div>
                 <div id="bookmark-list" class="hidden bookmark-list-on-pc"><ul style="margin: 0;"></ul></div>
