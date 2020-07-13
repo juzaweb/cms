@@ -11,7 +11,7 @@
                         <span>
                             <span><a href="{{ route('home') }}">@lang('app.home')</a> »
                                 <span><a href="/hanh-dong/">Hành Động</a> »
-                                    <span class="breadcrumb_last" aria-current="page">{{ $item->name }}</span>
+                                    <span class="breadcrumb_last" aria-current="page">{{ $info->name }}</span>
                                 </span>
                             </span>
                         </span>
@@ -41,7 +41,7 @@
 
                         </div>
                         <div class="title-wrapper">
-                            <h1 class="entry-title" data-toggle="tooltip" title="{{ $item->name }}">{{ $item->name }}<span class="title-year"> (<a href="/release/2020" rel="tag">2020</a>)</span></h1>
+                            <h1 class="entry-title" data-toggle="tooltip" title="{{ $info->name }}">{{ $info->name }}<span class="title-year"> (<a href="/release/2020" rel="tag">2020</a>)</span></h1>
                         </div>
 
                         <div class="ratings_wrapper hidden-xs">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="movie_info col-xs-12">
                         <div class="movie-poster col-md-3">
-                            <img class="movie-thumb" src="{{ $item->getThumbnail() }}" alt="{{ $item->name }}">
+                            <img class="movie-thumb" src="{{ $info->getThumbnail() }}" alt="{{ $info->name }}">
                             <div class="halim_imdbrating"><span>6.7</span></div>
                             <a href="/xem-phim-to-chuc-rugal/tap-1-sv1.html" class="btn btn-sm btn-danger watch-movie visible-xs-block"><i class="hl-play"></i>Xem phim</a>
 
@@ -83,9 +83,9 @@
                         </div>
 
                         <div class="film-poster col-md-9">
-                            <div class="film-poster-img" style="background: url('{{ image_url($item->poster) }}'); background-size: cover; background-repeat: no-repeat;background-position: 30% 25%;height: 300px;-webkit-filter: grayscale(100%); filter: grayscale(100%);"></div>
+                            <div class="film-poster-img" style="background: url('{{ $info->getPoster() }}'); background-size: cover; background-repeat: no-repeat;background-position: 30% 25%;height: 300px;-webkit-filter: grayscale(100%); filter: grayscale(100%);"></div>
                             <div class="halim-play-btn hidden-xs">
-                                <a href="" class="play-btn" title="Click to Play" data-toggle="tooltip" data-placement="bottom">Click to Play</a>
+                                <a href="{{ route('watch.play', [$info->slug]) }}" class="play-btn" title="Click to Play" data-toggle="tooltip" data-placement="bottom">Click to Play</a>
                             </div>
 
                             <div class="movie-trailer hidden"></div>

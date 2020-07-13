@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Countries;
 use App\Models\Genres;
+use App\Models\Menu;
 use App\Models\PostCategories;
 use App\Models\Stars;
 use App\Models\Tags;
 use App\Models\Types;
 use App\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class LoadDataController extends Controller
 {
@@ -259,6 +260,35 @@ class LoadDataController extends Controller
             $query->where(function ($sub) use ($search) {
                 $sub->orWhere('name', 'like', '%'. $search .'%');
                 $sub->orWhere('email', 'like', '%'. $search .'%');
+            });
+        }
+        
+        if ($explodes) {
+            $query->whereNotIn('id', $explodes);
+        }
+        
+        $paginate = $query->paginate(10);
+        $data['results'] = $query->get();
+        if ($paginate->nextPageUrl()) {
+            $data['pagination'] = ['more' => true];
+        }
+        
+        return response()->json($data);
+    }
+    
+    protected function loadMenu(Request $request) {
+        $search = $request->get('search');
+        $explodes = $request->get('explodes');
+        
+        $query = Menu::query();
+        $query->select([
+            'id',
+            'name AS text'
+        ]);
+        
+        if ($search) {
+            $query->where(function ($sub) use ($search) {
+                $sub->orWhere('name', 'like', '%'. $search .'%');
             });
         }
         

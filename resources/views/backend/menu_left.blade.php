@@ -28,15 +28,15 @@
     </li>
 
     <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/types*')) cui__menuLeft__item--active @endif" href="{{ route('admin.types') }}">
-            <span class="cui__menuLeft__item__title">@lang('app.types')</span>
+        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/countries*')) cui__menuLeft__item--active @endif" href="{{ route('admin.countries') }}">
+            <span class="cui__menuLeft__item__title">@lang('app.countries')</span>
             <i class="cui__menuLeft__item__icon fe fe-list"></i>
         </a>
     </li>
 
     <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/countries*')) cui__menuLeft__item--active @endif" href="{{ route('admin.countries') }}">
-            <span class="cui__menuLeft__item__title">@lang('app.countries')</span>
+        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/types*')) cui__menuLeft__item--active @endif" href="{{ route('admin.types') }}">
+            <span class="cui__menuLeft__item__title">@lang('app.types')</span>
             <i class="cui__menuLeft__item__icon fe fe-list"></i>
         </a>
     </li>
@@ -116,8 +116,8 @@
         </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
-                <a href="" class="cui__menuLeft__item__link">
-                    <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
+                <a href="{{ route('admin.theme.themes') }}" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.themes')</span>
                 </a>
             </li>
 

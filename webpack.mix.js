@@ -1,6 +1,6 @@
 const mix = require('laravel-mix');
 
-mix.js('resources/js/app.js', 'public/js')
+/*mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.styles([
@@ -102,13 +102,13 @@ mix.combine([
     'resources/styles/js/LoadBootstrapTable.js',
     'resources/styles/js/form-ajax.js',
     'resources/js/customs.js',
-], 'public/js/backend.js');
+], 'public/js/backend.js');*/
 
 mix.styles([
     'resources/styles/frontend/assets/css/bootstrap.min.css',
-    'resources/styles/frontend/assets/css/style.css',
     'resources/styles/frontend/style.css',
-], 'public/css/frontend.css');
+    'resources/styles/frontend/assets/css/style.css',
+], 'public/styles/themes/mymo/css/main.css');
 
 mix.combine([
     'resources/styles/vendors/jquery/dist/jquery.min.js',
@@ -119,7 +119,4 @@ mix.combine([
     'resources/styles/frontend/assets/js/ajax-auth-script.min.js',
     'resources/styles/frontend/player/assets/js/jwplayer-8.9.3.js',
     'resources/styles/frontend/player/assets/js/player.min.js',
-],'public/js/frontend.js');
-
-//mix.copyDirectory('resources/styles/frontend/assets/images', 'public/images');
-//mix.copyDirectory('resources/styles/frontend/assets/font', 'public/fonts');
+],'public/styles/themes/mymo/js/main.js');

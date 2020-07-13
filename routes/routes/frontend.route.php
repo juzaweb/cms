@@ -32,4 +32,4 @@ Route::get('/tag/{slug}/page-{page}', 'Frontend\TagController@index')->name('tag
 
 Route::get('/watch/{slug}', 'Frontend\WatchController@index')->name('watch');
 
-Route::get('/watch/{slug}/play.html', 'Frontend\WatchController@index')->name('watch.play');
+Route::get('/watch/{slug}/play.html', 'Frontend\WatchController@watch')->name('watch.play');

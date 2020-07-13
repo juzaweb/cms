@@ -111,4 +111,12 @@ class Movies extends Model
         
         return round($this->views / 1000, 1) . 'K';
     }
+    
+    public function getPoster() {
+        if ($this->poster) {
+            return image_url($this->poster);
+        }
+        
+        return $this->getThumbnail();
+    }
 }

@@ -235,16 +235,22 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
 });
 
-Route::group(['prefix' => 'setting/theme/menu'], function () {
+Route::group(['prefix' => 'themes'], function () {
+    Route::get('/', 'Backend\Theme\ThemesController@index')->name('admin.theme.themes');
+    
+    Route::post('/save', 'Backend\Theme\ThemesController@save')->name('admin.theme.themes.save');
+});
+
+Route::group(['prefix' => 'theme/menu'], function () {
     Route::get('/', 'Backend\Theme\MenuController@index')->name('admin.theme.menu');
     
     Route::post('/save', 'Backend\Theme\MenuController@save')->name('admin.theme.menu.save');
 });
 
-Route::group(['prefix' => 'setting/theme/editor'], function () {
-    Route::get('/', 'Backend\Setting\SystemSettingController@index')->name('admin.theme.editor');
+Route::group(['prefix' => 'theme/editor'], function () {
+    Route::get('/', 'Backend\Theme\ThemeEditorController@index')->name('admin.theme.editor');
     
-    Route::post('/save', 'Backend\Setting\SystemSettingController@save')->name('admin.theme.editor.save');
+    Route::post('/save', 'Backend\Theme\ThemeEditorController@save')->name('admin.theme.editor.save');
 });
 
 Route::group(['prefix' => 'setting/system'], function () {
