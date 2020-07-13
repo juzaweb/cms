@@ -62,7 +62,7 @@ class StarsController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250|unique:stars,name',
+            'name' => 'required|string|max:250|unique:stars,name,' . $request->post('id'),
             'description' => 'nullable|string|max:300',
             'type' => 'required|string|in:director,actor,writer',
             'status' => 'required|in:0,1',

@@ -75,7 +75,7 @@ mix.combine([
     'resources/styles/vendors/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js',
     'resources/styles/js/themeeditor.min.js',
     'resources/styles/js/theme-editor.js',
-], 'public/css/theme-editor.js');
+], 'public/js/theme-editor.js');
 
 mix.combine([
     'resources/styles/vendors/jquery/dist/jquery.min.js',

@@ -62,7 +62,7 @@ class GenresController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250|unique:genres,name',
+            'name' => 'required|string|max:250|unique:genres,name,' . $request->post('id'),
             'description' => 'nullable|string|max:300',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',

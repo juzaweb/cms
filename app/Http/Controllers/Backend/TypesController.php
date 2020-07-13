@@ -61,17 +61,15 @@ class TypesController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250:unique:types,name',
+            'name' => 'required|string|max:250|unique:types,name,' . $request->post('id'),
             'description' => 'nullable|string|max:300',
-            'thumbnail' => 'nullable|string|max:250',
         ], $request, [
             'name' => trans('app.name'),
             'description' => trans('app.description'),
-            'thumbnail' => trans('app.thumbnail'),
         ]);
         
         $addtype = $request->post('addtype');
-        $model = Types::firstOrNew(['id' => $request->id]);
+        $model = Types::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->save();
         

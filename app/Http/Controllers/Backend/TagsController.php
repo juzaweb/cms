@@ -10,7 +10,7 @@ class TagsController extends Controller
 {
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250|unique:tags,name',
+            'name' => 'required|string|max:250|unique:tags,name,' . $request->post('id'),
         ], $request, [
             'name' => trans('app.name'),
         ]);

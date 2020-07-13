@@ -52,6 +52,26 @@
 
 <hr>
 <div class="form-group">
+    <label class="col-form-label" for="select-types">@lang('app.types') <span><a href="javascript:void(0)" class="add-new-types float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_types')</a></span></label>
+
+    <select id="select-types" name="type_id" class="form-control load-types select-types" data-placeholder="--- @lang('app.type') ---" data-explodes="types-explode">
+        @if($type)
+            <option value="{{ $type->id }}">{{ $type->name }}</option>
+        @endif
+    </select>
+
+    <div class="form-add-types box-hidden">
+        <div class="form-group">
+            <label class="col-form-label" for="typesName">@lang('app.type')</label>
+            <input type="text" class="form-control" id="typesName" autocomplete="off">
+        </div>
+
+        <button type="button" class="btn btn-primary add-type"><i class="fa fa-plus-circle"></i> @lang('app.add_type')</button>
+    </div>
+</div>
+
+<hr>
+<div class="form-group">
     <label class="col-form-label" for="select-countries">@lang('app.countries') <span><a href="javascript:void(0)" class="add-new-countries float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_countries')</a></span></label>
 
     <select id="select-countries" class="form-control load-countries select-countries" data-placeholder="--- @lang('app.countries') ---" data-explodes="countries-explode"></select>

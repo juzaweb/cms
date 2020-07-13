@@ -6,6 +6,7 @@ use App\Models\Countries;
 use App\Models\Genres;
 use App\Models\Stars;
 use App\Models\Tags;
+use App\Models\Types;
 use App\Models\VideoQualities;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -73,12 +74,13 @@ class MoviesController extends Controller
     public function form($id = null) {
         $model = Movies::firstOrNew(['id' => $id]);
         $qualities = VideoQualities::get();
-        $tags = Tags::whereIn('id', explode(',', $model->tags))->get();
-        $genres = Genres::whereIn('id', explode(',', $model->genres))->get();
-        $countries = Countries::whereIn('id', explode(',', $model->countries))->get();
-        $directors = Stars::whereIn('id', explode(',', $model->directors))->get();
-        $writers = Stars::whereIn('id', explode(',', $model->writers))->get();
-        $actors = Stars::whereIn('id', explode(',', $model->actors))->get();
+        $tags = Tags::whereIn('id', explode(',', $model->tags))->get(['id', 'name']);
+        $genres = Genres::whereIn('id', explode(',', $model->genres))->get(['id', 'name']);
+        $type = Types::where('id', '=', $model->type_id)->first(['id', 'name']);
+        $countries = Countries::whereIn('id', explode(',', $model->countries))->get(['id', 'name']);
+        $directors = Stars::whereIn('id', explode(',', $model->directors))->get(['id', 'name']);
+        $writers = Stars::whereIn('id', explode(',', $model->writers))->get(['id', 'name']);
+        $actors = Stars::whereIn('id', explode(',', $model->actors))->get(['id', 'name']);
         
         return view('backend.movies.form', [
             'model' => $model,
@@ -86,6 +88,7 @@ class MoviesController extends Controller
             'qualities' => $qualities,
             'tags' => $tags,
             'genres' => $genres,
+            'type' => $type,
             'countries' => $countries,
             'directors' => $directors,
             'writers' => $writers,

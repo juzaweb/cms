@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersSeeder::class,
             GenresSeeder::class,
+            TypesSeeder::class,
             CountriesSeeder::class,
             StarsSeeder::class,
             TagsSeeder::class,

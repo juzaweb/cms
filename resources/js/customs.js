@@ -80,6 +80,49 @@ $(document).on("turbolinks:load", function() {
         });
     });
 
+    $('.add-new-types').on('click', function () {
+        if ($('.form-add-types').is(":hidden")) {
+            $('.form-add-types').show('slow');
+        }
+        else {
+            $('.form-add-types').hide('slow');
+        }
+    });
+
+    $('.form-add-types').on('click', '.add-type', function () {
+        let name = $("#typesName").val();
+
+        if (!name) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin-cp/types/save',
+            dataType: 'json',
+            data: {
+                'name': name,
+                'status': 1,
+                'addtype': 2,
+            }
+        }).done(function(data) {
+
+            if (data.status === "error") {
+                show_message(data.message, 'error');
+                return false;
+            }
+
+            var newOption = new Option(data.name, data.id, false, true);
+            $("#select-types").append(newOption).trigger('change');
+            $("#typesName").val('');
+
+            return false;
+        }).fail(function(data) {
+            show_message(langs.data_error, 'error');
+            return false;
+        });
+    });
+
     $('.form-add-tags').on('click', '.add-tags', function () {
         let name = $("#tagsName").val();
 

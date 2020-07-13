@@ -198,5 +198,7 @@ return [
   'blog_description' => 'Blog page description',
   'views' => 'Views',
   'types' => 'Types',
-];
+  'add_type' => 'Add type',
+  'add_types' => 'Add types',
+]; 
 

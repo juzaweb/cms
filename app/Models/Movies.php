@@ -92,6 +92,7 @@ class Movies extends Model
         'other_name',
         'description',
         'thumbnail',
+        'type_id',
         'poster',
         'rating',
         'release',

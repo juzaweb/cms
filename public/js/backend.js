@@ -7873,6 +7873,36 @@ $(document).on("turbolinks:load", function() {
         },
     });
 
+    $('.load-types').select2({
+        allowClear: true,
+        width: '100%',
+        placeholder: function (params) {
+            return {
+                id: null,
+                text: params.placeholder,
+            }
+        },
+        ajax: {
+            method: 'GET',
+            url: '/admin-cp/load-data/loadTypes',
+            dataType: 'json',
+            data: function (params) {
+                let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
+                if (explodes) {
+                    explodes = $("." + explodes).map(function () {return $(this).val();}).get();
+                }
+
+                var query = {
+                    search: $.trim(params.term),
+                    page: params.page,
+                    explodes: explodes,
+                };
+
+                return query;
+            }
+        },
+    });
+
     $('.load-countries').select2({
         allowClear: true,
         width: '100%',
@@ -8405,6 +8435,49 @@ $(document).on("turbolinks:load", function() {
             let item = replace_template(category_item, data);
             $(".show-categories ul").append(item);
             $("#categoryName").val('');
+
+            return false;
+        }).fail(function(data) {
+            show_message(langs.data_error, 'error');
+            return false;
+        });
+    });
+
+    $('.add-new-types').on('click', function () {
+        if ($('.form-add-types').is(":hidden")) {
+            $('.form-add-types').show('slow');
+        }
+        else {
+            $('.form-add-types').hide('slow');
+        }
+    });
+
+    $('.form-add-types').on('click', '.add-type', function () {
+        let name = $("#typesName").val();
+
+        if (!name) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin-cp/types/save',
+            dataType: 'json',
+            data: {
+                'name': name,
+                'status': 1,
+                'addtype': 2,
+            }
+        }).done(function(data) {
+
+            if (data.status === "error") {
+                show_message(data.message, 'error');
+                return false;
+            }
+
+            var newOption = new Option(data.name, data.id, false, true);
+            $("#select-types").append(newOption).trigger('change');
+            $("#typesName").val('');
 
             return false;
         }).fail(function(data) {

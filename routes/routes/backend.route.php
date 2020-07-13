@@ -104,17 +104,17 @@ Route::group(['prefix' => 'genres'], function () {
 });
 
 Route::group(['prefix' => 'types'], function () {
-    Route::get('/', 'Backend\CountriesController@index')->name('admin.types');
+    Route::get('/', 'Backend\TypesController@index')->name('admin.types');
     
-    Route::get('/getdata', 'Backend\CountriesController@getData')->name('admin.types.getdata');
+    Route::get('/getdata', 'Backend\TypesController@getData')->name('admin.types.getdata');
     
-    Route::get('/create', 'Backend\CountriesController@form')->name('admin.types.create');
+    Route::get('/create', 'Backend\TypesController@form')->name('admin.types.create');
     
-    Route::get('/edit/{id}', 'Backend\CountriesController@form')->name('admin.types.edit')->where('id', '[0-9]+');
+    Route::get('/edit/{id}', 'Backend\TypesController@form')->name('admin.types.edit')->where('id', '[0-9]+');
     
-    Route::post('/save', 'Backend\CountriesController@save')->name('admin.types.save');
+    Route::post('/save', 'Backend\TypesController@save')->name('admin.types.save');
     
-    Route::post('/remove', 'Backend\CountriesController@remove')->name('admin.types.remove');
+    Route::post('/remove', 'Backend\TypesController@remove')->name('admin.types.remove');
 });
 
 Route::group(['prefix' => 'countries'], function () {
