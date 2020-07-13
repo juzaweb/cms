@@ -109,14 +109,20 @@
         </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="">
+                <a href="" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
                 </a>
             </li>
 
             <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link" href="">
+                <a href="{{ route('admin.theme.menu') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.menu')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a href="{{ route('admin.theme.editor') }}" class="cui__menuLeft__item__link" data-turbolinks="false">
+                    <span class="cui__menuLeft__item__title">@lang('app.editor')</span>
                 </a>
             </li>
 

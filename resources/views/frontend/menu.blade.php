@@ -26,16 +26,16 @@
                         <li class="current-menu-item active">
                             <a title="Trang chủ" href="/">Trang chủ</a>
                         </li>
-                        {{--<li><a title="Phim mới" href="/phim-moi-nhat">Phim mới</a></li>--}}
                         <li><a title="Phim bộ" href="{{ route('tv_series') }}">Phim bộ</a></li>
                         <li><a title="Phim lẻ" href="{{ route('movies') }}">Phim lẻ</a></li>
-                        <li><a title="Phim chiếu rạp" href="/phim-chieu-rap">Phim chiếu rạp</a></li>
+
                         <li class="mega dropdown"><a title="Thể loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Thể loại <span class="caret"></span></a>
                             <ul role="menu" class=" dropdown-menu">
                                 <li><a title="Phim Âm Nhạc" href="/am-nhac">Phim Âm Nhạc</a></li>
 
                             </ul>
                         </li>
+
                         <li class="mega dropdown">
                             <a title="Quốc gia" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Quốc gia <span class="caret"></span></a>
                             <ul role="menu" class=" dropdown-menu">
@@ -43,6 +43,7 @@
 
                             </ul>
                         </li>
+
                         <li><a title="Mới cập nhật" href="/phim-moi-cap-nhat">Mới cập nhật</a></li>
                     </ul>
                 </div>

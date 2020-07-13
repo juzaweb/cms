@@ -4,7 +4,11 @@ Route::get('/', 'Frontend\HomeController@index')->name('home');
 
 Route::get('/login', 'Frontend\LoginController@index')->name('login');
 
-Route::get('/register', 'Frontend\RegisterController@index')->name('login');
+Route::get('/register', 'Frontend\RegisterController@index')->name('register');
+
+Route::get('/search', 'Frontend\SearchController@search')->name('search');
+
+Route::get('/popular-movies', 'Frontend\SearchController@search')->name('movies.popular');
 
 Route::get('/movies', 'Frontend\MoviesController@index')->name('movies');
 

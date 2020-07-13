@@ -8,6 +8,6 @@ use App\Http\Controllers\Controller;
 class EmailLogsController extends Controller
 {
     public function index() {
-    
+        return view('backend.email_logs.index');
     }
 }

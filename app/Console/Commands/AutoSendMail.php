@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 class AutoSendMail extends Command
 {
-    protected $signature = 'mail:auto';
+    protected $signature = 'email:send';
     
     protected $description = 'Command description';
     

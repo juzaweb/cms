@@ -1,4 +1,4 @@
-@extends('themes.mymo.layout')
+@extends('layouts.frontend')
 
 @section('content')
 
@@ -12,7 +12,7 @@
                         <span>
                             <span>
                                 <a href="{{ route('home') }}">@lang('app.home')</a> »
-                                <span class="breadcrumb_last" aria-current="page">Phim mới nhất</span>
+                                <span class="breadcrumb_last" aria-current="page">{{ $info->name }}</span>
                             </span>
                         </span>
                     </div>

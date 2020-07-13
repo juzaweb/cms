@@ -65,6 +65,18 @@ mix.styles([
     'resources/styles/css/customs.css',
 ], 'public/css/backend.css');
 
+mix.styles([
+    'resources/styles/vendors/font-awesome/css/font-awesome.min.css',
+    'resources/styles/vendors/select2/dist/css/select2.min.css',
+    'resources/styles/css/themeeditor-main.min.css',
+], 'public/css/theme-editor.css');
+
+mix.combine([
+    'resources/styles/vendors/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js',
+    'resources/styles/js/themeeditor.min.js',
+    'resources/styles/js/theme-editor.js',
+], 'public/css/theme-editor.js');
+
 mix.combine([
     'resources/styles/vendors/jquery/dist/jquery.min.js',
     'resources/styles/vendors/popper.js/dist/umd/popper.js',

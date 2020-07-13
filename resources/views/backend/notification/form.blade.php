@@ -59,9 +59,9 @@
                             <label class="col-form-label" for="type">@lang('app.type')</label>
 
                             <select name="type" id="type" class="form-control" required>
-                                <option value="1">@lang('app.notify')</option>
-                                <option value="2">@lang('app.email')</option>
-                                <option value="3">@lang('app.notify_and_email')</option>
+                                <option value="1" @if($model->type == 1) selected @endif>@lang('app.notify')</option>
+                                <option value="2" @if($model->type == 2) selected @endif>@lang('app.email')</option>
+                                <option value="3" @if($model->type == 3) selected @endif>@lang('app.notify_and_email')</option>
                             </select>
                         </div>
 

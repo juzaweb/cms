@@ -168,6 +168,7 @@ return [
   'logs' => 'Logs',
   'action' => 'Action',
   'edit' => 'Edit',
+  'editor' => 'Editor',
   'home_title' => 'Home page title',
   'home_description' => 'Home page description',
   'player_setting' => 'Player setting',
@@ -195,5 +196,6 @@ return [
   'blog_title' => 'Blog page title',
   'blog_keywords' => 'Blog page keywords',
   'blog_description' => 'Blog page description',
+  'views' => 'Views',
 ]; 
 

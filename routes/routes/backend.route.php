@@ -221,6 +221,18 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
 });
 
+Route::group(['prefix' => 'setting/theme/menu'], function () {
+    Route::get('/', 'Backend\Theme\MenuController@index')->name('admin.theme.menu');
+    
+    Route::post('/save', 'Backend\Theme\MenuController@save')->name('admin.theme.menu.save');
+});
+
+Route::group(['prefix' => 'setting/theme/editor'], function () {
+    Route::get('/', 'Backend\Setting\SystemSettingController@index')->name('admin.theme.editor');
+    
+    Route::post('/save', 'Backend\Setting\SystemSettingController@save')->name('admin.theme.editor.save');
+});
+
 Route::group(['prefix' => 'setting/system'], function () {
     Route::get('/', 'Backend\Setting\SystemSettingController@index')->name('admin.setting');
     
@@ -309,6 +321,12 @@ Route::group(['prefix' => 'setting/video-ads'], function () {
     Route::post('/remove', 'Backend\Setting\VideoAdsController@remove')->name('admin.setting.video_ads.remove');
 });
 
+Route::group(['prefix' => 'setting/seo'], function () {
+    Route::get('/', 'Backend\Setting\SeoSettingController@index')->name('admin.setting.seo');
+    
+    Route::post('/save', 'Backend\Setting\SeoSettingController@save')->name('admin.setting.seo.save');
+});
+
 Route::group(['prefix' => 'notification'], function () {
     Route::get('/', 'Backend\SendNotificationController@index')->name('admin.notification');
     
@@ -321,10 +339,4 @@ Route::group(['prefix' => 'notification'], function () {
     Route::post('/save', 'Backend\SendNotificationController@save')->name('admin.notification.save');
     
     Route::post('/remove', 'Backend\SendNotificationController@remove')->name('admin.notification.remove');
-});
-
-Route::group(['prefix' => 'setting/seo'], function () {
-    Route::get('/', 'Backend\Setting\SeoSettingController@index')->name('admin.setting.seo');
-    
-    Route::post('/save', 'Backend\Setting\SeoSettingController@save')->name('admin.setting.seo.save');
 });

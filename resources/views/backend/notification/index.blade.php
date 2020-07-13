@@ -40,6 +40,7 @@
                         <div class="form-group mb-2 mr-1">
                             <label for="inputStatus" class="sr-only">@lang('app.status')</label>
                             <select name="status" id="inputStatus" class="form-control">
+                                <option value="">--- @lang('app.status') ---</option>
                                 <option value="1">@lang('app.enabled')</option>
                                 <option value="0">@lang('app.disabled')</option>
                             </select>

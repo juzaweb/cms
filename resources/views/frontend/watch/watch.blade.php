@@ -1,4 +1,4 @@
-@extends('themes.mymo.layout')
+@extends('layouts.frontend')
 
 @section('content')
 <div class="row container" id="wrapper">
