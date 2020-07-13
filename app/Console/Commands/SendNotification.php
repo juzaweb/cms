@@ -31,16 +31,19 @@ class SendNotification extends Command
                 if (!in_array($row->type, [2, 3])) {
                     continue;
                 }
-                
-                $emails = User::whereIn('id', $users)
+    
+                $users = User::whereIn('id', $users)
                     ->get();
                 
-                foreach ($emails as $email) {
+                foreach ($users as $user) {
                     $mail = new EmailList();
-                    $mail->emails = $email;
+                    $mail->subject = $row->subject;
+                    $mail->emails = $user->email;
                     $mail->params = json_encode([
-
+                        'name' => $user->name,
+                        'email' => $user->email,
                     ]);
+                    
                     
                 }
             }

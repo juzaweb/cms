@@ -28,6 +28,13 @@
     </li>
 
     <li class="cui__menuLeft__item">
+        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/types*')) cui__menuLeft__item--active @endif" href="{{ route('admin.types') }}">
+            <span class="cui__menuLeft__item__title">@lang('app.types')</span>
+            <i class="cui__menuLeft__item__icon fe fe-list"></i>
+        </a>
+    </li>
+
+    <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/countries*')) cui__menuLeft__item--active @endif" href="{{ route('admin.countries') }}">
             <span class="cui__menuLeft__item__title">@lang('app.countries')</span>
             <i class="cui__menuLeft__item__icon fe fe-list"></i>

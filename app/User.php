@@ -37,6 +37,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int $status
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereStatus($value)
+ * @property string $language
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLanguage($value)
  */
 class User extends Authenticatable
 {

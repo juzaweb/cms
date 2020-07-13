@@ -197,5 +197,6 @@ return [
   'blog_keywords' => 'Blog page keywords',
   'blog_description' => 'Blog page description',
   'views' => 'Views',
-]; 
+  'types' => 'Types',
+];
 

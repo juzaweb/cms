@@ -103,6 +103,20 @@ Route::group(['prefix' => 'genres'], function () {
     Route::post('/remove', 'Backend\GenresController@remove')->name('admin.genres.remove');
 });
 
+Route::group(['prefix' => 'types'], function () {
+    Route::get('/', 'Backend\CountriesController@index')->name('admin.types');
+    
+    Route::get('/getdata', 'Backend\CountriesController@getData')->name('admin.types.getdata');
+    
+    Route::get('/create', 'Backend\CountriesController@form')->name('admin.types.create');
+    
+    Route::get('/edit/{id}', 'Backend\CountriesController@form')->name('admin.types.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\CountriesController@save')->name('admin.types.save');
+    
+    Route::post('/remove', 'Backend\CountriesController@remove')->name('admin.types.remove');
+});
+
 Route::group(['prefix' => 'countries'], function () {
     Route::get('/', 'Backend\CountriesController@index')->name('admin.countries');
     
@@ -159,10 +173,6 @@ Route::group(['prefix' => 'posts'], function () {
     Route::post('/remove', 'Backend\PostsController@remove')->name('admin.posts.remove');
 });
 
-Route::group(['prefix' => 'tags'], function () {
-    Route::post('/save', 'Backend\TagsController@save')->name('admin.tags.save');
-});
-
 Route::group(['prefix' => 'post-categories'], function () {
     Route::get('/', 'Backend\PostCategoriesController@index')->name('admin.post_categories');
     
@@ -175,6 +185,10 @@ Route::group(['prefix' => 'post-categories'], function () {
     Route::post('/save', 'Backend\PostCategoriesController@save')->name('admin.post_categories.save');
     
     Route::post('/remove', 'Backend\PostCategoriesController@remove')->name('admin.post_categories.remove');
+});
+
+Route::group(['prefix' => 'tags'], function () {
+    Route::post('/save', 'Backend\TagsController@save')->name('admin.tags.save');
 });
 
 Route::group(['prefix' => 'comments/movie'], function () {

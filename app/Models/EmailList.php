@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \App\Models\EmailTemplates|null $template
+ * @property string $subject
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereSubject($value)
  */
 class EmailList extends Model
 {

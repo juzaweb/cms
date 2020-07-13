@@ -4,28 +4,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlansTable extends Migration
+class CreateFoldersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create('folders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->bigInteger('folder_id')->index()->nullable();
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('folders');
     }
 }

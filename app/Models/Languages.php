@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Languages whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Languages whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $default
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Languages whereDefault($value)
  */
 class Languages extends Model
 {

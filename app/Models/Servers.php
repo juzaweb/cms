@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Servers whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Servers whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Movies $movie
  */
 class Servers extends Model
 {

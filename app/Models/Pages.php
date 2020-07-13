@@ -30,6 +30,12 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string|null $thumbnail
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pages whereThumbnail($value)
+ * @property string|null $meta_title
+ * @property string|null $meta_description
+ * @property string|null $keywords
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pages whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pages whereMetaDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pages whereMetaTitle($value)
  */
 class Pages extends Model
 {
