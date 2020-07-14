@@ -43,27 +43,23 @@ class AutoSendMail extends Command
             ->to('user@laravel.com')
             ->send(new OrderShipped);*/
         
-        $rows = EmailList::with('template')
-            ->has('template')
-            ->where('status', '=', 0)
+        $rows = EmailList::where('status', '=', 2)
+            ->orderBy('priority', 'DESC')
             ->limit(10)
             ->get();
         
         foreach ($rows as $row) {
-            $params = json_decode($row->params, true);
-            Mail::send('emails.' . $row->template->template_file, $params, function ($message) use ($row) {
-                //                $message->from('elearn@kienlongbank.com', 'Đào tạo');
-                $message->to(explode(',', $row->emails))->subject($row->template->subject);
+            Mail::send('emails.' . $row->template_file, [
+                'content' => $this->mapParams($row->content, $row->params),
+            ], function ($message) use ($row) {
+                $message->to(explode(',', $row->emails))->subject($this->mapParams($row->subject, $row->params));
             });
     
             if (Mail::failures()) {
-                
-                var_dump(Mail::failures());
-                
                 EmailList::where('id', '=', $row->id)
                     ->update([
-                        'error' => '',
-                        'status' => 2,
+                        'error' => @json_encode(Mail::failures()),
+                        'status' => 0,
                     ]);
                 
                 continue;
@@ -74,5 +70,14 @@ class AutoSendMail extends Command
                     'status' => 1,
                 ]);
         }
+    }
+    
+    protected function mapParams($content, $params) {
+        $params = json_decode($params);
+        foreach ($params as $key => $param) {
+            $content = str_replace('{'. $key .'}', $param, $content);
+        }
+        
+        return $content;
     }
 }

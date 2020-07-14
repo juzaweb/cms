@@ -13,9 +13,11 @@ class CreateEmailListTable extends Migration
             $table->string('emails', 300);
             $table->string('subject', 300);
             $table->text('content');
+            $table->string('template_file');
             $table->text('params')->nullable();
             $table->text('error')->nullable();
-            $table->tinyInteger('status')->default(0)->comment('1: sended, 2: pending, 3: cancel, 0: error');
+            $table->tinyInteger('priority')->default(1);
+            $table->tinyInteger('status')->default(2)->comment('1: sended, 2: pending, 3: cancel, 0: error');
             $table->timestamps();
         });
     }

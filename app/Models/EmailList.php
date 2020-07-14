@@ -39,13 +39,4 @@ class EmailList extends Model
         'params',
         'content',
     ];
-    
-    public static function mapParams($content, $params) {
-        $params = json_decode($params);
-        foreach ($params as $key => $param) {
-            $content = str_replace('{'. $key .'}', $param, $content);
-        }
-        
-        return $content;
-    }
 }
