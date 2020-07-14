@@ -360,3 +360,13 @@ Route::group(['prefix' => 'notification'], function () {
     
     Route::post('/remove', 'Backend\SendNotificationController@remove')->name('admin.notification.remove');
 });
+
+Route::group(['prefix' => 'email-logs'], function () {
+    Route::get('/', 'Backend\EmailLogsController@index')->name('admin.email_logs');
+    
+    Route::get('/getdata', 'Backend\EmailLogsController@getData')->name('admin.email_logs.getdata');
+    
+    Route::post('/remove', 'Backend\EmailLogsController@remove')->name('admin.email_logs.remove');
+    
+    
+});

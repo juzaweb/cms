@@ -25,5 +25,5 @@ select.load-actors,
 select.load-directors,
 select.load-writers,
 select.load-countries,
-button[data=status],
+button[data-status],
 button[type=submit][data-loading-text]{}

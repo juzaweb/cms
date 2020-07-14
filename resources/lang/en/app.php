@@ -85,6 +85,7 @@ return [
   'add_category' => 'Add category',
   'add_tags' => 'Add tags',
   'data_error' => 'Data error',
+  'error' => 'Error',
   'seo_and_marketing' => 'SEO & Marketing',
   'slug' => 'Slug',
   'meta_title' => 'Meta Title',
@@ -163,8 +164,10 @@ return [
   'notify' => 'Notify',
   'notify_and_email' => 'Notify & Email',
   'sended' => 'Sended',
+  'resend' => 'Resend',
   'send_for' => 'Sended for',
   'sending' => 'Sending',
+  'pending' => 'Pending',
   'pause' => 'Pause',
   'all_users' => 'All users',
   'logs' => 'Logs',
@@ -202,5 +205,6 @@ return [
   'types' => 'Types',
   'add_type' => 'Add type',
   'add_types' => 'Add types',
-]; 
+  'email_logs' => 'Email logs',
+];
 

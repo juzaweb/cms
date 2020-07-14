@@ -80,6 +80,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereViews($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereWriters($value)
  * @mixin \Eloquent
+ * @property int|null $type_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTypeId($value)
  */
 class Movies extends Model
 {

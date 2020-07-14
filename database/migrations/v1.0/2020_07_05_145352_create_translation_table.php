@@ -9,6 +9,10 @@ class CreateTranslationTable extends Migration
 {
     public function up()
     {
+        if (Schema::hasTable('translation')) {
+            return;
+        }
+        
         Schema::create('translation', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('key', 150)->unique();
@@ -21,6 +25,6 @@ class CreateTranslationTable extends Migration
     
     public function down()
     {
-        Schema::dropIfExists('translation');
+        //Schema::dropIfExists('translation');
     }
 }
