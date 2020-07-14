@@ -27,25 +27,15 @@ class SendNotification extends Command
         foreach ($rows as $row) {
             if ($row->users) {
                 $users = explode(',', $row->users);
-                
-                if (!in_array($row->type, [2, 3])) {
-                    continue;
-                }
-    
                 $users = User::whereIn('id', $users)
                     ->get();
-                
-                foreach ($users as $user) {
-                    $mail = new EmailList();
-                    $mail->subject = $row->subject;
-                    $mail->emails = $user->email;
-                    $mail->params = json_encode([
-                        'name' => $user->name,
-                        'email' => $user->email,
-                    ]);
-                    
-                    
-                }
+    
+                \Notification::send($users, new \App\Notifications\SendNotification($row));
+            }
+            else {
+                $users = User::where('status', '=', 1)
+                    ->get();
+                \Notification::send($users, new \App\Notifications\SendNotification($row));
             }
         }
     }

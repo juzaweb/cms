@@ -39,15 +39,5 @@ class EmailTemplates extends Model
     public static function findCode(string $code) {
         return self::where('code', '=', $code)
             ->first();
-        
-    }
-    
-    public static function mapParams($content, $params) {
-        $params = json_decode($params);
-        foreach ($params as $key => $param) {
-            $content = str_replace('{{'. $key .'}}', $param, $content);
-        }
-        
-        return $content;
     }
 }
