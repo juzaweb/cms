@@ -26,9 +26,26 @@
     <meta name="csrf-token" content="{{ csrf_token()  }}">
 
     <link rel="stylesheet" href="{{ asset('styles/themes/mymo/css/main.css') }}"/>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var langs = {
+            'apparently_there_are_no_posts_to_show': '@lang('app.apparently_there_are_no_posts_to_show')'
+        };
+        /* ]]> */
+    </script>
+
     <script type='text/javascript'>
         /* <![CDATA[ */
-        var halim = {"ajax_url":"http:\/\/xemphimplus.net\/wp-content\/themes\/halimmovies\/halim-ajax.php","light_mode":"0","light_mode_btn":"1","ajax_live_search":"1","sync":null,"db_redirect_url":"http:\/\/xemphimplus.net\/"};
+        var halim = {
+            "ajax_url":"http:\/\/xemphimplus.net\/wp-content\/themes\/halimmovies\/halim-ajax.php",
+            "ajax_search_url": "{{ route('search') }}",
+            "ajax_popular_movies_url": "{{ route('movies.popular') }}",
+            "light_mode":"0",
+            "light_mode_btn":"1",
+            "ajax_live_search":"1",
+            "sync":null,
+            "db_redirect_url":"http:\/\/xemphimplus.net\/"
+        };
         /* ]]> */
     </script>
 

@@ -8,7 +8,7 @@ Route::get('/register', 'Frontend\RegisterController@index')->name('register');
 
 Route::get('/search', 'Frontend\SearchController@search')->name('search');
 
-Route::get('/popular-movies', 'Frontend\SearchController@search')->name('movies.popular');
+Route::get('/popular-movies', 'Frontend\SearchController@getPopularMovies')->name('movies.popular');
 
 Route::get('/movies', 'Frontend\MoviesController@index')->name('movies');
 
@@ -22,13 +22,13 @@ Route::get('/genre/{slug}', 'Frontend\GenreController@index')->name('genre');
 
 Route::get('/genre/{slug}/page-{page}', 'Frontend\GenreController@index')->name('genre.page')->where('page', '[0-9]+');
 
-Route::get('/country/{slug}', 'Frontend\GenreController@index')->name('genre');
+Route::get('/country/{slug}', 'Frontend\CountryController@index')->name('country');
 
-Route::get('/country/{slug}/page-{page}', 'Frontend\GenreController@index')->name('genre.page')->where('page', '[0-9]+');
+Route::get('/country/{slug}/page-{page}', 'Frontend\CountryController@index')->name('country.page')->where('page', '[0-9]+');
 
 Route::get('/tag/{slug}', 'Frontend\TagController@index')->name('tag');
 
-Route::get('/tag/{slug}/page-{page}', 'Frontend\TagController@index')->name('tag');
+Route::get('/tag/{slug}/page-{page}', 'Frontend\TagController@index')->name('tag.page');
 
 Route::get('/watch/{slug}', 'Frontend\WatchController@index')->name('watch');
 

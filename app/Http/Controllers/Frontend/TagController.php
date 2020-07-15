@@ -17,6 +17,7 @@ class TagController extends Controller
     
         return view('themes.mymo.genre.index', [
             'items' => $items,
+            'info' => $info,
         ]);
     }
 }

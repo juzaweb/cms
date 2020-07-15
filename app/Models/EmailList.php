@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $template_file
+ * @property int $priority
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList wherePriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereTemplateFile($value)
  */
 class EmailList extends Model
 {

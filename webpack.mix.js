@@ -1,6 +1,6 @@
 const mix = require('laravel-mix');
 
-/*mix.js('resources/js/app.js', 'public/js')
+mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.styles([
@@ -17,6 +17,8 @@ mix.styles([
     'resources/styles/vendors/bootstrap-table/bootstrap-table.min.css',
     'resources/styles/vendors/font-icomoon/style.css',
     'resources/styles/vendors/toastr/toastr.min.css',
+    'resources/styles/vendors/nestable2/jquery.nestable.min.css',
+    'resources/styles/vendors/accordion/accordion.css',
     'resources/styles/components/kit-vendors/bootstrap/css/card.css',
     'resources/styles/components/kit-vendors/bootstrap/css/utilities.css',
     'resources/styles/components/kit-vendors/bootstrap/css/buttons.css',
@@ -90,6 +92,8 @@ mix.combine([
     'resources/styles/vendors/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
     'resources/styles/vendors/bootstrap-datepicker/js/load-datepicker.js',
     'resources/styles/vendors/toastr/toastr.min.js',
+    'resources/styles/vendors/accordion/accordion.min.js',
+    'resources/styles/vendors/nestable2/jquery.nestable.min.js',
     'resources/styles/components/kit-core/index.js',
     'resources/styles/components/cui-layout/menu-left/index.js',
     'resources/styles/components/cui-layout/menu-top/index.js',
@@ -102,7 +106,7 @@ mix.combine([
     'resources/styles/js/LoadBootstrapTable.js',
     'resources/styles/js/form-ajax.js',
     'resources/js/customs.js',
-], 'public/js/backend.js');*/
+], 'public/js/backend.js');
 
 mix.styles([
     'resources/styles/frontend/assets/css/bootstrap.min.css',

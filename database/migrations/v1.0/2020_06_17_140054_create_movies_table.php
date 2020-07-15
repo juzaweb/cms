@@ -23,7 +23,7 @@ class CreateMoviesTable extends Migration
             $table->string('rating', 25)->nullable();
             $table->date('release')->nullable();
             $table->string('countries', 250)->nullable();
-            $table->string('genres', 250)->nullable();
+            $table->string('genres', 250);
             $table->bigInteger('type_id')->index()->nullable();
             $table->string('tags', 250)->nullable();
             $table->string('runtime', 100)->nullable();
@@ -42,6 +42,10 @@ class CreateMoviesTable extends Migration
             $table->bigInteger('updated_by')->index();
             $table->timestamps();
         });
+        
+        $prefix = DB::getTablePrefix();
+        DB::statement('ALTER TABLE `'. $prefix .'movies` ADD FULLTEXT index_name(name);');
+        DB::statement('ALTER TABLE `'. $prefix .'movies` ADD FULLTEXT index_other_name(other_name);');
     }
     
     public function down()

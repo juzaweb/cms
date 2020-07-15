@@ -7,7 +7,8 @@
                 @endif
             </select>
         </div>
-        <a href="javascript:void(0)" class="ml-1 add-new-menu"><i class="fa fa-plus"></i> {{ trans('main.add_new') }}</a>
+
+        <a href="javascript:void(0)" class="ml-1" data-toggle="modal" data-target="#modal-add-menu"><i class="fa fa-plus"></i> {{ trans('main.add_new') }}</a>
     </div>
 
     <div class="card-body">
@@ -41,8 +42,6 @@
                     </form>
                 </div>
             </li>
-
-
         </ul>
     </div>
 </div>

@@ -25,13 +25,14 @@ class SearchController extends Controller
             'slug',
             'views',
             'release',
+            'created_at',
         ]);
         
         $query->where('status', '=', 1);
         
         if ($q) {
             $query->where(function (Builder $builder) use ($q) {
-                $q = $this->fullTextWildcards($q);
+                $q = full_text_wildcards($q);
                 $builder->orWhereRaw('MATCH (name) AGAINST (? IN BOOLEAN MODE)', [$q]);
                 $builder->orWhereRaw('MATCH (other_name) AGAINST (? IN BOOLEAN MODE)', [$q]);
             });
@@ -49,10 +50,13 @@ class SearchController extends Controller
             $query->where('release', 'like', $year . '%');
         }
         
-        if ($data == 'json') {
+        if ($data == 'html') {
             if ($query->exists()) {
-                $rows = $query->limit(10);
-                return response()->json($rows);
+                $query->limit(10);
+                return view('themes.mymo.data.search_item', [
+                    'keyword' => $q,
+                    'items' => $query->get(),
+                ]);
             }
             
             return response()->json([
@@ -99,27 +103,5 @@ class SearchController extends Controller
             ->limit(5)
             ->get()
             ->toArray();
-    }
-    
-    protected function fullTextWildcards($term) {
-        // removing symbols used by MySQL
-        $reservedSymbols = ['-', '+', '<', '>', '@', '(', ')', '~'];
-        $term = str_replace($reservedSymbols, '', $term);
-        
-        $words = explode(' ', $term);
-        
-        foreach ($words as $key => $word) {
-            /*
-             * applying + operator (required word) only big words
-             * because smaller ones are not indexed by mysql
-             */
-            if (strlen($word) >= 1) {
-                $words[$key] = '+' . $word  . '*';
-            }
-        }
-        
-        $searchTerm = implode(' ', $words);
-        
-        return $searchTerm;
     }
 }

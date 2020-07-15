@@ -25,6 +25,7 @@
                 <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
             </div>
         </div>
+
         <div id="ajax-filter" class="panel-collapse collapse" aria-expanded="true" role="menu">
             <div class="ajax"></div>
         </div>
@@ -35,10 +36,13 @@
         <section>
             <div class="section-bar clearfix">
                 <h3 class="section-title">
-                    <span>Phim mới nhất</span>
+                    <span>{{ $info->name }}</span>
+
                     <span class="pull-right sortby">Sort by: <a href="?sortby=movie">Movie</a> / <a href="?sortby=tv_series">TV Series</a></span>
+
                 </h3>
             </div>
+
             <div class="halim_box">
                 @foreach($items as $item)
                     <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-21564">
@@ -46,9 +50,10 @@
                     </article>
                 @endforeach
             </div>
+
             <div class="clearfix"></div>
             <div class="text-center">
-                {{ $items->links('themes.mymo.pagination') }}
+                {{ $items->links('themes.mymo.data.pagination') }}
             </div>
 
             <div class="entry-content htmlwrap clearfix">
@@ -102,19 +107,7 @@
             <section class="tab-content">
                 <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
                     <div class="halim-ajax-popular-post-loading hidden"></div>
-                    <div id="halim-ajax-popular-post" class="popular-post">
-
-                        <div class="item post-18066">
-                            <a href="/lam-sao-boss-lai-lam-sao-nua" title="Làm Sao? Boss Lại Làm Sao Nữa">
-                                <div class="item-link">
-                                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="wp-content/uploads/2020/06/lam-sao-boss-lai-lam-sao-nua-18066-thumbnail.jpg" class="lazyload blur-up post-thumb" alt="Làm Sao? Boss Lại Làm Sao Nữa" title="Làm Sao? Boss Lại Làm Sao Nữa" />
-                                </div>
-                                <h3 class="title">Làm Sao? Boss Lại Làm Sao Nữa</h3>
-                                <p class="original_title">What If You&#039;re My Boss? (2020)</p>            </a>
-                            <div class="viewsCount">3.2K lượt xem</div>
-                        </div>
-
-                    </div>
+                    <div id="halim-ajax-popular-post" class="popular-post"></div>
                 </div>
             </section>
 

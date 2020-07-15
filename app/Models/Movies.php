@@ -114,11 +114,31 @@ class Movies extends Model
         return round($this->views / 1000, 1) . 'K';
     }
     
+    public function getReleaseYear() {
+        if ($this->release) {
+            return explode('-', $this->release)[0];
+        }
+        
+        return '';
+    }
+    
     public function getPoster() {
         if ($this->poster) {
             return image_url($this->poster);
         }
         
         return $this->getThumbnail();
+    }
+    
+    public function getGenres() {
+        return Genres::where('status', '=', 1)
+            ->whereIn('id', explode(',', $this->genres))
+            ->get(['id', 'name', 'slug']);
+    }
+    
+    public function getCountries() {
+        return Countries::where('status', '=', 1)
+            ->whereIn('id', explode(',', $this->countries))
+            ->get(['id', 'name', 'slug']);
     }
 }

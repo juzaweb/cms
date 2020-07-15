@@ -1,26 +1,40 @@
 <div class="halim-item">
-        <a class="halim-thumb" href="{{ route('watch', ['slug' => $item->slug]) }}" title="{{ $item->name }}">
+    @php
+        $genres = $item->getGenres();
+        $countries = $item->getCountries();
+
+        $genre_str = '';
+        foreach ($genres as $genre) {
+            $genre_str .= '<span class=category-name>'. $genre->name .'</span>';
+        }
+
+        $country_str = '';
+        foreach ($countries as $country) {
+            $country_str .= '<span class=category-name>'. $country->name .'</span>';
+        }
+    @endphp
+        <a class="halim-thumb" href="{{ route('watch', ['slug' => $item->slug]) }}" title="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}">
             <figure>
-                <img class="lazyload blur-up img-responsive" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $item->getThumbnail() }}" alt="{{ $item->name }}" title="{{ $item->name }}">
+                <img class="lazyload blur-up img-responsive" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $item->getThumbnail() }}" alt="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}" title="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}">
             </figure>
-            <span class="status">HD</span>
+            <span class="status">{{ $item->video_quality }}</span>
             <span class="episode">Tập 3</span>
             <div class="icon_overlay" data-html="true"
                  data-toggle="halim-popover"
                  data-placement="top"
                  data-trigger="hover"
                  title="<span class=film-title>{{ $item->name }}</span>"
-                 data-content="<div class=org-title>{{ $item->other_name }} (2020)</div>                            <div class=film-meta>
+                 data-content="<div class=org-title>{{ $item->other_name }} ({{ $item->getReleaseYear() }})</div>                            <div class=film-meta>
                                 <div class=text-center>
-                                    <span class=released><i class=hl-calendar></i> 2020</span>                                   </div>
+                                    <span class=released><i class=hl-calendar></i> {{ $item->getReleaseYear() }}</span>                                   </div>
                                 <div class=film-content>{{ $item->short_description }}</div>
-                                <p class=category>Quốc gia: <span class=category-name>Trung Quốc</span></p>                                <p class=category>Thể loại: <span class=category-name>Hài Hước</span><span class=category-name>Tình Cảm</span></p>
+                                <p class=category>@lang('app.countries'): {{ $country_str }}</p>                                <p class=category>@lang('app.genres'): {{ $genre_str }}</p>
                             </div>">
             </div>
 
             <div class="halim-post-title-box">
                 <div class="halim-post-title ">
-                    <h2 class="entry-title">{{ $item->name }}</h2><p class="original_title">{{ $item->other_name }} {{ $item->release ? '(' . $item->release->format('Y') . ')' : '' }}</p>
+                    <h2 class="entry-title">{{ $item->name }}</h2><p class="original_title">{{ $item->other_name }} ({{ $item->getReleaseYear() }})</p>
                 </div>
             </div>
         </a>

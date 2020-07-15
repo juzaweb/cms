@@ -122,3 +122,19 @@ function copyfile_chunked($infile, $outfile) {
     fclose($o_handle);
     return $cnt;
 }
+
+function full_text_wildcards($term) {
+    $reservedSymbols = ['-', '+', '<', '>', '@', '(', ')', '~'];
+    $term = str_replace($reservedSymbols, '', $term);
+    $words = explode(' ', $term);
+    
+    foreach ($words as $key => $word) {
+        if (strlen($word) >= 1) {
+            $words[$key] = '+' . $word  . '*';
+        }
+    }
+    
+    $searchTerm = implode(' ', $words);
+    
+    return $searchTerm;
+}

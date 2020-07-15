@@ -1,9 +1,10 @@
 <footer id="footer" class="clearfix">
     <div class="container footer-columns">
         <div class="row container">
+
             <div class="widget about col-xs-12 col-sm-4 col-md-4">
                 <div class="footer-logo">
-                    <img class="img-responsive" src="wp-content/uploads/2019/05/logo-xemphimplus.png" alt="XemPhimPlus | Phim Hay | Phim Mới"/>
+                    <img class="img-responsive" src="{{ image_url(get_config('logo')) }}" alt="XemPhimPlus | Phim Hay | Phim Mới"/>
                     <span class="social">
                         <a href="https://www.facebook.com/pg/GalaPhimPage" target="_blank" rel="nofollow"><i class="hl-facebook"></i></a>
                         <a href="https://youtube.com/channel/UCZGvgvQcFNVrwgRcNKYNfkQ/about" target="_blank" rel="nofollow"><i class="hl-gplus"></i></a>
@@ -14,8 +15,11 @@
 
                 <p class="halim-about"><strong><a href="https://xemphimplus.net/">XemPhimPlus</a> </strong>- Xem phim Online HD hoàn toàn miễn phí. Tổng hợp những bộ phim hay và phim mới nhất, được cập nhật liên tục.
                     <strong>Hỗ trợ</strong>: <a href="mailto:xemphimplus.net@gmail.com">xemphimplus.net@gmail.com</a>
-                    <strong>Quảng cáo</strong>: <a href="mailto:ads.xemphimplus.net@gmail.com">ads.xemphimplus.net@gmail.com</a></p>			</div>
-            <div id="halim_tagcloud_widget-2" class="widget widget_halim_tagcloud_widget col-xs-12 col-sm-6 col-md-4"><h4 class="widget-title">Tag nổi bật</h4>
+                    <strong>Quảng cáo</strong>: <a href="mailto:ads.xemphimplus.net@gmail.com">ads.xemphimplus.net@gmail.com</a></p>
+            </div>
+
+            <div id="halim_tagcloud_widget-2" class="widget widget_halim_tagcloud_widget col-xs-12 col-sm-6 col-md-4">
+                <h4 class="widget-title">Tag nổi bật</h4>
                 <div class="video-item halim-entry-box hidden-xs">
                     <div class="item-content tagcloud">
                         <a href="/tag/banhtv" class="tag-cloud-link tag-link-5448 tag-link-position-1" style="font-size: 10pt;" aria-label="Banhtv - Xem phim online hay với chất lượng HD (117 mục)">Banhtv - Xem phim online hay với chất lượng HD</a>
@@ -43,9 +47,7 @@
             <div id="text-2" class="widget widget_text col-xs-12 col-sm-6 col-md-4">
                 <h4 class="widget-title">Theo dõi trên Facebook</h4>
                 <div class="textwidget">
-                    <div class="fb-page" data-href="https://www.facebook.com/GalaPhimPage/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
-                        <blockquote cite="https://www.facebook.com/GalaPhimPage/" class="fb-xfbml-parse-ignore"><p><a href="https://www.facebook.com/GalaPhimPage/">Thích Xem Phim</a></p></blockquote>
-                    </div>
+
                 </div>
             </div>
         </div>

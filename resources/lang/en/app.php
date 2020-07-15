@@ -206,5 +206,7 @@ return [
   'add_type' => 'Add type',
   'add_types' => 'Add types',
   'email_logs' => 'Email logs',
+  'result_for_keyword' => 'Result for keyword',
+  'apparently_there_are_no_posts_to_show' => 'Apparently, there are no posts to show!',
 ];
 
