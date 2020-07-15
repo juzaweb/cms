@@ -244,6 +244,10 @@ Route::group(['prefix' => 'themes'], function () {
 Route::group(['prefix' => 'theme/menu'], function () {
     Route::get('/', 'Backend\Theme\MenuController@index')->name('admin.theme.menu');
     
+    Route::get('/{id}', 'Backend\Theme\MenuController@index')->name('admin.theme.menu.id');
+    
+    Route::post('/add-menu', 'Backend\Theme\MenuController@addMenu')->name('admin.theme.menu.add');
+    
     Route::post('/save', 'Backend\Theme\MenuController@save')->name('admin.theme.menu.save');
 });
 

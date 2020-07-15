@@ -12,11 +12,7 @@ Route::get('/popular-movies', 'Frontend\SearchController@getPopularMovies')->nam
 
 Route::get('/movies', 'Frontend\MoviesController@index')->name('movies');
 
-Route::get('/movies/page-{page}', 'Frontend\MoviesController@index')->name('movies.page');
-
 Route::get('/tv-series', 'Frontend\TVSeriesController@index')->name('tv_series');
-
-Route::get('/tv-series/page-{page}', 'Frontend\TVSeriesController@index')->name('tv_series.page');
 
 Route::get('/genre/{slug}', 'Frontend\GenreController@index')->name('genre');
 
@@ -24,11 +20,7 @@ Route::get('/genre/{slug}/page-{page}', 'Frontend\GenreController@index')->name(
 
 Route::get('/country/{slug}', 'Frontend\CountryController@index')->name('country');
 
-Route::get('/country/{slug}/page-{page}', 'Frontend\CountryController@index')->name('country.page')->where('page', '[0-9]+');
-
 Route::get('/tag/{slug}', 'Frontend\TagController@index')->name('tag');
-
-Route::get('/tag/{slug}/page-{page}', 'Frontend\TagController@index')->name('tag.page');
 
 Route::get('/watch/{slug}', 'Frontend\WatchController@index')->name('watch');
 

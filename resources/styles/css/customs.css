@@ -84,3 +84,7 @@ ul {
 .preview-image img {
     max-width: 100%;
 }
+
+#accordion .acc_content{
+    display: none;
+}

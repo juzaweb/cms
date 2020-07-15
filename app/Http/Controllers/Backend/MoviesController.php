@@ -102,6 +102,7 @@ class MoviesController extends Controller
             'description' => 'nullable|string|max:300',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
+            'genres' => 'required|array',
             'poster' => 'nullable|string|max:250',
             'rating' => 'nullable|string|max:25',
             'release' => 'nullable|string|max:15',
@@ -113,6 +114,7 @@ class MoviesController extends Controller
             'description' => trans('app.description'),
             'status' => trans('app.status'),
             'thumbnail' => trans('app.thumbnail'),
+            'genres' => trans('app.genres'),
             'poster' => trans('app.poster'),
             'rating' => trans('app.rating'),
             'release' => trans('app.release'),
@@ -130,6 +132,7 @@ class MoviesController extends Controller
         
         $model = Movies::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
+        $model->setAttribute('short_description', substr(strip_tags($model->description), 0, 200));
         $model->setAttribute('genres', implode(',', $genres));
         $model->setAttribute('countries', implode(',', $countries));
         $model->setAttribute('actors', implode(',', $actors));

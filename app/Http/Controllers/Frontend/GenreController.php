@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class GenreController extends Controller
 {
-    public function index($slug, $page = null) {
+    public function index($slug) {
         $info = Genres::where('slug', '=', $slug)
             ->where('status', '=', 1)
             ->firstOrFail();

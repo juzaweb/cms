@@ -208,5 +208,10 @@ return [
   'email_logs' => 'Email logs',
   'result_for_keyword' => 'Result for keyword',
   'apparently_there_are_no_posts_to_show' => 'Apparently, there are no posts to show!',
+  'menu_name' => 'Menu name',
+  'add_menu' => 'Add menu',
+  'add_to_menu' => 'Add to menu',
+  'choose_menu' => 'Choose menu',
+  'open_new_tab' => 'Open new tab',
 ];
 
