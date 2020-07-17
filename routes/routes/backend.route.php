@@ -249,6 +249,8 @@ Route::group(['prefix' => 'theme/menu'], function () {
     Route::post('/add-menu', 'Backend\Theme\MenuController@addMenu')->name('admin.theme.menu.add');
     
     Route::post('/save', 'Backend\Theme\MenuController@save')->name('admin.theme.menu.save');
+    
+    Route::post('/get-data', 'Backend\Theme\MenuController@getItems')->name('admin.theme.menu.items');
 });
 
 Route::group(['prefix' => 'theme/editor'], function () {

@@ -18,7 +18,7 @@
                 <ol class="dd-list" id="dd-empty-placeholder"></ol>
             </div>
 
-            <textarea name="setting" id="nestable-output" class="form-control d-none"></textarea>
+            <textarea name="content" id="nestable-output" class="form-control d-none"></textarea>
         </div>
 
         <div class="card-footer">

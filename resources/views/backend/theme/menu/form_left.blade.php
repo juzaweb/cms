@@ -30,10 +30,10 @@
                             <div class="show-categories">
                                 <ul class="mt-2 p-0">
                                     @foreach($genres as $genre)
-                                    <li class="m-1" id="item-category-1">
+                                    <li class="m-1" id="item-genre-{{ $genre->id }}">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="genres[]" class="custom-control-input" id="category-{{ $genre->id }}" value="{{ $genre->id }}">
-                                            <label class="custom-control-label" for="category-{{ $genre->id }}">{{ $genre->name }}</label>
+                                            <input type="checkbox" name="items[]" class="custom-control-input" id="genre-{{ $genre->id }}" value="{{ $genre->id }}">
+                                            <label class="custom-control-label" for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
                                         </div>
                                     </li>
                                     @endforeach
@@ -43,7 +43,77 @@
 
                         <div class="form-group">
                             <label class="custom-switch">
-                                <input type="checkbox" name="open_new_tab" class="custom-switch-input">
+                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description"> {{ trans('app.open_new_tab') }}</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('app.add_to_menu') }}</button>
+                    </form>
+                </div>
+            </li>
+
+            <li class="acc_section">
+                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('app.countries') }}</h3></div>
+                <div class="acc_content">
+                    <form action="" method="post" class="add-menu-item">
+
+                        <input type="hidden" name="type" value="country">
+
+                        <div class="form-group">
+                            <div class="show-countries">
+                                <ul class="mt-2 p-0">
+                                    @foreach($countries as $country)
+                                        <li class="m-1" id="item-country-{{ $country->id }}">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="items[]" class="custom-control-input" id="country-{{ $country->id }}" value="{{ $country->id }}">
+                                                <label class="custom-control-label" for="country-{{ $country->id }}">{{ $country->name }}</label>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="custom-switch">
+                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description"> {{ trans('app.open_new_tab') }}</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('app.add_to_menu') }}</button>
+                    </form>
+                </div>
+            </li>
+
+            <li class="acc_section">
+                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('app.types') }}</h3></div>
+                <div class="acc_content">
+                    <form action="" method="post" class="add-menu-item">
+
+                        <input type="hidden" name="type" value="type">
+
+                        <div class="form-group">
+                            <div class="show-countries">
+                                <ul class="mt-2 p-0">
+                                    @foreach($types as $type)
+                                        <li class="m-1" id="item-type-{{ $type->id }}">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="items[]" class="custom-control-input" id="type-{{ $type->id }}" value="{{ $type->id }}">
+                                                <label class="custom-control-label" for="type-{{ $type->id }}">{{ $type->name }}</label>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="custom-switch">
+                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
                                 <span class="custom-switch-indicator"></span>
                                 <span class="custom-switch-description"> {{ trans('app.open_new_tab') }}</span>
                             </label>

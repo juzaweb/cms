@@ -16,8 +16,6 @@ Route::get('/tv-series', 'Frontend\TVSeriesController@index')->name('tv_series')
 
 Route::get('/genre/{slug}', 'Frontend\GenreController@index')->name('genre');
 
-Route::get('/genre/{slug}/page-{page}', 'Frontend\GenreController@index')->name('genre.page')->where('page', '[0-9]+');
-
 Route::get('/country/{slug}', 'Frontend\CountryController@index')->name('country');
 
 Route::get('/tag/{slug}', 'Frontend\TagController@index')->name('tag');
