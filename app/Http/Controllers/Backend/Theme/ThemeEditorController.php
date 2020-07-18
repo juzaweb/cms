@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 class ThemeEditorController extends Controller
 {
     public function index() {
-        $config = include resource_path('views/frontend/config.php');
+        $config = include resource_path('views/themes/mymo/config.php');
         
         return view('backend.theme.editor.index', [
             'config' => $config,

@@ -129,6 +129,7 @@ return [
   'logo' => 'Logo',
   'icon' => 'Icon',
   'banner' => 'Banner',
+  'banners' => 'Banners',
   'change_image' => 'Change image',
   'site_info' => 'Site info',
   'login' => 'Login',
@@ -213,5 +214,10 @@ return [
   'add_to_menu' => 'Add to menu',
   'choose_menu' => 'Choose menu',
   'open_new_tab' => 'Open new tab',
+  'are_you_sure_you_want_to_delete_this_banner' => 'Are you sure you want to delete this banner?',
+  'sliders' => 'Sliders',
+  'link' => 'Link',
+  'add_new_banner' => 'Add new banner',
+  'change_photo' => 'Change photo',
 ];
 

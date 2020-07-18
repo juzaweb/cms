@@ -128,6 +128,12 @@
             </li>
 
             <li class="cui__menuLeft__item">
+                <a href="{{ route('admin.theme.sliders') }}" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.sliders')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
                 <a href="{{ route('admin.theme.editor') }}" class="cui__menuLeft__item__link" data-turbolinks="false">
                     <span class="cui__menuLeft__item__title">@lang('app.editor')</span>
                 </a>

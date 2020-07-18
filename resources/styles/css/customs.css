@@ -88,3 +88,13 @@ ul {
 #accordion .acc_content{
     display: none;
 }
+
+#banners li {
+    margin-top: 20px;
+}
+
+#banners li .thumbnail {
+    object-fit: cover;
+    width: 100%;
+    height: 130px;
+}

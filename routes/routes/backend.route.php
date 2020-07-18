@@ -253,6 +253,20 @@ Route::group(['prefix' => 'theme/menu'], function () {
     Route::post('/get-data', 'Backend\Theme\MenuController@getItems')->name('admin.theme.menu.items');
 });
 
+Route::group(['prefix' => 'theme/sliders'], function () {
+    Route::get('/', 'Backend\Theme\SlidersController@index')->name('admin.theme.sliders');
+    
+    Route::get('/getdata', 'Backend\Theme\SlidersController@getData')->name('admin.theme.sliders.getdata');
+    
+    Route::get('/create', 'Backend\Theme\SlidersController@form')->name('admin.theme.sliders.create');
+    
+    Route::get('/edit/{id}', 'Backend\Theme\SlidersController@form')->name('admin.theme.sliders.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\Theme\SlidersController@save')->name('admin.theme.sliders.save');
+    
+    Route::post('/remove', 'Backend\Theme\SlidersController@remove')->name('admin.theme.sliders.remove');
+});
+
 Route::group(['prefix' => 'theme/editor'], function () {
     Route::get('/', 'Backend\Theme\ThemeEditorController@index')->name('admin.theme.editor');
     

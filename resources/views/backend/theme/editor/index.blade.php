@@ -62,7 +62,7 @@
                     </div>--}}
                     <div class="te-top-bar__list">
                         <div class="te-top-bar__item te-top-bar__item--fill">
-                            <span class="te-theme-name"><a href="{{ route('vendor.admin.theme') }}" data-no-turbolink="true">‹‹ {{ trans('main.back_to') }} {{ trans('main.theme') }}</a></span>
+                            <span class="te-theme-name"><a href="{{ route('admin.theme.themes') }}" data-no-turbolink="true">‹‹ {{ trans('main.back_to') }} {{ trans('main.theme') }}</a></span>
                         </div>
                         <div class="te-top-bar__item te-status-indicator--live mobile-only">
                             Live
@@ -75,7 +75,7 @@
                         <div class="ui-stack-item ui-stack-item--fill">
                             <section class="next-card theme-editor__card">
                                 <ul class="theme-editor-action-list theme-editor-action-list--divided theme-editor-action-list--rounded">
-                                @foreach($theme_config as $index => $item)
+                                @foreach($config as $index => $item)
                                     <li title="{{ $item['name'] }}">
                                         <button class="btn theme-editor-action-list__item" data-bind-event-click="openSection({{ $index }})" type="button" name="button">
                                             <div class="ui-stack ui-stack--alignment-center ui-stack--spacing-none">
@@ -97,7 +97,7 @@
                     </div>
                 </div>
 
-                @foreach($theme_config as $index => $item)
+                @foreach($config as $index => $item)
                     @php
                     $options = json_decode($theme_option($item['code'], $shop_id), true);
                     @endphp
@@ -155,12 +155,12 @@
                                     @endif
                                 @if(isset($card['input_items']))
                                     @foreach($card['input_items'] as $iinput => $input)
-                                    @if(in_array($input['element'], ['input', 'textarea', 'media', 'slider', 'select_category', 'icon', 'select_news']))
+                                    @if(in_array($input['element'], ['input', 'textarea', 'media', 'slider', 'select_category']))
 
-                                            @include('vendor.admin.theme_editor.input_box')
+                                            @include('backend.theme.editor.input_box')
 
                                         @else
-                                            @include('vendor.admin.theme_editor.'. $input['element'] .'_box')
+                                            @include('backend.theme.editor.'. $input['element'] .'_box')
                                         @endif
 
                                     @endforeach
