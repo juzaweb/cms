@@ -96,16 +96,15 @@ class UsersController extends Controller
         $model->save();
         
         if ($request->hasFile('avatar')) {
-            $path_upload = \Storage::disk('uploads')->path('/avatar');
             $avatar = $request->file('avatar');
             $extention = $avatar->getClientOriginalExtension();
             $newname = $model->id . '.' . $extention;
-            $upload = $avatar->move($path_upload, $newname);
+            $upload = $avatar->storeAs('avatars', $newname, 'uploads');
             
             if ($upload) {
                 User::where('id', '=', $model->id)
                     ->update([
-                        'avatar' => 'avatar/' . $newname
+                        'avatar' => 'avatars/' . $newname
                     ]);
             }
         }

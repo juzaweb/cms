@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 class StreamController extends Controller
 {
     public function image($path) {
-        
         if (explode('/', $path)[0] !== 'files') {
             $path = \Storage::disk('uploads')->path($path);
             if (file_exists($path)) {
