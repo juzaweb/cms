@@ -198,24 +198,6 @@
             </a>
 
             <div class="dropdown-divider"></div>
-            <div class="dropdown-header">
-                Home
-            </div>
-
-            <a class="dropdown-item" href="javascript:void(0)">
-                <i class="dropdown-icon fe fe-chevron-right"></i>
-                System Dashboard
-            </a>
-            <a class="dropdown-item" href="javascript:void(0)">
-                <i class="dropdown-icon fe fe-chevron-right"></i>
-                User Boards
-            </a>
-            <a class="dropdown-item" href="javascript:void(0)">
-                <i class="dropdown-icon fe fe-chevron-right"></i>
-                Issue Navigator
-                <span class="badge badge-success font-size-11 ml-2">25 New</span>
-            </a>
-            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="javascript:void(0)">
                 <i class="dropdown-icon fe fe-log-out"></i> Logout
             </a>

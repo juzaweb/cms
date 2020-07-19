@@ -9,7 +9,7 @@ class StreamController extends Controller
 {
     public function image($path) {
         
-        if (in_array(explode('/', $path)[0], ['photos', 'thumbs'])) {
+        if (explode('/', $path)[0] !== 'files') {
             $path = \Storage::disk('uploads')->path($path);
             if (file_exists($path)) {
                 return response()->file($path);

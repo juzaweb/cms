@@ -74,11 +74,7 @@ class User extends Authenticatable
     
     public function getAvatar() {
         if ($this->avatar) {
-            $storage = \Storage::disk('public');
-            $path = $storage->path('avatar');
-            if (file_exists($path . '/'. $this->avatar)) {
-                return $storage->url('/avatar/' . $this->avatar);
-            }
+            return image_url($this->avatar);
         }
         
         return asset('images/thumb-default.png');

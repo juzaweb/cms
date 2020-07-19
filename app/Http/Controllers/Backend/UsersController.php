@@ -78,8 +78,6 @@ class UsersController extends Controller
         $model->fill($request->all());
         
         if (empty($model->id)) {
-            
-            
             $model->setAttribute('email', $request->post('email'));
         }
         
@@ -98,7 +96,7 @@ class UsersController extends Controller
         $model->save();
         
         if ($request->hasFile('avatar')) {
-            $path_upload = \Storage::disk('public')->path('/avatar');
+            $path_upload = \Storage::disk('uploads')->path('/avatar');
             $avatar = $request->file('avatar');
             $extention = $avatar->getClientOriginalExtension();
             $newname = $model->id . '.' . $extention;
@@ -106,7 +104,9 @@ class UsersController extends Controller
             
             if ($upload) {
                 User::where('id', '=', $model->id)
-                    ->update(['avatar' => $newname]);
+                    ->update([
+                        'avatar' => 'avatar/' . $newname
+                    ]);
             }
         }
         
