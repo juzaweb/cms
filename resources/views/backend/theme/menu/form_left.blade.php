@@ -27,7 +27,7 @@
                         <input type="hidden" name="type" value="genre">
 
                         <div class="form-group">
-                            <div class="show-categories">
+                            <div class="ul-show-items">
                                 <ul class="mt-2 p-0">
                                     @foreach($genres as $genre)
                                     <li class="m-1" id="item-genre-{{ $genre->id }}">
@@ -62,7 +62,7 @@
                         <input type="hidden" name="type" value="country">
 
                         <div class="form-group">
-                            <div class="show-countries">
+                            <div class="ul-show-items">
                                 <ul class="mt-2 p-0">
                                     @foreach($countries as $country)
                                         <li class="m-1" id="item-country-{{ $country->id }}">
@@ -97,7 +97,7 @@
                         <input type="hidden" name="type" value="type">
 
                         <div class="form-group">
-                            <div class="show-countries">
+                            <div class="ul-show-items">
                                 <ul class="mt-2 p-0">
                                     @foreach($types as $type)
                                         <li class="m-1" id="item-type-{{ $type->id }}">
@@ -109,6 +109,71 @@
                                     @endforeach
                                 </ul>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="custom-switch">
+                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description"> {{ trans('app.open_new_tab') }}</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('app.add_to_menu') }}</button>
+                    </form>
+                </div>
+            </li>
+
+            <li class="acc_section">
+                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('app.other_pages') }}</h3></div>
+                <div class="acc_content">
+                    <form action="" method="post" class="add-menu-item">
+
+                        <input type="hidden" name="type" value="custom">
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="add-title">@lang('app.title')</label>
+                            <input type="text" name="title" id="add-title" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="add-url">@lang('app.pages')</label>
+                            <select name="url" id="add-url" class="form-control">
+                                <option value="">--- @lang('app.choose_page') ---</option>
+                                <option value="/">@lang('app.home')</option>
+                                <option value="/movies">@lang('app.movies')</option>
+                                <option value="/tv-series">@lang('app.tv_series')</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="custom-switch">
+                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description"> {{ trans('app.open_new_tab') }}</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('app.add_to_menu') }}</button>
+                    </form>
+                </div>
+            </li>
+
+            <li class="acc_section">
+                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('app.custom_url') }}</h3></div>
+                <div class="acc_content">
+                    <form action="" method="post" class="add-menu-item">
+
+                        <input type="hidden" name="type" value="custom">
+
+                        <div class="form-group">
+                            <label class="col-form-label">@lang('app.title')</label>
+                            <input type="text" name="title" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label">@lang('app.url')</label>
+                            <input type="text" name="url" class="form-control" required>
                         </div>
 
                         <div class="form-group">

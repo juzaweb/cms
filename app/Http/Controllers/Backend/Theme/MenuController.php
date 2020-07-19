@@ -50,6 +50,7 @@ class MenuController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
+            'redirect' => route('admin.theme.menu.id', [$model->id]),
         ]);
     }
     
@@ -69,7 +70,7 @@ class MenuController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.theme.menu'),
+            'redirect' => route('admin.theme.menu.id', [$model->id]),
         ]);
     }
     

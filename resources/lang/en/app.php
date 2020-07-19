@@ -213,11 +213,14 @@ return [
   'add_menu' => 'Add menu',
   'add_to_menu' => 'Add to menu',
   'choose_menu' => 'Choose menu',
+  'choose_page' => 'Choose page',
   'open_new_tab' => 'Open new tab',
   'are_you_sure_you_want_to_delete_this_banner' => 'Are you sure you want to delete this banner?',
   'sliders' => 'Sliders',
   'link' => 'Link',
   'add_new_banner' => 'Add new banner',
   'change_photo' => 'Change photo',
+  'other_pages' => 'Other pages',
+  'custom_url' => 'Custom url',
 ];
 
