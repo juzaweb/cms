@@ -74,8 +74,13 @@ mix.styles([
 ], 'public/css/theme-editor.css');
 
 mix.combine([
-    'resources/styles/vendors/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js',
     'resources/styles/js/themeeditor.min.js',
+    'resources/styles/vendors/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js',
+    'resources/styles/vendors/select2/dist/js/select2.full.min.js',
+    'resources/vendor/laravel-filemanager/js/stand-alone-button.js',
+    'resources/styles/js/load-ajax.js',
+    'resources/styles/js/load-select2.js',
+    'resources/styles/js/form-ajax.js',
     'resources/styles/js/theme-editor.js',
 ], 'public/js/theme-editor.js');
 

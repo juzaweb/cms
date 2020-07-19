@@ -222,5 +222,10 @@ return [
   'change_photo' => 'Change photo',
   'other_pages' => 'Other pages',
   'custom_url' => 'Custom url',
+  'header' => 'Header',
+  'main_menu' => 'Main menu',
+  'home_page' => 'Home page',
+  'slider' => 'Slider',
+  'footer' => 'Footer',
 ];
 

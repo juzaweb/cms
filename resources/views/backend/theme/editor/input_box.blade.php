@@ -40,7 +40,7 @@ if (strpos($input['name'], '[')) {
     @case('media')
     <label class="next-label" for="input-{{ $index }}-{{ $icard }}-{{ $iinput }}">{{ $input['title'] }}</label>
     <div class="review">
-        <img src="{{ media_url($input_value) }}" alt="" id="review-{{ $index }}-{{ $icard }}-{{ $iinput }}">
+        <img src="{{ image_url($input_value) }}" alt="" id="review-{{ $index }}-{{ $icard }}-{{ $iinput }}">
     </div>
     
     <p><a href="javascript:void(0)" class="load-media" data-input="#input-{{ $index }}-{{ $icard }}-{{ $iinput }}" data-review="#review-{{ $index }}-{{ $icard }}-{{ $iinput }}"><i class="fa fa-edit"></i> {{ trans('main.change') }}</a></p>
@@ -60,12 +60,12 @@ if (strpos($input['name'], '[')) {
         </select>
     @break
 
-    @case('select_category')
+    @case('select_genre')
     <label class="next-label" for="input-{{ $index }}-{{ $icard }}-{{ $iinput }}">{{ $input['title'] }}</label>
     <select name="{{ $input_name }}" class="load-product-category">
         @if($input_value)
             @php
-                $category = \App\Models\Category::where('id', '=', $input_value)
+                $category = \App\Models\Genres::where('id', '=', $input_value)
                     ->first();
             @endphp
             <option value="{{ $input_value }}">{{ @$category->name }}</option>
@@ -76,19 +76,6 @@ if (strpos($input['name'], '[')) {
     @case('icon')
         <label class="next-label" for="input-{{ $index }}-{{ $icard }}-{{ $iinput }}">{{ @$input['title'] }}</label>
         <input type="text" name="{{ $input_name }}" class="next-input select-icon" value="{{ @$input_value }}">
-    @break
-
-    @case('select_news')
-        <label class="next-label" for="input-{{ $index }}-{{ $icard }}-{{ $iinput }}">{{ $input['title'] }}</label>
-        <select name="{{ $input_name }}" class="load-post">
-            @if($input_value)
-                @php
-                    $category = \App\Models\Post::where('id', '=', $input_value)
-                        ->first();
-                @endphp
-                <option value="{{ $input_value }}">{{ @$category->title }}</option>
-            @endif
-        </select>
     @break
 
     @endswitch

@@ -1,5 +1,10 @@
 <?php
 
+use App\Models\Genres;
+use App\Models\Menu;
+use App\Models\ThemeConfigs;
+use App\Models\Types;
+
 function json_message($message, $status = 'success') {
     header('Content-Type: application/json');
     echo json_encode(['status' => $status, 'message' => $message]);
@@ -137,4 +142,24 @@ function full_text_wildcards($term) {
     $searchTerm = implode(' ', $words);
     
     return $searchTerm;
+}
+
+function theme_config($code) {
+    return ThemeConfigs::where('code', '=', $code)
+        ->first();
+}
+
+function menu_info($id) {
+    return Menu::where('id', '=', $id)
+        ->first();
+}
+
+function genre_info($id) {
+    return Genres::where('id', '=', $id)
+        ->first();
+}
+
+function type_info($id) {
+    return Types::where('id', '=', $id)
+        ->first();
 }

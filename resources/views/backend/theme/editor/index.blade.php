@@ -4,8 +4,8 @@
     <link rel="shortcut icon" href="{{ asset('styles/images/brand/favicon.ico') }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{{ trans('main.customize_theme') }}</title>
-    <meta name="description" content="{{ trans('main.customize_theme') }}">
+    <title>{{ trans('app.customize_theme') }}</title>
+    <meta name="description" content="{{ trans('app.customize_theme') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
@@ -15,7 +15,8 @@
     <script src="{{ asset('styles/js/respond.min.js') }}"></script>
     <![endif]-->
 
-    <script src="{{ asset('css/theme-editor.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/theme-editor.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ajaxStart(function () {
@@ -54,7 +55,7 @@
         <section class="theme-editor__index" component="UI.PanelContainer">
                 <header class="te-top-bar">
                     {{--<div class="te-top-bar__branding">
-                        <a title="{{ trans('main.theme') }}" aria_label="{{ trans('main.theme') }}" class="te-brand-link" data-no-turbolink="true" href="{{ route('vendor.admin.menu') }}">
+                        <a title="{{ trans('app.theme') }}" aria_label="{{ trans('app.theme') }}" class="te-brand-link" data-no-turbolink="true" href="{{ route('vendor.admin.menu') }}">
                             <span class="te-brand-logo" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 42">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-sapo"></use>
                             </span>
@@ -62,7 +63,7 @@
                     </div>--}}
                     <div class="te-top-bar__list">
                         <div class="te-top-bar__item te-top-bar__item--fill">
-                            <span class="te-theme-name"><a href="{{ route('admin.theme.themes') }}" data-no-turbolink="true">‹‹ {{ trans('main.back_to') }} {{ trans('main.theme') }}</a></span>
+                            <span class="te-theme-name"><a href="{{ route('admin.theme.themes') }}" data-no-turbolink="true">‹‹ {{ trans('app.back_to') }} {{ trans('app.theme') }}</a></span>
                         </div>
                         <div class="te-top-bar__item te-status-indicator--live mobile-only">
                             Live
@@ -99,7 +100,7 @@
 
                 @foreach($config as $index => $item)
                     @php
-                    $options = json_decode($theme_option($item['code'], $shop_id), true);
+                    $options = json_decode(theme_config($item['code']), true);
                     @endphp
                 <div class="theme-editor__panel" id="panel-{{ $index }}" tabindex="-1">
                     <header class="te-panel__header">
@@ -113,8 +114,8 @@
                     </header>
 
                     <div class="theme-editor__panel-body" data-scrollable>
-                        <form action="{{ route('vendor.admin.theme_editor.save') }}" method="post" class="form-ajax" data-success="save_success">
-                            <button class="btn btn-save-top" type="submit">{{ trans('main.save') }}</button>
+                        <form action="{{ route('admin.theme.editor.save') }}" method="post" class="form-ajax" data-success="save_success">
+                            <button class="btn btn-save-top" type="submit">{{ trans('app.save') }}</button>
 
                             <input type="hidden" name="code" value="{{ $item['code'] }}">
 
@@ -127,7 +128,7 @@
                             <section class="next-card__section">
 
                                 <header class="next-card__header theme-setting theme-setting--header">
-                                    <h3 class="ui-subheading">{{ $card['name'] }} <a href="javascript:void(0)" class="show-card-body"><i class="fa fa-eye"></i> {{ trans('main.show') }}</a></h3>
+                                    <h3 class="ui-subheading">{{ $card['name'] }} <a href="javascript:void(0)" class="show-card-body"><i class="fa fa-eye"></i> {{ trans('app.show') }}</a></h3>
                                 </header>
 
                                 <div class="card-body">
@@ -139,7 +140,7 @@
                                             <div class="next-input-wrapper">
                                                 <div class="checkbox" id="setting-checkbox-favicon_enable">
                                                     <label class="next-label next-label--switch">
-                                                        {{ trans('main.enable') }}
+                                                        {{ trans('app.enable') }}
                                                     </label>
                                                     <input type="checkbox" class="next-checkbox check-status" {{ (isset($option_card['status']) && (int) $option_card['status'] == 1) ? 'checked' : '' }}>
                                                     <input type="hidden" name="{{ $card['code'] }}[status]" class="check-status-hide" value="{{ isset($option_card['status']) ? (int) $option_card['status'] : 0 }}">
@@ -173,7 +174,7 @@
                         @endforeach
                         @endif
 
-                            <button class="btn btn--full-width" type="submit">{{ trans('main.save') }}</button>
+                            <button class="btn btn--full-width" type="submit">{{ trans('app.save') }}</button>
                         </form>
                     </div>
                 </div>
@@ -238,7 +239,7 @@
             </div>
         </header>
         <label class="helper--visually-hidden" for="theme-editor__iframe-wrapper" id="theme-editor__iframe-label">
-            <h1>{{ trans('main.preview') }}</h1>
+            <h1>{{ trans('app.preview') }}</h1>
             <p>
                 Press Enter to navigate. Click Escape to return to the Edit page.
             </p>
@@ -247,7 +248,7 @@
              data-bind-class=""
              tabindex="0"
              aria-labelledby="theme-editor__iframe-label" data-preview-window="desktop">
-            <iframe id="theme-editor-iframe" class="theme-editor__iframe" scrolling="yes" sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-modals" tabindex="-1" src="{{ \App\Models\Shop::getShopSubDomain() }}">
+            <iframe id="theme-editor-iframe" class="theme-editor__iframe" scrolling="yes" sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-modals" tabindex="-1" src="{{ route('home') }}">
             </iframe>
         </div>
     </section>
@@ -334,18 +335,6 @@
 
 <div>
     <div class="section-footer">
-        <script type="text/javascript">
-            $('.select-icon').iconpicker({
-                icons: [
-                    @foreach($fa_icons as $fa_icon)
-                    {
-                        title: "fa {{ $fa_icon }}",
-                        searchTerms: ['{{ str_replace('fa-', '', $fa_icon) }}']
-                    },
-                    @endforeach
-                ],
-            });
-        </script>
 
         <script type="text/javascript">
             $(document).ready(function () {
