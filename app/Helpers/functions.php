@@ -38,10 +38,11 @@ function image_url($path) {
     }
     
     if ($path) {
-        $storage_path = Storage::disk('uploads')->path('/');
+        $file_path = Storage::disk('uploads')->path($path);
+        $file_url = Storage::disk('uploads')->url($path);
         
-        if (file_exists($storage_path . '/' . $path)) {
-            return '/storage/uploads/' . $path;
+        if (file_exists($file_path)) {
+            return $file_url;
         }
     }
     
