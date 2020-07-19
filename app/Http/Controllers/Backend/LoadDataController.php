@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sliders;
 use Illuminate\Http\Request;
 use App\Models\Countries;
 use App\Models\Genres;
@@ -281,6 +282,35 @@ class LoadDataController extends Controller
         $explodes = $request->get('explodes');
         
         $query = Menu::query();
+        $query->select([
+            'id',
+            'name AS text'
+        ]);
+        
+        if ($search) {
+            $query->where(function ($sub) use ($search) {
+                $sub->orWhere('name', 'like', '%'. $search .'%');
+            });
+        }
+        
+        if ($explodes) {
+            $query->whereNotIn('id', $explodes);
+        }
+        
+        $paginate = $query->paginate(10);
+        $data['results'] = $query->get();
+        if ($paginate->nextPageUrl()) {
+            $data['pagination'] = ['more' => true];
+        }
+        
+        return response()->json($data);
+    }
+    
+    protected function loadSliders(Request $request) {
+        $search = $request->get('search');
+        $explodes = $request->get('explodes');
+        
+        $query = Sliders::query();
         $query->select([
             'id',
             'name AS text'

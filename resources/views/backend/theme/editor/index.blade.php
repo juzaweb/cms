@@ -8,7 +8,22 @@
     <meta name="description" content="{{ trans('app.customize_theme') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-
+    <script type="text/javascript">
+        var langs = {
+            'are_you_sure_delete_items': '@lang('app.are_you_sure_delete_items')',
+            'yes': '@lang('app.yes')',
+            'cancel': '@lang('app.cancel')',
+            'data_error': '@lang('app.data_error')',
+            'enabled': '@lang('app.enabled')',
+            'disabled': '@lang('app.disabled')',
+            'edit': '@lang('app.edit')',
+            'translate': '@lang('app.translate')',
+            'preview': '@lang('app.preview')',
+            'upload': '@lang('app.upload')',
+            'show': '@lang('app.show')',
+            'hide': '@lang('app.hide')',
+        }
+    </script>
     <link rel="stylesheet" href="{{ asset('css/theme-editor.css') }}">
     <!--[if lt IE 9]>
     <script src="{{ asset('styles/js/html5shiv.min.js') }}"></script>
@@ -63,7 +78,7 @@
                     </div>--}}
                     <div class="te-top-bar__list">
                         <div class="te-top-bar__item te-top-bar__item--fill">
-                            <span class="te-theme-name"><a href="{{ route('admin.theme.themes') }}" data-no-turbolink="true">‹‹ {{ trans('app.back_to') }} {{ trans('app.theme') }}</a></span>
+                            <span class="te-theme-name"><a href="{{ route('admin.theme.themes') }}" data-no-turbolink="true" data-turbolinks="false">‹‹ {{ trans('app.back_to_theme') }}</a></span>
                         </div>
                         <div class="te-top-bar__item te-status-indicator--live mobile-only">
                             Live
@@ -71,114 +86,8 @@
                     </div>
                 </header>
 
-                <div class="theme-editor__panel-body">
-                    <div class="ui-stack ui-stack--vertical next-tab__panel--grow">
-                        <div class="ui-stack-item ui-stack-item--fill">
-                            <section class="next-card theme-editor__card">
-                                <ul class="theme-editor-action-list theme-editor-action-list--divided theme-editor-action-list--rounded">
-                                @foreach($config as $index => $item)
-                                    <li title="{{ $item['name'] }}">
-                                        <button class="btn theme-editor-action-list__item" data-bind-event-click="openSection({{ $index }})" type="button" name="button">
-                                            <div class="ui-stack ui-stack--alignment-center ui-stack--spacing-none">
-                                                <div class="ui-stack-item stacked-menu__item-icon stacked-menu__item-icon--small">
-                                                    <div class="theme-editor__icon">
-                                                        <svg class="next-icon next-icon--color-slate-lighter next-icon--size-24"> <use xlink:href="#settings" /> </svg>
-                                                    </div>
-                                                </div>
-                                                <div class="ui-stack-item ui-stack-item--fill stacked-menu__item-text">
-                                                    {{ $item['name'] }}
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </li>
-                                @endforeach
-                                </ul>
-                            </section>
-                        </div>
-                    </div>
-                </div>
+                @include('backend.theme.editor.config_option')
 
-                @foreach($config as $index => $item)
-                    @php
-                    $options = json_decode(theme_config($item['code']), true);
-                    @endphp
-                <div class="theme-editor__panel" id="panel-{{ $index }}" tabindex="-1">
-                    <header class="te-panel__header">
-                        <button class="ui-button btn--plain te-panel__header-action" data-bind-event-click="closeSection()" data-trekkie-id="close-panel" aria-label="Back to theme settings" type="button" name="button">
-                            <svg class="next-icon next-icon--size-20 next-icon--rotate-180 te-panel__header-action-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-chevron"></use>
-                            </svg>
-                        </button>
-                        <h2 class="ui-heading theme-editor__heading">{{ $item['name'] }}</h2>
-
-                    </header>
-
-                    <div class="theme-editor__panel-body" data-scrollable>
-                        <form action="{{ route('admin.theme.editor.save') }}" method="post" class="form-ajax" data-success="save_success">
-                            <button class="btn btn-save-top" type="submit">{{ trans('app.save') }}</button>
-
-                            <input type="hidden" name="code" value="{{ $item['code'] }}">
-
-                        @if(isset($item['cards']))
-                        @foreach($item['cards'] as $icard => $card)
-                            @php
-                                $option_card = @$options[$card['code']];
-                            @endphp
-                        <section class="next-card theme-editor__card card-{{ $index }}-{{ $icard }}">
-                            <section class="next-card__section">
-
-                                <header class="next-card__header theme-setting theme-setting--header">
-                                    <h3 class="ui-subheading">{{ $card['name'] }} <a href="javascript:void(0)" class="show-card-body"><i class="fa fa-eye"></i> {{ trans('app.show') }}</a></h3>
-                                </header>
-
-                                <div class="card-body">
-                                    <input type="hidden" name="{{ $card['code'] }}[code]" value="{{ $card['code'] }}">
-
-                                    @if(isset($card['status']))
-
-                                        <div class="theme-setting theme-setting--text editor-item">
-                                            <div class="next-input-wrapper">
-                                                <div class="checkbox" id="setting-checkbox-favicon_enable">
-                                                    <label class="next-label next-label--switch">
-                                                        {{ trans('app.enable') }}
-                                                    </label>
-                                                    <input type="checkbox" class="next-checkbox check-status" {{ (isset($option_card['status']) && (int) $option_card['status'] == 1) ? 'checked' : '' }}>
-                                                    <input type="hidden" name="{{ $card['code'] }}[status]" class="check-status-hide" value="{{ isset($option_card['status']) ? (int) $option_card['status'] : 0 }}">
-                                                    <span class="next-checkbox--styled">
-                                                        <svg class="next-icon next-icon--size-10 checkmark">
-                                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use>
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    @endif
-                                @if(isset($card['input_items']))
-                                    @foreach($card['input_items'] as $iinput => $input)
-                                    @if(in_array($input['element'], ['input', 'textarea', 'media', 'slider', 'select_category']))
-
-                                            @include('backend.theme.editor.input_box')
-
-                                        @else
-                                            @include('backend.theme.editor.'. $input['element'] .'_box')
-                                        @endif
-
-                                    @endforeach
-                                @endif
-
-
-                                </div>
-                            </section>
-                        </section>
-                        @endforeach
-                        @endif
-
-                            <button class="btn btn--full-width" type="submit">{{ trans('app.save') }}</button>
-                        </form>
-                    </div>
-                </div>
-                @endforeach
             </section>
     </div>
     <style>
@@ -200,58 +109,7 @@
         }
     </style>
 
-    <section class="theme-editor__preview te-preview__container" component="UI.Preview">
-        <header class="te-context-bar">
-            <div class="te-top-bar__branding desktop-only hide" bind-show="">
-                <a title="Navigate to themes" aria_label="Navigate to themes" class="te-brand-link" data-no-turbolink="true" href="/admin/themes">
-                    <svg class="ui-inline-svg te-brand-logo" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 42">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-sapo"></use>
-                    </svg>
-                </a>
-            </div>
-            <div class="te-top-bar__list te-preview-context-bar__inner" data-bind-class="">
-                <div class="te-top-bar__item te-top-bar__item--fill te-top-bar__item--bleed">
-                    <ul class="segmented te-top-bar__button te-viewport-selector desktop-only">
-                        <li>
-                            <button class="ui-button ui-button--transparent ui-button--icon-only" bind-event-click="changeThemePreviewMode(this)"
-                                    data-bind-class="{'is-selected': viewportSize == 'mobile'}" data-preview="mobile" data-trekkie-id="mobile" aria-label="Small screen" type="button" name="button">
-                                <svg class="next-icon next-icon--size-16 next-icon--flip-horizontal">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#phone"></use>
-                                </svg>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="ui-button ui-button--transparent ui-button--icon-only is-selected" bind-event-click="changeThemePreviewMode(this)"
-                                    data-bind-class="{'is-selected': viewportSize == 'desktop'}" data-preview="desktop" data-trekkie-id="desktop" aria-label="Large screen" type="button" name="button">
-                                <svg class="next-icon next-icon--size-16">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#desktop"></use>
-                                </svg>
-                            </button>
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="te-top-bar__item te-status-indicator--live desktop-only">
-                    Live
-                </div>
-
-
-            </div>
-        </header>
-        <label class="helper--visually-hidden" for="theme-editor__iframe-wrapper" id="theme-editor__iframe-label">
-            <h1>{{ trans('app.preview') }}</h1>
-            <p>
-                Press Enter to navigate. Click Escape to return to the Edit page.
-            </p>
-        </label>
-        <div class="theme-editor__iframe-wrapper"
-             data-bind-class=""
-             tabindex="0"
-             aria-labelledby="theme-editor__iframe-label" data-preview-window="desktop">
-            <iframe id="theme-editor-iframe" class="theme-editor__iframe" scrolling="yes" sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-modals" tabindex="-1" src="{{ route('home') }}">
-            </iframe>
-        </div>
-    </section>
+    @include('backend.theme.editor.preview_page')
 
     <div class="theme-editor__spinner" component="UI.Spinner">
         <div class="next-spinner">

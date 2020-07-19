@@ -227,5 +227,11 @@ return [
   'home_page' => 'Home page',
   'slider' => 'Slider',
   'footer' => 'Footer',
+  'column' => 'Column',
+  'change' => 'Change',
+  'hide' => 'Hide',
+  'movie_list' => 'Movie list',
+  'customize_theme' => 'Customize theme',
+  'back_to_theme' => 'Back to Theme',
 ];
 

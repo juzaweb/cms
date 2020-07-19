@@ -46,64 +46,31 @@ return [
                 ]
             ],
             [
-                'code' => 'product_list2',
+                'code' => 'slider_movies',
+                'name' => trans('app.slider') . ' ' . trans('app.movies'),
                 'status' => true,
-                'name' => trans('app.product_list') . ' 2',
+                'input_items' => [
+                
+                ]
+            ],
+            [
+                'code' => 'category1',
+                'status' => true,
+                'name' => trans('app.movie_list') . ' 1',
                 'input_items' => [
                     [
                         'element' => 'category',
-                        'title' => trans('app.product_list'),
+                        'title' => trans('app.movie_list'),
                         'name' => 'category',
                     ]
                 ]
             ],
-            [
-                'code' => 'product_list3',
-                'status' => true,
-                'name' => trans('app.product_list') . ' 3',
-                'input_items' => [
-                    [
-                        'element' => 'category',
-                        'title' => trans('app.product_list'),
-                        'name' => 'category',
-                    ]
-                ]
-            ],
-            [
-                'code' => 'product_list4',
-                'status' => true,
-                'name' => trans('app.product_list') . ' 4',
-                'input_items' => [
-                    [
-                        'element' => 'category',
-                        'title' => trans('app.product_list'),
-                        'name' => 'category',
-                    ]
-                ]
-            ],
-            [
-                'code' => 'feature_products',
-                'status' => true,
-                'name' => trans('app.feature_products'),
-                'input_items' => [
-                    [
-                        'element' => 'category',
-                        'title' => trans('app.feature_products'),
-                        'name' => 'category',
-                    ],
-                ]
-            ]
         ]
     ],
     [
         'code' => 'footer',
         'name' => trans('app.footer'),
         'cards' => [
-            [
-                'code' => 'social',
-                'name' => trans('app.social'),
-                'status' => true,
-            ],
             [
                 'code' => 'column1',
                 'name' => trans('app.column') . ' 1',
@@ -174,18 +141,6 @@ return [
                         'element' => 'menu',
                         'title' => trans('app.menu'),
                         'name' => 'menu',
-                    ]
-                ]
-            ],
-            [
-                'code' => 'column5',
-                'name' => trans('app.column') . ' 5',
-                'input_items' => [
-                    [
-                        'element' => 'input',
-                        'title' => trans('app.title'),
-                        'type' => 'text',
-                        'name' => 'title',
                     ]
                 ]
             ]

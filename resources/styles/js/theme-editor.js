@@ -1,4 +1,6 @@
-$(document).ready(function () {
+$(document).on("turbolinks:load", function() {
+    $('.load-media').filemanager('image', {prefix: '/admin-cp/filemanager'});
+
     $("#theme-editor-sidebar").on('click', '.add-card-item', function () {
         let item = $(this);
         let card = item.closest('.theme-editor__card');
@@ -20,11 +22,11 @@ $(document).ready(function () {
         let body = $(this).closest('.theme-editor__card').find('.card-body');
         if (body.is(':hidden')) {
             body.show('slow');
-            $(this).html('<i class="fa fa-eye-slash"></i> '+ lang.hide);
+            $(this).html('<i class="fa fa-eye-slash"></i> '+ langs.hide);
         }
         else {
             body.hide('slow');
-            $(this).html('<i class="fa fa-eye"></i> '+ lang.show);
+            $(this).html('<i class="fa fa-eye"></i> '+ langs.show);
         }
     });
 
@@ -48,31 +50,6 @@ $(document).ready(function () {
 
     $(".form-product-list").on('change', '.select-ctype', function () {
         let ctype = $(this).val();
-        if (ctype == 1) {
-            $(this).closest('.form-product-list').find('.form-box-type').hide('slow');
-            $(this).closest('.form-product-list').find('.form-box-type select').prop('disabled', true);
-            $(this).closest('.form-product-list').find('.form-box-vendor').hide('slow');
-            $(this).closest('.form-product-list').find('.form-box-vendor select').prop('disabled', true);
-            $(this).closest('.form-product-list').find('.form-box-category').show('slow');
-            $(this).closest('.form-product-list').find('.form-box-category select').prop('disabled', false);
-        }
 
-        if (ctype == 2) {
-            $(this).closest('.form-product-list').find('.form-box-category').hide('slow');
-            $(this).closest('.form-product-list').find('.form-box-category select').prop('disabled', true);
-            $(this).closest('.form-product-list').find('.form-box-vendor').hide('slow');
-            $(this).closest('.form-product-list').find('.form-box-vendor select').prop('disabled', true);
-            $(this).closest('.form-product-list').find('.form-box-type').show('slow');
-            $(this).closest('.form-product-list').find('.form-box-type select').prop('disabled', false);
-        }
-
-        if (ctype == 3) {
-            $(this).closest('.form-product-list').find('.form-box-category').hide('slow');
-            $(this).closest('.form-product-list').find('.form-box-category select').prop('disabled', true);
-            $(this).closest('.form-product-list').find('.form-box-type').hide('slow');
-            $(this).closest('.form-product-list').find('.form-box-type select').prop('disabled', true);
-            $(this).closest('.form-product-list').find('.form-box-vendor').show('slow');
-            $(this).closest('.form-product-list').find('.form-box-vendor select').prop('disabled', false);
-        }
     });
 });

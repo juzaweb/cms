@@ -70,6 +70,7 @@ mix.styles([
 mix.styles([
     'resources/styles/vendors/font-awesome/css/font-awesome.min.css',
     'resources/styles/vendors/select2/dist/css/select2.min.css',
+    'resources/styles/vendors/toastr/toastr.min.css',
     'resources/styles/css/themeeditor-main.min.css',
 ], 'public/css/theme-editor.css');
 
@@ -77,6 +78,7 @@ mix.combine([
     'resources/styles/js/themeeditor.min.js',
     'resources/styles/vendors/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js',
     'resources/styles/vendors/select2/dist/js/select2.full.min.js',
+    'resources/styles/vendors/toastr/toastr.min.js',
     'resources/vendor/laravel-filemanager/js/stand-alone-button.js',
     'resources/styles/js/load-ajax.js',
     'resources/styles/js/load-select2.js',
