@@ -233,5 +233,6 @@ return [
   'movie_list' => 'Movie list',
   'customize_theme' => 'Customize theme',
   'back_to_theme' => 'Back to Theme',
+  'logout' => 'Logout',
 ];
 

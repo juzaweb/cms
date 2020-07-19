@@ -198,8 +198,8 @@
             </a>
 
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="javascript:void(0)">
-                <i class="dropdown-icon fe fe-log-out"></i> Logout
+            <a href="{{ route('logout') }}" class="dropdown-item">
+                <i class="dropdown-icon fe fe-log-out"></i> @lang('app.logout')
             </a>
         </div>
     </div>

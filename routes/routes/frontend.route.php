@@ -4,9 +4,11 @@ Route::get('/', 'Frontend\HomeController@index')->name('home');
 
 Route::get('/uploads/{path}', 'Frontend\StreamController@image')->name('uploads')->where('path', '(.*)');
 
-Route::get('/login', 'Frontend\LoginController@index')->name('login');
+Route::get('/login', 'Frontend\Auth\LoginController@index')->name('login');
 
-Route::get('/register', 'Frontend\RegisterController@index')->name('register');
+Route::get('/logout', 'Frontend\Auth\LoginController@logout')->name('logout');
+
+Route::get('/register', 'Frontend\Auth\RegisterController@index')->name('register');
 
 Route::get('/search', 'Frontend\SearchController@search')->name('search');
 
