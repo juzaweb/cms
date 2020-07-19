@@ -90,15 +90,15 @@
 
     function status_formatter(value, row, index) {
         if (value == 1) {
-            return '<span class="text-success">@lang('app.enabled')</span>';
+            return '<span class="text-success">'+ langs.enabled +'</span>';
         }
-        return '<span class="text-danger">@lang('app.disabled')</span>';
+        return '<span class="text-danger">'+ langs.disabled +'</span>';
     }
 
     function options_formatter(value, row, index) {
         let result = '';
-        result += '<a href="" target="_blank" class="btn btn-success btn-sm mr-1" data-turbolinks="false"><i class="fa fa-eye"></i> @lang('app.preview')</a>';
-        result += '<a href="'+ row.upload_url +'" class="btn btn-success btn-sm"><i class="fa fa-upload"></i> @lang('app.upload')</a>';
+        result += '<a href="'+ row.preview_url +'" target="_blank" class="btn btn-success btn-sm mr-1" data-turbolinks="false"><i class="fa fa-eye"></i> '+ langs.preview +'</a>';
+        result += '<a href="'+ row.upload_url +'" class="btn btn-success btn-sm"><i class="fa fa-upload"></i> '+ langs.upload +'</a>';
         return result;
     }
 

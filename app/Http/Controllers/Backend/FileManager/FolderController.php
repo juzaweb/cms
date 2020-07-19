@@ -1,6 +1,6 @@
 <?php
 
-namespace UniSharp\LaravelFilemanager\Controllers;
+namespace App\Http\Controllers\Backend\Filemanager;
 
 class FolderController extends LfmController
 {
@@ -14,7 +14,7 @@ class FolderController extends LfmController
         $folder_types = array_filter(['user', 'share'], function ($type) {
             return $this->helper->allowFolderType($type);
         });
-
+        
         return view('laravel-filemanager::tree')
             ->with([
                 'root_folders' => array_map(function ($type) use ($folder_types) {

@@ -1,11 +1,8 @@
 <?php
 
-namespace UniSharp\LaravelFilemanager\Controllers;
+namespace App\Http\Controllers\Backend\Filemanager;
 
 use Illuminate\Support\Facades\Log;
-use UniSharp\LaravelFilemanager\Events\ImageIsUploading;
-use UniSharp\LaravelFilemanager\Events\ImageWasUploaded;
-use UniSharp\LaravelFilemanager\Lfm;
 
 class UploadController extends LfmController
 {
@@ -16,13 +13,7 @@ class UploadController extends LfmController
         parent::__construct();
         $this->errors = [];
     }
-
-    /**
-     * Upload files
-     *
-     * @param void
-     * @return string
-     */
+    
     public function upload()
     {
         $uploaded_files = request()->file('upload');
@@ -47,10 +38,10 @@ class UploadController extends LfmController
         } else { // upload via ckeditor5 expects json responses
             if (is_null($new_filename)) {
                 $response = ['error' =>
-                                [
-                                    'message' =>  $error_bag[0]
-                                ]
-                            ];
+                    [
+                        'message' =>  $error_bag[0]
+                    ]
+                ];
             } else {
                 $url = $this->lfm->setName($new_filename)->url();
 

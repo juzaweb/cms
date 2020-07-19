@@ -1,7 +1,8 @@
 <?php
 
-namespace UniSharp\LaravelFilemanager\Controllers;
+namespace App\Http\Controllers\Backend\Filemanager;
 
+use App\Http\Controllers\Controller;
 use UniSharp\LaravelFilemanager\Lfm;
 use UniSharp\LaravelFilemanager\LfmPath;
 

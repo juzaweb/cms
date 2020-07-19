@@ -1,6 +1,6 @@
 <?php
 
-namespace UniSharp\LaravelFilemanager\Controllers;
+namespace App\Http\Controllers\Backend\Filemanager;
 
 use UniSharp\LaravelFilemanager\Events\ImageIsDeleting;
 use UniSharp\LaravelFilemanager\Events\ImageWasDeleted;

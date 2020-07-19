@@ -16,7 +16,7 @@
   <link rel="shortcut icon" type="image/png" href="{{ asset('vendor/laravel-filemanager/img/72px color.png') }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css">
   <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/cropper.min.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/dropzone.min.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/mime-icons.min.css') }}">
@@ -82,7 +82,7 @@
 
       <nav aria-label="breadcrumb" class="d-none d-lg-block" id="breadcrumbs">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item invisible">Home</li>
+          <li class="breadcrumb-item invisible">@lang('app.home')</li>
         </ol>
       </nav>
 
@@ -115,7 +115,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aia-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('unisharp.lfm.upload') }}" role='form' id='uploadForm' name='uploadForm' method='post' enctype='multipart/form-data' class="dropzone">
+          <form action="{{ route('backend.lfm.upload') }}" role='form' id='uploadForm' name='uploadForm' method='post' enctype='multipart/form-data' class="dropzone">
             <div class="form-group" id="attachment">
               <div class="controls text-center">
                 <div class="input-group w-100">
@@ -125,7 +125,7 @@
             </div>
             <input type='hidden' name='working_dir' id='working_dir'>
             <input type='hidden' name='type' id='type' value='{{ request("type") }}'>
-            <input type='hidden' name='_token' value='{{csrf_token()}}'>
+            <input type='hidden' name='_token' value='{{ csrf_token() }}'>
           </form>
         </div>
         <div class="modal-footer">

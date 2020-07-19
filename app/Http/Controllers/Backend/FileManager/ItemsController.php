@@ -1,7 +1,8 @@
 <?php
 
-namespace UniSharp\LaravelFilemanager\Controllers;
+namespace App\Http\Controllers\Backend\Filemanager;
 
+use App\Models\Folders;
 use UniSharp\LaravelFilemanager\Events\FileIsMoving;
 use UniSharp\LaravelFilemanager\Events\FileWasMoving;
 use UniSharp\LaravelFilemanager\Events\FolderIsMoving;
@@ -9,11 +10,6 @@ use UniSharp\LaravelFilemanager\Events\FolderWasMoving;
 
 class ItemsController extends LfmController
 {
-    /**
-     * Get the images to load for a selected folder.
-     *
-     * @return mixed
-     */
     public function getItems()
     {
         $currentPage = self::getCurrentPageFromRequest();
