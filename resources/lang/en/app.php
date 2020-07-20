@@ -234,5 +234,13 @@ return [
   'customize_theme' => 'Customize theme',
   'back_to_theme' => 'Back to Theme',
   'logout' => 'Logout',
+  'year' => 'Year',
+  'sort' => 'Sort',
+  'formats' => 'Formats',
+  'completed' => 'Completed',
+  'ongoing' => 'Ongoing',
+  'latest' => 'Latest',
+  'top_views' => 'Top views',
+  'new_update' => 'New update',
+  'filter' => 'Filter',
 ];
-

@@ -116,18 +116,18 @@ mix.combine([
 ], 'public/js/backend.js');
 
 mix.styles([
-    'resources/styles/frontend/assets/css/bootstrap.min.css',
-    'resources/styles/frontend/style.css',
-    'resources/styles/frontend/assets/css/style.css',
+    'resources/views/themes/mymo/styles/assets/css/bootstrap.min.css',
+    'resources/views/themes/mymo/styles/style.css',
+    'resources/views/themes/mymo/styles/assets/css/style.css',
 ], 'public/styles/themes/mymo/css/main.css');
 
 mix.combine([
     'resources/styles/vendors/jquery/dist/jquery.min.js',
-    'resources/styles/frontend/assets/js/bootstrap.min.js',
-    'resources/styles/frontend/assets/js/core.min.js',
-    'resources/styles/frontend/assets/js/lazysizes.min.js',
-    'resources/styles/frontend/assets/js/owl.carousel.min.js',
-    'resources/styles/frontend/assets/js/ajax-auth-script.min.js',
-    'resources/styles/frontend/player/assets/js/jwplayer-8.9.3.js',
-    'resources/styles/frontend/player/assets/js/player.min.js',
+    'resources/views/themes/mymo/styles/assets/js/bootstrap.min.js',
+    'resources/views/themes/mymo/styles/assets/js/core.min.js',
+    'resources/views/themes/mymo/styles/assets/js/lazysizes.min.js',
+    'resources/views/themes/mymo/styles/assets/js/owl.carousel.min.js',
+    'resources/views/themes/mymo/styles/assets/js/ajax-auth-script.min.js',
+    'resources/views/themes/mymo/styles/player/assets/js/jwplayer-8.9.3.js',
+    'resources/views/themes/mymo/styles/player/assets/js/player.min.js',
 ],'public/styles/themes/mymo/js/main.js');

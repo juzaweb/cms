@@ -24,9 +24,8 @@
                  data-placement="top"
                  data-trigger="hover"
                  title="<span class=film-title>{{ $item->name }}</span>"
-                 data-content="<div class=org-title>{{ $item->other_name }} ({{ $item->getReleaseYear() }})</div>                            <div class=film-meta>
-                                <div class=text-center>
-                                    <span class=released><i class=hl-calendar></i> {{ $item->getReleaseYear() }}</span>                                   </div>
+                 data-content="<div class=org-title>{{ $item->other_name }} ({{ $item->year }})</div>                            <div class=film-meta>
+                                
                                 <div class=film-content>{{ $item->short_description }}</div>
                                 <p class=category>@lang('app.countries'): {{ $country_str }}</p>                                <p class=category>@lang('app.genres'): {{ $genre_str }}</p>
                             </div>">
@@ -34,7 +33,7 @@
 
             <div class="halim-post-title-box">
                 <div class="halim-post-title ">
-                    <h2 class="entry-title">{{ $item->name }}</h2><p class="original_title">{{ $item->other_name }} ({{ $item->getReleaseYear() }})</p>
+                    <h2 class="entry-title">{{ $item->name }}</h2><p class="original_title">{{ $item->other_name }} ({{ $item->year }})</p>
                 </div>
             </div>
         </a>

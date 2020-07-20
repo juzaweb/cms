@@ -107,7 +107,7 @@ class MoviesController extends Controller
             'genres' => 'required|array',
             'poster' => 'nullable|string|max:250',
             'rating' => 'nullable|string|max:25',
-            'release' => 'nullable|string|max:15',
+            'release' => 'nullable|date_format:Y-m-d',
             'runtime' => 'nullable|string|max:100',
             'video_quality' => 'nullable|string|max:100',
             'trailer_link' => 'nullable|string|max:100',
@@ -141,6 +141,11 @@ class MoviesController extends Controller
         $model->setAttribute('directors', implode(',', $directors));
         $model->setAttribute('writers', implode(',', $writers));
         $model->setAttribute('tags', implode(',', $tags));
+        
+        if ($model->release) {
+            $model->year = explode('-', $model->release)[0];
+        }
+        
         $model->save();
         
         return response()->json([

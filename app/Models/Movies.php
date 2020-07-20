@@ -25,8 +25,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $writers
  * @property string|null $rating
  * @property string|null $release
+ * @property int|null $year
  * @property string|null $countries
- * @property string|null $genres
+ * @property string $genres
+ * @property int|null $type_id
  * @property string|null $tags
  * @property string|null $runtime
  * @property string|null $video_quality
@@ -74,14 +76,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereThumbnail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTrailerLink($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTvSeries($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereVideoQuality($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereViews($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereWriters($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereYear($value)
  * @mixin \Eloquent
- * @property int|null $type_id
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTypeId($value)
  */
 class Movies extends Model
 {
@@ -112,14 +114,6 @@ class Movies extends Model
         }
         
         return round($this->views / 1000, 1) . 'K';
-    }
-    
-    public function getReleaseYear() {
-        if ($this->release) {
-            return explode('-', $this->release)[0];
-        }
-        
-        return '';
     }
     
     public function getPoster() {

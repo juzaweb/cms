@@ -27,6 +27,7 @@ class MoviesSeeder extends Seeder
                 ->toArray();
             $type = \App\Models\Types::inRandomOrder()->first();
             $random_key = array_rand([1, 2],1);
+            $release = $faker->date();
             
             DB::table('movies')->insert([
                 'name' => $name,
@@ -40,7 +41,8 @@ class MoviesSeeder extends Seeder
                 'video_quality' => 'HD',
                 'description' => $faker->sentence(50),
                 'short_description' => $faker->sentence(10),
-                'release' => $faker->date(),
+                'release' => $release,
+                'year' => explode('-', $release)[0],
                 'status' => 1,
                 'created_by' => 1,
                 'updated_by' => 1,

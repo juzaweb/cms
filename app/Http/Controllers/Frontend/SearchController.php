@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Countries;
+use App\Models\Genres;
 use App\Models\Movies;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -67,6 +69,22 @@ class SearchController extends Controller
         
         return view('frontend.genre.index', [
             'items' => $query->paginate(20),
+        ]);
+    }
+    
+    public function filterForm() {
+        $genres = Genres::where('status', '=', 1)
+            ->get(['id', 'name']);
+        $countries = Countries::where('status', '=', 1)
+            ->get(['id', 'name']);
+        $years = Movies::where('status', '=', 1)
+            ->groupBy('year')
+            ->get(['year']);
+        
+        return view('themes.mymo.data.filter_form', [
+            'genres' => $genres,
+            'countries' => $countries,
+            'years' => $years,
         ]);
     }
     
