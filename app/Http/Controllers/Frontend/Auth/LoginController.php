@@ -22,11 +22,18 @@ class LoginController extends Controller
             'remember' => 'nullable|numeric',
         ]);
         
+        if (\Auth::attempt($request->only(['email', 'password']), 1)) {
         
-    }
+        }
+        
+        
+     }
     
     public function logout() {
-        \Auth::logout();
+        if (\Auth::check()) {
+            \Auth::logout();
+        }
+        
         return redirect()->route('home');
     }
 }

@@ -89,16 +89,18 @@ class SearchController extends Controller
     }
     
     public function getPopularMovies(Request $request) {
-        $q = $request->get('q');
+        $type = $request->get('type');
         $date = date('Y-m-d');
-        switch ($q) {
+        switch ($type) {
             case 'day': $date = date('Y-m-d');break;
             case 'month': $date = date('Y-m');break;
             case 'year': $date = date('Y');break;
         }
         
-        $rows = $this->getPopular($date);
-        return response()->json($rows);
+        $items = $this->getPopular($date);
+        return view('themes.mymo.data.popular_movies', [
+            'items' => $items
+        ]);
     }
     
     protected function getPopular($date) {
@@ -119,7 +121,6 @@ class SearchController extends Controller
                     ->where('created_at', 'like', $date . '%');
             })
             ->limit(5)
-            ->get()
-            ->toArray();
+            ->get();
     }
 }

@@ -54,7 +54,7 @@ class MovieServesController extends Controller
         $rows = $query->get();
         
         foreach ($rows as $row) {
-            $row->created = $row->created_at->format('H:i d/m/Y');
+            $row->created = $row->created_at->format('H:i Y-m-d');
             if ($movie->tv_series == 0) {
                 $row->upload_url = route('admin.movies.servers.upload', ['server_id' => $row->id]);
             }

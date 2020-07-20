@@ -43,7 +43,7 @@ class VideoAdsController extends Controller
         $rows = $query->get();
         
         foreach ($rows as $row) {
-            $row->created = $row->created_at->format('H:i d/m/Y');
+            $row->created = $row->created_at->format('H:i Y-m-d');
             $row->edit_url = route('admin.setting.video_ads.edit', ['id' => $row->id]);
         }
         

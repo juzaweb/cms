@@ -59,7 +59,7 @@ class TVSeriesController extends Controller
         
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
-            $row->created = $row->created_at->format('H:i d/m/Y');
+            $row->created = $row->created_at->format('H:i Y-m-d');
             $row->description = Str::words(strip_tags($row->description), 15);
             $row->edit_url = route('admin.tv_series.edit', ['id' => $row->id]);
             $row->preview_url = route('watch', [$row->slug]);

@@ -41,7 +41,7 @@ class UsersController extends Controller
         
         foreach ($rows as $row) {
             $row->thumb_url = $row->getAvatar();
-            $row->created = $row->created_at->format('H:i d/m/Y');
+            $row->created = $row->created_at->format('H:i Y-m-d');
             $row->edit_url = route('admin.users.edit', ['id' => $row->id]);
         }
         
