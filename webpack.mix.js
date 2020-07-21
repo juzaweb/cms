@@ -124,6 +124,7 @@ mix.styles([
 mix.combine([
     'resources/styles/vendors/jquery/dist/jquery.min.js',
     'resources/views/themes/mymo/styles/assets/js/bootstrap.min.js',
+    'resources/styles/js/load-ajax.js',
     'resources/views/themes/mymo/styles/assets/js/core.min.js',
     'resources/views/themes/mymo/styles/assets/js/lazysizes.min.js',
     'resources/views/themes/mymo/styles/assets/js/owl.carousel.min.js',

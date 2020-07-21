@@ -52,7 +52,8 @@
     <script type='text/javascript'>
         /* <![CDATA[ */
         var ajax_auth_object = {
-            "ajaxurl":"http:\/\/xemphimplus.net\/wp-content\/themes\/halimmovies\/halim-ajax.php",
+            "login_url": "{{ route('login.submit') }}",
+            "register_url": "{{ route('register.submit') }}",
             "redirecturl":"{{ url()->current() }}",
             "loadingmessage":"Sending user info, please wait...",
             "sitekey":"",
