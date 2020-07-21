@@ -125,6 +125,41 @@
             </li>
 
             <li class="acc_section">
+                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('app.pages') }}</h3></div>
+                <div class="acc_content">
+                    <form action="" method="post" class="add-menu-item">
+
+                        <input type="hidden" name="type" value="page">
+
+                        <div class="form-group">
+                            <div class="ul-show-items">
+                                <ul class="mt-2 p-0">
+                                    @foreach($pages as $page)
+                                        <li class="m-1" id="item-page-{{ $page->id }}">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="items[]" class="custom-control-input" id="page-{{ $page->id }}" value="{{ $page->id }}">
+                                                <label class="custom-control-label" for="page-{{ $page->id }}">{{ $page->name }}</label>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="custom-switch">
+                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
+                                <span class="custom-switch-indicator"></span>
+                                <span class="custom-switch-description"> {{ trans('app.open_new_tab') }}</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('app.add_to_menu') }}</button>
+                    </form>
+                </div>
+            </li>
+
+            <li class="acc_section">
                 <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('app.other_pages') }}</h3></div>
                 <div class="acc_content">
                     <form action="" method="post" class="add-menu-item">

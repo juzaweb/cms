@@ -111,7 +111,7 @@
 
     <li class="cui__menuLeft__item cui__menuLeft__submenu">
         <span class="cui__menuLeft__item__link">
-            <span class="cui__menuLeft__item__title">@lang('app.theme')</span>
+            <span class="cui__menuLeft__item__title">@lang('app.design')</span>
             <i class="cui__menuLeft__item__icon fe fe-layout"></i>
         </span>
         <ul class="cui__menuLeft__navigation">

@@ -243,4 +243,5 @@ return [
   'top_views' => 'Top views',
   'new_update' => 'New update',
   'filter' => 'Filter',
+  'design' => 'Design',
 ];

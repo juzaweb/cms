@@ -221,12 +221,12 @@
       //   label: lang['menu-view'],
       //   multiple: true
       // },
-      /*{
+      {
         name: 'move',
         icon: 'paste',
         label: lang['menu-move'],
         multiple: true
-      },*/
+      },
       {
         name: 'resize',
         icon: 'arrows-alt',

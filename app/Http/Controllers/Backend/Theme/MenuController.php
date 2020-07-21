@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Theme;
 use App\Models\Countries;
 use App\Models\Genres;
 use App\Models\Menu;
+use App\Models\Pages;
 use App\Models\Tags;
 use App\Models\Types;
 use Illuminate\Http\Request;
@@ -27,12 +28,15 @@ class MenuController extends Controller
             ->get(['id', 'name']);
         $types = Types::where('status', '=', 1)
             ->get(['id', 'name']);
+        $pages = Pages::where('status', '=', 1)
+            ->get(['id', 'name']);
         
         return view('backend.theme.menu.index', [
             'menu' => $menu,
             'genres' => $genres,
             'countries' => $countries,
             'types' => $types,
+            'pages' => $pages,
         ]);
     }
     
@@ -92,6 +96,7 @@ class MenuController extends Controller
                 $result = [];
                 
                 foreach ($items as $item) {
+                    $url = parse_url(route('genre', [$item->slug]))['path'];
                     $result[] = [
                         'name' => $item->name,
                         'url' => route('genre', [$item->slug]),
@@ -107,9 +112,10 @@ class MenuController extends Controller
                 $result = [];
     
                 foreach ($items as $item) {
+                    $url = parse_url(route('country', [$item->slug]))['path'];
                     $result[] = [
                         'name' => $item->name,
-                        'url' => route('genre', [$item->slug]),
+                        'url' => $url,
                         'object_id' => $item->id,
                     ];
                 }
@@ -122,23 +128,25 @@ class MenuController extends Controller
                 $result = [];
     
                 foreach ($items as $item) {
+                    $url = parse_url(route('type', [$item->slug]))['path'];
                     $result[] = [
                         'name' => $item->name,
-                        'url' => route('genre', [$item->slug]),
+                        'url' => $url,
                         'object_id' => $item->id,
                     ];
                 }
     
                 return response()->json($result);
-            case 'tag':
-                $items = Tags::whereIn('id', $items)
+            case 'page':
+                $items = Pages::whereIn('id', $items)
                     ->get(['id', 'name', 'slug']);
                 $result = [];
-        
+                
                 foreach ($items as $item) {
+                    $url = parse_url(route('page', [$item->slug]))['path'];
                     $result[] = [
                         'name' => $item->name,
-                        'url' => route('genre', [$item->slug]),
+                        'url' => $url,
                         'object_id' => $item->id,
                     ];
                 }

@@ -6,7 +6,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="name" class="form-label">{{ trans('app.menu_name') }}</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{ @$menu->name }}">
+                        <input type="text" name="name" id="name" class="form-control" value="{{ @$menu->name }}" autocomplete="off">
                     </div>
                 </div>
 
