@@ -115,7 +115,7 @@
 
     <style>
         #header .site-title {
-            background: url({{ get_config('logo') }}) no-repeat top left;
+            background: url({{ image_url(get_config('logo')) }}) no-repeat top left;
             background-size: contain;
             text-indent: -9999px;
         }

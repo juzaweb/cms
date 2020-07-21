@@ -8,7 +8,20 @@ use App\Http\Controllers\Controller;
 class YearController extends Controller
 {
     public function index($year) {
-        $items = Movies::where('status', '=', 1)
+        $items = Movies::select([
+            'id',
+            'name',
+            'other_name',
+            'short_description',
+            'thumbnail',
+            'slug',
+            'views',
+            'video_quality',
+            'year',
+            'genres',
+            'countries',
+        ])
+            ->where('status', '=', 1)
             ->where('release', 'like', $year . '%')
             ->orderBy('id', 'DESC')
             ->paginate(20);

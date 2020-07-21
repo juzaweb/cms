@@ -12,7 +12,20 @@ class MoviesController extends Controller
             'name' => trans('app.movies'),
         ];
         
-        $items = Movies::where('status', '=', 1)
+        $items = Movies::select([
+            'id',
+            'name',
+            'other_name',
+            'short_description',
+            'thumbnail',
+            'slug',
+            'views',
+            'video_quality',
+            'year',
+            'genres',
+            'countries',
+        ])
+            ->where('status', '=', 1)
             ->where('tv_series', '=', 0)
             ->orderBy('id', 'DESC')
             ->paginate(20);

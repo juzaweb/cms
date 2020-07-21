@@ -8,8 +8,8 @@
     <title>Sign Up Form</title>
 
     <!-- Font Icon -->
-    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="vendor/nouislider/nouislider.min.css">
+    <link rel="stylesheet" href="{{ asset('styles/installer/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/installer/vendor/nouislider/nouislider.min.css') }}">
 
     <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
@@ -157,14 +157,14 @@
 </div>
 
 <!-- JS -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
-<script src="vendor/jquery-steps/jquery.steps.min.js"></script>
-<script src="vendor/minimalist-picker/dobpicker.js"></script>
-<script src="vendor/nouislider/nouislider.min.js"></script>
-<script src="vendor/wnumb/wNumb.js"></script>
-<script src="js/main.js"></script>
+<script src="{{ asset('styles/installer/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('styles/installer/vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('styles/installer/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
+<script src="{{ asset('styles/installer/vendor/jquery-steps/jquery.steps.min.js') }}"></script>
+<script src="{{ asset('styles/installer/vendor/minimalist-picker/dobpicker.js') }}"></script>
+<script src="{{ asset('styles/installer/vendor/nouislider/nouislider.min.js') }}"></script>
+<script src="{{ asset('styles/installer/vendor/wnumb/wNumb.js') }}"></script>
+<script src="{{ asset('styles/installer/js/main.js') }}"></script>
 </body>
 
 </html>

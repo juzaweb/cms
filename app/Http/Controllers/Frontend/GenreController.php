@@ -15,9 +15,16 @@ class GenreController extends Controller
         
         $items = Movies::select([
             'id',
-            'thumbnail',
             'name',
+            'other_name',
+            'short_description',
+            'thumbnail',
             'slug',
+            'views',
+            'video_quality',
+            'year',
+            'genres',
+            'countries',
         ])
             ->where('status', '=', 1)
             ->whereRaw('find_in_set(?, genres)', [$info->id])

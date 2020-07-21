@@ -1,5 +1,5 @@
 <div class="item post-{{ $item->id }}">
-    <a href="{{ route('watch', [$model->slug]) }}" title="{{ $model->name }}{{ $model->other_name ? ' - ' . $model->other_name : '' }}">
+    <a href="{{ route('watch', [$item->slug]) }}" title="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}">
         <div class="item-link">
             <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $item->getThumbnail() }}" class="lazyload blur-up post-thumb" alt="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}" title="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}" />
         </div>
