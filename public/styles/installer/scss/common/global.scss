@@ -1,0 +1,67 @@
+ a:focus,
+ a:active {
+     text-decoration: none;
+     outline: none;
+     @include transition(all 300ms ease 0s);
+ }
+ 
+ input,
+ select,
+ textarea {
+     outline: none;
+     @include appearance( unset);
+ }
+ 
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+     @include appearance( none);
+     margin: 0;
+ }
+ 
+ input:focus,
+ select:focus,
+ textarea:focus {
+     outline: none;
+     @include box-shadow-input(none);
+ }
+ 
+ input[type=checkbox] {
+     @include appearance( checkbox);
+ }
+ 
+ input[type=radio] {
+     @include appearance( radio);
+ }
+ 
+ .clear {
+     clear: both;
+ }
+ h2 {
+     font-size: 30px;
+     margin: 0px;
+ }
+ 
+ body {
+     font-size: 14px;
+     line-height: 1.6;
+     color: $black-color;
+     font-weight: 400;
+     font-family: 'Roboto Slab';
+     margin: 0px;
+     background: #222;
+     position: relative;
+     padding: 0px;
+ }
+ 
+ .main {
+     padding: 50px 0;
+     position: relative;
+     z-index: 99;
+ }
+ 
+ .container {
+     width: 1400px;
+     // position: relative;
+     margin: 0 auto;
+     background: #fff;
+ }

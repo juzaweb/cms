@@ -1,0 +1,73 @@
+@media screen and (max-width: 1024px) {
+    .container {
+        width: calc(100% - 40px);
+        max-width: 100%;
+    }
+    .vertical .steps, .vertical .content, .vertical .actions {
+        float: none;
+        width: 100%;
+    }
+    #find_bank {
+        width: 100%;
+    }
+    .form-radio-flex input + label {
+        width: 190px;
+        height: 120px;
+    }
+}
+//end 992px
+@media screen and (max-width: 992px) {
+
+    .content {
+        height: 900px;
+    }
+    .form-radio-flex input + label {
+        width: 100px;
+        height: 65px;
+    }
+}
+@media screen and (max-width: 768px) {
+    #steps-uid-0-p-0 .form-row, #steps-uid-0-p-0 .form-group, #steps-uid-0-p-0 .form-date {
+        width: 100%;
+    }
+    .form-flex {
+        @include flex-direction(column);
+        margin: 0px;
+    }
+    .form-flex .form-group {
+        padding: 0px;
+    }
+    fieldset, .actions ul {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    #slider-margin .noUi-pips {
+        width: 94%;
+    }
+}
+
+//end 575px
+@media screen and (max-width: 480px) {
+    .form-date-group , .form-find{
+        @include flex-direction(column);
+    }
+    .content {
+        height: 1050px;
+    }
+    #find_bank {
+        margin-bottom: 20px;
+    }
+    .actions ul li a {
+        width: 100px;
+    }
+    .form-radio-flex {
+        margin: 0 -5px;
+    }
+    .form-radio-flex .form-radio-item {
+        padding: 0 5px;
+    }
+    .form-radio-flex input + label {
+        width: 90px;
+        height: 61px;
+    }
+}

@@ -1,0 +1,398 @@
+@mixin hideInput {width: 0; height: 0; position: absolute; left: -9999px;}
+@mixin focusOutline {outline: dotted 1px #CCC; outline-offset: .45rem;}
+fieldset {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    padding-left: 45px;
+    padding-right: 55px;
+    padding-top: 45px;
+}
+p.desc {
+    margin: 0px;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+.form-label {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.text-input {
+    font-size: 12px;
+    color: $grey-color;
+    display: block;
+    margin-top: 5px;
+    span {
+        color: $black-color;
+        font-weight: bold;
+    }
+}
+
+input {
+    width: 100%;
+    display: block;
+    border: 1px solid #ebebeb;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 0 20px;
+    color: $black-color;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Roboto Slab';
+}
+#steps-uid-0-p-0 {
+    .form-row, .form-group , .form-date {
+        width: 680px;
+    }
+}
+
+.form-flex {
+    @extend display-flex;
+    margin: 0 -10px;
+    .form-group {
+        width: 50%;
+        padding: 0 10px;
+    }
+}
+
+.form-group,
+.form-date {
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.form-date-group {
+    @extend display-flex;
+    // @include justify-content(space-between);
+    border: 1px solid transparent;
+    @include border-radius(5px);
+    select {
+        border: 1px solid #ebebeb;
+        width: 100%;
+        box-sizing: border-box;
+        @include appearance(none);
+        position: relative;
+        background: 0 0;
+        z-index: 10;
+        cursor: pointer;
+        padding: 0 20px;
+        height: 50px;
+        font-size: 14px;
+        font-family: 'Roboto Slab';
+        color: #999;
+        box-sizing: border-box;
+        background-color: #fff;
+        color: $black-color;
+        font-weight: bold;
+    }
+}
+
+.form-date-item {
+    position: relative;
+    overflow: hidden;
+    width: 100px;
+    margin-right: 10px;
+}
+
+.vertical {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    .steps {
+        float: left;
+        width: 310px;
+    }
+    .content,
+    .actions {
+        float: right;
+        width: 1090px;
+    }
+}
+.content {
+    height: 800px;
+}
+
+.steps {
+    ul {
+        @extend list-type-ulli;
+        @extend display-flex;
+        @include flex-direction(column);
+        position: relative;
+        padding-left: 40px;
+        padding-top: 60px;
+        li {
+            padding-bottom: 40px;
+            position: relative;
+            z-index: 99;
+            a {
+                text-decoration: none;
+                color: $black-color;
+            }
+        }
+        &:after {
+            position: absolute;
+            content: '';
+            width: 2px;
+            height: 180px;
+            background: #ebebeb;
+            left: 64px;
+            top: 50%;
+            @include transform(translateY(-50%));
+            z-index: 9;
+        }
+    }
+}
+
+.title {
+    @extend display-flex;
+    @include align-items(center);
+    .step-number {
+        width: 40px;
+        height: 40px;
+        @extend display-flex;
+        @include align-items(center);
+        @include justify-content(center);
+        @include border-radius(50%);
+        background: $border-color;
+        color: #999;
+        margin-right: 15px;
+        border: 5px solid #fff;
+        font-weight: bold;
+    }
+    .step-text {
+        font-weight: bold;
+        color: $grey-color;
+    }
+}
+
+.current {
+    .title {
+        .step-number {
+            background: $blue-color;
+            color: #fff;
+        }
+        .step-text {
+            color: $blue-color;
+        }
+    }
+}
+
+.content h3 {
+    display: none;
+}
+.content, .actions {
+    background: $grey-bg;
+}
+
+.actions {
+    padding-bottom: 90px;
+    ul {
+        @extend list-type-ulli;
+        padding-left: 45px;
+        padding-right: 55px;
+        .disabled {
+            display: none;
+        }
+        li {
+            &:first-child {
+                float: left;
+                a {
+                    background: #e8e8e8;
+                    color: $grey-color; 
+                }
+            }
+            float: right;
+            a {
+                width: 140px;
+                height: 50px;
+                color: #fff;
+                background: $blue-color;
+                @extend display-flex;
+                @include align-items(center);
+                @include justify-content(center);
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.form-radio-flex {
+    @extend display-flex;
+    @include flex-wrap(wrap);
+    margin: 0 -15px;
+    .form-radio-item {
+        padding: 0 15px;
+        margin-bottom: 25px;
+    }
+    input {
+        @include hideInput;
+    }
+	input + label {
+        margin: 0px;
+        width: 223px;
+        height: 133px;
+        box-sizing: border-box;
+        position: relative; 
+        display: inline-block;
+        // width: auto;
+        text-align: center;
+        background-color: transparent;
+        border: 1px solid transparent;
+        text-align: center;
+        text-transform: none;
+		transition: 	border-color .15s ease-out, 
+					color .25s ease-out, 
+					background-color .15s ease-out,
+                    box-shadow .15s ease-out;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+	input:checked + label {
+        border: 1px solid #4966b1;
+        z-index: 1;
+    }
+    input:focus + label {
+        outline: none;
+    }
+    input:hover {
+        border: 1px solid #4966b1;
+    }
+}
+label.error {
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    &:after {
+        font-family: 'Material-Design-Iconic-Font';
+        position: absolute;
+        content: '\f135';
+        right: 20px;
+        top: 50px;
+        font-size: 13px;
+        color: #f63726;
+    }
+}
+input.error {
+    border: 1px solid #f63726;
+}
+#find_bank {
+    padding: 0 55px;
+    width: 680px;
+    &::-webkit-input-placeholder {
+        font-weight: 400;
+    }
+    &::-moz-placeholder {
+        font-weight: 400;
+    }
+    &:-ms-input-placeholder {
+        font-weight: 400;
+    }
+    &:-moz-placeholder {
+        font-weight: 400;
+    }
+    margin-right: 20px;
+}
+.submit {
+    width: 150px;
+    background: #666;
+    color: #fff;
+    font-weight: 400;
+    cursor: pointer;
+    &:hover {
+        background-color: darken(#666, 10%)
+    }
+}
+.form-find {
+    position: relative;
+    @extend display-flex;
+    padding-bottom: 70px;
+    border-bottom: 1px solid $border-color;
+}
+.form-icon {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    font-size: 18px;
+    color: $grey-color;
+}
+.choose-bank-desc {
+    color: #666;
+    margin: 0px;
+    padding-top: 30px;
+    padding-bottom: 35px;
+}
+
+#slider-margin {
+    height: 9px;
+    border: none;
+    @include box-shadow(none);
+    background: #e8e8e8;
+    @include border-radius(0px);
+    position: relative;
+    margin-top: 110px;
+    .noUi-marker-horizontal.noUi-marker-large, .noUi-marker-horizontal.noUi-marker{
+        height: 0px;
+    }
+    .noUi-connect {
+        background: $blue-color;
+    }
+    .noUi-connects {
+        @include border-radius(0px);
+    }
+    .noUi-handle {
+        width: 15px;
+        height: 30px;
+        top: -12px;
+        background: #e8e8e8;
+        outline: none;
+        border: none;
+        // left: 50%;
+        // @include transform(translateX(-50%));
+        // right: auto;
+        right: -15px;
+        border: 1px solid $blue-color;
+        border-radius: 0px;
+        &:after, &:before {
+            width: 0px;
+        }
+
+        .noUi-tooltip {
+            bottom: 33px;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            color: $blue-color;
+            padding: 0px;
+        }
+    }
+    .noUi-pips {
+        width: 96%;
+        .noUi-value {
+            top: -50px;
+            font-size: 16px;
+            color: #666;
+            &:before {
+                content: '$';
+            }
+        }
+        .noUi-value-horizontal {
+            @include transform(none);
+        }
+    }
+}
+.your-money {
+    font-size: 16px;
+    color: $black-color;
+    margin: 0px;
+    padding-top: 62px;
+    .money {
+        font-size: 28px;
+        font-weight: bold;
+    }
+}
