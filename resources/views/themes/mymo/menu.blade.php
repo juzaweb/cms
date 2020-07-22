@@ -20,14 +20,16 @@
                     <span class="count">0</span>
                 </button>
             </div>
+
             <div class="collapse navbar-collapse" id="halim">
                 <div class="menu-main-menu-container">
                     <ul id="menu-main-menu" class="nav navbar-nav navbar-left">
+
                         <li class="current-menu-item active">
                             <a title="Trang chủ" href="/">Trang chủ</a>
                         </li>
+
                         <li><a title="Phim bộ" href="{{ route('tv_series') }}">Phim bộ</a></li>
-                        <li><a title="Phim lẻ" href="{{ route('movies') }}">Phim lẻ</a></li>
 
                         <li class="mega dropdown"><a title="Thể loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Thể loại <span class="caret"></span></a>
                             <ul role="menu" class=" dropdown-menu">
@@ -36,15 +38,6 @@
                             </ul>
                         </li>
 
-                        <li class="mega dropdown">
-                            <a title="Quốc gia" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Quốc gia <span class="caret"></span></a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li><a title="Phim Ấn Độ" href="/country/an-do">Phim Ấn Độ</a></li>
-
-                            </ul>
-                        </li>
-
-                        <li><a title="Mới cập nhật" href="/phim-moi-cap-nhat">Mới cập nhật</a></li>
                     </ul>
                 </div>
             </div>

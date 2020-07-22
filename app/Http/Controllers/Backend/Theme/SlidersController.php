@@ -69,6 +69,7 @@ class SlidersController extends Controller
         $titles = $request->post('title');
         $links = $request->post('link');
         $images = $request->post('image');
+        $descriptions = $request->post('description');
     
         if (empty($titles)) {
             return response()->json([
@@ -84,7 +85,8 @@ class SlidersController extends Controller
             $content[] = [
                 'title' => $title,
                 'link' => $links[$key],
-                'image' => $images[$key]
+                'image' => $images[$key],
+                'description' => $descriptions[$key],
             ];
         }
     

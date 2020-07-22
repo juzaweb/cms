@@ -60,6 +60,11 @@
                                                 </div>
 
                                                 <div class="form-group">
+                                                    <label class="form-label">{{ trans('app.description') }}</label>
+                                                    <textarea class="form-control" name="description[]">{{ @$banner->description }}</textarea>
+                                                </div>
+
+                                                <div class="form-group">
                                                     <label class="form-label">{{ trans('app.link') }}</label>
                                                     <div class="input-group mb-3">
                                                         <input type="text" class="form-control" name="link[]" autocomplete="off" value="{{ @$banner->link }}">
@@ -108,6 +113,11 @@
                 <div class="form-group">
                     <label class="form-label">{{ trans('app.title') }}</label>
                     <input type="text" class="form-control" name="title[]" autocomplete="off" value="">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">{{ trans('app.description') }}</label>
+                    <textarea class="form-control" name="description[]"></textarea>
                 </div>
 
                 <div class="form-group">

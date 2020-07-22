@@ -1,19 +1,27 @@
+@if(@$home->slider->status == 1)
 <div class="container">
-    <div class="text-center"></div>    <div class="row fullwith-slider">
+    <div class="text-center"></div>
+    <div class="row fullwith-slider">
+
+        @php
+            $sliders = slider_setting(@$home->slider->slider);
+        @endphp
         <!-- Wrapper For Slides -->
         <div id="halim-fullwith-slider-widget-2" class="owl-carousel owl-carousel-fullwidth owl-theme">
-            @for ($i = 0; $i < 4; $i++)
+            @if($sliders)
+                @foreach($sliders as $index => $item)
                 <div class="post-{{ $i }} item">
-                    <a href="/hoa-bi-ngan-beautiful-reborn-flower" title="Hoa Bỉ Ngạn">
-                        <img src="{{ asset('uploads/2020/05/binganhoa.gif') }}" alt="Hoa Bỉ Ngạn"  class="slide-image" />
+                    <a href="{{ @$item->link }}" title="{{ @$item->title }}">
+                        <img src="{{ image_url(@$item->image) }}" alt="{{ @$item->title }}"  class="slide-image" />
                         <div class="slide-text">
-                            <h3 class="slider-title">Hoa Bỉ Ngạn</h3>
+                            <h3 class="slider-title">{{ @$item->title }}</h3>
                             <div class="slider-meta hidden-xs">
-                                <p>[Beautiful Reborn Flower (2020)]</p>										</div>
+                                <p>{{ @$item->description }}</p>										            </div>
                         </div>
                     </a>
                 </div>
-            @endfor
+                @endforeach
+            @endif
         </div><!-- End of Wrapper For Slides -->
         <script type="text/javascript">
             jQuery(document).ready(function($) {
@@ -35,5 +43,7 @@
                 });
             });
         </script>
+
     </div>
 </div>
+@endif

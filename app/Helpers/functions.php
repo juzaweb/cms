@@ -2,6 +2,7 @@
 
 use App\Models\Genres;
 use App\Models\Menu;
+use App\Models\Sliders;
 use App\Models\ThemeConfigs;
 use App\Models\Types;
 
@@ -163,4 +164,25 @@ function genre_info($id) {
 function type_info($id) {
     return Types::where('id', '=', $id)
         ->first();
+}
+
+function theme_setting($code) {
+    $config = ThemeConfigs::where('code', '=', $code)
+        ->first();
+    
+    if ($config) {
+        return json_decode($config->content);
+    }
+    
+    return false;
+}
+
+function slider_setting($setting) {
+    $slider = Sliders::where('id', '=', $setting)
+        ->first();
+    if ($slider) {
+        return json_decode($slider->content);
+    }
+    
+    return false;
 }

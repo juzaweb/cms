@@ -98,6 +98,7 @@
                             <span data-text="Viễn Tưỏng"></span></li>
                     </ul>
                 </h4>
+
                 <div id="halim-advanced-widget-2-ajax-box" class="halim_box">
                     @for ($i = 0; $i < 12; $i++)
                         <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-21352">
