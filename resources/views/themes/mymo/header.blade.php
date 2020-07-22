@@ -33,6 +33,10 @@
                                 <span class="name">@lang('app.account')</span>
                             </a>
                             <ul class="dropdown-menu login-box" aria-labelledby="userInfo2">
+                                @if(\App\User::find(Auth::id())->is_admin)
+                                    <li><a href="{{ route('admin.dashboard') }}" data-turbolinks="false"><i class="hl-cog"></i> @lang('app.admin_panel')</a></li>
+                                @endif
+
                                 <li><a href="{{ route('account') }}"><i class="hl-user"></i> @lang('app.profile')</a></li>
                                 <li><a href="{{ route('account.change_password') }}"><i class="hl-lock-open-alt"></i> @lang('app.change_password')</a></li>
                                 <li><a href="{{ route('logout') }}" data-turbolinks="false"><i class="hl-off"></i> @lang('app.logout')</a></li>

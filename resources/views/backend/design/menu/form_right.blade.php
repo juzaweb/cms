@@ -1,4 +1,4 @@
-<form action="{{ route('admin.theme.menu.save') }}" method="post" class="form-ajax">
+<form action="{{ route('admin.design.menu.save') }}" method="post" class="form-ajax">
     <input type="hidden" name="id" value="{{ @$menu->id }}">
     <div class="card">
         <div class="card-header">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Theme;
+namespace App\Http\Controllers\Backend\Design;
 
 use App\Models\Sliders;
 use Illuminate\Http\Request;
@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class SlidersController extends Controller
 {
     public function index() {
-        return view('backend.theme.sliders.index');
+        return view('backend.design.sliders.index');
     }
     
     public function getData(Request $request) {
@@ -39,7 +39,7 @@ class SlidersController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.theme.sliders.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.design.sliders.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -50,7 +50,7 @@ class SlidersController extends Controller
     
     public function form($id = null) {
         $model = Sliders::firstOrNew(['id' => $id]);
-        return view('backend.theme.sliders.form', [
+        return view('backend.design.sliders.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new')
         ]);
@@ -96,7 +96,7 @@ class SlidersController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.theme.sliders'),
+            'redirect' => route('admin.design.sliders'),
         ]);
     }
     
@@ -104,7 +104,7 @@ class SlidersController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.theme.sliders')
+            'ids' => trans('app.design.sliders')
         ]);
         
         Sliders::destroy($request->post('ids'));

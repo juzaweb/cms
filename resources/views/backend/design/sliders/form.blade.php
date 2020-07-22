@@ -6,11 +6,11 @@
 
 {{ Breadcrumbs::render('manager', [
         'name' => trans('app.sliders'),
-        'url' => route('admin.theme.sliders')
+        'url' => route('admin.design.sliders')
     ], $model) }}
 
 <div class="cui__utils__content">
-    <form method="post" action="{{ route('admin.theme.sliders.save') }}" class="form-ajax">
+    <form method="post" action="{{ route('admin.design.sliders.save') }}" class="form-ajax">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -21,7 +21,7 @@
                     <div class="col-md-6">
                         <div class="btn-group float-right">
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                            <a href="{{ route('admin.theme.sliders') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                            <a href="{{ route('admin.design.sliders') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
                         </div>
                     </div>
                 </div>

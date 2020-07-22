@@ -98,7 +98,7 @@ class TVSeriesController extends Controller
     public function save(Request $request) {
         $this->validateRequest([
             'name' => 'required|string|max:250',
-            'description' => 'nullable|string|max:300',
+            'description' => 'nullable',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
             'poster' => 'nullable|string|max:250',

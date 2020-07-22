@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Theme;
+namespace App\Http\Controllers\Backend\Design;
 
 use App\Models\Configs;
 use App\Models\ThemeConfigs;
@@ -12,7 +12,7 @@ class ThemeEditorController extends Controller
     public function index() {
         $config = include resource_path('views/themes/mymo/config.php');
         
-        return view('backend.theme.editor.index', [
+        return view('backend.design.editor.index', [
             'config' => $config,
         ]);
     }

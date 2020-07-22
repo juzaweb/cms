@@ -78,7 +78,7 @@
                     </div>--}}
                     <div class="te-top-bar__list">
                         <div class="te-top-bar__item te-top-bar__item--fill">
-                            <span class="te-theme-name"><a href="{{ route('admin.theme.themes') }}" data-no-turbolink="true" data-turbolinks="false">‹‹ {{ trans('app.back_to_theme') }}</a></span>
+                            <span class="te-theme-name"><a href="{{ route('admin.design.themes') }}" data-no-turbolink="true" data-turbolinks="false">‹‹ {{ trans('app.back_to_theme') }}</a></span>
                         </div>
                         <div class="te-top-bar__item te-status-indicator--live mobile-only">
                             Live
@@ -86,7 +86,7 @@
                     </div>
                 </header>
 
-                @include('backend.theme.editor.config_option')
+                @include('backend.design.editor.config_option')
 
             </section>
     </div>
@@ -109,7 +109,7 @@
         }
     </style>
 
-    @include('backend.theme.editor.preview_page')
+    @include('backend.design.editor.preview_page')
 
     <div class="theme-editor__spinner" component="UI.Spinner">
         <div class="next-spinner">

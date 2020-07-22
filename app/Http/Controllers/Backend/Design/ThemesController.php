@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Theme;
+namespace App\Http\Controllers\Backend\Design;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ThemesController extends Controller
 {
     public function index() {
-        return view('backend.theme.themes.index', [
+        return view('backend.design.themes.index', [
         
         ]);
     }

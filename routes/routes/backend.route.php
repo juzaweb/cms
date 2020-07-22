@@ -235,42 +235,42 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
 });
 
-Route::group(['prefix' => 'themes'], function () {
-    Route::get('/', 'Backend\Theme\ThemesController@index')->name('admin.theme.themes');
+Route::group(['prefix' => 'design/themes'], function () {
+    Route::get('/', 'Backend\Design\ThemesController@index')->name('admin.design.themes');
     
-    Route::post('/save', 'Backend\Theme\ThemesController@save')->name('admin.theme.themes.save');
+    Route::post('/save', 'Backend\Design\ThemesController@save')->name('admin.design.themes.save');
 });
 
-Route::group(['prefix' => 'theme/menu'], function () {
-    Route::get('/', 'Backend\Theme\MenuController@index')->name('admin.theme.menu');
+Route::group(['prefix' => 'design/menu'], function () {
+    Route::get('/', 'Backend\Design\MenuController@index')->name('admin.design.menu');
     
-    Route::get('/{id}', 'Backend\Theme\MenuController@index')->name('admin.theme.menu.id');
+    Route::get('/{id}', 'Backend\Design\MenuController@index')->name('admin.design.menu.id');
     
-    Route::post('/add-menu', 'Backend\Theme\MenuController@addMenu')->name('admin.theme.menu.add');
+    Route::post('/add-menu', 'Backend\Design\MenuController@addMenu')->name('admin.design.menu.add');
     
-    Route::post('/save', 'Backend\Theme\MenuController@save')->name('admin.theme.menu.save');
+    Route::post('/save', 'Backend\Design\MenuController@save')->name('admin.design.menu.save');
     
-    Route::post('/get-data', 'Backend\Theme\MenuController@getItems')->name('admin.theme.menu.items');
+    Route::post('/get-data', 'Backend\Design\MenuController@getItems')->name('admin.design.menu.items');
 });
 
-Route::group(['prefix' => 'theme/sliders'], function () {
-    Route::get('/', 'Backend\Theme\SlidersController@index')->name('admin.theme.sliders');
+Route::group(['prefix' => 'design/sliders'], function () {
+    Route::get('/', 'Backend\Design\SlidersController@index')->name('admin.design.sliders');
     
-    Route::get('/getdata', 'Backend\Theme\SlidersController@getData')->name('admin.theme.sliders.getdata');
+    Route::get('/getdata', 'Backend\Design\SlidersController@getData')->name('admin.design.sliders.getdata');
     
-    Route::get('/create', 'Backend\Theme\SlidersController@form')->name('admin.theme.sliders.create');
+    Route::get('/create', 'Backend\Design\SlidersController@form')->name('admin.design.sliders.create');
     
-    Route::get('/edit/{id}', 'Backend\Theme\SlidersController@form')->name('admin.theme.sliders.edit')->where('id', '[0-9]+');
+    Route::get('/edit/{id}', 'Backend\Design\SlidersController@form')->name('admin.design.sliders.edit')->where('id', '[0-9]+');
     
-    Route::post('/save', 'Backend\Theme\SlidersController@save')->name('admin.theme.sliders.save');
+    Route::post('/save', 'Backend\Design\SlidersController@save')->name('admin.design.sliders.save');
     
-    Route::post('/remove', 'Backend\Theme\SlidersController@remove')->name('admin.theme.sliders.remove');
+    Route::post('/remove', 'Backend\Design\SlidersController@remove')->name('admin.design.sliders.remove');
 });
 
-Route::group(['prefix' => 'theme/editor'], function () {
-    Route::get('/', 'Backend\Theme\ThemeEditorController@index')->name('admin.theme.editor');
+Route::group(['prefix' => 'design/editor'], function () {
+    Route::get('/', 'Backend\Design\ThemeEditorController@index')->name('admin.design.editor');
     
-    Route::post('/save', 'Backend\Theme\ThemeEditorController@save')->name('admin.theme.editor.save');
+    Route::post('/save', 'Backend\Design\ThemeEditorController@save')->name('admin.design.editor.save');
 });
 
 Route::group(['prefix' => 'setting/system'], function () {

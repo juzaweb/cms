@@ -6,17 +6,17 @@
 
     {{ Breadcrumbs::render('manager', [
             'name' => trans('app.menu'),
-            'url' => route('admin.theme.menu')
+            'url' => route('admin.design.menu')
         ]) }}
 
     <div class="cui__utils__content">
         <div class="row mt-5">
             <div class="col-md-5">
-                @include('backend.theme.menu.form_left')
+                @include('backend.design.menu.form_left')
             </div>
 
             <div class="col-md-7">
-                @include('backend.theme.menu.form_right')
+                @include('backend.design.menu.form_right')
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
     <div class="modal fade" id="modal-add-menu">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{ route('admin.theme.menu.add') }}" method="post" class="form-ajax">
+                <form action="{{ route('admin.design.menu.add') }}" method="post" class="form-ajax">
                     <div class="modal-header">
                         <h4 class="modal-title">{{ trans('app.add_menu') }}</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>

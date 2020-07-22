@@ -116,25 +116,25 @@
         </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.theme.themes') }}" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.design.themes') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.themes')</span>
                 </a>
             </li>
 
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.theme.menu') }}" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.design.menu') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.menu')</span>
                 </a>
             </li>
 
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.theme.sliders') }}" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.design.sliders') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.sliders')</span>
                 </a>
             </li>
 
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.theme.editor') }}" class="cui__menuLeft__item__link" data-turbolinks="false">
+                <a href="{{ route('admin.design.editor') }}" class="cui__menuLeft__item__link" data-turbolinks="false">
                     <span class="cui__menuLeft__item__title">@lang('app.editor')</span>
                 </a>
             </li>

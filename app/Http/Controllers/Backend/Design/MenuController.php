@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Theme;
+namespace App\Http\Controllers\Backend\Design;
 
 use App\Models\Countries;
 use App\Models\Genres;
@@ -17,7 +17,7 @@ class MenuController extends Controller
         if (empty($id)) {
             $menu = Menu::first();
             if ($menu) {
-                return redirect()->route('admin.theme.menu.id', $menu->id);
+                return redirect()->route('admin.design.menu.id', $menu->id);
             }
         }
         
@@ -31,7 +31,7 @@ class MenuController extends Controller
         $pages = Pages::where('status', '=', 1)
             ->get(['id', 'name']);
         
-        return view('backend.theme.menu.index', [
+        return view('backend.design.menu.index', [
             'menu' => $menu,
             'genres' => $genres,
             'countries' => $countries,
@@ -54,7 +54,7 @@ class MenuController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.theme.menu.id', [$model->id]),
+            'redirect' => route('admin.design.menu.id', [$model->id]),
         ]);
     }
     
@@ -74,7 +74,7 @@ class MenuController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.theme.menu.id', [$model->id]),
+            'redirect' => route('admin.design.menu.id', [$model->id]),
         ]);
     }
     

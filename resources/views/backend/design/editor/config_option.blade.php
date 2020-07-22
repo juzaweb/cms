@@ -41,7 +41,7 @@
         </header>
 
         <div class="theme-editor__panel-body" data-scrollable>
-            <form action="{{ route('admin.theme.editor.save') }}" method="post" class="form-ajax" data-success="save_success">
+            <form action="{{ route('admin.design.editor.save') }}" method="post" class="form-ajax" data-success="save_success">
                 <button class="btn btn-save-top" type="submit">{{ trans('app.save') }}</button>
 
                 <input type="hidden" name="code" value="{{ $item['code'] }}">
@@ -85,10 +85,10 @@
                                         @foreach($card['input_items'] as $iinput => $input)
                                             @if(in_array($input['element'], ['input', 'textarea', 'media', 'slider', 'select_category']))
 
-                                                @include('backend.theme.editor.boxs.input_box')
+                                                @include('backend.design.editor.boxs.input_box')
 
                                             @else
-                                                @include('backend.theme.editor.boxs.'. $input['element'] .'_box')
+                                                @include('backend.design.editor.boxs.'. $input['element'] .'_box')
                                             @endif
 
                                         @endforeach

@@ -254,5 +254,6 @@ return [
   'create_account' => 'Create account',
   'account' => 'Account',
   'profile' => 'Profile',
+  'admin_panel' => 'Admin panel',
   'sending_user_info_please_wait' => 'Sending user info, please wait...',
 ];
