@@ -15,6 +15,10 @@ class StreamController extends Controller
             }
         }
         
-        abort(404);
+        return abort(404);
+    }
+    
+    public function video(Request $request) {
+    
     }
 }

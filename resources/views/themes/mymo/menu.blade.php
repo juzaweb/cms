@@ -31,14 +31,13 @@
 
                             @if(empty($childrens))
                                 <li @if(request()->is(@$menu->url)) class="current-menu-item active" @endif>
-                                    <a title="{{ @$menu->content }}" href="{{ @$menu->url }}">{{ @$menu->content }}</a>
+                                    <a title="{{ @$menu->content }}" href="{{ @$menu->url }}" @if(@$menu->new_tab == 1) target="_blank" @endif>{{ @$menu->content }}</a>
                                 </li>
                             @else
                                 <li class="mega dropdown"><a title="{{ @$menu->content }}" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">{{ @$menu->content }} <span class="caret"></span></a>
-
                                     <ul role="menu" class=" dropdown-menu">
                                         @foreach($childrens as $children)
-                                        <li><a href="{{ @$children->url }}" title="{{ @$children->content }}">{{ @$children->content }}</a></li>
+                                        <li><a href="{{ @$children->url }}" title="{{ @$children->content }}" @if(@$children->new_tab == 1) target="_blank" @endif>{{ @$children->content }}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>

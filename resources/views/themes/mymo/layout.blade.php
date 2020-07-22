@@ -52,6 +52,7 @@
         var ajax_auth_object = {
             "login_url": "{{ route('login.submit') }}",
             "register_url": "{{ route('register.submit') }}",
+            "forgot_password_url": "{{ route('register.submit') }}",
             "redirecturl":"{{ url()->current() }}",
             "loadingmessage":"@lang('app.sending_user_info_please_wait')",
             "sitekey":"",

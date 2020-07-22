@@ -21,26 +21,28 @@
                 </div>
             </div>
             <div class="col-md-4 hidden-xs">
-                <div id="get-bookmark" class="box-shadow"><i class="hl-bookmark"></i><span> Tủ phim</span><span class="count">0</span></div>
+                <div id="get-bookmark" class="box-shadow">
+                    <i class="hl-bookmark"></i><span> @lang('app.bookmark')</span>
+                    <span class="count">0</span>
+                </div>
                 <div class="user user-login-option box-shadow" id="pc-user-login">
                     <div class="dropdown">
+                        @if(Auth::check())
+                            <a href="javascript:void(0)" class="avt" id="userInfo2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <img src='http://1.gravatar.com/avatar/?s=20&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/?s=40&#038;d=mm&#038;r=g 2x' class='avatar avatar-20 photo avatar-default' height='20' width='20' />
+                                <span class="name">@lang('app.account')</span>
+                            </a>
+                            <ul class="dropdown-menu login-box" aria-labelledby="userInfo2">
+                                <li><a href="{{ route('account') }}"><i class="hl-user"></i> @lang('app.profile')</a></li>
+                                <li><a href="{{ route('account.change_password') }}"><i class="hl-lock-open-alt"></i> @lang('app.change_password')</a></li>
+                                <li><a href="{{ route('logout') }}" data-turbolinks="false"><i class="hl-off"></i> @lang('app.logout')</a></li>
+                            </ul>
+                        @else
                         <a href="javascript:void(0)" class="avt" id="userInfo">
-                            <img alt='' src='http://1.gravatar.com/avatar/?s=20&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/?s=40&#038;d=mm&#038;r=g 2x' class='avatar avatar-20 photo avatar-default' height='20' width='20' />                            <span class="name">Đăng nhập</span>
+                            <img src='http://1.gravatar.com/avatar/?s=20&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/?s=40&#038;d=mm&#038;r=g 2x' class='avatar avatar-20 photo avatar-default' height='20' width='20' />
+                            <span class="name">@lang('app.login')</span>
                         </a>
-                        {{--<ul class="dropdown-menu login-box" aria-labelledby="userInfo">
-                            <li class="twitter box-shadow">
-                                <a rel="nofollow" href="/wp-login.php?apsl_login_id=twitter_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg==" title='Đăng nhập bằng twitter'><i class="hl-twitter"></i> Login with <span>twitter</span>
-                                </a>
-                            </li>
-                            <li class="facebook box-shadow">
-                                <a rel="nofollow" href="/wp-login.php?apsl_login_id=facebook_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg==" title='Đăng nhập bằng facebook'><i class="hl-facebook"></i> Login with <span>facebook</span>
-                                </a>
-                            </li>
-                            <li class="google box-shadow">
-                                <a rel="nofollow" href="/wp-login.php?apsl_login_id=google_login&state=cmVkaXJlY3RfdG89aHR0cCUzQSUyRiUyRnhlbXBoaW1wbHVzLm5ldCUyRg==" title='Đăng nhập bằng google'><i class="hl-gplus"></i> Login with <span>google</span>
-                                </a>
-                            </li>
-                        </ul>--}}
+                        @endif
                     </div>
                 </div>
                 <div id="bookmark-list" class="hidden bookmark-list-on-pc"><ul style="margin: 0;"></ul></div>
