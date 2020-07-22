@@ -22,7 +22,7 @@ class YearController extends Controller
             'countries',
         ])
             ->where('status', '=', 1)
-            ->where('release', 'like', $year . '%')
+            ->where('year', '=', $year)
             ->orderBy('id', 'DESC')
             ->paginate(20);
     

@@ -31,8 +31,11 @@ class MoviesController extends Controller
             ->paginate(20);
         
         return view('themes.mymo.genre.index', [
+            'title' => get_config('movies_title'),
+            'description' => get_config('movies_description'),
+            'keywords' => get_config('movies_keywords'),
             'items' => $items,
-            'info' => $info
+            'info' => $info,
         ]);
     }
 }

@@ -15,9 +15,16 @@ class CountryController extends Controller
         
         $items = Movies::select([
             'id',
-            'thumbnail',
             'name',
+            'other_name',
+            'short_description',
+            'thumbnail',
             'slug',
+            'views',
+            'video_quality',
+            'year',
+            'genres',
+            'countries',
         ])
             ->where('status', '=', 1)
             ->whereRaw('find_in_set(?, countries)', [$info->id])
@@ -25,6 +32,9 @@ class CountryController extends Controller
             ->paginate(20);
         
         return view('themes.mymo.genre.index', [
+            'title' => $info->meta_title,
+            'description' => $info->meta_description,
+            'keywords' => $info->keywords,
             'items' => $items,
             'info' => $info,
         ]);

@@ -12,8 +12,8 @@ class CreateEmailTemplatesTable extends Migration
             $table->bigIncrements('id');
             $table->string('code', 30)->unique();
             $table->string('subject', 300);
+            $table->text('content')->nullable();
             $table->text('params')->nullable();
-            $table->string('template_file', 300);
             $table->timestamps();
         });
     }

@@ -43,4 +43,11 @@ class EmailList extends Model
         'params',
         'content',
     ];
+    
+    public function sendByTemplate() {
+        $template = EmailTemplates::findCode($this->template_file);
+        $this->subject = $template->subject;
+        $this->content = $template->content;
+        $this->save();
+    }
 }

@@ -29,8 +29,12 @@ class SendNotification extends Notification
             $mail = new EmailList();
             $mail->subject = $this->myNotification->subject;
             $mail->content = $this->myNotification->content;
+            $mail->template_file = 'notification';
             $mail->emails = $notifiable->email;
-            $mail->params = json_encode(['name' => $notifiable->name, 'email' => $notifiable->email]);
+            $mail->params = json_encode([
+                'name' => $notifiable->name,
+                'email' => $notifiable->email
+            ]);
             return $mail->save();
         }
         return false;

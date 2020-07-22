@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\EmailList;
 use App\Models\MyNotification;
 use App\User;
 use Illuminate\Console\Command;

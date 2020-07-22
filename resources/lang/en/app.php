@@ -244,4 +244,7 @@ return [
   'new_update' => 'New update',
   'filter' => 'Filter',
   'design' => 'Design',
+  'logged_successfully' => 'Logged successfully',
+  'registered_successfully' => 'Registered successfully',
+  'email_or_password_is_incorrect' => 'Email or password is incorrect',
 ];

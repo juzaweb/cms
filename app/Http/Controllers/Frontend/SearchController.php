@@ -53,17 +53,10 @@ class SearchController extends Controller
         }
         
         if ($data == 'html') {
-            if ($query->exists()) {
-                $query->limit(10);
-                return view('themes.mymo.data.search_item', [
-                    'keyword' => $q,
-                    'items' => $query->get(),
-                ]);
-            }
-            
+            $query->limit(10);
             return view('themes.mymo.data.search_item', [
                 'keyword' => $q,
-                'items' => [],
+                'items' => $query->get(),
             ]);
         }
         

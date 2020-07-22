@@ -28,6 +28,9 @@ class WatchController extends Controller
         $related_movies = $this->getRelatedMovies($info);
         
         return view('themes.mymo.watch.index', [
+            'title' => $info->meta_title,
+            'description' => $info->meta_description,
+            'keywords' => $info->keywords,
             'info' => $info,
             'genre' => $genre,
             'genres' => $genres,

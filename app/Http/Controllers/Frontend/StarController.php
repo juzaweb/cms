@@ -32,6 +32,9 @@ class StarController extends Controller
             ->paginate(20);
     
         return view('themes.mymo.genre.index', [
+            'title' => $info->name,
+            'description' => $info->name,
+            'keywords' => $info->name,
             'items' => $items,
             'info' => $info,
         ]);

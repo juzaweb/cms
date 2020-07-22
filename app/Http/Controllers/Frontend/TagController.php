@@ -9,7 +9,9 @@ use App\Models\Tags;
 class TagController extends Controller
 {
     public function index($slug) {
-        $info = Tags::where('slug', '=', $slug)->firstOrFail(['id', 'name']);
+        $info = Tags::where('slug', '=', $slug)
+            ->firstOrFail(['id', 'name']);
+        
         $items = Movies::select([
             'id',
             'name',

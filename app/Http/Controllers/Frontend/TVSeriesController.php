@@ -20,8 +20,8 @@ class TVSeriesController extends Controller
             'thumbnail',
             'slug',
             'views',
-            'year',
             'video_quality',
+            'year',
             'genres',
             'countries',
         ])
