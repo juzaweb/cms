@@ -177,12 +177,20 @@ function theme_setting($code) {
     return false;
 }
 
-function slider_setting($setting) {
-    $slider = Sliders::where('id', '=', $setting)
-        ->first();
+function slider_setting($slider_id) {
+    $slider = Sliders::find($slider_id);
     if ($slider) {
         return json_decode($slider->content);
     }
     
     return false;
+}
+
+function menu_setting($menu_id) {
+    $menu = Menu::find($menu_id);
+    if ($menu) {
+        return json_decode($menu->content);
+    }
+    
+    return [];
 }

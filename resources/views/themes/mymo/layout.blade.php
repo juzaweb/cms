@@ -2,8 +2,11 @@
 <html lang="vi-VN">
 <head>
     @php
-    $icon = image_url(get_config('icon'));
-    $logo = image_url(get_config('logo'));
+        $icon = image_url(get_config('icon'));
+        $logo = image_url(get_config('logo'));
+        $header = theme_setting('header');
+        $footer = theme_setting('footer');
+        $menu_main = menu_setting(@$header->main_menu->menu);
     @endphp
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,27 +27,22 @@
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:site" content="@XemPhimPlus"/>
     <meta name="csrf-token" content="{{ csrf_token()  }}">
-
+    <link rel="icon" href="{{ $icon }}" sizes="32x32"/>
+    <link rel="icon" href="{{ $icon }}" sizes="192x192"/>
+    <link rel="apple-touch-icon-precomposed" href="{{ $icon }}"/>
+    <meta name="msapplication-TileImage" content="{{ $icon }}"/>
     <link rel="stylesheet" href="{{ asset('styles/themes/mymo/css/main.css') }}"/>
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var langs = {
-            'apparently_there_are_no_posts_to_show': '@lang('app.apparently_there_are_no_posts_to_show')'
-        };
-        /* ]]> */
-    </script>
 
     <script type='text/javascript'>
         /* <![CDATA[ */
         var halim = {
-            "ajax_url":"http:\/\/xemphimplus.net\/wp-content\/themes\/halimmovies\/halim-ajax.php",
             "ajax_search_url": "{{ route('search') }}",
             "ajax_popular_movies_url": "{{ route('movies.popular') }}",
             "light_mode":"0",
             "light_mode_btn":"1",
             "ajax_live_search":"1",
             "sync":null,
-            "db_redirect_url":"http:\/\/xemphimplus.net\/"
+            "db_redirect_url":"{{ url()->current() }}"
         };
         /* ]]> */
     </script>
@@ -55,23 +53,24 @@
             "login_url": "{{ route('login.submit') }}",
             "register_url": "{{ route('register.submit') }}",
             "redirecturl":"{{ url()->current() }}",
-            "loadingmessage":"Sending user info, please wait...",
+            "loadingmessage":"@lang('app.sending_user_info_please_wait')",
             "sitekey":"",
             "languages":{
                 "login":"@lang('app.login')",
                 "register":"@lang('app.register')",
                 "forgotpassword":"B\u1ea1n qu\u00ean m\u1eadt kh\u1ea9u?",
                 "already_account":"Already have an account?",
-                "create_account":"Create account",
+                "create_account":"@lang('app.create_account')",
                 "reset_captcha":"Reset captcha",
                 "username":"@lang('app.name')",
                 "email":"@lang('app.email')",
                 "username_email":"@lang('app.email')",
                 "password":"@lang('app.password')",
-                "reset_password":"Thi\u1ebft l\u1eadp l\u1ea1i m\u1eadt kh\u1ea9u",
+                "reset_password":"@lang('app.reset_password')",
                 "login_with":"",
                 "register_with":"",
-                "or":"or"
+                "or":"@lang('app.or')",
+                "apparently_there_are_no_posts_to_show": "@lang('app.apparently_there_are_no_posts_to_show')"
             }
         };
         /* ]]> */
@@ -107,14 +106,7 @@
             right: 5px;
             bottom: 55px;
         }
-    </style>
 
-    <link rel="icon" href="{{ $icon }}" sizes="32x32"/>
-    <link rel="icon" href="{{ $icon }}" sizes="192x192"/>
-    <link rel="apple-touch-icon-precomposed" href="{{ $icon }}"/>
-    <meta name="msapplication-TileImage" content="{{ $icon }}"/>
-
-    <style>
         #header .site-title {
             background: url({{ image_url(get_config('logo')) }}) no-repeat top left;
             background-size: contain;
@@ -128,7 +120,7 @@
 @include('themes.mymo.menu')
 <!-- /header -->
 @if(request()->is('/'))
-@include('themes.mymo.slider')
+    @include('themes.mymo.slider')
 @endif
 
 <div class="container-fluid halim-full-player hidden halim-centered">
@@ -164,7 +156,9 @@
 </script>
 <div class="float-ck hidemobile">
     <div id="hide_float_left">
-        <a href="javascript:hide_float_left()">[X]</a></div>
+        <a href="javascript:hide_float_left()">[X]</a>
+    </div>
+
     <div id="float_content_left">
         <!-- Start quang cao-->
 

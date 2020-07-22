@@ -236,6 +236,7 @@ return [
   'logout' => 'Logout',
   'year' => 'Year',
   'sort' => 'Sort',
+  'or' => 'or',
   'formats' => 'Formats',
   'completed' => 'Completed',
   'ongoing' => 'Ongoing',
@@ -247,4 +248,7 @@ return [
   'logged_successfully' => 'Logged successfully',
   'registered_successfully' => 'Registered successfully',
   'email_or_password_is_incorrect' => 'Email or password is incorrect',
+  'reset_password' => 'Reset password',
+  'create_account' => 'Create account',
+  'sending_user_info_please_wait' => 'Sending user info, please wait...',
 ];

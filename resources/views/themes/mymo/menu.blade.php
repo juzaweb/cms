@@ -24,19 +24,26 @@
             <div class="collapse navbar-collapse" id="halim">
                 <div class="menu-main-menu-container">
                     <ul id="menu-main-menu" class="nav navbar-nav navbar-left">
+                        @foreach($menu_main as $menu)
+                            @php
+                                $childrens = isset($menu->children) ? $menu->children : [];
+                            @endphp
 
-                        <li class="current-menu-item active">
-                            <a title="Trang chủ" href="/">Trang chủ</a>
-                        </li>
+                            @if(empty($childrens))
+                                <li @if(request()->is(@$menu->url)) class="current-menu-item active" @endif>
+                                    <a title="{{ @$menu->content }}" href="{{ @$menu->url }}">{{ @$menu->content }}</a>
+                                </li>
+                            @else
+                                <li class="mega dropdown"><a title="{{ @$menu->content }}" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">{{ @$menu->content }} <span class="caret"></span></a>
 
-                        <li><a title="Phim bộ" href="{{ route('tv_series') }}">Phim bộ</a></li>
-
-                        <li class="mega dropdown"><a title="Thể loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Thể loại <span class="caret"></span></a>
-                            <ul role="menu" class=" dropdown-menu">
-                                <li><a title="Phim Âm Nhạc" href="/am-nhac">Phim Âm Nhạc</a></li>
-
-                            </ul>
-                        </li>
+                                    <ul role="menu" class=" dropdown-menu">
+                                        @foreach($childrens as $children)
+                                        <li><a href="{{ @$children->url }}" title="{{ @$children->content }}">{{ @$children->content }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
+                        @endforeach
 
                     </ul>
                 </div>

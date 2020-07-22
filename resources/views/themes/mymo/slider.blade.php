@@ -2,7 +2,6 @@
 <div class="container">
     <div class="text-center"></div>
     <div class="row fullwith-slider">
-
         @php
             $sliders = slider_setting(@$home->slider->slider);
         @endphp
