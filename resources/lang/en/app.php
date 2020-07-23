@@ -6,6 +6,7 @@ return [
   'movies' => 'Movies',
   'tv_series' => 'TV Series',
   'genre' => 'Genre',
+  'choose_genre' => 'Choose genre',
   'genres' => 'Genres',
   'add_genres' => 'Add genres',
   'key' => 'Key',
@@ -257,4 +258,6 @@ return [
   'admin_panel' => 'Admin panel',
   'error_logs' => 'Error logs',
   'sending_user_info_please_wait' => 'Sending user info, please wait...',
+  'menu_link' => 'Menu link',
+  'custom_html' => 'Custom html',
 ];

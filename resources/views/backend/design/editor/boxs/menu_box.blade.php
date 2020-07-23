@@ -8,7 +8,7 @@
 
 <div class="theme-setting theme-setting--text editor-item">
     <label class="next-label">{{ trans('app.menu') }}</label>
-    <select name="{{ $card['code'] }}[{{ $input['name'] }}][menu]" class="load-menu">
+    <select name="{{ $card['code'] }}[{{ $input['name'] }}]" class="load-menu">
         @if($menu)
             <option value="{{ $menu->id }}">{{ $menu->name }}</option>
         @endif

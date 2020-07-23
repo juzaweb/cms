@@ -50,6 +50,9 @@ $(document).on("turbolinks:load", function() {
 
     $(".form-product-list").on('change', '.select-ctype', function () {
         let ctype = $(this).val();
-
+        if (parseInt(ctype) > 0) {
+            $(this).closest('.form-product-list').find('.ctype').hide('slow');
+            $(this).closest('.form-product-list').find('.ctype-'+ ctype).show('slow');
+        }
     });
 });

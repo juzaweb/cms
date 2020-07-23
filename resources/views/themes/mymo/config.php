@@ -50,7 +50,11 @@ return [
                 'name' => trans('app.slider') . ' ' . trans('app.movies'),
                 'status' => true,
                 'input_items' => [
-                
+                    [
+                        'element' => 'category',
+                        'title' => trans('app.title'),
+                        'name' => 'category',
+                    ]
                 ]
             ],
             [
@@ -98,15 +102,8 @@ return [
                 'name' => trans('app.column') . ' 2',
                 'input_items' => [
                     [
-                        'element' => 'input',
-                        'title' => trans('app.title'),
-                        'type' => 'text',
-                        'name' => 'title',
-                    ],
-                    [
-                        'element' => 'menu',
-                        'title' => trans('app.menu'),
-                        'name' => 'menu',
+                        'element' => 'footer_column',
+                        'name' => 'column',
                     ]
                 ]
             ],
@@ -115,15 +112,8 @@ return [
                 'name' => trans('app.column') . ' 3',
                 'input_items' => [
                     [
-                        'element' => 'input',
-                        'title' => trans('app.title'),
-                        'type' => 'text',
-                        'name' => 'title',
-                    ],
-                    [
-                        'element' => 'menu',
-                        'title' => trans('app.menu'),
-                        'name' => 'menu',
+                        'element' => 'footer_column',
+                        'name' => 'column',
                     ]
                 ]
             ],
@@ -132,15 +122,8 @@ return [
                 'name' => trans('app.column') . ' 4',
                 'input_items' => [
                     [
-                        'element' => 'input',
-                        'title' => trans('app.title'),
-                        'type' => 'text',
-                        'name' => 'title',
-                    ],
-                    [
-                        'element' => 'menu',
-                        'title' => trans('app.menu'),
-                        'name' => 'menu',
+                        'element' => 'footer_column',
+                        'name' => 'column',
                     ]
                 ]
             ]
