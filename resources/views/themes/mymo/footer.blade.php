@@ -23,20 +23,8 @@
                 <div class="video-item halim-entry-box hidden-xs">
                     <div class="item-content tagcloud">
                         <a href="/tag/banhtv" class="tag-cloud-link tag-link-5448 tag-link-position-1" style="font-size: 10pt;" aria-label="Banhtv - Xem phim online hay với chất lượng HD (117 mục)">Banhtv - Xem phim online hay với chất lượng HD</a>
-                        <a href="/tag/dongphim" class="tag-cloud-link tag-link-7428 tag-link-position-2" style="font-size: 8.25pt;" aria-label="DongPhim - Trang phim hot nhất hiện nay (100 mục)">DongPhim - Trang phim hot nhất hiện nay</a>
-                        <a href="/tag/fimfast" class="tag-cloud-link tag-link-7697 tag-link-position-3" style="font-size: 8.25pt;" aria-label="FimFast - Xem phim gì chẳng có (100 mục)">FimFast - Xem phim gì chẳng có</a>
-                        <a href="/tag/hdonline" class="tag-cloud-link tag-link-5445 tag-link-position-4" style="font-size: 9.25pt;" aria-label="HDOnline - Xem Phim HD Online chất lượng tốt nhất (109 mục)">HDOnline - Xem Phim HD Online chất lượng tốt nhất</a>
-                        <a href="/tag/hdviet" class="tag-cloud-link tag-link-7696 tag-link-position-5" style="font-size: 8.25pt;" aria-label="HDViet - Sự trổi dậy của Phim Ảnh (100 mục)">HDViet - Sự trổi dậy của Phim Ảnh</a>
-                        <a href="/tag/motphim" class="tag-cloud-link tag-link-7425 tag-link-position-6" style="font-size: 8.25pt;" aria-label="MotPhim - Tiểu Thuyết Của Những Cuốn Phim (100 mục)">MotPhim - Tiểu Thuyết Của Những Cuốn Phim</a>
-                        <a href="/tag/phim3s" class="tag-cloud-link tag-link-6459 tag-link-position-7" style="font-size: 9.75pt;" aria-label="Phim3s - Xem phim3s online với chất lượng tốt nhất (113 mục)">Phim3s - Xem phim3s online với chất lượng tốt nhất</a>
-                        <a href="/tag/phimbathu-com" class="tag-cloud-link tag-link-5446 tag-link-position-8" style="font-size: 9.5pt;" aria-label="PhimBatHu - Xem Phim Online với tốc độ siêu nhanh (112 mục)">PhimBatHu - Xem Phim Online với tốc độ siêu nhanh</a>
-                        <a href="/tag/phimmoi" class="tag-cloud-link tag-link-5444 tag-link-position-9" style="font-size: 9.5pt;" aria-label="Phimmoi - Xem phim mới mang lại đột phá (112 mục)">Phimmoi - Xem phim mới mang lại đột phá</a>
-                        <a href="/tag/topphimmoi" class="tag-cloud-link tag-link-7701 tag-link-position-10" style="font-size: 8pt;" aria-label="topphimmoi (97 mục)">topphimmoi</a>
-                        <a href="/tag/tvhay" class="tag-cloud-link tag-link-7695 tag-link-position-11" style="font-size: 8.25pt;" aria-label="TVHay - Xem Phim Giải Trí (100 mục)">TVHay - Xem Phim Giải Trí</a>
-                        <a href="/tag/vungtv" class="tag-cloud-link tag-link-7426 tag-link-position-12" style="font-size: 8pt;" aria-label="VungTV - Kho Tàng Phim Ảnh (97 mục)">VungTV - Kho Tàng Phim Ảnh</a>
-                        <a href="/tag/xemvtv" class="tag-cloud-link tag-link-7700 tag-link-position-13" style="font-size: 8pt;" aria-label="Xemvtv - Đừng Bỏ Lỡ Thời Gian Trống (97 mục)">Xemvtv - Đừng Bỏ Lỡ Thời Gian Trống</a>
-                        <a href="/tag/yeuphimmoi" class="tag-cloud-link tag-link-7694 tag-link-position-14" style="font-size: 8.25pt;" aria-label="YeuPhimMoi - Trọn Vẹn Thời Gian Cho Phim (100 mục)">YeuPhimMoi - Trọn Vẹn Thời Gian Cho Phim</a>
-                        <a href="/tag/zingtv" class="tag-cloud-link tag-link-7699 tag-link-position-15" style="font-size: 8pt;" aria-label="ZingTv - Phim Online Hay Nhất Mọi Thời Đại (97 mục)">ZingTv - Phim Online Hay Nhất Mọi Thời Đại</a>	                <div class="clearfix"></div>
+
+                        <div class="clearfix"></div>
                     </div>
                     <div class="item-content-toggle">
                         <div class="item-content-gradient"></div>

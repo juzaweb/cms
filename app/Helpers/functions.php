@@ -157,8 +157,13 @@ function full_text_wildcards($term) {
 }
 
 function theme_config($code) {
-    return ThemeConfigs::where('code', '=', $code)
-        ->first();
+    $config = ThemeConfigs::where('code', '=', $code)
+        ->first(['content']);
+    if ($config) {
+        return json_decode($config->content, true);
+    }
+    
+    return false;
 }
 
 function menu_info($id) {

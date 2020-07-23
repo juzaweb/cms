@@ -6,7 +6,7 @@
         $logo = image_url(get_config('logo'));
         $header = theme_setting('header');
         $footer = theme_setting('footer');
-        $menu_main = menu_setting(@$header->main_menu->menu);
+        $menu_main = menu_setting(@$header->main_menu->menu->menu);
     @endphp
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">

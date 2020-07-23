@@ -27,7 +27,7 @@
 
 @foreach($config as $index => $item)
     @php
-        $options = json_decode(theme_config($item['code']), true);
+        $options = theme_config($item['code']);
     @endphp
     <div class="theme-editor__panel" id="panel-{{ $index }}" tabindex="-1">
         <header class="te-panel__header">
@@ -88,7 +88,9 @@
                                                 @include('backend.design.editor.boxs.input_box')
 
                                             @else
+
                                                 @include('backend.design.editor.boxs.'. $input['element'] .'_box')
+
                                             @endif
 
                                         @endforeach

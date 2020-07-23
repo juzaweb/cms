@@ -63,9 +63,9 @@ return [
                 'name' => trans('app.movie_list') . ' 1',
                 'input_items' => [
                     [
-                        'element' => 'category',
+                        'element' => 'genre',
                         'title' => trans('app.movie_list'),
-                        'name' => 'category',
+                        'name' => 'genre',
                     ]
                 ]
             ],
@@ -75,9 +75,9 @@ return [
                 'name' => trans('app.movie_list') . ' 2',
                 'input_items' => [
                     [
-                        'element' => 'category',
+                        'element' => 'genre',
                         'title' => trans('app.movie_list'),
-                        'name' => 'category',
+                        'name' => 'genre',
                     ]
                 ]
             ],
@@ -87,9 +87,9 @@ return [
                 'name' => trans('app.movie_list') . ' 3',
                 'input_items' => [
                     [
-                        'element' => 'category',
+                        'element' => 'genre',
                         'title' => trans('app.movie_list'),
-                        'name' => 'category',
+                        'name' => 'genre',
                     ]
                 ]
             ],
@@ -99,9 +99,9 @@ return [
                 'name' => trans('app.movie_list') . ' 4',
                 'input_items' => [
                     [
-                        'element' => 'category',
+                        'element' => 'genre',
                         'title' => trans('app.movie_list'),
-                        'name' => 'category',
+                        'name' => 'genre',
                     ]
                 ]
             ]
@@ -125,11 +125,6 @@ return [
                         'element' => 'textarea',
                         'title' => trans('app.description'),
                         'name' => 'description',
-                    ],
-                    [
-                        'element' => 'slider',
-                        'title' => trans('app.slider_payment_method'),
-                        'name' => 'payment_methods',
                     ]
                 ]
             ],
