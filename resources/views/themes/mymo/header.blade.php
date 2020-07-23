@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row" id="headwrap">
             <div class="col-md-3 col-sm-6 slogan">
-                <h1 class="site-title"><a class="logo" href="/" rel="home">XemPhimPlus | Phim Hay | Phim Mới</a></h1>
+                <h1 class="site-title"><a class="logo" href="/" rel="home">{{ get_config('title') }}</a></h1>
             </div>
 
             <div class="col-md-5 col-sm-6 halim-search-form hidden-xs">

@@ -220,16 +220,18 @@ function menu_setting($menu_id) {
 }
 
 function genre_setting($setting) {
-    $order = isset($setting->order) ?: 'id_DESC';
+    $order = isset($setting->order) ? $setting->order : 'id_DESC';
     $limit = isset($setting->limit) ? intval($setting->limit) : 6;
     $ctype = isset($setting->ctype) ? intval($setting->ctype) : 1;
+    $format = isset($setting->format) ? intval($setting->format) : 0;
     $order = explode('_', $order);
+    $result = new stdClass();
     
     if (empty($ctype)) {
         $ctype = 1;
     }
     
-    if (!in_array($order[0], ['update', 'view'])) {
+    if (!in_array($order[0], ['updated_at', 'view'])) {
         $order[0] = 'id';
     }
     
@@ -238,7 +240,25 @@ function genre_setting($setting) {
     }
     
     $query = Movies::query();
+    $query->select([
+        'id',
+        'name',
+        'other_name',
+        'short_description',
+        'thumbnail',
+        'slug',
+        'views',
+        'video_quality',
+        'year',
+        'genres',
+        'countries',
+    ]);
+    
     $query->where('status', '=', 1);
+    
+    if ($format) {
+        $query->where('tv_series', '=', $format - 1);
+    }
     
     if ($ctype == 1) {
         if (@$setting->genre) {
@@ -261,7 +281,6 @@ function genre_setting($setting) {
     $query->orderBy($order[0], $order[1]);
     $query->limit($limit);
     
-    $result = new stdClass();
     $result->items = $query->get();
     $result->title = @$setting->title;
     return $result;

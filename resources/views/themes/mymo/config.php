@@ -54,6 +54,9 @@ return [
                         'element' => 'genre',
                         'title' => trans('app.title'),
                         'name' => 'genre',
+                        'limit' => [
+                            'default' => 12
+                        ]
                     ]
                 ]
             ],
@@ -66,6 +69,9 @@ return [
                         'element' => 'genre',
                         'title' => trans('app.movie_list'),
                         'name' => 'genre',
+                        'limit' => [
+                            'default' => 12
+                        ]
                     ]
                 ]
             ],
@@ -78,6 +84,9 @@ return [
                         'element' => 'genre',
                         'title' => trans('app.movie_list'),
                         'name' => 'genre',
+                        'limit' => [
+                            'default' => 12
+                        ]
                     ]
                 ]
             ],
@@ -90,18 +99,9 @@ return [
                         'element' => 'genre',
                         'title' => trans('app.movie_list'),
                         'name' => 'genre',
-                    ]
-                ]
-            ],
-            [
-                'code' => 'genre4',
-                'status' => true,
-                'name' => trans('app.movie_list') . ' 4',
-                'input_items' => [
-                    [
-                        'element' => 'genre',
-                        'title' => trans('app.movie_list'),
-                        'name' => 'genre',
+                        'limit' => [
+                            'default' => 12
+                        ]
                     ]
                 ]
             ]
@@ -141,16 +141,6 @@ return [
             [
                 'code' => 'column3',
                 'name' => trans('app.column') . ' 3',
-                'input_items' => [
-                    [
-                        'element' => 'footer_column',
-                        'name' => 'column',
-                    ]
-                ]
-            ],
-            [
-                'code' => 'column4',
-                'name' => trans('app.column') . ' 4',
                 'input_items' => [
                     [
                         'element' => 'footer_column',

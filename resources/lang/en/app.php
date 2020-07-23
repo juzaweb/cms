@@ -239,6 +239,7 @@ return [
   'year' => 'Year',
   'sort' => 'Sort',
   'or' => 'or',
+  'format' => 'Format',
   'formats' => 'Formats',
   'completed' => 'Completed',
   'ongoing' => 'Ongoing',

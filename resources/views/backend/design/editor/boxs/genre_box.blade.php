@@ -1,6 +1,7 @@
 @php
     $title = @$option_card[$input['name']]['title'];
     $ctype = @$option_card[$input['name']]['ctype'] ?: 1;
+    $format = @$option_card[$input['name']]['format'];
     $genre_id = @$option_card[$input['name']]['genre'];
     $type_id = @$option_card[$input['name']]['type'];
     $country_id = @$option_card[$input['name']]['country'];
@@ -9,7 +10,7 @@
     $type = type_info($type_id);
     $country = type_info($country_id);
 
-    $order = 'id_DESC';
+    $order = 'updated_at_DESC';
     if (isset($option_card[$input['name']]['order'])) {
         $order = $option_card[$input['name']]['order'];
     }
@@ -67,10 +68,19 @@
     </div>
 
     <div class="theme-setting theme-setting--text editor-item">
+        <label class="next-label">{{ trans('app.format') }}</label>
+        <select name="{{ $card['code'] }}[{{ $input['name'] }}][format]" class="next-input">
+            <option value="">--- {{ trans('app.format') }} ---</option>
+            <option value="1" @if($format == 1) selected @endif>{{ trans('app.movies') }}</option>
+            <option value="2" @if($format == 2) selected @endif>{{ trans('app.tv_series') }}</option>
+        </select>
+    </div>
+
+    <div class="theme-setting theme-setting--text editor-item">
         <label class="next-label">{{ trans('app.sort') }}</label>
         <select name="{{ $card['code'] }}[{{ $input['name'] }}][order]">
-            <option value="update_DESC" @if($order == 'update_DESC') selected @endif>{{ trans('app.latest') }}</option>
-            <option value="update_ASC" @if($order == 'update_ASC') selected @endif>{{ trans('app.oldest') }}</option>
+            <option value="updated_at_DESC" @if($order == 'updated_at_DESC') selected @endif>{{ trans('app.latest') }}</option>
+            <option value="updated_at_ASC" @if($order == 'updated_at_ASC') selected @endif>{{ trans('app.oldest') }}</option>
             <option value="view_DESC" @if($order == 'view_DESC') selected @endif>{{ trans('app.price_high_to_low') }}</option>
             <option value="view_ASC" @if($order == 'view_ASC') selected @endif>{{ trans('app.price_low_to_high') }}</option>
         </select>
