@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8112b8a56b7d869e1051feecbab810a",
+    "content-hash": "4bf654496ead5bb854e477e9c8d218fa",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -707,48 +707,6 @@
                 "parser"
             ],
             "time": "2019-12-30T22:54:17+00:00"
-        },
-        {
-            "name": "esemve/hook",
-            "version": "0.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/esemve/Hook.git",
-                "reference": "ddbdf983776f08ef80335dca95e12917568403dc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/esemve/Hook/zipball/ddbdf983776f08ef80335dca95e12917568403dc",
-                "reference": "ddbdf983776f08ef80335dca95e12917568403dc",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "5.* || 6.*",
-                "php": ">=5.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Esemve\\Hook\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bence Kádár",
-                    "email": "esemve@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Simple hook engine for Laravel 5.*, 6.*",
-            "keywords": [
-                "HOOK",
-                "laravel"
-            ],
-            "time": "2019-09-24T12:16:44+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -1844,77 +1802,6 @@
                 "php"
             ],
             "time": "2020-07-02T17:12:47+00:00"
-        },
-        {
-            "name": "nwidart/laravel-modules",
-            "version": "6.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nWidart/laravel-modules.git",
-                "reference": "6dc702eeb5d025b4cd331bc394e47ccc43b68e89"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/6dc702eeb5d025b4cd331bc394e47ccc43b68e89",
-                "reference": "6dc702eeb5d025b4cd331bc394e47ccc43b68e89",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.2"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.15",
-                "laravel/framework": "6.0.*",
-                "mockery/mockery": "~1.0",
-                "orchestra/testbench": "^4.0",
-                "phpstan/phpstan": "^0.9.2",
-                "phpunit/phpunit": "~7.0|~8.0",
-                "spatie/phpunit-snapshot-assertions": "^2.1.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Nwidart\\Modules\\LaravelModulesServiceProvider"
-                    ],
-                    "aliases": {
-                        "Module": "Nwidart\\Modules\\Facades\\Module"
-                    }
-                },
-                "branch-alias": {
-                    "dev-master": "6.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Nwidart\\Modules\\": "src"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Widart",
-                    "email": "n.widart@gmail.com",
-                    "homepage": "https://nicolaswidart.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel Module management",
-            "keywords": [
-                "laravel",
-                "module",
-                "modules",
-                "nwidart",
-                "rad"
-            ],
-            "time": "2019-11-12T18:38:48+00:00"
         },
         {
             "name": "opis/closure",

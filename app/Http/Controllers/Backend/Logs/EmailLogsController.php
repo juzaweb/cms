@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\Logs;
 
 use App\Models\EmailList;
 use Illuminate\Http\Request;
@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class EmailLogsController extends Controller
 {
     public function index() {
-        return view('backend.email_logs.index');
+        return view('backend.logs.email');
     }
     
     public function getData(Request $request) {

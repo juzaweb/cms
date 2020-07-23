@@ -1,0 +1,95 @@
+<?php
+
+Route::group(['prefix' => 'setting/system'], function () {
+    Route::get('/', 'Backend\Setting\SystemSettingController@index')->name('admin.setting');
+    
+    Route::post('/save', 'Backend\Setting\SystemSettingController@save')->name('admin.setting.save');
+});
+
+Route::group(['prefix' => 'setting/email'], function () {
+    Route::get('/', 'Backend\Setting\EmailSettingController@index')->name('admin.setting.email');
+    
+    Route::post('/save', 'Backend\Setting\EmailSettingController@save')->name('admin.setting.email.save');
+});
+
+Route::group(['prefix' => 'setting/email-templates'], function () {
+    Route::get('/', 'Backend\Setting\EmailTemplateController@index')->name('admin.setting.email_templates');
+    
+    Route::get('/getdata', 'Backend\Setting\EmailTemplateController@getData')->name('admin.setting.email_templates.getdata');
+    
+    Route::get('/create', 'Backend\Setting\EmailTemplateController@form')->name('admin.setting.email_templates.create');
+    
+    Route::get('/edit/{id}', 'Backend\Setting\EmailTemplateController@form')->name('admin.setting.email_templates.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\Setting\EmailTemplateController@save')->name('admin.setting.email_templates.save');
+    
+    Route::post('/remove', 'Backend\Setting\EmailTemplateController@remove')->name('admin.setting.email_templates.remove');
+});
+
+Route::group(['prefix' => 'setting/languages'], function () {
+    Route::get('/', 'Backend\Setting\LanguagesController@index')->name('admin.setting.languages');
+    
+    Route::get('/getdata', 'Backend\Setting\LanguagesController@getData')->name('admin.setting.languages.getdata');
+    
+    Route::post('/save', 'Backend\Setting\LanguagesController@save')->name('admin.setting.languages.save');
+    
+    Route::post('/remove', 'Backend\Setting\LanguagesController@remove')->name('admin.setting.languages.remove');
+    
+    Route::post('/sync', 'Backend\Setting\LanguagesController@syncLanguage')->name('admin.setting.languages.sync');
+    
+    Route::post('/set-default', 'Backend\Setting\LanguagesController@setDefault')->name('admin.setting.languages.default');
+});
+
+Route::group(['prefix' => 'setting/translate'], function () {
+    Route::get('/{lang}', 'Backend\Setting\TranslateController@index')->name('admin.setting.translate')->where('lang', '[a-z]+');
+    
+    Route::get('/{lang}/getdata', 'Backend\Setting\TranslateController@getData')->name('admin.setting.translate.getdata')->where('lang', '[a-z]+');
+    
+    Route::post('/{lang}/save', 'Backend\Setting\TranslateController@save')->name('admin.setting.translate.save')->where('lang', '[a-z]+');
+});
+
+Route::group(['prefix' => 'setting/video-qualities'], function () {
+    Route::get('/', 'Backend\Setting\VideoQualityController@index')->name('admin.video_qualities');
+    
+    Route::get('/getdata', 'Backend\Setting\VideoQualityController@getData')->name('admin.video_qualities.getdata');
+    
+    Route::get('/create', 'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.create');
+    
+    Route::get('/edit/{id}', 'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\Setting\VideoQualityController@save')->name('admin.video_qualities.save');
+    
+    Route::post('/remove', 'Backend\Setting\VideoQualityController@remove')->name('admin.video_qualities.remove');
+});
+
+Route::group(['prefix' => 'setting/ads'], function () {
+    Route::get('/', 'Backend\Setting\AdsSettingController@index')->name('admin.setting.ads');
+    
+    Route::get('/getdata', 'Backend\AdsSettingController@getData')->name('admin.setting.ads.getdata');
+    
+    Route::get('/create', 'Backend\AdsSettingController@form')->name('admin.setting.ads.create');
+    
+    Route::get('/edit/{id}', 'Backend\AdsSettingController@form')->name('admin.setting.ads.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\AdsSettingController@save')->name('admin.setting.ads.save');
+});
+
+Route::group(['prefix' => 'setting/video-ads'], function () {
+    Route::get('/', 'Backend\Setting\VideoAdsController@index')->name('admin.setting.video_ads');
+    
+    Route::get('/getdata', 'Backend\Setting\VideoAdsController@getData')->name('admin.setting.video_ads.getdata');
+    
+    Route::get('/create', 'Backend\Setting\VideoAdsController@form')->name('admin.setting.video_ads.create');
+    
+    Route::get('/edit/{id}', 'Backend\Setting\VideoAdsController@form')->name('admin.setting.video_ads.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\Setting\VideoAdsController@save')->name('admin.setting.video_ads.save');
+    
+    Route::post('/remove', 'Backend\Setting\VideoAdsController@remove')->name('admin.setting.video_ads.remove');
+});
+
+Route::group(['prefix' => 'setting/seo'], function () {
+    Route::get('/', 'Backend\Setting\SeoSettingController@index')->name('admin.setting.seo');
+    
+    Route::post('/save', 'Backend\Setting\SeoSettingController@save')->name('admin.setting.seo.save');
+});

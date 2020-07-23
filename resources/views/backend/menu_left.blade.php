@@ -1,4 +1,5 @@
-<ul class="cui__menuLeft__navigation" data-turbolinks-track="reload">
+<ul class="cui__menuLeft__navigation">
+
     <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link @if(request()->is('admin-cp')) cui__menuLeft__item--active @endif" href="{{ route('admin.dashboard') }}">
             <span class="cui__menuLeft__item__title">@lang('app.dashboard')</span>
@@ -83,52 +84,52 @@
         </a>
     </li>
 
-    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+    <li class="cui__menuLeft__item cui__menuLeft__submenu @if(request()->is('admin-cp/comments*')) cui__menuLeft__submenu--toggled @endif">
         <span class="cui__menuLeft__item__link">
             <span class="cui__menuLeft__item__title">@lang('app.comments')</span>
             <i class="cui__menuLeft__item__icon fe fe-message-square"></i>
         </span>
-        <ul class="cui__menuLeft__navigation">
+        <ul class="cui__menuLeft__navigation" @if(request()->is('admin-cp/comments*')) style="display: block;" @endif>
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.movie_comments') }}" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.movie_comments') }}" class="cui__menuLeft__item__link @if(request()->is('admin-cp/comments/movie*')) cui__menuLeft__item--active @endif">
                     <span class="cui__menuLeft__item__title">@lang('app.movie_comments')</span>
                 </a>
             </li>
 
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.post_comments') }}" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.post_comments') }}" class="cui__menuLeft__item__link @if(request()->is('admin-cp/comments/post*')) cui__menuLeft__item--active @endif">
                     <span class="cui__menuLeft__item__title">@lang('app.post_comments')</span>
                 </a>
             </li>
 
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.setting.comment') }}" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.setting.comment') }}" class="cui__menuLeft__item__link @if(request()->is('admin-cp/comments/setting*')) cui__menuLeft__item--active @endif">
                     <span class="cui__menuLeft__item__title">@lang('app.setting')</span>
                 </a>
             </li>
         </ul>
     </li>
 
-    <li class="cui__menuLeft__item cui__menuLeft__submenu">
+    <li class="cui__menuLeft__item cui__menuLeft__submenu @if(request()->is('admin-cp/design*')) cui__menuLeft__submenu--toggled @endif">
         <span class="cui__menuLeft__item__link">
             <span class="cui__menuLeft__item__title">@lang('app.design')</span>
             <i class="cui__menuLeft__item__icon fe fe-layout"></i>
         </span>
-        <ul class="cui__menuLeft__navigation">
-            <li class="cui__menuLeft__item">
+        <ul class="cui__menuLeft__navigation" @if(request()->is('admin-cp/design*')) style="display: block" @endif>
+            {{--<li class="cui__menuLeft__item">
                 <a href="{{ route('admin.design.themes') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.themes')</span>
                 </a>
-            </li>
+            </li>--}}
 
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.design.menu') }}" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.design.menu') }}" class="cui__menuLeft__item__link @if(request()->is('admin-cp/design/menu*')) cui__menuLeft__item--active @endif">
                     <span class="cui__menuLeft__item__title">@lang('app.menu')</span>
                 </a>
             </li>
 
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.design.sliders') }}" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.design.sliders') }}" class="cui__menuLeft__item__link @if(request()->is('admin-cp/design/sliders*')) cui__menuLeft__item--active @endif">
                     <span class="cui__menuLeft__item__title">@lang('app.sliders')</span>
                 </a>
             </li>

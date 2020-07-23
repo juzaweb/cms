@@ -255,5 +255,6 @@ return [
   'account' => 'Account',
   'profile' => 'Profile',
   'admin_panel' => 'Admin panel',
+  'error_logs' => 'Error logs',
   'sending_user_info_please_wait' => 'Sending user info, please wait...',
 ];

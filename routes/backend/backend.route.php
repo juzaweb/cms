@@ -1,4 +1,8 @@
 <?php
+
+require_once __DIR__ . '/design.route.php';
+require_once __DIR__ . '/setting.route.php';
+
 Route::group(['prefix' => 'filemanager'], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
@@ -235,138 +239,6 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
 });
 
-Route::group(['prefix' => 'design/themes'], function () {
-    Route::get('/', 'Backend\Design\ThemesController@index')->name('admin.design.themes');
-    
-    Route::post('/save', 'Backend\Design\ThemesController@save')->name('admin.design.themes.save');
-});
-
-Route::group(['prefix' => 'design/menu'], function () {
-    Route::get('/', 'Backend\Design\MenuController@index')->name('admin.design.menu');
-    
-    Route::get('/{id}', 'Backend\Design\MenuController@index')->name('admin.design.menu.id');
-    
-    Route::post('/add-menu', 'Backend\Design\MenuController@addMenu')->name('admin.design.menu.add');
-    
-    Route::post('/save', 'Backend\Design\MenuController@save')->name('admin.design.menu.save');
-    
-    Route::post('/get-data', 'Backend\Design\MenuController@getItems')->name('admin.design.menu.items');
-});
-
-Route::group(['prefix' => 'design/sliders'], function () {
-    Route::get('/', 'Backend\Design\SlidersController@index')->name('admin.design.sliders');
-    
-    Route::get('/getdata', 'Backend\Design\SlidersController@getData')->name('admin.design.sliders.getdata');
-    
-    Route::get('/create', 'Backend\Design\SlidersController@form')->name('admin.design.sliders.create');
-    
-    Route::get('/edit/{id}', 'Backend\Design\SlidersController@form')->name('admin.design.sliders.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\Design\SlidersController@save')->name('admin.design.sliders.save');
-    
-    Route::post('/remove', 'Backend\Design\SlidersController@remove')->name('admin.design.sliders.remove');
-});
-
-Route::group(['prefix' => 'design/editor'], function () {
-    Route::get('/', 'Backend\Design\ThemeEditorController@index')->name('admin.design.editor');
-    
-    Route::post('/save', 'Backend\Design\ThemeEditorController@save')->name('admin.design.editor.save');
-});
-
-Route::group(['prefix' => 'setting/system'], function () {
-    Route::get('/', 'Backend\Setting\SystemSettingController@index')->name('admin.setting');
-    
-    Route::post('/save', 'Backend\Setting\SystemSettingController@save')->name('admin.setting.save');
-});
-
-Route::group(['prefix' => 'setting/email'], function () {
-    Route::get('/', 'Backend\Setting\EmailSettingController@index')->name('admin.setting.email');
-    
-    Route::post('/save', 'Backend\Setting\EmailSettingController@save')->name('admin.setting.email.save');
-});
-
-Route::group(['prefix' => 'setting/email-templates'], function () {
-    Route::get('/', 'Backend\Setting\EmailTemplateController@index')->name('admin.setting.email_templates');
-    
-    Route::get('/getdata', 'Backend\Setting\EmailTemplateController@getData')->name('admin.setting.email_templates.getdata');
-    
-    Route::get('/create', 'Backend\Setting\EmailTemplateController@form')->name('admin.setting.email_templates.create');
-    
-    Route::get('/edit/{id}', 'Backend\Setting\EmailTemplateController@form')->name('admin.setting.email_templates.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\Setting\EmailTemplateController@save')->name('admin.setting.email_templates.save');
-    
-    Route::post('/remove', 'Backend\Setting\EmailTemplateController@remove')->name('admin.setting.email_templates.remove');
-});
-
-Route::group(['prefix' => 'setting/languages'], function () {
-    Route::get('/', 'Backend\Setting\LanguagesController@index')->name('admin.setting.languages');
-    
-    Route::get('/getdata', 'Backend\Setting\LanguagesController@getData')->name('admin.setting.languages.getdata');
-    
-    Route::post('/save', 'Backend\Setting\LanguagesController@save')->name('admin.setting.languages.save');
-    
-    Route::post('/remove', 'Backend\Setting\LanguagesController@remove')->name('admin.setting.languages.remove');
-    
-    Route::post('/sync', 'Backend\Setting\LanguagesController@syncLanguage')->name('admin.setting.languages.sync');
-    
-    Route::post('/set-default', 'Backend\Setting\LanguagesController@setDefault')->name('admin.setting.languages.default');
-});
-
-Route::group(['prefix' => 'setting/translate'], function () {
-    Route::get('/{lang}', 'Backend\Setting\TranslateController@index')->name('admin.setting.translate')->where('lang', '[a-z]+');
-    
-    Route::get('/{lang}/getdata', 'Backend\Setting\TranslateController@getData')->name('admin.setting.translate.getdata')->where('lang', '[a-z]+');
-    
-    Route::post('/{lang}/save', 'Backend\Setting\TranslateController@save')->name('admin.setting.translate.save')->where('lang', '[a-z]+');
-});
-
-Route::group(['prefix' => 'setting/video-qualities'], function () {
-    Route::get('/', 'Backend\Setting\VideoQualityController@index')->name('admin.video_qualities');
-    
-    Route::get('/getdata', 'Backend\Setting\VideoQualityController@getData')->name('admin.video_qualities.getdata');
-    
-    Route::get('/create', 'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.create');
-    
-    Route::get('/edit/{id}', 'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\Setting\VideoQualityController@save')->name('admin.video_qualities.save');
-    
-    Route::post('/remove', 'Backend\Setting\VideoQualityController@remove')->name('admin.video_qualities.remove');
-});
-
-Route::group(['prefix' => 'setting/ads'], function () {
-    Route::get('/', 'Backend\Setting\AdsSettingController@index')->name('admin.setting.ads');
-    
-    Route::get('/getdata', 'Backend\AdsSettingController@getData')->name('admin.setting.ads.getdata');
-    
-    Route::get('/create', 'Backend\AdsSettingController@form')->name('admin.setting.ads.create');
-    
-    Route::get('/edit/{id}', 'Backend\AdsSettingController@form')->name('admin.setting.ads.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\AdsSettingController@save')->name('admin.setting.ads.save');
-});
-
-Route::group(['prefix' => 'setting/video-ads'], function () {
-    Route::get('/', 'Backend\Setting\VideoAdsController@index')->name('admin.setting.video_ads');
-    
-    Route::get('/getdata', 'Backend\Setting\VideoAdsController@getData')->name('admin.setting.video_ads.getdata');
-    
-    Route::get('/create', 'Backend\Setting\VideoAdsController@form')->name('admin.setting.video_ads.create');
-    
-    Route::get('/edit/{id}', 'Backend\Setting\VideoAdsController@form')->name('admin.setting.video_ads.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\Setting\VideoAdsController@save')->name('admin.setting.video_ads.save');
-    
-    Route::post('/remove', 'Backend\Setting\VideoAdsController@remove')->name('admin.setting.video_ads.remove');
-});
-
-Route::group(['prefix' => 'setting/seo'], function () {
-    Route::get('/', 'Backend\Setting\SeoSettingController@index')->name('admin.setting.seo');
-    
-    Route::post('/save', 'Backend\Setting\SeoSettingController@save')->name('admin.setting.seo.save');
-});
-
 Route::group(['prefix' => 'notification'], function () {
     Route::get('/', 'Backend\SendNotificationController@index')->name('admin.notification');
     
@@ -381,10 +253,10 @@ Route::group(['prefix' => 'notification'], function () {
     Route::post('/remove', 'Backend\SendNotificationController@remove')->name('admin.notification.remove');
 });
 
-Route::group(['prefix' => 'email-logs'], function () {
-    Route::get('/', 'Backend\EmailLogsController@index')->name('admin.email_logs');
+Route::group(['prefix' => 'logs/email'], function () {
+    Route::get('/', 'Backend\Logs\EmailLogsController@index')->name('admin.logs.email');
     
-    Route::get('/getdata', 'Backend\EmailLogsController@getData')->name('admin.email_logs.getdata');
+    Route::get('/getdata', 'Backend\Logs\EmailLogsController@getData')->name('admin.logs.email.getdata');
     
-    Route::post('/remove', 'Backend\EmailLogsController@remove')->name('admin.email_logs.remove');
+    Route::post('/remove', 'Backend\Logs\EmailLogsController@remove')->name('admin.logs.email.remove');
 });
