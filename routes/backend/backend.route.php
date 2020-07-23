@@ -2,10 +2,7 @@
 
 require_once __DIR__ . '/design.route.php';
 require_once __DIR__ . '/setting.route.php';
-
-Route::group(['prefix' => 'filemanager'], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+require_once __DIR__ . '/filemanager.route.php';
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');

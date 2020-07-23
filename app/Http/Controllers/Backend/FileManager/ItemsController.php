@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Filemanager;
 
+use App\Models\Files;
 use App\Models\Folders;
 use UniSharp\LaravelFilemanager\Events\FileIsMoving;
 use UniSharp\LaravelFilemanager\Events\FileWasMoving;
@@ -13,21 +14,28 @@ class ItemsController extends LfmController
     public function getItems()
     {
         $currentPage = self::getCurrentPageFromRequest();
-
-        $perPage = $this->helper->getPaginationPerPage();
-        $items = array_merge($this->lfm->folders(), $this->lfm->files());
+        $perPage = 20;
+        
+        $working_dir = null;
+        $folders = Folders::where('folder_id', '=', $working_dir)
+            ->get()
+            ->toArray();
+        
+        $files = Files::where('folder_id', '=', $working_dir)
+            ->paginate($perPage)
+            ->items();
+        
+        $items = array_merge($folders, $files);
 
         return [
-            'items' => array_map(function ($item) {
-                return $item->fill()->attributes;
-            }, array_slice($items, ($currentPage - 1) * $perPage, $perPage)),
+            'items' => $items,
             'paginator' => [
                 'current_page' => $currentPage,
                 'total' => count($items),
                 'per_page' => $perPage,
             ],
-            'display' => $this->helper->getDisplayMode(),
-            'working_dir' => $this->lfm->path('working_dir'),
+            'display' => 'grid',
+            'working_dir' => $working_dir,
         ];
     }
 

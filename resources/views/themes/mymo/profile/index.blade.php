@@ -6,7 +6,14 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-8 hidden-xs">
-                    <div class="yoast_breadcrumb"><span><span><a href="http://xemphimplus.net/">Trang chủ</a> » <span class="breadcrumb_last" aria-current="page">Archives for theanhk</span></span></span></div>            </div>
+                    <div class="yoast_breadcrumb"><span>
+                            <span>
+                                <a href="{{ route('home') }}">@lang('app.home')</a> »
+                                <span class="breadcrumb_last" aria-current="page">{{ $user->name }}</span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
                 <div class="col-xs-4 text-right">
                     <a href="javascript:;" id="expand-ajax-filter">Lọc phim <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                 </div>

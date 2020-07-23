@@ -4,18 +4,13 @@ namespace App\Http\Controllers\Backend\Filemanager;
 
 class FolderController extends LfmController
 {
-    /**
-     * Get list of folders as json to populate treeview.
-     *
-     * @return mixed
-     */
     public function getFolders()
     {
         $folder_types = array_filter(['user', 'share'], function ($type) {
             return $this->helper->allowFolderType($type);
         });
         
-        return view('laravel-filemanager::tree')
+        return view('backend.file-manager.tree')
             ->with([
                 'root_folders' => array_map(function ($type) use ($folder_types) {
                     $path = $this->lfm->dir($this->helper->getRootFolder($type));
@@ -29,15 +24,10 @@ class FolderController extends LfmController
                 }, $folder_types),
             ]);
     }
-
-    /**
-     * Add a new folder.
-     *
-     * @return mixed
-     */
+    
     public function getAddfolder()
     {
-        $folder_name = $this->helper->input('name');
+        $folder_name = request()->input('name');
 
         try {
             if ($folder_name === null || $folder_name == '') {

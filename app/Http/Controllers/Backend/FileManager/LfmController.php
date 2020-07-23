@@ -14,12 +14,7 @@ class LfmController extends Controller
     {
         $this->applyIniOverrides();
     }
-
-    /**
-     * Set up needed functions.
-     *
-     * @return object|null
-     */
+    
     public function __get($var_name)
     {
         if ($var_name === 'lfm') {
@@ -28,29 +23,19 @@ class LfmController extends Controller
             return app(Lfm::class);
         }
     }
-
-    /**
-     * Show the filemanager.
-     *
-     * @return mixed
-     */
+    
     public function show()
     {
-        return view('laravel-filemanager::index')
+        return view('backend.file-manager.index')
             ->withHelper($this->helper);
     }
-
-    /**
-     * Check if any extension or config is missing.
-     *
-     * @return array
-     */
+    
     public function getErrors()
     {
         $arr_errors = [];
 
         if (! extension_loaded('gd') && ! extension_loaded('imagick')) {
-            array_push($arr_errors, trans('laravel-filemanager::lfm.message-extension_not_found'));
+            array_push($arr_errors, trans('lfm.message-extension_not_found'));
         }
 
         if (! extension_loaded('exif')) {
@@ -72,9 +57,8 @@ class LfmController extends Controller
         return $arr_errors;
     }
 
-    public function error($error_type, $variables = [])
-    {
-        return $this->helper->error($error_type, $variables);
+    public function error($error_type, $variables = []) {
+        throw new \Exception(trans('lfm.error-' . $error_type, $variables));
     }
 
     /**

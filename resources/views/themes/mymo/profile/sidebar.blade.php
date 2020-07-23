@@ -21,12 +21,14 @@
 <!-- SIDEBAR MENU -->
 <div class="profile-usermenu">
     <ul class="nav">
-        <li class="active">
-            <a href=""><i class="hl-user"></i> @lang('app.profile')</a>
+        <li @if(request()->is('account')) class="active" @endif>
+            <a href="{{ route('account') }}"><i class="hl-user"></i> @lang('app.profile')</a>
         </li>
-        <li>
-            <a href=""><i class="hl-lock-open-alt"></i> @lang('app.change_password')</a>
+
+        <li @if(request()->is('account/change-password')) class="active" @endif>
+            <a href="{{ route('account.change_password') }}"><i class="hl-lock-open-alt"></i> @lang('app.change_password')</a>
         </li>
+
         <li>
             <a href="{{ route('logout') }}" data-turbolinks="false"><i class="hl-off"></i> @lang('app.logout')</a>
         </li>

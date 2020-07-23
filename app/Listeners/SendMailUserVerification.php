@@ -4,7 +4,6 @@ namespace App\Listeners;
 
 use App\Events\RegisterSuccess;
 use App\Models\EmailList;
-use App\Models\EmailTemplates;
 
 class SendMailUserVerification
 {
@@ -22,7 +21,8 @@ class SendMailUserVerification
             $mail->priority = 2;
             $mail->params = json_encode([
                 'name' => $event->user->name,
-                'email' => $event->user->email
+                'email' => $event->user->email,
+                'url' => '',
             ]);
             $mail->sendByTemplate();
         }

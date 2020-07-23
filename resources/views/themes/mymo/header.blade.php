@@ -38,7 +38,7 @@
                                 @endif
 
                                 <li><a href="{{ route('account') }}"><i class="hl-user"></i> @lang('app.profile')</a></li>
-                                <li><a href="{{ route('account.change_password') }}"><i class="hl-lock-open-alt"></i> @lang('app.change_password')</a></li>
+
                                 <li><a href="{{ route('logout') }}" data-turbolinks="false"><i class="hl-off"></i> @lang('app.logout')</a></li>
                             </ul>
                         @else

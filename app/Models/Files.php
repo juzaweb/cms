@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $name
- * @property string $type
+ * @property string $mime_type
  * @property string $path
  * @property string $extension
  * @property int $size
@@ -24,15 +24,19 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereExtension($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereFolderId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereMimeType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereUserId($value)
  * @mixin \Eloquent
  */
 class Files extends Model
 {
-    //
+    protected $table = 'files';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'name'
+    ];
 }

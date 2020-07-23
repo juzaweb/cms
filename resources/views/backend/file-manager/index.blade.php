@@ -115,7 +115,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aia-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('unisharp.lfm.upload') }}" role='form' id='uploadForm' name='uploadForm' method='post' enctype='multipart/form-data' class="dropzone">
+          <form action="{{ route('backend.filemanager.upload') }}" role='form' id='uploadForm' name='uploadForm' method='post' enctype='multipart/form-data' class="dropzone">
             <div class="form-group" id="attachment">
               <div class="controls text-center">
                 <div class="input-group w-100">
@@ -227,7 +227,7 @@
         label: lang['menu-move'],
         multiple: true
       },
-      {
+      /*{
         name: 'resize',
         icon: 'arrows-alt',
         label: lang['menu-resize'],
@@ -238,7 +238,7 @@
         icon: 'crop',
         label: lang['menu-crop'],
         multiple: false
-      },
+      },*/
       {
         name: 'trash',
         icon: 'trash',
