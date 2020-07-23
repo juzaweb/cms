@@ -53,7 +53,7 @@ return [
         'attributes' => [
             'prefix'     => 'log-viewer',
 
-            'middleware' => 'admin',
+            'middleware' => ['web', 'admin'],
         ],
     ],
 

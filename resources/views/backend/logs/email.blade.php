@@ -6,7 +6,7 @@
 
     {{ Breadcrumbs::render('manager', [
             'name' => trans('app.email_logs'),
-            'url' => route('admin.email_logs')
+            'url' => route('admin.logs.email')
         ]) }}
 
     <div class="cui__utils__content">
@@ -98,8 +98,8 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.email_logs.getdata') }}',
-            remove_url: '{{ route('admin.email_logs.remove') }}',
+            url: '{{ route('admin.logs.email.getdata') }}',
+            remove_url: '{{ route('admin.logs.email.remove') }}',
         });
     </script>
 @endsection

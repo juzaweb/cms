@@ -51,14 +51,14 @@ return [
                 'status' => true,
                 'input_items' => [
                     [
-                        'element' => 'category',
+                        'element' => 'genre',
                         'title' => trans('app.title'),
-                        'name' => 'category',
+                        'name' => 'genre',
                     ]
                 ]
             ],
             [
-                'code' => 'category1',
+                'code' => 'genre1',
                 'status' => true,
                 'name' => trans('app.movie_list') . ' 1',
                 'input_items' => [
@@ -69,6 +69,42 @@ return [
                     ]
                 ]
             ],
+            [
+                'code' => 'genre2',
+                'status' => true,
+                'name' => trans('app.movie_list') . ' 2',
+                'input_items' => [
+                    [
+                        'element' => 'category',
+                        'title' => trans('app.movie_list'),
+                        'name' => 'category',
+                    ]
+                ]
+            ],
+            [
+                'code' => 'genre3',
+                'status' => true,
+                'name' => trans('app.movie_list') . ' 3',
+                'input_items' => [
+                    [
+                        'element' => 'category',
+                        'title' => trans('app.movie_list'),
+                        'name' => 'category',
+                    ]
+                ]
+            ],
+            [
+                'code' => 'genre4',
+                'status' => true,
+                'name' => trans('app.movie_list') . ' 4',
+                'input_items' => [
+                    [
+                        'element' => 'category',
+                        'title' => trans('app.movie_list'),
+                        'name' => 'category',
+                    ]
+                ]
+            ]
         ]
     ],
     [

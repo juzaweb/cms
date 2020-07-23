@@ -14,6 +14,14 @@ function json_message($message, $status = 'success') {
     exit();
 }
 
+function get_ip_client() {
+    if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+        return $_SERVER["HTTP_CF_CONNECTING_IP"];
+    }
+    
+    return request()->ip();
+}
+
 function image_path($url) {
     $img = explode('uploads/', $url);
     if (isset($img[1])) {
@@ -194,11 +202,15 @@ function slider_setting($slider_id) {
 }
 
 function menu_setting($menu_id) {
-    $menu = Menu::find($menu_id);
-    if ($menu) {
-        return json_decode($menu->content);
+    try {
+        $menu = Menu::find($menu_id);
+        if ($menu) {
+            return json_decode($menu->content);
+        }
     }
-    
+    catch (Exception $exception) {
+        \Log::error($exception->getMessage());
+    }
     return [];
 }
 

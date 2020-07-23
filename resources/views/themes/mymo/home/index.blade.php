@@ -81,8 +81,7 @@
                         <span class="h-text">Phim mới nhất</span>
                     </a>
                     <ul class="heading-nav pull-right hidden-xs">
-                        <li class="section-btn halim_ajax_get_post" data-catid="752" data-showpost="12"
-                            data-widgetid="halim-advanced-widget-2" data-layout="6col">
+                        <li class="section-btn halim_ajax_get_post" data-catid="752" data-showpost="12" data-widgetid="halim-advanced-widget-2" data-layout="6col">
                             <span data-text="Hài Hước"></span>
                         </li>
                         <li class="section-btn halim_ajax_get_post" data-catid="84" data-showpost="12"

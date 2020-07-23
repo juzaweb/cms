@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-
 class VideoStream
 {
     private $path = "";
@@ -11,9 +10,9 @@ class VideoStream
     private $start  = -1;
     private $end    = -1;
     private $size   = 0;
+    private static $token_key = '$#5xc698BMSF^*#';
     
-    function __construct($filePath)
-    {
+    function __construct($filePath) {
         $this->path = $filePath;
     }
     
@@ -114,11 +113,24 @@ class VideoStream
     /**
      * Start streaming video content
      */
-    function start()
+    public function start()
     {
         $this->open();
         $this->setHeader();
         $this->stream();
         $this->end();
+    }
+    
+    public static function generateToken() {
+        $month = date('Y-m');
+        $ip = get_ip_client();
+        return \Hash::make(static::$token_key . $month . static::$token_key . $ip);
+    }
+    
+    public static function checkToken($token) {
+        if (static::generateToken() == $token) {
+            return true;
+        }
+        return false;
     }
 }

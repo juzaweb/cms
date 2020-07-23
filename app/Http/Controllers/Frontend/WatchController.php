@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\VideoFiles;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Countries;
 use App\Models\Genres;
 use App\Models\Movies;
 use App\Http\Controllers\Controller;
@@ -50,17 +50,24 @@ class WatchController extends Controller
         ]);
     }
     
-    public function getPlayer() {
+    public function getPlayer($vfile_id) {
+        $file = VideoFiles::find($vfile_id);
+        if ($file) {
+            return response()->json([
+                'data' => [
+                    'status' => true,
+                    'sources' => view('themes.mymo.data.player_script', [
+                        'files' => $files,
+                    ])->render(),
+                ]
+            ]);
+        }
         
-        
-        $result = [
+        return response()->json([
             'data' => [
-                'status' => true,
-                'sources' => view('themes.mymo.data.player_script', [
-                    'file' => $file,
-                ])->render(),
+                'status' => false,
             ]
-        ];
+        ]);
     }
     
     protected function getRelatedMovies(Movies $info) {

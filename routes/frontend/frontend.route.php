@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/auth.route.php';
 require_once __DIR__ . '/sitemap.route.php';
+require_once __DIR__ . '/watch.route.php';
 
 Route::group(['prefix' => 'account', 'middleware' => ['web', 'auth']], function () {
     Route::get('/', 'Frontend\ProfileController@index')->name('account');
@@ -28,9 +29,5 @@ Route::get('/type/{slug}', 'Frontend\TypeController@index')->name('type');
 Route::get('/country/{slug}', 'Frontend\CountryController@index')->name('country');
 
 Route::get('/tag/{slug}', 'Frontend\TagController@index')->name('tag');
-
-Route::get('/watch/{slug}', 'Frontend\WatchController@index')->name('watch');
-
-Route::get('/watch/{slug}/play.html', 'Frontend\WatchController@watch')->name('watch.play');
 
 Route::get('/page/{slug}', 'Frontend\PageController@index')->name('page');

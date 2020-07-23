@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
+use App\Helpers\VideoStream;
 use App\Http\Controllers\Controller;
 
 class StreamController extends Controller
@@ -18,7 +18,24 @@ class StreamController extends Controller
         return abort(404);
     }
     
-    public function video(Request $request) {
+    public function video($token, $file, $file_name) {
+        if (!VideoStream::checkToken($token)) {
+            die('Token do not match');
+        }
     
+        try {
+            $file = json_decode(\Crypt::decryptString($file));
+            if ($file->path) {
+                if (\Storage::disk('uploads')->exists($file->path)) {
+                    $file_path = \Storage::disk('uploads')->path($file->path);
+                    $stream = new VideoStream($file_path);
+                    $stream->start();
+                }
+            }
+        }
+        catch (\Exception $exception) {
+            \Log::error('VideoStream: ' . $exception->getMessage());
+            die('Token do not match');
+        }
     }
 }

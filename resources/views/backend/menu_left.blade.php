@@ -208,7 +208,7 @@
         </span>
         <ul class="cui__menuLeft__navigation">
             <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.email_logs') }}" class="cui__menuLeft__item__link">
+                <a href="{{ route('admin.logs.email') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.email_logs')</span>
                 </a>
             </li>

@@ -55,7 +55,13 @@
             displayPlaybackLabel: true,
             aspectratio: "16:9",
             sharing: {
-                sites: ["reddit","facebook","twitter","googleplus","email","linkedin"]
+                sites: [
+                    "reddit",
+                    "facebook",
+                    "twitter",
+                    "email",
+                    "linkedin"
+                ]
             },
             advertising: {
                 client: 'vast',
