@@ -6,9 +6,14 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-8 hidden-xs">
-                    <div class="yoast_breadcrumb"><span><span><a href="http://xemphimplus.net/">Trang chủ</a> » <span class="breadcrumb_last" aria-current="page">Archives for theanhk</span></span></span></div>            </div>
+                    <div class="yoast_breadcrumb"><span>
+                            <span>
+                                <a href="">@lang('app.home')</a> » <span class="breadcrumb_last" aria-current="page">{{ $user->name }}</span></span>
+                        </span>
+                    </div>
+                </div>
                 <div class="col-xs-4 text-right">
-                    <a href="javascript:;" id="expand-ajax-filter">Lọc phim <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                    <a href="javascript:;" id="expand-ajax-filter">@lang('app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                 </div>
                 <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
             </div>
@@ -21,7 +26,7 @@
     <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
         <div class="section-bar clearfix">
             <h3 class="section-title">
-                <span>Hồ sơ cá nhân</span>
+                <span>@lang('app.change_password')</span>
             </h3>
 
             <div class="profile-sidebar">
@@ -42,20 +47,25 @@
 
             <div class="halim_box">
                 <div class="col-sm-4">
-                    <form action="" method="post">
-                        <input type="hidden" id="user_profile_nonce_field" name="user_profile_nonce_field" value="b4120590ac" /><input type="hidden" name="_wp_http_referer" value="/author/theanhk/?act=change_pw" />						    <label>Current Password</label>
+                    <form action="{{ route('account.change_password.handle') }}" method="post" class="form-ajax">
+                        <label>@lang('app.current_password')</label>
                         <div class="form-group pass_show">
-                            <input type="password" class="form-control" name="current_password" placeholder="Current Password">
+                            <input type="password" class="form-control" name="current_password">
                         </div>
-                        <label>New Password</label>
+
+                        <label>@lang('app.new_password')</label>
                         <div class="form-group pass_show">
-                            <input type="password" class="form-control" name="new_password" placeholder="New Password">
+                            <input type="password" class="form-control" name="password">
                         </div>
-                        <label>Confirm Password</label>
+
+                        <label>@lang('app.confirm_password')</label>
                         <div class="form-group pass_show">
-                            <input type="password" class="form-control" name="confirm_new_password" placeholder="Confirm Password">
+                            <input type="password" class="form-control" name="password_confirmation">
                         </div>
-                        <div class="form-group"><button type="submit" class="btn btn-success">Cập nhật</button></div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">@lang('app.update')</button>
+                        </div>
                     </form>
                 </div>
                 <style>

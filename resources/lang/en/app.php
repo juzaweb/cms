@@ -247,6 +247,7 @@ return [
   'top_views' => 'Top views',
   'new_update' => 'New update',
   'filter' => 'Filter',
+  'filter_movies' => 'Filter movies',
   'bookmark' => 'Bookmark',
   'design' => 'Design',
   'logged_successfully' => 'Logged successfully',
@@ -261,4 +262,8 @@ return [
   'sending_user_info_please_wait' => 'Sending user info, please wait...',
   'menu_link' => 'Menu link',
   'custom_html' => 'Custom html',
+  'current_password' => 'Current password',
+  'current_password_incorrect' => 'Current password incorrect',
+  'new_password' => 'New password',
+    'update' => 'Update',
 ];

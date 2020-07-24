@@ -1,14 +1,9 @@
 <?php
 
-require_once __DIR__ . '/auth.route.php';
-require_once __DIR__ . '/sitemap.route.php';
-require_once __DIR__ . '/watch.route.php';
-
-Route::group(['prefix' => 'account', 'middleware' => ['web', 'auth']], function () {
-    Route::get('/', 'Frontend\ProfileController@index')->name('account');
-    
-    Route::get('/change-password', 'Frontend\ChangePasswordController@index')->name('account.change_password');
-});
+require_once __DIR__ . '/component/auth.route.php';
+require_once __DIR__ . '/component/sitemap.route.php';
+require_once __DIR__ . '/component/watch.route.php';
+require_once __DIR__ . '/component/account.route.php';
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
 
