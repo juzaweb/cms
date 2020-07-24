@@ -135,4 +135,48 @@ class Movies extends Model
             ->whereIn('id', explode(',', $this->countries))
             ->get(['id', 'name', 'slug']);
     }
+    
+    public function getRelatedMovies(int $limit = 8) {
+        $query = Movies::query();
+        $query->select([
+            'id',
+            'name',
+            'other_name',
+            'short_description',
+            'thumbnail',
+            'slug',
+            'views',
+            'release',
+        ]);
+    
+        $query->where('status', '=', 1)
+            ->where('id', '!=', $this->id);
+    
+        $query->where(function (Builder $builder) {
+            $builder->orWhereRaw('MATCH (name) AGAINST (? IN BOOLEAN MODE)', [full_text_wildcards($this->name)]);
+            $builder->orWhereRaw('MATCH (other_name) AGAINST (? IN BOOLEAN MODE)', [full_text_wildcards($this->other_name)]);
+        });
+        
+        if (!$query->exists()) {
+            $query->newQuery();
+            $query->where('status', '=', 1)
+                ->where('id', '!=', $this->id);
+    
+            $genres = explode(',', $this->genres);
+            if ($genres) {
+                $query->where(function (Builder $builder) use ($genres) {
+                    foreach ($genres as $genre) {
+                        $builder->orWhereRaw('FIND_IN_SET(?, genres)', [$genre]);
+                    }
+                });
+            }
+            else {
+                $query->whereRaw('1=2');
+            }
+        }
+    
+        $query->limit($limit);
+    
+        return $query->get();
+    }
 }

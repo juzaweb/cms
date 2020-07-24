@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Helpers\VideoStream;
 use App\Http\Controllers\Controller;
+use App\Helpers\UrlVideoStream;
 
 class StreamController extends Controller
 {
@@ -19,17 +20,29 @@ class StreamController extends Controller
     }
     
     public function video($token, $file, $file_name) {
-        if (!VideoStream::checkToken($token)) {
+        if (!VideoStream::checkToken($token, $file_name)) {
             die('Token do not match');
         }
     
         try {
             $file = json_decode(\Crypt::decryptString($file));
             if ($file->path) {
+                
+                if (is_url($file->path)) {
+    
+                    //$stream = new UrlVideoStream($file->path);
+                    //$stream->start();
+                    
+                    return response()->streamDownload(function () use ($file) {
+                        echo file_get_contents($file->path);
+                    }, 'video.mp4');
+                }
+                
                 if (\Storage::disk('uploads')->exists($file->path)) {
                     $file_path = \Storage::disk('uploads')->path($file->path);
                     $stream = new VideoStream($file_path);
                     $stream->start();
+                    die();
                 }
             }
         }

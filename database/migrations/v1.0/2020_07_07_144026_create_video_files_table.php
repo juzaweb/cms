@@ -16,6 +16,14 @@ class CreateVideoFilesTable extends Migration
             $table->integer('order')->default(1);
             $table->string('source', 100);
             $table->string('url');
+            $table->string('video_240p')->nullable();
+            $table->string('video_360p')->nullable();
+            $table->string('video_480p')->nullable();
+            $table->string('video_720p')->nullable();
+            $table->string('video_1080p')->nullable();
+            $table->string('video_2048p')->nullable();
+            $table->string('video_4096p')->nullable();
+            $table->tinyInteger('converted')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

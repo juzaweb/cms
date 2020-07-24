@@ -285,3 +285,11 @@ function genre_setting($setting) {
     $result->title = @$setting->title;
     return $result;
 }
+
+function get_youtube_id($url) {
+    preg_match_all("#(?<=v=|v\/|vi=|vi\/|youtu.be\/)[a-zA-Z0-9_-]{11}#", $url, $matches);
+    if (@$matches[0]) {
+        return $matches[0];
+    }
+    return false;
+}

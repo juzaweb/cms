@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\VideoFiles;
-use Illuminate\Database\Eloquent\Builder;
 use App\Models\Genres;
 use App\Models\Movies;
 use App\Http\Controllers\Controller;
@@ -25,7 +24,7 @@ class WatchController extends Controller
         $tags = Tags::whereIn('id', explode(',', $info->tags))
             ->get(['id', 'name', 'slug']);
         
-        $related_movies = $this->getRelatedMovies($info);
+        $related_movies = $info->getRelatedMovies(8);
         
         return view('themes.mymo.watch.index', [
             'title' => $info->meta_title,
@@ -41,18 +40,26 @@ class WatchController extends Controller
     }
     
     public function watch($slug) {
-        $item = Movies::where('slug', '=', $slug)
+        $info = Movies::where('slug', '=', $slug)
             ->where('status', '=', 1)
             ->firstOrFail();
+    
+        $related_movies = $info->getRelatedMovies(8);
         
         return view('themes.mymo.watch.watch', [
-            'item' => $item,
+            'title' => $info->meta_title,
+            'description' => $info->meta_description,
+            'keywords' => $info->keywords,
+            'info' => $info,
+            'related_movies' => $related_movies,
         ]);
     }
     
     public function getPlayer($vfile_id) {
         $file = VideoFiles::find($vfile_id);
-        if ($file) {
+        $files = $file->getFiles();
+        
+        if ($files) {
             return response()->json([
                 'data' => [
                     'status' => true,
@@ -68,31 +75,5 @@ class WatchController extends Controller
                 'status' => false,
             ]
         ]);
-    }
-    
-    protected function getRelatedMovies(Movies $info) {
-        $query = Movies::query();
-        $query->select([
-            'id',
-            'name',
-            'other_name',
-            'short_description',
-            'thumbnail',
-            'slug',
-            'views',
-            'release',
-        ]);
-        
-        $query->where('status', '=', 1)
-            ->where('id', '!=', $info->id);
-    
-        $query->where(function (Builder $builder) use ($info) {
-            $builder->orWhereRaw('MATCH (name) AGAINST (? IN BOOLEAN MODE)', [full_text_wildcards($info->name)]);
-            $builder->orWhereRaw('MATCH (other_name) AGAINST (? IN BOOLEAN MODE)', [full_text_wildcards($info->other_name)]);
-        });
-    
-        $query->limit(8);
-        
-        return $query->get();
     }
 }

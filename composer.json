@@ -19,6 +19,7 @@
         "laravel/tinker": "^1.0",
         "laravelium/sitemap": "3.1.*",
         "pion/laravel-chunk-upload": "^1.4",
+        "sokil/php-vast": "^2.0",
         "spatie/laravel-permission": "^3.10",
         "unisharp/laravel-filemanager": "^2.1"
     },
@@ -44,7 +45,9 @@
     "autoload": {
         "files": [
           "app/Helpers/functions.php",
-          "app/Helpers/VideoStream.php"
+          "app/Helpers/VideoStream.php",
+          "app/Helpers/UrlVideoStream.php",
+          "app/Helpers/GoogleDrive.php"
         ],
         "psr-4": {
             "App\\": "app/"

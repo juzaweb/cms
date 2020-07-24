@@ -10,7 +10,6 @@ class VideoStream
     private $start  = -1;
     private $end    = -1;
     private $size   = 0;
-    private static $token_key = '$#5xc698BMSF^*#';
     
     function __construct($filePath) {
         $this->path = $filePath;
@@ -121,14 +120,15 @@ class VideoStream
         $this->end();
     }
     
-    public static function generateToken() {
+    public static function generateToken($file_name) {
         $month = date('Y-m');
         $ip = get_ip_client();
-        return \Hash::make(static::$token_key . $month . static::$token_key . $ip);
+        $key = config('app.key');
+        return \Hash::make($key . $month . $key . $ip . $file_name);
     }
     
-    public static function checkToken($token) {
-        if (static::generateToken() == $token) {
+    public static function checkToken($token, $file_name) {
+        if (static::generateToken($file_name) == $token) {
             return true;
         }
         return false;

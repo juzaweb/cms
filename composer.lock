@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64ffa180c1e989f2b26833581b222be9",
+    "content-hash": "5e4569b33f7ce0e1a8499a42781f9aac",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -2411,6 +2411,51 @@
                 "uuid"
             ],
             "time": "2020-02-21T04:36:14+00:00"
+        },
+        {
+            "name": "sokil/php-vast",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sokil/php-vast.git",
+                "reference": "6996588840013fcbf4d4d36917e492b57eb4ccc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sokil/php-vast/zipball/6996588840013fcbf4d4d36917e492b57eb4ccc4",
+                "reference": "6996588840013fcbf4d4d36917e492b57eb4ccc4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-json": "*",
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^4.8 | ^6.5",
+                "squizlabs/php_codesniffer": "^3.4.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sokil\\Vast\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmytro Sokil",
+                    "email": "dmytro.sokil@gmail.com"
+                }
+            ],
+            "description": "Generator and parser for VAST documents",
+            "time": "2019-09-26T20:22:49+00:00"
         },
         {
             "name": "spatie/laravel-permission",

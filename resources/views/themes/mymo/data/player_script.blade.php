@@ -14,7 +14,8 @@
                     {
                     "label":"720p",
                     "type":"mp4",
-                    "file":"http:\/\/api.3s.live\/api\/redirect?file=0a6ea0021431d9de3f57c7dc86e51af2c715e3af0b005643a13535d44abf20412a3e15fe4732dbc1be3b195470d8b048&label=720p"},
+                    "file":""
+                    },
                     {
                         "label":"360p",
                         "type":"mp4",
