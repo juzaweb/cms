@@ -20,9 +20,7 @@ class DeleteController extends LfmController
         foreach ($item_names as $name_to_delete) {
             $file_to_delete = $this->lfm->pretty($name_to_delete);
             $file_path = $file_to_delete->path();
-
-            event(new ImageIsDeleting($file_path));
-
+            
             if (is_null($name_to_delete)) {
                 array_push($errors, parent::error('folder-name'));
                 continue;
@@ -45,8 +43,6 @@ class DeleteController extends LfmController
             }
 
             $this->lfm->setName($name_to_delete)->delete();
-
-            event(new ImageWasDeleted($file_path));
         }
 
         if (count($errors) > 0) {

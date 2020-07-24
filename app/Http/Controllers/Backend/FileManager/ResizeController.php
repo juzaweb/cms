@@ -8,11 +8,6 @@ use UniSharp\LaravelFilemanager\Events\ImageWasResized;
 
 class ResizeController extends LfmController
 {
-    /**
-     * Dipsplay image for resizing.
-     *
-     * @return mixed
-     */
     public function getResize()
     {
         $ratio = 1.0;

@@ -29,4 +29,10 @@ class Folders extends Model
     protected $fillable = [
         'name'
     ];
+    
+    public static function folderExists($folder_name, $parent_id) {
+        return self::where('name', '=', $folder_name)
+            ->where('folder_id', '=', $parent_id)
+            ->exists();
+    }
 }

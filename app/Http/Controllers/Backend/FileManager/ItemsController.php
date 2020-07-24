@@ -95,7 +95,6 @@ class ItemsController extends LfmController
     {
         $currentPage = (int) request()->get('page', 1);
         $currentPage = $currentPage < 1 ? 1 : $currentPage;
-
         return $currentPage;
     }
 }

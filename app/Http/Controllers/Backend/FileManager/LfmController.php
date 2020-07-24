@@ -9,11 +9,6 @@ use UniSharp\LaravelFilemanager\LfmPath;
 class LfmController extends Controller
 {
     protected static $success_response = 'OK';
-
-    public function __construct()
-    {
-        $this->applyIniOverrides();
-    }
     
     public function __get($var_name)
     {
@@ -24,14 +19,12 @@ class LfmController extends Controller
         }
     }
     
-    public function show()
-    {
+    public function show() {
         return view('backend.file-manager.index')
             ->withHelper($this->helper);
     }
     
-    public function getErrors()
-    {
+    public function getErrors() {
         $arr_errors = [];
 
         if (! extension_loaded('gd') && ! extension_loaded('imagick')) {
@@ -59,24 +52,5 @@ class LfmController extends Controller
 
     public function error($error_type, $variables = []) {
         throw new \Exception(trans('lfm.error-' . $error_type, $variables));
-    }
-
-    /**
-     * Overrides settings in php.ini.
-     *
-     * @return null
-     */
-    public function applyIniOverrides()
-    {
-        $overrides = config('lfm.php_ini_overrides');
-        if ($overrides && is_array($overrides) && count($overrides) === 0) {
-            return;
-        }
-
-        foreach ($overrides as $key => $value) {
-            if ($value && $value != 'false') {
-                ini_set($key, $value);
-            }
-        }
     }
 }

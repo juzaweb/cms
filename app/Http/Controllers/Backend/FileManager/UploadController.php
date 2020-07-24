@@ -27,7 +27,8 @@ class UploadController extends LfmController
         
         $error_bag = [];
         $new_filename = null;
-
+        $new_path = null;
+        
         foreach (is_array($uploaded_files) ? $uploaded_files : [$uploaded_files] as $file) {
             try {
                 
@@ -72,7 +73,7 @@ class UploadController extends LfmController
                     ]
                 ];
             } else {
-                $url = $this->lfm->setName($new_filename)->url();
+                $url = \Storage::disk('uploads')->url($new_path);
 
                 $response = [
                     'url' => $url

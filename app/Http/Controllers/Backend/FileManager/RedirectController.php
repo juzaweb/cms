@@ -8,9 +8,9 @@ class RedirectController extends LfmController
 {
     public function showFile($file_path)
     {
-        $storage = Storage::disk($this->helper->config('disk'));
+        $storage = Storage::disk('uploads');
 
-        if (! $storage->exists($file_path)) {
+        if (!$storage->exists($file_path)) {
             abort(404);
         }
 

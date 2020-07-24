@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $name
+ * @property int $type 1: images, 2: files
  * @property string $mime_type
  * @property string $path
  * @property string $extension
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereUserId($value)
  * @mixin \Eloquent
