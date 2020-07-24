@@ -7,5 +7,11 @@ use App\Http\Controllers\Controller;
 
 class ResetPasswordController extends Controller
 {
-    //
+    public function index() {
+    
+    }
+    
+    public function handle(Request $request) {
+    
+    }
 }

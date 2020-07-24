@@ -6,7 +6,6 @@ use App\Models\Countries;
 use App\Models\Genres;
 use App\Models\Menu;
 use App\Models\Pages;
-use App\Models\Tags;
 use App\Models\Types;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

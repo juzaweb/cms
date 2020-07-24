@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Backend\Filemanager;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use UniSharp\LaravelFilemanager\Lfm;
 use UniSharp\LaravelFilemanager\LfmPath;
 
 class LfmController extends Controller
 {
     protected static $success_response = 'OK';
+    
+    public function __construct()
+    {
+    
+    }
     
     public function __get($var_name)
     {
@@ -19,9 +25,24 @@ class LfmController extends Controller
         }
     }
     
-    public function show() {
-        return view('backend.file-manager.index')
-            ->withHelper($this->helper);
+    public function show(Request $request) {
+        $mime_types = [
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/gif',
+            'image/svg+xml',
+        ];
+        
+        $mime_types = [
+            'audio/mpeg',
+            'video/mp4',
+            'video/mpeg',
+        ];
+        
+        return view('backend.file-manager.index', [
+            'mime_types' => $mime_types
+        ]);
     }
     
     public function getErrors() {

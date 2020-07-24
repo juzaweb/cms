@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css">
     <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/cropper.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/dropzone.min.css') }}">
+    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
     <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/mime-icons.min.css') }}">
     <style>{!! \File::get(base_path('vendor/unisharp/laravel-filemanager/public/css/lfm.css')) !!}</style>
 </head>
@@ -190,7 +190,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script src="{{ asset('vendor/laravel-filemanager/js/cropper.min.js') }}"></script>
-<script src="{{ asset('vendor/laravel-filemanager/js/dropzone.min.js') }}"></script>
+<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
 <script>
     var lang = {!! json_encode(trans('lfm')) !!};
 
@@ -263,7 +263,7 @@
 {{-- <script src="{{ asset('vendor/laravel-filemanager/js/script.js') }}"></script> --}}
 <script>
     Dropzone.options.uploadForm = {
-        paramName: "upload[]", // The name that will be used to transfer the file
+        paramName: "upload",
         uploadMultiple: false,
         parallelUploads: 5,
         timeout: 0,
@@ -283,8 +283,9 @@
         headers: {
             'Authorization': 'Bearer ' + getUrlParam('token')
         },
-        acceptedFiles: "{{ implode(',', $helper->availableMimeTypes()) }}",
-        maxFilesize: ({{ $helper->maxUploadSize() }} / 1000)
+        acceptedFiles: "{{ implode(',', $mime_types) }}",
+        chunking: true,
+        chunkSize: 1048576,
     }
 </script>
 </body>
