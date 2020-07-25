@@ -4,9 +4,8 @@
     @php
         $icon = image_url(get_config('icon'));
         $logo = image_url(get_config('logo'));
+        $home_tile = get_config('title');
         $header = theme_setting('header');
-        $footer = theme_setting('footer');
-        $menu_main = menu_setting(@$header->main_menu->menu->menu);
         $body_class = isset($body_class) ? $body_class : 'home blog wp-embed-responsive halimthemes halimmovies halim-corner-rounded';
     @endphp
     <meta charset="utf-8"/>

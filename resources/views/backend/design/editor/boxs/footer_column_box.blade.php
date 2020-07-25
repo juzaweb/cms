@@ -32,7 +32,7 @@
     </div>
 
     <div class="theme-setting theme-setting--text editor-item ctype ctype-2 @if($ctype != 2) box-hidden @endif">
-        <label class="next-label">{{ trans('app.menu') }}</label>
-        <textarea class="form-control" name="body" rows="5">{!! $body !!}</textarea>
+        <label class="next-label">{{ trans('app.content') }} (html)</label>
+        <textarea class="form-control" name="{{ $card['code'] }}[{{ $input['name'] }}][body]" rows="5">{!! $body !!}</textarea>
     </div>
 </div>

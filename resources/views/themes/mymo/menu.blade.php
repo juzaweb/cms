@@ -20,9 +20,12 @@
                     <span class="count">0</span>
                 </button>
             </div>
-
+            @php
+                $menu_main = menu_setting(@$header->main_menu->menu->menu);
+            @endphp
             <div class="collapse navbar-collapse" id="halim">
                 <div class="menu-main-menu-container">
+                    @if($menu_main)
                     <ul id="menu-main-menu" class="nav navbar-nav navbar-left">
                         @foreach($menu_main as $menu)
                             @php
@@ -43,8 +46,8 @@
                                 </li>
                             @endif
                         @endforeach
-
                     </ul>
+                    @endif
                 </div>
             </div>
             <!-- /.navbar-collapse -->

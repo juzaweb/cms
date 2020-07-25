@@ -39,11 +39,11 @@ if (strpos($input['name'], '[')) {
     
     @case('media')
     <label class="next-label" for="input-{{ $index }}-{{ $icard }}-{{ $iinput }}">{{ $input['title'] }}</label>
-    <div class="review">
-        <img src="{{ image_url($input_value) }}" alt="" id="review-{{ $index }}-{{ $icard }}-{{ $iinput }}">
+    <div class="review" id="review-{{ $index }}-{{ $icard }}-{{ $iinput }}">
+        <img src="{{ image_url($input_value) }}" alt="">
     </div>
     
-    <p><a href="javascript:void(0)" class="load-media" data-input="#input-{{ $index }}-{{ $icard }}-{{ $iinput }}" data-review="#review-{{ $index }}-{{ $icard }}-{{ $iinput }}"><i class="fa fa-edit"></i> {{ trans('main.change') }}</a></p>
+    <p><a href="javascript:void(0)" class="load-media" data-input="input-{{ $index }}-{{ $icard }}-{{ $iinput }}" data-preview="review-{{ $index }}-{{ $icard }}-{{ $iinput }}"><i class="fa fa-edit"></i> {{ trans('app.change') }}</a></p>
     <input type="hidden" name="{{ $input_name }}" id="input-{{ $index }}-{{ $icard }}-{{ $iinput }}" value="{{ $input_value }}">
     @break
 

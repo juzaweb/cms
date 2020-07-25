@@ -73,9 +73,9 @@
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="linkedin">Linkedin URL</label>
+            <label class="col-form-label" for="linkedin">Pinterest URL</label>
 
-            <input type="text" name="linkedin" id="linkedin" class="form-control" value="{{ get_config('linkedin') }}" autocomplete="off">
+            <input type="text" name="linkedin" id="pinterest" class="form-control" value="{{ get_config('pinterest') }}" autocomplete="off">
         </div>
 
         <div class="form-group">

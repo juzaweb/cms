@@ -76,6 +76,10 @@ ul#f-menu li a {
     display: block;
 }
 
+.pl-0 {
+    padding-left: 0;
+}
+
 @media screen and (min-width: 1024px){
     /*.hidemobile {
         display: block;

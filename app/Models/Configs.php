@@ -80,7 +80,7 @@ class Configs extends Model
             'blog_description',
             'facebook',
             'twitter',
-            'linkedin',
+            'pinterest',
             'youtube',
         ];
     }

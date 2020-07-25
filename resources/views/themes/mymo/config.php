@@ -133,7 +133,6 @@ return [
                     [
                         'element' => 'media',
                         'title' => trans('app.logo'),
-                        'type' => 'text',
                         'name' => 'logo',
                     ],
                     [
