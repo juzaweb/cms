@@ -20,6 +20,9 @@ class YearController extends Controller
             'year',
             'genres',
             'countries',
+            'tv_series',
+            'current_episode',
+            'max_episode',
         ])
             ->where('status', '=', 1)
             ->where('year', '=', $year)

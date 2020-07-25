@@ -7,6 +7,7 @@
         $header = theme_setting('header');
         $footer = theme_setting('footer');
         $menu_main = menu_setting(@$header->main_menu->menu->menu);
+        $body_class = isset($body_class) ? $body_class : 'home blog wp-embed-responsive halimthemes halimmovies halim-corner-rounded';
     @endphp
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -115,7 +116,7 @@
         }
     </style>
 </head>
-<body class="home blog wp-embed-responsive halimthemes halimmovies halim-corner-rounded" data-masonry="" data-nonce="9d27ce22e4">
+<body class="{{ $body_class }}" data-masonry="" data-nonce="9d27ce22e4">
 
 @include('themes.mymo.header')
 @include('themes.mymo.menu')

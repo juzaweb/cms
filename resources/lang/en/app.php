@@ -266,4 +266,5 @@ return [
   'current_password_incorrect' => 'Current password incorrect',
   'new_password' => 'New password',
     'update' => 'Update',
+    'episode' => 'Episode',
 ];

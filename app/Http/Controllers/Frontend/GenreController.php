@@ -25,6 +25,9 @@ class GenreController extends Controller
             'year',
             'genres',
             'countries',
+            'tv_series',
+            'current_episode',
+            'max_episode',
         ])
             ->where('status', '=', 1)
             ->whereRaw('find_in_set(?, genres)', [$info->id])

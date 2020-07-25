@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="col-xs-4 text-right">
-                    <a href="javascript:void(0)" id="expand-ajax-filter">Lọc phim <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                    <a href="javascript:void(0)" id="expand-ajax-filter">@lang('app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                 </div>
 
                 <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
@@ -38,7 +38,7 @@
                 <h3 class="section-title">
                     <span>{{ $info->name }}</span>
 
-                    <span class="pull-right sortby">Sort by: <a href="?sortby=movie">Movie</a> / <a href="?sortby=tv_series">TV Series</a></span>
+                    {{--<span class="pull-right sortby">Sort by: <a href="?sortby=movie">Movie</a> / <a href="?sortby=tv_series">TV Series</a></span>--}}
 
                 </h3>
             </div>
@@ -72,47 +72,7 @@
     </main>
 
     <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
-        <div id="text-16" class="widget widget_text">
-            <div class="textwidget">
-            </div>
-        </div>
-
-        <div id="text-14" class="widget widget_text">
-            <div class="textwidget">
-
-            </div>
-        </div>
-
-        <div id="halim_tab_popular_videos-widget-5" class="widget halim_tab_popular_videos-widget">
-            <div class="section-bar clearfix">
-                <div class="section-title">
-                    <span>Nổi bật</span>
-                    <ul class="halim-popular-tab" role="tablist">
-                        <li role="presentation" class="active">
-                            <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="day">Ngày</a>
-                        </li>
-                        <li role="presentation">
-                            <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="week">Tuần</a>
-                        </li>
-                        <li role="presentation">
-                            <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="month">Tháng</a>
-                        </li>
-                        <li role="presentation">
-                            <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="all">Tất cả</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <section class="tab-content">
-                <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
-                    <div class="halim-ajax-popular-post-loading hidden"></div>
-                    <div id="halim-ajax-popular-post" class="popular-post"></div>
-                </div>
-            </section>
-
-            <div class="clearfix"></div>
-        </div>
+        @include('themes.mymo.data.sidebar')
     </aside>
 </div>
 

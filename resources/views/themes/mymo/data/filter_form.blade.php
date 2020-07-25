@@ -71,7 +71,7 @@
             </div>
 
             <div class="col-md-2 col-xs-12 col-sm-6">
-                <button type="submit" id="btn-movie-filter" class="btn btn-danger">@lang('app.filter')</button>
+                <button type="submit" id="btn-movie-filter" class="btn btn-danger">@lang('app.filter_movies')</button>
             </div>
         </form>
     </div>

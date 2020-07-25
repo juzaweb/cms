@@ -24,6 +24,9 @@ class MoviesController extends Controller
             'year',
             'genres',
             'countries',
+            'tv_series',
+            'current_episode',
+            'max_episode',
         ])
             ->where('status', '=', 1)
             ->where('tv_series', '=', 0)

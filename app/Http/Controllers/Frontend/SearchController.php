@@ -26,8 +26,13 @@ class SearchController extends Controller
             'thumbnail',
             'slug',
             'views',
-            'release',
+            'year',
             'created_at',
+            'genres',
+            'countries',
+            'tv_series',
+            'current_episode',
+            'max_episode',
         ]);
         
         $query->where('status', '=', 1);
@@ -60,7 +65,7 @@ class SearchController extends Controller
             ]);
         }
         
-        return view('frontend.genre.index', [
+        return view('themes.mymo.genre.index', [
             'items' => $query->paginate(20),
         ]);
     }
