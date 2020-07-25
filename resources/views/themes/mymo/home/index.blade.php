@@ -22,11 +22,11 @@
             $home = theme_setting('home_page');
         @endphp
 
-        @if(@$home->slider_movies->status == 1)
-            @php
-            $genre = genre_setting(@$home->slider_movies->genre);
-            @endphp
         <div class="col-xs-12 carausel-sliderWidget">
+            @if(@$home->slider_movies->status == 1)
+                @php
+                    $genre = genre_setting(@$home->slider_movies->genre);
+                @endphp
             <div id="halim-carousel-widget-3xx" class="wrap-slider">
                 <div class="section-bar clearfix">
                     <h3 class="section-title"><span>{{ @$genre->title }}</span></h3>
@@ -58,25 +58,35 @@
                     });
                 </script>
             </div>
+            @endif
 
-            @if(@$home->genre1->status == 1)
+            @for($i = 1; $i <= 3; $i++)
+            @if(@$home->{'genre' . $i}->status == 1)
                 @php
-                    $genre = genre_setting(@$home->genre1->genre);
+                    $genre = genre_setting(@$home->{'genre' . $i}->genre);
                 @endphp
 
-            <section id="halim-advanced-widget-2">
+            <section id="halim-advanced-widget-{{ $i }}">
                 <h4 class="section-heading">
-                    <a href="#" title="{{ $genre->title }}">
-                        <span class="h-text">{{ $genre->title }}</span>
+                    <a href="{{ @$genre->url }}" title="{{ @$genre->title }}">
+                        <span class="h-text">{{ @$genre->title }}</span>
                     </a>
+
+                    @if(@$home->{'genre' . $i}->child_genres)
+                        @php
+                        $child_genres = child_genres_setting($home->{'genre' . $i}->child_genres);
+                        @endphp
                     <ul class="heading-nav pull-right hidden-xs">
-                        <li class="section-btn halim_ajax_get_post" data-catid="752" data-showpost="12" data-widgetid="halim-advanced-widget-2" data-layout="6col">
-                            <span data-text="Hài Hước"></span>
+                        @foreach($child_genres as $child)
+                        <li class="section-btn halim_ajax_get_post" data-catid="{{ $child->id }}" data-showpost="12" data-widgetid="halim-advanced-widget-{{ $i }}" data-layout="6col">
+                            <span data-text="{{ $child->name }}"></span>
                         </li>
+                        @endforeach
                     </ul>
+                    @endif
                 </h4>
 
-                <div id="halim-advanced-widget-2-ajax-box" class="halim_box">
+                <div id="halim-advanced-widget-{{ $i }}-ajax-box" class="halim_box">
                     @if(!$genre->items->isEmpty())
                         @foreach($genre->items as $item)
                         <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-{{ $item->id }}">
@@ -85,80 +95,13 @@
                         @endforeach
                     @endif
 
-                    <a href="#" class="see-more">View all post »</a>
+                    <a href="{{ @$genre->url }}" class="see-more">@lang('app.view_all') »</a>
                 </div>
             </section>
             <div class="clearfix"></div>
             @endif
-
-            @if(@$home->genre2->status == 1)
-                @php
-                    $genre = genre_setting(@$home->genre2->genre);
-                @endphp
-            <section id="halim-advanced-widget-4">
-                <h4 class="section-heading">
-                    <a href="#" title="{{ @$genre->title }}">
-                        <span class="h-text">{{ @$genre->title }}</span>
-                    </a>
-
-                    <ul class="heading-nav pull-right hidden-xs">
-
-                        <li class="section-btn halim_ajax_get_post" data-catid="766" data-showpost="12"
-                            data-widgetid="halim-advanced-widget-4" data-layout="6col"><span data-text="Cổ Trang"></span>
-                        </li>
-
-                    </ul>
-                </h4>
-                <div id="halim-advanced-widget-4-ajax-box" class="halim_box">
-                    @if(!$genre->items->isEmpty())
-                        @foreach($genre->items as $item)
-                            <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-{{ $item->id }}">
-                                @include('themes.mymo.data.item')
-                            </article>
-                        @endforeach
-                    @endif
-
-                    <a href="#" class="see-more">View all post »</a>
-                </div>
-            </section>
-            <div class="clearfix"></div>
-            @endif
-
-            @if(@$home->genre2->status == 1)
-                @php
-                    $genre = genre_setting(@$home->genre2->genre);
-                @endphp
-            <section id="halim-advanced-widget-3">
-                <h4 class="section-heading">
-                    <a href="#" title="{{ @$genre->title }}">
-                        <span class="h-text">{{ @$genre->title }}</span>
-                    </a>
-                    <ul class="heading-nav pull-right hidden-xs">
-
-                        <li class="section-btn halim_ajax_get_post" data-catid="768" data-showpost="12"
-                            data-widgetid="halim-advanced-widget-3" data-layout="6col"><span
-                                    data-text="Khoa Học"></span>
-                        </li>
-
-                    </ul>
-                </h4>
-                <div id="halim-advanced-widget-3-ajax-box" class="halim_box">
-
-                    @if(!$genre->items->isEmpty())
-                        @foreach($genre->items as $item)
-                            <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-{{ $item->id }}">
-                                @include('themes.mymo.data.item')
-                            </article>
-                        @endforeach
-                    @endif
-
-                    <div class="clearfix"></div>
-                    <a href="#" class="see-more">View all post »</a>
-                </div>
-            </section>
-            <div class="clearfix"></div>
-            @endif
+            @endfor
         </div>
-        @endif
+
     </div>
 @endsection

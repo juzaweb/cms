@@ -1,7 +1,7 @@
 @php
 $input_value = '';
 if (isset($option_card[$input['name']])) {
-    if (is_array($option_card[$input['name']])) {
+    if (is_array($option_card[$input['name']][$iinput])) {
         $input_value = (isset($option_card[$input['name']][$iinput]) ? $option_card[$input['name']][$iinput]: '');
     }
     else {
@@ -62,13 +62,29 @@ if (strpos($input['name'], '[')) {
 
     @case('select_genre')
     <label class="next-label" for="input-{{ $index }}-{{ $icard }}-{{ $iinput }}">{{ $input['title'] }}</label>
-    <select name="{{ $input_name }}" class="load-product-category">
+    <select name="{{ $input_name }}" class="load-genres">
         @if($input_value)
             @php
-                $category = \App\Models\Genres::where('id', '=', $input_value)
-                    ->first();
+                $genre = \App\Models\Genres::where('id', '=', $input_value)
+                    ->first(['name']);
             @endphp
-            <option value="{{ $input_value }}">{{ @$category->name }}</option>
+            <option value="{{ $input_value }}">{{ @$genre->name }}</option>
+        @endif
+    </select>
+    @break
+
+    @case('select_genres')
+    <label class="next-label" for="input-{{ $index }}-{{ $icard }}-{{ $iinput }}">{{ $input['title'] }}</label>
+    <select name="{{ $input_name }}[]" class="load-genres" multiple>
+        @if($input_value)
+            @php
+                $genres = \App\Models\Genres::whereIn('id', $input_value)
+                    ->get(['id', 'name']);
+            @endphp
+
+            @foreach($genres as $item)
+            <option value="{{ @$item->id }}" selected>{{ @$item->name }}</option>
+            @endforeach
         @endif
     </select>
     @break

@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__ . '/component/auth.route.php';
 require_once __DIR__ . '/component/sitemap.route.php';
+require_once __DIR__ . '/component/ajax_get.route.php';
+require_once __DIR__ . '/component/auth.route.php';
 require_once __DIR__ . '/component/watch.route.php';
 require_once __DIR__ . '/component/account.route.php';
 
@@ -11,7 +12,7 @@ Route::get('/uploads/{path}', 'Frontend\StreamController@image')->name('uploads'
 
 Route::get('/search', 'Frontend\SearchController@search')->name('search');
 
-Route::get('/popular-movies', 'Frontend\SearchController@getPopularMovies')->name('movies.popular');
+Route::get('/latest-movies', 'Frontend\LatestMoviesController@index')->name('latest_movies');
 
 Route::get('/movies', 'Frontend\MoviesController@index')->name('movies');
 

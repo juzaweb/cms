@@ -72,6 +72,11 @@ return [
                         'limit' => [
                             'default' => 12
                         ]
+                    ],
+                    [
+                        'element' => 'select_genres',
+                        'title' => trans('app.other_genres'),
+                        'name' => 'child_genres',
                     ]
                 ]
             ],
@@ -87,6 +92,11 @@ return [
                         'limit' => [
                             'default' => 12
                         ]
+                    ],
+                    [
+                        'element' => 'select_genres',
+                        'title' => trans('app.other_genres'),
+                        'name' => 'child_genres',
                     ]
                 ]
             ],
@@ -102,6 +112,11 @@ return [
                         'limit' => [
                             'default' => 12
                         ]
+                    ],
+                    [
+                        'element' => 'select_genres',
+                        'title' => trans('app.other_genres'),
+                        'name' => 'child_genres',
                     ]
                 ]
             ]

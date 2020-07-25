@@ -83,7 +83,7 @@
                                     @endif
                                     @if(isset($card['input_items']))
                                         @foreach($card['input_items'] as $iinput => $input)
-                                            @if(in_array($input['element'], ['input', 'textarea', 'media', 'slider', 'select_category']))
+                                            @if(in_array($input['element'], ['input', 'textarea', 'media', 'slider', 'select_genre', 'select_genres']))
 
                                                 @include('backend.design.editor.boxs.input_box')
 

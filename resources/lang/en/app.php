@@ -266,5 +266,8 @@ return [
   'current_password_incorrect' => 'Current password incorrect',
   'new_password' => 'New password',
     'update' => 'Update',
+    'limit' => 'Limit',
     'episode' => 'Episode',
+    'view_all' => 'View all',
+    'other_genres' => 'Other genres',
 ];

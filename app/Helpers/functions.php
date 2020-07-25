@@ -252,6 +252,9 @@ function genre_setting($setting) {
         'year',
         'genres',
         'countries',
+        'tv_series',
+        'current_episode',
+        'max_episode',
     ]);
     
     $query->where('status', '=', 1);
@@ -263,18 +266,35 @@ function genre_setting($setting) {
     if ($ctype == 1) {
         if (@$setting->genre) {
             $query->whereRaw('find_in_set(?, genres)', [$setting->genre]);
+            $result->url = route('genre', @Genres::find($setting->genre)->slug);
         }
     }
     
     if ($ctype == 2) {
         if (@$setting->type) {
             $query->where('type_id', '=', $setting->type);
+            $result->url = route('type', @Types::find($setting->type)->slug);
         }
     }
     
     if ($ctype == 3) {
         if (@$setting->country) {
             $query->whereRaw('find_in_set(?, countries)', [$setting->country]);
+            $result->url = route('country', @Countries::find($setting->country)->slug);
+        }
+    }
+    
+    if (empty($result->url)) {
+        if ($format == 1) {
+            $result->url = route('movies');
+        }
+    
+        if ($format == 2) {
+            $result->url = route('tv_series');
+        }
+        
+        if (empty($format)) {
+            $result->url = route('latest_movies');
         }
     }
     
@@ -284,6 +304,18 @@ function genre_setting($setting) {
     $result->items = $query->get();
     $result->title = @$setting->title;
     return $result;
+}
+
+function child_genres_setting($setting) {
+    try {
+        $query = Genres::query();
+        $query->whereIn('id', $setting);
+        $query->where('status', '=', 1);
+        return $query->get(['id', 'name', 'slug']);
+    }
+    catch (Exception $exception) {
+        return [];
+    }
 }
 
 function get_youtube_id($url) {
