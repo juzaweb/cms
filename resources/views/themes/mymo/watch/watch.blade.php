@@ -37,7 +37,8 @@
                         "act": "watch",
                         "post_url": "{{ url()->current() }}",
                         "ajax_url": "",
-                        "player_url": "{{ route('watch.player', [$info->slug]) }}",
+                        "set_movie_view_url": "{{ route('watch.set_view', [$info->slug]) }}",
+                        "player_url": "{{ route('watch.player', [$info->slug, $vid]) }}",
                         "loading_img": "{{ asset('styles/themes/mymo/images/ajax-loader.gif') }}",
                         "eps_slug": "tap",
                         "server_slug": "s",
@@ -182,12 +183,7 @@
 
                 <div class="entry-content htmlwrap clearfix collapse" id="expand-post-content">
                     <article id="post-14773" class="item-content post-14773">
-                        <p><a href="/to-chuc-rugal"><strong>Tổ Chức Rugal</strong></a> xoay quanh Kang Ki Bum (Choi Jin Hyuk), vốn là một cảnh sát giỏi nhưng trong khi đang điều tra về tổ chức Argos thì bị người của Argos tìm đến tiêu diệt. Cả vợ và con anh đều bị sát hại, còn anh thì bị làm cho mù mắt. Khi tỉnh lại, Ki Bum bị buộc tội giết chính vợ con mình. Trong tình thế tuyệt vọng, NIS tìm đến Ki Bum và kết nạp anh vào đội Rugal - một nhóm người đặc biệt lãnh nhiệm vụ đánh sập tổ chức tội phạm</p>
-                        <h2>Xem Phim Tổ Chức Rugal Vietsub mới nhất</h2>
-                        <p><img class="aligncenter size-full wp-image-15462" src="wp-content/uploads/2020/04/rugal.gif" alt="" width="1170" height="400" /></p>
-                        <p>Là Dự án hành động máu lửa thảng hoặc hoi ra mắt giữa bão dịch, Rugal (tổ chức Rugal) của đài cáp toàn siêu phẩm "nặng đô" OCN lôi kéo ngay trong khoảng phút đầu nhá hàng, mang màn song kiếm hợp bích của hai "chú đại" Park Sung Woong và Choi Jin Hyuk. khởi động 2 tập đầu có mức rating trợ thì ổn, đạt 3.8%, Rugal đã thành công thu hút sự chú ý của các fan cứng đam mê phim hành động, đính kèm "drama" báo thù như Vagabond (Lãng Khách) dịp cuối năm 2019. Thế nhưng, gây chú ý với những phân đoạn bạo lực được đính mác "Rated 18+" trên Netflix như vậy, Rugal có thực làm người xem trằm trồ mang các gì đã diễn ra trong hai tập trước nhất?</p>
-                        <p>Chưa cần bàn đến bất cứ nhân tố nào khác, Rugal đã "ăn điểm" ngay tức khắc mang hội mọt phim Hàn với phần ưu ái mức bạo lực "nặng đô" thi thoảng gặp trên màn ảnh nhỏ. hai tay che mắt, người co rúm đến việc phải bịt mồm vì chứng kiến sự đẫm máu, chân thực đến hoảng hồn của hai tập đầu Rugal chính là các gì rất nhiều người xem sẽ phải trải qua.</p>
-                        <p>Trong khi nam chính Kang Gi Bum (Choi Jin Hyuk) bị phe phản diện chọc mù 2 mắt bằng dao, chịu đòn như 1 bài luyện tập thể lực tại doanh nghiệp đến cận cảnh các con phố đạn xuyên đầu cảnh sát, Rugal đã đích thực nâng tầm độ bạo lực của phim hành động Hàn lúc phát sóng trên TV. nếu như là 1 khán fake yếu tim và "sợ đau" lẫn máu, Rugal không hề là một Dự án dành cho bạn.</p>
+                        {!! $info->description !!}
                     </article>
                 </div>
                 <div class="clearfix"></div>

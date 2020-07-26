@@ -108,6 +108,10 @@ class Movies extends Model
         'status',
     ];
     
+    public function rating() {
+        return $this->hasMany('App\Models\MovieRating', 'movie_id', 'id');
+    }
+    
     public function getViews() {
         if ($this->views < 1000) {
             return $this->views;
@@ -134,6 +138,24 @@ class Movies extends Model
         return Countries::where('status', '=', 1)
             ->whereIn('id', explode(',', $this->countries))
             ->get(['id', 'name', 'slug']);
+    }
+    
+    public function getTags() {
+        return Tags::whereIn('id', explode(',', $this->tags))
+            ->get(['id', 'name', 'slug']);
+    }
+    
+    public function countRating() {
+        return $this->rating()->count(['id']);
+    }
+    
+    public function getStarRating() {
+        $total = $this->rating()->sum('start');
+        $count = $this->countRating();
+        if ($count <= 0) {
+            return 0;
+        }
+        return round($total * 5 / ($count * 5), 2);
     }
     
     public function getRelatedMovies(int $limit = 8) {

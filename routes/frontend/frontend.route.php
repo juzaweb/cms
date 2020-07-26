@@ -2,13 +2,12 @@
 
 require_once __DIR__ . '/component/sitemap.route.php';
 require_once __DIR__ . '/component/ajax_get.route.php';
+require_once __DIR__ . '/component/stream.route.php';
 require_once __DIR__ . '/component/auth.route.php';
 require_once __DIR__ . '/component/watch.route.php';
 require_once __DIR__ . '/component/account.route.php';
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
-
-Route::get('/uploads/{path}', 'Frontend\StreamController@image')->name('uploads')->where('path', '(.*)');
 
 Route::get('/search', 'Frontend\SearchController@search')->name('search');
 

@@ -37,14 +37,15 @@
                         "act": "",
                         "post_url": "{{ url()->current() }}",
                         "ajax_url": "",
-                        "player_url": "{{ route('watch.player', [$info->slug]) }}",
+                        "player_url": "{{ route('watch.player', [$info->slug, $player_id]) }}",
+                        "rating_url": "{{ route('watch.rating', [$info->slug]) }}",
                         "loading_img": "{{ asset('styles/themes/mymo/images/ajax-loader.gif') }}",
                         "eps_slug": "tap",
                         "server_slug": "s",
                         "type_slug": "slug-2",
                         "post_title": "{{ $info->name }}",
-                        "post_id": '{{ $info->id }}',
-                        "episode_slug": "tap-1",
+                        "post_id": '',
+                        "episode_slug": "",
                         "server": 1,
                         "player_error_detect": "display_modal",
                         "paging_episode": "false",
@@ -97,15 +98,15 @@
 
                         <div class="ratings_wrapper hidden-xs">
                             <div class="halim_imdbrating taq-score">
-                                <span class="score">4.28</span><i>/</i>
+                                <span class="score">{{ $start }}</span><i>/</i>
                                 <span class="max-ratings">5</span>
-                                <span class="total_votes">8</span><span class="vote-txt"> đánh giá</span>
+                                <span class="total_votes">{{ $info->countRating() }}</span><span class="vote-txt"> đánh giá</span>
                             </div>
                             <div class="rate-this">
-                                <div data-rate="85.5" data-id="14773" class="user-rate user-rate-active">
-				<span class="user-rate-image post-large-rate stars-large">
-					<span style="width: 85.5%"></span>
-				</span>
+                                <div data-rate="{{ $start * 100 / 5 }}" data-id="{{ $info->id }}" class="user-rate user-rate-active">
+                                    <span class="user-rate-image post-large-rate stars-large">
+                                        <span style="width: {{ $start * 100 / 5 }}%"></span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -169,42 +170,35 @@
                     </div>
 
                     <div id="halim-list-server" class="list-eps-ajax">
+                        @foreach($servers as $server)
+                            @php
+                            $video_files = $server->video_files()
+                                ->orderBy('order', 'asc')
+                                ->get();
+                            @endphp
                         <div class="halim-server show_all_eps" data-episode-nav="">
                             <span class="halim-server-name">
-                                <span class="hl-server"></span> Server HD</span>
+                                <span class="hl-server"></span> {{ $server->name }}
+                            </span>
+
                             <ul id="listsv-1" class="halim-list-eps">
-                                <li class="halim-episode halim-episode-1-tap-1"><a href="/xem-phim-to-chuc-rugal/tap-1-sv1.html" title="1"><span class="halim-info-1-tap-1 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-1" data-position="first" data-embed="0">1</span></a></li>
+                                @foreach($video_files as $file)
+                                <li class="halim-episode halim-episode-{{ $file->id }}"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="halim-info-{{ $file->id }} box-shadow halim-btn" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
+                                @endforeach
                             </ul>
 
                             <div class="clearfix"></div>
                         </div>
                         <div id="pagination-1"></div>
-
-                        <div class="halim-server show_all_eps" data-episode-nav="">
-                            <span class="halim-server-name"><span class="hl-server"></span> Server VIP</span>
-                            <ul id="listsv-2" class="halim-list-eps">
-                                <li class="halim-episode halim-episode-2-tap-1"><span data-href="/xem-phim-to-chuc-rugal/tap-1-sv2.html" class="clickable halim-info-2-tap-1 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-1" data-position="first" data-embed="0">1</span></li>
-                            </ul>
-
-                            <div class="clearfix"></div>
-                        </div>
-                        <div id="pagination-2"></div>
-
-                        <div class="halim-server show_all_eps" data-episode-nav=""><span class="halim-server-name"><span class="hl-server"></span> Server VIP 2</span>
-                            <ul id="listsv-3" class="halim-list-eps">
-                                <li class="halim-episode halim-episode-3-tap-1"><span data-href="/xem-phim-to-chuc-rugal/tap-1-sv3.html" class="clickable halim-info-3-tap-1 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-1" data-position="first" data-embed="0">1</span></li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div id="pagination-3"></div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="clearfix"></div>
 
-                <div class="halim--notice">
+                {{--<div class="halim--notice">
                     <!-- Ads -->
 
-                </div>
+                </div>--}}
 
                 <div class="entry-content htmlwrap clearfix">
                     <div class="video-item halim-entry-box">

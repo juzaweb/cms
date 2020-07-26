@@ -49,8 +49,9 @@ function image_url($path) {
     }
     
     if ($path) {
-        $file_path = Storage::disk('uploads')->path($path);
-        $file_url = Storage::disk('uploads')->url($path);
+        $storage = Storage::disk('uploads');
+        $file_path = $storage->path($path);
+        $file_url = $storage->url($path);
         
         if (file_exists($file_path)) {
             return $file_url;

@@ -4,20 +4,21 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMovieViewsTable extends Migration
+class CreateMovieRatingTable extends Migration
 {
     public function up()
     {
-        Schema::create('movie_views', function (Blueprint $table) {
+        Schema::create('movie_rating', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('movie_id')->index();
-            $table->bigInteger('views')->default(0);
-            $table->date('day')->index();
+            $table->string('client_ip', 50)->index();
+            $table->float('start');
+            $table->timestamps();
         });
     }
     
     public function down()
     {
-        Schema::dropIfExists('movie_views');
+        Schema::dropIfExists('movie_rating');
     }
 }

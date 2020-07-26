@@ -1,6 +1,6 @@
 const mix = require('laravel-mix');
 
-mix.js('resources/js/app.js', 'public/js')
+/*mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.styles([
@@ -113,7 +113,7 @@ mix.combine([
     'resources/styles/js/LoadBootstrapTable.js',
     'resources/styles/js/form-ajax.js',
     'resources/styles/js/customs.js',
-], 'public/js/backend.js');
+], 'public/js/backend.js');*/
 
 mix.styles([
     'resources/views/themes/mymo/styles/assets/css/bootstrap.min.css',

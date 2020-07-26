@@ -209,6 +209,6 @@ class VideoFiles extends Model
         
         $file = \Crypt::encryptString($file);
         
-        return route('stream', [$token, $file, basename($path)]);
+        return route('stream.video', [$token, $file, basename($path)]);
     }
 }

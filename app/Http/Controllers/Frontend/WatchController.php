@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
+use App\Models\MovieRating;
 use App\Models\Servers;
 use App\Models\VideoFiles;
 use App\Models\Genres;
 use App\Models\Movies;
-use App\Http\Controllers\Controller;
-use App\Models\Tags;
-use Illuminate\Http\Request;
 
 class WatchController extends Controller
 {
@@ -23,11 +22,16 @@ class WatchController extends Controller
     
         $genres = $info->getGenres();
         $countries = $info->getCountries();
-        $tags = Tags::whereIn('id', explode(',', $info->tags))
-            ->get(['id', 'name', 'slug']);
+        $tags = $info->getTags();
         
         $related_movies = $info->getRelatedMovies(8);
         $player_id = $this->getFileVideo($info->id);
+        $start = $info->getStarRating();
+        
+        $servers = Servers::where('movie_id', '=', $info->id)
+            ->where('status', '=', 1)
+            ->orderBy('order', 'asc')
+            ->get();
         
         return view('themes.mymo.watch.index', [
             'title' => $info->meta_title,
@@ -37,58 +41,12 @@ class WatchController extends Controller
             'related_movies' => $related_movies,
             'info' => $info,
             'player_id' => $player_id,
+            'start' => $start,
             'genre' => $genre,
             'genres' => $genres,
             'countries' => $countries,
             'tags' => $tags,
-        ]);
-    }
-    
-    public function watch($slug, $vid) {
-        $info = Movies::where('slug', '=', $slug)
-            ->where('status', '=', 1)
-            ->firstOrFail();
-        $genre = Genres::where('status', '=', 1)
-            ->whereIn('id', explode(',', $info->genres))
-            ->first(['id', 'name', 'slug']);
-        $tags = Tags::whereIn('id', explode(',', $info->tags))
-            ->get(['id', 'name', 'slug']);
-        
-        $related_movies = $info->getRelatedMovies(8);
-        
-        return view('themes.mymo.watch.watch', [
-            'title' => $info->meta_title,
-            'description' => $info->meta_description,
-            'keywords' => $info->keywords,
-            'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive halimthemes halimmovies halim-corner-rounded',
-            'info' => $info,
-            'genre' => $genre,
-            'tags' => $tags,
-            'related_movies' => $related_movies,
-        ]);
-    }
-    
-    public function getPlayer($slug, Request $request) {
-        $vfile_id = $request->post('file_id');
-        
-        $file = VideoFiles::find($vfile_id);
-        if ($file) {
-            
-            $files = $file->getFiles();
-            return response()->json([
-                'data' => [
-                    'status' => true,
-                    'sources' => view('themes.mymo.data.player_script', [
-                        'files' => $files,
-                    ])->render(),
-                ]
-            ]);
-        }
-        
-        return response()->json([
-            'data' => [
-                'status' => false,
-            ]
+            'servers' => $servers,
         ]);
     }
     
