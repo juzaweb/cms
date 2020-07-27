@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers\Frontend\Account;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
+use App\Models\Movies;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class ChangePasswordController extends Controller
 {
     public function index() {
-        $user = \Auth::user();
+        $viewed = Cookie::get('viewed');
+        $recently_visited = [];
+        if ($viewed) {
+            $viewed = json_decode($viewed, true);
+            $recently_visited = Movies::whereIn('id', $viewed)
+                ->where('status', '=', 1)
+                ->paginate(10);
+        }
+        
         return view('themes.mymo.profile.change_password', [
-            'user' => $user
+            'user' => \Auth::user(),
+            'recently_visited' => $recently_visited
         ]);
     }
     
@@ -43,7 +54,7 @@ class ChangePasswordController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.old_password_incorrect'),
+            'message' => trans('app.change_password_successfully'),
         ]);
     }
 }

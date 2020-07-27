@@ -5,7 +5,7 @@
 <!-- SIDEBAR USER TITLE -->
 <div class="profile-usertitle">
     <div class="profile-usertitle-name">
-        <a href="http://xemphimplus.net/author/theanhk"></a>
+        <a href="{{ route('account') }}"></a>
     </div>
     <div class="profile-usertitle-job">
         subscriber
