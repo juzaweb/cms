@@ -40,7 +40,7 @@
                         "player_url": "{{ route('watch.player', [$info->slug, $player_id]) }}",
                         "rating_url": "{{ route('watch.rating', [$info->slug]) }}",
                         "loading_img": "{{ asset('styles/themes/mymo/images/ajax-loader.gif') }}",
-                        "eps_slug": "tap",
+                        "eps_slug": "eps",
                         "server_slug": "s",
                         "type_slug": "slug-2",
                         "post_title": "{{ $info->name }}",
@@ -55,19 +55,19 @@
                         "resume_playback": true,
                         "resume_text": "Tự động phát lại phim từ thời điểm bạn xem gần đây nhất tại",
                         "resume_text_2": "Phát lại từ đầu?",
-                        "playback": "Phát lại",
-                        "continue_watching": "Xem tiếp",
-                        "player_reload": "Tải lại trình phát",
+                        "playback": "@lang('app.playback')",
+                        "continue_watching": "@lang('app.continue_watching')",
+                        "player_reload": "@lang('app.player_reload')",
                         "jw_error_msg_0": "Chúng tôi không thể tìm thấy video bạn đang tìm kiếm. Có thể có một số lý do cho việc này, ví dụ như nó đã bị xóa bởi chủ sở hữu!",
                         "jw_error_msg_1": "Video lỗi không thể phát được.",
                         "jw_error_msg_2": "Để xem tiếp, vui lòng click vào nút \"Tải lại trình phát\"",
                         "jw_error_msg_3": "hoặc click vào các nút được liệt kê bên dưới",
-                        "light_on": "Bật đèn",
-                        "light_off": "Tắt đèn",
-                        "expand": "Phóng to",
-                        "collapse": "Thu nhỏ",
-                        "player_loading": "Đang khởi tạo trình phát, vui lòng chờ...",
-                        "player_autonext": "Đang tự động chuyển tập, vui lòng chờ...",
+                        "light_on": "@lang('app.light_on')",
+                        "light_off": "@lang('app.light_off')",
+                        "expand": "@lang('app.expand')",
+                        "collapse": "@lang('app.collapse')",
+                        "player_loading": "@lang('app.player_loading')",
+                        "player_autonext": "@lang('app.player_autonext')",
                         "is_adult": false,
                         "adult_title": "Adult Content Warning!",
                         "adult_content": "<span style=\"vertical-align: inherit;\"><span style=\"vertical-align: inherit;\">Trang web này chứa nội dung dành cho các cá nhân từ 18\/21 tuổi trở lên được xác định theo luật pháp địa phương và quốc gia của khu vực nơi bạn cư trú. <\/span><span style=\"vertical-align: inherit;\">Nếu bạn chưa đủ 18 tuổi, hãy rời khỏi trang web này ngay lập tức. <\/span><span style=\"vertical-align: inherit;\">Khi vào trang web này, bạn đồng ý rằng bạn từ 18 tuổi trở lên. <\/span><span style=\"vertical-align: inherit;\">Bạn sẽ không phân phối lại tài liệu này cho bất kỳ ai, và bạn cũng sẽ không cho phép bất kỳ trẻ vị thành niên nào xem tài liệu này.<\/span><\/span>",
@@ -82,25 +82,25 @@
                             "loading_img": "{{ asset('styles/themes/mymo/images/loading.gif') }}",
                             "report_btn": "Báo lỗi",
                             "name_or_email": "Tên hoặc Email",
-                            "close": "Đóng"
+                            "close": "@lang('app.close')"
                         }
                     }
                 </script>
 
                 <div class="halim-movie-wrapper">
                     <div class="title-block watch-page">
-                        <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-id="14773" data-toggle="tooltip" title="Add to bookmark">
+                        <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-id="{{ $info->id }}" data-toggle="tooltip" title="@lang('app.add_to_bookmark')">
 
                         </div>
                         <div class="title-wrapper">
-                            <h1 class="entry-title" data-toggle="tooltip" title="{{ $info->name }}">{{ $info->name }}<span class="title-year"> (<a href="" rel="tag">{{ $info->year }}</a>)</span></h1>
+                            <h1 class="entry-title" data-toggle="tooltip" title="{{ $info->name }}">{{ $info->name }}<span class="title-year"> (<a href="{{ route('year', [$info->year]) }}" rel="tag">{{ $info->year }}</a>)</span></h1>
                         </div>
 
                         <div class="ratings_wrapper hidden-xs">
                             <div class="halim_imdbrating taq-score">
                                 <span class="score">{{ $start }}</span><i>/</i>
                                 <span class="max-ratings">5</span>
-                                <span class="total_votes">{{ $info->countRating() }}</span><span class="vote-txt"> đánh giá</span>
+                                <span class="total_votes">{{ $info->countRating() }}</span><span class="vote-txt"> @lang('app.votes')</span>
                             </div>
                             <div class="rate-this">
                                 <div data-rate="{{ $start * 100 / 5 }}" data-id="{{ $info->id }}" class="user-rate user-rate-active">
@@ -110,6 +110,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="more-info">
                             @if($info->tv_series == 0)
                             <span>Full</span>
@@ -127,15 +128,15 @@
                     <div class="movie_info col-xs-12">
                         <div class="movie-poster col-md-3">
                             <img class="movie-thumb" src="{{ $info->getThumbnail() }}" alt="{{ $info->name }}">
-                            <div class="halim_imdbrating"><span>6.7</span></div>
-                            <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="btn btn-sm btn-danger watch-movie visible-xs-block"><i class="hl-play"></i>Xem phim</a>
+                            <div class="halim_imdbrating"><span>{{ $info->rating }}</span></div>
+                            <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="btn btn-sm btn-danger watch-movie visible-xs-block"><i class="hl-play"></i>@lang('watch')</a>
 
 
                             <span id="show-trailer" data-url="{{ $info->trailer }}" class="btn btn-sm btn-primary show-trailer">
-                            <i class="hl-youtube-play"></i> Trailer</span>
+                            <i class="hl-youtube-play"></i> @lang('app.trailer')</span>
 
-                            <span class="btn btn-sm btn-success quick-eps">
-                                <a data-toggle="collapse" href="#collapseEps" aria-expanded="false" aria-controls="collapseEps"><i class="hl-sort-down"></i> Chọn tập</a>
+                            <span class="btn btn-sm btn-success quick-eps" data-toggle="collapse" href="#collapseEps" aria-expanded="false" aria-controls="collapseEps">
+                                <i class="hl-sort-down"></i> @lang('app.episodes')
                             </span>
                         </div>
 
@@ -174,14 +175,14 @@
                             @php
                             $video_files = $server->video_files()
                                 ->orderBy('order', 'asc')
-                                ->get();
+                                ->get(['id', 'label']);
                             @endphp
                         <div class="halim-server show_all_eps" data-episode-nav="">
                             <span class="halim-server-name">
                                 <span class="hl-server"></span> {{ $server->name }}
                             </span>
 
-                            <ul id="listsv-1" class="halim-list-eps">
+                            <ul id="listsv-{{ $server->id }}" class="halim-list-eps">
                                 @foreach($video_files as $file)
                                 <li class="halim-episode halim-episode-{{ $file->id }}"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="halim-info-{{ $file->id }} box-shadow halim-btn" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
                                 @endforeach
@@ -207,7 +208,7 @@
                         </article>
                         <div class="item-content-toggle">
                             <div class="item-content-gradient"></div>
-                            <span class="show-more" data-single="true" data-showmore="Hiển thị thêm" data-showless="Rút gọn">Hiển thị thêm</span>
+                            <span class="show-more" data-single="true" data-showmore="@lang('app.show_more')" data-showless="@lang('app.show_less')">@lang('app.show_more')</span>
                         </div>
                     </div>
                 </div>
@@ -219,7 +220,7 @@
 
             <div id="halim_related_movies-2xx" class="wrap-slider">
                 <div class="section-bar clearfix">
-                    <h3 class="section-title"><span>CÓ THỂ BẠN MUỐN XEM?</span></h3>
+                    <h3 class="section-title"><span>@lang('app.similar_movies')</span></h3>
                 </div>
                 <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
                     @foreach($related_movies as $item)

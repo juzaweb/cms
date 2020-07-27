@@ -89,7 +89,7 @@ class VideoFiles extends Model
                 return $this->getVideoUrl('embed');
         }
         
-        return false;
+        return [];
     }
     
     protected function getExtension() {
@@ -100,7 +100,7 @@ class VideoFiles extends Model
     protected function getVideoYoutube() {
         return [
             [
-                'url' => '//www.youtube.com/watch?v=' . get_youtube_id($this->url),
+                'file' => '//www.youtube.com/watch?v=' . get_youtube_id($this->url),
                 'type' => 'video/youtube',
             ]
         ];
@@ -109,7 +109,7 @@ class VideoFiles extends Model
     protected function getVideoVimeo() {
         return [
             [
-                'url' => $this->url,
+                'file' => $this->url,
                 'type' => 'mp4',
             ]
         ];
@@ -118,7 +118,7 @@ class VideoFiles extends Model
     protected function getVideoUrl($type) {
         return [
             (object) [
-                'url' => $this->url,
+                'file' => $this->url,
                 'type' => $type,
             ]
         ];
@@ -129,57 +129,57 @@ class VideoFiles extends Model
             $files = [];
             if ($this->video_240p) {
                 $files[] = (object) [
-                    'quality' => '240p',
+                    'label' => '240p',
                     'type' => $this->getExtension(),
-                    'url' => $this->generateStreamUrl($this->video_240p),
+                    'file' => $this->generateStreamUrl($this->video_240p),
                 ];
             }
     
             if ($this->video_360p) {
                 $files[] = (object) [
-                    'quality' => '360p',
+                    'label' => '360p',
                     'type' => $this->getExtension(),
-                    'url' => $this->generateStreamUrl($this->video_360p),
+                    'file' => $this->generateStreamUrl($this->video_360p),
                 ];
             }
     
             if ($this->video_480p) {
                 $files[] = (object) [
-                    'quality' => '480p',
+                    'label' => '480p',
                     'type' => $this->getExtension(),
-                    'url' => $this->generateStreamUrl($this->video_480p),
+                    'file' => $this->generateStreamUrl($this->video_480p),
                 ];
             }
     
             if ($this->video_720p) {
                 $files[] = (object) [
-                    'quality' => '720p',
+                    'label' => '720p',
                     'type' => $this->getExtension(),
-                    'url' => $this->generateStreamUrl($this->video_720p),
+                    'file' => $this->generateStreamUrl($this->video_720p),
                 ];
             }
     
             if ($this->video_1080p) {
                 $files[] = (object) [
-                    'quality' => '1080p',
+                    'label' => '1080p',
                     'type' => $this->getExtension(),
-                    'url' => $this->generateStreamUrl($this->video_1080p),
+                    'file' => $this->generateStreamUrl($this->video_1080p),
                 ];
             }
     
             if ($this->video_2048p) {
                 $files[] = (object) [
-                    'quality' => '2048p',
+                    'label' => '2048p',
                     'type' => $this->getExtension(),
-                    'url' => $this->generateStreamUrl($this->video_2048p),
+                    'file' => $this->generateStreamUrl($this->video_2048p),
                 ];
             }
     
             if ($this->video_4096p) {
                 $files[] = (object) [
-                    'quality' => '4096p',
+                    'label' => '4096p',
                     'type' => $this->getExtension(),
-                    'url' => $this->generateStreamUrl($this->video_4096p),
+                    'file' => $this->generateStreamUrl($this->video_4096p),
                 ];
             }
             
@@ -190,7 +190,7 @@ class VideoFiles extends Model
         
         return [
             (object) [
-                'url' => $this->generateStreamUrl($this->url),
+                'file' => $this->generateStreamUrl($this->url),
                 'type' => $this->getExtension(),
             ]
         ];

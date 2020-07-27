@@ -115,19 +115,19 @@
                         </div>
 
                         <div id="toggle-light"><i class="hl-adjust"></i>
-                            Tắt đèn
+                            @lang('app.light_off')
                         </div>
 
                         <div id="report" class="halim-switch">
-                            <i class="hl-attention"></i> Báo lỗi
+                            <i class="hl-attention"></i> @lang('app.report')
                         </div>
 
                         <div class="luotxem"><i class="hl-eye"></i>
-                            <span>249.9K</span> lượt xem
+                            <span>{{ $info->getViews() }}</span> @lang('app.views')
                         </div>
 
                         <div class="luotxem visible-xs-inline">
-                            <a data-toggle="collapse" href="#moretool" aria-expanded="false" aria-controls="moretool"><i class="hl-forward"></i> Chia sẻ</a>
+                            <a data-toggle="collapse" href="#moretool" aria-expanded="false" aria-controls="moretool"><i class="hl-forward"></i> @lang('app.share')</a>
                         </div>
 
                     </ul>
@@ -135,15 +135,21 @@
 
                 <div class="collapse" id="moretool">
                     <ul class="nav nav-pills x-nav-justified">
-                        <li class="fb-like" data-href="/to-chuc-rugal/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></li>
-                        <div class="fb-save" data-uri="/to-chuc-rugal/" data-size="small"></div>
+                        <li class="fb-like" data-href="" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></li>
+                        <div class="fb-save" data-uri="" data-size="small"></div>
                     </ul>
                 </div>
 
                 <div class="clearfix"></div>
-                <div class="text-center">			<div class="textwidget"><p style="color: yellow;border: 1px solid;padding: 5px;">Hãy <strong>Đăng Nhập</strong> ẩn hết <strong>&nbsp;Quảng Cáo</strong>!</p>
+                <div class="text-center">
+                    <div class="textwidget">
+                        <!-- Ads -->
                     </div>
-                </div><div class="text-center">			<div class="textwidget">
+                </div>
+
+                <div class="text-center">
+
+                    <div class="textwidget">
                         <style type="text/css">
                             #main-contents{position:relative;}
                             .float-left{position:absolute;left:-130px;top:0;}
@@ -151,43 +157,75 @@
                         </style>
 
                     </div>
-                </div>        <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
 
                 <div class="title-block watch-page">
-                    <a href="javascript:;" data-toggle="tooltip" title="Thêm vào tủ phim">
-                        <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-post_id="14773" data-thumbnail="/wp-content/uploads/2020/04/to-chuc-rugal-14773-thumbnail.jpg" data-href="/to-chuc-rugal" data-title="Tổ Chức Rugal" data-date="2020-04-04">
+                    <a href="javascript:;" data-toggle="tooltip" title="@lang('app.add_to_bookmark')">
+                        <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-post_id="{{ $info->id }}" data-thumbnail="{{ $info->getThumbnail() }}" data-href="{{ route('watch', [$info->slug]) }}" data-title="{{ $info->name }}" data-date="{{ $info->release }}">
                             <!-- <div class="halim-pulse-ring"></div> -->
                         </div>
                     </a>
+
                     <div class="title-wrapper full">
-                        <h1 class="entry-title"><a href="/to-chuc-rugal" title="Xem phim Tổ Chức Rugal Tập 1 Full [Vietsub + Thuyết minh]" class="tl">Xem phim Tổ Chức Rugal Tập 1 Full [Vietsub + Thuyết minh]</a></h1>
-                        <span class="plot-collapse" data-toggle="collapse" data-target="#expand-post-content" aria-expanded="false" aria-controls="expand-post-content" data-text="Nội dung phim"><i class="hl-angle-down"></i></span>
+                        <h1 class="entry-title"><a href="{{ route('watch.play', [$info->slug, $vid]) }}" title="{{ $info->meta_title }}" class="tl">{{ $info->meta_title }}</a></h1>
+
+                        <span class="plot-collapse" data-toggle="collapse" data-target="#expand-post-content" aria-expanded="false" aria-controls="expand-post-content" data-text="@lang('app.movie_plot')"><i class="hl-angle-down"></i></span>
                     </div>
 
-                    <div class="ratings_wrapper">
+                    <div class="ratings_wrapper hidden-xs">
                         <div class="halim_imdbrating taq-score">
-                            <span class="score">4.28</span><i>/</i>
+                            <span class="score">{{ $start }}</span><i>/</i>
                             <span class="max-ratings">5</span>
-                            <span class="total_votes">8</span><span class="vote-txt"> đánh giá</span>
+                            <span class="total_votes">{{ $info->countRating() }}</span><span class="vote-txt"> @lang('app.votes')</span>
                         </div>
                         <div class="rate-this">
-                            <div data-rate="85.5" data-id="14773" class="user-rate user-rate-active">
-            <span class="user-rate-image post-large-rate stars-large">
-                <span style="width: 85.5%"></span>
-            </span>
+                            <div data-rate="{{ $start * 100 / 5 }}" data-id="{{ $info->id }}" class="user-rate user-rate-active">
+                                    <span class="user-rate-image post-large-rate stars-large">
+                                        <span style="width: {{ $start * 100 / 5 }}%"></span>
+                                    </span>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="entry-content htmlwrap clearfix collapse" id="expand-post-content">
-                    <article id="post-14773" class="item-content post-14773">
+                    <article id="post-{{ $info->id }}" class="item-content post-{{ $info->id }}">
                         {!! $info->description !!}
                     </article>
                 </div>
+
                 <div class="clearfix"></div>
-                <div class="text-center halim-ajax-list-server"><div id="halim-ajax-list-server"><script>var svlists = [];</script></div></div><div id="halim-list-server" class="list-eps-ajax"><div class="halim-server show_all_eps" data-episode-nav=""><span class="halim-server-name"><span class="hl-server"></span> Server HD</span><ul id="listsv-1" class="halim-list-eps"><li class="active halim-episode halim-episode-1-tap-1"><a href="/xem-phim-to-chuc-rugal/tap-1-sv1.html" title="1"><span class="active halim-info-1-tap-1 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-1" data-position="first" data-embed="0">1</span></a></li><li class="halim-episode halim-episode-1-tap-2"><a href="/xem-phim-to-chuc-rugal/tap-2-sv1.html" title="2"><span class="halim-info-1-tap-2 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-2" data-position="" data-embed="0">2</span></a></li><li class="halim-episode halim-episode-1-tap-3"><a href="/xem-phim-to-chuc-rugal/tap-3-sv1.html" title="3"><span class="halim-info-1-tap-3 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-3" data-position="" data-embed="0">3</span></a></li><li class="halim-episode halim-episode-1-tap-4"><a href="/xem-phim-to-chuc-rugal/tap-4-sv1.html" title="4"><span class="halim-info-1-tap-4 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-4" data-position="" data-embed="0">4</span></a></li><li class="halim-episode halim-episode-1-tap-5"><a href="/xem-phim-to-chuc-rugal/tap-5-sv1.html" title="5"><span class="halim-info-1-tap-5 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-5" data-position="" data-embed="0">5</span></a></li><li class="halim-episode halim-episode-1-tap-6"><a href="/xem-phim-to-chuc-rugal/tap-6-sv1.html" title="6"><span class="halim-info-1-tap-6 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-6" data-position="" data-embed="0">6</span></a></li><li class="halim-episode halim-episode-1-tap-7"><a href="/xem-phim-to-chuc-rugal/tap-7-sv1.html" title="7"><span class="halim-info-1-tap-7 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-7" data-position="" data-embed="0">7</span></a></li><li class="halim-episode halim-episode-1-tap-8"><a href="/xem-phim-to-chuc-rugal/tap-8-sv1.html" title="8"><span class="halim-info-1-tap-8 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-8" data-position="" data-embed="0">8</span></a></li><li class="halim-episode halim-episode-1-tap-9"><a href="/xem-phim-to-chuc-rugal/tap-9-sv1.html" title="9"><span class="halim-info-1-tap-9 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-9" data-position="" data-embed="0">9</span></a></li><li class="halim-episode halim-episode-1-tap-10"><a href="/xem-phim-to-chuc-rugal/tap-10-sv1.html" title="10"><span class="halim-info-1-tap-10 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-10" data-position="" data-embed="0">10</span></a></li><li class="halim-episode halim-episode-1-tap-11"><a href="/xem-phim-to-chuc-rugal/tap-11-sv1.html" title="11"><span class="halim-info-1-tap-11 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-11" data-position="" data-embed="0">11</span></a></li><li class="halim-episode halim-episode-1-tap-12"><a href="/xem-phim-to-chuc-rugal/tap-12-sv1.html" title="12"><span class="halim-info-1-tap-12 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-12" data-position="" data-embed="0">12</span></a></li><li class="halim-episode halim-episode-1-tap-13"><a href="/xem-phim-to-chuc-rugal/tap-13-sv1.html" title="13"><span class="halim-info-1-tap-13 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-13" data-position="" data-embed="0">13</span></a></li><li class="halim-episode halim-episode-1-tap-14"><a href="/xem-phim-to-chuc-rugal/tap-14-sv1.html" title="14"><span class="halim-info-1-tap-14 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-14" data-position="" data-embed="0">14</span></a></li><li class="halim-episode halim-episode-1-tap-15"><a href="/xem-phim-to-chuc-rugal/tap-15-sv1.html" title="15"><span class="halim-info-1-tap-15 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-15" data-position="" data-embed="0">15</span></a></li><li class="halim-episode halim-episode-1-tap-16"><a href="/xem-phim-to-chuc-rugal/tap-16-sv1.html" title="16"><span class="halim-info-1-tap-16 box-shadow halim-btn" data-post-id="14773" data-server="1"  data-episode-slug="tap-16" data-position="last" data-embed="0">16</span></a></li></ul><div class="clearfix"></div></div><div id="pagination-1"></div><div class="halim-server show_all_eps" data-episode-nav=""><span class="halim-server-name"><span class="hl-server"></span> Server VIP</span><ul id="listsv-2" class="halim-list-eps"><li class="halim-episode halim-episode-2-tap-1"><span data-href="/xem-phim-to-chuc-rugal/tap-1-sv2.html" class="clickable halim-info-2-tap-1 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-1" data-position="first" data-embed="0">1</span></li><li class="halim-episode halim-episode-2-tap-2"><span data-href="/xem-phim-to-chuc-rugal/tap-2-sv2.html" class="clickable halim-info-2-tap-2 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-2" data-position="" data-embed="0">2</span></li><li class="halim-episode halim-episode-2-tap-3"><span data-href="/xem-phim-to-chuc-rugal/tap-3-sv2.html" class="clickable halim-info-2-tap-3 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-3" data-position="" data-embed="0">3</span></li><li class="halim-episode halim-episode-2-tap-4"><span data-href="/xem-phim-to-chuc-rugal/tap-4-sv2.html" class="clickable halim-info-2-tap-4 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-4" data-position="" data-embed="0">4</span></li><li class="halim-episode halim-episode-2-tap-5"><span data-href="/xem-phim-to-chuc-rugal/tap-5-sv2.html" class="clickable halim-info-2-tap-5 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-5" data-position="" data-embed="0">5</span></li><li class="halim-episode halim-episode-2-tap-6"><span data-href="/xem-phim-to-chuc-rugal/tap-6-sv2.html" class="clickable halim-info-2-tap-6 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-6" data-position="" data-embed="0">6</span></li><li class="halim-episode halim-episode-2-tap-7"><span data-href="/xem-phim-to-chuc-rugal/tap-7-sv2.html" class="clickable halim-info-2-tap-7 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-7" data-position="" data-embed="0">7</span></li><li class="halim-episode halim-episode-2-tap-8"><span data-href="/xem-phim-to-chuc-rugal/tap-8-sv2.html" class="clickable halim-info-2-tap-8 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-8" data-position="" data-embed="0">8</span></li><li class="halim-episode halim-episode-2-tap-9"><span data-href="/xem-phim-to-chuc-rugal/tap-9-sv2.html" class="clickable halim-info-2-tap-9 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-9" data-position="" data-embed="0">9</span></li><li class="halim-episode halim-episode-2-tap-10"><span data-href="/xem-phim-to-chuc-rugal/tap-10-sv2.html" class="clickable halim-info-2-tap-10 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-10" data-position="" data-embed="0">10</span></li><li class="halim-episode halim-episode-2-tap-11"><span data-href="/xem-phim-to-chuc-rugal/tap-11-sv2.html" class="clickable halim-info-2-tap-11 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-11" data-position="" data-embed="0">11</span></li><li class="halim-episode halim-episode-2-tap-12"><span data-href="/xem-phim-to-chuc-rugal/tap-12-sv2.html" class="clickable halim-info-2-tap-12 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-12" data-position="" data-embed="0">12</span></li><li class="halim-episode halim-episode-2-tap-13"><span data-href="/xem-phim-to-chuc-rugal/tap-13-sv2.html" class="clickable halim-info-2-tap-13 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-13" data-position="" data-embed="0">13</span></li><li class="halim-episode halim-episode-2-tap-14"><span data-href="/xem-phim-to-chuc-rugal/tap-14-sv2.html" class="clickable halim-info-2-tap-14 box-shadow halim-btn" data-post-id="14773" data-server="2" data-episode-slug="tap-14" data-position="" data-embed="0">14</span></li></ul><div class="clearfix"></div></div><div id="pagination-2"></div><div class="halim-server show_all_eps" data-episode-nav=""><span class="halim-server-name"><span class="hl-server"></span> Server VIP 2</span><ul id="listsv-3" class="halim-list-eps"><li class="halim-episode halim-episode-3-tap-1"><span data-href="/xem-phim-to-chuc-rugal/tap-1-sv3.html" class="clickable halim-info-3-tap-1 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-1" data-position="first" data-embed="0">1</span></li><li class="halim-episode halim-episode-3-tap-2"><span data-href="/xem-phim-to-chuc-rugal/tap-2-sv3.html" class="clickable halim-info-3-tap-2 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-2" data-position="" data-embed="0">2</span></li><li class="halim-episode halim-episode-3-tap-3"><span data-href="/xem-phim-to-chuc-rugal/tap-3-sv3.html" class="clickable halim-info-3-tap-3 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-3" data-position="" data-embed="0">3</span></li><li class="halim-episode halim-episode-3-tap-4"><span data-href="/xem-phim-to-chuc-rugal/tap-4-sv3.html" class="clickable halim-info-3-tap-4 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-4" data-position="" data-embed="0">4</span></li><li class="halim-episode halim-episode-3-tap-5"><span data-href="/xem-phim-to-chuc-rugal/tap-5-sv3.html" class="clickable halim-info-3-tap-5 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-5" data-position="" data-embed="0">5</span></li><li class="halim-episode halim-episode-3-tap-6"><span data-href="/xem-phim-to-chuc-rugal/tap-6-sv3.html" class="clickable halim-info-3-tap-6 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-6" data-position="" data-embed="0">6</span></li><li class="halim-episode halim-episode-3-tap-7"><span data-href="/xem-phim-to-chuc-rugal/tap-7-sv3.html" class="clickable halim-info-3-tap-7 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-7" data-position="" data-embed="0">7</span></li><li class="halim-episode halim-episode-3-tap-8"><span data-href="/xem-phim-to-chuc-rugal/tap-8-sv3.html" class="clickable halim-info-3-tap-8 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-8" data-position="" data-embed="0">8</span></li><li class="halim-episode halim-episode-3-tap-9"><span data-href="/xem-phim-to-chuc-rugal/tap-9-sv3.html" class="clickable halim-info-3-tap-9 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-9" data-position="" data-embed="0">9</span></li><li class="halim-episode halim-episode-3-tap-10"><span data-href="/xem-phim-to-chuc-rugal/tap-10-sv3.html" class="clickable halim-info-3-tap-10 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-10" data-position="" data-embed="0">10</span></li><li class="halim-episode halim-episode-3-tap-11"><span data-href="/xem-phim-to-chuc-rugal/tap-11-sv3.html" class="clickable halim-info-3-tap-11 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-11" data-position="" data-embed="0">11</span></li><li class="halim-episode halim-episode-3-tap-12"><span data-href="/xem-phim-to-chuc-rugal/tap-12-sv3.html" class="clickable halim-info-3-tap-12 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-12" data-position="" data-embed="0">12</span></li><li class="halim-episode halim-episode-3-tap-14"><span data-href="/xem-phim-to-chuc-rugal/tap-14-sv3.html" class="clickable halim-info-3-tap-14 box-shadow halim-btn" data-post-id="14773" data-server="3" data-episode-slug="tap-14" data-position="" data-embed="0">14</span></li></ul><div class="clearfix"></div></div><div id="pagination-3"></div></div>        <div class="clearfix"></div>
+                <div class="text-center halim-ajax-list-server">
+                    <div id="halim-ajax-list-server">
+                        <script>var svlists = [];</script></div>
+                </div>
+
+                <div id="halim-list-server" class="list-eps-ajax">
+                    @foreach($servers as $server)
+                        @php
+                            $video_files = $server->video_files()
+                                ->orderBy('order', 'asc')
+                                ->get(['id', 'label']);
+                        @endphp
+                        <div class="halim-server show_all_eps" data-episode-nav="">
+                            <span class="halim-server-name">
+                                <span class="hl-server"></span> {{ $server->name }}
+                            </span>
+
+                            <ul id="listsv-{{ $server->id }}" class="halim-list-eps">
+                                @foreach($video_files as $file)
+                                    <li class="halim-episode halim-episode-{{ $file->id }}"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="halim-info-{{ $file->id }} box-shadow halim-btn" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
+                                @endforeach
+                            </ul>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="pagination-1"></div>
+                    @endforeach
+                </div>
+                <div class="clearfix"></div>
+
                 <div class="htmlwrap clearfix">
                     <div class="fb-comments"  data-href="/to-chuc-rugal/" data-width="100%" data-mobile="true" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time"></div>
                 </div>
@@ -200,7 +238,7 @@
 
             <div id="halim_related_movies-2xx" class="wrap-slider">
                 <div class="section-bar clearfix">
-                    <h3 class="section-title"><span>CÓ THỂ BẠN MUỐN XEM?</span></h3>
+                    <h3 class="section-title"><span>@lang('app.similar_movies')</span></h3>
                 </div>
                 <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
                     @foreach($related_movies as $item)

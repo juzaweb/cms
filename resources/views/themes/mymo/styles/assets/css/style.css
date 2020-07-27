@@ -80,6 +80,97 @@ ul#f-menu li a {
     padding-left: 0;
 }
 
+span.btn-success.quick-eps {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 43%;
+    text-align: center;
+    text-indent: 10px;
+    padding: 8px 6px;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 20px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-image: linear-gradient(to right,#009245,#d0c200,#00a8c5,#d9e021);
+    box-shadow: 0 4px 15px 0 rgba(83,176,57,.75);
+}
+
+span.btn-success.quick-eps:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.quick-eps .hl-sort-down {
+    position: absolute;
+    left: -10px;
+    top: 6px;
+}
+
+span.show-trailer {
+    position: absolute;
+    bottom: 10px;
+    padding: 8px;
+    right: 10px;
+    left: unset;
+    width: 45%;
+    max-height: 35px;
+    border-radius: 20px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-image: linear-gradient(to right,#fb0,#e43603,#ff6290,#ff5000);
+    box-shadow: 0 4px 15px 0 rgba(229,66,10,.75);
+    background-color: white;
+}
+
+span.show-trailer:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+a.watch-movie {
+    position: absolute;
+    bottom: 10px;
+    padding: 8px;
+    right: 10px;
+    left: unset;
+    width: 45%;
+    max-height: 35px;
+    border-radius: 20px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-image: linear-gradient(to right,#fb0,#e43603,#ff6290,#ff5000);
+    box-shadow: 0 4px 15px 0 rgba(229,66,10,.75);
+    background-color: white;
+}
+
+a.watch-movie:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
 @media screen and (min-width: 1024px){
     /*.hidemobile {
         display: block;

@@ -40,7 +40,7 @@ class Servers extends Model
     ];
     
     public function movie() {
-        return $this->belongsTo('App\Models\Movies', 'movie_id', 'id');
+        return $this->hasOne('App\Models\Movies', 'id', 'movie_id');
     }
     
     public function video_files() {

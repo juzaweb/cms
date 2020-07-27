@@ -1,6 +1,7 @@
 <script>
-    var resumeId = encodeURI('5d1d90fdec293317a9cd9bb7c444ead9'),
-        playerInstance = jwplayer('ajax-player');
+    var resumeId = encodeURI('5d1d90fdec293317a9cd9bb7c444ead9');
+    var playerInstance = jwplayer('ajax-player');
+    var files = JSON.parse('{!! json_encode($files) !!}');
 
     if(typeof playerInstance != 'undefined'){
 
@@ -8,19 +9,9 @@
             key: "ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=",
             primary: "html5",
             playlist: [{
-                title: "Đẹp Trai Là Số 1",
-                image: "/wp-content/uploads/2020/05/dep-trai-la-so-1-15425-poster.jpg",
-                sources: [
-                    {
-                    "label":"720p",
-                    "type":"mp4",
-                    "file":""
-                    },
-                    {
-                        "label":"360p",
-                        "type":"mp4",
-                        "file":"http:\/\/api.3s.live\/api\/redirect?file=0a6ea0021431d9de3f57c7dc86e51af2c715e3af0b005643a13535d44abf20412a3e15fe4732dbc1be3b195470d8b048&label=360p"}
-                ],
+                title: "{{ $movie->name }}",
+                image: "{{ $movie->getPoster() }}",
+                sources: files,
                 tracks: [],
                 captions: {
                     color: "#fff",

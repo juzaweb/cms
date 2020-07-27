@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Genres;
 use App\Models\Movies;
 use App\Models\MovieViews;
-use App\Models\Tags;
 use App\Models\VideoFiles;
 use Illuminate\Support\Facades\Cookie;
 
@@ -20,11 +19,6 @@ class PlayController extends Controller
             ->whereIn('id', explode(',', $info->genres))
             ->first(['id', 'name', 'slug']);
         
-        $tags = Tags::whereIn('id', explode(',', $info->tags))
-            ->get(['id', 'name', 'slug']);
-        
-        $related_movies = $info->getRelatedMovies(8);
-        
         return view('themes.mymo.watch.watch', [
             'title' => $info->meta_title,
             'description' => $info->meta_description,
@@ -32,14 +26,16 @@ class PlayController extends Controller
             'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive halimthemes halimmovies halim-corner-rounded',
             'info' => $info,
             'vid' => $vid,
+            'start' => $info->getStarRating(),
             'genre' => $genre,
-            'tags' => $tags,
-            'related_movies' => $related_movies,
+            'tags' => $info->getTags(),
+            'servers' => $info->getServers(),
+            'related_movies' => $info->getRelatedMovies(8),
         ]);
     }
     
     public function getPlayer($slug, $vid) {
-        Movies::where('slug', '=', $slug)
+        $movie = Movies::where('slug', '=', $slug)
             ->where('status', '=', 1)
             ->firstOrFail();
         
@@ -50,6 +46,7 @@ class PlayController extends Controller
                 'data' => [
                     'status' => true,
                     'sources' => view('themes.mymo.data.player_script', [
+                        'movie' => $movie,
                         'files' => $files,
                     ])->render(),
                 ]

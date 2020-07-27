@@ -23,6 +23,8 @@ Route::get('/type/{slug}', 'Frontend\TypeController@index')->name('type');
 
 Route::get('/country/{slug}', 'Frontend\CountryController@index')->name('country');
 
+Route::get('/year/{slug}', 'Frontend\YearController@index')->name('year');
+
 Route::get('/tag/{slug}', 'Frontend\TagController@index')->name('tag');
 
 Route::get('/page/{slug}', 'Frontend\PageController@index')->name('page');

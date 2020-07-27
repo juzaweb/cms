@@ -38,7 +38,7 @@ class GoogleDrive
             }
             
             $files[] = (object) [
-                'quality' => $quality,
+                'label' => $quality,
                 'type' => 'mp4',
                 'url' => $explode[1],
             ];

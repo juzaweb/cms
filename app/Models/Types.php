@@ -46,4 +46,8 @@ class Types extends Model
         'description',
         'status',
     ];
+    
+    public function movies() {
+        return $this->hasMany('App\Models\Movies', 'id', 'movie_id');
+    }
 }

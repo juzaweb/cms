@@ -112,6 +112,10 @@ class Movies extends Model
         return $this->hasMany('App\Models\MovieRating', 'movie_id', 'id');
     }
     
+    public function servers() {
+        return $this->hasMany('App\Models\Servers', 'movie_id', 'id');
+    }
+    
     public function getViews() {
         if ($this->views < 1000) {
             return $this->views;
@@ -143,6 +147,12 @@ class Movies extends Model
     public function getTags() {
         return Tags::whereIn('id', explode(',', $this->tags))
             ->get(['id', 'name', 'slug']);
+    }
+    
+    public function getServers($columns = ['id', 'name']) {
+        return $this->servers()
+            ->where('status', '=', 1)
+            ->get($columns);
     }
     
     public function countRating() {
