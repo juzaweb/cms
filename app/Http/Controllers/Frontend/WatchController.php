@@ -39,7 +39,8 @@ class WatchController extends Controller
         $server = Servers::where('status', '=', 1)
             ->where('movie_id', '=', $movie_id)
             ->orderBy('order', 'asc')
-            ->first(['id', 'server_id']);
+            ->first(['id', 'movie_id']);
+        
         if (empty($server)) {
             return 0;
         }

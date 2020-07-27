@@ -20,6 +20,7 @@ return [
   'content' => 'Content',
   'status' => 'Status',
   'search' => 'Search',
+  'search_movies_or_tv_series' => 'Search movies or TV series...',
   'enabled' => 'Enabled',
   'disabled' => 'Disabled',
   'created_at' => 'Created at',
@@ -298,4 +299,5 @@ return [
     'player_loading' => 'Player loading...',
     'add_to_bookmark' => 'Add to bookmark',
     'player_autonext' => 'Player autonext...',
+    'press_enter_to_search' => 'Press Enter to search',
 ];

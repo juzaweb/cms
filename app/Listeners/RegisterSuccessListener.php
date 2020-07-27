@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\RegisterSuccess;
 use App\Models\EmailList;
 
-class SendMailUserVerification
+class RegisterSuccessListener
 {
     public function __construct()
     {

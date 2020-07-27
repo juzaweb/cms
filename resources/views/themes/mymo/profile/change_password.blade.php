@@ -25,17 +25,7 @@
         </div>
     </div>
 
-    <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
-        <div class="section-bar clearfix">
-            <h3 class="section-title">
-                <span>@lang('app.change_password')</span>
-            </h3>
-
-            <div class="profile-sidebar">
-                @include('themes.mymo.profile.sidebar')
-            </div>
-        </div>
-    </aside>
+    @include('themes.mymo.profile.sidebar')
 
     <main id="main-contents" class="col-xs-12 col-sm-12 col-md-12">
         <section>
@@ -109,6 +99,8 @@
                         @include('themes.mymo.data.mini_item')
                     @endforeach
                 </div>
+
+                {{ $recently_visited->links() }}
             </div>
         </section>
 

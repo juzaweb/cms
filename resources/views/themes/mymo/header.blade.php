@@ -1,7 +1,7 @@
 <header id="header">
     <div class="container">
         <div class="row" id="headwrap">
-            <div class="col-md-3 col-sm-6 slogan">
+            <div class="col-md-2 col-sm-6 slogan">
                 <h1 class="site-title"><a class="logo" href="/" rel="home">{{ $home_tile }}</a></h1>
             </div>
 
@@ -11,7 +11,7 @@
                         <form id="search-form-pc" name="halimForm" role="search" action="/" method="GET">
                             <div class="form-group">
                                 <div class="input-group col-xs-12">
-                                    <input id="search" type="text" name="s" value="" class="form-control" data-toggle="tooltip" data-placement="bottom" data-original-title="Nhấn Enter để tìm kiếm" placeholder="Tìm kiếm với 3,119 bộ phim..." autocomplete="off" required>
+                                    <input id="search" type="text" name="s" value="" class="form-control" data-toggle="tooltip" data-placement="bottom" data-original-title="@lang('app.press_enter_to_search')" placeholder="@lang('app.search_movies_or_tv_series')" autocomplete="off" required>
                                     <i class="animate-spin hl-spin4 hidden"></i>
                                 </div>
                             </div>
@@ -20,11 +20,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 hidden-xs">
+            <div class="col-md-5 hidden-xs text-right">
+
                 <div id="get-bookmark" class="box-shadow">
                     <i class="hl-bookmark"></i><span> @lang('app.bookmark')</span>
                     <span class="count">0</span>
                 </div>
+
+                <div id="get-bookmark" class="box-shadow">
+                    <i class="hl-bell"></i>
+                    <span class="count">0</span>
+                </div>
+
                 <div class="user user-login-option box-shadow" id="pc-user-login">
                     <div class="dropdown">
                         @if(Auth::check())

@@ -7,12 +7,11 @@ $(document).on("turbolinks:load", function() {
 
     $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
         if (jqxhr.status === 401) {
-            window.location = "/";
+            Turbolinks.visit('/');
         }
 
         if (jqxhr.status === 419) {
-            alert('Token expired');
-            window.location = "";
+            Turbolinks.visit(location.toString());
         }
     });
 });

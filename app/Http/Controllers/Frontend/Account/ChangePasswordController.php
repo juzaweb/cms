@@ -17,7 +17,7 @@ class ChangePasswordController extends Controller
             $viewed = json_decode($viewed, true);
             $recently_visited = Movies::whereIn('id', $viewed)
                 ->where('status', '=', 1)
-                ->paginate(10);
+                ->paginate(5);
         }
         
         return view('themes.mymo.profile.change_password', [
