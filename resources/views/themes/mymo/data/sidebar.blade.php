@@ -1,8 +1,14 @@
-<div id="text-16" class="widget widget_text">
-    <div class="textwidget">
+@php
+$sidebar = theme_setting('sidebar');
+@endphp
 
+@if(@$sidebar->widget1->status == 1)
+<div id="text-1" class="widget widget_text">
+    <div class="textwidget">
+        {!! @$sidebar->widget1->body !!}
     </div>
 </div>
+@endif
 
 <div id="text-14" class="widget widget_text">
     <div class="textwidget">
@@ -10,21 +16,23 @@
     </div>
 </div>
 
-<div id="halim_tab_popular_videos-widget-5" class="widget halim_tab_popular_videos-widget">			<div class="section-bar clearfix">
+@if(@$sidebar->popular_movies->status == 1)
+<div id="halim_tab_popular_videos-widget-5" class="widget halim_tab_popular_videos-widget">
+    <div class="section-bar clearfix">
         <div class="section-title">
-            <span>Nổi bật</span>
+            <span>{{ @$sidebar->popular_movies->title }}</span>
             <ul class="halim-popular-tab" role="tablist">
                 <li role="presentation" class="active">
-                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="day">Ngày</a>
+                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="day">@lang('app.day')</a>
                 </li>
                 <li role="presentation">
-                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="week">Tuần</a>
+                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="week">@lang('app.week')</a>
                 </li>
                 <li role="presentation">
-                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="month">Tháng</a>
+                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="month">@lang('app.month')</a>
                 </li>
                 <li role="presentation">
-                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="all">Tất cả</a>
+                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="all">@lang('app.all')</a>
                 </li>
             </ul>
         </div>
@@ -38,3 +46,14 @@
     </section>
     <div class="clearfix"></div>
 </div>
+@endif
+
+@for($i=2;$i<=3;$i++)
+    @if(@$sidebar->{'widget' . $i}->status == 1)
+        <div id="text-{{ $i }}" class="widget widget_text">
+            <div class="textwidget">
+                {!! @$sidebar->{'widget' . $i}->body !!}
+            </div>
+        </div>
+    @endif
+@endfor

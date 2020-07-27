@@ -65,6 +65,17 @@ function get_config(string $key) {
     return \App\Models\Configs::getConfig($key);
 }
 
+function get_ads(string $key) {
+    $ads = \App\Models\Ads::where('key', '=', $key)
+        ->where('status', '=', 1)
+        ->first(['body']);
+    if (empty($ads)) {
+        return false;
+    }
+    
+    return $ads->body;
+}
+
 function copyfile_chunked($infile, $outfile) {
     $chunksize = 10 * (1024 * 1024); // 10 Megs
     

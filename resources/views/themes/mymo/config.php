@@ -123,6 +123,67 @@ return [
         ]
     ],
     [
+        'code' => 'sidebar',
+        'name' => trans('app.sidebar'),
+        'cards' => [
+            [
+                [
+                    'code' => 'widget1',
+                    'name' => trans('app.widget') . ' 1',
+                    'status' => true,
+                    'input_items' => [
+                        [
+                            'element' => 'textarea',
+                            'title' => trans('app.content'),
+                            'name' => 'body',
+                        ]
+                    ]
+                ],
+                [
+                    'code' => 'popular_movies',
+                    'name' => trans('app.popular_movies'),
+                    'status' => true,
+                    'input_items' => [
+                        [
+                            'element' => 'input',
+                            'title' => trans('app.title'),
+                            'name' => 'title',
+                        ],
+                        [
+                            'element' => 'input',
+                            'title' => trans('app.maximum_movies'),
+                            'name' => 'showpost',
+                        ]
+                    ]
+                ],
+                [
+                    'code' => 'widget2',
+                    'name' => trans('app.widget') . ' 2',
+                    'status' => true,
+                    'input_items' => [
+                        [
+                            'element' => 'textarea',
+                            'title' => trans('app.content'),
+                            'name' => 'body',
+                        ]
+                    ]
+                ],
+                [
+                    'code' => 'widget3',
+                    'name' => trans('app.widget') . ' 3',
+                    'status' => true,
+                    'input_items' => [
+                        [
+                            'element' => 'textarea',
+                            'title' => trans('app.content'),
+                            'name' => 'body',
+                        ]
+                    ]
+                ],
+            ]
+        ]
+    ],
+    [
         'code' => 'footer',
         'name' => trans('app.footer'),
         'cards' => [

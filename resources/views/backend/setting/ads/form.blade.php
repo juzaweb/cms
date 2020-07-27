@@ -38,8 +38,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseName">@lang('app.name')</label>
-                            <input type="text" name="name" class="form-control" id="baseName" value="{{ $model->name }}" autocomplete="off" required>
+                            <label class="col-form-label" for="name">@lang('app.name')</label>
+                            <input type="text" name="name" class="form-control" id="name" value="{{ $model->name }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
