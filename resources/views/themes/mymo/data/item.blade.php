@@ -1,4 +1,4 @@
-<div class="halim-item">
+<div class="mymo-item">
     @php
         $genres = $item->getGenres();
         $countries = $item->getCountries();
@@ -13,7 +13,7 @@
             $country_str .= '<span class=category-name>'. $country->name .'</span>';
         }
     @endphp
-    <a class="halim-thumb" href="{{ route('watch', ['slug' => $item->slug]) }}" title="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}">
+    <a class="mymo-thumb" href="{{ route('watch', ['slug' => $item->slug]) }}" title="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}">
         <figure>
             <img class="lazyload blur-up img-responsive" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $item->getThumbnail() }}" alt="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}" title="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}">
         </figure>
@@ -24,7 +24,7 @@
         <span class="episode">@lang('app.episode') {{ $item->current_episode }}{{ $item->max_episode ? '/' . $item->max_episode : '' }}</span>
         @endif
         <div class="icon_overlay" data-html="true"
-             data-toggle="halim-popover"
+             data-toggle="mymo-popover"
              data-placement="top"
              data-trigger="hover"
              title="<span class=film-title>{{ $item->name }}</span>"
@@ -35,8 +35,8 @@
                         </div>">
         </div>
 
-        <div class="halim-post-title-box">
-            <div class="halim-post-title ">
+        <div class="mymo-post-title-box">
+            <div class="mymo-post-title ">
                 <h2 class="entry-title">{{ $item->name }}</h2>
                 <p class="original_title">{{ $item->other_name }} ({{ $item->year }})</p>
             </div>

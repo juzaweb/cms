@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row container" id="wrapper">
-    <div class="halim-panel-filter">
+    <div class="mymo-panel-filter">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-8 hidden-xs">
@@ -33,7 +33,7 @@
         <section id="content">
             <div class="clearfix wrap-content">
 
-                <script type="text/javascript">var halim_cfg = {
+                <script type="text/javascript">var mymo_cfg = {
                         "act": "",
                         "post_url": "{{ url()->current() }}",
                         "ajax_url": "",
@@ -87,7 +87,7 @@
                     }
                 </script>
 
-                <div class="halim-movie-wrapper">
+                <div class="mymo-movie-wrapper">
                     <div class="title-block watch-page">
                         <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-id="{{ $info->id }}" data-toggle="tooltip" title="@lang('app.add_to_bookmark')">
 
@@ -97,7 +97,7 @@
                         </div>
 
                         <div class="ratings_wrapper hidden-xs">
-                            <div class="halim_imdbrating taq-score">
+                            <div class="mymo_imdbrating taq-score">
                                 <span class="score">{{ $start }}</span><i>/</i>
                                 <span class="max-ratings">5</span>
                                 <span class="total_votes">{{ $info->countRating() }}</span><span class="vote-txt"> @lang('app.votes')</span>
@@ -128,7 +128,7 @@
                     <div class="movie_info col-xs-12">
                         <div class="movie-poster col-md-3">
                             <img class="movie-thumb" src="{{ $info->getThumbnail() }}" alt="{{ $info->name }}">
-                            <div class="halim_imdbrating"><span>{{ $info->rating }}</span></div>
+                            <div class="mymo_imdbrating"><span>{{ $info->rating }}</span></div>
                             <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="btn btn-sm btn-danger watch-movie visible-xs-block"><i class="hl-play"></i>@lang('watch')</a>
 
 
@@ -142,7 +142,7 @@
 
                         <div class="film-poster col-md-9">
                             <div class="film-poster-img" style="background: url('{{ $info->getPoster() }}'); background-size: cover; background-repeat: no-repeat;background-position: 30% 25%;height: 300px;-webkit-filter: grayscale(100%); filter: grayscale(100%);"></div>
-                            <div class="halim-play-btn hidden-xs">
+                            <div class="mymo-play-btn hidden-xs">
                                 <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="play-btn" title="Click to Play" data-toggle="tooltip" data-placement="bottom">Click to Play</a>
                             </div>
 
@@ -162,29 +162,29 @@
 
                 <div class="clearfix"></div>
 
-                <div id="halim_trailer"></div>
+                <div id="mymo_trailer"></div>
 
                 <div class="collapse" id="collapseEps">
-                    <div class="text-center halim-ajax-list-server">
-                        <div id="halim-ajax-list-server">
+                    <div class="text-center mymo-ajax-list-server">
+                        <div id="mymo-ajax-list-server">
                             <script>var svlists = [];</script></div>
                     </div>
 
-                    <div id="halim-list-server" class="list-eps-ajax">
+                    <div id="mymo-list-server" class="list-eps-ajax">
                         @foreach($servers as $server)
                             @php
                             $video_files = $server->video_files()
                                 ->orderBy('order', 'asc')
                                 ->get(['id', 'label']);
                             @endphp
-                        <div class="halim-server show_all_eps" data-episode-nav="">
-                            <span class="halim-server-name">
+                        <div class="mymo-server show_all_eps" data-episode-nav="">
+                            <span class="mymo-server-name">
                                 <span class="hl-server"></span> {{ $server->name }}
                             </span>
 
-                            <ul id="listsv-{{ $server->id }}" class="halim-list-eps">
+                            <ul id="listsv-{{ $server->id }}" class="mymo-list-eps">
                                 @foreach($video_files as $file)
-                                <li class="halim-episode halim-episode-{{ $file->id }}"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="halim-info-{{ $file->id }} box-shadow halim-btn" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
+                                <li class="mymo-episode mymo-episode-{{ $file->id }}"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="mymo-info-{{ $file->id }} box-shadow mymo-btn" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
                                 @endforeach
                             </ul>
 
@@ -197,14 +197,14 @@
                 <div class="clearfix"></div>
                 @php($ads = get_ads('player_bottom'))
                 @if($ads)
-                <div class="halim--notice">
+                <div class="mymo--notice">
                     <!-- Ads -->
                     {!! $ads !!}
                 </div>
                 @endif
 
                 <div class="entry-content htmlwrap clearfix">
-                    <div class="video-item halim-entry-box">
+                    <div class="video-item mymo-entry-box">
                         <article id="post-{{ $info->id }}" class="item-content">
                             {!! $info->description !!}
                         </article>
@@ -220,11 +220,11 @@
 
         <section class="related-movies">
 
-            <div id="halim_related_movies-2xx" class="wrap-slider">
+            <div id="mymo_related_movies-2xx" class="wrap-slider">
                 <div class="section-bar clearfix">
                     <h3 class="section-title"><span>@lang('app.similar_movies')</span></h3>
                 </div>
-                <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
+                <div id="mymo_related_movies-2" class="owl-carousel owl-theme related-film">
                     @foreach($related_movies as $item)
                     <article class="thumb grid-item post-{{ $item->id }}">
                         @include('themes.mymo.data.relate_item')
@@ -233,7 +233,7 @@
                 </div>
                 <script>
                     $(document).on("turbolinks:load", function() {
-                        var owl = $('#halim_related_movies-2');
+                        var owl = $('#mymo_related_movies-2');
                         owl.owlCarousel({
                             loop: true,
                             margin: 4,

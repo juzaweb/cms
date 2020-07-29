@@ -1,4 +1,4 @@
-<div class="halim-search-filter">
+<div class="mymo-search-filter">
     <div class="btn-group col-md-12">
         <form action="{{ route('search') }}" id="form-filter" class="form-inline" method="GET">
             <div class="col-md-1 col-xs-12 col-sm-6">

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row container" id="wrapper">
-    <div class="halim-panel-filter">
+    <div class="mymo-panel-filter">
         <div class="panel-heading">
             <div class="row">
 
@@ -43,7 +43,7 @@
                 </h3>
             </div>
 
-            <div class="halim_box">
+            <div class="mymo_box">
                 @foreach($items as $item)
                     <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-21564">
                         @include('themes.mymo.data.item')
@@ -58,7 +58,7 @@
 
             @if(@$info->description)
             <div class="entry-content htmlwrap clearfix">
-                <div class="video-item halim-entry-box">
+                <div class="video-item mymo-entry-box">
                     <article id="post-312" class="item-content">
                         {!! $info->description !!}
                     </article>

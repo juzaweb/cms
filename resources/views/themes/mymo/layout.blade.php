@@ -6,7 +6,7 @@
         $logo = image_url(get_config('logo'));
         $home_tile = get_config('title');
         $header = theme_setting('header');
-        $body_class = isset($body_class) ? $body_class : 'home blog wp-embed-responsive halimthemes halimmovies halim-corner-rounded';
+        $body_class = isset($body_class) ? $body_class : 'home blog wp-embed-responsive mymothemes mymomovies mymo-corner-rounded';
     @endphp
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@
 
     <script type='text/javascript'>
         /* <![CDATA[ */
-        var halim = {
+        var mymo = {
             "ajax_search_url": "{{ route('search') }}",
             "ajax_popular_movies_url": "{{ route('movies.popular') }}",
             "ajax_get_movies_by_genre_url": "{{ route('movies.genre') }}",
@@ -98,8 +98,8 @@
     @include('themes.mymo.slider')
 @endif
 
-<div class="container-fluid halim-full-player hidden halim-centered">
-    <div id="halim-full-player" class="container col-md-offset-2s col-md-9"></div>
+<div class="container-fluid mymo-full-player hidden mymo-centered">
+    <div id="mymo-full-player" class="container col-md-offset-2s col-md-9"></div>
 </div>
 
 <div class="container">

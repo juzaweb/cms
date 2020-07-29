@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row container" id="wrapper">
-    <div class="halim-panel-filter">
+    <div class="mymo-panel-filter">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-8 hidden-xs">
@@ -36,8 +36,8 @@
                 </h3>
             </div>
 
-            <div class="halim_box">
-                <ul class="halim-bookmark-lists" id="bookmarkList" style="max-height: 350px;"></ul>
+            <div class="mymo_box">
+                <ul class="mymo-bookmark-lists" id="bookmarkList" style="max-height: 350px;"></ul>
             </div>
 
             <div class="clearfix"></div>

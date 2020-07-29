@@ -17,11 +17,11 @@ $sidebar = theme_setting('sidebar');
 </div>
 
 @if(@$sidebar->popular_movies->status == 1)
-<div id="halim_tab_popular_videos-widget-5" class="widget halim_tab_popular_videos-widget">
+<div id="mymo_tab_popular_videos-widget-5" class="widget mymo_tab_popular_videos-widget">
     <div class="section-bar clearfix">
         <div class="section-title">
             <span>{{ @$sidebar->popular_movies->title }}</span>
-            <ul class="halim-popular-tab" role="tablist">
+            <ul class="mymo-popular-tab" role="tablist">
                 <li role="presentation" class="active">
                     <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="day">@lang('app.day')</a>
                 </li>
@@ -39,9 +39,9 @@ $sidebar = theme_setting('sidebar');
     </div>
 
     <section class="tab-content">
-        <div role="tabpanel" class="tab-pane active halim-ajax-popular-post">
-            <div class="halim-ajax-popular-post-loading hidden"></div>
-            <div id="halim-ajax-popular-post" class="popular-post"></div>
+        <div role="tabpanel" class="tab-pane active mymo-ajax-popular-post">
+            <div class="mymo-ajax-popular-post-loading hidden"></div>
+            <div id="mymo-ajax-popular-post" class="popular-post"></div>
         </div>
     </section>
     <div class="clearfix"></div>

@@ -23,7 +23,7 @@ class PlayController extends Controller
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,
-            'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive halimthemes halimmovies halim-corner-rounded',
+            'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive mymothemes mymomovies mymo-corner-rounded',
             'info' => $info,
             'vid' => $vid,
             'start' => $info->getStarRating(),

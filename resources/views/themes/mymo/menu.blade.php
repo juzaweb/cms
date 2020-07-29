@@ -1,8 +1,8 @@
 <div class="navbar-container">
     <div class="container">
-        <nav class="navbar halim-navbar main-navigation" role="navigation" data-dropdown-hover="1">
+        <nav class="navbar mymo-navbar main-navigation" role="navigation" data-dropdown-hover="1">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#halim" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#mymo" aria-expanded="false">
                     <span class="sr-only">Menu</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -23,7 +23,7 @@
             @php
                 $menu_main = menu_setting(@$header->main_menu->menu->menu);
             @endphp
-            <div class="collapse navbar-collapse" id="halim">
+            <div class="collapse navbar-collapse" id="mymo">
                 <div class="menu-main-menu-container">
                     @if($menu_main)
                     <ul id="menu-main-menu" class="nav navbar-nav navbar-left">
@@ -53,7 +53,7 @@
             <!-- /.navbar-collapse -->
         </nav>
         <div class="collapse navbar-collapse" id="search-form">
-            <div id="mobile-search-form" class="halim-search-form"></div>
+            <div id="mobile-search-form" class="mymo-search-form"></div>
         </div>
         <div class="collapse navbar-collapse" id="user-info">
             <div id="mobile-user-login"></div>

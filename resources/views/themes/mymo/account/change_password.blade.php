@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row container" id="wrapper">
-    <div class="halim-panel-filter">
+    <div class="mymo-panel-filter">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-8 hidden-xs">
@@ -35,7 +35,7 @@
                 </h3>
             </div>
 
-            <div class="halim_box">
+            <div class="mymo_box">
                 <div class="col-sm-4">
                     <form action="{{ route('account.change_password.handle') }}" method="post" class="form-ajax">
                         <label>@lang('app.current_password')</label>

@@ -8,7 +8,7 @@ html {
     overflow-x: hidden !important
 }
 
-body.halimthemes {
+body.mymothemes {
     color: #a5a5a5;
     font-size: 13px;
     line-height: 1.6;
@@ -16,7 +16,7 @@ body.halimthemes {
     font-family: 'Montserrat', sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    background: #222d38 url(../images/halimBg.png) fixed center;
+    background: #222d38 url(../images/mymoBg.png) fixed center;
     -webkit-transition: background-color 150ms ease-out !important;
     transition: background-color 150ms ease-out !important
 }
@@ -67,7 +67,7 @@ img:hover {
     -webkit-filter: brightness(1)
 }
 
-#halim_wrapper {
+#mymo_wrapper {
     max-width: 1022px;
     padding: 0 13px;
     margin: 0 auto;
@@ -135,7 +135,7 @@ img:hover {
         background-position: center !important
     }
 
-    .halim-panel-filter .col-xs-4.text-right {
+    .mymo-panel-filter .col-xs-4.text-right {
         text-align: left !important
     }
 
@@ -329,7 +329,7 @@ img:hover {
     display: inline-table
 }
 
-.halim-post-title-box {
+.mymo-post-title-box {
     position: absolute;
     line-height: 18px;
     padding: 80px 0 0;
@@ -342,12 +342,12 @@ img:hover {
     border-bottom-left-radius: 5px
 }
 
-.video-item .halim-post-title-box {
+.video-item .mymo-post-title-box {
     background: none;
     height: auto
 }
 
-.halim-post-title {
+.mymo-post-title {
     position: absolute;
     background: rgba(0, 0, 0, 0);
     line-height: 18px;
@@ -357,21 +357,21 @@ img:hover {
     width: 100%
 }
 
-.list-news .halim-post-title {
+.list-news .mymo-post-title {
     position: static;
     background: transparent
 }
 
-.owl-carousel .halim-post-title {
+.owl-carousel .mymo-post-title {
     bottom: 0
 }
 
-.halim-post-title h2 {
+.mymo-post-title h2 {
     margin: 0;
     line-height: 20px
 }
 
-.halim-post-title a, .halim-post-title h2, .halim-post-title p, .popular-post .original_title {
+.mymo-post-title a, .mymo-post-title h2, .mymo-post-title p, .popular-post .original_title {
     font-size: 14px !important;
     color: #fff;
     overflow: hidden;
@@ -382,15 +382,15 @@ img:hover {
     margin-bottom: 3px
 }
 
-.halim-post-title.title-2-line a, .halim-post-title.title-2-line p, .popular-post .original_title.title-2-line {
+.mymo-post-title.title-2-line a, .mymo-post-title.title-2-line p, .popular-post .original_title.title-2-line {
     -webkit-line-clamp: 2
 }
 
-.halim-post-title a:hover {
+.mymo-post-title a:hover {
     color: #FF9800
 }
 
-.halim-post-title .original_title, .popular-post .original_title {
+.mymo-post-title .original_title, .popular-post .original_title {
     font-size: 11.5px !important;
     margin: 0;
     padding-right: 5px;
@@ -601,12 +601,12 @@ button, input {
     content: "\203A"
 }
 
-#halim-player-wrapper {
+#mymo-player-wrapper {
     position: relative;
     z-index: 9
 }
 
-#halim-player-loader {
+#mymo-player-loader {
     position: absolute;
     text-align: center;
     background: rgba(23, 37, 49, 0.94) url(../images/ripple.svg) no-repeat 50% 50%;
@@ -621,21 +621,21 @@ button, input {
 }
 
 @media (max-width: 500px) {
-    #halim-player-loader {
+    #mymo-player-loader {
         margin: auto -15px
     }
 }
 
-#halim-player {
+#mymo-player {
     position: relative;
     z-index: 8
 }
 
-#halim-player #player {
+#mymo-player #player {
     width: 100%
 }
 
-#halim-player center {
+#mymo-player center {
     position: absolute;
     right: 9px;
     bottom: -37px;
@@ -660,7 +660,7 @@ button, input {
     padding: 9px
 }
 
-.halim_box {
+.mymo_box {
     list-style: none;
     padding: 0;
     margin: 10px -2px 20px;
@@ -670,15 +670,15 @@ button, input {
     clear: both
 }
 
-.halim-news-box-widget .halim_box {
+.mymo-news-box-widget .mymo_box {
     margin: auto
 }
 
-.halim_box li.col-md-3.col-sm-6.col-xs-6.thumb img {
+.mymo_box li.col-md-3.col-sm-6.col-xs-6.thumb img {
     width: 100%
 }
 
-.halim_box a.halim-thumb {
+.mymo_box a.mymo-thumb {
     position: relative;
     display: inline-block;
     -webkit-transition: all .1s ease;
@@ -687,7 +687,7 @@ button, input {
     width: 100%
 }
 
-.halim_box.news a.halim-thumb {
+.mymo_box.news a.mymo-thumb {
     width: unset
 }
 
@@ -695,7 +695,7 @@ button, input {
     position: relative
 }
 
-.halim_box li:nth-child(4n) {
+.mymo_box li:nth-child(4n) {
     margin-right: 0 !important
 }
 
@@ -751,7 +751,7 @@ button, input {
         margin-top: 15px
     }
 
-    .halim_box li.col-md-3.col-sm-6.col-xs-6.thumb img {
+    .mymo_box li.col-md-3.col-sm-6.col-xs-6.thumb img {
         width: 100%
     }
 
@@ -918,7 +918,7 @@ button, input {
     width: 100%
 }
 
-.halim-light-mode .section-title:before {
+.mymo-light-mode .section-title:before {
     border-bottom: 1px solid #e9ebee !important
 }
 
@@ -1224,7 +1224,7 @@ input.search-btn.pull-right {
         display: none !important
     }
 
-    #halim-player-wrapper {
+    #mymo-player-wrapper {
         height: auto;
         margin: auto -15px
     }
@@ -1328,7 +1328,7 @@ input.search-btn.pull-right {
     margin-bottom: 0
 }
 
-.halim-light-mode .button-watch {
+.mymo-light-mode .button-watch {
     color: #676767
 }
 
@@ -1412,38 +1412,38 @@ tr.title {
     font-weight: 400
 }
 
-.halim-entry-box .item-content {
+.mymo-entry-box .item-content {
     max-height: 50px;
     overflow: hidden;
     transition: all .2s ease
 }
 
-.halim-entry-box .item-info {
+.mymo-entry-box .item-info {
     margin-bottom: 10px;
     font-size: 11px
 }
 
-.halim-entry-box .item-content, .content-single img {
+.mymo-entry-box .item-content, .content-single img {
     max-width: 100%
 }
 
-.halim-entry-box .item-content {
+.mymo-entry-box .item-content {
     max-height: 120px;
     overflow: hidden;
     transition: all .2s ease
 }
 
 @media (max-width: 767px) {
-    .halim-entry-box .item-content {
+    .mymo-entry-box .item-content {
         height: 80px
     }
 
-    .halim-entry-box .item-content.toggled {
+    .mymo-entry-box .item-content.toggled {
         height: auto
     }
 }
 
-.halim-entry-box .item-content.toggled {
+.mymo-entry-box .item-content.toggled {
     max-height: none
 }
 
@@ -1452,7 +1452,7 @@ tr.title {
     margin: 5px 0 0
 }
 
-.widget_halim_tagcloud_widget .item-content-toggle {
+.widget_mymo_tagcloud_widget .item-content-toggle {
     border-top: solid 1px #222e3a;
     text-align: center;
     position: relative;
@@ -1483,7 +1483,7 @@ tr.title {
     font-size: 13px
 }
 
-.widget_halim_tagcloud_widget .item-content-toggle .show-more {
+.widget_mymo_tagcloud_widget .item-content-toggle .show-more {
     border: 1px solid #222e3a;
     border-top: none;
     padding: 4px 10px
@@ -1511,11 +1511,11 @@ tr.title {
     border-radius: 6px
 }
 
-.halim_box .grid-item {
+.mymo_box .grid-item {
     padding: 2px
 }
 
-.grid-item, .grid-item .halim-thumb {
+.grid-item, .grid-item .mymo-thumb {
     position: relative
 }
 
@@ -1870,7 +1870,7 @@ tr.title {
         padding: 0 8px
     }
 
-    .halim_box.video-item .halim-thumb img {
+    .mymo_box.video-item .mymo-thumb img {
         height: 110px
     }
 }
@@ -1880,7 +1880,7 @@ tr.title {
         width: -webkit-fill-available
     }
 
-    .halim_box.video-item .halim-thumb img {
+    .mymo_box.video-item .mymo-thumb img {
         height: 150px
     }
 }
@@ -1962,16 +1962,16 @@ tr.title {
     vertical-align: middle
 }
 
-.halim-search-form {
+.mymo-search-form {
     margin-top: 0;
     padding-left: 0
 }
 
-#mobile-search-form.halim-search-form {
+#mobile-search-form.mymo-search-form {
     margin-top: 10px
 }
 
-#mobile-search-form.halim-search-form .form-group {
+#mobile-search-form.mymo-search-form .form-group {
     margin-bottom: 5px
 }
 
@@ -1989,7 +1989,7 @@ tr.title {
     }
 }
 
-.halim-social-plugin {
+.mymo-social-plugin {
     list-style: none;
     padding: 0;
     display: inline-block;
@@ -1997,21 +1997,21 @@ tr.title {
     margin-top: 5px
 }
 
-.halim-social-plugin li {
+.mymo-social-plugin li {
     float: left;
     margin-right: 5px
 }
 
-.halim-social-plugin li span {
+.mymo-social-plugin li span {
     vertical-align: initial !important
 }
 
-.halim-social-plugin a {
+.mymo-social-plugin a {
     color: #fff
 }
 
 @media screen and (max-width: 767px) {
-    .halim-social-plugin {
+    .mymo-social-plugin {
         display: grid
     }
 
@@ -2104,7 +2104,7 @@ tr.title {
 }
 
 @media (min-width: 1200px) {
-    .halim-movie-wrapper.tpl-2 .movie-poster:after {
+    .mymo-movie-wrapper.tpl-2 .movie-poster:after {
         content: '';
         width: 200%;
         height: 100%;
@@ -2116,11 +2116,11 @@ tr.title {
 }
 
 @media (min-width: 992px) {
-    .halim-movie-wrapper.tpl-2 .movie-poster:after {
+    .mymo-movie-wrapper.tpl-2 .movie-poster:after {
         content: ''
     }
 
-    .halim-movie-wrapper.tpl-2 .movie-detail p {
+    .mymo-movie-wrapper.tpl-2 .movie-detail p {
         padding: 3px 0
     }
 }
@@ -2132,7 +2132,7 @@ tr.title {
     border: 6px solid #1f2933
 }
 
-.halim-movie-wrapper.tpl-2 .movie-poster img {
+.mymo-movie-wrapper.tpl-2 .movie-poster img {
     border: none;
     height: 100%;
     border-radius: 6px
@@ -2146,12 +2146,12 @@ tr.title {
         border: 6px solid #1f2933
     }
 
-    .halim-movie-wrapper.tpl-2 .movie-poster img {
+    .mymo-movie-wrapper.tpl-2 .movie-poster img {
         border: 3px solid #1f2933
     }
 }
 
-.movie-poster .halim_imdbrating {
+.movie-poster .mymo_imdbrating {
     background: #f38f38;
     display: inline;
     padding: 7px 8px;
@@ -2179,7 +2179,7 @@ tr.title {
     color: #a5a5a5
 }
 
-.halim-movie-wrapper.tpl-2 .movie-detail {
+.mymo-movie-wrapper.tpl-2 .movie-detail {
     position: unset;
     padding: 0 15px 5px;
     overflow: hidden;
@@ -2187,16 +2187,16 @@ tr.title {
     background: transparent
 }
 
-.halim-light-mode .halim-movie-wrapper.tpl-2 .movie-detail {
+.mymo-light-mode .mymo-movie-wrapper.tpl-2 .movie-detail {
     background: transparent
 }
 
-.halim-light-mode .halim-movie-wrapper.tpl-2 .movie-detail p {
+.mymo-light-mode .mymo-movie-wrapper.tpl-2 .movie-detail p {
     color: #777;
     font-weight: 600
 }
 
-.halim-light-mode .halim-movie-wrapper.tpl-2 .movie-detail p a {
+.mymo-light-mode .mymo-movie-wrapper.tpl-2 .movie-detail p a {
     color: #af6e6e
 }
 
@@ -2219,26 +2219,26 @@ tr.title {
     margin: 0 1px
 }
 
-.halim-movie-wrapper.tpl-2 .movie-detail p {
+.mymo-movie-wrapper.tpl-2 .movie-detail p {
     padding: 3px 0;
     margin-bottom: 0;
     color: #cacaca
 }
 
-.halim-movie-wrapper.tpl-2 .movie-detail p.released {
+.mymo-movie-wrapper.tpl-2 .movie-detail p.released {
     color: #cacaca
 }
 
-.halim-light-mode .halim-movie-wrapper.tpl-2 .movie-detail p.released {
+.mymo-light-mode .mymo-movie-wrapper.tpl-2 .movie-detail p.released {
     color: #777
 }
 
-.halim-movie-wrapper.tpl-2 .movie-detail p:last-child {
+.mymo-movie-wrapper.tpl-2 .movie-detail p:last-child {
     border: none;
     padding-bottom: 0
 }
 
-.halim-movie-wrapper.tpl-2 .movie-detail p span + span {
+.mymo-movie-wrapper.tpl-2 .movie-detail p span + span {
     padding: 2px 7px;
     color: #fff;
     background-size: 300% 100%;
@@ -2249,42 +2249,42 @@ tr.title {
     margin-left: 3px
 }
 
-.halim-movie-wrapper.tpl-2 .movie-detail h1.entry-title {
+.mymo-movie-wrapper.tpl-2 .movie-detail h1.entry-title {
     color: #cacaca;
     font-size: 23px;
     font-weight: 700
 }
 
-.halim-light-mode .halim-movie-wrapper.tpl-2 .movie-detail h1.entry-title {
+.mymo-light-mode .mymo-movie-wrapper.tpl-2 .movie-detail h1.entry-title {
     color: #5f5f5f
 }
 
-.halim-movie-wrapper.tpl-2 .movie-detail p.org_title {
+.mymo-movie-wrapper.tpl-2 .movie-detail p.org_title {
     color: #afafaf;
     font-size: 13px;
     padding: 5px 0
 }
 
-.halim-light-mode .halim-movie-wrapper.tpl-2 .movie-detail p.org_title {
+.mymo-light-mode .mymo-movie-wrapper.tpl-2 .movie-detail p.org_title {
     color: #999
 }
 
 @media (max-width: 767px) {
-    .halim-movie-wrapper.tpl-2 .movie-detail p {
+    .mymo-movie-wrapper.tpl-2 .movie-detail p {
         padding: 5px 0;
         border-bottom: none
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .halim-movie-wrapper.tpl-2 .movie-detail p {
+    .mymo-movie-wrapper.tpl-2 .movie-detail p {
         padding: 4px 0;
         border-bottom: none
     }
 }
 
 @media (min-width: 1024px) and (max-width: 1366px) {
-    .halim-movie-wrapper.tpl-2 .movie-detail p {
+    .mymo-movie-wrapper.tpl-2 .movie-detail p {
         padding: 4px 0;
         border-bottom: none
     }
@@ -2342,15 +2342,15 @@ tr.title {
         margin-bottom: -1px
     }
 
-    .halim-movie-wrapper.tpl-2 .movie-detail p, .halim-movie-wrapper.tpl-2 .movie-detail p.org_title {
+    .mymo-movie-wrapper.tpl-2 .movie-detail p, .mymo-movie-wrapper.tpl-2 .movie-detail p.org_title {
         padding: 5px 0
     }
 
-    .halim-movie-wrapper.tpl-2 .movie-detail p.org_title {
+    .mymo-movie-wrapper.tpl-2 .movie-detail p.org_title {
         margin-top: 3px
     }
 
-    .halim-movie-wrapper.tpl-2 .movie-detail p:last-child {
+    .mymo-movie-wrapper.tpl-2 .movie-detail p:last-child {
         border: 1px solid #1d2731;
         padding-bottom: 5px
     }
@@ -2367,7 +2367,7 @@ tr.title {
         text-align: center
     }
 
-    .halim-movie-wrapper.tpl-2 .movie_info {
+    .mymo-movie-wrapper.tpl-2 .movie_info {
         margin-top: 15px
     }
 
@@ -2387,12 +2387,12 @@ tr.title {
         height: auto
     }
 
-    .halim-movie-wrapper.tpl-2 .film-poster {
+    .mymo-movie-wrapper.tpl-2 .film-poster {
         margin-top: 40px;
         width: 100%
     }
 
-    .halim-movie-wrapper.tpl-2 .movie-poster {
+    .mymo-movie-wrapper.tpl-2 .movie-poster {
         width: auto
     }
 }
@@ -2402,7 +2402,7 @@ tr.title {
     max-height: 405px
 }
 
-.halim-pulse-ring {
+.mymo-pulse-ring {
     position: absolute;
     left: -10px;
     top: -8px;
@@ -2420,13 +2420,13 @@ tr.title {
     -moz-background-clip: padding;
     border-radius: 50%;
     background-clip: padding-box;
-    -webkit-animation: halim-pulse 2s cubic-bezier(0.4, 0, 0.29, 0.9) infinite;
-    -moz-animation: halim-pulse 2s cubic-bezier(0.4, 0, 0.29, 0.9) infinite;
-    -o-animation: halim-pulse 2s cubic-bezier(0.4, 0, 0.29, 0.9) infinite;
-    animation: halim-pulse 2s cubic-bezier(0.4, 0, 0.29, 0.9) infinite
+    -webkit-animation: mymo-pulse 2s cubic-bezier(0.4, 0, 0.29, 0.9) infinite;
+    -moz-animation: mymo-pulse 2s cubic-bezier(0.4, 0, 0.29, 0.9) infinite;
+    -o-animation: mymo-pulse 2s cubic-bezier(0.4, 0, 0.29, 0.9) infinite;
+    animation: mymo-pulse 2s cubic-bezier(0.4, 0, 0.29, 0.9) infinite
 }
 
-@-moz-keyframes halim-pulse {
+@-moz-keyframes mymo-pulse {
     0% {
         -moz-transform: scale(0);
         -ms-transform: scale(0);
@@ -2464,7 +2464,7 @@ tr.title {
     }
 }
 
-@-o-keyframes halim-pulse {
+@-o-keyframes mymo-pulse {
     0% {
         -moz-transform: scale(0);
         -ms-transform: scale(0);
@@ -2502,7 +2502,7 @@ tr.title {
     }
 }
 
-@-webkit-keyframes halim-pulse {
+@-webkit-keyframes mymo-pulse {
     0% {
         -moz-transform: scale(0);
         -ms-transform: scale(0);
@@ -2540,7 +2540,7 @@ tr.title {
     }
 }
 
-@keyframes halim-pulse {
+@keyframes mymo-pulse {
     0% {
         -moz-transform: scale(0);
         -ms-transform: scale(0);
@@ -2659,7 +2659,7 @@ tr.title {
     border-image: initial
 }
 
-@-webkit-keyframes halim-bookmark-animation {
+@-webkit-keyframes mymo-bookmark-animation {
     0% {
         -webkit-transform: rotate(0) scale(.5) skew(1deg);
         -webkit-opacity: .1
@@ -2674,7 +2674,7 @@ tr.title {
     }
 }
 
-@-webkit-keyframes halim-bookmark-fill-animation {
+@-webkit-keyframes mymo-bookmark-fill-animation {
     0% {
         -webkit-transform: rotate(0) scale(.7) skew(1deg);
         opacity: .2
@@ -2689,7 +2689,7 @@ tr.title {
     }
 }
 
-@-webkit-keyframes halim-bookmark-img-animation {
+@-webkit-keyframes mymo-bookmark-img-animation {
     0% {
         -webkit-transform: rotate(0) scale(1) skew(1deg)
     }
@@ -2713,12 +2713,12 @@ tr.title {
     }
 }
 
-.halim-post-title .original_title, .popular-post .original_title {
+.mymo-post-title .original_title, .popular-post .original_title {
     height: 20px;
     overflow: hidden
 }
 
-.halim-post-title h2 {
+.mymo-post-title h2 {
     height: 20px;
     overflow: hidden
 }
@@ -2735,7 +2735,7 @@ tr.title {
     display: contents
 }
 
-.halim-logo-bar {
+.mymo-logo-bar {
     width: 100px !important
 }
 
@@ -2749,7 +2749,7 @@ tr.title {
     -webkit-font-smoothing: antialiased
 }
 
-.halim-resize-bar {
+.mymo-resize-bar {
     background-size: 100px 19px;
     background-repeat: no-repeat;
     background-position: center center;
@@ -2758,7 +2758,7 @@ tr.title {
     -webkit-font-smoothing: antialiased
 }
 
-.halim-toggle-light {
+.mymo-toggle-light {
     background-size: 100px 19px;
     background-repeat: no-repeat;
     background-position: center center;
@@ -2767,7 +2767,7 @@ tr.title {
     -webkit-font-smoothing: antialiased
 }
 
-.jw-logo-bar .player-tooltip, .halim-toggle-light .player-tooltip, .halim-resize-bar .player-tooltip {
+.jw-logo-bar .player-tooltip, .mymo-toggle-light .player-tooltip, .mymo-resize-bar .player-tooltip {
     background: rgba(0, 0, 0, 0.81);
     font-size: 11px;
     bottom: 100%;
@@ -2797,7 +2797,7 @@ tr.title {
     box-shadow: 2px 2px 6px rgba(0, 0, 0, .28)
 }
 
-.jw-logo-bar .player-tooltip:before, .halim-toggle-light .player-tooltip:before, .halim-resize-bar .player-tooltip:before {
+.jw-logo-bar .player-tooltip:before, .mymo-toggle-light .player-tooltip:before, .mymo-resize-bar .player-tooltip:before {
     bottom: -20px;
     content: " ";
     display: block;
@@ -2807,7 +2807,7 @@ tr.title {
     width: 100%
 }
 
-.jw-logo-bar .player-tooltip:after, .halim-toggle-light .player-tooltip:after, .halim-resize-bar .player-tooltip:after {
+.jw-logo-bar .player-tooltip:after, .mymo-toggle-light .player-tooltip:after, .mymo-resize-bar .player-tooltip:after {
     border-left: solid transparent 10px;
     border-right: solid transparent 10px;
     border-top: solid rgba(0, 0, 0, 0.62) 10px;
@@ -2820,7 +2820,7 @@ tr.title {
     width: 0
 }
 
-.jw-logo-bar:hover .player-tooltip, .halim-toggle-light:hover .player-tooltip, .halim-resize-bar:hover .player-tooltip {
+.jw-logo-bar:hover .player-tooltip, .mymo-toggle-light:hover .player-tooltip, .mymo-resize-bar:hover .player-tooltip {
     opacity: 1;
     pointer-events: auto;
     -webkit-transform: translateY(0);
@@ -2830,28 +2830,28 @@ tr.title {
     transform: translateY(0)
 }
 
-.jw-logo-bar .player-tooltip, .halim-toggle-light .player-tooltip, .halim-resize-bar .player-tooltip {
+.jw-logo-bar .player-tooltip, .mymo-toggle-light .player-tooltip, .mymo-resize-bar .player-tooltip {
     display: none
 }
 
-.jw-logo-bar:hover .player-tooltip, .halim-toggle-light:hover .player-tooltip, .halim-resize-bar:hover .player-tooltip {
+.jw-logo-bar:hover .player-tooltip, .mymo-toggle-light:hover .player-tooltip, .mymo-resize-bar:hover .player-tooltip {
     display: block
 }
 
-.halim-icon-expand.size-small:before {
+.mymo-icon-expand.size-small:before {
     background-image: url(../images/twGIvru.png)
 }
 
-.halim-icon-expand.size-large:before {
+.mymo-icon-expand.size-large:before {
     background-image: url(../images/6YPXfj3.png)
 }
 
-.halim-icon-toggle-light:before {
+.mymo-icon-toggle-light:before {
     background-image: url(../images/bUMAkKj.png);
     background-size: 20px !important
 }
 
-.halim-icon-expand:before, .halim-icon-toggle-light:before {
+.mymo-icon-expand:before, .mymo-icon-toggle-light:before {
     padding: 11px 5px;
     display: inline-block;
     content: " ";
@@ -2866,7 +2866,7 @@ tr.title {
     background-size: 26px 14px
 }
 
-.halim-icon-toggle-light:before {
+.mymo-icon-toggle-light:before {
     width: 13px
 }
 
@@ -3126,7 +3126,7 @@ tr.title {
     width: 100%
 }
 
-.owl-item .halim-thumb {
+.owl-item .mymo-thumb {
     display: inline-block;
     position: relative;
     width: 100%
@@ -3177,7 +3177,7 @@ tr.title {
     }
 }
 
-.halim-carausel-widget .owl-dots {
+.mymo-carausel-widget .owl-dots {
     text-align: right;
     display: none
 }
@@ -3526,7 +3526,7 @@ tr.title {
     transition: .7s
 }
 
-.halim-light-mode .the_tag_list a {
+.mymo-light-mode .the_tag_list a {
     background: #e9ebee;
     border: 1px solid #dedede;
     color: #757575
@@ -3661,7 +3661,7 @@ tr.title {
     }
 }
 
-.halim-movie-wrapper {
+.mymo-movie-wrapper {
     position: relative;
     overflow: hidden
 }
@@ -3683,7 +3683,7 @@ tr.title {
     margin: auto -10px
 }
 
-.related-video .halim-post-title {
+.related-video .mymo-post-title {
     bottom: 0
 }
 
@@ -3971,18 +3971,18 @@ a .hl-dot-3 {
     color: #fff
 }
 
-.halim-user-tool {
+.mymo-user-tool {
     border-bottom: 1px solid #17222f;
     overflow: hidden;
     padding: 0;
     margin-bottom: 10px
 }
 
-.halim-user-tool .col-md-6 {
+.mymo-user-tool .col-md-6 {
     padding: 0
 }
 
-.halim-user-tool .wpf-favorite-link, .halim-user-tool .wpf-favorite-links {
+.mymo-user-tool .wpf-favorite-link, .mymo-user-tool .wpf-favorite-links {
     position: static;
     background: rgba(255, 255, 255, 0);
     padding: 2px 5px;
@@ -4000,7 +4000,7 @@ a .hl-dot-3 {
     border: 1px solid #1d2731a6
 }
 
-.halim-light-mode .entry-content, .post-content {
+.mymo-light-mode .entry-content, .post-content {
     margin-top: 20px;
     background: initial;
     border: none
@@ -4166,13 +4166,13 @@ a .hl-dot-3 {
     border-color: transparent transparent rgba(0, 0, 0, 0.9)
 }
 
-.halim-search-form .input-group-addon.film.hidden-xs {
+.mymo-search-form .input-group-addon.film.hidden-xs {
     background: #2d3842;
     border: 1px solid #2d3842;
     color: #5d85a9
 }
 
-.halim-search-form .form-control {
+.mymo-search-form .form-control {
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
     border: 1px solid #273e52;
@@ -4184,12 +4184,12 @@ a .hl-dot-3 {
     background: #12171b6e url(../images/search.svg) 5px 2px no-repeat
 }
 
-.halim-search-form .form-control:focus {
+.mymo-search-form .form-control:focus {
     border-radius: 3px !important;
     transition: .7s all
 }
 
-.halim-search-form .btn-primary {
+.mymo-search-form .btn-primary {
     color: #7aa6ce;
     background-color: #12171b;
     border-color: #2d3842;
@@ -4198,26 +4198,26 @@ a .hl-dot-3 {
     border-radius: 20px !important
 }
 
-.halim-search-form .btn-primary:hover {
+.mymo-search-form .btn-primary:hover {
     background: #12171b
 }
 
-.halim-search-form .btn-primary .glyphicon-search {
+.mymo-search-form .btn-primary .glyphicon-search {
     padding-top: 5px
 }
 
-.section-title .halim-popular-tab {
+.section-title .mymo-popular-tab {
     padding: 0;
     position: absolute;
     right: 1px;
     top: 6.5px
 }
 
-.halim-light-mode .section-title .halim-popular-tab {
+.mymo-light-mode .section-title .mymo-popular-tab {
     top: 6.5px
 }
 
-.halim-popular-tab li {
+.mymo-popular-tab li {
     border: 1px solid #1b2b3a;
     background: #111720;
     padding: 5px 8px;
@@ -4226,15 +4226,15 @@ a .hl-dot-3 {
     margin: -1px
 }
 
-.halim-popular-tab li:first-child {
+.mymo-popular-tab li:first-child {
     border-top-left-radius: 3px
 }
 
-.halim-popular-tab li:last-child {
+.mymo-popular-tab li:last-child {
     border-top-right-radius: 3px
 }
 
-.halim-popular-tab li.active {
+.mymo-popular-tab li.active {
     background: #1b2a39;
     border: 1px solid #1b2a3900;
     background-size: 200% 100%;
@@ -4243,7 +4243,7 @@ a .hl-dot-3 {
     position: relative
 }
 
-.halim-popular-tab li.active:after {
+.mymo-popular-tab li.active:after {
     content: '';
     border-bottom: 6px solid #9919b2;
     border-left: 6px solid transparent;
@@ -4257,58 +4257,58 @@ a .hl-dot-3 {
     z-index: 1
 }
 
-.halim-light-mode .halim-popular-tab li.active:after {
+.mymo-light-mode .mymo-popular-tab li.active:after {
     bottom: -9px
 }
 
-.halim-popular-tab li a {
+.mymo-popular-tab li a {
     font-size: 10px;
     font-weight: 400;
     text-transform: none;
     cursor: pointer
 }
 
-.halim-popular-tab li.active a {
+.mymo-popular-tab li.active a {
     color: #fff
 }
 
-.halim-panel-filter .panel-heading {
+.mymo-panel-filter .panel-heading {
     background: #1821299e;
     border-bottom: 1px solid #1d2731;
     padding: 12px 15px
 }
 
-.halim-panel-filter .panel-heading a {
+.mymo-panel-filter .panel-heading a {
     color: #7aa6ce
 }
 
-.halim-search-filter {
+.mymo-search-filter {
     background: transparent;
     padding: 15px 0 0;
     overflow: hidden
 }
 
-.halim-search-filter .btn-group {
+.mymo-search-filter .btn-group {
     padding: 0;
     margin-bottom: 10px
 }
 
 @media (min-width: 991px) {
-    .halim-search-filter .btn-group .col-md-1:first-child, .halim-search-filter .btn-group .col-md-2:first-child {
+    .mymo-search-filter .btn-group .col-md-1:first-child, .mymo-search-filter .btn-group .col-md-2:first-child {
         padding-left: 15px
     }
 
-    .halim-search-filter .btn-group .col-md-1, .halim-search-filter .btn-group .col-md-2 {
+    .mymo-search-filter .btn-group .col-md-1, .mymo-search-filter .btn-group .col-md-2 {
         padding-right: 0;
         padding-left: 8px
     }
 
-    .halim-search-filter .btn-group .col-md-3 {
+    .mymo-search-filter .btn-group .col-md-3 {
         padding: 0 0 8px 8px;
         width: 22%
     }
 
-    .halim-search-filter .btn-group .col-md-1 {
+    .mymo-search-filter .btn-group .col-md-1 {
         width: 9.333333%
     }
 
@@ -4329,14 +4329,14 @@ a .hl-dot-3 {
     background-position: right center
 }
 
-.halim-search-filter .filter-box {
+.mymo-search-filter .filter-box {
     border: 1px solid #1f2d39;
     overflow: hidden;
     margin-bottom: 10px;
     border-radius: 20px
 }
 
-.halim-search-filter .filter-box-title {
+.mymo-search-filter .filter-box-title {
     background: #1f2d39;
     padding: 4px 10px;
     text-transform: uppercase;
@@ -4344,22 +4344,22 @@ a .hl-dot-3 {
     display: none
 }
 
-.halim-search-filter .filter-box label {
+.mymo-search-filter .filter-box label {
     margin-right: 5px;
     cursor: pointer;
     font-weight: 400;
     line-height: 17px
 }
 
-.halim-search-filter .col-md-8 .filter-box label {
+.mymo-search-filter .col-md-8 .filter-box label {
     width: 31%
 }
 
-.halim-search-filter .filter-box label:hover {
+.mymo-search-filter .filter-box label:hover {
     color: #f90
 }
 
-.halim-search-filter .filter-box label::before {
+.mymo-search-filter .filter-box label::before {
     content: '\2023';
     font-size: 18px
 }
@@ -4368,7 +4368,7 @@ a .hl-dot-3 {
     padding: 15px 30px
 }
 
-.halim-search-filter .form-inline .form-control {
+.mymo-search-filter .form-inline .form-control {
     display: inline-block;
     width: 100%;
     vertical-align: middle;
@@ -4381,16 +4381,16 @@ a .hl-dot-3 {
     border-radius: 3px
 }
 
-.halim-search-filter .col-md-4.subtitle {
+.mymo-search-filter .col-md-4.subtitle {
     padding-right: 15px
 }
 
-.halim-search-filter input[type="radio"] + label:hover, .halim-search-filter input[type="radio"]:checked + label {
+.mymo-search-filter input[type="radio"] + label:hover, .mymo-search-filter input[type="radio"]:checked + label {
     font-weight: 700;
     color: #ffa822
 }
 
-.halim-search-filter input[type="radio"] {
+.mymo-search-filter input[type="radio"] {
     display: none
 }
 
@@ -4415,7 +4415,7 @@ a .hl-dot-3 {
     margin-top: 20px
 }
 
-.halim-dl-link {
+.mymo-dl-link {
     background: #2d3842;
     display: block;
     text-align: center;
@@ -4425,7 +4425,7 @@ a .hl-dot-3 {
     transition: .3s ease-in
 }
 
-.halim-dl-link:hover {
+.mymo-dl-link:hover {
     background: #1e262d;
     transition: .3s ease-in
 }
@@ -4470,7 +4470,7 @@ a .hl-dot-3 {
     color: #fff
 }
 
-.ui-autocomplete li .halim_list_item {
+.ui-autocomplete li .mymo_list_item {
     overflow: hidden
 }
 
@@ -4554,7 +4554,7 @@ a .hl-dot-3 {
 }
 
 .widget_categories ul li a::before {
-    font-family: 'halimfont';
+    font-family: 'mymofont';
     content: '\e81c';
     color: #a5a5a5;
     font-size: 11px;
@@ -4612,11 +4612,11 @@ a .hl-dot-3 {
     padding-left: 10px
 }
 
-#halim-list-server {
+#mymo-list-server {
     margin-top: 15px
 }
 
-#halim-list-server .halim-server-name {
+#mymo-list-server .mymo-server-name {
     background: #365979;
     padding: 6px 10px;
     margin: -1.6px 6px 0 0;
@@ -4628,17 +4628,17 @@ a .hl-dot-3 {
     float: left
 }
 
-#halim-list-server ul {
+#mymo-list-server ul {
     padding: 0;
     list-style: none
 }
 
-#halim-list-server li {
+#mymo-list-server li {
     display: inline-block;
     margin: 0 4px 10px 0
 }
 
-#halim-list-server ul li span {
+#mymo-list-server ul li span {
     background: #1f2c3e;
     padding: 7.5px 10px 6px;
     border-radius: 3px;
@@ -4648,23 +4648,23 @@ a .hl-dot-3 {
     cursor: pointer
 }
 
-#halim-list-server li:hover span {
+#mymo-list-server li:hover span {
     background: #F90
 }
 
-#halim-list-server ul li span.active {
+#mymo-list-server ul li span.active {
     background: #e46565
 }
 
-#halim-list-server ul li:hover span.active {
+#mymo-list-server ul li:hover span.active {
     background: #315c84
 }
 
-#halim-list-server ul.nav-tabs li {
+#mymo-list-server ul.nav-tabs li {
     margin: 0
 }
 
-#halim-list-server ul.nav-tabs li a {
+#mymo-list-server ul.nav-tabs li a {
     margin: 0;
     border: none;
     padding: 7px 12px;
@@ -4672,51 +4672,51 @@ a .hl-dot-3 {
     font-size: 12px
 }
 
-#halim-list-server ul.nav-tabs li a:hover {
+#mymo-list-server ul.nav-tabs li a:hover {
     margin: 0 !important
 }
 
-#halim-list-server ul.nav-tabs li.active {
+#mymo-list-server ul.nav-tabs li.active {
     background: #263a4c
 }
 
-#halim-list-server ul.nav-tabs li.active a {
+#mymo-list-server ul.nav-tabs li.active a {
     margin: 0;
     border: none;
     padding: 7px 12px
 }
 
-#halim-list-server .tab-content ul {
+#mymo-list-server .tab-content ul {
     margin: 0;
     padding: 15px 0
 }
 
-#halim-list-server .tab-content {
+#mymo-list-server .tab-content {
     background: #0b0f15;
     padding: 0 15px
 }
 
-.halim-light-mode #halim-list-server .tab-content {
+.mymo-light-mode #mymo-list-server .tab-content {
     background: #e9ebee;
     padding: 0 15px
 }
 
-.halim-item {
+.mymo-item {
     position: relative;
     line-height: 0;
     border-radius: 5px
 }
 
-.halim-item span {
+.mymo-item span {
     line-height: 1.6
 }
 
-.halim-single-news {
+.mymo-single-news {
     padding: 0 15px 15px;
     margin-top: 0
 }
 
-.halim-single-news .item-content {
+.mymo-single-news .item-content {
     color: #888;
     font-size: 14px
 }
@@ -4783,15 +4783,15 @@ a .hl-dot-3 {
     position: relative
 }
 
-.halim_bookmark {
+.mymo_bookmark {
     position: absolute !important;
     top: 5px;
     left: 5px
 }
 
 .bookmark-img-animation {
-    -webkit-animation: halim-bookmark-img-animation 1s infinite ease-in-out;
-    animation: halim-bookmark-img-animation 1.8s infinite ease-in-out
+    -webkit-animation: mymo-bookmark-img-animation 1s infinite ease-in-out;
+    animation: mymo-bookmark-img-animation 1.8s infinite ease-in-out
 }
 
 .primary_ribbon {
@@ -4822,7 +4822,7 @@ a .hl-dot-3 {
     background-size: 45px
 }
 
-.primary_ribbon.bookmarked .halim-pulse-ring {
+.primary_ribbon.bookmarked .mymo-pulse-ring {
     display: none
 }
 
@@ -4871,22 +4871,22 @@ a .hl-dot-3 {
     text-align: right
 }
 
-.halim-movie-wrapper.tpl-2 .ratings_wrapper {
+.mymo-movie-wrapper.tpl-2 .ratings_wrapper {
     float: none;
     width: 100%;
     display: initial;
     height: 100%
 }
 
-.halim-movie-wrapper.tpl-2 .ratings_wrapper .halim_imdbrating.taq-score {
+.mymo-movie-wrapper.tpl-2 .ratings_wrapper .mymo_imdbrating.taq-score {
     border-right-color: #151d25
 }
 
-.halim-movie-wrapper.tpl-2 .ratings_wrapper.single-info .halim_imdbrating.taq-score {
+.mymo-movie-wrapper.tpl-2 .ratings_wrapper.single-info .mymo_imdbrating.taq-score {
     float: left
 }
 
-.halim-light-mode .halim-movie-wrapper.tpl-2 .ratings_wrapper .halim_imdbrating.taq-score {
+.mymo-light-mode .mymo-movie-wrapper.tpl-2 .ratings_wrapper .mymo_imdbrating.taq-score {
     border-right-color: #e6e6e6
 }
 
@@ -4908,41 +4908,41 @@ a .hl-dot-3 {
     color: #eaeaea
 }
 
-.ratings_wrapper .halim_imdbrating {
+.ratings_wrapper .mymo_imdbrating {
     display: inline-block;
     line-height: 22px;
     padding: 4px 0 0
 }
 
-.ratings_wrapper .halim_imdbrating::before {
-    font-family: "halimfont";
+.ratings_wrapper .mymo_imdbrating::before {
+    font-family: "mymofont";
     font-size: 30px;
     content: '\e841';
     color: #fdae01
 }
 
-.ratings_wrapper .halim_imdbrating span {
+.ratings_wrapper .mymo_imdbrating span {
     font-size: 21px;
     color: #fff
 }
 
-.halim-light-mode .ratings_wrapper .halim_imdbrating span, .halim-light-mode .ratings_wrapper .halim_imdbrating i, .halim-light-mode .ratings_wrapper .halim_imdbrating span.max-ratings, .halim-light-mode .ratings_wrapper .halim_imdbrating span.total_votes {
+.mymo-light-mode .ratings_wrapper .mymo_imdbrating span, .mymo-light-mode .ratings_wrapper .mymo_imdbrating i, .mymo-light-mode .ratings_wrapper .mymo_imdbrating span.max-ratings, .mymo-light-mode .ratings_wrapper .mymo_imdbrating span.total_votes {
     color: #5a5a5a
 }
 
-.ratings_wrapper .halim_imdbrating i {
+.ratings_wrapper .mymo_imdbrating i {
     font-size: 11px;
     margin-left: 2px;
     color: #bbbaba
 }
 
-.ratings_wrapper .halim_imdbrating span.max-ratings {
+.ratings_wrapper .mymo_imdbrating span.max-ratings {
     font-size: 11px;
     color: #b3b3b3;
     font-family: sans-serif
 }
 
-.ratings_wrapper .halim_imdbrating span.total_votes {
+.ratings_wrapper .mymo_imdbrating span.total_votes {
     display: inline-block;
     font-size: 11px;
     margin-top: -8px;
@@ -4951,26 +4951,26 @@ a .hl-dot-3 {
     color: #b3b3b3
 }
 
-.ratings_wrapper .halim_imdbrating span.total_votes::before {
+.ratings_wrapper .mymo_imdbrating span.total_votes::before {
     content: '('
 }
 
-.ratings_wrapper .halim_imdbrating span.vote-txt {
+.ratings_wrapper .mymo_imdbrating span.vote-txt {
     font-size: 11px;
     color: #b3b3b3
 }
 
-.ratings_wrapper .halim_imdbrating span.vote-txt::after {
+.ratings_wrapper .mymo_imdbrating span.vote-txt::after {
     content: ')';
     font-size: 11px;
     color: #b3b3b3
 }
 
-.ratings_wrapper .halim_imdbrating span.taq-count {
+.ratings_wrapper .mymo_imdbrating span.taq-count {
     font-size: 10px
 }
 
-.watch-page .ratings_wrapper .halim_imdbrating {
+.watch-page .ratings_wrapper .mymo_imdbrating {
     border: none
 }
 
@@ -5071,7 +5071,7 @@ a .hl-dot-3 {
         padding-left: 35px
     }
 
-    .halim-light-mode .halim-movie-wrapper .title-block .title-wrapper {
+    .mymo-light-mode .mymo-movie-wrapper .title-block .title-wrapper {
         padding-left: 50px
     }
 
@@ -5095,7 +5095,7 @@ a .hl-dot-3 {
         z-index: 9
     }
 
-    #bookmark .halim-pulse-ring {
+    #bookmark .mymo-pulse-ring {
         display: none
     }
 
@@ -5104,7 +5104,7 @@ a .hl-dot-3 {
     }
 }
 
-.halim-watch-box {
+.mymo-watch-box {
     position: absolute;
     display: block;
     overflow: hidden;
@@ -5129,7 +5129,7 @@ a .hl-dot-3 {
     width: 45%
 }
 
-.halim-movie-wrapper.tpl-2 .quick-eps {
+.mymo-movie-wrapper.tpl-2 .quick-eps {
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -5148,7 +5148,7 @@ a .hl-dot-3 {
     box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75)
 }
 
-.halim-movie-wrapper.tpl-2 .quick-eps:hover {
+.mymo-movie-wrapper.tpl-2 .quick-eps:hover {
     background-position: 100% 0;
     moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
@@ -5162,14 +5162,14 @@ a .hl-dot-3 {
     top: 3px
 }
 
-.halim-movie-wrapper.tpl-2 .quick-eps .hl-sort-down {
+.mymo-movie-wrapper.tpl-2 .quick-eps .hl-sort-down {
     position: absolute;
     left: -10px;
     top: 6px
 }
 
 @media (max-width: 767px) {
-    .halim-movie-wrapper.tpl-2 .quick-eps .hl-sort-down {
+    .mymo-movie-wrapper.tpl-2 .quick-eps .hl-sort-down {
         position: absolute;
         top: 4px
     }
@@ -5182,7 +5182,7 @@ a .hl-dot-3 {
     width: 43%
 }
 
-.halim-movie-wrapper.tpl-2 .show-trailer {
+.mymo-movie-wrapper.tpl-2 .show-trailer {
     position: absolute;
     top: 7px;
     right: 7px;
@@ -5204,7 +5204,7 @@ a .hl-dot-3 {
     right: 15px
 }
 
-.halim-movie-wrapper.tpl-2 .watch-movie {
+.mymo-movie-wrapper.tpl-2 .watch-movie {
     position: absolute;
     bottom: 10px;
     padding: 8px;
@@ -5223,7 +5223,7 @@ a .hl-dot-3 {
     box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75)
 }
 
-.halim-movie-wrapper.tpl-2 .watch-movie:hover {
+.mymo-movie-wrapper.tpl-2 .watch-movie:hover {
     background-position: 100% 0;
     moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
@@ -5240,7 +5240,7 @@ a .hl-dot-3 {
         top: 10px
     }
 
-    .halim-movie-wrapper.tpl-2 .watch-movie {
+    .mymo-movie-wrapper.tpl-2 .watch-movie {
         position: absolute;
         right: 8px;
         bottom: 10px;
@@ -5256,59 +5256,59 @@ a .hl-dot-3 {
         width: 45%
     }
 
-    .halim-movie-wrapper.tpl-2 .quick-eps {
+    .mymo-movie-wrapper.tpl-2 .quick-eps {
         padding: 6px;
         box-shadow: none
     }
 
-    .halim-movie-wrapper.tpl-2 .halim-watch-box {
+    .mymo-movie-wrapper.tpl-2 .mymo-watch-box {
         background: transparent;
         bottom: -10px
     }
 }
 
-.halim-movie-detail a, .halim-movie-detail span {
+.mymo-movie-detail a, .mymo-movie-detail span {
     margin-left: 3px
 }
 
-.halim-movie-detail.full p.country {
+.mymo-movie-detail.full p.country {
     display: inline-block;
     margin-right: 40px
 }
 
-.halim-movie-detail.full p._episode {
+.mymo-movie-detail.full p._episode {
     display: inline-block;
     margin-right: 40px
 }
 
-.halim-movie-detail.full p._showtime {
+.mymo-movie-detail.full p._showtime {
     display: inline-block
 }
 
-.halim-movie-detail.full p._showtime span, .halim-movie-detail.full p._episode span {
+.mymo-movie-detail.full p._showtime span, .mymo-movie-detail.full p._episode span {
     padding: 3px 5px;
     border-radius: 2px;
     color: #fff;
     font-size: 11px
 }
 
-.halim-movie-detail.full p._showtime span {
+.mymo-movie-detail.full p._showtime span {
     background: #a04d4d
 }
 
-.halim-movie-detail.full p._episode span {
+.mymo-movie-detail.full p._episode span {
     background: #73a04d
 }
 
-.halim-movie-detail p {
+.mymo-movie-detail p {
     margin-bottom: 5px
 }
 
-.halim-movie-detail p.directors {
+.mymo-movie-detail p.directors {
     padding-left: 0
 }
 
-.halim-movie-detail p.country {
+.mymo-movie-detail p.country {
     padding: 0
 }
 
@@ -5382,7 +5382,7 @@ a .hl-dot-3 {
     cursor: not-allowed
 }
 
-.halim-bookmark-lists {
+.mymo-bookmark-lists {
     padding: 0 12px;
     margin: 15px 0;
     max-height: 195px;
@@ -5391,7 +5391,7 @@ a .hl-dot-3 {
     border-radius: 3px
 }
 
-.halim-bookmark-lists li {
+.mymo-bookmark-lists li {
     padding: 10px 0;
     list-style: none;
     border-bottom: 1px solid #1d2731;
@@ -5400,11 +5400,11 @@ a .hl-dot-3 {
     position: relative
 }
 
-.halim-bookmark-lists li:last-child {
+.mymo-bookmark-lists li:last-child {
     border: none
 }
 
-.halim-bookmark-lists li img {
+.mymo-bookmark-lists li img {
     width: 45px;
     height: 60px;
     float: left;
@@ -5412,7 +5412,7 @@ a .hl-dot-3 {
     border-radius: 3px
 }
 
-.halim-bookmark-lists li .bookmark-title {
+.mymo-bookmark-lists li .bookmark-title {
     color: #d4d4d4;
     display: block;
     font-size: 12px;
@@ -5423,11 +5423,11 @@ a .hl-dot-3 {
     -webkit-box-orient: vertical
 }
 
-.halim-bookmark-lists li .bookmark-date {
+.mymo-bookmark-lists li .bookmark-date {
     font-size: 11px
 }
 
-.halim-bookmark-lists li .remove-bookmark {
+.mymo-bookmark-lists li .remove-bookmark {
     background: #a04444;
     padding: 3px 8px;
     line-height: 17px;
@@ -5438,7 +5438,7 @@ a .hl-dot-3 {
     color: #fff
 }
 
-.halim-bookmark-lists li .remove-bookmark:hover {
+.mymo-bookmark-lists li .remove-bookmark:hover {
     background: #b32020
 }
 
@@ -5469,7 +5469,7 @@ a .hl-dot-3 {
     margin-left: 10px
 }
 
-.halim-bookmark-box {
+.mymo-bookmark-box {
     background: #12171b;
     padding: 15px;
     margin-top: 7px;
@@ -5481,7 +5481,7 @@ a .hl-dot-3 {
     border-radius: 5px
 }
 
-.halim-bookmark-box::after {
+.mymo-bookmark-box::after {
     content: '';
     border-bottom: 8px solid #12171b;
     border-left: 8px solid transparent;
@@ -5491,11 +5491,11 @@ a .hl-dot-3 {
     position: absolute
 }
 
-.halim-bookmark-box .section-bar {
+.mymo-bookmark-box .section-bar {
     margin-top: 0
 }
 
-.halim-bookmark-box .remove-all-bookmark {
+.mymo-bookmark-box .remove-all-bookmark {
     background: #a04444;
     cursor: pointer;
     padding: 1px 10px;
@@ -5507,11 +5507,11 @@ a .hl-dot-3 {
     border-radius: 3px
 }
 
-.halim-bookmark-box .remove-all-bookmark:hover {
+.mymo-bookmark-box .remove-all-bookmark:hover {
     background: #8c2828
 }
 
-.halim-bookmark-box ul {
+.mymo-bookmark-box ul {
     margin-bottom: 0
 }
 
@@ -5550,7 +5550,7 @@ a .hl-dot-3 {
     position: absolute
 }
 
-.halim-centered {
+.mymo-centered {
     display: flex;
     justify-content: center
 }
@@ -5563,7 +5563,7 @@ a .hl-dot-3 {
     -webkit-transform: rotate(90deg) scale(1) skew(1deg) translate(0px)
 }
 
-.halim--notice {
+.mymo--notice {
     /*background: #224361 url(../images/warning.png) no-repeat;*/
     background-position: 8px 40%;
     padding: 15px;
@@ -5574,7 +5574,7 @@ a .hl-dot-3 {
     margin-bottom: 10px
 }
 
-.halim-film-notice {
+.mymo-film-notice {
     background: #fbecd8 url(../images/warning.png) no-repeat;
     background-position: 8px 40%;
     padding: 15px;
@@ -5584,7 +5584,7 @@ a .hl-dot-3 {
     font-size: 13.5px
 }
 
-.halim_showtime_movies {
+.mymo_showtime_movies {
     background: #22466b url(../images/weekly-calendar.png) no-repeat;
     background-position: 10px 42%;
     background-size: 25px;
@@ -5595,15 +5595,15 @@ a .hl-dot-3 {
     font-size: 13.5px
 }
 
-.halim_showtime_movies p, .halim-film-notice p, .halim--notice p {
+.mymo_showtime_movies p, .mymo-film-notice p, .mymo--notice p {
     margin: 0
 }
 
-#halim-ajax-list-server {
+#mymo-ajax-list-server {
     margin: 10px 5px
 }
 
-#halim-ajax-list-server .get-eps {
+#mymo-ajax-list-server .get-eps {
     background: #224361;
     margin: 2px;
     padding: 6px 10px;
@@ -5615,20 +5615,20 @@ a .hl-dot-3 {
     display: inline-block
 }
 
-#halim-ajax-list-server .get-eps:hover {
+#mymo-ajax-list-server .get-eps:hover {
     background: #276ba9;
     transition: .5s all
 }
 
-#halim-ajax-list-server .get-eps.checked {
+#mymo-ajax-list-server .get-eps.checked {
     background: #e46565
 }
 
-#halim-ajax-list-server .get-eps.checked.active, #halim-ajax-list-server .get-eps.no-active.active {
+#mymo-ajax-list-server .get-eps.checked.active, #mymo-ajax-list-server .get-eps.no-active.active {
     background: #558a28
 }
 
-#halim-ajax-list-server .get-eps.active {
+#mymo-ajax-list-server .get-eps.active {
     background: #558a28
 }
 
@@ -5687,7 +5687,7 @@ a .hl-dot-3 {
     }
 }
 
-.halim-play-btn {
+.mymo-play-btn {
     padding: 10px;
     position: absolute;
     top: 0;
@@ -5764,11 +5764,11 @@ a .hl-dot-3 {
     background: #e46565
 }
 
-.halim-ajax-popular-post {
+.mymo-ajax-popular-post {
     position: relative
 }
 
-.halim-ajax-popular-post-loading, .halim-ajax-get-post-loading {
+.mymo-ajax-popular-post-loading, .mymo-ajax-get-post-loading {
     background: rgba(21, 29, 37, 0.78) url(../images/ajax-loader.gif) no-repeat 95% 2%;
     position: absolute;
     width: 100%;
@@ -5791,7 +5791,7 @@ a .hl-dot-3 {
     color: #fff
 }
 
-.eps-page-nav.active, .eps-page-nav::before, .halim_ajax_get_post span::before, .list-svname::before {
+.eps-page-nav.active, .eps-page-nav::before, .mymo_ajax_get_post span::before, .list-svname::before {
     content: attr(data-text);
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone
@@ -5902,78 +5902,78 @@ span.ajax-update-eps:hover {
     background: #7f1717
 }
 
-.halim-corner-rounded .halim_box .grid-item figure, .halim-corner-rounded .owl-carousel .grid-item figure {
+.mymo-corner-rounded .mymo_box .grid-item figure, .mymo-corner-rounded .owl-carousel .grid-item figure {
     border-radius: 8.888px
 }
 
-.halim-corner-rounded .halim_box figure img
-.halim-corner-rounded .owl-carousel figure img {
+.mymo-corner-rounded .mymo_box figure img
+.mymo-corner-rounded .owl-carousel figure img {
     border-radius: 8px
 }
 
-.halim-corner-rounded .owl-carousel .grid-item .status, .halim-corner-rounded .halim_box .grid-item .status {
+.mymo-corner-rounded .owl-carousel .grid-item .status, .mymo-corner-rounded .mymo_box .grid-item .status {
     border-top-left-radius: 8px;
     border-bottom-right-radius: 8px
 }
 
-.halim-corner-rounded .halim_box .grid-item .episode, .halim-corner-rounded .owl-carousel .grid-item .episode {
+.mymo-corner-rounded .mymo_box .grid-item .episode, .mymo-corner-rounded .owl-carousel .grid-item .episode {
     border-radius: 2px
 }
 
-.halim-corner-rounded .halim_box .grid-item {
+.mymo-corner-rounded .mymo_box .grid-item {
     padding: 3px
 }
 
-.halim-corner-rounded .owl-carousel .grid-item {
+.mymo-corner-rounded .owl-carousel .grid-item {
     padding: 1px
 }
 
-.halim-corner-rounded .halim_box .grid-item .icon_overlay
-.halim-corner-rounded .owl-carousel .grid-item .icon_overlay {
+.mymo-corner-rounded .mymo_box .grid-item .icon_overlay
+.mymo-corner-rounded .owl-carousel .grid-item .icon_overlay {
     border-radius: 8px
 }
 
-.halim-corner-rounded .halim_box .grid-item .halim-post-title, .halim-corner-rounded .halim_box .grid-item .halim-post-title-box {
+.mymo-corner-rounded .mymo_box .grid-item .mymo-post-title, .mymo-corner-rounded .mymo_box .grid-item .mymo-post-title-box {
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px
 }
 
-.halim-corner-rounded .owl-carousel .grid-item:hover .duration, .halim-corner-rounded .halim_box .grid-item:hover .duration {
+.mymo-corner-rounded .owl-carousel .grid-item:hover .duration, .mymo-corner-rounded .mymo_box .grid-item:hover .duration {
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px
 }
 
-.halim-corner-rounded .owl-carousel .grid-item .halim-post-title-box {
+.mymo-corner-rounded .owl-carousel .grid-item .mymo-post-title-box {
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px
 }
 
-.halim-corner-rounded .grid-item:hover .icon_overlay, .halim-corner-rounded .slider-thumb:hover .icon_overlay {
+.mymo-corner-rounded .grid-item:hover .icon_overlay, .mymo-corner-rounded .slider-thumb:hover .icon_overlay {
     border-radius: 8px
 }
 
-.halim-corner-rounded .owl-carousel-fullwidth.owl-carousel .owl-item img {
+.mymo-corner-rounded .owl-carousel-fullwidth.owl-carousel .owl-item img {
     border-radius: 8px
 }
 
-.halim-corner-rounded .owl-carousel-fullwidth.owl-carousel .slide-text {
+.mymo-corner-rounded .owl-carousel-fullwidth.owl-carousel .slide-text {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px
 }
 
-.halim-corner-rounded .owl-carousel-fullwidth .owl-dots {
+.mymo-corner-rounded .owl-carousel-fullwidth .owl-dots {
     right: 6px !important
 }
 
-.halim-light-mode {
+.mymo-light-mode {
     background: #e9ebee !important
 }
 
-.halim-light-mode #header {
+.mymo-light-mode #header {
     background: #2e5d86
 }
 
-.halim-light-mode #wrapper {
+.mymo-light-mode #wrapper {
     background: #fff;
     margin-top: -1px;
     border-radius: 3px;
@@ -5982,81 +5982,81 @@ span.ajax-update-eps:hover {
     box-shadow: 0 3px 14px -1px #bbb
 }
 
-.halim-light-mode .user .dropdown-menu {
+.mymo-light-mode .user .dropdown-menu {
     background: #fff !important
 }
 
-.halim-light-mode .user.user-login-option {
+.mymo-light-mode .user.user-login-option {
     text-shadow: none;
     box-shadow: none
 }
 
-.halim-light-mode .user .dropdown-menu > li > a {
+.mymo-light-mode .user .dropdown-menu > li > a {
     color: #333 !important
 }
 
-.halim-light-mode .user .dropdown-menu.login-box > li > a {
+.mymo-light-mode .user .dropdown-menu.login-box > li > a {
     color: #fff !important
 }
 
-.halim-light-mode .user .dropdown-menu::after {
+.mymo-light-mode .user .dropdown-menu::after {
     border-bottom: 8px solid #fff
 }
 
 @media (max-width: 767px) {
-    .halim-light-mode .user a {
+    .mymo-light-mode .user a {
         color: #333
     }
 
-    .halim-light-mode .navbar-container .dropdown-menu > li > a {
+    .mymo-light-mode .navbar-container .dropdown-menu > li > a {
         color: #333 !important
     }
 }
 
-.halim-light-mode .navbar-container {
+.mymo-light-mode .navbar-container {
     background: #fff;
     -webkit-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.03);
     box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.03);
     border-top: 1px solid #e9ebee
 }
 
-.halim-light-mode .main-navigation {
+.mymo-light-mode .main-navigation {
     background: #fff;
     border: none
 }
 
-.home.halim-light-mode .main-navigation .navbar-nav > .active > a {
+.home.mymo-light-mode .main-navigation .navbar-nav > .active > a {
     background: transparent;
     padding-left: 0
 }
 
-.home.halim-light-mode .main-navigation .navbar-nav > .active > a:hover {
+.home.mymo-light-mode .main-navigation .navbar-nav > .active > a:hover {
     background: #e9ebee;
     padding-left: 15px;
     color: #f73333
 }
 
-.halim-light-mode #mobile-search-form.halim-search-form input {
+.mymo-light-mode #mobile-search-form.mymo-search-form input {
     background-color: #4d7496
 }
 
-.halim-light-mode .halim-search-form .form-control {
+.mymo-light-mode .mymo-search-form .form-control {
     border: 1px solid #4d7496;
     color: #fff;
     background-color: #4d7496
 }
 
-.halim-light-mode #get-bookmark {
+.mymo-light-mode #get-bookmark {
     box-shadow: none;
     text-shadow: none
 }
 
-.halim-light-mode #get-bookmark:hover {
+.mymo-light-mode #get-bookmark:hover {
     background: #4d7496;
     color: #fff
 }
 
-.halim-light-mode .halim-bookmark-box {
+.mymo-light-mode .mymo-bookmark-box {
     background: #fff;
     border-color: #e9ebee;
     border-radius: 3px;
@@ -6064,237 +6064,237 @@ span.ajax-update-eps:hover {
     box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.03)
 }
 
-.halim-light-mode .halim-bookmark-box::after {
+.mymo-light-mode .mymo-bookmark-box::after {
     border-bottom: 8px solid #e9ebee
 }
 
-.halim-light-mode .halim-bookmark-box ul.halim-bookmark-lists {
+.mymo-light-mode .mymo-bookmark-box ul.mymo-bookmark-lists {
     border-color: #e9ebee;
     color: #333
 }
 
-.halim-light-mode .halim-bookmark-box ul.halim-bookmark-lists span.bookmark-title {
+.mymo-light-mode .mymo-bookmark-box ul.mymo-bookmark-lists span.bookmark-title {
     color: #333
 }
 
-.halim-light-mode .halim-bookmark-box .remove-all-bookmark {
+.mymo-light-mode .mymo-bookmark-box .remove-all-bookmark {
     background-color: #333;
     border-radius: 3px
 }
 
-.halim-light-mode .halim-bookmark-box .remove-bookmark {
+.mymo-light-mode .mymo-bookmark-box .remove-bookmark {
     background: #f44;
     color: #fff;
     border-radius: 20px
 }
 
-.halim-light-mode .main-navigation .navbar-nav > li > a {
+.mymo-light-mode .main-navigation .navbar-nav > li > a {
     border: none;
     color: #333 !important
 }
 
-.halim-light-mode .main-navigation .navbar-nav > li > a:hover, .halim-light-mode .main-navigation .navbar-nav > li > a:focus {
+.mymo-light-mode .main-navigation .navbar-nav > li > a:hover, .mymo-light-mode .main-navigation .navbar-nav > li > a:focus {
     background: #f9f9f9
 }
 
-.halim-light-mode .main-navigation .navbar-nav > li > a:focus {
+.mymo-light-mode .main-navigation .navbar-nav > li > a:focus {
     background: #e9ebee;
     outline: none
 }
 
-.halim-light-mode .main-navigation .navbar-nav > .active > a {
+.mymo-light-mode .main-navigation .navbar-nav > .active > a {
     background: #e9ebee
 }
 
-.halim-light-mode .navbar-container ul.dropdown-menu {
+.mymo-light-mode .navbar-container ul.dropdown-menu {
     background: #fff !important;
     border-top: 1px solid #f79f25;
     margin-top: 7px
 }
 
-.halim-light-mode .navbar-container .dropdown-menu > li > a {
+.mymo-light-mode .navbar-container .dropdown-menu > li > a {
     color: #333
 }
 
-.halim-light-mode .navbar-container .dropdown-menu > li.active > a {
+.mymo-light-mode .navbar-container .dropdown-menu > li.active > a {
     background: none;
     color: #e48e08
 }
 
-.halim-light-mode .navbar-container .dropdown-menu > li > a:hover {
+.mymo-light-mode .navbar-container .dropdown-menu > li > a:hover {
     background: none;
     color: #de5d0f;
     padding: 8px 15px 8px 18px;
     border-left: 3px solid #f79f25
 }
 
-.halim-light-mode .navbar-container .dropdown-menu > li > a:hover, .halim-light-mode .navbar-container .dropdown-menu > li > a:focus {
+.mymo-light-mode .navbar-container .dropdown-menu > li > a:hover, .mymo-light-mode .navbar-container .dropdown-menu > li > a:focus {
     background: none;
     outline: none
 }
 
-.halim-light-mode .navbar-container .navbar-nav .dropdown-menu::after {
+.mymo-light-mode .navbar-container .navbar-nav .dropdown-menu::after {
     border-bottom: 8px solid #f79f25
 }
 
-.halim-light-mode .halim-panel-filter .panel-heading {
+.mymo-light-mode .mymo-panel-filter .panel-heading {
     background: #f7f7f7;
     border-bottom: 1px solid #eee;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px
 }
 
-.halim-light-mode .halim-panel-filter .panel-heading a {
+.mymo-light-mode .mymo-panel-filter .panel-heading a {
     color: #333
 }
 
-.halim-light-mode .halim-search-filter .form-inline .form-control {
+.mymo-light-mode .mymo-search-filter .form-inline .form-control {
     background: #fff;
     color: #828282
 }
 
-.halim-light-mode .halim-search-filter .filter-box {
+.mymo-light-mode .mymo-search-filter .filter-box {
     border-color: #d8d8d8;
     border-radius: 20px
 }
 
-.halim-light-mode #btn-movie-filter {
+.mymo-light-mode #btn-movie-filter {
     border-radius: 20px
 }
 
-.halim-light-mode .section-title {
+.mymo-light-mode .section-title {
     border: none
 }
 
-.halim-light-mode .section-heading:before {
+.mymo-light-mode .section-heading:before {
     background: #fff !important
 }
 
-.halim-light-mode .section-heading .h-text {
+.mymo-light-mode .section-heading .h-text {
     color: #333;
     padding: 9px 0;
     margin-left: 0;
     border-bottom: 2px solid #f89708
 }
 
-.halim-light-mode .section-heading .h-text:before, .halim-light-mode .section-heading .h-text:after {
+.mymo-light-mode .section-heading .h-text:before, .mymo-light-mode .section-heading .h-text:after {
     background: #fff;
     position: relative;
     width: 0
 }
 
-.halim-light-mode .section-heading .section-btn {
+.mymo-light-mode .section-heading .section-btn {
     color: #757575
 }
 
-.halim-light-mode .section-heading .section-btn:hover {
+.mymo-light-mode .section-heading .section-btn:hover {
     background: #fff
 }
 
-.halim-light-mode .section-heading .section-btn.active, .halim-light-mode .section-heading .section-btn:hover {
+.mymo-light-mode .section-heading .section-btn.active, .mymo-light-mode .section-heading .section-btn:hover {
     background: #f39917;
     color: #ff8e09;
     border-color: #f39917
 }
 
-.halim-light-mode .section-heading .section-btn span {
+.mymo-light-mode .section-heading .section-btn span {
     background: #fff
 }
 
-.halim-light-mode a.see-more:hover {
+.mymo-light-mode a.see-more:hover {
     background: #e2e2e2
 }
 
-.halim-light-mode a.see-more {
+.mymo-light-mode a.see-more {
     background: #eee;
     color: #333
 }
 
-.halim-light-mode .halim-popular-tab li {
+.mymo-light-mode .mymo-popular-tab li {
     background: #e9ebee;
     border: 1px solid #fff !important;
     padding: 6px 10px
 }
 
-.halim-light-mode .halim-popular-tab li a {
+.mymo-light-mode .mymo-popular-tab li a {
     color: #333
 }
 
-.halim-light-mode .halim-popular-tab li.active {
+.mymo-light-mode .mymo-popular-tab li.active {
     background-size: 200% 100%;
     background-image: linear-gradient(to right, #f0c 0%, #339 51%, #f0c 100%)
 }
 
-.halim-light-mode .halim-popular-tab li.active a {
+.mymo-light-mode .mymo-popular-tab li.active a {
     color: #fff
 }
 
-.halim-light-mode .popular-post .item {
+.mymo-light-mode .popular-post .item {
     background: #e9ebee;
     padding: 0
 }
 
-.halim-light-mode .popular-post .item h3.title {
+.mymo-light-mode .popular-post .item h3.title {
     color: #0c0c0c;
     letter-spacing: 0
 }
 
-.halim-light-mode .popular-post .original_title {
+.mymo-light-mode .popular-post .original_title {
     color: #545454;
     letter-spacing: 0
 }
 
-.halim-light-mode .popular-post .viewsCount {
+.mymo-light-mode .popular-post .viewsCount {
     color: #949494
 }
 
-.halim-light-mode .halim-ajax-popular-post-loading, .halim-light-mode .halim-ajax-get-post-loading {
+.mymo-light-mode .mymo-ajax-popular-post-loading, .mymo-light-mode .mymo-ajax-get-post-loading {
     background-color: rgba(238, 238, 238, 0.73)
 }
 
-.halim-light-mode .halim-single-news {
+.mymo-light-mode .mymo-single-news {
     background: transparent;
     margin-top: 0
 }
 
-.halim-light-mode .halim-single-news .item-content {
+.mymo-light-mode .mymo-single-news .item-content {
     color: #757575
 }
 
-.halim-light-mode .halim-single-news .the_tag_list {
+.mymo-light-mode .mymo-single-news .the_tag_list {
     padding: 10px 0;
     border: none
 }
 
-.halim-light-mode .list-news {
+.mymo-light-mode .list-news {
     border-bottom-color: #e9ebee
 }
 
-.halim-light-mode .list-news .post-info span a {
+.mymo-light-mode .list-news .post-info span a {
     background: #e9ebee;
     color: #333;
     padding: 6px 6px 3px;
     border-radius: 20px
 }
 
-.halim-light-mode .list-news .post-info h2 a {
+.mymo-light-mode .list-news .post-info h2 a {
     color: #5d5d5d;
     letter-spacing: 0
 }
 
-.halim-light-mode .np-viewall {
+.mymo-light-mode .np-viewall {
     background: transparent
 }
 
-.halim-light-mode .np-viewall a {
+.mymo-light-mode .np-viewall a {
     color: #333
 }
 
-.halim-light-mode input#search::-webkit-input-placeholder {
+.mymo-light-mode input#search::-webkit-input-placeholder {
     color: #eee
 }
 
-.halim-light-mode .ui-autocomplete {
+.mymo-light-mode .ui-autocomplete {
     background: #fff;
     border: none;
     border-radius: 2px;
@@ -6302,84 +6302,84 @@ span.ajax-update-eps:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175)
 }
 
-.halim-light-mode .ui-autocomplete li {
+.mymo-light-mode .ui-autocomplete li {
     border-color: #f5f5f5;
     padding: 8px
 }
 
-.halim-light-mode .ui-autocomplete li:hover {
+.mymo-light-mode .ui-autocomplete li:hover {
     background: #f3f3f3
 }
 
-.halim-light-mode .ui-autocomplete li a {
+.mymo-light-mode .ui-autocomplete li a {
     color: #333
 }
 
-.halim-light-mode .ui-autocomplete li .enName {
+.mymo-light-mode .ui-autocomplete li .enName {
     color: #6d6d6d;
     font-weight: 400
 }
 
-.halim-light-mode .ui-autocomplete li.exact_result {
+.mymo-light-mode .ui-autocomplete li.exact_result {
     background: #e2e2e2
 }
 
-.halim-light-mode .halim-movie-wrapper .title-block {
+.mymo-light-mode .mymo-movie-wrapper .title-block {
     background: #fff;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px
 }
 
-.halim-light-mode .title-block .ratings_wrapper .halim_imdbrating span {
+.mymo-light-mode .title-block .ratings_wrapper .mymo_imdbrating span {
     color: #868686
 }
 
-.halim-light-mode .title-block .title-wrapper h1.entry-title {
+.mymo-light-mode .title-block .title-wrapper h1.entry-title {
     color: #777
 }
 
-.halim-light-mode .halim-movie-wrapper .title-block .title-wrapper {
+.mymo-light-mode .mymo-movie-wrapper .title-block .title-wrapper {
     border-bottom-color: #e9ebee
 }
 
-.halim-light-mode .halim-movie-wrapper .title-block .ratings_wrapper .halim_imdbrating {
+.mymo-light-mode .mymo-movie-wrapper .title-block .ratings_wrapper .mymo_imdbrating {
     border-right: 1px solid #e9ebee
 }
 
-.halim-light-mode .halim-movie-wrapper .title-block .more-info span {
+.mymo-light-mode .mymo-movie-wrapper .title-block .more-info span {
     color: #777
 }
 
-.halim-light-mode .halim-movie-wrapper .title-block .more-info span::after {
+.mymo-light-mode .mymo-movie-wrapper .title-block .more-info span::after {
     border-right: 1px solid #bdbdbd;
     top: -1px
 }
 
-.halim-light-mode .halim-movie-wrapper .title-block .more-info span a {
+.mymo-light-mode .mymo-movie-wrapper .title-block .more-info span a {
     color: #408ac5
 }
 
-.halim-light-mode.single-post .entry-title a {
+.mymo-light-mode.single-post .entry-title a {
     color: #777 !important
 }
 
-.halim-light-mode .halim-movie-wrapper .movie-poster img {
+.mymo-light-mode .mymo-movie-wrapper .movie-poster img {
     border: none;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px
 }
 
-.halim-light-mode .halim-movie-wrapper .film-poster-img {
+.mymo-light-mode .mymo-movie-wrapper .film-poster-img {
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px
 }
 
-.halim-light-mode .halim-movie-wrapper .movie-detail {
+.mymo-light-mode .mymo-movie-wrapper .movie-detail {
     border-bottom-right-radius: 3px
 }
 
 @media (max-width: 767px) {
-    .halim-light-mode .halim-movie-wrapper .movie-detail {
+    .mymo-light-mode .mymo-movie-wrapper .movie-detail {
         border-bottom-right-radius: 3px;
         background: transparent;
         border: 1px solid #e9ebee;
@@ -6387,27 +6387,27 @@ span.ajax-update-eps:hover {
         padding: 8px
     }
 
-    .halim-light-mode .halim-movie-wrapper .movie-detail p {
+    .mymo-light-mode .mymo-movie-wrapper .movie-detail p {
         color: #333;
         border: none
     }
 
-    .halim-light-mode .halim-movie-wrapper .movie-detail p a {
+    .mymo-light-mode .mymo-movie-wrapper .movie-detail p a {
         color: #777
     }
 
-    .halim-light-mode .halim-movie-wrapper .more-info {
+    .mymo-light-mode .mymo-movie-wrapper .more-info {
         padding: 10px 15px 0
     }
 }
 
-.halim-light-mode .title-block {
+.mymo-light-mode .title-block {
     background: #e9ebee;
     padding: 15px 15px 0;
     box-shadow: 0 0 20px 2px #bfbfbf
 }
 
-.halim-light-mode #halim-list-server ul li span {
+.mymo-light-mode #mymo-list-server ul li span {
     background-color: #fff;
     color: #333;
     border: 1px solid #cacaca;
@@ -6416,60 +6416,60 @@ span.ajax-update-eps:hover {
     box-shadow: none
 }
 
-.halim-light-mode #halim-list-server li:hover span {
+.mymo-light-mode #mymo-list-server li:hover span {
     background: #F90;
     color: #fff;
     border-color: #f90
 }
 
-.halim-light-mode #halim-list-server ul li span.active {
+.mymo-light-mode #mymo-list-server ul li span.active {
     background: #e46565;
     border-color: #e46565;
     color: #fff
 }
 
-.halim-light-mode #content .htmlwrap {
+.mymo-light-mode #content .htmlwrap {
     border-radius: 3px;
     background: #f9f9f9;
     border: 1px solid #e9ebee
 }
 
-.halim-light-mode .eps-page-nav.active {
+.mymo-light-mode .eps-page-nav.active {
     padding: 4px 6px 1px
 }
 
-.halim-light-mode .list-svname {
+.mymo-light-mode .list-svname {
     color: #333
 }
 
-.halim-light-mode #content .entry-content .item-content-toggle {
+.mymo-light-mode #content .entry-content .item-content-toggle {
     border-color: #e9ebee
 }
 
-.halim-light-mode #content .entry-content .item-content-toggle .item-content-gradient {
+.mymo-light-mode #content .entry-content .item-content-toggle .item-content-gradient {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.46) 0%, #f9f9f9 100%)
 }
 
-.halim-light-mode #content .entry-content .item-content-toggle .show-more {
+.mymo-light-mode #content .entry-content .item-content-toggle .show-more {
     border-color: #e9ebee;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px
 }
 
-.halim-light-mode #content .entry-content .item-content-toggle .show-more:hover {
+.mymo-light-mode #content .entry-content .item-content-toggle .show-more:hover {
     background: #f9f9f9
 }
 
-.halim-light-mode .the_tag_list {
+.mymo-light-mode .the_tag_list {
     border-color: #e9ebee;
     border-radius: 3px
 }
 
-.halim-light-mode .navbar-toggle .icon-bar {
+.mymo-light-mode .navbar-toggle .icon-bar {
     background-color: #7b7b7b
 }
 
-.halim-light-mode .page-numbers li span.current, .halim-light-mode .page-numbers.dots {
+.mymo-light-mode .page-numbers li span.current, .mymo-light-mode .page-numbers.dots {
     background: #f5a833
 }
 
@@ -6556,7 +6556,7 @@ span.ajax-update-eps:hover {
     }
 }
 
-.halim-light-mode-button {
+.mymo-light-mode-button {
     cursor: default;
     position: fixed;
     left: -25px;
@@ -6568,23 +6568,23 @@ span.ajax-update-eps:hover {
 }
 
 @media (max-width: 767px) {
-    .halim-light-mode-button {
+    .mymo-light-mode-button {
         background: rgba(0, 0, 0, 0.74);
         padding-left: 8px;
         border-radius: 20px;
         left: -36px
     }
 
-    .halim-light-mode-button label {
+    .mymo-light-mode-button label {
         display: inline;
         margin-bottom: 0
     }
 
-    .halim-light-mode-button #dayIcon {
+    .mymo-light-mode-button #dayIcon {
         top: 2px
     }
 
-    .halim-light-mode-button #nightIcon {
+    .mymo-light-mode-button #nightIcon {
         top: 3px;
         height: 26px
     }
@@ -6684,11 +6684,11 @@ span.ajax-update-eps:hover {
     left: 50%
 }
 
-.halim-server.show_all_eps {
+.mymo-server.show_all_eps {
     margin-bottom: 10px
 }
 
-#halim-list-server .halim-server.show_all_eps .halim-server-name {
+#mymo-list-server .mymo-server.show_all_eps .mymo-server-name {
     float: none !important;
     margin-bottom: -5px !important;
     background: #0b0f15;
@@ -6698,24 +6698,24 @@ span.ajax-update-eps:hover {
     text-transform: uppercase
 }
 
-.halim-light-mode #halim-list-server .halim-server.show_all_eps .halim-server-name {
+.mymo-light-mode #mymo-list-server .mymo-server.show_all_eps .mymo-server-name {
     background: #e9ebee;
     color: #4e4e4e
 }
 
-.halim-server.show_all_eps ul.halim-list-eps {
+.mymo-server.show_all_eps ul.mymo-list-eps {
     background: #0b0f15;
     padding: 15px 12px 5px !important;
     border-radius: 3px
 }
 
-.halim-light-mode .halim-server.show_all_eps ul.halim-list-eps {
+.mymo-light-mode .mymo-server.show_all_eps ul.mymo-list-eps {
     background: #e9ebee;
     padding: 15px 15px 5px !important;
     border-radius: 3px
 }
 
-#halim-player-wrapper .post-password-form {
+#mymo-player-wrapper .post-password-form {
     text-align: center;
     background: #0b0f15;
     padding: 15px;
@@ -6733,7 +6733,7 @@ span.ajax-update-eps:hover {
     filter: blur(0)
 }
 
-.halim-vertical-widget {
+.mymo-vertical-widget {
     overflow: hidden;
     margin: auto -15px
 }
@@ -6748,23 +6748,23 @@ span.ajax-update-eps:hover {
     font-size: 14px
 }
 
-.halim-full-player {
+.mymo-full-player {
     background: #000;
     padding: 10px 0;
     margin-bottom: 10px
 }
 
-.halim-full-player .container {
+.mymo-full-player .container {
     padding: 0
 }
 
 @media (min-width: 991px) {
-    .halim-centered {
+    .mymo-centered {
         display: flex;
         justify-content: center
     }
 
-    .halim-full-player {
+    .mymo-full-player {
         background: #000;
         padding: 10px 0;
         margin-top: 0
@@ -6956,7 +6956,7 @@ span.ajax-update-eps:hover {
     box-shadow: 0 3px 20px 7px #12181d
 }
 
-.halim-light-mode #is_copyright {
+.mymo-light-mode #is_copyright {
     box-shadow: none
 }
 
@@ -7418,7 +7418,7 @@ div#letter-filter {
     line-height: 5px
 }
 
-.halim-light-mode div#letter-filter {
+.mymo-light-mode div#letter-filter {
     border-bottom: 1px solid #eee
 }
 
@@ -7460,7 +7460,7 @@ div#letter-filter {
     border-color: #fb6363
 }
 
-.halim-light-mode #letter-filter .pagination > li > a, .halim-light-mode #letter-filter .pagination > li > span {
+.mymo-light-mode #letter-filter .pagination > li > a, .mymo-light-mode #letter-filter .pagination > li > span {
     color: #6d6d6d;
     background-color: #fff;
     border: 1px solid #cdced0

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row container" id="wrapper">
-        <div class="halim-panel-filter">
+        <div class="mymo-panel-filter">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-8 hidden-xs">
@@ -27,11 +27,11 @@
                 @php
                     $genre = genre_setting(@$home->slider_movies->genre);
                 @endphp
-            <div id="halim-carousel-widget-3xx" class="wrap-slider">
+            <div id="mymo-carousel-widget-3xx" class="wrap-slider">
                 <div class="section-bar clearfix">
                     <h3 class="section-title"><span>{{ @$genre->title }}</span></h3>
                 </div>
-                <div id="halim-carousel-widget-3" class="owl-carousel owl-theme">
+                <div id="mymo-carousel-widget-3" class="owl-carousel owl-theme">
                     @if(!$genre->items->isEmpty())
                         @foreach($genre->items as $item)
                         <article class="thumb grid-item post-{{ $item->id }}">
@@ -42,7 +42,7 @@
                 </div>
                 <script>
                     jQuery(document).ready(function ($) {
-                        var owl = $('#halim-carousel-widget-3');
+                        var owl = $('#mymo-carousel-widget-3');
                         owl.owlCarousel({
                             rtl: false,
                             loop: true,
@@ -66,7 +66,7 @@
                     $genre = genre_setting(@$home->{'genre' . $i}->genre);
                 @endphp
 
-            <section id="halim-advanced-widget-{{ $i }}">
+            <section id="mymo-advanced-widget-{{ $i }}">
                 <h4 class="section-heading">
                     <a href="{{ @$genre->url }}" title="{{ @$genre->title }}">
                         <span class="h-text">{{ @$genre->title }}</span>
@@ -78,7 +78,7 @@
                         @endphp
                     <ul class="heading-nav pull-right hidden-xs">
                         @foreach($child_genres as $child)
-                        <li class="section-btn halim_ajax_get_post" data-catid="{{ $child->id }}" data-showpost="12" data-widgetid="halim-advanced-widget-{{ $i }}" data-layout="6col">
+                        <li class="section-btn mymo_ajax_get_post" data-catid="{{ $child->id }}" data-showpost="12" data-widgetid="mymo-advanced-widget-{{ $i }}" data-layout="6col">
                             <span data-text="{{ $child->name }}"></span>
                         </li>
                         @endforeach
@@ -86,7 +86,7 @@
                     @endif
                 </h4>
 
-                <div id="halim-advanced-widget-{{ $i }}-ajax-box" class="halim_box">
+                <div id="mymo-advanced-widget-{{ $i }}-ajax-box" class="mymo_box">
                     @if(!$genre->items->isEmpty())
                         @foreach($genre->items as $item)
                         <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-{{ $item->id }}">

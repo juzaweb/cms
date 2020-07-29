@@ -6,7 +6,7 @@
             $sliders = slider_setting(@$home->slider->slider);
         @endphp
         <!-- Wrapper For Slides -->
-        <div id="halim-fullwith-slider-widget-2" class="owl-carousel owl-carousel-fullwidth owl-theme">
+        <div id="mymo-fullwith-slider-widget-2" class="owl-carousel owl-carousel-fullwidth owl-theme">
             @if($sliders)
                 @foreach($sliders as $index => $item)
                 <div class="post-{{ $i }} item">
@@ -24,7 +24,7 @@
         </div><!-- End of Wrapper For Slides -->
         <script type="text/javascript">
             jQuery(document).ready(function($) {
-                var owl = $('#halim-fullwith-slider-widget-2');
+                var owl = $('#mymo-fullwith-slider-widget-2');
                 owl.owlCarousel({
                     rtl:false,
                     items: 1,

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row container" id="wrapper">
-        <div class="halim-panel-filter">
+        <div class="mymo-panel-filter">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-8 hidden-xs">

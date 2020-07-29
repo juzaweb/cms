@@ -27,15 +27,15 @@
 					</span>
                 </div>
 
-                <p class="halim-about">
+                <p class="mymo-about">
                     {!! @$footer->column1->description !!}
                 </p>
             </div>
 
-            {{--<div id="halim_tagcloud_widget-2" class="widget widget_halim_tagcloud_widget col-xs-12 col-sm-6 col-md-4">
+            {{--<div id="mymo_tagcloud_widget-2" class="widget widget_mymo_tagcloud_widget col-xs-12 col-sm-6 col-md-4">
                 <h4 class="widget-title">Tag</h4>
 
-                <div class="video-item halim-entry-box hidden-xs">
+                <div class="video-item mymo-entry-box hidden-xs">
                     <div class="item-content tagcloud">
 
                         <a href="/tag/banhtv" class="tag-cloud-link tag-link-5448 tag-link-position-1" style="font-size: 10pt;" aria-label=""></a>
@@ -96,7 +96,7 @@
     <div class="container credit">
         <div class="row container">
             <div class="col-xs-12 col-sm-4 col-md-6">©
-                <a id="halimthemes" href="/" title="{{ $home_tile }}">2016
+                <a id="mymothemes" href="/" title="{{ $home_tile }}">2016
                     <a href="/"><strong>{{ $home_tile }}</strong></a>
                 </a>
             </div>

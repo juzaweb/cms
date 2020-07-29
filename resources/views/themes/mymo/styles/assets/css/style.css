@@ -2,7 +2,7 @@
 body {
     font-family: "Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-.halim-light-mode-button {
+.mymo-light-mode-button {
     display: none;
 }
 .jwplayer .jw-rightclick .jw-rightclick-list .jw-featured .jw-rightclick-link span + span.jw-reset::after{content:''!important;}
@@ -76,22 +76,22 @@ ul#f-menu li a {
     display: block;
 }
 
-.halim-post-title-box {
+.mymo-post-title-box {
     position: unset !important;
     padding: 50px 0 0 !important;
     text-align: center !important;
     background: transparent !important;
 }
 
-.halim-post-title > h2 {
+.mymo-post-title > h2 {
     color: #e6920e;
 }
 
-.halim-corner-rounded .halim_box .grid-item figure, .halim-corner-rounded .owl-carousel .grid-item figure {
+.mymo-corner-rounded .mymo_box .grid-item figure, .mymo-corner-rounded .owl-carousel .grid-item figure {
     border-radius: 8.5px;
 }
 
-.halim-post-title.title-2-line h2 {
+.mymo-post-title.title-2-line h2 {
     -webkit-line-clamp: 2;
 }
 

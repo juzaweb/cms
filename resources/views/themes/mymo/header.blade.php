@@ -5,10 +5,10 @@
                 <h1 class="site-title"><a class="logo" href="/" rel="home">{{ $home_tile }}</a></h1>
             </div>
 
-            <div class="col-md-5 col-sm-6 halim-search-form hidden-xs">
+            <div class="col-md-5 col-sm-6 mymo-search-form hidden-xs">
                 <div class="header-nav">
                     <div class="col-xs-12">
-                        <form id="search-form-pc" name="halimForm" role="search" action="/" method="GET">
+                        <form id="search-form-pc" name="mymoForm" role="search" action="/" method="GET">
                             <div class="form-group">
                                 <div class="input-group col-xs-12">
                                     <input id="search" type="text" name="s" value="" class="form-control" data-toggle="tooltip" data-placement="bottom" data-original-title="@lang('app.press_enter_to_search')" placeholder="@lang('app.search_movies_or_tv_series')" autocomplete="off" required>
