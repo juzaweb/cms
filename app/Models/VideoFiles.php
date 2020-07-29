@@ -101,7 +101,7 @@ class VideoFiles extends Model
         return [
             [
                 'file' => '//www.youtube.com/watch?v=' . get_youtube_id($this->url),
-                'type' => 'video/youtube',
+                'type' => 'mp4',
             ]
         ];
     }

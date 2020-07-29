@@ -9,9 +9,11 @@ class ForgotPasswordController extends Controller
 {
     public function handle(Request $request) {
         $this->validateRequest([
-            'email' => 'required',
+            'email' => 'required|exists:users,email',
         ], $request, [
             'email' => trans('app.email')
         ]);
+        
+        
     }
 }

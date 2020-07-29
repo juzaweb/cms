@@ -76,6 +76,30 @@ ul#f-menu li a {
     display: block;
 }
 
+.halim-post-title-box {
+    position: unset !important;
+    padding: 50px 0 0 !important;
+    text-align: center !important;
+    background: transparent !important;
+}
+
+.halim-post-title > h2 {
+    color: #e6920e;
+}
+
+.halim-corner-rounded .halim_box .grid-item figure, .halim-corner-rounded .owl-carousel .grid-item figure {
+    border-radius: 8.5px;
+}
+
+.halim-post-title.title-2-line h2 {
+    -webkit-line-clamp: 2;
+}
+
+.grid-item .episode {
+    right: 5px;
+    bottom: 55px;
+}
+
 .pl-0 {
     padding-left: 0;
 }

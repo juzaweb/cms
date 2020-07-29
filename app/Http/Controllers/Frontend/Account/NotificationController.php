@@ -10,7 +10,9 @@ class NotificationController extends Controller
         $user = \Auth::user();
         $notifications = $user->notifications()
             ->paginate(10);
-        return view('themes.mymo.profile.notification.index', [
+        
+        return view('themes.mymo.account.notification.index', [
+            'title' => trans('app.notification'),
             'user' => $user,
             'notifications' => $notifications
         ]);
@@ -22,5 +24,10 @@ class NotificationController extends Controller
             ->where('id', '=', $id)
             ->firstOrFail();
         
+        return view('themes.mymo.profile.notification.detail', [
+            'title' => trans('app.notification'),
+            'user' => $user,
+            'notification' => $notification
+        ]);
     }
 }

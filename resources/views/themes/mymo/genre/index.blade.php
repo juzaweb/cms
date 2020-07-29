@@ -46,7 +46,7 @@
             <div class="halim_box">
                 @foreach($items as $item)
                     <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-21564">
-                    @include('themes.mymo.data.item')
+                        @include('themes.mymo.data.item')
                     </article>
                 @endforeach
             </div>
@@ -56,18 +56,19 @@
                 {{ $items->links('themes.mymo.data.pagination') }}
             </div>
 
+            @if(@$info->description)
             <div class="entry-content htmlwrap clearfix">
                 <div class="video-item halim-entry-box">
                     <article id="post-312" class="item-content">
-
+                        {!! $info->description !!}
                     </article>
                     <div class="item-content-toggle">
                         <div class="item-content-gradient"></div>
-                        <span class="show-more" data-single="true" data-showmore="Hiển thị thêm" data-showless="Rút gọn">Hiển thị thêm</span>
+                        <span class="show-more" data-single="true" data-showmore="Hiển thị thêm" data-showless="@lang('app.show_less')">@lang('app.show_more')</span>
                     </div>
                 </div>
             </div>
-
+            @endif
         </section>
     </main>
 

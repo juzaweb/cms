@@ -80,7 +80,7 @@
                             "msg": "Nội dung",
                             "msg_success": "Cảm ơn bạn đã gửi thông báo lỗi. Chúng tôi sẽ tiến hành sửa lỗi sớm nhất có thể",
                             "loading_img": "{{ asset('styles/themes/mymo/images/loading.gif') }}",
-                            "report_btn": "Báo lỗi",
+                            "report_btn": "@lang('app.report')",
                             "name_or_email": "Tên hoặc Email",
                             "close": "@lang('app.close')"
                         }
@@ -195,11 +195,13 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-
-                {{--<div class="halim--notice">
+                @php($ads = get_ads('player_bottom'))
+                @if($ads)
+                <div class="halim--notice">
                     <!-- Ads -->
-
-                </div>--}}
+                    {!! $ads !!}
+                </div>
+                @endif
 
                 <div class="entry-content htmlwrap clearfix">
                     <div class="video-item halim-entry-box">

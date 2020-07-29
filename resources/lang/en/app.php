@@ -292,6 +292,8 @@ return [
     'week' => 'week',
     'month' => 'month',
     'all' => 'All',
+    'on' => 'On',
+    'off' => 'Off',
     'widget' => 'Widget',
     'popular_movies' => 'Popular movies',
     'maximum_movies' => 'Maximum movies',
@@ -300,4 +302,5 @@ return [
     'add_to_bookmark' => 'Add to bookmark',
     'player_autonext' => 'Player autonext...',
     'press_enter_to_search' => 'Press Enter to search',
+    'autoplay_next_episode' => 'Autoplay next episode',
 ];

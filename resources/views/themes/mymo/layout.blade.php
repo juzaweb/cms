@@ -18,15 +18,13 @@
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
     <link rel="canonical" href="{{ url()->current() }}"/>
-    <meta property="og:locale" content="vi_VN"/>
+    <meta property="og:locale" content="en_US"/>
     <meta property="og:title" content="{{ @$title }}"/>
     <meta property="og:description" content="{{ @$description }}"/>
     <meta property="og:url" content="{{ url()->current() }}"/>
-    <meta property="og:site_name" content=""/>
+    <meta property="og:site_name" content="{{ $home_tile }}"/>
     <meta property="fb:app_id" content="2401456150086560"/>
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:site" content="@XemPhimPlus"/>
-    <meta name="csrf-token" content="{{ csrf_token()  }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ $icon }}" sizes="32x32"/>
     <link rel="icon" href="{{ $icon }}" sizes="192x192"/>
     <link rel="apple-touch-icon-precomposed" href="{{ $icon }}"/>
@@ -84,31 +82,7 @@
 
     <!-- End Google Analytics -->
 
-    <style>
-        .halim-post-title-box {
-            position: unset !important;
-            padding: 50px 0 0 !important;
-            text-align: center !important;
-            background: transparent !important;
-        }
-
-        .halim-post-title > h2 {
-            color: #e6920e;
-        }
-
-        .halim-corner-rounded .halim_box .grid-item figure, .halim-corner-rounded .owl-carousel .grid-item figure {
-            border-radius: 8.5px;
-        }
-
-        .halim-post-title.title-2-line h2 {
-            -webkit-line-clamp: 2;
-        }
-
-        .grid-item .episode {
-            right: 5px;
-            bottom: 55px;
-        }
-
+    <style type="text/css">
         #header .site-title {
             background: url({{ image_url(get_config('logo')) }}) no-repeat top left;
             text-indent: -9999px;

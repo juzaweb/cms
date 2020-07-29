@@ -101,17 +101,17 @@
 
                 <div class="button-watch">
                     <ul class="halim-social-plugin col-xs-4 hidden-xs">
-                        <li class="fb-like" data-href="/to-chuc-rugal/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></li>
+                        <li class="fb-like" data-href="{{ route('watch', [$info->slug]) }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></li>
                     </ul>
                     <ul class="col-xs-12 col-md-8">
                         <div id="autonext" class="btn-cs autonext">
                             <i class="icon-autonext-sm"></i>
-                            <span><i class="hl-next"></i> Autoplay next episode: <span id="autonext-status">On</span></span>
+                            <span><i class="hl-next"></i> @lang('app.autoplay_next_episode'): <span id="autonext-status">@lang('app.on')</span></span>
                         </div>
 
                         <div id="explayer" class="hidden-xs">
                             <i class="hl-resize-full"></i>
-                            Phóng to
+                            @lang('app.expand')
                         </div>
 
                         <div id="toggle-light"><i class="hl-adjust"></i>
@@ -141,11 +141,17 @@
                 </div>
 
                 <div class="clearfix"></div>
+                @php
+                    $ads = get_ads('player_bottom');
+                @endphp
+                @if($ads)
                 <div class="text-center">
                     <div class="textwidget">
                         <!-- Ads -->
+                        {!! $ads !!}
                     </div>
                 </div>
+                @endif
 
                 <div class="text-center">
 
@@ -181,9 +187,9 @@
                         </div>
                         <div class="rate-this">
                             <div data-rate="{{ $start * 100 / 5 }}" data-id="{{ $info->id }}" class="user-rate user-rate-active">
-                                    <span class="user-rate-image post-large-rate stars-large">
-                                        <span style="width: {{ $start * 100 / 5 }}%"></span>
-                                    </span>
+                                <span class="user-rate-image post-large-rate stars-large">
+                                    <span style="width: {{ $start * 100 / 5 }}%"></span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -215,7 +221,7 @@
 
                             <ul id="listsv-{{ $server->id }}" class="halim-list-eps">
                                 @foreach($video_files as $file)
-                                    <li class="halim-episode halim-episode-{{ $file->id }}"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="halim-info-{{ $file->id }} box-shadow halim-btn" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
+                                    <li class="halim-episode halim-episode-{{ $file->id }} @if($file->id == $vid) active @endif"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="halim-info-{{ $file->id }} box-shadow halim-btn" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
                                 @endforeach
                             </ul>
 
@@ -229,6 +235,7 @@
                 <div class="htmlwrap clearfix">
                     <div class="fb-comments"  data-href="/to-chuc-rugal/" data-width="100%" data-mobile="true" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time"></div>
                 </div>
+
                 <div id="lightout"></div>
 
             </div>

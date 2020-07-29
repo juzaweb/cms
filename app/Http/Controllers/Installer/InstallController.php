@@ -7,5 +7,7 @@ use App\Http\Controllers\Controller;
 
 class InstallController extends Controller
 {
-    //
+    public function index() {
+        return view('installer.install');
+    }
 }

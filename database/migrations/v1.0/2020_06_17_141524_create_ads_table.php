@@ -16,6 +16,25 @@ class CreateAdsTable extends Migration
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
+        
+        DB::table('ads')->insert([
+            [
+                'key' => 'home_header',
+                'name' => 'Home Page Header',
+            ],
+            [
+                'key' => 'genre_header',
+                'name' => 'Genre Page Header',
+            ],
+            [
+                'key' => 'sidebar',
+                'name' => 'Sidebar',
+            ],
+            [
+                'key' => 'player_bottom',
+                'name' => 'Player Bottom',
+            ]
+        ]);
     }
     
     public function down()

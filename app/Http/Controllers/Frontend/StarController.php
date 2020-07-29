@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Movies;
 use App\Models\Stars;
-use App\Http\Controllers\Controller;
 
 class StarController extends Controller
 {
