@@ -303,4 +303,7 @@ return [
     'player_autonext' => 'Player autonext...',
     'press_enter_to_search' => 'Press Enter to search',
     'autoplay_next_episode' => 'Autoplay next episode',
+    'ads_have_xx_seconds_left' => 'Ads have XX seconds left.',
+    'skip_ad' => 'Skip ad',
+    'skip_later_xxs' => 'Skip later xxs',
 ];

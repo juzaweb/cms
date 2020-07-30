@@ -3,23 +3,39 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\VideoAds;
 
 class VideoAdsController extends Controller
 {
     public function ads() {
+        $video_ads = VideoAds::where('status', '=', 1)
+            ->inRandomOrder()
+            ->first();
+    
+        if (empty($video_ads)) {
+            $factory = new \Sokil\Vast\Factory();
+            $document = $factory->create('2.0');
+            $document->toDomDocument();
+            return $document;
+        }
+        
+        return $this->getAds($video_ads);
+    }
+    
+    protected function getAds(VideoAds $video_ads) {
         $factory = new \Sokil\Vast\Factory();
         $document = $factory->create('2.0');
-        
+    
         $ad1 = $document
             ->createInLineAdSection()
             ->setId('ad1')
-            ->setAdSystem('Ad Server Name')
-            ->setAdTitle('Ad Title')
+            ->setAdSystem($video_ads->name)
+            ->setAdTitle($video_ads->title)
             ->addImpression('http://ad.server.com/impression', 'imp1');
     
         $linearCreative = $ad1
             ->createLinearCreative()
-            ->setDuration(128)
+            ->setDuration(1)
             ->setId('013d876d-14fc-49a2-aefd-744fce68365b')
             ->setAdId('pre')
             ->setVideoClicksClickThrough('http://entertainmentserver.com/landing')
@@ -41,7 +57,7 @@ class VideoAdsController extends Controller
             ->setHeight(100)
             ->setWidth(100)
             ->setBitrate(2500)
-            ->setUrl('http://server.com/media1.mp4');
+            ->setUrl(image_url($video_ads->video_url));
     
         $document->toDomDocument();
         return $document;

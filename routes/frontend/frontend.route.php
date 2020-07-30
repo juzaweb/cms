@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/component/sitemap.route.php';
 require_once __DIR__ . '/component/ajax_get.route.php';
 require_once __DIR__ . '/component/stream.route.php';
@@ -28,3 +27,5 @@ Route::get('/year/{slug}', 'Frontend\YearController@index')->name('year');
 Route::get('/tag/{slug}', 'Frontend\TagController@index')->name('tag');
 
 Route::get('/page/{slug}', 'Frontend\PageController@index')->name('page');
+
+Route::get('/ads/videos.xml', 'Frontend\VideoAdsController@ads')->name('ads.videos');

@@ -91,6 +91,7 @@ class Movies extends Model
     
     protected $table = 'movies';
     protected $primaryKey = 'id';
+    protected $resize = '185x250';
     protected $fillable = [
         'name',
         'other_name',

@@ -106,14 +106,14 @@
             },
             advertising: {
                 client: 'vast',
-                admessage: 'Quảng cáo còn XX giây.',
-                skiptext: 'Bỏ qua quảng cáo',
-                skipmessage: 'Bỏ qua sau xxs',
+                admessage: '@lang('app.ads_have_xx_seconds_left')',
+                skiptext: '@lang('app.skip_ad')',
+                skipmessage: '@lang('app.skip_later_xxs')',
                 schedule: {
-                    'qc1': {
+                    'ad1': {
                         'offset': '1',
                         'skipoffset': '5',
-                        'tag': 'http://xemphimplus.net/link/ads.xml'
+                        'tag': '{{ route('ads.videos') }}'
                     },
 
                 }

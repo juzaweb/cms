@@ -47,5 +47,6 @@ class VideoAds extends Model
         'url',
         'description',
         'video_url',
+        'status'
     ];
 }
