@@ -10,11 +10,17 @@ $sidebar = theme_setting('sidebar');
 </div>
 @endif
 
+@php
+$ads = get_ads('sidebar');
+@endphp
+@if($ads)
 <div id="text-14" class="widget widget_text">
     <div class="textwidget">
         <!-- Ads -->
+        {!! $ads !!}
     </div>
 </div>
+@endif
 
 @if(@$sidebar->popular_movies->status == 1)
 <div id="mymo_tab_popular_videos-widget-5" class="widget mymo_tab_popular_videos-widget">

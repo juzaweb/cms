@@ -43,6 +43,13 @@
                 </h3>
             </div>
 
+            @php
+                $ads = get_ads('genre_header');
+            @endphp
+            @if($ads)
+                {!! $ads !!}
+            @endif
+
             <div class="mymo_box">
                 @foreach($items as $item)
                     <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-21564">

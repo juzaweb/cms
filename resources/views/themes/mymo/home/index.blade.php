@@ -9,7 +9,7 @@
                         {{ get_config('title') }}
                     </div>
                     <div class="col-xs-4 text-right">
-                        <a href="javascript:;" id="expand-ajax-filter">@lang('app.filter') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                        <a href="javascript:;" id="expand-ajax-filter">@lang('app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                     </div>
                     <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
                 </div>
@@ -21,6 +21,17 @@
         @php
             $home = theme_setting('home_page');
         @endphp
+
+        @php
+            $ads = get_ads('home_header');
+        @endphp
+        @if($ads)
+            <div class="col-xs-12">
+                <!-- Ads -->
+                {!! $ads !!}
+            </div>
+        @endif
+
 
         <div class="col-xs-12 carausel-sliderWidget">
             @if(@$home->slider_movies->status == 1)

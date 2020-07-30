@@ -127,7 +127,7 @@
                     </div>
                     <div class="movie_info col-xs-12">
                         <div class="movie-poster col-md-3">
-                            <img class="movie-thumb" src="{{ $info->getThumbnail() }}" alt="{{ $info->name }}">
+                            <img class="movie-thumb" src="{{ $info->getThumbnail(false) }}" alt="{{ $info->name }}">
                             <div class="mymo_imdbrating"><span>{{ $info->rating }}</span></div>
                             <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="btn btn-sm btn-danger watch-movie visible-xs-block"><i class="hl-play"></i>@lang('watch')</a>
 
