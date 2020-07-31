@@ -8,6 +8,12 @@ Route::group(['middleware' => ['web', 'guest']], function () {
     Route::get('/register', 'Frontend\Auth\RegisterController@index')->name('register');
     
     Route::post('/register', 'Frontend\Auth\RegisterController@register')->name('register.submit');
+    
+    Route::post('/forgot-password', 'Frontend\Auth\ForgotPasswordController@handle')->name('password.forgot.submit');
+    
+    Route::get('/reset-password/{token}', 'Frontend\Auth\ResetPasswordController@index')->name('password.reset');
+    
+    Route::post('/reset-password/{token}', 'Frontend\Auth\ResetPasswordController@handle')->name('password.reset.submit');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {

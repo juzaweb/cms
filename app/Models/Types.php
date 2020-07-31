@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Types whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Types whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movies[] $movies
+ * @property-read int|null $movies_count
  */
 class Types extends Model
 {

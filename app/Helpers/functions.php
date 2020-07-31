@@ -22,6 +22,20 @@ function get_ip_client() {
     return request()->ip();
 }
 
+function generate_token($string) {
+    $month = date('Y-m');
+    $ip = get_ip_client();
+    $key = config('app.key');
+    return \Hash::make($key . $month . $key . $ip . $string);
+}
+
+function check_token($token, $string) {
+    if (generate_token($string) == $token) {
+        return true;
+    }
+    return false;
+}
+
 function image_path($url) {
     $img = explode('uploads/', $url);
     if (isset($img[1])) {

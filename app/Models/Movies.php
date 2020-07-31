@@ -84,6 +84,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereWriters($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereYear($value)
  * @mixin \Eloquent
+ * @property-read int|null $rating_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Servers[] $servers
+ * @property-read int|null $servers_count
  */
 class Movies extends Model
 {

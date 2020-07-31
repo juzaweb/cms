@@ -16,7 +16,6 @@ class RegisterSuccessListener
     {
         if (get_config('user_verification')) {
             $mail = new EmailList();
-            $mail->template_file = 'user_verification';
             $mail->emails = $event->user->email;
             $mail->priority = 2;
             $mail->params = json_encode([
@@ -24,7 +23,7 @@ class RegisterSuccessListener
                 'email' => $event->user->email,
                 'url' => '',
             ]);
-            $mail->sendByTemplate();
+            $mail->sendByTemplate('user_verification');
         }
     }
 }

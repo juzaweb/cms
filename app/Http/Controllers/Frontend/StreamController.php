@@ -20,7 +20,7 @@ class StreamController extends Controller
     }
     
     public function video($token, $file, $file_name) {
-        if (!VideoStream::checkToken($token, $file_name)) {
+        if (!check_token($token, $file_name)) {
             die('Token do not match');
         }
     

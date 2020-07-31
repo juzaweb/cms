@@ -202,7 +202,7 @@ class VideoFiles extends Model
     }
     
     protected function generateStreamUrl($path) {
-        $token = VideoStream::generateToken(basename($path));
+        $token = generate_token(basename($path));
         $file = json_encode([
             'path' => $path,
         ]);

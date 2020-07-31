@@ -21,7 +21,7 @@ class AutoSendMail extends Command
     
     public function handle()
     {
-        \Config::set('mail.host', Configs::getConfig('mail_host'));
+        /*\Config::set('mail.host', Configs::getConfig('mail_host'));
         \Config::set('mail.driver', Configs::getConfig('mail_driver'));
         \Config::set('mail.port', Configs::getConfig('mail_port'));
         \Config::set('mail.username', Configs::getConfig('mail_username'));
@@ -30,7 +30,7 @@ class AutoSendMail extends Command
         \Config::set('mail.from.name', Configs::getConfig('mail_from_name'));
         \Config::set('mail.from.address', Configs::getConfig('mail_from_address'));
     
-        (new \Illuminate\Mail\MailServiceProvider(app()))->register();
+        (new \Illuminate\Mail\MailServiceProvider(app()))->register();*/
         /*$transport = (new \Swift_SmtpTransport('host', 'port'))
             ->setEncryption(null)
             ->setUsername('username')
@@ -49,10 +49,11 @@ class AutoSendMail extends Command
             ->get();
         
         foreach ($rows as $row) {
-            Mail::send('emails.' . $row->template_file, [
+            Mail::send('emails.template', [
                 'content' => $this->mapParams($row->content, $row->params),
             ], function ($message) use ($row) {
-                $message->to(explode(',', $row->emails))->subject($this->mapParams($row->subject, $row->params));
+                $message->to(explode(',', $row->emails))
+                    ->subject($this->mapParams($row->subject, $row->params));
             });
     
             if (Mail::failures()) {

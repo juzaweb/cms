@@ -119,18 +119,4 @@ class VideoStream
         $this->stream();
         $this->end();
     }
-    
-    public static function generateToken($file_name) {
-        $month = date('Y-m');
-        $ip = get_ip_client();
-        $key = config('app.key');
-        return \Hash::make($key . $month . $key . $ip . $file_name);
-    }
-    
-    public static function checkToken($token, $file_name) {
-        if (static::generateToken($file_name) == $token) {
-            return true;
-        }
-        return false;
-    }
 }
