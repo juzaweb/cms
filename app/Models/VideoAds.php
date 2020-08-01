@@ -38,7 +38,6 @@ use Illuminate\Database\Eloquent\Model;
 class VideoAds extends Model
 {
     use UseChangeBy;
-    
     protected $table = 'video_ads';
     protected $primaryKey = 'id';
     protected $fillable = [
@@ -49,4 +48,18 @@ class VideoAds extends Model
         'video_url',
         'status'
     ];
+    
+    public function getVideoUrl() {
+        if (is_url($this->video_url)) {
+            return $this->video_url;
+        }
+        
+        $token = generate_token(basename($this->video_url));
+        $file = json_encode([
+            'path' => $this->video_url,
+        ]);
+    
+        $file = \Crypt::encryptString($file);
+        return route('stream.video', [base64_encode($token), base64_encode($file), basename($this->video_url)]);
+    }
 }

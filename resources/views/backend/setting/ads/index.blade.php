@@ -19,7 +19,7 @@
 
                 <div class="col-md-6">
                     <div class="btn-group float-right">
-                        <a href="{{ route('admin.setting.ads.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                        <a href="{{ route('admin.setting.video_ads') }}" class="btn btn-success text-uppercase">@lang('app.video_ads')</a>
                     </div>
                 </div>
             </div>
@@ -32,13 +32,13 @@
                     <form method="get" class="form-inline" id="form-search">
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputName" class="sr-only">@lang('app.search')</label>
-                            <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
+                            <label for="search" class="sr-only">@lang('app.search')</label>
+                            <input name="search" type="text" id="search" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
                         </div>
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputStatus" class="sr-only">@lang('app.status')</label>
-                            <select name="status" id="inputStatus" class="form-control">
+                            <label for="status" class="sr-only">@lang('app.status')</label>
+                            <select name="status" id="status" class="form-control">
                                 <option value="1">@lang('app.enabled')</option>
                                 <option value="0">@lang('app.disabled')</option>
                             </select>

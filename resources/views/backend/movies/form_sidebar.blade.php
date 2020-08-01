@@ -17,7 +17,7 @@
     <div class="form-thumbnail text-center">
         <input id="poster" type="hidden" name="poster">
         <div id="holder-poster">
-            <img src="{{ $model->getThumbnail() }}" class="w-100">
+            <img src="{{ $model->getPoster() }}" class="w-100">
         </div>
 
         <a href="javascript:void(0)" data-input="poster" data-preview="holder-poster" class="btn btn-primary text-capitalize lfm">

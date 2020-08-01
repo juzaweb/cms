@@ -197,11 +197,15 @@
                 <div class="clearfix"></div>
                 @php($ads = get_ads('player_bottom'))
                 @if($ads)
-                <div class="mymo--notice">
                     <!-- Ads -->
-                    {!! $ads !!}
-                </div>
+                    <div class="mb-3">
+                        {!! $ads !!}
+                    </div>
+
                 @endif
+
+                <div class="mymo--notice">
+                </div>
 
                 <div class="entry-content htmlwrap clearfix">
                     <div class="video-item mymo-entry-box">

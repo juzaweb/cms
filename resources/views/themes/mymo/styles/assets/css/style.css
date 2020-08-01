@@ -104,6 +104,10 @@ ul#f-menu li a {
     padding-left: 0;
 }
 
+.mb-3 {
+    margin-bottom: 6px;
+}
+
 span.btn-success.quick-eps {
     position: absolute;
     bottom: 10px;

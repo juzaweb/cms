@@ -39,7 +39,7 @@
 
                         <div class="form-group">
                             <label class="col-form-label" for="name">@lang('app.name')</label>
-                            <input type="text" name="name" class="form-control" id="name" value="{{ $model->name }}" autocomplete="off" required>
+                            <input type="text" class="form-control" id="name" value="{{ $model->name }}" autocomplete="off" disabled>
                         </div>
 
                         <div class="form-group">
@@ -48,8 +48,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseStatus">@lang('app.status')</label>
-                            <select name="status" id="baseStatus" class="form-control">
+                            <label class="col-form-label" for="status">@lang('app.status')</label>
+                            <select name="status" id="status" class="form-control">
                                 <option value="1" @if($model->status == 1) selected @endif>@lang('app.enabled')</option>
                                 <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
                             </select>
@@ -64,4 +64,12 @@
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    var editor = CodeMirror.fromTextArea(document.getElementById("body"), {
+        lineNumbers: true,
+        extraKeys: {"Ctrl-Space": "autocomplete"},
+        mode: "text/html",
+    });
+</script>
 @endsection

@@ -31,7 +31,6 @@ class Ads extends Model
     protected $table = 'ads';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name',
         'body',
         'status'
     ];

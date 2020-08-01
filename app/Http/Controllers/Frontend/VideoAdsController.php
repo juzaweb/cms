@@ -57,7 +57,7 @@ class VideoAdsController extends Controller
             ->setHeight(100)
             ->setWidth(100)
             ->setBitrate(2500)
-            ->setUrl(image_url($video_ads->video_url));
+            ->setUrl(image_url($video_ads->getVideoUrl()));
     
         $document->toDomDocument();
         return $document;

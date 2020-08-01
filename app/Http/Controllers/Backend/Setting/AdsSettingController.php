@@ -36,7 +36,7 @@ class AdsSettingController extends Controller
         $rows = $query->get();
         
         foreach ($rows as $row) {
-            $row->edit_url = route('admin.ads.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.setting.ads.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -55,11 +55,9 @@ class AdsSettingController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250',
             'body' => 'nullable',
             'status' => 'required|in:0,1',
         ], $request, [
-            'name' => trans('app.name'),
             'body' => trans('app.content'),
             'status' => trans('app.status'),
         ]);
@@ -71,7 +69,7 @@ class AdsSettingController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.ads'),
+            'redirect' => route('admin.setting.ads'),
         ]);
     }
 }

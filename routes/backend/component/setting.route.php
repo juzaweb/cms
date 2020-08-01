@@ -65,13 +65,11 @@ Route::group(['prefix' => 'setting/video-qualities'], function () {
 Route::group(['prefix' => 'setting/ads'], function () {
     Route::get('/', 'Backend\Setting\AdsSettingController@index')->name('admin.setting.ads');
     
-    Route::get('/getdata', 'Backend\AdsSettingController@getData')->name('admin.setting.ads.getdata');
+    Route::get('/getdata', 'Backend\Setting\AdsSettingController@getData')->name('admin.setting.ads.getdata');
     
-    Route::get('/create', 'Backend\AdsSettingController@form')->name('admin.setting.ads.create');
+    Route::get('/edit/{id}', 'Backend\Setting\AdsSettingController@form')->name('admin.setting.ads.edit')->where('id', '[0-9]+');
     
-    Route::get('/edit/{id}', 'Backend\AdsSettingController@form')->name('admin.setting.ads.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\AdsSettingController@save')->name('admin.setting.ads.save');
+    Route::post('/save', 'Backend\Setting\AdsSettingController@save')->name('admin.setting.ads.save');
 });
 
 Route::group(['prefix' => 'setting/video-ads'], function () {
