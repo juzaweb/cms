@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $emails
  * @property string $subject
  * @property string $content
- * @property string $template_file
  * @property string|null $params
  * @property string|null $error
  * @property int $priority
@@ -30,7 +29,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList wherePriority($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereSubject($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereTemplateFile($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\EmailList whereUpdatedAt($value)
  * @mixin \Eloquent
  */

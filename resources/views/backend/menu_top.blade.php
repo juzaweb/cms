@@ -21,13 +21,12 @@
             <span class="dropdown-toggle-text">EN</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" role="menu">
-
             <a class="dropdown-item " href="javascript:void(0)"><span class="text-uppercase font-size-12 mr-1">EN</span>
                 English</a>
         </div>
     </div>
     <div class="cui__topbar__actionsDropdown dropdown mr-4 d-none d-sm-block">
-        <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="0,15">
+        <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="0,15">
             <i class="dropdown-toggle-icon fe fe-bell"></i>
         </a>
         <div class="cui__topbar__actionsDropdownMenu dropdown-menu dropdown-menu-right" role="menu">
@@ -36,20 +35,21 @@
                     <div class="tab-content">
                         <div class="height-300 kit__customScroll">
                             <ul class="list-unstyled">
-
+                            @php
+                                $notifications = Auth::user()->unreadNotifications()
+                                    ->orderBy('id', 'DESC')
+                                    ->limit(5)
+                                    ->get();
+                            @endphp
+                            @foreach($notifications as $notification)
                                 <li class="mb-3">
                                     <div class="d-flex align-items-baseline">
                                         <p class="kit__l2__title">
-                                            Update Status:
-                                            <strong class="text-black">New</strong>
+                                            <a href="">{{ $notification->data['subject'] }}</a>
                                         </p>
-                                        <span class="kit__l2__span">5 min ago</span>
                                     </div>
-                                    <p class="kit__l2__content text-muted">
-                                        Mary has approved your quote.
-                                    </p>
                                 </li>
-
+                            @endforeach
                             </ul>
                         </div>
                     </div>

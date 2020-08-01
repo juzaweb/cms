@@ -23,7 +23,7 @@
                             </div>
 
                             <div class="col-md-6 text-right">
-                                <a href="{{ route('admin.design.editor') }}"><i class="fa fa-edit"></i> @lang('app.editor')</a>
+                                <a href="{{ route('admin.design.editor') }}" data-turbolinks="false"><i class="fa fa-edit"></i> @lang('app.editor')</a>
                             </div>
                         </div>
                     </div>

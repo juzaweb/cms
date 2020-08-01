@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\EmailList;
+use App\Channels\CustomMailChannel;
 use App\Models\MyNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -20,22 +20,22 @@ class SendNotification extends Notification
     
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return [CustomMailChannel::class, 'database'];
     }
     
-    public function toMail($notifiable)
+    public function toCustomMail($notifiable)
     {
         if (in_array($this->myNotification->type, [2, 3])) {
-            $mail = new EmailList();
-            $mail->subject = $this->myNotification->subject;
-            $mail->content = $this->myNotification->content;
-            $mail->emails = $notifiable->email;
-            $mail->params = json_encode([
-                'name' => $notifiable->name,
-                'email' => $notifiable->email
-            ]);
-            return $mail->save();
+            return [
+                'subject' => $this->myNotification->subject,
+                'content' => $this->myNotification->content,
+                'params' => json_encode([
+                    'name' => $notifiable->name,
+                    'email' => $notifiable->email
+                ])
+            ];
         }
+        
         return false;
     }
 

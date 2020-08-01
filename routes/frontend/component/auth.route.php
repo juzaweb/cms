@@ -1,19 +1,27 @@
 <?php
 
-Route::group(['middleware' => ['web', 'guest']], function () {
-    Route::get('/login', 'Frontend\Auth\LoginController@index')->name('login');
+Route::group(['prefix' => 'login', 'middleware' => ['web', 'guest']], function () {
+    Route::get('/', 'Frontend\Auth\LoginController@index')->name('login');
     
-    Route::post('/login', 'Frontend\Auth\LoginController@login')->name('login.submit');
+    Route::post('/', 'Frontend\Auth\LoginController@login')->name('login.submit');
+});
+
+Route::group(['prefix' => 'register', 'middleware' => ['web', 'guest']], function () {
+    Route::get('/', 'Frontend\Auth\RegisterController@index')->name('register');
     
-    Route::get('/register', 'Frontend\Auth\RegisterController@index')->name('register');
+    Route::post('/', 'Frontend\Auth\RegisterController@register')->name('register.submit');
     
-    Route::post('/register', 'Frontend\Auth\RegisterController@register')->name('register.submit');
+    Route::get('/verification/{token}', 'Frontend\Auth\RegisterController@index')->name('register.verification');
+});
+
+Route::group(['prefix' => 'forgot-password', 'middleware' => ['web', 'guest']], function () {
+    Route::post('/', 'Frontend\Auth\ForgotPasswordController@handle')->name('password.forgot.submit');
+});
+
+Route::group(['prefix' => 'reset-password', 'middleware' => ['web', 'guest']], function () {
+    Route::get('/{token}', 'Frontend\Auth\ResetPasswordController@index')->name('password.reset');
     
-    Route::post('/forgot-password', 'Frontend\Auth\ForgotPasswordController@handle')->name('password.forgot.submit');
-    
-    Route::get('/reset-password/{token}', 'Frontend\Auth\ResetPasswordController@index')->name('password.reset');
-    
-    Route::post('/reset-password/{token}', 'Frontend\Auth\ResetPasswordController@handle')->name('password.reset.submit');
+    Route::post('/{token}', 'Frontend\Auth\ResetPasswordController@handle')->name('password.reset.submit');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {

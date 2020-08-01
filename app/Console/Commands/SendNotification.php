@@ -30,11 +30,17 @@ class SendNotification extends Command
                     ->get();
     
                 \Notification::send($users, new \App\Notifications\SendNotification($row));
+                
+                MyNotification::where('id', $row->id)
+                    ->update(['status' => 1]);
             }
             else {
                 $users = User::where('status', '=', 1)
                     ->get();
                 \Notification::send($users, new \App\Notifications\SendNotification($row));
+                
+                MyNotification::where('id', $row->id)
+                    ->update(['status' => 1]);
             }
         }
     }

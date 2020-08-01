@@ -7,5 +7,7 @@ use App\Http\Controllers\Controller;
 
 class UpdateController extends Controller
 {
-    //
+    public function index() {
+        return view('installer.update');
+    }
 }

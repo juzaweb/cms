@@ -26,7 +26,7 @@ function get_ip_client() {
 function generate_token($string) {
     $month = date('Y-m');
     $ip = get_ip_client();
-    $key = config('app.key');
+    $key = 'ADAsd$#5vSD342354BCVByt&%^23vx';
     return \Hash::make($key . $month . $key . $ip . $string);
 }
 
@@ -364,4 +364,8 @@ function get_vimeo_id($url) {
         $id = $regs[3];
     }
     return $id;
+}
+
+function count_unread_notifications() {
+    return Auth::user()->unreadNotifications()->count(['id']);
 }
