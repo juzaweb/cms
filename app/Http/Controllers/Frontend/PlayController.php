@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Genres;
 use App\Models\Movies;
 use App\Models\MovieViews;
+use App\Models\VideoAds;
 use App\Models\VideoFiles;
 use Illuminate\Support\Facades\Cookie;
 
@@ -42,6 +43,7 @@ class PlayController extends Controller
         $file = VideoFiles::find($vid);
         if ($file) {
             $files = $file->getFiles();
+            $ads_exists = VideoAds::where('status', 1)->exists();
             return response()->json([
                 'data' => [
                     'status' => true,
@@ -49,6 +51,7 @@ class PlayController extends Controller
                         'movie' => $movie,
                         'file' => $file,
                         'files' => $files,
+                        'ads_exists' => $ads_exists,
                     ])->render(),
                 ]
             ]);

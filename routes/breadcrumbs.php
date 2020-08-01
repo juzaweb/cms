@@ -9,8 +9,8 @@ Breadcrumbs::for('manager', function ($trail, $parent, $model = null) {
     $trail->push($parent['name'], $parent['url']);
     
     if ($model) {
-        if ($model->name || $model->title) {
-            if ($model->name) {
+        if (isset($model->name) || isset($model->title)) {
+            if (isset($model->name)) {
                 $trail->push($model->name);
             }
             else {

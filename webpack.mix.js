@@ -1,6 +1,6 @@
 const mix = require('laravel-mix');
 
-/*mix.js('resources/js/app.js', 'public/js')
+mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.styles([
@@ -19,6 +19,7 @@ mix.styles([
     'resources/styles/vendors/toastr/toastr.min.css',
     'resources/styles/vendors/nestable2/jquery.nestable.min.css',
     'resources/styles/vendors/accordion/accordion.css',
+    'resources/styles/vendors/codemirror/codemirror.css',
     'resources/styles/components/kit-vendors/bootstrap/css/card.css',
     'resources/styles/components/kit-vendors/bootstrap/css/utilities.css',
     'resources/styles/components/kit-vendors/bootstrap/css/buttons.css',
@@ -101,6 +102,8 @@ mix.combine([
     'resources/styles/vendors/toastr/toastr.min.js',
     'resources/styles/vendors/accordion/accordion.min.js',
     'resources/styles/vendors/nestable2/jquery.nestable.min.js',
+    'resources/styles/vendors/codemirror/codemirror.js',
+    'resources/styles/vendors/codemirror/htmlmixed.js',
     'resources/styles/components/kit-core/index.js',
     'resources/styles/components/cui-layout/menu-left/index.js',
     'resources/styles/components/cui-layout/menu-top/index.js',
@@ -113,7 +116,7 @@ mix.combine([
     'resources/styles/js/LoadBootstrapTable.js',
     'resources/styles/js/form-ajax.js',
     'resources/styles/js/customs.js',
-], 'public/js/backend.js');*/
+], 'public/js/backend.js');
 
 mix.styles([
     'resources/views/themes/mymo/styles/assets/css/bootstrap.min.css',

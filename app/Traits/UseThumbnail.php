@@ -9,10 +9,10 @@ trait UseThumbnail {
         $thumbnail = request()->post('thumbnail');
         static::saving(function ($model) use ($thumbnail) {
             if ($thumbnail) {
-                if ($model->resize_size) {
+                if ($model->resize) {
                     $thumbnail = $model->resizeThumbnail($thumbnail, $model->resize);
                 }
-    
+                
                 $model->thumbnail = $model->cutPathThumbnail($thumbnail);
             }
         });
@@ -36,8 +36,13 @@ trait UseThumbnail {
             $resize_size = explode('x', $resize_size);
             $w = $resize_size[0];
             $h = $resize_size[1];
-            $new_file_path = $this->getDirPathThumbnail($thumbnail) . '/thumbs/' . $this->getFileNameThumbnail($thumbnail);
+            $new_file_path = $this->getDirPathThumbnail($thumbnail) . '/thumbs/';
             
+            if (!is_dir($new_file_path)) {
+                mkdir($new_file_path);
+            }
+            
+            $new_file_path .= $this->getFileNameThumbnail($thumbnail);
             $img = \Image::make($thumb_path);
             $img->fit($w, $h);
             $img->save($new_file_path, 90);
@@ -63,8 +68,8 @@ trait UseThumbnail {
     
     protected function cutPathThumbnail($thumbnail) {
         if ($thumbnail) {
-            $upload_url = \Storage::disk('uploads')->url('/');
-            return str_replace($upload_url, '', $thumbnail);
+            $upload_path = \Storage::disk('uploads')->path('');
+            return str_replace($upload_path, '', $thumbnail);
         }
         
         return null;

@@ -17,13 +17,13 @@ Route::group(['prefix' => 'setting/email-templates'], function () {
     
     Route::get('/getdata', 'Backend\Setting\EmailTemplateController@getData')->name('admin.setting.email_templates.getdata');
     
-    Route::get('/create', 'Backend\Setting\EmailTemplateController@form')->name('admin.setting.email_templates.create');
-    
     Route::get('/edit/{id}', 'Backend\Setting\EmailTemplateController@form')->name('admin.setting.email_templates.edit')->where('id', '[0-9]+');
     
     Route::post('/save', 'Backend\Setting\EmailTemplateController@save')->name('admin.setting.email_templates.save');
     
-    Route::post('/remove', 'Backend\Setting\EmailTemplateController@remove')->name('admin.setting.email_templates.remove');
+    Route::get('/edit-layout', 'Backend\Setting\EmailTemplateController@editLayout')->name('admin.setting.email_templates.edit_layout');
+    
+    Route::post('/edit-layout', 'Backend\Setting\EmailTemplateController@saveLayout')->name('admin.setting.email_templates.edit_layout.save');
 });
 
 Route::group(['prefix' => 'setting/languages'], function () {

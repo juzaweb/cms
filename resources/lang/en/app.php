@@ -307,4 +307,5 @@ return [
     'skip_ad' => 'Skip ad',
     'skip_later_xxs' => 'Skip later xxs',
     'email_does_not_exist' => 'Email does not exist',
+    'edit_layout' => 'Edit layout',
 ];

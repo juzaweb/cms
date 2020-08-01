@@ -169,6 +169,12 @@
             </li>
 
             <li class="cui__menuLeft__item">
+                <a href="{{ route('admin.setting.email_templates') }}" class="cui__menuLeft__item__link">
+                    <span class="cui__menuLeft__item__title">@lang('app.email_templates')</span>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
                 <a href="{{ route('admin.video_qualities') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.video_qualities')</span>
                 </a>

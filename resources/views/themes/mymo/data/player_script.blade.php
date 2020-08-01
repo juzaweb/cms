@@ -107,6 +107,7 @@
                     "linkedin"
                 ]
             },
+            @if($ads_exists)
             advertising: {
                 client: 'vast',
                 admessage: '@lang('app.ads_have_xx_seconds_left')',
@@ -120,8 +121,8 @@
                     },
 
                 }
-
             }
+            @endif
         });
 
         mymoResumeVideo(resumeId, playerInstance);

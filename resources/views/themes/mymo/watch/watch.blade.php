@@ -11,7 +11,9 @@
                             <span>
                                 <a href="/">@lang('app.home')</a> » <span>
                                     <a href="{{ route('genre', [$genre->slug]) }}">{{ $genre->name }}</a> »
-                                    <span class="breadcrumb_last" aria-current="page">{{ $info->name }}</span>
+                                    <a href="{{ route('watch', [$info->slug]) }}">{{ $info->name }}</a> »
+
+                                    <span class="breadcrumb_last" aria-current="page">@lang('app.episode') {{ @\App\Models\VideoFiles::find($vid, ['label'])->label }}</span>
                                 </span>
                             </span>
                         </span>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Ads;
 use App\Models\Countries;
 use App\Models\Genres;
 use App\Models\Menu;
@@ -84,7 +85,7 @@ function get_config(string $key) {
 }
 
 function get_ads(string $key) {
-    $ads = \App\Models\Ads::where('key', '=', $key)
+    $ads = Ads::where('key', '=', $key)
         ->where('status', '=', 1)
         ->first(['body']);
     if (empty($ads)) {

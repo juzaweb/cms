@@ -47,6 +47,7 @@ class WatchController extends Controller
         
         $video = $server->video_files()
             ->orderBy('order', 'asc')
+            ->orderBy('id', 'asc')
             ->first(['id']);
         
         if (empty($video)) {

@@ -35,7 +35,7 @@ class StreamController extends Controller
                 }
                 
                 if (\Storage::disk('uploads')->exists($file->path)) {
-                    $this->localFileStream();
+                    $this->localFileStream($file->path);
                     die();
                 }
             }

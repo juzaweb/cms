@@ -19,8 +19,7 @@
 
                 <div class="col-md-6">
                     <div class="btn-group float-right">
-                        <a href="{{ route('admin.setting.email_templates.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
-                        <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                        <a href="{{ route('admin.setting.email_templates.edit_layout') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.edit_layout')</a>
                     </div>
                 </div>
             </div>
@@ -49,7 +48,7 @@
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
                             <th data-width="10%" data-field="code">@lang('app.code')</th>
-                            <th data-field="subject" data-formatter="title_formatter">@lang('app.subject')</th>
+                            <th data-field="subject" data-formatter="subject_formatter">@lang('app.subject')</th>
                         </tr>
                     </thead>
                 </table>
@@ -60,13 +59,12 @@
 
     <script type="text/javascript">
 
-        function name_formatter(value, row, index) {
+        function subject_formatter(value, row, index) {
             return '<a href="'+ row.edit_url +'">'+ value +'</a>';
         }
 
         var table = new LoadBootstrapTable({
             url: '{{ route('admin.setting.email_templates.getdata') }}',
-            remove_url: '{{ route('admin.setting.email_templates.remove') }}',
         });
     </script>
 @endsection

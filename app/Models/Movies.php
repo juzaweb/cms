@@ -99,7 +99,6 @@ class Movies extends Model
         'name',
         'other_name',
         'description',
-        'thumbnail',
         'type_id',
         'poster',
         'rating',
@@ -133,7 +132,7 @@ class Movies extends Model
             return image_url($this->poster);
         }
         
-        return $this->getThumbnail();
+        return $this->getThumbnail(false);
     }
     
     public function getGenres() {
