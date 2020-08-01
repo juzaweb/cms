@@ -116,11 +116,11 @@
             <i class="cui__menuLeft__item__icon fe fe-layout"></i>
         </span>
         <ul class="cui__menuLeft__navigation" @if(request()->is('admin-cp/design*')) style="display: block" @endif>
-            {{--<li class="cui__menuLeft__item">
+            <li class="cui__menuLeft__item">
                 <a href="{{ route('admin.design.themes') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.themes')</span>
                 </a>
-            </li>--}}
+            </li>
 
             <li class="cui__menuLeft__item">
                 <a href="{{ route('admin.design.menu') }}" class="cui__menuLeft__item__link @if(request()->is('admin-cp/design/menu*')) cui__menuLeft__item--active @endif">
@@ -203,7 +203,7 @@
     <li class="cui__menuLeft__item">
         <a href="{{ route('admin.notification') }}" class="cui__menuLeft__item__link">
             <span class="cui__menuLeft__item__title">@lang('app.notification')</span>
-            <i class="cui__menuLeft__item__icon fe fe-users"></i>
+            <i class="cui__menuLeft__item__icon fe fe-send"></i>
         </a>
     </li>
 
