@@ -1,3 +1,6 @@
+@if(in_array($file->source, ['embed', 'youtube', 'vimeo']))
+    <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="{{ @$files[0]->file }}" allowfullscreen></iframe></div>
+@else
 <script type="text/javascript">
     var resumeId = encodeURI('5d1d90fdec293317a9cd9bb7c444ead9');
     var playerInstance = jwplayer('ajax-player');
@@ -128,6 +131,4 @@
     }
 
 </script>
-
-{{--
-<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="https://drive.google.com/file/d/1Itae9uwt7G7tRgFFCq0IhMTwib8j4ijg/preview" allowfullscreen></iframe></div>--}}
+@endif

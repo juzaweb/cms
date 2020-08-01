@@ -221,7 +221,7 @@
 
                             <ul id="listsv-{{ $server->id }}" class="mymo-list-eps">
                                 @foreach($video_files as $file)
-                                    <li class="mymo-episode mymo-episode-{{ $file->id }} @if($file->id == $vid) active @endif"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="mymo-info-{{ $file->id }} box-shadow mymo-btn" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
+                                    <li class="mymo-episode mymo-episode-{{ $file->id }} @if($file->id == $vid) active @endif"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="mymo-info-{{ $file->id }} box-shadow mymo-btn @if($file->id == $vid) active @endif" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
                                 @endforeach
                             </ul>
 

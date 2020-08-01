@@ -30,7 +30,11 @@ function generate_token($string) {
 }
 
 function check_token($token, $string) {
-    if (generate_token($string) == $token) {
+    $month = date('Y-m');
+    $ip = get_ip_client();
+    $key = config('app.key');
+    
+    if (\Hash::check($key . $month . $key . $ip . $string, $token)) {
         return true;
     }
     return false;
@@ -345,9 +349,18 @@ function child_genres_setting($setting) {
 }
 
 function get_youtube_id($url) {
-    preg_match_all("#(?<=v=|v\/|vi=|vi\/|youtu.be\/)[a-zA-Z0-9_-]{11}#", $url, $matches);
-    if (@$matches[0]) {
-        return $matches[0];
+    preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
+    if (@$match[1]) {
+        return $match[1];
     }
     return false;
+}
+
+function get_vimeo_id($url) {
+    $regs = [];
+    $id = '';
+    if (preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $url, $regs)) {
+        $id = $regs[3];
+    }
+    return $id;
 }

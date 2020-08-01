@@ -47,6 +47,7 @@ class PlayController extends Controller
                     'status' => true,
                     'sources' => view('themes.mymo.data.player_script', [
                         'movie' => $movie,
+                        'file' => $file,
                         'files' => $files,
                     ])->render(),
                 ]

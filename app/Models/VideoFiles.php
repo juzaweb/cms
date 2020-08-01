@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Helpers\GoogleDrive;
-use App\Helpers\VideoStream;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * App\Models\VideoFiles
@@ -99,8 +99,8 @@ class VideoFiles extends Model
     
     protected function getVideoYoutube() {
         return [
-            [
-                'file' => '//www.youtube.com/watch?v=' . get_youtube_id($this->url),
+            (object) [
+                'file' => 'https://www.youtube.com/embed/' . get_youtube_id($this->url),
                 'type' => 'mp4',
             ]
         ];
@@ -108,8 +108,8 @@ class VideoFiles extends Model
     
     protected function getVideoVimeo() {
         return [
-            [
-                'file' => $this->url,
+            (object) [
+                'file' => 'https://player.vimeo.com/video/' . get_vimeo_id($this->url),
                 'type' => 'mp4',
             ]
         ];
@@ -198,7 +198,25 @@ class VideoFiles extends Model
     
     protected function getVideoGoogleDrive() {
         $gdrive = new GoogleDrive($this->url);
-        return $gdrive->getLinkPlay();
+        $play_links = $gdrive->getLinkPlay();
+        
+        $files = [];
+        foreach ($play_links as $link) {
+            $str_rand = Str::random(5);
+            $token = generate_token($str_rand . 'play.mp4');
+            $file = json_encode([
+                'path' => $this->url,
+            ]);
+            $file = \Crypt::encryptString($file);
+            
+            $files[] = (object) [
+                'label' => $link->label,
+                'type' => 'mp4',
+                'file' => $this->getStreamLink($token, $file, $str_rand . 'play.mp4'),
+            ];
+        }
+        
+        return $files;
     }
     
     protected function generateStreamUrl($path) {
@@ -209,6 +227,10 @@ class VideoFiles extends Model
         
         $file = \Crypt::encryptString($file);
         
-        return route('stream.video', [$token, $file, basename($path)]);
+        return $this->getStreamLink($token, $file, basename($path));
+    }
+    
+    protected function getStreamLink($token, $file, $name) {
+        return route('stream.video', [base64_encode($token), base64_encode($file), $name]);
     }
 }

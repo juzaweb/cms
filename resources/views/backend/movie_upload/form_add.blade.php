@@ -23,7 +23,7 @@
                     <option value="upload">Upload</option>
                     <option value="youtube">Youtube</option>
                     <option value="vimeo">Vimeo</option>
-                    <option value="embed">Google Drive</option>
+                    <option value="gdrive">Google Drive</option>
                     <option value="mp4" selected>MP4 From URL</option>
                     <option value="mkv">MKV From URL</option>
                     <option value="webm">WEBM From URL</option>

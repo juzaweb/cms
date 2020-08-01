@@ -80,6 +80,7 @@
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
                             <th data-field="label" data-width="10%">@lang('app.label')</th>
                             <th data-field="url">@lang('app.url')</th>
+                            <th data-field="source" data-width="10%">@lang('app.source')</th>
                             <th data-field="order" data-width="10%" data-align="center">@lang('app.order')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                             <th data-width="15%" data-field="action" data-align="center" data-formatter="action_formatter">@lang('app.action')</th>
