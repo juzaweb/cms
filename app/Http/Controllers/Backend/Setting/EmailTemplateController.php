@@ -40,6 +40,7 @@ class EmailTemplateController extends Controller
         $query = EmailTemplates::query();
         $query->select([
             'id',
+            'code',
             'subject',
             'content',
         ]);

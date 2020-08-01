@@ -33,18 +33,15 @@
                     <div class="col-md-12">
 
                         <div class="form-group">
-                            <label class="col-form-label" for="name">@lang('app.name')</label>
+                            <label class="col-form-label" for="name">@lang('app.subject')</label>
 
-                            <input type="text" name="name" class="form-control" id="name" value="{{ $model->name }}" autocomplete="off" required>
+                            <input type="text" name="subject" class="form-control" id="subject" value="{{ $model->subject }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label class="col-form-label" for="content">@lang('app.content')</label>
                             <textarea class="form-control" name="content" id="content" rows="6">{{ $model->content }}</textarea>
                         </div>
-
-
-
                     </div>
 
                 </div>
@@ -54,4 +51,12 @@
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    var editor = CodeMirror.fromTextArea(document.getElementById("content"), {
+        lineNumbers: true,
+        extraKeys: {"Ctrl-Space": "autocomplete"},
+        mode: "text/html",
+    });
+</script>
 @endsection
