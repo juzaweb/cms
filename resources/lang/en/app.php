@@ -14,7 +14,7 @@ return [
   'name' => 'Name',
   'other_name' => 'Other name',
   'email' => 'Email',
-  'is_admin' => 'Is Admin',
+  'permission' => 'Permission',
   'thumbnail' => 'Thumbnail',
   'description' => 'Description',
   'content' => 'Content',
@@ -309,4 +309,7 @@ return [
     'email_does_not_exist' => 'Email does not exist',
     'edit_layout' => 'Edit layout',
     'actived' => 'Actived',
+    'admin' => 'Admin',
+    'user' => 'User',
+    'no_notifications' => 'No notifications',
 ];

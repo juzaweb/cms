@@ -33,26 +33,36 @@
                     <div class="col-md-12">
 
                         <div class="form-group">
-                            <label class="col-form-label" for="name">@lang('app.name')</label>
+                            <label class="col-form-label" for="name">@lang('app.name') <span class="text-danger">*</span></label>
 
                             <input type="text" name="name" class="form-control" id="name" value="{{ $model->name }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
                             <label class="col-form-label" for="users">@lang('app.send_for')</label>
-                            <select name="users[]" id="users" class="form-control load-users" data-placeholder="--- @lang('app.users') ---" multiple></select>
+                            <select name="users[]" id="users" class="form-control load-users" data-placeholder="--- @lang('app.users') ---" multiple>
+                                @if($users)
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
                             <input type="checkbox" class="all-users"> @lang('app.all_users')
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="subject">@lang('app.subject')</label>
-
+                            <label class="col-form-label" for="subject">@lang('app.subject') <span class="text-danger">*</span></label>
                             <input type="text" name="subject" class="form-control" id="subject" value="{{ $model->subject }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="content">@lang('app.content')</label>
+                            <label class="col-form-label" for="content">@lang('app.content') <span class="text-danger">*</span></label>
                             <textarea class="form-control" name="content" id="content" rows="6">{{ $model->content }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="subject">@lang('app.url')</label>
+                            <input type="text" name="url" class="form-control" id="url" value="{{ $model->url }}" autocomplete="off">
                         </div>
 
                         <div class="form-group">

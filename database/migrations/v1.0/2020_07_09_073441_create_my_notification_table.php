@@ -14,6 +14,7 @@ class CreateMyNotificationTable extends Migration
             $table->text('users')->nullable();
             $table->string('subject', 300);
             $table->text('content');
+            $table->string('url', 300);
             $table->tinyInteger('type')->default(1)->comment('1: Notify, 2: Email, 3: All');
             $table->tinyInteger('status')->default(2)->comment('0: Cancel, 1: Sended, 2: Sending, 3: Pause');
             $table->timestamps();

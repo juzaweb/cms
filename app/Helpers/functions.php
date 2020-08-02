@@ -33,7 +33,7 @@ function generate_token($string) {
 function check_token($token, $string) {
     $month = date('Y-m');
     $ip = get_ip_client();
-    $key = config('app.key');
+    $key = 'ADAsd$#5vSD342354BCVByt&%^23vx';
     
     if (\Hash::check($key . $month . $key . $ip . $string, $token)) {
         return true;

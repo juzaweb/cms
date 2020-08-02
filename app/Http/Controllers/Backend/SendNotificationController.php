@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MyNotification;
@@ -53,9 +54,12 @@ class SendNotificationController extends Controller
     
     public function form($id = null) {
         $model = MyNotification::firstOrNew(['id' => $id]);
+        $users = User::whereIn('id', explode(',', $model->users))
+            ->get(['id', 'name']);
         return view('backend.notification.form', [
+            'title' => $model->name ?: trans('app.add_new'),
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'users' => $users,
         ]);
     }
     

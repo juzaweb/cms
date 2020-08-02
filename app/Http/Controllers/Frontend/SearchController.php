@@ -33,6 +33,7 @@ class SearchController extends Controller
             'tv_series',
             'current_episode',
             'max_episode',
+            'created_at',
         ]);
         
         $query->where('status', '=', 1);

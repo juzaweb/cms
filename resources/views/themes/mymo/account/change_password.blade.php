@@ -8,12 +8,14 @@
                 <div class="col-xs-8 hidden-xs">
                     <div class="yoast_breadcrumb"><span>
                             <span>
-                                <a href="">@lang('app.home')</a> »
-                                <span class="breadcrumb_last" aria-current="page">{{ $user->name }}</span>
+                                <a href="{{ route('home') }}">@lang('app.home')</a> »
+                                <a href="{{ route('account') }}">{{ $user->name }}</a> »
+                                <span class="breadcrumb_last" aria-current="page">@lang('app.change_password')</span>
                             </span>
                         </span>
                     </div>
                 </div>
+
                 <div class="col-xs-4 text-right">
                     <a href="javascript:;" id="expand-ajax-filter">@lang('app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                 </div>
@@ -25,7 +27,7 @@
         </div>
     </div>
 
-    @include('themes.mymo.profile.sidebar')
+    @include('themes.mymo.account.sidebar')
 
     <main id="main-contents" class="col-xs-12 col-sm-12 col-md-12">
         <section>

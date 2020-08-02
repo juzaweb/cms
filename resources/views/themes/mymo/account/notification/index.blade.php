@@ -9,7 +9,8 @@
                         <div class="yoast_breadcrumb"><span>
                             <span>
                                 <a href="{{ route('home') }}">@lang('app.home')</a> »
-                                <span class="breadcrumb_last" aria-current="page">{{ $user->name }}</span>
+                                <a href="{{ route('account') }}">{{ $user->name }}</a> »
+                                <span class="breadcrumb_last" aria-current="page">@lang('app.notification')</span>
                             </span>
                         </span>
                         </div>
@@ -25,7 +26,7 @@
             </div>
         </div><!-- end panel-default -->
 
-        @include('themes.mymo.profile.sidebar')
+        @include('themes.mymo.account.sidebar')
 
         <main id="main-contents" class="col-xs-12 col-sm-12 col-md-12">
             <section>
@@ -40,9 +41,19 @@
                         <tr>
                             <th width="5%">#</th>
                             <th>@lang('app.subject')</th>
-                            <th width="15%">@lang('app.created_at')</th>
+                            <th width="20%">@lang('app.created_at')</th>
                         </tr>
                     </thead>
+
+                    <tbody>
+                        @foreach($notifications as $index => $notification)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td><a href="{{ route('account.notification.detail', [$notification->id]) }}" @if(empty($notification->read_at)) style="font-weight: bold" @endif>{{ $notification->data['subject'] }}</a></td>
+                            <td>{{ $notification->created_at->format('Y-m-d H:i') }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </section>
 

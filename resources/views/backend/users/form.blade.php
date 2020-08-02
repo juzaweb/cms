@@ -32,27 +32,27 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
-                            <label class="col-form-label" for="baseName">@lang('app.name')</label>
+                            <label class="col-form-label" for="name">@lang('app.name')</label>
 
-                            <input type="text" name="name" class="form-control" id="baseName" value="{{ $model->name }}" autocomplete="off" required>
+                            <input type="text" name="name" class="form-control" id="name" value="{{ $model->name }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseEmail">@lang('app.email')</label>
-                            <input type="text" class="form-control" id="baseEmail" value="{{ $model->email }}" autocomplete="off" @if($model->id) disabled @else name="email" required @endif>
+                            <label class="col-form-label" for="email">@lang('app.email')</label>
+                            <input type="text" class="form-control" id="email" value="{{ $model->email }}" autocomplete="off" @if($model->id) disabled @else name="email" required @endif>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="is_admin">@lang('app.is_admin')</label>
+                            <label class="col-form-label" for="is_admin">@lang('app.permission')</label>
                             <select name="is_admin" id="is_admin" class="form-control" required>
-                                <option value="0" @if($model->type == 0) selected @endif>@lang('app.no')</option>
-                                <option value="1" @if($model->type == 1) selected @endif>@lang('app.yes')</option>
+                                <option value="0" @if($model->is_admin == 0) selected @endif>@lang('app.user')</option>
+                                <option value="1" @if($model->is_admin == 1) selected @endif>@lang('app.admin')</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseStatus">@lang('app.status')</label>
-                            <select name="status" id="baseStatus" class="form-control" required>
+                            <label class="col-form-label" for="status">@lang('app.status')</label>
+                            <select name="status" id="status" class="form-control" required>
                                 <option value="1" @if($model->status == 1) selected @endif>@lang('app.enabled')</option>
                                 <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
                             </select>

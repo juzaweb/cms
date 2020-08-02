@@ -9,7 +9,9 @@
                         <div class="yoast_breadcrumb"><span>
                             <span>
                                 <a href="{{ route('home') }}">@lang('app.home')</a> »
-                                <span class="breadcrumb_last" aria-current="page">{{ $user->name }}</span>
+                                <a href="{{ route('account') }}">{{ $user->name }}</a> »
+                                <a href="{{ route('account.notification') }}">@lang('app.notification')</a> »
+                                <span class="breadcrumb_last" aria-current="page">{{ $notification->data['subject'] }}</span>
                             </span>
                         </span>
                         </div>
@@ -25,7 +27,7 @@
             </div>
         </div><!-- end panel-default -->
 
-        @include('themes.mymo.profile.sidebar')
+        @include('themes.mymo.account.sidebar')
 
         <main id="main-contents" class="col-xs-12 col-sm-12 col-md-12">
             <section>
@@ -35,7 +37,7 @@
                     </h3>
                 </div>
 
-
+                {!! @$notification->data['content'] !!}
             </section>
 
             <div class="clearfix"></div>

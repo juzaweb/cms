@@ -26,7 +26,7 @@
     </div><!-- end panel-default -->
 
 
-    @include('themes.mymo.profile.sidebar')
+    @include('themes.mymo.account.sidebar')
 
     <main id="main-contents" class="col-xs-12 col-sm-12 col-md-12">
         <section>

@@ -23,8 +23,13 @@ class NotificationController extends Controller
         $notification = $user->notifications()
             ->where('id', '=', $id)
             ->firstOrFail();
+        $notification->update(['read_at' => now()]);
         
-        return view('themes.mymo.profile.notification.detail', [
+        if (isset($notification->data['url'])) {
+            return redirect()->to($notification->data['url']);
+        }
+        
+        return view('themes.mymo.account.notification.detail', [
             'title' => trans('app.notification'),
             'user' => $user,
             'notification' => $notification

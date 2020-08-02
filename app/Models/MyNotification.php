@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $users
  * @property string $subject
  * @property string $content
+ * @property string $url
  * @property int $type 1: Notify, 2: Email, 3: All
  * @property int $status 0: Cancel, 1: Sended, 2: Sending, 3: Pause
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MyNotification whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MyNotification whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MyNotification whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MyNotification whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\MyNotification whereUsers($value)
  * @mixin \Eloquent
  */
@@ -38,6 +40,7 @@ class MyNotification extends Model
         'name',
         'subject',
         'content',
+        'url',
         'type',
     ];
 }

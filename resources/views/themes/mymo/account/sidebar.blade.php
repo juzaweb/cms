@@ -32,7 +32,7 @@
                         <a href="{{ route('account') }}"><i class="hl-user"></i> @lang('app.profile')</a>
                     </li>
 
-                    <li @if(request()->is('account/notification')) class="active" @endif>
+                    <li @if(request()->is('account/notification*')) class="active" @endif>
                         <a href="{{ route('account.notification') }}"><i class="hl-bell"></i> @lang('app.notification')</a>
                     </li>
 

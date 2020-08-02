@@ -39,17 +39,22 @@
                                 $notifications = Auth::user()->unreadNotifications()
                                     ->orderBy('id', 'DESC')
                                     ->limit(5)
-                                    ->get();
+                                    ->get(['id', 'data']);
                             @endphp
-                            @foreach($notifications as $notification)
-                                <li class="mb-3">
-                                    <div class="d-flex align-items-baseline">
-                                        <p class="kit__l2__title">
-                                            <a href="">{{ $notification->data['subject'] }}</a>
-                                        </p>
-                                    </div>
-                                </li>
-                            @endforeach
+
+                                @if($notifications->isEmpty())
+                                    <p>@lang('app.no_notifications')</p>
+                                @else
+                                    @foreach($notifications as $notification)
+                                        <li class="mb-3">
+                                            <div class="d-flex align-items-baseline">
+                                                <p class="kit__l2__title">
+                                                    <a href="{{ route('account.notification.detail', [$notification->id]) }}" data-turbolinks="false">{{ $notification->data['subject'] }}</a>
+                                                </p>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
