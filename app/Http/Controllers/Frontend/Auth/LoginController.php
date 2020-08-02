@@ -21,6 +21,12 @@ class LoginController extends Controller
             'password' => trans('app.password'),
         ]);
         
+        if (get_config('google_recaptcha')) {
+            $this->validateRequest([
+                'recaptcha' => 'required|recaptcha',
+            ], $request);
+        }
+        
         $user_exists = User::where('email', '=', $request->post('email'))
             ->where('status', '=', 1)
             ->exists();

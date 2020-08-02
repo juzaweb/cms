@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $mainPath = database_path('migrations');
         $directories = glob($mainPath . '/*' , GLOB_ONLYDIR);
         $paths = array_merge([$mainPath], $directories);
-    
+        \Validator::extend('recaptcha', 'App\Validators\Recaptcha@validate');
         $this->loadMigrationsFrom($paths);
     }
 }

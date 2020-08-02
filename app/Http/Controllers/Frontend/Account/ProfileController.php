@@ -10,13 +10,10 @@ class ProfileController extends Controller
 {
     public function index() {
         $viewed = Cookie::get('viewed');
-        $recently_visited = [];
-        if ($viewed) {
-            $viewed = json_decode($viewed, true);
-            $recently_visited = Movies::whereIn('id', $viewed)
-                ->where('status', '=', 1)
-                ->paginate(5);
-        }
+        $viewed = $viewed ? json_decode($viewed, true) : [0];
+        $recently_visited = Movies::whereIn('id', $viewed)
+            ->where('status', '=', 1)
+            ->paginate(5);
         
         return view('themes.mymo.account.index', [
             'title' => trans('app.profile'),

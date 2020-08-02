@@ -28,7 +28,7 @@ class SystemSettingController extends Controller
             'google_recaptcha_key' => 'required_if:google_recaptcha,!=,0|string|max:300',
             'google_recaptcha_secret' => 'required_if:google_recaptcha,!=,0|string|max:300',
             'player_watermark' => 'required|in:0,1',
-            'player_watermark_logo' => 'required_if:player_watermark,!=,0',
+            'player_watermark_logo' => 'nullable',
         ], $request, [
             'title' => trans('app.home_title'),
             'description' => trans('app.home_description'),
@@ -41,6 +41,8 @@ class SystemSettingController extends Controller
             'google_recaptcha' => trans('app.google_recaptcha'),
             'google_recaptcha_key' => trans('app.google_recaptcha_key'),
             'google_recaptcha_secret' => trans('app.google_recaptcha_secret'),
+            'player_watermark' => trans('app.player_watermark'),
+            'player_watermark_logo' => trans('app.player_watermark_logo'),
         ]);
         
         $configs = $request->only(Configs::getConfigs());

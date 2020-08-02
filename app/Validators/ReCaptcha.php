@@ -11,7 +11,7 @@ class ReCaptcha
             'https://www.google.com/recaptcha/api/siteverify',
             ['form_params'=>
                 [
-                    'secret'=> env('GOOGLE_RECAPTCHA_SECRET'),
+                    'secret'=> get_config('google_recaptcha_secret'),
                     'response'=> $value
                 ]
             ]
