@@ -11,3 +11,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['web', 'auth']], function 
     
     Route::post('/change-password', 'Frontend\Account\ChangePasswordController@handle')->name('account.change_password.handle');
 });
+
+Route::get('account/get-notifications', 'Frontend\Account\NotificationController@getUnreadNotifications')->name('account.notifications');
+
+Route::post('account/get-notifications', 'Frontend\Account\NotificationController@readAllNotifications')->name('account.notifications.read_all');

@@ -311,5 +311,13 @@ return [
     'actived' => 'Actived',
     'admin' => 'Admin',
     'user' => 'User',
+    'login_with' => 'Login with',
+    'register_with' => 'Register with',
+    'reset_captcha' => 'Reset captcha',
+    'forgot_password' => 'Forgot password',
     'no_notifications' => 'No notifications',
+    'already_have_an_account' => 'Already have an account?',
+    'nothing_found' => 'Nothing found!',
+    'remove_all' => 'Remove all',
+    'read_all' => 'Read all',
 ];

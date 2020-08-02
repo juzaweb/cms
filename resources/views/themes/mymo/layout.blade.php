@@ -35,13 +35,21 @@
         /* <![CDATA[ */
         var mymo = {
             "ajax_search_url": "{{ route('search') }}",
+            "ajax_notification_url": "{{ route('account.notifications') }}",
+            "ajax_remove_all_notification_url": "{{ route('account.notifications.read_all') }}",
             "ajax_popular_movies_url": "{{ route('movies.popular') }}",
             "ajax_get_movies_by_genre_url": "{{ route('movies.genre') }}",
             "light_mode":"0",
             "light_mode_btn":"1",
             "ajax_live_search":"1",
             "sync":null,
-            "db_redirect_url":"{{ url()->current() }}"
+            "db_redirect_url":"{{ url()->current() }}",
+            "languages": {
+                'notification': '@lang('app.notification')',
+                'nothing_found': '@lang('app.nothing_found')',
+                'remove_all': '@lang('app.remove_all')',
+                'bookmark': '@lang('app.bookmark')',
+            }
         };
         /* ]]> */
     </script>
@@ -54,21 +62,21 @@
             "forgot_password_url": "{{ route('register.submit') }}",
             "redirecturl":"{{ url()->current() }}",
             "loadingmessage":"@lang('app.sending_user_info_please_wait')",
-            "sitekey":"",
+            "sitekey":"{{ get_config('google_recaptcha_key') }}",
             "languages":{
                 "login":"@lang('app.login')",
                 "register":"@lang('app.register')",
-                "forgotpassword":"B\u1ea1n qu\u00ean m\u1eadt kh\u1ea9u?",
-                "already_account":"Already have an account?",
+                "forgotpassword":"@lang('app.forgot_password')?",
+                "already_account":"@lang('app.already_have_an_account')",
                 "create_account":"@lang('app.create_account')",
-                "reset_captcha":"Reset captcha",
+                "reset_captcha":"@lang('app.reset_captcha')",
                 "username":"@lang('app.name')",
                 "email":"@lang('app.email')",
                 "username_email":"@lang('app.email')",
                 "password":"@lang('app.password')",
                 "reset_password":"@lang('app.reset_password')",
-                "login_with":"",
-                "register_with":"",
+                "login_with":"@lang('app.login_with')",
+                "register_with":"@lang('app.register_with')",
                 "or":"@lang('app.or')",
                 "apparently_there_are_no_posts_to_show": "@lang('app.apparently_there_are_no_posts_to_show')"
             }

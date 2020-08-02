@@ -5531,6 +5531,155 @@ a .hl-dot-3 {
     right: 0
 }
 
+.mymo-notification-lists {
+    padding: 0 12px;
+    margin: 15px 0;
+    max-height: 195px;
+    overflow-x: hidden;
+    border: 1px solid #1b2b3a;
+    border-radius: 3px
+}
+
+.mymo-notification-lists li {
+    padding: 10px 0;
+    list-style: none;
+    border-bottom: 1px solid #1d2731;
+    display: inline-block;
+    width: 100%;
+    position: relative
+}
+
+.mymo-notification-lists li:last-child {
+    border: none
+}
+
+.mymo-notification-lists li img {
+    width: 45px;
+    height: 45px;
+    float: left;
+    margin-right: 10px;
+    border-radius: 3px
+}
+
+.mymo-notification-lists li .bookmark-title {
+    color: #d4d4d4;
+    display: block;
+    font-size: 12px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: vertical
+}
+
+.mymo-notification-lists li .bookmark-date {
+    font-size: 11px
+}
+
+.mymo-notification-lists li .remove-bookmark {
+    background: #a04444;
+    padding: 3px 8px;
+    line-height: 17px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #fff
+}
+
+.mymo-notification-lists li .remove-bookmark:hover {
+    background: #b32020
+}
+
+#get-notification {
+    background: #224361;
+    display: inline-block;
+    line-height: 20px;
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: .4s all;
+    margin-top: 1px;
+    margin-right: 15px;
+    background: linear-gradient(to right, #063458, #1c5e94)
+}
+
+#get-notification:hover {
+    background: #337ab7
+}
+
+#get-notification span.count {
+    background: #f11b1b;
+    padding: 3px 6px;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 20px;
+    margin-left: 10px
+}
+
+.mymo-notification-box {
+    background: #12171b;
+    padding: 15px;
+    margin-top: 7px;
+    width: 85%;
+    position: absolute;
+    border: 1px solid #234;
+    text-align: left;
+    z-index: 99;
+    border-radius: 5px
+}
+
+.mymo-notification-box::after {
+    content: '';
+    border-bottom: 8px solid #12171b;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    top: -8px;
+    left: 45%;
+    position: absolute
+}
+
+.mymo-notification-box .section-bar {
+    margin-top: 0
+}
+
+.mymo-notification-box .remove-all-notification {
+    background: #a04444;
+    cursor: pointer;
+    padding: 1px 10px;
+    font-size: 12px;
+    color: #fff;
+    position: absolute;
+    top: 3px;
+    right: 0;
+    border-radius: 3px
+}
+
+.mymo-notification-box .remove-all-notification:hover {
+    background: #8c2828
+}
+
+.mymo-notification-box ul {
+    margin-bottom: 0
+}
+
+.get-notification-on-mobile {
+    position: relative
+}
+
+.get-notification-on-mobile span.count {
+    background: #ea3a3a;
+    color: #fff;
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 100%;
+    line-height: 15px;
+    position: absolute;
+    top: -2px;
+    right: 0
+}
+
 .apsl-error {
     position: absolute;
     background: #29567f;

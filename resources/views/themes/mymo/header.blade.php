@@ -27,7 +27,7 @@
                     <span class="count">0</span>
                 </div>
 
-                <div id="get-bookmark" class="box-shadow">
+                <div id="get-notification" class="box-shadow">
                     <i class="hl-bell"></i>
                     <span class="count">0</span>
                 </div>
@@ -56,7 +56,14 @@
                         @endif
                     </div>
                 </div>
-                <div id="bookmark-list" class="hidden bookmark-list-on-pc"><ul style="margin: 0;"></ul></div>
+
+                <div id="bookmark-list" class="hidden bookmark-list-on-pc">
+                    <ul style="margin: 0;"></ul>
+                </div>
+
+                <div id="notification-list" class="hidden notification-list-on-pc">
+                    <ul style="margin: 0;"></ul>
+                </div>
             </div>
 
         </div>
