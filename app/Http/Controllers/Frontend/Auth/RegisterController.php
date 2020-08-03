@@ -24,14 +24,18 @@ class RegisterController extends Controller
         $this->validateRequest([
             'name' => 'required|string|max:250',
             'email' => 'required|email|unique:users,email|max:250',
-            'password' => 'required|string|max:32|min:6|confirmed',
-            'password_confirmation' => 'required|string|max:32|min:6'
+            'password' => 'required|string|max:32|min:6',
         ], $request, [
             'name' => trans('app.name'),
             'email' => trans('app.email'),
             'password' => trans('app.password'),
-            'password_confirmation' => trans('app.confirm_password'),
         ]);
+    
+        if (get_config('google_recaptcha')) {
+            $this->validateRequest([
+                'recaptcha' => 'required|recaptcha',
+            ], $request);
+        }
         
         $model = new User();
         $model->fill($request->all());
@@ -39,6 +43,7 @@ class RegisterController extends Controller
         
         if (get_config('user_verification')) {
             $model->setAttribute('status', 2);
+            $model->setAttribute('verification_token', generate_token($model->email));
         }
         
         $model->save();

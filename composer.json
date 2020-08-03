@@ -47,7 +47,9 @@
           "app/Helpers/functions.php",
           "app/Helpers/VideoStream.php",
           "app/Helpers/UrlVideoStream.php",
-          "app/Helpers/GoogleDrive.php"
+          "app/Helpers/GoogleDrive.php",
+          "app/Helpers/TmdbConfiguration.php",
+          "app/Helpers/TmdbApi.php"
         ],
         "psr-4": {
             "App\\": "app/"

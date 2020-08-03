@@ -20,6 +20,6 @@ class VerificationController extends Controller
         
         \Auth::loginUsingId($user->id);
     
-        return view();
+        return view('themes.mymo.auth.verified_success');
     }
 }

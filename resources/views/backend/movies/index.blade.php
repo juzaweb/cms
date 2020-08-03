@@ -18,9 +18,15 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="btn-group float-right">
-                        <a href="{{ route('admin.movies.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
-                        <button class="btn btn-danger" type="button"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                    <div class="float-right">
+                        <div class="btn-group">
+                            <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#tmdb-modal"><i class="fa fa-plus"></i> @lang('app.add_from_tmdb')</a>
+                        </div>
+
+                        <div class="btn-group">
+                            <a href="{{ route('admin.movies.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <button class="btn btn-danger" type="button"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,4 +114,6 @@
         remove_url: '{{ route('admin.movies.remove') }}',
     });
 </script>
+
+@include('backend.movies.form_tmdb')
 @endsection

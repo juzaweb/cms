@@ -40,6 +40,8 @@
             <div class="mymo_box">
                 <div class="col-sm-4">
                     <form action="{{ route('account.change_password.handle') }}" method="post" class="form-ajax">
+                        @csrf
+
                         <label>@lang('app.current_password')</label>
                         <div class="form-group pass_show">
                             <input type="password" class="form-control" name="current_password" placeholder="@lang('app.current_password')">

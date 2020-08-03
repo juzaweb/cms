@@ -17,11 +17,7 @@ class RegisterSuccessListener
     {
         if (get_config('user_verification')) {
             $user = User::where('email', $event->user->email)
-                ->first();
-            $token = generate_token($event->user->email);
-            $user->update([
-                'verification_token' => $token,
-            ]);
+                ->first(['verification_token']);
             
             $mail = new EmailList();
             $mail->emails = $event->user->email;
@@ -29,7 +25,7 @@ class RegisterSuccessListener
             $mail->params = json_encode([
                 'name' => $event->user->name,
                 'email' => $event->user->email,
-                'url' => route('register.verification', [$token]),
+                'url' => route('register.verification', [$user->verification_token]),
             ]);
             $mail->sendByTemplate('user_verification');
         }

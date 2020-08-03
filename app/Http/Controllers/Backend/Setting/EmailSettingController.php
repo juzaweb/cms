@@ -21,8 +21,9 @@ class EmailSettingController extends Controller
             'mail_host' => 'required|string|max:300',
             'mail_driver' => 'required|string|max:300',
             'mail_port' => 'required|string|max:300',
-            'mail_username' => 'required|string|max:300',
-            'mail_password' => 'required|string|max:300',
+            'mail_username' => 'nullable|string|max:300',
+            'mail_password' => 'nullable|string|max:300',
+            'mail_encryption' => 'nullable|string|max:300',
             'mail_from_name' => 'required|string|max:300',
             'mail_from_address' => 'required|string|max:300',
         ], $request, [
@@ -31,6 +32,7 @@ class EmailSettingController extends Controller
             'mail_port' => trans('app.mail_port'),
             'mail_username' => trans('app.mail_username'),
             'mail_password' => trans('app.mail_password'),
+            'mail_encryption' => trans('app.mail_encryption'),
             'mail_from_name' => trans('app.mail_from_name'),
             'mail_from_address' => trans('app.mail_from_address'),
         ]);
@@ -41,18 +43,27 @@ class EmailSettingController extends Controller
             'mail_port',
             'mail_username',
             'mail_password',
+            'mail_encryption',
             'mail_from_name',
             'mail_from_address',
         ]);
         
-        foreach ($configs as $key => $config) {
-            Configs::setConfig($key, $config);
+        try {
+            foreach ($configs as $key => $config) {
+                Configs::setConfig($key, (string) $config);
+            }
+        }
+        catch (\Exception $exception) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $exception->getMessage(),
+            ]);
         }
         
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.setting.comment'),
+            'redirect' => route('admin.setting.email'),
         ]);
     }
     
@@ -68,16 +79,16 @@ class EmailSettingController extends Controller
         \Config::set('mail.port', Configs::getConfig('mail_port'));
         \Config::set('mail.username', Configs::getConfig('mail_username'));
         \Config::set('mail.password', Configs::getConfig('mail_password'));
+        \Config::set('mail.encryption', Configs::getConfig('mail_encryption'));
         \Config::set('mail.from.name', Configs::getConfig('mail_from_name'));
         \Config::set('mail.from.address', Configs::getConfig('mail_from_address'));
     
         (new \Illuminate\Mail\MailServiceProvider(app()))->register();
         
         $emails = [$request->post('email')];
-        $template = EmailTemplates::findCode('email_test');
-        $subject = $template->subject;
+        $subject = 'Test email';
         
-        Mail::send('emails.email_test', function ($message) use ($emails, $subject) {
+        Mail::send('emails.email_test', [], function ($message) use ($emails, $subject) {
             $message->to($emails)->subject($subject);
         });
     

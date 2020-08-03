@@ -1,5 +1,7 @@
 @extends('layouts.backend')
 
+@section('title', trans('app.dashboard'))
+
 @section('content')
     <div class="cui__utils__content">
         <div class="row">

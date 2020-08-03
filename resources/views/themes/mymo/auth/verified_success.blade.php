@@ -28,24 +28,11 @@
 
         <main class="col-xs-12 col-sm-12 col-md-12">
             <div class="post-content panel-body text-center">
-                <form action="{{ route('password.reset.submit') }}" method="post">
-                    @csrf
+                <h4 class="title-info">@lang('app.verified_success')</h4>
+                <p>@lang('app.verified_success_description')</p>
+                <a href="{{ route('account') }}" title="@lang('app.profile')" class="btn btn-primary">@lang('app.profile')</a>
 
-                    <label>@lang('app.new_password')</label>
-                    <div class="form-group pass_show">
-                        <input type="password" class="form-control" name="password" placeholder="@lang('app.new_password')">
-                    </div>
-
-                    <label>@lang('app.confirm_password')</label>
-                    <div class="form-group pass_show">
-                        <input type="password" class="form-control" name="password_confirmation" placeholder="@lang('app.confirm_password')">
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">@lang('app.update')</button>
-                    </div>
-
-                </form>
+                <a href="/" title="@lang('app.back_to_home')" class="btn btn-primary">@lang('app.back_to_home')</a>
             </div>
         </main>
     </div>

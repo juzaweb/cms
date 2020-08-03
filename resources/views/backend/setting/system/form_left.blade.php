@@ -41,6 +41,13 @@
     <input id="banner" class="form-control" type="hidden" name="banner" value="{{ get_config('banner') }}">
 </div>
 
+<h5>@lang('app.tmdb')</h5>
+<div class="form-group">
+    <label class="col-form-label" for="tmdb_api_key">@lang('app.tmdb_api_key')</label>
+
+    <input type="text" name="tmdb_api_key" class="form-control" id="tmdb_api_key" value="{{ get_config('tmdb_api_key') }}" autocomplete="off">
+</div>
+
 @php
     $google_recaptcha = get_config('google_recaptcha');
 @endphp

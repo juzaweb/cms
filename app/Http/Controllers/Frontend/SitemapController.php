@@ -35,7 +35,7 @@ class SitemapController extends Controller
         $total = $items->lastPage();
         
         for ($i=1; $i<= $total; $i++) {
-            $sitemap->addSitemap(route('sitemap.genres.list', [$i]));
+            $sitemap->addSitemap(route('sitemap.movies.list', [$i]));
         }
         
         return $sitemap->render('sitemapindex');
@@ -65,7 +65,7 @@ class SitemapController extends Controller
         $total = $items->lastPage();
         
         for ($i=1; $i<= $total; $i++) {
-            $sitemap->addSitemap(route('sitemap.genres.list', [$i]));
+            $sitemap->addSitemap(route('sitemap.tv_series.list', [$i]));
         }
         
         return $sitemap->render('sitemapindex');
@@ -177,7 +177,7 @@ class SitemapController extends Controller
         $total = $items->lastPage();
         
         for ($i=1; $i<= $total; $i++) {
-            $sitemap->addSitemap(route('sitemap.post_categories', ['page' => $i]));
+            $sitemap->addSitemap(route('sitemap.post_categories.list', ['page' => $i]));
         }
         
         return $sitemap->render('sitemapindex');

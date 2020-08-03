@@ -30,18 +30,6 @@ class Configs extends Model
         'name'
     ];
     
-    public static function getConfig(string $key) {
-        $config = Configs::firstOrNew(['code' => $key]);
-        return $config->value;
-    }
-    
-    public static function setConfig(string $key, string $value = null) {
-        $config = Configs::firstOrNew(['code' => $key]);
-        $config->code = $key;
-        $config->value = $value;
-        return $config->save();
-    }
-    
     public static function getConfigs() {
         return [
             'title',
@@ -52,6 +40,7 @@ class Configs extends Model
             'banner',
             'user_registration',
             'user_verification',
+            'tmdb_api_key',
             'google_recaptcha',
             'google_recaptcha_key',
             'google_recaptcha_secret',
@@ -64,6 +53,7 @@ class Configs extends Model
             'mail_port',
             'mail_username',
             'mail_password',
+            'mail_encryption',
             'mail_from_name',
             'mail_from_address',
             'player_watermark',
@@ -85,5 +75,23 @@ class Configs extends Model
         ];
     }
     
+    public static function getConfig(string $key) {
+        $config = Configs::firstOrNew(['code' => $key]);
+        return $config->value;
+    }
     
+    public static function setConfig(string $key, string $value = null) {
+        $config = Configs::firstOrNew(['code' => $key]);
+        $config->code = $key;
+        $config->value = $value;
+        return $config->save();
+    }
+    
+    private static function setEnv(string $key, string $value) {
+        $value = preg_replace('/\s+/', '', $value);
+        $key = strtoupper($key);
+        $env = file_get_contents(base_path('.env'));
+        $env = str_replace("$key=" . env($key), "$key=" . $value, $env);
+        return file_put_contents(base_path('.env'), $env);
+    }
 }

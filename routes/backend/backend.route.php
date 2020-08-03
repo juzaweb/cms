@@ -4,6 +4,7 @@ require_once __DIR__ . '/component/design.route.php';
 require_once __DIR__ . '/component/setting.route.php';
 require_once __DIR__ . '/component/filemanager.route.php';
 require_once __DIR__ . '/component/movie.route.php';
+require_once __DIR__ . '/component/tmdb.route.php';
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');

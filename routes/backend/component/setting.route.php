@@ -10,6 +10,8 @@ Route::group(['prefix' => 'setting/email'], function () {
     Route::get('/', 'Backend\Setting\EmailSettingController@index')->name('admin.setting.email');
     
     Route::post('/save', 'Backend\Setting\EmailSettingController@save')->name('admin.setting.email.save');
+    
+    Route::post('/test', 'Backend\Setting\EmailSettingController@sendEmailTest')->name('admin.setting.email.test');
 });
 
 Route::group(['prefix' => 'setting/email-templates'], function () {

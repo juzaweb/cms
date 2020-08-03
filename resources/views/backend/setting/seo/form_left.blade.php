@@ -8,7 +8,7 @@
         <div class="form-group">
             <label class="col-form-label" for="sitemap">@lang('app.sitemap')</label>
 
-            <p><a href=""></a></p>
+            <p><a href="{{ route('sitemap') }}" data-turbolinks="false" target="_blank">{{ route('sitemap') }}</a></p>
         </div>
 
         <div class="form-group">

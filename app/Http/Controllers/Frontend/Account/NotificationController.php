@@ -37,21 +37,24 @@ class NotificationController extends Controller
     }
     
     public function getUnreadNotifications() {
-        $notifications = \Auth::user()
-            ->unreadNotifications()
-            ->orderBy('created_at', 'DESC')
-            ->limit(5)
-            ->get();
-        
+    
         $result = [];
-        foreach ($notifications as $notification) {
-            $result[] = [
-                'id' => $notification->id,
-                'thumb' => asset('styles/themes/mymo/images/notification.png'),
-                'link' => route('account.notification.detail', [$notification->id]),
-                'title' => $notification->data['subject'],
-                'date' => $notification->created_at->format('Y-m-d'),
-            ];
+        if (\Auth::check()) {
+            $notifications = \Auth::user()
+                ->unreadNotifications()
+                ->orderBy('created_at', 'DESC')
+                ->limit(5)
+                ->get();
+            
+            foreach ($notifications as $notification) {
+                $result[] = [
+                    'id' => $notification->id,
+                    'thumb' => asset('styles/themes/mymo/images/notification.png'),
+                    'link' => route('account.notification.detail', [$notification->id]),
+                    'title' => $notification->data['subject'],
+                    'date' => $notification->created_at->format('Y-m-d'),
+                ];
+            }
         }
         
         return response()->json([

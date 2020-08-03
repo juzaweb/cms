@@ -107,4 +107,6 @@
         remove_url: '{{ route('admin.tv_series.remove') }}',
     });
 </script>
+
+@include('backend.movies.form_tmdb')
 @endsection

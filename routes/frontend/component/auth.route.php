@@ -11,7 +11,7 @@ Route::group(['prefix' => 'register', 'middleware' => ['web', 'guest']], functio
     
     Route::post('/', 'Frontend\Auth\RegisterController@register')->name('register.submit');
     
-    Route::get('/verification/{token}', 'Frontend\Auth\RegisterController@index')->name('register.verification');
+    Route::get('/verification/{token}', 'Frontend\Auth\VerificationController@index')->name('register.verification');
 });
 
 Route::group(['prefix' => 'forgot-password', 'middleware' => ['web', 'guest']], function () {

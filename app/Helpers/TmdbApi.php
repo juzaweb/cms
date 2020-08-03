@@ -7,6 +7,7 @@ class TmdbApi
     const _API_URL_ = "http://api.themoviedb.org/3/";
     const VERSION = '0.5';
     private $config;
+    private $_apiconfiguration;
     
     public function __construct($config = null) {
         
@@ -60,6 +61,19 @@ class TmdbApi
     
     public function getDebug() {
         return $this->getConfig()->getDebug();
+    }
+    
+    private function _loadConfig() {
+        $this->_apiconfiguration = new TmdbConfiguration($this->_call('configuration'));
+        return ! empty($this->_apiconfiguration);
+    }
+    
+    public function getAPIConfig() {
+        return $this->_apiconfiguration;
+    }
+    
+    public function getImageURL($size = 'original') {
+        return $this->_apiconfiguration->getImageBaseURL().$size;
     }
     
     public function getDiscoverMovies($page = 1) {
