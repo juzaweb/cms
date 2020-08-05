@@ -328,4 +328,7 @@ return [
     'add_movie' => 'Add movie',
     'tmdb' => 'TMDB',
     'tmdb_api_key' => 'TMDB Api key',
+    'min' => 'Min',
+    'movie_not_found' => 'Movie not found',
+    'tmdb_api_key_not_found' => 'TMDB api key not found',
 ];

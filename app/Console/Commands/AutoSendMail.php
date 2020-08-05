@@ -21,6 +21,14 @@ class AutoSendMail extends Command
     
     public function handle()
     {
+        $query = EmailList::where('status', '=', 2)
+            ->orderBy('priority', 'DESC')
+            ->limit(10);
+        
+        if (!$query->exists()) {
+            return false;
+        }
+        
         \Config::set('mail.host', Configs::getConfig('mail_host'));
         \Config::set('mail.driver', Configs::getConfig('mail_driver'));
         \Config::set('mail.port', Configs::getConfig('mail_port'));
@@ -31,22 +39,8 @@ class AutoSendMail extends Command
         \Config::set('mail.from.address', Configs::getConfig('mail_from_address'));
     
         (new \Illuminate\Mail\MailServiceProvider(app()))->register();
-        /*$transport = (new \Swift_SmtpTransport('host', 'port'))
-            ->setEncryption(null)
-            ->setUsername('username')
-            ->setPassword('secret')
-            ->setPort(587);
-        $mailer = app(\Illuminate\Mail\Mailer::class);
-        $mailer->setSwiftMailer(new \Swift_Mailer($transport));
-    
-        $mail = $mailer
-            ->to('user@laravel.com')
-            ->send(new OrderShipped);*/
         
-        $rows = EmailList::where('status', '=', 2)
-            ->orderBy('priority', 'DESC')
-            ->limit(10)
-            ->get();
+        $rows = $query->get();
         
         foreach ($rows as $row) {
             Mail::send('emails.template', [

@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use App\Models\Files;
+use Illuminate\Support\Str;
+
 trait UseThumbnail {
     
     public static function bootUseThumbnail()
@@ -9,10 +12,11 @@ trait UseThumbnail {
         $thumbnail = request()->post('thumbnail');
         static::saving(function ($model) use ($thumbnail) {
             if ($thumbnail) {
-                if ($model->resize) {
-                    $thumbnail = $model->resizeThumbnail($thumbnail, $model->resize);
+                if (is_url($thumbnail)) {
+                    $thumbnail = $model->downloadThumbnail($thumbnail);
                 }
                 
+                $model->resizeThumbnail($thumbnail);
                 $model->thumbnail = $model->cutPathThumbnail($thumbnail);
             }
         });
@@ -30,7 +34,45 @@ trait UseThumbnail {
         return image_url($this->thumbnail);
     }
     
+    protected function downloadThumbnail($thumbnail) {
+        $data['name'] = $this->getFileNameThumbnail($thumbnail);
+        $slip = explode('.', $data['name']);
+        $data['extension'] = $slip[count($slip) - 1];
+        $file_name = str_replace('.' . $data['extension'], '', $data['name']);
+        $new_file = $file_name . '-' . Str::random(10) . '-'. time() .'.' . $data['extension'];
+        
+        try {
+            $new_dir = \Storage::disk('uploads')->path(date('Y/m/d'));
+            if (!is_dir($new_dir)) {
+                \File::makeDirectory($new_dir, 0775, true);
+            }
+            
+            $get_file = file_put_contents($new_dir . $new_file, file_get_contents($thumbnail));
+            if ($get_file) {
+                $data['path'] = date('Y/m/d') .'/'. $new_file;
+                $model = new Files();
+                $model->fill($data);
+                $model->type = 1;
+                $model->mime_type = \Storage::disk('uploads')
+                    ->mimeType($data['path']);
+                $model->user_id = \Auth::id();
+                $model->save();
+                
+                return $data['path'];
+            }
+        }
+        catch (\Exception $exception) {
+            return false;
+        }
+        
+        return false;
+    }
+    
     protected function resizeThumbnail($thumbnail, $resize_size) {
+        if (!isset($this->resize) || empty($this->resize)) {
+            return null;
+        }
+        
         $thumb_path = $this->getPathThumbnail($thumbnail);
         if (file_exists($thumb_path)) {
             $resize_size = explode('x', $resize_size);
@@ -74,5 +116,4 @@ trait UseThumbnail {
         
         return null;
     }
-    
 }

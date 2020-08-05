@@ -12,13 +12,16 @@ class ChangePasswordController extends Controller
 {
     public function index() {
         $viewed = Cookie::get('viewed');
-        $recently_visited = [];
         if ($viewed) {
             $viewed = json_decode($viewed, true);
-            $recently_visited = Movies::whereIn('id', $viewed)
-                ->where('status', '=', 1)
-                ->paginate(5);
         }
+        else {
+            $viewed = [];
+        }
+        
+        $recently_visited = Movies::whereIn('id', $viewed)
+            ->where('status', '=', 1)
+            ->paginate(5);
         
         return view('themes.mymo.account.change_password', [
             'title' => trans('app.change_password'),
