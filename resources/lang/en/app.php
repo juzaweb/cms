@@ -343,4 +343,8 @@ return [
     'thank_you_for_submitting_error_message' => 'Thank you for submitting error message. We will fix errors as soon as possible',
     'or_click_on_buttons_listed_below' => 'or click on buttons listed below',
     'adult_content_warning' => 'Adult Content Warning!',
+    'video_convert' => 'Video convert',
+    'video_convert_quality' => 'Video convert quality',
+    'hls_video' => 'HLS video',
+    'hls_video_description' => 'If enabled, the video files will be converted to .m3u8 format',
 ];

@@ -79,4 +79,8 @@ class User extends Authenticatable
         
         return asset('images/thumb-default.png');
     }
+    
+    public static function masterAdminId() {
+        return 1;
+    }
 }

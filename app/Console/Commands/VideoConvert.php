@@ -2,83 +2,110 @@
 
 namespace App\Console\Commands;
 
+use App\Models\VideoFiles;
+use App\User;
 use Illuminate\Console\Command;
 
 class VideoConvert extends Command
 {
     protected $signature = 'video:convert';
-    
-    protected $description = 'Command description';
+    protected $description = '';
+    protected $ffmpeg_path;
+    protected $qualities;
+    protected $hls_video;
+    protected $convert_speed;
     
     public function __construct()
     {
         parent::__construct();
+        $this->ffmpeg_path = '';
+        $qualities = get_config('video_convert_quality');
+        $qualities = $qualities ? explode(',', $qualities) : null;
+        $this->qualities = $qualities;
+        $this->hls_video = get_config('hls_video');
     }
     
     public function handle()
     {
-        $shell     = shell_exec("$ffmpeg_b -y -i $video_file_full_path -vcodec libx264 -preset {$pt->config->convert_speed} -filter:v scale=426:-2 -crf 26 $video_output_full_path_240 2>&1");
-        $upload_s3 = PT_UploadToS3($filepath . "_240p_converted.mp4");
-        $db->where('id', $video->id);
-        $db->update(T_VIDEOS, array(
-            'converted' => 1,
-            '240p' => 1,
-            'video_location' => $filepath . "_240p_converted.mp4"
-        ));
-        $db->where('video_id',$video->id)->delete(T_QUEUE);
-    
-        if ($video_res >= 640 || $video_res == 0) {
-            $shell                      = shell_exec("$ffmpeg_b -y -i $video_file_full_path -vcodec libx264 -preset {$pt->config->convert_speed} -filter:v scale=640:-2 -crf 26 $video_output_full_path_360 2>&1");
-            $upload_s3                  = PT_UploadToS3($filepath . "_360p_converted.mp4");
-            $db->where('id', $video->id);
-            $db->update(T_VIDEOS, array(
-                '360p' => 1,
-            ));
+        if (!get_config('video_convert')) {
+            return false;
         }
-    
-        if ($video_res >= 854 || $video_res == 0) {
-            $shell     = shell_exec("$ffmpeg_b -y -i $video_file_full_path -vcodec libx264 -preset {$pt->config->convert_speed} -filter:v scale=854:-2 -crf 26 $video_output_full_path_480 2>&1");
-            $upload_s3 = PT_UploadToS3($filepath . "_480p_converted.mp4");
-            $db->where('id', $video->id);
-            $db->update(T_VIDEOS, array(
-                '480p' => 1
-            ));
+        
+        if (empty($this->qualities)) {
+            return false;
         }
+        
+        $video_files = VideoFiles::where('source', 'upload')
+            ->where('converted', '=', 0)
+            ->limit(1)
+            ->get();
+        $storage = \Storage::disk('uploads');
+        
+        foreach ($video_files as $video_file) {
+            if ($storage->exists($video_file->url)) {
+                $video_file->update([
+                    'converted' => 2,
+                ]);
+                
+                $video_res = 0;
+                foreach ($this->qualities as $quality) {
+                    $scale = $this->getScaleByQuality($quality);
+                    if ($video_res >= $scale || $video_res == 0) {
+                        $result = $this->convertVideo($storage->path($video_file->url), $quality, $scale);
+                        if ($result) {
+                            $video_file->update([
+                                'video_' . $quality => $result,
+                            ]);
+                        }
+                    }
+                }
     
-        if ($video_res >= 1280 || $video_res == 0) {
-            $shell     = shell_exec("$ffmpeg_b -y -i $video_file_full_path -vcodec libx264 -preset {$pt->config->convert_speed} -filter:v scale=1280:-2 -crf 26 $video_output_full_path_720 2>&1");
-            $upload_s3 = PT_UploadToS3($filepath . "_720p_converted.mp4");
-            $db->where('id', $video->id);
-            $db->update(T_VIDEOS, array(
-                '720p' => 1
-            ));
+                $video_file->update([
+                    'converted' => 1,
+                ]);
+            }
+            else {
+                $video_file->update([
+                    'converted' => 3,
+                ]);
+            }
         }
+    }
     
-        if ($video_res >= 1920 || $video_res == 0) {
-            $shell     = shell_exec("$ffmpeg_b -y -i $video_file_full_path -vcodec libx264 -preset {$pt->config->convert_speed} -filter:v scale=1920:-2 -crf 26 $video_output_full_path_1080 2>&1");
-            $upload_s3 = PT_UploadToS3($filepath . "_1080p_converted.mp4");
-            $db->where('id', $video->id);
-            $db->update(T_VIDEOS, array(
-                '1080p' => 1
-            ));
+    private function convertVideo($video_path, $quality, $scale) {
+        if ($this->hls_video) {
+            return $this;
         }
+        
+        return $this->videoFileConvert($video_path, $quality, $scale);
+    }
     
-        if ($video_res >= 2048) {
-            $shell     = shell_exec("$ffmpeg_b -y -i $video_file_full_path -vcodec libx264 -preset {$pt->config->convert_speed} -filter:v scale=2048:-2 -crf 26 $video_output_full_path_2048 2>&1");
-            $upload_s3 = PT_UploadToS3($filepath . "_2048p_converted.mp4");
-            $db->where('id', $video->id);
-            $db->update(T_VIDEOS, array(
-                '2048p' => 1
-            ));
+    private function videoFileConvert($video_path, $quality, $scale) {
+        try {
+            $file_path = date('Y/m/d') . '/' . 'converted_'. $quality .'_' . basename($video_path);
+            $output_path = \Storage::disk('uploads')->path($file_path);
+            shell_exec("$this->ffmpeg_path -y -i $video_path -vcodec libx264 -preset {$this->convert_speed} -filter:v scale=". $scale .":-2 -crf 26 $output_path 2>&1");
+        
+            return $file_path;
         }
+        catch (\Exception $exception) {
+            \Log::error('VideoConvert: ' . $exception->getFile() . ' - Line '. $exception->getLine(). ': '. $exception->getMessage());
+            return false;
+        }
+    }
     
-        if ($video_res >= 3840) {
-            $shell     = shell_exec("$ffmpeg_b -y -i $video_file_full_path -vcodec libx264 -preset {$pt->config->convert_speed} -filter:v scale=3840:-2 -crf 26 $video_output_full_path_4096 2>&1");
-            $upload_s3 = PT_UploadToS3($filepath . "_4096p_converted.mp4");
-            $db->where('id', $video->id);
-            $db->update(T_VIDEOS, array(
-                '4096p' => 1
-            ));
+    private function getScaleByQuality($quality) {
+        switch ($quality) {
+            case '240p': $scale = 426;break;
+            case '360p': $scale = 640;break;
+            case '480p': $scale = 854;break;
+            case '720p': $scale = 1280;break;
+            case '1080p': $scale = 1920;break;
+            case '2048p': $scale = 2048;break;
+            case '4096p': $scale = 3840;break;
+            default: $scale = '';
         }
+        
+        return $scale;
     }
 }

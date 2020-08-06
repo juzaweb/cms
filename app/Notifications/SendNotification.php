@@ -38,13 +38,7 @@ class SendNotification extends Notification
         
         return false;
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+    
     public function toArray($notifiable)
     {
         return [
