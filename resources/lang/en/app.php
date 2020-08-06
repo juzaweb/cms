@@ -331,4 +331,7 @@ return [
     'min' => 'Min',
     'movie_not_found' => 'Movie not found',
     'tmdb_api_key_not_found' => 'TMDB api key not found',
+    'you_must_be_logged_in_to_comment' => 'You must be logged in to comment',
+    'write_your_comment' => 'Write your comment...',
+    'click_to_play' => 'Click to Play',
 ];

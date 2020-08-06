@@ -9,3 +9,5 @@ Route::post('/watch/{slug}/set-view', 'Frontend\PlayController@setMovieView')->n
 Route::post('/watch/{slug}/rating', 'Frontend\RatingController@setRating')->name('watch.rating');
 
 Route::post('/watch/player/{slug}/{vid}', 'Frontend\PlayController@getPlayer')->name('watch.player');
+
+Route::post('/watch/{slug}/comment', 'Frontend\CommentController@comment')->name('watch.comment');

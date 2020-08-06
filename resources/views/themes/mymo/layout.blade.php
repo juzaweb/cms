@@ -23,7 +23,12 @@
     <meta property="og:description" content="{{ @$description }}"/>
     <meta property="og:url" content="{{ url()->current() }}"/>
     <meta property="og:site_name" content="{{ $home_tile }}"/>
-    <meta property="fb:app_id" content="2401456150086560"/>
+    @php
+    $fb_app_id = get_config('fb_app_id');
+    @endphp
+    @if($fb_app_id)
+    <meta property="fb:app_id" content="{{ $fb_app_id }}"/>
+    @endif
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ $icon }}" sizes="32x32"/>
     <link rel="icon" href="{{ $icon }}" sizes="192x192"/>
@@ -99,6 +104,10 @@
     </style>
 </head>
 <body class="{{ $body_class }}" data-masonry="" data-nonce="9d27ce22e4">
+@if($fb_app_id)
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&autoLogAppEvents=1&version=v8.0&appId={{ $fb_app_id }}" nonce="ozkqznFT"></script>
+@endif
 
 @include('themes.mymo.header')
 @include('themes.mymo.menu')

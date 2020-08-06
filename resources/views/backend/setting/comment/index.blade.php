@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         @php
-                            $comment_able = \App\Models\Configs::getConfig('comment_able');
+                            $comment_able = get_config('comment_able');
                         @endphp
                         <div class="form-group">
                             <label class="col-form-label" for="comment_able">@lang('app.comment_able')</label>
@@ -42,7 +42,7 @@
                         </div>
 
                         @php
-                        $comment_type = \App\Models\Configs::getConfig('comment_type');
+                        $comment_type = get_config('comment_type');
                         @endphp
                         <div class="form-group">
                             <label class="col-form-label" for="comment_type">@lang('app.comment_type')</label>
@@ -55,11 +55,11 @@
                         <div class="form-group">
                             <label class="col-form-label" for="comments_per_page">@lang('app.comments_per_page')</label>
 
-                            <input type="number" name="comments_per_page" class="form-control" id="comments_per_page" value="{{ \App\Models\Configs::getConfig('comments_per_page') }}" autocomplete="off">
+                            <input type="number" name="comments_per_page" class="form-control" id="comments_per_page" value="{{ get_config('comments_per_page') }}" autocomplete="off">
                         </div>
 
                         @php
-                            $comments_approval = \App\Models\Configs::getConfig('comments_approval');
+                            $comments_approval = get_config('comments_approval');
                         @endphp
                         <div class="form-group">
                             <label class="col-form-label" for="comments_approval">@lang('app.comments_approval')</label>

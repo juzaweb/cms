@@ -119,6 +119,10 @@ class Movies extends Model
         return $this->hasMany('App\Models\Servers', 'movie_id', 'id');
     }
     
+    public function comments() {
+        return $this->hasMany('App\Models\MovieComments', 'movie_id', 'id');
+    }
+    
     public function getViews() {
         if ($this->views < 1000) {
             return $this->views;

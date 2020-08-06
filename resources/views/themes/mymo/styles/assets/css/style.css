@@ -199,6 +199,60 @@ a.watch-movie:hover {
     transition: all .4s ease-in-out;
 }
 
+.comment-form textarea {
+    border-radius: 25px;
+    padding: 13px 15px 7px;
+    height: 56px;
+    margin: 0px -13.3438px 0px 0px;
+}
+
+.comment-form button {
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+    padding: 0 15px;
+    margin-left: 10px;
+}
+
+.comment-list {
+    margin-top: 30px;
+}
+
+.comment-list .main-comment {
+    margin-bottom: 20px;
+}
+
+.comment-list .main-comment .main-comment-data-sp .user-avatar {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.comment-list .main-comment .main-comment-data-sp .user-name {
+    font-size: 15px;
+}
+
+.comment-list .main-comment .main-comment-data-sp .user-name a {
+    font-weight: bold;
+}
+
+.comment-list .main-comment .main-comment-data-sp .user-name small {
+    font-size: 12px;
+    color: #aaa;
+    display: inline;
+}
+
+.comment-list .main-comment .main-comment-data-sp .user-comment {
+    font-size: 13px;
+    margin-top: 5px;
+    overflow: hidden;
+    color: #777;
+    font-family: Lato, sans-serif;
+}
+
+.color-text {
+    color: #a5a5a5;
+}
+
 @media screen and (min-width: 1024px){
     /*.hidemobile {
         display: block;

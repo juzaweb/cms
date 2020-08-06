@@ -84,7 +84,7 @@
                             "loading_img": "http:\/\/xemphimplus.net\/wp-content\/plugins\/mymo-movie-report\/loading.gif",
                             "report_btn": "Báo lỗi",
                             "name_or_email": "Tên hoặc Email",
-                            "close": "Đóng"
+                            "close": "@lang('app.close')"
                         }
                     }</script>
                 <div class="clearfix"></div>
@@ -229,14 +229,12 @@
 
                             <div class="clearfix"></div>
                         </div>
-                        <div id="pagination-1"></div>
+                        <div id="pagination-{{ $server->id }}"></div>
                     @endforeach
                 </div>
                 <div class="clearfix"></div>
 
-                <div class="htmlwrap clearfix">
-                    <div class="fb-comments"  data-href="/to-chuc-rugal/" data-width="100%" data-mobile="true" data-colorscheme="dark" data-numposts="5" data-order-by="reverse_time"></div>
-                </div>
+                @include('themes.mymo.watch.component.comment')
 
                 <div id="lightout"></div>
 

@@ -143,7 +143,7 @@
                         <div class="film-poster col-md-9">
                             <div class="film-poster-img" style="background: url('{{ $info->getPoster() }}'); background-size: cover; background-repeat: no-repeat;background-position: 30% 25%;height: 300px;-webkit-filter: grayscale(100%); filter: grayscale(100%);"></div>
                             <div class="mymo-play-btn hidden-xs">
-                                <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="play-btn" title="Click to Play" data-toggle="tooltip" data-placement="bottom">Click to Play</a>
+                                <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="play-btn" title="@lang('app.click_to_play')" data-toggle="tooltip" data-placement="bottom">@lang('app.click_to_play')</a>
                             </div>
 
                             <div class="movie-trailer hidden"></div>
@@ -190,11 +190,12 @@
 
                             <div class="clearfix"></div>
                         </div>
-                        <div id="pagination-1"></div>
+                        <div id="pagination-{{ $server->id }}"></div>
                         @endforeach
                     </div>
                 </div>
                 <div class="clearfix"></div>
+
                 @php($ads = get_ads('player_bottom'))
                 @if($ads)
                     <!-- Ads -->
@@ -204,8 +205,8 @@
 
                 @endif
 
-                <div class="mymo--notice">
-                </div>
+                {{--<div class="mymo--notice">
+                </div>--}}
 
                 <div class="entry-content htmlwrap clearfix">
                     <div class="video-item mymo-entry-box">
@@ -218,6 +219,13 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="clearfix"></div>
+
+                <div class="comments">
+                    @include('themes.mymo.watch.component.comment')
+                </div>
+
             </div>
 
         </section>

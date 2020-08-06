@@ -59,6 +59,7 @@ class Configs extends Model
             'player_watermark',
             'player_watermark_logo',
             'author_name',
+            'fb_app_id',
             'movies_title',
             'movies_keywords',
             'movies_description',
