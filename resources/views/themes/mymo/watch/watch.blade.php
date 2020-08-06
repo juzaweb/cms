@@ -35,58 +35,10 @@
     <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
         <section id="content">
             <div class="clearfix wrap-content">
-                <script>var mymo_cfg = {
-                        "act": "watch",
-                        "post_url": "{{ url()->current() }}",
-                        "ajax_url": "",
-                        "set_movie_view_url": "{{ route('watch.set_view', [$info->slug]) }}",
-                        "player_url": "{{ route('watch.player', [$info->slug, $vid]) }}",
-                        "loading_img": "{{ asset('styles/themes/mymo/images/ajax-loader.gif') }}",
-                        "eps_slug": "tap",
-                        "server_slug": "s",
-                        "type_slug": "slug-2",
-                        "post_title": "{{ $info->name }}",
-                        "post_id": '{{ $info->id }}',
-                        "episode_slug": "tap-1",
-                        "server": "1",
-                        "player_error_detect": "display_modal",
-                        "paging_episode": "false",
-                        "episode_display": "show_list_eps",
-                        "episode_nav_num": 100,
-                        "auto_reset_cache": true,
-                        "resume_playback": true,
-                        "resume_text": "Tự động phát lại phim từ thời điểm bạn xem gần đây nhất tại",
-                        "resume_text_2": "Phát lại từ đầu?",
-                        "playback": "Phát lại",
-                        "continue_watching": "Xem tiếp",
-                        "player_reload": "Tải lại trình phát",
-                        "jw_error_msg_0": "Chúng tôi không thể tìm thấy video bạn đang tìm kiếm. Có thể có một số lý do cho việc này, ví dụ như nó đã bị xóa bởi chủ sở hữu!",
-                        "jw_error_msg_1": "Video lỗi không thể phát được.",
-                        "jw_error_msg_2": "Để xem tiếp, vui lòng click vào nút \"Tải lại trình phát\"",
-                        "jw_error_msg_3": "hoặc click vào các nút được liệt kê bên dưới",
-                        "light_on": "Bật đèn",
-                        "light_off": "Tắt đèn",
-                        "expand": "Phóng to",
-                        "collapse": "Thu nhỏ",
-                        "player_loading": "Đang khởi tạo trình phát, vui lòng chờ...",
-                        "player_autonext": "Đang tự động chuyển tập, vui lòng chờ...",
-                        "is_adult": false,
-                        "adult_title": "Adult Content Warning!",
-                        "adult_content": "<span style=\"vertical-align: inherit;\"><span style=\"vertical-align: inherit;\">Trang web này chứa nội dung dành cho các cá nhân từ 18\/21 tuổi trở lên được xác định theo luật pháp địa phương và quốc gia của khu vực nơi bạn cư trú. <\/span><span style=\"vertical-align: inherit;\">Nếu bạn chưa đủ 18 tuổi, hãy rời khỏi trang web này ngay lập tức. <\/span><span style=\"vertical-align: inherit;\">Khi vào trang web này, bạn đồng ý rằng bạn từ 18 tuổi trở lên. <\/span><span style=\"vertical-align: inherit;\">Bạn sẽ không phân phối lại tài liệu này cho bất kỳ ai, và bạn cũng sẽ không cho phép bất kỳ trẻ vị thành niên nào xem tài liệu này.<\/span><\/span>",
-                        "show_only_once": "Không hiển thị lại",
-                        "exit_btn": "THOÁT",
-                        "is_18plus": "TÔI ĐỦ 18 TUỔI",
-                        "report_lng": {
-                            "title": "Tổ Chức Rugal",
-                            "alert": "Tên (email) và nội dung là bắt buộc",
-                            "msg": "Nội dung",
-                            "msg_success": "Cảm ơn bạn đã gửi thông báo lỗi. Chúng tôi sẽ tiến hành sửa lỗi sớm nhất có thể",
-                            "loading_img": "http:\/\/xemphimplus.net\/wp-content\/plugins\/mymo-movie-report\/loading.gif",
-                            "report_btn": "Báo lỗi",
-                            "name_or_email": "Tên hoặc Email",
-                            "close": "@lang('app.close')"
-                        }
-                    }</script>
+                @php
+                $is_watch = 1;
+                @endphp
+                @include('themes.mymo.watch.component.global_script')
                 <div class="clearfix"></div>
                 <div class="text-center">
                     <div class="textwidget">

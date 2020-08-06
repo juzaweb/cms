@@ -5,10 +5,9 @@ require_once __DIR__ . '/component/stream.route.php';
 require_once __DIR__ . '/component/auth.route.php';
 require_once __DIR__ . '/component/watch.route.php';
 require_once __DIR__ . '/component/account.route.php';
+require_once __DIR__ . '/component/search.route.php';
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
-
-Route::get('/search', 'Frontend\SearchController@search')->name('search');
 
 Route::get('/latest-movies', 'Frontend\LatestMoviesController@index')->name('latest_movies');
 

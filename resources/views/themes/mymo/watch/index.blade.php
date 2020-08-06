@@ -33,59 +33,7 @@
         <section id="content">
             <div class="clearfix wrap-content">
 
-                <script type="text/javascript">var mymo_cfg = {
-                        "act": "",
-                        "post_url": "{{ url()->current() }}",
-                        "ajax_url": "",
-                        "player_url": "{{ route('watch.player', [$info->slug, $player_id]) }}",
-                        "rating_url": "{{ route('watch.rating', [$info->slug]) }}",
-                        "loading_img": "{{ asset('styles/themes/mymo/images/ajax-loader.gif') }}",
-                        "eps_slug": "eps",
-                        "server_slug": "s",
-                        "type_slug": "slug-2",
-                        "post_title": "{{ $info->name }}",
-                        "post_id": '',
-                        "episode_slug": "",
-                        "server": 1,
-                        "player_error_detect": "display_modal",
-                        "paging_episode": "false",
-                        "episode_display": "show_list_eps",
-                        "episode_nav_num": 100,
-                        "auto_reset_cache": true,
-                        "resume_playback": true,
-                        "resume_text": "Tự động phát lại phim từ thời điểm bạn xem gần đây nhất tại",
-                        "resume_text_2": "Phát lại từ đầu?",
-                        "playback": "@lang('app.playback')",
-                        "continue_watching": "@lang('app.continue_watching')",
-                        "player_reload": "@lang('app.player_reload')",
-                        "jw_error_msg_0": "Chúng tôi không thể tìm thấy video bạn đang tìm kiếm. Có thể có một số lý do cho việc này, ví dụ như nó đã bị xóa bởi chủ sở hữu!",
-                        "jw_error_msg_1": "Video lỗi không thể phát được.",
-                        "jw_error_msg_2": "Để xem tiếp, vui lòng click vào nút \"Tải lại trình phát\"",
-                        "jw_error_msg_3": "hoặc click vào các nút được liệt kê bên dưới",
-                        "light_on": "@lang('app.light_on')",
-                        "light_off": "@lang('app.light_off')",
-                        "expand": "@lang('app.expand')",
-                        "collapse": "@lang('app.collapse')",
-                        "player_loading": "@lang('app.player_loading')",
-                        "player_autonext": "@lang('app.player_autonext')",
-                        "is_adult": false,
-                        "adult_title": "Adult Content Warning!",
-                        "adult_content": "<span style=\"vertical-align: inherit;\"><span style=\"vertical-align: inherit;\">Trang web này chứa nội dung dành cho các cá nhân từ 18\/21 tuổi trở lên được xác định theo luật pháp địa phương và quốc gia của khu vực nơi bạn cư trú. <\/span><span style=\"vertical-align: inherit;\">Nếu bạn chưa đủ 18 tuổi, hãy rời khỏi trang web này ngay lập tức. <\/span><span style=\"vertical-align: inherit;\">Khi vào trang web này, bạn đồng ý rằng bạn từ 18 tuổi trở lên. <\/span><span style=\"vertical-align: inherit;\">Bạn sẽ không phân phối lại tài liệu này cho bất kỳ ai, và bạn cũng sẽ không cho phép bất kỳ trẻ vị thành niên nào xem tài liệu này.<\/span><\/span>",
-                        "show_only_once": "Không hiển thị lại",
-                        "exit_btn": "THOÁT",
-                        "is_18plus": "TÔI ĐỦ 18 TUỔI",
-                        "report_lng": {
-                            "title": "{{ $info->name }}",
-                            "alert": "Tên (email) và nội dung là bắt buộc",
-                            "msg": "Nội dung",
-                            "msg_success": "Cảm ơn bạn đã gửi thông báo lỗi. Chúng tôi sẽ tiến hành sửa lỗi sớm nhất có thể",
-                            "loading_img": "{{ asset('styles/themes/mymo/images/loading.gif') }}",
-                            "report_btn": "@lang('app.report')",
-                            "name_or_email": "Tên hoặc Email",
-                            "close": "@lang('app.close')"
-                        }
-                    }
-                </script>
+                @include('themes.mymo.watch.component.global_script')
 
                 <div class="mymo-movie-wrapper">
                     <div class="title-block watch-page">

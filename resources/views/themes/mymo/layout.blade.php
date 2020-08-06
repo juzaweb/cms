@@ -44,6 +44,7 @@
             "ajax_remove_all_notification_url": "{{ route('account.notifications.read_all') }}",
             "ajax_popular_movies_url": "{{ route('movies.popular') }}",
             "ajax_get_movies_by_genre_url": "{{ route('movies.genre') }}",
+            "ajax_filter_form_url": "{{ route('search.form') }}",
             "light_mode":"0",
             "light_mode_btn":"1",
             "ajax_live_search":"1",
