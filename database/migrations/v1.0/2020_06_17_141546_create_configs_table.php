@@ -17,12 +17,13 @@ class CreateConfigsTable extends Migration
         });
         
         Configs::setConfig('title', 'MyMo');
-        Configs::setConfig('description', '');
+        Configs::setConfig('description', 'MyMo');
         Configs::setConfig('logo', '');
         Configs::setConfig('icon', '');
         Configs::setConfig('banner', '');
         Configs::setConfig('user_registration', 1);
         Configs::setConfig('user_verification', 0);
+        Configs::setConfig('tmdb_api_key', '92b2df3080b91d92b31eacb015fc5497');
         Configs::setConfig('google_recaptcha', 0);
         Configs::setConfig('google_recaptcha_key', '');
         Configs::setConfig('google_recaptcha_secret', '');

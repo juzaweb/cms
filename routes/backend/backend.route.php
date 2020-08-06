@@ -11,11 +11,11 @@ Route::group(['prefix' => '/'], function () {
     
     Route::get('/load-data/{func}', 'Backend\LoadDataController@loadData')->name('admin.load_data');
     
-    Route::get('/users', 'Backend\DashboardController@getDataUser')->name('admin.dashboard.users');
+    Route::get('/dashboard/users', 'Backend\DashboardController@getDataUser')->name('admin.dashboard.users');
     
-    Route::get('/notifications', 'Backend\DashboardController@getDataNotification')->name('admin.dashboard.notifications');
+    Route::get('/dashboard/notifications', 'Backend\DashboardController@getDataNotification')->name('admin.dashboard.notifications');
     
-    Route::get('/views-chart', 'Backend\DashboardController@viewsChart')->name('admin.dashboard.views_chart');
+    Route::get('/dashboard/views-chart', 'Backend\DashboardController@viewsChart')->name('admin.dashboard.views_chart');
 });
 
 Route::group(['prefix' => 'genres'], function () {

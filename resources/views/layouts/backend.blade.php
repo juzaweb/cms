@@ -30,6 +30,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/backend.js') }}"></script>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 

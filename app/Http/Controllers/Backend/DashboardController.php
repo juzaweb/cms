@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Movies;
 use App\Models\MovieViews;
+use App\Models\Pages;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,12 +20,14 @@ class DashboardController extends Controller
             ->count('id');
         $count_user = User::where('status', '=', 1)
             ->count('id');
-        
+        $count_page = Pages::where('status', '=', 1)
+            ->count('id');
         
         return view('backend.dashboard', [
             'count_movie' => $count_movie,
             'count_tvserie' => $count_tvserie,
             'count_user' => $count_user,
+            'count_page' => $count_page,
         ]);
     }
     
@@ -33,20 +36,20 @@ class DashboardController extends Controller
         $limit = $request->get('limit', 20);
     
         $query = \Auth::user()->notifications();
-    
-        $count = $query->count();
+        
         $query->orderBy('created_at', 'DESC');
         $query->offset($offset);
         $query->limit($limit);
         $rows = $query->get();
     
         foreach ($rows as $row) {
-            $row->created = $row->created_at->format('H:i Y-m-d');
+            $row->created = $row->created_at->format('Y-m-d');
+            $row->subject = $row->data['subject'];
             $row->url = route('account.notification.detail', [$row->id]);
         }
     
         return response()->json([
-            'total' => $count,
+            'total' => count($rows),
             'rows' => $rows
         ]);
     }
@@ -58,7 +61,6 @@ class DashboardController extends Controller
         $query = User::query();
         $query->where('status', '=', 1);
         
-        $count = $query->count();
         $query->orderBy('created_at', 'DESC');
         $query->offset($offset);
         $query->limit($limit);
@@ -74,7 +76,7 @@ class DashboardController extends Controller
         }
     
         return response()->json([
-            'total' => $count,
+            'total' => count($rows),
             'rows' => $rows
         ]);
     }
@@ -82,8 +84,10 @@ class DashboardController extends Controller
     public function viewsChart() {
         $max_day = date('t');
         $result = [];
+        $result[] = [trans('app.day'), trans('app.views')];
         for ($i=1;$i<=$max_day;$i++) {
-        
+            $day = $i < 10 ? '0'. $i : $i;
+            $result[] = [$day, $this->countViewByDay('Y-m' . $day)];
         }
         
         return response()->json($result);

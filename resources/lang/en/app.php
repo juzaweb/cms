@@ -350,4 +350,6 @@ return [
     'hls_video' => 'HLS video',
     'hls_video_description' => 'If enabled, the video files will be converted to .m3u8 format',
     'new_users' => 'New users',
+    'statistics' => 'Statistics',
+    'chart_of_views_this_month' => 'Chart of views this month',
 ];
