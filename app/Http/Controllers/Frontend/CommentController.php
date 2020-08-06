@@ -23,6 +23,7 @@ class CommentController extends Controller
         
         return response()->json([
             'status' => 'success',
+            'redirect' => $request->headers->get('referer'),
         ]);
     }
 }

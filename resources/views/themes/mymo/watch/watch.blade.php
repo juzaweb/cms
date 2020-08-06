@@ -13,7 +13,7 @@
                                     <a href="{{ route('genre', [$genre->slug]) }}">{{ $genre->name }}</a> »
                                     <a href="{{ route('watch', [$info->slug]) }}">{{ $info->name }}</a> »
 
-                                    <span class="breadcrumb_last" aria-current="page">@lang('app.episode') {{ @\App\Models\VideoFiles::find($vid, ['label'])->label }}</span>
+                                    <span class="breadcrumb_last" aria-current="page">@lang('app.episode') {{ @\App\Models\VideoFiles::find($player_id, ['label'])->label }}</span>
                                 </span>
                             </span>
                         </span>
@@ -128,7 +128,7 @@
                     </a>
 
                     <div class="title-wrapper full">
-                        <h1 class="entry-title"><a href="{{ route('watch.play', [$info->slug, $vid]) }}" title="{{ $info->meta_title }}" class="tl">{{ $info->meta_title }}</a></h1>
+                        <h1 class="entry-title"><a href="{{ route('watch.play', [$info->slug, $player_id]) }}" title="{{ $info->meta_title }}" class="tl">{{ $info->meta_title }}</a></h1>
 
                         <span class="plot-collapse" data-toggle="collapse" data-target="#expand-post-content" aria-expanded="false" aria-controls="expand-post-content" data-text="@lang('app.movie_plot')"><i class="hl-angle-down"></i></span>
                     </div>
@@ -175,7 +175,7 @@
 
                             <ul id="listsv-{{ $server->id }}" class="mymo-list-eps">
                                 @foreach($video_files as $file)
-                                    <li class="mymo-episode mymo-episode-{{ $file->id }} @if($file->id == $vid) active @endif"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="mymo-info-{{ $file->id }} box-shadow mymo-btn @if($file->id == $vid) active @endif" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
+                                    <li class="mymo-episode mymo-episode-{{ $file->id }} @if($file->id == $player_id) active @endif"><a href="{{ route('watch.play', [$info->slug, $file->id]) }}" title="1"><span class="mymo-info-{{ $file->id }} box-shadow mymo-btn @if($file->id == $player_id) active @endif" data-post-id="{{ $info->id }}" data-server="{{ $server->id }}" data-episode-slug="{{ $file->id }}" data-position="first" data-embed="0">{{ $file->label }}</span></a></li>
                                 @endforeach
                             </ul>
 

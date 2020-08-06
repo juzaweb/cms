@@ -120,6 +120,7 @@ mix.combine([
 
 mix.styles([
     'resources/views/themes/mymo/styles/assets/css/bootstrap.min.css',
+    'resources/styles/vendors/toastr/toastr.min.css',
     'resources/views/themes/mymo/styles/style.css',
     'resources/views/themes/mymo/styles/assets/css/style.css',
 ], 'public/styles/themes/mymo/css/main.css');
@@ -127,6 +128,7 @@ mix.styles([
 mix.combine([
     'resources/styles/vendors/jquery/dist/jquery.min.js',
     'resources/views/themes/mymo/styles/assets/js/bootstrap.min.js',
+    'resources/styles/vendors/toastr/toastr.min.js',
     'resources/styles/js/load-ajax.js',
     'resources/styles/js/form-ajax.js',
     'resources/views/themes/mymo/styles/assets/js/core.min.js',

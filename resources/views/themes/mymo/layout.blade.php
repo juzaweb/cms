@@ -57,6 +57,10 @@
                 'bookmark': '@lang('app.bookmark')',
             }
         };
+
+        var langs = {
+            'data_error': '@lang('app.data_error')'
+        };
         /* ]]> */
     </script>
 

@@ -26,7 +26,7 @@ class PlayController extends Controller
             'keywords' => $info->keywords,
             'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive mymothemes mymomovies mymo-corner-rounded',
             'info' => $info,
-            'vid' => $vid,
+            'player_id' => $vid,
             'start' => $info->getStarRating(),
             'genre' => $genre,
             'tags' => $info->getTags(),

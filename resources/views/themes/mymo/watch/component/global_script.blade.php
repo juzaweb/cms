@@ -4,7 +4,7 @@
         "post_url": "{{ url()->current() }}",
         "ajax_url": "",
         "set_movie_view_url": "{{ route('watch.set_view', [$info->slug]) }}",
-        "player_url": "{{ route('watch.player', [$info->slug, $player_id]) }}",
+        "player_url": "{{ isset($player_id) ? route('watch.player', [$info->slug, $player_id]) : '' }}",
         "rating_url": "{{ route('watch.rating', [$info->slug]) }}",
         "loading_img": "{{ asset('styles/themes/mymo/images/ajax-loader.gif') }}",
         "eps_slug": "eps",

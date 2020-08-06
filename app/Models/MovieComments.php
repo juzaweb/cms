@@ -9,7 +9,8 @@ class MovieComments extends Model
     protected $table = 'movie_comments';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'content'
+        'content',
+        'user_id'
     ];
     
     public function user() {
