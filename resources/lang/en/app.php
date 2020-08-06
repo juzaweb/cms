@@ -161,6 +161,8 @@ return [
   'mail_from_name' => 'From name',
   'mail_from_address' => 'From address',
   'notification' => 'Notification',
+  'notifications' => 'Notifications',
+  'new_notifications' => 'New notifications',
   'send' => 'Send',
   'test_configuration' => 'TEST CONFIGURATION',
   'email_templates' => 'Email templates',
@@ -347,4 +349,5 @@ return [
     'video_convert_quality' => 'Video convert quality',
     'hls_video' => 'HLS video',
     'hls_video_description' => 'If enabled, the video files will be converted to .m3u8 format',
+    'new_users' => 'New users',
 ];

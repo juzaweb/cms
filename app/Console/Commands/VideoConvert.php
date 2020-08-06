@@ -74,10 +74,14 @@ class VideoConvert extends Command
     
     private function convertVideo($video_path, $quality, $scale) {
         if ($this->hls_video) {
-            return $this;
+            return $this->hlsConvert($video_path, $quality, $scale);
         }
         
         return $this->videoFileConvert($video_path, $quality, $scale);
+    }
+    
+    private function hlsConvert($video_path, $quality, $scale) {
+    
     }
     
     private function videoFileConvert($video_path, $quality, $scale) {
