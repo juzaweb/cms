@@ -79,3 +79,10 @@
         @endforeach
     </select>
 </div>
+
+<h5>@lang('app.tmdb')</h5>
+<div class="form-group">
+    <label class="col-form-label" for="tmdb_api_key">@lang('app.tmdb_api_key')</label>
+
+    <input type="text" name="tmdb_api_key" class="form-control" id="tmdb_api_key" value="{{ get_config('tmdb_api_key') }}" autocomplete="off">
+</div>

@@ -10,7 +10,9 @@
                         <span>
                             <span>
                                 <a href="/">@lang('app.home')</a> » <span>
+                                    @if($genre)
                                     <a href="{{ route('genre', [$genre->slug]) }}">{{ $genre->name }}</a> »
+                                    @endif
                                     <a href="{{ route('watch', [$info->slug]) }}">{{ $info->name }}</a> »
 
                                     <span class="breadcrumb_last" aria-current="page">@lang('app.episode') {{ @\App\Models\VideoFiles::find($player_id, ['label'])->label }}</span>

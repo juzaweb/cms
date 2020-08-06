@@ -39,6 +39,9 @@ class Files extends Model
     protected $table = 'files';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name'
+        'name',
+        'path',
+        'extension',
+        'mime_type',
     ];
 }

@@ -14,22 +14,20 @@ class TmdbConfiguration
     public function __construct($cnf) {
         // Check if config is given and use default if not
         // Note: There is no API Key inside the default conf
-        if(!isset($cnf)) {
-            //$cnf['apikey'] = '';
-            $cnf['lang'] = 'en';
-            $cnf['timezone'] = 'Europe/Berlin';
-            $cnf['adult'] = false;
-            $cnf['debug'] = false;
+        $cnf['apikey'] = get_config('tmdb_api_key');
+        $cnf['lang'] = 'en';
+        $cnf['timezone'] = 'Europe/Berlin';
+        $cnf['adult'] = false;
+        $cnf['debug'] = false;
     
-            // Data Return Configuration - Manipulate if you want to tune your results
-            $cnf['appender']['movie'] = array('trailers', 'images', 'credits', 'translations', 'reviews');
-            $cnf['appender']['tvshow'] = array('trailers', 'images', 'credits', 'translations', 'keywords');
-            $cnf['appender']['season'] = array('trailers', 'images', 'credits', 'translations');
-            $cnf['appender']['episode'] = array('trailers', 'images', 'credits', 'translations');
-            $cnf['appender']['person'] = array('movie_credits', 'tv_credits', 'images');
-            $cnf['appender']['collection'] = array('images');
-            $cnf['appender']['company'] = array('movies');
-        }
+        // Data Return Configuration - Manipulate if you want to tune your results
+        $cnf['appender']['movie'] = array('trailers', 'images', 'credits', 'translations', 'reviews');
+        $cnf['appender']['tvshow'] = array('trailers', 'images', 'credits', 'translations', 'keywords');
+        $cnf['appender']['season'] = array('trailers', 'images', 'credits', 'translations');
+        $cnf['appender']['episode'] = array('trailers', 'images', 'credits', 'translations');
+        $cnf['appender']['person'] = array('movie_credits', 'tv_credits', 'images');
+        $cnf['appender']['collection'] = array('images');
+        $cnf['appender']['company'] = array('movies');
         
         $this->setAPIKey($cnf['apikey']);
         $this->setLang($cnf['lang']);

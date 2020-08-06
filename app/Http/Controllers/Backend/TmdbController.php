@@ -33,7 +33,7 @@ class TmdbController extends Controller
                 'message' => trans('app.movie_not_found'),
             ]);
         }
-        dd($movie);
+        
         $model = new Movies();
         $model->fill($movie);
         $model->thumbnail = $this->downloadThumbnail($movie['thumbnail']);
@@ -54,40 +54,39 @@ class TmdbController extends Controller
     protected function getMovieById($imdb_id) {
         $api = new TmdbApi();
         $api->setAPIKey(get_config('tmdb_api_key'));
-        $result = $api->getMovie($imdb_id);
-        $data = $result->getJson();
-        $data = json_decode($data, true);
+        $data = $api->getMovie($imdb_id);
         if (empty($data)) {
             return false;
         }
-    
+        
         $actors = $this->getStarIds($data['credits']['cast'], 'actor');
-        $directors = $this->addOrGetStar($data['credits']['crew'], 'director');
-        $writters = $this->getStarIds($data['credits']['crew'], 'writter');
-        $countries = $this->getCounrtyIds($data['origin_country']);
+        $directors = $this->getStarIds($data['credits']['crew'], 'director');
+        $writers = $this->getStarIds($data['credits']['crew'], 'writter');
+        $countries = $this->getCounrtyIds($data['production_countries']);
         $genres = $this->getGenreIds($data['genres']);
         
         return [
-            'name' => $data['original_name'],
+            'name' => $data['original_title'],
+            'description' => $data['overview'],
             'thumbnail' => 'https://image.tmdb.org/t/p/w185/'.$data['poster_path'],
             'poster' => 'https://image.tmdb.org/t/p/w780/'.$data['backdrop_path'],
             'rating' => $data['vote_average'],
-            'release' => $data['first_air_date'],
-            'runtime' => @$data['episode_run_time'] . ' ' . trans('app.min'),
+            'release' => $data['release_date'],
+            'runtime' => @$data['runtime'] . ' ' . trans('app.min'),
             'actors' => $actors,
             'directors' => $directors,
-            'writters' => $writters,
+            'writers' => $writers,
             'countries' => $countries,
             'genres' => $genres,
         ];
     }
     
     protected function downloadThumbnail($thumbnail) {
-        $data['name'] = $this->getFileNameThumbnail($thumbnail);
+        $data['name'] = basename($thumbnail);
         $slip = explode('.', $data['name']);
         $data['extension'] = $slip[count($slip) - 1];
         $file_name = str_replace('.' . $data['extension'], '', $data['name']);
-        $new_file = $file_name . '-' . Str::random(10) . '-'. time() .'.' . $data['extension'];
+        $new_file = Str::slug($file_name) . '-' . Str::random(10) . '-'. time() .'.' . $data['extension'];
         
         try {
             $new_dir = \Storage::disk('uploads')->path(date('Y/m/d'));
@@ -95,7 +94,7 @@ class TmdbController extends Controller
                 \File::makeDirectory($new_dir, 0775, true);
             }
             
-            $get_file = file_put_contents($new_dir . $new_file, file_get_contents($thumbnail));
+            $get_file = file_put_contents($new_dir . '/' . $new_file, file_get_contents($thumbnail));
             if ($get_file) {
                 $data['path'] = date('Y/m/d') .'/'. $new_file;
                 $model = new Files();

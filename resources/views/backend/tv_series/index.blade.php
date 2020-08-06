@@ -20,7 +20,7 @@
                 <div class="col-md-6">
                     <div class="btn-group float-right">
                         <a href="{{ route('admin.tv_series.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
-                        <button class="btn btn-danger" type="button"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                        <button class="btn btn-danger" type="button" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                     </div>
                 </div>
             </div>

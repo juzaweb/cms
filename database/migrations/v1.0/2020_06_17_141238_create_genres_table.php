@@ -14,7 +14,7 @@ class CreateGenresTable extends Migration
             $table->string('name', 250);
             $table->text('description')->nullable();
             $table->string('slug', 200)->unique()->index();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->string('meta_title', 70)->nullable();
             $table->string('meta_description', 320)->nullable();
             $table->string('keywords', 320)->nullable();

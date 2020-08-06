@@ -9,10 +9,14 @@
                 <div class="col-xs-8 hidden-xs">
                     <div class="yoast_breadcrumb">
                         <span>
-                            <span><a href="{{ route('home') }}">@lang('app.home')</a> »
-                                <span><a href="{{ route('genre', [$genre->slug]) }}">{{ $genre->name }}</a> »
-                                    <span class="breadcrumb_last" aria-current="page">{{ $info->name }}</span>
-                                </span>
+                            <span>
+                                <a href="{{ route('home') }}">@lang('app.home')</a> »
+                                @if($genre)
+                                <a href="{{ route('genre', [$genre->slug]) }}">{{ $genre->name }}</a> »
+                                @endif
+
+                                <span class="breadcrumb_last" aria-current="page">{{ $info->name }}</span>
+
                             </span>
                         </span>
                     </div>
