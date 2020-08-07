@@ -53,7 +53,7 @@
     <input id="player_watermark_logo" class="form-control" type="hidden" name="player_watermark_logo" value="{{ get_config('player_watermark_logo') }}">
 </div>
 
-<h5>@lang('app.video_convert')</h5>
+{{--<h5>@lang('app.video_convert')</h5>
 <div class="form-group">
     <label class="col-form-label" for="video_convert">@lang('app.video_convert')</label>
     <select name="video_convert" id="video_convert" class="form-control">
@@ -78,7 +78,7 @@
         <option value="{{ $quality }}" @if(in_array($quality, $convert_quality)) selected @endif>{{ $quality }}</option>
         @endforeach
     </select>
-</div>
+</div>--}}
 
 <h5>@lang('app.tmdb')</h5>
 <div class="form-group">

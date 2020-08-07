@@ -39,32 +39,55 @@ class TmdbController extends Controller
         $model->thumbnail = $this->downloadThumbnail($movie['thumbnail']);
         $model->poster = $this->downloadThumbnail($movie['poster']);
         $model->genres = implode(',', $movie['genres']);
-        $model->countries = implode(',', $movie['countries']);
+        
+        if ($movie['countries']) {
+            $model->countries = implode(',', $movie['countries']);
+        }
+        
         $model->actors = implode(',', $movie['actors']);
         $model->writers = implode(',', $movie['writers']);
         $model->directors = implode(',', $movie['directors']);
+        $model->tv_series = $this->isTvSeries();
         $model->save();
         
         return response()->json([
-            'status' => '',
-            'redirect' => route('admin.movies.edit', [$model->id]),
+            'status' => 'success',
+            'redirect' => route('admin.'. ($model->tv_series ? 'tv_series' : 'movies') .'.edit', [$model->id]),
         ]);
     }
     
-    protected function getMovieById($imdb_id) {
+    protected function isTvSeries() {
+        if (strpos($_SERVER["HTTP_REFERER"], 'movies') === false) {
+            return 1;
+        }
+        
+        return 0;
+    }
+    
+    protected function getMovieById($tmdb_id) {
+        
+        if ($this->isTvSeries()) {
+            return $this->getTVShow($tmdb_id);
+        }
+        
+        return $this->getTVShow($tmdb_id);
+    }
+    
+    protected function getMovie($tmdb_id) {
         $api = new TmdbApi();
         $api->setAPIKey(get_config('tmdb_api_key'));
-        $data = $api->getMovie($imdb_id);
+        $data = $api->getMovie($tmdb_id);
+    
         if (empty($data)) {
             return false;
         }
-        
+    
         $actors = $this->getStarIds($data['credits']['cast'], 'actor');
         $directors = $this->getStarIds($data['credits']['crew'], 'director');
         $writers = $this->getStarIds($data['credits']['crew'], 'writter');
         $countries = $this->getCounrtyIds($data['production_countries']);
         $genres = $this->getGenreIds($data['genres']);
-        
+    
         return [
             'name' => $data['original_title'],
             'description' => $data['overview'],
@@ -73,6 +96,37 @@ class TmdbController extends Controller
             'rating' => $data['vote_average'],
             'release' => $data['release_date'],
             'runtime' => @$data['runtime'] . ' ' . trans('app.min'),
+            'actors' => $actors,
+            'directors' => $directors,
+            'writers' => $writers,
+            'countries' => $countries,
+            'genres' => $genres,
+        ];
+    }
+    
+    protected function getTVShow($tmdb_id) {
+        $api = new TmdbApi();
+        $api->setAPIKey(get_config('tmdb_api_key'));
+        $data = $api->getTVShow($tmdb_id);
+    
+        if (empty($data)) {
+            return false;
+        }
+        
+        $actors = $this->getStarIds($data['credits']['cast'], 'actor');
+        $directors = $this->getStarIds($data['credits']['crew'], 'director');
+        $writers = $this->getStarIds($data['credits']['crew'], 'writter');
+        $countries = $this->getCounrtyIds(@$data['production_countries']);
+        $genres = $this->getGenreIds($data['genres']);
+        
+        return [
+            'name' => $data['original_name'],
+            'description' => $data['overview'],
+            'thumbnail' => 'https://image.tmdb.org/t/p/w185/'.$data['poster_path'],
+            'poster' => 'https://image.tmdb.org/t/p/w780/'.$data['backdrop_path'],
+            'rating' => $data['vote_average'],
+            'release' => $data['first_air_date'],
+            'runtime' => @$data['episode_run_time'][0] . ' ' . trans('app.min'),
             'actors' => $actors,
             'directors' => $directors,
             'writers' => $writers,
@@ -126,6 +180,10 @@ class TmdbController extends Controller
     }
     
     protected function getCounrtyIds($countries) {
+        if (empty($countries)) {
+            return null;
+        }
+        
         $result = [];
         foreach ($countries as $country) {
             if ($country['name']) {
