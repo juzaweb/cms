@@ -1,4 +1,4 @@
-@if(in_array($file->source, ['embed', 'youtube', 'vimeo']))
+@if(in_array($file->source, ['embed', 'youtube', 'vimeo', 'gdrive']))
     <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="{{ @$files[0]->file }}" allowfullscreen></iframe></div>
 @else
 <script type="text/javascript">

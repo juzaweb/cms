@@ -198,24 +198,17 @@ class VideoFiles extends Model
     
     protected function getVideoGoogleDrive() {
         $gdrive = new GoogleDrive($this->url);
-        $play_links = $gdrive->getLinkPlay();
-        
-        $files = [];
-        foreach ($play_links as $link) {
-            $str_rand = Str::random(5);
-            $token = generate_token($str_rand . 'play.mp4');
-            $file = json_encode([
-                'path' => $this->url,
-            ]);
-            $file = \Crypt::encryptString($file);
-            
-            $files[] = (object) [
-                'label' => $link->label,
+        return [
+            (object) [
+                'file' => 'https://drive.google.com/file/d/'. $gdrive->getFileId() .'/preview',
                 'type' => 'mp4',
-                'file' => $this->getStreamLink($token, $file, $str_rand . 'play.mp4'),
-            ];
-        }
-        
+            ]
+        ];
+    }
+    
+    protected function getVideoGoogleDrive2() {
+        $gdrive = new GoogleDrive($this->url);
+        $files = $gdrive->getLinkPlay();
         return $files;
     }
     
@@ -231,6 +224,6 @@ class VideoFiles extends Model
     }
     
     protected function getStreamLink($token, $file, $name) {
-        return route('stream.video', [base64_encode($token), base64_encode($file), $name]);
+        return route('stream.video', [$token, base64_encode($file), $name]);
     }
 }

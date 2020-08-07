@@ -27,15 +27,11 @@ function generate_token($string) {
     $month = date('Y-m');
     $ip = get_ip_client();
     $key = 'ADAsd$#5vSD342354BCVByt&%^23vx';
-    return \Hash::make($key . $month . $key . $ip . $string);
+    return md5($key . $month . $key) . md5($key . $ip . $string);
 }
 
 function check_token($token, $string) {
-    $month = date('Y-m');
-    $ip = get_ip_client();
-    $key = 'ADAsd$#5vSD342354BCVByt&%^23vx';
-    
-    if (\Hash::check($key . $month . $key . $ip . $string, $token)) {
+    if (generate_token($string) == $token) {
         return true;
     }
     return false;

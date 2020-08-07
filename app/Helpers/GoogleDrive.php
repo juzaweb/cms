@@ -84,18 +84,22 @@ class GoogleDrive
         return $files;
     }
     
+    public function getFileId() {
+        return $this->file_id;
+    }
+    
     public function getDataStream($key) {
         $response = $this->_getLinks();
         $content = $response->response;
-        $header_cookies = $response->headers['Set-Cookie'];
-        $cookies = [];
-        foreach ($header_cookies as $cookie) {
-            $split = explode('=', $cookie);
-            if (isset($split[1])) {
-                $cookies[$split[0]] = trim($split[1]);
+        $cookies = $response->headers['Set-Cookie'];
+        
+        $drive_stream = '';
+        foreach ($cookies as $cookie) {
+            if (strpos($cookie, 'DRIVE_STREAM=') === 0) {
+                $drive_stream = str_replace('DRIVE_STREAM=', '', $cookie);
             }
         }
-    
+        
         $arr = [];
         parse_str($content,$arr);
         $stream_map = explode(',', $arr['fmt_stream_map']);
@@ -125,7 +129,7 @@ class GoogleDrive
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTPHEADER => array(
                 'Connection: keep-alive',
-                'Cookie: DRIVE_STREAM=' . $cookies['DRIVE_STREAM']
+                'Cookie: DRIVE_STREAM=' . $drive_stream
             )
         ));
     
@@ -135,7 +139,7 @@ class GoogleDrive
     
         return [
             'content_length' => $content_length,
-            'drive_stream' => $cookies['DRIVE_STREAM'],
+            'drive_stream' => $drive_stream,
             'src' => $file_url,
         ];
     }

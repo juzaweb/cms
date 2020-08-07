@@ -21,29 +21,29 @@ class StreamController extends Controller
     }
     
     public function video($token, $file, $file_name) {
-        if (!check_token(base64_decode($token), $file_name)) {
+        if (!check_token($token, $file_name)) {
             die('Token do not match');
         }
     
-        try {
+        //try {
             $file = json_decode(\Crypt::decryptString(base64_decode($file)));
             if ($file->path) {
-                
+            
                 if (is_url($file->path)) {
                     $this->urlFileStream($file);
                     die();
                 }
-                
+            
                 if (\Storage::disk('uploads')->exists($file->path)) {
                     $this->localFileStream($file);
                     die();
                 }
             }
-        }
+        /*}
         catch (\Exception $exception) {
             \Log::error('VideoStream: ' . $exception->getMessage());
             die('Token do not match.');
-        }
+        }*/
     }
     
     protected function urlFileStream($file) {
@@ -72,7 +72,7 @@ class StreamController extends Controller
     
     protected function googleDriveStream($file) {
         $gdrive = new GoogleDrive($file->path);
-        $this->googleDriveStream($gdrive->getDataStream($file->key));
+        $this->googleDriveStreamData($gdrive->getDataStream($file->key));
     }
     
     protected function googleDriveStreamData(array $data) {
