@@ -6,18 +6,17 @@ use GuzzleHttp\Client;
 
 class GoogleDrive
 {
+    protected $url;
     protected $file_id;
     
     public function __construct(string $url) {
-        $this->file_id = $this->getFileId($url);
+        $this->url = $url;
+        $this->file_id = $this->_getFileId($this->url);
     }
     
     public function getLinkPlay() {
-        $play_url = 'https://drive.google.com/get_video_info?docid=' . $this->file_id;
-        $client = new Client();
-        $response = $client->request('GET', $play_url);
-        $content = $response->getBody()->getContents();
-        $cookies = $response->getHeaders()['Set-Cookie'];
+        $response = $this->_getLinks();
+        $content = $response->response;
         $arr = [];
         parse_str($content,$arr);
         $stream_map = explode(',', $arr['fmt_stream_map']);
@@ -30,10 +29,20 @@ class GoogleDrive
                 case 22: $quality = '720p';break;
                 default: $quality = '360p';
             }
+    
+            $file = json_encode([
+                'path' => $this->url,
+                'key' => $explode[0],
+            ]);
             
             $files[] = (object) [
                 'label' => $quality,
                 'type' => 'mp4',
+                'file' => route('stream.video', [
+                    generate_token($quality . '.mp4'),
+                    base64_encode(\Crypt::encryptString($file)),
+                    $quality . '.mp4'
+                ]),
             ];
         }
         
@@ -75,10 +84,36 @@ class GoogleDrive
         return $files;
     }
     
-    public function getLinkStream() {
+    public function getDataStream($key) {
+        $response = $this->_getLinks();
+        $content = $response->response;
+        $header_cookies = $response->headers['Set-Cookie'];
+        $cookies = [];
+        foreach ($header_cookies as $cookie) {
+            $split = explode('=', $cookie);
+            if (isset($split[1])) {
+                $cookies[$split[0]] = trim($split[1]);
+            }
+        }
+    
+        $arr = [];
+        parse_str($content,$arr);
+        $stream_map = explode(',', $arr['fmt_stream_map']);
+        
+        foreach ($stream_map as $file) {
+            $explode = explode('|', $file);
+            if ($explode[0] == $key) {
+                $file_url = $explode[1];
+            }
+        }
+        
+        if (empty($file_url)) {
+            return false;
+        }
+    
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $explode[1],
+            CURLOPT_URL => $file_url,
             CURLOPT_HEADER => true,
             CURLOPT_CONNECTTIMEOUT => 0,
             CURLOPT_TIMEOUT => 1000,
@@ -97,9 +132,25 @@ class GoogleDrive
         curl_exec($curl);
         $content_length = curl_getinfo($curl, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
         curl_close($curl);
+    
+        return [
+            'content_length' => $content_length,
+            'drive_stream' => $cookies['DRIVE_STREAM'],
+            'src' => $file_url,
+        ];
     }
     
-    public function getFileId(string $url) {
+    private function _getFileId(string $url) {
         return explode('/', $url)[5];
+    }
+    
+    private function _getLinks() {
+        $play_url = 'https://drive.google.com/get_video_info?docid=' . $this->file_id;
+        $client = new Client();
+        $response = $client->request('GET', $play_url);
+        return (object) [
+            'response' => $response->getBody()->getContents(),
+            'headers' => $response->getHeaders(),
+        ];
     }
 }

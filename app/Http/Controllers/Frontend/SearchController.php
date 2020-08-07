@@ -40,9 +40,8 @@ class SearchController extends Controller
         
         if ($q) {
             $query->where(function (Builder $builder) use ($q) {
-                $q = full_text_wildcards($q);
-                $builder->orWhereRaw('MATCH (name) AGAINST (? IN BOOLEAN MODE)', [$q]);
-                $builder->orWhereRaw('MATCH (other_name) AGAINST (? IN BOOLEAN MODE)', [$q]);
+                $builder->orWhere('name', 'like', '%'. $q .'%');
+                $builder->orWhere('other_name', 'like', '%'. $q .'%');
             });
         }
         

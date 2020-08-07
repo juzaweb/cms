@@ -84,7 +84,7 @@ class VideoFiles extends Model
             case 'webm':
                 return $this->getVideoUrl('webm');
             case 'm3u8':
-                return $this->getVideoUrl('webm');
+                return $this->getVideoUrl('m3u8');
             case 'embed':
                 return $this->getVideoUrl('embed');
         }

@@ -30,12 +30,12 @@ class StreamController extends Controller
             if ($file->path) {
                 
                 if (is_url($file->path)) {
-                    $this->urlFileStream($file->path);
+                    $this->urlFileStream($file);
                     die();
                 }
                 
                 if (\Storage::disk('uploads')->exists($file->path)) {
-                    $this->localFileStream($file->path);
+                    $this->localFileStream($file);
                     die();
                 }
             }
@@ -46,61 +46,61 @@ class StreamController extends Controller
         }
     }
     
-    protected function urlFileStream($file_path) {
-        if ($this->isUrlGoogleDrive($file_path)) {
-            $gdrive = new GoogleDrive($file_path);
-            $play_links = $gdrive->getLinkPlay();
-            
+    protected function urlFileStream($file) {
+        if ($this->isUrlGoogleDrive($file->path)) {
+            $this->googleDriveStream($file);
         }
-        //$stream = new UrlVideoStream($file->path);
-        //$stream->start();
+        else {
+            $stream = new UrlVideoStream($file->path);
+            $stream->start();
+        }
     }
     
-    protected function localFileStream($file_path) {
-        $file_path = \Storage::disk('uploads')->path($file_path);
+    protected function localFileStream($file) {
+        $file_path = \Storage::disk('uploads')->path($file->path);
         $stream = new VideoStream($file_path);
         $stream->start();
     }
     
     protected function isUrlGoogleDrive($url) {
-        return true;
+        if (strpos($url, 'drive.google.com') !== false) {
+            return true;
+        }
+        
+        return false;
     }
     
-    protected function googleDriveStream(array $data) {
-        $content_length = $data['content-length'];
-        $headers = array(
+    protected function googleDriveStream($file) {
+        $gdrive = new GoogleDrive($file->path);
+        $this->googleDriveStream($gdrive->getDataStream($file->key));
+    }
+    
+    protected function googleDriveStreamData(array $data) {
+        $content_length = $data['content_length'];
+        $headers = [
             'Connection: keep-alive',
-            'Cookie: DRIVE_STREAM=' . $data['cookie']['DRIVE_STREAM']
-        );
+            'Cookie: DRIVE_STREAM=' . $data['drive_stream']
+        ];
         
         if (isset($_SERVER['HTTP_RANGE'])) {
-            
             $http = 1;
             preg_match('/bytes=(\d+)-(\d+)?/', $_SERVER['HTTP_RANGE'], $range);
             $initial = intval($range[1]);
             $final = $content_length - $initial - 1;
             array_push($headers,'Range: bytes=' . $initial . '-' . ($initial + $final));
-            
         } else {
-            
             $http = 0;
-            
         }
         
         if ($http == 1) {
-            
             header('HTTP/1.1 206 Partial Content');
             header('Accept-Ranges: bytes');
             header('Content-Range: bytes ' . $initial . '-' . ($initial + $final) . '/' . $data['content-length']);
-            
         } else {
-            
             header('Accept-Ranges: bytes');
-            
         }
         
         $ch = curl_init();
-        
         curl_setopt_array($ch, array(
             CURLOPT_URL => $data['src'],
             CURLOPT_CONNECTTIMEOUT => 0,
@@ -118,7 +118,6 @@ class StreamController extends Controller
         
         header('Content-Type: video/mp4');
         header('Content-length: ' . $content_length);
-        
         curl_exec($ch);
     }
 }
