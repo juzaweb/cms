@@ -17,7 +17,7 @@ class RegisterController extends Controller
         if (!get_config('user_registration')) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Registration has been locked',
+                'message' => trans('app.registration_has_been_locked'),
             ]);
         }
         
@@ -47,6 +47,11 @@ class RegisterController extends Controller
         }
         
         $model->save();
+    
+        if (!get_config('user_verification')) {
+            \Auth::loginUsingId($model->id, true);
+        }
+        
         event(new RegisterSuccess($model));
         
         return response()->json([

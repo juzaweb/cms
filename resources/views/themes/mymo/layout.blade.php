@@ -71,7 +71,7 @@
             "register_url": "{{ route('register.submit') }}",
             "forgot_password_url": "{{ route('register.submit') }}",
             "redirecturl":"{{ url()->current() }}",
-            "loadingmessage":"@lang('app.sending_user_info_please_wait')",
+            "loadingmessage":"@lang('app.please_wait')",
             "recaptcha":"{{ get_config('google_recaptcha') }}",
             "sitekey":"{{ get_config('google_recaptcha_key') }}",
             "languages":{

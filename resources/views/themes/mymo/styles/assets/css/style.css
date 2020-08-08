@@ -257,6 +257,10 @@ a.watch-movie:hover {
     margin-top: 6px;
 }
 
+.color-red {
+    color: red;
+}
+
 @media screen and (min-width: 1024px){
     /*.hidemobile {
         display: block;

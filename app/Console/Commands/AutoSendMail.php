@@ -29,14 +29,18 @@ class AutoSendMail extends Command
             return false;
         }
         
-        \Config::set('mail.host', Configs::getConfig('mail_host'));
-        \Config::set('mail.driver', Configs::getConfig('mail_driver'));
-        \Config::set('mail.port', Configs::getConfig('mail_port'));
-        \Config::set('mail.username', Configs::getConfig('mail_username'));
-        \Config::set('mail.password', Configs::getConfig('mail_password'));
-        \Config::set('mail.encryption', Configs::getConfig('mail_encryption'));
-        \Config::set('mail.from.name', Configs::getConfig('mail_from_name'));
-        \Config::set('mail.from.address', Configs::getConfig('mail_from_address'));
+        if (empty(get_config('mail_host')) || empty(get_config('mail_driver'))) {
+            return false;
+        }
+        
+        \Config::set('mail.host', get_config('mail_host'));
+        \Config::set('mail.driver', get_config('mail_driver'));
+        \Config::set('mail.port', get_config('mail_port'));
+        \Config::set('mail.username', get_config('mail_username'));
+        \Config::set('mail.password', get_config('mail_password'));
+        \Config::set('mail.encryption', get_config('mail_encryption'));
+        \Config::set('mail.from.name', get_config('mail_from_name'));
+        \Config::set('mail.from.address', get_config('mail_from_address'));
     
         (new \Illuminate\Mail\MailServiceProvider(app()))->register();
         

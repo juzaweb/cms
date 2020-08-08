@@ -265,6 +265,7 @@ return [
   'admin_panel' => 'Admin panel',
   'error_logs' => 'Error logs',
   'sending_user_info_please_wait' => 'Sending user info, please wait...',
+  'please_wait' => 'Please wait...',
   'menu_link' => 'Menu link',
   'custom_html' => 'Custom html',
   'current_password' => 'Current password',
@@ -352,4 +353,6 @@ return [
     'new_users' => 'New users',
     'statistics' => 'Statistics',
     'chart_of_views_this_month' => 'Chart of views this month',
+    'home_banner' => 'Home page banner',
+    'registration_has_been_locked' => 'Registration has been locked',
 ];

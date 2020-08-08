@@ -17,6 +17,12 @@
             <input type="text" name="author_name" id="author_name" class="form-control" value="{{ get_config('author_name') }}" autocomplete="off" required>
         </div>
 
+        <div class="form-group">
+            <label class="col-form-label" for="home_banner">@lang('app.home_banner')</label>
+
+            <input type="text" name="home_banner" id="home_banner" class="form-control" value="{{ get_config('home_banner') }}" autocomplete="off" >
+        </div>
+
     </div>
 </div>
 
@@ -28,13 +34,13 @@
     <div class="card-body">
 
         <div class="form-group">
-            <label class="col-form-label" for="author_name">@lang('app.seo_title')</label>
+            <label class="col-form-label" for="movies_title">@lang('app.seo_title')</label>
 
             <input type="text" name="movies_title" id="movies_title" class="form-control" value="{{ get_config('movies_title') }}" autocomplete="off" required>
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="author_name">@lang('app.seo_keywords')</label>
+            <label class="col-form-label" for="movies_keywords">@lang('app.seo_keywords')</label>
 
             <input type="text" name="movies_keywords" id="movies_keywords" class="form-control" value="{{ get_config('movies_keywords') }}" autocomplete="off">
             <em class="description">@lang('app.use_comma_to_separate_keyword')</em>
