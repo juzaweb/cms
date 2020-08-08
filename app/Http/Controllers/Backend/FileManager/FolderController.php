@@ -54,6 +54,7 @@ class FolderController extends LfmController
                 
                 $model = new Folders();
                 $model->name = $folder_name;
+                $model->type = $this->getType();
                 $model->folder_id = $parent_id;
                 $model->save();
                 

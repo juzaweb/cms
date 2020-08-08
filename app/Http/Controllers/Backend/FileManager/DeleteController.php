@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend\Filemanager;
 
-use UniSharp\LaravelFilemanager\Events\ImageIsDeleting;
-use UniSharp\LaravelFilemanager\Events\ImageWasDeleted;
+use App\Models\Files;
+use App\Models\Folders;
 
 class DeleteController extends LfmController
 {
@@ -12,32 +12,21 @@ class DeleteController extends LfmController
         $item_names = request('items');
         $errors = [];
 
-        foreach ($item_names as $name_to_delete) {
-            $file_to_delete = $this->lfm->pretty($name_to_delete);
-            $file_path = $file_to_delete->path();
-            
-            if (is_null($name_to_delete)) {
+        foreach ($item_names as $file) {
+            if (is_null($file)) {
                 array_push($errors, parent::error('folder-name'));
                 continue;
             }
-
-            if (! $this->lfm->setName($name_to_delete)->exists()) {
-                array_push($errors, parent::error('folder-not-found', ['folder' => $file_path]));
-                continue;
+    
+            $is_directory = $this->isDirectory($file);
+            if ($is_directory) {
+                Folders::find($file)->deleteFolder();
             }
-
-            if ($this->lfm->setName($name_to_delete)->isDirectory()) {
-                if (! $this->lfm->setName($name_to_delete)->directoryIsEmpty()) {
-                    array_push($errors, parent::error('delete-folder'));
-                    continue;
-                }
-            } else {
-                if ($file_to_delete->isImage()) {
-                    $this->lfm->setName($name_to_delete)->thumb()->delete();
-                }
+            else {
+                $file_path = $this->getPath($file);
+                Files::where('path', '=', $file_path)->first()->deleteFile();
             }
-
-            $this->lfm->setName($name_to_delete)->delete();
+            
         }
 
         if (count($errors) > 0) {

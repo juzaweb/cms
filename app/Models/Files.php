@@ -44,4 +44,9 @@ class Files extends Model
         'extension',
         'mime_type',
     ];
+    
+    public function deleteFile() {
+        \Storage::disk('uploads')->delete($this->path);
+        return $this->delete();
+    }
 }

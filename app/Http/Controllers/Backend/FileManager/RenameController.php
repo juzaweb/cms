@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers\Backend\Filemanager;
 
-use UniSharp\LaravelFilemanager\Events\ImageIsRenaming;
-use UniSharp\LaravelFilemanager\Events\ImageWasRenamed;
-use UniSharp\LaravelFilemanager\Events\FolderIsRenaming;
-use UniSharp\LaravelFilemanager\Events\FolderWasRenamed;
+use App\Models\Files;
+use App\Models\Folders;
 
 class RenameController extends LfmController
 {
     public function getRename()
     {
-        $old_name = request()->input('file');
+        $file = request()->input('file');
         $new_name = request()->input('new_name');
         
-        $old_file = $this->lfm->pretty($old_name);
-
-        $is_directory = $old_file->isDirectory();
+        $is_directory = $this->isDirectory($file);
 
         if (empty($new_name)) {
             if ($is_directory) {
@@ -26,42 +22,21 @@ class RenameController extends LfmController
             }
         }
 
-        if (config('lfm.alphanumeric_directory') && preg_match('/[^\w-]/i', $new_name)) {
-            return parent::error('folder-alnum');
-        // return parent::error('file-alnum');
-        } elseif ($this->lfm->setName($new_name)->exists()) {
-            return parent::error('rename');
-        }
-
-        if (! $is_directory) {
-            $extension = $old_file->extension();
-            if ($extension) {
-                $new_name = str_replace('.' . $extension, '', $new_name) . '.' . $extension;
-            }
-        }
-
-        $new_file = $this->lfm->setName($new_name)->path('absolute');
-
         if ($is_directory) {
-            event(new FolderIsRenaming($old_file->path(), $new_file));
-        } else {
-            event(new ImageIsRenaming($old_file->path(), $new_file));
+            Folders::where('id', '=', $file)
+                ->update([
+                    'name' => $new_name
+                ]);
         }
-
-        if ($old_file->hasThumb()) {
-            $this->lfm->setName($old_name)->thumb()
-                ->move($this->lfm->setName($new_name)->thumb());
+        else {
+            $file_path = explode('uploads/', $file)[1];
+            
+            Files::where('path', '=', $file_path)
+                ->update([
+                    'name' => $new_name
+                ]);
         }
-
-        $this->lfm->setName($old_name)
-            ->move($this->lfm->setName($new_name));
-
-        if ($is_directory) {
-            event(new FolderWasRenamed($old_file->path(), $new_file));
-        } else {
-            event(new ImageWasRenamed($old_file->path(), $new_file));
-        }
-
+        
         return parent::$success_response;
     }
 }

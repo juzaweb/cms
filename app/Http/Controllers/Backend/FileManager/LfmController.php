@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Backend\Filemanager;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use UniSharp\LaravelFilemanager\Lfm;
-use UniSharp\LaravelFilemanager\LfmPath;
 
 class LfmController extends Controller
 {
@@ -15,7 +12,7 @@ class LfmController extends Controller
     
     }
     
-    public function show(Request $request) {
+    public function show() {
         $type = $this->getType();
         if ($type == 1) {
             $mime_types = [
@@ -68,5 +65,21 @@ class LfmController extends Controller
         }
         
         return 2;
+    }
+    
+    protected function getPath($url) {
+        $explode = explode('uploads/', $url);
+        if ($explode[1]) {
+            return $explode[1];
+        }
+        return $url;
+    }
+    
+    protected function isDirectory($file) {
+        if (is_numeric($file)) {
+            return true;
+        }
+        
+        return false;
     }
 }

@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers\Backend\Filemanager;
 
+use App\Models\Files;
+
 class DownloadController extends LfmController
 {
     public function getDownload()
     {
-        return response()->download($this->lfm->setName(request('file'))->path('absolute'));
+        $file = $this->getPath(request()->get('file'));
+        $data = Files::where('path', '=', $file)->first(['name']);
+        
+        $path = \Storage::disk('uploads')->path($file);
+        if ($data) {
+            return response()->download($path, $data->name);
+        }
+        
+        return response()->download($path);
     }
 }

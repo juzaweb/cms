@@ -542,7 +542,7 @@ function rename(item) {
 function trash(items) {
     notify(lang['message-delete'], function () {
         performLfmRequest('delete', {
-            items: items.map(function (item) { return item.name; })
+            items: items.map(function (item) { return item.url; })
         }).done(refreshFoldersAndItems)
     });
 }
@@ -561,7 +561,7 @@ function download(items) {
     items.forEach(function (item, index) {
         var data = defaultParameters();
 
-        data['file'] = item.name;
+        data['file'] = item.url;
 
         var token = getUrlParam('token');
         if (token) {
