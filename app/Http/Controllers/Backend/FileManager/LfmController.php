@@ -15,18 +15,9 @@ class LfmController extends Controller
     
     }
     
-    public function __get($var_name)
-    {
-        if ($var_name === 'lfm') {
-            return app(LfmPath::class);
-        } elseif ($var_name === 'helper') {
-            return app(Lfm::class);
-        }
-    }
-    
     public function show(Request $request) {
-        $type = strtolower($request->get('type'));
-        if ($type == 'image') {
+        $type = $this->getType();
+        if ($type == 1) {
             $mime_types = [
                 'image/jpeg',
                 'image/pjpeg',
@@ -62,19 +53,20 @@ class LfmController extends Controller
         if (! extension_loaded('fileinfo')) {
             array_push($arr_errors, 'Fileinfo extension not found.');
         }
-
-        $mine_config_key = 'lfm.folder_categories.'
-            . $this->helper->currentLfmType()
-            . '.valid_mime';
-
-        if (! is_array(config($mine_config_key))) {
-            array_push($arr_errors, 'Config : ' . $mine_config_key . ' is not a valid array.');
-        }
-
+        
         return $arr_errors;
     }
-
+    
     public function error($error_type, $variables = []) {
-        throw new \Exception(trans('error-' . $error_type, $variables));
+        throw new \Exception(trans('lfm.error-' . $error_type, $variables));
+    }
+    
+    protected function getType() {
+        $type = strtolower(\request()->get('type'));
+        if (in_array($type, ['image', 'images'])) {
+            return 1;
+        }
+        
+        return 2;
     }
 }

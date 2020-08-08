@@ -533,7 +533,7 @@ function createFolder(folder_name) {
 function rename(item) {
     dialog(lang['message-rename'], item.name, function (new_name) {
         performLfmRequest('rename', {
-            file: item.name,
+            file: item.url,
             new_name: new_name
         }).done(refreshFoldersAndItems);
     });

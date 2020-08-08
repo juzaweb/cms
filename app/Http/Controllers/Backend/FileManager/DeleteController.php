@@ -7,11 +7,6 @@ use UniSharp\LaravelFilemanager\Events\ImageWasDeleted;
 
 class DeleteController extends LfmController
 {
-    /**
-     * Delete image and associated thumbnail.
-     *
-     * @return mixed
-     */
     public function getDelete()
     {
         $item_names = request('items');

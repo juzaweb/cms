@@ -219,12 +219,12 @@
         //   label: lang['menu-view'],
         //   multiple: true
         // },
-        {
+        /*{
             name: 'move',
             icon: 'paste',
             label: lang['menu-move'],
             multiple: true
-        },
+        },*/
         /*{
           name: 'resize',
           icon: 'arrows-alt',
@@ -270,12 +270,13 @@
         init: function () {
             var _this = this; // For the closure
             this.on('success', function (file, response) {
-                if (response == 'OK') {
+                /*if (response == 'OK') {
                     loadFolders();
                 }
                 else {
                     this.defaultOptions.error(file, response.join('\n'));
-                }
+                }*/
+                loadFolders();
             });
         },
         headers: {

@@ -22,7 +22,7 @@ class UploadController extends LfmController
     
     public function upload(Request $request)
     {
-        $folder_id = request()->input('working_dir', null);
+        $folder_id = request()->input('working_dir');
         
         if (empty($folder_id)) {
             $folder_id = null;
@@ -32,7 +32,7 @@ class UploadController extends LfmController
         $new_filename = null;
         $new_path = null;
     
-//        try {
+        try {
     
             $receiver = new FileReceiver('upload', $request, HandlerFactory::classFromRequest($request));
             if ($receiver->isUploaded() === false) {
@@ -52,7 +52,7 @@ class UploadController extends LfmController
                 'status' => true
             ]);
         
-        /*} catch (\Exception $e) {
+        } catch (\Exception $e) {
             Log::error($e->getMessage(), [
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
@@ -61,7 +61,7 @@ class UploadController extends LfmController
         
             array_push($error_bag, $e->getMessage());
             return $this->response($error_bag);
-        }*/
+        }
     }
     
     protected function saveFile(UploadedFile $file, $folder_id) {
@@ -73,7 +73,7 @@ class UploadController extends LfmController
             $model = new Files();
             $model->name = $file->getClientOriginalName();
             $model->path = $new_path;
-            $model->type = 1;
+            $model->type = $this->getType();
             $model->mime_type = $file->getClientMimeType();
             $model->extension = $file->getClientOriginalExtension();
             $model->size = $file->getSize();

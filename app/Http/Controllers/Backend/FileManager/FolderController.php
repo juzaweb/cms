@@ -8,14 +8,27 @@ class FolderController extends LfmController
 {
     public function getFolders()
     {
+        $childrens = [];
+        $folders = Folders::whereNull('folder_id')
+            ->get(['id', 'name']);
+        
+        foreach ($folders as $folder) {
+            $childrens[] = (object) [
+                'name' => $folder->name,
+                'url' => $folder->id,
+                'children' => [],
+                'has_next' => false,
+            ];
+        }
+        
         return view('backend.file_manager.tree')
             ->with([
                 'root_folders' => [
                     (object) [
                         'name' => 'Root',
                         'url' => '',
-                        'children' => [],
-                        'has_next' => false,
+                        'children' => $childrens,
+                        'has_next' => $childrens ? true : false,
                     ]
                 ],
             ]);
@@ -24,7 +37,7 @@ class FolderController extends LfmController
     public function getAddfolder()
     {
         $folder_name = request()->input('name');
-        $parent_id = null;
+        $parent_id = request()->input('working_dir');
         
         try {
             if ($folder_name === null || $folder_name == '') {

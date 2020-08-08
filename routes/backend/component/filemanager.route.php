@@ -1,10 +1,10 @@
 <?php
 
-Route::group(['prefix' => 'filemanager'], function () {
+Route::group(['prefix' => 'filemanager2'], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
-Route::group(['prefix' => 'filemanager2'], function () {
+Route::group(['prefix' => 'filemanager'], function () {
     Route::get('/', 'Backend\Filemanager\LfmController@show');
     
     Route::get('/errors', 'Backend\Filemanager\LfmController@getErrors');

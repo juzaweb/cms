@@ -17,9 +17,11 @@ class ItemsController extends LfmController
         $perPage = 20;
         
         $working_dir = request()->get('working_dir');
+        
         $folders = Folders::where('folder_id', '=', $working_dir)
             ->get(['id', 'name']);
         $files = Files::where('folder_id', '=', $working_dir)
+            ->where('type', '=', $this->getType())
             ->paginate($perPage);
     
         $storage = \Storage::disk('uploads');
@@ -42,9 +44,9 @@ class ItemsController extends LfmController
                 'is_file' => true,
                 'is_image' => $file->type == 1 ? true : false,
                 'name' => $file->name,
-                'thumb_url' => $storage->url($file->path),
+                'thumb_url' => $file->type == 1 ? $storage->url($file->path) : null,
                 'time' => strtotime($file->created_at),
-                'url' => $file->path,
+                'url' => $storage->url($file->path),
             ];
         }
         
