@@ -11,15 +11,17 @@ class VerificationController extends Controller
     public function index($token) {
         $user = User::where('verification_token', '=', $token)
             ->where('status', '=', 2)
-            ->firstOrFail();
+            ->firstOrFail(['id']);
     
-        $user->update([
+        User::where('id', '=', $user->id)->update([
             'status' => 1,
             'verification_token' => null,
         ]);
         
         \Auth::loginUsingId($user->id);
     
-        return view('themes.mymo.auth.verified_success');
+        return view('themes.mymo.auth.verified_success', [
+            'title' => trans('app.user_e_mail_verification')
+        ]);
     }
 }
