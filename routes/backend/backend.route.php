@@ -183,5 +183,7 @@ Route::group(['prefix' => 'logs/email'], function () {
     
     Route::get('/getdata', 'Backend\Logs\EmailLogsController@getData')->name('admin.logs.email.getdata');
     
+    Route::post('/status', 'Backend\Logs\EmailLogsController@status')->name('admin.logs.email.status');
+    
     Route::post('/remove', 'Backend\Logs\EmailLogsController@remove')->name('admin.logs.email.remove');
 });

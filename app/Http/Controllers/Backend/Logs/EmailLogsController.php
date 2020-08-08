@@ -48,6 +48,26 @@ class EmailLogsController extends Controller
         ]);
     }
     
+    public function status(Request $request) {
+        $this->validateRequest([
+            'ids' => 'required',
+            'status' => 'required|in:2,3',
+        ], $request, [
+            'ids' => trans('app.email_logs'),
+            'status' => trans('app.status'),
+        ]);
+        
+        EmailList::whereIn('id', $request->post('ids'))
+            ->update([
+                'status' => $request->post('status')
+            ]);
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('app.deleted_successfully'),
+        ]);
+    }
+    
     public function remove(Request $request) {
         $this->validateRequest([
             'ids' => 'required',

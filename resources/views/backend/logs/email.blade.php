@@ -100,6 +100,7 @@
         var table = new LoadBootstrapTable({
             url: '{{ route('admin.logs.email.getdata') }}',
             remove_url: '{{ route('admin.logs.email.remove') }}',
+            status_url: '{{ route('admin.logs.email.status') }}',
         });
     </script>
 @endsection
