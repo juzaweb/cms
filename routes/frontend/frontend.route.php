@@ -6,6 +6,7 @@ require_once __DIR__ . '/component/auth.route.php';
 require_once __DIR__ . '/component/watch.route.php';
 require_once __DIR__ . '/component/account.route.php';
 require_once __DIR__ . '/component/search.route.php';
+require_once __DIR__ . '/component/post.route.php';
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
 

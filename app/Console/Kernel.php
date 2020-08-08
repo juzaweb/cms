@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('email:send')->everyMinute();
         $schedule->command('notify:send')->everyFiveMinutes();
-        $schedule->command('video:convert')->everyMinute();
+        //$schedule->command('video:convert')->everyMinute();
     }
     
     protected function commands()

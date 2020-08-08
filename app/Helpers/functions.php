@@ -8,6 +8,7 @@ use App\Models\Movies;
 use App\Models\Sliders;
 use App\Models\ThemeConfigs;
 use App\Models\Types;
+use Illuminate\Support\Str;
 
 function json_message($message, $status = 'success') {
     header('Content-Type: application/json');
@@ -35,6 +36,10 @@ function check_token($token, $string) {
         return true;
     }
     return false;
+}
+
+function sub_words($string, int $words = 20) {
+    return Str::words($string, $words);
 }
 
 function image_path($url) {

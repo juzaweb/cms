@@ -87,6 +87,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $rating_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Servers[] $servers
  * @property-read int|null $servers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\MovieComments[] $comments
+ * @property-read int|null $comments_count
  */
 class Movies extends Model
 {

@@ -10,4 +10,4 @@ Route::post('/watch/{slug}/rating', 'Frontend\RatingController@setRating')->name
 
 Route::post('/watch/player/{slug}/{vid}', 'Frontend\PlayController@getPlayer')->name('watch.player');
 
-Route::post('/watch/{movie_id}/comment', 'Frontend\CommentController@comment')->name('watch.comment');
+Route::post('/watch/{movie_id}/comment', 'Frontend\CommentController@movieComment')->name('watch.comment');

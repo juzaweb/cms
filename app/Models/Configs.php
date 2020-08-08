@@ -80,8 +80,13 @@ class Configs extends Model
     }
     
     public static function getConfig(string $key) {
-        $config = Configs::firstOrNew(['code' => $key]);
-        return $config->value;
+        try {
+            $config = Configs::firstOrNew(['code' => $key]);
+            return $config->value;
+        }
+        catch (\Exception $exception) {
+            return '';
+        }
     }
     
     public static function setConfig(string $key, string $value = null) {

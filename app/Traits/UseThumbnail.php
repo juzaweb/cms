@@ -68,14 +68,14 @@ trait UseThumbnail {
         return false;
     }
     
-    protected function resizeThumbnail($thumbnail, $resize_size) {
+    protected function resizeThumbnail($thumbnail) {
         if (!isset($this->resize) || empty($this->resize)) {
             return null;
         }
         
         $thumb_path = $this->getPathThumbnail($thumbnail);
         if (file_exists($thumb_path)) {
-            $resize_size = explode('x', $resize_size);
+            $resize_size = explode('x', $this->resize);
             $w = $resize_size[0];
             $h = $resize_size[1];
             $new_file_path = $this->getDirPathThumbnail($thumbnail) . '/thumbs/';

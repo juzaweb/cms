@@ -14,6 +14,8 @@ class PostsSeeder extends Seeder
                 'content' => $faker->sentence(50),
                 'status' => 1,
                 'slug' => \Illuminate\Support\Str::slug($title),
+                'created_by' => 1,
+                'updated_by' => 1,
                 'created_at' => $faker->dateTime(),
                 'updated_at' => $faker->dateTime(),
             ]);

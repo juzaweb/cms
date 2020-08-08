@@ -15,8 +15,6 @@ class DatabaseSeeder extends Seeder
             TagsSeeder::class,
             MoviesSeeder::class,
             PostsSeeder::class,
-            CommentsSeeder::class,
         ]);
-        
     }
 }
