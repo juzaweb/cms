@@ -11,8 +11,7 @@ class LfmController extends Controller
 {
     protected static $success_response = 'OK';
     
-    public function __construct()
-    {
+    public function __construct() {
     
     }
     
@@ -26,21 +25,25 @@ class LfmController extends Controller
     }
     
     public function show(Request $request) {
-        $mime_types = [
-            'image/jpeg',
-            'image/pjpeg',
-            'image/png',
-            'image/gif',
-            'image/svg+xml',
-        ];
+        $type = strtolower($request->get('type'));
+        if ($type == 'image') {
+            $mime_types = [
+                'image/jpeg',
+                'image/pjpeg',
+                'image/png',
+                'image/gif',
+                'image/svg+xml',
+            ];
+        }
+        else {
+            $mime_types = [
+                'audio/mpeg',
+                'video/mp4',
+                'video/mpeg',
+            ];
+        }
         
-        $mime_types = [
-            'audio/mpeg',
-            'video/mp4',
-            'video/mpeg',
-        ];
-        
-        return view('backend.file-manager.index', [
+        return view('backend.file_manager.index', [
             'mime_types' => $mime_types
         ]);
     }
@@ -72,6 +75,6 @@ class LfmController extends Controller
     }
 
     public function error($error_type, $variables = []) {
-        throw new \Exception(trans('lfm.error-' . $error_type, $variables));
+        throw new \Exception(trans('error-' . $error_type, $variables));
     }
 }

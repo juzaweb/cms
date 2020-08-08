@@ -8,23 +8,16 @@ class FolderController extends LfmController
 {
     public function getFolders()
     {
-        $folder_types = array_filter(['user', 'share'], function ($type) {
-            return $this->helper->allowFolderType($type);
-        });
-        
-        return view('backend.file-manager.tree')
+        return view('backend.file_manager.tree')
             ->with([
-                'root_folders' => array_map(function ($type) use ($folder_types) {
-                    $path = $this->lfm->dir($this->helper->getRootFolder($type));
-
-                    return (object) [
-                        'name' => trans('lfm.title-' . $type),
-                        'url' => $path->path('working_dir'),
-                        'children' => $path->folders(),
-                        'has_next' => ! ($type == end($folder_types)),
-                    ];
-                    
-                }, $folder_types),
+                'root_folders' => [
+                    (object) [
+                        'name' => 'Root',
+                        'url' => '',
+                        'children' => [],
+                        'has_next' => false,
+                    ]
+                ],
             ]);
     }
     

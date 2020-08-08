@@ -22,7 +22,6 @@ class UploadController extends LfmController
     
     public function upload(Request $request)
     {
-        $file = request()->file('upload');
         $folder_id = request()->input('working_dir', null);
         
         if (empty($folder_id)) {

@@ -16,17 +16,38 @@ class ItemsController extends LfmController
         $currentPage = self::getCurrentPageFromRequest();
         $perPage = 20;
         
-        $working_dir = null;
+        $working_dir = request()->get('working_dir');
         $folders = Folders::where('folder_id', '=', $working_dir)
-            ->get()
-            ->toArray();
-        
+            ->get(['id', 'name']);
         $files = Files::where('folder_id', '=', $working_dir)
-            ->paginate($perPage)
-            ->items();
+            ->paginate($perPage);
+    
+        $storage = \Storage::disk('uploads');
+        $items = [];
+        foreach ($folders as $folder) {
+            $items[] = [
+                'icon' => 'fa-folder-o',
+                'is_file' => false,
+                'is_image' => false,
+                'name' => $folder->name,
+                'thumb_url' => asset('images/folder.png'),
+                'time' => false,
+                'url' => $folder->id,
+            ];
+        }
         
-        $items = array_merge($folders, $files);
-
+        foreach ($files as $file) {
+            $items[] = [
+                'icon' => $file->type == 1 ? 'fa-image' : 'fa-file',
+                'is_file' => true,
+                'is_image' => $file->type == 1 ? true : false,
+                'name' => $file->name,
+                'thumb_url' => $storage->url($file->path),
+                'time' => strtotime($file->created_at),
+                'url' => $file->path,
+            ];
+        }
+        
         return [
             'items' => $items,
             'paginator' => [
@@ -45,7 +66,7 @@ class ItemsController extends LfmController
         $folder_types = array_filter(['user', 'share'], function ($type) {
             return $this->helper->allowFolderType($type);
         });
-        return view('laravel-filemanager::move')
+        return view('backend.file_manager.move')
             ->with([
                 'root_folders' => array_map(function ($type) use ($folder_types) {
                     $path = $this->lfm->dir($this->helper->getRootFolder($type));
