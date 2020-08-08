@@ -16,6 +16,8 @@ Route::group(['prefix' => 'register', 'middleware' => ['web', 'guest']], functio
 
 Route::group(['prefix' => 'forgot-password', 'middleware' => ['web', 'guest']], function () {
     Route::post('/', 'Frontend\Auth\ForgotPasswordController@handle')->name('password.forgot.submit');
+    
+    Route::get('/success', 'Frontend\Auth\ForgotPasswordController@message')->name('password.forgot.success');
 });
 
 Route::group(['prefix' => 'reset-password', 'middleware' => ['web', 'guest']], function () {

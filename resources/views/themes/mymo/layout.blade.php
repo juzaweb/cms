@@ -68,8 +68,9 @@
         /* <![CDATA[ */
         var ajax_auth_object = {
             "login_url": "{{ route('login.submit') }}",
+            "user_registration": "{{ get_config('user_registration') }}",
             "register_url": "{{ route('register.submit') }}",
-            "forgot_password_url": "{{ route('register.submit') }}",
+            "forgot_password_url": "{{ route('password.forgot.submit') }}",
             "redirecturl":"{{ url()->current() }}",
             "loadingmessage":"@lang('app.please_wait')",
             "recaptcha":"{{ get_config('google_recaptcha') }}",

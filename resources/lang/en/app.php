@@ -355,4 +355,6 @@ return [
     'chart_of_views_this_month' => 'Chart of views this month',
     'home_banner' => 'Home page banner',
     'registration_has_been_locked' => 'Registration has been locked',
+    'forgot_message' => 'Password reset request successful',
+    'forgot_message_description' => 'Please click on the link in your email to retrieve your password',
 ];

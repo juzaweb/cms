@@ -22,5 +22,6 @@ class PasswordReset extends Model
 {
     protected $table = 'password_resets';
     protected $primaryKey = 'id';
-    
+    protected $fillable = ['email'];
+    const UPDATED_AT = null;
 }

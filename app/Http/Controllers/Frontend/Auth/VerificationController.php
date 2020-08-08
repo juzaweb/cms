@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Crypt;
 use App\User;
 
 class VerificationController extends Controller
@@ -20,8 +19,9 @@ class VerificationController extends Controller
         
         \Auth::loginUsingId($user->id);
     
-        return view('themes.mymo.auth.verified_success', [
-            'title' => trans('app.user_e_mail_verification')
+        return view('themes.mymo.message', [
+            'title' => trans('app.verified_success'),
+            'description' => trans('app.verified_success_description'),
         ]);
     }
 }

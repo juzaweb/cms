@@ -10,7 +10,7 @@
                             <span>
                                 <span>
                                     <a href="{{ route('home') }}">@lang('app.home')</a> »
-                                    <span class="breadcrumb_last" aria-current="page">@lang('app.verified_success')</span>
+                                    <span class="breadcrumb_last" aria-current="page">{{ @$title }}</span>
                                 </span>
                             </span>
                         </div>
@@ -28,9 +28,8 @@
 
         <main class="col-xs-12 col-sm-12 col-md-12">
             <div class="post-content panel-body text-center">
-                <h4 class="title-info">@lang('app.verified_success')</h4>
-                <p>@lang('app.verified_success_description')</p>
-                <a href="{{ route('account') }}" title="@lang('app.profile')" class="btn btn-primary">@lang('app.profile')</a>
+                <h4 class="title-info">{{ @$title }}</h4>
+                <p>{{ @$description }}</p>
 
                 <a href="/" title="@lang('app.back_to_home')" class="btn btn-primary">@lang('app.back_to_home')</a>
             </div>

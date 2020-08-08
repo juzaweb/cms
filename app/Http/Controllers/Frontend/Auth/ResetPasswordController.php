@@ -11,10 +11,10 @@ class ResetPasswordController extends Controller
 {
     public function index($token) {
         PasswordReset::where('token', $token)
-            ->findOrFail();
+            ->firstOrFail();
         
         return view('themes.mymo.auth.reset_password', [
-        
+            'token' => $token
         ]);
     }
     
@@ -28,13 +28,14 @@ class ResetPasswordController extends Controller
         ]);
     
         $reset_password = PasswordReset::where('token', $token)
-            ->findOrFail();
+            ->firstOrFail();
         $password = $request->post('password');
         User::where('email', '=', $reset_password->email)
             ->update([
                 'password' => \Hash::make($password),
             ]);
-        $reset_password->delete();
+        
+        PasswordReset::where('token', $token)->delete();
         
         return response()->json([
             'status' => 'success',

@@ -28,24 +28,28 @@
 
         <main class="col-xs-12 col-sm-12 col-md-12">
             <div class="post-content panel-body text-center">
-                <form action="{{ route('password.reset.submit') }}" method="post">
-                    @csrf
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <form action="{{ route('password.reset.submit', [$token]) }}" method="post" class="form-ajax">
 
-                    <label>@lang('app.new_password')</label>
-                    <div class="form-group pass_show">
-                        <input type="password" class="form-control" name="password" placeholder="@lang('app.new_password')">
+                            <label>@lang('app.new_password')</label>
+                            <div class="form-group pass_show">
+                                <input type="password" class="form-control" name="password" placeholder="@lang('app.new_password')">
+                            </div>
+
+                            <label>@lang('app.confirm_password')</label>
+                            <div class="form-group pass_show">
+                                <input type="password" class="form-control" name="password_confirmation" placeholder="@lang('app.confirm_password')">
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">@lang('app.update')</button>
+                            </div>
+
+                        </form>
                     </div>
-
-                    <label>@lang('app.confirm_password')</label>
-                    <div class="form-group pass_show">
-                        <input type="password" class="form-control" name="password_confirmation" placeholder="@lang('app.confirm_password')">
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">@lang('app.update')</button>
-                    </div>
-
-                </form>
+                </div>
             </div>
         </main>
     </div>

@@ -43,7 +43,15 @@ class ForgotPasswordController extends Controller
     
         $mail->sendByTemplate('forgot_password');
         return response()->json([
-            'status' => 'error',
+            'status' => 'success',
+            'redirect' => route('password.forgot.success'),
+        ]);
+    }
+    
+    public function message() {
+        return view('themes.mymo.message', [
+            'title' => trans('app.forgot_message'),
+            'description' => trans('app.forgot_message_description'),
         ]);
     }
     

@@ -29,7 +29,11 @@
 
                 <div id="get-notification" class="box-shadow">
                     <i class="hl-bell"></i>
-                    <span class="count">0</span>
+                    @if(Auth::check())
+                        <span class="count">{{ Auth::user()->unreadNotifications()->count() }}</span>
+                    @else
+                        <span class="count">0</span>
+                    @endif
                 </div>
 
                 <div class="user user-login-option box-shadow" id="pc-user-login">
