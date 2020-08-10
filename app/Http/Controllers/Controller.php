@@ -15,6 +15,12 @@ class Controller extends BaseController
 
     public function callAction($method, $parameters)
     {
+        if (!file_exists(base_path('.env'))) {
+            if (!in_array(\Route::currentRouteName(), ['install', 'install.submit'])) {
+                return redirect()->route('install');
+            }
+        }
+        
         return parent::callAction($method, $parameters);
     }
     

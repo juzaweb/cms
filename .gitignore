@@ -9,6 +9,7 @@
 /vendor
 /.idea
 /update
+/installed
 .env
 .env.backup
 .phpunit.result.cache

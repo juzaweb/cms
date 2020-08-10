@@ -1,0 +1,15 @@
+.box-hidden {
+    display: none;
+}
+
+.list-group .list-group-item span {
+    float: right;
+}
+
+.list-group .list-group-item.success .fa-fw {
+    color: green;
+}
+
+.list-group .list-group-item.error .fa-fw {
+    color: red;
+}
