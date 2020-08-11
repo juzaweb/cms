@@ -19,7 +19,7 @@ class InstallController extends Controller
     }
     
     public function index() {
-        if (file_exists(base_path('.env'))) {
+        if (file_exists(base_path('installed'))) {
             return abort(404);
         }
         
@@ -37,11 +37,11 @@ class InstallController extends Controller
     public function install(Request $request) {
         $this->validateRequest([
             'dbhost' => 'required',
-            'dbport' => 'required',
+            'dbport' => 'required|integer',
             'dbuser' => 'required',
             'dbpass' => 'nullable',
             'dbname' => 'required',
-            'dbprefix' => 'nullable',
+            'dbprefix' => 'nullable|alpha_dash',
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|string|min:6|max:32|confirmed',
@@ -51,16 +51,17 @@ class InstallController extends Controller
         ini_set('max_execution_time', 300);
         
         try {
-            $connection = $this->_testDbConnect($request->all());
-            if ($connection !== true) {
+            
+            if (!$this->_testDbConnect($request->all())) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => $connection,
+                    'message' => 'Cannot connect database!!!',
                 ]);
             }
     
             $this->_writeEnvFile($request->all());
             $this->_callArtisan();
+            $this->_createInstalled();
     
             return response()->json([
                 'status' => 'success',
@@ -109,33 +110,54 @@ class InstallController extends Controller
     }
     
     private function _testDbConnect(array $data) {
-        try{
-            $port = $data['dbport'] ? 'port='. $data['dbport'] .';' : '';
-            $connection = new \PDO("mysql:host=". $data['dbhost'] .";". $port ."dbname=". $data['dbname'] .";charset=utf8", $data['dbuser'], $data['dbpass']);
-            $connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $settings = config("database.connections.mysql");
+    
+        config([
+            'database' => [
+                'default' => 'mysql',
+                'connections' => [
+                    'mysql' => array_merge($settings, [
+                        'driver' => 'mysql',
+                        'host' => $data['dbhost'],
+                        'port' => $data['dbport'],
+                        'database' => $data['dbname'],
+                        'username' => $data['dbuser'],
+                        'password' => $data['dbpass'],
+                    ]),
+                ],
+            ],
+        ]);
+    
+        \DB::purge();
+    
+        try {
+            \DB::connection()->getPdo();
+        
             return true;
-        }
-        catch(\PDOException $e){
-            return 'Cannot connect database!!!';
+        } catch (\Exception $e) {
+            return false;
         }
     }
     
     private function _writeEnvFile(array $data) {
         $env = file_get_contents(base_path() . '/.env.example');
-        $env = str_replace('APP_KEY=', 'APP_KEY=base64:'.base64_encode(Str::random(32)), $env);
-        $env = str_replace('APP_URL=', 'APP_URL=' . $_SERVER['HTTP_HOST'], $env);
+        $env = str_replace('APP_KEY=123456', 'APP_KEY=base64:'.base64_encode(Str::random(32)), $env);
+        $env = str_replace('APP_URL=', 'APP_URL=' . url('/'), $env);
         $env = str_replace('DB_HOST=', 'DB_HOST=' . $data['dbhost'], $env);
         $env = str_replace('DB_PORT=', 'DB_PORT=' . $data['dbport'], $env);
         $env = str_replace('DB_DATABASE=', 'DB_DATABASE=' . $data['dbname'], $env);
         $env = str_replace('DB_USERNAME=', 'DB_USERNAME=' . $data['dbuser'], $env);
         $env = str_replace('DB_PASSWORD=', 'DB_PASSWORD=' . $data['dbpass'], $env);
-        $env = str_replace('DB_PREFIX=', 'DB_PREFIX=' . $data['dbprefix'], $env);
+        $env = str_replace('DB_PREFIX=', 'DB_PREFIX=' . str_replace('-', '_', $data['dbprefix']), $env);
         
         return file_put_contents(base_path() . '/.env', $env);
     }
     
     private function _callArtisan() {
-        \Artisan::call('config:clear');
-        \Artisan::call('migrate');
+        \Artisan::call('migrate', ['--force' => true]);
+    }
+    
+    private function _createInstalled() {
+        return file_put_contents(base_path('installed'), 'Installed');
     }
 }
