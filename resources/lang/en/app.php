@@ -354,8 +354,12 @@ return [
   'statistics' => 'Statistics',
   'chart_of_views_this_month' => 'Chart of views this month',
   'home_banner' => 'Home page banner',
+  'movies_banner' => 'Movies page banner',
+  'tv_series_banner' => 'Tv series page banner',
+  'blog_banner' => 'Blog page banner',
   'registration_has_been_locked' => 'Registration has been locked',
   'forgot_message' => 'Password reset request successful',
   'forgot_message_description' => 'Please click on the link in your email to retrieve your password',
-]; 
+  'banner_display_when_sharing_on_social_networks' => 'Banner display when sharing on social networks',
+];
 

@@ -13,7 +13,11 @@ class LatestMoviesController extends Controller
             ->paginate(20);
         
         return view('themes.mymo.genre.index', [
-            'items' => $items
+            'title' => get_config('latest_movies_title'),
+            'description' => get_config('latest_movies_description'),
+            'keywords' => get_config('latest_movies_keywords'),
+            'banner' => get_config('latest_movies_banner'),
+            'items' => $items,
         ]);
     }
 }

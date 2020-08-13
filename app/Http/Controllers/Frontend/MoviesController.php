@@ -37,6 +37,7 @@ class MoviesController extends Controller
             'title' => get_config('movies_title'),
             'description' => get_config('movies_description'),
             'keywords' => get_config('movies_keywords'),
+            'banner' => get_config('movies_banner'),
             'items' => $items,
             'info' => $info,
         ]);

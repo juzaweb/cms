@@ -34,6 +34,10 @@ class TVSeriesController extends Controller
             ->paginate(20);
     
         return view('themes.mymo.genre.index', [
+            'title' => get_config('tv_series_title'),
+            'description' => get_config('tv_series_description'),
+            'keywords' => get_config('tv_series_keywords'),
+            'banner' => get_config('tv_series_banner'),
             'items' => $items,
             'info' => $info
         ]);

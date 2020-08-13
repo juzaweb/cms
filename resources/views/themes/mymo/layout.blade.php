@@ -23,6 +23,9 @@
     <meta property="og:description" content="{{ @$description }}"/>
     <meta property="og:url" content="{{ url()->current() }}"/>
     <meta property="og:site_name" content="{{ $home_tile }}"/>
+    @if(@$banner)
+        <meta property="og:image" content="{{ image_url($banner) }}"/>
+    @endif
     @php
     $fb_app_id = get_config('fb_app_id');
     @endphp

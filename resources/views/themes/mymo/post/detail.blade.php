@@ -45,6 +45,10 @@
                 <div class="mymo_box">
                     {!! $info->content !!}
                 </div>
+
+                <div class="comments">
+                    @include('themes.mymo.post.component.comment')
+                </div>
             </section>
         </main>
 

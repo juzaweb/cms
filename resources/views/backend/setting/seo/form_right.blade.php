@@ -23,6 +23,24 @@
             <textarea name="description" id="description" class="form-control" rows="4">{{ get_config('description') }}</textarea>
         </div>
 
+        <div class="form-group">
+            <label class="col-form-label" for="banner">@lang('app.home_banner')</label>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="w-100" id="banner">
+                        <img src="{{ image_url(get_config('banner')) }}" alt="">
+                    </div>
+                    <em class="description">@lang('app.banner_display_when_sharing_on_social_networks')</em>
+                    <input type="hidden" name="banner" id="banner" class="form-control" value="{{ get_config('home_banner') }}" autocomplete="off" >
+                </div>
+
+                <div class="col-md-2">
+                    <a href="javascript:void(0)" class="btn btn-primary lfm-file" data-input="banner" data-preview="banner"><i class="fa fa-upload"></i> @lang('app.choose_image')</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -49,6 +67,24 @@
         <div class="form-group">
             <label class="col-form-label" for="tv_series_description">@lang('app.seo_meta_description')</label>
             <textarea name="tv_series_description" id="tv_series_description" class="form-control" rows="4">{{ get_config('tv_series_description') }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="tv_series_banner">@lang('app.tv_series_banner')</label>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="w-100" id="banner-tv_series">
+                        <img src="{{ image_url(get_config('tv_series_banner')) }}" alt="">
+                    </div>
+                    <em class="description">@lang('app.banner_display_when_sharing_on_social_networks')</em>
+                    <input type="hidden" name="tv_series_banner" id="tv_series_banner" class="form-control" value="{{ get_config('tv_series_banner') }}" autocomplete="off" >
+                </div>
+
+                <div class="col-md-2">
+                    <a href="javascript:void(0)" class="btn btn-primary lfm-file" data-input="tv_series_banner" data-preview="banner-tv_series"><i class="fa fa-upload"></i> @lang('app.choose_image')</a>
+                </div>
+            </div>
         </div>
 
     </div>

@@ -11,6 +11,7 @@ class HomeController extends Controller
             'title' => get_config('title'),
             'description' => get_config('description'),
             'keywords' => get_config('keywords'),
+            'banner' => get_config('banner'),
         ]);
     }
 }
