@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Installer;
 
 use App\Helpers\PermissionsChecker;
 use App\Helpers\RequirementsChecker;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -47,20 +48,20 @@ class InstallController extends Controller
             'password' => 'required|string|min:6|max:32|confirmed',
             'password_confirmation' => 'required|string|min:6|max:32',
         ], $request);
-    
-        ini_set('max_execution_time', 300);
         
         try {
             
-            if (!$this->_testDbConnect($request->all())) {
+            $data = $request->all();
+            if (!$this->_testDbConnect($data)) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Cannot connect database!!!',
                 ]);
             }
     
-            $this->_writeEnvFile($request->all());
+            $this->_writeEnvFile($data);
             $this->_callArtisan();
+            $this->_createAdminUser($data);
             $this->_createInstalled();
     
             return response()->json([
@@ -75,6 +76,19 @@ class InstallController extends Controller
                 'message' => $exception->getMessage(),
             ]);
         }
+    }
+    
+    public function step($step) {
+        ini_set('max_execution_time', 300);
+        
+        switch ($step) {
+            case 1: $this->_writeEnvFile($data);break;
+            case 2: $this->_callArtisan();break;
+            case 3: $this->_createAdminUser($data);break;
+            case 4: $this->_createInstalled();break;
+        }
+        
+        
     }
     
     private function _checkPHPversion($min_version) {
@@ -123,6 +137,7 @@ class InstallController extends Controller
                         'database' => $data['dbname'],
                         'username' => $data['dbuser'],
                         'password' => $data['dbpass'],
+                        'prefix' => $data['dbprefix'],
                     ]),
                 ],
             ],
@@ -141,6 +156,7 @@ class InstallController extends Controller
     
     private function _writeEnvFile(array $data) {
         $env = file_get_contents(base_path() . '/.env.example');
+        $env = str_replace('APP_ENV=local', 'APP_ENV=production', $env);
         $env = str_replace('APP_KEY=123456', 'APP_KEY=base64:'.base64_encode(Str::random(32)), $env);
         $env = str_replace('APP_URL=', 'APP_URL=' . url('/'), $env);
         $env = str_replace('DB_HOST=', 'DB_HOST=' . $data['dbhost'], $env);
@@ -155,6 +171,14 @@ class InstallController extends Controller
     
     private function _callArtisan() {
         \Artisan::call('migrate', ['--force' => true]);
+    }
+    
+    private function _createAdminUser(array $data) {
+        $model = new User();
+        $model->fill($data);
+        $model->password = \Hash::make($data['password']);
+        $model->is_admin = 1;
+        return $model->save();
     }
     
     private function _createInstalled() {

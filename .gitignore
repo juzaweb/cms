@@ -10,6 +10,8 @@
 /.idea
 /update
 /installed
+/composer.lock
+/bootstrap/cache
 .env
 .env.backup
 .phpunit.result.cache
