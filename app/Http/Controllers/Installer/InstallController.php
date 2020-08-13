@@ -58,16 +58,9 @@ class InstallController extends Controller
                     'message' => 'Cannot connect database!!!',
                 ]);
             }
-    
-            $this->_writeEnvFile($data);
-            $this->_callArtisan();
-            $this->_createAdminUser($data);
-            $this->_createInstalled();
-    
+            
             return response()->json([
                 'status' => 'success',
-                'message' => 'Install success',
-                'redirect' => route('home'),
             ]);
         }
         catch (\Exception $exception) {
@@ -78,17 +71,39 @@ class InstallController extends Controller
         }
     }
     
-    public function step($step) {
+    public function step($step, Request $request) {
         ini_set('max_execution_time', 300);
+        $data = $request->all();
         
+        $flash = '';
         switch ($step) {
-            case 1: $this->_writeEnvFile($data);break;
-            case 2: $this->_callArtisan();break;
-            case 3: $this->_createAdminUser($data);break;
-            case 4: $this->_createInstalled();break;
+            case 1: $this->_writeEnvFile($data);
+                $flash = 'Created env file config';
+                break;
+            case 2: $this->_callArtisan();
+                $flash = 'Run database';
+            break;
+            case 3: $this->_createAdminUser($data);
+                $flash = 'Create Admin user';
+            break;
+            case 4: $this->_createInstalled();
+                $flash = 'Create install file';
+            break;
         }
-        
-        
+    
+        if ($step < 4) {
+            return response()->json([
+                'status' => 'success',
+                'flash' => $flash,
+                'next_step' => $step + 1,
+            ]);
+        }
+    
+        return response()->json([
+            'status' => 'success',
+            'flash' => 'Install success',
+            'redirect' => route('home'),
+        ]);
     }
     
     private function _checkPHPversion($min_version) {

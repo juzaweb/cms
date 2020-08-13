@@ -41,6 +41,7 @@ $(document).ready(function () {
         var formData = new FormData(form[0]);
         var btnsubmit = form.find("button[type=submit]");
         var currentIcon = btnsubmit.find('i').attr('class');
+        var submitSuccess = form.data('success');
         btnsubmit.find('i').attr('class', 'fa fa-spinner fa-spin');
         btnsubmit.prop("disabled", true);
 
@@ -72,6 +73,10 @@ $(document).ready(function () {
                 return false;
             }
 
+            if (submitSuccess) {
+                eval(submitSuccess)(form);
+            }
+
             return false;
         }).fail(function() {
             btnsubmit.find('i').attr('class', currentIcon);
@@ -85,4 +90,28 @@ $(document).ready(function () {
             return false;
         });
     });
+
+    function install_submit_success(form) {
+        install_step(1);
+    }
+
+    function install_step(step) {
+        $.ajax({
+            type: "POST",
+            url: "/install/step/" + step,
+            dataType: 'json',
+            data: {},
+            success: function (result) {
+                $('.step-status').append(result.flash);
+                if (result.next_step) {
+                    install_step(result.next_step);
+                }
+
+                if (result.redirect) {
+                    window.location = result.redirect;
+                    return false;
+                }
+            }
+        });
+    }
 });

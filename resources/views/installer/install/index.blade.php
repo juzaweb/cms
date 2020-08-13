@@ -3,7 +3,7 @@
 @section('title', 'Install')
 
 @section('content')
-    <form action="{{ route('install.submit') }}" method="post" class="form-ajax">
+    <form action="{{ route('install.submit') }}" method="post" class="form-ajax" data-success="install_submit_success">
         @csrf
         <div class="row pt-3">
             <div class="col-md-3"></div>
