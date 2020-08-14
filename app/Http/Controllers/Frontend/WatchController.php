@@ -26,7 +26,7 @@ class WatchController extends Controller
             'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive mymothemes mymomovies mymo-corner-rounded',
             'related_movies' => $info->getRelatedMovies(8),
             'info' => $info,
-            'player_id' => $this->getFileVideo($info->id),
+            'player_id' => $this->_getFileVideo($info->id),
             'start' => $info->getStarRating(),
             'genre' => $genre,
             'genres' => $info->getGenres(),
@@ -36,7 +36,7 @@ class WatchController extends Controller
         ]);
     }
     
-    protected function getFileVideo($movie_id) {
+    private function _getFileVideo($movie_id) {
         $server = Servers::where('status', '=', 1)
             ->where('movie_id', '=', $movie_id)
             ->orderBy('order', 'asc')

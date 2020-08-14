@@ -9,7 +9,7 @@ class TypeController extends Controller
 {
     public function index($slug) {
         $info = Types::where('slug', '=', $slug)
-            ->firstOrFail(['id', 'name']);
+            ->firstOrFail();
         
         $items = $info->movies()
             ->where('status', '=', 1)

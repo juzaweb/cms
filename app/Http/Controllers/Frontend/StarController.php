@@ -11,7 +11,7 @@ class StarController extends Controller
     public function index($slug) {
         $info = Stars::where('slug', '=', $slug)
             ->where('status', '=', 1)
-            ->firstOrFail();
+            ->firstOrFail(['name', 'slug']);
     
         $items = Movies::select([
             'id',

@@ -8,6 +8,10 @@ use App\Models\Movies;
 class LatestMoviesController extends Controller
 {
     public function index() {
+        $info = (object) [
+            'name' => trans('app.latest_movies'),
+        ];
+        
         $items = Movies::where('status', '=', 1)
             ->orderBy('id', 'DESC')
             ->paginate(20);
@@ -17,6 +21,7 @@ class LatestMoviesController extends Controller
             'description' => get_config('latest_movies_description'),
             'keywords' => get_config('latest_movies_keywords'),
             'banner' => get_config('latest_movies_banner'),
+            'info' => $info,
             'items' => $items,
         ]);
     }

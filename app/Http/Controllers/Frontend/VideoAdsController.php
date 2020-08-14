@@ -19,10 +19,10 @@ class VideoAdsController extends Controller
             return $document;
         }
         
-        return $this->getAds($video_ads);
+        return $this->_getAds($video_ads);
     }
     
-    protected function getAds(VideoAds $video_ads) {
+    private function _getAds(VideoAds $video_ads) {
         $factory = new \Sokil\Vast\Factory();
         $document = $factory->create('2.0');
     

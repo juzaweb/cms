@@ -99,6 +99,9 @@ class SearchController extends Controller
         }
         
         return view('themes.mymo.genre.index', [
+            'title' => trans('app.result_for_keyword') . ' '. $q,
+            'description' => trans('app.result_for_keyword') . ' '. $q,
+            'keywords' => trans('app.result_for_keyword') . ' '. $q,
             'items' => $query->paginate(20),
         ]);
     }

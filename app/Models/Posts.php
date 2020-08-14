@@ -60,6 +60,7 @@ class Posts extends Model
         'title',
         'content',
         'status',
+        'views'
     ];
     
     public function comments() {

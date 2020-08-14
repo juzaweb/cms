@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Posts;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
 
 class PostController extends Controller
 {
@@ -26,6 +27,8 @@ class PostController extends Controller
             ->where('slug', '=', $slug)
             ->firstOrFail();
         
+        $this->_setView($info);
+        
         return view('themes.mymo.post.detail', [
             'title' => $info->meta_title,
             'description' => $info->meta_description,
@@ -33,5 +36,30 @@ class PostController extends Controller
             'banner' => $info->getThumbnail(false),
             'info' => $info
         ]);
+    }
+    
+    private function _setView(Posts $post) {
+        $viewed = Cookie::get('post_viewed');
+        if ($viewed) {
+            $viewed = json_decode($viewed, true);
+        
+            if (!in_array($post->id, $viewed)) {
+                $post->update([
+                    'views' => $post->views + 1,
+                ]);
+            
+                $viewed[] = $post->id;
+                Cookie::queue('post_viewed', json_encode($viewed), 1440);
+            }
+        }
+        
+        if (empty($viewed)) {
+            $post->update([
+                'views' => $post->views + 1,
+            ]);
+            
+            $viewed[] = $post->id;
+            Cookie::queue('post_viewed', json_encode($viewed), 1440);
+        }
     }
 }
