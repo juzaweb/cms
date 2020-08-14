@@ -6,9 +6,9 @@
                     <div class="filter-box-title">@lang('app.sort')</div>
                     <select class="form-control" id="sort" name="sort">
                         <option value="">@lang('app.sort')</option>
-                        <option value="posttime">@lang('app.latest')</option>
-                        <option value="viewcount">@lang('app.top_views')</option>
-                        <option value="updatetime">@lang('app.new_update')</option>
+                        <option value="latest">@lang('app.latest')</option>
+                        <option value="top_views">@lang('app.top_views')</option>
+                        <option value="new_update">@lang('app.new_update')</option>
                     </select>
                 </div>
             </div>
@@ -18,8 +18,8 @@
                     <div class="filter-box-title">@lang('app.formats')</div>
                     <select class="form-control" id="type" name="formality">
                         <option value="">@lang('app.formats')</option>
-                        <option value="movies">@lang('app.movies')</option>
-                        <option value="tv_series">@lang('app.tv_series')</option>
+                        <option value="1">@lang('app.movies')</option>
+                        <option value="2">@lang('app.tv_series')</option>
                     </select>
                 </div>
             </div>

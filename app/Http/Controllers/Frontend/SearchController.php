@@ -17,7 +17,10 @@ class SearchController extends Controller
         $genre = $request->get('genre');
         $country = $request->get('country');
         $year = $request->get('year');
-    
+        $sort = $request->get('sort');
+        $formality = $request->get('formality');
+        $status = $request->get('status');
+        
         $query = Movies::select([
             'id',
             'name',
@@ -55,6 +58,36 @@ class SearchController extends Controller
     
         if ($year) {
             $query->where('release', 'like', $year . '%');
+        }
+        
+        if ($formality) {
+            $query->where('tv_series', 'like', $formality - 1);
+        }
+        
+        if ($status) {
+            if ($status == 'completed') {
+                $query->where(function (Builder $builder) {
+                    $builder->orWhereNull('max_episode');
+                    $builder->orWhereColumn('current_episode', '=', 'max_episode');
+                });
+            }
+            
+            if ($status == 'ongoing') {
+                $query->where(function (Builder $builder) {
+                    $builder->orWhereNull('max_episode');
+                    $builder->orWhereColumn('current_episode', '<', 'max_episode');
+                });
+            }
+        }
+        
+        if ($sort) {
+            switch ($sort) {
+                case 'top_views': $orderby = 'views DESC';break;
+                case 'new_update': $orderby = 'updated_at DESC';break;
+                default: $orderby = 'id DESC';break;
+            }
+            
+            $query->orderByRaw($orderby);
         }
         
         if ($data == 'html') {
