@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 class YearController extends Controller
 {
     public function index($year) {
+        $info = (object) [
+            'name' => $year,
+        ];
+        
         $items = Movies::select([
             'id',
             'name',
@@ -30,7 +34,8 @@ class YearController extends Controller
             ->paginate(20);
     
         return view('themes.mymo.genre.index', [
-            'items' => $items
+            'info' => $info,
+            'items' => $items,
         ]);
     }
 }

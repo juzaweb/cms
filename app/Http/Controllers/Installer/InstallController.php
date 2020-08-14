@@ -84,10 +84,10 @@ class InstallController extends Controller
                 $flash = 'Run database';
             break;
             case 3: $this->_createAdminUser($data);
-                $flash = 'Create Admin user';
+                $flash = 'Created user Admin';
             break;
             case 4: $this->_createInstalled();
-                $flash = 'Create install file';
+                $flash = 'Created install file';
             break;
         }
     
@@ -101,7 +101,7 @@ class InstallController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'flash' => 'Install success',
+            'message' => 'Install success',
             'redirect' => route('home'),
         ]);
     }

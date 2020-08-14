@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Countries;
+use App\Models\Genres;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -14,10 +16,82 @@ class CreateMenuTable extends Migration
             $table->text('content')->nullable();
             $table->timestamps();
         });
+        
+        $items = [
+            [
+                'content' => 'Home',
+                'url' => '/',
+                'new_tab' => 0,
+            ],
+            [
+                'content' => 'Latest Movies',
+                'url' => '/latest-movies',
+                'new_tab' => 0,
+            ],
+            [
+                'content' => 'Movies',
+                'url' => '/movies',
+                'new_tab' => 0,
+            ],
+            [
+                'content' => 'Tv series',
+                'url' => '/tv-series',
+                'new_tab' => 0,
+            ],
+            [
+                'content' => 'Genre',
+                'url' => '#',
+                'new_tab' => 0,
+                'children' => $this->_getGenresMenu(),
+            ],
+            [
+                'content' => 'Country',
+                'url' => '#',
+                'new_tab' => 0,
+                'children' => $this->_getCountriesMenu(),
+            ]
+        ];
+        
+        DB::table('menu')->insert([
+            'name' => 'Main',
+            'content' => json_encode($items),
+        ]);
     }
     
     public function down()
     {
         Schema::dropIfExists('menu');
+    }
+    
+    private function _getGenresMenu() {
+        $genres = Genres::where('status', '=', 1)
+            ->get(['name', 'slug']);
+        $result = [];
+        
+        foreach ($genres as $genre) {
+            $result[] = [
+                'content' => $genre->name,
+                'url' => '/genre/' . $genre->slug,
+                'new_tab' => 0,
+            ];
+        }
+        
+        return $result;
+    }
+    
+    private function _getCountriesMenu() {
+        $genres = Countries::where('status', '=', 1)
+            ->get(['name', 'slug']);
+        $result = [];
+        
+        foreach ($genres as $genre) {
+            $result[] = [
+                'content' => $genre->name,
+                'url' => '/genre/' . $genre->slug,
+                'new_tab' => 0,
+            ];
+        }
+        
+        return $result;
     }
 }

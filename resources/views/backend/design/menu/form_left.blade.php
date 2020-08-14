@@ -178,6 +178,8 @@
                                 <option value="/">@lang('app.home')</option>
                                 <option value="/movies">@lang('app.movies')</option>
                                 <option value="/tv-series">@lang('app.tv_series')</option>
+                                <option value="/latest-movies">@lang('app.latest_movies')</option>
+                                <option value="/posts">@lang('app.blog')</option>
                             </select>
                         </div>
 

@@ -38,6 +38,7 @@ class GenreController extends Controller
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,
+            'banner' => $info->getThumbnail(false),
             'items' => $items,
             'info' => $info,
         ]);

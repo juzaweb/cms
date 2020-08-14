@@ -14,7 +14,7 @@
 
         @if($comment_type == 'site')
             @if(Auth::check())
-                <form action="{{ route('watch.comment', [$info->id]) }}" method="post" class="form-ajax comment-form">
+                <form action="{{ route('post.comment', [$info->slug]) }}" method="post" class="form-ajax comment-form">
                     <div class="row">
                         <div class="col-xs-10 col-sm-11 col-md-11">
                             <textarea class="form-control" name="content" placeholder="@lang('app.write_your_comment')"></textarea>
@@ -41,7 +41,7 @@
                 @endphp
 
                 @foreach($comments as $comment)
-                    @include('themes.mymo.watch.component.comment_item')
+                    @include('themes.mymo.post.component.comment_item')
                 @endforeach
 
                 {{ $comments->links() }}

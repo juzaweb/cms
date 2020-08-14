@@ -11,10 +11,12 @@ class PostController extends Controller
         $posts = Posts::where('status', '=', 1)
             ->orderBy('id', 'desc')
             ->paginate(5, ['id', 'title', 'slug', 'meta_description']);
+        
         return view('themes.mymo.post.index', [
             'title' => get_config('blog_title'),
             'description' => get_config('blog_description'),
             'keywords' => get_config('blog_keywords'),
+            'banner' => get_config('blog_banner'),
             'posts' => $posts
         ]);
     }
@@ -28,6 +30,7 @@ class PostController extends Controller
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,
+            'banner' => $info->getThumbnail(false),
             'info' => $info
         ]);
     }

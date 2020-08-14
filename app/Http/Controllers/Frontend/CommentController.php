@@ -9,14 +9,17 @@ use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
-    public function movieComment($movie_id, Request $request) {
+    public function movieComment($movie_slug, Request $request) {
         $this->validateRequest([
             'content' => 'required',
         ], $request, [
             'content' => trans('app.content')
         ]);
         
-        $movie = Movies::findOrFail($movie_id);
+        $movie = Movies::where('slug', '=', $movie_slug)
+            ->where('status', '=', 1)
+            ->findOrFail();
+        
         $movie->comments()->create([
             'content' => $request->post('content'),
             'user_id' => \Auth::id(),
@@ -28,15 +31,18 @@ class CommentController extends Controller
         ]);
     }
     
-    public function postComment($post_id, Request $request) {
+    public function postComment($post_slug, Request $request) {
         $this->validateRequest([
             'content' => 'required',
         ], $request, [
             'content' => trans('app.content')
         ]);
         
-        $movie = Posts::findOrFail($post_id);
-        $movie->comments()->create([
+        $post = Posts::where('slug', '=', $post_slug)
+            ->where('status', '=', 1)
+            ->firstOrFail();
+    
+        $post->comments()->create([
             'content' => $request->post('content'),
             'user_id' => \Auth::id(),
         ]);

@@ -361,5 +361,7 @@ return [
   'forgot_message' => 'Password reset request successful',
   'forgot_message_description' => 'Please click on the link in your email to retrieve your password',
   'banner_display_when_sharing_on_social_networks' => 'Banner display when sharing on social networks',
-];
+  'latest_movies' => 'Latest movies',
+  'blog' => 'Blog',
+]; 
 

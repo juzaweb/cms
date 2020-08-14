@@ -74,7 +74,7 @@ $(document).ready(function () {
             }
 
             if (submitSuccess) {
-                eval(submitSuccess)(form);
+                eval(submitSuccess)();
             }
 
             return false;
@@ -91,18 +91,24 @@ $(document).ready(function () {
         });
     });
 
-    function install_submit_success(form) {
+    function install_submit_success() {
+        $('.tabs').hide('slow');
+        $('.tab-title').html($('.tab-5 .tab-name').text());
+        $('.tab-5').show('slow');
         install_step(1);
     }
 
     function install_step(step) {
+        var form = $('.form-ajax');
+        var formData = new FormData(form[0]);
+
         $.ajax({
             type: "POST",
             url: "/install/step/" + step,
             dataType: 'json',
-            data: {},
+            data: formData,
             success: function (result) {
-                $('.step-status').append(result.flash);
+                $('.step-status').append('<li class="list-group-item success">'+ result.flash +'<span><i class="fa fa-fw fa-check-circle-o row-icon" aria-hidden="true"></i></span></li>');
                 if (result.next_step) {
                     install_step(result.next_step);
                 }
