@@ -366,5 +366,7 @@ return [
   'banner_display_when_sharing_on_social_networks' => 'Banner display when sharing on social networks',
   'latest_movies' => 'Latest movies',
   'blog' => 'Blog',
-]; 
+  'latest_movies_page_seo' => 'Latest movies page seo',
+  'latest_movies_banner' => 'Latest movies banner',
+];
 

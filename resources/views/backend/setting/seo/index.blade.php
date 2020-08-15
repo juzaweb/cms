@@ -11,7 +11,7 @@
 
 <div class="cui__utils__content">
     <form action="{{ route('admin.setting.seo.save') }}" method="post" class="form-ajax">
-        <div class="card">
+        <div class="card seo-card">
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">

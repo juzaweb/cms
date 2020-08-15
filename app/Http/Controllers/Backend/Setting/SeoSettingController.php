@@ -26,7 +26,7 @@ class SeoSettingController extends Controller
             'blog_description' => 'nullable|string|max:300',
             'facebook' => 'nullable|string|max:300',
             'twitter' => 'nullable|string|max:300',
-            'linkedin' => 'nullable|string|max:300',
+            'pinterest' => 'nullable|string|max:300',
             'youtube' => 'nullable|string|max:300',
             'title' => 'required|string|max:300',
             'description' => 'nullable|string|max:300',
@@ -44,7 +44,7 @@ class SeoSettingController extends Controller
             'blog_description' => trans('app.blog_description'),
             'facebook' => 'Facebook URL',
             'twitter' => 'Twitter URL',
-            'linkedin' => 'Linkedin URL',
+            'pinterest' => 'Linkedin URL',
             'youtube' => 'Youtube URL',
             'title' => trans('app.home_title'),
             'description' => trans('app.home_description'),
@@ -55,8 +55,8 @@ class SeoSettingController extends Controller
             'title',
             'description',
             'keywords',
+            'banner',
             'author_name',
-            'home_banner',
             'movies_title',
             'movies_keywords',
             'movies_description',
@@ -69,9 +69,13 @@ class SeoSettingController extends Controller
             'blog_keywords',
             'blog_description',
             'blog_banner',
+            'latest_movies_title',
+            'latest_movies_keywords',
+            'latest_movies_description',
+            'latest_movies_banner',
             'facebook',
             'twitter',
-            'linkedin',
+            'pinterest',
             'youtube',
         ]);
     
@@ -82,7 +86,7 @@ class SeoSettingController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.setting.comment'),
+            'redirect' => route('admin.setting.seo'),
         ]);
     }
 }

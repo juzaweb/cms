@@ -28,15 +28,15 @@
 
             <div class="row">
                 <div class="col-md-10">
-                    <div class="w-100" id="banner">
+                    <div class="w-100" id="banner-banner">
                         <img src="{{ image_url(get_config('banner')) }}" alt="">
                     </div>
                     <em class="description">@lang('app.banner_display_when_sharing_on_social_networks')</em>
-                    <input type="hidden" name="banner" id="banner" class="form-control" value="{{ get_config('home_banner') }}" autocomplete="off" >
+                    <input type="hidden" name="banner" id="banner" class="form-control" value="{{ get_config('banner') }}" autocomplete="off" >
                 </div>
 
                 <div class="col-md-2">
-                    <a href="javascript:void(0)" class="btn btn-primary lfm-file" data-input="banner" data-preview="banner"><i class="fa fa-upload"></i> @lang('app.choose_image')</a>
+                    <a href="javascript:void(0)" class="btn btn-primary lfm" data-input="banner" data-preview="banner-banner"><i class="fa fa-upload"></i> @lang('app.choose_image')</a>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    <a href="javascript:void(0)" class="btn btn-primary lfm-file" data-input="tv_series_banner" data-preview="banner-tv_series"><i class="fa fa-upload"></i> @lang('app.choose_image')</a>
+                    <a href="javascript:void(0)" class="btn btn-primary lfm" data-input="tv_series_banner" data-preview="banner-tv_series"><i class="fa fa-upload"></i> @lang('app.choose_image')</a>
                 </div>
             </div>
         </div>
@@ -109,9 +109,9 @@
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="linkedin">Pinterest URL</label>
+            <label class="col-form-label" for="pinterest">Pinterest URL</label>
 
-            <input type="text" name="linkedin" id="pinterest" class="form-control" value="{{ get_config('pinterest') }}" autocomplete="off">
+            <input type="text" name="pinterest" id="pinterest" class="form-control" value="{{ get_config('pinterest') }}" autocomplete="off">
         </div>
 
         <div class="form-group">

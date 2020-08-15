@@ -69,21 +69,21 @@ class AjaxGetController extends Controller
             $query->whereIn('id', function ($builder) use ($date) {
                 $builder->select(['movie_id'])
                     ->from('movie_views')
-                    ->where('created_at', 'like', $date . '%')
+                    ->where('day', 'like', $date . '%')
                     ->orderBy('views', 'desc');
             });
         }
         
         if ($type == 'week') {
             $day = date('w');
-            $week_start = date('Y-m-d 00:00:00', strtotime('-'. $day .' days'));
-            $week_end = date('Y-m-d 23:59:59', strtotime('+'. (6-$day) .' days'));
+            $week_start = date('Y-m-d', strtotime('-'. $day .' days'));
+            $week_end = date('Y-m-d', strtotime('+'. (6-$day) .' days'));
             
             $query->whereIn('id', function ($builder) use ($week_start, $week_end) {
                 $builder->select(['movie_id'])
                     ->from('movie_views')
-                    ->where('created_at', '>=', $week_start)
-                    ->where('created_at', '<=', $week_end)
+                    ->where('day', '>=', $week_start)
+                    ->where('day', '<=', $week_end)
                     ->orderBy('views', 'desc');
             });
         }

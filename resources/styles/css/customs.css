@@ -110,3 +110,7 @@ ul {
     z-index: 999;
     top: 5px;
 }
+
+.seo-card img {
+    max-width: 100%;
+}
