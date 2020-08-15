@@ -1,6 +1,6 @@
 @extends('installer.layout')
 
-@section('title', 'Install - ')
+@section('title', 'Install - MyMo CMS')
 
 @section('content')
     <form action="{{ route('install.submit') }}" method="post" class="form-ajax" data-success="install_submit_success">

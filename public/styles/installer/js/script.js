@@ -98,6 +98,7 @@ $(document).ready(function () {
         $('.tab-title').html($('.tab-5 .tab-name').text());
         $('.tab-5').show('slow');
         $('.submit-button').html('<i class="fa fa-spinner fa-spin"></i> Please wait...').prop('disabled', true);
+        $('.step-status').html('');
         install_step(1);
     }
 

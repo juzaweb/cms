@@ -12,7 +12,7 @@ class UpdateController extends Controller
             $update = true;
         }
         
-        return view('installer.update', [
+        return view('installer.update.index', [
             'update' => $update,
         ]);
     }

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Installer;
 
+use Illuminate\Database\SQLiteConnection;
 use App\Helpers\PermissionsChecker;
 use App\Helpers\RequirementsChecker;
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use App\User;
 
 class InstallController extends Controller
 {
@@ -181,11 +182,14 @@ class InstallController extends Controller
         $env = str_replace('DB_PASSWORD=', 'DB_PASSWORD=' . $data['dbpass'], $env);
         $env = str_replace('DB_PREFIX=', 'DB_PREFIX=' . str_replace('-', '_', $data['dbprefix']), $env);
         
+        if (file_exists(base_path() . '/.env')) {
+            unlink(base_path() . '/.env');
+        }
+        
         return file_put_contents(base_path() . '/.env', $env);
     }
     
     private function _callArtisan() {
-        \Artisan::call('config:clear');
         \Artisan::call('migrate', ['--force' => true]);
     }
     
