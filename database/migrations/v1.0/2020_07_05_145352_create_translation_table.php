@@ -20,7 +20,7 @@ class CreateTranslationTable extends Migration
             $table->timestamps();
         });
     
-        Translation::syncLanguage();
+        //Translation::syncLanguage();
     }
     
     public function down()

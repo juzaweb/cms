@@ -101,7 +101,7 @@ class InstallController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'message' => 'Install success',
+            'flash' => 'Install success',
             'redirect' => route('home'),
         ]);
     }
@@ -185,6 +185,7 @@ class InstallController extends Controller
     }
     
     private function _callArtisan() {
+        \Artisan::call('config:clear');
         \Artisan::call('migrate', ['--force' => true]);
     }
     
