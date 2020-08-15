@@ -16,25 +16,29 @@ class CreateConfigsTable extends Migration
             $table->timestamps();
         });
         
-        Configs::setConfig('title', 'MyMo');
-        Configs::setConfig('description', 'MyMo');
-        Configs::setConfig('logo', '');
-        Configs::setConfig('icon', '');
-        Configs::setConfig('banner', '');
+        $this->_createConfig();
+    }
+    
+    public function down()
+    {
+        Schema::dropIfExists('configs');
+    }
+    
+    private function _createConfig() {
+        Configs::setConfig('title', 'MyMo - TV Series & Movie Portal CMS');
+        Configs::setConfig('description', 'MYMO is a powerful, flexible and User friendly TV Series & Movie Portal CMS with advance video contents management system. It’s easy to use & install. It has been created to provide a unique experience to movie lover & movie site owner.');
+        Configs::setConfig('logo', '2020/08/15/logo-1597464831-Z4tc4jsTu6.png');
+        Configs::setConfig('icon', '2020/08/15/icon-1597477743-dkiMRD8xpZ.png');
+        Configs::setConfig('banner', '2020/08/15/banner-mymo-1597477743-EHZ3staOHI.png');
         Configs::setConfig('user_registration', 1);
         Configs::setConfig('user_verification', 0);
         Configs::setConfig('tmdb_api_key', '92b2df3080b91d92b31eacb015fc5497');
         Configs::setConfig('google_recaptcha', 0);
         Configs::setConfig('google_recaptcha_key', '');
         Configs::setConfig('google_recaptcha_secret', '');
-        Configs::setConfig('comment_able', 1);
+        Configs::setConfig('comment_able', 0);
         Configs::setConfig('comment_type', 'facebook');
         Configs::setConfig('comments_per_page', 10);
         Configs::setConfig('comments_approval', 'auto');
-    }
-    
-    public function down()
-    {
-        Schema::dropIfExists('configs');
     }
 }

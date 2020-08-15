@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Countries;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -19,10 +20,34 @@ class CreateCountriesTable extends Migration
             $table->string('keywords', 320)->nullable();
             $table->timestamps();
         });
+        
+        $this->_createCountries();
     }
     
     public function down()
     {
         Schema::dropIfExists('countries');
+    }
+    
+    private function _createCountries() {
+        $countries = [
+            'United States',
+            'Denmark',
+            'China',
+            'Japan',
+            'Korean',
+            'Thailand',
+            'India',
+            'France',
+            'Italy',
+            'Canada',
+        ];
+        
+        foreach ($countries as $country) {
+            Countries::create([
+                'name' => $country,
+                'slug' => Str::slug($country),
+            ]);
+        }
     }
 }

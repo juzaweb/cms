@@ -8,9 +8,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UsersSeeder::class,
-            GenresSeeder::class,
+            //GenresSeeder::class,
             TypesSeeder::class,
-            CountriesSeeder::class,
+            //CountriesSeeder::class,
             StarsSeeder::class,
             TagsSeeder::class,
             MoviesSeeder::class,

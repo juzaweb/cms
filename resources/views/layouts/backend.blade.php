@@ -8,7 +8,7 @@
     <meta name="turbolinks-cache-control" content="no-cache">
 
     <title>@yield('title')</title>
-    <link rel="icon" type="image/png" href="{{ asset('favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">

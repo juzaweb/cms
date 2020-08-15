@@ -17,6 +17,16 @@ class CreateMenuTable extends Migration
             $table->timestamps();
         });
         
+        $this->_createMainMenu();
+        $this->_createFooterMenu();
+    }
+    
+    public function down()
+    {
+        Schema::dropIfExists('menu');
+    }
+    
+    private function _createMainMenu() {
         $items = [
             [
                 'content' => 'Home',
@@ -51,16 +61,51 @@ class CreateMenuTable extends Migration
                 'children' => $this->_getCountriesMenu(),
             ]
         ];
-        
+    
         DB::table('menu')->insert([
             'name' => 'Main',
             'content' => json_encode($items),
         ]);
     }
     
-    public function down()
-    {
-        Schema::dropIfExists('menu');
+    private function _createFooterMenu() {
+        $items = [
+            [
+                'content' => 'Home',
+                'url' => '/',
+                'new_tab' => 0,
+            ],
+            [
+                'content' => 'Latest Movies',
+                'url' => '/latest-movies',
+                'new_tab' => 0,
+            ],
+            [
+                'content' => 'Movies',
+                'url' => '/movies',
+                'new_tab' => 0,
+            ],
+            [
+                'content' => 'Tv series',
+                'url' => '/tv-series',
+                'new_tab' => 0,
+            ],
+            [
+                'content' => 'Privacy Policy',
+                'url' => '/page/privacy-policy',
+                'new_tab' => 0,
+            ],
+            [
+                'content' => 'Terms of Use',
+                'url' => '/page/terms-of-use',
+                'new_tab' => 0,
+            ]
+        ];
+    
+        DB::table('menu')->insert([
+            'name' => 'Footer',
+            'content' => json_encode($items),
+        ]);
     }
     
     private function _getGenresMenu() {
@@ -87,7 +132,7 @@ class CreateMenuTable extends Migration
         foreach ($genres as $genre) {
             $result[] = [
                 'content' => $genre->name,
-                'url' => '/genre/' . $genre->slug,
+                'url' => '/country/' . $genre->slug,
                 'new_tab' => 0,
             ];
         }

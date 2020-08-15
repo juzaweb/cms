@@ -10,6 +10,7 @@
     @endphp
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="turbolinks-cache-control" content="no-cache">
     <meta name="theme-color" content="#234556">
     <link rel="shortcut icon" href="{{ $icon }}" type="image/x-icon"/>
     <title>{{ @$title }}</title>

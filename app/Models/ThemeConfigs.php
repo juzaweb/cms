@@ -28,5 +28,6 @@ class ThemeConfigs extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'code',
+        'content',
     ];
 }

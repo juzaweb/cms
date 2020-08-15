@@ -29,7 +29,6 @@ class ThemeEditorController extends Controller
         }
     
         $model = ThemeConfigs::firstOrNew(['code' => $request->post('code')]);
-        $model->fill($request->all());
         $model->content = response()->json($request->except(['setting']))->getContent();
         $model->save();
         

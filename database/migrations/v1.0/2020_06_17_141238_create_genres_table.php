@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\Genres;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Str;
 
 class CreateGenresTable extends Migration
 {
@@ -20,10 +22,34 @@ class CreateGenresTable extends Migration
             $table->string('keywords', 320)->nullable();
             $table->timestamps();
         });
+        
+        $this->_createGenres();
     }
     
     public function down()
     {
         Schema::dropIfExists('genres');
+    }
+    
+    private function _createGenres() {
+        $genres = [
+            'Action',
+            'Adventure',
+            'Comedy',
+            'Sci-Fi & Fantasy',
+            'Drama',
+            'Animation',
+            'Thriller',
+            'Science Fiction',
+            'Family',
+            'Crime',
+        ];
+        
+        foreach ($genres as $genre) {
+            Genres::create([
+                'name' => $genre,
+                'slug' => Str::slug($genre),
+            ]);
+        }
     }
 }
