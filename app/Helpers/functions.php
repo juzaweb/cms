@@ -81,6 +81,14 @@ function image_url($path) {
     return asset('images/thumb-default.png');
 }
 
+function logo_url($path) {
+    if (empty($path)) {
+        return asset('images/logo.png');
+    }
+    
+    return image_url($path);
+}
+
 function get_config(string $key) {
     return \App\Models\Configs::getConfig($key);
 }

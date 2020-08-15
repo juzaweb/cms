@@ -68,5 +68,5 @@ return [
   'title_user' => 'Files',
   'title_view' => 'View File',
   'type_folder' => 'Folder',
-]; 
+];
 

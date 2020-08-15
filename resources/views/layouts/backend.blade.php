@@ -43,11 +43,10 @@
         <div class="cui__menuLeft__outer">
             <div class="cui__menuLeft__logo__container">
                 <div class="cui__menuLeft__logo">
-                    <img src="https://html.cleanui.cloud/components/kit/core/img/logo.svg" class="mr-2" alt="Clean UI" />
-                    <div class="cui__menuLeft__logo__name">Clean UI Pro</div>
-                    <div class="cui__menuLeft__logo__descr">Html</div>
+                    <img src="{{ asset('images/logo.png') }}" class="mr-2" alt="Mymo Logo" />
                 </div>
             </div>
+
             <div class="cui__menuLeft__scroll kit__customScroll">
                 @include('backend.menu_left')
             </div>

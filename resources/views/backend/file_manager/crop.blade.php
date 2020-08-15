@@ -22,7 +22,7 @@
           2:3
         </label>
         <label class="btn btn-info btn-aspectRatio" onclick="changeAspectRatio(this, null)">
-          {{ trans('laravel-filemanager::lfm.btn-crop-free') }}
+          {{ trans('laravel-filemanager::lfm.btn_crop_free') }}
         </label>
       </div>
       <br>

@@ -36,12 +36,12 @@ $(document).ready(function () {
         buttons: [
             {
                 icon: 'fas fa-upload',
-                label: lang['nav-upload'],
+                label: lang['nav_upload'],
                 attrs: {id: 'upload'}
             },
             {
                 icon: 'fas fa-folder',
-                label: lang['nav-new'],
+                label: lang['nav_new'],
                 attrs: {id: 'add-folder'}
             }
         ]
@@ -132,7 +132,7 @@ $('#main').click(function (e) {
 });
 
 $(document).on('click', '#add-folder', function () {
-    dialog(lang['message-name'], '', createFolder);
+    dialog(lang['message_name'], '', createFolder);
 });
 
 $(document).on('click', '#upload', function () {
@@ -531,7 +531,7 @@ function createFolder(folder_name) {
 // ==================================
 
 function rename(item) {
-    dialog(lang['message-rename'], item.name, function (new_name) {
+    dialog(lang['message_rename'], item.name, function (new_name) {
         performLfmRequest('rename', {
             file: item.url,
             new_name: new_name
@@ -540,7 +540,7 @@ function rename(item) {
 }
 
 function trash(items) {
-    notify(lang['message-delete'], function () {
+    notify(lang['message_delete'], function () {
         performLfmRequest('delete', {
             items: items.map(function (item) { return item.url; })
         }).done(refreshFoldersAndItems)

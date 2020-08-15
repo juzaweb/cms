@@ -40,7 +40,7 @@ class LfmController extends Controller
         $arr_errors = [];
 
         if (! extension_loaded('gd') && ! extension_loaded('imagick')) {
-            array_push($arr_errors, trans('lfm.message-extension_not_found'));
+            array_push($arr_errors, trans('lfm.message_extension_not_found'));
         }
 
         if (! extension_loaded('exif')) {
@@ -55,7 +55,7 @@ class LfmController extends Controller
     }
     
     public function error($error_type, $variables = []) {
-        throw new \Exception(trans('lfm.error-' . $error_type, $variables));
+        throw new \Exception(trans('lfm.error_' . $error_type, $variables));
     }
     
     protected function getType() {

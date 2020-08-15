@@ -10,7 +10,7 @@
     <meta name="msapplication-navbutton-color" content="#333844">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#333844">
-    <title>{{ trans('lfm.title-page') }}</title>
+    <title>{{ trans('lfm.title_page') }}</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('vendor/laravel-filemanager/img/72px color.png') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
@@ -24,7 +24,7 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark" id="nav">
     <a class="navbar-brand invisible-lg d-none d-lg-inline" id="to-previous">
         <i class="fas fa-arrow-left fa-fw"></i>
-        <span class="d-none d-lg-inline">{{ trans('lfm.nav-back') }}</span>
+        <span class="d-none d-lg-inline">{{ trans('lfm.nav_back') }}</span>
     </a>
     <a class="navbar-brand d-block d-lg-none" id="show_tree">
         <i class="fas fa-bars fa-fw"></i>
@@ -34,7 +34,7 @@
     <div class="ml-auto px-2">
         <a class="navbar-link d-none" id="multi_selection_toggle">
             <i class="fa fa-check-double fa-fw"></i>
-            <span class="d-none d-lg-inline">{{ trans('lfm.menu-multiple') }}</span>
+            <span class="d-none d-lg-inline">{{ trans('lfm.menu_multiple') }}</span>
         </a>
     </div>
     <a class="navbar-toggler collapsed border-0 px-1 py-2 m-0" data-toggle="collapse" data-target="#nav-buttons">
@@ -45,18 +45,18 @@
             <li class="nav-item">
                 <a class="nav-link" data-display="grid">
                     <i class="fas fa-th-large fa-fw"></i>
-                    <span>{{ trans('lfm.nav-thumbnails') }}</span>
+                    <span>{{ trans('lfm.nav_thumbnails') }}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-display="list">
                     <i class="fas fa-list-ul fa-fw"></i>
-                    <span>{{ trans('lfm.nav-list') }}</span>
+                    <span>{{ trans('lfm.nav_list') }}</span>
                 </a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-sort fa-fw"></i>{{ trans('lfm.nav-sort') }}
+                    <i class="fas fa-sort fa-fw"></i>{{ trans('lfm.nav_sort') }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right border-0"></div>
             </li>
@@ -65,9 +65,9 @@
 </nav>
 
 <nav class="bg-light fixed-bottom border-top d-none" id="actions">
-    <a data-action="open" data-multiple="false"><i class="fas fa-folder-open"></i>{{ trans('lfm.btn-open') }}</a>
-    <a data-action="preview" data-multiple="true"><i class="fas fa-images"></i>{{ trans('lfm.menu-view') }}</a>
-    <a data-action="use" data-multiple="true"><i class="fas fa-check"></i>{{ trans('lfm.btn-confirm') }}</a>
+    <a data-action="open" data-multiple="false"><i class="fas fa-folder-open"></i>{{ trans('lfm.btn_open') }}</a>
+    <a data-action="preview" data-multiple="true"><i class="fas fa-images"></i>{{ trans('lfm.menu_view') }}</a>
+    <a data-action="use" data-multiple="true"><i class="fas fa-check"></i>{{ trans('lfm.btn_confirm') }}</a>
 </nav>
 
 <div class="d-flex flex-row">
@@ -84,7 +84,7 @@
 
         <div id="empty" class="d-none">
             <i class="far fa-folder-open"></i>
-            {{ trans('lfm.message-empty') }}
+            {{ trans('lfm.message_empty') }}
         </div>
 
         <div id="content"></div>
@@ -107,7 +107,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">{{ trans('lfm.title-upload') }}</h4>
+                <h4 class="modal-title" id="myModalLabel">{{ trans('lfm.title_upload') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aia-hidden="true">&times;</span></button>
             </div>
@@ -116,7 +116,7 @@
                     <div class="form-group" id="attachment">
                         <div class="controls text-center">
                             <div class="input-group w-100">
-                                <a class="btn btn-primary w-100 text-white" id="upload-button">{{ trans('lfm.message-choose') }}</a>
+                                <a class="btn btn-primary w-100 text-white" id="upload-button">{{ trans('lfm.message_choose') }}</a>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">{{ trans('lfm.btn-close') }}</button>
+                <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">{{ trans('lfm.btn_close') }}</button>
             </div>
         </div>
     </div>
@@ -137,8 +137,8 @@
         <div class="modal-content">
             <div class="modal-body"></div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">{{ trans('lfm.btn-close') }}</button>
-                <button type="button" class="btn btn-primary w-100" data-dismiss="modal">{{ trans('lfm.btn-confirm') }}</button>
+                <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">{{ trans('lfm.btn_close') }}</button>
+                <button type="button" class="btn btn-primary w-100" data-dismiss="modal">{{ trans('lfm.btn_confirm') }}</button>
             </div>
         </div>
     </div>
@@ -154,8 +154,8 @@
                 <input type="text" class="form-control">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">{{ trans('lfm.btn-close') }}</button>
-                <button type="button" class="btn btn-primary w-100" data-dismiss="modal">{{ trans('lfm.btn-confirm') }}</button>
+                <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">{{ trans('lfm.btn_close') }}</button>
+                <button type="button" class="btn btn-primary w-100" data-dismiss="modal">{{ trans('lfm.btn_confirm') }}</button>
             </div>
         </div>
     </div>
@@ -204,13 +204,13 @@
         {
             name: 'rename',
             icon: 'edit',
-            label: lang['menu-rename'],
+            label: lang['menu_rename'],
             multiple: false
         },
         {
             name: 'download',
             icon: 'download',
-            label: lang['menu-download'],
+            label: lang['menu_download'],
             multiple: true
         },
         // {
@@ -240,7 +240,7 @@
         {
             name: 'trash',
             icon: 'trash',
-            label: lang['menu-delete'],
+            label: lang['menu_delete'],
             multiple: true
         },
     ];
@@ -249,12 +249,12 @@
         {
             by: 'alphabetic',
             icon: 'sort-alpha-down',
-            label: lang['nav-sort-alphabetic']
+            label: lang['nav_sort_alphabetic']
         },
         {
             by: 'time',
             icon: 'sort-numeric-down',
-            label: lang['nav-sort-time']
+            label: lang['nav_sort_time']
         }
     ];
 </script>
@@ -266,7 +266,7 @@
         parallelUploads: 5,
         timeout: 0,
         clickable: '#upload-button',
-        dictDefaultMessage: lang['message-drop'],
+        dictDefaultMessage: lang['message_drop'],
         init: function () {
             var _this = this; // For the closure
             this.on('success', function (file, response) {

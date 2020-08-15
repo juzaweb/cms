@@ -81,8 +81,8 @@
         <select name="{{ $card['code'] }}[{{ $input['name'] }}][order]">
             <option value="updated_at_DESC" @if($order == 'updated_at_DESC') selected @endif>{{ trans('app.latest') }}</option>
             <option value="updated_at_ASC" @if($order == 'updated_at_ASC') selected @endif>{{ trans('app.oldest') }}</option>
-            <option value="view_DESC" @if($order == 'view_DESC') selected @endif>{{ trans('app.price_high_to_low') }}</option>
-            <option value="view_ASC" @if($order == 'view_ASC') selected @endif>{{ trans('app.price_low_to_high') }}</option>
+            <option value="view_DESC" @if($order == 'view_DESC') selected @endif>{{ trans('app.views_high_to_low') }}</option>
+            <option value="view_ASC" @if($order == 'view_ASC') selected @endif>{{ trans('app.views_low_to_high') }}</option>
         </select>
     </div>
 
