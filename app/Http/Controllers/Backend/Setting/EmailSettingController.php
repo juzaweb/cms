@@ -12,7 +12,7 @@ class EmailSettingController extends Controller
 {
     public function index() {
         return view('backend.setting.email.index', [
-            'title' => trans('app.comment_setting')
+            'title' => trans('app.email_setting')
         ]);
     }
     
