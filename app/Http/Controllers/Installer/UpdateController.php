@@ -18,7 +18,7 @@ class UpdateController extends Controller
     }
     
     public function update() {
-        \Artisan::call('migrate');
+        \Artisan::call('migrate', ['--force' => true]);
     
         return response()->json([
             'status' => 'success',

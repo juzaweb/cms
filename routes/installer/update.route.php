@@ -1,7 +1,7 @@
 <?php
 
-Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], function () {
-    Route::get('/update', 'Installer\UpdateController@index')->name('update');
+Route::group(['prefix' => 'update', 'middleware' => ['web', 'admin']], function () {
+    Route::get('/', 'Installer\UpdateController@index')->name('update');
     
-    Route::post('/update', 'Installer\UpdateController@update')->name('update.submit');
+    Route::post('/', 'Installer\UpdateController@update')->name('update.submit');
 });
