@@ -14,14 +14,16 @@ class ItemsController extends LfmController
     public function getItems()
     {
         $currentPage = self::getCurrentPageFromRequest();
-        $perPage = 20;
+        $perPage = 15;
         
         $working_dir = request()->get('working_dir');
         
         $folders = Folders::where('folder_id', '=', $working_dir)
+            ->orderBy('name', 'ASC')
             ->get(['id', 'name']);
         $files = Files::where('folder_id', '=', $working_dir)
             ->where('type', '=', $this->getType())
+            ->orderBy('id', 'DESC')
             ->paginate($perPage);
     
         $storage = \Storage::disk('uploads');

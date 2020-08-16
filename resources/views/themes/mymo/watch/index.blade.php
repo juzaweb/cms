@@ -83,8 +83,7 @@
                             <div class="mymo_imdbrating"><span>{{ $info->rating }}</span></div>
                             <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="btn btn-sm btn-danger watch-movie visible-xs-block"><i class="hl-play"></i>@lang('watch')</a>
 
-
-                            <span id="show-trailer" data-url="{{ $info->trailer }}" class="btn btn-sm btn-primary show-trailer">
+                            <span id="show-trailer" data-url="{{ $info->getTrailerLink() }}" class="btn btn-sm btn-primary show-trailer">
                             <i class="hl-youtube-play"></i> @lang('app.trailer')</span>
 
                             <span class="btn btn-sm btn-success quick-eps" data-toggle="collapse" href="#collapseEps" aria-expanded="false" aria-controls="collapseEps">
@@ -94,9 +93,11 @@
 
                         <div class="film-poster col-md-9">
                             <div class="film-poster-img" style="background: url('{{ $info->getPoster() }}'); background-size: cover; background-repeat: no-repeat;background-position: 30% 25%;height: 300px;-webkit-filter: grayscale(100%); filter: grayscale(100%);"></div>
+                            @if($player_id)
                             <div class="mymo-play-btn hidden-xs">
                                 <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="play-btn" title="@lang('app.click_to_play')" data-toggle="tooltip" data-placement="bottom">@lang('app.click_to_play')</a>
                             </div>
+                            @endif
 
                             <div class="movie-trailer hidden"></div>
                             <div class="movie-detail">

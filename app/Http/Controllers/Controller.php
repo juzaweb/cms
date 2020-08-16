@@ -21,12 +21,21 @@ class Controller extends BaseController
             }
         }
         
-        if (config('app.demo')) {
+        if (config('app.demo') == 'true') {
             if (\request()->isMethod('post')) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'You cannot change the demo version',
-                ]);
+                if (\request()->is('admin-cp/*')) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'You cannot change the demo version',
+                    ]);
+                }
+                
+                if (\request()->is('account/change-password')) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'You cannot change the demo version',
+                    ]);
+                }
             }
         }
         

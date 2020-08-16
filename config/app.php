@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => (env('APP_DEBUG') == 'true'),
 
     /*
     |--------------------------------------------------------------------------
@@ -227,6 +227,13 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    
+    'debug_blacklist' => [
+        '_COOKIE' => array_keys($_COOKIE),
+        '_SERVER' => array_keys($_SERVER),
+        '_ENV' => array_keys($_ENV),
+        '_POST' => array_keys($_POST),
+    ],
+    
     'demo' => env('APP_DEMO', false),
 ];

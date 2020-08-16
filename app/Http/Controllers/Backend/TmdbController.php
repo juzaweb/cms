@@ -36,7 +36,7 @@ class TmdbController extends Controller
         
         $model = new Movies();
         $model->fill($movie);
-        $model->setAttribute('short_description', sub_words(strip_tags($model->description), 20));
+        $model->setAttribute('short_description', sub_words(strip_tags($model->description), 15));
         $model->thumbnail = $this->downloadThumbnail($movie['thumbnail']);
         $model->poster = $this->downloadThumbnail($movie['poster']);
         $model->genres = implode(',', $movie['genres']);

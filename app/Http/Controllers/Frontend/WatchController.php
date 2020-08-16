@@ -22,7 +22,7 @@ class WatchController extends Controller
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,
-            'banner' => $info->getThumbnail(false),
+            'banner' => $info->getPoster(),
             'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive mymothemes mymomovies mymo-corner-rounded',
             'related_movies' => $info->getRelatedMovies(8),
             'info' => $info,

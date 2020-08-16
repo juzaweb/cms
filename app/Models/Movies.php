@@ -141,6 +141,14 @@ class Movies extends Model
         return $this->getThumbnail(false);
     }
     
+    public function getTrailerLink() {
+        if ($this->trailer_link) {
+            return 'https://www.youtube.com/embed/' . get_youtube_id($this->trailer_link);
+        }
+        
+        return '';
+    }
+    
     public function getGenres() {
         return Genres::where('status', '=', 1)
             ->whereIn('id', explode(',', $this->genres))

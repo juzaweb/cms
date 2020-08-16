@@ -15,12 +15,12 @@
 <div class="form-group">
     <label class="col-form-label" for="poster">@lang('app.poster')</label>
     <div class="form-thumbnail text-center">
-        <input id="poster" type="hidden" name="poster">
+        <input id="poster" type="hidden" name="poster" value="{{ $model->poster }}">
         <div id="holder-poster">
             <img src="{{ $model->getPoster() }}" class="w-100">
         </div>
 
-        <a href="javascript:void(0)" data-input="poster" data-preview="holder-poster" class="btn btn-primary text-capitalize lfm" value="{{ $model->poster }}">
+        <a href="javascript:void(0)" data-input="poster" data-preview="holder-poster" class="btn btn-primary text-capitalize lfm">
             <i class="fa fa-picture-o"></i> @lang('app.choose_image')
         </a>
     </div>

@@ -24,7 +24,7 @@ class PlayController extends Controller
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,
-            'banner' => $info->getThumbnail(false),
+            'banner' => $info->getPoster(),
             'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive mymothemes mymomovies mymo-corner-rounded',
             'info' => $info,
             'player_id' => $vid,
@@ -108,7 +108,7 @@ class PlayController extends Controller
             'day' => date('Y-m-d'),
         ]);
         $model->movie_id = $movie_id;
-        $model->views = $model->views + 1;
+        $model->views = empty($model->views) ? 1 : $model->views + 1;
         $model->day = date('Y-m-d');
         return $model->save();
     }
