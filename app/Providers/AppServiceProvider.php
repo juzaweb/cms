@@ -31,8 +31,15 @@ class AppServiceProvider extends ServiceProvider
         \Validator::extend('recaptcha', 'App\Validators\Recaptcha@validate');
         $this->loadMigrationsFrom($paths);
         
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
-            \URL::forceScheme('https');
+		if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && !empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+			if ($_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+				\URL::forceScheme('https');
+			}
+		}
+        else {
+			if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+				\URL::forceScheme('https');
+			}
         }
     }
 }
