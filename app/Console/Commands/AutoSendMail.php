@@ -29,21 +29,6 @@ class AutoSendMail extends Command
             return false;
         }
         
-        if (empty(get_config('mail_host')) || empty(get_config('mail_driver'))) {
-            return false;
-        }
-        
-        \Config::set('mail.host', get_config('mail_host'));
-        \Config::set('mail.driver', get_config('mail_driver'));
-        \Config::set('mail.port', get_config('mail_port'));
-        \Config::set('mail.username', get_config('mail_username'));
-        \Config::set('mail.password', get_config('mail_password'));
-        \Config::set('mail.encryption', get_config('mail_encryption'));
-        \Config::set('mail.from.name', get_config('mail_from_name'));
-        \Config::set('mail.from.address', get_config('mail_from_address'));
-    
-        (new \Illuminate\Mail\MailServiceProvider(app()))->register();
-        
         $rows = $query->get();
         
         foreach ($rows as $row) {

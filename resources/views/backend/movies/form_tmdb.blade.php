@@ -3,7 +3,7 @@
         <form action="{{ route('admin.tmdb.add_movie') }}" method="post" class="form-ajax">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tmdbModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="tmdbModalLabel">@lang('app.add_from_tmdb')</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="@lang('app.close')">
                         <span aria-hidden="true">&times;</span>
                     </button>

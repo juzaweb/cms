@@ -70,7 +70,7 @@ class TmdbController extends Controller
             return $this->getTVShow($tmdb_id);
         }
         
-        return $this->getTVShow($tmdb_id);
+        return $this->getMovie($tmdb_id);
     }
     
     protected function getMovie($tmdb_id) {

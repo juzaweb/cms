@@ -228,4 +228,5 @@ return [
 
     ],
 
+    'demo' => env('APP_DEMO', false),
 ];

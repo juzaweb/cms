@@ -21,6 +21,15 @@ class Controller extends BaseController
             }
         }
         
+        if (config('app.demo')) {
+            if (\request()->isMethod('post')) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You cannot change the demo version',
+                ]);
+            }
+        }
+        
         return parent::callAction($method, $parameters);
     }
     
