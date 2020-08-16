@@ -24,8 +24,11 @@ class InstallController extends Controller
         if (file_exists(base_path('installed'))) {
             return abort(404);
         }
-    
+        
         \Artisan::call('config:clear');
+        if (!$this->_testDbConnect()) {
+            return '<h1>Cannot connect database!!!</h1>';
+        }
         
         $php_support = $this->_checkPHPversion('7.1.3');
         $requirements = $this->_checkRequirements();
@@ -48,8 +51,7 @@ class InstallController extends Controller
         
         try {
             
-            $data = $request->all();
-            if (!$this->_testDbConnect($data)) {
+            if (!$this->_testDbConnect()) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Cannot connect database!!!',
@@ -131,7 +133,7 @@ class InstallController extends Controller
         ]);
     }
     
-    private function _testDbConnect(array $data) {
+    private function _testDbConnect() {
         try {
             \DB::connection()->getPdo();
         
