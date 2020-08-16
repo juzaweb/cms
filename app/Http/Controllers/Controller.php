@@ -15,7 +15,7 @@ class Controller extends BaseController
 
     public function callAction($method, $parameters)
     {
-        if (!file_exists(base_path('installed'))) {
+        if (!file_exists(storage_path('installed'))) {
             if (!in_array(\Route::currentRouteName(), ['install', 'install.submit', 'install.submit.step'])) {
                 return redirect()->route('install');
             }

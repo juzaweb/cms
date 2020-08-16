@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Installer;
 
-use Illuminate\Database\SQLiteConnection;
 use App\Helpers\PermissionsChecker;
 use App\Helpers\RequirementsChecker;
 use Illuminate\Http\Request;
@@ -21,7 +20,7 @@ class InstallController extends Controller
     }
     
     public function index() {
-        if (file_exists(base_path('installed'))) {
+        if (file_exists(storage_path('installed'))) {
             return abort(404);
         }
         
@@ -127,9 +126,9 @@ class InstallController extends Controller
     private function _checkPermissionFolder() {
         return $this->permissions->check(
             [
-            'resources/views/emails'     => '775',
-            'storage/'     => '777',
-            'bootstrap/cache/'       => '777',
+                'resources/views/emails'     => '775',
+                'storage/'     => '777',
+                'bootstrap/cache/'       => '777',
         ]);
     }
     
@@ -175,6 +174,6 @@ class InstallController extends Controller
     }
     
     private function _createInstalled() {
-        return file_put_contents(base_path('installed'), 'Installed');
+        return file_put_contents(storage_path('installed'), 'Installed');
     }
 }
