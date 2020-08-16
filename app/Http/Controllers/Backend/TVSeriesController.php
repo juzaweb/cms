@@ -129,6 +129,7 @@ class TVSeriesController extends Controller
         
         $model = Movies::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
+        $model->setAttribute('short_description', sub_words(strip_tags($model->description), 20));
         $model->setAttribute('genres', implode(',', $genres));
         $model->setAttribute('countries', implode(',', $countries));
         $model->setAttribute('actors', implode(',', $actors));
@@ -136,6 +137,11 @@ class TVSeriesController extends Controller
         $model->setAttribute('writers', implode(',', $writers));
         $model->setAttribute('tags', implode(',', $tags));
         $model->setAttribute('tv_series', 1);
+    
+        if ($model->release) {
+            $model->year = explode('-', $model->release)[0];
+        }
+        
         $model->save();
         
         return response()->json([

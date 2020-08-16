@@ -15,7 +15,7 @@
 <div class="form-group">
     <label class="col-form-label" for="poster">@lang('app.poster')</label>
     <div class="form-thumbnail text-center">
-        <input id="poster" type="hidden" name="poster">
+        <input id="poster" type="hidden" name="poster" value="{{ $model->poster }}">
         <div id="holder-poster">
             <img src="{{ $model->getPoster() }}" class="w-100">
         </div>

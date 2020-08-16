@@ -20,7 +20,7 @@
             <img src="{{ $model->getPoster() }}" class="w-100">
         </div>
 
-        <a href="javascript:void(0)" data-input="poster" data-preview="holder-poster" class="btn btn-primary text-capitalize lfm">
+        <a href="javascript:void(0)" data-input="poster" data-preview="holder-poster" class="btn btn-primary text-capitalize lfm" value="{{ $model->poster }}">
             <i class="fa fa-picture-o"></i> @lang('app.choose_image')
         </a>
     </div>

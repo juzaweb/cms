@@ -60,6 +60,7 @@ class DashboardController extends Controller
     
         $query = User::query();
         $query->where('status', '=', 1);
+        $query->where('is_admin', '=', 0);
         
         $query->orderBy('created_at', 'DESC');
         $query->offset($offset);

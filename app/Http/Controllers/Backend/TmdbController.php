@@ -36,6 +36,7 @@ class TmdbController extends Controller
         
         $model = new Movies();
         $model->fill($movie);
+        $model->setAttribute('short_description', sub_words(strip_tags($model->description), 20));
         $model->thumbnail = $this->downloadThumbnail($movie['thumbnail']);
         $model->poster = $this->downloadThumbnail($movie['poster']);
         $model->genres = implode(',', $movie['genres']);
@@ -48,6 +49,11 @@ class TmdbController extends Controller
         $model->writers = implode(',', $movie['writers']);
         $model->directors = implode(',', $movie['directors']);
         $model->tv_series = $this->isTvSeries();
+    
+        if ($model->release) {
+            $model->year = explode('-', $model->release)[0];
+        }
+        
         $model->save();
         
         return response()->json([
@@ -141,29 +147,24 @@ class TmdbController extends Controller
         $data['extension'] = $slip[count($slip) - 1];
         $file_name = str_replace('.' . $data['extension'], '', $data['name']);
         $new_file = Str::slug($file_name) . '-' . Str::random(10) . '-'. time() .'.' . $data['extension'];
-        
-        try {
-            $new_dir = \Storage::disk('uploads')->path(date('Y/m/d'));
-            if (!is_dir($new_dir)) {
-                \File::makeDirectory($new_dir, 0775, true);
-            }
-            
-            $get_file = file_put_contents($new_dir . '/' . $new_file, file_get_contents($thumbnail));
-            if ($get_file) {
-                $data['path'] = date('Y/m/d') .'/'. $new_file;
-                $model = new Files();
-                $model->fill($data);
-                $model->type = 1;
-                $model->mime_type = \Storage::disk('uploads')
-                    ->mimeType($data['path']);
-                $model->user_id = \Auth::id();
-                $model->save();
-                
-                return $data['path'];
-            }
+    
+        $new_dir = \Storage::disk('uploads')->path(date('Y/m/d'));
+        if (!is_dir($new_dir)) {
+            \File::makeDirectory($new_dir, 0775, true);
         }
-        catch (\Exception $exception) {
-            return null;
+    
+        $get_file = file_put_contents($new_dir . '/' . $new_file, file_get_contents($thumbnail));
+        if ($get_file) {
+            $data['path'] = date('Y/m/d') .'/'. $new_file;
+            $model = new Files();
+            $model->fill($data);
+            $model->type = 1;
+            $model->mime_type = \Storage::disk('uploads')
+                ->mimeType($data['path']);
+            $model->user_id = \Auth::id();
+            $model->save();
+        
+            return $data['path'];
         }
         
         return null;
