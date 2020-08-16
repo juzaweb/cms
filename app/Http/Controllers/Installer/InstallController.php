@@ -24,6 +24,8 @@ class InstallController extends Controller
         if (file_exists(base_path('installed'))) {
             return abort(404);
         }
+    
+        \Artisan::call('config:clear');
         
         $php_support = $this->_checkPHPversion('7.1.3');
         $requirements = $this->_checkRequirements();
@@ -38,12 +40,6 @@ class InstallController extends Controller
     
     public function install(Request $request) {
         $this->validateRequest([
-            'dbhost' => 'required',
-            'dbport' => 'required|integer',
-            'dbuser' => 'required',
-            'dbpass' => 'nullable',
-            'dbname' => 'required',
-            'dbprefix' => 'nullable|alpha_dash',
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|string|min:6|max:32|confirmed',
@@ -78,21 +74,18 @@ class InstallController extends Controller
         
         $flash = '';
         switch ($step) {
-            case 1: $this->_writeEnvFile($data);
-                $flash = 'Created env file config';
-                break;
-            case 2: $this->_callArtisan();
+            case 1: $this->_runMigration();
                 $flash = 'Run database';
             break;
-            case 3: $this->_createAdminUser($data);
+            case 2: $this->_createAdminUser($data);
                 $flash = 'Created user Admin';
             break;
-            case 4: $this->_createInstalled();
+            case 3: $this->_createInstalled();
                 $flash = 'Created install file';
             break;
         }
     
-        if ($step < 4) {
+        if ($step < 3) {
             return response()->json([
                 'status' => 'success',
                 'flash' => $flash,
@@ -132,7 +125,6 @@ class InstallController extends Controller
     private function _checkPermissionFolder() {
         return $this->permissions->check(
             [
-            '/'     => '775',
             'resources/views/emails'     => '775',
             'storage/'     => '777',
             'bootstrap/cache/'       => '777',
@@ -140,27 +132,6 @@ class InstallController extends Controller
     }
     
     private function _testDbConnect(array $data) {
-        $settings = config("database.connections.mysql");
-    
-        config([
-            'database' => [
-                'default' => 'mysql',
-                'connections' => [
-                    'mysql' => array_merge($settings, [
-                        'driver' => 'mysql',
-                        'host' => $data['dbhost'],
-                        'port' => $data['dbport'],
-                        'database' => $data['dbname'],
-                        'username' => $data['dbuser'],
-                        'password' => $data['dbpass'],
-                        'prefix' => $data['dbprefix'],
-                    ]),
-                ],
-            ],
-        ]);
-    
-        \DB::purge();
-    
         try {
             \DB::connection()->getPdo();
         
@@ -189,7 +160,7 @@ class InstallController extends Controller
         return file_put_contents(base_path() . '/.env', $env);
     }
     
-    private function _callArtisan() {
+    private function _runMigration() {
         \Artisan::call('migrate', ['--force' => true]);
     }
     

@@ -1,4 +1,4 @@
-<div class="col-md-12 box-hidden tabs tab-4">
+<div class="col-md-12 box-hidden tabs tab-3">
     <div class="tab-name box-hidden">Admin User</div>
     <div class="form-group">
         <label for="name">Name</label>

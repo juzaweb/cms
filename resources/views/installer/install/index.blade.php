@@ -25,8 +25,6 @@
 
                             @include('installer.install.component.permission_tab')
 
-                            @include('installer.install.component.database_tab')
-
                             @include('installer.install.component.admin_tab')
 
                             @include('installer.install.component.process_tab')

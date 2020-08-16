@@ -13,7 +13,7 @@ $(document).ready(function () {
             $('.back-button').prop('disabled', true);
         }
 
-        if (tab == 4) {
+        if (tab == 3) {
             $('.next-button').hide('slow');
             $('.submit-button').show('slow');
         }
@@ -25,7 +25,7 @@ $(document).ready(function () {
         $('.tab-title').html($('.tab-'+ tab + ' .tab-name').text());
         $('.tab-'+ tab).show('slow');
 
-        if (tab < 4) {
+        if (tab < 3) {
             $('.submit-button').hide('slow');
             $('.next-button').show('slow');
         }
@@ -95,10 +95,10 @@ $(document).ready(function () {
 
     function install_submit_success() {
         $('.tabs').hide('slow');
-        $('.tab-title').html($('.tab-5 .tab-name').text());
-        $('.tab-5').show('slow');
+        $('.tab-title').html($('.tab-4 .tab-name').text());
+        $('.tab-4').show('slow');
         $('.submit-button').html('<i class="fa fa-spinner fa-spin"></i> Please wait...').prop('disabled', true);
-        $('.step-status').html('');
+        $('.step-status').html('<li class="list-group-item success">Installing...<span><i class="fa fa-fw fa-check-circle-o row-icon" aria-hidden="true"></i></span></li>');
         install_step(1);
     }
 
