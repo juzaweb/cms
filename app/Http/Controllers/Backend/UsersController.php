@@ -22,6 +22,7 @@ class UsersController extends Controller
         $limit = $request->get('limit', 20);
         
         $query = User::query();
+        $query->where('status', '>', 1);
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -76,6 +77,7 @@ class UsersController extends Controller
         
         $model = User::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
+        $model->is_admin = $request->post('is_admin');
         
         if (empty($model->id)) {
             $model->setAttribute('email', $request->post('email'));

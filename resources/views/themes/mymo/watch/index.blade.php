@@ -104,12 +104,13 @@
 
                             <div class="movie-trailer hidden"></div>
                             <div class="movie-detail">
-
+                                @if(!$countries->isEmpty())
                                 <p class="actors">@lang('app.countries'):
                                     @foreach($countries as $country)
                                     <a href="{{ route('country', [$country->slug]) }}" title="{{ $country->name }}">{{ $country->name }}</a>
                                     @endforeach
                                 </p>
+                                @endif
                             </div>
                         </div>
                     </div>
