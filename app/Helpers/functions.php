@@ -275,6 +275,10 @@ function genre_setting($setting) {
         $order[0] = 'id';
     }
     
+    if ($order[0] == 'view') {
+        $order[0] = 'views';
+    }
+    
     if (!in_array($order[1], ['ASC', 'DESC'])) {
         $order[1] = 'DESC';
     }

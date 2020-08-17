@@ -41,9 +41,12 @@
 
                 <div class="mymo-movie-wrapper">
                     <div class="title-block watch-page">
-                        <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-id="{{ $info->id }}" data-toggle="tooltip" title="@lang('app.add_to_bookmark')">
+                        <a href="javascript:;" data-toggle="tooltip" title="@lang('app.add_to_bookmark')">
+                            <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-post_id="{{ $info->id }}" data-thumbnail="{{ $info->getThumbnail() }}" data-href="{{ route('watch', [$info->slug]) }}" data-title="{{ $info->name }}" data-date="{{ $info->release }}">
+                                <!-- <div class="mymo-pulse-ring"></div> -->
+                            </div>
+                        </a>
 
-                        </div>
                         <div class="title-wrapper">
                             <h1 class="entry-title" data-toggle="tooltip" title="{{ $info->name }}">{{ $info->name }}<span class="title-year"> (<a href="{{ route('year', [$info->year]) }}" rel="tag">{{ $info->year }}</a>)</span></h1>
                         </div>
