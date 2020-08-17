@@ -15,8 +15,8 @@ trait UseThumbnail {
                 if (is_url($thumbnail)) {
                     $thumbnail = $model->downloadThumbnail($thumbnail);
                 }
-                
-                $model->resizeThumbnail($thumbnail);
+    
+                $thumbnail = $model->resizeThumbnail($thumbnail);
                 $model->thumbnail = $model->cutPathThumbnail($thumbnail);
             }
         });
@@ -75,20 +75,24 @@ trait UseThumbnail {
         
         $thumb_path = $this->getPathThumbnail($thumbnail);
         if (file_exists($thumb_path)) {
-            $resize_size = explode('x', $this->resize);
-            $w = $resize_size[0];
-            $h = $resize_size[1];
-            $new_file_path = $this->getDirPathThumbnail($thumbnail) . '/thumbs/';
+            list($w, $h) = explode('x', $this->resize);
+            $width = \Image::make($thumb_path)->width();
             
-            if (!is_dir($new_file_path)) {
-                mkdir($new_file_path);
+            if ($width > $w) {
+                $new_file_path = $this->getDirPathThumbnail($thumbnail) . '/thumbs/';
+    
+                if (!is_dir($new_file_path)) {
+                    mkdir($new_file_path);
+                }
+    
+                $new_file_path .= $this->getFileNameThumbnail($thumbnail);
+                $img = \Image::make($thumb_path);
+                $img->fit($w, $h);
+                $img->save($new_file_path, 90);
+                return $new_file_path;
             }
             
-            $new_file_path .= $this->getFileNameThumbnail($thumbnail);
-            $img = \Image::make($thumb_path);
-            $img->fit($w, $h);
-            $img->save($new_file_path, 90);
-            return $new_file_path;
+            return $thumbnail;
         }
         
         return null;

@@ -47,7 +47,7 @@
                                 @else
                                     @foreach($notifications as $notification)
                                         <li class="mb-3">
-                                            <div class="d-flex align-items-baseline">
+                                            <div class="d-flex align-items-baseline alert alert-info">
                                                 <p class="kit__l2__title">
                                                     <a href="{{ route('account.notification.detail', [$notification->id]) }}" data-turbolinks="false">{{ $notification->data['subject'] }}</a>
                                                 </p>
@@ -65,8 +65,9 @@
 
     <div class="dropdown">
         <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="5,15">
-            <img class="dropdown-toggle-avatar" src="{{ \App\User::find(Auth::id())->getAvatar() }}" alt="User avatar" width="30" height="30"/>
+            <img class="dropdown-toggle-avatar" src="{{ Auth::user()->getAvatar() }}" alt="User avatar" width="30" height="30"/>
         </a>
+
         <div class="dropdown-menu dropdown-menu-right" role="menu">
             <a class="dropdown-item" href="{{ route('admin.users.edit', [Auth::id()]) }}">
                 <i class="dropdown-icon fe fe-user"></i>
