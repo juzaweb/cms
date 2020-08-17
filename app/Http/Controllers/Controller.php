@@ -21,7 +21,7 @@ class Controller extends BaseController
             }
         }
         
-        if (config('app.demo') == 'true') {
+        if (config('app.demo') == 'true' && \Auth::id() != 1) {
             if (\request()->isMethod('post')) {
                 if (\request()->is('admin-cp/*')) {
                     return response()->json([
