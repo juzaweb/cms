@@ -126,9 +126,10 @@ class InstallController extends Controller
     private function _checkPermissionFolder() {
         return $this->permissions->check(
             [
-                'resources/views/emails'     => '775',
-                'storage/'     => '777',
-                'bootstrap/cache/'       => '777',
+                'resources/lang' => '775',
+                'resources/views/emails' => '775',
+                'storage/' => '777',
+                'bootstrap/cache/' => '777',
         ]);
     }
     

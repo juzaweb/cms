@@ -368,5 +368,8 @@ return [
   'blog' => 'Blog',
   'latest_movies_page_seo' => 'Latest movies page seo',
   'latest_movies_banner' => 'Latest movies banner',
+  'other' => 'Other',
+  'fb_app_id' => 'Facebook App ID',
+  'google_analytics_id' => 'Google Analytics ID',
 ];
 

@@ -76,6 +76,7 @@ class Configs extends Model
             'twitter',
             'pinterest',
             'youtube',
+            'google_analytics',
         ];
     }
     

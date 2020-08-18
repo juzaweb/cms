@@ -86,3 +86,16 @@
 
     <input type="text" name="tmdb_api_key" class="form-control" id="tmdb_api_key" value="{{ get_config('tmdb_api_key') }}" autocomplete="off">
 </div>
+
+<h5>@lang('app.other')</h5>
+<div class="form-group">
+    <label class="col-form-label" for="fb_app_id">@lang('app.fb_app_id')</label>
+
+    <input type="text" name="fb_app_id" class="form-control" id="fb_app_id" value="{{ get_config('fb_app_id') }}" autocomplete="off">
+</div>
+
+<div class="form-group">
+    <label class="col-form-label" for="google_analytics">@lang('app.google_analytics_id')</label>
+
+    <input type="text" name="google_analytics" class="form-control" id="google_analytics" value="{{ get_config('google_analytics') }}" autocomplete="off">
+</div>

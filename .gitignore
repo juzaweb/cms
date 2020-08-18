@@ -1,15 +1,10 @@
 /node_modules
 /public/hot
 /public/storage
-/public/js
-/public/css
-/public/styles/themes/mymo/css
-/public/styles/themes/mymo/js
 /storage
 /vendor
 /.idea
 /update
-/installed
 /composer.lock
 /bootstrap/cache
 .env

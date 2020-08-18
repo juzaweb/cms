@@ -6,6 +6,8 @@
         $logo = image_url(get_config('logo'));
         $home_tile = get_config('title');
         $header = theme_setting('header');
+        $fb_app_id = get_config('fb_app_id');
+        $google_analytics = get_config('google_analytics');
         $body_class = isset($body_class) ? $body_class : 'home blog wp-embed-responsive mymothemes mymomovies mymo-corner-rounded';
     @endphp
     <meta charset="utf-8"/>
@@ -27,9 +29,7 @@
     @if(@$banner)
         <meta property="og:image" content="{{ image_url($banner) }}"/>
     @endif
-    @php
-    $fb_app_id = get_config('fb_app_id');
-    @endphp
+
     @if($fb_app_id)
     <meta property="fb:app_id" content="{{ $fb_app_id }}"/>
     @endif
@@ -71,6 +71,7 @@
     <script type='text/javascript'>
         /* <![CDATA[ */
         var ajax_auth_object = {
+            "logined": "{{ Auth::check() ? '1' : '0' }}",
             "login_url": "{{ route('login.submit') }}",
             "user_registration": "{{ get_config('user_registration') }}",
             "register_url": "{{ route('register.submit') }}",
@@ -102,9 +103,20 @@
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('styles/themes/mymo/js/main.js') }}"></script>
 
+    @if($google_analytics)
     <!-- Google Analytics -->
 
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $google_analytics }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '{{ $google_analytics }}');
+        </script>
+
     <!-- End Google Analytics -->
+    @endif
 
     <style type="text/css">
         #header .site-title {
