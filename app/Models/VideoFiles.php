@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\GoogleDrive;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
 /**
@@ -197,19 +198,33 @@ class VideoFiles extends Model
     }
     
     protected function getVideoGoogleDrive() {
-        $gdrive = new GoogleDrive($this->url);
-        return [
-            (object) [
-                'file' => 'https://drive.google.com/file/d/'. $gdrive->getFileId() .'/preview',
-                'type' => 'mp4',
-            ]
-        ];
-    }
-    
-    protected function getVideoGoogleDrive2() {
-        $gdrive = new GoogleDrive($this->url);
-        $files = $gdrive->getLinkPlay();
-        return $files;
+        $gdrive = GoogleDrive::link_stream(get_google_drive_id($this->url));
+        if ($gdrive) {
+            
+            $files = [];
+            foreach ($gdrive->qualities as $quality) {
+                $file = [
+                    'class' => 'GoogleDrive',
+                    'file' => $gdrive->stream_id,
+                ];
+                
+                $token = Crypt::encryptString(urlencode(base64_encode(json_encode($file))));
+                
+                $files[] = (object) [
+                    'label' => $quality,
+                    'file' => route('stream.service', [
+                        $token,
+                        $quality,
+                        $quality . '.mp4'
+                    ]),
+                    'type' => 'mp4',
+                ];
+            }
+            
+            return $files;
+        }
+        
+        return [];
     }
     
     protected function generateStreamUrl($path) {
