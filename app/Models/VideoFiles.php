@@ -208,7 +208,7 @@ class VideoFiles extends Model
                     'file' => $gdrive->stream_id,
                 ];
                 
-                $token = Crypt::encryptString(urlencode(base64_encode(json_encode($file))));
+                $token = urlencode(base64_encode(Crypt::encryptString(json_encode($file))));
                 
                 $files[] = (object) [
                     'label' => $quality,
