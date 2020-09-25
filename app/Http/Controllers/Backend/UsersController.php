@@ -22,7 +22,7 @@ class UsersController extends Controller
         $limit = $request->get('limit', 20);
         
         $query = User::query();
-        $query->where('status', '>', 1);
+        $query->where('id', '>', 1);
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {

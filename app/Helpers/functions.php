@@ -382,3 +382,7 @@ function get_vimeo_id($url) {
 function count_unread_notifications() {
     return Auth::user()->unreadNotifications()->count(['id']);
 }
+
+function get_google_drive_id(string $url) {
+    return explode('/', $url)[5];
+}

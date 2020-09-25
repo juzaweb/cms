@@ -87,10 +87,8 @@ class AjaxGetController extends Controller
                     ->orderBy('views', 'desc');
             });
         }
-        
-        if ($type == 'all') {
-            $query->orderBy('views', 'DESC');
-        }
+    
+        $query->orderBy('views', 'DESC');
         
         $query->limit(10);
         return $query->get();

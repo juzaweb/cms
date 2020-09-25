@@ -25,10 +25,10 @@ class SystemSettingController extends Controller
             'user_registration' => 'required|in:0,1',
             'user_verification' => 'required|in:0,1',
             'google_recaptcha' => 'required|in:0,1',
-            'google_recaptcha_key' => 'required_if:google_recaptcha,!=,0|string|max:300',
-            'google_recaptcha_secret' => 'required_if:google_recaptcha,!=,0|string|max:300',
+            'google_recaptcha_key' => 'required_if:google_recaptcha,1|string|max:300',
+            'google_recaptcha_secret' => 'required_if:google_recaptcha,1|string|max:300',
             'player_watermark' => 'required|in:0,1',
-            'player_watermark_logo' => 'nullable',
+            'player_watermark_logo' => 'required_if:player_watermark,1',
         ], $request, [
             'title' => trans('app.home_title'),
             'description' => trans('app.home_description'),

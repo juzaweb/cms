@@ -71,7 +71,7 @@
                     </article>
                     <div class="item-content-toggle">
                         <div class="item-content-gradient"></div>
-                        <span class="show-more" data-single="true" data-showmore="Hiển thị thêm" data-showless="@lang('app.show_less')">@lang('app.show_more')</span>
+                        <span class="show-more" data-single="true" data-showmore="@lang('app.show_more')" data-showless="@lang('app.show_less')">@lang('app.show_more')</span>
                     </div>
                 </div>
             </div>

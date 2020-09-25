@@ -145,7 +145,7 @@ class GoogleDrive
     }
     
     private function _getFileId(string $url) {
-        return explode('/', $url)[5];
+        return get_google_drive_id($url);
     }
     
     private function _getLinks() {
