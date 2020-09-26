@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Leech\LeechFile whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Leech\LeechFile whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $leech_link_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Leech\LeechFile whereLeechLinkId($value)
  */
 class LeechFile extends Model
 {
@@ -37,6 +39,7 @@ class LeechFile extends Model
         'label',
         'original_url',
         'local_path',
-        'leech_link_id'
+        'leech_link_id',
+        'status'
     ];
 }

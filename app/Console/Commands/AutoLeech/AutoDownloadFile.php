@@ -19,7 +19,12 @@ class AutoDownloadFile extends Command
     }
     
     public function handle() {
-        $path = \Storage::disk('local')->path('leech/' . date('Y_m_d'));
+        $storage_path = \Storage::disk('local')->path('');
+        $filepath = 'leech/' . date('Y_m_d');
+        if (!is_dir($storage_path . $filepath)) {
+            \File::makeDirectory($storage_path . $filepath);
+        }
+        
         $files = LeechFile::where('status', '=', 2)
             ->limit(1)
             ->get();
@@ -29,7 +34,7 @@ class AutoDownloadFile extends Command
                 'status' => 3,
             ]);
             
-            if (!$this->checkAccess()) {
+            if (!$this->checkAccess($file->original_url)) {
                 $file->update([
                     'status' => 0,
                     'error' => 'File not access',
@@ -38,10 +43,11 @@ class AutoDownloadFile extends Command
                 continue;
             }
     
-            $filename = $path . '/' . $this->generateFileName();
+            $filepath = $filepath .'/'. $this->generateFileName($file->original_url);
+            $filename = $storage_path . '/' . $filepath;
             $this->downloadChunk($file->original_url, $filename);
     
-            if (\Storage::size($filename) <= 2) {
+            if (\File::size($filename) <= 2) {
                 $file->update([
                     'status' => 0,
                     'error' => 'Cannot download file',
@@ -52,6 +58,7 @@ class AutoDownloadFile extends Command
     
             $file->update([
                 'status' => 1,
+                'local_path' => $filepath,
             ]);
         }
     }

@@ -23,6 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Leech\LeechLink whereServer($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Leech\LeechLink whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $leech_data
+ * @property int $leech_link
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Leech\LeechLink whereLeechData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Leech\LeechLink whereLeechLink($value)
  */
 class LeechLink extends Model
 {
