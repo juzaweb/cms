@@ -52,6 +52,10 @@ function image_path($url) {
 }
 
 function is_url($string) {
+    if (empty($string)) {
+        return false;
+    }
+    
     if (substr($string, 0, 7) === 'http://') {
         return true;
     }
