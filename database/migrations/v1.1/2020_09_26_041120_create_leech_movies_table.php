@@ -16,6 +16,7 @@ class CreateLeechMoviesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 500);
             $table->longText('data');
+            $table->text('leech_link');
             $table->tinyInteger('type')->default(1)->comment('1: movie, 2: tv series');
             $table->timestamps();
         });

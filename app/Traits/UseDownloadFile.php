@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Str;
+
 trait UseDownloadFile
 {
     protected function downloadFileUrl($url, $filename) {
@@ -30,20 +32,14 @@ trait UseDownloadFile
             file_put_contents($filename, $buffer,FILE_APPEND);
             @ob_flush();
             flush();
-            
-            if (true) {
-                $cnt += strlen($buffer);
-            }
+    
+            $cnt += strlen($buffer);
             
             echo "Chunk download: " . round($cnt / 1048576, 2) . " MB \n";
         }
         
         $status = fclose($handle);
-        
-        if (true && $status) {
-            return $cnt;
-        }
-        
+    
         return $status;
     }
     
@@ -53,18 +49,39 @@ trait UseDownloadFile
         return $name;
     }
     
-    protected function checkActive($url) {
-        $ch = curl_init($url);
+    protected function checkAccess($url) {
+        try {
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_NOBODY, true);
+            curl_exec($ch);
+            $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
     
-        curl_setopt($ch, CURLOPT_NOBODY, true);
-        curl_exec($ch);
-        $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-    
-        if ($retcode == 200) {
-            return true;
+            if ($retcode == 200) {
+                return true;
+            }
+        }
+        catch (\Exception $exception) {
+            return false;
         }
     
         return false;
+    }
+    
+    protected function generateFileName($url) {
+        return Str::random(10) .'_'. date('H-i-s') . '.' . $this->getFileExtension($url);
+    }
+    
+    protected function getFileExtension($url) {
+        $name = $this->getBaseName($url);
+        if ($name) {
+            $ext = explode('.', $name)[count(explode('.', $name)) - 1];
+            
+            if ($ext) {
+                return $ext;
+            }
+        }
+        
+        return 'mp4';
     }
 }

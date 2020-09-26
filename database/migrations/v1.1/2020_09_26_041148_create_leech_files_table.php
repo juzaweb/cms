@@ -17,7 +17,9 @@ class CreateLeechFilesTable extends Migration
             $table->bigInteger('leech_id')->index();
             $table->string('label', 200);
             $table->text('original_url');
-            $table->text('local_url');
+            $table->text('local_path')->nullable();
+            $table->text('error')->nullable();
+            $table->tinyInteger('status')->default(2)->comment('0: Download failed, 1: Download success, 2: Download pending, 3: Downloading');
             $table->timestamps();
         });
     }
