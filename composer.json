@@ -45,6 +45,7 @@
     "autoload": {
         "files": [
           "app/Helpers/functions.php",
+          "app/Helpers/simple_html_dom.php",
           "app/Helpers/VideoStream.php",
           "app/Helpers/UrlVideoStream.php",
           "app/Helpers/GoogleDrive.php",
