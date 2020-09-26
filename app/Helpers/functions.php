@@ -73,7 +73,7 @@ function image_url($path) {
     }
     
     if ($path) {
-        $storage = Storage::disk('uploads');
+        $storage = Storage::disk('public');
         $file_path = $storage->path($path);
         $file_url = $storage->url($path);
         

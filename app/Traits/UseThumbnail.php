@@ -42,7 +42,7 @@ trait UseThumbnail {
         $new_file = $file_name . '-' . Str::random(10) . '-'. time() .'.' . $data['extension'];
         
         try {
-            $new_dir = \Storage::disk('uploads')->path(date('Y/m/d'));
+            $new_dir = \Storage::disk('public')->path(date('Y/m/d'));
             if (!is_dir($new_dir)) {
                 \File::makeDirectory($new_dir, 0775, true);
             }
@@ -53,7 +53,7 @@ trait UseThumbnail {
                 $model = new Files();
                 $model->fill($data);
                 $model->type = 1;
-                $model->mime_type = \Storage::disk('uploads')
+                $model->mime_type = \Storage::disk('public')
                     ->mimeType($data['path']);
                 $model->user_id = \Auth::id();
                 $model->save();
@@ -109,12 +109,12 @@ trait UseThumbnail {
     }
     
     protected function getPathThumbnail($thumbnail) {
-        return \Storage::disk('uploads')->path($thumbnail);
+        return \Storage::disk('public')->path($thumbnail);
     }
     
     protected function cutPathThumbnail($thumbnail) {
         if ($thumbnail) {
-            $upload_path = \Storage::disk('uploads')->path('');
+            $upload_path = \Storage::disk('public')->path('');
             return str_replace($upload_path, '', $thumbnail);
         }
         

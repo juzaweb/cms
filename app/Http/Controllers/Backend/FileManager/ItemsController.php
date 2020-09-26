@@ -26,7 +26,7 @@ class ItemsController extends LfmController
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
     
-        $storage = \Storage::disk('uploads');
+        $storage = \Storage::disk('public');
         $items = [];
         foreach ($folders as $folder) {
             $items[] = [

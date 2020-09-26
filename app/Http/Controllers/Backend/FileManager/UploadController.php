@@ -66,7 +66,7 @@ class UploadController extends LfmController
     
     protected function saveFile(UploadedFile $file, $folder_id) {
         $filename = $this->createFilename($file);
-        $storage = \Storage::disk('uploads');
+        $storage = \Storage::disk('public');
         $new_path = $storage->putFileAs(date('Y/m/d'), $file, $filename);
     
         if ($new_path) {

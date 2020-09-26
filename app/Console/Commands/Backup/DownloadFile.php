@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Console\Commands\AutoLeech;
+namespace App\Console\Commands\Backup;
 
 use App\Models\Leech\LeechFile;
 use App\Traits\UseDownloadFile;
 use Illuminate\Console\Command;
 
-class AutoDownloadFile extends Command
+class DownloadFile extends Command
 {
     use UseDownloadFile;
     
-    protected $signature = 'autoleech:download';
+    protected $signature = 'backup:download';
     
     protected $description = '';
     

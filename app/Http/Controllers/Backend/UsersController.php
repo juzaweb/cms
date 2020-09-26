@@ -101,7 +101,7 @@ class UsersController extends Controller
             $avatar = $request->file('avatar');
             $extention = $avatar->getClientOriginalExtension();
             $newname = $model->id . '.' . $extention;
-            $upload = $avatar->storeAs('avatars', $newname, 'uploads');
+            $upload = $avatar->storeAs('avatars', $newname, 'public');
             
             if ($upload) {
                 User::where('id', '=', $model->id)

@@ -46,7 +46,7 @@ class Files extends Model
     ];
     
     public function deleteFile() {
-        \Storage::disk('uploads')->delete($this->path);
+        \Storage::disk('public')->delete($this->path);
         return $this->delete();
     }
 }

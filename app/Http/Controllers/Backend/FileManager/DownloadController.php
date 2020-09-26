@@ -11,7 +11,7 @@ class DownloadController extends LfmController
         $file = $this->getPath(request()->get('file'));
         $data = Files::where('path', '=', $file)->first(['name']);
         
-        $path = \Storage::disk('uploads')->path($file);
+        $path = \Storage::disk('public')->path($file);
         if ($data) {
             return response()->download($path, $data->name);
         }

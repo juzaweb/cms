@@ -148,7 +148,7 @@ class TmdbController extends Controller
         $file_name = str_replace('.' . $data['extension'], '', $data['name']);
         $new_file = Str::slug($file_name) . '-' . Str::random(10) . '-'. time() .'.' . $data['extension'];
     
-        $new_dir = \Storage::disk('uploads')->path(date('Y/m/d'));
+        $new_dir = \Storage::disk('public')->path(date('Y/m/d'));
         if (!is_dir($new_dir)) {
             \File::makeDirectory($new_dir, 0775, true);
         }
@@ -159,7 +159,7 @@ class TmdbController extends Controller
             $model = new Files();
             $model->fill($data);
             $model->type = 1;
-            $model->mime_type = \Storage::disk('uploads')
+            $model->mime_type = \Storage::disk('public')
                 ->mimeType($data['path']);
             $model->user_id = \Auth::id();
             $model->save();
