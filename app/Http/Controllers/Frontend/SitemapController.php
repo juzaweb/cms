@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Countries;
-use App\Models\Genres;
+use App\Models\Category\Countries;
+use App\Models\Category\Genres;
 use App\Models\Movie\Movies;
 use App\Models\PostCategories;
 use App\Models\Posts;

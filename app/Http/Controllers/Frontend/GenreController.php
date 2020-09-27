@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Genres;
+use App\Models\Category\Genres;
 use App\Models\Movie\Movies;
 
 class GenreController extends Controller

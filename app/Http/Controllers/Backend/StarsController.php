@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Stars;
+use App\Models\Category\Stars;
 
 class StarsController extends Controller
 {

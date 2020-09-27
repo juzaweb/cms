@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Logs;
 
-use App\Models\EmailList;
+use App\Models\Email\EmailList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

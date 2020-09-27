@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\Servers whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \App\Models\Movie\Movies $movie
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\VideoFiles[] $video_files
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Video\VideoFiles[] $video_files
  * @property-read int|null $video_files_count
  */
 class VideoServers extends Model
@@ -44,6 +44,6 @@ class VideoServers extends Model
     }
     
     public function video_files() {
-        return $this->hasMany('App\Models\VideoFiles', 'server_id', 'id');
+        return $this->hasMany('App\Models\Video\VideoFiles', 'server_id', 'id');
     }
 }

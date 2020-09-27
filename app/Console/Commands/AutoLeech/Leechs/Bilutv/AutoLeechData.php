@@ -5,7 +5,7 @@ namespace App\Console\Commands\AutoLeech\Leechs\Bilutv;
 use App\Helpers\ImportMovie;
 use App\Models\Leech\LeechLink;
 use App\Models\Video\VideoServers;
-use App\Models\VideoFiles;
+use App\Models\Video\VideoFiles;
 use App\Traits\UseLeech;
 use Illuminate\Console\Command;
 

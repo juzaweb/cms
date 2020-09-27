@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Movie\Movies;
-use App\Models\Tags;
+use App\Models\Category\Tags;
 
 class TagController extends Controller
 {

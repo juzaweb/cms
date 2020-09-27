@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Video\VideoServers;
-use App\Models\Genres;
+use App\Models\Category\Genres;
 use App\Models\Movie\Movies;
 
 class WatchController extends Controller

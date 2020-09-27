@@ -65,7 +65,7 @@ if (strpos($input['name'], '[')) {
     <select name="{{ $input_name }}" class="load-genres">
         @if($input_value)
             @php
-                $genre = \App\Models\Genres::where('id', '=', $input_value)
+                $genre = \App\Models\Category\Genres::where('id', '=', $input_value)
                     ->first(['name']);
             @endphp
             <option value="{{ $input_value }}">{{ @$genre->name }}</option>
@@ -78,7 +78,7 @@ if (strpos($input['name'], '[')) {
     <select name="{{ $input_name }}[]" class="load-genres" multiple>
         @if($input_value)
             @php
-                $genres = \App\Models\Genres::whereIn('id', $input_value)
+                $genres = \App\Models\Category\Genres::whereIn('id', $input_value)
                     ->get(['id', 'name']);
             @endphp
 

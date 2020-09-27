@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\RegisterSuccess;
-use App\Models\EmailList;
+use App\Models\Email\EmailList;
 use App\User;
 
 class RegisterSuccessListener

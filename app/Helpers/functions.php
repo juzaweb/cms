@@ -1,13 +1,13 @@
 <?php
 
 use App\Models\Ads;
-use App\Models\Countries;
-use App\Models\Genres;
+use App\Models\Category\Countries;
+use App\Models\Category\Genres;
 use App\Models\Menu;
 use App\Models\Movie\Movies;
 use App\Models\Sliders;
 use App\Models\ThemeConfigs;
-use App\Models\Types;
+use App\Models\Category\Types;
 use Illuminate\Support\Str;
 
 function json_message($message, $status = 'success') {

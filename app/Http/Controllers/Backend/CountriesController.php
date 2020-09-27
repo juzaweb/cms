@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Countries;
+use App\Models\Category\Countries;
 
 class CountriesController extends Controller
 {

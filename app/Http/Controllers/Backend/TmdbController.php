@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Helpers\TmdbApi;
-use App\Models\Countries;
+use App\Models\Category\Countries;
 use App\Models\Files;
-use App\Models\Genres;
+use App\Models\Category\Genres;
 use App\Models\Movie\Movies;
-use App\Models\Stars;
+use App\Models\Category\Stars;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;

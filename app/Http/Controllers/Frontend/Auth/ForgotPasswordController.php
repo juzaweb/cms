@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Auth;
 
-use App\Models\EmailList;
+use App\Models\Email\EmailList;
 use App\Models\PasswordReset;
 use App\User;
 use Illuminate\Http\Request;

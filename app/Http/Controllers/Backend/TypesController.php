@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Types;
+use App\Models\Category\Types;
 
 class TypesController extends Controller
 {

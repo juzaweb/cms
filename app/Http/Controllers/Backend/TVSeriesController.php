@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Countries;
-use App\Models\Genres;
-use App\Models\Stars;
-use App\Models\Tags;
-use App\Models\VideoQualities;
+use App\Models\Category\Countries;
+use App\Models\Category\Genres;
+use App\Models\Category\Stars;
+use App\Models\Category\Tags;
+use App\Models\Video\VideoQualities;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Movie\Movies;

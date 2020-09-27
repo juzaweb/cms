@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend\Design;
 
-use App\Models\Countries;
-use App\Models\Genres;
+use App\Models\Category\Countries;
+use App\Models\Category\Genres;
 use App\Models\Menu;
 use App\Models\Pages;
-use App\Models\Types;
+use App\Models\Category\Types;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

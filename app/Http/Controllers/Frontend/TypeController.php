@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Types;
+use App\Models\Category\Types;
 use App\Http\Controllers\Controller;
 
 class TypeController extends Controller

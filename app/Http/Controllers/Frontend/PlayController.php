@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Models\Genres;
+use App\Models\Category\Genres;
 use App\Models\Movie\Movies;
 use App\Models\Movie\MovieViews;
-use App\Models\VideoAds;
-use App\Models\VideoFiles;
+use App\Models\Video\VideoAds;
+use App\Models\Video\VideoFiles;
 
 class PlayController extends Controller
 {

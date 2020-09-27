@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Genres;
+use App\Models\Category\Genres;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

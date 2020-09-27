@@ -5,7 +5,7 @@ namespace App\Console\Commands\Backup\Servers;
 use App\Models\Backup\BackupHistory;
 use App\Models\Backup\BackupServer;
 use App\Models\Leech\LeechFile;
-use App\Models\VideoFiles;
+use App\Models\Video\VideoFiles;
 use Illuminate\Console\Command;
 use App\Helpers\OpenDriveApi;
 

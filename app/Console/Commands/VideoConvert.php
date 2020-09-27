@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\VideoFiles;
+use App\Models\Video\VideoFiles;
 use App\User;
 use Illuminate\Console\Command;
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\VideoQualities;
+use App\Models\Video\VideoQualities;
 
 class VideoQualityController extends Controller
 {

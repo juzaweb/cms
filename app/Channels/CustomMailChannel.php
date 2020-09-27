@@ -2,7 +2,7 @@
 
 namespace App\Channels;
 
-use App\Models\EmailList;
+use App\Models\Email\EmailList;
 use Illuminate\Notifications\Notification;
 
 class CustomMailChannel

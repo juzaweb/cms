@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Video;
 
 use App\Helpers\GoogleDrive;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Str;
 
 /**
- * App\Models\VideoFiles
+ * App\Models\Video\VideoFiles
  *
  * @property int $id
  * @property int $server_id
@@ -28,27 +27,27 @@ use Illuminate\Support\Str;
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereConverted($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereLabel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereMovieId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereServerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereSource($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereVideo1080p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereVideo2048p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereVideo240p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereVideo360p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereVideo4096p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereVideo480p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoFiles whereVideo720p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereConverted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereLabel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereMovieId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereServerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereSource($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo1080p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo2048p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo240p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo360p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo4096p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo480p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo720p($value)
  * @mixin \Eloquent
  */
 class VideoFiles extends Model

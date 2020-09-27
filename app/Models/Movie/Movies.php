@@ -2,9 +2,9 @@
 
 namespace App\Models\Movie;
 
-use App\Models\Countries;
-use App\Models\Genres;
-use App\Models\Tags;
+use App\Models\Category\Countries;
+use App\Models\Category\Genres;
+use App\Models\Category\Tags;
 use App\Traits\UseChangeBy;
 use App\Traits\UseMetaSeo;
 use App\Traits\UseSlug;

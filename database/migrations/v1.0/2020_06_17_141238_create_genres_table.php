@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Genres;
+use App\Models\Category\Genres;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

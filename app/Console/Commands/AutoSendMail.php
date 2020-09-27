@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Configs;
-use App\Models\EmailList;
+use App\Models\Email\EmailList;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;

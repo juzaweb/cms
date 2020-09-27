@@ -9,23 +9,23 @@ class MoviesSeeder extends Seeder
         $faker = Faker\Factory::create();
         foreach (range(1, 50) as $row) {
             $name = $faker->name;
-            $genres = \App\Models\Genres::where('status', '=', 1)
+            $genres = \App\Models\Category\Genres::where('status', '=', 1)
                 ->inRandomOrder()
                 ->limit(3)
                 ->pluck('id')
                 ->toArray();
             
-            $countries = \App\Models\Countries::where('status', '=', 1)
+            $countries = \App\Models\Category\Countries::where('status', '=', 1)
                 ->inRandomOrder()
                 ->limit(3)
                 ->pluck('id')
                 ->toArray();
             
-            $tags = \App\Models\Tags::inRandomOrder()
+            $tags = \App\Models\Category\Tags::inRandomOrder()
                 ->limit(3)
                 ->pluck('id')
                 ->toArray();
-            $type = \App\Models\Types::inRandomOrder()->first();
+            $type = \App\Models\Category\Types::inRandomOrder()->first();
             $random_key = array_rand([1, 2],1);
             $release = $faker->date();
             

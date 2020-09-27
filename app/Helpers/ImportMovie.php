@@ -2,12 +2,12 @@
 
 namespace App\Helpers;
 
-use App\Models\Countries;
+use App\Models\Category\Countries;
 use App\Models\Files;
-use App\Models\Genres;
+use App\Models\Category\Genres;
 use App\Models\Movie\Movies;
-use App\Models\Stars;
-use App\Models\Tags;
+use App\Models\Category\Stars;
+use App\Models\Category\Tags;
 use Illuminate\Support\Str;
 
 class ImportMovie

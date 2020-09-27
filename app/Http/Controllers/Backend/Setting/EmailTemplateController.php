@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\EmailTemplates;
+use App\Models\Email\EmailTemplates;
 
 class EmailTemplateController extends Controller
 {

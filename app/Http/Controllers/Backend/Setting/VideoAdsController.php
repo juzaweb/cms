@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\VideoAds;
+use App\Models\Video\VideoAds;
 
 class VideoAdsController extends Controller
 {

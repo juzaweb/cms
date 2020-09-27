@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Movie\Movies;
 use App\Models\Video\VideoServers;
-use App\Models\VideoFiles;
+use App\Models\Video\VideoFiles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

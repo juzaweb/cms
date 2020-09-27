@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Countries;
+use App\Models\Category\Countries;
 use App\Models\Movie\Movies;
 use App\Http\Controllers\Controller;
 
