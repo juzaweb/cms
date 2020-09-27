@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class ImportMovie
 {
     public $data;
-    public $errors;
+    public $errors = [];
     
     public function __construct(array $data) {
         $fill_data = [
@@ -81,6 +81,9 @@ class ImportMovie
         $model->tv_series = $this->data['tv_series'] ? 1 : 0;
         $model->status = 2;
     
+        $model->created_by = \Auth::check() ? \Auth::id() : 1;
+        $model->updated_by = \Auth::check() ? \Auth::id() : 1;
+    
         if ($model->release && empty($model->year)) {
             $model->year = explode('-', $model->release)[0];
         }
@@ -92,29 +95,37 @@ class ImportMovie
         if ($model->description && empty($model->short_description)) {
             $model->short_description = sub_words(strip_tags($model->description), 15);
         }
-    
+        
         return $model->save();
     }
     
     public function validate() {
         if (empty($this->data['name'])) {
-            $this->errors[] = 'Name is required';
+            $this->errors[] = 'Name is required.';
         }
     
         if (empty($this->data['description'])) {
-            $this->errors[] = 'Description is required';
+            $this->errors[] = 'Description is required.';
         }
     
         if (empty($this->data['thumbnail'])) {
-            $this->errors[] = 'Thumbnail is required';
+            $this->errors[] = 'Thumbnail is required.';
         }
         
         if (empty($this->data['genres'])) {
-            $this->errors[] = 'Genres is required';
+            $this->errors[] = 'Genres is required.';
         }
         
         if ($this->data['tv_series'] === null) {
-            $this->errors[] = 'TV Series is required';
+            $this->errors[] = 'TV Series is required.';
+        }
+        
+        if (Movies::where('other_name', '=', $this->data['other_name'])
+            ->where('year', '=', $this->data['year'])
+            ->whereNotNull('other_name')
+            ->whereNotNull('year')
+            ->exists()) {
+            $this->errors[] = 'Movie is exists.';
         }
         
         if (count($this->errors) > 0) {
@@ -124,20 +135,23 @@ class ImportMovie
         return true;
     }
     
-    protected function downloadImage($thumbnail, $name) {
+    protected function downloadImage($image, $name) {
+        if (empty($image)) {
+            return null;
+        }
+        
         $data = [];
-        $data['name'] = basename($thumbnail);
+        $data['name'] = basename($image);
         $slip = explode('.', $data['name']);
         $data['extension'] = $slip[count($slip) - 1];
-        $file_name = str_replace('.' . $data['extension'], '', $data['name']);
-        $new_file = Str::slug($file_name) . '-' . Str::random(10) . '-'. time() .'.' . $data['extension'];
+        $new_file = Str::slug($name) . '-' . Str::random(10) . '-'. time() .'.' . $data['extension'];
         
         $new_dir = \Storage::disk('public')->path(date('Y/m/d'));
         if (!is_dir($new_dir)) {
             \File::makeDirectory($new_dir, 0775, true);
         }
         
-        $get_file = file_put_contents($new_dir . '/' . $new_file, file_get_contents($thumbnail));
+        $get_file = file_put_contents($new_dir . '/' . $new_file, file_get_contents($image));
         if ($get_file) {
             $data['path'] = date('Y/m/d') .'/'. $new_file;
             $model = new Files();
@@ -145,7 +159,7 @@ class ImportMovie
             $model->type = 1;
             $model->mime_type = \Storage::disk('public')
                 ->mimeType($data['path']);
-            $model->user_id = \Auth::id();
+            $model->user_id = \Auth::check() ? \Auth::id() : 1;
             $model->save();
             
             return $data['path'];
@@ -156,7 +170,7 @@ class ImportMovie
     
     protected function getGenreIds($genres) {
         if (is_string($genres)) {
-            return implode(',', $genres);
+            return $genres;
         }
         
         $result = [];
@@ -165,7 +179,7 @@ class ImportMovie
                 $result[] = $this->addOrGetGenre($genre['name']);
             }
         }
-        return $result;
+        return implode(',', $result);
     }
     
     protected function getCounrtyIds($countries) {
@@ -174,7 +188,7 @@ class ImportMovie
         }
         
         if (is_string($countries)) {
-            return implode(',', $countries);
+            return $countries;
         }
         
         $result = [];
@@ -183,12 +197,12 @@ class ImportMovie
                 $result[] = $this->addOrGetCountry($country['name']);
             }
         }
-        return $result;
+        return implode(',', $result);
     }
     
     protected function getStarIds($stars, $type = 'actor') {
         if (is_string($stars)) {
-            return implode(',', $stars);
+            return $stars;
         }
         
         $result = [];
@@ -197,7 +211,7 @@ class ImportMovie
                 $result[] = $this->addOrGetStar($star['name'], $type);
             }
         }
-        return $result;
+        return implode(',', $result);
     }
     
     protected function getTagsIds($tags) {

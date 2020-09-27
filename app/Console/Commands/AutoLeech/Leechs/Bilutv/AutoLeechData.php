@@ -46,7 +46,16 @@ class AutoLeechData extends Command
             $data['tags'] = $this->getTags($html);
             
             $import = new ImportMovie($data);
-            if (!$import->save()) {
+            if ($import->save()) {
+                echo "OK: " . $data['name'];
+    
+                $link->update([
+                    'leech_data' => 1,
+                ]);
+            }
+            else {
+                echo "Error: " . @$import->errors[0];
+                
                 $link->update([
                     'leech_data' => 0,
                     'error' => json_encode($import->errors)
