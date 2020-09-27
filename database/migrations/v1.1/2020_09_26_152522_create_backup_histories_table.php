@@ -10,12 +10,11 @@ class CreateBackupHistoriesTable extends Migration
     {
         Schema::create('backup_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('file_id')->index();
-            $table->bigInteger('server_id')->index();
-            $table->tinyInteger('type')->default(1)->comment('1: file, 2: leech');
+            $table->bigInteger('video_file_id')->index();
+            $table->bigInteger('backup_server_id')->index();
             $table->text('error')->nullable();
             $table->timestamps();
-            $table->unique(['file_id', 'server_id', 'type']);
+            $table->unique(['video_file_id', 'backup_server_id']);
         });
     }
     
