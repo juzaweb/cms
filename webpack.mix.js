@@ -1,7 +1,6 @@
 const mix = require('laravel-mix');
 
-/*mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/app.js', 'public/js');
 
 mix.styles([
     'resources/styles/vendors/bootstrap/dist/css/bootstrap.css',
@@ -88,6 +87,7 @@ mix.combine([
 ], 'public/js/theme-editor.js');
 
 mix.combine([
+    'public/js/app.js',
     'resources/styles/vendors/jquery/dist/jquery.min.js',
     'resources/styles/vendors/popper.js/dist/umd/popper.js',
     'resources/styles/vendors/jquery-ui/jquery-ui.min.js',
@@ -116,7 +116,7 @@ mix.combine([
     'resources/styles/js/LoadBootstrapTable.js',
     'resources/styles/js/form-ajax.js',
     'resources/styles/js/customs.js',
-], 'public/js/backend.js');*/
+], 'public/js/backend.js');
 
 mix.styles([
     'resources/views/themes/mymo/styles/assets/css/bootstrap.min.css',
@@ -126,6 +126,7 @@ mix.styles([
 ], 'public/styles/themes/mymo/css/main.css');
 
 mix.combine([
+    'public/js/app.js',
     'resources/styles/vendors/jquery/dist/jquery.min.js',
     'resources/views/themes/mymo/styles/assets/js/bootstrap.min.js',
     'resources/styles/vendors/toastr/toastr.min.js',

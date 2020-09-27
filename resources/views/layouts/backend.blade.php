@@ -11,7 +11,6 @@
     <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/backend.css') }}">
     <script type="text/javascript">
         var langs = {
@@ -27,7 +26,7 @@
             'upload': '@lang('app.upload')',
         }
     </script>
-    <script src="{{ asset('js/app.js') }}"></script>
+
     <script src="{{ asset('js/backend.js') }}"></script>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>

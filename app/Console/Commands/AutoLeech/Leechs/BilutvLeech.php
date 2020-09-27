@@ -17,5 +17,6 @@ class BilutvLeech extends Command
     
     public function handle() {
         $this->call('leech:bilutv-link');
+        $this->call('leech:bilutv-data');
     }
 }

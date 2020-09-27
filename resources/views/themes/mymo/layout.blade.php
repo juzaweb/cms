@@ -100,7 +100,7 @@
         };
         /* ]]> */
     </script>
-    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+
     <script type="text/javascript" src="{{ asset('styles/themes/mymo/js/main.js') }}"></script>
 
     @if($google_analytics)
