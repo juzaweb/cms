@@ -83,8 +83,9 @@ class ImportMovie
         $model->actors = $this->getStarIds($this->data['actors'], 'actor');
         $model->writers = $this->getStarIds($this->data['writers'], 'writer');
         $model->directors = $this->getStarIds($this->data['directors'], 'director');
+        $model->tags = $this->getTagsIds($this->data['tags']);
         $model->tv_series = $this->data['tv_series'] ? 1 : 0;
-        $model->status = 2;
+        $model->status = 1;
     
         $model->created_by = \Auth::check() ? \Auth::id() : 1;
         $model->updated_by = \Auth::check() ? \Auth::id() : 1;
@@ -222,7 +223,7 @@ class ImportMovie
     
     protected function getTagsIds($tags) {
         if (is_string($tags)) {
-            return implode(',', $tags);
+            return $tags;
         }
         
         $result = [];
@@ -232,7 +233,7 @@ class ImportMovie
             }
         }
         
-        return $result;
+        return implode(',', $result);
     }
     
     protected function addOrGetGenre($name) {

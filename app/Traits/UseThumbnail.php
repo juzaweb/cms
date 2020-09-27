@@ -11,11 +11,15 @@ trait UseThumbnail {
     {
         $thumbnail = request()->post('thumbnail');
         static::saving(function ($model) use ($thumbnail) {
+            if (empty($thumbnail)) {
+                $thumbnail = $model->thumbnail;
+            }
+            
             if ($thumbnail) {
                 if (is_url($thumbnail)) {
                     $thumbnail = $model->downloadThumbnail($thumbnail);
                 }
-    
+                
                 $thumbnail = $model->resizeThumbnail($thumbnail);
                 $model->thumbnail = $model->cutPathThumbnail($thumbnail);
             }
@@ -70,12 +74,19 @@ trait UseThumbnail {
     
     protected function resizeThumbnail($thumbnail) {
         if (!isset($this->resize) || empty($this->resize)) {
-            return null;
+            return $thumbnail;
         }
         
         $thumb_path = $this->getPathThumbnail($thumbnail);
+        list($cw, $ch, $type, $attr) = getimagesize($thumb_path);
+        list($w, $h) = explode('x', $this->resize);
+        
+        if ($cw == $w && $ch == $h) {
+            return $thumbnail;
+        }
+        
         if (file_exists($thumb_path)) {
-            list($w, $h) = explode('x', $this->resize);
+            
             $width = \Image::make($thumb_path)->width();
             
             if ($width > $w) {

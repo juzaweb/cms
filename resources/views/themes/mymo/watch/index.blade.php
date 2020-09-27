@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="film-poster col-md-9">
-                            <div class="film-poster-img" style="background: url('{{ $info->getPoster() }}'); background-size: cover; background-repeat: no-repeat;background-position: 30% 25%;height: 300px;-webkit-filter: grayscale(100%); filter: grayscale(100%);"></div>
+                            <div class="film-poster-img" style="background: url('{{ $info->getPoster() }}'); background-size: cover; background-repeat: no-repeat;background-position: 30% 25%;height: 300px;/*-webkit-filter: grayscale(100%); filter: grayscale(100%);*/"></div>
                             @if($player_id)
                             <div class="mymo-play-btn hidden-xs">
                                 <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="play-btn" title="@lang('app.click_to_play')" data-toggle="tooltip" data-placement="bottom">@lang('app.click_to_play')</a>
