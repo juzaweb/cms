@@ -7,47 +7,64 @@
         </a>
     </li>
 
-    <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/movies*')) cui__menuLeft__item--active @endif" href="{{ route('admin.movies') }}">
+    <li class="cui__menuLeft__item cui__menuLeft__submenu @if(is_active_movie_menu()) cui__menuLeft__submenu--toggled @endif">
+        <span class="cui__menuLeft__item__link">
             <span class="cui__menuLeft__item__title">@lang('app.movies')</span>
             <i class="cui__menuLeft__item__icon fe fe-film"></i>
-        </a>
+        </span>
+        <ul class="cui__menuLeft__navigation" @if(is_active_movie_menu()) style="display: block" @endif>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/movies*')) cui__menuLeft__item--active @endif" href="{{ route('admin.movies') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.movies')</span>
+                    <i class="cui__menuLeft__item__icon fe fe-film"></i>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/tv-series*')) cui__menuLeft__item--active @endif" href="{{ route('admin.tv_series') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.tv_series')</span>
+                    <i class="cui__menuLeft__item__icon fe fe-film"></i>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/genres*')) cui__menuLeft__item--active @endif" href="{{ route('admin.genres') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.genres')</span>
+                    <i class="cui__menuLeft__item__icon fe fe-list"></i>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/countries*')) cui__menuLeft__item--active @endif" href="{{ route('admin.countries') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.countries')</span>
+                    <i class="cui__menuLeft__item__icon fe fe-list"></i>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/types*')) cui__menuLeft__item--active @endif" href="{{ route('admin.types') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.types')</span>
+                    <i class="cui__menuLeft__item__icon fe fe-list"></i>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/stars*')) cui__menuLeft__item--active @endif" href="{{ route('admin.stars') }}">
+                    <span class="cui__menuLeft__item__title">@lang('app.stars')</span>
+                    <i class="cui__menuLeft__item__icon fe fe-star"></i>
+                </a>
+            </li>
+
+            <li class="cui__menuLeft__item">
+                <a href="{{ route('admin.video_qualities') }}" class="cui__menuLeft__item__link @if(request()->is('admin-cp/video-qualities*')) cui__menuLeft__item--active @endif">
+                    <span class="cui__menuLeft__item__title">@lang('app.video_qualities')</span>
+                    <i class="cui__menuLeft__item__icon fe fe-video"></i>
+                </a>
+            </li>
+        </ul>
     </li>
 
-    <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/tv-series*')) cui__menuLeft__item--active @endif" href="{{ route('admin.tv_series') }}">
-            <span class="cui__menuLeft__item__title">@lang('app.tv_series')</span>
-            <i class="cui__menuLeft__item__icon fe fe-film"></i>
-        </a>
-    </li>
-
-    <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/genres*')) cui__menuLeft__item--active @endif" href="{{ route('admin.genres') }}">
-            <span class="cui__menuLeft__item__title">@lang('app.genres')</span>
-            <i class="cui__menuLeft__item__icon fe fe-list"></i>
-        </a>
-    </li>
-
-    <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/countries*')) cui__menuLeft__item--active @endif" href="{{ route('admin.countries') }}">
-            <span class="cui__menuLeft__item__title">@lang('app.countries')</span>
-            <i class="cui__menuLeft__item__icon fe fe-list"></i>
-        </a>
-    </li>
-
-    <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/types*')) cui__menuLeft__item--active @endif" href="{{ route('admin.types') }}">
-            <span class="cui__menuLeft__item__title">@lang('app.types')</span>
-            <i class="cui__menuLeft__item__icon fe fe-list"></i>
-        </a>
-    </li>
-
-    <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/stars*')) cui__menuLeft__item--active @endif" href="{{ route('admin.stars') }}">
-            <span class="cui__menuLeft__item__title">@lang('app.stars')</span>
-            <i class="cui__menuLeft__item__icon fe fe-star"></i>
-        </a>
-    </li>
 
     <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/pages*')) cui__menuLeft__item--active @endif" href="{{ route('admin.pages') }}">
@@ -171,12 +188,6 @@
             <li class="cui__menuLeft__item">
                 <a href="{{ route('admin.setting.email_templates') }}" class="cui__menuLeft__item__link">
                     <span class="cui__menuLeft__item__title">@lang('app.email_templates')</span>
-                </a>
-            </li>
-
-            <li class="cui__menuLeft__item">
-                <a href="{{ route('admin.video_qualities') }}" class="cui__menuLeft__item__link">
-                    <span class="cui__menuLeft__item__title">@lang('app.video_qualities')</span>
                 </a>
             </li>
 

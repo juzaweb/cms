@@ -50,20 +50,6 @@ Route::group(['prefix' => 'setting/translate'], function () {
     Route::post('/{lang}/save', 'Backend\Setting\TranslateController@save')->name('admin.setting.translate.save')->where('lang', '[a-z]+');
 });
 
-Route::group(['prefix' => 'setting/video-qualities'], function () {
-    Route::get('/', 'Backend\Setting\VideoQualityController@index')->name('admin.video_qualities');
-    
-    Route::get('/getdata', 'Backend\Setting\VideoQualityController@getData')->name('admin.video_qualities.getdata');
-    
-    Route::get('/create', 'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.create');
-    
-    Route::get('/edit/{id}', 'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\Setting\VideoQualityController@save')->name('admin.video_qualities.save');
-    
-    Route::post('/remove', 'Backend\Setting\VideoQualityController@remove')->name('admin.video_qualities.remove');
-});
-
 Route::group(['prefix' => 'setting/ads'], function () {
     Route::get('/', 'Backend\Setting\AdsSettingController@index')->name('admin.setting.ads');
     

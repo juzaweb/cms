@@ -390,3 +390,21 @@ function count_unread_notifications() {
 function get_google_drive_id(string $url) {
     return explode('/', $url)[5];
 }
+
+function is_active_movie_menu() {
+    $menus = [
+        'movies',
+        'tv-series',
+        'genres',
+        'countries',
+        'types',
+        'stars',
+        'video-qualities',
+    ];
+    foreach ($menus as $menu) {
+        if (request()->is('admin-cp/'. $menu .'*')) {
+            return true;
+        }
+    }
+    return false;
+}
