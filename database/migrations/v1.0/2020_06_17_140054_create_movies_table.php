@@ -23,10 +23,10 @@ class CreateMoviesTable extends Migration
             $table->string('rating', 25)->nullable();
             $table->date('release')->nullable();
             $table->integer('year')->nullable();
-            $table->string('countries', 250)->nullable();
-            $table->string('genres', 250);
+            $table->string('countries', 500)->nullable();
+            $table->string('genres', 500);
             $table->bigInteger('type_id')->index()->nullable();
-            $table->string('tags', 250)->nullable();
+            $table->string('tags', 500)->nullable();
             $table->string('runtime', 100)->nullable();
             $table->string('video_quality', 100)->nullable();
             $table->string('trailer_link', 100)->nullable();

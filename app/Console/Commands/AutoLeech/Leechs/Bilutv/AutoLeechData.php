@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\AutoLeech\Leechs\Bilutv;
 
+use App\Helpers\ImportMovie;
 use App\Models\Leech\LeechLink;
 use App\Traits\UseLeech;
 use Illuminate\Console\Command;
@@ -42,10 +43,15 @@ class AutoLeechData extends Command
             $data['countries'] = $this->getDataArray($html, 'Quốc gia: ');
             $data['directors'] = $this->getDataArray($html, 'Đạo diễn: ');
             $data['actors'] = $this->getActors($html);
+            $data['tags'] = $this->getTags($html);
             
-            
-            dd($data);
-            //$data['tags'] = $this->getTags($html);
+            $import = new ImportMovie($data);
+            if (!$import->save()) {
+                $link->update([
+                    'leech_data' => 0,
+                    'error' => json_encode($import->errors)
+                ]);
+            }
         }
     }
     
@@ -75,8 +81,18 @@ class AutoLeechData extends Command
         return $result;
     }
     
-    protected function getTags() {
+    protected function getTags($content) {
+        $result = [];
+        $attr = $this->find($content, '.tags .tag-item');
+        foreach ($attr as $item) {
+            $text = htmlspecialchars_decode($item->text(), ENT_QUOTES);
+            $text = trim($text);
+            $result[] = [
+                'name' => $text,
+            ];
+        }
     
+        return $result;
     }
     
     protected function getInfo($content, $info, $output = 'text') {

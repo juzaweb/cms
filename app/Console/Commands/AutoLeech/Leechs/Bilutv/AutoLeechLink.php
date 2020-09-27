@@ -41,6 +41,7 @@ class AutoLeechLink extends Command
                 'name' => $name,
                 'link' => trim($movie->href),
                 'server' => 'bilutv',
+                'tv_series' => 0,
             ]);
         
             if ($newmovie) {

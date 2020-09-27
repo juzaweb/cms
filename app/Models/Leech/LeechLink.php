@@ -34,6 +34,8 @@ class LeechLink extends Model
     protected $fillable = [
         'name',
         'link',
-        'server'
+        'server',
+        'leech_data',
+        'error',
     ];
 }

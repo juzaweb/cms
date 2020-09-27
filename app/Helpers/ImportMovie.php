@@ -7,6 +7,7 @@ use App\Models\Files;
 use App\Models\Genres;
 use App\Models\Movies;
 use App\Models\Stars;
+use App\Models\Tags;
 use Illuminate\Support\Str;
 
 class ImportMovie
@@ -41,6 +42,7 @@ class ImportMovie
             'actors',
             'writers',
             'directors',
+            'tags'
         ];
         
         foreach ($fill_data as $item) {
@@ -112,7 +114,7 @@ class ImportMovie
         }
         
         if ($this->data['tv_series'] === null) {
-            $this->errors[] = 'TV series is required';
+            $this->errors[] = 'TV Series is required';
         }
         
         if (count($this->errors) > 0) {
@@ -198,6 +200,21 @@ class ImportMovie
         return $result;
     }
     
+    protected function getTagsIds($tags) {
+        if (is_string($tags)) {
+            return implode(',', $tags);
+        }
+        
+        $result = [];
+        foreach ($tags as $tag) {
+            if ($tag['name']) {
+                $result[] = $this->addOrGetTag($tag['name']);
+            }
+        }
+        
+        return $result;
+    }
+    
     protected function addOrGetGenre($name) {
         $name = trim($name);
         $slug = Str::slug($name);
@@ -240,6 +257,21 @@ class ImportMovie
         $model->name = $name;
         $model->slug = $slug;
         $model->type = $type;
+        $model->save();
+        return $model->id;
+    }
+    
+    protected function addOrGetTag($name) {
+        $name = trim($name);
+        $slug = Str::slug($name);
+        $tag = Tags::where('slug', $slug)->first(['id']);
+        if ($tag) {
+            return $tag->id;
+        }
+        
+        $model = new Tags();
+        $model->name = $name;
+        $model->slug = $slug;
         $model->save();
         return $model->id;
     }
