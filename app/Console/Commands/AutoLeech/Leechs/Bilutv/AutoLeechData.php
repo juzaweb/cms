@@ -4,6 +4,8 @@ namespace App\Console\Commands\AutoLeech\Leechs\Bilutv;
 
 use App\Helpers\ImportMovie;
 use App\Models\Leech\LeechLink;
+use App\Models\Servers;
+use App\Models\VideoFiles;
 use App\Traits\UseLeech;
 use Illuminate\Console\Command;
 
@@ -46,7 +48,40 @@ class AutoLeechData extends Command
             $data['tags'] = $this->getTags($html);
             
             $import = new ImportMovie($data);
-            if ($import->save()) {
+            $files = $this->leechFiles($html, $link->tv_series);
+            
+            if ($files === true) {
+                continue;
+            }
+            
+            if ($files['status'] === false) {
+                $link->update([
+                    'leech_data' => 0,
+                    'error' => json_encode([$files['data']['error']])
+                ]);
+                
+                continue;
+            }
+            
+            $new_movie = $import->save();
+            if ($new_movie) {
+                $server = new Servers();
+                $server->name = 'Server 1';
+                $server->movie_id = $new_movie->id;
+                $server->save();
+                
+                $video_files = $files['data']['files'];
+                foreach ($video_files as $file) {
+                    $video = new VideoFiles();
+                    $video->movie_id = $new_movie->id;
+                    $video->server_id = $server->id;
+                    $video->label = $file['label'];
+                    $video->source = $file['source'];
+                    $video->url = $file['url'];
+                    
+                    $video->save();
+                }
+                
                 echo "OK: " . $data['name'];
     
                 $link->update([
@@ -128,12 +163,19 @@ class AutoLeechData extends Command
         return null;
     }
     
-    protected function leeckFiles($url) {
-        $html = $this->getContent($url);
-        $film_id = $this->attribute($html, '#film_id', 'value');
-        $play_url = $this->attribute($html, 'a.btn-see', 'href');
-        $episode_id = @explode('.', $play_url)[2];
+    protected function leechFiles($content, $tv_series = 0) {
+        if ($tv_series == 0) {
+            return $this->leechFilesMovie($content);
+        }
         
+        return $this->leechFilesTvSeries($content);
+    }
+    
+    protected function leechFilesMovie($content) {
+        $film_id = $this->attribute($content, '#film_id', 'value');
+        $play_url = $this->attribute($content, 'a.btn-see', 'href');
+        $episode_id = @explode('.', $play_url)[2];
+    
         if ($film_id > 0 && $episode_id > 0) {
             $data = $this->post('https://bilutvz.org/ajax/player', [
                 'id' => $film_id,
@@ -154,18 +196,25 @@ class AutoLeechData extends Command
                             [
                                 'label' => 'S1',
                                 'url' => $data,
+                                'source' => 'mp4',
                             ]
                         ]
                     ]
                 ];
             }
-    
+        
             return [
                 'status' => false,
                 'data' => [
-                    'error' => 'Cannot find link'
+                    'error' => 'Cannot find link.'
                 ],
             ];
         }
+    
+        return true;
+    }
+    
+    protected function leechFilesTvSeries($content) {
+    
     }
 }

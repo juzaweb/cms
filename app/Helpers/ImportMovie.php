@@ -63,6 +63,11 @@ class ImportMovie
         $this->data = $data;
     }
     
+    /**
+     * Save import movie.
+     *
+     * @return Movies|false
+     */
     public function save() {
         if (!$this->validate()) {
             return false;
@@ -96,9 +101,10 @@ class ImportMovie
             $model->short_description = sub_words(strip_tags($model->description), 15);
         }
         
-        return $model->save();
+        $model->save();
+        return $model;
     }
-    
+
     public function validate() {
         if (empty($this->data['name'])) {
             $this->errors[] = 'Name is required.';
