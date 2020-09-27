@@ -35,3 +35,4 @@ function replace_template(template, data){
         }
     );
 }
+

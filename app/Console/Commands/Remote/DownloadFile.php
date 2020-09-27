@@ -27,10 +27,11 @@ class DownloadFile extends Command
             \File::makeDirectory($storage_path . $filepath, 775, true);
         }
         
-        $files = VideoFiles::where(function (Builder $builder) {
-            $builder->orWhere('url', 'like', 'http://%');
-            $builder->orWhere('url', 'like', 'https://%');
-        })
+        $files = VideoFiles::where('enable_remote', '=', 1)
+            ->where(function (Builder $builder) {
+                $builder->orWhere('url', 'like', 'http://%');
+                $builder->orWhere('url', 'like', 'https://%');
+            })
             ->whereNotExists(function (Builder $builder) {
                 $builder->select(['id'])
                     ->from('download_remote_histories')

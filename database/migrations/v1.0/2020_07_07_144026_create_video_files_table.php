@@ -17,6 +17,7 @@ class CreateVideoFilesTable extends Migration
             $table->string('source', 100);
             $table->text('url');
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('enable_remote')->default(1);
             $table->timestamps();
         });
     }
