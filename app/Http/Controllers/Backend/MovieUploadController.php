@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Movies;
-use App\Models\Servers;
+use App\Models\Movie\Movies;
+use App\Models\Video\VideoServers;
 use App\Models\VideoFiles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class MovieUploadController extends Controller
 {
     public function index($server_id) {
-        $server = Servers::where('id', '=', $server_id)->firstOrFail();
+        $server = VideoServers::where('id', '=', $server_id)->firstOrFail();
         $movie = Movies::where('id', '=', $server->movie_id)->firstOrFail();
         
         return view('backend.movie_upload.index', [

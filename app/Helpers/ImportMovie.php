@@ -5,7 +5,7 @@ namespace App\Helpers;
 use App\Models\Countries;
 use App\Models\Files;
 use App\Models\Genres;
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use App\Models\Stars;
 use App\Models\Tags;
 use Illuminate\Support\Str;

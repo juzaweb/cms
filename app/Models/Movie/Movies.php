@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Movie;
 
+use App\Models\Countries;
+use App\Models\Genres;
+use App\Models\Tags;
 use App\Traits\UseChangeBy;
 use App\Traits\UseMetaSeo;
 use App\Traits\UseSlug;
@@ -10,7 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Movies
+ * App\Models\Movie\Movies
  *
  * @property int $id
  * @property string $name
@@ -46,48 +49,48 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $updated_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereActors($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereCountries($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereCurrentEpisode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereDirectors($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereGenres($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereIsPaid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereKeywords($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereMaxEpisode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereMetaDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereMetaTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereOtherName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies wherePoster($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereRelease($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereRuntime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereShortDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTags($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereThumbnail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTrailerLink($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTvSeries($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereVideoQuality($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereViews($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereWriters($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movies whereYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereActors($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereCountries($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereCurrentEpisode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereDirectors($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereGenres($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereIsPaid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereMaxEpisode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereMetaDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereMetaTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereOtherName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies wherePoster($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereRelease($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereRuntime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereShortDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereTags($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereThumbnail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereTrailerLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereTvSeries($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereVideoQuality($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereViews($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereWriters($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Movie\Movies whereYear($value)
  * @mixin \Eloquent
  * @property-read int|null $rating_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Servers[] $servers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Video\VideoServers[] $servers
  * @property-read int|null $servers_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\MovieComments[] $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\MovieComments[] $comments
  * @property-read int|null $comments_count
  */
 class Movies extends Model
@@ -116,15 +119,15 @@ class Movies extends Model
     ];
     
     public function rating() {
-        return $this->hasMany('App\Models\MovieRating', 'movie_id', 'id');
+        return $this->hasMany('App\Models\Movie\MovieRating', 'movie_id', 'id');
     }
     
     public function servers() {
-        return $this->hasMany('App\Models\Servers', 'movie_id', 'id');
+        return $this->hasMany('App\Models\Video\VideoServers', 'movie_id', 'id');
     }
     
     public function comments() {
-        return $this->hasMany('App\Models\MovieComments', 'movie_id', 'id');
+        return $this->hasMany('App\Models\Movie\MovieComments', 'movie_id', 'id');
     }
     
     public function getViews() {

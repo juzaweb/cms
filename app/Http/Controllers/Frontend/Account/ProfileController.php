@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend\Account;
 
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 
 class ProfileController extends Controller
 {

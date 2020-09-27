@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use App\Http\Controllers\Controller;
 
 class MoviesController extends Controller

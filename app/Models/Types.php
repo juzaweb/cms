@@ -33,7 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Types whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Types whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movies[] $movies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Movie\Movies[] $movies
  * @property-read int|null $movies_count
  */
 class Types extends Model
@@ -50,6 +50,6 @@ class Types extends Model
     ];
     
     public function movies() {
-        return $this->hasMany('App\Models\Movies', 'id', 'movie_id');
+        return $this->hasMany('App\Models\Movie\Movies', 'id', 'movie_id');
     }
 }

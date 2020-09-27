@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend\Account;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use App\User;
 use Illuminate\Http\Request;
 

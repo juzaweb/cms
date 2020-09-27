@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

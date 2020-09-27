@@ -4,7 +4,7 @@ use App\Models\Ads;
 use App\Models\Countries;
 use App\Models\Genres;
 use App\Models\Menu;
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use App\Models\Sliders;
 use App\Models\ThemeConfigs;
 use App\Models\Types;

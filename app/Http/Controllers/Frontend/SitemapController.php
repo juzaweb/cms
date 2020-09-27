@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Countries;
 use App\Models\Genres;
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use App\Models\PostCategories;
 use App\Models\Posts;
 use App\Http\Controllers\Controller;

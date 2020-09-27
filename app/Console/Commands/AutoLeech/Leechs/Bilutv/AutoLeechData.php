@@ -4,7 +4,7 @@ namespace App\Console\Commands\AutoLeech\Leechs\Bilutv;
 
 use App\Helpers\ImportMovie;
 use App\Models\Leech\LeechLink;
-use App\Models\Servers;
+use App\Models\Video\VideoServers;
 use App\Models\VideoFiles;
 use App\Traits\UseLeech;
 use Illuminate\Console\Command;
@@ -65,7 +65,7 @@ class AutoLeechData extends Command
             
             $new_movie = $import->save();
             if ($new_movie) {
-                $server = new Servers();
+                $server = new VideoServers();
                 $server->name = 'Server 1';
                 $server->movie_id = $new_movie->id;
                 $server->save();

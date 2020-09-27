@@ -9,7 +9,7 @@ use App\Models\Tags;
 use App\Models\VideoQualities;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use Illuminate\Support\Str;
 
 class TVSeriesController extends Controller

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Movies;
-use App\Models\MovieViews;
+use App\Models\Movie\Movies;
+use App\Models\Movie\MovieViews;
 use App\Models\Pages;
 use App\User;
 use Illuminate\Http\Request;

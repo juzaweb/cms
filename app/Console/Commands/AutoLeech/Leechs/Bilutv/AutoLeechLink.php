@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\AutoLeech\Leechs\Bilutv;
 
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use Illuminate\Console\Command;
 use App\Models\Leech\LeechLink;
 use App\Traits\UseLeech;

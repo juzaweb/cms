@@ -10,7 +10,7 @@ use App\Models\Types;
 use App\Models\VideoQualities;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use Illuminate\Support\Str;
 
 class MoviesController extends Controller

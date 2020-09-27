@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Movies;
-use App\Models\Servers;
+use App\Models\Movie\Movies;
+use App\Models\Video\VideoServers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +18,7 @@ class MovieServesController extends Controller
     
     public function form($movie_id, $server_id = null) {
         $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
-        $model = Servers::firstOrNew(['id' => $server_id]);
+        $model = VideoServers::firstOrNew(['id' => $server_id]);
         return view('backend.movie_servers.form', [
             'title' => $model->name ?: trans('app.add_new'),
             'movie' => $movie,
@@ -36,7 +36,7 @@ class MovieServesController extends Controller
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Servers::query();
+        $query = VideoServers::query();
         $query->where('movie_id', '=', $movie_id);
         
         if ($search) {
@@ -78,7 +78,7 @@ class MovieServesController extends Controller
             'order' => trans('app.order'),
         ]);
         
-        $model = Servers::firstOrNew(['id' => $request->post('id')]);
+        $model = VideoServers::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->movie_id = $movie_id;
         $model->save();
@@ -97,12 +97,12 @@ class MovieServesController extends Controller
             'ids' => trans('app.servers'),
         ]);
         
-        $movie_ids = Servers::where('movie_id', '=', $movie_id)
+        $movie_ids = VideoServers::where('movie_id', '=', $movie_id)
             ->whereIn('id', $request->post('ids'))
             ->pluck('id')
             ->toArray();
-        
-        Servers::destroy($movie_ids);
+    
+        VideoServers::destroy($movie_ids);
         
         return response()->json([
             'status' => 'success',

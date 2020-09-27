@@ -6,7 +6,7 @@ use App\Helpers\TmdbApi;
 use App\Models\Countries;
 use App\Models\Files;
 use App\Models\Genres;
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 use App\Models\Stars;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

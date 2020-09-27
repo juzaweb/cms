@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Servers;
+use App\Models\Video\VideoServers;
 use App\Models\Genres;
-use App\Models\Movies;
+use App\Models\Movie\Movies;
 
 class WatchController extends Controller
 {
@@ -37,7 +37,7 @@ class WatchController extends Controller
     }
     
     private function _getFileVideo($movie_id) {
-        $server = Servers::where('status', '=', 1)
+        $server = VideoServers::where('status', '=', 1)
             ->where('movie_id', '=', $movie_id)
             ->orderBy('order', 'asc')
             ->first(['id', 'movie_id']);

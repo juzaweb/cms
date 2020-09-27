@@ -64,7 +64,7 @@ class VideoFiles extends Model
     ];
     
     public function server() {
-        $this->belongsTo('App\Models\Servers', 'server_id', 'id');
+        $this->belongsTo('App\Models\Video\VideoServers', 'server_id', 'id');
     }
     
     public function getFiles() {
