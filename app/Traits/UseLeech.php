@@ -23,6 +23,15 @@ trait UseLeech
         return trim($name);
     }
     
+    protected function getMovieYear($name) {
+        preg_match('/\(\d{4}\)/', $name, $matches);
+        if (isset($matches[0])) {
+            return str_replace(['(', ')'], '', $matches[0]);
+        }
+        
+        return null;
+    }
+    
     /**
      * Content find.
      *
@@ -70,6 +79,10 @@ trait UseLeech
      */
     protected function innertext($content, $selector, $index = 0) {
         return $this->find($content, $selector, $index)->innertext;
+    }
+    
+    protected function attribute($content, $selector, $value, $index = 0) {
+        return $this->find($content, $selector, $index)->{$value};
     }
     
     /**

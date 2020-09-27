@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\AutoLeech\Leechs\Bilutv;
 
+use App\Models\Movies;
 use Illuminate\Console\Command;
 use App\Models\Leech\LeechLink;
 use App\Traits\UseLeech;
@@ -14,8 +15,7 @@ class AutoLeechLink extends Command
     
     protected $description = 'Command description';
     
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
     
@@ -33,15 +33,31 @@ class AutoLeechLink extends Command
             $name = $this->plaintext($movie->innertext(), '.real-name');
             $name = $this->getMovieName($name);
         
+            if ($this->nameExists($name)) {
+                continue;
+            }
+            
             $newmovie = LeechLink::create([
                 'name' => $name,
                 'link' => trim($movie->href),
-                'server' => 'Bilutv',
+                'server' => 'bilutv',
             ]);
         
             if ($newmovie) {
                 echo 'Leeched ' . $name . "\n";
             }
         }
+    }
+    
+    protected function nameExists($name) {
+        if (LeechLink::where('link', $name)->exists()) {
+            return true;
+        }
+        
+        if (Movies::where('name', '=', $name)->exists()) {
+            return true;
+        }
+        
+        return false;
     }
 }

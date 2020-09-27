@@ -17,14 +17,15 @@ class CreateLeechLinksTable extends Migration
             $table->string('name', 500);
             $table->text('link')->unique();
             $table->string('server');
-            $table->tinyInteger('leech_data')->default(2);
-            $table->tinyInteger('leech_link')->default(2);
+            $table->tinyInteger('tv_series')->default(0);
+            $table->tinyInteger('leech_data')->default(2)
+                ->comment('0: error, 1: success, 2: pending, 3: leeching');
             $table->timestamps();
         });
     }
     
     public function down()
     {
-        //Schema::dropIfExists('leech_links');
+        Schema::dropIfExists('leech_links');
     }
 }

@@ -51,7 +51,7 @@
           "app/Helpers/GoogleDrive.php",
           "app/Helpers/TmdbConfiguration.php",
           "app/Helpers/TmdbApi.php",
-          "app/Helpers/OpenDrive.php",
+          "app/Helpers/OpenDriveApi.php",
           "app/Helpers/HTTP.php",
           "app/Helpers/WebBrowser.php",
           "app/Helpers/WebBrowserForm.php"

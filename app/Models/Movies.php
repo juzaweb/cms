@@ -101,6 +101,7 @@ class Movies extends Model
         'name',
         'other_name',
         'description',
+        'short_description',
         'type_id',
         'poster',
         'rating',
@@ -110,6 +111,7 @@ class Movies extends Model
         'trailer_link',
         'current_episode',
         'max_episode',
+        'year',
         'status',
     ];
     
