@@ -10,20 +10,20 @@ class GoogleDrive {
     }
     
     public function cache_path($id){
-		if (!file_exists($this->cache_path . '/_cache')) {
-			mkdir($this->cache_path . '/_cache', 0777);
+		if (!file_exists($this->cache_path)) {
+			mkdir($this->cache_path, 0777);
 		}
 		
 		if (strlen($id) == 33) {
-			return $this->cache_path . '/_cache/' . hash('sha256',$id, false);
+			return $this->cache_path . '/' . hash('sha256', $id, false);
 		} else {
-			return $this->cache_path . '/_cache/' . $id;
+			return $this->cache_path . '/' . $id;
 		}
 	}
 	
 	public function read_data($id){
 		$fpath = $this->cache_path($id);
-		if ($fhandle = fopen($fpath,'r')) {
+		if ($fhandle = @fopen($fpath,'r')) {
 			$content = fread($fhandle,filesize($fpath));
 			fclose($fhandle);
 			return json_decode($content,true);
