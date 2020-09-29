@@ -80,6 +80,20 @@ Route::group(['prefix' => 'tv-series/servers/upload'], function () {
     Route::get('/get-file', 'Backend\MovieUploadController@getFile')->name('admin.movies.tv_series.upload.getfile');
 });
 
+Route::group(['prefix' => 'movies/servers/upload/subtitle/{file_id}'], function () {
+    Route::get('/', 'Backend\SubtitleController@index')->name('admin.movies.servers.upload.subtitle')->where('file_id', '[0-9]+');
+    
+    Route::get('create', 'Backend\SubtitleController@form')->name('admin.movies.servers.upload.subtitle.create')->where('file_id', '[0-9]+');
+    
+    Route::get('edit/{id}', 'Backend\SubtitleController@form')->name('admin.movies.servers.upload.subtitle.edit')->where('file_id', '[0-9]+')->where('id', '[0-9]+');
+    
+    Route::get('getdata', 'Backend\SubtitleController@getData')->name('admin.movies.servers.upload.subtitle.getdata')->where('file_id', '[0-9]+');
+    
+    Route::post('save', 'Backend\SubtitleController@save')->name('admin.movies.servers.upload.subtitle.save')->where('file_id', '[0-9]+');
+    
+    Route::post('remove', 'Backend\SubtitleController@remove')->name('admin.movies.servers.upload.subtitle.remove')->where('file_id', '[0-9]+');
+});
+
 Route::group(['prefix' => 'video-qualities'], function () {
     Route::get('/', 'Backend\Setting\VideoQualityController@index')->name('admin.video_qualities');
     

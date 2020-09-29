@@ -17,8 +17,8 @@ $(document).on("turbolinks:load", function() {
                 return false;
             }
 
-            $('#setting-title').empty().html('');
-            $('#setting-form').empty().html(data.data);
+            $('#setting-title').empty().html(data.data.title);
+            $('#setting-form').empty().html(data.data.html);
 
             return false;
         }).fail(function(data) {

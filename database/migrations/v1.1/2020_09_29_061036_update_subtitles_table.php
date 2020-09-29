@@ -23,6 +23,6 @@ class UpdateSubtitlesTable extends Migration
     
     public function down()
     {
-    
+        Schema::dropIfExists('subtitles');
     }
 }

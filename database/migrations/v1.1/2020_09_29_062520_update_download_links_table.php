@@ -22,6 +22,6 @@ class UpdateDownloadLinksTable extends Migration
     
     public function down()
     {
-    
+        Schema::dropIfExists('download_links');
     }
 }
