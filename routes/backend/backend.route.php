@@ -121,15 +121,15 @@ Route::group(['prefix' => 'tags'], function () {
 });
 
 Route::group(['prefix' => 'comments/movie'], function () {
-    Route::get('/', 'Backend\MovieCommentsController@index')->name('admin.movie_comments');
+    Route::get('/', 'Backend\Movie\MovieCommentsController@index')->name('admin.movie_comments');
     
-    Route::get('/getdata', 'Backend\MovieCommentsController@getData')->name('admin.movie_comments.getdata');
+    Route::get('/getdata', 'Backend\Movie\MovieCommentsController@getData')->name('admin.movie_comments.getdata');
     
-    Route::post('/remove', 'Backend\MovieCommentsController@remove')->name('admin.movie_comments.remove');
+    Route::post('/remove', 'Backend\Movie\MovieCommentsController@remove')->name('admin.movie_comments.remove');
     
-    Route::post('/approve', 'Backend\MovieCommentsController@approve')->name('admin.movie_comments.approve');
+    Route::post('/approve', 'Backend\Movie\MovieCommentsController@approve')->name('admin.movie_comments.approve');
     
-    Route::post('/', 'Backend\MovieCommentsController@publicis')->name('admin.movie_comments.publicis');
+    Route::post('/', 'Backend\Movie\MovieCommentsController@publicis')->name('admin.movie_comments.publicis');
 });
 
 Route::group(['prefix' => 'comments/post'], function () {

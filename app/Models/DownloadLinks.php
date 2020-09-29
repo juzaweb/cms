@@ -5,20 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\DownloadLinks
+ * App\Models\DownloadLink
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLinks newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLinks newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLinks query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLinks whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLinks whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLinks whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class DownloadLinks extends Model
+class DownloadLink extends Model
 {
-    //
+    protected $table = 'download_links';
+    protected $fillable = [
+        'label',
+        'url',
+        'order',
+        'status'
+    ];
 }

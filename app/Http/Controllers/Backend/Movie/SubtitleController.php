@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\Movie;
 
 use App\Models\Video\VideoFiles;
 use Illuminate\Http\Request;

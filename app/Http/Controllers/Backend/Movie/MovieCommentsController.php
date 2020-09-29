@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\Movie;
 
+use App\Models\Movie\MovieComments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Comments;
 
 class MovieCommentsController extends Controller
 {
@@ -22,7 +22,7 @@ class MovieCommentsController extends Controller
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Comments::query();
+        $query = MovieComments::query();
         $query->select([
             'a.*',
             'b.name AS author',
@@ -71,8 +71,8 @@ class MovieCommentsController extends Controller
         ], $request, [
             'ids' => trans('app.movie_comments')
         ]);
-        
-        Comments::destroy($request->post('ids'));
+    
+        MovieComments::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
@@ -91,7 +91,7 @@ class MovieCommentsController extends Controller
     
         $status = $request->post('status');
         if (in_array($status, [0, 1])) {
-            Comments::whereIn('id', $request->post('ids'))
+            MovieComments::whereIn('id', $request->post('ids'))
                 ->update([
                     'status' => $status,
                 ]);
@@ -99,7 +99,7 @@ class MovieCommentsController extends Controller
         
         if (in_array($status, [2, 3])) {
             $status = $status == 2 ? 1 : 0;
-            Comments::whereIn('id', $request->post('ids'))
+            MovieComments::whereIn('id', $request->post('ids'))
                 ->update([
                     'approved' => $status,
                 ]);
