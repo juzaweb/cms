@@ -46,6 +46,7 @@ class MovieUploadController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
+            $row->subtitle_url = route('admin.movies.servers.upload.subtitle', [$row->id]);
         }
         
         return response()->json([

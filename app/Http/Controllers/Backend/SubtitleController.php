@@ -11,7 +11,9 @@ class SubtitleController extends Controller
 {
     public function index($file_id) {
         VideoFiles::findOrFail($file_id);
-        return view('backend.movie_upload.subtitle.index');
+        return view('backend.movie_upload.subtitle.index', [
+            'file_id' => $file_id,
+        ]);
     }
     
     public function form($file_id, $id = null) {
@@ -19,6 +21,7 @@ class SubtitleController extends Controller
         $model = Subtitle::firstOrNew(['id' => $id]);
         return view('backend.movie_upload.subtitle.form', [
             'model' => $model,
+            'file_id' => $file_id,
             'title' => $model->name ?: trans('app.add_new')
         ]);
     }

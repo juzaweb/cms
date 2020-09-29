@@ -24,6 +24,7 @@
             'translate': '@lang('app.translate')',
             'preview': '@lang('app.preview')',
             'upload': '@lang('app.upload')',
+            'add_subtitle': '@lang('app.add_subtitle')',
         }
     </script>
 

@@ -6,7 +6,7 @@
 
     {{ Breadcrumbs::render('manager', [
             'name' => trans('app.subtitle'),
-            'url' => route('admin.movies.servers.upload.subtitle')
+            'url' => route('admin.movies.servers.upload.subtitle', [$file_id])
         ]) }}
 
     <div class="cui__utils__content">
@@ -86,8 +86,8 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.subtitle.getdata') }}',
-            remove_url: '{{ route('admin.subtitle.remove') }}',
+            url: '{{ route('admin.movies.servers.upload.subtitle.getdata', [$file_id]) }}',
+            remove_url: '{{ route('admin.movies.servers.upload.subtitle.remove', [$file_id]) }}',
         });
     </script>
 @endsection

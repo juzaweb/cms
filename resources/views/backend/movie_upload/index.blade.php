@@ -102,7 +102,9 @@
         }
 
         function action_formatter(value, row, index) {
-            return '<a href="javascript:void(0)" class="btn btn-success edit-video btn-sm" data-id="'+ row.id +'"><i class="fa fa-edit"></i> '+ langs.edit +'</a>';
+            let str = '<a href="javascript:void(0)" class="btn btn-success edit-video btn-sm" data-id="'+ row.id +'"><i class="fa fa-edit"></i> '+ langs.edit +'</a>';
+            str += '<a href="javascript:void(0)" class="btn btn-success edit-video btn-sm"><i class="fa fa-edit"></i> '+ langs.subtitle_url +'</a>';
+            return str;
         }
 
         var table = new LoadBootstrapTable({

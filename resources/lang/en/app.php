@@ -373,5 +373,6 @@ return [
   'google_analytics_id' => 'Google Analytics ID',
   'reset' => 'Reset',
   'subtitle' => 'Subtitle',
+  'add_subtitle' => 'Add subtitle',
 ];
 
