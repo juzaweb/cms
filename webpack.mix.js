@@ -116,6 +116,7 @@ mix.combine([
     'resources/styles/js/LoadBootstrapTable.js',
     'resources/styles/js/form-ajax.js',
     'resources/styles/js/customs.js',
+    'resources/styles/js/setting.js',
 ], 'public/js/backend.js');
 
 mix.styles([

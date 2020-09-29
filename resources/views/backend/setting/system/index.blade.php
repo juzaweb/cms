@@ -10,37 +10,37 @@
     ]) }}
 
 <div class="cui__utils__content">
-    <form method="post" action="{{ route('admin.setting.save') }}" class="form-ajax">
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">{{ $title }}</h5>
-                    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="list-group" id="setting-menu">
+                        <a href="#" class="list-group-item active" data-form="general">@lang('app.site_info')</a>
+                        <a href="#" class="list-group-item" data-form="recaptcha">@lang('app.google_recaptcha')</a>
 
-                    <div class="col-md-6">
-                        <div class="btn-group float-right">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="mb-0 card-title font-weight-bold" id="setting-title"></h5>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-body">
+                <div class="card-body" id="setting-form">
 
-                <div class="row">
-                    <div class="col-md-8">
-                        @include('backend.setting.system.form_left')
-                    </div>
-
-                    <div class="col-md-4">
-                        @include('backend.setting.system.form_right')
-                    </div>
                 </div>
-
 
             </div>
         </div>
-    </form>
+    </div>
 </div>
 @endsection

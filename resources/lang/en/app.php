@@ -371,5 +371,6 @@ return [
   'other' => 'Other',
   'fb_app_id' => 'Facebook App ID',
   'google_analytics_id' => 'Google Analytics ID',
+  'reset' => 'Reset',
 ];
 

@@ -56,4 +56,25 @@ class SystemSettingController extends Controller
             'redirect' => route('admin.setting'),
         ]);
     }
+    
+    public function getSettingForm(Request $request) {
+        $form = $request->get('form');
+        if (view()->exists('backend.setting.system.form.' . $form)) {
+            return response()->json([
+                'status' => 'success',
+                'data' => [
+                    'title' => trans('app.' . $form),
+                    'html' => view('backend.setting.system.form.' . $form)->render(),
+                ],
+            ]);
+        }
+    
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'title' => trans('app.' . $form),
+                'html' => view('backend.setting.system.form.general')->render(),
+            ],
+        ]);
+    }
 }
