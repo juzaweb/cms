@@ -8,9 +8,9 @@ use App\Models\Category\Stars;
 use App\Models\Category\Tags;
 use App\Models\Category\Types;
 use App\Models\Video\VideoQualities;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Movie\Movies;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class MoviesController extends Controller
@@ -65,6 +65,7 @@ class MoviesController extends Controller
             $row->edit_url = route('admin.movies.edit', [$row->id]);
             $row->preview_url = route('watch', [$row->slug]);
             $row->upload_url = route('admin.movies.servers', [$row->id]);
+            $row->download_url = route('admin.movies.download', ['movies', $row->id]);
         }
         
         return response()->json([

@@ -77,7 +77,7 @@
                             <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
                             <th data-width="20%" data-field="description">@lang('app.description')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
-                            <th data-width="20%" data-field="options" data-align="center" data-formatter="options_formatter">@lang('app.options')</th>
+                            <th data-width="15%" data-field="options" data-align="center" data-formatter="options_formatter">@lang('app.options')</th>
                         </tr>
                     </thead>
                 </table>
@@ -103,9 +103,16 @@
     }
 
     function options_formatter(value, row, index) {
-        let result = '';
-        result += '<a href="'+ row.preview_url +'" target="_blank" class="btn btn-success btn-sm mr-1" data-turbolinks="false"><i class="fa fa-eye"></i> '+ langs.preview +'</a>';
-        result += '<a href="'+ row.upload_url +'" class="btn btn-success btn-sm"><i class="fa fa-upload"></i> '+ langs.upload +'</a>';
+        let result = '<div class="dropdown d-inline-block mb-2 mr-2">\n' +
+            '          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">\n' +
+            '            '+ langs.options +'\n' +
+            '          </button>\n' +
+            '          <div class="dropdown-menu" role="menu" style="">\n' +
+            '            <a href="'+ row.upload_url +'" class="dropdown-item">'+ langs.upload_videos +'</a>\n' +
+            '            <a href="'+ row.download_url +'" class="dropdown-item">'+ langs.download_videos +'</a>\n' +
+            '            <a href="'+ row.preview_url +'" target="_blank" class="dropdown-item">'+ langs.preview +'</a>\n' +
+            '          </div>\n' +
+            '        </div>';
         return result;
     }
 

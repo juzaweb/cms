@@ -107,3 +107,17 @@ Route::group(['prefix' => 'video-qualities'], function () {
     
     Route::post('/remove', 'Backend\Setting\VideoQualityController@remove')->name('admin.video_qualities.remove');
 });
+
+Route::group(['prefix' => '{type}/download/{movie_id}'], function () {
+    Route::get('/', 'Backend\Movie\DownloadController@index')->name('admin.movies.download');
+    
+    Route::get('/getdata', 'Backend\Movie\DownloadController@getData')->name('admin.movies.download.getdata');
+    
+    Route::get('/create', 'Backend\Movie\DownloadController@form')->name('admin.movies.download.create');
+    
+    Route::get('/edit/{id}', 'Backend\Movie\DownloadController@form')->name('admin.movies.download.edit')->where('id', '[0-9]+');
+    
+    Route::post('/save', 'Backend\Movie\DownloadController@save')->name('admin.movies.download.save');
+    
+    Route::post('/remove', 'Backend\Movie\DownloadController@remove')->name('admin.movies.download.remove');
+});

@@ -9,25 +9,29 @@ use App\Models\DownloadLink;
 
 class DownloadController extends Controller
 {
-    public function index($file_id) {
-        Movies::findOrFail($file_id);
-        return view('backend.movie_upload.subtitle.index', [
-            'file_id' => $file_id,
+    public function index($page_type, $movie_id) {
+        Movies::findOrFail($movie_id);
+        
+        return view('backend.download.index', [
+            'movie_id' => $movie_id,
+            'page_type' => $page_type,
         ]);
     }
     
-    public function form($file_id, $id = null) {
-        Movies::findOrFail($file_id);
+    public function form($page_type, $movie_id, $id = null) {
+        Movies::findOrFail($movie_id);
         $model = DownloadLink::firstOrNew(['id' => $id]);
-        return view('backend.movie_upload.subtitle.form', [
+        
+        return view('backend.download.form', [
+            'movie_id' => $movie_id,
+            'page_type' => $page_type,
             'model' => $model,
-            'file_id' => $file_id,
-            'title' => $model->label ?: trans('app.add_new')
+            'title' => $model->lable ? $model->lable : trans('app.add_new'),
         ]);
     }
     
-    public function getData($file_id, Request $request) {
-        Movies::findOrFail($file_id);
+    public function getData($page_type, $movie_id, Request $request) {
+        Movies::findOrFail($movie_id);
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -66,8 +70,8 @@ class DownloadController extends Controller
         ]);
     }
     
-    public function save($file_id, Request $request) {
-        Movies::findOrFail($file_id);
+    public function save($page_type, $movie_id, Request $request) {
+        Movies::findOrFail($movie_id);
         $this->validateRequest([
             'label' => 'required|string|max:250',
             'url' => 'required|string|max:300',
@@ -91,8 +95,8 @@ class DownloadController extends Controller
         ]);
     }
     
-    public function remove($file_id, Request $request) {
-        Movies::findOrFail($file_id);
+    public function remove($page_type, $movie_id, Request $request) {
+        Movies::findOrFail($movie_id);
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [

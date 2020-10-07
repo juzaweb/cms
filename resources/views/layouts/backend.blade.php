@@ -20,10 +20,12 @@
             'data_error': '@lang('app.data_error')',
             'enabled': '@lang('app.enabled')',
             'disabled': '@lang('app.disabled')',
+            'options': '@lang('app.options')',
             'edit': '@lang('app.edit')',
             'translate': '@lang('app.translate')',
             'preview': '@lang('app.preview')',
-            'upload': '@lang('app.upload')',
+            'upload_videos': '@lang('app.upload_videos')',
+            'download_videos': '@lang('app.download_videos')',
             'add_subtitle': '@lang('app.add_subtitle')',
         }
     </script>

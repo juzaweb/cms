@@ -95,7 +95,7 @@ class DashboardController extends Controller
     }
     
     protected function countViewByDay($day) {
-        return MovieViews::where('day', '=', $day)
+        return (int) MovieViews::where('day', '=', $day)
             ->sum('views');
     }
 }

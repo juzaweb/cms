@@ -114,6 +114,8 @@ return [
   'options' => 'Options',
   'preview' => 'Preview',
   'upload' => 'Upload',
+  'download' => 'Download',
+  'download_videos' => 'Download videos',
   'order' => 'Order',
   'close' => 'Close',
   'sync_language' => 'Sync language',

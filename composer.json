@@ -51,11 +51,7 @@
           "app/Helpers/UrlVideoStream.php",
           "app/Helpers/GoogleDrive.php",
           "app/Helpers/TmdbConfiguration.php",
-          "app/Helpers/TmdbApi.php",
-          "app/Helpers/OpenDriveApi.php",
-          "app/Helpers/HTTP.php",
-          "app/Helpers/WebBrowser.php",
-          "app/Helpers/WebBrowserForm.php"
+          "app/Helpers/TmdbApi.php"
         ],
         "psr-4": {
             "App\\": "app/"
