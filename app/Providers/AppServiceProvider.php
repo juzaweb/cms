@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $paths = array_merge([$mainPath], $directories);
         \Validator::extend('recaptcha', 'App\Validators\Recaptcha@validate');
         $this->loadMigrationsFrom($paths);
-        
+        \Schema::defaultStringLength(191);
 		if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && !empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
 			if ($_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
 				\URL::forceScheme('https');

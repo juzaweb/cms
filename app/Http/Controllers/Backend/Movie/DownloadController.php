@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers\Backend\Movie;
 
+use App\Models\Movie\Movies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Video\VideoFiles;
-use App\Models\Subtitle;
+use App\Models\DownloadLink;
 
-class SubtitleController extends Controller
+class DownloadController extends Controller
 {
     public function index($file_id) {
-        VideoFiles::findOrFail($file_id);
+        Movies::findOrFail($file_id);
         return view('backend.movie_upload.subtitle.index', [
             'file_id' => $file_id,
         ]);
     }
     
     public function form($file_id, $id = null) {
-        VideoFiles::findOrFail($file_id);
-        $model = Subtitle::firstOrNew(['id' => $id]);
+        Movies::findOrFail($file_id);
+        $model = DownloadLink::firstOrNew(['id' => $id]);
         return view('backend.movie_upload.subtitle.form', [
             'model' => $model,
             'file_id' => $file_id,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->label ?: trans('app.add_new')
         ]);
     }
     
     public function getData($file_id, Request $request) {
-        VideoFiles::findOrFail($file_id);
+        Movies::findOrFail($file_id);
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -36,7 +36,7 @@ class SubtitleController extends Controller
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Subtitle::query();
+        $query = DownloadLink::query();
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -67,7 +67,7 @@ class SubtitleController extends Controller
     }
     
     public function save($file_id, Request $request) {
-        VideoFiles::findOrFail($file_id);
+        Movies::findOrFail($file_id);
         $this->validateRequest([
             'label' => 'required|string|max:250',
             'url' => 'required|string|max:300',
@@ -80,7 +80,7 @@ class SubtitleController extends Controller
             'status' => trans('app.status'),
         ]);
         
-        $model = Subtitle::firstOrNew(['id' => $request->post('id')]);
+        $model = DownloadLink::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->save();
         
@@ -92,14 +92,14 @@ class SubtitleController extends Controller
     }
     
     public function remove($file_id, Request $request) {
-        VideoFiles::findOrFail($file_id);
+        Movies::findOrFail($file_id);
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
             'ids' => trans('app.subtitle')
         ]);
         
-        Subtitle::destroy($request->post('ids'));
+        DownloadLink::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',

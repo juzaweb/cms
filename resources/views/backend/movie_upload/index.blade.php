@@ -78,7 +78,7 @@
                         <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                            <th data-field="label" data-width="10%">@lang('app.label')</th>
+                            <th data-field="label" data-width="15%" data-formatter="label_formatter">@lang('app.label')</th>
                             <th data-field="url">@lang('app.url')</th>
                             <th data-field="source" data-width="10%">@lang('app.source')</th>
                             <th data-field="order" data-width="10%" data-align="center">@lang('app.order')</th>
@@ -93,6 +93,9 @@
     </div>
 
     <script type="text/javascript">
+        function label_formatter(value, row, index) {
+            return '<a href="'+ row.edit_url +'">'+ value +'</a>';
+        }
 
         function status_formatter(value, row, index) {
             if (value == 1) {
@@ -102,8 +105,8 @@
         }
 
         function action_formatter(value, row, index) {
-            let str = '<a href="javascript:void(0)" class="btn btn-success edit-video btn-sm" data-id="'+ row.id +'"><i class="fa fa-edit"></i> '+ langs.edit +'</a>';
-            str += '<a href="javascript:void(0)" class="btn btn-success edit-video btn-sm"><i class="fa fa-edit"></i> '+ langs.subtitle_url +'</a>';
+            let str = '';
+            str += '<a href="'+ row.subtitle_url +'" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> '+ langs.add_subtitle +'</a>';
             return str;
         }
 
@@ -111,91 +114,5 @@
             url: '{{ route('admin.movies.servers.upload.getdata', ['server_id' => $server->id]) }}',
             remove_url: '{{ route('admin.movies.servers.upload.remove', ['server_id' => $server->id]) }}',
         });
-
-        function add_file_success(form) {
-            form.find('#id').val('');
-            form.find('#label').val('');
-            form.find('#order').val('1');
-            //form.find('#source').val('mp4');
-            form.find('#url').val('');
-            form.find('#url_upload').val('');
-            table.refresh();
-        }
-        
-        $('.add-new-video').on('click', function () {
-            if ($('.form-upload-video').is(":hidden")) {
-                $('.form-upload-video').show('slow');
-            }
-            else {
-                $('.form-upload-video').hide('slow');
-            }
-        });
-
-        $('#source').on('change', function () {
-            if ($(this).val() === "upload") {
-                $('.form-url').hide('slow');
-                $('.form-upload').show('slow');
-            }
-            else {
-                $('.form-upload').hide('slow');
-                $('.form-url').show('slow');
-            }
-        });
-
-        $('.table').on('click', '.edit-video', function () {
-            let id = $(this).data('id');
-            var btn = $(this);
-            var icon = btn.find('i').attr('class');
-
-            btn.find('i').attr('class', 'fa fa-spinner fa-spin');
-            btn.prop("disabled", true);
-
-            $.ajax({
-                type: 'GET',
-                url: '{{ route('admin.movies.servers.upload.getfile') }}',
-                dataType: 'json',
-                data: {
-                    'id': id,
-                }
-            }).done(function(data) {
-
-                btn.find('i').attr('class', icon);
-                btn.prop("disabled", false);
-
-                if (data.status === "error") {
-                    show_message(data.message, 'error');
-                    return false;
-                }
-
-                if ($('.form-upload-video').is(":hidden")) {
-                    $('.form-upload-video').show('slow');
-                }
-
-                $('#id').val(data.id);
-                $('#label').val(data.label);
-                $('#order').val(data.order);
-                $('#source').val(data.source);
-
-                if (data.source === "upload") {
-                    $('#url_upload').val(data.url);
-                    $('.form-url').hide('slow');
-                    $('.form-upload').show('slow');
-                }
-                else {
-                    $('#url').val(data.url);
-                    $('.form-upload').hide('slow');
-                    $('.form-url').show('slow');
-                }
-
-                return false;
-            }).fail(function(data) {
-                btn.find('i').attr('class', icon);
-                btn.prop("disabled", false);
-
-                show_message(langs.data_error, 'error');
-                return false;
-            });
-        });
-
     </script>
 @endsection

@@ -14,7 +14,7 @@ class CreateMoviesTable extends Migration
             $table->string('other_name', 250)->nullable();
             $table->string('thumbnail', 250)->nullable();
             $table->string('poster', 250)->nullable();
-            $table->string('slug', 200)->unique()->index();
+            $table->string('slug', 150)->unique()->index();
             $table->longText('description')->nullable();
             $table->string('short_description', 300)->nullable();
             $table->text('actors')->nullable();
@@ -44,9 +44,9 @@ class CreateMoviesTable extends Migration
             $table->timestamps();
         });
         
-        $prefix = DB::getTablePrefix();
-        DB::statement('ALTER TABLE `'. $prefix .'movies` ADD FULLTEXT index_name(name);');
-        DB::statement('ALTER TABLE `'. $prefix .'movies` ADD FULLTEXT index_other_name(other_name);');
+        //$prefix = DB::getTablePrefix();
+        //DB::statement('ALTER TABLE `'. $prefix .'movies` ADD FULLTEXT index_name(name);');
+        //DB::statement('ALTER TABLE `'. $prefix .'movies` ADD FULLTEXT index_other_name(other_name);');
     }
     
     public function down()

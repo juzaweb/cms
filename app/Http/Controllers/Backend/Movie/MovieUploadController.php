@@ -7,6 +7,7 @@ use App\Models\Video\VideoServers;
 use App\Models\Video\VideoFiles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class MovieUploadController extends Controller
 {
@@ -17,6 +18,19 @@ class MovieUploadController extends Controller
         return view('backend.movie_upload.index', [
             'server' => $server,
             'movie' => $movie,
+        ]);
+    }
+    
+    public function form($server_id, $id = null) {
+        $server = VideoServers::where('id', '=', $server_id)->firstOrFail();
+        $movie = Movies::where('id', '=', $server->movie_id)->firstOrFail();
+        $model = VideoFiles::firstOrNew(['id' => $id]);
+        
+        return view('backend.movie_upload.index', [
+            'title' => $model->label ? $model->label : trans('app.add_new'),
+            'server' => $server,
+            'movie' => $movie,
+            'model' => $model,
         ]);
     }
     
@@ -46,7 +60,9 @@ class MovieUploadController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
+            $row->edit_url = route('admin.movies.servers.upload.edit', [$row->id]);
             $row->subtitle_url = route('admin.movies.servers.upload.subtitle', [$row->id]);
+            $row->url = substr($row->url, 0, 50);
         }
         
         return response()->json([

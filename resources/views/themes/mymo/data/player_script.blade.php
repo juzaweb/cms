@@ -24,7 +24,7 @@
                     edgeStyle: "raised"
                 }
             }],
-            @if(get_config('player_watermark'))
+            @if(0)
             logo: {
                 file: "{{ image_url(get_config('player_watermark_logo')) }}",
                 link: "{{ url('/') }}",
@@ -58,7 +58,7 @@
                     "linkedin"
                 ]
             },
-            @if($ads_exists)
+            @if(0)
             advertising: {
                 client: 'vast',
                 admessage: '@lang('app.ads_have_xx_seconds_left')',

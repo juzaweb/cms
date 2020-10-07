@@ -13,7 +13,7 @@ class CreatePagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 250);
             $table->string('thumbnail', 250)->nullable();
-            $table->string('slug', 200)->unique()->index();
+            $table->string('slug', 150)->unique()->index();
             $table->longText('content')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('meta_title', 70)->nullable();
