@@ -15,7 +15,7 @@ class UpdateSubtitlesTable extends Migration
             $table->text('url');
             $table->integer('order')->default(1);
             $table->tinyInteger('status')->default(1);
-            $table->bigInteger('video_file_id')->index();
+            $table->bigInteger('file_id')->index();
             $table->bigInteger('movie_id')->index();
             $table->timestamps();
         });

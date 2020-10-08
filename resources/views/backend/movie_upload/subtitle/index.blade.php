@@ -6,7 +6,7 @@
 
     {{ Breadcrumbs::render('manager', [
             'name' => trans('app.subtitle'),
-            'url' => route('admin.movies.servers.upload.subtitle', [$file_id])
+            'url' => route('admin.movies.servers.upload.subtitle', [$page_type, $file_id])
         ]) }}
 
     <div class="cui__utils__content">
@@ -19,7 +19,7 @@
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <a href="{{ route('admin.subtitle.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <a href="{{ route('admin.movies.servers.upload.subtitle.create', [$page_type, $file_id]) }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                             <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
@@ -70,9 +70,6 @@
     </div>
 
     <script type="text/javascript">
-        function thumbnail_formatter(value, row, index) {
-            return '<img src="'+ row.thumb_url +'" class="w-100">';
-        }
 
         function label_formatter(value, row, index) {
             return '<a href="'+ row.edit_url +'">'+ value +'</a>';
@@ -86,8 +83,8 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.movies.servers.upload.subtitle.getdata', [$file_id]) }}',
-            remove_url: '{{ route('admin.movies.servers.upload.subtitle.remove', [$file_id]) }}',
+            url: '{{ route('admin.movies.servers.upload.subtitle.getdata', [$page_type, $file_id]) }}',
+            remove_url: '{{ route('admin.movies.servers.upload.subtitle.remove', [$page_type, $file_id]) }}',
         });
     </script>
 @endsection

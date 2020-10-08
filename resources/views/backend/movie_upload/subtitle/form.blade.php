@@ -6,11 +6,11 @@
 
     {{ Breadcrumbs::render('manager', [
             'name' => trans('app.subtitle'),
-            'url' => route('admin.movies.servers.upload.subtitle', [$file_id])
+            'url' => route('admin.movies.servers.upload.subtitle', [$page_type, $file_id])
         ], $model) }}
 
     <div class="cui__utils__content">
-        <form method="post" action="{{ route('admin.movies.servers.upload.subtitle.save', [$file_id]) }}" class="form-ajax">
+        <form method="post" action="{{ route('admin.movies.servers.upload.subtitle.save', [$page_type, $file_id]) }}" class="form-ajax">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
@@ -21,7 +21,7 @@
                         <div class="col-md-6">
                             <div class="btn-group float-right">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                                <a href="{{ route('admin.movies.servers.upload.subtitle', [$file_id]) }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                                <a href="{{ route('admin.movies.servers.upload.subtitle', [$page_type, $file_id]) }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
                             </div>
                         </div>
                     </div>

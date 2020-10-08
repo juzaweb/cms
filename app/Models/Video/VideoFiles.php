@@ -48,6 +48,8 @@ use Stream3s\Helpers\Stream3sApi;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo480p($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo720p($value)
  * @mixin \Eloquent
+ * @property int $enable_remote
+ * @method static \Illuminate\Database\Eloquent\Builder|VideoFiles whereEnableRemote($value)
  */
 class VideoFiles extends Model
 {

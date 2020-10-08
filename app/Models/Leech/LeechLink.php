@@ -27,6 +27,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $leech_link
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Leech\LeechLink whereLeechData($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Leech\LeechLink whereLeechLink($value)
+ * @property int $tv_series
+ * @property string|null $error
+ * @method static \Illuminate\Database\Eloquent\Builder|LeechLink whereError($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LeechLink whereTvSeries($value)
  */
 class LeechLink extends Model
 {

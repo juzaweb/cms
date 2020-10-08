@@ -9,24 +9,26 @@ use App\Models\Subtitle;
 
 class SubtitleController extends Controller
 {
-    public function index($file_id) {
+    public function index($page_type, $file_id) {
         VideoFiles::findOrFail($file_id);
         return view('backend.movie_upload.subtitle.index', [
+            'page_type' => $page_type,
             'file_id' => $file_id,
         ]);
     }
     
-    public function form($file_id, $id = null) {
+    public function form($page_type, $file_id, $id = null) {
         VideoFiles::findOrFail($file_id);
         $model = Subtitle::firstOrNew(['id' => $id]);
         return view('backend.movie_upload.subtitle.form', [
             'model' => $model,
+            'page_type' => $page_type,
             'file_id' => $file_id,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->label ? $model->label : trans('app.add_new')
         ]);
     }
     
-    public function getData($file_id, Request $request) {
+    public function getData($page_type, $file_id, Request $request) {
         VideoFiles::findOrFail($file_id);
         $search = $request->get('search');
         $status = $request->get('status');
@@ -37,6 +39,7 @@ class SubtitleController extends Controller
         $limit = $request->get('limit', 20);
         
         $query = Subtitle::query();
+        $query->where('file_id', '=', $file_id);
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -57,7 +60,7 @@ class SubtitleController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.subtitle.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.subtitle.edit', [$page_type, $file_id, $row->id]);
         }
         
         return response()->json([
@@ -66,8 +69,9 @@ class SubtitleController extends Controller
         ]);
     }
     
-    public function save($file_id, Request $request) {
-        VideoFiles::findOrFail($file_id);
+    public function save($page_type, $file_id, Request $request) {
+        $file = VideoFiles::findOrFail($file_id);
+        
         $this->validateRequest([
             'label' => 'required|string|max:250',
             'url' => 'required|string|max:300',
@@ -82,16 +86,18 @@ class SubtitleController extends Controller
         
         $model = Subtitle::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
+        $model->file_id = $file_id;
+        $model->movie_id = $file->movie_id;
         $model->save();
         
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.subtitle'),
+            'redirect' => route('admin.movies.servers.upload.subtitle', [$page_type, $file_id]),
         ]);
     }
     
-    public function remove($file_id, Request $request) {
+    public function remove($page_type, $file_id, Request $request) {
         VideoFiles::findOrFail($file_id);
         $this->validateRequest([
             'ids' => 'required',

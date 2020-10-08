@@ -17,6 +17,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $label
+ * @property string $url
+ * @property int $order
+ * @property int $status
+ * @property int $movie_id
+ * @method static \Illuminate\Database\Eloquent\Builder|DownloadLink whereLabel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DownloadLink whereMovieId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DownloadLink whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DownloadLink whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DownloadLink whereUrl($value)
  */
 class DownloadLink extends Model
 {
