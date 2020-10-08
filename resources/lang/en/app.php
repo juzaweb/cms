@@ -115,6 +115,7 @@ return [
   'preview' => 'Preview',
   'upload' => 'Upload',
   'download' => 'Download',
+  'download_link' => 'Download link',
   'download_videos' => 'Download videos',
   'order' => 'Order',
   'close' => 'Close',

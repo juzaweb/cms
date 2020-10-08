@@ -41,6 +41,7 @@ class DownloadController extends Controller
         $limit = $request->get('limit', 20);
         
         $query = DownloadLink::query();
+        $query->where('movie_id', '=', $movie_id);
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -61,7 +62,7 @@ class DownloadController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.subtitle.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.movies.download.edit', [$page_type, 'id' => $row->id]);
         }
         
         return response()->json([
@@ -72,6 +73,7 @@ class DownloadController extends Controller
     
     public function save($page_type, $movie_id, Request $request) {
         Movies::findOrFail($movie_id);
+        
         $this->validateRequest([
             'label' => 'required|string|max:250',
             'url' => 'required|string|max:300',
@@ -86,12 +88,13 @@ class DownloadController extends Controller
         
         $model = DownloadLink::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
+        $model->movie_id = $movie_id;
         $model->save();
         
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.subtitle'),
+            'redirect' => route('admin.movies.download', [$page_type]),
         ]);
     }
     

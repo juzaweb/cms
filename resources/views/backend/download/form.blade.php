@@ -31,13 +31,24 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="col-form-label" for="baseName">@lang('app.name')</label>
 
-                            <input type="text" name="name" class="form-control" id="baseName" value="{{ $model->name }}" autocomplete="off" required>
+                        <div class="form-group">
+                            <label class="col-form-label" for="label">@lang('app.label')</label>
+
+                            <input type="text" name="label" class="form-control" id="label" value="{{ $model->label }}" autocomplete="off" required>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-form-label" for="url">@lang('app.download_link')</label>
 
+                            <input type="text" name="label" class="form-control" id="url" value="{{ $model->url }}" autocomplete="off" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="order">@lang('app.download_link')</label>
+
+                            <input type="number" name="order" class="form-control" id="order" value="{{ $model->order ?? '1' }}" autocomplete="off" required>
+                        </div>
 
                         <div class="form-group">
                             <label class="col-form-label" for="baseStatus">@lang('app.status')</label>

@@ -9,7 +9,7 @@ class UpdateDownloadLinksTable extends Migration
     public function up()
     {
         Schema::dropIfExists('download_links');
-        Schema::table('download_links', function (Blueprint $table) {
+        Schema::create('download_links', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('label', 250);
             $table->text('url');
