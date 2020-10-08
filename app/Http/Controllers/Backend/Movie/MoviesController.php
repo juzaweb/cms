@@ -64,7 +64,7 @@ class MoviesController extends Controller
             $row->description = Str::words(strip_tags($row->description), 15);
             $row->edit_url = route('admin.movies.edit', [$row->id]);
             $row->preview_url = route('watch', [$row->slug]);
-            $row->upload_url = route('admin.movies.servers', [$row->id]);
+            $row->upload_url = route('admin.movies.servers', ['movies', $row->id]);
             $row->download_url = route('admin.movies.download', ['movies', $row->id]);
         }
         

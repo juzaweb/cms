@@ -16,7 +16,7 @@
             ],
             [
                 'name' => trans('app.servers_video'),
-                'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
+                'url' => route('admin.movies.servers', [$page_type, $movie->id])
             ]
         ]) }}
     @else
@@ -31,7 +31,7 @@
         ],
         [
             'name' => trans('app.servers_video'),
-            'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
+            'url' => route('admin.movies.servers', [$page_type, $movie->id])
         ]
     ]) }}
     @endif
@@ -45,7 +45,7 @@
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <a href="{{ route('admin.movies.servers.create', ['movie_id' => $movie->id]) }}" class="btn btn-success add-new-server"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <a href="{{ route('admin.movies.servers.create', [$page_type, $movie->id]) }}" class="btn btn-success add-new-server"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                             <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
@@ -109,8 +109,8 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.movies.servers.getdata', ['movie_id' => $movie->id]) }}',
-            remove_url: '{{ route('admin.movies.servers.remove', ['movie_id' => $movie->id]) }}',
+            url: '{{ route('admin.movies.servers.getdata', [$page_type, $movie->id]) }}',
+            remove_url: '{{ route('admin.movies.servers.remove', [$page_type, $movie->id]) }}',
         });
 
     </script>

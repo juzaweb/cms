@@ -16,7 +16,7 @@
             ],
             [
                 'name' => trans('app.servers_video'),
-                'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
+                'url' => route('admin.movies.servers', [$page_type, $movie->id])
             ]
         ], $model) }}
     @else
@@ -31,13 +31,13 @@
         ],
         [
             'name' => trans('app.servers_video'),
-            'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
+            'url' => route('admin.movies.servers', [$page_type, $movie->id])
         ]
     ], $model) }}
     @endif
 
 <div class="cui__utils__content">
-    <form method="post" action="{{ route('admin.movies.servers.save', ['movie_id' => $movie->id]) }}" class="form-ajax">
+    <form method="post" action="{{ route('admin.movies.servers.save', [$page_type, $movie->id]) }}" class="form-ajax">
         <div class="card">
             <div class="card-header">
                 <div class="row">

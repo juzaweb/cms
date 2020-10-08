@@ -69,17 +69,17 @@ Route::group(['prefix' => '{type}/servers/upload/subtitle/{file_id}'], function 
 });
 
 Route::group(['prefix' => '{type}/download/{movie_id}'], function () {
-    Route::get('/', 'Backend\Movie\DownloadController@index')->name('admin.movies.download');
+    Route::get('/', 'Backend\Movie\MovieDownloadController@index')->name('admin.movies.download');
     
-    Route::get('/getdata', 'Backend\Movie\DownloadController@getData')->name('admin.movies.download.getdata');
+    Route::get('/getdata', 'Backend\Movie\MovieDownloadController@getData')->name('admin.movies.download.getdata');
     
-    Route::get('/create', 'Backend\Movie\DownloadController@form')->name('admin.movies.download.create');
+    Route::get('/create', 'Backend\Movie\MovieDownloadController@form')->name('admin.movies.download.create');
     
-    Route::get('/edit/{id}', 'Backend\Movie\DownloadController@form')->name('admin.movies.download.edit')->where('id', '[0-9]+');
+    Route::get('/edit/{id}', 'Backend\Movie\MovieDownloadController@form')->name('admin.movies.download.edit')->where('id', '[0-9]+');
     
-    Route::post('/save', 'Backend\Movie\DownloadController@save')->name('admin.movies.download.save');
+    Route::post('/save', 'Backend\Movie\MovieDownloadController@save')->name('admin.movies.download.save');
     
-    Route::post('/remove', 'Backend\Movie\DownloadController@remove')->name('admin.movies.download.remove');
+    Route::post('/remove', 'Backend\Movie\MovieDownloadController@remove')->name('admin.movies.download.remove');
 });
 
 Route::group(['prefix' => 'video-qualities'], function () {

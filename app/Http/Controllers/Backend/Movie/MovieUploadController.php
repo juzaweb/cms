@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class MovieUploadController extends Controller
 {
-    public function index($server_id) {
+    public function index($page_type, $server_id) {
         $server = VideoServers::where('id', '=', $server_id)->firstOrFail();
         $movie = Movies::where('id', '=', $server->movie_id)->firstOrFail();
         
@@ -21,7 +21,7 @@ class MovieUploadController extends Controller
         ]);
     }
     
-    public function form($server_id, $id = null) {
+    public function form($page_type, $server_id, $id = null) {
         $server = VideoServers::where('id', '=', $server_id)->firstOrFail();
         $movie = Movies::where('id', '=', $server->movie_id)->firstOrFail();
         $model = VideoFiles::firstOrNew(['id' => $id]);
@@ -34,7 +34,7 @@ class MovieUploadController extends Controller
         ]);
     }
     
-    public function getData($server_id, Request $request) {
+    public function getData($page_type, $server_id, Request $request) {
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -71,7 +71,7 @@ class MovieUploadController extends Controller
         ]);
     }
     
-    public function save($server_id, Request $request) {
+    public function save($page_type, $server_id, Request $request) {
         $this->validateRequest([
             'label' => 'required|string|max:250',
             'source' => 'required|string|max:100',
@@ -112,7 +112,7 @@ class MovieUploadController extends Controller
         ]);
     }
     
-    public function remove($server_id, Request $request) {
+    public function remove($page_type, $server_id, Request $request) {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [

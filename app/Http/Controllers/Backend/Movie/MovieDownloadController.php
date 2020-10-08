@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DownloadLink;
 
-class DownloadController extends Controller
+class MovieDownloadController extends Controller
 {
     public function index($page_type, $movie_id) {
         Movies::findOrFail($movie_id);

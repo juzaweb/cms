@@ -9,25 +9,27 @@ use App\Http\Controllers\Controller;
 
 class MovieServesController extends Controller
 {
-    public function index($movie_id) {
+    public function index($page_type, $movie_id) {
         $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
         return view('backend.movie_servers.index', [
             'movie' => $movie,
+            'page_type' => $page_type,
         ]);
     }
     
-    public function form($movie_id, $server_id = null) {
+    public function form($page_type, $movie_id, $server_id = null) {
         $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
         $model = VideoServers::firstOrNew(['id' => $server_id]);
         return view('backend.movie_servers.form', [
-            'title' => $model->name ?: trans('app.add_new'),
+            'title' => $model->name ? $model->name : trans('app.add_new'),
             'movie' => $movie,
             'model' => $model,
+            'page_type' => $page_type,
         ]);
     }
     
-    public function getData($movie_id, Request $request) {
-        $movie = Movies::where('id', '=', $movie_id)
+    public function getData($page_type, $movie_id, Request $request) {
+        Movies::where('id', '=', $movie_id)
             ->firstOrFail();
         
         $search = $request->get('search');
@@ -55,12 +57,7 @@ class MovieServesController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
-            if ($movie->tv_series == 0) {
-                $row->upload_url = route('admin.movies.servers.upload', ['server_id' => $row->id]);
-            }
-            else {
-                $row->upload_url = route('admin.tv_series.servers.upload', ['server_id' => $row->id]);
-            }
+            $row->upload_url = route('admin.movies.servers.upload', [$page_type, $row->id]);
         }
         
         return response()->json([
@@ -69,7 +66,7 @@ class MovieServesController extends Controller
         ]);
     }
     
-    public function save($movie_id, Request $request) {
+    public function save($page_type, $movie_id, Request $request) {
         $this->validateRequest([
             'name' => 'required|string|max:100',
             'order' => 'required|numeric',
@@ -86,11 +83,11 @@ class MovieServesController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.movies.servers', ['movie_id' => $movie_id]),
+            'redirect' => route('admin.movies.servers', [$page_type, $movie_id]),
         ]);
     }
     
-    public function remove($movie_id, Request $request) {
+    public function remove($page_type, $movie_id, Request $request) {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
@@ -107,7 +104,7 @@ class MovieServesController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.genres'),
+            'redirect' => route('admin.movies.servers', [$page_type, $movie_id]),
         ]);
     }
 }
