@@ -76,7 +76,7 @@ class VideoFiles extends Model
             case 'upload':
                 return $this->getVideoUpload();
             case 'gdrive':
-                return $this->getVideoGoogleDrive();
+                return $this->getVideoGoogleDriveEmbed();
             case 'mp4';
                 return $this->getVideoUrl('mp4');
             case 'mkv';
@@ -196,34 +196,13 @@ class VideoFiles extends Model
         ];
     }
     
-    protected function getVideoGoogleDrive() {
-        $gdrive = GoogleDrive::link_stream(get_google_drive_id($this->url));
-        if ($gdrive) {
-            
-            $files = [];
-            foreach ($gdrive->qualities as $quality) {
-                $file = [
-                    'class' => 'GoogleDrive',
-                    'file' => $gdrive->stream_id,
-                ];
-                
-                $token = urlencode(base64_encode(Crypt::encryptString(json_encode($file))));
-                
-                $files[] = (object) [
-                    'label' => $quality,
-                    'file' => route('stream.service', [
-                        $token,
-                        $quality,
-                        $quality . '.mp4'
-                    ]),
-                    'type' => 'mp4',
-                ];
-            }
-            
-            return $files;
-        }
-        
-        return [];
+    protected function getVideoGoogleDriveEmbed() {
+        $files[] = (object) [
+            'file' => 'https://drive.google.com/file/d/'. get_google_drive_id($this->url) .'/preview',
+            'type' => 'mp4',
+        ];
+    
+        return $files;
     }
     
     protected function generateStreamUrl($path) {

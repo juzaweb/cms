@@ -18,9 +18,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="btn-group float-right">
-                        <a href="{{ route('admin.setting.video_ads') }}" class="btn btn-success text-uppercase">@lang('app.video_ads')</a>
-                    </div>
+
                 </div>
             </div>
         </div>

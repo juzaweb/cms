@@ -49,7 +49,7 @@
           "app/Helpers/simple_html_dom.php",
           "app/Helpers/VideoStream.php",
           "app/Helpers/UrlVideoStream.php",
-          "app/Helpers/GoogleDrive.php",
+          "app/Helpers/Stream3sApi.php",
           "app/Helpers/TmdbConfiguration.php",
           "app/Helpers/TmdbApi.php"
         ],

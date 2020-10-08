@@ -20,7 +20,7 @@
                 <div class="col-md-6">
                     <div class="float-right">
                         <div class="btn-group">
-                            <a href="{{ route('admin.setting.ads') }}" class="btn btn-success text-uppercase">@lang('app.banner_ads')</a>
+
                         </div>
 
                         <div class="btn-group">
