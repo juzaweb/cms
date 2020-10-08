@@ -379,5 +379,8 @@ return [
   'subtitle' => 'Subtitle',
   'add_subtitle' => 'Add subtitle',
   'player' => 'Player',
+  'stream3s_stream' => 'Stream3s stream',
+  'client_id' => 'Client ID',
+  'secret_key' => 'Secret key',
 ];
 

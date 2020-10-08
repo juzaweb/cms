@@ -75,7 +75,7 @@ class SystemSettingController extends Controller
             'general' => trans('app.site_info'),
             'recaptcha' => trans('app.google_recaptcha'),
             'player' => trans('app.player'),
-            'stream3s' => 'Stream3s'
+            'stream3s' => trans('app.stream3s_stream')
         ];
     }
 }
