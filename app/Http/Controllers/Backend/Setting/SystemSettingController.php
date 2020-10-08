@@ -8,9 +8,22 @@ use App\Http\Controllers\Controller;
 
 class SystemSettingController extends Controller
 {
-    public function index() {
+    public function index($form = null) {
+        if (empty($form)) {
+            $form = 'general';
+        }
+        
+        if (!view()->exists('backend.setting.system.form.' . $form)) {
+            $form = 'general';
+        }
+        
+        $form_content = view('backend.setting.system.form.' . $form)->render();
+        
         return view('backend.setting.system.index', [
-            'title' => trans('app.system_setting')
+            'title' => trans('app.system_setting'),
+            'form' => $form,
+            'form_content' => $form_content,
+            'settings' => $this->settingList(),
         ]);
     }
     
@@ -57,24 +70,12 @@ class SystemSettingController extends Controller
         ]);
     }
     
-    public function getSettingForm(Request $request) {
-        $form = $request->get('form');
-        if (view()->exists('backend.setting.system.form.' . $form)) {
-            return response()->json([
-                'status' => 'success',
-                'data' => [
-                    'title' => trans('app.' . $form),
-                    'html' => view('backend.setting.system.form.' . $form)->render(),
-                ],
-            ]);
-        }
-    
-        return response()->json([
-            'status' => 'success',
-            'data' => [
-                'title' => trans('app.' . $form),
-                'html' => view('backend.setting.system.form.general')->render(),
-            ],
-        ]);
+    protected function settingList() {
+        return [
+            'general' => trans('app.site_info'),
+            'recaptcha' => trans('app.google_recaptcha'),
+            'player' => trans('app.player'),
+            'stream3s' => 'Stream3s'
+        ];
     }
 }

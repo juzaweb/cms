@@ -19,21 +19,7 @@
     ];
 @endphp
 
-<div class="form-group">
-    <label class="col-form-label" for="user_registration">@lang('app.user_registration')</label>
-    <select name="user_registration" id="user_registration" class="form-control">
-        <option value="1" @if($registration == 1) selected @endif>@lang('app.enabled')</option>
-        <option value="0" @if($registration == 0) selected @endif>@lang('app.disabled')</option>
-    </select>
-</div>
 
-<div class="form-group">
-    <label class="col-form-label" for="user_verification">@lang('app.user_e_mail_verification')</label>
-    <select name="user_verification" id="user_verification" class="form-control">
-        <option value="1" @if($verification == 1) selected @endif>@lang('app.enabled')</option>
-        <option value="0" @if($verification == 0) selected @endif>@lang('app.disabled')</option>
-    </select>
-</div>
 
 
 

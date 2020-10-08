@@ -141,6 +141,8 @@ return [
   'register' => 'Register',
   'manual' => 'Manual',
   'auto' => 'Auto',
+  'registration' => 'Registration',
+  'general' => 'General',
   'user_registration' => 'User Registration',
   'google_recaptcha' => 'Recaptcha',
   'google_recaptcha_key' => 'Recaptcha key',
@@ -376,5 +378,6 @@ return [
   'reset' => 'Reset',
   'subtitle' => 'Subtitle',
   'add_subtitle' => 'Add subtitle',
+  'player' => 'Player',
 ];
 

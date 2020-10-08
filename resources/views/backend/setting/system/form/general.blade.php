@@ -1,4 +1,10 @@
 <form method="post" action="{{ route('admin.setting.save') }}" class="form-ajax">
+    @php
+        $registration = get_config('user_registration');
+        $verification = get_config('user_verification');
+    @endphp
+
+    <h5>@lang('app.general')</h5>
     <div class="form-group">
         <label class="col-form-label" for="title">@lang('app.home_title')</label>
 
@@ -51,6 +57,30 @@
         <label class="col-form-label" for="google_analytics">@lang('app.google_analytics_id')</label>
 
         <input type="text" name="google_analytics" class="form-control" id="google_analytics" value="{{ get_config('google_analytics') }}" autocomplete="off">
+    </div>
+
+    <h5>@lang('app.registration')</h5>
+    <div class="form-group">
+        <label class="col-form-label" for="user_registration">@lang('app.user_registration')</label>
+        <select name="user_registration" id="user_registration" class="form-control">
+            <option value="1" @if($registration == 1) selected @endif>@lang('app.enabled')</option>
+            <option value="0" @if($registration == 0) selected @endif>@lang('app.disabled')</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" for="user_verification">@lang('app.user_e_mail_verification')</label>
+        <select name="user_verification" id="user_verification" class="form-control">
+            <option value="1" @if($verification == 1) selected @endif>@lang('app.enabled')</option>
+            <option value="0" @if($verification == 0) selected @endif>@lang('app.disabled')</option>
+        </select>
+    </div>
+
+    <h5>@lang('app.tmdb')</h5>
+    <div class="form-group">
+        <label class="col-form-label" for="tmdb_api_key">@lang('app.tmdb_api_key')</label>
+
+        <input type="text" name="tmdb_api_key" class="form-control" id="tmdb_api_key" value="{{ get_config('tmdb_api_key') }}" autocomplete="off">
     </div>
 
     <div class="row">

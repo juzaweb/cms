@@ -15,9 +15,9 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="list-group" id="setting-menu">
-                        <a href="#" class="list-group-item active" data-form="general">@lang('app.site_info')</a>
-                        <a href="#" class="list-group-item" data-form="recaptcha">@lang('app.google_recaptcha')</a>
-
+                        @foreach($settings as $key => $setting)
+                        <a href="{{ route('admin.setting.form', [$key]) }}" class="list-group-item @if($key == $form) active @endif" data-form="general">{{ $setting }}</a>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="card-body" id="setting-form">
-
+                    {!! $form_content !!}
                 </div>
 
             </div>

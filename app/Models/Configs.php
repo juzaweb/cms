@@ -77,6 +77,8 @@ class Configs extends Model
             'pinterest',
             'youtube',
             'google_analytics',
+            'stream3s_client_id',
+            'stream3s_secret_key',
         ];
     }
     
