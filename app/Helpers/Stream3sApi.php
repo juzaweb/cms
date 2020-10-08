@@ -7,6 +7,7 @@ class Stream3sApi {
 	public static $API_URL = 'http://localhost:8004/api';
 	
 	protected $session_id;
+	protected $is_premium;
 	protected $errors = [];
 	
 	public function login($client_id, $secret_key) {
@@ -21,6 +22,7 @@ class Stream3sApi {
 		}
 		
 		$this->session_id = $response['data']['session_id'];
+		$this->is_premium = $response['data']['premium'];
 		return true;
 	}
 	
@@ -97,6 +99,10 @@ class Stream3sApi {
 	public function getErrors() {
 		return $this->errors;
 	}
+	
+	public function isPremium() {
+	    return $this->is_premium;
+    }
 	
 	private function _callApi($uri, $params = [], $method = 'GET') {
 		if ($method === 'GET') {

@@ -382,5 +382,6 @@ return [
   'stream3s_stream' => 'Stream3s stream',
   'client_id' => 'Client ID',
   'secret_key' => 'Secret key',
+  'cannot_get_google_drive_id' => 'Cannot get google drive id.',
 ];
 

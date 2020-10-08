@@ -2,9 +2,8 @@
 
 namespace App\Models\Video;
 
-use App\Helpers\GoogleDrive;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Crypt;
+use Stream3s\Helpers\Stream3sApi;
 
 /**
  * App\Models\Video\VideoFiles
@@ -67,7 +66,6 @@ class VideoFiles extends Model
     }
     
     public function getFiles() {
-        
         switch ($this->source) {
             case 'youtube';
                 return $this->getVideoYoutube();
@@ -76,7 +74,7 @@ class VideoFiles extends Model
             case 'upload':
                 return $this->getVideoUpload();
             case 'gdrive':
-                return $this->getVideoGoogleDriveEmbed();
+                return $this->getVideoGoogleDrive();
             case 'mp4';
                 return $this->getVideoUrl('mp4');
             case 'mkv';
@@ -196,12 +194,55 @@ class VideoFiles extends Model
         ];
     }
     
+    protected function getVideoGoogleDrive() {
+        $stream3s_using = get_config('stream3s_use');
+        if ($stream3s_using) {
+            return $this->getVideoGoogleDriveStream();
+        }
+        
+        return $this->getVideoGoogleDriveEmbed();
+    }
+    
     protected function getVideoGoogleDriveEmbed() {
         $files[] = (object) [
             'file' => 'https://drive.google.com/file/d/'. get_google_drive_id($this->url) .'/preview',
             'type' => 'mp4',
         ];
     
+        return $files;
+    }
+    
+    protected function getVideoGoogleDriveStream() {
+        $client_id = get_config('stream3s_client_id');
+        $secret_key = get_config('stream3s_secret_key');
+        
+        if ($client_id && $secret_key) {
+            $stream = new Stream3sApi();
+            if ($stream->login($client_id, $secret_key)) {
+                if ($stream->isPremium()) {
+                
+                    $stream_link = $stream->addAndGetDirectLink($this->url);
+                    if ($stream_link) {
+                        foreach ($stream_link as $key => $item) {
+                            $files[] = (object) $item;
+                        }
+                    }
+                
+                }
+                else {
+                
+                    $embed_link = $stream->addAndGetEmbedLink($this->url);
+                    if ($embed_link) {
+                        $files[] = (object) [
+                            'file' => $embed_link,
+                            'type' => 'mp4',
+                        ];
+                    }
+                    
+                }
+            }
+        }
+        
         return $files;
     }
     

@@ -86,6 +86,15 @@ class MovieUploadController extends Controller
             'order' => trans('app.order'),
         ]);
         
+        if ($request->post('source') == 'gdrive') {
+            if (!get_google_drive_id($request->post('url'))) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => trans('app.cannot_get_google_drive_id'),
+                ]);
+            }
+        }
+        
         $model = VideoFiles::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->server_id = $server_id;
