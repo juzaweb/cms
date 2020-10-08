@@ -30,7 +30,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <h5 class="mb-0 card-title font-weight-bold" id="setting-title"></h5>
+                            <h5 class="mb-0 card-title font-weight-bold">{{ @$settings[$form] }}</h5>
                         </div>
                     </div>
                 </div>

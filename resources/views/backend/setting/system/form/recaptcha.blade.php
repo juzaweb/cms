@@ -1,6 +1,7 @@
 <form method="post" action="{{ route('admin.setting.save') }}" class="form-ajax">
+    <input type="hidden" name="form" value="recaptcha">
     @php
-
+    $google_recaptcha = get_config('google_recaptcha');
     @endphp
     <div class="form-group">
         <label class="col-form-label" for="google_recaptcha">@lang('app.google_recaptcha')</label>

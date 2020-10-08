@@ -2,9 +2,11 @@
 
 namespace Stream3s\Helpers;
 
+use GuzzleHttp\Client;
+
 class Stream3sApi {
 
-	public static $API_URL = 'http://localhost:8004/api';
+	public static $API_URL = 'https://stream.juzaweb.com/api';
 	
 	protected $session_id;
 	protected $is_premium;
@@ -105,14 +107,19 @@ class Stream3sApi {
     }
 	
 	private function _callApi($uri, $params = [], $method = 'GET') {
+	    $client = new Client();
 		if ($method === 'GET') {
-			$response = wp_remote_get(static::$API_URL . '/' . $uri, $params);
+			$response = $client->request($method, static::$API_URL . '/' . $uri, [
+			    'query' => $params
+            ]);
 		}
 		else {
-			$response = wp_remote_post(static::$API_URL . '/' . $uri, $params);
+            $response = $client->request($method, static::$API_URL . '/' . $uri, [
+                'form_params' => $params
+            ]);
 		}
 		
-		return json_decode(wp_remote_retrieve_body($response), true);
+		return json_decode($response->getBody(), true);
 	}
 	
 }

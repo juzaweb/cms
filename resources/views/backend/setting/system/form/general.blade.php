@@ -1,4 +1,5 @@
 <form method="post" action="{{ route('admin.setting.save') }}" class="form-ajax">
+    <input type="hidden" name="form" value="general">
     @php
         $registration = get_config('user_registration');
         $verification = get_config('user_verification');

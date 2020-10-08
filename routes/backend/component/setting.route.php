@@ -6,8 +6,6 @@ Route::group(['prefix' => 'setting/system'], function () {
     Route::get('/{form}', 'Backend\Setting\SystemSettingController@index')->name('admin.setting.form');
     
     Route::post('/save', 'Backend\Setting\SystemSettingController@save')->name('admin.setting.save');
-    
-    Route::get('/get-form', 'Backend\Setting\SystemSettingController@getSettingForm')->name('admin.setting.form');
 });
 
 Route::group(['prefix' => 'setting/email'], function () {

@@ -28,45 +28,20 @@ class SystemSettingController extends Controller
     }
     
     public function save(Request $request) {
-        $this->validateRequest([
-            'title' => 'required|string|max:300',
-            'description' => 'nullable|string|max:300',
-            'keywords' => 'nullable|string|max:300',
-            'logo' => 'required|string|max:300',
-            'icon' => 'required|string|max:300',
-            'banner' => 'nullable|string|max:300',
-            'user_registration' => 'required|in:0,1',
-            'user_verification' => 'required|in:0,1',
-            'google_recaptcha' => 'required|in:0,1',
-            'google_recaptcha_key' => 'required_if:google_recaptcha,1|max:300',
-            'google_recaptcha_secret' => 'required_if:google_recaptcha,1|max:300',
-            'player_watermark' => 'required|in:0,1',
-            'player_watermark_logo' => 'required_if:player_watermark,1',
-        ], $request, [
-            'title' => trans('app.home_title'),
-            'description' => trans('app.home_description'),
-            'keywords' => trans('app.keywords'),
-            'logo' => trans('app.logo'),
-            'icon' => trans('app.icon'),
-            'banner' => trans('app.banner'),
-            'user_registration' => trans('app.user_registration'),
-            'user_verification' => trans('app.user_e_mail_verification'),
-            'google_recaptcha' => trans('app.google_recaptcha'),
-            'google_recaptcha_key' => trans('app.google_recaptcha_key'),
-            'google_recaptcha_secret' => trans('app.google_recaptcha_secret'),
-            'player_watermark' => trans('app.player_watermark'),
-            'player_watermark_logo' => trans('app.player_watermark_logo'),
-        ]);
-        
         $configs = $request->only(Configs::getConfigs());
         foreach ($configs as $key => $config) {
             Configs::setConfig($key, $config);
         }
     
+        $form = $request->post('form');
+        if (empty($form)) {
+            $form = 'general';
+        }
+        
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.setting'),
+            'redirect' => route('admin.setting.form', [$form]),
         ]);
     }
     

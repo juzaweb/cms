@@ -1,4 +1,5 @@
 <form method="post" action="{{ route('admin.setting.save') }}" class="form-ajax">
+    <input type="hidden" name="form" value="player">
     @php
         $player_watermark = get_config('player_watermark');
     @endphp
