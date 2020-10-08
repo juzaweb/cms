@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoServers whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoServers whereOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoServers whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\Servers whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoServers whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \App\Models\Movie\Movies $movie
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Video\VideoFiles[] $video_files

@@ -15,11 +15,11 @@
         ],
         [
             'name' => trans('app.servers'),
-            'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
+            'url' => route('admin.movies.servers', [$page_type, $movie->id])
         ],
         [
             'name' => $server->name,
-            'url' => route('admin.movies.servers', ['movie_id' => $movie->id])
+            'url' => route('admin.movies.servers', [$page_type, $movie->id])
         ]
     ]) }}
 
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="btn-group">
-                                <a href="javascript:void(0)" class="btn btn-success add-new-video"><i class="fa fa-plus-circle"></i> @lang('app.add_video')</a>
+                                <a href="{{ route('admin.movies.servers.upload.create', [$page_type, $server->id]) }}" class="btn btn-success add-new-video"><i class="fa fa-plus-circle"></i> @lang('app.add_video')</a>
                                 <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                             </div>
                         </div>
@@ -48,7 +48,6 @@
             </div>
 
             <div class="card-body">
-                @include('backend.movie_upload.form_add')
 
                 <div class="row mb-3">
                     <div class="col-md-12">
@@ -111,8 +110,8 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.movies.servers.upload.getdata', ['server_id' => $server->id]) }}',
-            remove_url: '{{ route('admin.movies.servers.upload.remove', ['server_id' => $server->id]) }}',
+            url: '{{ route('admin.movies.servers.upload.getdata', [$page_type, $server->id]) }}',
+            remove_url: '{{ route('admin.movies.servers.upload.remove', [$page_type, $server->id]) }}',
         });
     </script>
 @endsection

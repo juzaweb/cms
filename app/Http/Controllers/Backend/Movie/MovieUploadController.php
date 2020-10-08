@@ -7,17 +7,16 @@ use App\Models\Video\VideoServers;
 use App\Models\Video\VideoFiles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 
 class MovieUploadController extends Controller
 {
     public function index($page_type, $server_id) {
         $server = VideoServers::where('id', '=', $server_id)->firstOrFail();
-        $movie = Movies::where('id', '=', $server->movie_id)->firstOrFail();
         
         return view('backend.movie_upload.index', [
             'server' => $server,
-            'movie' => $movie,
+            'movie' => $server->movie,
+            'page_type' => $page_type,
         ]);
     }
     
@@ -26,11 +25,12 @@ class MovieUploadController extends Controller
         $movie = Movies::where('id', '=', $server->movie_id)->firstOrFail();
         $model = VideoFiles::firstOrNew(['id' => $id]);
         
-        return view('backend.movie_upload.index', [
+        return view('backend.movie_upload.form', [
             'title' => $model->label ? $model->label : trans('app.add_new'),
             'server' => $server,
             'movie' => $movie,
             'model' => $model,
+            'page_type' => $page_type,
         ]);
     }
     
@@ -109,6 +109,7 @@ class MovieUploadController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
+            'redirect' => route('admin.movies.servers.upload', [$page_type, $server_id]),
         ]);
     }
     
@@ -125,28 +126,10 @@ class MovieUploadController extends Controller
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
             'redirect' => route('admin.movies.servers.upload', [
-                'server_id' => $server_id
+                $page_type,
+                $server_id
             ]),
         ]);
     }
     
-    public function getFile(Request $request) {
-        $query = VideoFiles::query();
-        $query->where('id', '=', $request->get('id'));
-        
-        if ($query->exists()) {
-            return $query->first([
-                'id',
-                'label',
-                'order',
-                'source',
-                'url',
-            ])->toJson();
-        }
-        
-        return json_encode([
-            'status' => 'error',
-            'message' => 'File not found',
-        ]);
-    }
 }

@@ -45,13 +45,16 @@ Route::group(['prefix' => '{type}/servers'], function () {
 Route::group(['prefix' => '{type}/servers/upload'], function () {
     Route::get('/{server_id}', 'Backend\Movie\MovieUploadController@index')->name('admin.movies.servers.upload')->where('server_id', '[0-9]+');
     
+    Route::get('/{server_id}/create', 'Backend\Movie\MovieUploadController@form')->name('admin.movies.servers.upload.create')->where('server_id', '[0-9]+');
+    
+    Route::get('/{server_id}/edit/{id}', 'Backend\Movie\MovieUploadController@form')->name('admin.movies.servers.upload.edit')->where('server_id', '[0-9]+')->where('id', '[0-9]+');
+    
     Route::get('/{server_id}/getdata', 'Backend\Movie\MovieUploadController@getData')->name('admin.movies.servers.upload.getdata')->where('server_id', '[0-9]+');
     
     Route::post('/{server_id}/save', 'Backend\Movie\MovieUploadController@save')->name('admin.movies.servers.upload.save')->where('server_id', '[0-9]+');
     
     Route::post('/{server_id}/remove', 'Backend\Movie\MovieUploadController@remove')->name('admin.movies.servers.upload.remove')->where('server_id', '[0-9]+');
     
-    Route::get('/get-file', 'Backend\Movie\MovieUploadController@getFile')->name('admin.movies.servers.upload.getfile');
 });
 
 Route::group(['prefix' => '{type}/servers/upload/subtitle/{file_id}'], function () {
