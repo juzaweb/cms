@@ -25,7 +25,7 @@ $(document).on("turbolinks:load", function() {
                 }).join(',');
 
                 // set the value of the desired input to image url
-                file_path = file_path.split('uploads/')[1];
+                file_path = file_path.split('storage/')[1];
                 target_input.val('').val(file_path).trigger('change');
 
                 // clear previous preview

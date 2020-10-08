@@ -298,7 +298,7 @@ var refreshFoldersAndItems = function (data) {
 var hideNavAndShowEditor = function (data) {
     $('#nav-buttons > ul').addClass('d-none');
     $('#content').html(data);
-    $('#pagination').removeClass('preserve_actions_space')
+    $('#pagination').removeClass('preserve_actions_space');
     clearSelected();
 }
 

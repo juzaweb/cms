@@ -13,6 +13,7 @@ class ItemsController extends LfmController
 {
     public function getItems()
     {
+        $file_type = $this->getType();
         $currentPage = self::getCurrentPageFromRequest();
         $perPage = 15;
         
@@ -22,11 +23,16 @@ class ItemsController extends LfmController
             ->orderBy('name', 'ASC')
             ->get(['id', 'name']);
         $files = Files::where('folder_id', '=', $working_dir)
-            ->where('type', '=', $this->getType())
+            ->where('type', '=', $file_type)
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
-    
-        $storage = \Storage::disk('public');
+        
+        if ($file_type == 1) {
+            $storage = \Storage::disk('public');
+        }
+        else {
+            $storage = \Storage::disk('uploads');
+        }
         $items = [];
         foreach ($folders as $folder) {
             $items[] = [

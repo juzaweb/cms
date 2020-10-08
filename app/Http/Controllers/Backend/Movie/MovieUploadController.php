@@ -60,8 +60,8 @@ class MovieUploadController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.movies.servers.upload.edit', [$row->id]);
-            $row->subtitle_url = route('admin.movies.servers.upload.subtitle', [$row->id]);
+            $row->edit_url = route('admin.movies.servers.upload.edit', [$page_type, $server_id, $row->id]);
+            $row->subtitle_url = route('admin.movies.servers.upload.subtitle', [$page_type, $row->id]);
             $row->url = substr($row->url, 0, 50);
         }
         
