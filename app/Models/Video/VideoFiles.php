@@ -64,7 +64,7 @@ class VideoFiles extends Model
     ];
     
     public function server() {
-        $this->belongsTo('App\Models\Video\VideoServers', 'server_id', 'id');
+        return $this->hasOne('App\Models\Video\VideoServers', 'id', 'server_id');
     }
     
     public function getFiles() {
@@ -90,6 +90,10 @@ class VideoFiles extends Model
         }
         
         return [];
+    }
+    
+    public function subtitles() {
+        return $this->hasMany('App\Models\Subtitle', 'file_id', 'id');
     }
     
     public function isSourceEmbed() {
@@ -128,6 +132,30 @@ class VideoFiles extends Model
     }
     
     protected function getVideoUrl($type) {
+        
+        if (!is_url($this->url)) {
+            return $this->getVideoUpload();
+        }
+        
+        $tracks = $this->subtitles()
+            ->where('status', '=', 1)
+            ->get([
+                \DB::raw("'captions' AS kind"),
+                'url AS file',
+                'label'
+            ])->toArray();
+        
+        if ($tracks) {
+            
+            return [
+                (object) [
+                    'file' => $this->url,
+                    'type' => $type,
+                    'tracks' => $tracks,
+                ]
+            ];
+        }
+        
         return [
             (object) [
                 'file' => $this->url,
@@ -241,7 +269,19 @@ class VideoFiles extends Model
                 if ($stream->isPremium()) {
                     $stream_link = $stream->addAndGetDirectLink($this->url);
                     if ($stream_link) {
+                        $tracks = $this->subtitles()
+                            ->where('status', '=', 1)
+                            ->get([
+                                \DB::raw("'captions' AS kind"),
+                                'url AS file',
+                                'label'
+                            ])->toArray();
+                        
                         foreach ($stream_link as $key => $item) {
+                            if ($tracks) {
+                                $item['tracks'] = $tracks;
+                            }
+                            
                             $files[] = (object) $item;
                         }
                     }

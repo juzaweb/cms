@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Movie;
 
+use App\Models\Movie\Movies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Video\VideoFiles;
@@ -10,20 +11,28 @@ use App\Models\Subtitle;
 class SubtitleController extends Controller
 {
     public function index($page_type, $file_id) {
-        VideoFiles::findOrFail($file_id);
+        $file = VideoFiles::findOrFail($file_id);
+        $movie = Movies::findOrFail($file->server->movie_id);
+        
         return view('backend.movie_upload.subtitle.index', [
             'page_type' => $page_type,
+            'file' => $file,
             'file_id' => $file_id,
+            'movie' => $movie,
         ]);
     }
     
     public function form($page_type, $file_id, $id = null) {
-        VideoFiles::findOrFail($file_id);
+        $file = VideoFiles::findOrFail($file_id);
+        $movie = Movies::findOrFail($file->server->movie_id);
+        
         $model = Subtitle::firstOrNew(['id' => $id]);
         return view('backend.movie_upload.subtitle.form', [
             'model' => $model,
             'page_type' => $page_type,
+            'file' => $file,
             'file_id' => $file_id,
+            'movie' => $movie,
             'title' => $model->label ? $model->label : trans('app.add_new')
         ]);
     }
@@ -60,7 +69,7 @@ class SubtitleController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.subtitle.edit', [$page_type, $file_id, $row->id]);
+            $row->edit_url = route('admin.movies.servers.upload.subtitle.edit', [$page_type, $file_id, $row->id]);
         }
         
         return response()->json([

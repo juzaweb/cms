@@ -4,14 +4,34 @@
 
 @section('content')
 
-    {{ Breadcrumbs::render('multiple_parent', [
+    @if($movie->tv_series == 0)
+        {{ Breadcrumbs::render('multiple_parent', [
+            [
+                'name' => trans('app.movies'),
+                'url' => route('admin.movies')
+            ],
+            [
+                'name' => $movie->name,
+                'url' => route('admin.movies.edit', ['id' => $movie->id])
+            ],
+            [
+                'name' => trans('app.servers'),
+                'url' => route('admin.movies.servers', [$page_type, $movie->id])
+            ],
+            [
+                'name' => $server->name,
+                'url' => route('admin.movies.servers', [$page_type, $movie->id])
+            ]
+        ], $model) }}
+    @else
+        {{ Breadcrumbs::render('multiple_parent', [
         [
-            'name' => trans('app.movies'),
-            'url' => route('admin.movies')
+            'name' => trans('app.tv_series'),
+            'url' => route('admin.tv_series')
         ],
         [
             'name' => $movie->name,
-            'url' => route('admin.movies.edit', ['id' => $movie->id])
+            'url' => route('admin.tv_series.edit', ['id' => $movie->id])
         ],
         [
             'name' => trans('app.servers'),
@@ -20,12 +40,9 @@
         [
             'name' => $server->name,
             'url' => route('admin.movies.servers', [$page_type, $movie->id])
-        ],
-        [
-            'name' => $title,
-            'url' => route('admin.movies.servers.upload', [$page_type, $server->id])
         ]
-    ]) }}
+    ], $model) }}
+    @endif
 
     <div class="cui__utils__content">
         <form method="post" action="{{ route('admin.movies.servers.upload.save', [$page_type, $server->id]) }}" class="form-ajax">

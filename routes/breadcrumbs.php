@@ -30,12 +30,15 @@ Breadcrumbs::for('multiple_parent', function ($trail, $parents, $model = null) {
     }
     
     if ($model) {
-        if ($model->name || $model->title) {
+        if ($model->name || $model->title || $model->label) {
             if ($model->name) {
                 $trail->push($model->name);
             }
-            else {
+            else if ($model->title) {
                 $trail->push($model->title);
+            }
+            else {
+                $trail->push($model->label);
             }
         }
         else {

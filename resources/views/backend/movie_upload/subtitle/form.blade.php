@@ -4,10 +4,45 @@
 
 @section('content')
 
-    {{ Breadcrumbs::render('manager', [
-            'name' => trans('app.subtitle'),
-            'url' => route('admin.movies.servers.upload.subtitle', [$page_type, $file_id])
+    @if($movie->tv_series == 0)
+        {{ Breadcrumbs::render('multiple_parent', [
+            [
+                'name' => trans('app.movies'),
+                'url' => route('admin.movies')
+            ],
+            [
+                'name' => $movie->name,
+                'url' => route('admin.movies.edit', ['id' => $movie->id])
+            ],
+            [
+                'name' => $file->server->name,
+                'url' => route('admin.movies.servers', [$page_type, $movie->id])
+            ],
+            [
+                'name' => $file->label,
+                'url' => route('admin.movies.servers.upload', [$page_type, $file->server->id])
+            ]
         ], $model) }}
+    @else
+        {{ Breadcrumbs::render('multiple_parent', [
+        [
+            'name' => trans('app.tv_series'),
+            'url' => route('admin.tv_series')
+        ],
+        [
+            'name' => $movie->name,
+            'url' => route('admin.tv_series.edit', ['id' => $movie->id])
+        ],
+        [
+            'name' => $file->server->name,
+            'url' => route('admin.movies.servers', [$page_type, $movie->id])
+        ],
+        [
+            'name' => $file->label,
+            'url' => route('admin.movies.servers.upload', [$page_type, $file->server->id])
+        ]
+    ], $model) }}
+    @endif
 
     <div class="cui__utils__content">
         <form method="post" action="{{ route('admin.movies.servers.upload.subtitle.save', [$page_type, $file_id]) }}" class="form-ajax">
@@ -45,7 +80,7 @@
 
                             <div class="form-group">
                                 <label class="col-form-label" for="order">@lang('app.order')</label>
-                                <input type="number" name="url" class="form-control" id="order" value="{{ $model->order ? $model->order : 1 }}" autocomplete="off" required>
+                                <input type="number" name="order" class="form-control" id="order" value="{{ $model->order ?? 1 }}" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
