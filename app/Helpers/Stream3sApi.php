@@ -69,7 +69,8 @@ class Stream3sApi {
         }
         
         $response = $this->_callApi('direct/' . $video_id, [
-            'session_id' => $this->session_id
+            'session_id' => $this->session_id,
+            'client_ip' => get_ip_client(),
         ]);
         
         if (empty($response['status'])) {
