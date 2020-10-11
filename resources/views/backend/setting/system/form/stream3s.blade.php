@@ -1,6 +1,7 @@
 <form method="post" action="{{ route('admin.setting.save') }}" class="form-ajax">
     @php
         $stream3s_use = get_config('stream3s_use');
+        $stream3s_link = get_config('stream3s_link');
     @endphp
     <input type="hidden" name="form" value="stream3s">
 
@@ -9,6 +10,14 @@
         <select name="stream3s_use" id="stream3s_use" class="form-control">
             <option value="1" @if($stream3s_use == 1) selected @endif>@lang('app.enabled')</option>
             <option value="0" @if($stream3s_use == 0) selected @endif>@lang('app.disabled')</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" for="stream3s_link">@lang('app.stream3s_link')</label>
+        <select name="stream3s_link" id="stream3s_link" class="form-control">
+            <option value="embed" @if($stream3s_link == 'embed') selected @endif>Embed</option>
+            <option value="direct" @if($stream3s_link == 'direct') selected @endif>Direct (Only Stream3s Premium Members)</option>
         </select>
     </div>
 

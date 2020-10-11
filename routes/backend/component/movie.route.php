@@ -15,17 +15,17 @@ Route::group(['prefix' => 'movies'], function () {
 });
 
 Route::group(['prefix' => 'tv-series'], function () {
-    Route::get('/', 'Backend\TVSeriesController@index')->name('admin.tv_series');
+    Route::get('/', 'Backend\Movie\TVSeriesController@index')->name('admin.tv_series');
     
-    Route::get('/getdata', 'Backend\TVSeriesController@getData')->name('admin.tv_series.getdata');
+    Route::get('/getdata', 'Backend\Movie\TVSeriesController@getData')->name('admin.tv_series.getdata');
     
-    Route::get('/create', 'Backend\TVSeriesController@form')->name('admin.tv_series.create');
+    Route::get('/create', 'Backend\Movie\TVSeriesController@form')->name('admin.tv_series.create');
     
-    Route::get('/edit/{id}', 'Backend\TVSeriesController@form')->name('admin.tv_series.edit')->where('id', '[0-9]+');
+    Route::get('/edit/{id}', 'Backend\Movie\TVSeriesController@form')->name('admin.tv_series.edit')->where('id', '[0-9]+');
     
-    Route::post('/save', 'Backend\TVSeriesController@save')->name('admin.tv_series.save');
+    Route::post('/save', 'Backend\Movie\TVSeriesController@save')->name('admin.tv_series.save');
     
-    Route::post('/remove', 'Backend\TVSeriesController@remove')->name('admin.tv_series.remove');
+    Route::post('/remove', 'Backend\Movie\TVSeriesController@remove')->name('admin.tv_series.remove');
 });
 
 Route::group(['prefix' => '{type}/servers'], function () {

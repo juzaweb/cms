@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 class Stream3sApi {
 
-	public static $API_URL = 'https://stream.juzaweb.com/api';
+	public static $API_URL = 'https://stream3s.com/api';
 	
 	protected $session_id;
 	protected $is_premium;

@@ -381,6 +381,7 @@ return [
   'add_subtitle' => 'Add subtitle',
   'player' => 'Player',
   'stream3s_stream' => 'Stream3s stream',
+  'stream3s_link' => 'Stream3s link',
   'client_id' => 'Client ID',
   'secret_key' => 'Secret key',
   'cannot_get_google_drive_id' => 'Cannot get google drive id.',

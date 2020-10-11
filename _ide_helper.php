@@ -14583,25 +14583,7 @@ namespace Illuminate\Support\Facades {
  
 }
 
-namespace Illuminate\Support { 
 
-    /**
-     * 
-     *
-     */ 
-    class Arr {
-         
-    }
-
-    /**
-     * 
-     *
-     */ 
-    class Str {
-         
-    }
- 
-}
 
 namespace DaveJamesMiller\Breadcrumbs\Facades { 
 

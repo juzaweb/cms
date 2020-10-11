@@ -21,7 +21,7 @@
                             <div class="float-right">
                             @if($model->id)
                                 <div class="btn-group mr-5">
-                                    <a href="{{ route('admin.movies.servers', ['movie_id' => $model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('app.upload_videos')</a>
+                                    <a href="{{ route('admin.movies.servers', ['tv-series', $model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('app.upload_videos')</a>
                                 </div>
                             @endif
 

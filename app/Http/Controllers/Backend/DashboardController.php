@@ -88,14 +88,14 @@ class DashboardController extends Controller
         $result[] = [trans('app.day'), trans('app.views')];
         for ($i=1;$i<=$max_day;$i++) {
             $day = $i < 10 ? '0'. $i : $i;
-            $result[] = [$day, $this->countViewByDay(date('Y-m-' . $day))];
+            $result[] = [(string) $day, (int) $this->countViewByDay(date('Y-m-' . $day))];
         }
         
         return response()->json($result);
     }
     
     protected function countViewByDay($day) {
-        return (int) MovieViews::where('day', '=', $day)
+        return MovieViews::where('day', '=', $day)
             ->sum('views');
     }
 }

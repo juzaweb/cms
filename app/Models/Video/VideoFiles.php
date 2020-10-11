@@ -92,6 +92,18 @@ class VideoFiles extends Model
         return [];
     }
     
+    public function isSourceEmbed() {
+        $embed_source = ['embed', 'youtube', 'vimeo'];
+        if (!get_config('stream3s_use') || get_config('stream3s_link') != 'direct') {
+            $embed_source[] = 'gdrive';
+        }
+        
+        if (in_array($this->source, $embed_source)) {
+            return true;
+        }
+        return false;
+    }
+    
     protected function getExtension() {
         $file_name = basename($this->url);
         return explode('.', $file_name)[count(explode('.', $file_name)) - 1];
@@ -198,8 +210,12 @@ class VideoFiles extends Model
     
     protected function getVideoGoogleDrive() {
         $stream3s_using = get_config('stream3s_use');
+        $stream3s_link = get_config('stream3s_link');
         if ($stream3s_using) {
-            return $this->getVideoGoogleDriveStream();
+            if ($stream3s_link == 'direct') {
+                return $this->getVideoGoogleDriveStream3sDirect();
+            }
+            return $this->getVideoGoogleDriveStream3sEmbed();
         }
         
         return $this->getVideoGoogleDriveEmbed();
@@ -214,33 +230,42 @@ class VideoFiles extends Model
         return $files;
     }
     
-    protected function getVideoGoogleDriveStream() {
+    protected function getVideoGoogleDriveStream3sDirect() {
         $client_id = get_config('stream3s_client_id');
         $secret_key = get_config('stream3s_secret_key');
+        $files = [];
         
         if ($client_id && $secret_key) {
             $stream = new Stream3sApi();
             if ($stream->login($client_id, $secret_key)) {
                 if ($stream->isPremium()) {
-                
                     $stream_link = $stream->addAndGetDirectLink($this->url);
                     if ($stream_link) {
                         foreach ($stream_link as $key => $item) {
                             $files[] = (object) $item;
                         }
                     }
-                
                 }
-                else {
-                
-                    $embed_link = $stream->addAndGetEmbedLink($this->url);
-                    if ($embed_link) {
-                        $files[] = (object) [
-                            'file' => $embed_link,
-                            'type' => 'mp4',
-                        ];
-                    }
-                    
+            }
+        }
+        
+        return $files;
+    }
+    
+    protected function getVideoGoogleDriveStream3sEmbed() {
+        $client_id = get_config('stream3s_client_id');
+        $secret_key = get_config('stream3s_secret_key');
+        $files = [];
+        
+        if ($client_id && $secret_key) {
+            $stream = new Stream3sApi();
+            if ($stream->login($client_id, $secret_key)) {
+                $embed_link = $stream->addAndGetEmbedLink($this->url);
+                if ($embed_link) {
+                    $files[] = (object) [
+                        'file' => $embed_link,
+                        'type' => 'mp4',
+                    ];
                 }
             }
         }
