@@ -26,13 +26,8 @@ class ItemsController extends LfmController
             ->where('type', '=', $file_type)
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
-        
-        if ($file_type == 1) {
-            $storage = \Storage::disk('public');
-        }
-        else {
-            $storage = \Storage::disk('uploads');
-        }
+    
+        $storage = \Storage::disk('public');
         $items = [];
         foreach ($folders as $folder) {
             $items[] = [

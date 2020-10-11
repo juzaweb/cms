@@ -33,7 +33,7 @@ class StreamController extends Controller
                     die();
                 }
             
-                if (\Storage::disk('uploads')->exists($file->path)) {
+                if (\Storage::disk('public')->exists($file->path)) {
                     $this->localFileStream($file);
                     die();
                 }
@@ -51,7 +51,7 @@ class StreamController extends Controller
     }
     
     protected function localFileStream($file) {
-        $file_path = \Storage::disk('uploads')->path($file->path);
+        $file_path = \Storage::disk('public')->path($file->path);
         $stream = new VideoStream($file_path);
         $stream->start();
     }
