@@ -10,20 +10,22 @@ use App\Models\DownloadLink;
 class MovieDownloadController extends Controller
 {
     public function index($page_type, $movie_id) {
-        Movies::findOrFail($movie_id);
+        $movie = Movies::findOrFail($movie_id);
         
         return view('backend.download.index', [
             'movie_id' => $movie_id,
+            'movie' => $movie,
             'page_type' => $page_type,
         ]);
     }
     
     public function form($page_type, $movie_id, $id = null) {
-        Movies::findOrFail($movie_id);
+        $movie = Movies::findOrFail($movie_id);
         $model = DownloadLink::firstOrNew(['id' => $id]);
         
         return view('backend.download.form', [
             'movie_id' => $movie_id,
+            'movie' => $movie,
             'page_type' => $page_type,
             'model' => $model,
             'title' => $model->lable ? $model->lable : trans('app.add_new'),
@@ -62,7 +64,7 @@ class MovieDownloadController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.movies.download.edit', [$page_type, 'id' => $row->id]);
+            $row->edit_url = route('admin.movies.download.edit', [$page_type, $movie_id, $row->id]);
         }
         
         return response()->json([
@@ -94,7 +96,7 @@ class MovieDownloadController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.movies.download', [$page_type]),
+            'redirect' => route('admin.movies.download', [$page_type, $movie_id]),
         ]);
     }
     

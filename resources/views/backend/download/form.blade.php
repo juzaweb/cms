@@ -4,10 +4,37 @@
 
 @section('content')
 
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('app.download_videos'),
-        'url' => route('admin.movies.download', [$page_type, $movie_id])
+    @if($movie->tv_series == 0)
+        {{ Breadcrumbs::render('multiple_parent', [
+            [
+                'name' => trans('app.movies'),
+                'url' => route('admin.movies')
+            ],
+            [
+                'name' => $movie->name,
+                'url' => route('admin.movies.edit', ['id' => $movie->id])
+            ],
+            [
+                'name' => trans('app.download_videos'),
+                'url' => route('admin.movies.download', [$page_type, $movie->id])
+            ]
+        ], $model) }}
+    @else
+        {{ Breadcrumbs::render('multiple_parent', [
+        [
+            'name' => trans('app.tv_series'),
+            'url' => route('admin.tv_series')
+        ],
+        [
+            'name' => $movie->name,
+            'url' => route('admin.tv_series.edit', ['id' => $movie->id])
+        ],
+        [
+            'name' => trans('app.download_videos'),
+            'url' => route('admin.movies.download', [$page_type, $movie->id])
+        ]
     ], $model) }}
+@endif
 
 <div class="cui__utils__content">
     <form method="post" action="{{ route('admin.movies.download.save', [$page_type, $movie_id]) }}" class="form-ajax">
@@ -41,11 +68,11 @@
                         <div class="form-group">
                             <label class="col-form-label" for="url">@lang('app.download_link')</label>
 
-                            <input type="text" name="label" class="form-control" id="url" value="{{ $model->url }}" autocomplete="off" required>
+                            <input type="text" name="url" class="form-control" id="url" value="{{ $model->url }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="order">@lang('app.download_link')</label>
+                            <label class="col-form-label" for="order">@lang('app.order')</label>
 
                             <input type="number" name="order" class="form-control" id="order" value="{{ $model->order ?? '1' }}" autocomplete="off" required>
                         </div>

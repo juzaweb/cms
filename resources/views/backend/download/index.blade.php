@@ -4,10 +4,37 @@
 
 @section('content')
 
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('app.download_videos'),
-        'url' => route('admin.movies.download', [$page_type, $movie_id])
+@if($movie->tv_series == 0)
+    {{ Breadcrumbs::render('multiple_parent', [
+        [
+            'name' => trans('app.movies'),
+            'url' => route('admin.movies')
+        ],
+        [
+            'name' => $movie->name,
+            'url' => route('admin.movies.edit', ['id' => $movie->id])
+        ],
+        [
+            'name' => trans('app.download_videos'),
+            'url' => route('admin.movies.download', [$page_type, $movie->id])
+        ]
     ]) }}
+@else
+    {{ Breadcrumbs::render('multiple_parent', [
+    [
+        'name' => trans('app.tv_series'),
+        'url' => route('admin.tv_series')
+    ],
+    [
+        'name' => $movie->name,
+        'url' => route('admin.tv_series.edit', ['id' => $movie->id])
+    ],
+    [
+        'name' => trans('app.download_videos'),
+        'url' => route('admin.movies.download', [$page_type, $movie->id])
+    ]
+]) }}
+@endif
 
 <div class="cui__utils__content">
     <div class="card">
@@ -57,7 +84,8 @@
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                            <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
+                            <th data-field="label" data-formatter="label_formatter">@lang('app.label')</th>
+                            <th data-width="50%" data-field="url">@lang('app.url')</th>
                             <th data-width="15%" data-field="created">@lang('app.created_at')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                         </tr>
@@ -70,7 +98,7 @@
 
     <script type="text/javascript">
 
-        function name_formatter(value, row, index) {
+        function label_formatter(value, row, index) {
             return '<a href="'+ row.edit_url +'">'+ value +'</a>';
         }
 

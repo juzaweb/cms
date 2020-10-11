@@ -11,3 +11,5 @@ Route::post('/watch/{slug}/rating', 'Frontend\RatingController@setRating')->name
 Route::post('/watch/player/{slug}/{vid}', 'Frontend\PlayController@getPlayer')->name('watch.player');
 
 Route::post('/watch/{slug}/comment', 'Frontend\CommentController@movieComment')->name('watch.comment');
+
+Route::get('/download/{link_id}', 'Frontend\WatchController@download')->name('watch.download');

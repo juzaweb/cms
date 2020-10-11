@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\DownloadLink;
 use App\Models\Video\VideoServers;
 use App\Models\Category\Genres;
 use App\Models\Movie\Movies;
@@ -18,11 +19,17 @@ class WatchController extends Controller
             ->whereIn('id', explode(',', $info->genres))
             ->first(['id', 'name', 'slug']);
         
+        $download_links = DownloadLink::where('movie_id', '=', $info->id)
+            ->where('status', '=', 1)
+            ->orderBy('order', 'ASC')
+            ->get();
+        
         return view('themes.mymo.watch.index', [
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,
             'banner' => $info->getPoster(),
+            'download_links' => $download_links,
             'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive mymothemes mymomovies mymo-corner-rounded',
             'related_movies' => $info->getRelatedMovies(8),
             'info' => $info,
@@ -34,6 +41,15 @@ class WatchController extends Controller
             'tags' => $info->getTags(),
             'servers' => $info->getServers(),
         ]);
+    }
+    
+    public function download($link_id) {
+        $download = DownloadLink::find($link_id);
+        if (empty($download) || $download->status != 1) {
+            return abort(404);
+        }
+        
+        return redirect()->to($download->url);
     }
     
     private function _getFileVideo($movie_id) {

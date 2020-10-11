@@ -261,6 +261,20 @@ a.watch-movie:hover {
     color: red;
 }
 
+.btn-primary.download-btn {
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 20px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-image: linear-gradient(to right,#009245,#d0c200,#00a8c5,#d9e021);
+    box-shadow: 0 4px 15px 0 rgba(83,176,57,.75);
+}
+
+
+
 @media screen and (min-width: 1024px){
     /*.hidemobile {
         display: block;
