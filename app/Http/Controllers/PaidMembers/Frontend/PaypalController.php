@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Client;
+namespace App\Http\Controllers\PaidMembers\Frontend;
 
 use App\Models\PaymentHistory;
 use App\Models\UserSubscription;

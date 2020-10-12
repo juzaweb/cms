@@ -30,17 +30,22 @@
             <div class="card-body">
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseName">@lang('app.name')</label>
+                            <label class="col-form-label" for="name">@lang('app.name')</label>
 
-                            <input type="text" name="name" class="form-control" id="baseName" value="{{ $model->name }}" autocomplete="off" required>
+                            <input type="text" name="name" class="form-control" id="name" value="{{ $model->name }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseContent">@lang('app.content')</label>
-                            <textarea class="form-control" name="content" id="baseContent" rows="6">{{ $model->content }}</textarea>
+                            <label class="col-form-label" for="days">@lang('app.days')</label>
+                            <select name="days" id="days" class="form-control"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="price">@lang('app.price')</label>
+                            <input type="text" name="price" class="form-control" id="price" value="{{ $model->days }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
@@ -51,22 +56,10 @@
                             </select>
                         </div>
 
-                        @include('backend.seo_form')
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="form-thumbnail text-center">
-                            <input id="thumbnail" type="hidden" name="thumbnail">
-                            <div id="holder">
-                                <img src="{{ $model->getThumbnail() }}" class="w-100">
-                            </div>
 
-                            <a href="javascript:void(0)" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-capitalize">
-                                <i class="fa fa-picture-o"></i> @lang('app.choose_image')
-                            </a>
-                        </div>
 
-                    </div>
                 </div>
 
                 <input type="hidden" name="id" value="{{ $model->id }}">

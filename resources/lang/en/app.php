@@ -386,6 +386,7 @@ return [
   'secret_key' => 'Secret key',
   'cannot_get_google_drive_id' => 'Cannot get google drive id.',
   'price' => 'Price',
+  'days' => 'Days',
   'package' => 'Package',
   'packages' => 'Packages',
 ];

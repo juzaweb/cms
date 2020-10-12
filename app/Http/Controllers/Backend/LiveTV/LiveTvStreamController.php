@@ -1,23 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\PaidMembers\Backend;
+namespace App\Http\Controllers\Backend\LiveTV;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\PaidMembers\Package;
+use App\Models\LiveTV\LiveTvStream;
 
-class PackageController extends Controller
+class LiveTvStreamController extends Controller
 {
     public function index() {
-        return view('paid-members.backend.package.index');
-    }
-    
-    public function form($id = null) {
-        $model = Package::firstOrNew(['id' => $id]);
-        return view('paid-members.backend.package.form', [
-            'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
-        ]);
+        return view('backend.genres.index');
     }
     
     public function getData(Request $request) {
@@ -29,13 +21,12 @@ class PackageController extends Controller
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Package::query();
+        $query = LiveTvStream::query();
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
                 $subquery->orWhere('name', 'like', '%'. $search .'%');
-                $subquery->orWhere('days', 'like', '%'. $search .'%');
-                $subquery->orWhere('price', 'like', '%'. $search .'%');
+                
             });
         }
         
@@ -51,7 +42,7 @@ class PackageController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.package.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.genres.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -60,25 +51,31 @@ class PackageController extends Controller
         ]);
     }
     
+    public function form($id = null) {
+        $model = LiveTvStream::firstOrNew(['id' => $id]);
+        return view('backend.genres.form', [
+            'model' => $model,
+            'title' => $model->name ?: trans('app.add_new')
+        ]);
+    }
+    
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250|unique:package,name',
-            'days' => 'required|integer',
-            'price' => 'required|float',
+            'name' => 'required|string|max:250|unique:genres,name,' . $request->post('id'),
             'status' => 'required|in:0,1',
         ], $request, [
             'name' => trans('app.name'),
             'status' => trans('app.status'),
         ]);
         
-        $model = Package::firstOrNew(['id' => $request->id]);
+        $model = LiveTvStream::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->save();
         
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.package'),
+            'redirect' => route('admin.genres'),
         ]);
     }
     
@@ -86,10 +83,10 @@ class PackageController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.package')
+            'ids' => trans('app.genres')
         ]);
         
-        Package::destroy($request->post('ids'));
+        LiveTvStream::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
