@@ -389,5 +389,6 @@ return [
   'days' => 'Days',
   'package' => 'Package',
   'packages' => 'Packages',
+  'paid_members' => 'Paid members',
 ];
 

@@ -81,6 +81,8 @@ class Configs extends Model
             'stream3s_link',
             'stream3s_client_id',
             'stream3s_secret_key',
+            'only_members_can_view',
+            'only_premium_can_view',
         ];
     }
     
