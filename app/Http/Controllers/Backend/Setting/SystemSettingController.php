@@ -30,7 +30,9 @@ class SystemSettingController extends Controller
     public function save(Request $request) {
         $configs = $request->only(Configs::getConfigs());
         foreach ($configs as $key => $config) {
-            Configs::setConfig($key, $config);
+            if ($request->has($key)) {
+                Configs::setConfig($key, $config);
+            }
         }
     
         $form = $request->post('form');
