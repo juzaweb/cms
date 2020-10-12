@@ -29,9 +29,17 @@ class UpdateController extends Controller
     
     private function _countMigrations()
     {
-        $migrations = glob(database_path().DIRECTORY_SEPARATOR.'migrations'.DIRECTORY_SEPARATOR.'*.php');
-        //$migrations = str_replace('.php', '', $migrations);
-        return count($migrations);
+        $mainPath = database_path('migrations');
+        $directories = glob($mainPath . '/*' , GLOB_ONLYDIR);
+        $paths = array_merge([$mainPath], $directories);
+        $total = 0;
+        
+        foreach ($paths as $path) {
+            $migrations = glob($path . DIRECTORY_SEPARATOR . '*.php');
+            $total += count($migrations);
+        }
+        
+        return $total;
     }
     
     private function _countExecutedMigrations()
