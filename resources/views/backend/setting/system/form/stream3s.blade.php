@@ -29,7 +29,7 @@
     <div class="form-group">
         <label class="col-form-label" for="stream3s_secret_key">@lang('app.secret_key')</label>
 
-        <input type="text" name="stream3s_secret_key" id="stream3s_secret_key" class="form-control" value="{{ get_config('stream3s_secret_key') }}" autocomplete="off">
+        <input type="text" name="stream3s_secret_key" id="stream3s_secret_key" class="form-control" autocomplete="off">
     </div>
 
     <div class="row">
