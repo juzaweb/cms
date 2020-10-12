@@ -90,7 +90,7 @@ class Stream3sApi {
             'session_id' => $this->session_id,
             'video_url' => $video_url,
             'client_ip' => get_ip_client(),
-        ]);
+        ], 'POST');
         
         if (empty($response['status'])) {
             $this->errors[] = $response['data']['message'];

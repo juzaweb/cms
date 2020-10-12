@@ -285,6 +285,9 @@ class VideoFiles extends Model
                             $files[] = (object) $item;
                         }
                     }
+                    else {
+                        \Log::error('Get file stream '. $this->id .': ' . json_encode($stream->getErrors()));
+                    }
                 }
             }
         }
