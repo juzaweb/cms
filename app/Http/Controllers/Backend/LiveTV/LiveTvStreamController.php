@@ -9,7 +9,15 @@ use App\Models\LiveTV\LiveTvStream;
 class LiveTvStreamController extends Controller
 {
     public function index() {
-        return view('backend.genres.index');
+        return view('backend.live-tv-stream.index');
+    }
+    
+    public function form($id = null) {
+        $model = LiveTvStream::firstOrNew(['id' => $id]);
+        return view('backend.live-tv-stream.form', [
+            'model' => $model,
+            'title' => $model->name ?: trans('app.add_new')
+        ]);
     }
     
     public function getData(Request $request) {
@@ -48,14 +56,6 @@ class LiveTvStreamController extends Controller
         return response()->json([
             'total' => $count,
             'rows' => $rows
-        ]);
-    }
-    
-    public function form($id = null) {
-        $model = LiveTvStream::firstOrNew(['id' => $id]);
-        return view('backend.genres.form', [
-            'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
         ]);
     }
     
