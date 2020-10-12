@@ -50,6 +50,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLanguage($value)
  * @property string|null $verification_token
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereVerificationToken($value)
+ * @property int|null $package_id
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePackageId($value)
  */
 class User extends Authenticatable
 {

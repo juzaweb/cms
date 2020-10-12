@@ -50,6 +50,9 @@ use Stream3s\Helpers\Stream3sApi;
  * @mixin \Eloquent
  * @property int $enable_remote
  * @method static \Illuminate\Database\Eloquent\Builder|VideoFiles whereEnableRemote($value)
+ * @property-read \App\Models\Video\VideoServers|null $server
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Subtitle[] $subtitles
+ * @property-read int|null $subtitles_count
  */
 class VideoFiles extends Model
 {

@@ -5,8 +5,8 @@
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.movies'),
-        'url' => route('admin.movies')
+        'name' => trans('app.live_tv'),
+        'url' => route('admin.live-tv')
     ]) }}
 
 <div class="cui__utils__content">
@@ -14,7 +14,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.movies')</h5>
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.live_tv')</h5>
                 </div>
 
                 <div class="col-md-6">
@@ -24,7 +24,7 @@
                         </div>
 
                         <div class="btn-group">
-                            <a href="{{ route('admin.movies.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <a href="{{ route('admin.live-tv.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                             <button class="btn btn-danger" type="button" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
@@ -117,8 +117,8 @@
     }
 
     var table = new LoadBootstrapTable({
-        url: '{{ route('admin.movies.getdata') }}',
-        remove_url: '{{ route('admin.movies.remove') }}',
+        url: '{{ route('admin.live-tv.getdata') }}',
+        remove_url: '{{ route('admin.live-tv.remove') }}',
     });
 </script>
 

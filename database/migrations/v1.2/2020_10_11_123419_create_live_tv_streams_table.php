@@ -13,6 +13,7 @@ class CreateLiveTvStreamsTable extends Migration
             $table->string('label');
             $table->string('from');
             $table->text('url');
+            $table->integer('order')->default(1);
             $table->bigInteger('live_tv_id')->index();
             $table->timestamps();
         });

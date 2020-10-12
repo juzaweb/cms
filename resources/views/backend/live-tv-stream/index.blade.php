@@ -1,12 +1,12 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.genres'))
+@section('title', trans('app.stream'))
 
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
         'name' => trans('app.stream'),
-        'url' => route('admin.genres')
+        'url' => route('admin.live-tv.stream')
     ]) }}
 
 <div class="cui__utils__content">
@@ -19,7 +19,7 @@
 
                 <div class="col-md-6">
                     <div class="btn-group float-right">
-                        <a href="{{ route('admin.genres.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                        <a href="{{ route('admin.live-tv.stream.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
                         <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                     </div>
                 </div>
@@ -87,8 +87,8 @@
         }
 
         var table = new LoadBootstrapTable({
-            url: '{{ route('admin.genres.getdata') }}',
-            remove_url: '{{ route('admin.genres.remove') }}',
+            url: '{{ route('admin.live-tv.stream.getdata') }}',
+            remove_url: '{{ route('admin.live-tv.stream.remove') }}',
         });
     </script>
 @endsection
