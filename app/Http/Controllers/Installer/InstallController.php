@@ -175,6 +175,8 @@ class InstallController extends Controller
     }
     
     private function _createInstalled() {
+        \Artisan::call('storage:link');
+        
         return file_put_contents(storage_path('installed'), 'Installed');
     }
 }
