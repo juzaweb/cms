@@ -51,7 +51,7 @@ class LiveTvCategoryController extends Controller
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.genres.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.live-tv.category.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -62,7 +62,7 @@ class LiveTvCategoryController extends Controller
     
     public function save(Request $request) {
         $this->validateRequest([
-            'name' => 'required|string|max:250|unique:genres,name,' . $request->post('id'),
+            'name' => 'required|string|max:250|unique:live_tv_categories,name,' . $request->post('id'),
             'description' => 'nullable|string|max:300',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
@@ -72,9 +72,11 @@ class LiveTvCategoryController extends Controller
             'status' => trans('app.status'),
             'thumbnail' => trans('app.thumbnail'),
         ]);
-        
+    
+        $id = $request->post('id');
         $addtype = $request->post('addtype');
-        $model = LiveTvCategory::firstOrNew(['id' => $request->post('id')]);
+        
+        $model = LiveTvCategory::firstOrNew(['id' => $id]);
         $model->fill($request->all());
         $model->save();
         
@@ -85,7 +87,30 @@ class LiveTvCategoryController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.genres'),
+            'redirect' => route('admin.live-tv.category'),
+        ]);
+    }
+    
+    public function publish(Request $request) {
+        $this->validateRequest([
+            'ids' => 'required',
+            'status' => 'required',
+        ], $request, [
+            'ids' => trans('app.live_tv_categories'),
+            'status' => trans('app.status'),
+        ]);
+        
+        $ids = $request->post('ids');
+        $status = $request->post('status');
+    
+        LiveTvCategory::whereIn('id', $ids)
+            ->update([
+                'status' => $status,
+            ]);
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('app.updated_successfully'),
         ]);
     }
     
@@ -93,10 +118,11 @@ class LiveTvCategoryController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.genres')
+            'ids' => trans('app.live_tv_categories')
         ]);
-        
-        LiveTvCategory::destroy($request->post('ids'));
+    
+        $ids = $request->post('ids');
+        LiveTvCategory::destroy($ids);
         
         return response()->json([
             'status' => 'success',

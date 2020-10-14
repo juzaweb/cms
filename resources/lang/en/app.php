@@ -389,6 +389,7 @@ return [
   'live_tv' => 'Live TV',
   'stream' => 'Stream',
   'add_stream' => 'Add stream',
+    'live_tv_categories' => 'Live TV Categories',
   'price' => 'Price',
   'days' => 'Days',
   'package' => 'Package',

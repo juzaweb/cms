@@ -99,8 +99,10 @@ class LiveTvController extends Controller
     public function publish(Request $request) {
         $this->validateRequest([
             'ids' => 'required',
+            'status' => 'required',
         ], $request, [
-            'ids' => trans('app.live_tv')
+            'ids' => trans('app.live_tv'),
+            'status' => trans('app.status'),
         ]);
     
         $ids = $request->post('ids');

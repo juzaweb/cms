@@ -4,6 +4,7 @@ namespace App\Models\LiveTV;
 
 use App\Traits\UseChangeBy;
 use App\Traits\UseMetaSeo;
+use App\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -48,8 +49,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LiveTv extends Model
 {
-    use UseChangeBy, UseMetaSeo;
+    use UseChangeBy, UseMetaSeo, UseThumbnail;
     
+    protected $resize = '185x250';
     protected $table = 'live_tvs';
     protected $fillable = [
         'name',
@@ -57,4 +59,6 @@ class LiveTv extends Model
         'status',
         'category_id',
     ];
+    
+    
 }
