@@ -38,8 +38,18 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="label">@lang('app.label')</label>
-                            <input type="text" name="label" class="form-control" id="label" value="{{ $model->label }}" autocomplete="off" required>
+                            <label class="col-form-label" for="from">@lang('app.from')</label>
+                            <select name="from" id="from" class="form-control"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="url">@lang('app.url')</label>
+                            <input type="text" name="url" class="form-control" id="url" value="{{ $model->url }}" autocomplete="off" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label" for="order">@lang('app.order')</label>
+                            <input type="text" name="order" class="form-control" id="order" value="{{ $model->order ?? 1 }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
@@ -51,8 +61,6 @@
                         </div>
 
                     </div>
-
-
 
                 </div>
 

@@ -388,6 +388,7 @@ return [
   'cannot_get_google_drive_id' => 'Cannot get google drive id.',
   'live_tv' => 'Live TV',
   'stream' => 'Stream',
+  'from' => 'From',
   'add_stream' => 'Add stream',
     'live_tv_categories' => 'Live TV Categories',
   'price' => 'Price',
