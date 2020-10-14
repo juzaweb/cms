@@ -11,6 +11,8 @@ Route::group(['prefix' => 'live-tv'], function () {
     
     Route::post('/save', 'Backend\LiveTV\LiveTvController@save')->name('admin.live-tv.save');
     
+    Route::post('/publish', 'Backend\LiveTV\LiveTvController@publish')->name('admin.live-tv.publish');
+    
     Route::post('/remove', 'Backend\LiveTV\LiveTvController@remove')->name('admin.live-tv.remove');
 });
 
@@ -24,6 +26,8 @@ Route::group(['prefix' => 'live-tv-categories'], function () {
     Route::get('/edit/{id}', 'Backend\LiveTV\LiveTvCategoryController@form')->name('admin.live-tv.category.edit')->where('id', '[0-9]+');
     
     Route::post('/save', 'Backend\LiveTV\LiveTvCategoryController@save')->name('admin.live-tv.category.save');
+    
+    Route::post('/publish', 'Backend\LiveTV\LiveTvCategoryController@publish')->name('admin.live-tv.category.publish');
     
     Route::post('/remove', 'Backend\LiveTV\LiveTvCategoryController@remove')->name('admin.live-tv.category.remove');
 });

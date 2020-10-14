@@ -13,6 +13,15 @@ class LiveTvController extends Controller
         return view('backend.live-tv.index');
     }
     
+    public function form($id = null) {
+        $model = LiveTv::firstOrNew(['id' => $id]);
+        
+        return view('backend.live-tv.form', [
+            'model' => $model,
+            'title' => $model->name ?: trans('app.add_new'),
+        ]);
+    }
+    
     public function getData(Request $request) {
         $search = $request->get('search');
         $status = $request->get('status');
@@ -46,23 +55,14 @@ class LiveTvController extends Controller
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i Y-m-d');
             $row->description = Str::words(strip_tags($row->description), 15);
-            $row->edit_url = route('admin.movies.edit', [$row->id]);
+            $row->edit_url = route('admin.live-tv.edit', [$row->id]);
             $row->preview_url = route('watch', [$row->slug]);
-            $row->upload_url = route('admin.movies.servers', ['movies', $row->id]);
+            $row->stream_url = route('admin.live-tv.stream', [$row->id]);
         }
         
         return response()->json([
             'total' => $count,
             'rows' => $rows
-        ]);
-    }
-    
-    public function form($id = null) {
-        $model = LiveTv::firstOrNew(['id' => $id]);
-        
-        return view('backend.live-tv.form', [
-            'model' => $model,
-            'title' => $model->name ?: trans('app.add_new'),
         ]);
     }
     
@@ -72,17 +72,21 @@ class LiveTvController extends Controller
             'description' => 'nullable',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
-            
+            'category_id' => 'nullable|exists:live_tv_categories,id',
         ], $request, [
             'name' => trans('app.name'),
             'description' => trans('app.description'),
             'status' => trans('app.status'),
             'thumbnail' => trans('app.thumbnail'),
-            
+            'category_id' => trans('app.category'),
         ]);
+    
+        $tags = $request->post('tags', []);
+        $tags = implode(',', $tags);
         
         $model = LiveTv::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
+        $model->setAttribute('tags', $tags);
         $model->save();
         
         return response()->json([
@@ -92,14 +96,36 @@ class LiveTvController extends Controller
         ]);
     }
     
+    public function publish(Request $request) {
+        $this->validateRequest([
+            'ids' => 'required',
+        ], $request, [
+            'ids' => trans('app.live_tv')
+        ]);
+    
+        $ids = $request->post('ids');
+        $status = $request->post('status');
+        
+        LiveTv::whereIn('id', $ids)
+            ->update([
+                'status' => $status,
+            ]);
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('app.updated_successfully'),
+        ]);
+    }
+    
     public function remove(Request $request) {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
             'ids' => trans('app.movies')
         ]);
-        
-        LiveTv::destroy($request->post('ids'));
+    
+        $ids = $request->post('ids');
+        LiveTv::destroy($ids);
         
         return response()->json([
             'status' => 'success',

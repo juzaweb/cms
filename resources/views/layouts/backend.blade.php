@@ -27,6 +27,7 @@
             'upload_videos': '@lang('app.upload_videos')',
             'download_videos': '@lang('app.download_videos')',
             'add_subtitle': '@lang('app.add_subtitle')',
+            'stream': '@lang('app.stream')',
         }
     </script>
 

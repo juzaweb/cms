@@ -19,13 +19,16 @@
 
                 <div class="col-md-6">
                     <div class="float-right">
+
                         <div class="btn-group">
-                            <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#tmdb-modal"><i class="fa fa-plus"></i> @lang('app.add_from_tmdb')</a>
+                            <button type="button" class="btn btn-primary status-button" data-status="1"><i class="fa fa-check"></i> @lang('app.enabled')</button>
+
+                            <button type="button" class="btn btn-warning status-button" data-status="0"><i class="fa fa-times"></i> @lang('app.disabled')</button>
                         </div>
 
                         <div class="btn-group">
                             <a href="{{ route('admin.live-tv.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
-                            <button class="btn btn-danger" type="button" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                            <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
                         </div>
                     </div>
                 </div>
@@ -39,23 +42,18 @@
                     <form action="" method="get" class="form-inline" id="form-search">
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputSearch" class="sr-only">@lang('app.search')</label>
-                            <input name="search" type="text" id="inputSearch" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
+                            <label for="search" class="sr-only">@lang('app.search')</label>
+                            <input name="search" type="text" id="search" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
                         </div>
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="genre" class="sr-only">@lang('app.genre')</label>
-                            <select name="genre" id="genre" class="form-control load-genres" data-placeholder="--- @lang('app.genre') ---"></select>
+                            <label for="category" class="sr-only">@lang('app.category')</label>
+                            <select name="category" id="category" class="form-control load-live-tv-category" data-placeholder="--- @lang('app.category') ---"></select>
                         </div>
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="country" class="sr-only">@lang('app.country')</label>
-                            <select name="country" id="country" class="form-control load-countries" data-placeholder="--- @lang('app.country') ---"></select>
-                        </div>
-
-                        <div class="form-group mb-2 mr-1">
-                            <label for="inputStatus" class="sr-only">@lang('app.status')</label>
-                            <select name="status" id="inputStatus" class="form-control">
+                            <label for="status" class="sr-only">@lang('app.status')</label>
+                            <select name="status" id="status" class="form-control">
                                 <option value="">--- @lang('app.status') ---</option>
                                 <option value="1">@lang('app.enabled')</option>
                                 <option value="0">@lang('app.disabled')</option>
@@ -108,8 +106,7 @@
             '            '+ langs.options +'\n' +
             '          </button>\n' +
             '          <div class="dropdown-menu" role="menu" style="">\n' +
-            '            <a href="'+ row.upload_url +'" class="dropdown-item">'+ langs.upload_videos +'</a>\n' +
-            '            <a href="'+ row.download_url +'" class="dropdown-item">'+ langs.download_videos +'</a>\n' +
+            '            <a href="'+ row.stream_url +'" class="dropdown-item">'+ langs.stream +'</a>\n' +
             '            <a href="'+ row.preview_url +'" target="_blank" class="dropdown-item">'+ langs.preview +'</a>\n' +
             '          </div>\n' +
             '        </div>';
@@ -119,8 +116,8 @@
     var table = new LoadBootstrapTable({
         url: '{{ route('admin.live-tv.getdata') }}',
         remove_url: '{{ route('admin.live-tv.remove') }}',
+        status_url: '{{ route('admin.live-tv.publish') }}',
     });
 </script>
 
-@include('backend.movies.form_tmdb')
 @endsection

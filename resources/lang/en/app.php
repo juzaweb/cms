@@ -43,6 +43,7 @@ return [
   'sync_successfully' => 'Sync successfully.',
   'change_password_successfully' => 'Change password successfully.',
   'send_email_successfully' => 'Send email successfully.',
+  'updated_successfully' => 'Updated successfully.',
   'updated_status_successfully' => 'Updated status successfully.',
   'are_you_sure_delete_items' => 'Are you sure you want to delete the selected items?',
   'approve' => 'Approve',

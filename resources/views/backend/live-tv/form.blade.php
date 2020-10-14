@@ -21,7 +21,7 @@
                             <div class="float-right">
                                 @if($model->id)
                                 <div class="btn-group mr-5">
-                                    <a href="{{ route('admin.live-tv.servers', ['movies', $model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('app.add_stream')</a>
+                                    <a href="{{ route('admin.live-tv.stream', [$model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('app.add_stream')</a>
                                 </div>
                                 @endif
 
@@ -93,25 +93,17 @@
 
                             <hr>
                             <div class="form-group">
-                                <label class="col-form-label" for="select-genres">@lang('app.genres') <span><a href="javascript:void(0)" class="add-new-genres float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_genres')</a></span></label>
+                                <label class="col-form-label">@lang('app.category') <span><a href="javascript:void(0)" class="add-new-category float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</a></span></label>
 
-                                <select id="select-genres" class="form-control load-genres select-genres" data-placeholder="--- @lang('app.genres') ---" data-explodes="genres-explode"></select>
+                                <select name="category_id" id="category_id" class="form-control load-live-tv-category" data-placeholder="--- @lang('app.category') ---"></select>
 
-                                <div class="show-genres mt-2">
-                                    @foreach($genres as $item)
-                                        <span class="tag m-1">{{ $item->name }} <a href="javascript:void(0)" class="text-danger ml-1 remove-tag-item"><i class="fa fa-times-circle"></i></a>
-              <input type="hidden" name="genres[]" class="genres-explode" value="{{ $item->id }}">
-            </span>
-                                    @endforeach
-                                </div>
-
-                                <div class="form-add-genres box-hidden">
+                                <div class="form-add-live-tv-category box-hidden">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="tagsName">@lang('app.genre')</label>
-                                        <input type="text" class="form-control" id="genresName" autocomplete="off">
+                                        <label class="col-form-label" for="categoryName">@lang('app.category')</label>
+                                        <input type="text" class="form-control" id="categoryName" autocomplete="off">
                                     </div>
 
-                                    <button type="button" class="btn btn-primary add-genres"><i class="fa fa-plus-circle"></i> @lang('app.add_genre')</button>
+                                    <button type="button" class="btn btn-primary add-live-tv-category"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</button>
                                 </div>
                             </div>
 

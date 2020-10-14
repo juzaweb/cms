@@ -20,6 +20,7 @@ class CreateLiveTvsTable extends Migration
             $table->string('meta_title', 70)->nullable();
             $table->string('meta_description', 320)->nullable();
             $table->string('keywords', 320)->nullable();
+            $table->text('tags')->nullable();
             $table->bigInteger('views')->default(0);
             $table->bigInteger('created_by')->index();
             $table->bigInteger('updated_by')->index();
