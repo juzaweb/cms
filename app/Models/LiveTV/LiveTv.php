@@ -60,5 +60,7 @@ class LiveTv extends Model
         'category_id',
     ];
     
-    
+    public function getPoster() {
+        return image_url($this->poster);
+    }
 }

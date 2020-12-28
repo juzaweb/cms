@@ -1,7 +1,7 @@
 <?php
 
 Route::group(['prefix' => 'packages'], function () {
-    Route::get('/', 'PaidMembers\Backend\PackageController@index')->name('admin.pages');
+    Route::get('/', 'PaidMembers\Backend\PackageController@index')->name('admin.package');
     
     Route::get('/getdata', 'PaidMembers\Backend\PackageController@getData')->name('admin.package.getdata');
     

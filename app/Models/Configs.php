@@ -27,7 +27,8 @@ class Configs extends Model
     protected $table = 'configs';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name'
+        'code',
+        'value'
     ];
     
     public static function getConfigs() {
@@ -86,14 +87,13 @@ class Configs extends Model
         ];
     }
     
-    public static function getConfig(string $key) {
-        try {
-            $config = Configs::firstOrNew(['code' => $key]);
+    public static function getConfig(string $key, $default = null) {
+        $config = Configs::first(['code' => $key]);
+        if ($config) {
             return $config->value;
         }
-        catch (\Exception $exception) {
-            return '';
-        }
+    
+        return $default;
     }
     
     public static function setConfig(string $key, string $value = null) {
@@ -103,11 +103,4 @@ class Configs extends Model
         return $config->save();
     }
     
-    private static function setEnv(string $key, string $value) {
-        $value = preg_replace('/\s+/', '', $value);
-        $key = strtoupper($key);
-        $env = file_get_contents(base_path('.env'));
-        $env = str_replace("$key=" . env($key), "$key=" . $value, $env);
-        return file_put_contents(base_path('.env'), $env);
-    }
 }
