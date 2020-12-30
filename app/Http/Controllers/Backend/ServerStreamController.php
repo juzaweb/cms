@@ -87,9 +87,9 @@ class ServerStreamController extends Controller
     public function publish(Request $request) {
         $this->validateRequest([
             'ids' => 'required',
-            'status' => 'required',
+            'status' => 'required|in:0,1',
         ], $request, [
-            'ids' => trans('app.live_tv_categories'),
+            'ids' => trans('app.server_stream'),
             'status' => trans('app.status'),
         ]);
         
@@ -111,7 +111,7 @@ class ServerStreamController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.live_tv_categories')
+            'ids' => trans('app.server_stream')
         ]);
         
         $ids = $request->post('ids');
