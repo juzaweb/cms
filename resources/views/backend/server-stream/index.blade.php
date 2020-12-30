@@ -70,7 +70,7 @@
                             <th data-field="key" data-width="10%">@lang('app.key')</th>
                             <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
                             <th data-field="priority" data-width="5%" data-align="center">@lang('app.priority')</th>
-                            <th data-field="base_url" data-width="5%" data-align="center">@lang('app.base_url')</th>
+                            <th data-field="base_url" data-width="15%">@lang('app.base_url')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                         </tr>
                     </thead>

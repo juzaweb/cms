@@ -40,6 +40,25 @@ class PlayController extends Controller
         $movie = Movies::where('slug', '=', $slug)
             ->where('status', '=', 1)
             ->firstOrFail();
+    
+        if (get_config('only_member_view') == 1) {
+            if (!\Auth::check()) {
+                $file = new VideoFiles();
+                $file->source = 'embed';
+                $files[] = (object) ['file' => route('watch.no-view')];
+                
+                return response()->json([
+                    'data' => [
+                        'status' => true,
+                        'sources' => view('themes.mymo.data.player_script', [
+                            'movie' => $movie,
+                            'file' => $file,
+                            'files' => $files,
+                        ])->render(),
+                    ]
+                ]);
+            }
+        }
         
         $file = VideoFiles::find($vid);
         if ($file) {

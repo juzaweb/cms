@@ -3,6 +3,7 @@
     @php
         $registration = get_config('user_registration');
         $verification = get_config('user_verification');
+        $only_member_view = get_config('only_member_view');
     @endphp
 
     <h5>@lang('app.general')</h5>
@@ -74,6 +75,14 @@
         <select name="user_verification" id="user_verification" class="form-control">
             <option value="1" @if($verification == 1) selected @endif>@lang('app.enabled')</option>
             <option value="0" @if($verification == 0) selected @endif>@lang('app.disabled')</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" for="only_member_view">Require Login To Watch Video</label>
+        <select name="only_member_view" id="only_member_view" class="form-control">
+            <option value="1" @if($only_member_view == 1) selected @endif>@lang('app.enabled')</option>
+            <option value="0" @if($only_member_view == 0) selected @endif>@lang('app.disabled')</option>
         </select>
     </div>
 
