@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|LiveTvStream whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LiveTvStream whereUrl($value)
  * @mixin \Eloquent
+ * @property int $order
+ * @method static \Illuminate\Database\Eloquent\Builder|LiveTvStream whereOrder($value)
  */
 class LiveTvStream extends Model
 {

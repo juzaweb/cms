@@ -83,11 +83,14 @@ class Configs extends Model
             'stream3s_client_id',
             'stream3s_secret_key',
             'only_member_view',
+            'block_ip_status',
+            'block_ip_type',
+            'block_ip_list',
         ];
     }
     
     public static function getConfig(string $key, $default = null) {
-        $config = Configs::first(['code' => $key]);
+        $config = Configs::where('code', '=', $key)->first(['value']);
         if ($config) {
             return $config->value;
         }

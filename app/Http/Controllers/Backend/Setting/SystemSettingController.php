@@ -47,11 +47,38 @@ class SystemSettingController extends Controller
         ]);
     }
     
+    public function saveBlockIp(Request $request) {
+        $this->validateRequest([
+            'block_ip_status' => 'required',
+            'block_ip_type' => 'required',
+            'block_ip_list' => 'required',
+        ], $request, [
+            'block_ip_status' => trans('app.block_ip_status'),
+            'block_ip_type' => trans('app.block_ip_type'),
+            'block_ip_list' => trans('app.block_ip_list'),
+        ]);
+        
+        $block_ip_status = $request->post('block_ip_status');
+        $block_ip_type = $request->post('block_ip_type');
+        $block_ip_list = $request->post('block_ip_list');
+        
+        Configs::setConfig('block_ip_status', $block_ip_status);
+        Configs::setConfig('block_ip_type', $block_ip_type);
+        Configs::setConfig('block_ip_list', implode(',', $block_ip_list));
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('app.saved_successfully'),
+            'redirect' => route('admin.setting.form', ['blockip']),
+        ]);
+    }
+    
     protected function settingList() {
         return [
             'general' => trans('app.site_info'),
             'recaptcha' => trans('app.google_recaptcha'),
             'player' => trans('app.player'),
+            'blockip' => trans('app.block_ip'),
             'paid-members' => trans('app.paid_members'),
         ];
     }

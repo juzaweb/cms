@@ -2,10 +2,10 @@
 
 namespace App\Models\LiveTV;
 
+use Illuminate\Database\Eloquent\Model;
 use App\Traits\UseChangeBy;
 use App\Traits\UseMetaSeo;
 use App\Traits\UseThumbnail;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\LiveTV\LiveTv
@@ -46,6 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|LiveTv whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LiveTv whereViews($value)
  * @mixin \Eloquent
+ * @property string|null $tags
+ * @method static \Illuminate\Database\Eloquent\Builder|LiveTv whereTags($value)
  */
 class LiveTv extends Model
 {

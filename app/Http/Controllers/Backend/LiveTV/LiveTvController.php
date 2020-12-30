@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend\LiveTV;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\LiveTV\LiveTv;
-use Illuminate\Support\Str;
+use App\Models\Category\Tags;
 
 class LiveTvController extends Controller
 {
@@ -15,9 +15,11 @@ class LiveTvController extends Controller
     
     public function form($id = null) {
         $model = LiveTv::firstOrNew(['id' => $id]);
+        $tags = Tags::whereIn('id', explode(',', $model->tags))->get(['id', 'name']);
         
         return view('backend.live-tv.form', [
             'model' => $model,
+            'tags' => $tags,
             'title' => $model->name ?: trans('app.add_new'),
         ]);
     }
@@ -53,9 +55,8 @@ class LiveTvController extends Controller
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->description = Str::words(strip_tags($row->description), 15);
             $row->edit_url = route('admin.live-tv.edit', [$row->id]);
-            $row->preview_url = route('watch', [$row->slug]);
+            //$row->preview_url = route('watch', [$row->slug]);
             $row->stream_url = route('admin.live-tv.stream', [$row->id]);
         }
         

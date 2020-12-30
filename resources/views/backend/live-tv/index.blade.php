@@ -73,7 +73,6 @@
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
                             <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('app.thumbnail')</th>
                             <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
-                            <th data-width="20%" data-field="description">@lang('app.description')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                             <th data-width="15%" data-field="options" data-align="center" data-formatter="options_formatter">@lang('app.options')</th>
                         </tr>

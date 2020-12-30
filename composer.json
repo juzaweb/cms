@@ -26,6 +26,7 @@
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.5",
         "ip2location/ip2location-laravel": "^1.0",
+        "ip2location/ip2location-php": "^8.3",
         "laravel/framework": "6.*",
         "laravel/tinker": "^1.0",
         "laravelium/sitemap": "6.*",

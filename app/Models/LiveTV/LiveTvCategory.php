@@ -3,6 +3,7 @@
 namespace App\Models\LiveTV;
 
 use App\Traits\UseMetaSeo;
+use App\Traits\UseSlug;
 use App\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,7 +39,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LiveTvCategory extends Model
 {
-    use UseMetaSeo, UseThumbnail;
+    use UseMetaSeo, UseThumbnail, UseSlug;
     
     protected $table = 'live_tv_categories';
     protected $fillable = [
