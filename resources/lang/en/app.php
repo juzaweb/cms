@@ -396,5 +396,8 @@ return [
   'package' => 'Package',
   'packages' => 'Packages',
   'paid_members' => 'Paid members',
+  'priority' => 'Priority',
+  'base_url' => 'Base Url',
+  'server_stream' => 'Server Stream',
 ];
 

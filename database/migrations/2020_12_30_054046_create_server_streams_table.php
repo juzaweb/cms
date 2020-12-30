@@ -14,6 +14,7 @@ class CreateServerStreamsTable extends Migration
             $table->string('name', 250);
             $table->string('base_url', 250);
             $table->tinyInteger('priority')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
