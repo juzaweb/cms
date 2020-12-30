@@ -379,7 +379,7 @@ $(document).on("turbolinks:load", function() {
         },
     });
 
-    $('.load-countries-g').select2({
+    $('.load-countries-name').select2({
         allowClear: true,
         width: '100%',
         placeholder: function (params) {
@@ -390,7 +390,7 @@ $(document).on("turbolinks:load", function() {
         },
         ajax: {
             method: 'GET',
-            url: '/admin-cp/load-data/loadLiveTvCategory',
+            url: '/admin-cp/load-data/loadCountryName',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;

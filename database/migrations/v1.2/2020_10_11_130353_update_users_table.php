@@ -10,13 +10,12 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->bigInteger('package_id')->index()->nullable();
+            $table->date('end_date')->nullable();
         });
     }
     
     public function down()
     {
-        Schema::table('users', function($table) {
-            $table->dropColumn('package_id');
-        });
+    
     }
 }

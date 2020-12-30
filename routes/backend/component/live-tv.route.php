@@ -16,7 +16,7 @@ Route::group(['prefix' => 'live-tv'], function () {
     Route::post('/remove', 'Backend\LiveTV\LiveTvController@remove')->name('admin.live-tv.remove');
 });
 
-Route::group(['prefix' => 'live-tv-categories'], function () {
+Route::group(['prefix' => 'live-categories'], function () {
     Route::get('/', 'Backend\LiveTV\LiveTvCategoryController@index')->name('admin.live-tv.category');
     
     Route::get('/getdata', 'Backend\LiveTV\LiveTvCategoryController@getData')->name('admin.live-tv.category.getdata');

@@ -10,7 +10,7 @@
     ], $model) }}
 
 <div class="cui__utils__content">
-    <form method="post" action="{{ route('admin.live-tv.stream.save') }}" class="form-ajax">
+    <form method="post" action="{{ route('admin.live-tv.stream.save', [$live_tv->id]) }}" class="form-ajax">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -21,7 +21,7 @@
                     <div class="col-md-6">
                         <div class="btn-group float-right">
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                            <a href="{{ route('admin.live-tv.stream') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                            <a href="{{ route('admin.live-tv.stream', [$live_tv->id]) }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
                         </div>
                     </div>
                 </div>

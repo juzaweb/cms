@@ -65,13 +65,13 @@
         </ul>
     </li>
 
-    <li class="cui__menuLeft__item cui__menuLeft__submenu @if(request()->is('admin-cp/live-tv*') || request()->is('admin-cp/live-tv-categories*')) cui__menuLeft__submenu--toggled @endif">
+    <li class="cui__menuLeft__item cui__menuLeft__submenu @if(request()->is('admin-cp/live-tv*') || request()->is('admin-cp/live-categories*')) cui__menuLeft__submenu--toggled @endif">
         <span class="cui__menuLeft__item__link">
             <span class="cui__menuLeft__item__title">@lang('app.live_tv')</span>
             <i class="cui__menuLeft__item__icon fe fe-clipboard"></i>
         </span>
 
-        <ul class="cui__menuLeft__navigation" @if(request()->is('admin-cp/live-tv*') || request()->is('admin-cp/live-tv-categories*')) style="display: block" @endif>
+        <ul class="cui__menuLeft__navigation" @if(request()->is('admin-cp/live-tv*') || request()->is('admin-cp/live-categories*')) style="display: block" @endif>
 
             <li class="cui__menuLeft__item">
                 <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/live-tv*')) cui__menuLeft__item--active @endif" href="{{ route('admin.live-tv') }}">
@@ -80,7 +80,7 @@
             </li>
 
             <li class="cui__menuLeft__item">
-                <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/ive-tv-categories*')) cui__menuLeft__item--active @endif" href="{{ route('admin.live-tv.category') }}">
+                <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/live-categories*')) cui__menuLeft__item--active @endif" href="{{ route('admin.live-tv.category') }}">
                     <span class="cui__menuLeft__item__title">@lang('app.categories')</span>
                 </a>
             </li>
