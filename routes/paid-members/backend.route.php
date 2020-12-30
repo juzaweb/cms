@@ -11,5 +11,7 @@ Route::group(['prefix' => 'packages'], function () {
     
     Route::post('/save', 'PaidMembers\Backend\PackageController@save')->name('admin.package.save');
     
+    Route::post('/status', 'PaidMembers\Backend\PackageController@status')->name('admin.package.status');
+    
     Route::post('/remove', 'PaidMembers\Backend\PackageController@remove')->name('admin.package.remove');
 });

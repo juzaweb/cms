@@ -18,9 +18,17 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="btn-group float-right">
-                        <a href="{{ route('admin.package.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
-                        <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                    <div class="float-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary status-button" data-status="1"><i class="fa fa-check"></i> @lang('app.enabled')</button>
+
+                            <button type="button" class="btn btn-warning status-button" data-status="0"><i class="fa fa-times"></i> @lang('app.disabled')</button>
+                        </div>
+
+                        <div class="btn-group">
+                            <a href="{{ route('admin.package.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
+                            <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,7 +66,7 @@
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
                             <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
-                            <th data-width="15%" data-field="days">@lang('app.price')</th>
+                            <th data-width="15%" data-field="days">@lang('app.days')</th>
                             <th data-width="15%" data-field="price">@lang('app.price')</th>
                             <th data-width="15%" data-field="created">@lang('app.created_at')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
@@ -86,6 +94,7 @@
         var table = new LoadBootstrapTable({
             url: '{{ route('admin.package.getdata') }}',
             remove_url: '{{ route('admin.package.remove') }}',
+            status_url: '{{ route('admin.package.status') }}',
         });
     </script>
 @endsection

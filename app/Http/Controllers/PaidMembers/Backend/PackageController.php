@@ -82,6 +82,28 @@ class PackageController extends Controller
         ]);
     }
     
+    public function status(Request $request) {
+        $this->validateRequest([
+            'ids' => 'required',
+            'status' => 'required|in:0,1',
+        ], $request, [
+            'ids' => trans('app.package'),
+            'status' => trans('app.status'),
+        ]);
+        
+        $status = $request->post('status');
+        
+        Package::whereIn('id', $request->post('ids'))
+            ->update([
+                'status' => $status,
+            ]);
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('app.deleted_successfully'),
+        ]);
+    }
+    
     public function remove(Request $request) {
         $this->validateRequest([
             'ids' => 'required',

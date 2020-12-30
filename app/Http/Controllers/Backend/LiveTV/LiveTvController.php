@@ -32,7 +32,6 @@ class LiveTvController extends Controller
         $limit = $request->get('limit', 20);
         
         $query = LiveTv::query();
-        $query->where('tv_series', '=', 0);
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -123,7 +122,7 @@ class LiveTvController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.movies')
+            'ids' => trans('app.live_tv')
         ]);
     
         $ids = $request->post('ids');
