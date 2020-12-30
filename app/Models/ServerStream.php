@@ -8,7 +8,11 @@ class ServerStream extends Model
 {
     protected $table = 'server_streams';
     protected $fillable = [
+        'key',
         'name',
+        'base_url',
+        'priority',
+        'status',
     ];
     
     public function getLinkStream() {

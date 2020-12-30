@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label class="col-form-label" for="key">@lang('app.key')</label>
 
-                            <input type="text" name="key" class="form-control" id="key" value="{{ $model->key }}" autocomplete="off" required>
+                            <input type="text" name="key" class="form-control" id="key" value="{{ $model->key ?? Str::random(32) }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">

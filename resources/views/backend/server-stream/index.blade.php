@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.live_tv_categories'))
+@section('title', trans('app.server_stream'))
 
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.live_tv_categories'),
+        'name' => trans('app.server_stream'),
         'url' => route('admin.server-stream')
     ]) }}
 
@@ -14,7 +14,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.live_tv_categories')</h5>
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.server_stream')</h5>
                 </div>
 
                 <div class="col-md-6">
@@ -67,9 +67,10 @@
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                            <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('app.thumbnail')</th>
+                            <th data-field="key" data-width="10%">@lang('app.key')</th>
                             <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
-                            <th data-width="15%" data-field="created">@lang('app.created_at')</th>
+                            <th data-field="priority" data-width="5%" data-align="center">@lang('app.priority')</th>
+                            <th data-field="base_url" data-width="5%" data-align="center">@lang('app.base_url')</th>
                             <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
                         </tr>
                     </thead>
@@ -80,9 +81,6 @@
 </div>
 
     <script type="text/javascript">
-        function thumbnail_formatter(value, row, index) {
-            return '<img src="'+ row.thumb_url +'" class="w-100">';
-        }
 
         function name_formatter(value, row, index) {
             return '<a href="'+ row.edit_url +'">'+ value +'</a>';

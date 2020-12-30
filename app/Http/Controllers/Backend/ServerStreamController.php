@@ -64,10 +64,14 @@ class ServerStreamController extends Controller
         $this->validateRequest([
             'key' => 'required|string|max:32|unique:server_streams,key,'. $request->post('id'),
             'name' => 'required|string|max:250',
+            'base_url' => 'required|string|max:250',
+            'priority' => 'required|integer',
             'status' => 'required|in:0,1',
         ], $request, [
             'key' => trans('app.key'),
             'name' => trans('app.name'),
+            'base_url' => trans('app.base_url'),
+            'priority' => trans('app.priority'),
             'status' => trans('app.status'),
         ]);
         
