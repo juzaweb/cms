@@ -7,11 +7,25 @@ MyMo is a powerful, flexible and User friendly movie & Video Steaming CMS Pro wi
 - Demo Url: https://mymo.juzaweb.com
 - Admin Test: Email/password: admin2@juzaweb.com / 123456
 
+![MyMo Cms](https://i.imgur.com/XvrwjM1.png "MyMo Cms")
+![MyMo Cms](https://i.imgur.com/s8luMke.png "MyMo Cms")
+![MyMo Cms](https://i.imgur.com/julpxXe.png "MyMo Cms")
+
 ## Documents
 
 ### Install by composer
+```
+composer create-project --prefer-dist mymocms/mymocms mymo
+```
+Run Migration
+```
+php artisan migrate
+```
+Or go to http://www.yoursite.com/install to install
 
-[Read all documents](https://mymo-docs.juzaweb.com/)
+Read more: [All documents](https://mymo-docs.juzaweb.com/)
+
+Enjoy!
 
 ## Requirements
 - PHP Version >= 7.2.5
@@ -85,3 +99,7 @@ Features
 - Add Download link for Movies / TV Series
 - Add Subtitle for Video file
 - And more...
+
+## License
+
+The TA TMS is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
