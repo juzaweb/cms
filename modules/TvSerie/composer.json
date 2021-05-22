@@ -1,5 +1,5 @@
 {
-    "name": "mymocms/movie",
+    "name": "mymocms/tvserie",
     "description": "",
     "authors": [
         {
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Movie\\": ""
+            "Modules\\TvSerie\\": ""
         }
     }
 }
