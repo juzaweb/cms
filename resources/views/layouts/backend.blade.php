@@ -37,12 +37,12 @@
 
 </head>
 
-<body class="cui__layout--cardsShadow cui__menuLeft--dark">
+<body class="cui__menuLeft--dark cui__topbar--fixed cui__menuLeft--unfixed">
 <div class="cui__layout cui__layout--hasSider">
 
     <div class="cui__menuLeft">
         <div class="cui__menuLeft__mobileTrigger"><span></span></div>
-        <div class="cui__menuLeft__trigger"></div>
+
         <div class="cui__menuLeft__outer">
             <div class="cui__menuLeft__logo__container">
                 <div class="cui__menuLeft__logo">
@@ -67,13 +67,13 @@
         <div class="cui__layout__footer">
             <div class="cui__footer">
                 <div class="cui__footer__inner">
-                    <a href="" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
+                    <a href="https://mymo.juzaweb.com" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
                         MYMO
                         <span></span>
                     </a>
                     <br />
                     <p class="mb-0">
-                        Copyright © 2020 MyMy Team
+                        Copyright © 2020 MyMo Team
                     </p>
                 </div>
             </div>
@@ -85,7 +85,7 @@
 <script type="text/javascript">
     $.extend( $.validator.messages, {
         required: "{{ trans('app.this_field_is_required') }}",
-    } );
+    });
 
     $(".form-ajax").validate();
 </script>
