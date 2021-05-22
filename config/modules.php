@@ -26,7 +26,7 @@ return [
 
     'stubs' => [
         'enabled' => false,
-        'path' => base_path() . '/vendor/nwidart/laravel-modules/src/Commands/stubs',
+        'path' => app_path('Console/stubs/module'),
         'files' => [
             'routes/web' => 'routes/web.php',
             'routes/api' => 'routes/api.php',
@@ -102,8 +102,8 @@ return [
         'generator' => [
             'config' => ['path' => 'config', 'generate' => false],
             'command' => ['path' => 'Console', 'generate' => true],
-            'migration' => ['path' => 'database/Migrations', 'generate' => true],
-            'seeder' => ['path' => 'database/Seeders', 'generate' => true],
+            'migration' => ['path' => 'database/migrations', 'generate' => true],
+            'seeder' => ['path' => 'database/seeders', 'generate' => true],
             'factory' => ['path' => 'database/factories', 'generate' => true],
             'model' => ['path' => 'Models', 'generate' => true],
             'routes' => ['path' => 'routes', 'generate' => true],
@@ -153,11 +153,8 @@ return [
     */
 
     'composer' => [
-        'vendor' => 'nwidart',
-        'author' => [
-            'name' => 'Nicolas Widart',
-            'email' => 'n.widart@gmail.com',
-        ],
+        'vendor' => 'mymocms',
+        'author' => [],
     ],
     /*
     |--------------------------------------------------------------------------

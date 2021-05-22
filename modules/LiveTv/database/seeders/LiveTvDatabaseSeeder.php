@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\TvSerie\database\Seeders;
+namespace Modules\LiveTv\database\seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class TvSerieDatabaseSeeder extends Seeder
+class LiveTvDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.

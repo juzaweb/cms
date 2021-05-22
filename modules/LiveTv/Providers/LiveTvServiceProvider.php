@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\TvSerie\Providers;
+namespace Modules\LiveTv\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class TvSerieServiceProvider extends ServiceProvider
+class LiveTvServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'TvSerie';
+    protected $moduleName = 'LiveTv';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'tvserie';
+    protected $moduleNameLower = 'livetv';
 
     /**
      * Boot the application events.
@@ -26,7 +26,7 @@ class TvSerieServiceProvider extends ServiceProvider
     {
         $this->registerTranslations();
         $this->registerViews();
-        $this->loadMigrationsFrom(module_path($this->moduleName, 'database/Migrations'));
+        $this->loadMigrationsFrom(module_path($this->moduleName, 'database/migrations'));
     }
 
     /**

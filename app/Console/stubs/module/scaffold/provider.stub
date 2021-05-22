@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\TvSerie\Providers;
+namespace $NAMESPACE$;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class TvSerieServiceProvider extends ServiceProvider
+class $CLASS$ extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'TvSerie';
+    protected $moduleName = '$MODULE$';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'tvserie';
+    protected $moduleNameLower = '$LOWER_NAME$';
 
     /**
      * Boot the application events.
@@ -26,7 +26,7 @@ class TvSerieServiceProvider extends ServiceProvider
     {
         $this->registerTranslations();
         $this->registerViews();
-        $this->loadMigrationsFrom(module_path($this->moduleName, 'database/Migrations'));
+        $this->loadMigrationsFrom(module_path($this->moduleName, '$MIGRATIONS_PATH$'));
     }
 
     /**
@@ -48,7 +48,7 @@ class TvSerieServiceProvider extends ServiceProvider
     {
         $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
-        $sourcePath = module_path($this->moduleName, 'resources/views');
+        $sourcePath = module_path($this->moduleName, '$PATH_VIEWS$');
 
         $this->publishes([
             $sourcePath => $viewPath
@@ -69,7 +69,7 @@ class TvSerieServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
         } else {
-            $this->loadTranslationsFrom(module_path($this->moduleName, 'resources/lang'), $this->moduleNameLower);
+            $this->loadTranslationsFrom(module_path($this->moduleName, '$PATH_LANG$'), $this->moduleNameLower);
         }
     }
 
