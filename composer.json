@@ -1,24 +1,30 @@
 {
-    "name": "laravel/laravel",
+    "name": "tadcms/mymo",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "MyMo is a powerful, flexible and User friendly movie & Video Steaming CMS Pro with advance video contents management system. It’s easy to use & install. It has been created to provide unique experience to movie lover & movie site owner.",
     "keywords": [
         "framework",
         "laravel"
     ],
+    "authors": [
+      {
+        "name": "The Anh Dang",
+        "email": "dangtheanh16@gmail.com"
+      }
+    ],
     "license": "MIT",
     "require": {
-        "php": "^7.1.3",
+        "php": ">=7.2.5",
         "aminyazdanpanah/php-ffmpeg-video-streaming": "^1.2",
-        "arcanedev/log-viewer": "~4.7.0",
-        "davejamesmiller/laravel-breadcrumbs": "5.x",
+        "arcanedev/log-viewer": "5.*",
+        "diglactic/laravel-breadcrumbs": "6.x",
         "dilab/resumable.php": "^0.1.4",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.5",
         "ip2location/ip2location-laravel": "^1.0",
-        "laravel/framework": "5.8.*",
+        "laravel/framework": "6.*",
         "laravel/tinker": "^1.0",
-        "laravelium/sitemap": "3.1.*",
+        "laravelium/sitemap": "6.*",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",
         "spatie/laravel-permission": "^3.10",
