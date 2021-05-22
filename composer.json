@@ -39,6 +39,7 @@
         "laravelium/sitemap": "6.*",
         "nwidart/laravel-modules": "^8.2",
         "pion/laravel-chunk-upload": "^1.4",
+        "shipu/themevel": "^2.2",
         "sokil/php-vast": "^2.0",
         "unisharp/laravel-filemanager": "^2.1"
     },
