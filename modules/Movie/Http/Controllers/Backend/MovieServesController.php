@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Movie;
+namespace Modules\Movie\Http\Controllers\Backend;
 
 use App\Models\Movie\Movies;
 use App\Models\Video\VideoServers;

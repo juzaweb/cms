@@ -1,39 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Movie;
+namespace Modules\Movie\Http\Controllers\Backend;
 
 use App\Models\Movie\Movies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\DownloadLink;
+use App\Models\Video\VideoFiles;
+use App\Models\Subtitle;
 
-class MovieDownloadController extends Controller
+class SubtitleController extends Controller
 {
-    public function index($page_type, $movie_id) {
-        $movie = Movies::findOrFail($movie_id);
+    public function index($page_type, $file_id) {
+        $file = VideoFiles::findOrFail($file_id);
+        $movie = Movies::findOrFail($file->server->movie_id);
         
-        return view('backend.download.index', [
-            'movie_id' => $movie_id,
-            'movie' => $movie,
+        return view('backend.movie_upload.subtitle.index', [
             'page_type' => $page_type,
+            'file' => $file,
+            'file_id' => $file_id,
+            'movie' => $movie,
         ]);
     }
     
-    public function form($page_type, $movie_id, $id = null) {
-        $movie = Movies::findOrFail($movie_id);
-        $model = DownloadLink::firstOrNew(['id' => $id]);
+    public function form($page_type, $file_id, $id = null) {
+        $file = VideoFiles::findOrFail($file_id);
+        $movie = Movies::findOrFail($file->server->movie_id);
         
-        return view('backend.download.form', [
-            'movie_id' => $movie_id,
-            'movie' => $movie,
-            'page_type' => $page_type,
+        $model = Subtitle::firstOrNew(['id' => $id]);
+        return view('backend.movie_upload.subtitle.form', [
             'model' => $model,
-            'title' => $model->lable ? $model->lable : trans('app.add_new'),
+            'page_type' => $page_type,
+            'file' => $file,
+            'file_id' => $file_id,
+            'movie' => $movie,
+            'title' => $model->label ? $model->label : trans('app.add_new')
         ]);
     }
     
-    public function getData($page_type, $movie_id, Request $request) {
-        Movies::findOrFail($movie_id);
+    public function getData($page_type, $file_id, Request $request) {
+        VideoFiles::findOrFail($file_id);
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -42,8 +47,8 @@ class MovieDownloadController extends Controller
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = DownloadLink::query();
-        $query->where('movie_id', '=', $movie_id);
+        $query = Subtitle::query();
+        $query->where('file_id', '=', $file_id);
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -64,7 +69,7 @@ class MovieDownloadController extends Controller
         
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.movies.download.edit', [$page_type, $movie_id, $row->id]);
+            $row->edit_url = route('admin.movies.servers.upload.subtitle.edit', [$page_type, $file_id, $row->id]);
         }
         
         return response()->json([
@@ -73,8 +78,8 @@ class MovieDownloadController extends Controller
         ]);
     }
     
-    public function save($page_type, $movie_id, Request $request) {
-        Movies::findOrFail($movie_id);
+    public function save($page_type, $file_id, Request $request) {
+        $file = VideoFiles::findOrFail($file_id);
         
         $this->validateRequest([
             'label' => 'required|string|max:250',
@@ -88,27 +93,28 @@ class MovieDownloadController extends Controller
             'status' => trans('app.status'),
         ]);
         
-        $model = DownloadLink::firstOrNew(['id' => $request->post('id')]);
+        $model = Subtitle::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
-        $model->movie_id = $movie_id;
+        $model->file_id = $file_id;
+        $model->movie_id = $file->movie_id;
         $model->save();
         
         return response()->json([
             'status' => 'success',
             'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.movies.download', [$page_type, $movie_id]),
+            'redirect' => route('admin.movies.servers.upload.subtitle', [$page_type, $file_id]),
         ]);
     }
     
-    public function remove($page_type, $movie_id, Request $request) {
-        Movies::findOrFail($movie_id);
+    public function remove($page_type, $file_id, Request $request) {
+        VideoFiles::findOrFail($file_id);
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
             'ids' => trans('app.subtitle')
         ]);
         
-        DownloadLink::destroy($request->post('ids'));
+        Subtitle::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',

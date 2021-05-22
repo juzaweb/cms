@@ -1,0 +1,13 @@
+{
+    "name": "Movie",
+    "alias": "movie",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Movie\\Providers\\MovieServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

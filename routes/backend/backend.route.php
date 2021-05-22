@@ -3,7 +3,6 @@
 require_once __DIR__ . '/component/design.route.php';
 require_once __DIR__ . '/component/setting.route.php';
 require_once __DIR__ . '/component/filemanager.route.php';
-require_once __DIR__ . '/component/movie.route.php';
 require_once __DIR__ . '/component/post.route.php';
 require_once __DIR__ . '/component/comment.route.php';
 require_once __DIR__ . '/component/tmdb.route.php';

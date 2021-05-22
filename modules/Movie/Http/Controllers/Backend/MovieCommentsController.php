@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Movie;
+namespace Modules\Movie\Http\Controllers;
 
 use App\Models\Movie\MovieComments;
 use Illuminate\Http\Request;
