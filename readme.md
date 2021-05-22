@@ -17,11 +17,7 @@ MyMo is a powerful, flexible and User friendly movie & Video Steaming CMS Pro wi
 ```
 composer create-project --prefer-dist mymocms/mymocms mymo
 ```
-Run Migration
-```
-php artisan migrate
-```
-Or go to http://www.yoursite.com/install to install
+Go to http://www.yoursite.com/install to install
 
 Read more: [All documents](https://mymo-docs.juzaweb.com/)
 

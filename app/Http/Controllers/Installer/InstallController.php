@@ -13,6 +13,7 @@ class InstallController extends Controller
 {
     protected $requirements;
     protected $permissions;
+    protected $installed = 'app/installed';
     
     public function __construct(RequirementsChecker $requirements, PermissionsChecker $permissions) {
         $this->requirements = $requirements;
@@ -20,7 +21,7 @@ class InstallController extends Controller
     }
     
     public function index() {
-        if (file_exists(storage_path('installed'))) {
+        if (file_exists(storage_path($this->installed))) {
             return abort(404);
         }
         
@@ -177,6 +178,6 @@ class InstallController extends Controller
     private function _createInstalled() {
         \Artisan::call('storage:link');
         
-        return file_put_contents(storage_path('installed'), 'Installed');
+        return file_put_contents(storage_path($this->installed), 'Installed');
     }
 }
