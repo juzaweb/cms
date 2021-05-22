@@ -25,6 +25,7 @@
         "laravel/framework": "6.*",
         "laravel/tinker": "^1.0",
         "laravelium/sitemap": "6.*",
+        "nwidart/laravel-modules": "^8.2",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",
         "spatie/laravel-permission": "^3.10",
@@ -60,7 +61,8 @@
           "app/Helpers/TmdbApi.php"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Modules\\": "Modules/"
         },
         "classmap": [
             "database/seeds",
