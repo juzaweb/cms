@@ -225,7 +225,6 @@ $(document).on("turbolinks:load", function() {
                 return query;
             }
         },
-
     });
 
     $('.load-post-categories').select2({

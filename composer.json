@@ -33,7 +33,6 @@
         "nwidart/laravel-modules": "^8.2",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",
-        "spatie/laravel-permission": "^3.10",
         "unisharp/laravel-filemanager": "^2.1"
     },
     "require-dev": {
@@ -57,13 +56,13 @@
     },
     "autoload": {
         "files": [
-          "app/Helpers/functions.php",
-          "app/Helpers/simple_html_dom.php",
-          "app/Helpers/VideoStream.php",
-          "app/Helpers/UrlVideoStream.php",
-          "app/Helpers/Stream3sApi.php",
-          "app/Helpers/TmdbConfiguration.php",
-          "app/Helpers/TmdbApi.php"
+            "app/Helpers/functions.php",
+            "app/Helpers/simple_html_dom.php",
+            "app/Helpers/VideoStream.php",
+            "app/Helpers/UrlVideoStream.php",
+            "app/Helpers/Stream3sApi.php",
+            "app/Helpers/TmdbConfiguration.php",
+            "app/Helpers/TmdbApi.php"
         ],
         "psr-4": {
             "App\\": "app/",
