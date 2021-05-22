@@ -195,6 +195,11 @@ span.tag {
     line-height: 30px;
 }
 
+.cui__menuLeft__navigation .cui__menuLeft__navigation .cui__menuLeft__item__link .cui__menuLeft__item__icon {
+    top: 9px;
+    font-size: 1rem;
+}
+
 .cui__menuLeft__item__link {
     border-radius: 2px;
     text-transform: capitalize;
