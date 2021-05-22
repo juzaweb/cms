@@ -93,8 +93,8 @@ function logo_url($path) {
     return image_url($path);
 }
 
-function get_config(string $key) {
-    return \App\Models\Configs::getConfig($key);
+function get_config(string $key, $default = null) {
+    return \App\Models\Configs::getConfig($key, $default);
 }
 
 function get_ads(string $key) {

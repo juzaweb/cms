@@ -24,7 +24,7 @@
                     edgeStyle: "raised"
                 }
             }],
-            @if(0)
+            @if(get_config('player_watermark'))
             logo: {
                 file: "{{ image_url(get_config('player_watermark_logo')) }}",
                 link: "{{ url('/') }}",
@@ -33,9 +33,6 @@
                 position: "top-right",
             },
             @endif
-            floating: {
-                dismissible: true
-            },
             autoPause: {
                 viewability: true,
                 pauseAds: true
@@ -58,7 +55,7 @@
                     "linkedin"
                 ]
             },
-            @if(0)
+            @if($ads_exists)
             advertising: {
                 client: 'vast',
                 admessage: '@lang('app.ads_have_xx_seconds_left')',

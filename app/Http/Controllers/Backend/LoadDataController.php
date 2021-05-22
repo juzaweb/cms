@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\LiveTV\LiveTvCategory;
 use App\Models\Sliders;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Models\Category\Countries;
 use App\Models\Category\Genres;
@@ -332,6 +334,64 @@ class LoadDataController extends Controller
             $data['pagination'] = ['more' => true];
         }
         
+        return response()->json($data);
+    }
+    
+    protected function loadLiveTvCategory(Request $request) {
+        $search = $request->get('search');
+        $explodes = $request->get('explodes');
+    
+        $query = LiveTvCategory::query();
+        $query->select([
+            'id',
+            'name AS text'
+        ]);
+    
+        if ($search) {
+            $query->where('name', 'like', '%'. $search .'%');
+        }
+    
+        if ($explodes) {
+            $query->whereNotIn('id', $explodes);
+        }
+    
+        $paginate = $query->paginate(10);
+        $data['results'] = $query->get();
+        if ($paginate->nextPageUrl()) {
+            $data['pagination'] = ['more' => true];
+        }
+    
+        return response()->json($data);
+    }
+    
+    protected function loadCountryName(Request $request) {
+        $search = $request->get('search');
+        $explodes = $request->get('explodes');
+    
+        $query = LiveTvCategory::query();
+        $query->select([
+            'code AS id',
+            'name AS text'
+        ]);
+    
+        if ($search) {
+            $query->where(function (Builder $builder) use ($search) {
+                $builder->where('code', 'like', '%'. $search .'%');
+                $builder->where('name', 'like', '%'. $search .'%');
+            });
+        }
+    
+        if ($explodes) {
+            $query->whereNotIn('code', $explodes);
+        }
+    
+        $paginate = $query->paginate(10);
+        $data['results'] = $query->get();
+        
+        if ($paginate->nextPageUrl()) {
+            $data['pagination'] = ['more' => true];
+        }
+    
         return response()->json($data);
     }
 }

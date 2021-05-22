@@ -27,7 +27,8 @@ class Configs extends Model
     protected $table = 'configs';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name'
+        'code',
+        'value'
     ];
     
     public static function getConfigs() {
@@ -81,17 +82,20 @@ class Configs extends Model
             'stream3s_link',
             'stream3s_client_id',
             'stream3s_secret_key',
+            'only_member_view',
+            'block_ip_status',
+            'block_ip_type',
+            'block_ip_list',
         ];
     }
     
-    public static function getConfig(string $key) {
-        try {
-            $config = Configs::firstOrNew(['code' => $key]);
+    public static function getConfig(string $key, $default = null) {
+        $config = Configs::where('code', '=', $key)->first(['value']);
+        if ($config) {
             return $config->value;
         }
-        catch (\Exception $exception) {
-            return '';
-        }
+    
+        return $default;
     }
     
     public static function setConfig(string $key, string $value = null) {
@@ -101,11 +105,4 @@ class Configs extends Model
         return $config->save();
     }
     
-    private static function setEnv(string $key, string $value) {
-        $value = preg_replace('/\s+/', '', $value);
-        $key = strtoupper($key);
-        $env = file_get_contents(base_path('.env'));
-        $env = str_replace("$key=" . env($key), "$key=" . $value, $env);
-        return file_put_contents(base_path('.env'), $env);
-    }
 }
