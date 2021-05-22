@@ -36,12 +36,12 @@
 
 </head>
 
-<body class="cui__layout--cardsShadow cui__menuLeft--dark">
+<body class="cui__menuLeft--dark cui__topbar--fixed cui__menuLeft--unfixed">
 <div class="cui__layout cui__layout--hasSider">
 
     <div class="cui__menuLeft">
         <div class="cui__menuLeft__mobileTrigger"><span></span></div>
-        <div class="cui__menuLeft__trigger"></div>
+
         <div class="cui__menuLeft__outer">
             <div class="cui__menuLeft__logo__container">
                 <div class="cui__menuLeft__logo">
@@ -72,7 +72,7 @@
                     </a>
                     <br />
                     <p class="mb-0">
-                        Copyright © 2020 MyMy Team
+                        Copyright © 2020 MyMo Team
                     </p>
                 </div>
             </div>
