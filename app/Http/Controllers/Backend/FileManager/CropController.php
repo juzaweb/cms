@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Filemanager;
+namespace App\Http\Controllers\Backend\FileManager;
 
 use Intervention\Image\Facades\Image;
 use UniSharp\LaravelFilemanager\Events\ImageIsCropping;

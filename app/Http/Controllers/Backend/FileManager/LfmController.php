@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Filemanager;
+namespace App\Http\Controllers\Backend\FileManager;
 
 use App\Http\Controllers\Controller;
 

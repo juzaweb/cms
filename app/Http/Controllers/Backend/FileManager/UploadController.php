@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Filemanager;
+namespace App\Http\Controllers\Backend\FileManager;
 
 use App\Models\Files;
 use Illuminate\Support\Facades\Log;
