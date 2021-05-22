@@ -9,13 +9,7 @@ MyMo is a powerful, flexible and User friendly movie & Video Steaming CMS Pro wi
 - Admin Test: admin2@juzaweb.com / 123456
 - Follow us: https://www.facebook.com/mymocms/
 
-![MyMo Cms](https://i.imgur.com/nY5FdSY.jpg "MyMo Cms")
-![MyMo Cms](https://i.imgur.com/oCdSI1K.jpg "MyMo Cms")
-![MyMo Cms](https://i.imgur.com/b4P7Xi2.jpg "MyMo Cms")
-
-## Documents
-
-### Install by composer
+## Install
 ```
 composer create-project --prefer-dist mymocms/mymocms mymo
 ```
@@ -23,7 +17,9 @@ Go to http://www.yoursite.com/install to install
 
 Read more: [All documents](https://mymo-docs.juzaweb.com/)
 
-Enjoy!
+![MyMo Cms](https://i.imgur.com/nY5FdSY.jpg "MyMo Cms")
+![MyMo Cms](https://i.imgur.com/oCdSI1K.jpg "MyMo Cms")
+![MyMo Cms](https://i.imgur.com/b4P7Xi2.jpg "MyMo Cms")
 
 ## Requirements
 - PHP Version >= 7.2.5
