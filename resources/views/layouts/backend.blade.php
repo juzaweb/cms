@@ -66,7 +66,7 @@
         <div class="cui__layout__footer">
             <div class="cui__footer">
                 <div class="cui__footer__inner">
-                    <a href="" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
+                    <a href="https://mymo.juzaweb.com" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
                         MYMO
                         <span></span>
                     </a>
@@ -84,7 +84,7 @@
 <script type="text/javascript">
     $.extend( $.validator.messages, {
         required: "{{ trans('app.this_field_is_required') }}",
-    } );
+    });
 
     $(".form-ajax").validate();
 </script>
