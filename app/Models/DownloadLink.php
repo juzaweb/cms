@@ -37,4 +37,8 @@ class DownloadLink extends Model
         'order',
         'status'
     ];
+    
+    public function movie() {
+        return $this->hasOne('App\Models\Movie\Movies', 'id', 'movie_id');
+    }
 }

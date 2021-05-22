@@ -20,5 +20,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CountryName extends Model
 {
-    //
+    protected $table = 'country_names';
+    protected $fillable = [
+        'code',
+        'name',
+    ];
 }

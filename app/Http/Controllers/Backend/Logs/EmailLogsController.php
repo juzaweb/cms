@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend\Logs;
 
-use App\Models\Email\EmailList;
 use Illuminate\Http\Request;
+use App\Models\Email\EmailList;
 use App\Http\Controllers\Controller;
 
 class EmailLogsController extends Controller

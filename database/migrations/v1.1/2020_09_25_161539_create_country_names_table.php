@@ -6,24 +6,16 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCountryNamesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('country_names', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('code', 5)->unique();
+            $table->string('name', 150);
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('country_names');

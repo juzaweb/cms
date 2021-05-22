@@ -30,7 +30,7 @@ class InstallController extends Controller
             return '<h1>Cannot connect database!!!</h1>';
         }
         
-        $php_support = $this->_checkPHPversion('7.1.3');
+        $php_support = $this->_checkPHPversion('7.2');
         $requirements = $this->_checkRequirements();
         $permissions = $this->_checkPermissionFolder();
         

@@ -2,8 +2,9 @@
 
 namespace App\Models\Video;
 
+use App\Helpers\GoogleDrive;
 use Illuminate\Database\Eloquent\Model;
-use Stream3s\Helpers\Stream3sApi;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * App\Models\Video\VideoFiles
@@ -50,6 +51,9 @@ use Stream3s\Helpers\Stream3sApi;
  * @mixin \Eloquent
  * @property int $enable_remote
  * @method static \Illuminate\Database\Eloquent\Builder|VideoFiles whereEnableRemote($value)
+ * @property-read \App\Models\Video\VideoServers|null $server
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Subtitle[] $subtitles
+ * @property-read int|null $subtitles_count
  */
 class VideoFiles extends Model
 {
@@ -236,17 +240,40 @@ class VideoFiles extends Model
         ];
     }
     
-    protected function getVideoGoogleDrive() {
-        $stream3s_using = get_config('stream3s_use');
-        $stream3s_link = get_config('stream3s_link');
-        if ($stream3s_using) {
-            if ($stream3s_link == 'direct') {
-                return $this->getVideoGoogleDriveStream3sDirect();
-            }
-            return $this->getVideoGoogleDriveStream3sEmbed();
+    protected function getVideoGoogleDrive()
+    {
+        $use_stream = get_config('use_stream', 1);
+        
+        if (empty($use_stream)) {
+            return $this->getVideoGoogleDriveEmbed();
         }
         
-        return $this->getVideoGoogleDriveEmbed();
+        $gdrive = GoogleDrive::link_stream(get_google_drive_id($this->url));
+        if ($gdrive) {
+        
+            $files = [];
+            foreach ($gdrive->qualities as $quality) {
+                $file = [
+                    'class' => 'GoogleDrive',
+                    'file' => $gdrive->stream_id
+                ];
+            
+                $token = urlencode(base64_encode(Crypt::encryptString(json_encode($file))));
+            
+                $files[] = (object)[
+                    'label' => $quality,
+                    'file' => route('stream.service', [
+                        $token, $quality,
+                        $quality . '.mp4'
+                    ]),
+                    'type' => 'mp4'
+                ];
+            }
+        
+            return $files;
+        }
+    
+        return [];
     }
     
     protected function getVideoGoogleDriveEmbed() {
@@ -255,64 +282,6 @@ class VideoFiles extends Model
             'type' => 'mp4',
         ];
     
-        return $files;
-    }
-    
-    protected function getVideoGoogleDriveStream3sDirect() {
-        $client_id = get_config('stream3s_client_id');
-        $secret_key = get_config('stream3s_secret_key');
-        $files = [];
-        
-        if ($client_id && $secret_key) {
-            $stream = new Stream3sApi();
-            if ($stream->login($client_id, $secret_key)) {
-                if ($stream->isPremium()) {
-                    $stream_link = $stream->addAndGetDirectLink($this->url);
-                    if ($stream_link) {
-                        $tracks = $this->subtitles()
-                            ->where('status', '=', 1)
-                            ->get([
-                                \DB::raw("'captions' AS kind"),
-                                'url AS file',
-                                'label'
-                            ])->toArray();
-                        
-                        foreach ($stream_link as $key => $item) {
-                            if ($tracks) {
-                                $item['tracks'] = $tracks;
-                            }
-                            
-                            $files[] = (object) $item;
-                        }
-                    }
-                    else {
-                        \Log::error('Get file stream '. $this->id .': ' . json_encode($stream->getErrors()));
-                    }
-                }
-            }
-        }
-        
-        return $files;
-    }
-    
-    protected function getVideoGoogleDriveStream3sEmbed() {
-        $client_id = get_config('stream3s_client_id');
-        $secret_key = get_config('stream3s_secret_key');
-        $files = [];
-        
-        if ($client_id && $secret_key) {
-            $stream = new Stream3sApi();
-            if ($stream->login($client_id, $secret_key)) {
-                $embed_link = $stream->addAndGetEmbedLink($this->url);
-                if ($embed_link) {
-                    $files[] = (object) [
-                        'file' => $embed_link,
-                        'type' => 'mp4',
-                    ];
-                }
-            }
-        }
-        
         return $files;
     }
     

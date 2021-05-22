@@ -13,3 +13,7 @@ Route::post('/watch/player/{slug}/{vid}', 'Frontend\PlayController@getPlayer')->
 Route::post('/watch/{slug}/comment', 'Frontend\CommentController@movieComment')->name('watch.comment');
 
 Route::get('/download/{link_id}', 'Frontend\WatchController@download')->name('watch.download');
+
+Route::get('/watch/no-view', function () {
+    return view('themes.mymo.watch.component.no_view');
+})->name('watch.no-view');

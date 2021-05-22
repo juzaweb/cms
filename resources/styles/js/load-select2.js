@@ -225,7 +225,6 @@ $(document).on("turbolinks:load", function() {
                 return query;
             }
         },
-
     });
 
     $('.load-post-categories').select2({
@@ -331,6 +330,66 @@ $(document).on("turbolinks:load", function() {
         ajax: {
             method: 'GET',
             url: '/admin-cp/load-data/loadSliders',
+            dataType: 'json',
+            data: function (params) {
+                let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
+                if (explodes) {
+                    explodes = $("." + explodes).map(function () {return $(this).val();}).get();
+                }
+
+                var query = {
+                    search: $.trim(params.term),
+                    page: params.page,
+                    explodes: explodes,
+                };
+
+                return query;
+            }
+        },
+    });
+
+    $('.load-live-tv-category').select2({
+        allowClear: true,
+        width: '100%',
+        placeholder: function (params) {
+            return {
+                id: null,
+                text: params.placeholder,
+            }
+        },
+        ajax: {
+            method: 'GET',
+            url: '/admin-cp/load-data/loadLiveTvCategory',
+            dataType: 'json',
+            data: function (params) {
+                let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
+                if (explodes) {
+                    explodes = $("." + explodes).map(function () {return $(this).val();}).get();
+                }
+
+                var query = {
+                    search: $.trim(params.term),
+                    page: params.page,
+                    explodes: explodes,
+                };
+
+                return query;
+            }
+        },
+    });
+
+    $('.load-countries-name').select2({
+        allowClear: true,
+        width: '100%',
+        placeholder: function (params) {
+            return {
+                id: null,
+                text: params.placeholder,
+            }
+        },
+        ajax: {
+            method: 'GET',
+            url: '/admin-cp/load-data/loadCountryName',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
