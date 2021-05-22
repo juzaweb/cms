@@ -5,7 +5,6 @@
 /.idea
 /update
 /composer.lock
-/bootstrap/cache
 /storage/*.key
 .env
 .env.backup

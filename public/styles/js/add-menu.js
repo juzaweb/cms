@@ -120,7 +120,7 @@ $("#modal-edit-menu").on('click', '.save-menu-item', function () {
 
 $(".load-menu").on('change', function () {
     let id = $(this).val();
-    window.location = "/admin-cp/theme/menu/"+ id;
+    window.location = "/admin-cp/design/menu/"+ id;
 });
 
 $('#accordion').on('submit', '.add-menu-item', function () {
@@ -142,7 +142,7 @@ $('#accordion').on('submit', '.add-menu-item', function () {
 
         $.ajax({
             type: "POST",
-            url: "/admin-cp/theme/menu/get-data",
+            url: "/admin-cp/design/menu/get-data",
             dataType: 'json',
             data: formData,
             success: function (result) {
