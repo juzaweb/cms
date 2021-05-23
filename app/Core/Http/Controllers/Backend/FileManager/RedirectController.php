@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\FileManager;
+namespace App\Core\Http\Controllers\Backend\FileManager;
 
 use Illuminate\Support\Facades\Storage;
 

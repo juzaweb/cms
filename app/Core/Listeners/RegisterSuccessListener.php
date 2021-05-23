@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Core\Listeners;
 
-use App\Events\RegisterSuccess;
-use App\Models\Email\EmailList;
-use App\User;
+use App\Core\Events\RegisterSuccess;
+use App\Core\Models\Email\EmailList;
+use App\Core\User;
 
 class RegisterSuccessListener
 {

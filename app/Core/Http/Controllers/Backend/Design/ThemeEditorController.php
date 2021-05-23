@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Design;
+namespace App\Core\Http\Controllers\Backend\Design;
 
-use App\Models\Configs;
-use App\Models\ThemeConfigs;
+use App\Core\Models\Configs;
+use App\Core\Models\ThemeConfigs;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 
 class ThemeEditorController extends Controller
 {

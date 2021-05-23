@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Backend\FileManager;
+namespace App\Core\Http\Controllers\Backend\FileManager;
 
-use App\Models\Files;
-use App\Models\Folders;
+use App\Core\Models\Files;
+use App\Core\Models\Folders;
 
 class RenameController extends LfmController
 {

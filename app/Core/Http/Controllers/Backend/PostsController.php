@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Core\Http\Controllers\Backend;
 
-use App\Models\PostCategories;
-use App\Models\Category\Tags;
+use App\Core\Models\PostCategories;
+use App\Core\Models\Category\Tags;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Posts;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\Posts;
 
 class PostsController extends Controller
 {

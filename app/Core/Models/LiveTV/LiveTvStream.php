@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\LiveTV;
+namespace App\Core\Models\LiveTV;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\LiveTV\LiveTvStream
+ * App\Core\Models\LiveTV\LiveTvStream
  *
  * @property int $id
  * @property string $label

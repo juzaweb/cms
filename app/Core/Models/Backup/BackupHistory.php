@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Backup;
+namespace App\Core\Models\Backup;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Backup\BackupHistory
+ * App\Core\Models\Backup\BackupHistory
  *
  * @property int $id
  * @property int $video_file_id

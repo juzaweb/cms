@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Account;
+namespace App\Core\Http\Controllers\Frontend\Account;
 
 use Illuminate\Support\Facades\Cookie;
-use App\Http\Controllers\Controller;
-use App\Models\Movie\Movies;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\Movie\Movies;
 
 class ProfileController extends Controller
 {

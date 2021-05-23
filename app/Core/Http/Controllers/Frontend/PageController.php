@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Core\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Pages;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\Pages;
 
 class PageController extends Controller
 {

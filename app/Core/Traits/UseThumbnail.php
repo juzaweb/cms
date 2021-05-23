@@ -2,7 +2,7 @@
 
 namespace App\Core\Traits;
 
-use App\Models\Files;
+use App\Core\Models\Files;
 use Illuminate\Support\Str;
 
 trait UseThumbnail {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Events;
+namespace App\Core\Events;
 
-use App\User;
+use App\Core\User;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;

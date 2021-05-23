@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Backend\FileManager;
+namespace App\Core\Http\Controllers\Backend\FileManager;
 
-use App\Models\Folders;
+use App\Core\Models\Folders;
 
 class FolderController extends LfmController
 {

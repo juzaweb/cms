@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\PostCategories;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\PostCategories;
 
 class PostCategoriesController extends Controller
 {

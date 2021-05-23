@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Core\Http\Controllers\Frontend;
 
-use App\Helpers\VideoStream;
-use App\Http\Controllers\Controller;
-use App\Helpers\UrlVideoStream;
+use App\Core\Helpers\VideoStream;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Helpers\UrlVideoStream;
 
 class StreamController extends Controller
 {

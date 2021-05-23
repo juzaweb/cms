@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Comments;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\Comments;
 
 class PostCommentsController extends Controller
 {

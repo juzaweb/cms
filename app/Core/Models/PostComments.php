@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\PostComments
+ * App\Core\Models\PostComments
  *
  * @property int $id
  * @property int $user_id
@@ -15,17 +15,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments whereApproved($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments whereMovieId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PostComments whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments whereApproved($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments whereMovieId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostComments whereUserId($value)
  * @mixin \Eloquent
  */
 class PostComments extends Model

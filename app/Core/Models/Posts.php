@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Models;
 
 use App\Core\Traits\UseChangeBy;
 use App\Core\Traits\UseMetaSeo;
@@ -9,7 +9,7 @@ use App\Core\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Posts
+ * App\Core\Models\Posts
  *
  * @property int $id
  * @property string $title
@@ -27,27 +27,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $updated_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PostComments[] $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Core\Models\PostComments[] $comments
  * @property-read int|null $comments_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereCategory($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereKeywords($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereMetaDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereMetaTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereTags($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereThumbnail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereUpdatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Posts whereViews($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereCategory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereMetaDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereMetaTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereTags($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereThumbnail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Posts whereViews($value)
  * @mixin \Eloquent
  */
 class Posts extends Model
@@ -64,7 +64,7 @@ class Posts extends Model
     ];
     
     public function comments() {
-        return $this->hasMany('App\Models\PostComments', 'post_id', 'id');
+        return $this->hasMany('App\Core\Models\PostComments', 'post_id', 'id');
     }
     
     public function created_by() {

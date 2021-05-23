@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Setting;
+namespace App\Core\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Video\VideoQualities;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\Video\VideoQualities;
 
 class VideoQualityController extends Controller
 {

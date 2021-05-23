@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Backend\FileManager;
+namespace App\Core\Http\Controllers\Backend\FileManager;
 
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 
 class LfmController extends Controller
 {

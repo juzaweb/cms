@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Design;
+namespace App\Core\Http\Controllers\Backend\Design;
 
-use App\Models\Category\Countries;
-use App\Models\Category\Genres;
-use App\Models\Menu;
-use App\Models\Pages;
-use App\Models\Category\Types;
+use App\Core\Models\Category\Countries;
+use App\Core\Models\Category\Genres;
+use App\Core\Models\Menu;
+use App\Core\Models\Pages;
+use App\Core\Models\Category\Types;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 
 class MenuController extends Controller
 {

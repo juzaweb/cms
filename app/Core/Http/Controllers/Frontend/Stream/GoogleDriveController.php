@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Stream;
+namespace App\Core\Http\Controllers\Frontend\Stream;
 
-use App\Helpers\GoogleDrive;
-use App\Http\Controllers\Controller;
+use App\Core\Helpers\GoogleDrive;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 
 class GoogleDriveController extends Controller

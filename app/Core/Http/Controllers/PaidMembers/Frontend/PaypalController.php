@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\PaidMembers\Frontend;
+namespace App\Core\Http\Controllers\PaidMembers\Frontend;
 
-use App\Models\PaymentHistory;
-use App\Models\UserSubscription;
+use App\Core\Models\PaymentHistory;
+use App\Core\Models\UserSubscription;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use PayPal\Api\Agreement;
 use PayPal\Api\Currency;
 use PayPal\Api\MerchantPreferences;

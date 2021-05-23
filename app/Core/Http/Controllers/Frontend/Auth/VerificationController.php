@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Auth;
+namespace App\Core\Http\Controllers\Frontend\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use App\User;
 
 class VerificationController extends Controller

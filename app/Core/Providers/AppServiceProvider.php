@@ -9,7 +9,7 @@
  * Github: https://github.com/mymocms/mymocms
  */
 
-namespace App\Providers;
+namespace App\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend\LiveTV;
+namespace App\Core\Http\Controllers\Backend\LiveTV;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\LiveTV\LiveTv;
-use App\Models\Category\Tags;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\LiveTV\LiveTv;
+use App\Core\Models\Category\Tags;
 
 class LiveTvController extends Controller
 {

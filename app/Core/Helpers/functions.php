@@ -1,13 +1,13 @@
 <?php
 
-use App\Models\Ads;
-use App\Models\Category\Countries;
-use App\Models\Category\Genres;
-use App\Models\Menu;
-use App\Models\Movie\Movies;
-use App\Models\Sliders;
-use App\Models\ThemeConfigs;
-use App\Models\Category\Types;
+use App\Core\Models\Ads;
+use App\Core\Models\Category\Countries;
+use App\Core\Models\Category\Genres;
+use App\Core\Models\Menu;
+use App\Core\Models\Movie\Movies;
+use App\Core\Models\Sliders;
+use App\Core\Models\ThemeConfigs;
+use App\Core\Models\Category\Types;
 use Illuminate\Support\Str;
 
 function json_message($message, $status = 'success') {
@@ -94,7 +94,7 @@ function logo_url($path) {
 }
 
 function get_config(string $key, $default = null) {
-    return \App\Models\Configs::getConfig($key, $default);
+    return \App\Core\Models\Configs::getConfig($key, $default);
 }
 
 function get_ads(string $key) {

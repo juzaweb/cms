@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Setting;
+namespace App\Core\Http\Controllers\Backend\Setting;
 
-use App\Models\Translation;
+use App\Core\Models\Translation;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Languages;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\Languages;
 
 class LanguagesController extends Controller
 {

@@ -15,7 +15,7 @@
                                     @endif
                                     <a href="{{ route('watch', [$info->slug]) }}">{{ $info->name }}</a> »
 
-                                    <span class="breadcrumb_last" aria-current="page">@lang('app.episode') {{ @\App\Models\Video\VideoFiles::find($player_id, ['label'])->label }}</span>
+                                    <span class="breadcrumb_last" aria-current="page">@lang('app.episode') {{ @\App\Core\Models\Video\VideoFiles::find($player_id, ['label'])->label }}</span>
                                 </span>
                             </span>
                         </span>

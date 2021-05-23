@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Core\Console\Commands;
 
-use App\Models\MyNotification;
+use App\Core\Models\MyNotification;
 use App\User;
 use Illuminate\Console\Command;
 

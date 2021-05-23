@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Design;
+namespace App\Core\Http\Controllers\Backend\Design;
 
-use App\Models\Sliders;
+use App\Core\Models\Sliders;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 
 class SlidersController extends Controller
 {

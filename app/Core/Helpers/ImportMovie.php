@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Core\Helpers;
 
-use App\Models\Category\Countries;
-use App\Models\Files;
-use App\Models\Category\Genres;
-use App\Models\Movie\Movies;
-use App\Models\Category\Stars;
-use App\Models\Category\Tags;
+use App\Core\Models\Category\Countries;
+use App\Core\Models\Files;
+use App\Core\Models\Category\Genres;
+use App\Core\Models\Movie\Movies;
+use App\Core\Models\Category\Stars;
+use App\Core\Models\Category\Tags;
 use Illuminate\Support\Str;
 
 class ImportMovie

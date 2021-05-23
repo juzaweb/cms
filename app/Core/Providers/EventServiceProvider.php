@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace App\Core\Providers;
 
-use App\Events\RegisterSuccess;
-use App\Listeners\RegisterSuccessListener;
+use App\Core\Events\RegisterSuccess;
+use App\Core\Events\RegisterSuccessListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider

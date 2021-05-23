@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Configs
+ * App\Core\Models\Configs
  *
  * @property int $id
  * @property string $code
  * @property string|null $value
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Configs newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Configs newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Configs query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Configs whereCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Configs whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Configs whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Configs whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Configs whereValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Configs newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Configs newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Configs query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Configs whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Configs whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Configs whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Configs whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Configs whereValue($value)
  * @mixin \Eloquent
  */
 class Configs extends Model

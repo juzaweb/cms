@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Installer;
+namespace App\Core\Http\Controllers\Installer;
 
-use App\Helpers\PermissionsChecker;
-use App\Helpers\RequirementsChecker;
+use App\Core\Helpers\PermissionsChecker;
+use App\Core\Helpers\RequirementsChecker;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\User;
 

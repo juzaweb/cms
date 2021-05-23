@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Core\Http\Controllers\Backend;
 
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\MyNotification;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\MyNotification;
 
 class SendNotificationController extends Controller
 {

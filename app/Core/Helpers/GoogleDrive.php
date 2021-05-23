@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Core\Helpers;
 
 class GoogleDrive {
     private $cache_path;

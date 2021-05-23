@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Stream;
+namespace App\Core\Http\Controllers\Frontend\Stream;
 
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 
 class StreamController extends Controller
@@ -11,7 +11,7 @@ class StreamController extends Controller
         $stream = base64_decode(urldecode($file));
         $stream = json_decode(Crypt::decryptString($stream));
         
-        $class = 'App\Http\Controllers\Frontend\Stream\\'. $stream->class .'Controller';
+        $class = 'App\Core\Http\Controllers\Frontend\Stream\\'. $stream->class .'Controller';
         if (class_exists($class)) {
             $controller = new $class();
             $controller->stream($file, $quality);

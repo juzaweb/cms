@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Setting;
+namespace App\Core\Http\Controllers\Backend\Setting;
 
-use App\Models\Configs;
-use App\Models\Email\EmailTemplates;
+use App\Core\Models\Configs;
+use App\Core\Models\Email\EmailTemplates;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
 class EmailSettingController extends Controller

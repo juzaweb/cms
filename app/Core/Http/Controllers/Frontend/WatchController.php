@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Core\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\DownloadLink;
-use App\Models\Video\VideoServers;
-use App\Models\Category\Genres;
-use App\Models\Movie\Movies;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\DownloadLink;
+use App\Core\Models\Video\VideoServers;
+use App\Core\Models\Category\Genres;
+use App\Core\Models\Movie\Movies;
 
 class WatchController extends Controller
 {

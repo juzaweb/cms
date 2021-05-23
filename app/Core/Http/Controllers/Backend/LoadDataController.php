@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Core\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Models\LiveTV\LiveTvCategory;
-use App\Models\Sliders;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\LiveTV\LiveTvCategory;
+use App\Core\Models\Sliders;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use App\Models\Category\Countries;
-use App\Models\Category\Genres;
-use App\Models\Menu;
-use App\Models\PostCategories;
-use App\Models\Category\Stars;
-use App\Models\Category\Tags;
-use App\Models\Category\Types;
+use App\Core\Models\Category\Countries;
+use App\Core\Models\Category\Genres;
+use App\Core\Models\Menu;
+use App\Core\Models\PostCategories;
+use App\Core\Models\Category\Stars;
+use App\Core\Models\Category\Tags;
+use App\Core\Models\Category\Types;
 use App\User;
 
 class LoadDataController extends Controller

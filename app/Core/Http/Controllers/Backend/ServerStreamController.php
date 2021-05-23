@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Core\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ServerStream;
+use App\Core\Models\ServerStream;
 
 class ServerStreamController extends Controller
 {

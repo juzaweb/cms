@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Video;
+namespace App\Core\Models\Video;
 
-use App\Helpers\GoogleDrive;
+use App\Core\Helpers\GoogleDrive;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
 
 /**
- * App\Models\Video\VideoFiles
+ * App\Core\Models\Video\VideoFiles
  *
  * @property int $id
  * @property int $server_id
@@ -27,32 +27,32 @@ use Illuminate\Support\Facades\Crypt;
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereConverted($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereLabel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereMovieId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereServerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereSource($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo1080p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo2048p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo240p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo360p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo4096p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo480p($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video\VideoFiles whereVideo720p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereConverted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereLabel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereMovieId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereServerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereSource($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereVideo1080p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereVideo2048p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereVideo240p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereVideo360p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereVideo4096p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereVideo480p($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoFiles whereVideo720p($value)
  * @mixin \Eloquent
  * @property int $enable_remote
  * @method static \Illuminate\Database\Eloquent\Builder|VideoFiles whereEnableRemote($value)
- * @property-read \App\Models\Video\VideoServers|null $server
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Subtitle[] $subtitles
+ * @property-read \App\Core\Models\Video\VideoServers|null $server
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Core\Models\Subtitle[] $subtitles
  * @property-read int|null $subtitles_count
  */
 class VideoFiles extends Model
@@ -68,7 +68,7 @@ class VideoFiles extends Model
     ];
     
     public function server() {
-        return $this->hasOne('App\Models\Video\VideoServers', 'id', 'server_id');
+        return $this->hasOne('App\Core\Models\Video\VideoServers', 'id', 'server_id');
     }
     
     public function getFiles() {
@@ -97,7 +97,7 @@ class VideoFiles extends Model
     }
     
     public function subtitles() {
-        return $this->hasMany('App\Models\Subtitle', 'file_id', 'id');
+        return $this->hasMany('App\Core\Models\Subtitle', 'file_id', 'id');
     }
     
     public function isSourceEmbed() {

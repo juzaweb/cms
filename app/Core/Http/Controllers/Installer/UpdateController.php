@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Installer;
+namespace App\Core\Http\Controllers\Installer;
 
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 
 class UpdateController extends Controller
 {

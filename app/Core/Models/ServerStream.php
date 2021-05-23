@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\ServerStream
+ * App\Core\Models\ServerStream
  *
  * @property int $id
  * @property string $key

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Design;
+namespace App\Core\Http\Controllers\Backend\Design;
 
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ThemesController extends Controller

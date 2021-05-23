@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Core\Http\Controllers\Backend;
 
-use App\Models\Movie\Movies;
-use App\Models\Movie\MovieViews;
-use App\Models\Pages;
+use App\Core\Models\Movie\Movies;
+use App\Core\Models\Movie\MovieViews;
+use App\Core\Models\Pages;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {

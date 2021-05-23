@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Logs;
+namespace App\Core\Http\Controllers\Backend\Logs;
 
 use Illuminate\Http\Request;
-use App\Models\Email\EmailList;
-use App\Http\Controllers\Controller;
+use App\Core\Models\Email\EmailList;
+use App\Core\Http\Controllers\Controller;
 
 class EmailLogsController extends Controller
 {

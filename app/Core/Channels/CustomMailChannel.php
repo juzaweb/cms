@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Channels;
+namespace App\Core\Channels;
 
-use App\Models\Email\EmailList;
+use App\Core\Models\Email\EmailList;
 use Illuminate\Notifications\Notification;
 
 class CustomMailChannel

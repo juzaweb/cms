@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Core\Http\Controllers\Frontend;
 
-use App\Models\Category\Countries;
-use App\Models\Movie\Movies;
-use App\Http\Controllers\Controller;
+use App\Core\Models\Category\Countries;
+use App\Core\Models\Movie\Movies;
+use App\Core\Http\Controllers\Controller;
 
 class CountryController extends Controller
 {

@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Translation
+ * App\Core\Models\Translation
  *
  * @property int $id
  * @property string $key
  * @property string|null $en
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Translation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Translation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Translation query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Translation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Translation whereEn($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Translation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Translation whereKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Translation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Translation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Translation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Translation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Translation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Translation whereEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Translation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Translation whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Translation whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Translation extends Model

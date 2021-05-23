@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Account;
+namespace App\Core\Http\Controllers\Frontend\Account;
 
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use App\Models\Movie\Movies;
+use App\Core\Models\Movie\Movies;
 use App\User;
 use Illuminate\Http\Request;
 

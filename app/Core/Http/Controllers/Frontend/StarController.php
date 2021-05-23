@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Core\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Movie\Movies;
-use App\Models\Category\Stars;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\Movie\Movies;
+use App\Core\Models\Category\Stars;
 
 class StarController extends Controller
 {

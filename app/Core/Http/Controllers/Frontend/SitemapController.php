@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Core\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category\Countries;
-use App\Models\Category\Genres;
-use App\Models\Movie\Movies;
-use App\Models\PostCategories;
-use App\Models\Posts;
+use App\Core\Http\Controllers\Controller;
+use App\Core\Models\Category\Countries;
+use App\Core\Models\Category\Genres;
+use App\Core\Models\Movie\Movies;
+use App\Core\Models\PostCategories;
+use App\Core\Models\Posts;
 
 class SitemapController extends Controller
 {

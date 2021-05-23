@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console;
+namespace App\Core\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -21,6 +21,6 @@ class Kernel extends ConsoleKernel
     {
         $this->load(__DIR__.'/Commands');
 
-        require base_path('routes/console.php');
+        require app_path('Core/routes/console.php');
     }
 }

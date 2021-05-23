@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\DownloadLink
+ * App\Core\Models\DownloadLink
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\DownloadLink whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property string $label
  * @property string $url
@@ -39,6 +39,6 @@ class DownloadLink extends Model
     ];
     
     public function movie() {
-        return $this->hasOne('App\Models\Movie\Movies', 'id', 'movie_id');
+        return $this->hasOne('App\Core\Models\Movie\Movies', 'id', 'movie_id');
     }
 }

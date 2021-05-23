@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\LiveTV;
+namespace App\Core\Models\LiveTV;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Core\Traits\UseChangeBy;
@@ -8,7 +8,7 @@ use App\Core\Traits\UseMetaSeo;
 use App\Core\Traits\UseThumbnail;
 
 /**
- * App\Models\LiveTV\LiveTv
+ * App\Core\Models\LiveTV\LiveTv
  *
  * @property int $id
  * @property string $name

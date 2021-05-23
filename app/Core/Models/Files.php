@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Files
+ * App\Core\Models\Files
  *
  * @property int $id
  * @property string $name
@@ -18,20 +18,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereExtension($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereFolderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereMimeType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files wherePath($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Files whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereExtension($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereFolderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereMimeType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Files whereUserId($value)
  * @mixin \Eloquent
  */
 class Files extends Model

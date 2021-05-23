@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Setting;
+namespace App\Core\Http\Controllers\Backend\Setting;
 
-use App\Models\Configs;
+use App\Core\Models\Configs;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 
 class SystemSettingController extends Controller
 {

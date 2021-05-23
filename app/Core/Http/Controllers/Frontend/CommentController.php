@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Core\Http\Controllers\Frontend;
 
-use App\Models\Movie\Movies;
-use App\Models\Posts;
+use App\Core\Models\Movie\Movies;
+use App\Core\Models\Posts;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {

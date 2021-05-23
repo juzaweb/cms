@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Folders
+ * App\Core\Models\Folders
  *
  * @property int $id
  * @property string $name
@@ -13,19 +13,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $folder_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Files[] $childs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Core\Models\Files[] $childs
  * @property-read int|null $childs_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Folders[] $folder_childs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Core\Models\Folders[] $folder_childs
  * @property-read int|null $folder_childs_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Folders newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Folders newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Folders query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Folders whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Folders whereFolderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Folders whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Folders whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Folders whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Folders whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Folders newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Folders newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Folders query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Folders whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Folders whereFolderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Folders whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Folders whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Folders whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Folders whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Folders extends Model
@@ -37,11 +37,11 @@ class Folders extends Model
     ];
     
     public function childs() {
-        return $this->hasMany('App\Models\Files', 'folder_id', 'id');
+        return $this->hasMany('App\Core\Models\Files', 'folder_id', 'id');
     }
     
     public function folder_childs() {
-        return $this->hasMany('App\Models\Folders', 'folder_id', 'id');
+        return $this->hasMany('App\Core\Models\Folders', 'folder_id', 'id');
     }
     
     public function deleteFolder() {

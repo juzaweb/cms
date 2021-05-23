@@ -9,7 +9,7 @@
  * Github: https://github.com/mymocms/mymocms
  */
 
-namespace App\Http\Controllers;
+namespace App\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;

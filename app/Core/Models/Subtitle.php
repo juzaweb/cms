@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Subtitle
+ * App\Core\Models\Subtitle
  *
  * @property int $id
  * @property string $label

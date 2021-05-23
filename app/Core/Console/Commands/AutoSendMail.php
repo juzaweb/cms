@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Core\Console\Commands;
 
-use App\Models\Configs;
-use App\Models\Email\EmailList;
+use App\Core\Models\Configs;
+use App\Core\Models\Email\EmailList;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;

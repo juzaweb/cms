@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Core\Http\Controllers\Backend;
 
-use App\Helpers\TmdbApi;
-use App\Models\Category\Countries;
-use App\Models\Files;
-use App\Models\Category\Genres;
-use App\Models\Movie\Movies;
-use App\Models\Category\Stars;
+use App\Core\Helpers\TmdbApi;
+use App\Core\Models\Category\Countries;
+use App\Core\Models\Files;
+use App\Core\Models\Category\Genres;
+use App\Core\Models\Movie\Movies;
+use App\Core\Models\Category\Stars;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 
 class TmdbController extends Controller
