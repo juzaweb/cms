@@ -28,6 +28,7 @@
         "php": ">=7.2.5",
         "aminyazdanpanah/php-ffmpeg-video-streaming": "^1.2",
         "arcanedev/log-viewer": "5.*",
+        "codedge/laravel-selfupdater": "^3.2",
         "diglactic/laravel-breadcrumbs": "6.x",
         "dilab/resumable.php": "^0.1.4",
         "fideloper/proxy": "^4.0",

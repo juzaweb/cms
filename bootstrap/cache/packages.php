@@ -14,6 +14,17 @@
       0 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
     ),
   ),
+  'codedge/laravel-selfupdater' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Codedge\\Updater\\UpdaterServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Updater' => 'Codedge\\Updater\\UpdaterFacade',
+    ),
+  ),
   'diglactic/laravel-breadcrumbs' => 
   array (
     'providers' => 
