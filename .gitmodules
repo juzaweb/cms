@@ -1,0 +1,3 @@
+[submodule "app/Core"]
+	path = app/Core
+	url = https://github.com/mymocms/mymo-core.git
