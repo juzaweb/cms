@@ -1,7 +1,7 @@
 {
     "name": "mymocms/mymocms",
     "type": "project",
-    "description": "MyMo is a Laravel CMS powerful, flexible and User friendly movie & Video Steaming CMS Pro with advance video contents management system. It\u2019s easy to use & install. It has been created to provide unique experience to movie lover & movie site owner.",
+    "description": "MyMo is a Laravel CMS powerful, flexible and User friendly movie & Video Steaming CMS Pro with advance video contents management system. It’s easy to use & install. It has been created to provide unique experience to movie lover & movie site owner.",
     "keywords": [
         "laravel cms",
         "mymo cms",
@@ -28,7 +28,6 @@
         "php": ">=7.2.5",
         "aminyazdanpanah/php-ffmpeg-video-streaming": "^1.2",
         "arcanedev/log-viewer": "5.*",
-        "codedge/laravel-selfupdater": "^3.2",
         "diglactic/laravel-breadcrumbs": "6.x",
         "dilab/resumable.php": "^0.1.4",
         "fideloper/proxy": "^4.0",
@@ -67,21 +66,16 @@
     },
     "autoload": {
         "files": [
-            "core/Helpers/functions.php",
-            "core/Helpers/simple_html_dom.php",
-            "core/Helpers/VideoStream.php",
-            "core/Helpers/UrlVideoStream.php",
-            "core/Helpers/Stream3sApi.php",
-            "core/Helpers/TmdbConfiguration.php",
-            "core/Helpers/TmdbApi.php"
+            "app/Core/Helpers/functions.php",
+            "app/Core/Helpers/simple_html_dom.php"
         ],
         "psr-4": {
-            "App\\": "core/",
+            "App\\": "app/",
             "Modules\\": "modules/"
         },
         "classmap": [
-            "core/database/seeds",
-            "core/database/factories"
+            "app/Core/database/seeds",
+            "app/Core/database/factories"
         ]
     },
     "autoload-dev": {

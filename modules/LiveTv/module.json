@@ -1,0 +1,13 @@
+{
+    "name": "LiveTv",
+    "alias": "livetv",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\LiveTv\\Providers\\LiveTvServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
