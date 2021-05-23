@@ -67,26 +67,26 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/functions.php",
-            "app/Helpers/simple_html_dom.php",
-            "app/Helpers/VideoStream.php",
-            "app/Helpers/UrlVideoStream.php",
-            "app/Helpers/Stream3sApi.php",
-            "app/Helpers/TmdbConfiguration.php",
-            "app/Helpers/TmdbApi.php"
+            "core/Helpers/functions.php",
+            "core/Helpers/simple_html_dom.php",
+            "core/Helpers/VideoStream.php",
+            "core/Helpers/UrlVideoStream.php",
+            "core/Helpers/Stream3sApi.php",
+            "core/Helpers/TmdbConfiguration.php",
+            "core/Helpers/TmdbApi.php"
         ],
         "psr-4": {
-            "App\\": "app/",
+            "App\\": "core/",
             "Modules\\": "modules/"
         },
         "classmap": [
-            "database/seeds",
-            "database/factories"
+            "core/database/seeds",
+            "core/database/factories"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "core/tests/"
         }
     },
     "minimum-stability": "dev",
