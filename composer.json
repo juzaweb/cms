@@ -75,6 +75,7 @@
             "app/Helpers/TmdbApi.php"
         ],
         "psr-4": {
+            "App\\": "app/",
             "Modules\\": "modules/"
         },
         "classmap": [
