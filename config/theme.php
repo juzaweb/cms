@@ -34,7 +34,7 @@ return [
     | then symlink can be false or true as your wish.
     |
     */
-    'symlink'    => true,
+    'symlink'    => false,
     
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +101,7 @@ return [
 
         'css' => 'assets/css',
         'js'  => 'assets/js',
-        'img' => 'assets/img',
+        'img' => 'assets/images',
 
         'layouts' => 'views/layouts',
     ],
@@ -115,7 +115,7 @@ return [
     |
     */
     'stubs'      => [
-        'path'  => base_path('vendor/shipu/themevel/src/Console/stubs'),
+        'path'  => app_path('Core/Console/stubs/theme'),
         'files' => [
             'css'    => 'assets/css/app.css',
             'layout' => 'views/layouts/master.blade.php',
