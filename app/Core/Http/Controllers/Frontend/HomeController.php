@@ -2,12 +2,12 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 
-class HomeController extends Controller
+class HomeController extends FrontendController
 {
     public function index() {
-        return view('themes.mymo.home.index', [
+        return view('home.index', [
             'title' => get_config('title'),
             'description' => get_config('description'),
             'keywords' => get_config('keywords'),

@@ -4,9 +4,9 @@ namespace App\Core\Http\Controllers\Frontend;
 
 use App\Core\Models\Category\Countries;
 use App\Core\Models\Movie\Movies;
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 
-class CountryController extends Controller
+class CountryController extends FrontendController
 {
     public function index($slug) {
         $info = Countries::where('slug', '=', $slug)

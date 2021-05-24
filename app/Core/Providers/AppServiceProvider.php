@@ -1,6 +1,6 @@
 <?php
 /**
- * MYMO CMS - TV Series & Movie Portal CMS Unlimited
+ * MYMO CMS
  *
  * @package mymocms/mymocms
  * @author The Anh Dang
@@ -11,6 +11,7 @@
 
 namespace App\Core\Providers;
 
+use App\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
+
+        $this->app->register(ThemeServiceProvider::class);
     }
 
     /**
