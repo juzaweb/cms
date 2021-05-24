@@ -4,7 +4,7 @@ namespace Modules\Movie\Http\Controllers\Backend;
 
 use App\Core\Models\Movie\Movies;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use App\Core\Models\DownloadLink;
 
 class MovieDownloadController extends Controller

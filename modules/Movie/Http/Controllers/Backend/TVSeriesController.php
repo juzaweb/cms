@@ -8,17 +8,19 @@ use App\Core\Models\Category\Stars;
 use App\Core\Models\Category\Tags;
 use App\Core\Models\Video\VideoQualities;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use App\Core\Models\Movie\Movies;
 use Illuminate\Support\Str;
 
 class TVSeriesController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('backend.tv_series.index');
     }
     
-    public function getData(Request $request) {
+    public function getData(Request $request)
+    {
         $search = $request->get('search');
         $status = $request->get('status');
         $genre = $request->get('genre');
@@ -73,7 +75,8 @@ class TVSeriesController extends Controller
         ]);
     }
     
-    public function form($id = null) {
+    public function form($id = null)
+    {
         $model = Movies::firstOrNew(['id' => $id]);
         $qualities = VideoQualities::get();
         $tags = Tags::whereIn('id', explode(',', $model->tags))->get();
@@ -96,7 +99,8 @@ class TVSeriesController extends Controller
         ]);
     }
     
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $this->validateRequest([
             'name' => 'required|string|max:250',
             'description' => 'nullable',
@@ -152,7 +156,8 @@ class TVSeriesController extends Controller
         ]);
     }
     
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [

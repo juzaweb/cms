@@ -9,7 +9,7 @@ use App\Core\Models\Category\Tags;
 use App\Core\Models\Category\Types;
 use App\Core\Models\Video\VideoQualities;
 use App\Core\Models\Movie\Movies;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

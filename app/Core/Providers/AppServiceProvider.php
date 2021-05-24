@@ -1,6 +1,6 @@
 <?php
 /**
- * MYMO CMS
+ * MYMOCMS
  *
  * @package mymocms/mymocms
  * @author The Anh Dang
