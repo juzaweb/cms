@@ -13,15 +13,15 @@
         "tv series"
     ],
     "authors": [
-      {
-        "name": "The Anh Dang",
-        "email": "dangtheanh16@gmail.com",
-        "role": "Developer"
-      }
+        {
+            "name": "The Anh Dang",
+            "email": "dangtheanh16@gmail.com",
+            "role": "Developer"
+        }
     ],
     "support": {
-      "email": "dangtheanh16@gmail.com",
-      "docs": "https://github.com/mymocms/mymocms"
+        "email": "dangtheanh16@gmail.com",
+        "docs": "https://github.com/mymocms/mymocms"
     },
     "license": "MIT",
     "require": {
@@ -32,6 +32,7 @@
         "dilab/resumable.php": "^0.1.4",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.5",
+        "hassankhan/config": "^2.2",
         "ip2location/ip2location-laravel": "^1.0",
         "ip2location/ip2location-php": "^8.3",
         "laravel/framework": "6.*",
@@ -40,6 +41,7 @@
         "nwidart/laravel-modules": "^8.2",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",
+        "symfony/yaml": "^5.2",
         "unisharp/laravel-filemanager": "^2.1"
     },
     "require-dev": {
@@ -59,32 +61,27 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-              "barryvdh/laravel-ide-helper"
+                "barryvdh/laravel-ide-helper"
             ]
         }
     },
     "autoload": {
         "files": [
-            "app/Helpers/functions.php",
-            "app/Helpers/simple_html_dom.php",
-            "app/Helpers/VideoStream.php",
-            "app/Helpers/UrlVideoStream.php",
-            "app/Helpers/Stream3sApi.php",
-            "app/Helpers/TmdbConfiguration.php",
-            "app/Helpers/TmdbApi.php"
+            "app/Core/Helpers/functions.php",
+            "app/Core/Helpers/simple_html_dom.php"
         ],
         "psr-4": {
             "App\\": "app/",
             "Modules\\": "modules/"
         },
         "classmap": [
-            "database/seeds",
-            "database/factories"
+            "app/Core/database/seeds",
+            "app/Core/database/factories"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "core/tests/"
         }
     },
     "minimum-stability": "dev",

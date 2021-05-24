@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/backend.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles/css/backend.css') }}">
     <script type="text/javascript">
         var langs = {
             'are_you_sure_delete_items': '@lang('app.are_you_sure_delete_items')',
@@ -31,8 +31,8 @@
         }
     </script>
 
-    <script src="{{ asset('js/backend.js') }}"></script>
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('styles/js/backend.js') }}"></script>
+    <script src="{{ asset('styles/ckeditor/ckeditor.js') }}"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
@@ -46,7 +46,7 @@
         <div class="cui__menuLeft__outer">
             <div class="cui__menuLeft__logo__container">
                 <div class="cui__menuLeft__logo">
-                    <img src="{{ asset('images/logo.png') }}" class="mr-2" alt="Mymo Logo" />
+                    <img src="{{ asset('styles/images/logo.png') }}" class="mr-2" alt="Mymo Logo" />
                 </div>
             </div>
 
@@ -77,7 +77,6 @@
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

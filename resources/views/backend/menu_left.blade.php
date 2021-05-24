@@ -89,13 +89,6 @@
     </li>
 
     <li class="cui__menuLeft__item">
-        <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/server-stream*')) cui__menuLeft__item--active @endif" href="{{ route('admin.server-stream') }}">
-            <span class="cui__menuLeft__item__title">@lang('app.server_stream')</span>
-            <i class="cui__menuLeft__item__icon fe fe-server"></i>
-        </a>
-    </li>
-
-    <li class="cui__menuLeft__item">
         <a class="cui__menuLeft__item__link @if(request()->is('admin-cp/pages*')) cui__menuLeft__item--active @endif" href="{{ route('admin.pages') }}">
             <span class="cui__menuLeft__item__title">@lang('app.pages')</span>
             <i class="cui__menuLeft__item__icon fe fe-clipboard"></i>

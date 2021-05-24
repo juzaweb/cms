@@ -3,7 +3,7 @@
 
     $tags = null;
     if (isset($option_card[$input['name']]['tags']) && is_array($option_card[$input['name']]['tags'])) {
-        $tags = \App\Models\Category\Tags::where('shop_id', '=', $shop_id)
+        $tags = \App\Core\Models\Category\Tags::where('shop_id', '=', $shop_id)
             ->where('status', '=', 1)
             ->whereIn('id', $option_card[$input['name']]['tags']);
     }

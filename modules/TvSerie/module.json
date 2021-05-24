@@ -1,0 +1,13 @@
+{
+    "name": "TvSerie",
+    "alias": "tvserie",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\TvSerie\\Providers\\TvSerieServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
