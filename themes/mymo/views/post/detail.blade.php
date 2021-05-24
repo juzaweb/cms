@@ -1,4 +1,4 @@
-@extends('themes.mymo.layout')
+@extends('layouts.master')
 
 @section('content')
 
@@ -47,13 +47,13 @@
                 </div>
 
                 <div class="comments">
-                    @include('themes.mymo.post.component.comment')
+                    @include('post.component.comment')
                 </div>
             </section>
         </main>
 
         <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
-            @include('themes.mymo.data.sidebar')
+            @include('data.sidebar')
         </aside>
     </div>
 

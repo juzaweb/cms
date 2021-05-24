@@ -1,4 +1,4 @@
-@extends('themes.mymo.layout')
+@extends('layouts.master')
 
 @section('content')
     <div class="row container" id="wrapper">
@@ -26,7 +26,7 @@
             </div>
         </div><!-- end panel-default -->
 
-        @include('themes.mymo.account.sidebar')
+        @include('account.sidebar')
 
         <main id="main-contents" class="col-xs-12 col-sm-12 col-md-12">
             <section>

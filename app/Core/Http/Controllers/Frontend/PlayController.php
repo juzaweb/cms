@@ -20,7 +20,7 @@ class PlayController extends Controller
             ->whereIn('id', explode(',', $info->genres))
             ->first(['id', 'name', 'slug']);
         
-        return view('themes.mymo.watch.watch', [
+        return view('watch.watch', [
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,
@@ -50,7 +50,7 @@ class PlayController extends Controller
                 return response()->json([
                     'data' => [
                         'status' => true,
-                        'sources' => view('themes.mymo.data.player_script', [
+                        'sources' => view('data.player_script', [
                             'movie' => $movie,
                             'file' => $file,
                             'files' => $files,
@@ -67,7 +67,7 @@ class PlayController extends Controller
             return response()->json([
                 'data' => [
                     'status' => true,
-                    'sources' => view('themes.mymo.data.player_script', [
+                    'sources' => view('data.player_script', [
                         'movie' => $movie,
                         'file' => $file,
                         'files' => $files,

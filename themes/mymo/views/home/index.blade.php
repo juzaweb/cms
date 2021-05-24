@@ -46,7 +46,7 @@
                     @if(!$genre->items->isEmpty())
                         @foreach($genre->items as $item)
                         <article class="thumb grid-item post-{{ $item->id }}">
-                            @include('themes.mymo.data.item')
+                            @include('data.item')
                         </article>
                         @endforeach
                     @endif
@@ -101,7 +101,7 @@
                     @if(!$genre->items->isEmpty())
                         @foreach($genre->items as $item)
                         <article class="col-md-2 col-sm-4 col-xs-6 thumb grid-item post-{{ $item->id }}">
-                            @include('themes.mymo.data.item')
+                            @include('data.item')
                         </article>
                         @endforeach
                     @endif

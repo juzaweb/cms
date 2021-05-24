@@ -1,4 +1,4 @@
-@extends('themes.mymo.layout')
+@extends('layouts.master')
 
 @section('content')
 
@@ -48,7 +48,7 @@
         </main>
 
         <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
-            @include('themes.mymo.data.sidebar')
+            @include('data.sidebar')
         </aside>
     </div>
 

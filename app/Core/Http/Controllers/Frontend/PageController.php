@@ -12,7 +12,7 @@ class PageController extends Controller
             ->where('slug', '=', $slug)
             ->firstOrFail();
         
-        return view('themes.mymo.page.index', [
+        return view('page.index', [
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,

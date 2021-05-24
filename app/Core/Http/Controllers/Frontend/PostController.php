@@ -13,7 +13,7 @@ class PostController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(5, ['id', 'title', 'slug', 'meta_description']);
         
-        return view('themes.mymo.post.index', [
+        return view('post.index', [
             'title' => get_config('blog_title'),
             'description' => get_config('blog_description'),
             'keywords' => get_config('blog_keywords'),
@@ -29,7 +29,7 @@ class PostController extends Controller
         
         $this->_setView($info);
         
-        return view('themes.mymo.post.detail', [
+        return view('post.detail', [
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,

@@ -33,7 +33,7 @@ class TVSeriesController extends Controller
             ->orderBy('id', 'DESC')
             ->paginate(20);
     
-        return view('themes.mymo.genre.index', [
+        return view('genre.index', [
             'title' => get_config('tv_series_title'),
             'description' => get_config('tv_series_description'),
             'keywords' => get_config('tv_series_keywords'),

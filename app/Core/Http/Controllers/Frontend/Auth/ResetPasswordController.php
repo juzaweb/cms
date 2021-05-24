@@ -13,7 +13,7 @@ class ResetPasswordController extends Controller
         PasswordReset::where('token', $token)
             ->firstOrFail();
         
-        return view('themes.mymo.auth.reset_password', [
+        return view('auth.reset_password', [
             'token' => $token
         ]);
     }

@@ -1,4 +1,4 @@
-@extends('themes.mymo.layout')
+@extends('layouts.master')
 
 @section('content')
 
@@ -37,7 +37,7 @@
         <section id="content">
             <div class="clearfix wrap-content">
 
-                @include('themes.mymo.watch.component.global_script')
+                @include('watch.component.global_script')
 
                 <div class="mymo-movie-wrapper">
                     <div class="title-block watch-page">
@@ -199,7 +199,7 @@
                 <div class="clearfix"></div>
 
                 <div class="comments">
-                    @include('themes.mymo.watch.component.comment')
+                    @include('watch.component.comment')
                 </div>
 
             </div>
@@ -215,7 +215,7 @@
                 <div id="mymo_related_movies-2" class="owl-carousel owl-theme related-film">
                     @foreach($related_movies as $item)
                     <article class="thumb grid-item post-{{ $item->id }}">
-                        @include('themes.mymo.data.relate_item')
+                        @include('data.relate_item')
                     </article>
                     @endforeach
                 </div>
@@ -251,7 +251,7 @@
     </main>
 
     <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
-        @include('themes.mymo.data.sidebar')
+        @include('data.sidebar')
     </aside>
 </div>
 

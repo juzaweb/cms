@@ -6,7 +6,8 @@ use App\Core\Http\Controllers\FrontendController;
 
 class HomeController extends FrontendController
 {
-    public function index() {
+    public function index()
+    {
         return view('home.index', [
             'title' => get_config('title'),
             'description' => get_config('description'),

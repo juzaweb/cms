@@ -49,7 +49,7 @@ class ForgotPasswordController extends Controller
     }
     
     public function message() {
-        return view('themes.mymo.message', [
+        return view('message', [
             'title' => trans('app.forgot_message'),
             'description' => trans('app.forgot_message_description'),
         ]);

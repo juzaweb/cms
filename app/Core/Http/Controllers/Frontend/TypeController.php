@@ -16,7 +16,7 @@ class TypeController extends Controller
             ->orderBy('id', 'DESC')
             ->paginate(20);
         
-        return view('themes.mymo.genre.index', [
+        return view('genre.index', [
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,

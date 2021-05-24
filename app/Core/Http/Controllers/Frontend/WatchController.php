@@ -24,7 +24,7 @@ class WatchController extends Controller
             ->orderBy('order', 'ASC')
             ->get();
         
-        return view('themes.mymo.watch.index', [
+        return view('watch.index', [
             'title' => $info->meta_title,
             'description' => $info->meta_description,
             'keywords' => $info->keywords,

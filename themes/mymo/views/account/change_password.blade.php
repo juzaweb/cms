@@ -1,4 +1,4 @@
-@extends('themes.mymo.layout')
+@extends('layouts.master')
 
 @section('content')
 <div class="row container" id="wrapper">
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    @include('themes.mymo.account.sidebar')
+    @include('account.sidebar')
 
     <main id="main-contents" class="col-xs-12 col-sm-12 col-md-12">
         <section>
@@ -100,7 +100,7 @@
             <div role="tabpanel" class="tab-pane active">
                 <div class="popular-post">
                     @foreach($recently_visited as $item)
-                        @include('themes.mymo.data.mini_item')
+                        @include('data.mini_item')
                     @endforeach
                 </div>
 

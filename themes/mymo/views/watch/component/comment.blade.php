@@ -41,7 +41,7 @@
                 @endphp
 
                 @foreach($comments as $comment)
-                    @include('themes.mymo.watch.component.comment_item')
+                    @include('watch.component.comment_item')
                 @endforeach
 
                 {{ $comments->links() }}

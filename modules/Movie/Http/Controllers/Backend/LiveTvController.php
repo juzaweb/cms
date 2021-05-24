@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\LiveTv\Http\Controllers;
+namespace Modules\Movie\Http\Controllers\Backend;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;

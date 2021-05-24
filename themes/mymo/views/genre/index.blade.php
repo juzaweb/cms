@@ -1,4 +1,4 @@
-@extends('themes.mymo.layout')
+@extends('layouts.master')
 
 @section('content')
 
@@ -53,14 +53,14 @@
             <div class="mymo_box">
                 @foreach($items as $item)
                     <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-21564">
-                        @include('themes.mymo.data.item')
+                        @include('data.item')
                     </article>
                 @endforeach
             </div>
 
             <div class="clearfix"></div>
             <div class="text-center">
-                {{ $items->links('themes.mymo.data.pagination') }}
+                {{ $items->links('data.pagination') }}
             </div>
 
             @if(@$info->description)
@@ -80,7 +80,7 @@
     </main>
 
     <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
-        @include('themes.mymo.data.sidebar')
+        @include('data.sidebar')
     </aside>
 </div>
 

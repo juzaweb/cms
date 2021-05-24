@@ -19,7 +19,7 @@ class VerificationController extends Controller
         
         \Auth::loginUsingId($user->id);
     
-        return view('themes.mymo.message', [
+        return view('message', [
             'title' => trans('app.verified_success'),
             'description' => trans('app.verified_success_description'),
         ]);

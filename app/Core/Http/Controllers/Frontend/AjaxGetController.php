@@ -33,7 +33,7 @@ class AjaxGetController extends Controller
         $query->whereRaw('find_in_set(?, genres)', [$genre]);
         $query->limit($showpost);
         
-        return view('themes.mymo.data.movies_by_genre', [
+        return view('data.movies_by_genre', [
             'items' => $query->get()
         ]);
     }
@@ -41,7 +41,7 @@ class AjaxGetController extends Controller
     public function getPopularMovies(Request $request) {
         $type = $request->get('type');
         $items = $this->getPopular($type);
-        return view('themes.mymo.data.popular_movies', [
+        return view('data.popular_movies', [
             'items' => $items
         ]);
     }

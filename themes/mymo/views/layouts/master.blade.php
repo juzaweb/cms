@@ -131,11 +131,11 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&autoLogAppEvents=1&version=v8.0&appId={{ $fb_app_id }}" nonce="ozkqznFT"></script>
 @endif
 
-@include('themes.mymo.header')
-@include('themes.mymo.menu')
+@include('header')
+@include('menu')
 <!-- /header -->
 @if(request()->is('/'))
-    @include('themes.mymo.slider')
+    @include('slider')
 @endif
 
 <div class="container-fluid mymo-full-player hidden mymo-centered">
@@ -149,7 +149,7 @@
 <div class="clearfix"></div>
 
 
-@include('themes.mymo.footer')
+@include('footer')
 
 <!-- <div  class="hidemobile" style="position: fixed; top: 0px; left: 0px; z-index: 999999">
 <a href="/link/floatleft.html" rel="nofollow" target="_blank">

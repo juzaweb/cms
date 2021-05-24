@@ -11,7 +11,7 @@ class NotificationController extends Controller
         $notifications = $user->notifications()
             ->paginate(10);
         
-        return view('themes.mymo.account.notification.index', [
+        return view('account.notification.index', [
             'title' => trans('app.notification'),
             'user' => $user,
             'notifications' => $notifications
@@ -29,7 +29,7 @@ class NotificationController extends Controller
             return redirect()->to($notification->data['url']);
         }
         
-        return view('themes.mymo.account.notification.detail', [
+        return view('account.notification.detail', [
             'title' => trans('app.notification'),
             'user' => $user,
             'notification' => $notification

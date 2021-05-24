@@ -23,7 +23,7 @@ class ChangePasswordController extends Controller
             ->where('status', '=', 1)
             ->paginate(5);
         
-        return view('themes.mymo.account.change_password', [
+        return view('account.change_password', [
             'title' => trans('app.change_password'),
             'user' => \Auth::user(),
             'recently_visited' => $recently_visited

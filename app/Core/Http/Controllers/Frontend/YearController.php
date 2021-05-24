@@ -33,7 +33,7 @@ class YearController extends Controller
             ->orderBy('id', 'DESC')
             ->paginate(20);
     
-        return view('themes.mymo.genre.index', [
+        return view('genre.index', [
             'title' => $year,
             'description' => $year,
             'keywords' => $year,

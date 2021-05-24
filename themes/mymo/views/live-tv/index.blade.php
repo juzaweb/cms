@@ -1,4 +1,4 @@
-@extends('themes.mymo.layout')
+@extends('layouts.master')
 
 @section('content')
 <div class="row container" id="wrapper">
@@ -40,7 +40,7 @@
                 @php
                 $is_watch = 1;
                 @endphp
-                @include('themes.mymo.watch.component.global_script')
+                @include('watch.component.global_script')
                 <div class="clearfix"></div>
                 <div class="text-center">
                     <div class="textwidget">
@@ -188,7 +188,7 @@
                 </div>
                 <div class="clearfix"></div>
 
-                @include('themes.mymo.watch.component.comment')
+                @include('watch.component.comment')
 
                 <div id="lightout"></div>
 
@@ -204,7 +204,7 @@
                 <div id="mymo_related_movies-2" class="owl-carousel owl-theme related-film">
                     @foreach($related_movies as $item)
                         <article class="thumb grid-item post-{{ $item->id }}">
-                            @include('themes.mymo.data.relate_item')
+                            @include('data.relate_item')
                         </article>
                     @endforeach
                 </div>
@@ -233,7 +233,7 @@
         </div>
     </main>
     <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
-        @include('themes.mymo.data.sidebar')
+        @include('data.sidebar')
     </aside>
 </div>
 @endsection

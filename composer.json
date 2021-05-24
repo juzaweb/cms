@@ -41,6 +41,7 @@
         "nwidart/laravel-modules": "^8.2",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",
+        "symfony/yaml": "^5.2",
         "unisharp/laravel-filemanager": "^2.1"
     },
     "require-dev": {

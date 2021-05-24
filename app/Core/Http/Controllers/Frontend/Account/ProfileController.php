@@ -15,7 +15,7 @@ class ProfileController extends Controller
             ->where('status', '=', 1)
             ->paginate(5);
         
-        return view('themes.mymo.account.index', [
+        return view('account.index', [
             'title' => trans('app.profile'),
             'user' => \Auth::user(),
             'recently_visited' => $recently_visited

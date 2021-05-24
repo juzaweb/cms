@@ -92,7 +92,7 @@ class SearchController extends Controller
         
         if ($data == 'html') {
             $query->limit(10);
-            return view('themes.mymo.data.search_item', [
+            return view('data.search_item', [
                 'keyword' => $q,
                 'items' => $query->get(),
             ]);
@@ -102,7 +102,7 @@ class SearchController extends Controller
             'name' => trans('app.result_for_keyword') . ' '. $q,
         ];
         
-        return view('themes.mymo.genre.index', [
+        return view('genre.index', [
             'title' => trans('app.result_for_keyword') . ' '. $q,
             'description' => trans('app.result_for_keyword') . ' '. $q,
             'keywords' => trans('app.result_for_keyword') . ' '. $q,
@@ -120,7 +120,7 @@ class SearchController extends Controller
             ->groupBy('year')
             ->get(['year']);
         
-        return view('themes.mymo.data.filter_form', [
+        return view('data.filter_form', [
             'genres' => $genres,
             'countries' => $countries,
             'years' => $years,

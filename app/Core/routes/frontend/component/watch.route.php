@@ -15,5 +15,5 @@ Route::post('/watch/{slug}/comment', 'Frontend\CommentController@movieComment')-
 Route::get('/download/{link_id}', 'Frontend\WatchController@download')->name('watch.download');
 
 Route::get('/watch/no-view', function () {
-    return view('themes.mymo.watch.component.no_view');
+    return view('watch.component.no_view');
 })->name('watch.no-view');
