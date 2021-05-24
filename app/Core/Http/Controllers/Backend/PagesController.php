@@ -8,11 +8,13 @@ use App\Core\Models\Pages;
 
 class PagesController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('backend.pages.index');
     }
     
-    public function getData(Request $request) {
+    public function getData(Request $request)
+    {
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -52,7 +54,8 @@ class PagesController extends Controller
         ]);
     }
     
-    public function form($id = null) {
+    public function form($id = null)
+    {
         $model = Pages::firstOrNew(['id' => $id]);
         return view('backend.pages.form', [
             'model' => $model,
@@ -60,7 +63,8 @@ class PagesController extends Controller
         ]);
     }
     
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $this->validateRequest([
             'name' => 'required|string|max:250|unique:pages,name',
             'status' => 'required|in:0,1',
@@ -82,7 +86,8 @@ class PagesController extends Controller
         ]);
     }
     
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
