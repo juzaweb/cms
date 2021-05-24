@@ -2,12 +2,13 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Movie\Movies;
-use App\Core\Http\Controllers\Controller;
 
-class MoviesController extends Controller
+class MoviesController extends FrontendController
 {
-    public function index() {
+    public function index()
+    {
         $info = (object) [
             'name' => trans('app.movies'),
         ];

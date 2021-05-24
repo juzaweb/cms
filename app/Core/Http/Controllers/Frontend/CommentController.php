@@ -2,12 +2,12 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Movie\Movies;
 use App\Core\Models\Posts;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
 
-class CommentController extends Controller
+class CommentController extends FrontendController
 {
     public function movieComment($movie_slug, Request $request) {
         $this->validateRequest([

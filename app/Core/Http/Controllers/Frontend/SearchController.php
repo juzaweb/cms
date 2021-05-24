@@ -2,16 +2,17 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Category\Countries;
 use App\Core\Models\Category\Genres;
 use App\Core\Models\Movie\Movies;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
 
-class SearchController extends Controller
+class SearchController extends FrontendController
 {
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         $q = $request->get('q');
         $data = $request->get('data');
         $genre = $request->get('genre');
@@ -111,7 +112,8 @@ class SearchController extends Controller
         ]);
     }
     
-    public function filterForm() {
+    public function filterForm()
+    {
         $genres = Genres::where('status', '=', 1)
             ->get(['id', 'name']);
         $countries = Countries::where('status', '=', 1)

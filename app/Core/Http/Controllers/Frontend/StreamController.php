@@ -3,10 +3,10 @@
 namespace App\Core\Http\Controllers\Frontend;
 
 use App\Core\Helpers\VideoStream;
-use App\Core\Http\Controllers\Controller;
 use App\Core\Helpers\UrlVideoStream;
+use App\Core\Http\Controllers\FrontendController;
 
-class StreamController extends Controller
+class StreamController extends FrontendController
 {
     public function image($path) {
         if (explode('/', $path)[0] !== 'files') {

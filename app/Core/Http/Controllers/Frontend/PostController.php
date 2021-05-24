@@ -2,11 +2,11 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Posts;
-use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
 
-class PostController extends Controller
+class PostController extends FrontendController
 {
     public function index() {
         $posts = Posts::where('status', '=', 1)

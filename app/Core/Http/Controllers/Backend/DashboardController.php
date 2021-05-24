@@ -5,7 +5,7 @@ namespace App\Core\Http\Controllers\Backend;
 use App\Core\Models\Movie\Movies;
 use App\Core\Models\Movie\MovieViews;
 use App\Core\Models\Pages;
-use App\User;
+use App\Core\User;
 use Illuminate\Http\Request;
 use App\Core\Http\Controllers\Controller;
 

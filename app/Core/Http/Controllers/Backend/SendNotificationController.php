@@ -2,7 +2,7 @@
 
 namespace App\Core\Http\Controllers\Backend;
 
-use App\User;
+use App\Core\User;
 use Illuminate\Http\Request;
 use App\Core\Http\Controllers\Controller;
 use App\Core\Models\MyNotification;

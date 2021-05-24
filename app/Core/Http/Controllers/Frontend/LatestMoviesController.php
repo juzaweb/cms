@@ -2,10 +2,10 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Movie\Movies;
 
-class LatestMoviesController extends Controller
+class LatestMoviesController extends FrontendController
 {
     public function index() {
         $info = (object) [

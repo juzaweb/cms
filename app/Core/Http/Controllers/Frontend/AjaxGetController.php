@@ -2,11 +2,11 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Movie\Movies;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
 
-class AjaxGetController extends Controller
+class AjaxGetController extends FrontendController
 {
     public function getMoviesByGenre(Request $request) {
         $genre = $request->get('cat_id');

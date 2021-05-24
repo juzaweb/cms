@@ -2,11 +2,12 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 
-class LiveTvController extends Controller
+class LiveTvController extends FrontendController
 {
-    public function index() {
+    public function index()
+    {
         return view('live-tv.index');
     }
 }

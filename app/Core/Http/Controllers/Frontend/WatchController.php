@@ -2,13 +2,13 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\DownloadLink;
 use App\Core\Models\Video\VideoServers;
 use App\Core\Models\Category\Genres;
 use App\Core\Models\Movie\Movies;
 
-class WatchController extends Controller
+class WatchController extends FrontendController
 {
     public function index($slug) {
         $info = Movies::where('slug', '=', $slug)

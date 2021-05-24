@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\PaidMembers\Frontend;
 
 use App\Core\Models\PaymentHistory;
 use App\Core\Models\UserSubscription;
-use App\User;
+use App\Core\User;
 use Illuminate\Http\Request;
 use App\Core\Http\Controllers\Controller;
 use PayPal\Api\Agreement;

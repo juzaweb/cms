@@ -2,12 +2,12 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Movie\MovieRating;
 use App\Core\Models\Movie\Movies;
-use App\Core\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RatingController extends Controller
+class RatingController extends FrontendController
 {
     public function setRating($slug, Request $request) {
         $movie = Movies::where('slug', '=', $slug)

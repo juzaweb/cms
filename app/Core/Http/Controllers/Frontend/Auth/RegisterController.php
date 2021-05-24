@@ -3,17 +3,19 @@
 namespace App\Core\Http\Controllers\Frontend\Auth;
 
 use App\Core\Events\RegisterSuccess;
-use App\User;
+use App\Core\User;
 use Illuminate\Http\Request;
 use App\Core\Http\Controllers\Controller;
 
-class RegisterController extends Controller
+class RegisterController extends FrontendController
 {
-    public function index() {
+    public function index()
+    {
     
     }
     
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         if (!get_config('user_registration')) {
             return response()->json([
                 'status' => 'error',

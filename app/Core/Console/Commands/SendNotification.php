@@ -3,7 +3,7 @@
 namespace App\Core\Console\Commands;
 
 use App\Core\Models\MyNotification;
-use App\User;
+use App\Core\User;
 use Illuminate\Console\Command;
 
 class SendNotification extends Command

@@ -2,11 +2,10 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\Controller;
 use App\Core\Models\Category\Genres;
 use App\Core\Models\Movie\Movies;
 
-class GenreController extends Controller
+class GenreController extends FrontendController
 {
     public function index($slug) {
         $info = Genres::where('slug', '=', $slug)

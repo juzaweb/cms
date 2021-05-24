@@ -3,10 +3,10 @@
 namespace App\Core\Http\Controllers\Frontend\Account;
 
 use Illuminate\Support\Facades\Cookie;
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Movie\Movies;
 
-class ProfileController extends Controller
+class ProfileController extends FrontendController
 {
     public function index() {
         $viewed = Cookie::get('viewed');

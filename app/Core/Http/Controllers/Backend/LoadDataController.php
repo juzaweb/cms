@@ -14,7 +14,7 @@ use App\Core\Models\PostCategories;
 use App\Core\Models\Category\Stars;
 use App\Core\Models\Category\Tags;
 use App\Core\Models\Category\Types;
-use App\User;
+use App\Core\User;
 
 class LoadDataController extends Controller
 {

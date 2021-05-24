@@ -2,17 +2,19 @@
 
 namespace App\Core\Http\Controllers\Frontend\Auth;
 
-use App\User;
+use App\Core\User;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 
-class LoginController extends Controller
+class LoginController extends FrontendController
 {
-    public function index() {
+    public function index()
+    {
     
     }
     
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
         $this->validateRequest([
             'email' => 'required|email',
             'password' => 'required',

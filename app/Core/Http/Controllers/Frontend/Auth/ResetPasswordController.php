@@ -3,13 +3,14 @@
 namespace App\Core\Http\Controllers\Frontend\Auth;
 
 use App\Core\Models\PasswordReset;
-use App\User;
+use App\Core\User;
 use Illuminate\Http\Request;
 use App\Core\Http\Controllers\Controller;
 
 class ResetPasswordController extends Controller
 {
-    public function index($token) {
+    public function index($token)
+    {
         PasswordReset::where('token', $token)
             ->firstOrFail();
         
@@ -18,7 +19,8 @@ class ResetPasswordController extends Controller
         ]);
     }
     
-    public function handle($token, Request $request) {
+    public function handle($token, Request $request)
+    {
         $this->validateRequest([
             'password' => 'required|string|max:32|min:6|confirmed',
             'password_confirmation' => 'required|string|max:32|min:6'

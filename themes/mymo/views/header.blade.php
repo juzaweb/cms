@@ -44,7 +44,7 @@
                                 <span class="name">@lang('app.account')</span>
                             </a>
                             <ul class="dropdown-menu login-box" aria-labelledby="userInfo2">
-                                @if(\App\User::find(Auth::id())->is_admin)
+                                @if(\App\Core\User::find(Auth::id())->is_admin)
                                     <li><a href="{{ route('admin.dashboard') }}" data-turbolinks="false"><i class="hl-cog"></i> @lang('app.admin_panel')</a></li>
                                 @endif
 

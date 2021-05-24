@@ -2,11 +2,11 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Movie\Movies;
 use App\Core\Models\Category\Stars;
 
-class StarController extends Controller
+class StarController extends FrontendController
 {
     public function index($slug) {
         $info = Stars::where('slug', '=', $slug)

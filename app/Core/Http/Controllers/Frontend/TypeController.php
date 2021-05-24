@@ -2,10 +2,10 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Category\Types;
-use App\Core\Http\Controllers\Controller;
 
-class TypeController extends Controller
+class TypeController extends FrontendController
 {
     public function index($slug) {
         $info = Types::where('slug', '=', $slug)

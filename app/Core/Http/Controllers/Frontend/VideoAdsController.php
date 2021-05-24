@@ -2,10 +2,10 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Video\VideoAds;
 
-class VideoAdsController extends Controller
+class VideoAdsController extends FrontendController
 {
     public function ads() {
         $video_ads = VideoAds::where('status', '=', 1)

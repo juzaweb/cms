@@ -2,7 +2,7 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
 use App\Core\Models\Category\Genres;
 use App\Core\Models\Movie\Movies;
@@ -10,7 +10,7 @@ use App\Core\Models\Movie\MovieViews;
 use App\Core\Models\Video\VideoAds;
 use App\Core\Models\Video\VideoFiles;
 
-class PlayController extends Controller
+class PlayController extends FrontendController
 {
     public function index($slug, $vid) {
         $info = Movies::where('slug', '=', $slug)

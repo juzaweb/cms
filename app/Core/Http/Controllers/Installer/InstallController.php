@@ -7,7 +7,7 @@ use App\Core\Helpers\RequirementsChecker;
 use Illuminate\Http\Request;
 use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Str;
-use App\User;
+use App\Core\User;
 
 class InstallController extends Controller
 {

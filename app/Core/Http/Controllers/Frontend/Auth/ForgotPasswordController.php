@@ -4,13 +4,14 @@ namespace App\Core\Http\Controllers\Frontend\Auth;
 
 use App\Core\Models\Email\EmailList;
 use App\Core\Models\PasswordReset;
-use App\User;
+use App\Core\User;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 
-class ForgotPasswordController extends Controller
+class ForgotPasswordController extends FrontendController
 {
-    public function handle(Request $request) {
+    public function handle(Request $request)
+    {
         $this->validateRequest([
             'email' => 'required',
         ], $request, [
@@ -48,14 +49,16 @@ class ForgotPasswordController extends Controller
         ]);
     }
     
-    public function message() {
+    public function message()
+    {
         return view('message', [
             'title' => trans('app.forgot_message'),
             'description' => trans('app.forgot_message_description'),
         ]);
     }
     
-    protected function checkEmailExists($email) {
+    protected function checkEmailExists($email)
+    {
         return User::where('email', $email)
             ->where('status', 1)
             ->first();

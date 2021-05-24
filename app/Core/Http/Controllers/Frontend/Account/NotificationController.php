@@ -2,9 +2,9 @@
 
 namespace App\Core\Http\Controllers\Frontend\Account;
 
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 
-class NotificationController extends Controller
+class NotificationController extends FrontendController
 {
     public function index() {
         $user = \Auth::user();

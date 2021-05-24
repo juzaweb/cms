@@ -2,15 +2,16 @@
 
 namespace App\Core\Http\Controllers\Frontend\Account;
 
-use App\Core\Http\Controllers\Controller;
+use App\Core\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
 use App\Core\Models\Movie\Movies;
-use App\User;
+use App\Core\User;
 use Illuminate\Http\Request;
 
-class ChangePasswordController extends Controller
+class ChangePasswordController extends FrontendController
 {
-    public function index() {
+    public function index()
+    {
         $viewed = Cookie::get('viewed');
         if ($viewed) {
             $viewed = json_decode($viewed, true);
@@ -30,7 +31,8 @@ class ChangePasswordController extends Controller
         ]);
     }
     
-    public function handle(Request $request) {
+    public function handle(Request $request)
+    {
         $this->validateRequest([
             'current_password' => 'required|string',
             'password' => 'required|string|max:32|min:6|confirmed',

@@ -3,11 +3,12 @@
 namespace App\Core\Http\Controllers\Frontend\Auth;
 
 use App\Core\Http\Controllers\Controller;
-use App\User;
+use App\Core\User;
 
 class VerificationController extends Controller
 {
-    public function index($token) {
+    public function index($token)
+    {
         $user = User::where('verification_token', '=', $token)
             ->where('status', '=', 2)
             ->firstOrFail(['id']);
