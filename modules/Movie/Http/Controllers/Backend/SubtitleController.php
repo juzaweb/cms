@@ -2,11 +2,11 @@
 
 namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Models\Movie\Movies;
+use App\Core\Models\Movie\Movies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Video\VideoFiles;
-use App\Models\Subtitle;
+use App\Core\Models\Video\VideoFiles;
+use App\Core\Models\Subtitle;
 
 class SubtitleController extends Controller
 {

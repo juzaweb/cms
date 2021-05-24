@@ -2,9 +2,9 @@
 
 namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Models\Movie\Movies;
-use App\Models\Video\VideoServers;
-use App\Models\Video\VideoFiles;
+use App\Core\Models\Movie\Movies;
+use App\Core\Models\Video\VideoServers;
+use App\Core\Models\Video\VideoFiles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Models\Category\Countries;
-use App\Models\Category\Genres;
-use App\Models\Category\Stars;
-use App\Models\Category\Tags;
-use App\Models\Video\VideoQualities;
+use App\Core\Models\Category\Countries;
+use App\Core\Models\Category\Genres;
+use App\Core\Models\Category\Stars;
+use App\Core\Models\Category\Tags;
+use App\Core\Models\Video\VideoQualities;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Movie\Movies;
+use App\Core\Models\Movie\Movies;
 use Illuminate\Support\Str;
 
 class TVSeriesController extends Controller
