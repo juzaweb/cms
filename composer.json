@@ -26,10 +26,8 @@
     "license": "MIT",
     "require": {
         "php": ">=7.2.5",
-        "aminyazdanpanah/php-ffmpeg-video-streaming": "^1.2",
         "arcanedev/log-viewer": "5.*",
         "diglactic/laravel-breadcrumbs": "6.x",
-        "dilab/resumable.php": "^0.1.4",
         "ext-json": "*",
         "fideloper/proxy": "^4.4",
         "guzzlehttp/guzzle": "^6.5",
@@ -39,7 +37,6 @@
         "laravel/framework": "6.*",
         "laravel/tinker": "^2.5",
         "laravelium/sitemap": "6.*",
-        "nwidart/laravel-modules": "^8.2",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",
         "symfony/yaml": "^5.2"
