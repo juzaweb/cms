@@ -64,8 +64,7 @@
     },
     "autoload": {
         "files": [
-            "app/Core/Helpers/functions.php",
-            "app/Core/Helpers/simple_html_dom.php"
+            "app/Core/Helpers/helpers.php"
         ],
         "psr-4": {
             "App\\": "app/",

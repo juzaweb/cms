@@ -1,9 +1,5 @@
 <?php
 
-Route::group(['prefix' => 'filemanager2'], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
-
 Route::group(['prefix' => 'filemanager'], function () {
     Route::get('/', 'Backend\Filemanager\LfmController@show');
     
