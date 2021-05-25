@@ -6,7 +6,6 @@
 /update
 /composer.lock
 /storage/*.key
-/webpack.mix.backend.js
 .env
 .env.backup
 .phpunit.result.cache
