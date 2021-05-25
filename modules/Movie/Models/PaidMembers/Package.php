@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Models\PaidMembers;
+namespace Modules\Movie\Models\PaidMembers;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\PaidMembers\Package
+ * Modules\Movie\Models\PaidMembers\Package
  *
  * @property int $id
  * @property string $name

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Movie\Models\Category;
+namespace App\Core\Models;
 
 use App\Core\Traits\UseSlug;
 use Illuminate\Database\Eloquent\Model;

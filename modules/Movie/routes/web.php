@@ -150,3 +150,5 @@ Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], functio
     });
 
 });
+
+require_once __DIR__ . '/frontend/frontend.route.php';

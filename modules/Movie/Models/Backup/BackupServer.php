@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Models\Backup;
+namespace Modules\Movie\Models\Backup;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\Backup\BackupServer
+ * Modules\Movie\Models\Backup\BackupServer
  *
  * @property int $id
  * @property string $name
@@ -15,12 +15,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereData($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereServer($value)

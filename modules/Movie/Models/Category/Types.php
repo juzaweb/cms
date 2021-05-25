@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Core\Models\Category;
+namespace Modules\Movie\Models\Category;
 
 use App\Core\Traits\UseMetaSeo;
 use App\Core\Traits\UseSlug;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\Category\Types
+ * Modules\Movie\Models\Category\Types
  *
  * @property int $id
  * @property string $name
@@ -19,21 +19,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $keywords
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereKeywords($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereMetaDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereMetaTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Category\Types whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereMetaDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereMetaTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Category\Types whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Core\Models\Movie\Movies[] $movies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Modules\Movie\Models\Movie\Movies[] $movies
  * @property-read int|null $movies_count
  */
 class Types extends Model
@@ -50,6 +50,6 @@ class Types extends Model
     ];
     
     public function movies() {
-        return $this->hasMany('App\Core\Models\Movie\Movies', 'id', 'movie_id');
+        return $this->hasMany('Modules\Movie\Models\Movie\Movies', 'id', 'movie_id');
     }
 }

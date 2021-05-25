@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Models\LiveTV;
+namespace Modules\Movie\Models\LiveTV;
 
 use App\Core\Traits\UseMetaSeo;
 use App\Core\Traits\UseSlug;
@@ -8,7 +8,7 @@ use App\Core\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\LiveTV\LiveTvCategory
+ * Modules\Movie\Models\LiveTV\LiveTvCategory
  *
  * @property int $id
  * @property string|null $thumbnail

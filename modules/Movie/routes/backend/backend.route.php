@@ -1,13 +1,8 @@
 <?php
 
-require_once __DIR__ . '/component/design.route.php';
-require_once __DIR__ . '/component/setting.route.php';
-require_once __DIR__ . '/component/filemanager.route.php';
-require_once __DIR__ . '/component/post.route.php';
-require_once __DIR__ . '/component/comment.route.php';
-require_once __DIR__ . '/component/tmdb.route.php';
-require_once __DIR__ . '/component/live-tv.route.php';
-require_once __DIR__ . '/component/server-stream.route.php';
+require_once __DIR__ . '/components/tmdb.route.php';
+require_once __DIR__ . '/components/live-tv.route.php';
+require_once __DIR__ . '/components/server-stream.route.php';
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
