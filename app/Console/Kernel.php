@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Console;
+namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -13,14 +13,14 @@ class Kernel extends ConsoleKernel
     
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('email:send')->everyMinute();
-        $schedule->command('notify:send')->everyFiveMinutes();
+        // $schedule->command('inspire')
+        //          ->hourly();
     }
     
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
 
-        require app_path('Core/routes/console.php');
+        require base_path('routes/console.php');
     }
 }

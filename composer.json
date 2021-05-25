@@ -64,20 +64,21 @@
     },
     "autoload": {
         "files": [
-            "app/Core/Helpers/helpers.php"
+            "mymo-core/Core/Helpers/helpers.php"
         ],
         "psr-4": {
             "App\\": "app/",
-            "Modules\\": "modules/"
+            "Mymo\\": "mymo-core/",
+            "Modules\\": "mymo-modules/"
         },
         "classmap": [
-            "app/Core/database/seeds",
-            "app/Core/database/factories"
+            "database/seeds",
+            "database/factories"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "core/tests/"
+            "Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",

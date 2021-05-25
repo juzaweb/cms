@@ -9,7 +9,7 @@
  * Github: https://github.com/mymocms/mymocms
  */
 
-namespace App\Core\Providers;
+namespace App\Providers;
 
 use App\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
         $directories = glob($mainPath . '/*' , GLOB_ONLYDIR);
         $paths = array_merge([$mainPath], $directories);
         
-        \Validator::extend('recaptcha', 'App\Core\Validators\Recaptcha@validate');
+        \Validator::extend('recaptcha', 'App\Validators\Recaptcha@validate');
         $this->loadMigrationsFrom($paths);
         \Schema::defaultStringLength(191);
         
