@@ -149,4 +149,7 @@ Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], functio
         Route::post('/remove', 'Backend\Setting\VideoQualityController@remove')->name('admin.video_qualities.remove');
     });
 
+    require (__DIR__ . '/backend/backend.route.php');
 });
+
+require __DIR__ . '/frontend/frontend.route.php';

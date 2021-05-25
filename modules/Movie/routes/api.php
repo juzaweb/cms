@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MYMO CMS - TV Series & Movie Portal CMS Unlimited
+ * MYMO CMS
  *
  * @package mymocms/mymocms
  * @author The Anh Dang
