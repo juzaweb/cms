@@ -74,15 +74,14 @@ function image_url($path) {
     
     if ($path) {
         $storage = Storage::disk('public');
-        $file_path = $storage->path($path);
         $file_url = $storage->url($path);
         
-        if (file_exists($file_path)) {
+        if (file_exists($storage->path($path))) {
             return $file_url;
         }
     }
     
-    return asset('images/thumb-default.png');
+    return asset('styles/images/thumb-default.png');
 }
 
 function logo_url($path) {

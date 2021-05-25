@@ -10,11 +10,13 @@ use App\Core\Models\Posts;
 
 class PostsController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('backend.posts.index');
     }
     
-    public function getData(Request $request) {
+    public function getData(Request $request)
+    {
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -54,7 +56,8 @@ class PostsController extends Controller
         ]);
     }
     
-    public function form($id = null) {
+    public function form($id = null)
+    {
         $model = Posts::firstOrNew(['id' => $id]);
         $categories = PostCategories::where('status', '=', 1)
             ->get();
@@ -68,7 +71,8 @@ class PostsController extends Controller
         ]);
     }
     
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $this->validateRequest([
             'title' => 'required|string|max:250',
             'status' => 'required|in:0,1',
@@ -97,7 +101,8 @@ class PostsController extends Controller
         ]);
     }
     
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
