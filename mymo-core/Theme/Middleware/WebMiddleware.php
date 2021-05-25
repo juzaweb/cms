@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Theme\Middleware;
+namespace Mymo\Theme\Middleware;
 
 use Closure;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Exceptions;
+namespace Mymo\Module\Exceptions;
 
 class InvalidJsonException extends \Exception
 {

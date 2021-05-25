@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend;
+namespace Mymo\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
-use App\Core\Models\Pages;
+use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Models\Pages;
 
 class PagesController extends Controller
 {

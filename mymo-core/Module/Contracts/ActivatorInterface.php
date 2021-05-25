@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Module\Contracts;
+namespace Mymo\Module\Contracts;
 
-use App\Module\Module;
+use Mymo\Module\Module;
 
 interface ActivatorInterface
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\Notifications\Notifications;
+namespace Mymo\Updater\Notifications\Notifications;
 
-use App\Updater\Events\UpdateFailed as UpdateFailedEvent;
-use App\Updater\Notifications\BaseNotification;
+use Mymo\Updater\Events\UpdateFailed as UpdateFailedEvent;
+use Mymo\Updater\Notifications\BaseNotification;
 use Illuminate\Notifications\Messages\MailMessage;
 
 final class UpdateFailed extends BaseNotification

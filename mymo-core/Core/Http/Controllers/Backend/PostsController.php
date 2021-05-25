@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend;
+namespace Mymo\Core\Http\Controllers\Backend;
 
-use App\Core\Models\PostCategories;
-use App\Core\Models\Category\Tags;
+use Mymo\Core\Models\PostCategories;
+use Mymo\Core\Models\Category\Tags;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
-use App\Core\Models\Posts;
+use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Models\Posts;
 
 class PostsController extends Controller
 {

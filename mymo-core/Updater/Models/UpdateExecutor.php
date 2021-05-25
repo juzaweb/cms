@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\Models;
+namespace Mymo\Updater\Models;
 
-use App\Updater\Events\UpdateFailed;
-use App\Updater\Events\UpdateSucceeded;
-use App\Updater\Traits\UseVersionFile;
+use Mymo\Updater\Events\UpdateFailed;
+use Mymo\Updater\Events\UpdateSucceeded;
+use Mymo\Updater\Traits\UseVersionFile;
 use Exception;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\Contracts;
+namespace Mymo\Updater\Contracts;
 
-use App\Updater\Models\Release;
+use Mymo\Updater\Models\Release;
 
 interface SourceRepositoryTypeContract
 {

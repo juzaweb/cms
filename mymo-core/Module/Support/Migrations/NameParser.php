@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Support\Migrations;
+namespace Mymo\Module\Support\Migrations;
 
 class NameParser
 {

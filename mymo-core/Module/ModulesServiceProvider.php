@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Module;
+namespace Mymo\Module;
 
 use Illuminate\Support\ServiceProvider;
-use App\Module\Providers\BootstrapServiceProvider;
-use App\Module\Providers\ConsoleServiceProvider;
-use App\Module\Providers\ContractsServiceProvider;
+use Mymo\Module\Providers\BootstrapServiceProvider;
+use Mymo\Module\Providers\ConsoleServiceProvider;
+use Mymo\Module\Providers\ContractsServiceProvider;
 
 abstract class ModulesServiceProvider extends ServiceProvider
 {

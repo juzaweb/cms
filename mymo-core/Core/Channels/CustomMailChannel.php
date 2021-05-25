@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Channels;
+namespace Mymo\Core\Channels;
 
-use App\Core\Models\Email\EmailList;
+use Mymo\Core\Models\Email\EmailList;
 use Illuminate\Notifications\Notification;
 
 class CustomMailChannel

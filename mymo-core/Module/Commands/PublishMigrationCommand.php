@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use Illuminate\Console\Command;
-use App\Module\Migrations\Migrator;
-use App\Module\Publishing\MigrationPublisher;
+use Mymo\Module\Migrations\Migrator;
+use Mymo\Module\Publishing\MigrationPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PublishMigrationCommand extends Command
@@ -46,7 +46,7 @@ class PublishMigrationCommand extends Command
     /**
      * Publish migration for the specified module.
      *
-     * @param \App\Module\Module $module
+     * @param \Mymo\Module\Module $module
      */
     public function publish($module)
     {

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Module\Activators;
+namespace Mymo\Module\Activators;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
-use App\Module\Contracts\ActivatorInterface;
-use App\Module\Module;
+use Mymo\Module\Contracts\ActivatorInterface;
+use Mymo\Module\Module;
 
 class FileActivator implements ActivatorInterface
 {

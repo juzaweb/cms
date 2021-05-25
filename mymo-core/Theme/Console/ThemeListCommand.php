@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Theme\Console;
+namespace Mymo\Theme\Console;
 
 use Illuminate\Console\Command;
-use App\Theme\Contracts\ThemeContract;
+use Mymo\Theme\Contracts\ThemeContract;
 
 class ThemeListCommand extends Command
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Updater\Events;
+namespace Mymo\Updater\Events;
 
 class UpdateAvailable
 {

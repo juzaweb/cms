@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Theme\Managers;
+namespace Mymo\Theme\Managers;
 
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\View\ViewFinderInterface;
 use Noodlehaus\Config;
-use App\Theme\Contracts\ThemeContract;
-use App\Theme\Exceptions\ThemeNotFoundException;
+use Mymo\Theme\Contracts\ThemeContract;
+use Mymo\Theme\Exceptions\ThemeNotFoundException;
 
 class Theme implements ThemeContract
 {

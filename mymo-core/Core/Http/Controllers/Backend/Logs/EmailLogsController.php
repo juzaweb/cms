@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\Logs;
+namespace Mymo\Core\Http\Controllers\Backend\Logs;
 
 use Illuminate\Http\Request;
-use App\Core\Models\Email\EmailList;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Models\Email\EmailList;
+use Mymo\Core\Http\Controllers\Controller;
 
 class EmailLogsController extends Controller
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Module\Generators;
+namespace Mymo\Module\Generators;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Console\Command as Console;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use App\Module\Contracts\ActivatorInterface;
-use App\Module\FileRepository;
-use App\Module\Support\Config\GenerateConfigReader;
-use App\Module\Support\Stub;
+use Mymo\Module\Contracts\ActivatorInterface;
+use Mymo\Module\FileRepository;
+use Mymo\Module\Support\Config\GenerateConfigReader;
+use Mymo\Module\Support\Stub;
 
 class ModuleGenerator extends Generator
 {
@@ -51,7 +51,7 @@ class ModuleGenerator extends Generator
     /**
      * The module instance.
      *
-     * @var \App\Module\Module
+     * @var \Mymo\Module\Module
      */
     protected $module;
 
@@ -227,7 +227,7 @@ class ModuleGenerator extends Generator
     /**
      * Get the module instance.
      *
-     * @return \App\Module\Module
+     * @return \Mymo\Module\Module
      */
     public function getModule()
     {

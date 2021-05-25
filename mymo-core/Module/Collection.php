@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module;
+namespace Mymo\Module;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection as BaseCollection;

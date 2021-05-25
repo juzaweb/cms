@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use Illuminate\Console\Command;
-use App\Module\Module;
-use App\Module\Publishing\LangPublisher;
+use Mymo\Module\Module;
+use Mymo\Module\Publishing\LangPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PublishTranslationCommand extends Command

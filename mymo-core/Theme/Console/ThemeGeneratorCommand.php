@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Theme\Console;
+namespace Mymo\Theme\Console;
 
 use Illuminate\Config\Repository;
 use Illuminate\Console\Command;

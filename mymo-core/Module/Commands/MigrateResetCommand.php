@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use Illuminate\Console\Command;
-use App\Module\Migrations\Migrator;
-use App\Module\Traits\MigrationLoaderTrait;
+use Mymo\Module\Migrations\Migrator;
+use Mymo\Module\Traits\MigrationLoaderTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -27,7 +27,7 @@ class MigrateResetCommand extends Command
     protected $description = 'Reset the modules migrations.';
 
     /**
-     * @var \App\Module\Contracts\RepositoryInterface
+     * @var \Mymo\Module\Contracts\RepositoryInterface
      */
     protected $module;
 

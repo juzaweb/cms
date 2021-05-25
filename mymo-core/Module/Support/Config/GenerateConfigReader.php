@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Support\Config;
+namespace Mymo\Module\Support\Config;
 
 class GenerateConfigReader
 {

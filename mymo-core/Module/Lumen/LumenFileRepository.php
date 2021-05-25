@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Module\Lumen;
+namespace Mymo\Module\Lumen;
 
-use App\Module\FileRepository;
+use Mymo\Module\FileRepository;
 
 class LumenFileRepository extends FileRepository
 {

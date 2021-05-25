@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend;
+namespace Mymo\Core\Http\Controllers\Backend;
 
-use App\Core\Http\Controllers\Controller;
-use App\Core\Models\LiveTV\LiveTvCategory;
-use App\Core\Models\Sliders;
+use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Models\LiveTV\LiveTvCategory;
+use Mymo\Core\Models\Sliders;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use App\Core\Models\Category\Countries;
-use App\Core\Models\Category\Genres;
-use App\Core\Models\Menu;
-use App\Core\Models\PostCategories;
-use App\Core\Models\Category\Stars;
-use App\Core\Models\Category\Tags;
-use App\Core\Models\Category\Types;
-use App\Core\User;
+use Mymo\Core\Models\Category\Countries;
+use Mymo\Core\Models\Category\Genres;
+use Mymo\Core\Models\Menu;
+use Mymo\Core\Models\PostCategories;
+use Mymo\Core\Models\Category\Stars;
+use Mymo\Core\Models\Category\Tags;
+use Mymo\Core\Models\Category\Types;
+use Mymo\Core\User;
 
 class LoadDataController extends Controller
 {

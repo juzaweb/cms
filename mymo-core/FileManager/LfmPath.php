@@ -1,12 +1,12 @@
 <?php
 
-namespace App\FileManager;
+namespace Mymo\FileManager;
 
 use Illuminate\Container\Container;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use App\FileManager\Events\ImageIsUploading;
-use App\FileManager\Events\ImageWasUploaded;
+use Mymo\FileManager\Events\ImageIsUploading;
+use Mymo\FileManager\Events\ImageWasUploaded;
 
 class LfmPath
 {

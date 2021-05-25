@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Core\Http\Controllers\Installer;
+namespace Mymo\Core\Http\Controllers\Installer;
 
-use App\Core\Helpers\PermissionsChecker;
-use App\Core\Helpers\RequirementsChecker;
+use Mymo\Core\Helpers\PermissionsChecker;
+use Mymo\Core\Helpers\RequirementsChecker;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\Controller;
 use Illuminate\Support\Str;
-use App\Core\User;
+use Mymo\Core\User;
 
 class InstallController extends Controller
 {

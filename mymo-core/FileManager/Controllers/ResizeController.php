@@ -1,10 +1,10 @@
 <?php
 
-namespace App\FileManager\Controllers;
+namespace Mymo\FileManager\Controllers;
 
 use Intervention\Image\Facades\Image;
-use App\FileManager\Events\ImageIsResizing;
-use App\FileManager\Events\ImageWasResized;
+use Mymo\FileManager\Events\ImageIsResizing;
+use Mymo\FileManager\Events\ImageWasResized;
 
 class ResizeController extends LfmController
 {

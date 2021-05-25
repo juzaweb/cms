@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\Notifications\Notifications;
+namespace Mymo\Updater\Notifications\Notifications;
 
-use App\Updater\Events\UpdateSucceeded as UpdateSucceededEvent;
-use App\Updater\Notifications\BaseNotification;
+use Mymo\Updater\Events\UpdateSucceeded as UpdateSucceededEvent;
+use Mymo\Updater\Notifications\BaseNotification;
 use Illuminate\Notifications\Messages\MailMessage;
 
 final class UpdateSucceeded extends BaseNotification

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Module\Process;
+namespace Mymo\Module\Process;
 
-use App\Module\Contracts\RepositoryInterface;
-use App\Module\Contracts\RunableInterface;
+use Mymo\Module\Contracts\RepositoryInterface;
+use Mymo\Module\Contracts\RunableInterface;
 
 class Runner implements RunableInterface
 {

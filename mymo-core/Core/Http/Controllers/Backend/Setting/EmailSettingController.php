@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\Setting;
+namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
-use App\Core\Models\Configs;
-use App\Core\Models\Email\EmailTemplates;
+use Mymo\Core\Models\Configs;
+use Mymo\Core\Models\Email\EmailTemplates;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
 class EmailSettingController extends Controller

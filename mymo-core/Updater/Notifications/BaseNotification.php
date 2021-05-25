@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\Notifications;
+namespace Mymo\Updater\Notifications;
 
 use Illuminate\Notifications\Notification;
 

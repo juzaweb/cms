@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Module\Providers;
+namespace Mymo\Module\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Module\Contracts\RepositoryInterface;
-use App\Module\Laravel\LaravelFileRepository;
+use Mymo\Module\Contracts\RepositoryInterface;
+use Mymo\Module\Laravel\LaravelFileRepository;
 
 class ContractsServiceProvider extends ServiceProvider
 {

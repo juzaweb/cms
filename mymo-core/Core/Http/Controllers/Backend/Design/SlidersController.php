@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\Design;
+namespace Mymo\Core\Http\Controllers\Backend\Design;
 
-use App\Core\Models\Sliders;
+use Mymo\Core\Models\Sliders;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\Controller;
 
 class SlidersController extends Controller
 {

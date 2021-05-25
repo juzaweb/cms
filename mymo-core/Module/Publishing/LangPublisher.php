@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Module\Publishing;
+namespace Mymo\Module\Publishing;
 
-use App\Module\Support\Config\GenerateConfigReader;
+use Mymo\Module\Support\Config\GenerateConfigReader;
 
 class LangPublisher extends Publisher
 {

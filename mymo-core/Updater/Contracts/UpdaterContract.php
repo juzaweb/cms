@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Updater\Contracts;
+namespace Mymo\Updater\Contracts;
 
 interface UpdaterContract
 {

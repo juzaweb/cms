@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FileManager\Handlers;
+namespace Mymo\FileManager\Handlers;
 
 class ConfigHandler
 {

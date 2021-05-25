@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Core\Models;
+namespace Mymo\Core\Models;
 
-use App\Core\Traits\UseSlug;
+use Mymo\Core\Traits\UseSlug;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\PostCategories
+ * Mymo\Core\Models\PostCategories
  *
  * @property int $id
  * @property string $name
@@ -14,18 +14,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property string $description
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PostCategories whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PostCategories whereDescription($value)
  */
 class PostCategories extends Model
 {

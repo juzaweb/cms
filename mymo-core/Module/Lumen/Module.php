@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Module\Lumen;
+namespace Mymo\Module\Lumen;
 
 use Illuminate\Support\Str;
-use App\Module\Module as BaseModule;
+use Mymo\Module\Module as BaseModule;
 
 class Module extends BaseModule
 {

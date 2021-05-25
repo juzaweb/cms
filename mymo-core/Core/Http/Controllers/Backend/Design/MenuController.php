@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\Design;
+namespace Mymo\Core\Http\Controllers\Backend\Design;
 
-use App\Core\Models\Category\Countries;
-use App\Core\Models\Category\Genres;
-use App\Core\Models\Menu;
-use App\Core\Models\Pages;
-use App\Core\Models\Category\Types;
+use Mymo\Core\Models\Category\Countries;
+use Mymo\Core\Models\Category\Genres;
+use Mymo\Core\Models\Menu;
+use Mymo\Core\Models\Pages;
+use Mymo\Core\Models\Category\Types;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\Controller;
 
 class MenuController extends Controller
 {

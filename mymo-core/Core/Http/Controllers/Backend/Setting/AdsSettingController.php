@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\Setting;
+namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
-use App\Core\Models\Ads;
+use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Models\Ads;
 
 class AdsSettingController extends Controller
 {

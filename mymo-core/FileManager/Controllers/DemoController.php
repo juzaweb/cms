@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FileManager\Controllers;
+namespace Mymo\FileManager\Controllers;
 
 class DemoController extends LfmController
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\Models;
+namespace Mymo\Updater\Models;
 
-use App\Updater\Traits\SupportPrivateAccessToken;
+use Mymo\Updater\Traits\SupportPrivateAccessToken;
 use Exception;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Filesystem\Filesystem;

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\FileManager\Middlewares;
+namespace Mymo\FileManager\Middlewares;
 
 use Closure;
-use App\FileManager\Lfm;
-use App\FileManager\LfmPath;
+use Mymo\FileManager\Lfm;
+use Mymo\FileManager\LfmPath;
 
 class CreateDefaultFolder
 {

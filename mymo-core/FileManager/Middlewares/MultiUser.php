@@ -1,10 +1,10 @@
 <?php
 
-namespace App\FileManager\Middlewares;
+namespace Mymo\FileManager\Middlewares;
 
 use Closure;
 use Illuminate\Support\Str;
-use App\FileManager\Lfm;
+use Mymo\FileManager\Lfm;
 
 class MultiUser
 {

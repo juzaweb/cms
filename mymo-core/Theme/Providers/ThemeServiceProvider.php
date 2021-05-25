@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Theme\Providers;
+namespace Mymo\Theme\Providers;
 
 use App;
 use File;
 use Illuminate\Support\ServiceProvider;
-use App\Theme\Console\ThemeListCommand;
-use App\Theme\Contracts\ThemeContract;
-use App\Theme\Managers\Theme;
+use Mymo\Theme\Console\ThemeListCommand;
+use Mymo\Theme\Contracts\ThemeContract;
+use Mymo\Theme\Managers\Theme;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -48,7 +48,7 @@ class ThemeServiceProvider extends ServiceProvider
         if (config('theme.types.enable')) {
             $themeTypes = config('theme.types.middleware');
             foreach ($themeTypes as $middleware => $themeName) {
-                $this->app['router']->aliasMiddleware($middleware, '\App\Theme\Middleware\RouteMiddleware:'.$themeName);
+                $this->app['router']->aliasMiddleware($middleware, '\Mymo\Theme\Middleware\RouteMiddleware:'.$themeName);
             }
         }
     }
@@ -119,7 +119,7 @@ class ThemeServiceProvider extends ServiceProvider
     public function registerThemeGeneratorCommand()
     {
         $this->app->singleton('theme.create', function ($app) {
-            return new \App\Theme\Console\ThemeGeneratorCommand($app['config'], $app['files']);
+            return new \Mymo\Theme\Console\ThemeGeneratorCommand($app['config'], $app['files']);
         });
     }
 

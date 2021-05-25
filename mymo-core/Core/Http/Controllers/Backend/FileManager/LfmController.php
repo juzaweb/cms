@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\Core\Http\Controllers\Backend\FileManager;
 
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\Controller;
 
 class LfmController extends Controller
 {

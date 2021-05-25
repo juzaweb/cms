@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Contracts;
+namespace Mymo\Module\Contracts;
 
 interface PublisherInterface
 {

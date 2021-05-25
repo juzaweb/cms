@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use Illuminate\Console\Command;
-use App\Module\Contracts\ActivatorInterface;
-use App\Module\Generators\ModuleGenerator;
+use Mymo\Module\Contracts\ActivatorInterface;
+use Mymo\Module\Generators\ModuleGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

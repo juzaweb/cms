@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Theme\Contracts;
+namespace Mymo\Theme\Contracts;
 
 interface ThemeContract
 {

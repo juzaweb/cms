@@ -1,9 +1,9 @@
 <?php
 
-namespace App\FileManager\Controllers;
+namespace Mymo\FileManager\Controllers;
 
-use App\FileManager\Lfm;
-use App\FileManager\LfmPath;
+use Mymo\FileManager\Lfm;
+use Mymo\FileManager\LfmPath;
 
 class LfmController extends Controller
 {

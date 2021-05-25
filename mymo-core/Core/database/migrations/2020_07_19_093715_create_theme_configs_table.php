@@ -1,6 +1,6 @@
 <?php
 
-use App\Core\Models\ThemeConfigs;
+use Mymo\Core\Models\ThemeConfigs;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

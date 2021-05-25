@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Updater\Commands;
+namespace Mymo\Updater\Commands;
 
-use App\Updater\UpdaterManager;
+use Mymo\Updater\UpdaterManager;
 use Illuminate\Console\Command;
 
 class CheckForUpdate extends Command

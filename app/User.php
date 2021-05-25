@@ -9,13 +9,13 @@
  * Github: https://github.com/mymocms/mymocms
  */
 
-namespace App\Core;
+namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
- * App\Core\User
+ * App\User
  *
  * @property int $id
  * @property string $name
@@ -27,28 +27,28 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property int $is_admin
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereIsAdmin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsAdmin($value)
  * @property string|null $avatar
  * @property int $status
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereAvatar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereStatus($value)
  * @property string $language
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereLanguage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLanguage($value)
  * @property string|null $verification_token
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\User whereVerificationToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereVerificationToken($value)
  * @property int|null $package_id
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePackageId($value)
  */

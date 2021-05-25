@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Updater;
+namespace Mymo\Updater;
 
-use App\Updater\Contracts\SourceRepositoryTypeContract;
-use App\Updater\Contracts\UpdaterContract;
-use App\Updater\Models\UpdateExecutor;
-use App\Updater\SourceRepositoryTypes\GithubRepositoryType;
-use App\Updater\SourceRepositoryTypes\HttpRepositoryType;
+use Mymo\Updater\Contracts\SourceRepositoryTypeContract;
+use Mymo\Updater\Contracts\UpdaterContract;
+use Mymo\Updater\Models\UpdateExecutor;
+use Mymo\Updater\SourceRepositoryTypes\GithubRepositoryType;
+use Mymo\Updater\SourceRepositoryTypes\HttpRepositoryType;
 use Exception;
 use Illuminate\Foundation\Application;
 use InvalidArgumentException;

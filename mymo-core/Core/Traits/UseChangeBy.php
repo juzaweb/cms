@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Traits;
+namespace Mymo\Core\Traits;
 
 trait UseChangeBy {
     

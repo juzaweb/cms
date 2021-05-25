@@ -1,6 +1,6 @@
 <?php
 
-use App\Core\Models\Category\Countries;
+use Mymo\Core\Models\Category\Countries;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

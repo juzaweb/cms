@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Events;
+namespace Mymo\Core\Events;
 
-use App\Core\User;
+use Mymo\Core\User;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;

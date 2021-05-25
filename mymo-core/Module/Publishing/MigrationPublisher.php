@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Module\Publishing;
+namespace Mymo\Module\Publishing;
 
-use App\Module\Migrations\Migrator;
+use Mymo\Module\Migrations\Migrator;
 
 class MigrationPublisher extends AssetPublisher
 {

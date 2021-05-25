@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Traits;
+namespace Mymo\Core\Traits;
 
-use App\Core\Models\Files;
+use Mymo\Core\Models\Files;
 use Illuminate\Support\Str;
 
 trait UseThumbnail {

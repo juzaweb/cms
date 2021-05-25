@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend;
+namespace Mymo\Core\Http\Controllers\Backend;
 
-use App\Core\Models\Movie\Movies;
-use App\Core\Models\Movie\MovieViews;
-use App\Core\Models\Pages;
-use App\Core\User;
+use Mymo\Core\Models\Movie\Movies;
+use Mymo\Core\Models\Movie\MovieViews;
+use Mymo\Core\Models\Pages;
+use Mymo\Core\User;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {

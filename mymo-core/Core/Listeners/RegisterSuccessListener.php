@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Listeners;
+namespace Mymo\Core\Listeners;
 
-use App\Core\Events\RegisterSuccess;
-use App\Core\Models\Email\EmailList;
-use App\Core\User;
+use Mymo\Core\Events\RegisterSuccess;
+use Mymo\Core\Models\Email\EmailList;
+use Mymo\Core\User;
 
 class RegisterSuccessListener
 {

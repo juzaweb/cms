@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\Core\Http\Controllers\Backend\FileManager;
 
-use App\Core\Models\Files;
+use Mymo\Core\Models\Files;
 
 class DownloadController extends LfmController
 {

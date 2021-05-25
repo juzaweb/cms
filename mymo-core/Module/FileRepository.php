@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module;
+namespace Mymo\Module;
 
 use Countable;
 use Illuminate\Cache\CacheManager;
@@ -10,11 +10,11 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
-use App\Module\Contracts\RepositoryInterface;
-use App\Module\Exceptions\InvalidAssetPath;
-use App\Module\Exceptions\ModuleNotFoundException;
-use App\Module\Process\Installer;
-use App\Module\Process\Updater;
+use Mymo\Module\Contracts\RepositoryInterface;
+use Mymo\Module\Exceptions\InvalidAssetPath;
+use Mymo\Module\Exceptions\ModuleNotFoundException;
+use Mymo\Module\Process\Installer;
+use Mymo\Module\Process\Updater;
 
 abstract class FileRepository implements RepositoryInterface, Countable
 {
@@ -129,7 +129,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * @param Container $app
      * @param string $args
      * @param string $path
-     * @return \App\Module\Module
+     * @return \Mymo\Module\Module
      */
     abstract protected function createModule(...$args);
 
@@ -487,7 +487,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     /**
      * Get module used for cli session.
      * @return string
-     * @throws \App\Module\Exceptions\ModuleNotFoundException
+     * @throws \Mymo\Module\Exceptions\ModuleNotFoundException
      */
     public function getUsedNow() : string
     {
@@ -554,7 +554,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * Enabling a specific module.
      * @param string $name
      * @return void
-     * @throws \App\Module\Exceptions\ModuleNotFoundException
+     * @throws \Mymo\Module\Exceptions\ModuleNotFoundException
      */
     public function enable($name)
     {
@@ -565,7 +565,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * Disabling a specific module.
      * @param string $name
      * @return void
-     * @throws \App\Module\Exceptions\ModuleNotFoundException
+     * @throws \Mymo\Module\Exceptions\ModuleNotFoundException
      */
     public function disable($name)
     {

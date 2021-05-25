@@ -1,12 +1,12 @@
 <?php
 
-namespace App\FileManager\Controllers;
+namespace Mymo\FileManager\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use App\FileManager\Events\FileIsMoving;
-use App\FileManager\Events\FileWasMoving;
-use App\FileManager\Events\FolderIsMoving;
-use App\FileManager\Events\FolderWasMoving;
+use Mymo\FileManager\Events\FileIsMoving;
+use Mymo\FileManager\Events\FileWasMoving;
+use Mymo\FileManager\Events\FolderIsMoving;
+use Mymo\FileManager\Events\FolderWasMoving;
 
 class ItemsController extends LfmController
 {

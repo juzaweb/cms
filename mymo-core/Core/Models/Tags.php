@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Models;
+namespace Mymo\Core\Models;
 
-use App\Core\Traits\UseSlug;
+use Mymo\Core\Traits\UseSlug;
 use Illuminate\Database\Eloquent\Model;
 
 class Tags extends Model

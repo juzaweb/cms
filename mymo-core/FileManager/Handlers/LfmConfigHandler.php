@@ -2,7 +2,7 @@
 
 namespace App\Handlers;
 
-class LfmConfigHandler extends \App\FileManager\Handlers\ConfigHandler
+class LfmConfigHandler extends \Mymo\FileManager\Handlers\ConfigHandler
 {
     public function userField()
     {

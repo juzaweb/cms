@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FileManager\Controllers;
+namespace Mymo\FileManager\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

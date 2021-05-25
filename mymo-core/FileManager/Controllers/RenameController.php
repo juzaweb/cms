@@ -1,12 +1,12 @@
 <?php
 
-namespace App\FileManager\Controllers;
+namespace Mymo\FileManager\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use App\FileManager\Events\FolderIsRenaming;
-use App\FileManager\Events\FolderWasRenamed;
-use App\FileManager\Events\ImageIsRenaming;
-use App\FileManager\Events\ImageWasRenamed;
+use Mymo\FileManager\Events\FolderIsRenaming;
+use Mymo\FileManager\Events\FolderWasRenamed;
+use Mymo\FileManager\Events\ImageIsRenaming;
+use Mymo\FileManager\Events\ImageWasRenamed;
 
 class RenameController extends LfmController
 {

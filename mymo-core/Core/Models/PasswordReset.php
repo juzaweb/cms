@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Core\Models;
+namespace Mymo\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\PasswordReset
+ * Mymo\Core\Models\PasswordReset
  *
  * @property string $email
  * @property string $token
  * @property \Illuminate\Support\Carbon|null $created_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PasswordReset newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PasswordReset newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PasswordReset query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PasswordReset whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PasswordReset whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\PasswordReset whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PasswordReset newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PasswordReset newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PasswordReset query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PasswordReset whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PasswordReset whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Mymo\Core\Models\PasswordReset whereToken($value)
  * @mixin \Eloquent
  */
 class PasswordReset extends Model

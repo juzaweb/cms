@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Theme\Facades;
+namespace Mymo\Theme\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -13,6 +13,6 @@ class Theme extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \App\Theme\Contracts\ThemeContract::class;
+        return \Mymo\Theme\Contracts\ThemeContract::class;
     }
 }

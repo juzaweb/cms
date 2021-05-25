@@ -1,13 +1,13 @@
 <?php
 
-namespace App\FileManager;
+namespace Mymo\FileManager;
 
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use App\FileManager\Middlewares\CreateDefaultFolder;
-use App\FileManager\Middlewares\MultiUser;
+use Mymo\FileManager\Middlewares\CreateDefaultFolder;
+use Mymo\FileManager\Middlewares\MultiUser;
 
 class Lfm
 {

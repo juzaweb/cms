@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Generators;
+namespace Mymo\Module\Generators;
 
 abstract class Generator
 {

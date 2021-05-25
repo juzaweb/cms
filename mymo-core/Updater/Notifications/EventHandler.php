@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\Notifications;
+namespace Mymo\Updater\Notifications;
 
-use App\Updater\Events\UpdateAvailable;
-use App\Updater\Events\UpdateFailed;
-use App\Updater\Events\UpdateSucceeded;
+use Mymo\Updater\Events\UpdateAvailable;
+use Mymo\Updater\Events\UpdateFailed;
+use Mymo\Updater\Events\UpdateSucceeded;
 use Exception;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher;

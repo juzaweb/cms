@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FileManager\Events;
+namespace Mymo\FileManager\Events;
 
 class FolderIsMoving
 {

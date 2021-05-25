@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Module;
+namespace Mymo\Module;
 
 use Illuminate\Filesystem\Filesystem;
-use App\Module\Exceptions\InvalidJsonException;
+use Mymo\Module\Exceptions\InvalidJsonException;
 
 class Json
 {

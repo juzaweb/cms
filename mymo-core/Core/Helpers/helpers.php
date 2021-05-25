@@ -1,9 +1,9 @@
 <?php
 
 
-use App\Core\Models\Menu;
-use App\Core\Models\Sliders;
-use App\Core\Models\ThemeConfigs;
+use Mymo\Core\Models\Menu;
+use Mymo\Core\Models\Sliders;
+use Mymo\Core\Models\ThemeConfigs;
 use Illuminate\Support\Str;
 
 function json_message($message, $status = 'success') {
@@ -89,7 +89,7 @@ function logo_url($path) {
 }
 
 function get_config(string $key, $default = null) {
-    return \App\Core\Models\Configs::getConfig($key, $default);
+    return \Mymo\Core\Models\Configs::getConfig($key, $default);
 }
 
 function copyfile_chunked($infile, $outfile) {

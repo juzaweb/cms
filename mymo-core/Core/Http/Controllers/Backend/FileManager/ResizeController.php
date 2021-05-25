@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\Core\Http\Controllers\Backend\FileManager;
 
 use Intervention\Image\Facades\Image;
 use UniSharp\LaravelFilemanager\Events\ImageIsResizing;

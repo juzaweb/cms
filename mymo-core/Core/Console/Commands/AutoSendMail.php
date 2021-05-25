@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Core\Console\Commands;
+namespace Mymo\Core\Console\Commands;
 
-use App\Core\Models\Configs;
-use App\Core\Models\Email\EmailList;
+use Mymo\Core\Models\Configs;
+use Mymo\Core\Models\Email\EmailList;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;

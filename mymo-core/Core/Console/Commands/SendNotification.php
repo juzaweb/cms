@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Core\Console\Commands;
+namespace Mymo\Core\Console\Commands;
 
-use App\Core\Models\MyNotification;
-use App\Core\User;
+use Mymo\Core\Models\MyNotification;
+use Mymo\Core\User;
 use Illuminate\Console\Command;
 
 class SendNotification extends Command

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Updater;
+namespace Mymo\Updater;
 
-use App\Updater\Contracts\SourceRepositoryTypeContract;
-use App\Updater\Models\Release;
-use App\Updater\Models\UpdateExecutor;
-use App\Updater\Traits\SupportPrivateAccessToken;
-use App\Updater\Traits\UseVersionFile;
+use Mymo\Updater\Contracts\SourceRepositoryTypeContract;
+use Mymo\Updater\Models\Release;
+use Mymo\Updater\Models\UpdateExecutor;
+use Mymo\Updater\Traits\SupportPrivateAccessToken;
+use Mymo\Updater\Traits\UseVersionFile;
 use Illuminate\Support\Facades\Artisan;
 
 /**

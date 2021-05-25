@@ -1,10 +1,10 @@
 <?php
 
-namespace App\FileManager\Controllers;
+namespace Mymo\FileManager\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use App\FileManager\Events\ImageIsDeleting;
-use App\FileManager\Events\ImageWasDeleted;
+use Mymo\FileManager\Events\ImageIsDeleting;
+use Mymo\FileManager\Events\ImageWasDeleted;
 
 class DeleteController extends LfmController
 {

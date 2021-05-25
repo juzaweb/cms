@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Updater;
+namespace Mymo\Updater;
 
 use Illuminate\Support\Facades\Facade;
 

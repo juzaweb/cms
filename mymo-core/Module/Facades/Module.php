@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Facades;
+namespace Mymo\Module\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

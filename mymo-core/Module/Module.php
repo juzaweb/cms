@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module;
+namespace Mymo\Module;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Translation\Translator;
-use App\Module\Contracts\ActivatorInterface;
+use Mymo\Module\Contracts\ActivatorInterface;
 
 abstract class Module
 {

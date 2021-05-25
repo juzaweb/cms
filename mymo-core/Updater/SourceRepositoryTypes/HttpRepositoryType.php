@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\SourceRepositoryTypes;
+namespace Mymo\Updater\SourceRepositoryTypes;
 
-use App\Updater\Contracts\SourceRepositoryTypeContract;
-use App\Updater\Events\UpdateAvailable;
-use App\Updater\Models\Release;
-use App\Updater\Models\UpdateExecutor;
-use App\Updater\Traits\SupportPrivateAccessToken;
-use App\Updater\Traits\UseVersionFile;
+use Mymo\Updater\Contracts\SourceRepositoryTypeContract;
+use Mymo\Updater\Events\UpdateAvailable;
+use Mymo\Updater\Models\Release;
+use Mymo\Updater\Models\UpdateExecutor;
+use Mymo\Updater\Traits\SupportPrivateAccessToken;
+use Mymo\Updater\Traits\UseVersionFile;
 use Exception;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Support\Collection;

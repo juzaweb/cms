@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Module\Publishing;
+namespace Mymo\Module\Publishing;
 
 use Illuminate\Console\Command;
-use App\Module\Contracts\PublisherInterface;
-use App\Module\Contracts\RepositoryInterface;
-use App\Module\Module;
+use Mymo\Module\Contracts\PublisherInterface;
+use Mymo\Module\Contracts\RepositoryInterface;
+use Mymo\Module\Module;
 
 abstract class Publisher implements PublisherInterface
 {
@@ -87,7 +87,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Get module instance.
      *
-     * @return \App\Module\Module
+     * @return \Mymo\Module\Module
      */
     public function getModule()
     {

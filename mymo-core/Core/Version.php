@@ -10,7 +10,7 @@
  * Time: 11:20 AM
  */
 
-namespace App\Core;
+namespace Mymo\Core;
 
 class Version
 {

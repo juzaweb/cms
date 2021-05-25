@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use ErrorException;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Str;
-use App\Module\Contracts\RepositoryInterface;
-use App\Module\Module;
-use App\Module\Support\Config\GenerateConfigReader;
-use App\Module\Traits\ModuleCommandTrait;
+use Mymo\Module\Contracts\RepositoryInterface;
+use Mymo\Module\Module;
+use Mymo\Module\Support\Config\GenerateConfigReader;
+use Mymo\Module\Traits\ModuleCommandTrait;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Support\Migrations;
+namespace Mymo\Module\Support\Migrations;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;

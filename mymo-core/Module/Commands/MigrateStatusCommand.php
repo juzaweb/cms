@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use Illuminate\Console\Command;
-use App\Module\Migrations\Migrator;
-use App\Module\Module;
+use Mymo\Module\Migrations\Migrator;
+use Mymo\Module\Module;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -25,7 +25,7 @@ class MigrateStatusCommand extends Command
     protected $description = 'Status for all module migrations';
 
     /**
-     * @var \App\Module\Contracts\RepositoryInterface
+     * @var \Mymo\Module\Contracts\RepositoryInterface
      */
     protected $module;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Module;
+namespace Mymo\Module;
 
-use App\Module\Support\Stub;
+use Mymo\Module\Support\Stub;
 
 class LumenModulesServiceProvider extends ModulesServiceProvider
 {

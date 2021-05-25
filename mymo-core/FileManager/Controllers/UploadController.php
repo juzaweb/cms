@@ -1,11 +1,11 @@
 <?php
 
-namespace App\FileManager\Controllers;
+namespace Mymo\FileManager\Controllers;
 
 use Illuminate\Support\Facades\Log;
-use App\FileManager\Events\ImageIsUploading;
-use App\FileManager\Events\ImageWasUploaded;
-use App\FileManager\Lfm;
+use Mymo\FileManager\Events\ImageIsUploading;
+use Mymo\FileManager\Events\ImageWasUploaded;
+use Mymo\FileManager\Lfm;
 
 class UploadController extends LfmController
 {

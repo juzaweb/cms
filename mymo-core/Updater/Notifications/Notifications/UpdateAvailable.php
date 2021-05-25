@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\Notifications\Notifications;
+namespace Mymo\Updater\Notifications\Notifications;
 
-use App\Updater\Events\UpdateAvailable as UpdateAvailableEvent;
-use App\Updater\Notifications\BaseNotification;
+use Mymo\Updater\Events\UpdateAvailable as UpdateAvailableEvent;
+use Mymo\Updater\Notifications\BaseNotification;
 use Illuminate\Notifications\Messages\MailMessage;
 
 final class UpdateAvailable extends BaseNotification

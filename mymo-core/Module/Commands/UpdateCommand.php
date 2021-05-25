@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use Illuminate\Console\Command;
-use App\Module\Traits\ModuleCommandTrait;
+use Mymo\Module\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 
 class UpdateCommand extends Command
@@ -37,7 +37,7 @@ class UpdateCommand extends Command
             return 0;
         }
 
-        /** @var \App\Module\Module $module */
+        /** @var \Mymo\Module\Module $module */
         foreach ($this->laravel['modules']->getOrdered() as $module) {
             $this->updateModule($module->getName());
         }

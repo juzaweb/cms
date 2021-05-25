@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Module\Process;
+namespace Mymo\Module\Process;
 
-use App\Module\Module;
+use Mymo\Module\Module;
 
 class Updater extends Runner
 {

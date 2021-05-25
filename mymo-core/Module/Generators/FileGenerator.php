@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Module\Generators;
+namespace Mymo\Module\Generators;
 
 use Illuminate\Filesystem\Filesystem;
-use App\Module\Exceptions\FileAlreadyExistException;
+use Mymo\Module\Exceptions\FileAlreadyExistException;
 
 class FileGenerator extends Generator
 {

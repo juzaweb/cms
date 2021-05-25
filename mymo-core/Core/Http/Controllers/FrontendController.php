@@ -10,9 +10,9 @@
  * Time: 8:36 PM
  */
 
-namespace App\Core\Http\Controllers;
+namespace Mymo\Core\Http\Controllers;
 
-use App\Theme\Facades\Theme;
+use Mymo\Theme\Facades\Theme;
 
 class FrontendController extends Controller
 {

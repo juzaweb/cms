@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Updater;
+namespace Mymo\Updater;
 
-use App\Updater\Commands\CheckForUpdate;
-use App\Updater\Contracts\SourceRepositoryTypeContract;
-use App\Updater\Models\Release;
-use App\Updater\Models\UpdateExecutor;
-use App\Updater\Notifications\EventHandler;
-use App\Updater\SourceRepositoryTypes\GithubRepositoryType;
-use App\Updater\SourceRepositoryTypes\GithubRepositoryTypes\GithubBranchType;
-use App\Updater\SourceRepositoryTypes\GithubRepositoryTypes\GithubTagType;
-use App\Updater\SourceRepositoryTypes\HttpRepositoryType;
+use Mymo\Updater\Commands\CheckForUpdate;
+use Mymo\Updater\Contracts\SourceRepositoryTypeContract;
+use Mymo\Updater\Models\Release;
+use Mymo\Updater\Models\UpdateExecutor;
+use Mymo\Updater\Notifications\EventHandler;
+use Mymo\Updater\SourceRepositoryTypes\GithubRepositoryType;
+use Mymo\Updater\SourceRepositoryTypes\GithubRepositoryTypes\GithubBranchType;
+use Mymo\Updater\SourceRepositoryTypes\GithubRepositoryTypes\GithubTagType;
+use Mymo\Updater\SourceRepositoryTypes\HttpRepositoryType;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Filesystem\Filesystem;

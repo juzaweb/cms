@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Module\Process;
+namespace Mymo\Module\Process;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use App\Module\Contracts\RepositoryInterface;
+use Mymo\Module\Contracts\RepositoryInterface;
 use Symfony\Component\Process\Process;
 
 class Installer
@@ -25,7 +25,7 @@ class Installer
 
     /**
      * The module repository instance.
-     * @var \App\Module\Contracts\RepositoryInterface
+     * @var \Mymo\Module\Contracts\RepositoryInterface
      */
     protected $repository;
 
@@ -90,7 +90,7 @@ class Installer
 
     /**
      * Set the module repository instance.
-     * @param \App\Module\Contracts\RepositoryInterface $repository
+     * @param \Mymo\Module\Contracts\RepositoryInterface $repository
      * @return $this
      */
     public function setRepository(RepositoryInterface $repository)

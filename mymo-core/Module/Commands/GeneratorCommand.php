@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use Illuminate\Console\Command;
-use App\Module\Exceptions\FileAlreadyExistException;
-use App\Module\Generators\FileGenerator;
+use Mymo\Module\Exceptions\FileAlreadyExistException;
+use Mymo\Module\Generators\FileGenerator;
 
 abstract class GeneratorCommand extends Command
 {
@@ -79,7 +79,7 @@ abstract class GeneratorCommand extends Command
     /**
      * Get class namespace.
      *
-     * @param \App\Module\Module $module
+     * @param \Mymo\Module\Module $module
      *
      * @return string
      */

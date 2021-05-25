@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use Illuminate\Support\Str;
-use App\Module\Support\Config\GenerateConfigReader;
-use App\Module\Support\Migrations\NameParser;
-use App\Module\Support\Migrations\SchemaParser;
-use App\Module\Support\Stub;
-use App\Module\Traits\ModuleCommandTrait;
+use Mymo\Module\Support\Config\GenerateConfigReader;
+use Mymo\Module\Support\Migrations\NameParser;
+use Mymo\Module\Support\Migrations\SchemaParser;
+use Mymo\Module\Support\Stub;
+use Mymo\Module\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

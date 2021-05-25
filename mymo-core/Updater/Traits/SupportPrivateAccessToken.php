@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\Traits;
+namespace Mymo\Updater\Traits;
 
 trait SupportPrivateAccessToken
 {

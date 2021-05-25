@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Module;
+namespace Mymo\Module;
 
-use App\Module\Contracts\RepositoryInterface;
-use App\Module\Exceptions\InvalidActivatorClass;
-use App\Module\Support\Stub;
+use Mymo\Module\Contracts\RepositoryInterface;
+use Mymo\Module\Exceptions\InvalidActivatorClass;
+use Mymo\Module\Support\Stub;
 
 class LaravelModulesServiceProvider extends ModulesServiceProvider
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Module\Laravel;
+namespace Mymo\Module\Laravel;
 
-use App\Module\FileRepository;
+use Mymo\Module\FileRepository;
 
 class LaravelFileRepository extends FileRepository
 {

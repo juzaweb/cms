@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Module\Providers;
+namespace Mymo\Module\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Module\Contracts\RepositoryInterface;
+use Mymo\Module\Contracts\RepositoryInterface;
 
 class BootstrapServiceProvider extends ServiceProvider
 {

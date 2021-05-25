@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Theme\Exceptions;
+namespace Mymo\Theme\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

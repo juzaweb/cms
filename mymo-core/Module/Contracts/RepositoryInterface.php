@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Module\Contracts;
+namespace Mymo\Module\Contracts;
 
-use App\Module\Exceptions\ModuleNotFoundException;
-use App\Module\Module;
+use Mymo\Module\Exceptions\ModuleNotFoundException;
+use Mymo\Module\Module;
 
 interface RepositoryInterface
 {
@@ -31,7 +31,7 @@ interface RepositoryInterface
     /**
      * Get modules as modules collection instance.
      *
-     * @return \App\Module\Collection
+     * @return \Mymo\Module\Collection
      */
     public function toCollection();
 
@@ -157,7 +157,7 @@ interface RepositoryInterface
      * Delete a specific module.
      * @param string $module
      * @return bool
-     * @throws \App\Module\Exceptions\ModuleNotFoundException
+     * @throws \Mymo\Module\Exceptions\ModuleNotFoundException
      */
     public function delete(string $module): bool;
 

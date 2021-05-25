@@ -9,10 +9,10 @@
  * Github: https://github.com/mymocms/mymocms
  */
 
-namespace App\Core\Notifications;
+namespace Mymo\Core\Notifications;
 
-use App\Core\Channels\CustomMailChannel;
-use App\Core\Models\MyNotification;
+use Mymo\Core\Channels\CustomMailChannel;
+use Mymo\Core\Models\MyNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 

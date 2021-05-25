@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Module\Migrations;
+namespace Mymo\Module\Migrations;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use App\Module\Module;
-use App\Module\Support\Config\GenerateConfigReader;
+use Mymo\Module\Module;
+use Mymo\Module\Support\Config\GenerateConfigReader;
 
 class Migrator
 {

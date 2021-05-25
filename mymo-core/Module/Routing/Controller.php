@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Routing;
+namespace Mymo\Module\Routing;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

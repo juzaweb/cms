@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Helpers;
+namespace Mymo\Core\Helpers;
 
 class GoogleDrive {
     private $cache_path;

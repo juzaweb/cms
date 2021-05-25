@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Updater\SourceRepositoryTypes\GithubRepositoryTypes;
+namespace Mymo\Updater\SourceRepositoryTypes\GithubRepositoryTypes;
 
-use App\Updater\Contracts\SourceRepositoryTypeContract;
-use App\Updater\Models\Release;
-use App\Updater\Models\UpdateExecutor;
-use App\Updater\SourceRepositoryTypes\GithubRepositoryType;
+use Mymo\Updater\Contracts\SourceRepositoryTypeContract;
+use Mymo\Updater\Models\Release;
+use Mymo\Updater\Models\UpdateExecutor;
+use Mymo\Updater\SourceRepositoryTypes\GithubRepositoryType;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Utils;
 use Illuminate\Support\Collection;

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Module\Laravel;
+namespace Mymo\Module\Laravel;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
 use Illuminate\Support\Str;
-use App\Module\Module as BaseModule;
+use Mymo\Module\Module as BaseModule;
 
 class Module extends BaseModule
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FileManager;
+namespace Mymo\FileManager;
 
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

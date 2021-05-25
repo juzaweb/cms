@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Commands;
+namespace Mymo\Module\Commands;
 
 use Illuminate\Console\Command;
-use App\Module\Contracts\RepositoryInterface;
-use App\Module\Module;
+use Mymo\Module\Contracts\RepositoryInterface;
+use Mymo\Module\Module;
 
 class LaravelModulesV6Migrator extends Command
 {

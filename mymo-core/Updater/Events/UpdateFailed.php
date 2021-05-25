@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Updater\Events;
+namespace Mymo\Updater\Events;
 
-use App\Updater\Models\Release;
+use Mymo\Updater\Models\Release;
 
 class UpdateFailed
 {

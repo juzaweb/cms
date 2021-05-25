@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\Setting;
+namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
-use App\Core\Models\Languages;
-use App\Core\Models\Translation;
+use Mymo\Core\Models\Languages;
+use Mymo\Core\Models\Translation;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\Controller;
 
 class TranslateController extends Controller
 {

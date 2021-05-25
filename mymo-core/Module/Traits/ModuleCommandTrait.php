@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Traits;
+namespace Mymo\Module\Traits;
 
 trait ModuleCommandTrait
 {

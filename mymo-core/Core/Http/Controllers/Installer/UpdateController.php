@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Http\Controllers\Installer;
+namespace Mymo\Core\Http\Controllers\Installer;
 
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\Controller;
 
 class UpdateController extends Controller
 {

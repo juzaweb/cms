@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Module\Support;
+namespace Mymo\Module\Support;
 
 class Stub
 {

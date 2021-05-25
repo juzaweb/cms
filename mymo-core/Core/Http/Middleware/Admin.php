@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Http\Middleware;
+namespace Mymo\Core\Http\Middleware;
 
-use App\Core\User;
+use Mymo\Core\User;
 use Closure;
 
 class Admin
