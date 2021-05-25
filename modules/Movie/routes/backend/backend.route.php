@@ -4,18 +4,6 @@ require_once __DIR__ . '/components/tmdb.route.php';
 require_once __DIR__ . '/components/live-tv.route.php';
 require_once __DIR__ . '/components/server-stream.route.php';
 
-Route::group(['prefix' => '/'], function () {
-    Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
-    
-    Route::get('/load-data/{func}', 'Backend\LoadDataController@loadData')->name('admin.load_data');
-    
-    Route::get('/dashboard/users', 'Backend\DashboardController@getDataUser')->name('admin.dashboard.users');
-    
-    Route::get('/dashboard/notifications', 'Backend\DashboardController@getDataNotification')->name('admin.dashboard.notifications');
-    
-    Route::get('/dashboard/views-chart', 'Backend\DashboardController@viewsChart')->name('admin.dashboard.views_chart');
-});
-
 Route::group(['prefix' => 'genres'], function () {
     Route::get('/', 'Backend\GenresController@index')->name('admin.genres');
     
@@ -88,42 +76,4 @@ Route::group(['prefix' => 'pages'], function () {
 
 Route::group(['prefix' => 'tags'], function () {
     Route::post('/save', 'Backend\TagsController@save')->name('admin.tags.save');
-});
-
-Route::group(['prefix' => 'users'], function () {
-    Route::get('/', 'Backend\UsersController@index')->name('admin.users');
-    
-    Route::get('/getdata', 'Backend\UsersController@getData')->name('admin.users.getdata');
-    
-    Route::get('/create', 'Backend\UsersController@form')->name('admin.users.create');
-    
-    Route::get('/edit/{id}', 'Backend\UsersController@form')->name('admin.users.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\UsersController@save')->name('admin.users.save');
-    
-    Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
-});
-
-Route::group(['prefix' => 'notification'], function () {
-    Route::get('/', 'Backend\SendNotificationController@index')->name('admin.notification');
-    
-    Route::get('/getdata', 'Backend\SendNotificationController@getData')->name('admin.notification.getdata');
-    
-    Route::get('/create', 'Backend\SendNotificationController@form')->name('admin.notification.create');
-    
-    Route::get('/edit/{id}', 'Backend\SendNotificationController@form')->name('admin.notification.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\SendNotificationController@save')->name('admin.notification.save');
-    
-    Route::post('/remove', 'Backend\SendNotificationController@remove')->name('admin.notification.remove');
-});
-
-Route::group(['prefix' => 'logs/email'], function () {
-    Route::get('/', 'Backend\Logs\EmailLogsController@index')->name('admin.logs.email');
-    
-    Route::get('/getdata', 'Backend\Logs\EmailLogsController@getData')->name('admin.logs.email.getdata');
-    
-    Route::post('/status', 'Backend\Logs\EmailLogsController@status')->name('admin.logs.email.status');
-    
-    Route::post('/remove', 'Backend\Logs\EmailLogsController@remove')->name('admin.logs.email.remove');
 });
