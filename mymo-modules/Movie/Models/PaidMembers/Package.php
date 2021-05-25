@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Core\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Package newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Package newQuery()

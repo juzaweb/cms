@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Core\User|null $user
+ * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments publiced()

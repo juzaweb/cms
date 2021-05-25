@@ -12,6 +12,7 @@
 
 namespace Mymo\Core\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Mymo\Theme\Facades\Theme;
 
 class FrontendController extends Controller

@@ -1,6 +1,6 @@
 <?php
 /**
- * MYMO CMS - TV Series & Movie Portal CMS Unlimited
+ * MYMO CMS - Free Laravel CMS
  *
  * @package mymocms/mymocms
  * @author The Anh Dang
@@ -83,16 +83,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    public function getAvatar() {
-        if ($this->avatar) {
-            return image_url($this->avatar);
-        }
-        
-        return asset('images/thumb-default.png');
-    }
-    
-    public static function masterAdminId() {
-        return 1;
-    }
 }

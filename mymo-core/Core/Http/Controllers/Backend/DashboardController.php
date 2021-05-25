@@ -2,14 +2,14 @@
 
 namespace Mymo\Core\Http\Controllers\Backend;
 
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Movie\Movies;
 use Mymo\Core\Models\Movie\MovieViews;
 use Mymo\Core\Models\Pages;
-use Mymo\Core\User;
+use Mymo\Core\Models\User;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
 
-class DashboardController extends Controller
+class DashboardController extends BackendController
 {
     public function index() {
         /*$count_movie = Movies::where('status', '=', 1)
