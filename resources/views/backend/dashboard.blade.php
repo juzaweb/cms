@@ -10,7 +10,7 @@
                     <strong class="text-uppercase font-size-16">@lang('app.statistics')</strong>
                 </div>
                 <div class="row">
-                    <div class="col-xl-3">
+                    {{--<div class="col-xl-3">
                         <div class="card">
                             <div class="card-body position-relative overflow-hidden">
                                 <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_movie }}</div>
@@ -28,7 +28,8 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
+
                     <div class="col-xl-3">
                         <div class="card">
                             <div class="card-body position-relative overflow-hidden">
