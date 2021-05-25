@@ -1,4 +1,5 @@
 <?php
+
 namespace Mymo\Core\Validators;
 
 use GuzzleHttp\Client;
