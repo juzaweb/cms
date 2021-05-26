@@ -2,7 +2,7 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
-use Mymo\Core\Models\Configs;
+use Mymo\Core\Models\Config;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\Controller;
 
@@ -80,7 +80,7 @@ class SeoSettingController extends Controller
         ]);
     
         foreach ($configs as $key => $config) {
-            Configs::setConfig($key, $config);
+            Config::setConfig($key, $config);
         }
     
         return response()->json([

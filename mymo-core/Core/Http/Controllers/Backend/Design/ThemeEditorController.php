@@ -2,8 +2,8 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Design;
 
-use Mymo\Core\Models\Configs;
-use Mymo\Core\Models\ThemeConfigs;
+use Mymo\Core\Models\Config;
+use Mymo\Core\Models\ThemeConfig;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\Controller;
 
@@ -20,15 +20,15 @@ class ThemeEditorController extends Controller
     public function save(Request $request) {
         $settings = $request->post('setting');
         if ($settings) {
-            $configs = Configs::getConfigs();
+            $configs = Config::getConfigs();
             foreach ($settings as $key => $setting) {
                 if (in_array($key, $configs)) {
-                    Configs::setConfig($key, $setting);
+                    Config::setConfig($key, $setting);
                 }
             }
         }
     
-        $model = ThemeConfigs::firstOrNew(['code' => $request->post('code')]);
+        $model = ThemeConfig::firstOrNew(['code' => $request->post('code')]);
         $model->content = response()->json($request->except(['setting']))->getContent();
         $model->save();
         

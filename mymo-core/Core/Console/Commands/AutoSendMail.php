@@ -2,7 +2,7 @@
 
 namespace Mymo\Core\Console\Commands;
 
-use Mymo\Core\Models\Configs;
+use Mymo\Core\Models\Config;
 use Mymo\Core\Models\Email\EmailList;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;

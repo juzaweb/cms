@@ -1,6 +1,6 @@
 <?php
 
-use Mymo\Core\Models\ThemeConfigs;
+use Mymo\Core\Models\ThemeConfig;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,8 +15,6 @@ class CreateThemeConfigsTable extends Migration
             $table->longText('content')->nullable();
             $table->timestamps();
         });
-        
-        $this->_createConfigs();
     }
     
     public function down()
@@ -33,7 +31,7 @@ class CreateThemeConfigsTable extends Migration
         ];
         
         foreach ($configs as $key => $config) {
-            ThemeConfigs::create([
+            ThemeConfig::create([
                 'code' => $key,
                 'content' => $config,
             ]);

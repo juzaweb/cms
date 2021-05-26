@@ -3,7 +3,7 @@
 
 use Mymo\Core\Models\Menu;
 use Mymo\Core\Models\Sliders;
-use Mymo\Core\Models\ThemeConfigs;
+use Mymo\Core\Models\ThemeConfig;
 use Illuminate\Support\Str;
 
 function json_message($message, $status = 'success') {
@@ -89,7 +89,7 @@ function logo_url($path) {
 }
 
 function get_config(string $key, $default = null) {
-    return \Mymo\Core\Models\Configs::getConfig($key, $default);
+    return \Mymo\Core\Models\Config::getConfig($key, $default);
 }
 
 function copyfile_chunked($infile, $outfile) {
@@ -185,7 +185,7 @@ function full_text_wildcards($term) {
 }
 
 function theme_config($code) {
-    $config = ThemeConfigs::where('code', '=', $code)
+    $config = ThemeConfig::where('code', '=', $code)
         ->first(['content']);
     if ($config) {
         return json_decode($config->content, true);
@@ -200,7 +200,7 @@ function menu_info($id) {
 }
 
 function theme_setting($code) {
-    $config = ThemeConfigs::where('code', '=', $code)
+    $config = ThemeConfig::where('code', '=', $code)
         ->first(['content']);
     
     if ($config) {

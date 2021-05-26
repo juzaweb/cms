@@ -2,7 +2,7 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
-use Mymo\Core\Models\Configs;
+use Mymo\Core\Models\Config;
 use Mymo\Core\Models\Email\EmailTemplates;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\Controller;

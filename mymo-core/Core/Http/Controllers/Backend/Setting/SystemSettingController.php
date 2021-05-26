@@ -2,7 +2,7 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
-use Mymo\Core\Models\Configs;
+use Mymo\Core\Models\Config;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\Controller;
 
@@ -28,10 +28,10 @@ class SystemSettingController extends Controller
     }
     
     public function save(Request $request) {
-        $configs = $request->only(Configs::getConfigs());
+        $configs = $request->only(Config::getConfigs());
         foreach ($configs as $key => $config) {
             if ($request->has($key)) {
-                Configs::setConfig($key, $config);
+                Config::setConfig($key, $config);
             }
         }
     
@@ -62,9 +62,9 @@ class SystemSettingController extends Controller
         $block_ip_type = $request->post('block_ip_type');
         $block_ip_list = $request->post('block_ip_list');
         
-        Configs::setConfig('block_ip_status', $block_ip_status);
-        Configs::setConfig('block_ip_type', $block_ip_type);
-        Configs::setConfig('block_ip_list', implode(',', $block_ip_list));
+        Config::setConfig('block_ip_status', $block_ip_status);
+        Config::setConfig('block_ip_type', $block_ip_type);
+        Config::setConfig('block_ip_list', implode(',', $block_ip_list));
         
         return response()->json([
             'status' => 'success',
