@@ -258,5 +258,5 @@ function user_avatar($user = null) {
         return $user->getAvatar();
     }
 
-    return asset('images/thumb-default.png');
+    return asset('styles/images/thumb-default.png');
 }

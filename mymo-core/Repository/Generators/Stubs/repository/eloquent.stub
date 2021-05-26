@@ -1,0 +1,27 @@
+<?php
+
+$NAMESPACE$
+
+use Tadcms\Repository\Eloquent\BaseRepository;
+use $MODEL$;
+
+/**
+ * Class $CLASS$RepositoryEloquent.
+ *
+ * @package $NAMESPACE$
+ */
+class $CLASS$RepositoryEloquent extends BaseRepository implements $CLASS$Repository
+{
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    public function model()
+    {
+        return $CLASS$::class;
+    }
+
+
+    
+}

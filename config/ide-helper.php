@@ -93,7 +93,7 @@ return array(
 
     'model_locations' => array(
         'app',
-        'app/Models'
+        'mymo-core/Core/Models'
     ),
 
     /*

@@ -27,6 +27,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'avatar'
     ];
 
     /**
@@ -52,10 +53,6 @@ class User extends Authenticatable
             return image_url($this->avatar);
         }
 
-        return asset('images/thumb-default.png');
-    }
-
-    public static function masterAdminId() {
-        return 1;
+        return asset('styles/images/thumb-default.png');
     }
 }
