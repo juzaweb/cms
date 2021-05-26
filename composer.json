@@ -26,9 +26,9 @@
     "license": "MIT",
     "require": {
         "php": ">=7.2.5",
+        "ext-json": "*",
         "arcanedev/log-viewer": "5.*",
         "diglactic/laravel-breadcrumbs": "6.x",
-        "ext-json": "*",
         "fideloper/proxy": "^4.4",
         "guzzlehttp/guzzle": "^6.5",
         "hassankhan/config": "^2.2",
@@ -39,7 +39,8 @@
         "laravelium/sitemap": "6.*",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",
-        "symfony/yaml": "^5.2"
+        "symfony/yaml": "^5.2",
+        "tadcms/hooks": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",
@@ -64,20 +65,21 @@
     },
     "autoload": {
         "files": [
-            "app/Core/Helpers/helpers.php"
+            "mymo-core/Core/Helpers/helpers.php"
         ],
         "psr-4": {
             "App\\": "app/",
-            "Modules\\": "modules/"
+            "Mymo\\": "mymo-core/",
+            "Modules\\": "mymo-modules/"
         },
         "classmap": [
-            "app/Core/database/seeds",
-            "app/Core/database/factories"
+            "database/seeds",
+            "database/factories"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "core/tests/"
+            "Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",

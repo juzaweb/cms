@@ -37,7 +37,7 @@ return [
     |
     */
 
-    'files' => base_path('app/Core/routes/breadcrumbs.php'),
+    'files' => base_path('mymo-core/Core/routes/breadcrumbs.php'),
 
     /*
     |--------------------------------------------------------------------------
