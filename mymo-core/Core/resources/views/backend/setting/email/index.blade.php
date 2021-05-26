@@ -27,7 +27,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.test_configuration')</h5>
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.test_configuration')</h5>
                 </div>
             </div>
         </div>
@@ -35,12 +35,12 @@
         <div class="card-body">
             <form method="post" action="{{ route('admin.setting.email.test') }}" class="form-ajax">
                 <div class="form-group">
-                    <label class="col-form-label" for="email">@lang('app.email')</label>
+                    <label class="col-form-label" for="email">@lang('mymo_core::app.email')</label>
 
                     <input type="text" name="email" class="form-control" id="email" autocomplete="off">
                 </div>
 
-                <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i> @lang('app.send')</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i> @lang('mymo_core::app.send')</button>
             </form>
         </div>
     </div>

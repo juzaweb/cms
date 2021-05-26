@@ -167,19 +167,19 @@
                         <input type="hidden" name="type" value="custom">
 
                         <div class="form-group">
-                            <label class="col-form-label" for="add-title">@lang('app.title')</label>
+                            <label class="col-form-label" for="add-title">@lang('mymo_core::app.title')</label>
                             <input type="text" name="title" id="add-title" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="add-url">@lang('app.pages')</label>
+                            <label class="col-form-label" for="add-url">@lang('mymo_core::app.pages')</label>
                             <select name="url" id="add-url" class="form-control">
-                                <option value="">--- @lang('app.choose_page') ---</option>
-                                <option value="/">@lang('app.home')</option>
-                                <option value="/movies">@lang('app.movies')</option>
-                                <option value="/tv-series">@lang('app.tv_series')</option>
-                                <option value="/latest-movies">@lang('app.latest_movies')</option>
-                                <option value="/posts">@lang('app.blog')</option>
+                                <option value="">--- @lang('mymo_core::app.choose_page') ---</option>
+                                <option value="/">@lang('mymo_core::app.home')</option>
+                                <option value="/movies">@lang('mymo_core::app.movies')</option>
+                                <option value="/tv-series">@lang('mymo_core::app.tv_series')</option>
+                                <option value="/latest-movies">@lang('mymo_core::app.latest_movies')</option>
+                                <option value="/posts">@lang('mymo_core::app.blog')</option>
                             </select>
                         </div>
 
@@ -204,12 +204,12 @@
                         <input type="hidden" name="type" value="custom">
 
                         <div class="form-group">
-                            <label class="col-form-label">@lang('app.title')</label>
+                            <label class="col-form-label">@lang('mymo_core::app.title')</label>
                             <input type="text" name="title" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label">@lang('app.url')</label>
+                            <label class="col-form-label">@lang('mymo_core::app.url')</label>
                             <input type="text" name="url" class="form-control" required>
                         </div>
 

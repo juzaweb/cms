@@ -20,8 +20,8 @@
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                            <a href="{{ route('admin.video_qualities') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('mymo_core::app.save')</button>
+                            <a href="{{ route('admin.video_qualities') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('mymo_core::app.cancel')</a>
                         </div>
                     </div>
                 </div>
@@ -33,16 +33,16 @@
                     <div class="col-md-12">
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseName">@lang('app.name')</label>
+                            <label class="col-form-label" for="baseName">@lang('mymo_core::app.name')</label>
 
                             <input type="text" name="name" class="form-control" id="baseName" value="{{ $model->name }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="default">@lang('app.default')</label>
+                            <label class="col-form-label" for="default">@lang('mymo_core::app.default')</label>
                             <select name="default" id="default" class="form-control">
-                                <option value="0" @if($model->default == 0) selected @endif>@lang('app.no')</option>
-                                <option value="1" @if($model->default == 1) selected @endif>@lang('app.yes')</option>
+                                <option value="0" @if($model->default == 0) selected @endif>@lang('mymo_core::app.no')</option>
+                                <option value="1" @if($model->default == 1) selected @endif>@lang('mymo_core::app.yes')</option>
                             </select>
                         </div>
                     </div>

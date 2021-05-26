@@ -10,18 +10,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <script type="text/javascript">
         var langs = {
-            'are_you_sure_delete_items': '@lang('app.are_you_sure_delete_items')',
-            'yes': '@lang('app.yes')',
-            'cancel': '@lang('app.cancel')',
-            'data_error': '@lang('app.data_error')',
-            'enabled': '@lang('app.enabled')',
-            'disabled': '@lang('app.disabled')',
-            'edit': '@lang('app.edit')',
-            'translate': '@lang('app.translate')',
-            'preview': '@lang('app.preview')',
-            'upload': '@lang('app.upload')',
-            'show': '@lang('app.show')',
-            'hide': '@lang('app.hide')',
+            'are_you_sure_delete_items': '@lang('mymo_core::app.are_you_sure_delete_items')',
+            'yes': '@lang('mymo_core::app.yes')',
+            'cancel': '@lang('mymo_core::app.cancel')',
+            'data_error': '@lang('mymo_core::app.data_error')',
+            'enabled': '@lang('mymo_core::app.enabled')',
+            'disabled': '@lang('mymo_core::app.disabled')',
+            'edit': '@lang('mymo_core::app.edit')',
+            'translate': '@lang('mymo_core::app.translate')',
+            'preview': '@lang('mymo_core::app.preview')',
+            'upload': '@lang('mymo_core::app.upload')',
+            'show': '@lang('mymo_core::app.show')',
+            'hide': '@lang('mymo_core::app.hide')',
         }
     </script>
     <link rel="stylesheet" href="{{ asset('css/theme-editor.css') }}">

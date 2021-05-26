@@ -14,23 +14,23 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.post_comments')</h5>
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.post_comments')</h5>
                 </div>
 
                 <div class="col-md-6">
                     <div class="float-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success status-button" data-status="1"><i class="fa fa-check-circle"></i> @lang('app.show')</button>
-                            <button type="button" class="btn btn-warning status-button" data-status="0"><i class="fa fa-times-circle"></i> @lang('app.hidden')</button>
+                            <button type="button" class="btn btn-success status-button" data-status="1"><i class="fa fa-check-circle"></i> @lang('mymo_core::app.show')</button>
+                            <button type="button" class="btn btn-warning status-button" data-status="0"><i class="fa fa-times-circle"></i> @lang('mymo_core::app.hidden')</button>
                         </div>
 
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success status-button" data-status="2"><i class="fa fa-check-circle"></i> @lang('app.approve')</button>
-                            <button type="button" class="btn btn-warning status-button" data-status="3"><i class="fa fa-times-circle"></i> @lang('app.deny')</button>
+                            <button type="button" class="btn btn-success status-button" data-status="2"><i class="fa fa-check-circle"></i> @lang('mymo_core::app.approve')</button>
+                            <button type="button" class="btn btn-warning status-button" data-status="3"><i class="fa fa-times-circle"></i> @lang('mymo_core::app.deny')</button>
                         </div>
 
                         <div class="btn-group">
-                            <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                            <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('mymo_core::app.delete')</button>
                         </div>
                     </div>
                 </div>
@@ -44,29 +44,29 @@
                     <form method="get" class="form-inline" id="form-search">
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputName" class="sr-only">@lang('app.search')</label>
-                            <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
+                            <label for="inputName" class="sr-only">@lang('mymo_core::app.search')</label>
+                            <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
                         </div>
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputApprove" class="sr-only">@lang('app.approve')</label>
+                            <label for="inputApprove" class="sr-only">@lang('mymo_core::app.approve')</label>
                             <select name="approve" id="inputApprove" class="form-control">
-                                <option value="">--- @lang('app.approve') ---</option>
-                                <option value="1">@lang('app.approved')</option>
-                                <option value="0">@lang('app.deny')</option>
+                                <option value="">--- @lang('mymo_core::app.approve') ---</option>
+                                <option value="1">@lang('mymo_core::app.approved')</option>
+                                <option value="0">@lang('mymo_core::app.deny')</option>
                             </select>
                         </div>
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputStatus" class="sr-only">@lang('app.status')</label>
+                            <label for="inputStatus" class="sr-only">@lang('mymo_core::app.status')</label>
                             <select name="status" id="inputStatus" class="form-control">
-                                <option value="">--- @lang('app.status') ---</option>
-                                <option value="1">@lang('app.show')</option>
-                                <option value="0">@lang('app.hidden')</option>
+                                <option value="">--- @lang('mymo_core::app.status') ---</option>
+                                <option value="1">@lang('mymo_core::app.show')</option>
+                                <option value="0">@lang('mymo_core::app.hidden')</option>
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('app.search')</button>
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo_core::app.search')</button>
                     </form>
                 </div>
             </div>
@@ -76,12 +76,12 @@
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                            <th data-field="author">@lang('app.author')</th>
-                            <th data-width="30%" data-field="content">@lang('app.content')</th>
-                            <th data-width="15%" data-field="post">@lang('app.post')</th>
-                            <th data-width="15%" data-field="created">@lang('app.created_at')</th>
-                            <th data-width="10%" data-field="approved" data-align="center" data-formatter="approve_formatter">@lang('app.approve')</th>
-                            <th data-width="10%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
+                            <th data-field="author">@lang('mymo_core::app.author')</th>
+                            <th data-width="30%" data-field="content">@lang('mymo_core::app.content')</th>
+                            <th data-width="15%" data-field="post">@lang('mymo_core::app.post')</th>
+                            <th data-width="15%" data-field="created">@lang('mymo_core::app.created_at')</th>
+                            <th data-width="10%" data-field="approved" data-align="center" data-formatter="approve_formatter">@lang('mymo_core::app.approve')</th>
+                            <th data-width="10%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('mymo_core::app.status')</th>
                         </tr>
                     </thead>
                 </table>
@@ -97,16 +97,16 @@
 
         function approve_formatter(value, row, index) {
             if (value == 1) {
-                return '<span class="text-success">@lang('app.approved')</span>';
+                return '<span class="text-success">@lang('mymo_core::app.approved')</span>';
             }
-            return '<span class="text-danger">@lang('app.deny')</span>';
+            return '<span class="text-danger">@lang('mymo_core::app.deny')</span>';
         }
 
         function status_formatter(value, row, index) {
             if (value == 1) {
-                return '<span class="text-success">@lang('app.show')</span>';
+                return '<span class="text-success">@lang('mymo_core::app.show')</span>';
             }
-            return '<span class="text-danger">@lang('app.hidden')</span>';
+            return '<span class="text-danger">@lang('mymo_core::app.hidden')</span>';
         }
 
         var table = new LoadBootstrapTable({

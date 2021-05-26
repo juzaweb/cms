@@ -14,12 +14,12 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.email_templates')</h5>
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.email_templates')</h5>
                 </div>
 
                 <div class="col-md-6">
                     <div class="btn-group float-right">
-                        <a href="{{ route('admin.setting.email_templates.edit_layout') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.edit_layout')</a>
+                        <a href="{{ route('admin.setting.email_templates.edit_layout') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.edit_layout')</a>
                     </div>
                 </div>
             </div>
@@ -32,11 +32,11 @@
                     <form method="get" class="form-inline" id="form-search">
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputName" class="sr-only">@lang('app.search')</label>
-                            <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
+                            <label for="inputName" class="sr-only">@lang('mymo_core::app.search')</label>
+                            <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
                         </div>
 
-                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('app.search')</button>
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo_core::app.search')</button>
                     </form>
                 </div>
 
@@ -47,8 +47,8 @@
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                            <th data-width="10%" data-field="code">@lang('app.code')</th>
-                            <th data-field="subject" data-formatter="subject_formatter">@lang('app.subject')</th>
+                            <th data-width="10%" data-field="code">@lang('mymo_core::app.code')</th>
+                            <th data-field="subject" data-formatter="subject_formatter">@lang('mymo_core::app.subject')</th>
                         </tr>
                     </thead>
                 </table>

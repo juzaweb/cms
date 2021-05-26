@@ -15,12 +15,12 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.seo_setting')</h5>
+                        <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.seo_setting')</h5>
                     </div>
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('mymo_core::app.save')</button>
                         </div>
                     </div>
                 </div>

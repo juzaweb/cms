@@ -6,24 +6,24 @@
         $block_ip_list = get_config('block_ip_list');
     @endphp
     <div class="form-group">
-        <label class="col-form-label" for="block_ip_status">@lang('app.block_ip_status')</label>
+        <label class="col-form-label" for="block_ip_status">@lang('mymo_core::app.block_ip_status')</label>
         <select name="block_ip_status" id="block_ip_status" class="form-control">
-            <option value="1" @if($block_ip_status == 1) selected @endif>@lang('app.enabled')</option>
-            <option value="0" @if($block_ip_status == 0) selected @endif>@lang('app.disabled')</option>
+            <option value="1" @if($block_ip_status == 1) selected @endif>@lang('mymo_core::app.enabled')</option>
+            <option value="0" @if($block_ip_status == 0) selected @endif>@lang('mymo_core::app.disabled')</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="block_ip_status">@lang('app.block_ip_type')</label>
+        <label class="col-form-label" for="block_ip_status">@lang('mymo_core::app.block_ip_type')</label>
         <select name="block_ip_status" id="block_ip_status" class="form-control">
-            <option value="1" @if($block_ip_type == 1) selected @endif>@lang('app.enabled')</option>
-            <option value="0" @if($block_ip_type == 2) selected @endif>@lang('app.disabled')</option>
+            <option value="1" @if($block_ip_type == 1) selected @endif>@lang('mymo_core::app.enabled')</option>
+            <option value="0" @if($block_ip_type == 2) selected @endif>@lang('mymo_core::app.disabled')</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="block_ip_status">@lang('app.block_ip_list')</label>
-        <select name="block_ip_list[]" id="block_ip_list" class="form-control load-countries-g" data-placeholder="--- @lang('app.block_ip_list') ---"></select>
+        <label class="col-form-label" for="block_ip_status">@lang('mymo_core::app.block_ip_list')</label>
+        <select name="block_ip_list[]" id="block_ip_list" class="form-control load-countries-g" data-placeholder="--- @lang('mymo_core::app.block_ip_list') ---"></select>
     </div>
 
     <div class="row">
@@ -32,11 +32,11 @@
         <div class="col-md-6">
             <div class="btn-group float-right">
                 <button type="submit" class="btn btn-success">
-                    <i class="fa fa-save"></i> @lang('app.save')
+                    <i class="fa fa-save"></i> @lang('mymo_core::app.save')
                 </button>
 
                 <button type="reset" class="btn btn-default">
-                    <i class="fa fa-refresh"></i> @lang('app.reset')
+                    <i class="fa fa-refresh"></i> @lang('mymo_core::app.reset')
                 </button>
             </div>
         </div>

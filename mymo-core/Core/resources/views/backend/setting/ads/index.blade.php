@@ -14,7 +14,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.banner_ads')</h5>
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.banner_ads')</h5>
                 </div>
 
                 <div class="col-md-6">
@@ -30,19 +30,19 @@
                     <form method="get" class="form-inline" id="form-search">
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="search" class="sr-only">@lang('app.search')</label>
-                            <input name="search" type="text" id="search" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
+                            <label for="search" class="sr-only">@lang('mymo_core::app.search')</label>
+                            <input name="search" type="text" id="search" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
                         </div>
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="status" class="sr-only">@lang('app.status')</label>
+                            <label for="status" class="sr-only">@lang('mymo_core::app.status')</label>
                             <select name="status" id="status" class="form-control">
-                                <option value="1">@lang('app.enabled')</option>
-                                <option value="0">@lang('app.disabled')</option>
+                                <option value="1">@lang('mymo_core::app.enabled')</option>
+                                <option value="0">@lang('mymo_core::app.disabled')</option>
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('app.search')</button>
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo_core::app.search')</button>
                     </form>
                 </div>
 
@@ -53,9 +53,9 @@
                     <thead>
                         <tr>
                             <th  data-field="state" data-width="3%" data-checkbox="true"></th>
-                            <th data-field="key" data-width="10%">@lang('app.code')</th>
-                            <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
-                            <th data-field="status" data-width="15%" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
+                            <th data-field="key" data-width="10%">@lang('mymo_core::app.code')</th>
+                            <th data-field="name" data-formatter="name_formatter">@lang('mymo_core::app.name')</th>
+                            <th data-field="status" data-width="15%" data-align="center" data-formatter="status_formatter">@lang('mymo_core::app.status')</th>
                         </tr>
                     </thead>
                 </table>
@@ -72,9 +72,9 @@
 
         function status_formatter(value, row, index) {
             if (value == 1) {
-                return '<span class="text-success">@lang('app.enabled')</span>';
+                return '<span class="text-success">@lang('mymo_core::app.enabled')</span>';
             }
-            return '<span class="text-danger">@lang('app.disabled')</span>';
+            return '<span class="text-danger">@lang('mymo_core::app.disabled')</span>';
         }
 
         var table = new LoadBootstrapTable({

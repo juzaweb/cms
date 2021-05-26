@@ -7,14 +7,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="cui__utils__heading">
-                    <strong class="text-uppercase font-size-16">@lang('app.statistics')</strong>
+                    <strong class="text-uppercase font-size-16">@lang('mymo_core::app.statistics')</strong>
                 </div>
                 <div class="row">
                     {{--<div class="col-xl-3">
                         <div class="card">
                             <div class="card-body position-relative overflow-hidden">
                                 <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_movie }}</div>
-                                <div class="text-uppercase">@lang('app.movies')</div>
+                                <div class="text-uppercase">@lang('mymo_core::app.movies')</div>
 
                             </div>
                         </div>
@@ -24,7 +24,7 @@
                         <div class="card">
                             <div class="card-body position-relative overflow-hidden">
                                 <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_tvserie }}</div>
-                                <div class="text-uppercase">@lang('app.tv_series')</div>
+                                <div class="text-uppercase">@lang('mymo_core::app.tv_series')</div>
 
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                         <div class="card">
                             <div class="card-body position-relative overflow-hidden">
                                 <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_user }}</div>
-                                <div class="text-uppercase">@lang('app.users')</div>
+                                <div class="text-uppercase">@lang('mymo_core::app.users')</div>
 
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                         <div class="card">
                             <div class="card-body position-relative overflow-hidden">
                                 <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_page }}</div>
-                                <div class="text-uppercase">@lang('app.pages')</div>
+                                <div class="text-uppercase">@lang('mymo_core::app.pages')</div>
 
                             </div>
                         </div>
@@ -67,7 +67,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>@lang('app.new_users')</h5>
+                        <h5>@lang('mymo_core::app.new_users')</h5>
                     </div>
 
                     <div class="card-body">
@@ -75,8 +75,8 @@
                             <thead>
                                 <tr>
                                     <th data-formatter="index_formatter" data-width="5%">#</th>
-                                    <th data-field="name">@lang('app.name')</th>
-                                    <th data-field="created" data-width="30%" data-align="center">@lang('app.created_at')</th>
+                                    <th data-field="name">@lang('mymo_core::app.name')</th>
+                                    <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
                                 </tr>
                             </thead>
                         </table>
@@ -87,7 +87,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>@lang('app.new_notifications')</h5>
+                        <h5>@lang('mymo_core::app.new_notifications')</h5>
                     </div>
 
                     <div class="card-body">
@@ -95,8 +95,8 @@
                             <thead>
                                 <tr>
                                     <th data-formatter="index_formatter" data-width="5%">#</th>
-                                    <th data-field="subject" data-formatter="subject_formatter">@lang('app.subject')</th>
-                                    <th data-field="created" data-width="30%" data-align="center">@lang('app.created_at')</th>
+                                    <th data-field="subject" data-formatter="subject_formatter">@lang('mymo_core::app.subject')</th>
+                                    <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
                                 </tr>
                             </thead>
                         </table>
@@ -124,7 +124,7 @@
             var data = google.visualization.arrayToDataTable(jsonData);
 
             var options = {
-                title: '@lang('app.chart_of_views_this_month')',
+                title: '@lang('mymo_core::app.chart_of_views_this_month')',
                 curveType: 'function',
                 legend: { position: 'bottom' },
             };

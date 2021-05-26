@@ -17,14 +17,14 @@
     <div class="theme-setting theme-setting--text editor-item ctype-select">
         <label class="next-label">{{ trans('app.type') }}</label>
         <select name="{{ $card['code'] }}[{{ $input['name'] }}][ctype]" class="next-input select-ctype">
-            <option value="1" @if($ctype == 1) selected @endif>@lang('app.menu_link')</option>
-            <option value="2" @if($ctype == 2) selected @endif>@lang('app.custom_html')</option>
+            <option value="1" @if($ctype == 1) selected @endif>@lang('mymo_core::app.menu_link')</option>
+            <option value="2" @if($ctype == 2) selected @endif>@lang('mymo_core::app.custom_html')</option>
         </select>
     </div>
 
     <div class="theme-setting theme-setting--text editor-item ctype ctype-1 @if($ctype != 1) box-hidden @endif">
         <label class="next-label">{{ trans('app.menu') }}</label>
-        <select name="{{ $card['code'] }}[{{ $input['name'] }}][menu]" class="next-input load-menu" data-placeholder="--- @lang('app.choose_menu') ---">
+        <select name="{{ $card['code'] }}[{{ $input['name'] }}][menu]" class="next-input load-menu" data-placeholder="--- @lang('mymo_core::app.choose_menu') ---">
             @if($menu)
                 <option value="{{ $menu->id }}">{{ $menu->name }}</option>
             @endif

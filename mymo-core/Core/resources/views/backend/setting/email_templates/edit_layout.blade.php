@@ -20,8 +20,8 @@
 
                         <div class="col-md-6">
                             <div class="btn-group float-right">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                                <a href="{{ route('admin.setting.email_templates') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('mymo_core::app.save')</button>
+                                <a href="{{ route('admin.setting.email_templates') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('mymo_core::app.cancel')</a>
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                         <div class="col-md-12">
 
                             <div class="form-group">
-                                <label class="col-form-label" for="content">@lang('app.content')</label>
+                                <label class="col-form-label" for="content">@lang('mymo_core::app.content')</label>
                                 <textarea class="form-control" name="content" id="content" rows="6">{{ $model->code }}</textarea>
                             </div>
 

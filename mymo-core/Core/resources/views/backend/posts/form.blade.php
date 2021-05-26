@@ -20,8 +20,8 @@
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                            <a href="{{ route('admin.posts') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('mymo_core::app.save')</button>
+                            <a href="{{ route('admin.posts') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('mymo_core::app.cancel')</a>
                         </div>
                     </div>
                 </div>
@@ -33,21 +33,21 @@
                     <div class="col-md-8">
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseTitle">@lang('app.title')</label>
+                            <label class="col-form-label" for="baseTitle">@lang('mymo_core::app.title')</label>
 
                             <input type="text" name="title" class="form-control" id="baseTitle" value="{{ $model->title }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseContent">@lang('app.content')</label>
+                            <label class="col-form-label" for="baseContent">@lang('mymo_core::app.content')</label>
                             <textarea class="form-control" name="content" id="baseContent" rows="6">{{ $model->content }}</textarea>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="baseStatus">@lang('app.status')</label>
+                            <label class="col-form-label" for="baseStatus">@lang('mymo_core::app.status')</label>
                             <select name="status" id="baseStatus" class="form-control">
-                                <option value="1" @if($model->status == 1) selected @endif>@lang('app.enabled')</option>
-                                <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
+                                <option value="1" @if($model->status == 1) selected @endif>@lang('mymo_core::app.enabled')</option>
+                                <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('mymo_core::app.disabled')</option>
                             </select>
                         </div>
 
@@ -56,7 +56,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-form-label" for="baseStatus">@lang('app.thumbnail')</label>
+                            <label class="col-form-label" for="baseStatus">@lang('mymo_core::app.thumbnail')</label>
                             <div class="form-thumbnail text-center">
                                 <input id="thumbnail" type="hidden" name="thumbnail">
                                 <div id="holder">
@@ -64,13 +64,13 @@
                                 </div>
 
                                 <a href="javascript:void(0)" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-capitalize">
-                                    <i class="fa fa-picture-o"></i> @lang('app.choose_image')
+                                    <i class="fa fa-picture-o"></i> @lang('mymo_core::app.choose_image')
                                 </a>
                             </div>
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label class="col-form-label" for="categories">@lang('app.categories') <span><a href="javascript:void(0)" class="add-new-category float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</a></span></label>
+                            <label class="col-form-label" for="categories">@lang('mymo_core::app.categories') <span><a href="javascript:void(0)" class="add-new-category float-right"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add_category')</a></span></label>
 
                             <div class="show-categories">
                                 @php
@@ -90,18 +90,18 @@
 
                             <div class="form-add-category box-hidden">
                                 <div class="form-group">
-                                    <label class="col-form-label" for="categoryName">@lang('app.name')</label>
+                                    <label class="col-form-label" for="categoryName">@lang('mymo_core::app.name')</label>
                                     <input type="text" class="form-control" id="categoryName" autocomplete="off">
                                 </div>
 
-                                <button type="button" class="btn btn-primary add-category"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</button>
+                                <button type="button" class="btn btn-primary add-category"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add_category')</button>
                             </div>
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label class="col-form-label" for="select-tags">@lang('app.tags') <span><a href="javascript:void(0)" class="add-new-tags float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_tags')</a></span></label>
+                            <label class="col-form-label" for="select-tags">@lang('mymo_core::app.tags') <span><a href="javascript:void(0)" class="add-new-tags float-right"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add_tags')</a></span></label>
 
-                            <select id="select-tags" class="form-control load-tags select-tags" data-placeholder="--- @lang('app.tags') ---" data-explodes="tag-explode"></select>
+                            <select id="select-tags" class="form-control load-tags select-tags" data-placeholder="--- @lang('mymo_core::app.tags') ---" data-explodes="tag-explode"></select>
 
                             <div class="show-tags mt-2">
                                 @foreach($tags as $item)
@@ -113,11 +113,11 @@
 
                             <div class="form-add-tags box-hidden">
                                 <div class="form-group">
-                                    <label class="col-form-label" for="tagsName">@lang('app.tags')</label>
+                                    <label class="col-form-label" for="tagsName">@lang('mymo_core::app.tags')</label>
                                     <input type="text" class="form-control" id="tagsName" autocomplete="off">
                                 </div>
 
-                                <button type="button" class="btn btn-primary add-tags"><i class="fa fa-plus-circle"></i> @lang('app.add_tags')</button>
+                                <button type="button" class="btn btn-primary add-tags"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add_tags')</button>
                             </div>
                         </div>
                     </div>

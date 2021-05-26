@@ -14,13 +14,13 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.notification')</h5>
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.notification')</h5>
                 </div>
 
                 <div class="col-md-6">
                     <div class="btn-group float-right">
-                        <a href="{{ route('admin.notification.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('app.add_new')</a>
-                        <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                        <a href="{{ route('admin.notification.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add_new')</a>
+                        <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('mymo_core::app.delete')</button>
                     </div>
                 </div>
             </div>
@@ -33,20 +33,20 @@
                     <form method="get" class="form-inline" id="form-search">
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputSearch" class="sr-only">@lang('app.search')</label>
-                            <input name="search" type="text" id="inputSearch" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
+                            <label for="inputSearch" class="sr-only">@lang('mymo_core::app.search')</label>
+                            <input name="search" type="text" id="inputSearch" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
                         </div>
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputStatus" class="sr-only">@lang('app.status')</label>
+                            <label for="inputStatus" class="sr-only">@lang('mymo_core::app.status')</label>
                             <select name="status" id="inputStatus" class="form-control">
-                                <option value="">--- @lang('app.status') ---</option>
-                                <option value="1">@lang('app.enabled')</option>
-                                <option value="0">@lang('app.disabled')</option>
+                                <option value="">--- @lang('mymo_core::app.status') ---</option>
+                                <option value="1">@lang('mymo_core::app.enabled')</option>
+                                <option value="0">@lang('mymo_core::app.disabled')</option>
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('app.search')</button>
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo_core::app.search')</button>
                     </form>
                 </div>
             </div>
@@ -56,10 +56,10 @@
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                            <th data-field="name" data-formatter="name_formatter">@lang('app.name')</th>
-                            <th data-field="type" data-width="15%" data-formatter="type_formatter">@lang('app.type')</th>
-                            <th data-field="created" data-width="15%">@lang('app.created_at')</th>
-                            <th data-field="status" data-width="15%" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
+                            <th data-field="name" data-formatter="name_formatter">@lang('mymo_core::app.name')</th>
+                            <th data-field="type" data-width="15%" data-formatter="type_formatter">@lang('mymo_core::app.type')</th>
+                            <th data-field="created" data-width="15%">@lang('mymo_core::app.created_at')</th>
+                            <th data-field="status" data-width="15%" data-align="center" data-formatter="status_formatter">@lang('mymo_core::app.status')</th>
                         </tr>
                     </thead>
                 </table>
@@ -80,9 +80,9 @@
 
         function status_formatter(value, row, index) {
             if (value == 1) {
-                return '<span class="text-success">@lang('app.enabled')</span>';
+                return '<span class="text-success">@lang('mymo_core::app.enabled')</span>';
             }
-            return '<span class="text-danger">@lang('app.disabled')</span>';
+            return '<span class="text-danger">@lang('mymo_core::app.disabled')</span>';
         }
 
         var table = new LoadBootstrapTable({

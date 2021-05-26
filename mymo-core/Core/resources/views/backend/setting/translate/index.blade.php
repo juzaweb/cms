@@ -20,7 +20,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="mb-0 card-title font-weight-bold">@lang('app.translate')</h5>
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.translate')</h5>
                 </div>
 
                 <div class="col-md-6">
@@ -38,11 +38,11 @@
                     <form method="get" class="form-inline" id="form-search">
 
                         <div class="form-group mb-2 mr-1">
-                            <label for="inputName" class="sr-only">@lang('app.search')</label>
-                            <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
+                            <label for="inputName" class="sr-only">@lang('mymo_core::app.search')</label>
+                            <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
                         </div>
 
-                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('app.search')</button>
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo_core::app.search')</button>
                     </form>
                 </div>
 
@@ -53,7 +53,7 @@
                     <thead>
                         <tr>
                             <th data-width="35%" data-field="en" data-sortable="true">English</th>
-                            <th data-field="{{ $lang }}" data-sortable="true" data-formatter="translate_formatter">@lang('app.translate')</th>
+                            <th data-field="{{ $lang }}" data-sortable="true" data-formatter="translate_formatter">@lang('mymo_core::app.translate')</th>
                         </tr>
                     </thead>
                 </table>

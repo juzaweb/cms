@@ -6,27 +6,27 @@
         $only_member_view = get_config('only_member_view');
     @endphp
 
-    <h5>@lang('app.general')</h5>
+    <h5>@lang('mymo_core::app.general')</h5>
     <div class="form-group">
-        <label class="col-form-label" for="title">@lang('app.home_title')</label>
+        <label class="col-form-label" for="title">@lang('mymo_core::app.home_title')</label>
 
         <input type="text" name="title" class="form-control" id="title" value="{{ get_config('title') }}" autocomplete="off" required>
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="keywords">@lang('app.keywords')</label>
+        <label class="col-form-label" for="keywords">@lang('mymo_core::app.keywords')</label>
 
         <input type="text" name="keywords" id="keywords" class="form-control" value="{{ get_config('keywords') }}" autocomplete="off">
-        <em class="description">@lang('app.use_comma_to_separate_keyword')</em>
+        <em class="description">@lang('mymo_core::app.use_comma_to_separate_keyword')</em>
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="description">@lang('app.home_description')</label>
+        <label class="col-form-label" for="description">@lang('mymo_core::app.home_description')</label>
         <textarea class="form-control" name="description" id="description" rows="5">{{ get_config('description') }}</textarea>
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="logo">@lang('app.logo') <span class="float-right"><a href="javascript:void(0)" data-input="logo" data-preview="preview-logo" class="lfm"><i class="fa fa-edit"></i> @lang('app.change_image')</a></span></label>
+        <label class="col-form-label" for="logo">@lang('mymo_core::app.logo') <span class="float-right"><a href="javascript:void(0)" data-input="logo" data-preview="preview-logo" class="lfm"><i class="fa fa-edit"></i> @lang('mymo_core::app.change_image')</a></span></label>
         <div id="preview-logo">
             <img src="{{ image_url(get_config('logo')) }}" alt="" class="w-25">
         </div>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="icon">@lang('app.icon') <span class="float-right"><a href="javascript:void(0)" data-input="icon" data-preview="preview-icon" class="lfm"><i class="fa fa-edit"></i> @lang('app.change_image')</a></span></label>
+        <label class="col-form-label" for="icon">@lang('mymo_core::app.icon') <span class="float-right"><a href="javascript:void(0)" data-input="icon" data-preview="preview-icon" class="lfm"><i class="fa fa-edit"></i> @lang('mymo_core::app.change_image')</a></span></label>
         <div id="preview-icon">
             <img src="{{ image_url(get_config('icon')) }}" alt="" class="w-25">
         </div>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="banner">@lang('app.banner') <span class="float-right"><a href="javascript:void(0)" data-input="banner" data-preview="preview-banner" class="lfm"><i class="fa fa-edit"></i> @lang('app.change_image')</a></span></label>
+        <label class="col-form-label" for="banner">@lang('mymo_core::app.banner') <span class="float-right"><a href="javascript:void(0)" data-input="banner" data-preview="preview-banner" class="lfm"><i class="fa fa-edit"></i> @lang('mymo_core::app.change_image')</a></span></label>
         <div id="preview-banner">
             <img src="{{ image_url(get_config('banner')) }}" alt="" class="w-25">
         </div>
@@ -50,45 +50,45 @@
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="fb_app_id">@lang('app.fb_app_id')</label>
+        <label class="col-form-label" for="fb_app_id">@lang('mymo_core::app.fb_app_id')</label>
 
         <input type="text" name="fb_app_id" class="form-control" id="fb_app_id" value="{{ get_config('fb_app_id') }}" autocomplete="off">
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="google_analytics">@lang('app.google_analytics_id')</label>
+        <label class="col-form-label" for="google_analytics">@lang('mymo_core::app.google_analytics_id')</label>
 
         <input type="text" name="google_analytics" class="form-control" id="google_analytics" value="{{ get_config('google_analytics') }}" autocomplete="off">
     </div>
 
-    <h5>@lang('app.registration')</h5>
+    <h5>@lang('mymo_core::app.registration')</h5>
     <div class="form-group">
-        <label class="col-form-label" for="user_registration">@lang('app.user_registration')</label>
+        <label class="col-form-label" for="user_registration">@lang('mymo_core::app.user_registration')</label>
         <select name="user_registration" id="user_registration" class="form-control">
-            <option value="1" @if($registration == 1) selected @endif>@lang('app.enabled')</option>
-            <option value="0" @if($registration == 0) selected @endif>@lang('app.disabled')</option>
+            <option value="1" @if($registration == 1) selected @endif>@lang('mymo_core::app.enabled')</option>
+            <option value="0" @if($registration == 0) selected @endif>@lang('mymo_core::app.disabled')</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label class="col-form-label" for="user_verification">@lang('app.user_e_mail_verification')</label>
+        <label class="col-form-label" for="user_verification">@lang('mymo_core::app.user_e_mail_verification')</label>
         <select name="user_verification" id="user_verification" class="form-control">
-            <option value="1" @if($verification == 1) selected @endif>@lang('app.enabled')</option>
-            <option value="0" @if($verification == 0) selected @endif>@lang('app.disabled')</option>
+            <option value="1" @if($verification == 1) selected @endif>@lang('mymo_core::app.enabled')</option>
+            <option value="0" @if($verification == 0) selected @endif>@lang('mymo_core::app.disabled')</option>
         </select>
     </div>
 
     <div class="form-group">
         <label class="col-form-label" for="only_member_view">Require Login To Watch Video</label>
         <select name="only_member_view" id="only_member_view" class="form-control">
-            <option value="1" @if($only_member_view == 1) selected @endif>@lang('app.enabled')</option>
-            <option value="0" @if($only_member_view == 0) selected @endif>@lang('app.disabled')</option>
+            <option value="1" @if($only_member_view == 1) selected @endif>@lang('mymo_core::app.enabled')</option>
+            <option value="0" @if($only_member_view == 0) selected @endif>@lang('mymo_core::app.disabled')</option>
         </select>
     </div>
 
-    <h5>@lang('app.tmdb')</h5>
+    <h5>@lang('mymo_core::app.tmdb')</h5>
     <div class="form-group">
-        <label class="col-form-label" for="tmdb_api_key">@lang('app.tmdb_api_key')</label>
+        <label class="col-form-label" for="tmdb_api_key">@lang('mymo_core::app.tmdb_api_key')</label>
 
         <input type="text" name="tmdb_api_key" class="form-control" id="tmdb_api_key" value="{{ get_config('tmdb_api_key') }}" autocomplete="off">
     </div>
@@ -99,11 +99,11 @@
         <div class="col-md-6">
             <div class="btn-group float-right">
                 <button type="submit" class="btn btn-success">
-                    <i class="fa fa-save"></i> @lang('app.save')
+                    <i class="fa fa-save"></i> @lang('mymo_core::app.save')
                 </button>
 
                 <button type="reset" class="btn btn-default">
-                    <i class="fa fa-refresh"></i> @lang('app.reset')
+                    <i class="fa fa-refresh"></i> @lang('mymo_core::app.reset')
                 </button>
             </div>
         </div>

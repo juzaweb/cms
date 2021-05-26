@@ -14,20 +14,20 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('styles/css/backend.css') }}">
     <script type="text/javascript">
         var langs = {
-            'are_you_sure_delete_items': '@lang('app.are_you_sure_delete_items')',
-            'yes': '@lang('app.yes')',
-            'cancel': '@lang('app.cancel')',
-            'data_error': '@lang('app.data_error')',
-            'enabled': '@lang('app.enabled')',
-            'disabled': '@lang('app.disabled')',
-            'options': '@lang('app.options')',
-            'edit': '@lang('app.edit')',
-            'translate': '@lang('app.translate')',
-            'preview': '@lang('app.preview')',
-            'upload_videos': '@lang('app.upload_videos')',
-            'download_videos': '@lang('app.download_videos')',
-            'add_subtitle': '@lang('app.add_subtitle')',
-            'stream': '@lang('app.stream')',
+            'are_you_sure_delete_items': '@lang('mymo_core::app.are_you_sure_delete_items')',
+            'yes': '@lang('mymo_core::app.yes')',
+            'cancel': '@lang('mymo_core::app.cancel')',
+            'data_error': '@lang('mymo_core::app.data_error')',
+            'enabled': '@lang('mymo_core::app.enabled')',
+            'disabled': '@lang('mymo_core::app.disabled')',
+            'options': '@lang('mymo_core::app.options')',
+            'edit': '@lang('mymo_core::app.edit')',
+            'translate': '@lang('mymo_core::app.translate')',
+            'preview': '@lang('mymo_core::app.preview')',
+            'upload_videos': '@lang('mymo_core::app.upload_videos')',
+            'download_videos': '@lang('mymo_core::app.download_videos')',
+            'add_subtitle': '@lang('mymo_core::app.add_subtitle')',
+            'stream': '@lang('mymo_core::app.stream')',
         }
     </script>
 

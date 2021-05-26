@@ -43,7 +43,7 @@
                             @endphp
 
                                 @if($notifications->isEmpty())
-                                    <p>@lang('app.no_notifications')</p>
+                                    <p>@lang('mymo_core::app.no_notifications')</p>
                                 @else
                                     @foreach($notifications as $notification)
                                         <li class="mb-3">
@@ -71,12 +71,12 @@
         <div class="dropdown-menu dropdown-menu-right" role="menu">
             <a class="dropdown-item" href="{{ route('admin.users.edit', [Auth::id()]) }}">
                 <i class="dropdown-icon fe fe-user"></i>
-                @lang('app.profile')
+                @lang('mymo_core::app.profile')
             </a>
 
             <div class="dropdown-divider"></div>
             <a href="{{ route('logout') }}" class="dropdown-item" data-turbolinks="false">
-                <i class="dropdown-icon fe fe-log-out"></i> @lang('app.logout')
+                <i class="dropdown-icon fe fe-log-out"></i> @lang('mymo_core::app.logout')
             </a>
         </div>
     </div>
