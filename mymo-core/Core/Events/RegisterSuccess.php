@@ -2,7 +2,7 @@
 
 namespace Mymo\Core\Events;
 
-use Mymo\Core\User;
+use Mymo\Core\Models\User;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;

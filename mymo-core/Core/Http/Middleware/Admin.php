@@ -2,7 +2,7 @@
 
 namespace Mymo\Core\Http\Middleware;
 
-use Mymo\Core\User;
+use Mymo\Core\Models\User;
 use Closure;
 
 class Admin

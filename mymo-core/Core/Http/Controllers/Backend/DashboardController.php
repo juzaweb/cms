@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 
 class DashboardController extends BackendController
 {
-    public function index() {
+    public function index()
+    {
         /*$count_movie = Movies::where('status', '=', 1)
             ->where('tv_series', '=', 0)
             ->count('id');
@@ -31,7 +32,8 @@ class DashboardController extends BackendController
         ]);
     }
     
-    public function getDataNotification(Request $request) {
+    public function getDataNotification(Request $request)
+    {
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
     
@@ -54,7 +56,8 @@ class DashboardController extends BackendController
         ]);
     }
     
-    public function getDataUser(Request $request) {
+    public function getDataUser(Request $request)
+    {
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
     
@@ -82,7 +85,8 @@ class DashboardController extends BackendController
         ]);
     }
     
-    public function viewsChart() {
+    public function viewsChart()
+    {
         $max_day = date('t');
         $result = [];
         $result[] = [trans('app.day'), trans('app.views')];
@@ -94,7 +98,8 @@ class DashboardController extends BackendController
         return response()->json($result);
     }
     
-    protected function countViewByDay($day) {
+    protected function countViewByDay($day)
+    {
         return MovieViews::where('day', '=', $day)
             ->sum('views');
     }

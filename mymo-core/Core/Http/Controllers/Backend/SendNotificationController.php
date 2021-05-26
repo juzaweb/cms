@@ -2,7 +2,7 @@
 
 namespace Mymo\Core\Http\Controllers\Backend;
 
-use Mymo\Core\User;
+use Mymo\Core\Models\User;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\Controller;
 use Mymo\Core\Models\MyNotification;

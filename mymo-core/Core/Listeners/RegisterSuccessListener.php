@@ -4,7 +4,7 @@ namespace Mymo\Core\Listeners;
 
 use Mymo\Core\Events\RegisterSuccess;
 use Mymo\Core\Models\Email\EmailList;
-use Mymo\Core\User;
+use Mymo\Core\Models\User;
 
 class RegisterSuccessListener
 {

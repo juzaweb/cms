@@ -14,7 +14,7 @@ use Mymo\Core\Models\PostCategories;
 use Mymo\Core\Models\Category\Stars;
 use Mymo\Core\Models\Category\Tags;
 use Mymo\Core\Models\Category\Types;
-use Mymo\Core\User;
+use Mymo\Core\Models\User;
 
 class LoadDataController extends Controller
 {

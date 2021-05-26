@@ -3,7 +3,7 @@
 namespace Mymo\Core\Console\Commands;
 
 use Mymo\Core\Models\MyNotification;
-use Mymo\Core\User;
+use Mymo\Core\Models\User;
 use Illuminate\Console\Command;
 
 class SendNotification extends Command

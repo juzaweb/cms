@@ -7,7 +7,7 @@ use Mymo\Core\Helpers\RequirementsChecker;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\Controller;
 use Illuminate\Support\Str;
-use Mymo\Core\User;
+use Mymo\Core\Models\User;
 
 class InstallController extends Controller
 {

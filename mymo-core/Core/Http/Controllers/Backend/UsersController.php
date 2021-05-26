@@ -4,7 +4,7 @@ namespace Mymo\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\Controller;
-use Mymo\Core\User;
+use Mymo\Core\Models\User;
 
 class UsersController extends Controller
 {

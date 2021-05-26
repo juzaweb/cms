@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $meta_description
  * @property string|null $keywords
  * @property int $views
- * @property \Mymo\Core\User|null $created_by
+ * @property \Mymo\Core\Models\User|null $created_by
  * @property int $updated_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -68,6 +68,6 @@ class Posts extends Model
     }
     
     public function created_by() {
-        return $this->hasOne('Mymo\Core\User', 'id', 'created_by');
+        return $this->hasOne('Mymo\Core\Models\User', 'id', 'created_by');
     }
 }

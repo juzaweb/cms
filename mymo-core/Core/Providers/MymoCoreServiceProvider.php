@@ -21,17 +21,18 @@ use Illuminate\Support\Facades\Validator;
 
 class MymoCoreServiceProvider extends ServiceProvider
 {
-    public function register()
-    {
-        $this->registerProviders();
-    }
-
     public function boot()
     {
         $this->bootMigrations();
+        $this->bootMiddlewares();
 
         Validator::extend('recaptcha', 'Mymo\Core\Validators\Recaptcha@validate');
         Schema::defaultStringLength(150);
+    }
+
+    public function register()
+    {
+        $this->registerProviders();
     }
 
     protected function bootMigrations()
@@ -51,5 +52,10 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(MymoSecurityServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
+    }
+
+    protected function bootMiddlewares()
+    {
+        $this->app['router']->aliasMiddleware('admin', \Mymo\Core\Http\Middleware\Admin::class);
     }
 }

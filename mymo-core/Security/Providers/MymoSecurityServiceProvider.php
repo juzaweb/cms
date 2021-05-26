@@ -23,6 +23,7 @@ class MymoSecurityServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->bootMiddlewares();
+        $this->bootSchemeSsl();
     }
 
     protected function bootMiddlewares()
