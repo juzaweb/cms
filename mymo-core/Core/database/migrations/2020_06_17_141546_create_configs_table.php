@@ -13,7 +13,6 @@ class CreateConfigsTable extends Migration
             $table->bigIncrements('id');
             $table->string('code', 100)->unique();
             $table->string('value', 300)->nullable();
-            $table->timestamps();
         });
     }
     
@@ -22,7 +21,8 @@ class CreateConfigsTable extends Migration
         Schema::dropIfExists('configs');
     }
     
-    private function _createConfig() {
+    private function _createConfig()
+    {
         Config::setConfig('title', 'MyMo - TV Series & Movie Portal CMS');
         Config::setConfig('description', 'MYMO is a powerful, flexible and User friendly TV Series & Movie Portal CMS with advance video contents management system. It’s easy to use & install. It has been created to provide a unique experience to movie lover & movie site owner.');
         Config::setConfig('logo', '2020/08/15/logo-1597464831-Z4tc4jsTu6.png');
