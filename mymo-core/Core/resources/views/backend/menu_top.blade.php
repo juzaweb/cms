@@ -11,7 +11,7 @@
     </div>
 
     <div class="mr-4 d-none d-md-block">
-        <a href="{{ route('home') }}" data-turbolinks="false" target="_blank" class="text-nowrap">
+        <a href="/" data-turbolinks="false" target="_blank" class="text-nowrap">
             <span>VIEW WEBSITE</span>
         </a>
     </div>
@@ -65,7 +65,7 @@
 
     <div class="dropdown">
         <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="5,15">
-            <img class="dropdown-toggle-avatar" src="{{ Auth::user()->getAvatar() }}" alt="User avatar" width="30" height="30"/>
+            <img class="dropdown-toggle-avatar" src="{{ user_avatar() }}" alt="User avatar" width="30" height="30"/>
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" role="menu">
@@ -75,9 +75,9 @@
             </a>
 
             <div class="dropdown-divider"></div>
-            <a href="{{ route('logout') }}" class="dropdown-item" data-turbolinks="false">
+            {{--<a href="{{ route('logout') }}" class="dropdown-item" data-turbolinks="false">
                 <i class="dropdown-icon fe fe-log-out"></i> @lang('mymo_core::app.logout')
-            </a>
+            </a>--}}
         </div>
     </div>
 </div>

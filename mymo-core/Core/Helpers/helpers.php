@@ -1,7 +1,7 @@
 <?php
-
-
+use Illuminate\Support\Facades\Auth;
 use Mymo\Core\Models\Menu;
+use Mymo\Core\Models\User;
 use Mymo\Core\Models\Sliders;
 use Mymo\Core\Models\ThemeConfig;
 use Illuminate\Support\Str;
@@ -242,4 +242,21 @@ function core_path($path = null) {
     }
 
     return base_path('mymo-core/Core');
+}
+
+function user_avatar($user = null) {
+    if ($user) {
+        if (!is_a($user, User::class)) {
+            $user = User::find($user);
+        }
+
+        return $user->getAvatar();
+    }
+
+    if (Auth::check()) {
+        $user = User::find(Auth::user()->id);
+        return $user->getAvatar();
+    }
+
+    return asset('images/thumb-default.png');
 }

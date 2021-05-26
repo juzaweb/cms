@@ -47,6 +47,11 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom($paths);
     }
 
+    protected function bootMiddlewares()
+    {
+        $this->app['router']->aliasMiddleware('admin', \Mymo\Core\Http\Middleware\Admin::class);
+    }
+
     protected function registerProviders()
     {
         if ($this->app->environment() !== 'production') {
@@ -56,10 +61,5 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(MymoSecurityServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
-    }
-
-    protected function bootMiddlewares()
-    {
-        $this->app['router']->aliasMiddleware('admin', \Mymo\Core\Http\Middleware\Admin::class);
     }
 }
