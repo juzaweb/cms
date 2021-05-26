@@ -51,7 +51,7 @@
             </div>
 
             <div class="cui__menuLeft__scroll kit__customScroll">
-                @include('backend.menu_left')
+                @include('mymo_core::backend.menu_left')
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
 
     <div class="cui__layout">
         <div class="cui__layout__header">
-            @include('backend.menu_top')
+            @include('mymo_core::backend.menu_top')
         </div>
         <div class="cui__layout__content">
             @yield('content')

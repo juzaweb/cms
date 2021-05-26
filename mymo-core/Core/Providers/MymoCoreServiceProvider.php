@@ -25,6 +25,10 @@ class MymoCoreServiceProvider extends ServiceProvider
     {
         $this->bootMigrations();
         $this->bootMiddlewares();
+        $this->loadMigrationsFrom(core_path('database/migrations'));
+        $this->loadFactoriesFrom(core_path('database/factories'));
+        $this->loadViewsFrom(core_path('resources/views'), 'mymo_core');
+        $this->loadTranslationsFrom(core_path('resources/lang'), 'mymo_core');
 
         Validator::extend('recaptcha', 'Mymo\Core\Validators\Recaptcha@validate');
         Schema::defaultStringLength(150);

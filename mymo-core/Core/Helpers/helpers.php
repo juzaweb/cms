@@ -235,3 +235,11 @@ function menu_setting($menu_id) {
 function count_unread_notifications() {
     return Auth::user()->unreadNotifications()->count(['id']);
 }
+
+function core_path($path = null) {
+    if ($path) {
+        return base_path('mymo-core/Core/' . $path);
+    }
+
+    return base_path('mymo-core/Core');
+}

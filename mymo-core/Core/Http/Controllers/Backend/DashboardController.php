@@ -24,7 +24,7 @@ class DashboardController extends BackendController
         $count_page = Pages::where('status', '=', 1)
             ->count('id');
         
-        return view('backend.dashboard', [
+        return view('mymo_core::backend.dashboard', [
             //'count_movie' => $count_movie,
             //'count_tvserie' => $count_tvserie,
             'count_user' => $count_user,
