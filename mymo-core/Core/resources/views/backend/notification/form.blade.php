@@ -5,7 +5,7 @@
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.notification'),
+        'name' => trans('mymo_core::app.notification'),
         'url' => route('admin.notification')
     ], $model) }}
 

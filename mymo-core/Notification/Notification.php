@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Notification;
+namespace Mymo\Notification;
 
-use Tadcms\Notification\Jobs\SendNotification as SendNotificationJob;
-use Tadcms\Notification\Models\ManualNotification;
+use Mymo\Notification\Jobs\SendNotification as SendNotificationJob;
+use Mymo\Notification\Models\ManualNotification;
 
 class Notification
 {

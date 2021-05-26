@@ -1,11 +1,11 @@
 <?php
 
-namespace Tadcms\Notification\Models;
+namespace Mymo\Notification\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Tadcms\Notification\Models\Notification
+ * Mymo\Notification\Models\Notification
  *
  * @property int $id
  * @property string $type

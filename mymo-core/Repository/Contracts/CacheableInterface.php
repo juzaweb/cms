@@ -1,11 +1,11 @@
 <?php
-namespace Tadcms\Repository\Contracts;
+namespace Mymo\Repository\Contracts;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 
 /**
  * Interface CacheableInterface
- * @package Tadcms\Repository\Contracts
+ * @package Mymo\Repository\Contracts
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 interface CacheableInterface

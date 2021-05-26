@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Repository\Events;
+namespace Mymo\Repository\Events;
 
 /**
  * Class RepositoryEntityCreated
- * @package Tadcms\Repository\Events
+ * @package Mymo\Repository\Events
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class RepositoryEntityCreated extends RepositoryEventBase

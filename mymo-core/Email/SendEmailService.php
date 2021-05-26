@@ -1,8 +1,8 @@
 <?php
 
-namespace Tadcms\EmailTemplate;
+namespace Mymo\Email;
 
-use Tadcms\EmailTemplate\Models\EmailList;
+use Mymo\Email\Models\EmailList;
 use Illuminate\Support\Facades\Mail;
 
 class SendEmailService

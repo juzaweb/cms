@@ -1,9 +1,9 @@
 <?php
-namespace Tadcms\Repository\Generators\Migrations;
+namespace Mymo\Repository\Generators\Migrations;
 
 /**
  * Class NameParser
- * @package Tadcms\Repository\Generators\Migrations
+ * @package Mymo\Repository\Generators\Migrations
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class NameParser

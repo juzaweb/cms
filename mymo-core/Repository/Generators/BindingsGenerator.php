@@ -1,9 +1,9 @@
 <?php
-namespace Tadcms\Repository\Generators;
+namespace Mymo\Repository\Generators;
 
 /**
  * Class BindingsGenerator
- * @package Tadcms\Repository\Generators
+ * @package Mymo\Repository\Generators
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class BindingsGenerator extends Generator

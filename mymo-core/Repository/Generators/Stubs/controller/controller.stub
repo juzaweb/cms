@@ -48,7 +48,7 @@ class $CONTROLLER$Controller extends Controller
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Tadcms\Repository\Criteria\RequestCriteria'));
+        $this->repository->pushCriteria(app('Mymo\Repository\Criteria\RequestCriteria'));
         $$PLURAL$ = $this->repository->all();
 
         if (request()->wantsJson()) {

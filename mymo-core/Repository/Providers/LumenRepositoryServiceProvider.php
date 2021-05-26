@@ -1,11 +1,11 @@
 <?php
-namespace Tadcms\Repository\Providers;
+namespace Mymo\Repository\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class LumenRepositoryServiceProvider
- * @package Tadcms\Repository\Providers
+ * @package Mymo\Repository\Providers
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class LumenRepositoryServiceProvider extends ServiceProvider
@@ -24,8 +24,8 @@ class LumenRepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands('Tadcms\Repository\Generators\Commands\RepositoryCommand');
-        $this->app->register('Tadcms\Repository\Providers\EventServiceProvider');
+        $this->commands('Mymo\Repository\Generators\Commands\RepositoryCommand');
+        $this->app->register('Mymo\Repository\Providers\EventServiceProvider');
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', trans('app.dashboard'))
+@section('title', trans('mymo_core::app.dashboard'))
 
 @section('content')
     <div class="cui__utils__content">

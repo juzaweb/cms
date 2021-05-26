@@ -1,11 +1,11 @@
 <?php
 
-namespace Tadcms\EmailTemplate\Models;
+namespace Mymo\Email\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Tadcms\EmailTemplate\Models\EmailTemplate
+ * Mymo\Email\Models\EmailTemplate
  *
  * @property int $id
  * @property string $code

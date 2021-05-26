@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Notification\Notifications;
+namespace Mymo\Notification\Notifications;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;

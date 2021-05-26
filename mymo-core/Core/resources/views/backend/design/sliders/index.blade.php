@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.sliders'))
+@section('title', trans('mymo_core::app.sliders'))
 
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.sliders'),
+        'name' => trans('mymo_core::app.sliders'),
         'url' => route('admin.design.sliders')
     ]) }}
 

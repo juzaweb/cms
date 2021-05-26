@@ -1,16 +1,16 @@
 <?php
-namespace Tadcms\Repository\Generators\Commands;
+namespace Mymo\Repository\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Tadcms\Repository\Generators\ControllerGenerator;
-use Tadcms\Repository\Generators\FileAlreadyExistsException;
+use Mymo\Repository\Generators\ControllerGenerator;
+use Mymo\Repository\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class ControllerCommand
- * @package Tadcms\Repository\Generators\Commands
+ * @package Mymo\Repository\Generators\Commands
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class ControllerCommand extends Command

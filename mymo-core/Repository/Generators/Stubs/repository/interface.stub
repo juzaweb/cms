@@ -2,7 +2,7 @@
 
 $NAMESPACE$
 
-use Tadcms\Repository\Contracts\RepositoryInterface;
+use Mymo\Repository\Contracts\RepositoryInterface;
 
 /**
  * Interface $CLASS$Repository.

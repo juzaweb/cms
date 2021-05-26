@@ -37,7 +37,7 @@
         </div>
     </header>
     <label class="helper--visually-hidden" for="theme-editor__iframe-wrapper" id="theme-editor__iframe-label">
-        <h1>{{ trans('app.preview') }}</h1>
+        <h1>{{ trans('mymo_core::app.preview') }}</h1>
         <p>
             Press Enter to navigate. Click Escape to return to the Edit page.
         </p>

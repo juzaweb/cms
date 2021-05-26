@@ -2,7 +2,7 @@
 
 $NAMESPACE$
 
-use Tadcms\Repository\Eloquent\BaseRepository;
+use Mymo\Repository\Eloquent\BaseRepository;
 use $MODEL$;
 
 /**

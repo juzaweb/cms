@@ -1,16 +1,16 @@
 <?php
 
-namespace Tadcms\Repository\Traits;
+namespace Mymo\Repository\Traits;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
-use Tadcms\Repository\Contracts\CriteriaInterface;
-use Tadcms\Repository\Helpers\CacheKeys;
+use Mymo\Repository\Contracts\CriteriaInterface;
+use Mymo\Repository\Helpers\CacheKeys;
 use ReflectionObject;
 use Exception;
 
 /**
  * Class CacheableRepository
- * @package Tadcms\Repository\Traits
+ * @package Mymo\Repository\Traits
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 trait CacheableRepository
@@ -151,8 +151,8 @@ trait CacheableRepository
     /**
      * Serialize single criterion with customized serialization of Closures.
      *
-     * @param  \Tadcms\Repository\Contracts\CriteriaInterface $criterion
-     * @return \Tadcms\Repository\Contracts\CriteriaInterface|array
+     * @param  \Mymo\Repository\Contracts\CriteriaInterface $criterion
+     * @return \Mymo\Repository\Contracts\CriteriaInterface|array
      *
      * @throws \Exception
      */

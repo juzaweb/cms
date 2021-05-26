@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Repository\Contracts;
+namespace Mymo\Repository\Contracts;
 
 /**
  * Interface Transformable
- * @package Tadcms\Repository\Contracts
+ * @package Mymo\Repository\Contracts
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 interface Transformable

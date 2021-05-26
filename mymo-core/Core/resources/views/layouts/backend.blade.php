@@ -83,7 +83,7 @@
 
 <script type="text/javascript">
     $.extend( $.validator.messages, {
-        required: "{{ trans('app.this_field_is_required') }}",
+        required: "{{ trans('mymo_core::app.this_field_is_required') }}",
     });
 
     $(".form-ajax").validate();

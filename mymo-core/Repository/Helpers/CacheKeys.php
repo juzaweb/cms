@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Repository\Helpers;
+namespace Mymo\Repository\Helpers;
 
 /**
  * Class CacheKeys
- * @package Tadcms\Repository\Helpers
+ * @package Mymo\Repository\Helpers
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class CacheKeys

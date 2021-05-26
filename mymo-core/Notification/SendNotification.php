@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Notification;
+namespace Mymo\Notification;
 
 use Illuminate\Support\Facades\DB;
 
@@ -9,7 +9,7 @@ class SendNotification
     protected $notification;
 
     /**
-     * @param \Tadcms\Notification\Models\ManualNotification $notification
+     * @param \Mymo\Notification\Models\ManualNotification $notification
      * */
     public function __construct($notification)
     {

@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.language'))
+@section('title', trans('mymo_core::app.language'))
 
 @section('content')
 
     {{ Breadcrumbs::render('manager', [
-            'name' => trans('app.language'),
+            'name' => trans('mymo_core::app.language'),
             'url' => route('admin.setting.languages')
         ]) }}
 

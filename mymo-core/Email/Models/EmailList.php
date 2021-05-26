@@ -1,11 +1,11 @@
 <?php
 
-namespace Tadcms\EmailTemplate\Models;
+namespace Mymo\Email\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Tadcms\EmailTemplate\Models\EmailList
+ * Mymo\Email\Models\EmailList
  *
  * @property int $id
  * @property string $email
@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property array|null $data
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Tadcms\EmailTemplate\Models\EmailTemplate $template
+ * @property-read \Mymo\Email\Models\EmailTemplate $template
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList query()

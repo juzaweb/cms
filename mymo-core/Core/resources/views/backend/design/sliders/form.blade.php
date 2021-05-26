@@ -5,7 +5,7 @@
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.sliders'),
+        'name' => trans('mymo_core::app.sliders'),
         'url' => route('admin.design.sliders')
     ], $model) }}
 
@@ -50,26 +50,26 @@
                                                 <div id="thumbnail-{{ $index+1 }}" class="preview-image">
                                                     <img src="{{ image_url(@$banner->image) }}" class="thumbnail mb-0 mt-3">
                                                 </div>
-                                                <a href="javascript:void(0)" class="load-media" data-preview="thumbnail-{{ $index+1 }}" data-input="image-{{ $index+1 }}"><i class="fa fa-edit"></i> {{ trans('app.change_photo') }}</a>
+                                                <a href="javascript:void(0)" class="load-media" data-preview="thumbnail-{{ $index+1 }}" data-input="image-{{ $index+1 }}"><i class="fa fa-edit"></i> {{ trans('mymo_core::app.change_photo') }}</a>
                                             </div>
 
                                             <div class="col-md-8">
                                                 <div class="form-group">
-                                                    <label class="form-label">{{ trans('app.title') }}</label>
+                                                    <label class="form-label">{{ trans('mymo_core::app.title') }}</label>
                                                     <input type="text" class="form-control" name="title[]" autocomplete="off" value="{{ @$banner->title }}">
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="form-label">{{ trans('app.description') }}</label>
+                                                    <label class="form-label">{{ trans('mymo_core::app.description') }}</label>
                                                     <textarea class="form-control" name="description[]">{{ @$banner->description }}</textarea>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="form-label">{{ trans('app.link') }}</label>
+                                                    <label class="form-label">{{ trans('mymo_core::app.link') }}</label>
                                                     <div class="input-group mb-3">
                                                         <input type="text" class="form-control" name="link[]" autocomplete="off" value="{{ @$banner->link }}">
                                                         <div class="input-group-append">
-                                                            <span class="input-group-text" id="basic-addon2"><input type="checkbox" class="link-new-tab" value="1"> {{ trans('app.open_new_tab') }}</span>
+                                                            <span class="input-group-text" id="basic-addon2"><input type="checkbox" class="link-new-tab" value="1"> {{ trans('mymo_core::app.open_new_tab') }}</span>
                                                             <input type="hidden" name="new_tab[]" class="new-tab" value="{{ @$banner->new_tab == 1 ? 1 : 0 }}" @if(@$banner->new_tab == 1) checked @endif>
                                                         </div>
                                                     </div>
@@ -87,7 +87,7 @@
                         </ul>
 
                         <div class="text-right mt-5">
-                            <a href="javascript:void(0)" class="add-banner">{{ trans('app.add_new_banner') }}</a>
+                            <a href="javascript:void(0)" class="add-banner">{{ trans('mymo_core::app.add_new_banner') }}</a>
                         </div>
                     </div>
 
@@ -106,26 +106,26 @@
                 <div id="thumbnail-{length}" class="preview-image">
                     <img src="{{ image_url(null) }}" alt="" class="thumbnail mb-0 mt-3">
                 </div>
-                <a href="javascript:void(0)" class="load-media" data-preview="thumbnail-{length}" data-input="image-{length}"><i class="fa fa-edit"></i> {{ trans('app.change_photo') }}</a>
+                <a href="javascript:void(0)" class="load-media" data-preview="thumbnail-{length}" data-input="image-{length}"><i class="fa fa-edit"></i> {{ trans('mymo_core::app.change_photo') }}</a>
             </div>
 
             <div class="col-md-8">
                 <div class="form-group">
-                    <label class="form-label">{{ trans('app.title') }}</label>
+                    <label class="form-label">{{ trans('mymo_core::app.title') }}</label>
                     <input type="text" class="form-control" name="title[]" autocomplete="off" value="">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">{{ trans('app.description') }}</label>
+                    <label class="form-label">{{ trans('mymo_core::app.description') }}</label>
                     <textarea class="form-control" name="description[]"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">{{ trans('app.link') }}</label>
+                    <label class="form-label">{{ trans('mymo_core::app.link') }}</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="link[]" autocomplete="off">
                         <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2"><input type="checkbox" class="link-new-tab" value="1"> {{ trans('app.open_new_tab') }}</span>
+                            <span class="input-group-text" id="basic-addon2"><input type="checkbox" class="link-new-tab" value="1"> {{ trans('mymo_core::app.open_new_tab') }}</span>
                             <input type="hidden" name="new_tab[]" class="new-tab" value="0">
                         </div>
                     </div>
@@ -161,13 +161,13 @@
         let item = $(this);
         Swal.fire({
             title: '',
-            text: '{{ trans('app.are_you_sure_you_want_to_delete_this_banner') }}',
+            text: '{{ trans('mymo_core::app.are_you_sure_you_want_to_delete_this_banner') }}',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: '{{ trans('app.yes') }} !',
-            cancelButtonText: '{{ trans('app.cancel') }} !',
+            confirmButtonText: '{{ trans('mymo_core::app.yes') }} !',
+            cancelButtonText: '{{ trans('mymo_core::app.cancel') }} !',
         }).then((result) => {
             if (result.value) {
                 item.closest('li').remove();

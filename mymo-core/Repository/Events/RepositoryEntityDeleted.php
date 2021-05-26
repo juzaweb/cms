@@ -1,9 +1,9 @@
 <?php
-namespace Tadcms\Repository\Events;
+namespace Mymo\Repository\Events;
 
 /**
  * Class RepositoryEntityDeleted
- * @package Tadcms\Repository\Events
+ * @package Mymo\Repository\Events
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class RepositoryEntityDeleted extends RepositoryEventBase

@@ -1,10 +1,10 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.themes'))
+@section('title', trans('mymo_core::app.themes'))
 
 @section('content')
     {{ Breadcrumbs::render('manager', [
-            'name' => trans('app.themes'),
+            'name' => trans('mymo_core::app.themes'),
             'url' => route('admin.design.themes')
         ]) }}
 

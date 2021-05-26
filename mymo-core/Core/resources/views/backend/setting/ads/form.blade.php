@@ -5,7 +5,7 @@
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.banner_ads'),
+        'name' => trans('mymo_core::app.banner_ads'),
         'url' => route('admin.setting.ads')
     ], $model) }}
 

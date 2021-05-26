@@ -1,12 +1,12 @@
 <?php
-namespace Tadcms\Repository\Contracts;
+namespace Mymo\Repository\Contracts;
 
 use Illuminate\Support\Collection;
 
 
 /**
  * Interface RepositoryCriteriaInterface
- * @package Tadcms\Repository\Contracts
+ * @package Mymo\Repository\Contracts
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 interface RepositoryCriteriaInterface

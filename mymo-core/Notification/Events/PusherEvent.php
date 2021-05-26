@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Notification\Events;
+namespace Mymo\Notification\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Tadcms\EmailTemplate\Jobs;
+namespace Mymo\Email\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Tadcms\EmailTemplate\Models\EmailList;
-use Tadcms\EmailTemplate\SendEmailService;
+use Mymo\Email\Models\EmailList;
+use Mymo\Email\SendEmailService;
 
 class SendEmail implements ShouldQueue
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Tadcms\Repository\Listeners;
+namespace Mymo\Repository\Listeners;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
-use Tadcms\Repository\Contracts\RepositoryInterface;
-use Tadcms\Repository\Events\RepositoryEventBase;
-use Tadcms\Repository\Helpers\CacheKeys;
+use Mymo\Repository\Contracts\RepositoryInterface;
+use Mymo\Repository\Events\RepositoryEventBase;
+use Mymo\Repository\Helpers\CacheKeys;
 
 /**
  * Class CleanCacheRepository
- * @package Tadcms\Repository\Listeners
+ * @package Mymo\Repository\Listeners
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class CleanCacheRepository

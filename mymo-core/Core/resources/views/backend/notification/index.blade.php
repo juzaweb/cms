@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.notification'))
+@section('title', trans('mymo_core::app.notification'))
 
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.notification'),
+        'name' => trans('mymo_core::app.notification'),
         'url' => route('admin.notification')
     ]) }}
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Repository\Traits;
+namespace Mymo\Repository\Traits;
 
 /**
  * Class TransformableTrait
- * @package Tadcms\Repository\Traits
+ * @package Mymo\Repository\Traits
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 trait TransformableTrait

@@ -1,13 +1,13 @@
 <?php
 
-namespace Tadcms\Repository\Transformer;
+namespace Mymo\Repository\Transformer;
 
 use League\Fractal\TransformerAbstract;
-use Tadcms\Repository\Contracts\Transformable;
+use Mymo\Repository\Contracts\Transformable;
 
 /**
  * Class ModelTransformer
- * @package Tadcms\Repository\Transformer
+ * @package Mymo\Repository\Transformer
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class ModelTransformer extends TransformerAbstract

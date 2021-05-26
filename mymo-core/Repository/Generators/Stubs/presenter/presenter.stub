@@ -3,7 +3,7 @@
 $NAMESPACE$
 
 use $TRANSFORMER$;
-use Tadcms\Repository\Presenter\FractalPresenter;
+use Mymo\Repository\Presenter\FractalPresenter;
 
 /**
  * Class $CLASS$Presenter.

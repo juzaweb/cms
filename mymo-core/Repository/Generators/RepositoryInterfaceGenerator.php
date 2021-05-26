@@ -1,12 +1,12 @@
 <?php
 
-namespace Tadcms\Repository\Generators;
+namespace Mymo\Repository\Generators;
 
-use Tadcms\Repository\Generators\Migrations\SchemaParser;
+use Mymo\Repository\Generators\Migrations\SchemaParser;
 
 /**
  * Class RepositoryInterfaceGenerator
- * @package Tadcms\Repository\Generators
+ * @package Mymo\Repository\Generators
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class RepositoryInterfaceGenerator extends Generator

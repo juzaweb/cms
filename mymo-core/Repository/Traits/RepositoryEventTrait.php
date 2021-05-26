@@ -10,9 +10,9 @@
  * Time: 1:46 PM
  */
 
-namespace Tadcms\Repository\Traits;
+namespace Mymo\Repository\Traits;
 
-use Tadcms\Repository\Contracts\RepositoryInterface;
+use Mymo\Repository\Contracts\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
 trait RepositoryEventTrait

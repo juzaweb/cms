@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.email_logs'))
+@section('title', trans('mymo_core::app.email_logs'))
 
 @section('content')
 
     {{ Breadcrumbs::render('manager', [
-            'name' => trans('app.email_logs'),
+            'name' => trans('mymo_core::app.email_logs'),
             'url' => route('admin.logs.email')
         ]) }}
 

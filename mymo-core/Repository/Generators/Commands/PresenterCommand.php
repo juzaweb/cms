@@ -1,16 +1,16 @@
 <?php
-namespace Tadcms\Repository\Generators\Commands;
+namespace Mymo\Repository\Generators\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Repository\Generators\FileAlreadyExistsException;
-use Tadcms\Repository\Generators\PresenterGenerator;
-use Tadcms\Repository\Generators\TransformerGenerator;
+use Mymo\Repository\Generators\FileAlreadyExistsException;
+use Mymo\Repository\Generators\PresenterGenerator;
+use Mymo\Repository\Generators\TransformerGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class PresenterCommand
- * @package Tadcms\Repository\Generators\Commands
+ * @package Mymo\Repository\Generators\Commands
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class PresenterCommand extends Command

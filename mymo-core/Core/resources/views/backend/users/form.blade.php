@@ -5,7 +5,7 @@
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.users'),
+        'name' => trans('mymo_core::app.users'),
         'url' => route('admin.users')
     ], $model) }}
 

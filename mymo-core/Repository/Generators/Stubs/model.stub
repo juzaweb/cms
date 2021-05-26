@@ -3,8 +3,8 @@
 $NAMESPACE$
 
 use Illuminate\Database\Eloquent\Model;
-use Tadcms\Repository\Contracts\Transformable;
-use Tadcms\Repository\Traits\TransformableTrait;
+use Mymo\Repository\Contracts\Transformable;
+use Mymo\Repository\Traits\TransformableTrait;
 
 /**
  * Class $CLASS$.

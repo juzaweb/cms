@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.seo_setting'))
+@section('title', trans('mymo_core::app.seo_setting'))
 
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.seo_setting'),
+        'name' => trans('mymo_core::app.seo_setting'),
         'url' => route('admin.setting.seo')
     ]) }}
 

@@ -1,11 +1,11 @@
 <?php
-namespace Tadcms\Repository\Providers;
+namespace Mymo\Repository\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class EventServiceProvider
- * @package Tadcms\Repository\Providers
+ * @package Mymo\Repository\Providers
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class EventServiceProvider extends ServiceProvider
@@ -17,14 +17,14 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Tadcms\Repository\Events\RepositoryEntityCreated' => [
-            'Tadcms\Repository\Listeners\CleanCacheRepository'
+        'Mymo\Repository\Events\RepositoryEntityCreated' => [
+            'Mymo\Repository\Listeners\CleanCacheRepository'
         ],
-        'Tadcms\Repository\Events\RepositoryEntityUpdated' => [
-            'Tadcms\Repository\Listeners\CleanCacheRepository'
+        'Mymo\Repository\Events\RepositoryEntityUpdated' => [
+            'Mymo\Repository\Listeners\CleanCacheRepository'
         ],
-        'Tadcms\Repository\Events\RepositoryEntityDeleted' => [
-            'Tadcms\Repository\Listeners\CleanCacheRepository'
+        'Mymo\Repository\Events\RepositoryEntityDeleted' => [
+            'Mymo\Repository\Listeners\CleanCacheRepository'
         ]
     ];
 

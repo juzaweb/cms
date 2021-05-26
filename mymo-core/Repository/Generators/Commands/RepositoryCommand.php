@@ -1,20 +1,20 @@
 <?php
-namespace Tadcms\Repository\Generators\Commands;
+namespace Mymo\Repository\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Tadcms\Repository\Generators\FileAlreadyExistsException;
-use Tadcms\Repository\Generators\MigrationGenerator;
-use Tadcms\Repository\Generators\ModelGenerator;
-use Tadcms\Repository\Generators\RepositoryEloquentGenerator;
-use Tadcms\Repository\Generators\RepositoryInterfaceGenerator;
+use Mymo\Repository\Generators\FileAlreadyExistsException;
+use Mymo\Repository\Generators\MigrationGenerator;
+use Mymo\Repository\Generators\ModelGenerator;
+use Mymo\Repository\Generators\RepositoryEloquentGenerator;
+use Mymo\Repository\Generators\RepositoryInterfaceGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class RepositoryCommand
- * @package Tadcms\Repository\Generators\Commands
+ * @package Mymo\Repository\Generators\Commands
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class RepositoryCommand extends Command

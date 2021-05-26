@@ -2,8 +2,8 @@
 
 $NAMESPACE$
 
-use Tadcms\Repository\Contracts\CriteriaInterface;
-use Tadcms\Repository\Contracts\RepositoryInterface;
+use Mymo\Repository\Contracts\CriteriaInterface;
+use Mymo\Repository\Contracts\RepositoryInterface;
 
 /**
  * Class $CLASS$Criteria.

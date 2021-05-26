@@ -1,16 +1,16 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.translate'))
+@section('title', trans('mymo_core::app.translate'))
 
 @section('content')
 
 {{ Breadcrumbs::render('multiple_parent', [
     [
-        'name' => trans('app.language'),
+        'name' => trans('mymo_core::app.language'),
         'url' => route('admin.setting.languages')
     ],
     [
-        'name' => trans('app.translate'),
+        'name' => trans('mymo_core::app.translate'),
         'url' => route('admin.setting.translate', [$lang])
     ]
 ]) }}

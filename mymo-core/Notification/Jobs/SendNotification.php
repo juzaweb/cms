@@ -1,14 +1,14 @@
 <?php
 
-namespace Tadcms\Notification\Jobs;
+namespace Mymo\Notification\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Tadcms\Notification\Models\ManualNotification;
-use Tadcms\Notification\SendNotification as TadNotification;
+use Mymo\Notification\Models\ManualNotification;
+use Mymo\Notification\SendNotification as TadNotification;
 
 class SendNotification implements ShouldQueue
 {

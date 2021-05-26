@@ -1,23 +1,23 @@
 <?php
 /**
- * @package    tadcms\tadcms
+ * @package    mymocms/mymocms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://github.com/tadcms/tadcms
+ * @link       https://github.com/mymocms/mymocms
  * @license    MIT
  *
  * Created by The Anh.
- * Date: 5/3/2021
- * Time: 11:08 AM
+ * Date: 5/25/2021
+ * Time: 10:05 PM
  */
 
-namespace Tadcms\System\Traits;
+namespace Mymo\Core\Traits;
 
 use Illuminate\Support\Arr;
 
 trait MenuHookAction
 {
     /**
-     * TAD CMS: Add a top-level menu page.
+     * Add a top-level menu page.
      *
      * This function takes a capability which will be used to determine whether
      * or not a page is included in the menu.
@@ -64,7 +64,8 @@ trait MenuHookAction
     }
 
     /**
-     * TAD CMS: Registers menu item in menu builder.
+     * Registers menu item in menu builder.
+     *
      * @param string $key
      * @param array $args
      *      - label (Required): Label for item

@@ -1,12 +1,12 @@
 <?php
-namespace Tadcms\Repository\Presenter;
+namespace Mymo\Repository\Presenter;
 
 use Exception;
-use Tadcms\Repository\Transformer\ModelTransformer;
+use Mymo\Repository\Transformer\ModelTransformer;
 
 /**
  * Class ModelFractalPresenter
- * @package Tadcms\Repository\Presenter
+ * @package Mymo\Repository\Presenter
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class ModelFractalPresenter extends FractalPresenter

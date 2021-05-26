@@ -43,7 +43,7 @@ if (strpos($input['name'], '[')) {
         <img src="{{ image_url($input_value) }}" alt="">
     </div>
     
-    <p><a href="javascript:void(0)" class="load-media" data-input="input-{{ $index }}-{{ $icard }}-{{ $iinput }}" data-preview="review-{{ $index }}-{{ $icard }}-{{ $iinput }}"><i class="fa fa-edit"></i> {{ trans('app.change') }}</a></p>
+    <p><a href="javascript:void(0)" class="load-media" data-input="input-{{ $index }}-{{ $icard }}-{{ $iinput }}" data-preview="review-{{ $index }}-{{ $icard }}-{{ $iinput }}"><i class="fa fa-edit"></i> {{ trans('mymo_core::app.change') }}</a></p>
     <input type="hidden" name="{{ $input_name }}" id="input-{{ $index }}-{{ $icard }}-{{ $iinput }}" value="{{ $input_value }}">
     @break
 

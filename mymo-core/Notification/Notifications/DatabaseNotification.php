@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Notification\Notifications;
+namespace Mymo\Notification\Notifications;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Tadcms\Notification\Models\Notification;
+use Mymo\Notification\Models\Notification;
 
 class DatabaseNotification extends NotificationAbstract
 {
@@ -13,7 +13,7 @@ class DatabaseNotification extends NotificationAbstract
         foreach ($this->users as $user) {
             Notification::create([
                 'id' => (string) Str::uuid(),
-                'type' => 'Tadcms\Notification\Notifications\DbNotify',
+                'type' => 'Mymo\Notification\Notifications\DbNotify',
                 'data' => [
                     'subject' => Arr::get($this->notification->data, 'subject'),
                     'body' => Arr::get($this->notification->data, 'body'),

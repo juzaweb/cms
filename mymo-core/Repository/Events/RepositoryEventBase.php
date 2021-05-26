@@ -1,12 +1,12 @@
 <?php
-namespace Tadcms\Repository\Events;
+namespace Mymo\Repository\Events;
 
 use Illuminate\Database\Eloquent\Model;
-use Tadcms\Repository\Contracts\RepositoryInterface;
+use Mymo\Repository\Contracts\RepositoryInterface;
 
 /**
  * Class RepositoryEventBase
- * @package Tadcms\Repository\Events
+ * @package Mymo\Repository\Events
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 abstract class RepositoryEventBase

@@ -5,7 +5,7 @@
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.comment_setting'),
+        'name' => trans('mymo_core::app.comment_setting'),
         'url' => route('admin.setting.comment')
     ]) }}
 

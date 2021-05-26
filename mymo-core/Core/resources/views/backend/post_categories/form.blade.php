@@ -4,7 +4,7 @@
 
 @section('content')
 {{ Breadcrumbs::render('manager', [
-    'name' => trans('app.post_categories'),
+    'name' => trans('mymo_core::app.post_categories'),
     'url' => route('admin.post_categories')
 ], $model) }}
 

@@ -1,9 +1,9 @@
 <?php
-namespace Tadcms\Repository\Generators;
+namespace Mymo\Repository\Generators;
 
 /**
  * Class PresenterGenerator
- * @package Tadcms\Repository\Generators
+ * @package Mymo\Repository\Generators
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class PresenterGenerator extends Generator

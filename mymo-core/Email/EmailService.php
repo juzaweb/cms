@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\EmailTemplate;
+namespace Mymo\Email;
 
-use Tadcms\EmailTemplate\Jobs\SendEmail;
-use Tadcms\EmailTemplate\Models\EmailList;
-use Tadcms\EmailTemplate\Models\EmailTemplate;
+use Mymo\Email\Jobs\SendEmail;
+use Mymo\Email\Models\EmailList;
+use Mymo\Email\Models\EmailTemplate;
 
 class EmailService
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Tadcms\Repository\Generators\Migrations;
+namespace Mymo\Repository\Generators\Migrations;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 /**
  * Class SchemaParser
- * @package Tadcms\Repository\Generators\Migrations
+ * @package Mymo\Repository\Generators\Migrations
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class SchemaParser implements Arrayable

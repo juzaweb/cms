@@ -1,16 +1,16 @@
 <?php
-namespace Tadcms\Repository\Generators\Commands;
+namespace Mymo\Repository\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Tadcms\Repository\Generators\FileAlreadyExistsException;
-use Tadcms\Repository\Generators\ValidatorGenerator;
+use Mymo\Repository\Generators\FileAlreadyExistsException;
+use Mymo\Repository\Generators\ValidatorGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class ValidatorCommand
- * @package Tadcms\Repository\Generators\Commands
+ * @package Mymo\Repository\Generators\Commands
  */
 class ValidatorCommand extends Command
 {

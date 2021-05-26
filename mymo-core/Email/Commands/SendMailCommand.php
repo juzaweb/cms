@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\EmailTemplate\Commands;
+namespace Mymo\Email\Commands;
 
-use Tadcms\EmailTemplate\Models\EmailList;
+use Mymo\Email\Models\EmailList;
 use Illuminate\Console\Command;
-use Tadcms\EmailTemplate\SendEmailService;
+use Mymo\Email\SendEmailService;
 
 class SendMailCommand extends Command
 {

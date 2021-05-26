@@ -1,13 +1,13 @@
 <?php
 
-namespace Tadcms\Notification\Notifications;
+namespace Mymo\Notification\Notifications;
 
 abstract class NotificationAbstract
 {
     protected $notification;
     protected $users;
     /**
-     * @param \Tadcms\Notification\Models\ManualNotification $notification
+     * @param \Mymo\Notification\Models\ManualNotification $notification
      * */
     public function __construct($notification)
     {

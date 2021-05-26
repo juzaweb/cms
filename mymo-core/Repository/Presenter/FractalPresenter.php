@@ -1,5 +1,5 @@
 <?php
-namespace Tadcms\Repository\Presenter;
+namespace Mymo\Repository\Presenter;
 
 use Exception;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -11,11 +11,11 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Serializer\SerializerAbstract;
-use Tadcms\Repository\Contracts\PresenterInterface;
+use Mymo\Repository\Contracts\PresenterInterface;
 
 /**
  * Class FractalPresenter
- * @package Tadcms\Repository\Presenter
+ * @package Mymo\Repository\Presenter
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 abstract class FractalPresenter implements PresenterInterface

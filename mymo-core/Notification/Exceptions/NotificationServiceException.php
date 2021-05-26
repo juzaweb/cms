@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Notification\Exceptions;
+namespace Mymo\Notification\Exceptions;
 
 class NotificationServiceException extends \Exception
 {

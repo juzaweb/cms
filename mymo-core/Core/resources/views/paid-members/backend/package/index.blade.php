@@ -1,11 +1,11 @@
 @extends('layouts.backend')
 
-@section('title', trans('app.package'))
+@section('title', trans('mymo_core::app.package'))
 
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.packages'),
+        'name' => trans('mymo_core::app.packages'),
         'url' => route('admin.package')
     ]) }}
 

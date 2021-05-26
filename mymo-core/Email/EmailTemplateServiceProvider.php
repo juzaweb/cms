@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\EmailTemplate;
+namespace Mymo\Email;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
-use Tadcms\EmailTemplate\Commands\SendMailCommand;
+use Mymo\Email\Commands\SendMailCommand;
 
 class EmailTemplateServiceProvider extends ServiceProvider
 {

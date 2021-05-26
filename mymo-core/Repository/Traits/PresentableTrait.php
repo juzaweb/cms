@@ -1,13 +1,13 @@
 <?php
 
-namespace Tadcms\Repository\Traits;
+namespace Mymo\Repository\Traits;
 
 use Illuminate\Support\Arr;
-use Tadcms\Repository\Contracts\PresenterInterface;
+use Mymo\Repository\Contracts\PresenterInterface;
 
 /**
  * Class PresentableTrait
- * @package Tadcms\Repository\Traits
+ * @package Mymo\Repository\Traits
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 trait PresentableTrait
@@ -19,7 +19,7 @@ trait PresentableTrait
     protected $presenter = null;
 
     /**
-     * @param \Tadcms\Repository\Contracts\PresenterInterface $presenter
+     * @param \Mymo\Repository\Contracts\PresenterInterface $presenter
      *
      * @return $this
      */

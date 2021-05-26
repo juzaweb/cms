@@ -1,5 +1,5 @@
 <?php
-namespace Tadcms\Repository\Generators\Commands;
+namespace Mymo\Repository\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class EntityCommand
- * @package Tadcms\Repository\Generators\Commands
+ * @package Mymo\Repository\Generators\Commands
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class EntityCommand extends Command

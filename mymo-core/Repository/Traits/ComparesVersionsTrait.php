@@ -1,9 +1,9 @@
 <?php
-namespace Tadcms\Repository\Traits;
+namespace Mymo\Repository\Traits;
 
 /**
  * Trait ComparesVersionsTrait
- * @package Tadcms\Repository\Traits
+ * @package Mymo\Repository\Traits
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 trait ComparesVersionsTrait

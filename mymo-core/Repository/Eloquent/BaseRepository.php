@@ -1,5 +1,5 @@
 <?php
-namespace Tadcms\Repository\Eloquent;
+namespace Mymo\Repository\Eloquent;
 
 use Closure;
 use Exception;
@@ -8,24 +8,24 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Tadcms\Repository\Contracts\CriteriaInterface;
-use Tadcms\Repository\Contracts\Presentable;
-use Tadcms\Repository\Contracts\PresenterInterface;
-use Tadcms\Repository\Contracts\RepositoryCriteriaInterface;
-use Tadcms\Repository\Contracts\RepositoryInterface;
-use Tadcms\Repository\Events\RepositoryEntityCreated;
-use Tadcms\Repository\Events\RepositoryEntityCreating;
-use Tadcms\Repository\Events\RepositoryEntityDeleted;
-use Tadcms\Repository\Events\RepositoryEntityDeleting;
-use Tadcms\Repository\Events\RepositoryEntityUpdated;
-use Tadcms\Repository\Events\RepositoryEntityUpdating;
-use Tadcms\Repository\Exceptions\RepositoryException;
-use Tadcms\Repository\Traits\ComparesVersionsTrait;
-use Tadcms\Repository\Traits\RepositoryEventTrait;
+use Mymo\Repository\Contracts\CriteriaInterface;
+use Mymo\Repository\Contracts\Presentable;
+use Mymo\Repository\Contracts\PresenterInterface;
+use Mymo\Repository\Contracts\RepositoryCriteriaInterface;
+use Mymo\Repository\Contracts\RepositoryInterface;
+use Mymo\Repository\Events\RepositoryEntityCreated;
+use Mymo\Repository\Events\RepositoryEntityCreating;
+use Mymo\Repository\Events\RepositoryEntityDeleted;
+use Mymo\Repository\Events\RepositoryEntityDeleting;
+use Mymo\Repository\Events\RepositoryEntityUpdated;
+use Mymo\Repository\Events\RepositoryEntityUpdating;
+use Mymo\Repository\Exceptions\RepositoryException;
+use Mymo\Repository\Traits\ComparesVersionsTrait;
+use Mymo\Repository\Traits\RepositoryEventTrait;
 
 /**
  * Class BaseRepository
- * @package Tadcms\Repository\Eloquent
+ * @package Mymo\Repository\Eloquent
  * @method Builder query()
  * @author Anderson Andrade <contato@andersonandra.de>
  */
@@ -955,7 +955,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      * @param $criteria
      *
      * @return $this
-     * @throws \Tadcms\Repository\Exceptions\RepositoryException
+     * @throws \Mymo\Repository\Exceptions\RepositoryException
      */
     public function pushCriteria($criteria)
     {

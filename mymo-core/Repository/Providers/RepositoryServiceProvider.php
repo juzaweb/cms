@@ -1,11 +1,11 @@
 <?php
-namespace Tadcms\Repository\Providers;
+namespace Mymo\Repository\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class RepositoryServiceProvider
- * @package Tadcms\Repository\Providers
+ * @package Mymo\Repository\Providers
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class RepositoryServiceProvider extends ServiceProvider
@@ -38,15 +38,15 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands('Tadcms\Repository\Generators\Commands\RepositoryCommand');
-        /*$this->commands('Tadcms\Repository\Generators\Commands\TransformerCommand');
-        $this->commands('Tadcms\Repository\Generators\Commands\PresenterCommand');
-        $this->commands('Tadcms\Repository\Generators\Commands\EntityCommand');
-        $this->commands('Tadcms\Repository\Generators\Commands\ValidatorCommand');
-        $this->commands('Tadcms\Repository\Generators\Commands\ControllerCommand');
-        $this->commands('Tadcms\Repository\Generators\Commands\BindingsCommand');
-        $this->commands('Tadcms\Repository\Generators\Commands\CriteriaCommand');*/
-        $this->app->register('Tadcms\Repository\Providers\EventServiceProvider');
+        $this->commands('Mymo\Repository\Generators\Commands\RepositoryCommand');
+        /*$this->commands('Mymo\Repository\Generators\Commands\TransformerCommand');
+        $this->commands('Mymo\Repository\Generators\Commands\PresenterCommand');
+        $this->commands('Mymo\Repository\Generators\Commands\EntityCommand');
+        $this->commands('Mymo\Repository\Generators\Commands\ValidatorCommand');
+        $this->commands('Mymo\Repository\Generators\Commands\ControllerCommand');
+        $this->commands('Mymo\Repository\Generators\Commands\BindingsCommand');
+        $this->commands('Mymo\Repository\Generators\Commands\CriteriaCommand');*/
+        $this->app->register('Mymo\Repository\Providers\EventServiceProvider');
     }
 
 

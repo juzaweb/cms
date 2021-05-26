@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Notification\Commands;
+namespace Mymo\Notification\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Notification\Models\ManualNotification;
-use Tadcms\Notification\SendNotification;
+use Mymo\Notification\Models\ManualNotification;
+use Mymo\Notification\SendNotification;
 
 class SendNotify extends Command
 {

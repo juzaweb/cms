@@ -1,16 +1,16 @@
 <?php
-namespace Tadcms\Repository\Criteria;
+namespace Mymo\Repository\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Tadcms\Repository\Contracts\CriteriaInterface;
-use Tadcms\Repository\Contracts\RepositoryInterface;
+use Mymo\Repository\Contracts\CriteriaInterface;
+use Mymo\Repository\Contracts\RepositoryInterface;
 
 /**
  * Class RequestCriteria
- * @package Tadcms\Repository\Criteria
+ * @package Mymo\Repository\Criteria
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class RequestCriteria implements CriteriaInterface

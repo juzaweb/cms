@@ -1,12 +1,12 @@
 <?php
-namespace Tadcms\Repository\Generators;
+namespace Mymo\Repository\Generators;
 
-use Tadcms\Repository\Generators\Migrations\RulesParser;
-use Tadcms\Repository\Generators\Migrations\SchemaParser;
+use Mymo\Repository\Generators\Migrations\RulesParser;
+use Mymo\Repository\Generators\Migrations\SchemaParser;
 
 /**
  * Class ValidatorGenerator
- * @package Tadcms\Repository\Generators
+ * @package Mymo\Repository\Generators
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class ValidatorGenerator extends Generator

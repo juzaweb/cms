@@ -5,7 +5,7 @@
 @section('content')
 
 {{ Breadcrumbs::render('manager', [
-        'name' => trans('app.video_qualities'),
+        'name' => trans('mymo_core::app.video_qualities'),
         'url' => route('admin.video_qualities')
     ], $model) }}
 

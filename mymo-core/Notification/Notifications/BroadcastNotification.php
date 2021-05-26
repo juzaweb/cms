@@ -1,8 +1,8 @@
 <?php
 
-namespace Tadcms\Notification\Notifications;
+namespace Mymo\Notification\Notifications;
 
-use Tadcms\Notification\Events\PusherEvent;
+use Mymo\Notification\Events\PusherEvent;
 
 class BroadcastNotification extends NotificationAbstract
 {

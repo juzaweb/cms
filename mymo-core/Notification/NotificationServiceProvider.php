@@ -1,12 +1,12 @@
 <?php
 
-namespace Tadcms\Notification;
+namespace Mymo\Notification;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
-use Tadcms\Notification\Notifications\BroadcastNotification;
-use Tadcms\Notification\Notifications\DatabaseNotification;
-use Tadcms\Notification\Notifications\EmailNotification;
+use Mymo\Notification\Notifications\BroadcastNotification;
+use Mymo\Notification\Notifications\DatabaseNotification;
+use Mymo\Notification\Notifications\EmailNotification;
 
 class NotificationServiceProvider extends ServiceProvider
 {
@@ -35,7 +35,7 @@ class NotificationServiceProvider extends ServiceProvider
         );
 
         $this->commands([
-            \Tadcms\Notification\Commands\SendNotify::class,
+            \Mymo\Notification\Commands\SendNotify::class,
         ]);
     }
 }

@@ -1,9 +1,9 @@
 <?php
-namespace Tadcms\Repository\Events;
+namespace Mymo\Repository\Events;
 
 /**
  * Class RepositoryEntityUpdated
- * @package Tadcms\Repository\Events
+ * @package Mymo\Repository\Events
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class RepositoryEntityUpdating extends RepositoryEventBase

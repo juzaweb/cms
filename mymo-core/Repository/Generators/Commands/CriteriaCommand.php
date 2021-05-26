@@ -1,16 +1,16 @@
 <?php
 
-namespace Tadcms\Repository\Generators\Commands;
+namespace Mymo\Repository\Generators\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Repository\Generators\CriteriaGenerator;
-use Tadcms\Repository\Generators\FileAlreadyExistsException;
+use Mymo\Repository\Generators\CriteriaGenerator;
+use Mymo\Repository\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class CriteriaCommand
- * @package Tadcms\Repository\Generators\Commands
+ * @package Mymo\Repository\Generators\Commands
  * @author Anderson Andrade <contato@andersonandra.de>
  */
 class CriteriaCommand extends Command

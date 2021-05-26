@@ -42,7 +42,7 @@
 
         <div class="theme-editor__panel-body" data-scrollable>
             <form action="{{ route('admin.design.editor.save') }}" method="post" class="form-ajax" data-success="save_success">
-                <button class="btn btn-save-top" type="submit">{{ trans('app.save') }}</button>
+                <button class="btn btn-save-top" type="submit">{{ trans('mymo_core::app.save') }}</button>
 
                 <input type="hidden" name="code" value="{{ $item['code'] }}">
 
@@ -55,7 +55,7 @@
                             <section class="next-card__section">
 
                                 <header class="next-card__header theme-setting theme-setting--header">
-                                    <h3 class="ui-subheading">{{ $card['name'] }} <a href="javascript:void(0)" class="show-card-body"><i class="fa fa-eye"></i> {{ trans('app.show') }}</a></h3>
+                                    <h3 class="ui-subheading">{{ $card['name'] }} <a href="javascript:void(0)" class="show-card-body"><i class="fa fa-eye"></i> {{ trans('mymo_core::app.show') }}</a></h3>
                                 </header>
 
                                 <div class="card-body">
@@ -67,7 +67,7 @@
                                             <div class="next-input-wrapper">
                                                 <div class="checkbox" id="setting-checkbox-favicon_enable">
                                                     <label class="next-label next-label--switch">
-                                                        {{ trans('app.enabled') }}
+                                                        {{ trans('mymo_core::app.enabled') }}
                                                     </label>
                                                     <input type="checkbox" class="next-checkbox check-status" {{ (isset($option_card['status']) && (int) $option_card['status'] == 1) ? 'checked' : '' }}>
                                                     <input type="hidden" name="{{ $card['code'] }}[status]" class="check-status-hide" value="{{ isset($option_card['status']) ? (int) $option_card['status'] : 0 }}">
@@ -103,7 +103,7 @@
                     @endforeach
                 @endif
 
-                <button class="btn btn--full-width" type="submit">{{ trans('app.save') }}</button>
+                <button class="btn btn--full-width" type="submit">{{ trans('mymo_core::app.save') }}</button>
             </form>
         </div>
     </div>
