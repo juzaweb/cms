@@ -35,10 +35,19 @@ HookAction::addAdminMenu(
 
 HookAction::addAdminMenu(
     'mymo_core::app.updates',
-    'dashboard.update',
+    'updates',
     [
         'icon' => 'fa fa-upgrade',
         'position' => 2,
         'parent' => 'dashboard',
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.users'),
+    'users',
+    [
+        'icon' => 'fa fa-users',
+        'position' => 60
     ]
 );

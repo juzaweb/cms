@@ -9,7 +9,7 @@ use Mymo\Core\Models\Ads;
 class AdsSettingController extends Controller
 {
     public function index() {
-        return view('backend.setting.ads.index');
+        return view('mymo_core::backend.setting.ads.index');
     }
     
     public function getData(Request $request) {
@@ -47,9 +47,9 @@ class AdsSettingController extends Controller
     
     public function form($id = null) {
         $model = Ads::firstOrNew(['id' => $id]);
-        return view('backend.setting.ads.form', [
+        return view('mymo_core::backend.setting.ads.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->name ?: trans('mymo_core::app.add_new')
         ]);
     }
     
@@ -58,8 +58,8 @@ class AdsSettingController extends Controller
             'body' => 'nullable',
             'status' => 'required|in:0,1',
         ], $request, [
-            'body' => trans('app.content'),
-            'status' => trans('app.status'),
+            'body' => trans('mymo_core::app.content'),
+            'status' => trans('mymo_core::app.status'),
         ]);
         
         $model = Ads::firstOrNew(['id' => $request->post('id')]);
@@ -68,7 +68,7 @@ class AdsSettingController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.setting.ads'),
         ]);
     }

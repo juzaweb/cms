@@ -12,11 +12,11 @@
     <div class="cui__utils__content">
         <div class="row mt-5">
             <div class="col-md-5">
-                @include('backend.design.menu.form_left')
+                @include('mymo_core::backend.design.menu.form_left')
             </div>
 
             <div class="col-md-7">
-                @include('backend.design.menu.form_right')
+                @include('mymo_core::backend.design.menu.form_right')
             </div>
         </div>
     </div>

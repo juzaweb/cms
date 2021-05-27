@@ -12,7 +12,7 @@ class ThemeEditorController extends Controller
     public function index() {
         $config = include resource_path('views/themes/mymo/config.php');
         
-        return view('backend.design.editor.index', [
+        return view('mymo_core::backend.design.editor.index', [
             'config' => $config,
         ]);
     }
@@ -34,7 +34,7 @@ class ThemeEditorController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
         ]);
     }
 }

@@ -10,7 +10,7 @@
  */
 
 Breadcrumbs::for('admin', function ($trail) {
-    $trail->push(trans('app.home'), route('admin.dashboard'));
+    $trail->push(trans('mymo_core::app.home'), route('admin.dashboard'));
 });
 
 Breadcrumbs::for('manager', function ($trail, $parent, $model = null) {
@@ -27,7 +27,7 @@ Breadcrumbs::for('manager', function ($trail, $parent, $model = null) {
             }
         }
         else {
-            $trail->push(trans('app.add_new'));
+            $trail->push(trans('mymo_core::app.add_new'));
         }
     }
 });
@@ -51,7 +51,7 @@ Breadcrumbs::for('multiple_parent', function ($trail, $parents, $model = null) {
             }
         }
         else {
-            $trail->push(trans('app.add_new'));
+            $trail->push(trans('mymo_core::app.add_new'));
         }
     }
 });

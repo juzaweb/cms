@@ -390,7 +390,7 @@ return [
   'stream' => 'Stream',
   'from' => 'From',
   'add_stream' => 'Add stream',
-    'live_tv_categories' => 'Live TV Categories',
+  'live_tv_categories' => 'Live TV Categories',
   'price' => 'Price',
   'days' => 'Days',
   'package' => 'Package',
@@ -404,5 +404,6 @@ return [
   'base_url' => 'Base Url',
   'server_stream' => 'Server Stream',
   'news' => 'News',
+  'updates' => 'Updates',
 ];
 

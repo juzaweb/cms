@@ -10,7 +10,7 @@ use Mymo\Core\Models\MyNotification;
 class SendNotificationController extends Controller
 {
     public function index() {
-        return view('backend.notification.index');
+        return view('mymo_core::backend.notification.index');
     }
     
     public function getData(Request $request) {
@@ -56,8 +56,8 @@ class SendNotificationController extends Controller
         $model = MyNotification::firstOrNew(['id' => $id]);
         $users = User::whereIn('id', explode(',', $model->users))
             ->get(['id', 'name']);
-        return view('backend.notification.form', [
-            'title' => $model->name ?: trans('app.add_new'),
+        return view('mymo_core::backend.notification.form', [
+            'title' => $model->name ?: trans('mymo_core::app.add_new'),
             'model' => $model,
             'users' => $users,
         ]);
@@ -70,10 +70,10 @@ class SendNotificationController extends Controller
             'content' => 'required',
             'type' => 'required|in:1,2,3',
         ], $request, [
-            'name' => trans('app.name'),
-            'subject' => trans('app.subject'),
-            'content' => trans('app.content'),
-            'type' => trans('app.type'),
+            'name' => trans('mymo_core::app.name'),
+            'subject' => trans('mymo_core::app.subject'),
+            'content' => trans('mymo_core::app.content'),
+            'type' => trans('mymo_core::app.type'),
         ]);
         
         $users = $request->post('users');
@@ -91,7 +91,7 @@ class SendNotificationController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.notification'),
         ]);
     }
@@ -100,14 +100,14 @@ class SendNotificationController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.notification')
+            'ids' => trans('mymo_core::app.notification')
         ]);
         
         MyNotification::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
 }

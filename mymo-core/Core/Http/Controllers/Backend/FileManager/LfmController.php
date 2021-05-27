@@ -31,7 +31,7 @@ class LfmController extends Controller
             ];
         }
         
-        return view('backend.file_manager.index', [
+        return view('mymo_core::backend.file_manager.index', [
             'mime_types' => $mime_types
         ]);
     }

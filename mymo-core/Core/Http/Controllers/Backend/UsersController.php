@@ -3,16 +3,18 @@
 namespace Mymo\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\User;
 
-class UsersController extends Controller
+class UsersController extends BackendController
 {
-    public function index() {
-        return view('backend.users.index');
+    public function index()
+    {
+        return view('mymo_core::backend.users.index');
     }
     
-    public function getData(Request $request) {
+    public function getData(Request $request)
+    {
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -52,15 +54,17 @@ class UsersController extends Controller
         ]);
     }
     
-    public function form($id = null) {
+    public function form($id = null)
+    {
         $model = User::firstOrNew(['id' => $id]);
-        return view('backend.users.form', [
+        return view('mymo_core::backend.users.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->name ?: trans('mymo_core::app.add_new')
         ]);
     }
     
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $this->validateRequest([
             'name' => 'required|string|max:250',
             'password' => 'required_if:id,',
@@ -68,11 +72,11 @@ class UsersController extends Controller
             'email' => 'required_if:id,|unique:users,email',
             'status' => 'required|in:0,1',
         ], $request, [
-            'name' => trans('app.name'),
-            'email' => trans('app.email'),
-            'password' => trans('app.password'),
-            'avatar' => trans('app.avatar'),
-            'status' => trans('app.status'),
+            'name' => trans('mymo_core::app.name'),
+            'email' => trans('mymo_core::app.email'),
+            'password' => trans('mymo_core::app.password'),
+            'avatar' => trans('mymo_core::app.avatar'),
+            'status' => trans('mymo_core::app.status'),
         ]);
         
         $model = User::firstOrNew(['id' => $request->post('id')]);
@@ -88,8 +92,8 @@ class UsersController extends Controller
                 'password' => 'required|string|max:32|min:6|confirmed',
                 'password_confirmation' => 'required|string|max:32|min:6'
             ], $request, [
-                'password' => trans('app.password'),
-                'password_confirmation' => trans('app.confirm_password')
+                'password' => trans('mymo_core::app.password'),
+                'password_confirmation' => trans('mymo_core::app.confirm_password')
             ]);
             
             $model->setAttribute('password', \Hash::make($request->post('password')));
@@ -113,23 +117,24 @@ class UsersController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.users'),
         ]);
     }
     
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.users')
+            'ids' => trans('mymo_core::app.users')
         ]);
         
         User::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
 }

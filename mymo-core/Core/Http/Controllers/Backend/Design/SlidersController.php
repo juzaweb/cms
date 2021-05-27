@@ -9,7 +9,7 @@ use Mymo\Core\Http\Controllers\Controller;
 class SlidersController extends Controller
 {
     public function index() {
-        return view('backend.design.sliders.index');
+        return view('mymo_core::backend.design.sliders.index');
     }
     
     public function getData(Request $request) {
@@ -50,9 +50,9 @@ class SlidersController extends Controller
     
     public function form($id = null) {
         $model = Sliders::firstOrNew(['id' => $id]);
-        return view('backend.design.sliders.form', [
+        return view('mymo_core::backend.design.sliders.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->name ?: trans('mymo_core::app.add_new')
         ]);
     }
     
@@ -60,7 +60,7 @@ class SlidersController extends Controller
         $this->validateRequest([
             'name' => 'required|string|max:250',
         ], $request, [
-            'name' => trans('app.name'),
+            'name' => trans('mymo_core::app.name'),
         ]);
     
         $model = Sliders::firstOrNew(['id' => $request->post('id')]);
@@ -75,7 +75,7 @@ class SlidersController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => trans('validation.required', [
-                    'attribute' => trans('app.banners')
+                    'attribute' => trans('mymo_core::app.banners')
                 ])
             ]);
         }
@@ -95,7 +95,7 @@ class SlidersController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.design.sliders'),
         ]);
     }
@@ -104,14 +104,14 @@ class SlidersController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.design.sliders')
+            'ids' => trans('mymo_core::app.design.sliders')
         ]);
         
         Sliders::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
 }

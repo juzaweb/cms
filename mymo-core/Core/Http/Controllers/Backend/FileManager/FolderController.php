@@ -21,7 +21,7 @@ class FolderController extends LfmController
             ];
         }
         
-        return view('backend.file_manager.tree')
+        return view('mymo_core::backend.file_manager.tree')
             ->with([
                 'root_folders' => [
                     (object) [

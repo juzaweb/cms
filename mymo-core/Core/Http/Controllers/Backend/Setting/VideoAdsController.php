@@ -9,7 +9,7 @@ use Mymo\Core\Models\Video\VideoAds;
 class VideoAdsController extends Controller
 {
     public function index() {
-        return view('backend.setting.video_ads.index');
+        return view('mymo_core::backend.setting.video_ads.index');
     }
     
     public function getData(Request $request) {
@@ -55,9 +55,9 @@ class VideoAdsController extends Controller
     
     public function form($id = null) {
         $model = VideoAds::firstOrNew(['id' => $id]);
-        return view('backend.setting.video_ads.form', [
+        return view('mymo_core::backend.setting.video_ads.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->name ?: trans('mymo_core::app.add_new')
         ]);
     }
     
@@ -70,12 +70,12 @@ class VideoAdsController extends Controller
             'description' => 'nullable|string|max:300',
             'status' => 'required|in:0,1',
         ], $request, [
-            'name' => trans('app.name'),
-            'title' => trans('app.title'),
-            'url' => trans('app.url'),
-            'video_url' => trans('app.video_url'),
-            'description' => trans('app.description'),
-            'status' => trans('app.status'),
+            'name' => trans('mymo_core::app.name'),
+            'title' => trans('mymo_core::app.title'),
+            'url' => trans('mymo_core::app.url'),
+            'video_url' => trans('mymo_core::app.video_url'),
+            'description' => trans('mymo_core::app.description'),
+            'status' => trans('mymo_core::app.status'),
         ]);
         
         $model = VideoAds::firstOrNew(['id' => $request->post('id')]);
@@ -84,7 +84,7 @@ class VideoAdsController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.setting.video_ads'),
         ]);
     }
@@ -93,14 +93,14 @@ class VideoAdsController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.video_ads')
+            'ids' => trans('mymo_core::app.video_ads')
         ]);
         
         VideoAds::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
 }

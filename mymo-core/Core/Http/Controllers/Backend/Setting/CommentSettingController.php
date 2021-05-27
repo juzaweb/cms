@@ -9,8 +9,8 @@ use Mymo\Core\Http\Controllers\Controller;
 class CommentSettingController extends Controller
 {
     public function index() {
-        return view('backend.setting.comment.index', [
-            'title' => trans('app.comment_setting')
+        return view('mymo_core::backend.setting.comment.index', [
+            'title' => trans('mymo_core::app.comment_setting')
         ]);
     }
     
@@ -21,10 +21,10 @@ class CommentSettingController extends Controller
             'comments_per_page' => 'required|string|max:300',
             'comments_approval' => 'required|string|max:300',
         ], $request, [
-            'comment_able' => trans('app.comment_able'),
-            'comment_type' => trans('app.comment_type'),
-            'comments_per_page' => trans('app.comments_per_page'),
-            'comments_approval' => trans('app.comments_approval'),
+            'comment_able' => trans('mymo_core::app.comment_able'),
+            'comment_type' => trans('mymo_core::app.comment_type'),
+            'comments_per_page' => trans('mymo_core::app.comments_per_page'),
+            'comments_approval' => trans('mymo_core::app.comments_approval'),
         ]);
     
         $configs = $request->only([
@@ -40,7 +40,7 @@ class CommentSettingController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.setting.comment'),
         ]);
     }

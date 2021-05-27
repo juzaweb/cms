@@ -9,7 +9,7 @@ use Mymo\Core\Http\Controllers\Controller;
 class EmailLogsController extends Controller
 {
     public function index() {
-        return view('backend.logs.email');
+        return view('mymo_core::backend.logs.email');
     }
     
     public function getData(Request $request) {
@@ -53,8 +53,8 @@ class EmailLogsController extends Controller
             'ids' => 'required',
             'status' => 'required|in:2,3',
         ], $request, [
-            'ids' => trans('app.email_logs'),
-            'status' => trans('app.status'),
+            'ids' => trans('mymo_core::app.email_logs'),
+            'status' => trans('mymo_core::app.status'),
         ]);
         
         EmailList::whereIn('id', $request->post('ids'))
@@ -64,7 +64,7 @@ class EmailLogsController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
     
@@ -72,14 +72,14 @@ class EmailLogsController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.email_logs')
+            'ids' => trans('mymo_core::app.email_logs')
         ]);
         
         EmailList::destroy($request->post('ids', []));
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
 }

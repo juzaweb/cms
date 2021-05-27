@@ -29,10 +29,10 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        @include('backend.setting.seo.form_left')
+                        @include('mymo_core::backend.setting.seo.form_left')
                     </div>
                     <div class="col-md-6">
-                        @include('backend.setting.seo.form_right')
+                        @include('mymo_core::backend.setting.seo.form_right')
                     </div>
                 </div>
             </div>

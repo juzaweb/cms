@@ -13,14 +13,14 @@ class SystemSettingController extends Controller
             $form = 'general';
         }
         
-        if (!view()->exists('backend.setting.system.form.' . $form)) {
+        if (!view()->exists('mymo_core::backend.setting.system.form.' . $form)) {
             $form = 'general';
         }
         
-        $form_content = view('backend.setting.system.form.' . $form)->render();
+        $form_content = view('mymo_core::backend.setting.system.form.' . $form)->render();
         
-        return view('backend.setting.system.index', [
-            'title' => trans('app.system_setting'),
+        return view('mymo_core::backend.setting.system.index', [
+            'title' => trans('mymo_core::app.system_setting'),
             'form' => $form,
             'form_content' => $form_content,
             'settings' => $this->settingList(),
@@ -42,7 +42,7 @@ class SystemSettingController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.setting.form', [$form]),
         ]);
     }
@@ -53,9 +53,9 @@ class SystemSettingController extends Controller
             'block_ip_type' => 'required',
             'block_ip_list' => 'required',
         ], $request, [
-            'block_ip_status' => trans('app.block_ip_status'),
-            'block_ip_type' => trans('app.block_ip_type'),
-            'block_ip_list' => trans('app.block_ip_list'),
+            'block_ip_status' => trans('mymo_core::app.block_ip_status'),
+            'block_ip_type' => trans('mymo_core::app.block_ip_type'),
+            'block_ip_list' => trans('mymo_core::app.block_ip_list'),
         ]);
         
         $block_ip_status = $request->post('block_ip_status');
@@ -68,18 +68,18 @@ class SystemSettingController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.setting.form', ['blockip']),
         ]);
     }
     
     protected function settingList() {
         return [
-            'general' => trans('app.site_info'),
-            'recaptcha' => trans('app.google_recaptcha'),
-            'player' => trans('app.player'),
-            'blockip' => trans('app.block_ip'),
-            'paid-members' => trans('app.paid_members'),
+            'general' => trans('mymo_core::app.site_info'),
+            'recaptcha' => trans('mymo_core::app.google_recaptcha'),
+            'player' => trans('mymo_core::app.player'),
+            'blockip' => trans('mymo_core::app.block_ip'),
+            'paid-members' => trans('mymo_core::app.paid_members'),
         ];
     }
 }

@@ -5,7 +5,7 @@ Route::group(['prefix' => 'filemanager'], function () {
     
     Route::get('/errors', 'Backend\Filemanager\LfmController@getErrors');
     
-    Route::any('/upload', 'Backend\Filemanager\UploadController@upload')->name('backend.filemanager.upload');
+    Route::any('/upload', 'Backend\Filemanager\UploadController@upload')->name('mymo_core::backend.filemanager.upload');
     
     Route::get('/jsonitems', 'Backend\Filemanager\ItemsController@getItems');
     
