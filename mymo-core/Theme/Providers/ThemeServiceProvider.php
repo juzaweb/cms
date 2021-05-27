@@ -18,9 +18,7 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!File::exists(public_path('themes')) && !File::exists(config('theme.symlink_path')) && config('theme.symlink') && File::exists(config('theme.theme_path'))) {
-            App::make('files')->link(config('theme.theme_path'), config('theme.symlink_path', public_path('themes')));
-        }
+        //
     }
 
     /**
@@ -30,12 +28,11 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //$this->publishConfig();
+        $this->publishConfig();
         $this->registerTheme();
         $this->registerHelper();
         $this->consoleCommand();
         $this->registerMiddleware();
-        $this->loadViewsFrom(__DIR__.'/../Views', 'themevel');
     }
 
     /**
@@ -86,7 +83,7 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function publishConfig()
     {
-        $configPath = realpath(__DIR__.'/../../config/theme.php');
+        $configPath = realpath(__DIR__ . '/../config/theme.php');
 
         $this->publishes([
             $configPath => config_path('theme.php'),

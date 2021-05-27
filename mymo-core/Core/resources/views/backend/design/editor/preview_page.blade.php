@@ -1,7 +1,7 @@
 <section class="theme-editor__preview te-preview__container" component="UI.Preview">
     <header class="te-context-bar">
         <div class="te-top-bar__branding desktop-only hide" bind-show="">
-            <a title="Navigate to themes" aria_label="Navigate to themes" class="te-brand-link" data-no-turbolink="true" href="/admin/themes">
+            <a title="Navigate to themes" aria_label="Navigate to themes" class="te-brand-link" data-no-turbolink="true" href="/admin-cp/themes">
                 <svg class="ui-inline-svg te-brand-logo" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 42">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-sapo"></use>
                 </svg>
@@ -29,10 +29,10 @@
 
                 </ul>
             </div>
+
             <div class="te-top-bar__item te-status-indicator--live desktop-only">
                 Live
             </div>
-
 
         </div>
     </header>
@@ -46,7 +46,7 @@
          data-bind-class=""
          tabindex="0"
          aria-labelledby="theme-editor__iframe-label" data-preview-window="desktop">
-        <iframe id="theme-editor-iframe" class="theme-editor__iframe" scrolling="yes" sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-modals" tabindex="-1" src="{{ route('home') }}">
+        <iframe id="theme-editor-iframe" class="theme-editor__iframe" scrolling="yes" sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-modals" tabindex="-1" src="/">
         </iframe>
     </div>
 </section>
