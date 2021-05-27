@@ -86,7 +86,7 @@
                     </div>
                 </header>
 
-                @include('backend.design.editor.config_option')
+                @include('mymo_core::backend.design.editor.config_option')
 
             </section>
     </div>
@@ -109,7 +109,7 @@
         }
     </style>
 
-    @include('backend.design.editor.preview_page')
+    @include('mymo_core::backend.design.editor.preview_page')
 
     <div class="theme-editor__spinner" component="UI.Spinner">
         <div class="next-spinner">

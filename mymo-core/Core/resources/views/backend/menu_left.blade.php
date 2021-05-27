@@ -1,6 +1,6 @@
 <ul class="cui__menuLeft__navigation">
     @php
-        $items = \Mymo\Core\Helpers\MenuCollection::make(apply_filters('admin_menu', []));
+        $items = \Mymo\Core\Helpers\MenuCollection::make(apply_filters('mymo.admin_menu', []));
     @endphp
 
     @foreach($items as $item)
@@ -15,10 +15,10 @@
                 <ul class="cui__menuLeft__navigation">
                     @foreach($item->getChildrens() as $child)
                         <li class="cui__menuLeft__item cui__menuLeft__item-{{ $child->get('url') }}">
-                            <a class="cui__menuLeft__item__link" href="{{ url('admin-cp/' . $child->get('url')) }}">
+                            <a class="cui__menuLeft__item__link" href="{{ url('admin-cp/' . $child->get('url')) }}" @if($child->get('turbolinks') == false) data-turbolinks="false" @endif>
                                 <span class="cui__menuLeft__item__title">{{ trans($child->get('title')) }}</span>
 
-                                @if($icon = $item->get('icon'))
+                                @if($icon = $child->get('icon'))
                                 <i class="cui__menuLeft__item__icon {{ $icon }}"></i>
                                 @endif
                             </a>

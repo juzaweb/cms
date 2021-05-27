@@ -23,7 +23,7 @@ return [
     |
     */
 
-    'view' => 'backend.breadcrumbs',
+    'view' => 'mymo_core::backend.breadcrumbs',
 
     /*
     |--------------------------------------------------------------------------

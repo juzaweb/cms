@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Mail;
 class EmailSettingController extends Controller
 {
     public function index() {
-        return view('backend.setting.email.index', [
-            'title' => trans('app.email_setting')
+        return view('mymo_core::backend.setting.email.index', [
+            'title' => trans('mymo_core::app.email_setting')
         ]);
     }
     
@@ -20,7 +20,7 @@ class EmailSettingController extends Controller
         $this->validateRequest([
             'email' => 'required|email',
         ], $request, [
-            'email' => trans('app.email'),
+            'email' => trans('mymo_core::app.email'),
         ]);
         
         $emails = [$request->post('email')];
@@ -39,7 +39,7 @@ class EmailSettingController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.send_email_successfully'),
+            'message' => trans('mymo_core::app.send_email_successfully'),
             'redirect' => route('admin.setting.email'),
         ]);
     }

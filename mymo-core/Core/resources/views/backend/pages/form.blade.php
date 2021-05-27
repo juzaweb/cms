@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('mymo_core::layouts.backend')
 
 @section('title', $title)
 
@@ -51,7 +51,7 @@
                             </select>
                         </div>
 
-                        @include('backend.seo_form')
+                        @include('mymo_core::backend.seo_form')
                     </div>
 
                     <div class="col-md-4">

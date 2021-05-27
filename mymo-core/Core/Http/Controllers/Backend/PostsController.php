@@ -12,7 +12,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        return view('backend.posts.index');
+        return view('mymo_core::backend.posts.index');
     }
     
     public function getData(Request $request)
@@ -63,9 +63,9 @@ class PostsController extends Controller
             ->get();
         $tags = Tags::whereIn('id', explode(',', $model->tags))->get();
         
-        return view('backend.posts.form', [
+        return view('mymo_core::backend.posts.form', [
             'model' => $model,
-            'title' => $model->title ?: trans('app.add_new'),
+            'title' => $model->title ?: trans('mymo_core::app.add_new'),
             'categories' => $categories,
             'tags' => $tags
         ]);
@@ -79,10 +79,10 @@ class PostsController extends Controller
             'thumbnail' => 'nullable|string|max:250',
             'category' => 'nullable|string|max:200',
         ], $request, [
-            'title' => trans('app.title'),
-            'status' => trans('app.status'),
-            'thumbnail' => trans('app.thumbnail'),
-            'category' => trans('app.categories'),
+            'title' => trans('mymo_core::app.title'),
+            'status' => trans('mymo_core::app.status'),
+            'thumbnail' => trans('mymo_core::app.thumbnail'),
+            'category' => trans('mymo_core::app.categories'),
         ]);
         
         $category = $request->post('categories', []);
@@ -96,7 +96,7 @@ class PostsController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.posts'),
         ]);
     }
@@ -106,14 +106,14 @@ class PostsController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.posts')
+            'ids' => trans('mymo_core::app.posts')
         ]);
         
         Posts::destroy($request->ids);
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
 }

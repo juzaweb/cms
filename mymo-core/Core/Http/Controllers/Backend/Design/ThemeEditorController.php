@@ -5,14 +5,14 @@ namespace Mymo\Core\Http\Controllers\Backend\Design;
 use Mymo\Core\Models\Config;
 use Mymo\Core\Models\ThemeConfig;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class ThemeEditorController extends Controller
+class ThemeEditorController extends BackendController
 {
     public function index() {
         $config = include resource_path('views/themes/mymo/config.php');
         
-        return view('backend.design.editor.index', [
+        return view('mymo_core::backend.design.editor.index', [
             'config' => $config,
         ]);
     }
@@ -34,7 +34,7 @@ class ThemeEditorController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
         ]);
     }
 }

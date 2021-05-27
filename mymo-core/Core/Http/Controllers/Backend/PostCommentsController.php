@@ -9,7 +9,7 @@ use Mymo\Core\Models\Comments;
 class PostCommentsController extends Controller
 {
     public function index() {
-        return view('backend.post_comments.index');
+        return view('mymo_core::backend.post_comments.index');
     }
     
     public function getData(Request $request) {
@@ -69,14 +69,14 @@ class PostCommentsController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.post_comments')
+            'ids' => trans('mymo_core::app.post_comments')
         ]);
         
         Comments::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
     
@@ -85,8 +85,8 @@ class PostCommentsController extends Controller
             'ids' => 'required',
             'status' => 'required|in:0,1,2,3',
         ], $request, [
-            'ids' => trans('app.post_comments'),
-            'status' => trans('app.status'),
+            'ids' => trans('mymo_core::app.post_comments'),
+            'status' => trans('mymo_core::app.status'),
         ]);
         
         $status = $request->post('status');
@@ -107,7 +107,7 @@ class PostCommentsController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.updated_status_successfully'),
+            'message' => trans('mymo_core::app.updated_status_successfully'),
         ]);
     }
 }

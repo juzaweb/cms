@@ -9,7 +9,7 @@ use Mymo\Core\Models\Video\VideoQualities;
 class VideoQualityController extends Controller
 {
     public function index() {
-        return view('backend.setting.video_qualities.index');
+        return view('mymo_core::backend.setting.video_qualities.index');
     }
     
     public function getData(Request $request) {
@@ -47,9 +47,9 @@ class VideoQualityController extends Controller
     
     public function form($id = null) {
         $model = VideoQualities::firstOrNew(['id' => $id]);
-        return view('backend.setting.video_qualities.form', [
+        return view('mymo_core::backend.setting.video_qualities.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->name ?: trans('mymo_core::app.add_new')
         ]);
     }
     
@@ -58,8 +58,8 @@ class VideoQualityController extends Controller
             'name' => 'required|string|max:250|unique:video_qualities,name',
             'default' => 'required|in:0,1',
         ], $request, [
-            'name' => trans('app.name'),
-            'default' => trans('app.default'),
+            'name' => trans('mymo_core::app.name'),
+            'default' => trans('mymo_core::app.default'),
         ]);
         
         $model = VideoQualities::firstOrNew(['id' => $request->post('id')]);
@@ -76,7 +76,7 @@ class VideoQualityController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.video_qualities'),
         ]);
     }
@@ -85,14 +85,14 @@ class VideoQualityController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.video_qualities')
+            'ids' => trans('mymo_core::app.video_qualities')
         ]);
         
         VideoQualities::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
 }

@@ -85,11 +85,11 @@
                                         @foreach($card['input_items'] as $iinput => $input)
                                             @if(in_array($input['element'], ['input', 'textarea', 'media', 'slider', 'select_genre', 'select_genres']))
 
-                                                @include('backend.design.editor.boxs.input_box')
+                                                @include('mymo_core::backend.design.editor.boxs.input_box')
 
                                             @else
 
-                                                @include('backend.design.editor.boxs.'. $input['element'] .'_box')
+                                                @include('mymo_core::backend.design.editor.boxs.'. $input['element'] .'_box')
 
                                             @endif
 

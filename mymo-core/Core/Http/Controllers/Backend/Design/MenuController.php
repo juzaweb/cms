@@ -8,9 +8,9 @@ use Mymo\Core\Models\Menu;
 use Mymo\Core\Models\Pages;
 use Mymo\Core\Models\Category\Types;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class MenuController extends Controller
+class MenuController extends BackendController
 {
     public function index($id = null) {
         if (empty($id)) {
@@ -30,7 +30,7 @@ class MenuController extends Controller
         $pages = Pages::where('status', '=', 1)
             ->get(['id', 'name']);
         
-        return view('backend.design.menu.index', [
+        return view('mymo_core::backend.design.menu.index', [
             'menu' => $menu,
             'genres' => $genres,
             'countries' => $countries,
@@ -43,7 +43,7 @@ class MenuController extends Controller
         $this->validateRequest([
             'name' => 'required|string|max:250',
         ], $request, [
-            'name' => trans('app.name')
+            'name' => trans('mymo_core::app.name')
         ]);
     
         $model = Menu::firstOrNew(['id' => $request->post('id')]);
@@ -52,7 +52,7 @@ class MenuController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.design.menu.id', [$model->id]),
         ]);
     }
@@ -62,8 +62,8 @@ class MenuController extends Controller
             'name' => 'required|string|max:250',
             'content' => 'required',
         ], $request, [
-            'name' => trans('app.name'),
-            'content' => trans('app.menu'),
+            'name' => trans('mymo_core::app.name'),
+            'content' => trans('mymo_core::app.menu'),
         ]);
         
         $model = Menu::firstOrNew(['id' => $request->post('id')]);
@@ -72,7 +72,7 @@ class MenuController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.design.menu.id', [$model->id]),
         ]);
     }
@@ -81,7 +81,7 @@ class MenuController extends Controller
         $this->validateRequest([
             'type' => 'required',
         ], $request, [
-            'type' => trans('app.type')
+            'type' => trans('mymo_core::app.type')
         ]);
         
         $type = $request->post('type');

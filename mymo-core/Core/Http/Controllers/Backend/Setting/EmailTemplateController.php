@@ -9,23 +9,23 @@ use Mymo\Core\Models\Email\EmailTemplates;
 class EmailTemplateController extends Controller
 {
     public function index() {
-        return view('backend.setting.email_templates.index');
+        return view('mymo_core::backend.setting.email_templates.index');
     }
     
     public function form($id = null) {
         $model = EmailTemplates::findOrFail($id);
-        return view('backend.setting.email_templates.form', [
+        return view('mymo_core::backend.setting.email_templates.form', [
             'model' => $model,
-            'title' => $model->subject ?: trans('app.add_new')
+            'title' => $model->subject ?: trans('mymo_core::app.add_new')
         ]);
     }
     
     public function editLayout() {
         $code = file_get_contents($this->getPathEmailLayout());
         $model = new \stdClass();
-        $model->title = trans('app.edit_layout');
+        $model->title = trans('mymo_core::app.edit_layout');
         $model->code = $code;
-        return view('backend.setting.email_templates.edit_layout', [
+        return view('mymo_core::backend.setting.email_templates.edit_layout', [
             'model' => $model
         ]);
     }
@@ -72,7 +72,7 @@ class EmailTemplateController extends Controller
         $this->validateRequest([
             'subject' => 'required|string|max:300',
         ], $request, [
-            'subject' => trans('app.name'),
+            'subject' => trans('mymo_core::app.name'),
         ]);
         
         $model = EmailTemplates::findOrFail($request->post('id'));
@@ -81,7 +81,7 @@ class EmailTemplateController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.setting.email_templates'),
         ]);
     }
@@ -95,7 +95,7 @@ class EmailTemplateController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.setting.email_templates.edit_layout'),
         ]);
     }

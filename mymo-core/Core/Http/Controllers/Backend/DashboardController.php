@@ -13,6 +13,11 @@ class DashboardController extends BackendController
 {
     public function index()
     {
+        return redirect()->route('admin.dashboard');
+    }
+
+    public function dashboard()
+    {
         /*$count_movie = Movies::where('status', '=', 1)
             ->where('tv_series', '=', 0)
             ->count('id');
@@ -23,7 +28,7 @@ class DashboardController extends BackendController
             ->count('id');
         $count_page = Pages::where('status', '=', 1)
             ->count('id');
-        
+
         return view('mymo_core::backend.dashboard', [
             //'count_movie' => $count_movie,
             //'count_tvserie' => $count_tvserie,
@@ -89,7 +94,7 @@ class DashboardController extends BackendController
     {
         $max_day = date('t');
         $result = [];
-        $result[] = [trans('app.day'), trans('app.views')];
+        $result[] = [trans('mymo_core::app.day'), trans('mymo_core::app.views')];
         for ($i=1;$i<=$max_day;$i++) {
             $day = $i < 10 ? '0'. $i : $i;
             $result[] = [(string) $day, (int) $this->countViewByDay(date('Y-m-' . $day))];

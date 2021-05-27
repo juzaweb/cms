@@ -9,7 +9,7 @@ use Mymo\Core\Models\PostCategories;
 class PostCategoriesController extends Controller
 {
     public function index() {
-        return view('backend.post_categories.index');
+        return view('mymo_core::backend.post_categories.index');
     }
     
     public function getData(Request $request) {
@@ -53,9 +53,9 @@ class PostCategoriesController extends Controller
     
     public function form($id = null) {
         $model = PostCategories::firstOrNew(['id' => $id]);
-        return view('backend.post_categories.form', [
+        return view('mymo_core::backend.post_categories.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->name ?: trans('mymo_core::app.add_new')
         ]);
     }
     
@@ -66,10 +66,10 @@ class PostCategoriesController extends Controller
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
         ], $request, [
-            'name' => trans('app.name'),
-            'description' => trans('app.description'),
-            'status' => trans('app.status'),
-            'thumbnail' => trans('app.thumbnail'),
+            'name' => trans('mymo_core::app.name'),
+            'description' => trans('mymo_core::app.description'),
+            'status' => trans('mymo_core::app.status'),
+            'thumbnail' => trans('mymo_core::app.thumbnail'),
         ]);
         
         $addtype = $request->post('addtype');
@@ -83,7 +83,7 @@ class PostCategoriesController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.post_categories'),
         ]);
     }
@@ -92,14 +92,14 @@ class PostCategoriesController extends Controller
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.post_categories')
+            'ids' => trans('mymo_core::app.post_categories')
         ]);
         
         PostCategories::destroy($request->ids);
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('mymo_core::app.deleted_successfully'),
         ]);
     }
 }
