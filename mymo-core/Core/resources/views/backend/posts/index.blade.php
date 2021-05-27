@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('mymo_core::layouts.backend')
 
 @section('title', trans('mymo_core::app.posts'))
 
