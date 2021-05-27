@@ -44,11 +44,41 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
+    trans('mymo_core::app.design'),
+    'design',
+    [
+        'icon' => 'fa fa-layout',
+        'position' => 40
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.design'),
+    'design.menu',
+    [
+        'icon' => 'fa fa-layout',
+        'position' => 1,
+        'parent' => 'design',
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.editor'),
+    'design.editor',
+    [
+        'icon' => 'fa fa-layout',
+        'position' => 1,
+        'parent' => 'design',
+        'turbolinks' => false,
+    ]
+);
+
+HookAction::addAdminMenu(
     trans('mymo_core::app.users'),
     'users',
     [
         'icon' => 'fa fa-users',
-        'position' => 60
+        'position' => 50
     ]
 );
 
@@ -86,7 +116,7 @@ HookAction::addAdminMenu(
     'logs',
     [
         'icon' => 'fa fa-users',
-        'position' => 60
+        'position' => 70
     ]
 );
 

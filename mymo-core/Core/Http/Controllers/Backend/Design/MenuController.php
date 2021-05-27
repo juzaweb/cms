@@ -8,9 +8,9 @@ use Mymo\Core\Models\Menu;
 use Mymo\Core\Models\Pages;
 use Mymo\Core\Models\Category\Types;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class MenuController extends Controller
+class MenuController extends BackendController
 {
     public function index($id = null) {
         if (empty($id)) {

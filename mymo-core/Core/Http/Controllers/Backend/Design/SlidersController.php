@@ -4,9 +4,9 @@ namespace Mymo\Core\Http\Controllers\Backend\Design;
 
 use Mymo\Core\Models\Sliders;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class SlidersController extends Controller
+class SlidersController extends BackendController
 {
     public function index() {
         return view('mymo_core::backend.design.sliders.index');
