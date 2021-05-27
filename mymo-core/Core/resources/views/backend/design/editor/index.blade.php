@@ -24,14 +24,14 @@
             'hide': '@lang('mymo_core::app.hide')',
         }
     </script>
-    <link rel="stylesheet" href="{{ asset('css/theme-editor.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/css/theme-editor.css') }}">
     <!--[if lt IE 9]>
     <script src="{{ asset('styles/js/html5shiv.min.js') }}"></script>
     <script src="{{ asset('styles/js/respond.min.js') }}"></script>
     <![endif]-->
 
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/theme-editor.js') }}"></script>
+    <script src="{{ asset('styles/js/app.js') }}"></script>
+    <script src="{{ asset('styles/js/theme-editor.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ajaxStart(function () {

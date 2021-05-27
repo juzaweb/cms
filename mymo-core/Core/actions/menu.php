@@ -53,7 +53,17 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.design'),
+    trans('mymo_core::app.themes'),
+    'design.themes',
+    [
+        'icon' => 'fa fa-layout',
+        'position' => 1,
+        'parent' => 'design',
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.menu'),
     'design.menu',
     [
         'icon' => 'fa fa-layout',

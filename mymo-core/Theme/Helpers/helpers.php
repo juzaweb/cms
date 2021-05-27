@@ -1,5 +1,7 @@
 <?php
 
+use Mymo\Theme\Facades\Theme;
+
 if (!function_exists('themes')) {
     /**
      * Generate an asset path for the theme.
@@ -62,9 +64,7 @@ if (!function_exists('current_theme_name')) {
     /**
      * Get current active theme name only or themeinfo collection.
      *
-     * @param bool $collection
-     *
-     * @return null|ThemeInfo
+     * @return null|stdClass
      */
     function current_theme_name()
     {
@@ -78,7 +78,7 @@ if (!function_exists('current_theme')) {
      *
      * @param bool $collection
      *
-     * @return null|ThemeInfo
+     * @return null|stdClass
      */
     function current_theme($collection = false)
     {
