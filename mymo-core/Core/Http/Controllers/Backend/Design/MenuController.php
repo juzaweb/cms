@@ -21,20 +21,20 @@ class MenuController extends BackendController
         }
         
         $menu = Menu::where('id', '=', $id)->first();
-        $genres = Genres::where('status', '=', 1)
+        /*$genres = Genres::where('status', '=', 1)
             ->get(['id', 'name']);
         $countries = Countries::where('status', '=', 1)
             ->get(['id', 'name']);
         $types = Types::where('status', '=', 1)
-            ->get(['id', 'name']);
+            ->get(['id', 'name']);*/
         $pages = Pages::where('status', '=', 1)
             ->get(['id', 'name']);
         
         return view('mymo_core::backend.design.menu.index', [
             'menu' => $menu,
-            'genres' => $genres,
+            /*'genres' => $genres,
             'countries' => $countries,
-            'types' => $types,
+            'types' => $types,*/
             'pages' => $pages,
         ]);
     }
@@ -88,7 +88,7 @@ class MenuController extends BackendController
         $items = $request->post('items');
         
         switch ($type) {
-            case 'genre':
+            /*case 'genre':
                 $items = Genres::where('status', '=', 1)
                     ->whereIn('id', $items)
                     ->get(['id', 'name', 'slug']);
@@ -135,7 +135,7 @@ class MenuController extends BackendController
                     ];
                 }
     
-                return response()->json($result);
+                return response()->json($result);*/
             case 'page':
                 $items = Pages::whereIn('id', $items)
                     ->get(['id', 'name', 'slug']);
