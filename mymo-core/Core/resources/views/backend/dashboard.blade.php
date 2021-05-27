@@ -53,16 +53,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div id="curve_chart" style="width: 100%; height: 400px"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="row mt-3">
             <div class="col-md-6">
                 <div class="card">
@@ -87,7 +77,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>@lang('mymo_core::app.new_notifications')</h5>
+                        <h5>@lang('mymo_core::app.news')</h5>
                     </div>
 
                     <div class="card-body">

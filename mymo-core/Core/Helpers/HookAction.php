@@ -17,4 +17,17 @@ use Mymo\Core\Traits\MenuHookAction;
 class HookAction
 {
     use MenuHookAction;
+
+    /**
+     * Add hook actions folder
+     *
+     * @param string $path
+     **/
+    public function loadActionForm($path)
+    {
+        add_filters('mymo.actions', function ($items) use ($path) {
+            $items[] = $path;
+            return collect($items)->unique();
+        });
+    }
 }

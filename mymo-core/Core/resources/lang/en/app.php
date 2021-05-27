@@ -403,5 +403,6 @@ return [
   'priority' => 'Priority',
   'base_url' => 'Base Url',
   'server_stream' => 'Server Stream',
+  'news' => 'News',
 ];
 

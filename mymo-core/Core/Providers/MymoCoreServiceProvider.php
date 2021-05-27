@@ -14,6 +14,7 @@ namespace Mymo\Core\Providers;
 
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Mymo\Core\Helpers\HookAction;
 use Mymo\Security\Providers\MymoSecurityServiceProvider;
 use Mymo\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
@@ -37,6 +38,7 @@ class MymoCoreServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerProviders();
+        $this->registerSingleton();
     }
 
     protected function bootMigrations()
@@ -59,7 +61,15 @@ class MymoCoreServiceProvider extends ServiceProvider
         }
 
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(HookActionServiceProvider::class);
         $this->app->register(MymoSecurityServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
+    }
+
+    protected function registerSingleton()
+    {
+        $this->app->singleton('mymo.hook', function () {
+            return new HookAction();
+        });
     }
 }
