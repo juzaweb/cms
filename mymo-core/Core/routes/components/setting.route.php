@@ -18,7 +18,7 @@ Route::group(['prefix' => 'setting/email'], function () {
     Route::post('/test', 'Backend\Setting\EmailSettingController@sendEmailTest')->name('admin.setting.email.test');
 });
 
-Route::group(['prefix' => 'setting/email-templates'], function () {
+Route::group(['prefix' => 'setting/email-template'], function () {
     Route::get('/', 'Backend\Setting\EmailTemplateController@index')->name('admin.setting.email_templates');
     
     Route::get('/getdata', 'Backend\Setting\EmailTemplateController@getData')->name('admin.setting.email_templates.getdata');
@@ -32,18 +32,18 @@ Route::group(['prefix' => 'setting/email-templates'], function () {
     Route::post('/edit-layout', 'Backend\Setting\EmailTemplateController@saveLayout')->name('admin.setting.email_templates.edit_layout.save');
 });
 
-Route::group(['prefix' => 'setting/languages'], function () {
-    Route::get('/', 'Backend\Setting\LanguagesController@index')->name('admin.setting.languages');
+Route::group(['prefix' => 'setting/language'], function () {
+    Route::get('/', 'Backend\Setting\LanguageController@index')->name('admin.setting.languages');
     
-    Route::get('/getdata', 'Backend\Setting\LanguagesController@getData')->name('admin.setting.languages.getdata');
+    Route::get('/getdata', 'Backend\Setting\LanguageController@getData')->name('admin.setting.languages.getdata');
     
-    Route::post('/save', 'Backend\Setting\LanguagesController@save')->name('admin.setting.languages.save');
+    Route::post('/save', 'Backend\Setting\LanguageController@save')->name('admin.setting.languages.save');
     
-    Route::post('/remove', 'Backend\Setting\LanguagesController@remove')->name('admin.setting.languages.remove');
+    Route::post('/remove', 'Backend\Setting\LanguageController@remove')->name('admin.setting.languages.remove');
     
-    Route::post('/sync', 'Backend\Setting\LanguagesController@syncLanguage')->name('admin.setting.languages.sync');
+    Route::post('/sync', 'Backend\Setting\LanguageController@syncLanguage')->name('admin.setting.languages.sync');
     
-    Route::post('/set-default', 'Backend\Setting\LanguagesController@setDefault')->name('admin.setting.languages.default');
+    Route::post('/set-default', 'Backend\Setting\LanguageController@setDefault')->name('admin.setting.languages.default');
 });
 
 Route::group(['prefix' => 'setting/translate'], function () {

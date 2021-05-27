@@ -5,10 +5,10 @@ namespace Mymo\Core\Http\Controllers\Backend\Setting;
 use Mymo\Core\Models\Translation;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Languages;
 
-class LanguagesController extends Controller
+class LanguageController extends BackendController
 {
     public function index() {
         return view('mymo_core::backend.setting.languages.index');

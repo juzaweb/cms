@@ -3,10 +3,10 @@
 namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Ads;
 
-class AdsSettingController extends Controller
+class AdsSettingController extends BackendController
 {
     public function index() {
         return view('mymo_core::backend.setting.ads.index');

@@ -2,13 +2,14 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Config;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
 
-class SystemSettingController extends Controller
+class SystemSettingController extends BackendController
 {
-    public function index($form = null) {
+    public function index($form = null)
+    {
         if (empty($form)) {
             $form = 'general';
         }
@@ -27,7 +28,8 @@ class SystemSettingController extends Controller
         ]);
     }
     
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $configs = $request->only(Config::getConfigs());
         foreach ($configs as $key => $config) {
             if ($request->has($key)) {
@@ -47,7 +49,8 @@ class SystemSettingController extends Controller
         ]);
     }
     
-    public function saveBlockIp(Request $request) {
+    public function saveBlockIp(Request $request)
+    {
         $this->validateRequest([
             'block_ip_status' => 'required',
             'block_ip_type' => 'required',
@@ -73,13 +76,14 @@ class SystemSettingController extends Controller
         ]);
     }
     
-    protected function settingList() {
+    protected function settingList()
+    {
         return [
             'general' => trans('mymo_core::app.site_info'),
             'recaptcha' => trans('mymo_core::app.google_recaptcha'),
             'player' => trans('mymo_core::app.player'),
-            'blockip' => trans('mymo_core::app.block_ip'),
-            'paid-members' => trans('mymo_core::app.paid_members'),
+            //'blockip' => trans('mymo_core::app.block_ip'),
+            //'paid-members' => trans('mymo_core::app.paid_members'),
         ];
     }
 }

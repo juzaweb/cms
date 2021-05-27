@@ -45,7 +45,7 @@ trait MenuHookAction
         ];
         $item = array_merge($opts, $args);
 
-        return add_filters('admin_menu', function ($menu) use ($item) {
+        return add_filters('mymo.admin_menu', function ($menu) use ($item) {
             if ($item['parent']) {
                 $menu[$item['parent']]['children'][$item['key']] = $item;
             } else {
@@ -82,7 +82,7 @@ trait MenuHookAction
             throw new \Exception('Args component is required');
         }
 
-        add_filters('tadcms.menu_blocks', function ($items) use ($key, $args) {
+        add_filters('mymo.menu_blocks', function ($items) use ($key, $args) {
             array_merge([
                 'label' => '',
                 'component' => '',

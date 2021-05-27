@@ -4,9 +4,9 @@ namespace Mymo\Core\Http\Controllers\Backend\Logs;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Models\Email\EmailList;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class EmailLogsController extends Controller
+class EmailLogsController extends BackendController
 {
     public function index() {
         return view('mymo_core::backend.logs.email');

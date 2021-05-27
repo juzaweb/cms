@@ -51,3 +51,51 @@ HookAction::addAdminMenu(
         'position' => 60
     ]
 );
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.setting'),
+    'setting',
+    [
+        'icon' => 'fa fa-cogs',
+        'position' => 60
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.system_setting'),
+    'setting.system',
+    [
+        'icon' => 'fa fa-cogs',
+        'position' => 1,
+        'parent' => 'setting',
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.language'),
+    'setting.language',
+    [
+        'icon' => 'fa fa-cogs',
+        'position' => 1,
+        'parent' => 'setting',
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.logs'),
+    'logs',
+    [
+        'icon' => 'fa fa-users',
+        'position' => 60
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.email_logs'),
+    'logs.email',
+    [
+        'icon' => 'fa fa-cogs',
+        'position' => 1,
+        'parent' => 'logs',
+    ]
+);

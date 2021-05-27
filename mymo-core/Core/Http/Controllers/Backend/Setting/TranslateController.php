@@ -5,9 +5,9 @@ namespace Mymo\Core\Http\Controllers\Backend\Setting;
 use Mymo\Core\Models\Languages;
 use Mymo\Core\Models\Translation;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class TranslateController extends Controller
+class TranslateController extends BackendController
 {
     public function index($lang) {
         Languages::where('key', '=', $lang)->firstOrFail();
