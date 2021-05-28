@@ -2,11 +2,11 @@
 
 namespace App\Core\Http\Controllers\Backend;
 
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
-use App\Core\Models\ServerStream;
+use Modules\Movie\Models\ServerStream;
 
-class ServerStreamController extends Controller
+class ServerStreamController extends BackendController
 {
     public function index() {
         return view('backend.server-stream.index');

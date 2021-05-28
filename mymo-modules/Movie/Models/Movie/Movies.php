@@ -5,10 +5,10 @@ namespace App\Core\Models\Movie;
 use App\Core\Models\Category\Countries;
 use App\Core\Models\Category\Genres;
 use App\Core\Models\Category\Tags;
-use App\Core\Traits\UseChangeBy;
-use App\Core\Traits\UseMetaSeo;
-use App\Core\Traits\UseSlug;
-use App\Core\Traits\UseThumbnail;
+use Mymo\Core\Traits\UseChangeBy;
+use Mymo\Core\Traits\UseMetaSeo;
+use Mymo\Core\Traits\UseSlug;
+use Mymo\Core\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 

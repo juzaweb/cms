@@ -2,8 +2,8 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\FrontendController;
-use App\Core\Models\Posts;
+use Mymo\Core\Http\Controllers\FrontendController;
+use Modules\Movie\Models\Posts;
 use Illuminate\Support\Facades\Cookie;
 
 class PostController extends FrontendController

@@ -3,10 +3,10 @@
 namespace App\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
-use App\Core\Models\Category\Stars;
+use Mymo\Core\Http\Controllers\BackendController;
+use Modules\Movie\Models\Category\Stars;
 
-class StarsController extends Controller
+class StarsController extends BackendController
 {
     public function index() {
         return view('backend.stars.index');

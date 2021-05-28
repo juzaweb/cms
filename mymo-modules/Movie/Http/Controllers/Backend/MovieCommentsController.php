@@ -2,11 +2,11 @@
 
 namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Core\Models\Movie\MovieComments;
+use Modules\Movie\Models\Movie\MovieComments;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class MovieCommentsController extends Controller
+class MovieCommentsController extends BackendController
 {
     public function index() {
         return view('backend.movie_comments.index');

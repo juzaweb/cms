@@ -2,11 +2,11 @@
 
 namespace App\Core\Http\Controllers\Backend;
 
-use App\Core\Models\Category\Genres;
+use Modules\Movie\Models\Category\Genres;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class GenresController extends Controller
+class GenresController extends BackendController
 {
     public function index() {
         return view('backend.genres.index');

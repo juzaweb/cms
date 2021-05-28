@@ -3,10 +3,10 @@
 namespace App\Core\Http\Controllers\PaidMembers\Backend;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
-use App\Core\Models\PaidMembers\Package;
+use Mymo\Core\Http\Controllers\BackendController;
+use Modules\Movie\Models\PaidMembers\Package;
 
-class PackageController extends Controller
+class PackageController extends BackendController
 {
     public function index() {
         return view('paid-members.backend.package.index');

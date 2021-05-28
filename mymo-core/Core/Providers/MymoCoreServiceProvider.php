@@ -15,7 +15,7 @@ namespace Mymo\Core\Providers;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Mymo\Core\Helpers\HookAction;
-use Mymo\Security\Providers\MymoSecurityServiceProvider;
+use Mymo\Performance\Providers\MymoPerformanceServiceProvider;
 use Mymo\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -62,7 +62,7 @@ class MymoCoreServiceProvider extends ServiceProvider
 
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(HookActionServiceProvider::class);
-        $this->app->register(MymoSecurityServiceProvider::class);
+        $this->app->register(MymoPerformanceServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
     }
 

@@ -1,12 +1,21 @@
 <?php
+/**
+ * MYMO CMS - Free Laravel CMS
+ *
+ * @package mymocms/mymocms
+ * @author The Anh Dang
+ *
+ * Developed based on Laravel Framework
+ * Github: https://github.com/mymocms/mymocms
+ */
 
-Route::group(['prefix' => 'design/themes'], function () {
+Route::group(['prefix' => 'appearance/themes'], function () {
     Route::get('/', 'Backend\Design\ThemesController@index')->name('admin.design.themes');
     
     Route::post('/save', 'Backend\Design\ThemesController@save')->name('admin.design.themes.save');
 });
 
-Route::group(['prefix' => 'design/menu'], function () {
+Route::group(['prefix' => 'appearance/menu'], function () {
     Route::get('/', 'Backend\Design\MenuController@index')->name('admin.design.menu');
     
     Route::get('/{id}', 'Backend\Design\MenuController@index')->name('admin.design.menu.id');
@@ -18,7 +27,7 @@ Route::group(['prefix' => 'design/menu'], function () {
     Route::post('/get-data', 'Backend\Design\MenuController@getItems')->name('admin.design.menu.items');
 });
 
-Route::group(['prefix' => 'design/sliders'], function () {
+Route::group(['prefix' => 'appearance/sliders'], function () {
     Route::get('/', 'Backend\Design\SlidersController@index')->name('admin.design.sliders');
     
     Route::get('/getdata', 'Backend\Design\SlidersController@getData')->name('admin.design.sliders.getdata');
@@ -32,7 +41,7 @@ Route::group(['prefix' => 'design/sliders'], function () {
     Route::post('/remove', 'Backend\Design\SlidersController@remove')->name('admin.design.sliders.remove');
 });
 
-Route::group(['prefix' => 'design/editor'], function () {
+Route::group(['prefix' => 'appearance/editor'], function () {
     Route::get('/', 'Backend\Design\ThemeEditorController@index')->name('admin.design.editor');
     
     Route::post('/save', 'Backend\Design\ThemeEditorController@save')->name('admin.design.editor.save');

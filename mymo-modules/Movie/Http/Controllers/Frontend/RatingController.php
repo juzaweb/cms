@@ -2,9 +2,9 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\FrontendController;
-use App\Core\Models\Movie\MovieRating;
-use App\Core\Models\Movie\Movies;
+use Mymo\Core\Http\Controllers\FrontendController;
+use Modules\Movie\Models\Movie\MovieRating;
+use Modules\Movie\Models\Movie\Movies;
 use Illuminate\Http\Request;
 
 class RatingController extends FrontendController

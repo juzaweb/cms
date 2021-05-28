@@ -3,10 +3,10 @@
 namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Video\VideoQualities;
 
-class VideoQualityController extends Controller
+class VideoQualityController extends BackendController
 {
     public function index() {
         return view('mymo_core::backend.setting.video_qualities.index');

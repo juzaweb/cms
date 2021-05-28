@@ -2,10 +2,10 @@
 
 namespace App\Core\Http\Controllers\Frontend\Stream;
 
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Crypt;
 
-class StreamController extends Controller
+class StreamController extends BackendController
 {
     public function stream($file, $quality = '360p')
     {

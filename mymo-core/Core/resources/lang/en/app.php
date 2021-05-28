@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
   'home' => 'Home',
   'dashboard' => 'Dashboard',
@@ -405,5 +405,6 @@ return [
   'server_stream' => 'Server Stream',
   'news' => 'News',
   'updates' => 'Updates',
+  'appearance' => 'Appearance',
 ];
 

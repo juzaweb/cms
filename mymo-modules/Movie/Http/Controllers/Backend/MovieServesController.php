@@ -2,12 +2,12 @@
 
 namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Core\Models\Movie\Movies;
-use App\Core\Models\Video\VideoServers;
+use Modules\Movie\Models\Movie\Movies;
+use Modules\Movie\Models\Video\VideoServers;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class MovieServesController extends Controller
+class MovieServesController extends BackendController
 {
     public function index($page_type, $movie_id) {
         $movie = Movies::where('id', '=', $movie_id)->firstOrFail();

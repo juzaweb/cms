@@ -2,9 +2,9 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Models\Category\Countries;
-use App\Core\Models\Movie\Movies;
-use App\Core\Http\Controllers\FrontendController;
+use Modules\Movie\Models\Category\Countries;
+use Modules\Movie\Models\Movie\Movies;
+use Mymo\Core\Http\Controllers\FrontendController;
 
 class CountryController extends FrontendController
 {

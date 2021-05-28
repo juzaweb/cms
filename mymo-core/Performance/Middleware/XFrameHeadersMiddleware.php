@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Security\Middleware;
+namespace Mymo\Performance\Middleware;
 
 use Closure;
 

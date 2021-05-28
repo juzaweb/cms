@@ -3,16 +3,16 @@
 namespace App\Core\Http\Controllers\Backend;
 
 use App\Core\Helpers\TmdbApi;
-use App\Core\Models\Category\Countries;
-use App\Core\Models\Files;
-use App\Core\Models\Category\Genres;
-use App\Core\Models\Movie\Movies;
-use App\Core\Models\Category\Stars;
+use Modules\Movie\Models\Category\Countries;
+use Modules\Movie\Models\Files;
+use Modules\Movie\Models\Category\Genres;
+use Modules\Movie\Models\Movie\Movies;
+use Modules\Movie\Models\Category\Stars;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Support\Str;
 
-class TmdbController extends Controller
+class TmdbController extends BackendController
 {
     public function addMovie(Request $request) {
         $this->validateRequest([

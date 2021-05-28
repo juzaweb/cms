@@ -2,11 +2,11 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\FrontendController;
-use App\Core\Models\DownloadLink;
-use App\Core\Models\Video\VideoServers;
-use App\Core\Models\Category\Genres;
-use App\Core\Models\Movie\Movies;
+use Mymo\Core\Http\Controllers\FrontendController;
+use Modules\Movie\Models\DownloadLink;
+use Modules\Movie\Models\Video\VideoServers;
+use Modules\Movie\Models\Category\Genres;
+use Modules\Movie\Models\Movie\Movies;
 
 class WatchController extends FrontendController
 {

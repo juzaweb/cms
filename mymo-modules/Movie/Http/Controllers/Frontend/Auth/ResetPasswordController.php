@@ -2,12 +2,12 @@
 
 namespace App\Core\Http\Controllers\Frontend\Auth;
 
-use App\Core\Models\PasswordReset;
+use Modules\Movie\Models\PasswordReset;
 use App\Core\User;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class ResetPasswordController extends Controller
+class ResetPasswordController extends BackendController
 {
     public function index($token)
     {

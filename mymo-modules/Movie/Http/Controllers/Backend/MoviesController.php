@@ -2,18 +2,18 @@
 
 namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Core\Models\Category\Countries;
-use App\Core\Models\Category\Genres;
-use App\Core\Models\Category\Stars;
-use App\Core\Models\Category\Tags;
-use App\Core\Models\Category\Types;
-use App\Core\Models\Video\VideoQualities;
-use App\Core\Models\Movie\Movies;
-use App\Core\Http\Controllers\Controller;
+use Modules\Movie\Models\Category\Countries;
+use Modules\Movie\Models\Category\Genres;
+use Modules\Movie\Models\Category\Stars;
+use Modules\Movie\Models\Category\Tags;
+use Modules\Movie\Models\Category\Types;
+use Modules\Movie\Models\Video\VideoQualities;
+use Modules\Movie\Models\Movie\Movies;
+use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class MoviesController extends Controller
+class MoviesController extends BackendController
 {
     public function index() {
         return view('backend.movies.index');

@@ -2,11 +2,11 @@
 
 namespace App\Core\Http\Controllers\PaidMembers\Frontend;
 
-use App\Core\Models\PaymentHistory;
-use App\Core\Models\UserSubscription;
+use Modules\Movie\Models\PaymentHistory;
+use Modules\Movie\Models\UserSubscription;
 use App\Core\User;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use PayPal\Api\Agreement;
 use PayPal\Api\Currency;
 use PayPal\Api\MerchantPreferences;
@@ -19,7 +19,7 @@ use PayPal\Common\PayPalModel;
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
 
-class PaypalController extends Controller
+class PaypalController extends BackendController
 {
     private $apiContext;
     private $client_id;

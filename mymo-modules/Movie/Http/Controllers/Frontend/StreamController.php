@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\Frontend;
 
 use App\Core\Helpers\VideoStream;
 use App\Core\Helpers\UrlVideoStream;
-use App\Core\Http\Controllers\FrontendController;
+use Mymo\Core\Http\Controllers\FrontendController;
 
 class StreamController extends FrontendController
 {

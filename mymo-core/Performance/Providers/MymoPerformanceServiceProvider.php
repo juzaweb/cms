@@ -12,13 +12,13 @@
  * Time: 10:29 PM
  */
 
-namespace Mymo\Security\Providers;
+namespace Mymo\Performance\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Mymo\Security\Middleware\XFrameHeadersMiddleware;
+use Mymo\Performance\Middleware\XFrameHeadersMiddleware;
 use Illuminate\Support\Facades\URL;
 
-class MymoSecurityServiceProvider extends ServiceProvider
+class MymoPerformanceServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -38,8 +38,7 @@ class MymoSecurityServiceProvider extends ServiceProvider
             if ($_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
                 URL::forceScheme('https');
             }
-        }
-        else {
+        } else {
             if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
                 URL::forceScheme('https');
             }

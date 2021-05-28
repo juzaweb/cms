@@ -2,8 +2,8 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\FrontendController;
-use App\Core\Models\Pages;
+use Mymo\Core\Http\Controllers\FrontendController;
+use Modules\Movie\Models\Pages;
 
 class PageController extends FrontendController
 {

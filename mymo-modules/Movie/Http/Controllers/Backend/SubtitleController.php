@@ -2,13 +2,13 @@
 
 namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Core\Models\Movie\Movies;
+use Modules\Movie\Models\Movie\Movies;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
-use App\Core\Models\Video\VideoFiles;
-use App\Core\Models\Subtitle;
+use Mymo\Core\Http\Controllers\BackendController;
+use Modules\Movie\Models\Video\VideoFiles;
+use Modules\Movie\Models\Subtitle;
 
-class SubtitleController extends Controller
+class SubtitleController extends BackendController
 {
     public function index($page_type, $file_id) {
         $file = VideoFiles::findOrFail($file_id);

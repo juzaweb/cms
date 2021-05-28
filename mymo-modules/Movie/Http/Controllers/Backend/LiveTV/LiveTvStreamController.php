@@ -3,11 +3,11 @@
 namespace App\Core\Http\Controllers\Backend\LiveTV;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
-use App\Core\Models\LiveTV\LiveTv;
-use App\Core\Models\LiveTV\LiveTvStream;
+use Mymo\Core\Http\Controllers\BackendController;
+use Modules\Movie\Models\LiveTV\LiveTv;
+use Modules\Movie\Models\LiveTV\LiveTvStream;
 
-class LiveTvStreamController extends Controller
+class LiveTvStreamController extends BackendController
 {
     public function index($live_tv_id) {
         $live_tv = LiveTv::findOrFail($live_tv_id);

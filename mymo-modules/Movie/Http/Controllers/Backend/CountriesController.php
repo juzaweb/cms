@@ -3,10 +3,10 @@
 namespace App\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
-use App\Core\Models\Category\Countries;
+use Mymo\Core\Http\Controllers\BackendController;
+use Modules\Movie\Models\Category\Countries;
 
-class CountriesController extends Controller
+class CountriesController extends BackendController
 {
     public function index() {
         return view('backend.countries.index');
