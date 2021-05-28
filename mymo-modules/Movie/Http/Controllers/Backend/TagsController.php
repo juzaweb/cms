@@ -4,9 +4,9 @@ namespace App\Core\Http\Controllers\Backend;
 
 use App\Core\Models\Category\Tags;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class TagsController extends Controller
+class TagsController extends BackendController
 {
     public function save(Request $request) {
         $this->validateRequest([

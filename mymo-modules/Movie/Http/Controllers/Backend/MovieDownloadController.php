@@ -4,10 +4,10 @@ namespace Modules\Movie\Http\Controllers\Backend;
 
 use App\Core\Models\Movie\Movies;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use App\Core\Models\DownloadLink;
 
-class MovieDownloadController extends Controller
+class MovieDownloadController extends BackendController
 {
     public function index($page_type, $movie_id) {
         $movie = Movies::findOrFail($movie_id);

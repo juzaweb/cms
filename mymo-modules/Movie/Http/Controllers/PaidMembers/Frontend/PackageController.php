@@ -3,9 +3,9 @@
 namespace App\Core\Http\Controllers\PaidMembers\Frontend;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class PackageController extends Controller
+class PackageController extends BackendController
 {
     //
 }

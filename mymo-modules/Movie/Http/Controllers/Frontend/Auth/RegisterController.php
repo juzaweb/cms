@@ -5,7 +5,7 @@ namespace App\Core\Http\Controllers\Frontend\Auth;
 use App\Core\Events\RegisterSuccess;
 use App\Core\User;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
 class RegisterController extends FrontendController
 {

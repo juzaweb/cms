@@ -3,7 +3,7 @@
 namespace App\Core\Http\Controllers\Frontend\Account;
 
 use Illuminate\Support\Facades\Cookie;
-use App\Core\Http\Controllers\FrontendController;
+use Mymo\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Movie\Movies;
 
 class ProfileController extends FrontendController

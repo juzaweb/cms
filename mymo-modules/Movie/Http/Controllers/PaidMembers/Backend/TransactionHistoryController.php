@@ -3,9 +3,9 @@
 namespace App\Core\Http\Controllers\PaidMembers\Backend;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class TransactionHistoryController extends Controller
+class TransactionHistoryController extends BackendController
 {
     public function index() {
         return view('paid-members.backend.package.index');

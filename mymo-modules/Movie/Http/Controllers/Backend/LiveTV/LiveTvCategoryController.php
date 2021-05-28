@@ -3,10 +3,10 @@
 namespace App\Core\Http\Controllers\Backend\LiveTV;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use App\Core\Models\LiveTV\LiveTvCategory;
 
-class LiveTvCategoryController extends Controller
+class LiveTvCategoryController extends BackendController
 {
     public function index() {
         return view('backend.live-tv-category.index');

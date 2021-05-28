@@ -9,10 +9,10 @@ use App\Core\Models\Category\Genres;
 use App\Core\Models\Movie\Movies;
 use App\Core\Models\Category\Stars;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Support\Str;
 
-class TmdbController extends Controller
+class TmdbController extends BackendController
 {
     public function addMovie(Request $request) {
         $this->validateRequest([

@@ -12,18 +12,6 @@ Route::group(['prefix' => 'comments/movie'], function () {
     Route::post('/', 'Backend\Movie\MovieCommentsController@publicis')->name('admin.movie_comments.publicis');
 });
 
-Route::group(['prefix' => 'comments/post'], function () {
-    Route::get('/', 'Backend\PostCommentsController@index')->name('admin.post_comments');
-    
-    Route::get('/getdata', 'Backend\PostCommentsController@getData')->name('admin.post_comments.getdata');
-    
-    Route::post('/remove', 'Backend\PostCommentsController@remove')->name('admin.post_comments.remove');
-    
-    Route::post('/approve', 'Backend\PostCommentsController@approve')->name('admin.post_comments.approve');
-    
-    Route::post('/', 'Backend\PostCommentsController@publicis')->name('admin.post_comments.publicis');
-});
-
 Route::group(['prefix' => 'comments/setting'], function () {
     Route::get('/', 'Backend\Setting\CommentSettingController@index')->name('admin.setting.comment');
     

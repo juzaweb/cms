@@ -27,3 +27,15 @@ Route::group(['prefix' => 'post-categories'], function () {
     
     Route::post('/remove', 'Backend\PostCategoriesController@remove')->name('admin.post_categories.remove');
 });
+
+Route::group(['prefix' => 'comments/post'], function () {
+    Route::get('/', 'Backend\PostCommentsController@index')->name('admin.post_comments');
+
+    Route::get('/getdata', 'Backend\PostCommentsController@getData')->name('admin.post_comments.getdata');
+
+    Route::post('/remove', 'Backend\PostCommentsController@remove')->name('admin.post_comments.remove');
+
+    Route::post('/approve', 'Backend\PostCommentsController@approve')->name('admin.post_comments.approve');
+
+    Route::post('/', 'Backend\PostCommentsController@publicis')->name('admin.post_comments.publicis');
+});

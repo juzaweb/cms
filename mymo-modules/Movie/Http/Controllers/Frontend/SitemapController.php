@@ -2,14 +2,14 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use App\Core\Models\Category\Countries;
 use App\Core\Models\Category\Genres;
 use App\Core\Models\Movie\Movies;
 use App\Core\Models\PostCategories;
 use App\Core\Models\Posts;
 
-class SitemapController extends Controller
+class SitemapController extends BackendController
 {
     protected $per_page = 20;
     

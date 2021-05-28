@@ -2,7 +2,7 @@
 
 namespace App\Core\Http\Controllers\Frontend\Account;
 
-use App\Core\Http\Controllers\FrontendController;
+use Mymo\Core\Http\Controllers\FrontendController;
 
 class NotificationController extends FrontendController
 {

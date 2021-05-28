@@ -6,7 +6,7 @@ use App\Core\Models\Email\EmailList;
 use App\Core\Models\PasswordReset;
 use App\Core\User;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\FrontendController;
+use Mymo\Core\Http\Controllers\FrontendController;
 
 class ForgotPasswordController extends FrontendController
 {

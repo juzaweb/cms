@@ -6,9 +6,9 @@ use App\Core\Models\Movie\Movies;
 use App\Core\Models\Video\VideoServers;
 use App\Core\Models\Video\VideoFiles;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 
-class MovieUploadController extends Controller
+class MovieUploadController extends BackendController
 {
     public function index($page_type, $server_id) {
         $server = VideoServers::where('id', '=', $server_id)->firstOrFail();

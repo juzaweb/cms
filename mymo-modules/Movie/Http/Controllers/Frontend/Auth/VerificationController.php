@@ -2,10 +2,10 @@
 
 namespace App\Core\Http\Controllers\Frontend\Auth;
 
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use App\Core\User;
 
-class VerificationController extends Controller
+class VerificationController extends BackendController
 {
     public function index($token)
     {

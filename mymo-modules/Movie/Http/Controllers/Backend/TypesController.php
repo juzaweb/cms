@@ -3,10 +3,10 @@
 namespace App\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use App\Core\Models\Category\Types;
 
-class TypesController extends Controller
+class TypesController extends BackendController
 {
     public function index() {
         return view('backend.types.index');

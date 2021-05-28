@@ -2,7 +2,7 @@
 
 namespace App\Core\Http\Controllers\Frontend;
 
-use App\Core\Http\Controllers\FrontendController;
+use Mymo\Core\Http\Controllers\FrontendController;
 use App\Core\Models\Category\Countries;
 use App\Core\Models\Category\Genres;
 use App\Core\Models\Movie\Movies;

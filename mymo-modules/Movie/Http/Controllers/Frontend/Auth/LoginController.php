@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\Frontend\Auth;
 
 use App\Core\User;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\FrontendController;
+use Mymo\Core\Http\Controllers\FrontendController;
 
 class LoginController extends FrontendController
 {

@@ -4,6 +4,7 @@ namespace App\Core\Http\Controllers\Frontend;
 
 use App\Core\Models\Category\Genres;
 use App\Core\Models\Movie\Movies;
+use Mymo\Core\Http\Controllers\FrontendController;
 
 class GenreController extends FrontendController
 {

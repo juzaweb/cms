@@ -8,11 +8,11 @@ use App\Core\Models\Category\Stars;
 use App\Core\Models\Category\Tags;
 use App\Core\Models\Video\VideoQualities;
 use Illuminate\Http\Request;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use App\Core\Models\Movie\Movies;
 use Illuminate\Support\Str;
 
-class TVSeriesController extends Controller
+class TVSeriesController extends BackendController
 {
     public function index()
     {

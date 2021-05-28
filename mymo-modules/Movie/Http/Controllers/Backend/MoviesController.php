@@ -9,11 +9,11 @@ use App\Core\Models\Category\Tags;
 use App\Core\Models\Category\Types;
 use App\Core\Models\Video\VideoQualities;
 use App\Core\Models\Movie\Movies;
-use App\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class MoviesController extends Controller
+class MoviesController extends BackendController
 {
     public function index() {
         return view('backend.movies.index');
