@@ -1,6 +1,6 @@
 <?php
 /**
- * MYMO CMS
+ * MYMO CMS - Free Laravel CMS
  *
  * @package mymocms/mymocms
  * @author The Anh Dang

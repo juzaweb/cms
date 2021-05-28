@@ -38,8 +38,7 @@ class MymoPerformanceServiceProvider extends ServiceProvider
             if ($_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
                 URL::forceScheme('https');
             }
-        }
-        else {
+        } else {
             if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
                 URL::forceScheme('https');
             }

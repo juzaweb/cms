@@ -1,4 +1,13 @@
 <?php
+/**
+ * MYMO CMS - Free Laravel CMS
+ *
+ * @package mymocms/mymocms
+ * @author The Anh Dang
+ *
+ * Developed based on Laravel Framework
+ * Github: https://github.com/mymocms/mymocms
+ */
 
 Route::group(['prefix' => 'appearance/themes'], function () {
     Route::get('/', 'Backend\Design\ThemesController@index')->name('admin.design.themes');
