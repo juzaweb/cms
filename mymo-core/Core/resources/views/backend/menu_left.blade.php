@@ -28,7 +28,7 @@
             </li>
         @else
             <li class="cui__menuLeft__item cui__menuLeft__item-{{ $item->get('url') }}">
-                <a class="cui__menuLeft__item__link" href="{{ url('admin-cp/' . $item->get('url')) }}" @if($child->get('turbolinks') === false) data-turbolinks="false" @endif>
+                <a class="cui__menuLeft__item__link" href="{{ url('admin-cp/' . $item->get('url')) }}" @if($item->get('turbolinks') === false) data-turbolinks="false" @endif>
                     <i class="cui__menuLeft__item__icon {{ $item->get('icon') }}"></i>
                     <span class="cui__menuLeft__item__title">{{ $item->get('title') }}</span>
 

@@ -44,31 +44,31 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.design'),
-    'design',
+    trans('mymo_core::app.appearance'),
+    'appearance',
     [
-        'icon' => 'fa fa-layout',
+        'icon' => 'fa fa-paint-brush',
         'position' => 40
     ]
 );
 
 HookAction::addAdminMenu(
     trans('mymo_core::app.themes'),
-    'design.themes',
+    'appearance.themes',
     [
-        'icon' => 'fa fa-layout',
+        'icon' => 'fa fa-paint-brush',
         'position' => 1,
-        'parent' => 'design',
+        'parent' => 'appearance',
     ]
 );
 
 HookAction::addAdminMenu(
     trans('mymo_core::app.menu'),
-    'design.menu',
+    'appearance.menu',
     [
-        'icon' => 'fa fa-layout',
-        'position' => 1,
-        'parent' => 'design',
+        'icon' => 'fa fa-list',
+        'position' => 2,
+        'parent' => 'appearance',
     ]
 );
 

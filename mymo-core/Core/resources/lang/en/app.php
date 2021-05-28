@@ -405,5 +405,6 @@ return [
   'server_stream' => 'Server Stream',
   'news' => 'News',
   'updates' => 'Updates',
+  'appearance' => 'Appearance',
 ];
 

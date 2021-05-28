@@ -11,7 +11,7 @@
 
 Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], function () {
     require __DIR__ . '/components/dashboard.route.php';
-    require __DIR__ . '/components/design.route.php';
+    require __DIR__ . '/components/appearance.route.php';
     require __DIR__ . '/components/setting.route.php';
     require __DIR__ . '/components/filemanager.route.php';
     require __DIR__ . '/components/post.route.php';

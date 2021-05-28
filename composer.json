@@ -32,6 +32,7 @@
         "fideloper/proxy": "^4.4",
         "guzzlehttp/guzzle": "^6.5",
         "hassankhan/config": "^2.2",
+        "intervention/image": "^2.5",
         "ip2location/ip2location-laravel": "^1.0",
         "ip2location/ip2location-php": "^8.3",
         "laravel/framework": "6.*",
@@ -39,8 +40,10 @@
         "laravelium/sitemap": "6.*",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",
+        "spatie/image-optimizer": "^1.4",
         "symfony/yaml": "^5.2",
-        "tadcms/hooks": "^1.0"
+        "tadcms/hooks": "^1.0",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",
