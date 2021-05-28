@@ -74,11 +74,11 @@ HookAction::addAdminMenu(
 
 HookAction::addAdminMenu(
     trans('mymo_core::app.editor'),
-    'design.editor',
+    'appearance.editor',
     [
-        'icon' => 'fa fa-layout',
-        'position' => 1,
-        'parent' => 'design',
+        'icon' => 'fa fa-edit',
+        'position' => 3,
+        'parent' => 'appearance',
         'turbolinks' => false,
     ]
 );
