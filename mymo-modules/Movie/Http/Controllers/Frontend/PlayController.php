@@ -4,11 +4,11 @@ namespace App\Core\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
-use App\Core\Models\Category\Genres;
-use App\Core\Models\Movie\Movies;
-use App\Core\Models\Movie\MovieViews;
-use App\Core\Models\Video\VideoAds;
-use App\Core\Models\Video\VideoFiles;
+use Modules\Movie\Models\Category\Genres;
+use Modules\Movie\Models\Movie\Movies;
+use Modules\Movie\Models\Movie\MovieViews;
+use Modules\Movie\Models\Video\VideoAds;
+use Modules\Movie\Models\Video\VideoFiles;
 
 class PlayController extends FrontendController
 {

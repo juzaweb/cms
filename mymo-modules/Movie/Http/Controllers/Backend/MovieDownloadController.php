@@ -2,10 +2,10 @@
 
 namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Core\Models\Movie\Movies;
+use Modules\Movie\Models\Movie\Movies;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use App\Core\Models\DownloadLink;
+use Modules\Movie\Models\DownloadLink;
 
 class MovieDownloadController extends BackendController
 {

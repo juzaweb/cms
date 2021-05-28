@@ -2,7 +2,7 @@
 
 namespace App\Core\Http\Controllers\Backend;
 
-use App\Core\Models\Category\Genres;
+use Modules\Movie\Models\Category\Genres;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 

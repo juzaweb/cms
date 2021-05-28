@@ -3,7 +3,7 @@
 namespace App\Core\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use App\Core\Models\Category\Types;
+use Modules\Movie\Models\Category\Types;
 
 class TypeController extends FrontendController
 {

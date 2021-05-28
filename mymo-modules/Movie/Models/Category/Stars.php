@@ -2,8 +2,8 @@
 
 namespace Modules\Movie\Models\Category;
 
-use App\Core\Traits\UseSlug;
-use App\Core\Traits\UseThumbnail;
+use Mymo\Core\Traits\UseSlug;
+use Mymo\Core\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
 
 /**

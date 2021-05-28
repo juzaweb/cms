@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\Frontend\Account;
 
 use Mymo\Core\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
-use App\Core\Models\Movie\Movies;
+use Modules\Movie\Models\Movie\Movies;
 use App\Core\User;
 use Illuminate\Http\Request;
 

@@ -3,8 +3,8 @@
 namespace App\Core\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use App\Core\Models\Movie\Movies;
-use App\Core\Models\Category\Stars;
+use Modules\Movie\Models\Movie\Movies;
+use Modules\Movie\Models\Category\Stars;
 
 class StarController extends FrontendController
 {

@@ -3,7 +3,7 @@
 namespace App\Core\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use App\Core\Models\Movie\Movies;
+use Modules\Movie\Models\Movie\Movies;
 
 class LatestMoviesController extends FrontendController
 {

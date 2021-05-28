@@ -2,9 +2,9 @@
 
 namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Core\Models\Movie\Movies;
-use App\Core\Models\Video\VideoServers;
-use App\Core\Models\Video\VideoFiles;
+use Modules\Movie\Models\Movie\Movies;
+use Modules\Movie\Models\Video\VideoServers;
+use Modules\Movie\Models\Video\VideoFiles;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 

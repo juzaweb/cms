@@ -2,7 +2,7 @@
 
 namespace Modules\Movie\Http\Controllers\Backend;
 
-use App\Core\Models\Movie\MovieComments;
+use Modules\Movie\Models\Movie\MovieComments;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 

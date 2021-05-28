@@ -2,7 +2,7 @@
 
 namespace App\Core\Models\Video;
 
-use App\Core\Traits\UseChangeBy;
+use Mymo\Core\Traits\UseChangeBy;
 use Illuminate\Database\Eloquent\Model;
 
 /**

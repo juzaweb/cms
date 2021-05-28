@@ -4,8 +4,8 @@ namespace App\Core\Http\Controllers\Backend\LiveTV;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use App\Core\Models\LiveTV\LiveTv;
-use App\Core\Models\LiveTV\LiveTvStream;
+use Modules\Movie\Models\LiveTV\LiveTv;
+use Modules\Movie\Models\LiveTV\LiveTvStream;
 
 class LiveTvStreamController extends BackendController
 {

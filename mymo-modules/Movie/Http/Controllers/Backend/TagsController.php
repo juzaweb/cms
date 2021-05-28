@@ -2,7 +2,7 @@
 
 namespace App\Core\Http\Controllers\Backend;
 
-use App\Core\Models\Category\Tags;
+use Modules\Movie\Models\Category\Tags;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 

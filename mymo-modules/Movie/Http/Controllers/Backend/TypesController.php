@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use App\Core\Models\Category\Types;
+use Modules\Movie\Models\Category\Types;
 
 class TypesController extends BackendController
 {

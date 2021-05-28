@@ -3,7 +3,7 @@
 namespace App\Core\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use App\Core\Models\Video\VideoAds;
+use Modules\Movie\Models\Video\VideoAds;
 
 class VideoAdsController extends FrontendController
 {

@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\Frontend\Account;
 
 use Illuminate\Support\Facades\Cookie;
 use Mymo\Core\Http\Controllers\FrontendController;
-use App\Core\Models\Movie\Movies;
+use Modules\Movie\Models\Movie\Movies;
 
 class ProfileController extends FrontendController
 {

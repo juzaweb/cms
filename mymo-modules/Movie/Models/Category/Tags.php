@@ -2,7 +2,7 @@
 
 namespace Modules\Movie\Models\Category;
 
-use App\Core\Traits\UseSlug;
+use Mymo\Core\Traits\UseSlug;
 use Illuminate\Database\Eloquent\Model;
 
 class Tags extends Model

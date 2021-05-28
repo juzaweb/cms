@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\Backend;
 
 use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
-use App\Core\Models\ServerStream;
+use Modules\Movie\Models\ServerStream;
 
 class ServerStreamController extends BackendController
 {

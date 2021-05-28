@@ -3,7 +3,7 @@
 namespace App\Core\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use App\Core\Models\Pages;
+use Modules\Movie\Models\Pages;
 
 class PageController extends FrontendController
 {

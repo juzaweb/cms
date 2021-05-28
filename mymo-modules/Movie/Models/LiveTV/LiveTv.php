@@ -3,9 +3,9 @@
 namespace Modules\Movie\Models\LiveTV;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Core\Traits\UseChangeBy;
-use App\Core\Traits\UseMetaSeo;
-use App\Core\Traits\UseThumbnail;
+use Mymo\Core\Traits\UseChangeBy;
+use Mymo\Core\Traits\UseMetaSeo;
+use Mymo\Core\Traits\UseThumbnail;
 
 /**
  * Modules\Movie\Models\LiveTV\LiveTv

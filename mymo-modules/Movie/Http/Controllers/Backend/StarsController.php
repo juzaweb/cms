@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use App\Core\Models\Category\Stars;
+use Modules\Movie\Models\Category\Stars;
 
 class StarsController extends BackendController
 {

@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\PaidMembers\Backend;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use App\Core\Models\PaidMembers\Package;
+use Modules\Movie\Models\PaidMembers\Package;
 
 class PackageController extends BackendController
 {

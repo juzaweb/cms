@@ -2,8 +2,8 @@
 
 namespace Modules\Movie\Models\Category;
 
-use App\Core\Traits\UseMetaSeo;
-use App\Core\Traits\UseSlug;
+use Mymo\Core\Traits\UseMetaSeo;
+use Mymo\Core\Traits\UseSlug;
 use Illuminate\Database\Eloquent\Model;
 
 /**

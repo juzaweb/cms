@@ -2,8 +2,8 @@
 
 namespace App\Core\Http\Controllers\PaidMembers\Frontend;
 
-use App\Core\Models\PaymentHistory;
-use App\Core\Models\UserSubscription;
+use Modules\Movie\Models\PaymentHistory;
+use Modules\Movie\Models\UserSubscription;
 use App\Core\User;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;

@@ -3,11 +3,11 @@
 namespace App\Core\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\BackendController;
-use App\Core\Models\Category\Countries;
-use App\Core\Models\Category\Genres;
-use App\Core\Models\Movie\Movies;
-use App\Core\Models\PostCategories;
-use App\Core\Models\Posts;
+use Modules\Movie\Models\Category\Countries;
+use Modules\Movie\Models\Category\Genres;
+use Modules\Movie\Models\Movie\Movies;
+use Modules\Movie\Models\PostCategories;
+use Modules\Movie\Models\Posts;
 
 class SitemapController extends BackendController
 {
