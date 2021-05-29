@@ -174,7 +174,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Ip2location\IP2LocationLaravel\IP2LocationLaravelServiceProvider::class,
         Mymo\Core\Providers\MymoCoreServiceProvider::class,
     ],
 
