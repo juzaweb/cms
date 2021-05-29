@@ -3,10 +3,10 @@
 namespace Mymo\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Pages;
 
-class PagesController extends Controller
+class PageController extends BackendController
 {
     public function index()
     {

@@ -12,7 +12,8 @@ use Mymo\Core\Http\Controllers\BackendController;
 
 class MenuController extends BackendController
 {
-    public function index($id = null) {
+    public function index($id = null)
+    {
         if (empty($id)) {
             $menu = Menu::first();
             if ($menu) {
@@ -32,10 +33,8 @@ class MenuController extends BackendController
         
         return view('mymo_core::backend.design.menu.index', [
             'menu' => $menu,
-            /*'genres' => $genres,
-            'countries' => $countries,
-            'types' => $types,*/
             'pages' => $pages,
+            'title' => trans('mymo_core::app.menu')
         ]);
     }
     
