@@ -16,7 +16,7 @@ class LfmPath
 
     private $helper;
 
-    public function __construct(Lfm $lfm = null)
+    public function __construct(FileManager $lfm = null)
     {
         $this->helper = $lfm;
     }
@@ -70,7 +70,7 @@ class LfmPath
         } elseif ($type == 'storage') {
             // storage: files/{user_slug}
             // storage on windows: files\{user_slug}
-            return str_replace(Lfm::DS, $this->helper->ds(), $this->path('url'));
+            return str_replace(FileManager::DS, $this->helper->ds(), $this->path('url'));
         } else {
             // absolute: /var/www/html/project/storage/app/files/{user_slug}
             // absolute on windows: C:\project\storage\app\files\{user_slug}
@@ -80,7 +80,7 @@ class LfmPath
 
     public function translateToLfmPath($path)
     {
-        return str_replace($this->helper->ds(), Lfm::DS, $path);
+        return str_replace($this->helper->ds(), FileManager::DS, $path);
     }
 
     public function url()
@@ -174,12 +174,12 @@ class LfmPath
 
         if ($this->is_thumb) {
             // Prevent if working dir is "/" normalizeWorkingDir will add double "//" that breaks S3 functionality
-            $path = rtrim($path, Lfm::DS) . Lfm::DS . $this->helper->getThumbFolderName();
+            $path = rtrim($path, FileManager::DS) . FileManager::DS . $this->helper->getThumbFolderName();
         }
 
         if ($this->getName()) {
             // Prevent if working dir is "/" normalizeWorkingDir will add double "//" that breaks S3 functionality
-            $path = rtrim($path, Lfm::DS) . Lfm::DS . $this->getName();
+            $path = rtrim($path, FileManager::DS) . FileManager::DS . $this->getName();
         }
 
         return $path;

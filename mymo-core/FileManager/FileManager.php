@@ -5,9 +5,8 @@ namespace Mymo\FileManager;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Mymo\FileManager\Middlewares\MultiUser;
 
-class Lfm
+class FileManager
 {
     const PACKAGE_NAME = 'filemanager';
     const DS = '/';
@@ -45,15 +44,6 @@ class Lfm
     public function getNameFromPath($path)
     {
         return pathinfo($path, PATHINFO_BASENAME);
-    }
-
-    public function allowFolderType($type)
-    {
-        if ($type == 'user') {
-            return $this->allowMultiUser();
-        } else {
-            return $this->allowShareFolder();
-        }
     }
 
     public function getCategoryName()
@@ -203,7 +193,7 @@ class Lfm
      */
     public function ds()
     {
-        $ds = Lfm::DS;
+        $ds = FileManager::DS;
         if ($this->isRunningOnWindows()) {
             $ds = '\\';
         }
@@ -222,11 +212,12 @@ class Lfm
     }
 
     /**
-     * Shorter function of getting localized error message..
+     * Shorter function of getting localized error message.
      *
-     * @param  mixed  $error_type  Key of message in lang file.
-     * @param  mixed  $variables   Variables the message needs.
+     * @param  mixed $error_type Key of message in lang file.
+     * @param  mixed $variables Variables the message needs.
      * @return string
+     * @throws \Exception
      */
     public function error($error_type, $variables = [])
     {

@@ -35,7 +35,7 @@ class FilemanagerServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../resources/assets' => public_path('styles/filemanager'),
-        ], 'filemanager_public');
+        ], 'filemanager_assets');
     }
 
     /**
