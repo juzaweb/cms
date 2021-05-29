@@ -1,18 +1,13 @@
 <?php
 
-namespace Mymo\FileManager\Controllers;
+namespace Mymo\Core\Http\Controllers\Backend\FileManager;
 
 use Intervention\Image\Facades\Image;
-use Mymo\FileManager\Events\ImageIsResizing;
-use Mymo\FileManager\Events\ImageWasResized;
+use UniSharp\LaravelFilemanager\Events\ImageIsResizing;
+use UniSharp\LaravelFilemanager\Events\ImageWasResized;
 
 class ResizeController extends LfmController
 {
-    /**
-     * Dipsplay image for resizing.
-     *
-     * @return mixed
-     */
     public function getResize()
     {
         $ratio = 1.0;

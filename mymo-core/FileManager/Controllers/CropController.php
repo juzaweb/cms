@@ -1,10 +1,10 @@
 <?php
 
-namespace Mymo\FileManager\Controllers;
+namespace Mymo\Core\Http\Controllers\Backend\FileManager;
 
 use Intervention\Image\Facades\Image;
-use Mymo\FileManager\Events\ImageIsCropping;
-use Mymo\FileManager\Events\ImageWasCropped;
+use UniSharp\LaravelFilemanager\Events\ImageIsCropping;
+use UniSharp\LaravelFilemanager\Events\ImageWasCropped;
 
 class CropController extends LfmController
 {

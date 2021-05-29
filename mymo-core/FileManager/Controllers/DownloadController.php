@@ -1,19 +1,21 @@
 <?php
 
-namespace Mymo\FileManager\Controllers;
+namespace Mymo\Core\Http\Controllers\Backend\FileManager;
 
-use Illuminate\Support\Facades\Storage;
+use Mymo\Core\Models\Files;
 
 class DownloadController extends LfmController
 {
     public function getDownload()
     {
-        $file = $this->lfm->setName(request('file'));
-
-        if (!Storage::disk($this->helper->config('disk'))->exists($file->path('storage'))) {
-            abort(404);
+        $file = $this->getPath(request()->get('file'));
+        $data = Files::where('path', '=', $file)->first(['name']);
+        
+        $path = \Storage::disk('public')->path($file);
+        if ($data) {
+            return response()->download($path, $data->name);
         }
-
-        return response()->download($file->path('absolute'));
+        
+        return response()->download($path);
     }
 }

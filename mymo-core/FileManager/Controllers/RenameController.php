@@ -1,29 +1,18 @@
 <?php
 
-namespace Mymo\FileManager\Controllers;
+namespace Mymo\Core\Http\Controllers\Backend\FileManager;
 
-use Illuminate\Support\Facades\Storage;
-use Mymo\FileManager\Events\FolderIsRenaming;
-use Mymo\FileManager\Events\FolderWasRenamed;
-use Mymo\FileManager\Events\ImageIsRenaming;
-use Mymo\FileManager\Events\ImageWasRenamed;
+use Mymo\Core\Models\Files;
+use Mymo\Core\Models\Folders;
 
 class RenameController extends LfmController
 {
     public function getRename()
     {
-        $old_name = $this->helper->input('file');
-        $new_name = $this->helper->input('new_name');
-
-        $file = $this->lfm->setName($old_name);
-
-        if (!Storage::disk($this->helper->config('disk'))->exists($file->path('storage'))) {
-            abort(404);
-        }
-
-        $old_file = $this->lfm->pretty($old_name);
-
-        $is_directory = $old_file->isDirectory();
+        $file = request()->input('file');
+        $new_name = request()->input('new_name');
+        
+        $is_directory = $this->isDirectory($file);
 
         if (empty($new_name)) {
             if ($is_directory) {
@@ -33,42 +22,21 @@ class RenameController extends LfmController
             }
         }
 
-        if (config('lfm.alphanumeric_directory') && preg_match('/[^\w-]/i', $new_name)) {
-            return parent::error('folder-alnum');
-        // return parent::error('file-alnum');
-        } elseif ($this->lfm->setName($new_name)->exists()) {
-            return parent::error('rename');
-        }
-
-        if (! $is_directory) {
-            $extension = $old_file->extension();
-            if ($extension) {
-                $new_name = str_replace('.' . $extension, '', $new_name) . '.' . $extension;
-            }
-        }
-
-        $new_file = $this->lfm->setName($new_name)->path('absolute');
-
         if ($is_directory) {
-            event(new FolderIsRenaming($old_file->path(), $new_file));
-        } else {
-            event(new ImageIsRenaming($old_file->path(), $new_file));
+            Folders::where('id', '=', $file)
+                ->update([
+                    'name' => $new_name
+                ]);
         }
-
-        if ($old_file->hasThumb()) {
-            $this->lfm->setName($old_name)->thumb()
-                ->move($this->lfm->setName($new_name)->thumb());
+        else {
+            $file_path = explode('uploads/', $file)[1];
+            
+            Files::where('path', '=', $file_path)
+                ->update([
+                    'name' => $new_name
+                ]);
         }
-
-        $this->lfm->setName($old_name)
-            ->move($this->lfm->setName($new_name));
-
-        if ($is_directory) {
-            event(new FolderWasRenamed($old_file->path(), $new_file));
-        } else {
-            event(new ImageWasRenamed($old_file->path(), $new_file));
-        }
-
+        
         return parent::$success_response;
     }
 }

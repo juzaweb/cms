@@ -1,53 +1,63 @@
 <?php
 
-namespace Mymo\FileManager\Controllers;
+namespace Mymo\Core\Http\Controllers\Backend\FileManager;
+
+use Mymo\Core\Models\Folders;
 
 class FolderController extends LfmController
 {
-    /**
-     * Get list of folders as json to populate treeview.
-     *
-     * @return mixed
-     */
     public function getFolders()
     {
-        $folder_types = array_filter(['user', 'share'], function ($type) {
-            return $this->helper->allowFolderType($type);
-        });
-
-        return view('laravel-filemanager::tree')
+        $childrens = [];
+        $folders = Folders::whereNull('folder_id')
+            ->get(['id', 'name']);
+        
+        foreach ($folders as $folder) {
+            $childrens[] = (object) [
+                'name' => $folder->name,
+                'url' => $folder->id,
+                'children' => [],
+                'has_next' => false,
+            ];
+        }
+        
+        return view('mymo_core::backend.file_manager.tree')
             ->with([
-                'root_folders' => array_map(function ($type) use ($folder_types) {
-                    $path = $this->lfm->dir($this->helper->getRootFolder($type));
-
-                    return (object) [
-                        'name' => trans('laravel-filemanager::lfm.title-' . $type),
-                        'url' => $path->path('working_dir'),
-                        'children' => $path->folders(),
-                        'has_next' => ! ($type == end($folder_types)),
-                    ];
-                }, $folder_types),
+                'root_folders' => [
+                    (object) [
+                        'name' => 'Root',
+                        'url' => '',
+                        'children' => $childrens,
+                        'has_next' => $childrens ? true : false,
+                    ]
+                ],
             ]);
     }
-
-    /**
-     * Add a new folder.
-     *
-     * @return mixed
-     */
+    
     public function getAddfolder()
     {
-        $folder_name = $this->helper->input('name');
-
+        $folder_name = request()->input('name');
+        $parent_id = request()->input('working_dir');
+        
         try {
             if ($folder_name === null || $folder_name == '') {
-                return $this->helper->error('folder-name');
-            } elseif ($this->lfm->setName($folder_name)->exists()) {
-                return $this->helper->error('folder-exist');
-            } elseif (config('lfm.alphanumeric_directory') && preg_match('/[^\w-]/i', $folder_name)) {
-                return $this->helper->error('folder-alnum');
+                return $this->error('folder-name');
+            }
+            
+            if (Folders::folderExists($folder_name, $parent_id)) {
+                return $this->error('folder-exist');
+            }
+            
+            if (preg_match('/[^\w-]/i', $folder_name)) {
+                return $this->error('folder-alnum');
             } else {
-                $this->lfm->setName($folder_name)->createFolder();
+                
+                $model = new Folders();
+                $model->name = $folder_name;
+                $model->type = $this->getType();
+                $model->folder_id = $parent_id;
+                $model->save();
+                
             }
         } catch (\Exception $e) {
             return $e->getMessage();

@@ -1,59 +1,32 @@
 <?php
 
-namespace Mymo\FileManager\Controllers;
+namespace Mymo\Core\Http\Controllers\Backend\FileManager;
 
-use Illuminate\Support\Facades\Storage;
-use Mymo\FileManager\Events\ImageIsDeleting;
-use Mymo\FileManager\Events\ImageWasDeleted;
+use Mymo\Core\Models\Files;
+use Mymo\Core\Models\Folders;
 
 class DeleteController extends LfmController
 {
-    /**
-     * Delete image and associated thumbnail.
-     *
-     * @return mixed
-     */
     public function getDelete()
     {
         $item_names = request('items');
         $errors = [];
 
-        foreach ($item_names as $name_to_delete) {
-            $file = $this->lfm->setName($name_to_delete);
-
-            if (!Storage::disk($this->helper->config('disk'))->exists($file->path('storage'))) {
-                abort(404);
-            }
-
-            $file_to_delete = $this->lfm->pretty($name_to_delete);
-            $file_path = $file_to_delete->path();
-
-            event(new ImageIsDeleting($file_path));
-
-            if (is_null($name_to_delete)) {
+        foreach ($item_names as $file) {
+            if (is_null($file)) {
                 array_push($errors, parent::error('folder-name'));
                 continue;
             }
-
-            if (! $this->lfm->setName($name_to_delete)->exists()) {
-                array_push($errors, parent::error('folder-not-found', ['folder' => $file_path]));
-                continue;
+    
+            $is_directory = $this->isDirectory($file);
+            if ($is_directory) {
+                Folders::find($file)->deleteFolder();
             }
-
-            if ($this->lfm->setName($name_to_delete)->isDirectory()) {
-                if (! $this->lfm->setName($name_to_delete)->directoryIsEmpty()) {
-                    array_push($errors, parent::error('delete-folder'));
-                    continue;
-                }
-            } else {
-                if ($file_to_delete->isImage()) {
-                    $this->lfm->setName($name_to_delete)->thumb()->delete();
-                }
+            else {
+                $file_path = $this->getPath($file);
+                Files::where('path', '=', $file_path)->first()->deleteFile();
             }
-
-            $this->lfm->setName($name_to_delete)->delete();
-
-            event(new ImageWasDeleted($file_path));
+            
         }
 
         if (count($errors) > 0) {

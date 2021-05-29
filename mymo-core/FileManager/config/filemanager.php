@@ -1,11 +1,16 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Documentation for this config :
-|--------------------------------------------------------------------------
-| online  => http://unisharp.github.io/laravel-filemanager/config
-| offline => vendor/unisharp/laravel-filemanager/docs/config.md
+/**
+ * MYMO CMS - Free Laravel CMS
+ *
+ * @package    mymocms/mymocms
+ * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @link       https://github.com/mymocms/mymocms
+ * @license    MIT
+ *
+ * Created by The Anh.
+ * Date: 5/27/2021
+ * Time: 8:37 PM
  */
 
 return [
