@@ -12,6 +12,8 @@
  * Time: 10:05 PM
  */
 
+require (__DIR__ . '/../../Module/helpers.php');
+
 use Illuminate\Support\Facades\Auth;
 use Mymo\Core\Helpers\Breadcrumb;
 use Mymo\Core\Models\Menu;

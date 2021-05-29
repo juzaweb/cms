@@ -86,8 +86,8 @@
 
     <script type="text/javascript">
         CKEDITOR.replace('content', {
-            filebrowserImageBrowseUrl: '/admin-cp/filemanager?type=Images',
-            filebrowserBrowseUrl: '/admin-cp/filemanager?type=Files'
+            filebrowserImageBrowseUrl: '/admin-cp/file-manager?type=Images',
+            filebrowserBrowseUrl: '/admin-cp/file-manager?type=Files'
         });
 
         $('.all-users').on('change', function () {

@@ -3,7 +3,6 @@
 namespace Mymo\Core\Traits;
 
 trait UseChangeBy {
-    
     public static function bootUseChangeBy()
     {
         static::saving(function ($model) {
@@ -16,5 +15,4 @@ trait UseChangeBy {
             }
         });
     }
-    
 }

@@ -34,6 +34,15 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
+    trans('mymo_core::app.pages'),
+    'pages',
+    [
+        'icon' => 'fa fa-file-text',
+        'position' => 20
+    ]
+);
+
+HookAction::addAdminMenu(
     trans('mymo_core::app.posts'),
     'posts',
     [
@@ -43,11 +52,42 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.pages'),
-    'pages',
+    trans('mymo_core::app.all_posts'),
+    'posts',
     [
-        'icon' => 'fa fa-edit',
-        'position' => 30
+        'icon' => 'fa fa-list-ul',
+        'position' => 1,
+        'parent' => 'posts',
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.add_new'),
+    'posts.create',
+    [
+        'icon' => 'fa fa-plus',
+        'position' => 2,
+        'parent' => 'posts',
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.categories'),
+    'post.categories',
+    [
+        'icon' => 'fa fa-plus',
+        'position' => 3,
+        'parent' => 'posts',
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.tags'),
+    'post.tags',
+    [
+        'icon' => 'fa fa-plus',
+        'position' => 4,
+        'parent' => 'posts',
     ]
 );
 

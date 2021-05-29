@@ -54,7 +54,7 @@ class ConsoleServiceProvider extends ServiceProvider
      * Namespace of the console commands
      * @var string
      */
-    protected $consoleNamespace = "Nwidart\\Modules\\Commands";
+    protected $consoleNamespace = "Mymo\\Module\\Commands";
 
     /**
      * The available commands
@@ -74,7 +74,7 @@ class ConsoleServiceProvider extends ServiceProvider
         NotificationMakeCommand::class,
         ProviderMakeCommand::class,
         RouteProviderMakeCommand::class,
-        InstallCommand::class,
+        //InstallCommand::class,
         ListCommand::class,
         ModuleDeleteCommand::class,
         ModuleMakeCommand::class,
@@ -90,14 +90,14 @@ class ConsoleServiceProvider extends ServiceProvider
         MigrationMakeCommand::class,
         ModelMakeCommand::class,
         PublishCommand::class,
-        PublishConfigurationCommand::class,
-        PublishMigrationCommand::class,
+        //PublishConfigurationCommand::class,
+        //PublishMigrationCommand::class,
         PublishTranslationCommand::class,
         SeedCommand::class,
         SeedMakeCommand::class,
         SetupCommand::class,
         UnUseCommand::class,
-        UpdateCommand::class,
+        //UpdateCommand::class,
         UseCommand::class,
         ResourceMakeCommand::class,
         TestMakeCommand::class,

@@ -35,5 +35,4 @@ trait UseSlug {
         
         return $slug;
     }
-    
 }

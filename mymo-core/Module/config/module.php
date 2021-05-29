@@ -1,6 +1,6 @@
 <?php
 
-use Nwidart\Modules\Activators\FileActivator;
+use Mymo\Module\Activators\FileActivator;
 
 return [
 
@@ -26,7 +26,7 @@ return [
 
     'stubs' => [
         'enabled' => false,
-        'path' => app_path('Console/stubs/module'),
+        'path' => core_path('Console/stubs/module'),
         'files' => [
             'routes/web' => 'routes/web.php',
             'routes/api' => 'routes/api.php',
@@ -70,7 +70,7 @@ return [
         |
         */
 
-        'modules' => base_path('modules'),
+        'modules' => base_path('mymo-modules'),
         /*
         |--------------------------------------------------------------------------
         | Modules assets path
@@ -101,7 +101,7 @@ return [
         */
         'generator' => [
             'config' => ['path' => 'config', 'generate' => false],
-            'command' => ['path' => 'Console', 'generate' => true],
+            'command' => ['path' => 'Console', 'generate' => false],
             'migration' => ['path' => 'database/migrations', 'generate' => true],
             'seeder' => ['path' => 'database/seeders', 'generate' => true],
             'factory' => ['path' => 'database/factories', 'generate' => true],
@@ -166,7 +166,7 @@ return [
     */
     'cache' => [
         'enabled' => false,
-        'key' => 'laravel-modules',
+        'key' => 'mymocms-modules',
         'lifetime' => 60,
     ],
     /*

@@ -1,13 +1,16 @@
 <?php
 
 /**
- * MYMO CMS
+ * MYMO CMS - Free Laravel CMS
  *
- * @package mymocms/mymocms
- * @author The Anh Dang
+ * @package    mymocms/mymocms
+ * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @link       https://github.com/mymocms/mymocms
+ * @license    MIT
  *
- * Developed based on Laravel Framework
- * Github: https://github.com/mymocms/mymocms
+ * Created by The Anh.
+ * Date: 5/27/2021
+ * Time: 8:37 PM
  */
 
 define('LARAVEL_START', microtime(true));

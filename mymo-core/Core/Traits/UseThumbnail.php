@@ -5,7 +5,8 @@ namespace Mymo\Core\Traits;
 use Mymo\Core\Models\Files;
 use Illuminate\Support\Str;
 
-trait UseThumbnail {
+trait UseThumbnail
+{
     
     public static function bootUseThumbnail()
     {
