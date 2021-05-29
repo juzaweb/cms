@@ -1,11 +1,11 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\FileManager\Http\Controllers\Backend\FileManager;
 
 use Mymo\Core\Models\Files;
 use Mymo\Core\Models\Folders;
 
-class DeleteController extends LfmController
+class DeleteController extends FileManagerController
 {
     public function getDelete()
     {

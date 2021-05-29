@@ -1,12 +1,12 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\FileManager\Http\Controllers\Backend\FileManager;
 
 use Intervention\Image\Facades\Image;
-use UniSharp\LaravelFilemanager\Events\ImageIsResizing;
-use UniSharp\LaravelFilemanager\Events\ImageWasResized;
+use Mymo\FileManager\Events\ImageIsResizing;
+use Mymo\FileManager\Events\ImageWasResized;
 
-class ResizeController extends LfmController
+class ResizeController extends FileManagerController
 {
     public function getResize()
     {

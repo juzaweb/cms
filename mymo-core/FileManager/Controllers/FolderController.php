@@ -1,10 +1,10 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\FileManager\Http\Controllers\Backend\FileManager;
 
 use Mymo\Core\Models\Folders;
 
-class FolderController extends LfmController
+class FolderController extends FileManagerController
 {
     public function getFolders()
     {

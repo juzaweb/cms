@@ -1,15 +1,15 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\FileManager\Http\Controllers\Backend\FileManager;
 
 use Mymo\Core\Models\Files;
 use Mymo\Core\Models\Folders;
-use UniSharp\LaravelFilemanager\Events\FileIsMoving;
-use UniSharp\LaravelFilemanager\Events\FileWasMoving;
-use UniSharp\LaravelFilemanager\Events\FolderIsMoving;
-use UniSharp\LaravelFilemanager\Events\FolderWasMoving;
+use Mymo\FileManager\Events\FileIsMoving;
+use Mymo\FileManager\Events\FileWasMoving;
+use Mymo\FileManager\Events\FolderIsMoving;
+use Mymo\FileManager\Events\FolderWasMoving;
 
-class ItemsController extends LfmController
+class ItemsController extends FileManagerController
 {
     public function getItems()
     {

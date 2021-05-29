@@ -1,11 +1,11 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\FileManager\Http\Controllers\Backend\FileManager;
 
 use Mymo\Core\Models\Files;
 use Mymo\Core\Models\Folders;
 
-class RenameController extends LfmController
+class RenameController extends FileManagerController
 {
     public function getRename()
     {

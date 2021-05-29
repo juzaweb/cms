@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\FileManager\Http\Controllers\Backend\FileManager;
 
 use Mymo\Core\Models\Files;
 use Illuminate\Support\Facades\Log;
@@ -11,7 +11,7 @@ use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 use Illuminate\Http\UploadedFile;
 
-class UploadController extends LfmController
+class UploadController extends FileManagerController
 {
     protected $errors;
 

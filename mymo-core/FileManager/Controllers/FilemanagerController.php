@@ -1,10 +1,10 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\FileManager\Http\Controllers\Backend\FileManager;
 
 use Mymo\Core\Http\Controllers\Controller;
 
-class LfmController extends Controller
+class FilemanagerController extends Controller
 {
     protected static $success_response = 'OK';
     

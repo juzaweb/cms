@@ -1,10 +1,10 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend\FileManager;
+namespace Mymo\FileManager\Http\Controllers\Backend\FileManager;
 
 use Illuminate\Support\Facades\Storage;
 
-class RedirectController extends LfmController
+class RedirectController extends FileManagerController
 {
     public function showFile($file_path)
     {
