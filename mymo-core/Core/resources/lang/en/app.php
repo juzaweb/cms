@@ -410,6 +410,7 @@ return [
   'apply' => 'Apply',
   'activate' => 'Activate',
   'deactivate' => 'Deactivate',
+  'languages' => 'Languages',
   'bulk-actions' => 'Bulk Actions',
   'all-status' => 'All status',
 ];
