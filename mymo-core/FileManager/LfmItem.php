@@ -114,7 +114,7 @@ class LfmItem
     public function thumbUrl()
     {
         if ($this->isDirectory()) {
-            return asset('vendor/' . Lfm::PACKAGE_NAME . '/img/folder.png');
+            return asset('vendor/' . FileManager::PACKAGE_NAME . '/img/folder.png');
         }
 
         if ($this->isImage()) {
@@ -140,7 +140,7 @@ class LfmItem
     public function type()
     {
         if ($this->isDirectory()) {
-            return trans(Lfm::PACKAGE_NAME . '::lfm.type-folder');
+            return trans(FileManager::PACKAGE_NAME . '::lfm.type-folder');
         }
 
         if ($this->isImage()) {
