@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="turbolinks-cache-control" content="no-cache">
 
-    <title>@yield('title')</title>
+    <title>{{ $title ?? '' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
 
@@ -61,14 +61,25 @@
         <div class="cui__layout__header">
             @include('mymo_core::backend.menu_top')
         </div>
+
         <div class="cui__layout__content">
-            @yield('content')
+            {{ breadcrumb('admin', [
+                    [
+                        'title' => $title
+                    ]
+                ]) }}
+
+            <h4 class="font-weight-bold ml-3">{{ $title }}</h4>
+
+            <div class="cui__utils__content">
+                @yield('content')
+            </div>
         </div>
         <div class="cui__layout__footer">
             <div class="cui__footer">
                 <div class="cui__footer__inner">
                     <a href="https://mymo.juzaweb.com" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
-                        MYMO
+                        MYMO - Free Laravel CMS
                         <span></span>
                     </a>
                     <br />

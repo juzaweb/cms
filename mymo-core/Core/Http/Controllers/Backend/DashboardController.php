@@ -34,6 +34,7 @@ class DashboardController extends BackendController
             //'count_tvserie' => $count_tvserie,
             'count_user' => $count_user,
             'count_page' => $count_page,
+            'title' => trans('mymo_core::app.dashboard'),
         ]);
     }
     

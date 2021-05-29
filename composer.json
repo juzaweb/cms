@@ -28,7 +28,6 @@
         "php": ">=7.2.5",
         "ext-json": "*",
         "arcanedev/log-viewer": "5.*",
-        "diglactic/laravel-breadcrumbs": "6.x",
         "fideloper/proxy": "^4.4",
         "guzzlehttp/guzzle": "^6.5",
         "hassankhan/config": "^2.2",

@@ -14,7 +14,7 @@ class ModuleController extends BackendController
     public function index()
     {
         return view('mymo_core::backend.module.index', [
-            'title' => trans('tadcms::app.plugins'),
+            'title' => trans('mymo_core::app.modules'),
         ]);
     }
     
