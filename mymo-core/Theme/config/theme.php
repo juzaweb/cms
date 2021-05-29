@@ -115,7 +115,7 @@ return [
     |
     */
     'stubs'      => [
-        'path'  => app_path('Core/Console/stubs/theme'),
+        'path'  => base_path('mymo-core/Core/Console/stubs/theme'),
         'files' => [
             'css'    => 'assets/css/app.css',
             'layout' => 'views/layouts/master.blade.php',

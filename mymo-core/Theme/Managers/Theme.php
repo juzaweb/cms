@@ -57,7 +57,7 @@ class Theme implements ThemeContract
     /**
      * Current Active Theme.
      *
-     * @var string|collection
+     * @var string
      */
     private $activeTheme = null;
 
@@ -118,7 +118,7 @@ class Theme implements ThemeContract
      *
      * @param string $themeName
      *
-     * @return null|ThemeInfo
+     * @return null
      */
     public function getThemeInfo($themeName)
     {
@@ -131,7 +131,7 @@ class Theme implements ThemeContract
      * @param string $theme
      * @param bool   $collection
      *
-     * @return array|null|ThemeInfo
+     * @return array|null
      */
     public function get($theme = null, $collection = false)
     {
@@ -147,7 +147,7 @@ class Theme implements ThemeContract
      *
      * @param bool $collection
      *
-     * @return null|ThemeInfo
+     * @return null
      */
     public function current($collection = false)
     {
@@ -229,6 +229,7 @@ class Theme implements ThemeContract
      * @param string $manifestDirectory
      *
      * @return \Illuminate\Support\HtmlString|string
+     * @throws \Exception
      */
     public function themeMix($path, $manifestDirectory = '')
     {
