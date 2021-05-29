@@ -2,11 +2,8 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Design;
 
-use Mymo\Core\Models\Category\Countries;
-use Mymo\Core\Models\Category\Genres;
 use Mymo\Core\Models\Menu;
 use Mymo\Core\Models\Pages;
-use Mymo\Core\Models\Category\Types;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 
@@ -38,7 +35,8 @@ class MenuController extends BackendController
         ]);
     }
     
-    public function addMenu(Request $request) {
+    public function addMenu(Request $request)
+    {
         $this->validateRequest([
             'name' => 'required|string|max:250',
         ], $request, [
@@ -56,7 +54,8 @@ class MenuController extends BackendController
         ]);
     }
     
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $this->validateRequest([
             'name' => 'required|string|max:250',
             'content' => 'required',
@@ -76,7 +75,8 @@ class MenuController extends BackendController
         ]);
     }
     
-    public function getItems(Request $request) {
+    public function getItems(Request $request)
+    {
         $this->validateRequest([
             'type' => 'required',
         ], $request, [
