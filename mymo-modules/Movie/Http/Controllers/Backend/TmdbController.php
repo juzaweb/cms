@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend;
+namespace Modules\Movie\Http\Controllers\Backend;
 
 use App\Core\Helpers\TmdbApi;
 use Modules\Movie\Models\Category\Countries;

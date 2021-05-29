@@ -28,6 +28,7 @@ class MymoCoreServiceProvider extends ServiceProvider
     {
         $this->bootMigrations();
         $this->bootMiddlewares();
+        $this->bootPublishes();
         $this->loadMigrationsFrom(core_path('database/migrations'));
         $this->loadFactoriesFrom(core_path('database/factories'));
         $this->loadViewsFrom(core_path('resources/views'), 'mymo_core');
@@ -76,5 +77,16 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->singleton('mymo.hook', function () {
             return new HookAction();
         });
+    }
+
+    protected function bootPublishes()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/mymo_core.php' => base_path('config/mymo_core.php'),
+        ], 'mymo_config');
+
+        $this->publishes([
+            __DIR__.'/../resources/assets' => public_path('styles'),
+        ], 'mymo_assets');
     }
 }

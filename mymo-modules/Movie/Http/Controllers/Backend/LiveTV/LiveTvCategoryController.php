@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend\LiveTV;
+namespace Modules\Movie\Http\Controllers\Backend\LiveTV;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;

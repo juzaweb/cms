@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Frontend\Account;
+namespace Modules\Movie\Http\Controllers\Frontend\Account;
 
 use Mymo\Core\Http\Controllers\FrontendController;
 

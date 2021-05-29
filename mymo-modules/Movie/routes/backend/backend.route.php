@@ -60,20 +60,3 @@ Route::group(['prefix' => 'stars'], function () {
     Route::post('/remove', 'Backend\StarsController@remove')->name('admin.stars.remove');
 });
 
-Route::group(['prefix' => 'pages'], function () {
-    Route::get('/', 'Backend\PagesController@index')->name('admin.pages');
-    
-    Route::get('/getdata', 'Backend\PagesController@getData')->name('admin.pages.getdata');
-    
-    Route::get('/create', 'Backend\PagesController@form')->name('admin.pages.create');
-    
-    Route::get('/edit/{id}', 'Backend\PagesController@form')->name('admin.pages.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\PagesController@save')->name('admin.pages.save');
-    
-    Route::post('/remove', 'Backend\PagesController@remove')->name('admin.pages.remove');
-});
-
-Route::group(['prefix' => 'tags'], function () {
-    Route::post('/save', 'Backend\TagsController@save')->name('admin.tags.save');
-});

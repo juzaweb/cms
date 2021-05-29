@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Frontend\Stream;
+namespace Modules\Movie\Http\Controllers\Frontend\Stream;
 
 use App\Core\Helpers\GoogleDrive;
 use Mymo\Core\Http\Controllers\BackendController;

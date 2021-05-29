@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Frontend\Auth;
+namespace Modules\Movie\Http\Controllers\Frontend\Auth;
 
 use App\Core\Events\RegisterSuccess;
 use App\Core\User;

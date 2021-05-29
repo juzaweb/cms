@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Frontend;
+namespace Modules\Movie\Http\Controllers\Frontend;
 
 use App\Core\Helpers\VideoStream;
 use App\Core\Helpers\UrlVideoStream;

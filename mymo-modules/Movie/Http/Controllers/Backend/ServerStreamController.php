@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Backend;
+namespace Modules\Movie\Http\Controllers\Backend;
 
 use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
