@@ -13,17 +13,17 @@ Route::group([
 
     Route::get('/jsonitems', 'ItemsController@getItems');
 
-    Route::get('/move', 'ItemsController@move');
+    /*Route::get('/move', 'ItemsController@move');
 
     Route::get('/domove', 'ItemsController@domove');
 
-    Route::get('/new-folder', 'FolderController@getAddfolder');
+    Route::get('/new-folder', 'FolderController@getAddfolder');*/
 
     Route::get('/folders', 'FolderController@getFolders');
 
-    Route::get('/rename', 'RenameController@getRename');
+    /*Route::get('/rename', 'RenameController@getRename');
 
-    Route::get('/download', 'DownloadController@getDownload');
+    Route::get('/download', 'DownloadController@getDownload');*/
 
-    Route::get('/delete', 'DeleteController@getDelete');
+    Route::post('/delete', 'DeleteController@delete');
 });

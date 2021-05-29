@@ -260,9 +260,10 @@ function setOpenFolders() {
 // ==  Ajax actions  ==
 // ====================
 
-function performLfmRequest(url, parameter, type) {
+function performLfmRequest(url, parameter, method = 'GET', type = 'text') {
     var data = defaultParameters();
 
+    data['_token'] =  $('meta[name="csrf-token"]').attr('content');
     if (parameter != null) {
         $.each(parameter, function (key, value) {
             data[key] = value;
@@ -270,14 +271,14 @@ function performLfmRequest(url, parameter, type) {
     }
 
     return $.ajax({
-        type: 'GET',
+        type: method,
         beforeSend: function (request) {
             var token = getUrlParam('token');
             if (token !== null) {
                 request.setRequestHeader("Authorization", 'Bearer ' + token);
             }
         },
-        dataType: type || 'text',
+        dataType: type,
         url: lfm_route + '/' + url,
         data: data,
         cache: false
@@ -306,7 +307,7 @@ var hideNavAndShowEditor = function (data) {
 };
 
 function loadFolders() {
-    performLfmRequest('folders', {}, 'html')
+    performLfmRequest('folders', {}, 'GET', 'html')
         .done(function (data) {
             $('#tree').html(data);
             loadItems();
@@ -425,7 +426,7 @@ function createPagination(paginationSetting) {
 
 function loadItems(page) {
     loading(true);
-    performLfmRequest('jsonitems', {show_list: show_list, sort_type: sort_type, page: page || 1}, 'html')
+    performLfmRequest('jsonitems', {show_list: show_list, sort_type: sort_type, page: page || 1}, 'GET', 'html')
         .done(function (data) {
             selected = [];
             var response = JSON.parse(data);
@@ -533,7 +534,7 @@ function loading(show_loading) {
 }
 
 function createFolder(folder_name) {
-    performLfmRequest('newfolder', {name: folder_name})
+    performLfmRequest('newfolder', {name: folder_name}, 'POST')
         .done(refreshFoldersAndItems);
 }
 
@@ -546,7 +547,7 @@ function rename(item) {
         performLfmRequest('rename', {
             file: item.name,
             new_name: new_name
-        }).done(refreshFoldersAndItems);
+        }, 'POST').done(refreshFoldersAndItems);
     });
 }
 
@@ -554,28 +555,26 @@ function trash(items) {
     notify(lang['message-delete'], function () {
         performLfmRequest('delete', {
             items: items.map(function (item) {
-                return item.name;
+                return item.path;
             })
-        }).done(refreshFoldersAndItems)
+        }, 'POST').done(refreshFoldersAndItems)
     });
 }
 
 function crop(item) {
-    performLfmRequest('crop', {img: item.name})
+    performLfmRequest('crop', {img: item.path})
         .done(hideNavAndShowEditor);
 }
 
 function resize(item) {
-    performLfmRequest('resize', {img: item.name})
+    performLfmRequest('resize', {img: item.path})
         .done(hideNavAndShowEditor);
 }
 
 function download(items) {
     items.forEach(function (item, index) {
         var data = defaultParameters();
-
-        data['file'] = item.name;
-
+        data['file'] = item.path;
         var token = getUrlParam('token');
         if (token) {
             data['token'] = token;
@@ -656,7 +655,7 @@ function preview(items) {
 function move(items) {
     performLfmRequest('move', {
         items: items.map(function (item) {
-            return item.name;
+            return item.path;
         })
     })
         .done(refreshFoldersAndItems);

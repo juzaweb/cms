@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#333844">
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333844">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#333844">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ trans('filemanager::lfm.title-page') }}</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('styles/filemanager/images/72px color.png') }}">

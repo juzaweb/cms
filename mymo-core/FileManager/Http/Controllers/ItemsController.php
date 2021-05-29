@@ -45,6 +45,7 @@ class ItemsController extends FileManagerController
             $items[] = [
                 'icon' => $file->type == 1 ? 'fa-image' : 'fa-file',
                 'is_file' => true,
+                'path' => $file->path,
                 'is_image' => $file->type == 1 ? true : false,
                 'name' => $file->name,
                 'thumb_url' => $file->type == 1 ? $storage->url($file->path) : null,

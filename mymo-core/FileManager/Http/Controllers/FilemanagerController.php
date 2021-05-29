@@ -69,7 +69,7 @@ class FilemanagerController extends Controller
     
     protected function getPath($url) {
         $explode = explode('uploads/', $url);
-        if ($explode[1]) {
+        if (isset($explode[1])) {
             return $explode[1];
         }
         return $url;

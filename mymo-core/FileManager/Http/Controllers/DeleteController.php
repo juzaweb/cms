@@ -7,7 +7,7 @@ use Mymo\Core\Models\Folders;
 
 class DeleteController extends FileManagerController
 {
-    public function getDelete()
+    public function delete()
     {
         $item_names = request('items');
         $errors = [];
@@ -21,8 +21,7 @@ class DeleteController extends FileManagerController
             $is_directory = $this->isDirectory($file);
             if ($is_directory) {
                 Folders::find($file)->deleteFolder();
-            }
-            else {
+            } else {
                 $file_path = $this->getPath($file);
                 Files::where('path', '=', $file_path)->first()->deleteFile();
             }
