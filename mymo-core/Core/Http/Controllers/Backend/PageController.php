@@ -47,7 +47,7 @@ class PageController extends BackendController
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.pages.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.page.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -84,7 +84,7 @@ class PageController extends BackendController
         return response()->json([
             'status' => 'success',
             'message' => trans('mymo_core::app.saved_successfully'),
-            'redirect' => route('admin.pages'),
+            'redirect' => route('admin.page'),
         ]);
     }
     

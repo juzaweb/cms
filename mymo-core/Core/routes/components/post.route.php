@@ -15,7 +15,7 @@ Route::group(['prefix' => 'pages'], function () {
 });
 
 Route::group(['prefix' => 'posts'], function () {
-    Route::get('/', 'Backend\PostController@index')->name('admin.posts');
+    Route::get('/', 'Backend\PostController@index')->name('admin.post');
     
     Route::get('/getdata', 'Backend\PostController@getData')->name('admin.post.getdata');
     

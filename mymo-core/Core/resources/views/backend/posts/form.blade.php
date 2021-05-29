@@ -12,7 +12,7 @@
                     <div class="col-md-6">
                         <div class="btn-group float-right">
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('mymo_core::app.save')</button>
-                            <a href="{{ route('admin.posts') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('mymo_core::app.cancel')</a>
+                            <a href="{{ route('admin.post') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('mymo_core::app.cancel')</a>
                         </div>
                     </div>
                 </div>

@@ -48,7 +48,7 @@ class PostController extends BackendController
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.posts.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.post.edit', ['id' => $row->id]);
         }
         
         return response()->json([
@@ -98,7 +98,7 @@ class PostController extends BackendController
         return response()->json([
             'status' => 'success',
             'message' => trans('mymo_core::app.saved_successfully'),
-            'redirect' => route('admin.posts'),
+            'redirect' => route('admin.post'),
         ]);
     }
     
