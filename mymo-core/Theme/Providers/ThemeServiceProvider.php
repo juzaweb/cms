@@ -2,8 +2,6 @@
 
 namespace Mymo\Theme\Providers;
 
-use App;
-use File;
 use Illuminate\Support\ServiceProvider;
 use Mymo\Theme\Console\ThemeListCommand;
 use Mymo\Theme\Contracts\ThemeContract;
@@ -87,9 +85,13 @@ class ThemeServiceProvider extends ServiceProvider
 
         $this->publishes([
             $configPath => config_path('theme.php'),
-        ]);
+        ], 'theme_config');
 
         $this->mergeConfigFrom($configPath, 'theme');
+
+        $this->publishes([
+            base_path('mymo-themes/mymo/assets') => public_path('styles/theme'),
+        ], 'theme_assets');
     }
 
     /**
