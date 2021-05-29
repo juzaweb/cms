@@ -10,7 +10,9 @@ class PageController extends BackendController
 {
     public function index()
     {
-        return view('mymo_core::backend.pages.index');
+        return view('mymo_core::backend.pages.index', [
+            'title' => trans('mymo_core::app.pages')
+        ]);
     }
     
     public function getData(Request $request)

@@ -1,16 +1,9 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', $title)
-
 @section('content')
 
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('mymo_core::app.pages'),
-        'url' => route('admin.pages')
-    ], $model) }}
-
 <div class="cui__utils__content">
-    <form method="post" action="{{ route('admin.pages.save') }}" class="form-ajax">
+    <form method="post" action="{{ route('admin.page.save') }}" class="form-ajax">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -21,7 +14,7 @@
                     <div class="col-md-6">
                         <div class="btn-group float-right">
                             <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('mymo_core::app.save')</button>
-                            <a href="{{ route('admin.pages') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('mymo_core::app.cancel')</a>
+                            <a href="{{ route('admin.page') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('mymo_core::app.cancel')</a>
                         </div>
                     </div>
                 </div>

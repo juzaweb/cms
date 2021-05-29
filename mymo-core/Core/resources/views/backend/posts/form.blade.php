@@ -1,16 +1,7 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', $title)
-
 @section('content')
-
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('mymo_core::app.posts'),
-        'url' => route('admin.posts')
-    ], $model) }}
-
-<div class="cui__utils__content">
-    <form method="post" action="{{ route('admin.posts.save') }}" class="form-ajax">
+    <form method="post" action="{{ route('admin.post.save') }}" class="form-ajax">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -74,17 +65,17 @@
 
                             <div class="show-categories">
                                 @php
-                                $selected = explode(',', $model->category);
+                                    $selected = explode(',', $model->category);
                                 @endphp
                                 <ul class="mt-2 p-0">
-                                @foreach($categories as $item)
-                                    <li class="m-1" id="item-category-{{ $item->id }}">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="categories[]" class="custom-control-input" id="category-{{ $item->id }}" value="{{ $item->id }}" @if(in_array($item->id, $selected)) checked @endif>
-                                            <label class="custom-control-label" for="category-{{ $item->id }}">{{ $item->name }}</label>
-                                        </div>
-                                    </li>
-                                @endforeach
+                                    @foreach($categories as $item)
+                                        <li class="m-1" id="item-category-{{ $item->id }}">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="categories[]" class="custom-control-input" id="category-{{ $item->id }}" value="{{ $item->id }}" @if(in_array($item->id, $selected)) checked @endif>
+                                                <label class="custom-control-label" for="category-{{ $item->id }}">{{ $item->name }}</label>
+                                            </div>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
 
@@ -105,7 +96,7 @@
 
                             <div class="show-tags mt-2">
                                 @foreach($tags as $item)
-                                <span class="tag m-1">{{ $item->name }} <a href="javascript:void(0)" class="text-danger ml-1 remove-tag-item"><i class="fa fa-times-circle"></i></a>
+                                    <span class="tag m-1">{{ $item->name }} <a href="javascript:void(0)" class="text-danger ml-1 remove-tag-item"><i class="fa fa-times-circle"></i></a>
   <input type="hidden" name="tags[]" class="tag-explode" value="{{ $item->id }}">
 </span>
                                 @endforeach
@@ -130,9 +121,8 @@
 
     <script type="text/javascript">
         CKEDITOR.replace('baseContent', {
-            filebrowserImageBrowseUrl: '/admin-cp/filemanager?type=Images',
-            filebrowserBrowseUrl: '/admin-cp/filemanager?type=Files'
+            filebrowserImageBrowseUrl: '/admin-cp/file-manager?type=Images',
+            filebrowserBrowseUrl: '/admin-cp/file-manager?type=Files'
         });
     </script>
-</div>
 @endsection

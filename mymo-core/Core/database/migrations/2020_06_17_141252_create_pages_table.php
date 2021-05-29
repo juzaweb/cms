@@ -11,22 +11,23 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('status', 50)->default('draft');
+            $table->bigInteger('views')->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('page_translations', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('name', 250);
             $table->string('thumbnail', 250)->nullable();
             $table->string('slug', 150)->unique()->index();
             $table->longText('content')->nullable();
-            $table->tinyInteger('status')->default(1);
-            $table->string('meta_title', 70)->nullable();
-            $table->string('meta_description', 320)->nullable();
-            $table->string('keywords', 320)->nullable();
-            $table->timestamps();
         });
-        
-        $this->_createPages();
     }
     
     public function down()
     {
+        Schema::dropIfExists('page_translations');
         Schema::dropIfExists('pages');
     }
     

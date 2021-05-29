@@ -3,16 +3,17 @@
 namespace Mymo\Core\Http\Controllers\Backend;
 
 use Mymo\Core\Models\PostCategories;
-use Mymo\Core\Models\Category\Tags;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Posts;
 
-class PostsController extends Controller
+class PostController extends BackendController
 {
     public function index()
     {
-        return view('mymo_core::backend.posts.index');
+        return view('mymo_core::backend.posts.index', [
+            'title' => trans('mymo_core::app.posts')
+        ]);
     }
     
     public function getData(Request $request)
@@ -61,7 +62,7 @@ class PostsController extends Controller
         $model = Posts::firstOrNew(['id' => $id]);
         $categories = PostCategories::where('status', '=', 1)
             ->get();
-        $tags = Tags::whereIn('id', explode(',', $model->tags))->get();
+        $tags = [];
         
         return view('mymo_core::backend.posts.form', [
             'model' => $model,

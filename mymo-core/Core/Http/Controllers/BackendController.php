@@ -60,4 +60,12 @@ class BackendController extends Controller
             json_message($validator->errors()->all()[0], 'error');
         }
     }
+
+    protected function addBreadcrumb(array $item, $name = 'admin')
+    {
+        add_filters($name . '_breadcrumb', function ($items) use ($item) {
+            $items[] = $item;
+            return $items;
+        });
+    }
 }

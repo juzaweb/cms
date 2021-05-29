@@ -12,8 +12,6 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->string('status', 50)->default('draft');
             $table->bigInteger('views')->default(0);
-            $table->bigInteger('created_by')->index();
-            $table->bigInteger('updated_by')->index();
             $table->timestamps();
         });
 

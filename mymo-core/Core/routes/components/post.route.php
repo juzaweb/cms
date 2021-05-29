@@ -1,17 +1,31 @@
 <?php
 
+Route::group(['prefix' => 'pages'], function () {
+    Route::get('/', 'Backend\PageController@index')->name('admin.page');
+
+    Route::get('/getdata', 'Backend\PageController@getData')->name('admin.page.getdata');
+
+    Route::get('/create', 'Backend\PageController@form')->name('admin.page.create');
+
+    Route::get('/edit/{id}', 'Backend\PageController@form')->name('admin.page.edit')->where('id', '[0-9]+');
+
+    Route::post('/save', 'Backend\PageController@save')->name('admin.page.save');
+
+    Route::post('/remove', 'Backend\PageController@remove')->name('admin.page.remove');
+});
+
 Route::group(['prefix' => 'posts'], function () {
-    Route::get('/', 'Backend\PostsController@index')->name('admin.posts');
+    Route::get('/', 'Backend\PostController@index')->name('admin.posts');
     
-    Route::get('/getdata', 'Backend\PostsController@getData')->name('admin.posts.getdata');
+    Route::get('/getdata', 'Backend\PostController@getData')->name('admin.post.getdata');
     
-    Route::get('/create', 'Backend\PostsController@form')->name('admin.posts.create');
+    Route::get('/create', 'Backend\PostController@form')->name('admin.post.create');
     
-    Route::get('/edit/{id}', 'Backend\PostsController@form')->name('admin.posts.edit')->where('id', '[0-9]+');
+    Route::get('/edit/{id}', 'Backend\PostController@form')->name('admin.post.edit')->where('id', '[0-9]+');
     
-    Route::post('/save', 'Backend\PostsController@save')->name('admin.posts.save');
+    Route::post('/save', 'Backend\PostController@save')->name('admin.post.save');
     
-    Route::post('/remove', 'Backend\PostsController@remove')->name('admin.posts.remove');
+    Route::post('/remove', 'Backend\PostController@remove')->name('admin.post.remove');
 });
 
 Route::group(['prefix' => 'post-categories'], function () {
