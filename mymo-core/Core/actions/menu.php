@@ -93,6 +93,15 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
+    trans('mymo_core::app.modules'),
+    'modules',
+    [
+        'icon' => 'fa fa-plug',
+        'position' => 50
+    ]
+);
+
+HookAction::addAdminMenu(
     trans('mymo_core::app.setting'),
     'setting',
     [

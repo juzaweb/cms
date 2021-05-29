@@ -406,5 +406,6 @@ return [
   'news' => 'News',
   'updates' => 'Updates',
   'appearance' => 'Appearance',
+  'modules' => 'Modules',
 ];
 
