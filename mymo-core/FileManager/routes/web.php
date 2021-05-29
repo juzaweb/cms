@@ -9,7 +9,7 @@ Route::group([
 
     Route::get('/errors', 'FilemanagerController@getErrors');
 
-    Route::any('/upload', 'UploadController@upload')->name('mymo_core::backend.filemanager.upload');
+    Route::any('/upload', 'UploadController@upload')->name('filemanager.upload');
 
     Route::get('/jsonitems', 'ItemsController@getItems');
 
