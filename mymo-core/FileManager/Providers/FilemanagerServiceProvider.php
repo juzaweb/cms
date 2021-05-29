@@ -12,7 +12,7 @@
  * Time: 10:10 PM
  */
 
-namespace Mymo\FileManager;
+namespace Mymo\FileManager\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -25,16 +25,16 @@ class FilemanagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/resources/lang', 'filemanager');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'filemanager');
 
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'filemanager');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'filemanager');
 
         $this->publishes([
-            __DIR__ . '/config/filemanager.php' => base_path('config/filemanager.php'),
+            __DIR__ . '/../config/filemanager.php' => base_path('config/filemanager.php'),
         ], 'filemanager_config');
 
         $this->publishes([
-            __DIR__.'/resources/assets' => public_path('styles/filemanager'),
+            __DIR__.'/../resources/assets' => public_path('styles/filemanager'),
         ], 'filemanager_public');
     }
 
@@ -45,6 +45,7 @@ class FilemanagerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/filemanager.php', 'filemanager');
+        $this->mergeConfigFrom(__DIR__ . '/../config/filemanager.php', 'filemanager');
+        $this->app->register(RouteServiceProvider::class);
     }
 }

@@ -5,25 +5,25 @@ Route::group([
     'middleware' => ['web', 'admin']
 ], function ()
 {
-    Route::get('/', 'Backend\Filemanager\LfmController@show');
+    Route::get('/', 'FilemanagerController@show');
 
-    Route::get('/errors', 'Backend\Filemanager\LfmController@getErrors');
+    Route::get('/errors', 'FilemanagerController@getErrors');
 
-    Route::any('/upload', 'Backend\Filemanager\UploadController@upload')->name('mymo_core::backend.filemanager.upload');
+    Route::any('/upload', 'UploadController@upload')->name('mymo_core::backend.filemanager.upload');
 
-    Route::get('/jsonitems', 'Backend\Filemanager\ItemsController@getItems');
+    Route::get('/jsonitems', 'ItemsController@getItems');
 
-    Route::get('/move', 'Backend\Filemanager\ItemsController@move');
+    Route::get('/move', 'ItemsController@move');
 
-    Route::get('/domove', 'Backend\Filemanager\ItemsController@domove');
+    Route::get('/domove', 'ItemsController@domove');
 
-    Route::get('/newfolder', 'Backend\Filemanager\FolderController@getAddfolder');
+    Route::get('/new-folder', 'FolderController@getAddfolder');
 
-    Route::get('/folders', 'Backend\Filemanager\FolderController@getFolders');
+    Route::get('/folders', 'FolderController@getFolders');
 
-    Route::get('/rename', 'Backend\Filemanager\RenameController@getRename');
+    Route::get('/rename', 'RenameController@getRename');
 
-    Route::get('/download', 'Backend\Filemanager\DownloadController@getDownload');
+    Route::get('/download', 'DownloadController@getDownload');
 
-    Route::get('/delete', 'Backend\Filemanager\DeleteController@getDelete');
+    Route::get('/delete', 'DeleteController@getDelete');
 });

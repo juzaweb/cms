@@ -15,6 +15,7 @@ namespace Mymo\Core\Providers;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Mymo\Core\Helpers\HookAction;
+use Mymo\FileManager\Providers\FilemanagerServiceProvider;
 use Mymo\Performance\Providers\MymoPerformanceServiceProvider;
 use Mymo\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
@@ -64,6 +65,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(HookActionServiceProvider::class);
         $this->app->register(MymoPerformanceServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
+        $this->app->register(FilemanagerServiceProvider::class);
     }
 
     protected function registerSingleton()
