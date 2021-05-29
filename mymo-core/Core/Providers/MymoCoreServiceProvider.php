@@ -66,6 +66,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(MymoPerformanceServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
         $this->app->register(FilemanagerServiceProvider::class);
+        $this->app->register(TranslatableServiceProvider::class);
     }
 
     protected function registerSingleton()

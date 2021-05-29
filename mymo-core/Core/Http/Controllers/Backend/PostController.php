@@ -2,8 +2,8 @@
 
 namespace Mymo\Core\Http\Controllers\Backend;
 
-use Mymo\Core\Models\PostCategories;
 use Illuminate\Http\Request;
+use Mymo\Core\Models\PostCategories;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Posts;
 
@@ -66,7 +66,7 @@ class PostController extends BackendController
         
         return view('mymo_core::backend.posts.form', [
             'model' => $model,
-            'title' => $model->title ?: trans('mymo_core::app.add_new'),
+            'title' => $model->title ?? trans('mymo_core::app.add_new'),
             'categories' => $categories,
             'tags' => $tags
         ]);
