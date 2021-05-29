@@ -1,129 +1,96 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', trans('mymo_core::app.dashboard'))
-
 @section('content')
-    <div class="cui__utils__content">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="cui__utils__heading">
-                    <strong class="text-uppercase font-size-16">@lang('mymo_core::app.statistics')</strong>
-                </div>
-                <div class="row">
-                    {{--<div class="col-xl-3">
-                        <div class="card">
-                            <div class="card-body position-relative overflow-hidden">
-                                <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_movie }}</div>
-                                <div class="text-uppercase">@lang('mymo_core::app.movies')</div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3">
-                        <div class="card">
-                            <div class="card-body position-relative overflow-hidden">
-                                <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_tvserie }}</div>
-                                <div class="text-uppercase">@lang('mymo_core::app.tv_series')</div>
-
-                            </div>
-                        </div>
-                    </div>--}}
-
-                    <div class="col-xl-3">
-                        <div class="card">
-                            <div class="card-body position-relative overflow-hidden">
-                                <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_user }}</div>
-                                <div class="text-uppercase">@lang('mymo_core::app.users')</div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3">
-                        <div class="card">
-                            <div class="card-body position-relative overflow-hidden">
-                                <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_page }}</div>
-                                <div class="text-uppercase">@lang('mymo_core::app.pages')</div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="cui__utils__heading">
+                <strong class="text-uppercase font-size-16">@lang('mymo_core::app.statistics')</strong>
             </div>
-        </div>
+            <div class="row">
+                {{--<div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body position-relative overflow-hidden">
+                            <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_movie }}</div>
+                            <div class="text-uppercase">@lang('mymo_core::app.movies')</div>
 
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>@lang('mymo_core::app.new_users')</h5>
-                    </div>
-
-                    <div class="card-body">
-                        <table class="table" id="users-table">
-                            <thead>
-                                <tr>
-                                    <th data-formatter="index_formatter" data-width="5%">#</th>
-                                    <th data-field="name">@lang('mymo_core::app.name')</th>
-                                    <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>@lang('mymo_core::app.news')</h5>
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body position-relative overflow-hidden">
+                            <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_tvserie }}</div>
+                            <div class="text-uppercase">@lang('mymo_core::app.tv_series')</div>
+
+                        </div>
                     </div>
+                </div>--}}
 
-                    <div class="card-body">
-                        <table class="table" id="users-notification">
-                            <thead>
-                                <tr>
-                                    <th data-formatter="index_formatter" data-width="5%">#</th>
-                                    <th data-field="subject" data-formatter="subject_formatter">@lang('mymo_core::app.subject')</th>
-                                    <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
-                                </tr>
-                            </thead>
-                        </table>
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body position-relative overflow-hidden">
+                            <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_user }}</div>
+                            <div class="text-uppercase">@lang('mymo_core::app.users')</div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body position-relative overflow-hidden">
+                            <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_page }}</div>
+                            <div class="text-uppercase">@lang('mymo_core::app.pages')</div>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script type="text/javascript">
-        setTimeout(function () {
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawChart);
-        }, 200);
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@lang('mymo_core::app.new_users')</h5>
+                </div>
 
+                <div class="card-body">
+                    <table class="table" id="users-table">
+                        <thead>
+                        <tr>
+                            <th data-formatter="index_formatter" data-width="5%">#</th>
+                            <th data-field="name">@lang('mymo_core::app.name')</th>
+                            <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-        function drawChart() {
-            var jsonData = $.ajax({
-                url: "{{ route('admin.dashboard.views_chart') }}",
-                dataType: "json",
-                async: false
-            }).responseText;
-            jsonData = JSON.parse(jsonData);
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>@lang('mymo_core::app.news')</h5>
+                </div>
 
-            var data = google.visualization.arrayToDataTable(jsonData);
-
-            var options = {
-                title: '@lang('mymo_core::app.chart_of_views_this_month')',
-                curveType: 'function',
-                legend: { position: 'bottom' },
-            };
-
-            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-            chart.draw(data, options);
-        }
-    </script>
+                <div class="card-body">
+                    <table class="table" id="users-notification">
+                        <thead>
+                        <tr>
+                            <th data-formatter="index_formatter" data-width="5%">#</th>
+                            <th data-field="subject" data-formatter="subject_formatter">@lang('mymo_core::app.subject')</th>
+                            <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
 

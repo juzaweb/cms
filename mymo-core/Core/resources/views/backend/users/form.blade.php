@@ -1,15 +1,6 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', $title)
-
 @section('content')
-
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('mymo_core::app.users'),
-        'url' => route('admin.users')
-    ], $model) }}
-
-<div class="cui__utils__content">
     <form method="post" action="{{ route('admin.users.save') }}" class="form-ajax">
         <div class="card">
             <div class="card-header">
@@ -115,5 +106,4 @@
             $("#avatar").trigger('click');
         });
     </script>
-</div>
 @endsection

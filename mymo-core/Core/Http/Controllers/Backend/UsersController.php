@@ -10,7 +10,9 @@ class UsersController extends BackendController
 {
     public function index()
     {
-        return view('mymo_core::backend.users.index');
+        return view('mymo_core::backend.users.index', [
+            'title' => trans('mymo_core::app.users'),
+        ]);
     }
     
     public function getData(Request $request)

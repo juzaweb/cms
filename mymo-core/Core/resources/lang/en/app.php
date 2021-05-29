@@ -406,5 +406,11 @@ return [
   'news' => 'News',
   'updates' => 'Updates',
   'appearance' => 'Appearance',
+  'modules' => 'Modules',
+  'apply' => 'Apply',
+  'activate' => 'Activate',
+  'deactivate' => 'Deactivate',
+  'bulk-actions' => 'Bulk Actions',
+  'all-status' => 'All status',
 ];
 

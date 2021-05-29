@@ -1,5 +1,7 @@
 <?php
 /**
+ * MYMO CMS - Free Laravel CMS
+ *
  * @package    mymocms/mymocms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/mymocms/mymocms
@@ -11,9 +13,9 @@
  */
 
 use Illuminate\Support\Facades\Auth;
+use Mymo\Core\Helpers\Breadcrumb;
 use Mymo\Core\Models\Menu;
 use Mymo\Core\Models\User;
-use Mymo\Core\Models\Sliders;
 use Mymo\Core\Models\ThemeConfig;
 use Illuminate\Support\Str;
 
@@ -270,4 +272,17 @@ function user_avatar($user = null) {
     }
 
     return asset('styles/images/thumb-default.png');
+}
+
+function breadcrumb($name, $add_items = [])
+{
+    $items = apply_filters($name . '_breadcrumb', []);
+
+    if ($add_items) {
+        foreach ($add_items as $add_item) {
+            $items[] = $add_item;
+        }
+    }
+
+    return Breadcrumb::render($name, $items);
 }
