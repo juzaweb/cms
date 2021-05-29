@@ -1,6 +1,10 @@
 <?php
 
-Route::group(['prefix' => 'admin-cp/file-manager', 'middleware' => ['web', 'admin']], function () {
+Route::group([
+    'prefix' => 'admin-cp/file-manager',
+    'middleware' => ['web', 'admin']
+], function ()
+{
     Route::get('/', 'Backend\Filemanager\LfmController@show');
 
     Route::get('/errors', 'Backend\Filemanager\LfmController@getErrors');
