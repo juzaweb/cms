@@ -1,4 +1,5 @@
 <?php
+
 namespace Mymo\Repository\Contracts;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;

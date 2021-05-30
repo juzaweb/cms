@@ -19,6 +19,7 @@ use Mymo\Core\Macros\RouterMacros;
 use Mymo\FileManager\Providers\FilemanagerServiceProvider;
 use Mymo\Module\LaravelModulesServiceProvider;
 use Mymo\Performance\Providers\MymoPerformanceServiceProvider;
+use Mymo\Repository\Providers\RepositoryServiceProvider;
 use Mymo\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -44,6 +45,7 @@ class MymoCoreServiceProvider extends ServiceProvider
     {
         $this->registerProviders();
         $this->registerSingleton();
+        $this->registerRouteMacros();
     }
 
     protected function bootMigrations()
@@ -83,6 +85,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(FilemanagerServiceProvider::class);
         $this->app->register(TranslatableServiceProvider::class);
         $this->app->register(LaravelModulesServiceProvider::class);
+        $this->app->register(RepositoryServiceProvider::class);
     }
 
     protected function registerSingleton()

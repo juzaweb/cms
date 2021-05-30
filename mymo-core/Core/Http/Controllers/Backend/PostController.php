@@ -15,8 +15,25 @@ class PostController extends BackendController
             'title' => trans('mymo_core::app.posts')
         ]);
     }
-    
-    public function getData(Request $request)
+
+    public function create()
+    {
+        $this->addBreadcrumb([
+            'title' => $this->setting->get('label'),
+            'url' => route("admin.{$this->postType}.index"),
+        ]);
+
+        return view('mymo_core::backend.posts.form', [
+            'title' => trans('mymo_core::app.add_new'),
+        ]);
+    }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function getDataTable(Request $request)
     {
         $search = $request->get('search');
         $status = $request->get('status');
@@ -72,7 +89,7 @@ class PostController extends BackendController
         ]);
     }
     
-    public function save(Request $request)
+    public function store(Request $request)
     {
         $this->validateRequest([
             'title' => 'required|string|max:250',
@@ -102,7 +119,7 @@ class PostController extends BackendController
         ]);
     }
     
-    public function remove(Request $request)
+    public function bulkActions(Request $request)
     {
         $this->validateRequest([
             'ids' => 'required',
@@ -110,7 +127,7 @@ class PostController extends BackendController
             'ids' => trans('mymo_core::app.posts')
         ]);
         
-        Posts::destroy($request->ids);
+        Posts::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',

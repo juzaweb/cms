@@ -9,7 +9,7 @@
 
         <div class="col-md-6">
             <div class="btn-group float-right">
-                <a href="{{ route('admin.post.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add_new')</a>
+                <a href="{{ route('admin.posts.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add_new')</a>
                 <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('mymo_core::app.delete')</button>
             </div>
         </div>
@@ -40,16 +40,16 @@
     </div>
 
     <div class="table-responsive mb-5">
-        <table class="table load-bootstrap-table">
+        <table class="table mymo-table">
             <thead>
-            <tr>
-                <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('mymo_core::app.thumbnail')</th>
-                <th data-field="title" data-formatter="name_formatter">@lang('mymo_core::app.name')</th>
+                <tr>
+                    <th data-width="3%" data-field="state" data-checkbox="true"></th>
+                    <th data-width="10%" data-field="thumbnail" data-formatter="thumbnail_formatter">@lang('mymo_core::app.thumbnail')</th>
+                    <th data-field="title" data-formatter="name_formatter">@lang('mymo_core::app.name')</th>
 
-                <th data-width="15%" data-field="created">@lang('mymo_core::app.created_at')</th>
-                <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('mymo_core::app.status')</th>
-            </tr>
+                    <th data-width="15%" data-field="created">@lang('mymo_core::app.created_at')</th>
+                    <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('mymo_core::app.status')</th>
+                </tr>
             </thead>
         </table>
     </div>
@@ -71,8 +71,8 @@
         }
 
         var table = new MymoTable({
-            url: '{{ route('admin.post.getdata') }}',
-            action_url: '{{ route('admin.post.bulk-actions') }}',
+            url: '{{ route('admin.posts.get-data') }}',
+            action_url: '{{ route('admin.posts.bulk-actions') }}',
         });
     </script>
 @endsection

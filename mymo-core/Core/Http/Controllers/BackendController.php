@@ -28,7 +28,7 @@ class BackendController extends Controller
             }
         }
 
-        if (config('mymo_core::app.demo') == 'true' && \Auth::id() != 1) {
+        if (config('mymo_core::app.demo', false) == 'true' && \Auth::id() != 1) {
             if (\request()->isMethod('post')) {
                 if (\request()->is('admin-cp/*')) {
                     return response()->json([

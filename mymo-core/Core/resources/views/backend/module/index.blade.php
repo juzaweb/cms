@@ -47,7 +47,7 @@
     </div>
 
     <div class="table-responsive mb-5">
-        <table class="table tad-table">
+        <table class="table mymo-table">
             <thead>
                 <tr>
                     <th data-width="3%" data-field="state" data-checkbox="true"></th>

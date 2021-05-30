@@ -19,7 +19,6 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class RepositoryCommand extends Command
 {
-
     /**
      * The name of command.
      *

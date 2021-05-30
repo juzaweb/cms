@@ -49,7 +49,7 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table load-bootstrap-table">
+                <table class="table mymo-table">
                     <thead>
                         <tr>
                             <th data-width="35%" data-field="en" data-sortable="true">English</th>
