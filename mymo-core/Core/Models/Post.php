@@ -3,23 +3,37 @@
 namespace Mymo\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Mymo\Repository\Contracts\Transformable;
+use Mymo\Core\Translatable\Translatable;
 use Mymo\Repository\Traits\TransformableTrait;
+use Mymo\Core\Translatable\Contracts\Translatable as TranslatableContract;
 
-/**
- * Class Post.
- *
- * @package namespace Mymo\Core\Models;
- */
-class Post extends Model implements Transformable
+class Post extends Model implements TranslatableContract
 {
-    use TransformableTrait;
+    use TransformableTrait, Translatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [];
+    protected $fillable = [
+        'status',
+    ];
 
+    public $translatedAttributes = [
+        'title',
+        'content',
+        'thumbnail',
+        'slug'
+    ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
+
+    public function metas()
+    {
+        return $this->hasMany(PostMeta::class, 'post_id', 'id');
+    }
+
+    public function taxonomies()
+    {
+        return $this->belongsToMany('Tadcms\System\Models\Taxonomy', 'term_taxonomies', 'term_id', 'taxonomy_id');
+    }
 }
