@@ -88,7 +88,7 @@
             return '<span class="text-danger">@lang('mymo_core::app.error')</span>';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.logs.email.getdata') }}',
             remove_url: '{{ route('admin.logs.email.remove') }}',
             status_url: '{{ route('admin.logs.email.status') }}',

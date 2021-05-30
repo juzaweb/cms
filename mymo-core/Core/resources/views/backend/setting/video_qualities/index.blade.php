@@ -71,7 +71,7 @@
             return '<span class="text-danger">@lang('mymo_core::app.no')</span>';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.video_qualities.getdata') }}',
             remove_url: '{{ route('admin.video_qualities.remove') }}',
         });

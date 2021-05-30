@@ -63,7 +63,7 @@
             return '<a href="'+ row.edit_url +'">'+ value +'</a>';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.setting.email_templates.getdata') }}',
         });
     </script>

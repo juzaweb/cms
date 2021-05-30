@@ -102,9 +102,9 @@
 
         function status_formatter(value, row, index) {
             if (value == 1) {
-                return '<span class="text-success">'+ langs.enabled +'</span>';
+                return '<span class="text-success">'+ mymo.lang.enabled +'</span>';
             }
-            return '<span class="text-danger">'+ langs.disabled +'</span>';
+            return '<span class="text-danger">'+ mymo.lang.disabled +'</span>';
         }
 
         function default_formatter(value, row, index) {
@@ -114,11 +114,11 @@
 
         function options_formatter(value, row, index) {
             let result = '';
-            result += '<a href="'+ row.tran_url +'" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> '+ langs.translate +'</a>';
+            result += '<a href="'+ row.tran_url +'" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> '+ mymo.lang.translate +'</a>';
             return result;
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.setting.languages.getdata') }}',
             remove_url: '{{ route('admin.setting.languages.remove') }}',
         });
@@ -142,7 +142,7 @@
 
                 return false;
             }).fail(function(data) {
-                show_message(langs.data_error, 'error');
+                show_message(mymo.lang.data_error, 'error');
                 btn.find('i').attr('class', cIcon);
                 btn.prop("disabled", false);
                 return false;
@@ -167,7 +167,7 @@
 
                 return false;
             }).fail(function(data) {
-                show_message(langs.data_error, 'error');
+                show_message(mymo.lang.data_error, 'error');
                 return false;
             });
         });

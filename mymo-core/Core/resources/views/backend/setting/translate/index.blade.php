@@ -75,7 +75,7 @@
             return '<input type="text" class="form-control text-trans" data-key="'+ row.key +'" value="'+ strLang +'">';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.setting.translate.getdata', ['lang' => $lang]) }}',
         });
 
@@ -101,7 +101,7 @@
 
                 return false;
             }).fail(function(data) {
-                show_message(langs.data_error, 'error');
+                show_message(mymo.lang.data_error, 'error');
                 return false;
             });
         });

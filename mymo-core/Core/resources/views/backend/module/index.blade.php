@@ -15,7 +15,7 @@
         <div class="col-md-3">
             <form method="post" class="form-inline">
                 <select name="bulk_actions" class="form-control w-60 mb-2 mr-1">
-                    <option value="">@lang('mymo_core::app.bulk-actions')</option>
+                    <option value="">@lang('mymo_core::app.bulk_actions')</option>
                     <option value="delete">@lang('mymo_core::app.delete')</option>
                     <option value="activate">@lang('mymo_core::app.activate')</option>
                     <option value="deactivate">@lang('mymo_core::app.deactivate')</option>
@@ -35,7 +35,7 @@
                 <div class="form-group w-25 mb-2 mr-1">
                     <label for="status" class="sr-only">@lang('mymo_core::app.status')</label>
                     <select name="status" id="status" class="form-control">
-                        <option value="">@lang('mymo_core::app.all-status')</option>
+                        <option value="">@lang('mymo_core::app.all_status')</option>
                         <option value="1">@lang('mymo_core::app.enabled')</option>
                         <option value="0">@lang('mymo_core::app.disabled')</option>
                     </select>
@@ -72,7 +72,7 @@
             return "<span class='text-success'>{{ trans('mymo_core::app.active') }}</span>";
         }
 
-        var table = new TadTable({
+        var table = new MymoTable({
             url: '{{ route('admin.module.get-data') }}',
             action_url: '{{ route('admin.module.bulk-actions') }}',
         });

@@ -109,7 +109,7 @@
             return '<span class="text-danger">@lang('mymo_core::app.hidden')</span>';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.post_comments.getdata') }}',
             remove_url: '{{ route('admin.post_comments.remove') }}',
             status_url: '{{ route('admin.post_comments.publicis') }}',

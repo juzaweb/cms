@@ -85,7 +85,7 @@
             return '<span class="text-danger">@lang('mymo_core::app.disabled')</span>';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.setting.video_ads.getdata') }}',
             remove_url: '{{ route('admin.setting.video_ads.remove') }}',
         });

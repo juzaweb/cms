@@ -398,6 +398,11 @@ abstract class Module
         return $this->json()->getFilesystem()->deleteDirectory($this->getPath());
     }
 
+    public function getDisplayName()
+    {
+        return $this->get('title', $this->get('name'));
+    }
+
     /**
      * Get extra path.
      *

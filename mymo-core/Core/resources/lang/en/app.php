@@ -412,7 +412,8 @@ return [
   'deactivate' => 'Deactivate',
   'languages' => 'Languages',
   'all_posts' => 'All posts',
-  'bulk-actions' => 'Bulk Actions',
-  'all-status' => 'All status',
+  'bulk_actions' => 'Bulk Actions',
+  'all_status' => 'All status',
+  'active' => 'Active',
 ];
 
