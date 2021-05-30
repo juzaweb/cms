@@ -14,8 +14,6 @@ class CreateTaxonomiesTable extends Migration
             $table->string('taxonomy', 50)->index();
             $table->bigInteger('parent_id')->nullable()->index();
             $table->bigInteger('total_post')->default(0);
-            $table->bigInteger('created_by')->nullable()->index();
-            $table->bigInteger('updated_by')->nullable()->index();
             $table->timestamps();
             $table->unique([
                 'post_type',

@@ -9,22 +9,16 @@ class CreateTranslationTable extends Migration
 {
     public function up()
     {
-        if (Schema::hasTable('translation')) {
-            return;
-        }
-        
         Schema::create('translation', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('key', 150)->unique();
             $table->string('en', 300)->nullable();
             $table->timestamps();
         });
-    
-        //Translation::syncLanguage();
     }
     
     public function down()
     {
-        //Schema::dropIfExists('translation');
+        Schema::dropIfExists('translation');
     }
 }
