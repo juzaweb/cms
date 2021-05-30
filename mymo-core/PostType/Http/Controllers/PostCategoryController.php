@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend;
+namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;

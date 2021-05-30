@@ -1,12 +1,12 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend;
+namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Comments;
 
-class PostCommentController extends BackendController
+class CommentController extends BackendController
 {
     public function index() {
         return view('mymo_core::backend.post_comments.index');

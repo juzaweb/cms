@@ -18,8 +18,22 @@ use Illuminate\Support\ServiceProvider;
 
 class PostTypeServiceProvider extends ServiceProvider
 {
+    public function boot()
+    {
+        $this->bootMigrations();
+    }
+
     public function register()
     {
         $this->app->register(RepositoryServiceProvider::class);
+        $this->app->register(RouteServiceProvider::class);
+    }
+
+    protected function bootMigrations()
+    {
+        $mainPath = base_path('mymo-core/PostType/database/migrations');
+        $directories = glob($mainPath . '/*' , GLOB_ONLYDIR);
+        $paths = array_merge([$mainPath], $directories);
+        $this->loadMigrationsFrom($paths);
     }
 }

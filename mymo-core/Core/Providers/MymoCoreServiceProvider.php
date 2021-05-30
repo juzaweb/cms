@@ -15,10 +15,12 @@ namespace Mymo\Core\Providers;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Mymo\Core\Helpers\HookAction;
+use Mymo\Core\Http\Middleware\Admin;
 use Mymo\Core\Macros\RouterMacros;
 use Mymo\FileManager\Providers\FilemanagerServiceProvider;
 use Mymo\Module\LaravelModulesServiceProvider;
 use Mymo\Performance\Providers\MymoPerformanceServiceProvider;
+use Mymo\PostType\Providers\PostTypeServiceProvider;
 use Mymo\Repository\Providers\RepositoryServiceProvider;
 use Mymo\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
@@ -58,7 +60,7 @@ class MymoCoreServiceProvider extends ServiceProvider
 
     protected function bootMiddlewares()
     {
-        $this->app['router']->aliasMiddleware('admin', \Mymo\Core\Http\Middleware\Admin::class);
+        $this->app['router']->aliasMiddleware('admin', Admin::class);
     }
 
     protected function bootPublishes()
@@ -86,6 +88,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(TranslatableServiceProvider::class);
         $this->app->register(LaravelModulesServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
+        $this->app->register(PostTypeServiceProvider::class);
     }
 
     protected function registerSingleton()
