@@ -16,6 +16,7 @@ namespace Mymo\Core\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 
 class BackendController extends Controller
@@ -49,7 +50,8 @@ class BackendController extends Controller
         return parent::callAction($method, $parameters);
     }
 
-    protected function validateRequest($rules, Request $request, $attributeNames = null) {
+    protected function validateRequest($rules, Request $request, $attributeNames = null)
+    {
         $validator = Validator::make($request->all(), $rules);
 
         if ($attributeNames) {
@@ -67,5 +69,14 @@ class BackendController extends Controller
             $items[] = $item;
             return $items;
         });
+    }
+
+    /**
+     * @param string $postType
+     * @return \Illuminate\Support\Collection
+     * */
+    protected function getPostTypeSetting($postType)
+    {
+        return Arr::get(apply_filters('mymo.post_types', []), $postType);
     }
 }

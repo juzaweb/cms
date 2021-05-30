@@ -6,13 +6,29 @@ use Illuminate\Http\Request;
 use Mymo\Core\Models\PostCategories;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Posts;
+use Mymo\Core\Repositories\PostRepository;
 
 class PostController extends BackendController
 {
+    protected $setting;
+    protected $postType = 'posts';
+    protected $postRepository;
+
+    public function __construct(PostRepository $postRepository)
+    {
+        $this->setting = $this->getPostTypeSetting($this->postType);
+        $this->postRepository = $postRepository;
+        if (empty($this->setting)) {
+            throw new \Exception(
+                'Post type ' . $this->postType . ' does not exists.'
+            );
+        }
+    }
+
     public function index()
     {
         return view('mymo_core::backend.posts.index', [
-            'title' => trans('mymo_core::app.posts')
+            'title' => $this->setting->get('label')
         ]);
     }
 
@@ -30,7 +46,16 @@ class PostController extends BackendController
 
     public function edit($id)
     {
+        $this->addBreadcrumb([
+            'title' => $this->setting->get('label'),
+            'url' => route("admin.{$this->postType}.index"),
+        ]);
 
+        $model = $this->postRepository->find($id);
+        return view('mymo_core::backend.posts.form', [
+            'title' => trans('mymo_core::app.add_new'),
+            'model' => $model,
+        ]);
     }
 
     public function getDataTable(Request $request)
@@ -74,21 +99,6 @@ class PostController extends BackendController
         ]);
     }
     
-    public function form($id = null)
-    {
-        $model = Posts::firstOrNew(['id' => $id]);
-        $categories = PostCategories::where('status', '=', 1)
-            ->get();
-        $tags = [];
-        
-        return view('mymo_core::backend.posts.form', [
-            'model' => $model,
-            'title' => $model->title ?? trans('mymo_core::app.add_new'),
-            'categories' => $categories,
-            'tags' => $tags
-        ]);
-    }
-    
     public function store(Request $request)
     {
         $this->validateRequest([
@@ -117,6 +127,11 @@ class PostController extends BackendController
             'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.post'),
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+
     }
     
     public function bulkActions(Request $request)
