@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Backend\Macros;
+namespace Mymo\Core\Macros;
 
 class RouterMacros
 {
-    public function tadResource()
+    public function mymoResource()
     {
         return function ($uri, $controller, $options = []) {
             $default = [

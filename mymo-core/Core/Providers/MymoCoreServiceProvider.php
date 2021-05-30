@@ -15,12 +15,14 @@ namespace Mymo\Core\Providers;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Mymo\Core\Helpers\HookAction;
+use Mymo\Core\Macros\RouterMacros;
 use Mymo\FileManager\Providers\FilemanagerServiceProvider;
 use Mymo\Module\LaravelModulesServiceProvider;
 use Mymo\Performance\Providers\MymoPerformanceServiceProvider;
 use Mymo\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Router;
 
 class MymoCoreServiceProvider extends ServiceProvider
 {
@@ -57,6 +59,17 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware('admin', \Mymo\Core\Http\Middleware\Admin::class);
     }
 
+    protected function bootPublishes()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/mymo_core.php' => base_path('config/mymo_core.php'),
+        ], 'mymo_config');
+
+        $this->publishes([
+            __DIR__.'/../resources/assets' => public_path('styles'),
+        ], 'mymo_assets');
+    }
+
     protected function registerProviders()
     {
         if ($this->app->environment() !== 'production') {
@@ -79,14 +92,8 @@ class MymoCoreServiceProvider extends ServiceProvider
         });
     }
 
-    protected function bootPublishes()
+    protected function registerRouteMacros()
     {
-        $this->publishes([
-            __DIR__ . '/../config/mymo_core.php' => base_path('config/mymo_core.php'),
-        ], 'mymo_config');
-
-        $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('styles'),
-        ], 'mymo_assets');
+        Router::mixin(new RouterMacros());
     }
 }
