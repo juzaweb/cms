@@ -10,11 +10,11 @@
  * Time: 9:06 PM
  */
 
-use App\Core\Models\Ads;
-use App\Core\Models\Category\Countries;
-use App\Core\Models\Category\Genres;
-use App\Core\Models\Category\Types;
-use App\Core\Models\Movie\Movies;
+use Modules\Movie\Models\Ads;
+use Modules\Movie\Models\Category\Countries;
+use Modules\Movie\Models\Category\Genres;
+use Modules\Movie\Models\Category\Types;
+use Modules\Movie\Models\Movie\Movies;
 
 function get_ads(string $key) {
     $ads = Ads::where('key', '=', $key)

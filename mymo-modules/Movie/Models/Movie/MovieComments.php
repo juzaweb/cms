@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Models\Movie;
+namespace Modules\Movie\Models\Movie;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\Movie\MovieComments
+ * Modules\Movie\Models\Movie\MovieComments
  *
  * @property int $id
  * @property int $user_id
@@ -16,18 +16,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments publiced()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments whereApproved($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments whereMovieId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieComments whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments publiced()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments whereApproved($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments whereMovieId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieComments whereUserId($value)
  * @mixin \Eloquent
  */
 class MovieComments extends Model

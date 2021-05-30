@@ -21,11 +21,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereData($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereServer($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Backup\BackupServer whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereServer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Backup\BackupServer whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class BackupServer extends Model

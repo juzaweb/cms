@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Core\Models;
+namespace Modules\Movie\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\DownloadLink
+ * Modules\Movie\Models\DownloadLink
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\DownloadLink whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\DownloadLink newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\DownloadLink newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\DownloadLink query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\DownloadLink whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\DownloadLink whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\DownloadLink whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property string $label
  * @property string $url
@@ -39,6 +39,6 @@ class DownloadLink extends Model
     ];
     
     public function movie() {
-        return $this->hasOne('App\Core\Models\Movie\Movies', 'id', 'movie_id');
+        return $this->hasOne('Modules\Movie\Models\Movie\Movies', 'id', 'movie_id');
     }
 }
