@@ -3,20 +3,28 @@
 namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Mymo\Core\Http\Controllers\BackendController;
-use Mymo\Core\Models\Posts;
-use Mymo\Core\Repositories\PostRepository;
+use Mymo\PostType\Models\Post;
+use Mymo\PostType\PostService;
+use Mymo\PostType\PostType;
+use Mymo\PostType\Repositories\PostRepository;
 
 class PostController extends BackendController
 {
     protected $setting;
     protected $postType = 'posts';
     protected $postRepository;
+    protected $postService;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(
+        PostRepository $postRepository,
+        PostService $postService
+    )
     {
-        $this->setting = $this->getPostTypeSetting($this->postType);
+        $this->setting = PostType::getSetting($this->postType);
         $this->postRepository = $postRepository;
+        $this->postService = $postService;
         if (empty($this->setting)) {
             throw new \Exception(
                 'Post type ' . $this->postType . ' does not exists.'
@@ -52,7 +60,7 @@ class PostController extends BackendController
 
         $model = $this->postRepository->find($id);
         return view('mymo_core::backend.posts.form', [
-            'title' => trans('mymo_core::app.add_new'),
+            'title' => $model->title,
             'model' => $model,
         ]);
     }
@@ -61,13 +69,12 @@ class PostController extends BackendController
     {
         $search = $request->get('search');
         $status = $request->get('status');
-        
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Posts::query();
+        $query = Post::query();
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -89,7 +96,7 @@ class PostController extends BackendController
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.post.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.posts.edit', [$row->id]);
         }
         
         return response()->json([
@@ -100,52 +107,63 @@ class PostController extends BackendController
     
     public function store(Request $request)
     {
-        $this->validateRequest([
-            'title' => 'required|string|max:250',
-            'status' => 'required|in:0,1',
-            'thumbnail' => 'nullable|string|max:250',
-            'category' => 'nullable|string|max:200',
-        ], $request, [
-            'title' => trans('mymo_core::app.title'),
-            'status' => trans('mymo_core::app.status'),
-            'thumbnail' => trans('mymo_core::app.thumbnail'),
-            'category' => trans('mymo_core::app.categories'),
-        ]);
-        
-        $category = $request->post('categories', []);
-        $tags = $request->post('tags', []);
-        
-        $model = Posts::firstOrNew(['id' => $request->post('id')]);
-        $model->fill($request->all());
-        $model->setAttribute('category', implode(',', $category));
-        $model->setAttribute('tags', implode(',', $tags));
-        $model->save();
+        $this->postService->create($request->all());
         
         return response()->json([
             'status' => 'success',
             'message' => trans('mymo_core::app.saved_successfully'),
-            'redirect' => route('admin.post'),
+            'redirect' => route('admin.posts'),
         ]);
     }
 
     public function update(Request $request, $id)
     {
+        $this->postService->update($request->all(), $id);
 
+        return response()->json([
+            'status' => 'success',
+            'message' => trans('mymo_core::app.saved_successfully'),
+            'redirect' => route('admin.posts'),
+        ]);
     }
     
     public function bulkActions(Request $request)
     {
-        $this->validateRequest([
-            'ids' => 'required',
-        ], $request, [
-            'ids' => trans('mymo_core::app.posts')
+        $request->validate([
+            'ids' => 'required|array',
+            'action' => 'required',
         ]);
-        
-        Posts::destroy($request->post('ids'));
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('mymo_core::app.deleted_successfully'),
-        ]);
+
+        $action = $request->post('action');
+        $ids = $request->post('ids');
+
+        try {
+            DB::beginTransaction();
+            switch ($action) {
+                case 'delete':
+                    foreach ($ids as $id) {
+                        $this->postService->delete($id);
+                    }
+                    break;
+                case 'public':
+                case 'private':
+                case 'draft':
+                    foreach ($ids as $id) {
+                        $this->postService->update([
+                            'status' => $action
+                        ], $id);
+                    }
+                    break;
+            }
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
+
+        return $this->success(
+            trans('tadcms::app.successfully')
+        );
     }
 }

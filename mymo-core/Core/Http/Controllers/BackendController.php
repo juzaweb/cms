@@ -18,9 +18,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Mymo\Core\Traits\ResponseMessage;
 
 class BackendController extends Controller
 {
+    use ResponseMessage;
+
     public function callAction($method, $parameters)
     {
         if (!file_exists(storage_path('app/installed'))) {
@@ -69,14 +72,5 @@ class BackendController extends Controller
             $items[] = $item;
             return $items;
         });
-    }
-
-    /**
-     * @param string $postType
-     * @return \Illuminate\Support\Collection
-     * */
-    protected function getPostTypeSetting($postType)
-    {
-        return Arr::get(apply_filters('mymo.post_types', []), $postType);
     }
 }

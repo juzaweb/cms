@@ -19,8 +19,8 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'Mymo\Core\Repositories\PostRepository',
-            'Mymo\Core\Repositories\PostRepositoryEloquent'
+            'Mymo\PostType\Repositories\PostRepository',
+            'Mymo\PostType\Repositories\PostRepositoryEloquent'
         );
 
         /*$this->app->bind(

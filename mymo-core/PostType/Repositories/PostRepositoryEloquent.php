@@ -1,14 +1,14 @@
 <?php
 
-namespace Mymo\Core\Repositories;
+namespace Mymo\PostType\Repositories;
 
 use Mymo\Repository\Eloquent\BaseRepository;
-use Mymo\Core\Models\Post;
+use Mymo\PostType\Models\Post;
 
 /**
  * Class PostRepositoryEloquent.
  *
- * @package namespace Mymo\Core\Repositories;
+ * @package namespace Mymo\PostType\Repositories;
  */
 class PostRepositoryEloquent extends BaseRepository implements PostRepository
 {

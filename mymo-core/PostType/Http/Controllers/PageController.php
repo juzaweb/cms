@@ -4,7 +4,7 @@ namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use Mymo\Core\Models\Pages;
+use Mymo\PostType\Models\Page;
 
 class PageController extends BackendController
 {
@@ -25,7 +25,7 @@ class PageController extends BackendController
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Pages::query();
+        $query = Page::query();
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -58,7 +58,7 @@ class PageController extends BackendController
     
     public function form($id = null)
     {
-        $model = Pages::firstOrNew(['id' => $id]);
+        $model = Page::firstOrNew(['id' => $id]);
         return view('mymo_core::backend.pages.form', [
             'model' => $model,
             'title' => $model->name ?: trans('mymo_core::app.add_new')
@@ -77,7 +77,7 @@ class PageController extends BackendController
             'thumbnail' => trans('mymo_core::app.thumbnail'),
         ]);
         
-        $model = Pages::firstOrNew(['id' => $request->id]);
+        $model = Page::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
         $model->save();
         
@@ -96,7 +96,7 @@ class PageController extends BackendController
             'ids' => trans('mymo_core::app.pages')
         ]);
         
-        Pages::destroy($request->ids);
+        Pages::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',

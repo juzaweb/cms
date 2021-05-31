@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Mymo\Core\Models\Menu;
-use Mymo\Core\Models\PostCategories;
+use Mymo\PostType\Models\PostCategories;
 use Mymo\Core\Models\User;
 
 class LoadDataController extends BackendController

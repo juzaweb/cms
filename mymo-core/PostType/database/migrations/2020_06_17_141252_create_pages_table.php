@@ -1,6 +1,6 @@
 <?php
 
-use Mymo\Core\Models\Pages;
+use Mymo\PostType\Models\Page;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -38,7 +38,7 @@ class CreatePagesTable extends Migration
         ];
         
         foreach ($pages as $page) {
-            Pages::create([
+            Page::create([
                 'name' => $page,
                 'slug' => \Illuminate\Support\Str::slug($page),
                 'content' => $page . ' demo page',

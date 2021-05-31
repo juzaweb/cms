@@ -4,7 +4,7 @@ namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use Mymo\Core\Models\PostCategories;
+use Mymo\PostType\Models\PostCategories;
 
 class PostCategoryController extends BackendController
 {

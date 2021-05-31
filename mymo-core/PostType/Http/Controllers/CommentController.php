@@ -4,15 +4,17 @@ namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use Mymo\Core\Models\Comments;
+use Mymo\PostType\Models\Comment;
 
 class CommentController extends BackendController
 {
-    public function index() {
+    public function index()
+    {
         return view('mymo_core::backend.post_comments.index');
     }
     
-    public function getData(Request $request) {
+    public function getDataTable(Request $request)
+    {
         $search = $request->get('search');
         $status = $request->get('status');
         $approve = $request->get('approve');
@@ -22,7 +24,7 @@ class CommentController extends BackendController
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Comments::query();
+        $query = Comment::query();
         $query->select([
             'a.*',
             'b.name AS author',
@@ -65,14 +67,15 @@ class CommentController extends BackendController
         ]);
     }
     
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
             'ids' => trans('mymo_core::app.post_comments')
         ]);
         
-        Comments::destroy($request->post('ids'));
+        Comment::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
@@ -80,7 +83,8 @@ class CommentController extends BackendController
         ]);
     }
     
-    public function publicis(Request $request) {
+    public function publicis(Request $request)
+    {
         $this->validateRequest([
             'ids' => 'required',
             'status' => 'required|in:0,1,2,3',
@@ -91,7 +95,7 @@ class CommentController extends BackendController
         
         $status = $request->post('status');
         if (in_array($status, [0, 1])) {
-            Comments::whereIn('id', $request->post('ids'))
+            Comment::whereIn('id', $request->post('ids'))
                 ->update([
                     'status' => $status,
                 ]);
@@ -99,7 +103,7 @@ class CommentController extends BackendController
         
         if (in_array($status, [2, 3])) {
             $status = $status == 2 ? 1 : 0;
-            Comments::whereIn('id', $request->post('ids'))
+            Comment::whereIn('id', $request->post('ids'))
                 ->update([
                     'approved' => $status,
                 ]);

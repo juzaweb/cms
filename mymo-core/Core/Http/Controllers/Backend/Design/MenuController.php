@@ -3,7 +3,7 @@
 namespace Mymo\Core\Http\Controllers\Backend\Design;
 
 use Mymo\Core\Models\Menu;
-use Mymo\Core\Models\Pages;
+use Mymo\PostType\Models\Page;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 
@@ -25,7 +25,7 @@ class MenuController extends BackendController
             ->get(['id', 'name']);
         $types = Types::where('status', '=', 1)
             ->get(['id', 'name']);*/
-        $pages = Pages::where('status', '=', 1)
+        $pages = Page::where('status', '=', 1)
             ->get(['id', 'name']);
         
         return view('mymo_core::backend.design.menu.index', [
@@ -136,7 +136,7 @@ class MenuController extends BackendController
     
                 return response()->json($result);*/
             case 'page':
-                $items = Pages::whereIn('id', $items)
+                $items = Page::whereIn('id', $items)
                     ->get(['id', 'name', 'slug']);
                 $result = [];
                 

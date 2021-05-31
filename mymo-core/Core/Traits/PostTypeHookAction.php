@@ -37,7 +37,7 @@ trait PostTypeHookAction
             'parent' => $objectType,
             'menu_slug' => $type . '.' . $taxonomy,
             'menu_position' => 20,
-            'menu_icon' => 'fa fa-list-alt',
+            'menu_icon' => 'fa fa-list-ul',
             'supports' => [
                 'thumbnail',
                 'hierarchical'
@@ -74,11 +74,7 @@ trait PostTypeHookAction
             ]
         );
 
-        $this->registerPermalink($taxonomy, [
-            'label' => $args->get('label'),
-            'base' => $args->get('singular'),
-            'callback' => 'Tadcms\\Frontend\\Controllers\\TaxonomyController'
-        ]);
+
     }
 
     /**
@@ -117,18 +113,20 @@ trait PostTypeHookAction
         );
 
         $this->addAdminMenu(
-            trans('tadcms::app.all') . ' '. $args->get('label'),
+            trans('mymo_core::app.all') . ' '. $args->get('label'),
             $key,
             [
+                'icon' => 'fa fa-list-ul',
                 'position' => 2,
                 'parent' => $key,
             ]
         );
 
         $this->addAdminMenu(
-            trans('tadcms::app.add-new'),
+            trans('mymo_core::app.add_new'),
             $key . '.create',
             [
+                'icon' => 'fa fa-plus',
                 'position' => 3,
                 'parent' => $key,
             ]
@@ -137,23 +135,17 @@ trait PostTypeHookAction
         $supports = $args->get('supports', []);
         if (in_array('category', $supports)) {
             $this->registerTaxonomy('categories', $key, [
-                'label' => trans('tadcms::app.categories'),
+                'label' => trans('mymo_core::app.categories'),
                 'menu_position' => 4,
             ]);
         }
 
         if (in_array('tag', $args['supports'])) {
             $this->registerTaxonomy('tags', $key, [
-                'label' => trans('tadcms::app.tags'),
+                'label' => trans('mymo_core::app.tags'),
                 'menu_position' => 5,
                 'supports' => []
             ]);
         }
-
-        $this->registerPermalink($key, [
-            'label' => $args->get('label'),
-            'base' => $args->get('singular'),
-            'callback' => 'Tadcms\Frontend\Controllers\PostController'
-        ]);
     }
 }

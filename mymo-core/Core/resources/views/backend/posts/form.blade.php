@@ -1,8 +1,7 @@
 @extends('mymo_core::layouts.backend')
 
 @section('content')
-    <form method="post" action="{{ route('admin.post.save') }}" class="form-ajax">
-
+    <form method="post" action="{{ route('admin.posts.save') }}" class="form-ajax">
         <div class="row">
             <div class="col-md-6">
                 <h5 class="mb-0 card-title font-weight-bold">{{ $title }}</h5>

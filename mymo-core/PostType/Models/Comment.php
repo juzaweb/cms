@@ -1,10 +1,10 @@
 <?php
 
-namespace Mymo\Core\Models;
+namespace Mymo\PostType\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comments extends Model
+class Comment extends Model
 {
     //
 }

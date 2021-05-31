@@ -16,14 +16,5 @@ Route::mymoResource('posts', 'PostController');
 
 Route::mymoResource('post/categories', 'PostCategoriesController');
 
-Route::group(['prefix' => 'comments/post'], function () {
-    Route::get('/', 'PostCommentsController@index')->name('admin.post_comments');
+Route::mymoResource('post/comments', 'PostCommentsController');
 
-    Route::get('/getdata', 'PostCommentsController@getData')->name('admin.post_comments.getdata');
-
-    Route::post('/remove', 'PostCommentsController@remove')->name('admin.post_comments.remove');
-
-    Route::post('/approve', 'PostCommentsController@approve')->name('admin.post_comments.approve');
-
-    Route::post('/', 'PostCommentsController@publicis')->name('admin.post_comments.publicis');
-});
