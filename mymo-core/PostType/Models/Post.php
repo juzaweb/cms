@@ -65,11 +65,18 @@ class Post extends Model
     
     public function comments()
     {
-        return $this->hasMany('Mymo\PostType\Models\PostComment', 'post_id', 'id');
+        return $this->hasMany('Mymo\PostType\Models\Comment', 'post_id', 'id');
     }
     
-    public function created_by()
+    public function createdBy()
     {
         return $this->hasOne('Mymo\Core\Models\User', 'id', 'created_by');
+    }
+
+    public function taxonomies()
+    {
+        return $this->belongsToMany('Mymo\PostType\Models\Taxonomy', 'term_taxonomies', 'term_id', 'taxonomy_id')
+            ->withPivot(['term_type'])
+            ->where('post_type', '=', 'posts');
     }
 }

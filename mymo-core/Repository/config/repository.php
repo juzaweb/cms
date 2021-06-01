@@ -232,7 +232,7 @@ return [
     |
     */
     'generator'  => [
-        'basePath'      => base_path('mymo-core/Core'),
+        'basePath'      => base_path('mymo-core/PostType'),
         'rootNamespace' => 'Mymo\\Core\\',
         'stubsOverridePath' => app()->path(),
         'paths'         => [

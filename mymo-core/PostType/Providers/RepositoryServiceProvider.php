@@ -23,15 +23,16 @@ class RepositoryServiceProvider extends ServiceProvider
             'Mymo\PostType\Repositories\PostRepositoryEloquent'
         );
 
+        $this->app->bind(
+            'Mymo\PostType\Repositories\TaxonomyRepository',
+            'Mymo\PostType\Repositories\TaxonomyRepositoryEloquent'
+        );
+
         /*$this->app->bind(
             'Tadcms\System\Repositories\PageRepository',
             'Tadcms\System\Repositories\PageRepositoryEloquent'
         );
 
-        $this->app->bind(
-            'Tadcms\System\Repositories\TaxonomyRepository',
-            'Tadcms\System\Repositories\TaxonomyRepositoryEloquent'
-        );
 
         $this->app->bind(
             'Tadcms\System\Repositories\UserRepository',

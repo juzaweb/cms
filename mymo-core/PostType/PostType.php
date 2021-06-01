@@ -21,11 +21,62 @@ class PostType
     /**
      * Get post type setting
      *
-     * @param string $postType
+     * @param string|null $postType
      * @return \Illuminate\Support\Collection
      * */
-    public static function getSetting($postType)
+    public static function getSetting($postType = null)
     {
-        return Arr::get(apply_filters('mymo.post_types', []), $postType);
+        if ($postType) {
+            return Arr::get(apply_filters('mymo.post_types', []), $postType);
+        }
+
+        return apply_filters('mymo.post_types', []);
+    }
+
+    public static function getTaxonomies($postType = null)
+    {
+        $taxonomies = collect(apply_filters('mymo.taxonomies', []));
+        if (empty($taxonomies)) {
+            return $taxonomies;
+        }
+
+        $taxonomies = $taxonomies->filter(function ($item) use ($postType) {
+            return Arr::has($item['object_types'], $postType);
+        })->mapWithKeys(function ($item) use ($postType) {
+            return [$item['taxonomy'] => $item['object_types'][$postType]];
+        });
+
+        $taxonomies = $taxonomies ?
+            $taxonomies->sortBy('menu_position')
+            : [];
+
+        return $taxonomies;
+    }
+
+    /**
+     * Sync taxonomies post type
+     *
+     * @param string $postType
+     * @param \Mymo\PostType\Models\Post $model
+     * @param array $attributes
+     * @return void
+     *
+     * @throws \Exception
+     */
+    public static function syncTaxonomies($postType, $model, array $attributes)
+    {
+        $taxonomies = PostType::getTaxonomies($postType);
+        foreach ($taxonomies as $taxonomy) {
+            if (!Arr::has($attributes, $taxonomy->get('taxonomy'))) {
+                continue;
+            }
+
+            $data = Arr::get($attributes, $taxonomy->get('taxonomy'), []);
+            $model->taxonomies()
+                ->where('taxonomy', '=', $taxonomy->get('singular'))
+                ->sync(combine_pivot($data, [
+                    'term_type' => $postType
+                ]));
+        }
     }
 }

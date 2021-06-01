@@ -1,17 +1,12 @@
 <?php
 
-namespace Mymo\PostType\Repositories;
+namespace Mymo\Core\Repositories;
 
 use Mymo\PostType\PostType;
 use Mymo\Repository\Eloquent\BaseRepository;
-use Mymo\PostType\Models\Post;
+use Mymo\Core\Models\Taxonomy;
 
-/**
- * Class PostRepositoryEloquent.
- *
- * @package namespace Mymo\PostType\Repositories;
- */
-class PostRepositoryEloquent extends BaseRepository implements PostRepository
+class TaxonomyRepositoryEloquent extends BaseRepository implements TaxonomyRepository
 {
     /**
      * Specify Model class name
@@ -20,7 +15,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      */
     public function model()
     {
-        return Post::class;
+        return Taxonomy::class;
     }
 
     public function getSetting()

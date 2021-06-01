@@ -11,5 +11,5 @@ use Mymo\Repository\Contracts\RepositoryInterface;
  */
 interface PostRepository extends RepositoryInterface
 {
-    //
+    public function getSetting();
 }

@@ -11,7 +11,7 @@ class CreateTermTaxonomiesTable extends Migration
         Schema::create('term_taxonomies', function (Blueprint $table) {
             $table->bigInteger('term_id')->index();
             $table->bigInteger('taxonomy_id')->index();
-            $table->string('term_type', 100)->index();
+            $table->string('term_type', 50)->index();
             $table->primary([
                 'term_id',
                 'term_type',

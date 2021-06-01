@@ -8,23 +8,23 @@
  * @license    MIT
  *
  * Created by The Anh.
- * Date: 5/30/2021
- * Time: 3:19 PM
+ * Date: 5/31/2021
+ * Time: 10:20 PM
  */
 
 namespace Mymo\PostType;
 
-use Illuminate\Support\Facades\DB;
-use Mymo\PostType\Repositories\PostRepository;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Mymo\Core\Repositories\TaxonomyRepository;
 
-class PostService
+class TaxonomyService
 {
-    protected $postRepository;
+    protected $taxonomyRepository;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(TaxonomyRepository $taxonomyRepository)
     {
-        $this->postRepository = $postRepository;
+        $this->taxonomyRepository = $taxonomyRepository;
     }
 
     public function create(array $attributes)
@@ -32,8 +32,7 @@ class PostService
         $this->validator($attributes);
         DB::beginTransaction();
         try {
-            $model = $this->postRepository->create($attributes);
-            PostType::syncTaxonomies('posts', $model, $attributes);
+            $model = $this->taxonomyRepository->create($attributes);
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -48,12 +47,11 @@ class PostService
         $this->validator($attributes);
         DB::beginTransaction();
         try {
-            $model = $this->postRepository->update($attributes, $id);
-            PostType::syncTaxonomies('posts', $model, $attributes);
+            $model = $this->taxonomyRepository->update($attributes, $id);
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             DB::rollBack();
-            throw $e;
+            throw $exception;
         }
 
         return $model;
@@ -61,23 +59,15 @@ class PostService
 
     public function delete($id)
     {
-        return $this->postRepository->delete($id);
+        return $this->taxonomyRepository->delete($id);
     }
 
     protected function validate($attributes)
     {
         $validator = Validator::make($attributes, [
-            'title' => 'required|string|max:250',
+            'name' => 'required|string|max:250',
             'status' => 'required|in:0,publish,trash,private',
             'thumbnail' => 'nullable|string|max:150',
-            'category' => 'nullable|string|max:200',
-        ]);
-
-        $validator->setAttributeNames([
-            'title' => trans('mymo_core::app.title'),
-            'status' => trans('mymo_core::app.status'),
-            'thumbnail' => trans('mymo_core::app.thumbnail'),
-            'category' => trans('mymo_core::app.categories'),
         ]);
 
         $validator->validate();
