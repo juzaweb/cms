@@ -12,9 +12,10 @@
  * Time: 3:19 PM
  */
 
-namespace Mymo\PostType;
+namespace Mymo\PostType\Services;
 
 use Illuminate\Support\Facades\DB;
+use Mymo\PostType\PostType;
 use Mymo\PostType\Repositories\PostRepository;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,9 +36,9 @@ class PostService
             $model = $this->postRepository->create($attributes);
             PostType::syncTaxonomies('posts', $model, $attributes);
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            throw $exception;
+            throw $e;
         }
 
         return $model;
@@ -59,25 +60,37 @@ class PostService
         return $model;
     }
 
+    /**
+     * Delete post
+     *
+     * @param int|array $id
+     * @return bool
+     *
+     * @throws \Exception
+     */
     public function delete($id)
     {
-        return $this->postRepository->delete($id);
+        $ids = is_array($id) ? $id : [$id];
+        foreach ($ids as $id) {
+            try {
+                DB::beginTransaction();
+                $this->postRepository->delete($id);
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        }
+
+        return true;
     }
 
     protected function validate($attributes)
     {
         $validator = Validator::make($attributes, [
             'title' => 'required|string|max:250',
-            'status' => 'required|in:0,publish,trash,private',
+            'status' => 'required|in:draft,public,trash,private',
             'thumbnail' => 'nullable|string|max:150',
-            'category' => 'nullable|string|max:200',
-        ]);
-
-        $validator->setAttributeNames([
-            'title' => trans('mymo_core::app.title'),
-            'status' => trans('mymo_core::app.status'),
-            'thumbnail' => trans('mymo_core::app.thumbnail'),
-            'category' => trans('mymo_core::app.categories'),
         ]);
 
         $validator->validate();

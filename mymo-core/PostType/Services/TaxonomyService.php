@@ -12,7 +12,7 @@
  * Time: 10:20 PM
  */
 
-namespace Mymo\PostType;
+namespace Mymo\PostType\Services;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -59,14 +59,25 @@ class TaxonomyService
 
     public function delete($id)
     {
-        return $this->taxonomyRepository->delete($id);
+        $ids = is_array($id) ? $id : [$id];
+        foreach ($ids as $id) {
+            try {
+                DB::beginTransaction();
+                $this->taxonomyRepository->delete($id);
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        }
+
+        return true;
     }
 
     protected function validate($attributes)
     {
         $validator = Validator::make($attributes, [
             'name' => 'required|string|max:250',
-            'status' => 'required|in:0,publish,trash,private',
             'thumbnail' => 'nullable|string|max:150',
         ]);
 

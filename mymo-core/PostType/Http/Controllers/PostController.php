@@ -3,10 +3,9 @@
 namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\PostType\Models\Post;
-use Mymo\PostType\PostService;
+use Mymo\PostType\Services\PostService;
 use Mymo\PostType\PostType;
 use Mymo\PostType\Repositories\PostRepository;
 
@@ -25,6 +24,11 @@ class PostController extends BackendController
         $this->setting = PostType::getSetting($this->postType);
         $this->postRepository = $postRepository;
         $this->postService = $postService;
+        $this->init();
+    }
+
+    public function init()
+    {
         if (empty($this->setting)) {
             throw new \Exception(
                 'Post type ' . $this->postType . ' does not exists.'
@@ -43,7 +47,7 @@ class PostController extends BackendController
     {
         $this->addBreadcrumb([
             'title' => $this->setting->get('label'),
-            'url' => route("admin.{$this->postType}.index"),
+            'url' => route("admin.posts.index"),
         ]);
 
         return view('mymo_core::backend.posts.form', [
@@ -55,7 +59,7 @@ class PostController extends BackendController
     {
         $this->addBreadcrumb([
             'title' => $this->setting->get('label'),
-            'url' => route("admin.{$this->postType}.index"),
+            'url' => route("admin.posts.index"),
         ]);
 
         $model = $this->postRepository->find($id);
@@ -109,10 +113,8 @@ class PostController extends BackendController
     {
         $this->postService->create($request->all());
         
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
-            'redirect' => route('admin.posts'),
+        return $this->success([
+            'message' => trans('mymo_core::app.saved_successfully')
         ]);
     }
 
@@ -120,10 +122,8 @@ class PostController extends BackendController
     {
         $this->postService->update($request->all(), $id);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
-            'redirect' => route('admin.posts'),
+        return $this->success([
+            'message' => trans('mymo_core::app.saved_successfully')
         ]);
     }
     
@@ -137,33 +137,23 @@ class PostController extends BackendController
         $action = $request->post('action');
         $ids = $request->post('ids');
 
-        try {
-            DB::beginTransaction();
-            switch ($action) {
-                case 'delete':
-                    foreach ($ids as $id) {
-                        $this->postService->delete($id);
-                    }
-                    break;
-                case 'public':
-                case 'private':
-                case 'draft':
-                    foreach ($ids as $id) {
-                        $this->postService->update([
-                            'status' => $action
-                        ], $id);
-                    }
-                    break;
-            }
-
-            DB::commit();
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            throw $exception;
+        switch ($action) {
+            case 'delete':
+                $this->postService->delete($ids);
+                break;
+            case 'public':
+            case 'private':
+            case 'draft':
+                foreach ($ids as $id) {
+                    $this->postService->update([
+                        'status' => $action
+                    ], $id);
+                }
+                break;
         }
 
-        return $this->success(
-            trans('tadcms::app.successfully')
-        );
+        return $this->success([
+            'message' => trans('mymo_core::app.successfully')
+        ]);
     }
 }
