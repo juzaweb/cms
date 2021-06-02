@@ -65,6 +65,8 @@ class MymoCoreServiceProvider extends ServiceProvider
 
     protected function bootPublishes()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/mymo_core.php', 'mymo_core');
+
         $this->publishes([
             __DIR__ . '/../config/mymo_core.php' => base_path('config/mymo_core.php'),
         ], 'mymo_config');

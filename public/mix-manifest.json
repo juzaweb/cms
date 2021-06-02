@@ -1,6 +1,4 @@
 {
     "/mymo-core/Core/resources/assets/css/backend.css": "/mymo-core/Core/resources/assets/css/backend.css",
-    "/mymo-core/Core/resources/assets/css/theme-editor.css": "/mymo-core/Core/resources/assets/css/theme-editor.css",
-    "/mymo-core/Core/resources/assets/js/theme-editor.js": "/mymo-core/Core/resources/assets/js/theme-editor.js",
     "/mymo-core/Core/resources/assets/js/backend.js": "/mymo-core/Core/resources/assets/js/backend.js"
 }

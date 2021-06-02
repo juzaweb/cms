@@ -4,6 +4,7 @@ namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\Core\Supports\DataTable;
 use Mymo\PostType\Models\Post;
 use Mymo\PostType\Services\PostService;
 use Mymo\PostType\PostType;
@@ -50,8 +51,10 @@ class PostController extends BackendController
             'url' => route("admin.posts.index"),
         ]);
 
+        $model = $this->postRepository->makeModel();
         return view('mymo_core::backend.posts.form', [
             'title' => trans('mymo_core::app.add_new'),
+            'model' => $model
         ]);
     }
 
@@ -63,14 +66,16 @@ class PostController extends BackendController
         ]);
 
         $model = $this->postRepository->find($id);
+
         return view('mymo_core::backend.posts.form', [
             'title' => $model->title,
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     public function getDataTable(Request $request)
     {
+        (new DataTable())->jsonResponse();
         $search = $request->get('search');
         $status = $request->get('status');
         $sort = $request->get('sort', 'id');

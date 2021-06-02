@@ -415,5 +415,8 @@ return [
   'bulk_actions' => 'Bulk Actions',
   'all_status' => 'All status',
   'active' => 'Active',
+  'parent' => 'Parent',
+  'add' => 'Add',
+  'click_here_to_select_file' => 'Click here to select file',
 ];
 

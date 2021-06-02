@@ -25,7 +25,7 @@ class DataTable
         $this->datatable = $datatable;
     }
 
-    public function response()
+    public function jsonResponse()
     {
         $request = request();
         $sort = $request->get('sort', 'id');
@@ -48,7 +48,10 @@ class DataTable
 
     public function render()
     {
-
+        $datatable = $this->makeData();
+        return view('mymo_core::components.datatable', [
+            'columns' => $datatable->columns()
+        ]);
     }
 
     protected function makeData()

@@ -15,12 +15,14 @@
 namespace Mymo\PostType\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Mymo\Core\Facades\HookAction;
 
 class PostTypeServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         $this->bootMigrations();
+        HookAction::loadActionForm(__DIR__ . '/../actions');
     }
 
     public function register()

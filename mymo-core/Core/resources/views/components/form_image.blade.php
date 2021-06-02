@@ -28,7 +28,7 @@
 
         <div class="icon-choose">
             <i class="fa fa-cloud-upload fa-5x"></i>
-            <p>@lang('tadcms::app.click-here-to-select-file')</p>
+            <p>@lang('mymo_core::app.click_here_to_select_file')</p>
         </div>
     </div>
 </div>
