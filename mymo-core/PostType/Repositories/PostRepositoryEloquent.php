@@ -25,6 +25,6 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
 
     public function getSetting()
     {
-        return PostType::getSetting('posts');
+        return PostType::getPostTypes('posts');
     }
 }

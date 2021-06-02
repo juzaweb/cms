@@ -22,6 +22,7 @@ class PostTypeServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->bootMigrations();
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mymo_post_type');
         HookAction::loadActionForm(__DIR__ . '/../actions');
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Core\Repositories;
+namespace Mymo\PostType\Repositories;
 
 use Mymo\Repository\Contracts\RepositoryInterface;
 

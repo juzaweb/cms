@@ -1,10 +1,10 @@
 <?php
 
-namespace Mymo\Core\Repositories;
+namespace Mymo\PostType\Repositories;
 
 use Mymo\PostType\PostType;
 use Mymo\Repository\Eloquent\BaseRepository;
-use Mymo\Core\Models\Taxonomy;
+use Mymo\PostType\Models\Taxonomy;
 
 class TaxonomyRepositoryEloquent extends BaseRepository implements TaxonomyRepository
 {
@@ -18,8 +18,5 @@ class TaxonomyRepositoryEloquent extends BaseRepository implements TaxonomyRepos
         return Taxonomy::class;
     }
 
-    public function getSetting()
-    {
-        return PostType::getSetting('posts');
-    }
+
 }

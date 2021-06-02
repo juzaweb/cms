@@ -22,7 +22,7 @@ class PostController extends BackendController
         PostService $postService
     )
     {
-        $this->setting = PostType::getSetting($this->postType);
+        $this->setting = PostType::getPostTypes($this->postType);
         $this->postRepository = $postRepository;
         $this->postService = $postService;
         $this->init();

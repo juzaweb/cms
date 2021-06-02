@@ -16,7 +16,7 @@ namespace Mymo\PostType\Services;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Mymo\Core\Repositories\TaxonomyRepository;
+use Mymo\PostType\Repositories\TaxonomyRepository;
 
 class TaxonomyService
 {

@@ -305,3 +305,12 @@ function combine_pivot($entities, $pivots = [])
     // Combine and return filler pivot array with data
     return array_combine($entities, $filler);
 }
+
+function path_url(string $url)
+{
+    if (!is_url($url)) {
+        return $url;
+    }
+
+    return parse_url($url)['path'];
+}

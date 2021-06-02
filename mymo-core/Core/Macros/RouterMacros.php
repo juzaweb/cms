@@ -2,6 +2,8 @@
 
 namespace Mymo\Core\Macros;
 
+use Illuminate\Support\Str;
+
 class RouterMacros
 {
     public function mymoResource()
@@ -12,8 +14,7 @@ class RouterMacros
             ];
     
             $options = array_merge($default, $options);
-            $uriName = $options['name'] ? $options['name'] :
-                str_replace('/', '.', $uri);
+            $uriName = $options['name'] ? $options['name'] : str_replace('/', '.', $uri);
             $uriName = 'admin.' . $uriName;
             
             $this->get($uri, $controller . '@index')->name($uriName .'.index');
@@ -25,6 +26,17 @@ class RouterMacros
             $this->get($uri . '/get-data', $controller . '@getDataTable')->name($uriName . '.get-data');
             
             $this->post($uri . '/bulk-actions', $controller . '@bulkActions')->name($uriName . '.bulk-actions');
+        };
+    }
+
+    public function postTypeResource()
+    {
+        return function ($uri, $controller, $options = []) {
+            $this->mymoResource($uri, $controller, $options);
+            //$this->mymoResource(Str::singular($uri) . '/comments', $controller, $options);
+            $this->mymoResource(Str::singular($uri) . '/{taxonomy}', '\Mymo\PostType\Http\Controllers\TaxonomyController', [
+                'name' => Str::singular($uri) . '.taxonomy'
+            ]);
         };
     }
 }

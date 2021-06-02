@@ -12,9 +12,9 @@
  * Time: 12:08 PM
  */
 
-Route::mymoResource('posts', 'PostController');
+Route::postTypeResource('posts', 'PostController');
 
-Route::mymoResource('post/categories', 'PostCategoriesController');
+//Route::mymoResource('post/{taxonomy}', 'TaxonomyController');
 
-Route::mymoResource('post/comments', 'PostCommentsController');
+Route::mymoResource('post/comments', 'TaxonomyController');
 

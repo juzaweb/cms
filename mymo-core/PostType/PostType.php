@@ -24,7 +24,7 @@ class PostType
      * @param string|null $postType
      * @return \Illuminate\Support\Collection
      * */
-    public static function getSetting($postType = null)
+    public static function getPostTypes($postType = null)
     {
         if ($postType) {
             return Arr::get(apply_filters('mymo.post_types', []), $postType);
