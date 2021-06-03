@@ -83,14 +83,13 @@ class TaxonomyController extends BackendController
         $limit = $request->get('limit', 20);
 
         $query = $this->taxonomyRepository->makeQuery();
-        $query->with(['translations']);
-        $query->where('taxonomy', '=', $setting->get('singular'));
-        $query->where('type', '=', $setting->get('type'));
+        $query->where('taxonomy', '=', $setting->get('taxonomy'));
+        $query->where('post_type', '=', $setting->get('post_type'));
 
         if ($search) {
             $query->where(function ($subquery) use ($search) {
-                $subquery->orWhereTranslationLike('name', '%'. $search .'%');
-                $subquery->orWhereTranslationLike('description', '%'. $search .'%');
+                $subquery->where('name', 'like', '%'. $search .'%');
+                $subquery->where('description', 'like', '%'. $search .'%');
             });
         }
 
@@ -101,7 +100,7 @@ class TaxonomyController extends BackendController
         $rows = $query->get();
 
         foreach ($rows as $row) {
-            $row->edit_url = route("admin.{$setting->get('type')}.taxonomy.edit", [$row->id]);
+            $row->edit_url = route("admin.{$setting->get('type')}.taxonomy.edit", [$taxonomy, $row->id]);
             $row->thumbnail = upload_url($row->thumbnail);
             $row->description = Str::words($row->description, 20);
         }

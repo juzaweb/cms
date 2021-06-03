@@ -45,6 +45,7 @@ trait PostTypeHookAction
         ];
 
         $args['type'] = $type;
+        $args['post_type'] = $objectType;
         $args['taxonomy'] = $taxonomy;
         $args['singular'] = Str::singular($taxonomy);
         $args = collect(array_merge($opts, $args));
