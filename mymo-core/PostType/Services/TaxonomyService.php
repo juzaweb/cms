@@ -29,7 +29,7 @@ class TaxonomyService
 
     public function create(array $attributes)
     {
-        $this->validator($attributes);
+        $this->validate($attributes);
         DB::beginTransaction();
         try {
             $model = $this->taxonomyRepository->create($attributes);
@@ -44,7 +44,7 @@ class TaxonomyService
 
     public function update(array $attributes, $id)
     {
-        $this->validator($attributes);
+        $this->validate($attributes);
         DB::beginTransaction();
         try {
             $model = $this->taxonomyRepository->update($attributes, $id);

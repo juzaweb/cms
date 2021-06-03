@@ -3,28 +3,24 @@
 namespace Mymo\PostType\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Mymo\Core\Translatable\Translatable;
-use Mymo\Core\Translatable\Contracts\Translatable as TranslatableContract;
+use Mymo\Core\Traits\UseSlug;
 
-class Taxonomy extends Model implements TranslatableContract
+class Taxonomy extends Model
 {
-    use Translatable;
+    use UseSlug;
 
     protected $table = 'taxonomies';
     protected $slugSource = 'name';
     protected $fillable = [
-        'type',
-        'taxonomy',
-        'type',
-        'parent_id',
-        'total_post'
-    ];
-
-    public $translatedAttributes = [
         'name',
         'description',
         'thumbnail',
-        'slug'
+        'slug',
+        'posy_type',
+        'taxonomy',
+        'post_type',
+        'parent_id',
+        'total_post'
     ];
 
     public function parent()
@@ -32,7 +28,7 @@ class Taxonomy extends Model implements TranslatableContract
         return $this->belongsTo(Taxonomy::class, 'parent_id', 'id');
     }
 
-    public function childrens()
+    public function children()
     {
         return $this->hasMany(Taxonomy::class, 'parent_id', 'id');
     }

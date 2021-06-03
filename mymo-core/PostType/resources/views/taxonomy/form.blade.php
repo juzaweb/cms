@@ -4,6 +4,7 @@
     @php
         $type = $setting->get('type');
     @endphp
+
     @component('mymo_core::components.form', [
         'method' => $model->id ? 'put' : 'post',
         'action' => $model->id ?
@@ -22,7 +23,7 @@
                 @endcomponent
 
                 @component('mymo_core::components.form_textarea', [
-                    'name' => $lang . '[description]',
+                    'name' => 'description',
                     'label' => trans('mymo_core::app.description'),
                     'value' => $model->description
                 ])
@@ -42,7 +43,7 @@
             @if(in_array('thumbnail', $setting->get('supports', [])))
             <div class="col-md-4">
                 @component('mymo_core::components.form_image', [
-                    'name' => $lang . '[thumbnail]',
+                    'name' => 'thumbnail',
                     'label' => trans('mymo_core::app.thumbnail'),
                     'value' => $model->thumbnail
                 ])@endcomponent

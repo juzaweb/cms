@@ -48,7 +48,7 @@ class TaxonomyController extends BackendController
 
         return view('mymo_post_type::taxonomy.form', [
             'model' => $model,
-            'title' => trans('mymo_core::app.add-new'),
+            'title' => trans('mymo_core::app.add_new'),
             'taxonomy' => $taxonomy,
             'setting' => $setting
         ]);
@@ -82,7 +82,8 @@ class TaxonomyController extends BackendController
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
 
-        $query = Taxonomy::query()->with(['translations']);
+        $query = $this->taxonomyRepository->makeQuery();
+        $query->with(['translations']);
         $query->where('taxonomy', '=', $setting->get('singular'));
         $query->where('type', '=', $setting->get('type'));
 
@@ -113,19 +114,26 @@ class TaxonomyController extends BackendController
 
     public function store(Request $request, $taxonomy)
     {
-        $model = $this->taxonomyService->create($request->all());
+        $model = $this->taxonomyService->create(array_merge($request->all(), [
+            'post_type' => $this->objectType,
+            'taxonomy' => $taxonomy
+        ]));
 
         return $this->success([
             'message' => trans('mymo_core::app.successfully'),
             'html' => view('mymo_core::components.tag-item', [
                 'item' => $model,
+                'name' => $taxonomy,
             ])->render()
         ]);
     }
 
     public function update(Request $request, $taxonomy, $id)
     {
-        $this->taxonomyService->update($request->all(), $id);
+        $this->taxonomyService->update(array_merge($request->all(), [
+            'post_type' => $this->objectType,
+            'taxonomy' => $taxonomy
+        ]), $id);
 
         return $this->success([
             'message' => trans('mymo_core::app.successfully')
