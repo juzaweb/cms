@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Mymo\Core\Models\Menu;
-use Mymo\PostType\Models\PostCategories;
 use Mymo\Core\Models\User;
+use Mymo\PostType\Models\Taxonomy;
 
 class LoadDataController extends BackendController
 {
@@ -22,57 +22,36 @@ class LoadDataController extends BackendController
         ]);
     }
 
-    protected function loadTags(Request $request) {
+    protected function loadTaxonomies(Request $request)
+    {
         $search = $request->get('search');
         $explodes = $request->get('explodes');
-    
-        $query = Tags::query();
+        $postType = $request->get('post_type');
+        $taxonomy = $request->get('taxonomy');
+
+        $query = Taxonomy::query();
         $query->select([
             'id',
-            'name AS text'
-        ]);
-        
+            'name as text'
+        ])
+            ->where('post_type', '=', $postType)
+            ->where('taxonomy', '=', $taxonomy);
+
         if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
+            $query->whereTranslationLike('name', '%'. $search .'%');
         }
-    
+
         if ($explodes) {
             $query->whereNotIn('id', $explodes);
         }
-    
+
         $paginate = $query->paginate(10);
         $data['results'] = $query->get();
+
         if ($paginate->nextPageUrl()) {
             $data['pagination'] = ['more' => true];
         }
-    
-        return response()->json($data);
-    }
-    
-    protected function loadPostCategories(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-    
-        $query = PostCategories::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-    
-        if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
-        }
-    
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-    
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-    
+
         return response()->json($data);
     }
     

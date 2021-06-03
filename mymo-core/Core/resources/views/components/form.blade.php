@@ -1,4 +1,6 @@
 <form action="{{ $action ?? '' }}" method="post" class="form-ajax">
+    @csrf
+
     @if(isset($method) && $method == 'put')
         @method('PUT')
     @endif

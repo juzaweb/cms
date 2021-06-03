@@ -417,6 +417,7 @@ return [
   'active' => 'Active',
   'parent' => 'Parent',
   'add' => 'Add',
+  'inactive' => 'Inactive',
   'total_posts' => 'Total posts',
   'successfully' => 'Successfully',
   'click_here_to_select_file' => 'Click here to select file',

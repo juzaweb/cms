@@ -32,9 +32,9 @@
                 @if(in_array('hierarchical', $setting->get('supports', [])))
                 <div class="form-group">
                     <label class="col-form-label" for="parent_id">@lang('mymo_core::app.parent')</label>
-                    <select name="parent_id" id="parent_id" class="form-control load-taxonomies" data-type="{{ $type }}" data-taxonomy="{{ $setting->get('singular') }}" data-placeholder="{{ trans('mymo_core::app.parent') }}" data-explodes="{{ $model->id }}">
+                    <select name="parent_id" id="parent_id" class="form-control load-taxonomies" data-post-type="{{ $setting->get('post_type') }}" data-taxonomy="{{ $setting->get('taxonomy') }}" data-placeholder="{{ trans('mymo_core::app.parent') }}" data-explodes="{{ $model->id }}">
                         @if($model->parent)
-                            <option value="{{ $model->parent->id }}">{{ $model->parent->name }}</option>
+                            <option value="{{ $model->parent->id }}" selected>{{ $model->parent->name }}</option>
                         @endif
                     </select>
                 </div>

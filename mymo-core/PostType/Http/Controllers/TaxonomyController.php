@@ -62,7 +62,7 @@ class TaxonomyController extends BackendController
 
         $this->addBreadcrumb([
             'title' => $setting->get('label'),
-            'url' => route('admin.'. $setting->get('type') .'.taxonomy.index')
+            'url' => route('admin.'. $setting->get('type') .'.taxonomy.index', [$taxonomy])
         ]);
 
         return view('mymo_post_type::taxonomy.form', [
