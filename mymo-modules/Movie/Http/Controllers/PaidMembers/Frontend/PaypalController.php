@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Http\Controllers\PaidMembers\Frontend;
+namespace Modules\Movie\Http\Controllers\PaidMembers\Frontend;
 
 use Modules\Movie\Models\PaymentHistory;
 use Modules\Movie\Models\UserSubscription;
-use App\Core\User;
+use Modules\Movie\User;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 use PayPal\Api\Agreement;

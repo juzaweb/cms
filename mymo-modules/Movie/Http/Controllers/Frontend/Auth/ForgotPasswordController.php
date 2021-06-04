@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Frontend\Auth;
+namespace Modules\Movie\Http\Controllers\Frontend\Auth;
 
 use Modules\Movie\Models\Email\EmailList;
 use Modules\Movie\Models\PasswordReset;

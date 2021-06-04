@@ -38,7 +38,7 @@ trait MenuHookAction
         $opts = [
             'title' => $menuTitle,
             'key' => $menuSlug,
-            'icon' => 'fa fa-list-alt',
+            'icon' => 'fa fa-list-ul',
             'url' => str_replace('.', '/', $menuSlug),
             'parent' => null,
             'position' => 20,

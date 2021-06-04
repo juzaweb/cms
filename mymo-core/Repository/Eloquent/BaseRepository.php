@@ -182,6 +182,11 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         return $this;
     }
 
+    public function makeQuery()
+    {
+        return $this->model->newQuery();
+    }
+
     /**
      * @return Model
      * @throws RepositoryException

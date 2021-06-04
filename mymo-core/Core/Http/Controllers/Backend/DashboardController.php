@@ -3,9 +3,7 @@
 namespace Mymo\Core\Http\Controllers\Backend;
 
 use Mymo\Core\Http\Controllers\BackendController;
-use Mymo\Core\Models\Movie\Movies;
-use Mymo\Core\Models\Movie\MovieViews;
-use Mymo\Core\Models\Pages;
+use Mymo\PostType\Models\Page;
 use Mymo\Core\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,7 +24,7 @@ class DashboardController extends BackendController
             ->count('id');*/
         $count_user = User::where('status', '=', 1)
             ->count('id');
-        $count_page = Pages::where('status', '=', 1)
+        $count_page = Page::where('status', '=', 1)
             ->count('id');
 
         return view('mymo_core::backend.dashboard', [

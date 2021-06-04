@@ -49,7 +49,7 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table load-bootstrap-table">
+                <table class="table mymo-table">
                     <thead>
                         <tr>
                             <th data-width="35%" data-field="en" data-sortable="true">English</th>
@@ -75,7 +75,7 @@
             return '<input type="text" class="form-control text-trans" data-key="'+ row.key +'" value="'+ strLang +'">';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.setting.translate.getdata', ['lang' => $lang]) }}',
         });
 
@@ -101,7 +101,7 @@
 
                 return false;
             }).fail(function(data) {
-                show_message(langs.data_error, 'error');
+                show_message(mymo.lang.data_error, 'error');
                 return false;
             });
         });

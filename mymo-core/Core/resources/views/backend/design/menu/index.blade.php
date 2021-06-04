@@ -1,23 +1,14 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', trans('mymo_core::app.menu'))
-
 @section('content')
 
-    {{ Breadcrumbs::render('manager', [
-            'name' => trans('mymo_core::app.menu'),
-            'url' => route('admin.design.menu')
-        ]) }}
+    <div class="row mt-5">
+        <div class="col-md-5">
+            @include('mymo_core::backend.design.menu.form_left')
+        </div>
 
-    <div class="cui__utils__content">
-        <div class="row mt-5">
-            <div class="col-md-5">
-                @include('mymo_core::backend.design.menu.form_left')
-            </div>
-
-            <div class="col-md-7">
-                @include('mymo_core::backend.design.menu.form_right')
-            </div>
+        <div class="col-md-7">
+            @include('mymo_core::backend.design.menu.form_right')
         </div>
     </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Frontend;
+namespace Modules\Movie\Http\Controllers\Frontend;
 
 use Modules\Movie\Models\Category\Genres;
 use Modules\Movie\Models\Movie\Movies;

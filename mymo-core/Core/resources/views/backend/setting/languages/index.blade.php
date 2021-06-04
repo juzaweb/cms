@@ -1,76 +1,67 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', trans('mymo_core::app.language'))
-
 @section('content')
 
-    {{ Breadcrumbs::render('manager', [
-            'name' => trans('mymo_core::app.language'),
-            'url' => route('admin.setting.languages')
-        ]) }}
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.language')</h5>
+                </div>
 
-    <div class="cui__utils__content">
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.language')</h5>
-                    </div>
+                <div class="col-md-6">
+                    <div class="float-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success sync-language"><i class="fa fa-refresh"></i> @lang('mymo_core::app.sync_language')</button>
+                        </div>
 
-                    <div class="col-md-6">
-                        <div class="float-right">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-success sync-language"><i class="fa fa-refresh"></i> @lang('mymo_core::app.sync_language')</button>
-                            </div>
-
-                            <div class="btn-group">
-                                <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add_new')</a>
-                                <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('mymo_core::app.delete')</button>
-                            </div>
+                        <div class="btn-group">
+                            <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add_new')</a>
+                            <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('mymo_core::app.delete')</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="card-body">
+        <div class="card-body">
 
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <form method="get" class="form-inline" id="form-search">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <form method="get" class="form-inline" id="form-search">
 
-                            <div class="form-group mb-2 mr-1">
-                                <label for="inputName" class="sr-only">@lang('mymo_core::app.search')</label>
-                                <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
-                            </div>
+                        <div class="form-group mb-2 mr-1">
+                            <label for="inputName" class="sr-only">@lang('mymo_core::app.search')</label>
+                            <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
+                        </div>
 
-                            <div class="form-group mb-2 mr-1">
-                                <label for="inputStatus" class="sr-only">@lang('mymo_core::app.status')</label>
-                                <select name="status" id="inputStatus" class="form-control">
-                                    <option value="1">@lang('mymo_core::app.enabled')</option>
-                                    <option value="0">@lang('mymo_core::app.disabled')</option>
-                                </select>
-                            </div>
+                        <div class="form-group mb-2 mr-1">
+                            <label for="inputStatus" class="sr-only">@lang('mymo_core::app.status')</label>
+                            <select name="status" id="inputStatus" class="form-control">
+                                <option value="1">@lang('mymo_core::app.enabled')</option>
+                                <option value="0">@lang('mymo_core::app.disabled')</option>
+                            </select>
+                        </div>
 
-                            <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo_core::app.search')</button>
-                        </form>
-                    </div>
-
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo_core::app.search')</button>
+                    </form>
                 </div>
 
-                <div class="table-responsive mb-5">
-                    <table class="table load-bootstrap-table">
-                        <thead>
-                            <tr>
-                                <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                                <th data-width="10%" data-field="key">@lang('mymo_core::app.code')</th>
-                                <th data-field="name">@lang('mymo_core::app.name')</th>
-                                <th data-field="status" data-width="15%" data-align="center" data-formatter="status_formatter">@lang('mymo_core::app.status')</th>
-                                <th data-field="default" data-width="5%" data-formatter="default_formatter">@lang('mymo_core::app.default')</th>
-                                <th data-width="20%" data-field="options" data-formatter="options_formatter" data-align="center">@lang('mymo_core::app.options')</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+            </div>
+
+            <div class="table-responsive mb-5">
+                <table class="table mymo-table">
+                    <thead>
+                    <tr>
+                        <th data-width="3%" data-field="state" data-checkbox="true"></th>
+                        <th data-width="10%" data-field="key">@lang('mymo_core::app.code')</th>
+                        <th data-field="name">@lang('mymo_core::app.name')</th>
+                        <th data-field="status" data-width="15%" data-align="center" data-formatter="status_formatter">@lang('mymo_core::app.status')</th>
+                        <th data-field="default" data-width="5%" data-formatter="default_formatter">@lang('mymo_core::app.default')</th>
+                        <th data-width="20%" data-field="options" data-formatter="options_formatter" data-align="center">@lang('mymo_core::app.options')</th>
+                    </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
@@ -111,9 +102,9 @@
 
         function status_formatter(value, row, index) {
             if (value == 1) {
-                return '<span class="text-success">'+ langs.enabled +'</span>';
+                return '<span class="text-success">'+ mymo.lang.enabled +'</span>';
             }
-            return '<span class="text-danger">'+ langs.disabled +'</span>';
+            return '<span class="text-danger">'+ mymo.lang.disabled +'</span>';
         }
 
         function default_formatter(value, row, index) {
@@ -123,11 +114,11 @@
 
         function options_formatter(value, row, index) {
             let result = '';
-            result += '<a href="'+ row.tran_url +'" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> '+ langs.translate +'</a>';
+            result += '<a href="'+ row.tran_url +'" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> '+ mymo.lang.translate +'</a>';
             return result;
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.setting.languages.getdata') }}',
             remove_url: '{{ route('admin.setting.languages.remove') }}',
         });
@@ -151,7 +142,7 @@
 
                 return false;
             }).fail(function(data) {
-                show_message(langs.data_error, 'error');
+                show_message(mymo.lang.data_error, 'error');
                 btn.find('i').attr('class', cIcon);
                 btn.prop("disabled", false);
                 return false;
@@ -176,7 +167,7 @@
 
                 return false;
             }).fail(function(data) {
-                show_message(langs.data_error, 'error');
+                show_message(mymo.lang.data_error, 'error');
                 return false;
             });
         });

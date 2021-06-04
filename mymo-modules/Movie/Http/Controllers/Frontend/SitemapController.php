@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Frontend;
+namespace Modules\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\BackendController;
 use Modules\Movie\Models\Category\Countries;

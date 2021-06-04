@@ -8,8 +8,11 @@ use Mymo\Core\Http\Controllers\BackendController;
 
 class EmailLogsController extends BackendController
 {
-    public function index() {
-        return view('mymo_core::backend.logs.email');
+    public function index()
+    {
+        return view('mymo_core::backend.logs.email', [
+            'title' => trans('mymo_core::app.email_logs'),
+        ]);
     }
     
     public function getData(Request $request) {

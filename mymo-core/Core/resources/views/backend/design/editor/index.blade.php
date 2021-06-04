@@ -8,22 +8,8 @@
     <meta name="description" content="{{ trans('mymo_core::app.customize_theme') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <script type="text/javascript">
-        var langs = {
-            'are_you_sure_delete_items': '@lang('mymo_core::app.are_you_sure_delete_items')',
-            'yes': '@lang('mymo_core::app.yes')',
-            'cancel': '@lang('mymo_core::app.cancel')',
-            'data_error': '@lang('mymo_core::app.data_error')',
-            'enabled': '@lang('mymo_core::app.enabled')',
-            'disabled': '@lang('mymo_core::app.disabled')',
-            'edit': '@lang('mymo_core::app.edit')',
-            'translate': '@lang('mymo_core::app.translate')',
-            'preview': '@lang('mymo_core::app.preview')',
-            'upload': '@lang('mymo_core::app.upload')',
-            'show': '@lang('mymo_core::app.show')',
-            'hide': '@lang('mymo_core::app.hide')',
-        }
-    </script>
+    @include('mymo_core::components.mymo_langs')
+
     <link rel="stylesheet" href="{{ asset('styles/css/theme-editor.css') }}">
     <!--[if lt IE 9]>
     <script src="{{ asset('styles/js/html5shiv.min.js') }}"></script>

@@ -8,6 +8,12 @@
         "Modules\\Movie\\Providers\\MovieServiceProvider"
     ],
     "aliases": {},
-    "files": [],
-    "requires": []
+    "files": [
+      "Helpers/helpers.php"
+    ],
+    "requires": [],
+    "minimumCoreVersion": "1.0.3",
+    "author": "",
+    "title": "Movie Portal",
+    "version": "1.0"
 }

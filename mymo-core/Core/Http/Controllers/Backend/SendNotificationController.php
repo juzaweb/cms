@@ -4,10 +4,10 @@ namespace Mymo\Core\Http\Controllers\Backend;
 
 use Mymo\Core\Models\User;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\Controller;
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\MyNotification;
 
-class SendNotificationController extends Controller
+class SendNotificationController extends BackendController
 {
     public function index() {
         return view('mymo_core::backend.notification.index');

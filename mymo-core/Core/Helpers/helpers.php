@@ -12,6 +12,8 @@
  * Time: 10:05 PM
  */
 
+require (__DIR__ . '/../../Module/helpers.php');
+
 use Illuminate\Support\Facades\Auth;
 use Mymo\Core\Helpers\Breadcrumb;
 use Mymo\Core\Models\Menu;
@@ -285,4 +287,48 @@ function breadcrumb($name, $add_items = [])
     }
 
     return Breadcrumb::render($name, $items);
+}
+
+function combine_pivot($entities, $pivots = [])
+{
+    // Set array
+    $pivotArray = [];
+    // Loop through all pivot attributes
+    foreach ($pivots as $pivot => $value) {
+        // Combine them to pivot array
+        $pivotArray += [$pivot => $value];
+    }
+    // Get the total of arrays we need to fill
+    $total = count($entities);
+    // Make filler array
+    $filler = array_fill(0, $total, $pivotArray);
+    // Combine and return filler pivot array with data
+    return array_combine($entities, $filler);
+}
+
+function path_url(string $url)
+{
+    if (!is_url($url)) {
+        return $url;
+    }
+
+    return parse_url($url)['path'];
+}
+
+function upload_url($path, $default = null)
+{
+    if (is_url($path)) {
+        return $path;
+    }
+
+    $storage = Storage::disk(config('file-manager.upload_disk'));
+    if ($storage->exists($path)) {
+        return $storage->url($path);
+    }
+
+    if ($default) {
+        return $default;
+    }
+
+    return asset('styles/images/thumb-default.png');
 }

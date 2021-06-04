@@ -10,8 +10,11 @@ use Mymo\Core\Models\Languages;
 
 class LanguageController extends BackendController
 {
-    public function index() {
-        return view('mymo_core::backend.setting.languages.index');
+    public function index()
+    {
+        return view('mymo_core::backend.setting.languages.index', [
+            'title' => trans('mymo_core::app.languages'),
+        ]);
     }
     
     public function getData(Request $request) {

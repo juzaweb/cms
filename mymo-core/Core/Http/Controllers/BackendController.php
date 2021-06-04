@@ -16,10 +16,14 @@ namespace Mymo\Core\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Mymo\Core\Traits\ResponseMessage;
 
 class BackendController extends Controller
 {
+    use ResponseMessage;
+
     public function callAction($method, $parameters)
     {
         if (!file_exists(storage_path('app/installed'))) {
@@ -28,7 +32,7 @@ class BackendController extends Controller
             }
         }
 
-        if (config('mymo_core::app.demo') == 'true' && \Auth::id() != 1) {
+        if (config('mymo_core::app.demo', false) == 'true' && \Auth::id() != 1) {
             if (\request()->isMethod('post')) {
                 if (\request()->is('admin-cp/*')) {
                     return response()->json([
@@ -49,7 +53,8 @@ class BackendController extends Controller
         return parent::callAction($method, $parameters);
     }
 
-    protected function validateRequest($rules, Request $request, $attributeNames = null) {
+    protected function validateRequest($rules, Request $request, $attributeNames = null)
+    {
         $validator = Validator::make($request->all(), $rules);
 
         if ($attributeNames) {
@@ -59,5 +64,13 @@ class BackendController extends Controller
         if ($validator->fails()) {
             json_message($validator->errors()->all()[0], 'error');
         }
+    }
+
+    protected function addBreadcrumb(array $item, $name = 'admin')
+    {
+        add_filters($name . '_breadcrumb', function ($items) use ($item) {
+            $items[] = $item;
+            return $items;
+        });
     }
 }

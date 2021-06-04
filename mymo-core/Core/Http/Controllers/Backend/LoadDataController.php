@@ -2,21 +2,14 @@
 
 namespace Mymo\Core\Http\Controllers\Backend;
 
-use Mymo\Core\Http\Controllers\Controller;
-use Mymo\Core\Models\LiveTV\LiveTvCategory;
-use Mymo\Core\Models\Sliders;
 use Illuminate\Database\Eloquent\Builder;
+use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
-use Mymo\Core\Models\Category\Countries;
-use Mymo\Core\Models\Category\Genres;
 use Mymo\Core\Models\Menu;
-use Mymo\Core\Models\PostCategories;
-use Mymo\Core\Models\Category\Stars;
-use Mymo\Core\Models\Category\Tags;
-use Mymo\Core\Models\Category\Types;
 use Mymo\Core\Models\User;
+use Mymo\PostType\Models\Taxonomy;
 
-class LoadDataController extends Controller
+class LoadDataController extends BackendController
 {
     public function loadData($func, Request $request) {
         if (method_exists($this, $func)) {
@@ -28,224 +21,37 @@ class LoadDataController extends Controller
             'message' => 'Function not found',
         ]);
     }
-    
-    protected function loadGenres(Request $request) {
+
+    protected function loadTaxonomies(Request $request)
+    {
         $search = $request->get('search');
         $explodes = $request->get('explodes');
-        
-        $query = Genres::query();
+        $postType = $request->get('post_type');
+        $taxonomy = $request->get('taxonomy');
+
+        $query = Taxonomy::query();
         $query->select([
             'id',
-            'name AS text'
-        ]);
-        
+            'name as text'
+        ])
+            ->where('post_type', '=', $postType)
+            ->where('taxonomy', '=', $taxonomy);
+
         if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
+            $query->whereTranslationLike('name', '%'. $search .'%');
         }
-        
+
         if ($explodes) {
             $query->whereNotIn('id', $explodes);
         }
-        
+
         $paginate = $query->paginate(10);
         $data['results'] = $query->get();
+
         if ($paginate->nextPageUrl()) {
             $data['pagination'] = ['more' => true];
         }
-        
-        return response()->json($data);
-    }
-    
-    protected function loadTypes(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-        
-        $query = Types::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-        
-        if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
-        }
-        
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-        
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-        
-        return response()->json($data);
-    }
-    
-    protected function loadCountries(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-        
-        $query = Countries::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-        
-        if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
-        }
-        
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-        
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-        
-        return response()->json($data);
-    }
-    
-    protected function loadActors(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-        
-        $query = Stars::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-        
-        if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
-        }
-        
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-        
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-        
-        return response()->json($data);
-    }
-    
-    protected function loadDirectors(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-        
-        $query = Stars::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-        
-        $query->where('type', '=', 'director');
-        
-        if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
-        }
-        
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-        
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-        
-        return response()->json($data);
-    }
-    
-    protected function loadWriters(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-        
-        $query = Stars::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-        
-        $query->where('type', '=', 'writer');
-        
-        if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
-        }
-        
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-        
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-        
-        return response()->json($data);
-    }
-    
-    protected function loadTags(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-    
-        $query = Tags::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-        
-        if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
-        }
-    
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-    
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-    
-        return response()->json($data);
-    }
-    
-    protected function loadPostCategories(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-    
-        $query = PostCategories::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-    
-        if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
-        }
-    
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-    
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-    
+
         return response()->json($data);
     }
     
@@ -307,63 +113,7 @@ class LoadDataController extends Controller
         
         return response()->json($data);
     }
-    
-    protected function loadSliders(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-        
-        $query = Sliders::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-        
-        if ($search) {
-            $query->where(function ($sub) use ($search) {
-                $sub->orWhere('name', 'like', '%'. $search .'%');
-            });
-        }
-        
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-        
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-        
-        return response()->json($data);
-    }
-    
-    protected function loadLiveTvCategory(Request $request) {
-        $search = $request->get('search');
-        $explodes = $request->get('explodes');
-    
-        $query = LiveTvCategory::query();
-        $query->select([
-            'id',
-            'name AS text'
-        ]);
-    
-        if ($search) {
-            $query->where('name', 'like', '%'. $search .'%');
-        }
-    
-        if ($explodes) {
-            $query->whereNotIn('id', $explodes);
-        }
-    
-        $paginate = $query->paginate(10);
-        $data['results'] = $query->get();
-        if ($paginate->nextPageUrl()) {
-            $data['pagination'] = ['more' => true];
-        }
-    
-        return response()->json($data);
-    }
-    
+
     protected function loadCountryName(Request $request) {
         $search = $request->get('search');
         $explodes = $request->get('explodes');

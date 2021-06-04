@@ -88,10 +88,6 @@ class ThemeServiceProvider extends ServiceProvider
         ], 'theme_config');
 
         $this->mergeConfigFrom($configPath, 'theme');
-
-        $this->publishes([
-            base_path('mymo-themes/mymo/assets') => public_path('styles/theme'),
-        ], 'theme_assets');
     }
 
     /**

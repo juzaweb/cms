@@ -15,11 +15,17 @@ namespace Mymo\Core\Providers;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Mymo\Core\Helpers\HookAction;
+use Mymo\Core\Http\Middleware\Admin;
+use Mymo\Core\Macros\RouterMacros;
 use Mymo\FileManager\Providers\FilemanagerServiceProvider;
+use Mymo\Module\LaravelModulesServiceProvider;
 use Mymo\Performance\Providers\MymoPerformanceServiceProvider;
+use Mymo\PostType\Providers\PostTypeServiceProvider;
+use Mymo\Repository\Providers\RepositoryServiceProvider;
 use Mymo\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Router;
 
 class MymoCoreServiceProvider extends ServiceProvider
 {
@@ -27,6 +33,7 @@ class MymoCoreServiceProvider extends ServiceProvider
     {
         $this->bootMigrations();
         $this->bootMiddlewares();
+        $this->bootPublishes();
         $this->loadMigrationsFrom(core_path('database/migrations'));
         $this->loadFactoriesFrom(core_path('database/factories'));
         $this->loadViewsFrom(core_path('resources/views'), 'mymo_core');
@@ -40,6 +47,7 @@ class MymoCoreServiceProvider extends ServiceProvider
     {
         $this->registerProviders();
         $this->registerSingleton();
+        $this->registerRouteMacros();
     }
 
     protected function bootMigrations()
@@ -52,7 +60,20 @@ class MymoCoreServiceProvider extends ServiceProvider
 
     protected function bootMiddlewares()
     {
-        $this->app['router']->aliasMiddleware('admin', \Mymo\Core\Http\Middleware\Admin::class);
+        $this->app['router']->aliasMiddleware('admin', Admin::class);
+    }
+
+    protected function bootPublishes()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/mymo_core.php', 'mymo_core');
+
+        $this->publishes([
+            __DIR__ . '/../config/mymo_core.php' => base_path('config/mymo_core.php'),
+        ], 'mymo_config');
+
+        $this->publishes([
+            __DIR__.'/../resources/assets' => public_path('styles'),
+        ], 'mymo_assets');
     }
 
     protected function registerProviders()
@@ -66,6 +87,10 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(MymoPerformanceServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
         $this->app->register(FilemanagerServiceProvider::class);
+        $this->app->register(TranslatableServiceProvider::class);
+        $this->app->register(LaravelModulesServiceProvider::class);
+        $this->app->register(RepositoryServiceProvider::class);
+        $this->app->register(PostTypeServiceProvider::class);
     }
 
     protected function registerSingleton()
@@ -73,5 +98,10 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->singleton('mymo.hook', function () {
             return new HookAction();
         });
+    }
+
+    protected function registerRouteMacros()
+    {
+        Router::mixin(new RouterMacros());
     }
 }

@@ -3,7 +3,6 @@
 namespace Modules\Movie\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
 
 class MovieServiceProvider extends ServiceProvider
 {

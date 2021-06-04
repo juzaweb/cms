@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Core\Models\Movie;
+namespace Modules\Movie\Models\Movie;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\Movie\MovieViews
+ * Modules\Movie\Models\Movie\MovieViews
  *
  * @property int $id
  * @property int $movie_id
  * @property int $views
  * @property string $day
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieViews newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieViews newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieViews query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieViews whereDay($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieViews whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieViews whereMovieId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Movie\MovieViews whereViews($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieViews newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieViews newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieViews query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieViews whereDay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieViews whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieViews whereMovieId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Movie\MovieViews whereViews($value)
  * @mixin \Eloquent
  */
 class MovieViews extends Model

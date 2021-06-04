@@ -34,6 +34,17 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
+    trans('mymo_core::app.pages'),
+    'pages',
+    [
+        'icon' => 'fa fa-file-text',
+        'position' => 20
+    ]
+);
+
+
+
+HookAction::addAdminMenu(
     'mymo_core::app.updates',
     'updates',
     [
@@ -84,20 +95,20 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.users'),
-    'users',
-    [
-        'icon' => 'fa fa-users',
-        'position' => 50
-    ]
-);
-
-HookAction::addAdminMenu(
     trans('mymo_core::app.modules'),
     'modules',
     [
         'icon' => 'fa fa-plug',
         'position' => 50
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.users'),
+    'users',
+    [
+        'icon' => 'fa fa-users',
+        'position' => 60
     ]
 );
 

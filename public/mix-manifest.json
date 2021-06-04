@@ -1,9 +1,4 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/backend.css": "/css/backend.css",
-    "/css/theme-editor.css": "/css/theme-editor.css",
-    "/js/theme-editor.js": "/js/theme-editor.js",
-    "/js/backend.js": "/js/backend.js",
-    "/styles/themes/mymo/css/main.css": "/styles/themes/mymo/css/main.css",
-    "/styles/themes/mymo/js/main.js": "/styles/themes/mymo/js/main.js"
+    "/mymo-core/Core/resources/assets/css/backend.css": "/mymo-core/Core/resources/assets/css/backend.css",
+    "/mymo-core/Core/resources/assets/js/backend.js": "/mymo-core/Core/resources/assets/js/backend.js"
 }

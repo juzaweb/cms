@@ -410,7 +410,16 @@ return [
   'apply' => 'Apply',
   'activate' => 'Activate',
   'deactivate' => 'Deactivate',
-  'bulk-actions' => 'Bulk Actions',
-  'all-status' => 'All status',
+  'languages' => 'Languages',
+  'all_posts' => 'All posts',
+  'bulk_actions' => 'Bulk Actions',
+  'all_status' => 'All status',
+  'active' => 'Active',
+  'parent' => 'Parent',
+  'add' => 'Add',
+  'inactive' => 'Inactive',
+  'total_posts' => 'Total posts',
+  'successfully' => 'Successfully',
+  'click_here_to_select_file' => 'Click here to select file',
 ];
 

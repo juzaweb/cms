@@ -45,7 +45,7 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table load-bootstrap-table">
+                <table class="table mymo-table">
                     <thead>
                     <tr>
                         <th data-width="3%" data-field="state" data-checkbox="true"></th>
@@ -77,7 +77,7 @@
             return '<span class="text-danger">@lang('mymo_core::app.disabled')</span>';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.users.getdata') }}',
             remove_url: '{{ route('admin.users.remove') }}',
         });

@@ -2,17 +2,15 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Design;
 
-use Mymo\Core\Models\Category\Countries;
-use Mymo\Core\Models\Category\Genres;
 use Mymo\Core\Models\Menu;
-use Mymo\Core\Models\Pages;
-use Mymo\Core\Models\Category\Types;
+use Mymo\PostType\Models\Page;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 
 class MenuController extends BackendController
 {
-    public function index($id = null) {
+    public function index($id = null)
+    {
         if (empty($id)) {
             $menu = Menu::first();
             if ($menu) {
@@ -27,19 +25,18 @@ class MenuController extends BackendController
             ->get(['id', 'name']);
         $types = Types::where('status', '=', 1)
             ->get(['id', 'name']);*/
-        $pages = Pages::where('status', '=', 1)
+        $pages = Page::where('status', '=', 1)
             ->get(['id', 'name']);
         
         return view('mymo_core::backend.design.menu.index', [
             'menu' => $menu,
-            /*'genres' => $genres,
-            'countries' => $countries,
-            'types' => $types,*/
             'pages' => $pages,
+            'title' => trans('mymo_core::app.menu')
         ]);
     }
     
-    public function addMenu(Request $request) {
+    public function addMenu(Request $request)
+    {
         $this->validateRequest([
             'name' => 'required|string|max:250',
         ], $request, [
@@ -57,7 +54,8 @@ class MenuController extends BackendController
         ]);
     }
     
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $this->validateRequest([
             'name' => 'required|string|max:250',
             'content' => 'required',
@@ -77,7 +75,8 @@ class MenuController extends BackendController
         ]);
     }
     
-    public function getItems(Request $request) {
+    public function getItems(Request $request)
+    {
         $this->validateRequest([
             'type' => 'required',
         ], $request, [
@@ -137,7 +136,7 @@ class MenuController extends BackendController
     
                 return response()->json($result);*/
             case 'page':
-                $items = Pages::whereIn('id', $items)
+                $items = Page::whereIn('id', $items)
                     ->get(['id', 'name', 'slug']);
                 $result = [];
                 

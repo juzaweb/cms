@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Core\Models\Video;
+namespace Modules\Movie\Models\Video;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Core\Models\Video\VideoServers
+ * Modules\Movie\Models\Video\VideoServers
  *
  * @property int $id
  * @property string $name
@@ -14,19 +14,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers whereMovieId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers whereOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Core\Models\Video\VideoServers whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers whereMovieId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Modules\Movie\Models\Video\VideoServers whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \App\Core\Models\Movie\Movies $movie
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Core\Models\Video\VideoFiles[] $video_files
+ * @property-read \Modules\Movie\Models\Movie\Movies $movie
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Modules\Movie\Models\Video\VideoFiles[] $video_files
  * @property-read int|null $video_files_count
  */
 class VideoServers extends Model
@@ -40,10 +40,10 @@ class VideoServers extends Model
     ];
     
     public function movie() {
-        return $this->hasOne('App\Core\Models\Movie\Movies', 'id', 'movie_id');
+        return $this->hasOne('Modules\Movie\Models\Movie\Movies', 'id', 'movie_id');
     }
     
     public function video_files() {
-        return $this->hasMany('App\Core\Models\Video\VideoFiles', 'server_id', 'id');
+        return $this->hasMany('Modules\Movie\Models\Video\VideoFiles', 'server_id', 'id');
     }
 }

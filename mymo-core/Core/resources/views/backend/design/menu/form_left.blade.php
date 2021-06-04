@@ -19,7 +19,7 @@
     <div class="card-body">
         <ul class="accordionjs m-0" id="accordion" data-active-index="false">
 
-            <li class="acc_section">
+            {{--<li class="acc_section">
                 <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('mymo_core::app.genres') }}</h3></div>
                 <div class="acc_content">
                     <form action="" method="post" class="add-menu-item">
@@ -122,7 +122,7 @@
                         <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('mymo_core::app.add_to_menu') }}</button>
                     </form>
                 </div>
-            </li>
+            </li>--}}
 
             <li class="acc_section">
                 <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('mymo_core::app.pages') }}</h3></div>

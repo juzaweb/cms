@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers\Frontend\Stream;
+namespace Modules\Movie\Http\Controllers\Frontend\Stream;
 
 use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Crypt;
@@ -12,7 +12,7 @@ class StreamController extends BackendController
         $stream = base64_decode(urldecode($file));
         $stream = json_decode(Crypt::decryptString($stream));
         
-        $class = 'App\Core\Http\Controllers\Frontend\Stream\\'. $stream->class .'Controller';
+        $class = 'Modules\Movie\Http\Controllers\Frontend\Stream\\'. $stream->class .'Controller';
         if (class_exists($class)) {
             $controller = new $class();
             $controller->stream($file, $quality);

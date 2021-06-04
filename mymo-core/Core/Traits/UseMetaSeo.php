@@ -4,7 +4,8 @@ namespace Mymo\Core\Traits;
 
 use Illuminate\Support\Str;
 
-trait UseMetaSeo {
+trait UseMetaSeo
+{
     
     public static function bootUseMetaSeo()
     {

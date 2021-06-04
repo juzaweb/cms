@@ -9,7 +9,7 @@ trait UseSlug {
     public static function bootUseSlug()
     {
         static::saving(function ($model) {
-            $model->slug = $model->generateSlug($model->name ?: $model->title);
+            $model->slug = $model->generateSlug($model->name ?? $model->title);
         });
     }
     
@@ -35,5 +35,4 @@ trait UseSlug {
         
         return $slug;
     }
-    
 }

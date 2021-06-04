@@ -1,10 +1,22 @@
 <?php
+/**
+ * MYMO CMS - Free Laravel CMS
+ *
+ * @package    mymocms/mymocms
+ * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @link       https://github.com/mymocms/mymocms
+ * @license    MIT
+ *
+ * Time: 12:08 PM
+ */
+
 namespace Mymo\Repository\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class RepositoryServiceProvider
+ *
  * @package Mymo\Repository\Providers
  * @author Anderson Andrade <contato@andersonandra.de>
  */
@@ -24,12 +36,11 @@ class RepositoryServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/repository.php' => config_path('repository.php')
+            __DIR__ . '/../config/repository.php' => config_path('repository.php')
         ]);
 
-        $this->mergeConfigFrom(__DIR__ . '/../../config/repository.php', 'repository');
+        $this->mergeConfigFrom(__DIR__ . '/../config/repository.php', 'repository');
     }
-
 
     /**
      * Register the service provider.

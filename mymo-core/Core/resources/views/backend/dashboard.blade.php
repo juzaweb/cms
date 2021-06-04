@@ -102,13 +102,13 @@
             return '<a href="'+ row.url +'" data-turbolinks="false">'+ value +'</a>';
         }
 
-        var table1 = new LoadBootstrapTable({
+        var table1 = new MymoTable({
             table: '#users-table',
             page_size: 5,
             url: '{{ route('admin.dashboard.users') }}',
         });
 
-        var table2 = new LoadBootstrapTable({
+        var table2 = new MymoTable({
             table: '#users-notification',
             page_size: 5,
             url: '{{ route('admin.dashboard.notifications') }}',

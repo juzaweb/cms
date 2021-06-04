@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Str;
-use Symfony\Component\Finder\Finder;
 
 if (! \function_exists('dirsIntersect')) {
     /**
@@ -24,7 +23,7 @@ if (! \function_exists('checkPermissions')) {
     /**
      * Check a given directory recursively if all files are writeable.
      *
-     * @param Finder $directory
+     * @param string $directory
      *
      * @return bool
      */
