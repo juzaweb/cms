@@ -67,11 +67,17 @@ class PostType
             }
 
             $data = Arr::get($attributes, $taxonomy->get('taxonomy'), []);
+            $detachIds = $model->taxonomies()
+                ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
+                ->whereNotIn('id', $data)
+                ->pluck('id')
+                ->toArray();
+
+            $model->taxonomies()->detach($detachIds);
             $model->taxonomies()
-                ->where('taxonomy', '=', $taxonomy->get('singular'))
-                ->sync(combine_pivot($data, [
+                ->syncWithoutDetaching(combine_pivot($data, [
                     'term_type' => $postType
-                ]));
+                ]), ['term_type' => $postType]);
         }
     }
 }

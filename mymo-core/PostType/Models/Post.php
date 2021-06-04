@@ -2,8 +2,6 @@
 
 namespace Mymo\PostType\Models;
 
-use Mymo\Core\Traits\UseChangeBy;
-use Mymo\Core\Traits\UseMetaSeo;
 use Mymo\Core\Traits\UseSlug;
 use Mymo\Core\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Model;
@@ -73,6 +71,6 @@ class Post extends Model
     {
         return $this->belongsToMany('Mymo\PostType\Models\Taxonomy', 'term_taxonomies', 'term_id', 'taxonomy_id')
             ->withPivot(['term_type'])
-            ->where('post_type', '=', 'posts');
+            ->wherePivot('term_type', '=', 'posts');
     }
 }
