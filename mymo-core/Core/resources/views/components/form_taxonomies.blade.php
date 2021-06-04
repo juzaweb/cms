@@ -13,14 +13,14 @@
             data-post-type="{{ $taxonomy->get('post_type') }}"
             data-type="{{ $taxonomy->get('type') }}"
             data-taxonomy="{{ $taxonomy->get('taxonomy') }}"
-            data-explodes="{{ $taxonomy->get('singular') }}-explode">
+            data-explodes="{{ $taxonomy->get('taxonomy') }}-explode">
     </select>
 
     <div class="show-tags mt-2">
         @php
             $items = $model->taxonomies()
                 ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
-                ->get(['id', 'taxonomy']);
+                ->get();
         @endphp
 
         @foreach($items as $item)

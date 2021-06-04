@@ -30,7 +30,7 @@ class PostService
 
     public function create(array $attributes)
     {
-        $this->validator($attributes);
+        $this->validate($attributes);
         DB::beginTransaction();
         try {
             $model = $this->postRepository->create($attributes);
@@ -46,7 +46,7 @@ class PostService
 
     public function update(array $attributes, $id)
     {
-        $this->validator($attributes);
+        $this->validate($attributes);
         DB::beginTransaction();
         try {
             $model = $this->postRepository->update($attributes, $id);

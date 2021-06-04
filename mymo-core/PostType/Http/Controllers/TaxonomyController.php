@@ -3,7 +3,7 @@
 namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\PostType\Repositories\TaxonomyRepository;
@@ -13,7 +13,6 @@ class TaxonomyController extends BackendController
 {
     protected $taxonomyRepository;
     protected $taxonomyService;
-    protected $objectType = 'posts';
 
     public function __construct(
         TaxonomyRepository $taxonomyRepository,
@@ -114,7 +113,7 @@ class TaxonomyController extends BackendController
     public function store(Request $request, $taxonomy)
     {
         $model = $this->taxonomyService->create(array_merge($request->all(), [
-            'post_type' => $this->objectType,
+            'post_type' => $this->getPostType(),
             'taxonomy' => $taxonomy
         ]));
 
@@ -130,7 +129,7 @@ class TaxonomyController extends BackendController
     public function update(Request $request, $taxonomy, $id)
     {
         $this->taxonomyService->update(array_merge($request->all(), [
-            'post_type' => $this->objectType,
+            'post_type' => $this->getPostType(),
             'taxonomy' => $taxonomy
         ]), $id);
 
@@ -162,6 +161,24 @@ class TaxonomyController extends BackendController
         ]);
     }
 
+    public function getTagComponent(Request $request, $taxonomy)
+    {
+        $item = $this->taxonomyRepository->findOrFail($request->input('id'));
+        return $this->response([
+            'html' => view('mymo_core::components.tag-item', [
+                'item' => $item,
+                'name' => $taxonomy
+            ])
+                ->render()
+        ], true);
+    }
+
+    protected function getPostType()
+    {
+        $split = explode('.', Route::currentRouteName());
+        return Str::plural($split[count($split) - 3]);
+    }
+
     /**
      * Get taxonomy setting
      *
@@ -170,13 +187,7 @@ class TaxonomyController extends BackendController
      **/
     protected function getSetting($taxonomy)
     {
-        $taxonomies = collect(apply_filters('mymo.taxonomies', []));
-        $taxonomies = $taxonomies->filter(function ($item) {
-            return Arr::has($item['object_types'], $this->objectType);
-        })->mapWithKeys(function ($item) {
-            return [$item['taxonomy'] => $item['object_types'][$this->objectType]];
-        });
-
-        return $taxonomies->get($taxonomy);
+        $taxonomies = apply_filters('mymo.taxonomies', []);
+        return $taxonomies[$this->getPostType()][$taxonomy] ?? [];
     }
 }

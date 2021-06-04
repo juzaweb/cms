@@ -19,9 +19,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $category
  * @property string|null $tags
  * @property int $status
- * @property string|null $meta_title
- * @property string|null $meta_description
- * @property string|null $keywords
  * @property int $views
  * @property \Mymo\Core\Models\User|null $created_by
  * @property int $updated_by
@@ -52,10 +49,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Post extends Model
 {
-    use UseThumbnail, UseSlug, UseMetaSeo, UseChangeBy;
+    use UseThumbnail, UseSlug;
     
     protected $table = 'posts';
-    protected $primaryKey = 'id';
     protected $fillable = [
         'title',
         'content',

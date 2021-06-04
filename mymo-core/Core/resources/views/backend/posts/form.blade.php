@@ -13,7 +13,6 @@
 
                 <div class="form-group">
                     <label class="col-form-label" for="title">@lang('mymo_core::app.title')</label>
-
                     <input type="text" name="title" class="form-control" id="title" value="{{ $model->title }}" autocomplete="off" required>
                 </div>
 
@@ -34,7 +33,7 @@
                 ])
                 @endcomponent
 
-                @do_action('post_type.posts.form.left')
+                @do_action('post_type.'. $postType .'.form.left')
                 {{--@include('mymo_core::backend.seo_form')--}}
             </div>
 
@@ -45,7 +44,7 @@
                     'value' => $model->thumbnail,
                 ])@endcomponent
 
-                @do_action('post_type.posts.form.rigth', $model)
+                @do_action('post_type.'. $postType .'.form.rigth', $model)
             </div>
         </div>
     @endcomponent

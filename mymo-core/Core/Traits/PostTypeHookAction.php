@@ -31,7 +31,7 @@ trait PostTypeHookAction
         $type = Str::singular($objectType);
         $opts = [
             'label' => '',
-            'type_label' => ucfirst($type) .' '. $args['label'],
+            'label_type' => ucfirst($type) .' '. $args['label'],
             'description' => '',
             'hierarchical' => false,
             'parent' => $objectType,
@@ -51,17 +51,7 @@ trait PostTypeHookAction
         $args = collect(array_merge($opts, $args));
 
         add_filters('mymo.taxonomies', function ($items) use ($taxonomy, $objectType, $args) {
-            if (Arr::has($items, $taxonomy)) {
-                $items[$taxonomy]['object_types'][$objectType] = $args;
-            } else {
-                $items[$taxonomy] = [
-                    'taxonomy' => $taxonomy,
-                    'singular' => $args->get('singular'),
-                    'object_types' => [
-                        $objectType => $args
-                    ]
-                ];
-            }
+            $items[$objectType][$taxonomy] = $args;
             return $items;
         });
 

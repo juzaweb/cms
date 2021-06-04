@@ -4,8 +4,6 @@ namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use Mymo\Core\Supports\DataTable;
-use Mymo\PostType\Models\Post;
 use Mymo\PostType\Services\PostService;
 use Mymo\PostType\PostType;
 use Mymo\PostType\Repositories\PostRepository;
@@ -54,7 +52,8 @@ class PostController extends BackendController
         $model = $this->postRepository->makeModel();
         return view('mymo_core::backend.posts.form', [
             'title' => trans('mymo_core::app.add_new'),
-            'model' => $model
+            'model' => $model,
+            'postType' => $this->postType
         ]);
     }
 
@@ -69,13 +68,13 @@ class PostController extends BackendController
 
         return view('mymo_core::backend.posts.form', [
             'title' => $model->title,
-            'model' => $model
+            'model' => $model,
+            'postType' => $this->postType
         ]);
     }
 
     public function getDataTable(Request $request)
     {
-        (new DataTable())->jsonResponse();
         $search = $request->get('search');
         $status = $request->get('status');
         $sort = $request->get('sort', 'id');
@@ -83,12 +82,12 @@ class PostController extends BackendController
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Post::query();
+        $query = $this->postRepository->makeQuery();
         
         if ($search) {
-            $query->where(function ($subquery) use ($search) {
-                $subquery->orWhere('name', 'like', '%'. $search .'%');
-                $subquery->orWhere('description', 'like', '%'. $search .'%');
+            $query->where(function ($q) use ($search) {
+                $q->orWhere('name', 'like', '%'. $search .'%');
+                $q->orWhere('description', 'like', '%'. $search .'%');
             });
         }
         

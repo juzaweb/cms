@@ -40,12 +40,7 @@ class PostType
             return $taxonomies;
         }
 
-        $taxonomies = $taxonomies->filter(function ($item) use ($postType) {
-            return Arr::has($item['object_types'], $postType);
-        })->mapWithKeys(function ($item) use ($postType) {
-            return [$item['taxonomy'] => $item['object_types'][$postType]];
-        });
-
+        $taxonomies = collect($taxonomies[$postType] ?? []);
         $taxonomies = $taxonomies ?
             $taxonomies->sortBy('menu_position')
             : [];

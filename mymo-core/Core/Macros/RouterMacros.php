@@ -26,9 +26,11 @@ class RouterMacros
     public function postTypeResource()
     {
         return function ($uri, $controller, $options = []) {
+            $singular = Str::singular($uri);
             $this->mymoResource($uri, $controller, $options);
             //$this->mymoResource(Str::singular($uri) . '/comments', $controller, $options);
-            $this->mymoResource(Str::singular($uri) . '/{taxonomy}', '\Mymo\PostType\Http\Controllers\TaxonomyController', [
+            $this->get($singular . '/{taxonomy}/component-item', '\Mymo\PostType\Http\Controllers\TaxonomyController@getTagComponent');
+            $this->mymoResource($singular . '/{taxonomy}', '\Mymo\PostType\Http\Controllers\TaxonomyController', [
                 'name' => Str::singular($uri) . '.taxonomy'
             ]);
         };
