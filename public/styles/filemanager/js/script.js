@@ -161,8 +161,7 @@ function toggleSelected(e) {
     var element_index = selected.indexOf(sequence);
     if (element_index === -1) {
         selected.push(sequence);
-    }
-    else {
+    } else {
         selected.splice(element_index, 1);
     }
 
