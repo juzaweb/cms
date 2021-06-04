@@ -8,7 +8,8 @@ class FilemanagerController extends Controller
 {
     protected static $success_response = 'OK';
     
-    public function __construct() {
+    public function __construct()
+    {
     
     }
     
