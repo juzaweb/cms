@@ -12,7 +12,7 @@
  * Time: 2:24 PM
  */
 
-Route::group(['prefix' => 'modules'], function () {
+Route::group(['prefix' => 'plugins'], function () {
     Route::get('/', 'Backend\ModuleController@index')->name('admin.module');
 
     Route::get('/get-data', 'Backend\ModuleController@getDataTable')->name('admin.module.get-data');
