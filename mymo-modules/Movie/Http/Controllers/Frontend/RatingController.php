@@ -21,7 +21,7 @@ class RatingController extends FrontendController
             ]);
         }
         
-        $client_ip = get_ip_client();
+        $client_ip = get_client_ip();
         
         $model = MovieRating::firstOrNew([
             'movie_id' => $movie->id,

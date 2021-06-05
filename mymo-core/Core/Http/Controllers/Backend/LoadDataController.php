@@ -3,8 +3,9 @@
 namespace Mymo\Core\Http\Controllers\Backend;
 
 use Illuminate\Database\Eloquent\Builder;
-use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
+use Modules\Movie\Models\BlockIp\CountryName;
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Menu;
 use Mymo\Core\Models\User;
 use Mymo\PostType\Models\Taxonomy;
@@ -118,7 +119,7 @@ class LoadDataController extends BackendController
         $search = $request->get('search');
         $explodes = $request->get('explodes');
     
-        $query = LiveTvCategory::query();
+        $query = CountryName::query();
         $query->select([
             'code AS id',
             'name AS text'

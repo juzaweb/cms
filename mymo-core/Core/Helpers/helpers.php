@@ -16,6 +16,7 @@ require (__DIR__ . '/../../Module/helpers.php');
 
 use Illuminate\Support\Facades\Auth;
 use Mymo\Core\Helpers\Breadcrumb;
+use Mymo\Core\Models\Config;
 use Mymo\Core\Models\Menu;
 use Mymo\Core\Models\User;
 use Mymo\Core\Models\ThemeConfig;
@@ -27,17 +28,35 @@ function json_message($message, $status = 'success') {
     exit();
 }
 
-function get_ip_client() {
+/**
+ * Get client ip
+ *
+ * @return string
+ * */
+function get_client_ip()
+{
+    // Check Cloudflare support
     if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
         return $_SERVER["HTTP_CF_CONNECTING_IP"];
     }
-    
+
+    // Get ip from server
     return request()->ip();
+}
+
+function get_config($key, $default = null)
+{
+    return Config::getConfig($key, $default);
+}
+
+function set_config($key, $value)
+{
+    return Config::setConfig($key, $value);
 }
 
 function generate_token($string) {
     $month = date('Y-m');
-    $ip = get_ip_client();
+    $ip = get_client_ip();
     $key = 'ADAsd$#5vSD342354BCVByt&%^23vx';
     return md5($key . $month . $key) . md5($key . $ip . $string);
 }
@@ -101,10 +120,6 @@ function logo_url($path) {
     }
     
     return image_url($path);
-}
-
-function get_config(string $key, $default = null) {
-    return \Mymo\Core\Models\Config::getConfig($key, $default);
 }
 
 function copyfile_chunked($infile, $outfile) {
@@ -331,4 +346,9 @@ function upload_url($path, $default = null)
     }
 
     return asset('styles/images/thumb-default.png');
+}
+
+function random_string(int $length = 16)
+{
+    return Str::random($length);
 }

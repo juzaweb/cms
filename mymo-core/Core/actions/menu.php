@@ -42,8 +42,6 @@ HookAction::addAdminMenu(
     ]
 );
 
-
-
 HookAction::addAdminMenu(
     'mymo_core::app.updates',
     'updates',
@@ -150,12 +148,4 @@ HookAction::addAdminMenu(
     ]
 );
 
-HookAction::addAdminMenu(
-    trans('mymo_core::app.email_logs'),
-    'logs.email',
-    [
-        'icon' => 'fa fa-cogs',
-        'position' => 1,
-        'parent' => 'logs',
-    ]
-);
+

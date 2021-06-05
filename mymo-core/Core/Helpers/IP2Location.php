@@ -14,11 +14,18 @@
 
 namespace Mymo\Core\Helpers;
 
+use IP2Location\Database;
+
 class IP2Location
 {
+    /**
+     * @var Database $db
+     * */
+    protected $db;
+
     private function load()
     {
-        $this->db = new \IP2Location\Database($this->getDatabasePath(), \IP2Location\Database::FILE_IO);
+        $this->db = new Database($this->getDatabasePath(), Database::FILE_IO);
     }
 
     private function getDatabasePath()
@@ -29,7 +36,7 @@ class IP2Location
     public function get($ip, $mode = 'bin')
     {
         $this->load();
-        $records = $this->db->lookup($ip, \IP2Location\Database::ALL);
+        $records = $this->db->lookup($ip, Database::ALL);
         return $records;
     }
 }

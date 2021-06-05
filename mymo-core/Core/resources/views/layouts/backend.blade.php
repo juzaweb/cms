@@ -7,7 +7,7 @@
     <meta name="turbolinks-cache-control" content="no-cache">
 
     <title>{{ $title ?? '' }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('styles/images/icon.png') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('styles/css/backend.css') }}">
@@ -15,8 +15,8 @@
 
     <script src="{{ asset('styles/js/backend.js') }}"></script>
     <script src="{{ asset('styles/ckeditor/ckeditor.js') }}"></script>
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
+    @yield('header')
 </head>
 
 <body class="cui__menuLeft--dark cui__topbar--fixed cui__menuLeft--unfixed">
@@ -81,5 +81,7 @@
 
     $(".form-ajax").validate();
 </script>
+
+@yield('footer')
 </body>
 </html>
