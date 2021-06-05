@@ -23,5 +23,5 @@ HookAction::registerPostType('pages', [
     'repository' => 'Tadcms\\System\\Repositories\\PageRepository',
     'menu_icon' => 'fa fa-edit',
     'menu_position' => 15,
-    'supports' => ['tag'],
+    'supports' => [],
 ]);

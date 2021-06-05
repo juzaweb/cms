@@ -16,8 +16,8 @@ class NotificationController extends BackendController
 {
     public function index()
     {
-        return view('tadcms::notification.index', [
-            'title' => trans('tadcms::app.notification')
+        return view('mymo_notification::notification.index', [
+            'title' => trans('mymo_core::app.notifications')
         ]);
     }
     
@@ -63,14 +63,14 @@ class NotificationController extends BackendController
     public function create()
     {
         $this->addBreadcrumb([
-            'title' => trans('tadcms::app.notification'),
+            'title' => trans('mymo_core::app.notification'),
             'url' => route('admin.notification.index')
         ]);
 
         $model = new ManualNotification();
         $vias = $this->getVias();
-        return view('tadcms::notification.form', [
-            'title' => trans('tadcms::app.add-new'),
+        return view('mymo_notification::notification.form', [
+            'title' => trans('mymo_core::app.add_new'),
             'model' => $model,
             'vias' => $vias,
         ]);
@@ -79,7 +79,7 @@ class NotificationController extends BackendController
     public function edit($id)
     {
         $this->addBreadcrumb([
-            'title' => trans('tadcms::app.notification'),
+            'title' => trans('mymo_core::app.notifications'),
             'url' => route('admin.notification.index')
         ]);
 
@@ -88,7 +88,7 @@ class NotificationController extends BackendController
         $users = User::whereIn('id', explode(',', $model->users))
             ->get(['id', 'name']);
 
-        return view('tadcms::notification.form', [
+        return view('mymo_notification::notification.form', [
             'title' => $model->data['subject'] ?? '',
             'model' => $model,
             'users' => $users,
@@ -119,7 +119,7 @@ class NotificationController extends BackendController
         }
 
         return $this->success(
-            trans('tadcms::app.saved-successfully')
+            trans('mymo_core::app.saved-successfully')
         );
     }
 
@@ -145,7 +145,7 @@ class NotificationController extends BackendController
         }
 
         return $this->success(
-            trans('tadcms::app.saved-successfully')
+            trans('mymo_core::app.saved-successfully')
         );
     }
     
@@ -155,7 +155,7 @@ class NotificationController extends BackendController
             'ids' => 'required',
             'action' => 'required',
         ], [], [
-            'ids' => trans('tadcms::app.notification')
+            'ids' => trans('mymo_core::app.notifications')
         ]);
 
         $ids = $request->post('ids');
@@ -202,7 +202,7 @@ class NotificationController extends BackendController
         }
 
         return $this->success(
-            trans('tadcms::app.successfully')
+            trans('mymo_core::app.successfully')
         );
     }
 

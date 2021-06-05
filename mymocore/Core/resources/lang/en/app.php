@@ -420,6 +420,8 @@ return [
   'public' => 'Public',
   'private' => 'Private',
   'draft' => 'Draft',
+  'via' => 'Via',
+  'image' => 'Image',
   'inactive' => 'Inactive',
   'total_posts' => 'Total posts',
   'successfully' => 'Successfully',
