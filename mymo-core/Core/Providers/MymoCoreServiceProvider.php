@@ -19,6 +19,7 @@ use Mymo\Core\Http\Middleware\Admin;
 use Mymo\Core\Macros\RouterMacros;
 use Mymo\FileManager\Providers\FilemanagerServiceProvider;
 use Mymo\Module\LaravelModulesServiceProvider;
+use Mymo\Notification\Providers\NotificationServiceProvider;
 use Mymo\Performance\Providers\MymoPerformanceServiceProvider;
 use Mymo\PostType\Providers\PostTypeServiceProvider;
 use Mymo\Repository\Providers\RepositoryServiceProvider;
@@ -91,6 +92,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(LaravelModulesServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(PostTypeServiceProvider::class);
+        $this->app->register(NotificationServiceProvider::class);
     }
 
     protected function registerSingleton()
