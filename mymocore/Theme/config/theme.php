@@ -22,7 +22,7 @@ return [
     | automatically to list of scanned folders.
     |
     */
-    'theme_path' => base_path('mymo-themes'),
+    'theme_path' => base_path('themes'),
 
     /*
     |--------------------------------------------------------------------------

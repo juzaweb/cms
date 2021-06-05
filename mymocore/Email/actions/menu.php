@@ -18,7 +18,7 @@ HookAction::addAdminMenu(
     trans('mymo_core::app.email_setting'),
     'setting.email',
     [
-        'icon' => 'fa fa-cogs',
+        'icon' => 'fa fa-envelope',
         'position' => 10,
         'parent' => 'setting',
     ]
@@ -28,7 +28,7 @@ HookAction::addAdminMenu(
     trans('mymo_core::app.email_templates'),
     'setting.email-template',
     [
-        'icon' => 'fa fa-cogs',
+        'icon' => 'fa fa-envelope',
         'position' => 10,
         'parent' => 'setting',
     ]

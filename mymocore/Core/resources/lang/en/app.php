@@ -433,6 +433,8 @@ return [
     'email_password' => 'Password',
     'email_from_address' => 'From address',
     'email_from_name' => 'From name',
+    'general_setting' => 'General setting',
+    'translations' => 'Translations',
   'click_here_to_select_file' => 'Click here to select file',
 ];
 

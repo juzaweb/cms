@@ -115,12 +115,12 @@ HookAction::addAdminMenu(
     'setting',
     [
         'icon' => 'fa fa-cogs',
-        'position' => 60
+        'position' => 70
     ]
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.system_setting'),
+    trans('mymo_core::app.general_setting'),
     'setting.system',
     [
         'icon' => 'fa fa-cogs',
@@ -130,11 +130,11 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.language'),
+    trans('mymo_core::app.translations'),
     'setting.language',
     [
-        'icon' => 'fa fa-cogs',
-        'position' => 1,
+        'icon' => 'fa fa-language',
+        'position' => 5,
         'parent' => 'setting',
     ]
 );
@@ -144,7 +144,7 @@ HookAction::addAdminMenu(
     'logs',
     [
         'icon' => 'fa fa-users',
-        'position' => 70
+        'position' => 99
     ]
 );
 

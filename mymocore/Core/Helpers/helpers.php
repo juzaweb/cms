@@ -268,10 +268,10 @@ function count_unread_notifications() {
 
 function core_path($path = null) {
     if ($path) {
-        return base_path('cmscore/Core/' . $path);
+        return base_path('mymocore/Core/' . $path);
     }
 
-    return base_path('cmscore/Core');
+    return base_path('mymocore/Core');
 }
 
 function user_avatar($user = null) {

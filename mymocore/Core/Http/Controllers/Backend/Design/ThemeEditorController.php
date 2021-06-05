@@ -10,7 +10,7 @@ use Mymo\Core\Http\Controllers\BackendController;
 class ThemeEditorController extends BackendController
 {
     public function index() {
-        $config = include base_path('mymo-themes/mymo/config.php');
+        $config = include base_path('themes/mymo/config.php');
         
         return view('mymo_core::backend.design.editor.index', [
             'config' => $config,
