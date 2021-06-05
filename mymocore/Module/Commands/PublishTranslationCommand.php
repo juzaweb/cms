@@ -14,7 +14,7 @@ class PublishTranslationCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:publish-translation';
+    protected $name = 'plugin:publish-translation';
 
     /**
      * The console command description.

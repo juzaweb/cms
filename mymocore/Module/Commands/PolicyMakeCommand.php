@@ -24,7 +24,7 @@ class PolicyMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'module:make-policy';
+    protected $name = 'plugin:make-policy';
 
     /**
      * The console command description.

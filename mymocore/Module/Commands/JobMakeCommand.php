@@ -18,7 +18,7 @@ class JobMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'module:make-job';
+    protected $name = 'plugin:make-job';
 
     /**
      * The console command description.

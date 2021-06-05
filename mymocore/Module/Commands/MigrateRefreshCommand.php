@@ -16,7 +16,7 @@ class MigrateRefreshCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:migrate-refresh';
+    protected $name = 'plugin:migrate-refresh';
 
     /**
      * The console command description.
@@ -38,20 +38,20 @@ class MigrateRefreshCommand extends Command
             return E_ERROR;
         }
 
-        $this->call('module:migrate-reset', [
+        $this->call('plugin:migrate-reset', [
             'module' => $this->getModuleName(),
             '--database' => $this->option('database'),
             '--force' => $this->option('force'),
         ]);
 
-        $this->call('module:migrate', [
+        $this->call('plugin:migrate', [
             'module' => $this->getModuleName(),
             '--database' => $this->option('database'),
             '--force' => $this->option('force'),
         ]);
 
         if ($this->option('seed')) {
-            $this->call('module:seed', [
+            $this->call('plugin:seed', [
                 'module' => $this->getModuleName(),
             ]);
         }

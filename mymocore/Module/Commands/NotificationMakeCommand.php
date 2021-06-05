@@ -17,7 +17,7 @@ final class NotificationMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'module:make-notification';
+    protected $name = 'plugin:make-notification';
 
     protected $argumentName = 'name';
 

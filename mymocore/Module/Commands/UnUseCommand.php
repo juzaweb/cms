@@ -11,14 +11,14 @@ class UnUseCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:unuse';
+    protected $name = 'plugin:unuse';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Forget the used module with module:use';
+    protected $description = 'Forget the used module with plugin:use';
 
     /**
      * Execute the console command.

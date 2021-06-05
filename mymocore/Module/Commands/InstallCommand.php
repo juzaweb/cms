@@ -15,7 +15,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:install';
+    protected $name = 'plugin:install';
 
     /**
      * The console command description.
@@ -111,7 +111,7 @@ class InstallCommand extends Command
         $installer->run();
 
         if (!$this->option('no-update')) {
-            $this->call('module:update', [
+            $this->call('plugin:update', [
                 'module' => $installer->getModuleName(),
             ]);
         }

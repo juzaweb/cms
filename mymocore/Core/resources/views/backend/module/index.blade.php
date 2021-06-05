@@ -14,6 +14,7 @@
     <div class="row mb-2">
         <div class="col-md-3">
             <form method="post" class="form-inline">
+                @csrf
                 <select name="bulk_actions" class="form-control w-60 mb-2 mr-1">
                     <option value="">@lang('mymo_core::app.bulk_actions')</option>
                     <option value="delete">@lang('mymo_core::app.delete')</option>
@@ -66,10 +67,11 @@
         
         function statusFormatter(value, row, index) {
             switch (value) {
-                case 'inactive': return "<span class='text-disable'>{{ trans('mymo_core::app.inactive') }}</span>";
+                case 'inactive':
+                    return `<span class='text-disable'>${mymo.lang.inactive}</span>`;
             }
 
-            return "<span class='text-success'>{{ trans('mymo_core::app.active') }}</span>";
+            return `<span class='text-success'>${mymo.lang.active}</span>`;
         }
 
         var table = new MymoTable({

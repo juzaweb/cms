@@ -19,7 +19,7 @@ class RouteProviderMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'module:route-provider';
+    protected $name = 'plugin:route-provider';
 
     /**
      * The command description.

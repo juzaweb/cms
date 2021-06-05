@@ -11,7 +11,7 @@ class SetupCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:setup';
+    protected $name = 'plugin:setup';
 
     /**
      * The console command description.

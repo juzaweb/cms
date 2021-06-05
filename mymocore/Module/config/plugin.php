@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'namespace' => 'Modules',
+    'namespace' => 'plugins',
 
     /*
     |--------------------------------------------------------------------------
@@ -70,17 +70,17 @@ return [
         |
         */
 
-        'modules' => base_path('mymo-modules'),
+        'modules' => base_path('plugins'),
         /*
         |--------------------------------------------------------------------------
         | Modules assets path
         |--------------------------------------------------------------------------
         |
-        | Here you may update the modules assets path.
+        | Here you may update the plugins assets path.
         |
         */
 
-        'assets' => public_path('modules'),
+        'assets' => public_path('plugins'),
         /*
         |--------------------------------------------------------------------------
         | The migrations path
@@ -166,12 +166,12 @@ return [
     */
     'cache' => [
         'enabled' => false,
-        'key' => 'mymocms-modules',
+        'key' => 'mymocms-plugins',
         'lifetime' => 60,
     ],
     /*
     |--------------------------------------------------------------------------
-    | Choose what laravel-modules will register as custom namespaces.
+    | Choose what plugins will register as custom namespaces.
     | Setting one to false will require you to register that part
     | in your own Service Provider class.
     |--------------------------------------------------------------------------
@@ -195,12 +195,12 @@ return [
     |
     | You can define new types of activators here, file, database etc. The only
     | required parameter is 'class'.
-    | The file activator will store the activation status in storage/installed_modules
+    | The file activator will store the activation status in storage/installed_plugins
     */
     'activators' => [
         'file' => [
             'class' => FileActivator::class,
-            'statuses-file' => storage_path('app/modules_statuses.json'),
+            'statuses-file' => storage_path('app/plugins_statuses.json'),
             'cache-key' => 'activator.installed',
             'cache-lifetime' => 604800,
         ],

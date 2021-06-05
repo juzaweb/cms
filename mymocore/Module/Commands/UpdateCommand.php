@@ -15,7 +15,7 @@ class UpdateCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:update';
+    protected $name = 'plugin:update';
 
     /**
      * The console command description.
@@ -47,7 +47,7 @@ class UpdateCommand extends Command
 
     protected function updateModule($name)
     {
-        $this->line('Running for module: <info>' . $name . '</info>');
+        $this->line('Running for plugin: <info>' . $name . '</info>');
 
         $this->laravel['modules']->update($name);
 
