@@ -67,12 +67,12 @@
     },
     "autoload": {
         "files": [
-            "mymo-core/Core/Helpers/helpers.php"
+            "mymocore/Core/Helpers/helpers.php"
         ],
         "psr-4": {
             "App\\": "app/",
-            "Mymo\\": "mymo-core/",
-            "Modules\\": "mymo-modules/"
+            "Mymo\\": "mymocore/",
+            "Plugins\\": "plugins/"
         },
         "classmap": [
             "database/seeds",
