@@ -17,5 +17,5 @@ Route::group(['prefix' => 'plugins'], function () {
 
     Route::get('/get-data', 'Backend\ModuleController@getDataTable')->name('admin.module.get-data');
 
-    Route::get('/bulk-actions', 'Backend\ModuleController@bulkActions')->name('admin.module.bulk-actions');
+    Route::post('/bulk-actions', 'Backend\ModuleController@bulkActions')->name('admin.module.bulk-actions');
 });
