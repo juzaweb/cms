@@ -30,7 +30,7 @@ class SendEmailService
         $this->updateStatus('processing');
     
         try {
-            Mail::send('emailtemplate::layouts.email', [
+            Mail::send('emailtemplate::layouts.default', [
                 'body' => $this->getBody(),
             ], function ($message) {
                 $message->to([$this->mail->email])
@@ -46,12 +46,12 @@ class SendEmailService
         
             $this->updateStatus('success');
             return true;
-        } catch (\Exception $exception) {
+        } catch (\Exception $e) {
             $this->updateError([
                 'title' => 'Send mail exception',
-                'message' => $exception->getMessage(),
-                'code' => $exception->getCode(),
-                'line' => $exception->getLine(),
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+                'line' => $e->getLine(),
             ]);
     
             return false;
@@ -106,13 +106,6 @@ class SendEmailService
     
     protected function validate()
     {
-        if (empty($this->mail->template)) {
-            return [
-                'title' => 'Empty email template',
-                'message' => 'Email template does not exist.'
-            ];
-        }
-        
         return true;
     }
 }

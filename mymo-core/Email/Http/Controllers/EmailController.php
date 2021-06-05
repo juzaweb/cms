@@ -43,6 +43,8 @@ class EmailController extends BackendController
             ->setBody('Hello {name}, This is the test email')
             ->setParams(['name' => Auth::user()->name])
             ->send();
+
+
     }
     
     protected function getSettings()

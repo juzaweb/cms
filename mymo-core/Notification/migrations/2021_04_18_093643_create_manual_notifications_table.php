@@ -19,7 +19,7 @@ class CreateManualNotificationsTable extends Migration
             $table->timestamps();
         });
 
-        if (!DB::table('email_templates')->where('code', '=', 'notification')->exists()) {
+        /*if (!DB::table('email_templates')->where('code', '=', 'notification')->exists()) {
             DB::table('email_templates')->insert([
                 'code' => 'notification',
                 'subject' => '{subject}',
@@ -33,7 +33,7 @@ class CreateManualNotificationsTable extends Migration
                     'image' => 'Image notify',
                 ]),
             ]);
-        }
+        }*/
     }
 
     public function down()

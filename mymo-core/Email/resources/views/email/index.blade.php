@@ -6,13 +6,13 @@
             <h5>@lang('mymo_core::app.setting')</h5>
 
             @component('mymo_core::components.form', [
-                'method' => 'post',
-                'action' => route('admin.email.test-email')
+                'method' => 'post'
             ])
 
                 @component('mymo_core::components.form_input', [
                     'label' => trans('mymo_core::app.email_host'),
                     'name' => 'email_host',
+                    'value' => get_config('email_host'),
                 ])@endcomponent
 
                 <div class="row">

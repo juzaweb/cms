@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Core\Helpers;
+namespace Modules\Movie\Helpers;
 
 class GoogleDrive {
     private $cache_path;

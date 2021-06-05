@@ -11,7 +11,7 @@ class CreateEmailListsTable extends Migration
         Schema::create('email_lists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('email', 150)->index();
-            $table->unsignedBigInteger('template_id')->index();
+            $table->unsignedBigInteger('template_id')->nullable()->index();
             $table->text('params')->nullable();
             $table->string('status', 50)->index()->default('pending')->comment('pending => processing => (success || error)');
             $table->integer('priority')->default(1);

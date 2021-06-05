@@ -1,13 +1,13 @@
 <?php
 
-namespace Mymo\Core\Helpers;
+namespace Modules\Movie\Helpers;
 
-use Mymo\Core\Models\Category\Countries;
-use Mymo\Core\Models\Files;
-use Mymo\Core\Models\Category\Genres;
-use Mymo\Core\Models\Movie\Movies;
-use Mymo\Core\Models\Category\Stars;
-use Mymo\Core\Models\Category\Tags;
+use Modules\Movie\Models\Category\Countries;
+use Modules\Movie\Models\Files;
+use Modules\Movie\Models\Category\Genres;
+use Modules\Movie\Models\Movie\Movies;
+use Modules\Movie\Models\Category\Stars;
+use Modules\Movie\Models\Category\Tags;
 use Illuminate\Support\Str;
 
 class ImportMovie

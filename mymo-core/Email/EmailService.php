@@ -119,16 +119,17 @@ class EmailService
                     break;
             }
         }
+
+        return true;
     }
     
     protected function validate()
     {
         if (empty($this->template)) {
-            throw new \Exception('Email template is required.');
+            return null;
         }
-        
-        $template = EmailTemplate::where(['code' => $this->template])
-            ->first(['id']);
+
+        $template = EmailTemplate::where(['code' => $this->template])->first(['id']);
         if (empty($template)) {
             throw new \Exception("Email template [{$this->template}] does not exist.");
         }
