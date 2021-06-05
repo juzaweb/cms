@@ -13,6 +13,7 @@ class TranslateController extends BackendController
         Languages::where('key', '=', $lang)->firstOrFail();
         
         return view('mymo_core::backend.setting.translate.index', [
+            'title' => trans('mymo_core::app.translations'),
             'lang' => $lang
         ]);
     }

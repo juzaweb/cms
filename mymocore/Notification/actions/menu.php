@@ -9,12 +9,16 @@
  *
  * Created by The Anh.
  * Date: 6/5/2021
- * Time: 11:36 AM
+ * Time: 5:13 PM
  */
 
-Route::group([
-    'prefix' => config('mymo_core.admin_prefix'),
-    'middleware' => ['web', 'admin']
-], function (){
-    Route::mymoResource('notification', 'NotificationController');
-});
+use Mymo\Core\Facades\HookAction;
+
+HookAction::addAdminMenu(
+    trans('mymo_core::app.notifications'),
+    'notification',
+    [
+        'icon' => 'fa fa-bell',
+        'position' => 100
+    ]
+);
