@@ -30,7 +30,7 @@ class Config extends Model
         'code',
         'value'
     ];
-    
+
     public static function getConfigs() {
         return [
             'title',
@@ -92,16 +92,26 @@ class Config extends Model
     public static function getConfig(string $key, $default = null) {
         $config = Config::where('code', '=', $key)->first(['value']);
         if ($config) {
+            if (is_json($config->value)) {
+                return json_decode($config->value, true);
+            }
             return $config->value;
         }
     
         return $default;
     }
     
-    public static function setConfig(string $key, string $value = null) {
+    public static function setConfig(string $key, $value = null) {
+        if (is_string($value)) {
+            $setting = $value;;
+        } else {
+            $setting = array_merge(get_config($key, []), $value);
+            $setting = json_encode($setting);
+        }
+
         $config = Config::firstOrNew(['code' => $key]);
         $config->code = $key;
-        $config->value = $value;
+        $config->value = $setting;
         return $config->save();
     }
     

@@ -83,6 +83,7 @@ class MymoCoreServiceProvider extends ServiceProvider
             $this->app->register(IdeHelperServiceProvider::class);
         }
 
+        $this->app->register(DbConfigServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(HookActionServiceProvider::class);
         $this->app->register(MymoPerformanceServiceProvider::class);

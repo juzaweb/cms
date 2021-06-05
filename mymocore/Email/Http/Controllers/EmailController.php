@@ -11,23 +11,21 @@ class EmailController extends BackendController
 {
     public function index()
     {
+        $config = get_config('email', []);
         return view('emailtemplate::email.index', [
             'title' => trans('mymo_core::app.email_setting'),
+            'config' => $config,
         ]);
     }
     
     public function save(Request $request)
     {
-        $settings = $this->getSettings();
-        foreach ($settings as $setting) {
-            if ($request->has($setting)) {
-                set_config($setting, $request->post($setting));
-            }
-        }
+        $email = $request->post('email');
+        set_config('email', $email);
         
-        return $this->success(
-            trans('mymo_core::app.save_successfully')
-        );
+        return $this->success([
+            'message' => trans('mymo_core::app.save_successfully')
+        ]);
     }
     
     public function sendTestMail(Request $request)
@@ -44,20 +42,8 @@ class EmailController extends BackendController
             ->setParams(['name' => Auth::user()->name])
             ->send();
 
-
-    }
-    
-    protected function getSettings()
-    {
-        return [
-            'email_setting',
-            'email_host',
-            'email_port',
-            'email_encryption',
-            'email_username',
-            'email_password',
-            'email_from_address',
-            'email_from_name',
-        ];
+        return $this->success([
+            'message' => trans('mymo_core::app.send_mail_successfully')
+        ]);
     }
 }

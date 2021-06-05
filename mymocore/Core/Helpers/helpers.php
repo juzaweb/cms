@@ -352,3 +352,8 @@ function random_string(int $length = 16)
 {
     return Str::random($length);
 }
+
+function is_json($string) {
+    json_decode($string);
+    return json_last_error() === JSON_ERROR_NONE;
+}

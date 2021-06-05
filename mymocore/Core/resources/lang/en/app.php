@@ -435,6 +435,8 @@ return [
     'email_from_name' => 'From name',
     'general_setting' => 'General setting',
     'translations' => 'Translations',
+    'save_successfully' => 'Save successfully',
+    'send_mail_successfully' => 'Send email successfully',
   'click_here_to_select_file' => 'Click here to select file',
 ];
 
