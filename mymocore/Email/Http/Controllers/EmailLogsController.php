@@ -1,9 +1,9 @@
 <?php
 
-namespace Mymo\Core\Http\Controllers\Backend\Logs;
+namespace Mymo\Email\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mymo\Core\Models\Email\EmailList;
+use Mymo\Email\Models\EmailList;
 use Mymo\Core\Http\Controllers\BackendController;
 
 class EmailLogsController extends BackendController
@@ -15,7 +15,8 @@ class EmailLogsController extends BackendController
         ]);
     }
     
-    public function getData(Request $request) {
+    public function getData(Request $request)
+    {
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -31,7 +32,7 @@ class EmailLogsController extends BackendController
             });
         }
     
-        if (!is_null($status)) {
+        if ($status) {
             $query->where('status', '=', $status);
         }
     
@@ -43,6 +44,8 @@ class EmailLogsController extends BackendController
     
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('H:i Y-m-d');
+            $row->content = $row->data['body'] ?? '';
+            $row->subject = $row->data['subject'] ?? '';
         }
     
         return response()->json([
@@ -51,10 +54,11 @@ class EmailLogsController extends BackendController
         ]);
     }
     
-    public function status(Request $request) {
+    public function status(Request $request)
+    {
         $this->validateRequest([
             'ids' => 'required',
-            'status' => 'required|in:2,3',
+            'status' => 'required|in:success,error,pending',
         ], $request, [
             'ids' => trans('mymo_core::app.email_logs'),
             'status' => trans('mymo_core::app.status'),
@@ -71,7 +75,8 @@ class EmailLogsController extends BackendController
         ]);
     }
     
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [

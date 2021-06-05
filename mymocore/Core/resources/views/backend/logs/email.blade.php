@@ -53,7 +53,7 @@
                 <tr>
                     <th data-width="3%" data-field="state" data-checkbox="true"></th>
                     <th data-field="subject">@lang('mymo_core::app.subject')</th>
-                    <th data-width="20%" data-field="content">@lang('mymo_core::app.content')</th>
+                    <th data-width="30%" data-field="content">@lang('mymo_core::app.content')</th>
                     <th data-width="15%" data-field="created">@lang('mymo_core::app.created_at')</th>
                     <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('mymo_core::app.status')</th>
                 </tr>
@@ -63,15 +63,15 @@
 
     <script type="text/javascript">
         function status_formatter(value, row, index) {
-            if (value == 1) {
+            if (value == 'success') {
                 return '<span class="text-success">@lang('mymo_core::app.sended')</span>';
             }
             
-            if (value == 2) {
-                return '<span class="text-success">@lang('mymo_core::app.pending')</span>';
+            if (value == 'pending') {
+                return '<span class="text-warning">@lang('mymo_core::app.pending')</span>';
             }
 
-            if (value == 3) {
+            if (value == 'cancel') {
                 return '<span class="text-success">@lang('mymo_core::app.cancel')</span>';
             }
             
