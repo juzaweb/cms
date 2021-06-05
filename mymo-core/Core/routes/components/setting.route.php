@@ -18,20 +18,6 @@ Route::group(['prefix' => 'setting/email'], function () {
     Route::post('/test', 'Backend\Setting\EmailSettingController@sendEmailTest')->name('admin.setting.email.test');
 });
 
-Route::group(['prefix' => 'setting/email-template'], function () {
-    Route::get('/', 'Backend\Setting\EmailTemplateController@index')->name('admin.setting.email_templates');
-    
-    Route::get('/getdata', 'Backend\Setting\EmailTemplateController@getData')->name('admin.setting.email_templates.getdata');
-    
-    Route::get('/edit/{id}', 'Backend\Setting\EmailTemplateController@form')->name('admin.setting.email_templates.edit')->where('id', '[0-9]+');
-    
-    Route::post('/save', 'Backend\Setting\EmailTemplateController@save')->name('admin.setting.email_templates.save');
-    
-    Route::get('/edit-layout', 'Backend\Setting\EmailTemplateController@editLayout')->name('admin.setting.email_templates.edit_layout');
-    
-    Route::post('/edit-layout', 'Backend\Setting\EmailTemplateController@saveLayout')->name('admin.setting.email_templates.edit_layout.save');
-});
-
 Route::group(['prefix' => 'setting/language'], function () {
     Route::get('/', 'Backend\Setting\LanguageController@index')->name('admin.setting.languages');
     

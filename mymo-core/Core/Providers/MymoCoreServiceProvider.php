@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Schema;
 use Mymo\Core\Helpers\HookAction;
 use Mymo\Core\Http\Middleware\Admin;
 use Mymo\Core\Macros\RouterMacros;
+use Mymo\Email\Providers\EmailTemplateServiceProvider;
 use Mymo\FileManager\Providers\FilemanagerServiceProvider;
 use Mymo\Module\LaravelModulesServiceProvider;
 use Mymo\Notification\Providers\NotificationServiceProvider;
@@ -49,6 +50,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->registerProviders();
         $this->registerSingleton();
         $this->registerRouteMacros();
+        $this->mergeConfigFrom(__DIR__ . '/../config/mymo_core.php', 'mymo_core');
     }
 
     protected function bootMigrations()
@@ -66,8 +68,6 @@ class MymoCoreServiceProvider extends ServiceProvider
 
     protected function bootPublishes()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/mymo_core.php', 'mymo_core');
-
         $this->publishes([
             __DIR__ . '/../config/mymo_core.php' => base_path('config/mymo_core.php'),
         ], 'mymo_config');
@@ -93,6 +93,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(PostTypeServiceProvider::class);
         $this->app->register(NotificationServiceProvider::class);
+        $this->app->register(EmailTemplateServiceProvider::class);
     }
 
     protected function registerSingleton()
