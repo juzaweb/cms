@@ -25,7 +25,7 @@ class ComponentViewMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'module:make-component-view';
+    protected $name = 'plugin:make-component-view';
 
     /**
      * The console command description.

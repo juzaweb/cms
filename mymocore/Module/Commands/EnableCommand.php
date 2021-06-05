@@ -13,7 +13,7 @@ class EnableCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:enable';
+    protected $name = 'plugin:enable';
 
     /**
      * The console command description.

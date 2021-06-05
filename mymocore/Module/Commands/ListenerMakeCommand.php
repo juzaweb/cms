@@ -21,7 +21,7 @@ class ListenerMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'module:make-listener';
+    protected $name = 'plugin:make-listener';
 
     /**
      * The console command description.

@@ -17,7 +17,7 @@ class MigrateResetCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:migrate-reset';
+    protected $name = 'plugin:migrate-reset';
 
     /**
      * The console command description.
@@ -47,7 +47,7 @@ class MigrateResetCommand extends Command
         }
 
         foreach ($this->module->getOrdered($this->option('direction')) as $module) {
-            $this->line('Running for module: <info>' . $module->getName() . '</info>');
+            $this->line('Running for plugin: <info>' . $module->getName() . '</info>');
 
             $this->reset($module);
         }

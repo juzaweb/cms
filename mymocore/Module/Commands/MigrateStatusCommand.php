@@ -15,7 +15,7 @@ class MigrateStatusCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:migrate-status';
+    protected $name = 'plugin:migrate-status';
 
     /**
      * The console command description.
@@ -49,7 +49,7 @@ class MigrateStatusCommand extends Command
         }
 
         foreach ($this->module->getOrdered($this->option('direction')) as $module) {
-            $this->line('Running for module: <info>' . $module->getName() . '</info>');
+            $this->line('Running for plugin: <info>' . $module->getName() . '</info>');
             $this->migrateStatus($module);
         }
 

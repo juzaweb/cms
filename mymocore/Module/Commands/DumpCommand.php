@@ -12,7 +12,7 @@ class DumpCommand extends Command
      *
      * @var string
      */
-    protected $name = 'module:dump';
+    protected $name = 'plugin:dump';
 
     /**
      * The console command description.

@@ -25,7 +25,7 @@ class ControllerMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'module:make-controller';
+    protected $name = 'plugin:make-controller';
 
     /**
      * The console command description.

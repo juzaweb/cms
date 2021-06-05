@@ -24,7 +24,7 @@ class RuleMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'module:make-rule';
+    protected $name = 'plugin:make-rule';
 
     /**
      * The console command description.
