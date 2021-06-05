@@ -2,17 +2,17 @@
 
 namespace Mymo\Email\Http\Controllers;
 
+use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Email\EmailService;
 
 class EmailController extends BackendController
 {
     public function index()
     {
-        return view('emailtemplate::setting.email', [
-            'title' => trans('mymo_core::app.email-setting'),
+        return view('emailtemplate::email.index', [
+            'title' => trans('mymo_core::app.email_setting'),
         ]);
     }
     
@@ -26,7 +26,7 @@ class EmailController extends BackendController
         }
         
         return $this->success(
-            trans('mymo_core::app.save-successfully')
+            trans('mymo_core::app.save_successfully')
         );
     }
     

@@ -11,7 +11,7 @@ class EmailTemplateController extends BackendController
     public function index()
     {
         return view('emailtemplate::email_template.index', [
-            'title' => trans('mymo_core::app.email-template')
+            'title' => trans('mymo_core::app.email_templates')
         ]);
     }
     
@@ -24,12 +24,10 @@ class EmailTemplateController extends BackendController
         $limit = $request->get('limit', 20);
     
         $query = EmailTemplate::query();
-        
-        
         if ($search) {
-            $query->where(function ($subQuery) use ($search) {
-                $subQuery->orWhere('name', 'like', '%'. $search .'%');
-                $subQuery->orWhere('subject', 'like', '%'. $search .'%');
+            $query->where(function ($q) use ($search) {
+                $q->orWhere('name', 'like', '%'. $search .'%');
+                $q->orWhere('subject', 'like', '%'. $search .'%');
             });
         }
         
@@ -49,7 +47,7 @@ class EmailTemplateController extends BackendController
         $request->validate([
             'ids' => 'required',
         ], [], [
-            'ids' => trans('mymo_core::validation.attributes.email_templates')
+            'ids' => trans('mymo_core::app.email_templates')
         ]);
         
         $ids = $request->post('ids');
@@ -62,8 +60,8 @@ class EmailTemplateController extends BackendController
                 break;
         }
         
-        return $this->success(
-            trans('mymo_core::app.successfully')
-        );
+        return $this->success([
+            'message' => trans('mymo_core::app.successfully')
+        ]);
     }
 }

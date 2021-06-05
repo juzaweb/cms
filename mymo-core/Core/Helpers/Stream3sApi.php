@@ -70,7 +70,7 @@ class Stream3sApi {
         
         $response = $this->_callApi('direct/' . $video_id, [
             'session_id' => $this->session_id,
-            'client_ip' => get_ip_client(),
+            'client_ip' => get_client_ip(),
         ]);
         
         if (empty($response['status'])) {
@@ -89,7 +89,7 @@ class Stream3sApi {
         $response = $this->_callApi('direct/add', [
             'session_id' => $this->session_id,
             'video_url' => $video_url,
-            'client_ip' => get_ip_client(),
+            'client_ip' => get_client_ip(),
         ], 'POST');
         
         if (empty($response['status'])) {

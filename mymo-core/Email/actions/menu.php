@@ -15,6 +15,16 @@
 use Mymo\Core\Facades\HookAction;
 
 HookAction::addAdminMenu(
+    trans('mymo_core::app.email_setting'),
+    'setting.email',
+    [
+        'icon' => 'fa fa-cogs',
+        'position' => 10,
+        'parent' => 'setting',
+    ]
+);
+
+HookAction::addAdminMenu(
     trans('mymo_core::app.email_templates'),
     'setting.email-template',
     [

@@ -17,8 +17,8 @@ Route::group([
     'middleware' => ['web', 'admin']
 ], function () {
 
-    Route::post('setting/email/send-test-mail',
-        'SettingController@sendTestMail')->name('admin.setting.test-email');
+    Route::get('setting/email', 'EmailController@index')->name('admin.setting.test-email');
+    Route::post('setting/email/send-test-mail', 'SettingController@sendTestMail')->name('admin.setting.test-email');
 
     Route::group(['prefix' => 'setting/email-template'], function () {
         Route::get('/', 'EmailTemplateController@index')->name('admin.email-template');

@@ -423,6 +423,16 @@ return [
   'inactive' => 'Inactive',
   'total_posts' => 'Total posts',
   'successfully' => 'Successfully',
+  'send_email_test' => 'Send email test',
+    'email_address' => 'Email address',
+    'email_template' => 'Email Template',
+    'email_host' => 'Host',
+    'email_port' => 'Port',
+    'email_encryption' => 'Encryption',
+    'email_username' => 'Username',
+    'email_password' => 'Password',
+    'email_from_address' => 'From address',
+    'email_from_name' => 'From name',
   'click_here_to_select_file' => 'Click here to select file',
 ];
 
