@@ -347,3 +347,8 @@ function upload_url($path, $default = null)
 
     return asset('styles/images/thumb-default.png');
 }
+
+function random_string(int $length = 16)
+{
+    return Str::random($length);
+}
