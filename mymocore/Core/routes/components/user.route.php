@@ -11,9 +11,9 @@
  */
 
 Route::group(['prefix' => 'users'], function () {
-    Route::get('/', 'Backend\UsersController@index')->name('admin.users');
+    Route::get('/', 'Backend\UsersController@index')->name('admin.users.index');
 
-    Route::get('/getdata', 'Backend\UsersController@getData')->name('admin.users.getdata');
+    Route::get('/get-data', 'Backend\UsersController@getData')->name('admin.users.get-data');
 
     Route::get('/create', 'Backend\UsersController@form')->name('admin.users.create');
 
@@ -21,5 +21,5 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::post('/save', 'Backend\UsersController@save')->name('admin.users.save');
 
-    Route::post('/remove', 'Backend\UsersController@remove')->name('admin.users.remove');
+    Route::post('/bulk-actions', 'Backend\UsersController@bulkActions')->name('admin.users.bulk-actions');
 });

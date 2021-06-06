@@ -13,6 +13,7 @@
     <div class="row mb-3">
         <div class="col-md-4">
             <form method="post" class="form-inline">
+                @csrf
                 <select name="bulk_actions" class="form-control w-60 mb-2 mr-1">
                     <option value="">@lang('mymo_core::app.bulk_actions')</option>
                     <option value="send">@lang('mymo_core::app.send')</option>

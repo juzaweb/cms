@@ -145,7 +145,7 @@ class NotificationController extends BackendController
         }
 
         return $this->success(
-            trans('mymo_core::app.saved-successfully')
+            trans('mymo_core::app.save_successfully')
         );
     }
     
@@ -201,9 +201,9 @@ class NotificationController extends BackendController
             );
         }
 
-        return $this->success(
-            trans('mymo_core::app.successfully')
-        );
+        return $this->success([
+            'message' => trans('mymo_core::app.successfully')
+        ]);
     }
 
     protected function getVias()
