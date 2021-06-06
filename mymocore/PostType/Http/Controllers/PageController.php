@@ -3,6 +3,7 @@
 namespace Mymo\PostType\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\PostType\Models\Page;
 
@@ -46,8 +47,7 @@ class PageController extends BackendController
         
         foreach ($rows as $row) {
             $row->thumb_url = $row->getThumbnail();
-            $row->created = $row->created_at->format('H:i Y-m-d');
-            $row->edit_url = route('admin.page.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.page.edit', [$row->id]);
         }
         
         return response()->json([
@@ -58,6 +58,11 @@ class PageController extends BackendController
     
     public function form($id = null)
     {
+        $this->addBreadcrumb([
+            'title' => trans('mymo_core::app.pages'),
+            'url' => route('admin.page.index')
+        ]);
+
         $model = Page::firstOrNew(['id' => $id]);
         return view('mymo_core::backend.pages.form', [
             'model' => $model,
@@ -67,11 +72,11 @@ class PageController extends BackendController
     
     public function save(Request $request)
     {
-        $this->validateRequest([
-            'name' => 'required|string|max:250|unique:pages,name',
+        $request->validate([
+            'name' => 'required|string|max:250',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
-        ], $request, [
+        ], [], [
             'name' => trans('mymo_core::app.name'),
             'status' => trans('mymo_core::app.status'),
             'thumbnail' => trans('mymo_core::app.thumbnail'),
@@ -80,27 +85,41 @@ class PageController extends BackendController
         $model = Page::firstOrNew(['id' => $request->id]);
         $model->fill($request->all());
         $model->save();
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
-            'redirect' => route('admin.page'),
+
+        return $this->success([
+            'message' => trans('mymo_core::app.successfully')
         ]);
     }
     
-    public function remove(Request $request)
+    public function bulkActions(Request $request)
     {
-        $this->validateRequest([
+        $request->validate([
             'ids' => 'required',
-        ], $request, [
+            'action' => 'required',
+        ], [], [
             'ids' => trans('mymo_core::app.pages')
         ]);
-        
-        Pages::destroy($request->post('ids'));
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('mymo_core::app.deleted_successfully'),
+
+        $ids = $request->post('ids');
+        $action = $request->post('action');
+
+        try {
+            DB::beginTransaction();
+            switch ($action) {
+                case 'delete':
+                    Page::destroy($ids);
+                    break;
+            }
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return $this->error([
+                'message' => $exception->getMessage()
+            ]);
+        }
+
+        return $this->success([
+            'message' => trans('mymo_core::app.successfully')
         ]);
     }
 }

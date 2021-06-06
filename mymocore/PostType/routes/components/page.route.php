@@ -13,7 +13,7 @@
  */
 
 Route::group(['prefix' => 'pages'], function () {
-    Route::get('/', 'PageController@index')->name('admin.page');
+    Route::get('/', 'PageController@index')->name('admin.page.index');
 
     Route::get('/getdata', 'PageController@getData')->name('admin.page.getdata');
 
@@ -23,5 +23,5 @@ Route::group(['prefix' => 'pages'], function () {
 
     Route::post('/save', 'PageController@save')->name('admin.page.save');
 
-    Route::post('/remove', 'PageController@remove')->name('admin.page.remove');
+    Route::post('/bulk-actions', 'PageController@bulkActions')->name('admin.page.bulk-actions');
 });

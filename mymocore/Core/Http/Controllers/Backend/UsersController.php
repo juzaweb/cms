@@ -2,9 +2,11 @@
 
 namespace Mymo\Core\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends BackendController
 {
@@ -59,21 +61,27 @@ class UsersController extends BackendController
     public function form($id = null)
     {
         $model = User::firstOrNew(['id' => $id]);
+        $titlePage = $model->name ?? trans('mymo_core::app.add_new');
+        $this->addBreadcrumb([
+            'title' => trans('mymo_core::app.users'),
+            'url' => route('admin.users.index')
+        ]);
+
         return view('mymo_core::backend.users.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('mymo_core::app.add_new')
+            'title' => $titlePage
         ]);
     }
     
     public function save(Request $request)
     {
-        $this->validateRequest([
+        $request->validate([
             'name' => 'required|string|max:250',
             'password' => 'required_if:id,',
-            'avatar' => 'nullable|mimetypes:image/jpeg,image/png,image/gif',
+            'avatar' => 'nullable|string|max:150',
             'email' => 'required_if:id,|unique:users,email',
             'status' => 'required|in:0,1',
-        ], $request, [
+        ], [], [
             'name' => trans('mymo_core::app.name'),
             'email' => trans('mymo_core::app.email'),
             'password' => trans('mymo_core::app.password'),
@@ -90,53 +98,54 @@ class UsersController extends BackendController
         }
         
         if ($request->post('password')) {
-            $this->validateRequest([
+            $request->validate([
                 'password' => 'required|string|max:32|min:6|confirmed',
                 'password_confirmation' => 'required|string|max:32|min:6'
-            ], $request, [
+            ], [], [
                 'password' => trans('mymo_core::app.password'),
                 'password_confirmation' => trans('mymo_core::app.confirm_password')
             ]);
             
-            $model->setAttribute('password', \Hash::make($request->post('password')));
+            $model->setAttribute('password', Hash::make($request->post('password')));
         }
         
         $model->save();
         
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $extention = $avatar->getClientOriginalExtension();
-            $newname = $model->id . '.' . $extention;
-            $upload = $avatar->storeAs('avatars', $newname, 'public');
-            
-            if ($upload) {
-                User::where('id', '=', $model->id)
-                    ->update([
-                        'avatar' => 'avatars/' . $newname
-                    ]);
-            }
-        }
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
-            'redirect' => route('admin.users'),
+        return $this->success([
+            'message' => trans('mymo_core::app.save_successfully')
         ]);
     }
-    
-    public function remove(Request $request)
+
+    public function bulkActions(Request $request)
     {
-        $this->validateRequest([
+        $request->validate([
             'ids' => 'required',
-        ], $request, [
+            'action' => 'required',
+        ], [], [
             'ids' => trans('mymo_core::app.users')
         ]);
-        
-        User::destroy($request->post('ids'));
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('mymo_core::app.deleted_successfully'),
+
+        $ids = $request->post('ids');
+        $action = $request->post('action');
+
+        try {
+            DB::beginTransaction();
+            switch ($action) {
+                case 'delete':
+                    User::destroy($ids);
+                    break;
+            }
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return $this->error([
+                'message' => $exception->getMessage()
+            ]);
+        }
+
+        return $this->success([
+            'message' => trans('mymo_core::app.successfully')
         ]);
     }
+
 }

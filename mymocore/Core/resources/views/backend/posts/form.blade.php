@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @component('mymo_core::components.form', [
+    @component('mymo_core::components.resource_form', [
         'method' => $model->id ? 'put' : 'post',
         'action' =>  $model->id ?
             route('admin.posts.update', [$model->id]) :
@@ -41,7 +41,7 @@
                 @component('mymo_core::components.form_image', [
                     'label' => trans('mymo_core::app.thumbnail'),
                     'name' => 'thumbnail',
-                    'value' => $model->thumbnail,
+                    'value' => $model->getThumbnail(),
                 ])@endcomponent
 
                 @do_action('post_type.'. $postType .'.form.rigth', $model)

@@ -4,7 +4,7 @@ namespace Mymo\Notification\Notifications;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Tadcms\EmailTemplate\EmailService;
+use Mymo\Email\EmailService;
 
 /**
  * EmailNotification class

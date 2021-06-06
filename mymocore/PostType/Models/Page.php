@@ -39,10 +39,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Page extends Model
 {
-    use UseThumbnail, UseSlug, UseMetaSeo;
+    use UseThumbnail, UseSlug;
     
     protected $table = 'pages';
-    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'content',

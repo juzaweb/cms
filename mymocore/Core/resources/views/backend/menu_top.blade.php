@@ -35,26 +35,7 @@
                     <div class="tab-content">
                         <div class="height-300 kit__customScroll">
                             <ul class="list-unstyled">
-                            @php
-                                $notifications = Auth::user()->unreadNotifications()
-                                    ->orderBy('id', 'DESC')
-                                    ->limit(5)
-                                    ->get(['id', 'data']);
-                            @endphp
 
-                                @if($notifications->isEmpty())
-                                    <p>@lang('mymo_core::app.no_notifications')</p>
-                                @else
-                                    @foreach($notifications as $notification)
-                                        <li class="mb-3">
-                                            <div class="d-flex align-items-baseline alert alert-info">
-                                                <p class="kit__l2__title">
-                                                    <a href="{{ route('account.notification.detail', [$notification->id]) }}" data-turbolinks="false">{{ $notification->data['subject'] }}</a>
-                                                </p>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                @endif
                             </ul>
                         </div>
                     </div>
