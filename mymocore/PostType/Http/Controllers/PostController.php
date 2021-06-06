@@ -91,7 +91,7 @@ class PostController extends BackendController
             });
         }
         
-        if (!is_null($status)) {
+        if ($status) {
             $query->where('status', '=', $status);
         }
         

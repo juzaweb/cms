@@ -3,9 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-6">
-            <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.posts')</h5>
-        </div>
+        <div class="col-md-6"></div>
 
         <div class="col-md-6">
             <div class="btn-group float-right">
@@ -16,7 +14,22 @@
     </div>
 
     <div class="row mb-3">
-        <div class="col-md-12">
+        <div class="col-md-4">
+            <form method="post" class="form-inline">
+                @csrf
+                <select name="bulk_actions" class="form-control w-60 mb-2 mr-1">
+                    <option value="">@lang('mymo_core::app.bulk_actions')</option>
+                    <option value="public">@lang('tadcms::app.public')</option>
+                    <option value="private">@lang('tadcms::app.private')</option>
+                    <option value="draft">@lang('tadcms::app.draft')</option>
+                    <option value="delete">@lang('mymo_core::app.delete')</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary mb-2" id="apply-action">@lang('mymo_core::app.apply')</button>
+            </form>
+        </div>
+
+        <div class="col-md-8">
             <form method="get" class="form-inline" id="form-search">
 
                 <div class="form-group mb-2 mr-1">
@@ -64,10 +77,14 @@
         }
 
         function status_formatter(value, row, index) {
-            if (value == 1) {
-                return '<span class="text-success">@lang('mymo_core::app.enabled')</span>';
+            switch (value) {
+                case 'public':
+                    return `<span class="text-success">${mymo.lang.public}</span>`;
+                case 'private':
+                    return `<span class="text-warning">${mymo.lang.private}</span>`;
+                case 'draft':
+                    return `<span class="text-secondary">${mymo.lang.draft}</span>`;
             }
-            return '<span class="text-danger">@lang('mymo_core::app.disabled')</span>';
         }
 
         var table = new MymoTable({

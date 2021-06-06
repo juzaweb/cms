@@ -72,11 +72,11 @@ class PageController extends BackendController
     
     public function save(Request $request)
     {
-        $this->validateRequest([
-            'name' => 'required|string|max:250|unique:pages,name',
+        $request->validate([
+            'name' => 'required|string|max:250',
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
-        ], $request, [
+        ], [], [
             'name' => trans('mymo_core::app.name'),
             'status' => trans('mymo_core::app.status'),
             'thumbnail' => trans('mymo_core::app.thumbnail'),
