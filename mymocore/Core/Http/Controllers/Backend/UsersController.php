@@ -122,7 +122,7 @@ class UsersController extends BackendController
             'ids' => 'required',
             'action' => 'required',
         ], [], [
-            'ids' => trans('mymo_core::app.notifications')
+            'ids' => trans('mymo_core::app.users')
         ]);
 
         $ids = $request->post('ids');
