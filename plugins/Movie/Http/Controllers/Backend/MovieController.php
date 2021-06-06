@@ -146,7 +146,7 @@ class MovieController extends BackendController
         ]);
     }
     
-    public function remove(Request $request)
+    public function bulkActions(Request $request)
     {
         $this->validateRequest([
             'ids' => 'required',

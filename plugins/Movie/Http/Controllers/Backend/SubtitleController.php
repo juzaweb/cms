@@ -14,7 +14,7 @@ class SubtitleController extends BackendController
         $file = VideoFiles::findOrFail($file_id);
         $movie = Movies::findOrFail($file->server->movie_id);
         
-        return view('backend.movie_upload.subtitle.index', [
+        return view('movie::movie_upload.subtitle.index', [
             'page_type' => $page_type,
             'file' => $file,
             'file_id' => $file_id,
@@ -27,7 +27,7 @@ class SubtitleController extends BackendController
         $movie = Movies::findOrFail($file->server->movie_id);
         
         $model = Subtitle::firstOrNew(['id' => $id]);
-        return view('backend.movie_upload.subtitle.form', [
+        return view('movie::movie_upload.subtitle.form', [
             'model' => $model,
             'page_type' => $page_type,
             'file' => $file,

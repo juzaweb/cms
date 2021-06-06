@@ -9,12 +9,12 @@ use Plugins\Movie\Models\LiveTV\LiveTvCategory;
 class LiveTvCategoryController extends BackendController
 {
     public function index() {
-        return view('backend.live-tv-category.index');
+        return view('movie::live-tv-category.index');
     }
     
     public function form($id = null) {
         $model = LiveTvCategory::firstOrNew(['id' => $id]);
-        return view('backend.live-tv-category.form', [
+        return view('movie::live-tv-category.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new')
         ]);

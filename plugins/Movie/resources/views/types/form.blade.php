@@ -49,7 +49,7 @@
                             </select>
                         </div>
 
-                        @include('backend.seo_form')
+
                     </div>
                 </div>
 

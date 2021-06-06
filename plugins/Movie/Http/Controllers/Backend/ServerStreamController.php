@@ -9,12 +9,12 @@ use Plugins\Movie\Models\ServerStream;
 class ServerStreamController extends BackendController
 {
     public function index() {
-        return view('backend.server-stream.index');
+        return view('movie::server-stream.index');
     }
     
     public function form($id = null) {
         $model = ServerStream::firstOrNew(['id' => $id]);
-        return view('backend.server-stream.form', [
+        return view('movie::server-stream.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new')
         ]);

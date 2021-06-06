@@ -9,7 +9,7 @@ use Mymo\Core\Http\Controllers\BackendController;
 class SlidersController extends BackendController
 {
     public function index() {
-        return view('mymo_core::backend.design.sliders.index');
+        return view('mymo_core::movie::design.sliders.index');
     }
     
     public function getData(Request $request) {
@@ -50,7 +50,7 @@ class SlidersController extends BackendController
     
     public function form($id = null) {
         $model = Sliders::firstOrNew(['id' => $id]);
-        return view('mymo_core::backend.design.sliders.form', [
+        return view('mymo_core::movie::design.sliders.form', [
             'model' => $model,
             'title' => $model->name ?: trans('mymo_core::app.add_new')
         ]);

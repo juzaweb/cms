@@ -9,7 +9,7 @@ use Mymo\Core\Http\Controllers\BackendController;
 class MovieCommentsController extends BackendController
 {
     public function index() {
-        return view('backend.movie_comments.index');
+        return view('movie::movie_comments.index');
     }
     
     public function getData(Request $request) {

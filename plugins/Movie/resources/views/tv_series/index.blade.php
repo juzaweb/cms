@@ -122,5 +122,5 @@
     });
 </script>
 
-@include('backend.movies.form_tmdb')
+@include('movie::movies.form_tmdb')
 @endsection

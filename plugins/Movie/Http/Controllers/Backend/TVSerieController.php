@@ -83,24 +83,10 @@ class TVSerieController extends BackendController
     public function edit($id)
     {
         $model = Movie::firstOrNew(['id' => $id]);
-        $qualities = VideoQualities::get();
-        $tags = Tags::whereIn('id', explode(',', $model->tags))->get();
-        $genres = Genres::whereIn('id', explode(',', $model->genres))->get();
-        $countries = Countries::whereIn('id', explode(',', $model->countries))->get();
-        $directors = Stars::whereIn('id', explode(',', $model->directors))->get();
-        $writers = Stars::whereIn('id', explode(',', $model->writers))->get();
-        $actors = Stars::whereIn('id', explode(',', $model->actors))->get();
-        
+
         return view('movie::tv_series.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new'),
-            'qualities' => $qualities,
-            'tags' => $tags,
-            'genres' => $genres,
-            'countries' => $countries,
-            'directors' => $directors,
-            'writers' => $writers,
-            'actors' => $actors,
+            'title' => $model->name
         ]);
     }
     
@@ -161,7 +147,7 @@ class TVSerieController extends BackendController
         ]);
     }
     
-    public function remove(Request $request)
+    public function bulkActions(Request $request)
     {
         $this->validateRequest([
             'ids' => 'required',

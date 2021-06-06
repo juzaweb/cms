@@ -9,7 +9,7 @@ use Mymo\Core\Models\Video\VideoAds;
 class VideoAdsController extends BackendController
 {
     public function index() {
-        return view('mymo_core::backend.setting.video_ads.index');
+        return view('mymo_core::movie::setting.video_ads.index');
     }
     
     public function getData(Request $request) {
@@ -55,7 +55,7 @@ class VideoAdsController extends BackendController
     
     public function form($id = null) {
         $model = VideoAds::firstOrNew(['id' => $id]);
-        return view('mymo_core::backend.setting.video_ads.form', [
+        return view('mymo_core::movie::setting.video_ads.form', [
             'model' => $model,
             'title' => $model->name ?: trans('mymo_core::app.add_new')
         ]);

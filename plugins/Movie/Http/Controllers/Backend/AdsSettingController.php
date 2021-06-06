@@ -9,7 +9,7 @@ use Mymo\Core\Models\Ads;
 class AdsSettingController extends BackendController
 {
     public function index() {
-        return view('mymo_core::backend.setting.ads.index');
+        return view('mymo_core::movie::setting.ads.index');
     }
     
     public function getData(Request $request) {
@@ -47,7 +47,7 @@ class AdsSettingController extends BackendController
     
     public function form($id = null) {
         $model = Ads::firstOrNew(['id' => $id]);
-        return view('mymo_core::backend.setting.ads.form', [
+        return view('mymo_core::movie::setting.ads.form', [
             'model' => $model,
             'title' => $model->name ?: trans('mymo_core::app.add_new')
         ]);

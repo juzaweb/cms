@@ -117,11 +117,11 @@
                                 </select>
                             </div>
 
-                            @include('backend.seo_form')
+
                         </div>
 
                         <div class="col-md-4">
-                            @include('backend.tv_series.form_sidebar')
+                            @include('movie::tv_series.form_sidebar')
                         </div>
                     </div>
 

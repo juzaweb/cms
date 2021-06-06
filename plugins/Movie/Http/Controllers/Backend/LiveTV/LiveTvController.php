@@ -10,14 +10,14 @@ use Plugins\Movie\Models\Category\Tags;
 class LiveTvController extends BackendController
 {
     public function index() {
-        return view('backend.live-tv.index');
+        return view('movie::live-tv.index');
     }
     
     public function form($id = null) {
         $model = LiveTv::firstOrNew(['id' => $id]);
         $tags = Tags::whereIn('id', explode(',', $model->tags))->get(['id', 'name']);
         
-        return view('backend.live-tv.form', [
+        return view('movie::live-tv.form', [
             'model' => $model,
             'tags' => $tags,
             'title' => $model->name ?: trans('app.add_new'),

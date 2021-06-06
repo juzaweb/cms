@@ -11,7 +11,7 @@ class MovieServesController extends BackendController
 {
     public function index($page_type, $movie_id) {
         $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
-        return view('backend.movie_servers.index', [
+        return view('movie::movie_servers.index', [
             'movie' => $movie,
             'page_type' => $page_type,
         ]);
@@ -20,7 +20,7 @@ class MovieServesController extends BackendController
     public function form($page_type, $movie_id, $server_id = null) {
         $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
         $model = VideoServers::firstOrNew(['id' => $server_id]);
-        return view('backend.movie_servers.form', [
+        return view('movie::movie_servers.form', [
             'title' => $model->name ? $model->name : trans('app.add_new'),
             'movie' => $movie,
             'model' => $model,

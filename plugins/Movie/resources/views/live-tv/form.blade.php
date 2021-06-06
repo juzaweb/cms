@@ -59,7 +59,7 @@
                                 </select>
                             </div>
 
-                            @include('backend.seo_form')
+
                         </div>
 
                         <div class="col-md-4">

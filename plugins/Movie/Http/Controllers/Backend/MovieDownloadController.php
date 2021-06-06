@@ -12,7 +12,7 @@ class MovieDownloadController extends BackendController
     public function index($page_type, $movie_id) {
         $movie = Movies::findOrFail($movie_id);
         
-        return view('backend.download.index', [
+        return view('movie::download.index', [
             'movie_id' => $movie_id,
             'movie' => $movie,
             'page_type' => $page_type,
@@ -23,7 +23,7 @@ class MovieDownloadController extends BackendController
         $movie = Movies::findOrFail($movie_id);
         $model = DownloadLink::firstOrNew(['id' => $id]);
         
-        return view('backend.download.form', [
+        return view('movie::download.form', [
             'movie_id' => $movie_id,
             'movie' => $movie,
             'page_type' => $page_type,

@@ -11,7 +11,7 @@ class LiveTvStreamController extends BackendController
 {
     public function index($live_tv_id) {
         $live_tv = LiveTv::findOrFail($live_tv_id);
-        return view('backend.live-tv-stream.index', [
+        return view('movie::live-tv-stream.index', [
             'live_tv' => $live_tv
         ]);
     }
@@ -19,7 +19,7 @@ class LiveTvStreamController extends BackendController
     public function form($live_tv_id, $id = null) {
         $live_tv = LiveTv::findOrFail($live_tv_id);
         $model = LiveTvStream::firstOrNew(['id' => $id]);
-        return view('backend.live-tv-stream.form', [
+        return view('movie::live-tv-stream.form', [
             'title' => $model->label ?? trans('app.add_new'),
             'model' => $model,
             'live_tv' => $live_tv
