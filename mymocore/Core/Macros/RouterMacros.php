@@ -9,7 +9,7 @@ class RouterMacros
     public function mymoResource()
     {
         return function ($uri, $controller, $options = []) {
-            $uriName = $options['name'] ?? preg_replace('/[^a-z0-9\.]+/', '.', $uri);
+            $uriName = $options['name'] ?? str_replace('/', '.', $uri);
             $uriName = 'admin.' . $uriName;
 
             $this->get($uri, $controller . '@index')->name($uriName .'.index');

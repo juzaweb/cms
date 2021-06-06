@@ -2,11 +2,6 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use Plugins\Movie\Models\Category\Countries;
-use Plugins\Movie\Models\Category\Genres;
-use Plugins\Movie\Models\Category\Stars;
-use Plugins\Movie\Models\Category\Tags;
-use Plugins\Movie\Models\Video\VideoQualities;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 use Plugins\Movie\Models\Movie\Movie;
@@ -16,7 +11,9 @@ class TVSerieController extends BackendController
 {
     public function index()
     {
-        return view('movie::tv_series.index');
+        return view('movie::tv_series.index', [
+            'title' => trans('movie::app.tv_series')
+        ]);
     }
     
     public function getData(Request $request)
@@ -63,7 +60,7 @@ class TVSerieController extends BackendController
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i Y-m-d');
             $row->description = Str::words(strip_tags($row->description), 15);
-            $row->edit_url = route('admin.tv_series.edit', ['id' => $row->id]);
+            $row->edit_url = route('admin.tv_series.edit', [$row->id]);
             $row->preview_url = route('watch', [$row->slug]);
             $row->upload_url = route('admin.movies.servers', ['tv-series', $row->id]);
             $row->download_url = route('admin.movies.download', ['tv-series', $row->id]);
@@ -77,12 +74,16 @@ class TVSerieController extends BackendController
 
     public function create()
     {
-
+        $model = new Movie();
+        return view('movie::tv_series.form', [
+            'model' => $model,
+            'title' => trans('mymo_core::app.add_new')
+        ]);
     }
 
     public function edit($id)
     {
-        $model = Movie::firstOrNew(['id' => $id]);
+        $model = Movie::findOrFail($id);
 
         return view('movie::tv_series.form', [
             'model' => $model,
@@ -90,7 +91,7 @@ class TVSerieController extends BackendController
         ]);
     }
     
-    public function save(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:250',
@@ -115,23 +116,10 @@ class TVSerieController extends BackendController
             'video_quality' => trans('app.video_quality'),
             'trailer_link' => trans('app.trailer'),
         ]);
-        
-        $genres = $request->post('genres', []);
-        $countries = $request->post('countries', []);
-        $actors = $request->post('actors', []);
-        $directors = $request->post('directors', []);
-        $writers = $request->post('writers', []);
-        $tags = $request->post('tags', []);
-        
+
         $model = Movie::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->setAttribute('short_description', sub_words(strip_tags($model->description), 15));
-        $model->setAttribute('genres', implode(',', $genres));
-        $model->setAttribute('countries', implode(',', $countries));
-        $model->setAttribute('actors', implode(',', $actors));
-        $model->setAttribute('directors', implode(',', $directors));
-        $model->setAttribute('writers', implode(',', $writers));
-        $model->setAttribute('tags', implode(',', $tags));
         $model->setAttribute('tv_series', 1);
     
         if ($model->release) {
@@ -145,6 +133,11 @@ class TVSerieController extends BackendController
             'message' => trans('app.saved_successfully'),
             'redirect' => route('admin.tv_series'),
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+
     }
     
     public function bulkActions(Request $request)

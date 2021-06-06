@@ -22,7 +22,7 @@ HookAction::registerPostType('movies', [
 ]);
 
 HookAction::registerPostType('tv-series', [
-    'label' => trans('movie::app.tv-series'),
+    'label' => trans('movie::app.tv_series'),
     'menu_icon' => 'fa fa-edit',
     'menu_position' => 10,
     'supports' => [],

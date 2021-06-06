@@ -108,22 +108,7 @@ Route::group(['prefix' => config('mymo_core.admin_prefix'), 'middleware' => ['we
         Route::post('/remove', 'Backend\MovieDownloadController@remove')->name('admin.movies.download.remove');
     });
 
-    Route::group(['prefix' => 'video-qualities'], function () {
-        Route::get('/', 'Backend\Setting\VideoQualityController@index')->name('admin.video_qualities');
-
-        Route::get('/getdata', 'Backend\Setting\VideoQualityController@getData')->name('admin.video_qualities.getdata');
-
-        Route::get('/create', 'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.create');
-
-        Route::get('/edit/{id}',
-            'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.edit')->where('id', '[0-9]+');
-
-        Route::post('/save', 'Backend\Setting\VideoQualityController@save')->name('admin.video_qualities.save');
-
-        Route::post('/remove', 'Backend\Setting\VideoQualityController@remove')->name('admin.video_qualities.remove');
-    });
-
-    require (__DIR__ . '/backend/backend.route.php');
+    require_once __DIR__ . '/backend/components/tmdb.route.php';
 });
 
-require __DIR__ . '/frontend/frontend.route.php';
+//require __DIR__ . '/frontend/frontend.route.php';
