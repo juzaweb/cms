@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MYMO CMS - TV Series & Movie Portal CMS Unlimited
+ * MYMO CMS - Free Laravel CMS
  *
  * @package mymocms/mymocms
  * @author The Anh Dang
@@ -10,37 +10,11 @@
  * Github: https://github.com/mymocms/mymocms
  */
 
-Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], function () {
+Route::group(['prefix' => config('mymo_core.admin_prefix'), 'middleware' => ['web', 'admin']], function () {
 
-    Route::group(['prefix' => 'movies'], function () {
-        Route::get('/', 'Backend\MoviesController@index')->name('admin.movies');
+    Route::postTypeResource('movies', 'Backend\MovieController');
 
-        Route::get('/getdata', 'Backend\MoviesController@getData')->name('admin.movies.getdata');
-
-        Route::get('/create', 'Backend\MoviesController@form')->name('admin.movies.create');
-
-        Route::get('/edit/{id}', 'Backend\MoviesController@form')->name('admin.movies.edit')->where('id',
-            '[0-9]+');
-
-        Route::post('/save', 'Backend\MoviesController@save')->name('admin.movies.save');
-
-        Route::post('/remove', 'Backend\MoviesController@remove')->name('admin.movies.remove');
-    });
-
-    Route::group(['prefix' => 'tv-series'], function () {
-        Route::get('/', 'Backend\TVSeriesController@index')->name('admin.tv_series');
-
-        Route::get('/getdata', 'Backend\TVSeriesController@getData')->name('admin.tv_series.getdata');
-
-        Route::get('/create', 'Backend\TVSeriesController@form')->name('admin.tv_series.create');
-
-        Route::get('/edit/{id}', 'Backend\TVSeriesController@form')->name('admin.tv_series.edit')->where('id',
-            '[0-9]+');
-
-        Route::post('/save', 'Backend\TVSeriesController@save')->name('admin.tv_series.save');
-
-        Route::post('/remove', 'Backend\TVSeriesController@remove')->name('admin.tv_series.remove');
-    });
+    Route::postTypeResource('tv-series', 'Backend\TVSerieController');
 
     Route::group(['prefix' => '{type}/servers'], function () {
         Route::get('/{movie_id}',

@@ -2,24 +2,21 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use Plugins\Movie\Models\Category\Countries;
-use Plugins\Movie\Models\Category\Genres;
-use Plugins\Movie\Models\Category\Stars;
-use Plugins\Movie\Models\Category\Tags;
-use Plugins\Movie\Models\Category\Types;
-use Plugins\Movie\Models\Video\VideoQualities;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class MoviesController extends BackendController
+class MovieController extends BackendController
 {
-    public function index() {
-        return view('backend.movies.index');
+    public function index()
+    {
+        return view('movie::movies.index', [
+            'title' => trans('movie::app.movies')
+        ]);
     }
     
-    public function getData(Request $request) {
+    public function getDataTable(Request $request) {
         $search = $request->get('search');
         $status = $request->get('status');
         $genre = $request->get('genre');
@@ -30,7 +27,7 @@ class MoviesController extends BackendController
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Movies::query();
+        $query = Movie::query();
         $query->where('tv_series', '=', 0);
         
         if ($search) {
@@ -73,34 +70,30 @@ class MoviesController extends BackendController
             'rows' => $rows
         ]);
     }
-    
-    public function form($id = null) {
-        $model = Movies::firstOrNew(['id' => $id]);
-        $qualities = VideoQualities::get();
-        $tags = Tags::whereIn('id', explode(',', $model->tags))->get(['id', 'name']);
-        $genres = Genres::whereIn('id', explode(',', $model->genres))->get(['id', 'name']);
-        $type = Types::where('id', '=', $model->type_id)->first(['id', 'name']);
-        $countries = Countries::whereIn('id', explode(',', $model->countries))->get(['id', 'name']);
-        $directors = Stars::whereIn('id', explode(',', $model->directors))->get(['id', 'name']);
-        $writers = Stars::whereIn('id', explode(',', $model->writers))->get(['id', 'name']);
-        $actors = Stars::whereIn('id', explode(',', $model->actors))->get(['id', 'name']);
-        
-        return view('backend.movies.form', [
+
+    public function create()
+    {
+        $model = new Movie();
+
+        return view('movie::movies.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new'),
-            'qualities' => $qualities,
-            'tags' => $tags,
-            'genres' => $genres,
-            'type' => $type,
-            'countries' => $countries,
-            'directors' => $directors,
-            'writers' => $writers,
-            'actors' => $actors,
+            'title' => trans('app.add_new'),
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $model = Movie::findOrFail($id);
+
+        return view('movie::movies.form', [
+            'model' => $model,
+            'title' => $model->name,
         ]);
     }
     
-    public function save(Request $request) {
-        $this->validateRequest([
+    public function save(Request $request)
+    {
+        $request->validate([
             'name' => 'required|string|max:250',
             'description' => 'nullable',
             'status' => 'required|in:0,1',
@@ -112,7 +105,7 @@ class MoviesController extends BackendController
             'runtime' => 'nullable|string|max:100',
             'video_quality' => 'nullable|string|max:100',
             'trailer_link' => 'nullable|string|max:100',
-        ], $request, [
+        ], [], [
             'name' => trans('app.name'),
             'description' => trans('app.description'),
             'status' => trans('app.status'),
@@ -133,7 +126,7 @@ class MoviesController extends BackendController
         $writers = $request->post('writers', []);
         $tags = $request->post('tags', []);
         
-        $model = Movies::firstOrNew(['id' => $request->post('id')]);
+        $model = Movie::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->setAttribute('short_description', sub_words(strip_tags($model->description), 15));
         $model->setAttribute('genres', implode(',', $genres));
@@ -148,22 +141,20 @@ class MoviesController extends BackendController
         }
         
         $model->save();
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('app.saved_successfully'),
-            'redirect' => route('admin.movies'),
+        return $this->success([
+            'message' => trans('mymo_core::app.saved_successfully'),
         ]);
     }
     
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
             'ids' => trans('app.movies')
         ]);
         
-        Movies::destroy($request->post('ids'));
+        Movie::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',

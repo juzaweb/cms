@@ -3,6 +3,7 @@
 namespace Plugins\Movie\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Mymo\Core\Facades\HookAction;
 
 class MovieServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class MovieServiceProvider extends ServiceProvider
     {
         $this->registerTranslations();
         $this->registerViews();
+        HookAction::loadActionForm(__DIR__ . '/../actions');
         $this->loadMigrationsFrom(module_path($this->moduleName, 'database/migrations'));
     }
 
@@ -51,7 +53,7 @@ class MovieServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ], ['views', $this->moduleNameLower . '-module-views']);
+        ], ['views', $this->moduleNameLower . '-plugin-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }

@@ -9,14 +9,14 @@ use Plugins\Movie\Models\Category\Tags;
 use Plugins\Movie\Models\Video\VideoQualities;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Support\Str;
 
-class TVSeriesController extends BackendController
+class TVSerieController extends BackendController
 {
     public function index()
     {
-        return view('backend.tv_series.index');
+        return view('movie::tv_series.index');
     }
     
     public function getData(Request $request)
@@ -31,7 +31,7 @@ class TVSeriesController extends BackendController
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Movies::query();
+        $query = Movie::query();
         $query->where('tv_series', '=', 1);
         
         if ($search) {
@@ -74,10 +74,15 @@ class TVSeriesController extends BackendController
             'rows' => $rows
         ]);
     }
-    
-    public function form($id = null)
+
+    public function create()
     {
-        $model = Movies::firstOrNew(['id' => $id]);
+
+    }
+
+    public function edit($id)
+    {
+        $model = Movie::firstOrNew(['id' => $id]);
         $qualities = VideoQualities::get();
         $tags = Tags::whereIn('id', explode(',', $model->tags))->get();
         $genres = Genres::whereIn('id', explode(',', $model->genres))->get();
@@ -86,7 +91,7 @@ class TVSeriesController extends BackendController
         $writers = Stars::whereIn('id', explode(',', $model->writers))->get();
         $actors = Stars::whereIn('id', explode(',', $model->actors))->get();
         
-        return view('backend.tv_series.form', [
+        return view('movie::tv_series.form', [
             'model' => $model,
             'title' => $model->name ?: trans('app.add_new'),
             'qualities' => $qualities,
@@ -101,7 +106,7 @@ class TVSeriesController extends BackendController
     
     public function save(Request $request)
     {
-        $this->validateRequest([
+        $request->validate([
             'name' => 'required|string|max:250',
             'description' => 'nullable',
             'status' => 'required|in:0,1',
@@ -112,7 +117,7 @@ class TVSeriesController extends BackendController
             'runtime' => 'nullable|string|max:100',
             'video_quality' => 'nullable|string|max:100',
             'trailer_link' => 'nullable|string|max:100',
-        ], $request, [
+        ], [], [
             'name' => trans('app.name'),
             'description' => trans('app.description'),
             'status' => trans('app.status'),
@@ -132,7 +137,7 @@ class TVSeriesController extends BackendController
         $writers = $request->post('writers', []);
         $tags = $request->post('tags', []);
         
-        $model = Movies::firstOrNew(['id' => $request->post('id')]);
+        $model = Movie::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->setAttribute('short_description', sub_words(strip_tags($model->description), 15));
         $model->setAttribute('genres', implode(',', $genres));
@@ -164,7 +169,7 @@ class TVSeriesController extends BackendController
             'ids' => trans('app.tv_series')
         ]);
         
-        Movies::destroy($request->post('ids'));
+        Movie::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
