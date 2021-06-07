@@ -5,25 +5,25 @@ Route::group(['prefix' => 'filemanager2'], function () {
 });
 
 Route::group(['prefix' => 'filemanager'], function () {
-    Route::get('/', 'Backend\Filemanager\LfmController@show');
+    Route::get('/', 'Backend\FileManager\LfmController@show');
     
-    Route::get('/errors', 'Backend\Filemanager\LfmController@getErrors');
+    Route::get('/errors', 'Backend\FileManager\LfmController@getErrors');
     
-    Route::any('/upload', 'Backend\Filemanager\UploadController@upload')->name('backend.filemanager.upload');
+    Route::any('/upload', 'Backend\FileManager\UploadController@upload')->name('backend.filemanager.upload');
     
-    Route::get('/jsonitems', 'Backend\Filemanager\ItemsController@getItems');
+    Route::get('/jsonitems', 'Backend\FileManager\ItemsController@getItems');
     
-    Route::get('/move', 'Backend\Filemanager\ItemsController@move');
+    Route::get('/move', 'Backend\FileManager\ItemsController@move');
     
-    Route::get('/domove', 'Backend\Filemanager\ItemsController@domove');
+    Route::get('/domove', 'Backend\FileManager\ItemsController@domove');
     
-    Route::get('/newfolder', 'Backend\Filemanager\FolderController@getAddfolder');
+    Route::get('/newfolder', 'Backend\FileManager\FolderController@getAddfolder');
     
-    Route::get('/folders', 'Backend\Filemanager\FolderController@getFolders');
+    Route::get('/folders', 'Backend\FileManager\FolderController@getFolders');
     
-    Route::get('/rename', 'Backend\Filemanager\RenameController@getRename');
+    Route::get('/rename', 'Backend\FileManager\RenameController@getRename');
     
-    Route::get('/download', 'Backend\Filemanager\DownloadController@getDownload');
+    Route::get('/download', 'Backend\FileManager\DownloadController@getDownload');
     
-    Route::get('/delete', 'Backend\Filemanager\DeleteController@getDelete');
+    Route::get('/delete', 'Backend\FileManager\DeleteController@getDelete');
 });
