@@ -28,7 +28,6 @@ class UsersController extends BackendController
         $limit = $request->get('limit', 20);
         
         $query = User::query();
-        $query->where('id', '>', 1);
         
         if ($search) {
             $query->where(function ($subquery) use ($search) {
@@ -147,5 +146,4 @@ class UsersController extends BackendController
             'message' => trans('mymo_core::app.successfully')
         ]);
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
+use Plugins\Movie\Http\Requests\MovieRequest;
 use Plugins\Movie\Models\Movie\Movie;
 use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
@@ -73,11 +74,16 @@ class MovieController extends BackendController
 
     public function create()
     {
+        $this->addBreadcrumb([
+            'title' => trans('movie::app.movie'),
+            'url' => route('admin.movies.index')
+        ]);
+
         $model = new Movie();
 
         return view('movie::movies.form', [
             'model' => $model,
-            'title' => trans('app.add_new'),
+            'title' => trans('movie::app.add_new'),
         ]);
     }
 
@@ -91,56 +97,18 @@ class MovieController extends BackendController
         ]);
     }
     
-    public function save(Request $request)
+    public function save(MovieRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:250',
-            'description' => 'nullable',
-            'status' => 'required|in:0,1',
-            'thumbnail' => 'nullable|string|max:250',
-            'genres' => 'required|array',
-            'poster' => 'nullable|string|max:250',
-            'rating' => 'nullable|string|max:25',
-            'release' => 'nullable|date_format:Y-m-d',
-            'runtime' => 'nullable|string|max:100',
-            'video_quality' => 'nullable|string|max:100',
-            'trailer_link' => 'nullable|string|max:100',
-        ], [], [
-            'name' => trans('app.name'),
-            'description' => trans('app.description'),
-            'status' => trans('app.status'),
-            'thumbnail' => trans('app.thumbnail'),
-            'genres' => trans('app.genres'),
-            'poster' => trans('app.poster'),
-            'rating' => trans('app.rating'),
-            'release' => trans('app.release'),
-            'runtime' => trans('app.runtime'),
-            'video_quality' => trans('app.video_quality'),
-            'trailer_link' => trans('app.trailer'),
-        ]);
-    
-        $genres = $request->post('genres', []);
-        $countries = $request->post('countries', []);
-        $actors = $request->post('actors', []);
-        $directors = $request->post('directors', []);
-        $writers = $request->post('writers', []);
-        $tags = $request->post('tags', []);
-        
         $model = Movie::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->setAttribute('short_description', sub_words(strip_tags($model->description), 15));
-        $model->setAttribute('genres', implode(',', $genres));
-        $model->setAttribute('countries', implode(',', $countries));
-        $model->setAttribute('actors', implode(',', $actors));
-        $model->setAttribute('directors', implode(',', $directors));
-        $model->setAttribute('writers', implode(',', $writers));
-        $model->setAttribute('tags', implode(',', $tags));
-        
         if ($model->release) {
             $model->year = explode('-', $model->release)[0];
         }
         
         $model->save();
+        $model->syncTaxonomies($request->all());
+
         return $this->success([
             'message' => trans('mymo_core::app.saved_successfully'),
         ]);
@@ -148,17 +116,31 @@ class MovieController extends BackendController
     
     public function bulkActions(Request $request)
     {
-        $this->validateRequest([
-            'ids' => 'required',
-        ], $request, [
-            'ids' => trans('app.movies')
+        $request->validate([
+            'ids' => 'required|array',
+            'action' => 'required',
         ]);
-        
-        Movie::destroy($request->post('ids'));
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+
+        $action = $request->post('action');
+        $ids = $request->post('ids');
+
+        switch ($action) {
+            case 'delete':
+                Movie::destroy($ids);
+                break;
+            case 'public':
+            case 'private':
+            case 'draft':
+                foreach ($ids as $id) {
+                    Movie::update([
+                        'status' => $action
+                    ], $id);
+                }
+                break;
+        }
+
+        return $this->success([
+            'message' => trans('mymo_core::app.successfully')
         ]);
     }
 }

@@ -461,11 +461,11 @@ class ModuleGenerator extends Generator
     }
 
     /**
-     * Generate the module.json file
+     * Generate the plugin.json file
      */
     private function generateModuleJsonFile()
     {
-        $path = $this->module->getModulePath($this->getName()) . 'module.json';
+        $path = $this->module->getModulePath($this->getName()) . 'plugin.json';
 
         if (!$this->filesystem->isDirectory($dir = dirname($path))) {
             $this->filesystem->makeDirectory($dir, 0775, true);
@@ -477,12 +477,12 @@ class ModuleGenerator extends Generator
     }
 
     /**
-     * Remove the default service provider that was added in the module.json file
+     * Remove the default service provider that was added in the plugin.json file
      * This is needed when a --plain module was created
      */
     private function cleanModuleJsonFile()
     {
-        $path = $this->module->getModulePath($this->getName()) . 'module.json';
+        $path = $this->module->getModulePath($this->getName()) . 'plugin.json';
 
         $content = $this->filesystem->get($path);
         $namespace = $this->getModuleNamespaceReplacement();

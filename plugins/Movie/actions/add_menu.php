@@ -16,14 +16,32 @@ use Mymo\Core\Facades\HookAction;
 
 HookAction::registerPostType('movies', [
     'label' => trans('movie::app.movies'),
-    'menu_icon' => 'fa fa-edit',
+    'menu_icon' => 'fa fa-film',
     'menu_position' => 10,
-    'supports' => [],
+    'supports' => ['tag'],
 ]);
 
 HookAction::registerPostType('tv-series', [
     'label' => trans('movie::app.tv_series'),
+    'menu_icon' => 'fa fa-film',
+    'menu_position' => 11,
+    'supports' => ['tag'],
+]);
+
+HookAction::registerTaxonomy('genres', ['movies', 'tv-series'], [
+    'label' => trans('movie::app.genres'),
     'menu_icon' => 'fa fa-edit',
-    'menu_position' => 10,
-    'supports' => [],
+    'menu_position' => 6,
+    'supports' => [
+        'thumbnail'
+    ],
+]);
+
+HookAction::registerTaxonomy('countries', ['movies', 'tv-series'], [
+    'label' => trans('movie::app.countries'),
+    'menu_icon' => 'fa fa-edit',
+    'menu_position' => 7,
+    'supports' => [
+        'thumbnail'
+    ],
 ]);

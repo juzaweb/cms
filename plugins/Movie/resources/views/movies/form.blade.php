@@ -50,22 +50,35 @@
 
             {{--qualities--}}
 
-            <div class="form-group">
-                <label class="col-form-label" for="status">@lang('movie::app.status')</label>
-                <select name="status" id="status" class="form-control" required>
-                    <option value="1" @if($model->status == 1) selected @endif>@lang('movie::app.enabled')</option>
-                    <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('movie::app.disabled')</option>
-                </select>
-            </div>
+            @do_action('post_type.movies.form.left')
         </div>
 
         <div class="col-md-4">
-            @component('mymo_core::components.form_image', [
+            @component('mymo_core::components.form_select', [
+                    'label' => trans('mymo_core::app.status'),
+                    'name' => 'status',
+                    'value' => $model->status,
+                    'options' => [
+                        'public' => trans('mymo_core::app.public'),
+                        'private' => trans('mymo_core::app.private'),
+                        'draft' => trans('mymo_core::app.draft'),
+                    ],
+                ])
+            @endcomponent
+
+            @include('mymo_core::components.form_image', [
                 'label' => trans('movie::app.thumbnail'),
                 'name' => 'thumbnail',
                 'value' => $model->getThumbnail()
             ])
-            @endcomponent
+
+            @include('mymo_core::components.form_image', [
+                'label' => trans('movie::app.poster'),
+                'name' => 'poster',
+                'value' => $model->getPoster()
+            ])
+
+            @do_action('post_type.movies.form.rigth', $model)
         </div>
     </div>
     @endcomponent

@@ -2,10 +2,8 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-md-6"></div>
-
-        <div class="col-md-6">
+    <div class="row mb-3">
+        <div class="col-md-12">
             <div class="float-right">
                 <div class="btn-group">
                     <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#tmdb-modal"><i class="fa fa-plus"></i> @lang('movie::app.add_from_tmdb')</a>
@@ -38,13 +36,13 @@
         <div class="col-md-8">
             <form action="" method="get" class="form-inline" id="form-search">
                 <div class="form-group mb-2 mr-1">
-                    <label for="inputSearch" class="sr-only">@lang('movie::app.search')</label>
-                    <input name="search" type="text" id="inputSearch" class="form-control" placeholder="@lang('movie::app.search')" autocomplete="off">
+                    <label for="search" class="sr-only">@lang('movie::app.search')</label>
+                    <input name="search" type="text" id="search" class="form-control" placeholder="@lang('movie::app.search')" autocomplete="off">
                 </div>
 
                 <div class="form-group mb-2 mr-1">
                     <label for="genre" class="sr-only">@lang('movie::app.genre')</label>
-                    <select name="genre" id="genre" class="form-control load-genres" data-placeholder="--- @lang('movie::app.genre') ---"></select>
+                    <select name="genre" id="genre" class="form-control load-taxonomies" data-placeholder="--- @lang('movie::app.genre') ---" data-taxonomy="genres" data-post-type="movies"></select>
                 </div>
 
                 <div class="form-group mb-2 mr-1">
@@ -53,11 +51,12 @@
                 </div>
 
                 <div class="form-group mb-2 mr-1">
-                    <label for="inputStatus" class="sr-only">@lang('movie::app.status')</label>
-                    <select name="status" id="inputStatus" class="form-control">
+                    <label for="status" class="sr-only">@lang('movie::app.status')</label>
+                    <select name="status" id="status" class="form-control">
                         <option value="">--- @lang('movie::app.status') ---</option>
-                        <option value="1">@lang('movie::app.enabled')</option>
-                        <option value="0">@lang('movie::app.disabled')</option>
+                        <option value="public">@lang('mymo_core::app.public')</option>
+                        <option value="private">@lang('mymo_core::app.private')</option>
+                        <option value="draft">@lang('mymo_core::app.draft')</option>
                     </select>
                 </div>
 
@@ -67,7 +66,7 @@
     </div>
 
     <div class="table-responsive mb-5">
-        <table class="table load-bootstrap-table">
+        <table class="table mymo-table">
             <thead>
                 <tr>
                     <th data-width="3%" data-field="state" data-checkbox="true"></th>
@@ -92,9 +91,9 @@
 
         function status_formatter(value, row, index) {
             if (value == 1) {
-                return '<span class="text-success">'+ langs.enabled +'</span>';
+                return '<span class="text-success">'+ mymo.lang.enabled +'</span>';
             }
-            return '<span class="text-danger">'+ langs.disabled +'</span>';
+            return '<span class="text-danger">'+ mymo.lang.disabled +'</span>';
         }
 
         function options_formatter(value, row, index) {
