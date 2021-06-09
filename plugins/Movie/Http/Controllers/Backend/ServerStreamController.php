@@ -81,8 +81,7 @@ class ServerStreamController extends BackendController
         $model->fill($request->all());
         $model->save();
         
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.server-stream'),
         ]);
@@ -105,8 +104,7 @@ class ServerStreamController extends BackendController
                 'status' => $status,
             ]);
         
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'message' => trans('movie::app.updated_successfully'),
         ]);
     }
@@ -121,8 +119,7 @@ class ServerStreamController extends BackendController
         $ids = $request->post('ids');
         ServerStream::destroy($ids);
         
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'message' => trans('movie::app.deleted_successfully'),
         ]);
     }

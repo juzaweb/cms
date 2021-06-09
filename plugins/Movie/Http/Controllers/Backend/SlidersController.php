@@ -2,7 +2,7 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Design;
 
-use Mymo\Core\Models\Sliders;
+use Plugins\Movie\Models\Slider;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 
@@ -21,7 +21,7 @@ class SlidersController extends BackendController
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = Sliders::query();
+        $query = Slider::query();
         
         if ($search) {
             $query->where('name', 'like', '%'. $search .'%');
@@ -49,7 +49,7 @@ class SlidersController extends BackendController
     }
     
     public function form($id = null) {
-        $model = Sliders::firstOrNew(['id' => $id]);
+        $model = Slider::firstOrNew(['id' => $id]);
         return view('mymo_core::movie::design.sliders.form', [
             'model' => $model,
             'title' => $model->name ?: trans('mymo_core::app.add_new')
@@ -63,7 +63,7 @@ class SlidersController extends BackendController
             'name' => trans('mymo_core::app.name'),
         ]);
     
-        $model = Sliders::firstOrNew(['id' => $request->post('id')]);
+        $model = Slider::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
     
         $titles = $request->post('title');
@@ -107,7 +107,7 @@ class SlidersController extends BackendController
             'ids' => trans('mymo_core::app.design.sliders')
         ]);
         
-        Sliders::destroy($request->post('ids'));
+        Slider::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',

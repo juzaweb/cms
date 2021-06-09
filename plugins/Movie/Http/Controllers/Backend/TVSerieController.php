@@ -2,8 +2,8 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
+use Illuminate\Http\Request;
 use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Support\Str;
 

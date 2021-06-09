@@ -19,6 +19,7 @@ class SubtitleController extends BackendController
             'file' => $file,
             'file_id' => $file_id,
             'movie' => $movie,
+            'title' => trans('movie::app.subtitle')
         ]);
     }
     
@@ -99,8 +100,7 @@ class SubtitleController extends BackendController
         $model->movie_id = $file->movie_id;
         $model->save();
         
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies.servers.upload.subtitle', [$page_type, $file_id]),
         ]);
@@ -116,8 +116,7 @@ class SubtitleController extends BackendController
         
         Subtitle::destroy($request->post('ids'));
         
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'message' => trans('movie::app.deleted_successfully'),
         ]);
     }

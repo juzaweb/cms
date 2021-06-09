@@ -81,9 +81,8 @@ class MovieServesController extends BackendController
         $model->movie_id = $movie_id;
         $model->save();
         
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('movie::app.saved_successfully'),
+        return $this->success([
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.movies.servers', [$page_type, $movie_id]),
         ]);
     }

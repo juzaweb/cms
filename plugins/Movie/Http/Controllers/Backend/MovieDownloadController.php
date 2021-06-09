@@ -16,6 +16,7 @@ class MovieDownloadController extends BackendController
             'movie_id' => $movie_id,
             'movie' => $movie,
             'page_type' => $page_type,
+            'title' => trans('movie::app.download_videos')
         ]);
     }
     

@@ -14,6 +14,7 @@ class MovieUploadController extends BackendController
         $server = VideoServers::where('id', '=', $server_id)->firstOrFail();
         
         return view('movie::movie_upload.index', [
+            'title' => trans('movie::app.upload'),
             'server' => $server,
             'movie' => $server->movie,
             'page_type' => $page_type,
@@ -109,8 +110,7 @@ class MovieUploadController extends BackendController
         
         $model->save();
         
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies.servers.upload', [$page_type, $server_id]),
         ]);
@@ -125,8 +125,7 @@ class MovieUploadController extends BackendController
     
         VideoFiles::destroy($request->post('ids', []));
         
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies.servers.upload', [
                 $page_type,

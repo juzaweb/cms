@@ -3,11 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-6">
-            <h5 class="mb-0 card-title font-weight-bold">@lang('movie::app.servers_video')</h5>
-        </div>
-
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="btn-group float-right">
                 <a href="{{ route('admin.movies.servers.create', [$page_type, $movie->id]) }}" class="btn btn-success add-new-server"><i class="fa fa-plus-circle"></i> @lang('movie::app.add_new')</a>
                 <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('movie::app.delete')</button>
@@ -18,7 +14,6 @@
     <div class="row mb-3">
         <div class="col-md-12">
             <form method="get" class="form-inline" id="form-search">
-
                 <div class="form-group mb-2 mr-1">
                     <label for="inputName" class="sr-only">@lang('movie::app.search')</label>
                     <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('movie::app.search')" autocomplete="off">
@@ -54,7 +49,6 @@
     </div>
 
     <script type="text/javascript">
-
         function status_formatter(value, row, index) {
             if (value == 1) {
                 return '<span class="text-success">@lang('movie::app.enabled')</span>';
