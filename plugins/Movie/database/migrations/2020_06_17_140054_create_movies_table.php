@@ -29,8 +29,6 @@ class CreateMoviesTable extends Migration
             $table->tinyInteger('is_paid')->default(0);
             $table->string('status')->default('draft');
             $table->bigInteger('views')->default(0);
-            $table->bigInteger('created_by')->index();
-            $table->bigInteger('updated_by')->index();
             $table->timestamps();
         });
         

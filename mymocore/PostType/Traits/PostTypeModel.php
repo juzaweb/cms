@@ -15,14 +15,15 @@
 namespace Mymo\PostType\Traits;
 
 use Illuminate\Support\Arr;
+use Mymo\Core\Traits\ResourceModel;
 use Mymo\Core\Traits\UseChangeBy;
 use Mymo\Core\Traits\UseSlug;
 use Mymo\Core\Traits\UseThumbnail;
 use Mymo\PostType\PostType;
 
-trait PostTypeAble
+trait PostTypeModel
 {
-    use UseSlug, UseThumbnail, UseChangeBy;
+    use ResourceModel, UseSlug, UseThumbnail, UseChangeBy;
 
     protected $postType;
 

@@ -5,11 +5,8 @@
     <form method="post" action="{{ route('admin.movies.download.save', [$page_type, $movie_id]) }}" class="form-ajax">
 
         <div class="row">
-            <div class="col-md-6">
-                <h5 class="mb-0 card-title font-weight-bold">{{ $title }}</h5>
-            </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="btn-group float-right">
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('movie::app.save')</button>
                     <a href="{{ route('admin.movies.download', [$page_type, $movie_id]) }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('movie::app.cancel')</a>
@@ -51,8 +48,6 @@
         </div>
 
         <input type="hidden" name="id" value="{{ $model->id }}">
-
-
     </form>
 
 @endsection

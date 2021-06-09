@@ -12,29 +12,24 @@
  * Time: 2:05 PM
  */
 
-namespace Mymo\PostType\Traits;
+namespace Mymo\Core\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Mymo\Core\Traits\ResourceController;
-use Mymo\PostType\PostType;
-use Illuminate\Support\Facades\Validator;
 
-trait PostTypeController
+trait ResourceController
 {
-    use ResourceController;
-
     public function index()
     {
         return view($this->viewPrefix . '.index', [
-            'title' => $this->getSetting()->get('label')
+            'title' => $this->getTitle()
         ]);
     }
 
     public function create()
     {
         $this->addBreadcrumb([
-            'title' => $this->getSetting()->get('label'),
+            'title' => $this->getTitle(),
             'url' => action([static::class, 'index']),
         ]);
 
@@ -52,28 +47,21 @@ trait PostTypeController
         ]);
 
         $model = $this->makeModel()->findOrFail($id);
-
         return view($this->viewPrefix . '.form', array_merge([
-            'title' => $model->title
+            'title' => $model->{$this->getFieldName()}
         ], $this->getDataDataForForm($model)));
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Model
-     * */
-    abstract protected function getModel();
-
-    abstract public function getDataTable(Request $request);
 
     public function store(Request $request)
     {
         $this->validator($request->all())->validate();
         DB::beginTransaction();
         try {
+            $this->beforeStore($request);
             $model = $this->makeModel();
             $model->fill($request->all());
             $model->save();
-            $model->syncTaxonomies($request->all());
+            $this->afterStore($request, $model);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -91,9 +79,11 @@ trait PostTypeController
         $model = $this->makeModel()->findOrFail($id);
         DB::beginTransaction();
         try {
+            $this->beforeUpdate($request, $model);
             $model->fill($request->all());
             $model->save();
             $model->syncTaxonomies($request->all());
+            $this->afterUpdate($request, $model);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -120,9 +110,7 @@ trait PostTypeController
                 case 'delete':
                     $this->makeModel()->find($id)->delete($id);
                     break;
-                case 'public':
-                case 'private':
-                case 'draft':
+                default:
                     $this->makeModel()->find($id)->update([
                         'status' => $action
                     ]);
@@ -135,36 +123,55 @@ trait PostTypeController
         ]);
     }
 
-    protected function getTitle()
+    public function getDataTable(Request $request)
     {
-        return $this->getSetting()->get('label');
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'desc');
+        $offset = $request->get('offset', 0);
+        $limit = $request->get('limit', 20);
+
+        $query = $this->makeModel()->newQuery();
+        $query->filter($request->all());
+
+        $count = $query->count();
+        $query->orderBy($sort, $order);
+        $query->offset($offset);
+        $query->limit($limit);
+        $rows = $query->get();
+
+        foreach ($rows as $row) {
+            $row->edit_url = route('admin.design.sliders.edit', [$row->id]);
+        }
+
+        return response()->json([
+            'total' => $count,
+            'rows' => $rows
+        ]);
+    }
+
+    protected function beforeStore(Request $request)
+    {
+        //
+    }
+
+    protected function afterStore(Request $request, $model)
+    {
+        //
+    }
+
+    protected function beforeUpdate(Request $request, $model)
+    {
+        //
+    }
+
+    protected function afterUpdate(Request $request, $model)
+    {
+        //
     }
 
     protected function makeModel()
     {
         return app($this->getModel());
-    }
-
-    protected function validator(array $attributes)
-    {
-        $validator = Validator::make($attributes, [
-            'title' => 'required|string|max:250',
-            'description' => 'nullable',
-            'status' => 'required|in:draft,public,trash,private',
-            'thumbnail' => 'nullable|string|max:150',
-        ]);
-
-        return $validator;
-    }
-
-    protected function getSetting()
-    {
-        $setting = PostType::getPostTypes($this->makeModel()->getPostType());
-        if (empty($setting)) {
-            throw new \Exception('Post type ' . $this->makeModel()->getPostType() . ' does not exists.');
-        }
-
-        return $setting;
     }
 
     /**
@@ -176,8 +183,29 @@ trait PostTypeController
     protected function getDataDataForForm($model)
     {
         return [
-            'postType' => $model->getPostType(),
             'model' => $model
         ];
     }
+
+    /**
+     * Validator for store and update
+     *
+     * @param array $attributes
+     * @return \Illuminate\Support\Facades\Validator
+     * */
+    abstract protected function validator(array $attributes);
+
+    /**
+     * Get model resource
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     * */
+    abstract protected function getModel();
+
+    /**
+     * Get title resource
+     *
+     * @return string
+     **/
+    abstract protected function getTitle();
 }

@@ -2,21 +2,20 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
+use Illuminate\Support\Facades\Validator;
 use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
+use Mymo\PostType\Traits\PostTypeController;
 use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Support\Str;
 
 class TVSerieController extends BackendController
 {
-    public function index()
-    {
-        return view('movie::tv_series.index', [
-            'title' => trans('movie::app.tv_series')
-        ]);
-    }
-    
-    public function getData(Request $request)
+    use PostTypeController;
+
+    protected $viewPrefix = 'movie::tv_series';
+
+    public function getDataTable(Request $request)
     {
         $search = $request->get('search');
         $status = $request->get('status');
@@ -72,28 +71,14 @@ class TVSerieController extends BackendController
         ]);
     }
 
-    public function create()
+    protected function getModel()
     {
-        $model = new Movie();
-        return view('movie::tv_series.form', [
-            'model' => $model,
-            'title' => trans('mymo_core::app.add_new')
-        ]);
+        return Movie::class;
     }
 
-    public function edit($id)
+    protected function validator(array $attributes)
     {
-        $model = Movie::findOrFail($id);
-
-        return view('movie::tv_series.form', [
-            'model' => $model,
-            'title' => $model->name
-        ]);
-    }
-    
-    public function store(Request $request)
-    {
-        $request->validate([
+        $validator = Validator::make($attributes, [
             'name' => 'required|string|max:250',
             'description' => 'nullable',
             'status' => 'required|in:0,1',
@@ -104,55 +89,8 @@ class TVSerieController extends BackendController
             'runtime' => 'nullable|string|max:100',
             'video_quality' => 'nullable|string|max:100',
             'trailer_link' => 'nullable|string|max:100',
-        ], [], [
-            'name' => trans('movie::app.name'),
-            'description' => trans('movie::app.description'),
-            'status' => trans('movie::app.status'),
-            'thumbnail' => trans('movie::app.thumbnail'),
-            'poster' => trans('movie::app.poster'),
-            'rating' => trans('movie::app.rating'),
-            'release' => trans('movie::app.release'),
-            'runtime' => trans('movie::app.runtime'),
-            'video_quality' => trans('movie::app.video_quality'),
-            'trailer_link' => trans('movie::app.trailer'),
         ]);
 
-        $model = Movie::firstOrNew(['id' => $request->post('id')]);
-        $model->fill($request->all());
-        $model->setAttribute('short_description', sub_words(strip_tags($model->description), 15));
-        $model->setAttribute('tv_series', 1);
-    
-        if ($model->release) {
-            $model->year = explode('-', $model->release)[0];
-        }
-        
-        $model->save();
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('movie::app.saved_successfully'),
-            'redirect' => route('admin.tv_series'),
-        ]);
-    }
-
-    public function update(Request $request, $id)
-    {
-
-    }
-    
-    public function bulkActions(Request $request)
-    {
-        $this->validateRequest([
-            'ids' => 'required',
-        ], $request, [
-            'ids' => trans('movie::app.tv_series')
-        ]);
-        
-        Movie::destroy($request->post('ids'));
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('movie::app.deleted_successfully'),
-        ]);
+        return $validator;
     }
 }

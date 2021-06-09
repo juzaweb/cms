@@ -2,9 +2,9 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
-use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use Mymo\Core\Models\Video\VideoAds;
+use Illuminate\Http\Request;
+use Plugins\Movie\Models\Video\VideoAds;
 
 class VideoAdsController extends BackendController
 {

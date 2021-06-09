@@ -4,13 +4,14 @@ namespace Plugins\Movie\Models\Movie;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Mymo\PostType\Traits\PostTypeAble;
+use Mymo\PostType\Traits\PostTypeModel;
 
 class Movie extends Model
 {
-    use PostTypeAble;
+    use PostTypeModel;
 
-    protected $resize = '185x250';
+    protected $fieldName = 'name';
+    protected $thumbnailSize = '185x250';
     protected $fillable = [
         'name',
         'thumbnail',
@@ -28,6 +29,11 @@ class Movie extends Model
         'max_episode',
         'year',
         'status',
+    ];
+
+    protected $searchAttributes = [
+        'name',
+        'other_name'
     ];
 
     public function rating() {
