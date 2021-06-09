@@ -7,7 +7,7 @@
     @if($movie->tv_series == 0)
         {{ Breadcrumbs::render('multiple_parent', [
             [
-                'name' => trans('app.movies'),
+                'name' => trans('movie::app.movies'),
                 'url' => route('admin.movies')
             ],
             [
@@ -26,7 +26,7 @@
     @else
         {{ Breadcrumbs::render('multiple_parent', [
         [
-            'name' => trans('app.tv_series'),
+            'name' => trans('movie::app.tv_series'),
             'url' => route('admin.tv_series')
         ],
         [
@@ -55,8 +55,8 @@
 
                         <div class="col-md-6">
                             <div class="btn-group float-right">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                                <a href="{{ route('admin.movies.servers.upload.subtitle', [$page_type, $file_id]) }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('movie::app.save')</button>
+                                <a href="{{ route('admin.movies.servers.upload.subtitle', [$page_type, $file_id]) }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('movie::app.cancel')</a>
                             </div>
                         </div>
                     </div>
@@ -68,26 +68,26 @@
                         <div class="col-md-12">
 
                             <div class="form-group">
-                                <label class="col-form-label" for="label">@lang('app.label')</label>
+                                <label class="col-form-label" for="label">@lang('movie::app.label')</label>
 
                                 <input type="text" name="label" class="form-control" id="label" value="{{ $model->label }}" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-form-label" for="url">@lang('app.url')</label>
+                                <label class="col-form-label" for="url">@lang('movie::app.url')</label>
                                 <input type="text" name="url" class="form-control" id="url" value="{{ $model->url }}" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-form-label" for="order">@lang('app.order')</label>
+                                <label class="col-form-label" for="order">@lang('movie::app.order')</label>
                                 <input type="number" name="order" class="form-control" id="order" value="{{ $model->order ?? 1 }}" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-form-label" for="status">@lang('app.status')</label>
+                                <label class="col-form-label" for="status">@lang('movie::app.status')</label>
                                 <select name="status" id="status" class="form-control">
-                                    <option value="1" @if($model->status == 1) selected @endif>@lang('app.enabled')</option>
-                                    <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
+                                    <option value="1" @if($model->status == 1) selected @endif>@lang('movie::app.enabled')</option>
+                                    <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('movie::app.disabled')</option>
                                 </select>
                             </div>
                         </div>

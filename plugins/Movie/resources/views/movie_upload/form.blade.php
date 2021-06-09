@@ -7,7 +7,7 @@
     @if($movie->tv_series == 0)
         {{ Breadcrumbs::render('multiple_parent', [
             [
-                'name' => trans('app.movies'),
+                'name' => trans('movie::app.movies'),
                 'url' => route('admin.movies')
             ],
             [
@@ -15,7 +15,7 @@
                 'url' => route('admin.movies.edit', ['id' => $movie->id])
             ],
             [
-                'name' => trans('app.servers'),
+                'name' => trans('movie::app.servers'),
                 'url' => route('admin.movies.servers', [$page_type, $movie->id])
             ],
             [
@@ -26,7 +26,7 @@
     @else
         {{ Breadcrumbs::render('multiple_parent', [
         [
-            'name' => trans('app.tv_series'),
+            'name' => trans('movie::app.tv_series'),
             'url' => route('admin.tv_series')
         ],
         [
@@ -34,7 +34,7 @@
             'url' => route('admin.tv_series.edit', ['id' => $movie->id])
         ],
         [
-            'name' => trans('app.servers'),
+            'name' => trans('movie::app.servers'),
             'url' => route('admin.movies.servers', [$page_type, $movie->id])
         ],
         [
@@ -55,8 +55,8 @@
 
                         <div class="col-md-6">
                             <div class="btn-group float-right">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                                <a href="{{ route('admin.movies.servers.upload', [$page_type, $server->id]) }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('movie::app.save')</button>
+                                <a href="{{ route('admin.movies.servers.upload', [$page_type, $server->id]) }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('movie::app.cancel')</a>
                             </div>
                         </div>
                     </div>
@@ -70,21 +70,21 @@
                             <input type="hidden" name="id" id="id" value="{{ $model->id }}">
 
                             <div class="form-group">
-                                <label class="col-form-label" for="label">@lang('app.label')</label>
+                                <label class="col-form-label" for="label">@lang('movie::app.label')</label>
 
                                 <input type="text" name="label" class="form-control" id="label" autocomplete="off" required value="{{ $model->label }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="col-form-label" for="order">@lang('app.order')</label>
+                                <label class="col-form-label" for="order">@lang('movie::app.order')</label>
 
                                 <input type="text" name="order" class="form-control" id="order" autocomplete="off" required value="{{ $model->order ? $model->order : 1 }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="col-form-label" for="source">@lang('app.source')</label>
+                                <label class="col-form-label" for="source">@lang('movie::app.source')</label>
                                 <select name="source" id="source" class="form-control" required>
-                                    <option value="">--- @lang('app.source') ---</option>
+                                    <option value="">--- @lang('movie::app.source') ---</option>
                                     <option value="youtube">Youtube</option>
                                     <option value="vimeo">Vimeo</option>
                                     <option value="gdrive">Google Drive</option>
@@ -97,14 +97,14 @@
                             </div>
 
                             <div class="form-group form-url">
-                                <label class="col-form-label" for="url">@lang('app.video_url')</label>
+                                <label class="col-form-label" for="url">@lang('movie::app.video_url')</label>
                                 <div class="row">
                                     <div class="col-md-10">
                                         <input type="text" name="url" id="url" class="form-control" autocomplete="off" value="{{ $model->url }}">
                                     </div>
 
                                     <div class="col-md-2">
-                                        <a href="javascript:void(0)" class="btn btn-primary lfm-file" data-input="url"><i class="fa fa-upload"></i> @lang('app.upload')</a>
+                                        <a href="javascript:void(0)" class="btn btn-primary lfm-file" data-input="url"><i class="fa fa-upload"></i> @lang('movie::app.upload')</a>
                                     </div>
                                 </div>
 

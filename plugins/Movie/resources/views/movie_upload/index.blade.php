@@ -1,13 +1,13 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', trans('app.upload'))
+@section('title', trans('movie::app.upload'))
 
 @section('content')
 
     @if($movie->tv_series == 0)
     {{ Breadcrumbs::render('multiple_parent', [
         [
-            'name' => trans('app.movies'),
+            'name' => trans('movie::app.movies'),
             'url' => route('admin.movies')
         ],
         [
@@ -15,7 +15,7 @@
             'url' => route('admin.movies.edit', ['id' => $movie->id])
         ],
         [
-            'name' => trans('app.servers'),
+            'name' => trans('movie::app.servers'),
             'url' => route('admin.movies.servers', [$page_type, $movie->id])
         ],
         [
@@ -26,7 +26,7 @@
     @else
         {{ Breadcrumbs::render('multiple_parent', [
         [
-            'name' => trans('app.tv_series'),
+            'name' => trans('movie::app.tv_series'),
             'url' => route('admin.tv_series')
         ],
         [
@@ -34,7 +34,7 @@
             'url' => route('admin.tv_series.edit', ['id' => $movie->id])
         ],
         [
-            'name' => trans('app.servers'),
+            'name' => trans('movie::app.servers'),
             'url' => route('admin.movies.servers', [$page_type, $movie->id])
         ],
         [
@@ -49,19 +49,19 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="mb-0 card-title font-weight-bold">@lang('app.upload_videos')</h5>
+                        <h5 class="mb-0 card-title font-weight-bold">@lang('movie::app.upload_videos')</h5>
                     </div>
 
                     <div class="col-md-6">
                         <div class="float-right">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-success status-button" data-status="1"><i class="fa fa-check-circle"></i> @lang('app.enabled')</button>
-                                <button type="button" class="btn btn-warning status-button" data-status="0"><i class="fa fa-times-circle"></i> @lang('app.disabled')</button>
+                                <button type="button" class="btn btn-success status-button" data-status="1"><i class="fa fa-check-circle"></i> @lang('movie::app.enabled')</button>
+                                <button type="button" class="btn btn-warning status-button" data-status="0"><i class="fa fa-times-circle"></i> @lang('movie::app.disabled')</button>
                             </div>
 
                             <div class="btn-group">
-                                <a href="{{ route('admin.movies.servers.upload.create', [$page_type, $server->id]) }}" class="btn btn-success add-new-video"><i class="fa fa-plus-circle"></i> @lang('app.add_video')</a>
-                                <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('app.delete')</button>
+                                <a href="{{ route('admin.movies.servers.upload.create', [$page_type, $server->id]) }}" class="btn btn-success add-new-video"><i class="fa fa-plus-circle"></i> @lang('movie::app.add_video')</a>
+                                <button type="button" class="btn btn-danger" id="delete-item"><i class="fa fa-trash"></i> @lang('movie::app.delete')</button>
                             </div>
                         </div>
                     </div>
@@ -75,20 +75,20 @@
                         <form method="get" class="form-inline" id="form-search">
 
                             <div class="form-group mb-2 mr-1">
-                                <label for="inputName" class="sr-only">@lang('app.search')</label>
-                                <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('app.search')" autocomplete="off">
+                                <label for="inputName" class="sr-only">@lang('movie::app.search')</label>
+                                <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('movie::app.search')" autocomplete="off">
                             </div>
 
                             <div class="form-group mb-2 mr-1">
-                                <label for="inputStatus" class="sr-only">@lang('app.status')</label>
+                                <label for="inputStatus" class="sr-only">@lang('movie::app.status')</label>
                                 <select name="status" id="inputStatus" class="form-control">
-                                    <option value="">--- @lang('app.status') ---</option>
-                                    <option value="1">@lang('app.enabled')</option>
-                                    <option value="0">@lang('app.disabled')</option>
+                                    <option value="">--- @lang('movie::app.status') ---</option>
+                                    <option value="1">@lang('movie::app.enabled')</option>
+                                    <option value="0">@lang('movie::app.disabled')</option>
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('app.search')</button>
+                            <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('movie::app.search')</button>
                         </form>
                     </div>
                 </div>
@@ -98,12 +98,12 @@
                         <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                            <th data-field="label" data-width="15%" data-formatter="label_formatter">@lang('app.label')</th>
-                            <th data-field="url">@lang('app.url')</th>
-                            <th data-field="source" data-width="10%">@lang('app.source')</th>
-                            <th data-field="order" data-width="10%" data-align="center">@lang('app.order')</th>
-                            <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('app.status')</th>
-                            <th data-width="15%" data-field="action" data-align="center" data-formatter="action_formatter">@lang('app.action')</th>
+                            <th data-field="label" data-width="15%" data-formatter="label_formatter">@lang('movie::app.label')</th>
+                            <th data-field="url">@lang('movie::app.url')</th>
+                            <th data-field="source" data-width="10%">@lang('movie::app.source')</th>
+                            <th data-field="order" data-width="10%" data-align="center">@lang('movie::app.order')</th>
+                            <th data-width="15%" data-field="status" data-align="center" data-formatter="status_formatter">@lang('movie::app.status')</th>
+                            <th data-width="15%" data-field="action" data-align="center" data-formatter="action_formatter">@lang('movie::app.action')</th>
                         </tr>
                         </thead>
                     </table>

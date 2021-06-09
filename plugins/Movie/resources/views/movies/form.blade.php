@@ -10,7 +10,7 @@
     ])
         {{--@if($model->id)
             <div class="btn-group mr-5">
-                <a href="{{ route('admin.movies.servers', ['movies', $model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('app.upload_videos')</a>
+                <a href="{{ route('admin.movies.servers', ['movies', $model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('movie::app.upload_videos')</a>
             </div>
         @endif--}}
 
