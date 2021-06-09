@@ -20,7 +20,7 @@ class TmdbController extends BackendController
         if (empty(get_config('tmdb_api_key'))) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('app.tmdb_api_key_not_found'),
+                'message' => trans('movie::app.tmdb_api_key_not_found'),
             ]);
         }
         
@@ -28,7 +28,7 @@ class TmdbController extends BackendController
         if (empty($movie)) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('app.movie_not_found'),
+                'message' => trans('movie::app.movie_not_found'),
             ]);
         }
         
@@ -93,7 +93,7 @@ class TmdbController extends BackendController
             'poster' => 'https://image.tmdb.org/t/p/w780/'.$data['backdrop_path'],
             'rating' => $data['vote_average'],
             'release' => $data['release_date'],
-            'runtime' => @$data['runtime'] . ' ' . trans('app.min'),
+            'runtime' => @$data['runtime'] . ' ' . trans('movie::app.min'),
             'actors' => $actors,
             'directors' => $directors,
             'writers' => $writers,
@@ -124,7 +124,7 @@ class TmdbController extends BackendController
             'poster' => 'https://image.tmdb.org/t/p/w780/'.$data['backdrop_path'],
             'rating' => $data['vote_average'],
             'release' => $data['first_air_date'],
-            'runtime' => @$data['episode_run_time'][0] . ' ' . trans('app.min'),
+            'runtime' => @$data['episode_run_time'][0] . ' ' . trans('movie::app.min'),
             'actors' => $actors,
             'directors' => $directors,
             'writers' => $writers,

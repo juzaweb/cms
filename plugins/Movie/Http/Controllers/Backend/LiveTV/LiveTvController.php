@@ -20,7 +20,7 @@ class LiveTvController extends BackendController
         return view('movie::live-tv.form', [
             'model' => $model,
             'tags' => $tags,
-            'title' => $model->name ?: trans('app.add_new'),
+            'title' => $model->name ?: trans('movie::app.add_new'),
         ]);
     }
     
@@ -74,11 +74,11 @@ class LiveTvController extends BackendController
             'thumbnail' => 'nullable|string|max:250',
             'category_id' => 'nullable|exists:live_tv_categories,id',
         ], $request, [
-            'name' => trans('app.name'),
-            'description' => trans('app.description'),
-            'status' => trans('app.status'),
-            'thumbnail' => trans('app.thumbnail'),
-            'category_id' => trans('app.category'),
+            'name' => trans('movie::app.name'),
+            'description' => trans('movie::app.description'),
+            'status' => trans('movie::app.status'),
+            'thumbnail' => trans('movie::app.thumbnail'),
+            'category_id' => trans('movie::app.category'),
         ]);
     
         $tags = $request->post('tags', []);
@@ -91,7 +91,7 @@ class LiveTvController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies'),
         ]);
     }
@@ -101,8 +101,8 @@ class LiveTvController extends BackendController
             'ids' => 'required',
             'status' => 'required',
         ], $request, [
-            'ids' => trans('app.live_tv'),
-            'status' => trans('app.status'),
+            'ids' => trans('movie::app.live_tv'),
+            'status' => trans('movie::app.status'),
         ]);
     
         $ids = $request->post('ids');
@@ -115,7 +115,7 @@ class LiveTvController extends BackendController
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.updated_successfully'),
+            'message' => trans('movie::app.updated_successfully'),
         ]);
     }
     
@@ -123,7 +123,7 @@ class LiveTvController extends BackendController
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.live_tv')
+            'ids' => trans('movie::app.live_tv')
         ]);
     
         $ids = $request->post('ids');
@@ -131,7 +131,7 @@ class LiveTvController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('movie::app.deleted_successfully'),
         ]);
     }
 }

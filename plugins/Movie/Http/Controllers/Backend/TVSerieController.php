@@ -105,16 +105,16 @@ class TVSerieController extends BackendController
             'video_quality' => 'nullable|string|max:100',
             'trailer_link' => 'nullable|string|max:100',
         ], [], [
-            'name' => trans('app.name'),
-            'description' => trans('app.description'),
-            'status' => trans('app.status'),
-            'thumbnail' => trans('app.thumbnail'),
-            'poster' => trans('app.poster'),
-            'rating' => trans('app.rating'),
-            'release' => trans('app.release'),
-            'runtime' => trans('app.runtime'),
-            'video_quality' => trans('app.video_quality'),
-            'trailer_link' => trans('app.trailer'),
+            'name' => trans('movie::app.name'),
+            'description' => trans('movie::app.description'),
+            'status' => trans('movie::app.status'),
+            'thumbnail' => trans('movie::app.thumbnail'),
+            'poster' => trans('movie::app.poster'),
+            'rating' => trans('movie::app.rating'),
+            'release' => trans('movie::app.release'),
+            'runtime' => trans('movie::app.runtime'),
+            'video_quality' => trans('movie::app.video_quality'),
+            'trailer_link' => trans('movie::app.trailer'),
         ]);
 
         $model = Movie::firstOrNew(['id' => $request->post('id')]);
@@ -130,7 +130,7 @@ class TVSerieController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.tv_series'),
         ]);
     }
@@ -145,14 +145,14 @@ class TVSerieController extends BackendController
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.tv_series')
+            'ids' => trans('movie::app.tv_series')
         ]);
         
         Movie::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('movie::app.deleted_successfully'),
         ]);
     }
 }

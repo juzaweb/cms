@@ -16,7 +16,7 @@ class ServerStreamController extends BackendController
         $model = ServerStream::firstOrNew(['id' => $id]);
         return view('movie::server-stream.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('app.add_new')
+            'title' => $model->name ?: trans('movie::app.add_new')
         ]);
     }
     
@@ -68,11 +68,11 @@ class ServerStreamController extends BackendController
             'priority' => 'required|integer',
             'status' => 'required|in:0,1',
         ], $request, [
-            'key' => trans('app.key'),
-            'name' => trans('app.name'),
-            'base_url' => trans('app.base_url'),
-            'priority' => trans('app.priority'),
-            'status' => trans('app.status'),
+            'key' => trans('movie::app.key'),
+            'name' => trans('movie::app.name'),
+            'base_url' => trans('movie::app.base_url'),
+            'priority' => trans('movie::app.priority'),
+            'status' => trans('movie::app.status'),
         ]);
         
         $id = $request->post('id');
@@ -83,7 +83,7 @@ class ServerStreamController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.server-stream'),
         ]);
     }
@@ -93,8 +93,8 @@ class ServerStreamController extends BackendController
             'ids' => 'required',
             'status' => 'required|in:0,1',
         ], $request, [
-            'ids' => trans('app.server_stream'),
-            'status' => trans('app.status'),
+            'ids' => trans('movie::app.server_stream'),
+            'status' => trans('movie::app.status'),
         ]);
         
         $ids = $request->post('ids');
@@ -107,7 +107,7 @@ class ServerStreamController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.updated_successfully'),
+            'message' => trans('movie::app.updated_successfully'),
         ]);
     }
     
@@ -115,7 +115,7 @@ class ServerStreamController extends BackendController
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.server_stream')
+            'ids' => trans('movie::app.server_stream')
         ]);
         
         $ids = $request->post('ids');
@@ -123,7 +123,7 @@ class ServerStreamController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('movie::app.deleted_successfully'),
         ]);
     }
 }

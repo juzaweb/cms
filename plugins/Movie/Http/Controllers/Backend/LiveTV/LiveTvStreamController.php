@@ -20,7 +20,7 @@ class LiveTvStreamController extends BackendController
         $live_tv = LiveTv::findOrFail($live_tv_id);
         $model = LiveTvStream::firstOrNew(['id' => $id]);
         return view('movie::live-tv-stream.form', [
-            'title' => $model->label ?? trans('app.add_new'),
+            'title' => $model->label ?? trans('movie::app.add_new'),
             'model' => $model,
             'live_tv' => $live_tv
         ]);
@@ -69,8 +69,8 @@ class LiveTvStreamController extends BackendController
             'label' => 'required|string|max:250|unique:live_tv_streams,label,' . $request->post('id'),
             'status' => 'required|in:0,1',
         ], $request, [
-            'label' => trans('app.label'),
-            'status' => trans('app.status'),
+            'label' => trans('movie::app.label'),
+            'status' => trans('movie::app.status'),
         ]);
         
         $model = LiveTvStream::firstOrNew(['id' => $request->post('id')]);
@@ -80,7 +80,7 @@ class LiveTvStreamController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.live-tv.stream', [$live_tv_id]),
         ]);
     }
@@ -89,7 +89,7 @@ class LiveTvStreamController extends BackendController
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.genres')
+            'ids' => trans('movie::app.genres')
         ]);
     
         LiveTv::findOrFail($live_tv_id);
@@ -98,7 +98,7 @@ class LiveTvStreamController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('movie::app.deleted_successfully'),
         ]);
     }
 }

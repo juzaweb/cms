@@ -26,7 +26,7 @@ class MovieUploadController extends BackendController
         $model = VideoFiles::firstOrNew(['id' => $id]);
         
         return view('movie::movie_upload.form', [
-            'title' => $model->label ? $model->label : trans('app.add_new'),
+            'title' => $model->label ? $model->label : trans('movie::app.add_new'),
             'server' => $server,
             'movie' => $movie,
             'model' => $model,
@@ -82,18 +82,18 @@ class MovieUploadController extends BackendController
             //'url_upload' => 'required_if:source,upload|max:250',
             'order' => 'required|numeric',
         ], $request, [
-            'label' => trans('app.label'),
-            'source' => trans('app.source'),
-            'url' => trans('app.video_url'),
-            'url_upload' => trans('app.video_url'),
-            'order' => trans('app.order'),
+            'label' => trans('movie::app.label'),
+            'source' => trans('movie::app.source'),
+            'url' => trans('movie::app.video_url'),
+            'url_upload' => trans('movie::app.video_url'),
+            'order' => trans('movie::app.order'),
         ]);
         
         if ($request->post('source') == 'gdrive') {
             if (!get_google_drive_id($request->post('url'))) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => trans('app.cannot_get_google_drive_id'),
+                    'message' => trans('movie::app.cannot_get_google_drive_id'),
                 ]);
             }
         }
@@ -111,7 +111,7 @@ class MovieUploadController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies.servers.upload', [$page_type, $server_id]),
         ]);
     }
@@ -120,14 +120,14 @@ class MovieUploadController extends BackendController
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.servers'),
+            'ids' => trans('movie::app.servers'),
         ]);
     
         VideoFiles::destroy($request->post('ids', []));
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies.servers.upload', [
                 $page_type,
                 $server_id

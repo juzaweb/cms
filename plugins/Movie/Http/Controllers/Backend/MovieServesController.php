@@ -22,7 +22,7 @@ class MovieServesController extends BackendController
         $movie = Movie::where('id', '=', $movie_id)->firstOrFail();
         $model = VideoServers::firstOrNew(['id' => $server_id]);
         return view('movie::movie_servers.form', [
-            'title' => $model->name ? $model->name : trans('app.add_new'),
+            'title' => $model->name ? $model->name : trans('movie::app.add_new'),
             'movie' => $movie,
             'model' => $model,
             'page_type' => $page_type,
@@ -72,8 +72,8 @@ class MovieServesController extends BackendController
             'name' => 'required|string|max:100',
             'order' => 'required|numeric',
         ], $request, [
-            'name' => trans('app.name'),
-            'order' => trans('app.order'),
+            'name' => trans('movie::app.name'),
+            'order' => trans('movie::app.order'),
         ]);
         
         $model = VideoServers::firstOrNew(['id' => $request->post('id')]);
@@ -83,7 +83,7 @@ class MovieServesController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies.servers', [$page_type, $movie_id]),
         ]);
     }
@@ -92,7 +92,7 @@ class MovieServesController extends BackendController
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.servers'),
+            'ids' => trans('movie::app.servers'),
         ]);
         
         $movie_ids = VideoServers::where('movie_id', '=', $movie_id)
@@ -104,7 +104,7 @@ class MovieServesController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies.servers', [$page_type, $movie_id]),
         ]);
     }
