@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 trait UseThumbnail
 {
     
-    public static function bootUseThumbnail()
+    /*public static function bootUseThumbnail()
     {
         $thumbnail = request()->post('thumbnail');
         static::saving(function ($model) use ($thumbnail) {
@@ -25,7 +25,7 @@ trait UseThumbnail
                 $model->thumbnail = $model->cutPathThumbnail($thumbnail);
             }
         });
-    }
+    }*/
     
     public function getThumbnail($thumb = true) {
         if ($this->resize) {

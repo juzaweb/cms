@@ -24,6 +24,7 @@ return [
   'avatar' => 'Avatar',
   'choose_avatar' => 'Choose avatar',
   'saved_successfully' => 'Saved successfully.',
+  'created_successfully' => 'Created successfully.',
   'deleted_successfully' => 'Deleted successfully.',
   'approved_successfully' => 'Approved successfully.',
   'sync_successfully' => 'Sync successfully.',

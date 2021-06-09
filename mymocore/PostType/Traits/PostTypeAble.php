@@ -15,10 +15,15 @@
 namespace Mymo\PostType\Traits;
 
 use Illuminate\Support\Arr;
+use Mymo\Core\Traits\UseChangeBy;
+use Mymo\Core\Traits\UseSlug;
+use Mymo\Core\Traits\UseThumbnail;
 use Mymo\PostType\PostType;
 
 trait PostTypeAble
 {
+    use UseSlug, UseThumbnail, UseChangeBy;
+
     protected $postType;
 
     public function taxonomies()
@@ -37,22 +42,32 @@ trait PostTypeAble
                 continue;
             }
 
-            $data = Arr::get($attributes, $taxonomy->get('taxonomy'), []);
-            $detachIds = $this->taxonomies()
-                ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
-                ->whereNotIn('id', $data)
-                ->pluck('id')
-                ->toArray();
-
-            $this->taxonomies()->detach($detachIds);
-            $this->taxonomies()
-                ->syncWithoutDetaching(combine_pivot($data, [
-                    'term_type' => $postType
-                ]), ['term_type' => $postType]);
+            $this->syncTaxonomy($taxonomy->get('taxonomy'), $attributes, $postType);
         }
     }
 
-    protected function getPostType()
+    public function syncTaxonomy(string $taxonomy, array $attributes, string $postType = null)
+    {
+        if (!Arr::has($attributes, $taxonomy)) {
+            return;
+        }
+
+        $postType = $postType ?? $this->getPostType();
+        $data = Arr::get($attributes, $taxonomy, []);
+        $detachIds = $this->taxonomies()
+            ->where('taxonomy', '=', $taxonomy)
+            ->whereNotIn('id', $data)
+            ->pluck('id')
+            ->toArray();
+
+        $this->taxonomies()->detach($detachIds);
+        $this->taxonomies()
+            ->syncWithoutDetaching(combine_pivot($data, [
+                'term_type' => $postType
+            ]), ['term_type' => $postType]);
+    }
+
+    public function getPostType()
     {
         if ($this->postType) {
             return $this->postType;

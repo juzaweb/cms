@@ -2,21 +2,17 @@
 
 namespace Plugins\Movie\Models\Movie;
 
-use Mymo\Core\Traits\UseChangeBy;
-use Mymo\Core\Traits\UseSlug;
-use Mymo\Core\Traits\UseThumbnail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Mymo\PostType\Traits\PostTypeAble;
 
 class Movie extends Model
 {
-    use UseThumbnail, UseSlug, UseChangeBy, PostTypeAble;
+    use PostTypeAble;
 
-    protected $primaryKey = 'id';
-    protected $resize = '185x250';
     protected $fillable = [
         'name',
+        'thumbnail',
         'other_name',
         'description',
         'short_description',
@@ -32,7 +28,7 @@ class Movie extends Model
         'year',
         'status',
     ];
-    
+
     public function rating() {
         return $this->hasMany('Plugins\Movie\Models\Movie\MovieRating', 'movie_id', 'id');
     }

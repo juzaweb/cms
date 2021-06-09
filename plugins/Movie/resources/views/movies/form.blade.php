@@ -2,7 +2,12 @@
 
 @section('content')
 
-    @component('mymo_core::components.resource_form')
+    @component('mymo_core::components.form_resource', [
+        'method' => $model->id ? 'put' : 'post',
+        'action' =>  $model->id ?
+            route('admin.movies.update', [$model->id]) :
+            route('admin.movies.store')
+    ])
         {{--@if($model->id)
             <div class="btn-group mr-5">
                 <a href="{{ route('admin.movies.servers', ['movies', $model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('app.upload_videos')</a>

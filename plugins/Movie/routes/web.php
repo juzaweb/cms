@@ -12,10 +12,6 @@
 
 Route::group(['prefix' => config('mymo_core.admin_prefix'), 'middleware' => ['web', 'admin']], function () {
 
-    Route::postTypeResource('movies', 'Backend\MovieController');
-
-    Route::postTypeResource('tv-series', 'Backend\TVSerieController');
-
     Route::group(['prefix' => '{type}/servers'], function () {
         Route::get('/{movie_id}',
             'Backend\MovieServesController@index')->name('admin.movies.servers')->where('movie_id', '[0-9]+');
@@ -107,6 +103,10 @@ Route::group(['prefix' => config('mymo_core.admin_prefix'), 'middleware' => ['we
 
         Route::post('/remove', 'Backend\MovieDownloadController@remove')->name('admin.movies.download.remove');
     });
+
+    Route::postTypeResource('movies', 'Backend\MovieController');
+
+    Route::postTypeResource('tv-series', 'Backend\TVSerieController');
 
     require_once __DIR__ . '/backend/components/tmdb.route.php';
 });
