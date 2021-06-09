@@ -2,7 +2,7 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 use Plugins\Movie\Models\DownloadLink;
@@ -10,7 +10,7 @@ use Plugins\Movie\Models\DownloadLink;
 class MovieDownloadController extends BackendController
 {
     public function index($page_type, $movie_id) {
-        $movie = Movies::findOrFail($movie_id);
+        $movie = Movie::findOrFail($movie_id);
         
         return view('movie::download.index', [
             'movie_id' => $movie_id,
@@ -20,7 +20,7 @@ class MovieDownloadController extends BackendController
     }
     
     public function form($page_type, $movie_id, $id = null) {
-        $movie = Movies::findOrFail($movie_id);
+        $movie = Movie::findOrFail($movie_id);
         $model = DownloadLink::firstOrNew(['id' => $id]);
         
         return view('movie::download.form', [
@@ -33,7 +33,7 @@ class MovieDownloadController extends BackendController
     }
     
     public function getData($page_type, $movie_id, Request $request) {
-        Movies::findOrFail($movie_id);
+        Movie::findOrFail($movie_id);
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -74,7 +74,7 @@ class MovieDownloadController extends BackendController
     }
     
     public function save($page_type, $movie_id, Request $request) {
-        Movies::findOrFail($movie_id);
+        Movie::findOrFail($movie_id);
         
         $this->validateRequest([
             'label' => 'required|string|max:250',
@@ -101,7 +101,7 @@ class MovieDownloadController extends BackendController
     }
     
     public function remove($page_type, $movie_id, Request $request) {
-        Movies::findOrFail($movie_id);
+        Movie::findOrFail($movie_id);
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [

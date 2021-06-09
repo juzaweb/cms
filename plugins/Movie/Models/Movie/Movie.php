@@ -10,6 +10,7 @@ class Movie extends Model
 {
     use PostTypeAble;
 
+    protected $resize = '185x250';
     protected $fillable = [
         'name',
         'thumbnail',

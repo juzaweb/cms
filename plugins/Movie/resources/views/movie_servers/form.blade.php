@@ -1,10 +1,8 @@
-@extends('layouts.backend')
-
-@section('title', $title)
+@extends('mymo_core::layouts.backend')
 
 @section('content')
 
-    @if($movie->tv_series == 0)
+    {{--@if($movie->tv_series == 0)
     {{ Breadcrumbs::render('multiple_parent', [
             [
                 'name' => trans('app.movies'),
@@ -34,9 +32,8 @@
             'url' => route('admin.movies.servers', [$page_type, $movie->id])
         ]
     ], $model) }}
-    @endif
+    @endif--}}
 
-<div class="cui__utils__content">
     <form method="post" action="{{ route('admin.movies.servers.save', [$page_type, $movie->id]) }}" class="form-ajax">
         <div class="card">
             <div class="card-header">
@@ -85,5 +82,4 @@
             </div>
         </div>
     </form>
-</div>
 @endsection

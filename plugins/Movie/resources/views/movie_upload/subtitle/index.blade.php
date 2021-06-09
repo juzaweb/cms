@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('mymo_core::layouts.backend')
 
 @section('title', trans('app.subtitle'))
 
@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="table-responsive mb-5">
-                    <table class="table load-bootstrap-table">
+                    <table class="table mymo-table">
                         <thead>
                             <tr>
                                 <th data-width="3%" data-field="state" data-checkbox="true"></th>
@@ -117,7 +117,7 @@
             return '<span class="text-danger">@lang('app.disabled')</span>';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.movies.servers.upload.subtitle.getdata', [$page_type, $file_id]) }}',
             remove_url: '{{ route('admin.movies.servers.upload.subtitle.remove', [$page_type, $file_id]) }}',
         });

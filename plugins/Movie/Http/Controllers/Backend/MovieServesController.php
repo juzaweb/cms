@@ -2,7 +2,7 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\Video\VideoServers;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
@@ -10,15 +10,16 @@ use Mymo\Core\Http\Controllers\BackendController;
 class MovieServesController extends BackendController
 {
     public function index($page_type, $movie_id) {
-        $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
+        $movie = Movie::where('id', '=', $movie_id)->firstOrFail();
         return view('movie::movie_servers.index', [
             'movie' => $movie,
+            'title' => trans('movie::app.servers_video'),
             'page_type' => $page_type,
         ]);
     }
     
     public function form($page_type, $movie_id, $server_id = null) {
-        $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
+        $movie = Movie::where('id', '=', $movie_id)->firstOrFail();
         $model = VideoServers::firstOrNew(['id' => $server_id]);
         return view('movie::movie_servers.form', [
             'title' => $model->name ? $model->name : trans('app.add_new'),
@@ -29,7 +30,7 @@ class MovieServesController extends BackendController
     }
     
     public function getData($page_type, $movie_id, Request $request) {
-        Movies::where('id', '=', $movie_id)
+        Movie::where('id', '=', $movie_id)
             ->firstOrFail();
         
         $search = $request->get('search');

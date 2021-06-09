@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('mymo_core::layouts.backend')
 
 @section('title', trans('app.live_tv_categories'))
 
@@ -63,7 +63,7 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table load-bootstrap-table">
+                <table class="table mymo-table">
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
@@ -95,7 +95,7 @@
             return '<span class="text-danger">@lang('app.disabled')</span>';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.live-tv.category.getdata') }}',
             remove_url: '{{ route('admin.live-tv.category.remove') }}',
             status_url: '{{ route('admin.live-tv.category.publish') }}',

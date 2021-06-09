@@ -99,12 +99,12 @@
         function options_formatter(value, row, index) {
             let result = '<div class="dropdown d-inline-block mb-2 mr-2">\n' +
                 '          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">\n' +
-                '            '+ langs.options +'\n' +
+                '            Options' +
                 '          </button>\n' +
                 '          <div class="dropdown-menu" role="menu" style="">\n' +
-                '            <a href="'+ row.upload_url +'" class="dropdown-item">'+ langs.upload_videos +'</a>\n' +
-                '            <a href="'+ row.download_url +'" class="dropdown-item">'+ langs.download_videos +'</a>\n' +
-                '            <a href="'+ row.preview_url +'" target="_blank" class="dropdown-item">'+ langs.preview +'</a>\n' +
+                '            <a href="'+ row.upload_url +'" class="dropdown-item">Upload videos</a>\n' +
+                '            <a href="'+ row.download_url +'" class="dropdown-item">Download videos</a>\n' +
+                '            <a href="'+ row.preview_url +'" target="_blank" class="dropdown-item">Preview</a>\n' +
                 '          </div>\n' +
                 '        </div>';
             return result;

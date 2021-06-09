@@ -2,7 +2,7 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\Video\VideoServers;
 use Plugins\Movie\Models\Video\VideoFiles;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class MovieUploadController extends BackendController
     
     public function form($page_type, $server_id, $id = null) {
         $server = VideoServers::where('id', '=', $server_id)->firstOrFail();
-        $movie = Movies::where('id', '=', $server->movie_id)->firstOrFail();
+        $movie = Movie::where('id', '=', $server->movie_id)->firstOrFail();
         $model = VideoFiles::firstOrNew(['id' => $id]);
         
         return view('movie::movie_upload.form', [

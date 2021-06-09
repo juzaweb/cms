@@ -3,7 +3,7 @@
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 
 class YearController extends FrontendController
 {
@@ -12,7 +12,7 @@ class YearController extends FrontendController
             'name' => $year,
         ];
         
-        $items = Movies::select([
+        $items = Movie::select([
             'id',
             'name',
             'other_name',

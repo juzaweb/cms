@@ -4,7 +4,7 @@ namespace Plugins\Movie\Http\Controllers\Frontend\Account;
 
 use Mymo\Core\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\User;
 use Illuminate\Http\Request;
 
@@ -20,7 +20,7 @@ class ChangePasswordController extends FrontendController
             $viewed = [];
         }
         
-        $recently_visited = Movies::whereIn('id', $viewed)
+        $recently_visited = Movie::whereIn('id', $viewed)
             ->where('status', '=', 1)
             ->paginate(5);
         

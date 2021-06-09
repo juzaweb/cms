@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('mymo_core::layouts.backend')
 
 @section('title', trans('app.movies'))
 
@@ -67,7 +67,7 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table load-bootstrap-table">
+                <table class="table mymo-table">
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
@@ -112,7 +112,7 @@
         return result;
     }
 
-    var table = new LoadBootstrapTable({
+    var table = new MymoTable({
         url: '{{ route('admin.live-tv.getdata') }}',
         remove_url: '{{ route('admin.live-tv.remove') }}',
         status_url: '{{ route('admin.live-tv.publish') }}',

@@ -39,6 +39,6 @@ class DownloadLink extends Model
     ];
     
     public function movie() {
-        return $this->hasOne('Plugins\Movie\Models\Movie\Movies', 'id', 'movie_id');
+        return $this->hasOne('Plugins\Movie\Models\Movie\Movie', 'id', 'movie_id');
     }
 }

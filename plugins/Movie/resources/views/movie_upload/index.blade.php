@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('mymo_core::layouts.backend')
 
 @section('title', trans('app.upload'))
 
@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="table-responsive mb-5">
-                    <table class="table load-bootstrap-table">
+                    <table class="table mymo-table">
                         <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
@@ -130,7 +130,7 @@
             return str;
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.movies.servers.upload.getdata', [$page_type, $server->id]) }}',
             remove_url: '{{ route('admin.movies.servers.upload.remove', [$page_type, $server->id]) }}',
         });

@@ -2,7 +2,7 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 use Plugins\Movie\Models\Video\VideoFiles;
@@ -12,7 +12,7 @@ class SubtitleController extends BackendController
 {
     public function index($page_type, $file_id) {
         $file = VideoFiles::findOrFail($file_id);
-        $movie = Movies::findOrFail($file->server->movie_id);
+        $movie = Movie::findOrFail($file->server->movie_id);
         
         return view('movie::movie_upload.subtitle.index', [
             'page_type' => $page_type,
@@ -24,7 +24,7 @@ class SubtitleController extends BackendController
     
     public function form($page_type, $file_id, $id = null) {
         $file = VideoFiles::findOrFail($file_id);
-        $movie = Movies::findOrFail($file->server->movie_id);
+        $movie = Movie::findOrFail($file->server->movie_id);
         
         $model = Subtitle::firstOrNew(['id' => $id]);
         return view('movie::movie_upload.subtitle.form', [
