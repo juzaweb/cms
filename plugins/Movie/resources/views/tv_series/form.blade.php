@@ -1,11 +1,18 @@
 @extends('mymo_core::layouts.backend')
 
 @section('content')
-    {{--@if($model->id)
+    @if($model->id)
         <div class="btn-group mr-5">
             <a href="{{ route('admin.movies.servers', ['tv-series', $model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('movie::app.upload_videos')</a>
         </div>
-    @endif--}}
+    @endif
+
+    @component('mymo_core::components.form_resource', [
+        'method' => $model->id ? 'put' : 'post',
+        'action' =>  $model->id ?
+            route('admin.movies.update', [$model->id]) :
+            route('admin.movies.store')
+    ])
 
     <div class="row">
         <div class="col-md-8">
@@ -67,6 +74,10 @@
 
             {{--qualities--}}
 
+            @do_action('post_type.tv-series.form.left')
+        </div>
+
+        <div class="col-md-4">
             <div class="form-group">
                 <label class="col-form-label" for="status">@lang('movie::app.status')</label>
                 <select name="status" id="status" class="form-control" required>
@@ -74,10 +85,34 @@
                     <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('movie::app.disabled')</option>
                 </select>
             </div>
-        </div>
 
-        <div class="col-md-4">
+            @component('mymo_core::components.form_select', [
+                    'label' => trans('mymo_core::app.status'),
+                    'name' => 'status',
+                    'value' => $model->status,
+                    'options' => [
+                        'public' => trans('mymo_core::app.publish'),
+                        'private' => trans('mymo_core::app.private'),
+                        'draft' => trans('mymo_core::app.draft'),
+                    ],
+                ])
+            @endcomponent
 
+            @include('mymo_core::components.form_image', [
+                'label' => trans('movie::app.thumbnail'),
+                'name' => 'thumbnail',
+                'value' => $model->getThumbnail()
+            ])
+
+            @include('mymo_core::components.form_image', [
+                'label' => trans('movie::app.poster'),
+                'name' => 'poster',
+                'value' => $model->getPoster()
+            ])
+
+            @do_action('post_type.tv-series.form.rigth', $model)
         </div>
     </div>
+
+    @endcomponent
 @endsection

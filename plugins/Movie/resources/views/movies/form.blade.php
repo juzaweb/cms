@@ -8,11 +8,11 @@
             route('admin.movies.update', [$model->id]) :
             route('admin.movies.store')
     ])
-        {{--@if($model->id)
+        @if($model->id)
             <div class="btn-group mr-5">
                 <a href="{{ route('admin.movies.servers', ['movies', $model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('movie::app.upload_videos')</a>
             </div>
-        @endif--}}
+        @endif
 
     <div class="row">
         <div class="col-md-8">
@@ -64,7 +64,7 @@
                     'name' => 'status',
                     'value' => $model->status,
                     'options' => [
-                        'public' => trans('mymo_core::app.public'),
+                        'public' => trans('mymo_core::app.publish'),
                         'private' => trans('mymo_core::app.private'),
                         'draft' => trans('mymo_core::app.draft'),
                     ],

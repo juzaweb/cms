@@ -3,11 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-6">
-            <h5 class="mb-0 card-title font-weight-bold">@lang('movie::app.upload_videos')</h5>
-        </div>
-
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="float-right">
                 <div class="btn-group">
                     <button type="button" class="btn btn-success status-button" data-status="1"><i class="fa fa-check-circle"></i> @lang('movie::app.enabled')</button>
@@ -27,14 +23,13 @@
             <form method="get" class="form-inline" id="form-search">
 
                 <div class="form-group mb-2 mr-1">
-                    <label for="inputName" class="sr-only">@lang('movie::app.search')</label>
-                    <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('movie::app.search')" autocomplete="off">
+                    <label for="search" class="sr-only">@lang('movie::app.search')</label>
+                    <input name="search" type="text" id="search" class="form-control" placeholder="@lang('movie::app.search')" autocomplete="off">
                 </div>
 
                 <div class="form-group mb-2 mr-1">
-                    <label for="inputStatus" class="sr-only">@lang('movie::app.status')</label>
-                    <select name="status" id="inputStatus" class="form-control">
-                        <option value="">--- @lang('movie::app.status') ---</option>
+                    <label for="status" class="sr-only">@lang('movie::app.status')</label>
+                    <select name="status" id="status" class="form-control select2-default" data-placeholder="--- @lang('movie::app.status') ---">
                         <option value="1">@lang('movie::app.enabled')</option>
                         <option value="0">@lang('movie::app.disabled')</option>
                     </select>
