@@ -11,7 +11,7 @@ return [
     | 'active' => 'themeone',
     |
     */
-    'active'     => '',
+    'active'     => 'default',
 
     /*
     |--------------------------------------------------------------------------
@@ -98,11 +98,9 @@ return [
         'views'   => 'views',
         'lang'    => 'lang',
         'lang/en' => 'lang/en',
-
         'css' => 'assets/css',
         'js'  => 'assets/js',
         'img' => 'assets/images',
-
         'layouts' => 'views/layouts',
     ],
 

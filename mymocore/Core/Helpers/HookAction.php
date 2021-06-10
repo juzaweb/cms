@@ -49,7 +49,7 @@ class HookAction
             throw new \Exception('Permalink args default_base is required');
         }
 
-        add_filters('tadcms.permalinks', function ($items) use ($key, $args) {
+        add_filters('mymo.permalinks', function ($items) use ($key, $args) {
             array_merge([
                 'label' => '',
                 'base' => '',
