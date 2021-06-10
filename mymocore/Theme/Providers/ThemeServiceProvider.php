@@ -31,6 +31,7 @@ class ThemeServiceProvider extends ServiceProvider
         $this->registerHelper();
         $this->consoleCommand();
         $this->registerMiddleware();
+        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
