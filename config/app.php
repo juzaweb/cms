@@ -1,4 +1,16 @@
 <?php
+/**
+ * MYMO CMS - Free Laravel CMS
+ *
+ * @package    mymocms/mymocms
+ * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @link       https://github.com/mymocms/mymocms
+ * @license    MIT
+ *
+ * Created by The Anh.
+ * Date: 5/27/2021
+ * Time: 8:37 PM
+ */
 
 return [
 
@@ -174,7 +186,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Ip2location\IP2LocationLaravel\IP2LocationLaravelServiceProvider::class,
+        Mymo\Core\Providers\MymoCoreServiceProvider::class,
     ],
 
     /*
@@ -189,7 +201,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -225,15 +236,5 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-    ],
-    
-    'debug_blacklist' => [
-        '_COOKIE' => array_keys($_COOKIE),
-        '_SERVER' => array_keys($_SERVER),
-        '_ENV' => array_keys($_ENV),
-        '_POST' => array_keys($_POST),
-    ],
-    
-    'demo' => env('APP_DEMO', false),
+    ]
 ];

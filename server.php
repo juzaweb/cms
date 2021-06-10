@@ -1,10 +1,13 @@
 <?php
 
 /**
- * Laravel - A PHP Framework For Web Artisans
+ * MYMO CMS
  *
- * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
+ * @package mymocms/mymocms
+ * @author The Anh Dang
+ *
+ * Developed based on Laravel Framework
+ * Github: https://github.com/mymocms/mymocms
  */
 
 $uri = urldecode(

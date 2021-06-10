@@ -1,15 +1,13 @@
 <?php
 
-use Illuminate\Http\Request;
+/**
+ * MYMO CMS - API Routes
+ *
+ * @package mymocms/mymocms
+ * @author The Anh Dang
+ *
+ * Developed based on Laravel Framework
+ * Github: https://github.com/mymocms/mymocms
+ */
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 

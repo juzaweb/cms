@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Events\RegisterSuccess;
-use App\Listeners\RegisterSuccessListener;
+use App\Events\RegisterSuccessListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider

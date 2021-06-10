@@ -20,6 +20,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "minimist": "^1.2.5",
         "turbolinks": "^5.2.0"
     }
 }
