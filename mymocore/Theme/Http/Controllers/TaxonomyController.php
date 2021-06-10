@@ -2,7 +2,7 @@
 
 namespace Mymo\Theme\Http\Controllers;
 
-use Tadcms\System\Models\Taxonomy;
+use Mymo\PostType\Models\Taxonomy;
 
 class TaxonomyController
 {
@@ -14,7 +14,7 @@ class TaxonomyController
     public function content($slug)
     {
         $tax = Taxonomy::with(['translations'])
-            ->whereTranslation('slug', $slug)
+            ->where('slug', $slug)
             ->first();
         dd($tax);
     }
