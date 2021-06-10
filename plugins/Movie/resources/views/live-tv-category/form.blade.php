@@ -1,13 +1,6 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', $title)
-
 @section('content')
-
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('movie::app.live_tv_categories'),
-        'url' => route('admin.live-tv.category')
-    ], $model) }}
 
 <div class="cui__utils__content">
     <form method="post" action="{{ route('admin.live-tv.category.save') }}" class="form-ajax">

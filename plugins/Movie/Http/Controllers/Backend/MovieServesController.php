@@ -2,9 +2,9 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
+use Illuminate\Http\Request;
 use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\Video\VideoServers;
-use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 
 class MovieServesController extends BackendController

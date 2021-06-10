@@ -23,7 +23,7 @@
                 @csrf
                 <select name="bulk_actions" class="form-control w-60 mb-2 mr-1">
                     <option value="">@lang('mymo_core::app.bulk_actions')</option>
-                    <option value="public">@lang('mymo_core::app.public')</option>
+                    <option value="publish">@lang('mymo_core::app.publish')</option>
                     <option value="private">@lang('mymo_core::app.private')</option>
                     <option value="draft">@lang('mymo_core::app.draft')</option>
                     <option value="delete">@lang('mymo_core::app.delete')</option>

@@ -1,13 +1,6 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', $title)
-
 @section('content')
-
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('mymo_core::app.sliders'),
-        'url' => route('admin.design.sliders')
-    ], $model) }}
 
 <div class="cui__utils__content">
     <form method="post" action="{{ route('admin.design.sliders.save') }}" class="form-ajax">

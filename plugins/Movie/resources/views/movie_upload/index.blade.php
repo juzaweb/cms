@@ -68,14 +68,14 @@
 
         function status_formatter(value, row, index) {
             if (value == 1) {
-                return '<span class="text-success">'+ langs.enabled +'</span>';
+                return '<span class="text-success">'+ mymo.lang.enabled +'</span>';
             }
-            return '<span class="text-danger">'+ langs.disabled +'</span>';
+            return '<span class="text-danger">'+ mymo.lang.disabled +'</span>';
         }
 
         function action_formatter(value, row, index) {
             let str = '';
-            str += '<a href="'+ row.subtitle_url +'" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> '+ langs.add_subtitle +'</a>';
+            str += '<a href="'+ row.subtitle_url +'" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> '+ mymo.lang.add_subtitle +'</a>';
             return str;
         }
 

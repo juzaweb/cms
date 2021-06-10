@@ -20,8 +20,8 @@
                 </div>
 
                 <div class="form-group mb-2 mr-1">
-                    <label for="inputStatus" class="sr-only">@lang('movie::app.status')</label>
-                    <select name="status" id="inputStatus" class="form-control">
+                    <label for="status" class="sr-only">@lang('movie::app.status')</label>
+                    <select name="status" id="status" class="form-control">
                         <option value="">--- @lang('movie::app.status') ---</option>
                         <option value="1">@lang('movie::app.enabled')</option>
                         <option value="0">@lang('movie::app.disabled')</option>

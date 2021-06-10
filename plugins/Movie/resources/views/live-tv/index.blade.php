@@ -4,11 +4,6 @@
 
 @section('content')
 
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('movie::app.live_tv'),
-        'url' => route('admin.live-tv')
-    ]) }}
-
 <div class="cui__utils__content">
     <div class="card">
         <div class="card-header">
@@ -94,19 +89,19 @@
 
     function status_formatter(value, row, index) {
         if (value == 1) {
-            return '<span class="text-success">'+ langs.enabled +'</span>';
+            return '<span class="text-success">'+ mymo.lang.enabled +'</span>';
         }
-        return '<span class="text-danger">'+ langs.disabled +'</span>';
+        return '<span class="text-danger">'+ mymo.lang.disabled +'</span>';
     }
 
     function options_formatter(value, row, index) {
         let result = '<div class="dropdown d-inline-block mb-2 mr-2">\n' +
             '          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">\n' +
-            '            '+ langs.options +'\n' +
+            '            '+ mymo.lang.options +'\n' +
             '          </button>\n' +
             '          <div class="dropdown-menu" role="menu" style="">\n' +
-            '            <a href="'+ row.stream_url +'" class="dropdown-item">'+ langs.stream +'</a>\n' +
-            '            <a href="'+ row.preview_url +'" target="_blank" class="dropdown-item">'+ langs.preview +'</a>\n' +
+            '            <a href="'+ row.stream_url +'" class="dropdown-item">'+ mymo.lang.stream +'</a>\n' +
+            '            <a href="'+ row.preview_url +'" target="_blank" class="dropdown-item">'+ mymo.lang.preview +'</a>\n' +
             '          </div>\n' +
             '        </div>';
         return result;

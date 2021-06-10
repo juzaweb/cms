@@ -136,4 +136,8 @@ return [
     'upload' => 'Upload',
     'download' => 'Download',
     'order' => 'Order',
+    'source' => 'Source',
+    'url' => 'URL',
+    'label' => 'Label',
+    'action' => 'Action',
 ];

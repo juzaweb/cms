@@ -2,9 +2,9 @@
 
 namespace Plugins\Movie\Models\Movie;
 
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 use Mymo\PostType\Traits\PostTypeModel;
 
 class Movie extends Model
@@ -82,7 +82,8 @@ class Movie extends Model
         return $this->getThumbnail(false);
     }
     
-    public function getTrailerLink() {
+    public function getTrailerLink()
+    {
         if ($this->trailer_link) {
             return 'https://www.youtube.com/embed/' . get_youtube_id($this->trailer_link);
         }
@@ -90,17 +91,20 @@ class Movie extends Model
         return '';
     }
     
-    public function getServers($columns = ['id', 'name']) {
+    public function getServers($columns = ['id', 'name'])
+    {
         return $this->servers()
             ->where('status', '=', 1)
             ->get($columns);
     }
     
-    public function countRating() {
+    public function countRating()
+    {
         return $this->rating()->count(['id']);
     }
     
-    public function getStarRating() {
+    public function getStarRating()
+    {
         $total = $this->rating()->sum('start');
         $count = $this->countRating();
         if ($count <= 0) {
@@ -109,7 +113,8 @@ class Movie extends Model
         return round($total * 5 / ($count * 5), 2);
     }
     
-    public function getRelatedMovies(int $limit = 8) {
+    public function getRelatedMovies(int $limit = 8)
+    {
         $query = Movie::query();
         $query->select([
             'id',
@@ -135,8 +140,7 @@ class Movie extends Model
                     $builder->orWhereRaw('FIND_IN_SET(?, genres)', [$genre]);
                 }
             });
-        }
-        else {
+        } else {
             $query->whereRaw('1=2');
         }
         

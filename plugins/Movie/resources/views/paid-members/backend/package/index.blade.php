@@ -4,11 +4,6 @@
 
 @section('content')
 
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('mymo_core::app.packages'),
-        'url' => route('admin.package')
-    ]) }}
-
 <div class="cui__utils__content">
     <div class="card">
         <div class="card-header">

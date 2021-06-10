@@ -21,6 +21,9 @@ use Mymo\Core\Traits\UseSlug;
 use Mymo\Core\Traits\UseThumbnail;
 use Mymo\PostType\PostType;
 
+/**
+ * @method \Illuminate\Database\Eloquent\Builder wherePublish()
+ * */
 trait PostTypeModel
 {
     use ResourceModel, UseSlug, UseThumbnail, UseChangeBy;
@@ -66,6 +69,15 @@ trait PostTypeModel
             ]), ['term_type' => $postType]);
     }
 
+    public function getStatuses()
+    {
+        return [
+            'draft' => trans('mymo_core::app.draft'),
+            'publish' => trans('mymo_core::app.public'),
+            'private' => trans('mymo_core::app.private')
+        ];
+    }
+
     public function getPostType()
     {
         if (empty($this->postType)) {
@@ -73,5 +85,16 @@ trait PostTypeModel
         }
 
         return $this->postType;
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     **/
+    public function scopeWherePublish($builder)
+    {
+        $builder->where('status', '=', 'publish');
+        return $builder;
     }
 }

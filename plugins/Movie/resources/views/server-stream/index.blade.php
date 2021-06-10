@@ -4,11 +4,6 @@
 
 @section('content')
 
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('movie::app.server_stream'),
-        'url' => route('admin.server-stream')
-    ]) }}
-
 <div class="cui__utils__content">
     <div class="card">
         <div class="card-header">

@@ -1,13 +1,6 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', $title)
-
 @section('content')
-
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('movie::app.server_stream'),
-        'url' => route('admin.server-stream')
-    ], $model) }}
 
 <div class="cui__utils__content">
     <form method="post" action="{{ route('admin.server-stream.save') }}" class="form-ajax">

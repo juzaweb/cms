@@ -4,11 +4,6 @@
 
 @section('content')
 
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('movie::app.live_tv_categories'),
-        'url' => route('admin.live-tv.category')
-    ]) }}
-
 <div class="cui__utils__content">
     <div class="card">
         <div class="card-header">
