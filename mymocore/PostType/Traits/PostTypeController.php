@@ -120,7 +120,7 @@ trait PostTypeController
                 case 'delete':
                     $this->makeModel()->find($id)->delete($id);
                     break;
-                case 'public':
+                case 'publish':
                 case 'private':
                 case 'draft':
                     $this->makeModel()->find($id)->update([
@@ -140,6 +140,9 @@ trait PostTypeController
         return $this->getSetting()->get('label');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Model
+     * */
     protected function makeModel()
     {
         return app($this->getModel());
@@ -150,7 +153,7 @@ trait PostTypeController
         $validator = Validator::make($attributes, [
             'title' => 'required|string|max:250',
             'description' => 'nullable',
-            'status' => 'required|in:draft,public,trash,private',
+            'status' => 'required|in:draft,publish,trash,private',
             'thumbnail' => 'nullable|string|max:150',
         ]);
 

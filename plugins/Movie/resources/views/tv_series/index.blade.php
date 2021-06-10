@@ -34,14 +34,13 @@
                     <select name="country" id="country" class="form-control load-countries" data-placeholder="--- @lang('movie::app.country') ---"></select>
                 </div>
 
-                <div class="form-group mb-2 mr-1">
-                    <label for="inputStatus" class="sr-only">@lang('movie::app.status')</label>
-                    <select name="status" id="inputStatus" class="form-control">
-                        <option value="">--- @lang('movie::app.status') ---</option>
-                        <option value="1">@lang('movie::app.enabled')</option>
-                        <option value="0">@lang('movie::app.disabled')</option>
-                    </select>
-                </div>
+                <select name="bulk_actions" class="form-control w-60 mb-2 mr-1">
+                    <option value="">@lang('mymo_core::app.bulk_actions')</option>
+                    <option value="publish">@lang('mymo_core::app.publish')</option>
+                    <option value="private">@lang('mymo_core::app.private')</option>
+                    <option value="draft">@lang('mymo_core::app.draft')</option>
+                    <option value="delete">@lang('mymo_core::app.delete')</option>
+                </select>
 
                 <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('movie::app.search')</button>
             </form>

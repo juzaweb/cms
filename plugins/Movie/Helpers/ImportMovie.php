@@ -86,10 +86,7 @@ class ImportMovie
         $model->tags = $this->getTagsIds($this->data['tags']);
         $model->tv_series = $this->data['tv_series'] ? 1 : 0;
         $model->status = 1;
-    
-        $model->created_by = \Auth::check() ? \Auth::id() : 1;
-        $model->updated_by = \Auth::check() ? \Auth::id() : 1;
-    
+
         if ($model->release && empty($model->year)) {
             $model->year = explode('-', $model->release)[0];
         }

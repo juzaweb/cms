@@ -22,8 +22,6 @@ use Mymo\Core\Traits\UseThumbnail;
  * @property string|null $meta_description
  * @property string|null $keywords
  * @property int $views
- * @property int $created_by
- * @property int $updated_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|LiveTv newModelQuery()

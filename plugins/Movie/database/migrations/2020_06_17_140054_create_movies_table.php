@@ -27,7 +27,7 @@ class CreateMoviesTable extends Migration
             $table->integer('max_episode')->nullable();
             $table->tinyInteger('tv_series')->default(0);
             $table->tinyInteger('is_paid')->default(0);
-            $table->string('status')->default('draft');
+            $table->string('status', 50)->default('draft');
             $table->bigInteger('views')->default(0);
             $table->timestamps();
         });

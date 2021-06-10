@@ -23,8 +23,6 @@ class CreateLiveTvsTable extends Migration
             $table->text('tags')->nullable();
             $table->bigInteger('views')->default(0);
             $table->string('slug', 150)->unique();
-            $table->bigInteger('created_by')->index();
-            $table->bigInteger('updated_by')->index();
             $table->timestamps();
         });
     }

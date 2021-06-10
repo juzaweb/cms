@@ -54,7 +54,7 @@
                     <label for="status" class="sr-only">@lang('movie::app.status')</label>
                     <select name="status" id="status" class="form-control">
                         <option value="">--- @lang('movie::app.status') ---</option>
-                        <option value="public">@lang('mymo_core::app.public')</option>
+                        <option value="publish">@lang('mymo_core::app.public')</option>
                         <option value="private">@lang('mymo_core::app.private')</option>
                         <option value="draft">@lang('mymo_core::app.draft')</option>
                     </select>
@@ -90,10 +90,11 @@
         }
 
         function status_formatter(value, row, index) {
-            if (value == 1) {
-                return '<span class="text-success">'+ mymo.lang.enabled +'</span>';
+            if (row.status == 'publish') {
+                return '<span class="text-success">'+ mymo.lang.publish +'</span>';
             }
-            return '<span class="text-danger">'+ mymo.lang.disabled +'</span>';
+
+            return '<span class="text-danger">'+ mymo.lang[row.status] +'</span>';
         }
 
         function options_formatter(value, row, index) {

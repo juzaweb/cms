@@ -81,7 +81,7 @@ class TVSerieController extends BackendController
         $validator = Validator::make($attributes, [
             'name' => 'required|string|max:250',
             'description' => 'nullable',
-            'status' => 'required|in:0,1',
+            'status' => 'required|in:draft,publish,trash,private',
             'thumbnail' => 'nullable|string|max:250',
             'poster' => 'nullable|string|max:250',
             'rating' => 'nullable|string|max:25',

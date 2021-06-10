@@ -64,7 +64,7 @@
                     'name' => 'status',
                     'value' => $model->status,
                     'options' => [
-                        'public' => trans('mymo_core::app.publish'),
+                        'publish' => trans('mymo_core::app.publish'),
                         'private' => trans('mymo_core::app.private'),
                         'draft' => trans('mymo_core::app.draft'),
                     ],

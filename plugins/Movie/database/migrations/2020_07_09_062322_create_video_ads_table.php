@@ -15,9 +15,7 @@ class CreateVideoAdsTable extends Migration
             $table->string('url', 250);
             $table->string('description', 350)->nullable();
             $table->string('video_url', 250);
-            $table->tinyInteger('status')->default(1);
-            $table->bigInteger('created_by')->index();
-            $table->bigInteger('updated_by')->index();
+            $table->string('status', 50)->default('draft');
             $table->timestamps();
         });
     }
