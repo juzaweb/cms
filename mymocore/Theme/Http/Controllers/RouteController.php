@@ -22,6 +22,7 @@ class RouteController extends FrontendController
     public function index(Request $request, $base, $slug)
     {
         $permalinks = $this->getPermalinks();
+        dd($permalinks);
         $permalink = $permalinks->where('base', $base);
         if ($permalink) {
             if ($callback = $permalink->last()->get('callback')) {

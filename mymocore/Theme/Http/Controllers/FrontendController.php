@@ -12,7 +12,7 @@ class FrontendController extends Controller
      * Set a layout properties here, so you can globally
      * call it in all of your Controllers
      */
-    protected $layout = 'frontend::layout';
+    protected $layout = 'theme::layout';
 
     public function callAction($method, $parameters)
     {
