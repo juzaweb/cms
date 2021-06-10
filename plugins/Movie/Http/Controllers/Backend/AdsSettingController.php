@@ -4,7 +4,7 @@ namespace Mymo\Core\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
-use Mymo\Core\Models\Ads;
+use Plugins\Movie\Models\Ads;
 
 class AdsSettingController extends BackendController
 {

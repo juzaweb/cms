@@ -21,12 +21,6 @@ use Illuminate\Support\Arr;
  **/
 trait ResourceModel
 {
-    protected $fieldName;
-    /**
-     * @var array $searchAttributes
-     * */
-    protected $searchAttributes;
-
     /**
      * @param \Illuminate\Database\Eloquent\Builder $builder
      * @param array $params
@@ -53,7 +47,7 @@ trait ResourceModel
 
     public function getFieldName()
     {
-        if ($this->fieldName) {
+        if (!empty($this->fieldName)) {
             return $this->fieldName;
         }
 

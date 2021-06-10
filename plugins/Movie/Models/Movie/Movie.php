@@ -4,6 +4,7 @@ namespace Plugins\Movie\Models\Movie;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Mymo\PostType\Traits\PostTypeModel;
 
 class Movie extends Model
@@ -36,19 +37,36 @@ class Movie extends Model
         'other_name'
     ];
 
-    public function rating() {
+    public function fill(array $attributes)
+    {
+        if ($description = Arr::get($attributes, 'description')) {
+            $attributes['short_description'] = sub_words(strip_tags($description), 15);
+        }
+
+        if ($release = Arr::get($attributes, 'release')) {
+            $attributes['year'] = explode('-', $release)[0];
+        }
+
+        return parent::fill($attributes);
+    }
+
+    public function rating()
+    {
         return $this->hasMany('Plugins\Movie\Models\Movie\MovieRating', 'movie_id', 'id');
     }
     
-    public function servers() {
+    public function servers()
+    {
         return $this->hasMany('Plugins\Movie\Models\Video\VideoServers', 'movie_id', 'id');
     }
     
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany('Plugins\Movie\Models\Movie\MovieComments', 'movie_id', 'id');
     }
     
-    public function getViews() {
+    public function getViews()
+    {
         if ($this->views < 1000) {
             return $this->views;
         }

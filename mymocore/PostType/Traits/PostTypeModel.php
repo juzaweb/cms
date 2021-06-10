@@ -25,8 +25,6 @@ trait PostTypeModel
 {
     use ResourceModel, UseSlug, UseThumbnail, UseChangeBy;
 
-    protected $postType;
-
     public function taxonomies()
     {
         return $this->belongsToMany('Mymo\PostType\Models\Taxonomy', 'term_taxonomies', 'term_id', 'taxonomy_id')
@@ -70,10 +68,10 @@ trait PostTypeModel
 
     public function getPostType()
     {
-        if ($this->postType) {
-            return $this->postType;
+        if (empty($this->postType)) {
+            return $this->getTable();
         }
 
-        return $this->getTable();
+        return $this->postType;
     }
 }

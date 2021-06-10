@@ -20,7 +20,8 @@ class MovieController extends BackendController
         return Movie::class;
     }
 
-    public function getDataTable(Request $request) {
+    public function getDataTable(Request $request)
+    {
         $search = $request->get('search');
         $status = $request->get('status');
         $genre = $request->get('genre');

@@ -93,7 +93,8 @@ return array(
 
     'model_locations' => array(
         'app',
-        'mymocore/Core/Models'
+        'mymocore/Core/Models',
+        'plugins'
     ),
 
     /*
