@@ -20,7 +20,7 @@ trait PostTypeHookAction
     /**
      * TAD CMS: Creates or modifies a taxonomy object.
      * @param string $taxonomy (Required) Taxonomy key, must not exceed 32 characters.
-     * @param string $objectType
+     * @param array|string $objectType
      * @param array $args (Optional) Array of arguments for registering a post type.
      * @return void
      *
@@ -28,44 +28,46 @@ trait PostTypeHookAction
      */
     public function registerTaxonomy($taxonomy, $objectType, $args = [])
     {
-        $type = Str::singular($objectType);
-        $opts = [
-            'label' => '',
-            'label_type' => ucfirst($type) .' '. $args['label'],
-            'description' => '',
-            'hierarchical' => false,
-            'parent' => $objectType,
-            'menu_slug' => $type . '.' . $taxonomy,
-            'menu_position' => 20,
-            'menu_icon' => 'fa fa-list-ul',
-            'supports' => [
-                'thumbnail',
-                'hierarchical'
-            ],
-        ];
+        $objectTypes = is_string($objectType) ? [$objectType] : $objectType;
+        foreach ($objectTypes as $objectType) {
+            $type = Str::singular($objectType);
+            $opts = [
+                'label' => '',
+                'label_type' => ucfirst($type) .' '. $args['label'],
+                'description' => '',
+                'hierarchical' => false,
+                'parent' => $objectType,
+                'menu_slug' => $type . '.' . $taxonomy,
+                'menu_position' => 20,
+                'menu_icon' => 'fa fa-list',
+                'supports' => [
+                    'thumbnail',
+                    'hierarchical'
+                ],
+            ];
 
-        $args['type'] = $type;
-        $args['post_type'] = $objectType;
-        $args['taxonomy'] = $taxonomy;
-        $args['singular'] = Str::singular($taxonomy);
-        $args = collect(array_merge($opts, $args));
+            $iargs = $args;
+            $iargs['type'] = $type;
+            $iargs['post_type'] = $objectType;
+            $iargs['taxonomy'] = $taxonomy;
+            $iargs['singular'] = Str::singular($taxonomy);
+            $iargs = collect(array_merge($opts, $iargs));
 
-        add_filters('mymo.taxonomies', function ($items) use ($taxonomy, $objectType, $args) {
-            $items[$objectType][$taxonomy] = $args;
-            return $items;
-        });
+            add_filters('mymo.taxonomies', function ($items) use ($taxonomy, $objectType, $iargs) {
+                $items[$objectType][$taxonomy] = $iargs;
+                return $items;
+            });
 
-        $this->addAdminMenu(
-            $args->get('label'),
-            $args->get('menu_slug'),
-            [
-                'icon' => 'fa fa-list-alt',
-                'parent' => $args->get('parent'),
-                'position' => $args->get('menu_position')
-            ]
-        );
-
-
+            $this->addAdminMenu(
+                $iargs->get('label'),
+                $iargs->get('menu_slug'),
+                [
+                    'icon' => $iargs->get('menu_icon', 'fa fa-list'),
+                    'parent' => $iargs->get('parent'),
+                    'position' => $iargs->get('menu_position')
+                ]
+            );
+        }
     }
 
     /**
@@ -98,8 +100,8 @@ trait PostTypeHookAction
             $args->get('label'),
             $key,
             [
-                'icon' => 'fa fa-edit',
-                'position' => 15
+                'icon' => $args->get('menu_icon', 'fa fa-edit'),
+                'position' => $args->get('menu_position', 20)
             ]
         );
 
@@ -134,7 +136,7 @@ trait PostTypeHookAction
         if (in_array('tag', $args['supports'])) {
             $this->registerTaxonomy('tags', $key, [
                 'label' => trans('mymo_core::app.tags'),
-                'menu_position' => 5,
+                'menu_position' => 15,
                 'supports' => []
             ]);
         }

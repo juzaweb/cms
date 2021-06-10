@@ -63,7 +63,7 @@ HookAction::addAdminMenu(
 
 HookAction::addAdminMenu(
     trans('mymo_core::app.themes'),
-    'appearance.themes',
+    'themes',
     [
         'icon' => 'fa fa-paint-brush',
         'position' => 1,
@@ -73,7 +73,7 @@ HookAction::addAdminMenu(
 
 HookAction::addAdminMenu(
     trans('mymo_core::app.menu'),
-    'appearance.menu',
+    'menu',
     [
         'icon' => 'fa fa-list',
         'position' => 2,
@@ -83,7 +83,7 @@ HookAction::addAdminMenu(
 
 HookAction::addAdminMenu(
     trans('mymo_core::app.editor'),
-    'appearance.editor',
+    'editor',
     [
         'icon' => 'fa fa-edit',
         'position' => 3,

@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Mymo\Core\Traits\ResponseMessage;
+use Mymo\PostType\PostType;
 
 class BackendController extends Controller
 {
@@ -48,6 +49,16 @@ class BackendController extends Controller
                     ]);
                 }
             }
+        }
+
+        $types = PostType::getPostTypes();
+        foreach ($types as $key => $type) {
+            add_action('post_type.'.$key.'.form.rigth', function ($model) use ($key) {
+                echo view('mymo_core::components.taxonomies', [
+                    'postType' => $key,
+                    'model' => $model
+                ])->render();
+            });
         }
 
         return parent::callAction($method, $parameters);

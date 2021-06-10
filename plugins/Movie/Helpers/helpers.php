@@ -14,7 +14,7 @@ use Plugins\Movie\Models\Ads;
 use Plugins\Movie\Models\Category\Countries;
 use Plugins\Movie\Models\Category\Genres;
 use Plugins\Movie\Models\Category\Types;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 
 function get_ads(string $key) {
     $ads = Ads::where('key', '=', $key)
@@ -66,7 +66,7 @@ function genre_setting($setting) {
         $order[1] = 'DESC';
     }
 
-    $query = Movies::query();
+    $query = Movie::query();
     $query->select([
         'id',
         'name',

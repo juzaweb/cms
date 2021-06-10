@@ -44,8 +44,6 @@ class MoviesSeeder extends Seeder
                 'release' => $release,
                 'year' => explode('-', $release)[0],
                 'status' => 1,
-                'created_by' => 1,
-                'updated_by' => 1,
                 'created_at' => $faker->dateTime(),
                 'updated_at' => $faker->dateTime(),
             ]);

@@ -1,13 +1,6 @@
-@extends('layouts.backend')
-
-@section('title', $title)
+@extends('mymo_core::layouts.backend')
 
 @section('content')
-
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('app.live_tv_categories'),
-        'url' => route('admin.live-tv.category')
-    ], $model) }}
 
 <div class="cui__utils__content">
     <form method="post" action="{{ route('admin.live-tv.category.save') }}" class="form-ajax">
@@ -20,8 +13,8 @@
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
-                            <a href="{{ route('admin.live-tv.category') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('movie::app.save')</button>
+                            <a href="{{ route('admin.live-tv.category') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('movie::app.cancel')</a>
                         </div>
                     </div>
                 </div>
@@ -33,25 +26,25 @@
                     <div class="col-md-8">
 
                         <div class="form-group">
-                            <label class="col-form-label" for="name">@lang('app.name')</label>
+                            <label class="col-form-label" for="name">@lang('movie::app.name')</label>
 
                             <input type="text" name="name" class="form-control" id="name" value="{{ $model->name }}" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="description">@lang('app.description')</label>
+                            <label class="col-form-label" for="description">@lang('movie::app.description')</label>
                             <textarea class="form-control" name="description" id="description" rows="6">{{ $model->description }}</textarea>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="status">@lang('app.status')</label>
+                            <label class="col-form-label" for="status">@lang('movie::app.status')</label>
                             <select name="status" id="status" class="form-control">
-                                <option value="1" @if($model->status == 1) selected @endif>@lang('app.enabled')</option>
-                                <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
+                                <option value="1" @if($model->status == 1) selected @endif>@lang('movie::app.enabled')</option>
+                                <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('movie::app.disabled')</option>
                             </select>
                         </div>
 
-                        @include('backend.seo_form')
+
                     </div>
 
                     <div class="col-md-4">
@@ -62,7 +55,7 @@
                             </div>
 
                             <a href="javascript:void(0)" id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-capitalize">
-                                <i class="fa fa-picture-o"></i> @lang('app.choose_image')
+                                <i class="fa fa-picture-o"></i> @lang('movie::app.choose_image')
                             </a>
                         </div>
                     </div>

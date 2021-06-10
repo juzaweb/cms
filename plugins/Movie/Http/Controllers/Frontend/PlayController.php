@@ -5,7 +5,7 @@ namespace Plugins\Movie\Http\Controllers\Frontend;
 use Mymo\Core\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
 use Plugins\Movie\Models\Category\Genres;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\Movie\MovieViews;
 use Plugins\Movie\Models\Video\VideoAds;
 use Plugins\Movie\Models\Video\VideoFiles;
@@ -13,7 +13,7 @@ use Plugins\Movie\Models\Video\VideoFiles;
 class PlayController extends FrontendController
 {
     public function index($slug, $vid) {
-        $info = Movies::where('slug', '=', $slug)
+        $info = Movie::where('slug', '=', $slug)
             ->where('status', '=', 1)
             ->firstOrFail();
         $genre = Genres::where('status', '=', 1)
@@ -37,7 +37,7 @@ class PlayController extends FrontendController
     }
     
     public function getPlayer($slug, $vid) {
-        $movie = Movies::where('slug', '=', $slug)
+        $movie = Movie::where('slug', '=', $slug)
             ->where('status', '=', 1)
             ->firstOrFail();
     
@@ -85,7 +85,7 @@ class PlayController extends FrontendController
     }
     
     public function setMovieView($slug) {
-        $movie = Movies::where('slug', '=', $slug)
+        $movie = Movie::where('slug', '=', $slug)
             ->where('status', '=', 1)
             ->firstOrFail(['id', 'views']);
     
@@ -111,7 +111,7 @@ class PlayController extends FrontendController
         $viewed[] = $movie->id;
         Cookie::queue('viewed', json_encode($viewed), 1440);
         
-        Movies::where('id', '=', $movie->id)
+        Movie::where('id', '=', $movie->id)
             ->update([
                 'views' => $views
             ]);

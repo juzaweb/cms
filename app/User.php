@@ -51,6 +51,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereVerificationToken($value)
  * @property int|null $package_id
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePackageId($value)
+ * @property string|null $end_date
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEndDate($value)
  */
 class User extends Authenticatable
 {

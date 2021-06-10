@@ -6,12 +6,12 @@ use Mymo\Core\Http\Controllers\FrontendController;
 use Plugins\Movie\Models\DownloadLink;
 use Plugins\Movie\Models\Video\VideoServers;
 use Plugins\Movie\Models\Category\Genres;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 
 class WatchController extends FrontendController
 {
     public function index($slug) {
-        $info = Movies::where('slug', '=', $slug)
+        $info = Movie::where('slug', '=', $slug)
             ->where('status', '=', 1)
             ->firstOrFail();
         

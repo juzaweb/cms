@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="turbolinks-cache-control" content="no-cache">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('styles/images/icon.png') }}" />

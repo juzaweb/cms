@@ -1,7 +1,7 @@
 @extends('mymo_core::layouts.backend')
 
 @section('content')
-    @component('mymo_core::components.resource_form', [
+    @component('mymo_core::components.form_resource', [
         'action' => $model->id ? route('admin.notification.update', [$model->id]) :
                     route('admin.notification.store'),
         'method' => $model->id ? 'put' : 'post'

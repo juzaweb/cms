@@ -8,7 +8,7 @@ use Plugins\Movie\Models\Category\Stars;
 use Plugins\Movie\Models\Category\Tags;
 use Plugins\Movie\Models\Category\Types;
 use Plugins\Movie\Models\LiveTV\LiveTvCategory;
-use Plugins\Movie\Models\Sliders;
+use Plugins\Movie\Models\Slider;
 use Plugins\Movie\Models\Category\Countries;
 use Plugins\Movie\Models\Category\Genres;
 
@@ -195,7 +195,7 @@ class LoadDataController extends BackendController
         $search = $request->get('search');
         $explodes = $request->get('explodes');
 
-        $query = Sliders::query();
+        $query = Slider::query();
         $query->select([
             'id',
             'name AS text'

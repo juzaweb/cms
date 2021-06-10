@@ -3,7 +3,7 @@
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 
 class LatestMoviesController extends FrontendController
 {
@@ -12,7 +12,7 @@ class LatestMoviesController extends FrontendController
             'name' => trans('app.latest_movies'),
         ];
         
-        $items = Movies::where('status', '=', 1)
+        $items = Movie::where('status', '=', 1)
             ->orderBy('id', 'DESC')
             ->paginate(20);
         

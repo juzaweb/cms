@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @component('mymo_core::components.resource_form', [
+    @component('mymo_core::components.form_resource', [
         'action' => route('admin.users.save')
     ])
         <div class="row">

@@ -3,7 +3,7 @@
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\Category\Tags;
 
 class TagController extends FrontendController
@@ -12,7 +12,7 @@ class TagController extends FrontendController
         $info = Tags::where('slug', '=', $slug)
             ->firstOrFail(['id', 'name']);
         
-        $items = Movies::select([
+        $items = Movie::select([
             'id',
             'name',
             'other_name',

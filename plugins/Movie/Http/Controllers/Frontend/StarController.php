@@ -3,7 +3,7 @@
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\Category\Stars;
 
 class StarController extends FrontendController
@@ -13,7 +13,7 @@ class StarController extends FrontendController
             ->where('status', '=', 1)
             ->firstOrFail(['name', 'slug']);
     
-        $items = Movies::select([
+        $items = Movie::select([
             'id',
             'name',
             'other_name',

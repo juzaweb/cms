@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/components/tmdb.route.php';
 require_once __DIR__ . '/components/live-tv.route.php';
-require_once __DIR__ . '/components/server-stream.route.php';
+//require_once __DIR__ . '/components/server-stream.route.php';
 
 Route::group(['prefix' => 'genres'], function () {
     Route::get('/', 'Backend\GenresController@index')->name('admin.genres');
@@ -58,5 +58,19 @@ Route::group(['prefix' => 'stars'], function () {
     Route::post('/save', 'Backend\StarsController@save')->name('admin.stars.save');
     
     Route::post('/remove', 'Backend\StarsController@remove')->name('admin.stars.remove');
+});
+
+Route::group(['prefix' => 'sliders'], function () {
+    Route::get('/', 'Backend\Design\SlidersController@index')->name('admin.design.sliders');
+
+    Route::get('/getdata', 'Backend\Design\SlidersController@getData')->name('admin.design.sliders.getdata');
+
+    Route::get('/create', 'Backend\Design\SlidersController@form')->name('admin.design.sliders.create');
+
+    Route::get('/edit/{id}', 'Backend\Design\SlidersController@form')->name('admin.design.sliders.edit')->where('id', '[0-9]+');
+
+    Route::post('/save', 'Backend\Design\SlidersController@save')->name('admin.design.sliders.save');
+
+    Route::post('/remove', 'Backend\Design\SlidersController@remove')->name('admin.design.sliders.remove');
 });
 

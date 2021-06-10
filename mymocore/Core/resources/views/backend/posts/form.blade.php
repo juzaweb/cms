@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @component('mymo_core::components.resource_form', [
+    @component('mymo_core::components.form_resource', [
         'method' => $model->id ? 'put' : 'post',
         'action' =>  $model->id ?
             route('admin.posts.update', [$model->id]) :

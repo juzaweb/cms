@@ -3,7 +3,7 @@
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Http\Request;
 
 class AjaxGetController extends FrontendController
@@ -12,7 +12,7 @@ class AjaxGetController extends FrontendController
         $genre = $request->get('cat_id');
         $showpost = $request->get('showpost', 12);
         
-        $query = Movies::select([
+        $query = Movie::select([
             'id',
             'name',
             'other_name',
@@ -47,7 +47,7 @@ class AjaxGetController extends FrontendController
     }
     
     protected function getPopular($type) {
-        $query = Movies::select([
+        $query = Movie::select([
             'id',
             'name',
             'other_name',

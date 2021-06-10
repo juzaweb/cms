@@ -1,13 +1,6 @@
 @extends('mymo_core::layouts.backend')
 
-@section('title', trans('mymo_core::app.sliders'))
-
 @section('content')
-
-{{ Breadcrumbs::render('manager', [
-        'name' => trans('mymo_core::app.sliders'),
-        'url' => route('admin.design.sliders')
-    ]) }}
 
 <div class="cui__utils__content">
     <div class="card">
@@ -45,7 +38,7 @@
             </div>
 
             <div class="table-responsive mb-5">
-                <table class="table load-bootstrap-table">
+                <table class="table mymo-table">
                     <thead>
                         <tr>
                             <th data-width="3%" data-field="state" data-checkbox="true"></th>
@@ -75,7 +68,7 @@
             return '<span class="text-danger">@lang('mymo_core::app.disabled')</span>';
         }
 
-        var table = new LoadBootstrapTable({
+        var table = new MymoTable({
             url: '{{ route('admin.design.sliders.getdata') }}',
             remove_url: '{{ route('admin.design.sliders.remove') }}',
         });

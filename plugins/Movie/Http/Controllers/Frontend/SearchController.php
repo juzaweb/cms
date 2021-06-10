@@ -5,7 +5,7 @@ namespace Plugins\Movie\Http\Controllers\Frontend;
 use Mymo\Core\Http\Controllers\FrontendController;
 use Plugins\Movie\Models\Category\Countries;
 use Plugins\Movie\Models\Category\Genres;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -22,7 +22,7 @@ class SearchController extends FrontendController
         $formality = $request->get('formality');
         $status = $request->get('status');
         
-        $query = Movies::select([
+        $query = Movie::select([
             'id',
             'name',
             'other_name',
@@ -118,7 +118,7 @@ class SearchController extends FrontendController
             ->get(['id', 'name']);
         $countries = Countries::where('status', '=', 1)
             ->get(['id', 'name']);
-        $years = Movies::where('status', '=', 1)
+        $years = Movie::where('status', '=', 1)
             ->groupBy('year')
             ->get(['year']);
         

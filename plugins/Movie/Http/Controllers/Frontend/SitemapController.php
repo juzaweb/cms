@@ -5,7 +5,7 @@ namespace Plugins\Movie\Http\Controllers\Frontend;
 use Mymo\Core\Http\Controllers\BackendController;
 use Plugins\Movie\Models\Category\Countries;
 use Plugins\Movie\Models\Category\Genres;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\PostCategories;
 use Plugins\Movie\Models\Posts;
 
@@ -28,7 +28,7 @@ class SitemapController extends BackendController
     public function sitemapMovies() {
         $sitemap = \App::make("sitemap");
         $sitemap->setCache('sitemap-post', 3600);
-        $items = Movies::where('status', '=', 1)
+        $items = Movie::where('status', '=', 1)
             ->where('tv_series', '=', 0)
             ->paginate($this->per_page, ['id']);
         
@@ -44,7 +44,7 @@ class SitemapController extends BackendController
     public function sitemapMoviesList($page) {
         $sitemap = \App::make("sitemap");
         $sitemap->setCache('sitemap-posts', 3600);
-        $items = Movies::where('status', '=', 1)
+        $items = Movie::where('status', '=', 1)
             ->where('tv_series', '=', 0)
             ->paginate($this->per_page, ['updated_at', 'slug'], 'page', $page);
         
@@ -58,7 +58,7 @@ class SitemapController extends BackendController
     public function sitemapTVSeries() {
         $sitemap = \App::make("sitemap");
         $sitemap->setCache('sitemap-post', 3600);
-        $items = Movies::where('status', '=', 1)
+        $items = Movie::where('status', '=', 1)
             ->where('tv_series', '=', 1)
             ->paginate($this->per_page, ['id']);
         
@@ -74,7 +74,7 @@ class SitemapController extends BackendController
     public function sitemapTVSeriesList($page) {
         $sitemap = \App::make("sitemap");
         $sitemap->setCache('sitemap-posts', 3600);
-        $items = Movies::where('status', '=', 1)
+        $items = Movie::where('status', '=', 1)
             ->where('tv_series', '=', 1)
             ->paginate($this->per_page, ['updated_at', 'slug'], 'page', $page);
         

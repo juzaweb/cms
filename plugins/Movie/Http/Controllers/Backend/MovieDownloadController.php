@@ -2,7 +2,7 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 use Plugins\Movie\Models\DownloadLink;
@@ -10,30 +10,31 @@ use Plugins\Movie\Models\DownloadLink;
 class MovieDownloadController extends BackendController
 {
     public function index($page_type, $movie_id) {
-        $movie = Movies::findOrFail($movie_id);
+        $movie = Movie::findOrFail($movie_id);
         
-        return view('backend.download.index', [
+        return view('movie::download.index', [
             'movie_id' => $movie_id,
             'movie' => $movie,
             'page_type' => $page_type,
+            'title' => trans('movie::app.download_videos')
         ]);
     }
     
     public function form($page_type, $movie_id, $id = null) {
-        $movie = Movies::findOrFail($movie_id);
+        $movie = Movie::findOrFail($movie_id);
         $model = DownloadLink::firstOrNew(['id' => $id]);
         
-        return view('backend.download.form', [
+        return view('movie::download.form', [
             'movie_id' => $movie_id,
             'movie' => $movie,
             'page_type' => $page_type,
             'model' => $model,
-            'title' => $model->lable ? $model->lable : trans('app.add_new'),
+            'title' => $model->lable ? $model->lable : trans('movie::app.add_new'),
         ]);
     }
     
     public function getData($page_type, $movie_id, Request $request) {
-        Movies::findOrFail($movie_id);
+        Movie::findOrFail($movie_id);
         $search = $request->get('search');
         $status = $request->get('status');
         
@@ -74,7 +75,7 @@ class MovieDownloadController extends BackendController
     }
     
     public function save($page_type, $movie_id, Request $request) {
-        Movies::findOrFail($movie_id);
+        Movie::findOrFail($movie_id);
         
         $this->validateRequest([
             'label' => 'required|string|max:250',
@@ -82,10 +83,10 @@ class MovieDownloadController extends BackendController
             'order' => 'required|numeric|max:300',
             'status' => 'required|in:0,1',
         ], $request, [
-            'label' => trans('app.label'),
-            'url' => trans('app.url'),
-            'order' => trans('app.order'),
-            'status' => trans('app.status'),
+            'label' => trans('movie::app.label'),
+            'url' => trans('movie::app.url'),
+            'order' => trans('movie::app.order'),
+            'status' => trans('movie::app.status'),
         ]);
         
         $model = DownloadLink::firstOrNew(['id' => $request->post('id')]);
@@ -95,24 +96,24 @@ class MovieDownloadController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies.download', [$page_type, $movie_id]),
         ]);
     }
     
     public function remove($page_type, $movie_id, Request $request) {
-        Movies::findOrFail($movie_id);
+        Movie::findOrFail($movie_id);
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.subtitle')
+            'ids' => trans('movie::app.subtitle')
         ]);
         
         DownloadLink::destroy($request->post('ids'));
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.deleted_successfully'),
+            'message' => trans('movie::app.deleted_successfully'),
         ]);
     }
 }

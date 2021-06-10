@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $tags
  * @property int $status
  * @property int $views
- * @property \Mymo\Core\Models\User|null $created_by
  * @property int $updated_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -60,11 +59,6 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany('Mymo\PostType\Models\Comment', 'post_id', 'id');
-    }
-    
-    public function createdBy()
-    {
-        return $this->hasOne('Mymo\Core\Models\User', 'id', 'created_by');
     }
 
     public function taxonomies()

@@ -2,26 +2,27 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use Plugins\Movie\Models\Movie\Movies;
-use Plugins\Movie\Models\Video\VideoServers;
 use Illuminate\Http\Request;
+use Plugins\Movie\Models\Movie\Movie;
+use Plugins\Movie\Models\Video\VideoServers;
 use Mymo\Core\Http\Controllers\BackendController;
 
 class MovieServesController extends BackendController
 {
     public function index($page_type, $movie_id) {
-        $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
-        return view('backend.movie_servers.index', [
+        $movie = Movie::where('id', '=', $movie_id)->firstOrFail();
+        return view('movie::movie_servers.index', [
             'movie' => $movie,
+            'title' => trans('movie::app.servers_video'),
             'page_type' => $page_type,
         ]);
     }
     
     public function form($page_type, $movie_id, $server_id = null) {
-        $movie = Movies::where('id', '=', $movie_id)->firstOrFail();
+        $movie = Movie::where('id', '=', $movie_id)->firstOrFail();
         $model = VideoServers::firstOrNew(['id' => $server_id]);
-        return view('backend.movie_servers.form', [
-            'title' => $model->name ? $model->name : trans('app.add_new'),
+        return view('movie::movie_servers.form', [
+            'title' => $model->name ? $model->name : trans('movie::app.add_new'),
             'movie' => $movie,
             'model' => $model,
             'page_type' => $page_type,
@@ -29,7 +30,7 @@ class MovieServesController extends BackendController
     }
     
     public function getData($page_type, $movie_id, Request $request) {
-        Movies::where('id', '=', $movie_id)
+        Movie::where('id', '=', $movie_id)
             ->firstOrFail();
         
         $search = $request->get('search');
@@ -71,8 +72,8 @@ class MovieServesController extends BackendController
             'name' => 'required|string|max:100',
             'order' => 'required|numeric',
         ], $request, [
-            'name' => trans('app.name'),
-            'order' => trans('app.order'),
+            'name' => trans('movie::app.name'),
+            'order' => trans('movie::app.order'),
         ]);
         
         $model = VideoServers::firstOrNew(['id' => $request->post('id')]);
@@ -80,9 +81,8 @@ class MovieServesController extends BackendController
         $model->movie_id = $movie_id;
         $model->save();
         
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+        return $this->success([
+            'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.movies.servers', [$page_type, $movie_id]),
         ]);
     }
@@ -91,7 +91,7 @@ class MovieServesController extends BackendController
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('app.servers'),
+            'ids' => trans('movie::app.servers'),
         ]);
         
         $movie_ids = VideoServers::where('movie_id', '=', $movie_id)
@@ -103,7 +103,7 @@ class MovieServesController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.saved_successfully'),
+            'message' => trans('movie::app.saved_successfully'),
             'redirect' => route('admin.movies.servers', [$page_type, $movie_id]),
         ]);
     }

@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\Plugins\Movie\Models\Video\VideoServers whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Plugins\Movie\Models\Video\VideoServers whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Plugins\Movie\Models\Movie\Movies $movie
+ * @property-read \Plugins\Movie\Models\Movie\Movie $movie
  * @property-read \Illuminate\Database\Eloquent\Collection|\Plugins\Movie\Models\Video\VideoFiles[] $video_files
  * @property-read int|null $video_files_count
  */
@@ -40,7 +40,7 @@ class VideoServers extends Model
     ];
     
     public function movie() {
-        return $this->hasOne('Plugins\Movie\Models\Movie\Movies', 'id', 'movie_id');
+        return $this->hasOne('Plugins\Movie\Models\Movie\Movie', 'id', 'movie_id');
     }
     
     public function video_files() {

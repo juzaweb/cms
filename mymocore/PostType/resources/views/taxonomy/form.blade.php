@@ -5,7 +5,7 @@
         $type = $setting->get('type');
     @endphp
 
-    @component('mymo_core::components.form', [
+    @component('mymo_core::components.form_resource', [
         'method' => $model->id ? 'put' : 'post',
         'action' => $model->id ?
             route('admin.'. $type .'.taxonomy.update', [$taxonomy, $model->id]) :

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MYMO CMS - TV Series & Movie Portal CMS Unlimited
+ * MYMO CMS - Free Laravel CMS
  *
  * @package mymocms/mymocms
  * @author The Anh Dang
@@ -10,37 +10,7 @@
  * Github: https://github.com/mymocms/mymocms
  */
 
-Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], function () {
-
-    Route::group(['prefix' => 'movies'], function () {
-        Route::get('/', 'Backend\MoviesController@index')->name('admin.movies');
-
-        Route::get('/getdata', 'Backend\MoviesController@getData')->name('admin.movies.getdata');
-
-        Route::get('/create', 'Backend\MoviesController@form')->name('admin.movies.create');
-
-        Route::get('/edit/{id}', 'Backend\MoviesController@form')->name('admin.movies.edit')->where('id',
-            '[0-9]+');
-
-        Route::post('/save', 'Backend\MoviesController@save')->name('admin.movies.save');
-
-        Route::post('/remove', 'Backend\MoviesController@remove')->name('admin.movies.remove');
-    });
-
-    Route::group(['prefix' => 'tv-series'], function () {
-        Route::get('/', 'Backend\TVSeriesController@index')->name('admin.tv_series');
-
-        Route::get('/getdata', 'Backend\TVSeriesController@getData')->name('admin.tv_series.getdata');
-
-        Route::get('/create', 'Backend\TVSeriesController@form')->name('admin.tv_series.create');
-
-        Route::get('/edit/{id}', 'Backend\TVSeriesController@form')->name('admin.tv_series.edit')->where('id',
-            '[0-9]+');
-
-        Route::post('/save', 'Backend\TVSeriesController@save')->name('admin.tv_series.save');
-
-        Route::post('/remove', 'Backend\TVSeriesController@remove')->name('admin.tv_series.remove');
-    });
+Route::group(['prefix' => config('mymo_core.admin_prefix'), 'middleware' => ['web', 'admin']], function () {
 
     Route::group(['prefix' => '{type}/servers'], function () {
         Route::get('/{movie_id}',
@@ -134,22 +104,11 @@ Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], functio
         Route::post('/remove', 'Backend\MovieDownloadController@remove')->name('admin.movies.download.remove');
     });
 
-    Route::group(['prefix' => 'video-qualities'], function () {
-        Route::get('/', 'Backend\Setting\VideoQualityController@index')->name('admin.video_qualities');
+    Route::postTypeResource('movies', 'Backend\MovieController');
 
-        Route::get('/getdata', 'Backend\Setting\VideoQualityController@getData')->name('admin.video_qualities.getdata');
+    Route::postTypeResource('tv-series', 'Backend\TVSerieController');
 
-        Route::get('/create', 'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.create');
-
-        Route::get('/edit/{id}',
-            'Backend\Setting\VideoQualityController@form')->name('admin.video_qualities.edit')->where('id', '[0-9]+');
-
-        Route::post('/save', 'Backend\Setting\VideoQualityController@save')->name('admin.video_qualities.save');
-
-        Route::post('/remove', 'Backend\Setting\VideoQualityController@remove')->name('admin.video_qualities.remove');
-    });
-
-    require (__DIR__ . '/backend/backend.route.php');
+    require_once __DIR__ . '/backend/components/tmdb.route.php';
 });
 
 require __DIR__ . '/frontend/frontend.route.php';

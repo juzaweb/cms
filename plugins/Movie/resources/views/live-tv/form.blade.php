@@ -1,12 +1,6 @@
-@extends('layouts.backend')
-
-@section('title', $title)
+@extends('mymo_core::layouts.backend')
 
 @section('content')
-    {{ Breadcrumbs::render('manager', [
-            'name' => trans('app.live_tv'),
-            'url' => route('admin.live-tv')
-        ], $model) }}
 
     <div class="cui__utils__content">
         <form action="{{ route('admin.live-tv.save') }}" method="post" class="form-ajax">
@@ -21,14 +15,14 @@
                             <div class="float-right">
                                 @if($model->id)
                                 <div class="btn-group mr-5">
-                                    <a href="{{ route('admin.live-tv.stream', [$model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('app.add_stream')</a>
+                                    <a href="{{ route('admin.live-tv.stream', [$model->id]) }}" class="btn btn-success"><i class="fa fa-upload"></i> @lang('movie::app.add_stream')</a>
                                 </div>
                                 @endif
 
                                 <div class="btn-group">
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('app.save')</button>
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('movie::app.save')</button>
 
-                                    <a href="{{ route('admin.live-tv') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('app.cancel')</a>
+                                    <a href="{{ route('admin.live-tv') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('movie::app.cancel')</a>
                                 </div>
                             </div>
                         </div>
@@ -41,30 +35,30 @@
                         <div class="col-md-8">
 
                             <div class="form-group">
-                                <label class="col-form-label" for="name">@lang('app.name')</label>
+                                <label class="col-form-label" for="name">@lang('movie::app.name')</label>
 
                                 <input type="text" name="name" class="form-control" id="name" value="{{ $model->name }}" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-form-label" for="description">@lang('app.description')</label>
+                                <label class="col-form-label" for="description">@lang('movie::app.description')</label>
                                 <textarea class="form-control" name="description" id="description" rows="6">{{ $model->description }}</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-form-label" for="status">@lang('app.status')</label>
+                                <label class="col-form-label" for="status">@lang('movie::app.status')</label>
                                 <select name="status" id="status" class="form-control" required>
-                                    <option value="1" @if($model->status == 1) selected @endif>@lang('app.enabled')</option>
-                                    <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('app.disabled')</option>
+                                    <option value="1" @if($model->status == 1) selected @endif>@lang('movie::app.enabled')</option>
+                                    <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('movie::app.disabled')</option>
                                 </select>
                             </div>
 
-                            @include('backend.seo_form')
+
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="col-form-label" for="thumbnail">@lang('app.thumbnail')</label>
+                                <label class="col-form-label" for="thumbnail">@lang('movie::app.thumbnail')</label>
                                 <div class="form-thumbnail text-center">
                                     <input id="thumbnail" type="hidden" name="thumbnail">
                                     <div id="holder">
@@ -72,13 +66,13 @@
                                     </div>
 
                                     <a href="javascript:void(0)" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-capitalize lfm">
-                                        <i class="fa fa-picture-o"></i> @lang('app.choose_image')
+                                        <i class="fa fa-picture-o"></i> @lang('movie::app.choose_image')
                                     </a>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-form-label" for="poster">@lang('app.poster')</label>
+                                <label class="col-form-label" for="poster">@lang('movie::app.poster')</label>
                                 <div class="form-thumbnail text-center">
                                     <input id="poster" type="hidden" name="poster" value="{{ $model->poster }}">
                                     <div id="holder-poster">
@@ -86,32 +80,32 @@
                                     </div>
 
                                     <a href="javascript:void(0)" data-input="poster" data-preview="holder-poster" class="btn btn-primary text-capitalize lfm">
-                                        <i class="fa fa-picture-o"></i> @lang('app.choose_image')
+                                        <i class="fa fa-picture-o"></i> @lang('movie::app.choose_image')
                                     </a>
                                 </div>
                             </div>
 
                             <hr>
                             <div class="form-group">
-                                <label class="col-form-label">@lang('app.category') <span><a href="javascript:void(0)" class="add-new-category float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</a></span></label>
+                                <label class="col-form-label">@lang('movie::app.category') <span><a href="javascript:void(0)" class="add-new-category float-right"><i class="fa fa-plus-circle"></i> @lang('movie::app.add_category')</a></span></label>
 
-                                <select name="category_id" id="category_id" class="form-control load-live-tv-category" data-placeholder="--- @lang('app.category') ---"></select>
+                                <select name="category_id" id="category_id" class="form-control load-live-tv-category" data-placeholder="--- @lang('movie::app.category') ---"></select>
 
                                 <div class="form-add-live-tv-category box-hidden">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="categoryName">@lang('app.category')</label>
+                                        <label class="col-form-label" for="categoryName">@lang('movie::app.category')</label>
                                         <input type="text" class="form-control" id="categoryName" autocomplete="off">
                                     </div>
 
-                                    <button type="button" class="btn btn-primary add-live-tv-category"><i class="fa fa-plus-circle"></i> @lang('app.add_category')</button>
+                                    <button type="button" class="btn btn-primary add-live-tv-category"><i class="fa fa-plus-circle"></i> @lang('movie::app.add_category')</button>
                                 </div>
                             </div>
 
                             <hr>
                             <div class="form-group">
-                                <label class="col-form-label" for="select-tags">@lang('app.tags') <span><a href="javascript:void(0)" class="add-new-tags float-right"><i class="fa fa-plus-circle"></i> @lang('app.add_tags')</a></span></label>
+                                <label class="col-form-label" for="select-tags">@lang('movie::app.tags') <span><a href="javascript:void(0)" class="add-new-tags float-right"><i class="fa fa-plus-circle"></i> @lang('movie::app.add_tags')</a></span></label>
 
-                                <select id="select-tags" class="form-control load-tags select-tags" data-placeholder="--- @lang('app.tags') ---" data-explodes="tags-explode"></select>
+                                <select id="select-tags" class="form-control load-tags select-tags" data-placeholder="--- @lang('movie::app.tags') ---" data-explodes="tags-explode"></select>
 
                                 <div class="show-tags mt-2">
                                     @foreach($tags as $item)
@@ -123,11 +117,11 @@
 
                                 <div class="form-add-tags box-hidden">
                                     <div class="form-group">
-                                        <label class="col-form-label" for="tagsName">@lang('app.tags')</label>
+                                        <label class="col-form-label" for="tagsName">@lang('movie::app.tags')</label>
                                         <input type="text" class="form-control" id="tagsName" autocomplete="off">
                                     </div>
 
-                                    <button type="button" class="btn btn-primary add-tags"><i class="fa fa-plus-circle"></i> @lang('app.add_tags')</button>
+                                    <button type="button" class="btn btn-primary add-tags"><i class="fa fa-plus-circle"></i> @lang('movie::app.add_tags')</button>
                                 </div>
                             </div>
 

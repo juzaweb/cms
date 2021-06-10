@@ -14,5 +14,4 @@
 
 return [
     'admin_prefix' => env('ADMIN_PREFIX', 'admin-cp'),
-    'demo' => env('APP_DEMO', false),
 ];

@@ -2,12 +2,10 @@
 
 namespace Plugins\Movie\Http\Controllers\Backend;
 
-use App\Core\Helpers\TmdbApi;
-use Plugins\Movie\Models\Category\Countries;
+use Mymo\PostType\Models\Taxonomy;
+use Plugins\Movie\Helpers\TmdbApi;
 use Plugins\Movie\Models\Files;
-use Plugins\Movie\Models\Category\Genres;
-use Plugins\Movie\Models\Movie\Movies;
-use Plugins\Movie\Models\Category\Stars;
+use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Support\Str;
@@ -22,7 +20,7 @@ class TmdbController extends BackendController
         if (empty(get_config('tmdb_api_key'))) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('app.tmdb_api_key_not_found'),
+                'message' => trans('movie::app.tmdb_api_key_not_found'),
             ]);
         }
         
@@ -30,34 +28,28 @@ class TmdbController extends BackendController
         if (empty($movie)) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('app.movie_not_found'),
+                'message' => trans('movie::app.movie_not_found'),
             ]);
         }
         
-        $model = new Movies();
+        $model = new Movie();
         $model->fill($movie);
         $model->setAttribute('short_description', sub_words(strip_tags($model->description), 15));
         $model->thumbnail = $this->downloadThumbnail($movie['thumbnail']);
         $model->poster = $this->downloadThumbnail($movie['poster']);
-        $model->genres = implode(',', $movie['genres']);
-        
-        if ($movie['countries']) {
-            $model->countries = implode(',', $movie['countries']);
-        }
-        
+        $model->syncTaxonomies($movie);
+
         $model->actors = implode(',', $movie['actors']);
         $model->writers = implode(',', $movie['writers']);
         $model->directors = implode(',', $movie['directors']);
         $model->tv_series = $this->isTvSeries();
-    
         if ($model->release) {
             $model->year = explode('-', $model->release)[0];
         }
         
         $model->save();
         
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'redirect' => route('admin.'. ($model->tv_series ? 'tv_series' : 'movies') .'.edit', [$model->id]),
         ]);
     }
@@ -101,7 +93,7 @@ class TmdbController extends BackendController
             'poster' => 'https://image.tmdb.org/t/p/w780/'.$data['backdrop_path'],
             'rating' => $data['vote_average'],
             'release' => $data['release_date'],
-            'runtime' => @$data['runtime'] . ' ' . trans('app.min'),
+            'runtime' => @$data['runtime'] . ' ' . trans('movie::app.min'),
             'actors' => $actors,
             'directors' => $directors,
             'writers' => $writers,
@@ -132,7 +124,7 @@ class TmdbController extends BackendController
             'poster' => 'https://image.tmdb.org/t/p/w780/'.$data['backdrop_path'],
             'rating' => $data['vote_average'],
             'release' => $data['first_air_date'],
-            'runtime' => @$data['episode_run_time'][0] . ' ' . trans('app.min'),
+            'runtime' => @$data['episode_run_time'][0] . ' ' . trans('movie::app.min'),
             'actors' => $actors,
             'directors' => $directors,
             'writers' => $writers,
@@ -207,12 +199,12 @@ class TmdbController extends BackendController
     protected function addOrGetGenre($name) {
         $name = trim($name);
         $slug = Str::slug($name);
-        $genre = Genres::where('slug', $slug)->first(['id']);
+        $genre = Taxonomy::where('slug', $slug)->first(['id']);
         if ($genre) {
             return $genre->id;
         }
         
-        $model = new Genres();
+        $model = new Taxonomy();
         $model->name = $name;
         $model->slug = $slug;
         $model->save();
@@ -222,12 +214,12 @@ class TmdbController extends BackendController
     protected function addOrGetCountry($name) {
         $name = trim($name);
         $slug = Str::slug($name);
-        $genre = Countries::where('slug', $slug)->first(['id']);
+        $genre = Taxonomy::where('slug', $slug)->first(['id']);
         if ($genre) {
             return $genre->id;
         }
         
-        $model = new Countries();
+        $model = new Taxonomy();
         $model->name = $name;
         $model->slug = $slug;
         $model->save();
@@ -237,12 +229,12 @@ class TmdbController extends BackendController
     protected function addOrGetStar($name, $type = 'actor') {
         $name = trim($name);
         $slug = Str::slug($name);
-        $genre = Stars::where('slug', $slug)->first(['id']);
+        $genre = Taxonomy::where('slug', $slug)->first(['id']);
         if ($genre) {
             return $genre->id;
         }
         
-        $model = new Stars();
+        $model = new Taxonomy();
         $model->name = $name;
         $model->slug = $slug;
         $model->type = $type;

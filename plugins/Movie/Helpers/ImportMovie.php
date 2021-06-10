@@ -5,7 +5,7 @@ namespace Plugins\Movie\Helpers;
 use Plugins\Movie\Models\Category\Countries;
 use Plugins\Movie\Models\Files;
 use Plugins\Movie\Models\Category\Genres;
-use Plugins\Movie\Models\Movie\Movies;
+use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\Category\Stars;
 use Plugins\Movie\Models\Category\Tags;
 use Illuminate\Support\Str;
@@ -86,10 +86,7 @@ class ImportMovie
         $model->tags = $this->getTagsIds($this->data['tags']);
         $model->tv_series = $this->data['tv_series'] ? 1 : 0;
         $model->status = 1;
-    
-        $model->created_by = \Auth::check() ? \Auth::id() : 1;
-        $model->updated_by = \Auth::check() ? \Auth::id() : 1;
-    
+
         if ($model->release && empty($model->year)) {
             $model->year = explode('-', $model->release)[0];
         }
@@ -127,7 +124,7 @@ class ImportMovie
             $this->errors[] = 'TV Series is required.';
         }
         
-        if (Movies::where('other_name', '=', $this->data['other_name'])
+        if (Movie::where('other_name', '=', $this->data['other_name'])
             ->where('year', '=', $this->data['year'])
             ->whereNotNull('other_name')
             ->whereNotNull('year')
