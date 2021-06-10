@@ -37,6 +37,12 @@ class Movie extends Model
         'other_name'
     ];
 
+    public function genres()
+    {
+        return $this->taxonomies()
+            ->where('taxonomy', '=', 'countries');
+    }
+
     public function fill(array $attributes)
     {
         if ($description = Arr::get($attributes, 'description')) {
@@ -48,6 +54,18 @@ class Movie extends Model
         }
 
         return parent::fill($attributes);
+    }
+
+    public function getGenres()
+    {
+        return $this->taxonomies()
+            ->where('taxonomy', '=', 'genres')
+            ->get();
+    }
+
+    public function getCountries()
+    {
+        return $this->genres()->get();
     }
 
     public function rating()
@@ -133,12 +151,18 @@ class Movie extends Model
     
         $query->where('status', '=', 1)
             ->where('id', '!=', $this->id);
-    
-        $genres = explode(',', $this->genres);
+
+        $genres = $this->taxonomies()
+            ->where('taxonomy', '=', 'genres')
+            ->pluck('id')
+            ->toArray();
+
         if ($genres) {
             $query->where(function (Builder $builder) use ($genres) {
                 foreach ($genres as $genre) {
-                    $builder->orWhereRaw('FIND_IN_SET(?, genres)', [$genre]);
+                    $builder->orWhereHas('genres', function ($q) use ($genre) {
+                        $q->where('id', '=', $genre);
+                    });
                 }
             });
         } else {
