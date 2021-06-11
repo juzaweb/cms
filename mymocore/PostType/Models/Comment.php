@@ -19,7 +19,7 @@ class Comment extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'email', 'email');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function postType()
