@@ -20,7 +20,6 @@ return [
     'choose_genre' => 'Choose genre',
     'genres' => 'Genres',
     'add_genres' => 'Add genres',
-    'search_movies_or_tv_series' => 'Search movies or TV series...',
     'add_video' => 'Add video',
     'servers' => 'Servers',
     'servers_video' => 'Servers video',
