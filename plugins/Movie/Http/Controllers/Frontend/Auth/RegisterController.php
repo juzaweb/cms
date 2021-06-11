@@ -19,7 +19,7 @@ class RegisterController extends FrontendController
         if (!get_config('user_registration')) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('app.registration_has_been_locked'),
+                'message' => trans('mymo::app.registration_has_been_locked'),
             ]);
         }
         
@@ -28,9 +28,9 @@ class RegisterController extends FrontendController
             'email' => 'required|email|unique:users,email|max:250',
             'password' => 'required|string|max:32|min:6',
         ], $request, [
-            'name' => trans('app.name'),
-            'email' => trans('app.email'),
-            'password' => trans('app.password'),
+            'name' => trans('mymo::app.name'),
+            'email' => trans('mymo::app.email'),
+            'password' => trans('mymo::app.password'),
         ]);
     
         if (get_config('google_recaptcha')) {
@@ -58,7 +58,7 @@ class RegisterController extends FrontendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.registered_successfully'),
+            'message' => trans('mymo::app.registered_successfully'),
         ]);
     }
 }

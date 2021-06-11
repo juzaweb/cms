@@ -25,8 +25,8 @@ class ResetPasswordController extends BackendController
             'password' => 'required|string|max:32|min:6|confirmed',
             'password_confirmation' => 'required|string|max:32|min:6'
         ], $request, [
-            'password' => trans('app.new_password'),
-            'password_confirmation' => trans('app.confirm_password')
+            'password' => trans('mymo::app.new_password'),
+            'password_confirmation' => trans('mymo::app.confirm_password')
         ]);
     
         $reset_password = PasswordReset::where('token', $token)
@@ -41,7 +41,7 @@ class ResetPasswordController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.change_password_successfully'),
+            'message' => trans('mymo::app.change_password_successfully'),
         ]);
     }
 }

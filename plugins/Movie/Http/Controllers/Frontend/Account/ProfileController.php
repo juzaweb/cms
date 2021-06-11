@@ -16,7 +16,7 @@ class ProfileController extends FrontendController
             ->paginate(5);
         
         return view('account.index', [
-            'title' => trans('app.profile'),
+            'title' => trans('mymo::app.profile'),
             'user' => \Auth::user(),
             'recently_visited' => $recently_visited
         ]);

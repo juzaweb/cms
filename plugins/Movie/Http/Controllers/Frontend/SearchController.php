@@ -3,8 +3,7 @@
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use Plugins\Movie\Models\Category\Countries;
-use Plugins\Movie\Models\Category\Genres;
+use Mymo\PostType\Models\Taxonomy;
 use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -32,15 +31,13 @@ class SearchController extends FrontendController
             'views',
             'video_quality',
             'year',
-            'genres',
-            'countries',
             'tv_series',
             'current_episode',
             'max_episode',
             'created_at',
         ]);
         
-        $query->where('status', '=', 1);
+        $query->wherePublish();
         
         if ($q) {
             $query->where(function (Builder $builder) use ($q) {
@@ -50,11 +47,11 @@ class SearchController extends FrontendController
         }
         
         if ($genre) {
-            $query->whereRaw('find_in_set(?, genres)', [$genre]);
+            $query->whereTaxonomy($genre);
         }
     
         if ($country) {
-            $query->whereRaw('find_in_set(?, countries)', [$country]);
+            $query->whereTaxonomy($country);
         }
     
         if ($year) {
@@ -100,13 +97,13 @@ class SearchController extends FrontendController
         }
         
         $info = (object) [
-            'name' => trans('app.result_for_keyword') . ' '. $q,
+            'name' => trans('mymo::app.result_for_keyword') . ' '. $q,
         ];
         
         return view('genre.index', [
-            'title' => trans('app.result_for_keyword') . ' '. $q,
-            'description' => trans('app.result_for_keyword') . ' '. $q,
-            'keywords' => trans('app.result_for_keyword') . ' '. $q,
+            'title' => trans('mymo::app.result_for_keyword') . ' '. $q,
+            'description' => trans('mymo::app.result_for_keyword') . ' '. $q,
+            'keywords' => trans('mymo::app.result_for_keyword') . ' '. $q,
             'info' => $info,
             'items' => $query->paginate(20),
         ]);
@@ -114,9 +111,9 @@ class SearchController extends FrontendController
     
     public function filterForm()
     {
-        $genres = Genres::where('status', '=', 1)
+        $genres = Taxonomy::where('taxonomy', '=', 'genres')
             ->get(['id', 'name']);
-        $countries = Countries::where('status', '=', 1)
+        $countries = Taxonomy::where('taxonomy', '=', 'countries')
             ->get(['id', 'name']);
         $years = Movie::where('status', '=', 1)
             ->groupBy('year')

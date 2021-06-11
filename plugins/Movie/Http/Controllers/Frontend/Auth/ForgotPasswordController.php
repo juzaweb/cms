@@ -15,7 +15,7 @@ class ForgotPasswordController extends FrontendController
         $this->validateRequest([
             'email' => 'required',
         ], $request, [
-            'email' => trans('app.email')
+            'email' => trans('mymo::app.email')
         ]);
         
         $email = $request->post('email');
@@ -24,7 +24,7 @@ class ForgotPasswordController extends FrontendController
         if (!$user) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('app.email_does_not_exist'),
+                'message' => trans('mymo::app.email_does_not_exist'),
             ]);
         }
         
@@ -52,8 +52,8 @@ class ForgotPasswordController extends FrontendController
     public function message()
     {
         return view('message', [
-            'title' => trans('app.forgot_message'),
-            'description' => trans('app.forgot_message_description'),
+            'title' => trans('mymo::app.forgot_message'),
+            'description' => trans('mymo::app.forgot_message_description'),
         ]);
     }
     
