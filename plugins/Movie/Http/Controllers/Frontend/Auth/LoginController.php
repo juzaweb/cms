@@ -2,7 +2,8 @@
 
 namespace Plugins\Movie\Http\Controllers\Frontend\Auth;
 
-use App\Core\User;
+use Illuminate\Support\Facades\Auth;
+use Mymo\Core\Models\User;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\FrontendController;
 
@@ -34,7 +35,7 @@ class LoginController extends FrontendController
             ->exists();
         
         if ($user_exists) {
-            if (\Auth::attempt($request->only(['email', 'password']), 1)) {
+            if (Auth::attempt($request->only(['email', 'password']), 1)) {
                 return response()->json([
                     'status' => 'success',
                     'message' => trans('mymo::app.logged_successfully'),
@@ -49,8 +50,8 @@ class LoginController extends FrontendController
      }
     
     public function logout() {
-        if (\Auth::check()) {
-            \Auth::logout();
+        if (Auth::check()) {
+            Auth::logout();
         }
         
         return redirect()->route('home');

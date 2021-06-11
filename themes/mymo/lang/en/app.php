@@ -101,4 +101,5 @@ return [
     'movies' => 'Movies',
     'tv_series' => 'TV Series',
     'genres' => 'Genres',
+    'latest_movies' => 'Latest movies',
 ];

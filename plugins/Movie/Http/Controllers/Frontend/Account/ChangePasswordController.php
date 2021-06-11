@@ -5,7 +5,7 @@ namespace Plugins\Movie\Http\Controllers\Frontend\Account;
 use Mymo\Core\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
 use Plugins\Movie\Models\Movie\Movie;
-use Plugins\Movie\User;
+use Mymo\Core\Models\User;
 use Illuminate\Http\Request;
 
 class ChangePasswordController extends FrontendController

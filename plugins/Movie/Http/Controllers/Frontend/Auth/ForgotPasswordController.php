@@ -2,11 +2,11 @@
 
 namespace Plugins\Movie\Http\Controllers\Frontend\Auth;
 
-use Plugins\Movie\Models\Email\EmailList;
-use Plugins\Movie\Models\PasswordReset;
-use App\Core\User;
-use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\FrontendController;
+use Plugins\Movie\Models\Email\EmailList;
+use Mymo\Core\Models\PasswordReset;
+use Mymo\Core\Models\User;
+use Illuminate\Http\Request;
 
 class ForgotPasswordController extends FrontendController
 {

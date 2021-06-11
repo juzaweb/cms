@@ -2,10 +2,10 @@
 
 namespace Plugins\Movie\Http\Controllers\Frontend\Auth;
 
-use App\Core\Events\RegisterSuccess;
-use App\Core\User;
+use Mymo\Core\Events\RegisterSuccess;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\Core\Http\Controllers\FrontendController;
+use Mymo\Core\Models\User;
 
 class RegisterController extends FrontendController
 {

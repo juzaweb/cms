@@ -97,7 +97,6 @@ return [
     'adult_content_warning' => 'Adult Content Warning!',
     'movies_banner' => 'Movies page banner',
     'tv_series_banner' => 'Tv series page banner',
-    'latest_movies' => 'Latest movies',
     'latest_movies_page_seo' => 'Latest movies page seo',
     'latest_movies_banner' => 'Latest movies banner',
     'other_name' => 'Other name',
