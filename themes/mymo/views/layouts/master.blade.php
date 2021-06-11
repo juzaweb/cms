@@ -38,7 +38,7 @@
     <link rel="icon" href="{{ $icon }}" sizes="192x192"/>
     <link rel="apple-touch-icon-precomposed" href="{{ $icon }}"/>
     <meta name="msapplication-TileImage" content="{{ $icon }}"/>
-    <link rel="stylesheet" href="{{ asset('styles/themes/mymo/css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('themes/mymo/css/main.css') }}"/>
 
     <script type='text/javascript'>
         /* <![CDATA[ */
@@ -101,7 +101,7 @@
         /* ]]> */
     </script>
 
-    <script type="text/javascript" src="{{ asset('styles/themes/mymo/js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('themes/mymo/js/main.js') }}"></script>
 
     @if($google_analytics)
     <!-- Google Analytics -->

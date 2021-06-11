@@ -4,10 +4,11 @@ namespace Mymo\PostType\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Mymo\Core\Traits\UseSlug;
+use Mymo\Core\Traits\UseThumbnail;
 
 class Taxonomy extends Model
 {
-    use UseSlug;
+    use UseSlug, UseThumbnail;
 
     protected $table = 'taxonomies';
     protected $slugSource = 'name';

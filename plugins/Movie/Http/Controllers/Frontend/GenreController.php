@@ -2,15 +2,14 @@
 
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
-use Plugins\Movie\Models\Category\Genres;
+use Mymo\PostType\Models\Taxonomy;
 use Plugins\Movie\Models\Movie\Movie;
 use Mymo\Core\Http\Controllers\FrontendController;
 
 class GenreController extends FrontendController
 {
     public function index($slug) {
-        $info = Genres::where('slug', '=', $slug)
-            ->where('status', '=', 1)
+        $info = Taxonomy::where('slug', '=', $slug)
             ->firstOrFail();
         
         $items = Movie::select([
@@ -30,14 +29,13 @@ class GenreController extends FrontendController
             'max_episode',
         ])
             ->where('status', '=', 1)
-            ->whereRaw('find_in_set(?, genres)', [$info->id])
+            ->whereTaxonomy($info->id)
             ->orderBy('id', 'DESC')
             ->paginate(20);
         
         return view('genre.index', [
-            'title' => $info->meta_title,
-            'description' => $info->meta_description,
-            'keywords' => $info->keywords,
+            'title' => $info->name,
+            'description' => $info->description,
             'banner' => $info->getThumbnail(false),
             'items' => $items,
             'info' => $info,

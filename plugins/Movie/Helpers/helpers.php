@@ -90,9 +90,7 @@ function genre_setting($setting) {
 
     if ($ctype == 1) {
         if (@$setting->genre) {
-            $query->whereHas('genres', function ($q) use ($setting) {
-                $q->where($q->getModel()->getTable() . '.id', $setting->genre);
-            });
+            $query->whereTaxonomy($setting->genre);
             if ($g = Taxonomy::find($setting->genre, ['slug'])) {
                 $result->url = route('genre', [$g->slug]);
             } else {

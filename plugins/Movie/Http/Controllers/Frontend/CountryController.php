@@ -2,18 +2,18 @@
 
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
-use Plugins\Movie\Models\Category\Countries;
+use Mymo\PostType\Models\Taxonomy;
 use Plugins\Movie\Models\Movie\Movie;
 use Mymo\Core\Http\Controllers\FrontendController;
 
 class CountryController extends FrontendController
 {
     public function index($slug) {
-        $info = Countries::where('slug', '=', $slug)
-            ->where('status', '=', 1)
+        $info = Taxonomy::where('slug', '=', $slug)
             ->firstOrFail();
         
-        $items = Movie::select([
+        $items = Movie::with(['taxonomies'])
+            ->select([
             'id',
             'name',
             'other_name',
@@ -29,15 +29,14 @@ class CountryController extends FrontendController
             'current_episode',
             'max_episode',
         ])
-            ->where('status', '=', 1)
-            ->whereRaw('find_in_set(?, countries)', [$info->id])
+            ->wherePublish()
+            ->whereTaxonomy($info->id)
             ->orderBy('id', 'DESC')
             ->paginate(20);
         
         return view('genre.index', [
-            'title' => $info->meta_title,
-            'description' => $info->meta_description,
-            'keywords' => $info->keywords,
+            'title' => $info->name,
+            'description' => $info->description,
             'items' => $items,
             'info' => $info,
         ]);
