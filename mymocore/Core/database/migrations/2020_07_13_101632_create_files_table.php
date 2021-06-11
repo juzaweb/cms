@@ -21,7 +21,7 @@ class CreateFilesTable extends Migration
             $table->timestamps();
         });
         
-        $this->_createFiles();
+        //$this->_createFiles();
     }
     
     public function down()

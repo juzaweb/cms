@@ -19,6 +19,7 @@ use Mymo\Core\Traits\ResourceModel;
 use Mymo\Core\Traits\UseChangeBy;
 use Mymo\Core\Traits\UseSlug;
 use Mymo\Core\Traits\UseThumbnail;
+use Mymo\PostType\Models\Comment;
 use Mymo\PostType\PostType;
 
 /**
@@ -33,6 +34,11 @@ trait PostTypeModel
         return $this->belongsToMany('Mymo\PostType\Models\Taxonomy', 'term_taxonomies', 'term_id', 'taxonomy_id')
             ->withPivot(['term_type'])
             ->wherePivot('term_type', '=', $this->getPostType());
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'object_id', 'id')->where('object_type', '=', $this->getPostType());
     }
 
     public function syncTaxonomies(array $attributes)
@@ -73,7 +79,7 @@ trait PostTypeModel
     {
         return [
             'draft' => trans('mymo_core::app.draft'),
-            'publish' => trans('mymo_core::app.public'),
+            'publish' => trans('mymo_core::app.publish'),
             'private' => trans('mymo_core::app.private')
         ];
     }
@@ -81,6 +87,11 @@ trait PostTypeModel
     public function getPostType()
     {
         if (empty($this->postType)) {
+            /*$postType = collect(PostType::getPostTypes())
+                ->where('model', static::class)
+                ->first();
+
+            return $postType->get('key');*/
             return $this->getTable();
         }
 
