@@ -10,7 +10,7 @@
                     <div class="yoast_breadcrumb">
                         <span>
                             <span>
-                                <a href="{{ route('home') }}">@lang('app.home')</a> »
+                                <a href="{{ route('home') }}">@lang('mymo::app.home')</a> »
                                 @if($genre)
                                 <a href="{{ route('genre', [$genre->slug]) }}">{{ $genre->name }}</a> »
                                 @endif
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="col-xs-4 text-right">
-                    <a href="javascript:;" id="expand-ajax-filter">@lang('app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                    <a href="javascript:;" id="expand-ajax-filter">@lang('mymo::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                 </div>
                 <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
             </div>
@@ -41,7 +41,7 @@
 
                 <div class="mymo-movie-wrapper">
                     <div class="title-block watch-page">
-                        <a href="javascript:;" data-toggle="tooltip" title="@lang('app.add_to_bookmark')">
+                        <a href="javascript:;" data-toggle="tooltip" title="@lang('mymo::app.add_to_bookmark')">
                             <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-post_id="{{ $info->id }}" data-thumbnail="{{ $info->getThumbnail() }}" data-href="{{ route('watch', [$info->slug]) }}" data-title="{{ $info->name }}" data-date="{{ $info->release }}">
                                 <!-- <div class="mymo-pulse-ring"></div> -->
                             </div>
@@ -55,7 +55,7 @@
                             <div class="mymo_imdbrating taq-score">
                                 <span class="score">{{ $start }}</span><i>/</i>
                                 <span class="max-ratings">5</span>
-                                <span class="total_votes">{{ $info->countRating() }}</span><span class="vote-txt"> @lang('app.votes')</span>
+                                <span class="total_votes">{{ $info->countRating() }}</span><span class="vote-txt"> @lang('mymo::app.votes')</span>
                             </div>
                             <div class="rate-this">
                                 <div data-rate="{{ $start * 100 / 5 }}" data-id="{{ $info->id }}" class="user-rate user-rate-active">
@@ -71,7 +71,7 @@
                             <span>Full</span>
                             <span>{{ $info->runtime }}</span>
                             @else
-                            <span>@lang('app.episode') {{ $info->current_episode }}{{ $info->max_episode ? '/' . $info->max_episode : '' }}</span>
+                            <span>@lang('mymo::app.episode') {{ $info->current_episode }}{{ $info->max_episode ? '/' . $info->max_episode : '' }}</span>
                             @endif
                             <span>
                             @foreach($genres as $genre)
@@ -87,10 +87,10 @@
                             <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="btn btn-sm btn-danger watch-movie visible-xs-block"><i class="hl-play"></i>@lang('watch')</a>
 
                             <span id="show-trailer" data-url="{{ $info->getTrailerLink() }}" class="btn btn-sm btn-primary show-trailer">
-                            <i class="hl-youtube-play"></i> @lang('app.trailer')</span>
+                            <i class="hl-youtube-play"></i> @lang('mymo::app.trailer')</span>
 
                             <span class="btn btn-sm btn-success quick-eps" data-toggle="collapse" href="#collapseEps" aria-expanded="false" aria-controls="collapseEps">
-                                <i class="hl-sort-down"></i> @lang('app.episodes')
+                                <i class="hl-sort-down"></i> @lang('mymo::app.episodes')
                             </span>
                         </div>
 
@@ -98,14 +98,14 @@
                             <div class="film-poster-img" style="background: url('{{ $info->getPoster() }}'); background-size: cover; background-repeat: no-repeat;background-position: 30% 25%;height: 300px;/*-webkit-filter: grayscale(100%); filter: grayscale(100%);*/"></div>
                             @if($player_id)
                             <div class="mymo-play-btn hidden-xs">
-                                <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="play-btn" title="@lang('app.click_to_play')" data-toggle="tooltip" data-placement="bottom">@lang('app.click_to_play')</a>
+                                <a href="{{ route('watch.play', [$info->slug, $player_id]) }}" class="play-btn" title="@lang('mymo::app.click_to_play')" data-toggle="tooltip" data-placement="bottom">@lang('mymo::app.click_to_play')</a>
                             </div>
                             @endif
 
                             <div class="movie-trailer hidden"></div>
                             <div class="movie-detail">
                                 @if(!$countries->isEmpty())
-                                <p class="actors">@lang('app.countries'):
+                                <p class="actors">@lang('mymo::app.countries'):
                                     @foreach($countries as $country)
                                     <a href="{{ route('country', [$country->slug]) }}" title="{{ $country->name }}">{{ $country->name }}</a>
                                     @endforeach
@@ -153,7 +153,7 @@
                         @if(!$info->downloadLinks->isEmpty())
                         <div class="mymo-server show_all_eps">
                             <span class="mymo-server-name">
-                                <span class="hl-download"></span> @lang('app.download')
+                                <span class="hl-download"></span> @lang('mymo::app.download')
                             </span>
 
 
@@ -191,7 +191,7 @@
                         </article>
                         <div class="item-content-toggle">
                             <div class="item-content-gradient"></div>
-                            <span class="show-more" data-single="true" data-showmore="@lang('app.show_more')" data-showless="@lang('app.show_less')">@lang('app.show_more')</span>
+                            <span class="show-more" data-single="true" data-showmore="@lang('mymo::app.show_more')" data-showless="@lang('mymo::app.show_less')">@lang('mymo::app.show_more')</span>
                         </div>
                     </div>
                 </div>
@@ -210,7 +210,7 @@
 
             <div id="mymo_related_movies-2xx" class="wrap-slider">
                 <div class="section-bar clearfix">
-                    <h3 class="section-title"><span>@lang('app.similar_movies')</span></h3>
+                    <h3 class="section-title"><span>@lang('mymo::app.similar_movies')</span></h3>
                 </div>
                 <div id="mymo_related_movies-2" class="owl-carousel owl-theme related-film">
                     @foreach($related_movies as $item)

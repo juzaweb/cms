@@ -17,7 +17,7 @@
                 <form action="{{ route('watch.comment', [$info->id]) }}" method="post" class="form-ajax comment-form">
                     <div class="row">
                         <div class="col-xs-10 col-sm-11 col-md-11">
-                            <textarea class="form-control" name="content" placeholder="@lang('app.write_your_comment')"></textarea>
+                            <textarea class="form-control" name="content" placeholder="@lang('mymo::app.write_your_comment')"></textarea>
                         </div>
 
                         <div class="col-xs-2 col-sm-1 col-md-1">
@@ -28,7 +28,7 @@
                     </div>
                 </form>
             @else
-                <h5 class="text-center">@lang('app.you_must_be_logged_in_to_comment')</h5>
+                <h5 class="text-center">@lang('mymo::app.you_must_be_logged_in_to_comment')</h5>
             @endif
 
             <hr class="color-text">

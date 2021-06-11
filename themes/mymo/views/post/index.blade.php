@@ -11,15 +11,15 @@
                         <div class="yoast_breadcrumb">
                         <span>
                             <span>
-                                <a href="{{ route('home') }}">@lang('app.home')</a> »
-                                <span class="breadcrumb_last" aria-current="page">@lang('app.posts')</span>
+                                <a href="{{ route('home') }}">@lang('mymo::app.home')</a> »
+                                <span class="breadcrumb_last" aria-current="page">@lang('mymo::app.posts')</span>
                             </span>
                         </span>
                         </div>
                     </div>
 
                     <div class="col-xs-4 text-right">
-                        <a href="javascript:void(0)" id="expand-ajax-filter">@lang('app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                        <a href="javascript:void(0)" id="expand-ajax-filter">@lang('mymo::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                     </div>
 
                     <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
@@ -36,7 +36,7 @@
             <section>
                 <div class="section-bar clearfix">
                     <h3 class="section-title">
-                        <span>@lang('app.posts')</span>
+                        <span>@lang('mymo::app.posts')</span>
                     </h3>
                 </div>
 

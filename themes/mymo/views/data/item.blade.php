@@ -24,7 +24,7 @@
         @if($item->tv_series == 0)
             <span class="episode">Full</span>
         @else
-        <span class="episode">@lang('app.episode') {{ $item->current_episode }}{{ $item->max_episode ? '/' . $item->max_episode : '' }}</span>
+        <span class="episode">@lang('mymo::app.episode') {{ $item->current_episode }}{{ $item->max_episode ? '/' . $item->max_episode : '' }}</span>
         @endif
         <div class="icon_overlay" data-html="true"
              data-toggle="mymo-popover"
@@ -34,7 +34,7 @@
              data-content="<div class=org-title>{{ $item->other_name }} ({{ $item->year }})</div>                            <div class=film-meta>
 
                             <div class=film-content>{{ $item->short_description }}</div>
-                            <p class=category>@lang('app.countries'): {{ $country_str }}</p>                                <p class=category>@lang('app.genres'): {{ $genre_str }}</p>
+                            <p class=category>@lang('mymo::app.countries'): {{ $country_str }}</p>                                <p class=category>@lang('mymo::app.genres'): {{ $genre_str }}</p>
                         </div>">
         </div>
 

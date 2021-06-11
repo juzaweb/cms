@@ -1,7 +1,7 @@
 <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
     <div class="section-bar clearfix">
         <h3 class="section-title">
-            <span>@lang('app.profile')</span>
+            <span>@lang('mymo::app.profile')</span>
         </h3>
 
         <div class="profile-sidebar">
@@ -29,19 +29,19 @@
             <div class="profile-usermenu">
                 <ul class="nav">
                     <li @if(request()->is('account')) class="active" @endif>
-                        <a href="{{ route('account') }}"><i class="hl-user"></i> @lang('app.profile')</a>
+                        <a href="{{ route('account') }}"><i class="hl-user"></i> @lang('mymo::app.profile')</a>
                     </li>
 
                     <li @if(request()->is('account/notification*')) class="active" @endif>
-                        <a href="{{ route('account.notification') }}"><i class="hl-bell"></i> @lang('app.notification')</a>
+                        <a href="{{ route('account.notification') }}"><i class="hl-bell"></i> @lang('mymo::app.notification')</a>
                     </li>
 
                     <li @if(request()->is('account/change-password')) class="active" @endif>
-                        <a href="{{ route('account.change_password') }}"><i class="hl-lock-open-alt"></i> @lang('app.change_password')</a>
+                        <a href="{{ route('account.change_password') }}"><i class="hl-lock-open-alt"></i> @lang('mymo::app.change_password')</a>
                     </li>
 
                     <li>
-                        <a href="{{ route('logout') }}" data-turbolinks="false"><i class="hl-off"></i> @lang('app.logout')</a>
+                        <a href="{{ route('logout') }}" data-turbolinks="false"><i class="hl-off"></i> @lang('mymo::app.logout')</a>
                     </li>
                 </ul>
             </div>

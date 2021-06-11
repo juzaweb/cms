@@ -9,13 +9,13 @@
                     <div class="yoast_breadcrumb">
                         <span>
                             <span>
-                                <a href="/">@lang('app.home')</a> » <span>
+                                <a href="/">@lang('mymo::app.home')</a> » <span>
                                     @if($genre)
                                     <a href="{{ route('genre', [$genre->slug]) }}">{{ $genre->name }}</a> »
                                     @endif
                                     <a href="{{ route('watch', [$info->slug]) }}">{{ $info->name }}</a> »
 
-                                    <span class="breadcrumb_last" aria-current="page">@lang('app.episode') {{ @\App\Core\Models\Video\VideoFiles::find($player_id, ['label'])->label }}</span>
+                                    <span class="breadcrumb_last" aria-current="page">@lang('mymo::app.episode') {{ @\App\Core\Models\Video\VideoFiles::find($player_id, ['label'])->label }}</span>
                                 </span>
                             </span>
                         </span>
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="col-xs-4 text-right">
-                    <a href="javascript:;" id="expand-ajax-filter">@lang('app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                    <a href="javascript:;" id="expand-ajax-filter">@lang('mymo::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                 </div>
 
                 <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
@@ -62,28 +62,28 @@
                     <ul class="col-xs-12 col-md-8">
                         <div id="autonext" class="btn-cs autonext">
                             <i class="icon-autonext-sm"></i>
-                            <span><i class="hl-next"></i> @lang('app.autoplay_next_episode'): <span id="autonext-status">@lang('app.on')</span></span>
+                            <span><i class="hl-next"></i> @lang('mymo::app.autoplay_next_episode'): <span id="autonext-status">@lang('mymo::app.on')</span></span>
                         </div>
 
                         <div id="explayer" class="hidden-xs">
                             <i class="hl-resize-full"></i>
-                            @lang('app.expand')
+                            @lang('mymo::app.expand')
                         </div>
 
                         <div id="toggle-light"><i class="hl-adjust"></i>
-                            @lang('app.light_off')
+                            @lang('mymo::app.light_off')
                         </div>
 
                         <div id="report" class="mymo-switch">
-                            <i class="hl-attention"></i> @lang('app.report')
+                            <i class="hl-attention"></i> @lang('mymo::app.report')
                         </div>
 
                         <div class="luotxem"><i class="hl-eye"></i>
-                            <span>{{ $info->getViews() }}</span> @lang('app.views')
+                            <span>{{ $info->getViews() }}</span> @lang('mymo::app.views')
                         </div>
 
                         <div class="luotxem visible-xs-inline">
-                            <a data-toggle="collapse" href="#moretool" aria-expanded="false" aria-controls="moretool"><i class="hl-forward"></i> @lang('app.share')</a>
+                            <a data-toggle="collapse" href="#moretool" aria-expanded="false" aria-controls="moretool"><i class="hl-forward"></i> @lang('mymo::app.share')</a>
                         </div>
 
                     </ul>
@@ -123,7 +123,7 @@
                 <div class="clearfix"></div>
 
                 <div class="title-block watch-page">
-                    <a href="javascript:;" data-toggle="tooltip" title="@lang('app.add_to_bookmark')">
+                    <a href="javascript:;" data-toggle="tooltip" title="@lang('mymo::app.add_to_bookmark')">
                         <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-post_id="{{ $info->id }}" data-thumbnail="{{ $info->getThumbnail() }}" data-href="{{ route('watch', [$info->slug]) }}" data-title="{{ $info->name }}" data-date="{{ $info->release }}">
                             <!-- <div class="mymo-pulse-ring"></div> -->
                         </div>
@@ -132,14 +132,14 @@
                     <div class="title-wrapper full">
                         <h1 class="entry-title"><a href="{{ route('watch.play', [$info->slug, $player_id]) }}" title="{{ $info->meta_title }}" class="tl">{{ $info->meta_title }}</a></h1>
 
-                        <span class="plot-collapse" data-toggle="collapse" data-target="#expand-post-content" aria-expanded="false" aria-controls="expand-post-content" data-text="@lang('app.movie_plot')"><i class="hl-angle-down"></i></span>
+                        <span class="plot-collapse" data-toggle="collapse" data-target="#expand-post-content" aria-expanded="false" aria-controls="expand-post-content" data-text="@lang('mymo::app.movie_plot')"><i class="hl-angle-down"></i></span>
                     </div>
 
                     <div class="ratings_wrapper hidden-xs">
                         <div class="mymo_imdbrating taq-score">
                             <span class="score">{{ $start }}</span><i>/</i>
                             <span class="max-ratings">5</span>
-                            <span class="total_votes">{{ $info->countRating() }}</span><span class="vote-txt"> @lang('app.votes')</span>
+                            <span class="total_votes">{{ $info->countRating() }}</span><span class="vote-txt"> @lang('mymo::app.votes')</span>
                         </div>
                         <div class="rate-this">
                             <div data-rate="{{ $start * 100 / 5 }}" data-id="{{ $info->id }}" class="user-rate user-rate-active">
@@ -199,7 +199,7 @@
 
             <div id="mymo_related_movies-2xx" class="wrap-slider">
                 <div class="section-bar clearfix">
-                    <h3 class="section-title"><span>@lang('app.similar_movies')</span></h3>
+                    <h3 class="section-title"><span>@lang('mymo::app.similar_movies')</span></h3>
                 </div>
                 <div id="mymo_related_movies-2" class="owl-carousel owl-theme related-film">
                     @foreach($related_movies as $item)
