@@ -9,10 +9,10 @@ class LatestMoviesController extends FrontendController
 {
     public function index() {
         $info = (object) [
-            'name' => trans('app.latest_movies'),
+            'name' => trans('mymo::app.latest_movies'),
         ];
         
-        $items = Movie::where('status', '=', 1)
+        $items = Movie::wherePublish()
             ->orderBy('id', 'DESC')
             ->paginate(20);
         

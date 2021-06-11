@@ -51,7 +51,7 @@ use Illuminate\Support\Facades\Crypt;
  * @mixin \Eloquent
  * @property int $enable_remote
  * @method static \Illuminate\Database\Eloquent\Builder|VideoFiles whereEnableRemote($value)
- * @property-read \Plugins\Movie\Models\Video\VideoServers|null $server
+ * @property-read \Plugins\Movie\Models\Video\VideoServer|null $server
  * @property-read \Illuminate\Database\Eloquent\Collection|\Plugins\Movie\Models\Subtitle[] $subtitles
  * @property-read int|null $subtitles_count
  */
@@ -68,7 +68,7 @@ class VideoFiles extends Model
     ];
     
     public function server() {
-        return $this->hasOne('Plugins\Movie\Models\Video\VideoServers', 'id', 'server_id');
+        return $this->hasOne('Plugins\Movie\Models\Video\VideoServer', 'id', 'server_id');
     }
     
     public function getFiles() {

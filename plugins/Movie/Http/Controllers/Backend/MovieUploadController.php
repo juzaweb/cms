@@ -3,7 +3,7 @@
 namespace Plugins\Movie\Http\Controllers\Backend;
 
 use Plugins\Movie\Models\Movie\Movie;
-use Plugins\Movie\Models\Video\VideoServers;
+use Plugins\Movie\Models\Video\VideoServer;
 use Plugins\Movie\Models\Video\VideoFiles;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
@@ -11,7 +11,7 @@ use Mymo\Core\Http\Controllers\BackendController;
 class MovieUploadController extends BackendController
 {
     public function index($page_type, $server_id) {
-        $server = VideoServers::where('id', '=', $server_id)->firstOrFail();
+        $server = VideoServer::where('id', '=', $server_id)->firstOrFail();
         
         return view('movie::movie_upload.index', [
             'title' => trans('movie::app.upload'),
@@ -22,7 +22,7 @@ class MovieUploadController extends BackendController
     }
     
     public function form($page_type, $server_id, $id = null) {
-        $server = VideoServers::where('id', '=', $server_id)->firstOrFail();
+        $server = VideoServer::where('id', '=', $server_id)->firstOrFail();
         $movie = Movie::where('id', '=', $server->movie_id)->firstOrFail();
         $model = VideoFiles::firstOrNew(['id' => $id]);
         

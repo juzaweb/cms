@@ -5,7 +5,7 @@ namespace Plugins\Movie\Http\Controllers\Frontend\Account;
 use Mymo\Core\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
 use Plugins\Movie\Models\Movie\Movie;
-use Plugins\Movie\User;
+use Mymo\Core\Models\User;
 use Illuminate\Http\Request;
 
 class ChangePasswordController extends FrontendController
@@ -21,11 +21,11 @@ class ChangePasswordController extends FrontendController
         }
         
         $recently_visited = Movie::whereIn('id', $viewed)
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->paginate(5);
         
         return view('account.change_password', [
-            'title' => trans('app.change_password'),
+            'title' => trans('mymo::app.change_password'),
             'user' => \Auth::user(),
             'recently_visited' => $recently_visited
         ]);
@@ -38,9 +38,9 @@ class ChangePasswordController extends FrontendController
             'password' => 'required|string|max:32|min:6|confirmed',
             'password_confirmation' => 'required|string|max:32|min:6'
         ], $request, [
-            'current_password' => trans('app.current_password'),
-            'password' => trans('app.new_password'),
-            'password_confirmation' => trans('app.confirm_password')
+            'current_password' => trans('mymo::app.current_password'),
+            'password' => trans('mymo::app.new_password'),
+            'password_confirmation' => trans('mymo::app.confirm_password')
         ]);
         
         $current_password = $request->post('current_password');
@@ -49,7 +49,7 @@ class ChangePasswordController extends FrontendController
         if (!\Hash::check($current_password, \Auth::user()->password)) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('app.current_password_incorrect'),
+                'message' => trans('mymo::app.current_password_incorrect'),
             ]);
         }
         
@@ -60,7 +60,7 @@ class ChangePasswordController extends FrontendController
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('app.change_password_successfully'),
+            'message' => trans('mymo::app.change_password_successfully'),
         ]);
     }
 }

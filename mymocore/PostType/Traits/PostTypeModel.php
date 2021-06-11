@@ -24,6 +24,8 @@ use Mymo\PostType\PostType;
 
 /**
  * @method \Illuminate\Database\Eloquent\Builder wherePublish()
+ * @method \Illuminate\Database\Eloquent\Builder whereTaxonomy($taxonomy)
+ * @method \Illuminate\Database\Eloquent\Builder whereTaxonomyIn($taxonomies)
  * */
 trait PostTypeModel
 {
@@ -106,6 +108,34 @@ trait PostTypeModel
     public function scopeWherePublish($builder)
     {
         $builder->where('status', '=', 'publish');
+        return $builder;
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param int $taxonomy
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     **/
+    public function scopeWhereTaxonomy($builder, $taxonomy)
+    {
+        $builder->whereHas('genres', function ($q) use ($taxonomy) {
+            $q->where($q->getModel()->getTable() . '.id', $taxonomy);
+        });
+        return $builder;
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param array $taxonomies
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     **/
+    public function scopeWhereTaxonomyIn($builder, $taxonomies)
+    {
+        $builder->whereHas('genres', function ($q) use ($taxonomies) {
+            $q->whereIn($q->getModel()->getTable() . '.id', $taxonomies);
+        });
         return $builder;
     }
 }

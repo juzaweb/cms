@@ -12,11 +12,11 @@ class ProfileController extends FrontendController
         $viewed = Cookie::get('viewed');
         $viewed = $viewed ? json_decode($viewed, true) : [0];
         $recently_visited = Movie::whereIn('id', $viewed)
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->paginate(5);
         
         return view('account.index', [
-            'title' => trans('app.profile'),
+            'title' => trans('mymo::app.profile'),
             'user' => \Auth::user(),
             'recently_visited' => $recently_visited
         ]);

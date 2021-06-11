@@ -3,14 +3,14 @@
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
+use Mymo\PostType\Models\Taxonomy;
 use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\Category\Stars;
 
 class StarController extends FrontendController
 {
     public function index($slug) {
-        $info = Stars::where('slug', '=', $slug)
-            ->where('status', '=', 1)
+        $info = Taxonomy::where('slug', '=', $slug)
             ->firstOrFail(['name', 'slug']);
     
         $items = Movie::select([
@@ -29,7 +29,7 @@ class StarController extends FrontendController
             'current_episode',
             'max_episode',
         ])
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->whereRaw('find_in_set(?, stars)', [$info->id])
             ->orderBy('id', 'DESC')
             ->paginate(20);

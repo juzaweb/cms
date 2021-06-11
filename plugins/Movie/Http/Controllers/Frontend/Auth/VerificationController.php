@@ -3,7 +3,7 @@
 namespace Plugins\Movie\Http\Controllers\Frontend\Auth;
 
 use Mymo\Core\Http\Controllers\BackendController;
-use App\Core\User;
+use Mymo\Core\Models\User;
 
 class VerificationController extends BackendController
 {
@@ -21,8 +21,8 @@ class VerificationController extends BackendController
         \Auth::loginUsingId($user->id);
     
         return view('message', [
-            'title' => trans('app.verified_success'),
-            'description' => trans('app.verified_success_description'),
+            'title' => trans('mymo::app.verified_success'),
+            'description' => trans('mymo::app.verified_success_description'),
         ]);
     }
 }

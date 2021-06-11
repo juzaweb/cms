@@ -4,7 +4,7 @@ namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
-use Plugins\Movie\Models\Category\Genres;
+use Mymo\PostType\Models\Taxonomy;
 use Plugins\Movie\Models\Movie\Movie;
 use Plugins\Movie\Models\Movie\MovieViews;
 use Plugins\Movie\Models\Video\VideoAds;
@@ -14,10 +14,9 @@ class PlayController extends FrontendController
 {
     public function index($slug, $vid) {
         $info = Movie::where('slug', '=', $slug)
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->firstOrFail();
-        $genre = Genres::where('status', '=', 1)
-            ->whereIn('id', explode(',', $info->genres))
+        $genre = Taxonomy::whereIn('id', explode(',', $info->genres))
             ->first(['id', 'name', 'slug']);
         
         return view('watch.watch', [
@@ -38,7 +37,7 @@ class PlayController extends FrontendController
     
     public function getPlayer($slug, $vid) {
         $movie = Movie::where('slug', '=', $slug)
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->firstOrFail();
     
         if (get_config('only_member_view') == 1) {
@@ -86,7 +85,7 @@ class PlayController extends FrontendController
     
     public function setMovieView($slug) {
         $movie = Movie::where('slug', '=', $slug)
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->firstOrFail(['id', 'views']);
     
         $views = $movie->views;
