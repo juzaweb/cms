@@ -44,10 +44,11 @@ your extra branch.
 - Must use rebase to handle conflicts.
 
 ## Rebase process
+- Make sure that you're on your dev branch.
 - Get the latest code from the remote and rebase on the main branch
 ```
-git fetch
-git rebase origin/develop
+git fetch upstream
+git rebase upstream/develop
 ```
 - Fix conflict (if exists). Run command after fix conflict to continue rebase.
 ```
