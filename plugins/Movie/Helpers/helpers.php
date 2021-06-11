@@ -1,5 +1,7 @@
 <?php
 /**
+ * MYMO CMS - Free Laravel CMS
+ *
  * @package    mymocms/mymocms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/mymocms/mymocms
@@ -89,23 +91,35 @@ function genre_setting($setting) {
     if ($ctype == 1) {
         if (@$setting->genre) {
             $query->whereHas('genres', function ($q) use ($setting) {
-                $q->where('id', $setting->genre);
+                $q->where($q->getModel()->getTable() . '.id', $setting->genre);
             });
-            $result->url = route('genre', [@Taxonomy::find($setting->genre)->slug]);
+            if ($g = Taxonomy::find($setting->genre, ['slug'])) {
+                $result->url = route('genre', [$g->slug]);
+            } else {
+                $result->url = '';
+            }
         }
     }
 
     if ($ctype == 2) {
         if (@$setting->type) {
             $query->where('type_id', '=', $setting->type);
-            $result->url = route('type', @Taxonomy::find($setting->type)->slug);
+            if ($t = Taxonomy::find($setting->type, ['slug'])) {
+                $result->url = route('type', [$t->slug]);
+            } else {
+                $result->url = '';
+            }
         }
     }
 
     if ($ctype == 3) {
         if (@$setting->country) {
             $query->whereRaw('find_in_set(?, countries)', [$setting->country]);
-            $result->url = route('country', @Taxonomy::find($setting->country)->slug);
+            if ($c = Taxonomy::find($setting->country)) {
+                $result->url = route('country', $c->slug);
+            } else {
+                $result->url = '';
+            }
         }
     }
 
@@ -162,22 +176,4 @@ function get_vimeo_id($url) {
 
 function get_google_drive_id(string $url) {
     return explode('/', $url)[5];
-}
-
-function is_active_movie_menu() {
-    $menus = [
-        'movies',
-        'tv-series',
-        'genres',
-        'countries',
-        'types',
-        'stars',
-        'video-qualities',
-    ];
-    foreach ($menus as $menu) {
-        if (request()->is('admin-cp/'. $menu .'*')) {
-            return true;
-        }
-    }
-    return false;
 }

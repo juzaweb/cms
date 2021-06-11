@@ -1,7 +1,10 @@
 <div class="mymo-item">
     @php
-        $genres = $item->getGenres();
-        $countries = $item->getCountries();
+        /**
+        * @var \Plugins\Movie\Models\Movie\Movie $item
+        */
+        $genres = $item->taxonomies->where('taxonomy', 'genres');
+        $countries = $item->taxonomies->where('taxonomy', 'countries');
 
         $genre_str = '';
         foreach ($genres as $genre) {

@@ -68,7 +68,7 @@ class Movie extends Model
     
     public function servers()
     {
-        return $this->hasMany('Plugins\Movie\Models\Video\VideoServers', 'movie_id', 'id');
+        return $this->hasMany('Plugins\Movie\Models\Video\VideoServer', 'movie_id', 'id');
     }
     
     public function getViews()

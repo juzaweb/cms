@@ -4,8 +4,7 @@ namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
 use Plugins\Movie\Models\DownloadLink;
-use Plugins\Movie\Models\Video\VideoServers;
-use Plugins\Movie\Models\Category\Genres;
+use Plugins\Movie\Models\Video\VideoServer;
 use Plugins\Movie\Models\Movie\Movie;
 
 class WatchController extends FrontendController
@@ -49,7 +48,7 @@ class WatchController extends FrontendController
     }
     
     private function _getFileVideo($movie_id) {
-        $server = VideoServers::where('status', '=', 1)
+        $server = VideoServer::where('status', '=', 1)
             ->where('movie_id', '=', $movie_id)
             ->orderBy('order', 'asc')
             ->first(['id', 'movie_id']);

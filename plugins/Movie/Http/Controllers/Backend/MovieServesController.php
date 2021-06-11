@@ -4,7 +4,7 @@ namespace Plugins\Movie\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Plugins\Movie\Models\Movie\Movie;
-use Plugins\Movie\Models\Video\VideoServers;
+use Plugins\Movie\Models\Video\VideoServer;
 use Mymo\Core\Http\Controllers\BackendController;
 
 class MovieServesController extends BackendController
@@ -20,7 +20,7 @@ class MovieServesController extends BackendController
     
     public function form($page_type, $movie_id, $server_id = null) {
         $movie = Movie::where('id', '=', $movie_id)->firstOrFail();
-        $model = VideoServers::firstOrNew(['id' => $server_id]);
+        $model = VideoServer::firstOrNew(['id' => $server_id]);
         return view('movie::movie_servers.form', [
             'title' => $model->name ? $model->name : trans('movie::app.add_new'),
             'movie' => $movie,
@@ -39,7 +39,7 @@ class MovieServesController extends BackendController
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
         
-        $query = VideoServers::query();
+        $query = VideoServer::query();
         $query->where('movie_id', '=', $movie_id);
         
         if ($search) {
@@ -76,7 +76,7 @@ class MovieServesController extends BackendController
             'order' => trans('movie::app.order'),
         ]);
         
-        $model = VideoServers::firstOrNew(['id' => $request->post('id')]);
+        $model = VideoServer::firstOrNew(['id' => $request->post('id')]);
         $model->fill($request->all());
         $model->movie_id = $movie_id;
         $model->save();
@@ -94,12 +94,12 @@ class MovieServesController extends BackendController
             'ids' => trans('movie::app.servers'),
         ]);
         
-        $movie_ids = VideoServers::where('movie_id', '=', $movie_id)
+        $movie_ids = VideoServer::where('movie_id', '=', $movie_id)
             ->whereIn('id', $request->post('ids'))
             ->pluck('id')
             ->toArray();
     
-        VideoServers::destroy($movie_ids);
+        VideoServer::destroy($movie_ids);
         
         return response()->json([
             'status' => 'success',
