@@ -4,7 +4,7 @@ namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
 use Plugins\Movie\Models\Movie\Movie;
-use Plugins\Movie\Models\Posts;
+use Plugins\Movie\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends FrontendController
@@ -38,7 +38,7 @@ class CommentController extends FrontendController
             'content' => trans('app.content')
         ]);
         
-        $post = Posts::where('slug', '=', $post_slug)
+        $post = Post::where('slug', '=', $post_slug)
             ->where('status', '=', 1)
             ->firstOrFail();
     

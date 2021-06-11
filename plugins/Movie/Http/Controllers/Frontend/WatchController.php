@@ -15,10 +15,6 @@ class WatchController extends FrontendController
             ->where('status', '=', 1)
             ->firstOrFail();
         
-        $genre = Genres::where('status', '=', 1)
-            ->whereIn('id', explode(',', $info->genres))
-            ->first(['id', 'name', 'slug']);
-        
         $download_links = DownloadLink::where('movie_id', '=', $info->id)
             ->where('status', '=', 1)
             ->orderBy('order', 'ASC')

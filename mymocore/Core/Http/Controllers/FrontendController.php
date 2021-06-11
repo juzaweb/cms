@@ -38,7 +38,7 @@ class FrontendController extends Controller
 
     protected function getCurrentTheme()
     {
-        return get_config('activated_theme', 'default');
+        return get_config('activated_theme', 'mymo');
     }
 
     protected function setupLayout()

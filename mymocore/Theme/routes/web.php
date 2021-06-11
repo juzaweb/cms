@@ -12,7 +12,7 @@
  * Time: 3:22 PM
  */
 
-Route::get('/', 'HomeController@index')->name('home');
+//Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/search', 'SearchController@index')->name('search');
 
@@ -20,11 +20,11 @@ Route::get('/login', 'HomeController@index')->name('login');
 
 Route::get('/register', 'HomeController@index')->name('register');
 
-Route::get('/{slug}', 'PageController@index')
-    ->name('page')
-    ->where('slug', '[a-z0-9\-]+');
-
-Route::get('/{base}/{slug}', 'RouteController@index')
-    ->name('frontend')
-    ->where('base', '^((?!admin\-cp|api)[a-z0-9\-])*$')
-    ->where('slug', '[a-z0-9\-]+');
+//Route::get('/{slug}', 'PageController@index')
+//    ->name('page')
+//    ->where('slug', '[a-z0-9\-]+');
+//
+//Route::get('/{base}/{slug}', 'RouteController@index')
+//    ->name('frontend')
+//    ->where('base', '^((?!admin\-cp|api)[a-z0-9\-])*$')
+//    ->where('slug', '[a-z0-9\-]+');
