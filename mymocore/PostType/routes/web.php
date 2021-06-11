@@ -12,7 +12,10 @@
  * Time: 1:21 PM
  */
 
-Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], function () {
+Route::group([
+    'prefix' => config('mymo_core.admin_prefix'),
+    'middleware' => ['web', 'admin']],
+    function () {
     require __DIR__ . '/components/post.route.php';
     require __DIR__ . '/components/page.route.php';
 });

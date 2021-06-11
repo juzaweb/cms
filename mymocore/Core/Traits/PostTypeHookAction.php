@@ -85,6 +85,10 @@ trait PostTypeHookAction
      */
     public function registerPostType($key, $args = [])
     {
+        if (empty($args['model'])) {
+            throw new \Exception('Post type model is required. E.x: \\Mymo\\PostType\\Models\\Post.');
+        }
+
         $args = array_merge([
             'label' => '',
             'description' => '',

@@ -3,7 +3,6 @@
 namespace Plugins\Movie\Models\Movie;
 
 use Illuminate\Support\Arr;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Mymo\PostType\Traits\PostTypeModel;
 
@@ -37,12 +36,6 @@ class Movie extends Model
         'other_name'
     ];
 
-    public function genres()
-    {
-        return $this->taxonomies()
-            ->where('taxonomy', '=', 'countries');
-    }
-
     public function fill(array $attributes)
     {
         if ($description = Arr::get($attributes, 'description')) {
@@ -56,16 +49,16 @@ class Movie extends Model
         return parent::fill($attributes);
     }
 
-    public function getGenres()
+    public function genres()
     {
         return $this->taxonomies()
-            ->where('taxonomy', '=', 'genres')
-            ->get();
+            ->where('taxonomy', '=', 'genres');
     }
 
-    public function getCountries()
+    public function countries()
     {
-        return $this->genres()->get();
+        return $this->taxonomies()
+            ->where('taxonomy', '=', 'countries');
     }
 
     public function rating()
@@ -76,11 +69,6 @@ class Movie extends Model
     public function servers()
     {
         return $this->hasMany('Plugins\Movie\Models\Video\VideoServers', 'movie_id', 'id');
-    }
-    
-    public function comments()
-    {
-        return $this->hasMany('Plugins\Movie\Models\Movie\MovieComments', 'movie_id', 'id');
     }
     
     public function getViews()
@@ -158,12 +146,8 @@ class Movie extends Model
             ->toArray();
 
         if ($genres) {
-            $query->where(function (Builder $builder) use ($genres) {
-                foreach ($genres as $genre) {
-                    $builder->orWhereHas('genres', function ($q) use ($genre) {
-                        $q->where('id', '=', $genre);
-                    });
-                }
+            $query->whereHas('genres', function ($q) use ($genres) {
+                $q->whereIn('id', $genres);
             });
         } else {
             $query->whereRaw('1=2');
