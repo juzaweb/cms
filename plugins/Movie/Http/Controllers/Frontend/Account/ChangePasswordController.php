@@ -21,7 +21,7 @@ class ChangePasswordController extends FrontendController
         }
         
         $recently_visited = Movie::whereIn('id', $viewed)
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->paginate(5);
         
         return view('account.change_password', [

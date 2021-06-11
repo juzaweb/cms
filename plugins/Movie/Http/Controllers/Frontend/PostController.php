@@ -3,15 +3,15 @@
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use Plugins\Movie\Models\Posts;
+use Mymo\PostType\Models\Post;
 use Illuminate\Support\Facades\Cookie;
 
 class PostController extends FrontendController
 {
     public function index() {
-        $posts = Posts::where('status', '=', 1)
+        $posts = Post::wherePublish()
             ->orderBy('id', 'desc')
-            ->paginate(5, ['id', 'title', 'slug', 'meta_description']);
+            ->paginate(5, ['id', 'title', 'slug']);
         
         return view('post.index', [
             'title' => get_config('blog_title'),
@@ -23,7 +23,7 @@ class PostController extends FrontendController
     }
     
     public function detail($slug) {
-        $info = Posts::where('status', '=', 1)
+        $info = Posts::wherePublish()
             ->where('slug', '=', $slug)
             ->firstOrFail();
         

@@ -115,7 +115,7 @@ class SearchController extends FrontendController
             ->get(['id', 'name']);
         $countries = Taxonomy::where('taxonomy', '=', 'countries')
             ->get(['id', 'name']);
-        $years = Movie::where('status', '=', 1)
+        $years = Movie::wherePublish()
             ->groupBy('year')
             ->get(['year']);
         

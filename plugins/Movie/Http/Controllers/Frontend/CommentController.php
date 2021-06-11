@@ -17,7 +17,7 @@ class CommentController extends FrontendController
         ]);
         
         $movie = Movie::where('slug', '=', $movie_slug)
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->findOrFail();
         
         $movie->comments()->create([
@@ -39,7 +39,7 @@ class CommentController extends FrontendController
         ]);
         
         $post = Post::where('slug', '=', $post_slug)
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->firstOrFail();
     
         $post->comments()->create([

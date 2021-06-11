@@ -12,7 +12,7 @@ class LatestMoviesController extends FrontendController
             'name' => trans('mymo::app.latest_movies'),
         ];
         
-        $items = Movie::where('status', '=', 1)
+        $items = Movie::wherePublish()
             ->orderBy('id', 'DESC')
             ->paginate(20);
         
