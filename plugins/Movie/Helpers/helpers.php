@@ -11,10 +11,8 @@
  */
 
 use Plugins\Movie\Models\Ads;
-use Plugins\Movie\Models\Category\Countries;
-use Plugins\Movie\Models\Category\Genres;
-use Plugins\Movie\Models\Category\Types;
 use Plugins\Movie\Models\Movie\Movie;
+use Mymo\PostType\Models\Taxonomy;
 
 function get_ads(string $key) {
     $ads = Ads::where('key', '=', $key)
@@ -28,17 +26,17 @@ function get_ads(string $key) {
 }
 
 function genre_info($id) {
-    return Genres::where('id', '=', $id)
+    return Taxonomy::where('id', '=', $id)
         ->first(['id', 'name']);
 }
 
 function type_info($id) {
-    return Types::where('id', '=', $id)
+    return Taxonomy::where('id', '=', $id)
         ->first(['id', 'name']);
 }
 
 function country_info($id) {
-    return Countries::where('id', '=', $id)
+    return Taxonomy::where('id', '=', $id)
         ->first(['id', 'name']);
 }
 
@@ -67,7 +65,7 @@ function genre_setting($setting) {
     }
 
     $query = Movie::query();
-    $query->select([
+    $query->with(['taxonomies'])->select([
         'id',
         'name',
         'other_name',
@@ -77,14 +75,12 @@ function genre_setting($setting) {
         'views',
         'video_quality',
         'year',
-        'genres',
-        'countries',
         'tv_series',
         'current_episode',
         'max_episode',
     ]);
 
-    $query->where('status', '=', 1);
+    $query->wherePublish();
 
     if ($format) {
         $query->where('tv_series', '=', $format - 1);
@@ -92,22 +88,24 @@ function genre_setting($setting) {
 
     if ($ctype == 1) {
         if (@$setting->genre) {
-            $query->whereRaw('find_in_set(?, genres)', [$setting->genre]);
-            $result->url = route('genre', @Genres::find($setting->genre)->slug);
+            $query->whereHas('genres', function ($q) use ($setting) {
+                $q->where('id', $setting->genre);
+            });
+            $result->url = route('genre', [@Taxonomy::find($setting->genre)->slug]);
         }
     }
 
     if ($ctype == 2) {
         if (@$setting->type) {
             $query->where('type_id', '=', $setting->type);
-            $result->url = route('type', @Types::find($setting->type)->slug);
+            $result->url = route('type', @Taxonomy::find($setting->type)->slug);
         }
     }
 
     if ($ctype == 3) {
         if (@$setting->country) {
             $query->whereRaw('find_in_set(?, countries)', [$setting->country]);
-            $result->url = route('country', @Countries::find($setting->country)->slug);
+            $result->url = route('country', @Taxonomy::find($setting->country)->slug);
         }
     }
 
@@ -135,7 +133,7 @@ function genre_setting($setting) {
 
 function child_genres_setting($setting) {
     try {
-        $query = Genres::query();
+        $query = Taxonomy::query();
         $query->whereIn('id', $setting);
         $query->where('status', '=', 1);
         return $query->get(['id', 'name', 'slug']);

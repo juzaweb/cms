@@ -16,6 +16,7 @@ use Mymo\Core\Facades\HookAction;
 
 HookAction::registerPostType('movies', [
     'label' => trans('movie::app.movies'),
+    'model' => \Plugins\Movie\Models\Movie\Movie::class,
     'menu_icon' => 'fa fa-film',
     'menu_position' => 10,
     'supports' => ['tag'],
@@ -23,6 +24,7 @@ HookAction::registerPostType('movies', [
 
 HookAction::registerPostType('tv-series', [
     'label' => trans('movie::app.tv_series'),
+    'model' => \Plugins\Movie\Models\Movie\Movie::class,
     'menu_icon' => 'fa fa-film',
     'menu_position' => 11,
     'supports' => ['tag'],

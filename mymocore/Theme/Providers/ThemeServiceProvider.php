@@ -16,7 +16,7 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->loadViewsFrom(__DIR__ . '/../views', 'theme');
     }
 
     /**
@@ -31,6 +31,7 @@ class ThemeServiceProvider extends ServiceProvider
         $this->registerHelper();
         $this->consoleCommand();
         $this->registerMiddleware();
+        $this->app->register(RouteServiceProvider::class);
     }
 
     /**

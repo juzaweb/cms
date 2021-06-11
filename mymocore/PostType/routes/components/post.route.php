@@ -14,7 +14,5 @@
 
 Route::postTypeResource('posts', 'PostController');
 
-//Route::mymoResource('post/{taxonomy}', 'TaxonomyController');
-
-Route::mymoResource('post/comments', 'TaxonomyController');
+Route::mymoResource('comments', 'CommentController');
 

@@ -3,7 +3,6 @@
 namespace Plugins\Movie\Models\Movie;
 
 use Illuminate\Support\Arr;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Mymo\PostType\Traits\PostTypeModel;
 
@@ -50,6 +49,18 @@ class Movie extends Model
         return parent::fill($attributes);
     }
 
+    public function genres()
+    {
+        return $this->taxonomies()
+            ->where('taxonomy', '=', 'genres');
+    }
+
+    public function countries()
+    {
+        return $this->taxonomies()
+            ->where('taxonomy', '=', 'countries');
+    }
+
     public function rating()
     {
         return $this->hasMany('Plugins\Movie\Models\Movie\MovieRating', 'movie_id', 'id');
@@ -58,11 +69,6 @@ class Movie extends Model
     public function servers()
     {
         return $this->hasMany('Plugins\Movie\Models\Video\VideoServers', 'movie_id', 'id');
-    }
-    
-    public function comments()
-    {
-        return $this->hasMany('Plugins\Movie\Models\Movie\MovieComments', 'movie_id', 'id');
     }
     
     public function getViews()
@@ -133,13 +139,15 @@ class Movie extends Model
     
         $query->where('status', '=', 1)
             ->where('id', '!=', $this->id);
-    
-        $genres = explode(',', $this->genres);
+
+        $genres = $this->taxonomies()
+            ->where('taxonomy', '=', 'genres')
+            ->pluck('id')
+            ->toArray();
+
         if ($genres) {
-            $query->where(function (Builder $builder) use ($genres) {
-                foreach ($genres as $genre) {
-                    $builder->orWhereRaw('FIND_IN_SET(?, genres)', [$genre]);
-                }
+            $query->whereHas('genres', function ($q) use ($genres) {
+                $q->whereIn('id', $genres);
             });
         } else {
             $query->whereRaw('1=2');

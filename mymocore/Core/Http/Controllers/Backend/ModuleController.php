@@ -70,6 +70,6 @@ class ModuleController extends BackendController
             }
         }
         
-        return $this->success(trans('app.successfully'));
+        return $this->success(trans('mymo_core::app.successfully'));
     }
 }

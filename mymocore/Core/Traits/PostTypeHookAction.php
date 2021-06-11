@@ -67,6 +67,12 @@ trait PostTypeHookAction
                     'position' => $iargs->get('menu_position')
                 ]
             );
+
+            $this->registerPermalink($taxonomy, [
+                'label' => $iargs->get('label'),
+                'base' => $iargs->get('singular'),
+                'callback' => 'Mymo\\Theme\\Http\\Controllers\\TaxonomyController'
+            ]);
         }
     }
 
@@ -79,6 +85,10 @@ trait PostTypeHookAction
      */
     public function registerPostType($key, $args = [])
     {
+        if (empty($args['model'])) {
+            throw new \Exception('Post type model is required. E.x: \\Mymo\\PostType\\Models\\Post.');
+        }
+
         $args = array_merge([
             'label' => '',
             'description' => '',
