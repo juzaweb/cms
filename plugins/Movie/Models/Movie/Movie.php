@@ -5,6 +5,7 @@ namespace Plugins\Movie\Models\Movie;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
 use Mymo\PostType\Traits\PostTypeModel;
+use Plugins\Movie\Models\DownloadLink;
 
 class Movie extends Model
 {
@@ -59,6 +60,11 @@ class Movie extends Model
     {
         return $this->taxonomies()
             ->where('taxonomy', '=', 'countries');
+    }
+
+    public function downloadLinks()
+    {
+        return $this->hasMany(DownloadLink::class, 'movie_id', 'id');
     }
 
     public function rating()
@@ -133,11 +139,9 @@ class Movie extends Model
             'views',
             'release',
             'video_quality',
-            'genres',
-            'countries',
         ]);
     
-        $query->where('status', '=', 1)
+        $query->wherePublish()
             ->where('id', '!=', $this->id);
 
         $genres = $this->taxonomies()

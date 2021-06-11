@@ -48,7 +48,7 @@
                         </a>
 
                         <div class="title-wrapper">
-                            <h1 class="entry-title" data-toggle="tooltip" title="{{ $info->name }}">{{ $info->name }}<span class="title-year"> (<a href="{{ route('year', [$info->year]) }}" rel="tag">{{ $info->year }}</a>)</span></h1>
+                            <h1 class="entry-title" data-toggle="tooltip" title="{{ $info->name }}">{{ $info->name }} @if($info->year) <span class="title-year"> (<a href="{{ route('year', [$info->year]) }}" rel="tag">{{ $info->year }}</a>)</span> @endif</h1>
                         </div>
 
                         <div class="ratings_wrapper hidden-xs">
@@ -150,7 +150,7 @@
                         <div id="pagination-{{ $server->id }}"></div>
                         @endforeach
 
-                        @if(!$download_links->isEmpty())
+                        @if(!$info->downloadLinks->isEmpty())
                         <div class="mymo-server show_all_eps">
                             <span class="mymo-server-name">
                                 <span class="hl-download"></span> @lang('app.download')
@@ -158,7 +158,7 @@
 
 
                             <ul id="listsv-download" class="mymo-list-eps">
-                                @foreach($download_links as $download_link)
+                                @foreach($info->downloadLinks as $download_link)
                                     <li class="mymo-episode"><a href="{{ route('watch.download', [$download_link->id]) }}" target="_blank" rel="nofollow" title="{{ $download_link->label }}"><span class="mymo-download-{{ $download_link->id }} box-shadow mymo-btn" data-post-id="{{ $info->id }}">{{ $download_link->label }}</span></a></li>
                                 @endforeach
                             </ul>

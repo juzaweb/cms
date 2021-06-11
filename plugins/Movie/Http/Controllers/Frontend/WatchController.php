@@ -10,30 +10,30 @@ use Plugins\Movie\Models\Movie\Movie;
 class WatchController extends FrontendController
 {
     public function index($slug) {
-        $info = Movie::where('slug', '=', $slug)
-            ->where('status', '=', 1)
+        $info = Movie::with([
+            'taxonomies',
+            'downloadLinks' => function ($q) {
+                $q->where('status', '=', 1);
+                $q->orderBy('order', 'ASC');
+            }
+        ])
+            ->where('slug', '=', $slug)
+            ->wherePublish()
             ->firstOrFail();
         
-        $download_links = DownloadLink::where('movie_id', '=', $info->id)
-            ->where('status', '=', 1)
-            ->orderBy('order', 'ASC')
-            ->get();
-        
         return view('watch.index', [
-            'title' => $info->meta_title,
-            'description' => $info->meta_description,
-            'keywords' => $info->keywords,
+            'title' => $info->name,
+            'description' => $info->description,
             'banner' => $info->getPoster(),
-            'download_links' => $download_links,
             'body_class' => 'post-template-default single single-post postid-24594 single-format-aside logged-in admin-bar no-customize-support wp-embed-responsive mymothemes mymomovies mymo-corner-rounded',
             'related_movies' => $info->getRelatedMovies(8),
             'info' => $info,
             'player_id' => $this->_getFileVideo($info->id),
             'start' => $info->getStarRating(),
-            'genre' => $genre,
-            'genres' => $info->getGenres(),
-            'countries' => $info->getCountries(),
-            'tags' => $info->getTags(),
+            'tags' => $info->taxonomies->where('taxonomy', 'tags'),
+            'genres' => $info->taxonomies->where('taxonomy', 'genres'),
+            'countries' => $info->taxonomies->where('taxonomy', 'genres'),
+            'genre' => $info->taxonomies->where('taxonomy', 'genres')->first(),
             'servers' => $info->getServers(),
         ]);
     }
