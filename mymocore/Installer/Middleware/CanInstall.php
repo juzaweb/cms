@@ -3,6 +3,7 @@
 namespace Mymo\Installer\Middleware;
 
 use Closure;
+use Mymo\Installer\Helpers\Intaller;
 
 class CanInstall
 {
@@ -15,7 +16,7 @@ class CanInstall
      */
     public function handle($request, Closure $next)
     {
-        if ($this->alreadyInstalled()) {
+        if (Intaller::alreadyInstalled()) {
             $installedRedirect = config('installer.installedAlreadyAction');
 
             switch ($installedRedirect) {
@@ -44,15 +45,5 @@ class CanInstall
         }
 
         return $next($request);
-    }
-
-    /**
-     * If application is already installed.
-     *
-     * @return bool
-     */
-    public function alreadyInstalled()
-    {
-        return file_exists(storage_path('installed'));
     }
 }

@@ -8,7 +8,7 @@
         <title>@yield('template_title')</title>
 
         <script src="{{ asset('styles/js/app.js') }}"></script>
-        <link href="{{ asset('styles/installer/css/style.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('styles/installer/css/style.css') }}" rel="stylesheet"/>
 
         @yield('style')
 
@@ -32,7 +32,7 @@
                     <li class="step__divider"></li>
                     <li class="step__item {{ isActive('Installer::environment')}} {{ isActive('Installer::environmentWizard')}} {{ isActive('Installer::environmentClassic')}}">
                         @if(Request::is('install/environment') || Request::is('install/environment/wizard') || Request::is('install/environment/classic') )
-                            <a href="{{ route('Installer::environment') }}">
+                            <a href="{{ route('Installer::environmentWizard') }}">
                                 <i class="step__icon fa fa-cog" aria-hidden="true"></i>
                             </a>
                         @else
@@ -83,22 +83,7 @@
                             </strong>
                         </p>
                     @endif
-                    @if(session()->has('errors'))
-                        <div class="alert alert-danger" id="error_alert">
-                            <button type="button" class="close" id="close_alert" data-dismiss="alert" aria-hidden="true">
-                                 <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                            <h4>
-                                <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                                {{ trans('installer::installer_messages.forms.errorTitle') }}
-                            </h4>
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+
                     @yield('container')
                 </div>
             </div>

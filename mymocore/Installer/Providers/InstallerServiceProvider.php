@@ -5,6 +5,7 @@ namespace Mymo\Installer\Providers;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Mymo\Installer\Middleware\CanInstall;
+use Mymo\Installer\Middleware\Installed;
 
 class InstallerServiceProvider extends ServiceProvider
 {
@@ -38,7 +39,7 @@ class InstallerServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $router->middlewareGroup('install', [CanInstall::class]);
-        //$router->middlewareGroup('update', [CanUpdate::class]);
+        $router->pushMiddlewareToGroup('web', Installed::class);
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'installer');
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'installer');
     }

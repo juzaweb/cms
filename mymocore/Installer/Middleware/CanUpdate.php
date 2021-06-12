@@ -4,7 +4,7 @@ namespace Mymo\Installer\Middleware;
 
 use Closure;
 
-class canUpdate
+class CanUpdate
 {
     use \Mymo\Installer\Helpers\MigrationsHelper;
 

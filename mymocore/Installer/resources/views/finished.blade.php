@@ -27,10 +27,26 @@
         @endif
 	@endif
 
+    <form method="post" action="{{ route('Installer::environmentSaveWizard') }}" class="tabs-wrap" autocomplete="off">
+        @csrf
 
+        <div class="form-group {{ $errors->has('email') ? ' has-error ' : '' }}">
+            <label for="email">
+                {{ trans('installer::installer_messages.environment.wizard.form.db_host_label') }}
+            </label>
+            <input type="text" name="email" id="email" value="127.0.0.1" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.db_host_placeholder') }}" autocomplete="off" />
+            @if ($errors->has('email'))
+                <span class="error-block">
+                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{ $errors->first('email') }}
+                </span>
+            @endif
+        </div>
 
-    <div class="buttons">
+    </form>
+
+    {{--<div class="buttons">
         <a href="{{ url('/') }}" class="button">{{ trans('installer::installer_messages.final.exit') }}</a>
-    </div>
+    </div>--}}
 
 @endsection
