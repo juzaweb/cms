@@ -46,7 +46,7 @@ return [
         'storage/framework/'     => '775',
         'storage/logs/'          => '775',
         'bootstrap/cache/'       => '775',
-        'mymocore/'       => '775',
+        'mymocore/'              => '775',
     ],
 
     /*
@@ -104,7 +104,7 @@ return [
     'installed' => [
         'redirectOptions' => [
             'route' => [
-                'name' => 'welcome',
+                'name' => 'home',
                 'data' => [],
             ],
             'abort' => [
@@ -126,7 +126,7 @@ return [
     | route, abort, dump, 404, default, ''
     |
     */
-    'installedAlreadyAction' => '',
+    'installedAlreadyAction' => 'route',
 
     /*
     |--------------------------------------------------------------------------

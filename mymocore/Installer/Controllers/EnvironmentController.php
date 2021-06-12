@@ -73,7 +73,7 @@ class EnvironmentController extends Controller
 
         event(new EnvironmentSaved($input));
 
-        return $redirect->route('LaravelInstaller::environmentClassic')
+        return $redirect->route('Installer::environmentClassic')
                         ->with(['message' => $message]);
     }
 
@@ -94,11 +94,11 @@ class EnvironmentController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors($validator->errors());
+            return $redirect->route('Installer::environmentWizard')->withInput()->withErrors($validator->errors());
         }
 
         if (! $this->checkDatabaseConnection($request)) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors([
+            return $redirect->route('Installer::environmentWizard')->withInput()->withErrors([
                 'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
             ]);
         }
@@ -107,7 +107,7 @@ class EnvironmentController extends Controller
 
         event(new EnvironmentSaved($request));
 
-        return $redirect->route('LaravelInstaller::database')
+        return $redirect->route('Installer::database')
                         ->with(['results' => $results]);
     }
 

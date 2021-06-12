@@ -36,7 +36,6 @@ class DbConfigServiceProvider extends ServiceProvider
     
     protected function checkDbConnection()
     {
-
         try {
             DB::connection()->getPdo();
 
