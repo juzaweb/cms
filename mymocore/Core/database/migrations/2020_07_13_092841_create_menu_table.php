@@ -1,7 +1,5 @@
 <?php
 
-use Mymo\Core\Models\Category\Countries;
-use Mymo\Core\Models\Category\Genres;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -17,8 +15,8 @@ class CreateMenuTable extends Migration
             $table->timestamps();
         });
         
-        $this->_createMainMenu();
-        $this->_createFooterMenu();
+        //$this->_createMainMenu();
+        //$this->_createFooterMenu();
     }
     
     public function down()
