@@ -32,7 +32,7 @@ your extra branch.
 
 ## Rules for branching and merging
 - The branch must be forked from `develop`.
-- Do not continue from the branch that was merged into develop, but have to split again from `develop`.
+- Do not continue from the branch that was merged into develop, have to split again from `develop`.
 - Do not merge sub-branches together.
 - Each commit can't have too many changes, just make sure the code builds and runs, if it doesn't build or run, add WIP: at the beginning of the commit message.
 - Make sure the code runs without build errors before creating the Pull Request.
