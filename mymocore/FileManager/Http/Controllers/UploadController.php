@@ -2,6 +2,7 @@
 
 namespace Mymo\FileManager\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Mymo\Core\Models\Files;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class UploadController extends FileManagerController
     
     public function upload(Request $request)
     {
-        $folder_id = request()->input('working_dir');
+        $folder_id = $request->input('working_dir');
         
         if (empty($folder_id)) {
             $folder_id = null;
@@ -66,7 +67,7 @@ class UploadController extends FileManagerController
     
     protected function saveFile(UploadedFile $file, $folder_id) {
         $filename = $this->createFilename($file);
-        $storage = \Storage::disk('public');
+        $storage = Storage::disk('public');
         $new_path = $storage->putFileAs(date('Y/m/d'), $file, $filename);
     
         if ($new_path) {

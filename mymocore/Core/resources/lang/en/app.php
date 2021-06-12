@@ -279,5 +279,6 @@ return [
     'save_successfully' => 'Save successfully',
     'send_mail_successfully' => 'Send email successfully',
     'click_here_to_select_file' => 'Click here to select file',
+    'url' => 'Url',
 ];
 

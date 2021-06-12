@@ -129,7 +129,7 @@ HookAction::addAdminMenu(
     ]
 );
 
-HookAction::addAdminMenu(
+/*HookAction::addAdminMenu(
     trans('mymo_core::app.translations'),
     'setting.language',
     [
@@ -137,7 +137,7 @@ HookAction::addAdminMenu(
         'position' => 5,
         'parent' => 'setting',
     ]
-);
+);*/
 
 HookAction::addAdminMenu(
     trans('mymo_core::app.logs'),
