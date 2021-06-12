@@ -95,12 +95,12 @@ class EnvironmentManager
         $results = trans('installer::installer_messages.environment.success');
 
         $envFileData =
-        "APP_NAME=Mymocms".
+        "APP_NAME=Mymocms\n".
         "APP_ENV=production\n".
         "APP_KEY=base64:".base64_encode(Str::random(32))."\n".
         "APP_DEBUG=false\n".
-        "LOG_CHANNEL=daily\n".
         "APP_URL=http://localhost\n\n".
+        "LOG_CHANNEL=daily\n\n".
         "DB_CONNECTION=mysql\n".
         "DB_HOST=". $request->input('database_hostname') ."\n".
         'DB_PORT='. $request->input('database_port') ."\n".

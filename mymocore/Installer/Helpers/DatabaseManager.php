@@ -7,6 +7,7 @@ use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseManager
@@ -15,14 +16,24 @@ class DatabaseManager
      * Migrate and seed the database.
      *
      * @return array
+     * @throws Exception
      */
-    public function migrateAndSeed()
+    public function run()
     {
-        $outputLog = new BufferedOutput;
-
+        $outputLog = new BufferedOutput();
         $this->sqlite($outputLog);
 
-        return $this->migrate($outputLog);
+        DB::beginTransaction();
+        try {
+            $migrate = $this->migrate($outputLog);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return $this->response($e->getMessage(), 'error', $outputLog);
+        }
+
+        return $migrate;
     }
 
     /**
@@ -39,7 +50,7 @@ class DatabaseManager
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
 
-        return $this->seed($outputLog);
+        return $this->response(trans('installer::installer_messages.final.finished'), 'success', $outputLog);
     }
 
     /**

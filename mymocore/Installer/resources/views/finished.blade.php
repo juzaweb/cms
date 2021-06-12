@@ -11,19 +11,23 @@
 
 @section('container')
 
-	@if(session('message')['dbOutputLog'])
-		<p><strong><small>{{ trans('installer::installer_messages.final.migration') }}</small></strong></p>
-		<pre><code>{{ session('message')['dbOutputLog'] }}</code></pre>
+	@if($result = session('message'))
+		@if($result['status'] == 'error')
+            <div class="alert error-alert">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                {{ $result['message'] }}
+            </div>
+        @endif
+
+        @if($result['status'] == 'success')
+            <div class="alert success-alert">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                {{ $result['message'] }}
+            </div>
+        @endif
 	@endif
 
-	<p><strong><small>{{ trans('installer::installer_messages.final.console') }}</small></strong></p>
-	<pre><code>{{ $finalMessages }}</code></pre>
 
-	<p><strong><small>{{ trans('installer::installer_messages.final.log') }}</small></strong></p>
-	<pre><code>{{ $finalStatusMessage }}</code></pre>
-
-	<p><strong><small>{{ trans('installer::installer_messages.final.env') }}</small></strong></p>
-	<pre><code>{{ $finalEnvFile }}</code></pre>
 
     <div class="buttons">
         <a href="{{ url('/') }}" class="button">{{ trans('installer::installer_messages.final.exit') }}</a>

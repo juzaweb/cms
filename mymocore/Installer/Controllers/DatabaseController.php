@@ -3,6 +3,7 @@
 namespace Mymo\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Artisan;
 use Mymo\Installer\Helpers\DatabaseManager;
 
 class DatabaseController extends Controller
@@ -24,10 +25,11 @@ class DatabaseController extends Controller
      * Migrate and seed the database.
      *
      * @return \Illuminate\View\View
+     * @throws \Exception
      */
     public function database()
     {
-        $response = $this->databaseManager->migrateAndSeed();
+        $response = $this->databaseManager->run();
 
         return redirect()->route('Installer::final')
                          ->with(['message' => $response]);
