@@ -88,7 +88,7 @@ class EnvironmentController extends Controller
     {
         $rules = config('installer.environment.form.rules');
         $messages = [
-            'environment_custom.required_if' => trans('installer_messages.environment.wizard.form.name_required'),
+            'environment_custom.required_if' => trans('installer::installer_messages.environment.wizard.form.name_required'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -99,7 +99,7 @@ class EnvironmentController extends Controller
 
         if (! $this->checkDatabaseConnection($request)) {
             return $redirect->route('Installer::environmentWizard')->withInput()->withErrors([
-                'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
+                'database_connection' => trans('installer::installer_messages.environment.wizard.form.db_connection_failed'),
             ]);
         }
 
@@ -112,7 +112,6 @@ class EnvironmentController extends Controller
     }
 
     /**
-     * TODO: We can remove this code if PR will be merged: https://github.com/RachidLaasri/LaravelInstaller/pull/162
      * Validate database connection with user credentials (Form Wizard).
      *
      * @param Request $request
@@ -120,7 +119,7 @@ class EnvironmentController extends Controller
      */
     private function checkDatabaseConnection(Request $request)
     {
-        $connection = $request->input('database_connection');
+        $connection = 'mysql';
 
         $settings = config("database.connections.$connection");
 

@@ -21,16 +21,6 @@ Route::group(['prefix' => 'install', 'as' => 'Installer::', 'namespace' => 'Mymo
         'uses' => 'EnvironmentController@saveWizard',
     ]);
 
-    Route::get('environment/classic', [
-        'as' => 'environmentClassic',
-        'uses' => 'EnvironmentController@environmentClassic',
-    ]);
-
-    Route::post('environment/saveClassic', [
-        'as' => 'environmentSaveClassic',
-        'uses' => 'EnvironmentController@saveClassic',
-    ]);
-
     Route::get('requirements', [
         'as' => 'requirements',
         'uses' => 'RequirementsController@requirements',
