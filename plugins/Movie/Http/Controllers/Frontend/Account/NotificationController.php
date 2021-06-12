@@ -12,7 +12,7 @@ class NotificationController extends FrontendController
             ->paginate(10);
         
         return view('account.notification.index', [
-            'title' => trans('mymo::app.notification'),
+            'title' => trans('theme::app.notification'),
             'user' => $user,
             'notifications' => $notifications
         ]);
@@ -30,7 +30,7 @@ class NotificationController extends FrontendController
         }
         
         return view('account.notification.detail', [
-            'title' => trans('mymo::app.notification'),
+            'title' => trans('theme::app.notification'),
             'user' => $user,
             'notification' => $notification
         ]);

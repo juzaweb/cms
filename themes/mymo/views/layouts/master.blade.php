@@ -55,15 +55,15 @@
             "sync":null,
             "db_redirect_url":"{{ url()->current() }}",
             "languages": {
-                'notification': '@lang('mymo::app.notification')',
-                'nothing_found': '@lang('mymo::app.nothing_found')',
-                'remove_all': '@lang('mymo::app.remove_all')',
-                'bookmark': '@lang('mymo::app.bookmark')',
+                'notification': '@lang('theme::app.notification')',
+                'nothing_found': '@lang('theme::app.nothing_found')',
+                'remove_all': '@lang('theme::app.remove_all')',
+                'bookmark': '@lang('theme::app.bookmark')',
             }
         };
 
         var langs = {
-            'data_error': '@lang('mymo::app.data_error')'
+            'data_error': '@lang('theme::app.data_error')'
         };
         /* ]]> */
     </script>
@@ -77,25 +77,25 @@
             "register_url": "{{ route('register.submit') }}",
             "forgot_password_url": "{{ route('password.forgot.submit') }}",
             "redirecturl":"{{ url()->current() }}",
-            "loadingmessage":"@lang('mymo::app.please_wait')",
+            "loadingmessage":"@lang('theme::app.please_wait')",
             "recaptcha":"{{ get_config('google_recaptcha') }}",
             "sitekey":"{{ get_config('google_recaptcha_key') }}",
             "languages":{
-                "login":"@lang('mymo::app.login')",
-                "register":"@lang('mymo::app.register')",
-                "forgotpassword":"@lang('mymo::app.forgot_password')?",
-                "already_account":"@lang('mymo::app.already_have_an_account')",
-                "create_account":"@lang('mymo::app.create_account')",
-                "reset_captcha":"@lang('mymo::app.reset_captcha')",
-                "username":"@lang('mymo::app.name')",
-                "email":"@lang('mymo::app.email')",
-                "username_email":"@lang('mymo::app.email')",
-                "password":"@lang('mymo::app.password')",
-                "reset_password":"@lang('mymo::app.reset_password')",
-                "login_with":"@lang('mymo::app.login_with')",
-                "register_with":"@lang('mymo::app.register_with')",
-                "or":"@lang('mymo::app.or')",
-                "apparently_there_are_no_posts_to_show": "@lang('mymo::app.apparently_there_are_no_posts_to_show')"
+                "login":"@lang('theme::app.login')",
+                "register":"@lang('theme::app.register')",
+                "forgotpassword":"@lang('theme::app.forgot_password')?",
+                "already_account":"@lang('theme::app.already_have_an_account')",
+                "create_account":"@lang('theme::app.create_account')",
+                "reset_captcha":"@lang('theme::app.reset_captcha')",
+                "username":"@lang('theme::app.name')",
+                "email":"@lang('theme::app.email')",
+                "username_email":"@lang('theme::app.email')",
+                "password":"@lang('theme::app.password')",
+                "reset_password":"@lang('theme::app.reset_password')",
+                "login_with":"@lang('theme::app.login_with')",
+                "register_with":"@lang('theme::app.register_with')",
+                "or":"@lang('theme::app.or')",
+                "apparently_there_are_no_posts_to_show": "@lang('theme::app.apparently_there_are_no_posts_to_show')"
             }
         };
         /* ]]> */

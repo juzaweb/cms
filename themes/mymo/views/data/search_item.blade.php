@@ -1,4 +1,4 @@
-<li>@lang('mymo::app.result_for_keyword'): <strong class="text-danger">{{ $keyword }}</strong></li>
+<li>@lang('theme::app.result_for_keyword'): <strong class="text-danger">{{ $keyword }}</strong></li>
 @foreach($items as $item)
 <li class="exact_result">
     <a href="{{ route('watch', [$item->slug]) }}" title="{{ $item->name }}{{ $item->other_name ? ' - ' . $item->other_name : '' }}">

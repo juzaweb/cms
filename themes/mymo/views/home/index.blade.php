@@ -9,7 +9,7 @@
                         {{ get_config('title') }}
                     </div>
                     <div class="col-xs-4 text-right">
-                        <a href="javascript:;" id="expand-ajax-filter">@lang('mymo::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                        <a href="javascript:;" id="expand-ajax-filter">@lang('theme::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                     </div>
                     <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
                 </div>
@@ -106,7 +106,7 @@
                         @endforeach
                     @endif
 
-                    <a href="{{ @$genre->url }}" class="see-more">@lang('mymo::app.view_all') »</a>
+                    <a href="{{ @$genre->url }}" class="see-more">@lang('theme::app.view_all') »</a>
                 </div>
             </section>
             <div class="clearfix"></div>

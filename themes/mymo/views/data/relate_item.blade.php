@@ -29,8 +29,8 @@
                                 <div class=text-center>
                                     <span class=released><i class=hl-calendar></i> {{ $item->year }}</span>                                    <span class=runtime><i class=hl-clock></i> 87 Phút</span>                                </div>
                                 <div class=film-content>{{ $item->short_description }}</div>
-                                <p class=category>@lang('mymo::app.countries'): {{ $country_str }}</p>
-                                <p class=category>@lang('mymo::app.genres'): {{ $genre_str }}</p>
+                                <p class=category>@lang('theme::app.countries'): {{ $country_str }}</p>
+                                <p class=category>@lang('theme::app.genres'): {{ $genre_str }}</p>
                             </div>">
         </div>
 

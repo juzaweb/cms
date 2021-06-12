@@ -97,13 +97,13 @@ class SearchController extends FrontendController
         }
         
         $info = (object) [
-            'name' => trans('mymo::app.result_for_keyword') . ' '. $q,
+            'name' => trans('theme::app.result_for_keyword') . ' '. $q,
         ];
         
         return view('genre.index', [
-            'title' => trans('mymo::app.result_for_keyword') . ' '. $q,
-            'description' => trans('mymo::app.result_for_keyword') . ' '. $q,
-            'keywords' => trans('mymo::app.result_for_keyword') . ' '. $q,
+            'title' => trans('theme::app.result_for_keyword') . ' '. $q,
+            'description' => trans('theme::app.result_for_keyword') . ' '. $q,
+            'keywords' => trans('theme::app.result_for_keyword') . ' '. $q,
             'info' => $info,
             'items' => $query->paginate(20),
         ]);

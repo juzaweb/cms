@@ -169,11 +169,6 @@ return [
   'change_photo' => 'Change photo',
   'other_pages' => 'Other pages',
   'custom_url' => 'Custom url',
-  'header' => 'Header',
-  'main_menu' => 'Main menu',
-  'home_page' => 'Home page',
-  'slider' => 'Slider',
-  'footer' => 'Footer',
   'column' => 'Column',
   'change' => 'Change',
   'change_password' => 'Change password',
@@ -279,5 +274,6 @@ return [
     'save_successfully' => 'Save successfully',
     'send_mail_successfully' => 'Send email successfully',
     'click_here_to_select_file' => 'Click here to select file',
+    'url' => 'Url',
 ];
 

@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'prefix' => 'admin-cp/file-manager',
+    'prefix' => config('mymo_core.admin_prefix') . '/file-manager',
     'middleware' => ['web', 'admin']
 ], function ()
 {
@@ -11,7 +11,7 @@ Route::group([
 
     Route::any('/upload', 'UploadController@upload')->name('filemanager.upload');
 
-    Route::get('/jsonitems', 'ItemsController@getItems');
+    Route::get('/json-items', 'ItemsController@getItems');
 
     /*Route::get('/move', 'ItemsController@move');
 
