@@ -102,4 +102,9 @@ return [
     'tv_series' => 'TV Series',
     'genres' => 'Genres',
     'latest_movies' => 'Latest movies',
+    'header' => 'Header',
+    'main_menu' => 'Main menu',
+    'home_page' => 'Home page',
+    'slider' => 'Slider',
+    'footer' => 'Footer',
 ];

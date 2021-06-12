@@ -6,5 +6,5 @@
         <h3 class="title">{{ $item->name }}</h3>
         <p class="original_title">{{ $item->other_name }} ({{ $item->year }})</p>
     </a>
-    <div class="viewsCount">{{ $item->getViews() }} @lang('mymo::app.views')</div>
+    <div class="viewsCount">{{ $item->getViews() }} @lang('theme::app.views')</div>
 </div>

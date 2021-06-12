@@ -9,14 +9,14 @@
                         <div class="yoast_breadcrumb">
                             <span>
                                 <span>
-                                    <a href="{{ route('home') }}">@lang('mymo::app.home')</a> »
-                                    <span class="breadcrumb_last" aria-current="page">@lang('mymo::app.verified_success')</span>
+                                    <a href="{{ route('home') }}">@lang('theme::app.home')</a> »
+                                    <span class="breadcrumb_last" aria-current="page">@lang('theme::app.verified_success')</span>
                                 </span>
                             </span>
                         </div>
                     </div>
                     <div class="col-xs-4 text-right">
-                        <a href="javascript:;" id="expand-ajax-filter">@lang('mymo::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                        <a href="javascript:;" id="expand-ajax-filter">@lang('theme::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                     </div>
                     <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
                 </div>
@@ -33,18 +33,18 @@
                     <div class="col-md-6">
                         <form action="{{ route('password.reset.submit', [$token]) }}" method="post" class="form-ajax">
 
-                            <label>@lang('mymo::app.new_password')</label>
+                            <label>@lang('theme::app.new_password')</label>
                             <div class="form-group pass_show">
-                                <input type="password" class="form-control" name="password" placeholder="@lang('mymo::app.new_password')">
+                                <input type="password" class="form-control" name="password" placeholder="@lang('theme::app.new_password')">
                             </div>
 
-                            <label>@lang('mymo::app.confirm_password')</label>
+                            <label>@lang('theme::app.confirm_password')</label>
                             <div class="form-group pass_show">
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="@lang('mymo::app.confirm_password')">
+                                <input type="password" class="form-control" name="password_confirmation" placeholder="@lang('theme::app.confirm_password')">
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success">@lang('mymo::app.update')</button>
+                                <button type="submit" class="btn btn-success">@lang('theme::app.update')</button>
                             </div>
 
                         </form>

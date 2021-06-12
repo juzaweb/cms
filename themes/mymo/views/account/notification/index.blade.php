@@ -8,15 +8,15 @@
                     <div class="col-xs-8 hidden-xs">
                         <div class="yoast_breadcrumb"><span>
                             <span>
-                                <a href="{{ route('home') }}">@lang('mymo::app.home')</a> »
+                                <a href="{{ route('home') }}">@lang('theme::app.home')</a> »
                                 <a href="{{ route('account') }}">{{ $user->name }}</a> »
-                                <span class="breadcrumb_last" aria-current="page">@lang('mymo::app.notification')</span>
+                                <span class="breadcrumb_last" aria-current="page">@lang('theme::app.notification')</span>
                             </span>
                         </span>
                         </div>
                     </div>
                     <div class="col-xs-4 text-right">
-                        <a href="javascript:;" id="expand-ajax-filter">@lang('mymo::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                        <a href="javascript:;" id="expand-ajax-filter">@lang('theme::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                     </div>
                     <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
                 </div>
@@ -32,7 +32,7 @@
             <section>
                 <div class="section-bar clearfix">
                     <h3 class="section-title">
-                        <span>@lang('mymo::app.notification')</span><span class="count pull-right"><i></i> item</span>
+                        <span>@lang('theme::app.notification')</span><span class="count pull-right"><i></i> item</span>
                     </h3>
                 </div>
 
@@ -40,8 +40,8 @@
                     <thead>
                         <tr>
                             <th width="5%">#</th>
-                            <th>@lang('mymo::app.subject')</th>
-                            <th width="20%">@lang('mymo::app.created_at')</th>
+                            <th>@lang('theme::app.subject')</th>
+                            <th width="20%">@lang('theme::app.created_at')</th>
                         </tr>
                     </thead>
 
