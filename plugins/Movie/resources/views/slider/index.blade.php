@@ -11,7 +11,19 @@
     </div>
 
     <div class="row mb-3">
-        <div class="col-md-12">
+        <div class="col-md-4">
+            <form method="post" class="form-inline">
+                @csrf
+                <select name="bulk_actions" class="form-control w-60 mb-2 mr-1">
+                    <option value="">@lang('mymo_core::app.bulk_actions')</option>
+                    <option value="delete">@lang('mymo_core::app.delete')</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary mb-2" id="apply-action">@lang('mymo_core::app.apply')</button>
+            </form>
+        </div>
+
+        <div class="col-md-8">
             <form method="get" class="form-inline" id="form-search">
 
                 <div class="form-group mb-2 mr-1">
