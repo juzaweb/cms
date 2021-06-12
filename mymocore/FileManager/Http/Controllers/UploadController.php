@@ -34,7 +34,6 @@ class UploadController extends FileManagerController
         $new_path = null;
     
         try {
-    
             $receiver = new FileReceiver('upload', $request, HandlerFactory::classFromRequest($request));
             if ($receiver->isUploaded() === false) {
                 throw new UploadMissingFileException();

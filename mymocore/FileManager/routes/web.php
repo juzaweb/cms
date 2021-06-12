@@ -11,7 +11,7 @@ Route::group([
 
     Route::any('/upload', 'UploadController@upload')->name('filemanager.upload');
 
-    Route::get('/json-items', 'ItemsController@getItems');
+    Route::get('/jsonitems', 'ItemsController@getItems');
 
     /*Route::get('/move', 'ItemsController@move');
 
