@@ -319,6 +319,6 @@ class Theme implements ThemeContract
         if ($themeInfo->has('type') && !empty($themeInfo->get('type'))) {
             $this->finder->prependNamespace($themeInfo->get('type'), $viewPath);
         }
-        $this->lang->addNamespace($themeInfo->get('name'), $langPath);
+        $this->lang->addNamespace('theme', $langPath);
     }
 }

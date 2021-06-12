@@ -65,7 +65,7 @@ if (strpos($input['name'], '[')) {
     <select name="{{ $input_name }}" class="load-genres">
         @if($input_value)
             @php
-                $genre = \App\Core\Models\Category\Genres::where('id', '=', $input_value)
+                $genre = \Mymo\PostType\Models\Taxonomy::where('id', '=', $input_value)
                     ->first(['name']);
             @endphp
             <option value="{{ $input_value }}">{{ @$genre->name }}</option>
@@ -78,7 +78,7 @@ if (strpos($input['name'], '[')) {
     <select name="{{ $input_name }}[]" class="load-genres" multiple>
         @if($input_value)
             @php
-                $genres = \App\Core\Models\Category\Genres::whereIn('id', $input_value)
+                $genres = \Mymo\PostType\Models\Taxonomy::whereIn('id', $input_value)
                     ->get(['id', 'name']);
             @endphp
 

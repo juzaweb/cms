@@ -25,7 +25,7 @@
     </div>
 </div>
 
-{{--
+
 @foreach($config as $index => $item)
     @php
         $options = theme_config($item['code']);
@@ -108,4 +108,4 @@
             </form>
         </div>
     </div>
-@endforeach--}}
+@endforeach

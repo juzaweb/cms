@@ -102,9 +102,12 @@ class Config extends Model
     }
     
     public static function setConfig(string $key, $value = null) {
+        $setting = null;
         if (is_string($value)) {
             $setting = $value;;
-        } else {
+        }
+
+        if (is_array($value)) {
             $setting = array_merge(get_config($key, []), $value);
             $setting = json_encode($setting);
         }

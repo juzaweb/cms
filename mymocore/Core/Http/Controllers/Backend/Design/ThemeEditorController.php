@@ -6,12 +6,14 @@ use Mymo\Core\Models\Config;
 use Mymo\Core\Models\ThemeConfig;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\Theme\Facades\Theme;
 
 class ThemeEditorController extends BackendController
 {
     public function index() {
+        Theme::set('mymo');
         $config = include base_path('themes/mymo/config.php');
-        
+
         return view('mymo_core::backend.design.editor.index', [
             'config' => $config,
         ]);
