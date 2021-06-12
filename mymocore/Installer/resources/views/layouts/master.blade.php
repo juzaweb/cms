@@ -5,10 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>@if (trim($__env->yieldContent('template_title')))@yield('template_title') | @endif {{ trans('installer::installer_messages.title') }}</title>
+        <title>@yield('template_title')</title>
 
+        <script src="{{ asset('styles/js/app.js') }}"></script>
         <link href="{{ asset('styles/installer/css/style.min.css') }}" rel="stylesheet"/>
+
         @yield('style')
+
         <script>
             window.Laravel = @json([
                 'csrfToken' => csrf_token(),
@@ -104,9 +107,11 @@
         <script type="text/javascript">
             var x = document.getElementById('error_alert');
             var y = document.getElementById('close_alert');
-            y.onclick = function() {
-                x.style.display = "none";
-            };
+            if (x && y) {
+                y.onclick = function() {
+                    x.style.display = "none";
+                };
+            }
         </script>
     </body>
 </html>
