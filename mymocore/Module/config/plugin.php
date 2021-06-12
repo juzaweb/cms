@@ -86,7 +86,7 @@ return [
         | The migrations path
         |--------------------------------------------------------------------------
         |
-        | Where you run 'module:publish-migration' command, where do you publish the
+        | Where you run 'plugin:publish-migration' command, where do you publish the
         | the migration files?
         |
         */
