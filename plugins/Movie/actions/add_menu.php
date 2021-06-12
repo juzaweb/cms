@@ -47,3 +47,12 @@ HookAction::registerTaxonomy('countries', ['movies', 'tv-series'], [
         'thumbnail'
     ],
 ]);
+
+HookAction::addAdminMenu(
+    trans('movie::app.sliders'),
+    'sliders',
+    [
+        'icon' => 'fa fa-paint-brush',
+        'position' => 10,
+        'parent' => 'appearance',
+    ]);

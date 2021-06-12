@@ -3,6 +3,7 @@
 namespace Plugins\Movie\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Mymo\Core\Traits\ResourceModel;
 
 /**
  * Plugins\Movie\Models\Slider
@@ -24,8 +25,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Slider extends Model
 {
+    use ResourceModel;
+
+    protected $fieldName = 'name';
     protected $table = 'sliders';
     protected $fillable = [
         'name',
+        'content'
+    ];
+
+    protected $casts = [
+        'content' => 'array'
     ];
 }
