@@ -42,13 +42,13 @@ trait ResourceController
     public function edit($id)
     {
         $this->addBreadcrumb([
-            'title' => $this->getSetting()->get('label'),
+            'title' => $this->getTitle(),
             'url' => action([static::class, 'index']),
         ]);
 
         $model = $this->makeModel()->findOrFail($id);
         return view($this->viewPrefix . '.form', array_merge([
-            'title' => $model->{$this->getFieldName()}
+            'title' => $model->{$model->getFieldName()}
         ], $this->getDataDataForForm($model)));
     }
 
@@ -59,7 +59,7 @@ trait ResourceController
         try {
             $this->beforeStore($request);
             $model = $this->makeModel();
-            $model->fill($request->all());
+            $model->fill($this->parseDataForSave($request->all()));
             $model->save();
             $this->afterStore($request, $model);
             DB::commit();
@@ -80,9 +80,8 @@ trait ResourceController
         DB::beginTransaction();
         try {
             $this->beforeUpdate($request, $model);
-            $model->fill($request->all());
+            $model->fill($this->parseDataForSave($request->all()));
             $model->save();
-            $model->syncTaxonomies($request->all());
             $this->afterUpdate($request, $model);
             DB::commit();
         } catch (\Exception $e) {
@@ -172,6 +171,11 @@ trait ResourceController
     protected function makeModel()
     {
         return app($this->getModel());
+    }
+
+    protected function parseDataForSave(array $attributes)
+    {
+        return $attributes;
     }
 
     /**

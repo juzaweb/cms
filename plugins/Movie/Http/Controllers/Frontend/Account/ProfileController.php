@@ -2,23 +2,25 @@
 
 namespace Plugins\Movie\Http\Controllers\Frontend\Account;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Mymo\Core\Http\Controllers\FrontendController;
 use Plugins\Movie\Models\Movie\Movie;
 
 class ProfileController extends FrontendController
 {
-    public function index() {
+    public function index()
+    {
         $viewed = Cookie::get('viewed');
         $viewed = $viewed ? json_decode($viewed, true) : [0];
-        $recently_visited = Movie::whereIn('id', $viewed)
+        $recentlyVisited = Movie::whereIn('id', $viewed)
             ->wherePublish()
             ->paginate(5);
         
         return view('account.index', [
             'title' => trans('mymo::app.profile'),
-            'user' => \Auth::user(),
-            'recently_visited' => $recently_visited
+            'user' => Auth::user(),
+            'recently_visited' => $recentlyVisited
         ]);
     }
 }

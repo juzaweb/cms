@@ -86,7 +86,7 @@ HookAction::addAdminMenu(
     'editor',
     [
         'icon' => 'fa fa-edit',
-        'position' => 3,
+        'position' => 30,
         'parent' => 'appearance',
         'turbolinks' => false,
     ]
