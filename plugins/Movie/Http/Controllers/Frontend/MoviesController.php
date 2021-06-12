@@ -10,7 +10,7 @@ class MoviesController extends FrontendController
     public function index()
     {
         $info = (object) [
-            'name' => trans('mymo::app.movies'),
+            'name' => trans('theme::app.movies'),
         ];
         
         $items = Movie::select([

@@ -13,7 +13,7 @@ class CommentController extends FrontendController
         $this->validateRequest([
             'content' => 'required',
         ], $request, [
-            'content' => trans('mymo::app.content')
+            'content' => trans('theme::app.content')
         ]);
         
         $movie = Movie::where('slug', '=', $movie_slug)
@@ -35,7 +35,7 @@ class CommentController extends FrontendController
         $this->validateRequest([
             'content' => 'required',
         ], $request, [
-            'content' => trans('mymo::app.content')
+            'content' => trans('theme::app.content')
         ]);
         
         $post = Post::where('slug', '=', $post_slug)

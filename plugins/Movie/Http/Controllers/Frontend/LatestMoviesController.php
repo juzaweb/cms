@@ -9,7 +9,7 @@ class LatestMoviesController extends FrontendController
 {
     public function index() {
         $info = (object) [
-            'name' => trans('mymo::app.latest_movies'),
+            'name' => trans('theme::app.latest_movies'),
         ];
         
         $items = Movie::wherePublish()

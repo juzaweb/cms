@@ -10,7 +10,7 @@ class TVSeriesController extends FrontendController
     public function index()
     {
         $info = (object) [
-            'name' => trans('mymo::app.tv_series')
+            'name' => trans('theme::app.tv_series')
         ];
         
         $items = Movie::select([

@@ -25,7 +25,7 @@ class ChangePasswordController extends FrontendController
             ->paginate(5);
         
         return view('account.change_password', [
-            'title' => trans('mymo::app.change_password'),
+            'title' => trans('theme::app.change_password'),
             'user' => \Auth::user(),
             'recently_visited' => $recently_visited
         ]);
@@ -38,9 +38,9 @@ class ChangePasswordController extends FrontendController
             'password' => 'required|string|max:32|min:6|confirmed',
             'password_confirmation' => 'required|string|max:32|min:6'
         ], $request, [
-            'current_password' => trans('mymo::app.current_password'),
-            'password' => trans('mymo::app.new_password'),
-            'password_confirmation' => trans('mymo::app.confirm_password')
+            'current_password' => trans('theme::app.current_password'),
+            'password' => trans('theme::app.new_password'),
+            'password_confirmation' => trans('theme::app.confirm_password')
         ]);
         
         $current_password = $request->post('current_password');
@@ -49,7 +49,7 @@ class ChangePasswordController extends FrontendController
         if (!\Hash::check($current_password, \Auth::user()->password)) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('mymo::app.current_password_incorrect'),
+                'message' => trans('theme::app.current_password_incorrect'),
             ]);
         }
         
@@ -60,7 +60,7 @@ class ChangePasswordController extends FrontendController
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo::app.change_password_successfully'),
+            'message' => trans('theme::app.change_password_successfully'),
         ]);
     }
 }

@@ -20,8 +20,8 @@ class LoginController extends FrontendController
             'email' => 'required|email',
             'password' => 'required',
         ], $request, [
-            'email' => trans('mymo::app.email'),
-            'password' => trans('mymo::app.password'),
+            'email' => trans('theme::app.email'),
+            'password' => trans('theme::app.password'),
         ]);
         
         if (get_config('google_recaptcha')) {
@@ -38,14 +38,14 @@ class LoginController extends FrontendController
             if (Auth::attempt($request->only(['email', 'password']), 1)) {
                 return response()->json([
                     'status' => 'success',
-                    'message' => trans('mymo::app.logged_successfully'),
+                    'message' => trans('theme::app.logged_successfully'),
                 ]);
             }
         }
         
         return response()->json([
             'status' => 'error',
-            'message' => trans('mymo::app.email_or_password_is_incorrect'),
+            'message' => trans('theme::app.email_or_password_is_incorrect'),
         ]);
      }
     
