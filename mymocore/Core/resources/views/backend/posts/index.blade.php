@@ -41,8 +41,9 @@
                     <label for="inputStatus" class="sr-only">@lang('mymo_core::app.status')</label>
                     <select name="status" id="inputStatus" class="form-control">
                         <option value="">--- @lang('mymo_core::app.status') ---</option>
-                        <option value="1">@lang('mymo_core::app.enabled')</option>
-                        <option value="0">@lang('mymo_core::app.disabled')</option>
+                        <option value="publish">@lang('mymo_core::app.public')</option>
+                        <option value="private">@lang('mymo_core::app.private')</option>
+                        <option value="draft">@lang('mymo_core::app.draft')</option>
                     </select>
                 </div>
 

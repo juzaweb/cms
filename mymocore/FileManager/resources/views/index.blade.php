@@ -265,7 +265,7 @@
 <script src="{{ asset('styles/filemanager/js/script.js') }}"></script>
 <script>
     Dropzone.options.uploadForm = {
-        paramName: "upload[]", // The name that will be used to transfer the file
+        paramName: "upload",
         uploadMultiple: false,
         parallelUploads: 5,
         timeout: 0,
@@ -285,8 +285,10 @@
         headers: {
             'Authorization': 'Bearer ' + getUrlParam('token')
         },
-        {{--acceptedFiles: "{{ implode(',', $helper->availableMimeTypes()) }}",
-        maxFilesize: ({{ $helper->maxUploadSize() }} / 1000)--}}
+        acceptedFiles: "{{ implode(',', $mime_types) }}",
+        maxFilesize: 1024,
+        chunking: true,
+        chunkSize: 1048576,
     }
 </script>
 </body>

@@ -29,16 +29,16 @@ $ads = get_ads('sidebar');
             <span>{{ @$sidebar->popular_movies->title }}</span>
             <ul class="mymo-popular-tab" role="tablist">
                 <li role="presentation" class="active">
-                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="day">@lang('app.day')</a>
+                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="day">@lang('theme::app.day')</a>
                 </li>
                 <li role="presentation">
-                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="week">@lang('app.week')</a>
+                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="week">@lang('theme::app.week')</a>
                 </li>
                 <li role="presentation">
-                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="month">@lang('app.month')</a>
+                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="month">@lang('theme::app.month')</a>
                 </li>
                 <li role="presentation">
-                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="all">@lang('app.all')</a>
+                    <a class="ajax-tab" role="tab" data-toggle="tab" data-showpost="10" data-type="all">@lang('theme::app.all')</a>
                 </li>
             </ul>
         </div>

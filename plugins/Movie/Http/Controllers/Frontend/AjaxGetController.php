@@ -22,14 +22,12 @@ class AjaxGetController extends FrontendController
             'views',
             'video_quality',
             'year',
-            'genres',
-            'countries',
             'tv_series',
             'current_episode',
             'max_episode',
         ]);
     
-        $query->where('status', '=', 1);
+        $query->wherePublish();
         $query->whereRaw('find_in_set(?, genres)', [$genre]);
         $query->limit($showpost);
         
@@ -57,7 +55,7 @@ class AjaxGetController extends FrontendController
             'views',
             'year',
         ])
-            ->where('status', '=', 1);
+            ->wherePublish();
         
         if ($type == 'day' || $type == 'month') {
             switch ($type) {

@@ -6,6 +6,7 @@ use Mymo\Core\Models\Menu;
 use Mymo\PostType\Models\Page;
 use Illuminate\Http\Request;
 use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\PostType\Models\Taxonomy;
 
 class MenuController extends BackendController
 {
@@ -19,19 +20,19 @@ class MenuController extends BackendController
         }
         
         $menu = Menu::where('id', '=', $id)->first();
-        /*$genres = Genres::where('status', '=', 1)
+        $genres = Taxonomy::where('taxonomy', '=', 'genres')
             ->get(['id', 'name']);
-        $countries = Countries::where('status', '=', 1)
+        $countries = Taxonomy::where('taxonomy', '=', 'countries')
             ->get(['id', 'name']);
-        $types = Types::where('status', '=', 1)
-            ->get(['id', 'name']);*/
         $pages = Page::where('status', '=', 1)
             ->get(['id', 'name']);
         
         return view('mymo_core::backend.design.menu.index', [
+            'title' => trans('mymo_core::app.menu'),
             'menu' => $menu,
             'pages' => $pages,
-            'title' => trans('mymo_core::app.menu')
+            'genres' => $genres,
+            'countries' => $countries,
         ]);
     }
     
@@ -56,10 +57,10 @@ class MenuController extends BackendController
     
     public function save(Request $request)
     {
-        $this->validateRequest([
+        $request->validate([
             'name' => 'required|string|max:250',
             'content' => 'required',
-        ], $request, [
+        ], [], [
             'name' => trans('mymo_core::app.name'),
             'content' => trans('mymo_core::app.menu'),
         ]);
@@ -68,8 +69,7 @@ class MenuController extends BackendController
         $model->fill($request->all());
         $model->save();
     
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.design.menu.id', [$model->id]),
         ]);
@@ -87,14 +87,13 @@ class MenuController extends BackendController
         $items = $request->post('items');
         
         switch ($type) {
-            /*case 'genre':
-                $items = Genres::where('status', '=', 1)
+            case 'genre':
+                $items = Taxonomy::where('taxonomy', '=', 'genres')
                     ->whereIn('id', $items)
                     ->get(['id', 'name', 'slug']);
                 $result = [];
                 
                 foreach ($items as $item) {
-                    $url = parse_url(route('genre', [$item->slug]))['path'];
                     $result[] = [
                         'name' => $item->name,
                         'url' => route('genre', [$item->slug]),
@@ -104,7 +103,7 @@ class MenuController extends BackendController
                 
                 return response()->json($result);
             case 'country';
-                $items = Countries::where('status', '=', 1)
+                $items = Taxonomy::where('taxonomy', '=', 'countries')
                     ->whereIn('id', $items)
                     ->get(['id', 'name', 'slug']);
                 $result = [];
@@ -119,22 +118,6 @@ class MenuController extends BackendController
                 }
     
                 return response()->json($result);
-            case 'type':
-                $items = Types::where('status', '=', 1)
-                    ->whereIn('id', $items)
-                    ->get(['id', 'name', 'slug']);
-                $result = [];
-    
-                foreach ($items as $item) {
-                    $url = parse_url(route('type', [$item->slug]))['path'];
-                    $result[] = [
-                        'name' => $item->name,
-                        'url' => $url,
-                        'object_id' => $item->id,
-                    ];
-                }
-    
-                return response()->json($result);*/
             case 'page':
                 $items = Page::whereIn('id', $items)
                     ->get(['id', 'name', 'slug']);
@@ -152,8 +135,7 @@ class MenuController extends BackendController
                 return response()->json($result);
         }
         
-        return response()->json([
-            'status' => 'error',
+        return $this->error([
             'message' => ''
         ]);
     }

@@ -19,8 +19,8 @@
     <div class="card-body">
         <ul class="accordionjs m-0" id="accordion" data-active-index="false">
 
-            {{--<li class="acc_section">
-                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('mymo_core::app.genres') }}</h3></div>
+            <li class="acc_section">
+                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('movie::app.genres') }}</h3></div>
                 <div class="acc_content">
                     <form action="" method="post" class="add-menu-item">
 
@@ -55,7 +55,7 @@
             </li>
 
             <li class="acc_section">
-                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('mymo_core::app.countries') }}</h3></div>
+                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('movie::app.countries') }}</h3></div>
                 <div class="acc_content">
                     <form action="" method="post" class="add-menu-item">
 
@@ -88,41 +88,6 @@
                     </form>
                 </div>
             </li>
-
-            <li class="acc_section">
-                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('mymo_core::app.types') }}</h3></div>
-                <div class="acc_content">
-                    <form action="" method="post" class="add-menu-item">
-
-                        <input type="hidden" name="type" value="type">
-
-                        <div class="form-group">
-                            <div class="ul-show-items">
-                                <ul class="mt-2 p-0">
-                                    @foreach($types as $type)
-                                        <li class="m-1" id="item-type-{{ $type->id }}">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" name="items[]" class="custom-control-input" id="type-{{ $type->id }}" value="{{ $type->id }}">
-                                                <label class="custom-control-label" for="type-{{ $type->id }}">{{ $type->name }}</label>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="custom-switch">
-                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
-                                <span class="custom-switch-indicator"></span>
-                                <span class="custom-switch-description"> {{ trans('mymo_core::app.open_new_tab') }}</span>
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('mymo_core::app.add_to_menu') }}</button>
-                    </form>
-                </div>
-            </li>--}}
 
             <li class="acc_section">
                 <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('mymo_core::app.pages') }}</h3></div>

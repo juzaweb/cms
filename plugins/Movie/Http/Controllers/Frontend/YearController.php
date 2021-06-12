@@ -22,13 +22,11 @@ class YearController extends FrontendController
             'views',
             'video_quality',
             'year',
-            'genres',
-            'countries',
             'tv_series',
             'current_episode',
             'max_episode',
         ])
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->where('year', '=', $year)
             ->orderBy('id', 'DESC')
             ->paginate(20);

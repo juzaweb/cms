@@ -11,7 +11,7 @@ class RatingController extends FrontendController
 {
     public function setRating($slug, Request $request) {
         $movie = Movie::where('slug', '=', $slug)
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->firstOrFail(['id']);
         
         $start = $request->post('value');

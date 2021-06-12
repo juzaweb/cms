@@ -8,16 +8,16 @@
                 <div class="col-xs-8 hidden-xs">
                     <div class="yoast_breadcrumb"><span>
                             <span>
-                                <a href="{{ route('home') }}">@lang('app.home')</a> »
+                                <a href="{{ route('home') }}">@lang('theme::app.home')</a> »
                                 <a href="{{ route('account') }}">{{ $user->name }}</a> »
-                                <span class="breadcrumb_last" aria-current="page">@lang('app.change_password')</span>
+                                <span class="breadcrumb_last" aria-current="page">@lang('theme::app.change_password')</span>
                             </span>
                         </span>
                     </div>
                 </div>
 
                 <div class="col-xs-4 text-right">
-                    <a href="javascript:;" id="expand-ajax-filter">@lang('app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
+                    <a href="javascript:;" id="expand-ajax-filter">@lang('theme::app.filter_movies') <i id="ajax-filter-icon" class="hl-angle-down"></i></a>
                 </div>
                 <div id="alphabet-filter" style="float: right;display: inline-block;margin-right: 25px;"></div>
             </div>
@@ -33,7 +33,7 @@
         <section>
             <div class="section-bar clearfix">
                 <h3 class="section-title">
-                    <span>@lang('app.bookmark')</span><span class="count pull-right"><i></i> item</span>
+                    <span>@lang('theme::app.bookmark')</span><span class="count pull-right"><i></i> item</span>
                 </h3>
             </div>
 
@@ -42,23 +42,23 @@
                     <form action="{{ route('account.change_password.handle') }}" method="post" class="form-ajax">
                         @csrf
 
-                        <label>@lang('app.current_password')</label>
+                        <label>@lang('theme::app.current_password')</label>
                         <div class="form-group pass_show">
-                            <input type="password" class="form-control" name="current_password" placeholder="@lang('app.current_password')">
+                            <input type="password" class="form-control" name="current_password" placeholder="@lang('theme::app.current_password')">
                         </div>
 
-                        <label>@lang('app.new_password')</label>
+                        <label>@lang('theme::app.new_password')</label>
                         <div class="form-group pass_show">
-                            <input type="password" class="form-control" name="password" placeholder="@lang('app.new_password')">
+                            <input type="password" class="form-control" name="password" placeholder="@lang('theme::app.new_password')">
                         </div>
 
-                        <label>@lang('app.confirm_password')</label>
+                        <label>@lang('theme::app.confirm_password')</label>
                         <div class="form-group pass_show">
-                            <input type="password" class="form-control" name="password_confirmation" placeholder="@lang('app.confirm_password')">
+                            <input type="password" class="form-control" name="password_confirmation" placeholder="@lang('theme::app.confirm_password')">
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success">@lang('app.update')</button>
+                            <button type="submit" class="btn btn-success">@lang('theme::app.update')</button>
                         </div>
                     </form>
                 </div>
@@ -93,7 +93,7 @@
         </section>
         <div class="section-bar clearfix">
             <div class="section-title">
-                <span>@lang('app.recently_visited')</span>
+                <span>@lang('theme::app.recently_visited')</span>
             </div>
         </div>
         <section class="tab-content">

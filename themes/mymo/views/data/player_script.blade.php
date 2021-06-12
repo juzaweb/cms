@@ -58,9 +58,9 @@
             @if($ads_exists)
             advertising: {
                 client: 'vast',
-                admessage: '@lang('app.ads_have_xx_seconds_left')',
-                skiptext: '@lang('app.skip_ad')',
-                skipmessage: '@lang('app.skip_later_xxs')',
+                admessage: '@lang('theme::app.ads_have_xx_seconds_left')',
+                skiptext: '@lang('theme::app.skip_ad')',
+                skipmessage: '@lang('theme::app.skip_later_xxs')',
                 schedule: {
                     'ad1': {
                         'offset': '1',

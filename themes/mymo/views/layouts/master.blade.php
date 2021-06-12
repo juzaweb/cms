@@ -38,7 +38,7 @@
     <link rel="icon" href="{{ $icon }}" sizes="192x192"/>
     <link rel="apple-touch-icon-precomposed" href="{{ $icon }}"/>
     <meta name="msapplication-TileImage" content="{{ $icon }}"/>
-    <link rel="stylesheet" href="{{ asset('styles/themes/mymo/css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('themes/mymo/css/main.css') }}"/>
 
     <script type='text/javascript'>
         /* <![CDATA[ */
@@ -55,15 +55,15 @@
             "sync":null,
             "db_redirect_url":"{{ url()->current() }}",
             "languages": {
-                'notification': '@lang('app.notification')',
-                'nothing_found': '@lang('app.nothing_found')',
-                'remove_all': '@lang('app.remove_all')',
-                'bookmark': '@lang('app.bookmark')',
+                'notification': '@lang('theme::app.notification')',
+                'nothing_found': '@lang('theme::app.nothing_found')',
+                'remove_all': '@lang('theme::app.remove_all')',
+                'bookmark': '@lang('theme::app.bookmark')',
             }
         };
 
         var langs = {
-            'data_error': '@lang('app.data_error')'
+            'data_error': '@lang('theme::app.data_error')'
         };
         /* ]]> */
     </script>
@@ -77,31 +77,31 @@
             "register_url": "{{ route('register.submit') }}",
             "forgot_password_url": "{{ route('password.forgot.submit') }}",
             "redirecturl":"{{ url()->current() }}",
-            "loadingmessage":"@lang('app.please_wait')",
+            "loadingmessage":"@lang('theme::app.please_wait')",
             "recaptcha":"{{ get_config('google_recaptcha') }}",
             "sitekey":"{{ get_config('google_recaptcha_key') }}",
             "languages":{
-                "login":"@lang('app.login')",
-                "register":"@lang('app.register')",
-                "forgotpassword":"@lang('app.forgot_password')?",
-                "already_account":"@lang('app.already_have_an_account')",
-                "create_account":"@lang('app.create_account')",
-                "reset_captcha":"@lang('app.reset_captcha')",
-                "username":"@lang('app.name')",
-                "email":"@lang('app.email')",
-                "username_email":"@lang('app.email')",
-                "password":"@lang('app.password')",
-                "reset_password":"@lang('app.reset_password')",
-                "login_with":"@lang('app.login_with')",
-                "register_with":"@lang('app.register_with')",
-                "or":"@lang('app.or')",
-                "apparently_there_are_no_posts_to_show": "@lang('app.apparently_there_are_no_posts_to_show')"
+                "login":"@lang('theme::app.login')",
+                "register":"@lang('theme::app.register')",
+                "forgotpassword":"@lang('theme::app.forgot_password')?",
+                "already_account":"@lang('theme::app.already_have_an_account')",
+                "create_account":"@lang('theme::app.create_account')",
+                "reset_captcha":"@lang('theme::app.reset_captcha')",
+                "username":"@lang('theme::app.name')",
+                "email":"@lang('theme::app.email')",
+                "username_email":"@lang('theme::app.email')",
+                "password":"@lang('theme::app.password')",
+                "reset_password":"@lang('theme::app.reset_password')",
+                "login_with":"@lang('theme::app.login_with')",
+                "register_with":"@lang('theme::app.register_with')",
+                "or":"@lang('theme::app.or')",
+                "apparently_there_are_no_posts_to_show": "@lang('theme::app.apparently_there_are_no_posts_to_show')"
             }
         };
         /* ]]> */
     </script>
 
-    <script type="text/javascript" src="{{ asset('styles/themes/mymo/js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('themes/mymo/js/main.js') }}"></script>
 
     @if($google_analytics)
     <!-- Google Analytics -->

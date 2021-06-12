@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'prefix' => 'admin-cp/file-manager',
+    'prefix' => config('mymo_core.admin_prefix') . '/file-manager',
     'middleware' => ['web', 'admin']
 ], function ()
 {

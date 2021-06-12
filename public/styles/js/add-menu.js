@@ -59,6 +59,7 @@ function getNewMenuId() {
 }
 
 function htmlspecialchars(str) {
+    str = String(str);
     return str.replace('&', '&amp;').replace('"', '&quot;').replace("'", '&#039;').replace('<', '&lt;').replace('>', '&gt;');
 }
 
@@ -120,7 +121,7 @@ $("#modal-edit-menu").on('click', '.save-menu-item', function () {
 
 $(".load-menu").on('change', function () {
     let id = $(this).val();
-    window.location = "/admin-cp/design/menu/"+ id;
+    window.location = "/admin-cp/menu/"+ id;
 });
 
 $('#accordion').on('submit', '.add-menu-item', function () {
@@ -142,7 +143,7 @@ $('#accordion').on('submit', '.add-menu-item', function () {
 
         $.ajax({
             type: "POST",
-            url: "/admin-cp/design/menu/get-data",
+            url: "/admin-cp/menu/get-data",
             dataType: 'json',
             data: formData,
             success: function (result) {

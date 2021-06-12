@@ -3,16 +3,16 @@
 namespace Plugins\Movie\Http\Controllers\Frontend;
 
 use Mymo\Core\Http\Controllers\FrontendController;
-use Plugins\Movie\Models\Category\Types;
+use Mymo\PostType\Models\Taxonomy;
 
 class TypeController extends FrontendController
 {
     public function index($slug) {
-        $info = Types::where('slug', '=', $slug)
+        $info = Taxonomy::where('slug', '=', $slug)
             ->firstOrFail();
         
         $items = $info->movies()
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->orderBy('id', 'DESC')
             ->paginate(20);
         

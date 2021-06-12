@@ -10,7 +10,7 @@ class TVSeriesController extends FrontendController
     public function index()
     {
         $info = (object) [
-            'name' => trans('app.tv_series')
+            'name' => trans('theme::app.tv_series')
         ];
         
         $items = Movie::select([
@@ -23,13 +23,11 @@ class TVSeriesController extends FrontendController
             'views',
             'video_quality',
             'year',
-            'genres',
-            'countries',
             'tv_series',
             'current_episode',
             'max_episode',
         ])
-            ->where('status', '=', 1)
+            ->wherePublish()
             ->where('tv_series', '=', 1)
             ->orderBy('id', 'DESC')
             ->paginate(20);

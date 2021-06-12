@@ -20,7 +20,6 @@ return [
     'choose_genre' => 'Choose genre',
     'genres' => 'Genres',
     'add_genres' => 'Add genres',
-    'search_movies_or_tv_series' => 'Search movies or TV series...',
     'add_video' => 'Add video',
     'servers' => 'Servers',
     'servers_video' => 'Servers video',
@@ -98,7 +97,6 @@ return [
     'adult_content_warning' => 'Adult Content Warning!',
     'movies_banner' => 'Movies page banner',
     'tv_series_banner' => 'Tv series page banner',
-    'latest_movies' => 'Latest movies',
     'latest_movies_page_seo' => 'Latest movies page seo',
     'latest_movies_banner' => 'Latest movies banner',
     'other_name' => 'Other name',
@@ -140,4 +138,6 @@ return [
     'url' => 'URL',
     'label' => 'Label',
     'action' => 'Action',
+    'are_you_sure_you_want_to_delete_this_banner' => 'Are you sure you want to delete this banner?',
+    'sliders' => 'Sliders',
 ];
