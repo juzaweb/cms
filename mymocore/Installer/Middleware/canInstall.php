@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Installer\Middleware;
+namespace Mymo\Installer\Middleware;
 
 use Closure;
 use Redirect;

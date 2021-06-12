@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Installer\Events;
+namespace Mymo\Installer\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Tadcms\Installer\Providers;
+namespace Mymo\Installer\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Tadcms\Installer\Middleware\canInstall;
-use Tadcms\Installer\Middleware\canUpdate;
+use Mymo\Installer\Middleware\canInstall;
+use Mymo\Installer\Middleware\canUpdate;
 
 class InstallerServiceProvider extends ServiceProvider
 {

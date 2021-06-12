@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Installer\Controllers;
+namespace Mymo\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
 

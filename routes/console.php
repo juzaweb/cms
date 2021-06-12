@@ -1,7 +1,4 @@
 <?php
-
-use Illuminate\Foundation\Inspiring;
-
 /**
  * MYMO CMS
  *
@@ -11,7 +8,3 @@ use Illuminate\Foundation\Inspiring;
  * Developed based on Laravel Framework
  * Github: https://github.com/mymocms/mymocms
  */
-
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->describe('Display an inspiring quote');

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Installer\Controllers;
+namespace Mymo\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
-use Tadcms\Installer\Helpers\DatabaseManager;
+use Mymo\Installer\Helpers\DatabaseManager;
 
 class DatabaseController extends Controller
 {

@@ -28,7 +28,11 @@ use Mymo\Theme\Providers\ThemeServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Router;
+<<<<<<< HEAD
 use Mymo\Updater\UpdaterServiceProvider;
+=======
+use Mymo\Installer\Providers\InstallerServiceProvider;
+>>>>>>> :sparkles: Mymo installer init
 
 class MymoCoreServiceProvider extends ServiceProvider
 {
@@ -84,7 +88,11 @@ class MymoCoreServiceProvider extends ServiceProvider
             $this->app->register(IdeHelperServiceProvider::class);
         }
 
+<<<<<<< HEAD
         $this->app->register(UpdaterServiceProvider::class);
+=======
+        $this->app->register(InstallerServiceProvider::class);
+>>>>>>> :sparkles: Mymo installer init
         $this->app->register(DbConfigServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(HookActionServiceProvider::class);

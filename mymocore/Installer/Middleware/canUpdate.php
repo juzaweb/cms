@@ -1,12 +1,12 @@
 <?php
 
-namespace Tadcms\Installer\Middleware;
+namespace Mymo\Installer\Middleware;
 
 use Closure;
 
 class canUpdate
 {
-    use \Tadcms\Installer\Helpers\MigrationsHelper;
+    use \Mymo\Installer\Helpers\MigrationsHelper;
 
     /**
      * Handle an incoming request.

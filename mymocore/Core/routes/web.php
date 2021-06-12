@@ -17,5 +17,5 @@ Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], functio
     require __DIR__ . '/components/module.route.php';
 });
 
-require __DIR__ . '/installer/install.route.php';
-require __DIR__ . '/installer/update.route.php';
+//require __DIR__ . '/installer/install.route.php';
+//require __DIR__ . '/installer/update.route.php';

@@ -46,6 +46,7 @@ return [
         'storage/framework/'     => '775',
         'storage/logs/'          => '775',
         'bootstrap/cache/'       => '775',
+        'mymocore/'       => '775',
     ],
 
     /*
@@ -136,6 +137,6 @@ return [
     | Boolean value
     |
     */
-    'updaterEnabled' => 'true',
+    'updaterEnabled' => 'false',
 
 ];

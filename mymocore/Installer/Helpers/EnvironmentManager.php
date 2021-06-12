@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Installer\Helpers;
+namespace Mymo\Installer\Helpers;
 
 use Exception;
 use Illuminate\Http\Request;

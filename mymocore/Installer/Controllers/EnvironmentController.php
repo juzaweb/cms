@@ -1,14 +1,14 @@
 <?php
 
-namespace Tadcms\Installer\Controllers;
+namespace Mymo\Installer\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
-use Tadcms\Installer\Events\EnvironmentSaved;
-use Tadcms\Installer\Helpers\EnvironmentManager;
+use Mymo\Installer\Events\EnvironmentSaved;
+use Mymo\Installer\Helpers\EnvironmentManager;
 use Validator;
 
 class EnvironmentController extends Controller
