@@ -265,7 +265,7 @@
 <script src="{{ asset('styles/filemanager/js/script.js') }}"></script>
 <script>
     Dropzone.options.uploadForm = {
-        paramName: "upload", // The name that will be used to transfer the file
+        paramName: "upload",
         uploadMultiple: false,
         parallelUploads: 5,
         timeout: 0,
