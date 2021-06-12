@@ -38,25 +38,9 @@ your extra branch.
 - Make sure the code runs without build errors before creating the Pull Request.
 
 ## Other regulations
-- Need to fetch, check and pull/reset when returning to work on an old branch nhánh.
+- Need to fetch, check and pull/reset when returning to work on an old branch.
 - Avoid comments with the purpose of turning off lines of code, any code that is no longer in use should be deleted.
 - Should rebase to develop branch often and before creating Pull Request.
 - Must use rebase to handle conflicts.
-
-## Rebase process
-- Make sure that you're on your dev branch.
-- Get the latest code from the remote and rebase on the main branch
-```
-git fetch upstream
-git rebase upstream/develop
-```
-- Fix conflict (if exists). Run command after fix conflict to continue rebase.
-```
-git rebase --continue
-```
-- Run the following command to officially overwrite your code on the remote
-```
-git push --force-with-lease
-```
 
 
