@@ -9,7 +9,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Mymo\Installer\Events\EnvironmentSaved;
 use Mymo\Installer\Helpers\EnvironmentManager;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class EnvironmentController extends Controller
 {
@@ -27,54 +27,15 @@ class EnvironmentController extends Controller
     }
 
     /**
-     * Display the Environment menu page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function environmentMenu()
-    {
-        return view('installer::environment');
-    }
-
-    /**
      * Display the Environment page.
      *
      * @return \Illuminate\View\View
      */
-    public function environmentWizard()
+    public function environment()
     {
         $envConfig = $this->EnvironmentManager->getEnvContent();
 
         return view('installer::environment-wizard', compact('envConfig'));
-    }
-
-    /**
-     * Display the Environment page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function environmentClassic()
-    {
-        $envConfig = $this->EnvironmentManager->getEnvContent();
-
-        return view('installer::environment-classic', compact('envConfig'));
-    }
-
-    /**
-     * Processes the newly saved environment configuration (Classic).
-     *
-     * @param Request $input
-     * @param Redirector $redirect
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function saveClassic(Request $input, Redirector $redirect)
-    {
-        $message = $this->EnvironmentManager->saveFileClassic($input);
-
-        event(new EnvironmentSaved($input));
-
-        return $redirect->route('installer::environmentClassic')
-                        ->with(['message' => $message]);
     }
 
     /**

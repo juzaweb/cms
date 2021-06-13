@@ -24,13 +24,8 @@ Route::group([
     ]);
 
     Route::get('environment', [
-        'as' => 'environment',
-        'uses' => 'EnvironmentController@environmentMenu',
-    ]);
-
-    Route::get('environment', [
         'as' => 'environmentWizard',
-        'uses' => 'EnvironmentController@environmentWizard',
+        'uses' => 'EnvironmentController@environment',
     ]);
 
     Route::post('environment', [
@@ -59,7 +54,7 @@ Route::group([
     ]);
 
     Route::post('admin', [
-        'as' => 'admin',
+        'as' => 'admin.save',
         'uses' => 'AdminController@save',
     ]);
 

@@ -111,7 +111,10 @@ return [
                 'db_username_placeholder' => 'Database User Name',
                 'db_password_label' => 'Database Password',
                 'db_password_placeholder' => 'Database Password',
+                'name' => 'Name',
                 'email' => 'Email',
+                'password' => 'Password',
+                'password_confirmation' => 'Confirm Password',
 
                 'app_tabs' => [
                     'more_info' => 'More Info',
@@ -155,6 +158,7 @@ return [
                     'setup_database' => 'Setup Database',
                     'setup_application' => 'Setup Application',
                     'install' => 'Install',
+                    'create_user_admin' => 'Create User Admin',
                 ],
             ],
         ],
@@ -177,7 +181,7 @@ return [
      *
      */
     'installed' => [
-        'success_log_message' => 'Laravel Installer successfully INSTALLED on ',
+        'success_log_message' => 'Install successfully INSTALLED on ',
     ],
 
     /*
@@ -188,6 +192,7 @@ return [
     'final' => [
         'title' => 'Installation Finished',
         'templateTitle' => 'Installation Finished',
+        'database_finished' => 'Application database installed. Please set up your admin user.',
         'finished' => 'Application has been successfully installed.',
         'migration' => 'Migration &amp; Seed Console Output:',
         'console' => 'Application Console Output:',

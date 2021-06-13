@@ -11,14 +11,27 @@
 
 @section('container')
 
-    <form method="post" action="{{ route('installer::environmentSaveWizard') }}" class="tabs-wrap" autocomplete="off">
+    <form method="post" action="{{ route('installer::admin.save') }}" class="tabs-wrap" autocomplete="off">
         @csrf
+
+        <div class="form-group">
+            <label for="name">
+                {{ trans('installer::installer_messages.environment.wizard.form.name') }}
+            </label>
+            <input type="text" name="name" id="name" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.name') }}" autocomplete="off" required />
+            @if ($errors->has('name'))
+                <span class="error-block">
+                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{ $errors->first('name') }}
+                </span>
+            @endif
+        </div>
 
         <div class="form-group">
             <label for="email">
                 {{ trans('installer::installer_messages.environment.wizard.form.email') }}
             </label>
-            <input type="text" name="email" id="email" value="127.0.0.1" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.email') }}" autocomplete="off" />
+            <input type="text" name="email" id="email" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.email') }}" autocomplete="off" required />
             @if ($errors->has('email'))
                 <span class="error-block">
                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -27,9 +40,37 @@
             @endif
         </div>
 
+        <div class="form-group">
+            <label for="password">
+                {{ trans('installer::installer_messages.environment.wizard.form.password') }}
+            </label>
+            <input type="password" name="password" id="password" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.password') }}" autocomplete="off" required />
+            @if ($errors->has('password'))
+                <span class="error-block">
+                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{ $errors->first('password') }}
+                </span>
+            @endif
+        </div>
 
+        <div class="form-group">
+            <label for="password_confirmation">
+                {{ trans('installer::installer_messages.environment.wizard.form.password_confirmation') }}
+            </label>
+            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.password_confirmation') }}" autocomplete="off" required />
+            @if ($errors->has('password_confirmation'))
+                <span class="error-block">
+                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{ $errors->first('password_confirmation') }}
+                </span>
+            @endif
+        </div>
 
+        <div class="buttons">
+            <button type="submit" class="button">
+                {{ trans('installer::installer_messages.environment.wizard.form.buttons.create_user_admin') }}
+                <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
+            </button>
+        </div>
     </form>
-
-
 @endsection
