@@ -29,6 +29,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Router;
 use Mymo\Updater\UpdaterServiceProvider;
+use Mymo\Installer\Providers\InstallerServiceProvider;
 
 class MymoCoreServiceProvider extends ServiceProvider
 {
@@ -85,6 +86,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         }
 
         $this->app->register(UpdaterServiceProvider::class);
+        $this->app->register(InstallerServiceProvider::class);
         $this->app->register(DbConfigServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(HookActionServiceProvider::class);

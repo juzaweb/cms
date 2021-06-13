@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Installer\Controllers;
+namespace Mymo\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
-use Tadcms\Installer\Helpers\DatabaseManager;
+use Mymo\Installer\Helpers\DatabaseManager;
 
 class DatabaseController extends Controller
 {
@@ -24,12 +24,13 @@ class DatabaseController extends Controller
      * Migrate and seed the database.
      *
      * @return \Illuminate\View\View
+     * @throws \Exception
      */
     public function database()
     {
-        $response = $this->databaseManager->migrateAndSeed();
+        $response = $this->databaseManager->run();
 
-        return redirect()->route('LaravelInstaller::final')
+        return redirect()->route('installer::admin')
                          ->with(['message' => $response]);
     }
 }
