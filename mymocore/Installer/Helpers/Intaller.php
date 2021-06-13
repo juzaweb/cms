@@ -10,7 +10,7 @@
  * Created by The Anh.
  * Date: 6/12/2021
  * Time: 6:20 PM
- */
+*/
 
 namespace Mymo\Installer\Helpers;
 
@@ -24,6 +24,11 @@ class Intaller
      */
     public static function alreadyInstalled()
     {
-        return file_exists(storage_path('app/installed'));
+        return file_exists(static::installedPath());
+    }
+
+    public static function installedPath()
+    {
+        return storage_path('app/installed');
     }
 }
