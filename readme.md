@@ -15,7 +15,8 @@ composer create-project --prefer-dist mymocms/mymocms mymo
 ```
 Go to http://www.yoursite.com/install to install
 
-Read more: [All documents](https://mymo-docs.juzaweb.com/)
+Development: [Development documents](https://github.com/mymocms/mymocms/wiki)
+Usage: [Usage documents](https://mymo-docs.juzaweb.com/)
 
 ![MyMo Cms](https://i.imgur.com/nY5FdSY.jpg "MyMo Cms")
 ![MyMo Cms](https://i.imgur.com/oCdSI1K.jpg "MyMo Cms")
@@ -27,7 +28,7 @@ Read more: [All documents](https://mymo-docs.juzaweb.com/)
 - php_fileinfo Extension Enabled
 - MySQL Database
 
-Features
+## Features
 - Fast & Secure.
 - Fully Ajax load page.
 - Share Movie, Series.
@@ -93,7 +94,3 @@ Features
 - Add Download link for Movies / TV Series
 - Add Subtitle for Video file
 - And more...
-
-## License
-
-The TA TMS is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
