@@ -40,7 +40,7 @@
 
     @if ( ! isset($requirements['errors']) && $phpSupportInfo['supported'] )
         <div class="buttons">
-            <a class="button" href="{{ route('Installer::permissions') }}">
+            <a class="button" href="{{ route('installer::permissions') }}">
                 {{ trans('installer::installer_messages.requirements.next') }}
                 <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </a>

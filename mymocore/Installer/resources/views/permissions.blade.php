@@ -25,7 +25,7 @@
 
     @if ( ! isset($permissions['errors']))
         <div class="buttons">
-            <a href="{{ route('Installer::environmentWizard') }}" class="button">
+            <a href="{{ route('installer::environmentWizard') }}" class="button">
                 {{ trans('installer::installer_messages.permissions.next') }}
                 <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </a>

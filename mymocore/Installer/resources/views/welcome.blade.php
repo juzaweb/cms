@@ -14,7 +14,7 @@
       {{ trans('installer::installer_messages.welcome.message') }}
     </p>
     <p class="text-center">
-      <a href="{{ route('Installer::requirements') }}" class="button">
+      <a href="{{ route('installer::requirements') }}" class="button">
         {{ trans('installer::installer_messages.welcome.next') }}
         <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
       </a>

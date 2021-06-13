@@ -10,7 +10,7 @@
 @endsection
 
 @section('container')
-    <form method="post" action="{{ route('Installer::environmentSaveWizard') }}" class="tabs-wrap" autocomplete="off">
+    <form method="post" action="{{ route('installer::environmentSaveWizard') }}" class="tabs-wrap" autocomplete="off">
         @csrf
 
         <div class="form-group">

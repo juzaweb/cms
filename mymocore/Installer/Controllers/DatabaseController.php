@@ -31,7 +31,7 @@ class DatabaseController extends Controller
     {
         $response = $this->databaseManager->run();
 
-        return redirect()->route('Installer::final')
+        return redirect()->route('installer::final')
                          ->with(['message' => $response]);
     }
 }

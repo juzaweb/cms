@@ -25,7 +25,7 @@ class CanUpdate
                 // if the application has not been installed,
                 // redirect to the installer
                 if (! $canInstall->alreadyInstalled()) {
-                    return redirect()->route('Installer::welcome');
+                    return redirect()->route('installer::welcome');
                 }
 
                 if ($this->alreadyUpdated()) {

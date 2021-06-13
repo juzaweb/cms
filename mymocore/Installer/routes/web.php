@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'install', 'as' => 'Installer::', 'namespace' => 'Mymo\Installer\Controllers', 'middleware' => ['web', 'install']], function () {
+Route::group(['prefix' => 'install', 'as' => 'installer::', 'namespace' => 'Mymo\Installer\Controllers', 'middleware' => ['web', 'install']], function () {
     Route::get('/', [
         'as' => 'welcome',
         'uses' => 'WelcomeController@welcome',
