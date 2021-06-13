@@ -70,7 +70,7 @@ class HttpRepositoryType implements SourceRepositoryTypeContract
 
         $this->release = resolve(Release::class);
         $this->release->setStoragePath(Str::finish($this->config['download_path'], DIRECTORY_SEPARATOR))
-                      ->setUpdatePath(base_path(), config('self-update.exclude_folders'))
+                      ->setUpdatePath(base_path(), config('updater.exclude_folders'))
                       ->setAccessToken($config['private_access_token']);
 
         $this->updateExecutor = $updateExecutor;
@@ -178,7 +178,7 @@ class HttpRepositoryType implements SourceRepositoryTypeContract
      */
     public function getVersionInstalled(): string
     {
-        return (string) config('self-update.version_installed');
+        return (string) config('updater.version_installed');
     }
 
     /**

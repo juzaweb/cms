@@ -80,7 +80,7 @@ final class UpdateExecutor
     private function moveFiles(string $folder): void
     {
         $files = (new Finder())->in($folder)
-                               ->exclude(config('self-update.exclude_folders'))
+                               ->exclude(config('updater.exclude_folders'))
                                ->ignoreDotFiles(false)
                                ->files();
 
@@ -95,14 +95,14 @@ final class UpdateExecutor
 
     private function moveFolders(string $folder): void
     {
-        $directories = (new Finder())->in($folder)->exclude(config('self-update.exclude_folders'))->directories();
+        $directories = (new Finder())->in($folder)->exclude(config('updater.exclude_folders'))->directories();
 
         $sorted = collect($directories->sort(function (SplFileInfo $a, SplFileInfo $b) {
             return strlen($b->getRealpath()) - strlen($a->getRealpath());
         }));
 
         $sorted->each(function (SplFileInfo $directory) {
-            if (! dirsIntersect(File::directories($directory->getRealPath()), config('self-update.exclude_folders'))) {
+            if (! dirsIntersect(File::directories($directory->getRealPath()), config('updater.exclude_folders'))) {
                 File::copyDirectory(
                     $directory->getRealPath(),
                     Str::finish($this->basePath, DIRECTORY_SEPARATOR).Str::finish($directory->getRelativePath(), DIRECTORY_SEPARATOR).$directory->getBasename()

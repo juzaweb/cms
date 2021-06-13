@@ -33,7 +33,7 @@ final class EventHandler
 
     protected function determineNotifiable()
     {
-        $notifiableClass = $this->config->get('self-update.notifications.notifiable');
+        $notifiableClass = $this->config->get('updater.notifications.notifiable');
 
         return app($notifiableClass);
     }
@@ -42,7 +42,7 @@ final class EventHandler
     {
         $eventName = class_basename($event);
 
-        $notificationClass = collect($this->config->get('self-update.notifications.notifications'))
+        $notificationClass = collect($this->config->get('updater.notifications.notifications'))
             ->keys()
             ->first(function ($notificationClass) use ($eventName) {
                 $notificationName = class_basename($notificationClass);

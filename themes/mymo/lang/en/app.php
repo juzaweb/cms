@@ -107,4 +107,5 @@ return [
     'home_page' => 'Home page',
     'slider' => 'Slider',
     'footer' => 'Footer',
+
 ];

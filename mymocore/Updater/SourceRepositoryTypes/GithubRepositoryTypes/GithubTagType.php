@@ -33,7 +33,7 @@ final class GithubTagType extends GithubRepositoryType implements SourceReposito
 
         $this->release = resolve(Release::class);
         $this->release->setStoragePath(Str::finish($this->config['download_path'], DIRECTORY_SEPARATOR))
-                      ->setUpdatePath(base_path(), config('self-update.exclude_folders'))
+                      ->setUpdatePath(base_path(), config('updater.exclude_folders'))
                       ->setAccessToken($config['private_access_token']);
 
         $this->client = $client;

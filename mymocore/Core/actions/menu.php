@@ -34,19 +34,10 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.pages'),
-    'pages',
-    [
-        'icon' => 'fa fa-file-text',
-        'position' => 20
-    ]
-);
-
-HookAction::addAdminMenu(
     'mymo_core::app.updates',
     'updates',
     [
-        'icon' => 'fa fa-upgrade',
+        'icon' => 'fa fa-refresh',
         'position' => 2,
         'parent' => 'dashboard',
     ]

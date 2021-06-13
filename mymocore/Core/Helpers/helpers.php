@@ -13,6 +13,7 @@
  */
 
 require (__DIR__ . '/../../Module/helpers.php');
+require (__DIR__ . '/../../Updater/helpers.php');
 
 use Illuminate\Support\Facades\Auth;
 use Mymo\Core\Helpers\Breadcrumb;
@@ -44,6 +45,13 @@ function get_client_ip()
     return request()->ip();
 }
 
+/**
+ * Get DB config
+ *
+ * @param string $key
+ * @param mixed $default
+ * @return string|array
+ * */
 function get_config($key, $default = null)
 {
     return Config::getConfig($key, $default);
