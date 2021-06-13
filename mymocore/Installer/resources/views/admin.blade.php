@@ -11,14 +11,14 @@
 
 @section('container')
 
-    <form method="post" action="{{ route('installer::admin.save') }}" class="tabs-wrap" autocomplete="off">
+    <form method="post" action="{{ route('installer::admin.save') }}" autocomplete="off">
         @csrf
 
-        <div class="form-group">
+        <div class="form-group {{ $errors->has('name') ? ' has-error ' : '' }}">
             <label for="name">
                 {{ trans('installer::installer_messages.environment.wizard.form.name') }}
             </label>
-            <input type="text" name="name" id="name" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.name') }}" autocomplete="off" required />
+            <input type="text" name="name" id="name" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.name') }}" autocomplete="off" required value="{{ old('name') }}" />
             @if ($errors->has('name'))
                 <span class="error-block">
                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -27,11 +27,11 @@
             @endif
         </div>
 
-        <div class="form-group">
+        <div class="form-group {{ $errors->has('email') ? ' has-error ' : '' }}">
             <label for="email">
                 {{ trans('installer::installer_messages.environment.wizard.form.email') }}
             </label>
-            <input type="text" name="email" id="email" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.email') }}" autocomplete="off" required />
+            <input type="text" name="email" id="email" placeholder="{{ trans('installer::installer_messages.environment.wizard.form.email') }}" autocomplete="off" required value="{{ old('email') }}" />
             @if ($errors->has('email'))
                 <span class="error-block">
                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -40,7 +40,7 @@
             @endif
         </div>
 
-        <div class="form-group">
+        <div class="form-group {{ $errors->has('password') ? ' has-error ' : '' }}">
             <label for="password">
                 {{ trans('installer::installer_messages.environment.wizard.form.password') }}
             </label>
@@ -53,7 +53,7 @@
             @endif
         </div>
 
-        <div class="form-group">
+        <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error ' : '' }}">
             <label for="password_confirmation">
                 {{ trans('installer::installer_messages.environment.wizard.form.password_confirmation') }}
             </label>

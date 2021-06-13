@@ -30,6 +30,10 @@
                         <i class="step__icon fa fa-server" aria-hidden="true"></i>
                     </li>
                     <li class="step__divider"></li>
+                    <li class="step__item {{ isActive('installer::admin') }}">
+                        <i class="step__icon fa fa-user" aria-hidden="true"></i>
+                    </li>
+                    <li class="step__divider"></li>
                     <li class="step__item {{ isActive('installer::environment')}} {{ isActive('installer::environmentWizard')}} {{ isActive('installer::environmentClassic')}}">
                         @if(Request::is('install/environment') || Request::is('install/environment/wizard') || Request::is('install/environment/classic') )
                             <a href="{{ route('installer::environmentWizard') }}">
@@ -88,7 +92,9 @@
                 </div>
             </div>
         </div>
+
         @yield('scripts')
+
         <script type="text/javascript">
             var x = document.getElementById('error_alert');
             var y = document.getElementById('close_alert');

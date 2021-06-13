@@ -33,8 +33,8 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:150',
             'email' => 'required|email|max:150',
-            'password' => 'required|email|max:32|min:8|confirmed',
-            'password_confirmation' => 'required|email|max:32|min:8',
+            'password' => 'required|max:32|min:8|confirmed',
+            'password_confirmation' => 'required|max:32|min:8',
         ], [], [
             'name' => trans('mymo_core::app.name'),
             'email' => trans('mymo_core::app.email'),
