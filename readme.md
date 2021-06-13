@@ -94,7 +94,3 @@ Usage: [Usage documents](https://mymo-docs.juzaweb.com/)
 - Add Download link for Movies / TV Series
 - Add Subtitle for Video file
 - And more...
-
-## License
-
-The TA TMS is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
