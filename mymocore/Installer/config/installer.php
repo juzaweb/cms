@@ -43,10 +43,11 @@ return [
     |
     */
     'permissions' => [
-        'storage/framework/'     => '775',
-        'storage/logs/'          => '775',
-        'bootstrap/cache/'       => '775',
-        'mymocore/'              => '775',
+        'storage/' => '775',
+        'bootstrap/cache/' => '775',
+        'mymocore/' => '775',
+        'resources/' => '775',
+        'public/' => '775',
     ],
 
     /*
