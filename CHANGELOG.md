@@ -20,3 +20,6 @@
 - Fix file manager upload
 ## 1.0.5
 - Fix migrate cms
+## 1.0.6
+- Installer
+- Updater
