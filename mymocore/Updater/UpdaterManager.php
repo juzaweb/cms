@@ -69,7 +69,7 @@ final class UpdaterManager implements UpdaterContract
      */
     public function getDefaultSourceRepository()
     {
-        return $this->app['config']['self-update']['default'];
+        return $this->app['config']['updater']['default'];
     }
 
     /**
@@ -91,8 +91,8 @@ final class UpdaterManager implements UpdaterContract
      */
     protected function getConfig(string $name): array
     {
-        if (isset($this->app['config']['self-update']['repository_types'][$name])) {
-            return $this->app['config']['self-update']['repository_types'][$name];
+        if (isset($this->app['config']['updater']['repository_types'][$name])) {
+            return $this->app['config']['updater']['repository_types'][$name];
         }
 
         return [];

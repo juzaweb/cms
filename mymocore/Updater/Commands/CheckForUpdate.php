@@ -42,7 +42,7 @@ class CheckForUpdate extends Command
     {
         $currentVersion = $this->updater->source()->getVersionInstalled();
         $isAvail = $this->updater->source()->isNewVersionAvailable($currentVersion);
-
+        dd($isAvail);
         if ($isAvail === true) {
             $newVersion = $this->updater->source()->getVersionAvailable();
             $this->info('A new version ['.$newVersion.'] is available.');

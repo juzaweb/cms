@@ -18,7 +18,7 @@ final class UpdateAvailable extends BaseNotification
     public function toMail(): MailMessage
     {
         return (new MailMessage())
-            ->from(config('self-update.notifications.mail.from.address', config('mail.from.address')), config('self-update.notifications.mail.from.name', config('mail.from.name')))
+            ->from(config('updater.notifications.mail.from.address', config('mail.from.address')), config('updater.notifications.mail.from.name', config('mail.from.name')))
             ->subject(config('app.name').': Update available');
     }
 

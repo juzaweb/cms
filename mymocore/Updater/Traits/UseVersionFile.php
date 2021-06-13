@@ -11,7 +11,7 @@ trait UseVersionFile
     /**
      * @var string
      */
-    protected $versionFile = 'self-updater-new-version';
+    protected $versionFile = 'updaterr-new-version';
 
     /**
      * Check if the file with the new version already exists.

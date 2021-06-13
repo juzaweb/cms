@@ -85,7 +85,7 @@ class GithubRepositoryType
      */
     public function getVersionInstalled(): string
     {
-        return (string) config('self-update.version_installed');
+        return (string) config('updater.version_installed');
     }
 
     /**
