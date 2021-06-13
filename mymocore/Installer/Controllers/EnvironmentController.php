@@ -1,15 +1,15 @@
 <?php
 
-namespace Tadcms\Installer\Controllers;
+namespace Mymo\Installer\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
-use Tadcms\Installer\Events\EnvironmentSaved;
-use Tadcms\Installer\Helpers\EnvironmentManager;
-use Validator;
+use Mymo\Installer\Events\EnvironmentSaved;
+use Mymo\Installer\Helpers\EnvironmentManager;
+use Illuminate\Support\Facades\Validator;
 
 class EnvironmentController extends Controller
 {
@@ -27,54 +27,15 @@ class EnvironmentController extends Controller
     }
 
     /**
-     * Display the Environment menu page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function environmentMenu()
-    {
-        return view('installer::environment');
-    }
-
-    /**
      * Display the Environment page.
      *
      * @return \Illuminate\View\View
      */
-    public function environmentWizard()
+    public function environment()
     {
         $envConfig = $this->EnvironmentManager->getEnvContent();
 
         return view('installer::environment-wizard', compact('envConfig'));
-    }
-
-    /**
-     * Display the Environment page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function environmentClassic()
-    {
-        $envConfig = $this->EnvironmentManager->getEnvContent();
-
-        return view('installer::environment-classic', compact('envConfig'));
-    }
-
-    /**
-     * Processes the newly saved environment configuration (Classic).
-     *
-     * @param Request $input
-     * @param Redirector $redirect
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function saveClassic(Request $input, Redirector $redirect)
-    {
-        $message = $this->EnvironmentManager->saveFileClassic($input);
-
-        event(new EnvironmentSaved($input));
-
-        return $redirect->route('LaravelInstaller::environmentClassic')
-                        ->with(['message' => $message]);
     }
 
     /**
@@ -88,18 +49,18 @@ class EnvironmentController extends Controller
     {
         $rules = config('installer.environment.form.rules');
         $messages = [
-            'environment_custom.required_if' => trans('installer_messages.environment.wizard.form.name_required'),
+            'environment_custom.required_if' => trans('installer::installer_messages.environment.wizard.form.name_required'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors($validator->errors());
+            return $redirect->route('installer::environmentWizard')->withInput()->withErrors($validator->errors());
         }
 
         if (! $this->checkDatabaseConnection($request)) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors([
-                'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
+            return $redirect->route('installer::environmentWizard')->withInput()->withErrors([
+                'database_connection' => trans('installer::installer_messages.environment.wizard.form.db_connection_failed'),
             ]);
         }
 
@@ -107,12 +68,11 @@ class EnvironmentController extends Controller
 
         event(new EnvironmentSaved($request));
 
-        return $redirect->route('LaravelInstaller::database')
+        return $redirect->route('installer::database')
                         ->with(['results' => $results]);
     }
 
     /**
-     * TODO: We can remove this code if PR will be merged: https://github.com/RachidLaasri/LaravelInstaller/pull/162
      * Validate database connection with user credentials (Form Wizard).
      *
      * @param Request $request
@@ -120,7 +80,7 @@ class EnvironmentController extends Controller
      */
     private function checkDatabaseConnection(Request $request)
     {
-        $connection = $request->input('database_connection');
+        $connection = 'mysql';
 
         $settings = config("database.connections.$connection");
 

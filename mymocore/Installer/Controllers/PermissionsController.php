@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Installer\Controllers;
+namespace Mymo\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
-use Tadcms\Installer\Helpers\PermissionsChecker;
+use Mymo\Installer\Helpers\PermissionsChecker;
 
 class PermissionsController extends Controller
 {

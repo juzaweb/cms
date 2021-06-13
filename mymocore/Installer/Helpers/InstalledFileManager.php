@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Installer\Helpers;
+namespace Mymo\Installer\Helpers;
 
 class InstalledFileManager
 {
@@ -11,16 +11,15 @@ class InstalledFileManager
      */
     public function create()
     {
-        $installedLogFile = storage_path('installed');
-
+        $installedLogFile = Intaller::installedPath();
         $dateStamp = date('Y/m/d h:i:sa');
 
-        if (! file_exists($installedLogFile)) {
-            $message = trans('installer_messages.installed.success_log_message').$dateStamp."\n";
+        if (!file_exists($installedLogFile)) {
+            $message = trans('installer::installer_messages.installed.success_log_message').$dateStamp."\n";
 
             file_put_contents($installedLogFile, $message);
         } else {
-            $message = trans('installer_messages.updater.log.success_message').$dateStamp;
+            $message = trans('installer::installer_messages.updater.log.success_message').$dateStamp;
 
             file_put_contents($installedLogFile, $message.PHP_EOL, FILE_APPEND | LOCK_EX);
         }

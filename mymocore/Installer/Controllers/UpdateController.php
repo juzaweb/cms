@@ -1,14 +1,14 @@
 <?php
 
-namespace Tadcms\Installer\Controllers;
+namespace Mymo\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
-use Tadcms\Installer\Helpers\DatabaseManager;
-use Tadcms\Installer\Helpers\InstalledFileManager;
+use Mymo\Installer\Helpers\DatabaseManager;
+use Mymo\Installer\Helpers\InstalledFileManager;
 
 class UpdateController extends Controller
 {
-    use \Tadcms\Installer\Helpers\MigrationsHelper;
+    use \Mymo\Installer\Helpers\MigrationsHelper;
 
     /**
      * Display the updater welcome page.

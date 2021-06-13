@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Installer\Controllers;
+namespace Mymo\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
-use Tadcms\Installer\Helpers\RequirementsChecker;
+use Mymo\Installer\Helpers\RequirementsChecker;
 
 class RequirementsController extends Controller
 {

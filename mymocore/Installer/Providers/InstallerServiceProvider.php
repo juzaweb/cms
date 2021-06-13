@@ -1,11 +1,11 @@
 <?php
 
-namespace Tadcms\Installer\Providers;
+namespace Mymo\Installer\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Tadcms\Installer\Middleware\canInstall;
-use Tadcms\Installer\Middleware\canUpdate;
+use Mymo\Installer\Middleware\CanInstall;
+use Mymo\Installer\Middleware\Installed;
 
 class InstallerServiceProvider extends ServiceProvider
 {
@@ -24,7 +24,7 @@ class InstallerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->publishFiles();
-        $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->mergeConfigFrom(
             __DIR__ . '/../config/installer.php',
             'installer'
@@ -39,8 +39,9 @@ class InstallerServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $router->middlewareGroup('install', [CanInstall::class]);
-        $router->middlewareGroup('update', [CanUpdate::class]);
-        $this->loadViewsFrom(__DIR__ . '/../Views', 'installer');
+        $router->pushMiddlewareToGroup('web', Installed::class);
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'installer');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'installer');
     }
 
     /**
@@ -50,16 +51,12 @@ class InstallerServiceProvider extends ServiceProvider
      */
     protected function publishFiles()
     {
-        /*$this->publishes([
+        $this->publishes([
             __DIR__.'/../config/installer.php' => base_path('config/installer.php'),
-        ], 'installer');*/
+        ], 'installer_config');
 
         $this->publishes([
-            __DIR__.'/../assets' => public_path('tadcms/installer'),
-        ], 'installer');
-
-        $this->publishes([
-            __DIR__.'/../Lang' => base_path('resources/lang'),
-        ], 'installer');
+            __DIR__.'/../resources/assets' => public_path('styles/installer'),
+        ], 'installer_assets');
     }
 }

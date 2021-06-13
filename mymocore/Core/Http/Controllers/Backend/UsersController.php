@@ -98,8 +98,8 @@ class UsersController extends BackendController
         
         if ($request->post('password')) {
             $request->validate([
-                'password' => 'required|string|max:32|min:6|confirmed',
-                'password_confirmation' => 'required|string|max:32|min:6'
+                'password' => 'required|string|max:32|min:8|confirmed',
+                'password_confirmation' => 'required|string|max:32|min:8'
             ], [], [
                 'password' => trans('mymo_core::app.password'),
                 'password_confirmation' => trans('mymo_core::app.confirm_password')
