@@ -3,7 +3,6 @@
 namespace Mymo\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Artisan;
 use Mymo\Installer\Helpers\DatabaseManager;
 
 class DatabaseController extends Controller
@@ -31,7 +30,7 @@ class DatabaseController extends Controller
     {
         $response = $this->databaseManager->run();
 
-        return redirect()->route('installer::final')
+        return redirect()->route('installer::admin')
                          ->with(['message' => $response]);
     }
 }

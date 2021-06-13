@@ -1,6 +1,23 @@
 <?php
+/**
+ * MYMO CMS - Free Laravel CMS
+ *
+ * @package    mymocms/mymocms
+ * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @link       https://github.com/mymocms/mymocms
+ * @license    MIT
+ *
+ * Created by The Anh.
+ * Date: 6/13/2021
+ * Time: 12:50 PM
+ */
 
-Route::group(['prefix' => 'install', 'as' => 'installer::', 'namespace' => 'Mymo\Installer\Controllers', 'middleware' => ['web', 'install']], function () {
+Route::group([
+    'prefix' => 'install',
+    'as' => 'installer::',
+    'namespace' => 'Mymo\Installer\Controllers',
+    'middleware' => ['web', 'install']], function ()
+{
     Route::get('/', [
         'as' => 'welcome',
         'uses' => 'WelcomeController@welcome',
@@ -11,12 +28,12 @@ Route::group(['prefix' => 'install', 'as' => 'installer::', 'namespace' => 'Mymo
         'uses' => 'EnvironmentController@environmentMenu',
     ]);
 
-    Route::get('environment/wizard', [
+    Route::get('environment', [
         'as' => 'environmentWizard',
         'uses' => 'EnvironmentController@environmentWizard',
     ]);
 
-    Route::post('environment/saveWizard', [
+    Route::post('environment', [
         'as' => 'environmentSaveWizard',
         'uses' => 'EnvironmentController@saveWizard',
     ]);
@@ -34,6 +51,16 @@ Route::group(['prefix' => 'install', 'as' => 'installer::', 'namespace' => 'Mymo
     Route::get('database', [
         'as' => 'database',
         'uses' => 'DatabaseController@database',
+    ]);
+
+    Route::get('admin', [
+        'as' => 'admin',
+        'uses' => 'AdminController@index',
+    ]);
+
+    Route::post('admin', [
+        'as' => 'admin',
+        'uses' => 'AdminController@save',
     ]);
 
     Route::get('final', [

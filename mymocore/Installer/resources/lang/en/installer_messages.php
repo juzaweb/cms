@@ -111,6 +111,7 @@ return [
                 'db_username_placeholder' => 'Database User Name',
                 'db_password_label' => 'Database Password',
                 'db_password_placeholder' => 'Database Password',
+                'email' => 'Email',
 
                 'app_tabs' => [
                     'more_info' => 'More Info',

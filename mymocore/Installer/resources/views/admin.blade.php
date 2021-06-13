@@ -14,7 +14,7 @@
     <form method="post" action="{{ route('installer::environmentSaveWizard') }}" class="tabs-wrap" autocomplete="off">
         @csrf
 
-        <div class="form-group {{ $errors->has('email') ? ' has-error ' : '' }}">
+        <div class="form-group">
             <label for="email">
                 {{ trans('installer::installer_messages.environment.wizard.form.email') }}
             </label>
@@ -31,8 +31,5 @@
 
     </form>
 
-    {{--<div class="buttons">
-        <a href="{{ url('/') }}" class="button">{{ trans('installer::installer_messages.final.exit') }}</a>
-    </div>--}}
 
 @endsection
