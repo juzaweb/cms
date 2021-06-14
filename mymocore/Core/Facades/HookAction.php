@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static registerPostType(string $key, $args = [])
  * @method static registerTaxonomy(string $taxonomy, $objectType, $args = [])
  * @method static loadActionForm(string $path)
+ * @method static enqueueStyle(string $handle, string $src, $deps = [], $ver = '1.0', $media = 'all')
  * @see \Mymo\Core\Helpers\HookAction
  **/
 class HookAction extends Facade

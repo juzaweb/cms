@@ -14,6 +14,7 @@ namespace Mymo\Core\Helpers;
 
 use Mymo\Core\Traits\MenuHookAction;
 use Mymo\Core\Traits\PostTypeHookAction;
+use Tadcms\Hooks\Facades\Events as Hook;
 
 class HookAction
 {
@@ -61,5 +62,15 @@ class HookAction
             $items[$key] = collect($args);
             return $items;
         });
+    }
+
+    public function addAction($tag, $callback, $priority = 20, $arguments = 1)
+    {
+        Hook::addAction($tag, $callback, $priority, $arguments);
+    }
+
+    public function addFilter($tag, $callback, $priority = 20, $arguments = 1)
+    {
+        return Hook::addFilter($tag, $callback, $priority, $arguments);
     }
 }
