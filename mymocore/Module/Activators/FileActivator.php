@@ -7,6 +7,7 @@ use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Artisan;
 use Mymo\Module\Contracts\ActivatorInterface;
 use Mymo\Module\Module;
 
@@ -132,6 +133,9 @@ class FileActivator implements ActivatorInterface
     public function setActiveByName(string $name, bool $status): void
     {
         $this->modulesStatuses[$name] = $status;
+        if ($status) {
+            $this->runMigrate();
+        }
         $this->writeJson();
         $this->flushCache();
     }
@@ -206,5 +210,10 @@ class FileActivator implements ActivatorInterface
     private function flushCache(): void
     {
         $this->cache->forget($this->cacheKey);
+    }
+
+    private function runMigrate()
+    {
+        Artisan::call('migrate', ['--force'=> true]);
     }
 }

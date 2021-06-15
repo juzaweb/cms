@@ -4,7 +4,7 @@ namespace Mymo\Module\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Module extends Facade
+class Plugin extends Facade
 {
     /**
      * Get the registered name of the component.

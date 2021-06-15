@@ -3,9 +3,10 @@
 namespace Mymo\Core\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Traits\ArrayPagination;
-use Mymo\Module\Facades\Module;
+use Mymo\Module\Facades\Plugin;
 
 class ModuleController extends BackendController
 {
@@ -57,19 +58,30 @@ class ModuleController extends BackendController
         $action = $request->post('action');
         $ids = $request->post('ids');
         foreach ($ids as $plugin) {
-            switch ($action) {
-                case 'delete':
-                    Module::delete($plugin);
-                    break;
-                case 'activate':
-                    Module::enable($plugin);
-                    break;
-                case 'deactivate':
-                    Module::disable($plugin);
-                    break;
+            try {
+                DB::beginTransaction();
+                switch ($action) {
+                    case 'delete':
+                        Plugin::delete($plugin);
+                        break;
+                    case 'activate':
+                        Plugin::enable($plugin);
+                        break;
+                    case 'deactivate':
+                        Plugin::disable($plugin);
+                        break;
+                }
+                DB::commit();
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return $this->error([
+                    'message' => trans($e->getMessage())
+                ]);
             }
         }
         
-        return $this->success(trans('mymo_core::app.successfully'));
+        return $this->success([
+            'message' => trans('mymo_core::app.successfully')
+        ]);
     }
 }

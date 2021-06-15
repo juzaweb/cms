@@ -27,7 +27,7 @@ class DatabaseManager
         try {
             $migrate = $this->migrate($outputLog);
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
             Log::error($e);
             return $this->response($e->getMessage(), 'error', $outputLog);

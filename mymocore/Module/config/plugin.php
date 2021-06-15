@@ -200,7 +200,7 @@ return [
     'activators' => [
         'file' => [
             'class' => FileActivator::class,
-            'statuses-file' => storage_path('plugins_statuses.json'),
+            'statuses-file' => storage_path('app/plugins_statuses.json'),
             'cache-key' => 'activator.installed',
             'cache-lifetime' => 604800,
         ],
