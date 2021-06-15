@@ -3,10 +3,13 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-warning">Important: Before updating, please back up your database and files.</div>
-        </div>
+            <div class="alert alert-success">
+                <p>You are using Mymo CMS Version: {{ \Mymo\Core\Version::getVersion() }}</p>
+                <p>View CMS change logs: <a href="https://github.com/mymocms/mymocms/blob/master/CHANGELOG.md" target="_blank">click here</a></p>
+            </div>
 
-        <div class="col-md-12">
+            <div class="alert alert-warning">Important: Before updating, please back up your database and files.</div>
+
             @if($updater->source()->isNewVersionAvailable())
                 @php
                     $versionAvailable = $updater->source()->getVersionAvailable();
