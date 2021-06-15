@@ -87,7 +87,8 @@ class PageController extends BackendController
         $model->save();
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo_core::app.successfully'),
+            'redirect' => route('admin.page.index')
         ]);
     }
     

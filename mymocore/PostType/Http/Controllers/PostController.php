@@ -118,7 +118,8 @@ class PostController extends BackendController
         $this->postService->create($request->all());
         
         return $this->success([
-            'message' => trans('mymo_core::app.saved_successfully')
+            'message' => trans('mymo_core::app.saved_successfully'),
+            'redirect' => route('admin.posts.index')
         ]);
     }
 

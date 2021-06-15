@@ -35,7 +35,7 @@
                 @component('mymo_core::components.form_image', [
                     'label' => trans('mymo_core::app.thumbnail'),
                     'name' => 'thumbnail',
-                    'value' => $model->getThumbnail()
+                    'value' => $model->thumbnail
                 ])
                 @endcomponent
 

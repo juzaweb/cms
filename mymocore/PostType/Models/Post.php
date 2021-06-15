@@ -53,7 +53,8 @@ class Post extends Model
         'title',
         'content',
         'status',
-        'views'
+        'views',
+        'thumbnail'
     ];
     
     public function comments()
