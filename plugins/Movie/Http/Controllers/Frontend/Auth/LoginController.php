@@ -16,16 +16,16 @@ class LoginController extends FrontendController
     
     public function login(Request $request)
     {
-        $this->validateRequest([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-        ], $request, [
+        ], [], [
             'email' => trans('theme::app.email'),
             'password' => trans('theme::app.password'),
         ]);
         
         if (get_config('google_recaptcha')) {
-            $this->validateRequest([
+            $request->validate([
                 'recaptcha' => 'required|recaptcha',
             ], $request);
         }

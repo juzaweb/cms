@@ -74,18 +74,10 @@
 
             {{--qualities--}}
 
-            @do_action('post_type.tv-series.form.left')
+            @do_action('post_type.movies.form.left')
         </div>
 
         <div class="col-md-4">
-            <div class="form-group">
-                <label class="col-form-label" for="status">@lang('movie::app.status')</label>
-                <select name="status" id="status" class="form-control" required>
-                    <option value="1" @if($model->status == 1) selected @endif>@lang('movie::app.enabled')</option>
-                    <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('movie::app.disabled')</option>
-                </select>
-            </div>
-
             @component('mymo_core::components.form_select', [
                     'label' => trans('mymo_core::app.status'),
                     'name' => 'status',
@@ -110,7 +102,7 @@
                 'value' => $model->getPoster()
             ])
 
-            @do_action('post_type.tv-series.form.rigth', $model)
+            @do_action('post_type.movies.form.rigth', $model)
         </div>
     </div>
 

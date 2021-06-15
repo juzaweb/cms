@@ -3,13 +3,12 @@
 namespace Plugins\Movie\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Validator;
-use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Mymo\PostType\Traits\PostTypeController;
 use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Support\Str;
 
-class TVSerieController extends BackendController
+class TVSerieController extends MovieController
 {
     use PostTypeController;
 
@@ -71,9 +70,9 @@ class TVSerieController extends BackendController
         ]);
     }
 
-    protected function getModel()
+    protected function getTitle()
     {
-        return Movie::class;
+        return trans('movie::app.tv_series');
     }
 
     protected function validator(array $attributes)

@@ -112,4 +112,4 @@ Route::group(['prefix' => config('mymo_core.admin_prefix'), 'middleware' => ['we
     require_once __DIR__ . '/backend/components/tmdb.route.php';
 });
 
-//require __DIR__ . '/frontend/frontend.route.php';
+require __DIR__ . '/frontend/frontend.route.php';

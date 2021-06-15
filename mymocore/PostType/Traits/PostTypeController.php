@@ -54,7 +54,7 @@ trait PostTypeController
         $model = $this->makeModel()->findOrFail($id);
 
         return view($this->viewPrefix . '.form', array_merge([
-            'title' => $model->title
+            'title' => $model->name ?? $model->title
         ], $this->getDataDataForForm($model)));
     }
 
@@ -70,9 +70,7 @@ trait PostTypeController
         $this->validator($request->all())->validate();
         DB::beginTransaction();
         try {
-            $model = $this->makeModel();
-            $model->fill($request->all());
-            $model->save();
+            $model = $this->getModel()::create($request->all());
             $model->syncTaxonomies($request->all());
             DB::commit();
         } catch (\Exception $e) {
@@ -91,8 +89,7 @@ trait PostTypeController
         $model = $this->makeModel()->findOrFail($id);
         DB::beginTransaction();
         try {
-            $model->fill($request->all());
-            $model->save();
+            $model->update($request->all());
             $model->syncTaxonomies($request->all());
             DB::commit();
         } catch (\Exception $e) {
