@@ -74,6 +74,8 @@
 
             {{--qualities--}}
 
+            <input type="hidden" name="tv_series" value="1">
+
             @do_action('post_type.movies.form.left')
         </div>
 
@@ -93,13 +95,13 @@
             @include('mymo_core::components.form_image', [
                 'label' => trans('movie::app.thumbnail'),
                 'name' => 'thumbnail',
-                'value' => $model->getThumbnail()
+                'value' => $model->thumbnail
             ])
 
             @include('mymo_core::components.form_image', [
                 'label' => trans('movie::app.poster'),
                 'name' => 'poster',
-                'value' => $model->getPoster()
+                'value' => $model->poster
             ])
 
             @do_action('post_type.movies.form.rigth', $model)

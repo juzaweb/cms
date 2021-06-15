@@ -30,6 +30,7 @@ class Movie extends Model
         'max_episode',
         'year',
         'status',
+        'tv_series'
     ];
 
     protected $searchAttributes = [

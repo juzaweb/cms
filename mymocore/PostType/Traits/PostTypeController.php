@@ -22,7 +22,9 @@ use Illuminate\Support\Facades\Validator;
 
 trait PostTypeController
 {
-    use ResourceController;
+    use ResourceController {
+        ResourceController::afterSave as traitAfterSave;
+    }
 
     public function index()
     {
@@ -65,41 +67,10 @@ trait PostTypeController
 
     abstract public function getDataTable(Request $request);
 
-    public function store(Request $request)
+    protected function afterSave(Request $request, $model)
     {
-        $this->validator($request->all())->validate();
-        DB::beginTransaction();
-        try {
-            $model = $this->getModel()::create($request->all());
-            $model->syncTaxonomies($request->all());
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
-        }
-
-        return $this->success([
-            'message' => trans('mymo_core::app.created_successfully')
-        ]);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $this->validator($request->all())->validate();
-        $model = $this->makeModel()->findOrFail($id);
-        DB::beginTransaction();
-        try {
-            $model->update($request->all());
-            $model->syncTaxonomies($request->all());
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
-        }
-
-        return $this->success([
-            'message' => trans('mymo_core::app.updated_successfully')
-        ]);
+        $this->traitAfterSave($request, $model);
+        $model->syncTaxonomies($request->all());
     }
 
     public function bulkActions(Request $request)
@@ -135,14 +106,6 @@ trait PostTypeController
     protected function getTitle()
     {
         return $this->getSetting()->get('label');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Model
-     * */
-    protected function makeModel()
-    {
-        return app($this->getModel());
     }
 
     protected function validator(array $attributes)

@@ -105,7 +105,7 @@ Route::group(['prefix' => config('mymo_core.admin_prefix'), 'middleware' => ['we
 
     Route::postTypeResource('movies', 'Backend\MovieController');
 
-    Route::postTypeResource('tv-series', 'Backend\TVSerieController');
+    Route::mymoResource('tv-series', 'Backend\TVSerieController');
 
     Route::mymoResource('sliders', 'Backend\SliderController');
 
