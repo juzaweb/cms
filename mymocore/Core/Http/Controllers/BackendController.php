@@ -26,6 +26,8 @@ class BackendController extends Controller
 
     public function callAction($method, $parameters)
     {
+        do_action('backend.call_action', $method, $parameters);
+
         if (!file_exists(storage_path('app/installed'))) {
             if (!in_array(\Route::currentRouteName(), ['install', 'install.submit', 'install.submit.step'])) {
                 return redirect()->route('install');

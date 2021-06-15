@@ -20,5 +20,8 @@ class Action
     const THEME_HEADER = 'theme_header';
     const THEME_FOOTER = 'theme_footer';
 
+    const BACKEND_DASHBOARD_VIEW = 'backend.dashboard.view';
+
+    const BACKEND_CALLACTION = 'backend.call_action';
     const FRONTEND_CALLACTION = 'frontend.call_action';
 }

@@ -16,14 +16,7 @@ class DashboardController extends BackendController
 
     public function dashboard()
     {
-        $count_user = User::where('status', '=', 1)
-            ->count('id');
-        $count_page = Page::where('status', '=', 1)
-            ->count('id');
-
         return view('mymo_core::backend.dashboard', [
-            'count_user' => $count_user,
-            'count_page' => $count_page,
             'title' => trans('mymo_core::app.dashboard'),
         ]);
     }

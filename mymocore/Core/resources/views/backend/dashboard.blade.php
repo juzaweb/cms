@@ -1,54 +1,8 @@
 @extends('mymo_core::layouts.backend')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="cui__utils__heading">
-                <strong class="text-uppercase font-size-16">@lang('mymo_core::app.statistics')</strong>
-            </div>
-            <div class="row">
-                {{--<div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-body position-relative overflow-hidden">
-                            <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_movie }}</div>
-                            <div class="text-uppercase">@lang('mymo_core::app.movies')</div>
 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-body position-relative overflow-hidden">
-                            <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_tvserie }}</div>
-                            <div class="text-uppercase">@lang('mymo_core::app.tv_series')</div>
-
-                        </div>
-                    </div>
-                </div>--}}
-
-                <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-body position-relative overflow-hidden">
-                            <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_user }}</div>
-                            <div class="text-uppercase">@lang('mymo_core::app.users')</div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-body position-relative overflow-hidden">
-                            <div class="font-size-36 font-weight-bold text-dark mb-n2">{{ $count_page }}</div>
-                            <div class="text-uppercase">@lang('mymo_core::app.pages')</div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @do_action('backend.dashboard.view')
 
     <div class="row mt-3">
         <div class="col-md-6">
@@ -80,11 +34,11 @@
                 <div class="card-body">
                     <table class="table" id="users-notification">
                         <thead>
-                        <tr>
-                            <th data-formatter="index_formatter" data-width="5%">#</th>
-                            <th data-field="subject" data-formatter="subject_formatter">@lang('mymo_core::app.subject')</th>
-                            <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
-                        </tr>
+                            <tr>
+                                <th data-formatter="index_formatter" data-width="5%">#</th>
+                                <th data-field="subject" data-formatter="subject_formatter">@lang('mymo_core::app.subject')</th>
+                                <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
+                            </tr>
                         </thead>
                     </table>
                 </div>

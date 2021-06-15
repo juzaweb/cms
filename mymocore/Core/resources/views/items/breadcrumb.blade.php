@@ -1,8 +1,6 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        @if(!request()->is(config('tadcms.admin-prefix') . '/dashboard'))
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('mymo_core::app.dashboard')</a></li>
-        @endif
 
         @foreach($items as $item)
             @if(isset($item['url']))
@@ -11,6 +9,5 @@
                 <li class="breadcrumb-item active" aria-current="page">{{ $item['title'] }}</li>
             @endif
         @endforeach
-
     </ol>
 </nav>

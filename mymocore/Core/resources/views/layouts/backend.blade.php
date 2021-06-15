@@ -46,11 +46,15 @@
         </div>
 
         <div class="cui__layout__content">
+            @if(!request()->is(config('mymo_core.admin_prefix') . '/dashboard'))
             {{ breadcrumb('admin', [
                     [
                         'title' => $title
                     ]
                 ]) }}
+            @else
+                <div class="mb-3"></div>
+            @endif
 
             <h4 class="font-weight-bold ml-3">{{ $title }}</h4>
 
