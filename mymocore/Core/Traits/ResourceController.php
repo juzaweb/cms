@@ -58,10 +58,9 @@ trait ResourceController
         DB::beginTransaction();
         try {
             $this->beforeStore($request);
-            $model = $this->makeModel();
-            $model->fill($this->parseDataForSave($request->all()));
-            $model->save();
+            $model = $this->getModel()::create($request->all());
             $this->afterStore($request, $model);
+            $this->afterSave($request, $model);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -80,9 +79,9 @@ trait ResourceController
         DB::beginTransaction();
         try {
             $this->beforeUpdate($request, $model);
-            $model->fill($this->parseDataForSave($request->all()));
-            $model->save();
+            $model->update($request->all());
             $this->afterUpdate($request, $model);
+            $this->afterSave($request, $model);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -164,6 +163,11 @@ trait ResourceController
     }
 
     protected function afterUpdate(Request $request, $model)
+    {
+        //
+    }
+
+    protected function afterSave(Request $request, $model)
     {
         //
     }

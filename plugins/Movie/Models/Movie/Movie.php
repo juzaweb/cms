@@ -30,6 +30,7 @@ class Movie extends Model
         'max_episode',
         'year',
         'status',
+        'tv_series'
     ];
 
     protected $searchAttributes = [
@@ -67,7 +68,7 @@ class Movie extends Model
         return $this->hasMany(DownloadLink::class, 'movie_id', 'id');
     }
 
-    public function rating()
+    public function movieRating()
     {
         return $this->hasMany('Plugins\Movie\Models\Movie\MovieRating', 'movie_id', 'id');
     }
@@ -113,12 +114,12 @@ class Movie extends Model
     
     public function countRating()
     {
-        return $this->rating()->count(['id']);
+        return $this->movieRating()->count(['id']);
     }
     
     public function getStarRating()
     {
-        $total = $this->rating()->sum('start');
+        $total = $this->movieRating()->sum('start');
         $count = $this->countRating();
         if ($count <= 0) {
             return 0;

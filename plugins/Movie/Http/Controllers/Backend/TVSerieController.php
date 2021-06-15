@@ -3,13 +3,12 @@
 namespace Plugins\Movie\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Validator;
-use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Mymo\PostType\Traits\PostTypeController;
 use Plugins\Movie\Models\Movie\Movie;
 use Illuminate\Support\Str;
 
-class TVSerieController extends BackendController
+class TVSerieController extends MovieController
 {
     use PostTypeController;
 
@@ -31,9 +30,9 @@ class TVSerieController extends BackendController
         $query->where('tv_series', '=', 1);
         
         if ($search) {
-            $query->where(function ($subquery) use ($search) {
-                $subquery->orWhere('name', 'like', '%'. $search .'%');
-                $subquery->orWhere('description', 'like', '%'. $search .'%');
+            $query->where(function ($q) use ($search) {
+                $q->orWhere('name', 'like', '%'. $search .'%');
+                $q->orWhere('description', 'like', '%'. $search .'%');
             });
         }
         
@@ -59,7 +58,7 @@ class TVSerieController extends BackendController
             $row->thumb_url = $row->getThumbnail();
             $row->created = $row->created_at->format('H:i Y-m-d');
             $row->description = Str::words(strip_tags($row->description), 15);
-            $row->edit_url = route('admin.tv_series.edit', [$row->id]);
+            $row->edit_url = route('admin.tv-series.edit', [$row->id]);
             $row->preview_url = route('watch', [$row->slug]);
             $row->upload_url = route('admin.movies.servers', ['tv-series', $row->id]);
             $row->download_url = route('admin.movies.download', ['tv-series', $row->id]);
@@ -71,9 +70,9 @@ class TVSerieController extends BackendController
         ]);
     }
 
-    protected function getModel()
+    protected function getTitle()
     {
-        return Movie::class;
+        return trans('movie::app.tv_series');
     }
 
     protected function validator(array $attributes)

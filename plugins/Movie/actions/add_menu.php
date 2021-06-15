@@ -22,15 +22,7 @@ HookAction::registerPostType('movies', [
     'supports' => ['tag'],
 ]);
 
-HookAction::registerPostType('tv-series', [
-    'label' => trans('movie::app.tv_series'),
-    'model' => \Plugins\Movie\Models\Movie\Movie::class,
-    'menu_icon' => 'fa fa-film',
-    'menu_position' => 11,
-    'supports' => ['tag'],
-]);
-
-HookAction::registerTaxonomy('genres', ['movies', 'tv-series'], [
+HookAction::registerTaxonomy('genres', 'movies', [
     'label' => trans('movie::app.genres'),
     'menu_icon' => 'fa fa-edit',
     'menu_position' => 6,
@@ -39,7 +31,7 @@ HookAction::registerTaxonomy('genres', ['movies', 'tv-series'], [
     ],
 ]);
 
-HookAction::registerTaxonomy('countries', ['movies', 'tv-series'], [
+HookAction::registerTaxonomy('countries', 'movies', [
     'label' => trans('movie::app.countries'),
     'menu_icon' => 'fa fa-edit',
     'menu_position' => 7,
@@ -49,10 +41,21 @@ HookAction::registerTaxonomy('countries', ['movies', 'tv-series'], [
 ]);
 
 HookAction::addAdminMenu(
+    trans('movie::app.tv_series'),
+    'tv-series',
+    [
+        'icon' => 'fa fa-film',
+        'position' => 2,
+        'parent' => 'movies',
+    ]
+);
+
+HookAction::addAdminMenu(
     trans('movie::app.sliders'),
     'sliders',
     [
-        'icon' => 'fa fa-paint-brush',
-        'position' => 10,
+        'icon' => 'fa fa-film',
+        'position' => 6,
         'parent' => 'appearance',
-    ]);
+    ]
+);
