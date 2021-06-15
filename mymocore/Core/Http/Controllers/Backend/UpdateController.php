@@ -15,6 +15,7 @@
 namespace Mymo\Core\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Updater\UpdaterManager;
 
@@ -43,10 +44,21 @@ class UpdateController extends BackendController
             ]);
         }
 
-        $versionAvailable = $this->updater->source()->getVersionAvailable();
-        $release = $this->updater->source()->fetch($versionAvailable);
-        $this->updater->source()->update($release);
-        Artisan::call('migrate', ['--force'=> true]);
+        Artisan::call('down');
+        DB::beginTransaction();
+        try {
+            $versionAvailable = $this->updater->source()->getVersionAvailable();
+            $release = $this->updater->source()->fetch($versionAvailable);
+            $this->updater->source()->update($release);
+            Artisan::call('migrate', ['--force'=> true]);
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return $this->error([
+                'message' => $e->getMessage(),
+            ]);
+        }
+        Artisan::call('up');
 
         return $this->success([
             'message' => trans('mymo_core::app.updated_successfully'),

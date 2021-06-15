@@ -15,6 +15,7 @@
 namespace Mymo\Updater\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Mymo\Updater\UpdaterManager;
 use Illuminate\Support\Facades\Artisan;
 
@@ -36,10 +37,17 @@ class UpdateCommand extends Command
         }
 
         Artisan::call('down');
-        $versionAvailable = $this->updater->source()->getVersionAvailable();
-        $release = $this->updater->source()->fetch($versionAvailable);
-        $this->updater->source()->update($release);
-        Artisan::call('migrate', ['--force'=> true]);
+        DB::beginTransaction();
+        try {
+            $versionAvailable = $this->updater->source()->getVersionAvailable();
+            $release = $this->updater->source()->fetch($versionAvailable);
+            $this->updater->source()->update($release);
+            Artisan::call('migrate', ['--force'=> true]);
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            throw $e;
+        }
         Artisan::call('up');
 
         return $this->success([

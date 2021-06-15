@@ -25,7 +25,7 @@ class ModuleController extends BackendController
         $limit = $request->get('limit', 20);
         
         $results = [];
-        $plugins = Module::all();
+        $plugins = Plugin::all();
         foreach ($plugins as $plugin) {
             $item = [
                 'id' => $plugin->get('name'),
