@@ -73,10 +73,11 @@
         }
 
         function status_formatter(value, row, index) {
-            if (value == 1) {
-                return '<span class="text-success">'+ mymo.lang.enabled +'</span>';
+            if (row.status == 'publish') {
+                return '<span class="text-success">'+ mymo.lang.publish +'</span>';
             }
-            return '<span class="text-danger">'+ mymo.lang.disabled +'</span>';
+
+            return '<span class="text-danger">'+ mymo.lang[row.status] +'</span>';
         }
 
         function options_formatter(value, row, index) {
@@ -85,9 +86,9 @@
                 '            '+ mymo.lang.options +'\n' +
                 '          </button>\n' +
                 '          <div class="dropdown-menu" role="menu" style="">\n' +
-                '            <a href="'+ row.upload_url +'" class="dropdown-item">'+ mymo.lang.upload_videos +'</a>\n' +
-                '            <a href="'+ row.download_url +'" class="dropdown-item">'+ mymo.lang.download_videos +'</a>\n' +
-                '            <a href="'+ row.preview_url +'" target="_blank" class="dropdown-item">'+ mymo.lang.preview +'</a>\n' +
+                '            <a href="'+ row.upload_url +'" class="dropdown-item">Upload Videos</a>\n' +
+                '            <a href="'+ row.download_url +'" class="dropdown-item">Download Videos</a>\n' +
+                '            <a href="'+ row.preview_url +'" target="_blank" class="dropdown-item">Preview</a>\n' +
                 '          </div>\n' +
                 '        </div>';
             return result;

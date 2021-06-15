@@ -345,7 +345,7 @@ function upload_url($path, $default = null)
         return $path;
     }
 
-    $storage = Storage::disk(config('file-manager.upload_disk'));
+    $storage = Storage::disk('public');
     if ($storage->exists($path)) {
         return $storage->url($path);
     }
