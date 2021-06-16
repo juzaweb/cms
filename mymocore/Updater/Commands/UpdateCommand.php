@@ -18,9 +18,12 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Mymo\Updater\UpdaterManager;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Finder\Finder;
 
 class UpdateCommand extends Command
 {
+    protected $signature = 'mymo:update';
+
     protected $updater;
 
     public function __construct(UpdaterManager $updater)
@@ -31,6 +34,11 @@ class UpdateCommand extends Command
 
     public function handle()
     {
+        dd(collect((new Finder())->in(base_path())
+            ->exclude(config('updater.exclude_folders'))
+            ->ignoreDotFiles(false)
+            ->files()));
+
         if (!$this->updater->source()->isNewVersionAvailable()) {
             $this->info(trans('mymo_core::app.no_new_version_available'));
             exit;

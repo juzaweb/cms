@@ -3,6 +3,7 @@
 namespace Mymo\Updater;
 
 use Mymo\Updater\Commands\CheckForUpdate;
+use Mymo\Updater\Commands\UpdateCommand;
 use Mymo\Updater\Contracts\SourceRepositoryTypeContract;
 use Mymo\Updater\Models\Release;
 use Mymo\Updater\Models\UpdateExecutor;
@@ -68,6 +69,7 @@ class UpdaterServiceProvider extends ServiceProvider
     {
         $this->commands([
             CheckForUpdate::class,
+            UpdateCommand::class
         ]);
 
         // Register custom commands from config

@@ -81,20 +81,21 @@ return [
 
     'exclude_folders' => [
         '__MACOSX',
-        'node_modules',
-        'bootstrap',
-        'bower',
-        'storage',
-        'vendor',
         'app',
+        'bootstrap',
         'config',
         'database',
+        'bower',
+        'node_modules',
         'plugins',
         'public',
         'resources',
         'routes',
+        'storage',
+        'tests',
         'themes',
-        'tests'
+        'vendor',
+        'update'
     ],
 
     /*

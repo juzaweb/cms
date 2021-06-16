@@ -54,12 +54,11 @@ final class UpdateExecutor
     {
         if (checkPermissions($this->basePath)) {
             $releaseFolder = createFolderFromFile($release->getStoragePath());
-
             // Move all directories first
-            $this->moveFolders($releaseFolder);
+            $this->moveFolders($releaseFolder . '/mymocore');
 
             // Now move all the files
-            $this->moveFiles($releaseFolder);
+            $this->moveFiles($releaseFolder . '/mymocore');
 
             // Delete the folder from the update
             File::deleteDirectory($releaseFolder);
@@ -80,7 +79,6 @@ final class UpdateExecutor
     private function moveFiles(string $folder): void
     {
         $files = (new Finder())->in($folder)
-                               ->exclude(config('updater.exclude_folders'))
                                ->ignoreDotFiles(false)
                                ->files();
 
@@ -95,7 +93,8 @@ final class UpdateExecutor
 
     private function moveFolders(string $folder): void
     {
-        $directories = (new Finder())->in($folder)->exclude(config('updater.exclude_folders'))->directories();
+        $directories = (new Finder())->in($folder)
+            ->directories();
 
         $sorted = collect($directories->sort(function (SplFileInfo $a, SplFileInfo $b) {
             return strlen($b->getRealpath()) - strlen($a->getRealpath());
