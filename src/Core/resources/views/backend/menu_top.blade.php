@@ -56,9 +56,9 @@
             </a>
 
             <div class="dropdown-divider"></div>
-            {{--<a href="{{ route('logout') }}" class="dropdown-item" data-turbolinks="false">
+            <a href="{{ route('auth.logout') }}" class="dropdown-item" data-turbolinks="false">
                 <i class="dropdown-icon fe fe-log-out"></i> @lang('mymo_core::app.logout')
-            </a>--}}
+            </a>
         </div>
     </div>
 </div>
