@@ -124,4 +124,5 @@ return [
     'email_or_password_is_incorrect' => 'Email or password is incorrect',
     'reset_password' => 'Reset password',
     'new_password' => 'New password',
+    'please_wait' => 'Please wait...',
 ];
