@@ -3,7 +3,9 @@
     "description": "TAD CMS backend.",
     "keywords": [
       "laravel cms",
-      "mymo cms"
+      "mymo cms",
+      "laravel cms like wordpress",
+      "cms like wordpress"
     ],
     "license": "MIT",
     "homepage": "https://github.com/mymocms/mymocms",
@@ -43,13 +45,13 @@
           "Mymo\\": "src/"
         },
         "files": [
-            "Core/Helpers/helpers.php"
+            "src/Core/Helpers/helpers.php"
         ]
     },
     "extra": {
       "laravel": {
         "providers": [
-          "Tadcms\\Backend\\BackendServiceProvider"
+          "Mymo\\Core\\Providers\\MymoCoreServiceProvider"
         ]
       }
     }

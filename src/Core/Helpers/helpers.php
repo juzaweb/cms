@@ -12,9 +12,9 @@
  * Time: 10:05 PM
  */
 
-require (__DIR__ . '/../../Module/helpers.php');
-require (__DIR__ . '/../../Updater/helpers.php');
-require (__DIR__ . '/../../Installer/Helpers/functions.php');
+//require (__DIR__ . '/../../Module/helpers.php');
+//require (__DIR__ . '/../../Updater/helpers.php');
+//require (__DIR__ . '/../../Installer/Helpers/functions.php');
 
 use Illuminate\Support\Facades\Auth;
 use Mymo\Core\Helpers\Breadcrumb;
@@ -277,10 +277,10 @@ function count_unread_notifications() {
 
 function core_path($path = null) {
     if ($path) {
-        return base_path('mymocore/Core/' . $path);
+        return __DIR__ . '/../' . $path;
     }
 
-    return base_path('mymocore/Core');
+    return __DIR__ . '/../';
 }
 
 function user_avatar($user = null) {
