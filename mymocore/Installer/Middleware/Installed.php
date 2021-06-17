@@ -15,7 +15,9 @@
 namespace Mymo\Installer\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 use Mymo\Installer\Helpers\Intaller;
 
 class Installed

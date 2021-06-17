@@ -275,6 +275,9 @@ return [
     'send_mail_successfully' => 'Send email successfully',
     'click_here_to_select_file' => 'Click here to select file',
     'url' => 'Url',
+    'forgot_password' => 'Forgot password',
+    'remember_me' => 'Remember me',
+    'login_successfully' => 'Login successfully',
     'no_new_version_available' => 'No new version available.',
 ];
 

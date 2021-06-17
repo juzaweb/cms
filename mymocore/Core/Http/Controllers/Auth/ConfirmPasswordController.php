@@ -2,11 +2,10 @@
 
 namespace Mymo\Core\Http\Controllers\Auth;
 
-use Tadcms\System\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use App\Http\Controllers\Controller;
+use Mymo\Core\Traits\ResponseMessage;
 
 class ConfirmPasswordController extends Controller
 {
-
+    use ResponseMessage;
 }

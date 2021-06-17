@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Mymo\Core\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Mymo\Core\Traits\ResponseMessage;
 
 class LoginController extends Controller
 {
+    use ResponseMessage;
+
     public function index()
     {
         do_action('auth.login.index');
@@ -16,7 +19,7 @@ class LoginController extends Controller
         //
         
         return view('mymo_core::auth.login', [
-            'title' => trans('mymo_core::app.sign-in')
+            'title' => trans('mymo_core::app.login')
         ]);
     }
     
@@ -34,15 +37,18 @@ class LoginController extends Controller
         $email = $request->post('email');
         $password = $request->post('password');
         $remember = filter_var($request->post('remember'), FILTER_VALIDATE_BOOLEAN);
+        $user = User::whereEmail($email)->first(['status', 'is_admin']);
         
-        $user = User::whereEmail($email)->first(['status']);
-        
-        if (!$user) {
-            return $this->error(trans('mymo_core::message.login-form.login-failed'));
+        if (empty($user)) {
+            return $this->error([
+                'message' => trans('mymo_core::message.login_form.login_failed')
+            ]);
         }
         
         if ($user->status != 'active') {
-            return $this->error(trans('mymo_core::message.login-form.user-is-banned'));
+            return $this->error([
+                'message' => trans('mymo_core::message.login_form.user_is_banned')
+            ]);
         }
         
         if (Auth::attempt([
@@ -52,13 +58,14 @@ class LoginController extends Controller
             do_action('auth.login.success', Auth::user());
 
             return $this->success([
-                'message' => trans('mymo_core::app.login_successfully')
+                'message' => trans('mymo_core::app.login_successfully'),
+                'redirect' => $user->is_admin ? route('admin.dashboard') : '/'
             ]);
         }
     
         do_action('auth.login.failed');
         
-        return $this->error(trans('mymo_core::message.login-form.login-failed'));
+        return $this->error(trans('mymo_core::message.login_form.login_failed'));
     }
     
     public function logout()

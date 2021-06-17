@@ -2,12 +2,12 @@
 
 namespace Mymo\Core\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use Mymo\Core\Models\PasswordReset;
+use Mymo\Core\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Tadcms\System\Models\PasswordReset;
-use Tadcms\System\Controllers\Controller;
 use Illuminate\Http\Request;
-use Tadcms\System\Models\User;
 
 class ResetPasswordController extends Controller
 {
@@ -23,7 +23,7 @@ class ResetPasswordController extends Controller
             })
             ->firstOrFail();
         
-        return view('tadcms::auth.forgot_password', [
+        return view('mymo_core::auth.forgot_password', [
             'user' => $user,
         ]);
     }

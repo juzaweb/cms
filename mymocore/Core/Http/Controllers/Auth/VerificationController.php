@@ -2,9 +2,9 @@
 
 namespace Mymo\Core\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Tadcms\System\Models\User;
-use Tadcms\System\Controllers\Controller;
+use Mymo\Core\Models\User;
 
 class VerificationController extends Controller
 {

@@ -2,21 +2,26 @@
 
 namespace Mymo\Core\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Tadcms\System\Models\PasswordReset;
-use Tadcms\System\Models\User;
-use Tadcms\EmailTemplate\EmailService;
-use Tadcms\System\Controllers\Controller;
+use Mymo\Core\Models\PasswordReset;
+use Mymo\Core\Models\User;
+use Mymo\Core\Traits\ResponseMessage;
+use Mymo\Email\EmailService;
 use Illuminate\Http\Request;
 
 class ForgotPasswordController extends Controller
 {
+    use ResponseMessage;
+
     public function index()
     {
         do_action('auth.forgot-password.index');
         
-        return view('tadcms::auth.forgot_password');
+        return view('mymo_core::auth.forgot_password', [
+            'title' => trans('mymo_core::app.forgot_password')
+        ]);
     }
     
     public function forgotPassword(Request $request)
@@ -52,6 +57,6 @@ class ForgotPasswordController extends Controller
             throw $exception;
         }
     
-        return $this->redirect(route('auth.forgot-password'));
+        return $this->success(['redirect' => route('auth.forgot-password')]);
     }
 }

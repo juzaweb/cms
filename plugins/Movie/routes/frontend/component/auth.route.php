@@ -27,5 +27,5 @@ Route::group(['prefix' => 'reset-password', 'middleware' => ['web', 'guest']], f
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
-    Route::get('/logout', 'Frontend\Auth\LoginController@logout')->name('logout');
+    Route::get('/user/logout', 'Frontend\Auth\LoginController@logout')->name('logout');
 });
