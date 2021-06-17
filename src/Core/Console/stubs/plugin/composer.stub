@@ -1,0 +1,19 @@
+{
+    "name": "$LOWER_NAME$",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "$MODULE_NAMESPACE$\\$PROVIDER_NAMESPACE$\\MainServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "$MODULE_NAMESPACE$\\": "src/"
+        }
+    }
+}

@@ -36,7 +36,7 @@ class DashboardController extends BackendController
         foreach ($rows as $row) {
             $row->created = $row->created_at->format('Y-m-d');
             $row->subject = $row->data['subject'];
-            $row->url = route('account.notification.detail', [$row->id]);
+            $row->url = '';
         }
     
         return response()->json([

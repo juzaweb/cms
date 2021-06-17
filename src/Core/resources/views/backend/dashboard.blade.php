@@ -28,7 +28,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h5>@lang('mymo_core::app.news')</h5>
+                    <h5>@lang('mymo_core::app.notifications')</h5>
                 </div>
 
                 <div class="card-body">

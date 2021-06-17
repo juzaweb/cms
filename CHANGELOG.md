@@ -1,7 +1,5 @@
 ## 1.1.1
 - Package cms
-- Fix some movie plugin bugs
-- Fix some mymo theme bugs
 - Migrate when active plugin
 - Fix load image thumbnail
 - Current version and change logs updates pages
