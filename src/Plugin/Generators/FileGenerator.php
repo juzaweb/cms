@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Modules\Generators;
+namespace Mymo\Plugin\Generators;
 
 use Illuminate\Filesystem\Filesystem;
-use Tadcms\Modules\Exceptions\FileAlreadyExistException;
+use Mymo\Plugin\Exceptions\FileAlreadyExistException;
 
 class FileGenerator extends Generator
 {

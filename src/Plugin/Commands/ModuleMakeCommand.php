@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Contracts\ActivatorInterface;
-use Tadcms\Modules\Generators\ModuleGenerator;
+use Mymo\Plugin\Contracts\ActivatorInterface;
+use Mymo\Plugin\Generators\ModuleGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

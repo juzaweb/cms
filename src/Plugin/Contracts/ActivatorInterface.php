@@ -1,8 +1,8 @@
 <?php
 
-namespace Tadcms\Modules\Contracts;
+namespace Mymo\Plugin\Contracts;
 
-use Tadcms\Modules\Plugin;
+use Mymo\Plugin\Plugin;
 
 interface ActivatorInterface
 {

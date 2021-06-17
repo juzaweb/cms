@@ -1,8 +1,8 @@
 <?php
 
-namespace Tadcms\Modules;
+namespace Mymo\Plugin;
 
-use Tadcms\Modules\Support\Stub;
+use Mymo\Plugin\Support\Stub;
 
 class LumenModulesServiceProvider extends ModulesServiceProvider
 {

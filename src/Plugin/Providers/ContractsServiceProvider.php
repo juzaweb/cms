@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Modules\Providers;
+namespace Mymo\Plugin\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Tadcms\Modules\Contracts\RepositoryInterface;
-use Tadcms\Modules\Laravel\LaravelFileRepository;
+use Mymo\Plugin\Contracts\RepositoryInterface;
+use Mymo\Plugin\Laravel\LaravelFileRepository;
 
 class ContractsServiceProvider extends ServiceProvider
 {

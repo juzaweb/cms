@@ -1,8 +1,8 @@
 <?php
 
-namespace Tadcms\Modules\Publishing;
+namespace Mymo\Plugin\Publishing;
 
-use Tadcms\Modules\Support\Config\GenerateConfigReader;
+use Mymo\Plugin\Support\Config\GenerateConfigReader;
 
 class AssetPublisher extends Publisher
 {

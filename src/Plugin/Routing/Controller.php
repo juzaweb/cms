@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Routing;
+namespace Mymo\Plugin\Routing;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

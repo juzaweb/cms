@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules;
+namespace Mymo\Plugin;
 
 use Countable;
 use Illuminate\Cache\CacheManager;
@@ -10,11 +10,11 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
-use Tadcms\Modules\Contracts\RepositoryInterface;
-use Tadcms\Modules\Exceptions\InvalidAssetPath;
-use Tadcms\Modules\Exceptions\ModuleNotFoundException;
-use Tadcms\Modules\Process\Installer;
-use Tadcms\Modules\Process\Updater;
+use Mymo\Plugin\Contracts\RepositoryInterface;
+use Mymo\Plugin\Exceptions\InvalidAssetPath;
+use Mymo\Plugin\Exceptions\ModuleNotFoundException;
+use Mymo\Plugin\Process\Installer;
+use Mymo\Plugin\Process\Updater;
 
 abstract class FileRepository implements RepositoryInterface, Countable
 {
@@ -129,7 +129,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * @param Container $app
      * @param string $args
      * @param string $path
-     * @return \Tadcms\Modules\Plugin
+     * @return \Mymo\Plugin\Plugin
      */
     abstract protected function createModule(...$args);
 
@@ -487,7 +487,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     /**
      * Get module used for cli session.
      * @return string
-     * @throws \Tadcms\Modules\Exceptions\ModuleNotFoundException
+     * @throws \Mymo\Plugin\Exceptions\ModuleNotFoundException
      */
     public function getUsedNow() : string
     {
@@ -554,7 +554,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * Enabling a specific module.
      * @param string $name
      * @return void
-     * @throws \Tadcms\Modules\Exceptions\ModuleNotFoundException
+     * @throws \Mymo\Plugin\Exceptions\ModuleNotFoundException
      */
     public function enable($name)
     {
@@ -565,7 +565,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * Disabling a specific module.
      * @param string $name
      * @return void
-     * @throws \Tadcms\Modules\Exceptions\ModuleNotFoundException
+     * @throws \Mymo\Plugin\Exceptions\ModuleNotFoundException
      */
     public function disable($name)
     {

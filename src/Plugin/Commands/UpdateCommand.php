@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Traits\ModuleCommandTrait;
+use Mymo\Plugin\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 
 class UpdateCommand extends Command
@@ -37,7 +37,7 @@ class UpdateCommand extends Command
             return;
         }
 
-        /** @var \Tadcms\Modules\Plugin $module */
+        /** @var \Mymo\Plugin\Plugin $module */
         foreach ($this->laravel['modules']->getOrdered() as $module) {
             $this->updateModule($module->getName());
         }

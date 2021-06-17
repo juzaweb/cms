@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Exceptions\FileAlreadyExistException;
-use Tadcms\Modules\Generators\FileGenerator;
+use Mymo\Plugin\Exceptions\FileAlreadyExistException;
+use Mymo\Plugin\Generators\FileGenerator;
 
 abstract class GeneratorCommand extends Command
 {
@@ -75,7 +75,7 @@ abstract class GeneratorCommand extends Command
     /**
      * Get class namespace.
      *
-     * @param \Tadcms\Modules\Plugin $module
+     * @param \Mymo\Plugin\Plugin $module
      *
      * @return string
      */

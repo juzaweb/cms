@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Modules\Lumen;
+namespace Mymo\Plugin\Lumen;
 
 use Illuminate\Support\Str;
-use Tadcms\Modules\Plugin as BaseModule;
+use Mymo\Plugin\Plugin as BaseModule;
 
 class Module extends BaseModule
 {

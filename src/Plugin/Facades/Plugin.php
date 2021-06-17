@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Facades;
+namespace Mymo\Plugin\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method get(string $key, $default = null)
  * @method getDisplayName()
  * @method bool isEnabled()
- * @see \Tadcms\Modules\Laravel\Module
+ * @see \Mymo\Plugin\Laravel\Module
  * */
 class Plugin extends Facade
 {

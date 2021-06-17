@@ -51,7 +51,8 @@
     "extra": {
       "laravel": {
         "providers": [
-          "Mymo\\Core\\Providers\\MymoCoreServiceProvider"
+          "Mymo\\Core\\Providers\\MymoCoreServiceProvider",
+          "Mymo\\Plugin\\PluginServiceProvider"
         ]
       }
     }

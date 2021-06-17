@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Generators;
+namespace Mymo\Plugin\Generators;
 
 abstract class Generator
 {

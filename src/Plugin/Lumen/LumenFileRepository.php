@@ -1,8 +1,8 @@
 <?php
 
-namespace Tadcms\Modules\Lumen;
+namespace Mymo\Plugin\Lumen;
 
-use Tadcms\Modules\FileRepository;
+use Mymo\Plugin\FileRepository;
 
 class LumenFileRepository extends FileRepository
 {

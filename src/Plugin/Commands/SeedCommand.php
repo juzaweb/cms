@@ -1,15 +1,15 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use ErrorException;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Str;
-use Tadcms\Modules\Contracts\RepositoryInterface;
-use Tadcms\Modules\Plugin;
-use Tadcms\Modules\Support\Config\GenerateConfigReader;
-use Tadcms\Modules\Traits\ModuleCommandTrait;
+use Mymo\Plugin\Contracts\RepositoryInterface;
+use Mymo\Plugin\Plugin;
+use Mymo\Plugin\Support\Config\GenerateConfigReader;
+use Mymo\Plugin\Traits\ModuleCommandTrait;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;

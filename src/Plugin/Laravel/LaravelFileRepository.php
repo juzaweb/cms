@@ -1,8 +1,8 @@
 <?php
 
-namespace Tadcms\Modules\Laravel;
+namespace Mymo\Plugin\Laravel;
 
-use Tadcms\Modules\FileRepository;
+use Mymo\Plugin\FileRepository;
 
 class LaravelFileRepository extends FileRepository
 {

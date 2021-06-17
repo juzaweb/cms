@@ -1,11 +1,11 @@
 <?php
 
-namespace Tadcms\Modules\Publishing;
+namespace Mymo\Plugin\Publishing;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Contracts\PublisherInterface;
-use Tadcms\Modules\Contracts\RepositoryInterface;
-use Tadcms\Modules\Plugin;
+use Mymo\Plugin\Contracts\PublisherInterface;
+use Mymo\Plugin\Contracts\RepositoryInterface;
+use Mymo\Plugin\Plugin;
 
 abstract class Publisher implements PublisherInterface
 {
@@ -87,7 +87,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Get plugin instance.
      *
-     * @return \Tadcms\Modules\Plugin
+     * @return \Mymo\Plugin\Plugin
      */
     public function getModule()
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Plugin;
-use Tadcms\Modules\Publishing\AssetPublisher;
+use Mymo\Plugin\Plugin;
+use Mymo\Plugin\Publishing\AssetPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PublishCommand extends Command

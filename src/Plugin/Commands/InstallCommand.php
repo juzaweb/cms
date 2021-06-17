@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Json;
-use Tadcms\Modules\Process\Installer;
+use Mymo\Plugin\Json;
+use Mymo\Plugin\Process\Installer;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

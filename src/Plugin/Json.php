@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Modules;
+namespace Mymo\Plugin;
 
 use Illuminate\Filesystem\Filesystem;
-use Tadcms\Modules\Exceptions\InvalidJsonException;
+use Mymo\Plugin\Exceptions\InvalidJsonException;
 
 class Json
 {

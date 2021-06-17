@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Contracts\RepositoryInterface;
-use Tadcms\Modules\Plugin;
+use Mymo\Plugin\Contracts\RepositoryInterface;
+use Mymo\Plugin\Plugin;
 
 class LaravelModulesV6Migrator extends Command
 {

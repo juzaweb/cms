@@ -1,11 +1,11 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Support\Str;
-use Tadcms\Modules\Support\Config\GenerateConfigReader;
-use Tadcms\Modules\Support\Stub;
-use Tadcms\Modules\Traits\ModuleCommandTrait;
+use Mymo\Plugin\Support\Config\GenerateConfigReader;
+use Mymo\Plugin\Support\Stub;
+use Mymo\Plugin\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 
 class FactoryMakeCommand extends GeneratorCommand

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Support\Migrations;
+namespace Mymo\Plugin\Support\Migrations;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;

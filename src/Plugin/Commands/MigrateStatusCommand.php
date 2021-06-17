@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Migrations\Migrator;
-use Tadcms\Modules\Plugin;
+use Mymo\Plugin\Migrations\Migrator;
+use Mymo\Plugin\Plugin;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -25,7 +25,7 @@ class MigrateStatusCommand extends Command
     protected $description = 'Status for all plugin migrations';
 
     /**
-     * @var \Tadcms\Modules\Contracts\RepositoryInterface
+     * @var \Mymo\Plugin\Contracts\RepositoryInterface
      */
     protected $module;
 

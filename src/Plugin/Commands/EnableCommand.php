@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Plugin;
+use Mymo\Plugin\Plugin;
 use Symfony\Component\Console\Input\InputArgument;
 
 class EnableCommand extends Command

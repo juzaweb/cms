@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Migrations\Migrator;
-use Tadcms\Modules\Publishing\MigrationPublisher;
+use Mymo\Plugin\Migrations\Migrator;
+use Mymo\Plugin\Publishing\MigrationPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PublishMigrationCommand extends Command
@@ -44,7 +44,7 @@ class PublishMigrationCommand extends Command
     /**
      * Publish migration for the specified plugin.
      *
-     * @param \Tadcms\Modules\Plugin $module
+     * @param \Mymo\Plugin\Plugin $module
      */
     public function publish($module)
     {

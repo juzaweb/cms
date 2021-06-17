@@ -2,10 +2,10 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Design;
 
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Models\Menu;
 use Mymo\PostType\Models\Page;
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\PostType\Models\Taxonomy;
 
 class MenuController extends BackendController

@@ -1,8 +1,8 @@
 <?php
 
-namespace Tadcms\Modules\Process;
+namespace Mymo\Plugin\Process;
 
-use Tadcms\Modules\Plugin;
+use Mymo\Plugin\Plugin;
 
 class Updater extends Runner
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Support\Config;
+namespace Mymo\Plugin\Support\Config;
 
 class GenerateConfigReader
 {

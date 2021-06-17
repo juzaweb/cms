@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Support\Migrations;
+namespace Mymo\Plugin\Support\Migrations;
 
 class NameParser
 {

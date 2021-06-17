@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Contracts;
+namespace Mymo\Plugin\Contracts;
 
 class ModuleInterface
 {

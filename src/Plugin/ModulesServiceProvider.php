@@ -1,11 +1,11 @@
 <?php
 
-namespace Tadcms\Modules;
+namespace Mymo\Plugin;
 
 use Illuminate\Support\ServiceProvider;
-use Tadcms\Modules\Providers\BootstrapServiceProvider;
-use Tadcms\Modules\Providers\ConsoleServiceProvider;
-use Tadcms\Modules\Providers\ContractsServiceProvider;
+use Mymo\Plugin\Providers\BootstrapServiceProvider;
+use Mymo\Plugin\Providers\ConsoleServiceProvider;
+use Mymo\Plugin\Providers\ContractsServiceProvider;
 
 abstract class ModulesServiceProvider extends ServiceProvider
 {
@@ -36,7 +36,7 @@ abstract class ModulesServiceProvider extends ServiceProvider
      */
     protected function registerNamespaces()
     {
-        $configPath = __DIR__ . '/../config/config.php';
+        $configPath = __DIR__ . '/config/config.php';
 
         $this->mergeConfigFrom($configPath, 'modules');
         /*$this->publishes([

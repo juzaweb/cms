@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules;
+namespace Mymo\Plugin;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Translation\Translator;
-use Tadcms\Modules\Contracts\ActivatorInterface;
+use Mymo\Plugin\Contracts\ActivatorInterface;
 
 abstract class Plugin
 {

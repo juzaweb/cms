@@ -1,15 +1,15 @@
 <?php
 
-namespace Tadcms\Modules\Generators;
+namespace Mymo\Plugin\Generators;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Console\Command as Console;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Tadcms\Modules\Contracts\ActivatorInterface;
-use Tadcms\Modules\FileRepository;
-use Tadcms\Modules\Support\Config\GenerateConfigReader;
-use Tadcms\Modules\Support\Stub;
+use Mymo\Plugin\Contracts\ActivatorInterface;
+use Mymo\Plugin\FileRepository;
+use Mymo\Plugin\Support\Config\GenerateConfigReader;
+use Mymo\Plugin\Support\Stub;
 
 class ModuleGenerator extends Generator
 {
@@ -51,7 +51,7 @@ class ModuleGenerator extends Generator
     /**
      * The plugin instance.
      *
-     * @var \Tadcms\Modules\Plugin
+     * @var \Mymo\Plugin\Plugin
      */
     protected $module;
 
@@ -235,7 +235,7 @@ class ModuleGenerator extends Generator
     /**
      * Get the plugin instance.
      *
-     * @return \Tadcms\Modules\Plugin
+     * @return \Mymo\Plugin\Plugin
      */
     public function getModule()
     {

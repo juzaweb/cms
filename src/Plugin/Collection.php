@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules;
+namespace Mymo\Plugin;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection as BaseCollection;

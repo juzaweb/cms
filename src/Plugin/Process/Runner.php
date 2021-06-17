@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Modules\Process;
+namespace Mymo\Plugin\Process;
 
-use Tadcms\Modules\Contracts\RepositoryInterface;
-use Tadcms\Modules\Contracts\RunableInterface;
+use Mymo\Plugin\Contracts\RepositoryInterface;
+use Mymo\Plugin\Contracts\RunableInterface;
 
 class Runner implements RunableInterface
 {

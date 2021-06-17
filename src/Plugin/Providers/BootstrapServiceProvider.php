@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Modules\Providers;
+namespace Mymo\Plugin\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Tadcms\Modules\Contracts\RepositoryInterface;
+use Mymo\Plugin\Contracts\RepositoryInterface;
 
 class BootstrapServiceProvider extends ServiceProvider
 {

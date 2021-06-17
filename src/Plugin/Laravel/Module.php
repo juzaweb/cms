@@ -10,13 +10,13 @@
  * Time: 4:31 PM
  */
 
-namespace Tadcms\Modules\Laravel;
+namespace Mymo\Plugin\Laravel;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
 use Illuminate\Support\Str;
-use Tadcms\Modules\Plugin as BaseModule;
+use Mymo\Plugin\Plugin as BaseModule;
 
 class Module extends BaseModule
 {

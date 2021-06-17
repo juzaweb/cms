@@ -1,12 +1,12 @@
 <?php
 
-namespace Tadcms\Modules;
+namespace Mymo\Plugin;
 
-use Tadcms\Modules\Contracts\RepositoryInterface;
-use Tadcms\Modules\Exceptions\InvalidActivatorClass;
-use Tadcms\Modules\Support\Stub;
+use Mymo\Plugin\Contracts\RepositoryInterface;
+use Mymo\Plugin\Exceptions\InvalidActivatorClass;
+use Mymo\Plugin\Support\Stub;
 
-class LaravelModulesServiceProvider extends ModulesServiceProvider
+class PluginServiceProvider extends ModulesServiceProvider
 {
     /**
      * Booting the package.

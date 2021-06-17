@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Traits;
+namespace Mymo\Plugin\Traits;
 
 trait CanClearModulesCache
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Tadcms\Modules\Activators;
+namespace Mymo\Plugin\Activators;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
-use Tadcms\Modules\Contracts\ActivatorInterface;
-use Tadcms\Modules\Exceptions\ModuleNotFoundException;
-use Tadcms\Modules\Plugin;
+use Mymo\Plugin\Contracts\ActivatorInterface;
+use Mymo\Plugin\Exceptions\ModuleNotFoundException;
+use Mymo\Plugin\Plugin;
 
 class FileActivator implements ActivatorInterface
 {

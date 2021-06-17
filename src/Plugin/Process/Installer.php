@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Modules\Process;
+namespace Mymo\Plugin\Process;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Tadcms\Modules\Contracts\RepositoryInterface;
+use Mymo\Plugin\Contracts\RepositoryInterface;
 use Symfony\Component\Process\Process;
 
 class Installer
@@ -25,7 +25,7 @@ class Installer
 
     /**
      * The plugin repository instance.
-     * @var \Tadcms\Modules\Contracts\RepositoryInterface
+     * @var \Mymo\Plugin\Contracts\RepositoryInterface
      */
     protected $repository;
 
@@ -90,7 +90,7 @@ class Installer
 
     /**
      * Set the plugin repository instance.
-     * @param \Tadcms\Modules\Contracts\RepositoryInterface $repository
+     * @param \Mymo\Plugin\Contracts\RepositoryInterface $repository
      * @return $this
      */
     public function setRepository(RepositoryInterface $repository)

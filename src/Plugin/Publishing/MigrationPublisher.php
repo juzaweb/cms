@@ -1,8 +1,8 @@
 <?php
 
-namespace Tadcms\Modules\Publishing;
+namespace Mymo\Plugin\Publishing;
 
-use Tadcms\Modules\Migrations\Migrator;
+use Mymo\Plugin\Migrations\Migrator;
 
 class MigrationPublisher extends AssetPublisher
 {

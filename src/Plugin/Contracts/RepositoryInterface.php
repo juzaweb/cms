@@ -1,9 +1,9 @@
 <?php
 
-namespace Tadcms\Modules\Contracts;
+namespace Mymo\Plugin\Contracts;
 
-use Tadcms\Modules\Exceptions\ModuleNotFoundException;
-use Tadcms\Modules\Plugin;
+use Mymo\Plugin\Exceptions\ModuleNotFoundException;
+use Mymo\Plugin\Plugin;
 
 interface RepositoryInterface
 {
@@ -31,7 +31,7 @@ interface RepositoryInterface
     /**
      * Get plugins as plugins collection instance.
      *
-     * @return \Tadcms\Modules\Collection
+     * @return \Mymo\Plugin\Collection
      */
     public function toCollection();
 
@@ -157,7 +157,7 @@ interface RepositoryInterface
      * Delete a specific plugin.
      * @param string $module
      * @return bool
-     * @throws \Tadcms\Modules\Exceptions\ModuleNotFoundException
+     * @throws \Mymo\Plugin\Exceptions\ModuleNotFoundException
      */
     public function delete(string $module): bool;
 

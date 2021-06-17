@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Exceptions;
+namespace Mymo\Plugin\Exceptions;
 
 class ModuleNotFoundException extends \Exception
 {

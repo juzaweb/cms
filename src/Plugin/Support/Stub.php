@@ -1,6 +1,6 @@
 <?php
 
-namespace Tadcms\Modules\Support;
+namespace Mymo\Plugin\Support;
 
 class Stub
 {

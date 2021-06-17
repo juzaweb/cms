@@ -1,10 +1,10 @@
 <?php
 
-namespace Tadcms\Modules\Commands;
+namespace Mymo\Plugin\Commands;
 
 use Illuminate\Console\Command;
-use Tadcms\Modules\Migrations\Migrator;
-use Tadcms\Modules\Traits\MigrationLoaderTrait;
+use Mymo\Plugin\Migrations\Migrator;
+use Mymo\Plugin\Traits\MigrationLoaderTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -27,7 +27,7 @@ class MigrateResetCommand extends Command
     protected $description = 'Reset the plugins migrations.';
 
     /**
-     * @var \Tadcms\Modules\Contracts\RepositoryInterface
+     * @var \Mymo\Plugin\Contracts\RepositoryInterface
      */
     protected $module;
 
