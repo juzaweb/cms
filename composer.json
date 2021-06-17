@@ -1,40 +1,32 @@
 {
     "name": "mymocms/mymocms",
-    "type": "project",
-    "description": "MyMo is a Laravel CMS powerful, flexible and User friendly movie & Video Steaming CMS Pro with advance video contents management system. It’s easy to use & install. It has been created to provide unique experience to movie lover & movie site owner.",
+    "description": "TAD CMS backend.",
     "keywords": [
-        "laravel cms",
-        "mymo cms",
-        "movie steaming cms",
-        "video steaming",
-        "video steaming cms",
-        "movie",
-        "tv shows",
-        "tv series"
+      "laravel cms",
+      "mymo cms",
+      "laravel cms like wordpress",
+      "cms like wordpress"
     ],
+    "license": "MIT",
+    "homepage": "https://github.com/mymocms/mymocms",
     "authors": [
         {
-            "name": "The Anh Dang",
-            "email": "dangtheanh16@gmail.com",
-            "role": "Developer"
+          "name": "The Anh Dang",
+          "email": "dangtheanh16@gmail.com",
+          "role": "Developer"
         }
     ],
     "support": {
-        "email": "dangtheanh16@gmail.com",
-        "docs": "https://github.com/mymocms/mymocms"
+      "email": "dangtheanh16@gmail.com",
+      "docs": "https://github.com/mymocms/mymocms"
     },
-    "license": "MIT",
     "require": {
         "php": ">=7.2.5",
         "ext-json": "*",
-        "arcanedev/log-viewer": "5.*",
-        "fideloper/proxy": "^4.4",
         "guzzlehttp/guzzle": "^6.5",
         "hassankhan/config": "^2.2",
         "intervention/image": "^2.5",
         "ip2location/ip2location-php": "^8.3",
-        "laravel/framework": "6.*",
-        "laravel/tinker": "^2.5",
         "laravelium/sitemap": "6.*",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",
@@ -45,59 +37,22 @@
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.6",
-        "barryvdh/laravel-ide-helper": "^2.7",
-        "beyondcode/laravel-dump-server": "^1.0",
-        "facade/ignition": "^1.16.15",
-        "fakerphp/faker": "^1.9.1",
-        "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.5.8|^9.3.3"
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": [
-                "barryvdh/laravel-ide-helper",
-                "barryvdh/laravel-debugbar"
-            ]
-        }
+      "laravel/laravel": "^6.0 | ^7.0 | ^8.0",
+      "phpunit/phpunit": "6.0 | 7.0 | 7.5 | 8.4 | ^8.5"
     },
     "autoload": {
-        "files": [
-            "mymocore/Core/Helpers/helpers.php"
-        ],
         "psr-4": {
-            "App\\": "app/",
-            "Mymo\\": "mymocore/",
-            "Plugins\\": "plugins/"
+          "Mymo\\": "src/"
         },
-        "classmap": [
-            "database/seeds",
-            "database/factories"
+        "files": [
+            "src/Core/Helpers/helpers.php"
         ]
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
+    "extra": {
+      "laravel": {
+        "providers": [
+          "Mymo\\Core\\Providers\\MymoCoreServiceProvider"
         ]
+      }
     }
 }

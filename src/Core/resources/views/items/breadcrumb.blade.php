@@ -1,0 +1,13 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('mymo_core::app.dashboard')</a></li>
+
+        @foreach($items as $item)
+            @if(isset($item['url']))
+                <li class="breadcrumb-item"><a href="{{ $item['url'] }}">{{ $item['title'] }}</a></li>
+            @else
+                <li class="breadcrumb-item active" aria-current="page">{{ $item['title'] }}</li>
+            @endif
+        @endforeach
+    </ol>
+</nav>

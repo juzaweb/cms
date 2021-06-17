@@ -1,3 +1,5 @@
+## 1.0.7
+- Package cms
 ## 1.0.6
 - Installer
 - Updater
