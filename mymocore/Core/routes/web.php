@@ -9,7 +9,12 @@
  * Github: https://github.com/mymocms/mymocms
 */
 
-Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], function () {
+$adminPrefix = config('mymo_core.admin_prefix', 'admin-cp');
+
+Route::group([
+    'prefix' => $adminPrefix,
+    'middleware' => ['web', 'admin']
+], function () {
     require __DIR__ . '/components/dashboard.route.php';
     require __DIR__ . '/components/appearance.route.php';
     require __DIR__ . '/components/setting.route.php';
@@ -17,5 +22,20 @@ Route::group(['prefix' => 'admin-cp', 'middleware' => ['web', 'admin']], functio
     require __DIR__ . '/components/module.route.php';
 });
 
-//require __DIR__ . '/installer/install.route.php';
-//require __DIR__ . '/installer/update.route.php';
+Route::group([
+    'prefix' => $adminPrefix,
+    'middleware' => 'guest'
+], function () {
+    Route::get('/login', 'Auth\LoginController@index')->name('auth.login');
+    Route::post('/login', 'Auth\LoginController@login');
+
+    Route::get('/register', 'Auth\RegisterController@index')->name('auth.register');
+    Route::post('/register', 'Auth\RegisterController@register');
+
+    Route::get('/forgot-password', 'Auth\ForgotPasswordController@index')->name('auth.forgot_password');
+    Route::post('/forgot-password', 'Auth\ForgotPasswordController@forgotPassword');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', 'Auth\LoginController@logout')->name('auth.logout');
+});

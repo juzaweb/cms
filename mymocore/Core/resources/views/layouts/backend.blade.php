@@ -65,13 +65,13 @@
         <div class="cui__layout__footer">
             <div class="cui__footer">
                 <div class="cui__footer__inner">
-                    <a href="https://mymo.juzaweb.com" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
-                        MYMO - Free Laravel CMS
+                    <a href="https://github.com/mymocms/mymocms" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
+                        MYMO CMS - Free Laravel CMS
                         <span></span>
                     </a>
                     <br />
                     <p class="mb-0">
-                        Copyright © 2020 MyMo Team
+                        Copyright © {{ date('Y') }} {{ get_config('sitename') }} - Provided by MYMO CMS
                     </p>
                 </div>
             </div>
