@@ -12,9 +12,7 @@
  * Time: 10:05 PM
  */
 
-//require (__DIR__ . '/../../Module/helpers.php');
 //require (__DIR__ . '/../../Updater/helpers.php');
-//require (__DIR__ . '/../../Installer/Helpers/functions.php');
 
 use Illuminate\Support\Facades\Auth;
 use Mymo\Core\Helpers\Breadcrumb;

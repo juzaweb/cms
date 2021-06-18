@@ -18,7 +18,6 @@ use Mymo\Core\Http\Middleware\Admin;
 use Mymo\Core\Macros\RouterMacros;
 use Mymo\Email\Providers\EmailTemplateServiceProvider;
 use Mymo\FileManager\Providers\FilemanagerServiceProvider;
-use Mymo\Module\LaravelModulesServiceProvider;
 use Mymo\Notification\Providers\NotificationServiceProvider;
 use Mymo\Performance\Providers\MymoPerformanceServiceProvider;
 use Mymo\PostType\Providers\PostTypeServiceProvider;
@@ -90,7 +89,6 @@ class MymoCoreServiceProvider extends ServiceProvider
         //$this->app->register(ThemeServiceProvider::class);
         $this->app->register(FilemanagerServiceProvider::class);
         //$this->app->register(TranslatableServiceProvider::class);
-        //$this->app->register(LaravelModulesServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(PostTypeServiceProvider::class);
         $this->app->register(NotificationServiceProvider::class);

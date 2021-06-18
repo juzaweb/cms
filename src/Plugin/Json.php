@@ -126,11 +126,11 @@ class Json
             throw new InvalidJsonException('Error processing file: ' . $this->getPath() . '. Error: ' . json_last_error_msg());
         }
 
-        if (config('modules.cache.enabled') === false) {
+        if (config('plugin.cache.enabled') === false) {
             return $attributes;
         }
 
-        return app('cache')->remember($this->getPath(), config('modules.cache.lifetime'), function () use ($attributes) {
+        return app('cache')->remember($this->getPath(), config('plugin.cache.lifetime'), function () use ($attributes) {
             return $attributes;
         });
     }

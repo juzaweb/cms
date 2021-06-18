@@ -56,8 +56,8 @@ class InstallCommand extends Command
      */
     protected function installFromFile()
     {
-        if (!file_exists($path = base_path('modules.json'))) {
-            $this->error("File 'modules.json' does not exist in your project root.");
+        if (!file_exists($path = base_path('plugin.json'))) {
+            $this->error("File 'plugin.json' does not exist in your project root.");
 
             return;
         }

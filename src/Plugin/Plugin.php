@@ -184,7 +184,7 @@ abstract class Plugin
      */
     public function boot(): void
     {
-        if (config('modules.register.translations', true) === true) {
+        if (config('plugin.register.translations', true) === true) {
             $this->registerTranslation();
         }
 
@@ -204,7 +204,7 @@ abstract class Plugin
     {
         $lowerName = $this->getLowerName();
 
-        $langPath = $this->getPath() . '/Resources/lang';
+        $langPath = $this->getPath() . '/resources/lang';
 
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, $lowerName);
@@ -278,7 +278,7 @@ abstract class Plugin
      */
     protected function fireEvent($event): void
     {
-        $this->app['events']->dispatch(sprintf('modules.%s.' . $event, $this->getLowerName()), [$this]);
+        $this->app['events']->dispatch(sprintf('plugin.%s.' . $event, $this->getLowerName()), [$this]);
     }
     /**
      * Register the aliases from this plugin.
@@ -419,14 +419,14 @@ abstract class Plugin
      */
     protected function isLoadFilesOnBoot(): bool
     {
-        return config('modules.register.files', 'register') === 'boot' &&
+        return config('plugin.register.files', 'register') === 'boot' &&
             // force register method if option == boot && app is AsgardCms
             !class_exists('\Modules\Core\Foundation\AsgardCms');
     }
 
     private function flushCache(): void
     {
-        if (config('modules.cache.enabled')) {
+        if (config('plugin.cache.enabled')) {
             $this->cache->store()->flush();
         }
     }

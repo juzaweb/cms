@@ -249,7 +249,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get list of enabled modules.
+     * Get list of enabled plugins.
      *
      * @return array
      */
@@ -259,7 +259,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get list of disabled modules.
+     * Get list of disabled plugins.
      *
      * @return array
      */
@@ -269,7 +269,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get count from all modules.
+     * Get count from all plugins.
      *
      * @return int
      */
@@ -279,7 +279,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get all ordered modules.
+     * Get all ordered plugins.
      *
      * @param string $direction
      *
@@ -420,7 +420,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
         try {
             return $this->findOrFail($module)->getPath() . '/';
         } catch (ModuleNotFoundException $e) {
-            return $this->getPath() . '/' . Str::studly($module) . '/';
+            return $this->getPath() . '/' . Str::lower($module) . '/';
         }
     }
 
@@ -437,7 +437,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function config(string $key, $default = null)
     {
-        return $this->config->get('modules.' . $key, $default);
+        return $this->config->get('plugin.' . $key, $default);
     }
 
     /**
@@ -452,7 +452,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
             $this->getFiles()->makeDirectory($directory, 0777, true);
         }
 
-        $path = storage_path('app/modules/modules.used');
+        $path = storage_path('app/modules/plugin.used');
         if (!$this->getFiles()->exists($path)) {
             $this->getFiles()->put($path, '');
         }

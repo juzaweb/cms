@@ -6,17 +6,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Plugins Namespace
-    |--------------------------------------------------------------------------
-    |
-    | Default plugin namespace.
-    |
-    */
-
-    'namespace' => 'Plugins',
-
-    /*
-    |--------------------------------------------------------------------------
     | Module Stubs
     |--------------------------------------------------------------------------
     |
@@ -26,13 +15,13 @@ return [
 
     'stubs' => [
         'enabled' => true,
-        'path' => __DIR__ . '/../../Core/Console/stubs/plugin',
         'files' => [
+            'actions/postype' => 'actions/postype.php',
             'routes/web' => 'src/routes/web.php',
             'routes/api' => 'src/routes/api.php',
             'views/index' => 'src/resources/views/index.blade.php',
-            //'views/master' => 'Resources/views/layouts/master.blade.php',
-            //'scaffold/config' => 'Config/config.php',
+            //'views/master' => 'resources/views/layouts/master.blade.php',
+            //'scaffold/config' => 'config/config.php',
             'composer' => 'composer.json',
             'assets/js/app' => 'src/resources/assets/js/app.js',
             'assets/sass/app' => 'src/resources/assets/sass/app.scss',
