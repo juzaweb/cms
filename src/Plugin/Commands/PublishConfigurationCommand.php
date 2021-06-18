@@ -45,7 +45,7 @@ class PublishConfigurationCommand extends Command
      */
     private function getServiceProviderForModule($module)
     {
-        $namespace = $this->laravel['config']->get('modules.namespace');
+        $namespace = $this->laravel['config']->get('plugin.namespace');
         $studlyName = Str::studly($module);
 
         return "$namespace\\$studlyName\\Providers\\{$studlyName}ServiceProvider";

@@ -9,8 +9,8 @@ trait CanClearModulesCache
      */
     public function clearCache()
     {
-        if (config('modules.cache.enabled') === true) {
-            app('cache')->forget(config('modules.cache.key'));
+        if (config('plugin.cache.enabled') === true) {
+            app('cache')->forget(config('plugin.cache.key'));
         }
     }
 }

@@ -212,7 +212,7 @@ return ' . var_export($this->modulesStatuses, true) .';
      */
     private function getModulesStatuses(): array
     {
-        if (!$this->config->get('modules.cache.enabled')) {
+        if (!$this->config->get('plugin.cache.enabled')) {
             return $this->readJson();
         }
 
@@ -230,7 +230,7 @@ return ' . var_export($this->modulesStatuses, true) .';
      */
     private function config(string $key, $default = null)
     {
-        return $this->config->get('modules.activators.file.' . $key, $default);
+        return $this->config->get('plugin.activators.file.' . $key, $default);
     }
 
     /**
