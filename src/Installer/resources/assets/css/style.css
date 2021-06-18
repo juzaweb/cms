@@ -3382,6 +3382,7 @@ input[type=submit] {
 
 button[disabled] {
     cursor: default;
+    background-color: #ccc;
 }
 
 button::-moz-focus-inner {

@@ -51,9 +51,21 @@ class FinalInstallManager
     private static function publishVendorAssets(BufferedOutput $outputLog)
     {
         try {
-            if (config('installer.final.publish')) {
-                Artisan::call('vendor:publish', ['--all' => true], $outputLog);
-            }
+            Artisan::call('vendor:publish', [
+                '--tag' => 'mymo_assets',
+                'force' => true
+            ], $outputLog);
+
+            Artisan::call('vendor:publish', [
+                '--tag' => 'installer_assets',
+                'force' => true
+            ], $outputLog);
+
+            Artisan::call('vendor:publish', [
+                '--tag' => 'filemanager_assets',
+                'force' => true
+            ], $outputLog);
+
         } catch (Exception $e) {
             return static::response($e->getMessage(), $outputLog);
         }

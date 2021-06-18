@@ -17,8 +17,11 @@
             <label for="database_connection">
                 {{ trans('installer::installer_messages.environment.wizard.form.db_connection_label') }}
             </label>
-            <select id="database_connection" disabled>
+            <select name="database_connection" id="database_connection">
                 <option value="mysql" selected>{{ trans('installer::installer_messages.environment.wizard.form.db_connection_label_mysql') }}</option>
+                <option value="sqlite">{{ trans('installer::installer_messages.environment.wizard.form.db_connection_label_sqlite') }}</option>
+                <option value="pgsql">{{ trans('installer::installer_messages.environment.wizard.form.db_connection_label_pgsql') }}</option>
+                <option value="sqlsrv">{{ trans('installer::installer_messages.environment.wizard.form.db_connection_label_sqlsrv') }}</option>
             </select>
         </div>
 
@@ -88,7 +91,7 @@
         </div>
 
         <div class="buttons">
-            <button class="button">
+            <button class="button btn-submit">
                 {{ trans('installer::installer_messages.environment.wizard.form.buttons.setup_application') }}
                 <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </button>
@@ -106,11 +109,19 @@
                 element.style.display='none';
             }
         }
+
         function showDatabaseSettings() {
             document.getElementById('tab2').checked = true;
         }
+
         function showApplicationSettings() {
             document.getElementById('tab3').checked = true;
         }
+
+        $('form').on('submit', function () {
+            $('.btn-submit')
+                .html("{{ trans('mymo_core::app.please_wait') }}")
+                .prop('disabled', true);
+        });
     </script>
 @endsection
