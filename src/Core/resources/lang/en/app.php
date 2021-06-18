@@ -230,6 +230,7 @@ return [
   'modules' => 'Modules',
   'apply' => 'Apply',
   'activate' => 'Activate',
+  'activated' => 'Activated',
   'deactivate' => 'Deactivate',
   'languages' => 'Languages',
   'all_posts' => 'All posts',

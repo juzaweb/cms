@@ -3,11 +3,11 @@
 @section('content')
 
     <div class="row mt-5">
-        <div class="col-md-5">
+        <div class="col-md-4">
             @include('mymo_core::backend.design.menu.form_left')
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-8">
             @include('mymo_core::backend.design.menu.form_right')
         </div>
     </div>

@@ -7,32 +7,25 @@ use Mymo\Core\Models\Menu;
 use Mymo\PostType\Models\Page;
 use Illuminate\Http\Request;
 use Mymo\PostType\Models\Taxonomy;
+use Mymo\PostType\PostType;
 
 class MenuController extends BackendController
 {
     public function index($id = null)
     {
         if (empty($id)) {
-            $menu = Menu::first();
-            if ($menu) {
+            if ($menu = Menu::first()) {
                 return redirect()->route('admin.design.menu.id', $menu->id);
             }
         }
         
         $menu = Menu::where('id', '=', $id)->first();
-        $genres = Taxonomy::where('taxonomy', '=', 'genres')
-            ->get(['id', 'name']);
-        $countries = Taxonomy::where('taxonomy', '=', 'countries')
-            ->get(['id', 'name']);
-        $pages = Page::where('status', '=', 1)
-            ->get(['id', 'name']);
+        $postTypes = PostType::getPostTypes();
         
         return view('mymo_core::backend.design.menu.index', [
             'title' => trans('mymo_core::app.menu'),
             'menu' => $menu,
-            'pages' => $pages,
-            'genres' => $genres,
-            'countries' => $countries,
+            'postTypes' => $postTypes,
         ]);
     }
     
@@ -77,9 +70,9 @@ class MenuController extends BackendController
     
     public function getItems(Request $request)
     {
-        $this->validateRequest([
+        $request->validate([
             'type' => 'required',
-        ], $request, [
+        ], [], [
             'type' => trans('mymo_core::app.type')
         ]);
         
@@ -87,37 +80,6 @@ class MenuController extends BackendController
         $items = $request->post('items');
         
         switch ($type) {
-            case 'genre':
-                $items = Taxonomy::where('taxonomy', '=', 'genres')
-                    ->whereIn('id', $items)
-                    ->get(['id', 'name', 'slug']);
-                $result = [];
-                
-                foreach ($items as $item) {
-                    $result[] = [
-                        'name' => $item->name,
-                        'url' => route('genre', [$item->slug]),
-                        'object_id' => $item->id,
-                    ];
-                }
-                
-                return response()->json($result);
-            case 'country';
-                $items = Taxonomy::where('taxonomy', '=', 'countries')
-                    ->whereIn('id', $items)
-                    ->get(['id', 'name', 'slug']);
-                $result = [];
-    
-                foreach ($items as $item) {
-                    $url = parse_url(route('country', [$item->slug]))['path'];
-                    $result[] = [
-                        'name' => $item->name,
-                        'url' => $url,
-                        'object_id' => $item->id,
-                    ];
-                }
-    
-                return response()->json($result);
             case 'page':
                 $items = Page::whereIn('id', $items)
                     ->get(['id', 'name', 'slug']);

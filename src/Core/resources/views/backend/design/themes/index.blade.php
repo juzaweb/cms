@@ -14,7 +14,7 @@
                                 {{ $currentTheme['name'] }}
                             </div>
                             <div class="text-gray-6">
-                                <button class="btn btn-secondary" disabled> Activated</button>
+                                <button class="btn btn-secondary" disabled> {{ trans('mymo_core::app.activated') }}</button>
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                                 {{ $theme['name'] }}
                             </div>
                             <div class="text-gray-6">
-                                <button class="btn btn-primary active-theme" data-theme="{{ $theme['name'] }}"><i class="fa fa-check"></i> Activate</button>
+                                <button class="btn btn-primary active-theme" data-theme="{{ $theme['name'] }}"><i class="fa fa-check"></i> {{ trans('mymo_core::app.activate') }}</button>
 
                                 {{--<a href="javascript:void(0)" class="text-danger">{{ trans('mymo_core::app.delete') }}</a>--}}
                             </div>
