@@ -29,7 +29,12 @@
         <div class="cui__menuLeft__outer">
             <div class="cui__menuLeft__logo__container">
                 <div class="cui__menuLeft__logo">
-                    <img src="{{ asset('styles/images/logo.png') }}" class="mr-2" alt="Mymo Logo" />
+                    <div class="cui__menuLeft__logo__name">
+                        <a href="/{{ config('mymo_core.admin_prefix') }}" style="font-size: 25px">
+                            <span style="color: #b71d37; text-shadow: #f7cccc 0.05em 0.05em 0.1em;">MYMO</span>
+                            <span style="color: #0520e0; text-shadow: #d7dbf7 0.05em 0.05em 0.1em;">CMS</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -66,7 +71,7 @@
             <div class="cui__footer">
                 <div class="cui__footer__inner">
                     <a href="https://github.com/mymocms/mymocms" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
-                        MYMO CMS - Free Laravel CMS
+                        MYMO CMS - The Best Laravel CMS
                         <span></span>
                     </a>
                     <br />

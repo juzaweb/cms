@@ -1,5 +1,10 @@
-## 1.0.7
+## 1.1.1
 - Package cms
+- Migrate when active plugin
+- Fix load image thumbnail
+- Current version and change logs updates pages
+- Refix Dashboard
+- Admin login
 ## 1.0.6
 - Installer
 - Updater

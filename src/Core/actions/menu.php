@@ -23,7 +23,7 @@ HookAction::addAdminMenu(
     ]
 );
 
-HookAction::addAdminMenu(
+/*HookAction::addAdminMenu(
     'mymo_core::app.dashboard',
     'dashboard',
     [
@@ -42,7 +42,7 @@ HookAction::addAdminMenu(
         'parent' => 'dashboard',
     ]
 );
-
+*/
 HookAction::addAdminMenu(
     trans('mymo_core::app.appearance'),
     'appearance',
