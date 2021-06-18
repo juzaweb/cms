@@ -10,9 +10,9 @@
  */
 
 Route::group(['prefix' => 'themes'], function () {
-    Route::get('/', 'Backend\Design\ThemesController@index')->name('admin.design.themes');
+    Route::get('/', 'Backend\Design\ThemeController@index')->name('admin.design.themes');
     
-    Route::post('/save', 'Backend\Design\ThemesController@save')->name('admin.design.themes.save');
+    Route::post('/activate', 'Backend\Design\ThemeController@activate')->name('admin.design.themes.activate');
 });
 
 Route::group(['prefix' => 'menu'], function () {
