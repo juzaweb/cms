@@ -14,7 +14,6 @@ class PluginServiceProvider extends ModulesServiceProvider
      */
     public function boot()
     {
-        $this->registerNamespaces();
         $this->registerModules();
     }
 
@@ -23,6 +22,7 @@ class PluginServiceProvider extends ModulesServiceProvider
      */
     public function register()
     {
+        $this->registerNamespaces();
         $this->pluginAutoload();
         $this->registerServices();
         $this->setupStubPath();
@@ -76,8 +76,8 @@ class PluginServiceProvider extends ModulesServiceProvider
         if (empty($plugins)) {
             return;
         }
-
-        $pluginsFolder = base_path('plugins');
+        
+        $pluginsFolder = base_path($this->app['config']->get('plugin.paths.modules'));
 
         $loader = new ClassLoader();
         foreach ($plugins as $pluginInfo) {

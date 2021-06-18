@@ -28,7 +28,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Router;
 use Mymo\Updater\UpdaterServiceProvider;
 use Mymo\Installer\Providers\InstallerServiceProvider;
-use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 
 class MymoCoreServiceProvider extends ServiceProvider
 {
