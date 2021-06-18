@@ -2,7 +2,7 @@
 
 namespace Mymo\Installer\Helpers;
 
-use Exception;
+use Throwable;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -35,7 +35,7 @@ class FinalInstallManager
             if (config('installer.final.key')) {
                 Artisan::call('key:generate', ['--force'=> true], $outputLog);
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return static::response($e->getMessage(), $outputLog);
         }
 
@@ -66,7 +66,7 @@ class FinalInstallManager
                 'force' => true
             ], $outputLog);
 
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return static::response($e->getMessage(), $outputLog);
         }
 
