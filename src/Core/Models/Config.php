@@ -24,8 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Config extends Model
 {
+    public $timestamps = false;
+
     protected $table = 'configs';
-    protected $primaryKey = 'id';
     protected $fillable = [
         'code',
         'value'
@@ -117,5 +118,4 @@ class Config extends Model
         $config->value = $setting;
         return $config->save();
     }
-    
 }

@@ -14,13 +14,17 @@ class ThemeController extends BackendController
     public function index(Request $request)
     {
         $page = $request->get('page', 1);
-        $themes = Theme::all();
-        $themes = $this->arrayPaginate($themes, 10, $page);
         $activated = get_config('activated_theme', 'default');
+
+        $themes = Theme::all();
+        $currentTheme = $themes[$activated];
+        unset($themes[$activated]);
+        $themes = $this->arrayPaginate($themes, 10, $page);
 
         return view('mymo_core::backend.design.themes.index', [
             'title' => trans('mymo_core::app.themes'),
             'themes' => $themes,
+            'currentTheme' => $currentTheme,
             'activated' => $activated
         ]);
     }
@@ -42,5 +46,10 @@ class ThemeController extends BackendController
         return $this->success([
             'redirect' => route('admin.design.themes'),
         ]);
+    }
+
+    public function delete(Request $request)
+    {
+
     }
 }
