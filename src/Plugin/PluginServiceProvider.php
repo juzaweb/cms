@@ -77,8 +77,7 @@ class PluginServiceProvider extends ModulesServiceProvider
             return;
         }
         
-        $pluginsFolder = base_path($this->app['config']->get('plugin.paths.modules'));
-
+        $pluginsFolder = $this->app['config']->get('plugin.paths.modules');
         $loader = new ClassLoader();
         foreach ($plugins as $pluginInfo) {
             foreach ($pluginInfo as $key => $item) {
