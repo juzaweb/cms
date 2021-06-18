@@ -55,7 +55,7 @@ class MymoCoreServiceProvider extends ServiceProvider
 
     protected function bootMigrations()
     {
-        $mainPath = base_path('mymocore/Core/database/migrations');
+        $mainPath = __DIR__ . '/../database/migrations';
         $directories = glob($mainPath . '/*' , GLOB_ONLYDIR);
         $paths = array_merge([$mainPath], $directories);
         $this->loadMigrationsFrom($paths);

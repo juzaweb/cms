@@ -2,7 +2,7 @@
 
 namespace Mymo\Installer\Helpers;
 
-use Exception;
+use Throwable;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -35,7 +35,7 @@ class FinalInstallManager
             if (config('installer.final.key')) {
                 Artisan::call('key:generate', ['--force'=> true], $outputLog);
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return static::response($e->getMessage(), $outputLog);
         }
 
@@ -51,10 +51,22 @@ class FinalInstallManager
     private static function publishVendorAssets(BufferedOutput $outputLog)
     {
         try {
-            if (config('installer.final.publish')) {
-                Artisan::call('vendor:publish', ['--all' => true], $outputLog);
-            }
-        } catch (Exception $e) {
+            Artisan::call('vendor:publish', [
+                '--tag' => 'mymo_assets',
+                'force' => true
+            ], $outputLog);
+
+            Artisan::call('vendor:publish', [
+                '--tag' => 'installer_assets',
+                'force' => true
+            ], $outputLog);
+
+            Artisan::call('vendor:publish', [
+                '--tag' => 'filemanager_assets',
+                'force' => true
+            ], $outputLog);
+
+        } catch (Throwable $e) {
             return static::response($e->getMessage(), $outputLog);
         }
 
