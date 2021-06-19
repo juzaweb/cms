@@ -42,8 +42,7 @@ class SystemSettingController extends BackendController
             $form = 'general';
         }
         
-        return response()->json([
-            'status' => 'success',
+        return $this->success([
             'message' => trans('mymo_core::app.saved_successfully'),
             'redirect' => route('admin.setting.form', [$form]),
         ]);
@@ -81,7 +80,7 @@ class SystemSettingController extends BackendController
         return [
             'general' => trans('mymo_core::app.site_info'),
             'recaptcha' => trans('mymo_core::app.google_recaptcha'),
-            'player' => trans('mymo_core::app.player'),
+            //'player' => trans('mymo_core::app.player'),
             //'blockip' => trans('mymo_core::app.block_ip'),
             //'paid-members' => trans('mymo_core::app.paid_members'),
         ];

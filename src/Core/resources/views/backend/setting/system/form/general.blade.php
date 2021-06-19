@@ -3,7 +3,7 @@
     @php
         $registration = get_config('user_registration');
         $verification = get_config('user_verification');
-        $only_member_view = get_config('only_member_view');
+        //$only_member_view = get_config('only_member_view');
     @endphp
 
     <h5>@lang('mymo_core::app.general')</h5>
@@ -78,20 +78,12 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <label class="col-form-label" for="only_member_view">Require Login To Watch Video</label>
-        <select name="only_member_view" id="only_member_view" class="form-control">
-            <option value="1" @if($only_member_view == 1) selected @endif>@lang('mymo_core::app.enabled')</option>
-            <option value="0" @if($only_member_view == 0) selected @endif>@lang('mymo_core::app.disabled')</option>
-        </select>
-    </div>
-
-    <h5>@lang('mymo_core::app.tmdb')</h5>
+    {{--<h5>@lang('mymo_core::app.tmdb')</h5>
     <div class="form-group">
         <label class="col-form-label" for="tmdb_api_key">@lang('mymo_core::app.tmdb_api_key')</label>
 
         <input type="text" name="tmdb_api_key" class="form-control" id="tmdb_api_key" value="{{ get_config('tmdb_api_key') }}" autocomplete="off">
-    </div>
+    </div>--}}
 
     <div class="row">
         <div class="col-md-6"></div>
