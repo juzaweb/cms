@@ -62,7 +62,7 @@ HookAction::addAdminMenu(
     ]
 );
 
-HookAction::addAdminMenu(
+/*HookAction::addAdminMenu(
     trans('mymo_core::app.menu'),
     'menu',
     [
@@ -81,7 +81,7 @@ HookAction::addAdminMenu(
         'parent' => 'appearance',
         'turbolinks' => false,
     ]
-);
+);*/
 
 HookAction::addAdminMenu(
     trans('mymo_core::app.plugins'),

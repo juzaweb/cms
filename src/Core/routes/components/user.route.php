@@ -11,15 +11,15 @@
  */
 
 Route::group(['prefix' => 'users'], function () {
-    Route::get('/', 'Backend\UsersController@index')->name('admin.users.index');
+    Route::get('/', 'Backend\UserController@index')->name('admin.users.index');
 
-    Route::get('/get-data', 'Backend\UsersController@getData')->name('admin.users.get-data');
+    Route::get('/get-data', 'Backend\UserController@getData')->name('admin.users.get-data');
 
-    Route::get('/create', 'Backend\UsersController@form')->name('admin.users.create');
+    Route::get('/create', 'Backend\UserController@form')->name('admin.users.create');
 
-    Route::get('/edit/{id}', 'Backend\UsersController@form')->name('admin.users.edit')->where('id', '[0-9]+');
+    Route::get('/edit/{id}', 'Backend\UserController@form')->name('admin.users.edit')->where('id', '[0-9]+');
 
-    Route::post('/save', 'Backend\UsersController@save')->name('admin.users.save');
+    Route::post('/save', 'Backend\UserController@save')->name('admin.users.save');
 
-    Route::post('/bulk-actions', 'Backend\UsersController@bulkActions')->name('admin.users.bulk-actions');
+    Route::post('/bulk-actions', 'Backend\UserController@bulkActions')->name('admin.users.bulk-actions');
 });

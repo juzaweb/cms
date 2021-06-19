@@ -2,8 +2,8 @@
 
 namespace Mymo\Core\Http\Controllers\Backend\Design;
 
-use Mymo\Core\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
+use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Traits\ArrayPagination;
 use Mymo\Theme\Facades\Theme;
 
@@ -17,7 +17,7 @@ class ThemeController extends BackendController
         $activated = get_config('activated_theme', 'default');
 
         $themes = Theme::all();
-        $currentTheme = $themes[$activated];
+        $currentTheme = $themes[$activated] ?? null;
         unset($themes[$activated]);
         $themes = $this->arrayPaginate($themes, 10, $page);
 
