@@ -1,19 +1,23 @@
 <div class="cui__topbar">
     <div class="mr-4">
-
-    </div>
-    <div class="mr-auto">
-        {{--<div class="cui__topbar__search">
-            <i class="fe fe-search">
-                <!-- --></i>
-            <input type="text" placeholder="Type to search..." />
-        </div>--}}
-    </div>
-
-    <div class="mr-4 d-none d-md-block">
-        <a href="/" data-turbolinks="false" target="_blank" class="text-nowrap">
-            <span>VIEW WEBSITE</span>
+        <a href="{{ url('/') }}" class="mr-2" target="_blank">
+            <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Visit website"></i> Visit Site
         </a>
+    </div>
+
+    <div class="mr-auto">
+        <div class="dropdown mr-4 d-none d-sm-block">
+            <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown">
+                <i class="fa fa-plus"></i>
+                <span class="dropdown-toggle-text"> New</span>
+            </a>
+
+            <div class="dropdown-menu" role="menu">
+                <a class="dropdown-item" href="{{ route('admin.posts.create') }}">@lang('mymo_core::app.post')</a>
+                <a class="dropdown-item" href="{{ route('admin.page.create') }}">@lang('mymo_core::app.page')</a>
+                <a class="dropdown-item" href="{{ route('admin.users.create') }}">@lang('mymo_core::app.user')</a>
+            </div>
+        </div>
     </div>
 
     <div class="dropdown mr-4 d-none d-sm-block">
@@ -27,15 +31,48 @@
     </div>
     <div class="cui__topbar__actionsDropdown dropdown mr-4 d-none d-sm-block">
         <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="0,15">
-            <i class="dropdown-toggle-icon fe fe-bell"></i>
+            <i class="dropdown-toggle-icon fa fa-bell-o"></i>
         </a>
+        @php
+            $total = Auth::user()
+                        ->unreadNotifications()
+                        ->count();
+
+            $items = Auth::user()
+            ->unreadNotifications()
+            ->orderBy('id', 'DESC')
+            ->limit(5)
+            ->get(['id', 'data', 'created_at']);
+        @endphp
         <div class="cui__topbar__actionsDropdownMenu dropdown-menu dropdown-menu-right" role="menu">
             <div style="width: 350px;">
                 <div class="card-body">
                     <div class="tab-content">
-                        <div class="height-300 kit__customScroll">
+                        <div class="kit__l1">
+                            <div class="text-uppercase mb-2 text-gray-6 mb-2 font-weight-bold">@lang('mymo_core::app.notifications') ({{ $total }})</div>
+                            <hr>
                             <ul class="list-unstyled">
-
+                                @if($items->isEmpty())
+                                    <p>@lang('mymo_core::app.no_notifications')</p>
+                                @else
+                                    @foreach($items as $notify)
+                                        <li class="kit__l1__item">
+                                            <a href="{{ @$notify->data['url'] }}" class="kit__l1__itemLink" data-turbolinks="false">
+                                                <div class="kit__l1__itemPic mr-3">
+                                                    @if(empty($notify->data['image']))
+                                                        <i class="kit__l1__itemIcon fa fa-envelope-square"></i>
+                                                    @else
+                                                        <img src="{{ upload_url($notify->data['image']) }}" alt="">
+                                                    @endif
+                                                </div>
+                                                <div>
+                                                    <div class="text-blue">{{ @$notify->data['subject'] }}</div>
+                                                    <div class="text-muted">{{ $notify->created_at ? $notify->created_at->diffForHumans() : '' }}</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
