@@ -73,7 +73,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         ], 'mymo_config');
 
         $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('styles'),
+            __DIR__.'/../resources/assets' => public_path('mymo/styles'),
         ], 'mymo_assets');
     }
 

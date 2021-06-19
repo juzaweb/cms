@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css">
 
-    <link rel="stylesheet" href="{{ asset('styles/installer/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('mymo/installer/css/styles.css') }}">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
-    <script src="{{ asset('styles/installer/js/script.js') }}"></script>
+    <script src="{{ asset('mymo/installer/js/script.js') }}"></script>
 </head>
 <body>
 <div class="main">

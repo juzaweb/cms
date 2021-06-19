@@ -122,7 +122,7 @@ function image_url($path) {
         }
     }
     
-    return asset('styles/images/thumb-default.png');
+    return asset('mymo/styles/images/thumb-default.png');
 }
 
 function logo_url($path) {
@@ -299,7 +299,7 @@ function user_avatar($user = null) {
         return $user->getAvatar();
     }
 
-    return asset('styles/images/thumb-default.png');
+    return asset('mymo/styles/images/thumb-default.png');
 }
 
 function breadcrumb($name, $add_items = [])
@@ -356,7 +356,7 @@ function upload_url($path, $default = null)
         return $default;
     }
 
-    return asset('styles/images/thumb-default.png');
+    return asset('mymo/styles/images/thumb-default.png');
 }
 
 function random_string(int $length = 16)

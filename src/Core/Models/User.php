@@ -94,7 +94,7 @@ class User extends Authenticatable
     {
         return [
             'active' => trans('mymo_core::app.active'),
-            'unconfimred' => trans('mymo_core::app.unconfimred'),
+            'unconfirmed' => trans('mymo_core::app.unconfimred'),
             'banned' => trans('mymo_core::app.banned'),
         ];
     }
@@ -113,6 +113,6 @@ class User extends Authenticatable
             return image_url($this->avatar);
         }
 
-        return asset('styles/images/thumb-default.png');
+        return asset('mymo/styles/images/thumb-default.png');
     }
 }

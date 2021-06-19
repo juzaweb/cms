@@ -87,5 +87,5 @@
     <script type="text/javascript">
         var dataJson = '{!! isset($menu->content) ? $menu->content : '{}' !!}';
     </script>
-    <script type="text/javascript" src="{{ asset('styles/js/add-menu.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('mymo/styles/js/add-menu.js') }}"></script>
 @endsection

@@ -34,7 +34,7 @@ class FilemanagerServiceProvider extends ServiceProvider
         ], 'filemanager_config');
 
         $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('styles/filemanager'),
+            __DIR__.'/../resources/assets' => public_path('mymo/filemanager'),
         ], 'filemanager_assets');
     }
 

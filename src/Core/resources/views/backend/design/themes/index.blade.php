@@ -5,7 +5,7 @@
         @if($currentTheme)
         <div class="col-md-4">
             <div class="card">
-                {{--<div class="height-200 d-flex flex-column kit__g13__head" style="background-image: url('{{ $currentTheme['screenshot'] ?? asset('styles/images/thumb-default.png') }}')">
+                {{--<div class="height-200 d-flex flex-column kit__g13__head" style="background-image: url('{{ $currentTheme['screenshot'] ?? asset('mymo/styles/images/thumb-default.png') }}')">
                 </div>--}}
 
                 <div class="card card-borderless mb-0">
@@ -27,7 +27,7 @@
         @foreach($themes as $theme)
         <div class="col-md-4">
             <div class="card">
-                {{--<div class="height-200 d-flex flex-column kit__g13__head" style="background-image: url('{{ $theme['screenshot'] ?? asset('styles/images/thumb-default.png') }}')">
+                {{--<div class="height-200 d-flex flex-column kit__g13__head" style="background-image: url('{{ $theme['screenshot'] ?? asset('mymo/styles/images/thumb-default.png') }}')">
                 </div>--}}
 
                 <div class="card card-borderless mb-0">

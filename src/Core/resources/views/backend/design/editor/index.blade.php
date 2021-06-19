@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <link rel="shortcut icon" href="{{ asset('styles/images/brand/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('mymo/styles/images/brand/favicon.ico') }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{{ trans('mymo_core::app.customize_theme') }}</title>
@@ -10,14 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     @include('mymo_core::components.mymo_langs')
 
-    <link rel="stylesheet" href="{{ asset('styles/css/theme-editor.css') }}">
+    <link rel="stylesheet" href="{{ asset('mymo/styles/css/theme-editor.css') }}">
     <!--[if lt IE 9]>
-    <script src="{{ asset('styles/js/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('styles/js/respond.min.js') }}"></script>
+    <script src="{{ asset('mymo/styles/js/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('mymo/styles/js/respond.min.js') }}"></script>
     <![endif]-->
 
-    <script src="{{ asset('styles/js/app.js') }}"></script>
-    <script src="{{ asset('styles/js/theme-editor.js') }}"></script>
+    <script src="{{ asset('mymo/styles/js/app.js') }}"></script>
+    <script src="{{ asset('mymo/styles/js/theme-editor.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ajaxStart(function () {

@@ -8,14 +8,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? '' }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('styles/images/icon.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('mymo/styles/images/icon.png') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('styles/css/backend.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/backend.css') }}">
     @include('mymo_core::components.mymo_langs')
 
-    <script src="{{ asset('styles/js/backend.js') }}"></script>
-    <script src="{{ asset('styles/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('mymo/styles/js/backend.js') }}"></script>
+    <script src="{{ asset('mymo/styles/ckeditor/ckeditor.js') }}"></script>
 
     @yield('header')
 </head>

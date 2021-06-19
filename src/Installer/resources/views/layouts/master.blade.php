@@ -7,8 +7,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('template_title')</title>
 
-        <script src="{{ asset('styles/js/jquery.min.js') }}"></script>
-        <link href="{{ asset('styles/installer/css/style.css') }}" rel="stylesheet"/>
+        <script src="{{ asset('mymo/styles/js/jquery.min.js') }}"></script>
+        <link href="{{ asset('mymo/installer/css/style.css') }}" rel="stylesheet"/>
 
         @yield('style')
 

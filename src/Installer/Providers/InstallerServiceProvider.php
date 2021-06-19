@@ -61,7 +61,7 @@ class InstallerServiceProvider extends ServiceProvider
         ], 'installer_config');
 
         $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('styles/installer'),
+            __DIR__.'/../resources/assets' => public_path('mymo/installer'),
         ], 'installer_assets');
     }
 }

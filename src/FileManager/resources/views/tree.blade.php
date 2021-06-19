@@ -3,7 +3,7 @@
   <small class="d-block">Ver 2.0</small>
   <div class="row mt-3">
     <div class="col-4">
-      <img src="{{ asset('styles/filemanager/images/152px color.png') }}" class="w-100">
+      <img src="{{ asset('mymo/filemanager/images/152px color.png') }}" class="w-100">
     </div>
 
     <div class="col-8">
