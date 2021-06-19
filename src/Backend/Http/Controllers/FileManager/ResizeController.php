@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\FileManager\Http\Controllers;
+namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use Intervention\Image\Facades\Image;
 use Mymo\FileManager\Events\ImageIsResizing;

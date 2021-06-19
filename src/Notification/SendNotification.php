@@ -19,27 +19,35 @@ class SendNotification
     public function send()
     {
         $notifyMethods = $this->getMethods();
+        $methods = explode(',', $this->notification->method);
         foreach ($notifyMethods as $key => $method) {
-            if (config('notification.via.'. $key .'.enable')) {
-                try {
-                    DB::beginTransaction();
-                    (new $method['class']($this->notification))->handle();
+            if (!config('notification.via.'. $key .'.enable')) {
+                continue;
+            }
 
-                    $this->notification->update([
-                        'status' => 1
-                    ]);
+            if (!in_array($key, $methods)) {
+                continue;
+            }
 
-                    DB::commit();
-                } catch (\Exception $exception) {
-                    DB::rollBack();
+            try {
+                DB::beginTransaction();
+                (new $method['class']($this->notification))->handle();
 
-                    $this->notification->update([
-                        'status' => 0,
-                        'error' => $exception->getMessage(),
-                    ]);
+                $this->notification->update([
+                    'status' => 1,
+                    'error' => null,
+                ]);
 
-                    return false;
-                }
+                DB::commit();
+            } catch (\Exception $exception) {
+                DB::rollBack();
+
+                $this->notification->update([
+                    'status' => 0,
+                    'error' => $exception->getMessage(),
+                ]);
+
+                return false;
             }
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\FileManager\Http\Controllers;
+namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use Mymo\Core\Models\Folders;
 
@@ -21,7 +21,7 @@ class FolderController extends FileManagerController
             ];
         }
         
-        return view('filemanager::.tree')
+        return view('mymo_core::filemanager.tree')
             ->with([
                 'root_folders' => [
                     (object) [

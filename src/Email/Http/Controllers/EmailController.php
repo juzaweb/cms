@@ -2,7 +2,7 @@
 
 namespace Mymo\Email\Http\Controllers;
 
-use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\Backend\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Mymo\Email\EmailService;

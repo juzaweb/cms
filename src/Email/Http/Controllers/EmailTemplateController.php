@@ -3,7 +3,7 @@
 namespace Mymo\Email\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\Backend\Http\Controllers\BackendController;
 use Mymo\Core\Traits\ResourceController;
 use Mymo\Email\Models\EmailTemplate;
 use Illuminate\Support\Facades\Validator;

@@ -4,7 +4,7 @@ namespace Mymo\Email\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mymo\Email\Models\EmailList;
-use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\Backend\Http\Controllers\BackendController;
 
 class EmailLogsController extends BackendController
 {

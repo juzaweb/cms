@@ -9,13 +9,10 @@
  *
  * Created by The Anh.
  * Date: 5/30/2021
- * Time: 1:21 PM
+ * Time: 12:08 PM
  */
 
-Route::group([
-    'prefix' => config('mymo_core.admin_prefix'),
-    'middleware' => ['web', 'admin']],
-    function () {
-    require __DIR__ . '/components/post.route.php';
-    require __DIR__ . '/components/page.route.php';
-});
+Route::postTypeResource('posts', 'Backend\PostController');
+
+Route::mymoResource('comments', 'Backend\CommentController');
+

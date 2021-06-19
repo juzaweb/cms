@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\FileManager\Http\Controllers;
+namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use Mymo\Core\Models\Files;
 

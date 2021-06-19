@@ -1,9 +1,9 @@
 <?php
 
-namespace Mymo\PostType\Http\Controllers;
+namespace Mymo\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\Backend\Http\Controllers\BackendController;
 use Mymo\PostType\Services\PostService;
 use Mymo\PostType\PostType;
 use Mymo\PostType\Repositories\PostRepository;

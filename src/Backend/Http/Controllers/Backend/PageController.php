@@ -1,10 +1,10 @@
 <?php
 
-namespace Mymo\PostType\Http\Controllers;
+namespace Mymo\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\Backend\Http\Controllers\BackendController;
 use Mymo\PostType\Models\Page;
 
 class PageController extends BackendController

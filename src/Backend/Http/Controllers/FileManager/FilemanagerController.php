@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\FileManager\Http\Controllers;
+namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use App\Http\Controllers\Controller;
 
@@ -32,7 +32,7 @@ class FilemanagerController extends Controller
             ];
         }
         
-        return view('filemanager::.index', [
+        return view('mymo_core::filemanager.index', [
             'mime_types' => $mime_types
         ]);
     }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mymo\Notification\Http\Requests\NotificationRequest;
-use Mymo\Core\Http\Controllers\BackendController;
+use Mymo\Backend\Http\Controllers\BackendController;
 use Mymo\Core\Models\User;
 use Mymo\Notification\Models\ManualNotification;
 use Mymo\Notification\SendNotification;
@@ -119,7 +119,7 @@ class NotificationController extends BackendController
         }
 
         return $this->success(
-            trans('mymo_core::app.saved-successfully')
+            trans('mymo_core::app.saved_successfully')
         );
     }
 

@@ -21,22 +21,11 @@ class PostTypeServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->bootMigrations();
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mymo_post_type');
-        HookAction::loadActionForm(__DIR__ . '/../actions');
+
     }
 
     public function register()
     {
         $this->app->register(RepositoryServiceProvider::class);
-        $this->app->register(RouteServiceProvider::class);
-    }
-
-    protected function bootMigrations()
-    {
-        $mainPath = __DIR__ . '/../database/migrations';
-        $directories = glob($mainPath . '/*' , GLOB_ONLYDIR);
-        $paths = array_merge([$mainPath], $directories);
-        $this->loadMigrationsFrom($paths);
     }
 }

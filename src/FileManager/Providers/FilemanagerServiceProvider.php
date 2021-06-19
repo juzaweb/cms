@@ -25,17 +25,9 @@ class FilemanagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'filemanager');
-
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'filemanager');
-
         $this->publishes([
             __DIR__ . '/../config/filemanager.php' => base_path('config/filemanager.php'),
         ], 'filemanager_config');
-
-        $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('mymo/filemanager'),
-        ], 'filemanager_assets');
     }
 
     /**
@@ -46,6 +38,5 @@ class FilemanagerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/filemanager.php', 'filemanager');
-        $this->app->register(RouteServiceProvider::class);
     }
 }
