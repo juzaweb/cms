@@ -82,6 +82,7 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function publishConfig()
     {
+
         $configPath = realpath(__DIR__ . '/../config/theme.php');
 
         $this->publishes([

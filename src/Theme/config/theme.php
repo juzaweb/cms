@@ -113,7 +113,7 @@ return [
     |
     */
     'stubs'      => [
-        'path'  => base_path('mymocore/Core/Console/stubs/theme'),
+        'path'  => MYMO_BASE_PATH . '/../stubs/theme',
         'files' => [
             'css'    => 'assets/css/app.css',
             'layout' => 'views/layouts/master.blade.php',

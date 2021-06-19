@@ -14,6 +14,10 @@
 
 //require (__DIR__ . '/../../Updater/helpers.php');
 
+if (!defined('MYMO_BASE_PATH')) {
+    define('MYMO_BASE_PATH', __DIR__ . '/../..');
+}
+
 use Illuminate\Support\Facades\Auth;
 use Mymo\Core\Helpers\Breadcrumb;
 use Mymo\Core\Models\Config;

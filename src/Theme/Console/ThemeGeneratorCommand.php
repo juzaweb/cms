@@ -14,7 +14,7 @@ class ThemeGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'theme:create {name?}';
+    protected $signature = 'theme:make {name?}';
 
     /**
      * The console command description.
@@ -83,7 +83,7 @@ class ThemeGeneratorCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {
