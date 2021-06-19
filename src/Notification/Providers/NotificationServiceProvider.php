@@ -15,9 +15,8 @@ class NotificationServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/notification.php' => config_path('notification.php'),
-        ], 'config');
+        ], 'mymo_config');
 
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mymo_notification');
         $this->bootCommands();
         HookAction::loadActionForm(__DIR__ . '/../actions');
