@@ -8,12 +8,14 @@ use Mymo\Core\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class UsersController extends BackendController
+class UserController extends BackendController
 {
     public function index()
     {
+        $allStatus = User::getAllStatus();
         return view('mymo_core::backend.users.index', [
             'title' => trans('mymo_core::app.users'),
+            'allStatus' => $allStatus
         ]);
     }
     
@@ -35,7 +37,7 @@ class UsersController extends BackendController
             });
         }
         
-        if (!is_null($status)) {
+        if ($status) {
             $query->where('status', '=', $status);
         }
         
@@ -60,6 +62,7 @@ class UsersController extends BackendController
     public function form($id = null)
     {
         $model = User::firstOrNew(['id' => $id]);
+        $allStatus = User::getAllStatus();
         $titlePage = $model->name ?? trans('mymo_core::app.add_new');
         $this->addBreadcrumb([
             'title' => trans('mymo_core::app.users'),
@@ -68,18 +71,21 @@ class UsersController extends BackendController
 
         return view('mymo_core::backend.users.form', [
             'model' => $model,
-            'title' => $titlePage
+            'title' => $titlePage,
+            'allStatus' => $allStatus
         ]);
     }
     
     public function save(Request $request)
     {
+        $allStatus = array_keys(User::getAllStatus());
+
         $request->validate([
             'name' => 'required|string|max:250',
             'password' => 'required_if:id,',
             'avatar' => 'nullable|string|max:150',
             'email' => 'required_if:id,|unique:users,email',
-            'status' => 'required|in:0,1',
+            'status' => 'required|in:' . implode(',', $allStatus),
         ], [], [
             'name' => trans('mymo_core::app.name'),
             'email' => trans('mymo_core::app.email'),

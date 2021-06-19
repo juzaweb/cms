@@ -270,5 +270,7 @@ return [
     'remember_me' => 'Remember me',
     'login_successfully' => 'Login successfully',
     'no_new_version_available' => 'No new version available.',
+    'unconfimred' => 'Unconfimred',
+    'banned' => 'Banned',
 ];
 

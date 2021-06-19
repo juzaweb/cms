@@ -29,8 +29,9 @@
                 <div class="form-group">
                     <label class="col-form-label" for="status">@lang('mymo_core::app.status')</label>
                     <select name="status" id="status" class="form-control" required>
-                        <option value="1" @if($model->status == 1) selected @endif>@lang('mymo_core::app.enabled')</option>
-                        <option value="0" @if($model->status == 0 && !is_null($model->status)) selected @endif>@lang('mymo_core::app.disabled')</option>
+                        @foreach($allStatus as $key => $name)
+                        <option value="{{ $key }}" @if($model->status == $key) selected @endif>{{ $name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -53,7 +54,7 @@
                 @component('mymo_core::components.form_image', [
                     'label' => trans('mymo_core::app.avatar'),
                     'name' => 'avatar',
-                    'value' => $model->getAvatar()
+                    'value' => $model->avatar
                 ])
                 @endcomponent
 

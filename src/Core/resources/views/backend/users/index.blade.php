@@ -72,9 +72,15 @@
         }
 
         function status_formatter(value, row, index) {
-            if (value == 1) {
-                return `<span class="text-success">${mymo.lang.enabled}</span>`;
+            switch (row.status) {
+                case 'active':
+                    return `<span class="text-success">${mymo.lang.active}</span>`;
+                case 'unconfimred':
+                    return `<span class="text-warning">${mymo.lang.unconfimred}</span>`;
+                case 'banned':
+                    return `<span class="text-danger">${mymo.lang.banned}</span>`;
             }
+
             return `<span class="text-danger">${mymo.lang.disabled}</span>`;
         }
 

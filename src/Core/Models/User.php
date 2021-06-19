@@ -12,6 +12,7 @@
 
 namespace Mymo\Core\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -67,7 +68,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'avatar'
+        'avatar',
+        'status'
     ];
 
     /**
@@ -87,6 +89,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getAllStatus()
+    {
+        return [
+            'active' => trans('mymo_core::app.active'),
+            'unconfimred' => trans('mymo_core::app.unconfimred'),
+            'banned' => trans('mymo_core::app.banned'),
+        ];
+    }
+
+    /**
+     * @param Builder $builder
+     * @return Builder
+     * */
+    public function scopeActive($builder)
+    {
+        return $builder->where('status', '=', 'active');
+    }
 
     public function getAvatar() {
         if ($this->avatar) {
