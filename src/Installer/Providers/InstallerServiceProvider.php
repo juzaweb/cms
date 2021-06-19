@@ -4,6 +4,7 @@ namespace Mymo\Installer\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Mymo\Installer\Commands\InstallCommand;
 use Mymo\Installer\Middleware\CanInstall;
 use Mymo\Installer\Middleware\Installed;
 
@@ -29,6 +30,10 @@ class InstallerServiceProvider extends ServiceProvider
             __DIR__ . '/../config/installer.php',
             'installer'
         );
+
+        $this->commands([
+            InstallCommand::class,
+        ]);
     }
 
     /**

@@ -33,9 +33,9 @@
                     <input name="search" type="text" id="search" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
                 </div>
 
-                <div class="form-group w-25 mb-2 mr-1">
+                <div class="form-group mb-2 mr-1">
                     <label for="status" class="sr-only">@lang('mymo_core::app.status')</label>
-                    <select name="status" id="status" class="form-control">
+                    <select name="status" id="status" class="form-control select2-default">
                         <option value="">@lang('mymo_core::app.all_status')</option>
                         <option value="1">@lang('mymo_core::app.enabled')</option>
                         <option value="0">@lang('mymo_core::app.disabled')</option>
