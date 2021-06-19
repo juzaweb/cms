@@ -14,14 +14,11 @@ namespace Mymo\Core\Providers;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
-use Mymo\Core\Facades\HookAction;
 
 class HookActionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        HookAction::loadActionForm(__DIR__ . '/../actions');
-
         $this->app->booted(function () {
             $paths = apply_filters('mymo.actions', []);
 

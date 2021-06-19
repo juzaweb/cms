@@ -1,3 +1,11 @@
+## v1.1.4
+- Fix show config site
+- Fix config email
+- Default rows when install
+- Fix top menu admin
+- Fix email template manager
+- Fix table in Dashboard
+
 ## v1.1.3
 - Fix install command publish assets
 - Fix theme mamager empty theme
