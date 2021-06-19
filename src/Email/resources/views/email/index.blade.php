@@ -60,7 +60,7 @@
                 @component('mymo_core::components.form_input', [
                     'label' => trans('mymo_core::app.email_from_name'),
                     'name' => 'email[from_name]',
-                    'value' => $config['from_name'],
+                    'value' => $config['from_name'] ?? '',
                 ])@endcomponent
 
                 <div class="mt-3">
