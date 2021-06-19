@@ -18,22 +18,6 @@ class CreateManualNotificationsTable extends Migration
             $table->text('error')->nullable();
             $table->timestamps();
         });
-
-        /*if (!DB::table('email_templates')->where('code', '=', 'notification')->exists()) {
-            DB::table('email_templates')->insert([
-                'code' => 'notification',
-                'subject' => '{subject}',
-                'body' => '{body}',
-                'params' => json_encode([
-                    'subject' => 'Subject notify',
-                    'body' => 'Body notify',
-                    'name' => 'User name',
-                    'email' => 'User Email address',
-                    'url' => 'Url notify',
-                    'image' => 'Image notify',
-                ]),
-            ]);
-        }*/
     }
 
     public function down()

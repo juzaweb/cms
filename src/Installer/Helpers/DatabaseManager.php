@@ -127,6 +127,7 @@ class DatabaseManager
 <p><a href="{url}" target="_blank">Verify account</a></p>',
             'params' => [
                 'name' => 'Your Name',
+                'url' => 'Url verify account',
             ],
         ]);
 
@@ -138,7 +139,23 @@ class DatabaseManager
 <p>If this was a mistake, just ignore this email and nothing will happen.To reset your password, visit the following address:</p>
 <p><a href="{url}" target="_blank">{url}</a></p>',
             'params' => [
-                'name' => 'Your Name',
+                'name' => 'Full Name',
+                'email' => 'Email',
+                'url' => 'Url reset password',
+            ],
+        ]);
+
+        EmailTemplate::create([
+            'code' => 'notification',
+            'subject' => '{subject}',
+            'body' => '{body}',
+            'params' => [
+                'subject' => 'Subject notify',
+                'body' => 'Body notify',
+                'name' => 'User name',
+                'email' => 'User Email address',
+                'url' => 'Url notify',
+                'image' => 'Image notify',
             ],
         ]);
     }
