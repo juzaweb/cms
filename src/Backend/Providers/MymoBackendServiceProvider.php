@@ -45,7 +45,7 @@ class MymoBackendServiceProvider extends ServiceProvider
     protected function bootPublishes()
     {
         $this->publishes([
-            __DIR__ . '/../../../assets' => public_path('mymo/styles'),
+            __DIR__ . '/../../../assets' => public_path('mymo'),
         ], 'mymo_assets');
 
         $this->publishes([
