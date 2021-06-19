@@ -42,6 +42,7 @@
     },
     "autoload": {
         "psr-4": {
+          "Mymo\\Tests\\": "tests/",
           "Mymo\\": "src/"
         },
         "files": [
