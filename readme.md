@@ -2,7 +2,9 @@ MyMo - Free Laravel CMS
 =======================
 
 ## About
+Mymo is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again.
 
+Supported: Laravel 6
 
 - Follow us: https://www.facebook.com/mymocms/
 
@@ -19,12 +21,12 @@ Admin panel: http://yoursite/admin-cp
 [https://github.com/mymocms/mymocms/wiki](https://github.com/mymocms/mymocms/wiki)
 
 ## Features
-[x] Fully Ajax load page.
-[x] File manager
-[x] Chunk Video Upload
-[x] Post Type and Taxonomy support
-[x] Email service
-[x] Email templates
-[x] Notification
-[x] Email Log
+- [x] Fully Ajax load page.
+- [x] File manager
+- [x] Chunk Video Upload
+- [x] Post Type and Taxonomy support
+- [x] Email service
+- [x] Email templates
+- [x] Notification
+- [x] Email Log
 

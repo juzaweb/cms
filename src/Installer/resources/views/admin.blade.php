@@ -67,10 +67,20 @@
         </div>
 
         <div class="buttons">
-            <button type="submit" class="button">
+            <button type="submit" class="button btn-submit">
                 {{ trans('installer::installer_messages.environment.wizard.form.buttons.create_user_admin') }}
                 <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </button>
         </div>
     </form>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $('form').on('submit', function () {
+            $('.btn-submit')
+                .html("{{ trans('mymo_core::app.please_wait') }}")
+                .prop('disabled', true);
+        });
+    </script>
 @endsection

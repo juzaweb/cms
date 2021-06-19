@@ -55,7 +55,7 @@ class MymoCoreServiceProvider extends ServiceProvider
 
     protected function bootMigrations()
     {
-        $mainPath = base_path('mymocore/Core/database/migrations');
+        $mainPath = __DIR__ . '/../database/migrations';
         $directories = glob($mainPath . '/*' , GLOB_ONLYDIR);
         $paths = array_merge([$mainPath], $directories);
         $this->loadMigrationsFrom($paths);
@@ -85,7 +85,7 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(HookActionServiceProvider::class);
         $this->app->register(MymoPerformanceServiceProvider::class);
-        //$this->app->register(ThemeServiceProvider::class);
+        $this->app->register(ThemeServiceProvider::class);
         $this->app->register(FilemanagerServiceProvider::class);
         //$this->app->register(TranslatableServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);

@@ -101,7 +101,7 @@ class EnvironmentManager
         "APP_DEBUG=false\n".
         "APP_URL=http://localhost\n\n".
         "LOG_CHANNEL=daily\n\n".
-        "DB_CONNECTION=mysql\n".
+        "DB_CONNECTION=". $request->input('database_connection') ."\n".
         "DB_HOST=". $request->input('database_hostname') ."\n".
         'DB_PORT='. $request->input('database_port') ."\n".
         'DB_DATABASE='. $request->input('database_name') ."\n".

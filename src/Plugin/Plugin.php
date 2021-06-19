@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Translation\Translator;
 use Mymo\Plugin\Contracts\ActivatorInterface;
+use Illuminate\Support\Facades\Artisan;
 
 abstract class Plugin
 {
@@ -383,6 +384,7 @@ abstract class Plugin
         $this->fireEvent('enabling');
 
         $this->activator->enable($this);
+        $this->runMigrate();
         $this->flushCache();
 
         $this->fireEvent('enabled');
@@ -467,5 +469,10 @@ abstract class Plugin
     {
         return $this->getExtraTadcms('name') ??
             ucwords(str_replace('/', ' ', $this->getName()));
+    }
+
+    private function runMigrate()
+    {
+        Artisan::call('migrate', ['--force'=> true]);
     }
 }

@@ -18,79 +18,14 @@
 
     <div class="card-body">
         <ul class="accordionjs m-0" id="accordion" data-active-index="false">
-
+            @foreach($postTypes as $postType)
             <li class="acc_section">
-                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('movie::app.genres') }}</h3></div>
-                <div class="acc_content">
-                    <form action="" method="post" class="add-menu-item">
-
-                        <input type="hidden" name="type" value="genre">
-
-                        <div class="form-group">
-                            <div class="ul-show-items">
-                                <ul class="mt-2 p-0">
-                                    @foreach($genres as $genre)
-                                    <li class="m-1" id="item-genre-{{ $genre->id }}">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="items[]" class="custom-control-input" id="genre-{{ $genre->id }}" value="{{ $genre->id }}">
-                                            <label class="custom-control-label" for="genre-{{ $genre->id }}">{{ $genre->name }}</label>
-                                        </div>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="custom-switch">
-                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
-                                <span class="custom-switch-indicator"></span>
-                                <span class="custom-switch-description"> {{ trans('mymo_core::app.open_new_tab') }}</span>
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('mymo_core::app.add_to_menu') }}</button>
-                    </form>
-                </div>
-            </li>
-
-            <li class="acc_section">
-                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('movie::app.countries') }}</h3></div>
-                <div class="acc_content">
-                    <form action="" method="post" class="add-menu-item">
-
-                        <input type="hidden" name="type" value="country">
-
-                        <div class="form-group">
-                            <div class="ul-show-items">
-                                <ul class="mt-2 p-0">
-                                    @foreach($countries as $country)
-                                        <li class="m-1" id="item-country-{{ $country->id }}">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" name="items[]" class="custom-control-input" id="country-{{ $country->id }}" value="{{ $country->id }}">
-                                                <label class="custom-control-label" for="country-{{ $country->id }}">{{ $country->name }}</label>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="custom-switch">
-                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
-                                <span class="custom-switch-indicator"></span>
-                                <span class="custom-switch-description"> {{ trans('mymo_core::app.open_new_tab') }}</span>
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('mymo_core::app.add_to_menu') }}</button>
-                    </form>
-                </div>
-            </li>
-
-            <li class="acc_section">
-                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('mymo_core::app.pages') }}</h3></div>
+                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ $postType->get('label') }}</h3></div>
+                @php
+                    $items = app($postType->get('model'))
+                        ->limit(10)
+                        ->get();
+                @endphp
                 <div class="acc_content">
                     <form action="" method="post" class="add-menu-item">
 
@@ -99,11 +34,11 @@
                         <div class="form-group">
                             <div class="ul-show-items">
                                 <ul class="mt-2 p-0">
-                                    @foreach($pages as $page)
-                                        <li class="m-1" id="item-page-{{ $page->id }}">
+                                    @foreach($items as $item)
+                                        <li class="m-1" id="item-page-{{ $item->id }}">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" name="items[]" class="custom-control-input" id="page-{{ $page->id }}" value="{{ $page->id }}">
-                                                <label class="custom-control-label" for="page-{{ $page->id }}">{{ $page->name }}</label>
+                                                <input type="checkbox" name="items[]" class="custom-control-input" id="page-{{ $item->id }}" value="{{ $item->id }}">
+                                                <label class="custom-control-label" for="page-{{ $item->id }}">{{ $item->name ?? $item->title ?? '' }}</label>
                                             </div>
                                         </li>
                                     @endforeach
@@ -123,43 +58,7 @@
                     </form>
                 </div>
             </li>
-
-            <li class="acc_section">
-                <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('mymo_core::app.other_pages') }}</h3></div>
-                <div class="acc_content">
-                    <form action="" method="post" class="add-menu-item">
-
-                        <input type="hidden" name="type" value="custom">
-
-                        <div class="form-group">
-                            <label class="col-form-label" for="add-title">@lang('mymo_core::app.title')</label>
-                            <input type="text" name="title" id="add-title" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label" for="add-url">@lang('mymo_core::app.pages')</label>
-                            <select name="url" id="add-url" class="form-control">
-                                <option value="">--- @lang('mymo_core::app.choose_page') ---</option>
-                                <option value="/">@lang('mymo_core::app.home')</option>
-                                <option value="/movies">@lang('mymo_core::app.movies')</option>
-                                <option value="/tv-series">@lang('mymo_core::app.tv_series')</option>
-                                <option value="/latest-movies">@lang('mymo_core::app.latest_movies')</option>
-                                <option value="/posts">@lang('mymo_core::app.blog')</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="custom-switch">
-                                <input type="checkbox" name="new_tab" class="custom-switch-input" value="1">
-                                <span class="custom-switch-indicator"></span>
-                                <span class="custom-switch-description"> {{ trans('mymo_core::app.open_new_tab') }}</span>
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-success btn-sm mt-1"><i class="fa fa-plus"></i> {{ trans('mymo_core::app.add_to_menu') }}</button>
-                    </form>
-                </div>
-            </li>
+            @endforeach
 
             <li class="acc_section">
                 <div class="acc_head"><h3><i class="fa fa-plus-circle"></i> {{ trans('mymo_core::app.custom_url') }}</h3></div>

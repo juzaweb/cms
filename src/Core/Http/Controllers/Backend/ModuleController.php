@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mymo\Core\Http\Controllers\BackendController;
 use Mymo\Core\Traits\ArrayPagination;
-use Mymo\Module\Facades\Plugin;
+use Mymo\Plugin\Facades\Plugin;
 
 class ModuleController extends BackendController
 {
@@ -81,7 +81,8 @@ class ModuleController extends BackendController
         }
         
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo_core::app.successfully'),
+            'redirect' => route('admin.module')
         ]);
     }
 }
