@@ -1,3 +1,11 @@
+## v1.1.3
+- Fix install command publish assets
+- Fix theme mamager empty theme
+- Hidden menu builder / theme customizer (construction)
+- Fix show config site
+- Fix status users manager
+- Move folder styles
+
 ## 1.1.2
 - Show themes in admin themes
 - Plugin same package
