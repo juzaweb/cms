@@ -19,19 +19,17 @@ class HookActionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->app->booted(function () {
-            $paths = apply_filters('mymo.actions', []);
+        $paths = apply_filters('mymo.actions', []);
 
-            foreach ($paths as $path) {
-                if (!is_dir($path)) {
-                    continue;
-                }
-
-                $files = File::allFiles($path);
-                foreach ($files as $file) {
-                    require_once($file->getRealPath());
-                }
+        foreach ($paths as $path) {
+            if (!is_dir($path)) {
+                continue;
             }
-        });
+
+            $files = File::allFiles($path);
+            foreach ($files as $file) {
+                require ($file->getRealPath());
+            }
+        }
     }
 }

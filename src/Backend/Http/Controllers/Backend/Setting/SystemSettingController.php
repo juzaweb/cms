@@ -80,9 +80,6 @@ class SystemSettingController extends BackendController
         return [
             'general' => trans('mymo_core::app.site_info'),
             'recaptcha' => trans('mymo_core::app.google_recaptcha'),
-            //'player' => trans('mymo_core::app.player'),
-            //'blockip' => trans('mymo_core::app.block_ip'),
-            //'paid-members' => trans('mymo_core::app.paid_members'),
         ];
     }
 }
