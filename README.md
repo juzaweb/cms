@@ -9,13 +9,25 @@ Supported: Laravel 6
 - Follow us: https://www.facebook.com/mymocms/
 
 ## Install
+### Require package with composer
 ```
 composer require mymocms/mymocms
 ```
+### Config your database
+```
+DB_CONNECTION=mysql
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+```
 
-Go to `http://yoursite/install` to install
-
-Admin panel: http://yoursite/admin-cp
+### Run command install
+```
+php artisan mymo:install
+```
+Goto Admin panel: http://yoursite/admin-cp
 
 ## Documentation
 [https://github.com/mymocms/mymocms/wiki](https://github.com/mymocms/mymocms/wiki)

@@ -47,27 +47,30 @@ class FinalInstallManager
      *
      * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
      * @return \Symfony\Component\Console\Output\BufferedOutput|array
+     * @throws Throwable
      */
     private static function publishVendorAssets(BufferedOutput $outputLog)
     {
         try {
             Artisan::call('vendor:publish', [
                 '--tag' => 'mymo_assets',
-                'force' => true
+                '--force' => true
             ], $outputLog);
 
             Artisan::call('vendor:publish', [
                 '--tag' => 'installer_assets',
-                'force' => true
+                '--force' => true
             ], $outputLog);
 
             Artisan::call('vendor:publish', [
                 '--tag' => 'filemanager_assets',
-                'force' => true
+                '--force' => true
             ], $outputLog);
 
+            Artisan::call('storage:link', [], $outputLog);
+
         } catch (Throwable $e) {
-            return static::response($e->getMessage(), $outputLog);
+            throw $e;
         }
 
         return $outputLog;
