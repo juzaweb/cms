@@ -12,6 +12,7 @@ class FinalInstallManager
      * Run final commands.
      *
      * @return string
+     * @throws Throwable
      */
     public function runFinal()
     {
@@ -54,16 +55,6 @@ class FinalInstallManager
         try {
             Artisan::call('vendor:publish', [
                 '--tag' => 'mymo_assets',
-                '--force' => true
-            ], $outputLog);
-
-            Artisan::call('vendor:publish', [
-                '--tag' => 'installer_assets',
-                '--force' => true
-            ], $outputLog);
-
-            Artisan::call('vendor:publish', [
-                '--tag' => 'filemanager_assets',
                 '--force' => true
             ], $outputLog);
 

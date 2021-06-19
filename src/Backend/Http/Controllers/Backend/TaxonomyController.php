@@ -28,7 +28,7 @@ class TaxonomyController extends BackendController
         $setting = $this->getSetting($taxonomy);
         $model = $this->taxonomyRepository->makeModel();
 
-        return view('mymo_post_type::taxonomy.index', [
+        return view('mymo_core::backend.taxonomy.index', [
             'title' => $setting->get('label'),
             'setting' => $setting,
             'model' => $model,
@@ -45,7 +45,7 @@ class TaxonomyController extends BackendController
             'url' => route('admin.' . $setting->get('type') . '.taxonomy.index', [$taxonomy])
         ]);
 
-        return view('mymo_post_type::taxonomy.form', [
+        return view('mymo_core::backend.taxonomy.form', [
             'model' => $model,
             'title' => trans('mymo_core::app.add_new'),
             'taxonomy' => $taxonomy,
@@ -64,7 +64,7 @@ class TaxonomyController extends BackendController
             'url' => route('admin.'. $setting->get('type') .'.taxonomy.index', [$taxonomy])
         ]);
 
-        return view('mymo_post_type::taxonomy.form', [
+        return view('mymo_core::backend.taxonomy.form', [
             'model' => $model,
             'title' => $model->name,
             'taxonomy' => $taxonomy,

@@ -59,9 +59,5 @@ class InstallerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/installer.php' => base_path('config/installer.php'),
         ], 'installer_config');
-
-        $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('mymo/installer'),
-        ], 'installer_assets');
     }
 }
