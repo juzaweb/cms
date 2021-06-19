@@ -19,15 +19,15 @@ class DbConfigServiceProvider extends ServiceProvider
         if ($mail) {
             $config = [
                 'driver'     => 'smtp',
-                'host'       => $mail['host'],
-                'port'       => (int) $mail['port'],
+                'host'       => $mail['host'] ?? '',
+                'port'       => (int) $mail['port'] ?? '',
                 'from'       => [
-                    'address'   => $mail['from_address'],
-                    'name'      => $mail['from_name']
+                    'address'   => $mail['from_address'] ?? '',
+                    'name'      => $mail['from_name'] ?? '',
                 ],
-                'encryption' => $mail['encryption'],
-                'username'   => $mail['username'],
-                'password'   => $mail['password'],
+                'encryption' => $mail['encryption'] ?? '',
+                'username'   => $mail['username'] ?? '',
+                'password'   => $mail['password'] ?? '',
             ];
 
             Config::set('mail', $config);

@@ -6,43 +6,30 @@
 
     <div class="row mt-3">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5>@lang('mymo_core::app.new_users')</h5>
-                </div>
-
-                <div class="card-body">
-                    <table class="table" id="users-table">
-                        <thead>
-                        <tr>
-                            <th data-formatter="index_formatter" data-width="5%">#</th>
-                            <th data-field="name">@lang('mymo_core::app.name')</th>
-                            <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
+            <h5>@lang('mymo_core::app.new_users')</h5>
+            <table class="table" id="users-table">
+                <thead>
+                <tr>
+                    <th data-formatter="index_formatter" data-width="5%">#</th>
+                    <th data-field="name">@lang('mymo_core::app.name')</th>
+                    <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
+                </tr>
+                </thead>
+            </table>
         </div>
 
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5>@lang('mymo_core::app.notifications')</h5>
-                </div>
+            <h5>@lang('mymo_core::app.notifications')</h5>
 
-                <div class="card-body">
-                    <table class="table" id="users-notification">
-                        <thead>
-                            <tr>
-                                <th data-formatter="index_formatter" data-width="5%">#</th>
-                                <th data-field="subject" data-formatter="subject_formatter">@lang('mymo_core::app.subject')</th>
-                                <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
+            <table class="table" id="users-notification">
+                <thead>
+                    <tr>
+                        <th data-formatter="index_formatter" data-width="5%">#</th>
+                        <th data-field="subject" data-formatter="subject_formatter">@lang('mymo_core::app.subject')</th>
+                        <th data-field="created" data-width="30%" data-align="center">@lang('mymo_core::app.created_at')</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 
