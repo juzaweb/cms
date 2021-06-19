@@ -20,11 +20,7 @@ Route::group([
     Route::post('setting/email', 'EmailController@save')->name('admin.setting.email.save');
     Route::post('setting/email/send-test-mail', 'EmailController@sendTestMail')->name('admin.email.test-email');
 
-    Route::group(['prefix' => 'setting/email-template'], function () {
-        Route::get('/', 'EmailTemplateController@index')->name('admin.email-template');
-        Route::get('/get-data', 'EmailTemplateController@index')->name('admin.email-template.get-data');
-        Route::post('/bulk-actions', 'EmailTemplateController@bulkActions')->name('admin.email-template.bulk-actions');
-    });
+    Route::mymoResource('email-template', 'EmailTemplateController');
 
     Route::group(['prefix' => 'logs/email'], function () {
         Route::get('/', 'EmailLogsController@index')->name('admin.logs.email');

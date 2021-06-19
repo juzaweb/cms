@@ -14,8 +14,7 @@ class EmailTemplateServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/email-template.php' => config_path('email-template.php'),
         ], 'mymo_email_config');
-
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
+        
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'emailtemplate');
         HookAction::loadActionForm(__DIR__ . '/../actions');
         

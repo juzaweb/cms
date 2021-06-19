@@ -3,6 +3,7 @@
 namespace Mymo\Email\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Mymo\Core\Traits\ResourceModel;
 
 /**
  * Mymo\Email\Models\EmailTemplate
@@ -28,6 +29,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class EmailTemplate extends Model
 {
+    use ResourceModel;
+
+    protected $fieldName = 'subject';
     protected $table = 'email_templates';
     protected $fillable = [
         'code',

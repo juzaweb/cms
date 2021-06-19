@@ -26,7 +26,7 @@ HookAction::addAdminMenu(
 
 HookAction::addAdminMenu(
     trans('mymo_core::app.email_templates'),
-    'setting.email-template',
+    'email-template',
     [
         'icon' => 'fa fa-envelope',
         'position' => 10,

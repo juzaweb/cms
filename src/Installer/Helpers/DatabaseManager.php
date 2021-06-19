@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Mymo\Email\Models\EmailTemplate;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Mymo\Core\Models\Config as DbConfig;
 
 class DatabaseManager
 {
@@ -26,6 +28,8 @@ class DatabaseManager
         DB::beginTransaction();
         try {
             $migrate = $this->migrate($outputLog);
+            $this->makeConfig();
+            $this->makeEmailTemplate();
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
@@ -102,5 +106,40 @@ class DatabaseManager
             }
             $outputLog->write('Using SqlLite database: '.$database, 1);
         }
+    }
+
+    private function makeConfig()
+    {
+        DbConfig::setConfig('title', 'MyMo - The Best Laravel CMS');
+        DbConfig::setConfig('description', 'Mymo is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again.');
+        DbConfig::setConfig('author_name', 'MyMo Team');
+        DbConfig::setConfig('user_registration', 1);
+        DbConfig::setConfig('user_verification', 0);
+    }
+
+    private function makeEmailTemplate()
+    {
+        EmailTemplate::create([
+            'code' => 'verification',
+            'subject' => 'Verify your account',
+            'body' => '<p>Hello {name},</p>
+<p>Thank you for register. Please click the link below to Verify your account</p>
+<p><a href="{url}" target="_blank">Verify account</a></p>',
+            'params' => [
+                'name' => 'Your Name',
+            ],
+        ]);
+
+        EmailTemplate::create([
+            'code' => 'forgot_password',
+            'subject' => 'Password Reset for you account',
+            'body' => '<p>Someone has requested a password reset for the following account:</p>
+<p>Email: {email}</p>
+<p>If this was a mistake, just ignore this email and nothing will happen.To reset your password, visit the following address:</p>
+<p><a href="{url}" target="_blank">{url}</a></p>',
+            'params' => [
+                'name' => 'Your Name',
+            ],
+        ]);
     }
 }

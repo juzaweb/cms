@@ -30,7 +30,7 @@
             <thead>
                 <tr>
                     <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                    <th data-field="name" data-sortable="true" data-formatter="name_formatter">@lang('mymo_core::app.name')</th>
+                    <th data-field="code" data-sortable="true" data-formatter="name_formatter">@lang('mymo_core::app.code')</th>
                     <th data-width="20%" data-field="subject">@lang('mymo_core::app.subject')</th>
                     <th data-width="15%" data-sortable="true" data-field="created_at">@lang('mymo_core::app.created_at')</th>
                 </tr>
@@ -40,7 +40,7 @@
 
     <script type="text/javascript">
         function name_formatter(value, row, index) {
-            return '<a href="'+ row.edit_url +'">'+ value +'</a>';
+            return '<a href="'+ row.edit_url +'">'+ row.code +'</a>';
         }
 
         var table = new MymoTable({

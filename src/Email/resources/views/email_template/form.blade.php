@@ -1,4 +1,4 @@
-@extends('tadcms::layouts.admin')
+@extends('mymo_core::layouts.backend')
 
 @section('content')
 
