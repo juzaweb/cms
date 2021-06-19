@@ -41,4 +41,13 @@ Goto Admin panel: http://yoursite/admin-cp
 - [x] Email templates
 - [x] Notification
 - [x] Email Log
+- [] Theme Customize
+- [] Widgets support
+- [] Added default theme
+- [] Media manager in admin page
+- [] Translation cms
+- [] Upload themes
+- [] Upload plugins
+- [] Menu builder by post type
+- [] Logs view in admin page
 

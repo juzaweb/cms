@@ -1,3 +1,10 @@
+## 1.1.2
+- Show themes in admin themes
+- Plugin same package
+- Fix plugin list
+- Migrate when active plugin
+- Intall command
+
 ## 1.1.1
 - Package cms
 - Migrate when active plugin
