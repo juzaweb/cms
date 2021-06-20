@@ -8,29 +8,20 @@ use Illuminate\Http\Request;
 
 class SystemSettingController extends BackendController
 {
-    public function index($form = null)
+    public function index($form = 'general')
     {
-        if (empty($form)) {
-            $form = 'general';
-        }
-        
-        if (!view()->exists('mymo_core::backend.setting.system.form.' . $form)) {
-            $form = 'general';
-        }
-        
-        $form_content = view('mymo_core::backend.setting.system.form.' . $form)->render();
+        $forms = $this->getForms();
         
         return view('mymo_core::backend.setting.system.index', [
             'title' => trans('mymo_core::app.system_setting'),
-            'form' => $form,
-            'form_content' => $form_content,
-            'settings' => $this->settingList(),
+            'component' => $form,
+            'forms' => $forms,
         ]);
     }
     
     public function save(Request $request)
     {
-        $configs = $request->only(Config::getConfigs());
+        $configs = $request->only($this->getSettings());
         foreach ($configs as $key => $config) {
             if ($request->has($key)) {
                 Config::setConfig($key, $config);
@@ -47,39 +38,27 @@ class SystemSettingController extends BackendController
             'redirect' => route('admin.setting.form', [$form]),
         ]);
     }
-    
-    public function saveBlockIp(Request $request)
+
+    protected function getForms()
     {
-        $this->validateRequest([
-            'block_ip_status' => 'required',
-            'block_ip_type' => 'required',
-            'block_ip_list' => 'required',
-        ], $request, [
-            'block_ip_status' => trans('mymo_core::app.block_ip_status'),
-            'block_ip_type' => trans('mymo_core::app.block_ip_type'),
-            'block_ip_list' => trans('mymo_core::app.block_ip_list'),
-        ]);
-        
-        $block_ip_status = $request->post('block_ip_status');
-        $block_ip_type = $request->post('block_ip_type');
-        $block_ip_list = $request->post('block_ip_list');
-        
-        Config::setConfig('block_ip_status', $block_ip_status);
-        Config::setConfig('block_ip_type', $block_ip_type);
-        Config::setConfig('block_ip_list', implode(',', $block_ip_list));
-        
-        return response()->json([
-            'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
-            'redirect' => route('admin.setting.form', ['blockip']),
-        ]);
-    }
-    
-    protected function settingList()
-    {
-        return [
-            'general' => trans('mymo_core::app.site_info'),
-            'recaptcha' => trans('mymo_core::app.google_recaptcha'),
+        $items = [
+            'general' => [
+                'name' => trans('mymo_core::app.general_setting'),
+                'view' => 'mymo_core::backend.setting.system.form.general'
+            ],
+            'recaptcha' => [
+                'name' => trans('mymo_core::app.google_recaptcha'),
+                'view' => 'mymo_core::backend.setting.system.form.recaptcha'
+            ]
         ];
+
+        return apply_filters('admin.general_settings.forms', $items);
+    }
+
+    protected function getSettings()
+    {
+        $items = Config::getConfigs();
+
+        return apply_filters('admin.setting_fields', $items);
     }
 }

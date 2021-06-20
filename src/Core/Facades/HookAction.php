@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static registerTaxonomy(string $taxonomy, $objectType, $args = [])
  * @method static loadActionForm(string $path)
  * @method static enqueueStyle(string $handle, string $src, $deps = [], $ver = '1.0', $media = 'all')
+ * @method static addSettingForm($key, $args = [])
  * @see \Mymo\Core\Helpers\HookAction
  **/
 class HookAction extends Facade

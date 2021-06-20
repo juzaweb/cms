@@ -7,6 +7,7 @@
     @endphp
 
     <h5>@lang('mymo_core::app.general')</h5>
+
     <div class="form-group">
         <label class="col-form-label" for="title">@lang('mymo_core::app.home_title')</label>
 
