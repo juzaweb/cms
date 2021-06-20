@@ -34,7 +34,7 @@ class FolderController extends FileManagerController
             ]);
     }
     
-    public function getAddfolder()
+    public function addfolder()
     {
         $folder_name = request()->input('name');
         $parent_id = request()->input('working_dir');
@@ -57,7 +57,6 @@ class FolderController extends FileManagerController
                 $model->type = $this->getType();
                 $model->folder_id = $parent_id;
                 $model->save();
-                
             }
         } catch (\Exception $e) {
             return $e->getMessage();

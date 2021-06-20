@@ -315,7 +315,7 @@ class Theme implements ThemeContract
 
         $this->finder->prependLocation($themeInfo->get('path'));
         $this->finder->prependLocation($viewPath);
-        $this->finder->prependNamespace($themeInfo->get('name'), $viewPath);
+        $this->finder->prependNamespace('theme', $viewPath);
         if ($themeInfo->has('type') && !empty($themeInfo->get('type'))) {
             $this->finder->prependNamespace($themeInfo->get('type'), $viewPath);
         }
