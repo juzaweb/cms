@@ -37,7 +37,6 @@ use Illuminate\Database\Eloquent\Model;
 class Files extends Model
 {
     protected $table = 'files';
-    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'path',

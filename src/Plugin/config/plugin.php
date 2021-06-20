@@ -16,7 +16,7 @@ return [
     'stubs' => [
         'enabled' => true,
         'files' => [
-            'actions/postype' => 'actions/postype.php',
+            'actions/postype' => 'actions/action.php',
             'routes/web' => 'src/routes/web.php',
             'routes/api' => 'src/routes/api.php',
             'views/index' => 'src/resources/views/index.blade.php',
