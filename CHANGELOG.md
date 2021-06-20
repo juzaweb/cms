@@ -1,3 +1,7 @@
+## v1.1.6
+- Fix add folder file manager
+- Fix theme namespace
+
 ## v1.1.5
 - Retruck cms
 - Fix more bug
