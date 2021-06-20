@@ -23,9 +23,9 @@ Route::group(['prefix' => 'file-manager'], function () {
 
     /*Route::get('/move', 'ItemsController@move');
 
-    Route::get('/domove', 'ItemsController@domove');
+    Route::get('/domove', 'ItemsController@domove');*/
 
-    Route::get('/new-folder', 'FolderController@getAddfolder');*/
+    Route::post('/newfolder', 'FileManager\FolderController@addfolder');
 
     Route::get('/folders', 'FileManager\FolderController@getFolders');
 
