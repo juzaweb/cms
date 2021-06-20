@@ -1,5 +1,6 @@
 <form method="post" action="{{ route('admin.setting.save') }}" class="form-ajax">
     <input type="hidden" name="form" value="recaptcha">
+    <h5>@lang('mymo_core::app.google_recaptcha')</h5>
     @php
     $google_recaptcha = get_config('google_recaptcha');
     @endphp
