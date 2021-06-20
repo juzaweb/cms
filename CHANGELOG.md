@@ -1,3 +1,8 @@
+## v1.1.5
+- Retruck cms
+- Fix more bug
+- Register setting page
+
 ## v1.1.4
 - Fix show config site
 - Fix config email

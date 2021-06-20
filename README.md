@@ -4,6 +4,9 @@ MyMo - Free Laravel CMS
 ## About
 Mymo is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again.
 
+![Screenshot](https://i.imgur.com/2a6dTLh.png)
+![Screenshot](https://i.imgur.com/HPvagXR.png)
+
 Supported: Laravel 6
 
 ## Install
