@@ -9,7 +9,7 @@
         'url' => route('admin.setting.ads')
     ]) }}
 
-<div class="cui__utils__content">
+<div class="mymo__utils__content">
     <div class="card">
         <div class="card-header">
             <div class="row">

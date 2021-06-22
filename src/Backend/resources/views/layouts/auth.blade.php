@@ -13,10 +13,10 @@
     @include('mymo_core::components.mymo_langs')
     <script src="{{ asset('mymo/styles/js/backend.js') }}"></script>
 </head>
-    <body class="cui__layout--cardsShadow cui__menuLeft--dark">
-        <div class="cui__layout cui__layout--hasSider">
-            <div class="cui__menuLeft__backdrop"></div>
-            <div class="cui__layout">
+    <body class="mymo__layout--cardsShadow mymo__menuLeft--dark">
+        <div class="mymo__layout mymo__layout--hasSider">
+            <div class="mymo__menuLeft__backdrop"></div>
+            <div class="mymo__layout">
                 @yield('content')
             </div>
         </div>

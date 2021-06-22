@@ -1,11 +1,11 @@
 @extends('mymo_core::layouts.auth')
 
 @section('content')
-    <div class="cui__layout__content">
-        <div class="cui__utils__content">
-            <div class="cui__auth__authContainer">
-                <div class="cui__auth__containerInner">
-                    <div class="card cui__auth__boxContainer">
+    <div class="mymo__layout__content">
+        <div class="mymo__utils__content">
+            <div class="mymo__auth__authContainer">
+                <div class="mymo__auth__containerInner">
+                    <div class="card mymo__auth__boxContainer">
                         <div class="text-dark font-size-24 mb-4">
                             <strong>Create your account</strong>
                         </div>

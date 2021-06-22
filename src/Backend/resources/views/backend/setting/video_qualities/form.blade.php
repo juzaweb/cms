@@ -9,7 +9,7 @@
         'url' => route('admin.video_qualities')
     ], $model) }}
 
-<div class="cui__utils__content">
+<div class="mymo__utils__content">
     <form method="post" action="{{ route('admin.video_qualities.save') }}" class="form-ajax">
         <div class="card">
             <div class="card-header">

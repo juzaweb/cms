@@ -1,4 +1,4 @@
-<div class="cui__topbar">
+<div class="mymo__topbar">
     <div class="mr-4">
         <a href="{{ url('/') }}" class="mr-2" target="_blank">
             <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Visit website"></i> Visit Site
@@ -29,7 +29,7 @@
                 English</a>
         </div>
     </div>
-    <div class="cui__topbar__actionsDropdown dropdown mr-4 d-none d-sm-block">
+    <div class="mymo__topbar__actionsDropdown dropdown mr-4 d-none d-sm-block">
         <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="0,15">
             <i class="dropdown-toggle-icon fa fa-bell-o"></i>
         </a>
@@ -44,7 +44,7 @@
             ->limit(5)
             ->get(['id', 'data', 'created_at']);
         @endphp
-        <div class="cui__topbar__actionsDropdownMenu dropdown-menu dropdown-menu-right" role="menu">
+        <div class="mymo__topbar__actionsDropdownMenu dropdown-menu dropdown-menu-right" role="menu">
             <div style="width: 350px;">
                 <div class="card-body">
                     <div class="tab-content">

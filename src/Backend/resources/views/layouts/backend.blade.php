@@ -20,37 +20,36 @@
     @yield('header')
 </head>
 
-<body class="cui__menuLeft--dark cui__topbar--fixed cui__menuLeft--unfixed">
-<div class="cui__layout cui__layout--hasSider">
+<body class="mymo__menuLeft--dark mymo__topbar--fixed mymo__menuLeft--unfixed">
+<div class="mymo__layout mymo__layout--hasSider">
 
-    <div class="cui__menuLeft">
-        <div class="cui__menuLeft__mobileTrigger"><span></span></div>
+    <div class="mymo__menuLeft">
+        <div class="mymo__menuLeft__mobileTrigger"><span></span></div>
 
-        <div class="cui__menuLeft__outer">
-            <div class="cui__menuLeft__logo__container">
-                <div class="cui__menuLeft__logo">
-                    <div class="cui__menuLeft__logo__name">
-                        <a href="/{{ config('mymo_core.admin_prefix') }}" style="font-size: 25px">
-                            <span style="color: #b71d37; text-shadow: #f7cccc 0.05em 0.05em 0.1em;">MYMO</span>
-                            <span style="color: #0520e0; text-shadow: #d7dbf7 0.05em 0.05em 0.1em;">CMS</span>
+        <div class="mymo__menuLeft__outer">
+            <div class="mymo__menuLeft__logo__container">
+                <div class="mymo__menuLeft__logo">
+                    <div class="mymo__menuLeft__logo__name">
+                        <a href="/{{ config('mymo_core.admin_prefix') }}">
+                            <img src="{{ asset('mymo/styles/images/logo.png') }}" alt="">
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="cui__menuLeft__scroll kit__customScroll">
+            <div class="mymo__menuLeft__scroll kit__customScroll">
                 @include('mymo_core::backend.menu_left')
             </div>
         </div>
     </div>
-    <div class="cui__menuLeft__backdrop"></div>
+    <div class="mymo__menuLeft__backdrop"></div>
 
-    <div class="cui__layout">
-        <div class="cui__layout__header">
+    <div class="mymo__layout">
+        <div class="mymo__layout__header">
             @include('mymo_core::backend.menu_top')
         </div>
 
-        <div class="cui__layout__content">
+        <div class="mymo__layout__content">
             @if(!request()->is(config('mymo_core.admin_prefix') . '/dashboard'))
             {{ breadcrumb('admin', [
                     [
@@ -63,14 +62,14 @@
 
             <h4 class="font-weight-bold ml-3">{{ $title }}</h4>
 
-            <div class="cui__utils__content">
+            <div class="mymo__utils__content">
                 @yield('content')
             </div>
         </div>
-        <div class="cui__layout__footer">
-            <div class="cui__footer">
-                <div class="cui__footer__inner">
-                    <a href="https://github.com/mymocms/mymocms" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
+        <div class="mymo__layout__footer">
+            <div class="mymo__footer">
+                <div class="mymo__footer__inner">
+                    <a href="https://github.com/mymocms/mymocms" target="_blank" rel="noopener noreferrer" class="mymo__footer__logo">
                         MYMO CMS - The Best Laravel CMS
                         <span></span>
                     </a>

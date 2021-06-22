@@ -9,7 +9,7 @@
         'url' => route('admin.setting.seo')
     ]) }}
 
-<div class="cui__utils__content">
+<div class="mymo__utils__content">
     <form action="{{ route('admin.setting.seo.save') }}" method="post" class="form-ajax">
         <div class="card seo-card">
             <div class="card-header">
