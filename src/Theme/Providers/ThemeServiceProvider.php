@@ -3,6 +3,7 @@
 namespace Mymo\Theme\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Mymo\Theme\Console\ThemeGeneratorCommand;
 use Mymo\Theme\Console\ThemeListCommand;
 use Mymo\Theme\Contracts\ThemeContract;
 use Mymo\Theme\Managers\Theme;
@@ -51,33 +52,9 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function consoleCommand()
     {
-        $this->registerThemeGeneratorCommand();
-        // Assign commands.
-        $this->commands(
-            'theme.create',
+        $this->commands([
+            ThemeGeneratorCommand::class,
             ThemeListCommand::class
-        );
-    }
-
-    /**
-     * Register generator command.
-     *
-     * @return void
-     */
-    public function registerThemeGeneratorCommand()
-    {
-        $this->app->singleton('theme.create', function ($app) {
-            return new \Mymo\Theme\Console\ThemeGeneratorCommand($app['config'], $app['files']);
-        });
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [];
+        ]);
     }
 }
