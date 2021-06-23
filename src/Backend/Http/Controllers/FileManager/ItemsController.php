@@ -17,6 +17,7 @@ class ItemsController extends FileManagerController
         $working_dir = request()->get('working_dir');
         
         $folders = Folders::where('folder_id', '=', $working_dir)
+            ->where('type', '=', $file_type)
             ->orderBy('name', 'ASC')
             ->get(['id', 'name']);
         $files = Files::where('folder_id', '=', $working_dir)

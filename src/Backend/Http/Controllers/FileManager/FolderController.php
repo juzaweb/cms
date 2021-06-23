@@ -11,6 +11,7 @@ class FolderController extends FileManagerController
     {
         $childrens = [];
         $folders = Folders::whereNull('folder_id')
+            ->where('type', '=', $this->getType())
             ->get(['id', 'name']);
         
         foreach ($folders as $folder) {
