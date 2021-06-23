@@ -2,6 +2,7 @@
 
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
+use Illuminate\Support\Facades\Storage;
 use Mymo\Core\Models\Files;
 
 class DownloadController extends FileManagerController
@@ -11,7 +12,7 @@ class DownloadController extends FileManagerController
         $file = $this->getPath(request()->get('file'));
         $data = Files::where('path', '=', $file)->first(['name']);
         
-        $path = \Storage::disk('public')->path($file);
+        $path = Storage::disk(config('mymo.filemanager.disk'))->path($file);
         if ($data) {
             return response()->download($path, $data->name);
         }

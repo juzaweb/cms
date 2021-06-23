@@ -92,7 +92,7 @@ return [
         'disk' => 'public',
         'types' => [
             'file'  => [
-                'max_size'     => 50000, // size in KB
+                'max_size'     => 5, // size in MB
                 'valid_mime'   => [
                     'image/jpeg',
                     'image/pjpeg',
@@ -104,7 +104,7 @@ return [
                 ],
             ],
             'image' => [
-                'max_size'     => 50000, // size in KB
+                'max_size'     => 50, // size in MB
                 'valid_mime'   => [
                     'image/jpeg',
                     'image/pjpeg',

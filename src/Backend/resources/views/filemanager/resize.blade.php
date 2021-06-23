@@ -29,37 +29,37 @@
         <tbody>
           @if ($scaled)
           <tr>
-            <td class="text-nowrap">{{ trans('mymo::lfm.resize-ratio') }}</td>
+            <td class="text-nowrap">{{ trans('mymo::filemanager.resize-ratio') }}</td>
             <td class="text-right">{{ number_format($ratio, 2) }}</td>
           </tr>
           <tr>
-            <td class="text-nowrap">{{ trans('mymo::lfm.resize-scaled') }}</td>
+            <td class="text-nowrap">{{ trans('mymo::filemanager.resize-scaled') }}</td>
             <td class="text-right">
-              {{ trans('mymo::lfm.resize-true') }}
+              {{ trans('mymo::filemanager.resize-true') }}
             </td>
           </tr>
           @endif
           <tr>
-            <td class="text-nowrap">{{ trans('mymo::lfm.resize-old-height') }}</td>
+            <td class="text-nowrap">{{ trans('mymo::filemanager.resize-old-height') }}</td>
             <td class="text-right">{{ $original_height }}px</td>
           </tr>
           <tr>
-            <td class="text-nowrap">{{ trans('mymo::lfm.resize-old-width') }}</td>
+            <td class="text-nowrap">{{ trans('mymo::filemanager.resize-old-width') }}</td>
             <td class="text-right">{{ $original_width }}px</td>
           </tr>
           <tr>
-            <td class="text-nowrap" style="vertical-align: middle">{{ trans('mymo::lfm.resize-new-height') }}</td>
+            <td class="text-nowrap" style="vertical-align: middle">{{ trans('mymo::filemanager.resize-new-height') }}</td>
             <td class="text-right"><input type="text" id="height_display" class="form-control w-50 d-inline mr-2" value="{{ $height }}">px</td>
           </tr>
           <tr>
-            <td class="text-nowrap" style="vertical-align: middle">{{ trans('mymo::lfm.resize-new-width') }}</td>
+            <td class="text-nowrap" style="vertical-align: middle">{{ trans('mymo::filemanager.resize-new-width') }}</td>
             <td class="text-right"><input type="text" id="width_display" class="form-control w-50 d-inline mr-2" value="{{ $width }}">px</td>
           </tr>
         </tbody>
       </table>
       <div class="d-flex mb-3">
-        <button class="btn btn-secondary w-50 mr-1" onclick="loadItems()">{{ trans('mymo::lfm.btn-cancel') }}</button>
-        <button class="btn btn-primary w-50" onclick="doResize()">{{ trans('mymo::lfm.btn-resize') }}</button>
+        <button class="btn btn-secondary w-50 mr-1" onclick="loadItems()">{{ trans('mymo::filemanager.btn-cancel') }}</button>
+        <button class="btn btn-primary w-50" onclick="doResize()">{{ trans('mymo::filemanager.btn-resize') }}</button>
       </div>
 
       <input type="hidden" id="img" name="img" value="{{ $img->name }}">
