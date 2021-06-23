@@ -13,7 +13,7 @@ class EmailController extends BackendController
     {
         $config = get_config('email', []);
         return view('emailtemplate::email.index', [
-            'title' => trans('mymo_core::app.email_setting'),
+            'title' => trans('mymo::app.email_setting'),
             'config' => $config,
         ]);
     }
@@ -24,7 +24,7 @@ class EmailController extends BackendController
         set_config('email', $email);
         
         return $this->success([
-            'message' => trans('mymo_core::app.save_successfully')
+            'message' => trans('mymo::app.save_successfully')
         ]);
     }
     
@@ -43,7 +43,7 @@ class EmailController extends BackendController
             ->send();
 
         return $this->success([
-            'message' => trans('mymo_core::app.send_mail_successfully')
+            'message' => trans('mymo::app.send_mail_successfully')
         ]);
     }
 }

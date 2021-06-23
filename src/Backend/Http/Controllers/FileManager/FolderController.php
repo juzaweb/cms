@@ -21,7 +21,7 @@ class FolderController extends FileManagerController
             ];
         }
         
-        return view('mymo_core::filemanager.tree')
+        return view('mymo::filemanager.tree')
             ->with([
                 'root_folders' => [
                     (object) [

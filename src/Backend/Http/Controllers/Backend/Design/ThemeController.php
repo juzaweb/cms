@@ -21,8 +21,8 @@ class ThemeController extends BackendController
         unset($themes[$activated]);
         $themes = $this->arrayPaginate($themes, 10, $page);
 
-        return view('mymo_core::backend.design.themes.index', [
-            'title' => trans('mymo_core::app.themes'),
+        return view('mymo::backend.design.themes.index', [
+            'title' => trans('mymo::app.themes'),
             'themes' => $themes,
             'currentTheme' => $currentTheme,
             'activated' => $activated
@@ -38,7 +38,7 @@ class ThemeController extends BackendController
         $theme = $request->post('theme');
         if (!Theme::has($theme)) {
             return $this->error([
-                'message' => trans('mymo_core::message.theme_not_found')
+                'message' => trans('mymo::message.theme_not_found')
             ]);
         }
 

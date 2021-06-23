@@ -1,7 +1,7 @@
-@extends('mymo_core::layouts.backend')
+@extends('mymo::layouts.backend')
 
 @section('content')
-    @component('mymo_core::components.form_resource', [
+    @component('mymo::components.form_resource', [
         'action' => $model->id ? route('admin.notification.update', [$model->id]) :
                     route('admin.notification.store'),
         'method' => $model->id ? 'put' : 'post'
@@ -11,8 +11,8 @@
                 <input type="hidden" name="redirect" value="{{ route('admin.notification.index') }}">
 
                 <div class="form-group">
-                    <label class="col-form-label" for="users">@lang('mymo_core::app.send_for') <abbr>*</abbr></label>
-                    <select name="users[]" id="users" class="form-control load-users" data-placeholder="--- @lang('mymo_core::app.users') ---" multiple @if($model->users == -1) disabled @endif>
+                    <label class="col-form-label" for="users">@lang('mymo::app.send_for') <abbr>*</abbr></label>
+                    <select name="users[]" id="users" class="form-control load-users" data-placeholder="--- @lang('mymo::app.users') ---" multiple @if($model->users == -1) disabled @endif>
                         @if(!empty($users))
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
@@ -20,19 +20,19 @@
                         @endif
                     </select>
 
-                    <input type="checkbox" class="all-users" @if($model->users == -1) checked @endif> @lang('mymo_core::app.all_users')
+                    <input type="checkbox" class="all-users" @if($model->users == -1) checked @endif> @lang('mymo::app.all_users')
                 </div>
 
-                @component('mymo_core::components.form_input', [
-                    'label' => trans('mymo_core::app.subject'),
+                @component('mymo::components.form_input', [
+                    'label' => trans('mymo::app.subject'),
                     'name' => 'data[subject]',
                     'value' => $model->data['subject'] ?? '',
                     'required' => true
                 ])
                 @endcomponent
 
-                @component('mymo_core::components.form_ckeditor', [
-                    'label' => trans('mymo_core::app.content'),
+                @component('mymo::components.form_ckeditor', [
+                    'label' => trans('mymo::app.content'),
                     'name' => 'data[content]',
                     'value' => $model->data['content'] ?? '',
                 ])
@@ -41,7 +41,7 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <label class="col-form-label">@lang('mymo_core::app.via') <abbr>*</abbr></label>
+                    <label class="col-form-label">@lang('mymo::app.via') <abbr>*</abbr></label>
                     @php
                     $methods = $model->method ? explode(',', $model->method) : [];
                     @endphp
@@ -53,15 +53,15 @@
                     @endforeach
                 </div>
 
-                @component('mymo_core::components.form_image', [
-                    'label' => trans('mymo_core::app.image'),
+                @component('mymo::components.form_image', [
+                    'label' => trans('mymo::app.image'),
                     'name' => 'data[image]',
                     'value' => $model->data['image']  ?? '',
                 ])
                 @endcomponent
 
-                @component('mymo_core::components.form_input', [
-                    'label' => trans('mymo_core::app.url'),
+                @component('mymo::components.form_input', [
+                    'label' => trans('mymo::app.url'),
                     'name' => 'data[url]',
                     'value' => $model->data['url'] ?? '',
                 ])

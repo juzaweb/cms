@@ -1,4 +1,4 @@
-@extends('mymo_core::layouts.backend')
+@extends('mymo::layouts.backend')
 
 @section('content')
 

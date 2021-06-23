@@ -13,8 +13,8 @@ class UserController extends BackendController
     public function index()
     {
         $allStatus = User::getAllStatus();
-        return view('mymo_core::backend.users.index', [
-            'title' => trans('mymo_core::app.users'),
+        return view('mymo::backend.users.index', [
+            'title' => trans('mymo::app.users'),
             'allStatus' => $allStatus
         ]);
     }
@@ -63,13 +63,13 @@ class UserController extends BackendController
     {
         $model = User::firstOrNew(['id' => $id]);
         $allStatus = User::getAllStatus();
-        $titlePage = $model->name ?? trans('mymo_core::app.add_new');
+        $titlePage = $model->name ?? trans('mymo::app.add_new');
         $this->addBreadcrumb([
-            'title' => trans('mymo_core::app.users'),
+            'title' => trans('mymo::app.users'),
             'url' => route('admin.users.index')
         ]);
 
-        return view('mymo_core::backend.users.form', [
+        return view('mymo::backend.users.form', [
             'model' => $model,
             'title' => $titlePage,
             'allStatus' => $allStatus
@@ -87,11 +87,11 @@ class UserController extends BackendController
             'email' => 'required_if:id,|unique:users,email',
             'status' => 'required|in:' . implode(',', $allStatus),
         ], [], [
-            'name' => trans('mymo_core::app.name'),
-            'email' => trans('mymo_core::app.email'),
-            'password' => trans('mymo_core::app.password'),
-            'avatar' => trans('mymo_core::app.avatar'),
-            'status' => trans('mymo_core::app.status'),
+            'name' => trans('mymo::app.name'),
+            'email' => trans('mymo::app.email'),
+            'password' => trans('mymo::app.password'),
+            'avatar' => trans('mymo::app.avatar'),
+            'status' => trans('mymo::app.status'),
         ]);
         
         $model = User::firstOrNew(['id' => $request->post('id')]);
@@ -107,8 +107,8 @@ class UserController extends BackendController
                 'password' => 'required|string|max:32|min:8|confirmed',
                 'password_confirmation' => 'required|string|max:32|min:8'
             ], [], [
-                'password' => trans('mymo_core::app.password'),
-                'password_confirmation' => trans('mymo_core::app.confirm_password')
+                'password' => trans('mymo::app.password'),
+                'password_confirmation' => trans('mymo::app.confirm_password')
             ]);
             
             $model->setAttribute('password', Hash::make($request->post('password')));
@@ -117,7 +117,7 @@ class UserController extends BackendController
         $model->save();
         
         return $this->success([
-            'message' => trans('mymo_core::app.save_successfully')
+            'message' => trans('mymo::app.save_successfully')
         ]);
     }
 
@@ -127,7 +127,7 @@ class UserController extends BackendController
             'ids' => 'required',
             'action' => 'required',
         ], [], [
-            'ids' => trans('mymo_core::app.users')
+            'ids' => trans('mymo::app.users')
         ]);
 
         $ids = $request->post('ids');
@@ -149,7 +149,7 @@ class UserController extends BackendController
         }
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo::app.successfully')
         ]);
     }
 }

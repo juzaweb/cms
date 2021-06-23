@@ -1,4 +1,4 @@
-@extends('mymo_core::layouts.backend')
+@extends('mymo::layouts.backend')
 
 @section('content')
     <div class="row" id="theme-list">
@@ -15,7 +15,7 @@
                                 {{ $currentTheme['name'] }}
                             </div>
                             <div class="text-gray-6">
-                                <button class="btn btn-secondary" disabled> {{ trans('mymo_core::app.activated') }}</button>
+                                <button class="btn btn-secondary" disabled> {{ trans('mymo::app.activated') }}</button>
                             </div>
                         </div>
                     </div>
@@ -37,9 +37,9 @@
                                 {{ $theme['name'] }}
                             </div>
                             <div class="text-gray-6">
-                                <button class="btn btn-primary active-theme" data-theme="{{ $theme['name'] }}"><i class="fa fa-check"></i> {{ trans('mymo_core::app.activate') }}</button>
+                                <button class="btn btn-primary active-theme" data-theme="{{ $theme['name'] }}"><i class="fa fa-check"></i> {{ trans('mymo::app.activate') }}</button>
 
-                                {{--<a href="javascript:void(0)" class="text-danger">{{ trans('mymo_core::app.delete') }}</a>--}}
+                                {{--<a href="javascript:void(0)" class="text-danger">{{ trans('mymo::app.delete') }}</a>--}}
                             </div>
                         </div>
                     </div>

@@ -26,7 +26,7 @@ class Breadcrumb
     public static function getNameView($name)
     {
         return apply_filters('breadcrumb.render', [
-            'admin' => 'mymo_core::items.breadcrumb',
+            'admin' => 'mymo::items.breadcrumb',
         ])[$name];
     }
 }

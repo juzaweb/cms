@@ -10,8 +10,8 @@ class EmailLogsController extends BackendController
 {
     public function index()
     {
-        return view('mymo_core::backend.logs.email', [
-            'title' => trans('mymo_core::app.email_logs'),
+        return view('mymo::backend.logs.email', [
+            'title' => trans('mymo::app.email_logs'),
         ]);
     }
     
@@ -60,8 +60,8 @@ class EmailLogsController extends BackendController
             'ids' => 'required',
             'status' => 'required|in:success,error,pending',
         ], $request, [
-            'ids' => trans('mymo_core::app.email_logs'),
-            'status' => trans('mymo_core::app.status'),
+            'ids' => trans('mymo::app.email_logs'),
+            'status' => trans('mymo::app.status'),
         ]);
         
         EmailList::whereIn('id', $request->post('ids'))
@@ -71,7 +71,7 @@ class EmailLogsController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.deleted_successfully'),
+            'message' => trans('mymo::app.deleted_successfully'),
         ]);
     }
     
@@ -80,14 +80,14 @@ class EmailLogsController extends BackendController
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('mymo_core::app.email_logs')
+            'ids' => trans('mymo::app.email_logs')
         ]);
         
         EmailList::destroy($request->post('ids', []));
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.deleted_successfully'),
+            'message' => trans('mymo::app.deleted_successfully'),
         ]);
     }
 }

@@ -18,13 +18,13 @@ class RegisterController extends Controller
     public function index()
     {
         if (!get_config('users_can_register', 1)) {
-            return abort(403, trans('mymo_core::message.register-form.register-closed'));
+            return abort(403, trans('mymo::message.register-form.register-closed'));
         }
         
         do_action('auth.register.index');
         
-        return view('mymo_core::auth.register', [
-            'title' => trans('mymo_core::app.sign-up')
+        return view('mymo::auth.register', [
+            'title' => trans('mymo::app.sign-up')
         ]);
     }
     
@@ -33,7 +33,7 @@ class RegisterController extends Controller
         do_action('auth.register.handle', $request);
     
         if (!get_config('users_can_register', 1)) {
-            return $this->error(trans('mymo_core::message.register-form.register-closed'));
+            return $this->error(trans('mymo::message.register-form.register-closed'));
         }
         
         // Validate register

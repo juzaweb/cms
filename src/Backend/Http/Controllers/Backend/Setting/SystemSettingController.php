@@ -12,8 +12,8 @@ class SystemSettingController extends BackendController
     {
         $forms = $this->getForms();
         
-        return view('mymo_core::backend.setting.system.index', [
-            'title' => trans('mymo_core::app.system_setting'),
+        return view('mymo::backend.setting.system.index', [
+            'title' => trans('mymo::app.system_setting'),
             'component' => $form,
             'forms' => $forms,
         ]);
@@ -34,7 +34,7 @@ class SystemSettingController extends BackendController
         }
         
         return $this->success([
-            'message' => trans('mymo_core::app.saved_successfully'),
+            'message' => trans('mymo::app.saved_successfully'),
             'redirect' => route('admin.setting.form', [$form]),
         ]);
     }
@@ -43,12 +43,12 @@ class SystemSettingController extends BackendController
     {
         $items = [
             'general' => [
-                'name' => trans('mymo_core::app.general_setting'),
-                'view' => 'mymo_core::backend.setting.system.form.general'
+                'name' => trans('mymo::app.general_setting'),
+                'view' => 'mymo::backend.setting.system.form.general'
             ],
             'recaptcha' => [
-                'name' => trans('mymo_core::app.google_recaptcha'),
-                'view' => 'mymo_core::backend.setting.system.form.recaptcha'
+                'name' => trans('mymo::app.google_recaptcha'),
+                'view' => 'mymo::backend.setting.system.form.recaptcha'
             ]
         ];
 

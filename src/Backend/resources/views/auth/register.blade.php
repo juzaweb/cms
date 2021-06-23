@@ -1,4 +1,4 @@
-@extends('mymo_core::layouts.auth')
+@extends('mymo::layouts.auth')
 
 @section('content')
     <div class="mymo__layout__content">
@@ -17,15 +17,15 @@
 
                         <form action="{{ route('auth.register') }}" method="post" class="mb-4 form-ajax">
                             <div class="form-group mb-4">
-                                <input type="text" name="name" class="form-control" placeholder="@lang('mymo_core::app.full-name')" autocomplete="off"/>
+                                <input type="text" name="name" class="form-control" placeholder="@lang('mymo::app.full-name')" autocomplete="off"/>
                             </div>
                             <div class="form-group mb-4">
-                                <input type="text" name="email" class="form-control" placeholder="@lang('mymo_core::app.email-address')" autocomplete="off"/>
+                                <input type="text" name="email" class="form-control" placeholder="@lang('mymo::app.email-address')" autocomplete="off"/>
                             </div>
                             <div class="form-group mb-4">
-                                <input type="password" name="password" class="form-control" placeholder="@lang('mymo_core::app.password')" autocomplete="off"/>
+                                <input type="password" name="password" class="form-control" placeholder="@lang('mymo::app.password')" autocomplete="off"/>
                             </div>
-                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="@lang('mymo_core::app.please-wait')">
+                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="@lang('mymo::app.please-wait')">
                                 <strong>Sign Up</strong>
                             </button>
                         </form>

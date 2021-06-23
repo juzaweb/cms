@@ -32,7 +32,7 @@ class FilemanagerController extends Controller
             ];
         }
         
-        return view('mymo_core::filemanager.index', [
+        return view('mymo::filemanager.index', [
             'mime_types' => $mime_types
         ]);
     }

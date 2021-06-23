@@ -93,9 +93,9 @@ class User extends Authenticatable
     public static function getAllStatus()
     {
         return [
-            'active' => trans('mymo_core::app.active'),
-            'unconfirmed' => trans('mymo_core::app.unconfimred'),
-            'banned' => trans('mymo_core::app.banned'),
+            'active' => trans('mymo::app.active'),
+            'unconfirmed' => trans('mymo::app.unconfimred'),
+            'banned' => trans('mymo::app.banned'),
         ];
     }
 

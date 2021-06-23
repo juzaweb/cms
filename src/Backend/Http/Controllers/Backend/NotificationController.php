@@ -16,8 +16,8 @@ class NotificationController extends BackendController
 {
     public function index()
     {
-        return view('mymo_core::backend.notification.index', [
-            'title' => trans('mymo_core::app.notifications')
+        return view('mymo::backend.notification.index', [
+            'title' => trans('mymo::app.notifications')
         ]);
     }
     
@@ -63,14 +63,14 @@ class NotificationController extends BackendController
     public function create()
     {
         $this->addBreadcrumb([
-            'title' => trans('mymo_core::app.notification'),
+            'title' => trans('mymo::app.notification'),
             'url' => route('admin.notification.index')
         ]);
 
         $model = new ManualNotification();
         $vias = $this->getVias();
-        return view('mymo_core::backend.notification.form', [
-            'title' => trans('mymo_core::app.add_new'),
+        return view('mymo::backend.notification.form', [
+            'title' => trans('mymo::app.add_new'),
             'model' => $model,
             'vias' => $vias,
         ]);
@@ -79,7 +79,7 @@ class NotificationController extends BackendController
     public function edit($id)
     {
         $this->addBreadcrumb([
-            'title' => trans('mymo_core::app.notifications'),
+            'title' => trans('mymo::app.notifications'),
             'url' => route('admin.notification.index')
         ]);
 
@@ -88,7 +88,7 @@ class NotificationController extends BackendController
         $users = User::whereIn('id', explode(',', $model->users))
             ->get(['id', 'name']);
 
-        return view('mymo_core::backend.notification.form', [
+        return view('mymo::backend.notification.form', [
             'title' => $model->data['subject'] ?? '',
             'model' => $model,
             'users' => $users,
@@ -119,7 +119,7 @@ class NotificationController extends BackendController
         }
 
         return $this->success(
-            trans('mymo_core::app.saved_successfully')
+            trans('mymo::app.saved_successfully')
         );
     }
 
@@ -145,7 +145,7 @@ class NotificationController extends BackendController
         }
 
         return $this->success(
-            trans('mymo_core::app.save_successfully')
+            trans('mymo::app.save_successfully')
         );
     }
     
@@ -155,7 +155,7 @@ class NotificationController extends BackendController
             'ids' => 'required',
             'action' => 'required',
         ], [], [
-            'ids' => trans('mymo_core::app.notifications')
+            'ids' => trans('mymo::app.notifications')
         ]);
 
         $ids = $request->post('ids');
@@ -202,7 +202,7 @@ class NotificationController extends BackendController
         }
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo::app.successfully')
         ]);
     }
 

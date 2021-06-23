@@ -80,9 +80,9 @@ trait PostTypeModel
     public function getStatuses()
     {
         return [
-            'draft' => trans('mymo_core::app.draft'),
-            'publish' => trans('mymo_core::app.publish'),
-            'private' => trans('mymo_core::app.private')
+            'draft' => trans('mymo::app.draft'),
+            'publish' => trans('mymo::app.publish'),
+            'private' => trans('mymo::app.private')
         ];
     }
 

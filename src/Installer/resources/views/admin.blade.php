@@ -79,7 +79,7 @@
     <script type="text/javascript">
         $('form').on('submit', function () {
             $('.btn-submit')
-                .html("{{ trans('mymo_core::app.please_wait') }}")
+                .html("{{ trans('mymo::app.please_wait') }}")
                 .prop('disabled', true);
         });
     </script>

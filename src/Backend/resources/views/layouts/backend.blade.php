@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/vendor.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/backend.css') }}">
 
-    @include('mymo_core::components.mymo_langs')
+    @include('mymo::components.mymo_langs')
 
     <script src="{{ asset('mymo/styles/js/vendor.js') }}"></script>
     <script src="{{ asset('mymo/styles/js/backend.js') }}"></script>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="mymo__menuLeft__scroll kit__customScroll">
-                @include('mymo_core::backend.menu_left')
+                @include('mymo::backend.menu_left')
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
 
     <div class="mymo__layout">
         <div class="mymo__layout__header">
-            @include('mymo_core::backend.menu_top')
+            @include('mymo::backend.menu_top')
         </div>
 
         <div class="mymo__layout__content">
@@ -89,7 +89,7 @@
 
 <script type="text/javascript">
     $.extend( $.validator.messages, {
-        required: "{{ trans('mymo_core::app.this_field_is_required') }}",
+        required: "{{ trans('mymo::app.this_field_is_required') }}",
     });
 
     $(".form-ajax").validate();

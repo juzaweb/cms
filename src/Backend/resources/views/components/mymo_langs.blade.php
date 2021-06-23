@@ -10,6 +10,6 @@
     var mymo = {
         adminPrefix: "{{ config('mymo.admin_prefix') }}",
         adminUrl: "{{ url(config('mymo.admin_prefix')) }}",
-        lang: @json(trans('mymo_core::app'))
+        lang: @json(trans('mymo::app'))
     }
 </script>

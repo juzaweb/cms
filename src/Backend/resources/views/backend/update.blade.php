@@ -1,4 +1,4 @@
-@extends('mymo_core::layouts.backend')
+@extends('mymo::layouts.backend')
 
 @section('content')
     <div class="row">
@@ -24,7 +24,7 @@
                 </form>
 
             @else
-                <div class="alert alert-secondary">{{ trans('mymo_core::app.no_new_version_available') }}</div>
+                <div class="alert alert-secondary">{{ trans('mymo::app.no_new_version_available') }}</div>
             @endif
         </div>
     </div>

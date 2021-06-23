@@ -22,15 +22,15 @@
           2:3
         </label>
         <label class="btn btn-info btn-aspectRatio" onclick="changeAspectRatio(this, null)">
-          {{ trans('mymo_core::lfm.btn-crop-free') }}
+          {{ trans('mymo::lfm.btn-crop-free') }}
         </label>
       </div>
       <br>
       <br>
       <div class="btn-group clearfix">
-        <button class="btn btn-secondary" onclick="loadItems()">{{ trans('mymo_core::lfm.btn-cancel') }}</button>
-        <button class="btn btn-warning" onclick="performCropNew()">{{ trans('mymo_core::lfm.btn-copy-crop') }}</button>
-        <button class="btn btn-primary" onclick="performCrop()">{{ trans('mymo_core::lfm.btn-crop') }}</button>
+        <button class="btn btn-secondary" onclick="loadItems()">{{ trans('mymo::lfm.btn-cancel') }}</button>
+        <button class="btn btn-warning" onclick="performCropNew()">{{ trans('mymo::lfm.btn-copy-crop') }}</button>
+        <button class="btn btn-primary" onclick="performCrop()">{{ trans('mymo::lfm.btn-crop') }}</button>
       </div>
       <form id='cropForm'>
         <input type="hidden" id="img" name="img" value="{{ $img->name }}">

@@ -35,7 +35,7 @@ trait ResourceController
 
         $model = $this->makeModel();
         return view($this->viewPrefix . '.form', array_merge([
-            'title' => trans('mymo_core::app.add_new')
+            'title' => trans('mymo::app.add_new')
         ], $this->getDataDataForForm($model)));
     }
 
@@ -68,7 +68,7 @@ trait ResourceController
         }
 
         return $this->success([
-            'message' => trans('mymo_core::app.created_successfully')
+            'message' => trans('mymo::app.created_successfully')
         ]);
     }
 
@@ -89,7 +89,7 @@ trait ResourceController
         }
 
         return $this->success([
-            'message' => trans('mymo_core::app.updated_successfully')
+            'message' => trans('mymo::app.updated_successfully')
         ]);
     }
 
@@ -117,7 +117,7 @@ trait ResourceController
         }
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo::app.successfully')
         ]);
     }
 

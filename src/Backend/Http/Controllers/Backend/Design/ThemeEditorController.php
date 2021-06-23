@@ -14,7 +14,7 @@ class ThemeEditorController extends BackendController
         Theme::set('mymo');
         $config = include base_path('themes/mymo/config.php');
 
-        return view('mymo_core::backend.design.editor.index', [
+        return view('mymo::backend.design.editor.index', [
             'config' => $config,
         ]);
     }
@@ -36,7 +36,7 @@ class ThemeEditorController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
+            'message' => trans('mymo::app.saved_successfully'),
         ]);
     }
 }

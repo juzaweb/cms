@@ -15,7 +15,7 @@
 use Mymo\Core\Facades\HookAction;
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.email_setting'),
+    trans('mymo::app.email_setting'),
     'setting.email',
     [
         'icon' => 'fa fa-envelope',
@@ -25,7 +25,7 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.email_templates'),
+    trans('mymo::app.email_templates'),
     'email-template',
     [
         'icon' => 'fa fa-envelope',
@@ -35,7 +35,7 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.email_logs'),
+    trans('mymo::app.email_logs'),
     'logs.email',
     [
         'icon' => 'fa fa-cogs',

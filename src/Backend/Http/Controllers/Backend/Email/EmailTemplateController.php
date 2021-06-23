@@ -50,7 +50,7 @@ class EmailTemplateController extends BackendController
         $request->validate([
             'ids' => 'required',
         ], [], [
-            'ids' => trans('mymo_core::app.email_templates')
+            'ids' => trans('mymo::app.email_templates')
         ]);
         
         $ids = $request->post('ids');
@@ -63,7 +63,7 @@ class EmailTemplateController extends BackendController
         }
         
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo::app.successfully')
         ]);
     }
 
@@ -84,6 +84,6 @@ class EmailTemplateController extends BackendController
 
     protected function getTitle()
     {
-        return trans('mymo_core::app.email_templates');
+        return trans('mymo::app.email_templates');
     }
 }

@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/vendor.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/backend.css') }}">
 
-    @include('mymo_core::components.mymo_langs')
+    @include('mymo::components.mymo_langs')
 
     <script src="{{ asset('mymo/styles/js/vendor.js') }}"></script>
     <script src="{{ asset('mymo/styles/js/backend.js') }}"></script>

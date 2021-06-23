@@ -46,7 +46,7 @@ class MymoCoreServiceProvider extends ServiceProvider
     {
         $this->registerProviders();
         $this->registerSingleton();
-        $this->mergeConfigFrom(__DIR__ . '/../config/mymo.php', 'mymo');
+        $this->mergeConfigFrom(__DIR__ . '/../../../config/mymo.php', 'mymo');
     }
 
     protected function bootMigrations()
@@ -58,7 +58,7 @@ class MymoCoreServiceProvider extends ServiceProvider
     protected function bootPublishes()
     {
         $this->publishes([
-            __DIR__ . '/../config/mymo.php' => base_path('config/mymo.php'),
+            __DIR__ . '/../../../config/mymo.php' => base_path('config/mymo.php'),
         ], 'mymo_config');
     }
 

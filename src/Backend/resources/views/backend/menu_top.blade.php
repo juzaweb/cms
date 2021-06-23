@@ -13,9 +13,9 @@
             </a>
 
             <div class="dropdown-menu" role="menu">
-                <a class="dropdown-item" href="{{ route('admin.posts.create') }}">@lang('mymo_core::app.post')</a>
-                <a class="dropdown-item" href="{{ route('admin.page.create') }}">@lang('mymo_core::app.page')</a>
-                <a class="dropdown-item" href="{{ route('admin.users.create') }}">@lang('mymo_core::app.user')</a>
+                <a class="dropdown-item" href="{{ route('admin.posts.create') }}">@lang('mymo::app.post')</a>
+                <a class="dropdown-item" href="{{ route('admin.page.create') }}">@lang('mymo::app.page')</a>
+                <a class="dropdown-item" href="{{ route('admin.users.create') }}">@lang('mymo::app.user')</a>
             </div>
         </div>
     </div>
@@ -49,11 +49,11 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="kit__l1">
-                            <div class="text-uppercase mb-2 text-gray-6 mb-2 font-weight-bold">@lang('mymo_core::app.notifications') ({{ $total }})</div>
+                            <div class="text-uppercase mb-2 text-gray-6 mb-2 font-weight-bold">@lang('mymo::app.notifications') ({{ $total }})</div>
                             <hr>
                             <ul class="list-unstyled">
                                 @if($items->isEmpty())
-                                    <p>@lang('mymo_core::app.no_notifications')</p>
+                                    <p>@lang('mymo::app.no_notifications')</p>
                                 @else
                                     @foreach($items as $notify)
                                         <li class="kit__l1__item">
@@ -89,12 +89,12 @@
         <div class="dropdown-menu dropdown-menu-right" role="menu">
             <a class="dropdown-item" href="{{ route('admin.users.edit', [Auth::id()]) }}">
                 <i class="dropdown-icon fe fe-user"></i>
-                @lang('mymo_core::app.profile')
+                @lang('mymo::app.profile')
             </a>
 
             <div class="dropdown-divider"></div>
             <a href="{{ route('auth.logout') }}" class="dropdown-item" data-turbolinks="false">
-                <i class="dropdown-icon fe fe-log-out"></i> @lang('mymo_core::app.logout')
+                <i class="dropdown-icon fe fe-log-out"></i> @lang('mymo::app.logout')
             </a>
         </div>
     </div>

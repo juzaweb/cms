@@ -49,7 +49,7 @@ class DataTable
     public function render()
     {
         $datatable = $this->makeData();
-        return view('mymo_core::components.datatable', [
+        return view('mymo::components.datatable', [
             'columns' => $datatable->columns()
         ]);
     }

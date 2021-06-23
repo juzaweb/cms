@@ -116,7 +116,7 @@ trait PostTypeHookAction
         );
 
         $this->addAdminMenu(
-            trans('mymo_core::app.all') . ' '. $args->get('label'),
+            trans('mymo::app.all') . ' '. $args->get('label'),
             $key,
             [
                 'icon' => 'fa fa-list-ul',
@@ -126,7 +126,7 @@ trait PostTypeHookAction
         );
 
         $this->addAdminMenu(
-            trans('mymo_core::app.add_new'),
+            trans('mymo::app.add_new'),
             $key . '.create',
             [
                 'icon' => 'fa fa-plus',
@@ -138,14 +138,14 @@ trait PostTypeHookAction
         $supports = $args->get('supports', []);
         if (in_array('category', $supports)) {
             $this->registerTaxonomy('categories', $key, [
-                'label' => trans('mymo_core::app.categories'),
+                'label' => trans('mymo::app.categories'),
                 'menu_position' => 4,
             ]);
         }
 
         if (in_array('tag', $args['supports'])) {
             $this->registerTaxonomy('tags', $key, [
-                'label' => trans('mymo_core::app.tags'),
+                'label' => trans('mymo::app.tags'),
                 'menu_position' => 15,
                 'supports' => []
             ]);

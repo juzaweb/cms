@@ -3,7 +3,7 @@
         {{ $taxonomy->get('label') }}
         <span>
             <a href="javascript:void(0)" class="float-right add-new">
-                <i class="fa fa-plus"></i> @lang('mymo_core::app.add_new')
+                <i class="fa fa-plus"></i> @lang('mymo::app.add_new')
             </a>
         </span>
     </label>
@@ -24,7 +24,7 @@
         @endphp
 
         @foreach($items as $item)
-            @component('mymo_core::components.tag-item', [
+            @component('mymo::components.tag-item', [
                 'name' => $taxonomy->get('taxonomy'),
                 'item' => $item
             ])
@@ -34,13 +34,13 @@
 
     <div class="form-add mt-2 form-add-taxonomy box-hidden">
         <div class="form-group mb-1">
-            <label class="col-form-label">@lang('mymo_core::app.name')</label>
+            <label class="col-form-label">@lang('mymo::app.name')</label>
             <input type="text" class="form-control taxonomy-name" autocomplete="off">
         </div>
 
         @if(in_array('hierarchical', $taxonomy->get('supports', [])))
             <div class="form-group mb-1">
-                <label class="col-form-label">@lang('mymo_core::app.parent')</label>
+                <label class="col-form-label">@lang('mymo::app.parent')</label>
                 <select type="text" class="form-control taxonomy-parent load-taxonomies" autocomplete="off" data-type="{{ $taxonomy->get('post_type') }}" data-taxonomy="{{ $taxonomy->get('taxonomy') }}">
                 </select>
             </div>
@@ -51,6 +51,6 @@
                 class="btn btn-primary mt-2"
                 data-type="{{ $taxonomy->get('type') }}"
                 data-taxonomy="{{ $taxonomy->get('taxonomy') }}"
-        ><i class="fa fa-plus-circle"></i> @lang('mymo_core::app.add')</button>
+        ><i class="fa fa-plus-circle"></i> @lang('mymo::app.add')</button>
     </div>
 </div>

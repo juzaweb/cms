@@ -1,4 +1,4 @@
-@extends('mymo_core::layouts.auth')
+@extends('mymo::layouts.auth')
 
 @section('content')
     <div class="mymo__layout__content">
@@ -17,15 +17,15 @@
 
                         <form action="" method="post" class="mb-4 form-ajax">
                             <div class="form-group mb-4">
-                                <input type="password" name="password" class="form-control" placeholder="@lang('mymo_core::app.password')" autocomplete="off"/>
+                                <input type="password" name="password" class="form-control" placeholder="@lang('mymo::app.password')" autocomplete="off"/>
                             </div>
 
                             <div class="form-group mb-4">
-                                <input type="password" name="password" class="form-control" placeholder="@lang('mymo_core::app.password')" autocomplete="off"/>
+                                <input type="password" name="password" class="form-control" placeholder="@lang('mymo::app.password')" autocomplete="off"/>
                             </div>
 
-                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="@lang('mymo_core::app.please-wait')">
-                                <i class="fa fa-refresh"></i> @lang('mymo_core::app.reset-password')
+                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="@lang('mymo::app.please-wait')">
+                                <i class="fa fa-refresh"></i> @lang('mymo::app.reset-password')
                             </button>
                         </form>
                     </div>
