@@ -16,13 +16,26 @@ return [
     'admin_prefix' => env('ADMIN_PREFIX', 'admin-cp'),
 
     'plugin' => [
-        'path'      => base_path('plugins'),
+        /**
+         * Plugins path
+         *
+         * This path used for save the generated plugin. This path also will added
+        automatically to list of scanned folders.
+         */
+        'path' => base_path('plugins'),
+        /**
+         * Plugins assets path
+         *
+         * Path for assets when it was publish
+         * Default: plugins
+         */
         'assets'    => public_path('plugins'),
     ],
 
     'theme' => [
         /**
          * Themes path
+         *
          * This path used for save the generated theme. This path also will added
          automatically to list of scanned folders.
          */

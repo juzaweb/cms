@@ -3,37 +3,23 @@
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class FilemanagerController extends Controller
 {
     protected static $success_response = 'OK';
     
-    public function __construct()
+    public function index()
     {
-    
-    }
-    
-    public function show() {
         $type = $this->getType();
-        if ($type == 1) {
-            $mime_types = [
-                'image/jpeg',
-                'image/pjpeg',
-                'image/png',
-                'image/gif',
-                'image/svg+xml',
-            ];
+        $mimeTypes = config("mymo.filemanager.types.{$type}.valid_mime");
+
+        if (empty($mimeTypes)) {
+            return abort(404);
         }
-        else {
-            $mime_types = [
-                'audio/mpeg',
-                'video/mp4',
-                'video/mpeg',
-            ];
-        }
-        
+
         return view('mymo::filemanager.index', [
-            'mime_types' => $mime_types
+            'mimeTypes' => $mimeTypes
         ]);
     }
     
@@ -60,12 +46,8 @@ class FilemanagerController extends Controller
     }
     
     protected function getType() {
-        $type = strtolower(\request()->get('type'));
-        if (in_array($type, ['image', 'images'])) {
-            return 1;
-        }
-        
-        return 2;
+        $type = strtolower(request()->get('type'));
+        return Str::singular($type);
     }
     
     protected function getPath($url) {

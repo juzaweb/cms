@@ -25,9 +25,7 @@ class FilemanagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../config/filemanager.php' => base_path('config/filemanager.php'),
-        ], 'filemanager_config');
+        //
     }
 
     /**
@@ -37,6 +35,6 @@ class FilemanagerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/filemanager.php', 'filemanager');
+        //
     }
 }

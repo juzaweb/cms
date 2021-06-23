@@ -285,7 +285,7 @@
         headers: {
             'Authorization': 'Bearer ' + getUrlParam('token')
         },
-        acceptedFiles: "{{ implode(',', $mime_types) }}",
+        acceptedFiles: "{{ implode(',', $mimeTypes) }}",
         maxFilesize: 1024,
         chunking: true,
         chunkSize: 1048576,

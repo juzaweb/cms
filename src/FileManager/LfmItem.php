@@ -64,7 +64,6 @@ class LfmItem
     /**
      * Check a file is image or not.
      *
-     * @param  mixed  $file  Real path of a file or instance of UploadedFile.
      * @return bool
      */
     public function isImage()
@@ -75,7 +74,6 @@ class LfmItem
     /**
      * Get mime type of a file.
      *
-     * @param  mixed  $file  Real path of a file or instance of UploadedFile.
      * @return string
      */
     public function mimeType()
