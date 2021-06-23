@@ -9,14 +9,18 @@
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('mymo/styles/images/icon.png') }}" />
-    <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/vendor.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/backend.css') }}">
+
     @include('mymo_core::components.mymo_langs')
 
+    <script src="{{ asset('mymo/styles/js/vendor.js') }}"></script>
     <script src="{{ asset('mymo/styles/js/backend.js') }}"></script>
     <script src="{{ asset('mymo/styles/ckeditor/ckeditor.js') }}"></script>
 
+    @do_action('mymo_header')
     @yield('header')
 </head>
 
@@ -30,7 +34,7 @@
             <div class="mymo__menuLeft__logo__container">
                 <div class="mymo__menuLeft__logo">
                     <div class="mymo__menuLeft__logo__name">
-                        <a href="/{{ config('mymo_core.admin_prefix') }}">
+                        <a href="/{{ config('mymo.admin_prefix') }}">
                             <img src="{{ asset('mymo/styles/images/logo.png') }}" alt="">
                         </a>
                     </div>
@@ -50,7 +54,7 @@
         </div>
 
         <div class="mymo__layout__content">
-            @if(!request()->is(config('mymo_core.admin_prefix') . '/dashboard'))
+            @if(!request()->is(config('mymo.admin_prefix') . '/dashboard'))
             {{ breadcrumb('admin', [
                     [
                         'title' => $title
@@ -91,6 +95,7 @@
     $(".form-ajax").validate();
 </script>
 
+@do_action('mymo_footer')
 @yield('footer')
 </body>
 </html>

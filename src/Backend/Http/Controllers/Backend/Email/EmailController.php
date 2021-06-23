@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Email\Http\Controllers;
+namespace Mymo\Backend\Http\Controllers\Backend\Email;
 
 use Mymo\Backend\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Auth;

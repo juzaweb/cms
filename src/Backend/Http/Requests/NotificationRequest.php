@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Notification\Http\Requests;
+namespace Mymo\Backend\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

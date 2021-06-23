@@ -13,11 +13,6 @@ class NotificationServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../config/notification.php' => config_path('notification.php'),
-        ], 'mymo_config');
-
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mymo_notification');
         $this->bootCommands();
         HookAction::loadActionForm(__DIR__ . '/../actions');
         Notification::register('database', DatabaseNotification::class);
@@ -26,12 +21,7 @@ class NotificationServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/notification.php',
-            'notification'
-        );
         $this->registerCommands();
-        $this->app->register(RouteServiceProvider::class);
     }
 
     protected function bootCommands()

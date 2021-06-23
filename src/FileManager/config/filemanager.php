@@ -50,7 +50,7 @@ return [
     |--------------------------------------------------------------------------
      */
 
-    'folder_categories'        => [
+    'folder_categories' => [
         'file'  => [
             'folder_name'  => 'files',
             'startup_view' => 'list',

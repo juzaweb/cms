@@ -21,7 +21,7 @@ class SendNotification
         $notifyMethods = $this->getMethods();
         $methods = explode(',', $this->notification->method);
         foreach ($notifyMethods as $key => $method) {
-            if (!config('notification.via.'. $key .'.enable')) {
+            if (!config('mymo.notification.via.'. $key .'.enable')) {
                 continue;
             }
 

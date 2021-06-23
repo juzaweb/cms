@@ -139,4 +139,13 @@ HookAction::addAdminMenu(
     ]
 );
 
+HookAction::addAdminMenu(
+    trans('mymo_core::app.notifications'),
+    'notification',
+    [
+        'icon' => 'fa fa-bell',
+        'position' => 100
+    ]
+);
+
 

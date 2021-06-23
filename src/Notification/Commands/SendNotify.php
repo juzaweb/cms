@@ -14,7 +14,7 @@ class SendNotify extends Command
     
     public function handle()
     {
-        if (config('notification.method') != 'cron') {
+        if (config('mymo.notification.method') != 'cron') {
             return;
         }
 

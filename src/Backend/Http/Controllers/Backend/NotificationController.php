@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Notification\Http\Controllers;
+namespace Mymo\Backend\Http\Controllers\Backend;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class NotificationController extends BackendController
 {
     public function index()
     {
-        return view('mymo_notification::notification.index', [
+        return view('mymo_core::backend.notification.index', [
             'title' => trans('mymo_core::app.notifications')
         ]);
     }
@@ -69,7 +69,7 @@ class NotificationController extends BackendController
 
         $model = new ManualNotification();
         $vias = $this->getVias();
-        return view('mymo_notification::notification.form', [
+        return view('mymo_core::backend.notification.form', [
             'title' => trans('mymo_core::app.add_new'),
             'model' => $model,
             'vias' => $vias,
@@ -88,7 +88,7 @@ class NotificationController extends BackendController
         $users = User::whereIn('id', explode(',', $model->users))
             ->get(['id', 'name']);
 
-        return view('mymo_notification::notification.form', [
+        return view('mymo_core::backend.notification.form', [
             'title' => $model->data['subject'] ?? '',
             'model' => $model,
             'users' => $users,
@@ -173,7 +173,7 @@ class NotificationController extends BackendController
                             'status' => 2
                         ]);
 
-                    $useMethod = config('notification.method');
+                    $useMethod = config('mymo.notification.method');
                     if (in_array($useMethod, ['sync', 'queue'])) {
                         foreach ($ids as $id) {
                             $notification = ManualNotification::find($id);
@@ -208,7 +208,7 @@ class NotificationController extends BackendController
 
     protected function getVias()
     {
-        $vias = collect(config('notification.via'));
+        $vias = collect(config('mymo.notification.via'));
         return $vias->where('enable', true);
     }
 }

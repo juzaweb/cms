@@ -2,11 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
-            <h5 class="mb-0 card-title font-weight-bold">@lang('mymo_core::app.email_logs')</h5>
-        </div>
-
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="float-right">
                 <div class="btn-group">
                     <button type="button" class="btn btn-success status-button" data-status="2"><i class="fa fa-refresh"></i> @lang('mymo_core::app.resend')</button>
@@ -26,13 +22,13 @@
             <form method="get" class="form-inline" id="form-search">
 
                 <div class="form-group mb-2 mr-1">
-                    <label for="inputName" class="sr-only">@lang('mymo_core::app.search')</label>
-                    <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
+                    <label for="search" class="sr-only">@lang('mymo_core::app.search')</label>
+                    <input name="search" type="text" id="search" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
                 </div>
 
                 <div class="form-group mb-2 mr-1">
-                    <label for="inputStatus" class="sr-only">@lang('mymo_core::app.status')</label>
-                    <select name="status" id="inputStatus" class="form-control">
+                    <label for="status" class="sr-only">@lang('mymo_core::app.status')</label>
+                    <select name="status" id="status" class="form-control select2-default">
                         <option value="">--- @lang('mymo_core::app.status') ---</option>
                         <option value="1">@lang('mymo_core::app.sended')</option>
                         <option value="2">@lang('mymo_core::app.pending')</option>
