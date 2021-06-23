@@ -27,8 +27,7 @@ class RenameController extends FileManagerController
                 ->update([
                     'name' => $new_name
                 ]);
-        }
-        else {
+        } else {
             $file_path = explode('uploads/', $file)[1];
             
             Files::where('path', '=', $file_path)

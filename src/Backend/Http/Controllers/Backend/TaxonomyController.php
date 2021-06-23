@@ -28,7 +28,7 @@ class TaxonomyController extends BackendController
         $setting = $this->getSetting($taxonomy);
         $model = $this->taxonomyRepository->makeModel();
 
-        return view('mymo_core::backend.taxonomy.index', [
+        return view('mymo::backend.taxonomy.index', [
             'title' => $setting->get('label'),
             'setting' => $setting,
             'model' => $model,
@@ -45,9 +45,9 @@ class TaxonomyController extends BackendController
             'url' => route('admin.' . $setting->get('type') . '.taxonomy.index', [$taxonomy])
         ]);
 
-        return view('mymo_core::backend.taxonomy.form', [
+        return view('mymo::backend.taxonomy.form', [
             'model' => $model,
-            'title' => trans('mymo_core::app.add_new'),
+            'title' => trans('mymo::app.add_new'),
             'taxonomy' => $taxonomy,
             'setting' => $setting
         ]);
@@ -64,7 +64,7 @@ class TaxonomyController extends BackendController
             'url' => route('admin.'. $setting->get('type') .'.taxonomy.index', [$taxonomy])
         ]);
 
-        return view('mymo_core::backend.taxonomy.form', [
+        return view('mymo::backend.taxonomy.form', [
             'model' => $model,
             'title' => $model->name,
             'taxonomy' => $taxonomy,
@@ -118,8 +118,8 @@ class TaxonomyController extends BackendController
         ]));
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully'),
-            'html' => view('mymo_core::components.tag-item', [
+            'message' => trans('mymo::app.successfully'),
+            'html' => view('mymo::components.tag-item', [
                 'item' => $model,
                 'name' => $taxonomy,
             ])->render()
@@ -134,7 +134,7 @@ class TaxonomyController extends BackendController
         ]), $id);
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo::app.successfully')
         ]);
     }
 
@@ -157,7 +157,7 @@ class TaxonomyController extends BackendController
         }
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo::app.successfully')
         ]);
     }
 
@@ -165,7 +165,7 @@ class TaxonomyController extends BackendController
     {
         $item = $this->taxonomyRepository->findOrFail($request->input('id'));
         return $this->response([
-            'html' => view('mymo_core::components.tag-item', [
+            'html' => view('mymo::components.tag-item', [
                 'item' => $item,
                 'name' => $taxonomy
             ])

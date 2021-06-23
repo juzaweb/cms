@@ -30,8 +30,8 @@ class UpdateController extends BackendController
 
     public function index()
     {
-        return view('mymo_core::backend.update', [
-            'title' => trans('mymo_core::app.updates'),
+        return view('mymo::backend.update', [
+            'title' => trans('mymo::app.updates'),
             'updater' => $this->updater
         ]);
     }
@@ -40,7 +40,7 @@ class UpdateController extends BackendController
     {
         if (!$this->updater->source()->isNewVersionAvailable()) {
             return $this->error([
-                'message' => trans('mymo_core::app.no_new_version_available'),
+                'message' => trans('mymo::app.no_new_version_available'),
             ]);
         }
 
@@ -61,7 +61,7 @@ class UpdateController extends BackendController
         Artisan::call('up');
 
         return $this->success([
-            'message' => trans('mymo_core::app.updated_successfully'),
+            'message' => trans('mymo::app.updated_successfully'),
         ]);
     }
 }

@@ -40,7 +40,7 @@ class UpdateCommand extends Command
             ->files()));
 
         if (!$this->updater->source()->isNewVersionAvailable()) {
-            $this->info(trans('mymo_core::app.no_new_version_available'));
+            $this->info(trans('mymo::app.no_new_version_available'));
             exit;
         }
 
@@ -59,7 +59,7 @@ class UpdateCommand extends Command
         Artisan::call('up');
 
         return $this->success([
-            'message' => trans('mymo_core::app.updated_successfully'),
+            'message' => trans('mymo::app.updated_successfully'),
         ]);
     }
 }

@@ -19,9 +19,9 @@
 
     function status_formatter(value, row, index) {
         if (value == 1) {
-            return '<span class="text-success">@lang('mymo_core::app.enabled')</span>';
+            return '<span class="text-success">@lang('mymo::app.enabled')</span>';
         }
-        return '<span class="text-danger">@lang('mymo_core::app.disabled')</span>';
+        return '<span class="text-danger">@lang('mymo::app.disabled')</span>';
     }
 
     var table = new MymoTable({

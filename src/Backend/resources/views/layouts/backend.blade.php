@@ -9,49 +9,52 @@
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('mymo/styles/images/icon.png') }}" />
-    <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/vendor.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/backend.css') }}">
-    @include('mymo_core::components.mymo_langs')
 
+    @include('mymo::components.mymo_langs')
+
+    <script src="{{ asset('mymo/styles/js/vendor.js') }}"></script>
     <script src="{{ asset('mymo/styles/js/backend.js') }}"></script>
     <script src="{{ asset('mymo/styles/ckeditor/ckeditor.js') }}"></script>
 
+    @do_action('mymo_header')
     @yield('header')
 </head>
 
-<body class="cui__menuLeft--dark cui__topbar--fixed cui__menuLeft--unfixed">
-<div class="cui__layout cui__layout--hasSider">
+<body class="mymo__menuLeft--dark mymo__topbar--fixed mymo__menuLeft--unfixed">
+<div class="mymo__layout mymo__layout--hasSider">
 
-    <div class="cui__menuLeft">
-        <div class="cui__menuLeft__mobileTrigger"><span></span></div>
+    <div class="mymo__menuLeft">
+        <div class="mymo__menuLeft__mobileTrigger"><span></span></div>
 
-        <div class="cui__menuLeft__outer">
-            <div class="cui__menuLeft__logo__container">
-                <div class="cui__menuLeft__logo">
-                    <div class="cui__menuLeft__logo__name">
-                        <a href="/{{ config('mymo_core.admin_prefix') }}" style="font-size: 25px">
-                            <span style="color: #b71d37; text-shadow: #f7cccc 0.05em 0.05em 0.1em;">MYMO</span>
-                            <span style="color: #0520e0; text-shadow: #d7dbf7 0.05em 0.05em 0.1em;">CMS</span>
+        <div class="mymo__menuLeft__outer">
+            <div class="mymo__menuLeft__logo__container">
+                <div class="mymo__menuLeft__logo">
+                    <div class="mymo__menuLeft__logo__name">
+                        <a href="/{{ config('mymo.admin_prefix') }}">
+                            <img src="{{ asset('mymo/styles/images/logo.png') }}" alt="">
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="cui__menuLeft__scroll kit__customScroll">
-                @include('mymo_core::backend.menu_left')
+            <div class="mymo__menuLeft__scroll kit__customScroll">
+                @include('mymo::backend.menu_left')
             </div>
         </div>
     </div>
-    <div class="cui__menuLeft__backdrop"></div>
+    <div class="mymo__menuLeft__backdrop"></div>
 
-    <div class="cui__layout">
-        <div class="cui__layout__header">
-            @include('mymo_core::backend.menu_top')
+    <div class="mymo__layout">
+        <div class="mymo__layout__header">
+            @include('mymo::backend.menu_top')
         </div>
 
-        <div class="cui__layout__content">
-            @if(!request()->is(config('mymo_core.admin_prefix') . '/dashboard'))
+        <div class="mymo__layout__content">
+            @if(!request()->is(config('mymo.admin_prefix') . '/dashboard'))
             {{ breadcrumb('admin', [
                     [
                         'title' => $title
@@ -63,14 +66,14 @@
 
             <h4 class="font-weight-bold ml-3">{{ $title }}</h4>
 
-            <div class="cui__utils__content">
+            <div class="mymo__utils__content">
                 @yield('content')
             </div>
         </div>
-        <div class="cui__layout__footer">
-            <div class="cui__footer">
-                <div class="cui__footer__inner">
-                    <a href="https://github.com/mymocms/mymocms" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
+        <div class="mymo__layout__footer">
+            <div class="mymo__footer">
+                <div class="mymo__footer__inner">
+                    <a href="https://github.com/mymocms/mymocms" target="_blank" rel="noopener noreferrer" class="mymo__footer__logo">
                         MYMO CMS - The Best Laravel CMS
                         <span></span>
                     </a>
@@ -86,12 +89,13 @@
 
 <script type="text/javascript">
     $.extend( $.validator.messages, {
-        required: "{{ trans('mymo_core::app.this_field_is_required') }}",
+        required: "{{ trans('mymo::app.this_field_is_required') }}",
     });
 
     $(".form-ajax").validate();
 </script>
 
+@do_action('mymo_footer')
 @yield('footer')
 </body>
 </html>

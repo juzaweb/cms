@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('mymo_core::app.dashboard')</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('mymo::app.dashboard')</a></li>
 
         @foreach($items as $item)
             @if(isset($item['url']))

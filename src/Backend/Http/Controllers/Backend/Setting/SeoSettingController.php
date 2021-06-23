@@ -9,7 +9,7 @@ use Mymo\Backend\Http\Controllers\Controller;
 class SeoSettingController extends Controller
 {
     public function index() {
-        return view('mymo_core::backend.setting.seo.index');
+        return view('mymo::backend.setting.seo.index');
     }
     
     public function save(Request $request) {
@@ -32,23 +32,23 @@ class SeoSettingController extends Controller
             'description' => 'nullable|string|max:300',
             'keywords' => 'nullable|string|max:300',
         ], $request, [
-            'author_name' => trans('mymo_core::app.author_name'),
-            'movies_title' => trans('mymo_core::app.movies_title'),
-            'movies_keywords' => trans('mymo_core::app.movies_keywords'),
-            'movies_description' => trans('mymo_core::app.movies_description'),
-            'tv_series_title' => trans('mymo_core::app.tv_series_title'),
-            'tv_series_keywords' => trans('mymo_core::app.tv_series_keywords'),
-            'tv_series_description' => trans('mymo_core::app.tv_series_description'),
-            'blog_title' => trans('mymo_core::app.blog_title'),
-            'blog_keywords' => trans('mymo_core::app.blog_keywords'),
-            'blog_description' => trans('mymo_core::app.blog_description'),
+            'author_name' => trans('mymo::app.author_name'),
+            'movies_title' => trans('mymo::app.movies_title'),
+            'movies_keywords' => trans('mymo::app.movies_keywords'),
+            'movies_description' => trans('mymo::app.movies_description'),
+            'tv_series_title' => trans('mymo::app.tv_series_title'),
+            'tv_series_keywords' => trans('mymo::app.tv_series_keywords'),
+            'tv_series_description' => trans('mymo::app.tv_series_description'),
+            'blog_title' => trans('mymo::app.blog_title'),
+            'blog_keywords' => trans('mymo::app.blog_keywords'),
+            'blog_description' => trans('mymo::app.blog_description'),
             'facebook' => 'Facebook URL',
             'twitter' => 'Twitter URL',
             'pinterest' => 'Linkedin URL',
             'youtube' => 'Youtube URL',
-            'title' => trans('mymo_core::app.home_title'),
-            'description' => trans('mymo_core::app.home_description'),
-            'keywords' => trans('mymo_core::app.keywords'),
+            'title' => trans('mymo::app.home_title'),
+            'description' => trans('mymo::app.home_description'),
+            'keywords' => trans('mymo::app.keywords'),
         ]);
     
         $configs = $request->only([
@@ -85,7 +85,7 @@ class SeoSettingController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
+            'message' => trans('mymo::app.saved_successfully'),
             'redirect' => route('admin.setting.seo'),
         ]);
     }

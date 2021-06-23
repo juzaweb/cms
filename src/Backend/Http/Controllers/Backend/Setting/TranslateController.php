@@ -12,8 +12,8 @@ class TranslateController extends BackendController
     public function index($lang) {
         Languages::where('key', '=', $lang)->firstOrFail();
         
-        return view('mymo_core::backend.setting.translate.index', [
-            'title' => trans('mymo_core::app.translations'),
+        return view('mymo::backend.setting.translate.index', [
+            'title' => trans('mymo::app.translations'),
             'lang' => $lang
         ]);
     }
@@ -53,8 +53,8 @@ class TranslateController extends BackendController
             'key' => 'required|string|exists:translation,key',
             'value' => 'required|max:250',
         ], $request, [
-            'key' => trans('mymo_core::app.key'),
-            'value' => trans('mymo_core::app.translate'),
+            'key' => trans('mymo::app.key'),
+            'value' => trans('mymo::app.translate'),
         ]);
         
         $model = Translation::firstOrNew(['key' => $request->post('key')]);
@@ -63,7 +63,7 @@ class TranslateController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
+            'message' => trans('mymo::app.saved_successfully'),
         ]);
     }
 }

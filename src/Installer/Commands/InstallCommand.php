@@ -58,9 +58,9 @@ class InstallCommand extends Command
             'email' => 'required|email|max:150',
             'password' => 'required|max:32|min:6'
         ], [], [
-            'name' => trans('mymo_core::app.name'),
-            'email' => trans('mymo_core::app.email'),
-            'password' => trans('mymo_core::app.password')
+            'name' => trans('mymo::app.name'),
+            'email' => trans('mymo::app.email'),
+            'password' => trans('mymo::app.password')
         ]);
 
         if ($validator->fails()) {

@@ -8,7 +8,7 @@ class RedirectController extends FileManagerController
 {
     public function showFile($file_path)
     {
-        $storage = Storage::disk('public');
+        $storage = Storage::disk(config('mymo.filemanager.disk'));
 
         if (!$storage->exists($file_path)) {
             abort(404);

@@ -13,7 +13,7 @@
  */
 
 Route::group(['prefix' => 'file-manager'], function () {
-    Route::get('/', 'FileManager\FilemanagerController@show');
+    Route::get('/', 'FileManager\FilemanagerController@index');
 
     Route::get('/errors', 'FileManager\FilemanagerController@getErrors');
 

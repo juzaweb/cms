@@ -27,9 +27,9 @@ class MymoBackendServiceProvider extends ServiceProvider
         $this->bootMiddlewares();
         $this->bootPublishes();
         HookAction::loadActionForm(__DIR__ . '/../actions');
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mymo_core');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mymo');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'mymo_core');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'mymo');
     }
 
     public function register()

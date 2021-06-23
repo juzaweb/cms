@@ -3,7 +3,6 @@
 namespace Mymo\Backend\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
-use Mymo\Core\Models\User;
 use Closure;
 
 class Admin

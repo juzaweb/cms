@@ -4,11 +4,11 @@
     <link rel="shortcut icon" href="{{ asset('mymo/styles/images/brand/favicon.ico') }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{{ trans('mymo_core::app.customize_theme') }}</title>
-    <meta name="description" content="{{ trans('mymo_core::app.customize_theme') }}">
+    <title>{{ trans('mymo::app.customize_theme') }}</title>
+    <meta name="description" content="{{ trans('mymo::app.customize_theme') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    @include('mymo_core::components.mymo_langs')
+    @include('mymo::components.mymo_langs')
 
     <link rel="stylesheet" href="{{ asset('mymo/styles/css/theme-editor.css') }}">
     <!--[if lt IE 9]>
@@ -56,7 +56,7 @@
         <section class="theme-editor__index" component="UI.PanelContainer">
                 <header class="te-top-bar">
                     {{--<div class="te-top-bar__branding">
-                        <a title="{{ trans('mymo_core::app.theme') }}" aria_label="{{ trans('mymo_core::app.theme') }}" class="te-brand-link" data-no-turbolink="true" href="{{ route('vendor.admin.menu') }}">
+                        <a title="{{ trans('mymo::app.theme') }}" aria_label="{{ trans('mymo::app.theme') }}" class="te-brand-link" data-no-turbolink="true" href="{{ route('vendor.admin.menu') }}">
                             <span class="te-brand-logo" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 42">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-sapo"></use>
                             </span>
@@ -64,7 +64,7 @@
                     </div>--}}
                     <div class="te-top-bar__list">
                         <div class="te-top-bar__item te-top-bar__item--fill">
-                            <span class="te-theme-name"><a href="{{ route('admin.design.themes') }}" data-no-turbolink="true" data-turbolinks="false">‹‹ {{ trans('mymo_core::app.back_to_theme') }}</a></span>
+                            <span class="te-theme-name"><a href="{{ route('admin.design.themes') }}" data-no-turbolink="true" data-turbolinks="false">‹‹ {{ trans('mymo::app.back_to_theme') }}</a></span>
                         </div>
                         <div class="te-top-bar__item te-status-indicator--live mobile-only">
                             Live
@@ -72,7 +72,7 @@
                     </div>
                 </header>
 
-                @include('mymo_core::backend.design.editor.config_option')
+                @include('mymo::backend.design.editor.config_option')
 
             </section>
     </div>
@@ -95,7 +95,7 @@
         }
     </style>
 
-    @include('mymo_core::backend.design.editor.preview_page')
+    @include('mymo::backend.design.editor.preview_page')
 
     <div class="theme-editor__spinner" component="UI.Spinner">
         <div class="next-spinner">

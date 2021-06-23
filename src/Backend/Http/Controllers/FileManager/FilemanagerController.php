@@ -3,45 +3,32 @@
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class FilemanagerController extends Controller
 {
     protected static $success_response = 'OK';
     
-    public function __construct()
+    public function index()
     {
-    
-    }
-    
-    public function show() {
         $type = $this->getType();
-        if ($type == 1) {
-            $mime_types = [
-                'image/jpeg',
-                'image/pjpeg',
-                'image/png',
-                'image/gif',
-                'image/svg+xml',
-            ];
+        $mimeTypes = config("mymo.filemanager.types.{$type}.valid_mime");
+
+        if (empty($mimeTypes)) {
+            return abort(404);
         }
-        else {
-            $mime_types = [
-                'audio/mpeg',
-                'video/mp4',
-                'video/mpeg',
-            ];
-        }
-        
-        return view('mymo_core::filemanager.index', [
-            'mime_types' => $mime_types
+
+        return view('mymo::filemanager.index', [
+            'mimeTypes' => $mimeTypes
         ]);
     }
     
-    public function getErrors() {
+    public function getErrors()
+    {
         $arr_errors = [];
 
         if (! extension_loaded('gd') && ! extension_loaded('imagick')) {
-            array_push($arr_errors, trans('lfm.message_extension_not_found'));
+            array_push($arr_errors, trans('mymo::filemanager.message_extension_not_found'));
         }
 
         if (! extension_loaded('exif')) {
@@ -55,20 +42,19 @@ class FilemanagerController extends Controller
         return $arr_errors;
     }
     
-    public function error($error_type, $variables = []) {
-        throw new \Exception(trans('lfm.error_' . $error_type, $variables));
+    public function error($error_type, $variables = [])
+    {
+        throw new \Exception(trans('mymo::filemanager.error_' . $error_type, $variables));
     }
     
-    protected function getType() {
-        $type = strtolower(\request()->get('type'));
-        if (in_array($type, ['image', 'images'])) {
-            return 1;
-        }
-        
-        return 2;
+    protected function getType()
+    {
+        $type = strtolower(request()->get('type'));
+        return Str::singular($type);
     }
     
-    protected function getPath($url) {
+    protected function getPath($url)
+    {
         $explode = explode('uploads/', $url);
         if (isset($explode[1])) {
             return $explode[1];
@@ -76,7 +62,8 @@ class FilemanagerController extends Controller
         return $url;
     }
     
-    protected function isDirectory($file) {
+    protected function isDirectory($file)
+    {
         if (is_numeric($file)) {
             return true;
         }

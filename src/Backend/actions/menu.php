@@ -15,7 +15,7 @@
 use Mymo\Core\Facades\HookAction;
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.dashboard'),
+    trans('mymo::app.dashboard'),
     'dashboard',
     [
         'icon' => 'fa fa-dashboard',
@@ -24,7 +24,7 @@ HookAction::addAdminMenu(
 );
 
 /*HookAction::addAdminMenu(
-    'mymo_core::app.dashboard',
+    'mymo::app.dashboard',
     'dashboard',
     [
         'icon' => 'fa fa-dashboard',
@@ -34,7 +34,7 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    'mymo_core::app.updates',
+    'mymo::app.updates',
     'updates',
     [
         'icon' => 'fa fa-refresh',
@@ -44,7 +44,7 @@ HookAction::addAdminMenu(
 );
 */
 HookAction::addAdminMenu(
-    trans('mymo_core::app.appearance'),
+    trans('mymo::app.appearance'),
     'appearance',
     [
         'icon' => 'fa fa-paint-brush',
@@ -53,7 +53,7 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.themes'),
+    trans('mymo::app.themes'),
     'themes',
     [
         'icon' => 'fa fa-paint-brush',
@@ -63,7 +63,7 @@ HookAction::addAdminMenu(
 );
 
 /*HookAction::addAdminMenu(
-    trans('mymo_core::app.menu'),
+    trans('mymo::app.menu'),
     'menu',
     [
         'icon' => 'fa fa-list',
@@ -73,7 +73,7 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.editor'),
+    trans('mymo::app.editor'),
     'editor',
     [
         'icon' => 'fa fa-edit',
@@ -84,7 +84,7 @@ HookAction::addAdminMenu(
 );*/
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.plugins'),
+    trans('mymo::app.plugins'),
     'plugins',
     [
         'icon' => 'fa fa-plug',
@@ -93,7 +93,7 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.users'),
+    trans('mymo::app.users'),
     'users',
     [
         'icon' => 'fa fa-users',
@@ -102,7 +102,7 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.setting'),
+    trans('mymo::app.setting'),
     'setting',
     [
         'icon' => 'fa fa-cogs',
@@ -111,7 +111,7 @@ HookAction::addAdminMenu(
 );
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.general_setting'),
+    trans('mymo::app.general_setting'),
     'setting.system',
     [
         'icon' => 'fa fa-cogs',
@@ -121,7 +121,7 @@ HookAction::addAdminMenu(
 );
 
 /*HookAction::addAdminMenu(
-    trans('mymo_core::app.translations'),
+    trans('mymo::app.translations'),
     'setting.language',
     [
         'icon' => 'fa fa-language',
@@ -131,11 +131,20 @@ HookAction::addAdminMenu(
 );*/
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.logs'),
+    trans('mymo::app.logs'),
     'logs',
     [
         'icon' => 'fa fa-users',
         'position' => 99
+    ]
+);
+
+HookAction::addAdminMenu(
+    trans('mymo::app.notifications'),
+    'notification',
+    [
+        'icon' => 'fa fa-bell',
+        'position' => 100
     ]
 );
 

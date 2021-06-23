@@ -1,7 +1,8 @@
 {
     "name": "mymocms/mymocms",
-    "description": "Mymo is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again.",
+    "description": "Mymo is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again.",
     "keywords": [
+      "laravel",
       "laravel cms",
       "mymo cms",
       "laravel cms like wordpress",
@@ -26,7 +27,6 @@
         "guzzlehttp/guzzle": "^6.5",
         "hassankhan/config": "^2.2",
         "intervention/image": "^2.5",
-        "ip2location/ip2location-php": "^8.3",
         "laravelium/sitemap": "6.*",
         "pion/laravel-chunk-upload": "^1.4",
         "sokil/php-vast": "^2.0",

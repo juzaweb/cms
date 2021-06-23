@@ -12,8 +12,8 @@ class LanguageController extends BackendController
 {
     public function index()
     {
-        return view('mymo_core::backend.setting.languages.index', [
-            'title' => trans('mymo_core::app.languages'),
+        return view('mymo::backend.setting.languages.index', [
+            'title' => trans('mymo::app.languages'),
         ]);
     }
     
@@ -61,8 +61,8 @@ class LanguageController extends BackendController
             'key' => 'required|string|max:3|min:2|alpha|unique:languages,key',
             'name' => 'required|string|max:250|unique:languages,name',
         ], $request, [
-            'key' => trans('mymo_core::app.key'),
-            'name' => trans('mymo_core::app.name'),
+            'key' => trans('mymo::app.key'),
+            'name' => trans('mymo::app.name'),
         ]);
         
         $model = Languages::firstOrNew(['id' => $request->post('id')]);
@@ -78,7 +78,7 @@ class LanguageController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
+            'message' => trans('mymo::app.saved_successfully'),
             'redirect' => route('admin.setting.languages'),
         ]);
     }
@@ -87,7 +87,7 @@ class LanguageController extends BackendController
         $this->validateRequest([
             'ids' => 'required',
         ], $request, [
-            'ids' => trans('mymo_core::app.genres')
+            'ids' => trans('mymo::app.genres')
         ]);
         
         $ids = $request->post('ids');
@@ -102,7 +102,7 @@ class LanguageController extends BackendController
         
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.deleted_successfully'),
+            'message' => trans('mymo::app.deleted_successfully'),
             'redirect' => route('admin.setting.languages'),
         ]);
     }
@@ -111,7 +111,7 @@ class LanguageController extends BackendController
         $this->validateRequest([
             'id' => 'required|exists:languages,id',
         ], $request, [
-            'id' => trans('mymo_core::app.language')
+            'id' => trans('mymo::app.language')
         ]);
         
         Languages::where('id', '=', $request->post('id'))
@@ -126,7 +126,7 @@ class LanguageController extends BackendController
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
+            'message' => trans('mymo::app.saved_successfully'),
         ]);
     }
     
@@ -135,7 +135,7 @@ class LanguageController extends BackendController
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.sync_successfully'),
+            'message' => trans('mymo::app.sync_successfully'),
             'redirect' => route('admin.setting.languages'),
         ]);
     }

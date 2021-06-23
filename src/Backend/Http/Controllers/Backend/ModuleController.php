@@ -14,8 +14,8 @@ class ModuleController extends BackendController
     
     public function index()
     {
-        return view('mymo_core::backend.module.index', [
-            'title' => trans('mymo_core::app.modules'),
+        return view('mymo::backend.module.index', [
+            'title' => trans('mymo::app.modules'),
         ]);
     }
     
@@ -81,7 +81,7 @@ class ModuleController extends BackendController
         }
         
         return $this->success([
-            'message' => trans('mymo_core::app.successfully'),
+            'message' => trans('mymo::app.successfully'),
             'redirect' => route('admin.module')
         ]);
     }

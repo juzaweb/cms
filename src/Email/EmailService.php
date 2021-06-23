@@ -109,7 +109,7 @@ class EmailService
                 'data' => $data,
             ]);
 
-            $method = config('email-template.method');
+            $method = config('mymo.email.method');
             switch ($method) {
                 case 'sync':
                     (new SendEmailService($emailList))->send();

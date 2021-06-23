@@ -36,10 +36,10 @@ class AdminController extends Controller
             'password' => 'required|max:32|min:8|confirmed',
             'password_confirmation' => 'required|max:32|min:8',
         ], [], [
-            'name' => trans('mymo_core::app.name'),
-            'email' => trans('mymo_core::app.email'),
-            'password' => trans('mymo_core::app.password'),
-            'password_confirmation' => trans('mymo_core::app.confirm_password')
+            'name' => trans('mymo::app.name'),
+            'email' => trans('mymo::app.email'),
+            'password' => trans('mymo::app.password'),
+            'password_confirmation' => trans('mymo::app.confirm_password')
         ]);
 
         if ($validator->fails()) {

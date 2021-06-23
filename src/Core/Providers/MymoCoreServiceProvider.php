@@ -1,5 +1,7 @@
 <?php
 /**
+ *
+ *
  * @package    mymocms/mymocms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/mymocms/mymocms
@@ -44,21 +46,19 @@ class MymoCoreServiceProvider extends ServiceProvider
     {
         $this->registerProviders();
         $this->registerSingleton();
-        $this->mergeConfigFrom(__DIR__ . '/../config/mymo_core.php', 'mymo_core');
+        $this->mergeConfigFrom(__DIR__ . '/../../../config/mymo.php', 'mymo');
     }
 
     protected function bootMigrations()
     {
         $mainPath = __DIR__ . '/../../../database/migrations';
-        $directories = glob($mainPath . '/*' , GLOB_ONLYDIR);
-        $paths = array_merge([$mainPath], $directories);
-        $this->loadMigrationsFrom($paths);
+        $this->loadMigrationsFrom($mainPath);
     }
 
     protected function bootPublishes()
     {
         $this->publishes([
-            __DIR__ . '/../config/mymo_core.php' => base_path('config/mymo_core.php'),
+            __DIR__ . '/../../../config/mymo.php' => base_path('config/mymo.php'),
         ], 'mymo_config');
     }
 
@@ -73,7 +73,6 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(MymoPerformanceServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
         $this->app->register(FilemanagerServiceProvider::class);
-        //$this->app->register(TranslatableServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(PostTypeServiceProvider::class);
         $this->app->register(NotificationServiceProvider::class);

@@ -88,7 +88,7 @@ class Notification
             ],
         ]);
 
-        switch (config('notification.method')) {
+        switch (config('mymo.notification.method')) {
             case 'sync':
                 (new SendNotification($notification))->send();
                 break;

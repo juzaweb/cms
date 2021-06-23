@@ -43,15 +43,15 @@ class PostDatatable
     {
         return [
             'thumbnail' => [
-                'label' => trans('mymo_core::app.thumbnail'),
+                'label' => trans('mymo::app.thumbnail'),
                 'formatter' => [$this, 'thumbnailFormatter']
             ],
             'title' => [
-                'label' => trans('mymo_core::app.title'),
+                'label' => trans('mymo::app.title'),
                 'formatter' => [$this, 'thumbnailFormatter']
             ],
-            'created_at' => trans('mymo_core::app.created_at'),
-            'status' => trans('mymo_core::app.status'),
+            'created_at' => trans('mymo::app.created_at'),
+            'status' => trans('mymo::app.status'),
         ];
     }
 

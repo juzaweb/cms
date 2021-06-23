@@ -2,6 +2,8 @@
 
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Mymo\Core\Models\Files;
 use Illuminate\Support\Facades\Log;
@@ -14,12 +16,7 @@ use Illuminate\Http\UploadedFile;
 
 class UploadController extends FileManagerController
 {
-    protected $errors;
-
-    public function __construct() {
-        parent::__construct();
-        $this->errors = [];
-    }
+    protected $errors = [];
     
     public function upload(Request $request)
     {
@@ -28,8 +25,7 @@ class UploadController extends FileManagerController
         if (empty($folder_id)) {
             $folder_id = null;
         }
-        
-        $error_bag = [];
+
         $new_filename = null;
         $new_path = null;
     
@@ -42,7 +38,7 @@ class UploadController extends FileManagerController
             $save = $receiver->receive();
             if ($save->isFinished()) {
                 $this->saveFile($save->getFile(), $folder_id);
-                return $this->response($error_bag);
+                return $this->response($this->errors);
             }
     
             $handler = $save->handler();
@@ -53,47 +49,78 @@ class UploadController extends FileManagerController
             ]);
         
         } catch (\Exception $e) {
-            Log::error($e->getMessage(), [
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-                'trace' => $e->getTraceAsString()
-            ]);
-        
-            array_push($error_bag, $e->getMessage());
-            return $this->response($error_bag);
+            Log::error($e);
+            array_push($this->errors, $e->getMessage());
+            return $this->response($this->errors);
         }
     }
     
     protected function saveFile(UploadedFile $file, $folder_id) {
+        if (!$this->validateFile($file)) {
+            return $this->response($this->errors);
+        }
+
         $filename = $this->createFilename($file);
-        $storage = Storage::disk('public');
+        $storage = Storage::disk(config('mymo.filemanager.disk'));
         $new_path = $storage->putFileAs(date('Y/m/d'), $file, $filename);
     
         if ($new_path) {
-            $model = new Files();
-            $model->name = $file->getClientOriginalName();
-            $model->path = $new_path;
-            $model->type = $this->getType();
-            $model->mime_type = $file->getClientMimeType();
-            $model->extension = $file->getClientOriginalExtension();
-            $model->size = $file->getSize();
-            $model->folder_id = $folder_id;
-            $model->user_id = \Auth::id();
-            $model->save();
+            DB::beginTransaction();
+            try {
+                $model = new Files();
+                $model->name = $file->getClientOriginalName();
+                $model->path = $new_path;
+                $model->type = $this->getType();
+                $model->mime_type = $file->getClientMimeType();
+                $model->extension = $file->getClientOriginalExtension();
+                $model->size = $file->getSize();
+                $model->folder_id = $folder_id;
+                $model->user_id = Auth::id();
+                $model->save();
+
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
         }
         
         return $new_path;
     }
     
-    protected function createFilename(UploadedFile $file) {
+    protected function createFilename(UploadedFile $file)
+    {
         $filename = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
         $new_filename = Str::slug(basename($filename, "." . $extension)) .'-'. time() .'-'. Str::random(10) .'.' . $extension;
         return $new_filename;
     }
     
-    protected function response($error_bag) {
+    protected function response($error_bag)
+    {
         $response = count($error_bag) > 0 ? $error_bag : parent::$success_response;
         return response()->json($response);
+    }
+
+    protected function validateFile(UploadedFile $file)
+    {
+        $type = $this->getType();
+        $config = config('mymo.filemanager.types.' . $type);
+        if (empty($config)) {
+            array_push($this->errors, 'File type not sopport');
+            return false;
+        }
+
+        if (!in_array($file->getClientMimeType(), $config['valid_mime'])) {
+            array_push($this->errors, trans('mymo::filemanager.error-mime'));
+            return false;
+        }
+
+        if ($file->getSize() > $config['max_size'] * 1024 * 1024) {
+            array_push($this->errors, trans('mymo::filemanager.error-size'));
+            return false;
+        }
+
+        return true;
     }
 }

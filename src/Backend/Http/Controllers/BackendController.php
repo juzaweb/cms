@@ -34,7 +34,7 @@ class BackendController extends Controller
             }
         }
 
-        if (config('mymo_core::app.demo', false) == 'true' && \Auth::id() != 1) {
+        if (config('mymo::app.demo', false) == 'true' && \Auth::id() != 1) {
             if (\request()->isMethod('post')) {
                 if (\request()->is('admin-cp/*')) {
                     return response()->json([
@@ -55,7 +55,7 @@ class BackendController extends Controller
         $types = PostType::getPostTypes();
         foreach ($types as $key => $type) {
             add_action('post_type.'.$key.'.form.rigth', function ($model) use ($key) {
-                echo view('mymo_core::components.taxonomies', [
+                echo view('mymo::components.taxonomies', [
                     'postType' => $key,
                     'model' => $model
                 ])->render();

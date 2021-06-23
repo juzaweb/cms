@@ -1,8 +1,8 @@
-@extends('mymo_core::layouts.backend')
+@extends('mymo::layouts.backend')
 
 @section('content')
 
-    @component('mymo_core::components.form_resource', [
+    @component('mymo::components.form_resource', [
         'method' => $model->id ? 'put' : 'post',
         'action' =>  $model->id ?
             route('admin.posts.update', [$model->id]) :
@@ -12,34 +12,34 @@
             <div class="col-md-8">
 
                 <div class="form-group">
-                    <label class="col-form-label" for="title">@lang('mymo_core::app.title')</label>
+                    <label class="col-form-label" for="title">@lang('mymo::app.title')</label>
                     <input type="text" name="title" class="form-control" id="title" value="{{ $model->title }}" autocomplete="off" required>
                 </div>
 
-                @include('mymo_core::components.form_ckeditor', [
+                @include('mymo::components.form_ckeditor', [
                     'name' => 'content',
                     'value' => $model->content,
                 ])
 
-                @component('mymo_core::components.form_select', [
-                    'label' => trans('mymo_core::app.status'),
+                @component('mymo::components.form_select', [
+                    'label' => trans('mymo::app.status'),
                     'name' => 'status',
                     'value' => $model->status,
                     'options' => [
-                        'public' => trans('mymo_core::app.public'),
-                        'private' => trans('mymo_core::app.private'),
-                        'draft' => trans('mymo_core::app.draft'),
+                        'public' => trans('mymo::app.public'),
+                        'private' => trans('mymo::app.private'),
+                        'draft' => trans('mymo::app.draft'),
                     ],
                 ])
                 @endcomponent
 
                 @do_action('post_type.'. $postType .'.form.left')
-                {{--@include('mymo_core::backend.seo_form')--}}
+                {{--@include('mymo::backend.seo_form')--}}
             </div>
 
             <div class="col-md-4">
-                @component('mymo_core::components.form_image', [
-                    'label' => trans('mymo_core::app.thumbnail'),
+                @component('mymo::components.form_image', [
+                    'label' => trans('mymo::app.thumbnail'),
                     'name' => 'thumbnail',
                     'value' => $model->thumbnail,
                 ])@endcomponent

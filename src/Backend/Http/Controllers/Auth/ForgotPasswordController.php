@@ -19,8 +19,8 @@ class ForgotPasswordController extends Controller
     {
         do_action('auth.forgot-password.index');
         
-        return view('mymo_core::auth.forgot_password', [
-            'title' => trans('mymo_core::app.forgot_password')
+        return view('mymo::auth.forgot_password', [
+            'title' => trans('mymo::app.forgot_password')
         ]);
     }
     
