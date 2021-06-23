@@ -48,7 +48,8 @@
         "files": [
             "src/Core/Helpers/helpers.php",
             "src/Plugin/helpers.php",
-            "src/Installer/Helpers/functions.php"
+            "src/Installer/Helpers/functions.php",
+            "src/Theme/Helpers/helpers.php"
         ]
     },
     "extra": {

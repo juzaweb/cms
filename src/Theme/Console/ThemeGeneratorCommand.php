@@ -14,7 +14,7 @@ class ThemeGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'theme:make {name?}';
+    protected $signature = 'theme:make {name}';
 
     /**
      * The console command description.
@@ -87,18 +87,8 @@ class ThemeGeneratorCommand extends Command
      */
     public function handle()
     {
-        $this->themePath = $this->config->get('theme.theme_path');
+        $this->themePath = $this->config->get('mymo.theme.path');
         $this->theme['name'] = strtolower($this->argument('name'));
-
-        if (empty($this->theme['name'])) {
-            $this->theme['name'] = $this->ask('What is your theme name?');
-            if (empty($this->theme['name'])) {
-                $this->error('Theme is not Generated, Theme name required !!!');
-
-                return;
-            }
-        }
-
         $this->init();
     }
 
@@ -116,15 +106,11 @@ class ThemeGeneratorCommand extends Command
             exit();
         }
 
-        $this->consoleAsk();
-
-        $this->themeFolders = $this->config->get('theme.folders');
-        $this->themeStubPath = $this->config->get('theme.stubs.path');
-
-        $themeStubFiles = $this->config->get('theme.stubs.files');
-        $themeStubFiles['theme'] = $this->config->get('theme.config.name');
-        $themeStubFiles['changelog'] = $this->config->get('theme.config.changelog');
-
+        $this->themeFolders = $this->getThemeFolders();
+        $this->themeStubPath = $this->getThemeStubPath();
+        $themeStubFiles = $this->getThemeStubFiles();
+        $themeStubFiles['theme'] = 'theme.json';
+        $themeStubFiles['changelog'] = 'changelog.yml';
         $this->makeDir($createdThemePath);
 
         foreach ($this->themeFolders as $key => $folder) {
@@ -144,7 +130,6 @@ class ThemeGeneratorCommand extends Command
     public function consoleAsk()
     {
         $this->theme['title'] = $this->ask('What is theme title?');
-
         $this->theme['description'] = $this->ask('What is theme description?', false);
         $this->theme['description'] = !$this->theme['description'] ? '' : Str::title($this->theme['description']);
 
@@ -179,7 +164,7 @@ class ThemeGeneratorCommand extends Command
             } elseif ($filename == 'css' || $filename == 'js') {
                 $this->theme[$filename] = ltrim(
                     $storePath,
-                    rtrim($this->config->get('theme.folders.assets'), '/').'/'
+                    rtrim('assets', '/').'/'
                 );
             }
             $themeStubFile = $this->themeStubPath.'/'.$filename.'.stub';
@@ -208,12 +193,12 @@ class ThemeGeneratorCommand extends Command
      * @param string $storePath
      *
      * @return void
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     protected function makeFile($file, $storePath)
     {
         if ($this->files->exists($file)) {
             $content = $this->replaceStubs($this->files->get($file));
-
             $this->files->put($storePath, $content);
         }
     }
@@ -249,7 +234,35 @@ class ThemeGeneratorCommand extends Command
         ];
 
         $replaceContents = str_replace($mainString, $replaceString, $contents);
-
         return $replaceContents;
+    }
+
+    protected function getThemeStubPath()
+    {
+        return __DIR__ . '/../../../stubs/theme';
+    }
+
+    protected function getThemeStubFiles()
+    {
+        return [
+            'css'    => 'assets/css/app.css',
+            'layout' => 'views/layouts/master.blade.php',
+            'page'   => 'views/welcome.blade.php',
+            'lang'   => 'lang/en/content.php',
+        ];
+    }
+
+    protected function getThemeFolders()
+    {
+        return [
+            'assets'  => 'assets',
+            'views'   => 'views',
+            'lang'    => 'lang',
+            'lang/en' => 'lang/en',
+            'css' => 'assets/css',
+            'js'  => 'assets/js',
+            'img' => 'assets/images',
+            'layouts' => 'views/layouts',
+        ];
     }
 }

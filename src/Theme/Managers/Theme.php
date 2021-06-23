@@ -2,11 +2,11 @@
 
 namespace Mymo\Theme\Managers;
 
+use Noodlehaus\Config;
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\View\ViewFinderInterface;
-use Noodlehaus\Config;
 use Mymo\Theme\Contracts\ThemeContract;
 use Mymo\Theme\Exceptions\ThemeNotFoundException;
 
