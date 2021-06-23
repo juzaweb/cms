@@ -2,17 +2,18 @@
 
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
+use Illuminate\Http\Request;
 use Mymo\Core\Models\Files;
 use Mymo\Core\Models\Folders;
 
 class DeleteController extends FileManagerController
 {
-    public function delete()
+    public function delete(Request $request)
     {
-        $item_names = request('items');
+        $itemNames = $request->post('items');
         $errors = [];
 
-        foreach ($item_names as $file) {
+        foreach ($itemNames as $file) {
             if (is_null($file)) {
                 array_push($errors, parent::error('folder-name'));
                 continue;
@@ -23,9 +24,10 @@ class DeleteController extends FileManagerController
                 Folders::find($file)->deleteFolder();
             } else {
                 $file_path = $this->getPath($file);
-                Files::where('path', '=', $file_path)->first()->deleteFile();
+                Files::where('path', '=', $file_path)
+                    ->first()
+                    ->delete();
             }
-            
         }
 
         if (count($errors) > 0) {

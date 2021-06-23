@@ -3,6 +3,7 @@
 namespace Mymo\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Mymo\Core\Models\Files
@@ -44,8 +45,9 @@ class Files extends Model
         'mime_type',
     ];
     
-    public function deleteFile() {
-        \Storage::disk('public')->delete($this->path);
-        return $this->delete();
+    public function delete()
+    {
+        Storage::disk('public')->delete($this->path);
+        return parent::delete();
     }
 }

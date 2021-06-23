@@ -24,7 +24,7 @@ class ItemsController extends FileManagerController
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
     
-        $storage = Storage::disk('public');
+        $storage = Storage::disk(config('mymo.filemanager.disk'));
         $items = [];
         foreach ($folders as $folder) {
             $items[] = [
@@ -40,12 +40,12 @@ class ItemsController extends FileManagerController
         
         foreach ($files as $file) {
             $items[] = [
-                'icon' => $file->type == 1 ? 'fa-image' : 'fa-file',
+                'icon' => $file->type == 'image' ? 'fa-image' : 'fa-file',
                 'is_file' => true,
                 'path' => $file->path,
                 'is_image' => $file->type == 1 ? true : false,
                 'name' => $file->name,
-                'thumb_url' => $file->type == 1 ? $storage->url($file->path) : null,
+                'thumb_url' => $file->type == 'image' ? $storage->url($file->path) : null,
                 'time' => strtotime($file->created_at),
                 'url' => $storage->url($file->path),
             ];
