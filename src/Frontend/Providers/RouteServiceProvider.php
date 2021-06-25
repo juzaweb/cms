@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Theme\Providers;
+namespace Mymo\Frontend\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;

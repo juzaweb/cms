@@ -17,6 +17,21 @@ return [
 
     'plugin' => [
         /**
+         * Enable plugins
+         *
+         * Default: true
+         */
+        'enable' => true,
+
+        /**
+         * Enable autoload plugins
+         * If disable, you can require plugin by composer
+         *
+         * Default: true
+         */
+        'autoload' => true,
+
+        /**
          * Plugins path
          *
          * This path used for save the generated plugin. This path also will added
@@ -33,6 +48,12 @@ return [
     ],
 
     'theme' => [
+        /**
+         * Enable themes
+         *
+         * Default: true
+         */
+        'enable' => true,
         /**
          * Themes path
          *

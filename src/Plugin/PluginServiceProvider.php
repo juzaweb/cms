@@ -2,7 +2,7 @@
 
 namespace Mymo\Plugin;
 
-use Mymo\Plugin\Contracts\RepositoryInterface;
+use Mymo\Core\Facades\HookAction;
 use Mymo\Plugin\Exceptions\InvalidActivatorClass;
 use Mymo\Plugin\Support\Stub;
 use Composer\Autoload\ClassLoader;
@@ -14,6 +14,7 @@ class PluginServiceProvider extends ModulesServiceProvider
      */
     public function boot()
     {
+        HookAction::loadActionForm(__DIR__ . '/actions');
         $this->registerModules();
     }
 
@@ -23,10 +24,13 @@ class PluginServiceProvider extends ModulesServiceProvider
     public function register()
     {
         $this->registerNamespaces();
-        $this->pluginAutoload();
         $this->registerServices();
         $this->setupStubPath();
         $this->registerProviders();
+
+        if (config('mymo.plugin.autoload')) {
+            $this->pluginAutoload();
+        }
     }
 
     /**

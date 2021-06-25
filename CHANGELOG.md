@@ -1,3 +1,11 @@
+## v1.1.7
+- File manager config
+- Theme config
+- Fix module commands
+- Note for upgrade:
+	- Change type files/folders to string (default: image)
+	- Update your database if you upgrade
+
 ## v1.1.6.1
 - Fix load hook actions
 

@@ -52,15 +52,7 @@ HookAction::addAdminMenu(
     ]
 );
 
-HookAction::addAdminMenu(
-    trans('mymo::app.themes'),
-    'themes',
-    [
-        'icon' => 'fa fa-paint-brush',
-        'position' => 1,
-        'parent' => 'appearance',
-    ]
-);
+
 
 /*HookAction::addAdminMenu(
     trans('mymo::app.menu'),
@@ -82,15 +74,6 @@ HookAction::addAdminMenu(
         'turbolinks' => false,
     ]
 );*/
-
-HookAction::addAdminMenu(
-    trans('mymo::app.plugins'),
-    'plugins',
-    [
-        'icon' => 'fa fa-plug',
-        'position' => 50
-    ]
-);
 
 HookAction::addAdminMenu(
     trans('mymo::app.users'),
@@ -139,13 +122,6 @@ HookAction::addAdminMenu(
     ]
 );
 
-HookAction::addAdminMenu(
-    trans('mymo::app.notifications'),
-    'notification',
-    [
-        'icon' => 'fa fa-bell',
-        'position' => 100
-    ]
-);
+
 
 
