@@ -3,14 +3,14 @@
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Support\Facades\DB;
-use Mymo\Core\Models\Folders;
+use Mymo\Core\Models\Folder;
 
 class FolderController extends FileManagerController
 {
     public function getFolders()
     {
         $childrens = [];
-        $folders = Folders::whereNull('folder_id')
+        $folders = Folder::whereNull('folder_id')
             ->where('type', '=', $this->getType())
             ->get(['id', 'name']);
         
@@ -45,7 +45,7 @@ class FolderController extends FileManagerController
             return $this->error('folder-name');
         }
 
-        if (Folders::folderExists($folder_name, $parent_id)) {
+        if (Folder::folderExists($folder_name, $parent_id)) {
             return $this->error('folder-exist');
         }
 

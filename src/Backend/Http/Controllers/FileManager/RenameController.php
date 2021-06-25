@@ -3,7 +3,7 @@
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use Mymo\Core\Models\Files;
-use Mymo\Core\Models\Folders;
+use Mymo\Core\Models\Folder;
 
 class RenameController extends FileManagerController
 {
@@ -23,7 +23,7 @@ class RenameController extends FileManagerController
         }
 
         if ($is_directory) {
-            Folders::where('id', '=', $file)
+            Folder::where('id', '=', $file)
                 ->update([
                     'name' => $new_name
                 ]);

@@ -4,7 +4,7 @@ namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Http\Request;
 use Mymo\Core\Models\Files;
-use Mymo\Core\Models\Folders;
+use Mymo\Core\Models\Folder;
 
 class DeleteController extends FileManagerController
 {
@@ -21,7 +21,7 @@ class DeleteController extends FileManagerController
     
             $is_directory = $this->isDirectory($file);
             if ($is_directory) {
-                Folders::find($file)->deleteFolder();
+                Folder::find($file)->deleteFolder();
             } else {
                 $file_path = $this->getPath($file);
                 Files::where('path', '=', $file_path)
