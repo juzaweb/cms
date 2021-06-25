@@ -2,7 +2,7 @@
 
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
-use Mymo\Core\Models\Files;
+use Mymo\Core\Models\File;
 use Mymo\Core\Models\Folder;
 
 class RenameController extends FileManagerController
@@ -30,7 +30,7 @@ class RenameController extends FileManagerController
         } else {
             $file_path = explode('uploads/', $file)[1];
             
-            Files::where('path', '=', $file_path)
+            File::where('path', '=', $file_path)
                 ->update([
                     'name' => $new_name
                 ]);

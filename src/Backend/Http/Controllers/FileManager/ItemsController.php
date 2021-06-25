@@ -3,7 +3,7 @@
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Support\Facades\Storage;
-use Mymo\Core\Models\Files;
+use Mymo\Core\Models\File;
 use Mymo\Core\Models\Folder;
 
 class ItemsController extends FileManagerController
@@ -20,7 +20,7 @@ class ItemsController extends FileManagerController
             ->where('type', '=', $file_type)
             ->orderBy('name', 'ASC')
             ->get(['id', 'name']);
-        $files = Files::where('folder_id', '=', $working_dir)
+        $files = File::where('folder_id', '=', $working_dir)
             ->where('type', '=', $file_type)
             ->orderBy('id', 'DESC')
             ->paginate($perPage);

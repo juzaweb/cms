@@ -15,6 +15,7 @@
 namespace Mymo\Backend\Http\Controllers\Backend;
 
 use Mymo\Backend\Http\Controllers\BackendController;
+use Mymo\Core\Models\File;
 use Mymo\Core\Models\Folder;
 
 class MediaController extends BackendController
@@ -33,6 +34,8 @@ class MediaController extends BackendController
             $this->addBreadcrumbFolder($folder);
             $title = $folder->name;
         }
+
+
 
         return view('mymo::backend.media.index', [
             'fileTypes' => $this->getFileTypes(),
@@ -96,5 +99,81 @@ class MediaController extends BackendController
                 $this->addBreadcrumbFolder($parent);
             }
         }
+    }
+
+    /**
+     * Get files in folder
+     *
+     * @param Collection $sQuery
+     * @return array
+     */
+    protected function getFiles($sQuery)
+    {
+        $result = [];
+        $fileIcon = $this->getFileIcon();
+        $query = File::whereFolderId($this->folderId);
+
+        if ($sQuery->get('type')) {
+            $query->where('type', '=', $sQuery->get('type'));
+        }
+
+        $files = $query->get();
+        foreach ($files as $row) {
+            $fileUrl = FileManager::url($row->path);
+            $thumb = FileManager::isImage($row) ? $fileUrl : null;
+            $icon = isset($fileIcon[strtolower($row->extension)]) ?
+                $fileIcon[strtolower($row->extension)] : 'fa-file-o';
+
+            $result[] = (object) [
+                'id' => $row->id,
+                'name' => $row->name,
+                'url' => $fileUrl,
+                'size' => $row->size,
+                'updated' => strtotime($row->updated_at),
+                'path' => $row->path,
+                'time' => (string) $row->created_at,
+                'type' => $row->type,
+                'icon' => $icon,
+                'thumb' => $thumb,
+                'is_file' => true
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get directories in folder
+     *
+     * @param Collection $sQuery
+     * @return array
+     */
+    protected function getDirectories($sQuery)
+    {
+        $result = [];
+        $query = Folder::whereParentId($this->folderId);
+
+        if ($sQuery->get('type')) {
+            $query->where('type', '=', $sQuery->get('type'));
+        }
+
+        $directories = $query->get();
+        foreach ($directories as $row) {
+            $result[] = (object) [
+                'id' => $row->id,
+                'name' => $row->name,
+                'url' => '',
+                'size' => '',
+                'updated' => strtotime($row->updated_at),
+                'path' => $row->id,
+                'time' => (string) $row->created_at,
+                'type' => $row->type,
+                'icon' => 'fa-folder-o',
+                'thumb' => asset('tadcms/filemanager/images/folder.png'),
+                'is_file' => false
+            ];
+        }
+
+        return $result;
     }
 }

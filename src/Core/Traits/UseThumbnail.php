@@ -2,7 +2,7 @@
 
 namespace Mymo\Core\Traits;
 
-use Mymo\Core\Models\Files;
+use Mymo\Core\Models\File;
 use Illuminate\Support\Str;
 
 trait UseThumbnail

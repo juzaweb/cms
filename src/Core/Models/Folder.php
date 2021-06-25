@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $folder_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Mymo\Core\Models\Files[] $childs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Mymo\Core\Models\File[] $childs
  * @property-read int|null $childs_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Mymo\Core\Models\Folder[] $folder_childs
  * @property-read int|null $folder_childs_count
@@ -36,7 +36,7 @@ class Folder extends Model
     ];
     
     public function childs() {
-        return $this->hasMany('Mymo\Core\Models\Files', 'folder_id', 'id');
+        return $this->hasMany('Mymo\Core\Models\File', 'folder_id', 'id');
     }
     
     public function folder_childs() {

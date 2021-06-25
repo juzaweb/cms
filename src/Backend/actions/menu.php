@@ -43,6 +43,16 @@ HookAction::addAdminMenu(
     ]
 );
 */
+
+HookAction::addAdminMenu(
+    trans('mymo::app.media'),
+    'dashboard',
+    [
+        'icon' => 'fa fa-media',
+        'position' => 10
+    ]
+);
+
 HookAction::addAdminMenu(
     trans('mymo::app.appearance'),
     'appearance',
