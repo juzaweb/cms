@@ -1,8 +1,8 @@
 <?php
 
-namespace Mymo\Theme\Http\Controllers\Auth;
+namespace Mymo\Frontend\Controllers\Auth;
 
-use Mymo\Theme\Http\Controllers\FrontendController;
+use Mymo\Frontend\Controllers\FrontendController;
 
 class LoginController extends FrontendController
 {

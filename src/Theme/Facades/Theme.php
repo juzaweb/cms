@@ -3,7 +3,16 @@
 namespace Mymo\Theme\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Mymo\Theme\Contracts\ThemeContract;
 
+/**
+ * @method static set(string $theme)
+ * @method static has(string $theme)
+ * @method static getThemePath(string $theme)
+ * @method static getThemeInfo(string $theme)
+ * @method static get(string $theme)
+ * @see \Mymo\Theme\Managers\Theme
+ */
 class Theme extends Facade
 {
     /**
@@ -13,6 +22,6 @@ class Theme extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \Mymo\Theme\Contracts\ThemeContract::class;
+        return ThemeContract::class;
     }
 }
