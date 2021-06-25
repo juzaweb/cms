@@ -1,3 +1,6 @@
+## v1.1.6.1
+- Fix load hook actions
+
 ## v1.1.6
 - Fix add folder file manager
 - Fix theme namespace

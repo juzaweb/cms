@@ -44,7 +44,9 @@ abstract class GeneratorCommand extends Command
 
         try {
             $overwriteFile = $this->hasOption('force') ? $this->option('force') : false;
-            (new FileGenerator($path, $contents))->withFileOverwrite($overwriteFile)->generate();
+            (new FileGenerator($path, $contents))
+                ->withFileOverwrite($overwriteFile)
+                ->generate();
 
             $this->info("Created : {$path}");
         } catch (FileAlreadyExistException $e) {
@@ -82,19 +84,17 @@ abstract class GeneratorCommand extends Command
     public function getClassNamespace($module)
     {
         $extra = str_replace($this->getClass(), '', $this->argument($this->argumentName));
-
         $extra = str_replace('/', '\\', $extra);
-
         $namespace = '';
-
         $namespace .= '\\' . $module->getStudlyName();
-
         $namespace .= '\\' . $this->getDefaultNamespace();
-
         $namespace .= '\\' . $extra;
-
         $namespace = str_replace('/', '\\', $namespace);
-
         return trim($namespace, '\\');
+    }
+
+    public function getModuleNamespace($module)
+    {
+        return str_replace('/', '\\', $module->getStudlyName());
     }
 }

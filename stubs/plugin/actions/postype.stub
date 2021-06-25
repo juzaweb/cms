@@ -8,3 +8,4 @@
  *
  */
 
+use Mymo\Core\Facades\HookAction;

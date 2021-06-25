@@ -3,7 +3,7 @@
 use Mymo\Core\Facades\HookAction;
 
 HookAction::registerPostType('posts', [
-    'label' => trans('mymo_core::app.posts'),
+    'label' => trans('mymo::app.posts'),
     'model' => \Mymo\PostType\Models\Post::class,
     'menu_icon' => 'fa fa-edit',
     'menu_position' => 15,
@@ -11,7 +11,7 @@ HookAction::registerPostType('posts', [
 ]);
 
 HookAction::registerPostType('pages', [
-    'label' => trans('mymo_core::app.pages'),
+    'label' => trans('mymo::app.pages'),
     'model' => \Mymo\PostType\Models\Page::class,
     'menu_icon' => 'fa fa-edit',
     'menu_position' => 15,
@@ -19,7 +19,7 @@ HookAction::registerPostType('pages', [
 ]);
 
 HookAction::addAdminMenu(
-    trans('mymo_core::app.comments'),
+    trans('mymo::app.comments'),
     'comments',
     [
         'icon' => 'fa fa-comments',

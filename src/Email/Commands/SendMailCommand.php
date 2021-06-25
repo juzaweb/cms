@@ -19,7 +19,7 @@ class SendMailCommand extends Command
      * */
     public function handle()
     {
-        if (config('email-template.method') != 'cron') {
+        if (config('mymo.email.method') != 'cron') {
             return;
         }
 

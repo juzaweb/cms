@@ -71,7 +71,6 @@ class ProviderMakeCommand extends GeneratorCommand
     protected function getTemplateContents()
     {
         $stub = 'provider';
-
         /** @var Plugin $module */
         $module = $this->laravel['modules']->findOrFail($this->getModuleName());
 
@@ -82,7 +81,7 @@ class ProviderMakeCommand extends GeneratorCommand
             'MODULE'            => $this->getModuleName(),
             'NAME'              => $this->getFileName(),
             'STUDLY_NAME'       => $module->getStudlyName(),
-            'MODULE_NAMESPACE'  => $this->laravel['modules']->config('namespace'),
+            'MODULE_NAMESPACE'  => $this->getModuleNamespace($module),
             'PATH_VIEWS'        => GenerateConfigReader::read('views')->getPath(),
             'PATH_LANG'         => GenerateConfigReader::read('lang')->getPath(),
             'PATH_CONFIG'       => GenerateConfigReader::read('config')->getPath(),

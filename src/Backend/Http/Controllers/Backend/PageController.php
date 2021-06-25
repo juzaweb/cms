@@ -11,8 +11,8 @@ class PageController extends BackendController
 {
     public function index()
     {
-        return view('mymo_core::backend.pages.index', [
-            'title' => trans('mymo_core::app.pages')
+        return view('mymo::backend.pages.index', [
+            'title' => trans('mymo::app.pages')
         ]);
     }
     
@@ -59,14 +59,14 @@ class PageController extends BackendController
     public function form($id = null)
     {
         $this->addBreadcrumb([
-            'title' => trans('mymo_core::app.pages'),
+            'title' => trans('mymo::app.pages'),
             'url' => route('admin.page.index')
         ]);
 
         $model = Page::firstOrNew(['id' => $id]);
-        return view('mymo_core::backend.pages.form', [
+        return view('mymo::backend.pages.form', [
             'model' => $model,
-            'title' => $model->name ?: trans('mymo_core::app.add_new')
+            'title' => $model->name ?: trans('mymo::app.add_new')
         ]);
     }
     
@@ -77,9 +77,9 @@ class PageController extends BackendController
             'status' => 'required|in:0,1',
             'thumbnail' => 'nullable|string|max:250',
         ], [], [
-            'name' => trans('mymo_core::app.name'),
-            'status' => trans('mymo_core::app.status'),
-            'thumbnail' => trans('mymo_core::app.thumbnail'),
+            'name' => trans('mymo::app.name'),
+            'status' => trans('mymo::app.status'),
+            'thumbnail' => trans('mymo::app.thumbnail'),
         ]);
         
         $model = Page::firstOrNew(['id' => $request->id]);
@@ -87,7 +87,7 @@ class PageController extends BackendController
         $model->save();
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully'),
+            'message' => trans('mymo::app.successfully'),
             'redirect' => route('admin.page.index')
         ]);
     }
@@ -98,7 +98,7 @@ class PageController extends BackendController
             'ids' => 'required',
             'action' => 'required',
         ], [], [
-            'ids' => trans('mymo_core::app.pages')
+            'ids' => trans('mymo::app.pages')
         ]);
 
         $ids = $request->post('ids');
@@ -120,7 +120,7 @@ class PageController extends BackendController
         }
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo::app.successfully')
         ]);
     }
 }

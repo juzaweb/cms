@@ -9,7 +9,7 @@
  * Github: https://github.com/mymocms/mymocms
 */
 
-$adminPrefix = config('mymo_core.admin_prefix', 'admin-cp');
+$adminPrefix = config('mymo.admin_prefix', 'admin-cp');
 
 Route::group([
     'prefix' => $adminPrefix,
@@ -23,6 +23,8 @@ Route::group([
     require __DIR__ . '/components/page.route.php';
     require __DIR__ . '/components/post.route.php';
     require __DIR__ . '/components/filemanager.route.php';
+
+    Route::mymoResource('notification', 'Backend\NotificationController');
 });
 
 Route::group([

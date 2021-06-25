@@ -23,7 +23,7 @@ class ResetPasswordController extends Controller
             })
             ->firstOrFail();
         
-        return view('mymo_core::auth.forgot_password', [
+        return view('mymo::auth.forgot_password', [
             'user' => $user,
         ]);
     }

@@ -22,8 +22,8 @@ class MenuController extends BackendController
         $menu = Menu::where('id', '=', $id)->first();
         $postTypes = PostType::getPostTypes();
         
-        return view('mymo_core::backend.design.menu.index', [
-            'title' => trans('mymo_core::app.menu'),
+        return view('mymo::backend.design.menu.index', [
+            'title' => trans('mymo::app.menu'),
             'menu' => $menu,
             'postTypes' => $postTypes,
         ]);
@@ -34,7 +34,7 @@ class MenuController extends BackendController
         $this->validateRequest([
             'name' => 'required|string|max:250',
         ], $request, [
-            'name' => trans('mymo_core::app.name')
+            'name' => trans('mymo::app.name')
         ]);
     
         $model = Menu::firstOrNew(['id' => $request->post('id')]);
@@ -43,7 +43,7 @@ class MenuController extends BackendController
     
         return response()->json([
             'status' => 'success',
-            'message' => trans('mymo_core::app.saved_successfully'),
+            'message' => trans('mymo::app.saved_successfully'),
             'redirect' => route('admin.design.menu.id', [$model->id]),
         ]);
     }
@@ -54,8 +54,8 @@ class MenuController extends BackendController
             'name' => 'required|string|max:250',
             'content' => 'required',
         ], [], [
-            'name' => trans('mymo_core::app.name'),
-            'content' => trans('mymo_core::app.menu'),
+            'name' => trans('mymo::app.name'),
+            'content' => trans('mymo::app.menu'),
         ]);
         
         $model = Menu::firstOrNew(['id' => $request->post('id')]);
@@ -63,7 +63,7 @@ class MenuController extends BackendController
         $model->save();
     
         return $this->success([
-            'message' => trans('mymo_core::app.saved_successfully'),
+            'message' => trans('mymo::app.saved_successfully'),
             'redirect' => route('admin.design.menu.id', [$model->id]),
         ]);
     }
@@ -73,7 +73,7 @@ class MenuController extends BackendController
         $request->validate([
             'type' => 'required',
         ], [], [
-            'type' => trans('mymo_core::app.type')
+            'type' => trans('mymo::app.type')
         ]);
         
         $type = $request->post('type');

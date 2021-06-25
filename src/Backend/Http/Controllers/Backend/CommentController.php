@@ -12,7 +12,7 @@ class CommentController extends BackendController
 {
     use ResourceController;
 
-    protected $viewPrefix = 'mymo_core::backend.comment';
+    protected $viewPrefix = 'mymo::backend.comment';
 
     protected function validator(array $attributes)
     {
@@ -34,7 +34,7 @@ class CommentController extends BackendController
 
     protected function getTitle()
     {
-        return trans('mymo_core::app.comments');
+        return trans('mymo::app.comments');
     }
     
     public function getDataTable(Request $request)

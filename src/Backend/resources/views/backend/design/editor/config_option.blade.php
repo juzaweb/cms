@@ -43,7 +43,7 @@
 
         <div class="theme-editor__panel-body" data-scrollable>
             <form action="{{ route('admin.design.editor.save') }}" method="post" class="form-ajax" data-success="save_success">
-                <button class="btn btn-save-top" type="submit">{{ trans('mymo_core::app.save') }}</button>
+                <button class="btn btn-save-top" type="submit">{{ trans('mymo::app.save') }}</button>
 
                 <input type="hidden" name="code" value="{{ $item['code'] }}">
 
@@ -56,7 +56,7 @@
                             <section class="next-card__section">
 
                                 <header class="next-card__header theme-setting theme-setting--header">
-                                    <h3 class="ui-subheading">{{ $card['name'] }} <a href="javascript:void(0)" class="show-card-body"><i class="fa fa-eye"></i> {{ trans('mymo_core::app.show') }}</a></h3>
+                                    <h3 class="ui-subheading">{{ $card['name'] }} <a href="javascript:void(0)" class="show-card-body"><i class="fa fa-eye"></i> {{ trans('mymo::app.show') }}</a></h3>
                                 </header>
 
                                 <div class="card-body">
@@ -68,7 +68,7 @@
                                             <div class="next-input-wrapper">
                                                 <div class="checkbox" id="setting-checkbox-favicon_enable">
                                                     <label class="next-label next-label--switch">
-                                                        {{ trans('mymo_core::app.enabled') }}
+                                                        {{ trans('mymo::app.enabled') }}
                                                     </label>
                                                     <input type="checkbox" class="next-checkbox check-status" {{ (isset($option_card['status']) && (int) $option_card['status'] == 1) ? 'checked' : '' }}>
                                                     <input type="hidden" name="{{ $card['code'] }}[status]" class="check-status-hide" value="{{ isset($option_card['status']) ? (int) $option_card['status'] : 0 }}">
@@ -86,11 +86,11 @@
                                         @foreach($card['input_items'] as $iinput => $input)
                                             @if(in_array($input['element'], ['input', 'textarea', 'media', 'slider', 'select_genre', 'select_genres']))
 
-                                                @include('mymo_core::backend.design.editor.boxs.input_box')
+                                                @include('mymo::backend.design.editor.boxs.input_box')
 
                                             @else
 
-                                                @include('mymo_core::backend.design.editor.boxs.'. $input['element'] .'_box')
+                                                @include('mymo::backend.design.editor.boxs.'. $input['element'] .'_box')
 
                                             @endif
 
@@ -104,7 +104,7 @@
                     @endforeach
                 @endif
 
-                <button class="btn btn--full-width" type="submit">{{ trans('mymo_core::app.save') }}</button>
+                <button class="btn btn--full-width" type="submit">{{ trans('mymo::app.save') }}</button>
             </form>
         </div>
     </div>

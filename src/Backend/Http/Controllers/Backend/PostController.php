@@ -37,7 +37,7 @@ class PostController extends BackendController
 
     public function index()
     {
-        return view('mymo_core::backend.posts.index', [
+        return view('mymo::backend.posts.index', [
             'title' => $this->setting->get('label')
         ]);
     }
@@ -50,8 +50,8 @@ class PostController extends BackendController
         ]);
 
         $model = $this->postRepository->makeModel();
-        return view('mymo_core::backend.posts.form', [
-            'title' => trans('mymo_core::app.add_new'),
+        return view('mymo::backend.posts.form', [
+            'title' => trans('mymo::app.add_new'),
             'model' => $model,
             'postType' => $this->postType
         ]);
@@ -66,7 +66,7 @@ class PostController extends BackendController
 
         $model = $this->postRepository->find($id);
 
-        return view('mymo_core::backend.posts.form', [
+        return view('mymo::backend.posts.form', [
             'title' => $model->title,
             'model' => $model,
             'postType' => $this->postType
@@ -118,7 +118,7 @@ class PostController extends BackendController
         $this->postService->create($request->all());
         
         return $this->success([
-            'message' => trans('mymo_core::app.saved_successfully'),
+            'message' => trans('mymo::app.saved_successfully'),
             'redirect' => route('admin.posts.index')
         ]);
     }
@@ -128,7 +128,7 @@ class PostController extends BackendController
         $this->postService->update($request->all(), $id);
 
         return $this->success([
-            'message' => trans('mymo_core::app.saved_successfully')
+            'message' => trans('mymo::app.saved_successfully')
         ]);
     }
     
@@ -158,7 +158,7 @@ class PostController extends BackendController
         }
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo::app.successfully')
         ]);
     }
 }

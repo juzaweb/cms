@@ -8,8 +8,8 @@
      */
 
     var mymo = {
-        adminPrefix: "{{ config('mymo_core.admin_prefix') }}",
-        adminUrl: "{{ url(config('mymo_core.admin_prefix')) }}",
-        lang: @json(trans('mymo_core::app'))
+        adminPrefix: "{{ config('mymo.admin_prefix') }}",
+        adminUrl: "{{ url(config('mymo.admin_prefix')) }}",
+        lang: @json(trans('mymo::app'))
     }
 </script>

@@ -10,21 +10,21 @@
 @endphp
 <div class="form-product-list">
     <div class="theme-setting theme-setting--text editor-item">
-        <label class="next-label">{{ trans('mymo_core::app.title') }}</label>
+        <label class="next-label">{{ trans('mymo::app.title') }}</label>
         <input type="text" name="{{ $card['code'] }}[{{ $input['name'] }}][title]" class="next-input" value="{{ $title }}" autocomplete="off">
     </div>
 
     <div class="theme-setting theme-setting--text editor-item ctype-select">
-        <label class="next-label">{{ trans('mymo_core::app.type') }}</label>
+        <label class="next-label">{{ trans('mymo::app.type') }}</label>
         <select name="{{ $card['code'] }}[{{ $input['name'] }}][ctype]" class="next-input select-ctype">
-            <option value="1" @if($ctype == 1) selected @endif>@lang('mymo_core::app.menu_link')</option>
-            <option value="2" @if($ctype == 2) selected @endif>@lang('mymo_core::app.custom_html')</option>
+            <option value="1" @if($ctype == 1) selected @endif>@lang('mymo::app.menu_link')</option>
+            <option value="2" @if($ctype == 2) selected @endif>@lang('mymo::app.custom_html')</option>
         </select>
     </div>
 
     <div class="theme-setting theme-setting--text editor-item ctype ctype-1 @if($ctype != 1) box-hidden @endif">
-        <label class="next-label">{{ trans('mymo_core::app.menu') }}</label>
-        <select name="{{ $card['code'] }}[{{ $input['name'] }}][menu]" class="next-input load-menu" data-placeholder="--- @lang('mymo_core::app.choose_menu') ---">
+        <label class="next-label">{{ trans('mymo::app.menu') }}</label>
+        <select name="{{ $card['code'] }}[{{ $input['name'] }}][menu]" class="next-input load-menu" data-placeholder="--- @lang('mymo::app.choose_menu') ---">
             @if($menu)
                 <option value="{{ $menu->id }}">{{ $menu->name }}</option>
             @endif
@@ -32,7 +32,7 @@
     </div>
 
     <div class="theme-setting theme-setting--text editor-item ctype ctype-2 @if($ctype != 2) box-hidden @endif">
-        <label class="next-label">{{ trans('mymo_core::app.content') }} (html)</label>
+        <label class="next-label">{{ trans('mymo::app.content') }} (html)</label>
         <textarea class="form-control" name="{{ $card['code'] }}[{{ $input['name'] }}][body]" rows="5">{!! $body !!}</textarea>
     </div>
 </div>

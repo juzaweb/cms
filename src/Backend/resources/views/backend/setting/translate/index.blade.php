@@ -1,4 +1,4 @@
-@extends('mymo_core::layouts.backend')
+@extends('mymo::layouts.backend')
 
 @section('content')
 
@@ -7,11 +7,11 @@
             <form method="get" class="form-inline" id="form-search">
 
                 <div class="form-group mb-2 mr-1">
-                    <label for="inputName" class="sr-only">@lang('mymo_core::app.search')</label>
-                    <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('mymo_core::app.search')" autocomplete="off">
+                    <label for="inputName" class="sr-only">@lang('mymo::app.search')</label>
+                    <input name="search" type="text" id="inputName" class="form-control" placeholder="@lang('mymo::app.search')" autocomplete="off">
                 </div>
 
-                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo_core::app.search')</button>
+                <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i> @lang('mymo::app.search')</button>
             </form>
         </div>
 
@@ -22,7 +22,7 @@
             <thead>
             <tr>
                 <th data-width="35%" data-field="en" data-sortable="true">English</th>
-                <th data-field="{{ $lang }}" data-sortable="true" data-formatter="translate_formatter">@lang('mymo_core::app.translate')</th>
+                <th data-field="{{ $lang }}" data-sortable="true" data-formatter="translate_formatter">@lang('mymo::app.translate')</th>
             </tr>
             </thead>
         </table>

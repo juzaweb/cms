@@ -2,11 +2,12 @@
 
 namespace Mymo\Theme\Managers;
 
+use Illuminate\Support\Facades\File;
+use Noodlehaus\Config;
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\View\ViewFinderInterface;
-use Noodlehaus\Config;
 use Mymo\Theme\Contracts\ThemeContract;
 use Mymo\Theme\Exceptions\ThemeNotFoundException;
 
@@ -18,13 +19,6 @@ class Theme implements ThemeContract
      * @var string
      */
     protected $basePath;
-
-    /**
-     * All Theme Information.
-     *
-     * @var collection
-     */
-    protected $themes;
 
     /**
      * Blade View Finder.
@@ -69,19 +63,17 @@ class Theme implements ThemeContract
      * @param Repository          $config
      * @param Translator          $lang
      */
-    public function __construct(Container $app, ViewFinderInterface $finder, Repository $config, Translator $lang)
-    {
+    public function __construct(
+        Container $app,
+        ViewFinderInterface $finder,
+        Repository $config,
+        Translator $lang
+    ) {
         $this->config = $config;
-
         $this->app = $app;
-
         $this->finder = $finder;
-
         $this->lang = $lang;
-
-        $this->basePath = $this->config['theme.theme_path'];
-
-        $this->scanThemes();
+        $this->basePath = $this->config['mymo.theme.path'];
     }
 
     /**
@@ -110,19 +102,39 @@ class Theme implements ThemeContract
      */
     public function has($theme)
     {
-        return array_key_exists($theme, $this->themes);
+        $themeConfigPath = $this->getThemePath($theme) . '/theme.json';
+        return file_exists($themeConfigPath);
+    }
+
+    public function getThemePath($theme)
+    {
+        return $this->basePath . '/' . $theme;
     }
 
     /**
      * Get particular theme all information.
      *
-     * @param string $themeName
+     * @param string $theme
      *
      * @return null
      */
-    public function getThemeInfo($themeName)
+    public function getThemeInfo($theme)
     {
-        return isset($this->themes[$themeName]) ? $this->themes[$themeName] : null;
+        $themePath = $this->getThemePath($theme);
+        $themeConfigPath = $themePath . '/theme.json';
+        $themeChangelogPath = $themePath . '/changelog.yml';
+
+        if (file_exists($themeConfigPath)) {
+            $themeConfig = Config::load($themeConfigPath);
+            $themeConfig['changelog'] = Config::load($themeChangelogPath)->all();
+            $themeConfig['path'] = $themePath;
+
+            if ($themeConfig->has('name')) {
+                return $themeConfig;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -136,10 +148,18 @@ class Theme implements ThemeContract
     public function get($theme = null, $collection = false)
     {
         if (is_null($theme) || !$this->has($theme)) {
-            return !$collection ? $this->themes[$this->activeTheme]->all() : $this->themes[$this->activeTheme];
+            if ($collection) {
+                return $this->getThemeInfo($this->activeTheme);
+            }
+
+            return $this->getThemeInfo($this->activeTheme)->all();
         }
 
-        return !$collection ? $this->themes[$theme]->all() : $this->themes[$theme];
+        if ($collection) {
+            return $this->getThemeInfo($theme);
+        }
+
+        return $this->getThemeInfo($theme)->all();
     }
 
     /**
@@ -161,7 +181,18 @@ class Theme implements ThemeContract
      */
     public function all()
     {
-        return $this->themes;
+        $themeDirectories = File::directories($this->basePath);
+        $themes = [];
+        foreach ($themeDirectories as $theme) {
+            $themeConfig = $this->getThemeInfo(basename($theme));
+            if (empty($themeConfig)) {
+                continue;
+            }
+
+            $themes[$themeConfig->get('name')] = $themeConfig;
+        }
+
+        return $themes;
     }
 
     /**
@@ -184,7 +215,7 @@ class Theme implements ThemeContract
      *
      * @param string $path
      *
-     * @return string
+     * @return string|false
      */
     public function getFullPath($path)
     {
@@ -192,7 +223,7 @@ class Theme implements ThemeContract
 
         if (count($splitThemeAndPath) > 1) {
             if (is_null($splitThemeAndPath[0])) {
-                return;
+                return false;
             }
             $themeName = $splitThemeAndPath[0];
             $path = $splitThemeAndPath[1];
@@ -202,20 +233,14 @@ class Theme implements ThemeContract
         }
 
         $themeInfo = $this->getThemeInfo($themeName);
-
-        if ($this->config['theme.symlink']) {
-            $themePath = str_replace(base_path('public').DIRECTORY_SEPARATOR, '', $this->config['theme.symlink_path']).DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR;
-        } else {
-            $themePath = str_replace(base_path('public').DIRECTORY_SEPARATOR, '', $themeInfo->get('path')).DIRECTORY_SEPARATOR;
-        }
+        $themePath = str_replace(base_path('public').DIRECTORY_SEPARATOR, '', $themeInfo->get('path')).DIRECTORY_SEPARATOR;
 
         $assetPath = $this->config['theme.folders.assets'].DIRECTORY_SEPARATOR;
-        $fullPath = $themePath.$assetPath.$path;
+        $fullPath = $themePath . $assetPath . $path;
 
         if (!file_exists($fullPath) && $themeInfo->has('parent') && !empty($themeInfo->get('parent'))) {
             $themePath = str_replace(base_path().DIRECTORY_SEPARATOR, '', $this->getThemeInfo($themeInfo->get('parent'))->get('path')).DIRECTORY_SEPARATOR;
             $fullPath = $themePath.$assetPath.$path;
-
             return $fullPath;
         }
 
@@ -237,88 +262,29 @@ class Theme implements ThemeContract
     }
 
     /**
-     * Get lang content from current theme.
-     *
-     * @param string $fallback
-     *
-     * @return \Illuminate\Contracts\Translation\Translator|string
-     */
-    public function lang($fallback)
-    {
-        $splitLang = explode('::', $fallback);
-
-        if (count($splitLang) > 1) {
-            if (is_null($splitLang[0])) {
-                $fallback = $splitLang[1];
-            } else {
-                $fallback = $splitLang[0].'::'.$splitLang[1];
-            }
-        } else {
-            $fallback = $this->current().'::'.$splitLang[0];
-            if (!$this->lang->has($fallback)) {
-                $fallback = $this->getThemeInfo($this->current())->get('parent').'::'.$splitLang[0];
-            }
-        }
-
-        return trans($fallback);
-    }
-
-    /**
-     * Scan for all available themes.
-     *
-     * @return void
-     */
-    private function scanThemes()
-    {
-        $themeDirectories = glob($this->basePath.'/*', GLOB_ONLYDIR);
-        $themes = [];
-        foreach ($themeDirectories as $themePath) {
-            $themeConfigPath = $themePath.DIRECTORY_SEPARATOR.$this->config['theme.config.name'];
-            $themeChangelogPath = $themePath.DIRECTORY_SEPARATOR.$this->config['theme.config.changelog'];
-
-            if (file_exists($themeConfigPath)) {
-                $themeConfig = Config::load($themeConfigPath);
-                $themeConfig['changelog'] = Config::load($themeChangelogPath)->all();
-                $themeConfig['path'] = $themePath;
-
-                if ($themeConfig->has('name')) {
-                    $themes[$themeConfig->get('name')] = $themeConfig;
-                }
-            }
-        }
-        $this->themes = $themes;
-    }
-
-    /**
      * Map view map for particular theme.
      *
      * @param string $theme
      *
      * @return void
      */
-    private function loadTheme($theme)
+    protected function loadTheme($theme)
     {
         if (is_null($theme)) {
             return;
         }
 
         $themeInfo = $this->getThemeInfo($theme);
-
         if (is_null($themeInfo)) {
             return;
         }
 
         $this->loadTheme($themeInfo->get('parent'));
+        $viewPath = $themeInfo->get('path') . '/views';
+        $langPath = $themeInfo->get('path') .'/lang';
 
-        $viewPath = $themeInfo->get('path').DIRECTORY_SEPARATOR.$this->config['theme.folders.views'];
-        $langPath = $themeInfo->get('path').DIRECTORY_SEPARATOR.$this->config['theme.folders.lang'];
-
-        $this->finder->prependLocation($themeInfo->get('path'));
+        $this->lang->addNamespace('theme', $langPath);
         $this->finder->prependLocation($viewPath);
         $this->finder->prependNamespace('theme', $viewPath);
-        if ($themeInfo->has('type') && !empty($themeInfo->get('type'))) {
-            $this->finder->prependNamespace($themeInfo->get('type'), $viewPath);
-        }
-        $this->lang->addNamespace('theme', $langPath);
     }
 }

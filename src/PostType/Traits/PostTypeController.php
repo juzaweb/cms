@@ -42,7 +42,7 @@ trait PostTypeController
 
         $model = $this->makeModel();
         return view($this->viewPrefix . '.form', array_merge([
-            'title' => trans('mymo_core::app.add_new')
+            'title' => trans('mymo::app.add_new')
         ], $this->getDataDataForForm($model)));
     }
 
@@ -99,7 +99,7 @@ trait PostTypeController
         }
 
         return $this->success([
-            'message' => trans('mymo_core::app.successfully')
+            'message' => trans('mymo::app.successfully')
         ]);
     }
 

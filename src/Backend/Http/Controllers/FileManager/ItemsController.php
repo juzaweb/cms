@@ -2,12 +2,9 @@
 
 namespace Mymo\Backend\Http\Controllers\FileManager;
 
+use Illuminate\Support\Facades\Storage;
 use Mymo\Core\Models\Files;
 use Mymo\Core\Models\Folders;
-use Mymo\FileManager\Events\FileIsMoving;
-use Mymo\FileManager\Events\FileWasMoving;
-use Mymo\FileManager\Events\FolderIsMoving;
-use Mymo\FileManager\Events\FolderWasMoving;
 
 class ItemsController extends FileManagerController
 {
@@ -20,6 +17,7 @@ class ItemsController extends FileManagerController
         $working_dir = request()->get('working_dir');
         
         $folders = Folders::where('folder_id', '=', $working_dir)
+            ->where('type', '=', $file_type)
             ->orderBy('name', 'ASC')
             ->get(['id', 'name']);
         $files = Files::where('folder_id', '=', $working_dir)
@@ -27,7 +25,7 @@ class ItemsController extends FileManagerController
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
     
-        $storage = \Storage::disk('public');
+        $storage = Storage::disk(config('mymo.filemanager.disk'));
         $items = [];
         foreach ($folders as $folder) {
             $items[] = [
@@ -43,12 +41,12 @@ class ItemsController extends FileManagerController
         
         foreach ($files as $file) {
             $items[] = [
-                'icon' => $file->type == 1 ? 'fa-image' : 'fa-file',
+                'icon' => $file->type == 'image' ? 'fa-image' : 'fa-file',
                 'is_file' => true,
                 'path' => $file->path,
                 'is_image' => $file->type == 1 ? true : false,
                 'name' => $file->name,
-                'thumb_url' => $file->type == 1 ? $storage->url($file->path) : null,
+                'thumb_url' => $file->type == 'image' ? $storage->url($file->path) : null,
                 'time' => strtotime($file->created_at),
                 'url' => $storage->url($file->path),
             ];
@@ -78,7 +76,7 @@ class ItemsController extends FileManagerController
                     $path = $this->lfm->dir($this->helper->getRootFolder($type));
 
                     return (object) [
-                        'name' => trans('laravel-filemanager::lfm.title_' . $type),
+                        'name' => trans('mymo::filemanager.title_' . $type),
                         'url' => $path->path('working_dir'),
                         'children' => $path->folders(),
                         'has_next' => ! ($type == end($folder_types)),

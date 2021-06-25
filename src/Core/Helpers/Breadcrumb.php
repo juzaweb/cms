@@ -1,6 +1,6 @@
 <?php
 /**
- * MYMO CMS - Free Laravel CMS
+ * MYMO CMS - The Best Laravel CMS
  *
  * @package    mymocms/mymocms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
@@ -26,7 +26,7 @@ class Breadcrumb
     public static function getNameView($name)
     {
         return apply_filters('breadcrumb.render', [
-            'admin' => 'mymo_core::items.breadcrumb',
+            'admin' => 'mymo::items.breadcrumb',
         ])[$name];
     }
 }

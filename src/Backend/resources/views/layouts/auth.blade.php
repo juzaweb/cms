@@ -8,15 +8,19 @@
     <link rel="icon" type="image/png" href="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/vendor.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('mymo/styles/css/backend.css') }}">
 
-    @include('mymo_core::components.mymo_langs')
+    @include('mymo::components.mymo_langs')
+
+    <script src="{{ asset('mymo/styles/js/vendor.js') }}"></script>
     <script src="{{ asset('mymo/styles/js/backend.js') }}"></script>
 </head>
-    <body class="cui__layout--cardsShadow cui__menuLeft--dark">
-        <div class="cui__layout cui__layout--hasSider">
-            <div class="cui__menuLeft__backdrop"></div>
-            <div class="cui__layout">
+    <body class="mymo__layout--cardsShadow mymo__menuLeft--dark">
+        <div class="mymo__layout mymo__layout--hasSider">
+            <div class="mymo__menuLeft__backdrop"></div>
+            <div class="mymo__layout">
                 @yield('content')
             </div>
         </div>

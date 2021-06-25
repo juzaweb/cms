@@ -18,8 +18,8 @@ class LoginController extends Controller
         
         //
         
-        return view('mymo_core::auth.login', [
-            'title' => trans('mymo_core::app.login')
+        return view('mymo::auth.login', [
+            'title' => trans('mymo::app.login')
         ]);
     }
     
@@ -41,13 +41,13 @@ class LoginController extends Controller
         
         if (empty($user)) {
             return $this->error([
-                'message' => trans('mymo_core::message.login_form.login_failed')
+                'message' => trans('mymo::message.login_form.login_failed')
             ]);
         }
         
         if ($user->status != 'active') {
             return $this->error([
-                'message' => trans('mymo_core::message.login_form.user_is_banned')
+                'message' => trans('mymo::message.login_form.user_is_banned')
             ]);
         }
         
@@ -58,14 +58,14 @@ class LoginController extends Controller
             do_action('auth.login.success', Auth::user());
 
             return $this->success([
-                'message' => trans('mymo_core::app.login_successfully'),
+                'message' => trans('mymo::app.login_successfully'),
                 'redirect' => $user->is_admin ? route('admin.dashboard') : '/'
             ]);
         }
     
         do_action('auth.login.failed');
         
-        return $this->error(trans('mymo_core::message.login_form.login_failed'));
+        return $this->error(trans('mymo::message.login_form.login_failed'));
     }
     
     public function logout()
