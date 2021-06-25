@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Mymo\Theme\Http\Controllers';
+    protected $namespace = 'Mymo\Frontend\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

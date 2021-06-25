@@ -1,6 +1,6 @@
 <?php
 
-namespace Mymo\Theme\Http\Controllers;
+namespace Mymo\Frontend\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;

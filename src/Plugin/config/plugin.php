@@ -20,8 +20,6 @@ return [
             'routes/web' => 'src/routes/web.php',
             'routes/api' => 'src/routes/api.php',
             'views/index' => 'src/resources/views/index.blade.php',
-            //'views/master' => 'resources/views/layouts/master.blade.php',
-            //'scaffold/config' => 'config/config.php',
             'composer' => 'composer.json',
             'assets/js/app' => 'src/resources/assets/js/app.js',
             'assets/sass/app' => 'src/resources/assets/sass/app.scss',
@@ -90,7 +88,7 @@ return [
         */
         'generator' => [
             'config' => ['path' => 'Config', 'generate' => false],
-            'command' => ['path' => 'src/Console', 'generate' => false],
+            'command' => ['path' => 'src/Commands', 'generate' => false],
             'migration' => ['path' => 'src/database/migrations', 'generate' => true],
             'seeder' => ['path' => 'src/database/seeders', 'generate' => true],
             'factory' => ['path' => 'src/database/factories', 'generate' => true],
@@ -105,7 +103,7 @@ return [
             'views' => ['path' => 'src/resources/views', 'generate' => true],
             'test' => ['path' => 'tests/Unit', 'generate' => true],
             'test-feature' => ['path' => 'tests/Feature', 'generate' => true],
-            'repository' => ['path' => 'src/Repositories', 'generate' => true],
+            'repository' => ['path' => 'src/Repositories', 'generate' => false],
             'event' => ['path' => 'src/Events', 'generate' => false],
             'listener' => ['path' => 'src/Listeners', 'generate' => false],
             'policies' => ['path' => 'src/Policies', 'generate' => false],

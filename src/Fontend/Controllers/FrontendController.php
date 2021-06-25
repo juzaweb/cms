@@ -1,9 +1,8 @@
 <?php
 
-namespace Mymo\Theme\Http\Controllers;
+namespace Mymo\Frontend\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
 use Mymo\Theme\Facades\Theme;
 
 class FrontendController extends Controller
@@ -30,19 +29,5 @@ class FrontendController extends Controller
     protected function getCurrentTheme()
     {
         return get_config('activated_theme', 'default');
-    }
-
-    protected function setupLayout()
-    {
-        if (!is_null($this->layout)) {
-            $this->layout = View::make($this->layout);
-        }
-    }
-
-    protected function view(string $view)
-    {
-        $this->setupLayout();
-        $this->layout->content = View::make($view);
-        return $this->layout;
     }
 }
