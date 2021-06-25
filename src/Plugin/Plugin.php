@@ -103,7 +103,9 @@ abstract class Plugin
     public function getStudlyName(): string
     {
         $name = explode('/', $this->name);
-        return Str::studly($name[0]) .'/'. Str::studly($name[1]);
+        $author = Str::studly($name[0]);
+        $module = Str::studly($name[1]);
+        return $author .'/'. $module;
     }
 
     /**
