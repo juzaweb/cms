@@ -77,14 +77,8 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(PostTypeServiceProvider::class);
         $this->app->register(NotificationServiceProvider::class);
         $this->app->register(EmailTemplateServiceProvider::class);
-
-        if (config('mymo.theme.enable')) {
-            $this->app->register(ThemeServiceProvider::class);
-        }
-
-        if (config('mymo.plugin.enable')) {
-            $this->app->register(PluginServiceProvider::class);
-        }
+        $this->app->register(ThemeServiceProvider::class);
+        $this->app->register(PluginServiceProvider::class);
     }
 
     protected function registerSingleton()

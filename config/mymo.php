@@ -17,11 +17,11 @@ return [
 
     'plugin' => [
         /**
-         * Enable plugins
+         * Enable upload plugins
          *
          * Default: true
          */
-        'enable' => true,
+        'enable_upload' => true,
 
         /**
          * Enable autoload plugins
@@ -49,11 +49,11 @@ return [
 
     'theme' => [
         /**
-         * Enable themes
+         * Enable upload themes
          *
          * Default: true
          */
-        'enable' => true,
+        'enable_upload' => true,
         /**
          * Themes path
          *
@@ -83,6 +83,8 @@ return [
 
     'email' => [
         /**
+         * Method send email
+         *
          * Support: sync, queue, cron
          * Default: sync
          * */
@@ -91,13 +93,18 @@ return [
 
     'notification' => [
         /**
+         * Method send notification
+         *
          * Support: sync, queue, cron
          * Default: sync
          * */
         'method' => 'sync',
+
         /**
+         * Send mail via
+         *
          * Support: database, mail
-         * */
+         */
         'via' => [
             'database' => [
                 'enable' => true,

@@ -1,14 +1,14 @@
-@extends('mymo::layouts.admin')
+@extends('mymo::layouts.backend')
 
 @section('content')
     <div class="row mb-2">
         <div class="col-md-8">
 
             <form action="" method="get" class="form-inline">
-                <input type="text" class="form-control w-25" name="search" placeholder="Search by name" autocomplete="off">
+                <input type="text" class="form-control w-25" name="search" placeholder="{{ trans('mymo::app.search_by_name') }}" autocomplete="off">
 
                 <select name="type" class="form-control w-25 ml-1">
-                    <option value="">All type</option>
+                    <option value="">{{ trans('mymo::app.all_type') }}</option>
                     @foreach($fileTypes as $key => $type)
                     <option value="{{ $key }}" {{ request()->query('type') == $key ? 'selected' : '' }}>{{ strtoupper($key) }}</option>
                     @endforeach
@@ -32,7 +32,7 @@
 
         <div class="col-md-4">
             <div class="btn-group float-right">
-                <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#add-folder-modal"><i class="fa fa-plus"></i> @lang('mymo::app.add-folder')</a>
+                <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#add-folder-modal"><i class="fa fa-plus"></i> @lang('mymo::app.add_folder')</a>
                 <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#upload-modal"><i class="fa fa-cloud-upload"></i> @lang('mymo::app.upload')</a>
             </div>
         </div>
@@ -40,7 +40,7 @@
 
     <div class="list-media mt-5">
         <ul class="media-list">
-
+        @foreach($mediaItems as $item)
             <li class="media-item">
                 <a @if($item->is_file) href="javascript:void(0)" @else href="{{ route('admin.media.folder', [$item->id]) }}" @endif>
                     <div class="attachment-preview">
@@ -60,6 +60,7 @@
                     </div>--}}
                 </a>
             </li>
+        @endforeach
         </ul>
     </div>
 @endsection
@@ -70,24 +71,23 @@
             <form action="{{ route('admin.media.add-folder') }}" method="post" class="form-ajax">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="add-folder-modal-label">@lang('mymo::app.add-folder')</h5>
+                        <h5 class="modal-title" id="add-folder-modal-label">@lang('mymo::app.add_folder')</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('mymo::app.close') }}">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         @component('mymo::components.form_input', [
-                            'label' => trans('mymo::app.folder-name'),
+                            'label' => trans('mymo::app.folder_name'),
                             'name' => 'name'
                         ])
                         @endcomponent
 
-
-                        <input type="hidden" name="parent_id" value="{{ $folderId }}">
+                        <input type="hidden" name="folder_id" value="{{ $folderId }}">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> @lang('mymo::app.close')</button>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('mymo::app.add-folder')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('mymo::app.add_folder')</button>
                     </div>
                 </div>
             </form>
@@ -108,7 +108,7 @@
                         <div class="controls text-center">
                             <div class="text-center">
                                 <a href="javascript:void(0)" class="btn btn-primary rounded-0" id="upload-button"><i class="fa
-                                fa-cloud-upload"></i> {{ trans('filemanager::file-manager.message-choose') }}
+                                fa-cloud-upload"></i> {{ trans('mymo::filemanager.message-choose') }}
                                 </a>
                             </div>
                         </div>

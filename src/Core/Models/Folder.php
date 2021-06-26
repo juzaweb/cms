@@ -32,18 +32,27 @@ class Folder extends Model
 {
     protected $table = 'folders';
     protected $fillable = [
-        'name'
+        'name',
+        'folder_id'
     ];
     
-    public function childs() {
+    public function files()
+    {
         return $this->hasMany('Mymo\Core\Models\File', 'folder_id', 'id');
     }
-    
-    public function folder_childs() {
+
+    public function parent()
+    {
+        return $this->belongsTo(Folder::class, 'folder_id', 'id');
+    }
+
+    public function children()
+    {
         return $this->hasMany('Mymo\Core\Models\Folder', 'folder_id', 'id');
     }
     
-    public function deleteFolder() {
+    public function deleteFolder()
+    {
         foreach ($this->folder_childs as $folder_child) {
             $folder_child->deleteFolder();
         }
@@ -55,9 +64,10 @@ class Folder extends Model
         return $this->delete();
     }
     
-    public static function folderExists($folder_name, $parent_id) {
-        return self::where('name', '=', $folder_name)
-            ->where('folder_id', '=', $parent_id)
+    public static function folderExists($name, $parentId)
+    {
+        return self::where('name', '=', $name)
+            ->where('folder_id', '=', $parentId)
             ->exists();
     }
 }
