@@ -24,6 +24,7 @@ Route::group([
     require __DIR__ . '/components/post.route.php';
     require __DIR__ . '/components/filemanager.route.php';
     require __DIR__ . '/components/media.route.php';
+    require __DIR__ . '/components/email.route.php';
 
     Route::mymoResource('notification', 'Backend\NotificationController');
 });
