@@ -44,14 +44,14 @@ HookAction::addAdminMenu(
 );
 */
 
-HookAction::addAdminMenu(
+/*HookAction::addAdminMenu(
     trans('mymo::app.media'),
     'media',
     [
         'icon' => 'fa fa-image',
         'position' => 10
     ]
-);
+);*/
 
 HookAction::addAdminMenu(
     trans('mymo::app.appearance'),
