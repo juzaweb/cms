@@ -50,4 +50,9 @@ class File extends Model
         Storage::disk('public')->delete($this->path);
         return parent::delete();
     }
+
+    public function isImage()
+    {
+
+    }
 }

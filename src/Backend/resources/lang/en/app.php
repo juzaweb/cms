@@ -1,4 +1,5 @@
 <?php
+
 return [
   'home' => 'Home',
   'dashboard' => 'Dashboard',
@@ -273,5 +274,11 @@ return [
     'no_new_version_available' => 'No new version available.',
     'unconfimred' => 'Unconfimred',
     'banned' => 'Banned',
+    'all_type' => 'All type',
+    'search_by_name' => 'Search by name',
+    'folder_name' => 'Folder name',
+    'add_folder' => 'Add Folder',
+    'media' => 'Media',
+    'upload' => 'Upload',
 ];
 
