@@ -1,3 +1,6 @@
+## v1.1.7.2
+- Fix email route
+
 ## v1.1.7.1
 - Fix load frontend
 - Add more config
