@@ -12,7 +12,7 @@ class EmailTemplateController extends BackendController
 {
     use ResourceController;
 
-    protected $viewPrefix = 'emailtemplate::email_template';
+    protected $viewPrefix = 'mymo::backend.email_template';
     
     public function getDataTable(Request $request)
     {

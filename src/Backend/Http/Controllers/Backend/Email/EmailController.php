@@ -12,7 +12,7 @@ class EmailController extends BackendController
     public function index()
     {
         $config = get_config('email', []);
-        return view('emailtemplate::email.index', [
+        return view('mymo::backend.email.index', [
             'title' => trans('mymo::app.email_setting'),
             'config' => $config,
         ]);

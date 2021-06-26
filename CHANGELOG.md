@@ -1,3 +1,7 @@
+## v1.1.7.1
+- Fix load frontend
+- Add more config
+
 ## v1.1.7
 - File manager config
 - Theme config
