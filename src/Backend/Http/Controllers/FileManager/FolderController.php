@@ -55,7 +55,7 @@ class FolderController extends FileManagerController
 
         DB::beginTransaction();
         try {
-            $model = new Folders();
+            $model = new Folder();
             $model->name = $folder_name;
             $model->type = $this->getType();
             $model->folder_id = $parent_id;

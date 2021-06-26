@@ -67,7 +67,7 @@ class UploadController extends FileManagerController
         if ($new_path) {
             DB::beginTransaction();
             try {
-                $model = new Files();
+                $model = new File();
                 $model->name = $file->getClientOriginalName();
                 $model->path = $new_path;
                 $model->type = $this->getType();
