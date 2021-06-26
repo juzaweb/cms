@@ -457,7 +457,7 @@ abstract class Plugin
         return [];
     }
 
-    public function getExtraTadcms($key, $default = null)
+    public function getExtraMymo($key, $default = null)
     {
         $extra = $this->get('extra', []);
         if ($laravel = Arr::get($extra, 'tadcms', [])) {
@@ -469,7 +469,7 @@ abstract class Plugin
 
     public function getDisplayName()
     {
-        return $this->getExtraTadcms('name') ??
+        return $this->getExtraMymo('name') ??
             ucwords(str_replace('/', ' ', $this->getName()));
     }
 

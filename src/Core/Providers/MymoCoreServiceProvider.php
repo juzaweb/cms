@@ -22,6 +22,7 @@ use Mymo\Email\Providers\EmailTemplateServiceProvider;
 use Mymo\FileManager\Providers\FilemanagerServiceProvider;
 use Mymo\Notification\Providers\NotificationServiceProvider;
 use Mymo\Performance\Providers\MymoPerformanceServiceProvider;
+use Mymo\Plugin\PluginServiceProvider;
 use Mymo\PostType\Providers\PostTypeServiceProvider;
 use Mymo\Repository\Providers\RepositoryServiceProvider;
 use Mymo\Theme\Providers\ThemeServiceProvider;
@@ -71,12 +72,13 @@ class MymoCoreServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(HookActionServiceProvider::class);
         $this->app->register(MymoPerformanceServiceProvider::class);
-        $this->app->register(ThemeServiceProvider::class);
         $this->app->register(FilemanagerServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(PostTypeServiceProvider::class);
         $this->app->register(NotificationServiceProvider::class);
         $this->app->register(EmailTemplateServiceProvider::class);
+        $this->app->register(ThemeServiceProvider::class);
+        $this->app->register(PluginServiceProvider::class);
     }
 
     protected function registerSingleton()

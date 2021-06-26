@@ -43,6 +43,16 @@ HookAction::addAdminMenu(
     ]
 );
 */
+
+/*HookAction::addAdminMenu(
+    trans('mymo::app.media'),
+    'media',
+    [
+        'icon' => 'fa fa-image',
+        'position' => 10
+    ]
+);*/
+
 HookAction::addAdminMenu(
     trans('mymo::app.appearance'),
     'appearance',
@@ -139,13 +149,6 @@ HookAction::addAdminMenu(
     ]
 );
 
-HookAction::addAdminMenu(
-    trans('mymo::app.notifications'),
-    'notification',
-    [
-        'icon' => 'fa fa-bell',
-        'position' => 100
-    ]
-);
+
 
 

@@ -3,6 +3,7 @@
 namespace Mymo\Theme\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Mymo\Core\Facades\HookAction;
 use Mymo\Theme\Console\ThemeGeneratorCommand;
 use Mymo\Theme\Console\ThemeListCommand;
 use Mymo\Theme\Contracts\ThemeContract;
@@ -17,7 +18,7 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        HookAction::loadActionForm(__DIR__ . '/../actions');
     }
 
     /**

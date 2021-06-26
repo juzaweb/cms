@@ -13,7 +13,7 @@ $adminPrefix = config('mymo.admin_prefix', 'admin-cp');
 
 Route::group([
     'prefix' => $adminPrefix,
-    'middleware' => ['web', 'admin']
+    'middleware' => ['admin']
 ], function () {
     require __DIR__ . '/components/dashboard.route.php';
     require __DIR__ . '/components/appearance.route.php';
@@ -23,6 +23,7 @@ Route::group([
     require __DIR__ . '/components/page.route.php';
     require __DIR__ . '/components/post.route.php';
     require __DIR__ . '/components/filemanager.route.php';
+    require __DIR__ . '/components/media.route.php';
 
     Route::mymoResource('notification', 'Backend\NotificationController');
 });

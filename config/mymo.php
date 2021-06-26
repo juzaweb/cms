@@ -17,6 +17,21 @@ return [
 
     'plugin' => [
         /**
+         * Enable upload plugins
+         *
+         * Default: true
+         */
+        'enable_upload' => true,
+
+        /**
+         * Enable autoload plugins
+         * If disable, you can require plugin by composer
+         *
+         * Default: true
+         */
+        'autoload' => true,
+
+        /**
          * Plugins path
          *
          * This path used for save the generated plugin. This path also will added
@@ -33,6 +48,12 @@ return [
     ],
 
     'theme' => [
+        /**
+         * Enable upload themes
+         *
+         * Default: true
+         */
+        'enable_upload' => true,
         /**
          * Themes path
          *
@@ -62,6 +83,8 @@ return [
 
     'email' => [
         /**
+         * Method send email
+         *
          * Support: sync, queue, cron
          * Default: sync
          * */
@@ -70,13 +93,18 @@ return [
 
     'notification' => [
         /**
+         * Method send notification
+         *
          * Support: sync, queue, cron
          * Default: sync
          * */
         'method' => 'sync',
+
         /**
+         * Send mail via
+         *
          * Support: database, mail
-         * */
+         */
         'via' => [
             'database' => [
                 'enable' => true,
