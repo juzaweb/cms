@@ -1,0 +1,64 @@
+{
+    "name": "juzaweb/laravel-cms",
+    "type": "project",
+    "description": "Juzaweb CMS is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb",
+    "keywords": [
+        "framework",
+        "laravel",
+        "laravel cms",
+        "mymo cms",
+        "laravel cms like wordpress",
+        "cms like wordpress",
+        "juzaweb"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.2.5|^8.0",
+        "ext-json": "*",
+        "fideloper/proxy": "^4.4",
+        "juzaweb/cms": "^1.0",
+        "laravel/framework": "^6.20.26",
+        "laravel/tinker": "^2.5"
+    },
+    "require-dev": {
+		"barryvdh/laravel-debugbar": "^3.6",
+        "barryvdh/laravel-ide-helper": "^2.7",
+        "facade/ignition": "^1.16.15",
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^3.0",
+        "phpunit/phpunit": "^8.5.8|^9.3.3"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+              "barryvdh/laravel-ide-helper",
+              "barryvdh/laravel-debugbar"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    }
+}
