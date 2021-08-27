@@ -1,33 +1,20 @@
-MyMo - Free Laravel CMS
-=======================
+JUZAWEB CMS - The Best CMS for Laravel Project
+==============================================
 
 ## About
-Juzaweb CMS is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb
+Juzaweb CMS is a Content Management System (CMS) like Wordpress developed based on Laravel Framework 6 and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb.
 
 ![Screenshot](https://i.imgur.com/2a6dTLh.png)
 ![Screenshot](https://i.imgur.com/HPvagXR.png)
-
-Supported: Laravel 6
 
 ## Install
 ### Require package with composer
 ```
 composer create-project juzaweb/laravel-cms
 ```
-### Config your database
-```
-DB_CONNECTION=mysql
-DB_HOST=
-DB_PORT=
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
-```
+### Goto install
+http://yousite.com/install
 
-### Run command install
-```
-php artisan juzaweb:install
-```
 Goto Admin panel: http://yoursite/admin-cp
 
 ## Documentation
@@ -48,11 +35,10 @@ Contributions are welcome, and are accepted via pull requests. Please review the
 - [x] Email Log
 - [x] Plugins
 - [x] Themes
-- [ ] Theme Customize
-- [ ] Widgets support
+- [x] Theme Customize
 - [ ] Added default theme
 - [ ] Media manager in admin page
-- [ ] Translation cms
+- [x] Translation cms
 - [ ] Upload themes
 - [ ] Upload plugins
 - [ ] Menu builder by post type
