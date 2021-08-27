@@ -1,0 +1,19 @@
+{
+    "name": "mymocms/demo",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mymocms\\Demo\\Providers\\MainServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Mymocms\\Demo\\": "src/"
+        }
+    }
+}

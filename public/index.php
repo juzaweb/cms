@@ -8,6 +8,7 @@
  */
 
 define('LARAVEL_START', microtime(true));
+define('JW_BASEPATH', __DIR__ . '/..');
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,13 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+$autoloadPath = JW_BASEPATH . '/vendor/juzaweb/core/src/autoload.php';
+if (!file_exists($autoloadPath)) {
+    echo 'Missing vendor files, try running "composer install" or use the Wizard installer.' . PHP_EOL;
+    exit(1);
+}
+
+require $autoloadPath;
 
 /*
 |--------------------------------------------------------------------------
