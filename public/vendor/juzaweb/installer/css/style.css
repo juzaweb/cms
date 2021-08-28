@@ -3899,6 +3899,7 @@ input[type=text] {
     box-sizing: border-box;
     -webkit-box-shadow: 0 10px 10px rgba(0, 0, 0, 0.19), 0 6px 3px rgba(0, 0, 0, 0.23);
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.19), 0 6px 3px rgba(0, 0, 0, 0.23);
+    width: 660px;
 }
 
 .header {
