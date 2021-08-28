@@ -3,9 +3,7 @@ JUZAWEB CMS - The Best CMS for Laravel Project
 
 ## About
 Juzaweb CMS is a Content Management System (CMS) like Wordpress developed based on Laravel Framework 6 and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb.
-
-![Screenshot](https://i.imgur.com/2a6dTLh.png)
-![Screenshot](https://i.imgur.com/HPvagXR.png)
+You can see the demo here https://cms.juzaweb.com
 
 ## Install
 ### Require package with composer
@@ -13,9 +11,9 @@ Juzaweb CMS is a Content Management System (CMS) like Wordpress developed based 
 composer create-project juzaweb/laravel-cms
 ```
 ### Goto install
-http://yousite.com/install
+http://yoursite.com/install
 
-Goto Admin panel: http://yoursite/admin-cp
+Goto Admin panel: http://yoursite.com/admin-cp
 
 ## Documentation
 [https://github.com/mymocms/mymocms/wiki](https://github.com/mymocms/mymocms/wiki)
