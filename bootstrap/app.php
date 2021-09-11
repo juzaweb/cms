@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    Juzaweb\Core\Http\Kernel::class
+    Juzaweb\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    Juzaweb\Core\Console\Kernel::class
+    Juzaweb\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Juzaweb\Core\Exceptions\Handler::class
+    Juzaweb\Exceptions\Handler::class
 );
 
 /*
