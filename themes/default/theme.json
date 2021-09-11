@@ -4,6 +4,5 @@
   "description": "Default Theme",
   "author": "The Anh",
   "version": "1.0",
-  "parent": "",
-  "templates": []
+  "parent": ""
 }

@@ -1,0 +1,294 @@
+/**************************************
+
+    File Name: food.css
+    Template Name: Tech Blog
+    Created By: HTML.Design
+    http://themeforest.net/user/wpdestek
+
+**************************************/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+body,
+p,
+.topbar-section,
+.navbar-inverse .navbar-nav .nav-link,
+.header .dropdown-menu,
+.navbar-nav .nav-link {
+    font-family: 'Montserrat', serif;
+}
+
+body,
+p {
+    font-weight: 300;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-inverse .navbar-nav .nav-link,
+.navbar-nav .nav-link {
+    color: #ffffff !important;
+}
+
+.navbar-nav .nav-link:hover {
+    opacity: 0.9;
+}
+
+.dropdown-menu {
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+.jumbotron {
+    padding-top: 9rem;
+    padding-bottom: 6.5rem;
+    margin-bottom: 0;
+    background-color: #fff;
+}
+
+.jumbotron .container {
+    max-width: 40rem;
+}
+
+.album {
+    min-height: 50rem;
+    /* Can be removed; just added for demo purposes */
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-color: #f7f7f7;
+}
+
+.card {
+    float: left;
+    width: 33.333%;
+    padding: .75rem;
+    margin-bottom: 2rem;
+    border: 0;
+}
+
+.card > img {
+    margin-bottom: .75rem;
+}
+
+.card-text {
+    font-size: 85%;
+}
+
+.footer a,
+.footer p {
+    color: #999 !important;
+}
+
+.footer {
+    background-color: #000000;
+    background-image: none;
+}
+
+.blog-meta .rating {
+    display: block;
+    margin-top: 1rem;
+}
+
+.blog-box {
+    padding: 1rem;
+    background-color: #ffffff;
+}
+
+.blog-meta.big-meta h4 {
+    font-size: 18px;
+    margin-top: 0;
+    padding-top: 0.5rem;
+}
+
+.blog-meta.big-meta p {
+    margin-bottom: 1rem;
+}
+
+.section.lb {
+    background-color: #f3f3f3;
+}
+
+.grid-style .col-md-3 {
+    margin-bottom: 30px;
+}
+
+.jumbotron .container {
+    max-width: 50rem;
+}
+
+.page-title.wb {
+    border: 0;
+}
+
+#cta {
+    background: rgba(0, 0, 0, 0) url(../../upload/cta_01.jpg) no-repeat scroll top center / cover;
+    position: relative;
+}
+
+.sidebar .widget {
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background-color: #ffffff;
+}
+
+.sidebar .form-control {
+    border: 1px solid #e2e2e2;
+}
+
+.blog-list .blog-box {
+    padding: 1rem 0;
+}
+
+.blog-list .blog-meta.big-meta h4 {
+    background-color: #ffffff;
+    margin-left: 0;
+    margin-top: 0.5rem;
+    padding: 0 0 0.5rem;
+}
+
+.jumbotron h1 {
+    color: #ffffff;
+    font-size: 44px;
+}
+
+.jumbotron p {
+    padding: 2rem 0 2rem;
+    margin: 0;
+    line-height: 31px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.blog-meta small {
+    font-size: 10px !important;
+}
+
+.blog-meta small::after {
+    padding-left: 10px;
+}
+
+.btn {
+    border: 0 none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.detail {
+    position: absolute;
+    bottom: 10px;
+    z-index: 11;
+    left: 10px;
+    background-color: #ddd;
+    padding: 0 1rem;
+    color: #ffffff;
+    border-radius: 3px;
+    line-height: 1.9;
+    font-size: 12px;
+}
+
+.detail.veg {
+    background-color: #479037;
+}
+
+hr.invis3 {
+    border: 0;
+    margin: 2rem 0;
+}
+
+.banner-spot {
+    background: #fff none no-repeat scroll right center / auto 100%;
+}
+
+.navbar-toggler {
+    background: #000 none repeat scroll 0 0 !important;
+}
+
+#map {
+    height: 400px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+#map img {
+    max-width: inherit;
+}
+
+.loader {
+    margin-left: 10px;
+}
+
+.map {
+    position: relative;
+}
+
+.map .row {
+    position: relative;
+}
+
+.infobox img {
+    width: 100% !important;
+}
+
+.map .searchmodule {
+    padding: 18px 10px;
+}
+
+.infobox {
+    display: block;
+    margin: 0;
+    padding: 0 0 10px;
+    position: relative;
+    width: 260px;
+    z-index: 100;
+}
+
+.infobox .title {
+    font-size: 13px;
+    line-height: 1;
+    margin-bottom: 0;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+    -webkit-box-shadow: 0 0 0 0 #ab0012;
+    box-shadow: 0 0 0 0 #ab0012;
+}
+
+.tag-cloud-single span,
+.detail.nonveg,
+.page-link,
+.page-link:hover,
+.btn:hover,
+.btn:focus,
+.dmtop,
+.btn-primary.disabled,
+.btn-primary:disabled,
+.header .dropdown-item:hover,
+.header .dropdown-item:focus,
+.dropdown-item:hover,
+.dropdown-item:focus,
+.header {
+    color: #ffffff !important;
+    background-color: #ab0012 !important;
+    border-color: #ab0012 !important;
+    box-shadow: 0 !important;
+}
+
+.authorbox p a,
+.pp a,
+a:hover,
+a:focus {
+    color: #ab0012 !important;
+}

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @var \Juzaweb\Theme\Support\Customize $customize
+ * @var \Juzaweb\Support\Theme\Customize $customize
  */
 
-use Juzaweb\Theme\Support\CustomizeControl;
+use Juzaweb\Support\Theme\CustomizeControl;
 
 $customize->addPanel('header', [
     'title' => __("juzaweb::app.header"),
