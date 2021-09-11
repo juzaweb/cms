@@ -4,22 +4,5 @@
   "description": "Default Theme",
   "author": "The Anh",
   "version": "1.0",
-  "parent": "",
-  "templates": [],
-  "styles": {
-    "js": [
-      "assets/js/jquery.min.js",
-      "assets/js/tether.min.js",
-      "assets/js/bootstrap.min.js",
-      "assets/js/custom.js"
-    ],
-    "css": [
-      "assets/css/bootstrap.css",
-      "assets/css/font-awesome.min.css",
-      "assets/css/style.css",
-      "assets/css/responsive.css",
-      "assets/css/colors.css",
-      "assets/css/version/tech.css"
-    ]
-  }
+  "parent": ""
 }

@@ -1,4 +1,3 @@
-
 <footer class="footer">
     <div class="container">
         <div class="row">
@@ -61,7 +60,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <br>
-                <div class="copyright">&copy; Tech Blog. Design: <a href="http://html.design">HTML Design</a>.</div>
+                <div class="copyright">&copy; Tech Blog. Provided by: <a href="https://juzaweb.com" rel="nofollow">Juzaweb</a>.</div>
             </div>
         </div>
     </div><!-- end container -->

@@ -2,16 +2,20 @@
 
 return [
     'styles' => [
-        "js" => [
-            "assets/js/main.js"
+        'js' => [
+            'assets/js/main.js'
         ],
-        "css" => [
-            "assets/css/bootstrap.css",
-            "assets/css/font-awesome.min.css",
-            "assets/css/style.css",
-            "assets/css/responsive.css",
-            "assets/css/colors.css",
-            "assets/css/version/tech.css"
+        'css' => [
+            'assets/css/main.css',
         ]
-    ]
+    ],
+    'templates' => [
+        'home' => [
+            'name' => trans('juzaweb::app.home'),
+            'view' => 'templates.home'
+        ]
+    ],
+    'nav_menus' => [
+        'primary' => trans('theme::content.primary_menu'),
+    ],
 ];

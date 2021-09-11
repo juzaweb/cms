@@ -1,4 +1,4 @@
-@extends('jw_theme::layout')
+@extends('juzaweb::layouts.frontend')
 
 @section('content')
 

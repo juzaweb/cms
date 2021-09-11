@@ -1,7 +1,6 @@
 <?php
 
 return [
-
-    "title" => "default"
-
+    'title' => 'default',
+    'primary_menu' => 'Primary menu',
 ];

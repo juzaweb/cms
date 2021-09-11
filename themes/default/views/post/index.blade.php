@@ -1,4 +1,4 @@
-@extends('jw_theme::layout')
+@extends('juzaweb::layouts.frontend')
 
 @section('content')
     <div class="page-title lb single-wrapper">
@@ -22,7 +22,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                    <div class="sidebar">
+                    {{--<div class="sidebar">
                         <div class="widget">
                             <div class="banner-spot clearfix">
                                 <div class="banner-img">
@@ -203,16 +203,16 @@
                                 </div><!-- end banner-img -->
                             </div><!-- end banner -->
                         </div><!-- end widget -->
-                    </div><!-- end sidebar -->
+                    </div>--}}<!-- end sidebar -->
                 </div><!-- end col -->
 
                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-wrapper">
                         <div class="blog-grid-system">
                             <div class="row">
-                                @component('theme::items.post')
-
-                                @endcomponent
+                                @foreach($posts as $post)
+                                    {{ get_template_part($post, 'post/content') }}
+                                @endforeach
                             </div>
                         </div><!-- end blog-grid-system -->
                     </div><!-- end page-wrapper -->

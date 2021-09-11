@@ -2,8 +2,7 @@
 
     File Name: style.css
     Template Name: Tech Blog
-    Created By: HTML.Design
-    http://themeforest.net/user/wpdestek
+    Created By: Juzaweb.com
 
 **************************************/
 
@@ -383,7 +382,7 @@ div.tab button:hover {
 }
 
 .header .navbar-nav .has-submenu.menu-large ul li {
-    background: url(images/menubg.jpg) repeat-y center center #ffffff !important;
+    background: url(../images/menubg.jpg) repeat-y center center #ffffff !important;
 }
 
 .tab-details {
@@ -598,7 +597,7 @@ div.tab button:hover {
 
 .footer {
     padding: 4rem 0 4rem;
-    background: url(images/footer.png) repeat-x center bottom #edeff2;
+    background: url(../images/footer.png) repeat-x center bottom #edeff2;
 }
 
 .footer.wb {
@@ -679,7 +678,7 @@ div.tab button:hover {
 
 .dmtop {
     background-color: #111111;
-    background-image: url(images/arrow.png);
+    background-image: url(../images/arrow.png);
     background-position: 50% 50%;
     background-repeat: no-repeat;
     z-index: 9999;
@@ -695,7 +694,6 @@ div.tab button:hover {
     -o-transition: all .7s ease-in-out;
     -ms-transition: all .7s ease-in-out;
     transition: all .7s ease-in-out;
-    overflow: auto;
 }
 
 
@@ -1249,7 +1247,7 @@ hr.invis3 {
     position: absolute;
     height: 90px;
     display: block;
-    content: url(images/hover.png);
+    content: url(../images/hover.png);
     -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     -ms-transition: all .3s ease-in-out;
@@ -1266,7 +1264,7 @@ hr.invis3 {
 }
 
 .hovereffect span.videohover::before {
-    content: url(images/videohover.png);
+    content: url(../images/videohover.png);
 }
 
 .blog-list .blog-meta.big-meta h4 {
