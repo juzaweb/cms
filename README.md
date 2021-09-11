@@ -16,7 +16,7 @@ http://yoursite.com/install
 Goto Admin panel: http://yoursite.com/admin-cp
 
 ## Documentation
-[https://github.com/mymocms/mymocms/wiki](https://github.com/mymocms/mymocms/wiki)
+[https://juzaweb.com/cms](https://juzaweb.com/cms)
 
 ## Contributing
 Contributions are welcome, and are accepted via pull requests. Please review these guidelines before submitting any pull requests.
