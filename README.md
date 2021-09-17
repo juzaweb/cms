@@ -8,7 +8,7 @@ You can see the demo here https://cms.juzaweb.com
 ## Install
 ### Require package with composer
 ```
-composer create-project juzaweb/laravel-cms
+composer create-project --prefer-dist juzaweb/laravel-cms blog
 ```
 ### Goto install
 http://yoursite.com/install
