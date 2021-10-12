@@ -12,9 +12,9 @@
             <span class="color-orange"><a href="" title="">Gadgets</a></span>
             <h4><a title="{{ $post->getTitle() }}" href="{{ $post->getLink() }}">{{ $post->getTitle() }}</a></h4>
             <p>{{ $post->getDescription() }}</p>
-            <small><a href="" title="">14 July, 2017</a></small>
-            <small><a href="" title="">by Jack</a></small>
-            <small><a href="" title=""><i class="fa fa-eye"></i> 2887</a></small>
-        </div><!-- end meta -->
-    </div><!-- end blog-box -->
-</div><!-- end col -->
+            <small><a href="" title="">{{ $post->getCreatedDate() }}</a></small>
+            <small><a href="" title="">by {{ $post->getCreatedByName() }}</a></small>
+            <small><a href="" title=""><i class="fa fa-eye"></i> {{ $post->getViews() }}</a></small>
+        </div>
+    </div>
+</div>
