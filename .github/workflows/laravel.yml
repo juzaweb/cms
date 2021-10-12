@@ -9,12 +9,12 @@ on:
 jobs:
   laravel-tests:
     runs-on: ${{ matrix.os }}
-      strategy:
-        fail-fast: true
-        matrix:
-          os: [ubuntu-latest]
-          php: [7.4, 7.3, 7.2]
-      name: PHP${{ matrix.php }} - ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [7.4, 7.3, 7.2]
+    name: PHP${{ matrix.php }} - ${{ matrix.os }}
 
     steps:
       - name: Setup PHP
