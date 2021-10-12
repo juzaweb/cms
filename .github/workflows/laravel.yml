@@ -14,7 +14,7 @@ jobs:
         matrix:
           os: [ubuntu-latest]
           php: [7.4, 7.3, 7.2]
-      name: PHP${{ matrix.php }} - CMS${{ matrix.cms }} - L${{ matrix.version }} - ${{ matrix.os }}
+      name: PHP${{ matrix.php }} - ${{ matrix.os }}
 
     steps:
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
