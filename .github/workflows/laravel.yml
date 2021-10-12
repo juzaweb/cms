@@ -8,13 +8,21 @@ on:
 
 jobs:
   laravel-tests:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [7.4, 7.3, 7.2]
+    name: PHP${{ matrix.php }} - ${{ matrix.os }}
 
     steps:
-      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.3'
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
       - uses: actions/checkout@v2
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -34,4 +42,5 @@ jobs:
           DB_DATABASE: database/database.sqlite
         run: |
           vendor/bin/phpunit vendor/juzaweb/cms/tests/Install
+          vendor/bin/phpunit vendor/juzaweb/cms/tests/Unit
           vendor/bin/phpunit vendor/juzaweb/cms/tests/Feature

@@ -7,7 +7,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <a class="navbar-brand" href="/"><img src="{{ theme_assets('assets/images/version/tech-logo.png') }}" alt=""></a>
+                <a class="navbar-brand" href="/"><img src="{{ get_logo() }}" alt="{{ get_config('title') }}"></a>
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     {!! jw_nav_menu([
@@ -18,10 +18,14 @@
 
                     <ul class="navbar-nav mr-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-rss"></i></a>
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-rss"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-android"></i></a>
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-android"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="fa fa-apple"></i></a>
