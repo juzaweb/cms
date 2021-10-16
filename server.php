@@ -1,10 +1,13 @@
 <?php
 
 /**
- * Laravel - A PHP Framework For Web Artisans
+ * Juzaweb CMS - The Best for Laravel Project
  *
- * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
+ * @package juzaweb/laravel-cms
+ * @author The Anh Dang
+ *
+ * Developed based on Laravel Framework
+ * Github: https://github.com/juzaweb/laravel-cms
  */
 
 $uri = urldecode(
