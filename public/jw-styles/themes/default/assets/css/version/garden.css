@@ -1,0 +1,159 @@
+/**************************************
+
+    File Name: garden.css
+    Template Name: Tech Blog
+    Created By: HTML.Design
+    http://themeforest.net/user/wpdestek
+
+**************************************/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+body,
+p,
+.topbar-section,
+.navbar-inverse .navbar-nav .nav-link,
+.header .dropdown-menu,
+.navbar-nav .nav-link {
+    font-family: 'Droid Sans', serif;
+}
+
+.topbar-section {
+	border:0;
+}
+
+.blog-list .blog-meta.big-meta h4 {
+    margin-left: 0;
+    margin-top: 0;
+    padding: 1rem 0;
+}
+
+.footer {
+	background-image: none;
+}
+
+.blog-list-widget .mb-1 {
+	font-weight: bold;
+}
+
+.newsletter-widget .form-inline .form-control {
+	height: 54px;
+}
+
+.dropdown-menu {
+	border:0;
+}
+
+.navbar-inverse .navbar-nav .nav-link, .navbar-nav .nav-link {
+	font-weight: 400;
+}
+
+.blog-meta span {
+    background-color: #111111;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 0.1rem 1rem;
+}
+
+#map {
+    height: 400px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+#map img {
+    max-width: inherit;
+}
+
+.loader {
+    margin-left: 10px;
+}
+
+.map {
+    position: relative;
+}
+
+.map .row {
+    position: relative;
+}
+
+.infobox img {
+    width: 100% !important;
+}
+
+.map .searchmodule {
+    padding: 18px 10px;
+}
+
+.infobox {
+    display: block;
+    margin: 0;
+    padding: 0 0 10px;
+    position: relative;
+    width: 260px;
+    z-index: 100;
+}
+
+.infobox .title {
+    font-size: 13px;
+    line-height: 1;
+    margin-bottom: 0;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.header .dropdown-item:hover,
+.header .dropdown-item:focus,
+.blog-meta span,
+.blog-meta span a,
+.footer p,
+.footer a,
+.page-link,
+.page-link:hover,
+.topbar-section a:hover,
+.topbar-section a:focus,
+.topbar-section a,
+.topbar-section i {
+	color:#ffffff !important; 
+}
+
+.footer {
+	background-color: #000000 !important;
+}
+
+.small-title,
+.page-title .bg-green, .masonry-box:hover .blog-meta span.bg-green, .color-green a,
+.navbar-toggler,
+.masonry-box:hover .blog-meta span.bg-aqua,
+.blog-meta span.bg-aqua,
+.search-form .btn:hover, .search-form .btn:focus, .search-form .btn,
+.btn,
+.btn:hover,
+.dropdown-item:hover,
+.dropdown-item:focus,
+.btn:focus,
+.dmtop,
+.page-link,
+.topbar-section {
+	color:#ffffff !important;
+	background-color: #74a044 !important;
+	border-color: #74a044 !important;
+}
+
+
+.authorbox p a,
+.pp a,
+a:hover,
+a:focus,
+.footer .fa:hover,
+.footer a:hover,
+.navbar-nav .nav-link.active.color-green-hover,
+.navbar-nav .nav-link.color-green-hover:hover,
+.navbar-nav .nav-link.color-green-hover:focus {
+    color: #74a044 !important;
+}

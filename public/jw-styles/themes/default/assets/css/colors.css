@@ -1,0 +1,174 @@
+/**************************************
+
+    File Name: colors.css
+    Template Name: Tech Blog
+    Created By: HTML.Design
+    http://themeforest.net/user/wpdestek
+
+**************************************/
+
+
+/* COLORS 
+**************************************/
+
+.authorbox p a,
+.pp a,
+.sitemap-wrapper small,
+.fa-user-circle-o,
+.footer h5:hover,
+a:hover,
+a:focus,
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-inverse .navbar-nav .active > .nav-link,
+.navbar-inverse .navbar-nav .nav-link.active,
+.navbar-inverse .navbar-nav .nav-link.open,
+.navbar-inverse .navbar-nav .open > .nav-link {
+    color: #3197d6 !important;
+}
+
+.dmtop,
+.search-form .btn:hover,
+.search-form .btn:focus,
+.search-form .btn {
+    color: #ffffff !important;
+    background-color: #3197d6 !important;
+}
+
+.tag-cloud-single span,
+.page-title i,
+.btn:hover,
+.sitemap-wrapper .year,
+.btn:focus,
+.navbar-inverse .navbar-toggler {
+    color: #ffffff !important;
+    background-color: #3197d6;
+}
+
+.blockquote {
+    border-left-color: #3197d6;
+}
+
+.footer .widget-title {
+    border-color: #3197d6;
+}
+
+
+/* OTHER COLORS 
+**************************************/
+
+.navbar-nav .nav-link.active.color-pink-hover,
+.navbar-nav .nav-link.color-pink-hover:hover,
+.navbar-nav .nav-link.color-pink-hover:focus {
+    color: #deacca !important;
+}
+
+.page-title .bg-pink,
+.portfolio .blog-meta span.bg-pink,
+.masonry-box:hover .blog-meta span.bg-pink,
+.color-pink a {
+    background-color: #deacca !important;
+}
+
+.navbar-nav .nav-link.active.color-aqua-hover,
+.navbar-nav .nav-link.color-aqua-hover:hover,
+.navbar-nav .nav-link.color-aqua-hover:focus {
+    color: #2ad2c9 !important;
+}
+
+.page-title .bg-aqua,
+.masonry-box:hover .blog-meta span.bg-aqua,
+.color-aqua a {
+    background-color: #2ad2c9 !important;
+}
+
+.navbar-nav .nav-link.active.color-green-hover,
+.navbar-nav .nav-link.color-green-hover:hover,
+.navbar-nav .nav-link.color-green-hover:focus {
+    color: #34bf49 !important;
+}
+
+.page-title .bg-green,
+.masonry-box:hover .blog-meta span.bg-green,
+.color-green a {
+    background-color: #34bf49 !important;
+}
+
+.navbar-nav .nav-link.active.color-red-hover,
+.navbar-nav .nav-link.color-red-hover:hover,
+.navbar-nav .nav-link.color-red-hover:focus {
+    color: #ed1b2e !important;
+}
+
+.page-title .bg-red,
+.masonry-box:hover .blog-meta span.bg-red,
+.color-red a {
+    background-color: #ed1b2e !important;
+}
+
+.navbar-nav .nav-link.active.color-yellow-hover,
+.navbar-nav .nav-link.color-yellow-hover:hover,
+.navbar-nav .nav-link.color-yellow-hover:focus {
+    color: #ffb900 !important;
+}
+
+.page-title .bg-yellow,
+.masonry-box:hover .blog-meta span.bg-yellow,
+.color-yellow a {
+    background-color: #ffb900 !important;
+}
+
+.navbar-nav .nav-link.active.color-grey-hover,
+.navbar-nav .nav-link.color-grey-hover:hover,
+.navbar-nav .nav-link.color-grey-hover:focus {
+    color: #6f1683 !important;
+}
+
+.portfolio .blog-meta span.bg-grey,
+.page-title .bg-grey,
+.masonry-box:hover .blog-meta span.bg-grey,
+.color-grey a {
+    background-color: #6f1683 !important;
+}
+
+.fa-star-o,
+.fa-star {
+    color: #fbb034;
+}
+
+.topsocial .fa.fa-facebook {
+    color: #4b6ea9;
+}
+
+.topsocial .fa.fa-google-plus {
+    color: #e86142;
+}
+
+.topsocial .fa.fa-twitter {
+    color: #1ab2f5;
+}
+
+.topsocial .fa.fa-linkedin {
+    color: #0088c0;
+}
+
+.fa-bolt,
+.topsocial .fa.fa-pinterest {
+    color: #d73533;
+}
+
+.topsocial .fa.fa-youtube {
+    color: #d44638;
+}
+
+.topsocial .fa.fa-instagram {
+    color: #405de6;
+}
+
+.topsocial .fa.fa-flickr {
+    color: #ff0084;
+}
+
+.footer.wb .btn {
+    color: rgba(255, 255, 255, 1) !important;
+}

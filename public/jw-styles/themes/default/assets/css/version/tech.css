@@ -1,0 +1,332 @@
+/**************************************
+
+    File Name: tech.css
+    Template Name: Tech Blog
+    Created By: HTML.Design
+    http://themeforest.net/user/wpdestek
+
+**************************************/
+
+body {
+    background-color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+body,
+.navbar-toggleable-md .navbar-nav .nav-link,
+.market-header,
+.btn,
+.dropdown-item,
+.form-control,
+p {
+    font-family: 'Poppins', serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 600;
+}
+
+.navbar-inverse .navbar-nav .nav-link,
+.navbar-nav .nav-link {
+    color: #ffffff !important;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.header .navbar-nav .has-submenu ul {
+    margin-top: 17px !important
+}
+
+.header .navbar-nav .has-submenu.menu-large ul {
+    margin-top: 0px !important;
+}
+
+.navbar-inverse .navbar-nav .nav-link:focus,
+.navbar-nav .nav-link:hover,
+.navbar-inverse .navbar-nav .nav-link:focus,
+.navbar-nav .nav-link:focus {
+    opacity: 0.8;
+}
+
+.dropdown-toggle::after {
+    margin-top: -4px;
+}
+
+.mr-2 .nav-link {
+    font-size: 21px !important;
+    padding: 0.6rem 0.6rem 0 !important;
+}
+
+.first-slot {
+    float: left;
+    width: 50%;
+}
+
+.last-slot,
+.second-slot {
+    float: left;
+    width: 25%;
+}
+
+.first-slot .blog-meta h4 {
+    font-size: 31px;
+    line-height: 1.4;
+}
+
+.first-section .blog-meta h4 {
+    font-weight: 600;
+    padding: 0.8rem 0 0.5rem !important;
+}
+
+.blog-meta.big-meta h4 {
+    font-size: 24px;
+}
+
+.single-wrapper {
+    margin-top: 3.5rem;
+}
+
+.first-section {
+    margin-top: 4rem;
+}
+
+.blog-grid-system .color-orange {
+    display: block;
+    margin-top: 1rem;
+}
+
+.blog-grid-system .color-orange a {
+    color: #ffffff !important;
+    font-size: 13px;
+    padding: 0 0.7rem;
+    border-radius: 3px;
+}
+
+.blog-top {
+    margin-bottom: 2rem;
+}
+
+.blog-top h4 {
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.banner-spot {
+    padding: 0 !important;
+    border: 1px solid #e2e2e2;
+}
+
+.page-wrapper .banner-spot {
+    padding: 1rem !important;
+    border: 1px solid #e2e2e2;
+}
+
+.blog-top .fa {
+    font-size: 18px !important;
+    line-height: 1 !important;
+    padding-left: 10px;
+}
+
+.blog-meta small a,
+.blog-meta small {
+    font-weight: 500;
+    color: #999 !important;
+}
+
+.fa-star {
+    font-size: 12px;
+    margin: 0 -2px 0 0;
+}
+
+.social-button {
+    background-color: #dddddd;
+    display: table;
+    padding: 0.5rem 1rem;
+    color: #ffffff !important;
+    position: relative;
+    width: 100%;
+}
+
+.social-button .fa {
+    color: #ffffff !important;
+}
+
+.social-button p {
+    margin: 10px 0 0;
+    padding: 0;
+    color: #ffffff !important;
+    line-height: 1;
+}
+
+.facebook-button {
+    background-color: #3b5998;
+}
+
+.twitter-button {
+    background-color: #1da1f2;
+}
+
+.google-button {
+    background-color: #ea4335;
+}
+
+.youtube-button {
+    background-color: #cd201f;
+}
+
+.blog-meta .bg-orange {
+    color: #ffffff !important;
+    padding: 0 0.8rem;
+    border-radius: 3px;
+}
+
+.blog-meta small.firstsmall:after {
+    content: "" !important;
+    padding-left: 0;
+}
+
+.footer {
+    background-color: #000000;
+    background-image: none;
+}
+
+.footer .widget-title {
+    color: #ffffff !important;
+}
+
+.footer p {
+    color: #999999 !important;
+}
+
+.footer a {
+    color: #999999 !important;
+}
+
+.footer .link-widget li {
+    border-color: #444;
+}
+
+.trend-videos h4 {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.trend-videos h4 a {
+    color: #111111 !important;
+}
+
+.trend-videos hr.invis {
+    margin: 1rem 0;
+}
+
+.navbar-toggler-right {
+    top: 18px;
+}
+
+.blog-title-area span a {
+    font-size: 13px;
+}
+
+.pp .float-right {
+    margin-left: 2rem;
+}
+
+.trend-videos .hovereffect span:before {
+    opacity: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+.bg-orange {
+    background-color: #FF6347 !important;
+}
+
+.page-title .bg-orange,
+.masonry-box:hover .blog-meta span.bg-orange,
+.color-orange a {
+    background-color: #FF6347 !important;
+}
+
+.footer a:hover,
+.footer .fa:hover,
+.footer .fa:focus {
+    color: #0091e5 !important;
+}
+
+.authorbox p a,
+.pp a,
+.blog-top .fa-rss,
+a:hover,
+a:focus {
+    color: #FF6347 !important;
+}
+
+.btn,
+.page-link:hover,
+.page-link:focus,
+.btn:hover,
+.btn:focus {
+    color: #ffffff !important;
+    background: rgba(0, 0, 0, 0) linear-gradient(to right, #0091e5 0px, #00b7e5 100%) repeat scroll 0 0 !important
+}
+
+.tag-cloud-single span,
+.navbar-inverse {
+    color: #ffffff !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0) linear-gradient(to right, #0091e5 0px, #00b7e5 100%) repeat scroll 0 0 !important
+}
+
+.gp-button.btn-primary:hover,
+.gp-button.btn-primary:focus,
+.gp-button.btn-primary {
+    border-color: #DA5333 !important;
+    background: #DA5333 !important;
+}
+
+.fb-button.btn-primary:focus,
+.fb-button.btn-primary:hover,
+.fb-button.btn-primary {
+    background: #3B5998 !important;
+    border-color: #3B5998 !important;
+}
+
+.tw-button.btn-primary:hover,
+.tw-button.btn-primary:focus,
+.tw-button.btn-primary {
+    background: #00B6F1 !important;
+    border-color: #00B6F1 !important;
+}
+
+@media (max-width: 1080px) {
+    .first-section .blog-meta h4 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 980px) {
+    .first-section .blog-meta h4 {
+        font-size: 16px;
+    }
+    .shadow-desc {
+        padding: 1rem 0.5rem;
+    }
+    .last-slot,
+    .second-slot,
+    .first-slot {
+        float: none;
+        width: 100%;
+        display: block;
+    }
+}
