@@ -16,7 +16,7 @@
         "php": "^7.2|^8.0",
         "ext-json": "*",
         "fideloper/proxy": "^4.4",
-        "juzaweb/cms": "^1.0",
+        "juzaweb/cms": "^1.1",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.5"
     },
