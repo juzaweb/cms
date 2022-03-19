@@ -1,0 +1,33 @@
+{% if data.links.next %}
+    <nav>
+        <ul class="pagination">
+            {% if data.meta.current_page == 1 %}
+                <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                    <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ data.meta.prev }}" rel="prev" aria-label="{{ __('pagination.previous') }}">&lsaquo;</a>
+                </li>
+            {% endif %}
+
+            {% for page in data.meta.links %}
+                {% if page.active %}
+                    <li class="page-item active" aria-current="page"><span class="page-link">{{ page.label }}</span></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="{{ page.url }}">{{ page.label }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if data.links.next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ data.links.next }}" rel="next" aria-label="{{ __('pagination.next') }}">&rsaquo;</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled" aria-disabled="true" aria-label="{{ __('pagination.next') }}">
+                    <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

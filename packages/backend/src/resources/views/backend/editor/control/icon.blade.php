@@ -1,0 +1,2 @@
+<label class="next-label" for="input-{{ $index }}-{{ $icard }}-{{ $iinput }}">{{ @$input['title'] }}</label>
+<input type="text" name="{{ $input_name }}" class="next-input select-icon" value="{{ @$input_value }}">

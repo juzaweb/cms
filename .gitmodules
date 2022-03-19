@@ -1,0 +1,6 @@
+[submodule "packages/cms"]
+	path = packages/cms
+	url = https://github.com/juzaweb/cms
+[submodule "packages/backend"]
+	path = packages/backend
+	url = https://github.com/juzaweb/backend

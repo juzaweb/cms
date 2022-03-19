@@ -1,0 +1,25 @@
+{
+    "form": [
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Title"
+        },
+        {
+            "type": "text",
+            "name": "type",
+            "label": "Type",
+            "data": {
+                "default": "posts"
+            }
+        },
+        {
+            "type": "text",
+            "name": "limit",
+            "label": "Limit",
+            "data": {
+                "default": 10
+            }
+        }
+    ]
+}

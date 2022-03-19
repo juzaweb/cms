@@ -1,0 +1,2 @@
+<label class="next-label" for="theme-{{ $key }}">{{ $args->get('label') }}</label>
+<input autocomplete="off" name="theme[{{ $args->get('settings') }}]" class="next-input" id="theme-{{ $key }}" value="{{ get_theme_mod($args->get('settings')) }}"/>
