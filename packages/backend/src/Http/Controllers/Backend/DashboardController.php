@@ -66,13 +66,11 @@ class DashboardController extends BackendController
 
     public function getDataTopViews(Request $request)
     {
-        global $site;
-
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
 
         $result = Cache::store('file')->remember(
-            "data_top_views_{$site->id}",
+            cache_prefix('data_top_views'),
             3600,
             function () use ($offset, $limit) {
                 $query = Post::query();
@@ -106,10 +104,8 @@ class DashboardController extends BackendController
 
     public function viewsChart()
     {
-        global $site;
-
         $result = Cache::store('file')->remember(
-            "views_chart_{$site->id}",
+            cache_prefix('views_chart'),
             3600,
             function () {
                 $result = [];

@@ -60,7 +60,7 @@ class LoadDataController extends BackendController
         }
 
         if ($search) {
-            $query->where('name', 'ilike', '%'. $search .'%');
+            $query->where('name', JW_SQL_LIKE, '%'. $search .'%');
         }
 
         if ($explodes) {
@@ -90,8 +90,8 @@ class LoadDataController extends BackendController
 
         if ($search) {
             $query->where(function (Builder $q) use ($search) {
-                $q->where('name', 'ilike', '%'. $search .'%');
-                $q->orWhere('email', 'ilike', '%'. $search .'%');
+                $q->where('name', JW_SQL_LIKE, '%'. $search .'%');
+                $q->orWhere('email', JW_SQL_LIKE, '%'. $search .'%');
             });
         }
 
@@ -121,7 +121,7 @@ class LoadDataController extends BackendController
 
         if ($search) {
             $query->where(function (Builder $q) use ($search) {
-                $q->orWhere('name', 'ilike', '%'. $search .'%');
+                $q->orWhere('name', JW_SQL_LIKE, '%'. $search .'%');
             });
         }
 
@@ -182,7 +182,7 @@ class LoadDataController extends BackendController
         ]);
 
         if ($search) {
-            $query->where('title', 'ilike', '%'. $search .'%');
+            $query->where('title', JW_SQL_LIKE, '%'. $search .'%');
         }
 
         if ($explodes) {
@@ -220,7 +220,7 @@ class LoadDataController extends BackendController
         ]);
 
         if ($search) {
-            $query->where('title', 'ilike', '%'. $search .'%');
+            $query->where('title', JW_SQL_LIKE, '%'. $search .'%');
         }
 
         $paginate = $query->paginate($perPage);
@@ -255,7 +255,7 @@ class LoadDataController extends BackendController
         $query->where('type', '=', $type);
 
         if ($search) {
-            $query->where('name', 'ilike', '%'. $search .'%');
+            $query->where('name', JW_SQL_LIKE, '%'. $search .'%');
         }
 
         $paginate = $query->paginate($perPage);
@@ -290,7 +290,7 @@ class LoadDataController extends BackendController
         ]);
 
         if ($search) {
-            $query->where('name', 'ilike', '%'. $search .'%');
+            $query->where('name', JW_SQL_LIKE, '%'. $search .'%');
         }
 
         $paginate = $query->paginate($perPage);

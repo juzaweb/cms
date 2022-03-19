@@ -65,8 +65,8 @@ trait TaxonomyModel
 
         if ($keyword = Arr::get($params, 'keyword')) {
             $builder->where(function (Builder $q) use ($keyword) {
-                $q->where('name', 'ilike', '%'. $keyword .'%');
-                $q->orWhere('description', 'ilike', '%'. $keyword .'%');
+                $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
+                $q->orWhere('description', JW_SQL_LIKE, '%'. $keyword .'%');
             });
         }
 

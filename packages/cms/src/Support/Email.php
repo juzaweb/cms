@@ -2,7 +2,6 @@
 
 namespace Juzaweb\Support;
 
-use Juzaweb\Facades\Site;
 use Juzaweb\Jobs\SendEmailJob;
 use Juzaweb\Backend\Models\EmailList;
 use Juzaweb\Backend\Models\EmailTemplate;
@@ -90,8 +89,6 @@ class Email
 
     public function send()
     {
-        global $site;
-
         $templateId = $this->validate();
         $data = [];
 
@@ -118,7 +115,7 @@ class Email
                     (new SendEmail($emailList))->send();
                     break;
                 case 'queue':
-                    SendEmailJob::dispatch($emailList, $site->id);
+                    SendEmailJob::dispatch($emailList);
                     break;
             }
         }

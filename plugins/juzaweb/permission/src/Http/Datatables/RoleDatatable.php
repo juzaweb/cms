@@ -47,7 +47,7 @@ class RoleDatatable extends DataTable
 
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(function (Builder $q) use ($keyword) {
-                // $q->where('title', 'ilike', '%'. $keyword .'%');
+                // $q->where('title', JW_SQL_LIKE, '%'. $keyword .'%');
             });
         }
 

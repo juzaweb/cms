@@ -26,8 +26,6 @@ class EmailTemplateController extends BackendController
 
     protected function validator(array $attributes, ...$params)
     {
-        global $site;
-
         $id = $attributes['id'] ?? null;
 
         $validator = Validator::make(
@@ -37,12 +35,7 @@ class EmailTemplateController extends BackendController
                 'code' => [
                     'required',
                     'max:50',
-                    Rule::unique('email_templates')
-                        ->where(function ($q) use ($attributes, $site) {
-                            return $q->where('code', $attributes['code'])
-                                ->where('site_id', $site->id);
-                        })
-                        ->ignore($id),
+                    Rule::modelExists(EmailTemplate::class, 'code')->ignore($id),
                 ],
             ]
         );

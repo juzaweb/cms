@@ -108,8 +108,8 @@ class ResourceDatatable extends DataTable
 
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(function (Builder $q) use ($keyword) {
-                $q->where('name', 'ilike', '%'.$keyword.'%');
-                $q->orWhere('description', 'ilike', '%'.$keyword.'%');
+                $q->where('name', JW_SQL_LIKE, '%'.$keyword.'%');
+                $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
             });
         }
 

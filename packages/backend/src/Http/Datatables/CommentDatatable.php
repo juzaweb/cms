@@ -97,8 +97,8 @@ class CommentDatatable extends DataTable
 
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(function (Builder $q) use ($keyword) {
-                $q->where('name', 'ilike', '%'. $keyword .'%');
-                $q->orWhere('content', 'ilike', '%'. $keyword .'%');
+                $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
+                $q->orWhere('content', JW_SQL_LIKE, '%'. $keyword .'%');
             });
         }
 

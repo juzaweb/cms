@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Juzaweb\Backend\Events\RegisterSuccessful;
-use Juzaweb\Facades\Site;
 use Juzaweb\Models\User;
+use Juzaweb\Support\Validators\ModelExists;
 use Juzaweb\Traits\ResponseMessage;
 
 trait AuthRegisterForm
@@ -45,19 +45,14 @@ trait AuthRegisterForm
         if (! get_config('users_can_register', 1)) {
             return $this->error(trans('cms::message.register-form.register-closed'));
         }
-
-        global $site;
-
+        
         // Validate register
         $request->validate([
             'email' => [
                 'required',
                 'email',
                 'max:150',
-                Rule::unique('users')->where(function ($q) use ($request, $site) {
-                    return $q->where('email', $request->input('email'))
-                        ->where('site_id', $site->id);
-                })
+                new ModelExists(User::class, 'email')
             ],
             'password' => 'required|min:6|max:32|confirmed',
         ]);

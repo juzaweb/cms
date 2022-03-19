@@ -115,16 +115,16 @@ class Search extends Model
                     $q->whereRaw('MATCH (`title`) AGAINST (? IN BOOLEAN MODE)', [$keyword]);
                     $q->orWhereRaw('MATCH (`description`) AGAINST (? IN BOOLEAN MODE)', [$keyword]);
                     $q->orWhereRaw('MATCH (`keyword`) AGAINST (? IN BOOLEAN MODE)', [$keyword]);
-                    $q->orWhere('title', 'ilike', '%'.$keyword.'%');
-                    $q->orWhere('description', 'ilike', '%'.$keyword.'%');
-                    $q->orWhere('keyword', 'ilike', '%'.$keyword.'%');
+                    $q->orWhere('title', JW_SQL_LIKE, '%'.$keyword.'%');
+                    $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
+                    $q->orWhere('keyword', JW_SQL_LIKE, '%'.$keyword.'%');
                 });
             } else {
                 // $builder->addSelect(DB::raw('NULL AS match_score'));
                 $builder->where(function (Builder $q) use ($keyword) {
-                    $q->where('title', 'ilike', '%'.$keyword.'%');
-                    $q->orWhere('description', 'ilike', '%'.$keyword.'%');
-                    $q->orWhere('keyword', 'ilike', '%'.$keyword.'%');
+                    $q->where('title', JW_SQL_LIKE, '%'.$keyword.'%');
+                    $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
+                    $q->orWhere('keyword', JW_SQL_LIKE, '%'.$keyword.'%');
                 });
             }
         }

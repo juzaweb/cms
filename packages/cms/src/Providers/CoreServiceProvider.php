@@ -19,9 +19,11 @@ use Juzaweb\Backend\Contracts\HookActionContract;
 use Juzaweb\Contracts\XssCleanerContract;
 use Juzaweb\Support\GlobalData;
 use Juzaweb\Backend\Support\HookAction;
+use Juzaweb\Support\Validators\ModelExists;
 use Juzaweb\Support\XssCleaner;
 use Juzaweb\Support\Validators\ReCaptcha;
 use Juzaweb\Support\Validators\DomainValidator;
+use Illuminate\Validation\Rule;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -32,7 +34,11 @@ class CoreServiceProvider extends ServiceProvider
 
         Validator::extend('recaptcha', [ReCaptcha::class, 'validate']);
         Validator::extend('domain', [DomainValidator::class, 'validate']);
-
+    
+        Rule::macro('modelExists', function (string $modelClass, string $modelAttribute = 'id', callable $callback = null) {
+            return new ModelExists($modelClass, $modelAttribute, $callback);
+        });
+    
         Schema::defaultStringLength(150);
 
         /*$this->app->booted(function () {

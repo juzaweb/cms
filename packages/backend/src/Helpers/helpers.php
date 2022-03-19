@@ -712,13 +712,6 @@ function seo_string($string, $chars = 70)
     return sub_char($string, $chars);
 }
 
-function is_master_site()
-{
-    global $site;
-
-    return empty($site->id);
-}
-
 function jw_basename($name)
 {
     $base = basename($name);
@@ -758,4 +751,9 @@ function sub_char($str, $n, $end = '...')
     $html = mb_substr($str, 0, $n);
     $html = mb_substr($html, 0, mb_strrpos($html, ' '));
     return $html . $end;
+}
+
+function cache_prefix($name)
+{
+    return 'juzaweb_' . $name;
 }

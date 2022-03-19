@@ -18,15 +18,13 @@ class PostObserver
 {
     public function deleting(Post $post)
     {
-        global $site;
-
         $menuItems = $post->menuItems()->get(['menu_id']);
         $menus = $menuItems->map(function ($item) {
             return $item->menu_id;
         })->toArray();
 
         foreach ($menus as $menu) {
-            Cache::store('file')->pull("menu_items_menu_{$menu}_" . $site->id);
+            Cache::store('file')->pull(cache_prefix("menu_items_menu_{$menu}"));
         }
 
         foreach ($menuItems as $item) {
@@ -36,15 +34,13 @@ class PostObserver
 
     public function updating(Post $post)
     {
-        global $site;
-
         $menuItems = $post->menuItems()->get(['menu_id']);
         $menus = $menuItems->map(function ($item) {
             return $item->menu_id;
         })->toArray();
 
         foreach ($menus as $menu) {
-            Cache::store('file')->pull("menu_items_menu_{$menu}_" . $site->id);
+            Cache::store('file')->pull(cache_prefix("menu_items_menu_{$menu}"));
         }
     }
 }

@@ -63,9 +63,9 @@ class OrderDatatable extends DataTable
 
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(function (Builder $q) use ($keyword) {
-                $q->where('name', 'ilike', '%'. $keyword .'%');
-                $q->orWhere('email', 'ilike', '%'. $keyword .'%');
-                $q->orWhere('phone', 'ilike', '%'. $keyword .'%');
+                $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
+                $q->orWhere('email', JW_SQL_LIKE, '%'. $keyword .'%');
+                $q->orWhere('phone', JW_SQL_LIKE, '%'. $keyword .'%');
             });
         }
 

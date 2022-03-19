@@ -98,11 +98,11 @@ class TranslationDatatable extends DataTable
 
         if ($search = Arr::get($data, 'keyword')) {
             $query->where(function ($q) use ($search) {
-                $q->where('a.group', 'ilike', "%{$search}%");
-                $q->orWhere('a.key', 'ilike', "%{$search}%");
-                $q->orWhere('a.value', 'ilike', "%{$search}%");
-                $q->orWhere('a.object_key', 'ilike', "%{$search}%");
-                $q->orWhere('b.text', 'ilike', "%{$search}%");
+                $q->where('a.group', JW_SQL_LIKE, "%{$search}%");
+                $q->orWhere('a.key', JW_SQL_LIKE, "%{$search}%");
+                $q->orWhere('a.value', JW_SQL_LIKE, "%{$search}%");
+                $q->orWhere('a.object_key', JW_SQL_LIKE, "%{$search}%");
+                $q->orWhere('b.text', JW_SQL_LIKE, "%{$search}%");
             });
         }
 

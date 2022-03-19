@@ -86,8 +86,8 @@ class EmailLogDatatable extends DataTable
 
         if ($search = Arr::get($data, 'keyword')) {
             $query->where(function (Builder $q) use ($search) {
-                $q->where('subject', 'ilike', '%'. $search .'%');
-                $q->orWhere('content', 'ilike', '%'. $search .'%');
+                $q->where('subject', JW_SQL_LIKE, '%'. $search .'%');
+                $q->orWhere('content', JW_SQL_LIKE, '%'. $search .'%');
             });
         }
 
@@ -109,8 +109,6 @@ class EmailLogDatatable extends DataTable
 
     public function bulkActions($action, $ids)
     {
-        global $site;
-
         switch ($action) {
             case 'delete':
                 EmailList::destroy($ids);
@@ -132,7 +130,7 @@ class EmailLogDatatable extends DataTable
                             (new SendEmail($emailList))->send();
                             break;
                         case 'queue':
-                            SendEmailJob::dispatch($emailList, $site->id);
+                            SendEmailJob::dispatch($emailList);
                             break;
                     }
 

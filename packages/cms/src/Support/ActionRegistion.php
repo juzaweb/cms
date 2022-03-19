@@ -31,7 +31,7 @@ class ActionRegistion
     {
         return $this->cache->store('file')
             ->rememberForever(
-                "site_actions",
+                cache_prefix("site_actions"),
                 function () {
                     $plugins = get_config('plugin_statuses', []);
                     $plugins = array_keys($plugins);

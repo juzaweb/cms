@@ -70,7 +70,7 @@ class PaymentMethodDatatable extends DataTable
 
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(function (Builder $q) use ($keyword) {
-                $q->where('name', 'ilike', '%'. $keyword .'%');
+                $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
             });
         }
 

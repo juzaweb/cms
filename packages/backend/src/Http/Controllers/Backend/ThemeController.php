@@ -102,11 +102,9 @@ class ThemeController extends BackendController
 
     protected function putCache($theme)
     {
-        global $site;
-
         DB::beginTransaction();
         try {
-            Cache::pull('jw_theme_configs_' . $site->id);
+            Cache::pull(cache_prefix('jw_theme_configs'));
 
             $themeStatus = [
                 'name' => $theme,

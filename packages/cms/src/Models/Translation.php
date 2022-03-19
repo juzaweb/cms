@@ -45,7 +45,7 @@ class Translation extends Model
                         'key AS keylang',
                         'en AS default',
                         $column .' AS lang',
-                    ])->where('key', 'ilike', $group . '.%')
+                    ])->where('key', JW_SQL_LIKE, $group . '.%')
                         ->get();
 
                     $arr = [];

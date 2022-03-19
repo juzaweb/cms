@@ -153,8 +153,8 @@ trait PostTypeModel
         if ($keyword = Arr::get($params, 'q')) {
             $keyword = trim($keyword);
             $builder->where(function (Builder $q) use ($keyword) {
-                $q->where('title', 'ilike', '%'.$keyword.'%');
-                $q->orWhere('description', 'ilike', '%'.$keyword.'%');
+                $q->where('title', JW_SQL_LIKE, '%'.$keyword.'%');
+                $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
             });
         }
 

@@ -56,8 +56,8 @@ class EmailTemplateDataTable extends DataTable
 
         if ($keyword = Arr::get($data, 'keyword')) {
             $query->where(function (Builder $q) use ($keyword) {
-                $q->orWhere('code', 'ilike', '%'. $keyword .'%');
-                $q->orWhere('subject', 'ilike', '%'. $keyword .'%');
+                $q->orWhere('code', JW_SQL_LIKE, '%'. $keyword .'%');
+                $q->orWhere('subject', JW_SQL_LIKE, '%'. $keyword .'%');
             });
         }
 

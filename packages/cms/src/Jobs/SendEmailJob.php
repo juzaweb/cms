@@ -9,7 +9,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Juzaweb\Backend\Models\EmailList;
 use Juzaweb\Support\SendEmail;
-use Juzaweb\Traits\MultisiteCli;
 
 class SendEmailJob implements ShouldQueue
 {
@@ -17,22 +16,18 @@ class SendEmailJob implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    use MultisiteCli;
 
     protected $mail;
-    protected $siteId;
 
     /**
      * Create a new job instance.
      *
      * @param EmailList $mail
-     * @param int $siteId
      * @return void
      */
-    public function __construct($mail, $siteId)
+    public function __construct($mail)
     {
         $this->mail = $mail;
-        $this->siteId = $siteId;
     }
 
     /**
@@ -43,8 +38,6 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->setUpSite($this->siteId);
-
         (new SendEmail($this->mail))->send();
     }
 }

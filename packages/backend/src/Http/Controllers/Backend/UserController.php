@@ -30,7 +30,6 @@ class UserController extends BackendController
     protected function validator(array $attributes, ...$params)
     {
         $allStatus = array_keys(User::getAllStatus());
-        global $site;
 
         return [
             'name' => 'required|string|max:250',
@@ -40,11 +39,7 @@ class UserController extends BackendController
                 'required_if:id,',
                 'email',
                 'max:150',
-                Rule::unique('users')
-                    ->where(function ($q) use ($attributes, $site) {
-                        return $q->where('email', $attributes['email'])
-                            ->where('site_id', $site->id);
-                    })
+                Rule::modelExists(User::class, 'email'),
             ],
             'status' => 'required|in:' . implode(',', $allStatus),
         ];

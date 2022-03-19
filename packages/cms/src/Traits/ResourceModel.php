@@ -33,7 +33,7 @@ trait ResourceModel
         if ($keyword = Arr::get($params, 'keyword')) {
             $builder->where(function (Builder $q) use ($keyword) {
                 foreach ($this->searchFields as $key => $attribute) {
-                    $q->orWhere($attribute, 'ilike', '%'. $keyword .'%');
+                    $q->orWhere($attribute, JW_SQL_LIKE, '%'. $keyword .'%');
                 }
             });
         }

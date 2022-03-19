@@ -18,15 +18,11 @@ class MenuObserver
 {
     public function saved(Menu $menu)
     {
-        global $site;
-
-        Cache::store('file')->pull("menu_items_menu_{$menu->id}_" . $site->id);
+        Cache::store('file')->pull(cache_prefix("menu_items_menu_{$menu->id}_"));
     }
 
     public function deleted(Menu $menu)
     {
-        global $site;
-
-        Cache::store('file')->pull("menu_items_menu_{$menu->id}_" . $site->id);
+        Cache::store('file')->pull(cache_prefix("menu_items_menu_{$menu->id}"));
     }
 }

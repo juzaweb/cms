@@ -84,9 +84,7 @@ class LanguageLine extends Model
 
     public static function getCacheKey(string $group, string $locale, $namespace): string
     {
-        global $site;
-
-        return "translation-loader.". $site->id .".{$group}.{$locale}.{$namespace}";
+        return cache_prefix("translation-loader.{$group}.{$locale}.{$namespace}");
     }
 
     /**

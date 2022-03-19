@@ -113,9 +113,7 @@ class PluginController extends BackendController
             })
             ->values()
             ->toArray();
-
-        global $site;
-
+        
         foreach ($ids as $plugin) {
             try {
                 DB::beginTransaction();
@@ -152,7 +150,7 @@ class PluginController extends BackendController
                         break;
                 }
 
-                Cache::store('file')->pull("site_{$site->id}_actions");
+                Cache::store('file')->pull(cache_prefix("site_actions"));
 
                 DB::commit();
             } catch (\Throwable $e) {
