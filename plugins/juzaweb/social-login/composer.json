@@ -1,0 +1,26 @@
+{
+    "name": "juzaweb/social-login",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\SocialLogin\\Providers\\SocialLoginServiceProvider"
+            ]
+        },
+        "juzaweb": {
+            "name": "juzaweb/social-login",
+            "domain": "juso",
+            "cms_min": "1.0.9",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\SocialLogin\\Tests\\": "tests/",
+            "Juzaweb\\SocialLogin\\": "src/"
+        }
+    },
+    "require": {
+        "laravel/socialite": "^5.2"
+    }
+}

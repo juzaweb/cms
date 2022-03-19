@@ -29,11 +29,9 @@ class ActionRegistion
 
     protected function getActions()
     {
-        global $site;
-
         return $this->cache->store('file')
             ->rememberForever(
-                "site_{$site->id}_actions",
+                "site_actions",
                 function () {
                     $plugins = get_config('plugin_statuses', []);
                     $plugins = array_keys($plugins);

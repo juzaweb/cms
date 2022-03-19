@@ -1,0 +1,56 @@
+<?php
+
+return [
+    'name' => 'Name',
+    'type' => 'Type',
+    'products' => 'Products',
+    'product' => 'Product',
+    'vendors' => 'Vendors',
+    'brands' => 'Brands',
+    'orders' => 'Orders',
+    'inventories' => 'Inventories',
+    'setting' => 'Setting',
+    'code' => 'Code',
+    'phone' => 'Phone',
+    'email' => 'Email',
+    'total' => 'Total',
+    'payment_methods' => 'Payment methods',
+    'payment_method' => 'Payment method',
+    'ecommerce' => 'E-Commerce',
+    'price' => 'Price',
+    'compare_price' => 'Compare price',
+    'sku_code' => 'Sku code',
+    'barcode' => 'Barcode',
+    'images' => 'Images',
+    'mode' => 'Mode',
+    'sandbox' => 'Sandbox',
+    'live' => 'Live',
+    'sandbox_client_id' => 'Sandbox client id',
+    'sandbox_secret' => 'Sandbox secret',
+    'live_client_id' => 'Live client id',
+    'live_secret' => 'Live secret',
+    'method' => 'Method',
+    'payment_description' => 'Payment description',
+    'quantity' => 'Quantity',
+    'inventory_management' => 'Inventory management',
+    'allows_ordering_out_of_stock' => 'Allows ordering when out of stock.',
+    'data' => [
+        'variants' => [
+            'colors' => 'Colors',
+            'size' => 'Size',
+            'weight' => 'Weight',
+        ],
+        'variant_defaults' => [
+            'colors' => [
+                'White',
+                'Green',
+                'Blue',
+            ],
+        ],
+        'payment_methods' => [
+            'cod' => 'Cash on delivery',
+            'paypal' => 'Paypal',
+            'custom' => 'Custom',
+        ],
+    ]
+];

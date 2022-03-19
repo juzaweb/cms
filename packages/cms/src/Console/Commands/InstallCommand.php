@@ -26,7 +26,7 @@ use Juzaweb\Support\Manager\InstalledFileManager;
 
 class InstallCommand extends Command
 {
-    protected $signature = 'juzaweb:install';
+    protected $signature = 'jw:install';
 
     protected $user;
 

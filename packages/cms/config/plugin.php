@@ -101,22 +101,6 @@ return [
             \Juzaweb\Backend\Actions\EnqueueStyleAction::class,
             \Juzaweb\Backend\Actions\ThemeAction::class,
             \Juzaweb\Backend\Actions\FrontendAction::class,
-            \Juzaweb\Multisite\MultisiteAction::class
-        ],
-        'juzaweb/ads-manager' => [
-            \Juzaweb\AdsManager\AdsManagerAction::class
-        ],
-        'juzaweb/story' => [
-            \Juzaweb\Story\StoryAction::class,
-        ],
-        'juzaweb/demo-site' => [
-            \Juzaweb\DemoSite\DemoSiteAction::class
-        ],
-        'juzaweb/image-slider' => [
-            \Juzaweb\ImageSlider\ImageSliderAction::class
-        ],
-        'juzaweb/movie' => [
-            \Juzaweb\Movie\MovieAction::class
         ],
         'juzaweb/notification' => [
             \Juzaweb\Notification\NotificationAction::class
@@ -129,9 +113,6 @@ return [
         ],
         'juzaweb/translation' => [
             \Juzaweb\Translation\TranslationAction::class
-        ],
-        'juzaweb/multilang' => [
-            \Juzaweb\Multilang\MultilangAction::class
         ]
     ],
 ];

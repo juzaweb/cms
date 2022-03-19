@@ -11,7 +11,6 @@
 namespace Juzaweb\Support\Theme;
 
 use Illuminate\Cache\CacheManager;
-use Juzaweb\Facades\Site;
 use Juzaweb\Models\ThemeConfig as ConfigModel;
 use Illuminate\Container\Container;
 
@@ -31,14 +30,10 @@ class ThemeConfig
         $this->cache = $app['cache'];
         $this->theme = $theme;
 
-        $site = Site::info();
-        $this->cacheKey = $this->cacheKey . $site->id;
-
         $this->configs = $this->cache
             ->store('file')
-            ->rememberForever($this->cacheKey, function () use ($site) {
-                return ConfigModel::where('site_id', '=', $site->id)
-                    ->where('theme', '=', $this->theme)
+            ->rememberForever($this->cacheKey, function () {
+                return ConfigModel::where('theme', '=', $this->theme)
                     ->get([
                         'code',
                         'value',

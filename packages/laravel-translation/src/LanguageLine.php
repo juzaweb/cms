@@ -5,7 +5,6 @@ namespace Spatie\TranslationLoader;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
-use Juzaweb\Facades\Site;
 
 /**
  * Spatie\TranslationLoader\LanguageLine
@@ -27,7 +26,6 @@ use Juzaweb\Facades\Site;
  * @method static \Illuminate\Database\Eloquent\Builder|LanguageLine whereSiteId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LanguageLine whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LanguageLine whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string $namespace
  * @method static \Illuminate\Database\Eloquent\Builder|LanguageLine whereNamespace($value)
  */

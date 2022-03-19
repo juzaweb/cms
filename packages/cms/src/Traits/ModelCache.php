@@ -22,5 +22,5 @@ trait ModelCache
      *
      * @var string
      */
-    public $cacheDriver = 'redis';
+    public $cacheDriver = 'file';
 }

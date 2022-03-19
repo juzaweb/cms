@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Support\Hooks;
 
-use Opis\Closure\SerializableClosure;
+use Laravel\SerializableClosure\SerializableClosure;
 
 class HashedCallable
 {

@@ -73,7 +73,7 @@ use Juzaweb\Backend\Models\Post;
  */
 class Theme extends Post
 {
-    protected $connection = 'pgsql';
+    //protected $connection = 'pgsql';
     protected $postType = 'themes';
     protected $table = 'posts';
     protected $fillable = [

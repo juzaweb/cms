@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -35,6 +35,11 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+    
+            $themeRoute = base_path('vendor/juzaweb/backend/src/routes/theme.php');
+            if (file_exists($themeRoute)) {
+                Route::middleware('theme')->group($themeRoute);
+            }
         });
     }
 

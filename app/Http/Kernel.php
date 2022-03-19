@@ -30,6 +30,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
+            \Juzaweb\Http\Middleware\GlobalMiddleware::class,
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -37,12 +38,24 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Juzaweb\Http\Middleware\XFrameHeadersMiddleware::class,
         ],
 
         'api' => [
+            \Juzaweb\Http\Middleware\GlobalMiddleware::class,
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
+    
+        'admin' => [
+            'web',
+            \Juzaweb\Http\Middleware\Admin::class,
+        ],
+    
+        'theme' => [
+            'web',
+            \Juzaweb\Http\Middleware\Theme::class,
         ],
     ];
 

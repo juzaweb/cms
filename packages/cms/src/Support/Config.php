@@ -33,8 +33,7 @@ class Config
                 ->rememberForever(
                     $this->getCacheKey(),
                     function () {
-                        return ConfigModel::where('site_id', '=', Site::info()->id)
-                            ->get([
+                        return ConfigModel::get([
                                 'code',
                                 'value',
                             ])->keyBy('code')
@@ -76,7 +75,7 @@ class Config
         );
 
         $this->cache->store('file')->forever(
-            "dbconfig_". Site::info()->id ."_{$key}",
+            "dbconfig_{$key}",
             $value
         );
 
@@ -85,6 +84,6 @@ class Config
 
     protected function getCacheKey()
     {
-        return 'jw_configs_' . Site::info()->id;
+        return 'jw_configs_';
     }
 }

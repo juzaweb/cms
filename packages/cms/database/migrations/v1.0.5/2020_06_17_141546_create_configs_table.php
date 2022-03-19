@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Juzaweb\Models\Config;
+use Juzaweb\Facades\Config;
 
 class CreateConfigsTable extends Migration
 {

@@ -43,16 +43,16 @@ class MakeAdminCommand extends Command
             exit(1);
         }
 
-        //DB::beginTransaction();
+        DB::beginTransaction();
         try {
             $model = new User();
             $model->fill($this->user);
             $model->password = Hash::make($this->user['password']);
             $model->is_admin = 1;
             $model->save();
-            //DB::commit();
+            DB::commit();
         } catch (\Exception $e) {
-            //DB::rollBack();
+            DB::rollBack();
             throw $e;
         }
     }

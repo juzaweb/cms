@@ -4,7 +4,6 @@ namespace Juzaweb\Http\Middleware;
 
 use Closure;
 use Juzaweb\Facades\ActionRegistion;
-use Juzaweb\Facades\Site;
 use Juzaweb\Support\Installer;
 use Juzaweb\Facades\Theme;
 
@@ -12,11 +11,6 @@ class GlobalMiddleware
 {
     public function handle($request, Closure $next)
     {
-        $site = Site::info();
-        if (isset($site->error)) {
-            return response($site->error, 403);
-        }
-
         ActionRegistion::init();
 
         if (Installer::alreadyInstalled()) {

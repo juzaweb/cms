@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29ad1b2cd71ab67fb9b5193c23cc4389",
+    "content-hash": "c40ce9b776c98ca97d01d53db6fab805",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1315,7 +1315,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/cms",
-                "reference": "4d6680e0d162520763320f0d942e923f66ba94fd"
+                "reference": "4b6a5e6e781aeb1915679f3f1ba94271765e6c30"
             },
             "require": {
                 "arcanedev/log-viewer": "^9.0",
@@ -1323,7 +1323,7 @@
                 "intervention/image": "^2.5",
                 "juzaweb/config": "^2.2",
                 "juzaweb/laravel-chunk-upload": "^1.4",
-                "php": "^7.4|^8.1",
+                "php": "^8.0|^8.1",
                 "rcrowe/twigbridge": "^0.14",
                 "rennokki/laravel-eloquent-query-cache": "^3.1",
                 "spatie/image-optimizer": "^1.4",
@@ -9774,7 +9774,10 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0.2"
+        "php": "^8.0.2",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-simplexml": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"

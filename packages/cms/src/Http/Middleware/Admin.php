@@ -4,7 +4,6 @@ namespace Juzaweb\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\Abstracts\Action;
 
 class Admin
 {
@@ -19,7 +18,7 @@ class Admin
         if (!has_permission()) {
             return abort(403, 'You can not access this page.');
         }
-
+        
         return $next($request);
     }
 }

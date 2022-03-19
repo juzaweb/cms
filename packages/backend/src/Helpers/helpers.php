@@ -593,7 +593,7 @@ if (!function_exists('has_permission')) {
 
             $user = $jw_user;
         }
-
+        
         if (empty($user)) {
             return false;
         }

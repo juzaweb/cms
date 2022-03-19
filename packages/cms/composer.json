@@ -12,7 +12,7 @@
     "license": "MIT",
     "homepage": "https://juzaweb.com",
     "require": {
-        "php": "^7.4|^8.1",
+        "php": "^8.0|^8.1",
         "intervention/image": "^2.5",
         "juzaweb/config": "^2.2",
         "spatie/image-optimizer": "^1.4",

@@ -6,6 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-simplexml": "*",
         "guzzlehttp/guzzle": "^7.2",
         "juzaweb/backend": "dev-master",
         "juzaweb/cms": "dev-master",

@@ -364,7 +364,7 @@ class Theme implements ThemeContract
         $viewPublishPath = resource_path('views/vendor/theme_' . $theme);
         $langPublishPath = resource_path('lang/vendor/theme_' . $theme);
 
-        $namespace = 'theme_' . $theme;
+        $namespace = $theme;
         if ($hasParent) {
             $this->finder->prependNamespace($namespace, $viewPath);
         } else {

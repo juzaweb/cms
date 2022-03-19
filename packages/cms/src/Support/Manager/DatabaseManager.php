@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Juzaweb\Models\Config as DbConfig;
+use Juzaweb\Facades\Config as DbConfig;
 use Juzaweb\Backend\Models\EmailTemplate;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -108,44 +108,56 @@ class DatabaseManager
 
     private function makeEmailTemplate()
     {
-        EmailTemplate::create([
-            'code' => 'verification',
-            'subject' => 'Verify your account',
-            'body' => '<p>Hello {name},</p>
-<p>Thank you for register. Please click the link below to Verify your account</p>
-<p><a href="{verifyUrl}" target="_blank">Verify account</a></p>',
-            'params' => [
-                'name' => 'Your Name',
-                'verifyUrl' => 'Url verify account',
+        EmailTemplate::firstOrCreate(
+            [
+                'code' => 'verification',
             ],
-        ]);
+            [
+                'subject' => 'Verify your account',
+                'body' => '<p>Hello {{ name }},</p>
+    <p>Thank you for register. Please click the link below to Verify your account</p>
+    <p><a href="{{ verifyUrl }}" target="_blank">Verify account</a></p>',
+                'params' => [
+                    'name' => 'Your Name',
+                    'verifyUrl' => 'Url verify account',
+                ],
+            ]
+        );
 
-        EmailTemplate::create([
-            'code' => 'forgot_password',
-            'subject' => 'Password Reset for you account',
-            'body' => '<p>Someone has requested a password reset for the following account:</p>
-<p>Email: {email}</p>
+        EmailTemplate::firstOrCreate(
+            [
+                'code' => 'forgot_password',
+            ],
+            [
+                'subject' => 'Password Reset for you account',
+                'body' => '<p>Someone has requested a password reset for the following account:</p>
+<p>Email: {{ email }}</p>
 <p>If this was a mistake, just ignore this email and nothing will happen.To reset your password, visit the following address:</p>
-<p><a href="{url}" target="_blank">{url}</a></p>',
-            'params' => [
-                'name' => 'Full Name',
-                'email' => 'Email',
-                'url' => 'Url reset password',
-            ],
-        ]);
+<p><a href="{{ url }}" target="_blank">{{ url }}</a></p>',
+                'params' => [
+                    'name' => 'Full Name',
+                    'email' => 'Email',
+                    'url' => 'Url reset password',
+                ],
+            ]
+        );
 
-        EmailTemplate::create([
-            'code' => 'notification',
-            'subject' => '{subject}',
-            'body' => '{body}',
-            'params' => [
-                'subject' => 'Subject notify',
-                'body' => 'Body notify',
-                'name' => 'User name',
-                'email' => 'User Email address',
-                'url' => 'Url notify',
-                'image' => 'Image notify',
+        EmailTemplate::firstOrCreate(
+            [
+                'code' => 'notification',
             ],
-        ]);
+            [
+                'subject' => '{{ subject }}',
+                'body' => '{{ body }}',
+                'params' => [
+                    'subject' => 'Subject notify',
+                    'body' => 'Body notify',
+                    'name' => 'User name',
+                    'email' => 'User Email address',
+                    'url' => 'Url notify',
+                    'image' => 'Image notify',
+                ],
+            ]
+        );
     }
 }

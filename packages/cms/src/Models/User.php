@@ -6,10 +6,6 @@
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzawebcms/juzawebcms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 7/10/2021
- * Time: 3:13 PM
  */
 
 namespace Juzaweb\Models;
@@ -95,11 +91,6 @@ class User extends Authenticatable
         return [];
     }
 
-    public function sites()
-    {
-        return $this->belongsToMany(Site::class, 'site_users', 'user_id', 'site_id');
-    }
-
     /**
      * @param Builder $builder
      * @return Builder
@@ -143,13 +134,7 @@ class User extends Authenticatable
         if ($permission) {
             return true;
         }
-
-        global $site;
-
-        if ($this->site_id != $site->id) {
-            return false;
-        }
-
+        
         if ($this->is_admin) {
             return true;
         }

@@ -1,0 +1,23 @@
+{
+    "name": "juzaweb/translation",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\Translation\\Providers\\TranslationServiceProvider"
+            ]
+        },
+        "juzaweb": {
+            "aliases": {},
+            "name": "juzaweb/translation",
+            "domain": "jutr",
+            "cms_min": "1.0.9",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Translation\\": "src/"
+        }
+    }
+}
