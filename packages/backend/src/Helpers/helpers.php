@@ -8,12 +8,11 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Juzaweb\Abstracts\Action;
 use Juzaweb\Facades\Config;
 use Juzaweb\Facades\Hook;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\Site;
 use Juzaweb\Facades\XssCleaner;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Models\User;
@@ -250,6 +249,14 @@ if (! function_exists('upload_url')) {
     {
         if (is_url($path)) {
             return $path;
+        }
+        
+        if (empty($path)) {
+            if ($default) {
+                return $default;
+            }
+    
+            return asset('jw-styles/juzaweb/styles/images/thumb-default.png');
         }
 
         $storage = Storage::disk('public');
@@ -740,4 +747,15 @@ function get_full_url($url, $baseUrl)
     }
 
     return $baseUrl .'/'. $url;
+}
+
+function sub_char($str, $n, $end = '...')
+{
+    if (strlen($str) < $n) {
+        return $str;
+    }
+    
+    $html = mb_substr($str, 0, $n);
+    $html = mb_substr($html, 0, mb_strrpos($html, ' '));
+    return $html . $end;
 }

@@ -7,6 +7,8 @@ use Juzaweb\Contracts\ThemeContract;
 use Juzaweb\Contracts\ThemeInterface;
 use Juzaweb\Support\Theme\Theme;
 use Juzaweb\Support\ThemeFileRepository;
+use Juzaweb\Support\Installer;
+use Juzaweb\Facades\Theme as FacadeTheme;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -17,7 +19,16 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->booted(function () {
+            if (Installer::alreadyInstalled()) {
+                $currentTheme = jw_current_theme();
+                $themePath = FacadeTheme::getThemePath($currentTheme);
+        
+                if (is_dir($themePath)) {
+                    FacadeTheme::set($currentTheme);
+                }
+            }
+        });
     }
 
     /**
@@ -42,5 +53,7 @@ class ThemeServiceProvider extends ServiceProvider
         });
 
         $this->app->alias(ThemeInterface::class, 'themes');
+        
+        
     }
 }

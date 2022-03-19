@@ -16,7 +16,7 @@
         "intervention/image": "^2.5",
         "juzaweb/config": "^2.2",
         "spatie/image-optimizer": "^1.4",
-        "juzaweb/laravel-chunk-upload": "^1.4",
+        "juzaweb/laravel-chunk-upload": "^1.5",
         "arcanedev/log-viewer": "^9.0",
         "darkaonline/l5-swagger": "^8.0",
         "rcrowe/twigbridge": "^0.14",

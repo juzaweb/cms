@@ -1315,14 +1315,14 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/cms",
-                "reference": "4b6a5e6e781aeb1915679f3f1ba94271765e6c30"
+                "reference": "14d204943f256a71d45ec0aebd9bafb5d738dcc7"
             },
             "require": {
                 "arcanedev/log-viewer": "^9.0",
                 "darkaonline/l5-swagger": "^8.0",
                 "intervention/image": "^2.5",
                 "juzaweb/config": "^2.2",
-                "juzaweb/laravel-chunk-upload": "^1.4",
+                "juzaweb/laravel-chunk-upload": "^1.5",
                 "php": "^8.0|^8.1",
                 "rcrowe/twigbridge": "^0.14",
                 "rennokki/laravel-eloquent-query-cache": "^3.1",
@@ -1428,16 +1428,16 @@
         },
         {
             "name": "juzaweb/laravel-chunk-upload",
-            "version": "v1.4.3",
+            "version": "v1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/laravel-chunk-upload.git",
-                "reference": "da0d692772d98cf2b6220d7c9f5930bad80e72cc"
+                "reference": "e2c05259fd3b78db2dfc8e334ab025c66da4cbb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/laravel-chunk-upload/zipball/da0d692772d98cf2b6220d7c9f5930bad80e72cc",
-                "reference": "da0d692772d98cf2b6220d7c9f5930bad80e72cc",
+                "url": "https://api.github.com/repos/juzaweb/laravel-chunk-upload/zipball/e2c05259fd3b78db2dfc8e334ab025c66da4cbb0",
+                "reference": "e2c05259fd3b78db2dfc8e334ab025c66da4cbb0",
                 "shasum": ""
             },
             "require": {
@@ -1478,9 +1478,9 @@
             ],
             "description": "Service for chunked upload with several js providers",
             "support": {
-                "source": "https://github.com/juzaweb/laravel-chunk-upload/tree/v1.4.3"
+                "source": "https://github.com/juzaweb/laravel-chunk-upload/tree/v1.5"
             },
-            "time": "2022-03-19T07:30:46+00:00"
+            "time": "2022-03-19T13:26:06+00:00"
         },
         {
             "name": "laravel/framework",

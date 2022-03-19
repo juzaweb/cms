@@ -176,7 +176,7 @@ if (! function_exists('jw_nav_menu')) {
 
         $args = array_merge($defaults, $args);
         if (is_string($args['item_view'])) {
-            $args['item_view'] = Twig::loadTemplate($args['item_view']);
+            $args['item_view'] = Twig::loadTemplate(Twig::getTemplateClass($args['item_view']), $args['item_view']);
         }
 
         $menu = null;

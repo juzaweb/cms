@@ -360,17 +360,17 @@ class Theme implements ThemeContract
 
         $viewPath = $themeInfo->get('path') . '/views';
         $langPath = $themeInfo->get('path') .'/lang';
-
+        
         $viewPublishPath = resource_path('views/vendor/theme_' . $theme);
         $langPublishPath = resource_path('lang/vendor/theme_' . $theme);
 
-        $namespace = $theme;
+        $namespace = 'theme';
         if ($hasParent) {
             $this->finder->prependNamespace($namespace, $viewPath);
         } else {
             $this->finder->addNamespace($namespace, $viewPath);
         }
-
+        
         if (is_dir($viewPublishPath)) {
             $this->finder->addNamespace($namespace, $viewPath);
         }
