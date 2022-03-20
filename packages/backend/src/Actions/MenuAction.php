@@ -106,30 +106,10 @@ class MenuAction extends Action
 
         HookAction::addAdminMenu(
             trans('cms::app.plugins'),
-            'plugin',
-            [
-                'icon' => 'fa fa-plug',
-                'position' => 50,
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.plugins'),
             'plugins',
             [
                 'icon' => 'fa fa-plug',
                 'position' => 50,
-                'parent' => 'plugin',
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.add_new'),
-            'plugins.install',
-            [
-                'icon' => 'fa fa-plus',
-                'position' => 50,
-                'parent' => 'plugin',
             ]
         );
 
