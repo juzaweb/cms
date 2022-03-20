@@ -1,6 +1,6 @@
 {
     "name": "juzaweb/seo",
-    "description": "",
+    "description": "Flexible theme specially designed for Digital Marketing Agencies and SEO Agencies",
     "extra": {
         "laravel": {
             "providers": [
@@ -8,7 +8,7 @@
             ]
         },
         "juzaweb": {
-            "name": "juzaweb/seo",
+            "name": "SEO",
             "domain": "jseo",
             "cms_min": "1.0.9",
             "version": "1.0"
