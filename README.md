@@ -50,7 +50,7 @@ php artisan juzacms:install
 - [ ] Quick edit
 - [ ] Response cache
 - [ ] Preview post
-- [ ] Api
+- [ ] Api Support
 
 ### Plugins
 #### Translation
