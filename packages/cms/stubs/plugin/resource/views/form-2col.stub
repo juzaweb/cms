@@ -1,0 +1,23 @@
+@extends('cms::layouts.backend')
+
+@section('content')
+    @component('cms::components.form_resource', [
+        'model' => $model
+    ])
+
+        <div class="row">
+            <div class="col-md-8">
+
+                $FORM_COL1$
+
+            </div>
+
+            <div class="col-md-4">
+
+                $FORM_COL2$
+
+            </div>
+        </div>
+
+    @endcomponent
+@endsection

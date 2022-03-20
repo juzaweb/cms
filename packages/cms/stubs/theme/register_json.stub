@@ -1,0 +1,20 @@
+{
+    "styles": {
+        "js": [
+            "assets/js/main.js"
+        ],
+        "css": [
+            "assets/css/main.css"
+        ]
+    },
+    "sidebars": {
+        "sidebar": {
+            "label": "Sidebar"
+        }
+    },
+    "nav_menus": {
+        "primary": {
+            "label": "Primary menu"
+        }
+    }
+}

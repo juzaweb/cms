@@ -1,0 +1,23 @@
+{
+    "name": "$LOWER_NAME$",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "$MODULE_NAMESPACE$\\$PROVIDER_NAMESPACE$\\$MODULE_NAME$ServiceProvider"
+            ],
+            "aliases": {}
+        },
+        "juzaweb": {
+            "name": "$LOWER_NAME$",
+            "domain": "$MODULE_DOMAIN$",
+            "cms_min": "1.0.9",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "$MODULE_NAMESPACE$\\": "src/"
+        }
+    }
+}

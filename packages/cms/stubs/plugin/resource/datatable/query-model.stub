@@ -1,0 +1,9 @@
+$query = $MODEL_NAME$::query();
+
+        if ($keyword = Arr::get($data, 'keyword')) {
+            $query->where(function (Builder $q) use ($keyword) {
+                // $q->where('title', JW_SQL_LIKE, '%'. $keyword .'%');
+            });
+        }
+
+        return $query;

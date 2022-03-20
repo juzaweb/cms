@@ -1,0 +1,51 @@
+on: push
+name: Run phpunit test suite
+jobs:
+  phpunit-test-suite:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [7.4, 7.3, 7.2]
+        cms: [1.*]
+        version: [
+          1.*,
+          dev-develop,
+          dev-master
+        ]
+    name: PHP ${{ matrix.php }} - CMS ${{ matrix.cms }} - PACKAGE ${{ matrix.version }} - ${{ matrix.os }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+
+      - name: Install composer
+        run: composer create-project juzaweb/laravel-cms cms
+      - name: Update package
+        run: composer require "juzaweb/cms:${{ matrix.version }}"
+        working-directory: cms
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+        working-directory: cms
+      - name: Create Database
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+        working-directory: cms
+      - name: Config database and Execute tests
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+        run: |
+          vendor/bin/phpunit vendor/juzaweb/cms/tests/Install
+          vendor/bin/phpunit vendor/juzaweb/cms/tests/Unit
+          vendor/bin/phpunit vendor/juzaweb/cms/tests/Feature
+        working-directory: cms

@@ -1,0 +1,1 @@
+{{ Field::editor($model, 'content') }}
