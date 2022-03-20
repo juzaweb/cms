@@ -15,11 +15,11 @@ class ThemeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'code' => $this->slug,
-            'title' => $this->title,
-            'thumbnail' => $this->getThumbnail(),
-            'banner' => upload_url($this->banner),
-            'description' => $this->description,
+            'name' => $this->name,
+            'title' => $this->title ?? '',
+            'screenshot' => $this->screenshot,
+            'banner' => upload_url($this->banner ?? ''),
+            'description' => $this->description ?? '',
         ];
     }
 }

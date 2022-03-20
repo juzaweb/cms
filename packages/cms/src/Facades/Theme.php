@@ -17,7 +17,7 @@ use Juzaweb\Contracts\ThemeContract;
  * @method static getVersion(string $theme)
  * @method static array getRegister(string $theme)
  * @method static array getTemplates(string $theme, string $template = null)
- * @method static \Noodlehaus\Config[] all()
+ * @method static \Noodlehaus\Config[] all($assoc = false)
  *
  * @see \Juzaweb\Support\Theme\Theme
  */

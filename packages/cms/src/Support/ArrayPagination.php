@@ -35,6 +35,17 @@ class ArrayPagination
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
 
-        return new LengthAwarePaginator($this->items->forPage($page, $perPage), $this->items->count(), $perPage, $page, $options);
+        return new LengthAwarePaginator(
+            $this->items->forPage($page, $perPage),
+            $this->items->count(),
+            $perPage,
+            $page,
+            $options
+        );
+    }
+    
+    public function where($key, $operator = null, $value = null)
+    {
+        $this->items = $this->items->where($key, $operator, $value);
     }
 }

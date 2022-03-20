@@ -17,10 +17,4 @@ trait ModelCache
     use QueryCacheable;
 
     protected static $flushCacheOnUpdate = true;
-    /**
-     * The cache driver to be used.
-     *
-     * @var string
-     */
-    public $cacheDriver = 'file';
 }

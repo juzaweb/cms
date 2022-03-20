@@ -124,7 +124,7 @@ class Theme implements ThemeContract
      *
      * @param string $theme
      *
-     * @return null|Config
+     * @return false|Config
      */
     public function getThemeInfo($theme)
     {
@@ -136,13 +136,20 @@ class Theme implements ThemeContract
             $themeConfig = Config::load($themeConfigPath);
             $themeConfig['changelog'] = Config::load($themeChangelogPath)->all();
             $themeConfig['path'] = $themePath;
+            $screenshot = $themePath . '/assets/images/screenshot.png';
+            
+            if (file_exists($screenshot)) {
+                $themeConfig['screenshot'] = theme_assets('images/screenshot.png', $theme);
+            } else {
+                $themeConfig['screenshot'] = asset('jw-styles/juzaweb/styles/images/thumb-default.png');
+            }
 
             if ($themeConfig->has('name')) {
                 return $themeConfig;
             }
         }
 
-        return null;
+        return false;
     }
 
     /**
@@ -185,9 +192,10 @@ class Theme implements ThemeContract
     /**
      * Get all theme information.
      *
+     * @param boolean $assoc
      * @return array
      */
-    public function all()
+    public function all(bool $assoc = false)
     {
         $themeDirectories = File::directories($this->basePath);
         $themes = [];
@@ -197,7 +205,7 @@ class Theme implements ThemeContract
                 continue;
             }
 
-            $themes[$themeConfig->get('name')] = $themeConfig;
+            $themes[$themeConfig->get('name')] = $assoc ? $themeConfig->all() : $themeConfig;
         }
 
         return $themes;

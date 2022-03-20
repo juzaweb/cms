@@ -1,19 +1,18 @@
 @extends('cms::layouts.backend')
 
 @section('content')
-
     <div class="row" id="theme-list">
         @if($currentTheme)
         <div class="col-md-4">
             <div class="card">
-                <div class="height-200 d-flex flex-column jw__g13__head" style="background-image: url('{{ $currentTheme->getThumbnail() }}')">
+                <div class="height-200 d-flex flex-column jw__g13__head" style="background-image: url('{{ $currentTheme->get('screenshot') }}')">
                 </div>
 
                 <div class="card card-borderless mb-0">
                     <div class="card-header border-bottom-0">
                         <div class="d-flex">
                             <div class="text-dark text-uppercase font-weight-bold mr-auto">
-                                {{ $currentTheme->title }}
+                                {{ $currentTheme->get('title') }}
                             </div>
                             <div class="text-gray-6">
                                 <button class="btn btn-secondary" disabled> {{ trans('cms::app.activated') }}</button>
@@ -29,7 +28,7 @@
     <template id="theme-template">
         <div class="col-md-4">
             <div class="card">
-                <div class="height-200 d-flex flex-column jw__g13__head" style="background-image: url('{thumbnail}')">
+                <div class="height-200 d-flex flex-column jw__g13__head" style="background-image: url('{screenshot}')">
                 </div>
 
                 <div class="card card-borderless mb-0">
@@ -39,7 +38,7 @@
                                 {title}
                             </div>
                             <div class="text-gray-6">
-                                <button class="btn btn-primary active-theme" data-theme="{code}"> {{ trans('cms::app.activate') }}</button>
+                                <button class="btn btn-primary active-theme" data-theme="{name}"> {{ trans('cms::app.activate') }}</button>
                             </div>
                         </div>
                     </div>
