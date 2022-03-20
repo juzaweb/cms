@@ -154,10 +154,15 @@ abstract class FileRepository implements RepositoryInterface, Countable
             $manifests = $this->getFiles()->glob("{$path}/composer.json");
 
             is_array($manifests) || $manifests = [];
-
+            
             foreach ($manifests as $manifest) {
                 $info = Json::make($manifest)->getAttributes();
                 $name = Arr::get($info, 'name');
+                $visible = Arr::get($info, 'extra.juzaweb.visible', true);
+                if (!$visible) {
+                    continue;
+                }
+                
                 $modules[$name] = $this->createModule(
                     $this->app,
                     $name,

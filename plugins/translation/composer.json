@@ -1,6 +1,6 @@
 {
     "name": "juzaweb/translation",
-    "description": "",
+    "description": "Translation theme to your language",
     "extra": {
         "laravel": {
             "providers": [
@@ -8,7 +8,7 @@
             ]
         },
         "juzaweb": {
-            "name": "Translation theme to your language",
+            "name": "Translation",
             "domain": "jutr",
             "cms_min": "1.0.9",
             "version": "1.0"

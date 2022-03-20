@@ -15,7 +15,8 @@
             "name": "juzaweb/ecommerce",
             "domain": "ecom",
             "cms_min": "1.0.9",
-            "version": "1.0"
+            "version": "1.0",
+            "visible": false
         }
     },
     "require": {

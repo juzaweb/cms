@@ -1,16 +1,6 @@
 @extends('cms::layouts.backend')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-6"></div>
-
-        <div class="col-md-6">
-            <div class="btn-group float-right">
-                <a href="{{ route('admin.plugin.install') }}" class="btn btn-success" data-turbolinks="false"><i class="fa fa-plus-circle"></i> @lang('cms::app.add_new')</a>
-            </div>
-        </div>
-    </div>
-
     <div class="row mb-2">
         <div class="col-md-3">
             <form method="post" class="form-inline">
