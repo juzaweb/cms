@@ -1,0 +1,17 @@
+{
+    "name": "juzaweb/story",
+    "description": "",
+    "extra": {
+        "juzaweb": {
+            "name": "juzaweb/story",
+            "domain": "just",
+            "cms_min": "1.0.9",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Story\\": "src/"
+        }
+    }
+}

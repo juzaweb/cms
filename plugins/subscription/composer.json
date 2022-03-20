@@ -1,0 +1,30 @@
+{
+    "name": "juzaweb/subscription",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\Subscription\\Providers\\AutoloadServiceProvider"
+            ],
+            "aliases": {}
+        },
+        "juzaweb": {
+            "providers": [
+                "Juzaweb\\Subscription\\Providers\\SubscriptionServiceProvider"
+            ],
+            "name": "juzaweb/subscription",
+            "domain": "subr",
+            "cms_min": "1.0.9",
+            "version": "1.0",
+            "setting_url": "subscription/setting"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Subscription\\": "src/"
+        }
+    },
+    "require": {
+        "paypal/rest-api-sdk-php": "^1.14"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "name": "juzaweb/demo-site",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\DemoSite\\Providers\\DemoSiteServiceProvider"
+            ]
+        },
+        "juzaweb": {
+            "name": "juzaweb/demo-site",
+            "domain": "demo",
+            "cms_min": "1.0.9",
+            "version": "1.0",
+            "setting_url": "setting/system/demo-site"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\DemoSite\\": "src/"
+        }
+    }
+}

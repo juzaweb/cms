@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c8707c40b73352cce541ac1558fda5c",
+    "content-hash": "cb8667362f097c671f7d4ac195ed18cf",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1267,6 +1267,38 @@
             "time": "2021-12-16T16:49:26+00:00"
         },
         {
+            "name": "juzaweb/ads-manager",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./plugins/ads-manager",
+                "reference": "43896898867f52081414126171ff9a39eae543d0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Juzaweb\\AdsManager\\Providers\\AdsManagerServiceProvider"
+                    ]
+                },
+                "juzaweb": {
+                    "name": "juzaweb/ads-manager",
+                    "domain": "juad",
+                    "cms_min": "1.0.9",
+                    "version": "1.0"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\AdsManager\\": "src/"
+                }
+            },
+            "description": "Add html ads to your website",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "juzaweb/backend",
             "version": "dev-master",
             "dist": {
@@ -1425,6 +1457,38 @@
                 "source": "https://github.com/juzaweb/config/tree/2.2.1"
             },
             "time": "2020-12-07T16:04:15+00:00"
+        },
+        {
+            "name": "juzaweb/demo-site",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./plugins/demo-site",
+                "reference": "db8699275f41193e63570b5ef4768909429ed5fc"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Juzaweb\\DemoSite\\Providers\\DemoSiteServiceProvider"
+                    ]
+                },
+                "juzaweb": {
+                    "name": "juzaweb/demo-site",
+                    "domain": "demo",
+                    "cms_min": "1.0.9",
+                    "version": "1.0",
+                    "setting_url": "setting/system/demo-site"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\DemoSite\\": "src/"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "juzaweb/laravel-chunk-upload",
@@ -1739,7 +1803,7 @@
             "dist": {
                 "type": "path",
                 "url": "./plugins/translation",
-                "reference": "c0f216c1a10ff0ba00b052356542142f847d5989"
+                "reference": "2981aae4203d1d8266688b32f0c6d33ffac0b5e8"
             },
             "type": "library",
             "extra": {
@@ -1749,7 +1813,7 @@
                     ]
                 },
                 "juzaweb": {
-                    "name": "Translation theme to your language",
+                    "name": "Translation",
                     "domain": "jutr",
                     "cms_min": "1.0.9",
                     "version": "1.0"
@@ -1760,6 +1824,7 @@
                     "Juzaweb\\Translation\\": "src/"
                 }
             },
+            "description": "Translation theme to your language",
             "transport-options": {
                 "relative": true
             }
@@ -10284,8 +10349,10 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "juzaweb/ads-manager": 20,
         "juzaweb/backend": 20,
         "juzaweb/cms": 20,
+        "juzaweb/demo-site": 20,
         "juzaweb/notification": 20,
         "juzaweb/seo": 20,
         "juzaweb/social-login": 20,

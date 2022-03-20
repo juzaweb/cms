@@ -1,0 +1,22 @@
+{
+    "name": "juzaweb/ads-manager",
+    "description": "Add html ads to your website",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\AdsManager\\Providers\\AdsManagerServiceProvider"
+            ]
+        },
+        "juzaweb": {
+            "name": "juzaweb/ads-manager",
+            "domain": "juad",
+            "cms_min": "1.0.9",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\AdsManager\\": "src/"
+        }
+    }
+}

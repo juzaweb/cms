@@ -1,0 +1,25 @@
+{
+    "name": "juzaweb/multilang",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\Multilang\\Providers\\AutoloadServiceProvider"
+            ]
+        },
+        "juzaweb": {
+            "name": "juzaweb/multilang",
+            "domain": "mlla",
+            "cms_min": "1.0.9",
+            "version": "1.0",
+            "providers": [
+                "Juzaweb\\Multilang\\Providers\\MultilangServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Multilang\\": "src/"
+        }
+    }
+}
