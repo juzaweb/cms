@@ -39,17 +39,20 @@ php artisan juzacms:install
 - [x] Themes
 - [x] Theme Widgets
 - [x] Theme Customize
-- [x] Media manager in admin page
 - [x] Menu builder by post type
 - [x] Logs view
 - [x] Added default theme
 - [x] Page block
+- [x] Permalinks
+- [ ] Media manager admin page
 - [ ] Upload themes
 - [ ] Short Code
 - [ ] Add image from url
 - [ ] Quick edit
 - [ ] Response cache
 - [ ] Preview post
+- [ ] Activity logs
+- [ ] Per page paginate config
 - [ ] Api Support
 
 ### Plugins
@@ -62,34 +65,53 @@ php artisan juzacms:install
 - [x] Send notification database
 - [ ] Send push notifications
 #### Seo
+* Features:
 - [x] Auto render Sitemap
 - [x] Seo content custom
 - [x] Feed
 #### Social login
+* Features:
 - [x] Google
 - [x] Facebook
 - [x] Tweater
 - [x] Github
 - [x] Instagram
 #### Subscribes
+* Features:
 - [x] Paypal
 - [ ] Stripe
 #### User Permission
+* Features:
 - [ ] Check permisson menu
 - [ ] Policies
 #### E-commerce
+* Features:
 - [x] Product management
 - [x] Payment methods
 #### Crawler
-- [ ] Rss
-- [ ] Feed
+* Features:
 - [x] Content
 - [x] Auto crawler
+- [ ] Rss
+- [ ] Feed
+#### Multi languages
+* Features:
+- [ ] Change language by session
+- [ ] Subdomain language
+- [ ] Multi Language posts
+- [ ] Multi language taxonomy
+- [ ] Multi language menu items
+### Movie Streaming
+- [x] Movie/ TV-Series management
+- [x] Import movie from TMDB
+- [x] Server and upload management
+- [x] Genres/ Countries/ Actors/ Directors/ Writers management
+- [x] Player Watermark
+- [x] Player Watermark Logo
 #### Demo Site
+* Features:
 - [x] Add user admin demo
 - [ ] Autocomplete user demo
-#### Multi languages
-
 ### Theme
 #### Default
 
