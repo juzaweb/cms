@@ -1,0 +1,26 @@
+{
+    "name": "juzaweb/seo",
+    "description": "Flexible theme specially designed for Digital Marketing Agencies and SEO Agencies",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\Seo\\Providers\\SeoServiceProvider"
+            ]
+        },
+        "juzaweb": {
+            "name": "SEO",
+            "domain": "jseo",
+            "cms_min": "1.0.9",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Seo\\": "src/"
+        }
+    },
+    "require": {
+        "juzaweb/sitemap": "^9.0",
+        "spatie/laravel-feed": "^4.0"
+    }
+}
