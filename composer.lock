@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c4242ebbb2230fb740ea77f68b7e771",
+    "content-hash": "6c8707c40b73352cce541ac1558fda5c",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1550,12 +1550,55 @@
             "time": "2022-03-20T03:27:20+00:00"
         },
         {
+            "name": "juzaweb/notification",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./plugins/notification",
+                "reference": "7d62e4a773f7fce349bc0fa846dd857a7b9e769a"
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "laravel/laravel": "^6.0 | ^7.0 | ^8.0",
+                "phpunit/phpunit": "6.0 | 7.0 | 7.5 | 8.4 | ^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Juzaweb\\Notification\\Providers\\NotificationServiceProvider"
+                    ]
+                },
+                "juzaweb": {
+                    "name": "Notification",
+                    "domain": "juno",
+                    "cms_min": "1.0.9"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\Notification\\Tests\\": "tests/",
+                    "Juzaweb\\Notification\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Notification plugin for Juzaweb cms",
+            "homepage": "https://juzaweb.com",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "juzaweb/seo",
             "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "./plugins/seo",
-                "reference": "eb2eb3340f9d31383b1a82a53ab8349cadcd75e5"
+                "reference": "e1bfd3bb19c4eb15f5722b17455c17aac7e74946"
             },
             "require": {
                 "juzaweb/sitemap": "^9.0",
@@ -1569,7 +1612,7 @@
                     ]
                 },
                 "juzaweb": {
-                    "name": "juzaweb/seo",
+                    "name": "SEO",
                     "domain": "jseo",
                     "cms_min": "1.0.9",
                     "version": "1.0"
@@ -1580,6 +1623,7 @@
                     "Juzaweb\\Seo\\": "src/"
                 }
             },
+            "description": "Flexible theme specially designed for Digital Marketing Agencies and SEO Agencies",
             "transport-options": {
                 "relative": true
             }
@@ -1652,6 +1696,73 @@
                 "wiki": "https://github.com/Laravelium/laravel-sitemap/wiki"
             },
             "time": "2022-03-20T06:34:12+00:00"
+        },
+        {
+            "name": "juzaweb/social-login",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./plugins/social-login",
+                "reference": "6feb2cbdc758fa77b9ed30567436b47ada559e78"
+            },
+            "require": {
+                "laravel/socialite": "^5.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Juzaweb\\SocialLogin\\Providers\\SocialLoginServiceProvider"
+                    ]
+                },
+                "juzaweb": {
+                    "name": "Social Login",
+                    "domain": "juso",
+                    "cms_min": "1.0.9",
+                    "version": "1.0"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\SocialLogin\\Tests\\": "tests/",
+                    "Juzaweb\\SocialLogin\\": "src/"
+                }
+            },
+            "description": "Social Login & Register for Web. Professionally developed and free plugin that allows your visitors to comment, login and register with Social Networks like for example Facebook, Twitter, Google, LinkedIn, amongst other",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "juzaweb/translation",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./plugins/translation",
+                "reference": "c0f216c1a10ff0ba00b052356542142f847d5989"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Juzaweb\\Translation\\Providers\\TranslationServiceProvider"
+                    ]
+                },
+                "juzaweb": {
+                    "name": "Translation theme to your language",
+                    "domain": "jutr",
+                    "cms_min": "1.0.9",
+                    "version": "1.0"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\Translation\\": "src/"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "laravel/framework",
@@ -1954,6 +2065,75 @@
                 "source": "https://github.com/laravel/serializable-closure"
             },
             "time": "2022-02-11T19:23:53+00:00"
+        },
+        {
+            "name": "laravel/socialite",
+            "version": "v5.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/socialite.git",
+                "reference": "68afb03259b82d898c68196cbcacd48596a9dd72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/68afb03259b82d898c68196cbcacd48596a9dd72",
+                "reference": "68afb03259b82d898c68196cbcacd48596a9dd72",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/http": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "league/oauth1-client": "^1.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0",
+                "phpunit/phpunit": "^8.0|^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Socialite\\SocialiteServiceProvider"
+                    ],
+                    "aliases": {
+                        "Socialite": "Laravel\\Socialite\\Facades\\Socialite"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Socialite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "laravel",
+                "oauth"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/socialite/issues",
+                "source": "https://github.com/laravel/socialite"
+            },
+            "time": "2022-03-10T15:26:19+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2354,6 +2534,82 @@
                 }
             ],
             "time": "2021-11-21T11:48:40+00:00"
+        },
+        {
+            "name": "league/oauth1-client",
+            "version": "v1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/oauth1-client.git",
+                "reference": "88dd16b0cff68eb9167bfc849707d2c40ad91ddc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/88dd16b0cff68eb9167bfc849707d2c40ad91ddc",
+                "reference": "88dd16b0cff68eb9167bfc849707d2c40ad91ddc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "guzzlehttp/psr7": "^1.7|^2.0",
+                "php": ">=7.1||>=8.0"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "mockery/mockery": "^1.3.3",
+                "phpstan/phpstan": "^0.12.42",
+                "phpunit/phpunit": "^7.5||9.5"
+            },
+            "suggest": {
+                "ext-simplexml": "For decoding XML-based responses."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev",
+                    "dev-develop": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\OAuth1\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Corlett",
+                    "email": "bencorlett@me.com",
+                    "homepage": "http://www.webcomm.com.au",
+                    "role": "Developer"
+                }
+            ],
+            "description": "OAuth 1.0 Client Library",
+            "keywords": [
+                "Authentication",
+                "SSO",
+                "authorization",
+                "bitbucket",
+                "identity",
+                "idp",
+                "oauth",
+                "oauth1",
+                "single sign on",
+                "trello",
+                "tumblr",
+                "twitter"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/oauth1-client/issues",
+                "source": "https://github.com/thephpleague/oauth1-client/tree/v1.10.0"
+            },
+            "time": "2021-08-15T23:05:49+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -10030,7 +10286,10 @@
     "stability-flags": {
         "juzaweb/backend": 20,
         "juzaweb/cms": 20,
-        "juzaweb/seo": 20
+        "juzaweb/notification": 20,
+        "juzaweb/seo": 20,
+        "juzaweb/social-login": 20,
+        "juzaweb/translation": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
