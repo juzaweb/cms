@@ -21,8 +21,8 @@ class ConsoleServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        //$schedule = $this->app->make(Schedule::class);
-        //$schedule->command('notify:send')->everyMinute();
+        $schedule = $this->app->make(Schedule::class);
+        $schedule->command('notify:send')->everyMinute();
 
         Notification::register('database', DatabaseNotification::class);
         Notification::register('mail', EmailNotification::class);
