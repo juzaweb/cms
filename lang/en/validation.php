@@ -130,6 +130,7 @@ return [
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
     'model_exists' => 'The selected :attribute is invalid.',
+    'model_unique' => 'The :attribute has already been taken.',
 
     /*
     |--------------------------------------------------------------------------

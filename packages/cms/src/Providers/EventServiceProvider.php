@@ -7,7 +7,7 @@ use Juzaweb\Events\EmailHook;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Listeners\CountViewPost;
 use Juzaweb\Listeners\SendEmailHook;
-use Juzaweb\Listeners\SendMailRegisterSuccessful;
+use Juzaweb\Backend\Listeners\SendMailRegisterSuccessful;
 use Juzaweb\Backend\Events\RegisterSuccessful;
 
 class EventServiceProvider extends ServiceProvider

@@ -13,7 +13,7 @@ namespace Juzaweb\Support\Validators;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
 
-class ModelExists implements Rule
+class ModelUnique implements Rule
 {
     /**
      * @var string
@@ -52,7 +52,7 @@ class ModelExists implements Rule
         $this->attribute = $attribute;
         $this->value = $value;
         
-        return $this->modelClass::query()
+        return !$this->modelClass::query()
             ->when(
                 is_array($value),
                 function (Builder $query) {
@@ -68,7 +68,7 @@ class ModelExists implements Rule
     
     public function message()
     {
-        return trans('validation.model_exists', [
+        return trans('validation.model_unique', [
             'attribute' => $this->attribute,
             'value' => $this->value,
             'model' => class_basename($this->modelClass),

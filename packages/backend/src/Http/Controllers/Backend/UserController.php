@@ -39,7 +39,7 @@ class UserController extends BackendController
                 'required_if:id,',
                 'email',
                 'max:150',
-                Rule::modelExists(User::class, 'email'),
+                Rule::modelUnique(User::class, 'email'),
             ],
             'status' => 'required|in:' . implode(',', $allStatus),
         ];

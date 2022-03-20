@@ -35,7 +35,7 @@ class EmailTemplateController extends BackendController
                 'code' => [
                     'required',
                     'max:50',
-                    Rule::modelExists(EmailTemplate::class, 'code')->ignore($id),
+                    Rule::modelUnique(EmailTemplate::class, 'code')->ignore($id),
                 ],
             ]
         );

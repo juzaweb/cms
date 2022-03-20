@@ -51,7 +51,7 @@ trait AuthRegisterForm
                 'required',
                 'email',
                 'max:150',
-                Rule::modelExists(User::class, 'email')
+                Rule::modelUnique(User::class, 'email')
             ],
             'password' => [
                 'required',
@@ -67,13 +67,16 @@ trait AuthRegisterForm
         $password = $request->post('password');
 
         DB::beginTransaction();
-
         try {
-            $user = User::create([
-                'name' => $name,
-                'email' => $email,
-                'password' => Hash::make($password),
-            ]);
+            $user = new User();
+            $user->fill(
+                [
+                    'name' => $name,
+                    'email' => $email,
+                ]
+            );
+            $user->setAttribute('password', Hash::make($password));
+            $user->save();
 
             DB::commit();
         } catch (\Exception $e) {

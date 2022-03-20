@@ -19,6 +19,7 @@ use Juzaweb\Contracts\XssCleanerContract;
 use Juzaweb\Support\GlobalData;
 use Juzaweb\Backend\Support\HookAction;
 use Juzaweb\Support\Validators\ModelExists;
+use Juzaweb\Support\Validators\ModelUnique;
 use Juzaweb\Support\XssCleaner;
 use Juzaweb\Support\Validators\ReCaptcha;
 use Juzaweb\Support\Validators\DomainValidator;
@@ -42,6 +43,17 @@ class CoreServiceProvider extends ServiceProvider
                 callable $callback = null
             ) {
                 return new ModelExists($modelClass, $modelAttribute, $callback);
+            }
+        );
+    
+        Rule::macro(
+            'modelUnique',
+            function (
+                string $modelClass,
+                string $modelAttribute = 'id',
+                callable $callback = null
+            ) {
+                return new ModelUnique($modelClass, $modelAttribute, $callback);
             }
         );
     

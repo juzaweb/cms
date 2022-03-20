@@ -18111,6 +18111,19 @@
         {
                         return \Illuminate\Validation\Rule::modelExists($modelClass, $modelAttribute, $callback);
         }
+                    /**
+         * 
+         *
+         * @see \Juzaweb\Providers\CoreServiceProvider::boot()
+         * @param string $modelClass
+         * @param string $modelAttribute
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function modelUnique($modelClass, $modelAttribute = 'id', $callback = null)
+        {
+                        return \Illuminate\Validation\Rule::modelUnique($modelClass, $modelAttribute, $callback);
+        }
          
     }
      
