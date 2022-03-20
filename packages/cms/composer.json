@@ -15,12 +15,12 @@
         "php": "^8.0|^8.1",
         "intervention/image": "^2.5",
         "juzaweb/config": "^2.2",
+        "juzaweb/laravel-translation-loader": "^1.0",
         "spatie/image-optimizer": "^1.4",
         "juzaweb/laravel-chunk-upload": "^1.5",
         "arcanedev/log-viewer": "^9.0",
         "darkaonline/l5-swagger": "^8.0",
         "rcrowe/twigbridge": "^0.14",
-        "spatie/laravel-translation-loader": "@dev",
         "rennokki/laravel-eloquent-query-cache": "^3.1"
     },
     "require-dev": {
