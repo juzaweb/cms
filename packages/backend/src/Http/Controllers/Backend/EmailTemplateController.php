@@ -2,10 +2,10 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\Site;
 use Juzaweb\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\EmailTemplateDataTable;
 use Juzaweb\Backend\Models\EmailTemplate;
@@ -35,7 +35,9 @@ class EmailTemplateController extends BackendController
                 'code' => [
                     'required',
                     'max:50',
-                    Rule::modelUnique(EmailTemplate::class, 'code')->ignore($id),
+                    Rule::modelUnique(EmailTemplate::class, 'code', function (Builder $q) use ($id) {
+                        $q->where("{$q->getModel()->getTable()}.id", '!=', $id);
+                    }),
                 ],
             ]
         );
