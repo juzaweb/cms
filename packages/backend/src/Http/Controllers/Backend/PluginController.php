@@ -86,8 +86,6 @@ class PluginController extends BackendController
                         break;
                 }
 
-                Cache::store('file')->pull(cache_prefix("site_actions"));
-
                 DB::commit();
             } catch (\Throwable $e) {
                 DB::rollBack();

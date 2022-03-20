@@ -412,6 +412,8 @@ abstract class Plugin
         if (config('plugin.cache.enabled')) {
             $this->cache->store()->flush();
         }
+        
+        $this->cache->store('file')->pull(cache_prefix("site_actions"));
     }
 
     public function getExtraLarevel($key): array
