@@ -1,0 +1,26 @@
+{
+    "name": "juzaweb/social-login",
+    "description": "Social Login & Register for Web. Professionally developed and free plugin that allows your visitors to comment, login and register with Social Networks like for example Facebook, Twitter, Google, LinkedIn, amongst other",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\SocialLogin\\Providers\\SocialLoginServiceProvider"
+            ]
+        },
+        "juzaweb": {
+            "name": "Social Login",
+            "domain": "juso",
+            "cms_min": "1.0.9",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\SocialLogin\\Tests\\": "tests/",
+            "Juzaweb\\SocialLogin\\": "src/"
+        }
+    },
+    "require": {
+        "laravel/socialite": "^5.2"
+    }
+}
