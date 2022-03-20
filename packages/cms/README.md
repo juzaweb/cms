@@ -1,7 +1,7 @@
 
 
 ## Github Cms
-[https://juzaweb.com/juzaweb/laravel-cms](https://github.com/juzaweb/laravel-cms)
+[https://juzaweb.com/juzaweb/juzacms](https://github.com/juzaweb/juzacms)
 
 ## Documentation
 [Laravel cms](https://juzaweb.com/cms)

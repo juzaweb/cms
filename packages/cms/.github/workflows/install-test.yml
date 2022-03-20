@@ -28,7 +28,7 @@ jobs:
           coverage: none
 
       - name: Install composer
-        run: composer create-project juzaweb/laravel-cms cms
+        run: composer create-project juzaweb/juzacms cms
       - name: Update package
         run: composer require "juzaweb/cms:${{ matrix.version }}"
         working-directory: cms

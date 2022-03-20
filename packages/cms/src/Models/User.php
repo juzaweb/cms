@@ -20,6 +20,47 @@ use Juzaweb\Backend\Database\Factories\UserFactory;
 use Juzaweb\Traits\ModelCache;
 use Juzaweb\Traits\ResourceModel;
 
+/**
+ * Juzaweb\Models\User
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string|null $email_verified_at
+ * @property string $password
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $avatar
+ * @property int $is_admin
+ * @property string $status unconfimred, banned, active
+ * @property string $language
+ * @property string|null $verification_token
+ * @property array|null $data
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @method static Builder|User active()
+ * @method static \Juzaweb\Backend\Database\Factories\UserFactory factory(...$parameters)
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static Builder|User query()
+ * @method static Builder|User whereAvatar($value)
+ * @method static Builder|User whereCreatedAt($value)
+ * @method static Builder|User whereData($value)
+ * @method static Builder|User whereEmail($value)
+ * @method static Builder|User whereEmailVerifiedAt($value)
+ * @method static Builder|User whereFilter($params = [])
+ * @method static Builder|User whereId($value)
+ * @method static Builder|User whereIsAdmin($value)
+ * @method static Builder|User whereLanguage($value)
+ * @method static Builder|User whereName($value)
+ * @method static Builder|User wherePassword($value)
+ * @method static Builder|User whereRememberToken($value)
+ * @method static Builder|User whereStatus($value)
+ * @method static Builder|User whereUpdatedAt($value)
+ * @method static Builder|User whereVerificationToken($value)
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable
 {
     use Notifiable;

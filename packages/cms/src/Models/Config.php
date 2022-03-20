@@ -4,6 +4,20 @@ namespace Juzaweb\Models;
 
 use Juzaweb\Facades\GlobalData;
 
+/**
+ * Juzaweb\Models\Config
+ *
+ * @property int $id
+ * @property string $code
+ * @property string|null $value
+ * @method static \Illuminate\Database\Eloquent\Builder|Config newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Config newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Config query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Config whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Config whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Config whereValue($value)
+ * @mixin \Eloquent
+ */
 class Config extends Model
 {
     public $timestamps = false;

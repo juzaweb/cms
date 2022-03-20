@@ -7,6 +7,39 @@ use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Models\Model;
 use Juzaweb\Models\User;
 
+/**
+ * Juzaweb\Backend\Models\Comment
+ *
+ * @property int $id
+ * @property int|null $user_id
+ * @property string|null $email
+ * @property string|null $name
+ * @property string|null $website
+ * @property string $content
+ * @property int $object_id Post type ID
+ * @property string $object_type Post type
+ * @property string $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Juzaweb\Backend\Models\Post $post
+ * @property-read User|null $user
+ * @method static Builder|Comment newModelQuery()
+ * @method static Builder|Comment newQuery()
+ * @method static Builder|Comment query()
+ * @method static Builder|Comment whereApproved()
+ * @method static Builder|Comment whereContent($value)
+ * @method static Builder|Comment whereCreatedAt($value)
+ * @method static Builder|Comment whereEmail($value)
+ * @method static Builder|Comment whereId($value)
+ * @method static Builder|Comment whereName($value)
+ * @method static Builder|Comment whereObjectId($value)
+ * @method static Builder|Comment whereObjectType($value)
+ * @method static Builder|Comment whereStatus($value)
+ * @method static Builder|Comment whereUpdatedAt($value)
+ * @method static Builder|Comment whereUserId($value)
+ * @method static Builder|Comment whereWebsite($value)
+ * @mixin \Eloquent
+ */
 class Comment extends Model
 {
     protected $table = 'comments';

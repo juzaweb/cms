@@ -5,7 +5,7 @@ $langs = array_merge(trans('cms::app', [], 'en'), trans('cms::app'));
     /**
      * JUZAWEB CMS - THE BEST CMS FOR LARAVEL PROJECT
      *
-     * @package    juzaweb/laravel-cms
+     * @package    juzaweb/juzacms
      * @link       https://juzaweb.com/cms
      * @license    MIT
      */

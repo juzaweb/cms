@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/laravel-cms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
  * @license    MIT
@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Juzaweb\Backend\Events\RegisterSuccessful;
 use Juzaweb\Models\User;
-use Juzaweb\Support\Validators\ModelExists;
 use Juzaweb\Traits\ResponseMessage;
 
 trait AuthRegisterForm
@@ -52,9 +51,14 @@ trait AuthRegisterForm
                 'required',
                 'email',
                 'max:150',
-                new ModelExists(User::class, 'email')
+                Rule::modelExists(User::class, 'email')
             ],
-            'password' => 'required|min:6|max:32|confirmed',
+            'password' => [
+                'required',
+                'min:6',
+                'max:32',
+                'confirmed'
+            ],
         ]);
 
         // Create user

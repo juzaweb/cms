@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package juzaweb/laravel-cms
+ * @package juzaweb/juzacms
  * @author The Anh Dang
  *
  * Developed based on Laravel Framework

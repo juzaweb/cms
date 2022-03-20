@@ -8,6 +8,71 @@ use Juzaweb\Models\Model;
 use Juzaweb\Traits\ModelCache;
 use Juzaweb\Traits\PostTypeModel;
 
+/**
+ * Juzaweb\Backend\Models\Post
+ *
+ * @property int $id
+ * @property string $title
+ * @property string|null $thumbnail
+ * @property string $slug
+ * @property string|null $description
+ * @property string|null $content
+ * @property string $status
+ * @property int $views
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property string $type
+ * @property array|null $json_metas
+ * @property array|null $json_taxonomies
+ * @property float $rating
+ * @property int $total_rating
+ * @property int $total_comment
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Comment[] $comments
+ * @property-read int|null $comments_count
+ * @property-read \Juzaweb\Models\User|null $createdBy
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MenuItem[] $menuItems
+ * @property-read int|null $menu_items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostMeta[] $metas
+ * @property-read int|null $metas_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostRating[] $postRatings
+ * @property-read int|null $post_ratings_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostView[] $postViews
+ * @property-read int|null $post_views_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $taxonomies
+ * @property-read int|null $taxonomies_count
+ * @property-read \Juzaweb\Models\User|null $updatedBy
+ * @method static \Juzaweb\Backend\Database\Factories\PostFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereFilter($params = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereJsonMetas($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereJsonTaxonomies($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereMeta($key, $value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post wherePublish()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereSearch($params)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTaxonomy($taxonomy)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTaxonomyIn($taxonomies)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereThumbnail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTotalComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereTotalRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereViews($value)
+ * @mixin \Eloquent
+ */
 class Post extends Model
 {
     use PostTypeModel, HasFactory, ModelCache;

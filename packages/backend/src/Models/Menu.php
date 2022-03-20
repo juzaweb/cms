@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/laravel-cms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
  * @license    MIT
@@ -18,6 +18,26 @@ use Illuminate\Support\Arr;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Models\Model;
 
+/**
+ * Juzaweb\Backend\Models\Menu
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MenuItem[] $items
+ * @property-read int|null $items_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Menu extends Model
 {
     protected $table = 'menus';

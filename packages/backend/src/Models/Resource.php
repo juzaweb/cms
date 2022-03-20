@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/laravel-cms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
  * @license    MIT
@@ -15,6 +15,45 @@ use Illuminate\Support\Arr;
 use Juzaweb\Models\Model;
 use Juzaweb\Traits\ModelCache;
 
+/**
+ * Juzaweb\Backend\Models\Resource
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $type
+ * @property string|null $thumbnail
+ * @property string|null $description
+ * @property array|null $json_metas
+ * @property string $status
+ * @property int|null $post_id
+ * @property int|null $parent_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $display_order
+ * @property-read \Illuminate\Database\Eloquent\Collection|Resource[] $children
+ * @property-read int|null $children_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\ResourceMeta[] $metas
+ * @property-read int|null $metas_count
+ * @property-read Resource|null $parent
+ * @property-read \Juzaweb\Backend\Models\Post|null $post
+ * @method static Builder|Resource newModelQuery()
+ * @method static Builder|Resource newQuery()
+ * @method static Builder|Resource query()
+ * @method static Builder|Resource whereCreatedAt($value)
+ * @method static Builder|Resource whereDescription($value)
+ * @method static Builder|Resource whereDisplayOrder($value)
+ * @method static Builder|Resource whereId($value)
+ * @method static Builder|Resource whereJsonMetas($value)
+ * @method static Builder|Resource whereName($value)
+ * @method static Builder|Resource whereParentId($value)
+ * @method static Builder|Resource wherePostId($value)
+ * @method static Builder|Resource wherePublish()
+ * @method static Builder|Resource whereStatus($value)
+ * @method static Builder|Resource whereThumbnail($value)
+ * @method static Builder|Resource whereType($value)
+ * @method static Builder|Resource whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Resource extends Model
 {
     use ModelCache;
