@@ -19,7 +19,6 @@
                     <option value="">{{ trans('cms::app.bulk_actions') }}</option>
                     <option value="activate">{{ trans('cms::app.activate') }}</option>
                     <option value="deactivate">{{ trans('cms::app.deactivate') }}</option>
-                    <option value="delete">{{ trans('cms::app.delete') }}</option>
                 </select>
 
                 <button type="submit" class="btn btn-primary px-2 mb-2" id="apply-action">{{ trans('cms::app.apply') }}</button>
