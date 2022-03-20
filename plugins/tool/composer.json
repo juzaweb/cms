@@ -1,0 +1,21 @@
+{
+    "name": "juzaweb/tool",
+    "description": "",
+    "extra": {
+        "juzaweb": {
+            "providers": [
+                "Juzaweb\\Tool\\Providers\\ToolServiceProvider"
+            ],
+            "aliases": {},
+            "name": "juzaweb/tool",
+            "domain": "juto",
+            "cms_min": "1.0.9",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Tool\\": "src/"
+        }
+    }
+}
