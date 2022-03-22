@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer" xsi:noNamespaceSchemaLocation="phpcs.xsd">
+    <description>PHP STANDARD</description>
+    <exclude-pattern>*/*\.blade\.php$</exclude-pattern>
+    <exclude-pattern>/vendor</exclude-pattern>
+    <exclude-pattern>/bootstrap/cache/*</exclude-pattern>
+    <exclude-pattern>/storage/*</exclude-pattern>
+    <exclude-pattern>/update/*</exclude-pattern>
+    <exclude-pattern>/node_modules/*</exclude-pattern>
+    <exclude-pattern>/_ide_helper.php</exclude-pattern>
+
+    <arg name="colors"/>
+    <arg name="parallel" value="75"/>
+    <arg value="wsv"/>
+    <arg name="extensions" value="php"/>
+
+    <rule ref="PEAR">
+        <exclude name="Generic.Commenting"/>
+        <exclude name="Squiz.Commenting"/>
+        <exclude name="PEAR.Commenting"/>
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
+        <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
+        <exclude name="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+        <exclude name="PEAR.Files.IncludingFile.UseInclude"/>
+        <exclude name="PEAR.Files.IncludingFile.UseIncludeOnce"/>
+        <exclude name="PEAR.Files.IncludingFile.BracketsNotRequired"/>
+        <!--<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>-->
+    </rule>
+    <rule ref="PSR2">
+
+    </rule>
+</ruleset>
