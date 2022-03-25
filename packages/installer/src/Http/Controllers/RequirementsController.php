@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Installer\Http\Controllers\Installer;
 
 use Illuminate\Routing\Controller;
 use Juzaweb\Support\RequirementsChecker;

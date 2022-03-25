@@ -2,17 +2,13 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzawebcms/juzawebcms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzawebcms/juzawebcms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 6/13/2021
- * Time: 12:50 PM
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Installer\Http\Controllers\Installer;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -50,7 +46,6 @@ class AdminController extends Controller
         }
 
         DB::beginTransaction();
-
         try {
             $model = new User();
             $model->fill($request->all());
@@ -60,7 +55,6 @@ class AdminController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-
             throw $e;
         }
 
