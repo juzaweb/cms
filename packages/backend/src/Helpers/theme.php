@@ -439,9 +439,12 @@ function get_template_part($post, $slug, $name = null, $args = [])
     $type = $post ? Str::singular($post['type']) : 'none';
     $template = get_name_template_part($type, $slug, $name);
 
-    return Twig::display('theme::template-parts.'. $template, [
-        'post' => $post,
-    ]);
+    return Twig::display(
+        'theme::template-parts.'. $template,
+        [
+            'post' => $post,
+        ]
+    );
 }
 
 function paginate_links($data, $view = null, $params = [])
@@ -450,25 +453,27 @@ function paginate_links($data, $view = null, $params = [])
         $view = 'cms::pagination';
     }
 
-    return Twig::display($view, [
-        'data' => $data
-    ]);
+    return Twig::display(
+        $view,
+        [
+            'data' => $data
+        ]
+    );
 }
 
 function theme_viewname($name)
 {
-    return str_replace(
-        'theme::',
-        'theme_'. jw_current_theme() .'::',
-        $name
-    );
+    return $name;
 }
 
 function comment_form($post, $view = 'cms::comment_form')
 {
-    return Twig::display($view, compact(
-        'post'
-    ));
+    return Twig::display(
+        $view,
+        compact(
+            'post'
+        )
+    );
 }
 
 function get_locale()
