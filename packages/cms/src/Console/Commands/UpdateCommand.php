@@ -46,9 +46,13 @@ class UpdateCommand extends Command
             $release = $updater->source()->fetch($versionAvailable);
     
             // Run the update process
-            $updater->source()->update($release);
+            $update = $updater->source()->update($release);
     
-            $this->info('Update successful.');
+            if ($update) {
+                $this->info('Update successful.');
+            } else {
+                $this->error('Update fail. Please check folder permissions');
+            }
         } else {
             $this->info('No new version available.');
         }
