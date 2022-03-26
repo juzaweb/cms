@@ -1,12 +1,12 @@
 @extends('installer::layouts.master')
 
 @section('template_title')
-    {{ trans('installer::permissions.template_title') }}
+    {{ trans('installer::installer.permissions.template_title') }}
 @endsection
 
 @section('title')
     <i class="fa fa-key fa-fw" aria-hidden="true"></i>
-    {{ trans('installer::permissions.title') }}
+    {{ trans('installer::installer.permissions.title') }}
 @endsection
 
 @section('container')
@@ -26,7 +26,7 @@
     @if (!isset($permissions['errors']))
         <div class="buttons">
             <a href="{{ route('installer.environment') }}" class="button">
-                {{ trans('installer::permissions.next') }}
+                {{ trans('installer::installer.permissions.next') }}
                 <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </a>
         </div>
