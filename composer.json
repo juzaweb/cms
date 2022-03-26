@@ -18,7 +18,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "codedge/laravel-selfupdater": "^3.3",
+        "juzaweb/laravel-selfupdater": "^3.3",
         "guzzlehttp/guzzle": "^7.2",
         "juzaweb/ads-manager": "@dev",
         "juzaweb/backend": "@dev",
