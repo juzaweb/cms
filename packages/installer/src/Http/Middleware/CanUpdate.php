@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Http\Middleware;
+namespace Juzaweb\Installer\Http\Middleware;
 
 use Closure;
 use Juzaweb\Traits\MigrationsHelper;

@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Juzaweb\Http\Middleware\XFrameHeadersMiddleware::class,
+            \Juzaweb\Installer\Http\Middleware\Installed::class,
         ],
 
         'api' => [
@@ -76,5 +77,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'install' => \Juzaweb\Installer\Http\Middleware\CanInstall::class,
     ];
 }

@@ -2,10 +2,7 @@
 
 namespace Juzaweb\Installer\Providers;
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\Http\Middleware\CanInstall;
-use Juzaweb\Http\Middleware\Installed;
 
 class InstallerServiceProvider extends ServiceProvider
 {
@@ -15,11 +12,15 @@ class InstallerServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/installer.php',
             'installer'
         );
+        
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'installer');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'installer');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
     }
 
-    public function boot(Router $router)
+    public function boot()
     {
-        $router->aliasMiddleware('install', CanInstall::class);
-        $router->pushMiddlewareToGroup('web', Installed::class);
+        //Route::aliasMiddleware('install', CanInstall::class);
+        //Route::pushMiddlewareToGroup('web', Installed::class);
     }
 }

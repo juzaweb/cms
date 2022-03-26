@@ -1,11 +1,11 @@
-@extends('juzaweb::installer.layouts.master-update')
+@extends('installer::layouts.master-update')
 
-@section('title', trans('juzaweb::installer.updater.welcome.title'))
+@section('title', trans('installer::updater.welcome.title'))
 @section('container')
     <p class="paragraph text-center">
-    	{{ trans('juzaweb::installer.updater.welcome.message') }}
+    	{{ trans('installer::updater.welcome.message') }}
     </p>
     <div class="buttons">
-        <a href="{{ route('LaravelUpdater::overview') }}" class="button">{{ trans('juzaweb::installer.next') }}</a>
+        <a href="{{ route('LaravelUpdater::overview') }}" class="button">{{ trans('installer::next') }}</a>
     </div>
 @stop
