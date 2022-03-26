@@ -10,16 +10,16 @@
 
 namespace Juzaweb\Console\Commands;
 
+use Codedge\Updater\UpdaterManager;
 use Illuminate\Console\Command;
-use Juzaweb\Support\Manager\UpdateManager;
 
 class UpdateCommand extends Command
 {
     protected $signature = 'juzacms:update';
 
-    public function handle()
+    public function handle(UpdaterManager $updater)
     {
-        $update = new UpdateManager();
+        /*$update = new UpdateManager();
 
         $this->info('Check file update');
         $update->updateStep1();
@@ -34,6 +34,25 @@ class UpdateCommand extends Command
         $update->updateStep4();
 
         $this->info('Update database');
-        $update->updateStep5();
+        $update->updateStep5();*/
+    
+        $currentVersion = $updater->source()->getVersionInstalled();
+        $versionAvailable = $updater->source()->getVersionAvailable();
+    
+        $this->info("Current installed version: {$currentVersion}");
+        $this->info("Version available: {$versionAvailable}");
+        
+        if($updater->source()->isNewVersionAvailable()) {
+            $release = $updater->source()->fetch($versionAvailable);
+    
+            // Run the update process
+            $updater->source()->update($release);
+    
+            $this->info('Update successful.');
+        } else {
+            $this->info('No new version available.');
+        }
+    
+        return self::SUCCESS;
     }
 }

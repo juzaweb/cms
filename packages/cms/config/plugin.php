@@ -113,6 +113,9 @@ return [
         ],
         'juzaweb/translation' => [
             \Juzaweb\Translation\TranslationAction::class
+        ],
+        'juzaweb/movie' => [
+            \Juzaweb\Movie\MovieAction::class
         ]
     ],
 ];
