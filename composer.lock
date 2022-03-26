@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb8667362f097c671f7d4ac195ed18cf",
+    "content-hash": "3f4270e03ba4be965b4edc7f201c065c",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1486,6 +1486,41 @@
                     "Juzaweb\\DemoSite\\": "src/"
                 }
             },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "juzaweb/installer",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./packages/installer",
+                "reference": "f15518fb582fb3060f454c3ee4e5ca1d44d293f8"
+            },
+            "require": {
+                "juzaweb/cms": "@dev",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "8.4 | ^8.5 | ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Juzaweb\\Installer\\Providers\\InstallerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\Installer\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
             "transport-options": {
                 "relative": true
             }
@@ -10353,6 +10388,7 @@
         "juzaweb/backend": 20,
         "juzaweb/cms": 20,
         "juzaweb/demo-site": 20,
+        "juzaweb/installer": 20,
         "juzaweb/notification": 20,
         "juzaweb/seo": 20,
         "juzaweb/social-login": 20,

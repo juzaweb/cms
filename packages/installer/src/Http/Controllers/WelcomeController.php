@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Installer\Http\Controllers\Installer;
+namespace Juzaweb\Installer\Http\Controllers;
 
 use Juzaweb\Http\Controllers\Controller;
 

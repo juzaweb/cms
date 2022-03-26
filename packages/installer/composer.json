@@ -12,10 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Juzaweb\\Installer\\Tests\\": "tests/",
-            "Juzaweb\\Installer\\": "src/",
-            "Juzaweb\\Installer\\Database\\Factories\\": "database/factories/",
-            "Juzaweb\\Installer\\Database\\Seeders\\": "database/seeders/"
+            "Juzaweb\\Installer\\": "src/"
         }
     },
     "extra": {

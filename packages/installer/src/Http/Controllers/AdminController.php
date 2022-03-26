@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Installer\Http\Controllers\Installer;
+namespace Juzaweb\Installer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
