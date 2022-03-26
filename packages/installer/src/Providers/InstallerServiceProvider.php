@@ -15,7 +15,8 @@ class InstallerServiceProvider extends ServiceProvider
         
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'installer');
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'installer');
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        
+        $this->app->register(RouteServiceProvider::class);
     }
 
     public function boot()

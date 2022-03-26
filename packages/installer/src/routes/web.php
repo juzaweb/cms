@@ -11,6 +11,7 @@
 use Juzaweb\Installer\Http\Controllers\AdminController;
 use Juzaweb\Installer\Http\Controllers\DatabaseController;
 use Juzaweb\Installer\Http\Controllers\EnvironmentController;
+use Juzaweb\Installer\Http\Controllers\FinalController;
 use Juzaweb\Installer\Http\Controllers\PermissionsController;
 use Juzaweb\Installer\Http\Controllers\RequirementsController;
 use Juzaweb\Installer\Http\Controllers\WelcomeController;

@@ -50,7 +50,7 @@ class EnvironmentController extends Controller
             return $redirect->route('installer.environment')
                 ->withInput()
                 ->withErrors([
-                'database_connection' => trans('installer::environment.wizard.form.db_connection_failed'),
+                'database_connection' => trans('installer::installer.environment.wizard.form.db_connection_failed'),
             ]);
         }
 
@@ -88,7 +88,6 @@ class EnvironmentController extends Controller
 
         try {
             DB::connection()->getPdo();
-
             return true;
         } catch (Exception $e) {
             return false;

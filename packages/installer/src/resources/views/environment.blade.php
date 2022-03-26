@@ -23,12 +23,14 @@
                 <option value="pgsql">{{ trans('installer::installer.environment.wizard.form.db_connection_label_pgsql') }}</option>
                 <option value="sqlsrv">{{ trans('installer::installer.environment.wizard.form.db_connection_label_sqlsrv') }}</option>
             </select>
+
             @if ($errors->has('database_connection'))
                 <span class="error-block">
                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
                     {{ $errors->first('database_connection') }}
                 </span>
             @endif
+
         </div>
 
         <div class="form-group {{ $errors->has('database_hostname') ? ' has-error ' : '' }}">
@@ -139,7 +141,7 @@
 
         $('form').on('submit', function () {
             $('.btn-submit')
-                .html("{{ trans('juzaweb::app.please_wait') }}")
+                .html("{{ trans('cms::app.please_wait') }}")
                 .prop('disabled', true);
         });
     </script>
