@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Installer\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class EnvironmentController extends Controller
     {
         $envConfig = $this->environmentManager->getEnvContent();
 
-        return view('cms::installer.environment', compact('envConfig'));
+        return view('installer::environment', compact('envConfig'));
     }
 
     public function save(Request $request, Redirector $redirect)
@@ -50,7 +50,7 @@ class EnvironmentController extends Controller
             return $redirect->route('installer.environment')
                 ->withInput()
                 ->withErrors([
-                'database_connection' => trans('cms::installer.environment.wizard.form.db_connection_failed'),
+                'database_connection' => trans('installer::installer.environment.wizard.form.db_connection_failed'),
             ]);
         }
 
@@ -88,7 +88,6 @@ class EnvironmentController extends Controller
 
         try {
             DB::connection()->getPdo();
-
             return true;
         } catch (Exception $e) {
             return false;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Installer\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Juzaweb\Support\PermissionsChecker;
@@ -38,7 +38,7 @@ class PermissionsController extends Controller
         ]);
 
         return view(
-            'cms::installer.permissions',
+            'installer::permissions',
             compact('permissions')
         );
     }

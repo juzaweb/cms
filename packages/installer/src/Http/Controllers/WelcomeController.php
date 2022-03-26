@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Installer\Http\Controllers;
 
 use Juzaweb\Http\Controllers\Controller;
 
@@ -13,6 +13,6 @@ class WelcomeController extends Controller
 
     public function welcome()
     {
-        return view('cms::installer.welcome');
+        return view('installer::welcome');
     }
 }

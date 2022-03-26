@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Installer\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Juzaweb\Events\InstallerFinished;
@@ -26,7 +26,7 @@ class FinalController extends Controller
 
         event(new InstallerFinished());
 
-        return view('cms::installer.finished', compact(
+        return view('installer::finished', compact(
             'finalMessages',
             'finalStatusMessage'
         ));

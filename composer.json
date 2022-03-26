@@ -23,6 +23,7 @@
         "juzaweb/backend": "dev-master",
         "juzaweb/cms": "dev-master",
         "juzaweb/demo-site": "dev-master",
+        "juzaweb/installer": "dev-master",
         "juzaweb/notification": "dev-master",
         "juzaweb/seo": "dev-master",
         "juzaweb/social-login": "dev-master",

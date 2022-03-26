@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Installer;
+namespace Juzaweb\Installer\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Juzaweb\Support\RequirementsChecker;
@@ -34,6 +34,6 @@ class RequirementsController extends Controller
             config('installer.requirements')
         );
 
-        return view('cms::installer.requirements', compact('requirements', 'phpSupportInfo'));
+        return view('installer::requirements', compact('requirements', 'phpSupportInfo'));
     }
 }

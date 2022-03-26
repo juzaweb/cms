@@ -1,0 +1,25 @@
+{
+    "name": "juzaweb/installer",
+    "description": "",
+    "keywords": [],
+    "license": "MIT",
+    "require": {
+        "php": "^8.0",
+        "juzaweb/cms": "@dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "8.4 | ^8.5 | ^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Installer\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\Installer\\Providers\\InstallerServiceProvider"
+            ]
+        }
+    }
+}
