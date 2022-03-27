@@ -31,16 +31,4 @@ class CommandTest extends TestCase
         $this->artisan('optimize')
             ->assertExitCode(0);
     }
-
-    public function testImportThemes()
-    {
-        $this->artisan('jw:import-themes')
-            ->assertExitCode(0);
-    }
-
-    public function testImportPlugins()
-    {
-        $this->artisan('jw:import-plugins')
-            ->assertExitCode(0);
-    }
 }
