@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "614143d217f5fdc40087ca422c75571e",
+    "content-hash": "00fe3d13bb58f6beb97242e1546d9c03",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1347,7 +1347,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/cms",
-                "reference": "9f63bf7ffcd1d9ac4c7157bc23e8abc08b087b58"
+                "reference": "cc4b7b47c38023a24de07a4a114b04f80dbb12e3"
             },
             "require": {
                 "arcanedev/log-viewer": "^9.0",
@@ -1355,6 +1355,7 @@
                 "intervention/image": "^2.5",
                 "juzaweb/config": "^2.2",
                 "juzaweb/laravel-chunk-upload": "^1.5",
+                "juzaweb/laravel-selfupdater": "^3.3",
                 "juzaweb/laravel-translation-loader": "^1.0",
                 "php": "^8.0|^8.1",
                 "rcrowe/twigbridge": "^0.14",
@@ -1667,21 +1668,21 @@
         },
         {
             "name": "juzaweb/laravel-translation-loader",
-            "version": "v1.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/laravel-translation.git",
-                "reference": "8dcca066f57a4d2e49f702738c66fd0ef5f4cafb"
+                "reference": "ec1fc783ba7b063258d2f9192984ee96f0807df0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/laravel-translation/zipball/8dcca066f57a4d2e49f702738c66fd0ef5f4cafb",
-                "reference": "8dcca066f57a4d2e49f702738c66fd0ef5f4cafb",
+                "url": "https://api.github.com/repos/juzaweb/laravel-translation/zipball/ec1fc783ba7b063258d2f9192984ee96f0807df0",
+                "reference": "ec1fc783ba7b063258d2f9192984ee96f0807df0",
                 "shasum": ""
             },
             "require": {
                 "illuminate/translation": "^6.0|^7.0|^8.0|^9.0",
-                "php": "^7.2|^8.1"
+                "php": "^7.4|^8.0|^8.1"
             },
             "require-dev": {
                 "orchestra/testbench": "^4.0|^5.0|^6.0",
@@ -1722,7 +1723,7 @@
             ],
             "support": {
                 "issues": "https://github.com/juzaweb/laravel-translation/issues",
-                "source": "https://github.com/juzaweb/laravel-translation/tree/v1.0"
+                "source": "https://github.com/juzaweb/laravel-translation/tree/v1.0.1"
             },
             "funding": [
                 {
@@ -1730,7 +1731,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-03-20T03:27:20+00:00"
+            "time": "2022-03-27T00:34:28+00:00"
         },
         {
             "name": "juzaweb/movie",
