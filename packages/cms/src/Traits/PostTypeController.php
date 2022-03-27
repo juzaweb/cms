@@ -172,7 +172,7 @@ trait PostTypeController
         $attributes['type'] = $setting->get('key');
 
         if (!empty($attributes['meta'])) {
-            $metas = array_keys($setting->get('metas'));
+            $metas = array_keys((array) $setting->get('metas'));
             $attributes['meta'] = collect($attributes['meta'])
                 ->filter(function ($val, $key) use ($metas) {
                     return in_array($key, $metas);

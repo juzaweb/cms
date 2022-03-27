@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dtv
- * Date: 10/15/2021
- * Time: 1:00 PM
- */
 
 namespace Juzaweb\Backend\Tests\Install;
 
-use Juzaweb\Support\Manager\UpdateManager;
+use Illuminate\Support\Facades\File;
 use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Version;
 
 class UpdateTest extends TestCase
 {
@@ -24,7 +19,21 @@ class UpdateTest extends TestCase
 
     public function testUpdateCommand()
     {
+        $ver = Version::getVersion();
+        $filePath = base_path('packages/cms/src/Version.php');
+        File::put(
+            str_replace(
+                $ver,
+                'v2.0',
+                File::get($filePath)
+            ),
+            $filePath
+        );
+        
         $this->artisan('juzacms:update')
             ->assertExitCode(0);
+    
+        $ver = Version::getVersion();
+        $this->assertTrue($ver != 'v2.0');
     }
 }
