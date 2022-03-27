@@ -22,12 +22,12 @@ class UpdateTest extends TestCase
         $ver = Version::getVersion();
         $filePath = base_path('packages/cms/src/Version.php');
         File::put(
+            $filePath,
             str_replace(
                 $ver,
                 'v2.0',
                 File::get($filePath)
-            ),
-            $filePath
+            )
         );
         
         $this->artisan('juzacms:update')
