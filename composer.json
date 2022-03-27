@@ -19,6 +19,7 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "guzzlehttp/guzzle": "^7.2",
+        "inertiajs/inertia-laravel": "^0.5.2",
         "juzaweb/ads-manager": "@dev",
         "juzaweb/backend": "@dev",
         "juzaweb/cms": "@dev",
@@ -31,8 +32,10 @@
         "juzaweb/social-login": "@dev",
         "juzaweb/translation": "@dev",
         "laravel/framework": "^9.2",
+        "laravel/jetstream": "^2.6",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
