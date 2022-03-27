@@ -19,23 +19,6 @@ class UpdateCommand extends Command
 
     public function handle(UpdaterManager $updater)
     {
-        /*$update = new UpdateManager();
-
-        $this->info('Check file update');
-        $update->updateStep1();
-
-        $this->info('Download File');
-        $update->updateStep2();
-
-        $this->info('Unzip File');
-        $update->updateStep3();
-
-        $this->info('Move to folder');
-        $update->updateStep4();
-
-        $this->info('Update database');
-        $update->updateStep5();*/
-    
         $currentVersion = $updater->source()->getVersionInstalled();
         $versionAvailable = $updater->source()->getVersionAvailable();
     
@@ -49,6 +32,8 @@ class UpdateCommand extends Command
             $update = $updater->source()->update($release);
     
             if ($update) {
+                $this->callCommands();
+                
                 $this->info('Update successful.');
             } else {
                 $this->error('Update fail. Please check folder permissions');
@@ -56,7 +41,32 @@ class UpdateCommand extends Command
         } else {
             $this->info('No new version available.');
         }
-    
+        
         return self::SUCCESS;
+    }
+    
+    protected function callCommands()
+    {
+        $basePath = base_path();
+        shell_exec("php {$basePath}/composer.phar install");
+    
+        $this->call('migrate');
+        $this->call('optimize:clear');
+        $this->call(
+            'vendor:publish',
+            [
+                '--tag' => 'juzaweb_assets',
+                '--force' => true,
+            ]
+        );
+    
+        $theme = jw_current_theme();
+        $this->call(
+            'theme:publish',
+            [
+                'theme' => $theme,
+                'type' => 'assets',
+            ]
+        );
     }
 }
