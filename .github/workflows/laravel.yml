@@ -41,6 +41,6 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
         run: |
-          vendor/bin/phpunit vendor/juzaweb/cms/tests/Install
-          vendor/bin/phpunit vendor/juzaweb/cms/tests/Unit
-          vendor/bin/phpunit vendor/juzaweb/cms/tests/Feature
+          vendor/bin/phpunit vendor/juzaweb/backend/tests/Install
+          vendor/bin/phpunit vendor/juzaweb/backend/tests/Unit
+          vendor/bin/phpunit vendor/juzaweb/backend/tests/Feature
