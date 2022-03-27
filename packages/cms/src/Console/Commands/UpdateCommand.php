@@ -48,14 +48,14 @@ class UpdateCommand extends Command
     protected function callCommands()
     {
         $basePath = base_path();
-        shell_exec("php {$basePath}/composer.phar install");
+        shell_exec(PHP_BINARY . " {$basePath}/composer.phar install");
     
         $this->call('migrate');
         $this->call('optimize:clear');
         $this->call(
             'vendor:publish',
             [
-                '--tag' => 'juzaweb_assets',
+                '--tag' => 'cms_assets',
                 '--force' => true,
             ]
         );
