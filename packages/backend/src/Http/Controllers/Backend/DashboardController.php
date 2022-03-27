@@ -5,6 +5,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Inertia\Inertia;
 use Juzaweb\Abstracts\Action;
 use Juzaweb\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\MediaFile;
@@ -25,8 +26,8 @@ class DashboardController extends BackendController
         $pages = Post::where('type', '=', 'pages')
             ->count();
         $storage = format_size_units(MediaFile::sum('size'));
-
-        return view('cms::backend.dashboard', compact(
+    
+        return Inertia::render('Dashboard', compact(
             'title',
             'users',
             'posts',

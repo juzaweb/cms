@@ -2,8 +2,6 @@
     <div>
         <Head :title="title" />
 
-        <jet-banner />
-
         <div class="juzaweb__layout juzaweb__layout--hasSider">
 
             <div class="juzaweb__menuLeft">
@@ -21,7 +19,7 @@
                     </div>
 
                     <div class="juzaweb__menuLeft__scroll jw__customScroll">
-                        @include('cms::backend.menu_left')
+                        <MenuLeft></MenuLeft>
                     </div>
                 </div>
             </div>
@@ -29,7 +27,7 @@
 
             <div class="juzaweb__layout">
                 <div class="juzaweb__layout__header">
-                    @include('cms::backend.menu_top')
+                    <MenuTop />
                 </div>
 
                 <div class="juzaweb__layout__content">
@@ -62,12 +60,9 @@
 
 <script>
     import { defineComponent } from 'vue'
-    import JetApplicationMark from '@/Jetstream/ApplicationMark.vue'
-    import JetBanner from '@/Jetstream/Banner.vue'
-    import JetDropdown from '@/Jetstream/Dropdown.vue'
-    import JetDropdownLink from '@/Jetstream/DropdownLink.vue'
-    import JetNavLink from '@/Jetstream/NavLink.vue'
-    import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
+    import MenuTop from  '../Components/MenuTop';
+    import MenuLeft from  '../Components/MenuLeft';
+
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import '../../../public/jw-styles/juzaweb/styles/css/vendor.css';
     import '../../../public/jw-styles/juzaweb/styles/css/backend.css';
@@ -79,13 +74,9 @@
 
         components: {
             Head,
-            JetApplicationMark,
-            JetBanner,
-            JetDropdown,
-            JetDropdownLink,
-            JetNavLink,
-            JetResponsiveNavLink,
             Link,
+            MenuTop,
+            MenuLeft,
         },
 
         data() {

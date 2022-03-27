@@ -15,7 +15,9 @@
 namespace Juzaweb\Http\Controllers;
 
 use Juzaweb\Abstracts\Action;
+use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Traits\ResponseMessage;
+use Inertia\Inertia;
 
 class BackendController extends Controller
 {
@@ -24,6 +26,9 @@ class BackendController extends Controller
     public function callAction($method, $parameters)
     {
         do_action(Action::BACKEND_CALL_ACTION, $method, $parameters);
+    
+        $menuItems = HookAction::getAdminMenu();
+        Inertia::share('menuItems', $menuItems);
 
         return parent::callAction($method, $parameters);
     }
