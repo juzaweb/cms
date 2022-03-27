@@ -140,7 +140,7 @@ trait PostTypeController
         $editor = 'cms::backend.post.components.editor';
 
         if (Arr::get($templateData, 'blocks', [])) {
-            $editor = 'devtool::page-block.block';
+            $editor = 'cms::backend.page-block.block';
         }
 
         $data['editor'] = $editor;

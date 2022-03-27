@@ -116,6 +116,9 @@ return [
         ],
         'juzaweb/movie' => [
             \Juzaweb\Movie\MovieAction::class
+        ],
+        'juzaweb/image-slider' => [
+            \Juzaweb\ImageSlider\ImageSliderAction::class
         ]
     ],
 ];

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00fe3d13bb58f6beb97242e1546d9c03",
+    "content-hash": "f6c43c3c40b91cd6bbf13fc378492f2b",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1487,6 +1487,37 @@
                     "Juzaweb\\DemoSite\\": "src/"
                 }
             },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "juzaweb/image-slider",
+            "version": "dev-develop",
+            "dist": {
+                "type": "path",
+                "url": "./plugins/image-slider",
+                "reference": "7236e51e86040323b36c9f0cc745a9c1eb2bf7a5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Juzaweb\\ImageSlider\\Providers\\ImageSliderServiceProvider"
+                    ]
+                },
+                "juzaweb": {
+                    "name": "Image slider",
+                    "domain": "juim",
+                    "version": "1.0.1"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\ImageSlider\\": "src/"
+                }
+            },
+            "description": "Create Image slider for Website",
             "transport-options": {
                 "relative": true
             }
@@ -10724,6 +10755,7 @@
         "juzaweb/backend": 20,
         "juzaweb/cms": 20,
         "juzaweb/demo-site": 20,
+        "juzaweb/image-slider": 20,
         "juzaweb/installer": 20,
         "juzaweb/movie": 20,
         "juzaweb/notification": 20,
