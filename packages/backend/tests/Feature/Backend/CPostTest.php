@@ -15,6 +15,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\Facades\ActionRegistion;
 use Juzaweb\Models\User;
 use Juzaweb\Backend\Tests\TestCase;
 
@@ -30,6 +31,8 @@ class CPostTest extends TestCase
 
         $this->user = User::where('is_admin', '=', 1)
             ->first();
+    
+        ActionRegistion::init();
 
         Auth::loginUsingId($this->user->id);
 
