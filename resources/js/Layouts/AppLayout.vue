@@ -1,5 +1,5 @@
 <template>
-    <Head :title="title" />
+   <!-- <Head :title="title" />-->
 
     <div class="juzaweb__layout juzaweb__layout--hasSider">
 

@@ -1,7 +1,7 @@
 <template>
     <div class="juzaweb__topbar">
         <div class="mr-4">
-            <a href="" class="mr-2" target="_blank">
+            <a href="/" class="mr-2" target="_blank">
                 <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Visit website"></i> {{ $page.props.lang.view_website }}
             </a>
         </div>
@@ -10,7 +10,7 @@
             <div class="dropdown mr-4 d-none d-sm-block">
                 <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown">
                     <i class="fa fa-plus"></i>
-                    <span class="dropdown-toggle-text"> </span>
+                    <span class="dropdown-toggle-text"> {{ $page.props.lang.new }}</span>
                 </a>
 
                 <div class="dropdown-menu" role="menu">

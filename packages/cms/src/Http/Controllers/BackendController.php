@@ -43,6 +43,8 @@ class BackendController extends Controller
                 'menuItems' => $menuItems,
                 'lang' => $langs,
                 'user' => $user,
+                'adminUrl' => url(config('juzaweb.admin_prefix')),
+                'adminPrefix' => config('juzaweb.admin_prefix'),
             ]
         );
 
