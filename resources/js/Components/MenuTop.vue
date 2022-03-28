@@ -2,7 +2,7 @@
     <div class="juzaweb__topbar">
         <div class="mr-4">
             <a href="" class="mr-2" target="_blank">
-                <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Visit website"></i>
+                <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Visit website"></i> {{ $page.props.lang.view_website }}
             </a>
         </div>
 
@@ -14,17 +14,15 @@
                 </a>
 
                 <div class="dropdown-menu" role="menu">
-                    <a class="dropdown-item" href="{{ route('admin.posts.create', ['posts']) }}"></a>
+                    <a class="dropdown-item" :href="route('admin.posts.create', ['posts'])"></a>
 
-                    <a class="dropdown-item" href="{{ route('admin.posts.create', ['pages']) }}"></a>
+                    <a class="dropdown-item" :href="route('admin.posts.create', ['pages'])"></a>
 
-                    <a class="dropdown-item" href=""></a>
+                    <!--<a class="dropdown-item" href=""></a>-->
 
                 </div>
             </div>
         </div>
-
-
 
         <div class="juzaweb__topbar__actionsDropdown dropdown mr-4 d-none d-sm-block">
             <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="0,15">
@@ -52,7 +50,7 @@
 
         <div class="dropdown">
             <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="5,15">
-                <img class="dropdown-toggle-avatar" src="{{ $jw_user->getAvatar() }}" alt="User avatar" width="30" height="30"/>
+                <img class="dropdown-toggle-avatar" :src="$page.props.user.avatar" alt="User avatar" width="30" height="30"/>
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" role="menu">
