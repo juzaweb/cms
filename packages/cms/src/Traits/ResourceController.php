@@ -6,10 +6,6 @@
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzawebcms/juzawebcms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 6/9/2021
- * Time: 2:05 PM
  */
 
 namespace Juzaweb\Traits;
@@ -18,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 trait ResourceController
 {
@@ -25,8 +22,8 @@ trait ResourceController
     {
         $this->checkPermission('index', $this->getModel(...$params));
 
-        return view(
-            $this->viewPrefix . '.index',
+        return Inertia::render(
+            $this->viewPrefix . '/Index',
             $this->getDataForIndex(...$params)
         );
     }
@@ -48,7 +45,7 @@ trait ResourceController
 
         $model = $this->makeModel(...$params);
 
-        return view($this->viewPrefix . '.form', array_merge([
+        return Inertia::render($this->viewPrefix . '/Form', array_merge([
             'title' => trans('cms::app.add_new'),
             'linkIndex' => action([static::class, 'index'], $params)
         ], $this->getDataForForm($model, ...$params)));

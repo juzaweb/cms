@@ -6,7 +6,7 @@
                 <span class="juzaweb__menuLeft__item__title">{{ item.title }}</span>
             </span>
 
-            <Link class="juzaweb__menuLeft__item__link" :href="adminUrl +'/'+ item.url" v-if="!item.children">
+            <Link class="juzaweb__menuLeft__item__link" :href="(item.url === 'dashboard' ? adminUrl : adminUrl + '/' + item.url)" v-if="!item.children">
                 <span class="juzaweb__menuLeft__item__title">{{ item.title }}</span>
 
                 <i :class="'juzaweb__menuLeft__item__icon ' + item.icon"></i>

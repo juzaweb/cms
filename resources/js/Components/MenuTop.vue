@@ -2,7 +2,7 @@
     <div class="juzaweb__topbar">
         <div class="mr-4">
             <a href="/" class="mr-2" target="_blank">
-                <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Visit website"></i> {{ $page.props.lang.view_website }}
+                <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Visit website"></i> {{ $page.props.lang.view_site }}
             </a>
         </div>
 

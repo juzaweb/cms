@@ -1,5 +1,5 @@
 <template>
-   <!-- <Head :title="title" />-->
+   <Head :title="title" />
 
     <div class="juzaweb__layout juzaweb__layout--hasSider">
 
@@ -8,13 +8,13 @@
 
             <div class="juzaweb__menuLeft__outer">
                 <div class="juzaweb__menuLeft__logo__container">
-                    <a href="/">
+                    <Link href="/">
                         <div class="juzaweb__menuLeft__logo">
                             <img src="/jw-styles/juzaweb/styles/images/logo.svg" class="mr-2" alt="Juzaweb">
                             <div class="juzaweb__menuLeft__logo__name">Juzaweb</div>
                             <div class="juzaweb__menuLeft__logo__descr">Cms</div>
                         </div>
-                    </a>
+                    </Link>
                 </div>
 
                 <div class="juzaweb__menuLeft__scroll jw__customScroll">
