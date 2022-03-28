@@ -27,5 +27,8 @@
         "vue": "^3.2.31",
         "vue-loader": "^16.1.2"
     },
-    "dependencies": {}
+    "dependencies": {
+        "jquery": "^3.6.0",
+        "select2": "^4.1.0-rc.0"
+    }
 }

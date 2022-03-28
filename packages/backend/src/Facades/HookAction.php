@@ -51,6 +51,7 @@ use Juzaweb\Backend\Contracts\HookActionContract;
  * @method static \Illuminate\Support\Collection getAdminPages($key = null)
  * @method static \Illuminate\Support\Collection getPackageModules($key = null)
  * @method static \Illuminate\Support\Collection getThemeSettings($name = null)
+ * @method static array getAdminMenu()
  *
  * @see \Juzaweb\Backend\Support\HookAction
  */
