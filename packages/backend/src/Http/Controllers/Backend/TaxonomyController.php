@@ -10,6 +10,8 @@ use Juzaweb\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\TaxonomyDataTable;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\Traits\ResourceController;
+use Juzaweb\Abstracts\Action;
+use Inertia\Inertia;
 
 class TaxonomyController extends BackendController
 {
@@ -20,6 +22,18 @@ class TaxonomyController extends BackendController
     }
 
     protected $viewPrefix = 'cms::backend.taxonomy';
+
+    public function index()
+    {
+        do_action(Action::POST_FORM_LEFT_ACTION);
+        $title = trans('cms::app.tags');
+        $tags = Taxonomy::all();
+
+        return Inertia::render('Backend/Taxonomy/Taxonomy', compact(
+            'title',
+            'tags'
+        ));
+    }
 
     protected function getDataTable(...$params)
     {
