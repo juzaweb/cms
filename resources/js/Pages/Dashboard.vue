@@ -97,8 +97,8 @@
                             <tr>
                                 <th data-formatter="index_formatter" data-width="5%">#</th>
                                 <th data-field="title">{{ $page.props.lang.title }}</th>
-                                <th data-field="views" data-width="10%">views</th>
-                                <th data-field="created" data-width="30%" data-align="center">created_at</th>
+                                <th data-field="views" data-width="10%">{{ $page.props.lang.views }}</th>
+                                <th data-field="created" data-width="30%" data-align="center">{{ $page.props.lang.created_at }}</th>
                             </tr>
                             </thead>
                         </table>
