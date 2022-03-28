@@ -7,8 +7,8 @@
                         <div class="d-flex flex-wrap align-items-center">
                             <i class="fa fa-list font-size-50 mr-3"></i>
                             <div>
-                                <div class="font-size-21 font-weight-bold">posts</div>
-                                <div class="font-size-15">total: {{ $page.props.posts }}</div>
+                                <div class="font-size-21 font-weight-bold">{{ $page.props.lang.posts }}</div>
+                                <div class="font-size-15">{{ $page.props.lang.total }}: {{ $page.props.posts }}</div>
                             </div>
                         </div>
                     </div>
@@ -21,8 +21,8 @@
                         <div class="d-flex flex-wrap align-items-center">
                             <i class="fa fa-list font-size-50 mr-3"></i>
                             <div>
-                                <div class="font-size-21 font-weight-bold">pages</div>
-                                <div class="font-size-15">total: {{ $page.props.pages }}</div>
+                                <div class="font-size-21 font-weight-bold">{{ $page.props.lang.pages }}</div>
+                                <div class="font-size-15">{{ $page.props.lang.total }}: {{ $page.props.pages }}</div>
                             </div>
                         </div>
                     </div>
@@ -35,8 +35,8 @@
                         <div class="d-flex flex-wrap align-items-center">
                             <i class="fa fa-users font-size-50 mr-3"></i>
                             <div>
-                                <div class="font-size-21 font-weight-bold">users</div>
-                                <div class="font-size-15">total: {{ $page.props.users }}</div>
+                                <div class="font-size-21 font-weight-bold">{{ $page.props.lang.users }}</div>
+                                <div class="font-size-15">{{ $page.props.lang.total }}: {{ $page.props.users }}</div>
                             </div>
                         </div>
                     </div>
@@ -49,8 +49,8 @@
                         <div class="d-flex flex-wrap align-items-center">
                             <i class="fa fa-hdd-o font-size-50 mr-3"></i>
                             <div>
-                                <div class="font-size-21 font-weight-bold">storage</div>
-                                <div class="font-size-15">total: {{ $page.props.storage }}</div>
+                                <div class="font-size-21 font-weight-bold">{{ $page.props.lang.storage }}</div>
+                                <div class="font-size-15">{{ $page.props.lang.total }}: {{ $page.props.storage }}</div>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>new_users</h5>
+                        <h5>{{ $page.props.lang.new_users }}</h5>
                     </div>
 
                     <div class="card-body">
@@ -76,8 +76,8 @@
                             <thead>
                             <tr>
                                 <th data-formatter="index_formatter" data-width="5%">#</th>
-                                <th data-field="name">name</th>
-                                <th data-field="created" data-width="30%" data-align="center">created_at</th>
+                                <th data-field="name">{{ $page.props.lang.name }}</th>
+                                <th data-field="created" data-width="30%" data-align="center">{{ $page.props.lang.created_at }}</th>
                             </tr>
                             </thead>
                         </table>
@@ -88,7 +88,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5>top_views</h5>
+                        <h5>{{ $page.props.lang.top_views }}</h5>
                     </div>
 
                     <div class="card-body">
@@ -96,9 +96,9 @@
                             <thead>
                             <tr>
                                 <th data-formatter="index_formatter" data-width="5%">#</th>
-                                <th data-field="title">title</th>
-                                <th data-field="views" data-width="10%">views</th>
-                                <th data-field="created" data-width="30%" data-align="center">created_at</th>
+                                <th data-field="title">{{ $page.props.lang.title }}</th>
+                                <th data-field="views" data-width="10%">{{ $page.props.lang.views }}</th>
+                                <th data-field="created" data-width="30%" data-align="center">{{ $page.props.lang.created_at }}</th>
                             </tr>
                             </thead>
                         </table>
@@ -119,6 +119,6 @@
         components: {
             AppLayout,
             Welcome,
-        },
+        }
     })
 </script>
