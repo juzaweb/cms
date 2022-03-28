@@ -18,6 +18,7 @@ use Juzaweb\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Traits\ResponseMessage;
 use Inertia\Inertia;
+use function Symfony\Component\HttpFoundation\getLanguages;
 
 class BackendController extends Controller
 {
@@ -28,7 +29,14 @@ class BackendController extends Controller
         do_action(Action::BACKEND_CALL_ACTION, $method, $parameters);
     
         $menuItems = HookAction::getAdminMenu();
-        Inertia::share('menuItems', $menuItems);
+        $langs = array_merge(trans('cms::app', [], 'en'), trans('cms::app'));
+        
+        Inertia::share(
+            [
+                'menuItems' => $menuItems,
+                'lang' => $langs,
+            ]
+        );
 
         return parent::callAction($method, $parameters);
     }
