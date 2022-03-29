@@ -59,6 +59,10 @@
                 type: Object,
                 default: () => {}
             },
+            className: {
+                type: String,
+                default: ''
+            }
         },
         watch: {
             options: {

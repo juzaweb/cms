@@ -1,16 +1,18 @@
 <template>
     <app-layout :title="$page.props.title">
-        <div class="row">
-            <div class="col-md-9">
-                <InputField :label="$page.props.lang.title" name="title" />
+        <FormAction method="post">
+            <div class="row">
+                <div class="col-md-9">
+                    <InputField :label="$page.props.lang.title" name="title" />
 
-                <EditorField :label="$page.props.lang.content" name="content" />
+                    <EditorField :label="$page.props.lang.content" name="content" />
+                </div>
+
+                <div class="col-md-3">
+
+                </div>
             </div>
-
-            <div class="col-md-3">
-
-            </div>
-        </div>
+        </FormAction>
     </app-layout>
 </template>
 
@@ -21,6 +23,7 @@
     import InputField from '@/Components/Fields/InputField';
     import EditorField from '@/Components/Fields/EditorField';
     import SelectField from '@/Components/Fields/SelectField';
+    import FormAction from '@/Components/FormAction';
 
     export default defineComponent({
         components: {
@@ -29,6 +32,7 @@
             InputField,
             EditorField,
             SelectField,
+            FormAction,
         }
     })
 </script>
