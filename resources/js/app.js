@@ -1,6 +1,5 @@
 require('./bootstrap');
 require('jquery');
-require('select2');
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
