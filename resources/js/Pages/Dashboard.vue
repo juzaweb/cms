@@ -107,16 +107,31 @@
             </div>
         </div>
 
+        <Link text="JuzaCMS Team" className="juzaweb" href="https://juzaweb.com" />
+
     </app-layout>
 </template>
 
 <script>
     import { defineComponent } from 'vue'
     import AppLayout from '@/Layouts/AppLayout.vue'
+    import Welcome from '@/Jetstream/Welcome.vue'
+    import Link from '../Components/Atoms/Link/Link.atom.vue'
 
     export default defineComponent({
         components: {
             AppLayout,
+            Welcome,
+            Link
+        },
+        data() {
+            return {
+                products: [
+                    {id: 1, name: 'Prod 1'},
+                    {id: 2, name: 'Prod 2'},
+                    {id: 3, name: 'Prod 3'}
+                ]
+            }
         }
     })
 </script>
