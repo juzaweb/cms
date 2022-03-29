@@ -2,11 +2,9 @@
     <app-layout :title="$page.props.title">
         <div class="row">
             <div class="col-md-9">
-                <InputField name="title" />
+                <InputField :label="$page.props.lang.title" name="title" />
 
-                <SelectField name="name" />
-
-                <EditorField api-key='your-api-key' :init="{ /* your other settings */ }" />
+                <EditorField :label="$page.props.lang.content" name="content" />
             </div>
 
             <div class="col-md-3">
@@ -20,9 +18,9 @@
     import { defineComponent } from 'vue';
     import AppLayout from '@/Layouts/AppLayout.vue';
     import { Link } from '@inertiajs/inertia-vue3';
-    import InputField from '@/Fields/InputField';
-    import EditorField from '@/Fields/EditorField';
-    import SelectField from '@/Fields/SelectField';
+    import InputField from '@/Components/Fields/InputField';
+    import EditorField from '@/Components/Fields/EditorField';
+    import SelectField from '@/Components/Fields/SelectField';
 
     export default defineComponent({
         components: {
