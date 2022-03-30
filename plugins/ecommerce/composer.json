@@ -1,6 +1,6 @@
 {
     "name": "juzaweb/ecommerce",
-    "description": "",
+    "description": "Ecommerce plugin for website designed by Juzaweb",
     "extra": {
         "laravel": {
             "providers": [
@@ -12,11 +12,11 @@
                 "Juzaweb\\Ecommerce\\Providers\\EcommerceServiceProvider"
             ],
             "aliases": {},
-            "name": "juzaweb/ecommerce",
+            "name": "Ecommerces",
             "domain": "ecom",
             "cms_min": "1.0.9",
             "version": "1.0",
-            "visible": false
+            "visible": true
         }
     },
     "require": {
@@ -26,8 +26,9 @@
     "autoload": {
         "psr-4": {
             "Juzaweb\\Ecommerce\\Tests\\": "tests/",
-            "Juzaweb\\Ecommerce\\Seeders\\": "seeders/",
-            "Juzaweb\\Ecommerce\\Factories\\": "factories/",
+            "Juzaweb\\Ecommerce\\Database\\Seeders\\": "database/seeders/",
+            "Juzaweb\\Ecommerce\\Database\\Factories\\": "database/factories/",
+            "Juzaweb\\Ecommerce\\Database\\Migrations\\": "database/migrations/",
             "Juzaweb\\Ecommerce\\": "src/"
         }
     }

@@ -14,35 +14,35 @@ class CreateOrderItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create(
-            'order_items',
-            function (Blueprint $table) {
-                $table->id();
-                $table->decimal('price', 15, 2);
-                $table->decimal('compare_price', 15, 2)->nullable();
-                $table->string('sku_code', 100)->nullable()->index();
-                $table->string('barcode', 100)->nullable()->index();
-                $table->unsignedBigInteger('order_id')->index();
-                $table->unsignedBigInteger('product_id')->nullable()->index();
-                $table->unsignedBigInteger('variant_id')->nullable()->index();
-                $table->timestamps();
+        // Schema::create(
+        //     'order_items',
+        //     function (Blueprint $table) {
+        //         $table->id();
+        //         $table->decimal('price', 15, 2);
+        //         $table->decimal('compare_price', 15, 2)->nullable();
+        //         $table->string('sku_code', 100)->nullable()->index();
+        //         $table->string('barcode', 100)->nullable()->index();
+        //         $table->unsignedBigInteger('order_id')->index();
+        //         $table->unsignedBigInteger('product_id')->nullable()->index();
+        //         $table->unsignedBigInteger('variant_id')->nullable()->index();
+        //         $table->timestamps();
 
-                $table->foreign('order_id')
-                    ->references('id')
-                    ->on('orders')
-                    ->onDelete('cascade');
+        //         $table->foreign('order_id')
+        //             ->references('id')
+        //             ->on('orders')
+        //             ->onDelete('cascade');
 
-                $table->foreign('product_id')
-                    ->references('id')
-                    ->on('posts')
-                    ->onDelete('set null');
+        //         $table->foreign('product_id')
+        //             ->references('id')
+        //             ->on('posts')
+        //             ->onDelete('set null');
 
-                $table->foreign('variant_id')
-                    ->references('id')
-                    ->on('variants')
-                    ->onDelete('set null');
-            }
-        );
+        //         $table->foreign('variant_id')
+        //             ->references('id')
+        //             ->on('variants')
+        //             ->onDelete('set null');
+        //     }
+        // );
     }
 
     /**
@@ -52,6 +52,6 @@ class CreateOrderItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_items');
+        // Schema::dropIfExists('order_items');
     }
 }

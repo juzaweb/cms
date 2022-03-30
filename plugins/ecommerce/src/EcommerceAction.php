@@ -61,35 +61,35 @@ class EcommerceAction extends Action
                 'metas' => [
                     'price' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'compare_price' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'sku_code' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'barcode' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'images' => [
                         'type' => 'images',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'quantity' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'inventory_management' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'disable_out_of_stock' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ]
                 ]
             ]
