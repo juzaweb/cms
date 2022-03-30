@@ -249,12 +249,12 @@ abstract class Plugin
     {
         if (config('plugin.autoload')) {
             $this->autoloadPSR4();
+    
+            $this->registerAliases();
+    
+            $this->registerProviders();
         }
         
-        $this->registerAliases();
-
-        $this->registerProviders();
-
         if ($this->isLoadFilesOnBoot() === false) {
             $this->registerFiles();
         }
@@ -487,8 +487,6 @@ abstract class Plugin
         if (config('plugin.cache.enabled')) {
             $this->cache->store()->flush();
         }
-        
-        $this->cache->store('file')->pull(cache_prefix("site_actions"));
     }
     
     protected function runMigrate()

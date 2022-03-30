@@ -48,7 +48,7 @@ class PluginController extends BackendController
 
         return response()->json([
             'total' => $total,
-            'rows' => $data->items(),
+            'rows' => $data->values(),
         ]);
     }
 
