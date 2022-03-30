@@ -60,6 +60,10 @@ use Juzaweb\Traits\ResourceModel;
  * @method static Builder|User whereUpdatedAt($value)
  * @method static Builder|User whereVerificationToken($value)
  * @mixin \Eloquent
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @method static Builder|User whereTwoFactorRecoveryCodes($value)
+ * @method static Builder|User whereTwoFactorSecret($value)
  */
 class User extends Authenticatable
 {
