@@ -7,6 +7,7 @@ use Juzaweb\Contracts\ActionRegistionContract;
 
 /**
  * @method static void init()
+ * @method static void register(string|array $action)
  * @see \Juzaweb\Support\ActionRegistion
  */
 class ActionRegistion extends Facade

@@ -10,7 +10,8 @@ class ActionRegistion
     /**
      * @var CacheManager
      */
-    private $cache;
+    protected $cache;
+    protected $actions = [];
 
     public function __construct(Application $app)
     {
@@ -19,33 +20,23 @@ class ActionRegistion
 
     public function init()
     {
-        $actions = $this->getActions();
-        foreach ($actions as $module) {
-            foreach ($module as $action) {
-                app($action)->handle();
-            }
+        $actions = $this->actions;
+        foreach ($actions as $action) {
+            app($action)->handle();
         }
     }
-
-    protected function getActions()
+    
+    /**
+     * @param string|array $action
+     */
+    public function register($action)
     {
-        return $this->cache->store('file')
-            ->rememberForever(
-                cache_prefix("site_actions"),
-                function () {
-                    $plugins = get_config('plugin_statuses', []);
-                    $plugins = array_keys($plugins);
-
-                    $actions = config('plugin.actions');
-
-                    $actions = collect($actions)
-                        ->filter(function ($item, $key) use ($plugins) {
-                            return ($key == 'cms') || in_array($key, $plugins);
-                        })
-                        ->toArray();
-
-                    return $actions;
-                }
-            );
+        if (!is_array($action)) {
+            $action = [$action];
+        }
+        
+        foreach ($action as $item) {
+            $this->actions[] = $item;
+        }
     }
 }

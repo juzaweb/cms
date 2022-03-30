@@ -53,7 +53,5 @@ class ThemeServiceProvider extends ServiceProvider
         });
 
         $this->app->alias(ThemeInterface::class, 'themes');
-        
-        
     }
 }

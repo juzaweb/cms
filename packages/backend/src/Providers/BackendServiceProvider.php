@@ -16,6 +16,7 @@ use Juzaweb\Backend\Models\Menu;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Observers\MenuObserver;
 use Juzaweb\Backend\Observers\PostObserver;
+use Juzaweb\Facades\ActionRegistion;
 
 class BackendServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,15 @@ class BackendServiceProvider extends ServiceProvider
         Post::observe(PostObserver::class);
         Menu::observe(MenuObserver::class);
         Comment::observe(CommentObserver::class);
+    
+        ActionRegistion::register(
+            [
+                \Juzaweb\Backend\Actions\MenuAction::class,
+                \Juzaweb\Backend\Actions\EnqueueStyleAction::class,
+                \Juzaweb\Backend\Actions\ThemeAction::class,
+                \Juzaweb\Backend\Actions\FrontendAction::class,
+            ]
+        );
     }
 
     public function register()
