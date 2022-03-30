@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Permission\Providers;
 
+use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Permission\PermissionAction;
 use Juzaweb\Support\ServiceProvider;
 
@@ -11,8 +12,8 @@ class PermissionServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'perm');
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'perm');
-
-        $this->registerAction([
+    
+        ActionRegister::register([
             PermissionAction::class
         ]);
     }

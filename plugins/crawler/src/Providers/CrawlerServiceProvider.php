@@ -3,13 +3,14 @@
 namespace Juzaweb\Crawler\Providers;
 
 use Juzaweb\Crawler\CrawlerAction;
+use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Support\ServiceProvider;
 
 class CrawlerServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->registerAction(
+        ActionRegister::register(
             [
                 CrawlerAction::class
             ]

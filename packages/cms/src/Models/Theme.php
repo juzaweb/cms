@@ -62,6 +62,12 @@ use Juzaweb\Backend\Models\Post;
  * @method static \Illuminate\Database\Eloquent\Builder|Theme whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Theme whereViews($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MenuItem[] $menuItems
+ * @property-read int|null $menu_items_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostRating[] $postRatings
+ * @property-read int|null $post_ratings_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostView[] $postViews
+ * @property-read int|null $post_views_count
  */
 class Theme extends Post
 {
