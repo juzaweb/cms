@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-use Juzaweb\Support\Activators\FileActivator;
+use Juzaweb\Support\Activators\DbActivator;
 
 return [
     /*
@@ -19,7 +19,7 @@ return [
     */
     'autoload' => env('AUTOLOAD_PLUGIN', true),
     
-    'activator' => FileActivator::class,
+    'activator' => DbActivator::class,
     
     'stubs' => [
         'enabled' => true,

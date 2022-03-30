@@ -142,10 +142,7 @@ class DbActivator implements ActivatorInterface
                     }
                 }
 
-                $this->modulesStatuses[$name] = [
-                    'name' => $name,
-                    'class_map' => json_encode($classMap)
-                ];
+                $this->modulesStatuses[$name] = $classMap;
             } else {
                 throw new ModuleNotFoundException("Plugin [". $name . "] does not exists.");
             }
