@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Install;
+namespace Juzaweb\Backend\Tests;
 
 use Juzaweb\Models\User;
 use Juzaweb\Support\Installer;

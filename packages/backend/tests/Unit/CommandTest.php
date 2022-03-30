@@ -31,4 +31,10 @@ class CommandTest extends TestCase
         $this->artisan('optimize')
             ->assertExitCode(0);
     }
+    
+    public function testOptimizeClear()
+    {
+        $this->artisan('optimize:clear')
+            ->assertExitCode(0);
+    }
 }

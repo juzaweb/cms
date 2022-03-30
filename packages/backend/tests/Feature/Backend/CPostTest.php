@@ -65,7 +65,12 @@ class CPostTest extends TestCase
 
         if ($post = $this->makerData($postType)) {
             $old = app($postType->get('model'))->count();
-            $this->post('/admin-cp/post-type/' . $key, $post);
+            $response = $this->post("/admin-cp/post-type/{$key}", $post);
+            
+            if ($response->status() == 500) {
+                dd($response->statusText(), $post);
+            }
+            
             $new = app($postType->get('model'))->count();
             $this->assertEquals($old, ($new - 1));
         }
