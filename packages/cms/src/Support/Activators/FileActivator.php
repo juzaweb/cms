@@ -64,7 +64,7 @@ class FileActivator implements ActivatorInterface
         $this->files = $app['files'];
         $this->config = $app['config'];
         $this->statusesFile = base_path('bootstrap/cache/plugins_statuses.php');
-        $this->cacheKey = 'juzaweb.activator.installed';
+        $this->cacheKey = cache_prefix('juzaweb.activator.installed');
         $this->cacheLifetime = 604800;
         $this->modulesStatuses = $this->getModulesStatuses();
     }
@@ -136,8 +136,8 @@ class FileActivator implements ActivatorInterface
     public function setActiveByName($name, $status): void
     {
         if ($status) {
-            $pluginPath = config('juzaweb.plugin.path');
-            $pluginFile = $pluginPath . '/' . $name . '/composer.json';
+            $pluginPath = plugin_path($name);
+            $pluginFile = $pluginPath . '/composer.json';
             $setting = @json_decode($this->files->get($pluginFile), true);
 
             if (isset($setting['autoload']['psr-4'])) {
@@ -157,7 +157,7 @@ class FileActivator implements ActivatorInterface
 
                         $classMap[] = [
                             'namespace' => $key,
-                            'path' => $pluginPath .'/'. $name . '/' . $path,
+                            'path' => $pluginPath . '/' . $path,
                             'domain' => $domain,
                         ];
                     }
@@ -187,6 +187,17 @@ class FileActivator implements ActivatorInterface
         unset($this->modulesStatuses[$module->getName()]);
         $this->writeJson();
         $this->flushCache();
+    }
+    
+    /**
+     * Get plugin info load
+     *
+     * @param  Plugin $module
+     * @return array
+     */
+    public function getAutoloadInfo(Plugin $module): array
+    {
+        return $this->modulesStatuses[$module->getName()] ?? null;
     }
 
     /**
@@ -228,9 +239,13 @@ return ' . var_export($this->modulesStatuses, true) .';
             return $this->readJson();
         }
 
-        return $this->cache->remember($this->cacheKey, $this->cacheLifetime, function () {
-            return $this->readJson();
-        });
+        return $this->cache->remember(
+            $this->cacheKey,
+            $this->cacheLifetime,
+            function () {
+                return $this->readJson();
+            }
+        );
     }
 
     /**

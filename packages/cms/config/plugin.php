@@ -8,7 +8,19 @@
  * @license    MIT
  */
 
+use Juzaweb\Support\Activators\FileActivator;
+
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Autoload Plugin
+    |--------------------------------------------------------------------------
+    | Plugin namespace autoload if active, if false, you can run `composer require vendor/plugin` to enable plugin
+    */
+    'autoload' => env('AUTOLOAD_PLUGIN', true),
+    
+    'activator' => FileActivator::class,
+    
     'stubs' => [
         'enabled' => true,
         'files' => [

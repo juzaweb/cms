@@ -39,7 +39,7 @@ class Module extends BasePlugin
     {
         try {
             (new ProviderRepository($this->app, new Filesystem(), $this->getCachedServicesPath()))
-                ->load($this->getExtraJuzaweb('providers', []));
+                ->load($this->getExtraLarevel('providers', []));
         } catch (\Throwable $e) {
             if (!config('app.debug')) {
                 $this->disable();

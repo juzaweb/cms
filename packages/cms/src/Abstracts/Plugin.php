@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Abstracts;
 
+use Composer\Autoload\ClassLoader;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
@@ -246,6 +247,10 @@ abstract class Plugin
      */
     public function register(): void
     {
+        if (config('plugin.autoload')) {
+            $this->autoloadPSR4();
+        }
+        
         $this->registerAliases();
 
         $this->registerProviders();
@@ -265,6 +270,16 @@ abstract class Plugin
     protected function fireEvent($event): void
     {
         $this->app['events']->dispatch(sprintf('plugin.%s.' . $event, $this->getLowerName()), [$this]);
+    }
+    
+    protected function autoloadPSR4()
+    {
+        $loadmaps = $this->activator->getAutoloadInfo($this);
+        $loader = new ClassLoader();
+        foreach ($loadmaps as $loadmap) {
+            $loader->setPsr4($loadmap['namespace'], [$loadmap['path']]);
+        }
+        $loader->register(true);
     }
 
     /**
@@ -416,14 +431,14 @@ abstract class Plugin
         $this->cache->store('file')->pull(cache_prefix("site_actions"));
     }
 
-    public function getExtraLarevel($key): array
+    public function getExtraLarevel($key, $default = null): array
     {
         $extra = $this->get('extra', []);
         if ($laravel = Arr::get($extra, 'laravel', [])) {
-            return Arr::get($laravel, $key, []);
+            return Arr::get($laravel, $key, $default);
         }
 
-        return [];
+        return $default;
     }
 
     public function getExtraJuzaweb($key, $default = null)

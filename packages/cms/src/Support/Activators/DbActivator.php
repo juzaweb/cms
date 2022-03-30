@@ -166,6 +166,17 @@ class DbActivator implements ActivatorInterface
         unset($this->modulesStatuses[$module->getName()]);
         $this->writeData();
     }
+    
+    /**
+     * Get plugin info load
+     *
+     * @param  Plugin $module
+     * @return array
+     */
+    public function getAutoloadInfo(Plugin $module): array
+    {
+        return $this->modulesStatuses[$module->getName()] ?? null;
+    }
 
     /**
      * Deletes any plugin activation statuses created by this class.

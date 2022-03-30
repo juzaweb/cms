@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6c43c3c40b91cd6bbf13fc378492f2b",
+    "content-hash": "267bcc7b04e71668a1fb2f4b7b77cf57",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1267,40 +1267,8 @@
             "time": "2021-12-16T16:49:26+00:00"
         },
         {
-            "name": "juzaweb/ads-manager",
-            "version": "dev-develop",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/ads-manager",
-                "reference": "43896898867f52081414126171ff9a39eae543d0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Juzaweb\\AdsManager\\Providers\\AdsManagerServiceProvider"
-                    ]
-                },
-                "juzaweb": {
-                    "name": "juzaweb/ads-manager",
-                    "domain": "juad",
-                    "cms_min": "1.0.9",
-                    "version": "1.0"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Juzaweb\\AdsManager\\": "src/"
-                }
-            },
-            "description": "Add html ads to your website",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
             "name": "juzaweb/backend",
-            "version": "dev-develop",
+            "version": "dev-feature/change-actions-init",
             "dist": {
                 "type": "path",
                 "url": "./packages/backend",
@@ -1343,7 +1311,7 @@
         },
         {
             "name": "juzaweb/cms",
-            "version": "dev-develop",
+            "version": "dev-feature/change-actions-init",
             "dist": {
                 "type": "path",
                 "url": "./packages/cms",
@@ -1460,71 +1428,8 @@
             "time": "2020-12-07T16:04:15+00:00"
         },
         {
-            "name": "juzaweb/demo-site",
-            "version": "dev-develop",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/demo-site",
-                "reference": "db8699275f41193e63570b5ef4768909429ed5fc"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Juzaweb\\DemoSite\\Providers\\DemoSiteServiceProvider"
-                    ]
-                },
-                "juzaweb": {
-                    "name": "juzaweb/demo-site",
-                    "domain": "demo",
-                    "cms_min": "1.0.9",
-                    "version": "1.0",
-                    "setting_url": "setting/system/demo-site"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Juzaweb\\DemoSite\\": "src/"
-                }
-            },
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "juzaweb/image-slider",
-            "version": "dev-develop",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/image-slider",
-                "reference": "7236e51e86040323b36c9f0cc745a9c1eb2bf7a5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Juzaweb\\ImageSlider\\Providers\\ImageSliderServiceProvider"
-                    ]
-                },
-                "juzaweb": {
-                    "name": "Image slider",
-                    "domain": "juim",
-                    "version": "1.0.1"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Juzaweb\\ImageSlider\\": "src/"
-                }
-            },
-            "description": "Create Image slider for Website",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
             "name": "juzaweb/installer",
-            "version": "dev-develop",
+            "version": "dev-feature/change-actions-init",
             "dist": {
                 "type": "path",
                 "url": "./packages/installer",
@@ -1765,276 +1670,17 @@
             "time": "2022-03-27T00:34:28+00:00"
         },
         {
-            "name": "juzaweb/movie",
-            "version": "dev-develop",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/movie",
-                "reference": "2dbb98b5eeec73ae0ee5ac01b5852ecf789cc1fb"
-            },
-            "require": {
-                "sokil/php-vast": "^2.1"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Juzaweb\\Movie\\Providers\\MovieServiceProvider"
-                    ]
-                },
-                "juzaweb": {
-                    "name": "Movie plugin",
-                    "domain": "mymo",
-                    "cms_min": "1.0.9",
-                    "version": "1.0.2"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Juzaweb\\Movie\\": "src/"
-                },
-                "files": [
-                    "src/Helpers/helpers.php"
-                ]
-            },
-            "description": "MyMo Core Plugin help you easily create movie website. It is a powerful, flexible and User friendly movie & Video Steaming Theme with advance video contents management system. It’s easy to use & install. It has been created to provide unique experience to movie lover & movie site owner. To observe of ISP needed we have made MYMO to use as multipurpose video website. It was created to run with MyMo Theme.",
-            "keywords": [
-                "Movie plugin",
-                "juzaweb cms",
-                "juzaweb.com"
-            ],
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "juzaweb/notification",
-            "version": "dev-develop",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/notification",
-                "reference": "7d62e4a773f7fce349bc0fa846dd857a7b9e769a"
-            },
-            "require": {
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "laravel/laravel": "^6.0 | ^7.0 | ^8.0",
-                "phpunit/phpunit": "6.0 | 7.0 | 7.5 | 8.4 | ^8.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Juzaweb\\Notification\\Providers\\NotificationServiceProvider"
-                    ]
-                },
-                "juzaweb": {
-                    "name": "Notification",
-                    "domain": "juno",
-                    "cms_min": "1.0.9"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Juzaweb\\Notification\\Tests\\": "tests/",
-                    "Juzaweb\\Notification\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Notification plugin for Juzaweb cms",
-            "homepage": "https://juzaweb.com",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "juzaweb/seo",
-            "version": "dev-develop",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/seo",
-                "reference": "e1bfd3bb19c4eb15f5722b17455c17aac7e74946"
-            },
-            "require": {
-                "juzaweb/sitemap": "^9.0",
-                "spatie/laravel-feed": "^4.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Juzaweb\\Seo\\Providers\\SeoServiceProvider"
-                    ]
-                },
-                "juzaweb": {
-                    "name": "SEO",
-                    "domain": "jseo",
-                    "cms_min": "1.0.9",
-                    "version": "1.0"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Juzaweb\\Seo\\": "src/"
-                }
-            },
-            "description": "Flexible theme specially designed for Digital Marketing Agencies and SEO Agencies",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "juzaweb/sitemap",
-            "version": "v9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/juzaweb/laravel-sitemap.git",
-                "reference": "6af8cea2f5114f74dfc92121c0c782f84f0e1b33"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/laravel-sitemap/zipball/6af8cea2f5114f74dfc92121c0c782f84f0e1b33",
-                "reference": "6af8cea2f5114f74dfc92121c0c782f84f0e1b33",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/filesystem": "^8.0 | ^9.0",
-                "illuminate/support": "^8.0 | ^9.0",
-                "php": ">=7.3 | ^8.1"
-            },
-            "require-dev": {
-                "laravel/framework": "^8.0 | ^9.0",
-                "orchestra/testbench-core": "^6.0",
-                "php-coveralls/php-coveralls": "^2.2",
-                "phpunit/phpunit": "^9.3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Laravelium\\Sitemap\\SitemapServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Laravelium\\Sitemap": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rumen Damyanov",
-                    "email": "r@alfamatter.com",
-                    "homepage": "https://darumen.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravelium Sitemap package for Laravel.",
-            "homepage": "https://laravelium.com",
-            "keywords": [
-                "Sitemap",
-                "generator",
-                "google-news",
-                "html",
-                "laravel",
-                "laravelium",
-                "php",
-                "xml"
-            ],
-            "support": {
-                "issues": "https://github.com/Laravelium/laravel-sitemap/issues",
-                "source": "https://github.com/Laravelium/laravel-sitemap",
-                "wiki": "https://github.com/Laravelium/laravel-sitemap/wiki"
-            },
-            "time": "2022-03-20T06:34:12+00:00"
-        },
-        {
-            "name": "juzaweb/social-login",
-            "version": "dev-develop",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/social-login",
-                "reference": "6feb2cbdc758fa77b9ed30567436b47ada559e78"
-            },
-            "require": {
-                "laravel/socialite": "^5.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Juzaweb\\SocialLogin\\Providers\\SocialLoginServiceProvider"
-                    ]
-                },
-                "juzaweb": {
-                    "name": "Social Login",
-                    "domain": "juso",
-                    "cms_min": "1.0.9",
-                    "version": "1.0"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Juzaweb\\SocialLogin\\Tests\\": "tests/",
-                    "Juzaweb\\SocialLogin\\": "src/"
-                }
-            },
-            "description": "Social Login & Register for Web. Professionally developed and free plugin that allows your visitors to comment, login and register with Social Networks like for example Facebook, Twitter, Google, LinkedIn, amongst other",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "juzaweb/translation",
-            "version": "dev-develop",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/translation",
-                "reference": "2981aae4203d1d8266688b32f0c6d33ffac0b5e8"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Juzaweb\\Translation\\Providers\\TranslationServiceProvider"
-                    ]
-                },
-                "juzaweb": {
-                    "name": "Translation",
-                    "domain": "jutr",
-                    "cms_min": "1.0.9",
-                    "version": "1.0"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Juzaweb\\Translation\\": "src/"
-                }
-            },
-            "description": "Translation theme to your language",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
             "name": "laravel/framework",
-            "version": "v9.5.1",
+            "version": "v9.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "35be2599c9ac3d58bf1578895c2e85ea4848a0d7"
+                "reference": "47940a1a8774b96696ed57e6736ccea4a880c057"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/35be2599c9ac3d58bf1578895c2e85ea4848a0d7",
-                "reference": "35be2599c9ac3d58bf1578895c2e85ea4848a0d7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/47940a1a8774b96696ed57e6736ccea4a880c057",
+                "reference": "47940a1a8774b96696ed57e6736ccea4a880c057",
                 "shasum": ""
             },
             "require": {
@@ -2200,24 +1846,25 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-03-15T14:41:19+00:00"
+            "time": "2022-03-29T14:41:26+00:00"
         },
         {
             "name": "laravel/sanctum",
-            "version": "v2.14.2",
+            "version": "v2.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sanctum.git",
-                "reference": "dc5d749ba9bfcfd68d8f5c272238f88bea223e66"
+                "reference": "5be160413b6f37dcf8758663edeab12d0e806f56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sanctum/zipball/dc5d749ba9bfcfd68d8f5c272238f88bea223e66",
-                "reference": "dc5d749ba9bfcfd68d8f5c272238f88bea223e66",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/5be160413b6f37dcf8758663edeab12d0e806f56",
+                "reference": "5be160413b6f37dcf8758663edeab12d0e806f56",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
+                "illuminate/console": "^6.9|^7.0|^8.0|^9.0",
                 "illuminate/contracts": "^6.9|^7.0|^8.0|^9.0",
                 "illuminate/database": "^6.9|^7.0|^8.0|^9.0",
                 "illuminate/support": "^6.9|^7.0|^8.0|^9.0",
@@ -2264,7 +1911,7 @@
                 "issues": "https://github.com/laravel/sanctum/issues",
                 "source": "https://github.com/laravel/sanctum"
             },
-            "time": "2022-02-16T14:40:23+00:00"
+            "time": "2022-03-28T13:53:05+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -2326,86 +1973,17 @@
             "time": "2022-02-11T19:23:53+00:00"
         },
         {
-            "name": "laravel/socialite",
-            "version": "v5.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/socialite.git",
-                "reference": "68afb03259b82d898c68196cbcacd48596a9dd72"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/socialite/zipball/68afb03259b82d898c68196cbcacd48596a9dd72",
-                "reference": "68afb03259b82d898c68196cbcacd48596a9dd72",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "guzzlehttp/guzzle": "^6.0|^7.0",
-                "illuminate/http": "^6.0|^7.0|^8.0|^9.0",
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
-                "league/oauth1-client": "^1.0",
-                "php": "^7.2|^8.0"
-            },
-            "require-dev": {
-                "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0",
-                "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0",
-                "phpunit/phpunit": "^8.0|^9.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Socialite\\SocialiteServiceProvider"
-                    ],
-                    "aliases": {
-                        "Socialite": "Laravel\\Socialite\\Facades\\Socialite"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Socialite\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
-            "homepage": "https://laravel.com",
-            "keywords": [
-                "laravel",
-                "oauth"
-            ],
-            "support": {
-                "issues": "https://github.com/laravel/socialite/issues",
-                "source": "https://github.com/laravel/socialite"
-            },
-            "time": "2022-03-10T15:26:19+00:00"
-        },
-        {
             "name": "laravel/tinker",
-            "version": "v2.7.1",
+            "version": "v2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "1e2d500585a4e546346fadd3adc6f9c1a97e15f4"
+                "reference": "dff39b661e827dae6e092412f976658df82dbac5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/1e2d500585a4e546346fadd3adc6f9c1a97e15f4",
-                "reference": "1e2d500585a4e546346fadd3adc6f9c1a97e15f4",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/dff39b661e827dae6e092412f976658df82dbac5",
+                "reference": "dff39b661e827dae6e092412f976658df82dbac5",
                 "shasum": ""
             },
             "require": {
@@ -2458,9 +2036,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/tinker/issues",
-                "source": "https://github.com/laravel/tinker/tree/v2.7.1"
+                "source": "https://github.com/laravel/tinker/tree/v2.7.2"
             },
-            "time": "2022-03-15T15:25:01+00:00"
+            "time": "2022-03-23T12:38:24+00:00"
         },
         {
             "name": "league/commonmark",
@@ -2793,82 +2371,6 @@
                 }
             ],
             "time": "2021-11-21T11:48:40+00:00"
-        },
-        {
-            "name": "league/oauth1-client",
-            "version": "v1.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/oauth1-client.git",
-                "reference": "88dd16b0cff68eb9167bfc849707d2c40ad91ddc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/88dd16b0cff68eb9167bfc849707d2c40ad91ddc",
-                "reference": "88dd16b0cff68eb9167bfc849707d2c40ad91ddc",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-openssl": "*",
-                "guzzlehttp/guzzle": "^6.0|^7.0",
-                "guzzlehttp/psr7": "^1.7|^2.0",
-                "php": ">=7.1||>=8.0"
-            },
-            "require-dev": {
-                "ext-simplexml": "*",
-                "friendsofphp/php-cs-fixer": "^2.17",
-                "mockery/mockery": "^1.3.3",
-                "phpstan/phpstan": "^0.12.42",
-                "phpunit/phpunit": "^7.5||9.5"
-            },
-            "suggest": {
-                "ext-simplexml": "For decoding XML-based responses."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev",
-                    "dev-develop": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "League\\OAuth1\\Client\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ben Corlett",
-                    "email": "bencorlett@me.com",
-                    "homepage": "http://www.webcomm.com.au",
-                    "role": "Developer"
-                }
-            ],
-            "description": "OAuth 1.0 Client Library",
-            "keywords": [
-                "Authentication",
-                "SSO",
-                "authorization",
-                "bitbucket",
-                "identity",
-                "idp",
-                "oauth",
-                "oauth1",
-                "single sign on",
-                "trello",
-                "tumblr",
-                "twitter"
-            ],
-            "support": {
-                "issues": "https://github.com/thephpleague/oauth1-client/issues",
-                "source": "https://github.com/thephpleague/oauth1-client/tree/v1.10.0"
-            },
-            "time": "2021-08-15T23:05:49+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3386,16 +2888,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.5.0",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "2be8dd6dfa09ab1a21c49956ff591979cd5ab29e"
+                "reference": "f32e95f571c9587b4e14be05253ae56fedd00b2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2be8dd6dfa09ab1a21c49956ff591979cd5ab29e",
-                "reference": "2be8dd6dfa09ab1a21c49956ff591979cd5ab29e",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f32e95f571c9587b4e14be05253ae56fedd00b2c",
+                "reference": "f32e95f571c9587b4e14be05253ae56fedd00b2c",
                 "shasum": ""
             },
             "require": {
@@ -3421,7 +2923,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.5.0"
+                "source": "https://github.com/phpstan/phpstan/tree/1.5.2"
             },
             "funding": [
                 {
@@ -3441,25 +2943,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-24T18:18:00+00:00"
+            "time": "2022-03-29T07:34:36+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "9eb88c9f689003a8a2a5ae9e010338ee94dc39b3"
+                "reference": "09133ce914f1388a8bb8c7f8573aaa3723cff52a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/9eb88c9f689003a8a2a5ae9e010338ee94dc39b3",
-                "reference": "9eb88c9f689003a8a2a5ae9e010338ee94dc39b3",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/09133ce914f1388a8bb8c7f8573aaa3723cff52a",
+                "reference": "09133ce914f1388a8bb8c7f8573aaa3723cff52a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0",
-                "phpstan/phpstan": "^1.0"
+                "php": "^7.2 || ^8.0",
+                "phpstan/phpstan": "^1.5.0"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.0"
@@ -3472,9 +2974,6 @@
             },
             "type": "phpstan-extension",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                },
                 "phpstan": {
                     "includes": [
                         "extension.neon",
@@ -3494,9 +2993,9 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.0.0"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.1.0"
             },
-            "time": "2021-10-14T08:03:54+00:00"
+            "time": "2022-03-28T09:20:49+00:00"
         },
         {
             "name": "psr/cache",
@@ -4114,25 +3613,24 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.2.3",
+            "version": "4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "fc9bb7fb5388691fd7373cd44dcb4d63bbcf24df"
+                "reference": "8505afd4fea63b81a85d3b7b53ac3cb8dc347c28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/fc9bb7fb5388691fd7373cd44dcb4d63bbcf24df",
-                "reference": "fc9bb7fb5388691fd7373cd44dcb4d63bbcf24df",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/8505afd4fea63b81a85d3b7b53ac3cb8dc347c28",
+                "reference": "8505afd4fea63b81a85d3b7b53ac3cb8dc347c28",
                 "shasum": ""
             },
             "require": {
                 "brick/math": "^0.8 || ^0.9",
+                "ext-ctype": "*",
                 "ext-json": "*",
-                "php": "^7.2 || ^8.0",
-                "ramsey/collection": "^1.0",
-                "symfony/polyfill-ctype": "^1.8",
-                "symfony/polyfill-php80": "^1.14"
+                "php": "^8.0",
+                "ramsey/collection": "^1.0"
             },
             "replace": {
                 "rhumsaa/uuid": "self.version"
@@ -4169,9 +3667,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "4.x-dev"
-                },
                 "captainhook": {
                     "force-install": true
                 }
@@ -4196,7 +3691,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.2.3"
+                "source": "https://github.com/ramsey/uuid/tree/4.3.1"
             },
             "funding": [
                 {
@@ -4208,7 +3703,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-25T23:10:38+00:00"
+            "time": "2022-03-27T21:42:02+00:00"
         },
         {
             "name": "rcrowe/twigbridge",
@@ -4354,55 +3849,6 @@
             "time": "2022-02-12T19:37:00+00:00"
         },
         {
-            "name": "sokil/php-vast",
-            "version": "2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sokil/php-vast.git",
-                "reference": "02f1facb4d7719d6b33ce0060724244eb2624721"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sokil/php-vast/zipball/02f1facb4d7719d6b33ce0060724244eb2624721",
-                "reference": "02f1facb4d7719d6b33ce0060724244eb2624721",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "ext-json": "*",
-                "php": ">=7.1.3"
-            },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^2.1",
-                "phpunit/phpunit": ">=7.5.20",
-                "squizlabs/php_codesniffer": "^3.4.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Sokil\\Vast\\": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dmytro Sokil",
-                    "email": "dmytro.sokil@gmail.com"
-                }
-            ],
-            "description": "Generator and parser for VAST documents",
-            "support": {
-                "issues": "https://github.com/sokil/php-vast/issues",
-                "source": "https://github.com/sokil/php-vast/tree/2.1.1"
-            },
-            "time": "2022-03-03T18:19:08+00:00"
-        },
-        {
             "name": "spatie/image-optimizer",
             "version": "1.6.2",
             "source": {
@@ -4457,168 +3903,17 @@
             "time": "2021-12-21T10:08:05+00:00"
         },
         {
-            "name": "spatie/laravel-feed",
-            "version": "4.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-feed.git",
-                "reference": "b9e9a48e15dad123bcbebe9c33e7416516d36a4b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-feed/zipball/b9e9a48e15dad123bcbebe9c33e7416516d36a4b",
-                "reference": "b9e9a48e15dad123bcbebe9c33e7416516d36a4b",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^8.0|^9.0",
-                "illuminate/http": "^8.0|^9.0",
-                "illuminate/support": "^8.0|^9.0",
-                "php": "^8.0",
-                "spatie/laravel-package-tools": "^1.9"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.23|^7.0",
-                "phpunit/phpunit": "^9.5",
-                "spatie/phpunit-snapshot-assertions": "^4.2.7",
-                "spatie/test-time": "^1.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spatie\\Feed\\FeedServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\Feed\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jolita Grazyte",
-                    "email": "jolita@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Sebastian De Deyne",
-                    "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Patrick Organ",
-                    "homepage": "https://github.com/patinthehat",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Generate rss feeds",
-            "homepage": "https://github.com/spatie/laravel-feed",
-            "keywords": [
-                "laravel",
-                "laravel-feed",
-                "rss",
-                "spatie"
-            ],
-            "support": {
-                "source": "https://github.com/spatie/laravel-feed/tree/4.1.1"
-            },
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-03-20T15:09:10+00:00"
-        },
-        {
-            "name": "spatie/laravel-package-tools",
-            "version": "1.11.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "baeb3df0ebb3a541394fdaf8cbe6115bf4034a59"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/baeb3df0ebb3a541394fdaf8cbe6115bf4034a59",
-                "reference": "baeb3df0ebb3a541394fdaf8cbe6115bf4034a59",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^7.0|^8.0|^9.0",
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^5.0|^6.23|^7.0",
-                "phpunit/phpunit": "^9.4",
-                "spatie/test-time": "^1.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\LaravelPackageTools\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Tools for creating Laravel packages",
-            "homepage": "https://github.com/spatie/laravel-package-tools",
-            "keywords": [
-                "laravel-package-tools",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.11.3"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-03-15T20:01:36+00:00"
-        },
-        {
             "name": "swagger-api/swagger-ui",
-            "version": "v4.9.1",
+            "version": "v4.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swagger-api/swagger-ui.git",
-                "reference": "56fe8a1c279be6b55cd9aef7ce5e06e0ec364880"
+                "reference": "6686f34a8671248ab5d21a6743ec063fa5eaff6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/56fe8a1c279be6b55cd9aef7ce5e06e0ec364880",
-                "reference": "56fe8a1c279be6b55cd9aef7ce5e06e0ec364880",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/6686f34a8671248ab5d21a6743ec063fa5eaff6f",
+                "reference": "6686f34a8671248ab5d21a6743ec063fa5eaff6f",
                 "shasum": ""
             },
             "type": "library",
@@ -4664,9 +3959,9 @@
             ],
             "support": {
                 "issues": "https://github.com/swagger-api/swagger-ui/issues",
-                "source": "https://github.com/swagger-api/swagger-ui/tree/v4.9.1"
+                "source": "https://github.com/swagger-api/swagger-ui/tree/v4.10.0"
             },
-            "time": "2022-03-25T18:33:52+00:00"
+            "time": "2022-03-28T09:08:33+00:00"
         },
         {
             "name": "symfony/console",
@@ -8213,16 +7508,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.13.7",
+            "version": "v1.13.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "2092e1ce6e4ba534bff443de8c3a7bb280aba121"
+                "reference": "b00f1b64afff9c16355d23bb1e0f83a7ea9bbb7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/2092e1ce6e4ba534bff443de8c3a7bb280aba121",
-                "reference": "2092e1ce6e4ba534bff443de8c3a7bb280aba121",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/b00f1b64afff9c16355d23bb1e0f83a7ea9bbb7e",
+                "reference": "b00f1b64afff9c16355d23bb1e0f83a7ea9bbb7e",
                 "shasum": ""
             },
             "require": {
@@ -8269,20 +7564,20 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-03-11T14:11:15+00:00"
+            "time": "2022-03-23T12:35:34+00:00"
         },
         {
             "name": "laravel/telescope",
-            "version": "v4.8.0",
+            "version": "v4.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "eac91c87ad9326e8a9eff14e24128d35766fc73d"
+                "reference": "2c61ad4a1d1366f2829cbe3d50d004cef7dfc691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/eac91c87ad9326e8a9eff14e24128d35766fc73d",
-                "reference": "eac91c87ad9326e8a9eff14e24128d35766fc73d",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/2c61ad4a1d1366f2829cbe3d50d004cef7dfc691",
+                "reference": "2c61ad4a1d1366f2829cbe3d50d004cef7dfc691",
                 "shasum": ""
             },
             "require": {
@@ -8335,9 +7630,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/telescope/issues",
-                "source": "https://github.com/laravel/telescope/tree/v4.8.0"
+                "source": "https://github.com/laravel/telescope/tree/v4.8.1"
             },
-            "time": "2022-03-14T19:55:48+00:00"
+            "time": "2022-03-26T16:04:21+00:00"
         },
         {
             "name": "maximebf/debugbar",
@@ -8846,16 +8141,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "93ebd0014cab80c4ea9f5e297ea48672f1b87706"
+                "reference": "77a32518733312af16a44300404e945338981de3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/93ebd0014cab80c4ea9f5e297ea48672f1b87706",
-                "reference": "93ebd0014cab80c4ea9f5e297ea48672f1b87706",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/77a32518733312af16a44300404e945338981de3",
+                "reference": "77a32518733312af16a44300404e945338981de3",
                 "shasum": ""
             },
             "require": {
@@ -8890,9 +8185,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.0"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.1"
             },
-            "time": "2022-01-04T19:58:01+00:00"
+            "time": "2022-03-15T21:29:03+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -10474,16 +9769,16 @@
         },
         {
             "name": "spatie/ignition",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "be24d33a9de271638314924b5da85e168e4148e4"
+                "reference": "2f059cf42b48f7c522efbba1c05ad59fc2c1a3f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/be24d33a9de271638314924b5da85e168e4148e4",
-                "reference": "be24d33a9de271638314924b5da85e168e4148e4",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/2f059cf42b48f7c522efbba1c05ad59fc2c1a3f2",
+                "reference": "2f059cf42b48f7c522efbba1c05ad59fc2c1a3f2",
                 "shasum": ""
             },
             "require": {
@@ -10540,7 +9835,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-23T11:02:14+00:00"
+            "time": "2022-03-29T08:48:34+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
@@ -10751,17 +10046,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "juzaweb/ads-manager": 20,
         "juzaweb/backend": 20,
-        "juzaweb/cms": 20,
-        "juzaweb/demo-site": 20,
-        "juzaweb/image-slider": 20,
-        "juzaweb/installer": 20,
-        "juzaweb/movie": 20,
-        "juzaweb/notification": 20,
-        "juzaweb/seo": 20,
-        "juzaweb/social-login": 20,
-        "juzaweb/translation": 20
+        "juzaweb/installer": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
