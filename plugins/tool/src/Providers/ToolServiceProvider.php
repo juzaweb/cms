@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Tool\Providers;
 
+use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Support\ServiceProvider;
 use Juzaweb\Tool\ToolAction;
 
@@ -9,7 +10,7 @@ class ToolServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->registerAction([
+        ActionRegister::register([
             ToolAction::class
         ]);
     }

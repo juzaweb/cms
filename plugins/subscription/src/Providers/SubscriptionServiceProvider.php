@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Subscription\Providers;
 
+use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Subscription\Contracts\SubscriptionContract;
 use Juzaweb\Subscription\Manage\SubscriptionManage;
 use Juzaweb\Subscription\SubscriptionAction;
@@ -13,8 +14,8 @@ class SubscriptionServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'subr');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'subr');
-
-        $this->registerAction([
+    
+        ActionRegister::register([
             SubscriptionAction::class
         ]);
     }
