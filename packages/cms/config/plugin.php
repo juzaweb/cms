@@ -94,22 +94,5 @@ return [
         'enabled' => false,
         'key' => 'juzaweb-plugins',
         'lifetime' => 60,
-    ],
-    'actions' => [
-        'juzaweb/seo' => [
-            \Juzaweb\Seo\SeoAction::class
-        ],
-        'juzaweb/social-login' => [
-            \Juzaweb\SocialLogin\SocialLoginAction::class
-        ],
-        'juzaweb/translation' => [
-            \Juzaweb\Translation\TranslationAction::class
-        ],
-        'juzaweb/movie' => [
-            \Juzaweb\Movie\MovieAction::class
-        ],
-        'juzaweb/image-slider' => [
-            \Juzaweb\ImageSlider\ImageSliderAction::class
-        ]
-    ],
+    ]
 ];

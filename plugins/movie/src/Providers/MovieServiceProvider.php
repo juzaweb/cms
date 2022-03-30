@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Movie\Providers;
 
+use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Support\ServiceProvider;
 
 class MovieServiceProvider extends ServiceProvider
@@ -13,10 +14,12 @@ class MovieServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        ActionRegister::register(\Juzaweb\Movie\MovieAction::class);
+        
         $viewPath = __DIR__ .'/../resources/views';
         $langPath = __DIR__ . '/../resources/lang';
+        
         $domain = 'mymo';
-
         if (is_dir($viewPath)) {
             $this->loadViewsFrom($viewPath, $domain);
         }
