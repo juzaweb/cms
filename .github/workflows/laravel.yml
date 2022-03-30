@@ -42,5 +42,5 @@ jobs:
           DB_DATABASE: database/database.sqlite
         run: |
           vendor/bin/phpunit vendor/juzaweb/backend/tests/InstallTest.php
-          vendor/bin/phpunit vendor/juzaweb/backend/tests/UpdateTest.php
           php artisan test
+          vendor/bin/phpunit vendor/juzaweb/backend/tests/UpdateTest.php
