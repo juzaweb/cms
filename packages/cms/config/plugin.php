@@ -96,15 +96,6 @@ return [
         'lifetime' => 60,
     ],
     'actions' => [
-        'cms' => [
-            \Juzaweb\Backend\Actions\MenuAction::class,
-            \Juzaweb\Backend\Actions\EnqueueStyleAction::class,
-            \Juzaweb\Backend\Actions\ThemeAction::class,
-            \Juzaweb\Backend\Actions\FrontendAction::class,
-        ],
-        'juzaweb/notification' => [
-            \Juzaweb\Notification\NotificationAction::class
-        ],
         'juzaweb/seo' => [
             \Juzaweb\Seo\SeoAction::class
         ],

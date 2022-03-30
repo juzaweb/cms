@@ -13,7 +13,7 @@ namespace Juzaweb\Backend\Tests\Feature\Backend;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\ActionRegistion;
+use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Models\Model;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\Models\User;
@@ -31,8 +31,8 @@ class BTaxonomyTest extends TestCase
 
         $this->user = User::where('is_admin', '=', 1)
             ->first();
-        
-        ActionRegistion::init();
+    
+        ActionRegister::init();
 
         Auth::loginUsingId($this->user->id);
 

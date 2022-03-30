@@ -5,7 +5,7 @@ namespace Juzaweb\Support;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Foundation\Application;
 
-class ActionRegistion
+class ActionRegister
 {
     /**
      * @var CacheManager

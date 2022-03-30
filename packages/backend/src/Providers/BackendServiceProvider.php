@@ -4,6 +4,10 @@ namespace Juzaweb\Backend\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
+use Juzaweb\Backend\Actions\EnqueueStyleAction;
+use Juzaweb\Backend\Actions\FrontendAction;
+use Juzaweb\Backend\Actions\MenuAction;
+use Juzaweb\Backend\Actions\ThemeAction;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Observers\CommentObserver;
 use Juzaweb\Http\Middleware\Admin;
@@ -16,7 +20,7 @@ use Juzaweb\Backend\Models\Menu;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Observers\MenuObserver;
 use Juzaweb\Backend\Observers\PostObserver;
-use Juzaweb\Facades\ActionRegistion;
+use Juzaweb\Facades\ActionRegister;
 
 class BackendServiceProvider extends ServiceProvider
 {
@@ -30,12 +34,12 @@ class BackendServiceProvider extends ServiceProvider
         Menu::observe(MenuObserver::class);
         Comment::observe(CommentObserver::class);
     
-        ActionRegistion::register(
+        ActionRegister::register(
             [
-                \Juzaweb\Backend\Actions\MenuAction::class,
-                \Juzaweb\Backend\Actions\EnqueueStyleAction::class,
-                \Juzaweb\Backend\Actions\ThemeAction::class,
-                \Juzaweb\Backend\Actions\FrontendAction::class,
+                MenuAction::class,
+                EnqueueStyleAction::class,
+                ThemeAction::class,
+                FrontendAction::class,
             ]
         );
     }
@@ -59,11 +63,12 @@ class BackendServiceProvider extends ServiceProvider
     protected function bootPublishes()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cms');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
+        
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views/vendor/juzaweb'),
         ], 'cms_views');
-
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
+        
         $this->publishes([
             __DIR__ . '/../resources/lang' => resource_path('lang/vendor/juzaweb'),
         ], 'cms_lang');

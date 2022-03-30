@@ -5,8 +5,8 @@ namespace Juzaweb\Providers;
 use Barryvdh\Debugbar\ServiceProvider as DebugbarServiceProvider;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\Contracts\ActionRegistionContract;
-use Juzaweb\Support\ActionRegistion;
+use Juzaweb\Contracts\ActionRegisterContract;
+use Juzaweb\Support\ActionRegister;
 use Juzaweb\Support\Theme\ThemeConfig;
 use Juzaweb\Support\Config as DbConfig;
 use Juzaweb\Contracts\ConfigContract;
@@ -82,7 +82,6 @@ class CmsServiceProvider extends ServiceProvider
             }
         }
         
-        
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/juzaweb.php',
             'juzaweb'
@@ -116,9 +115,9 @@ class CmsServiceProvider extends ServiceProvider
     protected function registerSingleton()
     {
         $this->app->singleton(
-            ActionRegistionContract::class,
+            ActionRegisterContract::class,
             function ($app) {
-                return new ActionRegistion($app);
+                return new ActionRegister($app);
             }
         );
     
