@@ -55,6 +55,7 @@ class DbActivator implements ActivatorInterface
         $this->config = $app['config'];
         $this->modulesStatuses = $this->getModulesStatuses();
     }
+    
     /**
      * Enables a plugin
      *
@@ -62,17 +63,19 @@ class DbActivator implements ActivatorInterface
      */
     public function enable(Plugin $module): void
     {
-        $this->setActiveByName($module->getName(), true);
+        $this->setActiveByName($module, true);
     }
-
+    
     /**
      * Disables a plugin
      *
      * @param Plugin $module
+     * @throws ModuleNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function disable(Plugin $module): void
     {
-        $this->setActiveByName($module->getName(), false);
+        $this->setActiveByName($module, false);
     }
 
     /**
@@ -91,28 +94,33 @@ class DbActivator implements ActivatorInterface
 
         return $status === true;
     }
-
+    
     /**
      * Set active state for a plugin.
      *
      * @param Plugin $module
      * @param bool $active
+     * @throws ModuleNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function setActive(Plugin $module, $active): void
     {
-        $this->setActiveByName($module->getName(), $active);
+        $this->setActiveByName($module, $active);
     }
-
+    
     /**
      * Sets a plugin status by its name
      *
-     * @param  string $name
-     * @param  bool $active
+     * @param Plugin $module
+     * @param bool $active
+     * @throws ModuleNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    public function setActiveByName($name, $active): void
+    public function setActiveByName($module, $active): void
     {
+        $name = $module->getName();
         if ($active) {
-            $pluginPath = plugin_path($name);
+            $pluginPath = $module->getPath();
             $pluginFile = $pluginPath . '/composer.json';
             $setting = @json_decode(
                 $this->files->get($pluginFile),
@@ -144,7 +152,9 @@ class DbActivator implements ActivatorInterface
 
                 $this->modulesStatuses[$name] = $classMap;
             } else {
-                throw new ModuleNotFoundException("Plugin [". $name . "] does not exists.");
+                throw new ModuleNotFoundException(
+                    "Plugin [". $name . "] does not exists."
+                );
             }
         } else {
             unset($this->modulesStatuses[$name]);
