@@ -3,13 +3,14 @@
 namespace Juzaweb\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\Contracts\ActionRegistionContract;
+use Juzaweb\Contracts\ActionRegisterContract;
 
 /**
  * @method static void init()
- * @see \Juzaweb\Support\ActionRegistion
+ * @method static void register(string|array $action)
+ * @see \Juzaweb\Support\ActionRegister
  */
-class ActionRegistion extends Facade
+class ActionRegister extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -18,6 +19,6 @@ class ActionRegistion extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return ActionRegistionContract::class;
+        return ActionRegisterContract::class;
     }
 }

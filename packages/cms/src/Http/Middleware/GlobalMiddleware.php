@@ -3,13 +3,13 @@
 namespace Juzaweb\Http\Middleware;
 
 use Closure;
-use Juzaweb\Facades\ActionRegistion;
+use Juzaweb\Facades\ActionRegister;
 
 class GlobalMiddleware
 {
     public function handle($request, Closure $next)
     {
-        ActionRegistion::init();
+        ActionRegister::init();
 
         do_action('juzaweb.init');
 

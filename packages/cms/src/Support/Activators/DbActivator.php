@@ -142,10 +142,7 @@ class DbActivator implements ActivatorInterface
                     }
                 }
 
-                $this->modulesStatuses[$name] = [
-                    'name' => $name,
-                    'class_map' => json_encode($classMap)
-                ];
+                $this->modulesStatuses[$name] = $classMap;
             } else {
                 throw new ModuleNotFoundException("Plugin [". $name . "] does not exists.");
             }
@@ -165,6 +162,17 @@ class DbActivator implements ActivatorInterface
     {
         unset($this->modulesStatuses[$module->getName()]);
         $this->writeData();
+    }
+    
+    /**
+     * Get plugin info load
+     *
+     * @param  Plugin $module
+     * @return array
+     */
+    public function getAutoloadInfo(Plugin $module): array
+    {
+        return $this->modulesStatuses[$module->getName()] ?? null;
     }
 
     /**
