@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVariantNameItemsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -15,15 +15,15 @@ class CreateVariantNameItemsTable extends Migration
     public function up()
     {
         Schema::create(
-            'variant_name_items',
+            'attribute_values',
             function (Blueprint $table) {
                 $table->id();
-                $table->string('name');
-                $table->unsignedBigInteger('variant_name_id')->index();
-
-                $table->foreign('variant_name_id')
+                $table->string('value')->nullable();
+                $table->string('value_type')->nullable();
+                $table->unsignedBigInteger('attribute_id');
+                $table->foreign('attribute_id')
                     ->references('id')
-                    ->on('variant_names')
+                    ->on('attributes')
                     ->onDelete('cascade');
             }
         );
@@ -36,6 +36,6 @@ class CreateVariantNameItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variant_name_items');
+        Schema::dropIfExists('attribute_values');
     }
-}
+};
