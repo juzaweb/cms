@@ -12,11 +12,10 @@
             "providers": [
                 "Juzaweb\\Permission\\Providers\\PermissionServiceProvider"
             ],
-            "name": "juzaweb/permission",
+            "name": "User Permission",
             "domain": "perm",
             "cms_min": "1.0.9",
-            "version": "1.0",
-            "visible": false
+            "version": "1.0"
         }
     },
     "autoload": {
@@ -25,6 +24,6 @@
         }
     },
     "require": {
-        "spatie/laravel-permission": "^5.4"
+        "spatie/laravel-permission": "^5.5"
     }
 }
