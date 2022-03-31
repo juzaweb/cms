@@ -19,7 +19,7 @@ class TaxonomyPolicy
         return true;
     }
 
-    public function update(User $user, Model $model, $type, $taxonomy)
+    public function edit(User $user, Model $model, $type, $taxonomy)
     {
         if (!$user->can("{$type}.{$taxonomy}.edit")) {
             return false;
@@ -28,7 +28,7 @@ class TaxonomyPolicy
         return true;
     }
 
-    public function store(User $user, $type, $taxonomy)
+    public function create(User $user, $type, $taxonomy)
     {
         if (!$user->can("{$type}.{$taxonomy}.store")) {
             return false;

@@ -6,10 +6,6 @@
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzawebcms/juzawebcms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 6/9/2021
- * Time: 2:05 PM
  */
 
 namespace Juzaweb\Traits;
@@ -33,7 +29,7 @@ trait ResourceController
 
     public function create(...$params)
     {
-        $this->checkPermission('store', $this->getModel(...$params));
+        $this->checkPermission('create', $this->getModel(...$params));
 
         $indexRoute = str_replace(
             '.create',
@@ -72,7 +68,7 @@ trait ResourceController
         ]);
 
         $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
-        $this->checkPermission('update', $model);
+        $this->checkPermission('edit', $model);
 
         return view($this->viewPrefix . '.form', array_merge([
             'title' => $model->{$model->getFieldName()},
@@ -82,7 +78,7 @@ trait ResourceController
 
     public function store(Request $request, ...$params)
     {
-        $this->checkPermission('store', $this->getModel(...$params));
+        $this->checkPermission('create', $this->getModel(...$params));
 
         $validator = $this->validator($request->all(), ...$params);
         if (is_array($validator)) {
@@ -134,7 +130,7 @@ trait ResourceController
 
         $model = $this->makeModel(...$params)
             ->findOrFail($this->getPathId($params));
-        $this->checkPermission('update', $model);
+        $this->checkPermission('edit', $model);
 
         DB::beginTransaction();
         try {

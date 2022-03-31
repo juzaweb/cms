@@ -19,41 +19,59 @@ use Juzaweb\Permission\Models\PermissionGroup;
 class PermissionGenerateCommand extends Command
 {
     protected $signature = 'permission:generate';
-    protected $resourcePermissions = ['index', 'store', 'update', 'delete'];
+    protected $resourcePermissions = ['index', 'create', 'edit', 'delete'];
     
     public function handle()
     {
-        $this->resourceGenerate('users');
-        $this->resourceGenerate('email_templates');
-        $this->resourceGenerate('themes');
-        $this->resourceGenerate('menus');
+        $this->resourceGenerate('users', 'User');
+        $this->resourceGenerate('email_templates', 'Email Template');
+        $this->resourceGenerate('themes', 'Theme');
+        $this->resourceGenerate('menus', 'Menu');
+        $this->resourceGenerate('roles', 'Role');
         
         $postTypes = HookAction::getPostTypes();
         foreach ($postTypes as $type => $postType) {
-            $this->resourceGenerate($type);
+            $typeSingular = Str::singular($type);
+            $this->resourceGenerate($type, $postType->get('label'));
             
             $taxonomies = HookAction::getTaxonomies($type);
             foreach ($taxonomies as $key => $taxonomy) {
-                $typeSingular = Str::singular($type);
-                $this->resourceGenerate("{$typeSingular}.{$key}");
+                $this->resourceGenerate(
+                    "{$typeSingular}.{$key}",
+                    $taxonomy->get('label')
+                );
+            }
+            
+            if (in_array('comment', $postType->get('supports', []))) {
+                $this->resourceGenerate(
+                    "{$typeSingular}.comment",
+                    $postType->get('label') . ' Comment'
+                );
             }
         }
         
         return self::SUCCESS;
     }
     
-    protected function resourceGenerate($resource)
+    protected function resourceGenerate($resource, $name)
     {
+        $this->info("-- Generate permission {$name}");
+        
         $permissions = $this->resourcePermissions;
         foreach ($permissions as $permission) {
             $group = PermissionGroup::firstOrCreate([
                 'name' => $resource,
+                'description' => $name,
             ]);
-        
-            Permission::firstOrCreate([
-                'name' => "{$resource}.{$permission}",
-                'group_id' => $group->id
-            ]);
+    
+            $label = $permission == 'index' ? 'View List' : $permission;
+            Permission::firstOrCreate(
+                [
+                    'name' => "{$resource}.{$permission}",
+                    'group_id' => $group->id,
+                    'description' => Str::ucfirst($label) . " {$name}",
+                ]
+            );
         }
     }
 }

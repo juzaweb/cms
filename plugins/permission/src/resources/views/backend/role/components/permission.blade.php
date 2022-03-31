@@ -4,24 +4,29 @@
             <div class="card-body">
                 @foreach($groups as $group)
                     <h3>
-                        {{ trans("perm::content.groups.{$group->name}") }}
+                        {{ __($group->description) }}
                     </h3>
 
                     <div class="row">
-                        @foreach($group->permissions as $permission)
-                            <div class="col-md-2 form-line">
-                                <label>
-                                    <input class="perm-check-item" value="{{ $permission->name }}" type="checkbox" name="permissions[]" @if($model->hasPermissionTo($permission->name)) checked @endif>
-                                    <span>{{ trans("perm::content.permissions.{$permission->name}") }}</span>
-                                </label>
-                            </div>
-                        @endforeach
-
-                        <div class="col-md-2 form-line">
-                            <label>
-                                <input class="check-all-permissions" value="1" type="checkbox" >
-                                <span>{{ trans("perm::content.check_all") }}</span>
-                            </label>
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <th>{{ trans('perm::content.permission') }}</th>
+                                    <th width="10%">
+                                        <input class="check-all-permissions" value="1" type="checkbox" /> {{ trans("perm::content.check_all") }}
+                                    </th>
+                                </thead>
+                                <tbody>
+                                @foreach($group->permissions as $permission)
+                                    <tr>
+                                        <td>{{ __($permission->description) }}</td>
+                                        <td>
+                                            <input class="perm-check-item" value="{{ $permission->name }}" type="checkbox" name="permissions[]" @if($model->hasPermissionTo($permission->name)) checked @endif>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 @endforeach

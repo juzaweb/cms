@@ -13,6 +13,7 @@ namespace Juzaweb\Permission;
 use Illuminate\Support\Arr;
 use Juzaweb\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\Models\User;
 
 class PermissionAction extends Action
 {
@@ -36,14 +37,14 @@ class PermissionAction extends Action
         );
     }
 
-    public function saveRoleUser($data, \Juzaweb\Models\User $model)
+    public function saveRoleUser($data, User $model)
     {
         $roles = Arr::get($data, 'roles', []);
 
         $model->syncRoles($roles);
     }
 
-    public function addRoleUserForm(\Juzaweb\Models\User $model)
+    public function addRoleUserForm(User $model)
     {
         echo e(view(
             'perm::backend.role.components.role_users',
