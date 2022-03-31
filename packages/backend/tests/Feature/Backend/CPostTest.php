@@ -15,7 +15,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Models\User;
 use Juzaweb\Backend\Tests\TestCase;
 
@@ -68,7 +67,7 @@ class CPostTest extends TestCase
             $response = $this->post($create, $post);
             
             if ($response->status() == 500) {
-                dd($create, $post, $postType);
+                dd($post);
             }
             
             $new = app($postType->get('model'))->count();
