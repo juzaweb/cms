@@ -30,7 +30,7 @@ jobs:
           coverage: none
       - uses: actions/checkout@v2
       - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
       - name: Install Dependencies
         run: composer install
       - name: Generate key
@@ -39,15 +39,9 @@ jobs:
         run: php artisan config:clear
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
-      - name: Before ENV Info
-        run: echo "$GITHUB_CONTEXT"
       - name: Execute tests Install
         run: php artisan test vendor/juzaweb/backend/tests/InstallTest.php
-      - name: ENV Info After Install
-        run: echo "$GITHUB_CONTEXT"
       - name: Execute tests (Unit and Feature tests)
-        env:
-          DB_DATABASE: cms_test
         run: php artisan test
       - name: Execute tests Update
         run: php artisan test vendor/juzaweb/backend/tests/UpdateTest.php
