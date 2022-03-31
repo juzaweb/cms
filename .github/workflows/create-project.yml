@@ -1,6 +1,6 @@
 name: Run Create project test suite
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   laravel-tests:
