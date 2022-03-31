@@ -3,7 +3,6 @@
 namespace Juzaweb\Backend\Tests;
 
 use Illuminate\Support\Facades\File;
-use Juzaweb\Backend\Tests\TestCase;
 use Juzaweb\Version;
 
 class UpdateTest extends TestCase
@@ -17,7 +16,7 @@ class UpdateTest extends TestCase
         $this->assertEquals(302, $response->getStatusCode());
     }*/
 
-    /*public function testUpdateCommand()
+    public function testUpdateCommand()
     {
         $ver = Version::getVersion();
         $filePath = base_path('packages/cms/src/Version.php');
@@ -35,5 +34,5 @@ class UpdateTest extends TestCase
     
         $ver = Version::getVersion();
         $this->assertTrue($ver != 'v2.0');
-    }*/
+    }
 }
