@@ -3,6 +3,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AddColumnsToRolesTable extends Migration
@@ -50,6 +51,8 @@ class AddColumnsToRolesTable extends Migration
         Schema::table(
             'permissions',
             function (Blueprint $table) {
+                $prefix = DB::getTablePrefix();
+                $table->dropForeign("{$prefix}permissions_group_id_foreign");
                 $table->dropColumn(['group_id', 'description']);
             }
         );
