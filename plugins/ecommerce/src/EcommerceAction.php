@@ -31,70 +31,6 @@ class EcommerceAction extends Action
 
     public function registerPostTypes()
     {
-        HookAction::registerPostType(
-            'products',
-            [
-                'label' => trans('ecom::content.products'),
-                'menu_icon' => 'fa fa-list-alt',
-                'menu_position' => 10,
-                'supports' => [
-                    'category',
-                    'tag'
-                ],
-                'metas' => [
-                    'price' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'compare_price' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'sku_code' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'barcode' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'images' => [
-                        'type' => 'images',
-                        'visible' => true,
-                    ],
-                    'quantity' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'inventory_management' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'disable_out_of_stock' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ]
-                ]
-            ]
-        );
-
-        HookAction::registerTaxonomy(
-            'brands',
-            'products',
-            [
-                'label' => trans('ecom::content.brands'),
-                'menu_position' => 11,
-            ]
-        );
-
-        HookAction::registerTaxonomy(
-            'vendors',
-            'products',
-            [
-                'label' => trans('ecom::content.vendors'),
-                'menu_position' => 12,
-            ]
-        );
     }
 
     public function addAdminMenu()
@@ -106,7 +42,6 @@ class EcommerceAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-shopping-cart',
                     'position' => 50,
-
                 ]
             ]
         );
@@ -151,7 +86,7 @@ class EcommerceAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-indent',
                     'position' => 3,
-                    'parent' => 'ecommerce'
+                    'parent' => 'ecommerce',
                 ]
             ]
         );

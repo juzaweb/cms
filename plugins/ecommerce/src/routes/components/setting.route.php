@@ -7,9 +7,9 @@
  * @link       https://juzaweb.com/cms
  * @license    MIT
  */
-use Juzaweb\Ecommerce\Http\Controllers\Backend\SettingController;
-use Juzaweb\Ecommerce\Http\Controllers\Backend\PaymentMethodController;
 use Juzaweb\Ecommerce\Http\Controllers\Backend\InventoryController;
+use Juzaweb\Ecommerce\Http\Controllers\Backend\PaymentMethodController;
+use Juzaweb\Ecommerce\Http\Controllers\Backend\SettingController;
 use Juzaweb\Ecommerce\Http\Controllers\Backend\VariantController;
 
 Route::get('settings', [SettingController::class, 'index'])->name('admin.ecommerce.setting');
@@ -21,6 +21,8 @@ Route::jwResource(
         'name' => 'variants'
     ]
 );
+
+Route::get('/', [SettingController::class, 'index'])->name('admin.ecommerce.setting');
 
 Route::jwResource(
     'payment-methods',
