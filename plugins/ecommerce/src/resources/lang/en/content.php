@@ -52,5 +52,6 @@ return [
             'paypal' => 'Paypal',
             'custom' => 'Custom',
         ],
-    ]
+    ],
+    'variant' => 'Variant'
 ];

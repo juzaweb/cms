@@ -40,8 +40,54 @@ class EcommerceAction extends Action
             [
                 'title' => trans('cms::app.ecommerce'),
                 'menu' => [
-                    'icon' => 'fa fa-language',
-                    'position' => 100,
+                    'icon' => 'fa fa-shopping-cart',
+                    'position' => 50,
+
+                ]
+            ]
+        );
+        HookAction::registerAdminPage(
+            'ecommerce.settings',
+            [
+                'title' => trans('cms::app.setting'),
+                'menu' => [
+                    'icon' => 'fa fa-shopping-cart',
+                    'position' => 2,
+                    'parent' => 'ecommerce'
+                ]
+            ]
+        );
+        HookAction::registerAdminPage(
+            'ecommerce.payment-methods',
+            [
+                'title' => trans('cms::app.payment_methods'),
+                'menu' => [
+                    'icon' => 'fa fa-credit-card',
+                    'position' => 2,
+                    'parent' => 'ecommerce'
+                ]
+            ]
+        );
+        HookAction::registerAdminPage(
+            'ecommerce.inventories',
+            [
+                'title' => trans('cms::app.inventories'),
+                'menu' => [
+                    'icon' => 'fa fa-indent',
+                    'position' => 3,
+                    'parent' => 'ecommerce'
+                ]
+            ]
+        );
+
+        HookAction::registerAdminPage(
+            'ecommerce.variants',
+            [
+                'title' => trans('cms::app.variants'),
+                'menu' => [
+                    'icon' => 'fa fa-indent',
+                    'position' => 3,
+                    'parent' => 'ecommerce'
                 ]
             ]
         );
