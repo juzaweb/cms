@@ -11,10 +11,5 @@ class DemoSiteServiceProvider extends ServiceProvider
     public function boot()
     {
         ActionRegister::register(DemoSiteAction::class);
-        
-        $this->loadViewsFrom(
-            __DIR__ . '/../resources/views',
-            'demo'
-        );
     }
 }

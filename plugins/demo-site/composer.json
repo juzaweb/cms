@@ -4,10 +4,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Juzaweb\\DemoSite\\Providers\\DemoSiteServiceProvider"
+                "Juzaweb\\DemoSite\\Providers\\AutoloadServiceProvider"
             ]
         },
         "juzaweb": {
+            "providers": [
+                "Juzaweb\\DemoSite\\Providers\\DemoSiteServiceProvider"
+            ],
             "name": "juzaweb/demo-site",
             "domain": "demo",
             "cms_min": "1.0.9",
