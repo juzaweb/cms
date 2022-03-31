@@ -42,6 +42,10 @@ class EcommerceAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-shopping-cart',
                     'position' => 50,
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0c6d535 (:construction: feat/ecommerce-plugin in progress build variant)
                 ]
             ]
         );
@@ -86,7 +90,11 @@ class EcommerceAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-indent',
                     'position' => 3,
+<<<<<<< HEAD
                     'parent' => 'ecommerce',
+=======
+                    'parent' => 'ecommerce'
+>>>>>>> 0c6d535 (:construction: feat/ecommerce-plugin in progress build variant)
                 ]
             ]
         );

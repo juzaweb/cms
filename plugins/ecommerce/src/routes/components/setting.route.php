@@ -22,8 +22,6 @@ Route::jwResource(
     ]
 );
 
-Route::get('/', [SettingController::class, 'index'])->name('admin.ecommerce.setting');
-
 Route::jwResource(
     'payment-methods',
     PaymentMethodController::class,
