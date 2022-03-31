@@ -21,9 +21,11 @@
         "guzzlehttp/guzzle": "^7.2",
         "juzaweb/backend": "@dev",
         "juzaweb/installer": "@dev",
+        "juzaweb/permission": "@dev",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "spatie/laravel-permission": "5.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

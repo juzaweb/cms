@@ -3,6 +3,7 @@
 @section('content')
 
     <div class="row">
+        @if($canCreate)
         <div class="col-md-4">
             <h5>{{ trans('cms::app.add_new') }}</h5>
             @php
@@ -44,8 +45,9 @@
                 </button>
             </form>
         </div>
+        @endif
 
-        <div class="col-md-8">
+        <div class="@if($canCreate) col-md-8 @else col-md-12 @endif">
             {{ $dataTable->render() }}
         </div>
     </div>

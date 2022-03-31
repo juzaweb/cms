@@ -6,16 +6,13 @@
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzawebcms/juzawebcms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 6/9/2021
- * Time: 2:05 PM
  */
 
 namespace Juzaweb\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,7 +20,11 @@ trait ResourceController
 {
     public function index(...$params)
     {
-        $this->checkPermission('index', $this->getModel(...$params));
+        $this->checkPermission(
+            'index',
+            $this->getModel(...$params),
+            ...$params
+        );
 
         return view(
             $this->viewPrefix . '.index',
@@ -33,7 +34,7 @@ trait ResourceController
 
     public function create(...$params)
     {
-        $this->checkPermission('create', $this->getModel(...$params));
+        $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
         $indexRoute = str_replace(
             '.create',
@@ -72,7 +73,7 @@ trait ResourceController
         ]);
 
         $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
-        $this->checkPermission('update', $model);
+        $this->checkPermission('edit', $model, ...$params);
 
         return view($this->viewPrefix . '.form', array_merge([
             'title' => $model->{$model->getFieldName()},
@@ -82,7 +83,7 @@ trait ResourceController
 
     public function store(Request $request, ...$params)
     {
-        $this->checkPermission('create', $this->getModel(...$params));
+        $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
         $validator = $this->validator($request->all(), ...$params);
         if (is_array($validator)) {
@@ -134,7 +135,7 @@ trait ResourceController
 
         $model = $this->makeModel(...$params)
             ->findOrFail($this->getPathId($params));
-        $this->checkPermission('update', $model);
+        $this->checkPermission('edit', $model, ...$params);
 
         DB::beginTransaction();
         try {
@@ -264,10 +265,16 @@ trait ResourceController
     protected function getDataForIndex(...$params)
     {
         $dataTable = $this->getDataTable(...$params);
+        $canCreate = $this->getPermission(
+            'create',
+            $this->getModel(...$params),
+            ...$params
+        );
 
         return [
             'title' => $this->getTitle(...$params),
             'dataTable' => $dataTable,
+            'canCreate' => $canCreate,
             'linkCreate' => action([static::class, 'create'], $params),
         ];
     }
@@ -315,9 +322,15 @@ trait ResourceController
         return Route::getCurrentRoute()->getName() == 'admin.resource.update';
     }
 
-    protected function checkPermission($ability, $arguments = [])
+    protected function checkPermission($ability, $arguments = [], ...$params)
     {
         $this->authorize($ability, $arguments);
+    }
+    
+    protected function getPermission($ability, $arguments = [], ...$params)
+    {
+        $response = Gate::inspect($ability, $arguments);
+        return $response->allowed();
     }
 
     /**

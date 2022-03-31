@@ -8,11 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\Contracts;
 
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-
-class ServiceProvider extends BaseServiceProvider
+interface MacroableModelContract
 {
-    //
+    
 }

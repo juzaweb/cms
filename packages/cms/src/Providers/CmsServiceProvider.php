@@ -6,7 +6,9 @@ use Barryvdh\Debugbar\ServiceProvider as DebugbarServiceProvider;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Juzaweb\Contracts\ActionRegisterContract;
+use Juzaweb\Contracts\MacroableModelContract;
 use Juzaweb\Support\ActionRegister;
+use Juzaweb\Support\MacroableModel;
 use Juzaweb\Support\Theme\ThemeConfig;
 use Juzaweb\Support\Config as DbConfig;
 use Juzaweb\Contracts\ConfigContract;
@@ -114,6 +116,10 @@ class CmsServiceProvider extends ServiceProvider
     
     protected function registerSingleton()
     {
+        $this->app->singleton(MacroableModelContract::class, function() {
+            return new MacroableModel();
+        });
+        
         $this->app->singleton(
             ActionRegisterContract::class,
             function ($app) {

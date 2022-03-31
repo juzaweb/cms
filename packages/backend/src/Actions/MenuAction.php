@@ -117,8 +117,28 @@ class MenuAction extends Action
             trans('cms::app.users'),
             'users',
             [
-                'icon' => 'fa fa-users',
+                'icon' => 'fa fa-user-circle-o',
                 'position' => 60,
+            ]
+        );
+    
+        HookAction::addAdminMenu(
+            trans('cms::app.all_users'),
+            'users',
+            [
+                'icon' => 'fa fa-user-circle-o',
+                'position' => 1,
+                'parent' => 'users',
+            ]
+        );
+    
+        HookAction::addAdminMenu(
+            trans('cms::app.add_new'),
+            'users.create',
+            [
+                'icon' => 'fa fa-plus',
+                'position' => 1,
+                'parent' => 'users',
             ]
         );
 

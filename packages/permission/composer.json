@@ -1,0 +1,20 @@
+{
+    "name": "juzaweb/permission",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\Permission\\Providers\\PermissionServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Permission\\": "src/"
+        }
+    },
+    "require": {
+        "spatie/laravel-permission": "^5.5"
+    }
+}
