@@ -5,6 +5,15 @@ on: [push, pull_request]
 jobs:
   laravel-tests:
     runs-on: ${{ matrix.os }}
+    services:
+      mysql:
+        image: mysql:8.0.21
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: cms_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       fail-fast: true
       matrix:
@@ -26,16 +35,11 @@ jobs:
         run: composer install
       - name: Generate key
         run: php artisan key:generate
+      - name: Clear Configuration
+        run: php artisan config:clear
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
-      - name: Create Database
-        run: |
-          mkdir -p database
-          touch database/database.sqlite
       - name: Execute tests (Unit and Feature tests) via PHPUnit
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
         run: |
           vendor/bin/phpunit vendor/juzaweb/backend/tests/InstallTest.php
           php artisan test
