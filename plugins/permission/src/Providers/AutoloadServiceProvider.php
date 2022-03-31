@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Permission\Providers;
 
+use Juzaweb\Permission\Commands\PermissionGenerateCommand;
 use Juzaweb\Support\ServiceProvider;
 
 class AutoloadServiceProvider extends ServiceProvider
@@ -19,6 +20,14 @@ class AutoloadServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom($this->basePath . '/database/migrations');
+        $this->loadViewsFrom($this->basePath . '/src/resources/views', 'perm');
+        $this->loadTranslationsFrom($this->basePath . '/src/resources/lang', 'perm');
+        
+        $this->commands(
+            [
+                PermissionGenerateCommand::class,
+            ]
+        );
     }
 
     public function register()

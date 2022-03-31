@@ -33,7 +33,7 @@ trait ResourceController
 
     public function create(...$params)
     {
-        $this->checkPermission('create', $this->getModel(...$params));
+        $this->checkPermission('store', $this->getModel(...$params));
 
         $indexRoute = str_replace(
             '.create',
@@ -82,7 +82,7 @@ trait ResourceController
 
     public function store(Request $request, ...$params)
     {
-        $this->checkPermission('create', $this->getModel(...$params));
+        $this->checkPermission('store', $this->getModel(...$params));
 
         $validator = $this->validator($request->all(), ...$params);
         if (is_array($validator)) {

@@ -10,9 +10,6 @@ class PermissionServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'perm');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'perm');
-    
         ActionRegister::register([
             PermissionAction::class
         ]);
