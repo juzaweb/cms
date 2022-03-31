@@ -45,3 +45,5 @@ jobs:
         run: php artisan test
       - name: Execute tests Update
         run: php artisan test vendor/juzaweb/backend/tests/UpdateTest.php
+  composer-tests:
+    runs-on: ${{ matrix.os }}
