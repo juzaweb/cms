@@ -73,7 +73,6 @@ class InstallCommand extends Command
         }
 
         DB::beginTransaction();
-
         try {
             $model = new User();
             $model->fill($this->user);
