@@ -31,9 +31,7 @@ class CPostTest extends TestCase
 
         $this->user = User::where('is_admin', '=', 1)
             ->first();
-    
-        ActionRegister::init();
-
+        
         Auth::loginUsingId($this->user->id);
 
         $this->postTypes = HookAction::getPostTypes();
@@ -59,13 +57,20 @@ class CPostTest extends TestCase
 
     protected function createTest($key, $postType)
     {
-        $response = $this->get('/admin-cp/post-type/'. $key .'/create');
-
+        $index = '/admin-cp/post-type/'. $key .'/create';
+        $response = $this->get($index);
+        
         $response->assertStatus(200);
 
         if ($post = $this->makerData($postType)) {
             $old = app($postType->get('model'))->count();
-            $this->post('/admin-cp/post-type/' . $key, $post);
+            $create = "/admin-cp/post-type/{$key}";
+            $response = $this->post($create, $post);
+            
+            if ($response->status() == 500) {
+                dd($create, $post, $postType);
+            }
+            
             $new = app($postType->get('model'))->count();
             $this->assertEquals($old, ($new - 1));
         }
@@ -105,8 +110,6 @@ class CPostTest extends TestCase
             'content' => $faker->sentence(50),
             'status' => 'publish',
             'slug' => Str::slug($title),
-            'created_at' => $faker->dateTime(),
-            'updated_at' => $faker->dateTime(),
         ];
 
         $taxonomies = HookAction::getTaxonomies($postType->get('key'));

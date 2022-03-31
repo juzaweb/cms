@@ -31,8 +31,9 @@ class InstallCommand extends Command
         InstalledFileManager $fileManager,
         FinalInstallManager $finalInstall
     ) {
-        $this->info('JUZAWEB CMS Installer');
+        $this->info('JUZACMS INSTALLER');
         $this->info('-- Database Install');
+        
         $result = $databaseManager->run();
         if (Arr::get($result, 'status') == 'error') {
             throw new \Exception($result['message']);
@@ -45,10 +46,14 @@ class InstallCommand extends Command
         }
 
         $this->info('-- Create user admin');
-        $this->createAdminUser();
+        $this->call('juzacms:make-admin');
+        
         $this->info('-- Update installed');
         $fileManager->update();
+        
         $this->info('CMS Install Successfully !!!');
+        
+        return self::SUCCESS;
     }
 
     protected function createAdminUser()
@@ -73,7 +78,6 @@ class InstallCommand extends Command
         }
 
         DB::beginTransaction();
-
         try {
             $model = new User();
             $model->fill($this->user);

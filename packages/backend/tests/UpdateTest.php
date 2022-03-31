@@ -1,9 +1,8 @@
 <?php
 
-namespace Juzaweb\Backend\Tests\Install;
+namespace Juzaweb\Backend\Tests;
 
 use Illuminate\Support\Facades\File;
-use Juzaweb\Backend\Tests\TestCase;
 use Juzaweb\Version;
 
 class UpdateTest extends TestCase
