@@ -14,16 +14,5 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
-    protected static $actions = [];
-
-    /**
-     * Register Action.
-     *
-     * @param  string|array $actions
-     * @return void
-     */
-    protected function registerAction($actions)
-    {
-        //static::$actions = array_merge(static::$actions, $actions);
-    }
+    //
 }

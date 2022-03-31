@@ -51,7 +51,7 @@ class PluginServiceProvider extends BaseServiceProvider
         });
 
         $this->app->singleton(ActivatorInterface::class, function ($app) {
-            $class = DbActivator::class;
+            $class = config('plugin.activator');
             if ($class === null) {
                 throw InvalidActivatorClass::missingConfig();
             }

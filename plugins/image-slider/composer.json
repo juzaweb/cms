@@ -4,10 +4,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Juzaweb\\ImageSlider\\Providers\\ImageSliderServiceProvider"
+                "Juzaweb\\AdsManager\\Providers\\AutoloadServiceProvider"
             ]
         },
         "juzaweb": {
+            "providers": [
+                "Juzaweb\\ImageSlider\\Providers\\ImageSliderServiceProvider"
+            ],
             "name": "Image slider",
             "domain": "juim",
             "version": "1.0.1"

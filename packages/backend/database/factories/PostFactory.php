@@ -30,8 +30,8 @@ class PostFactory extends Factory
             'status' => 'publish',
             'type' => 'posts',
             'slug' => Str::slug($title),
-            'created_at' => $this->faker->dateTime(),
-            'updated_at' => $this->faker->dateTime(),
+            //'created_at' => $this->faker->dateTime(),
+            //'updated_at' => $this->faker->dateTime(),
             'created_by' => 1,
             'updated_by' => 1,
         ];

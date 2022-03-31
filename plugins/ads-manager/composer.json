@@ -4,11 +4,14 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Juzaweb\\AdsManager\\Providers\\AdsManagerServiceProvider"
+                "Juzaweb\\AdsManager\\Providers\\AutoloadServiceProvider"
             ]
         },
         "juzaweb": {
-            "name": "juzaweb/ads-manager",
+            "providers": [
+                "Juzaweb\\AdsManager\\Providers\\AdsManagerServiceProvider"
+            ],
+            "name": "Ads Management",
             "domain": "juad",
             "cms_min": "1.0.9",
             "version": "1.0"

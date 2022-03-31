@@ -136,7 +136,7 @@ class Installer
     public function run()
     {
         $process = $this->getProcess();
-
+        
         $process->setTimeout($this->timeout);
 
         if ($this->console instanceof Command) {
@@ -155,14 +155,14 @@ class Installer
      */
     public function getProcess()
     {
-        if ($this->type) {
+        if ($this->type != 'composer') {
             if ($this->tree) {
                 return $this->installViaSubtree();
             }
 
             return $this->installViaGit();
         }
-
+        
         return $this->installViaComposer();
     }
 
@@ -196,7 +196,6 @@ class Installer
 
             case 'gitlab':
                 return "git@gitlab.com:{$this->name}.git";
-
                 break;
 
             case 'bitbucket':
@@ -237,9 +236,10 @@ class Installer
      */
     public function getModuleName()
     {
-        $parts = explode('/', $this->name);
+        //$parts = explode('/', $this->name);
 
-        return Str::studly(end($parts));
+        //return Str::studly(end($parts));
+        return $this->name;
     }
 
     /**

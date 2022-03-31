@@ -15,10 +15,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Traits\Macroable;
 use Juzaweb\Abstracts\Action;
 use Juzaweb\Backend\Database\Factories\UserFactory;
 use Juzaweb\Traits\ModelCache;
 use Juzaweb\Traits\ResourceModel;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Juzaweb\Models\User
@@ -60,6 +62,10 @@ use Juzaweb\Traits\ResourceModel;
  * @method static Builder|User whereUpdatedAt($value)
  * @method static Builder|User whereVerificationToken($value)
  * @mixin \Eloquent
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @method static Builder|User whereTwoFactorRecoveryCodes($value)
+ * @method static Builder|User whereTwoFactorSecret($value)
  */
 class User extends Authenticatable
 {
@@ -67,6 +73,7 @@ class User extends Authenticatable
     use ResourceModel;
     use HasFactory;
     use ModelCache;
+    use HasRoles;
 
     const STATUS_ACTIVE = 'active';
     const STATUS_VERIFICATION = 'verification';

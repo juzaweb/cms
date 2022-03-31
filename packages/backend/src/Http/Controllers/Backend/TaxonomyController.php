@@ -3,6 +3,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Juzaweb\Facades\GlobalData;
@@ -141,5 +142,29 @@ class TaxonomyController extends BackendController
         $data['setting'] = $this->getSetting($postType, $taxonomy);
 
         return $data;
+    }
+    
+    protected function checkPermission($ability, $arguments = [], ...$params)
+    {
+        if (!is_array($arguments)) {
+            $arguments = [$arguments];
+        }
+        
+        $arguments[] = $params[0];
+        $arguments[] = $params[1];
+        $this->authorize($ability, $arguments);
+    }
+    
+    protected function getPermission($ability, $arguments = [], ...$params)
+    {
+        if (!is_array($arguments)) {
+            $arguments = [$arguments];
+        }
+    
+        $arguments[] = $params[0];
+        $arguments[] = $params[1];
+        
+        $response = Gate::inspect($ability, $arguments);
+        return $response->allowed();
     }
 }

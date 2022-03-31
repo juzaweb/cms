@@ -19,19 +19,13 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "guzzlehttp/guzzle": "^7.2",
-        "juzaweb/ads-manager": "@dev",
         "juzaweb/backend": "@dev",
-        "juzaweb/cms": "@dev",
-        "juzaweb/demo-site": "@dev",
         "juzaweb/installer": "@dev",
-        "juzaweb/movie": "@dev",
-        "juzaweb/notification": "@dev",
-        "juzaweb/seo": "@dev",
-        "juzaweb/social-login": "@dev",
-        "juzaweb/translation": "@dev",
+        "juzaweb/permission": "@dev",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "spatie/laravel-permission": "5.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

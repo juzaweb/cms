@@ -2,7 +2,6 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Facades\Plugin;
@@ -25,7 +24,7 @@ class PluginController extends BackendController
 
         $results = [];
         $plugins = Plugin::all();
-
+        
         foreach ($plugins as $name => $plugin) {
             /**
              * @var \Juzaweb\Abstracts\Plugin $plugin
@@ -49,7 +48,7 @@ class PluginController extends BackendController
 
         return response()->json([
             'total' => $total,
-            'rows' => $data->items(),
+            'rows' => $data->values(),
         ]);
     }
 

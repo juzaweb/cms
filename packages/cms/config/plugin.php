@@ -8,7 +8,22 @@
  * @license    MIT
  */
 
+use Juzaweb\Support\Activators\DbActivator;
+
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Autoload Plugin
+    |--------------------------------------------------------------------------
+    | Plugin namespace autoload if active, if false, you can run `composer require vendor/plugin` to enable plugin
+    */
+    'autoload' => env('AUTOLOAD_PLUGIN', true),
+    
+    /**
+     * Activator helper
+     */
+    'activator' => DbActivator::class,
+    
     'stubs' => [
         'enabled' => true,
         'files' => [
@@ -94,28 +109,5 @@ return [
         'enabled' => false,
         'key' => 'juzaweb-plugins',
         'lifetime' => 60,
-    ],
-    'actions' => [
-        'cms' => [
-            \Juzaweb\Backend\Actions\MenuAction::class,
-            \Juzaweb\Backend\Actions\EnqueueStyleAction::class,
-            \Juzaweb\Backend\Actions\ThemeAction::class,
-            \Juzaweb\Backend\Actions\FrontendAction::class,
-        ],
-        'juzaweb/notification' => [
-            \Juzaweb\Notification\NotificationAction::class
-        ],
-        'juzaweb/seo' => [
-            \Juzaweb\Seo\SeoAction::class
-        ],
-        'juzaweb/social-login' => [
-            \Juzaweb\SocialLogin\SocialLoginAction::class
-        ],
-        'juzaweb/translation' => [
-            \Juzaweb\Translation\TranslationAction::class
-        ],
-        'juzaweb/movie' => [
-            \Juzaweb\Movie\MovieAction::class
-        ]
-    ],
+    ]
 ];

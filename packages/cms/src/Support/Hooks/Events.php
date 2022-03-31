@@ -7,14 +7,14 @@ class Events
     /**
      * Holds all registered actions.
      *
-     * @var \Tadcms\Hooks\Hooks\Action
+     * @var \Juzaweb\Support\Hooks\Action
      */
     protected $action;
 
     /**
      * Holds all registered filters.
      *
-     * @var \Tadcms\Hooks\Hooks\Filter
+     * @var \Juzaweb\Support\Hooks\Filter
      */
     protected $filter;
 
@@ -30,7 +30,7 @@ class Events
     /**
      * Get the action instance.
      *
-     * @return \Tadcms\Hooks\Hooks\Action
+     * @return \Juzaweb\Support\Hooks\Action
      */
     public function getAction()
     {
@@ -40,7 +40,7 @@ class Events
     /**
      * Get the action instance.
      *
-     * @return \Tadcms\Hooks\Hooks\Filter
+     * @return \Juzaweb\Support\Hooks\Filter
      */
     public function getFilter()
     {

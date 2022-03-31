@@ -11,6 +11,7 @@
 namespace Juzaweb\Traits;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\Abstracts\Action;
 use Juzaweb\Backend\Events\AfterPostSave;
@@ -140,7 +141,7 @@ trait PostTypeController
         $editor = 'cms::backend.post.components.editor';
 
         if (Arr::get($templateData, 'blocks', [])) {
-            $editor = 'devtool::page-block.block';
+            $editor = 'cms::backend.page-block.block';
         }
 
         $data['editor'] = $editor;
@@ -172,7 +173,7 @@ trait PostTypeController
         $attributes['type'] = $setting->get('key');
 
         if (!empty($attributes['meta'])) {
-            $metas = array_keys($setting->get('metas'));
+            $metas = array_keys((array) $setting->get('metas'));
             $attributes['meta'] = collect($attributes['meta'])
                 ->filter(function ($val, $key) use ($metas) {
                     return in_array($key, $metas);
@@ -188,9 +189,15 @@ trait PostTypeController
         return $attributes;
     }
 
-    protected function checkPermission($ability, $arguments = [])
+    protected function checkPermission($ability, $arguments = [], ...$params)
     {
         $this->authorize($ability, [$arguments, $this->getPostType()]);
+    }
+    
+    protected function getPermission($ability, $arguments = [], ...$params)
+    {
+        $response = Gate::inspect($ability, [$arguments, $this->getPostType()]);
+        return $response->allowed();
     }
 
     /**

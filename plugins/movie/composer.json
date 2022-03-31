@@ -12,10 +12,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Juzaweb\\Movie\\Providers\\MovieServiceProvider"
+                "Juzaweb\\Movie\\Providers\\AutoloadServiceProvider"
             ]
         },
         "juzaweb": {
+            "providers": [
+                "Juzaweb\\Movie\\Providers\\MovieServiceProvider"
+            ],
             "name": "Movie plugin",
             "domain": "mymo",
             "cms_min": "1.0.9",

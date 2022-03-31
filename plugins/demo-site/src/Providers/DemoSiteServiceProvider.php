@@ -2,15 +2,14 @@
 
 namespace Juzaweb\DemoSite\Providers;
 
+use Juzaweb\DemoSite\DemoSiteAction;
 use Juzaweb\Support\ServiceProvider;
+use Juzaweb\Facades\ActionRegister;
 
 class DemoSiteServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadViewsFrom(
-            __DIR__ . '/../resources/views',
-            'demo'
-        );
+        ActionRegister::register(DemoSiteAction::class);
     }
 }

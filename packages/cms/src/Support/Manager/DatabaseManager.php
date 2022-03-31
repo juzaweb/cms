@@ -19,6 +19,7 @@ class DatabaseManager
      *
      * @return array
      * @throws Exception
+     * @throws \Throwable
      */
     public function run()
     {
@@ -31,7 +32,6 @@ class DatabaseManager
         }
 
         DB::beginTransaction();
-
         try {
             $this->makeConfig();
             $this->makeEmailTemplate();
@@ -39,7 +39,6 @@ class DatabaseManager
         } catch (\Throwable $e) {
             DB::rollBack();
             Log::error($e);
-
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
 
