@@ -20,7 +20,7 @@ class PostPolicy
 
     public function index(User $user, $type)
     {
-        if (!$user->can($type)) {
+        if (!$user->can("post-type.{$type}")) {
             return false;
         }
 
@@ -29,7 +29,7 @@ class PostPolicy
 
     public function edit(User $user, Model $model, $type)
     {
-        if (!$user->can("{$type}.edit")) {
+        if (!$user->can("post-type.{$type}.edit")) {
             return false;
         }
 
@@ -38,7 +38,7 @@ class PostPolicy
 
     public function create(User $user, $type)
     {
-        if (!$user->can("{$type}.create")) {
+        if (!$user->can("post-type.{$type}.create")) {
             return false;
         }
 
@@ -47,7 +47,7 @@ class PostPolicy
 
     public function delete(User $user, Model $model, $type)
     {
-        if (!$user->can("{$type}.delete")) {
+        if (!$user->can("post-type.{$type}.delete")) {
             return false;
         }
 

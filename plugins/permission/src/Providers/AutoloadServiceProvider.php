@@ -10,7 +10,9 @@
 
 namespace Juzaweb\Permission\Providers;
 
+use Juzaweb\Models\User;
 use Juzaweb\Permission\Commands\PermissionGenerateCommand;
+use Juzaweb\Permission\Support\PermissionRegistrar;
 use Juzaweb\Support\ServiceProvider;
 
 class AutoloadServiceProvider extends ServiceProvider

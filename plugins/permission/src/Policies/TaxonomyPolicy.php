@@ -12,7 +12,7 @@ class TaxonomyPolicy
 
     public function index(User $user, $type, $taxonomy)
     {
-        if (!$user->can("$type.{$taxonomy}")) {
+        if (!$user->can("taxonomy.{$type}.{$taxonomy}")) {
             return false;
         }
 
@@ -21,7 +21,7 @@ class TaxonomyPolicy
 
     public function edit(User $user, Model $model, $type, $taxonomy)
     {
-        if (!$user->can("{$type}.{$taxonomy}.edit")) {
+        if (!$user->can("taxonomy.{$type}.{$taxonomy}.edit")) {
             return false;
         }
 
@@ -30,7 +30,7 @@ class TaxonomyPolicy
 
     public function create(User $user, $type, $taxonomy)
     {
-        if (!$user->can("{$type}.{$taxonomy}.store")) {
+        if (!$user->can("taxonomy.{$type}.{$taxonomy}.store")) {
             return false;
         }
 
@@ -39,7 +39,7 @@ class TaxonomyPolicy
 
     public function delete(User $user, Model $model, $type, $taxonomy)
     {
-        if (!$user->can("{$type}.{$taxonomy}.delete")) {
+        if (!$user->can("taxonomy.{$type}.{$taxonomy}.delete")) {
             return false;
         }
 

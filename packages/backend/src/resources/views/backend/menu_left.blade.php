@@ -3,6 +3,8 @@
         use Juzaweb\Backend\Facades\HookAction;
         use Juzaweb\Support\MenuCollection;
 
+        global $jw_user;
+
         $adminPrefix = config('juzaweb.admin_prefix');
         $adminUrl = url($adminPrefix);
         $currentUrl = url()->current();
@@ -12,11 +14,19 @@
     @endphp
 
     @foreach($items as $item)
+        @if($item->get('key')!= 'dashboard' && !$jw_user->can($item->get('key')))
+            @continue
+        @endif
+
         @if($item->hasChildren())
             @php
             $strChild = '';
             $hasActive = false;
             foreach($item->getChildrens() as $child) {
+                if(!$jw_user->can($child->get('key'))) {
+                    continue;
+                }
+
                 if (empty($segment2)) {
                     $active = empty($child->getUrl());
                 } else {

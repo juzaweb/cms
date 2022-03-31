@@ -32,19 +32,22 @@ class PermissionGenerateCommand extends Command
         $postTypes = HookAction::getPostTypes();
         foreach ($postTypes as $type => $postType) {
             $typeSingular = Str::singular($type);
-            $this->resourceGenerate($type, $postType->get('label'));
+            $this->resourceGenerate(
+                "post-type.{$type}",
+                $postType->get('label')
+            );
             
             $taxonomies = HookAction::getTaxonomies($type);
             foreach ($taxonomies as $key => $taxonomy) {
                 $this->resourceGenerate(
-                    "{$typeSingular}.{$key}",
+                    "taxonomy.{$typeSingular}.{$key}",
                     $taxonomy->get('label')
                 );
             }
             
             if (in_array('comment', $postType->get('supports', []))) {
                 $this->resourceGenerate(
-                    "{$typeSingular}.comment",
+                    "post-type.{$typeSingular}.comments",
                     $postType->get('label') . ' Comment'
                 );
             }
@@ -65,9 +68,10 @@ class PermissionGenerateCommand extends Command
             ]);
     
             $label = $permission == 'index' ? 'View List' : $permission;
+            $permission =  $permission == 'index' ? $resource : "{$resource}.{$permission}";
             Permission::firstOrCreate(
                 [
-                    'name' => "{$resource}.{$permission}",
+                    'name' => $permission,
                     'group_id' => $group->id,
                     'description' => Str::ucfirst($label) . " {$name}",
                 ]

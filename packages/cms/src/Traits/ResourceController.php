@@ -19,7 +19,7 @@ trait ResourceController
 {
     public function index(...$params)
     {
-        $this->checkPermission('index', $this->getModel(...$params));
+        $this->checkPermission('index', $this->getModel(...$params), ...$params);
 
         return view(
             $this->viewPrefix . '.index',
@@ -29,7 +29,7 @@ trait ResourceController
 
     public function create(...$params)
     {
-        $this->checkPermission('create', $this->getModel(...$params));
+        $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
         $indexRoute = str_replace(
             '.create',
@@ -68,7 +68,7 @@ trait ResourceController
         ]);
 
         $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
-        $this->checkPermission('edit', $model);
+        $this->checkPermission('edit', $model, ...$params);
 
         return view($this->viewPrefix . '.form', array_merge([
             'title' => $model->{$model->getFieldName()},
@@ -78,7 +78,7 @@ trait ResourceController
 
     public function store(Request $request, ...$params)
     {
-        $this->checkPermission('create', $this->getModel(...$params));
+        $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
         $validator = $this->validator($request->all(), ...$params);
         if (is_array($validator)) {
@@ -130,7 +130,7 @@ trait ResourceController
 
         $model = $this->makeModel(...$params)
             ->findOrFail($this->getPathId($params));
-        $this->checkPermission('edit', $model);
+        $this->checkPermission('edit', $model, ...$params);
 
         DB::beginTransaction();
         try {
@@ -311,7 +311,7 @@ trait ResourceController
         return Route::getCurrentRoute()->getName() == 'admin.resource.update';
     }
 
-    protected function checkPermission($ability, $arguments = [])
+    protected function checkPermission($ability, $arguments = [], ...$params)
     {
         $this->authorize($ability, $arguments);
     }

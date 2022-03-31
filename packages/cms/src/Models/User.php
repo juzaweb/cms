@@ -15,10 +15,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Traits\Macroable;
 use Juzaweb\Abstracts\Action;
 use Juzaweb\Backend\Database\Factories\UserFactory;
 use Juzaweb\Traits\ModelCache;
 use Juzaweb\Traits\ResourceModel;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Juzaweb\Models\User
@@ -71,6 +73,7 @@ class User extends Authenticatable
     use ResourceModel;
     use HasFactory;
     use ModelCache;
+    use HasRoles;
 
     const STATUS_ACTIVE = 'active';
     const STATUS_VERIFICATION = 'verification';

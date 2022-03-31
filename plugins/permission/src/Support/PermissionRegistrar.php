@@ -10,7 +10,6 @@
 
 namespace Juzaweb\Permission\Support;
 
-use Juzaweb\Facades\Site;
 use Spatie\Permission\PermissionRegistrar as BaseRegistrar;
 
 class PermissionRegistrar extends BaseRegistrar

@@ -11,7 +11,7 @@
 namespace Juzaweb\Permission\Abstracts;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Juzaweb\Models\Model;
+use Illuminate\Database\Eloquent\Model;
 use Juzaweb\Models\User;
 
 abstract class ResourcePolicy
