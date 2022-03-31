@@ -39,8 +39,12 @@ jobs:
         run: php artisan config:clear
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
+      - name: Before ENV Info
+        run: echo "$GITHUB_CONTEXT"
       - name: Execute tests Install
         run: php artisan test vendor/juzaweb/backend/tests/InstallTest.php
+      - name: ENV Info After Install
+        run: echo "$GITHUB_CONTEXT"
       - name: Execute tests (Unit and Feature tests)
         env:
           DB_DATABASE: cms_test
