@@ -31,9 +31,7 @@ class CPostTest extends TestCase
 
         $this->user = User::where('is_admin', '=', 1)
             ->first();
-    
-        ActionRegister::init();
-
+        
         Auth::loginUsingId($this->user->id);
 
         $this->postTypes = HookAction::getPostTypes();

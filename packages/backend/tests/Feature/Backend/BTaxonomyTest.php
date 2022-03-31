@@ -31,9 +31,7 @@ class BTaxonomyTest extends TestCase
 
         $this->user = User::where('is_admin', '=', 1)
             ->first();
-    
-        ActionRegister::init();
-
+        
         Auth::loginUsingId($this->user->id);
 
         $this->postTypes = HookAction::getPostTypes();
@@ -46,7 +44,7 @@ class BTaxonomyTest extends TestCase
             if ($taxonomies->isEmpty()) {
                 continue;
             }
-
+            
             foreach ($taxonomies as $taxonomy) {
                 $this->indexTest($taxonomy);
 
@@ -71,9 +69,9 @@ class BTaxonomyTest extends TestCase
         $response->assertStatus(200);
 
         if ($tax = $this->makeFactory($taxonomy)) {
-            $old = app($taxonomy->get('model'))->count();
+            $old = app(Taxonomy::class)->count();
             $this->post($this->getUrlTaxonomy($taxonomy), $tax->getAttributes());
-            $new = app($taxonomy->get('model'))->count();
+            $new = app(Taxonomy::class)->count();
             $this->assertEquals($old, ($new - 1));
         }
     }
@@ -81,7 +79,7 @@ class BTaxonomyTest extends TestCase
     protected function updateTest($taxonomy)
     {
         if ($tax = $this->makeFactory($taxonomy)) {
-            $model = app($taxonomy->get('model'))->first(['id']);
+            $model = app(Taxonomy::class)->first(['id']);
 
             $response = $this->get(
                 $this->getUrlTaxonomy($taxonomy) . '/' . $model->id . '/edit'
@@ -94,7 +92,7 @@ class BTaxonomyTest extends TestCase
                 $tax->getAttributes()
             );
 
-            $model = app($taxonomy->get('model'))
+            $model = app(Taxonomy::class)
                 ->where('id', '=', $model->id)
                 ->first();
 
@@ -106,13 +104,12 @@ class BTaxonomyTest extends TestCase
      *
      * @param Collection $taxonomy
      *
-     * @return Model|false
+     * @return Model|\Illuminate\Database\Eloquent\Model|false
      */
     protected function makeFactory($taxonomy)
     {
         try {
             $post = Taxonomy::factory()->make();
-
             return $post;
         } catch (\Throwable $e) {
             echo "\n--- " . $e->getMessage();
