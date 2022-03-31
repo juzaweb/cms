@@ -4,18 +4,9 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Juzaweb\\Permission\\Providers\\AutoloadServiceProvider"
-            ],
-            "aliases": {}
-        },
-        "juzaweb": {
-            "providers": [
                 "Juzaweb\\Permission\\Providers\\PermissionServiceProvider"
             ],
-            "name": "User Permission",
-            "domain": "perm",
-            "cms_min": "1.0.9",
-            "version": "1.0"
+            "aliases": {}
         }
     },
     "autoload": {
