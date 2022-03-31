@@ -4,6 +4,8 @@ namespace Juzaweb\Permission\Http\Controllers\Backend;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
+use Juzaweb\Permission\Models\Permission;
 use Juzaweb\Permission\Models\PermissionGroup;
 use Juzaweb\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
@@ -31,7 +33,10 @@ class RoleController extends BackendController
             'name' => 'required|string|max:100',
             'description' => 'nullable|string|max:200',
             'permissions' => 'nullable|array',
-            'permissions.*' => 'nullable|exists:permissions,name',
+            'permissions.*' => [
+                'nullable',
+                Rule::modelExists(Permission::class, 'name')
+            ],
         ]);
 
         return $validator;
@@ -50,7 +55,7 @@ class RoleController extends BackendController
         return $data;
     }
 
-    protected function getModel()
+    protected function getModel(...$params)
     {
         return Role::class;
     }
@@ -60,7 +65,7 @@ class RoleController extends BackendController
         return trans('perm::content.roles');
     }
 
-    private function getPermissionGroups()
+    protected function getPermissionGroups()
     {
         $plugins = array_keys(get_config('plugin_statuses', []));
         $query = PermissionGroup::with(['permissions']);

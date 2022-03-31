@@ -14,5 +14,5 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
-    protected static $actions = [];
+    //
 }
