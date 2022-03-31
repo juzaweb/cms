@@ -32,7 +32,6 @@ class PermissionServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->register(PackageServiceProvider::class);
         $this->app->register(AuthServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
     }

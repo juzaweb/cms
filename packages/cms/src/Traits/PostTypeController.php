@@ -11,6 +11,7 @@
 namespace Juzaweb\Traits;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\Abstracts\Action;
 use Juzaweb\Backend\Events\AfterPostSave;
@@ -188,9 +189,15 @@ trait PostTypeController
         return $attributes;
     }
 
-    protected function checkPermission($ability, $arguments = [])
+    protected function checkPermission($ability, $arguments = [], ...$params)
     {
         $this->authorize($ability, [$arguments, $this->getPostType()]);
+    }
+    
+    protected function getPermission($ability, $arguments = [], ...$params)
+    {
+        $response = Gate::inspect($ability, [$arguments, $this->getPostType()]);
+        return $response->allowed();
     }
 
     /**
