@@ -40,7 +40,9 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: Execute tests (Unit and Feature tests) via PHPUnit
+        env:
+          DB_DATABASE: cms_test
         run: |
-          vendor/bin/phpunit vendor/juzaweb/backend/tests/InstallTest.php
+          php artisan test vendor/juzaweb/backend/tests/InstallTest.php
           php artisan test
-          vendor/bin/phpunit vendor/juzaweb/backend/tests/UpdateTest.php
+          php artisan test vendor/juzaweb/backend/tests/UpdateTest.php
