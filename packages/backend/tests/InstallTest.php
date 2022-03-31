@@ -12,7 +12,6 @@ namespace Juzaweb\Backend\Tests;
 
 use Juzaweb\Models\User;
 use Juzaweb\Support\Installer;
-use Juzaweb\Backend\Tests\TestCase;
 
 class InstallTest extends TestCase
 {

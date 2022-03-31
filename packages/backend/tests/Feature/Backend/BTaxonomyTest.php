@@ -43,7 +43,7 @@ class BTaxonomyTest extends TestCase
     {
         foreach ($this->postTypes as $key => $postType) {
             $taxonomies = HookAction::getTaxonomies($key);
-            if (empty($taxonomies)) {
+            if ($taxonomies->isEmpty()) {
                 continue;
             }
 

@@ -16,7 +16,7 @@ class CommandTest extends TestCase
 {
     public function testMigration()
     {
-        $this->artisan('migrate')
+        $this->artisan('migrate:refresh')
             ->assertExitCode(0);
     }
 
@@ -26,6 +26,15 @@ class CommandTest extends TestCase
             ->assertExitCode(0);
     }
 
+    public function testMakeAdmin()
+    {
+        $this->artisan('juzacms:make-admin')
+            ->expectsQuestion('Full Name?', 'Taylor Otwell')
+            ->expectsQuestion('Email?', 'demo@gmail.com')
+            ->expectsQuestion('Password?', '12345678')
+            ->assertExitCode(0);
+    }
+    
     public function testOptimize()
     {
         $this->artisan('optimize')
