@@ -276,7 +276,12 @@ abstract class Plugin
     {
         $loadmaps = $this->activator->getAutoloadInfo($this);
         $loader = new ClassLoader();
+        
         foreach ($loadmaps as $loadmap) {
+            if (empty($loadmap['namespace']) || empty($loadmap['path'])) {
+                continue;
+            }
+            
             $loader->setPsr4($loadmap['namespace'], [$loadmap['path']]);
         }
         $loader->register(true);
@@ -385,6 +390,9 @@ abstract class Plugin
         $this->fireEvent('enabling');
         $this->activator->enable($this);
         $this->flushCache();
+        if (config('plugin.autoload')) {
+            $this->runMigrate();
+        }
         $this->fireEvent('enabled');
     }
 

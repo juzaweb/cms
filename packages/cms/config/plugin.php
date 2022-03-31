@@ -19,6 +19,9 @@ return [
     */
     'autoload' => env('AUTOLOAD_PLUGIN', true),
     
+    /**
+     * Activator helper
+     */
     'activator' => DbActivator::class,
     
     'stubs' => [

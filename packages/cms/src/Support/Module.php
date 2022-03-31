@@ -37,14 +37,29 @@ class Module extends BasePlugin
      */
     public function registerProviders(): void
     {
-        try {
-            (new ProviderRepository($this->app, new Filesystem(), $this->getCachedServicesPath()))
-                ->load($this->getExtraLarevel('providers', []));
-        } catch (\Throwable $e) {
-            if (!config('app.debug')) {
+        if (config('plugin.autoload')) {
+            try {
+                (new ProviderRepository(
+                    $this->app,
+                    new Filesystem(),
+                    $this->getCachedServicesPath()
+                ))
+                    ->load($this->getExtraLarevel('providers', []));
+            } catch (\Throwable $e) {
                 $this->disable();
+                throw $e;
             }
-
+        }
+        
+        try {
+            (new ProviderRepository(
+                $this->app,
+                new Filesystem(),
+                $this->getCachedServicesPath()
+            ))
+                ->load($this->getExtraJuzaweb('providers', []));
+        } catch (\Throwable $e) {
+            $this->disable();
             throw $e;
         }
     }

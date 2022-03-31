@@ -60,6 +60,8 @@ class DbActivator implements ActivatorInterface
      * Enables a plugin
      *
      * @param Plugin $module
+     * @throws ModuleNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function enable(Plugin $module): void
     {
