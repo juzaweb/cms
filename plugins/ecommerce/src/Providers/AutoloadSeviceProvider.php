@@ -25,5 +25,7 @@ class AutoloadSeviceProvider extends ServiceProvider
             __DIR__ . '/../../config/ecommerce.php',
             'ecommerce'
         );
+    
+        $this->app->register(RouteServiceProvider::class);
     }
 }

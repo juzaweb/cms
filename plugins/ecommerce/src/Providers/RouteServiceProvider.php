@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapAdminRoutes()
     {
         Route::middleware('admin')
-            ->prefix(config('juzaweb.admin_prefix'))
+            ->prefix(config('juzaweb.admin_prefix') . '/' . config('ecommerce.ecommerce_prefix'))
             ->group(__DIR__ . '/../routes/admin.php');
     }
 }

@@ -27,136 +27,22 @@ class EcommerceAction extends Action
             Action::BACKEND_CALL_ACTION,
             [$this, 'addAdminMenu']
         );
-
-        $this->addAction(
-            str_replace('{name}', 'products', Action::POST_FORM_LEFT_ACTION),
-            [$this, 'addFormProduct']
-        );
-
-        $this->addAction(
-            'post_type.products.after_save',
-            [$this, 'saveDataProduct'],
-            20,
-            2
-        );
-
-        $this->addFilter(
-            'post_type.products.parseDataForSave',
-            [$this, 'parseDataForSave']
-        );
     }
 
     public function registerPostTypes()
     {
-        HookAction::registerPostType(
-            'products',
-            [
-                'label' => trans('ecom::content.products'),
-                'menu_icon' => 'fa fa-list-alt',
-                'menu_position' => 10,
-                'supports' => [
-                    'category',
-                    'tag'
-                ],
-                'metas' => [
-                    'price' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'compare_price' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'sku_code' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'barcode' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'images' => [
-                        'type' => 'images',
-                        'visible' => true,
-                    ],
-                    'quantity' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'inventory_management' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ],
-                    'disable_out_of_stock' => [
-                        'type' => 'text',
-                        'visible' => true,
-                    ]
-                ]
-            ]
-        );
-
-        HookAction::registerTaxonomy(
-            'brands',
-            'products',
-            [
-                'label' => trans('ecom::content.brands'),
-                'menu_position' => 11,
-            ]
-        );
-
-        HookAction::registerTaxonomy(
-            'vendors',
-            'products',
-            [
-                'label' => trans('ecom::content.vendors'),
-                'menu_position' => 12,
-            ]
-        );
     }
 
     public function addAdminMenu()
     {
-        HookAction::addAdminMenu(
-            trans('ecom::content.ecommerce'),
+        HookAction::registerAdminPage(
             'ecommerce',
             [
-                'position' => 12,
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('ecom::content.orders'),
-            'ecommerce.orders',
-            [
-                'position' => 1,
-                'parent' => 'ecommerce',
-            ]
-        );
-
-        /*HookAction::addAdminMenu(
-            trans('ecom::content.inventories'),
-            'ecommerce.inventories',
-            [
-                'position' => 2,
-                'parent' => 'ecommerce',
-            ]
-        );*/
-
-        HookAction::addAdminMenu(
-            trans('ecom::content.payment_methods'),
-            'ecommerce.payment-methods',
-            [
-                'position' => 3,
-                'parent' => 'ecommerce',
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('ecom::content.setting'),
-            'ecommerce.setting',
-            [
-                'position' => 3,
-                'parent' => 'ecommerce',
+                'title' => trans('cms::app.ecommerce'),
+                'menu' => [
+                    'icon' => 'fa fa-language',
+                    'position' => 100,
+                ]
             ]
         );
     }
