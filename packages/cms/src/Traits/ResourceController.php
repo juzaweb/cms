@@ -12,6 +12,7 @@ namespace Juzaweb\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,7 +20,11 @@ trait ResourceController
 {
     public function index(...$params)
     {
-        $this->checkPermission('index', $this->getModel(...$params), ...$params);
+        $this->checkPermission(
+            'index',
+            $this->getModel(...$params),
+            ...$params
+        );
 
         return view(
             $this->viewPrefix . '.index',
@@ -260,10 +265,16 @@ trait ResourceController
     protected function getDataForIndex(...$params)
     {
         $dataTable = $this->getDataTable(...$params);
+        $canCreate = $this->getPermission(
+            'create',
+            $this->getModel(...$params),
+            ...$params
+        );
 
         return [
             'title' => $this->getTitle(...$params),
             'dataTable' => $dataTable,
+            'canCreate' => $canCreate,
             'linkCreate' => action([static::class, 'create'], $params),
         ];
     }
@@ -314,6 +325,12 @@ trait ResourceController
     protected function checkPermission($ability, $arguments = [], ...$params)
     {
         $this->authorize($ability, $arguments);
+    }
+    
+    protected function getPermission($ability, $arguments = [], ...$params)
+    {
+        $response = Gate::inspect($ability, $arguments);
+        return $response->allowed();
     }
 
     /**
