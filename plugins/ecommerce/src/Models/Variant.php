@@ -12,6 +12,7 @@ namespace Juzaweb\Ecommerce\Models;
 
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\Ecommerce\Models\Attribute;
 
 /**
  * Juzaweb\Ecommerce\Models\Variant
@@ -43,7 +44,7 @@ class Variant extends Model
     protected $table = 'variants';
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public $timestamps = false;
+    // public $timestamps = false;
     public $casts = [
         'images' => 'array',
         'names' => 'array',
@@ -58,5 +59,10 @@ class Variant extends Model
     public function product()
     {
         return $this->belongsTo(Post::class, 'product_id', 'id');
+    }
+
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'variants_attributes', 'variant_id', 'attribute_id');
     }
 }
