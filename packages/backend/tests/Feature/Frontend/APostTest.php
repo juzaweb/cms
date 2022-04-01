@@ -43,8 +43,10 @@ class APostTest extends TestCase
     
                 $response->assertStatus(200);
                 
-                if ($response != 200) {
-                    dd($this->getUrlPost($postType, $post));
+                if ($response->status() != 200) {
+                    $this->expectOutputString(
+                        $this->getUrlPost($postType, $post)
+                    );
                 }
             }
         }
