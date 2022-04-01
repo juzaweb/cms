@@ -33,7 +33,7 @@ jobs:
         run: composer create-project --prefer-dist juzaweb/juzacms blog
       - name: Copy .env
         working-directory: blog
-        run: rm .env && copy .env.testing .env
+        run: rm .env && cp .env.testing .env
       - name: Generate key
         working-directory: blog
         run: php artisan key:generate
