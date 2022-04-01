@@ -36,7 +36,10 @@ class APostTest extends TestCase
     public function testDetail()
     {
         foreach ($this->postTypes as $key => $postType) {
-            $posts = Post::where('type', $key)->limit(2)->get();
+            $posts = Post::wherePublish()
+                ->where('type', $key)
+                ->limit(2)
+                ->get();
             
             foreach ($posts as $post) {
                 $response = $this->get($this->getUrlPost($postType, $post));
@@ -61,7 +64,10 @@ class APostTest extends TestCase
                 continue;
             }
         
-            $posts = Post::where('type', $key)->limit(2)->get();
+            $posts = Post::wherePublish()
+                ->where('type', $key)
+                ->limit(2)
+                ->get();
         
             foreach ($posts as $post) {
                 $this->post(
