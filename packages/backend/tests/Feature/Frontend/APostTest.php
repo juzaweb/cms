@@ -42,15 +42,13 @@ class APostTest extends TestCase
                 ->get();
             
             foreach ($posts as $post) {
-                $response = $this->get($this->getUrlPost($postType, $post));
-    
-                $response->assertStatus(200);
+                $url = $this->getUrlPost($postType, $post);
                 
-                if ($response->status() != 200) {
-                    $this->expectOutputString(
-                        $this->getUrlPost($postType, $post)
-                    );
-                }
+                $response = $this->get($url);
+    
+                $this->printText("Test {$url}");
+                
+                $response->assertStatus(200);
             }
         }
     }
@@ -70,8 +68,11 @@ class APostTest extends TestCase
                 ->get();
         
             foreach ($posts as $post) {
+                $url = $this->getUrlPost($postType, $post);
+                $this->printText("Test {$url}");
+                
                 $this->post(
-                    $this->getUrlPost($postType, $post),
+                    $url,
                     [
                         'name' => $faker->name,
                         'email' => $faker->email,
@@ -82,7 +83,7 @@ class APostTest extends TestCase
                     ->assertSessionHasErrors(['content']);
                 
                 $this->post(
-                    $this->getUrlPost($postType, $post),
+                    $url,
                     [
                         'name' => $faker->name,
                         'email' => 'required|email|max:100',
@@ -97,10 +98,8 @@ class APostTest extends TestCase
                     'email' => $faker->email,
                     'content' => 'required|max:300',
                 ];
-                $this->post(
-                    $this->getUrlPost($postType, $post),
-                    $data
-                )->assertStatus(302);
+                
+                $this->post($url, $data)->assertStatus(302);
     
                 $this->assertDatabaseHas('comments', $data);
             }

@@ -18,14 +18,25 @@ class BTestTaxonomy extends TestCase
 {
     public function testTaxonomy()
     {
-        $taxonomies = Taxonomy::query()->get();
-        foreach ($taxonomies as $taxonomy) {
-            $permalink = HookAction::getPermalinks($taxonomy);
-            $base = $permalink->get('base');
+        $taxonomies = HookAction::getTaxonomies();
+        foreach ($taxonomies as $types) {
+            foreach ($types as $key => $taxonomy) {
+                $data = Taxonomy::where('taxonomy', '=', $key)
+                    ->first();
+                if (empty($data)) {
+                    continue;
+                }
     
-            $response = $this->get("/{$base}/");
+                $permalink = HookAction::getPermalinks($key);
+                $base = $permalink->get('base');
     
-            $response->assertStatus(200);
+                $url = "/{$base}/{$data->slug}";
+                $response = $this->get($url);
+    
+                $this->printText("Test {$url}");
+                
+                $response->assertStatus(200);
+            }
         }
     }
 }

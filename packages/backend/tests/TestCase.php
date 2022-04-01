@@ -26,4 +26,9 @@ abstract class TestCase extends BaseTestCase
         return User::where('is_admin', '=', 1)
             ->first();
     }
+    
+    protected function printText($text)
+    {
+        echo "{$text} \n";
+    }
 }
