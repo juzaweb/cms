@@ -68,6 +68,17 @@ class APostTest extends TestCase
                     $this->getUrlPost($postType, $post),
                     [
                         'name' => $faker->name,
+                        'email' => $faker->email,
+                        'content' => '',
+                    ]
+                )
+                    ->assertStatus(302)
+                    ->assertSessionHasErrors(['content']);
+                
+                $this->post(
+                    $this->getUrlPost($postType, $post),
+                    [
+                        'name' => $faker->name,
                         'email' => 'required|email|max:100',
                         'content' => 'required|max:300',
                     ]
@@ -86,6 +97,43 @@ class APostTest extends TestCase
                 )->assertStatus(302);
     
                 $this->assertDatabaseHas('comments', $data);
+            }
+        }
+    }
+    
+    public function testAuthComment()
+    {
+        $this->authUserAdmin();
+    
+        foreach ($this->postTypes as $key => $postType) {
+            if (!in_array('comment', $postType->get('supports'))) {
+                continue;
+            }
+        
+            $posts = Post::where('type', $key)->limit(2)->get();
+        
+            foreach ($posts as $post) {
+                $this->post(
+                    $this->getUrlPost($postType, $post),
+                    [
+                        'content' => '',
+                    ]
+                )
+                    ->assertStatus(302)
+                    ->assertSessionHasErrors(['content']);
+                
+                $this->post(
+                    $this->getUrlPost($postType, $post),
+                    [
+                        'content' => 'required|max:300',
+                    ]
+                )
+                    ->assertStatus(302);
+                
+                $this->assertDatabaseHas(
+                    'comments',
+                    ['content' => 'required|max:300']
+                );
             }
         }
     }
