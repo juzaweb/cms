@@ -42,6 +42,10 @@ class APostTest extends TestCase
                 $response = $this->get($this->getUrlPost($postType, $post));
     
                 $response->assertStatus(200);
+                
+                if ($response != 200) {
+                    dd($this->getUrlPost($postType, $post));
+                }
             }
         }
     }
@@ -65,8 +69,9 @@ class APostTest extends TestCase
                         'email' => 'required|email|max:100',
                         'content' => 'required|max:300',
                     ]
-                )->assertStatus(302)
-                ->assertSessionHasErrors(['email']);
+                )
+                    ->assertStatus(302)
+                    ->assertSessionHasErrors(['email']);
     
                 $data = [
                     'name' => $faker->name,
@@ -86,9 +91,8 @@ class APostTest extends TestCase
     protected function getUrlPost($postType, $post)
     {
         $key = $postType->get('key');
-        if ($key == 'pages') {
-            $base = '';
-        } else {
+        $base = '';
+        if ($key != 'pages') {
             $permalink = HookAction::getPermalinks($key);
             $base = $permalink->get('base');
         }
