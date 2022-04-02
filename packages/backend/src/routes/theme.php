@@ -61,7 +61,7 @@ Route::post(
     [PostController::class, 'comment']
 )
     ->name('comment')
-    ->where('slug', '^((?!admin\-cp|api|subscription).)*$');
+    ->where('slug', '^(?!admin\-cp|api|subscription).*$');
 
 Route::get('{slug}', [RouteController::class, 'index'])
-    ->where('slug', '^((?!admin\-cp|api|subscription).)*$');
+    ->where('slug', '^(?!admin\-cp|api|subscription).*$');
