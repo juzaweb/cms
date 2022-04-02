@@ -74,6 +74,8 @@ class CPostTest extends TestCase
             if ($response->status() == 500) {
                 dd($post);
             }
+            
+            $response->assertStatus(302);
     
             $this->assertDatabaseHas(
                 'posts',

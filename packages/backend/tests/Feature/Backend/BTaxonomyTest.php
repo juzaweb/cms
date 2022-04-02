@@ -70,7 +70,12 @@ class BTaxonomyTest extends TestCase
 
         if ($tax = $this->makeFactory($taxonomy)) {
             $old = app(Taxonomy::class)->count();
-            $this->post($this->getUrlTaxonomy($taxonomy), $tax->getAttributes());
+            $response = $this->post(
+                $this->getUrlTaxonomy($taxonomy),
+                $tax->getAttributes()
+            );
+            
+            $response->assertStatus(302);
             $new = app(Taxonomy::class)->count();
             $this->assertEquals($old, ($new - 1));
         }
@@ -121,9 +126,9 @@ class BTaxonomyTest extends TestCase
     protected function getUrlTaxonomy($taxonomy)
     {
         return '/admin-cp/' . str_replace(
-                '.',
-                '/',
-                $taxonomy->get('menu_slug')
-            );
+            '.',
+            '/',
+            $taxonomy->get('menu_slug')
+        );
     }
 }
