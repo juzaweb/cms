@@ -50,8 +50,10 @@
 
     {{ theme_footer() }}
 
+    {% if auth %}
     <form action="{{ url('logout') }}" method="post" style="display: none" class="form-logout">
         {{ csrf_field() }}
     </form>
+    {% endif %}
 </body>
 </html>

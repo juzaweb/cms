@@ -30,8 +30,8 @@ class CommandTest extends TestCase
     {
         $this->artisan('juzacms:make-admin')
             ->expectsQuestion('Full Name?', 'Taylor Otwell')
-            ->expectsQuestion('Email?', 'demo@gmail.com')
-            ->expectsQuestion('Password?', '12345678')
+            ->expectsQuestion('Email?', 'admin@admin.com')
+            ->expectsQuestion('Password?', 'admin@admin.com')
             ->assertExitCode(0);
     }
     

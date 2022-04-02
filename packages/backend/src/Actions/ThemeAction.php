@@ -41,6 +41,7 @@ class ThemeAction extends Action
         HookAction::addAction(Action::FRONTEND_CALL_ACTION, [$this, 'appendHeader']);
         HookAction::addAction(Action::BLOCKS_INIT, [$this, 'blocks']);
         HookAction::addAction(Action::INIT_ACTION, [$this, 'settingFields']);
+        HookAction::addAction(Action::FRONTEND_AFTER_BODY, [$this, 'addThemeHeader']);
     }
 
     public function postTypes()
@@ -172,9 +173,11 @@ class ThemeAction extends Action
     {
         $items = $this->getRegister('nav_menus');
         foreach ($items as $key => $item) {
-            HookAction::registerNavMenus([
-                $key => $item['label']
-            ]);
+            HookAction::registerNavMenus(
+                [
+                    $key => $item['label']
+                ]
+            );
         }
     }
 
@@ -182,9 +185,12 @@ class ThemeAction extends Action
     {
         $bodyClass = $this->getRegister('body_class');
         if ($bodyClass) {
-            $this->addFilter('theme.body_class', function ($class) use ($bodyClass) {
-                return $class . ' ' . $bodyClass;
-            });
+            $this->addFilter(
+                'theme.body_class',
+                function ($class) use ($bodyClass) {
+                    return $class . ' ' . $bodyClass;
+                }
+            );
         }
     }
 
@@ -192,9 +198,19 @@ class ThemeAction extends Action
     {
         $append = $this->getRegister('append_header');
         if ($append) {
-            $this->addAction('theme.header', function () use ($append) {
-                echo e(Twig::display($append));
-            });
+            $this->addAction(
+                'theme.header',
+                function () use ($append) {
+                    echo e(Twig::display($append));
+                }
+            );
+        }
+    }
+    
+    public function addThemeHeader()
+    {
+        if (is_admin()) {
+            echo e(view('cms::frontend.admin_bar'));
         }
     }
 
