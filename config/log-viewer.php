@@ -53,7 +53,7 @@ return [
         'attributes' => [
             'prefix'     => 'admin-cp/log-viewer',
 
-            'middleware' => 'master_admin',
+            'middleware' => 'admin',
         ],
     ],
 
