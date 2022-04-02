@@ -9,7 +9,6 @@ use Juzaweb\Models\Model;
  *
  * @property int $id
  * @property int $post_id
- * @property int|null $site_id
  * @property int $views
  * @property string $day
  * @property-read \Juzaweb\Backend\Models\Post $post
