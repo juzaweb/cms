@@ -69,7 +69,7 @@ class APostTest extends TestCase
         
             foreach ($posts as $post) {
                 $url = $this->getUrlPost($postType, $post);
-                $this->printText("Test {$url}");
+                $this->printText("Test Comment {$url}");
                 
                 $this->post(
                     $url,
