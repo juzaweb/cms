@@ -35,7 +35,6 @@ use Juzaweb\Traits\ResourceModel;
  * @method static \Illuminate\Database\Eloquent\Builder|CrawTemplate whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CrawTemplate whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property int|null $site_id
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Crawler\Models\Component[] $components
  * @property-read int|null $components_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Crawler\Models\CrawLink[] $links

@@ -1,13 +1,9 @@
 <?php
 /**
- * @package    tadcms/tadcms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://github.com/tadcms/tadcms
+ * @link       https://github.com/juzaweb/juzacms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 5/1/2021
- * Time: 4:31 PM
  */
 
 namespace Juzaweb\Support;
@@ -37,18 +33,13 @@ class Module extends BasePlugin
      */
     public function registerProviders(): void
     {
+        $providers = $this->getExtraJuzaweb('providers', []);
+        
         if (config('plugin.autoload')) {
-            try {
-                (new ProviderRepository(
-                    $this->app,
-                    new Filesystem(),
-                    $this->getCachedServicesPath()
-                ))
-                    ->load($this->getExtraLarevel('providers', []));
-            } catch (\Throwable $e) {
-                $this->disable();
-                throw $e;
-            }
+            $providers = array_merge(
+                $this->getExtraLarevel('providers', []),
+                $providers
+            );
         }
         
         try {
@@ -57,7 +48,7 @@ class Module extends BasePlugin
                 new Filesystem(),
                 $this->getCachedServicesPath()
             ))
-                ->load($this->getExtraJuzaweb('providers', []));
+                ->load($providers);
         } catch (\Throwable $e) {
             $this->disable();
             throw $e;

@@ -19,7 +19,6 @@ use Juzaweb\Models\Model;
  * @property int $user_id
  * @property int $package_id
  * @property int|null $object_id
- * @property int|null $site_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Juzaweb\Subscription\Models\Package $package

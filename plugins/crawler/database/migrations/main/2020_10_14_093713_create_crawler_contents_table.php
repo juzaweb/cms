@@ -25,7 +25,6 @@ class CreateCrawlerContentsTable extends Migration
                 $table->text('crawler_title')->nullable();
                 $table->text('crawler_content')->nullable();
                 $table->string('status')->default('active');
-                $table->unsignedBigInteger('site_id')->index()->nullable();
                 $table->timestamps();
             }
         );

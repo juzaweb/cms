@@ -44,7 +44,7 @@ trait UseSlug
             $string = $this->getDisplayName();
         }
 
-        $slug = sub_char($string, 70, '');
+        $slug = substr($string, 0, 70);
         $slug = Str::slug($slug);
 
         $row = self::where('id', '!=', $this->id)
@@ -55,7 +55,7 @@ trait UseSlug
         if ($row) {
             $split = explode('-', $row->slug);
             $last = (int) $split[count($split) - 1];
-            $slug = $slug . '-'. ($last + 1);
+            $slug = $slug . '-' . ($last + 1);
         }
 
         $this->slug = $slug;

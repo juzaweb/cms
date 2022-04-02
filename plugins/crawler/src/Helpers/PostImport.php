@@ -53,7 +53,6 @@ class PostImport
         }
 
         $categoryIds = $conn->table('taxonomies')
-            ->where('site_id', $siteId)
             ->whereIn('id', $data['category_ids'])
             ->pluck('id')
             ->toArray();
@@ -74,7 +73,6 @@ class PostImport
                         'slug' => $slug,
                         'created_by' => $data['user_id'],
                         'updated_by' => $data['user_id'],
-                        'site_id' => $siteId,
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s'),
                     ]
@@ -168,7 +166,6 @@ class PostImport
                     'size' => $uploadedFile->getSize(),
                     'extension' => $uploadedFile->getClientOriginalExtension(),
                     'user_id' => $this->data['user_id'],
-                    'site_id' => $this->siteId,
                 ];
 
                 $conn->table(app(MediaFile::class)->getTable())

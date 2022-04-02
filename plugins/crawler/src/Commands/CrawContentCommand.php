@@ -146,8 +146,7 @@ class CrawContentCommand extends Command
                     'user_id' => $template->user_id,
                     'status' => $template->post_status,
                     'category_ids' => $link->category_ids,
-                ],
-                $template->site_id
+                ]
             );
 
             $link->update(
