@@ -77,23 +77,13 @@ class CPostTest extends TestCase
             
             $response->assertStatus(302);
     
+            $slug = substr($post['title'], 0, 70);
+            $slug = Str::slug($slug);
+    
             $this->assertDatabaseHas(
                 'posts',
                 [
-                    'slug' => substr($post['slug'], 0, 70),
-                    'type' => $post['type']
-                ]
-            );
-            
-            $response = $this->post($create, $post);
-            if ($response->status() == 500) {
-                dd($post);
-            }
-            
-            $this->assertDatabaseHas(
-                'posts',
-                [
-                    'slug' => substr($post['slug'], 0, 70),
+                    'slug' => $slug,
                     'type' => $post['type']
                 ]
             );
