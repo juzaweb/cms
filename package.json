@@ -28,7 +28,9 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "@tinymce/tinymce-vue": "^4",
         "jquery": "^3.6.0",
-        "select2": "^4.1.0-rc.0"
+        "select2": "^4.1.0-rc.0",
+        "vue-select2": "^0.2.6"
     }
 }

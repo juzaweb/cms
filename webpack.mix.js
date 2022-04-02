@@ -18,7 +18,7 @@ mix.js('resources/js/app.js', 'public/js').vue()
     ])
     .webpackConfig(require('./webpack.config'));
 
-//mix.extract(['vue', 'jquery']);
+//mix.extract(['vue', 'jquery'], 'vendor-1.js');
 
 mix.browserSync({
     proxy: "http://localhost:8000"
