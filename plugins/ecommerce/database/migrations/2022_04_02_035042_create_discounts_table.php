@@ -22,16 +22,11 @@ return new class extends Migration
                 $table->string('tbl');
                 $table->string('tbl_column');
                 $table->unsignedBigInteger('post_id')->nullable();
-                $table->unsignedBigInteger('variant_id')->nullable();
                 $table->timestamps();
 
                 $table->foreign('post_id')
                     ->references('id')
                     ->on('posts')
-                    ->onDelete('set null');
-                $table->foreign('variant_id')
-                    ->references('id')
-                    ->on('variants')
                     ->onDelete('set null');
             }
         );

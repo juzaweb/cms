@@ -18,14 +18,13 @@ return new class extends Migration
             'variants_attributes',
             function (Blueprint $table) {
                 $table->id();
-                $table->unsignedBigInteger('variant_id');
+                $table->unsignedBigInteger('product_variant_id');
                 $table->unsignedBigInteger('attribute_id');
-                $table->unique(['variant_id', 'attribute_id']);
-                $table->foreign('variant_id')
+                $table->foreign('product_variant_id', 'product_variant_id_foreign')
                     ->references('id')
-                    ->on('variants')
+                    ->on('product_variants')
                     ->onDelete('cascade');
-                $table->foreign('attribute_id')
+                $table->foreign('attribute_id', 'attribute_id_foreign')
                     ->references('id')
                     ->on('attributes')
                     ->onDelete('cascade');
