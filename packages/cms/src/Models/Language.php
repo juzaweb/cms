@@ -17,7 +17,6 @@ namespace Juzaweb\Models;
  * @property string $code
  * @property string $name
  * @property bool $default
- * @property int|null $site_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Language newModelQuery()

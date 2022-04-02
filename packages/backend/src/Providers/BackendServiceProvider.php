@@ -47,17 +47,22 @@ class BackendServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-
         $this->registerRouteMacros();
-        $this->app->booting(function () {
-            $loader = AliasLoader::getInstance();
-            $loader->alias('Field', Field::class);
-        });
+        $this->app->booting(
+            function () {
+                $loader = AliasLoader::getInstance();
+                $loader->alias('Field', Field::class);
+            }
+        );
     }
 
     protected function bootMiddlewares()
     {
-        $this->app['router']->aliasMiddleware('admin', Admin::class);
+        /**
+         * @var \Illuminate\Routing\Router $router
+         */
+        $router = $this->app['router'];
+        $router->aliasMiddleware('admin', Admin::class);
     }
 
     protected function bootPublishes()
@@ -65,17 +70,26 @@ class BackendServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cms');
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
         
-        $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/juzaweb'),
-        ], 'cms_views');
+        $this->publishes(
+            [
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/juzaweb'),
+            ],
+            'cms_views'
+        );
         
-        $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/juzaweb'),
-        ], 'cms_lang');
+        $this->publishes(
+            [
+                __DIR__ . '/../resources/lang' => resource_path('lang/vendor/juzaweb'),
+            ],
+            'cms_lang'
+        );
 
-        $this->publishes([
-            __DIR__ . '/../resources/assets' => public_path('jw-styles/juzaweb'),
-        ], 'cms_assets');
+        $this->publishes(
+            [
+                __DIR__ . '/../resources/assets' => public_path('jw-styles/juzaweb'),
+            ],
+            'cms_assets'
+        );
     }
 
     protected function registerRouteMacros()

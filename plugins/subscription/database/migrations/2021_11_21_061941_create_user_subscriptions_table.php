@@ -22,9 +22,6 @@ class CreateUserSubscriptionsTable extends Migration
                 $table->unsignedBigInteger('package_id')
                     ->nullable()
                     ->index();
-                $table->unsignedBigInteger('site_id')
-                    ->nullable()
-                    ->index();
 
                 $table->unique(['user_id', 'module']);
                 $table->timestamps();

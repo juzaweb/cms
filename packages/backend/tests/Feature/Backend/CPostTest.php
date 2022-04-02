@@ -15,7 +15,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Models\User;
 use Juzaweb\Backend\Tests\TestCase;
 
@@ -50,29 +49,44 @@ class CPostTest extends TestCase
 
     protected function indexTest($key)
     {
-        $response = $this->get('/admin-cp/post-type/' . $key);
+        $response = $this->get("/admin-cp/post-type/{$key}");
 
         $response->assertStatus(200);
     }
 
     protected function createTest($key, $postType)
     {
-        $index = '/admin-cp/post-type/'. $key .'/create';
+        $index = "/admin-cp/post-type/{$key}/create";
         $response = $this->get($index);
+        
+        $this->printText("Test {$index}");
         
         $response->assertStatus(200);
 
         if ($post = $this->makerData($postType)) {
-            $old = app($postType->get('model'))->count();
             $create = "/admin-cp/post-type/{$key}";
-            $response = $this->post($create, $post);
+            $this->printText("Test post create {$create}");
             
+            $data = $post;
+            unset($data['slug']);
+            
+            $response = $this->post($create, $post);
             if ($response->status() == 500) {
-                dd($create, $post, $postType);
+                dd($post);
             }
             
-            $new = app($postType->get('model'))->count();
-            $this->assertEquals($old, ($new - 1));
+            $response->assertStatus(302);
+    
+            $slug = substr($post['title'], 0, 70);
+            $slug = Str::slug($slug);
+    
+            $this->assertDatabaseHas(
+                'posts',
+                [
+                    'slug' => $slug,
+                    'type' => $post['type']
+                ]
+            );
         }
     }
 
@@ -80,11 +94,13 @@ class CPostTest extends TestCase
     {
         if ($post = $this->makerData($postType)) {
             $model = app($postType->get('model'))->first(['id']);
-            $response = $this->get('/admin-cp/post-type/posts/' . $model->id . '/edit');
+            $url = "/admin-cp/post-type/{$key}/{$model->id}/edit";
+            
+            $response = $this->get($url);
 
             $response->assertStatus(200);
 
-            $this->put('/admin-cp/post-type/'.$key.'/' . $model->id, $post);
+            $this->put("/admin-cp/post-type/{$key}/{$model->id}", $post);
 
             $model = app($postType->get('model'))
                 ->where('id', '=', $model->id)
@@ -109,6 +125,7 @@ class CPostTest extends TestCase
             'title' => $title,
             'content' => $faker->sentence(50),
             'status' => 'publish',
+            'type' => $postType->get('key'),
             'slug' => Str::slug($title),
         ];
 

@@ -76,7 +76,7 @@ class PluginController extends BackendController
         
         foreach ($ids as $plugin) {
             try {
-                DB::beginTransaction();
+                //DB::beginTransaction();
                 switch ($action) {
                     /*case 'delete':
                         $plugins = get_config('installed_plugins', []);
@@ -94,9 +94,9 @@ class PluginController extends BackendController
                         break;
                 }
 
-                DB::commit();
+                //DB::commit();
             } catch (\Throwable $e) {
-                DB::rollBack();
+                //DB::rollBack();
                 return $this->error(
                     [
                         'message' => $e->getMessage(),

@@ -9,6 +9,6 @@ class TaxonomyTableSeeder extends Seeder
 {
     public function run()
     {
-        Taxonomy::factory(500)->create();
+        Taxonomy::factory(20)->create();
     }
 }

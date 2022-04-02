@@ -9,7 +9,6 @@ use Juzaweb\Models\Model;
  *
  * @property int $id
  * @property int $post_id
- * @property int|null $site_id
  * @property string $client_ip
  * @property float $star
  * @property \Illuminate\Support\Carbon|null $created_at

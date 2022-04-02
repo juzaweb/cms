@@ -18,7 +18,6 @@ use Ramsey\Uuid\Uuid;
  * @property int $period
  * @property string $period_unit
  * @property array|null $data
- * @property int|null $site_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Subscription\Models\PackageConfig[] $configs

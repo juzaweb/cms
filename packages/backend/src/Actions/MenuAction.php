@@ -261,11 +261,14 @@ class MenuAction extends Action
 
     public function addMenuBoxs()
     {
-        HookAction::registerMenuBox('custom_url', [
-            'title' => trans('cms::app.custom_url'),
-            'group' => 'custom',
-            'menu_box' => new CustomMenuBox(),
-        ]);
+        HookAction::registerMenuBox(
+            'custom_url',
+            [
+                'title' => trans('cms::app.custom_url'),
+                'group' => 'custom',
+                'menu_box' => new CustomMenuBox(),
+            ]
+        );
     }
 
     public function addTaxonomiesForm()
@@ -275,10 +278,13 @@ class MenuAction extends Action
             add_action(
                 'post_type.'.$key.'.form.right',
                 function ($model) use ($key) {
-                    echo view('cms::components.taxonomies', [
-                        'postType' => $key,
-                        'model' => $model,
-                    ])->render();
+                    echo view(
+                        'cms::components.taxonomies',
+                        [
+                            'postType' => $key,
+                            'model' => $model,
+                        ]
+                    )->render();
                 }
             );
         }

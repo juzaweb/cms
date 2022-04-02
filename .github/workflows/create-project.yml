@@ -33,7 +33,7 @@ jobs:
         run: composer create-project --prefer-dist juzaweb/juzacms blog
       - name: Copy .env
         working-directory: blog
-        run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
+        run: rm .env && cp .env.testing .env
       - name: Generate key
         working-directory: blog
         run: php artisan key:generate
@@ -43,12 +43,12 @@ jobs:
       - name: Directory Permissions
         working-directory: blog
         run: chmod -R 777 storage bootstrap/cache
-#      - name: Execute tests Install
-#        working-directory: blog
-#        run: php artisan test vendor/juzaweb/backend/tests/InstallTest.php
-#      - name: Execute tests (Unit and Feature tests)
-#        working-directory: blog
-#        run: php artisan test
-#      - name: Execute tests Update
-#        working-directory: blog
-#        run: php artisan test vendor/juzaweb/backend/tests/UpdateTest.php
+      - name: Execute tests Install
+        working-directory: blog
+        run: php artisan test vendor/juzaweb/backend/tests/InstallTest.php
+      - name: Execute tests (Unit and Feature tests)
+        working-directory: blog
+        run: php artisan test
+      - name: Execute tests Update
+        working-directory: blog
+        run: php artisan test vendor/juzaweb/backend/tests/UpdateTest.php

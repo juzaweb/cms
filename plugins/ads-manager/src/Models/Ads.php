@@ -14,7 +14,6 @@ use Juzaweb\Models\Model;
  * @property string $position
  * @property string|null $body
  * @property bool $active
- * @property int|null $site_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static Builder|Ads newModelQuery()

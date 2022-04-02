@@ -39,7 +39,6 @@ use Juzaweb\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CrawContent whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CrawContent whereChannelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CrawContent wherePageId($value)
- * @property int|null $site_id
  * @method static \Illuminate\Database\Eloquent\Builder|CrawContent whereSiteId($value)
  * @property array|null $category_ids
  * @method static \Illuminate\Database\Eloquent\Builder|CrawContent whereCategoryIds($value)

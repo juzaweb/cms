@@ -26,7 +26,6 @@ class CreatePackagesTable extends Migration
             $table->json('data')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->boolean('is_free')->default(0);
-            $table->unsignedBigInteger('site_id')->index()->nullable();
             $table->timestamps();
         });
     }
