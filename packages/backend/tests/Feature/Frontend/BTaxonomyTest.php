@@ -14,7 +14,7 @@ use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\Backend\Tests\TestCase;
 
-class BTestTaxonomy extends TestCase
+class BTaxonomyTest extends TestCase
 {
     public function testTaxonomy()
     {
