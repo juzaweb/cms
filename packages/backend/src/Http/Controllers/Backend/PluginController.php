@@ -12,9 +12,12 @@ class PluginController extends BackendController
 {
     public function index()
     {
-        return view('cms::backend.plugin.index', [
-            'title' => trans('cms::app.plugins'),
-        ]);
+        return view(
+            'cms::backend.plugin.index',
+            [
+                'title' => trans('cms::app.plugins'),
+            ]
+        );
     }
 
     public function getDataTable(Request $request)
@@ -46,21 +49,27 @@ class PluginController extends BackendController
         $data = ArrayPagination::make($results);
         $data = $data->paginate($limit, $page);
 
-        return response()->json([
-            'total' => $total,
-            'rows' => $data->values(),
-        ]);
+        return response()->json(
+            [
+                'total' => $total,
+                'rows' => $data->values(),
+            ]
+        );
     }
 
     public function bulkActions(Request $request)
     {
-        $request->validate([
-            'ids' => 'required',
-            'action' => 'required',
-        ], [], [
-            'ids' => trans('tadcms::app.plugins'),
-            'action' => trans('tadcms::app.action'),
-        ]);
+        $request->validate(
+            [
+                'ids' => 'required',
+                'action' => 'required',
+            ],
+            [],
+            [
+                'ids' => trans('tadcms::app.plugins'),
+                'action' => trans('tadcms::app.action'),
+            ]
+        );
 
         $action = $request->post('action');
         $ids = $request->post('ids');
