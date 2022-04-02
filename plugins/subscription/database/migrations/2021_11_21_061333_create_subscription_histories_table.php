@@ -26,10 +26,7 @@ class CreateSubscriptionHistoriesTable extends Migration
                 $table->unsignedBigInteger('object_id')
                     ->nullable()
                     ->index();
-
-                $table->unsignedBigInteger('site_id')
-                    ->nullable()
-                    ->index();
+                
                 $table->timestamps();
 
                 $table->foreign('user_id')

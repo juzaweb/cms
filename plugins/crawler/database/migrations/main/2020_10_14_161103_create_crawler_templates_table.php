@@ -21,7 +21,6 @@ class CreateCrawlerTemplatesTable extends Migration
                 $table->boolean('auto_leech')->default(0);
                 $table->string('status', 10)->default('active');
                 $table->string('post_status', 10)->default('publish');
-                $table->unsignedBigInteger('site_id')->index()->nullable();
                 $table->unsignedBigInteger('user_id')->index();
                 $table->timestamps();
             }

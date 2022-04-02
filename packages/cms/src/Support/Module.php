@@ -1,13 +1,9 @@
 <?php
 /**
- * @package    tadcms/tadcms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://github.com/tadcms/tadcms
+ * @link       https://github.com/juzaweb/juzacms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 5/1/2021
- * Time: 4:31 PM
  */
 
 namespace Juzaweb\Support;
