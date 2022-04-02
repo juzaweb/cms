@@ -21,7 +21,7 @@ class CreateSubscriptionHistoriesTable extends Migration
                 $table->string('payer_id')->nullable();
                 $table->string('payer_email')->nullable();
 
-                $table->unsignedBigInteger('user_id')->index();
+                $table->unsignedBigInteger('user_id')->nullable()->index();
                 $table->unsignedBigInteger('package_id')->index();
                 $table->unsignedBigInteger('object_id')
                     ->nullable()
