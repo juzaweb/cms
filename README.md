@@ -18,9 +18,13 @@ composer create-project --prefer-dist juzaweb/juzacms blog
 ```
 php artisan juzacms:install
 ```
+- Publish config
+```
+php artisan vendor:publish --tag=cms_config
+```
 
 ## Documentation
-[https://juzaweb.com/cms](https://juzaweb.com/cms)
+View all documentation [https://juzaweb.com/documentation](https://juzaweb.com/documentation)
 
 ## Contributing
 - Contributions are welcome, and are accepted via pull requests. Please review these guidelines before submitting any pull requests.
