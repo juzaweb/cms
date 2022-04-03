@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\Validator;
 
 class CmsServiceProvider extends ServiceProvider
 {
+    protected $basePath = __DIR__ . '/../..';
+    
     public function boot()
     {
         $this->bootMigrations();
@@ -85,19 +87,19 @@ class CmsServiceProvider extends ServiceProvider
         }
         
         $this->mergeConfigFrom(
-            __DIR__ . '/../../config/juzaweb.php',
+            $this->basePath . '/config/juzaweb.php',
             'juzaweb'
         );
         
         $this->mergeConfigFrom(
-            __DIR__ . '/../../config/locales.php',
+            $this->basePath . '/config/locales.php',
             'locales'
         );
     }
     
     protected function bootMigrations()
     {
-        $mainPath = JW_PACKAGE_PATH . '/database/migrations';
+        $mainPath = $this->basePath . '/database/migrations';
         $directories = glob($mainPath . '/*', GLOB_ONLYDIR);
         $paths = array_merge([$mainPath], $directories);
         $this->loadMigrationsFrom($paths);
@@ -107,18 +109,21 @@ class CmsServiceProvider extends ServiceProvider
     {
         $this->publishes(
             [
-                JW_PACKAGE_PATH . '/config/juzaweb.php' => base_path('config/juzaweb.php'),
-                JW_PACKAGE_PATH . '/config/locales.php' => base_path('config/locales.php'),
+                $this->basePath . '/config/juzaweb.php' => base_path('config/juzaweb.php'),
+                $this->basePath . '/config/locales.php' => base_path('config/locales.php'),
             ],
-            'juzaweb_config'
+            'cms_config'
         );
     }
     
     protected function registerSingleton()
     {
-        $this->app->singleton(MacroableModelContract::class, function() {
-            return new MacroableModel();
-        });
+        $this->app->singleton(
+            MacroableModelContract::class,
+            function () {
+                return new MacroableModel();
+            }
+        );
         
         $this->app->singleton(
             ActionRegisterContract::class,
@@ -127,25 +132,40 @@ class CmsServiceProvider extends ServiceProvider
             }
         );
     
-        $this->app->singleton(ConfigContract::class, function ($app) {
-            return new DbConfig($app);
-        });
+        $this->app->singleton(
+            ConfigContract::class,
+            function ($app) {
+                return new DbConfig($app);
+            }
+        );
     
-        $this->app->singleton(ThemeConfigContract::class, function ($app) {
-            return new ThemeConfig($app, jw_current_theme());
-        });
+        $this->app->singleton(
+            ThemeConfigContract::class,
+            function ($app) {
+                return new ThemeConfig($app, jw_current_theme());
+            }
+        );
         
-        $this->app->singleton(HookActionContract::class, function () {
-            return new HookAction();
-        });
+        $this->app->singleton(
+            HookActionContract::class,
+            function () {
+                return new HookAction();
+            }
+        );
         
-        $this->app->singleton(GlobalDataContract::class, function () {
-            return new GlobalData();
-        });
+        $this->app->singleton(
+            GlobalDataContract::class,
+            function () {
+                return new GlobalData();
+            }
+        );
         
-        $this->app->singleton(XssCleanerContract::class, function () {
-            return new XssCleaner();
-        });
+        $this->app->singleton(
+            XssCleanerContract::class,
+            function () {
+                return new XssCleaner();
+            }
+        );
     }
 
     protected function registerProviders()

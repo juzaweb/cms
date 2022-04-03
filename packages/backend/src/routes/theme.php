@@ -17,6 +17,7 @@ use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
 use Juzaweb\Backend\Http\Controllers\Frontend\RouteController;
 use Juzaweb\Seo\Http\Controllers\FeedController;
 use Juzaweb\Seo\Http\Controllers\SitemapController;
+use Juzaweb\Support\Installer;
 use Juzaweb\Support\Route\Auth;
 
 Auth::routes();
@@ -56,12 +57,14 @@ Route::match(
     [SearchController::class, 'ajaxSearch']
 )->name('ajax.search');
 
-Route::post(
-    '{slug}',
-    [PostController::class, 'comment']
-)
-    ->name('comment')
-    ->where('slug', '^(?!admin\-cp|api\/|subscription\/).*$');
-
-Route::get('{slug}', [RouteController::class, 'index'])
-    ->where('slug', '^(?!admin\-cp|api\/|subscription\/).*$');
+if (Installer::alreadyInstalled()) {
+    Route::post(
+        '{slug}',
+        [PostController::class, 'comment']
+    )
+        ->name('comment')
+        ->where('slug', '^(?!admin\-cp|api\/|subscription\/).*$');
+    
+    Route::get('{slug}', [RouteController::class, 'index'])
+        ->where('slug', '^(?!admin\-cp|api\/|subscription\/).*$');
+}
