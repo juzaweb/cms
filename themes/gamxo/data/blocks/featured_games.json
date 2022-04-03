@@ -1,0 +1,83 @@
+{
+    "form": [
+        {
+            "type": "container",
+            "name": "col1",
+            "label": "Column 1",
+            "children": [
+                {
+                    "type": "text",
+                    "name": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "taxonomy",
+                    "name": "taxonomy",
+                    "label": "Category",
+                    "data": {
+                        "post_type": "posts",
+                        "taxonomy": "categories"
+                    }
+                },
+                {
+                    "type": "text",
+                    "name": "limit",
+                    "label": "Limit",
+                    "data": {
+                        "default": 3
+                    }
+                }
+            ]
+        },
+        {
+            "type": "container",
+            "name": "col2",
+            "label": "Column 2",
+            "children": [
+                {
+                    "type": "text",
+                    "name": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "taxonomy",
+                    "name": "taxonomy",
+                    "label": "Category",
+                    "data": {
+                        "post_type": "posts",
+                        "taxonomy": "categories"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "container",
+            "name": "col3",
+            "label": "Column 3",
+            "children": [
+                {
+                    "type": "text",
+                    "name": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "taxonomy",
+                    "name": "taxonomy",
+                    "label": "Category",
+                    "data": {
+                        "post_type": "posts",
+                        "taxonomy": "categories"
+                    }
+                },
+                {
+                    "type": "text",
+                    "name": "limit",
+                    "label": "Limit",
+                    "data": {
+                        "default": 3
+                    }
+                }
+            ]
+        }
+    ]
+}

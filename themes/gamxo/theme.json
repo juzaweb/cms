@@ -1,0 +1,11 @@
+{
+    "name": "gamxo",
+    "title": "Gamxo",
+    "description": "Gamxo description",
+    "author": "Gamxo",
+    "version": "1.0.3",
+    "parent": "",
+    "require": {
+        "juzaweb/image-slider": "^1.0.1"
+    }
+}

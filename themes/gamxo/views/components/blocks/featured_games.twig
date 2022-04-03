@@ -1,0 +1,120 @@
+<section class="post-wrap-layout6">
+    <div class="container">
+        {% set col1Items = get_posts('posts', {
+            limit: data.col1.limit|default(3),
+            taxonomy: data.col1.taxonomy
+        }) %}
+
+        {% set col2Items = get_posts('posts', {
+            limit: 4,
+            taxonomy: data.col2.taxonomy
+        }) %}
+
+        {% set col3Items = get_posts('posts', {
+            limit: data.col3.limit|default(3),
+            taxonomy: data.col3.taxonomy
+        }) %}
+
+        <div class="row gutters-40">
+
+            <div class="col-xl-3 col-lg-4 col-md-6 order-lg-1">
+                <div class="widget widget-most-viewed">
+                    <div class="heading-layout1">
+                        <h3 class="heading-title">{{ data.col1.title }}</h3>
+                    </div>
+                    {% set item = col1Items[0] %}
+                    <div class="grid-post">
+                        <div class="item-img">
+                            <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                            {% set category = get_post_taxonomy(item, 'categories') %}
+                            {% if category %}
+                                <div class="item-tag bg-orange text-white">{{ category.name }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="item-content">
+                            <div class="post-date"><i class="flaticon-clock"></i> {{ item.created_at }}</div>
+                            <h3 class="post-title"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                        </div>
+                    </div>
+
+                    <div class="list-post">
+                        {% set item = col1Items[1] %}
+                        {% if(item) %}
+                        <div class="media">
+                            <div class="item-img">
+                                <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                            </div>
+                            <div class="media-body">
+                                <div class="post-date"><i class="flaticon-clock"></i> {{ item.created_at }}</div>
+                                <h4 class="post-title"><a href="{{ item.url }}">{{ item.title }}</a></h4>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% set item = col1Items[2] %}
+                        {% if(item) %}
+                        <div class="media mb-0 pb-0 border-0">
+                            <div class="item-img">
+                                <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                            </div>
+
+                            <div class="media-body">
+                                <div class="post-date"><i class="flaticon-clock"></i> {{ item.created_at }}</div>
+                                <h4 class="post-title"><a href="{{ item.url }}">{{ item.title }}</a></h4>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-12 col-md-6 order-lg-3">
+                <div class="heading-layout1">
+                    <h2 class="heading-title">{{ data.col3.title }}</h2>
+                </div>
+                <div class="widget-upcoming-post">
+                    <div class="post-list-layout2">
+                        {% for item in col3Items %}
+                        <div class="media">
+                            <div class="item-img">
+                                <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                            </div>
+                            <div class="media-body">
+                                <div class="post-date"><i class="flaticon-clock"></i> {{ item.created_at }}</div>
+                                <h4 class="post-title"><a href="{{ item.url }}">{{ item.title }}</a></h4>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-8 col-md-12 order-lg-2">
+                <div class="heading-layout1">
+                    <h2 class="heading-title">{{ data.col2.title }}</h2>
+                    <div class="heading-icon">
+                        <a href="#" class="active"><i class="flaticon-left-arrow-1"></i></a>
+                        <a href="#"><i class="flaticon-right-arrow"></i></a>
+                    </div>
+                </div>
+                <div class="row gutters-2">
+                    {% for item in col2Items %}
+                    <div class="col-md-6">
+                        <div class="post-grid-layout3 post-grid11">
+                            <div class="post-img">
+                                <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                                {% set category = get_post_taxonomy(item, 'categories') %}
+                                {% if category %}
+                                <div class="item-category bg-green">{{ category.name }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="post-content">
+                                <div class="post-date"><i class="flaticon-clock"></i> {{ item.created_at }}</div>
+                                <h3 class="post-title"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

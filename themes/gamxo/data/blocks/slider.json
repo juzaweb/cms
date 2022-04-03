@@ -1,0 +1,14 @@
+{
+    "label": "Slider",
+    "description": "Slider for home",
+    "form": [
+        {
+            "type": "resource",
+            "label": "Slider",
+            "name": "slider",
+            "data": {
+                "type": "sliders"
+            }
+        }
+    ]
+}

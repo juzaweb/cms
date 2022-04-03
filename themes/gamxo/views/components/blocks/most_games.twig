@@ -1,0 +1,97 @@
+<section class="post-wrap-layout2">
+    <div class="container">
+        <div class="row gutters-40">
+            <div class="col-xl-9">
+                <div class="heading-layout1">
+                    <h2 class="heading-title">{{ data.col1.title }}</h2>
+                    <div class="heading-icon">
+                        <a href="#" class="active"><i class="flaticon-left-arrow-1"></i></a>
+                        <a href="#"><i class="flaticon-right-arrow"></i></a>
+                    </div>
+                </div>
+
+                {% set col1Items = get_posts('posts', {
+                    limit: data.col1.limit|default(5),
+                    taxonomy: data.col1.taxonomy
+                }) %}
+
+                {% set first = col1Items[0] %}
+
+                <div class="row gutters-20">
+                    <div class="col-md-6">
+
+                        <div class="post-list-layout3 post-grid-layout5">
+                            <div class="item-img">
+                                <img src="{{ first.thumbnail }}" alt="Post">
+                            </div>
+                            <div class="item-content">
+                                {% set category = get_post_taxonomy(post, 'categories') %}
+
+                                <div class="item-tag bg-green">{{ category.name }}</div>
+
+                                <div class="post-meta">
+                                    <ul>
+                                        <li><i class="flaticon-clock"></i> {{ first.created_at }}</li>
+                                        <li class="item-author">
+                                            <i class="flaticon-user bg-blueviolet"></i><span>{{ __('By') }}</span>
+                                            <a href="#">{{ first.author.name }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 class="item-title">
+                                    <a href="{{ first.url }}"> {{ first.title }}</a>
+                                </h3>
+                                <p>{{ first.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="post-list-layout2 post-list-layout4">
+                            {% for item in col1Items %}
+                            <div class="media">
+                                <div class="item-img">
+                                    <img src="{{ item.thumbnail }}" alt="{{ item.title }}" width="152">
+                                </div>
+
+                                <div class="media-body">
+                                    <div class="post-date"><i class="flaticon-clock"></i> {{ item.created_at }}</div>
+                                    <h4 class="post-title"><a href="{{ item.url }}">{{ item.title }}</a></h4>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3">
+                <div class="heading-layout1">
+                    <h2 class="heading-title">{{ data.col2.title }}</h2>
+                    <div class="heading-icon">
+                        <a href="#" class="active"><i class="flaticon-left-arrow-1"></i></a>
+                        <a href="#"><i class="flaticon-right-arrow"></i></a>
+                    </div>
+                </div>
+
+                {% set col2Items = get_posts('posts', {
+                    limit: data.col2.limit|default(3),
+                    taxonomy: data.col2.taxonomy
+                }) %}
+
+                {% for item in col2Items %}
+                <div class="post-grid-layout3 post-grid-layout6">
+                    <div class="post-img">
+                        <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-date"><i class="flaticon-clock"></i> {{ item.created_at }}</div>
+                        <h3 class="post-title"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

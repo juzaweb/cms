@@ -1,0 +1,43 @@
+<section class="margin-bottom-30">
+    <div class="container">
+        {% set items = get_posts('posts', {
+            limit: 4,
+            order_by: {
+                "views": "DESC"
+            }
+        }) %}
+
+        <div class="heading-layout1">
+            <h2 class="heading-title">{{ data.title }}</h2>
+            <div class="heading-icon">
+                <a href="#" class="active"><i class="flaticon-left-arrow-1"></i></a>
+                <a href="#"><i class="flaticon-right-arrow"></i></a>
+            </div>
+        </div>
+
+        <div class="row gutters-1">
+            {% for item in items %}
+            <div class="col-lg-3 col-sm-6">
+                <div class="post-grid-layout2 post-grid10">
+                    <div class="item-img">
+                        <img src="{{ item.thumbnail }}" alt="{{ item.title }}">
+                        {% set category = get_post_taxonomy(item, 'categories') %}
+                        {% if category %}
+                            <div class="item-category bg-amaranth">{{ category.name }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="item-content">
+                        <div class="post-date">
+                            <i class="flaticon-clock"></i> {{ item.created_at }}
+                        </div>
+                        <h3 class="post-title">
+                            <a href="{{ item.url }}">{{ item.title }}</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
