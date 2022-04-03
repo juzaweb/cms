@@ -1,0 +1,78 @@
+{
+    "styles": {
+        "js": [
+            "assets/js/main.js"
+        ],
+        "css": [
+            "assets/css/main.css",
+            "https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,700&display=swap"
+        ]
+    },
+    "sidebars": {
+        "sidebar": {
+            "label": "Sidebar"
+        },
+        "footer_column_1": {
+            "label": "Footer column 1"
+        },
+        "footer_column_2": {
+            "label": "Footer column 2"
+        },
+        "footer_column_3": {
+            "label": "Footer column 3"
+        }
+    },
+    "nav_menus": {
+        "primary": {
+            "label": "Primary menu"
+        },
+        "sidebar": {
+            "label": "Sidebar menu"
+        }
+    },
+    "templates": {
+        "home": {
+            "label": "Home",
+            "view": "theme::templates.home",
+            "blocks": {
+                "content": {
+                    "label": "Content"
+                }
+            }
+        }
+    },
+    "widgets": {
+        "categories": {
+            "label": "Categories",
+            "description": "Categories",
+            "view": "theme::components.widgets.categories"
+        },
+        "popular_news": {
+            "label": "Popular games",
+            "description": "Popular games",
+            "view": "theme::components.widgets.popular_news"
+        }
+    },
+    "blocks": {
+        "slider": {
+            "label": "Slider Image",
+            "description": "Slider Home page",
+            "view": "theme::components.blocks.slider"
+        },
+        "featured_games": {
+            "label": "Featured Games",
+            "description": "Featured Games",
+            "view": "theme::components.blocks.featured_games"
+        },
+        "most_viewed": {
+            "label": "Most viewed Games",
+            "description": "Most viewed Games",
+            "view": "theme::components.blocks.most_viewed"
+        },
+        "most_games": {
+            "label": "Most Games",
+            "description": "Most Games",
+            "view": "theme::components.blocks.most_games"
+        }
+    }
+}

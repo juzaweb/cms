@@ -1,0 +1,45 @@
+{% set slider = get_post_resource('sliders', data.slider) %}
+
+{% if slider %}
+    {% set sliderItems =
+        slider.metas.content ?
+            json_decode(slider.metas.content, true) :
+                {}
+    %}
+
+<div class="slider-area slider-layout2 dark-overlay">
+    <div class="bend niceties preview-{{ data.key }}">
+        <div id="ensign-nivoslider-1" class="slides">
+            {% if sliderItems %}
+                {% for index, item in sliderItems %}
+                    <img src="{{ upload_url(item.image) }}" alt="{{ item.title }}" title="#slider-direction-{{ data.key }}-{{ index }}" />
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% if sliderItems %}
+
+        {% for index, item in sliderItems %}
+            <div
+                id="slider-direction-{{ data.key }}-{{ index }}"
+                class="t-cn slider-direction">
+
+                <div class="slider-content s-tb slide-{{ index + 1 }}">
+                    <div class="text-left title-container s-tb-c">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-9">
+                                    <div class="item-date"><i class="flaticon-clock"></i> {{ slider.created_at }}</div>
+                                    <h1 class="item-title"><a href="{{ item.url }}">{{ item.title }}</a></h1>
+                                    <div class="item-paragraph">{{ item.description }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endif %}

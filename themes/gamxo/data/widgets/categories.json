@@ -1,0 +1,19 @@
+{
+    "form": [
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Title"
+        },
+        {
+            "type": "taxonomy",
+            "name": "taxonomies",
+            "label": "Categories",
+            "data": {
+                "post_type": "posts",
+                "taxonomy": "categories",
+                "multiple": true
+            }
+        }
+    ]
+}
