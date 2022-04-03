@@ -1,4 +1,4 @@
-{% extends 'layouts.frontend' %}
+{% extends 'cms::layouts.frontend' %}
 
 {% block content %}
     {% set tags = get_post_taxonomies(post, 'tags', 5) %}
