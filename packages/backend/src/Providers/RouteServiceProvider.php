@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
         $this->mapAssetRoutes();
         $this->mapAdminRoutes();
+        $this->mapThemeRoutes();
     }
 
     protected function mapWebRoutes()
@@ -33,6 +34,11 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->prefix(config('juzaweb.admin_prefix'))
             ->group(__DIR__ . '/../routes/admin.php');
+    }
+    
+    protected function mapThemeRoutes()
+    {
+        Route::middleware('theme')->group(__DIR__ . '/../routes/theme.php');
     }
 
     protected function mapApiRoutes()
