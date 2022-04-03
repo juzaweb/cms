@@ -15,11 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function map()
     {
-        $this->routes(function () {
-            Route::middleware('web')
-                ->group(__DIR__ . '/../routes/web.php');
-        });
+        Route::middleware('web')
+            ->group(__DIR__ . '/../routes/web.php');
     }
 }
