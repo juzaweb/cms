@@ -7,9 +7,6 @@
         "php": "^8.0",
         "juzaweb/cms": "@dev"
     },
-    "require-dev": {
-        "phpunit/phpunit": "8.4 | ^8.5 | ^9.0"
-    },
     "autoload": {
         "psr-4": {
             "Juzaweb\\Installer\\": "src/"
