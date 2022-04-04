@@ -50,15 +50,19 @@ class ThemeController extends BackendController
 
     public function activate(Request $request)
     {
-        $request->validate([
-            'theme' => 'required',
-        ]);
+        $request->validate(
+            [
+                'theme' => 'required',
+            ]
+        );
 
         $theme = $request->post('theme');
         if (! Theme::has($theme)) {
-            return $this->error([
-                'message' => trans('cms::message.theme_not_found'),
-            ]);
+            return $this->error(
+                [
+                    'message' => trans('cms::message.theme_not_found'),
+                ]
+            );
         }
 
         $this->putCache($theme);
@@ -66,6 +70,7 @@ class ThemeController extends BackendController
 
         if ($require = $info->get('require')) {
             $plugins = Plugin::all();
+            $str = [];
             foreach ($require as $plugin => $ver) {
                 if (app('plugins')->isEnabled($plugin)) {
                     continue;
@@ -74,9 +79,21 @@ class ThemeController extends BackendController
                 if (!in_array($plugin, array_keys($plugins))) {
                     $plugins[$plugin] = $plugin;
                 }
-
-                Plugin::enable($plugin);
+                
+                $str[] = "<strong>{$plugin}</strong>";
             }
+    
+            add_backend_message(
+                'require_plugins',
+                [
+                    trans('cms::app.theme_require_plugins') .' '
+                    . implode(', ', $str) . '
+                        . <a href="'. route('admin.themes.require-plugins') .'"><strong>'
+                    . trans('cms::app.activate_plugins')
+                    .'</strong></a>',
+                ],
+                'warning'
+            );
         }
 
         return $this->success(
