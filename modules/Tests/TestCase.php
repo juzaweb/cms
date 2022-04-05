@@ -5,7 +5,6 @@ namespace Juzaweb\Backend\Tests;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Models\User;
-use Tests\CreatesApplication;
 
 abstract class TestCase extends BaseTestCase
 {
