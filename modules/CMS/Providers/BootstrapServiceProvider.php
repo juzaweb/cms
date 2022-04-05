@@ -17,20 +17,22 @@ class BootstrapServiceProvider extends ServiceProvider
     {
         $this->app[RepositoryInterface::class]->boot();
     
-        $this->booted(function () {
-            ActionRegister::init();
+        $this->booted(
+            function () {
+                ActionRegister::init();
         
-            if (Installer::alreadyInstalled()) {
-                $currentTheme = jw_current_theme();
-                $themePath = Theme::getThemePath($currentTheme);
+                if (Installer::alreadyInstalled()) {
+                    $currentTheme = jw_current_theme();
+                    $themePath = Theme::getThemePath($currentTheme);
             
-                if (is_dir($themePath)) {
-                    Theme::set($currentTheme);
+                    if (is_dir($themePath)) {
+                        Theme::set($currentTheme);
+                    }
                 }
-            }
         
-            do_action('juzaweb.init');
-        });
+                do_action('juzaweb.init');
+            }
+        );
     }
 
     /**

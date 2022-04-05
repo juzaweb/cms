@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Juzaweb\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
 use Closure;
@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect('/');
             }
         }
 

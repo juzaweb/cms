@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Juzaweb\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
