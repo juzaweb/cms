@@ -8,7 +8,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Frontend;
 
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;

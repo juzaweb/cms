@@ -12,13 +12,13 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Facades\ThemeConfig;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeConfig;
 use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Menu;
-use Juzaweb\Support\Theme\BackendMenuBuilder;
-use Juzaweb\Support\Theme\MenuBuilder;
+use Juzaweb\CMS\Support\Theme\BackendMenuBuilder;
+use Juzaweb\CMS\Support\Theme\MenuBuilder;
 use TwigBridge\Facade\Twig;
 use Illuminate\Support\Arr;
 
@@ -370,7 +370,7 @@ if (! function_exists('comment_template')) {
     /**
      * Show comments frontend
      *
-     * @param \Juzaweb\Traits\PostTypeModel $post
+     * @param \Juzaweb\CMS\Traits\PostTypeModel $post
      * @param string $view
      * @return \Illuminate\View\View
      */

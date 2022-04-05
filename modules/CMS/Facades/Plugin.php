@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Facade;
  * @method getDomainName()
  * @method bool isEnabled()
  *
- * @see \Juzaweb\Support\Module
+ * @see \Juzaweb\CMS\Support\Module
  */
 class Plugin extends Facade
 {

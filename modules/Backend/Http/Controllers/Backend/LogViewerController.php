@@ -15,7 +15,7 @@ use Arcanedev\LogViewer\Exceptions\LogNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class LogViewerController extends BackendController
 {

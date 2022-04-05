@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class TaxonomyController extends FrontendController
 {

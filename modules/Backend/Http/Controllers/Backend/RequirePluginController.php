@@ -11,8 +11,8 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class RequirePluginController extends BackendController
 {

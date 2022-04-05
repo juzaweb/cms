@@ -4,7 +4,7 @@ namespace Juzaweb\Backend\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Juzaweb\Facades\GlobalData;
+use Juzaweb\CMS\Facades\GlobalData;
 
 trait HookActionGet
 {

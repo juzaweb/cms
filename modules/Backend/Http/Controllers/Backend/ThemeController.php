@@ -7,10 +7,10 @@ use Juzaweb\Backend\Http\Resources\ThemeResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Http\Controllers\BackendController;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Facades\Plugin;
-use Juzaweb\Support\ArrayPagination;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Support\ArrayPagination;
 
 class ThemeController extends BackendController
 {

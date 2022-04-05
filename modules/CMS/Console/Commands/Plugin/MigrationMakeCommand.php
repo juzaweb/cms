@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\Console\Commands\Plugin;
+namespace Juzaweb\CMS\Console\Commands\Plugin;
 
 use Illuminate\Support\Str;
-use Juzaweb\Support\Config\GenerateConfigReader;
-use Juzaweb\Support\Migrations\NameParser;
-use Juzaweb\Support\Migrations\SchemaParser;
-use Juzaweb\Support\Stub;
-use Juzaweb\Traits\ModuleCommandTrait;
+use Juzaweb\CMS\Support\Config\GenerateConfigReader;
+use Juzaweb\CMS\Support\Migrations\NameParser;
+use Juzaweb\CMS\Support\Migrations\SchemaParser;
+use Juzaweb\CMS\Support\Stub;
+use Juzaweb\CMS\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

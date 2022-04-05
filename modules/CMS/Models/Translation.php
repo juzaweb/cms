@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Models;
+namespace Juzaweb\CMS\Models;
 
 /**
- * Juzaweb\Models\Translation
+ * Juzaweb\CMS\Models\Translation
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Translation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Translation newQuery()

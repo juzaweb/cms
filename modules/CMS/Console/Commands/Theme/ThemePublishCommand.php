@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Console\Commands\Theme;
+namespace Juzaweb\CMS\Console\Commands\Theme;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Juzaweb\Facades\Theme;
+use Juzaweb\CMS\Facades\Theme;
 
 class ThemePublishCommand extends Command
 {

@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
-use Juzaweb\Traits\PostTypeController as PostTypeControllerTrait;
+use Juzaweb\CMS\Traits\PostTypeController as PostTypeControllerTrait;
 
 abstract class PostTypeController
 {

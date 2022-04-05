@@ -8,11 +8,11 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
-use Juzaweb\Facades\Theme;
+use Juzaweb\CMS\Facades\Theme;
 use TwigBridge\Facade\Twig;
 
 abstract class Widget

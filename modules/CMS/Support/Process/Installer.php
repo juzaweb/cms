@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Support\Process;
+namespace Juzaweb\CMS\Support\Process;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Juzaweb\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Contracts\RepositoryInterface;
 use Symfony\Component\Process\Process;
 
 class Installer
@@ -25,7 +25,7 @@ class Installer
 
     /**
      * The plugin repository instance.
-     * @var \Juzaweb\Contracts\RepositoryInterface
+     * @var \Juzaweb\CMS\Contracts\RepositoryInterface
      */
     protected $repository;
 
@@ -90,7 +90,7 @@ class Installer
 
     /**
      * Set the plugin repository instance.
-     * @param \Juzaweb\Contracts\RepositoryInterface $repository
+     * @param \Juzaweb\CMS\Contracts\RepositoryInterface $repository
      * @return $this
      */
     public function setRepository(RepositoryInterface $repository)

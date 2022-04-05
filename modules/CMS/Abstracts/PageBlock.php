@@ -8,10 +8,10 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\View\View;
-use Juzaweb\Facades\Theme;
+use Juzaweb\CMS\Facades\Theme;
 use TwigBridge\Facade\Twig;
 
 abstract class PageBlock

@@ -5,10 +5,10 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\UserDataTable;
 use Juzaweb\Models\User;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends BackendController

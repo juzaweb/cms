@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class ReadingController extends BackendController
 {

@@ -8,10 +8,10 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Theme;
+namespace Juzaweb\CMS\Support\Theme;
 
-use Juzaweb\Abstracts\MenuBox;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Abstracts\MenuBox;
+use Juzaweb\CMS\Backend\Facades\HookAction;
 
 class TaxonomyMenuBox extends MenuBox
 {

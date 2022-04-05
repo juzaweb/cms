@@ -8,10 +8,10 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Models;
+namespace Juzaweb\CMS\Models;
 
 /**
- * Juzaweb\Models\Language
+ * Juzaweb\CMS\Models\Language
  *
  * @property int $id
  * @property string $code

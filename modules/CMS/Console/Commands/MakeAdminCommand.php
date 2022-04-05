@@ -8,12 +8,12 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Console\Commands;
+namespace Juzaweb\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class MakeAdminCommand extends Command

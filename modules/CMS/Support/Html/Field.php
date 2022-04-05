@@ -8,12 +8,12 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Html;
+namespace Juzaweb\CMS\Support\Html;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class Field
 {

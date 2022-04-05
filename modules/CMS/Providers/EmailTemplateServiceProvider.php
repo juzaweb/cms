@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;

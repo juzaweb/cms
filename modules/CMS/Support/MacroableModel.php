@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

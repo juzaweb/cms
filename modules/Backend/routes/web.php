@@ -12,8 +12,8 @@ Route::group([
     'middleware' => 'guest',
     'as' => 'admin.',
     'prefix' => config('juzaweb.admin_prefix'),
-    'namespace' => 'Juzaweb\Http\Controllers',
+    'namespace' => 'Juzaweb\CMS\Http\Controllers',
 ], function () {
-    \Juzaweb\Support\Route\Auth::routes();
+    \Juzaweb\CMS\Support\Route\Auth::routes();
 });
 

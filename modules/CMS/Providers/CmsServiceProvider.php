@@ -1,28 +1,28 @@
 <?php
 
-namespace Juzaweb\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Barryvdh\Debugbar\ServiceProvider as DebugbarServiceProvider;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\Contracts\ActionRegisterContract;
-use Juzaweb\Contracts\MacroableModelContract;
-use Juzaweb\Support\ActionRegister;
-use Juzaweb\Support\MacroableModel;
-use Juzaweb\Support\Theme\ThemeConfig;
-use Juzaweb\Support\Config as DbConfig;
-use Juzaweb\Contracts\ConfigContract;
-use Juzaweb\Contracts\ThemeConfigContract;
-use Juzaweb\Contracts\GlobalDataContract;
-use Juzaweb\Backend\Contracts\HookActionContract;
-use Juzaweb\Contracts\XssCleanerContract;
-use Juzaweb\Support\GlobalData;
-use Juzaweb\Backend\Support\HookAction;
-use Juzaweb\Support\XssCleaner;
-use Juzaweb\Support\Validators\ModelExists;
-use Juzaweb\Support\Validators\ModelUnique;
-use Juzaweb\Support\Validators\ReCaptcha;
-use Juzaweb\Support\Validators\DomainValidator;
+use Juzaweb\CMS\Contracts\ActionRegisterContract;
+use Juzaweb\CMS\Contracts\MacroableModelContract;
+use Juzaweb\CMS\Support\ActionRegister;
+use Juzaweb\CMS\Support\MacroableModel;
+use Juzaweb\CMS\Support\Theme\ThemeConfig;
+use Juzaweb\CMS\Support\Config as DbConfig;
+use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Contracts\ThemeConfigContract;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Backend\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\XssCleanerContract;
+use Juzaweb\CMS\Support\GlobalData;
+use Juzaweb\CMS\Backend\Support\HookAction;
+use Juzaweb\CMS\Support\XssCleaner;
+use Juzaweb\CMS\Support\Validators\ModelExists;
+use Juzaweb\CMS\Support\Validators\ModelUnique;
+use Juzaweb\CMS\Support\Validators\ReCaptcha;
+use Juzaweb\CMS\Support\Validators\DomainValidator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;

@@ -17,8 +17,8 @@ use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
 use Juzaweb\Backend\Http\Controllers\Frontend\RouteController;
 use Juzaweb\Seo\Http\Controllers\FeedController;
 use Juzaweb\Seo\Http\Controllers\SitemapController;
-use Juzaweb\Support\Installer;
-use Juzaweb\Support\Route\Auth;
+use Juzaweb\CMS\Support\Installer;
+use Juzaweb\CMS\Support\Route\Auth;
 
 Auth::routes();
 

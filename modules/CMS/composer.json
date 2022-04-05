@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Juzaweb\\": "src/"
+            "Juzaweb\CMS\\": "src/"
         },
         "files": [
             "src/Helpers/define.php"
@@ -35,7 +35,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Juzaweb\\Providers\\CmsServiceProvider"
+                "Juzaweb\CMS\\Providers\\CmsServiceProvider"
             ]
         }
     }

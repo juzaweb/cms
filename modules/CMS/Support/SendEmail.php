@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Juzaweb\Backend\Models\EmailList;
+use Juzaweb\CMS\Backend\Models\EmailList;
 use TwigBridge\Facade\Twig;
 
 class SendEmail

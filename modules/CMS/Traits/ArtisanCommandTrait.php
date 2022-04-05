@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;

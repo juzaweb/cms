@@ -4,7 +4,7 @@ namespace $CLASS_NAMESPACE$;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 $USE_NAMESPACE$
 class $CLASS$ extends DataTable
 {

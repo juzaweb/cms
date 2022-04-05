@@ -3,8 +3,8 @@
 namespace Juzaweb\Backend\Http\Controllers\Frontend;
 
 use Juzaweb\Backend\Events\PostViewed;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;

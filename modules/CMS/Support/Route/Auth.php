@@ -8,13 +8,13 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Route;
+namespace Juzaweb\CMS\Support\Route;
 
 use Illuminate\Support\Facades\Route;
-use Juzaweb\Backend\Http\Controllers\Auth\LoginController;
-use Juzaweb\Backend\Http\Controllers\Auth\RegisterController;
-use Juzaweb\Backend\Http\Controllers\Auth\ForgotPasswordController;
-use Juzaweb\Backend\Http\Controllers\Auth\ResetPasswordController;
+use Juzaweb\CMS\Backend\Http\Controllers\Auth\LoginController;
+use Juzaweb\CMS\Backend\Http\Controllers\Auth\RegisterController;
+use Juzaweb\CMS\Backend\Http\Controllers\Auth\ForgotPasswordController;
+use Juzaweb\CMS\Backend\Http\Controllers\Auth\ResetPasswordController;
 
 class Auth
 {

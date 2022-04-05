@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Countable;
 use Illuminate\Cache\CacheManager;
@@ -11,13 +11,13 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
-use Juzaweb\Contracts\RepositoryInterface;
-use Juzaweb\Exceptions\InvalidAssetPath;
-use Juzaweb\Exceptions\ModuleNotFoundException;
-use Juzaweb\Support\Collection;
-use Juzaweb\Support\Json;
-use Juzaweb\Support\Process\Installer;
-use Juzaweb\Support\Process\Updater;
+use Juzaweb\CMS\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Exceptions\InvalidAssetPath;
+use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Support\Collection;
+use Juzaweb\CMS\Support\Json;
+use Juzaweb\CMS\Support\Process\Installer;
+use Juzaweb\CMS\Support\Process\Updater;
 
 abstract class FileRepository implements RepositoryInterface, Countable
 {
@@ -135,7 +135,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * @param Container $app
      * @param string $args
      * @param string $path
-     * @return \Juzaweb\Abstracts\Plugin
+     * @return \Juzaweb\CMS\Abstracts\Plugin
      */
     abstract protected function createModule(...$args);
 
@@ -502,7 +502,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
     /**
      * Get module used for cli session.
      * @return string
-     * @throws \Juzaweb\Exceptions\ModuleNotFoundException
+     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
      */
     public function getUsedNow(): string
     {
@@ -572,7 +572,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * Enabling a specific module.
      * @param string $name
      * @return void
-     * @throws \Juzaweb\Exceptions\ModuleNotFoundException
+     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
      */
     public function enable($name)
     {
@@ -583,7 +583,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
      * Disabling a specific module.
      * @param string $name
      * @return void
-     * @throws \Juzaweb\Exceptions\ModuleNotFoundException
+     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
      */
     public function disable($name)
     {

@@ -11,12 +11,12 @@
 namespace Juzaweb\Backend\Actions;
 
 use Juzaweb\Abstracts\Action;
-use Juzaweb\Facades\Theme;
+use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\Backend\Http\Controllers\Frontend\PageController;
 use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Support\Theme\CustomMenuBox;
+use Juzaweb\CMS\Support\Theme\CustomMenuBox;
 use Juzaweb\Version;
 
 class MenuAction extends Action

@@ -4,9 +4,9 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Facades\Plugin;
-use Juzaweb\Http\Controllers\BackendController;
-use Juzaweb\Support\ArrayPagination;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\ArrayPagination;
 
 class PluginController extends BackendController
 {

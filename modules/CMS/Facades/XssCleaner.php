@@ -8,15 +8,15 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\Contracts\XssCleanerContract;
+use Juzaweb\CMS\Contracts\XssCleanerContract;
 
 /**
  * @method static string clean(string $value)
  *
- * @see \Juzaweb\Support\XssCleaner
+ * @see \Juzaweb\CMS\Support\XssCleaner
  */
 class XssCleaner extends Facade
 {

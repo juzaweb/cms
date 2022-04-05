@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Traits;
+namespace Juzaweb\CMS\Traits;
 
 trait MigrationLoaderTrait
 {

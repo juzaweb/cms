@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\Menu;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\Models\User;
-use Juzaweb\Support\ArrayPagination;
+use Juzaweb\CMS\Support\ArrayPagination;
 
 class LoadDataController extends BackendController
 {

@@ -4,8 +4,8 @@ namespace Juzaweb\Backend\Http\Controllers\Frontend;
 
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Http\Controllers\Controller;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Http\Controllers\Controller;
 
 class AssetController extends Controller
 {

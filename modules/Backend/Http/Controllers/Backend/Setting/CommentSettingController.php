@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use Juzaweb\Http\Controllers\Controller;
+use Juzaweb\CMS\Http\Controllers\Controller;
 use Juzaweb\Models\Config;
 
 class CommentSettingController extends Controller

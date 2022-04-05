@@ -8,13 +8,13 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Arr;
 
 /**
- * Juzaweb\Models\Model
+ * Juzaweb\CMS\Models\Model
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Model newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Model newQuery()

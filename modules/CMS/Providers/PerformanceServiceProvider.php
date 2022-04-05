@@ -8,12 +8,12 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\Support\BladeMinifyCompiler;
+use Juzaweb\CMS\Support\BladeMinifyCompiler;
 
 class PerformanceServiceProvider extends ServiceProvider
 {

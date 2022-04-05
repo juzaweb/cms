@@ -12,8 +12,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Juzaweb\Backend\Traits\HookActionGet;
 use Juzaweb\Backend\Traits\HookActionRegister;
-use Juzaweb\Facades\GlobalData;
-use Juzaweb\Facades\Hook;
+use Juzaweb\CMS\Facades\GlobalData;
+use Juzaweb\CMS\Facades\Hook;
 
 class HookAction
 {

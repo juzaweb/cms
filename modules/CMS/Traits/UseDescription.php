@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;

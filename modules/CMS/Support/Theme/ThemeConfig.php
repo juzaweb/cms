@@ -8,10 +8,10 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Theme;
+namespace Juzaweb\CMS\Support\Theme;
 
 use Illuminate\Cache\CacheManager;
-use Juzaweb\Models\ThemeConfig as ConfigModel;
+use Juzaweb\CMS\Models\ThemeConfig as ConfigModel;
 use Illuminate\Container\Container;
 
 class ThemeConfig

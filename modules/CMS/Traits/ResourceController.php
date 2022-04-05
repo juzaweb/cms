@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -227,7 +227,7 @@ trait ResourceController
      * After Save model
      *
      * @param array $data
-     * @param \Juzaweb\Models\Model $model
+     * @param \Juzaweb\CMS\Models\Model $model
      * @param mixed $params
      */
     protected function afterSave($data, $model, ...$params)
@@ -237,7 +237,7 @@ trait ResourceController
 
     /**
      * @param $params
-     * @return \Juzaweb\Models\ResourceModel
+     * @return \Juzaweb\CMS\Models\ResourceModel
      */
     protected function makeModel(...$params)
     {
@@ -336,7 +336,7 @@ trait ResourceController
     /**
      * Get data table resource
      *
-     * @return \Juzaweb\Abstracts\DataTable
+     * @return \Juzaweb\CMS\Abstracts\DataTable
      */
     abstract protected function getDataTable(...$params);
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\Contracts\RepositoryInterface;
-use Juzaweb\Support\Installer;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Facades\ActionRegister;
+use Juzaweb\CMS\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Support\Installer;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ActionRegister;
 
 class BootstrapServiceProvider extends ServiceProvider
 {

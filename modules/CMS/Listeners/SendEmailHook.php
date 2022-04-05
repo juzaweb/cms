@@ -6,12 +6,12 @@
  * Time: 2:50 PM
  */
 
-namespace Juzaweb\Listeners;
+namespace Juzaweb\CMS\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Juzaweb\Events\EmailHook;
-use Juzaweb\Backend\Models\EmailTemplate;
-use Juzaweb\Support\Email;
+use Juzaweb\CMS\Events\EmailHook;
+use Juzaweb\CMS\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Support\Email;
 
 class SendEmailHook implements ShouldQueue
 {

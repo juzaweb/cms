@@ -3,8 +3,8 @@
 namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Intervention\Image\Facades\Image;
-use Juzaweb\Support\FileManager\Events\ImageIsCropping;
-use Juzaweb\Support\FileManager\Events\ImageWasCropped;
+use Juzaweb\CMS\Support\FileManager\Events\ImageIsCropping;
+use Juzaweb\CMS\Support\FileManager\Events\ImageWasCropped;
 
 class CropController extends FileManagerController
 {

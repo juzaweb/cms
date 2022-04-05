@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\EmailTemplateDataTable;
 use Juzaweb\Backend\Models\EmailTemplate;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class EmailTemplateController extends BackendController
 {

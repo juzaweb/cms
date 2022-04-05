@@ -8,12 +8,12 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Theme;
+namespace Juzaweb\CMS\Support\Theme;
 
 use Illuminate\Support\Collection;
-use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Backend\Http\Resources\MenuItemResource;
-use Juzaweb\Backend\Models\MenuItem;
+use Juzaweb\CMS\Backend\Facades\HookAction;
+use Juzaweb\CMS\Backend\Http\Resources\MenuItemResource;
+use Juzaweb\CMS\Backend\Models\MenuItem;
 
 class BackendMenuBuilder
 {

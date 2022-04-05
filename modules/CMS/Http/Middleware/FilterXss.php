@@ -8,10 +8,10 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Http\Middleware;
+namespace Juzaweb\CMS\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\TransformsRequest;
-use Juzaweb\Support\XssCleaner;
+use Juzaweb\CMS\Support\XssCleaner;
 
 class FilterXss extends TransformsRequest
 {

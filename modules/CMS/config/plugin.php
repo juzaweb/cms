@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-use Juzaweb\Support\Activators\DbActivator;
+use Juzaweb\CMS\Support\Activators\DbActivator;
 
 return [
     /*

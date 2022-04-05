@@ -6,14 +6,14 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Providers;
+namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\Facades\Blade;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Support\Installer;
-use Juzaweb\Support\ServiceProvider;
-use Juzaweb\Contracts\EventyContract;
-use Juzaweb\Support\Hooks\Events;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Support\Installer;
+use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\CMS\Contracts\EventyContract;
+use Juzaweb\CMS\Support\Hooks\Events;
 
 class HookActionServiceProvider extends ServiceProvider
 {
@@ -23,14 +23,14 @@ class HookActionServiceProvider extends ServiceProvider
          * Adds a directive in Blade for actions
          */
         Blade::directive('do_action', function ($expression) {
-            return "<?php app(\Juzaweb\Contracts\EventyContract::class)->action({$expression}); ?>";
+            return "<?php app(\Juzaweb\CMS\Contracts\EventyContract::class)->action({$expression}); ?>";
         });
 
         /*
          * Adds a directive in Blade for filters
          */
         Blade::directive('apply_filters', function ($expression) {
-            return "<?php echo app(\Juzaweb\Contracts\EventyContract::class)->filter({$expression}); ?>";
+            return "<?php echo app(\Juzaweb\CMS\Contracts\EventyContract::class)->filter({$expression}); ?>";
         });
 
         /*$this->app->booted(function () {

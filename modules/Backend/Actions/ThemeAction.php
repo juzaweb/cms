@@ -13,9 +13,9 @@ namespace Juzaweb\Backend\Actions;
 use Illuminate\Support\Arr;
 use Juzaweb\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Support\DefaultPageBlock;
-use Juzaweb\Support\DefaultWidget;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Support\DefaultPageBlock;
+use Juzaweb\CMS\Support\DefaultWidget;
 use TwigBridge\Facade\Twig;
 
 class ThemeAction extends Action

@@ -4,7 +4,7 @@ namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Juzaweb\Http\Controllers\Controller;
+use Juzaweb\CMS\Http\Controllers\Controller;
 
 class FileManagerController extends Controller
 {

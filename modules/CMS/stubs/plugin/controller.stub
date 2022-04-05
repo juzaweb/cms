@@ -2,7 +2,7 @@
 
 namespace $CLASS_NAMESPACE$;
 
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class $CLASS$ extends BackendController
 {

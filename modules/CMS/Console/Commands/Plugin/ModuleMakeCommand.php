@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Console\Commands\Plugin;
+namespace Juzaweb\CMS\Console\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Juzaweb\Contracts\ActivatorInterface;
-use Juzaweb\Support\Generators\ModuleGenerator;
+use Juzaweb\CMS\Contracts\ActivatorInterface;
+use Juzaweb\CMS\Support\Generators\ModuleGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

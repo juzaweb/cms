@@ -5,7 +5,7 @@ namespace Juzaweb\Backend\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class SearchController extends FrontendController
 {

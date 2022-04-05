@@ -8,10 +8,10 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Models;
+namespace Juzaweb\CMS\Models;
 
 /**
- * Juzaweb\Models\Job
+ * Juzaweb\CMS\Models\Job
  *
  * @property int $id
  * @property string $queue

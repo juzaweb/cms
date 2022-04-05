@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Support\Macros;
+namespace Juzaweb\CMS\Support\Macros;
 
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Controllers\Backend\TaxonomyController;
-use Juzaweb\Backend\Http\Controllers\Backend\CommentController;
+use Juzaweb\CMS\Backend\Http\Controllers\Backend\TaxonomyController;
+use Juzaweb\CMS\Backend\Http\Controllers\Backend\CommentController;
 
 class RouterMacros
 {

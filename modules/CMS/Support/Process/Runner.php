@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Support\Process;
+namespace Juzaweb\CMS\Support\Process;
 
-use Juzaweb\Contracts\RepositoryInterface;
-use Juzaweb\Contracts\RunableInterface;
+use Juzaweb\CMS\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Contracts\RunableInterface;
 
 class Runner implements RunableInterface
 {

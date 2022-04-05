@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Route;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Facades\HookAction;
 
 class PageController extends BackendController

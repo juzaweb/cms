@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Console\Commands\Theme;
+namespace Juzaweb\CMS\Console\Commands\Theme;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;

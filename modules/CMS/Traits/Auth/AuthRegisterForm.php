@@ -8,15 +8,15 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Traits\Auth;
+namespace Juzaweb\CMS\Traits\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Juzaweb\Backend\Events\RegisterSuccessful;
-use Juzaweb\Models\User;
-use Juzaweb\Traits\ResponseMessage;
+use Juzaweb\CMS\Backend\Events\RegisterSuccessful;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Traits\ResponseMessage;
 
 trait AuthRegisterForm
 {

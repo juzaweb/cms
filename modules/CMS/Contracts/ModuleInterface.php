@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 interface ModuleInterface
 {

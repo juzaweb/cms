@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Exceptions;
+namespace Juzaweb\CMS\Exceptions;
 
 class InvalidJsonException extends \Exception
 {

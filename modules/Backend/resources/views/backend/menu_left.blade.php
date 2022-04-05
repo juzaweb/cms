@@ -1,7 +1,7 @@
 <ul class="juzaweb__menuLeft__navigation">
     @php
         use Juzaweb\Backend\Facades\HookAction;
-        use Juzaweb\Support\MenuCollection;
+        use Juzaweb\CMS\Support\MenuCollection;
 
         global $jw_user;
 

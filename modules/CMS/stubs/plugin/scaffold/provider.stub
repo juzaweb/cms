@@ -2,7 +2,7 @@
 
 namespace $NAMESPACE$;
 
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
 class $CLASS$ extends ServiceProvider

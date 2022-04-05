@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Observers;
 
 use Juzaweb\Backend\Models\Menu;
 use Illuminate\Support\Facades\Cache;
-use Juzaweb\Facades\Site;
+use Juzaweb\CMS\Facades\Site;
 
 class MenuObserver
 {

@@ -12,10 +12,10 @@
  * Time: 10:10 PM
  */
 
-namespace Juzaweb\Http\Controllers;
+namespace Juzaweb\CMS\Http\Controllers;
 
-use Juzaweb\Abstracts\Action;
-use Juzaweb\Traits\ResponseMessage;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Traits\ResponseMessage;
 
 class BackendController extends Controller
 {

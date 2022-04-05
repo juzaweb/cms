@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Console\Commands\Plugin;
+namespace Juzaweb\CMS\Console\Commands\Plugin;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;

@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Auth;
 
-use Juzaweb\Http\Controllers\Controller;
-use Juzaweb\Traits\Auth\AuthResetPassword;
+use Juzaweb\CMS\Http\Controllers\Controller;
+use Juzaweb\CMS\Traits\Auth\AuthResetPassword;
 
 class ResetPasswordController extends Controller
 {

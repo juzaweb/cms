@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb;
+namespace Juzaweb\CMS;
 
 use Illuminate\Foundation\Application as BaseApplication;
 

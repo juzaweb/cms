@@ -12,7 +12,7 @@
  * Time: 10:16 PM
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
 class MinifyHtml
 {

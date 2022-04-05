@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\View\Compilers\BladeCompiler as BaseCompiler;
 

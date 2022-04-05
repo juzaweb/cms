@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Validators;
+namespace Juzaweb\CMS\Support\Validators;
 
 
 class DomainValidator

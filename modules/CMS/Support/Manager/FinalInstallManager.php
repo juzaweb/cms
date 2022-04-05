@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Support\Manager;
+namespace Juzaweb\CMS\Support\Manager;
 
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;

@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Traits;
+namespace Juzaweb\CMS\Traits;
 
-use Juzaweb\Models\Search;
+use Juzaweb\CMS\Models\Search;
 
 trait PostTypeSearch
 {

@@ -8,19 +8,19 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Juzaweb\Support\Config\GenerateConfigReader;
-use Juzaweb\Traits\ModuleCommandTrait;
+use Juzaweb\CMS\Support\Config\GenerateConfigReader;
+use Juzaweb\CMS\Traits\ModuleCommandTrait;
 
 abstract class ResourceCommand extends Command
 {
     use ModuleCommandTrait;
     /**
-     * @var \Juzaweb\Abstracts\Plugin
+     * @var \Juzaweb\CMS\Abstracts\Plugin
      */
     protected $module;
 

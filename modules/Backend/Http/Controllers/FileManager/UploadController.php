@@ -4,7 +4,7 @@ namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Juzaweb\Support\FileManager;
+use Juzaweb\CMS\Support\FileManager;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;

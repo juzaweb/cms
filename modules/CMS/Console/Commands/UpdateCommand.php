@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Console\Commands;
+namespace Juzaweb\CMS\Console\Commands;
 
 use Codedge\Updater\UpdaterManager;
 use Illuminate\Console\Command;

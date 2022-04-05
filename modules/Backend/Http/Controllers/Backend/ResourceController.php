@@ -11,10 +11,10 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\ResourceDatatable;
 use Juzaweb\Backend\Models\Resource;
-use Juzaweb\Traits\ResourceController as ResourceControllerTrait;
+use Juzaweb\CMS\Traits\ResourceController as ResourceControllerTrait;
 
 class ResourceController extends BackendController
 {

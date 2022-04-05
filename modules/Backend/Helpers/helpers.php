@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Juzaweb\Facades\Config;
-use Juzaweb\Facades\Hook;
+use Juzaweb\CMS\Facades\Config;
+use Juzaweb\CMS\Facades\Hook;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\XssCleaner;
+use Juzaweb\CMS\Facades\XssCleaner;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Models\User;
-use Juzaweb\Support\Breadcrumb;
+use Juzaweb\CMS\Support\Breadcrumb;
 
 if (! function_exists('e_html')) {
     function e_html($str)

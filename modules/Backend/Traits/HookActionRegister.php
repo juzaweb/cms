@@ -4,10 +4,10 @@ namespace Juzaweb\Backend\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Juzaweb\Facades\GlobalData;
+use Juzaweb\CMS\Facades\GlobalData;
 use Illuminate\Support\Str;
-use Juzaweb\Support\Theme\PostTypeMenuBox;
-use Juzaweb\Support\Theme\TaxonomyMenuBox;
+use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
+use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
 use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
 use Juzaweb\Backend\Http\Controllers\Frontend\TaxonomyController;
 use Juzaweb\Backend\Models\Post;

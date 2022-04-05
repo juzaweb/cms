@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Juzaweb\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class PermalinkController extends BackendController
 {

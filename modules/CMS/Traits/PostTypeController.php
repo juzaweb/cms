@@ -8,17 +8,17 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Abstracts\Action;
-use Juzaweb\Backend\Events\AfterPostSave;
-use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
-use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Backend\Events\AfterPostSave;
+use Juzaweb\CMS\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Backend\Http\Datatables\PostTypeDataTable;
+use Juzaweb\CMS\Backend\Models\Post;
 
 trait PostTypeController
 {
@@ -111,7 +111,7 @@ trait PostTypeController
     /**
      * Get data table resource
      *
-     * @return \Juzaweb\Abstracts\DataTable
+     * @return \Juzaweb\CMS\Abstracts\DataTable
      * @throws \Exception
      */
     protected function getDataTable(...$params)

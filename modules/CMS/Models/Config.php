@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\Models;
+namespace Juzaweb\CMS\Models;
 
-use Juzaweb\Facades\GlobalData;
+use Juzaweb\CMS\Facades\GlobalData;
 
 /**
- * Juzaweb\Models\Config
+ * Juzaweb\CMS\Models\Config
  *
  * @property int $id
  * @property string $code

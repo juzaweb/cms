@@ -15,7 +15,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Frontend;
 
 use Illuminate\Support\Facades\App;
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class RouteController extends FrontendController
 {

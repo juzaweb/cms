@@ -8,17 +8,17 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Console\Commands;
+namespace Juzaweb\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Models\User;
-use Juzaweb\Support\Manager\DatabaseManager;
-use Juzaweb\Support\Manager\FinalInstallManager;
-use Juzaweb\Support\Manager\InstalledFileManager;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Manager\DatabaseManager;
+use Juzaweb\CMS\Support\Manager\FinalInstallManager;
+use Juzaweb\CMS\Support\Manager\InstalledFileManager;
 
 class InstallCommand extends Command
 {

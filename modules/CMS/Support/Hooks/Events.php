@@ -1,20 +1,20 @@
 <?php
 
-namespace Juzaweb\Support\Hooks;
+namespace Juzaweb\CMS\Support\Hooks;
 
 class Events
 {
     /**
      * Holds all registered actions.
      *
-     * @var \Juzaweb\Support\Hooks\Action
+     * @var \Juzaweb\CMS\Support\Hooks\Action
      */
     protected $action;
 
     /**
      * Holds all registered filters.
      *
-     * @var \Juzaweb\Support\Hooks\Filter
+     * @var \Juzaweb\CMS\Support\Hooks\Filter
      */
     protected $filter;
 
@@ -30,7 +30,7 @@ class Events
     /**
      * Get the action instance.
      *
-     * @return \Juzaweb\Support\Hooks\Action
+     * @return \Juzaweb\CMS\Support\Hooks\Action
      */
     public function getAction()
     {
@@ -40,7 +40,7 @@ class Events
     /**
      * Get the action instance.
      *
-     * @return \Juzaweb\Support\Hooks\Filter
+     * @return \Juzaweb\CMS\Support\Hooks\Filter
      */
     public function getFilter()
     {

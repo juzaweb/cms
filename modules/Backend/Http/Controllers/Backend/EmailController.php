@@ -4,8 +4,8 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\Http\Controllers\BackendController;
-use Juzaweb\Support\Email;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\Email;
 
 class EmailController extends BackendController
 {

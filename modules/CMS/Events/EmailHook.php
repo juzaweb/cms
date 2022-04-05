@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Events;
+namespace Juzaweb\CMS\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;

@@ -11,7 +11,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Juzaweb\Http\Controllers\ApiController;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
 

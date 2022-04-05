@@ -12,7 +12,7 @@
  * Time: 10:05 PM
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
 class Breadcrumb
 {

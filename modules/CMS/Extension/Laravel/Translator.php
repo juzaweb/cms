@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Juzaweb\Extension\Laravel;
+namespace Juzaweb\CMS\Extension\Laravel;
 
 use Illuminate\Contracts\Translation\Translator as LaravelTranslator;
 use Twig\TwigFilter;

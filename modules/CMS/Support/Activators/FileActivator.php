@@ -1,15 +1,15 @@
 <?php
 
-namespace Juzaweb\Support\Activators;
+namespace Juzaweb\CMS\Support\Activators;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
-use Juzaweb\Abstracts\Plugin;
-use Juzaweb\Contracts\ActivatorInterface;
-use Juzaweb\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Abstracts\Plugin;
+use Juzaweb\CMS\Contracts\ActivatorInterface;
+use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
 
 class FileActivator implements ActivatorInterface
 {

@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Artisan;

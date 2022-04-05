@@ -7,7 +7,7 @@
  * @link       https://juzaweb.com/cms
  * @license    MIT
  */
-namespace Juzaweb\Logging;
+namespace Juzaweb\CMS\Logging;
 
 use Illuminate\Http\Request;
 

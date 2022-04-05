@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 trait UseChangeBy
 {

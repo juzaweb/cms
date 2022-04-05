@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Exceptions;
+namespace Juzaweb\CMS\Exceptions;
 
 class InvalidAssetPath extends \Exception
 {

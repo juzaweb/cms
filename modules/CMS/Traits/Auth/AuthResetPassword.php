@@ -8,13 +8,13 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Traits\Auth;
+namespace Juzaweb\CMS\Traits\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Juzaweb\Backend\Models\PasswordReset;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Backend\Models\PasswordReset;
+use Juzaweb\CMS\Models\User;
 
 trait AuthResetPassword
 {

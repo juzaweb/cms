@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
-use Juzaweb\Abstracts\Plugin;
-use Juzaweb\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Abstracts\Plugin;
+use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
 
 interface RepositoryInterface
 {
@@ -31,7 +31,7 @@ interface RepositoryInterface
     /**
      * Get plugins as plugins collection instance.
      *
-     * @return \Juzaweb\Support\Collection
+     * @return \Juzaweb\CMS\Support\Collection
      */
     public function toCollection();
 
@@ -157,7 +157,7 @@ interface RepositoryInterface
      * Delete a specific plugin.
      * @param string $module
      * @return bool
-     * @throws \Juzaweb\Exceptions\ModuleNotFoundException
+     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
      */
     public function delete(string $module): bool;
 

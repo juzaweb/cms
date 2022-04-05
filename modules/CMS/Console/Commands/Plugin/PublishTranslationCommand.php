@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Console\Commands\Plugin;
+namespace Juzaweb\CMS\Console\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Juzaweb\Abstracts\Plugin;
-use Juzaweb\Support\Publishing\LangPublisher;
+use Juzaweb\CMS\Abstracts\Plugin;
+use Juzaweb\CMS\Support\Publishing\LangPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PublishTranslationCommand extends Command

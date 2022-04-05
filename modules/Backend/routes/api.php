@@ -12,7 +12,7 @@
  * Time: 4:03 PM
  */
 
-use Juzaweb\Http\Controllers\Api\PostController;
+use Juzaweb\CMS\Http\Controllers\Api\PostController;
 
 Route::group([
     'prefix' => 'auth',

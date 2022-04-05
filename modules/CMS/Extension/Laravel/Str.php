@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Juzaweb\Extension\Laravel;
+namespace Juzaweb\CMS\Extension\Laravel;
 
 use Illuminate\Support\Str as IlluminateStr;
 use Twig\TwigFilter;

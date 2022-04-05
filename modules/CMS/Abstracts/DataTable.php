@@ -12,7 +12,7 @@
  * Time: 9:55 PM
  */
 
-namespace Juzaweb\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Crypt;

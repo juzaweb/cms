@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Models;
 
 use Juzaweb\Models\Model;
-use Juzaweb\Traits\ResourceModel;
+use Juzaweb\CMS\Traits\ResourceModel;
 
 /**
  * Juzaweb\Backend\Models\EmailTemplate

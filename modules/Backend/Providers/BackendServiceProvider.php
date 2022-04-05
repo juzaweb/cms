@@ -10,17 +10,17 @@ use Juzaweb\Backend\Actions\MenuAction;
 use Juzaweb\Backend\Actions\ThemeAction;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Observers\CommentObserver;
-use Juzaweb\Http\Middleware\Admin;
-use Juzaweb\Support\Html\Field;
-use Juzaweb\Support\Macros\RouterMacros;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Http\Middleware\Admin;
+use Juzaweb\CMS\Support\Html\Field;
+use Juzaweb\CMS\Support\Macros\RouterMacros;
+use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\Backend\Observers\TaxonomyObserver;
 use Juzaweb\Backend\Models\Menu;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Observers\MenuObserver;
 use Juzaweb\Backend\Observers\PostObserver;
-use Juzaweb\Facades\ActionRegister;
+use Juzaweb\CMS\Facades\ActionRegister;
 
 class BackendServiceProvider extends ServiceProvider
 {

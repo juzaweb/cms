@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Support\Manager;
+namespace Juzaweb\CMS\Support\Manager;
 
 use Exception;
 use Illuminate\Database\SQLiteConnection;
@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Juzaweb\Facades\Config as DbConfig;
-use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Facades\Config as DbConfig;
+use Juzaweb\CMS\Backend\Models\EmailTemplate;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseManager

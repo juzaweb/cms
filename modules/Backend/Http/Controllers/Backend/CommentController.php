@@ -3,10 +3,10 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Str;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\CommentDatatable;
 use Juzaweb\Backend\Models\Comment;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class CommentController extends BackendController
 {

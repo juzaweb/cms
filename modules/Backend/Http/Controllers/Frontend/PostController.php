@@ -13,7 +13,7 @@ namespace Juzaweb\Backend\Http\Controllers\Frontend;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Models\Comment;
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Facades\HookAction;

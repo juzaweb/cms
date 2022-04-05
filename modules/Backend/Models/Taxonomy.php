@@ -5,8 +5,8 @@ namespace Juzaweb\Backend\Models;
 use Juzaweb\Backend\Database\Factories\TaxonomyFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Juzaweb\Traits\ModelCache;
-use Juzaweb\Traits\TaxonomyModel;
+use Juzaweb\CMS\Traits\ModelCache;
+use Juzaweb\CMS\Traits\TaxonomyModel;
 use Juzaweb\Models\Model;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Frontend;
 
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\App;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;

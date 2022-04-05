@@ -5,8 +5,8 @@ namespace Juzaweb\Backend\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Juzaweb\Backend\Database\Factories\PostFactory;
 use Juzaweb\Models\Model;
-use Juzaweb\Traits\ModelCache;
-use Juzaweb\Traits\PostTypeModel;
+use Juzaweb\CMS\Traits\ModelCache;
+use Juzaweb\CMS\Traits\PostTypeModel;
 
 /**
  * Juzaweb\Backend\Models\Post

@@ -13,10 +13,10 @@ namespace Juzaweb\Backend\Http\Datatables;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Juzaweb\Abstracts\DataTable;
-use Juzaweb\Facades\Site;
+use Juzaweb\CMS\Facades\Site;
 use Juzaweb\Jobs\SendEmailJob;
 use Juzaweb\Backend\Models\EmailList;
-use Juzaweb\Support\SendEmail;
+use Juzaweb\CMS\Support\SendEmail;
 
 class EmailLogDatatable extends DataTable
 {

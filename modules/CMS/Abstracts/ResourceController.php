@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
-use Juzaweb\Traits\ResourceController as ResourceControllerTrait;
+use Juzaweb\CMS\Traits\ResourceController as ResourceControllerTrait;
 
 abstract class ResourceController
 {

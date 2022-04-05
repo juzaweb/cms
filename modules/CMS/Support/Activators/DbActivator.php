@@ -8,15 +8,15 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Activators;
+namespace Juzaweb\CMS\Support\Activators;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
-use Juzaweb\Abstracts\Plugin;
-use Juzaweb\Contracts\ActivatorInterface;
+use Juzaweb\CMS\Abstracts\Plugin;
+use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Illuminate\Filesystem\Filesystem;
-use Juzaweb\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
 
 class DbActivator implements ActivatorInterface
 {

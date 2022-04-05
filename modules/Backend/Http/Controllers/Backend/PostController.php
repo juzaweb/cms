@@ -2,9 +2,9 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Traits\PostTypeController;
+use Juzaweb\CMS\Traits\PostTypeController;
 
 class PostController extends BackendController
 {

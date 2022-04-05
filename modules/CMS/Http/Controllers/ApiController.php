@@ -12,7 +12,7 @@
  * Time: 12:28 PM
  */
 
-namespace Juzaweb\Http\Controllers;
+namespace Juzaweb\CMS\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;

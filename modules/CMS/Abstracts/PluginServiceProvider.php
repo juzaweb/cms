@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\Abstracts;
+namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\Contracts\RepositoryInterface;
-use Juzaweb\Providers\BootstrapServiceProvider;
-use Juzaweb\Providers\ConsoleServiceProvider;
-use Juzaweb\Providers\ContractsServiceProvider;
+use Juzaweb\CMS\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Providers\BootstrapServiceProvider;
+use Juzaweb\CMS\Providers\ConsoleServiceProvider;
+use Juzaweb\CMS\Providers\ContractsServiceProvider;
 
 abstract class PluginServiceProvider extends ServiceProvider
 {

@@ -16,10 +16,10 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Facades\Theme;
-use Juzaweb\Http\Controllers\BackendController;
-use Juzaweb\Support\Manager\UpdateManager;
-use Juzaweb\Support\JuzawebApi;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\Manager\UpdateManager;
+use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\Version;
 
 class UpdateController extends BackendController

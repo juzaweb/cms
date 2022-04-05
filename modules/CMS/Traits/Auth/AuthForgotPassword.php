@@ -8,15 +8,15 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Traits\Auth;
+namespace Juzaweb\CMS\Traits\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Models\PasswordReset;
-use Juzaweb\Models\User;
-use Juzaweb\Support\Email;
-use Juzaweb\Traits\ResponseMessage;
+use Juzaweb\CMS\Backend\Models\PasswordReset;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Email;
+use Juzaweb\CMS\Traits\ResponseMessage;
 
 trait AuthForgotPassword
 {

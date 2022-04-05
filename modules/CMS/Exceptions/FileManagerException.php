@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Exceptions;
+namespace Juzaweb\CMS\Exceptions;
 
 class FileManagerException extends \Exception
 {

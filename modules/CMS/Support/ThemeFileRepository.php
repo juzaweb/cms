@@ -6,7 +6,7 @@
  * Time: 8:48 PM
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Facades\File;
 

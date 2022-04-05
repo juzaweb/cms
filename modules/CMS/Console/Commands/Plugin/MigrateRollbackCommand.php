@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Console\Commands\Plugin;
+namespace Juzaweb\CMS\Console\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Juzaweb\Support\Migrations\Migrator;
-use Juzaweb\Traits\MigrationLoaderTrait;
+use Juzaweb\CMS\Support\Migrations\Migrator;
+use Juzaweb\CMS\Traits\MigrationLoaderTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -27,7 +27,7 @@ class MigrateRollbackCommand extends Command
     protected $description = 'Rollback the plugins migrations.';
 
     /**
-     * @var \Juzaweb\Contracts\RepositoryInterface
+     * @var \Juzaweb\CMS\Contracts\RepositoryInterface
      */
     protected $module;
 

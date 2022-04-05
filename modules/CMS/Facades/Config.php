@@ -8,15 +8,15 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\Contracts\ConfigContract;
+use Juzaweb\CMS\Contracts\ConfigContract;
 
 /**
- * @method static \Juzaweb\Models\Config setConfig($key, $value)
+ * @method static \Juzaweb\CMS\Models\Config setConfig($key, $value)
  * @method static string|array getConfig($key, $default = null)
- * @see \Juzaweb\Support\Config
+ * @see \Juzaweb\CMS\Support\Config
  */
 class Config extends Facade
 {

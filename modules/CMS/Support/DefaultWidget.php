@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
-use Juzaweb\Abstracts\Widget;
+use Juzaweb\CMS\Abstracts\Widget;
 
 class DefaultWidget extends Widget
 {

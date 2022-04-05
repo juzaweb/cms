@@ -6,13 +6,13 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
 use Illuminate\Support\Str;
-use Juzaweb\Abstracts\Plugin as BasePlugin;
+use Juzaweb\CMS\Abstracts\Plugin as BasePlugin;
 
 class Module extends BasePlugin
 {

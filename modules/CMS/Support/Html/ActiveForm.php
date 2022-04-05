@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Html;
+namespace Juzaweb\CMS\Support\Html;
 
 class ActiveForm
 {

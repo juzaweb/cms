@@ -3,8 +3,8 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
-use Juzaweb\Facades\GlobalData;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Facades\GlobalData;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Models\Config;
 use Juzaweb\Models\Language;
 

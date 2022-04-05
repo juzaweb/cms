@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
-use Juzaweb\Abstracts\PageBlock;
+use Juzaweb\CMS\Abstracts\PageBlock;
 
 class DefaultPageBlock extends PageBlock
 {

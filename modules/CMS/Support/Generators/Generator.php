@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Support\Generators;
+namespace Juzaweb\CMS\Support\Generators;
 
 abstract class Generator
 {

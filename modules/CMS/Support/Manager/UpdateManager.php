@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Manager;
+namespace Juzaweb\CMS\Support\Manager;
 
 use GuzzleHttp\Psr7\Utils;
 use Illuminate\Support\Facades\Artisan;
@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Juzaweb\Support\Curl;
-use Juzaweb\Support\JuzawebApi;
-use Juzaweb\Version;
+use Juzaweb\CMS\Support\Curl;
+use Juzaweb\CMS\Support\JuzawebApi;
+use Juzaweb\CMS\Version;
 
 class UpdateManager
 {
@@ -231,7 +231,7 @@ class UpdateManager
                 );
 
                 /**
-                 * @var \Juzaweb\Abstracts\Plugin[] $plugins
+                 * @var \Juzaweb\CMS\Abstracts\Plugin[] $plugins
                  */
                 $plugins = app('plugins')->all();
                 foreach ($plugins as $plugin) {
@@ -255,7 +255,7 @@ class UpdateManager
                 break;
             case 'plugin':
                 /**
-                 * @var \Juzaweb\Abstracts\Plugin $plugin
+                 * @var \Juzaweb\CMS\Abstracts\Plugin $plugin
                  */
                 $plugin = app('plugins')->find($this->val);
                 if ($plugin->isEnabled()) {

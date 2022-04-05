@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support\Theme;
+namespace Juzaweb\CMS\Support\Theme;
 
-use Juzaweb\Abstracts\CustomizeControl as BaseCustomizeControl;
+use Juzaweb\CMS\Abstracts\CustomizeControl as BaseCustomizeControl;
 
 class CustomizeControl extends BaseCustomizeControl
 {

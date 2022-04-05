@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Auth;
 
-use Juzaweb\Http\Controllers\Controller;
-use Juzaweb\Traits\Auth\AuthRegisterForm;
+use Juzaweb\CMS\Http\Controllers\Controller;
+use Juzaweb\CMS\Traits\Auth\AuthRegisterForm;
 
 class RegisterController extends Controller
 {

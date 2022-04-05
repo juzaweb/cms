@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Models;
+namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,14 +16,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
-use Juzaweb\Abstracts\Action;
-use Juzaweb\Backend\Database\Factories\UserFactory;
-use Juzaweb\Traits\ModelCache;
-use Juzaweb\Traits\ResourceModel;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Backend\Database\Factories\UserFactory;
+use Juzaweb\CMS\Traits\ModelCache;
+use Juzaweb\CMS\Traits\ResourceModel;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * Juzaweb\Models\User
+ * Juzaweb\CMS\Models\User
  *
  * @property int $id
  * @property string $name
@@ -42,7 +42,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @method static Builder|User active()
- * @method static \Juzaweb\Backend\Database\Factories\UserFactory factory(...$parameters)
+ * @method static \Juzaweb\CMS\Backend\Database\Factories\UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()

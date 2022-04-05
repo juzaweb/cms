@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Juzaweb\Facades\GlobalData;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Facades\GlobalData;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\TaxonomyDataTable;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class TaxonomyController extends BackendController
 {

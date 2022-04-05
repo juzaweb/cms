@@ -1,10 +1,10 @@
 <?php
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
-use Juzaweb\Jobs\SendEmailJob;
-use Juzaweb\Backend\Models\EmailList;
-use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Jobs\SendEmailJob;
+use Juzaweb\CMS\Backend\Models\EmailList;
+use Juzaweb\CMS\Backend\Models\EmailTemplate;
 
 class Email
 {

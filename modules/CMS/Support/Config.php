@@ -8,11 +8,11 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Support;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Cache\CacheManager;
-use Juzaweb\Facades\Site;
-use Juzaweb\Models\Config as ConfigModel;
+use Juzaweb\CMS\Facades\Site;
+use Juzaweb\CMS\Models\Config as ConfigModel;
 use Illuminate\Container\Container;
 
 class Config

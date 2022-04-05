@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Contracts;
+namespace Juzaweb\CMS\Contracts;
 
 interface MacroableModelContract
 {

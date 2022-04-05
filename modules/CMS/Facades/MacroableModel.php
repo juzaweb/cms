@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Facades;
+namespace Juzaweb\CMS\Facades;
 
-use Juzaweb\Contracts\MacroableModelContract;
+use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Illuminate\Support\Facades\Facade;
 
 class MacroableModel extends Facade

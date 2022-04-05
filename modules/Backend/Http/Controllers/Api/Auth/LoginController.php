@@ -13,7 +13,7 @@ namespace Juzaweb\Backend\Http\Controllers\Api\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Http\Controllers\ApiController;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class LoginController extends ApiController
 {

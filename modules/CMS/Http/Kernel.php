@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Http;
+namespace Juzaweb\CMS\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -15,11 +15,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
-        \Juzaweb\Http\Middleware\TrustProxies::class,
+        \Juzaweb\CMS\Http\Middleware\TrustProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
-        \Juzaweb\Http\Middleware\PreventRequestsDuringMaintenance::class,
+        \Juzaweb\CMS\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Juzaweb\Http\Middleware\TrimStrings::class,
+        \Juzaweb\CMS\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
     
@@ -30,20 +30,20 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Juzaweb\Http\Middleware\GlobalMiddleware::class,
-            \Juzaweb\Http\Middleware\EncryptCookies::class,
+            \Juzaweb\CMS\Http\Middleware\GlobalMiddleware::class,
+            \Juzaweb\CMS\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Juzaweb\Http\Middleware\VerifyCsrfToken::class,
+            \Juzaweb\CMS\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \Juzaweb\Http\Middleware\XFrameHeadersMiddleware::class,
-            \Juzaweb\Installer\Http\Middleware\Installed::class,
+            \Juzaweb\CMS\Http\Middleware\XFrameHeadersMiddleware::class,
+            \Juzaweb\CMS\Installer\Http\Middleware\Installed::class,
         ],
         
         'api' => [
-            \Juzaweb\Http\Middleware\GlobalMiddleware::class,
+            \Juzaweb\CMS\Http\Middleware\GlobalMiddleware::class,
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -51,12 +51,12 @@ class Kernel extends HttpKernel
         
         'admin' => [
             'web',
-            \Juzaweb\Http\Middleware\Admin::class,
+            \Juzaweb\CMS\Http\Middleware\Admin::class,
         ],
         
         'theme' => [
             'web',
-            \Juzaweb\Http\Middleware\Theme::class,
+            \Juzaweb\CMS\Http\Middleware\Theme::class,
         ],
     ];
     
@@ -68,15 +68,15 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        'auth' => \Juzaweb\Http\Middleware\Authenticate::class,
+        'auth' => \Juzaweb\CMS\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \Juzaweb\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \Juzaweb\CMS\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'install' => \Juzaweb\Installer\Http\Middleware\CanInstall::class,
+        'install' => \Juzaweb\CMS\Installer\Http\Middleware\CanInstall::class,
     ];
 }

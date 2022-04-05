@@ -13,7 +13,7 @@ namespace Juzaweb\Backend\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Juzaweb\Models\Model;
-use Juzaweb\Traits\ModelCache;
+use Juzaweb\CMS\Traits\ModelCache;
 
 /**
  * Juzaweb\Backend\Models\Resource

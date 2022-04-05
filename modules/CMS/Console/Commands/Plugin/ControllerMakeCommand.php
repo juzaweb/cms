@@ -1,11 +1,11 @@
 <?php
 
-namespace Juzaweb\Console\Commands\Plugin;
+namespace Juzaweb\CMS\Console\Commands\Plugin;
 
 use Illuminate\Support\Str;
-use Juzaweb\Support\Config\GenerateConfigReader;
-use Juzaweb\Support\Stub;
-use Juzaweb\Traits\ModuleCommandTrait;
+use Juzaweb\CMS\Support\Config\GenerateConfigReader;
+use Juzaweb\CMS\Support\Stub;
+use Juzaweb\CMS\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -127,7 +127,7 @@ class ControllerMakeCommand extends GeneratorCommand
     protected function getDataStub()
     {
         /**
-         * @var \Juzaweb\Abstracts\Plugin $module
+         * @var \Juzaweb\CMS\Abstracts\Plugin $module
          */
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 

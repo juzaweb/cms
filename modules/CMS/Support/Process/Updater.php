@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\Support\Process;
+namespace Juzaweb\CMS\Support\Process;
 
-use Juzaweb\Abstracts\Plugin;
+use Juzaweb\CMS\Abstracts\Plugin;
 
 class Updater extends Runner
 {

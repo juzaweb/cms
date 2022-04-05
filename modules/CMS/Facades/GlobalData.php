@@ -8,10 +8,10 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
 
 /**
  * @method static void set($key, $value)
@@ -19,7 +19,7 @@ use Juzaweb\Contracts\GlobalDataContract;
  * @method static void registerAction(array $actions)
  * @method static void initAction()
  * @method static mixed get($key)
- * @see \Juzaweb\Support\GlobalData
+ * @see \Juzaweb\CMS\Support\GlobalData
  */
 class GlobalData extends Facade
 {

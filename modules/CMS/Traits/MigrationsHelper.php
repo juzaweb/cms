@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Traits;
+namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Support\Facades\DB;
 
