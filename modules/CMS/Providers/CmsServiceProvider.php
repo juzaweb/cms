@@ -14,10 +14,10 @@ use Juzaweb\CMS\Support\Config as DbConfig;
 use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\ThemeConfigContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
-use Juzaweb\CMS\Backend\Contracts\HookActionContract;
+use Juzaweb\Backend\Contracts\HookActionContract;
 use Juzaweb\CMS\Contracts\XssCleanerContract;
 use Juzaweb\CMS\Support\GlobalData;
-use Juzaweb\CMS\Backend\Support\HookAction;
+use Juzaweb\Backend\Support\HookAction;
 use Juzaweb\CMS\Support\XssCleaner;
 use Juzaweb\CMS\Support\Validators\ModelExists;
 use Juzaweb\CMS\Support\Validators\ModelUnique;
@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CmsServiceProvider extends ServiceProvider
 {
-    protected $basePath = __DIR__ . '/../..';
+    protected $basePath = __DIR__ . '/..';
     
     public function boot()
     {

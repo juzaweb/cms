@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
 use Faker\Generator as Faker;
 use Illuminate\Support\Collection;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Models\User;
-use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class CPostTest extends TestCase
 {

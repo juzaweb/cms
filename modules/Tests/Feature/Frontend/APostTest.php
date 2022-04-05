@@ -8,12 +8,12 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Feature\Frontend;
+namespace Juzaweb\Tests\Feature\Frontend;
 
 use Faker\Generator as Faker;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class APostTest extends TestCase
 {

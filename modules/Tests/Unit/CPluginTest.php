@@ -8,11 +8,11 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
 use ChunkTests\Handler\ContentRangeUploadHandlerTest;
 use Juzaweb\Abstracts\Plugin;
-use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class CPluginTest extends TestCase
 {

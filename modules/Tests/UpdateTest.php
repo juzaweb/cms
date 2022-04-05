@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Tests;
+namespace Juzaweb\Tests;
 
 use Illuminate\Support\Facades\File;
 use Juzaweb\Version;

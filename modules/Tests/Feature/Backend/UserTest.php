@@ -8,10 +8,10 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
 use Faker\Generator as Faker;
-use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 use Juzaweb\Models\User;
 
 class UserTest extends TestCase

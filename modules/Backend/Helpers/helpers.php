@@ -15,7 +15,7 @@ use Juzaweb\CMS\Facades\Hook;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\CMS\Facades\XssCleaner;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\Breadcrumb;
 
 if (! function_exists('e_html')) {

@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Unit;
+namespace Juzaweb\Tests\Unit;
 
-use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class AOptimizeTest extends TestCase
 {

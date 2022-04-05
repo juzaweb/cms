@@ -8,11 +8,11 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Models\User;
-use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class ADashboardTest extends TestCase
 {

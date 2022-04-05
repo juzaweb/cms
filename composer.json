@@ -18,12 +18,19 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
+        "arcanedev/log-viewer": "^9.0",
+        "darkaonline/l5-swagger": "^8.0",
         "guzzlehttp/guzzle": "^7.2",
-        "juzaweb/backend": "@dev",
-        "juzaweb/installer": "@dev",
+        "intervention/image": "^2.5",
+        "juzaweb/config": "^2.2",
+        "juzaweb/laravel-chunk-upload": "^1.5",
+        "juzaweb/laravel-translation-loader": "^1.0",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "rcrowe/twigbridge": "^0.14",
+        "rennokki/laravel-eloquent-query-cache": "^3.1",
+        "spatie/image-optimizer": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -39,7 +46,10 @@
     "autoload": {
         "psr-4": {
             "Juzaweb\\": "modules/"
-        }
+        },
+        "files": [
+            "modules/Backend/Helpers/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

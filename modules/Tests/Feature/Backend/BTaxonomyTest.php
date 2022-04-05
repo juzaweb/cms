@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,7 @@ use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Models\Model;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\Models\User;
-use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class BTaxonomyTest extends TestCase
 {

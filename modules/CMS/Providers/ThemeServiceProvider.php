@@ -5,8 +5,8 @@ namespace Juzaweb\CMS\Providers;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\CMS\Backend\Http\Controllers\Frontend\PostController;
-use Juzaweb\CMS\Backend\Http\Controllers\Frontend\RouteController;
+use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
+use Juzaweb\Backend\Http\Controllers\Frontend\RouteController;
 use Juzaweb\CMS\Contracts\ThemeContract;
 use Juzaweb\CMS\Contracts\ThemeInterface;
 use Juzaweb\CMS\Support\Theme\Theme;
@@ -31,7 +31,7 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/theme.php', 'theme');
+        $this->mergeConfigFrom(__DIR__ . '/../config/theme.php', 'theme');
 
         $this->app->singleton(
             ThemeContract::class,

@@ -8,11 +8,11 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Feature\Frontend;
+namespace Juzaweb\Tests\Feature\Frontend;
 
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class BTaxonomyTest extends TestCase
 {

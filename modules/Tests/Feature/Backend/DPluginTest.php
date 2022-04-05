@@ -8,9 +8,9 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Tests\Feature\Backend;
+namespace Juzaweb\Tests\Feature\Backend;
 
-use Juzaweb\Backend\Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class DPluginTest extends TestCase
 {
