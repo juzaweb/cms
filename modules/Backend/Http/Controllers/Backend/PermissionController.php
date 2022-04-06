@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class PermissionController extends BackendController
 {

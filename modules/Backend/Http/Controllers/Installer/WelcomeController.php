@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Installer;
 
-use Juzaweb\Http\Controllers\Controller;
+use Juzaweb\CMS\Http\Controllers\Controller;
 
 class WelcomeController extends Controller
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Backend\Database\Factories;
+namespace Juzaweb\CMS\Database\Factories;
 
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory

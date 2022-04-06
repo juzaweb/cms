@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Database\Seeders;
+namespace Juzaweb\CMS\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Juzaweb\CMS\Models\User;

@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Database\Seeders;
+namespace Juzaweb\CMS\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Backend\Database\Seeders;
+namespace Juzaweb\CMS\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Models\Taxonomy;
 
 class TaxonomyTableSeeder extends Seeder
 {

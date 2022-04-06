@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Database\Factories;
+namespace Juzaweb\CMS\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;

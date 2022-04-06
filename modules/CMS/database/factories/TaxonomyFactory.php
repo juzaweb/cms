@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Backend\Database\Factories;
+namespace Juzaweb\CMS\Database\Factories;
 
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Models\Taxonomy;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaxonomyFactory extends Factory
