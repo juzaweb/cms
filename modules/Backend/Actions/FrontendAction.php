@@ -11,7 +11,7 @@
 namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Http\Request;
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostRating;

@@ -5,7 +5,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\Post;

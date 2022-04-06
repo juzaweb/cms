@@ -11,7 +11,7 @@
 namespace Juzaweb\Tests\Feature\Backend;
 
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
 class ADashboardTest extends TestCase

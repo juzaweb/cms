@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Installer;
 
 use Juzaweb\Http\Controllers\Controller;
-use Juzaweb\Support\Manager\DatabaseManager;
+use Juzaweb\CMS\Support\Manager\DatabaseManager;
 
 class DatabaseController extends Controller
 {

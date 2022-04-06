@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Http\Middleware;
 
 use Closure;
-use Juzaweb\Support\Installer;
+use Juzaweb\CMS\Support\Installer;
 
 class CanInstall
 {

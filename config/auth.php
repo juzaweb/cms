@@ -62,7 +62,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => \Juzaweb\Models\User::class,
+            'model' => \Juzaweb\CMS\Models\User::class,
         ],
 
         // 'users' => [

@@ -14,9 +14,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Facades\ActionRegister;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
 class BTaxonomyTest extends TestCase

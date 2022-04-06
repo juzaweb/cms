@@ -3,8 +3,8 @@
 namespace Juzaweb\Backend\Http\Controllers\Installer;
 
 use Illuminate\Routing\Controller;
-use Juzaweb\Support\Manager\DatabaseManager;
-use Juzaweb\Support\Manager\InstalledFileManager;
+use Juzaweb\CMS\Support\Manager\DatabaseManager;
+use Juzaweb\CMS\Support\Manager\InstalledFileManager;
 use Juzaweb\Traits\MigrationsHelper;
 
 class UpdateController extends Controller

@@ -4,7 +4,7 @@ namespace Juzaweb\Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 abstract class TestCase extends BaseTestCase
 {

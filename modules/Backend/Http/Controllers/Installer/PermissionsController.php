@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Installer;
 
 use Illuminate\Routing\Controller;
-use Juzaweb\Support\PermissionsChecker;
+use Juzaweb\CMS\Support\PermissionsChecker;
 
 class PermissionsController extends Controller
 {

@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Route;
-use Juzaweb\Support\Installer;
+use Juzaweb\CMS\Support\Installer;
 
 class Installed
 {

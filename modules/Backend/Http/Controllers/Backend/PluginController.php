@@ -30,7 +30,7 @@ class PluginController extends BackendController
         
         foreach ($plugins as $name => $plugin) {
             /**
-             * @var \Juzaweb\Abstracts\Plugin $plugin
+             * @var \Juzaweb\CMS\Abstracts\Plugin $plugin
              */
 
             $item = [

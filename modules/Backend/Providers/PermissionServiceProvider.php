@@ -7,7 +7,7 @@ use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Support\PermissionRegistrar;
 use Juzaweb\Facades\ActionRegister;
 use Juzaweb\Backend\PermissionAction;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class PermissionServiceProvider extends ServiceProvider
 {

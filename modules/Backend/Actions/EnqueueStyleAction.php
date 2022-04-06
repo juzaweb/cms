@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Backend\Actions;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
 
 class EnqueueStyleAction extends Action

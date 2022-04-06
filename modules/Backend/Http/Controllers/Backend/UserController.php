@@ -74,7 +74,7 @@ class UserController extends BackendController
     /**
      * Get data table resource
      *
-     * @return \Juzaweb\Abstracts\DataTable
+     * @return \Juzaweb\CMS\Abstracts\DataTable
      */
     protected function getDataTable(...$params)
     {

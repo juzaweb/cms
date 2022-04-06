@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
 class CPostTest extends TestCase

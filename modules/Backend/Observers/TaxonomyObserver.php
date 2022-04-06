@@ -12,7 +12,6 @@ namespace Juzaweb\Backend\Observers;
 
 use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Multisite\Models\Site;
 
 class TaxonomyObserver
 {

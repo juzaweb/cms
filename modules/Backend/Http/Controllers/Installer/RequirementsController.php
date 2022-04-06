@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Installer;
 
 use Illuminate\Routing\Controller;
-use Juzaweb\Support\RequirementsChecker;
+use Juzaweb\CMS\Support\RequirementsChecker;
 
 class RequirementsController extends Controller
 {

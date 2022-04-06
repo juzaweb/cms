@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         \Juzaweb\CMS\Providers\CmsServiceProvider::class,
+        \Juzaweb\Backend\Providers\BackendServiceProvider::class,
         /*
          * Application Service Providers...
          */

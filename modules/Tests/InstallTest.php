@@ -10,8 +10,8 @@
 
 namespace Juzaweb\Tests;
 
-use Juzaweb\Models\User;
-use Juzaweb\Support\Installer;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Installer;
 
 class InstallTest extends TestCase
 {

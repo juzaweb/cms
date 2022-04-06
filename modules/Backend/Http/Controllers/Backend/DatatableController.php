@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class DatatableController extends BackendController

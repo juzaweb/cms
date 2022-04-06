@@ -12,7 +12,7 @@ namespace Juzaweb\Tests\Feature\Backend;
 
 use Faker\Generator as Faker;
 use Juzaweb\Tests\TestCase;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class UserTest extends TestCase
 {

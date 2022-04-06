@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Backend\Actions;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\Backend\Http\Controllers\Frontend\PageController;
 use Juzaweb\Backend\Http\Controllers\Frontend\PostController;

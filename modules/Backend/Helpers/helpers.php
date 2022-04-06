@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/html_dom.php';
+require __DIR__ . '/data_helpers.php';
 require __DIR__ . '/plugin.php';
 require __DIR__ . '/theme.php';
 

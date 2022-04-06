@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\Backend\Models\Taxonomy;
 
 class TaxonomyDataTable extends DataTable
