@@ -18,11 +18,11 @@ class RoleDatatable extends DataTable
     {
         return [
             'name' => [
-                'label' => trans('perm::content.name'),
+                'label' => trans('cms::app.name'),
                 'formatter' => [$this, 'rowActionsFormatter'],
             ],
 			'guard_name' => [
-                'label' => trans('perm::content.guard_name'),
+                'label' => trans('cms::app.guard_name'),
             ],
             'created_at' => [
                 'label' => trans('cms::app.created_at'),

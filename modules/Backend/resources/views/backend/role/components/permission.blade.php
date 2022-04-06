@@ -11,9 +11,9 @@
                         <div class="col-md-12">
                             <table class="table">
                                 <thead>
-                                    <th>{{ trans('perm::content.permission') }}</th>
+                                    <th>{{ trans('cms::app.permission') }}</th>
                                     <th width="10%">
-                                        <input class="check-all-permissions" value="1" type="checkbox" /> {{ trans("perm::content.check_all") }}
+                                        <input class="check-all-permissions" value="1" type="checkbox" /> {{ trans("cms::app.check_all") }}
                                     </th>
                                 </thead>
                                 <tbody>

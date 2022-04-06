@@ -20,8 +20,7 @@ class ActionRegister
 
     public function init()
     {
-        $actions = $this->actions;
-        foreach ($actions as $action) {
+        foreach ($this->actions as $action) {
             app($action)->handle();
         }
     }

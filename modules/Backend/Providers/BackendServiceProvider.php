@@ -9,6 +9,7 @@ use Juzaweb\Backend\Actions\FrontendAction;
 use Juzaweb\Backend\Actions\MenuAction;
 use Juzaweb\Backend\Actions\PermissionAction;
 use Juzaweb\Backend\Actions\ThemeAction;
+use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Observers\CommentObserver;
 use Juzaweb\CMS\Http\Middleware\Admin;
@@ -44,11 +45,18 @@ class BackendServiceProvider extends ServiceProvider
                 PermissionAction::class,
             ]
         );
+    
+        $this->commands(
+            [
+                PermissionGenerateCommand::class,
+            ]
+        );
     }
 
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(AuthServiceProvider::class);
         $this->registerRouteMacros();
         $this->app->booting(
             function () {

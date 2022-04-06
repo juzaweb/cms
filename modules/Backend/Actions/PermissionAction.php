@@ -57,7 +57,7 @@ class PermissionAction extends Action
     public function addAdminMenu()
     {
         HookAction::addAdminMenu(
-            trans('perm::content.roles'),
+            trans('cms::app.roles'),
             'roles',
             [
                 'icon' => 'fa fa-users',

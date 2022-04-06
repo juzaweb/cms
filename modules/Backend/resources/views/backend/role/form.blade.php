@@ -10,7 +10,7 @@
                 <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">{{ trans('cms::app.general') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="permission-tab" data-toggle="tab" href="#permission" role="tab" aria-controls="permission" aria-selected="false">{{ trans('perm::content.permissions') }}</a>
+                <a class="nav-link" id="permission-tab" data-toggle="tab" href="#permission" role="tab" aria-controls="permission" aria-selected="false">{{ trans('cms::app.permissions') }}</a>
             </li>
         </ul>
 

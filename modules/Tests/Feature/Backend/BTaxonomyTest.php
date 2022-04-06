@@ -13,7 +13,7 @@ namespace Juzaweb\Tests\Feature\Backend;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Facades\ActionRegister;
+use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Models\User;

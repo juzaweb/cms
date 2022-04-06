@@ -9,7 +9,7 @@ use Juzaweb\Backend\Models\Permission;
 use Juzaweb\Backend\Models\PermissionGroup;
 use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\RoleDatatable;
 use Juzaweb\Backend\Models\Role;
 
@@ -20,7 +20,7 @@ class RoleController extends BackendController
         afterSave as tAfterSave;
     }
 
-    protected $viewPrefix = 'perm::backend.role';
+    protected $viewPrefix = 'cms::backend.role';
 
     protected function getDataTable(...$params)
     {
@@ -29,15 +29,18 @@ class RoleController extends BackendController
 
     protected function validator(array $attributes, ...$params)
     {
-        $validator = Validator::make($attributes, [
-            'name' => 'required|string|max:100',
-            'description' => 'nullable|string|max:200',
-            'permissions' => 'nullable|array',
-            'permissions.*' => [
-                'nullable',
-                Rule::modelExists(Permission::class, 'name')
-            ],
-        ]);
+        $validator = Validator::make(
+            $attributes,
+            [
+                'name' => 'required|string|max:100',
+                'description' => 'nullable|string|max:200',
+                'permissions' => 'nullable|array',
+                'permissions.*' => [
+                    'nullable',
+                    Rule::modelExists(Permission::class, 'name')
+                ],
+            ]
+        );
 
         return $validator;
     }
@@ -62,17 +65,19 @@ class RoleController extends BackendController
 
     protected function getTitle(...$params)
     {
-        return trans('perm::content.roles');
+        return trans('cms::app.roles');
     }
 
     protected function getPermissionGroups()
     {
         $plugins = array_keys(get_config('plugin_statuses', []));
         $query = PermissionGroup::with(['permissions']);
-        $query->where(function (Builder $q) use ($plugins) {
-            $q->whereNull('plugin');
-            $q->orWhereIn('plugin', $plugins);
-        });
+        $query->where(
+            function (Builder $q) use ($plugins) {
+                $q->whereNull('plugin');
+                $q->orWhereIn('plugin', $plugins);
+            }
+        );
         return $query->get();
     }
 }

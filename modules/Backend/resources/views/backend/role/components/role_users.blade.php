@@ -7,7 +7,7 @@
             })->toArray();
         @endphp
 
-        {{ Field::select(trans('perm::content.roles'), 'roles[]', [
+        {{ Field::select(trans('cms::app.roles'), 'roles[]', [
             'options' => $options,
             'value' => $model->roles->pluck('id')->toArray(),
             'multiple' => true
