@@ -21,7 +21,7 @@ class RoleDatatable extends DataTable
                 'label' => trans('cms::app.name'),
                 'formatter' => [$this, 'rowActionsFormatter'],
             ],
-			'guard_name' => [
+            'guard_name' => [
                 'label' => trans('cms::app.guard_name'),
             ],
             'created_at' => [
@@ -46,9 +46,11 @@ class RoleDatatable extends DataTable
         $query = Role::query();
 
         if ($keyword = Arr::get($data, 'keyword')) {
-            $query->where(function (Builder $q) use ($keyword) {
-                // $q->where('title', JW_SQL_LIKE, '%'. $keyword .'%');
-            });
+            $query->where(
+                function (Builder $q) use ($keyword) {
+                    // $q->where('title', JW_SQL_LIKE, '%'. $keyword .'%');
+                }
+            );
         }
 
         return $query;
@@ -58,8 +60,8 @@ class RoleDatatable extends DataTable
     {
         switch ($action) {
             case 'delete':
-            Role::destroy($ids);
-            break;
+                Role::destroy($ids);
+                break;
         }
     }
 }

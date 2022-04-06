@@ -16,10 +16,10 @@
 
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane p-3 fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
-                @include('perm::backend.role.components.general')
+                @include('cms::backend.role.components.general')
             </div>
             <div class="tab-pane p-3 fade" id="permission" role="tabpanel" aria-labelledby="permission-tab">
-                @include('perm::backend.role.components.permission')
+                @include('cms::backend.role.components.permission')
             </div>
         </div>
     @endcomponent

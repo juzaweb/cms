@@ -48,7 +48,7 @@ class PermissionAction extends Action
     {
         echo e(
             view(
-                'perm::backend.role.components.role_users',
+                'cms::backend.role.components.role_users',
                 compact('model')
             )
         );
