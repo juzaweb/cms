@@ -32,8 +32,11 @@ class PackageServiceProvider extends ServiceProvider
             $permissionLoader->registerPermissions();
         }
 
-        $this->app->singleton(PermissionRegistrar::class, function ($app) use ($permissionLoader) {
-            return $permissionLoader;
-        });
+        $this->app->singleton(
+            PermissionRegistrar::class,
+            function ($app) use ($permissionLoader) {
+                return $permissionLoader;
+            }
+        );
     }
 }

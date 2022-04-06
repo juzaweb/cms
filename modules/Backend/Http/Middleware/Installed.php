@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Installer\Http\Middleware;
+namespace Juzaweb\Backend\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Route;

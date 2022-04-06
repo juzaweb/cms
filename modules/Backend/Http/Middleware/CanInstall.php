@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Installer\Http\Middleware;
+namespace Juzaweb\Backend\Http\Middleware;
 
 use Closure;
 use Juzaweb\Support\Installer;
