@@ -19,3 +19,5 @@ require __DIR__ . '/components/theme.route.php';
 require __DIR__ . '/components/plugin.route.php';
 require __DIR__ . '/components/email.route.php';
 require __DIR__ . '/components/resource.route.php';
+
+Route::jwResource('roles', RoleController::class);
