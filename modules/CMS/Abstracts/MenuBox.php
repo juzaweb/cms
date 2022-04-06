@@ -12,7 +12,7 @@ namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
-use Juzaweb\CMS\Backend\Models\MenuItem;
+use Juzaweb\Backend\Models\MenuItem;
 
 abstract class MenuBox
 {

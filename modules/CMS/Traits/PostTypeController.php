@@ -14,11 +14,11 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Backend\Events\AfterPostSave;
-use Juzaweb\CMS\Backend\Facades\HookAction;
+use Juzaweb\Backend\Events\AfterPostSave;
+use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\CMS\Facades\Theme;
-use Juzaweb\CMS\Backend\Http\Datatables\PostTypeDataTable;
-use Juzaweb\CMS\Backend\Models\Post;
+use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
+use Juzaweb\Backend\Models\Post;
 
 trait PostTypeController
 {

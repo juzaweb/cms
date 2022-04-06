@@ -5,7 +5,7 @@ namespace Juzaweb\Backend\Http\Controllers\Installer;
 use Illuminate\Routing\Controller;
 use Juzaweb\CMS\Support\Manager\DatabaseManager;
 use Juzaweb\CMS\Support\Manager\InstalledFileManager;
-use Juzaweb\Traits\MigrationsHelper;
+use Juzaweb\CMS\Traits\MigrationsHelper;
 
 class UpdateController extends Controller
 {

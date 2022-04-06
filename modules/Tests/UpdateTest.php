@@ -3,7 +3,7 @@
 namespace Juzaweb\Tests;
 
 use Illuminate\Support\Facades\File;
-use Juzaweb\Version;
+use Juzaweb\CMS\Version;
 
 class UpdateTest extends TestCase
 {

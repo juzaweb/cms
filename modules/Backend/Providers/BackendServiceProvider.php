@@ -7,6 +7,7 @@ use Illuminate\Routing\Router;
 use Juzaweb\Backend\Actions\EnqueueStyleAction;
 use Juzaweb\Backend\Actions\FrontendAction;
 use Juzaweb\Backend\Actions\MenuAction;
+use Juzaweb\Backend\Actions\PermissionAction;
 use Juzaweb\Backend\Actions\ThemeAction;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Observers\CommentObserver;
@@ -40,6 +41,7 @@ class BackendServiceProvider extends ServiceProvider
                 EnqueueStyleAction::class,
                 ThemeAction::class,
                 FrontendAction::class,
+                PermissionAction::class,
             ]
         );
     }

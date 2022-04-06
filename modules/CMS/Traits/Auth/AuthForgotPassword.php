@@ -13,7 +13,7 @@ namespace Juzaweb\CMS\Traits\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Backend\Models\PasswordReset;
+use Juzaweb\Backend\Models\PasswordReset;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\Email;
 use Juzaweb\CMS\Traits\ResponseMessage;

@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Backend\Events\MediaWasUploaded;
+use Juzaweb\Backend\Events\MediaWasUploaded;
 use Juzaweb\CMS\Exceptions\FileManagerException;
-use Juzaweb\CMS\Backend\Models\MediaFile;
+use Juzaweb\Backend\Models\MediaFile;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use GuzzleHttp\Exception\RequestException;
 

@@ -2,7 +2,7 @@
 
 namespace Juzaweb\CMS\Models;
 
-use Juzaweb\CMS\Backend\Models\Post;
+use Juzaweb\Backend\Models\Post;
 
 /**
  * Juzaweb\CMS\Models\Plugin
@@ -25,15 +25,15 @@ use Juzaweb\CMS\Backend\Models\Post;
  * @property float $rating
  * @property int $total_rating
  * @property int $total_comment
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Backend\Models\Comment[] $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Comment[] $comments
  * @property-read int|null $comments_count
  * @property-read \Juzaweb\CMS\Models\User|null $createdBy
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Backend\Models\PostMeta[] $metas
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostMeta[] $metas
  * @property-read int|null $metas_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Backend\Models\Taxonomy[] $taxonomies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $taxonomies
  * @property-read int|null $taxonomies_count
  * @property-read \Juzaweb\CMS\Models\User|null $updatedBy
- * @method static \Juzaweb\CMS\Backend\Database\Factories\PostFactory factory(...$parameters)
+ * @method static \Juzaweb\Backend\Database\Factories\PostFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Plugin newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Plugin newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Plugin query()
@@ -62,11 +62,11 @@ use Juzaweb\CMS\Backend\Models\Post;
  * @method static \Illuminate\Database\Eloquent\Builder|Plugin whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Plugin whereViews($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Backend\Models\MenuItem[] $menuItems
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MenuItem[] $menuItems
  * @property-read int|null $menu_items_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Backend\Models\PostRating[] $postRatings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostRating[] $postRatings
  * @property-read int|null $post_ratings_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Backend\Models\PostView[] $postViews
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostView[] $postViews
  * @property-read int|null $post_views_count
  */
 class Plugin extends Post

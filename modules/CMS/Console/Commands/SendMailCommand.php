@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Backend\Models\EmailList;
+use Juzaweb\Backend\Models\EmailList;
 use Juzaweb\CMS\Support\SendEmail;
 
 class SendMailCommand extends Command

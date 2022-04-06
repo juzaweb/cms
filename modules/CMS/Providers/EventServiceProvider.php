@@ -4,11 +4,11 @@ namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Juzaweb\CMS\Events\EmailHook;
-use Juzaweb\CMS\Backend\Events\PostViewed;
-use Juzaweb\CMS\Backend\Listeners\CountViewPost;
+use Juzaweb\Backend\Events\PostViewed;
+use Juzaweb\Backend\Listeners\CountViewPost;
 use Juzaweb\CMS\Listeners\SendEmailHook;
-use Juzaweb\CMS\Backend\Listeners\SendMailRegisterSuccessful;
-use Juzaweb\CMS\Backend\Events\RegisterSuccessful;
+use Juzaweb\Backend\Listeners\SendMailRegisterSuccessful;
+use Juzaweb\Backend\Events\RegisterSuccessful;
 
 class EventServiceProvider extends ServiceProvider
 {

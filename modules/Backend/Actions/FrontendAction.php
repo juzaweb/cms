@@ -20,10 +20,13 @@ class FrontendAction extends Action
 {
     public function handle()
     {
-        HookAction::registerFrontendAjax('rating', [
-            'callback' => [app(FrontendAction::class), 'rating'],
-            'method' => 'post',
-        ]);
+        HookAction::registerFrontendAjax(
+            'rating',
+            [
+                'callback' => [app(FrontendAction::class), 'rating'],
+                'method' => 'post',
+            ]
+        );
     }
 
     public function rating(Request $request)

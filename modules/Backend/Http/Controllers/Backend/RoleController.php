@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Juzaweb\Backend\Models\Permission;
 use Juzaweb\Backend\Models\PermissionGroup;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\RoleDatatable;

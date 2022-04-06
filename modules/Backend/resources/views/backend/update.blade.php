@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-success">
-                <p>You are using Juzaweb CMS Version: {{ \Juzaweb\Version::getVersion() }}</p>
+                <p>You are using Juzaweb CMS Version: {{ \Juzaweb\CMS\Version::getVersion() }}</p>
                 <p>View CMS change logs: <a href="https://github.com/juzaweb/cms/releases" target="_blank">click here</a></p>
             </div>
 

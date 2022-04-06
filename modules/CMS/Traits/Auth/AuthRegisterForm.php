@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Juzaweb\CMS\Backend\Events\RegisterSuccessful;
+use Juzaweb\Backend\Events\RegisterSuccessful;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Traits\ResponseMessage;
 

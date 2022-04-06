@@ -10,7 +10,7 @@ namespace Juzaweb\CMS\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Juzaweb\CMS\Events\EmailHook;
-use Juzaweb\CMS\Backend\Models\EmailTemplate;
+use Juzaweb\Backend\Models\EmailTemplate;
 use Juzaweb\CMS\Support\Email;
 
 class SendEmailHook implements ShouldQueue

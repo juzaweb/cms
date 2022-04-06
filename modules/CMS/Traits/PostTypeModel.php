@@ -18,11 +18,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Backend\Facades\HookAction;
-use Juzaweb\CMS\Backend\Http\Resources\TaxonomyResource;
-use Juzaweb\CMS\Backend\Models\Comment;
-use Juzaweb\CMS\Backend\Models\PostMeta;
-use Juzaweb\CMS\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\Backend\Http\Resources\TaxonomyResource;
+use Juzaweb\Backend\Models\Comment;
+use Juzaweb\Backend\Models\PostMeta;
+use Juzaweb\Backend\Models\Taxonomy;
 
 /**
  * @method Builder wherePublish()
@@ -42,7 +42,7 @@ trait PostTypeModel
     /**
      * Create Builder for frontend
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Juzaweb\CMS\Backend\Models\Post
+     * @return \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\Post
      */
     public static function selectFrontendBuilder()
     {

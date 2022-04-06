@@ -13,9 +13,9 @@ namespace Juzaweb\CMS\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\CMS\Backend\Models\Post;
-use Juzaweb\CMS\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Backend\Facades\HookAction;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Facades\HookAction;
 
 /**
  * Juzaweb\CMS\Models\Search
@@ -48,9 +48,9 @@ use Juzaweb\CMS\Backend\Facades\HookAction;
  * @method static Builder|Search whereTitle($value)
  * @method static Builder|Search whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Backend\Models\Taxonomy[] $taxonomies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $taxonomies
  * @property-read int|null $taxonomies_count
- * @property-read \Juzaweb\CMS\Backend\Models\Post $post
+ * @property-read \Juzaweb\Backend\Models\Post $post
  */
 class Search extends Model
 {

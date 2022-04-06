@@ -20,7 +20,7 @@ use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\Manager\UpdateManager;
 use Juzaweb\CMS\Support\JuzawebApi;
-use Juzaweb\Version;
+use Juzaweb\CMS\Version;
 
 class UpdateController extends BackendController
 {

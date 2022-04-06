@@ -252,7 +252,7 @@
 
     var multi_selection_enabled = @if($multiChoose == 1) true @else false @endif;
 </script>
-<script src="{{ asset('jw-styles/juzaweb/styles/js/filemanager.js') }}?v={{ \Juzaweb\Version::getVersion() }}"></script>
+<script src="{{ asset('jw-styles/juzaweb/styles/js/filemanager.js') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}"></script>
 
 <script>
     Dropzone.options.uploadForm = {

@@ -4,7 +4,7 @@ namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Juzaweb\CMS\Backend\Models\EmailList;
+use Juzaweb\Backend\Models\EmailList;
 use TwigBridge\Facade\Twig;
 
 class SendEmail

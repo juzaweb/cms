@@ -17,7 +17,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Backend\Database\Factories\UserFactory;
+use Juzaweb\Backend\Database\Factories\UserFactory;
 use Juzaweb\CMS\Traits\ModelCache;
 use Juzaweb\CMS\Traits\ResourceModel;
 use Spatie\Permission\Traits\HasRoles;
@@ -42,7 +42,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @method static Builder|User active()
- * @method static \Juzaweb\CMS\Backend\Database\Factories\UserFactory factory(...$parameters)
+ * @method static \Juzaweb\Backend\Database\Factories\UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()

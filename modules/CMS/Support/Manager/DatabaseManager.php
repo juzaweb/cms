@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Juzaweb\CMS\Facades\Config as DbConfig;
-use Juzaweb\CMS\Backend\Models\EmailTemplate;
+use Juzaweb\Backend\Models\EmailTemplate;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseManager

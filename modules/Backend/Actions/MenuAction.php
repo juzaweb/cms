@@ -17,7 +17,7 @@ use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Support\Theme\CustomMenuBox;
-use Juzaweb\Version;
+use Juzaweb\CMS\Version;
 
 class MenuAction extends Action
 {

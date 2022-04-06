@@ -3,8 +3,8 @@
 namespace Juzaweb\CMS\Support;
 
 use Juzaweb\CMS\Jobs\SendEmailJob;
-use Juzaweb\CMS\Backend\Models\EmailList;
-use Juzaweb\CMS\Backend\Models\EmailTemplate;
+use Juzaweb\Backend\Models\EmailList;
+use Juzaweb\Backend\Models\EmailTemplate;
 
 class Email
 {

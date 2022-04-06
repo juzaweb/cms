@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Models;
 
 use Illuminate\Support\Arr;
-use Juzaweb\Traits\ResourceModel;
+use Juzaweb\CMS\Traits\ResourceModel;
 use Spatie\Permission\Models\Role as BaseRole;
 
 class Role extends BaseRole

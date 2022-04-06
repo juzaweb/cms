@@ -3,8 +3,8 @@
 namespace Juzaweb\CMS\Http\Controllers;
 
 use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Backend\Facades\HookAction;
-use Juzaweb\CMS\Backend\Http\Resources\UserResource;
+use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\Backend\Http\Resources\UserResource;
 use Juzaweb\CMS\Traits\ResponseMessage;
 use TwigBridge\Facade\Twig;
 use Illuminate\Support\Facades\View;
