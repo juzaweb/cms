@@ -2,11 +2,7 @@
 
 namespace Juzaweb\CMS\Providers;
 
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
-use Juzaweb\Backend\Http\Controllers\Frontend\RouteController;
 use Juzaweb\CMS\Contracts\ThemeContract;
 use Juzaweb\CMS\Contracts\ThemeInterface;
 use Juzaweb\CMS\Support\Theme\Theme;
