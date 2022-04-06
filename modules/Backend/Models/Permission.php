@@ -27,7 +27,7 @@ use Spatie\Permission\Models\Permission as BasePermission;
  * @property-read int|null $permissions_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Role[] $roles
  * @property-read int|null $roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Models\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Models\User[] $users
  * @property-read int|null $users_count
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Permission newQuery()

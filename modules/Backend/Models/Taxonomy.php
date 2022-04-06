@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Juzaweb\CMS\Traits\ModelCache;
 use Juzaweb\CMS\Traits\TaxonomyModel;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
  * Juzaweb\Backend\Models\Taxonomy

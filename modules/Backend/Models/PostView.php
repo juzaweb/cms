@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Backend\Models;
 
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
  * Juzaweb\Backend\Models\PostView

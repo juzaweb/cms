@@ -11,7 +11,7 @@ use Juzaweb\Backend\Models\Menu;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\ArrayPagination;
 
 class LoadDataController extends BackendController

@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Models;
 
 use Illuminate\Support\Collection;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
  * Juzaweb\Backend\Models\MenuItem

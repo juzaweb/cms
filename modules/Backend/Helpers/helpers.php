@@ -86,7 +86,7 @@ if (! function_exists('set_config')) {
      *
      * @param string $key
      * @param string|array $value
-     * @return \Juzaweb\Models\Config
+     * @return \Juzaweb\CMS\Models\Config
      */
     function set_config($key, $value)
     {
@@ -570,14 +570,14 @@ if (! function_exists('remove_backend_message')) {
 
 if (! function_exists('is_admin')) {
     /**
-     * @param \Juzaweb\Models\User|null $user
+     * @param \Juzaweb\CMS\Models\User|null $user
      * @return bool
      */
     function is_admin($user = null)
     {
         if (empty($user)) {
             /**
-             * @var \Juzaweb\Models\User $jw_user
+             * @var \Juzaweb\CMS\Models\User $jw_user
              */
             global $jw_user;
 
@@ -594,14 +594,14 @@ if (! function_exists('is_admin')) {
 
 if (!function_exists('has_permission')) {
     /**
-     * @param \Juzaweb\Models\User|null $user
+     * @param \Juzaweb\CMS\Models\User|null $user
      * @return bool
      */
     function has_permission($user = null)
     {
         if (empty($user)) {
             /**
-             * @var \Juzaweb\Models\User $jw_user
+             * @var \Juzaweb\CMS\Models\User $jw_user
              */
             global $jw_user;
 

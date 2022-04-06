@@ -4,7 +4,7 @@ namespace Juzaweb\Backend\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class UserFactory extends Factory
 {

@@ -5,8 +5,8 @@ namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 use Illuminate\Http\Request;
 use Juzaweb\CMS\Facades\GlobalData;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Models\Config;
-use Juzaweb\Models\Language;
+use Juzaweb\CMS\Models\Config;
+use Juzaweb\CMS\Models\Language;
 
 class SystemSettingController extends BackendController
 {

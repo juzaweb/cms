@@ -13,7 +13,7 @@ use Juzaweb\Backend\Http\Controllers\Frontend\TaxonomyController;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 trait HookActionRegister
 {

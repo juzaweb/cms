@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Abstracts;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Database\Eloquent\Model;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 abstract class ResourcePolicy
 {

@@ -11,8 +11,8 @@
 namespace Juzaweb\Backend\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Juzaweb\Models\Model;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
 
 class PostPolicy
 {

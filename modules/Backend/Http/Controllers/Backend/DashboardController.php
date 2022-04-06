@@ -10,7 +10,7 @@ use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostView;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class DashboardController extends BackendController
 {

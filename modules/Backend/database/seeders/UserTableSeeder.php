@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class UserTableSeeder extends Seeder
 {

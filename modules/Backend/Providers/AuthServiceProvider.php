@@ -6,7 +6,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\Backend\Policies\PostPolicy;
 use Juzaweb\Backend\Policies\TaxonomyPolicy;
 use Juzaweb\Backend\Policies\UserPolicy;

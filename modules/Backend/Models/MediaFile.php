@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Models;
 
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
  * Juzaweb\Backend\Models\MediaFile

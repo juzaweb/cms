@@ -4,7 +4,7 @@ namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Juzaweb\Backend\Database\Factories\PostFactory;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\ModelCache;
 use Juzaweb\CMS\Traits\PostTypeModel;
 
@@ -31,7 +31,7 @@ use Juzaweb\CMS\Traits\PostTypeModel;
  * @property int $total_comment
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Comment[] $comments
  * @property-read int|null $comments_count
- * @property-read \Juzaweb\Models\User|null $createdBy
+ * @property-read \Juzaweb\CMS\Models\User|null $createdBy
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MenuItem[] $menuItems
  * @property-read int|null $menu_items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostMeta[] $metas
@@ -42,7 +42,7 @@ use Juzaweb\CMS\Traits\PostTypeModel;
  * @property-read int|null $post_views_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $taxonomies
  * @property-read int|null $taxonomies_count
- * @property-read \Juzaweb\Models\User|null $updatedBy
+ * @property-read \Juzaweb\CMS\Models\User|null $updatedBy
  * @method static \Juzaweb\Backend\Database\Factories\PostFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()

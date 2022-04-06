@@ -8,12 +8,12 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend;
+namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Support\Arr;
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class PermissionAction extends Action
 {
@@ -46,10 +46,12 @@ class PermissionAction extends Action
 
     public function addRoleUserForm(User $model)
     {
-        echo e(view(
-            'perm::backend.role.components.role_users',
-            compact('model')
-        ));
+        echo e(
+            view(
+                'perm::backend.role.components.role_users',
+                compact('model')
+            )
+        );
     }
 
     public function addAdminMenu()

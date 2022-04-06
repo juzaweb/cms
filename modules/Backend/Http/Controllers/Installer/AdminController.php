@@ -8,14 +8,14 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers;
+namespace Juzaweb\Backend\Http\Controllers\Installer;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 class AdminController extends Controller
 {
@@ -26,17 +26,22 @@ class AdminController extends Controller
 
     public function save(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:150',
-            'email' => 'required|email|max:150',
-            'password' => 'required|max:32|min:8|confirmed',
-            'password_confirmation' => 'required|max:32|min:8',
-        ], [], [
-            'name' => trans('cms::app.name'),
-            'email' => trans('cms::app.email'),
-            'password' => trans('cms::app.password'),
-            'password_confirmation' => trans('cms::app.confirm_password'),
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required|max:150',
+                'email' => 'required|email|max:150',
+                'password' => 'required|max:32|min:8|confirmed',
+                'password_confirmation' => 'required|max:32|min:8',
+            ],
+            [],
+            [
+                'name' => trans('cms::app.name'),
+                'email' => trans('cms::app.email'),
+                'password' => trans('cms::app.password'),
+                'password_confirmation' => trans('cms::app.confirm_password'),
+            ]
+        );
 
         if ($validator->fails()) {
             return redirect()
@@ -58,7 +63,12 @@ class AdminController extends Controller
             throw $e;
         }
 
-        return redirect()->to('install/final')
-            ->with(['message' => trans('installer::installer.final.finished')]);
+        return redirect()
+            ->to('install/final')
+            ->with(
+                [
+                    'message' => trans('installer::installer.final.finished')
+                ]
+            );
     }
 }

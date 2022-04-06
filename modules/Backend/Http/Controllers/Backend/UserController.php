@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\UserDataTable;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
 
@@ -99,7 +99,7 @@ class UserController extends BackendController
      * After Save model
      *
      * @param array $data
-     * @param \Juzaweb\Models\Model $model
+     * @param \Juzaweb\CMS\Models\Model $model
      * @throws \Illuminate\Validation\ValidationException
      */
     protected function beforeSave(&$data, &$model, ...$params)

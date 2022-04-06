@@ -4,7 +4,7 @@ namespace Juzaweb\Backend\Models;
 
 use Illuminate\Support\Arr;
 use TwigBridge\Facade\Twig;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
  * Juzaweb\Backend\Models\EmailList

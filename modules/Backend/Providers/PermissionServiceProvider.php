@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Backend\Providers;
 
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Support\PermissionRegistrar;
 use Juzaweb\Facades\ActionRegister;

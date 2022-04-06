@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Backend\Policies;
 
-use Juzaweb\Models\Model;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TaxonomyPolicy
