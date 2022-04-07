@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Ecommerce\Http\Controllers\Backend;
 
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class SettingController extends BackendController
 {

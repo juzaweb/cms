@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Movie\Http\Controllers\Frontend;
 
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\Movie\Models\DownloadLink;
 use Juzaweb\Movie\Models\Video\VideoServer;
 use Juzaweb\Movie\Models\Movie\Movie;

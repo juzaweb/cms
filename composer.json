@@ -27,6 +27,7 @@
         "juzaweb/laravel-translation-loader": "^2.0",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "rcrowe/twigbridge": "^0.14",
         "rennokki/laravel-eloquent-query-cache": "^3.1",

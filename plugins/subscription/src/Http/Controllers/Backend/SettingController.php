@@ -11,7 +11,7 @@
 namespace Juzaweb\Subscription\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class SettingController extends BackendController
 {

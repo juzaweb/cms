@@ -12,7 +12,7 @@ namespace Juzaweb\Tool\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Juzaweb\CMS\Facades\Site;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Tool\Jobs\ImportBlogger;
 
 class ImportController extends BackendController

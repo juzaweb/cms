@@ -9,7 +9,7 @@ use Juzaweb\Crawler\Models\CrawTemplate;
 use Juzaweb\Crawler\Models\Component;
 use Juzaweb\Crawler\Models\CrawRemoveElement;
 use Juzaweb\Crawler\Helpers\Leech\LeechComponent;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class ComponentController extends BackendController
 {

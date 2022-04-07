@@ -4,7 +4,7 @@ namespace Juzaweb\Movie\Http\Controllers\Frontend;
 
 use Juzaweb\Multisite\Core\Helpers\VideoStream;
 use Juzaweb\Multisite\Core\Helpers\UrlVideoStream;
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class StreamController extends FrontendController
 {

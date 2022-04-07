@@ -8,6 +8,7 @@ use Juzaweb\Backend\Actions\EnqueueStyleAction;
 use Juzaweb\Backend\Actions\FrontendAction;
 use Juzaweb\Backend\Actions\MenuAction;
 use Juzaweb\Backend\Actions\PermissionAction;
+use Juzaweb\Backend\Actions\SocialLoginAction;
 use Juzaweb\Backend\Actions\ThemeAction;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Models\Comment;
@@ -43,6 +44,7 @@ class BackendServiceProvider extends ServiceProvider
                 ThemeAction::class,
                 FrontendAction::class,
                 PermissionAction::class,
+                SocialLoginAction::class,
             ]
         );
     

@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\SocialLogin;
+namespace Juzaweb\Backend\Actions;
 
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
@@ -25,10 +25,6 @@ class SocialLoginAction extends Action
 
     public function addSettingForm()
     {
-        HookAction::registerConfig([
-            'socialites'
-        ]);
-
         $socials = [
             'facebook',
             'google',
@@ -39,10 +35,16 @@ class SocialLoginAction extends Action
 
         $data = get_config('socialites', []);
 
-        HookAction::addSettingForm('social-login', [
-            'name' => trans('juso::content.social_login'),
-            'view' => view('juso::setting', compact('socials', 'data')),
-            'priority' => 20
-        ]);
+        HookAction::addSettingForm(
+            'social-login',
+            [
+                'name' => trans('cms::app.social_login'),
+                'view' => view(
+                    'cms::backend.setting.system.form.social_login',
+                    compact('socials', 'data')
+                ),
+                'priority' => 20
+            ]
+        );
     }
 }

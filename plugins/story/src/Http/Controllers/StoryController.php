@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Story\Http\Controllers;
 
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class StoryController extends BackendController
 {

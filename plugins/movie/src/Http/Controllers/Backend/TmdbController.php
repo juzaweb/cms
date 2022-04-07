@@ -5,7 +5,7 @@ namespace Juzaweb\Movie\Http\Controllers\Backend;
 use Juzaweb\Movie\Helpers\ImportMovie;
 use Juzaweb\Movie\Helpers\TmdbApi;
 use Illuminate\Http\Request;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class TmdbController extends BackendController
 {

@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Tool\Http\Controllers;
 
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class ToolController extends BackendController
 {

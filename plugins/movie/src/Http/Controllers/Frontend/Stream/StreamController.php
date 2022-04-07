@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Movie\Http\Controllers\Frontend\Stream;
 
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Crypt;
 
 class StreamController extends BackendController

@@ -8,7 +8,7 @@ use Juzaweb\Crawler\Helpers\Leech\LeechListItems;
 use Juzaweb\Crawler\Http\Datatables\TemplateDatatable;
 use Juzaweb\Crawler\Models\CrawTemplate;
 use Illuminate\Http\Request;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Traits\ResourceController;
 

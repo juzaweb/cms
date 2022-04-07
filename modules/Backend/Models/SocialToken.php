@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\SocialLogin\Models;
+namespace Juzaweb\Backend\Models;
 
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
