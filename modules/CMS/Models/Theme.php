@@ -33,7 +33,7 @@ use Juzaweb\Backend\Models\Post;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $taxonomies
  * @property-read int|null $taxonomies_count
  * @property-read \Juzaweb\CMS\Models\User|null $updatedBy
- * @method static \Juzaweb\Backend\Database\Factories\PostFactory factory(...$parameters)
+ * @method static \Juzaweb\CMS\Database\Factories\PostFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Theme newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Theme newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Theme query()

@@ -104,7 +104,7 @@ class CmsServiceProvider extends ServiceProvider
     
     protected function bootMigrations()
     {
-        $mainPath = $this->basePath . '/database/migrations';
+        $mainPath = $this->basePath . '/Database/migrations';
         $directories = glob($mainPath . '/*', GLOB_ONLYDIR);
         $paths = array_merge([$mainPath], $directories);
         $this->loadMigrationsFrom($paths);

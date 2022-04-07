@@ -25,7 +25,7 @@ class BDatabaseTest extends TestCase
         $this->artisan(
             'db:seed',
             [
-                '--class' => 'Juzaweb\Backend\Database\Seeders\DatabaseSeeder'
+                '--class' => 'Juzaweb\CMS\Database\Seeders\DatabaseSeeder'
             ]
         )
             ->assertExitCode(0);

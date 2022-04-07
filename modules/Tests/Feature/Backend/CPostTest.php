@@ -71,10 +71,6 @@ class CPostTest extends TestCase
             unset($data['slug']);
             
             $response = $this->post($create, $post);
-            if ($response->status() == 500) {
-                dd($post);
-            }
-            
             $response->assertStatus(302);
     
             $slug = substr($post['title'], 0, 70);

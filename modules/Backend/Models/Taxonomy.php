@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Backend\Models;
 
-use Juzaweb\Backend\Database\Factories\TaxonomyFactory;
+use Juzaweb\CMS\Database\Factories\TaxonomyFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Juzaweb\CMS\Traits\ModelCache;
@@ -29,7 +29,7 @@ use Juzaweb\CMS\Models\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\MenuItem[] $menuItems
  * @property-read int|null $menu_items_count
  * @property-read Taxonomy|null $parent
- * @method static \Juzaweb\Backend\Database\Factories\TaxonomyFactory factory(...$parameters)
+ * @method static \Juzaweb\CMS\Database\Factories\TaxonomyFactory factory(...$parameters)
  * @method static Builder|Taxonomy newModelQuery()
  * @method static Builder|Taxonomy newQuery()
  * @method static Builder|Taxonomy query()
