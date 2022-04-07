@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98610bc81bcab5166eb4ffa1d3513372",
+    "content-hash": "e817d50d63f3767e894382726df2ea2c",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1385,16 +1385,16 @@
         },
         {
             "name": "juzaweb/laravel-translation-loader",
-            "version": "v1.0.1",
+            "version": "v2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/laravel-translation.git",
-                "reference": "ec1fc783ba7b063258d2f9192984ee96f0807df0"
+                "reference": "17dc7f9d1af635ccade217dc7eaa3029a228b843"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/laravel-translation/zipball/ec1fc783ba7b063258d2f9192984ee96f0807df0",
-                "reference": "ec1fc783ba7b063258d2f9192984ee96f0807df0",
+                "url": "https://api.github.com/repos/juzaweb/laravel-translation/zipball/17dc7f9d1af635ccade217dc7eaa3029a228b843",
+                "reference": "17dc7f9d1af635ccade217dc7eaa3029a228b843",
                 "shasum": ""
             },
             "require": {
@@ -1440,7 +1440,7 @@
             ],
             "support": {
                 "issues": "https://github.com/juzaweb/laravel-translation/issues",
-                "source": "https://github.com/juzaweb/laravel-translation/tree/v1.0.1"
+                "source": "https://github.com/juzaweb/laravel-translation/tree/v2.0"
             },
             "funding": [
                 {
@@ -1448,7 +1448,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-03-27T00:34:28+00:00"
+            "time": "2022-04-07T13:42:17+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2009,16 +2009,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.0.13",
+            "version": "3.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "15dc1ccb2db8daef507c4d3e501565bae42a9f0e"
+                "reference": "46a5450352540e89cb8e7eb20c58b5b4aae481f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/15dc1ccb2db8daef507c4d3e501565bae42a9f0e",
-                "reference": "15dc1ccb2db8daef507c4d3e501565bae42a9f0e",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/46a5450352540e89cb8e7eb20c58b5b4aae481f6",
+                "reference": "46a5450352540e89cb8e7eb20c58b5b4aae481f6",
                 "shasum": ""
             },
             "require": {
@@ -2079,7 +2079,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.0.13"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.0.14"
             },
             "funding": [
                 {
@@ -2095,7 +2095,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-02T08:55:13+00:00"
+            "time": "2022-04-06T18:17:37+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -5889,16 +5889,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.3.9",
+            "version": "v3.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "6ff9b0e440fa66f97f207e181c41340ddfa5683d"
+                "reference": "8442df056c51b706793adf80a9fd363406dd3674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6ff9b0e440fa66f97f207e181c41340ddfa5683d",
-                "reference": "6ff9b0e440fa66f97f207e181c41340ddfa5683d",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8442df056c51b706793adf80a9fd363406dd3674",
+                "reference": "8442df056c51b706793adf80a9fd363406dd3674",
                 "shasum": ""
             },
             "require": {
@@ -5949,7 +5949,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.3.9"
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.10"
             },
             "funding": [
                 {
@@ -5961,7 +5961,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-25T09:37:52+00:00"
+            "time": "2022-04-06T06:47:41+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -6177,16 +6177,16 @@
         },
         {
             "name": "zircote/swagger-php",
-            "version": "4.2.13",
+            "version": "4.2.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zircote/swagger-php.git",
-                "reference": "8888655d7dc21eda6ec71e521f71a757605f48fe"
+                "reference": "975c598084a1f8e7acccaa68aed12c803cebbd6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/8888655d7dc21eda6ec71e521f71a757605f48fe",
-                "reference": "8888655d7dc21eda6ec71e521f71a757605f48fe",
+                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/975c598084a1f8e7acccaa68aed12c803cebbd6a",
+                "reference": "975c598084a1f8e7acccaa68aed12c803cebbd6a",
                 "shasum": ""
             },
             "require": {
@@ -6246,9 +6246,9 @@
             ],
             "support": {
                 "issues": "https://github.com/zircote/swagger-php/issues",
-                "source": "https://github.com/zircote/swagger-php/tree/4.2.13"
+                "source": "https://github.com/zircote/swagger-php/tree/4.2.14"
             },
-            "time": "2022-03-23T08:54:27+00:00"
+            "time": "2022-04-01T08:53:53+00:00"
         }
     ],
     "packages-dev": [
