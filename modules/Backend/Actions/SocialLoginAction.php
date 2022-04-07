@@ -25,12 +25,6 @@ class SocialLoginAction extends Action
 
     public function addSettingForm()
     {
-        HookAction::registerConfig(
-            [
-                'socialites'
-            ]
-        );
-
         $socials = [
             'facebook',
             'google',
