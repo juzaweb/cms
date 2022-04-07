@@ -4,7 +4,7 @@ namespace Juzaweb\Movie\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\Movie\Http\Datatables\SubtitleDatatable;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Movie\Models\Movie\Movie;
 use Juzaweb\Movie\Models\Subtitle;
 use Juzaweb\Movie\Models\Video\VideoFile;

@@ -4,7 +4,7 @@ namespace Juzaweb\Subscription\Http\Controllers\Backend;
 
 use Juzaweb\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Subscription\Http\Datatables\SubscriptionHistoryDatatable;
 use Juzaweb\Subscription\Models\SubscriptionHistory;
 

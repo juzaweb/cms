@@ -6,7 +6,7 @@ use Juzaweb\Crawler\Models\CrawContent;
 use Juzaweb\Crawler\Models\CrawTemplate;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class ContentController extends BackendController
 {

@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Movie\Http\Controllers\Frontend;
 
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Cookie;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\Movie\Models\Movie\Movie;

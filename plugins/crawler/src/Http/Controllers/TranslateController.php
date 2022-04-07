@@ -6,7 +6,7 @@ use Juzaweb\Crawler\Models\CrawContent;
 use Illuminate\Database\Schema\Builder;
 use Juzaweb\Crawler\Models\CrawTranslate;
 use Illuminate\Http\Request;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class TranslateController extends BackendController
 {

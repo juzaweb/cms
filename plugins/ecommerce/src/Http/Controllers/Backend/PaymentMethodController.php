@@ -4,7 +4,7 @@ namespace Juzaweb\Ecommerce\Http\Controllers\Backend;
 
 use Juzaweb\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Ecommerce\Http\Datatables\PaymentMethodDatatable;
 use Juzaweb\Ecommerce\Models\PaymentMethod;
 

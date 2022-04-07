@@ -4,7 +4,7 @@ namespace Juzaweb\Movie\Http\Controllers\Backend;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Movie\Models\Ads;
 
 class AdsSettingController extends BackendController

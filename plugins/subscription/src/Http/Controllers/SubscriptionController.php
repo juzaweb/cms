@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Http\Controllers\Controller;
+use Juzaweb\CMS\Http\Controllers\Controller;
 use Juzaweb\Subscription\Events\PaymentSuccess;
 use Juzaweb\Subscription\Facades\Subscription;
 use Juzaweb\Subscription\Models\Package;

@@ -4,7 +4,7 @@ namespace Juzaweb\Seo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class SeoController extends BackendController
 {

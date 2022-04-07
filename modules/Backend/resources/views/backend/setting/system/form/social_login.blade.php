@@ -15,22 +15,22 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5>{{ trans("juso::content.socials.{$social}") }}</h5>
+                    <h5>{{ trans("cms::app.socials.{$social}") }}</h5>
 
-                    {{ Field::checkbox(trans('juso::content.enable'), "socialites[{$social}][enable]", [
+                    {{ Field::checkbox(trans('cms::app.enable'), "socialites[{$social}][enable]", [
                         'value' => '1',
                         'checked' => $data[$social]['enable'] ?? false
                     ]) }}
 
-                    {{ Field::text(trans('juso::content.client_id'), "socialites[{$social}][client_id]", [
+                    {{ Field::text(trans('cms::app.client_id'), "socialites[{$social}][client_id]", [
                         'value' => $data[$social]['client_id'] ?? ''
                     ]) }}
 
-                    {{ Field::text(trans('juso::content.client_secret'), "socialites[{$social}][client_secret]", [
+                    {{ Field::text(trans('cms::app.client_secret'), "socialites[{$social}][client_secret]", [
                         'value' => $data[$social]['client_secret'] ?? ''
                     ]) }}
 
-                    {{ Field::text(trans('juso::content.redirect_url'), "socialites[{$social}][redirect_url]", [
+                    {{ Field::text(trans('cms::app.redirect_url'), "socialites[{$social}][redirect_url]", [
                         'disabled' => true,
                         'value' => route('auth.socialites.redirect', [$social])
                     ]) }}

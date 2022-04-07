@@ -10,7 +10,7 @@ use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Subscription\Facades\Subscription;
 use Juzaweb\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Subscription\Http\Datatables\PackageDatatable;
 use Juzaweb\Subscription\Models\Package;
 

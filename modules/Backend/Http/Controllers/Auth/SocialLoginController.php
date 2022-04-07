@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\SocialLogin\Http\Controllers;
+namespace Juzaweb\Backend\Http\Controllers\Auth;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\CMS\Models\User;
-use Juzaweb\SocialLogin\Models\SocialToken;
+use Juzaweb\Backend\Models\SocialToken;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\FacebookProvider;
 use Laravel\Socialite\Two\GoogleProvider;

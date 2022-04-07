@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Movie\Http\Controllers\Backend;
 
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Illuminate\Http\Request;
 use Juzaweb\Movie\Models\ServerStream;
 

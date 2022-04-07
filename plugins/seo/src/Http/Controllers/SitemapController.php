@@ -4,7 +4,7 @@ namespace Juzaweb\Seo\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Http\Controllers\Controller;
+use Juzaweb\CMS\Http\Controllers\Controller;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
 
