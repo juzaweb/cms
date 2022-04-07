@@ -16,7 +16,7 @@ class UpdateTest extends TestCase
         $this->assertEquals(302, $response->getStatusCode());
     }*/
 
-    public function testUpdateCommand()
+    /*public function testUpdateCommand()
     {
         $ver = Version::getVersion();
         $filePath = base_path('modules/CMS/Version.php');
@@ -34,5 +34,5 @@ class UpdateTest extends TestCase
     
         $ver = Version::getVersion();
         $this->assertTrue($ver != 'v2.0');
-    }
+    }*/
 }
