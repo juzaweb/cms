@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.6.0.
+ * Generated for Laravel 9.7.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1514,7 +1514,7 @@
          */ 
         public static function handle($input, $output = null)
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         return $instance->handle($input, $output);
         }
                     /**
@@ -1527,7 +1527,7 @@
          */ 
         public static function terminate($input, $status)
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         $instance->terminate($input, $status);
         }
                     /**
@@ -1540,7 +1540,7 @@
          */ 
         public static function command($signature, $callback)
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         return $instance->command($signature, $callback);
         }
                     /**
@@ -1552,7 +1552,7 @@
          */ 
         public static function registerCommand($command)
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         $instance->registerCommand($command);
         }
                     /**
@@ -1567,7 +1567,7 @@
          */ 
         public static function call($command, $parameters = [], $outputBuffer = null)
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         return $instance->call($command, $parameters, $outputBuffer);
         }
                     /**
@@ -1580,7 +1580,7 @@
          */ 
         public static function queue($command, $parameters = [])
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         return $instance->queue($command, $parameters);
         }
                     /**
@@ -1591,7 +1591,7 @@
          */ 
         public static function all()
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         return $instance->all();
         }
                     /**
@@ -1602,7 +1602,7 @@
          */ 
         public static function output()
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         return $instance->output();
         }
                     /**
@@ -1613,7 +1613,7 @@
          */ 
         public static function bootstrap()
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         $instance->bootstrap();
         }
                     /**
@@ -1625,7 +1625,7 @@
          */ 
         public static function setArtisan($artisan)
         {            //Method inherited from \Illuminate\Foundation\Console\Kernel         
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \Juzaweb\CMS\Console\Kernel $instance */
                         $instance->setArtisan($artisan);
         }
          
@@ -1835,7 +1835,7 @@
                     /**
          * Get the currently authenticated user.
          *
-         * @return \Juzaweb\CMS\Models\User|null
+         * @return \Juzaweb\CMS\Models\User|null 
          * @static 
          */ 
         public static function user()
@@ -1870,7 +1870,7 @@
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \Juzaweb\CMS\Models\User|false
+         * @return \Juzaweb\CMS\Models\User|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1950,7 +1950,7 @@
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \Juzaweb\CMS\Models\User|false
+         * @return \Juzaweb\CMS\Models\User|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -2002,7 +2002,7 @@
          *
          * @param string $password
          * @param string $attribute
-         * @return \Juzaweb\CMS\Models\User|null
+         * @return \Juzaweb\CMS\Models\User|null 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -2026,7 +2026,7 @@
                     /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \Juzaweb\CMS\Models\User
+         * @return \Juzaweb\CMS\Models\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -2140,7 +2140,7 @@
                     /**
          * Return the currently cached user.
          *
-         * @return \Juzaweb\CMS\Models\User|null
+         * @return \Juzaweb\CMS\Models\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -2186,7 +2186,7 @@
                     /**
          * Determine if the current user is authenticated. If not, throw an exception.
          *
-         * @return \Juzaweb\CMS\Models\User
+         * @return \Juzaweb\CMS\Models\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -12870,6 +12870,17 @@
                     /**
          * 
          *
+         * @see \Spatie\Feed\FeedServiceProvider::registerRouteMacro()
+         * @param mixed $baseUrl
+         * @static 
+         */ 
+        public static function feeds($baseUrl = '')
+        {
+                        return \Illuminate\Routing\Router::feeds($baseUrl);
+        }
+                    /**
+         * 
+         *
          * @see \Juzaweb\CMS\Support\Macros\RouterMacros::jwResource()
          * @param mixed $uri
          * @param mixed $controller
@@ -16915,43 +16926,132 @@
      
 }
 
-    namespace Codedge\Updater { 
+    namespace Laravel\Socialite\Facades { 
             /**
-     * UpdaterFacade.php.
+     * 
      *
-     * @author Holger Lösken <holger.loesken@codedge.de>
-     * @copyright See LICENSE file that was distributed with this source code.
+     * @see \Laravel\Socialite\SocialiteManager
      */ 
-        class UpdaterFacade {
+        class Socialite {
                     /**
-         * 
+         * Get a driver instance.
          *
+         * @param string $driver
+         * @return mixed 
          * @static 
          */ 
-        public static function source($name = '')
+        public static function with($driver)
         {
-                        /** @var \Codedge\Updater\UpdaterManager $instance */
-                        return $instance->source($name);
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->with($driver);
         }
                     /**
-         * 
+         * Build an OAuth 2 provider instance.
          *
+         * @param string $provider
+         * @param array $config
+         * @return \Laravel\Socialite\Two\AbstractProvider 
          * @static 
          */ 
-        public static function getDefaultSourceRepository()
+        public static function buildProvider($provider, $config)
         {
-                        /** @var \Codedge\Updater\UpdaterManager $instance */
-                        return $instance->getDefaultSourceRepository();
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->buildProvider($provider, $config);
         }
                     /**
-         * 
+         * Format the server configuration.
          *
+         * @param array $config
+         * @return array 
          * @static 
          */ 
-        public static function sourceRepository($sourceRepository)
+        public static function formatConfig($config)
         {
-                        /** @var \Codedge\Updater\UpdaterManager $instance */
-                        return $instance->sourceRepository($sourceRepository);
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->formatConfig($config);
+        }
+                    /**
+         * Forget all of the resolved driver instances.
+         *
+         * @return \Laravel\Socialite\SocialiteManager 
+         * @static 
+         */ 
+        public static function forgetDrivers()
+        {
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->forgetDrivers();
+        }
+                    /**
+         * Set the container instance used by the manager.
+         *
+         * @param \Illuminate\Contracts\Container\Container $container
+         * @return \Laravel\Socialite\SocialiteManager 
+         * @static 
+         */ 
+        public static function setContainer($container)
+        {
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->setContainer($container);
+        }
+                    /**
+         * Get the default driver name.
+         *
+         * @return string 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function getDefaultDriver()
+        {
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->getDefaultDriver();
+        }
+                    /**
+         * Get a driver instance.
+         *
+         * @param string|null $driver
+         * @return mixed 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function driver($driver = null)
+        {            //Method inherited from \Illuminate\Support\Manager         
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->driver($driver);
+        }
+                    /**
+         * Register a custom driver creator Closure.
+         *
+         * @param string $driver
+         * @param \Closure $callback
+         * @return \Laravel\Socialite\SocialiteManager 
+         * @static 
+         */ 
+        public static function extend($driver, $callback)
+        {            //Method inherited from \Illuminate\Support\Manager         
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->extend($driver, $callback);
+        }
+                    /**
+         * Get all of the created "drivers".
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getDrivers()
+        {            //Method inherited from \Illuminate\Support\Manager         
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->getDrivers();
+        }
+                    /**
+         * Get the container instance used by the manager.
+         *
+         * @return \Illuminate\Contracts\Container\Container 
+         * @static 
+         */ 
+        public static function getContainer()
+        {            //Method inherited from \Illuminate\Support\Manager         
+                        /** @var \Laravel\Socialite\SocialiteManager $instance */
+                        return $instance->getContainer();
         }
          
     }
@@ -18073,7 +18173,7 @@
      
 }
 
-    namespace Juzaweb\CMS\Support\Html {
+    namespace Juzaweb\CMS\Support\Html { 
             /**
      * 
      *
@@ -18163,6 +18263,17 @@
                     /**
          * 
          *
+         * @see \Spatie\Feed\FeedServiceProvider::registerRouteMacro()
+         * @param mixed $baseUrl
+         * @static 
+         */ 
+        public static function feeds($baseUrl = '')
+        {
+                        return \Illuminate\Routing\Router::feeds($baseUrl);
+        }
+                    /**
+         * 
+         *
          * @see \Juzaweb\CMS\Support\Macros\RouterMacros::jwResource()
          * @param mixed $uri
          * @param mixed $controller
@@ -18188,10 +18299,39 @@
         }
          
     }
+            /**
+     * 
+     *
+     */ 
+        class Route {
+                    /**
+         * 
+         *
+         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
+         * @param mixed $roles
+         * @static 
+         */ 
+        public static function role($roles = [])
+        {
+                        return \Illuminate\Routing\Route::role($roles);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Permission\PermissionServiceProvider::registerMacroHelpers()
+         * @param mixed $permissions
+         * @static 
+         */ 
+        public static function permission($permissions = [])
+        {
+                        return \Illuminate\Routing\Route::permission($permissions);
+        }
+         
+    }
      
 }
 
-    namespace Juzaweb\CMS\Support {
+    namespace Juzaweb\CMS\Support { 
             /**
      * 
      *
@@ -18211,7 +18351,7 @@
                     /**
          * 
          *
-         * @see \Juzaweb\Providers\CmsServiceProvider::boot()
+         * @see \Juzaweb\CMS\Providers\CmsServiceProvider::boot()
          * @param string $modelClass
          * @param string $modelAttribute
          * @param callable|null $callback
@@ -18224,7 +18364,7 @@
                     /**
          * 
          *
-         * @see \Juzaweb\Providers\CmsServiceProvider::boot()
+         * @see \Juzaweb\CMS\Providers\CmsServiceProvider::boot()
          * @param string $modelClass
          * @param string $modelAttribute
          * @param callable|null $callback
@@ -19597,7 +19737,7 @@ namespace  {
                 /**
              * Add a "belongs to" relationship where clause to the query.
              *
-             * @param \Illuminate\Database\Eloquent\Model $related
+             * @param \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection<\Illuminate\Database\Eloquent\Model> $related
              * @param string|null $relationshipName
              * @param string $boolean
              * @return \Illuminate\Database\Eloquent\Builder|static 
@@ -20767,6 +20907,61 @@ namespace  {
             }
              
                 /**
+             * Add a clause that determines if a JSON path exists to the query.
+             *
+             * @param string $column
+             * @param string $boolean
+             * @param bool $not
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function whereJsonContainsKey($column, $boolean = 'and', $not = false)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->whereJsonContainsKey($column, $boolean, $not);
+            }
+             
+                /**
+             * Add an "or" clause that determines if a JSON path exists to the query.
+             *
+             * @param string $column
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function orWhereJsonContainsKey($column)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->orWhereJsonContainsKey($column);
+            }
+             
+                /**
+             * Add a clause that determines if a JSON path does not exist to the query.
+             *
+             * @param string $column
+             * @param string $boolean
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function whereJsonDoesntContainKey($column, $boolean = 'and')
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->whereJsonDoesntContainKey($column, $boolean);
+            }
+             
+                /**
+             * Add an "or" clause that determines if a JSON path does not exist to the query.
+             *
+             * @param string $column
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function orWhereJsonDoesntContainKey($column)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->orWhereJsonDoesntContainKey($column);
+            }
+             
+                /**
              * Add a "where JSON length" clause to the query.
              *
              * @param string $column
@@ -21852,7 +22047,7 @@ namespace  {
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class L5Swagger extends \L5Swagger\L5SwaggerFacade {}
             class Image extends \Intervention\Image\Facades\Image {}
-            class Updater extends \Codedge\Updater\UpdaterFacade {}
+            class Socialite extends \Laravel\Socialite\Facades\Socialite {}
             class Twig extends \TwigBridge\Facade\Twig {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class Field extends \Juzaweb\CMS\Support\Html\Field {}

@@ -62,10 +62,12 @@ class PermissionGenerateCommand extends Command
         
         $permissions = $this->resourcePermissions;
         foreach ($permissions as $permission) {
-            $group = PermissionGroup::firstOrCreate([
-                'name' => $resource,
-                'description' => $name,
-            ]);
+            $group = PermissionGroup::firstOrCreate(
+                [
+                    'name' => $resource,
+                    'description' => $name,
+                ]
+            );
     
             $label = $permission == 'index' ? 'View List' : $permission;
             $permission =  $permission == 'index' ? $resource : "{$resource}.{$permission}";

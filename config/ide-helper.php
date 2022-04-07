@@ -129,7 +129,7 @@ return [
 
     'model_locations' => [
         'app',
-        'packages',
+        'modules',
         'plugins'
     ],
 
