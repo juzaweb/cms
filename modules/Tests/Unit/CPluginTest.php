@@ -11,7 +11,7 @@
 namespace Juzaweb\Tests\Unit;
 
 use ChunkTests\Handler\ContentRangeUploadHandlerTest;
-use Juzaweb\Abstracts\Plugin;
+use Juzaweb\CMS\Abstracts\Plugin;
 use Juzaweb\Tests\TestCase;
 
 class CPluginTest extends TestCase

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Support\FileManager;
+use Juzaweb\CMS\Support\FileManager;
 
 class ImportBlogger implements ShouldQueue
 {

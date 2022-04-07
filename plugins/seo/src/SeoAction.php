@@ -10,9 +10,9 @@
 
 namespace Juzaweb\Seo;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\Seo\Http\Controllers\SeoController;
 use Juzaweb\Seo\Models\SeoMeta;
 

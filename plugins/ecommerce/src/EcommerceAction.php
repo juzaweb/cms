@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Ecommerce;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Ecommerce\Models\Variant;
 use Juzaweb\Backend\Facades\HookAction;
 

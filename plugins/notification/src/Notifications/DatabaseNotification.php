@@ -3,7 +3,7 @@
 namespace Juzaweb\Notification\Notifications;
 
 use Illuminate\Support\Arr;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Illuminate\Support\Facades\Notification;
 
 class DatabaseNotification extends NotificationAbstract

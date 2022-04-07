@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Ecommerce\Providers;
 
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class AutoloadSeviceProvider extends ServiceProvider
 {

@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Notification\Providers;
 
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
 use Juzaweb\Notification\Commands\SendNotify;
 use Juzaweb\Notification\Notification;

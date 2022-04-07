@@ -3,7 +3,7 @@
 namespace Juzaweb\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 
 /**
  * Juzaweb\Subscription\Models\UserSubscription

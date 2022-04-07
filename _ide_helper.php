@@ -1835,7 +1835,7 @@
                     /**
          * Get the currently authenticated user.
          *
-         * @return \Juzaweb\Models\User|null 
+         * @return \Juzaweb\CMS\Models\User|null
          * @static 
          */ 
         public static function user()
@@ -1870,7 +1870,7 @@
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \Juzaweb\Models\User|false 
+         * @return \Juzaweb\CMS\Models\User|false
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1950,7 +1950,7 @@
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \Juzaweb\Models\User|false 
+         * @return \Juzaweb\CMS\Models\User|false
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -2002,7 +2002,7 @@
          *
          * @param string $password
          * @param string $attribute
-         * @return \Juzaweb\Models\User|null 
+         * @return \Juzaweb\CMS\Models\User|null
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -2026,7 +2026,7 @@
                     /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \Juzaweb\Models\User 
+         * @return \Juzaweb\CMS\Models\User
          * @static 
          */ 
         public static function getLastAttempted()
@@ -2140,7 +2140,7 @@
                     /**
          * Return the currently cached user.
          *
-         * @return \Juzaweb\Models\User|null 
+         * @return \Juzaweb\CMS\Models\User|null
          * @static 
          */ 
         public static function getUser()
@@ -2186,7 +2186,7 @@
                     /**
          * Determine if the current user is authenticated. If not, throw an exception.
          *
-         * @return \Juzaweb\Models\User 
+         * @return \Juzaweb\CMS\Models\User
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -2314,7 +2314,7 @@
          */ 
         public static function compileString($value)
         {
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->compileString($value);
         }
                     /**
@@ -2326,7 +2326,7 @@
          */ 
         public static function compile($path = null)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->compile($path);
         }
                     /**
@@ -2337,7 +2337,7 @@
          */ 
         public static function getPath()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->getPath();
         }
                     /**
@@ -2349,7 +2349,7 @@
          */ 
         public static function setPath($path)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->setPath($path);
         }
                     /**
@@ -2363,7 +2363,7 @@
          */ 
         public static function render($string, $data = [], $deleteCachedView = false)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        return \Juzaweb\Support\BladeMinifyCompiler::render($string, $data, $deleteCachedView);
+                        return \Juzaweb\CMS\Support\BladeMinifyCompiler::render($string, $data, $deleteCachedView);
         }
                     /**
          * Render a component instance to HTML.
@@ -2374,7 +2374,7 @@
          */ 
         public static function renderComponent($component)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        return \Juzaweb\Support\BladeMinifyCompiler::renderComponent($component);
+                        return \Juzaweb\CMS\Support\BladeMinifyCompiler::renderComponent($component);
         }
                     /**
          * Strip the parentheses from the given expression.
@@ -2385,7 +2385,7 @@
          */ 
         public static function stripParentheses($expression)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->stripParentheses($expression);
         }
                     /**
@@ -2397,7 +2397,7 @@
          */ 
         public static function extend($compiler)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->extend($compiler);
         }
                     /**
@@ -2408,7 +2408,7 @@
          */ 
         public static function getExtensions()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->getExtensions();
         }
                     /**
@@ -2421,7 +2421,7 @@
          */ 
         public static function if($name, $callback)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->if($name, $callback);
         }
                     /**
@@ -2434,7 +2434,7 @@
          */ 
         public static function check($name, ...$parameters)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->check($name, ...$parameters);
         }
                     /**
@@ -2448,7 +2448,7 @@
          */ 
         public static function component($class, $alias = null, $prefix = '')
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->component($class, $alias, $prefix);
         }
                     /**
@@ -2461,7 +2461,7 @@
          */ 
         public static function components($components, $prefix = '')
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->components($components, $prefix);
         }
                     /**
@@ -2472,7 +2472,7 @@
          */ 
         public static function getClassComponentAliases()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->getClassComponentAliases();
         }
                     /**
@@ -2485,7 +2485,7 @@
          */ 
         public static function componentNamespace($namespace, $prefix)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->componentNamespace($namespace, $prefix);
         }
                     /**
@@ -2496,7 +2496,7 @@
          */ 
         public static function getClassComponentNamespaces()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->getClassComponentNamespaces();
         }
                     /**
@@ -2509,7 +2509,7 @@
          */ 
         public static function aliasComponent($path, $alias = null)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->aliasComponent($path, $alias);
         }
                     /**
@@ -2522,7 +2522,7 @@
          */ 
         public static function include($path, $alias = null)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->include($path, $alias);
         }
                     /**
@@ -2535,7 +2535,7 @@
          */ 
         public static function aliasInclude($path, $alias = null)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->aliasInclude($path, $alias);
         }
                     /**
@@ -2549,7 +2549,7 @@
          */ 
         public static function directive($name, $handler)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->directive($name, $handler);
         }
                     /**
@@ -2560,7 +2560,7 @@
          */ 
         public static function getCustomDirectives()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->getCustomDirectives();
         }
                     /**
@@ -2572,7 +2572,7 @@
          */ 
         public static function precompiler($precompiler)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->precompiler($precompiler);
         }
                     /**
@@ -2584,7 +2584,7 @@
          */ 
         public static function setEchoFormat($format)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->setEchoFormat($format);
         }
                     /**
@@ -2595,7 +2595,7 @@
          */ 
         public static function withDoubleEncoding()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->withDoubleEncoding();
         }
                     /**
@@ -2606,7 +2606,7 @@
          */ 
         public static function withoutDoubleEncoding()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->withoutDoubleEncoding();
         }
                     /**
@@ -2617,7 +2617,7 @@
          */ 
         public static function withoutComponentTags()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->withoutComponentTags();
         }
                     /**
@@ -2629,7 +2629,7 @@
          */ 
         public static function getCompiledPath($path)
         {            //Method inherited from \Illuminate\View\Compilers\Compiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->getCompiledPath($path);
         }
                     /**
@@ -2641,7 +2641,7 @@
          */ 
         public static function isExpired($path)
         {            //Method inherited from \Illuminate\View\Compilers\Compiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->isExpired($path);
         }
                     /**
@@ -2653,7 +2653,7 @@
          */ 
         public static function newComponentHash($component)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        return \Juzaweb\Support\BladeMinifyCompiler::newComponentHash($component);
+                        return \Juzaweb\CMS\Support\BladeMinifyCompiler::newComponentHash($component);
         }
                     /**
          * Compile a class component opening.
@@ -2667,7 +2667,7 @@
          */ 
         public static function compileClassComponentOpening($component, $alias, $data, $hash)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        return \Juzaweb\Support\BladeMinifyCompiler::compileClassComponentOpening($component, $alias, $data, $hash);
+                        return \Juzaweb\CMS\Support\BladeMinifyCompiler::compileClassComponentOpening($component, $alias, $data, $hash);
         }
                     /**
          * Compile the end-component statements into valid PHP.
@@ -2677,7 +2677,7 @@
          */ 
         public static function compileEndComponentClass()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->compileEndComponentClass();
         }
                     /**
@@ -2689,7 +2689,7 @@
          */ 
         public static function sanitizeComponentAttribute($value)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        return \Juzaweb\Support\BladeMinifyCompiler::sanitizeComponentAttribute($value);
+                        return \Juzaweb\CMS\Support\BladeMinifyCompiler::sanitizeComponentAttribute($value);
         }
                     /**
          * Compile an end-once block into valid PHP.
@@ -2699,7 +2699,7 @@
          */ 
         public static function compileEndOnce()
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->compileEndOnce();
         }
                     /**
@@ -2712,7 +2712,7 @@
          */ 
         public static function stringable($class, $handler = null)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->stringable($class, $handler);
         }
                     /**
@@ -2724,7 +2724,7 @@
          */ 
         public static function compileEchos($value)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->compileEchos($value);
         }
                     /**
@@ -2736,7 +2736,7 @@
          */ 
         public static function applyEchoHandler($value)
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
-                        /** @var \Juzaweb\Support\BladeMinifyCompiler $instance */
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         return $instance->applyEchoHandler($value);
         }
          
@@ -12870,7 +12870,7 @@
                     /**
          * 
          *
-         * @see \Juzaweb\Support\Macros\RouterMacros::jwResource()
+         * @see \Juzaweb\CMS\Support\Macros\RouterMacros::jwResource()
          * @param mixed $uri
          * @param mixed $controller
          * @param mixed $options
@@ -12883,7 +12883,7 @@
                     /**
          * 
          *
-         * @see \Juzaweb\Support\Macros\RouterMacros::postTypeResource()
+         * @see \Juzaweb\CMS\Support\Macros\RouterMacros::postTypeResource()
          * @param mixed $uri
          * @param mixed $controller
          * @param mixed $options
@@ -18073,7 +18073,7 @@
      
 }
 
-    namespace Juzaweb\Support\Html { 
+    namespace Juzaweb\CMS\Support\Html {
             /**
      * 
      *
@@ -18163,7 +18163,7 @@
                     /**
          * 
          *
-         * @see \Juzaweb\Support\Macros\RouterMacros::jwResource()
+         * @see \Juzaweb\CMS\Support\Macros\RouterMacros::jwResource()
          * @param mixed $uri
          * @param mixed $controller
          * @param mixed $options
@@ -18176,7 +18176,7 @@
                     /**
          * 
          *
-         * @see \Juzaweb\Support\Macros\RouterMacros::postTypeResource()
+         * @see \Juzaweb\CMS\Support\Macros\RouterMacros::postTypeResource()
          * @param mixed $uri
          * @param mixed $controller
          * @param mixed $options
@@ -18191,7 +18191,7 @@
      
 }
 
-    namespace Juzaweb\Support { 
+    namespace Juzaweb\CMS\Support {
             /**
      * 
      *
@@ -21855,7 +21855,7 @@ namespace  {
             class Updater extends \Codedge\Updater\UpdaterFacade {}
             class Twig extends \TwigBridge\Facade\Twig {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
-            class Field extends \Juzaweb\Support\Html\Field {}
+            class Field extends \Juzaweb\CMS\Support\Html\Field {}
      
 }
 

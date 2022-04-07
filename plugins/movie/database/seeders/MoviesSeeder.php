@@ -9,23 +9,23 @@ class MoviesSeeder extends Seeder
         $faker = Faker\Factory::create();
         foreach (range(1, 50) as $row) {
             $name = $faker->name;
-            $genres = \Juzaweb\Models\Category\Genres::where('status', '=', 1)
+            $genres = \Juzaweb\CMS\Models\Category\Genres::where('status', '=', 1)
                 ->inRandomOrder()
                 ->limit(3)
                 ->pluck('id')
                 ->toArray();
             
-            $countries = \Juzaweb\Models\Category\Countries::where('status', '=', 1)
+            $countries = \Juzaweb\CMS\Models\Category\Countries::where('status', '=', 1)
                 ->inRandomOrder()
                 ->limit(3)
                 ->pluck('id')
                 ->toArray();
             
-            $tags = \Juzaweb\Models\Category\Tags::inRandomOrder()
+            $tags = \Juzaweb\CMS\Models\Category\Tags::inRandomOrder()
                 ->limit(3)
                 ->pluck('id')
                 ->toArray();
-            $type = \Juzaweb\Models\Category\Types::inRandomOrder()->first();
+            $type = \Juzaweb\CMS\Models\Category\Types::inRandomOrder()->first();
             $random_key = array_rand([1, 2],1);
             $release = $faker->date();
             

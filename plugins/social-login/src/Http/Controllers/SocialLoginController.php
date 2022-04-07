@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\SocialLogin\Models\SocialToken;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\FacebookProvider;

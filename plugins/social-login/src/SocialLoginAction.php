@@ -10,7 +10,7 @@
 
 namespace Juzaweb\SocialLogin;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
 
 class SocialLoginAction extends Action

@@ -10,8 +10,8 @@
 
 namespace Juzaweb\SocialLogin\Models;
 
-use Juzaweb\Models\Model;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
 
 class SocialToken extends Model
 {

@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Crawler\Models;
 
-use Juzaweb\Models\Language;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Language;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\Traits\ResourceModel;
 
 /**

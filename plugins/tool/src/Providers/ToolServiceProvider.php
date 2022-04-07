@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Tool\Providers;
 
-use Juzaweb\Facades\ActionRegister;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\Tool\ToolAction;
 
 class ToolServiceProvider extends ServiceProvider

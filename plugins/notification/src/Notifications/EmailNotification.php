@@ -4,8 +4,8 @@ namespace Juzaweb\Notification\Notifications;
 
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Models\EmailList;
-use Juzaweb\Models\User;
-use Juzaweb\Support\Email;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Email;
 
 class EmailNotification extends NotificationAbstract
 {

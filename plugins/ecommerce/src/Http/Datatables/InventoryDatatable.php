@@ -4,7 +4,7 @@ namespace Juzaweb\Ecommerce\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\Backend\Models\Post;
 
 class InventoryDatatable extends DataTable

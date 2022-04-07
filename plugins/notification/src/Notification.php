@@ -30,7 +30,7 @@ class Notification
     }
 
     /**
-     * @param array|int|\Juzaweb\Models\User $users
+     * @param array|int|\Juzaweb\CMS\Models\User $users
      * @return $this
      * */
     public function setUsers($users)

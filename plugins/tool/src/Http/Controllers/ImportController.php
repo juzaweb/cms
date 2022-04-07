@@ -11,7 +11,7 @@
 namespace Juzaweb\Tool\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Juzaweb\Facades\Site;
+use Juzaweb\CMS\Facades\Site;
 use Juzaweb\Http\Controllers\BackendController;
 use Juzaweb\Tool\Jobs\ImportBlogger;
 

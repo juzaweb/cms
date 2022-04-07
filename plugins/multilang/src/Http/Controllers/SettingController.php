@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Controllers\Backend\PageController;
-use Juzaweb\Models\Language;
+use Juzaweb\CMS\Models\Language;
 use Juzaweb\Multisite\Models\DomainMapping;
 
 class SettingController extends PageController

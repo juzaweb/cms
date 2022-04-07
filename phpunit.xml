@@ -6,12 +6,10 @@
 >
     <testsuites>
         <testsuite name="Unit">
-            <directory suffix="Test.php">./vendor/juzaweb/backend/tests/Unit</directory>
-            <directory suffix="Test.php">./tests/Unit</directory>
+            <directory suffix="Test.php">./modules/Tests/Unit</directory>
         </testsuite>
         <testsuite name="Feature">
-            <directory suffix="Test.php">./vendor/juzaweb/backend/tests/Feature</directory>
-            <directory suffix="Test.php">./tests/Feature</directory>
+            <directory suffix="Test.php">./modules/Tests/Feature</directory>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">

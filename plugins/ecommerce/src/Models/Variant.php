@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Ecommerce\Models;
 
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\Backend\Models\Post;
 
 /**

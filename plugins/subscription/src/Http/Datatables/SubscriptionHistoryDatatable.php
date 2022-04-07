@@ -4,7 +4,7 @@ namespace Juzaweb\Subscription\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\Subscription\Models\SubscriptionHistory;
 
 class SubscriptionHistoryDatatable extends DataTable

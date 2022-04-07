@@ -2,11 +2,11 @@
 
 namespace Juzaweb\Subscription\Providers;
 
-use Juzaweb\Facades\ActionRegister;
+use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\Subscription\Contracts\SubscriptionContract;
 use Juzaweb\Subscription\Manage\SubscriptionManage;
 use Juzaweb\Subscription\SubscriptionAction;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class SubscriptionServiceProvider extends ServiceProvider
 {

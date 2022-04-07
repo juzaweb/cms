@@ -2,9 +2,9 @@
 
 namespace Juzaweb\SocialLogin\Providers;
 
-use Juzaweb\Facades\ActionRegister;
+use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\SocialLogin\SocialLoginAction;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class SocialLoginServiceProvider extends ServiceProvider
 {
