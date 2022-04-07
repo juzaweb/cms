@@ -4,7 +4,7 @@ namespace Juzaweb\Notification\Http\Datatable;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\Notification\Models\ManualNotification;
 use Juzaweb\Notification\SendNotification;
 use Juzaweb\Notification\Jobs\SendNotification as SendNotificationJob;

@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Seo\Models;
 
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
 

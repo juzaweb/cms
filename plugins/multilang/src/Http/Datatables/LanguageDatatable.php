@@ -4,8 +4,8 @@ namespace Juzaweb\Multilang\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Abstracts\DataTable;
-use Juzaweb\Models\Language;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Models\Language;
 
 class LanguageDatatable extends DataTable
 {

@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Tool;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Tool\Http\Controllers\ImportController;
 

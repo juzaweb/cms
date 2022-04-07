@@ -4,7 +4,7 @@ namespace Juzaweb\Subscription\Models;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Traits\ResourceModel;
 use Ramsey\Uuid\Uuid;

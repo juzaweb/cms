@@ -6,7 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Juzaweb\Crawler\Commands\CrawContentCommand;
 use Juzaweb\Crawler\Commands\CrawLinkCommand;
 use Juzaweb\Crawler\Models\CrawTemplate;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class AutoloadServiceProvider extends ServiceProvider
 {

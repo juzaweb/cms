@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Http\Controllers\Backend\PageController;
 use Juzaweb\Notification\Http\Datatable\NotificationDatatable;
 use Juzaweb\Notification\Http\Requests\NotificationRequest;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\Notification\Models\ManualNotification;
 use Juzaweb\Traits\ResourceController;
 

@@ -3,7 +3,7 @@
 namespace Juzaweb\Multilang\Providers;
 
 use Juzaweb\Multilang\Http\Middleware\Multilang;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class MultilangServiceProvider extends ServiceProvider
 {

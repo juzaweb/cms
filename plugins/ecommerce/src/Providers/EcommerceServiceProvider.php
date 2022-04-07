@@ -11,7 +11,7 @@
 namespace Juzaweb\Ecommerce\Providers;
 
 use Juzaweb\Ecommerce\EcommerceAction;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class EcommerceServiceProvider extends ServiceProvider
 {

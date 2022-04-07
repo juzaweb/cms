@@ -12,7 +12,7 @@ use Juzaweb\Http\Controllers\Controller;
 use Juzaweb\Subscription\Events\PaymentSuccess;
 use Juzaweb\Subscription\Facades\Subscription;
 use Juzaweb\Subscription\Models\Package;
-use Juzaweb\Models\User;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\Subscription\Models\SubscriptionHistory;
 
 class SubscriptionController extends Controller

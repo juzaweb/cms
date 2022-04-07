@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Subscription\Models;
 
-use Juzaweb\Models\User;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Models\Model;
 
 /**
  * Juzaweb\Subscription\Models\SubscriptionHistory

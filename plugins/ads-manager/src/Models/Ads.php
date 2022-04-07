@@ -3,7 +3,7 @@
 namespace Juzaweb\AdsManager\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
  * Juzaweb\AdsManager\Models\Ads

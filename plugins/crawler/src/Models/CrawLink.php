@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Crawler\Models;
 
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 
 /**
  * Juzaweb\Crawler\Models\CrawLink

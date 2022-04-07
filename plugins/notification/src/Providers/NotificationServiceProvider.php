@@ -2,9 +2,9 @@
 
 namespace Juzaweb\Notification\Providers;
 
-use Juzaweb\Facades\ActionRegister;
+use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\Notification\NotificationAction;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class NotificationServiceProvider extends ServiceProvider
 {

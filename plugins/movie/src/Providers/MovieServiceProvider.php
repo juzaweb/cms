@@ -2,9 +2,9 @@
 
 namespace Juzaweb\Movie\Providers;
 
-use Juzaweb\Facades\ActionRegister;
+use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\Movie\MovieAction;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class MovieServiceProvider extends ServiceProvider
 {

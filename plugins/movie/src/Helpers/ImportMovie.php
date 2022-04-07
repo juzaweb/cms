@@ -5,7 +5,7 @@ namespace Juzaweb\Movie\Helpers;
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Support\FileManager;
+use Juzaweb\CMS\Support\FileManager;
 use Illuminate\Support\Facades\DB;
 
 class ImportMovie

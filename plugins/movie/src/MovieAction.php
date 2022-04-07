@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Movie;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Movie\Http\Controllers\AjaxController;
 use Juzaweb\Movie\Http\Controllers\Backend\TmdbController;

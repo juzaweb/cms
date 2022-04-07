@@ -12,7 +12,7 @@ namespace Juzaweb\AdsManager\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\AdsManager\Models\Ads;
 
 class AdsManagerDatatable extends DataTable

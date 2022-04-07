@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Payment\Providers;
 
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class PaymentServiceProvider extends ServiceProvider
 {

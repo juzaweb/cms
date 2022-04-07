@@ -1,0 +1,18 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Juzaweb\CMS\Abstracts\Action;
+
+class $CLASS$ extends Action
+{
+    /**
+     * Execute the actions.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        //
+    }
+}
