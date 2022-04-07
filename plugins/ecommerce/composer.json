@@ -4,7 +4,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Juzaweb\\Ecommerce\\Providers\\EcommerceServiceProvider"
+                "Juzaweb\\Ecommerce\\Providers\\AutoloadSeviceProvider"
             ]
         },
         "juzaweb": {

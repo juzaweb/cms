@@ -17,6 +17,9 @@ class AutoloadSeviceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $basePath = __DIR__ . '/..';
+        $this->loadViewsFrom($basePath . '/resources/views', 'ecom');
+        $this->loadTranslationsFrom($basePath . '/resources/lang', 'ecom');
     }
 
     public function register()
