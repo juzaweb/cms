@@ -19,7 +19,7 @@ class UpdateTest extends TestCase
     public function testUpdateCommand()
     {
         $ver = Version::getVersion();
-        $filePath = base_path('packages/cms/src/Version.php');
+        $filePath = base_path('modules/CMS/Version.php');
         File::put(
             $filePath,
             str_replace(
