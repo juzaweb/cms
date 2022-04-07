@@ -11,15 +11,17 @@ class FeedController
     public function index()
     {
         $posts = Post::with(['createdBy'])
-        ->select([
-            'id',
-            'title',
-            'description',
-            'updated_at',
-            'slug',
-            'type',
-            'created_by'
-        ])
+            ->select(
+                [
+                    'id',
+                    'title',
+                    'description',
+                    'updated_at',
+                    'slug',
+                    'type',
+                    'created_by'
+                ]
+            )
             ->wherePublish()
             ->latest()
             ->limit(10)
@@ -31,7 +33,9 @@ class FeedController
             request()->url(),
             $feed['view'] ?? 'feed::atom',
             (string) get_config('description', ''),
-            $feed['language'] ?? 'en-US'
+            $feed['language'] ?? 'en-US',
+            $feed['image'] ?? '',
+            $feed['format'] ?? 'atom'
         );
     }
 
@@ -40,15 +44,17 @@ class FeedController
         $taxonomy = Taxonomy::findBySlugOrFail($slug);
 
         $posts = Post::with(['createdBy'])
-            ->select([
-                'id',
-                'title',
-                'description',
-                'updated_at',
-                'slug',
-                'type',
-                'created_by'
-            ])
+            ->select(
+                [
+                    'id',
+                    'title',
+                    'description',
+                    'updated_at',
+                    'slug',
+                    'type',
+                    'created_by'
+                ]
+            )
             ->wherePublish()
             ->whereTaxonomy($taxonomy->id)
             ->latest()
@@ -61,7 +67,9 @@ class FeedController
             request()->url(),
             $feed['view'] ?? 'feed::atom',
             (string) get_config('description', ''),
-            $feed['language'] ?? 'en-US'
+            $feed['language'] ?? 'en-US',
+            $feed['image'] ?? '',
+            $feed['format'] ?? 'atom'
         );
     }
 }

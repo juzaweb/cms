@@ -7,6 +7,8 @@ use Juzaweb\CMS\Database\Factories\PostFactory;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\ModelCache;
 use Juzaweb\CMS\Traits\PostTypeModel;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 
 /**
  * Juzaweb\Backend\Models\Post
@@ -73,7 +75,7 @@ use Juzaweb\CMS\Traits\PostTypeModel;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereViews($value)
  * @mixin \Eloquent
  */
-class Post extends Model
+class Post extends Model implements Feedable
 {
     use PostTypeModel, HasFactory, ModelCache;
 
@@ -170,7 +172,7 @@ class Post extends Model
         return round($total * 5 / ($count * 5), 2);
     }
 
-    /*public function toFeedItem(): FeedItem
+    public function toFeedItem(): FeedItem
     {
         $name = $this->getCreatedByName();
         $updated = $this->updated_at ?: now();
@@ -185,5 +187,5 @@ class Post extends Model
             ->updated($updated)
             ->link($this->getLink())
             ->authorName($name);
-    }*/
+    }
 }

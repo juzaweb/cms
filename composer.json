@@ -33,7 +33,7 @@
         "rcrowe/twigbridge": "^0.14",
         "rennokki/laravel-eloquent-query-cache": "^3.1",
         "spatie/image-optimizer": "^1.4",
-        "spatie/laravel-feed": "^4.0",
+        "spatie/laravel-feed": "^4.1",
         "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
