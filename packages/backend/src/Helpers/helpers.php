@@ -532,7 +532,7 @@ if (! function_exists('get_version_by_tag')) {
 if (! function_exists('get_backend_message')) {
     function get_backend_message()
     {
-        return Cache::get('backend_messages', []);
+        return get_config('backend_messages', []);
     }
 }
 
@@ -545,19 +545,26 @@ if (! function_exists('add_backend_message')) {
 
         $data = get_backend_message();
         foreach ($messages as $message) {
-            $data[$key][] = ['status' => $status, 'message' => $message];
+            $id = Str::uuid()->toString();
+            $data[$id] = [
+                'id' => $id,
+                'key' => $key,
+                'status' => $status,
+                'message' => $message
+            ];
         }
 
-        Cache::forever('backend_messages', $data);
+        set_config('backend_messages', $data);
     }
 }
 
 if (! function_exists('remove_backend_message')) {
     function remove_backend_message($key)
     {
-        $data = get_backend_message();
-        unset($data[$key]);
-        Cache::forever('backend_messages', $data);
+        $data = collect(get_backend_message());
+        $keys = $data->where('key', $key)->keys()->toArray();
+        $data = $data->forget($keys)->all();
+        set_config('backend_messages', $data);
     }
 }
 

@@ -155,5 +155,6 @@ return [
         'date_format',
         'time_format',
         'fb_app_id',
+        'backend_messages',
     ]
 ];

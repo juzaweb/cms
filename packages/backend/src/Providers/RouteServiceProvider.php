@@ -38,7 +38,8 @@ class RouteServiceProvider extends ServiceProvider
     
     protected function mapThemeRoutes()
     {
-        Route::middleware('theme')->group(__DIR__ . '/../routes/theme.php');
+        Route::middleware('theme')
+            ->group(__DIR__ . '/../routes/theme.php');
     }
 
     protected function mapApiRoutes()

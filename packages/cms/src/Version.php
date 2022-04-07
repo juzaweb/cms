@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb\laravel-cms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
  * @license    MIT
@@ -14,6 +14,6 @@ class Version
 {
     public static function getVersion()
     {
-        return 'v2.0.6';
+        return 'v2.0.7';
     }
 }

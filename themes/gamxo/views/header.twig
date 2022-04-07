@@ -1,0 +1,96 @@
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please upgrade your browser to improve your experience and security.</p>
+<![endif]-->
+<!-- Preloader Start Here -->
+{#<div id="preloader"></div>#}
+<!-- Preloader End Here -->
+<!-- Back To Top Start Here -->
+<a href="#main-wrapper" data-type="section-switch" class="scrollup">
+    <i class="fas fa-angle-double-up"></i>
+</a>
+<!-- Back To Top End Here -->
+<div id="main-wrapper" class="fh-main-wrapper">
+
+    <header class="header">
+        <div id="header-topbar" class="header-topbar">
+            <div class="container">
+                <div class="header-topbar-border">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-lg-8">
+                            <div class="header-topbar-layout1">
+                                <div class="header-top-left">
+                                    <ul>
+                                        {% if auth %}
+                                        <li><i class="far fa-user"></i><a href="#">{{ user.name }}</a></li>
+                                        {% else %}
+                                        <li><i class="far fa-user"></i><a href="{{ url('login') }}">{{ __('Log in / Register') }}</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 d-flex justify-content-end">
+                            <div class="header-topbar-layout1">
+                                <div class="header-top-right">
+                                    <ul class="social-icon">
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-pinterest-square"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="rt-sticky-placeholder"></div>
+        <div id="header-menu" class="header-menu menu-layout1">
+            <div class="container">
+                <div class="row no-gutters align-items-center">
+                    <div class="col-lg-2">
+                        <div class="logo-area">
+                            <a href="{{ home_url() }}" class="temp-logo">
+                                <img src="{{ get_logo() }}" alt="logo" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 d-flex justify-content-end position-static">
+                        <nav id="dropdown" class="template-main-menu">
+                            {{  jw_nav_menu({
+                                'container_before': '<ul>',
+                                'container_after': '</ul>',
+                                'theme_location': 'primary',
+                                'item_view': 'theme::components.menu_item'
+                            }) }}
+                        </nav>
+                    </div>
+
+                    <div class="col-lg-2 d-flex justify-content-end">
+                        <div class="header-action-layout1">
+                            <ul>
+                                <li class="search-btn">
+                                    <a href="#header-search" title="Search">
+                                        <i class="flaticon-search"></i>
+                                    </a>
+                                </li>
+
+                                <li class="toggle-btn">
+                                    <button class="btn-icon sidebar-toggle">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </button>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>

@@ -18,16 +18,21 @@ class RequirePluginController extends BackendController
 {
     public function index()
     {
-        $this->addBreadcrumb([
-            'title' => trans('cms::app.themes'),
-            'url' => route('admin.themes'),
-        ]);
+        $this->addBreadcrumb(
+            [
+                'title' => trans('cms::app.themes'),
+                'url' => route('admin.themes'),
+            ]
+        );
 
         $title = trans('cms::app.require_plugins');
 
-        return view('cms::backend.theme.require', compact(
-            'title'
-        ));
+        return view(
+            'cms::backend.theme.require',
+            compact(
+                'title'
+            )
+        );
     }
 
     public function getData()
@@ -52,18 +57,23 @@ class RequirePluginController extends BackendController
             ];
         }
 
-        return response()->json([
-            'total' => count($result),
-            'rows' => $result,
-        ]);
+        return response()->json(
+            [
+                'total' => count($result),
+                'rows' => $result,
+            ]
+        );
     }
 
     public function bulkActions(Request $request)
     {
-        $this->validate($request, [
-            'ids' => 'array|required',
-            'action' => 'required',
-        ]);
+        $this->validate(
+            $request,
+            [
+                'ids' => 'array|required',
+                'action' => 'required',
+            ]
+        );
 
         $ids = $request->post('ids');
         $action = $request->post('action');
@@ -71,7 +81,7 @@ class RequirePluginController extends BackendController
 
         switch ($action) {
             case 'install':
-                foreach ($ids as $id) {
+                /*foreach ($ids as $id) {
                     $info = app('plugins')->find($id);
                     if (empty($info)) {
                         $installer = new UpdateManager('plugin', $id);
@@ -82,18 +92,21 @@ class RequirePluginController extends BackendController
                                 ]);
                         }
                     }
-                }
+                }*/
                 break;
             case 'activate':
                 foreach ($ids as $id) {
                     $info = app('plugins')->find($id);
                     if (empty($info)) {
                         $errors[] = trans(
-                            'cms::app.plugin_name_not_found', [
-                            'name' => $id
-                        ]);
+                            'cms::app.plugin_name_not_found',
+                            [
+                                'name' => $id
+                            ]
+                        );
                         continue;
                     }
+                    
                     $info->enable();
                 }
                 break;
@@ -102,13 +115,17 @@ class RequirePluginController extends BackendController
         remove_backend_message('require_plugins');
 
         if ($errors) {
-            return $this->error([
-                'message' => $errors[0],
-            ]);
+            return $this->error(
+                [
+                    'message' => $errors[0],
+                ]
+            );
         }
 
-        return $this->success([
-            'message' => trans('cms::app.successfully'),
-        ]);
+        return $this->success(
+            [
+                'message' => trans('cms::app.successfully'),
+            ]
+        );
     }
 }

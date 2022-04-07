@@ -3,6 +3,7 @@
 namespace Juzaweb\Http\Middleware;
 
 use Closure;
+use Juzaweb\Support\Installer;
 
 class XFrameHeadersMiddleware
 {
@@ -15,9 +16,11 @@ class XFrameHeadersMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $user = auth()->user();
-        $GLOBALS['jw_user'] = $user;
-
+        if (Installer::alreadyInstalled()) {
+            $user = auth()->user();
+            $GLOBALS['jw_user'] = $user;
+        }
+        
         /**
          * This middleware was created to prevent OWASP warnings, like:
          *

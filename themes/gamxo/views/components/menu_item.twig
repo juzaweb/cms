@@ -1,0 +1,18 @@
+{% for item in items %}
+    {% if item.children %}
+        <li>
+            <a href="#">{{ item.label }}</a>
+            <ul class="dropdown-menu-col-1">
+                {% for child in item.children %}
+                <li>
+                    <a href="{{ child.link }}" {% if child.target == '_blank' %} target="_blank" {% endif %}>{{ child.label }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% else %}
+        <li>
+            <a href="{{ item.link }}" {% if item.target == '_blank' %} target="_blank" {% endif %}>{{ item.label }}</a>
+        </li>
+    {% endif %}
+{% endfor %}
