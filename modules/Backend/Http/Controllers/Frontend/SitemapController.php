@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Seo\Http\Controllers;
+namespace Juzaweb\Backend\Http\Controllers\Frontend;
 
 use Illuminate\Support\Facades\App;
 use Juzaweb\Backend\Facades\HookAction;

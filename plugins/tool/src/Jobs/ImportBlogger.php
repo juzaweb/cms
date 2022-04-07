@@ -49,11 +49,13 @@ class ImportBlogger implements ShouldQueue
 
         $json = json_encode($xmlObject);
         $data = json_decode($json, true);
-        $data = collect(Arr::get($data, 'entry', []))->filter(function ($item) {
-            return (strpos($item['id'], 'post-')
-                && $item['author']['name'] != 'Unknown'
-                && strpos($item['category']['@attributes']['term'] ?? '', 'kind#comment') === false);
-        })->reverse()->all();
+        $data = collect(Arr::get($data, 'entry', []))->filter(
+            function ($item) {
+                return (strpos($item['id'], 'post-')
+                    && $item['author']['name'] != 'Unknown'
+                    && strpos($item['category']['@attributes']['term'] ?? '', 'kind#comment') === false);
+            }
+        )->reverse()->all();
 
         foreach ($data as $item) {
             DB::beginTransaction();
@@ -103,12 +105,16 @@ class ImportBlogger implements ShouldQueue
         $data['slug'] = $slug;
 
         $categories = collect($item['category'])
-            ->filter(function ($item) {
-                return ($item['@attributes']['scheme'] ?? '') == 'http://www.blogger.com/atom/ns#';
-            })
-            ->map(function ($item) {
-                return $item['@attributes']['term'];
-            })
+            ->filter(
+                function ($item) {
+                    return ($item['@attributes']['scheme'] ?? '') == 'http://www.blogger.com/atom/ns#';
+                }
+            )
+            ->map(
+                function ($item) {
+                    return $item['@attributes']['term'];
+                }
+            )
             ->values()
             ->toArray();
 
@@ -122,11 +128,13 @@ class ImportBlogger implements ShouldQueue
         $taxonomies = [];
 
         foreach ($categories as $category) {
-            $taxonomy = Taxonomy::firstOrCreate([
-                'name' => $category,
-                'taxonomy' => 'categories',
-                'post_type' => 'posts'
-            ]);
+            $taxonomy = Taxonomy::firstOrCreate(
+                [
+                    'name' => $category,
+                    'taxonomy' => 'categories',
+                    'post_type' => 'posts'
+                ]
+            );
 
             $taxonomies[] = $taxonomy->id;
         }

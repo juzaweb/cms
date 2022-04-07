@@ -14,13 +14,16 @@ class CreateSeoMetasTable extends Migration
      */
     public function up()
     {
-        Schema::create('seo_metas', function (Blueprint $table) {
-            $table->id();
-            $table->string('object_type', 10)->index();
-            $table->unsignedBigInteger('object_id')->index();
-            $table->string('meta_title', 150)->nullable();
-            $table->string('meta_description', 320)->nullable();
-        });
+        Schema::create(
+            'seo_metas',
+            function (Blueprint $table) {
+                $table->id();
+                $table->string('object_type', 10)->index();
+                $table->unsignedBigInteger('object_id')->index();
+                $table->string('meta_title', 150)->nullable();
+                $table->string('meta_description', 320)->nullable();
+            }
+        );
     }
 
     /**

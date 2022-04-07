@@ -10,9 +10,11 @@ class ToolServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        ActionRegister::register([
-            ToolAction::class
-        ]);
+        ActionRegister::register(
+            [
+                ToolAction::class
+            ]
+        );
     }
 
     /**

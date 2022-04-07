@@ -15,8 +15,8 @@ use Juzaweb\Backend\Http\Controllers\Frontend\AjaxController;
 use Juzaweb\Backend\Http\Controllers\Frontend\SearchController;
 use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
 use Juzaweb\Backend\Http\Controllers\Frontend\RouteController;
-use Juzaweb\Seo\Http\Controllers\FeedController;
-use Juzaweb\Seo\Http\Controllers\SitemapController;
+use Juzaweb\Backend\Http\Controllers\Frontend\FeedController;
+use Juzaweb\Backend\Http\Controllers\Frontend\SitemapController;
 use Juzaweb\CMS\Support\Installer;
 use Juzaweb\CMS\Support\Route\Auth;
 

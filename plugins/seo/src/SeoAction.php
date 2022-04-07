@@ -38,28 +38,41 @@ class SeoAction extends Action
 
     public function addAjaxs()
     {
-        HookAction::registerAdminAjax('seo-content', [
-            'callback' => [SeoController::class, 'getStringRaw'],
-            'method' => 'post'
-        ]);
+        HookAction::registerAdminAjax(
+            'seo-content',
+            [
+                'callback' => [SeoController::class, 'getStringRaw'],
+                'method' => 'post'
+            ]
+        );
     }
 
     public function addFormSeo(Model $model)
     {
         $data = SeoMeta::findByModel($model);
 
-        echo e(view('jseo::form', compact(
-            'model',
-            'data'
-        )));
+        echo e(
+            view(
+                'jseo::form',
+                compact(
+                    'model',
+                    'data'
+                )
+            )
+        );
     }
 
     public function addMetaHeader()
     {
         $taxonomy = '';
 
-        echo e(view('jseo::fe_header', compact(
-            'taxonomy'
-        )));
+        echo e(
+            view(
+                'jseo::fe_header',
+                compact(
+                    'taxonomy'
+                )
+            )
+        );
     }
 }
