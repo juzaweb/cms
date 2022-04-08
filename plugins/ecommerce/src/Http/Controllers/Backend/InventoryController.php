@@ -3,7 +3,7 @@
 namespace Juzaweb\Ecommerce\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Ecommerce\Http\Datatables\InventoryDatatable;
 use Juzaweb\Ecommerce\Models\Inventory;

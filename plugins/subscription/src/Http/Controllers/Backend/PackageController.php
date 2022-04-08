@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Subscription\Facades\Subscription;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Subscription\Http\Datatables\PackageDatatable;

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Movie\Http\Datatables\VideoAdsDatatable;
 use Juzaweb\Movie\Models\Video\VideoAds;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class VideoAdsController extends BackendController
 {

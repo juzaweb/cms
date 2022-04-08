@@ -7,8 +7,8 @@ use Juzaweb\Backend\Http\Controllers\Backend\PageController;
 use Juzaweb\Notification\Http\Datatable\NotificationDatatable;
 use Juzaweb\Notification\Http\Requests\NotificationRequest;
 use Juzaweb\CMS\Models\User;
-use Juzaweb\Notification\Models\ManualNotification;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\Backend\Models\ManualNotification;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class NotificationController extends PageController
 {

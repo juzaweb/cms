@@ -11,7 +11,7 @@
 namespace Juzaweb\Ecommerce\Models;
 
 use Juzaweb\CMS\Models\Model;
-use Juzaweb\Traits\ResourceModel;
+use Juzaweb\CMS\Traits\ResourceModel;
 
 class PaymentMethod extends Model
 {
