@@ -39,8 +39,10 @@ class ConsoleServiceProvider extends ServiceProvider
 
     protected function registerCommands()
     {
-        $this->commands([
-            SendNotify::class,
-        ]);
+        $this->commands(
+            [
+                SendNotify::class,
+            ]
+        );
     }
 }
