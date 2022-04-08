@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Notification\Models;
+namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

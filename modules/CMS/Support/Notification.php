@@ -1,9 +1,9 @@
 <?php
 
-namespace Juzaweb\Notification;
+namespace Juzaweb\CMS\Support;
 
 use Juzaweb\Notification\Jobs\SendNotification as SendNotificationJob;
-use Juzaweb\Notification\Models\ManualNotification;
+use Juzaweb\Backend\Models\ManualNotification;
 use Illuminate\Foundation\Auth\User;
 
 class Notification
@@ -37,7 +37,7 @@ class Notification
     /**
      * @param array|int|\Juzaweb\CMS\Models\User $users
      * @return $this
-     * */
+     */
     public function setUsers($users)
     {
         $userIds = [];
