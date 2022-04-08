@@ -439,5 +439,7 @@ return [
         'twitter' => 'Login with Twitter',
         'linkedin' => 'Login with Linkedin',
         'github' => 'Login with Github',
-    ]
+    ],
+    'tools' => 'Tools',
+    'import' => 'Import',
 ];

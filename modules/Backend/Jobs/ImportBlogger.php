@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Tool\Jobs;
+namespace Juzaweb\Backend\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Foundation\Bus\Dispatchable;

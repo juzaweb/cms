@@ -8,14 +8,24 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Tool\Http\Controllers;
+namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Tool\Jobs\ImportBlogger;
+use Juzaweb\Backend\Jobs\ImportBlogger;
 
 class ImportController extends BackendController
 {
+    public function index()
+    {
+        $title = trans('cms::app.import');
+        
+        return view(
+            'cms::backend.tool.import',
+            compact('title')
+        );
+    }
+    
     public function import(Request $request)
     {
         $this->validate(
