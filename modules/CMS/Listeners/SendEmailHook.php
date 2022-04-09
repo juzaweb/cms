@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dtv
- * Date: 10/10/2021
- * Time: 2:50 PM
- */
 
 namespace Juzaweb\CMS\Listeners;
 
