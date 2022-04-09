@@ -124,9 +124,6 @@ View all documentation [https://juzaweb.com/documentation](https://juzaweb.com/d
 
 ## Backend Javascript libraries
 - Jquery
-- Bootstrap
+- Bootstrap 4
 - select2
-- bootstrap-datepicker
 - font-awesome
-- sweetalert2
-- toastr

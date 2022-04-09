@@ -23,7 +23,7 @@ class TransFromEnglish extends TranslationCommand
     
     public function handle()
     {
-        $this->transFromEnglish();
+        //$this->transFromEnglish();
         
         $this->transToFile();
         

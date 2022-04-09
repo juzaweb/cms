@@ -315,12 +315,16 @@ return [
     'select' => 'Chọn: tên',
     'select_all' => 'Chọn tất cả',
     'reading_settings' => 'Đọc cài đặt',
-    'permalink_description' => 'Nếu muốn, bạn có thể nhập cấu trúc tùy chỉnh cho URL danh mục và thẻ của mình tại đây. Ví dụ: sử dụng chủ đề làm cơ sở danh mục của bạn sẽ làm cho danh mục của bạn liên kết như: url / chủ đề / chưa phân loại /. Nếu bạn để trống các giá trị này, các giá trị mặc định sẽ được sử dụng.',
+    'permalink_description' => 'Nếu muốn, bạn có thể nhập cấu trúc tùy chỉnh cho URL danh mục và thẻ của mình tại đây. '
+        .'Ví dụ: sử dụng chủ đề làm cơ sở danh mục của bạn sẽ làm cho danh mục của bạn liên kết như: '
+        .'url / chủ đề / chưa phân loại /. '
+        .'Nếu bạn để trống các giá trị này, các giá trị mặc định sẽ được sử dụng.',
     'your_homepage_displays' => 'Trang chủ của bạn hiển thị',
     'your_latest_posts' => 'Bài viết mới nhất của bạn',
     'a_static_page' => 'Một trang tĩnh (chọn bên dưới)',
     'site_description_note' => 'Trong một vài từ, hãy giải thích nội dung của trang web này.',
-    'timezone_description' => 'Chọn một thành phố trong cùng múi giờ với bạn hoặc chênh lệch múi giờ UTC (Giờ phối hợp quốc tế).',
+    'timezone_description' => 'Chọn một thành phố trong cùng múi giờ với bạn hoặc'
+        .' chênh lệch múi giờ UTC (Giờ phối hợp quốc tế).',
     'universal_time_is' => 'Giờ quốc tế là',
     'date_format' => 'Định dạng ngày tháng',
     'time_format' => 'Định dạng thời gian',
