@@ -266,16 +266,19 @@ class FindTransManager
 
     public function missingKey($namespace, $group, $key, $value, $obkey, $obtype)
     {
-        Translation::firstOrCreate([
-            'namespace' => $namespace,
-            'locale' => $this->app['config']['app.locale'],
-            'group' => $group,
-            'key' => $key,
-            'object_type' => $obtype,
-            'object_key' => $obkey,
-        ], [
-            'value' => $value,
-        ]);
+        Translation::firstOrCreate(
+            [
+                'namespace' => $namespace,
+                'locale' => $this->app['config']['app.locale'],
+                'group' => $group,
+                'key' => $key,
+                'object_type' => $obtype,
+                'object_key' => $obkey,
+            ],
+            [
+                'value' => $value,
+            ]
+        );
     }
 
     public function exportTranslations($group = null, $json = false)

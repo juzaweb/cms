@@ -6,14 +6,12 @@ use Juzaweb\CMS\Support\Manager\FindTransManager;
 use Juzaweb\CMS\Models\Translation;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Facades\Theme;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\SplFileInfo;
 
-class FindTransCommand extends Command
+class FindTransCommand extends TranslationCommand
 {
-    protected $signature = 'trans:generate-translate';
+    protected $signature = 'trans:find-translate';
 
     /** @var FindTransManager $manager */
     protected $manager;
@@ -73,65 +71,7 @@ class FindTransCommand extends Command
             }
         }
     }
-
-    protected function allObjects()
-    {
-        $result = [];
-        $result['core'] = collect(
-            [
-                'title' => 'Core Juzaweb',
-                'key' => 'core',
-                'type' => 'core',
-                'namespace' => 'cms',
-                'path' => 'modules/Backend/resources/lang'
-            ]
-        );
-
-        $result = array_merge($result, $this->getLocalePlugins());
-
-        return collect($result);
-    }
-
-    protected function getLocalePlugins()
-    {
-        $result = [];
-        $plugins = Plugin::all();
-        foreach ($plugins as $plugin) {
-            $snakeName = namespace_snakename($plugin->get('name'));
-            $result[$snakeName] = collect(
-                [
-                    'title' => $plugin->getDisplayName(),
-                    'key' => $snakeName,
-                    'namespace' => $plugin->getDomainName(),
-                    'type' => 'plugin',
-                    'path' => 'plugins/' . $plugin->get('name') . '/src/resources/lang'
-                ]
-            );
-        }
-
-        return $result;
-    }
-
-    protected function getLocaleThemes()
-    {
-        $result = [];
-        $themes = Theme::all();
-        foreach ($themes as $theme) {
-            $result['theme_' . $theme->get('name')] = collect(
-                [
-                    'title' => $theme->get('title'),
-                    'key' => 'theme_' . $theme->get('name'),
-                    'name' => $theme->get('name'),
-                    'type' => 'theme',
-                    'namespace' => '*',
-                    'path' => null,
-                ]
-            );
-        }
-
-        return $result;
-    }
-
+    
     /**
      * Get all language trans
      *
@@ -195,31 +135,6 @@ class FindTransCommand extends Command
             ->toArray();
     }
 
-    protected function originPath($key, $path = '')
-    {
-        $key = $this->parseVar($key);
-        $basePath = base_path($key->get('path'));
-
-        if (empty($path)) {
-            return $basePath;
-        }
-
-        return $basePath . '/' . $path;
-    }
-
-    /**
-     * @param Collection|string $key
-     * @return Collection
-     */
-    protected function parseVar($key)
-    {
-        if (is_a($key, Collection::class)) {
-            return $key;
-        }
-
-        return $this->getByKey($key);
-    }
-
     protected function mapGroupKeys(array $lang, $group, &$result, $keyPrefix = '')
     {
         foreach ($lang as $key => $item) {
@@ -234,10 +149,5 @@ class FindTransCommand extends Command
                 ];
             }
         }
-    }
-
-    protected function getByKey(string $key)
-    {
-        return $this->allObjects()->get($key, []);
     }
 }

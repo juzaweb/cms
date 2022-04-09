@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Crawler\Helpers\Translate;
+namespace Juzaweb\CMS\Support;
 
 class GoogleTranslate
 {
@@ -15,6 +15,7 @@ class GoogleTranslate
      *            Text that you want to translate
      *
      * @return string a simple string with the translation of the text in the target language
+     * @throws \Exception
      */
     public static function translate($source, $target, $text)
     {
@@ -40,10 +41,10 @@ class GoogleTranslate
      *            Text to translate taken from the 'translate' function
      *
      * @return object[] The response of the translation service in JSON format
+     * @throws \Exception
      */
     protected static function requestTranslation($source, $target, $text)
     {
-        
         // Google translate URL
         $url = "https://translate.google.com/translate_a/single"
          . "?client=at&dt=t&dt=ld&dt=qca&dt=rm&dt=bd&dj=1&hl=es-ES"
@@ -103,7 +104,7 @@ class GoogleTranslate
         $sentencesArray = json_decode($json, true);
         $sentences = "";
         
-        if(!$sentencesArray) {
+        if (!$sentencesArray) {
             $error = 'Google detected unusual traffic from your computer network, try again later (2 - 48 hours)';
             \Log::error($error);
             \Storage::disk('local')->put('lock-translate.txt', $error);
