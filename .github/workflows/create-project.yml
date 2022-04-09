@@ -14,14 +14,14 @@ jobs:
         mysql: [5.7.33, 8.0.21]
     services:
       mysql:
-        image: mysql:${matrix.mysql}
+        image: mysql:${{ matrix.mysql }}
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: cms_test
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    name: PHP${{ matrix.php }} - ${{ matrix.version }}
+    name: PHP${{ matrix.php }} - ${{ matrix.version }} - ${{ matrix.mysql }}
 
     steps:
       - name: Setup PHP
