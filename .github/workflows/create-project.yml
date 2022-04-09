@@ -20,7 +20,7 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0, 8.1]
         version: [^3.0, dev-master, dev-develop]
-    name: PHP${{ matrix.php }} - ${{ matrix.os }} -
+    name: PHP${{ matrix.php }} - ${{ matrix.version }}
 
     steps:
       - name: Setup PHP
