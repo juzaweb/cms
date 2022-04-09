@@ -15,7 +15,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Models\Translation;
 use Juzaweb\CMS\Support\GoogleTranslate;
-use function PHPUnit\Framework\isReadable;
+use Symfony\Component\Finder\SplFileInfo;
 
 class TransFromEnglish extends TranslationCommand
 {
@@ -23,63 +23,14 @@ class TransFromEnglish extends TranslationCommand
     
     public function handle()
     {
+        $this->transFromEnglish();
+        
         $this->transToFile();
         
         return self::SUCCESS;
     }
     
-    protected function transToFile()
-    {
-        $objects = $this->allObjects();
-        $languages = ['vi', 'fr', 'tr', 'zh', 'ru', 'ko', 'ja'];
-        
-        foreach ($objects as $key => $object) {
-            if ($key != 'core') {
-                continue;
-            }
-            
-            foreach ($languages as $language) {
-                $path = $object->get('path');
-                $enFiles = File::files("{$path}/en");
-                $groups = collect($enFiles)->map(
-                    function (\Symfony\Component\Finder\SplFileInfo $file) {
-                        return str_replace('.php', '', $file->getFilename());
-                    }
-                )
-                ->toArray();
-                
-                if (!is_dir("{$path}/{$language}")) {
-                    mkdir("{$path}/{$language}");
-                }
-                
-                foreach ($groups as $group) {
-                    $current = [];
-                    $fileLang = "{$path}/{$language}/{$group}.php";
-                    if (file_exists($fileLang)) {
-                        $current = include $fileLang;
-                    }
-                    
-                    $trans = Translation::where('locale', '=', $language)
-                        ->where('namespace', '=', $object->get('namespace'))
-                        ->where('group', '=', $group)
-                        ->get()
-                        ->mapWithKeys(
-                            function ($item) {
-                                return [$item->key => $item->value];
-                            }
-                        )->toArray();
-                    
-                    $trans = $this->parseChildKeyArray($trans);
-                    $trans = array_merge($trans, $current);
-                    
-                    $str = '<?php' . PHP_EOL . 'return ' . $this->varExport($trans) . ';' . PHP_EOL;
-                    File::put("{$path}/{$language}/{$group}.php", $str);
-                }
-            }
-        }
-    }
-    
-    protected function translateFromEnglish()
+    protected function transFromEnglish()
     {
         $languages = ['vi', 'fr', 'tr', 'zh', 'ru', 'ko', 'ja'];
     
@@ -132,6 +83,61 @@ class TransFromEnglish extends TranslationCommand
                 }
             
                 sleep(1);
+            }
+        }
+    }
+    
+    protected function transToFile()
+    {
+        $objects = $this->allObjects();
+        $languages = ['vi', 'fr', 'tr', 'zh', 'ru', 'ko', 'ja'];
+        
+        foreach ($objects as $key => $object) {
+            if ($key != 'core') {
+                continue;
+            }
+            
+            foreach ($languages as $language) {
+                $path = $object->get('path');
+                $enFiles = File::files("{$path}/en");
+                $groups = collect($enFiles)->map(
+                    function (SplFileInfo $file) {
+                        return str_replace('.php', '', $file->getFilename());
+                    }
+                )
+                    ->toArray();
+                
+                if (!is_dir("{$path}/{$language}")) {
+                    mkdir("{$path}/{$language}");
+                }
+                
+                foreach ($groups as $group) {
+                    $current = [];
+                    $fileLang = "{$path}/{$language}/{$group}.php";
+                    if (file_exists($fileLang)) {
+                        $current = include $fileLang;
+                    }
+                    
+                    $trans = Translation::where('locale', '=', $language)
+                        ->where('namespace', '=', $object->get('namespace'))
+                        ->where('group', '=', $group)
+                        ->get()
+                        ->mapWithKeys(
+                            function ($item) {
+                                return [$item->key => $item->value];
+                            }
+                        )->toArray();
+                    
+                    if (empty($trans)) {
+                        continue;
+                    }
+                    
+                    $trans = $this->parseChildKeyArray($trans);
+                    $trans = array_merge($trans, $current);
+                    
+                    $str = '<?php' . PHP_EOL . 'return ' . $this->varExport($trans) . ';' . PHP_EOL;
+                    File::put("{$path}/{$language}/{$group}.php", $str);
+                }
             }
         }
     }
