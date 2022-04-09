@@ -2,150 +2,81 @@
 
 namespace Juzaweb\CMS\Models;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+
 /**
- * Juzaweb\CMS\Models\Translation
+ * Juzaweb\Multisite\Models\Translation
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Translation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Translation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Translation query()
+ * @property int $id
+ * @property int $status
+ * @property string $locale
+ * @property string $group
+ * @property string $namespace
+ * @property string $key
+ * @property string|null $value
+ * @method static Builder|Translation newModelQuery()
+ * @method static Builder|Translation newQuery()
+ * @method static Builder|Translation ofTranslatedGroup($group)
+ * @method static Builder|Translation orderByGroupKeys($ordered)
+ * @method static Builder|Translation query()
+ * @method static Builder|Translation selectDistinctGroup()
+ * @method static Builder|Translation whereActive()
+ * @method static Builder|Translation whereGroup($value)
+ * @method static Builder|Translation whereId($value)
+ * @method static Builder|Translation whereKey($value)
+ * @method static Builder|Translation whereLocale($value)
+ * @method static Builder|Translation whereNamespace($value)
+ * @method static Builder|Translation whereStatus($value)
+ * @method static Builder|Translation whereValue($value)
  * @mixin \Eloquent
+ * @property string $object_type
+ * @property string $object_key
+ * @method static Builder|Translation whereObjectKey($value)
+ * @method static Builder|Translation whereObjectType($value)
  */
 class Translation extends Model
 {
-    protected $table = 'translation';
-    protected $primaryKey = 'id';
-    protected $fillable = [
-        'key',
+    const STATUS_SAVED = 0;
+    const STATUS_CHANGED = 1;
+
+    public $timestamps = false;
+    protected $table = 'jw_translations';
+
+    protected $guarded = [
+        'id'
     ];
 
-    public static function syncLanguage()
+    public function scopeOfTranslatedGroup(Builder $query, $group)
     {
-        self::fileToDatabase();
-        self::databaseToFile();
+        return $query->where('group', $group)->whereNotNull('value');
     }
 
-    protected static function databaseToFile()
+    public function scopeOrderByGroupKeys(Builder $query, $ordered)
     {
-        $lang_dir = resource_path() . '/lang';
-        $columns = self::getColumnsLanguage();
-        $trans_files = new \DirectoryIterator($lang_dir . '/en');
-
-        foreach ($columns as $column) {
-            $dir_path = $lang_dir . '/' . $column;
-
-            if (! is_dir($dir_path)) {
-                mkdir($dir_path);
-            }
-
-            foreach ($trans_files as $file) {
-                if (! $file->isDot()) {
-                    $file_name = $file->getFilename();
-                    $group = explode('.', $file_name)[0];
-                    $items = Translation::select([
-                        'key AS keylang',
-                        'en AS default',
-                        $column .' AS lang',
-                    ])->where('key', JW_SQL_LIKE, $group . '.%')
-                        ->get();
-
-                    $arr = [];
-                    foreach ($items as $item) {
-                        $keylang = str_replace($group . '.', '', $item->keylang);
-                        $explode = explode('.', $keylang);
-                        $lang_text = $item->lang;
-                        if (empty($lang_text)) {
-                            $lang_text = $item->default;
-                        }
-
-                        if (isset($explode[1]) && ! empty($explode[1])) {
-                            $arr[$explode[0]][trim($explode[1])] = trim($lang_text);
-                        } else {
-                            $arr[\Str::slug($keylang, '_')] = trim($lang_text);
-                        }
-                    }
-
-                    $str_arr = self::varExportShort($arr) . ";";
-                    $data = "<?php \n";
-                    $data .= "return $str_arr \n";
-                    $data .= "\n";
-
-                    $handle = fopen($dir_path . '/' . $file_name, 'w+') or die('Cannot open file: '. $file_name);
-                    fwrite($handle, $data);
-                    fclose($handle);
-                }
-            }
-        }
-    }
-
-    protected static function getColumnsLanguage()
-    {
-        $columns = \Schema::getColumnListing('translation');
-
-        return array_merge(array_diff($columns, ['key', 'id', 'created_at', 'updated_at']));
-    }
-
-    protected static function fileToDatabase()
-    {
-        $dir_path = resource_path() . '/lang';
-        $columns = self::getColumnsLanguage();
-
-        self::syncLanguageDir($dir_path . '/en', 'en');
-
-        foreach ($columns as $column) {
-            if ($column == 'en') {
-                continue;
-            }
-
-            self::syncLanguageDir($dir_path . '/' . $column, $column);
-        }
-    }
-
-    protected static function syncLanguageDir($dir, $lang)
-    {
-        if (! is_dir($dir)) {
-            return false;
+        if ($ordered) {
+            $query->orderBy('group')->orderBy('key');
         }
 
-        $dir = new \DirectoryIterator($dir);
-        foreach ($dir as $fileinfo) {
-            if ($fileinfo->isFile()) {
-                $file_name = $fileinfo->getFilename();
-                $file_name = str_replace('.php', '', $file_name);
-                $file_path = $fileinfo->getPathname();
-
-                $keywords = include($file_path);
-                foreach ($keywords as $key => $keyword) {
-                    $key2 = $file_name . '.' . $key;
-                    self::syncLanguageKey($key2, $keyword, $lang);
-                }
-            }
-        }
-
-        return true;
+        return $query;
     }
 
-    protected static function syncLanguageKey($key, $keyword, $lang)
+    public function scopeSelectDistinctGroup(Builder $query)
     {
-        if (is_array($keyword)) {
-            foreach ($keyword as $key2 => $item) {
-                $new_key = $key . '.' . $key2;
-                self::syncLanguageKey($new_key, $item, $lang);
-            }
-        } else {
-            if (! Translation::where('key', '=', $key)->exists()) {
-                $model = Translation::firstOrNew(['key' => $key]);
-                $model->{$lang} = $keyword;
-                $model->save();
-            }
+        switch (DB::getDriverName()) {
+            case 'mysql':
+                $select = 'DISTINCT `group`';
+                break;
+            default:
+                $select = 'DISTINCT "group"';
+                break;
         }
+
+        return $query->select(DB::raw($select));
     }
 
-    protected static function varExportShort($var)
+    public function scopeWhereActive(Builder $builder)
     {
-        $output = json_decode(str_replace(['(',')'], ['&#40','&#41'], json_encode($var)), true);
-        $output = var_export($output, true);
-        $output = str_replace(['array (',')','&#40','&#41'], ['[',']','(',')'], $output);
-
-        return $output;
+        return $builder->where('status', '=', 1);
     }
 }

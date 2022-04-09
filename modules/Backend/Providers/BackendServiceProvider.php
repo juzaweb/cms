@@ -11,6 +11,7 @@ use Juzaweb\Backend\Actions\PermissionAction;
 use Juzaweb\Backend\Actions\SocialLoginAction;
 use Juzaweb\Backend\Actions\ThemeAction;
 use Juzaweb\Backend\Actions\ToolAction;
+use Juzaweb\Backend\Commands\FindTransCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Observers\CommentObserver;
@@ -53,6 +54,7 @@ class BackendServiceProvider extends ServiceProvider
         $this->commands(
             [
                 PermissionGenerateCommand::class,
+                FindTransCommand::class,
             ]
         );
     }

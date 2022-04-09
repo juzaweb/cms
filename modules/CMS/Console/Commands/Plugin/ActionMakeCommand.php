@@ -71,10 +71,13 @@ class ActionMakeCommand extends GeneratorCommand
     {
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 
-        return (new Stub('/action.stub', [
-            'NAMESPACE' => $this->getClassNamespace($module),
-            'CLASS' => $this->getClass(),
-        ]))->render();
+        return (new Stub(
+            '/action.stub',
+            [
+                'NAMESPACE' => $this->getClassNamespace($module),
+                'CLASS' => $this->getClass(),
+            ]
+        ))->render();
     }
 
     /**
