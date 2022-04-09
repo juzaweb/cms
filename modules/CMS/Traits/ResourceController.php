@@ -42,17 +42,25 @@ trait ResourceController
             Route::currentRouteName()
         );
 
-        $this->addBreadcrumb([
-            'title' => $this->getTitle(...$params),
-            'url' => route($indexRoute, $params),
-        ]);
+        $this->addBreadcrumb(
+            [
+                'title' => $this->getTitle(...$params),
+                'url' => route($indexRoute, $params),
+            ]
+        );
 
         $model = $this->makeModel(...$params);
 
-        return view($this->viewPrefix . '.form', array_merge([
-            'title' => trans('cms::app.add_new'),
-            'linkIndex' => action([static::class, 'index'], $params)
-        ], $this->getDataForForm($model, ...$params)));
+        return view(
+            $this->viewPrefix . '.form',
+            array_merge(
+                [
+                    'title' => trans('cms::app.add_new'),
+                    'linkIndex' => action([static::class, 'index'], $params)
+                ],
+                $this->getDataForForm($model, ...$params)
+            )
+        );
     }
 
     public function edit(...$params)
@@ -67,18 +75,26 @@ trait ResourceController
         unset($indexParams[$this->getPathIdIndex($indexParams)]);
         $indexParams = collect($indexParams)->values()->toArray();
 
-        $this->addBreadcrumb([
-            'title' => $this->getTitle(...$params),
-            'url' => route($indexRoute, $indexParams),
-        ]);
+        $this->addBreadcrumb(
+            [
+                'title' => $this->getTitle(...$params),
+                'url' => route($indexRoute, $indexParams),
+            ]
+        );
 
         $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
         $this->checkPermission('edit', $model, ...$params);
 
-        return view($this->viewPrefix . '.form', array_merge([
-            'title' => $model->{$model->getFieldName()},
-            'linkIndex' => action([static::class, 'index'], $indexParams)
-        ], $this->getDataForForm($model, ...$params)));
+        return view(
+            $this->viewPrefix . '.form',
+            array_merge(
+                [
+                    'title' => $model->{$model->getFieldName()},
+                    'linkIndex' => action([static::class, 'index'], $indexParams)
+                ],
+                $this->getDataForForm($model, ...$params)
+            )
+        );
     }
 
     public function store(Request $request, ...$params)
@@ -161,6 +177,71 @@ trait ResourceController
             $model,
             $request,
             ...$params
+        );
+    }
+    
+    public function datatable(Request $request, ...$params)
+    {
+        $table = $this->getDataTable(...$params);
+        $table->setCurrentUrl(action([static::class, 'index'], $params));
+        
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'desc');
+        $offset = $request->get('offset', 0);
+        $limit = (int) $request->get('limit', 20);
+    
+        $query = $table->query($request->all());
+        $count = $query->count();
+        $query->orderBy($sort, $order);
+        $query->offset($offset);
+        $query->limit($limit);
+        $rows = $query->get();
+    
+        $results = [];
+        $columns = $table->columns();
+    
+        foreach ($rows as $index => $row) {
+            $columns['id'] = $row->id;
+            foreach ($columns as $col => $column) {
+                if (! empty($column['formatter'])) {
+                    $results[$index][$col] = $column['formatter'](
+                        $row->{$col} ?? null,
+                        $row,
+                        $index
+                    );
+                } else {
+                    $results[$index][$col] = $row->{$col};
+                }
+            }
+        }
+    
+        return response()->json(
+            [
+                'total' => $count,
+                'rows' => $results,
+            ]
+        );
+    }
+    
+    public function bulkActions(Request $request, ...$params)
+    {
+        $request->validate(
+            [
+                'ids' => 'required|array',
+                'action' => 'required',
+            ]
+        );
+    
+        $action = $request->post('action');
+        $ids = $request->post('ids');
+    
+        $table = $this->getDataTable(...$params);
+        $table->bulkActions($action, $ids);
+    
+        return $this->success(
+            [
+                'message' => trans('cms::app.successfully'),
+            ]
         );
     }
 
@@ -265,6 +346,10 @@ trait ResourceController
     protected function getDataForIndex(...$params)
     {
         $dataTable = $this->getDataTable(...$params);
+        $dataTable->setDataUrl(action([static::class, 'datatable'], $params));
+        $dataTable->setActionUrl(action([static::class, 'bulkActions'], $params));
+        $dataTable->setCurrentUrl(action([static::class, 'index'], $params));
+        
         $canCreate = $this->getPermission(
             'create',
             $this->getModel(...$params),
@@ -297,10 +382,12 @@ trait ResourceController
             Route::currentRouteName()
         );
 
-        return $this->success([
-            'message' => trans('cms::app.created_successfully'),
-            'redirect' => route($indexRoute, $params),
-        ]);
+        return $this->success(
+            [
+                'message' => trans('cms::app.created_successfully'),
+                'redirect' => route($indexRoute, $params),
+            ]
+        );
     }
 
     protected function updateSuccessResponse($model, $request, ...$params)
@@ -311,10 +398,12 @@ trait ResourceController
             Route::currentRouteName()
         );
 
-        return $this->success([
-            'message' => trans('cms::app.updated_successfully'),
-            'redirect' => route($editRoute, $params),
-        ]);
+        return $this->success(
+            [
+                'message' => trans('cms::app.updated_successfully'),
+                'redirect' => route($editRoute, $params),
+            ]
+        );
     }
 
     protected function isUpdateRoute()

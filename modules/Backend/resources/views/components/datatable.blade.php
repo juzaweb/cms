@@ -54,13 +54,18 @@
     </table>
 </div>
 
+@php
+    $dataUrl = $dataUrl ? $dataUrl : route('admin.datatable.get-data') .'?table='. urlencode($table) .'&data='. urlencode(json_encode($params)) .'&currentUrl='. url()->current();
+    $actionUrl = $actionUrl ?  $actionUrl : route('admin.datatable.bulk-actions') .'?table='. urlencode($table) .'&data='. urlencode(json_encode($params)) .'&currentUrl='. url()->current();
+@endphp
+
 <script type="text/javascript">
     var table = new JuzawebTable({
         table: "#{{ $uniqueId }}",
         page_size: parseInt("{{ $perPage }}"),
         sort_name: "{{ $sortName }}",
         sort_order: "{{ $sortOder }}",
-        url: '{{ route('admin.datatable.get-data') }}?table={{ urlencode($table) }}&data={{ urlencode(json_encode($params)) }}&currentUrl={{ url()->current() }}',
-        action_url: '{{ route('admin.datatable.bulk-actions') }}?table={{ urlencode($table) }}&data={{ urlencode(json_encode($params)) }}&currentUrl={{ url()->current() }}'
+        url: '{{ $dataUrl }}',
+        action_url: '{{ $actionUrl }}'
     });
 </script>
