@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Juzaweb\AdsManager\Http\Datatables\AdsManagerDatatable;
 use Juzaweb\Backend\Http\Controllers\Backend\PageController;
 use Juzaweb\AdsManager\Models\Ads;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class AdsManagerController extends PageController
 {

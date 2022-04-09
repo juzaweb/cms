@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Notification;
+namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Facades\DB;
 
@@ -9,7 +9,7 @@ class SendNotification
     protected $notification;
 
     /**
-     * @param \Juzaweb\Notification\Models\ManualNotification $notification
+     * @param \Juzaweb\Backend\Models\ManualNotification $notification
      * */
     public function __construct($notification)
     {
@@ -34,19 +34,23 @@ class SendNotification
                 DB::beginTransaction();
                 (new $method['class']($this->notification))->handle();
 
-                $this->notification->update([
-                    'status' => 1,
-                    'error' => null,
-                ]);
+                $this->notification->update(
+                    [
+                        'status' => 1,
+                        'error' => null,
+                    ]
+                );
 
                 DB::commit();
             } catch (\Exception $exception) {
                 DB::rollBack();
 
-                $this->notification->update([
-                    'status' => 0,
-                    'error' => $exception->getMessage(),
-                ]);
+                $this->notification->update(
+                    [
+                        'status' => 0,
+                        'error' => $exception->getMessage(),
+                    ]
+                );
 
                 return false;
             }

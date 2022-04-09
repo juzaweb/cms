@@ -1,8 +1,8 @@
 <?php
 
-namespace Juzaweb\Notification\Notifications;
+namespace Juzaweb\CMS\Support\Notifications;
 
-use Juzaweb\Notification\Events\PusherEvent;
+use Juzaweb\CMS\Events\PusherEvent;
 
 class BroadcastNotification extends NotificationAbstract
 {

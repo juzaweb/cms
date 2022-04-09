@@ -7,8 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Juzaweb\Notification\Models\ManualNotification;
-use Juzaweb\Notification\SendNotification as TadNotification;
+use Juzaweb\Backend\Models\ManualNotification;
+use Juzaweb\CMS\Support\SendNotification as TadNotification;
 
 class SendNotification implements ShouldQueue
 {

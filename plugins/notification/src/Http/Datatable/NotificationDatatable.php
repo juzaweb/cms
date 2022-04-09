@@ -5,8 +5,8 @@ namespace Juzaweb\Notification\Http\Datatable;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\Notification\Models\ManualNotification;
-use Juzaweb\Notification\SendNotification;
+use Juzaweb\Backend\Models\ManualNotification;
+use Juzaweb\CMS\Support\SendNotification;
 use Juzaweb\Notification\Jobs\SendNotification as SendNotificationJob;
 
 class NotificationDatatable extends DataTable
@@ -66,12 +66,15 @@ class NotificationDatatable extends DataTable
 
     public function rowActionsFormatter($value, $row, $index)
     {
-        return view('cms::backend.items.datatable_item', [
-            'value' => $row->data['subject'],
-            'row' => $row,
-            'actions' => $this->rowAction($row),
-            'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
-        ])
+        return view(
+            'cms::backend.items.datatable_item',
+            [
+                'value' => $row->data['subject'],
+                'row' => $row,
+                'actions' => $this->rowAction($row),
+                'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
+            ]
+        )
             ->render();
     }
 

@@ -8,7 +8,7 @@ use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Movie\Models\Movie\Movie;
 use Juzaweb\Movie\Models\Subtitle;
 use Juzaweb\Movie\Models\Video\VideoFile;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class SubtitleController extends BackendController
 {

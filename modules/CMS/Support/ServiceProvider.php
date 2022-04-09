@@ -10,7 +10,6 @@
 
 namespace Juzaweb\CMS\Support;
 
-use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;

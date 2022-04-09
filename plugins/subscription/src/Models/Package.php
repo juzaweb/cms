@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Traits\ResourceModel;
+use Juzaweb\CMS\Traits\ResourceModel;
 use Ramsey\Uuid\Uuid;
 
 /**

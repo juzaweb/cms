@@ -1,9 +1,10 @@
 <?php
 
-namespace Juzaweb\Notification;
+namespace Juzaweb\CMS\Support;
 
 use Juzaweb\Notification\Jobs\SendNotification as SendNotificationJob;
-use Juzaweb\Notification\Models\ManualNotification;
+use Juzaweb\Backend\Models\ManualNotification;
+use Illuminate\Foundation\Auth\User;
 
 class Notification
 {
@@ -15,13 +16,17 @@ class Notification
 
     public static function register($key, $class, $priority = 20)
     {
-        return add_filters('notify_methods', function ($items) use ($key, $class) {
-            $items[$key] = [
-                'class' => $class
-            ];
-
-            return $items;
-        }, $priority);
+        return add_filters(
+            'notify_methods',
+            function ($items) use ($key, $class) {
+                $items[$key] = [
+                    'class' => $class
+                ];
+    
+                return $items;
+            },
+            $priority
+        );
     }
 
     public static function make()
@@ -32,7 +37,7 @@ class Notification
     /**
      * @param array|int|\Juzaweb\CMS\Models\User $users
      * @return $this
-     * */
+     */
     public function setUsers($users)
     {
         $userIds = [];
@@ -42,7 +47,7 @@ class Notification
             foreach ($users as $user) {
                 if (is_numeric($user)) {
                     $userIds[] = $user;
-                } elseif (is_a($user, 'Illuminate\Foundation\Auth\User')) {
+                } elseif (is_a($user, User::class)) {
                     $userIds[] = $user->id;
                 }
             }
@@ -78,15 +83,17 @@ class Notification
 
     public function send()
     {
-        $notification = ManualNotification::create([
-            'users' => implode(',', $this->users),
-            'data' => [
-                'subject' => $this->subject,
-                'body' => $this->body,
-                'url' => $this->url,
-                'image' => $this->image,
-            ],
-        ]);
+        $notification = ManualNotification::create(
+            [
+                'users' => implode(',', $this->users),
+                'data' => [
+                    'subject' => $this->subject,
+                    'body' => $this->body,
+                    'url' => $this->url,
+                    'image' => $this->image,
+                ],
+            ]
+        );
 
         switch (config('mymo.notification.method')) {
             case 'sync':

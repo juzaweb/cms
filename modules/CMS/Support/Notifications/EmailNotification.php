@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Notification\Notifications;
+namespace Juzaweb\CMS\Support\Notifications;
 
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Models\EmailList;
@@ -40,12 +40,14 @@ class EmailNotification extends NotificationAbstract
             (Email::make())
                 ->withTemplate('notification')
                 ->setEmails($user->email)
-                ->setParams([
-                    'subject' => $subject,
-                    'body' => $body,
-                    'url' => Arr::get($this->notification->data, 'url'),
-                    'image' => Arr::get($this->notification->data, 'image'),
-                ])
+                ->setParams(
+                    [
+                        'subject' => $subject,
+                        'body' => $body,
+                        'url' => Arr::get($this->notification->data, 'url'),
+                        'image' => Arr::get($this->notification->data, 'image'),
+                    ]
+                )
                 ->send();
         }
     }

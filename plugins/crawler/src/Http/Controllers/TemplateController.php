@@ -10,7 +10,7 @@ use Juzaweb\Crawler\Models\CrawTemplate;
 use Illuminate\Http\Request;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Models\User;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class TemplateController extends BackendController
 {

@@ -4,7 +4,7 @@ namespace Juzaweb\Crawler\Models;
 
 use Juzaweb\CMS\Models\Language;
 use Juzaweb\CMS\Models\Model;
-use Juzaweb\Traits\ResourceModel;
+use Juzaweb\CMS\Traits\ResourceModel;
 
 /**
  * Juzaweb\Crawler\ModelsTemplate
