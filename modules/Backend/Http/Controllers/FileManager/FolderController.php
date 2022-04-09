@@ -24,16 +24,18 @@ class FolderController extends FileManagerController
         }
 
         return view('cms::backend.filemanager.tree')
-            ->with([
-                'root_folders' => [
-                    (object) [
-                        'name' => 'Root',
-                        'url' => '',
-                        'children' => $childrens,
-                        'has_next' => $childrens ? true : false,
+            ->with(
+                [
+                    'root_folders' => [
+                        (object) [
+                            'name' => 'Root',
+                            'url' => '',
+                            'children' => $childrens,
+                            'has_next' => $childrens ? true : false,
+                        ],
                     ],
-                ],
-            ]);
+                ]
+            );
     }
 
     public function addfolder()
@@ -54,9 +56,8 @@ class FolderController extends FileManagerController
         }
 
         DB::beginTransaction();
-
         try {
-            $model = new Folder();
+            $model = new MediaFolder();
             $model->name = $folder_name;
             $model->type = $this->getType();
             $model->folder_id = $parent_id;
@@ -64,7 +65,6 @@ class FolderController extends FileManagerController
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-
             return $e->getMessage();
         }
 

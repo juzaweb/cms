@@ -5,21 +5,23 @@ on: [push]
 jobs:
   laravel-tests:
     runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.0, 8.1]
+        version: [^3.0, dev-master, dev-develop]
+        mysql: [5.7.33, 8.0.21]
     services:
       mysql:
-        image: mysql:8.0.21
+        image: mysql:${{ matrix.mysql }}
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: cms_test
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu-latest]
-        php: [8.0, 8.1]
-    name: PHP${{ matrix.php }} - ${{ matrix.os }}
+    name: PHP${{ matrix.php }} - ${{ matrix.version }} - ${{ matrix.mysql }}
 
     steps:
       - name: Setup PHP
@@ -30,7 +32,7 @@ jobs:
           coverage: none
       - uses: actions/checkout@v2
       - name: Install Dependencies
-        run: composer create-project --prefer-dist juzaweb/juzacms blog
+        run: composer create-project --prefer-dist juzaweb/juzacms blog ${{ matrix.version }}
       - name: Copy .env
         working-directory: blog
         run: rm .env && cp .env.testing .env
@@ -45,10 +47,10 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Execute tests Install
         working-directory: blog
-        run: php artisan test vendor/juzaweb/backend/tests/InstallTest.php
+        run: php artisan test modules/Tests/InstallTest.php
       - name: Execute tests (Unit and Feature tests)
         working-directory: blog
         run: php artisan test
       - name: Execute tests Update
         working-directory: blog
-        run: php artisan test vendor/juzaweb/backend/tests/UpdateTest.php
+        run: php artisan test modules/Tests/UpdateTest.php

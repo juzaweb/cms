@@ -27,6 +27,10 @@ abstract class DataTable
     protected $sortOder = 'desc';
 
     protected $params = [];
+    
+    protected $dataUrl;
+    
+    protected $actionUrl;
 
     public $currentUrl;
 
@@ -59,20 +63,27 @@ abstract class DataTable
     {
         $uniqueId = 'juzaweb_' . Str::random(10);
         $searchFields = $this->searchFields();
-        $this->currentUrl = url()->current();
+        if (empty($this->currentUrl)) {
+            $this->currentUrl = url()->current();
+        }
 
-        return view('cms::components.datatable', [
-            'columns' => $this->columns(),
-            'actions' => $this->actions(),
-            'uniqueId' => $uniqueId,
-            'params' => $this->params,
-            'searchFields' => $searchFields,
-            'perPage' => $this->perPage,
-            'sortName' => $this->sortName,
-            'sortOder' => $this->sortOder,
-            'searchFieldTypes' => $this->getSearchFieldTypes(),
-            'table' => Crypt::encryptString(static::class),
-        ]);
+        return view(
+            'cms::components.datatable',
+            [
+                'columns' => $this->columns(),
+                'actions' => $this->actions(),
+                'uniqueId' => $uniqueId,
+                'params' => $this->params,
+                'searchFields' => $searchFields,
+                'perPage' => $this->perPage,
+                'sortName' => $this->sortName,
+                'sortOder' => $this->sortOder,
+                'dataUrl' => $this->dataUrl,
+                'actionUrl' => $this->actionUrl,
+                'searchFieldTypes' => $this->getSearchFieldTypes(),
+                'table' => Crypt::encryptString(static::class),
+            ]
+        );
     }
 
     public function actions()
@@ -115,15 +126,33 @@ abstract class DataTable
 
     public function rowActionsFormatter($value, $row, $index)
     {
-        return view('cms::backend.items.datatable_item', [
-            'value' => $value,
-            'row' => $row,
-            'actions' => $this->rowAction($row),
-            'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
-        ])
+        return view(
+            'cms::backend.items.datatable_item',
+            [
+                'value' => $value,
+                'row' => $row,
+                'actions' => $this->rowAction($row),
+                'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
+            ]
+        )
             ->render();
     }
 
+    public function setDataUrl(string $url)
+    {
+        $this->dataUrl = $url;
+    }
+    
+    public function setActionUrl(string $url)
+    {
+        $this->actionUrl = $url;
+    }
+    
+    public function setCurrentUrl(string $url)
+    {
+        $this->currentUrl = $url;
+    }
+    
     private function paramsToArray($params)
     {
         foreach ($params as $key => $var) {

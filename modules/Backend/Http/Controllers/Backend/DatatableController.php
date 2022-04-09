@@ -50,18 +50,22 @@ class DatatableController extends BackendController
             }
         }
 
-        return response()->json([
-            'total' => $count,
-            'rows' => $results,
-        ]);
+        return response()->json(
+            [
+                'total' => $count,
+                'rows' => $results,
+            ]
+        );
     }
 
     public function bulkActions(Request $request)
     {
-        $request->validate([
-            'ids' => 'required|array',
-            'action' => 'required',
-        ]);
+        $request->validate(
+            [
+                'ids' => 'required|array',
+                'action' => 'required',
+            ]
+        );
 
         $action = $request->post('action');
         $ids = $request->post('ids');
@@ -69,9 +73,11 @@ class DatatableController extends BackendController
         $table = $this->getTable($request);
         $table->bulkActions($action, $ids);
 
-        return $this->success([
-            'message' => trans('cms::app.successfully'),
-        ]);
+        return $this->success(
+            [
+                'message' => trans('cms::app.successfully'),
+            ]
+        );
     }
 
     /**
