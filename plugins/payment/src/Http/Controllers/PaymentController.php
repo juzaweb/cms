@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Payment\Http\Controllers;
 
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class PaymentController extends BackendController
 {

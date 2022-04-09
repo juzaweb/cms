@@ -3,7 +3,7 @@
 namespace Juzaweb\Movie\Http\Controllers\Backend\LiveTV;
 
 use Illuminate\Http\Request;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Movie\Models\LiveTV\LiveTv;
 use Juzaweb\Movie\Models\Category\Tags;
 

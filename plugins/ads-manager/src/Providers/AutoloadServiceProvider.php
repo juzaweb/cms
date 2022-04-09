@@ -2,7 +2,7 @@
 
 namespace Juzaweb\AdsManager\Providers;
 
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class AutoloadServiceProvider extends ServiceProvider
 {

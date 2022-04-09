@@ -3,8 +3,8 @@
 namespace Juzaweb\Notification\Commands;
 
 use Illuminate\Console\Command;
-use Juzaweb\Notification\Models\ManualNotification;
-use Juzaweb\Notification\SendNotification;
+use Juzaweb\Backend\Models\ManualNotification;
+use Juzaweb\Backend\SendNotification;
 
 class SendNotify extends Command
 {

@@ -3,10 +3,10 @@
 namespace Juzaweb\Movie\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Movie\Http\Datatables\VideoAdsDatatable;
 use Juzaweb\Movie\Models\Video\VideoAds;
-use Juzaweb\Traits\ResourceController;
+use Juzaweb\CMS\Traits\ResourceController;
 
 class VideoAdsController extends BackendController
 {
@@ -17,7 +17,7 @@ class VideoAdsController extends BackendController
     /**
      * Get data table resource
      *
-     * @return \Juzaweb\Abstracts\DataTable
+     * @return \Juzaweb\CMS\Abstracts\DataTable
      */
     protected function getDataTable(...$params)
     {

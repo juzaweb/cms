@@ -10,9 +10,9 @@
 
 namespace Juzaweb\Seo;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\Seo\Http\Controllers\SeoController;
 use Juzaweb\Seo\Models\SeoMeta;
 
@@ -38,28 +38,41 @@ class SeoAction extends Action
 
     public function addAjaxs()
     {
-        HookAction::registerAdminAjax('seo-content', [
-            'callback' => [SeoController::class, 'getStringRaw'],
-            'method' => 'post'
-        ]);
+        HookAction::registerAdminAjax(
+            'seo-content',
+            [
+                'callback' => [SeoController::class, 'getStringRaw'],
+                'method' => 'post'
+            ]
+        );
     }
 
     public function addFormSeo(Model $model)
     {
         $data = SeoMeta::findByModel($model);
 
-        echo e(view('jseo::form', compact(
-            'model',
-            'data'
-        )));
+        echo e(
+            view(
+                'jseo::form',
+                compact(
+                    'model',
+                    'data'
+                )
+            )
+        );
     }
 
     public function addMetaHeader()
     {
         $taxonomy = '';
 
-        echo e(view('jseo::fe_header', compact(
-            'taxonomy'
-        )));
+        echo e(
+            view(
+                'jseo::fe_header',
+                compact(
+                    'taxonomy'
+                )
+            )
+        );
     }
 }

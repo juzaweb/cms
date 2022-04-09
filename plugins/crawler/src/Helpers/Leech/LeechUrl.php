@@ -5,8 +5,8 @@ namespace Juzaweb\Crawler\Helpers\Leech;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
-use Juzaweb\Support\HtmlDom;
-use Juzaweb\Support\HtmlDomNode;
+use Juzaweb\CMS\Support\HtmlDom;
+use Juzaweb\CMS\Support\HtmlDomNode;
 use Psr\Http\Message\ResponseInterface;
 
 class LeechUrl

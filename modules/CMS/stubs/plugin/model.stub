@@ -1,0 +1,11 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Juzaweb\CMS\Models\Model;
+
+class $CLASS$ extends Model
+{
+    protected $table = '$TABLE$';
+    protected $fillable = $FILLABLE$;
+}

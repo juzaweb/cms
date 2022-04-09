@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Notification;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
 
 class NotificationAction extends Action

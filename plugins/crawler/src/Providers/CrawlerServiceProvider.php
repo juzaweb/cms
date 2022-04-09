@@ -3,8 +3,8 @@
 namespace Juzaweb\Crawler\Providers;
 
 use Juzaweb\Crawler\CrawlerAction;
-use Juzaweb\Facades\ActionRegister;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class CrawlerServiceProvider extends ServiceProvider
 {

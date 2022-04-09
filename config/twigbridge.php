@@ -122,7 +122,7 @@ return [
             'TwigBridge\Extension\Laravel\Translator',
             'TwigBridge\Extension\Laravel\Url',
             'TwigBridge\Extension\Laravel\Model',
-            'Juzaweb\Extension\Laravel\Custom',
+            'Juzaweb\CMS\Extension\Custom',
             // 'TwigBridge\Extension\Laravel\Gate',
 
             // 'TwigBridge\Extension\Laravel\Form',

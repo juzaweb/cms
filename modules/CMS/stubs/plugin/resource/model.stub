@@ -1,0 +1,14 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\ResourceModel;
+
+class $CLASS$ extends Model
+{
+    use ResourceModel;
+
+    protected $table = '$TABLE$';
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+}

@@ -2,8 +2,8 @@
 
 namespace Juzaweb\ImageSlider\Providers;
 
-use Juzaweb\Facades\ActionRegister;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class ImageSliderServiceProvider extends ServiceProvider
 {

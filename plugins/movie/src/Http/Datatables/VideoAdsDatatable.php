@@ -4,7 +4,7 @@ namespace Juzaweb\Movie\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\Movie\Models\Video\VideoAds;
 
 class VideoAdsDatatable extends DataTable

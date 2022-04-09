@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Translation\Providers;
 
-use Juzaweb\Facades\ActionRegister;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\Translation\TranslationAction;
 
 class TranslationServiceProvider extends ServiceProvider

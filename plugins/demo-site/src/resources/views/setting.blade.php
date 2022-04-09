@@ -4,7 +4,7 @@
     @php
     $options = ['' => trans('cms::app.user')];
     if ($user = get_config('demo_user')) {
-        $user = \Juzaweb\Models\User::find($user);
+        $user = \Juzaweb\CMS\Models\User::find($user);
         $options = [$user->id => $user->name];
     }
     @endphp

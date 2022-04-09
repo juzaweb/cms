@@ -3,8 +3,8 @@
 namespace Juzaweb\AdsManager\Providers;
 
 use Juzaweb\AdsManager\AdsManagerAction;
-use Juzaweb\Facades\ActionRegister;
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\CMS\Support\ServiceProvider;
 
 class AdsManagerServiceProvider extends ServiceProvider
 {

@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Subscription;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
 
 class SubscriptionAction extends Action

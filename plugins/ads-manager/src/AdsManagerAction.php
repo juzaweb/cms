@@ -2,7 +2,7 @@
 
 namespace Juzaweb\AdsManager;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\AdsManager\Models\Ads;
 use Juzaweb\Backend\Facades\HookAction;
 

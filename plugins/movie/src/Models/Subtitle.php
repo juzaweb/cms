@@ -3,7 +3,7 @@
 namespace Juzaweb\Movie\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Juzaweb\Traits\ResourceModel;
+use Juzaweb\CMS\Traits\ResourceModel;
 
 /**
  * Juzaweb\Movie\Models\Subtitle

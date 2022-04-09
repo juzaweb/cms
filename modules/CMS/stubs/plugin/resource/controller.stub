@@ -1,0 +1,40 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Juzaweb\CMS\Traits\ResourceController;
+use Illuminate\Support\Facades\Validator;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use $MODULE_NAMESPACE$Http\Datatables\$DATATABLE$;
+use $MODULE_NAMESPACE$Models\$MODEL_NAME$;
+
+class $CLASS$ extends BackendController
+{
+    use ResourceController;
+
+    protected $viewPrefix = '$MODULE_DOMAIN$::backend.$VIEW_NAME$';
+
+    protected function getDataTable()
+    {
+        return new $DATATABLE$();
+    }
+
+    protected function validator(array $attributes)
+    {
+        $validator = Validator::make($attributes, [
+            // Rules
+        ]);
+
+        return $validator;
+    }
+
+    protected function getModel()
+    {
+        return $MODEL_NAME$::class;
+    }
+
+    protected function getTitle()
+    {
+        return trans('$MODULE_DOMAIN$::content.$TABLE_NAME$');
+    }
+}

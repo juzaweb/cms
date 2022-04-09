@@ -13,7 +13,7 @@ namespace Juzaweb\Translation\Http\Datatables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 
 class TranslationDatatable extends DataTable
 {
@@ -82,28 +82,35 @@ class TranslationDatatable extends DataTable
 
         DB::setTablePrefix('');
         $query = DB::table("{$tbPrefixTrans}jw_translations AS a");
-        $query->select([
-            'a.*',
-            'b.text'
-        ]);
+        $query->select(
+            [
+                'a.*',
+                'b.text'
+            ]
+        );
 
-        $query->leftJoin("{$tbPrefix}language_lines AS b", function ($q) {
-            $q->on('a.key', '=', 'b.key');
-            $q->on('a.group', '=', 'b.group');
-            $q->on('a.namespace', '=', 'b.namespace');
-        });
+        $query->leftJoin(
+            "{$tbPrefix}language_lines AS b",
+            function ($q) {
+                $q->on('a.key', '=', 'b.key');
+                $q->on('a.group', '=', 'b.group');
+                $q->on('a.namespace', '=', 'b.namespace');
+            }
+        );
 
         $query->where('a.locale', '=', 'en');
         $query->whereIn('a.object_key', $objects);
 
         if ($search = Arr::get($data, 'keyword')) {
-            $query->where(function ($q) use ($search) {
-                $q->where('a.group', JW_SQL_LIKE, "%{$search}%");
-                $q->orWhere('a.key', JW_SQL_LIKE, "%{$search}%");
-                $q->orWhere('a.value', JW_SQL_LIKE, "%{$search}%");
-                $q->orWhere('a.object_key', JW_SQL_LIKE, "%{$search}%");
-                $q->orWhere('b.text', JW_SQL_LIKE, "%{$search}%");
-            });
+            $query->where(
+                function ($q) use ($search) {
+                    $q->where('a.group', JW_SQL_LIKE, "%{$search}%");
+                    $q->orWhere('a.key', JW_SQL_LIKE, "%{$search}%");
+                    $q->orWhere('a.value', JW_SQL_LIKE, "%{$search}%");
+                    $q->orWhere('a.object_key', JW_SQL_LIKE, "%{$search}%");
+                    $q->orWhere('b.text', JW_SQL_LIKE, "%{$search}%");
+                }
+            );
         }
 
         return $query;

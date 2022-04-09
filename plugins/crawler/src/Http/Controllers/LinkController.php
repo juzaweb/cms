@@ -4,7 +4,7 @@ namespace Juzaweb\Crawler\Http\Controllers;
 
 use Juzaweb\Crawler\Http\Datatables\LinkDatatable;
 use Juzaweb\Crawler\Models\CrawTemplate;
-use Juzaweb\Http\Controllers\BackendController;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class LinkController extends BackendController
 {

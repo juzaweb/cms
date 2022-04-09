@@ -4,7 +4,7 @@ namespace Juzaweb\Crawler\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Abstracts\DataTable;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\Crawler\Models\CrawLink;
 
 class LinkDatatable extends DataTable

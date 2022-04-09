@@ -14,16 +14,27 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.0|^8.1",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
+        "arcanedev/log-viewer": "^9.0",
+        "darkaonline/l5-swagger": "^8.0",
         "guzzlehttp/guzzle": "^7.2",
-        "juzaweb/backend": "@dev",
-        "juzaweb/installer": "@dev",
+        "intervention/image": "^2.5",
+        "juzaweb/config": "^2.2",
+        "juzaweb/laravel-chunk-upload": "^1.5",
+        "juzaweb/laravel-translation-loader": "^2.0",
+        "juzaweb/sitemap": "^9.0",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/socialite": "^5.5",
+        "laravel/tinker": "^2.7",
+        "rcrowe/twigbridge": "^0.14",
+        "rennokki/laravel-eloquent-query-cache": "^3.1",
+        "spatie/image-optimizer": "^1.4",
+        "spatie/laravel-feed": "^4.1",
+        "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -38,10 +49,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
+            "Juzaweb\\": "modules/"
+        },
+        "files": [
+            "modules/CMS/Helpers/define.php",
+            "modules/Backend/Helpers/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -77,15 +90,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./packages/*"
-        },
-        {
-            "type": "path",
-            "url": "./plugins/*"
-        }
-    ]
+    "prefer-stable": true
 }

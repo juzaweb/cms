@@ -10,12 +10,12 @@
 
 namespace Juzaweb\Notification\Providers;
 
-use Juzaweb\Support\ServiceProvider;
+use Juzaweb\CMS\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
 use Juzaweb\Notification\Commands\SendNotify;
-use Juzaweb\Notification\Notification;
-use Juzaweb\Notification\Notifications\DatabaseNotification;
-use Juzaweb\Notification\Notifications\EmailNotification;
+use Juzaweb\CMS\Support\Notification;
+use Juzaweb\CMS\Support\Notifications\DatabaseNotification;
+use Juzaweb\CMS\Support\Notifications\EmailNotification;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -39,8 +39,10 @@ class ConsoleServiceProvider extends ServiceProvider
 
     protected function registerCommands()
     {
-        $this->commands([
-            SendNotify::class,
-        ]);
+        $this->commands(
+            [
+                SendNotify::class,
+            ]
+        );
     }
 }

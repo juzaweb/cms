@@ -1,0 +1,17 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Juzaweb\CMS\Http\Controllers\BackendController;
+
+class $CLASS$ extends BackendController
+{
+    public function index()
+    {
+        //
+
+        return view('$DOMAIN_NAME$::index', [
+            'title' => 'Title Page',
+        ]);
+    }
+}

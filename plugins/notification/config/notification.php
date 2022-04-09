@@ -14,7 +14,7 @@ return [
      *
      * Support: sync, queue, cron
      * Default: sync
-     * */
+     */
     'method' => 'sync',
 
     /**

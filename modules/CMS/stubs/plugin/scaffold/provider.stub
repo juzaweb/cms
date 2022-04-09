@@ -1,0 +1,90 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Juzaweb\CMS\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Factory;
+
+class $CLASS$ extends ServiceProvider
+{
+    /**
+     * Boot the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerTranslations();
+        $this->registerViews();
+        $this->registerFactories();
+        $this->loadMigrationsFrom(module_path('$MODULE$', '$MIGRATIONS_PATH$'));
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->register(RouteServiceProvider::class);
+    }
+
+    /**
+     * Register views.
+     *
+     * @return void
+     */
+    public function registerViews()
+    {
+        $viewPath = resource_path('views/modules/$LOWER_NAME$');
+
+        $sourcePath = module_path('$MODULE$', '$PATH_VIEWS$');
+
+        $this->publishes([
+            $sourcePath => $viewPath
+        ],'views');
+
+        $this->loadViewsFrom(array_merge(array_map(function ($path) {
+            return $path . '/modules/$LOWER_NAME$';
+        }, \Config::get('view.paths')), [$sourcePath]), '$LOWER_NAME$');
+    }
+
+    /**
+     * Register translations.
+     *
+     * @return void
+     */
+    public function registerTranslations()
+    {
+        $langPath = resource_path('lang/modules/$LOWER_NAME$');
+
+        if (is_dir($langPath)) {
+            $this->loadTranslationsFrom($langPath, '$LOWER_NAME$');
+        } else {
+            $this->loadTranslationsFrom(module_path('$MODULE$', '$PATH_LANG$'), '$LOWER_NAME$');
+        }
+    }
+
+    /**
+     * Register an additional directory of factories.
+     *
+     * @return void
+     */
+    public function registerFactories()
+    {
+        if (! app()->environment('production') && $this->app->runningInConsole()) {
+            app(Factory::class)->load(module_path('$MODULE$', '$FACTORIES_PATH$'));
+        }
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [];
+    }
+}

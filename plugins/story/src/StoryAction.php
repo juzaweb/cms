@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Story;
 
-use Juzaweb\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
 
 class StoryAction extends Action
