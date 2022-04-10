@@ -65,4 +65,5 @@ return [
     'back_to_cart' => 'Back to cart',
     'email_is_malformed' => 'Email is malformed',
     'note' => 'Note',
+    'please_enter_full_name' => 'Please enter full name',
 ];
