@@ -26,13 +26,16 @@ class DashboardController extends BackendController
             ->count();
         $storage = format_size_units(MediaFile::sum('size'));
 
-        return view('cms::backend.dashboard', compact(
-            'title',
-            'users',
-            'posts',
-            'pages',
-            'storage'
-        ));
+        return view(
+            'cms::backend.dashboard',
+            compact(
+                'title',
+                'users',
+                'posts',
+                'pages',
+                'storage'
+            )
+        );
     }
 
     public function getDataUser(Request $request)

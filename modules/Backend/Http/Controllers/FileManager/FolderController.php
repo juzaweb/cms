@@ -3,6 +3,7 @@
 namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Support\Facades\DB;
+use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\MediaFolder;
 
 class FolderController extends FileManagerController
@@ -13,7 +14,9 @@ class FolderController extends FileManagerController
         $folders = MediaFolder::whereNull('folder_id')
             ->where('type', '=', $this->getType())
             ->get(['id', 'name']);
-
+        $storage = MediaFile::sum('size');
+        $total = disk_total_space(storage_path());
+        
         foreach ($folders as $folder) {
             $childrens[] = (object) [
                 'name' => $folder->name,
@@ -26,6 +29,8 @@ class FolderController extends FileManagerController
         return view('cms::backend.filemanager.tree')
             ->with(
                 [
+                    'storage' => $storage,
+                    'total' => $total,
                     'root_folders' => [
                         (object) [
                             'name' => 'Root',

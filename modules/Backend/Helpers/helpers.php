@@ -685,14 +685,14 @@ if (!function_exists('remove_query_url')) {
     }
 }
 
-function format_size_units($bytes)
+function format_size_units($bytes, $decimals = 2)
 {
     if ($bytes >= 1073741824) {
-        $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        $bytes = number_format($bytes / 1073741824, $decimals) . ' GB';
     } elseif ($bytes >= 1048576) {
-        $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        $bytes = number_format($bytes / 1048576, $decimals) . ' MB';
     } elseif ($bytes >= 1024) {
-        $bytes = number_format($bytes / 1024, 2) . ' KB';
+        $bytes = number_format($bytes / 1024, $decimals) . ' KB';
     } elseif ($bytes > 1) {
         $bytes = $bytes . ' bytes';
     } elseif ($bytes == 1) {
