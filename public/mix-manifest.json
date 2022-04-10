@@ -1,4 +1,4 @@
 {
-    "/modules/Backend/resources/assets/public/css/filemanager.min.css": "/modules/Backend/resources/assets/public/css/filemanager.min.css",
-    "/modules/Backend/resources/assets/public/js/filemanager.min.js": "/modules/Backend/resources/assets/public/js/filemanager.min.js"
+    "/plugins/ecommerce/src/resources/assets/public/css/checkout.min.css": "/plugins/ecommerce/src/resources/assets/public/css/checkout.min.css",
+    "/plugins/ecommerce/src/resources/assets/public/js/checkout.min.js": "/plugins/ecommerce/src/resources/assets/public/js/checkout.min.js"
 }

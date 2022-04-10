@@ -4,15 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ title }} - {{ trans('frontend.payment_order') }}" />
-    <title>{{ title }} - {{ trans('frontend.payment_order') }}</title>
+    <meta name="description" content="{{ title }} - {{ trans('ecom::content.payment_order') }}" />
+    <title>{{ title }} - {{ trans('ecom::content.payment_order') }}</title>
     <link rel="shortcut icon" href="{{ upload_url(config('icon')) }}" type="image/x-icon" />
 
-    <link href="{{ asset('styles/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('styles/css/nprogress.css') }}" rel="stylesheet" type="text/css" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('styles/css/select2-min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('styles/css/checkout.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('jw-styles/plugins/ecommerce/assets/css/checkout.min.css') }}">
     
     <script> var Juzaweb = Juzaweb || {}; Juzaweb.store = ''; Juzaweb.theme = {"id":606449,"role":"main","name":"{{ shop_name }}"}; Juzaweb.template = ''; </script>
 
@@ -39,9 +35,9 @@
 <button class="order-summary-toggle" bind-event-click="Juzaweb.StoreCheckout.toggleOrderSummary(this)">
     <div class="wrap">
         <h2>
-            <label class="control-label">{{ trans('frontend.order') }}</label>
+            <label class="control-label">{{ trans('ecom::content.order') }}</label>
             <label class="control-label hidden-small-device">
-                ({{ cart.item_count }} {{ trans('frontend.products') }})
+                ({{ cart.item_count }} {{ trans('ecom::content.products') }})
             </label>
             <label class="control-label visible-small-device inline">
                 ({{ cart.item_count }})
@@ -49,7 +45,7 @@
         </h2>
 
         <a class="underline-none expandable pull-right" href="javascript:void(0)">
-            {{ trans('frontend.view_detail') }}
+            {{ trans('ecom::content.view_detail') }}
         </a>
     </div>
 </button>
@@ -58,11 +54,11 @@
 
 </div>
 <form method="post" action="" data-toggle="validator" class="content stateful-form formCheckout">
-    <div class="wrap" context="checkout" define='{checkout: new Juzaweb.StoreCheckout(this,{ token: "{{ cart.token }}", email: "{{ customer.email }}", totalOrderItemPrice: {{ cart.total_price }}, shippingFee: 0, freeShipping: false, requiresShipping: {{ requires_shipping ? 'true' : 'false' }}, existCode: false, code: "", discount: 0, settingLanguage: "vi", moneyFormat: "₫", discountLabel: "{{ trans('frontend.free') }}", districtPolicy: "optional", wardPolicy: "hidden", district: "", ward: "", province:"", otherAddress: false, shippingId: 0, shippingMethods: {!! json_encode($shipping_methods) !!}, customerAddressId: 0, reductionCode: "" })}'>
+    <div class="wrap" context="checkout" define='{checkout: new Juzaweb.StoreCheckout(this,{ token: "{{ cart.token }}", email: "{{ customer.email }}", totalOrderItemPrice: {{ cart.total_price|default(0) }}, shippingFee: 0, freeShipping: false, requiresShipping: {{ requires_shipping ? 'true' : 'false' }}, existCode: false, code: "", discount: 0, settingLanguage: "vi", moneyFormat: "₫", discountLabel: "{{ trans('ecom::content.free') }}", districtPolicy: "optional", wardPolicy: "hidden", district: "", ward: "", province:"", otherAddress: false, shippingId: 0, shippingMethods: {}, customerAddressId: 0, reductionCode: "" })}'>
         <div class='sidebar '>
             <div class="sidebar_header">
                 <h2>
-                    <label class="control-label">{{ trans('frontend.order') }} ({{ cart.item_count }} {{ trans('frontend.products') }})</label>
+                    <label class="control-label">{{ trans('ecom::content.order') }} ({{ cart.item_count }} {{ trans('ecom::content.products') }})</label>
                 </h2>
                 <hr class="full_width"/>
             </div>
@@ -100,7 +96,7 @@
                                 </tbody>
                             </table>
                             <div class="order-summary__scroll-indicator">
-                                {{ trans('frontend.scroll_mouse_to_view_more') }}
+                                {{ trans('ecom::content.scroll_mouse_to_view_more') }}
                                 <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -112,9 +108,9 @@
                         <div class="form-group m0" bind-show="!existCode || !applyWithPromotion || code == null || !code.length">
                             <div class="field__input-btn-wrapper">
                                 <div class="field__input-wrapper">
-                                    <input bind="code" name="code" type="text" class="form-control discount_code" placeholder="{{ trans('frontend.enter_discount_code') }}" value="" id="checkout_reduction_code"/>
+                                    <input bind="code" name="code" type="text" class="form-control discount_code" placeholder="{{ trans('ecom::content.enter_discount_code') }}" value="" id="checkout_reduction_code"/>
                                 </div>
-                                <button bind-event-click="reduction_code = false, caculateShippingFee('')" class="btn btn-primary event-voucher-apply" type="button">{{ trans('frontend.apply') }}</button>
+                                <button bind-event-click="reduction_code = false, caculateShippingFee('')" class="btn btn-primary event-voucher-apply" type="button">{{ trans('ecom::content.apply') }}</button>
                             </div>
                         </div>
                         <div bind-class="{'warning' : existCode && !freeShipping && discount == 0,'success' : existCode && ( freeShipping || discount >0 )}" class="clearfix hide" bind-show="code!= null && code.length && existCode && applyWithPromotion">
@@ -125,13 +121,13 @@
                             <div bind="code" class="pull-left applied-discount-code">
 
                             </div>
-                            <div bind="(discountShipping && freeShipping) ? '{{ trans('frontend.free') }}' : discount" class="pull-right">
+                            <div bind="(discountShipping && freeShipping) ? '{{ trans('ecom::content.free') }}' : discount" class="pull-right">
                                 0
                             </div>
                             <input bind-event-click="removeCode('')" class="btn btn-delete" type="button" value="×" name="commit">
                         </div>
                         <div class="error mt10 hide" bind-show="inValidCode">
-                            {{ trans('frontend.discount_code_is_not_valid') }}
+                            {{ trans('ecom::content.discount_code_is_not_valid') }}
                         </div>
                         <div class="error mt10 hide" bind-show="!applyWithPromotion && existCode">
 
@@ -143,7 +139,7 @@
                     <div class="summary-section border-top-none--mobile">
                         <div class="total-line total-line-subtotal clearfix">
                             <span class="total-line-name pull-left">
-                                {{ trans('frontend.total_price') }}
+                                {{ trans('ecom::content.total_price') }}
                             </span>
 
                             <span bind="totalOrderItemPrice" class="total-line-subprice pull-right">
@@ -153,16 +149,16 @@
 
                         <div class="total-line total-line-shipping clearfix" bind-show="requiresShipping">
                             <span class="total-line-name pull-left">
-                                {{ trans('frontend.shipping_fee') }}
+                                {{ trans('ecom::content.shipping_fee') }}
                             </span>
-                            <span bind="shippingFee !=  0 ? shippingFee : ((requiresShipping && shippingMethods.length == 0) ? 'This area does not support transportation': '{{ trans('frontend.free') }}')" class="total-line-shipping pull-right" >
-                                {{ trans('frontend.free') }}
+                            <span bind="shippingFee !=  0 ? shippingFee : ((requiresShipping && shippingMethods.length == 0) ? 'This area does not support transportation': '{{ trans('ecom::content.free') }}')" class="total-line-shipping pull-right" >
+                                {{ trans('ecom::content.free') }}
                             </span>
                         </div>
 
                         <div class="total-line total-line-total clearfix">
                             <span class="total-line-name pull-left">
-                                {{ trans('frontend.total') }}
+                                {{ trans('ecom::content.total') }}
                             </span>
                             <span bind="totalPrice" class="total-line-price pull-right">
                                 {{ cart.total_price }}
@@ -174,9 +170,9 @@
                     <div class="field__input-btn-wrapper mt10">
                         <a class="previous-link" href="/cart">
                             <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i>
-                            <span>{{ trans('frontend.back_to_cart') }}</span>
+                            <span>{{ trans('ecom::content.back_to_cart') }}</span>
                         </a>
-                        <input class="btn btn-primary btn-checkout" data-loading-text="{{ trans('frontend.please_wait') }}" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('frontend.order2') }}" />
+                        <input class="btn btn-primary btn-checkout" data-loading-text="{{ trans('ecom::content.please_wait') }}" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('ecom::content.order2') }}" />
                     </div>
                 </div>
                 <div class="form-group has-error">
@@ -208,14 +204,14 @@
                                 <div class="layout-flex layout-flex--wrap">
                                     <h2 class="section__title layout-flex__item layout-flex__item--stretch">
                                         <i class="fa fa-id-card-o fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
-                                        <label class="control-label">{{ trans('frontend.information') }}</label>
+                                        <label class="control-label">{{ trans('ecom::content.information') }}</label>
                                     </h2>
-                                @if(!Auth::guard('customer')->check())
+                                {% if gest %}
                                     <a class="layout-flex__item section__title--link" href="/account/login?returnUrl=/checkout">
                                         <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
-                                        {{ trans('frontend.login') }}
+                                        {{ trans('ecom::content.login') }}
                                     </a>
-                                @endif
+                                {% endif %}
                                 </div>
                             </div>
                             <div class="section__content">
@@ -223,9 +219,9 @@
                                     <div>
                                         <label class="field__input-wrapper" bind-class="{ 'js-is-filled': email }">
                                             <span class="field__label" bind-event-click="handleClick(this)">
-                                                {{ trans('frontend.email') }}
+                                                {{ trans('ecom::content.email') }}
                                             </span>
-                                            <input name="Email" type="email" bind-event-change="changeEmail()" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_email" data-error="{{ trans('frontend.email_is_malformed') }}" required value="" pattern="^([a-zA-Z0-9_\-\.\+]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" bind="email" />
+                                            <input name="Email" type="email" bind-event-change="changeEmail()" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_email" data-error="{{ trans('ecom::content.email_is_malformed') }}" required value="" pattern="^([a-zA-Z0-9_\-\.\+]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" bind="email" />
                                         </label>
                                     </div>
                                     <div class="help-block with-errors">
@@ -237,9 +233,9 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper" bind-class="{ 'js-is-filled': billing_address.full_name }">
                                                     <span class="field__label" bind-event-click="handleClick(this)">
-                                                        {{ trans('frontend.full_name') }}
+                                                        {{ trans('ecom::content.full_name') }}
                                                     </span>
-                                                <input name="BillingAddress_LastName" type="text" bind-event-change="saveAbandoned()" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_billing_address_last_name" data-error="{{ trans('frontend.please_enter_full_name') }}" required bind="billing_address.full_name" autocomplete="off" value="{{ customer.name }}"/>
+                                                <input name="BillingAddress_LastName" type="text" bind-event-change="saveAbandoned()" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_billing_address_last_name" data-error="{{ trans('ecom::content.please_enter_full_name') }}" required bind="billing_address.full_name" autocomplete="off" value="{{ customer.name }}"/>
                                             </div>
                                             <div class="help-block with-errors"></div>
                                         </div>
@@ -247,9 +243,9 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper" bind-class="{ 'js-is-filled': billing_address.phone }">
                                                 <span class="field__label" bind-event-click="handleClick(this)">
-                                                    {{ trans('frontend.phone') }}
+                                                    {{ trans('ecom::content.phone') }}
                                                 </span>
-                                                <input name="BillingAddress_Phone" bind-event-change="saveAbandoned()" type="tel" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_billing_address_phone" data-error="{{ trans('frontend.please_enter_full_phone') }}" pattern="^([0-9,\+,\-,\(,\),\.]{8,20})$" bind="billing_address.phone" value="{{ customer.phone }}"/>
+                                                <input name="BillingAddress_Phone" bind-event-change="saveAbandoned()" type="tel" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_billing_address_phone" data-error="{{ trans('ecom::content.please_enter_full_phone') }}" pattern="^([0-9,\+,\-,\(,\),\.]{8,20})$" bind="billing_address.phone" value="{{ customer.phone }}"/>
                                             </div>
                                             <div class="help-block with-errors"></div>
                                         </div>
@@ -258,7 +254,7 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper" bind-class="{ 'js-is-filled': billing_address.address1 }">
                                             <span class="field__label" bind-event-click="handleClick(this)">
-                                                {{ trans('frontend.address') }}
+                                                {{ trans('ecom::content.address') }}
                                             </span>
                                                 <input name="BillingAddress_Address1" bind-event-change="saveAbandoned()" type="text" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_billing_address_address1"  bind="billing_address.address1"/>
                                             </div>
@@ -270,10 +266,10 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper field__input-wrapper--select">
                                                 <label class="field__label" for="BillingCountryId">
-                                                    {{ trans('frontend.country') }}
+                                                    {{ trans('ecom::content.country') }}
                                                 </label>
-                                                <select class="field__input field__input--select form-control filter-dropdown" name="BillingCountryId" id="billingCountry" required data-error="{{ trans('frontend.please_choose', {'name': trans('frontend.country')}) }}" bind-event-change="billingCountryChange('')" bind="BillingCountryId">
-                                                    <option value=''>--- {{ trans('frontend.choose_country') }} ---</option>
+                                                <select class="field__input field__input--select form-control filter-dropdown" name="BillingCountryId" id="billingCountry" required data-error="{{ trans('ecom::content.please_choose', {'name': trans('ecom::content.country')}) }}" bind-event-change="billingCountryChange('')" bind="BillingCountryId">
+                                                    <option value=''>--- {{ trans('ecom::content.choose_country') }} ---</option>
                                                     @foreach($countrys as $country)
                                                         <option value='{{ country.code }}' @if($selected_country == $country->code) selected @endif>{{ country.name }}</option>
                                                     @endforeach
@@ -287,10 +283,10 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper field__input-wrapper--select">
                                                 <label class="field__label" for="BillingProvinceId">
-                                                    {{ trans('frontend.provinces') }}
+                                                    {{ trans('ecom::content.provinces') }}
                                                 </label>
-                                                <select class="field__input field__input--select form-control filter-dropdown" name="BillingProvinceId" id="billingProvince" required data-error="{{ trans('frontend.please_choose', {'name': trans('frontend.province')}) }}" bind-event-change="billingDistrictChange('')" bind="BillingProvinceId">
-                                                    <option value=''>--- {{ trans('frontend.choose_province') }} ---</option>
+                                                <select class="field__input field__input--select form-control filter-dropdown" name="BillingProvinceId" id="billingProvince" required data-error="{{ trans('ecom::content.please_choose', {'name': trans('ecom::content.province')}) }}" bind-event-change="billingDistrictChange('')" bind="BillingProvinceId">
+                                                    <option value=''>--- {{ trans('ecom::content.choose_province') }} ---</option>
                                                     @foreach(provinces as province)
                                                         <option value='{{ province.id }}'>{{ province.name }}</option>
                                                     @endforeach
@@ -301,7 +297,7 @@
 
                                         <div bind-show="!otherAddress" class="form-group">
                                             <div class="error hide" bind-show="requiresShipping && loadedShippingMethods && shippingMethods.length == 0  && BillingProvinceId  ">
-                                                <label>{{ trans('frontend.area_not_support_shipping') }}</label>
+                                                <label>{{ trans('ecom::content.area_not_support_shipping') }}</label>
                                             </div>
                                         </div>
                                         @endif
@@ -317,7 +313,7 @@
                                             <input class="input-checkbox" type="checkbox" value="false" name="otherAddress" id="other_address" bind="otherAddress" bind-event-change="changeOtherAddress(this)">
                                         </div>
                                         <label class="checkbox__label" for="other_address">
-                                            {{ trans('frontend.shipping_to_other_address') }}
+                                            {{ trans('ecom::content.shipping_to_other_address') }}
                                         </label>
                                     </div>
                                 </div>
@@ -328,7 +324,7 @@
                                 <h2 class="section__title">
                                     <i class="fa fa-id-card-o fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
                                     <label class="control-label">
-                                        {{ trans('frontend.shipping_information') }}
+                                        {{ trans('ecom::content.shipping_information') }}
                                     </label>
                                 </h2>
                             </div>
@@ -338,9 +334,9 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.full_name }">
                                                 <span class="field__label" bind-event-click="handleClick(this)">
-                                                    {{ trans('frontend.full_name') }}
+                                                    {{ trans('ecom::content.full_name') }}
                                                 </span>
-                                                <input name="ShippingAddress_LastName" bind-event-change="saveAbandoned()" type="text" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_last_name" data-error="{{ trans('frontend.please_enter_full_name') }}" bind="shipping_address.full_name" />
+                                                <input name="ShippingAddress_LastName" bind-event-change="saveAbandoned()" type="text" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_last_name" data-error="{{ trans('ecom::content.please_enter_full_name') }}" bind="shipping_address.full_name" />
                                             </div>
                                             <div class="help-block with-errors"></div>
                                         </div>
@@ -348,9 +344,9 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.phone }">
                                                 <span class="field__label" bind-event-click="handleClick(this)">
-                                                    {{ trans('frontend.phone') }}
+                                                    {{ trans('ecom::content.phone') }}
                                                 </span>
-                                                <input name="ShippingAddress_Phone" bind-event-change="saveAbandoned()" type="tel" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_phone"  data-error="{{ trans('frontend.please_enter_phone') }}" pattern="^([0-9,\+,\-,\(,\),\.]{8,20})$" bind="shipping_address.phone"/>
+                                                <input name="ShippingAddress_Phone" bind-event-change="saveAbandoned()" type="tel" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_phone"  data-error="{{ trans('ecom::content.please_enter_phone') }}" pattern="^([0-9,\+,\-,\(,\),\.]{8,20})$" bind="shipping_address.phone"/>
                                             </div>
                                             <div class="help-block with-errors"></div>
                                         </div>
@@ -358,7 +354,7 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper" bind-class="{ 'js-is-filled': shipping_address.address1 }">
                                                 <span class="field__label" bind-event-click="handleClick(this)">
-                                                    {{ trans('frontend.address') }}
+                                                    {{ trans('ecom::content.address') }}
                                                 </span>
                                                 <input name="ShippingAddress_Address1" bind-event-change="saveAbandoned()" type="text" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_shipping_address_address1"  bind="shipping_address.address1" />
                                             </div>
@@ -369,10 +365,10 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper field__input-wrapper--select">
                                                 <label class="field__label" for="ShippingCountryId">
-                                                    {{ trans('frontend.country') }}
+                                                    {{ trans('ecom::content.country') }}
                                                 </label>
                                                 <select class="field__input field__input--select form-control filter-dropdown" name="ShippingCountryId" id="shippingCountry"  bind-event-change="shippingCountryChange('')" bind="ShippingCountryId">
-                                                    <option value="">--- {{ trans('frontend.choose_country') }} ---</option>
+                                                    <option value="">--- {{ trans('ecom::content.choose_country') }} ---</option>
                                                     @foreach($countrys as $country)
                                                         <option value='{{ country.code }}' @if($selected_country == $country->code) selected @endif>{{ country.name }}</option>
                                                     @endforeach
@@ -384,10 +380,10 @@
                                         <div class="form-group">
                                             <div class="field__input-wrapper field__input-wrapper--select">
                                                 <label class="field__label" for="BillingProvinceId">
-                                                    {{ trans('frontend.province') }}
+                                                    {{ trans('ecom::content.province') }}
                                                 </label>
-                                                <select class="field__input field__input--select form-control filter-dropdown" name="ShippingProvinceId" id="shippingProvince" data-error="{{ trans('frontend.please_choose', {'name': trans('frontend.province')}) }}" bind-event-change="shippingProviceChange('')" bind="ShippingProvinceId">
-                                                    <option value=''>--- {{ trans('frontend.choose_province') }} ---</option>
+                                                <select class="field__input field__input--select form-control filter-dropdown" name="ShippingProvinceId" id="shippingProvince" data-error="{{ trans('ecom::content.please_choose', {'name': trans('ecom::content.province')}) }}" bind-event-change="shippingProviceChange('')" bind="ShippingProvinceId">
+                                                    <option value=''>--- {{ trans('ecom::content.choose_province') }} ---</option>
                                                     @foreach(provinces as province)
                                                         <option value='{{ province.id }}'>{{ province.name }}</option>
                                                     @endforeach
@@ -398,7 +394,7 @@
 
                                         <div class="form-group">
                                             <div class="error hide" bind-show="requiresShipping && shippingMethods.length == 0 && ShippingProvinceId ">
-                                                <label>{{ trans('frontend.area_not_support_shipping') }}</label>
+                                                <label>{{ trans('ecom::content.area_not_support_shipping') }}</label>
                                             </div>
                                         </div>
                                         @endif
@@ -412,7 +408,7 @@
                                     <div>
                                         <label class="field__input-wrapper" bind-class="{'js-is-filled': note}" style="border: none">
 												<span class="field__label" bind-event-click="handleClick(this)" >
-													{{ trans('frontend.note') }}
+													{{ trans('ecom::content.note') }}
 												</span>
                                             <textarea name="note"
                                                       bind-event-change="saveAbandoned()"
@@ -431,7 +427,7 @@
                             <div class="section__header">
                                 <h2 class="section__title">
                                     <i class="fa fa-truck fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
-                                    <label class="control-label">{{ trans('frontend.shipping') }}</label>
+                                    <label class="control-label">{{ trans('ecom::content.shipping') }}</label>
                                 </h2>
                             </div>
                             <div class="section__content">
@@ -452,7 +448,7 @@
                             <div class="section__header">
                                 <h2 class="section__title">
                                     <i class="fa fa-credit-card fa-lg section__title--icon hidden-md hidden-lg" aria-hidden="true"></i>
-                                    <label class="control-label">{{ trans('frontend.payment') }}</label>
+                                    <label class="control-label">{{ trans('ecom::content.payment') }}</label>
                                 </h2>
                             </div>
                             <div class="section__content">
@@ -477,7 +473,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="radio-wrapper content-box__row content-box__row--secondary hide" id="payment-gateway-subfields-{{ payment_method.id }}" bind-show="payment_method_id == {{ payment_method.id }}">
+                                    <div class="radio-wrapper content-box__row content-box__row--secondary hide" id="payment-gateway-subfields-{{ payment_method.id }}" bind-show="payment_method_id == {{ payment_method.id|default(0) }}">
                                         <div class="blank-slate">
                                             <p>{{ payment_method.description }}</p>
                                         </div>
@@ -489,12 +485,12 @@
                         </div>
                         <div class="section hidden-md hidden-lg">
                             <div class="form-group clearfix m0">
-                                <input class="btn btn-primary btn-checkout" data-loading-text="Đang xử lý" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('frontend.order') }}" />
+                                <input class="btn btn-primary btn-checkout" data-loading-text="Đang xử lý" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('ecom::content.order') }}" />
                             </div>
                             <div class="text-center mt20">
                                 <a class="previous-link" href="/cart">
                                     <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i>
-                                    <span>{{ trans('frontend.back_to_cart') }}</span>
+                                    <span>{{ trans('ecom::content.back_to_cart') }}</span>
                                 </a>
                             </div>
                         </div>
@@ -511,7 +507,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                            <h4 class="modal-title">{{ trans('frontend.refund_policy') }}</h4>
+                            <h4 class="modal-title">{{ trans('ecom::content.refund_policy') }}</h4>
                         </div>
                         <div class="modal-body">
                             <pre></pre>
@@ -524,7 +520,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                            <h4 class="modal-title">{{ trans('frontend.privacy_policy') }}</h4>
+                            <h4 class="modal-title">{{ trans('ecom::content.privacy_policy') }}</h4>
                         </div>
                         <div class="modal-body">
                             <pre></pre>
@@ -537,7 +533,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                            <h4 class="modal-title">{{ trans('frontend.terms_of_service') }}</h4>
+                            <h4 class="modal-title">{{ trans('ecom::content.terms_of_service') }}</h4>
                         </div>
                         <div class="modal-body">
                             <pre></pre>
@@ -554,18 +550,9 @@
         <symbol id="next-spinner"><svg preserveAspectRatio="xMinYMin"><circle class="next-spinner__ring" cx="50%" cy="50%" r="45%"></circle></svg></symbol>
     </svg>
 </div>
-<script>var code_langs = {'choose_province': '{{ trans('frontend.choose_province') }}'};</script>
+<script>var code_langs = {'choose_province': '{{ trans('ecom::content.choose_province') }}'};</script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
-@include('jscsrf_token')
-<script src="{{ asset('styles/js/load-ajax.js') }}"></script>
-<script src="{{ asset('styles/js/bootstrap.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('styles/js/twine.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('styles/js/validator.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('styles/js/nprogress.js') }}" type="text/javascript"></script>
-<script src="{{ asset('styles/js/money-helper.js') }}" type="text/javascript"></script>
-<script src="{{ asset('styles/js/select2-full-min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('styles/js/ua-parser.pack.js') }}" type='text/javascript'></script>
-<script src="{{ asset('styles/js/checkout.js') }}" type="text/javascript"></script>
+<script src="{{ asset('jw-styles/plugins/ecommerce/assets/js/checkout.min.js') }}" type="text/javascript"></script>
 
 <script type="text/javascript">
     $(document).ajaxStart(function () {
@@ -587,8 +574,8 @@
             dropdownCssClass: 'field__input',
             dropdownParent: $('.main_content'),
             language: {
-                noResults: function () { return "{{ trans('frontend.no_results') }}" },
-                searching: function () { return "{{ trans('frontend.searching') }}…" }
+                noResults: function () { return "{{ trans('ecom::content.no_results') }}" },
+                searching: function () { return "{{ trans('ecom::content.searching') }}…" }
             }
         });
 

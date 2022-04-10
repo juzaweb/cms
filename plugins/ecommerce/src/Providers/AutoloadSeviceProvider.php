@@ -28,6 +28,14 @@ class AutoloadSeviceProvider extends ServiceProvider
             __DIR__ . '/../../config/ecommerce.php',
             'ecommerce'
         );
+        
+        $this->publishes(
+            [
+                plugin_path('juzaweb/ecommerce', 'src/resources/assets/public')
+                => base_path('public/jw-styles/plugins/ecommerce/assets')
+            ],
+            'ecom_assets'
+        );
     
         $this->app->register(RouteServiceProvider::class);
     }
