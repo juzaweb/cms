@@ -11,8 +11,10 @@
     },
     "devDependencies": {
         "axios": "^0.25",
+        "javascript-obfuscator": "^4.0.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "webpack-obfuscator": "^3.5.1"
     }
 }
