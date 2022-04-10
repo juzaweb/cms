@@ -766,3 +766,18 @@ function cache_prefix($name)
 {
     return 'juzaweb_' . $name;
 }
+
+if (!function_exists('admin_url')) {
+    function admin_url($path = '', $parameters = [], $secure = null)
+    {
+        if ($path) {
+            return url(
+                config('juzaweb.admin_prefix') .'/'. ltrim($path, '/'),
+                $parameters,
+                $secure
+            );
+        }
+        
+        return url(config('juzaweb.admin_prefix'), $parameters, $secure);
+    }
+}

@@ -27,12 +27,33 @@ class EcommerceAction extends Action
             Action::BACKEND_CALL_ACTION,
             [$this, 'addAdminMenu']
         );
+    
+        $this->addAction(
+            Action::INIT_ACTION,
+            [$this, 'registerConfigs']
+        );
+    
+        $this->addFilter(
+            'theme.get_view_page',
+            [$this, 'addCheckoutPage'],
+            20,
+            2
+        );
     }
 
     public function registerPostTypes()
     {
     }
 
+    public function registerConfigs()
+    {
+        HookAction::registerConfig(
+            [
+                'ecom_checkout_page',
+            ]
+        );
+    }
+    
     public function addAdminMenu()
     {
         HookAction::registerAdminPage(
@@ -148,5 +169,17 @@ class EcommerceAction extends Action
             ['id' => $variant->id ?? 0],
             $variantData
         );
+    }
+    
+    public function addCheckoutPage($view, $page)
+    {
+        $checkoutPage = get_config('ecom_checkout_page');
+        
+        if ($checkoutPage == $page->id) {
+            $view = 'ecom::frontend.checkout.index';
+            return $view;
+        }
+        
+        return $view;
     }
 }

@@ -32,10 +32,12 @@ class LoadDataController extends BackendController
     {
         $title = Str::words($request->input('title'), 15);
 
-        return response()->json([
-            'status' => true,
-            'slug' => Str::slug(seo_string($title, 70)),
-        ]);
+        return response()->json(
+            [
+                'status' => true,
+                'slug' => Str::slug(seo_string($title, 70)),
+            ]
+        );
     }
 
     protected function loadTaxonomies(Request $request)
@@ -46,10 +48,12 @@ class LoadDataController extends BackendController
         $taxonomy = $request->get('taxonomy');
 
         $query = Taxonomy::query();
-        $query->select([
-            'id',
-            'name as text',
-        ]);
+        $query->select(
+            [
+                'id',
+                'name as text',
+            ]
+        );
 
         if ($postType) {
             $query->where('post_type', '=', $postType);
@@ -83,16 +87,20 @@ class LoadDataController extends BackendController
         $explodes = $request->get('explodes');
 
         $query = User::query();
-        $query->select([
-            'id',
-            'name AS text',
-        ]);
+        $query->select(
+            [
+                'id',
+                'name AS text',
+            ]
+        );
 
         if ($search) {
-            $query->where(function (Builder $q) use ($search) {
-                $q->where('name', JW_SQL_LIKE, '%'. $search .'%');
-                $q->orWhere('email', JW_SQL_LIKE, '%'. $search .'%');
-            });
+            $query->where(
+                function (Builder $q) use ($search) {
+                    $q->where('name', JW_SQL_LIKE, '%'. $search .'%');
+                    $q->orWhere('email', JW_SQL_LIKE, '%'. $search .'%');
+                }
+            );
         }
 
         if ($explodes) {
@@ -114,15 +122,19 @@ class LoadDataController extends BackendController
         $explodes = $request->get('explodes');
 
         $query = Menu::query();
-        $query->select([
-            'id',
-            'name AS text',
-        ]);
+        $query->select(
+            [
+                'id',
+                'name AS text',
+            ]
+        );
 
         if ($search) {
-            $query->where(function (Builder $q) use ($search) {
-                $q->orWhere('name', JW_SQL_LIKE, '%'. $search .'%');
-            });
+            $query->where(
+                function (Builder $q) use ($search) {
+                    $q->orWhere('name', JW_SQL_LIKE, '%'. $search .'%');
+                }
+            );
         }
 
         if ($explodes) {
@@ -145,18 +157,22 @@ class LoadDataController extends BackendController
         $results = collect(config('locales'));
 
         if ($search) {
-            $results = $results->filter(function ($item) use ($search) {
-                return strpos(strtolower($item['code']), $search) !== false ||
-                    strpos(strtolower($item['name']), $search) !== false;
-            });
+            $results = $results->filter(
+                function ($item) use ($search) {
+                    return strpos(strtolower($item['code']), $search) !== false ||
+                        strpos(strtolower($item['name']), $search) !== false;
+                }
+            );
         }
 
-        $results = $results->map(function ($item) {
-            return [
-                'id' => $item['code'],
-                'text' => $item['name'],
-            ];
-        })->values();
+        $results = $results->map(
+            function ($item) {
+                return [
+                    'id' => $item['code'],
+                    'text' => $item['name'],
+                ];
+            }
+        )->values();
 
         $paginate = ArrayPagination::make($results);
         $paginate = $paginate->paginate(10);
@@ -176,10 +192,12 @@ class LoadDataController extends BackendController
         $explodes = $request->get('explodes');
 
         $query = Post::where('type', '=', 'pages');
-        $query->select([
-            'id',
-            'title as text',
-        ]);
+        $query->select(
+            [
+                'id',
+                'title as text',
+            ]
+        );
 
         if ($search) {
             $query->where('title', JW_SQL_LIKE, '%'. $search .'%');
@@ -214,10 +232,12 @@ class LoadDataController extends BackendController
          * @var Builder $query
          */
         $query = app($postType->get('model'))->query();
-        $query->select([
-            'id',
-            'title as text',
-        ]);
+        $query->select(
+            [
+                'id',
+                'title as text',
+            ]
+        );
 
         if ($search) {
             $query->where('title', JW_SQL_LIKE, '%'. $search .'%');
@@ -247,10 +267,12 @@ class LoadDataController extends BackendController
          * @var Builder $query
          */
         $query = Resource::query();
-        $query->select([
-            'id',
-            'name as text',
-        ]);
+        $query->select(
+            [
+                'id',
+                'name as text',
+            ]
+        );
 
         $query->where('type', '=', $type);
 
@@ -284,10 +306,12 @@ class LoadDataController extends BackendController
          * @var Builder $query
          */
         $query = $module->get('model')::query();
-        $query->select([
-            'id',
-            'name as text',
-        ]);
+        $query->select(
+            [
+                'id',
+                'name as text',
+            ]
+        );
 
         if ($search) {
             $query->where('name', JW_SQL_LIKE, '%'. $search .'%');
@@ -300,6 +324,23 @@ class LoadDataController extends BackendController
             $data['pagination'] = ['more' => true];
         }
 
+        return response()->json($data);
+    }
+    
+    protected function loadThemeTemplate(Request $request)
+    {
+        $templates = HookAction::getThemeTemplates()->map(
+            function ($item) {
+                return [
+                    'id' => $item->get('key'),
+                    'text' => __($item->get('label')),
+                ];
+            }
+        )
+            ->values()
+            ->toArray();
+        
+        $data['results'] = $templates;
         return response()->json($data);
     }
 }

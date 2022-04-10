@@ -42,6 +42,7 @@ class ThemeAction extends Action
         HookAction::addAction(Action::BLOCKS_INIT, [$this, 'blocks']);
         HookAction::addAction(Action::INIT_ACTION, [$this, 'settingFields']);
         HookAction::addAction(Action::FRONTEND_AFTER_BODY, [$this, 'addThemeHeader']);
+        HookAction::addAction(Action::INIT_ACTION, [$this, 'templates']);
     }
 
     public function postTypes()
@@ -155,6 +156,18 @@ class ThemeAction extends Action
             );
         }
     }
+    
+    public function templates()
+    {
+        $templates = $this->getRegister('templates');
+        
+        foreach ($templates as $key => $template) {
+            HookAction::registerThemeTemplate(
+                $key,
+                $template
+            );
+        }
+    }
 
     public function settingFields()
     {
@@ -214,8 +227,8 @@ class ThemeAction extends Action
         }
     }
 
-    protected function getRegister($key)
+    protected function getRegister($key, $default = [])
     {
-        return Arr::get($this->register, $key, []);
+        return Arr::get($this->register, $key, $default);
     }
 }

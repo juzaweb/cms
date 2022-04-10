@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Abstracts\Action;
@@ -137,7 +138,7 @@ trait PostTypeController
         $data = $this->DataForForm($model, ...$params);
         $setting = $this->getSetting();
         $templateData = $this->getTemplateData($model);
-
+        
         $editor = 'cms::backend.post.components.editor';
 
         if (Arr::get($templateData, 'blocks', [])) {
@@ -145,7 +146,7 @@ trait PostTypeController
         }
 
         $data['editor'] = $editor;
-
+        
         return apply_filters(
             "post_type.{$this->getPostType()}.getDataForForm",
             array_merge(
@@ -204,18 +205,17 @@ trait PostTypeController
 
     /**
      * @param Post|\Illuminate\Database\Eloquent\Model $model
-     * @return array
+     * @return array|Collection
      */
     private function getTemplateData($model)
     {
         $template = $this->getTemplate($model);
-
+        
         if (empty($template)) {
             return [];
         }
 
-        $register = Theme::getRegister(jw_current_theme());
-        $data = Arr::get($register, "templates.{$template}", []);
+        $data = HookAction::getThemeTemplates($template);
         return $data;
     }
 
