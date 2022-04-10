@@ -21,15 +21,15 @@
     },
     "require": {
         "league/omnipay": "^3",
-        "omnipay/paypal": "^3.0"
+        "omnipay/paypal": "^3.0",
+        "omnipay/stripe": "^3.2"
     },
     "autoload": {
         "psr-4": {
-            "Juzaweb\\Ecommerce\\Tests\\": "tests/",
-            "Juzaweb\\Ecommerce\\Database\\Seeders\\": "database/seeders/",
-            "Juzaweb\\Ecommerce\\Database\\Factories\\": "database/factories/",
-            "Juzaweb\\Ecommerce\\Database\\Migrations\\": "database/migrations/",
             "Juzaweb\\Ecommerce\\": "src/"
-        }
+        },
+        "files": [
+            "vendor/autoload.php"
+        ]
     }
 }
