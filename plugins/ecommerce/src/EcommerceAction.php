@@ -11,6 +11,7 @@
 namespace Juzaweb\Ecommerce;
 
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\Ecommerce\Http\Controllers\Frontend\CheckoutController;
 use Juzaweb\Ecommerce\Models\Variant;
 use Juzaweb\Backend\Facades\HookAction;
 
@@ -38,6 +39,11 @@ class EcommerceAction extends Action
             [$this, 'addCheckoutPage'],
             20,
             2
+        );
+        
+        $this->addAction(
+            Action::FRONTEND_CALL_ACTION,
+            [$this, 'registerFrontendAjax']
         );
     }
 
@@ -181,5 +187,23 @@ class EcommerceAction extends Action
         }
         
         return $view;
+    }
+    
+    public function registerFrontendAjax()
+    {
+        HookAction::registerFrontendAjax(
+            'checkout',
+            [
+                'callback' => [CheckoutController::class, 'checkout'],
+                'method' => 'POST',
+            ]
+        );
+    
+        HookAction::registerFrontendAjax(
+            'payment',
+            [
+                'callback' => [CheckoutController::class, 'payment'],
+            ]
+        );
     }
 }
