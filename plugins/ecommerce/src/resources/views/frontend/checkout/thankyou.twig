@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    @php
-        $shop_name = shop_setting('shop_name');
-    @endphp
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ $shop_name }} - {{ trans('frontend.thank_you') }}" />
-    <title>{{ $shop_name }} - {{ trans('frontend.thank_you') }}</title>
+    <title>{{ shop_name }} - {{ trans('frontend.thank_you') }}</title>
     <link rel="shortcut icon" href="{{ asset('styles/images/brand/favicon.ico') }}" type="image/x-icon" />
     <link href="{{ asset('styles/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -52,7 +49,7 @@
                     <div class="thankyou-message-text">
                         <h3>{{ trans('frontend.thank_you_for_your_order') }}</h3>
                         <p>
-                            {{ trans('frontend.confirmation_email_order_complete', ['email' => $order->email]) }}
+                            {{ trans('frontend.confirmation_email_order_complete', ['email' => order.email]) }}
                         </p>
                         <div style="font-style: italic;">
 
@@ -64,8 +61,8 @@
                         <div class="order-summary-header summary-header--thin summary-header--border">
                             <h2>
                                 <label class="control-label">{{ trans('frontend.order') }}</label>
-                                {{ $order->code }}
-                                <label class="control-label unprint">({{ $order->quantity }})</label>
+                                {{ order.code }}
+                                <label class="control-label unprint">({{ order.quantity }})</label>
                             </h2>
                             <a class="underline-none expandable expandable--pull-right mobile unprint" bind-event-click="toggle(this, '.order-items')" bind-class="{open: order_expand}" href="javascript:void(0)">
                                 {{ trans('frontend.view_detail') }}
@@ -107,7 +104,7 @@
                                         {{ trans('frontend.total_price') }}
                                     </span>
                                 <span class="total-line-subprice pull-right">
-                                        {{ price_format($order->total_price) }}
+                                        {{ price_format(order.total_price) }}
                                     </span>
                             </div>
 
@@ -117,7 +114,7 @@
                                     {{ trans('frontend.shipping_fee') }}
                                 </span>
                                 <span class="pull-right">
-                                    {{ price_format($order->shipping_fee) }}
+                                    {{ price_format(order.shipping_fee) }}
                                 </span>
                             </div>
                             @endif
@@ -129,7 +126,7 @@
                                     {{ trans('frontend.total') }}
                                 </span>
                                 <span class="total-line-price pull-right">
-                                    {{ price_format($order->total) }}
+                                    {{ price_format(order.total) }}
                                 </span>
                             </div>
                         </div>
@@ -148,7 +145,7 @@
                                         </h2>
                                     </div>
                                     <div class="summary-section no-border no-padding-top">
-                                        @if($order->other_address == 1)
+                                        @if(order.other_address == 1)
                                             <p class="address-name">
                                                 {{ @$shipping_address->full_name }}
                                             </p>
@@ -166,18 +163,18 @@
                                         @else
 
                                             <p class="address-name">
-                                                {{ $order->full_name }}
+                                                {{ order.full_name }}
                                             </p>
                                             <p class="address-address">
-                                                {{ $order->address }}
+                                                {{ order.address }}
                                             </p>
 
                                             <p class="address-province">
-                                                {{ $order->province }}
+                                                {{ order.province }}
                                             </p>
 
                                             <p class="address-country">
-                                                {{ \App\Models\Country::getName($order->country_code) }}
+                                                {{ order.country_code }}
                                             </p>
 
                                         @endif
@@ -196,18 +193,18 @@
                                     </div>
                                     <div class="summary-section no-border no-padding-top">
                                         <p class="address-name">
-                                            {{ $order->full_name }}
+                                            {{ order.full_name }}
                                         </p>
                                         <p class="address-address">
-                                            {{ $order->address }}
+                                            {{ order.address }}
                                         </p>
 
                                         <p class="address-province">
-                                            {{ $order->province }}
+                                            {{ order.province }}
                                         </p>
 
                                         <p class="address-country">
-                                            {{ \App\Models\Country::getName($order->country_code) }}
+                                            {{ order.country_code }}
                                         </p>
 
                                     </div>
@@ -224,10 +221,10 @@
                                         </h2>
                                     </div>
                                     <div class="summary-section no-border no-padding-top">
-                                        <span>{{ $order->payment_method_name }} ({!! $order->getTextPaymentStatus() !!})</span>
+                                        <span>{{ order.payment_method_name }} ({!! order.getTextPaymentStatus() !!})</span>
                                         @if(@$payment_method->instruction)
                                             <p><b>{{ trans('main.payment_instruction') }}</b></p>
-                                            <p>{{ $payment_method->instruction }}</p>
+                                            <p>{{ payment_method.instruction }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -242,7 +239,7 @@
                                     </div>
 
                                     <div class="summary-section no-border no-padding-top">
-                                        <span>{{ $order->shipping_method_name }} - {{ price_format($order->shipping_fee) }} ({!! $order->getTextShippingStatus() !!})</span>
+                                        <span>{{ order.shipping_method_name }} - {{ price_format(order.shipping_fee) }} ({!! order.getTextShippingStatus() !!})</span>
                                     </div>
                                 </div>
                             </div>
@@ -329,7 +326,7 @@
 
             this.ele = e;
             this.invalidEmail = false;
-        };
+        }
 
         Checkout.prototype.handleClick = function (element) {
             $(element).closest(".field__input-wrapper").find(".field__input").focus();

@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ $shop_name }} - {{ trans('frontend.payment_order') }}" />
-    <title>{{ $shop_name }} - {{ trans('frontend.payment_order') }}</title>
-    <link rel="shortcut icon" href="{{ media_url(shop_setting('shop_icon')) }}" type="image/x-icon" />
+    <meta name="description" content="{{ title }} - {{ trans('frontend.payment_order') }}" />
+    <title>{{ title }} - {{ trans('frontend.payment_order') }}</title>
+    <link rel="shortcut icon" href="{{ upload_url(config('icon')) }}" type="image/x-icon" />
 
     <link href="{{ asset('styles/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('styles/css/nprogress.css') }}" rel="stylesheet" type="text/css" />
@@ -14,12 +14,12 @@
     <link href="{{ asset('styles/css/select2-min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('styles/css/checkout.css') }}" rel="stylesheet" type="text/css" />
     
-    <script> var Juzaweb = Juzaweb || {}; Juzaweb.store = '{{ request()->getHost() }}'; Juzaweb.theme = {"id":606449,"role":"main","name":"{{ $shop_name }}"}; Juzaweb.template = ''; </script>
+    <script> var Juzaweb = Juzaweb || {}; Juzaweb.store = ''; Juzaweb.theme = {"id":606449,"role":"main","name":"{{ shop_name }}"}; Juzaweb.template = ''; </script>
 
     <script type="text/javascript">if (typeof Juzaweb == 'undefined') { Juzaweb = {}; }
         Juzaweb.Checkout = {};
-        Juzaweb.Checkout.token = "{{ $cart->token }}";
-        Juzaweb.Checkout.apiHost = "{{ request()->getHost() }}";
+        Juzaweb.Checkout.token = "{{ cart.token }}";
+        Juzaweb.Checkout.apiHost = "";
     </script>
 </head>
 <body class="body--custom-background-color ">
@@ -29,7 +29,7 @@
 
             <h1 class="shop__name">
                 <a href="/">
-                    {{ $shop_name }}
+                    {{ title }}
                 </a>
             </h1>
 
@@ -41,12 +41,13 @@
         <h2>
             <label class="control-label">{{ trans('frontend.order') }}</label>
             <label class="control-label hidden-small-device">
-                ({{ $cart->item_count }} {{ trans('frontend.products') }})
+                ({{ cart.item_count }} {{ trans('frontend.products') }})
             </label>
             <label class="control-label visible-small-device inline">
-                ({{ $cart->item_count }})
+                ({{ cart.item_count }})
             </label>
         </h2>
+
         <a class="underline-none expandable pull-right" href="javascript:void(0)">
             {{ trans('frontend.view_detail') }}
         </a>
@@ -57,11 +58,11 @@
 
 </div>
 <form method="post" action="" data-toggle="validator" class="content stateful-form formCheckout">
-    <div class="wrap" context="checkout" define='{checkout: new Juzaweb.StoreCheckout(this,{ token: "{{ $cart->token }}", email: "{{ $customer->email }}", totalOrderItemPrice: {{ deprice_format($cart->total_price) }}, shippingFee: 0, freeShipping: false, requiresShipping: {{ $requires_shipping ? 'true' : 'false' }}, existCode: false, code: "", discount: 0, settingLanguage: "vi", moneyFormat: "₫", discountLabel: "{{ trans('frontend.free') }}", districtPolicy: "optional", wardPolicy: "hidden", district: "", ward: "", province:"", otherAddress: false, shippingId: 0, shippingMethods: {!! json_encode($shipping_methods) !!}, customerAddressId: 0, reductionCode: "" })}'>
+    <div class="wrap" context="checkout" define='{checkout: new Juzaweb.StoreCheckout(this,{ token: "{{ cart.token }}", email: "{{ customer.email }}", totalOrderItemPrice: {{ cart.total_price }}, shippingFee: 0, freeShipping: false, requiresShipping: {{ requires_shipping ? 'true' : 'false' }}, existCode: false, code: "", discount: 0, settingLanguage: "vi", moneyFormat: "₫", discountLabel: "{{ trans('frontend.free') }}", districtPolicy: "optional", wardPolicy: "hidden", district: "", ward: "", province:"", otherAddress: false, shippingId: 0, shippingMethods: {!! json_encode($shipping_methods) !!}, customerAddressId: 0, reductionCode: "" })}'>
         <div class='sidebar '>
             <div class="sidebar_header">
                 <h2>
-                    <label class="control-label">{{ trans('frontend.order') }} ({{ $cart->item_count }} {{ trans('frontend.products') }})</label>
+                    <label class="control-label">{{ trans('frontend.order') }} ({{ cart.item_count }} {{ trans('frontend.products') }})</label>
                 </h2>
                 <hr class="full_width"/>
             </div>
@@ -72,27 +73,27 @@
                             <table class="product-table">
                                 <tbody>
                             @php
-                            $items = $cart->items;
+                            items = cart.items;
                             @endphp
 
-                            @foreach($items as $item)
+                            @foreach(items as item)
                                 <tr class="product product-has-image clearfix">
                                     <td>
                                         <div class="product-thumbnail">
                                             <div class="product-thumbnail__wrapper">
-                                                <img src="{{ media_url($item->image) }}" class="product-thumbnail__image" />
+                                                <img src="{{ upload_url(item.image) }}" class="product-thumbnail__image" />
                                             </div>
-                                            <span class="product-thumbnail__quantity" aria-hidden="true">{{ $item->quantity }}</span>
+                                            <span class="product-thumbnail__quantity" aria-hidden="true">{{ item.quantity }}</span>
                                         </div>
                                     </td>
                                     <td class="product-info">
                                         <span class="product-info-name">
-                                            {{ $item->name }}
+                                            {{ item.name }}
                                         </span>
                                     </td>
 
                                     <td class="product-price text-right">
-                                        {{ $item->line_price }}
+                                        {{ item.line_price }}
                                     </td>
                                 </tr>
                             @endforeach
@@ -133,7 +134,7 @@
                             {{ trans('frontend.discount_code_is_not_valid') }}
                         </div>
                         <div class="error mt10 hide" bind-show="!applyWithPromotion && existCode">
-                            {{--Mã khuyến mãi không được áp dụng chung với chương trình khuyến mãi--}}
+
                         </div>
                     </div>
                     <hr class="m0"/>
@@ -146,7 +147,7 @@
                             </span>
 
                             <span bind="totalOrderItemPrice" class="total-line-subprice pull-right">
-                                {{ price_format($cart->total_line_item_price) }}
+                                {{ cart.total_line_item_price }}
                             </span>
                         </div>
 
@@ -164,7 +165,7 @@
                                 {{ trans('frontend.total') }}
                             </span>
                             <span bind="totalPrice" class="total-line-price pull-right">
-                                {{ price_format($cart->total_price) }}
+                                {{ cart.total_price }}
                             </span>
                         </div>
                     </div>
@@ -175,7 +176,7 @@
                             <i class="fa fa-angle-left fa-lg" aria-hidden="true"></i>
                             <span>{{ trans('frontend.back_to_cart') }}</span>
                         </a>
-                        <input class="btn btn-primary btn-checkout" data-loading-text="{{ trans('frontend.please_wait') }}" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ \Illuminate\Support\Str::upper(trans('frontend.order2')) }}" />
+                        <input class="btn btn-primary btn-checkout" data-loading-text="{{ trans('frontend.please_wait') }}" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('frontend.order2') }}" />
                     </div>
                 </div>
                 <div class="form-group has-error">
@@ -193,7 +194,7 @@
 
                     <h1 class="shop__name">
                         <a href="/">
-                            {{ $shop_name }}
+                            {{ shop_name }}
                         </a>
                     </h1>
 
@@ -238,7 +239,7 @@
                                                     <span class="field__label" bind-event-click="handleClick(this)">
                                                         {{ trans('frontend.full_name') }}
                                                     </span>
-                                                <input name="BillingAddress_LastName" type="text" bind-event-change="saveAbandoned()" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_billing_address_last_name" data-error="{{ trans('frontend.please_enter_full_name') }}" required bind="billing_address.full_name" autocomplete="off" value="{{ $customer->name }}"/>
+                                                <input name="BillingAddress_LastName" type="text" bind-event-change="saveAbandoned()" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_billing_address_last_name" data-error="{{ trans('frontend.please_enter_full_name') }}" required bind="billing_address.full_name" autocomplete="off" value="{{ customer.name }}"/>
                                             </div>
                                             <div class="help-block with-errors"></div>
                                         </div>
@@ -248,7 +249,7 @@
                                                 <span class="field__label" bind-event-click="handleClick(this)">
                                                     {{ trans('frontend.phone') }}
                                                 </span>
-                                                <input name="BillingAddress_Phone" bind-event-change="saveAbandoned()" type="tel" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_billing_address_phone" data-error="{{ trans('frontend.please_enter_full_phone') }}" pattern="^([0-9,\+,\-,\(,\),\.]{8,20})$" bind="billing_address.phone" value="{{ $customer->phone }}"/>
+                                                <input name="BillingAddress_Phone" bind-event-change="saveAbandoned()" type="tel" bind-event-focus="handleFocus(this)" bind-event-blur="handleFieldBlur(this)" class="field__input form-control" id="_billing_address_phone" data-error="{{ trans('frontend.please_enter_full_phone') }}" pattern="^([0-9,\+,\-,\(,\),\.]{8,20})$" bind="billing_address.phone" value="{{ customer.phone }}"/>
                                             </div>
                                             <div class="help-block with-errors"></div>
                                         </div>
@@ -271,10 +272,10 @@
                                                 <label class="field__label" for="BillingCountryId">
                                                     {{ trans('frontend.country') }}
                                                 </label>
-                                                <select class="field__input field__input--select form-control filter-dropdown" name="BillingCountryId" id="billingCountry" required data-error="{{ trans('frontend.please_choose', ['name' => trans('frontend.country')]) }}" bind-event-change="billingCountryChange('')" bind="BillingCountryId">
+                                                <select class="field__input field__input--select form-control filter-dropdown" name="BillingCountryId" id="billingCountry" required data-error="{{ trans('frontend.please_choose', {'name': trans('frontend.country')}) }}" bind-event-change="billingCountryChange('')" bind="BillingCountryId">
                                                     <option value=''>--- {{ trans('frontend.choose_country') }} ---</option>
                                                     @foreach($countrys as $country)
-                                                        <option value='{{ $country->code }}' @if($selected_country == $country->code) selected @endif>{{ $country->name }}</option>
+                                                        <option value='{{ country.code }}' @if($selected_country == $country->code) selected @endif>{{ country.name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -288,10 +289,10 @@
                                                 <label class="field__label" for="BillingProvinceId">
                                                     {{ trans('frontend.provinces') }}
                                                 </label>
-                                                <select class="field__input field__input--select form-control filter-dropdown" name="BillingProvinceId" id="billingProvince" required data-error="{{ trans('frontend.please_choose', ['name' => trans('frontend.province')]) }}" bind-event-change="billingDistrictChange('')" bind="BillingProvinceId">
+                                                <select class="field__input field__input--select form-control filter-dropdown" name="BillingProvinceId" id="billingProvince" required data-error="{{ trans('frontend.please_choose', {'name': trans('frontend.province')}) }}" bind-event-change="billingDistrictChange('')" bind="BillingProvinceId">
                                                     <option value=''>--- {{ trans('frontend.choose_province') }} ---</option>
-                                                    @foreach($provinces as $province)
-                                                        <option value='{{ $province->id }}'>{{ $province->name }}</option>
+                                                    @foreach(provinces as province)
+                                                        <option value='{{ province.id }}'>{{ province.name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -373,7 +374,7 @@
                                                 <select class="field__input field__input--select form-control filter-dropdown" name="ShippingCountryId" id="shippingCountry"  bind-event-change="shippingCountryChange('')" bind="ShippingCountryId">
                                                     <option value="">--- {{ trans('frontend.choose_country') }} ---</option>
                                                     @foreach($countrys as $country)
-                                                        <option value='{{ $country->code }}' @if($selected_country == $country->code) selected @endif>{{ $country->name }}</option>
+                                                        <option value='{{ country.code }}' @if($selected_country == $country->code) selected @endif>{{ country.name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -385,10 +386,10 @@
                                                 <label class="field__label" for="BillingProvinceId">
                                                     {{ trans('frontend.province') }}
                                                 </label>
-                                                <select class="field__input field__input--select form-control filter-dropdown" name="ShippingProvinceId" id="shippingProvince" data-error="{{ trans('frontend.please_choose', ['name' => trans('frontend.province')]) }}" bind-event-change="shippingProviceChange('')" bind="ShippingProvinceId">
+                                                <select class="field__input field__input--select form-control filter-dropdown" name="ShippingProvinceId" id="shippingProvince" data-error="{{ trans('frontend.please_choose', {'name': trans('frontend.province')}) }}" bind-event-change="shippingProviceChange('')" bind="ShippingProvinceId">
                                                     <option value=''>--- {{ trans('frontend.choose_province') }} ---</option>
-                                                    @foreach($provinces as $province)
-                                                        <option value='{{ $province->id }}'>{{ $province->name }}</option>
+                                                    @foreach(provinces as province)
+                                                        <option value='{{ province.id }}'>{{ province.name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -461,10 +462,10 @@
                                     <div class="content-box__row">
                                         <div class="radio-wrapper">
                                             <div class="radio__input">
-                                                <input class="input-radio" type="radio" value="{{ $payment_method->id }}" name="PaymentMethodId" id="payment_method_{{ $payment_method->id }}" data-check-id="4" bind="payment_method_id" @if($index == 0) checked @endif>
+                                                <input class="input-radio" type="radio" value="{{ payment_method.id }}" name="PaymentMethodId" id="payment_method_{{ payment_method.id }}" data-check-id="4" bind="payment_method_id" @if($index == 0) checked @endif>
                                             </div>
-                                            <label class="radio__label" for="payment_method_{{ $payment_method->id }}">
-                                                <span class="radio__label__primary">{{ $payment_method->name }}</span>
+                                            <label class="radio__label" for="payment_method_{{ payment_method.id }}">
+                                                <span class="radio__label__primary">{{ payment_method.name }}</span>
                                                 <span class="radio__label__accessory">
                                                 <ul>
                                                     <li class="payment-icon-v2 payment-icon--4">
@@ -476,9 +477,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="radio-wrapper content-box__row content-box__row--secondary hide" id="payment-gateway-subfields-{{ $payment_method->id }}" bind-show="payment_method_id == {{ $payment_method->id }}">
+                                    <div class="radio-wrapper content-box__row content-box__row--secondary hide" id="payment-gateway-subfields-{{ payment_method.id }}" bind-show="payment_method_id == {{ payment_method.id }}">
                                         <div class="blank-slate">
-                                            <p>{{ $payment_method->description }}</p>
+                                            <p>{{ payment_method.description }}</p>
                                         </div>
                                     </div>
 
@@ -488,7 +489,7 @@
                         </div>
                         <div class="section hidden-md hidden-lg">
                             <div class="form-group clearfix m0">
-                                <input class="btn btn-primary btn-checkout" data-loading-text="Đang xử lý" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ \Illuminate\Support\Str::upper(trans('frontend.order')) }}" />
+                                <input class="btn btn-primary btn-checkout" data-loading-text="Đang xử lý" type="button" bind-event-click="paymentCheckout('AIzaSyAjQYbV19v7UMDVk0cDZ54yKh3OP1hQhbk;AIzaSyCLd-YkfOzBXlNGfS_FNLnpolyME1tRAJI;AIzaSyDdvilzaJlb50t2IRC3PrfSb1lNzf6n3pQ')" value="{{ trans('frontend.order') }}" />
                             </div>
                             <div class="text-center mt20">
                                 <a class="previous-link" href="/cart">
