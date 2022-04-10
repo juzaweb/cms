@@ -7,6 +7,7 @@
  * @link       https://juzaweb.com/cms
  * @license    MIT
  */
+
 use Juzaweb\Ecommerce\Http\Controllers\Backend\InventoryController;
 use Juzaweb\Ecommerce\Http\Controllers\Backend\PaymentMethodController;
 use Juzaweb\Ecommerce\Http\Controllers\Backend\SettingController;

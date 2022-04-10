@@ -38,7 +38,7 @@ class EcommerceAction extends Action
         HookAction::registerAdminPage(
             'ecommerce',
             [
-                'title' => trans('cms::app.ecommerce'),
+                'title' => trans('ecom::content.ecommerce'),
                 'menu' => [
                     'icon' => 'fa fa-shopping-cart',
                     'position' => 50,
@@ -48,7 +48,7 @@ class EcommerceAction extends Action
         HookAction::registerAdminPage(
             'ecommerce.settings',
             [
-                'title' => trans('cms::app.setting'),
+                'title' => trans('ecom::content.setting'),
                 'menu' => [
                     'icon' => 'fa fa-shopping-cart',
                     'position' => 2,
@@ -56,10 +56,11 @@ class EcommerceAction extends Action
                 ]
             ]
         );
+        
         HookAction::registerAdminPage(
             'ecommerce.payment-methods',
             [
-                'title' => trans('cms::app.payment_methods'),
+                'title' => trans('ecom::content.payment_methods'),
                 'menu' => [
                     'icon' => 'fa fa-credit-card',
                     'position' => 2,
@@ -67,10 +68,11 @@ class EcommerceAction extends Action
                 ]
             ]
         );
+        
         HookAction::registerAdminPage(
             'ecommerce.inventories',
             [
-                'title' => trans('cms::app.inventories'),
+                'title' => trans('ecom::content.inventories'),
                 'menu' => [
                     'icon' => 'fa fa-indent',
                     'position' => 3,
@@ -82,7 +84,7 @@ class EcommerceAction extends Action
         HookAction::registerAdminPage(
             'ecommerce.variants',
             [
-                'title' => trans('cms::app.variants'),
+                'title' => trans('ecom::content.variants'),
                 'menu' => [
                     'icon' => 'fa fa-indent',
                     'position' => 3,
@@ -96,10 +98,15 @@ class EcommerceAction extends Action
     {
         $variant = Variant::findByProduct($model->id);
 
-        echo e(view('ecom::backend.product.form', compact(
-            'variant',
-            'model'
-        )));
+        echo e(
+            view(
+                'ecom::backend.product.form',
+                compact(
+                    'variant',
+                    'model'
+                )
+            )
+        );
     }
 
     public function parseDataForSave($data)

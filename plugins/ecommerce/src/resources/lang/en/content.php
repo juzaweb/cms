@@ -53,5 +53,6 @@ return [
             'custom' => 'Custom',
         ],
     ],
-    'variant' => 'Variant'
+    'variant' => 'Variant',
+    'variants' => 'Variants',
 ];
