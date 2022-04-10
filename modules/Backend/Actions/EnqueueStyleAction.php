@@ -61,12 +61,17 @@ class EnqueueStyleAction extends Action
         $scripts = HookAction::getEnqueueFrontendScripts();
         $styles = HookAction::getEnqueueFrontendStyles();
 
-        echo e(view('cms::items.frontend_header', compact(
-            'fbAppId',
-            'googleAnalytics',
-            'scripts',
-            'styles'
-        )));
+        echo e(
+            view(
+                'cms::items.frontend_header',
+                compact(
+                    'fbAppId',
+                    'googleAnalytics',
+                    'scripts',
+                    'styles'
+                )
+            )
+        );
     }
 
     public function addRecaptchaForm()
@@ -76,15 +81,20 @@ class EnqueueStyleAction extends Action
 
     public function recaptchaRender()
     {
-        $recaptcha = get_configs([
-            'google_recaptcha',
-            'google_recaptcha_key',
-        ]);
+        $recaptcha = get_configs(
+            [
+                'google_recaptcha',
+                'google_recaptcha_key',
+            ]
+        );
 
         if ($recaptcha['google_recaptcha'] == 1) {
-            echo view('cms::components.frontend.recaptcha', compact(
-                'recaptcha'
-            ));
+            echo view(
+                'cms::components.frontend.recaptcha',
+                compact(
+                    'recaptcha'
+                )
+            );
         }
     }
 }

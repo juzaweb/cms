@@ -6,8 +6,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="turbolinks-cache-control" content="no-cache">
     <title>404 - Page not found</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/styles/css/vendor.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/styles/css/backend.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/vendor.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/backend.css') }}">
 </head>
 <body class="juzaweb__menuLeft--dark">
     <div class="juzaweb__layout">

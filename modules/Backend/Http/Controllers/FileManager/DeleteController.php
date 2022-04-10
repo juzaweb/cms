@@ -16,7 +16,6 @@ class DeleteController extends FileManagerController
         foreach ($itemNames as $file) {
             if (is_null($file)) {
                 array_push($errors, parent::error('folder-name'));
-
                 continue;
             }
 

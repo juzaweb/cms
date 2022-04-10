@@ -1,0 +1,48 @@
+#widget-container {
+    min-height: 350px;
+}
+
+#widget-container .widget-block {
+    padding: 5px 10px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid #e4e9f0;
+    box-sizing: border-box;
+}
+
+#widget-container .widget-block .widget-title {
+
+}
+
+#widget-container .widget-block .widget-description {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#widget-container .widget-block .dropdown-action {
+    position: absolute;
+    right: 25px;
+}
+
+#widget-container .dd-item {
+    margin: 5px 0;
+}
+
+#widget-container .dd-handle {
+    height: 40px;
+    border-radius: unset;
+    padding: 10px 10px;
+    margin: 0;
+}
+
+#widget-container .dd-handle .dd-nodrag {
+    font-size: 20px;
+    float: right;
+}
+
+#widget-container .right-actions {
+    position: absolute;
+    top: 0;
+    right: 10px;
+}

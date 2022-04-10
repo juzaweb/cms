@@ -1,0 +1,21 @@
+.page-block-content .dd-item .dd-handle {
+    padding: 15px 10px;
+    border-radius: unset;
+    height: unset;
+}
+
+.page-block-content .dd-item .dd-handle span {
+    font-size: 20px;
+}
+
+.page-block-content .block-action-button {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+
+.page-block-content .form-block-edit {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-top: none;
+}

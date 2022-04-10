@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? '' }}</title>
-    <link rel="icon" href="{{ asset('jw-styles/juzaweb/styles/images/favicon.ico') }}" />
+    <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
 
     @if($gtag = config('app.site_gtag'))
@@ -85,7 +85,7 @@
                     </a>
                 </div>
 
-                <img src="{{ asset('jw-styles/juzaweb/styles/images/icon.png') }}" alt="Logo Juzaweb">
+                <img src="{{ asset('jw-styles/juzaweb/images/icon.png') }}" alt="Logo Juzaweb">
 
                 <div class="juzaweb__btn-top">
                     @yield('buttons')

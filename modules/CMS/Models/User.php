@@ -160,7 +160,7 @@ class User extends Authenticatable
             return upload_url($this->avatar);
         }
 
-        return asset('jw-styles/juzaweb/styles/images/avatar.png');
+        return asset('jw-styles/juzaweb/images/avatar.png');
     }
 
     public function subscription()

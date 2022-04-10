@@ -141,7 +141,7 @@ class Theme implements ThemeContract
             if (file_exists($screenshot)) {
                 $themeConfig['screenshot'] = theme_assets('images/screenshot.png', $theme);
             } else {
-                $themeConfig['screenshot'] = asset('jw-styles/juzaweb/styles/images/thumb-default.png');
+                $themeConfig['screenshot'] = asset('jw-styles/juzaweb/images/thumb-default.png');
             }
 
             if ($themeConfig->has('name')) {

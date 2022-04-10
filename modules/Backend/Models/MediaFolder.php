@@ -40,7 +40,7 @@ class MediaFolder extends Model
 
     public function files()
     {
-        return $this->hasMany('Juzaweb\Backend\Models\MediaFile', 'folder_id', 'id');
+        return $this->hasMany(MediaFile::class, 'folder_id', 'id');
     }
 
     public function parent()
@@ -55,12 +55,12 @@ class MediaFolder extends Model
 
     public function deleteFolder()
     {
-        foreach ($this->folder_childs as $folder_child) {
-            $folder_child->deleteFolder();
+        foreach ($this->children as $child) {
+            $child->deleteFolder();
         }
 
-        foreach ($this->childs as $child) {
-            $child->deleteFile();
+        foreach ($this->files as $file) {
+            $file->delete();
         }
 
         return $this->delete();

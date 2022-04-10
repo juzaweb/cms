@@ -1,18 +1,17 @@
 <div class="m-3 d-block d-lg-none">
     <h1 style="font-size: 1.5rem;">File Manager</h1>
-    <small class="d-block">Ver 2.0</small>
     <div class="row mt-3">
         <div class="col-4">
-            <img src="{{ asset('jw-styles/juzaweb/styles/images/logo.svg') }}" class="w-100">
+            <img src="{{ asset('jw-styles/juzaweb/images/logo.svg') }}" class="w-100" alt="Juzaweb logo" />
         </div>
 
         <div class="col-8">
-            <p>Current usage :</p>
-            <p>20 GB (Max : 1 TB)</p>
+            <p>Current usage:</p>
+            <p>{{ format_size_units($storage) }} (Max: {{ format_size_units($total), 0 }})</p>
         </div>
     </div>
     <div class="progress mt-3" style="height: .5rem;">
-        <div class="progress-bar progress-bar-striped progress-bar-animated w-75 bg-main" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-main" role="progressbar" aria-valuenow="{{ round($storage / $total, 2) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round($storage / $total, 2) }}%;"></div>
     </div>
 </div>
 
