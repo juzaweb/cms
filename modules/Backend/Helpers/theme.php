@@ -283,7 +283,7 @@ if (! function_exists('get_logo')) {
     {
         return upload_url(
             get_config('logo'),
-            asset($default ?: 'jw-styles/juzaweb/styles/images/logo.png')
+            asset($default ?: 'jw-styles/juzaweb/images/logo.png')
         );
     }
 }
@@ -293,7 +293,7 @@ if (! function_exists('get_icon')) {
     {
         return upload_url(
             get_config('icon'),
-            asset($default ?: 'jw-styles/juzaweb/styles/images/favicon.ico')
+            asset($default ?: 'jw-styles/juzaweb/images/favicon.ico')
         );
     }
 }

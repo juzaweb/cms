@@ -564,7 +564,7 @@ trait PostTypeModel
             return $this->createdBy->getAvatar();
         }
 
-        return asset('jw-styles/juzaweb/styles/images/avatar.png');
+        return asset('jw-styles/juzaweb/images/avatar.png');
     }
 
     public function getViews()

@@ -7,7 +7,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('template_title')</title>
 
-        <script src="{{ asset('jw-styles/juzaweb/styles/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('jw-styles/juzaweb/js/jquery.min.js') }}"></script>
         <link href="{{ asset('jw-styles/juzaweb/installer/css/style.css') }}" rel="stylesheet"/>
 
         <script>
