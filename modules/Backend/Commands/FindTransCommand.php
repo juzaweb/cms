@@ -11,7 +11,7 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class FindTransCommand extends TranslationCommand
 {
-    protected $signature = 'trans:find-translate';
+    protected $signature = 'trans:import';
 
     /** @var FindTransManager $manager */
     protected $manager;
