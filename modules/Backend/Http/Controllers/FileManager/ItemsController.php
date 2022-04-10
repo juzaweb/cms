@@ -36,6 +36,7 @@ class ItemsController extends FileManagerController
                 'thumb_url' => asset('jw-styles/juzaweb/images/folder.png'),
                 'time' => false,
                 'url' => $folder->id,
+                'path' => $folder->id,
             ];
         }
 
