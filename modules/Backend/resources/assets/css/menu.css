@@ -1,0 +1,87 @@
+.form-select-menu .select2.select2-container {
+    width: 30% !important;
+    display: inline-block !important;
+}
+
+.form-select-menu .select2.select2-container .select2-selection--single {
+    height: 28px;
+}
+
+.form-select-menu .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+}
+
+.form-select-menu .select2-selection--single .select2-selection__rendered {
+    line-height: unset;
+}
+
+.form-menu-structure label[for=name] {
+    margin-bottom: 0;
+    font-size: 18px;
+    margin-top: 4px;
+}
+
+.form-menu-structure #name {
+    height: 33px;
+    width: 250px;
+    padding: 0.25rem;
+}
+
+#form-menu .dd-nodrag {
+    z-index: 999;
+    position: absolute;
+    right: 10px;
+    font-size: 18px;
+    top: 2px;
+}
+
+#form-menu .dd-item {
+    width: 400px;
+    margin: 0.33rem 0;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+#form-menu .dd-collapsed .dd-expand {
+    line-height: 30px;
+}
+
+#form-menu .dd-collapsed .dd-expand {
+    font-size: 15px;
+}
+
+#form-menu .dd-handle {
+    border: 1px solid #ddd;
+    background: #fafafa;
+    border-radius: 0;
+    color: #23282d;
+    font-weight: 600;
+    margin: 0;
+    height: 40px;
+}
+
+#form-menu .dd-handle:hover {
+    color: #23282d;
+    background: #fafafa;
+    border-color: unset;
+}
+
+.card-menu-items {
+    margin-bottom: unset;
+}
+
+.card-menu-items .card-header {
+    padding: 0.75rem 1.25rem;
+    min-height: 3rem;
+}
+
+.card-menu-items .card-body {
+    padding: 1.25rem;
+}
+
+.form-item-edit {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-top: none;
+}
+

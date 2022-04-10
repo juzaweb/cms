@@ -104,7 +104,7 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__ . '/../resources/assets' => public_path('jw-styles/juzaweb'),
+                __DIR__ . '/../resources/assets/public' => public_path('jw-styles/juzaweb'),
             ],
             'cms_assets'
         );
