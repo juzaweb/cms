@@ -11,10 +11,9 @@
             "providers": [
                 "Juzaweb\\Ecommerce\\Providers\\EcommerceServiceProvider"
             ],
-            "aliases": {},
             "name": "Ecommerces",
             "domain": "ecom",
-            "cms_min": "1.0.9",
+            "cms_min": "3.0",
             "version": "1.0",
             "visible": true
         }
