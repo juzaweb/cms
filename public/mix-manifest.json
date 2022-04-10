@@ -1,4 +1,4 @@
 {
-    "/modules/Backend/resources/assets/public/css/filemanager.css": "/modules/Backend/resources/assets/public/css/filemanager.css",
-    "/modules/Backend/resources/assets/public/js/filemanager.js": "/modules/Backend/resources/assets/public/js/filemanager.js"
+    "/modules/Backend/resources/assets/public/css/filemanager.min.css": "/modules/Backend/resources/assets/public/css/filemanager.min.css",
+    "/modules/Backend/resources/assets/public/js/filemanager.min.js": "/modules/Backend/resources/assets/public/js/filemanager.min.js"
 }

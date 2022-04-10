@@ -7,85 +7,105 @@ var items = [];
 $.fn.fab = function (options) {
     var menu = this;
     menu.addClass('fab-wrapper');
-
+    
     var toggler = $('<a>')
         .addClass('fab-button fab-toggle')
         .append($('<i>').addClass('fa fa-plus'))
-        .click(function () {
-            menu.toggleClass('fab-expand');
-        });
-
-    menu.append(toggler);
-
-    options.buttons.forEach(function (button) {
-        toggler.before(
-            $('<a>').addClass('fab-button fab-action')
-                .attr('data-label', button.label)
-                .attr('id', button.attrs.id)
-                .append($('<i>').addClass(button.icon))
-                .click(function () {
-                    menu.removeClass('fab-expand');
-                })
+        .click(
+            function () {
+                menu.toggleClass('fab-expand');
+            }
         );
-    });
+    
+    menu.append(toggler);
+    
+    options.buttons.forEach(
+        function (button) {
+            toggler.before(
+                $('<a>').addClass('fab-button fab-action')
+                    .attr('data-label', button.label)
+                    .attr('id', button.attrs.id)
+                    .append($('<i>').addClass(button.icon))
+                    .click(
+                        function () {
+                            menu.removeClass('fab-expand');
+                        }
+                    )
+            );
+        }
+    );
 };
 
-$(document).ready(function () {
-    $('#fab').fab({
-        buttons: [
+$(document).ready(
+    function () {
+        $('#fab').fab(
             {
-                icon: 'fa fa-upload',
-                label: lang['nav-upload'],
-                attrs: {id: 'upload'}
-            },
-            {
-                icon: 'fa fa-folder',
-                label: lang['nav-new'],
-                attrs: {id: 'add-folder'}
+                buttons: [
+                {
+                    icon: 'fa fa-upload',
+                    label: lang['nav-upload'],
+                    attrs: {id: 'upload'}
+                },
+                {
+                    icon: 'fa fa-folder',
+                    label: lang['nav-new'],
+                    attrs: {id: 'add-folder'}
+                }
+                ]
             }
-        ]
-    });
-
-    actions.reverse().forEach(function (action) {
-        $('#nav-buttons > ul').prepend(
-            $('<li>').addClass('nav-item').append(
-                $('<a>').addClass('nav-link d-none')
-                    .attr('data-action', action.name)
-                    .attr('data-multiple', action.multiple)
-                    .append($('<i>').addClass('fa fa-fw fa-' + action.icon))
-                    .append($('<span>').text(action.label))
-            )
         );
-    });
-
-    sortings.forEach(function (sort) {
-        $('#nav-buttons .dropdown-menu').append(
-            $('<a>').addClass('dropdown-item').attr('data-sortby', sort.by)
-                .append($('<i>').addClass('fa fa-fw fa-' + sort.icon))
-                .append($('<span>').text(sort.label))
-                .click(function () {
-                    sort_type = sort.by;
-                    loadItems();
-                })
-        );
-    });
-
+    
+    actions.reverse().forEach(
+        function (action) {
+            $('#nav-buttons > ul').prepend(
+                $('<li>').addClass('nav-item').append(
+                    $('<a>').addClass('nav-link d-none')
+                        .attr('data-action', action.name)
+                        .attr('data-multiple', action.multiple)
+                        .append($('<i>').addClass('fa fa-fw fa-' + action.icon))
+                        .append($('<span>').text(action.label))
+                )
+            );
+        }
+    );
+    
+    sortings.forEach(
+        function (sort) {
+            $('#nav-buttons .dropdown-menu').append(
+                $('<a>').addClass('dropdown-item')
+                    .attr('data-sortby', sort.by)
+                    .append($('<i>').addClass('fa fa-fw fa-' + sort.icon))
+                    .append($('<span>').text(sort.label))
+                    .click(
+                        function () {
+                            sort_type = sort.by;
+                            loadItems();
+                        }
+                    )
+            );
+        }
+    );
+    
     loadFolders();
     performLfmRequest('errors')
-        .done(function (response) {
-            JSON.parse(response).forEach(function (message) {
-                $('#alerts').append(
-                    $('<div>').addClass('alert alert-warning')
-                        .append($('<i>').addClass('fa fa-exclamation-circle'))
-                        .append(' ' + message)
+        .done(
+            function (response) {
+                JSON.parse(response).forEach(
+                    function (message) {
+                        $('#alerts').append(
+                            $('<div>').addClass('alert alert-warning')
+                                .append($('<i>').addClass('fa fa-exclamation-circle'))
+                                .append(' ' + message)
+                        );
+                    }
                 );
-            });
-        });
-
+            }
+        );
+    
     $(window).on('dragenter', function () {
         $('#uploadModal').modal('show');
     });
-
+    
     if (usingWysiwygEditor()) {
         $('#multi_selection_toggle').hide();
     }
@@ -101,7 +121,7 @@ $('#multi_selection_toggle').click(function () {
     $('#multi_selection_toggle i')
         .toggleClass('fa-times', multi_selection_enabled)
         .toggleClass('fa-check-double', !multi_selection_enabled);
-
+    
     if (!multi_selection_enabled) {
         clearSelected();
     }
@@ -155,16 +175,15 @@ function toggleSelected(e) {
     if (!multi_selection_enabled) {
         selected = [];
     }
-
+    
     var sequence = $(e.target).closest('a').data('id');
     var element_index = selected.indexOf(sequence);
     if (element_index === -1) {
         selected.push(sequence);
-    }
-    else {
+    } else {
         selected.splice(element_index, 1);
     }
-
+    
     updateSelectedStyle();
 }
 
@@ -208,7 +227,7 @@ function toggleActions() {
             return !item.is_file;
         })
         .length === 0;
-
+    
     $('[data-action=use]').toggleClass('d-none', !(many_selected && only_file));
     $('[data-action=rename]').toggleClass('d-none', !one_selected);
     $('[data-action=preview]').toggleClass('d-none', !(many_selected && only_file));
@@ -250,7 +269,7 @@ function setOpenFolders() {
             .toggleClass('fa-folder-open', should_open)
             .toggleClass('fa-folder', !should_open);
     });
-
+    
     $('#tree .nav-item').removeClass('active');
     $('#tree [data-path="' + $('#working_dir').val() + '"]').parent('.nav-item').addClass('active');
 }
@@ -261,14 +280,14 @@ function setOpenFolders() {
 
 function performLfmRequest(url, parameter, method = 'GET', type = 'text') {
     var data = defaultParameters();
-
-    data['_token'] =  $('meta[name="csrf-token"]').attr('content');
+    
+    data['_token'] = $('meta[name="csrf-token"]').attr('content');
     if (parameter != null) {
         $.each(parameter, function (key, value) {
             data[key] = value;
         });
     }
-
+    
     return $.ajax({
         type: method,
         beforeSend: function (request) {
@@ -321,7 +340,7 @@ function generatePaginationHTML(el, args) {
     var rangeStart = args.rangeStart;
     var rangeEnd = args.rangeEnd;
     var i;
-
+    
     // Disable page range, display all the pages
     if (args.pageRange === null) {
         for (i = 1; i <= totalPage; i++) {
@@ -333,10 +352,10 @@ function generatePaginationHTML(el, args) {
             }
             el.append(button);
         }
-
+        
         return;
     }
-
+    
     if (rangeStart <= 3) {
         for (i = 1; i < rangeStart; i++) {
             var button = $(template)
@@ -347,19 +366,18 @@ function generatePaginationHTML(el, args) {
             }
             el.append(button);
         }
-    }
-    else {
+    } else {
         var button = $(template)
             .attr('data-num', 1)
             .append($(linkTemplate).html(1));
         el.append(button);
-
+        
         var button = $(template)
             .addClass('disabled')
             .append($(linkTemplate).html('...'));
         el.append(button);
     }
-
+    
     for (i = rangeStart; i <= rangeEnd; i++) {
         var button = $(template)
             .attr('data-num', i)
@@ -369,7 +387,7 @@ function generatePaginationHTML(el, args) {
         }
         el.append(button);
     }
-
+    
     if (rangeEnd >= totalPage - 2) {
         for (i = rangeEnd + 1; i <= totalPage; i++) {
             var button = $(template)
@@ -377,13 +395,12 @@ function generatePaginationHTML(el, args) {
                 .append($(linkTemplate).html(i));
             el.append(button);
         }
-    }
-    else {
+    } else {
         var button = $(template)
             .addClass('disabled')
             .append($(linkTemplate).html('...'));
         el.append(button);
-
+        
         var button = $(template)
             .attr('data-num', totalPage)
             .append($(linkTemplate).html(totalPage));
@@ -393,25 +410,25 @@ function generatePaginationHTML(el, args) {
 
 function createPagination(paginationSetting) {
     var el = $('<ul class="pagination" role="navigation"></ul>');
-
+    
     var currentPage = paginationSetting.current_page;
     var pageRange = 5;
     var totalPage = Math.ceil(paginationSetting.total / paginationSetting.per_page);
-
+    
     var rangeStart = currentPage - pageRange;
     var rangeEnd = currentPage + pageRange;
-
+    
     if (rangeEnd > totalPage) {
         rangeEnd = totalPage;
         rangeStart = totalPage - pageRange * 2;
         rangeStart = rangeStart < 1 ? 1 : rangeStart;
     }
-
+    
     if (rangeStart <= 1) {
         rangeStart = 1;
         rangeEnd = Math.min(pageRange * 2 + 1, totalPage);
     }
-
+    
     generatePaginationHTML(el, {
         totalPage: totalPage,
         currentPage: currentPage,
@@ -419,7 +436,7 @@ function createPagination(paginationSetting) {
         rangeStart: rangeStart,
         rangeEnd: rangeEnd
     });
-
+    
     $('#pagination').append(el);
 }
 
@@ -436,11 +453,11 @@ function loadItems(page) {
             $('#empty').toggleClass('d-none', hasItems);
             $('#content').html('').removeAttr('class');
             $('#pagination').html('').removeAttr('class');
-
+            
             if (hasItems) {
                 $('#content').addClass(response.display);
                 $('#pagination').addClass('preserve_actions_space');
-
+                
                 items.forEach(function (item, index) {
                     var template = $('#item-template').clone()
                         .removeAttr('id class')
@@ -449,42 +466,40 @@ function loadItems(page) {
                         .dblclick(function (e) {
                             if (item.is_file) {
                                 use(getSelectedItems());
-                            }
-                            else {
+                            } else {
                                 goTo(item.url);
                             }
                         });
-
+                    
                     if (item.thumb_url) {
                         var image = $('<div>').css('background-image', 'url("' + item.thumb_url + '?timestamp=' + item.time + '")');
-                    }
-                    else {
+                    } else {
                         var icon = $('<div>').addClass('ico');
                         var image = $('<div>').addClass('mime-icon ico-' + item.icon).append(icon);
                     }
-
+                    
                     template.find('.square').append(image);
                     template.find('.item_name').text(item.name);
                     template.find('time').text((new Date(item.time * 1000)).toLocaleString());
-
+                    
                     $('#content').append(template);
                 });
             }
-
+            
             if (hasPaginator) {
                 createPagination(response.paginator);
-
+                
                 $('#pagination a').on('click', function (event) {
                     event.preventDefault();
-
+                    
                     loadItems($(this).closest('li')[0].getAttribute('data-num'));
-
+                    
                     return false;
                 });
             }
-
+            
             $('#nav-buttons > ul').removeClass('d-none');
-
+            
             $('#working_dir').val(working_dir);
             // console.log('Current working_dir : ' + working_dir);
             /*var breadcrumbs = [];
@@ -518,7 +533,7 @@ function loadItems(page) {
 
                 $('#breadcrumbs > ol').append(li);
             });*/
-
+            
             var atRootFolder = getPreviousDir() == '';
             $('#to-previous').toggleClass('d-none invisible-lg', atRootFolder);
             $('#show_tree').toggleClass('d-none', !atRootFolder).toggleClass('d-block', atRootFolder);
@@ -578,7 +593,7 @@ function download(items) {
         if (token) {
             data['token'] = token;
         }
-
+        
         setTimeout(function () {
             location.href = lfm_route + '/download?' + $.param(data);
         }, index * 100);
@@ -596,34 +611,33 @@ function preview(items) {
     carousel.children('.carousel-inner').html('');
     carousel.children('.carousel-indicators').html('');
     carousel.children('.carousel-indicators,.carousel-control-prev,.carousel-control-next').toggle(items.length > 1);
-
+    
     items.forEach(function (item, index) {
         var carouselItem = imageTemplate.clone()
             .addClass(index === 0 ? 'active' : '');
-
+        
         if (item.thumb_url) {
             carouselItem.find('.carousel-image').css('background-image', 'url(\'' + item.url + '?timestamp=' + item.time + '\')');
-        }
-        else {
+        } else {
             carouselItem.find('.carousel-image').css('width', '50vh').append($('<div>').addClass('mime-icon ico-' + item.icon));
         }
-
+        
         carouselItem.find('.carousel-label').attr('target', '_blank').attr('href', item.url)
             .append(item.name)
             .append($('<i class="fa fa-external-link-alt ml-2"></i>'));
-
+        
         carousel.children('.carousel-inner').append(carouselItem);
-
+        
         var carouselIndicator = indicatorTemplate.clone()
             .addClass(index === 0 ? 'active' : '')
             .attr('data-slide-to', index);
         carousel.children('.carousel-indicators').append(carouselIndicator);
     });
-
-
+    
+    
     // carousel swipe control
     var touchStartX = null;
-
+    
     carousel.on('touchstart', function (event) {
         var e = event.originalEvent;
         if (e.touches.length == 1) {
@@ -637,8 +651,7 @@ function preview(items) {
             if ((touchCurrentX - touchStartX) > 60) {
                 touchStartX = null;
                 carousel.carousel('prev');
-            }
-            else if ((touchStartX - touchCurrentX) > 60) {
+            } else if ((touchStartX - touchCurrentX) > 60) {
                 touchStartX = null;
                 carousel.carousel('next');
             }
@@ -647,7 +660,7 @@ function preview(items) {
         touchStartX = null;
     });
     // end carousel swipe control
-
+    
     notify(carousel);
 }
 
@@ -671,7 +684,7 @@ function use(items) {
         if (!usingTinymce3()) {
             return;
         }
-
+        
         var win = tinyMCEPopup.getWindowArg("window");
         win.document.getElementById(tinyMCEPopup.getWindowArg("input")).value = url;
         if (typeof (win.ImageDialog) != "undefined") {
@@ -679,7 +692,7 @@ function use(items) {
             if (win.ImageDialog.getImageData) {
                 win.ImageDialog.getImageData();
             }
-
+            
             // Preview if necessary
             if (win.ImageDialog.showPreviewImage) {
                 win.ImageDialog.showPreviewImage(url);
@@ -687,14 +700,14 @@ function use(items) {
         }
         tinyMCEPopup.close();
     }
-
+    
     function useTinymce4AndColorbox(url) {
         if (!usingTinymce4AndColorbox()) {
             return;
         }
-
+        
         parent.document.getElementById(getUrlParam('field_name')).value = url;
-
+        
         if (typeof parent.tinyMCE !== "undefined") {
             parent.tinyMCE.activeEditor.windowManager.close();
         }
@@ -702,81 +715,75 @@ function use(items) {
             parent.$.fn.colorbox.close();
         }
     }
-
+    
     function useTinymce5(url) {
         if (!usingTinymce5()) {
             return;
         }
-
+        
         parent.postMessage({
             mceAction: 'insert',
             content: url
         });
-
+        
         parent.postMessage({mceAction: 'close'});
     }
-
+    
     function useCkeditor3(url) {
         if (!usingCkeditor3()) {
             return;
         }
-
+        
         if (window.opener) {
             // Popup
             window.opener.CKEDITOR.tools.callFunction(getUrlParam('CKEditorFuncNum'), url);
-        }
-        else {
+        } else {
             // Modal (in iframe)
             parent.CKEDITOR.tools.callFunction(getUrlParam('CKEditorFuncNum'), url);
             parent.CKEDITOR.tools.callFunction(getUrlParam('CKEditorCleanUpFuncNum'));
         }
     }
-
+    
     function useFckeditor2(url) {
         if (!usingFckeditor2()) {
             return;
         }
-
+        
         var p = url;
         var w = data['Properties']['Width'];
         var h = data['Properties']['Height'];
         window.opener.SetUrl(p, w, h);
     }
-
+    
     var url = items[0].url;
     var callback = getUrlParam('callback');
     var useFileSucceeded = true;
-
+    
     if (usingWysiwygEditor()) {
         useTinymce3(url);
-
+        
         useTinymce4AndColorbox(url);
-
+        
         useTinymce5(url);
-
+        
         useCkeditor3(url);
-
+        
         useFckeditor2(url);
-    }
-    else if (callback && window[callback]) {
+    } else if (callback && window[callback]) {
         window[callback](getSelectedItems());
-    }
-    else if (callback && parent[callback]) {
+    } else if (callback && parent[callback]) {
         parent[callback](getSelecteditems());
-    }
-    else if (window.opener) { // standalone button or other situations
+    } else if (window.opener) { // standalone button or other situations
         window.opener.SetUrl(getSelectedItems());
-    }
-    else {
+    } else {
         useFileSucceeded = false;
     }
-
+    
     if (useFileSucceeded) {
         if (window.opener) {
             window.close();
         }
-    }
-    else {
+    } else {
         console.log('window.opener not found');
         // No editor found, open/download file using browser's default method
         window.open(url);

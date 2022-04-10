@@ -10,7 +10,7 @@ mix.styles(
         baseAsset + '/plugins/dropzone/css/dropzone.css',
         baseAsset + '/css/lfm.css',
     ],
-    basePublish + '/css/filemanager.css'
+    basePublish + '/css/filemanager.min.css'
 );
 
 mix.combine(
@@ -21,7 +21,7 @@ mix.combine(
         baseAsset + '/plugins/jquery-ui/jquery-ui.min.js',
         baseAsset + '/plugins/cropper/js/cropper.min.js',
         baseAsset + '/plugins/dropzone/js/dropzone.js',
-        baseAsset + '/js/script.js',
+        baseAsset + '/js/lfm.js',
     ],
-    basePublish + '/js/filemanager.js'
+    basePublish + '/js/filemanager.min.js'
 );
