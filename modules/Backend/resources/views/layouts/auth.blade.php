@@ -10,13 +10,13 @@
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/styles/css/vendor.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/styles/css/backend.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/vendor.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/backend.css') }}">
 
     @include('cms::components.juzaweb_langs')
 
-    <script src="{{ asset('jw-styles/juzaweb/styles/js/vendor.js') }}"></script>
-    <script src="{{ asset('jw-styles/juzaweb/styles/js/backend.js') }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/vendor.js') }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/backend.js') }}"></script>
 
     @yield('header')
 

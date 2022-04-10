@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
-    <link rel="shortcut icon" href="{{ asset('jw-styles/juzaweb/styles/images/brand/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('jw-styles/juzaweb/images/brand/favicon.ico') }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{{ trans('cms::app.customize_theme') }}</title>
@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     @include('cms::components.juzaweb_langs')
 
-    <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/styles/css/theme-editor.css') }}">
+    <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/theme-editor.css') }}">
     <!--[if lt IE 9]>
-    <script src="{{ asset('jw-styles/juzaweb/styles/js/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('jw-styles/juzaweb/styles/js/respond.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/respond.min.js') }}"></script>
     <![endif]-->
 
-    <script src="{{ asset('jw-styles/juzaweb/styles/js/theme-editor.js') }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/theme-editor.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ajaxStart(function () {

@@ -2,7 +2,7 @@
     <h1 style="font-size: 1.5rem;">File Manager</h1>
     <div class="row mt-3">
         <div class="col-4">
-            <img src="{{ asset('jw-styles/juzaweb/styles/images/logo.svg') }}" class="w-100" alt="Juzaweb logo" />
+            <img src="{{ asset('jw-styles/juzaweb/images/logo.svg') }}" class="w-100" alt="Juzaweb logo" />
         </div>
 
         <div class="col-8">
