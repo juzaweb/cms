@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Controllers\Backend\PageController;
 use Juzaweb\CMS\Models\Language;
-use Juzaweb\Multisite\Models\DomainMapping;
 
 class SettingController extends PageController
 {
@@ -17,11 +16,14 @@ class SettingController extends PageController
         $languages = Language::get();
         $subdomains = get_config('mlla_subdomain', []);
 
-        return view('mlla::setting', compact(
-            'title',
-            'languages',
-            'subdomains'
-        ));
+        return view(
+            'mlla::setting',
+            compact(
+                'title',
+                'languages',
+                'subdomains'
+            )
+        );
     }
 
     /**

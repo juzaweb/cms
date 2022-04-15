@@ -30,7 +30,6 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereUpdatedAt($value)
  */
-
 class Attribute extends Model
 {
     protected $table = 'attributes';

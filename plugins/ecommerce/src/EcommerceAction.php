@@ -11,6 +11,8 @@
 namespace Juzaweb\Ecommerce;
 
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\Ecommerce\Http\Controllers\Backend\PaymentMethodController;
+use Juzaweb\Ecommerce\Http\Controllers\Backend\SettingController;
 use Juzaweb\Ecommerce\Http\Controllers\Frontend\CartController;
 use Juzaweb\Ecommerce\Http\Controllers\Frontend\CheckoutController;
 use Juzaweb\Ecommerce\Models\ProductVariant;
@@ -73,14 +75,16 @@ class EcommerceAction extends Action
                 ]
             ]
         );
+        
         HookAction::registerAdminPage(
             'ecommerce.settings',
             [
                 'title' => trans('ecom::content.setting'),
+                'callback' => [SettingController::class, 'index'],
                 'menu' => [
                     'icon' => 'fa fa-shopping-cart',
                     'position' => 2,
-                    'parent' => 'ecommerce'
+                    'parent' => 'pages.ecommerce'
                 ]
             ]
         );
@@ -89,10 +93,12 @@ class EcommerceAction extends Action
             'ecommerce.payment-methods',
             [
                 'title' => trans('ecom::content.payment_methods'),
+                'callback' => PaymentMethodController::class,
+                'resource' => true,
                 'menu' => [
                     'icon' => 'fa fa-credit-card',
                     'position' => 2,
-                    'parent' => 'ecommerce'
+                    'parent' => 'pages.ecommerce'
                 ]
             ]
         );
@@ -104,7 +110,7 @@ class EcommerceAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-indent',
                     'position' => 3,
-                    'parent' => 'ecommerce'
+                    'parent' => 'pages.ecommerce'
                 ]
             ]
         );
@@ -116,7 +122,7 @@ class EcommerceAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-indent',
                     'position' => 3,
-                    'parent' => 'ecommerce',
+                    'parent' => 'pages.ecommerce',
                 ]
             ]
         );

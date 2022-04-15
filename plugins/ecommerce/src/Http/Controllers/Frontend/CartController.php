@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\Ecommerce\Http\Requests\AddToCartRequest;
@@ -126,10 +126,8 @@ class CartController extends FrontendController
         );
     }
     
-    public function getCartItems(
-        Request $request,
-        CartInterface $cart
-    ) {
+    public function getCartItems(CartInterface $cart)
+    {
         $cart = $cart->getCurrentCart();
         $variants = ProductVariant::whereIn(
             'id',
@@ -137,7 +135,27 @@ class CartController extends FrontendController
                 ->pluck('variant_id')
                 ->toArray()
         )
-            ->get();
+            ->get()
+            ->map(
+                function ($item) {
+                    return Arr::only(
+                        $item->toArray(),
+                        [
+                            'sku_code',
+                            'barcode',
+                            'title',
+                            'thumbnail',
+                            'description',
+                            'names',
+                            'images',
+                            'price',
+                            'compare_price',
+                            'stock',
+                            'type',
+                        ]
+                    );
+                }
+            );
         
         return response()->json(
             [

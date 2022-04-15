@@ -25,7 +25,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Juzaweb\\Ecommerce\\": "src/"
+            "Juzaweb\\Ecommerce\\": "src/",
+            "Juzaweb\\Ecommerce\\Tests\\": "tests/"
         },
         "files": [
             "vendor/autoload.php"
