@@ -34,7 +34,6 @@ class CreateOrdersTable extends Migration
                 $table->string('delivery_status')->default('pending')->comment('pending');
                 $table->unsignedBigInteger('user_id')->nullable()->index();
                 $table->timestamps();
-                $table->unique(['code']);
                 
                 $table->foreign('user_id')
                     ->references('id')
