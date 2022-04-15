@@ -11,8 +11,9 @@
 namespace Juzaweb\Ecommerce;
 
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\Ecommerce\Http\Controllers\Frontend\CartController;
 use Juzaweb\Ecommerce\Http\Controllers\Frontend\CheckoutController;
-use Juzaweb\Ecommerce\Models\Variant;
+use Juzaweb\Ecommerce\Models\ProductVariant;
 use Juzaweb\Backend\Facades\HookAction;
 
 class EcommerceAction extends Action
@@ -123,7 +124,7 @@ class EcommerceAction extends Action
 
     public function addFormProduct($model)
     {
-        $variant = Variant::findByProduct($model->id);
+        $variant = ProductVariant::findByProduct($model->id);
 
         echo e(
             view(
@@ -165,13 +166,13 @@ class EcommerceAction extends Action
      */
     public function saveDataProduct($model, $data)
     {
-        $variant = Variant::findByProduct($model->id);
+        $variant = ProductVariant::findByProduct($model->id);
         $variantData = $data['meta'];
         $variantData['title'] = 'Default';
         $variantData['names'] = ['Default'];
         $variantData['product_id'] = $model->id;
-
-        Variant::updateOrCreate(
+    
+        ProductVariant::updateOrCreate(
             ['id' => $variant->id ?? 0],
             $variantData
         );
@@ -195,7 +196,15 @@ class EcommerceAction extends Action
             'checkout',
             [
                 'callback' => [CheckoutController::class, 'checkout'],
-                //'method' => 'POST',
+                'method' => 'POST',
+            ]
+        );
+    
+        HookAction::registerFrontendAjax(
+            'cart.add-to-cart',
+            [
+                'callback' => [CartController::class, 'addToCart'],
+                'method' => 'POST',
             ]
         );
     

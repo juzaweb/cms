@@ -11,6 +11,7 @@
 namespace Juzaweb\Ecommerce\Providers;
 
 use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\Ecommerce\Supports\CartInterface;
 
 class AutoloadSeviceProvider extends ServiceProvider
 {
@@ -38,5 +39,10 @@ class AutoloadSeviceProvider extends ServiceProvider
         );
     
         $this->app->register(RouteServiceProvider::class);
+    
+        $this->app->bind(
+            CartInterface::class,
+            config('ecommerce.cart')
+        );
     }
 }

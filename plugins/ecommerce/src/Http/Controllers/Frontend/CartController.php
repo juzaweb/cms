@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
 
+use Illuminate\Support\Facades\DB;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\Ecommerce\Http\Requests\AddToCartRequest;
 use Juzaweb\Ecommerce\Http\Requests\RemoveItemCartRequest;
@@ -21,8 +22,20 @@ class CartController extends FrontendController
     {
         $variantId = $request->input('variant_id');
         $quantity = $request->input('quantity');
-        
-        $cart = $cart->addOrUpdate($variantId, $quantity);
+    
+        DB::beginTransaction();
+        try {
+            $cart = $cart->addOrUpdate($variantId, $quantity);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            report($e);
+            return $this->error(
+                [
+                    'message' => $e->getMessage(),
+                ]
+            );
+        }
         
         return $this->success(
             [
@@ -35,8 +48,34 @@ class CartController extends FrontendController
     public function removeItem(RemoveItemCartRequest $request, CartInterface $cart)
     {
         $variantId = $request->input('variant_id');
-        $cart = $cart->remove($variantId);
+        
+        DB::beginTransaction();
+        try {
+            $cart = $cart->remove($variantId);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            report($e);
+            return $this->error(
+                [
+                    'message' => $e->getMessage(),
+                ]
+            );
+        }
     
+        return $this->success(
+            [
+                'message' => __('Remove item cart successfully.'),
+                'cart' => $cart,
+            ]
+        );
+    }
+    
+    public function bulkUpdate(Request $request, CartInterface $cart)
+    {
+        $items = (array) $request->input('items');
+        $cart = $cart->bulkUpdate($items);
+        
         return $this->success(
             [
                 'message' => __('Add to cart successfully.'),

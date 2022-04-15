@@ -21,12 +21,16 @@ class AddToCartRequest extends FormRequest
         return [
             'variant_id' => [
                 'bail',
+                'required',
                 'integer',
+                'min:1',
                 Rule::modelExists(ProductVariant::class, 'id'),
             ],
             'quantity' => [
                 'bail',
+                'required',
                 'integer',
+                'min:0',
             ],
         ];
     }
