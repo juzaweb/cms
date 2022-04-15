@@ -10,11 +10,13 @@
 
 namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\Ecommerce\Http\Requests\AddToCartRequest;
 use Juzaweb\Ecommerce\Http\Requests\BulkUpdateCartRequest;
 use Juzaweb\Ecommerce\Http\Requests\RemoveItemCartRequest;
+use Juzaweb\Ecommerce\Models\ProductVariant;
 use Juzaweb\Ecommerce\Supports\CartInterface;
 
 class CartController extends FrontendController
@@ -52,7 +54,7 @@ class CartController extends FrontendController
         
         DB::beginTransaction();
         try {
-            $cart = $cart->remove($variantId);
+            $cart = $cart->removeItem($variantId);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -96,6 +98,51 @@ class CartController extends FrontendController
             [
                 'message' => __('Add to cart successfully.'),
                 'cart' => $cart,
+            ]
+        );
+    }
+    
+    public function remove(CartInterface $cart)
+    {
+        DB::beginTransaction();
+        try {
+            $cart->remove();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            report($e);
+            return $this->error(
+                [
+                    'message' => $e->getMessage(),
+                ]
+            );
+        }
+        
+        return $this->success(
+            [
+                'message' => __('Add to cart successfully.'),
+                'cart' => $cart,
+            ]
+        );
+    }
+    
+    public function getCartItems(
+        Request $request,
+        CartInterface $cart
+    ) {
+        $cart = $cart->getCurrentCart();
+        $variants = ProductVariant::whereIn(
+            'id',
+            collect($cart->items)
+                ->pluck('variant_id')
+                ->toArray()
+        )
+            ->get();
+        
+        return response()->json(
+            [
+                'code' => $cart->code,
+                'items' => $variants
             ]
         );
     }

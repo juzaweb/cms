@@ -13,6 +13,7 @@ namespace Juzaweb\Ecommerce\Supports;
 use Illuminate\Support\Arr;
 use Juzaweb\Ecommerce\Models\Cart;
 use Juzaweb\Ecommerce\Models\ProductVariant;
+use Illuminate\Support\Facades\Cookie;
 
 class DbCart implements CartInterface
 {
@@ -58,7 +59,7 @@ class DbCart implements CartInterface
         return $cart;
     }
     
-    public function remove(int $variantId) : Cart
+    public function removeItem(int $variantId) : Cart
     {
         $cart = $this->getCurrentCart();
         unset($cart->items[$variantId]);
@@ -66,9 +67,17 @@ class DbCart implements CartInterface
         return $cart;
     }
     
+    public function remove(): bool
+    {
+        $cart = $this->getCurrentCart();
+        Cookie::forget('jw_cart');
+        $cart->delete();
+        return true;
+    }
+    
     public function getCurrentCart() : Cart
     {
-        $cartCode = cookie('jw_cart');
+        $cartCode = Cookie::get('jw_cart');
         $cart = Cart::firstOrNew(['code' => $cartCode]);
         $cart->load('user');
         return $cart;

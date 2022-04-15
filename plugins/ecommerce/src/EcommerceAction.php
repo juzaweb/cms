@@ -209,6 +209,13 @@ class EcommerceAction extends Action
         );
     
         HookAction::registerFrontendAjax(
+            'cart.get-items',
+            [
+                'callback' => [CartController::class, 'getCartItems'],
+            ]
+        );
+    
+        HookAction::registerFrontendAjax(
             'payment.cancel',
             [
                 'callback' => [CheckoutController::class, 'cancel'],

@@ -39,7 +39,7 @@ class CreateOrderItemsTable extends Migration
                 
                 $table->foreign('variant_id')
                     ->references('id')
-                    ->on('variants')
+                    ->on('product_variants')
                     ->onDelete('set null');
             }
         );

@@ -15,10 +15,12 @@ trait ResponseMessage
         }
 
         if (request()->ajax()) {
-            return response()->json([
-                'status' => $status,
-                'data' => $data,
-            ]);
+            return response()->json(
+                [
+                    'status' => $status,
+                    'data' => $data,
+                ]
+            );
         }
 
         if (!empty($data['redirect'])) {

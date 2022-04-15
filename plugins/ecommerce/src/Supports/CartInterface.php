@@ -18,7 +18,9 @@ interface CartInterface
     
     public function bulkUpdate(array $items) : CartModel;
     
-    public function remove(int $variantId) : CartModel;
+    public function removeItem(int $variantId) : CartModel;
     
     public function getCurrentCart() : CartModel;
+    
+    public function remove() : bool;
 }
