@@ -26,22 +26,22 @@ use Juzaweb\Ecommerce\Models\Attribute;
  * @property array|null $images
  * @property int $product_id
  * @property-read Post $product
- * @method static \Illuminate\Database\Eloquent\Builder|Variant newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Variant newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Variant query()
- * @method static \Illuminate\Database\Eloquent\Builder|Variant whereBarcode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Variant whereComparePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Variant whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Variant whereImages($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Variant wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Variant whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Variant whereSkuCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Variant whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereBarcode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereComparePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereImages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereSkuCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereTitle($value)
  * @mixin \Eloquent
  */
-class Variant extends Model
+class ProductVariant extends Model
 {
-    protected $table = 'variants';
+    protected $table = 'product_variants';
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     // public $timestamps = false;

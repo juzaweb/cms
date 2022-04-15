@@ -195,14 +195,21 @@ class EcommerceAction extends Action
             'checkout',
             [
                 'callback' => [CheckoutController::class, 'checkout'],
-                'method' => 'POST',
+                //'method' => 'POST',
             ]
         );
     
         HookAction::registerFrontendAjax(
-            'payment',
+            'payment.cancel',
             [
-                'callback' => [CheckoutController::class, 'payment'],
+                'callback' => [CheckoutController::class, 'cancel'],
+            ]
+        );
+    
+        HookAction::registerFrontendAjax(
+            'payment.completed',
+            [
+                'callback' => [CheckoutController::class, 'cancel'],
             ]
         );
     }

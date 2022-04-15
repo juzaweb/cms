@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Ecommerce\Http\Controllers\Backend;
 
+use Illuminate\Validation\Rule;
 use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -23,7 +24,7 @@ class PaymentMethodController extends BackendController
 
     protected function validator(array $attributes, ...$params)
     {
-        $types = trans('ecom::content.data.payment_methods');
+        $types = config('ecommerce.payment_methods');
         $types = array_keys($types);
 
         $validator = Validator::make(
@@ -31,7 +32,7 @@ class PaymentMethodController extends BackendController
             [
                 'type' => [
                     'required_if:id,',
-                    'in:' . implode(',', $types)
+                    Rule::in($types)
                 ],
                 'name' => [
                     'required'

@@ -17,19 +17,21 @@ class FrontendController extends Controller
     {
         //parent::__construct();
 
-        View::composer('*', function ($view) {
-            global $jw_user;
-
-            $user = $jw_user ? (new UserResource($jw_user))->toArray(request()) : null;
-
-            $domains = explode(',', config('app.site_domains'));
-
-            $view->with('user', $user);
-            $view->with('is_admin', $user ? $user['is_admin'] : false);
-            $view->with('auth', $user ? true : false);
-            $view->with('guest', $user ? false : true);
-            $view->with('site_domains', $domains);
-        });
+        View::composer(
+            '*',
+            function ($view) {
+                global $jw_user;
+                $user = $jw_user ? (new UserResource($jw_user))->toArray(request()) : null;
+    
+                $domains = explode(',', config('app.site_domains'));
+    
+                $view->with('user', $user);
+                $view->with('is_admin', $user ? $user['is_admin'] : false);
+                $view->with('auth', $user ? true : false);
+                $view->with('guest', $user ? false : true);
+                $view->with('site_domains', $domains);
+            }
+        );
     }
 
     public function callAction($method, $parameters)

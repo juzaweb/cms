@@ -30,7 +30,8 @@ class CreateOrdersTable extends Migration
                 $table->string('payment_method_name', 250);
                 $table->text('notes')->nullable();
                 $table->tinyInteger('other_address')->default(0);
-                $table->tinyInteger('status')->default(2)->comment('0: hủy, 1: đã thanh toán, 2: chưa thanh toán');
+                $table->string('payment_status')->default('pending')->comment('pending');
+                $table->string('delivery_status')->default('pending')->comment('pending');
                 $table->unsignedBigInteger('user_id')->nullable()->index();
                 $table->timestamps();
                 $table->unique(['code']);
