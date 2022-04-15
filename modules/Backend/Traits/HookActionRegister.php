@@ -4,6 +4,7 @@ namespace Juzaweb\Backend\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Juzaweb\Backend\Http\Controllers\Backend\DashboardController;
 use Juzaweb\CMS\Facades\GlobalData;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
@@ -313,7 +314,7 @@ trait HookActionRegister
         if (empty($args['title'])) {
             throw new \Exception('Label Admin Page is required.');
         }
-
+        
         $defaults = [
             'key' => $key,
             'title' => '',
@@ -324,14 +325,23 @@ trait HookActionRegister
         ];
 
         $args = array_merge($defaults, $args);
+        $args = new Collection($args);
 
-        $this->addAdminMenu(
-            $args['title'],
-            $key,
-            $args['menu']
-        );
+        if ($args->get('resource', false)) {
+            $this->addAdminMenu(
+                $args['title'],
+                "resource-pages.{$key}",
+                $args['menu']
+            );
+        } else {
+            $this->addAdminMenu(
+                $args['title'],
+                "pages.{$key}",
+                $args['menu']
+            );
+        }
 
-        GlobalData::set('admin_pages.' . $key, new Collection($args));
+        GlobalData::set('admin_pages.' . $key, $args);
     }
 
     public function registerAdminAjax($key, $args = [])
