@@ -10,8 +10,7 @@
 
 namespace Juzaweb\Ecommerce\Models;
 
-use Juzaweb\Models\Model;
-use Juzaweb\Ecommerce\Models\AttributeValue;
+use Juzaweb\CMS\Models\Model;
 
 /**
  * Juzaweb\Ecommerce\Models\Attribute
@@ -23,6 +22,13 @@ use Juzaweb\Ecommerce\Models\AttributeValue;
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute query()
  * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereName($value)
  * @mixin \Eloquent
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Ecommerce\Models\AttributeValue[] $values
+ * @property-read int|null $values_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Attribute whereUpdatedAt($value)
  */
 
 class Attribute extends Model

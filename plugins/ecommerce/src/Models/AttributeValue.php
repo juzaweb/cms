@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Ecommerce\Models;
 
-use Juzaweb\Models\Model;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\Ecommerce\Models\Attribute;
 
 /**
@@ -26,6 +26,9 @@ use Juzaweb\Ecommerce\Models\Attribute;
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereValueType($value)
  * @mixin \Eloquent
+ * @property-read Attribute $attribute
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereAttributeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AttributeValue whereId($value)
  */
 
 class AttributeValue extends Model

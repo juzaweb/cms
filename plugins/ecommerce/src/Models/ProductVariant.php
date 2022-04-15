@@ -38,6 +38,30 @@ use Juzaweb\Ecommerce\Models\Attribute;
  * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereSkuCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereTitle($value)
  * @mixin \Eloquent
+ * @property string|null $thumbnail
+ * @property string|null $summary
+ * @property string|null $description
+ * @property array|null $names
+ * @property string|null $sale_price
+ * @property int $quantity
+ * @property int $stock
+ * @property string $type
+ * @property int $post_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|Attribute[] $attributes
+ * @property-read int|null $attributes_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereNames($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant wherePostId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereSalePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereStock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereSummary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereThumbnail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductVariant whereUpdatedAt($value)
  */
 class ProductVariant extends Model
 {
