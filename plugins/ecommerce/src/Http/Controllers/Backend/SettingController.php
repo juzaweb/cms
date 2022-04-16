@@ -2,9 +2,9 @@
 
 namespace Juzaweb\Ecommerce\Http\Controllers\Backend;
 
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Http\Controllers\Backend\PageController;
 
-class SettingController extends BackendController
+class SettingController extends PageController
 {
     public function index()
     {

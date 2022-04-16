@@ -15,23 +15,14 @@ class PageController extends BackendController
     
     public function callAction($method, $parameters)
     {
-        $this->page = $this->findPageOrFail($parameters['slug']);
-        
-        $callback = $this->page->get('callback');
+        $this->page = $this->findPageOrFail();
     
-        do_action(Action::BACKEND_CALL_ACTION, $method, $parameters);
-        
-        if (is_array($callback) && is_string($callback[0])) {
-            return App::call([app($callback[0]), $callback[1]]);
-        }
-    
-        return App::call([app($callback), $method], $parameters);
+        return parent::callAction($method, $parameters);
     }
     
-    protected function findPageOrFail(string $slug) : Collection
+    protected function findPageOrFail() : Collection
     {
-        $key = str_replace('/', '.', $slug);
-        $page = HookAction::getAdminPages($key);
+        $page = HookAction::getAdminPages($this->getPageSlug());
         if (empty($page)) {
             abort(404);
         }
@@ -41,5 +32,12 @@ class PageController extends BackendController
         }
         
         return $page;
+    }
+    
+    protected function getPageSlug()
+    {
+        $slugs = explode('/', Route::getCurrentRoute()->uri);
+        unset($slugs[0]);
+        return implode('.', $slugs);
     }
 }
