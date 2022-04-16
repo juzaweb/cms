@@ -45,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variants_attribute_values');
+        Schema::dropIfExists('product_variants_attribute_values');
     }
 };

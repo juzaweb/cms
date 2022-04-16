@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->string('value')->nullable();
                 $table->string('value_type')->nullable();
                 $table->unsignedBigInteger('attribute_id');
+                
                 $table->foreign('attribute_id')
                     ->references('id')
                     ->on('attributes')
