@@ -44,4 +44,16 @@ Route::group(
     }
 );
 
+Route::group(
+    ['prefix' => 'updates'],
+    function () {
+        Route::get('/', 'Backend\UpdateController@index')->name('admin.update');
+        Route::get('check-update', 'Backend\UpdateController@checkUpdate')->name('admin.update.check');
+        Route::post('/', 'Backend\UpdateController@update');
+        
+        Route::get('get-plugins', 'Backend\UpdateController@pluginDatatable')->name('admin.update.plugins');
+        Route::get('get-themes', 'Backend\UpdateController@themeDatatable')->name('admin.update.themes');
+    }
+);
+
 Route::any('/ajax/{slug}', 'Backend\AjaxController@handle')->name('admin.ajax');

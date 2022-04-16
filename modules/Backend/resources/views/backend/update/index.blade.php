@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="alert alert-success">
                 <p>You are using Juzaweb CMS Version: {{ \Juzaweb\CMS\Version::getVersion() }}</p>
-                <p>View CMS <a href="https://github.com/juzaweb/cms/releases" target="_blank">change logs here</a></p>
+                <p>View CMS <a href="https://github.com/juzaweb/juzacms/releases" target="_blank">change logs here</a></p>
             </div>
 
             <div id="update-form">
