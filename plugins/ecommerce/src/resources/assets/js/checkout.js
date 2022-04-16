@@ -318,7 +318,7 @@ window.Juzaweb || (window.Juzaweb = {});
                     $.ajax({
                         url: url,
                         success: function (data) {
-                            var html = "<option value=''>--- Chọn tỉnh thành ---</option>";
+                            var html = "<option value=''>--- Choose a province ---</option>";
 
                             for (var i = 0; i < data.length; i++) {
                                 var province = data[i];
@@ -362,7 +362,7 @@ window.Juzaweb || (window.Juzaweb = {});
                 url: url,
                 async: false,
                 success: function (data) {
-                    var html = "<option value=''>--- Chọn quận huyện ---</option>";
+                    var html = "<option value=''>--- Select district ---</option>";
 
                     for (var i = 0; i < data.length; i++) {
                         var district = data[i];
@@ -388,7 +388,7 @@ window.Juzaweb || (window.Juzaweb = {});
                     url: url,
                     async: false,
                     success: function (data) {
-                        var html = "<option value=''>--- Chọn phường xã ---</option>";
+                        var html = "<option value=''>--- Choose a ward ---</option>";
 
                         for (var i = 0; i < data.length; i++) {
                             var ward = data[i];
@@ -440,7 +440,7 @@ window.Juzaweb || (window.Juzaweb = {});
                         $.ajax({
                             url: url,
                             success: function (data) {
-                                var html = "<option value=''>--- Chọn phường xã ---</option>";
+                                var html = "<option value=''>--- Choose a ward ---</option>";
 
                                 for (var i = 0; i < data.length; i++) {
                                     var ward = data[i];
@@ -931,8 +931,9 @@ window.Juzaweb || (window.Juzaweb = {});
 
             $form.validator('validate');
             if ($(".help-block.with-errors > ul").length <= 0) {
-                var url = window.location.href;
-                var method = "POST";
+                let url = $form.attr('action');
+                let method = "POST";
+                
                 $.ajax({
                     url: url,
                     type: method,
@@ -951,7 +952,7 @@ window.Juzaweb || (window.Juzaweb = {});
                             $(".sidebar__content .has-error .help-block > ul").html(html);
                             $(".btn-checkout").button('reset');
 
-                            return;
+                            return false;
                         }
                     }
                 });

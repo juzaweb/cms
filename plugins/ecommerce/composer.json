@@ -29,7 +29,8 @@
             "Juzaweb\\Ecommerce\\Tests\\": "tests/"
         },
         "files": [
-            "vendor/autoload.php"
+            "vendor/autoload.php",
+            "src/Helpers/helpers.php"
         ]
     }
 }

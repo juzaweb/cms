@@ -7,6 +7,7 @@ use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Juzaweb\CMS\Contracts\ActionRegisterContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
+use Juzaweb\CMS\Extension\Custom;
 use Juzaweb\CMS\Support\ActionRegister;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Theme\ThemeConfig;
@@ -26,6 +27,7 @@ use Juzaweb\CMS\Support\Validators\DomainValidator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+use TwigBridge\Facade\Twig;
 
 class CmsServiceProvider extends ServiceProvider
 {
@@ -62,6 +64,8 @@ class CmsServiceProvider extends ServiceProvider
         );
     
         Schema::defaultStringLength(150);
+    
+        Twig::addExtension(new Custom());
     
         /*$this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);

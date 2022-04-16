@@ -66,4 +66,8 @@ return [
     'email_is_malformed' => 'Email is malformed',
     'note' => 'Note',
     'please_enter_full_name' => 'Please enter full name',
+    'total_price' => 'Total price',
+    'apply' => 'Apply',
+    'please_wait' => 'Please wait...',
+    'enter_discount_code' => 'Enter discount code',
 ];

@@ -29,7 +29,8 @@ class CheckoutController extends FrontendController
         global $jw_user;
         
         $items = $cart->getCartItems();
-        if (empty($items)) {
+        
+        if ($items->isEmpty()) {
             return $this->error(
                 [
                     'message' => __('Cart is empty.'),
@@ -69,6 +70,9 @@ class CheckoutController extends FrontendController
             $order->total_price = $items->sum('price');
             $order->total = $order->total_price;
             $order->quantity = $items->sum('quantity');
+            $order->name = $jw_user->name;
+            $order->phone = $jw_user->phone;
+            $order->email = $jw_user->email;
             $order->save();
             DB::commit();
         } catch (\Exception $e) {
@@ -128,7 +132,7 @@ class CheckoutController extends FrontendController
     
     protected function getThanksPageRedirect()
     {
-        $thanksPage = Post::find(21);
+        $thanksPage = Post::find(get_config('ecom_thanks_page'));
         return $thanksPage->slug ?? '/';
     }
 }

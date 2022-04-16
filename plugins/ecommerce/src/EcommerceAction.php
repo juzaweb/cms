@@ -131,6 +131,7 @@ class EcommerceAction extends Action
         HookAction::registerConfig(
             [
                 'ecom_checkout_page',
+                'ecom_thanks_page',
             ]
         );
     }

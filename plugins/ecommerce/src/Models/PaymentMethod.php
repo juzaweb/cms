@@ -42,6 +42,9 @@ class PaymentMethod extends Model
 {
     use ResourceModel;
 
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 1;
+    
     protected $table = 'payment_methods';
     protected $fieldName = 'name';
     protected $guarded = ['id', 'created_at', 'updated_at'];
@@ -49,7 +52,7 @@ class PaymentMethod extends Model
     protected $casts = [
         'data' => 'array'
     ];
-
+    
     public function order()
     {
         return $this->hasMany(
@@ -57,5 +60,10 @@ class PaymentMethod extends Model
             'payment_method_id',
             'id'
         );
+    }
+    
+    public function scopeActive($builder)
+    {
+        return $builder->where('active', '=', self::STATUS_ACTIVE);
     }
 }

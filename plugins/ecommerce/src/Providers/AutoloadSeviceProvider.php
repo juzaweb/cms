@@ -11,7 +11,9 @@
 namespace Juzaweb\Ecommerce\Providers;
 
 use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\Ecommerce\Extensions\TwigExtension;
 use Juzaweb\Ecommerce\Supports\CartInterface;
+use TwigBridge\Facade\Twig;
 
 class AutoloadSeviceProvider extends ServiceProvider
 {
@@ -21,6 +23,8 @@ class AutoloadSeviceProvider extends ServiceProvider
         $basePath = __DIR__ . '/..';
         $this->loadViewsFrom($basePath . '/resources/views', 'ecom');
         $this->loadTranslationsFrom($basePath . '/resources/lang', 'ecom');
+    
+        Twig::addExtension(new TwigExtension());
     }
 
     public function register()
