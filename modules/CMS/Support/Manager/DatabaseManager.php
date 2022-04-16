@@ -113,7 +113,7 @@ class DatabaseManager
     private function makeEmailTemplate(BufferedOutput $outputLog)
     {
         try {
-            Artisan::call('mail:generate-template', $outputLog);
+            Artisan::call('mail:generate-template', [], $outputLog);
         } catch (Exception $e) {
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
