@@ -11,9 +11,12 @@
 namespace Juzaweb\Ecommerce\Supports;
 
 use Illuminate\Support\Collection;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\Ecommerce\Models\Order;
 
 interface OrderInterface
 {
-    public function create(CartInterface $cart, array $data) : Order;
+    public function createByCart(CartInterface $cart, User $user, array $data) : Order;
+    
+    public function getCollectionItems(array $items): Collection;
 }

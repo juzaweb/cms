@@ -103,13 +103,12 @@ class DbCart implements CartInterface
     public function getCartItems() : Collection
     {
         $cart = $this->getCurrentCart();
+        $variantIds = collect($cart->items)
+            ->pluck('variant_id')
+            ->toArray();
+        
         $variants = ProductVariant::with(['product'])
-            ->whereIn(
-                'id',
-                collect($cart->items)
-                    ->pluck('variant_id')
-                    ->toArray()
-            )
+            ->whereIn('id', $variantIds)
             ->get()
             ->map(
                 function ($item) use ($cart) {

@@ -11,8 +11,13 @@
 namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Juzaweb\Backend\Events\RegisterSuccessful;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\Ecommerce\Http\Requests\CheckoutRequest;
 use Juzaweb\Ecommerce\Supports\CartInterface;
 use Juzaweb\Ecommerce\Supports\OrderInterface;
@@ -26,6 +31,8 @@ class CheckoutController extends FrontendController
         OrderInterface $order,
         CheckoutRequest $request
     ) {
+        global $jw_user;
+        
         $items = $cart->getCurrentCart()->items;
         
         if (empty($items)) {
@@ -38,7 +45,21 @@ class CheckoutController extends FrontendController
     
         DB::beginTransaction();
         try {
-            $newOrder = $order->create($cart, $request->all());
+            if (empty($jw_user)) {
+                $password = Hash::make(Str::random());
+        
+                $user = User::create(
+                    [
+                        'name' => $request->get('name'),
+                        'email' => $request->get('email'),
+                        'password' => $password,
+                    ]
+                );
+                
+                event(new RegisterSuccessful($user));
+            }
+            
+            $newOrder = $order->createByCart($cart, $user, $request->all());
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();

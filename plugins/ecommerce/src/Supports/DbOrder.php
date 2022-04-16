@@ -11,72 +11,100 @@
 namespace Juzaweb\Ecommerce\Supports;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Ecommerce\Models\Order;
 use Juzaweb\Ecommerce\Models\PaymentMethod;
+use Juzaweb\Ecommerce\Models\ProductVariant;
 
 class DbOrder implements OrderInterface
 {
-    public function create(CartInterface $cart, array $data) : Order
-    {
-        global $jw_user;
-    
-        $items = $cart->getCartItems();
-    
-        if (empty($items)) {
-            throw new \Exception('Cart is empty.');
-        }
-        
-        $paymentMethod = PaymentMethod::find(Arr::get($data, 'payment_method_id'));
-    
-        if (empty($paymentMethod)) {
-            throw new \Exception('Payment method does not exist');
-        }
-        
-        if (empty($jw_user)) {
-            $password = Hash::make(Str::random());
-        
-            $jw_user = User::create(
-                [
-                    'name' => Arr::get($data, 'name'),
-                    'email' => Arr::get($data, 'email'),
-                    'password' => $password,
-                ]
-            );
-        }
-    
-        $order = new Order();
-        $order->fill(
-            array_except(
-                $data,
-                [
-                    'code',
-                    'payment_status',
-                    'delivery_status',
-                    'payment_method_name',
-                    'user_id',
-                    'total_price',
-                    'total',
-                    'quantity',
-                ]
-            )
-        );
-    
-        $order->code = Str::uuid()->toString();
-        $order->user_id = $jw_user->id;
-        $order->total_price = $items->sum('price');
-        $order->total = $order->total_price;
-        $order->quantity = $items->sum('quantity');
-        $order->name = $jw_user->name;
-        $order->phone = $jw_user->phone;
-        $order->email = $jw_user->email;
-        $order->payment_method_name = $paymentMethod->name;
-        $order->save();
+    public function createByCart(
+        CartInterface $cart,
+        User $user,
+        array $data
+    ): Order {
+        $order = $this->createByItems($data, $cart->getCurrentCart()->items, $user);
     
         $cart->remove();
         
         return $order;
+    }
+    
+    public function createByItems(array $data, array $items, User $user): Order
+    {
+        $items = $this->getCollectionItems($items);
+    
+        $order = $this->createOrder($data, $user, $items);
+        
+        return $order;
+    }
+    
+    public function getCollectionItems(array $items): Collection
+    {
+        $variantIds = collect($items)
+            ->pluck('variant_id')
+            ->toArray();
+        
+        $variants = ProductVariant::with(['product'])
+            ->whereIn('id', $variantIds)
+            ->get()
+            ->map(
+                function ($item) use ($items) {
+                    $item->quantity = $items[$item->id]['quantity'];
+                    $item->line_price = $item->price * $item->quantity;
+                    return $item;
+                }
+            );
+    
+        if (empty($variants)) {
+            throw new \Exception('Product items is empty.');
+        }
+        
+        return $variants;
+    }
+    
+    protected function createOrder(array $data, User $user, Collection $items)
+    {
+        $paymentMethod = $this->getPaymentMethod($data);
+        $filldata = array_except(
+            $data,
+            [
+                'code',
+                'payment_status',
+                'delivery_status',
+                'payment_method_name',
+                'user_id',
+                'total_price',
+                'total',
+                'quantity',
+            ]
+        );
+        
+        $order = new Order();
+        $order->fill($filldata);
+        $order->code = Str::uuid()->toString();
+        $order->user_id = $user->id;
+        $order->total_price = $items->sum('price');
+        $order->total = $order->total_price;
+        $order->quantity = $items->sum('quantity');
+        $order->name = $user->name;
+        $order->phone = $user->phone;
+        $order->email = $user->email;
+        $order->payment_method_name = $paymentMethod->name;
+        $order->save();
+        return $order;
+    }
+    
+    protected function getPaymentMethod(array $data): PaymentMethod
+    {
+        $paymentMethod = PaymentMethod::find(Arr::get($data, 'payment_method_id'));
+        
+        if (empty($paymentMethod)) {
+            throw new \Exception('Payment method does not exist');
+        }
+        
+        return $paymentMethod;
     }
 }

@@ -27,27 +27,42 @@ class SendMailRegisterSuccessful
         if (get_config('user_verification')) {
             $verifyToken = Str::random(32);
 
-            $event->user->update([
-                'status' => 'verification',
-                'verification_token' => $verifyToken,
-            ]);
+            $event->user->update(
+                [
+                    'status' => 'verification',
+                    'verification_token' => $verifyToken,
+                ]
+            );
 
-            event(new EmailHook('register_success', [
-                'to' => [$event->user->email],
-                'params' => [
-                    'name' => $event->user->name,
-                    'email' => $event->user->email,
-                    'verifyToken' => $verifyToken,
-                    'verifyUrl' => route('verification', [$event->user->email, $verifyToken]),
-                ],
-            ]));
-        } else {
-            event(new EmailHook('register_success', [
-                'params' => [
-                    'name' => $event->user->name,
-                    'email' => $event->user->email,
-                ],
-            ]));
+            event(
+                new EmailHook(
+                    'register_success',
+                    [
+                        'to' => [$event->user->email],
+                        'params' => [
+                            'name' => $event->user->name,
+                            'email' => $event->user->email,
+                            'verifyToken' => $verifyToken,
+                            'verifyUrl' => route(
+                                'verification',
+                                [$event->user->email, $verifyToken]
+                            ),
+                        ],
+                    ]
+                )
+            );
         }
+    
+        event(
+            new EmailHook(
+                'register_success',
+                [
+                    'params' => [
+                        'name' => $event->user->name,
+                        'email' => $event->user->email,
+                    ],
+                ]
+            )
+        );
     }
 }
