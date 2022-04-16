@@ -4,6 +4,7 @@ namespace Juzaweb\Backend\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Juzaweb\Backend\Http\Controllers\Backend\DashboardController;
 use Juzaweb\CMS\Facades\GlobalData;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
@@ -30,20 +31,23 @@ trait HookActionRegister
             throw new \Exception('Post type label is required.');
         }
 
-        $args = array_merge([
-            'model' => Post::class,
-            'description' => '',
-            'priority' => 20,
-            'show_in_menu' => true,
-            'rewrite' => true,
-            'taxonomy_rewrite' => true,
-            'menu_box' => true,
-            'menu_position' => 20,
-            'callback' => PostController::class,
-            'menu_icon' => 'fa fa-list-alt',
-            'supports' => [],
-            'metas' => [],
-        ], $args);
+        $args = array_merge(
+            [
+                'model' => Post::class,
+                'description' => '',
+                'priority' => 20,
+                'show_in_menu' => true,
+                'rewrite' => true,
+                'taxonomy_rewrite' => true,
+                'menu_box' => true,
+                'menu_position' => 20,
+                'callback' => PostController::class,
+                'menu_icon' => 'fa fa-list-alt',
+                'supports' => [],
+                'metas' => [],
+            ],
+            $args
+        );
 
         $args['key'] = $key;
         $args['singular'] = Str::singular($key);
@@ -57,45 +61,59 @@ trait HookActionRegister
         }
 
         if ($args->get('menu_box')) {
-            $this->registerMenuBox('post_type_' . $key, [
-                'title' => $args->get('label'),
-                'group' => 'post_type',
-                'menu_box' => new PostTypeMenuBox($key, $args),
-                'priority' => 10,
-            ]);
+            $this->registerMenuBox(
+                'post_type_' . $key,
+                [
+                    'title' => $args->get('label'),
+                    'group' => 'post_type',
+                    'menu_box' => new PostTypeMenuBox($key, $args),
+                    'priority' => 10,
+                ]
+            );
         }
 
         $supports = $args->get('supports', []);
         if (in_array('category', $supports)) {
-            $this->registerTaxonomy('categories', $key, [
-                'label' => trans('cms::app.categories'),
-                'priority' => $args->get('priority') + 5,
-                'menu_position' => 4,
-                'show_in_menu' => $args->get('show_in_menu'),
-                'rewrite' => $args->get('taxonomy_rewrite'),
-            ]);
+            $this->registerTaxonomy(
+                'categories',
+                $key,
+                [
+                    'label' => trans('cms::app.categories'),
+                    'priority' => $args->get('priority') + 5,
+                    'menu_position' => 4,
+                    'show_in_menu' => $args->get('show_in_menu'),
+                    'rewrite' => $args->get('taxonomy_rewrite'),
+                ]
+            );
         }
 
         if (in_array('tag', $args['supports'])) {
-            $this->registerTaxonomy('tags', $key, [
-                'label' => trans('cms::app.tags'),
-                'priority' => $args->get('priority') + 6,
-                'menu_position' => 15,
-                'menu_box' => false,
-                'show_in_menu' => $args->get('show_in_menu'),
-                'rewrite' => $args->get('taxonomy_rewrite'),
-                'supports' => [],
-            ]);
+            $this->registerTaxonomy(
+                'tags',
+                $key,
+                [
+                    'label' => trans('cms::app.tags'),
+                    'priority' => $args->get('priority') + 6,
+                    'menu_position' => 15,
+                    'menu_box' => false,
+                    'show_in_menu' => $args->get('show_in_menu'),
+                    'rewrite' => $args->get('taxonomy_rewrite'),
+                    'supports' => [],
+                ]
+            );
         }
 
         if ($args->get('rewrite')) {
-            $this->registerPermalink($key, [
-                'label' => $args->get('label'),
-                'base' => $args->get('singular'),
-                'priority' => $args->get('priority'),
-                'callback' => $args->get('callback'),
-                'post_type' => $key,
-            ]);
+            $this->registerPermalink(
+                $key,
+                [
+                    'label' => $args->get('label'),
+                    'base' => $args->get('singular'),
+                    'priority' => $args->get('priority'),
+                    'callback' => $args->get('callback'),
+                    'post_type' => $key,
+                ]
+            );
         }
     }
 
@@ -177,24 +195,30 @@ trait HookActionRegister
             }
 
             if ($argsCollection->get('rewrite')) {
-                $this->registerPermalink($argsCollection->get('taxonomy'), [
-                    'label' => $argsCollection->get('label'),
-                    'base' => $argsCollection->get('singular'),
-                    'priority' => $argsCollection->get('priority'),
-                    'callback' => TaxonomyController::class,
-                ]);
+                $this->registerPermalink(
+                    $argsCollection->get('taxonomy'),
+                    [
+                        'label' => $argsCollection->get('label'),
+                        'base' => $argsCollection->get('singular'),
+                        'priority' => $argsCollection->get('priority'),
+                        'callback' => TaxonomyController::class,
+                    ]
+                );
             }
 
             if ($argsCollection->get('menu_box')) {
-                $this->registerMenuBox($objectType . '_' . $taxonomy, [
-                    'title' => $argsCollection->get('label'),
-                    'group' => 'taxonomy',
-                    'priority' => 15,
-                    'menu_box' => new TaxonomyMenuBox(
-                        $argsCollection->get('key'),
-                        $argsCollection
-                    ),
-                ]);
+                $this->registerMenuBox(
+                    $objectType . '_' . $taxonomy,
+                    [
+                        'title' => $argsCollection->get('label'),
+                        'group' => 'taxonomy',
+                        'priority' => 15,
+                        'menu_box' => new TaxonomyMenuBox(
+                            $argsCollection->get('key'),
+                            $argsCollection
+                        ),
+                    ]
+                );
             }
         }
     }
@@ -216,14 +240,19 @@ trait HookActionRegister
             throw new \Exception('Permalink args default_base is required');
         }
 
-        $args = new Collection(array_merge([
-            'label' => '',
-            'base' => '',
-            'key' => $key,
-            'callback' => '',
-            'post_type' => '',
-            'position' => 20,
-        ], $args));
+        $args = new Collection(
+            array_merge(
+                [
+                    'label' => '',
+                    'base' => '',
+                    'key' => $key,
+                    'callback' => '',
+                    'post_type' => '',
+                    'position' => 20,
+                ],
+                $args
+            )
+        );
 
         GlobalData::set('permalinks.' . $key, new Collection($args));
     }
@@ -236,11 +265,14 @@ trait HookActionRegister
 
         if (empty($postType)) {
             if ($menu = Arr::get($args, 'menu', [])) {
-                $menu = array_merge([
-                    'icon' => 'fa fa-list-ul',
-                    'parent' => null,
-                    'position' => 20,
-                ], Arr::get($args, 'menu', []));
+                $menu = array_merge(
+                    [
+                        'icon' => 'fa fa-list-ul',
+                        'parent' => null,
+                        'position' => 20,
+                    ],
+                    Arr::get($args, 'menu', [])
+                );
 
                 $menuKey = "resources.{$key}";
 
@@ -250,17 +282,20 @@ trait HookActionRegister
 
         unset($args['menu']);
 
-        $args = array_merge([
-            'key' => $key,
-            'model' => Resource::class,
-            'label' => '',
-            'label_action' => $args['label'],
-            'description' => '',
-            'post_type' => $postType,
-            'priority' => 20,
-            'supports' => [],
-            'metas' => [],
-        ], $args);
+        $args = array_merge(
+            [
+                'key' => $key,
+                'model' => Resource::class,
+                'label' => '',
+                'label_action' => $args['label'],
+                'description' => '',
+                'post_type' => $postType,
+                'priority' => 20,
+                'supports' => [],
+                'metas' => [],
+            ],
+            $args
+        );
 
         $args = new Collection($args);
 
@@ -279,7 +314,7 @@ trait HookActionRegister
         if (empty($args['title'])) {
             throw new \Exception('Label Admin Page is required.');
         }
-
+        
         $defaults = [
             'key' => $key,
             'title' => '',
@@ -290,14 +325,15 @@ trait HookActionRegister
         ];
 
         $args = array_merge($defaults, $args);
-
+        $args = new Collection($args);
+    
         $this->addAdminMenu(
             $args['title'],
             $key,
             $args['menu']
         );
 
-        GlobalData::set('admin_pages.' . $key, new Collection($args));
+        GlobalData::set('admin_pages.' . $key, $args);
     }
 
     public function registerAdminAjax($key, $args = [])
@@ -316,10 +352,15 @@ trait HookActionRegister
     public function registerNavMenus($locations = [])
     {
         foreach ($locations as $key => $location) {
-            GlobalData::set('nav_menus.' . $key, new Collection([
-                'key' => $key,
-                'location' => $location,
-            ]));
+            GlobalData::set(
+                'nav_menus.' . $key,
+                new Collection(
+                    [
+                        'key' => $key,
+                        'location' => $location,
+                    ]
+                )
+            );
         }
     }
 

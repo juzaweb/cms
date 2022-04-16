@@ -31,6 +31,10 @@ function body_class($class = '')
 
 function theme_assets(string $path, string $theme = null)
 {
+    if (strpos($path, 'jw-styles/') === 0) {
+        return asset($path);
+    }
+    
     $path = str_replace('assets/', '', $path);
 
     return Theme::assets($path, $theme);

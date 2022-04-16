@@ -14,11 +14,14 @@ class SystemSettingController extends BackendController
     {
         $forms = $this->getForms();
 
-        return view('cms::backend.setting.system.index', [
-            'title' => trans('cms::app.system_setting'),
-            'component' => $form,
-            'forms' => $forms,
-        ]);
+        return view(
+            'cms::backend.setting.system.index',
+            [
+                'title' => trans('cms::app.system_setting'),
+                'component' => $form,
+                'forms' => $forms,
+            ]
+        );
     }
 
     public function save(Request $request)
@@ -32,10 +35,12 @@ class SystemSettingController extends BackendController
 
                 if ($key == 'language') {
                     if (!Language::existsCode($config)) {
-                        Language::create([
-                            'code' => $config,
-                            'name' => $locales[$config]['name']
-                        ]);
+                        Language::create(
+                            [
+                                'code' => $config,
+                                'name' => $locales[$config]['name']
+                            ]
+                        );
                     }
 
                     Language::setDefault($config);
@@ -43,15 +48,11 @@ class SystemSettingController extends BackendController
             }
         }
 
-        $form = $request->post('form');
-        if (empty($form)) {
-            $form = 'general';
-        }
-
-        return $this->success([
-            'message' => trans('cms::app.saved_successfully'),
-            'redirect' => route('admin.setting.form', [$form]),
-        ]);
+        return $this->success(
+            [
+                'message' => trans('cms::app.saved_successfully'),
+            ]
+        );
     }
 
     protected function getForms()

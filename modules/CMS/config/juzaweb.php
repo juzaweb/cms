@@ -54,7 +54,7 @@ return [
          * Themes path
          *
          * This path used for save the generated theme. This path also will added
-        automatically to list of scanned folders.
+         * automatically to list of scanned folders.
          */
         'path' => base_path('themes'),
     ],

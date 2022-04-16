@@ -1,6 +1,6 @@
 {
     "name": "juzaweb/ecommerce",
-    "description": "",
+    "description": "Ecommerce plugin for website designed by Juzaweb",
     "extra": {
         "laravel": {
             "providers": [
@@ -11,24 +11,26 @@
             "providers": [
                 "Juzaweb\\Ecommerce\\Providers\\EcommerceServiceProvider"
             ],
-            "aliases": {},
-            "name": "juzaweb/ecommerce",
+            "name": "Ecommerces",
             "domain": "ecom",
-            "cms_min": "1.0.9",
+            "cms_min": "3.0",
             "version": "1.0",
-            "visible": false
+            "visible": true
         }
     },
     "require": {
         "league/omnipay": "^3",
-        "omnipay/paypal": "^3.0"
+        "omnipay/paypal": "^3.0",
+        "omnipay/stripe": "^3.2"
     },
     "autoload": {
         "psr-4": {
-            "Juzaweb\\Ecommerce\\Tests\\": "tests/",
-            "Juzaweb\\Ecommerce\\Seeders\\": "seeders/",
-            "Juzaweb\\Ecommerce\\Factories\\": "factories/",
-            "Juzaweb\\Ecommerce\\": "src/"
-        }
+            "Juzaweb\\Ecommerce\\": "src/",
+            "Juzaweb\\Ecommerce\\Tests\\": "tests/"
+        },
+        "files": [
+            "vendor/autoload.php",
+            "src/Helpers/helpers.php"
+        ]
     }
 }

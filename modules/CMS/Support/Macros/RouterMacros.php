@@ -18,9 +18,10 @@ class RouterMacros
                 $routeName = str_replace('/', '.', $routeName);
             }
 
+            $where = $options['where'] ?? [];
             $routeName = 'admin.' . $routeName;
 
-            $this->get($uri, "{$controller}@index")->name($routeName .'.index');
+            $this->get($uri, "{$controller}@index")->name($routeName .'.index')->where($where);
             $this->get($uri . '/create', $controller . '@create')->name($routeName . '.create');
             $this->get("{$uri}/datatable", $controller . '@datatable')->name($routeName . '.datatable');
             $this->get($uri . '/{id}/edit', $controller . '@edit')->name($routeName . '.edit')->where('id', '[0-9]+');

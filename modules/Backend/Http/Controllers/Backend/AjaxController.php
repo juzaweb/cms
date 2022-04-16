@@ -11,6 +11,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Facades\HookAction;
 
@@ -28,7 +29,11 @@ class AjaxController extends BackendController
         }
 
         $callback = $ajax->get('callback');
-
-        return app($callback[0])->{$callback[1]}($request);
+    
+        if (is_string($callback[0])) {
+            return app($callback[0])->{$callback[1]}($request);
+        }
+    
+        return App::call($callback, [$request]);
     }
 }

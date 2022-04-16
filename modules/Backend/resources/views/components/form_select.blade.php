@@ -28,8 +28,8 @@
             <option
                 value="{{ $key }}"
                 @if(in_array($key, $value)) selected @endif
-                @foreach($opdata as $key => $val)
-                    data-{{ $key }}="{{ $val }}"
+                @foreach($opdata as $opkey => $opval)
+                    data-{{ $opkey }}="{{ $opval }}"
                 @endforeach
             >
                 {{ $label }}

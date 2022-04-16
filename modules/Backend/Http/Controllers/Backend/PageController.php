@@ -2,36 +2,44 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Facades\HookAction;
 
 class PageController extends BackendController
 {
+    protected $page;
+    
     public function callAction($method, $parameters)
     {
-        $callAction = parent::callAction($method, $parameters);
-
-        $this->findPageOrFail();
-
-        return $callAction;
+        $this->page = $this->findPageOrFail();
+    
+        return parent::callAction($method, $parameters);
     }
-
-    protected function getPageSlug()
-    {
-        $slug = explode('/', Route::getCurrentRoute()->uri)[1];
-
-        return $slug;
-    }
-
-    protected function findPageOrFail()
+    
+    /**
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    protected function findPageOrFail() : Collection
     {
         $page = HookAction::getAdminPages($this->getPageSlug());
-
         if (empty($page)) {
             abort(404);
         }
-
+        
+        if (is_array($page)) {
+            abort(404);
+        }
+        
         return $page;
+    }
+    
+    protected function getPageSlug()
+    {
+        $slugs = explode('/', Route::getCurrentRoute()->uri);
+        unset($slugs[0]);
+        return implode('.', $slugs);
     }
 }
