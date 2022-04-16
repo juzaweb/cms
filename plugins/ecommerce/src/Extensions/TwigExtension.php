@@ -28,6 +28,7 @@ class TwigExtension extends AbstractExtension
         return [
             new TwigFunction('ecom_get_cart_items', 'ecom_get_cart_items'),
             new TwigFunction('ecom_get_payment_methods', 'ecom_get_payment_methods'),
+            new TwigFunction('ecom_get_cart', 'ecom_get_cart'),
         ];
     }
 }

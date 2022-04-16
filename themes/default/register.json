@@ -1,8 +1,7 @@
 {
     "styles": {
         "js": [
-            "assets/js/index.js",
-            "jw-styles/plugins/ecommerce/assets/js/frontend-support.min.js"
+            "assets/js/index.js"
         ],
         "css": [
             "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,400&display=swap",

@@ -12,7 +12,7 @@ namespace Juzaweb\Ecommerce\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ProductVariantCollectionResource extends ResourceCollection
+class CartItemCollectionResource extends ResourceCollection
 {
     public function toArray($request)
     {
@@ -22,14 +22,16 @@ class ProductVariantCollectionResource extends ResourceCollection
                     'sku_code' => $item->sku_code,
                     'barcode' => $item->barcode,
                     'title' => $item->title,
-                    'thumbnail' => $item->thumbnail,
+                    'thumbnail' => upload_url($item->thumbnail),
                     'description' => $item->description,
                     'names' => $item->names,
                     'images' => $item->images,
-                    'price' => $item->sku_code,
+                    'price' => $item->price,
                     'compare_price' => $item->compare_price,
                     'stock' => $item->stock,
                     'type' => $item->type,
+                    'line_price' => $item->line_price,
+                    'quantity' => $item->quantity,
                 ];
             }
         )->toArray();

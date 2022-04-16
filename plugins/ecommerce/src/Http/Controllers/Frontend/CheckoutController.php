@@ -12,6 +12,7 @@ namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
@@ -38,13 +39,18 @@ class CheckoutController extends FrontendController
             );
         }
         
+        $paymentMethod = PaymentMethod::find($request->input('payment_method_id'));
+        
         DB::beginTransaction();
         try {
             if (empty($jw_user)) {
+                $password = Hash::make(Str::random());
+                
                 $jw_user = User::create(
                     [
                         'name' => $request->input('name'),
                         'email' => $request->input('email'),
+                        'password' => $password,
                     ]
                 );
             }
@@ -73,6 +79,7 @@ class CheckoutController extends FrontendController
             $order->name = $jw_user->name;
             $order->phone = $jw_user->phone;
             $order->email = $jw_user->email;
+            $order->payment_method_name = $paymentMethod->name;
             $order->save();
             DB::commit();
         } catch (\Exception $e) {

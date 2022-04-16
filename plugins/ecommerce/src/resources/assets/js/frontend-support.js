@@ -21,9 +21,20 @@ function removeItemCart(variantId) {
         dataType: 'json',
         async: false,
         data: {
-            variant_id: variantId,
-            quantity: quantity,
+            variant_id: variantId
         }
+    }).responseText;
+    
+    return JSON.parse(res);
+}
+
+function removeCart() {
+    let res = $.ajax({
+        type: 'DELETE',
+        url: jwdata.base_url + '/ajax/cart/remove',
+        dataType: 'json',
+        async: false,
+        data: {}
     }).responseText;
     
     return JSON.parse(res);

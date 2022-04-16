@@ -110,7 +110,14 @@ class DbCart implements CartInterface
                     ->pluck('variant_id')
                     ->toArray()
             )
-            ->get();
+            ->get()
+            ->map(
+                function ($item) use ($cart) {
+                    $item->quantity = $cart->items[$item->id]['quantity'];
+                    $item->line_price = $item->price * $item->quantity;
+                    return $item;
+                }
+            );
         
         return $variants;
     }

@@ -77,21 +77,21 @@
                             <table class="product-table">
                                 <tbody>
 
-                            {% set items = ecom_get_cart_items() %}
+                            {% set cart = ecom_get_cart() %}
 
-                            {% for item in items %}
+                            {% for item in cart.items %}
                                 <tr class="product product-has-image clearfix">
                                     <td>
                                         <div class="product-thumbnail">
                                             <div class="product-thumbnail__wrapper">
-                                                <img src="{{ upload_url(item.image) }}" class="product-thumbnail__image" alt="" />
+                                                <img src="{{ item.thumbnail }}" class="product-thumbnail__image" alt="" />
                                             </div>
                                             <span class="product-thumbnail__quantity" aria-hidden="true">{{ item.quantity }}</span>
                                         </div>
                                     </td>
                                     <td class="product-info">
                                         <span class="product-info-name">
-                                            {{ item.name }}
+                                            {{ item.title }}
                                         </span>
                                     </td>
 
