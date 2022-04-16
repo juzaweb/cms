@@ -26,3 +26,10 @@ mix.combine(
     ],
     `${basePublish}/js/checkout.min.js`
 );
+
+mix.combine(
+    [
+            baseAsset + '/js/frontend-support.js',
+    ],
+    `${basePublish}/js/frontend-support.min.js`
+);

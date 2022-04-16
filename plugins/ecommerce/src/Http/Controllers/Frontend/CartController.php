@@ -11,12 +11,14 @@
 namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\Ecommerce\Http\Requests\AddToCartRequest;
 use Juzaweb\Ecommerce\Http\Requests\BulkUpdateCartRequest;
 use Juzaweb\Ecommerce\Http\Requests\RemoveItemCartRequest;
-use Juzaweb\Ecommerce\Models\ProductVariant;
+use Juzaweb\Ecommerce\Models\Cart;
 use Juzaweb\Ecommerce\Supports\CartInterface;
 
 class CartController extends FrontendController
@@ -40,11 +42,9 @@ class CartController extends FrontendController
             );
         }
         
-        return $this->success(
-            [
-                'message' => __('Add to cart successfully.'),
-                'cart' => $cart,
-            ]
+        return $this->responseCartWithCookie(
+            $cart,
+            'Add to cart successfully.'
         );
     }
     
@@ -66,11 +66,9 @@ class CartController extends FrontendController
             );
         }
     
-        return $this->success(
-            [
-                'message' => __('Remove item cart successfully.'),
-                'cart' => $cart,
-            ]
+        return $this->responseCartWithCookie(
+            $cart,
+            'Remove item cart successfully.'
         );
     }
     
@@ -93,13 +91,8 @@ class CartController extends FrontendController
                 ]
             );
         }
-        
-        return $this->success(
-            [
-                'message' => __('Add to cart successfully.'),
-                'cart' => $cart,
-            ]
-        );
+    
+        return $this->responseCartWithCookie($cart, 'Add to cart successfully.');
     }
     
     public function remove(CartInterface $cart)
@@ -157,5 +150,26 @@ class CartController extends FrontendController
                 'items' => $items
             ]
         );
+    }
+    
+    protected function responseCartWithCookie(Cart $cart, string $message)
+    {
+        $cookie = Cookie::make('jw_cart', $cart->code, 43200);
+    
+        return Response::make()
+            ->withCookie($cookie)
+            ->setContent(
+                response()
+                    ->json(
+                        [
+                            'status' => true,
+                            'data' => [
+                                'cart' => $cart,
+                                'message' => __($message),
+                            ],
+                        ]
+                    )
+                    ->getContent()
+            );
     }
 }

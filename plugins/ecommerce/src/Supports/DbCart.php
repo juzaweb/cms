@@ -91,7 +91,6 @@ class DbCart implements CartInterface
         $cart = Cart::firstOrNew(['code' => $cartCode]);
         if (empty($cart->code)) {
             $cart->code = Str::uuid()->toString();
-            Cookie::queue('jw_cart', $cartCode, time() + 2592000);
         }
         
         if ($jw_user) {

@@ -6,31 +6,23 @@
     <script src="{{ $script->get('src') }}?v={{ $script->get('ver') }}"></script>
 @endforeach
 
+<script>
+    let jwdata = {
+        base_url: "{{ url('/') }}"
+    };
+</script>
+
+@if($googleAnalytics)
 <script async src="https://www.googletagmanager.com/gtag/js"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    @if($gtag = config('app.site_gtag'))
-    @php
-    $domain = request()->getHost();
-    @endphp
-    gtag('config', '{{ $gtag }}', {
-        @if($domain != config('app.domain'))
-        'linker': {
-            'domains': ['juzaweb.com']
-        }
-        @endif
-    });
-
-    gtag('event', 'jw_page_view', {'jw_domain': '{{ $domain }}'});
-    @endif
-
-    @if($googleAnalytics)
     gtag('config', '{{ $googleAnalytics }}');
-    @endif
+
 </script>
+@endif
 
 @if($fbAppId)
     <div id="fb-root"></div>
