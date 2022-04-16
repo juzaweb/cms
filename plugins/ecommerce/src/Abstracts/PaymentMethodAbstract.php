@@ -27,8 +27,18 @@ abstract class PaymentMethodAbstract
         return $this->redirect;
     }
     
+    public function redirectUrl(): string
+    {
+        return null;
+    }
+    
     public function getMessage(): string
     {
         return __('Thank you for your order.');
+    }
+    
+    protected function setRedirect($redirect)
+    {
+        $this->redirect = $redirect;
     }
 }

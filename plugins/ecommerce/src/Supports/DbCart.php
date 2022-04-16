@@ -78,7 +78,7 @@ class DbCart implements CartInterface
     public function remove(): bool
     {
         $cart = $this->getCurrentCart();
-        Cookie::forget('jw_cart');
+        Cookie::queue(Cookie::forget('jw_cart'));
         $cart->delete();
         return true;
     }

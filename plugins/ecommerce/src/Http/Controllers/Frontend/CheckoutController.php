@@ -48,17 +48,22 @@ class CheckoutController extends FrontendController
         
         $paymentMethod = $newOrder->paymentMethod;
         
-        $payment = Payment::make($paymentMethod);
+        try {
+            $payment = Payment::make($paymentMethod);
     
-        $response = $payment->purchase(
-            [
-                'amount' => $newOrder->total,
-                'currency' => get_config('ecom_currency', 'USD'),
-                'cancelUrl' => route('ajax', ['payment/cancel']),
-                'returnUrl' => route('ajax', ['payment/completed']),
-            ]
-        );
-        
+            $response = $payment->purchase(
+                [
+                    'amount' => $newOrder->total,
+                    'currency' => get_config('ecom_currency', 'USD'),
+                    'cancelUrl' => route('ajax', ['payment/cancel']),
+                    'returnUrl' => route('ajax', ['payment/completed']),
+                ]
+            );
+        } catch (\Exception $e) {
+            report($e);
+            return $this->error($e->getMessage());
+        }
+    
         if ($response->isRedirect()) {
             $redirect = $response->redirectUrl();
         } else {

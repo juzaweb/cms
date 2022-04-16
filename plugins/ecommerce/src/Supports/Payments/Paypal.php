@@ -28,15 +28,10 @@ class Paypal extends PaymentMethodAbstract implements PaymentMethodInterface
         );
     
         $response = $gateway->purchase($data)->send();
-    
-        $this->redirect = $response->isRedirect();
+        dd($response->getData());
+        $this->setRedirect($response->isRedirect());
         $this->redirect = $response->getData();
     
         return $this;
-    }
-    
-    public function redirectUrl(): string
-    {
-        // TODO: Implement redirect() method.
     }
 }

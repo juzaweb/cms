@@ -20,11 +20,6 @@ class Cod extends PaymentMethodAbstract implements PaymentMethodInterface
         return false;
     }
     
-    public function redirectUrl(): string
-    {
-        // TODO: Implement redirect() method.
-    }
-    
     public function purchase(array $data): PaymentMethodInterface
     {
         return $this;
