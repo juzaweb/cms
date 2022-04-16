@@ -11,21 +11,42 @@
 namespace Juzaweb\Ecommerce\Tests\Feature;
 
 use Illuminate\Support\Arr;
+use Juzaweb\Ecommerce\Models\ProductVariant;
 use Juzaweb\Tests\TestCase;
 
 class CartTest extends TestCase
 {
     public function testAddToCart()
     {
-        $response = $this->json('POST', 'ajax/cart/add-to-cart', ['variant_id' => 1, 'quantity' => 1]);
+        $variants = ProductVariant::whereHas(
+            'product',
+            function ($q) {
+                $q->wherePublish();
+            }
+        )
+        ->limit(3)
+        ->get();
         
-        $response->assertStatus(200);
-        
-        $result = json_decode($response->getContent(), true);
-        
-        $this->assertDatabaseHas(
-            'carts',
-            ['code' => Arr::get($result, 'data.cart.code')]
-        );
+        foreach ($variants as $variant) {
+            $response = $this->json(
+                'POST',
+                'ajax/cart/add-to-cart',
+                [
+                    'variant_id' => $variant->id,
+                    'quantity' => random_int(10, 100),
+                ]
+            );
+    
+            $response->assertStatus(200);
+            
+            $result = json_decode($response->getContent(), true);
+    
+            $this->assertTrue($result['status']);
+    
+            $this->assertDatabaseHas(
+                'carts',
+                ['code' => Arr::get($result, 'data.cart.code')]
+            );
+        }
     }
 }

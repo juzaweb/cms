@@ -11,18 +11,72 @@
 namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\Ecommerce\Http\Requests\CheckoutRequest;
+use Juzaweb\Ecommerce\Models\Order;
 use Juzaweb\Ecommerce\Models\PaymentMethod;
+use Juzaweb\Ecommerce\Supports\CartInterface;
 use Omnipay\Omnipay;
 
 class CheckoutController extends FrontendController
 {
-    public function checkout(Request $request)
+    public function checkout(CartInterface $cart, CheckoutRequest $request)
     {
-        //
+        global $jw_user;
         
-        $paymentMethod = PaymentMethod::find(1);
+        $items = $cart->getCartItems();
+        if (empty($items)) {
+            return $this->error(
+                [
+                    'message' => __('Cart is empty.'),
+                ]
+            );
+        }
+        
+        DB::beginTransaction();
+        try {
+            if (empty($jw_user)) {
+                $jw_user = User::create(
+                    [
+                        'name' => $request->input('name'),
+                        'email' => $request->input('email'),
+                    ]
+                );
+            }
+            
+            $order = new Order();
+            $order->fill(
+                $request->except(
+                    [
+                        'code',
+                        'payment_status',
+                        'delivery_status',
+                        'payment_method_name',
+                        'user_id',
+                        'total_price',
+                        'total',
+                        'quantity',
+                    ]
+                )
+            );
+            
+            $order->code = Str::uuid()->toString();
+            $order->user_id = $jw_user->id;
+            $order->total_price = $items->sum('price');
+            $order->total = $order->total_price;
+            $order->quantity = $items->sum('quantity');
+            $order->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        
+        $paymentMethod = $order->paymentMethod;
         
         $response = $this->getPaymentResponse($paymentMethod);
     

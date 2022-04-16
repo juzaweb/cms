@@ -75,13 +75,13 @@ class ProductVariant extends Model
 
     public static function findByProduct($productId)
     {
-        return self::where('product_id', '=', $productId)
+        return self::where('post_id', '=', $productId)
             ->first();
     }
 
     public function product()
     {
-        return $this->belongsTo(Post::class, 'product_id', 'id');
+        return $this->belongsTo(Post::class, 'post_id', 'id');
     }
 
     public function attributes()

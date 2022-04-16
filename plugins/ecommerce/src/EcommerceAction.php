@@ -37,6 +37,13 @@ class EcommerceAction extends Action
             Action::INIT_ACTION,
             [$this, 'registerConfigs']
         );
+        
+        $this->addAction(
+            "post_type.products.after_save",
+            [$this, 'saveDataProduct'],
+            20,
+            2
+        );
     
         $this->addFilter(
             'theme.get_view_page',
@@ -83,7 +90,7 @@ class EcommerceAction extends Action
                     'images' => [
                         'type' => 'images',
                         'visible' => true,
-                    ],
+                    ]/*,
                     'quantity' => [
                         'type' => 'text',
                         'visible' => true,
@@ -95,7 +102,7 @@ class EcommerceAction extends Action
                     'disable_out_of_stock' => [
                         'type' => 'text',
                         'visible' => true,
-                    ]
+                    ]*/
                 ]
             ]
         );
@@ -226,8 +233,8 @@ class EcommerceAction extends Action
         $variantData = $data['meta'];
         $variantData['title'] = 'Default';
         $variantData['names'] = ['Default'];
-        $variantData['product_id'] = $model->id;
-    
+        $variantData['post_id'] = $model->id;
+        
         ProductVariant::updateOrCreate(
             ['id' => $variant->id ?? 0],
             $variantData

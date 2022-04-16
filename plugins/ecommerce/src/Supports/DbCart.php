@@ -11,6 +11,8 @@
 namespace Juzaweb\Ecommerce\Supports;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Juzaweb\Ecommerce\Models\Cart;
 use Juzaweb\Ecommerce\Models\ProductVariant;
 use Illuminate\Support\Facades\Cookie;
@@ -21,15 +23,17 @@ class DbCart implements CartInterface
     {
         $cart = $this->getCurrentCart();
         $variant = ProductVariant::find($variantId);
-        if ($variant) {
+        if (empty($variant)) {
             return $cart;
         }
         
-        $cart->items[$variantId] = [
+        $items = $cart->items;
+        $items[$variantId] = [
             'variant_id' => $variantId,
             'quantity' => $quantity,
         ];
         
+        $cart->items = $items;
         $cart->save();
         return $cart;
     }
@@ -38,15 +42,18 @@ class DbCart implements CartInterface
     {
         $cart = $this->getCurrentCart();
         $variantIds = collect($items)->pluck('variant_id')->toArray();
-        $variants = ProductVariant::whereIn('id', $variantIds)->get()->keyBy('id');
-        
+        $variants = ProductVariant::whereIn('id', $variantIds)
+            ->get()
+            ->keyBy('id');
+    
+        $items = $cart->items;
         foreach ($items as $item) {
             $variant = $variants->get($item['variant_id']);
             if (empty($variant)) {
                 continue;
             }
-            
-            $cart->items[$variant->id] = Arr::only(
+    
+            $items[$variant->id] = Arr::only(
                 $item,
                 [
                     'variant_id',
@@ -54,7 +61,8 @@ class DbCart implements CartInterface
                 ]
             );
         }
-        
+    
+        $cart->items = $items;
         $cart->save();
         return $cart;
     }
@@ -77,9 +85,34 @@ class DbCart implements CartInterface
     
     public function getCurrentCart() : Cart
     {
+        global $jw_user;
+        
         $cartCode = Cookie::get('jw_cart');
         $cart = Cart::firstOrNew(['code' => $cartCode]);
-        $cart->load('user');
+        if (empty($cart->code)) {
+            $cart->code = Str::uuid()->toString();
+            Cookie::queue('jw_cart', $cartCode, time() + 2592000);
+        }
+        
+        if ($jw_user) {
+            $cart->user_id = $jw_user->id;
+        }
+        
         return $cart;
+    }
+    
+    public function getCartItems() : Collection
+    {
+        $cart = $this->getCurrentCart();
+        $variants = ProductVariant::with(['product'])
+            ->whereIn(
+                'id',
+                collect($cart->items)
+                    ->pluck('variant_id')
+                    ->toArray()
+            )
+            ->get();
+        
+        return $variants;
     }
 }

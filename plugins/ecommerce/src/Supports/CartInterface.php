@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Ecommerce\Supports;
 
+use Illuminate\Support\Collection;
 use Juzaweb\Ecommerce\Models\Cart as CartModel;
 
 interface CartInterface
@@ -23,4 +24,6 @@ interface CartInterface
     public function getCurrentCart() : CartModel;
     
     public function remove() : bool;
+    
+    public function getCartItems() : Collection;
 }

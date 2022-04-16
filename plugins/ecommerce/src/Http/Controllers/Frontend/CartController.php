@@ -128,14 +128,8 @@ class CartController extends FrontendController
     
     public function getCartItems(CartInterface $cart)
     {
-        $cart = $cart->getCurrentCart();
-        $variants = ProductVariant::whereIn(
-            'id',
-            collect($cart->items)
-                ->pluck('variant_id')
-                ->toArray()
-        )
-            ->get()
+        $model = $cart->getCurrentCart();
+        $items = $cart->getCartItems()
             ->map(
                 function ($item) {
                     return Arr::only(
@@ -159,8 +153,8 @@ class CartController extends FrontendController
         
         return response()->json(
             [
-                'code' => $cart->code,
-                'items' => $variants
+                'code' => $model->code,
+                'items' => $items
             ]
         );
     }

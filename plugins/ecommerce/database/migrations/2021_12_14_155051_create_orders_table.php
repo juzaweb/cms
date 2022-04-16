@@ -13,9 +13,8 @@ class CreateOrdersTable extends Migration
             'orders',
             function (Blueprint $table) {
                 $table->id();
-                $table->uuid('key')->unique();
-                $table->string('code', 10)->unique();
-                $table->string('name', 250);
+                $table->uuid('code')->unique();
+                $table->string('name', 150);
                 $table->string('phone', 50)->nullable();
                 $table->string('email', 150)->nullable();
                 $table->text('address')->nullable();
