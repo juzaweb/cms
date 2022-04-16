@@ -11,13 +11,13 @@
 namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Events\RegisterSuccessful;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\Ecommerce\Events\OrderSuccess;
 use Juzaweb\Ecommerce\Http\Requests\CheckoutRequest;
 use Juzaweb\Ecommerce\Supports\CartInterface;
 use Juzaweb\Ecommerce\Supports\OrderInterface;
@@ -47,8 +47,8 @@ class CheckoutController extends FrontendController
         try {
             if (empty($jw_user)) {
                 $password = Hash::make(Str::random());
-        
-                $user = User::create(
+    
+                $jw_user = User::create(
                     [
                         'name' => $request->get('name'),
                         'email' => $request->get('email'),
@@ -56,16 +56,18 @@ class CheckoutController extends FrontendController
                     ]
                 );
                 
-                event(new RegisterSuccessful($user));
+                event(new RegisterSuccessful($jw_user));
             }
             
-            $newOrder = $order->createByCart($cart, $user, $request->all());
+            $newOrder = $order->createByCart($cart, $jw_user, $request->all());
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             report($e);
             return $this->error($e->getMessage());
         }
+        
+        event(new OrderSuccess($newOrder, $jw_user));
         
         $paymentMethod = $newOrder->paymentMethod;
         
