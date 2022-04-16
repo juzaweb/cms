@@ -11,6 +11,7 @@ use Juzaweb\Backend\Actions\PermissionAction;
 use Juzaweb\Backend\Actions\SocialLoginAction;
 use Juzaweb\Backend\Actions\ThemeAction;
 use Juzaweb\Backend\Actions\ToolAction;
+use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
 use Juzaweb\Backend\Commands\FindTransCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Commands\TransFromEnglish;
@@ -57,6 +58,7 @@ class BackendServiceProvider extends ServiceProvider
                 PermissionGenerateCommand::class,
                 FindTransCommand::class,
                 TransFromEnglish::class,
+                EmailTemplateGenerateCommand::class,
             ]
         );
     }

@@ -18,5 +18,7 @@ interface OrderInterface
 {
     public function createByCart(CartInterface $cart, User $user, array $data) : Order;
     
+    public function createByItems(array $data, array $items, User $user): Order;
+    
     public function getCollectionItems(array $items): Collection;
 }

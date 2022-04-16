@@ -1,0 +1,7 @@
+{
+    "subject": "Verify your account",
+    "params": {
+        "name": "Your Name",
+        "verifyUrl": "Url verify account"
+    }
+}
