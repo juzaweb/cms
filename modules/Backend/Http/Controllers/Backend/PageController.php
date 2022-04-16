@@ -3,9 +3,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Facades\HookAction;
 
@@ -20,6 +18,10 @@ class PageController extends BackendController
         return parent::callAction($method, $parameters);
     }
     
+    /**
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
     protected function findPageOrFail() : Collection
     {
         $page = HookAction::getAdminPages($this->getPageSlug());

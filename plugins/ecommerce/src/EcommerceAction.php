@@ -145,7 +145,6 @@ class EcommerceAction extends Action
             'ecommerce.settings',
             [
                 'title' => trans('ecom::content.setting'),
-                'callback' => [SettingController::class, 'index'],
                 'menu' => [
                     'icon' => 'fa fa-shopping-cart',
                     'position' => 2,
@@ -158,8 +157,6 @@ class EcommerceAction extends Action
             'ecommerce.payment-methods',
             [
                 'title' => trans('ecom::content.payment_methods'),
-                'callback' => PaymentMethodController::class,
-                'resource' => true,
                 'menu' => [
                     'icon' => 'fa fa-credit-card',
                     'position' => 2,
@@ -172,8 +169,6 @@ class EcommerceAction extends Action
             'ecommerce.inventories',
             [
                 'title' => trans('ecom::content.inventories'),
-                'callback' => InventoryController::class,
-                'resource' => true,
                 'menu' => [
                     'icon' => 'fa fa-indent',
                     'position' => 3,
