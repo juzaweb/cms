@@ -13,10 +13,10 @@ use Juzaweb\Ecommerce\Http\Controllers\Backend\PaymentMethodController;
 use Juzaweb\Ecommerce\Http\Controllers\Backend\SettingController;
 use Juzaweb\Ecommerce\Http\Controllers\Backend\VariantController;
 
-Route::get('settings', [SettingController::class, 'index'])->name('admin.ecommerce.setting');
+Route::get('ecommerce/settings', [SettingController::class, 'index'])->name('admin.ecommerce.setting');
 
 Route::jwResource(
-    'variants',
+    'ecommerce/variants',
     VariantController::class,
     [
         'name' => 'variants'
@@ -24,7 +24,7 @@ Route::jwResource(
 );
 
 Route::jwResource(
-    'payment-methods',
+    'ecommerce/payment-methods',
     PaymentMethodController::class,
     [
         'name' => 'payment_methods'
@@ -32,7 +32,7 @@ Route::jwResource(
 );
 
 Route::jwResource(
-    'inventories',
+    'ecommerce/inventories',
     InventoryController::class,
     [
         'name' => 'inventories'

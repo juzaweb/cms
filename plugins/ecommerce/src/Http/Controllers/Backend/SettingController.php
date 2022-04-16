@@ -10,8 +10,11 @@ class SettingController extends BackendController
     {
         $title = trans('ecom::content.setting');
 
-        return view('ecom::backend.setting.index', compact(
-            'title'
-        ));
+        return view(
+            'ecom::backend.setting.index',
+            compact(
+                'title'
+            )
+        );
     }
 }

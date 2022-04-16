@@ -326,20 +326,12 @@ trait HookActionRegister
 
         $args = array_merge($defaults, $args);
         $args = new Collection($args);
-
-        if ($args->get('resource', false)) {
-            $this->addAdminMenu(
-                $args['title'],
-                "managements.{$key}",
-                $args['menu']
-            );
-        } else {
-            $this->addAdminMenu(
-                $args['title'],
-                "pages.{$key}",
-                $args['menu']
-            );
-        }
+    
+        $this->addAdminMenu(
+            $args['title'],
+            $key,
+            $args['menu']
+        );
 
         GlobalData::set('admin_pages.' . $key, $args);
     }

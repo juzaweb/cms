@@ -5,6 +5,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Facades\HookAction;
 
@@ -12,17 +13,19 @@ class PageController extends BackendController
 {
     protected $page;
     
-    public function __invoke($slug)
+    public function callAction($method, $parameters)
     {
-        $this->page = $this->findPageOrFail($slug);
+        $this->page = $this->findPageOrFail($parameters['slug']);
         
         $callback = $this->page->get('callback');
+    
+        do_action(Action::BACKEND_CALL_ACTION, $method, $parameters);
         
-        if (is_string($callback[0])) {
+        if (is_array($callback) && is_string($callback[0])) {
             return App::call([app($callback[0]), $callback[1]]);
         }
-        
-        return App::call($callback);
+    
+        return App::call([app($callback), $method], $parameters);
     }
     
     protected function findPageOrFail(string $slug) : Collection

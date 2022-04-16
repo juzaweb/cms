@@ -11,6 +11,7 @@
 namespace Juzaweb\Ecommerce;
 
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\Ecommerce\Http\Controllers\Backend\InventoryController;
 use Juzaweb\Ecommerce\Http\Controllers\Backend\PaymentMethodController;
 use Juzaweb\Ecommerce\Http\Controllers\Backend\SettingController;
 use Juzaweb\Ecommerce\Http\Controllers\Frontend\CartController;
@@ -84,7 +85,7 @@ class EcommerceAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-shopping-cart',
                     'position' => 2,
-                    'parent' => 'pages.ecommerce'
+                    'parent' => 'ecommerce'
                 ]
             ]
         );
@@ -98,7 +99,7 @@ class EcommerceAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-credit-card',
                     'position' => 2,
-                    'parent' => 'pages.ecommerce'
+                    'parent' => 'ecommerce'
                 ]
             ]
         );
@@ -107,10 +108,12 @@ class EcommerceAction extends Action
             'ecommerce.inventories',
             [
                 'title' => trans('ecom::content.inventories'),
+                'callback' => InventoryController::class,
+                'resource' => true,
                 'menu' => [
                     'icon' => 'fa fa-indent',
                     'position' => 3,
-                    'parent' => 'pages.ecommerce'
+                    'parent' => 'ecommerce'
                 ]
             ]
         );
@@ -122,7 +125,7 @@ class EcommerceAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-indent',
                     'position' => 3,
-                    'parent' => 'pages.ecommerce',
+                    'parent' => 'ecommerce',
                 ]
             ]
         );
