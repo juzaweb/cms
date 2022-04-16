@@ -86,7 +86,7 @@ class DbOrder implements OrderInterface
         $order->fill($filldata);
         $order->code = Str::uuid()->toString();
         $order->user_id = $user->id;
-        $order->total_price = $items->sum('price');
+        $order->total_price = $items->sum('line_price');
         $order->total = $order->total_price;
         $order->quantity = $items->sum('quantity');
         $order->name = $user->name;
@@ -94,6 +94,21 @@ class DbOrder implements OrderInterface
         $order->email = $user->email;
         $order->payment_method_name = $paymentMethod->name;
         $order->save();
+        
+        foreach ($items as $item) {
+            /**
+             * @var ProductVariant $item
+             */
+            $order->orderItems()->create(
+                [
+                    'price' => $item->price,
+                    'compare_price' => $item->compare_price,
+                    'sku_code' => $item->sku_code,
+                    'barcode' => $item->barcode,
+                ]
+            );
+        }
+        
         return $order;
     }
     

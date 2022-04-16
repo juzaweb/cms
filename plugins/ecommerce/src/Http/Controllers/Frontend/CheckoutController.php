@@ -108,7 +108,22 @@ class CheckoutController extends FrontendController
     
     public function completed(Request $request)
     {
-        
+        $paypal = new PayPal;
+    
+        $response = $paypal->complete(
+            [
+                'amount' => $paypal->formatAmount($order->amount),
+                'transactionId' => $order->id,
+                'currency' => 'USD',
+                'cancelUrl' => $paypal->getCancelUrl($order),
+                'returnUrl' => $paypal->getReturnUrl($order),
+                'notifyUrl' => $paypal->getNotifyUrl($order),
+            ]
+        );
+    
+        if ($response->isSuccessful()) {
+            $order->update(['transaction_id' => $response->getTransactionReference()]);
+        }
         
         return redirect()->to($this->getThanksPageRedirect());
     }
