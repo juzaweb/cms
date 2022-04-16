@@ -12,6 +12,16 @@ namespace Juzaweb\Ecommerce\Models;
 
 use Juzaweb\CMS\Models\Model;
 
+/**
+ * Juzaweb\Ecommerce\Models\VariantName
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Ecommerce\Models\VariantNameItem[] $items
+ * @property-read int|null $items_count
+ * @method static \Illuminate\Database\Eloquent\Builder|VariantName newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|VariantName newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|VariantName query()
+ * @mixin \Eloquent
+ */
 class VariantName extends Model
 {
     protected $table = 'variant_names';

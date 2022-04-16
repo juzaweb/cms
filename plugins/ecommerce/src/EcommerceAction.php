@@ -11,7 +11,12 @@
 namespace Juzaweb\Ecommerce;
 
 use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\Ecommerce\Models\Variant;
+use Juzaweb\Ecommerce\Http\Controllers\Backend\InventoryController;
+use Juzaweb\Ecommerce\Http\Controllers\Backend\PaymentMethodController;
+use Juzaweb\Ecommerce\Http\Controllers\Backend\SettingController;
+use Juzaweb\Ecommerce\Http\Controllers\Frontend\CartController;
+use Juzaweb\Ecommerce\Http\Controllers\Frontend\CheckoutController;
+use Juzaweb\Ecommerce\Models\ProductVariant;
 use Juzaweb\Backend\Facades\HookAction;
 
 class EcommerceAction extends Action
@@ -24,25 +29,32 @@ class EcommerceAction extends Action
         );
 
         $this->addAction(
-            Action::BACKEND_CALL_ACTION,
+            Action::BACKEND_INIT,
             [$this, 'addAdminMenu']
         );
-
+    
         $this->addAction(
-            str_replace('{name}', 'products', Action::POST_FORM_LEFT_ACTION),
-            [$this, 'addFormProduct']
+            Action::INIT_ACTION,
+            [$this, 'registerConfigs']
         );
-
+        
         $this->addAction(
-            'post_type.products.after_save',
+            "post_type.products.after_save",
             [$this, 'saveDataProduct'],
             20,
             2
         );
-
+    
         $this->addFilter(
-            'post_type.products.parseDataForSave',
-            [$this, 'parseDataForSave']
+            'theme.get_view_page',
+            [$this, 'addCheckoutPage'],
+            20,
+            2
+        );
+        
+        $this->addAction(
+            Action::FRONTEND_CALL_ACTION,
+            [$this, 'registerFrontendAjax']
         );
     }
 
@@ -61,40 +73,40 @@ class EcommerceAction extends Action
                 'metas' => [
                     'price' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'compare_price' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'sku_code' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'barcode' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'images' => [
                         'type' => 'images',
-                        'visible' => false,
-                    ],
+                        'visible' => true,
+                    ]/*,
                     'quantity' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'inventory_management' => [
                         'type' => 'text',
-                        'visible' => false,
+                        'visible' => true,
                     ],
                     'disable_out_of_stock' => [
                         'type' => 'text',
-                        'visible' => false,
-                    ]
+                        'visible' => true,
+                    ]*/
                 ]
             ]
         );
-
+    
         HookAction::registerTaxonomy(
             'brands',
             'products',
@@ -103,7 +115,7 @@ class EcommerceAction extends Action
                 'menu_position' => 11,
             ]
         );
-
+    
         HookAction::registerTaxonomy(
             'vendors',
             'products',
@@ -114,61 +126,79 @@ class EcommerceAction extends Action
         );
     }
 
+    public function registerConfigs()
+    {
+        HookAction::registerConfig(
+            [
+                'ecom_checkout_page',
+                'ecom_thanks_page',
+            ]
+        );
+    }
+    
     public function addAdminMenu()
     {
-        HookAction::addAdminMenu(
-            trans('ecom::content.ecommerce'),
+        HookAction::registerAdminPage(
             'ecommerce',
             [
-                'position' => 12,
+                'title' => trans('ecom::content.ecommerce'),
+                'menu' => [
+                    'icon' => 'fa fa-shopping-cart',
+                    'position' => 50,
+                ]
             ]
         );
-
-        HookAction::addAdminMenu(
-            trans('ecom::content.orders'),
-            'ecommerce.orders',
+        
+        HookAction::registerAdminPage(
+            'ecommerce.settings',
             [
-                'position' => 1,
-                'parent' => 'ecommerce',
+                'title' => trans('ecom::content.setting'),
+                'menu' => [
+                    'icon' => 'fa fa-shopping-cart',
+                    'position' => 2,
+                    'parent' => 'ecommerce'
+                ]
             ]
         );
-
-        /*HookAction::addAdminMenu(
-            trans('ecom::content.inventories'),
-            'ecommerce.inventories',
-            [
-                'position' => 2,
-                'parent' => 'ecommerce',
-            ]
-        );*/
-
-        HookAction::addAdminMenu(
-            trans('ecom::content.payment_methods'),
+        
+        HookAction::registerAdminPage(
             'ecommerce.payment-methods',
             [
-                'position' => 3,
-                'parent' => 'ecommerce',
+                'title' => trans('ecom::content.payment_methods'),
+                'menu' => [
+                    'icon' => 'fa fa-credit-card',
+                    'position' => 2,
+                    'parent' => 'ecommerce'
+                ]
             ]
         );
-
-        HookAction::addAdminMenu(
-            trans('ecom::content.setting'),
-            'ecommerce.setting',
+        
+        HookAction::registerAdminPage(
+            'ecommerce.inventories',
             [
-                'position' => 3,
-                'parent' => 'ecommerce',
+                'title' => trans('ecom::content.inventories'),
+                'menu' => [
+                    'icon' => 'fa fa-indent',
+                    'position' => 3,
+                    'parent' => 'ecommerce'
+                ]
             ]
         );
     }
 
     public function addFormProduct($model)
     {
-        $variant = Variant::findByProduct($model->id);
+        $variant = ProductVariant::findByProduct($model->id);
 
-        echo e(view('ecom::backend.product.form', compact(
-            'variant',
-            'model'
-        )));
+        echo e(
+            view(
+                'ecom::backend.product.form',
+                compact(
+                    'variant',
+                    'model'
+                )
+            )
+        );
     }
 
     public function parseDataForSave($data)
@@ -200,15 +230,67 @@ class EcommerceAction extends Action
      */
     public function saveDataProduct($model, $data)
     {
-        $variant = Variant::findByProduct($model->id);
+        $variant = ProductVariant::findByProduct($model->id);
         $variantData = $data['meta'];
         $variantData['title'] = 'Default';
         $variantData['names'] = ['Default'];
-        $variantData['product_id'] = $model->id;
-
-        Variant::updateOrCreate(
+        $variantData['post_id'] = $model->id;
+        
+        ProductVariant::updateOrCreate(
             ['id' => $variant->id ?? 0],
             $variantData
+        );
+    }
+    
+    public function addCheckoutPage($view, $page)
+    {
+        $checkoutPage = get_config('ecom_checkout_page');
+        
+        if ($checkoutPage == $page->id) {
+            $view = 'ecom::frontend.checkout.index';
+            return $view;
+        }
+        
+        return $view;
+    }
+    
+    public function registerFrontendAjax()
+    {
+        HookAction::registerFrontendAjax(
+            'checkout',
+            [
+                'callback' => [CheckoutController::class, 'checkout'],
+                'method' => 'POST',
+            ]
+        );
+    
+        HookAction::registerFrontendAjax(
+            'cart.add-to-cart',
+            [
+                'callback' => [CartController::class, 'addToCart'],
+                'method' => 'POST',
+            ]
+        );
+    
+        HookAction::registerFrontendAjax(
+            'cart.get-items',
+            [
+                'callback' => [CartController::class, 'getCartItems'],
+            ]
+        );
+    
+        HookAction::registerFrontendAjax(
+            'payment.cancel',
+            [
+                'callback' => [CheckoutController::class, 'cancel'],
+            ]
+        );
+    
+        HookAction::registerFrontendAjax(
+            'payment.completed',
+            [
+                'callback' => [CheckoutController::class, 'cancel'],
+            ]
         );
     }
 }

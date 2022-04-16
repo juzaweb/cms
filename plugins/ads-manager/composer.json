@@ -21,5 +21,8 @@
         "psr-4": {
             "Juzaweb\\AdsManager\\": "src/"
         }
+    },
+    "require": {
+        "sokil/php-vast": "^2.1"
     }
 }

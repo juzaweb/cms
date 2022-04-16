@@ -45,7 +45,13 @@ Route::get(
 Route::get('feed', [FeedController::class, 'index'])->name('feed');
 Route::get('taxonomy/{taxonomy}/feed', [FeedController::class, 'taxonomy'])->name('feed.taxonomy');
 
-Route::match(['get', 'post'], 'ajax/{slug}', [AjaxController::class, 'ajax'])->name('ajax');
+Route::match(
+    ['get', 'post'],
+    'ajax/{slug}',
+    [AjaxController::class, 'ajax']
+)
+    ->name('ajax')
+    ->where('slug', '[a-z\-\/]+');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

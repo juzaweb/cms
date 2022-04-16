@@ -12,22 +12,17 @@ namespace Juzaweb\Ecommerce\Providers;
 
 use Juzaweb\Ecommerce\EcommerceAction;
 use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\CMS\Facades\ActionRegister;
 
 class EcommerceServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $basePath = __DIR__ . '/..';
-        $this->loadViewsFrom($basePath . '/resources/views', 'ecom');
-        $this->loadTranslationsFrom($basePath . '/resources/lang', 'ecom');
-
-        $this->registerAction([
-            EcommerceAction::class
-        ]);
+        ActionRegister::register(EcommerceAction::class);
     }
 
     public function register()
     {
-        $this->app->register(RouteServiceProvider::class);
+        //
     }
 }

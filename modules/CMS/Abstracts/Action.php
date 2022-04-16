@@ -15,6 +15,7 @@ use Juzaweb\CMS\Facades\Hook;
 abstract class Action
 {
     public const INIT_ACTION = 'juzaweb.init';
+    public const BACKEND_INIT = 'backend.init';
     public const BACKEND_CALL_ACTION = 'backend.call_action';
     public const FRONTEND_CALL_ACTION = 'frontend.call_action';
     public const FRONTEND_HEADER_ACTION = 'theme.header';

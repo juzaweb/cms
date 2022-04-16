@@ -163,7 +163,7 @@ class User extends Authenticatable
         return asset('jw-styles/juzaweb/images/avatar.png');
     }
 
-    public function subscription()
+    /*public function subscription()
     {
         return $this->hasOne(
             UserSubscription::class,
@@ -175,7 +175,7 @@ class User extends Authenticatable
     public function subscriptionHistories()
     {
         return $this->hasMany(SubscriptionHistory::class, 'user_id', 'id');
-    }
+    }*/
 
     public function isAdmin()
     {

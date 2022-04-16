@@ -30,10 +30,13 @@ class BackendController extends Controller
 
     protected function addBreadcrumb(array $item, $name = 'admin')
     {
-        add_filters($name . '_breadcrumb', function ($items) use ($item) {
-            $items[] = $item;
-
-            return $items;
-        });
+        add_filters(
+            $name . '_breadcrumb',
+            function ($items) use ($item) {
+                $items[] = $item;
+    
+                return $items;
+            }
+        );
     }
 }

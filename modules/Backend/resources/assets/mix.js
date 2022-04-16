@@ -11,7 +11,7 @@ mix.styles(
         baseAsset + '/css/page.css',
         baseAsset + '/css/customs.css',
     ],
-    `${basePublish}/css/custom.css`
+    `${basePublish}/css/custom.min.css`
 );
 
 mix.combine(
@@ -33,5 +33,5 @@ mix.combine(
         baseAsset + '/js/setting.js',
         baseAsset + '/js/page.js',
     ],
-    `${basePublish}/js/backend.js`
+    `${basePublish}/js/custom.min.js`
 );

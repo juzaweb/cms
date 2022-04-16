@@ -6,9 +6,6 @@
         "Movie plugin"
     ],
     "description": "MyMo Core Plugin help you easily create movie website. It is a powerful, flexible and User friendly movie & Video Steaming Theme with advance video contents management system. It’s easy to use & install. It has been created to provide unique experience to movie lover & movie site owner. To observe of ISP needed we have made MYMO to use as multipurpose video website. It was created to run with MyMo Theme.",
-    "require": {
-        "sokil/php-vast": "^2.1"
-    },
     "extra": {
         "laravel": {
             "providers": [
@@ -30,7 +27,7 @@
             "Juzaweb\\Movie\\": "src/"
         },
         "files": [
-          "src/Helpers/helpers.php"
+            "src/Helpers/helpers.php"
         ]
     }
 }

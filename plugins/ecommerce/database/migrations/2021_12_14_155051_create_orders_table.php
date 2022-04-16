@@ -13,9 +13,8 @@ class CreateOrdersTable extends Migration
             'orders',
             function (Blueprint $table) {
                 $table->id();
-                $table->uuid('key')->unique();
-                $table->string('code', 10)->unique();
-                $table->string('name', 250);
+                $table->uuid('code')->unique();
+                $table->string('name', 150);
                 $table->string('phone', 50)->nullable();
                 $table->string('email', 150)->nullable();
                 $table->text('address')->nullable();
@@ -30,19 +29,49 @@ class CreateOrdersTable extends Migration
                 $table->string('payment_method_name', 250);
                 $table->text('notes')->nullable();
                 $table->tinyInteger('other_address')->default(0);
-                //$table->tinyInteger('status')->default(2)->comment('0: hủy, 1: đã thanh toán, 2: chưa thanh toán');
+                $table->string('payment_status')->default('pending')->comment('pending');
+                $table->string('delivery_status')->default('pending')->comment('pending');
                 $table->unsignedBigInteger('user_id')->nullable()->index();
                 $table->timestamps();
-                $table->unique(['code']);
-
+                
                 $table->foreign('user_id')
                     ->references('id')
                     ->on('users')
                     ->onDelete('set null');
-
+                
                 $table->foreign('payment_method_id')
                     ->references('id')
                     ->on('payment_methods')
+                    ->onDelete('set null');
+            }
+        );
+    
+        Schema::create(
+            'order_items',
+            function (Blueprint $table) {
+                $table->id();
+                $table->decimal('price', 15, 2);
+                $table->decimal('compare_price', 15, 2)->nullable();
+                $table->string('sku_code', 100)->nullable()->index();
+                $table->string('barcode', 100)->nullable()->index();
+                $table->unsignedBigInteger('order_id')->index();
+                $table->unsignedBigInteger('product_id')->nullable()->index();
+                $table->unsignedBigInteger('variant_id')->nullable()->index();
+                $table->timestamps();
+            
+                $table->foreign('order_id')
+                    ->references('id')
+                    ->on('orders')
+                    ->onDelete('cascade');
+            
+                $table->foreign('product_id')
+                    ->references('id')
+                    ->on('posts')
+                    ->onDelete('set null');
+            
+                $table->foreign('variant_id')
+                    ->references('id')
+                    ->on('product_variants')
                     ->onDelete('set null');
             }
         );
@@ -50,6 +79,7 @@ class CreateOrdersTable extends Migration
     
     public function down()
     {
+        Schema::dropIfExists('order_items');
         Schema::dropIfExists('orders');
     }
 }

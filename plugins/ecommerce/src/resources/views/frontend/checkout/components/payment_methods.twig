@@ -1,0 +1,32 @@
+{% set paymentMethods = ecom_get_payment_methods() %}
+
+{% for index,paymentMethod in paymentMethods %}
+    <div class="content-box">
+
+        <div class="content-box__row">
+            <div class="radio-wrapper">
+                <div class="radio__input">
+                    <input class="input-radio" type="radio" value="{{ paymentMethod.id }}" name="payment_method_id" id="payment_method_{{ paymentMethod.id }}" data-check-id="4" bind="payment_method_id" {% if index == 0 %} checked {% endif %}>
+                </div>
+
+                <label class="radio__label" for="payment_method_{{ paymentMethod.id }}">
+                    <span class="radio__label__primary">{{ paymentMethod.name }}</span>
+                    <span class="radio__label__accessory">
+                    <ul>
+                        <li class="payment-icon-v2 payment-icon--4">
+                            <i class="fa fa-money payment-icon-fa" aria-hidden="true"></i>
+                        </li>
+                    </ul>
+                    </span>
+                </label>
+            </div>
+        </div>
+
+        <div class="radio-wrapper content-box__row content-box__row--secondary hide" id="payment-gateway-subfields-{{ paymentMethod.id }}" bind-show="payment_method_id == {{ paymentMethod.id|default(0) }}">
+            <div class="blank-slate">
+                <p>{{ paymentMethod.description }}</p>
+            </div>
+        </div>
+
+    </div>
+{% endfor %}

@@ -8,14 +8,26 @@
  * @license    MIT
  */
 
-Route::jwResource('resources/{type}-{post}', 'Backend\PostResourceController', [
-    'name' => 'post_resource'
-]);
+Route::jwResource(
+    'resources/{type}-{post}',
+    'Backend\PostResourceController',
+    [
+        'name' => 'post_resource'
+    ]
+);
 
-Route::jwResource('resources/{type}-{post}/parent/{parent}', 'Backend\ChildResourceController', [
-    'name' => 'child_resource'
-]);
+Route::jwResource(
+    'resources/{type}-{post}/parent/{parent}',
+    'Backend\ChildResourceController',
+    [
+        'name' => 'child_resource'
+    ]
+);
 
-Route::jwResource('resources/{type}', 'Backend\ResourceController', [
-    'name' => 'resource'
-]);
+Route::jwResource(
+    'resources/{type}',
+    'Backend\ResourceController',
+    [
+        'name' => 'resource'
+    ]
+);

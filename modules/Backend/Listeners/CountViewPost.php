@@ -32,10 +32,12 @@ class CountViewPost
             $event->post->increment('views');
             $event->post->save();
 
-            $model = PostView::firstOrNew([
-                'post_id' => $event->post->id,
-                'day' => date('Y-m-d'),
-            ]);
+            $model = PostView::firstOrNew(
+                [
+                    'post_id' => $event->post->id,
+                    'day' => date('Y-m-d'),
+                ]
+            );
 
             $model->views = empty($model->views) ? 1 : $model->views + 1;
             $model->save();

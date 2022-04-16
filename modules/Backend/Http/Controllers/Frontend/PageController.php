@@ -96,6 +96,8 @@ class PageController extends FrontendController
                 $view = 'theme::template-parts.single';
             }
         }
+        
+        $view = apply_filters('theme.get_view_page', $view, $page);
 
         return $view;
     }
