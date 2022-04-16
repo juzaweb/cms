@@ -44,6 +44,26 @@ class MenuAction extends Action
                 'position' => 1,
             ]
         );
+    
+        HookAction::addAdminMenu(
+            trans('cms::app.dashboard'),
+            'dashboard',
+            [
+                'icon' => 'fa fa-dashboard',
+                'position' => 1,
+                'parent' => 'dashboard',
+            ]
+        );
+    
+        HookAction::addAdminMenu(
+            trans('cms::app.updates'),
+            'updates',
+            [
+                'icon' => 'fa fa-arrow-circle-o-up',
+                'position' => 1,
+                'parent' => 'dashboard',
+            ]
+        );
 
         HookAction::addAdminMenu(
             trans('cms::app.appearance'),

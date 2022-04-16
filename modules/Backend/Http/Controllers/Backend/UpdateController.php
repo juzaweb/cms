@@ -16,6 +16,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Juzaweb\CMS\Abstracts\Plugin;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\Manager\UpdateManager;
@@ -35,9 +36,12 @@ class UpdateController extends BackendController
     {
         $title = trans('cms::app.updates');
 
-        return view('cms::backend.update.index', compact(
-            'title'
-        ));
+        return view(
+            'cms::backend.update.index',
+            compact(
+                'title'
+            )
+        );
     }
 
     public function checkUpdate()
@@ -50,12 +54,17 @@ class UpdateController extends BackendController
             $versionAvailable = $updater->getVersionAvailable();
         }
 
-        return response()->json([
-            'html' => view('cms::backend.update.form', compact(
-                'checkUpdate',
-                'versionAvailable'
-            ))->render(),
-        ]);
+        return response()->json(
+            [
+                'html' => view(
+                    'cms::backend.update.form',
+                    compact(
+                        'checkUpdate',
+                        'versionAvailable'
+                    )
+                )->render(),
+            ]
+        );
     }
 
     public function update(Request $request)
@@ -84,9 +93,11 @@ class UpdateController extends BackendController
             }
         }
 
-        return $this->success([
-            'message' => trans('cms::app.updated_successfully'),
-        ]);
+        return $this->success(
+            [
+                'message' => trans('cms::app.updated_successfully'),
+            ]
+        );
     }
 
     public function pluginDatatable()
@@ -94,28 +105,42 @@ class UpdateController extends BackendController
         $plugins = app('plugins')->all();
         $data = [];
         foreach ($plugins as $plugin) {
+            /**
+             * @var Plugin $plugin
+             */
+            
             $data[] = [
                 'code' => $plugin->get('name'),
                 'current_version' => $plugin->getVersion()
             ];
         }
 
-        $updates = $this->api->get('plugin/multi-available', [
-            'plugins' => json_encode($data),
-            'cms_version' => Version::getVersion(),
-        ]);
+        $updates = $this->api->get(
+            'plugin/multi-available',
+            [
+                'plugins' => json_encode($data),
+                'cms_version' => Version::getVersion(),
+            ]
+        );
 
         $update = collect((array) $updates)
-            ->filter(function ($item) {
-                return $item->status == true;
-            })->map(function ($item) {
-                return (array) $item;
-            })
+            ->filter(
+                function ($item) {
+                    return $item->status == true;
+                }
+            )->map(
+                function ($item) {
+                    return (array) $item;
+                }
+            )
             ->toArray();
         $updateKeys = array_keys($update);
 
         $result = [];
         foreach ($plugins as $plugin) {
+            /**
+             * @var Plugin $plugin
+             */
             if (!in_array($plugin->get('name'), $updateKeys)) {
                 continue;
             }
@@ -127,10 +152,12 @@ class UpdateController extends BackendController
             ];
         }
 
-        return response()->json([
-            'total' => count($result),
-            'rows' => $result,
-        ]);
+        return response()->json(
+            [
+                'total' => count($result),
+                'rows' => $result,
+            ]
+        );
     }
 
     public function themeDatatable()
@@ -144,18 +171,25 @@ class UpdateController extends BackendController
             ];
         }
 
-        $updates = $this->api->get('theme/multi-available', [
-            'themes' => json_encode($data),
-            'cms_version' => Version::getVersion(),
-        ]);
+        $updates = $this->api->get(
+            'theme/multi-available',
+            [
+                'themes' => json_encode($data),
+                'cms_version' => Version::getVersion(),
+            ]
+        );
 
         $update = collect((array) $updates)
-            ->filter(function ($item) {
-                return $item->status == true;
-            })
-            ->map(function ($item) {
-                return (array) $item;
-            })
+            ->filter(
+                function ($item) {
+                    return $item->status == true;
+                }
+            )
+            ->map(
+                function ($item) {
+                    return (array) $item;
+                }
+            )
             ->toArray();
 
         $updateKeys = array_keys($update);
@@ -173,9 +207,11 @@ class UpdateController extends BackendController
             ];
         }
 
-        return response()->json([
-            'total' => count($result),
-            'rows' => $result,
-        ]);
+        return response()->json(
+            [
+                'total' => count($result),
+                'rows' => $result,
+            ]
+        );
     }
 }
