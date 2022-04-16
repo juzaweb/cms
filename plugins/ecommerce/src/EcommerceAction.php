@@ -28,7 +28,7 @@ class EcommerceAction extends Action
         );
 
         $this->addAction(
-            Action::BACKEND_CALL_ACTION,
+            Action::BACKEND_INIT,
             [$this, 'addAdminMenu']
         );
     

@@ -10,38 +10,11 @@ use Juzaweb\Backend\Facades\HookAction;
 
 class PageController extends BackendController
 {
-    public function callAction($method, $parameters)
-    {
-        $callAction = parent::callAction($method, $parameters);
-
-        $this->findPageOrFail();
-
-        return $callAction;
-    }
-
-    protected function getPageSlug()
-    {
-        $slug = explode('/', Route::getCurrentRoute()->uri)[1];
-
-        return $slug;
-    }
-
-    protected function findPageOrFail()
-    {
-        $page = HookAction::getAdminPages($this->getPageSlug());
-
-        if (empty($page)) {
-            abort(404);
-        }
-
-        return $page;
-    }
-    
     protected $page;
     
-    public function router($slug)
+    public function __invoke($slug)
     {
-        $this->page = $this->findPageOrFail2($slug);
+        $this->page = $this->findPageOrFail($slug);
         
         $callback = $this->page->get('callback');
         
@@ -52,7 +25,7 @@ class PageController extends BackendController
         return App::call($callback);
     }
     
-    protected function findPageOrFail2(string $slug) : Collection
+    protected function findPageOrFail(string $slug) : Collection
     {
         $key = str_replace('/', '.', $slug);
         $page = HookAction::getAdminPages($key);

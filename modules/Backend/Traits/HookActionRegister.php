@@ -330,7 +330,7 @@ trait HookActionRegister
         if ($args->get('resource', false)) {
             $this->addAdminMenu(
                 $args['title'],
-                "resource-pages.{$key}",
+                "managements.{$key}",
                 $args['menu']
             );
         } else {

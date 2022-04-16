@@ -12,8 +12,9 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\App;
 use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\Collection;
+use Illuminate\Support\Collection;
 
 class PageResourceController extends BackendController
 {
@@ -24,12 +25,10 @@ class PageResourceController extends BackendController
         $this->page = $this->findPageOrFail($parameters['slug']);
         
         $callback = $this->page->get('callback');
+    
+        do_action(Action::BACKEND_CALL_ACTION, $method, $parameters);
         
-        if (is_string($callback[0])) {
-            return App::call([app($callback[0]), $callback[1]]);
-        }
-        
-        return App::call($callback);
+        return App::call([app($callback), $method]);
     }
     
     protected function findPageOrFail(string $slug) : Collection
