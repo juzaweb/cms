@@ -940,18 +940,18 @@ window.Juzaweb || (window.Juzaweb = {});
                     global: true,
                     data: $form.serialize(),
                     success: function (data) {
-                        if (data.success == true) {
-                            window.location.href = data.url_redirect;
+                        if (data.status == true) {
+                            window.location.href = data.data.redirect;
                         } else {
                             if (data.errors != null && data.errors.length > 0) {
-                                var html = "";
+                                let html = "";
                                 for (i = 0; i < data.errors.length; i++) {
                                     html += "<li>" + data.errors[i] + "</li>";
                                 }
                             }
+                            
                             $(".sidebar__content .has-error .help-block > ul").html(html);
                             $(".btn-checkout").button('reset');
-
                             return false;
                         }
                     }

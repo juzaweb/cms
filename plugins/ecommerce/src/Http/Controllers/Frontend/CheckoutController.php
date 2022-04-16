@@ -11,92 +11,63 @@
 namespace Juzaweb\Ecommerce\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
-use Juzaweb\CMS\Models\User;
 use Juzaweb\Ecommerce\Http\Requests\CheckoutRequest;
-use Juzaweb\Ecommerce\Models\Order;
-use Juzaweb\Ecommerce\Models\PaymentMethod;
 use Juzaweb\Ecommerce\Supports\CartInterface;
-use Omnipay\Omnipay;
+use Juzaweb\Ecommerce\Supports\OrderInterface;
+use Illuminate\Support\Facades\DB;
+use Juzaweb\Ecommerce\Supports\Payment;
 
 class CheckoutController extends FrontendController
 {
-    public function checkout(CartInterface $cart, CheckoutRequest $request)
-    {
-        global $jw_user;
+    public function checkout(
+        CartInterface $cart,
+        OrderInterface $order,
+        CheckoutRequest $request
+    ) {
+        $items = $cart->getCurrentCart()->items;
         
-        $items = $cart->getCartItems();
-        
-        if ($items->isEmpty()) {
+        if (empty($items)) {
             return $this->error(
                 [
                     'message' => __('Cart is empty.'),
                 ]
             );
         }
-        
-        $paymentMethod = PaymentMethod::find($request->input('payment_method_id'));
-        
+    
         DB::beginTransaction();
         try {
-            if (empty($jw_user)) {
-                $password = Hash::make(Str::random());
-                
-                $jw_user = User::create(
-                    [
-                        'name' => $request->input('name'),
-                        'email' => $request->input('email'),
-                        'password' => $password,
-                    ]
-                );
-            }
-            
-            $order = new Order();
-            $order->fill(
-                $request->except(
-                    [
-                        'code',
-                        'payment_status',
-                        'delivery_status',
-                        'payment_method_name',
-                        'user_id',
-                        'total_price',
-                        'total',
-                        'quantity',
-                    ]
-                )
-            );
-            
-            $order->code = Str::uuid()->toString();
-            $order->user_id = $jw_user->id;
-            $order->total_price = $items->sum('price');
-            $order->total = $order->total_price;
-            $order->quantity = $items->sum('quantity');
-            $order->name = $jw_user->name;
-            $order->phone = $jw_user->phone;
-            $order->email = $jw_user->email;
-            $order->payment_method_name = $paymentMethod->name;
-            $order->save();
+            $newOrder = $order->create($cart, $request->all());
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            report($e);
+            return $this->error($e->getMessage());
         }
         
-        $paymentMethod = $order->paymentMethod;
+        $paymentMethod = $newOrder->paymentMethod;
         
-        $response = $this->getPaymentResponse($paymentMethod);
+        $payment = Payment::make($paymentMethod);
     
+        $response = $payment->purchase(
+            [
+                'amount' => $newOrder->total,
+                'currency' => get_config('ecom_currency', 'USD'),
+                'cancelUrl' => route('ajax', ['payment/cancel']),
+                'returnUrl' => route('ajax', ['payment/completed']),
+            ]
+        );
+        
         if ($response->isRedirect()) {
-            $response->redirect();
+            $redirect = $response->redirectUrl();
+        } else {
+            $redirect = $this->getThanksPageRedirect();
         }
         
-        return redirect()->to($this->getThanksPageRedirect())->with(
+        return $this->success(
             [
+                'redirect' => $redirect,
                 'message' => $response->getMessage(),
             ]
         );
@@ -112,29 +83,6 @@ class CheckoutController extends FrontendController
         
         
         return redirect()->to($this->getThanksPageRedirect());
-    }
-    
-    protected function getPaymentResponse(PaymentMethod $paymentMethod)
-    {
-        $gateway = Omnipay::create('PayPal_Rest');
-        $gateway->initialize(
-            [
-                'clientId' => $paymentMethod->data['sandbox_client_id'],
-                'secret'   => $paymentMethod->data['sandbox_secret'],
-                'testMode' => true,
-            ]
-        );
-    
-        $response = $gateway->purchase(
-            [
-                'amount' => '10.00',
-                'currency' => 'USD',
-                'cancelUrl' => route('ajax', ['payment/cancel']),
-                'returnUrl' => route('home'),
-            ]
-        )->send();
-        
-        return $response;
     }
     
     protected function getThanksPageRedirect()

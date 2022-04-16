@@ -13,6 +13,7 @@ namespace Juzaweb\Ecommerce\Providers;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\Ecommerce\Extensions\TwigExtension;
 use Juzaweb\Ecommerce\Supports\CartInterface;
+use Juzaweb\Ecommerce\Supports\OrderInterface;
 use TwigBridge\Facade\Twig;
 
 class AutoloadSeviceProvider extends ServiceProvider
@@ -47,6 +48,11 @@ class AutoloadSeviceProvider extends ServiceProvider
         $this->app->bind(
             CartInterface::class,
             config('ecommerce.cart')
+        );
+    
+        $this->app->bind(
+            OrderInterface::class,
+            config('ecommerce.order')
         );
     }
 }
