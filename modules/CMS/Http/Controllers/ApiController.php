@@ -25,7 +25,168 @@ use Illuminate\Support\MessageBag;
  *      @OA\Contact(
  *          email="admin@juzaweb.com"
  *      )
- * )
+ * ),
+ * @OA\Parameter(
+ *      parameter="slug_in_path",
+ *      name="slug",
+ *      in="path",
+ *      required=true,
+ *      @OA\Schema(type="string")
+ *  ),
+ *  @OA\Parameter(
+ *      parameter="path_code",
+ *      name="code",
+ *      in="path",
+ *      required=true,
+ *      @OA\Schema(type="string")
+ *  ),
+ *  @OA\Parameter(
+ *      parameter="query_locale",
+ *      name="locale",
+ *      in="query",
+ *      required=true,
+ *      description="",
+ *      @OA\Schema(type="string", enum={"vi","en"}, description="" )
+ *  ),
+ *  @OA\Parameter(
+ *      parameter="query_limit",
+ *      name="limit",
+ *      in="query",
+ *      @OA\Schema(type="integer")
+ *  ),
+ *  @OA\Parameter(
+ *      parameter="query_page",
+ *      name="page",
+ *      in="query",
+ *      @OA\Schema(type="integer")
+ *  ),
+ *  @OA\Parameter(
+ *      parameter="query_keyword",
+ *      name="keyword",
+ *      in="query",
+ *      @OA\Schema(type="string")
+ *  ),
+ *  @OA\Response(
+ *      response="success_detail",
+ *      description="Get Data Success",
+ *      @OA\JsonContent(
+ *          @OA\Property(property="data", type="object"),
+ *      )
+ *  ),
+ *  @OA\Response(
+ *      response="success_list",
+ *      description="Get List Success",
+ *      @OA\JsonContent(
+ *          @OA\Property(
+ *              property="data",
+ *              type="array",
+ *              @OA\Items(type="object")
+ *          ),
+ *      )
+ *  ),
+ *  @OA\Response(
+ *      response="success_paging",
+ *      description="Get Paging Success",
+ *      @OA\JsonContent(
+ *          @OA\Property(
+ *              property="data",
+ *              type="array",
+ *              @OA\Items(type="object")
+ *          ),
+ *          @OA\Property(
+ *              property="links",
+ *              type="object",
+ *              @OA\Property(property="self", type="string"),
+ *              @OA\Property(property="first", type="string"),
+ *              @OA\Property(property="prev", type="string"),
+ *              @OA\Property(property="next", type="string"),
+ *              @OA\Property(property="last", type="string")
+ *          ),
+ *          @OA\Property(
+ *              property="meta",
+ *              type="object",
+ *              @OA\Property(property="totalPages", type="integer"),
+ *              @OA\Property(property="limit", type="integer"),
+ *              @OA\Property(property="total", type="integer"),
+ *              @OA\Property(property="page", type="integer")
+ *          ),
+ *      )
+ *  ),
+ *  @OA\Response(
+ *      response="error_401",
+ *      description="Token Error",
+ *      @OA\JsonContent(
+ *          @OA\Property(
+ *              property="errors",
+ *              type="array",
+ *              @OA\Items(
+ *                  @OA\Property(property="code", type="string", example=""),
+ *                  @OA\Property(property="title", type="string", example="")
+ *              )
+ *          ),
+ *          @OA\Property(property="message", type="string", example=""),
+ *      )
+ *  ),
+ *  @OA\Response(
+ *      response="error_403",
+ *      description="Permission denied",
+ *      @OA\JsonContent(
+ *          @OA\Property(
+ *              property="errors",
+ *              type="array",
+ *              @OA\Items(
+ *                  @OA\Property(property="code", type="string", example=""),
+ *                  @OA\Property(property="title", type="string", example="")
+ *              )
+ *          ),
+ *          @OA\Property(property="message", type="string", example=""),
+ *      )
+ *  ),
+ *  @OA\Response(
+ *      response="error_404",
+ *      description="Page not found",
+ *      @OA\JsonContent(
+ *          @OA\Property(
+ *              property="errors",
+ *              type="array",
+ *              @OA\Items(
+ *                  @OA\Property(property="code", type="string", example=""),
+ *                  @OA\Property(property="title", type="string", example="")
+ *              )
+ *          ),
+ *          @OA\Property(property="message", type="string", example=""),
+ *      )
+ *  ),
+ *  @OA\Response(
+ *      response="error_422",
+ *      description="Validate Error",
+ *      @OA\JsonContent(
+ *          @OA\Property(
+ *              property="errors",
+ *              type="array",
+ *              @OA\Items(
+ *                  @OA\Property(property="field", type="string", example=""),
+ *                  @OA\Property(property="message", type="string", example="")
+ *              )
+ *          ),
+ *          @OA\Property(property="message", type="string", example=""),
+ *      )
+ *  ),
+ *  @OA\Response(
+ *      response="error_500",
+ *      description="Server Error",
+ *      @OA\JsonContent(
+ *          @OA\Property(
+ *              property="errors",
+ *              type="array",
+ *              @OA\Items(
+ *                  @OA\Property(property="code", type="string", example=""),
+ *                  @OA\Property(property="title", type="string", example="")
+ *              )
+ *          ),
+ *          @OA\Property(property="message", type="string", example=""),
+ *      )
+ *  )
  */
 class ApiController extends Controller
 {

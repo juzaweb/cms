@@ -39,7 +39,7 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                 */
                 'annotations' => [
-                    base_path('modules/CMS'),
+                    base_path('modules'),
                 ],
 
             ],
@@ -63,7 +63,9 @@ return [
             'middleware' => [
                 'api' => [],
                 'asset' => [],
-                'docs' => [],
+                'docs' => [
+                    'web', 'admin'
+                ],
                 'oauth2_callback' => [],
             ],
 
@@ -99,7 +101,10 @@ return [
              * @deprecated Please use `scanOptions.exclude`
              * `scanOptions.exclude` overwrites this
             */
-            'excludes' => [],
+            'excludes' => [
+                base_path('modules/CMS/Database/migrations'),
+                base_path('modules/Tests')
+            ],
         ],
 
         'scanOptions' => [
@@ -192,13 +197,13 @@ return [
                         ],
                     ],
                 ],
+                */
                 'sanctum' => [ // Unique name of security
                     'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Enter token in format (Bearer <token>)',
                     'name' => 'Authorization', // The name of the header or query parameter to be used.
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
-                */
             ],
             'security' => [
                 /*

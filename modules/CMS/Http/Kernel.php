@@ -14,7 +14,7 @@ class Kernel extends HttpKernel
      * @var array<int, class-string|string>
      */
     protected $middleware = [
-        // \App\Http\Middleware\TrustHosts::class,
+        // \Juzaweb\CMS\Http\Middleware\TrustHosts::class,
         \Juzaweb\CMS\Http\Middleware\TrustProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \Juzaweb\CMS\Http\Middleware\PreventRequestsDuringMaintenance::class,

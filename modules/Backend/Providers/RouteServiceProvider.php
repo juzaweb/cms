@@ -14,10 +14,7 @@ class RouteServiceProvider extends ServiceProvider
 
     public function map()
     {
-        if (config('juzaweb.api_route')) {
-            $this->mapApiRoutes();
-        }
-
+        $this->mapApiRoutes();
         $this->mapWebRoutes();
         $this->mapAssetRoutes();
         $this->mapAdminRoutes();
@@ -49,7 +46,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace($this->namespace)
             ->group(__DIR__ . '/../routes/api.php');
     }
 

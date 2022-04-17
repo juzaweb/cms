@@ -67,14 +67,22 @@ class Handler extends ExceptionHandler
     {
         if ($this->is404Exception($exception)) {
             if ($request->is(config('juzaweb.admin_prefix') . '/*')) {
-                return response()->view('cms::404');
+                return response()->view('cms::404', [], 404);
             }
 
             if (view()->exists(theme_viewname('theme::404'))) {
-                return response()->view(theme_viewname('theme::404'));
+                return response()->view(
+                    theme_viewname('theme::404'),
+                    [],
+                    404
+                );
             }
 
-            return response()->view('cms::404');
+            return response()->view(
+                'cms::404',
+                [],
+                404
+            );
         }
 
         return parent::render($request, $exception);

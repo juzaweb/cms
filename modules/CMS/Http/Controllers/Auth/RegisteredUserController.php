@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Juzaweb\CMS\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Juzaweb\CMS\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;

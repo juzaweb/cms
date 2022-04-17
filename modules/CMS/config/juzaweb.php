@@ -9,14 +9,6 @@ return [
     'admin_prefix' => env('ADMIN_PREFIX', 'admin-cp'),
 
     /**
-     * Enable api for route
-     *
-     * Supported auth route
-     * Default: false
-     */
-    'api_route' => (bool) env('API_ROUTE', false),
-
-    /**
      * Show logs in admin page
      */
     'logs_viewer' => true,

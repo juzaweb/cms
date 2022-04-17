@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Models\User;
+use Juzaweb\CMS\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Juzaweb\Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
