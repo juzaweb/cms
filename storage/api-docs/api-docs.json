@@ -43,46 +43,329 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "Read success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "success_detail": {
+                "description": "Get Data Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "data": {
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "success_list": {
+                "description": "Get List Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "success_paging": {
+                "description": "Get Paging Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "links": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
+                                        "self": {
+                                            "type": "string"
                                         },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object"
-                                            }
+                                        "first": {
+                                            "type": "string"
                                         },
-                                        "message": {
-                                            "type": "string",
-                                            "example": ""
+                                        "prev": {
+                                            "type": "string"
+                                        },
+                                        "next": {
+                                            "type": "string"
+                                        },
+                                        "last": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "meta": {
+                                    "properties": {
+                                        "totalPages": {
+                                            "type": "integer"
+                                        },
+                                        "limit": {
+                                            "type": "integer"
+                                        },
+                                        "total": {
+                                            "type": "integer"
+                                        },
+                                        "page": {
+                                            "type": "integer"
                                         }
                                     },
                                     "type": "object"
                                 }
-                            }
+                            },
+                            "type": "object"
                         }
-                    },
-                    "404": {
-                        "description": "Not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error"
                     }
                 }
+            },
+            "error_401": {
+                "description": "Token Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "code": {
+                                                "type": "string",
+                                                "example": ""
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": ""
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": ""
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "error_403": {
+                "description": "Permission denied",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "code": {
+                                                "type": "string",
+                                                "example": ""
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": ""
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": ""
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "error_404": {
+                "description": "Page not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "code": {
+                                                "type": "string",
+                                                "example": ""
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": ""
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": ""
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "error_422": {
+                "description": "Validate Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "field": {
+                                                "type": "string",
+                                                "example": ""
+                                            },
+                                            "message": {
+                                                "type": "string",
+                                                "example": ""
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": ""
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "error_500": {
+                "description": "Server Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "code": {
+                                                "type": "string",
+                                                "example": ""
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": ""
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": ""
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "slug_in_path": {
+                "name": "slug",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "path_code": {
+                "name": "code",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "query_locale": {
+                "name": "locale",
+                "in": "query",
+                "description": "",
+                "required": true,
+                "schema": {
+                    "description": "",
+                    "type": "string",
+                    "enum": [
+                        "vi",
+                        "en"
+                    ]
+                }
+            },
+            "query_limit": {
+                "name": "limit",
+                "in": "query",
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "query_page": {
+                "name": "page",
+                "in": "query",
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "query_keyword": {
+                "name": "keyword",
+                "in": "query",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
             }
         }
     }

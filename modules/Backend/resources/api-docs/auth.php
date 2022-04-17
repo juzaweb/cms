@@ -25,24 +25,8 @@
  *              )
  *          )
  *      ),
- *      @OA\Response(
- *          response=200,
- *          description="Read success",
- *          @OA\JsonContent(
- *              @OA\Property(property="success", type="bool", example=true),
- *              @OA\Property(
- *                  property="data",
- *                  type="array",
- *                  @OA\Items( type="object" )
- *              ),
- *              @OA\Property( property="message", type="string", example=""),
- *          )
- *      ),
- *      @OA\Response(
- *          response=404,
- *          description="Not found",
- *          @OA\JsonContent(type="object")
- *      ),
- *      @OA\Response(response=500, description="Internal server error")
+ *      @OA\Response(response=201, ref="#/components/responses/success_detail"),
+ *      @OA\Response(response=422, ref="#/components/responses/error_422"),
+ *      @OA\Response(response=500, ref="#/components/responses/error_500")
  *  )
  */

@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Api;
+namespace Juzaweb\Backend\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use Juzaweb\CMS\Http\Controllers\ApiController;
