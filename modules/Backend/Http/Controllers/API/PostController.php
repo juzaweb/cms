@@ -11,6 +11,7 @@
 namespace Juzaweb\Backend\Http\Controllers\API;
 
 use Illuminate\Http\Request;
+use Juzaweb\Backend\Http\Resources\PostCollection;
 use Juzaweb\CMS\Http\Controllers\ApiController;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
@@ -21,11 +22,12 @@ class PostController extends ApiController
     {
         $query = Post::selectFrontendBuilder()
             ->where('type', '=', $type);
+        
         $limit = $this->getQueryLimit();
 
         $rows = $query->paginate($limit);
 
-        return PostResource::collection($rows);
+        return new PostCollection($rows);
     }
 
     public function show(Request $request, $type, $id)
@@ -33,7 +35,7 @@ class PostController extends ApiController
         $post = Post::createFrontendBuilder()
             ->where('type', '=', $type)
             ->where('id', '=', $id)
-            ->first();
+            ->firstOrFail();
 
         return new PostResource($post);
     }

@@ -55,7 +55,7 @@ class LoginController extends ApiController
 
         return $this->respondWithToken($token);
     }
-
+    
     public function refresh()
     {
         return $this->respondWithToken(Auth::guard('api')->refresh());

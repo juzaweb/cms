@@ -8,5 +8,11 @@
  * @license    MIT
  */
 
-require __DIR__ . '/api/auth.php';
-require __DIR__ . '/api/post.php';
+namespace Juzaweb\Backend\Http\Controllers\API\Auth;
+
+use Juzaweb\CMS\Http\Controllers\ApiController;
+
+class RegisterController extends ApiController
+{
+    //
+}
