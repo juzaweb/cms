@@ -1,7 +1,5 @@
 <?php
 
-use Laravel\Sanctum\Sanctum;
-
 return [
 
     /*
@@ -16,24 +14,11 @@ return [
     */
 
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
-        '%s%s',
+        '%s%s%s',
         'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
-        Sanctum::currentApplicationUrlWithPort()
+        env('APP_URL') ? ','.parse_url(env('APP_URL'), PHP_URL_HOST) : '',
+        env('FRONTEND_URL') ? ','.parse_url(env('FRONTEND_URL'), PHP_URL_HOST) : ''
     ))),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Sanctum Guards
-    |--------------------------------------------------------------------------
-    |
-    | This array contains the authentication guards that will be checked when
-    | Sanctum is trying to authenticate a request. If none of these guards
-    | are able to authenticate the request, Sanctum will use the bearer
-    | token that's present on an incoming request for authentication.
-    |
-    */
-
-    'guard' => ['web'],
 
     /*
     |--------------------------------------------------------------------------
@@ -60,8 +45,8 @@ return [
     */
 
     'middleware' => [
-        'verify_csrf_token' => App\Http\Middleware\VerifyCsrfToken::class,
-        'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
+        'verify_csrf_token' => Juzaweb\CMS\Http\Middleware\VerifyCsrfToken::class,
+        'encrypt_cookies' => Juzaweb\CMS\Http\Middleware\EncryptCookies::class,
     ],
 
 ];
