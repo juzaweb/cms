@@ -18,7 +18,7 @@ abstract class ResourcePolicy
 {
     use HandlesAuthorization;
 
-    protected $resourceType;
+    protected string $resourceType;
 
     public function index(User $user)
     {

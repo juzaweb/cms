@@ -22,7 +22,7 @@ class AdsManagerDatatable extends DataTable
      *
      * @return array
      */
-    public function columns()
+    public function columns(): array
     {
         return [
             'name' => [
@@ -54,15 +54,17 @@ class AdsManagerDatatable extends DataTable
      * @param array $data
      * @return Builder
      */
-    public function query($data)
+    public function query($data): Builder
     {
         $query = Ads::query();
 
         if ($search = Arr::get($data, 'keyword')) {
-            $query->where(function (Builder $q) use ($search) {
-                $q->where('position', 'like', '%'. $search .'%');
-                $q->orWhere('name', 'like', '%'. $search .'%');
-            });
+            $query->where(
+                function (Builder $q) use ($search) {
+                    $q->where('position', 'like', '%'. $search .'%');
+                    $q->orWhere('name', 'like', '%'. $search .'%');
+                }
+            );
         }
 
         $active = Arr::get($data, 'active');

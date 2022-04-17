@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.7.0.
+ * Generated for Laravel 9.8.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -20,14 +20,24 @@
      */ 
         class App {
                     /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getNamespace()
+        {
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
+                        return $instance->getNamespace();
+        }
+                    /**
          * Get the version number of the application.
          *
          * @return string 
          * @static 
          */ 
         public static function version()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->version();
         }
                     /**
@@ -38,8 +48,8 @@
          * @static 
          */ 
         public static function bootstrapWith($bootstrappers)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->bootstrapWith($bootstrappers);
         }
                     /**
@@ -50,8 +60,8 @@
          * @static 
          */ 
         public static function afterLoadingEnvironment($callback)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->afterLoadingEnvironment($callback);
         }
                     /**
@@ -63,8 +73,8 @@
          * @static 
          */ 
         public static function beforeBootstrapping($bootstrapper, $callback)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->beforeBootstrapping($bootstrapper, $callback);
         }
                     /**
@@ -76,8 +86,8 @@
          * @static 
          */ 
         public static function afterBootstrapping($bootstrapper, $callback)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->afterBootstrapping($bootstrapper, $callback);
         }
                     /**
@@ -87,20 +97,20 @@
          * @static 
          */ 
         public static function hasBeenBootstrapped()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->hasBeenBootstrapped();
         }
                     /**
          * Set the base path for the application.
          *
          * @param string $basePath
-         * @return \Illuminate\Foundation\Application 
+         * @return \Juzaweb\CMS\Support\Application 
          * @static 
          */ 
         public static function setBasePath($basePath)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->setBasePath($basePath);
         }
                     /**
@@ -111,20 +121,20 @@
          * @static 
          */ 
         public static function path($path = '')
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->path($path);
         }
                     /**
          * Set the application directory.
          *
          * @param string $path
-         * @return \Illuminate\Foundation\Application 
+         * @return \Juzaweb\CMS\Support\Application 
          * @static 
          */ 
         public static function useAppPath($path)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->useAppPath($path);
         }
                     /**
@@ -135,8 +145,8 @@
          * @static 
          */ 
         public static function basePath($path = '')
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->basePath($path);
         }
                     /**
@@ -147,8 +157,8 @@
          * @static 
          */ 
         public static function bootstrapPath($path = '')
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->bootstrapPath($path);
         }
                     /**
@@ -159,8 +169,8 @@
          * @static 
          */ 
         public static function configPath($path = '')
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->configPath($path);
         }
                     /**
@@ -171,20 +181,20 @@
          * @static 
          */ 
         public static function databasePath($path = '')
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->databasePath($path);
         }
                     /**
          * Set the database directory.
          *
          * @param string $path
-         * @return \Illuminate\Foundation\Application 
+         * @return \Juzaweb\CMS\Support\Application 
          * @static 
          */ 
         public static function useDatabasePath($path)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->useDatabasePath($path);
         }
                     /**
@@ -195,20 +205,20 @@
          * @static 
          */ 
         public static function langPath($path = '')
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->langPath($path);
         }
                     /**
          * Set the language file directory.
          *
          * @param string $path
-         * @return \Illuminate\Foundation\Application 
+         * @return \Juzaweb\CMS\Support\Application 
          * @static 
          */ 
         public static function useLangPath($path)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->useLangPath($path);
         }
                     /**
@@ -218,8 +228,8 @@
          * @static 
          */ 
         public static function publicPath()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->publicPath();
         }
                     /**
@@ -230,20 +240,20 @@
          * @static 
          */ 
         public static function storagePath($path = '')
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->storagePath($path);
         }
                     /**
          * Set the storage directory.
          *
          * @param string $path
-         * @return \Illuminate\Foundation\Application 
+         * @return \Juzaweb\CMS\Support\Application 
          * @static 
          */ 
         public static function useStoragePath($path)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->useStoragePath($path);
         }
                     /**
@@ -254,8 +264,8 @@
          * @static 
          */ 
         public static function resourcePath($path = '')
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->resourcePath($path);
         }
                     /**
@@ -268,8 +278,8 @@
          * @static 
          */ 
         public static function viewPath($path = '')
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->viewPath($path);
         }
                     /**
@@ -279,32 +289,32 @@
          * @static 
          */ 
         public static function environmentPath()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->environmentPath();
         }
                     /**
          * Set the directory for the environment file.
          *
          * @param string $path
-         * @return \Illuminate\Foundation\Application 
+         * @return \Juzaweb\CMS\Support\Application 
          * @static 
          */ 
         public static function useEnvironmentPath($path)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->useEnvironmentPath($path);
         }
                     /**
          * Set the environment file to be loaded during bootstrapping.
          *
          * @param string $file
-         * @return \Illuminate\Foundation\Application 
+         * @return \Juzaweb\CMS\Support\Application 
          * @static 
          */ 
         public static function loadEnvironmentFrom($file)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->loadEnvironmentFrom($file);
         }
                     /**
@@ -314,8 +324,8 @@
          * @static 
          */ 
         public static function environmentFile()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->environmentFile();
         }
                     /**
@@ -325,8 +335,8 @@
          * @static 
          */ 
         public static function environmentFilePath()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->environmentFilePath();
         }
                     /**
@@ -337,8 +347,8 @@
          * @static 
          */ 
         public static function environment(...$environments)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->environment(...$environments);
         }
                     /**
@@ -348,8 +358,8 @@
          * @static 
          */ 
         public static function isLocal()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->isLocal();
         }
                     /**
@@ -359,8 +369,8 @@
          * @static 
          */ 
         public static function isProduction()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->isProduction();
         }
                     /**
@@ -371,8 +381,8 @@
          * @static 
          */ 
         public static function detectEnvironment($callback)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->detectEnvironment($callback);
         }
                     /**
@@ -382,8 +392,8 @@
          * @static 
          */ 
         public static function runningInConsole()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->runningInConsole();
         }
                     /**
@@ -393,8 +403,8 @@
          * @static 
          */ 
         public static function runningUnitTests()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->runningUnitTests();
         }
                     /**
@@ -404,8 +414,8 @@
          * @static 
          */ 
         public static function hasDebugModeEnabled()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->hasDebugModeEnabled();
         }
                     /**
@@ -415,8 +425,8 @@
          * @static 
          */ 
         public static function registerConfiguredProviders()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->registerConfiguredProviders();
         }
                     /**
@@ -428,8 +438,8 @@
          * @static 
          */ 
         public static function register($provider, $force = false)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->register($provider, $force);
         }
                     /**
@@ -440,8 +450,8 @@
          * @static 
          */ 
         public static function getProvider($provider)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getProvider($provider);
         }
                     /**
@@ -452,8 +462,8 @@
          * @static 
          */ 
         public static function getProviders($provider)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getProviders($provider);
         }
                     /**
@@ -464,8 +474,8 @@
          * @static 
          */ 
         public static function resolveProvider($provider)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->resolveProvider($provider);
         }
                     /**
@@ -475,8 +485,8 @@
          * @static 
          */ 
         public static function loadDeferredProviders()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->loadDeferredProviders();
         }
                     /**
@@ -487,8 +497,8 @@
          * @static 
          */ 
         public static function loadDeferredProvider($service)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->loadDeferredProvider($service);
         }
                     /**
@@ -500,8 +510,8 @@
          * @static 
          */ 
         public static function registerDeferredProvider($provider, $service = null)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->registerDeferredProvider($provider, $service);
         }
                     /**
@@ -513,8 +523,8 @@
          * @static 
          */ 
         public static function make($abstract, $parameters = [])
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->make($abstract, $parameters);
         }
                     /**
@@ -525,8 +535,8 @@
          * @static 
          */ 
         public static function bound($abstract)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->bound($abstract);
         }
                     /**
@@ -536,8 +546,8 @@
          * @static 
          */ 
         public static function isBooted()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->isBooted();
         }
                     /**
@@ -547,8 +557,8 @@
          * @static 
          */ 
         public static function boot()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->boot();
         }
                     /**
@@ -559,8 +569,8 @@
          * @static 
          */ 
         public static function booting($callback)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->booting($callback);
         }
                     /**
@@ -571,8 +581,8 @@
          * @static 
          */ 
         public static function booted($callback)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->booted($callback);
         }
                     /**
@@ -582,8 +592,8 @@
          * @static 
          */ 
         public static function handle($request, $type = 1, $catch = true)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->handle($request, $type, $catch);
         }
                     /**
@@ -593,8 +603,8 @@
          * @static 
          */ 
         public static function shouldSkipMiddleware()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->shouldSkipMiddleware();
         }
                     /**
@@ -604,8 +614,8 @@
          * @static 
          */ 
         public static function getCachedServicesPath()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getCachedServicesPath();
         }
                     /**
@@ -615,8 +625,8 @@
          * @static 
          */ 
         public static function getCachedPackagesPath()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getCachedPackagesPath();
         }
                     /**
@@ -626,8 +636,8 @@
          * @static 
          */ 
         public static function configurationIsCached()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->configurationIsCached();
         }
                     /**
@@ -637,8 +647,8 @@
          * @static 
          */ 
         public static function getCachedConfigPath()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getCachedConfigPath();
         }
                     /**
@@ -648,8 +658,8 @@
          * @static 
          */ 
         public static function routesAreCached()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->routesAreCached();
         }
                     /**
@@ -659,8 +669,8 @@
          * @static 
          */ 
         public static function getCachedRoutesPath()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getCachedRoutesPath();
         }
                     /**
@@ -670,8 +680,8 @@
          * @static 
          */ 
         public static function eventsAreCached()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->eventsAreCached();
         }
                     /**
@@ -681,20 +691,20 @@
          * @static 
          */ 
         public static function getCachedEventsPath()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getCachedEventsPath();
         }
                     /**
          * Add new prefix to list of absolute path prefixes.
          *
          * @param string $prefix
-         * @return \Illuminate\Foundation\Application 
+         * @return \Juzaweb\CMS\Support\Application 
          * @static 
          */ 
         public static function addAbsoluteCachePathPrefix($prefix)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->addAbsoluteCachePathPrefix($prefix);
         }
                     /**
@@ -704,8 +714,8 @@
          * @static 
          */ 
         public static function maintenanceMode()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->maintenanceMode();
         }
                     /**
@@ -715,8 +725,8 @@
          * @static 
          */ 
         public static function isDownForMaintenance()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->isDownForMaintenance();
         }
                     /**
@@ -731,20 +741,20 @@
          * @static 
          */ 
         public static function abort($code, $message = '', $headers = [])
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->abort($code, $message, $headers);
         }
                     /**
          * Register a terminating callback with the application.
          *
          * @param callable|string $callback
-         * @return \Illuminate\Foundation\Application 
+         * @return \Juzaweb\CMS\Support\Application 
          * @static 
          */ 
         public static function terminating($callback)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->terminating($callback);
         }
                     /**
@@ -754,8 +764,8 @@
          * @static 
          */ 
         public static function terminate()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->terminate();
         }
                     /**
@@ -765,8 +775,8 @@
          * @static 
          */ 
         public static function getLoadedProviders()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getLoadedProviders();
         }
                     /**
@@ -777,8 +787,8 @@
          * @static 
          */ 
         public static function providerIsLoaded($provider)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->providerIsLoaded($provider);
         }
                     /**
@@ -788,8 +798,8 @@
          * @static 
          */ 
         public static function getDeferredServices()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getDeferredServices();
         }
                     /**
@@ -800,8 +810,8 @@
          * @static 
          */ 
         public static function setDeferredServices($services)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->setDeferredServices($services);
         }
                     /**
@@ -812,8 +822,8 @@
          * @static 
          */ 
         public static function addDeferredServices($services)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->addDeferredServices($services);
         }
                     /**
@@ -824,8 +834,8 @@
          * @static 
          */ 
         public static function isDeferredService($service)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->isDeferredService($service);
         }
                     /**
@@ -836,8 +846,8 @@
          * @static 
          */ 
         public static function provideFacades($namespace)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->provideFacades($namespace);
         }
                     /**
@@ -847,8 +857,8 @@
          * @static 
          */ 
         public static function getLocale()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getLocale();
         }
                     /**
@@ -858,8 +868,8 @@
          * @static 
          */ 
         public static function currentLocale()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->currentLocale();
         }
                     /**
@@ -869,8 +879,8 @@
          * @static 
          */ 
         public static function getFallbackLocale()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getFallbackLocale();
         }
                     /**
@@ -881,8 +891,8 @@
          * @static 
          */ 
         public static function setLocale($locale)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->setLocale($locale);
         }
                     /**
@@ -893,8 +903,8 @@
          * @static 
          */ 
         public static function setFallbackLocale($fallbackLocale)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->setFallbackLocale($fallbackLocale);
         }
                     /**
@@ -905,8 +915,8 @@
          * @static 
          */ 
         public static function isLocale($locale)
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->isLocale($locale);
         }
                     /**
@@ -916,8 +926,8 @@
          * @static 
          */ 
         public static function registerCoreContainerAliases()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->registerCoreContainerAliases();
         }
                     /**
@@ -927,21 +937,9 @@
          * @static 
          */ 
         public static function flush()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
+        {            //Method inherited from \Illuminate\Foundation\Application         
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->flush();
-        }
-                    /**
-         * Get the application namespace.
-         *
-         * @return string 
-         * @throws \RuntimeException
-         * @static 
-         */ 
-        public static function getNamespace()
-        {
-                        /** @var \Illuminate\Foundation\Application $instance */
-                        return $instance->getNamespace();
         }
                     /**
          * Define a contextual binding.
@@ -952,7 +950,7 @@
          */ 
         public static function when($concrete)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->when($concrete);
         }
                     /**
@@ -970,7 +968,7 @@
          */ 
         public static function has($id)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->has($id);
         }
                     /**
@@ -982,7 +980,7 @@
          */ 
         public static function resolved($abstract)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->resolved($abstract);
         }
                     /**
@@ -994,7 +992,7 @@
          */ 
         public static function isShared($abstract)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->isShared($abstract);
         }
                     /**
@@ -1006,7 +1004,7 @@
          */ 
         public static function isAlias($name)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->isAlias($name);
         }
                     /**
@@ -1021,7 +1019,7 @@
          */ 
         public static function bind($abstract, $concrete = null, $shared = false)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->bind($abstract, $concrete, $shared);
         }
                     /**
@@ -1033,7 +1031,7 @@
          */ 
         public static function hasMethodBinding($method)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->hasMethodBinding($method);
         }
                     /**
@@ -1046,7 +1044,7 @@
          */ 
         public static function bindMethod($method, $callback)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->bindMethod($method, $callback);
         }
                     /**
@@ -1059,7 +1057,7 @@
          */ 
         public static function callMethodBinding($method, $instance)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->callMethodBinding($method, $instance);
         }
                     /**
@@ -1073,7 +1071,7 @@
          */ 
         public static function addContextualBinding($concrete, $abstract, $implementation)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->addContextualBinding($concrete, $abstract, $implementation);
         }
                     /**
@@ -1087,7 +1085,7 @@
          */ 
         public static function bindIf($abstract, $concrete = null, $shared = false)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->bindIf($abstract, $concrete, $shared);
         }
                     /**
@@ -1100,7 +1098,7 @@
          */ 
         public static function singleton($abstract, $concrete = null)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->singleton($abstract, $concrete);
         }
                     /**
@@ -1113,7 +1111,7 @@
          */ 
         public static function singletonIf($abstract, $concrete = null)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->singletonIf($abstract, $concrete);
         }
                     /**
@@ -1126,7 +1124,7 @@
          */ 
         public static function scoped($abstract, $concrete = null)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->scoped($abstract, $concrete);
         }
                     /**
@@ -1139,7 +1137,7 @@
          */ 
         public static function scopedIf($abstract, $concrete = null)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->scopedIf($abstract, $concrete);
         }
                     /**
@@ -1153,7 +1151,7 @@
          */ 
         public static function extend($abstract, $closure)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->extend($abstract, $closure);
         }
                     /**
@@ -1166,7 +1164,7 @@
          */ 
         public static function instance($abstract, $instance)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->instance($abstract, $instance);
         }
                     /**
@@ -1179,7 +1177,7 @@
          */ 
         public static function tag($abstracts, $tags)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->tag($abstracts, $tags);
         }
                     /**
@@ -1191,7 +1189,7 @@
          */ 
         public static function tagged($tag)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->tagged($tag);
         }
                     /**
@@ -1205,7 +1203,7 @@
          */ 
         public static function alias($abstract, $alias)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->alias($abstract, $alias);
         }
                     /**
@@ -1218,7 +1216,7 @@
          */ 
         public static function rebinding($abstract, $callback)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->rebinding($abstract, $callback);
         }
                     /**
@@ -1232,7 +1230,7 @@
          */ 
         public static function refresh($abstract, $target, $method)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->refresh($abstract, $target, $method);
         }
                     /**
@@ -1245,7 +1243,7 @@
          */ 
         public static function wrap($callback, $parameters = [])
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->wrap($callback, $parameters);
         }
                     /**
@@ -1260,7 +1258,7 @@
          */ 
         public static function call($callback, $parameters = [], $defaultMethod = null)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->call($callback, $parameters, $defaultMethod);
         }
                     /**
@@ -1272,7 +1270,7 @@
          */ 
         public static function factory($abstract)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->factory($abstract);
         }
                     /**
@@ -1286,7 +1284,7 @@
          */ 
         public static function makeWith($abstract, $parameters = [])
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->makeWith($abstract, $parameters);
         }
                     /**
@@ -1301,7 +1299,7 @@
          */ 
         public static function get($id)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->get($id);
         }
                     /**
@@ -1315,7 +1313,7 @@
          */ 
         public static function build($concrete)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->build($concrete);
         }
                     /**
@@ -1328,7 +1326,7 @@
          */ 
         public static function beforeResolving($abstract, $callback = null)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->beforeResolving($abstract, $callback);
         }
                     /**
@@ -1341,7 +1339,7 @@
          */ 
         public static function resolving($abstract, $callback = null)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->resolving($abstract, $callback);
         }
                     /**
@@ -1354,7 +1352,7 @@
          */ 
         public static function afterResolving($abstract, $callback = null)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->afterResolving($abstract, $callback);
         }
                     /**
@@ -1365,7 +1363,7 @@
          */ 
         public static function getBindings()
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getBindings();
         }
                     /**
@@ -1377,7 +1375,7 @@
          */ 
         public static function getAlias($abstract)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->getAlias($abstract);
         }
                     /**
@@ -1389,7 +1387,7 @@
          */ 
         public static function forgetExtenders($abstract)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->forgetExtenders($abstract);
         }
                     /**
@@ -1401,7 +1399,7 @@
          */ 
         public static function forgetInstance($abstract)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->forgetInstance($abstract);
         }
                     /**
@@ -1412,7 +1410,7 @@
          */ 
         public static function forgetInstances()
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->forgetInstances();
         }
                     /**
@@ -1423,7 +1421,7 @@
          */ 
         public static function forgetScopedInstances()
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->forgetScopedInstances();
         }
                     /**
@@ -1434,7 +1432,7 @@
          */ 
         public static function getInstance()
         {            //Method inherited from \Illuminate\Container\Container         
-                        return \Illuminate\Foundation\Application::getInstance();
+                        return \Juzaweb\CMS\Support\Application::getInstance();
         }
                     /**
          * Set the shared instance of the container.
@@ -1445,7 +1443,7 @@
          */ 
         public static function setInstance($container = null)
         {            //Method inherited from \Illuminate\Container\Container         
-                        return \Illuminate\Foundation\Application::setInstance($container);
+                        return \Juzaweb\CMS\Support\Application::setInstance($container);
         }
                     /**
          * Determine if a given offset exists.
@@ -1456,7 +1454,7 @@
          */ 
         public static function offsetExists($key)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->offsetExists($key);
         }
                     /**
@@ -1468,7 +1466,7 @@
          */ 
         public static function offsetGet($key)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         return $instance->offsetGet($key);
         }
                     /**
@@ -1481,7 +1479,7 @@
          */ 
         public static function offsetSet($key, $value)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->offsetSet($key, $value);
         }
                     /**
@@ -1493,7 +1491,7 @@
          */ 
         public static function offsetUnset($key)
         {            //Method inherited from \Illuminate\Container\Container         
-                        /** @var \Illuminate\Foundation\Application $instance */
+                        /** @var \Juzaweb\CMS\Support\Application $instance */
                         $instance->offsetUnset($key);
         }
          
@@ -2476,6 +2474,19 @@
                         return $instance->getClassComponentAliases();
         }
                     /**
+         * Register an anonymous component namespace.
+         *
+         * @param string $directory
+         * @param string|null $prefix
+         * @return void 
+         * @static 
+         */ 
+        public static function anonymousComponentNamespace($directory, $prefix = null)
+        {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
+                        $instance->anonymousComponentNamespace($directory, $prefix);
+        }
+                    /**
          * Register a class-based component namespace.
          *
          * @param string $namespace
@@ -2487,6 +2498,17 @@
         {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
                         /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
                         $instance->componentNamespace($namespace, $prefix);
+        }
+                    /**
+         * Get the registered anonymous component namespaces.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAnonymousComponentNamespaces()
+        {            //Method inherited from \Illuminate\View\Compilers\BladeCompiler         
+                        /** @var \Juzaweb\CMS\Support\BladeMinifyCompiler $instance */
+                        return $instance->getAnonymousComponentNamespaces();
         }
                     /**
          * Get the registered class component namespaces.
@@ -4809,6 +4831,66 @@
                         return $instance->setApplication($app);
         }
                     /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Illuminate\Database\DatabaseManager::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Illuminate\Database\DatabaseManager::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Illuminate\Database\DatabaseManager::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Database\DatabaseManager::flushMacros();
+        }
+                    /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function macroCall($method, $parameters)
+        {
+                        /** @var \Illuminate\Database\DatabaseManager $instance */
+                        return $instance->macroCall($method, $parameters);
+        }
+                    /**
          * Determine if the connected database is a MariaDB database.
          *
          * @return bool 
@@ -4913,6 +4995,21 @@
         {            //Method inherited from \Illuminate\Database\Connection         
                         /** @var \Illuminate\Database\MySqlConnection $instance */
                         return $instance->selectOne($query, $bindings, $useReadPdo);
+        }
+                    /**
+         * Run a select statement and return the first column of the first row.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @param bool $useReadPdo
+         * @return mixed 
+         * @throws \Illuminate\Database\MultipleColumnsSelectedException
+         * @static 
+         */ 
+        public static function scalar($query, $bindings = [], $useReadPdo = true)
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        return $instance->scalar($query, $bindings, $useReadPdo);
         }
                     /**
          * Run a select statement against the database.
@@ -11173,7 +11270,7 @@
          * Retrieve an old input item.
          *
          * @param string|null $key
-         * @param string|array|null $default
+         * @param \Illuminate\Database\Eloquent\Model|string|array|null $default
          * @return string|array|null 
          * @static 
          */ 
@@ -18173,7 +18270,58 @@
      
 }
 
-    
+    namespace Spatie\SignalAwareCommand\Facades { 
+            /**
+     * 
+     *
+     * @see \Spatie\SignalAwareCommand\Signal
+     */ 
+        class Signal {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function handle($signal, $callable)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->handle($signal, $callable);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function executeSignalHandlers($signal, $command)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->executeSignalHandlers($signal, $command);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function clearHandlers($signal = null)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->clearHandlers($signal);
+        }
+         
+    }
+     
+}
+
+    namespace Juzaweb\CMS\Support\Html { 
+            /**
+     * 
+     *
+     */ 
+        class Field {
+         
+    }
+     
+}
 
     namespace Illuminate\Http { 
             /**
@@ -22041,6 +22189,7 @@ namespace  {
             class Socialite extends \Laravel\Socialite\Facades\Socialite {}
             class Twig extends \TwigBridge\Facade\Twig {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
+            class Signal extends \Spatie\SignalAwareCommand\Facades\Signal {}
             class Field extends \Juzaweb\CMS\Support\Html\Field {}
      
 }
