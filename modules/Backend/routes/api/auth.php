@@ -16,3 +16,13 @@ Route::group(
         Route::post('login', [LoginController::class, 'login']);
     }
 );
+
+Route::group(
+    [
+        'prefix' => 'auth',
+        'middleware' => 'auth:sanctum',
+    ],
+    function () {
+        Route::post('logout', [LoginController::class, 'logout']);
+    }
+);
