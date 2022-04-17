@@ -44,7 +44,7 @@ class Kernel extends HttpKernel
         
         'api' => [
             \Juzaweb\CMS\Http\Middleware\GlobalMiddleware::class,
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],

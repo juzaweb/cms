@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                'title' => 'JuzaCMS - API Documentation',
             ],
 
             'routes' => [
@@ -15,6 +15,11 @@ return [
                 'api' => 'api/documentation',
             ],
             'paths' => [
+                /*
+                 * Edit to include full URL in ui for assets
+                */
+                'use_absolute_path' => env('L5_SWAGGER_USE_ABSOLUTE_PATH', true),
+
                 /*
                  * File name of the generated json documentation file
                 */
@@ -34,8 +39,7 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                 */
                 'annotations' => [
-                    base_path('app'),
-                    base_path('packages/cms'),
+                    base_path('modules/CMS'),
                 ],
 
             ],
@@ -59,8 +63,7 @@ return [
             'middleware' => [
                 'api' => [],
                 'asset' => [],
-                'docs' => [
-                ],
+                'docs' => [],
                 'oauth2_callback' => [],
             ],
 
@@ -102,12 +105,14 @@ return [
         'scanOptions' => [
             /**
              * analyser: defaults to \OpenApi\StaticAnalyser .
+             *
              * @see \OpenApi\scan
              */
             'analyser' => null,
 
             /**
              * analysis: defaults to a new \OpenApi\Analysis .
+             *
              * @see \OpenApi\scan
              */
             'analysis' => null,
@@ -124,6 +129,7 @@ return [
 
             /**
              * pattern: string       $pattern File pattern(s) to scan (default: *.php) .
+             *
              * @see \OpenApi\scan
              */
             'pattern' => null,
@@ -146,17 +152,23 @@ return [
                 */
                 /*
                 'api_key_security_example' => [ // Unique name of security
-                    'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'type' => 'apiKey',
+                    // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'A short description for security scheme',
                     'name' => 'api_key', // The name of the header or query parameter to be used.
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
                 'oauth2_security_example' => [ // Unique name of security
-                    'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'type' => 'oauth2',
+                // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'A short description for oauth2 security scheme.',
-                    'flow' => 'implicit', // The flow used by the OAuth2 security scheme. Valid values are "implicit", "password", "application" or "accessCode".
-                    'authorizationUrl' => 'http://example.com/auth', // The authorization URL to be used for (implicit/accessCode)
-                    //'tokenUrl' => 'http://example.com/auth' // The authorization URL to be used for (password/application/accessCode)
+                    'flow' => 'implicit',
+                    // The flow used by the OAuth2 security scheme.
+                    // Valid values are "implicit", "password", "application" or "accessCode".
+                    'authorizationUrl' => 'http://example.com/auth',
+                    // The authorization URL to be used for (implicit/accessCode)
+                    //'tokenUrl' => 'http://example.com/auth'
+                    // The authorization URL to be used for (password/application/accessCode)
                     'scopes' => [
                         'read:projects' => 'read your projects',
                         'write:projects' => 'modify projects in your account',
@@ -166,7 +178,8 @@ return [
 
                 /* Open API 3.0 support
                 'passport' => [ // Unique name of security
-                    'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'type' => 'oauth2',// The type of the security scheme.
+                        // Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Laravel passport oauth2 security.',
                     'in' => 'header',
                     'scheme' => 'https',
@@ -178,6 +191,12 @@ return [
                             "scopes" => []
                         ],
                     ],
+                ],
+                'sanctum' => [ // Unique name of security
+                    'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
+                    'description' => 'Enter token in format (Bearer <token>)',
+                    'name' => 'Authorization', // The name of the header or query parameter to be used.
+                    'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
                 */
             ],
@@ -235,15 +254,41 @@ return [
         'validator_url' => null,
 
         /*
-         * Persist authorization login after refresh browser
-         */
-        'persist_authorization' => true,
+         * Swagger UI configuration parameters
+        */
+        'ui' => [
+            'display' => [
+                /*
+                 * Controls the default expansion setting for the operations and tags. It can be :
+                 * 'list' (expands only the tags),
+                 * 'full' (expands the tags and operations),
+                 * 'none' (expands nothing).
+                 */
+                'doc_expansion' => env('L5_SWAGGER_UI_DOC_EXPANSION', 'none'),
 
+                /**
+                 * If set, enables filtering. The top bar will show an edit box that
+                 * you can use to filter the tagged operations that are shown. Can be
+                 * Boolean to enable or disable, or a string, in which case filtering
+                 * will be enabled using that string as the filter expression. Filtering
+                 * is case-sensitive matching the filter expression anywhere inside
+                 * the tag.
+                 */
+                'filter' => env('L5_SWAGGER_UI_FILTERS', true), // true | false
+            ],
+
+            'authorization' => [
+                /*
+                 * If set to true, it persists authorization data, and it would not be lost on browser close/refresh
+                 */
+                'persist_authorization' => env('L5_SWAGGER_UI_PERSIST_AUTHORIZATION', false),
+            ],
+        ],
         /*
-         * Uncomment to add constants which can be used in annotations
+         * Constants which can be used in annotations
          */
-        // 'constants' => [
-        // 'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
-        // ],
+        'constants' => [
+            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+        ],
     ],
 ];
