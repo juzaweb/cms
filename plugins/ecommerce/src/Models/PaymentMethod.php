@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/laravel-cms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
  * @license    MIT
@@ -44,7 +44,7 @@ class PaymentMethod extends Model
 
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 1;
-    
+
     protected $table = 'payment_methods';
     protected $fieldName = 'name';
     protected $guarded = ['id', 'created_at', 'updated_at'];
@@ -52,7 +52,7 @@ class PaymentMethod extends Model
     protected $casts = [
         'data' => 'array'
     ];
-    
+
     public function order()
     {
         return $this->hasMany(
@@ -61,7 +61,7 @@ class PaymentMethod extends Model
             'id'
         );
     }
-    
+
     public function scopeActive($builder)
     {
         return $builder->where('active', '=', self::STATUS_ACTIVE);

@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/laravel-cms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
  * @license    MIT
@@ -24,7 +24,7 @@ class AutoloadSeviceProvider extends ServiceProvider
         $basePath = __DIR__ . '/..';
         $this->loadViewsFrom($basePath . '/resources/views', 'ecom');
         $this->loadTranslationsFrom($basePath . '/resources/lang', 'ecom');
-    
+
         Twig::addExtension(new TwigExtension());
     }
 
@@ -34,7 +34,7 @@ class AutoloadSeviceProvider extends ServiceProvider
             __DIR__ . '/../../config/ecommerce.php',
             'ecommerce'
         );
-        
+
         $this->publishes(
             [
                 plugin_path('juzaweb/ecommerce', 'src/resources/assets/public')
@@ -42,14 +42,14 @@ class AutoloadSeviceProvider extends ServiceProvider
             ],
             'ecom_assets'
         );
-    
+
         $this->app->register(RouteServiceProvider::class);
-    
+
         $this->app->bind(
             CartInterface::class,
             config('ecommerce.cart')
         );
-    
+
         $this->app->bind(
             OrderInterface::class,
             config('ecommerce.order')

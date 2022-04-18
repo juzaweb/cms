@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/laravel-cms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
  * @license    MIT
@@ -32,26 +32,26 @@ class EcommerceAction extends Action
             Action::BACKEND_INIT,
             [$this, 'addAdminMenu']
         );
-    
+
         $this->addAction(
             Action::INIT_ACTION,
             [$this, 'registerConfigs']
         );
-        
+
         $this->addAction(
             "post_type.products.after_save",
             [$this, 'saveDataProduct'],
             20,
             2
         );
-    
+
         $this->addFilter(
             'theme.get_view_page',
             [$this, 'addCheckoutPage'],
             20,
             2
         );
-        
+
         $this->addAction(
             Action::FRONTEND_CALL_ACTION,
             [$this, 'registerFrontendAjax']
@@ -106,7 +106,7 @@ class EcommerceAction extends Action
                 ]
             ]
         );
-    
+
         HookAction::registerTaxonomy(
             'brands',
             'products',
@@ -115,7 +115,7 @@ class EcommerceAction extends Action
                 'menu_position' => 11,
             ]
         );
-    
+
         HookAction::registerTaxonomy(
             'vendors',
             'products',
@@ -135,7 +135,7 @@ class EcommerceAction extends Action
             ]
         );
     }
-    
+
     public function addAdminMenu()
     {
         HookAction::registerAdminPage(
@@ -148,7 +148,7 @@ class EcommerceAction extends Action
                 ]
             ]
         );
-        
+
         HookAction::registerAdminPage(
             'ecommerce.settings',
             [
@@ -160,7 +160,7 @@ class EcommerceAction extends Action
                 ]
             ]
         );
-        
+
         HookAction::registerAdminPage(
             'ecommerce.payment-methods',
             [
@@ -172,7 +172,7 @@ class EcommerceAction extends Action
                 ]
             ]
         );
-        
+
         HookAction::registerAdminPage(
             'ecommerce.inventories',
             [
@@ -235,25 +235,25 @@ class EcommerceAction extends Action
         $variantData['title'] = 'Default';
         $variantData['names'] = ['Default'];
         $variantData['post_id'] = $model->id;
-        
+
         ProductVariant::updateOrCreate(
             ['id' => $variant->id ?? 0],
             $variantData
         );
     }
-    
+
     public function addCheckoutPage($view, $page)
     {
         $checkoutPage = get_config('ecom_checkout_page');
-        
+
         if ($checkoutPage == $page->id) {
             $view = 'ecom::frontend.checkout.index';
             return $view;
         }
-        
+
         return $view;
     }
-    
+
     public function registerFrontendAjax()
     {
         HookAction::registerFrontendAjax(
@@ -263,7 +263,7 @@ class EcommerceAction extends Action
                 'method' => 'POST',
             ]
         );
-    
+
         HookAction::registerFrontendAjax(
             'cart.add-to-cart',
             [
@@ -271,21 +271,21 @@ class EcommerceAction extends Action
                 'method' => 'POST',
             ]
         );
-    
+
         HookAction::registerFrontendAjax(
             'cart.get-items',
             [
                 'callback' => [CartController::class, 'getCartItems'],
             ]
         );
-    
+
         HookAction::registerFrontendAjax(
             'payment.cancel',
             [
                 'callback' => [CheckoutController::class, 'cancel'],
             ]
         );
-    
+
         HookAction::registerFrontendAjax(
             'payment.completed',
             [
