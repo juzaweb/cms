@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\API\Auth;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Http\Requests\API\Auth\LoginRequest;
@@ -47,20 +48,20 @@ class LoginController extends ApiController
      *      @OA\Response(response=500, ref="#/components/responses/error_500")
      *  )
      */
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): JsonResponse
     {
         $request->authenticate();
-    
+
         $token = $request->user()->createToken('auth_token');
 
         return $this->respondWithToken($token);
     }
-    
+
     public function refresh()
     {
         return $this->respondWithToken(Auth::guard('api')->refresh());
     }
-    
+
     /**
      * @OA\Post(
      *      path="/api/auth/logout",
@@ -73,14 +74,14 @@ class LoginController extends ApiController
      *      @OA\Response(response=500, ref="#/components/responses/error_500")
      *  )
      */
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
 
         return $this->restSuccess([], 'Successfully logged out');
     }
 
-    protected function respondWithToken($token)
+    protected function respondWithToken($token): JsonResponse
     {
         return $this->restSuccess(
             [
