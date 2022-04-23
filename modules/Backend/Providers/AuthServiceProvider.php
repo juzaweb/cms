@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Backend\Providers;
 
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Juzaweb\Backend\Models\Post;
@@ -40,6 +41,13 @@ class AuthServiceProvider extends ServiceProvider
                 }
             
                 return null;
+            }
+        );
+    
+        ResetPassword::createUrlUsing(
+            function ($notifiable, $token) {
+                return config('app.frontend_url')
+                    . "/password-reset/{$token}?email={$notifiable->getEmailForPasswordReset()}";
             }
         );
     }

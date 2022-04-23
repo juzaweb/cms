@@ -1,5 +1,4 @@
 {
-    "/plugins/ecommerce/src/resources/assets/public/css/checkout.min.css": "/plugins/ecommerce/src/resources/assets/public/css/checkout.min.css",
-    "/plugins/ecommerce/src/resources/assets/public/js/checkout.min.js": "/plugins/ecommerce/src/resources/assets/public/js/checkout.min.js",
-    "/plugins/ecommerce/src/resources/assets/public/js/frontend-support.min.js": "/plugins/ecommerce/src/resources/assets/public/js/frontend-support.min.js"
+    "/modules/Backend/resources/assets/public/css/custom.min.css": "/modules/Backend/resources/assets/public/css/custom.min.css",
+    "/modules/Backend/resources/assets/public/js/custom.min.js": "/modules/Backend/resources/assets/public/js/custom.min.js"
 }

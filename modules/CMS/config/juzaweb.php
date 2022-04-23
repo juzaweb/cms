@@ -9,14 +9,6 @@ return [
     'admin_prefix' => env('ADMIN_PREFIX', 'admin-cp'),
 
     /**
-     * Enable api for route
-     *
-     * Supported auth route
-     * Default: false
-     */
-    'api_route' => (bool) env('API_ROUTE', false),
-
-    /**
      * Show logs in admin page
      */
     'logs_viewer' => true,
@@ -77,7 +69,7 @@ return [
         /**
          * Plugins assets path
          *
-         * Path for assets when it was publish
+         * Path for assets when it was published
          * Default: plugins
          */
         'assets' => public_path('plugins'),
@@ -100,9 +92,25 @@ return [
 
     ],
 
+    /**
+     * File management setting
+     */
     'filemanager' => [
+        /**
+         * FileSystem disk
+         */
         'disk' => 'public',
+        /**
+         * Optimizer image after upload
+         *
+         * @see https://juzaweb.com/documentation/start/image-optimizer
+         */
         'image-optimizer' => (bool) env('IMAGE_OPTIMIZER', false),
+        /**
+         * File type
+         *
+         * Default: file, image
+         */
         'types' => [
             'file'  => [
                 'max_size' => 50, // size in MB
@@ -130,6 +138,9 @@ return [
         ],
     ],
 
+    /**
+     * Default database config
+     */
     'config' => [
         'title',
         'description',

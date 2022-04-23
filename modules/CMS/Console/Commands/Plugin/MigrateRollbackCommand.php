@@ -27,7 +27,7 @@ class MigrateRollbackCommand extends Command
     protected $description = 'Rollback the plugins migrations.';
 
     /**
-     * @var \Juzaweb\CMS\Contracts\RepositoryInterface
+     * @var \Juzaweb\CMS\Contracts\PluginRepositoryInterface
      */
     protected $module;
 

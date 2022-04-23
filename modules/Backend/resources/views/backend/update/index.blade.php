@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-success">
-                <p>You are using Juzaweb CMS Version: {{ \Juzaweb\CMS\Version::getVersion() }}</p>
-                <p>View CMS <a href="https://github.com/juzaweb/cms/releases" target="_blank">change logs here</a></p>
+                <p>{{ __('You are using Juzaweb CMS Version') }}: {{ \Juzaweb\CMS\Version::getVersion() }}</p>
+                <p>{{ __('View CMS') }} <a href="https://github.com/juzaweb/juzacms/releases" target="_blank">{{ __('change logs here') }}</a></p>
             </div>
 
             <div id="update-form">
@@ -16,7 +16,7 @@
 
     <div class="row mt-5">
         <div class="col-md-12">
-            <h5>Update plugins</h5>
+            <h5>{{ __('Update plugins') }}</h5>
             <div class="row mb-2">
                 <div class="col-md-4">
                     <form method="post" class="form-inline">
@@ -48,7 +48,7 @@
 
     <div class="row mt-2">
         <div class="col-md-12">
-            <h5>Update themes</h5>
+            <h5>{{__('Update themes')}}</h5>
             <div class="row mb-2">
                 <div class="col-md-4">
                     <form method="post" class="form-inline">
@@ -80,19 +80,21 @@
 
     <script type="text/javascript">
         function update_success() {
-            window.location = "";
+            setTimeout(function () {
+                window.location = "";
+            }, 300);
             return false;
         }
 
-        var table = new JuzawebTable({
+        let table = new JuzawebTable({
             table: "#plugins-table",
             apply_button: "#apply-action-plugins",
             url: "{{ route('admin.update.plugins') }}",
-            action_url: "",
+            action_url: "{{ route('admin.plugin.bulk-actions') }}",
             chunk_action: true
         });
 
-        var table2 = new JuzawebTable({
+        let table2 = new JuzawebTable({
             table: "#themes-table",
             apply_button: "#apply-action-themes",
             url: "{{ route('admin.update.themes') }}",

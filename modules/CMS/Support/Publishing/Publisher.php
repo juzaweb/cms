@@ -5,7 +5,7 @@ namespace Juzaweb\CMS\Support\Publishing;
 use Illuminate\Console\Command;
 use Juzaweb\CMS\Abstracts\Plugin;
 use Juzaweb\CMS\Contracts\PublisherInterface;
-use Juzaweb\CMS\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
 
 abstract class Publisher implements PublisherInterface
 {
@@ -18,7 +18,7 @@ abstract class Publisher implements PublisherInterface
 
     /**
      * The plugins repository instance.
-     * @var RepositoryInterface
+     * @var PluginRepositoryInterface
      */
     protected $repository;
 
@@ -96,10 +96,10 @@ abstract class Publisher implements PublisherInterface
 
     /**
      * Set plugins repository instance.
-     * @param RepositoryInterface $repository
+     * @param PluginRepositoryInterface $repository
      * @return $this
      */
-    public function setRepository(RepositoryInterface $repository)
+    public function setRepository(PluginRepositoryInterface $repository)
     {
         $this->repository = $repository;
 
@@ -109,7 +109,7 @@ abstract class Publisher implements PublisherInterface
     /**
      * Get plugins repository instance.
      *
-     * @return RepositoryInterface
+     * @return PluginRepositoryInterface
      */
     public function getRepository()
     {

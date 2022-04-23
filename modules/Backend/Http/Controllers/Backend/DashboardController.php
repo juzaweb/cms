@@ -50,21 +50,25 @@ class DashboardController extends BackendController
         $query->orderBy('created_at', 'DESC');
         $query->offset($offset);
         $query->limit($limit);
-        $rows = $query->get([
-            'id',
-            'name',
-            'email',
-            'created_at',
-        ]);
+        $rows = $query->get(
+            [
+                'id',
+                'name',
+                'email',
+                'created_at',
+            ]
+        );
 
         foreach ($rows as $row) {
             $row->created = jw_date_format($row->created_at);
         }
 
-        return response()->json([
-            'total' => count($rows),
-            'rows' => $rows,
-        ]);
+        return response()->json(
+            [
+                'total' => count($rows),
+                'rows' => $rows,
+            ]
+        );
     }
 
     public function getDataTopViews(Request $request)
@@ -83,12 +87,14 @@ class DashboardController extends BackendController
                 $query->offset($offset);
                 $query->limit($limit);
 
-                $rows = $query->get([
-                    'id',
-                    'title',
-                    'views',
-                    'created_at',
-                ]);
+                $rows = $query->get(
+                    [
+                        'id',
+                        'title',
+                        'views',
+                        'created_at',
+                    ]
+                );
 
                 foreach ($rows as $row) {
                     $row->created = jw_date_format($row->created_at);

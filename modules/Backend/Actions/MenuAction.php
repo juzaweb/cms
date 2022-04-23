@@ -44,6 +44,26 @@ class MenuAction extends Action
                 'position' => 1,
             ]
         );
+    
+        HookAction::addAdminMenu(
+            trans('cms::app.dashboard'),
+            'dashboard',
+            [
+                'icon' => 'fa fa-dashboard',
+                'position' => 1,
+                'parent' => 'dashboard',
+            ]
+        );
+    
+        HookAction::addAdminMenu(
+            trans('cms::app.updates'),
+            'updates',
+            [
+                'icon' => 'fa fa-arrow-circle-o-up',
+                'position' => 1,
+                'parent' => 'dashboard',
+            ]
+        );
 
         HookAction::addAdminMenu(
             trans('cms::app.appearance'),
@@ -296,6 +316,7 @@ class MenuAction extends Action
         HookAction::enqueueScript('core', 'jw-styles/juzaweb/js/vendor.min.js', $ver);
         HookAction::enqueueScript('core', 'jw-styles/juzaweb/js/backend.min.js', $ver);
         HookAction::enqueueScript('core', 'jw-styles/juzaweb/tinymce/tinymce.min.js', $ver);
+        HookAction::enqueueScript('core', 'jw-styles/juzaweb/js/custom.min.js', $ver);
     }
 
     public function addAdminStyles()
@@ -303,6 +324,7 @@ class MenuAction extends Action
         $ver = Version::getVersion();
         HookAction::enqueueStyle('core', 'jw-styles/juzaweb/css/vendor.min.css', $ver);
         HookAction::enqueueStyle('core', 'jw-styles/juzaweb/css/backend.min.css', $ver);
+        HookAction::enqueueStyle('core', 'jw-styles/juzaweb/css/custom.min.css', $ver);
     }
 
     public function addDatatableSearchFieldTypes()

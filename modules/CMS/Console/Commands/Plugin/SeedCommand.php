@@ -8,7 +8,7 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Abstracts\Plugin;
-use Juzaweb\CMS\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
 use RuntimeException;
@@ -62,12 +62,12 @@ class SeedCommand extends Command
 
     /**
      * @throws RuntimeException
-     * @return RepositoryInterface
+     * @return PluginRepositoryInterface
      */
-    public function getModuleRepository(): RepositoryInterface
+    public function getModuleRepository(): PluginRepositoryInterface
     {
         $modules = $this->laravel['plugins'];
-        if (! $modules instanceof RepositoryInterface) {
+        if (! $modules instanceof PluginRepositoryInterface) {
             throw new RuntimeException('Plugin repository not found!');
         }
 

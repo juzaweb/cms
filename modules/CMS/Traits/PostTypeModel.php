@@ -46,16 +46,18 @@ trait PostTypeModel
      */
     public static function selectFrontendBuilder()
     {
-        $builder = self::with([
+        $builder = self::with(
+            [
                 'createdBy' => function ($q) {
                     $q->cacheFor(3600);
                 },
                 'taxonomies' => function ($q) {
                     $q->cacheFor(3600);
                 },
-            ])
-            ->cacheFor(3600)
-            ->select([
+            ]
+        )->cacheFor(3600)
+        ->select(
+            [
                 'id',
                 'title',
                 'description',
@@ -66,10 +68,11 @@ trait PostTypeModel
                 'status',
                 'created_by',
                 'json_metas',
-            ])
-            ->wherePublish();
+            ]
+        )
+        ->wherePublish();
 
-        $builder = apply_filters('selectFrontendBuilder', $builder);
+        $builder = apply_filters('post.selectFrontendBuilder', $builder);
 
         return $builder;
     }
@@ -81,13 +84,15 @@ trait PostTypeModel
      */
     public static function createFrontendBuilder()
     {
-        $builder = self::with([
-            'createdBy',
-            'taxonomies',
-        ])
+        $builder = self::with(
+            [
+                'createdBy',
+                'taxonomies',
+            ]
+        )
             ->wherePublish();
 
-        $builder = apply_filters('createFrontendBuilder', $builder);
+        $builder = apply_filters('post.createFrontendBuilder', $builder);
 
         return $builder;
     }
@@ -152,10 +157,12 @@ trait PostTypeModel
     {
         if ($keyword = Arr::get($params, 'q')) {
             $keyword = trim($keyword);
-            $builder->where(function (Builder $q) use ($keyword) {
-                $q->where('title', JW_SQL_LIKE, '%'.$keyword.'%');
-                $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
-            });
+            $builder->where(
+                function (Builder $q) use ($keyword) {
+                    $q->where('title', JW_SQL_LIKE, '%'.$keyword.'%');
+                    $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
+                }
+            );
         }
 
         if ($status = Arr::get($params, 'status')) {
@@ -195,43 +202,6 @@ trait PostTypeModel
             }
         }
 
-        return $builder;
-    }
-
-    /**
-     * @param Builder $builder
-     * @param string $key
-     * @param string $value
-     *
-     * @return Builder
-     */
-    public function scopeWhereMeta($builder, $key, $value)
-    {
-        return $builder->whereHas('metas', function (
-            Builder $q
-        ) use (
-            $key,
-            $value
-        ) {
-            $q->where('meta_key', '=', $key);
-            if (is_array($value)) {
-                $q->whereIn('meta_value', $value);
-            } else {
-                $q->where('meta_value', '=', $value);
-            }
-        });
-    }
-
-    /**
-     * @param Builder $builder
-     * @param array $params
-     *
-     * @return Builder
-     */
-    public function scopeWhereSearch($builder, $params)
-    {
-        $builder->whereFilter($params);
-
         if ($sort = Arr::get($params, 'sort')) {
             switch ($sort) {
                 case 'latest':
@@ -245,6 +215,58 @@ trait PostTypeModel
                     break;
             }
         }
+
+        return $builder;
+    }
+
+    /**
+     * @param Builder $builder
+     * @param string $key
+     * @param string $value
+     *
+     * @return Builder
+     */
+    public function scopeWhereMeta($builder, $key, $value)
+    {
+        return $builder->whereHas(
+            'metas',
+            function (Builder $q) use (
+                $key,
+                $value
+            ) {
+                $q->where('meta_key', '=', $key);
+                if (is_array($value)) {
+                    $q->whereIn('meta_value', $value);
+                } else {
+                    $q->where('meta_value', '=', $value);
+                }
+            }
+        );
+    }
+
+    public function scopeWhereMetaIn($builder, $key, $values)
+    {
+        return $builder->whereHas(
+            'metas',
+            function (Builder $q) use (
+                $key,
+                $values
+            ) {
+                $q->where('meta_key', '=', $key);
+                $q->whereIn('meta_value', $values);
+            }
+        );
+    }
+
+    /**
+     * @param Builder $builder
+     * @param array $params
+     *
+     * @return Builder
+     */
+    public function scopeWhereSearch($builder, $params)
+    {
+        $builder->whereFilter($params);
 
         $builder = apply_filters(
             'frontend.search_query',
@@ -296,9 +318,12 @@ trait PostTypeModel
     {
         $ids = $this->getTaxonomies($taxonomy)->pluck('id')->toArray();
 
-        return self::whereHas('taxonomies', function (Builder $q) use ($ids) {
-            $q->whereIn("{$q->getModel()->getTable()}.id", $ids);
-        })
+        return self::whereHas(
+            'taxonomies',
+            function (Builder $q) use ($ids) {
+                $q->whereIn("{$q->getModel()->getTable()}.id", $ids);
+            }
+        )
             ->where('id', '!=', $this->id)
             ->take($limit)
             ->get();
@@ -323,11 +348,13 @@ trait PostTypeModel
             );
         }
 
-        $this->update([
-            'json_taxonomies' => TaxonomyResource::collection(
-                $this->taxonomies()->get()
-            )->toArray(request())
-        ]);
+        $this->update(
+            [
+                'json_taxonomies' => TaxonomyResource::collection(
+                    $this->taxonomies()->get()
+                )->toArray(request())
+            ]
+        );
     }
 
     public function syncTaxonomy(
@@ -351,18 +378,26 @@ trait PostTypeModel
         $this->taxonomies()->detach($detachIds);
 
         $this->taxonomies()
-            ->syncWithoutDetaching(combine_pivot($data, [
-                'term_type' => $postType,
-            ]), ['term_type' => $postType]);
+            ->syncWithoutDetaching(
+                combine_pivot(
+                    $data,
+                    [
+                        'term_type' => $postType,
+                    ]
+                ),
+                ['term_type' => $postType]
+            );
 
         $taxonomies = Taxonomy::where('taxonomy', '=', $taxonomy)
             ->whereIn('id', array_merge($detachIds, $data))
             ->get();
 
         foreach ($taxonomies as $taxonomy) {
-            $taxonomy->update([
-                'total_post' => $taxonomy->posts()->count(),
-            ]);
+            $taxonomy->update(
+                [
+                    'total_post' => $taxonomy->posts()->count(),
+                ]
+            );
         }
 
         return true;
@@ -371,17 +406,22 @@ trait PostTypeModel
     public function setMeta($key, $value)
     {
         $metas = $this->getMetas();
-        $this->metas()->updateOrCreate([
-            'meta_key' => $key
-        ], [
-            'meta_value' => $value
-        ]);
+        $this->metas()->updateOrCreate(
+            [
+                'meta_key' => $key
+            ],
+            [
+                'meta_value' => $value
+            ]
+        );
 
         $metas[$key] = $value;
 
-        $this->update([
-            'json_metas' => $metas
-        ]);
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
     }
 
     public function syncMetas(array $data = [])
@@ -394,18 +434,23 @@ trait PostTypeModel
                 continue;
             }
 
-            $this->metas()->updateOrCreate([
-                'meta_key' => $key
-            ], [
-                'meta_value' => is_array($val) ? json_encode($val) : $val
-            ]);
+            $this->metas()->updateOrCreate(
+                [
+                    'meta_key' => $key
+                ],
+                [
+                    'meta_value' => is_array($val) ? json_encode($val) : $val
+                ]
+            );
 
             $metas[$key] = $val;
         }
 
-        $this->update([
-            'json_metas' => $metas
-        ]);
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
 
         $this->metas()
             ->whereNotIn('meta_key', array_keys($data))
@@ -432,9 +477,12 @@ trait PostTypeModel
      **/
     public function scopeWhereTaxonomy($builder, $taxonomy)
     {
-        $builder->whereHas('taxonomies', function (Builder $q) use ($taxonomy) {
-            $q->where($q->getModel()->getTable() . '.id', $taxonomy);
-        });
+        $builder->whereHas(
+            'taxonomies',
+            function (Builder $q) use ($taxonomy) {
+                $q->where($q->getModel()->getTable() . '.id', $taxonomy);
+            }
+        );
 
         return $builder;
     }

@@ -7,6 +7,7 @@ use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Juzaweb\CMS\Facades\Config as DbConfig;
 use Juzaweb\Backend\Models\EmailTemplate;
@@ -34,7 +35,7 @@ class DatabaseManager
         DB::beginTransaction();
         try {
             $this->makeConfig();
-            $this->makeEmailTemplate();
+            $this->makeEmailTemplate($outputLog);
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
@@ -98,65 +99,23 @@ class DatabaseManager
 
     private function makeConfig()
     {
-        DbConfig::setConfig('title', 'Juzaweb CMS - The Best Laravel CMS');
-        DbConfig::setConfig('description', 'Juzaweb is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again.');
+        DbConfig::setConfig('title', 'JuzaCMS - Laravel CMS for Your Project');
+        DbConfig::setConfig(
+            'description',
+            'Juzaweb is a Content Management System (CMS)'
+            . ' and web platform whose sole purpose is to make your development workflow simple again.'
+        );
         DbConfig::setConfig('author_name', 'Juzaweb Team');
         DbConfig::setConfig('user_registration', 1);
         DbConfig::setConfig('user_verification', 0);
     }
 
-    private function makeEmailTemplate()
+    private function makeEmailTemplate(BufferedOutput $outputLog)
     {
-        EmailTemplate::firstOrCreate(
-            [
-                'code' => 'verification',
-            ],
-            [
-                'subject' => 'Verify your account',
-                'body' => '<p>Hello {{ name }},</p>
-    <p>Thank you for register. Please click the link below to Verify your account</p>
-    <p><a href="{{ verifyUrl }}" target="_blank">Verify account</a></p>',
-                'params' => [
-                    'name' => 'Your Name',
-                    'verifyUrl' => 'Url verify account',
-                ],
-            ]
-        );
-
-        EmailTemplate::firstOrCreate(
-            [
-                'code' => 'forgot_password',
-            ],
-            [
-                'subject' => 'Password Reset for you account',
-                'body' => '<p>Someone has requested a password reset for the following account:</p>
-<p>Email: {{ email }}</p>
-<p>If this was a mistake, just ignore this email and nothing will happen.To reset your password, visit the following address:</p>
-<p><a href="{{ url }}" target="_blank">{{ url }}</a></p>',
-                'params' => [
-                    'name' => 'Full Name',
-                    'email' => 'Email',
-                    'url' => 'Url reset password',
-                ],
-            ]
-        );
-
-        EmailTemplate::firstOrCreate(
-            [
-                'code' => 'notification',
-            ],
-            [
-                'subject' => '{{ subject }}',
-                'body' => '{{ body }}',
-                'params' => [
-                    'subject' => 'Subject notify',
-                    'body' => 'Body notify',
-                    'name' => 'User name',
-                    'email' => 'User Email address',
-                    'url' => 'Url notify',
-                    'image' => 'Image notify',
-                ],
-            ]
-        );
+        try {
+            Artisan::call('mail:generate-template', [], $outputLog);
+        } catch (Exception $e) {
+            return $this->response($e->getMessage(), 'error', $outputLog);
+        }
     }
 }

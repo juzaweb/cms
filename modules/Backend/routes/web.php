@@ -9,13 +9,13 @@
  */
 
 use Juzaweb\CMS\Support\Route\Auth;
-use Juzaweb\Backend\Http\Controllers\AdminController;
-use Juzaweb\Backend\Http\Controllers\DatabaseController;
-use Juzaweb\Backend\Http\Controllers\EnvironmentController;
-use Juzaweb\Backend\Http\Controllers\FinalController;
-use Juzaweb\Backend\Http\Controllers\PermissionsController;
-use Juzaweb\Backend\Http\Controllers\RequirementsController;
-use Juzaweb\Backend\Http\Controllers\WelcomeController;
+use Juzaweb\Backend\Http\Controllers\Installer\AdminController;
+use Juzaweb\Backend\Http\Controllers\Installer\DatabaseController;
+use Juzaweb\Backend\Http\Controllers\Installer\EnvironmentController;
+use Juzaweb\Backend\Http\Controllers\Installer\FinalController;
+use Juzaweb\Backend\Http\Controllers\Installer\PermissionsController;
+use Juzaweb\Backend\Http\Controllers\Installer\RequirementsController;
+use Juzaweb\Backend\Http\Controllers\Installer\WelcomeController;
 
 Route::group(
     [

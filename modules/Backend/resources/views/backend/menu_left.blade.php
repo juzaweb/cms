@@ -14,7 +14,7 @@
     @endphp
 
     @foreach($items as $item)
-        @if($item->get('key')!= 'dashboard' && !$jw_user->can($item->get('key')))
+        @if($item->get('key') != 'dashboard' && !$jw_user->can($item->get('key')))
             @continue
         @endif
 

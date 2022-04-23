@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/laravel-cms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
  * @license    MIT
@@ -19,13 +19,13 @@ class ImportController extends BackendController
     public function index()
     {
         $title = trans('cms::app.import');
-        
+
         return view(
             'cms::backend.tool.import',
             compact('title')
         );
     }
-    
+
     public function import(Request $request)
     {
         $this->validate(

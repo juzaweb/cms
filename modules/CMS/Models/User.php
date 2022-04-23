@@ -20,6 +20,7 @@ use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Database\Factories\UserFactory;
 use Juzaweb\CMS\Traits\ModelCache;
 use Juzaweb\CMS\Traits\ResourceModel;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -39,7 +40,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $language
  * @property string|null $verification_token
  * @property array|null $data
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @method static Builder|User active()
  * @method static \Juzaweb\CMS\Database\Factories\UserFactory factory(...$parameters)
@@ -75,6 +75,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable
 {
+    use HasApiTokens;
     use Notifiable;
     use ResourceModel;
     use HasFactory;
@@ -123,26 +124,6 @@ class User extends Authenticatable
     protected static function newFactory()
     {
         return UserFactory::new();
-    }
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
     }
 
     /**

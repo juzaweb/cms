@@ -12,12 +12,14 @@ class RouteServiceProvider extends ServiceProvider
 {
     protected $namespace = 'Juzaweb\Backend\Http\Controllers';
 
+    public function boot()
+    {
+        $this->configureRateLimiting();
+    }
+    
     public function map()
     {
-        if (config('juzaweb.api_route')) {
-            $this->mapApiRoutes();
-        }
-
+        //$this->mapApiRoutes();
         $this->mapWebRoutes();
         $this->mapAssetRoutes();
         $this->mapAdminRoutes();
@@ -49,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
             ->middleware('api')
-            ->namespace($this->namespace)
+            ->as('api.')
             ->group(__DIR__ . '/../routes/api.php');
     }
 

@@ -27,9 +27,9 @@ abstract class DataTable
     protected $sortOder = 'desc';
 
     protected $params = [];
-    
+
     protected $dataUrl;
-    
+
     protected $actionUrl;
 
     public $currentUrl;
@@ -142,17 +142,17 @@ abstract class DataTable
     {
         $this->dataUrl = $url;
     }
-    
+
     public function setActionUrl(string $url)
     {
         $this->actionUrl = $url;
     }
-    
+
     public function setCurrentUrl(string $url)
     {
         $this->currentUrl = $url;
     }
-    
+
     private function paramsToArray($params)
     {
         foreach ($params as $key => $var) {

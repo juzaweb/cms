@@ -4,7 +4,7 @@ namespace Juzaweb\CMS\Support\Process;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
 use Symfony\Component\Process\Process;
 
 class Installer
@@ -25,7 +25,7 @@ class Installer
 
     /**
      * The plugin repository instance.
-     * @var \Juzaweb\CMS\Contracts\RepositoryInterface
+     * @var \Juzaweb\CMS\Contracts\PluginRepositoryInterface
      */
     protected $repository;
 
@@ -90,10 +90,10 @@ class Installer
 
     /**
      * Set the plugin repository instance.
-     * @param \Juzaweb\CMS\Contracts\RepositoryInterface $repository
+     * @param \Juzaweb\CMS\Contracts\PluginRepositoryInterface $repository
      * @return $this
      */
-    public function setRepository(RepositoryInterface $repository)
+    public function setRepository(PluginRepositoryInterface $repository)
     {
         $this->repository = $repository;
 
@@ -136,7 +136,7 @@ class Installer
     public function run()
     {
         $process = $this->getProcess();
-        
+
         $process->setTimeout($this->timeout);
 
         if ($this->console instanceof Command) {
@@ -162,7 +162,7 @@ class Installer
 
             return $this->installViaGit();
         }
-        
+
         return $this->installViaComposer();
     }
 

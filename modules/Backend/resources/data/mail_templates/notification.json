@@ -1,0 +1,12 @@
+{
+    "subject": "{{ subject }}",
+    "body": "{{ body }}",
+    "params": {
+        "subject": "Subject notify",
+        "body": "Body notify",
+        "name": "User name",
+        "email": "User Email address",
+        "url": "Url notify",
+        "image": "Image notify"
+    }
+}

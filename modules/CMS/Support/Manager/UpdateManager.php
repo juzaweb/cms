@@ -11,310 +11,186 @@
 namespace Juzaweb\CMS\Support\Manager;
 
 use GuzzleHttp\Psr7\Utils;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Curl;
 use Juzaweb\CMS\Support\JuzawebApi;
-use Juzaweb\CMS\Version;
 
-class UpdateManager
+abstract class UpdateManager
 {
-    protected $curl;
-    /**
-     * @var JuzawebApi
-     */
-    protected $api;
+    protected Curl $curl;
+    protected JuzawebApi $api;
+    protected FilesystemAdapter $storage;
+    protected object $response;
+    protected string $tmpFolder;
+    protected string $tmpFile;
+    protected string $tmpFilePath;
+    protected string $process;
+    protected array $updatePaths = [];
 
-    protected $tag;
-    protected $val;
-    protected $version;
-
-    protected $storage;
-    protected $response;
-    protected $tmpFolder;
-    protected $tmpFile;
-
-    public function __construct($tag = 'core', $val = '', $version = null)
+    public function __construct(Curl $curl, JuzawebApi $api)
     {
-        $this->curl = app(Curl::class);
-        $this->api = app(JuzawebApi::class);
-
-        $this->tag = $tag;
-        $this->val = $val;
-        $this->version = $version;
+        $this->curl = $curl;
+        $this->api = $api;
         $this->storage = Storage::disk('tmp');
     }
 
-    public function checkUpdate()
+    public function checkForUpdate(): bool
     {
-        if ($this->getVersionAvailable() > $this->getCurrentVersion()) {
-            return true;
-        }
-
-        return false;
+        return version_compare(
+            $this->getVersionAvailable(),
+            $this->getCurrentVersion(),
+            '>'
+        );
     }
 
-    public function getCurrentVersion()
+    public function update(): bool
     {
-        switch ($this->tag) {
-            case 'core':
-                return Version::getVersion();
-            case 'plugin':
-                $module = app('plugins')->find($this->val);
-                if (empty($module)) {
-                    return "0";
-                }
-
-                return $module->getVersion();
-            case 'theme':
-                $theme = app('themes')->find($this->val);
-                if (empty($theme)) {
-                    return "0";
-                }
-
-                return $theme->getVersion();
-        }
-
-        return false;
-    }
-
-    public function getVersionAvailable()
-    {
-        $uri = $this->tag . '/version-available';
-        $data = [
-            'cms_version' => Version::getVersion(),
-            'current_version' => $this->getCurrentVersion()
-        ];
-
-        switch ($this->tag) {
-            case 'plugin':
-                $data['plugin'] = $this->val;
-                break;
-            case 'theme':
-                $data['theme'] = $this->val;
-                break;
-        }
-
-        $response = $this->api->get($uri, $data);
-
-        return get_version_by_tag($response->version);
-    }
-
-    public function update()
-    {
-        $this->updateStep1();
-        $this->updateStep2();
-        $this->updateStep3();
-        $this->updateStep4();
-        $this->updateStep5();
-        return false;
-    }
-
-    public function updateStep1()
-    {
-        $uri = $this->tag . '/version-available';
-
-        switch ($this->tag) {
-            case 'core':
-                $response = $this->api->get(
-                    $uri,
-                    [
-                        'current_version' => $this->getCurrentVersion()
-                    ]
-                );
-
-                break;
-            case 'plugin':
-                $response = $this->api->get(
-                    $uri,
-                    [
-                        'current_version' => $this->getCurrentVersion(),
-                        'update_version' => $this->version,
-                        'cms_version' => Version::getVersion(),
-                        'plugin' => $this->val,
-                        'version' => $this->version,
-                    ]
-                );
-
-                break;
-            case 'theme':
-                $response = $this->api->get(
-                    $uri,
-                    [
-                        'current_version' => $this->getCurrentVersion(),
-                        'update_version' => $this->version,
-                        'cms_version' => Version::getVersion(),
-                        'theme' => $this->val,
-                    ]
-                );
-                break;
-            default:
-                return false;
-        }
-
-        $this->response = $response;
-
-        if (empty($response->update)) {
-            return false;
-        }
-
+        $this->fetchData();
+        $this->downloadUpdateFile();
+        $this->unzipFile();
+        $this->updateFileAndFolder();
+        $this->finish();
         return true;
     }
 
-    public function updateStep2()
+    public function downloadUpdateFile(): bool
     {
-        $file = $this->response->link;
+        $this->setProcess('downloading');
 
-        $this->tmpFolder = $this->tag . '/' . Str::random(5);
+        $this->tmpFolder = Str::lower(Str::random(10));
         foreach (['zip', 'unzip', 'backup'] as $folder) {
-            if (! $this->storage->exists($this->tmpFolder . '/' . $folder)) {
-                File::makeDirectory($this->storage->path($this->tmpFolder . '/' . $folder), 0775, true);
+            if (!$this->storage->exists("{$this->tmpFolder}/{$folder}")) {
+                File::makeDirectory(
+                    $this->storage->path("{$this->tmpFolder}/{$folder}"),
+                    0775,
+                    true
+                );
             }
         }
 
-        $this->tmpFile = $this->tmpFolder . '/zip/' . Str::random(10) . '.zip';
-        $this->tmpFile = $this->storage->path($this->tmpFile);
+        $this->tmpFile = $this->tmpFolder.'/zip/'. Str::lower(Str::random(5)).'.zip';
+        $this->tmpFilePath = $this->storage->path($this->tmpFile);
 
-        if (! $this->downloadFile($file, $this->tmpFile)) {
+        if (!$this->downloadFile($this->response->link, $this->tmpFilePath)) {
             return false;
         }
 
+        $this->setProcess('downloaded');
         return true;
     }
 
-    public function updateStep3()
+    public function unzipFile(): bool
     {
+        $this->setProcess('unzip');
         $zip = new \ZipArchive();
-        $op = $zip->open($this->tmpFile);
+        $op = $zip->open($this->tmpFilePath);
 
         if ($op !== true) {
             return false;
         }
 
-        $zip->extractTo($this->storage->path($this->tmpFolder . '/unzip'));
+        $zip->extractTo($this->storage->path("{$this->tmpFolder}/unzip"));
         $zip->close();
-
+        $this->setProcess('unzip_success');
         return true;
     }
 
-    public function updateStep4()
+    public function updateFileAndFolder(): void
     {
-        $localFolder = $this->getLocalFolder();
+        $this->setProcess('updating');
+        $localFolder = $this->getLocalPath();
+        $tmpFolder = $this->storage->path($this->tmpFolder);
+
         if (!is_dir($localFolder)) {
             File::makeDirectory($localFolder, 0775, true);
         }
 
-        $zipFolders = File::directories($this->storage->path($this->tmpFolder . '/unzip'));
-        File::moveDirectory($localFolder, $this->storage->path($this->tmpFolder . '/backup/cms'));
+        $this->setProcess('backup');
+        $zipFolders = File::directories("{$tmpFolder}/unzip");
+
+        $this->updateFolder($localFolder, "{$tmpFolder}/backup");
+
+        $this->setProcess('move_folder');
         foreach ($zipFolders as $folder) {
-            File::moveDirectory($folder, $localFolder, true);
+            $this->updateFolder($folder, $localFolder);
             break;
         }
-
-        File::deleteDirectory($this->storage->path($this->tag), true);
     }
 
-    public function updateStep5()
+    public function finish(): void
     {
-        switch ($this->tag) {
-            case 'core':
-                Artisan::call('migrate', ['--force' => true]);
-                Artisan::call(
-                    'vendor:publish',
-                    [
-                        '--tag' => 'cms_assets',
-                        '--force' => true,
-                    ]
-                );
-
-                /**
-                 * @var \Juzaweb\CMS\Abstracts\Plugin[] $plugins
-                 */
-                $plugins = app('plugins')->all();
-                foreach ($plugins as $plugin) {
-                    if (! $plugin->isEnabled()) {
-                        continue;
-                    }
-
-                    $plugin->disable();
-                    $plugin->enable();
-                }
-
-                $theme = jw_current_theme();
-                Artisan::call(
-                    'theme:publish',
-                    [
-                        'theme' => $theme,
-                        'type' => 'assets',
-                    ]
-                );
-
-                break;
-            case 'plugin':
-                /**
-                 * @var \Juzaweb\CMS\Abstracts\Plugin $plugin
-                 */
-                $plugin = app('plugins')->find($this->val);
-                if ($plugin->isEnabled()) {
-                    $plugin->disable();
-                    $plugin->enable();
-                }
-
-                break;
-            case 'theme':
-                if ($this->val == jw_current_theme()) {
-                    Artisan::call(
-                        'theme:publish',
-                        [
-                            'theme' => $this->val,
-                            'type' => 'assets',
-                        ]
-                    );
-                }
+        $this->setProcess('before_finish');
+        if (method_exists($this, 'beforeFinish')) {
+            $this->beforeFinish();
         }
+
+        File::deleteDirectory($this->storage->path($this->tmpFolder), true);
 
         Artisan::call('optimize:clear');
+
+        if (method_exists($this, 'afterFinish')) {
+            $this->afterFinish();
+        }
     }
 
-    protected function getLocalFolder()
+    public function rollBack(): void
     {
-        switch ($this->tag) {
-            case 'core':
-                return base_path('packages');
-            case 'plugin':
-                return config('juzaweb.plugin.path') . '/' . $this->val;
-            case 'theme':
-                return config('juzaweb.theme.path') . '/' . $this->val;
+        //
+    }
+
+    protected function updateFolder(string $source, string $target): bool
+    {
+        if (empty($this->updatePaths)) {
+            File::copyDirectory($source, $target);
+            return true;
         }
 
-        return false;
+        foreach ($this->updatePaths as $path) {
+            $sourcePath = str_replace('\\', '/', "{$source}/{$path}");
+            $targetPath = str_replace('\\', '/', "{$target}/{$path}");
+
+            if (is_dir($sourcePath)) {
+                File::copyDirectory(
+                    $sourcePath,
+                    $targetPath
+                );
+            }
+
+            if (is_file($sourcePath)) {
+                File::copy($sourcePath, $targetPath);
+            }
+        }
+
+        return true;
     }
 
-    protected function downloadFile($url, $filename)
+    protected function downloadFile($url, $filename): ?string
     {
         $resource = Utils::tryFopen($filename, 'w');
 
-        try {
-            $this->curl->getClient()->request(
-                'GET',
-                $url,
-                [
-                    'curl' => [
-                        CURLOPT_TCP_KEEPALIVE => 10,
-                        CURLOPT_TCP_KEEPIDLE => 10,
-                    ],
-                    'sink' => $resource,
-                ]
-            );
+        $this->curl->getClient()->request(
+            'GET',
+            $url,
+            [
+                'curl' => [
+                    CURLOPT_TCP_KEEPALIVE => 10,
+                    CURLOPT_TCP_KEEPIDLE => 10,
+                ],
+                'sink' => $resource,
+            ]
+        );
 
-            return $filename;
-        } catch (\Throwable $e) {
-            Log::error($e);
-        }
-
-        return false;
+        return $filename;
     }
+
+    protected function setProcess(string $process): void
+    {
+        $this->process = $process;
+    }
+
+    abstract protected function getLocalPath(): string;
 }

@@ -11,7 +11,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
-use Juzaweb\CMS\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
 use Juzaweb\CMS\Exceptions\InvalidAssetPath;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
 use Juzaweb\CMS\Support\Collection;
@@ -19,7 +19,7 @@ use Juzaweb\CMS\Support\Json;
 use Juzaweb\CMS\Support\Process\Installer;
 use Juzaweb\CMS\Support\Process\Updater;
 
-abstract class FileRepository implements RepositoryInterface, Countable
+abstract class FileRepository implements PluginRepositoryInterface, Countable
 {
     use Macroable;
 
@@ -115,36 +115,30 @@ abstract class FileRepository implements RepositoryInterface, Countable
 
         $paths[] = $this->getPath() . '/*';
 
-        if (false) {
-            $scanPaths = [
-                base_path('vendor/*/*'),
-            ];
-            $paths = array_merge($paths, $scanPaths);
-        }
-
-        $paths = array_map(function ($path) {
-            return Str::endsWith($path, '/*') ? $path : Str::finish($path, '/*');
-        }, $paths);
-
-        return $paths;
+        return array_map(
+            function ($path) {
+                return Str::endsWith($path, '/*') ? $path : Str::finish($path, '/*');
+            },
+            $paths
+        );
     }
 
     /**
      * Creates a new Plugin instance
      *
      * @param Container $app
-     * @param string $args
+     * @param string $data
      * @param string $path
      * @return \Juzaweb\CMS\Abstracts\Plugin
      */
-    abstract protected function createModule(...$args);
+    abstract protected function createModule(...$args): Plugin;
 
     /**
      * Get & scan all plugins.
      *
      * @return array
      */
-    public function scan()
+    public function scan(): array
     {
         $paths = $this->getScanPaths();
 
@@ -154,7 +148,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
             $manifests = $this->getFiles()->glob("{$path}/composer.json");
 
             is_array($manifests) || $manifests = [];
-            
+
             foreach ($manifests as $manifest) {
                 $info = Json::make($manifest)->getAttributes();
                 $name = Arr::get($info, 'name');
@@ -162,7 +156,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
                 if (!$visible) {
                     continue;
                 }
-                
+
                 $modules[$name] = $this->createModule(
                     $this->app,
                     $name,
@@ -211,11 +205,15 @@ abstract class FileRepository implements RepositoryInterface, Countable
      *
      * @return array
      */
-    public function getCached()
+    public function getCached(): array
     {
-        return $this->cache->remember($this->config('cache.key'), $this->config('cache.lifetime'), function () {
-            return $this->toCollection()->toArray();
-        });
+        return $this->cache->remember(
+            $this->config('cache.key'),
+            $this->config('cache.lifetime'),
+            function () {
+                return $this->toCollection()->toArray();
+            }
+        );
     }
 
     /**
@@ -302,17 +300,20 @@ abstract class FileRepository implements RepositoryInterface, Countable
     {
         $modules = $this->allEnabled();
 
-        uasort($modules, function (Plugin $a, Plugin $b) use ($direction) {
-            if ($a->get('order') === $b->get('order')) {
-                return 0;
-            }
+        uasort(
+            $modules,
+            function (Plugin $a, Plugin $b) use ($direction) {
+                if ($a->get('order') === $b->get('order')) {
+                    return 0;
+                }
 
-            if ($direction === 'desc') {
-                return $a->get('order') < $b->get('order') ? 1 : -1;
-            }
+                if ($direction === 'desc') {
+                    return $a->get('order') < $b->get('order') ? 1 : -1;
+                }
 
-            return $a->get('order') > $b->get('order') ? 1 : -1;
-        });
+                return $a->get('order') > $b->get('order') ? 1 : -1;
+            }
+        );
 
         return $modules;
     }
@@ -356,7 +357,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
             }
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -370,7 +371,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
             }
         }
 
-        return;
+        return null;
     }
 
     /**

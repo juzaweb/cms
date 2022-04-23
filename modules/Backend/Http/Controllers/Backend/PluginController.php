@@ -2,15 +2,27 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Juzaweb\Backend\Http\Requests\Plugin\BulkActionRequest;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\ArrayPagination;
+use Juzaweb\CMS\Support\JuzawebApi;
+use Juzaweb\CMS\Support\Updater\PluginUpdater;
+use Juzaweb\CMS\Version;
 
 class PluginController extends BackendController
 {
-    public function index()
+    protected JuzawebApi $api;
+
+    public function __construct(JuzawebApi $api)
+    {
+        $this->api = $api;
+    }
+
+    public function index(): View
     {
         return view(
             'cms::backend.plugin.index',
@@ -20,83 +32,75 @@ class PluginController extends BackendController
         );
     }
 
-    public function getDataTable(Request $request)
+    public function getDataTable(Request $request): JsonResponse
     {
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
 
-        $results = [];
         $plugins = Plugin::all();
-        
-        foreach ($plugins as $name => $plugin) {
-            /**
-             * @var \Juzaweb\CMS\Abstracts\Plugin $plugin
-             */
+        $total = count($plugins);
+        $page = (int) round(($offset + $limit) / $limit);
+        $data = ArrayPagination::make($plugins);
+        $data = $data->paginate($limit, $page);
 
-            $item = [
+        $updates = $this->getDataUpdates($data);
+
+        $results = [];
+        foreach ($data as $plugin) {
+            /**
+             * @var Plugin $plugin
+             */
+            $results[] = [
                 'id' => $plugin->get('name'),
                 'name' => $plugin->getDisplayName(),
                 'description' => $plugin->get('description'),
                 'status' => $plugin->isEnabled() ? 'active' : 'inactive',
                 'setting' => $plugin->getSettingUrl(),
+                'version' => $plugin->getVersion(),
+                'update' => $updates->{$plugin->get('name')}->update ?? false,
             ];
-
-            $results[] = $item;
         }
-
-        $total = count($results);
-        $page = (int) round(($offset + $limit) / $limit);
-        $data = ArrayPagination::make($results);
-        $data = $data->paginate($limit, $page);
 
         return response()->json(
             [
                 'total' => $total,
-                'rows' => $data->values(),
+                'rows' => $results,
             ]
         );
     }
 
-    public function bulkActions(Request $request)
+    public function bulkActions(BulkActionRequest $request, PluginUpdater $updater): JsonResponse
     {
-        $request->validate(
-            [
-                'ids' => 'required',
-                'action' => 'required',
-            ],
-            [],
-            [
-                'ids' => trans('tadcms::app.plugins'),
-                'action' => trans('tadcms::app.action'),
-            ]
-        );
-
         $action = $request->post('action');
         $ids = $request->post('ids');
-        
+
         foreach ($ids as $plugin) {
             try {
-                //DB::beginTransaction();
                 switch ($action) {
-                    /*case 'delete':
-                        $plugins = get_config('installed_plugins', []);
-                        unset($plugins[$plugin]);
-
-                        if (app('plugins')->isEnabled($plugin)) {
-                            Plugin::disable($plugin);
+                    case 'delete':
+                        /**
+                         * @var \Juzaweb\CMS\Abstracts\Plugin $module
+                         */
+                        $module = app('plugins')->find($plugin);
+                        if ($module->isEnabled()) {
+                            $module->disable();
                         }
-                        break;*/
+
+                        $module->delete();
+                        break;
                     case 'activate':
                         Plugin::enable($plugin);
                         break;
                     case 'deactivate':
                         Plugin::disable($plugin);
                         break;
+                    case 'update':
+                        $helper = $updater->find($plugin);
+                        $helper->update();
+                        break;
                 }
-
-                //DB::commit();
             } catch (\Throwable $e) {
-                //DB::rollBack();
+                report($e);
                 return $this->error(
                     [
                         'message' => $e->getMessage(),
@@ -111,5 +115,27 @@ class PluginController extends BackendController
                 'redirect' => route('admin.plugin'),
             ]
         );
+    }
+
+    protected function getDataUpdates($plugins): ?object
+    {
+        try {
+            return $this->api->post(
+                'plugins/versions-available',
+                [
+                    'plugins' => $plugins->map(
+                        function ($item) {
+                            return [
+                                'name' => $item->get('name'),
+                                'current_version' => $item->getVersion(),
+                            ];
+                        }
+                    )->values()->toArray(),
+                    'cms_version' => Version::getVersion(),
+                ]
+            );
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }
