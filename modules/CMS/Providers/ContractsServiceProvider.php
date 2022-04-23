@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\CMS\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
 use Juzaweb\CMS\Support\LaravelFileRepository;
 
 class ContractsServiceProvider extends ServiceProvider
@@ -13,6 +13,6 @@ class ContractsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(RepositoryInterface::class, LaravelFileRepository::class);
+        $this->app->singleton(PluginRepositoryInterface::class, LaravelFileRepository::class);
     }
 }

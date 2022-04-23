@@ -201,7 +201,7 @@ trait PostTypeModel
                 $builder->whereMeta($key, $val);
             }
         }
-    
+
         if ($sort = Arr::get($params, 'sort')) {
             switch ($sort) {
                 case 'latest':
@@ -244,6 +244,20 @@ trait PostTypeModel
         );
     }
 
+    public function scopeWhereMetaIn($builder, $key, $values)
+    {
+        return $builder->whereHas(
+            'metas',
+            function (Builder $q) use (
+                $key,
+                $values
+            ) {
+                $q->where('meta_key', '=', $key);
+                $q->whereIn('meta_value', $values);
+            }
+        );
+    }
+
     /**
      * @param Builder $builder
      * @param array $params
@@ -253,7 +267,7 @@ trait PostTypeModel
     public function scopeWhereSearch($builder, $params)
     {
         $builder->whereFilter($params);
-        
+
         $builder = apply_filters(
             'frontend.search_query',
             $builder,

@@ -2,37 +2,33 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzawebcms/juzawebcms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzawebcms/juzawebcms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 6/13/2021
- * Time: 11:09 AM
  */
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Juzaweb\CMS\Abstracts\Plugin;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\Manager\UpdateManager;
 use Juzaweb\CMS\Support\JuzawebApi;
+use Juzaweb\CMS\Support\Updater\CmsUpdater;
 use Juzaweb\CMS\Version;
 
 class UpdateController extends BackendController
 {
-    protected $api;
+    protected JuzawebApi $api;
 
     public function __construct(JuzawebApi $api)
     {
         $this->api = $api;
     }
 
-    public function index()
+    public function index(): View
     {
         $title = trans('cms::app.updates');
 
@@ -44,15 +40,16 @@ class UpdateController extends BackendController
         );
     }
 
-    public function checkUpdate()
+    public function checkUpdate(CmsUpdater $updater): JsonResponse
     {
-        $updater = app(UpdateManager::class);
-        $checkUpdate = $updater->checkUpdate();
+        $currentVersion = $updater->getCurrentVersion();
+        $versionAvailable = $updater->getVersionAvailable();
 
-        $versionAvailable = null;
-        if ($checkUpdate) {
-            $versionAvailable = $updater->getVersionAvailable();
-        }
+        $checkUpdate = version_compare(
+            $versionAvailable,
+            $currentVersion,
+            '>'
+        );
 
         return response()->json(
             [
@@ -67,30 +64,15 @@ class UpdateController extends BackendController
         );
     }
 
-    public function update(Request $request)
+    public function update(CmsUpdater $updater): JsonResponse
     {
         set_time_limit(0);
-        $action = $request->post('action');
-        $ids = $request->post('ids');
-        if (empty($ids)) {
-            $ids = [''];
-        }
 
-        $tag = 'core';
-        if ($action) {
-            $tag = $action;
-        }
-
-        foreach ($ids as $id) {
-            DB::beginTransaction();
-            try {
-                $update = new UpdateManager($tag, $id);
-                $update->update();
-                DB::commit();
-            } catch (\Throwable $e) {
-                DB::rollBack();
-                throw $e;
-            }
+        try {
+            $updater->update();
+        } catch (\Exception $e) {
+            report($e);
+            return $this->error($e->getMessage());
         }
 
         return $this->success(
@@ -100,7 +82,7 @@ class UpdateController extends BackendController
         );
     }
 
-    public function pluginDatatable()
+    public function pluginDatatable(): JsonResponse
     {
         $plugins = app('plugins')->all();
         $data = [];
@@ -108,17 +90,17 @@ class UpdateController extends BackendController
             /**
              * @var Plugin $plugin
              */
-            
+
             $data[] = [
                 'code' => $plugin->get('name'),
                 'current_version' => $plugin->getVersion()
             ];
         }
 
-        $updates = $this->api->get(
-            'plugin/multi-available',
+        $updates = $this->api->post(
+            'releases/plugins/multi-version-available',
             [
-                'plugins' => json_encode($data),
+                'plugins' => $data,
                 'cms_version' => Version::getVersion(),
             ]
         );
@@ -160,7 +142,7 @@ class UpdateController extends BackendController
         );
     }
 
-    public function themeDatatable()
+    public function themeDatatable(): JsonResponse
     {
         $themes = Theme::all();
         $data = [];

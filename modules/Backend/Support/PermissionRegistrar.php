@@ -21,7 +21,7 @@ class PermissionRegistrar extends BaseRegistrar
         self::$teams = config('permission.teams', false);
         self::$teamsKey = config('permission.column_names.team_foreign_key');
 
-        self::$cacheKey = config('permission.cache.key');
+        self::$cacheKey = cache_prefix(config('permission.cache.key'));
 
         self::$pivotRole = config('permission.column_names.role_pivot_key') ?: 'role_id';
         self::$pivotPermission = config('permission.column_names.permission_pivot_key') ?: 'permission_id';

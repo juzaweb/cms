@@ -11,118 +11,107 @@
 namespace Juzaweb\CMS\Support;
 
 use GuzzleHttp\Exception\ClientException;
+use Exception;
 
 class JuzawebApi
 {
-    protected $curl;
-    protected $apiUrl = 'https://juzaweb.com/api';
-    protected $accessToken;
-    protected $expiresAt;
+    protected Curl $curl;
+    protected string $apiUrl = 'http://127.0.0.1:8000/api';
+    protected ?string $accessToken = null;
+    protected ?string $expiresAt = null;
 
     public function __construct(Curl $curl)
     {
         $this->curl = $curl;
     }
 
-    public function login($email, $password)
+    public function login(string $email, string $password): bool
     {
-        $response = $this->callApiGetData('POST', $this->apiUrl . '/auth/login', [
-            'email' => $email,
-            'password' => $password,
-        ]);
+        $response = $this->callApiGetData(
+            'POST',
+            $this->apiUrl.'/auth/login',
+            [
+                'email' => $email,
+                'password' => $password,
+            ]
+        );
 
         if (empty($response->access_token)) {
             return false;
         }
 
         $this->accessToken = $response->access_token;
-        $this->expiresAt = now()->addSeconds($response->expires_in)->format('Y-m-d H:i:s');
-
+        $this->expiresAt = now()->addSeconds($response->expires_in)
+            ->format('Y-m-d H:i:s');
         return true;
     }
 
-    /**
-     * @param string $uri
-     * @param array $params
-     * @return bool|object|object[]
-     */
-    public function get($uri, $params = [])
+    public function get(string $uri, array $params = []): object
     {
         return $this->callApi('GET', $uri, $params);
     }
 
-    /**
-     * @param string $uri
-     * @param array $params
-     * @return bool|object|object[]
-     */
-    public function post($uri, $params = [])
+    public function post(string $uri, array $params = []): object
     {
         return $this->callApi('POST', $uri, $params);
     }
 
-    /**
-     * Put data to api
-     *
-     * @param string $uri
-     * @param array $params
-     * @return bool|object|object[]
-     */
-    public function put($uri, $params = [])
+    public function put(string $uri, array $params = []): object
     {
         return $this->callApi('PUT', $uri, $params);
     }
 
-    public function getResponse($uri, $params = [])
+    public function getResponse($uri, $params = []): object
     {
+        $url = $this->apiUrl.'/'.$uri;
+
         $response = $this->callApiGetData(
             'GET',
-            $this->apiUrl . '/' . $uri,
+            $this->apiUrl.'/'.$uri,
             $params
         );
 
         if (empty($response)) {
-            return false;
+            throw new Exception("Response is empty url: {$url}");
         }
 
         return $response;
     }
 
-    protected function callApi($method, $uri, $params = [])
-    {
-        $headers = [];
+    protected function callApi(
+        string $method,
+        string $uri,
+        array $params = [],
+        array $headers = []
+    ): object {
+        $url = $this->apiUrl.'/'.$uri;
+
         if ($this->accessToken) {
-            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+            $headers['Authorization'] = 'Bearer '.$this->accessToken;
         }
 
         $response = $this->callApiGetData(
             $method,
-            $this->apiUrl . '/' . $uri,
+            $url,
             $params,
             $headers
         );
 
         if (empty($response)) {
-            return false;
+            throw new Exception("Response is empty url: {$url}");
         }
 
-        return $response->data ?? false;
+        return $response->data;
     }
 
-    protected function callApiGetData($method, $url, $params = [], $headers = [])
+    protected function callApiGetData($method, $url, $params = [], $headers = []): object
     {
         try {
-            switch (strtolower($method)) {
-                case 'post':
-                    $response = $this->curl->post($url, $params, $headers);
-                    break;
-                case 'put':
-                    $response = $this->curl->put($url, $params, $headers);
-                    break;
-                default:
-                    $response = $this->curl->get($url, $params, $headers);
-                    break;
-            }
+            $response = match (strtolower($method)) {
+                'post' => $this->curl->post($url, $params, $headers),
+                'put' => $this->curl->put($url, $params, $headers),
+                default => $this->curl->get($url, $params, $headers),
+            };
         } catch (ClientException $e) {
             $response = $e->getResponse();
         } catch (\Throwable $e) {
@@ -131,10 +120,10 @@ class JuzawebApi
 
         $content = $response->getBody()->getContents();
 
-        if (is_json($content)) {
-            return json_decode($content);
+        if (!is_json($content)) {
+            throw new Exception("Cannot get json response: {$url}");
         }
 
-        return false;
+        return json_decode($content);
     }
 }

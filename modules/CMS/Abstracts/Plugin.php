@@ -6,6 +6,8 @@ use Composer\Autoload\ClassLoader;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Foundation\ProviderRepository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
@@ -13,7 +15,7 @@ use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Juzaweb\CMS\Support\Json;
 
-abstract class Plugin
+class Plugin
 {
     use Macroable;
 
@@ -211,9 +213,13 @@ abstract class Plugin
             $file = 'composer.json';
         }
 
-        return Arr::get($this->moduleJson, $file, function () use ($file) {
-            return $this->moduleJson[$file] = new Json($this->getPath() . '/' . $file, $this->files);
-        });
+        return Arr::get(
+            $this->moduleJson,
+            $file,
+            function () use ($file) {
+                return $this->moduleJson[$file] = new Json($this->getPath() . '/' . $file, $this->files);
+            }
+        );
     }
 
     /**
@@ -249,12 +255,12 @@ abstract class Plugin
     {
         if (config('plugin.autoload')) {
             $this->autoloadPSR4();
-    
+
             $this->registerAliases();
-    
+
             $this->registerProviders();
         }
-        
+
         if ($this->isLoadFilesOnBoot() === false) {
             $this->registerFiles();
         }
@@ -271,38 +277,72 @@ abstract class Plugin
     {
         $this->app['events']->dispatch(sprintf('plugin.%s.' . $event, $this->getLowerName()), [$this]);
     }
-    
+
     protected function autoloadPSR4()
     {
         $loadmaps = $this->activator->getAutoloadInfo($this);
         $loader = new ClassLoader();
-        
+
         foreach ($loadmaps as $loadmap) {
             if (empty($loadmap['namespace']) || empty($loadmap['path'])) {
                 continue;
             }
-            
+
             $loader->setPsr4($loadmap['namespace'], [$loadmap['path']]);
         }
         $loader->register(true);
     }
 
     /**
-     * Register the aliases from this plugin.
+     * Get the path to the cached *_module.php file.
      */
-    abstract public function registerAliases(): void;
+    public function getCachedServicesPath(): string
+    {
+        return Str::replaceLast(
+            'services.php',
+            $this->getSnakeName() . '_module.php',
+            $this->app->getCachedServicesPath()
+        );
+    }
 
     /**
      * Register the service providers from this plugin.
      */
-    abstract public function registerProviders(): void;
+    public function registerProviders(): void
+    {
+        $providers = $this->getExtraJuzaweb('providers', []);
+
+        if (config('plugin.autoload')) {
+            $providers = array_merge(
+                $this->getExtraLarevel('providers', []),
+                $providers
+            );
+        }
+
+        try {
+            (new ProviderRepository(
+                $this->app,
+                new Filesystem(),
+                $this->getCachedServicesPath()
+            ))
+                ->load($providers);
+        } catch (\Throwable $e) {
+            $this->disable();
+            throw $e;
+        }
+    }
 
     /**
-     * Get the path to the cached *_module.php file.
-     *
-     * @return string
+     * Register the aliases from this plugin.
      */
-    abstract public function getCachedServicesPath(): string;
+    public function registerAliases(): void
+    {
+        $loader = AliasLoader::getInstance();
+
+        foreach ($this->getExtraJuzaweb('aliases', []) as $aliasName => $aliasClass) {
+            $loader->alias($aliasName, $aliasClass);
+        }
+    }
 
     /**
      * Register the files from this plugin.
@@ -419,27 +459,27 @@ abstract class Plugin
     {
         return $this->getPath() . '/' . $path;
     }
-    
+
     public function getExtraLarevel($key, $default = null): array
     {
         $extra = $this->get('extra', []);
         if ($laravel = Arr::get($extra, 'laravel', [])) {
             return Arr::get($laravel, $key, $default);
         }
-        
+
         return $default;
     }
-    
+
     public function getExtraJuzaweb($key, $default = null)
     {
         $extra = $this->get('extra', []);
         if ($laravel = Arr::get($extra, 'juzaweb', [])) {
             return Arr::get($laravel, $key, $default);
         }
-        
+
         return $default;
     }
-    
+
     public function getDisplayName()
     {
         $name = $this->getExtraJuzaweb('name');
@@ -448,12 +488,12 @@ abstract class Plugin
         }
         return $name;
     }
-    
+
     public function getDomainName()
     {
         return $this->getExtraJuzaweb('domain');
     }
-    
+
     public function getNamespace()
     {
         $namespace = Arr::get($this->get('autoload', []), 'psr-4');
@@ -461,23 +501,26 @@ abstract class Plugin
         $namespace = $namespace[count($namespace) - 1];
         return $namespace;
     }
-    
+
     public function getVersion()
     {
         return $this->getExtraJuzaweb('version', 0);
     }
-    
+
     public function getSettingUrl()
     {
         $settingUrl = $this->getExtraJuzaweb('setting_url');
         return $settingUrl;
     }
-    
+
     public function publishAssets()
     {
-        Artisan::call('plugin:publish', [
-            'module' => $this->get('name'),
-        ]);
+        Artisan::call(
+            'plugin:publish',
+            [
+                'module' => $this->get('name'),
+            ]
+        );
     }
 
     /**
@@ -496,12 +539,15 @@ abstract class Plugin
             $this->cache->store()->flush();
         }
     }
-    
+
     protected function runMigrate()
     {
-        Artisan::call('plugin:migrate', [
-            'module' => $this->name,
-            '--force' => true,
-        ]);
+        Artisan::call(
+            'plugin:migrate',
+            [
+                'module' => $this->name,
+                '--force' => true,
+            ]
+        );
     }
 }

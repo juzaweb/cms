@@ -69,7 +69,7 @@ return [
         /**
          * Plugins assets path
          *
-         * Path for assets when it was publish
+         * Path for assets when it was published
          * Default: plugins
          */
         'assets' => public_path('plugins'),
@@ -92,9 +92,25 @@ return [
 
     ],
 
+    /**
+     * File management setting
+     */
     'filemanager' => [
+        /**
+         * FileSystem disk
+         */
         'disk' => 'public',
+        /**
+         * Optimizer image after upload
+         *
+         * @see https://juzaweb.com/documentation/start/image-optimizer
+         */
         'image-optimizer' => (bool) env('IMAGE_OPTIMIZER', false),
+        /**
+         * File type
+         *
+         * Default: file, image
+         */
         'types' => [
             'file'  => [
                 'max_size' => 50, // size in MB
@@ -122,6 +138,9 @@ return [
         ],
     ],
 
+    /**
+     * Default database config
+     */
     'config' => [
         'title',
         'description',

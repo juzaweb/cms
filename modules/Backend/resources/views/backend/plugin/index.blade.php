@@ -9,6 +9,7 @@
                     <option value="">{{ trans('cms::app.bulk_actions') }}</option>
                     <option value="activate">{{ trans('cms::app.activate') }}</option>
                     <option value="deactivate">{{ trans('cms::app.deactivate') }}</option>
+                    <option value="delete">{{ trans('cms::app.delete') }}</option>
                 </select>
 
                 <button type="submit" class="btn btn-primary px-2 mb-2" id="apply-action">{{ trans('cms::app.apply') }}</button>
@@ -18,16 +19,16 @@
         <div class="col-md-9">
             <form method="get" class="form-inline" id="form-search">
                 <div class="form-group mb-2 mr-1">
-                    <label for="search" class="sr-only">@lang('cms::app.search')</label>
-                    <input name="search" type="text" id="search" class="form-control" placeholder="@lang('cms::app.search')" autocomplete="off">
+                    <label for="search" class="sr-only">{{ trans('cms::app.search') }}</label>
+                    <input name="search" type="text" id="search" class="form-control" placeholder="{{ trans('cms::app.search') }}" autocomplete="off">
                 </div>
 
                 <div class="form-group mb-2 mr-1">
-                    <label for="status" class="sr-only">@lang('cms::app.status')</label>
+                    <label for="status" class="sr-only">{{ trans('cms::app.status') }}</label>
                     <select name="status" id="status" class="form-control select2-default">
-                        <option value="">@lang('cms::app.all_status')</option>
-                        <option value="1">@lang('cms::app.enabled')</option>
-                        <option value="0">@lang('cms::app.disabled')</option>
+                        <option value="">{{ trans('cms::app.all_status') }}</option>
+                        <option value="1">{{ trans('cms::app.enabled') }}</option>
+                        <option value="0">{{ trans('cms::app.disabled') }}</option>
                     </select>
                 </div>
 
@@ -41,9 +42,8 @@
             <thead>
                 <tr>
                     <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                    <th data-field="name" data-width="20%" data-formatter="nameFormatter">@lang('cms::app.name')</th>
+                    <th data-field="name" data-width="25%" data-formatter="nameFormatter">@lang('cms::app.name')</th>
                     <th data-field="description">@lang('cms::app.description')</th>
-                    <th data-field="setting" data-width="10%" data-formatter="settingFormatter" data-align="center">@lang('cms::app.setting')</th>
                     <th data-width="15%" data-field="status" data-formatter="statusFormatter" data-align="center">@lang('cms::app.status')</th>
                 </tr>
             </thead>
@@ -52,15 +52,27 @@
 
     <script type="text/javascript">
         function nameFormatter(value, row, index) {
-            return value;
-        }
+            let str = `<div class="font-weight-bold">${value}</div>`;
 
-        function settingFormatter(value, row, index) {
-            if (!row.setting) {
-                return '';
+            str += `<ul class="list-inline mb-0 list-actions mt-2 ">`;
+
+            if(row.status == 'active') {
+                str += `<li class="list-inline-item"><a href="javascript:void(0)" class="jw-table-row action-item" data-id="${row.id}" data-action="deactivate">${juzaweb.lang.deactivate}</a></li>`;
+            } else {
+                str += `<li class="list-inline-item"><a href="javascript:void(0)" class="jw-table-row action-item" data-id="${row.id}" data-action="activate">${juzaweb.lang.activate}</a></li>`;
             }
 
-            return `<a href="/admin-cp/${row.setting}" class="btn btn-primary btn-sm">${juzaweb.lang.setting}</a>`;
+            if (row.setting) {
+                str += `<li class="list-inline-item"><a href="/admin-cp/${row.setting}" class="jw-table-row">${juzaweb.lang.setting}</a></li>`;
+            }
+
+            if (row.update) {
+                str += `<li class="list-inline-item"><a href="javascript:void(0)" class="jw-table-row action-item" data-id="${row.id}" data-action="update">${juzaweb.lang.update}</a></li>`;
+            }
+
+            str += `<li class="list-inline-item"><a href="javascript:void(0)" class="jw-table-row text-danger action-item" data-id="${row.id}" data-action="delete">${juzaweb.lang.delete}</a></li>`;
+            str += `</ul>`;
+            return str;
         }
 
         function statusFormatter(value, row, index) {
@@ -75,6 +87,7 @@
         var table = new JuzawebTable({
             url: '{{ route('admin.plugin.get-data') }}',
             action_url: '{{ route('admin.plugin.bulk-actions') }}',
+            chunk_action: true
         });
     </script>
 @endsection

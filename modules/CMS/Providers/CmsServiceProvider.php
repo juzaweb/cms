@@ -31,16 +31,16 @@ use TwigBridge\Facade\Twig;
 
 class CmsServiceProvider extends ServiceProvider
 {
-    protected $basePath = __DIR__ . '/..';
-    
+    protected string $basePath = __DIR__ . '/..';
+
     public function boot()
     {
         $this->bootMigrations();
         $this->bootPublishes();
-    
+
         Validator::extend('recaptcha', [ReCaptcha::class, 'validate']);
         Validator::extend('domain', [DomainValidator::class, 'validate']);
-    
+
         Rule::macro(
             'modelExists',
             function (
@@ -51,7 +51,7 @@ class CmsServiceProvider extends ServiceProvider
                 return new ModelExists($modelClass, $modelAttribute, $callback);
             }
         );
-    
+
         Rule::macro(
             'modelUnique',
             function (
@@ -62,50 +62,50 @@ class CmsServiceProvider extends ServiceProvider
                 return new ModelUnique($modelClass, $modelAttribute, $callback);
             }
         );
-    
+
         Schema::defaultStringLength(150);
-    
+
         Twig::addExtension(new Custom());
-    
+
         /*$this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
             $schedule->command('juzacms:update')->everyMinute();
         });*/
     }
-    
+
     public function register()
     {
         if ($this->app->environment('local')) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
         }
-        
+
         $this->registerSingleton();
         $this->registerConfigs();
         $this->registerProviders();
     }
-    
+
     protected function registerConfigs()
     {
         if ($this->app->environment() !== 'production') {
             $this->app->register(IdeHelperServiceProvider::class);
-            
+
             if (config('app.debug')) {
                 $this->app->register(DebugbarServiceProvider::class);
             }
         }
-        
+
         $this->mergeConfigFrom(
             $this->basePath . '/config/juzaweb.php',
             'juzaweb'
         );
-        
+
         $this->mergeConfigFrom(
             $this->basePath . '/config/locales.php',
             'locales'
         );
     }
-    
+
     protected function bootMigrations()
     {
         $mainPath = $this->basePath . '/Database/migrations';
@@ -113,7 +113,7 @@ class CmsServiceProvider extends ServiceProvider
         $paths = array_merge([$mainPath], $directories);
         $this->loadMigrationsFrom($paths);
     }
-    
+
     protected function bootPublishes()
     {
         $this->publishes(
@@ -124,7 +124,7 @@ class CmsServiceProvider extends ServiceProvider
             'cms_config'
         );
     }
-    
+
     protected function registerSingleton()
     {
         $this->app->singleton(
@@ -133,42 +133,42 @@ class CmsServiceProvider extends ServiceProvider
                 return new MacroableModel();
             }
         );
-        
+
         $this->app->singleton(
             ActionRegisterContract::class,
             function ($app) {
                 return new ActionRegister($app);
             }
         );
-    
+
         $this->app->singleton(
             ConfigContract::class,
             function ($app) {
                 return new DbConfig($app);
             }
         );
-    
+
         $this->app->singleton(
             ThemeConfigContract::class,
             function ($app) {
                 return new ThemeConfig($app, jw_current_theme());
             }
         );
-        
+
         $this->app->singleton(
             HookActionContract::class,
             function () {
                 return new HookAction();
             }
         );
-        
+
         $this->app->singleton(
             GlobalDataContract::class,
             function () {
                 return new GlobalData();
             }
         );
-        
+
         $this->app->singleton(
             XssCleanerContract::class,
             function () {
@@ -184,6 +184,5 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
         $this->app->register(PluginServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
-        //$this->app->register(SwaggerServiceProvider::class);
     }
 }

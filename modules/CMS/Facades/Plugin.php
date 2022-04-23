@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Facade;
  * @method static disable(string $plugin)
  * @method static getPath()
  * @method get(string $key, $default = null)
- * @method getDisplayName()
- * @method getDomainName()
+ * @method string getDisplayName()
+ * @method string getDomainName()
+ * @method string getSettingUrl()
+ * @method string getVersion()
  * @method bool isEnabled()
  *
  * @see \Juzaweb\CMS\Support\Module
