@@ -1,0 +1,23 @@
+{
+    "name": "juzaweb/example",
+    "description": "",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\Example\\Providers\\ExampleServiceProvider"
+            ],
+            "aliases": {}
+        },
+        "juzaweb": {
+            "name": "juzaweb/example",
+            "domain": "juex",
+            "cms_min": "1.0.9",
+            "version": "1.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Example\\": "src/"
+        }
+    }
+}
