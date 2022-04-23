@@ -30,6 +30,7 @@
         "laravel/sanctum": "^2.15",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
+        "prettus/l5-repository": "^2.8",
         "rcrowe/twigbridge": "^0.14",
         "rennokki/laravel-eloquent-query-cache": "^3.1",
         "spatie/image-optimizer": "^1.4",
