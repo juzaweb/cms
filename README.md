@@ -50,6 +50,16 @@ View all documentation [https://juzaweb.com/documentation](https://juzaweb.com/d
 - [x] Added default theme
 - [x] Page block
 - [x] Permalinks
+- [x] Social login
+  - [x] Google
+  - [x] Facebook
+  - [x] Tweater
+  - [x] Github
+  - [x] Instagram
+- [x] User Permission
+  - [x] Check permisson menu
+  - [x] Policies
+  - [ ] Check permisson button in views
 - [ ] Media manager admin page
 - [ ] Upload themes
 - [ ] Short Code
@@ -63,64 +73,15 @@ View all documentation [https://juzaweb.com/documentation](https://juzaweb.com/d
 
 ### Plugins
 #### Translation
-* Git: [juzaweb/translation](https://github.com/juzaweb/translation)
+* [juzaweb/translation](https://github.com/juzaweb/translation)
 #### Notification
-* Git: [juzaweb/notification](https://github.com/juzaweb/notification)
-* Features:
-- [x] Send mail notification
-- [x] Send notification database
-- [ ] Send push notifications
-#### Seo
-* Features:
-- [x] Auto render Sitemap
-- [x] Seo content custom
-- [x] Feed
-#### Social login
-* Features:
-- [x] Google
-- [x] Facebook
-- [x] Tweater
-- [x] Github
-- [x] Instagram
-#### Subscribes
-* Features:
-- [x] Paypal
-- [ ] Stripe
-#### User Permission
-* Features:
-- [x] Check permisson menu
-- [x] Policies
-- [ ] Check permisson button in views
-#### E-commerce
-* Features:
-- [x] Product management
-- [x] Payment methods
-#### Crawler
-* Features:
-- [x] Content
-- [x] Auto crawler
-- [ ] Rss
-- [ ] Feed
-#### Multi languages
-* Features:
-- [ ] Change language by session
-- [ ] Subdomain language
-- [ ] Multi Language posts
-- [ ] Multi language taxonomy
-- [ ] Multi language menu items
-### Movie Streaming
-- [x] Movie/ TV-Series management
-- [x] Import movie from TMDB
-- [x] Server and upload management
-- [x] Genres/ Countries/ Actors/ Directors/ Writers management
-- [x] Player Watermark
-- [x] Player Watermark Logo
-#### Demo Site
-* Features:
-- [x] Add user admin demo
-- [ ] Autocomplete user demo
+* [juzaweb/notification](https://github.com/juzaweb/notification)
+#### Movie
+* [juzaweb/movie](https://github.com/juzaweb/movie)
+
 ### Theme
 #### Default
+#### Gamxo
 
 ## Backend Javascript libraries
 - Jquery
