@@ -3,10 +3,8 @@
 namespace Juzaweb\CMS\Console\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Support\Json;
-use Juzaweb\CMS\Support\Process\Installer;
+use Juzaweb\CMS\Support\Updater\PluginUpdater;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 class InstallCommand extends Command
 {
@@ -22,107 +20,43 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the specified plugin by given package name (vendor/name).';
-
-    /**
-     * Create a new command instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    protected $description = 'Install plugin by name (vendor/name).';
 
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(PluginUpdater $updater)
     {
-        if (is_null($this->argument('name'))) {
-            $this->installFromFile();
-
+        $name = $this->argument('name');
+        $plugin = app('plugins')->find($name);
+        if ($plugin) {
+            $this->error("Plugin [{$name}] already exist.");
             return;
         }
 
-        $pluginName = $this->argument('name');
-        if (! file_exists($path = plugin_path($pluginName, 'composer.json'))) {
-            $this->error("File 'composer.json' does not exist in your project root.");
+        $this->info('Check file update');
+        $check = $updater->checkForUpdate();
 
-            return;
+        if ($check) {
+            $this->info('Fetch Data');
+            $updater->fetchData();
+
+            $this->info('Download File');
+            $updater->downloadUpdateFile();
+
+            $this->info('Unzip File');
+            $updater->unzipFile();
+
+            $this->info('Move to folder');
+            $updater->updateFileAndFolder();
+
+            $this->info('Update database');
+            $updater->finish();
+
+            $this->info('Plugin installation successful.');
+        } else {
+            $this->error("Plugin [{$name}] does not exist.");
         }
-
-        $modules = Json::make($path);
-        $dependencies = $modules->get('require', []);
-        
-        foreach ($dependencies as $module  => $ver) {
-            $this->install(
-                $module,
-                $ver
-            );
-        }
-    }
-
-    /**
-     * Install plugins from plugins.json file.
-     */
-    protected function installFromFile()
-    {
-        if (! file_exists($path = base_path('plugin.json'))) {
-            $this->error("File 'plugin.json' does not exist in your project root.");
-
-            return;
-        }
-
-        $modules = Json::make($path);
-
-        $dependencies = $modules->get('require', []);
-
-        foreach ($dependencies as $module) {
-            $module = collect($module);
-
-            $this->install(
-                $module->get('name'),
-                $module->get('version'),
-                $module->get('type')
-            );
-        }
-    }
-
-    /**
-     * Install the specified plugin.
-     *
-     * @param string $name
-     * @param string $version
-     * @param string $type
-     * @param bool   $tree
-     */
-    protected function install($name, $version = 'dev-master', $type = 'composer', $tree = false)
-    {
-        $installer = new Installer(
-            $name,
-            $version,
-            $type ?: $this->option('type'),
-            $tree ?: $this->option('tree')
-        );
-
-        $installer->setRepository($this->laravel['plugins']);
-
-        $installer->setConsole($this);
-
-        if ($timeout = $this->option('timeout')) {
-            $installer->setTimeout($timeout);
-        }
-
-        if ($path = $this->option('path')) {
-            $installer->setPath($path);
-        }
-        
-        $installer->run();
-
-        /*if (! $this->option('no-update')) {
-            $this->call('plugin:update', [
-                'module' => $installer->getModuleName(),
-            ]);
-        }*/
     }
 
     /**
@@ -133,24 +67,8 @@ class InstallCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::OPTIONAL, 'The name of plugin will be installed.'],
+            ['name', InputArgument::REQUIRED, 'The name of plugin will be installed.'],
             ['version', InputArgument::OPTIONAL, 'The version of plugin will be installed.'],
-        ];
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-            ['timeout', null, InputOption::VALUE_OPTIONAL, 'The process timeout.', null],
-            ['path', null, InputOption::VALUE_OPTIONAL, 'The installation path.', null],
-            ['type', null, InputOption::VALUE_OPTIONAL, 'The type of installation.', null],
-            ['tree', null, InputOption::VALUE_NONE, 'Install the plugin as a git subtree', null],
-            ['no-update', null, InputOption::VALUE_NONE, 'Disables the automatic update of the dependencies.', null],
         ];
     }
 }
