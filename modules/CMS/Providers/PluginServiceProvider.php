@@ -2,14 +2,13 @@
 
 namespace Juzaweb\CMS\Providers;
 
-use Juzaweb\CMS\Abstracts\PluginServiceProvider as BaseServiceProvider;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
 use Juzaweb\CMS\Exceptions\InvalidActivatorClass;
 use Juzaweb\CMS\Support\LaravelFileRepository;
-use Juzaweb\CMS\Support\Stub;
+use Juzaweb\CMS\Support\ServiceProvider;
 
-class PluginServiceProvider extends BaseServiceProvider
+class PluginServiceProvider extends ServiceProvider
 {
     /**
      * Booting the package.
@@ -25,22 +24,19 @@ class PluginServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->registerNamespaces();
-        $this->registerProviders();
         $this->registerServices();
-        $this->setupStubPath();
     }
 
     /**
-     * Setup stub path.
+     * Get the services provided by the provider.
+     *
+     * @return array
      */
-    public function setupStubPath()
+    public function provides(): array
     {
-        Stub::setBasePath(__DIR__ . '/../stubs/plugin');
+        return [PluginRepositoryInterface::class, 'plugins'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function registerServices()
     {
         $this->app->singleton(
@@ -64,6 +60,28 @@ class PluginServiceProvider extends BaseServiceProvider
             }
         );
 
+        $this->app->singleton(
+            PluginRepositoryInterface::class,
+            LaravelFileRepository::class
+        );
+
         $this->app->alias(PluginRepositoryInterface::class, 'plugins');
+    }
+
+    /**
+     * Register all plugins.
+     */
+    protected function registerModules()
+    {
+        $this->app->register(BootstrapServiceProvider::class);
+    }
+
+    /**
+     * Register package's namespaces.
+     */
+    protected function registerNamespaces()
+    {
+        $configPath = __DIR__ . '/../config/plugin.php';
+        $this->mergeConfigFrom($configPath, 'plugin');
     }
 }

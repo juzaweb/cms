@@ -54,8 +54,7 @@
             "Juzaweb\\": "modules/"
         },
         "files": [
-            "modules/CMS/Helpers/define.php",
-            "modules/Backend/Helpers/helpers.php"
+            "modules/CMS/Helpers/helpers.php"
         ]
     },
     "scripts": {

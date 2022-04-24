@@ -4,7 +4,10 @@ namespace Juzaweb\CMS\Repositories;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Eloquent\BaseRepository as PackageBaseRepository;
+use Prettus\Repository\Events\RepositoryEntityCreating;
+use Prettus\Repository\Events\RepositoryEntityUpdated;
 use Prettus\Repository\Exceptions\RepositoryException;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 abstract class BaseRepository extends PackageBaseRepository
 {
@@ -53,5 +56,21 @@ abstract class BaseRepository extends PackageBaseRepository
         }
 
         return $this;
+    }
+
+    public function updateOrCreate(array $attributes, array $values = [])
+    {
+        $model = $this->model->where($attributes)->first();
+
+        if ($model) {
+            $model = $this->update(
+                array_merge($attributes, $values),
+                $model->id
+            );
+        } else {
+            $model = $this->create(array_merge($attributes, $values));
+        }
+
+        return $this->parserResult($model);
     }
 }

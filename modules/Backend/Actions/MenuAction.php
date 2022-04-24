@@ -10,14 +10,14 @@
 
 namespace Juzaweb\Backend\Actions;
 
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Facades\Theme;
-use Juzaweb\Backend\Http\Controllers\Frontend\PageController;
-use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
 use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Support\Theme\CustomMenuBox;
 use Juzaweb\CMS\Version;
+use Juzaweb\Frontend\Http\Controllers\PageController;
+use Juzaweb\Frontend\Http\Controllers\PostController;
 
 class MenuAction extends Action
 {
@@ -44,7 +44,7 @@ class MenuAction extends Action
                 'position' => 1,
             ]
         );
-    
+
         HookAction::addAdminMenu(
             trans('cms::app.dashboard'),
             'dashboard',
@@ -54,7 +54,7 @@ class MenuAction extends Action
                 'parent' => 'dashboard',
             ]
         );
-    
+
         HookAction::addAdminMenu(
             trans('cms::app.updates'),
             'updates',
@@ -141,7 +141,7 @@ class MenuAction extends Action
                 'position' => 60,
             ]
         );
-    
+
         HookAction::addAdminMenu(
             trans('cms::app.all_users'),
             'users',
@@ -151,7 +151,7 @@ class MenuAction extends Action
                 'parent' => 'users',
             ]
         );
-    
+
         HookAction::addAdminMenu(
             trans('cms::app.add_new'),
             'users.create',

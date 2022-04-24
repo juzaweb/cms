@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\Backend\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\HookActionContract;
 
 /**
  * @method static addAdminMenu(string $menuTitle, $menuSlug, array $args)
@@ -53,7 +53,7 @@ use Juzaweb\Backend\Contracts\HookActionContract;
  * @method static \Illuminate\Support\Collection getThemeSettings($name = null)
  * @method static \Illuminate\Support\Collection getEnqueueScripts($inFooter = false)
  *
- * @see \Juzaweb\Backend\Support\HookAction
+ * @see \Juzaweb\CMS\Support\HookAction
  */
 class HookAction extends Facade
 {
