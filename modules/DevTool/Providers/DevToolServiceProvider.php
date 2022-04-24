@@ -18,7 +18,9 @@ class DevToolServiceProvider extends ServiceProvider
     public function register()
     {
         $this->setupStubPath();
-        $this->app->register(ConsoleServiceProvider::class);
+        if ($this->app->runningInConsole() || $this->app->runningUnitTests()) {
+            $this->app->register(ConsoleServiceProvider::class);
+        }
     }
 
     /**
