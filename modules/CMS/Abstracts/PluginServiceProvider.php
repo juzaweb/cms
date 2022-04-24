@@ -5,7 +5,6 @@ namespace Juzaweb\CMS\Abstracts;
 use Illuminate\Support\ServiceProvider;
 use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
 use Juzaweb\CMS\Providers\BootstrapServiceProvider;
-use Juzaweb\CMS\Providers\ConsoleServiceProvider;
 use Juzaweb\CMS\Providers\ContractsServiceProvider;
 
 abstract class PluginServiceProvider extends ServiceProvider
@@ -47,7 +46,6 @@ abstract class PluginServiceProvider extends ServiceProvider
      */
     protected function registerProviders()
     {
-        $this->app->register(ConsoleServiceProvider::class);
         $this->app->register(ContractsServiceProvider::class);
     }
 }

@@ -7,7 +7,6 @@ use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
 use Juzaweb\CMS\Exceptions\InvalidActivatorClass;
 use Juzaweb\CMS\Support\LaravelFileRepository;
-use Juzaweb\CMS\Support\Stub;
 
 class PluginServiceProvider extends BaseServiceProvider
 {
@@ -27,15 +26,6 @@ class PluginServiceProvider extends BaseServiceProvider
         $this->registerNamespaces();
         $this->registerProviders();
         $this->registerServices();
-        $this->setupStubPath();
-    }
-
-    /**
-     * Setup stub path.
-     */
-    public function setupStubPath(): void
-    {
-        Stub::setBasePath(__DIR__ . '/../stubs/plugin');
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Providers;
+namespace Juzaweb\DevTool\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Juzaweb\CMS\Console\Commands\InstallCommand;
