@@ -20,7 +20,7 @@ class PageController extends BackendController
         return parent::callAction($method, $parameters);
     }
 
-    protected function findPageOrFail() : Collection
+    protected function findPageOrFail(): Collection
     {
         $page = HookAction::getAdminPages($this->getPageSlug());
 
@@ -45,12 +45,14 @@ class PageController extends BackendController
         if (is_array($page)) {
             $page = $this->recursiveGetPage($page);
         }
+
         return $page;
     }
 
     protected function getPageSlug($index = 1): string
     {
         $slugs = explode('/', Route::getCurrentRoute()->uri);
+
         return $slugs[$index];
     }
 }
