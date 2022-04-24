@@ -24,7 +24,6 @@ class PluginServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerNamespaces();
-        $this->registerProviders();
         $this->registerServices();
     }
 
@@ -61,6 +60,11 @@ class PluginServiceProvider extends ServiceProvider
             }
         );
 
+        $this->app->singleton(
+            PluginRepositoryInterface::class,
+            LaravelFileRepository::class
+        );
+
         $this->app->alias(PluginRepositoryInterface::class, 'plugins');
     }
 
@@ -79,13 +83,5 @@ class PluginServiceProvider extends ServiceProvider
     {
         $configPath = __DIR__ . '/../config/plugin.php';
         $this->mergeConfigFrom($configPath, 'plugin');
-    }
-
-    /**
-     * Register providers.
-     */
-    protected function registerProviders()
-    {
-        $this->app->register(ContractsServiceProvider::class);
     }
 }

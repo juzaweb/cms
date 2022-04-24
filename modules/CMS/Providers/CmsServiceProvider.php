@@ -29,6 +29,7 @@ use Juzaweb\CMS\Support\Validators\ModelExists;
 use Juzaweb\CMS\Support\Validators\ModelUnique;
 use Juzaweb\CMS\Support\Validators\ReCaptcha;
 use Juzaweb\CMS\Support\XssCleaner;
+use Juzaweb\DevTool\Providers\DevToolServiceProvider;
 use Juzaweb\Frontend\Providers\FrontendServiceProvider;
 use TwigBridge\Facade\Twig;
 
@@ -193,6 +194,8 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(PerformanceServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(PluginServiceProvider::class);
+        $this->app->register(ConsoleServiceProvider::class);
+        $this->app->register(DevToolServiceProvider::class);
         $this->app->register(FrontendServiceProvider::class);
     }
 }

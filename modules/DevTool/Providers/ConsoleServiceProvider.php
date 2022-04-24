@@ -3,9 +3,6 @@
 namespace Juzaweb\DevTool\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\CMS\Console\Commands\InstallCommand;
-use Juzaweb\CMS\Console\Commands\SendMailCommand;
-use Juzaweb\CMS\Console\Commands\UpdateCommand;
 use Juzaweb\DevTool\Commands\MakeAdminCommand;
 use Juzaweb\DevTool\Commands\Plugin\ActionMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\CommandMakeCommand;
@@ -45,14 +42,7 @@ use Juzaweb\DevTool\Commands\Theme\ThemePublishCommand;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
-    /**
-     * The available commands
-     *
-     * @var array
-     */
-    protected $commands = [
-        InstallCommand::class,
-        UpdateCommand::class,
+    protected array $commands = [
         PluginInstallCommand::class,
         CommandMakeCommand::class,
         ControllerMakeCommand::class,
@@ -90,7 +80,6 @@ class ConsoleServiceProvider extends ServiceProvider
         ResourceMakeCommand::class,
         TestMakeCommand::class,
         LaravelModulesV6Migrator::class,
-        SendMailCommand::class,
         ThemeGeneratorCommand::class,
         ThemeListCommand::class,
         ThemePublishCommand::class,
@@ -113,8 +102,6 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        $provides = $this->commands;
-
-        return $provides;
+        return $this->commands;
     }
 }
