@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static delete(string $plugin)
  * @method static enable(string $plugin)
  * @method static disable(string $plugin)
- * @method static getPath()
+ * @method static getPath(string $path = '')
  * @method get(string $key, $default = null)
  * @method string getDisplayName()
  * @method string getDomainName()

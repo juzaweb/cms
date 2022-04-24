@@ -165,8 +165,12 @@ class Plugin
      *
      * @return string
      */
-    public function getPath(): string
+    public function getPath(string $path = ''): string
     {
+        if ($path) {
+            return $this->path .'/'. $path;
+        }
+
         return $this->path;
     }
 
