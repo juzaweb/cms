@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Backend\Policies;
 
-use Juzaweb\Backend\Abstracts\ResourcePolicy;
+use Juzaweb\CMS\Abstracts\ResourcePolicy;
 
 class EmailTemplatePolicy extends ResourcePolicy
 {

@@ -16,14 +16,12 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
     }
-    
+
     public function map()
     {
         //$this->mapApiRoutes();
         $this->mapWebRoutes();
-        $this->mapAssetRoutes();
         $this->mapAdminRoutes();
-        $this->mapThemeRoutes();
     }
 
     protected function mapWebRoutes()
@@ -40,12 +38,6 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix(config('juzaweb.admin_prefix'))
             ->group(__DIR__ . '/../routes/admin.php');
     }
-    
-    protected function mapThemeRoutes()
-    {
-        Route::middleware('theme')
-            ->group(__DIR__ . '/../routes/theme.php');
-    }
 
     protected function mapApiRoutes()
     {
@@ -55,19 +47,7 @@ class RouteServiceProvider extends ServiceProvider
             ->group(__DIR__ . '/../routes/api.php');
     }
 
-    protected function mapAssetRoutes()
-    {
-        Route::middleware('assets')
-            ->namespace($this->namespace)
-            ->group(__DIR__ . '/../routes/assets.php');
-    }
-    
-    /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
-     */
-    protected function configureRateLimiting()
+    protected function configureRateLimiting(): void
     {
         RateLimiter::for(
             'api',
