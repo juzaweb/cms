@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-use Juzaweb\Backend\Http\Controllers\Frontend\ProfileController;
+use Juzaweb\Frontend\Http\Controllers\ProfileController;
 
 Route::group(
     [

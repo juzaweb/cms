@@ -8,14 +8,14 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Frontend;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class AjaxController extends FrontendController
 {
@@ -23,7 +23,7 @@ class AjaxController extends FrontendController
     {
         $key = str_replace('/', '.', $key);
         $ajax = HookAction::getFrontendAjaxs($key);
-        
+
         if (empty($ajax)) {
             return response('Ajax function not found.', 404);
         }
@@ -43,7 +43,7 @@ class AjaxController extends FrontendController
         if (is_string($callback[0])) {
             return App::call([app($callback[0]), $callback[1]]);
         }
-        
+
         return App::call($callback);
     }
 }

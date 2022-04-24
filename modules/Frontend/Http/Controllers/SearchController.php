@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Frontend;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Http\Resources\PostResource;

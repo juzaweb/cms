@@ -1,17 +1,17 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Frontend;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\Controller;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Http\Controllers\Controller;
 
 class SitemapController extends Controller
 {
     protected $per_page = 500;
-    
+
     public function index()
     {
         $sitemap = App::make("sitemap");
@@ -61,7 +61,7 @@ class SitemapController extends Controller
         $sitemap->add(url('/'), now(), '1', 'daily');
         return $sitemap->render('xml');
     }
-    
+
     public function sitemapPost($type, $page)
     {
         $sitemap = App::make("sitemap");
@@ -82,7 +82,7 @@ class SitemapController extends Controller
 
         return $sitemap->render('xml');
     }
-    
+
     public function sitemapTaxonomy($taxonomy, $page)
     {
         $sitemap = App::make("sitemap");

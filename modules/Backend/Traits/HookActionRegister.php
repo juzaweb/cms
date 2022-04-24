@@ -4,17 +4,16 @@ namespace Juzaweb\Backend\Traits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Juzaweb\Backend\Http\Controllers\Backend\DashboardController;
-use Juzaweb\CMS\Facades\GlobalData;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
-use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
-use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
-use Juzaweb\Backend\Http\Controllers\Frontend\TaxonomyController;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\GlobalData;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
+use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
+use Juzaweb\Frontend\Http\Controllers\PostController;
+use Juzaweb\Frontend\Http\Controllers\TaxonomyController;
 
 trait HookActionRegister
 {
@@ -314,7 +313,7 @@ trait HookActionRegister
         if (empty($args['title'])) {
             throw new \Exception('Label Admin Page is required.');
         }
-        
+
         $defaults = [
             'key' => $key,
             'title' => '',
@@ -326,7 +325,7 @@ trait HookActionRegister
 
         $args = array_merge($defaults, $args);
         $args = new Collection($args);
-    
+
         $this->addAdminMenu(
             $args['title'],
             $key,

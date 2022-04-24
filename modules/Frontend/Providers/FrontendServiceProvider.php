@@ -1,32 +1,28 @@
 <?php
+/**
+ * JUZAWEB CMS - The Best CMS for Laravel Project
+ *
+ * @package    juzaweb/juzacms
+ * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @link       https://juzaweb.com/cms
+ * @license    MIT
+ */
 
-namespace Juzaweb\CMS\Providers;
+namespace Juzaweb\Frontend\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Juzaweb\CMS\Contracts\ThemeContract;
 use Juzaweb\CMS\Contracts\ThemeInterface;
+use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\CMS\Support\Theme\Theme;
 use Juzaweb\CMS\Support\ThemeFileRepository;
 
-class ThemeServiceProvider extends ServiceProvider
+class FrontendServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
-
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
     public function register()
     {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cms');
+        $this->app->register(RouteServiceProvider::class);
+
         $this->mergeConfigFrom(__DIR__ . '/../config/theme.php', 'theme');
 
         $this->app->singleton(

@@ -1,13 +1,13 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Frontend;
+namespace Juzaweb\Frontend\Http\Controllers;
 
-use Juzaweb\Backend\Events\PostViewed;
-use Juzaweb\CMS\Facades\Theme;
-use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Http\Request;
+use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Noodlehaus\Config;
 
 class PageController extends FrontendController
@@ -96,7 +96,7 @@ class PageController extends FrontendController
                 $view = 'theme::template-parts.single';
             }
         }
-        
+
         $view = apply_filters('theme.get_view_page', $view, $page);
 
         return $view;

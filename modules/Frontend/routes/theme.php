@@ -8,17 +8,17 @@
  * @license    MIT
  */
 
-require __DIR__ . '/components/theme.profile.php';
+require __DIR__ . '/components/profile.php';
 
-use Juzaweb\Backend\Http\Controllers\Frontend\HomeController;
-use Juzaweb\Backend\Http\Controllers\Frontend\AjaxController;
-use Juzaweb\Backend\Http\Controllers\Frontend\SearchController;
-use Juzaweb\Backend\Http\Controllers\Frontend\PostController;
-use Juzaweb\Backend\Http\Controllers\Frontend\RouteController;
-use Juzaweb\Backend\Http\Controllers\Frontend\FeedController;
-use Juzaweb\Backend\Http\Controllers\Frontend\SitemapController;
 use Juzaweb\CMS\Support\Installer;
 use Juzaweb\CMS\Support\Route\Auth;
+use Juzaweb\Frontend\Http\Controllers\AjaxController;
+use Juzaweb\Frontend\Http\Controllers\FeedController;
+use Juzaweb\Frontend\Http\Controllers\HomeController;
+use Juzaweb\Frontend\Http\Controllers\PostController;
+use Juzaweb\Frontend\Http\Controllers\RouteController;
+use Juzaweb\Frontend\Http\Controllers\SearchController;
+use Juzaweb\Frontend\Http\Controllers\SitemapController;
 
 Auth::routes();
 
@@ -70,7 +70,7 @@ if (Installer::alreadyInstalled()) {
     )
         ->name('comment')
         ->where('slug', '^(?!admin\-cp|api\/|subscription\/).*$');
-    
+
     Route::get('{slug}', [RouteController::class, 'index'])
         ->where('slug', '^(?!admin\-cp|api\/|subscription\/).*$');
 }

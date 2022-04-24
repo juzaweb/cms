@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Frontend;
+namespace Juzaweb\Frontend\Http\Controllers;
 
-use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
-use Illuminate\Http\Request;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class HomeController extends FrontendController
 {

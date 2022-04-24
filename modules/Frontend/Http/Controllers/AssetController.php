@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Frontend;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;

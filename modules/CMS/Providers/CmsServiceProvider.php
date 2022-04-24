@@ -29,6 +29,7 @@ use Juzaweb\CMS\Support\Validators\DomainValidator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+use Juzaweb\Frontend\Providers\FrontendServiceProvider;
 use TwigBridge\Facade\Twig;
 
 class CmsServiceProvider extends ServiceProvider
@@ -192,6 +193,6 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(PerformanceServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(PluginServiceProvider::class);
-        $this->app->register(ThemeServiceProvider::class);
+        $this->app->register(FrontendServiceProvider::class);
     }
 }

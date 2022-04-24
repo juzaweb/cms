@@ -6,12 +6,12 @@
  * Time: 8:15 PM
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Frontend;
+namespace Juzaweb\Frontend\Http\Controllers;
 
-use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class ProfileController extends FrontendController
 {

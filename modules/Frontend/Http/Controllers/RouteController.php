@@ -12,7 +12,7 @@
  * Time: 3:31 PM
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Frontend;
+namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
