@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Juzaweb\CMS\Facades\GlobalData;
 
-trait HookActionGet
+trait GetHookAction
 {
     /**
      * Get registed menu box

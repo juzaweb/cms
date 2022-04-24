@@ -15,7 +15,7 @@ use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
 use Juzaweb\Frontend\Http\Controllers\PostController;
 use Juzaweb\Frontend\Http\Controllers\TaxonomyController;
 
-trait HookActionRegister
+trait RegisterHookAction
 {
     /**
      * JUZAWEB CMS: Registers a post type.

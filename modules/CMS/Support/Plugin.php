@@ -4,7 +4,6 @@ namespace Juzaweb\CMS\Support;
 
 use Composer\Autoload\ClassLoader;
 use Illuminate\Cache\CacheManager;
-use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
@@ -14,12 +13,13 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
+use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 
 class Plugin
 {
     use Macroable;
 
-    protected Container $app;
+    protected ApplicationContract $app;
 
     protected string $name;
 
@@ -55,11 +55,11 @@ class Plugin
 
     /**
      * The constructor.
-     * @param Container $app
-     * @param $name
-     * @param $path
+     * @param ApplicationContract $app
+     * @param string $name
+     * @param string $path
      */
-    public function __construct(Container $app, string $name, $path)
+    public function __construct(ApplicationContract $app, string $name, string $path)
     {
         $this->name = $name;
         $this->path = $path;
@@ -71,7 +71,7 @@ class Plugin
     }
 
     /**
-     * Get name.
+     * Get name plugin.
      *
      * @return string
      */
@@ -259,7 +259,10 @@ class Plugin
      */
     protected function fireEvent($event): void
     {
-        $this->app['events']->dispatch(sprintf('plugin.%s.'.$event, $this->getLowerName()), [$this]);
+        $this->app['events']->dispatch(
+            sprintf('plugin.%s.'.$event, $this->getLowerName()),
+            [$this]
+        );
     }
 
     protected function autoloadPSR4(): void
@@ -484,9 +487,8 @@ class Plugin
     {
         $namespace = Arr::get($this->get('autoload', []), 'psr-4');
         $namespace = array_keys($namespace);
-        $namespace = $namespace[count($namespace) - 1];
 
-        return $namespace;
+        return $namespace[count($namespace) - 1];
     }
 
     public function getVersion()
