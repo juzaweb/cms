@@ -2,7 +2,7 @@
 
 namespace Juzaweb\CMS\Support\Process;
 
-use Juzaweb\CMS\Abstracts\Plugin;
+use Juzaweb\CMS\Support\Plugin;
 
 class Updater extends Runner
 {

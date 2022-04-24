@@ -99,7 +99,7 @@ class DatatableMakeCommand extends GeneratorCommand
     protected function getDataStub()
     {
         /**
-         * @var \Juzaweb\CMS\Abstracts\Plugin $module
+         * @var \Juzaweb\CMS\Support\Plugin $module
          */
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 

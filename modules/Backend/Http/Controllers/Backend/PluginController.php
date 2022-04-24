@@ -81,7 +81,7 @@ class PluginController extends BackendController
                 switch ($action) {
                     case 'delete':
                         /**
-                         * @var \Juzaweb\CMS\Abstracts\Plugin $module
+                         * @var \Juzaweb\CMS\Support\Plugin $module
                          */
                         $module = app('plugins')->find($plugin);
                         if ($module->isEnabled()) {

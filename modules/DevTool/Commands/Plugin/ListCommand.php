@@ -3,7 +3,7 @@
 namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Abstracts\Plugin;
+use Juzaweb\CMS\Support\Plugin;
 use Symfony\Component\Console\Input\InputOption;
 
 class ListCommand extends Command

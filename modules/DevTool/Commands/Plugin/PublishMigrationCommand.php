@@ -44,7 +44,7 @@ class PublishMigrationCommand extends Command
     /**
      * Publish migration for the specified plugin.
      *
-     * @param \Juzaweb\CMS\Abstracts\Plugin $module
+     * @param \Juzaweb\CMS\Support\Plugin $module
      */
     public function publish($module)
     {

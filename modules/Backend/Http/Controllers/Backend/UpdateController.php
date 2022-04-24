@@ -12,10 +12,10 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
-use Juzaweb\CMS\Abstracts\Plugin;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
+use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Updater\CmsUpdater;
 use Juzaweb\CMS\Version;
 

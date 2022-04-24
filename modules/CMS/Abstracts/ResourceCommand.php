@@ -20,7 +20,7 @@ abstract class ResourceCommand extends Command
 {
     use ModuleCommandTrait;
     /**
-     * @var \Juzaweb\CMS\Abstracts\Plugin
+     * @var \Juzaweb\CMS\Support\Plugin
      */
     protected $module;
 

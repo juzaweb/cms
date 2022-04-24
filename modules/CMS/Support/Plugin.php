@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Abstracts;
+namespace Juzaweb\CMS\Support;
 
 use Composer\Autoload\ClassLoader;
 use Illuminate\Cache\CacheManager;
@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
-use Juzaweb\CMS\Support\Json;
 
 class Plugin
 {
