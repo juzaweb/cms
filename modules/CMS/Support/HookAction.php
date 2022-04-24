@@ -32,7 +32,7 @@ class HookAction
         Hook::addFilter($tag, $callback, $priority, $arguments);
     }
 
-    public function applyFilters($tag, $value, ...$args): mixed
+    public function applyFilters(string $tag, mixed $value, ...$args): mixed
     {
         return Hook::filter($tag, $value, ...$args);
     }
@@ -44,7 +44,7 @@ class HookAction
      *      - name : Name form setting
      *      - view : View form setting
      */
-    public function addSettingForm($key, $args = []): void
+    public function addSettingForm(string $key, array $args = []): void
     {
         $defaults = [
             'name' => '',
@@ -73,9 +73,9 @@ class HookAction
      * - string $icon Url icon or fa icon fonts
      * - string $parent The parent of menu. Default null
      * - int $position The position in the menu order this item should appear.
-     * @return bool.
+     * @return void.
      */
-    public function addAdminMenu($menuTitle, $menuSlug, $args = [])
+    public function addAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
     {
         $adminMenu = GlobalData::get('admin_menu');
 
@@ -106,11 +106,9 @@ class HookAction
         }
 
         GlobalData::set('admin_menu', $adminMenu);
-
-        return true;
     }
 
-    public function enqueueScript($key, $src = '', $ver = '1.0', $inFooter = false)
+    public function enqueueScript(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void
     {
         if (!is_url($src)) {
             $src = asset($src);
@@ -129,7 +127,7 @@ class HookAction
         );
     }
 
-    public function enqueueStyle($key, $src = '', $ver = '1.0', $inFooter = false)
+    public function enqueueStyle(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
     {
         if (!is_url($src)) {
             $src = asset($src);
@@ -148,7 +146,7 @@ class HookAction
         );
     }
 
-    public function enqueueFrontendScript($key, $src = '', $ver = '1.0', $inFooter = false)
+    public function enqueueFrontendScript(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
     {
         if (!is_url($src)) {
             $src = theme_assets($src);
@@ -167,7 +165,7 @@ class HookAction
         );
     }
 
-    public function enqueueFrontendStyle($key, $src = '', $ver = '1.0', $inFooter = false)
+    public function enqueueFrontendStyle(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
     {
         if (!is_url($src)) {
             $src = theme_assets($src);
