@@ -20,8 +20,8 @@ use TwigBridge\Facade\Twig;
 
 class ThemeAction extends Action
 {
-    protected $currentTheme;
-    protected $register = [];
+    protected string $currentTheme;
+    protected array $register = [];
 
     public function __construct()
     {
@@ -73,7 +73,7 @@ class ThemeAction extends Action
             }
 
             foreach ($styles['css'] ?? [] as $index => $css) {
-                HookAction::enqueueFrontendStyle('main' . $index, $css, $version);
+                HookAction::enqueueFrontendStyle('main-' . $index, $css, $version);
             }
         }
     }
