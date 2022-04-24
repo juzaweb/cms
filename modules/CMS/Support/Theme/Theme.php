@@ -137,7 +137,7 @@ class Theme implements ThemeContract
             $themeConfig['changelog'] = Config::load($themeChangelogPath)->all();
             $themeConfig['path'] = $themePath;
             $screenshot = $themePath . '/assets/images/screenshot.png';
-            
+
             if (file_exists($screenshot)) {
                 $themeConfig['screenshot'] = theme_assets('images/screenshot.png', $theme);
             } else {
@@ -280,9 +280,8 @@ class Theme implements ThemeContract
                     $themeInfo->get('parent')
                 )->get('path')
             ) . DIRECTORY_SEPARATOR;
-            $fullPath = $themePath . $assetPath . $path;
 
-            return $fullPath;
+            return $themePath . $assetPath . $path;
         }
 
         return $fullPath;
@@ -368,7 +367,7 @@ class Theme implements ThemeContract
 
         $viewPath = $themeInfo->get('path') . '/views';
         $langPath = $themeInfo->get('path') .'/lang';
-        
+
         $viewPublishPath = resource_path('views/vendor/theme_' . $theme);
         $langPublishPath = resource_path('lang/vendor/theme_' . $theme);
 
@@ -378,7 +377,7 @@ class Theme implements ThemeContract
         } else {
             $this->finder->addNamespace($namespace, $viewPath);
         }
-        
+
         if (is_dir($viewPublishPath)) {
             $this->finder->addNamespace($namespace, $viewPath);
         }

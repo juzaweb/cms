@@ -53,6 +53,10 @@ class Plugin
      */
     private Router $router;
 
+    protected \Illuminate\Translation\Translator $lang;
+
+    protected \Illuminate\View\ViewFinderInterface $finder;
+
     /**
      * The constructor.
      * @param ApplicationContract $app
@@ -66,6 +70,8 @@ class Plugin
         $this->cache = $app['cache'];
         $this->files = $app['files'];
         $this->router = $app['router'];
+        $this->finder = $app['view']->getFinder();
+        $this->lang = $app['translator'];
         $this->activator = $app[ActivatorInterface::class];
         $this->app = $app;
     }
@@ -183,6 +189,33 @@ class Plugin
      */
     public function boot(): void
     {
+        $domain = $this->getDomainName();
+        $adminRouter = $this->getPath() . '/src/routes/admin.php';
+        $apiRouter = $this->getPath() . '/src/routes/admin.php';
+
+        if (file_exists($adminRouter)) {
+            $this->router->middleware('admin')
+                ->prefix(config('juzaweb.admin_prefix'))
+                ->group($adminRouter);
+        }
+
+        if (file_exists($apiRouter)) {
+            $this->router->middleware('api')
+                ->as('api.')
+                ->group($apiRouter);
+        }
+
+        $viewPath = $this->getPath() . '/src/resources/views';
+        $langPath = $this->getPath() . '/src/resources/lang';
+
+        if (is_dir($viewPath)) {
+            $this->finder->addNamespace($domain, $viewPath);
+        }
+
+        if (is_dir($langPath)) {
+            $this->lang->addNamespace($domain, $langPath);
+        }
+
         $this->fireEvent('boot');
     }
 
