@@ -53,6 +53,10 @@ class Plugin
      */
     private Router $router;
 
+    protected \Illuminate\Translation\Translator $lang;
+
+    protected \Illuminate\View\ViewFinderInterface $finder;
+
     /**
      * The constructor.
      * @param ApplicationContract $app
@@ -66,6 +70,8 @@ class Plugin
         $this->cache = $app['cache'];
         $this->files = $app['files'];
         $this->router = $app['router'];
+        $this->finder = $app['view']->getFinder();
+        $this->lang = $app['translator'];
         $this->activator = $app[ActivatorInterface::class];
         $this->app = $app;
     }
@@ -159,8 +165,12 @@ class Plugin
      *
      * @return string
      */
-    public function getPath(): string
+    public function getPath(string $path = ''): string
     {
+        if ($path) {
+            return $this->path .'/'. $path;
+        }
+
         return $this->path;
     }
 
@@ -183,6 +193,44 @@ class Plugin
      */
     public function boot(): void
     {
+        $domain = $this->getDomainName();
+        $name = $this->getName();
+        $adminRouter = $this->getPath() . '/src/routes/admin.php';
+        $apiRouter = $this->getPath() . '/src/routes/api.php';
+
+        if (file_exists($adminRouter)) {
+            $this->router->middleware('admin')
+                ->prefix(config('juzaweb.admin_prefix'))
+                ->group($adminRouter);
+        }
+
+        if (file_exists($apiRouter)) {
+            $this->router->middleware('api')
+                ->as('api.')
+                ->group($apiRouter);
+        }
+
+        $viewPath = $this->getPath() . '/src/resources/views';
+        $langPath = $this->getPath() . '/src/resources/lang';
+        $viewPublishPath = resource_path("views/plugins/{$name}");
+        $langPublishPath = resource_path("lang/plugins/{$name}");
+
+        if (is_dir($viewPath)) {
+            $this->finder->addNamespace($domain, $viewPath);
+        }
+
+        if (is_dir($viewPublishPath)) {
+            $this->finder->addNamespace($domain, $viewPublishPath);
+        }
+
+        if (is_dir($langPath)) {
+            $this->lang->addNamespace($domain, $langPath);
+        }
+
+        if (is_dir($langPublishPath)) {
+            $this->lang->addNamespace($domain, $langPublishPath);
+        }
+
         $this->fireEvent('boot');
     }
 

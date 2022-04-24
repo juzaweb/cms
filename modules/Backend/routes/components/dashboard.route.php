@@ -41,6 +41,11 @@ Route::group(
             '/datatable/bulk-actions',
             'Backend\DatatableController@bulkActions'
         )->name('admin.datatable.bulk-actions');
+
+        Route::post(
+            '/remove-message',
+            'Backend\DashboardController@removeMessage'
+        )->name('admin.dashboard.remove-message');
     }
 );
 

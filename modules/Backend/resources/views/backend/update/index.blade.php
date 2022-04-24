@@ -86,7 +86,7 @@
             return false;
         }
 
-        let table = new JuzawebTable({
+        var table1 = new JuzawebTable({
             table: "#plugins-table",
             apply_button: "#apply-action-plugins",
             url: "{{ route('admin.update.plugins') }}",
@@ -94,7 +94,7 @@
             chunk_action: true
         });
 
-        let table2 = new JuzawebTable({
+        var table2 = new JuzawebTable({
             table: "#themes-table",
             apply_button: "#apply-action-themes",
             url: "{{ route('admin.update.themes') }}",

@@ -24,7 +24,6 @@
         "intervention/image": "^2.5",
         "juzaweb/config": "^2.2",
         "juzaweb/laravel-chunk-upload": "^1.5",
-        "juzaweb/laravel-translation-loader": "^2.0",
         "juzaweb/sitemap": "^9.0",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.15",

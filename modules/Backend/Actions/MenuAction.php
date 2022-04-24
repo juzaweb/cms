@@ -313,18 +313,18 @@ class MenuAction extends Action
     public function addAdminScripts()
     {
         $ver = Version::getVersion();
-        HookAction::enqueueScript('core', 'jw-styles/juzaweb/js/vendor.min.js', $ver);
-        HookAction::enqueueScript('core', 'jw-styles/juzaweb/js/backend.min.js', $ver);
-        HookAction::enqueueScript('core', 'jw-styles/juzaweb/tinymce/tinymce.min.js', $ver);
-        HookAction::enqueueScript('core', 'jw-styles/juzaweb/js/custom.min.js', $ver);
+        HookAction::enqueueScript('core-vendor', 'jw-styles/juzaweb/js/vendor.min.js', $ver);
+        HookAction::enqueueScript('core-backend', 'jw-styles/juzaweb/js/backend.min.js', $ver);
+        HookAction::enqueueScript('core-tinymce', 'jw-styles/juzaweb/tinymce/tinymce.min.js', $ver);
+        HookAction::enqueueScript('core-custom', 'jw-styles/juzaweb/js/custom.min.js', $ver);
     }
 
     public function addAdminStyles()
     {
         $ver = Version::getVersion();
-        HookAction::enqueueStyle('core', 'jw-styles/juzaweb/css/vendor.min.css', $ver);
-        HookAction::enqueueStyle('core', 'jw-styles/juzaweb/css/backend.min.css', $ver);
-        HookAction::enqueueStyle('core', 'jw-styles/juzaweb/css/custom.min.css', $ver);
+        HookAction::enqueueStyle('core-vendor', 'jw-styles/juzaweb/css/vendor.min.css', $ver);
+        HookAction::enqueueStyle('core-backend', 'jw-styles/juzaweb/css/backend.min.css', $ver);
+        HookAction::enqueueStyle('core-custom', 'jw-styles/juzaweb/css/custom.min.css', $ver);
     }
 
     public function addDatatableSearchFieldTypes()

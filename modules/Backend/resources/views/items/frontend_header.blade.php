@@ -1,9 +1,10 @@
 @foreach($styles as $style)
-    <link rel="stylesheet" type="text/css" href="{{ $style->get('src') }}?v={{ $style->get('ver') }}">
+    <link rel="stylesheet" type="text/css" href="{{ $style->get('src') }}?v={{ $style->get('ver') }}"
+          id="{{ $style->get('key') }}">
 @endforeach
 
 @foreach($scripts as $script)
-    <script src="{{ $script->get('src') }}?v={{ $script->get('ver') }}"></script>
+    <script src="{{ $script->get('src') }}?v={{ $script->get('ver') }}" id="{{ $script->get('key') }}"></script>
 @endforeach
 
 <script>
@@ -13,7 +14,7 @@
 </script>
 
 @if($googleAnalytics)
-<script async src="https://www.googletagmanager.com/gtag/js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}

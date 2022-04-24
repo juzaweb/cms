@@ -114,8 +114,8 @@ class HookAction
             $src = asset($src);
         }
 
-        GlobalData::push(
-            'scripts',
+        GlobalData::set(
+            "scripts.{$key}",
             new Collection(
                 [
                     'key' => $key,
@@ -133,8 +133,8 @@ class HookAction
             $src = asset($src);
         }
 
-        GlobalData::push(
-            'styles',
+        GlobalData::set(
+            "styles.{$key}",
             new Collection(
                 [
                     'key' => $key,
@@ -152,8 +152,8 @@ class HookAction
             $src = theme_assets($src);
         }
 
-        GlobalData::push(
-            'frontend.scripts',
+        GlobalData::set(
+            "frontend_scripts.{$key}",
             new Collection(
                 [
                     'key' => $key,
@@ -171,8 +171,8 @@ class HookAction
             $src = theme_assets($src);
         }
 
-        GlobalData::push(
-            'frontend.styles',
+        GlobalData::set(
+            "frontend_styles.{$key}",
             new Collection(
                 [
                     'key' => $key,
