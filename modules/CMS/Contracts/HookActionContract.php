@@ -8,11 +8,8 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Policies;
+namespace Juzaweb\CMS\Contracts;
 
-use Juzaweb\CMS\Abstracts\ResourcePolicy;
-
-class EmailTemplatePolicy extends ResourcePolicy
+interface HookActionContract
 {
-    protected $resourceType = 'email_templates';
 }
