@@ -38,7 +38,7 @@
     </div>
 
     <div class="table-responsive mb-5">
-        <table class="table juzaweb-table">
+        <table class="table jw-table juzaweb-table">
             <thead>
                 <tr>
                     <th data-width="3%" data-field="state" data-checkbox="true"></th>

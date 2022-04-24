@@ -33,7 +33,7 @@ class PluginServiceProvider extends BaseServiceProvider
     /**
      * Setup stub path.
      */
-    public function setupStubPath()
+    public function setupStubPath(): void
     {
         Stub::setBasePath(__DIR__ . '/../stubs/plugin');
     }

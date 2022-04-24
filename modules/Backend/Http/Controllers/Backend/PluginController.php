@@ -5,7 +5,10 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Http\Requests\Plugin\BulkActionRequest;
+use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\ArrayPagination;
@@ -42,8 +45,7 @@ class PluginController extends BackendController
         $page = (int) round(($offset + $limit) / $limit);
         $data = ArrayPagination::make($plugins);
         $data = $data->paginate($limit, $page);
-
-        $updates = $this->getDataUpdates($data);
+        $updates = $this->getDataUpdates($data->getCollection());
 
         $results = [];
         foreach ($data as $plugin) {
@@ -97,6 +99,7 @@ class PluginController extends BackendController
                     case 'update':
                         $helper = $updater->find($plugin);
                         $helper->update();
+                        CacheGroup::pull('plugin_update_keys');
                         break;
                 }
             } catch (\Throwable $e) {
@@ -117,25 +120,34 @@ class PluginController extends BackendController
         );
     }
 
-    protected function getDataUpdates($plugins): ?object
+    protected function getDataUpdates(Collection $plugins): ?object
     {
-        try {
-            return $this->api->post(
-                'plugins/versions-available',
-                [
-                    'plugins' => $plugins->map(
-                        function ($item) {
-                            return [
-                                'name' => $item->get('name'),
-                                'current_version' => $item->getVersion(),
-                            ];
-                        }
-                    )->values()->toArray(),
-                    'cms_version' => Version::getVersion(),
-                ]
-            );
-        } catch (\Exception $e) {
-            return null;
-        }
+        $key = sha1($plugins->toJson());
+        CacheGroup::add('plugin_update_keys', $key);
+
+        return Cache::remember(
+            $key,
+            3600,
+            function () use ($plugins) {
+                try {
+                    return $this->api->post(
+                        'plugins/versions-available',
+                        [
+                            'plugins' => $plugins->map(
+                                function ($item) {
+                                    return [
+                                        'name' => $item->get('name'),
+                                        'current_version' => $item->getVersion(),
+                                    ];
+                                }
+                            )->values()->toArray(),
+                            'cms_version' => Version::getVersion(),
+                        ]
+                    );
+                } catch (\Exception $e) {
+                    return (object) [];
+                }
+            }
+        );
     }
 }

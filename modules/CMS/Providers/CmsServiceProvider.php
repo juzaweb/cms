@@ -6,9 +6,11 @@ use Barryvdh\Debugbar\ServiceProvider as DebugbarServiceProvider;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Juzaweb\CMS\Contracts\ActionRegisterContract;
+use Juzaweb\CMS\Contracts\CacheGroupContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Juzaweb\CMS\Extension\Custom;
 use Juzaweb\CMS\Support\ActionRegister;
+use Juzaweb\CMS\Support\CacheGroup;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Theme\ThemeConfig;
 use Juzaweb\CMS\Support\Config as DbConfig;
@@ -173,6 +175,13 @@ class CmsServiceProvider extends ServiceProvider
             XssCleanerContract::class,
             function () {
                 return new XssCleaner();
+            }
+        );
+
+        $this->app->singleton(
+            CacheGroupContract::class,
+            function ($app) {
+                return new CacheGroup($app['cache']);
             }
         );
     }

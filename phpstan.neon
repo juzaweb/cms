@@ -1,0 +1,11 @@
+parameters:
+
+    paths:
+        - modules
+
+    level: 9
+
+    ignoreErrors:
+        - '#PHPDoc tag @var#'
+
+    checkMissingIterableValueType: false
