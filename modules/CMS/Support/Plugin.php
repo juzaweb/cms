@@ -8,6 +8,7 @@ use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
@@ -18,49 +19,39 @@ class Plugin
 {
     use Macroable;
 
-    /**
-     * The laravel|lumen application instance.
-     *
-     * @var \Illuminate\Contracts\Foundation\Application
-     */
-    protected $app;
+    protected Container $app;
 
-    /**
-     * The plugin name.
-     *
-     * @var
-     */
-    protected $name;
+    protected string $name;
 
     /**
      * The plugin path.
      *
      * @var string
      */
-    protected $path;
+    protected string $path;
 
     /**
      * @var array of cached Json objects, keyed by filename
      */
-    protected $moduleJson = [];
+    protected array $moduleJson = [];
     /**
      * @var CacheManager
      */
-    private $cache;
+    private CacheManager $cache;
     /**
      * @var Filesystem
      */
-    private $files;
+    private Filesystem $files;
 
     /**
      * @var ActivatorInterface
      */
-    protected $activator;
+    protected ActivatorInterface $activator;
 
     /**
-     * @var \Illuminate\Routing\Router
+     * @var Router
      */
-    private $router;
+    private Router $router;
 
     /**
      * The constructor.
@@ -110,7 +101,7 @@ class Plugin
         $author = Str::studly($name[0]);
         $module = Str::studly($name[1]);
 
-        return $author .'/'. $module;
+        return $author.'/'.$module;
     }
 
     /**
@@ -180,7 +171,7 @@ class Plugin
      *
      * @return $this
      */
-    public function setPath($path): Plugin
+    public function setPath(string $path): Plugin
     {
         $this->path = $path;
 
@@ -192,10 +183,6 @@ class Plugin
      */
     public function boot(): void
     {
-        if ($this->isLoadFilesOnBoot()) {
-            //$this->registerFiles();
-        }
-
         $this->fireEvent('boot');
     }
 
@@ -206,7 +193,7 @@ class Plugin
      *
      * @return Json
      */
-    public function json($file = null): Json
+    public function json(string $file = null): Json
     {
         if ($file === null) {
             $file = 'composer.json';
@@ -216,7 +203,7 @@ class Plugin
             $this->moduleJson,
             $file,
             function () use ($file) {
-                return $this->moduleJson[$file] = new Json($this->getPath() . '/' . $file, $this->files);
+                return $this->moduleJson[$file] = new Json($this->getPath().'/'.$file, $this->files);
             }
         );
     }
@@ -229,7 +216,7 @@ class Plugin
      *
      * @return mixed
      */
-    public function get(string $key, $default = null)
+    public function get(string $key, $default = null): mixed
     {
         return $this->json()->get($key, $default);
     }
@@ -242,7 +229,7 @@ class Plugin
      *
      * @return mixed
      */
-    public function getComposerAttr($key, $default = null)
+    public function getComposerAttr($key, $default = null): mixed
     {
         return $this->json('composer.json')->get($key, $default);
     }
@@ -260,9 +247,7 @@ class Plugin
             $this->registerProviders();
         }
 
-        if ($this->isLoadFilesOnBoot() === false) {
-            $this->registerFiles();
-        }
+        $this->registerFiles();
 
         $this->fireEvent('register');
     }
@@ -274,10 +259,10 @@ class Plugin
      */
     protected function fireEvent($event): void
     {
-        $this->app['events']->dispatch(sprintf('plugin.%s.' . $event, $this->getLowerName()), [$this]);
+        $this->app['events']->dispatch(sprintf('plugin.%s.'.$event, $this->getLowerName()), [$this]);
     }
 
-    protected function autoloadPSR4()
+    protected function autoloadPSR4(): void
     {
         $loadmaps = $this->activator->getAutoloadInfo($this);
         $loader = new ClassLoader();
@@ -299,7 +284,7 @@ class Plugin
     {
         return Str::replaceLast(
             'services.php',
-            $this->getSnakeName() . '_module.php',
+            $this->getSnakeName().'_module.php',
             $this->app->getCachedServicesPath()
         );
     }
@@ -350,7 +335,7 @@ class Plugin
     {
         $files = Arr::get($this->get('autoload', []), 'files', []);
         foreach ($files as $file) {
-            include $this->path . '/' . $file;
+            include $this->path.'/'.$file;
         }
     }
 
@@ -393,7 +378,7 @@ class Plugin
      */
     public function isDisabled(): bool
     {
-        return ! $this->isEnabled();
+        return !$this->isEnabled();
     }
 
     /**
@@ -432,6 +417,7 @@ class Plugin
         if (config('plugin.autoload')) {
             $this->runMigrate();
         }
+        $this->publishAssets();
         $this->fireEvent('enabled');
     }
 
@@ -456,7 +442,7 @@ class Plugin
      */
     public function getExtraPath(string $path): string
     {
-        return $this->getPath() . '/' . $path;
+        return $this->getPath().'/'.$path;
     }
 
     public function getExtraLarevel($key, $default = null): array
@@ -485,6 +471,7 @@ class Plugin
         if (empty($name)) {
             $name = $this->get('name');
         }
+
         return $name;
     }
 
@@ -498,6 +485,7 @@ class Plugin
         $namespace = Arr::get($this->get('autoload', []), 'psr-4');
         $namespace = array_keys($namespace);
         $namespace = $namespace[count($namespace) - 1];
+
         return $namespace;
     }
 
@@ -506,13 +494,12 @@ class Plugin
         return $this->getExtraJuzaweb('version', 0);
     }
 
-    public function getSettingUrl()
+    public function getSettingUrl(): ?string
     {
-        $settingUrl = $this->getExtraJuzaweb('setting_url');
-        return $settingUrl;
+        return $this->getExtraJuzaweb('setting_url');
     }
 
-    public function publishAssets()
+    public function publishAssets(): void
     {
         Artisan::call(
             'plugin:publish',
@@ -522,16 +509,6 @@ class Plugin
         );
     }
 
-    /**
-     * Check if can load files of plugin on boot method.
-     *
-     * @return bool
-     */
-    protected function isLoadFilesOnBoot(): bool
-    {
-        return false;
-    }
-
     protected function flushCache(): void
     {
         if (config('plugin.cache.enabled')) {
@@ -539,7 +516,7 @@ class Plugin
         }
     }
 
-    protected function runMigrate()
+    protected function runMigrate(): void
     {
         Artisan::call(
             'plugin:migrate',
