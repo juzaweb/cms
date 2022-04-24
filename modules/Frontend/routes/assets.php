@@ -10,11 +10,11 @@
 
 /*Route::get('jw-styles/themes/{theme}/{path}', 'Frontend\AssetController@assetsTheme')
     ->where('theme', '[0-9a-z]+')
-    ->where('path', '[0-9a-zA-Z\.\/\-]+');
+    ->where('path', '[0-9a-z\.\/\-]+');
 
 Route::get('jw-styles/plugins/{plugin}/{path}', 'Frontend\AssetController@assetsPlugin')
     ->where('theme', '[0-9a-z]+')
-    ->where('path', '[0-9a-zA-Z\.\/\-]+');
+    ->where('path', '[0-9a-z\.\/\-]+');
 
 Route::get('storage/{path}', 'Frontend\AssetController@assetsStorage')
-    ->where('path', '[0-9a-zA-Z\.\/\-]+');*/
+    ->where('path', '[0-9a-z\.\/\-]+');*/
