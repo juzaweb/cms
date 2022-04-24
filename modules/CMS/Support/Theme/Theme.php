@@ -368,8 +368,8 @@ class Theme implements ThemeContract
         $viewPath = $themeInfo->get('path') . '/views';
         $langPath = $themeInfo->get('path') .'/lang';
 
-        $viewPublishPath = resource_path('views/vendor/theme_' . $theme);
-        $langPublishPath = resource_path('lang/vendor/theme_' . $theme);
+        $viewPublishPath = resource_path('views/themes/' . $theme);
+        $langPublishPath = resource_path('lang/themes/' . $theme);
 
         $namespace = 'theme';
         if ($hasParent) {
@@ -382,10 +382,10 @@ class Theme implements ThemeContract
             $this->finder->addNamespace($namespace, $viewPath);
         }
 
-        $this->lang->addNamespace('theme', $langPath);
+        $this->lang->addNamespace($namespace, $langPath);
 
         if (is_dir($langPublishPath)) {
-            $this->lang->addNamespace('theme', $langPublishPath);
+            $this->lang->addNamespace($namespace, $langPublishPath);
         }
     }
 }

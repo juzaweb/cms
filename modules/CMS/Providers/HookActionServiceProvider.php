@@ -22,40 +22,32 @@ class HookActionServiceProvider extends ServiceProvider
         /*
          * Adds a directive in Blade for actions
          */
-        Blade::directive('do_action', function ($expression) {
-            return "<?php app(\Juzaweb\CMS\Contracts\EventyContract::class)->action({$expression}); ?>";
-        });
+        Blade::directive(
+            'do_action',
+            function ($expression) {
+                return "<?php app(\Juzaweb\CMS\Contracts\EventyContract::class)->action({$expression}); ?>";
+            }
+        );
 
         /*
          * Adds a directive in Blade for filters
          */
-        Blade::directive('apply_filters', function ($expression) {
-            return "<?php echo app(\Juzaweb\CMS\Contracts\EventyContract::class)->filter({$expression}); ?>";
-        });
-
-        /*$this->app->booted(function () {
-            foreach (static::$actions as $action) {
-                app($action)->handle();
+        Blade::directive(
+            'apply_filters',
+            function ($expression) {
+                return "<?php echo app(\Juzaweb\CMS\Contracts\EventyContract::class)->filter({$expression}); ?>";
             }
-
-            if (Installer::alreadyInstalled()) {
-                $currentTheme = jw_current_theme();
-                $themePath = Theme::getThemePath($currentTheme);
-
-                if (is_dir($themePath)) {
-                    Theme::set($currentTheme);
-                }
-            }
-
-            do_action('juzaweb.init');
-        });*/
+        );
     }
 
     public function register()
     {
         // Registers the eventy singleton.
-        $this->app->singleton(EventyContract::class, function () {
-            return new Events();
-        });
+        $this->app->singleton(
+            EventyContract::class,
+            function () {
+                return new Events();
+            }
+        );
     }
 }

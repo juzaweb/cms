@@ -25,8 +25,6 @@ use Juzaweb\CMS\Http\Middleware\Admin;
 use Juzaweb\CMS\Support\Html\Field;
 use Juzaweb\CMS\Support\Macros\RouterMacros;
 use Juzaweb\CMS\Support\ServiceProvider;
-use Juzaweb\Frontend\Actions\FrontendAction;
-use Juzaweb\Frontend\Actions\ThemeAction;
 
 class BackendServiceProvider extends ServiceProvider
 {
@@ -89,14 +87,14 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/juzaweb'),
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/cms'),
             ],
             'cms_views'
         );
 
         $this->publishes(
             [
-                __DIR__ . '/../resources/lang' => resource_path('lang/vendor/juzaweb'),
+                __DIR__ . '/../resources/lang' => resource_path('lang/cms'),
             ],
             'cms_lang'
         );

@@ -129,8 +129,7 @@ class JuzawebTable {
                             if (response.status === true) {
                                 show_message(response);
                                 table.bootstrapTable('refresh');
-                                $('select[name=bulk_actions]').val(null);
-                                $('select[name=bulk_actions]').trigger('change.select2');
+                                $('select[name=bulk_actions]').val(null).trigger('change.select2');
                                 return false;
                             } else {
                                 show_message(response);
@@ -182,8 +181,7 @@ class JuzawebTable {
 
                                 table.bootstrapTable('refresh');
 
-                                $('select[name=bulk_actions]').val(null);
-                                $('select[name=bulk_actions]').trigger('change.select2');
+                                $('select[name=bulk_actions]').val(null).trigger('change.select2');
                             }
                         });
 
@@ -210,8 +208,7 @@ class JuzawebTable {
                                 }
 
                                 table.bootstrapTable('refresh');
-                                $('select[name=bulk_actions]').val(null);
-                                $('select[name=bulk_actions]').trigger('change.select2');
+                                $('select[name=bulk_actions]').val(null).trigger('change.select2');
                                 return false;
                             } else {
                                 show_message(response);
@@ -283,7 +280,7 @@ class JuzawebTable {
                                 'ids': ids,
                                 'action': action
                             },
-                            success: function (result) {
+                            success: function (response) {
                                 table.bootstrapTable('refresh');
                             }
                         });
@@ -300,7 +297,7 @@ class JuzawebTable {
                         'ids': ids,
                         'action': action
                     },
-                    success: function (result) {
+                    success: function (response) {
                         table.bootstrapTable('refresh');
                     }
                 });

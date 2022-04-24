@@ -141,6 +141,27 @@ class DashboardController extends BackendController
         return response()->json($result);
     }
 
+    public function removeMessage(Request $request)
+    {
+        $request->validate(
+            [
+                'id' => 'required'
+            ],
+            [],
+            [
+                'id' => trans('Message ID')
+            ]
+        );
+
+        remove_backend_message($request->input('id'));
+
+        return $this->success(
+            [
+                'message' => trans('cms::app.successfully')
+            ]
+        );
+    }
+
     protected function countViewByDay($day)
     {
         return PostView::where('day', '=', $day)

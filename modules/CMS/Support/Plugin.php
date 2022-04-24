@@ -194,8 +194,9 @@ class Plugin
     public function boot(): void
     {
         $domain = $this->getDomainName();
+        $name = $this->getName();
         $adminRouter = $this->getPath() . '/src/routes/admin.php';
-        $apiRouter = $this->getPath() . '/src/routes/admin.php';
+        $apiRouter = $this->getPath() . '/src/routes/api.php';
 
         if (file_exists($adminRouter)) {
             $this->router->middleware('admin')
@@ -211,13 +212,23 @@ class Plugin
 
         $viewPath = $this->getPath() . '/src/resources/views';
         $langPath = $this->getPath() . '/src/resources/lang';
+        $viewPublishPath = resource_path("views/plugins/{$name}");
+        $langPublishPath = resource_path("lang/plugins/{$name}");
 
         if (is_dir($viewPath)) {
             $this->finder->addNamespace($domain, $viewPath);
         }
 
+        if (is_dir($viewPublishPath)) {
+            $this->finder->addNamespace($domain, $viewPublishPath);
+        }
+
         if (is_dir($langPath)) {
             $this->lang->addNamespace($domain, $langPath);
+        }
+
+        if (is_dir($langPublishPath)) {
+            $this->lang->addNamespace($domain, $langPublishPath);
         }
 
         $this->fireEvent('boot');

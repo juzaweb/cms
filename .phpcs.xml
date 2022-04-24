@@ -24,6 +24,8 @@
         <exclude name="PEAR.Files.IncludingFile.UseInclude"/>
         <exclude name="PEAR.Files.IncludingFile.UseIncludeOnce"/>
         <exclude name="PEAR.Files.IncludingFile.BracketsNotRequired"/>
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.FunctionNoCapital"/>
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.FunctionNameInvalid"/>
         <!--<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>-->
     </rule>
     <rule ref="PSR2">

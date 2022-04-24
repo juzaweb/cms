@@ -1,7 +1,9 @@
 $(document).on("turbolinks:load", function() {
-    $('body').on('change', '.show_on_front-change', function () {
+    let bodyElement = $('body');
+
+    bodyElement.on('change', '.show_on_front-change', function () {
         let showOnFront = $(this).val();
-        
+
         if (showOnFront == 'posts') {
             $('.select-show_on_front').prop('disabled', true);
         }
@@ -11,11 +13,11 @@ $(document).on("turbolinks:load", function() {
         }
     });
 
-    $('body').on('click', '.cancel-button', function () {
+    bodyElement.on('click', '.cancel-button', function () {
         window.location = "";
     });
 
-    $('body').on('change', '.generate-slug', function () {
+    bodyElement.on('change', '.generate-slug', function () {
         let title = $(this).val();
 
         ajaxRequest(juzaweb.adminUrl +'/load-data/generateSlug', {
@@ -28,8 +30,20 @@ $(document).on("turbolinks:load", function() {
         });
     });
 
-    $('body').on('click', '.slug-edit', function () {
+    bodyElement.on('click', '.slug-edit', function () {
         let slugInput = $(this).closest('.input-group').find('input:first');
         slugInput.prop('readonly', !slugInput.prop('readonly'));
+    });
+
+    bodyElement.on('click', '.close-message', function () {
+        let id = $(this).data('id');
+        ajaxRequest(juzaweb.adminUrl + '/remove-message', {
+            id: id,
+        }, {
+            method: 'POST',
+            callback: function (response) {
+
+            }
+        });
     });
 });
