@@ -11,7 +11,7 @@
 namespace Juzaweb\CMS\Support\Theme;
 
 use Juzaweb\CMS\Abstracts\MenuBox;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 
 class PostTypeMenuBox extends MenuBox
 {

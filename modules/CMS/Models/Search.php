@@ -15,7 +15,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 
 /**
  * Juzaweb\CMS\Models\Search

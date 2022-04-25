@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Facades;
+namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Juzaweb\CMS\Contracts\HookActionContract;

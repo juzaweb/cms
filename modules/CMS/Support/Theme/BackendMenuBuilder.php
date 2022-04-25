@@ -11,9 +11,8 @@
 namespace Juzaweb\CMS\Support\Theme;
 
 use Illuminate\Support\Collection;
-use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\Backend\Http\Resources\MenuItemResource;
 use Juzaweb\Backend\Models\MenuItem;
+use Juzaweb\CMS\Facades\HookAction;
 
 class BackendMenuBuilder
 {

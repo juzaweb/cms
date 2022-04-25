@@ -14,12 +14,11 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Events\AfterPostSave;
-use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
 
 trait PostTypeController
 {
@@ -138,7 +137,7 @@ trait PostTypeController
         $data = $this->DataForForm($model, ...$params);
         $setting = $this->getSetting();
         $templateData = $this->getTemplateData($model);
-        
+
         $editor = 'cms::backend.post.components.editor';
 
         if (Arr::get($templateData, 'blocks', [])) {
@@ -146,7 +145,7 @@ trait PostTypeController
         }
 
         $data['editor'] = $editor;
-        
+
         return apply_filters(
             "post_type.{$this->getPostType()}.getDataForForm",
             array_merge(
@@ -196,7 +195,7 @@ trait PostTypeController
     {
         $this->authorize($ability, [$arguments, $this->getPostType()]);
     }
-    
+
     protected function getPermission($ability, $arguments = [], ...$params)
     {
         $response = Gate::inspect($ability, [$arguments, $this->getPostType()]);
@@ -210,7 +209,7 @@ trait PostTypeController
     private function getTemplateData($model)
     {
         $template = $this->getTemplate($model);
-        
+
         if (empty($template)) {
             return [];
         }

@@ -4,10 +4,10 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Backend\Facades\HookAction;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\View\View;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\BackendController;
+use Symfony\Component\HttpFoundation\Response;
 
 class PageController extends BackendController
 {

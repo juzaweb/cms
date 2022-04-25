@@ -10,9 +10,9 @@
 
 namespace Juzaweb\Backend\Actions;
 
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Support\Theme\CustomMenuBox;
 use Juzaweb\CMS\Version;

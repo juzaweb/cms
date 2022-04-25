@@ -11,8 +11,8 @@
 namespace Juzaweb\Frontend\Actions;
 
 use Illuminate\Support\Arr;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Support\DefaultPageBlock;
 use Juzaweb\CMS\Support\DefaultWidget;

@@ -2,12 +2,12 @@
 
 namespace Juzaweb\CMS\Http\Controllers;
 
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\Backend\Facades\HookAction;
+use Illuminate\Support\Facades\View;
 use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Traits\ResponseMessage;
 use TwigBridge\Facade\Twig;
-use Illuminate\Support\Facades\View;
 
 class FrontendController extends Controller
 {
@@ -22,9 +22,9 @@ class FrontendController extends Controller
             function ($view) {
                 global $jw_user;
                 $user = $jw_user ? (new UserResource($jw_user))->toArray(request()) : null;
-    
+
                 $domains = explode(',', config('app.site_domains'));
-    
+
                 $view->with('user', $user);
                 $view->with('is_admin', $user ? $user['is_admin'] : false);
                 $view->with('auth', $user ? true : false);

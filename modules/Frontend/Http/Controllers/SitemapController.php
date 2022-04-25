@@ -3,9 +3,9 @@
 namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\Controller;
 
 class SitemapController extends Controller

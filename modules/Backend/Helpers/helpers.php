@@ -6,15 +6,16 @@ require __DIR__.'/plugin.php';
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Facades\Config;
 use Juzaweb\CMS\Facades\Hook;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\XssCleaner;
-use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\Breadcrumb;
 
@@ -49,7 +50,7 @@ if (!function_exists('get_config')) {
      *
      * @param string $key
      * @param mixed $default
-     * @return string|array
+     * @return array|string|null
      */
     function get_config(string $key, mixed $default = null): array|string|null
     {
@@ -193,7 +194,7 @@ function user_avatar($user = null): string
 }
 
 if (!function_exists('jw_breadcrumb')) {
-    function jw_breadcrumb(string $name, array $addItems = [])
+    function jw_breadcrumb(string $name, array $addItems = []): \Illuminate\Contracts\View\View
     {
         $items = apply_filters($name.'_breadcrumb', []);
 
@@ -242,7 +243,7 @@ if (!function_exists('upload_url')) {
     /**
      * Get file upload url in public storage
      *
-     * @param string $path
+     * @param string|null $path
      * @param string|null $default Default path if file not exists
      * @return string
      */
@@ -470,14 +471,14 @@ if (!function_exists('array_except')) {
 }
 
 if (!function_exists('get_enqueue_scripts')) {
-    function get_enqueue_scripts($inFooter = false)
+    function get_enqueue_scripts($inFooter = false): Collection
     {
         return HookAction::getEnqueueScripts($inFooter);
     }
 }
 
 if (!function_exists('get_enqueue_styles')) {
-    function get_enqueue_styles($inFooter = false)
+    function get_enqueue_styles($inFooter = false): Collection
     {
         return HookAction::getEnqueueStyles($inFooter);
     }
@@ -542,7 +543,7 @@ if (!function_exists('get_backend_message')) {
 }
 
 if (!function_exists('add_backend_message')) {
-    function add_backend_message($key, $messages = [], $status = 'success')
+    function add_backend_message($key, $messages = [], $status = 'success'): void
     {
         if (!is_array($messages)) {
             $messages = [$messages];
@@ -564,7 +565,7 @@ if (!function_exists('add_backend_message')) {
 }
 
 if (!function_exists('remove_backend_message')) {
-    function remove_backend_message($key)
+    function remove_backend_message($key): void
     {
         $data = collect(get_backend_message());
         $data = $data->forget([$key])->all();
@@ -577,7 +578,7 @@ if (!function_exists('is_admin')) {
      * @param User|null $user
      * @return bool
      */
-    function is_admin($user = null)
+    function is_admin($user = null): bool
     {
         if (empty($user)) {
             /**
@@ -601,7 +602,7 @@ if (!function_exists('has_permission')) {
      * @param User|null $user
      * @return bool
      */
-    function has_permission($user = null)
+    function has_permission(User|null $user = null): bool
     {
         if (empty($user)) {
             /**
@@ -625,7 +626,7 @@ if (!function_exists('has_permission')) {
 }
 
 if (!function_exists('collect_metas')) {
-    function collect_metas(array $metas): \Illuminate\Support\Collection
+    function collect_metas(array $metas): Collection
     {
         return collect($metas)
             ->mapWithKeys(

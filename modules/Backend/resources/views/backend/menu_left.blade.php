@@ -1,7 +1,6 @@
 <ul class="juzaweb__menuLeft__navigation">
     @php
-        use Juzaweb\Backend\Facades\HookAction;
-        use Juzaweb\CMS\Support\MenuCollection;
+        use Juzaweb\CMS\Facades\HookAction;use Juzaweb\CMS\Support\MenuCollection;
 
         global $jw_user;
 
@@ -20,29 +19,29 @@
 
         @if($item->hasChildren())
             @php
-            $strChild = '';
-            $hasActive = false;
-            foreach($item->getChildrens() as $child) {
-                if(!$jw_user->can($child->get('key'))) {
-                    continue;
-                }
+                $strChild = '';
+                $hasActive = false;
+                foreach($item->getChildrens() as $child) {
+                    if(!$jw_user->can($child->get('key'))) {
+                        continue;
+                    }
 
-                if (empty($segment2)) {
-                    $active = empty($child->getUrl());
-                } else {
-                    $active = request()->is($adminPrefix .'/'. $child->get('url') . '*');
-                }
+                    if (empty($segment2)) {
+                        $active = empty($child->getUrl());
+                    } else {
+                        $active = request()->is($adminPrefix .'/'. $child->get('url') . '*');
+                    }
 
-                if ($active) {
-                    $hasActive = true;
-                }
+                    if ($active) {
+                        $hasActive = true;
+                    }
 
-                $strChild .= view('cms::backend.items.menu_left_item', [
-                    'adminUrl' => $adminUrl,
-                    'item' => $child,
-                    'active' => $active
-                ])->render();
-            }
+                    $strChild .= view('cms::backend.items.menu_left_item', [
+                        'adminUrl' => $adminUrl,
+                        'item' => $child,
+                        'active' => $active
+                    ])->render();
+                }
             @endphp
 
             <li class="juzaweb__menuLeft__item juzaweb__menuLeft__submenu juzaweb__menuLeft__item-{{ $item->get('slug') }} @if($hasActive) juzaweb__menuLeft__submenu--toggled @endif">

@@ -8,19 +8,19 @@
  * @license    MIT
  */
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\CMS\Facades\Theme;
-use Juzaweb\CMS\Facades\ThemeConfig;
 use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Menu;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeConfig;
 use Juzaweb\CMS\Support\Theme\BackendMenuBuilder;
 use Juzaweb\CMS\Support\Theme\MenuBuilder;
 use TwigBridge\Facade\Twig;
-use Illuminate\Support\Arr;
 
 function body_class($class = '')
 {
@@ -34,7 +34,7 @@ function theme_assets(string $path, string $theme = null)
     if (strpos($path, 'jw-styles/') === 0) {
         return asset($path);
     }
-    
+
     $path = str_replace('assets/', '', $path);
 
     return Theme::assets($path, $theme);

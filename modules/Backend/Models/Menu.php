@@ -15,7 +15,7 @@
 namespace Juzaweb\Backend\Models;
 
 use Illuminate\Support\Arr;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\Model;
 
 /**

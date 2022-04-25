@@ -4,11 +4,11 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\CMS\Facades\GlobalData;
-use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\Menu;
 use Juzaweb\Backend\Models\MenuItem;
+use Juzaweb\CMS\Facades\GlobalData;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class MenuController extends BackendController
 {

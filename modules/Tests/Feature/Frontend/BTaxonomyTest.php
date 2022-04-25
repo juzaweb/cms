@@ -10,8 +10,8 @@
 
 namespace Juzaweb\Tests\Feature\Frontend;
 
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\Tests\TestCase;
 
 class BTaxonomyTest extends TestCase
@@ -26,15 +26,15 @@ class BTaxonomyTest extends TestCase
                 if (empty($data)) {
                     continue;
                 }
-    
+
                 $permalink = HookAction::getPermalinks($key);
                 $base = $permalink->get('base');
-    
+
                 $url = "/{$base}/{$data->slug}";
                 $response = $this->get($url);
-    
+
                 $this->printText("Test {$url}");
-                
+
                 $response->assertStatus(200);
             }
         }

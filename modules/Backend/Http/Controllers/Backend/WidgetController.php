@@ -13,7 +13,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class WidgetController extends BackendController

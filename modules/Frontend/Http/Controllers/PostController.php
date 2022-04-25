@@ -13,10 +13,10 @@ namespace Juzaweb\Frontend\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Events\PostViewed;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Comment;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class PostController extends FrontendController

@@ -12,7 +12,7 @@ namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 
 trait TaxonomyModel
 {

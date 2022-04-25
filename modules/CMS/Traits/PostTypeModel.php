@@ -18,11 +18,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\PostMeta;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
 
 /**
  * @method Builder wherePublish()

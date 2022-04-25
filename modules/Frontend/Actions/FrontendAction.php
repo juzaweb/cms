@@ -11,10 +11,10 @@
 namespace Juzaweb\Frontend\Actions;
 
 use Illuminate\Http\Request;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostRating;
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
 
 class FrontendAction extends Action
 {
