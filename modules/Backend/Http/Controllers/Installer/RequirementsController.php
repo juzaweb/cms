@@ -30,10 +30,11 @@ class RequirementsController extends Controller
         $phpSupportInfo = $this->requirements->checkPHPversion(
             config('installer.core.minPhpVersion')
         );
+
         $requirements = $this->requirements->check(
             config('installer.requirements')
         );
 
-        return view('installer::requirements', compact('requirements', 'phpSupportInfo'));
+        return view('cms::installer.requirements', compact('requirements', 'phpSupportInfo'));
     }
 }

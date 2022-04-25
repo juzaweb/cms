@@ -1,12 +1,12 @@
-@extends('installer::layouts.master')
+@extends('cms::installer.layouts.master')
 
 @section('template_title')
-    {{ trans('installer::installer.requirements.template_title') }}
+    {{ trans('cms::installer.requirements.template_title') }}
 @endsection
 
 @section('title')
     <i class="fa fa-list-ul fa-fw" aria-hidden="true"></i>
-    {{ trans('installer::installer.requirements.title') }}
+    {{ trans('cms::installer.requirements.title') }}
 @endsection
 
 @section('container')
@@ -41,7 +41,7 @@
     @if ( ! isset($requirements['errors']) && $phpSupportInfo['supported'] )
         <div class="buttons">
             <a class="button" href="{{ route('installer.permissions') }}">
-                {{ trans('installer::installer.requirements.next') }}
+                {{ trans('cms::installer.requirements.next') }}
                 <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </a>
         </div>

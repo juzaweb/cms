@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@if (trim($__env->yieldContent('template_title')))@yield('template_title') | @endif {{ trans('installer::installer.updater.title') }}</title>
+        <title>@if (trim($__env->yieldContent('template_title')))@yield('template_title') | @endif {{ trans('cms::installer.updater.title') }}</title>
 
         <link href="{{ asset('vendor/installer/css/style.min.css') }}" rel="stylesheet"/>
         @yield('style')

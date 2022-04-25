@@ -38,7 +38,7 @@ class PermissionsController extends Controller
         ]);
 
         return view(
-            'installer::permissions',
+            'cms::installer.permissions',
             compact('permissions')
         );
     }
