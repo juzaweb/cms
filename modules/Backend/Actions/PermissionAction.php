@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\User;
 
 class PermissionAction extends Action

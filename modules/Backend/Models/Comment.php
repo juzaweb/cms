@@ -3,7 +3,7 @@
 namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
 

@@ -11,7 +11,7 @@
 namespace Juzaweb\Backend\Models;
 
 use Illuminate\Support\Collection;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\Model;
 
 /**

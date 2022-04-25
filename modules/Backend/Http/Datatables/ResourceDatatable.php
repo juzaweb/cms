@@ -13,9 +13,9 @@ namespace Juzaweb\Backend\Http\Datatables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Resource;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Facades\HookAction;
 
 class ResourceDatatable extends DataTable
 {

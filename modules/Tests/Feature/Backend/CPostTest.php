@@ -14,7 +14,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
@@ -30,7 +30,7 @@ class CPostTest extends TestCase
 
         $this->user = User::where('is_admin', '=', 1)
             ->first();
-        
+
         Auth::loginUsingId($this->user->id);
 
         $this->postTypes = HookAction::getPostTypes();
@@ -58,24 +58,24 @@ class CPostTest extends TestCase
     {
         $index = "/admin-cp/post-type/{$key}/create";
         $response = $this->get($index);
-        
+
         $this->printText("Test {$index}");
-        
+
         $response->assertStatus(200);
 
         if ($post = $this->makerData($postType)) {
             $create = "/admin-cp/post-type/{$key}";
             $this->printText("Test post create {$create}");
-            
+
             $data = $post;
             unset($data['slug']);
-            
+
             $response = $this->post($create, $post);
             $response->assertStatus(302);
-    
+
             $slug = substr($post['title'], 0, 70);
             $slug = Str::slug($slug);
-    
+
             $this->assertDatabaseHas(
                 'posts',
                 [
@@ -91,7 +91,7 @@ class CPostTest extends TestCase
         if ($post = $this->makerData($postType)) {
             $model = app($postType->get('model'))->first(['id']);
             $url = "/admin-cp/post-type/{$key}/{$model->id}/edit";
-            
+
             $response = $this->get($url);
 
             $response->assertStatus(200);

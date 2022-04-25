@@ -12,10 +12,9 @@ namespace Juzaweb\Tests\Feature\Backend;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\CMS\Facades\ActionRegister;
-use Juzaweb\CMS\Models\Model;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
@@ -31,7 +30,7 @@ class BTaxonomyTest extends TestCase
 
         $this->user = User::where('is_admin', '=', 1)
             ->first();
-        
+
         Auth::loginUsingId($this->user->id);
 
         $this->postTypes = HookAction::getPostTypes();
@@ -44,7 +43,7 @@ class BTaxonomyTest extends TestCase
             if ($taxonomies->isEmpty()) {
                 continue;
             }
-            
+
             foreach ($taxonomies as $taxonomy) {
                 $this->indexTest($taxonomy);
 
@@ -74,7 +73,7 @@ class BTaxonomyTest extends TestCase
                 $this->getUrlTaxonomy($taxonomy),
                 $tax->getAttributes()
             );
-            
+
             $response->assertStatus(302);
             $new = app(Taxonomy::class)->count();
             $this->assertEquals($old, ($new - 1));

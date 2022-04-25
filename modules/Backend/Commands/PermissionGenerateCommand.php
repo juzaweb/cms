@@ -12,15 +12,15 @@ namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Permission;
 use Juzaweb\Backend\Models\PermissionGroup;
+use Juzaweb\CMS\Facades\HookAction;
 
 class PermissionGenerateCommand extends Command
 {
     protected $signature = 'permission:generate';
     protected $resourcePermissions = ['index', 'create', 'edit', 'delete'];
-    
+
     public function handle()
     {
         $this->resourceGenerate('users', 'User');
@@ -28,7 +28,7 @@ class PermissionGenerateCommand extends Command
         $this->resourceGenerate('themes', 'Theme');
         $this->resourceGenerate('menus', 'Menu');
         $this->resourceGenerate('roles', 'Role');
-        
+
         $postTypes = HookAction::getPostTypes();
         foreach ($postTypes as $type => $postType) {
             $typeSingular = Str::singular($type);
@@ -36,7 +36,7 @@ class PermissionGenerateCommand extends Command
                 "post-type.{$type}",
                 $postType->get('label')
             );
-            
+
             $taxonomies = HookAction::getTaxonomies($type);
             foreach ($taxonomies as $key => $taxonomy) {
                 $this->resourceGenerate(
@@ -44,7 +44,7 @@ class PermissionGenerateCommand extends Command
                     $taxonomy->get('label')
                 );
             }
-            
+
             if (in_array('comment', $postType->get('supports', []))) {
                 $this->resourceGenerate(
                     "post-type.{$typeSingular}.comments",
@@ -52,14 +52,14 @@ class PermissionGenerateCommand extends Command
                 );
             }
         }
-        
+
         return self::SUCCESS;
     }
-    
+
     protected function resourceGenerate($resource, $name)
     {
         $this->info("-- Generate permission {$name}");
-        
+
         $permissions = $this->resourcePermissions;
         foreach ($permissions as $permission) {
             $group = PermissionGroup::firstOrCreate(
@@ -68,7 +68,7 @@ class PermissionGenerateCommand extends Command
                     'description' => $name,
                 ]
             );
-    
+
             $label = $permission == 'index' ? 'View List' : $permission;
             $permission =  $permission == 'index' ? $resource : "{$resource}.{$permission}";
             Permission::firstOrCreate(

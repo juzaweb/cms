@@ -11,28 +11,28 @@
 namespace Juzaweb\Tests\Feature\Frontend;
 
 use Faker\Generator as Faker;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\Tests\TestCase;
 
 class APostTest extends TestCase
 {
     protected $postTypes;
-    
+
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->postTypes = HookAction::getPostTypes();
     }
-    
+
     public function testIndex()
     {
         $response = $this->get('/');
-        
+
         $response->assertStatus(200);
     }
-    
+
     public function testDetail()
     {
         foreach ($this->postTypes as $key => $postType) {
@@ -40,37 +40,37 @@ class APostTest extends TestCase
                 ->where('type', $key)
                 ->limit(2)
                 ->get();
-            
+
             foreach ($posts as $post) {
                 $url = $this->getUrlPost($postType, $post);
-                
+
                 $response = $this->get($url);
-    
+
                 $this->printText("Test {$url}");
-                
+
                 $response->assertStatus(200);
             }
         }
     }
-    
+
     public function testComment()
     {
         $faker = app(Faker::class);
-        
+
         foreach ($this->postTypes as $key => $postType) {
             if (!in_array('comment', $postType->get('supports'))) {
                 continue;
             }
-        
+
             $posts = Post::wherePublish()
                 ->where('type', $key)
                 ->limit(2)
                 ->get();
-        
+
             foreach ($posts as $post) {
                 $url = $this->getUrlPost($postType, $post);
                 $this->printText("Test Comment {$url}");
-                
+
                 $this->post(
                     $url,
                     [
@@ -81,7 +81,7 @@ class APostTest extends TestCase
                 )
                     ->assertStatus(302)
                     ->assertSessionHasErrors(['content']);
-                
+
                 $this->post(
                     $url,
                     [
@@ -92,31 +92,31 @@ class APostTest extends TestCase
                 )
                     ->assertStatus(302)
                     ->assertSessionHasErrors(['email']);
-    
+
                 $data = [
                     'name' => $faker->name,
                     'email' => $faker->email,
                     'content' => 'required|max:300',
                 ];
-                
+
                 $this->post($url, $data)->assertStatus(302);
-    
+
                 $this->assertDatabaseHas('comments', $data);
             }
         }
     }
-    
+
     public function testAuthComment()
     {
         $this->authUserAdmin();
-    
+
         foreach ($this->postTypes as $key => $postType) {
             if (!in_array('comment', $postType->get('supports'))) {
                 continue;
             }
-        
+
             $posts = Post::where('type', $key)->limit(2)->get();
-        
+
             foreach ($posts as $post) {
                 $this->post(
                     $this->getUrlPost($postType, $post),
@@ -126,7 +126,7 @@ class APostTest extends TestCase
                 )
                     ->assertStatus(302)
                     ->assertSessionHasErrors(['content']);
-                
+
                 $this->post(
                     $this->getUrlPost($postType, $post),
                     [
@@ -134,7 +134,7 @@ class APostTest extends TestCase
                     ]
                 )
                     ->assertStatus(302);
-                
+
                 $this->assertDatabaseHas(
                     'comments',
                     ['content' => 'required|max:300']
@@ -142,7 +142,7 @@ class APostTest extends TestCase
             }
         }
     }
-    
+
     protected function getUrlPost($postType, $post)
     {
         $key = $postType->get('key');
@@ -151,7 +151,7 @@ class APostTest extends TestCase
             $permalink = HookAction::getPermalinks($key);
             $base = $permalink->get('base');
         }
-    
+
         return $base ? "/{$base}/{$post->slug}" : "/{$post->slug}";
     }
 }

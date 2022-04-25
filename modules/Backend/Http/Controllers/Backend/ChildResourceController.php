@@ -11,8 +11,8 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Route;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Facades\HookAction;
 
 class ChildResourceController extends ResourceController
 {

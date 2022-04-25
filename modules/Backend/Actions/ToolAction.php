@@ -2,9 +2,9 @@
 
 namespace Juzaweb\Backend\Actions;
 
-use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\Backend\Facades\HookAction;
 use Juzaweb\Backend\Http\Controllers\ImportController;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\HookAction;
 
 class ToolAction extends Action
 {

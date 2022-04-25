@@ -1,5 +1,5 @@
 @php
-    $blocks = \Juzaweb\Backend\Facades\HookAction::getPageBlocks();
+    $blocks = \Juzaweb\CMS\Facades\HookAction::getPageBlocks();
     $templateBlocks = $templateData['blocks'] ?? [];
     $currentTheme = jw_current_theme();
     $themePath = \Juzaweb\CMS\Facades\Theme::getThemePath($currentTheme);
@@ -8,7 +8,7 @@
 
 @foreach($templateBlocks as $contentKey => $block)
     @php
-    $items = $model->getMeta('block_content', [])[$contentKey] ?? [];
+        $items = $model->getMeta('block_content', [])[$contentKey] ?? [];
     @endphp
     @component('cms::components.card', [
         'label' => $block['label']

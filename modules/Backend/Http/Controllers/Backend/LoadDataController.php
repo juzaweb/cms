@@ -5,12 +5,12 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\Menu;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\ArrayPagination;
 
@@ -326,7 +326,7 @@ class LoadDataController extends BackendController
 
         return response()->json($data);
     }
-    
+
     protected function loadThemeTemplate(Request $request)
     {
         $templates = HookAction::getThemeTemplates()->map(
@@ -339,7 +339,7 @@ class LoadDataController extends BackendController
         )
             ->values()
             ->toArray();
-        
+
         $data['results'] = $templates;
         return response()->json($data);
     }
