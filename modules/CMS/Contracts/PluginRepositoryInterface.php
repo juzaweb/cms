@@ -2,8 +2,8 @@
 
 namespace Juzaweb\CMS\Contracts;
 
-use Juzaweb\CMS\Abstracts\Plugin;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Support\Plugin;
 
 interface PluginRepositoryInterface
 {

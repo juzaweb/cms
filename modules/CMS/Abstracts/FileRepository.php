@@ -16,6 +16,7 @@ use Juzaweb\CMS\Exceptions\InvalidAssetPath;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
 use Juzaweb\CMS\Support\Collection;
 use Juzaweb\CMS\Support\Json;
+use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Process\Installer;
 use Juzaweb\CMS\Support\Process\Updater;
 
@@ -129,7 +130,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      * @param Container $app
      * @param string $data
      * @param string $path
-     * @return \Juzaweb\CMS\Abstracts\Plugin
+     * @return \Juzaweb\CMS\Support\Plugin
      */
     abstract protected function createModule(...$args): Plugin;
 

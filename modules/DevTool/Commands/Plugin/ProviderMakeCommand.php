@@ -3,8 +3,8 @@
 namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Abstracts\Plugin;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
+use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Stub;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;

@@ -2,7 +2,7 @@
 
 namespace Juzaweb\CMS\Contracts;
 
-use Juzaweb\CMS\Abstracts\Plugin;
+use Juzaweb\CMS\Support\Plugin;
 
 interface ActivatorInterface
 {
@@ -52,7 +52,7 @@ interface ActivatorInterface
      * @param  Plugin $module
      */
     public function delete(Plugin $module): void;
-    
+
     /**
      * Get plugin info load
      *

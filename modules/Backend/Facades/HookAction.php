@@ -52,6 +52,7 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static \Illuminate\Support\Collection getPackageModules($key = null)
  * @method static \Illuminate\Support\Collection getThemeSettings($name = null)
  * @method static \Illuminate\Support\Collection getEnqueueScripts($inFooter = false)
+ * @method static \Illuminate\Support\Collection getEnqueueStyles($inFooter = false)
  *
  * @see \Juzaweb\CMS\Support\HookAction
  */

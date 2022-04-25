@@ -10,8 +10,7 @@
 
 namespace Juzaweb\Tests\Unit;
 
-use ChunkTests\Handler\ContentRangeUploadHandlerTest;
-use Juzaweb\CMS\Abstracts\Plugin;
+use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\Tests\TestCase;
 
 class CPluginTest extends TestCase
@@ -23,19 +22,19 @@ class CPluginTest extends TestCase
             /**
              * @var Plugin $plugin
              */
-            
+
             $this->printText("Enable {$plugin->getName()}");
-    
+
             $plugin->enable();
-            
+
             $this->assertTrue($plugin->isEnabled());
         }
-        
+
         $this->assertDatabaseHas(
             'configs',
             ['code' => 'plugin_statuses']
         );
-    
+
         $this->printText("Check Enable DB");
         $dbPlugins = get_config('plugin_statuses', []);
         $dbPlugins = array_keys($dbPlugins);
@@ -46,10 +45,10 @@ class CPluginTest extends TestCase
                 }
             )
             ->all();
-        
+
         $this->assertTrue(count($notEnable) == 0);
     }
-    
+
     public function testDisable()
     {
         $plugins = app('plugins')->all();
@@ -57,14 +56,14 @@ class CPluginTest extends TestCase
             /**
              * @var Plugin $plugin
              */
-            
+
             $this->printText("Disable {$plugin->getName()}");
-            
+
             $plugin->disable();
-            
+
             $this->assertTrue($plugin->isDisabled());
         }
-        
+
         $this->printText("Check Enable DB");
         $dbPlugins = get_config('plugin_statuses', []);
         $dbPlugins = array_keys($dbPlugins);

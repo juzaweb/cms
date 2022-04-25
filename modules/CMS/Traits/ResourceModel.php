@@ -31,11 +31,13 @@ trait ResourceModel
         }
 
         if ($keyword = Arr::get($params, 'keyword')) {
-            $builder->where(function (Builder $q) use ($keyword) {
-                foreach ($this->searchFields as $key => $attribute) {
-                    $q->orWhere($attribute, JW_SQL_LIKE, '%'. $keyword .'%');
+            $builder->where(
+                function (Builder $q) use ($keyword) {
+                    foreach ($this->searchFields as $key => $attribute) {
+                        $q->orWhere($attribute, JW_SQL_LIKE, '%'. $keyword .'%');
+                    }
                 }
-            });
+            );
         }
 
         return $builder;

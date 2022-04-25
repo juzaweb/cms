@@ -108,6 +108,11 @@ class CmsServiceProvider extends ServiceProvider
             $this->basePath . '/config/locales.php',
             'locales'
         );
+
+        $this->mergeConfigFrom(
+            $this->basePath . '/config/installer.php',
+            'installer'
+        );
     }
 
     protected function bootMigrations()

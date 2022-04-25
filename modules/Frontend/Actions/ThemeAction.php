@@ -8,11 +8,11 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Actions;
+namespace Juzaweb\Frontend\Actions;
 
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\Backend\Facades\HookAction;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Support\DefaultPageBlock;
 use Juzaweb\CMS\Support\DefaultWidget;
@@ -20,8 +20,8 @@ use TwigBridge\Facade\Twig;
 
 class ThemeAction extends Action
 {
-    protected $currentTheme;
-    protected $register = [];
+    protected string $currentTheme;
+    protected array $register = [];
 
     public function __construct()
     {
@@ -73,7 +73,7 @@ class ThemeAction extends Action
             }
 
             foreach ($styles['css'] ?? [] as $index => $css) {
-                HookAction::enqueueFrontendStyle('main' . $index, $css, $version);
+                HookAction::enqueueFrontendStyle('main-' . $index, $css, $version);
             }
         }
     }
@@ -156,11 +156,11 @@ class ThemeAction extends Action
             );
         }
     }
-    
+
     public function templates()
     {
         $templates = $this->getRegister('templates');
-        
+
         foreach ($templates as $key => $template) {
             HookAction::registerThemeTemplate(
                 $key,
@@ -219,7 +219,7 @@ class ThemeAction extends Action
             );
         }
     }
-    
+
     public function addThemeHeader()
     {
         if (is_admin()) {

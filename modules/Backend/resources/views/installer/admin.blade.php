@@ -1,12 +1,12 @@
-@extends('installer::layouts.master')
+@extends('cms::installer.layouts.master')
 
 @section('template_title')
-    {{ trans('installer::installer.final.template_title') }}
+    {{ trans('cms::installer.final.template_title') }}
 @endsection
 
 @section('title')
     <i class="fa fa-flag-checkered fa-fw" aria-hidden="true"></i>
-    {{ trans('installer::installer.final.title') }}
+    {{ trans('cms::installer.final.title') }}
 @endsection
 
 @section('container')
@@ -16,9 +16,9 @@
 
         <div class="form-group {{ $errors->has('name') ? ' has-error ' : '' }}">
             <label for="name">
-                {{ trans('installer::installer.environment.wizard.form.name') }}
+                {{ trans('cms::installer.environment.wizard.form.name') }}
             </label>
-            <input type="text" name="name" id="name" placeholder="{{ trans('installer::installer.environment.wizard.form.name') }}" autocomplete="off" required value="{{ old('name') }}" />
+            <input type="text" name="name" id="name" placeholder="{{ trans('cms::installer.environment.wizard.form.name') }}" autocomplete="off" required value="{{ old('name') }}" />
             @if ($errors->has('name'))
                 <span class="error-block">
                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -29,9 +29,9 @@
 
         <div class="form-group {{ $errors->has('email') ? ' has-error ' : '' }}">
             <label for="email">
-                {{ trans('installer::installer.environment.wizard.form.email') }}
+                {{ trans('cms::installer.environment.wizard.form.email') }}
             </label>
-            <input type="text" name="email" id="email" placeholder="{{ trans('installer::installer.environment.wizard.form.email') }}" autocomplete="off" required value="{{ old('email') }}" />
+            <input type="text" name="email" id="email" placeholder="{{ trans('cms::installer.environment.wizard.form.email') }}" autocomplete="off" required value="{{ old('email') }}" />
             @if ($errors->has('email'))
                 <span class="error-block">
                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -42,9 +42,9 @@
 
         <div class="form-group {{ $errors->has('password') ? ' has-error ' : '' }}">
             <label for="password">
-                {{ trans('installer::installer.environment.wizard.form.password') }}
+                {{ trans('cms::installer.environment.wizard.form.password') }}
             </label>
-            <input type="password" name="password" id="password" placeholder="{{ trans('installer::installer.environment.wizard.form.password') }}" autocomplete="off" required />
+            <input type="password" name="password" id="password" placeholder="{{ trans('cms::installer.environment.wizard.form.password') }}" autocomplete="off" required />
             @if ($errors->has('password'))
                 <span class="error-block">
                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -55,9 +55,9 @@
 
         <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error ' : '' }}">
             <label for="password_confirmation">
-                {{ trans('installer::installer.environment.wizard.form.password_confirmation') }}
+                {{ trans('cms::installer.environment.wizard.form.password_confirmation') }}
             </label>
-            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="{{ trans('installer::installer.environment.wizard.form.password_confirmation') }}" autocomplete="off" required />
+            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="{{ trans('cms::installer.environment.wizard.form.password_confirmation') }}" autocomplete="off" required />
             @if ($errors->has('password_confirmation'))
                 <span class="error-block">
                     <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -68,7 +68,7 @@
 
         <div class="buttons">
             <button type="submit" class="button btn-submit">
-                {{ trans('installer::installer.environment.wizard.form.buttons.create_user_admin') }}
+                {{ trans('cms::installer.environment.wizard.form.buttons.create_user_admin') }}
                 <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
             </button>
         </div>

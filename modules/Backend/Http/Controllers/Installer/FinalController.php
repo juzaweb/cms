@@ -26,7 +26,7 @@ class FinalController extends Controller
 
         event(new InstallerFinished());
 
-        return view('installer::finished', compact(
+        return view('cms::installer.finished', compact(
             'finalMessages',
             'finalStatusMessage'
         ));

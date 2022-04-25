@@ -21,7 +21,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('installer::admin');
+        return view('cms::installer.admin');
     }
 
     public function save(Request $request)
@@ -67,7 +67,7 @@ class AdminController extends Controller
             ->to('install/final')
             ->with(
                 [
-                    'message' => trans('installer::installer.final.finished')
+                    'message' => trans('cms::installer.final.finished')
                 ]
             );
     }

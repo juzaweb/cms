@@ -23,14 +23,15 @@ class DatabaseController extends Controller
     /**
      * Migrate and seed the database.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
     public function database()
     {
         $response = $this->databaseManager->run();
 
-        return redirect()->route('installer.admin')
-                         ->with(['message' => $response]);
+        return redirect()
+            ->route('installer.admin')
+            ->with(['message' => $response]);
     }
 }

@@ -567,8 +567,7 @@ if (!function_exists('remove_backend_message')) {
     function remove_backend_message($key)
     {
         $data = collect(get_backend_message());
-        $keys = $data->where('key', $key)->keys()->toArray();
-        $data = $data->forget($keys)->all();
+        $data = $data->forget([$key])->all();
         set_config('backend_messages', $data);
     }
 }

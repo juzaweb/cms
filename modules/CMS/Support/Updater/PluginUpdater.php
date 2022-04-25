@@ -2,8 +2,8 @@
 
 namespace Juzaweb\CMS\Support\Updater;
 
-use Juzaweb\CMS\Abstracts\Plugin;
 use Juzaweb\CMS\Support\Manager\UpdateManager;
+use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Version;
 
 class PluginUpdater extends UpdateManager

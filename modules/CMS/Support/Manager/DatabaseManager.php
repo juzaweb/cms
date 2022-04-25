@@ -60,7 +60,7 @@ class DatabaseManager
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
 
-        return $this->response(trans('installer::installer.final.database_finished'), 'success', $outputLog);
+        return $this->response(trans('cms::installer.final.database_finished'), 'success', $outputLog);
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Juzaweb\CMS\Facades\GlobalData;
 
-trait HookActionGet
+trait GetHookAction
 {
     /**
      * Get registed menu box
@@ -90,13 +90,16 @@ trait HookActionGet
         $permalinks = GlobalData::get('permalinks');
 
         if ($data) {
-            $permalinks = array_map(function ($item) use ($data) {
-                if (isset($data[$item->get('key')])) {
-                    $item->put('base', $data[$item->get('key')]['base']);
-                }
+            $permalinks = array_map(
+                function ($item) use ($data) {
+                    if (isset($data[$item->get('key')])) {
+                        $item->put('base', $data[$item->get('key')]['base']);
+                    }
 
-                return $item;
-            }, $permalinks);
+                    return $item;
+                },
+                $permalinks
+            );
         }
 
         if ($key) {
@@ -230,14 +233,14 @@ trait HookActionGet
 
     public function getEnqueueFrontendScripts($inFooter = false)
     {
-        $scripts = new Collection(GlobalData::get('frontend.scripts'));
+        $scripts = new Collection(GlobalData::get('frontend_scripts'));
 
         return $scripts->where('inFooter', $inFooter);
     }
 
     public function getEnqueueFrontendStyles($inFooter = false)
     {
-        $scripts = new Collection(GlobalData::get('frontend.styles'));
+        $scripts = new Collection(GlobalData::get('frontend_styles'));
 
         return $scripts->where('inFooter', $inFooter);
     }

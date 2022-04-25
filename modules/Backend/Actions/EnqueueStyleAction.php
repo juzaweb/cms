@@ -23,33 +23,23 @@ class EnqueueStyleAction extends Action
 
     public function enqueueStylesHeader()
     {
-        $scripts = get_enqueue_scripts(false);
-        $styles = get_enqueue_styles(false);
+        $scripts = HookAction::getEnqueueScripts();
+        $styles = HookAction::getEnqueueStyles();
 
-        foreach ($styles as $style) {
-            $href = e($style->get('src')) .'?v='. e($style->get('ver'));
-            echo '<link rel="stylesheet" type="text/css" href="'. $href .'">';
-        }
-
-        foreach ($scripts as $script) {
-            $href = e($script->get('src')) .'?v='. e($script->get('ver'));
-            echo '<script src="'. $href .'"></script>';
-        }
+        echo view(
+            'cms::frontend.styles',
+            ['scripts' => $scripts, 'styles' => $styles]
+        )->render();
     }
 
     public function enqueueStylesFooter()
     {
-        $scripts = get_enqueue_scripts(true);
-        $styles = get_enqueue_styles(true);
+        $scripts = HookAction::getEnqueueScripts(true);
+        $styles = HookAction::getEnqueueStyles(true);
 
-        foreach ($styles as $style) {
-            $href = e($style->get('src')) .'?v='. e($style->get('ver'));
-            echo '<link rel="stylesheet" type="text/css" href="'. $href .'">';
-        }
-
-        foreach ($scripts as $script) {
-            $href = e($script->get('src')) .'?v='. e($script->get('ver'));
-            echo '<script src="'. $href .'"></script>';
-        }
+        echo view(
+            'cms::frontend.styles',
+            ['scripts' => $scripts, 'styles' => $styles]
+        )->render();
     }
 }

@@ -51,7 +51,7 @@ class ModuleGenerator extends Generator
     /**
      * The plugin instance.
      *
-     * @var \Juzaweb\CMS\Abstracts\Plugin
+     * @var \Juzaweb\CMS\Support\Plugin
      */
     protected $module;
 
@@ -241,7 +241,7 @@ class ModuleGenerator extends Generator
     /**
      * Get the plugin instance.
      *
-     * @return \Juzaweb\CMS\Abstracts\Plugin
+     * @return \Juzaweb\CMS\Support\Plugin
      */
     public function getModule()
     {

@@ -158,7 +158,7 @@ class User extends Authenticatable
         return $this->hasMany(SubscriptionHistory::class, 'user_id', 'id');
     }*/
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         $permission = apply_filters(
             Action::BEFORE_PERMISSION_ADMIN,
@@ -169,7 +169,7 @@ class User extends Authenticatable
         if ($permission) {
             return true;
         }
-        
+
         if ($this->is_admin) {
             return true;
         }
@@ -206,7 +206,7 @@ class User extends Authenticatable
         return $label;
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [];
     }

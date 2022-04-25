@@ -8,7 +8,6 @@ use Juzaweb\Backend\Actions\EnqueueStyleAction;
 use Juzaweb\Backend\Actions\MenuAction;
 use Juzaweb\Backend\Actions\PermissionAction;
 use Juzaweb\Backend\Actions\SocialLoginAction;
-use Juzaweb\Backend\Actions\ThemeAction;
 use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
 use Juzaweb\Backend\Commands\FindTransCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
@@ -26,7 +25,6 @@ use Juzaweb\CMS\Http\Middleware\Admin;
 use Juzaweb\CMS\Support\Html\Field;
 use Juzaweb\CMS\Support\Macros\RouterMacros;
 use Juzaweb\CMS\Support\ServiceProvider;
-use Juzaweb\Frontend\Actions\FrontendAction;
 
 class BackendServiceProvider extends ServiceProvider
 {
@@ -44,8 +42,6 @@ class BackendServiceProvider extends ServiceProvider
             [
                 MenuAction::class,
                 EnqueueStyleAction::class,
-                ThemeAction::class,
-                FrontendAction::class,
                 PermissionAction::class,
                 SocialLoginAction::class,
                 //ToolAction::class
@@ -91,14 +87,14 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/juzaweb'),
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/cms'),
             ],
             'cms_views'
         );
 
         $this->publishes(
             [
-                __DIR__ . '/../resources/lang' => resource_path('lang/vendor/juzaweb'),
+                __DIR__ . '/../resources/lang' => resource_path('lang/cms'),
             ],
             'cms_lang'
         );

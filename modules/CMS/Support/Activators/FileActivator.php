@@ -7,9 +7,9 @@ use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
-use Juzaweb\CMS\Abstracts\Plugin;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Support\Plugin;
 
 class FileActivator implements ActivatorInterface
 {
@@ -188,7 +188,7 @@ class FileActivator implements ActivatorInterface
         $this->writeJson();
         $this->flushCache();
     }
-    
+
     /**
      * Get plugin info load
      *

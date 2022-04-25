@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de657d2b46732c2f5a9303316d384068",
+    "content-hash": "be037e213dc97f8d1de4a8a79048005f",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1382,73 +1382,6 @@
                 "source": "https://github.com/juzaweb/laravel-chunk-upload/tree/v1.5"
             },
             "time": "2022-03-19T13:26:06+00:00"
-        },
-        {
-            "name": "juzaweb/laravel-translation-loader",
-            "version": "v2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/juzaweb/laravel-translation.git",
-                "reference": "17dc7f9d1af635ccade217dc7eaa3029a228b843"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/laravel-translation/zipball/17dc7f9d1af635ccade217dc7eaa3029a228b843",
-                "reference": "17dc7f9d1af635ccade217dc7eaa3029a228b843",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/translation": "^6.0|^7.0|^8.0|^9.0",
-                "php": "^7.4|^8.0|^8.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^4.0|^5.0|^6.0",
-                "phpunit/phpunit": "^8.0|^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": []
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\TranslationLoader\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Store your language lines in the database, yaml or other sources",
-            "homepage": "https://github.com/spatie/laravel-translation-loader",
-            "keywords": [
-                "database",
-                "db",
-                "i8n",
-                "language",
-                "laravel",
-                "laravel-translation-loader",
-                "spatie",
-                "translate"
-            ],
-            "support": {
-                "issues": "https://github.com/juzaweb/laravel-translation/issues",
-                "source": "https://github.com/juzaweb/laravel-translation/tree/v2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                }
-            ],
-            "time": "2022-04-07T13:42:17+00:00"
         },
         {
             "name": "juzaweb/sitemap",

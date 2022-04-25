@@ -13,10 +13,10 @@ namespace Juzaweb\CMS\Support\Activators;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
-use Juzaweb\CMS\Abstracts\Plugin;
-use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Illuminate\Filesystem\Filesystem;
+use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Support\Plugin;
 
 class DbActivator implements ActivatorInterface
 {
@@ -55,7 +55,7 @@ class DbActivator implements ActivatorInterface
         $this->config = $app['config'];
         $this->modulesStatuses = $this->getModulesStatuses();
     }
-    
+
     /**
      * Enables a plugin
      *
@@ -67,7 +67,7 @@ class DbActivator implements ActivatorInterface
     {
         $this->setActiveByName($module, true);
     }
-    
+
     /**
      * Disables a plugin
      *
@@ -96,7 +96,7 @@ class DbActivator implements ActivatorInterface
 
         return $status === true;
     }
-    
+
     /**
      * Set active state for a plugin.
      *
@@ -109,7 +109,7 @@ class DbActivator implements ActivatorInterface
     {
         $this->setActiveByName($module, $active);
     }
-    
+
     /**
      * Sets a plugin status by its name
      *
@@ -175,7 +175,7 @@ class DbActivator implements ActivatorInterface
         unset($this->modulesStatuses[$module->getName()]);
         $this->writeData();
     }
-    
+
     /**
      * Get plugin info load
      *

@@ -10,26 +10,29 @@ namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Facades\GlobalData;
 use Juzaweb\CMS\Facades\Hook;
-use Juzaweb\CMS\Traits\HookAction\HookActionGet;
-use Juzaweb\CMS\Traits\HookAction\HookActionRegister;
+use Juzaweb\CMS\Traits\HookAction\GetHookAction;
+use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
 
 class HookAction
 {
-    use HookActionRegister, HookActionGet;
+    use RegisterHookAction,
+        GetHookAction,
+        Macroable;
 
-    public function addAction($tag, $callback, $priority = 20, $arguments = 1)
+    public function addAction($tag, $callback, $priority = 20, $arguments = 1): void
     {
         Hook::addAction($tag, $callback, $priority, $arguments);
     }
 
-    public function addFilter($tag, $callback, $priority = 20, $arguments = 1)
+    public function addFilter($tag, $callback, $priority = 20, $arguments = 1): void
     {
         Hook::addFilter($tag, $callback, $priority, $arguments);
     }
 
-    public function applyFilters($tag, $value, ...$args)
+    public function applyFilters(string $tag, mixed $value, ...$args): mixed
     {
         return Hook::filter($tag, $value, ...$args);
     }
@@ -41,7 +44,7 @@ class HookAction
      *      - name : Name form setting
      *      - view : View form setting
      */
-    public function addSettingForm($key, $args = [])
+    public function addSettingForm(string $key, array $args = []): void
     {
         $defaults = [
             'name' => '',
@@ -70,9 +73,9 @@ class HookAction
      * - string $icon Url icon or fa icon fonts
      * - string $parent The parent of menu. Default null
      * - int $position The position in the menu order this item should appear.
-     * @return bool.
+     * @return void.
      */
-    public function addAdminMenu($menuTitle, $menuSlug, $args = [])
+    public function addAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
     {
         $adminMenu = GlobalData::get('admin_menu');
 
@@ -103,95 +106,81 @@ class HookAction
         }
 
         GlobalData::set('admin_menu', $adminMenu);
-
-        return true;
     }
 
-    /**
-     * Sync taxonomies post type
-     *
-     * @param string $postType
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param array $attributes
-     * @return void
-     *
-     * @throws \Exception
-     */
-    public function syncTaxonomies($postType, $model, array $attributes)
+    public function enqueueScript(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void
     {
-        $taxonomies = $this->getTaxonomies($postType);
-
-        foreach ($taxonomies as $taxonomy) {
-            if (method_exists($model, 'taxonomies')) {
-                $data = Arr::get($attributes, $taxonomy->get('taxonomy'), []);
-                $detachIds = $model->taxonomies()
-                    ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
-                    ->whereNotIn('id', $data)
-                    ->pluck('id')
-                    ->toArray();
-
-                $model->taxonomies()->detach($detachIds);
-                $model->taxonomies()
-                    ->syncWithoutDetaching(combine_pivot($data, [
-                        'term_type' => $postType,
-                    ]), ['term_type' => $postType]);
-            }
-        }
-    }
-
-    public function enqueueScript($key, $src = '', $ver = '1.0', $inFooter = false)
-    {
-        if (! is_url($src)) {
+        if (!is_url($src)) {
             $src = asset($src);
         }
 
-        GlobalData::push('scripts', new Collection([
-            'key' => $key,
-            'src' => $src,
-            'ver' => $ver,
-            'inFooter' => $inFooter,
-        ]));
+        GlobalData::set(
+            "scripts.{$key}",
+            new Collection(
+                [
+                    'key' => $key,
+                    'src' => $src,
+                    'ver' => $ver,
+                    'inFooter' => $inFooter,
+                ]
+            )
+        );
     }
 
-    public function enqueueStyle($key, $src = '', $ver = '1.0', $inFooter = false)
+    public function enqueueStyle(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
     {
-        if (! is_url($src)) {
+        if (!is_url($src)) {
             $src = asset($src);
         }
 
-        GlobalData::push('styles', new Collection([
-            'key' => $key,
-            'src' => $src,
-            'ver' => $ver,
-            'inFooter' => $inFooter,
-        ]));
+        GlobalData::set(
+            "styles.{$key}",
+            new Collection(
+                [
+                    'key' => $key,
+                    'src' => $src,
+                    'ver' => $ver,
+                    'inFooter' => $inFooter,
+                ]
+            )
+        );
     }
 
-    public function enqueueFrontendScript($key, $src = '', $ver = '1.0', $inFooter = false)
+    public function enqueueFrontendScript(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
     {
-        if (! is_url($src)) {
+        if (!is_url($src)) {
             $src = theme_assets($src);
         }
 
-        GlobalData::push('frontend.scripts', new Collection([
-            'key' => $key,
-            'src' => $src,
-            'ver' => $ver,
-            'inFooter' => $inFooter,
-        ]));
+        GlobalData::set(
+            "frontend_scripts.{$key}",
+            new Collection(
+                [
+                    'key' => $key,
+                    'src' => $src,
+                    'ver' => $ver,
+                    'inFooter' => $inFooter,
+                ]
+            )
+        );
     }
 
-    public function enqueueFrontendStyle($key, $src = '', $ver = '1.0', $inFooter = false)
+    public function enqueueFrontendStyle(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
     {
-        if (! is_url($src)) {
+        if (!is_url($src)) {
             $src = theme_assets($src);
         }
 
-        GlobalData::push('frontend.styles', new Collection([
-            'key' => $key,
-            'src' => $src,
-            'ver' => $ver,
-            'inFooter' => $inFooter,
-        ]));
+        GlobalData::set(
+            "frontend_styles.{$key}",
+            new Collection(
+                [
+                    'key' => $key,
+                    'src' => $src,
+                    'ver' => $ver,
+                    'inFooter' => $inFooter,
+                ]
+            )
+        );
     }
 }
