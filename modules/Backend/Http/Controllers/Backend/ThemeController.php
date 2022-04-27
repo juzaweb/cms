@@ -5,15 +5,18 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Juzaweb\Backend\Http\Requests\Theme\UpdateRequest;
 use Juzaweb\Backend\Http\Resources\ThemeResource;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Support\ArrayPagination;
 use Juzaweb\CMS\Support\JuzawebApi;
+use Juzaweb\CMS\Support\Updater\ThemeUpdater;
 
 class ThemeController extends BackendController
 {
@@ -32,7 +35,7 @@ class ThemeController extends BackendController
         );
     }
 
-    public function getDataTheme(Request $request)
+    public function getDataTheme(Request $request): AnonymousResourceCollection
     {
         $limit = $request->get('limit', 20);
         $activated = jw_current_theme();
@@ -109,7 +112,7 @@ class ThemeController extends BackendController
     public function install(): View
     {
         $title = trans('cms::app.install');
-        
+
         $this->addBreadcrumb(
             [
                 'title' => trans('cms::app.themes'),
@@ -120,6 +123,23 @@ class ThemeController extends BackendController
         return view(
             'cms::backend.theme.install',
             compact('title')
+        );
+    }
+
+    public function update(UpdateRequest $request, ThemeUpdater $updater): JsonResponse
+    {
+        $updater = $updater->find($request->input('theme'));
+
+        try {
+            $updater->update();
+        } catch (\Exception $e) {
+            report($e);
+
+            return $this->error($e->getMessage());
+        }
+
+        return $this->success(
+            trans('cms::app.install_successfully')
         );
     }
 

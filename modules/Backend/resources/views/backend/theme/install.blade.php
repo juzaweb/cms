@@ -23,7 +23,7 @@
                                 {title}
                             </div>
                             <div class="text-gray-6">
-                                <button class="btn btn-primary active-theme" data-theme="{name}"> {{ trans('cms::app.activate') }}</button>
+                                <button class="btn btn-primary install-theme" data-theme="{name}"> {{ trans('cms::app.install') }}</button>
                             </div>
                         </div>
                     </div>
