@@ -1,9 +1,18 @@
 <?php
 
-Route::group(['prefix' => 'media'], function () {
-    Route::get('/', 'Backend\MediaController@index')->name('admin.media.index');
+use Juzaweb\Backend\Http\Controllers\Backend\MediaController;
 
-    Route::get('/folder/{folder}', 'Backend\MediaController@index')->name('admin.media.folder')->where('folder', '[0-9]+');
+Route::group(
+    ['prefix' => 'media'],
+    function (): void {
+        Route::get('/', [MediaController::class, 'index'])->name('admin.media.index');
+        Route::get(
+            '/folder/{folder}',
+            [MediaController::class, 'index']
+        )
+            ->name('admin.media.folder')
+            ->where('folder', '[0-9]+');
 
-    Route::post('/add-folder', 'Backend\MediaController@addFolder')->name('admin.media.add-folder');
-});
+        Route::post('/add-folder', [MediaController::class, 'addFolder'])->name('admin.media.add-folder');
+    }
+);

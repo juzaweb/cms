@@ -134,7 +134,6 @@ class ThemeController extends BackendController
             $updater->update();
         } catch (\Exception $e) {
             report($e);
-
             return $this->error($e->getMessage());
         }
 
@@ -159,7 +158,7 @@ class ThemeController extends BackendController
         );
     }
 
-    protected function putCache($theme)
+    protected function putCache($theme): void
     {
         DB::beginTransaction();
         try {
