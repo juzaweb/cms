@@ -15,22 +15,23 @@ Route::group(
         Route::get('/', 'Backend\ThemeController@index')->name('admin.themes');
         Route::get('/get-data', 'Backend\ThemeController@getDataTheme')->name('admin.themes.get-data');
         Route::get('/require-plugins', 'Backend\RequirePluginController@index')->name('admin.themes.require-plugins');
-    
+
         Route::get(
             '/require-plugins/get-data',
             'Backend\RequirePluginController@getData'
         )->name('admin.themes.require-plugins.get-data');
-    
+
         Route::post(
             '/require-plugins/buld-actions',
             'Backend\RequirePluginController@bulkActions'
         )->name('admin.themes.require-plugins.buld-actions');
         Route::delete('/delete', 'Backend\ThemeController@delete')->name('admin.themes.delete');
-    
-        Route::get('/install', 'Backend\ThemeController@install')->name('admin.themes.install');
-        Route::get('/install/all', 'Backend\ThemeController@getDataTheme')->name('admin.themes.install.all');
-        
         Route::post('/activate', 'Backend\ThemeController@activate')->name('admin.themes.activate');
+
+        if (config('juzaweb.theme.enable_upload')) {
+            Route::get('/install', 'Backend\ThemeController@install')->name('admin.theme.install');
+            Route::get('/install/all', 'Backend\ThemeController@getDataThemeInstall')->name('admin.theme.install.all');
+        }
     }
 );
 
@@ -38,7 +39,7 @@ Route::group(
     ['prefix' => 'reading'],
     function () {
         Route::get('/', 'Backend\ReadingController@index')->name('admin.reading');
-    
+
         Route::post('/save', 'Backend\ReadingController@save')->name('admin.reading.save');
     }
 );
@@ -47,7 +48,7 @@ Route::group(
     ['prefix' => 'permalinks'],
     function () {
         Route::get('/', 'Backend\PermalinkController@index')->name('admin.permalink');
-    
+
         Route::post('/save', 'Backend\PermalinkController@save')->name('admin.permalink.save');
     }
 );
@@ -68,7 +69,7 @@ Route::group(
     ['prefix' => 'customize'],
     function () {
         Route::get('/', 'Backend\ThemeEditorController@index')->name('admin.editor');
-    
+
         Route::post('/save', 'Backend\ThemeEditorController@save')->name('admin.editor.save');
     }
 );

@@ -3,16 +3,14 @@
 
 namespace PHPSTORM_META {
 
-    /**
-     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-     *
-     * @author Barry vd. Heuvel <barryvdh@gmail.com>
-     * @see https://github.com/barryvdh/laravel-ide-helper
-     */
-    override(
-        new \Illuminate\Contracts\Container\Container,
-        map([
-            '' => '@',
+   /**
+    * PhpStorm Meta file, to provide autocomplete information for PhpStorm
+    *
+    * @author Barry vd. Heuvel <barryvdh@gmail.com>
+    * @see https://github.com/barryvdh/laravel-ide-helper
+    */
+    override(new \Illuminate\Contracts\Container\Container, map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -226,7 +224,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -239,12 +237,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \Illuminate\Container\Container::makeWith(0),
-        map([
-            '' => '@',
+        ]));
+    override(\Illuminate\Container\Container::makeWith(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -458,7 +453,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -471,12 +466,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \Illuminate\Contracts\Container\Container::get(0),
-        map([
-            '' => '@',
+        ]));
+    override(\Illuminate\Contracts\Container\Container::get(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -690,7 +682,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -703,12 +695,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \Illuminate\Contracts\Container\Container::make(0),
-        map([
-            '' => '@',
+        ]));
+    override(\Illuminate\Contracts\Container\Container::make(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -922,7 +911,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -935,12 +924,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \Illuminate\Contracts\Container\Container::makeWith(0),
-        map([
-            '' => '@',
+        ]));
+    override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -1154,7 +1140,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -1167,12 +1153,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \App::get(0),
-        map([
-            '' => '@',
+        ]));
+    override(\App::get(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -1386,7 +1369,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -1399,12 +1382,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \App::make(0),
-        map([
-            '' => '@',
+        ]));
+    override(\App::make(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -1618,7 +1598,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -1631,12 +1611,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \App::makeWith(0),
-        map([
-            '' => '@',
+        ]));
+    override(\App::makeWith(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -1850,7 +1827,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -1863,12 +1840,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \app(0),
-        map([
-            '' => '@',
+        ]));
+    override(\app(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -2082,7 +2056,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -2095,12 +2069,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \resolve(0),
-        map([
-            '' => '@',
+        ]));
+    override(\resolve(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -2314,7 +2285,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -2327,12 +2298,9 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
-    override(
-        \Psr\Container\ContainerInterface::get(0),
-        map([
-            '' => '@',
+        ]));
+    override(\Psr\Container\ContainerInterface::get(0), map([
+        '' => '@',
             'Arcanedev\LogViewer\Contracts\LogViewer' => \Arcanedev\LogViewer\LogViewer::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Factory' => \Arcanedev\LogViewer\Utilities\Factory::class,
             'Arcanedev\LogViewer\Contracts\Utilities\Filesystem' => \Arcanedev\LogViewer\Utilities\Filesystem::class,
@@ -2546,7 +2514,7 @@ namespace PHPSTORM_META {
             'session' => \Illuminate\Session\SessionManager::class,
             'session.store' => \Illuminate\Session\Store::class,
             'sitemap' => \Laravelium\Sitemap\Sitemap::class,
-            'translation.loader' => \Spatie\TranslationLoader\TranslationLoaderManager::class,
+            'translation.loader' => \Illuminate\Translation\FileLoader::class,
             'translator' => \Illuminate\Translation\Translator::class,
             'twig' => \TwigBridge\Bridge::class,
             'twig.compiler' => \TwigBridge\Engine\Compiler::class,
@@ -2559,8 +2527,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
-        ])
-    );
+        ]));
 
 
     override(\Illuminate\Support\Arr::add(0), type(0));

@@ -46,22 +46,22 @@ class JuzawebApi
         return true;
     }
 
-    public function get(string $uri, array $params = []): object
+    public function get(string $uri, array $params = []): object|array
     {
         return $this->callApi('GET', $uri, $params);
     }
 
-    public function post(string $uri, array $params = []): object
+    public function post(string $uri, array $params = []): object|array
     {
         return $this->callApi('POST', $uri, $params);
     }
 
-    public function put(string $uri, array $params = []): object
+    public function put(string $uri, array $params = []): object|array
     {
         return $this->callApi('PUT', $uri, $params);
     }
 
-    public function getResponse($uri, $params = []): object
+    public function getResponse($uri, $params = []): object|array
     {
         $url = $this->apiUrl.'/'.$uri;
 
@@ -83,7 +83,7 @@ class JuzawebApi
         string $uri,
         array $params = [],
         array $headers = []
-    ): object {
+    ): object|array {
         $url = $this->apiUrl.'/'.$uri;
 
         if ($this->accessToken) {
@@ -101,11 +101,15 @@ class JuzawebApi
             throw new Exception("Response is empty url: {$url}");
         }
 
-        return $response->data;
+        return $response;
     }
 
-    protected function callApiGetData($method, $url, $params = [], $headers = []): object
-    {
+    protected function callApiGetData(
+        string $method,
+        string $url,
+        array $params = [],
+        array $headers = []
+    ): object|array {
         try {
             $response = match (strtolower($method)) {
                 'post' => $this->curl->post($url, $params, $headers),
