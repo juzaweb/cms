@@ -33,8 +33,6 @@ function ajaxRequest(url, data = null, options = {}) {
     });
 
     jqxhr.fail(function(response) {
-        show_message(response);
-
         if (options.failCallback || false) {
             options.failCallback(response);
         }
