@@ -38,7 +38,6 @@ use Juzaweb\DevTool\Commands\Resource\DatatableMakeCommand;
 use Juzaweb\DevTool\Commands\Resource\JuzawebResouceMakeCommand;
 use Juzaweb\DevTool\Commands\Theme\ThemeGeneratorCommand;
 use Juzaweb\DevTool\Commands\Theme\ThemeListCommand;
-use Juzaweb\DevTool\Commands\Theme\ThemePublishCommand;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -82,7 +81,6 @@ class ConsoleServiceProvider extends ServiceProvider
         LaravelModulesV6Migrator::class,
         ThemeGeneratorCommand::class,
         ThemeListCommand::class,
-        ThemePublishCommand::class,
         ActionMakeCommand::class,
         DatatableMakeCommand::class,
         JuzawebResouceMakeCommand::class,

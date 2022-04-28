@@ -10,4 +10,9 @@
  * Time: 9:02 PM
  */
 
-Route::jwResource('users', 'Backend\UserController');
+use Juzaweb\Backend\Http\Controllers\Backend\RoleController;
+use Juzaweb\Backend\Http\Controllers\Backend\UserController;
+
+Route::jwResource('users', UserController::class);
+
+Route::jwResource('roles', RoleController::class);

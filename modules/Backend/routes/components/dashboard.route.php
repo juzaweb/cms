@@ -8,6 +8,11 @@
  * @license    MIT
  */
 
+use Juzaweb\Backend\Http\Controllers\Backend\DashboardController;
+use Juzaweb\Backend\Http\Controllers\Backend\LoadDataController;
+use Juzaweb\Backend\Http\Controllers\Backend\UpdateController;
+use Juzaweb\Backend\Http\Controllers\Backend\AjaxController;
+
 Route::group(
     ['prefix' => '/'],
     function () {

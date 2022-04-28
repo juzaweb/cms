@@ -1,5 +1,6 @@
 $(document).on("turbolinks:load", function() {
-    $('body').on('click', '.install-plugin', function () {
+    let bodyElement = $('body');
+    bodyElement.on('click', '.install-plugin', function () {
         let plugin = $(this).data('plugin');
         let btn = $(this);
         btn.prop("disabled", true);
@@ -17,12 +18,13 @@ $(document).on("turbolinks:load", function() {
                 btn.prop("disabled", false);
             },
             failCallback: function(response) {
+                show_message(response);
                 btn.prop("disabled", false);
             }
         });
     });
 
-    $('body').on('click', '.active-plugin', function () {
+    bodyElement.on('click', '.active-plugin', function () {
         let plugin = $(this).data('plugin');
         let btn = $(this);
         btn.prop("disabled", true);
@@ -36,6 +38,7 @@ $(document).on("turbolinks:load", function() {
                 show_message(response);
                 btn.html(`<i class="fa fa-check"></i> ${juzaweb.lang.activated}`);
                 btn.removeClass('active-plugin');
+                btn.prop("disabled", true);
             },
             failCallback: function(response) {
                 show_message(response);
@@ -44,7 +47,7 @@ $(document).on("turbolinks:load", function() {
         });
     });
 
-    $('body').on('click', '.install-theme', function () {
+    bodyElement.on('click', '.install-theme', function () {
         let theme = $(this).data('theme');
         let btn = $(this);
         btn.prop("disabled", true);
@@ -54,11 +57,37 @@ $(document).on("turbolinks:load", function() {
         }, {
             method: 'POST',
             callback: function (response) {
+                if (response.status == false) {
+                    show_message(response);
+                    btn.prop("disabled", false);
+                } else {
+                    btn.html(`${juzaweb.lang.activate}`);
+                    btn.removeClass('install-theme');
+                    btn.addClass('active-theme');
+                    btn.prop("disabled", false);
+                }
+            },
+            failCallback: function(response) {
                 show_message(response);
-                btn.html(`${juzaweb.lang.installed}`);
-                btn.removeClass('install-theme');
-                //btn.addClass('active-theme');
-                //btn.prop("disabled", false);
+                btn.prop("disabled", false);
+            }
+        });
+    });
+
+    bodyElement.on('click', '.active-theme', function () {
+        let theme = $(this).data('theme');
+        let btn = $(this);
+        btn.prop("disabled", true);
+
+        ajaxRequest(juzaweb.adminUrl + '/themes/activate', {
+            theme: theme
+        }, {
+            method: 'POST',
+            callback: function (response) {
+                show_message(response);
+                btn.html(`<i class="fa fa-check"></i> ${juzaweb.lang.activated}`);
+                btn.removeClass('active-theme');
+                btn.prop("disabled", true);
             },
             failCallback: function(response) {
                 show_message(response);

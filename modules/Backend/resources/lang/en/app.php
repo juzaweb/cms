@@ -442,4 +442,5 @@ return [
     ],
     'tools' => 'Tools',
     'import' => 'Import',
+    'install_successfully' => 'Install successfully',
 ];

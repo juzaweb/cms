@@ -17730,6 +17730,33 @@ namespace Illuminate\Support\Facades {
 
 }
 
+namespace Illuminate\Support {
+
+    /**
+     *
+     *
+     * @template TKey of array-key
+     * @template TValue
+     * @implements \ArrayAccess<TKey, TValue>
+     * @implements \Illuminate\Support\Enumerable<TKey, TValue>
+     */
+    class Collection
+    {
+        /**
+         *
+         *
+         * @see \Barryvdh\Debugbar\ServiceProvider::register()
+         * @static
+         */
+        public static function debug()
+        {
+            return \Illuminate\Support\Collection::debug();
+        }
+
+    }
+
+}
+
 namespace Barryvdh\Debugbar\Facades {
 
     /**

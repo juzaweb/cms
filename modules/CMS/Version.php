@@ -12,8 +12,8 @@ namespace Juzaweb\CMS;
 
 class Version
 {
-    public static function getVersion()
+    public static function getVersion(): string
     {
-        return 'v3.0.3';
+        return 'v3.0.4';
     }
 }

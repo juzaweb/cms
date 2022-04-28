@@ -6,32 +6,37 @@
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzawebcms/juzawebcms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 6/19/2021
- * Time: 7:46 PM
  */
 
-Route::group(['prefix' => 'file-manager'], function () {
-    Route::get('/', 'FileManager\FileManagerController@index');
+use Juzaweb\Backend\Http\Controllers\FileManager\FileManagerController;
+use Juzaweb\Backend\Http\Controllers\FileManager\UploadController;
+use Juzaweb\Backend\Http\Controllers\FileManager\ItemsController;
+use Juzaweb\Backend\Http\Controllers\FileManager\FolderController;
+use Juzaweb\Backend\Http\Controllers\FileManager\DeleteController;
 
-    Route::get('/errors', 'FileManager\FileManagerController@getErrors');
+Route::group(
+    ['prefix' => 'file-manager'],
+    function () {
+        Route::get('/', 'FileManager\FileManagerController@index');
 
-    Route::any('/upload', 'FileManager\UploadController@upload')->name('filemanager.upload');
+        Route::get('/errors', 'FileManager\FileManagerController@getErrors');
 
-    Route::get('/jsonitems', 'FileManager\ItemsController@getItems');
+        Route::any('/upload', 'FileManager\UploadController@upload')->name('filemanager.upload');
 
-    /*Route::get('/move', 'ItemsController@move');
+        Route::get('/jsonitems', 'FileManager\ItemsController@getItems');
 
-    Route::get('/domove', 'ItemsController@domove');*/
+        /*Route::get('/move', 'ItemsController@move');
 
-    Route::post('/newfolder', 'FileManager\FolderController@addfolder');
+        Route::get('/domove', 'ItemsController@domove');*/
 
-    Route::get('/folders', 'FileManager\FolderController@getFolders');
+        Route::post('/newfolder', 'FileManager\FolderController@addfolder');
 
-    /*Route::get('/rename', 'RenameController@getRename');
+        Route::get('/folders', 'FileManager\FolderController@getFolders');
 
-    Route::get('/download', 'DownloadController@getDownload');*/
+        /*Route::get('/rename', 'RenameController@getRename');
 
-    Route::post('/delete', 'FileManager\DeleteController@delete');
-});
+        Route::get('/download', 'DownloadController@getDownload');*/
+
+        Route::post('/delete', 'FileManager\DeleteController@delete');
+    }
+);

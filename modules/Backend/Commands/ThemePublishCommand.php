@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Theme;
+namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -41,7 +41,7 @@ class ThemePublishCommand extends Command
     protected function publishViews(string $theme)
     {
         $sourceFolder = Theme::getThemePath($theme) . '/views';
-        $publicFolder = resource_path('views/vendor/theme_' . $theme);
+        $publicFolder = resource_path('views/themes/' . $theme);
 
         if (! File::isDirectory($publicFolder)) {
             File::makeDirectory($publicFolder, 0755, true, true);
@@ -53,7 +53,7 @@ class ThemePublishCommand extends Command
     protected function publishLang(string $theme)
     {
         $sourceFolder = Theme::getThemePath($theme) . '/lang';
-        $publicFolder = resource_path('lang/vendor/theme_' . $theme);
+        $publicFolder = resource_path('lang/themes/' . $theme);
 
         if (! File::isDirectory($publicFolder)) {
             File::makeDirectory($publicFolder, 0755, true, true);
@@ -64,7 +64,7 @@ class ThemePublishCommand extends Command
 
     protected function publishAssets(string $theme)
     {
-        $sourceFolder = Theme::getThemePath($theme) . '/assets';
+        $sourceFolder = Theme::getThemePath($theme) . '/assets/public';
         $publicFolder = Theme::publicPath($theme) . '/assets';
 
         if (! File::isDirectory($publicFolder)) {

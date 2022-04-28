@@ -2,6 +2,17 @@
 
 @section('content')
     <div class="row mb-2">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="btn-group float-right">
+                @if(config('juzaweb.plugin.enable_upload'))
+                    <a href="{{ route('admin.plugin.install') }}" class="btn btn-success" data-turbolinks="false"><i class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2">
         <div class="col-md-3">
             <form method="post" class="form-inline">
                 @csrf
