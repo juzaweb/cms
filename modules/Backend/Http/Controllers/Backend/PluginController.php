@@ -130,7 +130,7 @@ class PluginController extends BackendController
             3600,
             function () use ($plugins) {
                 try {
-                    return $this->api->post(
+                    $response = $this->api->post(
                         'plugins/versions-available',
                         [
                             'plugins' => $plugins->map(
@@ -144,6 +144,12 @@ class PluginController extends BackendController
                             'cms_version' => Version::getVersion(),
                         ]
                     );
+
+                    if (empty($response->data)) {
+                        return (object) [];
+                    }
+
+                    return $response->data;
                 } catch (\Exception $e) {
                     return (object) [];
                 }

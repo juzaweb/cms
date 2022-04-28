@@ -27,7 +27,7 @@ class PluginUpdater extends UpdateManager
 
         $response = $this->api->get($uri, $data);
 
-        return get_version_by_tag($response->version);
+        return get_version_by_tag($response->data->version);
     }
 
     public function getCurrentVersion(): string

@@ -75,7 +75,7 @@ abstract class UpdateManager
         $this->tmpFile = $this->tmpFolder.'/zip/'. Str::lower(Str::random(5)).'.zip';
         $this->tmpFilePath = $this->storage->path($this->tmpFile);
 
-        if (!$this->downloadFile($this->response->link, $this->tmpFilePath)) {
+        if (!$this->downloadFile($this->response->data->link, $this->tmpFilePath)) {
             return false;
         }
 

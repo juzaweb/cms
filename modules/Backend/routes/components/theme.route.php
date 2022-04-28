@@ -36,7 +36,7 @@ Route::group(
 
         if (config('juzaweb.theme.enable_upload')) {
             Route::get('/install', 'Backend\ThemeController@install')->name('admin.theme.install');
-            Route::post('/install', 'Backend\ThemeController@doInstall')->name('admin.theme.do_install');
+            Route::post('/update', 'Backend\ThemeController@update')->name('admin.theme.update');
             Route::get('/install/all', 'Backend\ThemeController@getDataThemeInstall')->name('admin.theme.install.all');
         }
     }
