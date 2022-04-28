@@ -35,6 +35,16 @@ class PluginController extends BackendController
         );
     }
 
+    public function install(): View
+    {
+        $title = trans('cms::app.install');
+
+        return view(
+            'cms::backend.plugin.install',
+            compact('title')
+        );
+    }
+
     public function getDataTable(Request $request): JsonResponse
     {
         $offset = $request->get('offset', 0);
@@ -67,6 +77,22 @@ class PluginController extends BackendController
             [
                 'total' => $total,
                 'rows' => $results,
+            ]
+        );
+    }
+
+    public function getDataPlugin(Request $request, JuzawebApi $api)
+    {
+        $limit = $request->get('limit', 20);
+        $page = $request->get('page', 1);
+        $except = array_keys(Plugin::all());
+
+        return $api->get(
+            'plugins',
+            [
+                'limit' => $limit,
+                'page' => $page,
+                'except' => $except
             ]
         );
     }
