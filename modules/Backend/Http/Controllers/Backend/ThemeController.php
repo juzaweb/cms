@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Http\Requests\Theme\UpdateRequest;
@@ -71,7 +72,7 @@ class ThemeController extends BackendController
             );
         }
 
-        $this->putCache($theme);
+        $this->setThemeActive($theme);
         $info = Theme::getThemeInfo($theme);
 
         if ($require = $info->get('require')) {
@@ -158,7 +159,7 @@ class ThemeController extends BackendController
         );
     }
 
-    protected function putCache($theme): void
+    protected function setThemeActive($theme): void
     {
         DB::beginTransaction();
         try {
@@ -171,6 +172,14 @@ class ThemeController extends BackendController
             ];
 
             set_config('theme_statuses', $themeStatus);
+
+            Artisan::call(
+                'theme:publish',
+                [
+                    'theme' => $theme,
+                    'type' => 'assets',
+                ]
+            );
 
             DB::commit();
         } catch (\Exception $e) {
