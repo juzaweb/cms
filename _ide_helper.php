@@ -17730,33 +17730,6 @@ namespace Illuminate\Support\Facades {
 
 }
 
-namespace Illuminate\Support {
-
-    /**
-     *
-     *
-     * @template TKey of array-key
-     * @template TValue
-     * @implements \ArrayAccess<TKey, TValue>
-     * @implements \Illuminate\Support\Enumerable<TKey, TValue>
-     */
-    class Collection
-    {
-        /**
-         *
-         *
-         * @see \Barryvdh\Debugbar\ServiceProvider::register()
-         * @static
-         */
-        public static function debug()
-        {
-            return \Illuminate\Support\Collection::debug();
-        }
-
-    }
-
-}
-
 namespace Barryvdh\Debugbar\Facades {
 
     /**
@@ -20022,6 +19995,29 @@ namespace Juzaweb\CMS\Support {
      */
     class Collection
     {
+
+    }
+
+}
+
+namespace Illuminate\Database\Query {
+
+    /**
+     *
+     *
+     */
+    class Builder
+    {
+        /**
+         *
+         *
+         * @see \Juzaweb\DevTool\Providers\DevToolServiceProvider::boot()
+         * @static
+         */
+        public static function toRawSql()
+        {
+            return \Illuminate\Database\Query\Builder::toRawSql();
+        }
 
     }
 
@@ -23772,6 +23768,17 @@ namespace {
         {
             /** @var \Illuminate\Database\Query\Builder $instance */
             return $instance->macroCall($method, $parameters);
+        }
+
+        /**
+         *
+         *
+         * @see \Juzaweb\DevTool\Providers\DevToolServiceProvider::boot()
+         * @static
+         */
+        public static function toRawSql()
+        {
+            return \Illuminate\Database\Query\Builder::toRawSql();
         }
     }
 
