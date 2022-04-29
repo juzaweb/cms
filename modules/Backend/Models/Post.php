@@ -74,6 +74,7 @@ use Spatie\Feed\FeedItem;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereViews($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereMetaIn($key, $values)
  */
 class Post extends Model implements Feedable
 {

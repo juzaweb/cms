@@ -62,9 +62,19 @@ class PageController extends FrontendController
 
         event(new PostViewed($page));
 
-        return apply_filters(
+        /* Add pages filter */
+        $result = apply_filters(
             'theme.page.handle',
             $this->view($view, $params),
+            $page,
+            $slug,
+            $params
+        );
+
+        /* Add single page filter */
+        return apply_filters(
+            "theme.page_{$page->id}.handle",
+            $result,
             $page,
             $slug,
             $params
@@ -77,8 +87,9 @@ class PageController extends FrontendController
      *
      * @return string
      */
-    protected function getViewPage(Post $page, $themeInfo)
+    protected function getViewPage(Post $page, $themeInfo): string
     {
+        /* Get view by template */
         if ($template = $page->getMeta('template')) {
             $templates = Theme::getTemplates($themeInfo->get('name'), $template);
             $templateView = $templates['view'] ?? null;
@@ -88,6 +99,7 @@ class PageController extends FrontendController
             }
         }
 
+        /* Get view default of theme */
         if (empty($view)) {
             $template = get_name_template_part('page', 'single');
             $view = 'theme::template-parts.' . $template;
@@ -97,8 +109,6 @@ class PageController extends FrontendController
             }
         }
 
-        $view = apply_filters('theme.get_view_page', $view, $page);
-
-        return $view;
+        return apply_filters('theme.get_view_page', $view, $page);
     }
 }
