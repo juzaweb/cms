@@ -34,6 +34,8 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereTemplateId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereSiteId($value)
  */
 class EmailList extends Model
 {

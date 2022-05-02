@@ -60,11 +60,6 @@ class PluginServiceProvider extends ServiceProvider
             }
         );
 
-        $this->app->singleton(
-            PluginRepositoryInterface::class,
-            LaravelFileRepository::class
-        );
-
         $this->app->alias(PluginRepositoryInterface::class, 'plugins');
     }
 

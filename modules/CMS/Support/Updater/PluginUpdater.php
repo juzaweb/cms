@@ -27,6 +27,8 @@ class PluginUpdater extends UpdateManager
 
         $response = $this->api->get($uri, $data);
 
+        $this->responseErrors($response);
+
         return get_version_by_tag($response->data->version);
     }
 
@@ -52,6 +54,8 @@ class PluginUpdater extends UpdateManager
                 'plugin' => $this->name,
             ]
         );
+
+        $this->responseErrors($response);
 
         $this->response = $response;
     }
@@ -79,6 +83,8 @@ class PluginUpdater extends UpdateManager
             return $plugin->getPath();
         }
 
-        return config('juzaweb.plugin.path').'/'.$this->name;
+        $folder = explode('/', $this->name)[1];
+
+        return config('juzaweb.plugin.path').'/'.$folder;
     }
 }

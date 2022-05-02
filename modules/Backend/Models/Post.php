@@ -75,6 +75,10 @@ use Spatie\Feed\FeedItem;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereViews($value)
  * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereMetaIn($key, $values)
+ * @property int|null $site_id
+ * @property string|null $locale
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereLocale($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereSiteId($value)
  */
 class Post extends Model implements Feedable
 {

@@ -778,7 +778,7 @@ function sub_char($str, $n, $end = '...')
 
 function cache_prefix($name): string
 {
-    return 'juzaweb_'.$name;
+    return config('juzaweb.cache_prefix').$name;
 }
 
 if (!function_exists('admin_url')) {

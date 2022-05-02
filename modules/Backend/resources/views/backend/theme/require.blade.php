@@ -6,9 +6,12 @@
             <form method="post" class="form-inline">
                 @csrf
 
-                <select name="bulk_actions" class="form-control select2-default" data-width="120px"><option value="">{{ trans('cms::app.bulk_actions') }}</option>
-                    <option value="install">{{ trans('cms::app.install') }}</option>
+                <select name="bulk_actions" class="form-control select2-default" data-width="120px">
+                    <option value="">{{ trans('cms::app.bulk_actions') }}</option>
                     <option value="activate">{{ trans('cms::app.active') }}</option>
+                    @if(config('juzaweb.plugin.enable_upload'))
+                        <option value="install">{{ trans('cms::app.install') }}</option>
+                    @endif
                 </select>
 
                 <button type="submit" class="btn btn-primary px-3" id="apply-action">{{ trans('cms::app.apply') }}</button>

@@ -25,7 +25,7 @@ class InstallCommand extends Command
         DatabaseManager $databaseManager,
         InstalledFileManager $fileManager,
         FinalInstallManager $finalInstall
-    ) {
+    ): int {
         $this->info('JUZACMS INSTALLER');
         $this->info('-- Database Install');
 

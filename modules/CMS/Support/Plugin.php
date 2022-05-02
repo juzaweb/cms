@@ -35,6 +35,12 @@ class Plugin
      */
     protected array $moduleJson = [];
     /**
+     * @var ActivatorInterface
+     */
+    protected ActivatorInterface $activator;
+    protected \Illuminate\Translation\Translator $lang;
+    protected \Illuminate\View\ViewFinderInterface $finder;
+    /**
      * @var CacheManager
      */
     private CacheManager $cache;
@@ -42,20 +48,10 @@ class Plugin
      * @var Filesystem
      */
     private Filesystem $files;
-
-    /**
-     * @var ActivatorInterface
-     */
-    protected ActivatorInterface $activator;
-
     /**
      * @var Router
      */
     private Router $router;
-
-    protected \Illuminate\Translation\Translator $lang;
-
-    protected \Illuminate\View\ViewFinderInterface $finder;
 
     /**
      * The constructor.
@@ -77,50 +73,6 @@ class Plugin
     }
 
     /**
-     * Get name plugin.
-     *
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * Get name in lower case.
-     *
-     * @return string
-     */
-    public function getLowerName(): string
-    {
-        return strtolower($this->name);
-    }
-
-    /**
-     * Get name in studly case.
-     *
-     * @return string
-     */
-    public function getStudlyName(): string
-    {
-        $name = explode('/', $this->name);
-        $author = Str::studly($name[0]);
-        $module = Str::studly($name[1]);
-
-        return $author.'/'.$module;
-    }
-
-    /**
-     * Get name in snake case.
-     *
-     * @return string
-     */
-    public function getSnakeName(): string
-    {
-        return namespace_snakename($this->name);
-    }
-
-    /**
      * Get description.
      *
      * @return string
@@ -128,6 +80,69 @@ class Plugin
     public function getDescription(): string
     {
         return $this->get('description');
+    }
+
+    /**
+     * Get a specific data from json file by given the key.
+     *
+     * @param string $key
+     * @param null $default
+     *
+     * @return mixed
+     */
+    public function get(string $key, $default = null): mixed
+    {
+        return $this->json()->get($key, $default);
+    }
+
+    /**
+     * Get json contents from the cache, setting as needed.
+     *
+     * @param string $file
+     *
+     * @return Json
+     */
+    public function json(string $file = null): Json
+    {
+        if ($file === null) {
+            $file = 'composer.json';
+        }
+
+        return Arr::get(
+            $this->moduleJson,
+            $file,
+            function () use ($file) {
+                return $this->moduleJson[$file] = new Json($this->getPath().'/'.$file, $this->files);
+            }
+        );
+    }
+
+    /**
+     * Get path.
+     *
+     * @return string
+     */
+    public function getPath(string $path = ''): string
+    {
+        if ($path) {
+            return $this->path .'/'. $path;
+        }
+
+        return $this->path;
+    }
+
+    /**
+     * Set path.
+     *
+     * @param string $path
+     *
+     * @return $this
+     */
+    public function setPath(string $path): Plugin
+    {
+        $this->path = $path;
+
+        return $this;
     }
 
     /**
@@ -158,34 +173,6 @@ class Plugin
     public function getRequires(): array
     {
         return $this->get('require', []);
-    }
-
-    /**
-     * Get path.
-     *
-     * @return string
-     */
-    public function getPath(string $path = ''): string
-    {
-        if ($path) {
-            return $this->path .'/'. $path;
-        }
-
-        return $this->path;
-    }
-
-    /**
-     * Set path.
-     *
-     * @param string $path
-     *
-     * @return $this
-     */
-    public function setPath(string $path): Plugin
-    {
-        $this->path = $path;
-
-        return $this;
     }
 
     /**
@@ -234,39 +221,52 @@ class Plugin
         $this->fireEvent('boot');
     }
 
-    /**
-     * Get json contents from the cache, setting as needed.
-     *
-     * @param string $file
-     *
-     * @return Json
-     */
-    public function json(string $file = null): Json
+    public function getDomainName()
     {
-        if ($file === null) {
-            $file = 'composer.json';
+        return $this->getExtraJuzaweb('domain');
+    }
+
+    public function getExtraJuzaweb($key, $default = null)
+    {
+        $extra = $this->get('extra', []);
+        if ($laravel = Arr::get($extra, 'juzaweb', [])) {
+            return Arr::get($laravel, $key, $default);
         }
 
-        return Arr::get(
-            $this->moduleJson,
-            $file,
-            function () use ($file) {
-                return $this->moduleJson[$file] = new Json($this->getPath().'/'.$file, $this->files);
-            }
+        return $default;
+    }
+
+    /**
+     * Get name plugin.
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Register the plugin event.
+     *
+     * @param string $event
+     */
+    protected function fireEvent($event): void
+    {
+        $this->app['events']->dispatch(
+            sprintf('plugin.%s.'.$event, $this->getLowerName()),
+            [$this]
         );
     }
 
     /**
-     * Get a specific data from json file by given the key.
+     * Get name in lower case.
      *
-     * @param string $key
-     * @param null $default
-     *
-     * @return mixed
+     * @return string
      */
-    public function get(string $key, $default = null): mixed
+    public function getLowerName(): string
     {
-        return $this->json()->get($key, $default);
+        return strtolower($this->name);
     }
 
     /**
@@ -300,19 +300,6 @@ class Plugin
         $this->fireEvent('register');
     }
 
-    /**
-     * Register the plugin event.
-     *
-     * @param string $event
-     */
-    protected function fireEvent($event): void
-    {
-        $this->app['events']->dispatch(
-            sprintf('plugin.%s.'.$event, $this->getLowerName()),
-            [$this]
-        );
-    }
-
     protected function autoloadPSR4(): void
     {
         $loadmaps = $this->activator->getAutoloadInfo($this);
@@ -329,15 +316,15 @@ class Plugin
     }
 
     /**
-     * Get the path to the cached *_module.php file.
+     * Register the aliases from this plugin.
      */
-    public function getCachedServicesPath(): string
+    public function registerAliases(): void
     {
-        return Str::replaceLast(
-            'services.php',
-            $this->getSnakeName().'_module.php',
-            $this->app->getCachedServicesPath()
-        );
+        $loader = AliasLoader::getInstance();
+
+        foreach ($this->getExtraJuzaweb('aliases', []) as $aliasName => $aliasClass) {
+            $loader->alias($aliasName, $aliasClass);
+        }
     }
 
     /**
@@ -367,15 +354,55 @@ class Plugin
         }
     }
 
-    /**
-     * Register the aliases from this plugin.
-     */
-    public function registerAliases(): void
+    public function getExtraLarevel($key, $default = null): array
     {
-        $loader = AliasLoader::getInstance();
+        $extra = $this->get('extra', []);
+        if ($laravel = Arr::get($extra, 'laravel', [])) {
+            return Arr::get($laravel, $key, $default);
+        }
 
-        foreach ($this->getExtraJuzaweb('aliases', []) as $aliasName => $aliasClass) {
-            $loader->alias($aliasName, $aliasClass);
+        return $default;
+    }
+
+    /**
+     * Get the path to the cached *_module.php file.
+     */
+    public function getCachedServicesPath(): string
+    {
+        return Str::replaceLast(
+            'services.php',
+            $this->getSnakeName().'_module.php',
+            $this->app->getCachedServicesPath()
+        );
+    }
+
+    /**
+     * Get name in snake case.
+     *
+     * @return string
+     */
+    public function getSnakeName(): string
+    {
+        return namespace_snakename($this->name);
+    }
+
+    /**
+     * Disable the current plugin.
+     */
+    public function disable(): void
+    {
+        $this->fireEvent('disabling');
+
+        $this->activator->disable($this);
+        $this->flushCache();
+
+        $this->fireEvent('disabled');
+    }
+
+    protected function flushCache(): void
+    {
+        if (config('plugin.cache.enabled')) {
+            $this->cache->store()->flush();
         }
     }
 
@@ -401,6 +428,20 @@ class Plugin
     }
 
     /**
+     * Get name in studly case.
+     *
+     * @return string
+     */
+    public function getStudlyName(): string
+    {
+        $name = explode('/', $this->name);
+        $author = Str::studly($name[0]);
+        $module = Str::studly($name[1]);
+
+        return $author.'/'.$module;
+    }
+
+    /**
      * Determine whether the given status same with the current plugin status.
      *
      * @param bool $status
@@ -413,16 +454,6 @@ class Plugin
     }
 
     /**
-     * Determine whether the current plugin activated.
-     *
-     * @return bool
-     */
-    public function isEnabled(): bool
-    {
-        return $this->activator->hasStatus($this, true);
-    }
-
-    /**
      *  Determine whether the current plugin not disabled.
      *
      * @return bool
@@ -430,6 +461,16 @@ class Plugin
     public function isDisabled(): bool
     {
         return !$this->isEnabled();
+    }
+
+    /**
+     * Determine whether the current plugin activated.
+     *
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return $this->activator->hasStatus($this, true);
     }
 
     /**
@@ -445,19 +486,6 @@ class Plugin
     }
 
     /**
-     * Disable the current plugin.
-     */
-    public function disable(): void
-    {
-        $this->fireEvent('disabling');
-
-        $this->activator->disable($this);
-        $this->flushCache();
-
-        $this->fireEvent('disabled');
-    }
-
-    /**
      * Enable the current plugin.
      */
     public function enable(): void
@@ -470,6 +498,27 @@ class Plugin
         }
         $this->publishAssets();
         $this->fireEvent('enabled');
+    }
+
+    protected function runMigrate(): void
+    {
+        Artisan::call(
+            'plugin:migrate',
+            [
+                'module' => $this->name,
+                '--force' => true,
+            ]
+        );
+    }
+
+    public function publishAssets(): void
+    {
+        Artisan::call(
+            'plugin:publish',
+            [
+                'module' => $this->get('name'),
+            ]
+        );
     }
 
     /**
@@ -496,26 +545,6 @@ class Plugin
         return $this->getPath().'/'.$path;
     }
 
-    public function getExtraLarevel($key, $default = null): array
-    {
-        $extra = $this->get('extra', []);
-        if ($laravel = Arr::get($extra, 'laravel', [])) {
-            return Arr::get($laravel, $key, $default);
-        }
-
-        return $default;
-    }
-
-    public function getExtraJuzaweb($key, $default = null)
-    {
-        $extra = $this->get('extra', []);
-        if ($laravel = Arr::get($extra, 'juzaweb', [])) {
-            return Arr::get($laravel, $key, $default);
-        }
-
-        return $default;
-    }
-
     public function getDisplayName()
     {
         $name = $this->getExtraJuzaweb('name');
@@ -524,11 +553,6 @@ class Plugin
         }
 
         return $name;
-    }
-
-    public function getDomainName()
-    {
-        return $this->getExtraJuzaweb('domain');
     }
 
     public function getNamespace()
@@ -547,33 +571,5 @@ class Plugin
     public function getSettingUrl(): ?string
     {
         return $this->getExtraJuzaweb('setting_url');
-    }
-
-    public function publishAssets(): void
-    {
-        Artisan::call(
-            'plugin:publish',
-            [
-                'module' => $this->get('name'),
-            ]
-        );
-    }
-
-    protected function flushCache(): void
-    {
-        if (config('plugin.cache.enabled')) {
-            $this->cache->store()->flush();
-        }
-    }
-
-    protected function runMigrate(): void
-    {
-        Artisan::call(
-            'plugin:migrate',
-            [
-                'module' => $this->name,
-                '--force' => true,
-            ]
-        );
     }
 }

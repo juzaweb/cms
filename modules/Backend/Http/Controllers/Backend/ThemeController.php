@@ -55,6 +55,9 @@ class ThemeController extends BackendController
         return ThemeResource::collection($rows);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function activate(Request $request): JsonResponse
     {
         $request->validate(
@@ -73,35 +76,6 @@ class ThemeController extends BackendController
         }
 
         $this->setThemeActive($theme);
-        $info = Theme::getThemeInfo($theme);
-
-        if ($require = $info->get('require')) {
-            $plugins = Plugin::all();
-            $str = [];
-            foreach ($require as $plugin => $ver) {
-                if (app('plugins')->isEnabled($plugin)) {
-                    continue;
-                }
-
-                if (!in_array($plugin, array_keys($plugins))) {
-                    $plugins[$plugin] = $plugin;
-                }
-
-                $str[] = "<strong>{$plugin}</strong>";
-            }
-
-            add_backend_message(
-                'require_plugins',
-                [
-                    trans('cms::app.theme_require_plugins') .' '
-                    . implode(', ', $str) . '
-                        . <a href="'. route('admin.themes.require-plugins') .'"><strong>'
-                    . trans('cms::app.activate_plugins')
-                    .'</strong></a>',
-                ],
-                'warning'
-            );
-        }
 
         return $this->success(
             [
@@ -180,6 +154,39 @@ class ThemeController extends BackendController
                     'type' => 'assets',
                 ]
             );
+
+            $info = Theme::getThemeInfo($theme);
+
+            if ($require = $info->get('require')) {
+                $plugins = Plugin::all();
+                $str = [];
+                foreach ($require as $plugin => $ver) {
+                    if (app('plugins')->has($plugin)) {
+                        if (app('plugins')->isEnabled($plugin)) {
+                            continue;
+                        }
+                    }
+
+                    if (!in_array($plugin, array_keys($plugins))) {
+                        $plugins[$plugin] = $plugin;
+                    }
+
+                    $str[] = "<strong>{$plugin}</strong>";
+                }
+
+                if ($str) {
+                    $this->addMessage(
+                        'require_plugins',
+                        trans(
+                            'cms::app.theme_require_plugins',
+                            [
+                                'plugins' => implode(', ', $str),
+                                'link' => route('admin.themes.require-plugins')
+                            ]
+                        )
+                    );
+                }
+            }
 
             DB::commit();
         } catch (\Exception $e) {

@@ -75,6 +75,18 @@ class JobMakeCommand extends GeneratorCommand
     }
 
     /**
+     * @return string
+     */
+    protected function getStubName(): string
+    {
+        if ($this->option('sync')) {
+            return '/job.stub';
+        }
+
+        return '/job-queued.stub';
+    }
+
+    /**
      * Get the destination file path.
      *
      * @return string
@@ -94,17 +106,5 @@ class JobMakeCommand extends GeneratorCommand
     private function getFileName()
     {
         return Str::studly($this->argument('name'));
-    }
-
-    /**
-     * @return string
-     */
-    protected function getStubName(): string
-    {
-        if ($this->option('sync')) {
-            return '/job.stub';
-        }
-
-        return '/job-queued.stub';
     }
 }

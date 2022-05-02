@@ -34,9 +34,23 @@ class BackendController extends Controller
             $name . '_breadcrumb',
             function ($items) use ($item) {
                 $items[] = $item;
-    
+
                 return $items;
             }
+        );
+    }
+
+    protected function addMessage(
+        string $key,
+        string|array $message,
+        string $type = 'warning'
+    ) {
+        $message = is_string($message) ? [$message] : $message;
+
+        add_backend_message(
+            $key,
+            $message,
+            $type
         );
     }
 }

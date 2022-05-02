@@ -29,6 +29,11 @@ class ThemeAction extends Action
         $this->register = Theme::getRegister($this->currentTheme);
     }
 
+    protected function getRegister($key, $default = [])
+    {
+        return Arr::get($this->register, $key, $default);
+    }
+
     public function handle()
     {
         HookAction::addAction(Action::INIT_ACTION, [$this, 'postTypes']);
@@ -225,10 +230,5 @@ class ThemeAction extends Action
         if (is_admin()) {
             echo e(view('cms::frontend.admin_bar'));
         }
-    }
-
-    protected function getRegister($key, $default = [])
-    {
-        return Arr::get($this->register, $key, $default);
     }
 }

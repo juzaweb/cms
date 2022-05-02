@@ -23,13 +23,15 @@ Route::group(
     }
 );
 
-Route::group(
-    ['prefix' => 'plugins/install'],
-    function () {
-        Route::get('/', 'Backend\PluginController@install')->name('admin.plugin.install');
+if (config('juzaweb.plugin.enable_upload')) {
+    Route::group(
+        ['prefix' => 'plugins/install'],
+        function () {
+            Route::get('/', 'Backend\PluginController@install')->name('admin.plugin.install');
 
-        Route::get('/all', 'Backend\PluginController@getDataPlugin')->name('admin.plugin.install.all');
+            Route::get('/all', 'Backend\PluginController@getDataPlugin')->name('admin.plugin.install.all');
 
-        Route::post('/update', 'Backend\PluginController@update')->name('admin.plugin.install.update');
-    }
-);
+            Route::post('/update', 'Backend\PluginController@update')->name('admin.plugin.install.update');
+        }
+    );
+}

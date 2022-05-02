@@ -30,6 +30,18 @@ class MigrationMakeCommand extends GeneratorCommand
     protected $description = 'Create a new migration for the specified plugin.';
 
     /**
+     * Run the command.
+     */
+    public function handle()
+    {
+        parent::handle();
+
+        if (app()->environment() === 'testing') {
+            return;
+        }
+    }
+
+    /**
      * Get the console command arguments.
      *
      * @return array
@@ -53,16 +65,6 @@ class MigrationMakeCommand extends GeneratorCommand
             ['fields', null, InputOption::VALUE_OPTIONAL, 'The specified fields table.', null],
             ['plain', null, InputOption::VALUE_NONE, 'Create plain migration.'],
         ];
-    }
-
-    /**
-     * Get schema parser.
-     *
-     * @return SchemaParser
-     */
-    public function getSchemaParser()
-    {
-        return new SchemaParser($this->option('fields'));
     }
 
     /**
@@ -108,6 +110,29 @@ class MigrationMakeCommand extends GeneratorCommand
         ]);
     }
 
+    public function getClass()
+    {
+        return $this->getClassName();
+    }
+
+    /**
+     * @return string
+     */
+    private function getClassName()
+    {
+        return Str::studly($this->argument('name'));
+    }
+
+    /**
+     * Get schema parser.
+     *
+     * @return SchemaParser
+     */
+    public function getSchemaParser()
+    {
+        return new SchemaParser($this->option('fields'));
+    }
+
     /**
      * @return mixed
      */
@@ -134,30 +159,5 @@ class MigrationMakeCommand extends GeneratorCommand
     private function getSchemaName()
     {
         return $this->argument('name');
-    }
-
-    /**
-     * @return string
-     */
-    private function getClassName()
-    {
-        return Str::studly($this->argument('name'));
-    }
-
-    public function getClass()
-    {
-        return $this->getClassName();
-    }
-
-    /**
-     * Run the command.
-     */
-    public function handle()
-    {
-        parent::handle();
-
-        if (app()->environment() === 'testing') {
-            return;
-        }
     }
 }

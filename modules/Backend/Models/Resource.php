@@ -53,6 +53,8 @@ use Juzaweb\CMS\Traits\ModelCache;
  * @method static Builder|Resource whereType($value)
  * @method static Builder|Resource whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static Builder|Resource whereSiteId($value)
  */
 class Resource extends Model
 {

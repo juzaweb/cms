@@ -14,5 +14,5 @@ use Juzaweb\CMS\Abstracts\ResourcePolicy;
 
 class EmailTemplatePolicy extends ResourcePolicy
 {
-    protected $resourceType = 'email_templates';
+    protected string $resourceType = 'email_templates';
 }

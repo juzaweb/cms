@@ -14,5 +14,5 @@ use Juzaweb\CMS\Abstracts\ResourcePolicy;
 
 class RolePolicy extends ResourcePolicy
 {
-    protected $resourceType = 'roles';
+    protected string $resourceType = 'roles';
 }

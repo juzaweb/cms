@@ -21,6 +21,7 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|PostView whereSiteId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PostView whereViews($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
  */
 class PostView extends Model
 {

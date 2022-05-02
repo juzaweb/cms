@@ -16,6 +16,7 @@ use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Comment;
+use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 
@@ -56,7 +57,7 @@ class PostController extends FrontendController
         $postType = HookAction::getPostTypes($permalink->get('post_type'));
 
         /**
-         * @var \Juzaweb\Backend\Models\Post $postModel
+         * @var Post $postModel
          */
         $postModel = $postType->get('model')::createFrontendBuilder()
             ->where('slug', $postSlug)
@@ -133,7 +134,7 @@ class PostController extends FrontendController
         }
 
         /**
-         * @var \Juzaweb\Backend\Models\Post $post
+         * @var Post $post
          */
         $post = $postType->get('model')::createFrontendBuilder()
             ->where('slug', '=', $slug)

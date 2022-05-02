@@ -42,6 +42,17 @@ class ModelMakeCommand extends GeneratorCommand
     }
 
     /**
+     * Create the migration file with the given model if migration flag was used
+     */
+    private function handleOptionalMigrationOption()
+    {
+        if ($this->option('migration') === true) {
+            $migrationName = 'create_' . $this->createMigrationName() . '_table';
+            $this->call('plugin:make-migration', ['name' => $migrationName, 'module' => $this->argument('module')]);
+        }
+    }
+
+    /**
      * Create a proper migration name:
      * ProductDetail: product_details
      * Product: products
@@ -61,6 +72,16 @@ class ModelMakeCommand extends GeneratorCommand
         }
 
         return $string;
+    }
+
+    /**
+     * Get default namespace.
+     *
+     * @return string
+     */
+    public function getDefaultNamespace(): string
+    {
+        return 'Models';
     }
 
     /**
@@ -92,17 +113,6 @@ class ModelMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Create the migration file with the given model if migration flag was used
-     */
-    private function handleOptionalMigrationOption()
-    {
-        if ($this->option('migration') === true) {
-            $migrationName = 'create_' . $this->createMigrationName() . '_table';
-            $this->call('plugin:make-migration', ['name' => $migrationName, 'module' => $this->argument('module')]);
-        }
-    }
-
-    /**
      * @return mixed
      */
     protected function getTemplateContents()
@@ -127,16 +137,13 @@ class ModelMakeCommand extends GeneratorCommand
         ]))->render();
     }
 
-    /**
-     * @return mixed
-     */
-    protected function getDestinationFilePath()
+    protected function getStubPath()
     {
-        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
+        if ($stub = $this->option('stub')) {
+            return '/' . $stub;
+        }
 
-        $modelPath = GenerateConfigReader::read('model');
-
-        return $path . $modelPath->getPath() . '/' . $this->getModelName() . '.php';
+        return '/model.stub';
     }
 
     /**
@@ -164,21 +171,14 @@ class ModelMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Get default namespace.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getDefaultNamespace(): string
+    protected function getDestinationFilePath()
     {
-        return 'Models';
-    }
+        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
 
-    protected function getStubPath()
-    {
-        if ($stub = $this->option('stub')) {
-            return '/' . $stub;
-        }
+        $modelPath = GenerateConfigReader::read('model');
 
-        return '/model.stub';
+        return $path . $modelPath->getPath() . '/' . $this->getModelName() . '.php';
     }
 }

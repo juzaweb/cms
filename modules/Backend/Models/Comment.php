@@ -39,6 +39,8 @@ use Juzaweb\CMS\Models\User;
  * @method static Builder|Comment whereUserId($value)
  * @method static Builder|Comment whereWebsite($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static Builder|Comment whereSiteId($value)
  */
 class Comment extends Model
 {

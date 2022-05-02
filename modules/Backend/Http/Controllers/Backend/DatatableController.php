@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Juzaweb\CMS\Abstracts\DataTable;
@@ -17,7 +18,7 @@ use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class DatatableController extends BackendController
 {
-    public function getData(Request $request)
+    public function getData(Request $request): JsonResponse
     {
         $table = $this->getTable($request);
         $sort = $request->get('sort', 'id');
@@ -58,7 +59,7 @@ class DatatableController extends BackendController
         );
     }
 
-    public function bulkActions(Request $request)
+    public function bulkActions(Request $request): JsonResponse
     {
         $request->validate(
             [
@@ -86,7 +87,7 @@ class DatatableController extends BackendController
      * @param Request $request
      * @return DataTable
      */
-    protected function getTable($request)
+    protected function getTable(Request $request): DataTable
     {
         $table = Crypt::decryptString($request->get('table'));
         $table = app($table);
@@ -94,7 +95,9 @@ class DatatableController extends BackendController
 
         if (method_exists($table, 'mount')) {
             $data = json_decode(urldecode($request->get('data')), true);
-            $table->mount(...$data);
+            if ($data) {
+                $table->mount(...$data);
+            }
         }
 
         return $table;

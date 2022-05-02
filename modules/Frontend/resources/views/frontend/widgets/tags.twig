@@ -1,0 +1,20 @@
+<aside class="wrapper__list__article">
+    <h4 class="border_section">{{ data.title }}</h4>
+    <div class="blog-tags p-0">
+        {% set items = get_taxonomies({
+            'type': data.type,
+            'taxonomy': 'tags',
+            'limit': data.limit,
+        }) %}
+
+        <ul class="list-inline">
+            {% for item in items %}
+            <li class="list-inline-item">
+                <a href="{{ item.url }}">
+                    #{{ item.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</aside>

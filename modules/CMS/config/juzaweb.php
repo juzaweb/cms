@@ -9,6 +9,14 @@ return [
     'admin_prefix' => env('ADMIN_PREFIX', 'admin-cp'),
 
     /**
+     * Cache prefix
+     *
+     * Default: juzaweb_
+     */
+
+    'cache_prefix' => 'juzaweb_',
+
+    /**
      * Show logs in admin page
      */
     'logs_viewer' => true,

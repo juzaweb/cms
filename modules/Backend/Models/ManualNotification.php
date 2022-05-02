@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ManualNotification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ManualNotification whereUsers($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static \Illuminate\Database\Eloquent\Builder|ManualNotification whereSiteId($value)
  */
 class ManualNotification extends Model
 {

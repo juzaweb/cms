@@ -33,6 +33,8 @@ use Juzaweb\CMS\Models\User;
  * @method static \Illuminate\Database\Eloquent\Builder|SocialToken whereSocialToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialToken whereUserId($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialToken whereSiteId($value)
  */
 class SocialToken extends Model
 {

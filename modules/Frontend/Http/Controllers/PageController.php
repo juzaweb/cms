@@ -19,16 +19,6 @@ class PageController extends FrontendController
         return $this->handlePage($request, $page, $slug);
     }
 
-    public function detail(Request $request, $id)
-    {
-        $page = Post::find($id);
-        if (empty($page)) {
-            return abort(404);
-        }
-
-        return $this->handlePage($request, $page);
-    }
-
     protected function getPageSlug($slug)
     {
         return apply_filters('theme.page_slug', $slug[0], $slug);
@@ -110,5 +100,12 @@ class PageController extends FrontendController
         }
 
         return apply_filters('theme.get_view_page', $view, $page);
+    }
+
+    public function detail(Request $request, $id)
+    {
+        $page = Post::findOrFail($id);
+
+        return $this->handlePage($request, $page);
     }
 }

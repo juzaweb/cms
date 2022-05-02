@@ -19,42 +19,42 @@ class Theme implements ThemeContract
      *
      * @var string
      */
-    protected $basePath;
+    protected string $basePath;
 
     /**
      * Blade View Finder.
      *
      * @var \Illuminate\View\ViewFinderInterface
      */
-    protected $finder;
+    protected ViewFinderInterface $finder;
 
     /**
      * Application Container.
      *
      * @var \Illuminate\Container\Container
      */
-    protected $app;
+    protected Container $app;
 
     /**
      * Translator.
      *
      * @var \Illuminate\Translation\Translator
      */
-    protected $lang;
+    protected Translator|\Illuminate\Translation\Translator $lang;
 
     /**
      * Config.
      *
      * @var Repository
      */
-    protected $config;
+    protected Repository $config;
 
     /**
      * Current Active Theme.
      *
      * @var string
      */
-    private $activeTheme = null;
+    private ?string $activeTheme = null;
 
     /**
      * Theme constructor.
@@ -84,7 +84,7 @@ class Theme implements ThemeContract
      *
      * @return void
      */
-    public function set($theme)
+    public function set(string $theme): void
     {
         if (! $this->has($theme)) {
             throw new ThemeNotFoundException($theme);
@@ -101,14 +101,14 @@ class Theme implements ThemeContract
      *
      * @return bool
      */
-    public function has($theme)
+    public function has(string $theme): bool
     {
         $themeConfigPath = $this->getThemePath($theme) . '/theme.json';
 
         return file_exists($themeConfigPath);
     }
 
-    public function getThemePath($theme, $path = '')
+    public function getThemePath($theme, $path = ''): string
     {
         $result = $this->basePath . '/' . $theme;
 
@@ -126,7 +126,7 @@ class Theme implements ThemeContract
      *
      * @return false|Config
      */
-    public function getThemeInfo($theme)
+    public function getThemeInfo($theme): bool|Config
     {
         $themePath = $this->getThemePath($theme);
         $themeConfigPath = $themePath . '/theme.json';
@@ -211,12 +211,12 @@ class Theme implements ThemeContract
         return $themes;
     }
 
-    public function publicPath($theme)
+    public function publicPath($theme): string
     {
         return public_path('jw-styles/themes/' . $theme);
     }
 
-    public function assetsUrl($theme, $secure = null)
+    public function assetsUrl($theme, $secure = null): string
     {
         return asset('jw-styles/themes/' . $theme . '/assets', $secure);
     }
@@ -230,7 +230,7 @@ class Theme implements ThemeContract
      *
      * @return string
      */
-    public function assets($path, $theme = null, $secure = null)
+    public function assets($path, $theme = null, $secure = null): string
     {
         if (empty($theme)) {
             $theme = $this->activeTheme;
@@ -247,7 +247,7 @@ class Theme implements ThemeContract
      *
      * @return string|false
      */
-    public function getFullPath($path, $theme = null)
+    public function getFullPath($path, $theme = null): bool|string
     {
         $splitThemeAndPath = explode(':', $path);
 
@@ -301,7 +301,7 @@ class Theme implements ThemeContract
         return mix($this->getFullPath($path), $manifestDirectory);
     }
 
-    public function getScreenshot($theme)
+    public function getScreenshot($theme): string
     {
         $path = $this->getThemePath($theme, 'assets/screenshot.png');
         if (file_exists($path)) {

@@ -11,42 +11,45 @@
 namespace Juzaweb\CMS\Support;
 
 use Illuminate\Cache\CacheManager;
-use Juzaweb\CMS\Facades\Site;
 use Juzaweb\CMS\Models\Config as ConfigModel;
 use Illuminate\Container\Container;
 
 class Config
 {
-    protected $configs = [];
+    protected array $configs = [];
 
     /**
      * @var CacheManager
      */
-    protected $cache;
+    protected CacheManager $cache;
 
-    public function __construct(Container $app)
+    public function __construct(Container $app, CacheManager $cache)
     {
-        $this->cache = $app['cache'];
+        $this->cache = $cache;
         if (Installer::alreadyInstalled()) {
             $this->configs = $this->cache
                 ->store('file')
                 ->rememberForever(
                     $this->getCacheKey(),
                     function () {
-                        return ConfigModel::get([
+                        return ConfigModel::get(
+                            [
                                 'code',
                                 'value',
-                            ])->keyBy('code')
-                            ->map(function ($item) {
-                                return $item->value;
-                            })
+                            ]
+                        )->keyBy('code')
+                            ->map(
+                                function ($item) {
+                                    return $item->value;
+                                }
+                            )
                             ->toArray();
                     }
                 );
         }
     }
 
-    public function getConfig($key, $default = null)
+    public function getConfig($key, $default = null): mixed
     {
         $value = $this->configs[$key] ?? $default;
         if (is_json($value)) {
@@ -56,17 +59,20 @@ class Config
         return $value;
     }
 
-    public function setConfig($key, $value = null)
+    public function setConfig($key, $value = null): ConfigModel
     {
         if (is_array($value)) {
             $value = json_encode($value);
         }
 
-        $config = ConfigModel::updateOrCreate([
-            'code' => $key,
-        ], [
-            'value' => $value,
-        ]);
+        $config = ConfigModel::updateOrCreate(
+            [
+                'code' => $key,
+            ],
+            [
+                'value' => $value,
+            ]
+        );
 
         $this->configs[$key] = $value;
         $this->cache->store('file')->forever(
@@ -82,8 +88,8 @@ class Config
         return $config;
     }
 
-    protected function getCacheKey()
+    protected function getCacheKey(): string
     {
-        return 'jw_configs_';
+        return cache_prefix('jw_configs_');
     }
 }

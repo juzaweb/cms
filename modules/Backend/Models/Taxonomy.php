@@ -47,6 +47,8 @@ use Juzaweb\CMS\Models\Model;
  * @method static Builder|Taxonomy whereTotalPost($value)
  * @method static Builder|Taxonomy whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static Builder|Taxonomy whereSiteId($value)
  */
 class Taxonomy extends Model
 {

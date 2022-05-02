@@ -28,6 +28,11 @@ class RouteProviderMakeCommand extends GeneratorCommand
      */
     protected $description = 'Create a new route service provider for the specified plugin.';
 
+    public function getDefaultNamespace(): string
+    {
+        return 'Providers';
+    }
+
     /**
      * The command arguments.
      *
@@ -77,17 +82,11 @@ class RouteProviderMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Get the destination file path.
-     *
      * @return string
      */
-    protected function getDestinationFilePath()
+    private function getControllerNameSpace(): string
     {
-        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
-
-        $generatorPath = GenerateConfigReader::read('provider');
-
-        return $path . $generatorPath->getPath() . '/' . $this->getFileName() . '.php';
+        return 'Http\\Controllers';
     }
 
     /**
@@ -106,16 +105,17 @@ class RouteProviderMakeCommand extends GeneratorCommand
         return '/' . $this->laravel['plugins']->config('stubs.files.routes/api', 'routes/api.php');
     }
 
-    public function getDefaultNamespace(): string
-    {
-        return 'Providers';
-    }
-
     /**
+     * Get the destination file path.
+     *
      * @return string
      */
-    private function getControllerNameSpace(): string
+    protected function getDestinationFilePath()
     {
-        return 'Http\\Controllers';
+        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
+
+        $generatorPath = GenerateConfigReader::read('provider');
+
+        return $path . $generatorPath->getPath() . '/' . $this->getFileName() . '.php';
     }
 }

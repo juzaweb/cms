@@ -34,6 +34,8 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|MediaFile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MediaFile whereUserId($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaFile whereSiteId($value)
  */
 class MediaFile extends Model
 {

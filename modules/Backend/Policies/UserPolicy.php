@@ -6,5 +6,5 @@ use Juzaweb\CMS\Abstracts\ResourcePolicy;
 
 class UserPolicy extends ResourcePolicy
 {
-    protected $resourceType = 'users';
+    protected string $resourceType = 'users';
 }

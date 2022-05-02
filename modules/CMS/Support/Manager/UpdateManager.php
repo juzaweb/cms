@@ -192,5 +192,12 @@ abstract class UpdateManager
         $this->process = $process;
     }
 
+    protected function responseErrors(object $response): void
+    {
+        if (isset($response->errors) && is_array($response->errors)) {
+            throw new \Exception($response->errors[0]->message);
+        }
+    }
+
     abstract protected function getLocalPath(): string;
 }

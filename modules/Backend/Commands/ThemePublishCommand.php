@@ -38,6 +38,18 @@ class ThemePublishCommand extends Command
         $this->info('Publish Theme Successfully');
     }
 
+    protected function publishAssets(string $theme)
+    {
+        $sourceFolder = Theme::getThemePath($theme) . '/assets/public';
+        $publicFolder = Theme::publicPath($theme) . '/assets';
+
+        if (! File::isDirectory($publicFolder)) {
+            File::makeDirectory($publicFolder, 0755, true, true);
+        }
+
+        File::copyDirectory($sourceFolder, $publicFolder);
+    }
+
     protected function publishViews(string $theme)
     {
         $sourceFolder = Theme::getThemePath($theme) . '/views';
@@ -54,18 +66,6 @@ class ThemePublishCommand extends Command
     {
         $sourceFolder = Theme::getThemePath($theme) . '/lang';
         $publicFolder = resource_path('lang/themes/' . $theme);
-
-        if (! File::isDirectory($publicFolder)) {
-            File::makeDirectory($publicFolder, 0755, true, true);
-        }
-
-        File::copyDirectory($sourceFolder, $publicFolder);
-    }
-
-    protected function publishAssets(string $theme)
-    {
-        $sourceFolder = Theme::getThemePath($theme) . '/assets/public';
-        $publicFolder = Theme::publicPath($theme) . '/assets';
 
         if (! File::isDirectory($publicFolder)) {
             File::makeDirectory($publicFolder, 0755, true, true);

@@ -14,9 +14,11 @@ use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
+use Juzaweb\CMS\Contracts\OverwriteConfigContract;
 use Juzaweb\CMS\Contracts\ThemeConfigContract;
 use Juzaweb\CMS\Contracts\XssCleanerContract;
 use Juzaweb\CMS\Extension\Custom;
+use Juzaweb\CMS\Facades\OverwriteConfig;
 use Juzaweb\CMS\Support\ActionRegister;
 use Juzaweb\CMS\Support\CacheGroup;
 use Juzaweb\CMS\Support\Config as DbConfig;
@@ -70,6 +72,8 @@ class CmsServiceProvider extends ServiceProvider
         Schema::defaultStringLength(150);
 
         Twig::addExtension(new Custom());
+
+        OverwriteConfig::init();
 
         /*$this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
@@ -148,7 +152,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->singleton(
             ConfigContract::class,
             function ($app) {
-                return new DbConfig($app);
+                return new DbConfig($app, $app['cache']);
             }
         );
 
@@ -184,6 +188,17 @@ class CmsServiceProvider extends ServiceProvider
             CacheGroupContract::class,
             function ($app) {
                 return new CacheGroup($app['cache']);
+            }
+        );
+
+        $this->app->singleton(
+            OverwriteConfigContract::class,
+            function ($app) {
+                return new DbConfig\OverwriteConfig(
+                    $app['config'],
+                    $app[ConfigContract::class],
+                    $app['request']
+                );
             }
         );
     }

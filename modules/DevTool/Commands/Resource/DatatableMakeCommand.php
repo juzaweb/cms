@@ -38,6 +38,11 @@ class DatatableMakeCommand extends GeneratorCommand
      */
     protected $description = 'Generate new restful datatable for the specified plugin.';
 
+    public function getDefaultNamespace(): string
+    {
+        return 'Http/Datatables';
+    }
+
     /**
      * Get template contents.
      *
@@ -46,54 +51,6 @@ class DatatableMakeCommand extends GeneratorCommand
     protected function getTemplateContents()
     {
         return (new Stub('/resource/datatable.stub', $this->getDataStub()))->render();
-    }
-
-    /**
-     * Get the destination file path.
-     *
-     * @return string
-     */
-    protected function getDestinationFilePath()
-    {
-        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
-        $datatablePath = GenerateConfigReader::read('datatable');
-
-        return $path . $datatablePath->getPath() . '/' . $this->getDatatableName() . '.php';
-    }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            ['name', InputArgument::REQUIRED, 'The name of the datatable class.'],
-            ['module', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
-        ];
-    }
-
-    /**
-     * @return array|string
-     */
-    protected function getDatatableName()
-    {
-        $name = Str::studly($this->argument('name'));
-
-        if (Str::contains(strtolower($name), 'datatable') === false) {
-            $name .= 'Datatable';
-        }
-
-        return $name;
-    }
-
-    /**
-     * @return array|string
-     */
-    protected function getDatatableNameWithoutNamespace()
-    {
-        return class_basename($this->getDatatableName());
     }
 
     protected function getDataStub()
@@ -119,21 +76,25 @@ class DatatableMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Get the console command options.
-     *
-     * @return array
+     * @return array|string
      */
-    protected function getOptions()
+    protected function getDatatableNameWithoutNamespace()
     {
-        return [
-            ['model', null, InputOption::VALUE_OPTIONAL, 'The model for query.', null],
-            ['columns', null, InputOption::VALUE_OPTIONAL, 'The columns for table.', null],
-        ];
+        return class_basename($this->getDatatableName());
     }
 
-    public function getDefaultNamespace(): string
+    /**
+     * @return array|string
+     */
+    protected function getDatatableName()
     {
-        return 'Http/Datatables';
+        $name = Str::studly($this->argument('name'));
+
+        if (Str::contains(strtolower($name), 'datatable') === false) {
+            $name .= 'Datatable';
+        }
+
+        return $name;
     }
 
     protected function getDataModelStub()
@@ -226,5 +187,44 @@ class DatatableMakeCommand extends GeneratorCommand
         }
 
         return 'resource/datatable/default-column.stub';
+    }
+
+    /**
+     * Get the destination file path.
+     *
+     * @return string
+     */
+    protected function getDestinationFilePath()
+    {
+        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
+        $datatablePath = GenerateConfigReader::read('datatable');
+
+        return $path . $datatablePath->getPath() . '/' . $this->getDatatableName() . '.php';
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['name', InputArgument::REQUIRED, 'The name of the datatable class.'],
+            ['module', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
+        ];
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['model', null, InputOption::VALUE_OPTIONAL, 'The model for query.', null],
+            ['columns', null, InputOption::VALUE_OPTIONAL, 'The columns for table.', null],
+        ];
     }
 }

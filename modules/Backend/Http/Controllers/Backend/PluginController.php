@@ -81,7 +81,7 @@ class PluginController extends BackendController
         );
     }
 
-    public function getDataPlugin(Request $request, JuzawebApi $api)
+    public function getDataPlugin(Request $request, JuzawebApi $api): object|array
     {
         $limit = $request->get('limit', 20);
         $page = $request->get('page', 1);
@@ -106,6 +106,9 @@ class PluginController extends BackendController
             try {
                 switch ($action) {
                     case 'delete':
+                        if (config('juzaweb.plugin.enable_upload')) {
+                            throw new \Exception('Access deny.');
+                        }
                         /**
                          * @var \Juzaweb\CMS\Support\Plugin $module
                          */
@@ -123,6 +126,10 @@ class PluginController extends BackendController
                         Plugin::disable($plugin);
                         break;
                     case 'update':
+                        if (!config('juzaweb.plugin.enable_upload')) {
+                            throw new \Exception('Access deny.');
+                        }
+
                         $helper = $updater->find($plugin);
                         $helper->update();
                         CacheGroup::pull('plugin_update_keys');
@@ -148,6 +155,10 @@ class PluginController extends BackendController
 
     protected function getDataUpdates(Collection $plugins): ?object
     {
+        if (!config('juzaweb.plugin.enable_upload')) {
+            return (object) [];
+        }
+
         $key = sha1($plugins->toJson());
         CacheGroup::add('plugin_update_keys', $key);
 

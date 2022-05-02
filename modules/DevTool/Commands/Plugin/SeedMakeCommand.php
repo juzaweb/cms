@@ -32,6 +32,16 @@ class SeedMakeCommand extends GeneratorCommand
     protected $description = 'Generate new seeder for the specified plugin.';
 
     /**
+     * Get default namespace.
+     *
+     * @return string
+     */
+    public function getDefaultNamespace(): string
+    {
+        return 'Database/Seeders';
+    }
+
+    /**
      * Get the console command arguments.
      *
      * @return array
@@ -77,20 +87,6 @@ class SeedMakeCommand extends GeneratorCommand
     }
 
     /**
-     * @return mixed
-     */
-    protected function getDestinationFilePath()
-    {
-        $this->clearCache();
-
-        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
-
-        $seederPath = GenerateConfigReader::read('seeder');
-
-        return $path . $seederPath->getPath() . '/' . $this->getSeederName() . '.php';
-    }
-
-    /**
      * Get seeder name.
      *
      * @return string
@@ -103,12 +99,16 @@ class SeedMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Get default namespace.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getDefaultNamespace(): string
+    protected function getDestinationFilePath()
     {
-        return 'Database/Seeders';
+        $this->clearCache();
+
+        $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
+
+        $seederPath = GenerateConfigReader::read('seeder');
+
+        return $path . $seederPath->getPath() . '/' . $this->getSeederName() . '.php';
     }
 }

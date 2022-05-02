@@ -17,19 +17,9 @@ use Juzaweb\CMS\Support\Stub;
 
 class DevToolServiceProvider extends ServiceProvider
 {
-    public function register()
-    {
-        $this->setupStubPath();
-
-        if ($this->app->runningInConsole() || $this->app->runningUnitTests()) {
-            $this->app->register(ConsoleServiceProvider::class);
-        }
-    }
-
     public function boot()
     {
         if ($this->app->environment('local')) {
-            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
 
             Builder::macro(
@@ -49,6 +39,15 @@ class DevToolServiceProvider extends ServiceProvider
                     );
                 }
             );
+        }
+    }
+
+    public function register()
+    {
+        $this->setupStubPath();
+
+        if ($this->app->runningInConsole() || $this->app->runningUnitTests()) {
+            $this->app->register(ConsoleServiceProvider::class);
         }
     }
 

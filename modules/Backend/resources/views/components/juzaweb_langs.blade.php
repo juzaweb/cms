@@ -12,6 +12,6 @@ $langs = array_merge(trans('cms::app', [], 'en'), trans('cms::app'));
     var juzaweb = {
         adminPrefix: "{{ config('juzaweb.admin_prefix') }}",
         adminUrl: "{{ url(config('juzaweb.admin_prefix')) }}",
-        lang: JSON.parse(`@json($langs)`)
+        lang: @json($langs)
     }
 </script>
