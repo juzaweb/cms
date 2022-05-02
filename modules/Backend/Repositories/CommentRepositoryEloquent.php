@@ -17,7 +17,7 @@ class CommentRepositoryEloquent extends BaseRepository implements CommentReposit
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
         return Comment::class;
     }

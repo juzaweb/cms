@@ -2,11 +2,8 @@
 
 namespace Juzaweb\Backend\Repositories;
 
+use Juzaweb\CMS\Models\User;
 use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Juzaweb\Backend\Repositories\UserRepository;
-use Juzaweb\Backend\Models2\User;
-use Juzaweb\Backend\Validators\UserValidator;
 
 /**
  * Class UserRepositoryEloquent.
@@ -20,19 +17,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
         return User::class;
     }
-
-    
-
-    /**
-     * Boot up the repository, pushing criteria
-     */
-    public function boot()
-    {
-        $this->pushCriteria(app(RequestCriteria::class));
-    }
-    
 }
