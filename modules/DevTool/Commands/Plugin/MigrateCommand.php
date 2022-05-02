@@ -34,7 +34,7 @@ class MigrateCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): mixed
     {
         $this->module = $this->laravel['plugins'];
 
@@ -66,12 +66,15 @@ class MigrateCommand extends Command
             $path = $path . "/" . $this->option("subpath");
         }
 
-        $this->call('migrate', [
-            '--path' => $path,
-            '--database' => $this->option('database'),
-            '--pretend' => $this->option('pretend'),
-            '--force' => $this->option('force'),
-        ]);
+        $this->call(
+            'migrate',
+            [
+                '--path' => $path,
+                '--database' => $this->option('database'),
+                '--pretend' => $this->option('pretend'),
+                '--force' => $this->option('force'),
+            ]
+        );
 
         if ($this->option('seed')) {
             $this->call('plugin:seed', ['module' => $module->getName()]);
@@ -83,7 +86,7 @@ class MigrateCommand extends Command
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['module', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
@@ -95,7 +98,7 @@ class MigrateCommand extends Command
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [
             ['direction', 'd', InputOption::VALUE_OPTIONAL, 'The direction of ordering.', 'asc'],

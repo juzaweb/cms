@@ -46,9 +46,7 @@ class DevToolServiceProvider extends ServiceProvider
     {
         $this->setupStubPath();
 
-        if ($this->app->runningInConsole() || $this->app->runningUnitTests()) {
-            $this->app->register(ConsoleServiceProvider::class);
-        }
+        $this->app->register(ConsoleServiceProvider::class);
     }
 
     /**

@@ -311,10 +311,10 @@ class Theme implements ThemeContract
         return asset('jw-styles/juzaweb/images/screenshot.svg');
     }
 
-    public function getVersion($theme)
+    public function getVersion($theme): string
     {
         $info = $this->getThemeInfo($theme);
-        return $info->get('version', 0);
+        return $info->get('version', '0');
     }
 
     public function getTemplates($theme, $template = null)
@@ -326,7 +326,7 @@ class Theme implements ThemeContract
         return $this->getRegister($theme, 'templates');
     }
 
-    public function getRegister($theme, $key = null)
+    public function getRegister($theme, $key = null): string|array
     {
         $path = $this->getThemePath($theme, 'register.json');
         if (file_exists($path)) {
@@ -348,7 +348,7 @@ class Theme implements ThemeContract
      *
      * @return void
      */
-    protected function loadTheme($theme)
+    protected function loadTheme($theme): void
     {
         if (is_null($theme)) {
             return;
