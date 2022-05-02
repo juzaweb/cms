@@ -3,14 +3,14 @@
 namespace Juzaweb\Backend\Repositories;
 
 use Juzaweb\CMS\Models\User;
-use Prettus\Repository\Eloquent\BaseRepository;
+use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 
 /**
  * Class UserRepositoryEloquent.
  *
  * @package namespace Juzaweb\Backend\Repositories;
  */
-class UserRepositoryEloquent extends BaseRepository implements UserRepository
+class UserRepositoryEloquent extends BaseRepositoryEloquent implements UserRepository
 {
     /**
      * Specify Model class name

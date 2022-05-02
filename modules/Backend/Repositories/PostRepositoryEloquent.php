@@ -3,6 +3,7 @@
 namespace Juzaweb\Backend\Repositories;
 
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
@@ -10,7 +11,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
  *
  * @package namespace Juzaweb\Backend\Repositories;
  */
-class PostRepositoryEloquent extends BaseRepository implements PostRepository
+class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepository
 {
     /**
      * Specify Model class name

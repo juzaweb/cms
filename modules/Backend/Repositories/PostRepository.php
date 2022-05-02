@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Backend\Repositories;
 
+use Juzaweb\CMS\Repositories\BaseRepository;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
@@ -9,7 +10,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  *
  * @package namespace Juzaweb\Backend\Repositories;
  */
-interface PostRepository extends RepositoryInterface
+interface PostRepository extends BaseRepository
 {
     //
 }

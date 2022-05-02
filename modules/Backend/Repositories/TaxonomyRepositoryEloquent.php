@@ -3,14 +3,14 @@
 namespace Juzaweb\Backend\Repositories;
 
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Repositories\BaseRepository;
+use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 
 /**
- * Class TaxonomyRepositoryEloquent.
+ * Class TaxonomyRepositoryEloquentEloquent.
  *
  * @package namespace Juzaweb\Backend\Repositories;
  */
-class TaxonomyRepositoryEloquent extends BaseRepository implements TaxonomyRepository
+class TaxonomyRepositoryEloquent extends BaseRepositoryEloquent implements TaxonomyRepository
 {
     /**
      * Specify Model class name

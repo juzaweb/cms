@@ -2,14 +2,14 @@
 
 namespace Juzaweb\Backend\Repositories;
 
-use Prettus\Repository\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Repositories\BaseRepository;
 
 /**
  * Interface UserRepository.
  *
  * @package namespace Juzaweb\Backend\Repositories;
  */
-interface UserRepository extends RepositoryInterface
+interface UserRepository extends BaseRepository
 {
     //
 }
