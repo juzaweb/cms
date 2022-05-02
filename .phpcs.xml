@@ -5,7 +5,7 @@
     <exclude-pattern>/vendor</exclude-pattern>
     <exclude-pattern>/bootstrap/cache/*</exclude-pattern>
     <exclude-pattern>/storage/*</exclude-pattern>
-    <exclude-pattern>/update/*</exclude-pattern>
+    <exclude-pattern>/config/*</exclude-pattern>
     <exclude-pattern>/node_modules/*</exclude-pattern>
     <exclude-pattern>/_ide_helper.php</exclude-pattern>
 

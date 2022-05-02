@@ -10,7 +10,7 @@ class CommentPolicy
 {
     use HandlesAuthorization;
 
-    public function index(User $user, $type)
+    public function index(User $user, $type): bool
     {
         if (!$user->can("{$type}.comments")) {
             return false;
