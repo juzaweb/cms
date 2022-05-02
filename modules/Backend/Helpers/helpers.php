@@ -408,9 +408,8 @@ if (!function_exists('jw_date_format')) {
         }
 
         $dateFormat = get_config('date_format', 'F j, Y');
-        switch ($format) {
-            case JW_DATE:
-                return date($dateFormat, $date);
+        if ($format == JW_DATE) {
+            return date($dateFormat, $date);
         }
 
         $timeFormat = get_config('time_format', 'g:i a');

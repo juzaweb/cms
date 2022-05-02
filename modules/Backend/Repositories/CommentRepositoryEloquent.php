@@ -6,11 +6,11 @@ use Juzaweb\Backend\Models\Comment;
 use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 
 /**
- * Class CommentRepositoryEloquentEloquent.
+ * Class CommentRepositoryEloquent.
  *
  * @package namespace Juzaweb\Backend\Repositories;
  */
-class CommentRepositoryEloquentEloquent extends BaseRepositoryEloquent implements CommentRepository
+class CommentRepositoryEloquent extends BaseRepositoryEloquent implements CommentRepository
 {
     /**
      * Specify Model class name

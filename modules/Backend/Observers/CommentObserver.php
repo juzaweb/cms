@@ -6,12 +6,12 @@ use Juzaweb\Backend\Models\Comment;
 
 class CommentObserver
 {
-    public function saved(Comment $comment)
+    public function saved(Comment $comment): void
     {
-        $this->changeTotalCommand($comment);
+        $this->changeTotalComment($comment);
     }
 
-    protected function changeTotalCommand(Comment $comment)
+    protected function changeTotalComment(Comment $comment): void
     {
         $count = Comment::where('object_id', '=', $comment->object_id)->whereApproved()->count();
 
@@ -22,8 +22,8 @@ class CommentObserver
         );
     }
 
-    public function deleted(Comment $comment)
+    public function deleted(Comment $comment): void
     {
-        $this->changeTotalCommand($comment);
+        $this->changeTotalComment($comment);
     }
 }
