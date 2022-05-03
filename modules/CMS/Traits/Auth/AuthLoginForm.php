@@ -29,7 +29,7 @@ trait AuthLoginForm
         do_action('recaptcha.init');
 
         return view(
-            'cms::auth.login',
+            $this->getViewForm(),
             [
                 'title' => trans('cms::app.login'),
             ]
@@ -113,5 +113,10 @@ trait AuthLoginForm
         }
 
         return redirect()->to('/');
+    }
+
+    protected function getViewForm()
+    {
+        return 'cms::auth.login';
     }
 }

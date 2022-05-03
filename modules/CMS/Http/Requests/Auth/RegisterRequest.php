@@ -20,12 +20,14 @@ class RegisterRequest extends FormRequest
     {
         return [
             'email' => [
+                'bail',
                 'required',
                 'email',
                 'max:150',
                 Rule::modelUnique(User::class, 'email')
             ],
             'password' => [
+                'bail',
                 'required',
                 'min:6',
                 'max:32',

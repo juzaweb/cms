@@ -17,12 +17,12 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'email' => 'required|email|max:150',
-            'password' => 'required|min:6|max:32',
+            'email' => 'bail|required|email|max:150',
+            'password' => 'bail|required|min:6|max:32',
         ];
 
         if (get_config('google_recaptcha')) {
-            $rules['recaptcha'] = 'required|recaptcha';
+            $rules['recaptcha'] = 'bail|required|recaptcha';
         }
 
         return $rules;

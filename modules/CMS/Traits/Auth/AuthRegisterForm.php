@@ -35,7 +35,7 @@ trait AuthRegisterForm
         do_action('recaptcha.init');
 
         return view(
-            'cms::auth.register',
+            $this->getViewForm(),
             [
                 'title' => trans('cms::app.sign_up'),
             ]
@@ -120,5 +120,10 @@ trait AuthRegisterForm
         }
 
         return abort(404);
+    }
+
+    protected function getViewForm(): string
+    {
+        return 'cms::auth.register';
     }
 }
