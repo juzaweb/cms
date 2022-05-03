@@ -9,12 +9,5 @@ class ExampleController extends BackendController
     public function index()
     {
         //
-
-        return view(
-            'juex::index',
-            [
-                'title' => 'Title Page',
-            ]
-        );
     }
 }
