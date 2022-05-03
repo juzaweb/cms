@@ -15,10 +15,13 @@ use Juzaweb\Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    public function testLogin()
+    public function testIndex()
     {
         $this->get('admin-cp/login')->assertStatus(200);
+    }
 
+    public function testLogin()
+    {
         $user = User::factory()->create();
 
         $this->json(

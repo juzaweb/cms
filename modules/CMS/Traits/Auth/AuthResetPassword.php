@@ -86,7 +86,7 @@ trait AuthResetPassword
             throw $exception;
         }
 
-        return redirect()->route('user.login');
+        return redirect()->route('login');
     }
 
     protected function getViewForm(): string

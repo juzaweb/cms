@@ -35,8 +35,11 @@ class Auth
                 Route::get('forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot_password');
                 Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword']);
 
-                Route::get('reset-password', [ResetPasswordController::class, 'index'])->name('reset_password');
-                Route::post('reset-password', [ResetPasswordController::class, 'resetPassword']);
+                Route::get(
+                    'reset-password/{email}/{token}',
+                    [ResetPasswordController::class, 'index']
+                )->name('reset_password');
+                Route::post('reset-password/{email}/{token}', [ResetPasswordController::class, 'resetPassword']);
 
                 Route::get(
                     'verification/{email}/{token}',

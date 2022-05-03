@@ -11,12 +11,13 @@
 namespace Juzaweb\Tests\Feature\Auth;
 
 use Faker\Generator as Faker;
+use Juzaweb\Backend\Models\EmailList;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
-    public function testAsccetRegister()
+    public function testIndex()
     {
         $this->get('admin-cp/register')->assertStatus(200);
     }
@@ -63,5 +64,13 @@ class RegisterTest extends TestCase
         $this->assertDatabaseHas('users', ['email' => $email, 'status' => 'verification']);
 
         $this->assertDatabaseHas('email_lists', ['email' => $email]);
+
+        $token = EmailList::whereEmail($email)->first();
+
+        $this->get("admin-cp/verification/{$email}/{$token->data['token']}")
+            ->assertStatus(302)
+            ->assertRedirect('admin-cp/login');
+
+        $token->delete();
     }
 }
