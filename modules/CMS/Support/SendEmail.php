@@ -5,11 +5,10 @@ namespace Juzaweb\CMS\Support;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Juzaweb\Backend\Models\EmailList;
-use TwigBridge\Facade\Twig;
 
 class SendEmail
 {
-    protected $mail;
+    protected EmailList $mail;
 
     public function __construct(EmailList $mail)
     {
@@ -22,7 +21,7 @@ class SendEmail
      * @return bool
      * @throws \Exception
      */
-    public function send()
+    public function send(): bool
     {
         $validate = $this->validate();
         if ($validate !== true) {
@@ -47,13 +46,13 @@ class SendEmail
                 }
             );
 
-            if (Mail::failures()) {
+            /*if (Mail::failures()) {
                 $this->updateError(array_merge([
                     'title' => 'Mail failures',
                 ], Mail::failures()));
 
                 return false;
-            }
+            }*/
 
             $this->updateStatus('success', $subject, $body);
 
