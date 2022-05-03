@@ -22,7 +22,7 @@ class SendMailRegisterSuccessful
      * @param RegisterSuccessful $event
      * @return void
      */
-    public function handle($event)
+    public function handle(RegisterSuccessful $event): void
     {
         if (get_config('user_verification')) {
             $verifyToken = Str::random(32);
@@ -52,7 +52,7 @@ class SendMailRegisterSuccessful
                 )
             );
         }
-    
+
         event(
             new EmailHook(
                 'register_success',

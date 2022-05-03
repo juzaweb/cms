@@ -2,9 +2,12 @@
 
 namespace Juzaweb\CMS\Traits;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+
 trait ResponseMessage
 {
-    protected function response($data, $status)
+    protected function response($data, $status): JsonResponse|RedirectResponse
     {
         if (! is_array($data)) {
             $data = [$data];
@@ -41,9 +44,9 @@ trait ResponseMessage
      * Response success message
      *
      * @param string|array $message
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse|RedirectResponse
      */
-    protected function success($message)
+    protected function success(string|array $message): JsonResponse|RedirectResponse
     {
         if (is_string($message)) {
             $message = ['message' => $message];
@@ -56,9 +59,9 @@ trait ResponseMessage
      * Response error message
      *
      * @param string|array $message
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse|RedirectResponse
      */
-    protected function error($message)
+    protected function error(string|array $message): JsonResponse|RedirectResponse
     {
         if (is_string($message)) {
             $message = ['message' => $message];
