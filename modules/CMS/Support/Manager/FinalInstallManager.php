@@ -11,103 +11,59 @@ class FinalInstallManager
     /**
      * Run final commands.
      *
-     * @return string
+     * @return array
      * @throws Throwable
      */
-    public function runFinal()
+    public function runFinal(): array
     {
         $outputLog = new BufferedOutput();
-
-        $this->generateKey($outputLog);
-        $this->clearOptimize($outputLog);
-        $this->publishStorage($outputLog);
-        $this->publishVendorAssets($outputLog);
-
-        return $outputLog->fetch();
-    }
-
-    /**
-     * Generate New Application Key.
-     *
-     * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
-     * @return \Symfony\Component\Console\Output\BufferedOutput|array
-     */
-    private static function generateKey(BufferedOutput $outputLog)
-    {
         try {
-            if (config('installer.final.key')) {
-                Artisan::call('key:generate', ['--force' => true], $outputLog);
-            }
+            $this->generateKey($outputLog);
+            $this->clearOptimize($outputLog);
+            $this->publishStorage($outputLog);
+            $this->publishVendorAssets($outputLog);
         } catch (Throwable $e) {
-            return static::response($e->getMessage(), $outputLog);
+            return $this->response($e->getMessage(), 'error', $outputLog);
         }
 
-        return $outputLog;
+        return $this->response(trans('cms::app.successfully'), 'success', $outputLog);
     }
 
-    private static function publishStorage(BufferedOutput $outputLog)
+    private function generateKey(BufferedOutput $outputLog): void
     {
-        try {
-            Artisan::call('storage:link', [], $outputLog);
-        } catch (Throwable $e) {
-            return static::response($e->getMessage(), $outputLog);
+        if (config('installer.final.key')) {
+            Artisan::call('key:generate', ['--force' => true], $outputLog);
         }
-
-        return $outputLog;
     }
 
-    /**
-     * Publish vendor assets.
-     *
-     * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
-     * @return \Symfony\Component\Console\Output\BufferedOutput|array
-     * @throws Throwable
-     */
-    private static function publishVendorAssets(BufferedOutput $outputLog)
+    private function publishStorage(BufferedOutput $outputLog): void
     {
-        try {
-            Artisan::call('vendor:publish', [
+        Artisan::call('storage:link', [], $outputLog);
+    }
+
+    private function publishVendorAssets(BufferedOutput $outputLog): void
+    {
+        Artisan::call(
+            'vendor:publish',
+            [
                 '--tag' => 'cms_assets',
                 '--force' => true,
-            ], $outputLog);
+            ],
+            $outputLog
+        );
 
-            Artisan::call('storage:link', [], $outputLog);
-        } catch (Throwable $e) {
-            throw $e;
-        }
-
-        return $outputLog;
+        Artisan::call('storage:link', [], $outputLog);
     }
 
-    /**
-     * Publish vendor assets.
-     *
-     * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
-     * @return \Symfony\Component\Console\Output\BufferedOutput|array
-     * @throws Throwable
-     */
-    private static function clearOptimize(BufferedOutput $outputLog)
+    private function clearOptimize(BufferedOutput $outputLog): void
     {
-        try {
-            Artisan::call('optimize:clear', [], $outputLog);
-        } catch (Throwable $e) {
-            throw $e;
-        }
-
-        return $outputLog;
+        Artisan::call('optimize:clear', [], $outputLog);
     }
 
-    /**
-     * Return a formatted error messages.
-     *
-     * @param $message
-     * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
-     * @return array
-     */
-    private static function response($message, BufferedOutput $outputLog)
+    private function response($message, $status, BufferedOutput $outputLog): array
     {
         return [
-            'status' => 'error',
+            'status' => $status,
             'message' => $message,
             'dbOutputLog' => $outputLog->fetch(),
         ];

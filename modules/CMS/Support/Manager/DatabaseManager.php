@@ -22,7 +22,7 @@ class DatabaseManager
      * @throws Exception
      * @throws \Throwable
      */
-    public function run()
+    public function run(): array
     {
         $outputLog = new BufferedOutput();
         $this->sqlite($outputLog);
@@ -39,7 +39,7 @@ class DatabaseManager
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
-            Log::error($e);
+            report($e);
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
 
@@ -52,7 +52,7 @@ class DatabaseManager
      * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
      * @return array
      */
-    private function migrate(BufferedOutput $outputLog)
+    private function migrate(BufferedOutput $outputLog): array
     {
         try {
             Artisan::call('migrate', ['--force' => true], $outputLog);
@@ -71,7 +71,7 @@ class DatabaseManager
      * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
      * @return array
      */
-    private function response($message, $status, BufferedOutput $outputLog)
+    private function response($message, $status, BufferedOutput $outputLog): array
     {
         return [
             'status' => $status,
@@ -85,7 +85,7 @@ class DatabaseManager
      *
      * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
      */
-    private function sqlite(BufferedOutput $outputLog)
+    private function sqlite(BufferedOutput $outputLog): void
     {
         if (DB::connection() instanceof SQLiteConnection) {
             $database = DB::connection()->getDatabaseName();
@@ -97,12 +97,12 @@ class DatabaseManager
         }
     }
 
-    private function makeConfig()
+    private function makeConfig(): void
     {
         DbConfig::setConfig('title', 'JuzaCMS - Laravel CMS for Your Project');
         DbConfig::setConfig(
             'description',
-            'Juzaweb is a Content Management System (CMS)'
+            'Juzacms is a Content Management System (CMS)'
             . ' and web platform whose sole purpose is to make your development workflow simple again.'
         );
         DbConfig::setConfig('author_name', 'Juzaweb Team');
@@ -110,12 +110,14 @@ class DatabaseManager
         DbConfig::setConfig('user_verification', 0);
     }
 
-    private function makeEmailTemplate(BufferedOutput $outputLog)
+    private function makeEmailTemplate(BufferedOutput $outputLog): array
     {
         try {
             Artisan::call('mail:generate-template', [], $outputLog);
         } catch (Exception $e) {
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
+
+        return $this->response(trans('cms::installer.final.database_finished'), 'success', $outputLog);
     }
 }
