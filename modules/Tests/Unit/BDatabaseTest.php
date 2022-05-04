@@ -39,4 +39,10 @@ class BDatabaseTest extends TestCase
             ->expectsQuestion('Password?', 'admin@admin.com')
             ->assertExitCode(0);
     }
+
+    public function testMakeEmailTemplate()
+    {
+        $this->artisan('mail:generate-template')
+            ->assertExitCode(0);
+    }
 }
