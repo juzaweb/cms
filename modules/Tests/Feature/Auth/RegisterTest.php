@@ -12,6 +12,7 @@ namespace Juzaweb\Tests\Feature\Auth;
 
 use Faker\Generator as Faker;
 use Juzaweb\Backend\Models\EmailList;
+use Juzaweb\Backend\Models\EmailTemplate;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
@@ -63,13 +64,21 @@ class RegisterTest extends TestCase
 
         $this->assertDatabaseHas('users', ['email' => $email, 'status' => 'verification']);
 
-        $this->assertDatabaseHas('email_lists', ['email' => $email]);
+        $template = EmailTemplate::whereCode('verification')->first();
+
+        $this->assertDatabaseHas(
+            'email_lists',
+            [
+                'email' => $email,
+                'template_id' => $template->id
+            ]
+        );
 
         $token = EmailList::with(['template'])
             ->whereEmail($email)
-            ->whereTemplate('verification')
+            ->where('template_id', '=', $template->id)
             ->first();
-        
+
         $this->get("admin-cp/verification/{$email}/{$token->params['verifyToken']}")
             ->assertStatus(302)
             ->assertRedirect(route('login'));
