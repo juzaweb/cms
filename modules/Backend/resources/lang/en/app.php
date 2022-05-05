@@ -445,4 +445,5 @@ return [
     'tools' => 'Tools',
     'import' => 'Import',
     'install_successfully' => 'Install successfully',
+    'reset_password' => 'Reset password',
 ];

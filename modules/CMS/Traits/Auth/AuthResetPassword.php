@@ -16,7 +16,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Juzaweb\Backend\Models\PasswordReset;
-use Juzaweb\CMS\Models\User;
 
 trait AuthResetPassword
 {
@@ -24,21 +23,15 @@ trait AuthResetPassword
     {
         do_action('reset-password.index');
 
-        $user = User::whereEmail($email)
-            ->whereExists(
-                function ($query) use ($email, $token) {
-                    $query->select(['email'])
-                        ->where('email', '=', $email)
-                        ->where('token', '=', $token);
-                }
-            )
+        $passwordReset = PasswordReset::with(['user'])
+            ->where(['email' => $email, 'token' => $token])
             ->firstOrFail();
+
+        $title = trans('cms::app.reset_password');
 
         return view(
             $this->getViewForm(),
-            [
-                'user' => $user,
-            ]
+            compact('email', 'token', 'passwordReset', 'title')
         );
     }
 
@@ -53,37 +46,23 @@ trait AuthResetPassword
             ]
         );
 
-        $user = User::whereEmail($email)
-            ->whereExists(
-                function ($query) use ($email, $token) {
-                    $query->select(['email'])
-                        ->from('password_resets')
-                        ->where('email', '=', $email)
-                        ->where('token', '=', $token);
-                }
-            )
-            ->firstOrFail();
-
-        $passwordReset = PasswordReset::where('email', '=', $email)
-            ->where('token', '=', $token)
+        $passwordReset = PasswordReset::with(['user'])
+            ->where(['email' => $email, 'token' => $token])
             ->firstOrFail();
 
         DB::beginTransaction();
-
         try {
-            $user->update(
+            $passwordReset->user->update(
                 [
                     'password' => Hash::make($request->post('password')),
                 ]
             );
 
             $passwordReset->delete();
-
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (\Exception $e) {
             DB::rollBack();
-
-            throw $exception;
+            throw $e;
         }
 
         return redirect()->route('login');

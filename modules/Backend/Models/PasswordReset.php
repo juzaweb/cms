@@ -2,7 +2,9 @@
 
 namespace Juzaweb\Backend\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Models\User;
 
 /**
  * Juzaweb\Backend\Models\PasswordReset
@@ -29,4 +31,9 @@ class PasswordReset extends Model
     ];
 
     public const UPDATED_AT = null;
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'email', 'email');
+    }
 }

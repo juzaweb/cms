@@ -40,10 +40,30 @@ class ForgotPasswordTest extends TestCase
     {
         $user = User::active()->first();
 
-        $passwordReset = PasswordReset::whereEmail($user->email)
-            ->first();
+        $passwordReset = PasswordReset::whereEmail($user->email)->first();
 
-        $this->get("admin-cp/reset-password/{$passwordReset->email}/{$passwordReset->token}")
+        $uri = "admin-cp/reset-password/{$passwordReset->email}/{$passwordReset->token}";
+
+        $this->get($uri)->assertStatus(200);
+
+        $this->json(
+            'POST',
+            $uri,
+            [
+                'password' => 'Asd123@@',
+                'password_confirmation' => 'Asd123@',
+            ]
+        )
+            ->assertJsonValidationErrors(['password']);
+
+        $this->json(
+            'POST',
+            $uri,
+            [
+                'password' => 'Asd123@@',
+                'password_confirmation' => 'Asd123@@',
+            ]
+        )
             ->assertStatus(302)
             ->assertRedirect(route('login'));
 

@@ -12,7 +12,7 @@ namespace Juzaweb\Tests\Unit;
 
 use Juzaweb\Tests\TestCase;
 
-class BDatabaseTest extends TestCase
+class DatabaseTest extends TestCase
 {
     public function testMigration()
     {

@@ -63,7 +63,7 @@ class EmailList extends Model
     const STATUS_CANCEL = 'cancel';
     const STATUS_ERROR = 'error';
 
-    public static function mapParams($string, $params = [])
+    public static function mapParams($string, $params = []): string
     {
         $temp = Twig::createTemplate($string);
         return $temp->render($params);
