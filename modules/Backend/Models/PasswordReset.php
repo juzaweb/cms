@@ -21,6 +21,7 @@ use Juzaweb\CMS\Models\Model;
 class PasswordReset extends Model
 {
     protected $primaryKey = 'email';
+    protected $keyType = 'string';
 
     protected $table = 'password_resets';
     protected $fillable = [

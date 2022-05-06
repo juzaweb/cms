@@ -54,7 +54,7 @@ class ForgotPasswordTest extends TestCase
         $passwordReset = PasswordReset::whereEmail($this->user->email)->first();
 
         $uri = "admin-cp/reset-password/{$passwordReset->email}/{$passwordReset->token}";
-        var_dump($uri);
+
         $this->get($uri)->assertStatus(200);
 
         $this->json(
@@ -75,7 +75,7 @@ class ForgotPasswordTest extends TestCase
                 'password_confirmation' => 'Asd123@@',
             ]
         )
-            ->assertStatus(302)
+            ->assertStatus(200)
             ->assertJson(['status' => true]);
 
         $this->assertDatabaseMissing(

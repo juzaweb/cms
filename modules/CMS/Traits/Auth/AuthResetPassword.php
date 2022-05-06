@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Traits\Auth;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,13 +39,13 @@ trait AuthResetPassword
         );
     }
 
-    public function resetPassword($email, $token, Request $request): RedirectResponse
+    public function resetPassword($email, $token, Request $request): JsonResponse|RedirectResponse
     {
         do_action('auth.reset-password.handle');
 
         $request->validate(
             [
-                'password' => 'required|string|min:6|max:32',
+                'password' => 'required|string|min:6|max:32|confirmed',
                 'password_confirmation' => 'required|string|max:32|min:6',
             ]
         );
@@ -72,6 +73,7 @@ trait AuthResetPassword
         return $this->success(
             [
                 'redirect' => route('login'),
+                'message' => trans('cms::app.change_password_successfully'),
             ]
         );
     }
