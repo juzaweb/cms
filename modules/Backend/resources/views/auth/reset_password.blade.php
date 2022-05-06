@@ -12,15 +12,15 @@
 
                         <form action="{{ route('admin.reset_password', [$email, $token]) }}" method="post" class="mb-4 form-ajax">
                             <div class="form-group mb-4">
-                                <input type="password" name="password" class="form-control" placeholder="@lang('cms::app.password')" autocomplete="off"/>
+                                <input type="password" name="password" class="form-control" placeholder="@lang('cms::app.password')" autocomplete="off" required />
                             </div>
 
                             <div class="form-group mb-4">
-                                <input type="password" name="password" class="form-control" placeholder="@lang('cms::app.password')" autocomplete="off"/>
+                                <input type="password" name="password_confirmation" class="form-control" placeholder="@lang('cms::app.password_confirmation')" autocomplete="off" required />
                             </div>
 
-                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="@lang('cms::app.please-wait')">
-                                <i class="fa fa-refresh"></i> @lang('cms::app.reset-password')
+                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="{{ trans('cms::app.please_wait') }}">
+                                <i class="fa fa-refresh"></i> {{ trans('cms::app.reset_password') }}
                             </button>
                         </form>
                     </div>

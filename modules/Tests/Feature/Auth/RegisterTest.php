@@ -72,7 +72,7 @@ class RegisterTest extends TestCase
                 'template_id' => $template->id
             ]
         );
-        dd(EmailList::get());
+
         $token = EmailList::with(['template'])
             ->whereEmail($email)
             ->where('template_id', '=', $template->id)

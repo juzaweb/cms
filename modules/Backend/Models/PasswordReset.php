@@ -31,9 +31,4 @@ class PasswordReset extends Model
     ];
 
     public const UPDATED_AT = null;
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'email', 'email');
-    }
 }

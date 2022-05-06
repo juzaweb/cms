@@ -16,6 +16,15 @@ use Juzaweb\Tests\TestCase;
 
 class ForgotPasswordTest extends TestCase
 {
+    private User $user;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::active()->first();
+    }
+
     public function testIndex()
     {
         $this->get('admin-cp/forgot-password')->assertStatus(200);
@@ -23,27 +32,23 @@ class ForgotPasswordTest extends TestCase
 
     public function testSubmit()
     {
-        $user = User::active()->first();
-
         $this->json(
             'POST',
             'admin-cp/forgot-password',
-            ['email' => $user->email]
+            ['email' => $this->user->email]
         )->assertJson(['status' => true]);
 
-        $this->assertDatabaseHas('password_resets', ['email' => $user->email]);
+        $this->assertDatabaseHas('password_resets', ['email' => $this->user->email]);
 
-        $this->assertDatabaseHas('email_lists', ['email' => $user->email]);
+        $this->assertDatabaseHas('email_lists', ['email' => $this->user->email]);
     }
 
     public function testResetPassword()
     {
-        $user = User::active()->first();
-
-        $passwordReset = PasswordReset::whereEmail($user->email)->first();
+        $passwordReset = PasswordReset::whereEmail($this->user->email)->first();
 
         $uri = "admin-cp/reset-password/{$passwordReset->email}/{$passwordReset->token}";
-        dump($uri);
+
         $this->get($uri)->assertStatus(200);
 
         $this->json(
@@ -65,8 +70,11 @@ class ForgotPasswordTest extends TestCase
             ]
         )
             ->assertStatus(302)
-            ->assertRedirect(route('login'));
+            ->assertJson(['status' => true]);
 
-        $this->assertDatabaseMissing('password_resets', ['email' => $user->email]);
+        $this->assertDatabaseMissing(
+            'password_resets',
+            ['email' => $this->user->email]
+        );
     }
 }

@@ -16,15 +16,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Juzaweb\Backend\Models\PasswordReset;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Traits\ResponseMessage;
 
 trait AuthResetPassword
 {
+    use ResponseMessage;
+
     public function index($email, $token): View
     {
         do_action('reset-password.index');
 
-        $passwordReset = PasswordReset::with(['user'])
-            ->where(['email' => $email, 'token' => $token])
+        $passwordReset = PasswordReset::where(['email' => $email, 'token' => $token])
             ->firstOrFail();
 
         $title = trans('cms::app.reset_password');
@@ -46,13 +49,14 @@ trait AuthResetPassword
             ]
         );
 
-        $passwordReset = PasswordReset::with(['user'])
-            ->where(['email' => $email, 'token' => $token])
+        $passwordReset = PasswordReset::where(['email' => $email, 'token' => $token])
             ->firstOrFail();
+
+        $user = User::whereEmail($passwordReset->email)->firstOrFail();
 
         DB::beginTransaction();
         try {
-            $passwordReset->user->update(
+            $user->update(
                 [
                     'password' => Hash::make($request->post('password')),
                 ]
@@ -65,7 +69,11 @@ trait AuthResetPassword
             throw $e;
         }
 
-        return redirect()->route('login');
+        return $this->success(
+            [
+                'redirect' => route('login'),
+            ]
+        );
     }
 
     protected function getViewForm(): string
