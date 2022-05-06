@@ -47,4 +47,26 @@ class Facade
             ]
         );
     }
+
+    public static function defaultImageMimetypes(): Collection
+    {
+        return collect(
+            [
+                'image/jpeg',
+                'image/pjpeg',
+                'image/png',
+                'image/gif',
+                'image/svg+xml',
+            ]
+        );
+    }
+
+    public static function defaultSVGMimetypes(): Collection
+    {
+        return collect(
+            [
+                'image/svg+xml',
+            ]
+        );
+    }
 }
