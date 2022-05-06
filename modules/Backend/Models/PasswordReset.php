@@ -2,9 +2,7 @@
 
 namespace Juzaweb\Backend\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Models\User;
 
 /**
  * Juzaweb\Backend\Models\PasswordReset
