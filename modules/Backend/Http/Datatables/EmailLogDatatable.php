@@ -13,8 +13,7 @@ namespace Juzaweb\Backend\Http\Datatables;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Facades\Site;
-use Juzaweb\Jobs\SendEmailJob;
+use Juzaweb\CMS\Jobs\SendEmailJob;
 use Juzaweb\Backend\Models\EmailList;
 use Juzaweb\CMS\Support\SendEmail;
 
@@ -47,20 +46,12 @@ class EmailLogDatatable extends DataTable
                 'label' => trans('cms::app.status'),
                 'width' => '10%',
                 'formatter' => function ($value, $row, $index) {
-                    switch ($value) {
-                        case EmailList::STATUS_SUCCESS:
-                            return '<span class="text-success">'. trans('cms::app.sended') .'</span>';
-                            break;
-                        case EmailList::STATUS_PENDING:
-                            return '<span class="text-warning">'. trans('cms::app.pending') .'</span>';
-                            break;
-                        case EmailList::STATUS_CANCEL:
-                            return '<span class="text-success">'.trans('cms::app.cancel').'</span>';
-                            break;
-                        default:
-                            return '<span class="text-danger">'.trans('cms::app.error').'</span>';
-                            break;
-                    }
+                    return match ($value) {
+                        EmailList::STATUS_SUCCESS => '<span class="text-success">'.trans('cms::app.sended').'</span>',
+                        EmailList::STATUS_PENDING => '<span class="text-warning">'.trans('cms::app.pending').'</span>',
+                        EmailList::STATUS_CANCEL => '<span class="text-success">'.trans('cms::app.cancel').'</span>',
+                        default => '<span class="text-danger">'.trans('cms::app.error').'</span>',
+                    };
                 }
             ],
             'updated_at' => [
@@ -78,17 +69,19 @@ class EmailLogDatatable extends DataTable
      * Query data datatable
      *
      * @param array $data
-     * @return Builder
+     * @return \Illuminate\Database\Eloquent\Builder|Builder
      */
     public function query($data)
     {
         $query = EmailList::with(['template']);
 
         if ($search = Arr::get($data, 'keyword')) {
-            $query->where(function (Builder $q) use ($search) {
-                $q->where('subject', JW_SQL_LIKE, '%'. $search .'%');
-                $q->orWhere('content', JW_SQL_LIKE, '%'. $search .'%');
-            });
+            $query->where(
+                function (Builder $q) use ($search) {
+                    $q->where('subject', JW_SQL_LIKE, '%'. $search .'%');
+                    $q->orWhere('content', JW_SQL_LIKE, '%'. $search .'%');
+                }
+            );
         }
 
         if ($status = Arr::get($data, 'status')) {
@@ -98,7 +91,7 @@ class EmailLogDatatable extends DataTable
         return $query;
     }
 
-    public function actions()
+    public function actions(): array
     {
         return [
             'delete' => trans('cms::app.delete'),
@@ -118,10 +111,13 @@ class EmailLogDatatable extends DataTable
                 $status = EmailList::STATUS_PENDING;
 
                 $emailLists = EmailList::whereIn('id', $ids)
-                    ->whereIn('status', [
-                        EmailList::STATUS_PENDING,
-                        EmailList::STATUS_ERROR
-                    ])
+                    ->whereIn(
+                        'status',
+                        [
+                            EmailList::STATUS_PENDING,
+                            EmailList::STATUS_ERROR
+                        ]
+                    )
                     ->get();
 
                 foreach ($emailLists as $emailList) {
@@ -134,22 +130,29 @@ class EmailLogDatatable extends DataTable
                             break;
                     }
 
-                    $emailList->update([
-                        'status' => $status
-                    ]);
+                    $emailList->update(
+                        [
+                            'status' => $status
+                        ]
+                    );
                 }
 
                 break;
             case 'cancel':
                 $status = $action;
                 EmailList::whereIn('id', $ids)
-                    ->whereIn('status', [
-                        EmailList::STATUS_PENDING,
-                        EmailList::STATUS_ERROR
-                    ])
-                    ->update([
-                        'status' => $status
-                    ]);
+                    ->whereIn(
+                        'status',
+                        [
+                            EmailList::STATUS_PENDING,
+                            EmailList::STATUS_ERROR
+                        ]
+                    )
+                    ->update(
+                        [
+                            'status' => $status
+                        ]
+                    );
         }
     }
 }

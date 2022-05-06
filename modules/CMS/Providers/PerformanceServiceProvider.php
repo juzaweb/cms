@@ -2,16 +2,14 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzawebcms/juzawebcms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://github.com/juzawebcms/juzawebcms
+ * @link       https://github.com/juzaweb/juzacms
  * @license    MIT
  */
 
 namespace Juzaweb\CMS\Providers;
 
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Juzaweb\CMS\Support\BladeMinifyCompiler;
 
@@ -31,8 +29,11 @@ class PerformanceServiceProvider extends ServiceProvider
 
     protected function registerBladeCompiler()
     {
-        $this->app->singleton('blade.compiler', function ($app) {
-            return new BladeMinifyCompiler($app['files'], $app['config']['view.compiled']);
-        });
+        $this->app->singleton(
+            'blade.compiler',
+            function ($app) {
+                return new BladeMinifyCompiler($app['files'], $app['config']['view.compiled']);
+            }
+        );
     }
 }

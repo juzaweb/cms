@@ -11,13 +11,14 @@
 namespace Juzaweb\Tests\Feature\Frontend;
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Collection;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\Tests\TestCase;
 
-class APostTest extends TestCase
+class PostTest extends TestCase
 {
-    protected $postTypes;
+    protected Collection $postTypes;
 
     protected function setUp(): void
     {
@@ -143,7 +144,7 @@ class APostTest extends TestCase
         }
     }
 
-    protected function getUrlPost($postType, $post)
+    protected function getUrlPost($postType, $post): string
     {
         $key = $postType->get('key');
         $base = '';

@@ -2,9 +2,9 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzawebcms/juzawebcms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://github.com/juzawebcms/juzawebcms
+ * @link       https://github.com/juzaweb/juzacms
  * @license    MIT
  */
 
@@ -179,27 +179,27 @@ trait ResourceController
             ...$params
         );
     }
-    
+
     public function datatable(Request $request, ...$params)
     {
         $table = $this->getDataTable(...$params);
         $table->setCurrentUrl(action([static::class, 'index'], $params));
-        
+
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
         $limit = (int) $request->get('limit', 20);
-    
+
         $query = $table->query($request->all());
         $count = $query->count();
         $query->orderBy($sort, $order);
         $query->offset($offset);
         $query->limit($limit);
         $rows = $query->get();
-    
+
         $results = [];
         $columns = $table->columns();
-    
+
         foreach ($rows as $index => $row) {
             $columns['id'] = $row->id;
             foreach ($columns as $col => $column) {
@@ -214,7 +214,7 @@ trait ResourceController
                 }
             }
         }
-    
+
         return response()->json(
             [
                 'total' => $count,
@@ -222,7 +222,7 @@ trait ResourceController
             ]
         );
     }
-    
+
     public function bulkActions(Request $request, ...$params)
     {
         $request->validate(
@@ -231,13 +231,13 @@ trait ResourceController
                 'action' => 'required',
             ]
         );
-    
+
         $action = $request->post('action');
         $ids = $request->post('ids');
-    
+
         $table = $this->getDataTable(...$params);
         $table->bulkActions($action, $ids);
-    
+
         return $this->success(
             [
                 'message' => trans('cms::app.successfully'),
@@ -349,7 +349,7 @@ trait ResourceController
         $dataTable->setDataUrl(action([static::class, 'datatable'], $params));
         $dataTable->setActionUrl(action([static::class, 'bulkActions'], $params));
         $dataTable->setCurrentUrl(action([static::class, 'index'], $params));
-        
+
         $canCreate = $this->getPermission(
             'create',
             $this->getModel(...$params),
@@ -415,7 +415,7 @@ trait ResourceController
     {
         $this->authorize($ability, $arguments);
     }
-    
+
     protected function getPermission($ability, $arguments = [], ...$params)
     {
         $response = Gate::inspect($ability, $arguments);

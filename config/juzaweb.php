@@ -1,5 +1,7 @@
 <?php
 
+use Juzaweb\CMS\Facades\Facade;
+
 return [
     /**
      * Admin url prefix
@@ -29,17 +31,6 @@ return [
          * Default: sync
          */
         'method' => env('EMAIL_METHOD', 'sync'),
-
-        'default' => [
-            'driver' => env('MAIL_MAILER'),
-            'host' => env('MAIL_HOST'),
-            'port' => env('MAIL_HOST'),
-            'from_address' => env('MAIL_FROM_ADDRESS'),
-            'from_name' => env('MAIL_FROM_NAME'),
-            'encryption' => env('MAIL_ENCRYPTION'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
-        ],
     ],
 
     'theme' => [
@@ -48,7 +39,7 @@ return [
          *
          * Default: true
          */
-        'enable_upload' => true,
+        'enable_upload' => (bool) env('ENABLE_UPLOAD_THEME', true),
 
         /**
          * Themes path
@@ -65,7 +56,7 @@ return [
          *
          * Default: true
          */
-        'enable_upload' => true,
+        'enable_upload' => (bool) env('ENABLE_UPLOAD_PLUGIN', true),
 
         /**
          * Path plugins folder
@@ -105,15 +96,29 @@ return [
      */
     'filemanager' => [
         /**
-         * FileSystem disk
+         * FileSystem upload disk
          */
         'disk' => 'public',
+
         /**
          * Optimizer image after upload
          *
          * @see https://juzaweb.com/documentation/start/image-optimizer
          */
         'image-optimizer' => (bool) env('IMAGE_OPTIMIZER', false),
+
+        'image_mimetypes' => Facade::defaultImageMimetypes()->merge(
+            [
+                // ...
+            ]
+        )->toArray(),
+
+        'svg_mimetypes' => Facade::defaultSVGMimetypes()->merge(
+            [
+                // ...
+            ]
+        )->toArray(),
+
         /**
          * File type
          *
@@ -146,35 +151,9 @@ return [
         ],
     ],
 
-    /**
-     * Default database config
-     */
-    'config' => [
-        'title',
-        'description',
-        'banner',
-        'logo',
-        'icon',
-        'banner',
-        'sitename',
-        'user_registration',
-        'user_verification',
-        'comment_able',
-        'comment_type',
-        'comments_per_page',
-        'comments_approval',
-        'author_name',
-        'facebook',
-        'twitter',
-        'pinterest',
-        'youtube',
-        'google_analytics',
-        'language',
-        'timezone',
-        'date_format',
-        'time_format',
-        'fb_app_id',
-        'backend_messages',
-        'socialites',
-    ]
+    'config' => Facade::defaultConfigs()->merge(
+        [
+            // ...
+        ]
+    )->toArray()
 ];

@@ -2,9 +2,9 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzawebcms/juzawebcms
+ * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
- * @link       https://github.com/juzawebcms/juzawebcms
+ * @link       https://github.com/juzaweb/juzacms
  * @license    MIT
  */
 
@@ -20,9 +20,9 @@ use Juzaweb\Tests\TestCase;
 
 class PostTest extends TestCase
 {
-    protected $user;
+    protected User|null $user;
 
-    protected $postTypes;
+    protected Collection $postTypes;
 
     protected function setUp(): void
     {
@@ -110,9 +110,9 @@ class PostTest extends TestCase
      *
      * @param Collection $postType
      *
-     * @return array|false
+     * @return array|bool
      */
-    protected function makerData($postType)
+    protected function makerData(Collection $postType): bool|array
     {
         $faker = app(Faker::class);
         $title = $faker->sentence(10);

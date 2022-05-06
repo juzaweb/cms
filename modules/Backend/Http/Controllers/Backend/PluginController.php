@@ -106,7 +106,7 @@ class PluginController extends BackendController
             try {
                 switch ($action) {
                     case 'delete':
-                        if (config('juzaweb.plugin.enable_upload')) {
+                        if (!config('juzaweb.plugin.enable_upload')) {
                             throw new \Exception('Access deny.');
                         }
                         /**

@@ -26,4 +26,47 @@ class PluginTest extends TestCase
         $this->get("/admin-cp/plugins")
             ->assertStatus(200);
     }
+
+    public function testActivePlugin()
+    {
+        $this->json(
+            'POST',
+            'admin-cp/plugins/bulk-actions',
+            [
+                'ids' => ['juzaweb/example'],
+                'action' => 'activate'
+            ]
+        )
+            ->assertJson(['status' => true]);
+    }
+
+    public function testDeactivePlugin()
+    {
+        $this->json(
+            'POST',
+            'admin-cp/plugins/bulk-actions',
+            [
+                'ids' => ['juzaweb/example'],
+                'action' => 'deactivate'
+            ]
+        )
+            ->assertJson(['status' => true]);
+    }
+
+    public function testDeletePlugin()
+    {
+        $this->json(
+            'POST',
+            'admin-cp/plugins/bulk-actions',
+            [
+                'ids' => ['juzaweb/example'],
+                'action' => 'delete'
+            ]
+        )
+            ->assertJson(['status' => true]);
+
+        $this->assertFileDoesNotExist(
+            config('juzaweb.plugin.path') . '/juzaweb/example/composer.json'
+        );
+    }
 }
