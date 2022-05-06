@@ -30,6 +30,11 @@ class ListenerMakeCommand extends GeneratorCommand
      */
     protected $description = 'Create a new event listener class for the specified plugin';
 
+    public function getDefaultNamespace(): string
+    {
+        return 'Listeners';
+    }
+
     /**
      * Get the console command arguments.
      *
@@ -68,9 +73,24 @@ class ListenerMakeCommand extends GeneratorCommand
         ]))->render();
     }
 
-    public function getDefaultNamespace(): string
+    /**
+     * @return string
+     */
+    protected function getStubName(): string
     {
-        return 'Listeners';
+        if ($this->option('queued')) {
+            if ($this->option('event')) {
+                return '/listener-queued.stub';
+            }
+
+            return '/listener-queued-duck.stub';
+        }
+
+        if ($this->option('event')) {
+            return '/listener.stub';
+        }
+
+        return '/listener-duck.stub';
     }
 
     protected function getEventName(Plugin $module)
@@ -95,25 +115,5 @@ class ListenerMakeCommand extends GeneratorCommand
     protected function getFileName()
     {
         return Str::studly($this->argument('name'));
-    }
-
-    /**
-     * @return string
-     */
-    protected function getStubName(): string
-    {
-        if ($this->option('queued')) {
-            if ($this->option('event')) {
-                return '/listener-queued.stub';
-            }
-
-            return '/listener-queued-duck.stub';
-        }
-
-        if ($this->option('event')) {
-            return '/listener.stub';
-        }
-
-        return '/listener-duck.stub';
     }
 }

@@ -10,6 +10,9 @@
 
 namespace Juzaweb\CMS\Traits\Auth;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -22,24 +25,30 @@ trait AuthForgotPassword
 {
     use ResponseMessage;
 
-    public function index()
+    public function index(): View
     {
         do_action('forgot-password.index');
 
-        return view('cms::auth.forgot_password', [
-            'title' => trans('cms::app.forgot_password'),
-        ]);
+        return view(
+            $this->getViewForm(),
+            [
+                'title' => trans('cms::app.forgot_password'),
+            ]
+        );
     }
 
-    public function forgotPassword(Request $request)
+    public function forgotPassword(Request $request): JsonResponse|RedirectResponse
     {
         do_action('forgot-password.handle', $request);
 
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-        ], [
-            'email.exists' => trans('cms::app.email_does_not_exists')
-        ]);
+        $request->validate(
+            [
+                'email' => 'required|email|exists:users,email',
+            ],
+            [
+                'email.exists' => trans('cms::app.email_does_not_exists')
+            ]
+        );
 
         $email = $request->post('email');
         $user = User::whereEmail($email)
@@ -52,44 +61,58 @@ trait AuthForgotPassword
                 Email::make()
                     ->withTemplate('forgot_password')
                     ->setEmails([$request->post('email')])
-                    ->setParams([
-                        'name' => $user->name,
-                        'email' => $email,
-                        'token' => $passwordReset->token,
-                        'url' => route('reset_password', [
+                    ->setParams(
+                        [
+                            'name' => $user->name,
                             'email' => $email,
                             'token' => $passwordReset->token,
-                        ]),
-                    ])
+                            'url' => route(
+                                'reset_password',
+                                [
+                                    'email' => $email,
+                                    'token' => $passwordReset->token,
+                                ]
+                            ),
+                        ]
+                    )
                     ->send();
             }
 
-            return $this->success([
-                'message' => trans('cms::app.send_email_successfully'),
-                'redirect' => route('forgot_password')
-            ]);
+            return $this->success(
+                [
+                    'message' => trans('cms::app.send_email_successfully'),
+                    'redirect' => route('forgot_password')
+                ]
+            );
         }
 
         DB::beginTransaction();
         try {
             $resetToken = Str::random(32);
-            PasswordReset::create([
-                'email' => $email,
-                'token' => $resetToken,
-            ]);
+            PasswordReset::create(
+                [
+                    'email' => $email,
+                    'token' => $resetToken,
+                ]
+            );
 
             Email::make()
                 ->withTemplate('forgot_password')
                 ->setEmails([$request->post('email')])
-                ->setParams([
-                    'name' => $user->name,
-                    'email' => $email,
-                    'token' => $resetToken,
-                    'url' => route('reset_password', [
+                ->setParams(
+                    [
+                        'name' => $user->name,
                         'email' => $email,
                         'token' => $resetToken,
-                    ]),
-                ])
+                        'url' => route(
+                            'reset_password',
+                            [
+                                'email' => $email,
+                                'token' => $resetToken,
+                            ]
+                        ),
+                    ]
+                )
                 ->send();
 
             DB::commit();
@@ -98,9 +121,16 @@ trait AuthForgotPassword
             throw $e;
         }
 
-        return $this->success([
-            'message' => trans('cms::app.send_email_successfully'),
-            'redirect' => route('forgot_password')
-        ]);
+        return $this->success(
+            [
+                'message' => trans('cms::app.send_email_successfully'),
+                'redirect' => route('forgot_password')
+            ]
+        );
+    }
+
+    protected function getViewForm(): string
+    {
+        return 'cms::auth.forgot_password';
     }
 }

@@ -31,7 +31,7 @@ function body_class($class = '')
 
 function theme_assets(string $path, string $theme = null)
 {
-    if (strpos($path, 'jw-styles/') === 0) {
+    if (str_starts_with($path, 'jw-styles/')) {
         return asset($path);
     }
 
@@ -41,7 +41,7 @@ function theme_assets(string $path, string $theme = null)
 }
 
 if (! function_exists('page_url')) {
-    function page_url($slug)
+    function page_url($slug): string
     {
         return url()->to($slug);
     }
@@ -54,7 +54,7 @@ if (! function_exists('page_url')) {
  * @param string $path
  * @return string
  */
-function theme_path(string $theme, $path = '')
+function theme_path(string $theme, string $path = ''): string
 {
     return Theme::getThemePath($theme, $path);
 }
@@ -64,9 +64,9 @@ if (! file_exists('jw_theme_info')) {
      * Get particular theme all information.
      *
      * @param string|null $theme
-     * @return null|Config|Collection
+     * @return null|\Noodlehaus\Config|Collection
      */
-    function jw_theme_info(string $theme = null)
+    function jw_theme_info(string $theme = null): Collection|\Noodlehaus\Config|null
     {
         if (empty($theme)) {
             return jw_theme_info(jw_current_theme());
@@ -82,7 +82,7 @@ if (! function_exists('jw_current_theme')) {
      *
      * @return string
      */
-    function jw_current_theme()
+    function jw_current_theme(): string
     {
         $theme = get_config('theme_statuses', []);
         return Arr::get($theme, 'name', 'default');
@@ -96,7 +96,7 @@ if (! function_exists('jw_theme_config')) {
      * @param string|null $theme
      * @return Collection
      */
-    function jw_theme_config(string $theme = null)
+    function jw_theme_config(string $theme = null): Collection
     {
         if (empty($theme)) {
             $theme = jw_current_theme();
@@ -122,20 +122,20 @@ if (! function_exists('get_name_template_part')) {
      * @param string $name
      * @return string
      */
-    function get_name_template_part($type, $slug, $name = null)
+    function get_name_template_part($type, $slug, $name = null): string
     {
         $name = (string) $name;
 
         if ($name !== '') {
             $template = "{$slug}-{$name}";
-            if (view()->exists(theme_viewname('theme::template-parts.' . $template))) {
+            if (view()->exists(theme_viewname("theme::template-parts.{$template}"))) {
                 return $template;
             }
         }
 
-        if (!in_array($type, ['post'])) {
+        if ($type != 'post') {
             $template = "{$slug}-{$type}";
-            if (view()->exists(theme_viewname('theme::template-parts.' . $template))) {
+            if (view()->exists(theme_viewname("theme::template-parts.{$template}"))) {
                 return $template;
             }
         }
@@ -151,7 +151,7 @@ if (! function_exists('jw_menu_items')) {
      * @param Menu $menu
      * @return Collection
      */
-    function jw_menu_items($menu)
+    function jw_menu_items(Menu $menu): Collection
     {
         return $menu->items()
             ->orderBy('num_order', 'ASC')
@@ -160,14 +160,14 @@ if (! function_exists('jw_menu_items')) {
 }
 
 if (! function_exists('jw_page_menu')) {
-    function jw_page_menu($args)
+    function jw_page_menu(?array $args): string
     {
         return trans('cms::app.menu_not_found');
     }
 }
 
 if (! function_exists('jw_nav_menu')) {
-    function jw_nav_menu($args = [])
+    function jw_nav_menu(?array $args = [])
     {
         $defaults = [
             'menu' => '',
@@ -193,19 +193,17 @@ if (! function_exists('jw_nav_menu')) {
             $menu = get_menu_by_theme_location($args['theme_location']);
         }
 
-        if (empty($menu)) {
-            return call_user_func($args['fallback_cb'], $args);
-        }
-
         if (is_numeric($menu)) {
             $menu = Menu::find($menu);
         }
 
+        if (empty($menu)) {
+            return call_user_func($args['fallback_cb'], $args);
+        }
+
         $items = jw_menu_items($menu);
         $builder = new MenuBuilder($items, $args);
-        $data = $builder->render();
-
-        return $data;
+        return $builder->render();
     }
 }
 
@@ -293,7 +291,7 @@ if (! function_exists('get_logo')) {
 }
 
 if (! function_exists('get_icon')) {
-    function get_icon($default = null)
+    function get_icon($default = null): string
     {
         return upload_url(
             get_config('icon'),
@@ -303,21 +301,21 @@ if (! function_exists('get_icon')) {
 }
 
 if (! function_exists('is_home')) {
-    function is_home()
+    function is_home(): bool
     {
         return Route::currentRouteName() == 'home';
     }
 }
 
 if (! function_exists('jw_get_sidebar')) {
-    function jw_get_sidebar($key)
+    function jw_get_sidebar($key): Collection
     {
         return HookAction::getSidebars($key);
     }
 }
 
 if (! function_exists('jw_get_widgets_sidebar')) {
-    function jw_get_widgets_sidebar($key)
+    function jw_get_widgets_sidebar($key): Collection
     {
         $content = get_theme_config('sidebar_' . $key, []);
 
@@ -335,10 +333,13 @@ if (! function_exists('dynamic_sidebar')) {
 
         $widgets = jw_get_widgets_sidebar($key);
 
-        return view('cms::components.dynamic_sidebar', compact(
-            'widgets',
-            'sidebar'
-        ));
+        return view(
+            'cms::components.dynamic_sidebar',
+            compact(
+                'widgets',
+                'sidebar'
+            )
+        );
     }
 }
 
@@ -354,15 +355,18 @@ if (! function_exists('dynamic_block')) {
             }
         );
 
-        return view('cms::components.dynamic_block', compact(
-            'data',
-            'blocks'
-        ));
+        return view(
+            'cms::components.dynamic_block',
+            compact(
+                'data',
+                'blocks'
+            )
+        );
     }
 }
 
 if (! function_exists('installed_themes')) {
-    function installed_themes()
+    function installed_themes(): array
     {
         $themes = Theme::all();
 
@@ -375,10 +379,10 @@ if (! function_exists('comment_template')) {
      * Show comments frontend
      *
      * @param \Juzaweb\CMS\Traits\PostTypeModel $post
-     * @param string $view
-     * @return \Illuminate\View\View
+     * @param string|null $view
+     * @return void
      */
-    function comment_template($post, $view = null)
+    function comment_template($post, string $view = null): void
     {
         if (empty($view)) {
             $view = 'cms::items.frontend_comment';
@@ -394,33 +398,40 @@ if (! function_exists('comment_template')) {
             ->getData(true);
         $total = $rows->total();
 
-        return Twig::display($view, compact(
-            'comments',
-            'total'
-        ));
+        Twig::display(
+            $view,
+            compact(
+                'comments',
+                'total'
+            )
+        );
     }
 }
 
-function theme_header()
+function theme_header(): void
 {
     do_action('theme.header');
 }
 
-function theme_footer()
+function theme_footer(): void
 {
     do_action('theme.footer');
 }
 
-function theme_after_body()
+function theme_after_body(): void
 {
     do_action('theme.after_body');
 }
 
-function theme_action($action)
+function theme_action($action): void
 {
-    if (in_array($action, [
-        'auth_form',
-    ])) {
+    if (in_array(
+        $action,
+        [
+            'auth_form',
+        ]
+    )
+    ) {
         do_action($action);
     }
 }
@@ -480,33 +491,27 @@ function comment_form($post, $view = 'cms::comment_form')
     );
 }
 
-function get_locale()
+function get_locale(): string
 {
     return app()->getLocale();
 }
 
-function home_url()
+function home_url(): string
 {
     return '/';
 }
 
-function share_url($social, $url, $text = null)
+function share_url($social, $url, $text = null): string
 {
     $url = urlencode($url);
     $text = urlencode($text);
 
-    switch ($social) {
-        case 'facebook':
-            return "https://www.facebook.com/sharer.php?u={$url}";
-        case 'twitter':
-            return "https://twitter.com/intent/tweet?url={$url}&text={$text}";
-        case 'telegram':
-            return "https://t.me/share/url?url={$url}&text={$text}";
-        case 'linkedin':
-            return "https://www.linkedin.com/sharing/share-offsite/?url={$url}";
-        case 'pinterest':
-            return "http://pinterest.com/pin/create/button/?url={$url}&description={$text}";
-    }
-
-    return '';
+    return match ($social) {
+        'facebook' => "https://www.facebook.com/sharer.php?u={$url}",
+        'twitter' => "https://twitter.com/intent/tweet?url={$url}&text={$text}",
+        'telegram' => "https://t.me/share/url?url={$url}&text={$text}",
+        'linkedin' => "https://www.linkedin.com/sharing/share-offsite/?url={$url}",
+        'pinterest' => "https://pinterest.com/pin/create/button/?url={$url}&description={$text}",
+        default => '',
+    };
 }

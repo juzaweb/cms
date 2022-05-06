@@ -18,20 +18,20 @@ use Juzaweb\Backend\Models\EmailTemplate;
 class EmailTemplateGenerateCommand extends Command
 {
     protected $signature = 'mail:generate-template';
-    
-    public function handle()
+
+    public function handle(): int
     {
         $basePath = 'modules/Backend/resources/data/mail_templates';
         $files = File::files(base_path($basePath));
-    
+
         foreach ($files as $file) {
             if ($file->getExtension() != 'json') {
                 continue;
             }
-            
+
             $code = $file->getFilenameWithoutExtension();
             $data = json_decode(File::get($file->getRealPath()), true);
-    
+
             EmailTemplate::firstOrCreate(
                 [
                     'code' => $code,
@@ -42,10 +42,10 @@ class EmailTemplateGenerateCommand extends Command
                     'params' => Arr::get($data, 'params'),
                 ]
             );
-            
+
             $this->info("Created email template: {$code}");
         }
-        
+
         return self::SUCCESS;
     }
 }

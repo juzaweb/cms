@@ -91,6 +91,14 @@ class ProviderMakeCommand extends GeneratorCommand
     }
 
     /**
+     * @return string
+     */
+    private function getFileName()
+    {
+        return Str::studly($this->argument('name'));
+    }
+
+    /**
      * @return mixed
      */
     protected function getDestinationFilePath()
@@ -100,13 +108,5 @@ class ProviderMakeCommand extends GeneratorCommand
         $generatorPath = GenerateConfigReader::read('provider');
 
         return $path . $generatorPath->getPath() . '/' . $this->getFileName() . '.php';
-    }
-
-    /**
-     * @return string
-     */
-    private function getFileName()
-    {
-        return Str::studly($this->argument('name'));
     }
 }

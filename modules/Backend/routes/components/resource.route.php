@@ -8,6 +8,10 @@
  * @license    MIT
  */
 
+use Juzaweb\Backend\Http\Controllers\Backend\ResourceController;
+use Juzaweb\Backend\Http\Controllers\Backend\ChildResourceController;
+use Juzaweb\Backend\Http\Controllers\Backend\PostResourceController;
+
 Route::jwResource(
     'resources/{type}-{post}',
     'Backend\PostResourceController',

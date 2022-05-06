@@ -66,6 +66,11 @@ class ThemeGeneratorCommand extends Command
         $this->init();
     }
 
+    protected function getThemeStubPath()
+    {
+        return JW_PACKAGE_PATH . '/stubs/theme';
+    }
+
     /**
      * Theme Initialize.
      *
@@ -112,6 +117,20 @@ class ThemeGeneratorCommand extends Command
     }
 
     /**
+     * Make directory.
+     *
+     * @param string $directory
+     *
+     * @return void
+     */
+    protected function makeDir($directory)
+    {
+        if (! File::isDirectory($directory)) {
+            File::makeDirectory($directory, 0755, true);
+        }
+    }
+
+    /**
      * Create theme stubs.
      *
      * @param array $themeStubFiles
@@ -133,20 +152,6 @@ class ThemeGeneratorCommand extends Command
 
             $themeStubFile = $this->themeStubPath.'/'.$filename.'.stub';
             $this->makeFile($themeStubFile, $createdThemePath.'/'.$storePath);
-        }
-    }
-
-    /**
-     * Make directory.
-     *
-     * @param string $directory
-     *
-     * @return void
-     */
-    protected function makeDir($directory)
-    {
-        if (! File::isDirectory($directory)) {
-            File::makeDirectory($directory, 0755, true);
         }
     }
 
@@ -197,10 +202,5 @@ class ThemeGeneratorCommand extends Command
         $replaceContents = str_replace($mainString, $replaceString, $contents);
 
         return $replaceContents;
-    }
-
-    protected function getThemeStubPath()
-    {
-        return JW_PACKAGE_PATH . '/stubs/theme';
     }
 }

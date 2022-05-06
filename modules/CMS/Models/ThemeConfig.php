@@ -21,6 +21,8 @@ namespace Juzaweb\CMS\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|ThemeConfig whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ThemeConfig whereValue($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static \Illuminate\Database\Eloquent\Builder|ThemeConfig whereSiteId($value)
  */
 class ThemeConfig extends Model
 {

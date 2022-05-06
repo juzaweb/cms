@@ -10,11 +10,13 @@
 
 namespace Juzaweb\CMS\Traits\Auth;
 
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use Juzaweb\Backend\Events\RegisterSuccessful;
+use Juzaweb\CMS\Http\Requests\Auth\RegisterRequest;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Traits\ResponseMessage;
 
@@ -22,7 +24,7 @@ trait AuthRegisterForm
 {
     use ResponseMessage;
 
-    public function index()
+    public function index(): View
     {
         if (! get_config('users_can_register', 1)) {
             return abort(403, trans('cms::message.register-form.register-closed'));
@@ -32,34 +34,21 @@ trait AuthRegisterForm
 
         do_action('recaptcha.init');
 
-        return view('cms::auth.register', [
-            'title' => trans('cms::app.sign_up'),
-        ]);
+        return view(
+            $this->getViewForm(),
+            [
+                'title' => trans('cms::app.sign_up'),
+            ]
+        );
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request): JsonResponse|RedirectResponse
     {
         do_action('register.handle', $request);
 
         if (! get_config('users_can_register', 1)) {
             return $this->error(trans('cms::message.register-form.register-closed'));
         }
-        
-        // Validate register
-        $request->validate([
-            'email' => [
-                'required',
-                'email',
-                'max:150',
-                Rule::modelUnique(User::class, 'email')
-            ],
-            'password' => [
-                'required',
-                'min:6',
-                'max:32',
-                'confirmed'
-            ],
-        ]);
 
         // Create user
         $name = $request->post('name');
@@ -89,19 +78,23 @@ trait AuthRegisterForm
         do_action('register.success', $user);
 
         if (get_config('user_verification')) {
-            return $this->success([
-                'redirect' => route('register'),
-                'message' => trans('cms::app.registered_success_verify'),
-            ]);
+            return $this->success(
+                [
+                    'redirect' => route('register'),
+                    'message' => trans('cms::app.registered_success_verify'),
+                ]
+            );
         }
 
-        return $this->success([
-            'redirect' => route('login'),
-            'message' => trans('cms::app.registered_success'),
-        ]);
+        return $this->success(
+            [
+                'redirect' => route('login'),
+                'message' => trans('cms::app.registered_success'),
+            ]
+        );
     }
 
-    public function verification($email, $token)
+    public function verification($email, $token): RedirectResponse
     {
         $user = User::whereEmail($email)
             ->where('verification_token', '=', $token)
@@ -110,10 +103,12 @@ trait AuthRegisterForm
         if ($user) {
             DB::beginTransaction();
             try {
-                $user->update([
-                    'status' => 'active',
-                    'verification_token' => null,
-                ]);
+                $user->update(
+                    [
+                        'status' => 'active',
+                        'verification_token' => null,
+                    ]
+                );
 
                 DB::commit();
             } catch (\Exception $exception) {
@@ -125,5 +120,10 @@ trait AuthRegisterForm
         }
 
         return abort(404);
+    }
+
+    protected function getViewForm(): string
+    {
+        return 'cms::auth.register';
     }
 }

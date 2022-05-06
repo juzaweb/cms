@@ -11,11 +11,13 @@
 namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Traits\Macroable;
+use Juzaweb\Backend\Models\PasswordReset;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Database\Factories\UserFactory;
 use Juzaweb\CMS\Traits\ModelCache;
@@ -72,6 +74,11 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $roles_count
  * @method static Builder|User permission($permissions)
  * @method static Builder|User role($roles, $guard = null)
+ * @property int|null $site_id
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read int|null $tokens_count
+ * @method static Builder|User whereSiteId($value)
  */
 class User extends Authenticatable
 {
@@ -119,23 +126,28 @@ class User extends Authenticatable
     /**
      * Create a new factory instance for the model.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
-    protected static function newFactory()
+    protected static function newFactory(): Factory
     {
         return UserFactory::new();
+    }
+
+    public function passwordReset(): HasOne
+    {
+        return $this->hasOne(PasswordReset::class, 'email', 'email');
     }
 
     /**
      * @param Builder $builder
      * @return Builder
      */
-    public function scopeActive($builder)
+    public function scopeActive(Builder $builder): Builder
     {
         return $builder->where('status', '=', User::STATUS_ACTIVE);
     }
 
-    public function getAvatar()
+    public function getAvatar(): string
     {
         if ($this->avatar) {
             return upload_url($this->avatar);

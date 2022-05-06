@@ -12,14 +12,14 @@ namespace Juzaweb\Tests\Unit;
 
 use Juzaweb\Tests\TestCase;
 
-class AOptimizeTest extends TestCase
+class OptimizeTest extends TestCase
 {
     public function testOptimize()
     {
         $this->artisan('optimize')
             ->assertExitCode(0);
     }
-    
+
     public function testOptimizeClear()
     {
         $this->artisan('optimize:clear')

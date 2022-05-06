@@ -81,14 +81,6 @@ class ActionMakeCommand extends GeneratorCommand
     }
 
     /**
-     * @return string
-     */
-    private function getCommandName()
-    {
-        return $this->option('command') ?: 'command:name';
-    }
-
-    /**
      * @return mixed
      */
     protected function getDestinationFilePath()
@@ -106,5 +98,13 @@ class ActionMakeCommand extends GeneratorCommand
     private function getFileName()
     {
         return Str::studly($this->argument('name'));
+    }
+
+    /**
+     * @return string
+     */
+    private function getCommandName()
+    {
+        return $this->option('command') ?: 'command:name';
     }
 }

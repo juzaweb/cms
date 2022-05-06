@@ -8,19 +8,35 @@
  * @license    MIT
  */
 
-Route::jwResource('post-type/{type}/comments', 'Backend\CommentController', [
-    'name' => 'comments'
-]);
+use Juzaweb\Backend\Http\Controllers\Backend\CommentController;
+use Juzaweb\Backend\Http\Controllers\Backend\TaxonomyController;
+use Juzaweb\Backend\Http\Controllers\Backend\PostController;
 
-Route::jwResource('taxonomy/{type}/{taxonomy}', 'Backend\TaxonomyController', [
-    'name' => 'taxonomies'
-]);
+Route::jwResource(
+    'post-type/{type}/comments',
+    CommentController::class,
+    [
+        'name' => 'comments'
+    ]
+);
 
-Route::get('taxonomy/{type}/{taxonomy}/component-item', 'Backend\TaxonomyController@getTagComponent');
+Route::jwResource(
+    'taxonomy/{type}/{taxonomy}',
+    TaxonomyController::class,
+    [
+        'name' => 'taxonomies'
+    ]
+);
 
-Route::jwResource('post-type/{type}', 'Backend\PostController', [
-    'name' => 'posts'
-]);
+Route::get(
+    'taxonomy/{type}/{taxonomy}/component-item',
+    [TaxonomyController::class, 'getTagComponent']
+);
 
-
-
+Route::jwResource(
+    'post-type/{type}',
+    PostController::class,
+    [
+        'name' => 'posts'
+    ]
+);

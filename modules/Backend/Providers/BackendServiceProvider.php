@@ -11,6 +11,7 @@ use Juzaweb\Backend\Actions\SocialLoginAction;
 use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
 use Juzaweb\Backend\Commands\FindTransCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
+use Juzaweb\Backend\Commands\ThemePublishCommand;
 use Juzaweb\Backend\Commands\TransFromEnglish;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Menu;
@@ -20,6 +21,14 @@ use Juzaweb\Backend\Observers\CommentObserver;
 use Juzaweb\Backend\Observers\MenuObserver;
 use Juzaweb\Backend\Observers\PostObserver;
 use Juzaweb\Backend\Observers\TaxonomyObserver;
+use Juzaweb\Backend\Repositories\CommentRepository;
+use Juzaweb\Backend\Repositories\CommentRepositoryEloquent;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\Backend\Repositories\PostRepositoryEloquent;
+use Juzaweb\Backend\Repositories\TaxonomyRepository;
+use Juzaweb\Backend\Repositories\TaxonomyRepositoryEloquent;
+use Juzaweb\Backend\Repositories\UserRepository;
+use Juzaweb\Backend\Repositories\UserRepositoryEloquent;
 use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Http\Middleware\Admin;
 use Juzaweb\CMS\Support\Html\Field;
@@ -28,6 +37,13 @@ use Juzaweb\CMS\Support\ServiceProvider;
 
 class BackendServiceProvider extends ServiceProvider
 {
+    public array $bindings = [
+        PostRepository::class => PostRepositoryEloquent::class,
+        TaxonomyRepository::class => TaxonomyRepositoryEloquent::class,
+        CommentRepository::class => CommentRepositoryEloquent::class,
+        UserRepository::class => UserRepositoryEloquent::class
+    ];
+
     public function boot()
     {
         $this->bootMiddlewares();
@@ -54,6 +70,7 @@ class BackendServiceProvider extends ServiceProvider
                 FindTransCommand::class,
                 TransFromEnglish::class,
                 EmailTemplateGenerateCommand::class,
+                ThemePublishCommand::class,
             ]
         );
     }
@@ -74,7 +91,7 @@ class BackendServiceProvider extends ServiceProvider
     protected function bootMiddlewares()
     {
         /**
-         * @var \Illuminate\Routing\Router $router
+         * @var Router $router
          */
         $router = $this->app['router'];
         $router->aliasMiddleware('admin', Admin::class);

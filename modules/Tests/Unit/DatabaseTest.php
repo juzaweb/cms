@@ -10,9 +10,10 @@
 
 namespace Juzaweb\Tests\Unit;
 
+use Juzaweb\CMS\Database\Seeders\DatabaseSeeder;
 use Juzaweb\Tests\TestCase;
 
-class BDatabaseTest extends TestCase
+class DatabaseTest extends TestCase
 {
     public function testMigration()
     {
@@ -25,7 +26,7 @@ class BDatabaseTest extends TestCase
         $this->artisan(
             'db:seed',
             [
-                '--class' => 'Juzaweb\CMS\Database\Seeders\DatabaseSeeder'
+                '--class' => DatabaseSeeder::class
             ]
         )
             ->assertExitCode(0);
@@ -37,6 +38,12 @@ class BDatabaseTest extends TestCase
             ->expectsQuestion('Full Name?', 'Taylor Otwell')
             ->expectsQuestion('Email?', 'admin@admin.com')
             ->expectsQuestion('Password?', 'admin@admin.com')
+            ->assertExitCode(0);
+    }
+
+    public function testMakeEmailTemplate()
+    {
+        $this->artisan('mail:generate-template')
             ->assertExitCode(0);
     }
 }

@@ -12,18 +12,26 @@
  * Time: 2:24 PM
  */
 
-Route::group(['prefix' => 'plugins'], function () {
-    Route::get('/', 'Backend\PluginController@index')->name('admin.plugin');
+Route::group(
+    ['prefix' => 'plugins'],
+    function () {
+        Route::get('/', 'Backend\PluginController@index')->name('admin.plugin');
 
-    Route::get('/get-data', 'Backend\PluginController@getDataTable')->name('admin.plugin.get-data');
+        Route::get('/get-data', 'Backend\PluginController@getDataTable')->name('admin.plugin.get-data');
 
-    Route::post('/bulk-actions', 'Backend\PluginController@bulkActions')->name('admin.plugin.bulk-actions');
-});
+        Route::post('/bulk-actions', 'Backend\PluginController@bulkActions')->name('admin.plugin.bulk-actions');
+    }
+);
 
-Route::group(['prefix' => 'plugins/install'], function () {
-    Route::get('/', 'Backend\PluginController@install')->name('admin.plugin.install');
+if (config('juzaweb.plugin.enable_upload')) {
+    Route::group(
+        ['prefix' => 'plugins/install'],
+        function () {
+            Route::get('/', 'Backend\PluginController@install')->name('admin.plugin.install');
 
-    Route::get('/all', 'Backend\PluginController@getDataPlugin')->name('admin.plugin.install.all');
+            Route::get('/all', 'Backend\PluginController@getDataPlugin')->name('admin.plugin.install.all');
 
-    Route::post('/update', 'Backend\PluginController@update')->name('admin.plugin.install.update');
-});
+            Route::post('/update', 'Backend\PluginController@update')->name('admin.plugin.install.update');
+        }
+    );
+}

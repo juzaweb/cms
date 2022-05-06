@@ -25,6 +25,7 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|PostRating whereStar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PostRating whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
  */
 class PostRating extends Model
 {

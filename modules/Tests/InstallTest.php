@@ -26,10 +26,8 @@ class InstallTest extends TestCase
             ->assertExitCode(0);
 
         $this->assertTrue(file_exists(Installer::installedPath()));
-    
-        $this->assertTrue(
-            User::where('is_admin', '=', 1)->exists()
-        );
+
+        $this->assertDatabaseHas('users', ['email' => 'demo@gmail.com', 'is_admin' => 1]);
     }
 
     protected function resetTestData()

@@ -43,18 +43,6 @@ class SetupCommand extends Command
     }
 
     /**
-     * Generate the assets folder.
-     */
-    public function generateAssetsFolder()
-    {
-        $this->generateDirectory(
-            public_path('plugins'),
-            'Assets directory created successfully',
-            'Assets directory already exist'
-        );
-    }
-
-    /**
      * Generate the specified directory by given $dir.
      *
      * @param $dir
@@ -72,5 +60,17 @@ class SetupCommand extends Command
         }
 
         $this->error($error);
+    }
+
+    /**
+     * Generate the assets folder.
+     */
+    public function generateAssetsFolder()
+    {
+        $this->generateDirectory(
+            public_path('plugins'),
+            'Assets directory created successfully',
+            'Assets directory already exist'
+        );
     }
 }

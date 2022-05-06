@@ -12,15 +12,15 @@ namespace Juzaweb\Tests\Feature\Backend;
 
 use Juzaweb\Tests\TestCase;
 
-class DPluginTest extends TestCase
+class PluginTest extends TestCase
 {
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->authUserAdmin();
     }
-    
+
     public function testIndexPlugin()
     {
         $this->get("/admin-cp/plugins")

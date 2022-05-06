@@ -26,7 +26,7 @@ class FilterCriteria implements CriteriaInterface
      * @return mixed
      * @throws \Exception
      */
-    public function apply($model, RepositoryInterface $repository)
+    public function apply($model, RepositoryInterface $repository): mixed
     {
         $fields = $repository->getFieldFilterable();
 

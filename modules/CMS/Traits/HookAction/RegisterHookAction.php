@@ -117,6 +117,57 @@ trait RegisterHookAction
     }
 
     /**
+     * @param string $key
+     * @param Collection $args
+     */
+    protected function registerMenuPostType($key, $args)
+    {
+        $supports = $args->get('supports', []);
+        $prefix = 'post-type.';
+
+        $this->addAdminMenu(
+            $args->get('label'),
+            $prefix . $key,
+            [
+                'icon' => $args->get('menu_icon', 'fa fa-edit'),
+                'position' => $args->get('menu_position', 20),
+            ]
+        );
+
+        $this->addAdminMenu(
+            trans('cms::app.all') . ' '. $args->get('label'),
+            $prefix . $key,
+            [
+                'icon' => 'fa fa-list-ul',
+                'position' => 2,
+                'parent' => $prefix . $key,
+            ]
+        );
+
+        $this->addAdminMenu(
+            trans('cms::app.add_new'),
+            $prefix . $key . '.create',
+            [
+                'icon' => 'fa fa-plus',
+                'position' => 3,
+                'parent' => $prefix . $key,
+            ]
+        );
+
+        if (in_array('comment', $supports)) {
+            $this->addAdminMenu(
+                trans('cms::app.comments'),
+                $prefix . $args->get('singular') . '.comments',
+                [
+                    'icon' => 'fa fa-comments',
+                    'position' => 20,
+                    'parent' => $prefix . $key,
+                ]
+            );
+        }
+    }
+
+    /**
      * Register menu box
      *
      * @param string $key
@@ -422,12 +473,15 @@ trait RegisterHookAction
     public function registerFrontendAjax($key, $args = [])
     {
         $defaults = [
-            'callback' => '',
             'auth' => false,
             'key' => $key,
         ];
 
         $args = array_merge($defaults, $args);
+
+        if (empty($args['callback'])) {
+            throw new \Exception('Frontend Ajax callback option is required.');
+        }
 
         GlobalData::set('frontend_ajaxs.' . $key, new Collection($args));
     }
@@ -468,56 +522,5 @@ trait RegisterHookAction
         ];
 
         GlobalData::set('theme_settings.' . $name, new Collection($args));
-    }
-
-    /**
-     * @param string $key
-     * @param Collection $args
-     */
-    protected function registerMenuPostType($key, $args)
-    {
-        $supports = $args->get('supports', []);
-        $prefix = 'post-type.';
-
-        $this->addAdminMenu(
-            $args->get('label'),
-            $prefix . $key,
-            [
-                'icon' => $args->get('menu_icon', 'fa fa-edit'),
-                'position' => $args->get('menu_position', 20),
-            ]
-        );
-
-        $this->addAdminMenu(
-            trans('cms::app.all') . ' '. $args->get('label'),
-            $prefix . $key,
-            [
-                'icon' => 'fa fa-list-ul',
-                'position' => 2,
-                'parent' => $prefix . $key,
-            ]
-        );
-
-        $this->addAdminMenu(
-            trans('cms::app.add_new'),
-            $prefix . $key . '.create',
-            [
-                'icon' => 'fa fa-plus',
-                'position' => 3,
-                'parent' => $prefix . $key,
-            ]
-        );
-
-        if (in_array('comment', $supports)) {
-            $this->addAdminMenu(
-                trans('cms::app.comments'),
-                $prefix . $args->get('singular') . '.comments',
-                [
-                    'icon' => 'fa fa-comments',
-                    'position' => 20,
-                    'parent' => $prefix . $key,
-                ]
-            );
-        }
     }
 }

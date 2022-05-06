@@ -32,26 +32,27 @@ class FileManager
 
     protected $client;
 
-    protected $type = 'image';
+    protected string $type = 'image';
 
-    protected $errors = [];
+    protected array $errors = [];
 
     /**
      * Add file
      *
      * @param $file
      * @param string $type
-     * @param null|int $folderId
-     * @param null|int $userId
+     * @param int|null $folderId
+     * @param int|null $userId
      *
      * @return MediaFile
      * @throws FileManagerException
+     * @throws \Exception
      */
     public static function addFile(
         $file,
-        $type = 'image',
-        $folderId = null,
-        $userId = null
+        string $type = 'image',
+        int|null $folderId = null,
+        int|null $userId = null
     ) {
         return (new self())
             ->withResource($file)
@@ -75,7 +76,7 @@ class FileManager
      *
      * @throws \Exception
      */
-    public function withResource($resource)
+    public function withResource($resource): static
     {
         $this->resource = $resource;
 
@@ -101,10 +102,10 @@ class FileManager
     /**
      * Set media Folder
      *
-     * @param int $folderId
+     * @param int|null $folderId
      * @return $this
-     * */
-    public function setFolder($folderId)
+     */
+    public function setFolder(?int $folderId): static
     {
         if (empty($folderId) || $folderId <= 0) {
             $folderId = null;
@@ -118,17 +119,17 @@ class FileManager
     /**
      * Set media Type
      *
-     * @param string $type
+     * @param string|null $type
      * @return $this
-     * */
-    public function setType($type)
+     */
+    public function setType(?string $type): static
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function setUserId($userId)
+    public function setUserId($userId): static
     {
         $this->user_id = $userId;
 
@@ -139,8 +140,9 @@ class FileManager
      * @return MediaFile
      *
      * @throws FileManagerException
+     * @throws \Exception
      */
-    public function save()
+    public function save(): MediaFile
     {
         global $jw_user;
 
@@ -166,7 +168,6 @@ class FileManager
             }
         }
 
-        DB::beginTransaction();
         try {
             $media = MediaFile::create([
                 'name' => $uploadedFile->getClientOriginalName(),
@@ -176,13 +177,9 @@ class FileManager
                 'size' => $uploadedFile->getSize(),
                 'extension' => $uploadedFile->getClientOriginalExtension(),
                 'folder_id' => $this->folder_id,
-                'user_id' => $this->user_id ? $this->user_id : $jw_user->id,
+                'user_id' => $this->user_id ?: $jw_user->id,
             ]);
-
-            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();
-
             if ($this->resource_type == 'url') {
                 unlink($uploadedFile->getRealPath());
             }
@@ -204,7 +201,7 @@ class FileManager
         return config('juzaweb.filemanager.types.image.valid_mime');
     }
 
-    protected function makeFolderUpload()
+    protected function makeFolderUpload(): string
     {
         $folderPath = date('Y/m/d');
 
@@ -219,17 +216,14 @@ class FileManager
     /**
      * Make Uploaded File
      * @return \Illuminate\Http\UploadedFile
-     * */
-    protected function makeUploadedFile()
+     */
+    protected function makeUploadedFile(): UploadedFile
     {
-        switch ($this->resource_type) {
-            case 'path':
-                return $this->makeUploadedFileByPath();
-            case 'url':
-                return $this->makeUploadedFileByUrl();
-            default:
-                return $this->resource;
-        }
+        return match ($this->resource_type) {
+            'path' => $this->makeUploadedFileByPath(),
+            'url' => $this->makeUploadedFileByUrl(),
+            default => $this->resource,
+        };
     }
 
     /**
@@ -244,8 +238,10 @@ class FileManager
     /**
      * Make Uploaded File By Url
      * @return \Illuminate\Http\UploadedFile
-     * */
-    protected function makeUploadedFileByUrl()
+     *
+     * @throws \Exception
+     */
+    protected function makeUploadedFileByUrl(): UploadedFile
     {
         $content = $this->getContentFileUrl($this->resource);
         if (empty($content)) {
@@ -270,28 +266,28 @@ class FileManager
         return $this->replaceInsecureSuffix($filename);
     }
 
-    protected function replaceInsecureSuffix($name)
+    protected function replaceInsecureSuffix($name): array|string|null
     {
         return preg_replace("/\.php$/i", '', $name);
     }
 
-    protected function fileIsValid($file)
+    protected function fileIsValid($file): bool
     {
         if (empty($file)) {
-            array_push($this->errors, $this->errorMessage('file-empty'));
+            $this->errors[] = $this->errorMessage('file-empty');
 
             return false;
         }
 
         if (! $file instanceof UploadedFile) {
-            array_push($this->errors, $this->errorMessage('instance'));
+            $this->errors[] = $this->errorMessage('instance');
 
             return false;
         }
 
         if ($file->getError() != UPLOAD_ERR_OK) {
             $msg = 'File failed to upload. Error code: ' . $file->getError();
-            array_push($this->errors, $msg);
+            $this->errors[] = $msg;
 
             return false;
         }
@@ -300,7 +296,7 @@ class FileManager
         $config = config('juzaweb.filemanager.types.' . $this->type);
 
         if (empty($config)) {
-            array_push($this->errors, $this->errorMessage('not-supported'));
+            $this->errors[] = $this->errorMessage('not-supported');
 
             return false;
         }
@@ -311,14 +307,14 @@ class FileManager
 
         $validMimetypes = $config['valid_mime'] ?? [];
         if (in_array($mimetype, $validMimetypes) === false) {
-            array_push($this->errors, $this->errorMessage('mime') . $mimetype);
+            $this->errors[] = $this->errorMessage('mime').$mimetype;
 
             return false;
         }
 
         if ($max_size > 0) {
             if ($file_size > ($max_size * 1024 * 1024)) {
-                array_push($this->errors, $this->errorMessage('size'));
+                $this->errors[] = $this->errorMessage('size');
 
                 return false;
             }
@@ -342,7 +338,7 @@ class FileManager
         return $content;
     }
 
-    protected function errorMessage($key)
+    protected function errorMessage($key): array|string
     {
         return trans('cms::filemanager.error-' . $key);
     }

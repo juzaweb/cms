@@ -12,30 +12,6 @@
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
     <script async src="https://www.gstatic.com/charts/loader.js"></script>
 
-    @if($gtag = config('app.site_gtag'))
-        @php
-            $domain = request()->getHost();
-        @endphp
-
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gtag }}"></script>
-
-        <script>
-            window.dataLayer=window.dataLayer||[];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-
-            gtag('js',new Date());
-            gtag('config','{{ $gtag }}', {
-                @if($domain != config('app.domain'))
-                'linker': {
-                    'domains': ['juzaweb.com']
-                }
-                @endif
-            });
-        </script>
-    @endif
-
     @include('cms::components.juzaweb_langs')
 
     @do_action('juzaweb_header')

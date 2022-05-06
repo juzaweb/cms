@@ -18,7 +18,7 @@ use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
-class BTaxonomyTest extends TestCase
+class TaxonomyTest extends TestCase
 {
     protected $user;
 

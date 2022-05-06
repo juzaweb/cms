@@ -29,7 +29,9 @@ class CmsUpdater extends UpdateManager
 
         $response = $this->api->get($uri, $data);
 
-        return get_version_by_tag($response->version);
+        $this->responseErrors($response);
+
+        return get_version_by_tag($response->data->version);
     }
 
     public function fetchData(): void
@@ -42,6 +44,8 @@ class CmsUpdater extends UpdateManager
                 'current_version' => $this->getCurrentVersion(),
             ]
         );
+
+        $this->responseErrors($response);
 
         $this->response = $response;
     }

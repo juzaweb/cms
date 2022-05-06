@@ -20,7 +20,9 @@ class ThemeUpdater extends UpdateManager
 
         $response = $this->api->get($uri, $data);
 
-        return get_version_by_tag($response->version);
+        $this->responseErrors($response);
+
+        return get_version_by_tag($response->data->version);
     }
 
     public function getCurrentVersion(): string
@@ -52,6 +54,8 @@ class ThemeUpdater extends UpdateManager
             ]
         );
 
+        $this->responseErrors($response);
+
         $this->response = $response;
     }
 
@@ -61,7 +65,7 @@ class ThemeUpdater extends UpdateManager
             Artisan::call(
                 'theme:publish',
                 [
-                    'theme' => $this->val,
+                    'theme' => $this->name,
                     'type' => 'assets',
                 ]
             );
@@ -70,6 +74,6 @@ class ThemeUpdater extends UpdateManager
 
     protected function getLocalPath(): string
     {
-        return config('juzaweb.theme.path').$this->name;
+        return config('juzaweb.theme.path').'/'.$this->name;
     }
 }

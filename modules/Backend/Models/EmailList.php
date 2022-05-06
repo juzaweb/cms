@@ -2,6 +2,8 @@
 
 namespace Juzaweb\Backend\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
 use TwigBridge\Facade\Twig;
 use Juzaweb\CMS\Models\Model;
@@ -34,6 +36,8 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereTemplateId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereSiteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmailList WhereTemplate($code)
  */
 class EmailList extends Model
 {
@@ -59,18 +63,28 @@ class EmailList extends Model
     const STATUS_CANCEL = 'cancel';
     const STATUS_ERROR = 'error';
 
-    public static function mapParams($string, $params = [])
+    public static function mapParams($string, $params = []): string
     {
         $temp = Twig::createTemplate($string);
         return $temp->render($params);
     }
 
-    public function template()
+    public function template(): BelongsTo
     {
         return $this->belongsTo(EmailTemplate::class, 'template_id', 'id');
     }
 
-    public function getSubject()
+    public function scopeWhereTemplate(Builder $builder, string $code): Builder
+    {
+        return $builder->whereHas(
+            'template',
+            function ($q) use ($code) {
+                $q->where('code', '=', $code);
+            }
+        );
+    }
+
+    public function getSubject(): string
     {
         $subject = Arr::get($this->data, 'subject');
         if (empty($subject)) {
@@ -80,7 +94,7 @@ class EmailList extends Model
         return static::mapParams($subject, $this->params);
     }
 
-    public function getBody()
+    public function getBody(): string
     {
         $body = Arr::get($this->data, 'body');
         if (empty($body)) {

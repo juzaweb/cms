@@ -41,18 +41,6 @@ class PublishConfigurationCommand extends Command
 
     /**
      * @param string $module
-     * @return string
-     */
-    private function getServiceProviderForModule($module)
-    {
-        $namespace = $this->laravel['config']->get('plugin.namespace');
-        $studlyName = Str::studly($module);
-
-        return "$namespace\\$studlyName\\Providers\\{$studlyName}ServiceProvider";
-    }
-
-    /**
-     * @param string $module
      */
     private function publishConfiguration($module)
     {
@@ -61,6 +49,18 @@ class PublishConfigurationCommand extends Command
             '--force' => $this->option('force'),
             '--tag' => ['config'],
         ]);
+    }
+
+    /**
+     * @param string $module
+     * @return string
+     */
+    private function getServiceProviderForModule($module)
+    {
+        $namespace = $this->laravel['config']->get('plugin.namespace');
+        $studlyName = Str::studly($module);
+
+        return "$namespace\\$studlyName\\Providers\\{$studlyName}ServiceProvider";
     }
 
     /**

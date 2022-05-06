@@ -37,16 +37,6 @@ class PublishCommand extends Command
     }
 
     /**
-     * Publish assets from all plugins.
-     */
-    public function publishAll()
-    {
-        foreach ($this->laravel['plugins']->allEnabled() as $module) {
-            $this->publish($module);
-        }
-    }
-
-    /**
      * Publish assets from the specified plugin.
      *
      * @param string $name
@@ -65,6 +55,16 @@ class PublishCommand extends Command
             ->publish();
 
         $this->line("<info>Published</info>: {$module->getStudlyName()}");
+    }
+
+    /**
+     * Publish assets from all plugins.
+     */
+    public function publishAll()
+    {
+        foreach ($this->laravel['plugins']->allEnabled() as $module) {
+            $this->publish($module);
+        }
     }
 
     /**

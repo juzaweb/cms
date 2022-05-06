@@ -31,12 +31,14 @@ use Juzaweb\CMS\Traits\ResourceModel;
  * @method static \Illuminate\Database\Eloquent\Builder|EmailTemplate whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmailTemplate whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static \Illuminate\Database\Eloquent\Builder|EmailTemplate whereSiteId($value)
  */
 class EmailTemplate extends Model
 {
     use ResourceModel;
 
-    protected $fieldName = 'subject';
+    protected string $fieldName = 'subject';
     protected $table = 'email_templates';
     protected $fillable = [
         'code',

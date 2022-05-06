@@ -37,6 +37,8 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereSiteId($value)
  */
 class Menu extends Model
 {

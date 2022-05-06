@@ -11,7 +11,9 @@ JUZACMS - Laravel CMS for Your Project
         - User/Pass: demo@juzaweb.com / demo@juzaweb.com
 
 ## Requirements
-The modules package requires PHP 8.0 or higher.
+- The modules package requires:
+    - PHP 8.0 or higher
+    - MySql 5.7 or higher
 
 ## Install
 ### Create project with composer

@@ -18,7 +18,7 @@ use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
-class CPostTest extends TestCase
+class PostTest extends TestCase
 {
     protected $user;
 

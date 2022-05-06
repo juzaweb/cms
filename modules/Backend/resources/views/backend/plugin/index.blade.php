@@ -2,10 +2,21 @@
 
 @section('content')
     <div class="row mb-2">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="btn-group float-right">
+                @if(config('juzaweb.plugin.enable_upload'))
+                    <a href="{{ route('admin.plugin.install') }}" class="btn btn-success" data-turbolinks="false"><i class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2">
         <div class="col-md-3">
             <form method="post" class="form-inline">
                 @csrf
-                <select name="bulk_actions" class="form-control w-60 mb-2 mr-1">
+                <select name="bulk_actions" id="bulk-actions" class="form-control w-60 mb-2 mr-1">
                     <option value="">{{ trans('cms::app.bulk_actions') }}</option>
                     <option value="activate">{{ trans('cms::app.activate') }}</option>
                     <option value="deactivate">{{ trans('cms::app.deactivate') }}</option>
@@ -42,9 +53,10 @@
             <thead>
                 <tr>
                     <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                    <th data-field="name" data-width="25%" data-formatter="nameFormatter">@lang('cms::app.name')</th>
-                    <th data-field="description">@lang('cms::app.description')</th>
-                    <th data-width="15%" data-field="status" data-formatter="statusFormatter" data-align="center">@lang('cms::app.status')</th>
+                    <th data-field="name" data-width="25%" data-formatter="nameFormatter">{{ trans('cms::app.name') }}</th>
+                    <th data-field="description">{{ trans('cms::app.description') }}</th>
+                    <th data-field="version" data-width="10%">{{ trans('cms::app.version') }}</th>
+                    <th data-width="15%" data-field="status" data-formatter="statusFormatter" data-align="center">{{ trans('cms::app.status') }}</th>
                 </tr>
             </thead>
         </table>
@@ -63,12 +75,14 @@
             }
 
             if (row.setting) {
-                str += `<li class="list-inline-item"><a href="/admin-cp/${row.setting}" class="jw-table-row">${juzaweb.lang.setting}</a></li>`;
+                str += `<li class="list-inline-item"><a href="${juzaweb.adminUrl +'/'+row.setting}" class="jw-table-row">${juzaweb.lang.setting}</a></li>`;
             }
 
+            @if(config('juzaweb.plugin.enable_upload'))
             if (row.update) {
                 str += `<li class="list-inline-item"><a href="javascript:void(0)" class="jw-table-row action-item" data-id="${row.id}" data-action="update">${juzaweb.lang.update}</a></li>`;
             }
+            @endif
 
             str += `<li class="list-inline-item"><a href="javascript:void(0)" class="jw-table-row text-danger action-item" data-id="${row.id}" data-action="delete">${juzaweb.lang.delete}</a></li>`;
             str += `</ul>`;

@@ -6,20 +6,45 @@
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
  * @license    MIT
- *
- * Created by JUZAWEB.
- * Date: 8/12/2021
- * Time: 3:05 PM
  */
 
 namespace Juzaweb\CMS\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\View;
+use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Facades\Theme as ThemeFacade;
+use Juzaweb\CMS\Support\Installer;
 
 class Theme
 {
     public function handle($request, Closure $next)
     {
+        View::composer(
+            '*',
+            function ($view) {
+                global $jw_user;
+                $user = $jw_user ? (new UserResource($jw_user))->toArray(request()) : null;
+
+                $view->with('user', $user);
+                $view->with('is_admin', $user ? $user['is_admin'] : false);
+                $view->with('auth', (bool) $user);
+                $view->with('guest', !$user);
+            }
+        );
+
+        if (Installer::alreadyInstalled()) {
+            $currentTheme = jw_current_theme();
+            $themePath = ThemeFacade::getThemePath($currentTheme);
+
+            if (is_dir($themePath)) {
+                ThemeFacade::set($currentTheme);
+            }
+        }
+
+        do_action(Action::FRONTEND_INIT, $request);
+
         return $next($request);
     }
 }

@@ -10,69 +10,76 @@
 
 namespace Juzaweb\CMS\Traits\Auth;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Juzaweb\Backend\Models\PasswordReset;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Traits\ResponseMessage;
 
 trait AuthResetPassword
 {
-    public function index($email, $token)
+    use ResponseMessage;
+
+    public function index($email, $token): View
     {
         do_action('reset-password.index');
 
-        $user = User::whereEmail($email)
-            ->whereExists(function ($query) use ($email, $token) {
-                $query->select(['email'])
-                    ->where('email', '=', $email)
-                    ->where('token', '=', $token);
-            })
+        $passwordReset = PasswordReset::where(['email' => $email, 'token' => $token])
             ->firstOrFail();
 
-        return view('cms::auth.forgot_password', [
-            'user' => $user,
-        ]);
+        $title = trans('cms::app.reset_password');
+
+        return view(
+            $this->getViewForm(),
+            compact('email', 'token', 'passwordReset', 'title')
+        );
     }
 
-    public function resetPassword($email, $token, Request $request)
+    public function resetPassword($email, $token, Request $request): JsonResponse|RedirectResponse
     {
         do_action('auth.reset-password.handle');
 
-        $request->validate([
-            'password' => 'required|string|min:6|max:32',
-            'password_confirmation' => 'required|string|max:32|min:6',
-        ]);
+        $request->validate(
+            [
+                'password' => 'required|string|min:6|max:32|confirmed',
+                'password_confirmation' => 'required|string|max:32|min:6',
+            ]
+        );
 
-        $user = User::whereEmail($email)
-            ->whereExists(function ($query) use ($email, $token) {
-                $query->select(['email'])
-                    ->from('password_resets')
-                    ->where('email', '=', $email)
-                    ->where('token', '=', $token);
-            })
+        $passwordReset = PasswordReset::where(['email' => $email, 'token' => $token])
             ->firstOrFail();
 
-        $passwordReset = PasswordReset::where('email', '=', $email)
-            ->where('token', '=', $token)
-            ->firstOrFail();
+        $user = User::whereEmail($passwordReset->email)->firstOrFail();
 
         DB::beginTransaction();
-
         try {
-            $user->update([
-                'password' => Hash::make($request->post('password')),
-            ]);
+            $user->update(
+                [
+                    'password' => Hash::make($request->post('password')),
+                ]
+            );
 
             $passwordReset->delete();
-
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (\Exception $e) {
             DB::rollBack();
-
-            throw $exception;
+            throw $e;
         }
 
-        return redirect()->route('user.login');
+        return $this->success(
+            [
+                'redirect' => route('login'),
+                'message' => trans('cms::app.change_password_successfully'),
+            ]
+        );
+    }
+
+    protected function getViewForm(): string
+    {
+        return 'cms::auth.reset_password';
     }
 }

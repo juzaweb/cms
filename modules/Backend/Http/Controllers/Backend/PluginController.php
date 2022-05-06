@@ -35,6 +35,16 @@ class PluginController extends BackendController
         );
     }
 
+    public function install(): View
+    {
+        $title = trans('cms::app.install');
+
+        return view(
+            'cms::backend.plugin.install',
+            compact('title')
+        );
+    }
+
     public function getDataTable(Request $request): JsonResponse
     {
         $offset = $request->get('offset', 0);
@@ -71,6 +81,22 @@ class PluginController extends BackendController
         );
     }
 
+    public function getDataPlugin(Request $request, JuzawebApi $api): object|array
+    {
+        $limit = $request->get('limit', 20);
+        $page = $request->get('page', 1);
+        $except = array_keys(Plugin::all());
+
+        return $api->get(
+            'plugins',
+            [
+                'limit' => $limit,
+                'page' => $page,
+                'except' => $except
+            ]
+        );
+    }
+
     public function bulkActions(BulkActionRequest $request, PluginUpdater $updater): JsonResponse
     {
         $action = $request->post('action');
@@ -80,6 +106,9 @@ class PluginController extends BackendController
             try {
                 switch ($action) {
                     case 'delete':
+                        if (config('juzaweb.plugin.enable_upload')) {
+                            throw new \Exception('Access deny.');
+                        }
                         /**
                          * @var \Juzaweb\CMS\Support\Plugin $module
                          */
@@ -97,6 +126,10 @@ class PluginController extends BackendController
                         Plugin::disable($plugin);
                         break;
                     case 'update':
+                        if (!config('juzaweb.plugin.enable_upload')) {
+                            throw new \Exception('Access deny.');
+                        }
+
                         $helper = $updater->find($plugin);
                         $helper->update();
                         CacheGroup::pull('plugin_update_keys');
@@ -122,6 +155,10 @@ class PluginController extends BackendController
 
     protected function getDataUpdates(Collection $plugins): ?object
     {
+        if (!config('juzaweb.plugin.enable_upload')) {
+            return (object) [];
+        }
+
         $key = sha1($plugins->toJson());
         CacheGroup::add('plugin_update_keys', $key);
 
@@ -130,7 +167,7 @@ class PluginController extends BackendController
             3600,
             function () use ($plugins) {
                 try {
-                    return $this->api->post(
+                    $response = $this->api->post(
                         'plugins/versions-available',
                         [
                             'plugins' => $plugins->map(
@@ -144,6 +181,12 @@ class PluginController extends BackendController
                             'cms_version' => Version::getVersion(),
                         ]
                     );
+
+                    if (empty($response->data)) {
+                        return (object) [];
+                    }
+
+                    return $response->data;
                 } catch (\Exception $e) {
                     return (object) [];
                 }

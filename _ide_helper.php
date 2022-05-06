@@ -8720,408 +8720,6 @@ namespace Illuminate\Support\Facades {
 
     }
 
-    /**
-     *
-     *
-     * @method static void alwaysFrom(string $address, string|null $name = null)
-     * @method static void alwaysReplyTo(string $address, string|null $name = null)
-     * @method static void alwaysReturnPath(string $address)
-     * @method static void alwaysTo(string $address, string|null $name = null)
-     * @method static \Illuminate\Mail\SentMessage|null plain(string $view, array $data, $callback)
-     * @method static \Illuminate\Mail\SentMessage|null html(string $html, $callback)
-     * @method static mixed laterOn(string $queue, \DateTimeInterface|\DateInterval|int $delay, \Illuminate\Contracts\Mail\Mailable|string|array $view)
-     * @method static mixed queueOn(string $queue, \Illuminate\Contracts\Mail\Mailable|string|array $view)
-     * @see \Illuminate\Mail\Mailer
-     * @see \Illuminate\Support\Testing\Fakes\MailFake
-     */
-    class Mail
-    {
-        /**
-         * Get a mailer instance by name.
-         *
-         * @param string|null $name
-         * @return \Illuminate\Contracts\Mail\Mailer
-         * @static
-         */
-        public static function mailer($name = null)
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            return $instance->mailer($name);
-        }
-
-        /**
-         * Get a mailer driver instance.
-         *
-         * @param string|null $driver
-         * @return \Illuminate\Mail\Mailer
-         * @static
-         */
-        public static function driver($driver = null)
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            return $instance->driver($driver);
-        }
-
-        /**
-         * Create a new transport instance.
-         *
-         * @param array $config
-         * @return \Symfony\Component\Mailer\Transport\TransportInterface
-         * @throws \InvalidArgumentException
-         * @static
-         */
-        public static function createSymfonyTransport($config)
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            return $instance->createSymfonyTransport($config);
-        }
-
-        /**
-         * Get the default mail driver name.
-         *
-         * @return string
-         * @static
-         */
-        public static function getDefaultDriver()
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            return $instance->getDefaultDriver();
-        }
-
-        /**
-         * Set the default mail driver name.
-         *
-         * @param string $name
-         * @return void
-         * @static
-         */
-        public static function setDefaultDriver($name)
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            $instance->setDefaultDriver($name);
-        }
-
-        /**
-         * Disconnect the given mailer and remove from local cache.
-         *
-         * @param string|null $name
-         * @return void
-         * @static
-         */
-        public static function purge($name = null)
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            $instance->purge($name);
-        }
-
-        /**
-         * Register a custom transport creator Closure.
-         *
-         * @param string $driver
-         * @param \Closure $callback
-         * @return \Illuminate\Mail\MailManager
-         * @static
-         */
-        public static function extend($driver, $callback)
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            return $instance->extend($driver, $callback);
-        }
-
-        /**
-         * Get the application instance used by the manager.
-         *
-         * @return \Illuminate\Contracts\Foundation\Application
-         * @static
-         */
-        public static function getApplication()
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            return $instance->getApplication();
-        }
-
-        /**
-         * Set the application instance used by the manager.
-         *
-         * @param \Illuminate\Contracts\Foundation\Application $app
-         * @return \Illuminate\Mail\MailManager
-         * @static
-         */
-        public static function setApplication($app)
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            return $instance->setApplication($app);
-        }
-
-        /**
-         * Forget all of the resolved mailer instances.
-         *
-         * @return \Illuminate\Mail\MailManager
-         * @static
-         */
-        public static function forgetMailers()
-        {
-            /** @var \Illuminate\Mail\MailManager $instance */
-            return $instance->forgetMailers();
-        }
-
-        /**
-         * Assert if a mailable was sent based on a truth-test callback.
-         *
-         * @param string|\Closure $mailable
-         * @param callable|int|null $callback
-         * @return void
-         * @static
-         */
-        public static function assertSent($mailable, $callback = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->assertSent($mailable, $callback);
-        }
-
-        /**
-         * Determine if a mailable was not sent or queued to be sent based on a truth-test callback.
-         *
-         * @param string|\Closure $mailable
-         * @param callable|null $callback
-         * @return void
-         * @static
-         */
-        public static function assertNotOutgoing($mailable, $callback = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->assertNotOutgoing($mailable, $callback);
-        }
-
-        /**
-         * Determine if a mailable was not sent based on a truth-test callback.
-         *
-         * @param string|\Closure $mailable
-         * @param callable|null $callback
-         * @return void
-         * @static
-         */
-        public static function assertNotSent($mailable, $callback = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->assertNotSent($mailable, $callback);
-        }
-
-        /**
-         * Assert that no mailables were sent or queued to be sent.
-         *
-         * @return void
-         * @static
-         */
-        public static function assertNothingOutgoing()
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->assertNothingOutgoing();
-        }
-
-        /**
-         * Assert that no mailables were sent.
-         *
-         * @return void
-         * @static
-         */
-        public static function assertNothingSent()
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->assertNothingSent();
-        }
-
-        /**
-         * Assert if a mailable was queued based on a truth-test callback.
-         *
-         * @param string|\Closure $mailable
-         * @param callable|int|null $callback
-         * @return void
-         * @static
-         */
-        public static function assertQueued($mailable, $callback = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->assertQueued($mailable, $callback);
-        }
-
-        /**
-         * Determine if a mailable was not queued based on a truth-test callback.
-         *
-         * @param string|\Closure $mailable
-         * @param callable|null $callback
-         * @return void
-         * @static
-         */
-        public static function assertNotQueued($mailable, $callback = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->assertNotQueued($mailable, $callback);
-        }
-
-        /**
-         * Assert that no mailables were queued.
-         *
-         * @return void
-         * @static
-         */
-        public static function assertNothingQueued()
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->assertNothingQueued();
-        }
-
-        /**
-         * Get all of the mailables matching a truth-test callback.
-         *
-         * @param string|\Closure $mailable
-         * @param callable|null $callback
-         * @return \Illuminate\Support\Collection
-         * @static
-         */
-        public static function sent($mailable, $callback = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            return $instance->sent($mailable, $callback);
-        }
-
-        /**
-         * Determine if the given mailable has been sent.
-         *
-         * @param string $mailable
-         * @return bool
-         * @static
-         */
-        public static function hasSent($mailable)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            return $instance->hasSent($mailable);
-        }
-
-        /**
-         * Get all of the queued mailables matching a truth-test callback.
-         *
-         * @param string|\Closure $mailable
-         * @param callable|null $callback
-         * @return \Illuminate\Support\Collection
-         * @static
-         */
-        public static function queued($mailable, $callback = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            return $instance->queued($mailable, $callback);
-        }
-
-        /**
-         * Determine if the given mailable has been queued.
-         *
-         * @param string $mailable
-         * @return bool
-         * @static
-         */
-        public static function hasQueued($mailable)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            return $instance->hasQueued($mailable);
-        }
-
-        /**
-         * Begin the process of mailing a mailable class instance.
-         *
-         * @param mixed $users
-         * @return \Illuminate\Mail\PendingMail
-         * @static
-         */
-        public static function to($users)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            return $instance->to($users);
-        }
-
-        /**
-         * Begin the process of mailing a mailable class instance.
-         *
-         * @param mixed $users
-         * @return \Illuminate\Mail\PendingMail
-         * @static
-         */
-        public static function bcc($users)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            return $instance->bcc($users);
-        }
-
-        /**
-         * Send a new message with only a raw text part.
-         *
-         * @param string $text
-         * @param \Closure|string $callback
-         * @return void
-         * @static
-         */
-        public static function raw($text, $callback)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->raw($text, $callback);
-        }
-
-        /**
-         * Send a new message using a view.
-         *
-         * @param \Illuminate\Contracts\Mail\Mailable|string|array $view
-         * @param array $data
-         * @param \Closure|string|null $callback
-         * @return void
-         * @static
-         */
-        public static function send($view, $data = [], $callback = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            $instance->send($view, $data, $callback);
-        }
-
-        /**
-         * Queue a new e-mail message for sending.
-         *
-         * @param \Illuminate\Contracts\Mail\Mailable|string|array $view
-         * @param string|null $queue
-         * @return mixed
-         * @static
-         */
-        public static function queue($view, $queue = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            return $instance->queue($view, $queue);
-        }
-
-        /**
-         * Queue a new e-mail message for sending after (n) seconds.
-         *
-         * @param \DateTimeInterface|\DateInterval|int $delay
-         * @param \Illuminate\Contracts\Mail\Mailable|string|array $view
-         * @param string|null $queue
-         * @return mixed
-         * @static
-         */
-        public static function later($delay, $view, $queue = null)
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            return $instance->later($delay, $view, $queue);
-        }
-
-        /**
-         * Get the array of failed recipients.
-         *
-         * @return array
-         * @static
-         */
-        public static function failures()
-        {
-            /** @var \Illuminate\Support\Testing\Fakes\MailFake $instance */
-            return $instance->failures();
-        }
-
-    }
 
     /**
      *
@@ -20000,6 +19598,29 @@ namespace Juzaweb\CMS\Support {
 
 }
 
+namespace Illuminate\Database\Query {
+
+    /**
+     *
+     *
+     */
+    class Builder
+    {
+        /**
+         *
+         *
+         * @see \Juzaweb\DevTool\Providers\DevToolServiceProvider::boot()
+         * @static
+         */
+        public static function toRawSql()
+        {
+            return \Illuminate\Database\Query\Builder::toRawSql();
+        }
+
+    }
+
+}
+
 namespace Illuminate\Validation {
 
     /**
@@ -23745,6 +23366,17 @@ namespace {
         {
             /** @var \Illuminate\Database\Query\Builder $instance */
             return $instance->macroCall($method, $parameters);
+        }
+
+        /**
+         *
+         *
+         * @see \Juzaweb\DevTool\Providers\DevToolServiceProvider::boot()
+         * @static
+         */
+        public static function toRawSql()
+        {
+            return \Illuminate\Database\Query\Builder::toRawSql();
         }
     }
 

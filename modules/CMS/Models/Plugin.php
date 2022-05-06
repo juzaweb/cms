@@ -68,6 +68,11 @@ use Juzaweb\Backend\Models\Post;
  * @property-read int|null $post_ratings_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostView[] $postViews
  * @property-read int|null $post_views_count
+ * @property int|null $site_id
+ * @property string|null $locale
+ * @method static \Illuminate\Database\Eloquent\Builder|Plugin whereLocale($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereMetaIn($key, $values)
+ * @method static \Illuminate\Database\Eloquent\Builder|Plugin whereSiteId($value)
  */
 class Plugin extends Post
 {

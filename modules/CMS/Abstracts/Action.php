@@ -16,6 +16,7 @@ abstract class Action
 {
     public const INIT_ACTION = 'juzaweb.init';
     public const BACKEND_INIT = 'backend.init';
+    public const FRONTEND_INIT = 'frontend.init';
     public const BACKEND_CALL_ACTION = 'backend.call_action';
     public const FRONTEND_CALL_ACTION = 'frontend.call_action';
     public const FRONTEND_HEADER_ACTION = 'theme.header';
@@ -43,17 +44,17 @@ abstract class Action
 
     abstract public function handle();
 
-    protected function addAction($tag, $callback, $priority = 20, $arguments = 1)
+    protected function addAction($tag, $callback, $priority = 20, $arguments = 1): void
     {
         Hook::addAction($tag, $callback, $priority, $arguments);
     }
 
-    protected function addFilter($tag, $callback, $priority = 20, $arguments = 1)
+    protected function addFilter($tag, $callback, $priority = 20, $arguments = 1): void
     {
         Hook::addFilter($tag, $callback, $priority, $arguments);
     }
 
-    protected function applyFilters($tag, $value, ...$args)
+    protected function applyFilters($tag, $value, ...$args): mixed
     {
         return Hook::filter($tag, $value, ...$args);
     }

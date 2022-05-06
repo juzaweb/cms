@@ -386,7 +386,9 @@ return [
     'not_installed' => 'Not installed',
     'activate_plugins' => 'Activate plugins',
     'require_plugins' => 'Require plugins',
-    'theme_require_plugins' => 'This theme require the following plugins:',
+    'theme_require_plugins' => 'This theme required the following plugins:'
+        . ' :plugins'
+        . ' <a href=":link"><strong>Activate plugins</strong></a>',
     'plugin_not_found' => 'Plugin not found',
     'plugin_name_not_found' => 'Plugin :name not found',
     'delete_theme_confirm' => 'Are you sure you want to delete this theme?',
@@ -442,4 +444,6 @@ return [
     ],
     'tools' => 'Tools',
     'import' => 'Import',
+    'install_successfully' => 'Install successfully',
+    'reset_password' => 'Reset password',
 ];

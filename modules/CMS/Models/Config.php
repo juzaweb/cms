@@ -17,6 +17,8 @@ use Juzaweb\CMS\Facades\GlobalData;
  * @method static \Illuminate\Database\Eloquent\Builder|Config whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Config whereValue($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Config whereSiteId($value)
  */
 class Config extends Model
 {

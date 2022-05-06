@@ -13,7 +13,7 @@ namespace Juzaweb\Tests\Unit;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\Tests\TestCase;
 
-class CPluginTest extends TestCase
+class PluginTest extends TestCase
 {
     public function testEnable()
     {

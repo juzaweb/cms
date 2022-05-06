@@ -56,6 +56,29 @@ class ResourceMakeCommand extends GeneratorCommand
     }
 
     /**
+     * @return string
+     */
+    protected function getStubName(): string
+    {
+        if ($this->collection()) {
+            return '/resource-collection.stub';
+        }
+
+        return '/resource.stub';
+    }
+
+    /**
+     * Determine if the command is generating a resource collection.
+     *
+     * @return bool
+     */
+    protected function collection(): bool
+    {
+        return $this->option('collection') ||
+            Str::endsWith($this->argument('name'), 'Collection');
+    }
+
+    /**
      * @return mixed
      */
     protected function getDestinationFilePath()
@@ -73,28 +96,5 @@ class ResourceMakeCommand extends GeneratorCommand
     private function getFileName()
     {
         return Str::studly($this->argument('name'));
-    }
-
-    /**
-     * Determine if the command is generating a resource collection.
-     *
-     * @return bool
-     */
-    protected function collection(): bool
-    {
-        return $this->option('collection') ||
-            Str::endsWith($this->argument('name'), 'Collection');
-    }
-
-    /**
-     * @return string
-     */
-    protected function getStubName(): string
-    {
-        if ($this->collection()) {
-            return '/resource-collection.stub';
-        }
-
-        return '/resource.stub';
     }
 }

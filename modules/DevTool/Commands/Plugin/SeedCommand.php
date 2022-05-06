@@ -61,37 +61,6 @@ class SeedCommand extends Command
     }
 
     /**
-     * @throws RuntimeException
-     * @return PluginRepositoryInterface
-     */
-    public function getModuleRepository(): PluginRepositoryInterface
-    {
-        $modules = $this->laravel['plugins'];
-        if (! $modules instanceof PluginRepositoryInterface) {
-            throw new RuntimeException('Plugin repository not found!');
-        }
-
-        return $modules;
-    }
-
-    /**
-     * @param $name
-     *
-     * @throws RuntimeException
-     *
-     * @return Plugin
-     */
-    public function getModuleByName($name)
-    {
-        $modules = $this->getModuleRepository();
-        if ($modules->has($name) === false) {
-            throw new RuntimeException("Plugin [$name] does not exists.");
-        }
-
-        return $modules->find($name);
-    }
-
-    /**
      * @param Plugin $module
      *
      * @return void
@@ -131,30 +100,6 @@ class SeedCommand extends Command
     }
 
     /**
-     * Seed the specified plugin.
-     *
-     * @param string $className
-     */
-    protected function dbSeed($className)
-    {
-        if ($option = $this->option('class')) {
-            $params['--class'] = Str::finish(substr($className, 0, strrpos($className, '\\')), '\\') . $option;
-        } else {
-            $params = ['--class' => $className];
-        }
-
-        if ($option = $this->option('database')) {
-            $params['--database'] = $option;
-        }
-
-        if ($option = $this->option('force')) {
-            $params['--force'] = $option;
-        }
-
-        $this->call('db:seed', $params);
-    }
-
-    /**
      * Get master database seeder name for the specified plugin.
      *
      * @param string $name
@@ -182,6 +127,60 @@ class SeedCommand extends Command
     }
 
     /**
+     * @param $name
+     *
+     * @throws RuntimeException
+     *
+     * @return Plugin
+     */
+    public function getModuleByName($name)
+    {
+        $modules = $this->getModuleRepository();
+        if ($modules->has($name) === false) {
+            throw new RuntimeException("Plugin [$name] does not exists.");
+        }
+
+        return $modules->find($name);
+    }
+
+    /**
+     * @throws RuntimeException
+     * @return PluginRepositoryInterface
+     */
+    public function getModuleRepository(): PluginRepositoryInterface
+    {
+        $modules = $this->laravel['plugins'];
+        if (! $modules instanceof PluginRepositoryInterface) {
+            throw new RuntimeException('Plugin repository not found!');
+        }
+
+        return $modules;
+    }
+
+    /**
+     * Report the exception to the exception handler.
+     *
+     * @param  \Throwable  $e
+     * @return void
+     */
+    protected function reportException(\Exception $e)
+    {
+        $this->laravel[ExceptionHandler::class]->report($e);
+    }
+
+    /**
+     * Report the exception to the exception handler.
+     *
+     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @param  \Throwable  $e
+     * @return void
+     */
+    protected function renderException($output, \Exception $e)
+    {
+        $this->laravel[ExceptionHandler::class]->renderForConsole($output, $e);
+    }
+
+    /**
      * Get master database seeder name for the specified plugin under a different namespace than Modules.
      *
      * @param string $name
@@ -205,26 +204,27 @@ class SeedCommand extends Command
     }
 
     /**
-     * Report the exception to the exception handler.
+     * Seed the specified plugin.
      *
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
-     * @param  \Throwable  $e
-     * @return void
+     * @param string $className
      */
-    protected function renderException($output, \Exception $e)
+    protected function dbSeed($className)
     {
-        $this->laravel[ExceptionHandler::class]->renderForConsole($output, $e);
-    }
+        if ($option = $this->option('class')) {
+            $params['--class'] = Str::finish(substr($className, 0, strrpos($className, '\\')), '\\') . $option;
+        } else {
+            $params = ['--class' => $className];
+        }
 
-    /**
-     * Report the exception to the exception handler.
-     *
-     * @param  \Throwable  $e
-     * @return void
-     */
-    protected function reportException(\Exception $e)
-    {
-        $this->laravel[ExceptionHandler::class]->report($e);
+        if ($option = $this->option('database')) {
+            $params['--database'] = $option;
+        }
+
+        if ($option = $this->option('force')) {
+            $params['--force'] = $option;
+        }
+
+        $this->call('db:seed', $params);
     }
 
     /**

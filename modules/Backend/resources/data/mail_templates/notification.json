@@ -1,6 +1,5 @@
 {
     "subject": "{{ subject }}",
-    "body": "{{ body }}",
     "params": {
         "subject": "Subject notify",
         "body": "Body notify",

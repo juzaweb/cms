@@ -17,33 +17,6 @@ class AssetController extends Controller
         return $this->responsePath($assetPath);
     }
 
-    public function assetsTheme($theme, $path)
-    {
-        $path = str_replace('assets/', '', $path);
-        $assetPath = Theme::getThemePath($theme) . '/assets/' . $path;
-
-        return $this->responsePath($assetPath);
-    }
-
-    public function assetsStorage($path)
-    {
-        $path = Storage::disk('public')->path($path);
-
-        return $this->responsePath($path);
-    }
-
-    public function languageScript($lang)
-    {
-        \Lang::setLocale($lang);
-
-        $langs = \Lang::get('tad');
-        $content = 'var langs = JSON.parse(\'' . json_encode($langs) . '\');';
-        $response = Response::make($content, 200);
-        $response->header('Content-Type', 'application/javascript');
-
-        return $response;
-    }
-
     protected function responsePath($path)
     {
         $path = $this->parsePathSecurity($path);
@@ -62,6 +35,11 @@ class AssetController extends Controller
         $response->header('Cache-Control', 'public');
 
         return $response;
+    }
+
+    protected function parsePathSecurity($path)
+    {
+        return str_replace('..', '', $path);
     }
 
     protected function getStaticAssets($path)
@@ -94,8 +72,30 @@ class AssetController extends Controller
         return false;
     }
 
-    protected function parsePathSecurity($path)
+    public function assetsTheme($theme, $path)
     {
-        return str_replace('..', '', $path);
+        $path = str_replace('assets/', '', $path);
+        $assetPath = Theme::getThemePath($theme) . '/assets/' . $path;
+
+        return $this->responsePath($assetPath);
+    }
+
+    public function assetsStorage($path)
+    {
+        $path = Storage::disk('public')->path($path);
+
+        return $this->responsePath($path);
+    }
+
+    public function languageScript($lang)
+    {
+        \Lang::setLocale($lang);
+
+        $langs = \Lang::get('tad');
+        $content = 'var langs = JSON.parse(\'' . json_encode($langs) . '\');';
+        $response = Response::make($content, 200);
+        $response->header('Content-Type', 'application/javascript');
+
+        return $response;
     }
 }

@@ -3,8 +3,7 @@
     "title": "Gamxo",
     "description": "Gamxo description",
     "author": "Gamxo",
-    "version": "1.0.3",
-    "parent": "",
+    "version": "1.0",
     "require": {
         "juzaweb/image-slider": "^1.0.1"
     }

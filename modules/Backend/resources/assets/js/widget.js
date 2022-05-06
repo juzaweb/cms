@@ -38,6 +38,7 @@ $(document).on("turbolinks:load", function() {
                 btn.prop("disabled", false);
             },
             failCallback: function () {
+                show_message(response);
                 btn.find('i').attr('class', icon);
                 btn.prop("disabled", false);
             }

@@ -16,20 +16,6 @@ abstract class GeneratorCommand extends Command
     protected $argumentName = '';
 
     /**
-     * Get template contents.
-     *
-     * @return string
-     */
-    abstract protected function getTemplateContents();
-
-    /**
-     * Get the destination file path.
-     *
-     * @return string
-     */
-    abstract protected function getDestinationFilePath();
-
-    /**
      * Execute the console command.
      */
     public function handle()
@@ -55,24 +41,18 @@ abstract class GeneratorCommand extends Command
     }
 
     /**
-     * Get class name.
+     * Get the destination file path.
      *
      * @return string
      */
-    public function getClass()
-    {
-        return class_basename($this->argument($this->argumentName));
-    }
+    abstract protected function getDestinationFilePath();
 
     /**
-     * Get default namespace.
+     * Get template contents.
      *
      * @return string
      */
-    public function getDefaultNamespace(): string
-    {
-        return '';
-    }
+    abstract protected function getTemplateContents();
 
     /**
      * Get class namespace.
@@ -92,6 +72,26 @@ abstract class GeneratorCommand extends Command
         $namespace = str_replace('/', '\\', $namespace);
 
         return trim($namespace, '\\');
+    }
+
+    /**
+     * Get class name.
+     *
+     * @return string
+     */
+    public function getClass()
+    {
+        return class_basename($this->argument($this->argumentName));
+    }
+
+    /**
+     * Get default namespace.
+     *
+     * @return string
+     */
+    public function getDefaultNamespace(): string
+    {
+        return '';
     }
 
     public function getModuleNamespace($module)

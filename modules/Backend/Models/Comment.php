@@ -39,6 +39,8 @@ use Juzaweb\CMS\Models\User;
  * @method static Builder|Comment whereUserId($value)
  * @method static Builder|Comment whereWebsite($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @method static Builder|Comment whereSiteId($value)
  */
 class Comment extends Model
 {
@@ -72,17 +74,17 @@ class Comment extends Model
         return $postType->get('model')::find($this->object_id);
     }
 
-    public function scopeWhereApproved(Builder $builder)
+    public function scopeWhereApproved(Builder $builder): Builder
     {
         return $builder->where('status', '=', 'approved');
     }
 
-    public function getUserName()
+    public function getUserName(): ?string
     {
         return $this->user ? $this->user->name : $this->name;
     }
 
-    public function getAvatar()
+    public function getAvatar(): string
     {
         if ($this->user) {
             return $this->user->getAvatar();
@@ -91,23 +93,26 @@ class Comment extends Model
         return asset('jw-styles/juzaweb/images/avatar.png');
     }
 
-    public function getUpdatedDate($format = JW_DATE_TIME)
+    public function getUpdatedDate($format = JW_DATE_TIME): string
     {
         return jw_date_format($this->updated_at, $format);
     }
 
-    public function getCreatedDate($format = JW_DATE_TIME)
+    public function getCreatedDate($format = JW_DATE_TIME): string
     {
         return jw_date_format($this->updated_at, $format);
     }
 
     public static function allStatuses()
     {
-        return apply_filters('comment.statuses', [
-            'approved' => trans('cms::app.approved'),
-            'deny' => trans('cms::app.deny'),
-            'pending' => trans('cms::app.pending'),
-            'trash' => trans('cms::app.trash'),
-        ]);
+        return apply_filters(
+            'comment.statuses',
+            [
+                'approved' => trans('cms::app.approved'),
+                'deny' => trans('cms::app.deny'),
+                'pending' => trans('cms::app.pending'),
+                'trash' => trans('cms::app.trash'),
+            ]
+        );
     }
 }

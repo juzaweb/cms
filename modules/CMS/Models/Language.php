@@ -30,6 +30,7 @@ namespace Juzaweb\CMS\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|Language whereSiteId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Language whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $site_id
  */
 class Language extends Model
 {
