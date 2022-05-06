@@ -1,5 +1,7 @@
 <?php
 
+use Juzaweb\CMS\Facades\Facade;
+
 return [
     /**
      * Admin url prefix
@@ -146,35 +148,9 @@ return [
         ],
     ],
 
-    /**
-     * Default database config
-     */
-    'config' => [
-        'title',
-        'description',
-        'banner',
-        'logo',
-        'icon',
-        'banner',
-        'sitename',
-        'user_registration',
-        'user_verification',
-        'comment_able',
-        'comment_type',
-        'comments_per_page',
-        'comments_approval',
-        'author_name',
-        'facebook',
-        'twitter',
-        'pinterest',
-        'youtube',
-        'google_analytics',
-        'language',
-        'timezone',
-        'date_format',
-        'time_format',
-        'fb_app_id',
-        'backend_messages',
-        'socialites',
-    ]
+    'config' => Facade::defaultConfigs()->merge(
+        [
+            // ...
+        ]
+    )->toArray()
 ];
