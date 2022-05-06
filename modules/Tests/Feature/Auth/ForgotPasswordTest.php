@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Tests\Feature\Auth;
 
+use Juzaweb\Backend\Models\EmailTemplate;
 use Juzaweb\Backend\Models\PasswordReset;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
@@ -38,9 +39,14 @@ class ForgotPasswordTest extends TestCase
             ['email' => $this->user->email]
         )->assertJson(['status' => true]);
 
+        $template = EmailTemplate::whereCode('forgot_password')->first();
+
         $this->assertDatabaseHas('password_resets', ['email' => $this->user->email]);
 
-        $this->assertDatabaseHas('email_lists', ['email' => $this->user->email]);
+        $this->assertDatabaseHas(
+            'email_lists',
+            ['email' => $this->user->email, 'template_id' => $template->id]
+        );
     }
 
     public function testResetPassword()
