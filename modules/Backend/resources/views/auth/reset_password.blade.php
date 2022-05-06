@@ -9,13 +9,8 @@
                         <div class="text-dark font-size-24 mb-4">
                             <strong>{{ trans('cms::app.reset_password') }}</strong>
                         </div>
-                        <div class="mb-4">
-                            <p>
-                                And start spending more time on your projects and less time managing your infrastructure.
-                            </p>
-                        </div>
 
-                        <form action="" method="post" class="mb-4 form-ajax">
+                        <form action="{{ route('admin.reset_password', [$email, $token]) }}" method="post" class="mb-4 form-ajax">
                             <div class="form-group mb-4">
                                 <input type="password" name="password" class="form-control" placeholder="@lang('cms::app.password')" autocomplete="off"/>
                             </div>

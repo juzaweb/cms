@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Tests\Unit;
 
+use Juzaweb\CMS\Database\Seeders\DatabaseSeeder;
 use Juzaweb\Tests\TestCase;
 
 class DatabaseTest extends TestCase
@@ -25,7 +26,7 @@ class DatabaseTest extends TestCase
         $this->artisan(
             'db:seed',
             [
-                '--class' => 'Juzaweb\CMS\Database\Seeders\DatabaseSeeder'
+                '--class' => DatabaseSeeder::class
             ]
         )
             ->assertExitCode(0);

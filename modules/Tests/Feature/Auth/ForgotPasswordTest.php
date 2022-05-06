@@ -43,7 +43,7 @@ class ForgotPasswordTest extends TestCase
         $passwordReset = PasswordReset::whereEmail($user->email)->first();
 
         $uri = "admin-cp/reset-password/{$passwordReset->email}/{$passwordReset->token}";
-
+        dump($uri);
         $this->get($uri)->assertStatus(200);
 
         $this->json(

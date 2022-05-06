@@ -70,6 +70,6 @@ trait AuthResetPassword
 
     protected function getViewForm(): string
     {
-        return 'cms::auth.forgot_password';
+        return 'cms::auth.reset_password';
     }
 }

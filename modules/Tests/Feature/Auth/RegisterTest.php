@@ -13,7 +13,6 @@ namespace Juzaweb\Tests\Feature\Auth;
 use Faker\Generator as Faker;
 use Juzaweb\Backend\Models\EmailList;
 use Juzaweb\Backend\Models\EmailTemplate;
-use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -73,7 +72,7 @@ class RegisterTest extends TestCase
                 'template_id' => $template->id
             ]
         );
-
+        dd(EmailList::get());
         $token = EmailList::with(['template'])
             ->whereEmail($email)
             ->where('template_id', '=', $template->id)
