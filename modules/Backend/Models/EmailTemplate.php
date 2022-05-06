@@ -38,7 +38,7 @@ class EmailTemplate extends Model
 {
     use ResourceModel;
 
-    protected $fieldName = 'subject';
+    protected string $fieldName = 'subject';
     protected $table = 'email_templates';
     protected $fillable = [
         'code',
