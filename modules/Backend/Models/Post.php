@@ -2,7 +2,9 @@
 
 namespace Juzaweb\Backend\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Juzaweb\CMS\Database\Factories\PostFactory;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\ModelCache;
@@ -118,25 +120,25 @@ class Post extends Model implements Feedable
     /**
      * Create a new factory instance for the model.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
-    protected static function newFactory()
+    protected static function newFactory(): Factory
     {
         return PostFactory::new();
     }
 
-    public function categories()
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->taxonomies()
             ->where('taxonomy', '=', 'categories');
     }
 
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->taxonomies()->where('taxonomy', '=', 'tags');
     }
 
-    public function menuItems()
+    public function menuItems(): HasMany
     {
         return $this->hasMany(
             MenuItem::class,
@@ -150,22 +152,22 @@ class Post extends Model implements Feedable
             );
     }
 
-    public function postViews()
+    public function postViews(): HasMany
     {
         return $this->hasMany(PostView::class, 'post_id', 'id');
     }
 
-    public function postRatings()
+    public function postRatings(): HasMany
     {
         return $this->hasMany(PostRating::class, 'post_id', 'id');
     }
 
-    public function getTotalRating()
+    public function getTotalRating(): int
     {
         return $this->postRatings()->count(['id']);
     }
 
-    public function getStarRating()
+    public function getStarRating(): float|int
     {
         $total = $this->postRatings()->sum('star');
         $count = $this->getTotalRating();
