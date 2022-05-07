@@ -72,6 +72,7 @@ class UpdateController extends BackendController
             $updater->update();
         } catch (\Exception $e) {
             report($e);
+
             return $this->error($e->getMessage());
         }
 
@@ -92,27 +93,29 @@ class UpdateController extends BackendController
              */
 
             $data[] = [
-                'code' => $plugin->get('name'),
-                'current_version' => $plugin->getVersion()
+                'name' => $plugin->get('name'),
+                'current_version' => $plugin->getVersion(),
             ];
         }
 
-        $updates = $this->api->post(
-            'releases/plugins/multi-version-available',
+        $response = $this->api->post(
+            'plugins/versions-available',
             [
                 'plugins' => $data,
                 'cms_version' => Version::getVersion(),
             ]
         );
 
-        $update = collect((array) $updates)
+        $updates = $response->data ?? [];
+
+        $update = collect((array)$updates)
             ->filter(
                 function ($item) {
-                    return $item->status == true;
+                    return $item->update == true;
                 }
             )->map(
                 function ($item) {
-                    return (array) $item;
+                    return (array)$item;
                 }
             )
             ->toArray();
@@ -148,28 +151,30 @@ class UpdateController extends BackendController
         $data = [];
         foreach ($themes as $theme) {
             $data[] = [
-                'code' => $theme->get('name'),
-                'current_version' => Theme::getVersion($theme->get('name'))
+                'name' => $theme->get('name'),
+                'current_version' => Theme::getVersion($theme->get('name')),
             ];
         }
 
-        $updates = $this->api->get(
-            'theme/multi-available',
+        $response = $this->api->post(
+            'themes/versions-available',
             [
-                'themes' => json_encode($data),
+                'themes' => $data,
                 'cms_version' => Version::getVersion(),
             ]
         );
 
-        $update = collect((array) $updates)
+        $updates = $response->data ?? [];
+
+        $update = collect((array)$updates)
             ->filter(
                 function ($item) {
-                    return $item->status == true;
+                    return $item->update == true;
                 }
             )
             ->map(
                 function ($item) {
-                    return (array) $item;
+                    return (array)$item;
                 }
             )
             ->toArray();
