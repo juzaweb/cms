@@ -262,7 +262,7 @@ if (!function_exists('upload_url')) {
         }
 
         $storage = Storage::disk('public');
-        if ($storage->exists($path)) {
+        if ($storage->exists(jw_basepath($path))) {
             return $storage->url($path);
         }
 
@@ -792,5 +792,12 @@ if (!function_exists('admin_url')) {
         }
 
         return url(config('juzaweb.admin_prefix'), $parameters, $secure);
+    }
+}
+
+if (!function_exists('jw_basepath')) {
+    function jw_basepath(string $path): string
+    {
+        return explode('?', $path)[0];
     }
 }
