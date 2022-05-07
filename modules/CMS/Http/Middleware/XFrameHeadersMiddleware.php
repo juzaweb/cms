@@ -20,7 +20,7 @@ class XFrameHeadersMiddleware
             $user = auth()->user();
             $GLOBALS['jw_user'] = $user;
         }
-        
+
         /**
          * This middleware was created to prevent OWASP warnings, like:
          *
@@ -39,7 +39,10 @@ class XFrameHeadersMiddleware
          */
 
         $response = $next($request);
-        $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
+
+        if (config('juzaweb.performance.deny_iframe')) {
+            $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
+        }
 
         return $response;
     }

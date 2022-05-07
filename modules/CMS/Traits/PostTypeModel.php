@@ -42,7 +42,7 @@ trait PostTypeModel
     /**
      * Create Builder for frontend
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\Post
+     * @return Builder|\Juzaweb\Backend\Models\Post
      */
     public static function selectFrontendBuilder()
     {
@@ -80,7 +80,7 @@ trait PostTypeModel
     /**
      * Create Builder for frontend
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public static function createFrontendBuilder()
     {
@@ -403,7 +403,7 @@ trait PostTypeModel
         return true;
     }
 
-    public function setMeta($key, $value)
+    public function setMeta($key, $value): void
     {
         $metas = $this->getMetas();
         $this->metas()->updateOrCreate(
@@ -411,7 +411,7 @@ trait PostTypeModel
                 'meta_key' => $key
             ],
             [
-                'meta_value' => $value
+                'meta_value' => is_array($value) ? json_encode($value) : $value
             ]
         );
 
@@ -424,7 +424,7 @@ trait PostTypeModel
         );
     }
 
-    public function syncMetas(array $data = [])
+    public function syncMetas(array $data = []): void
     {
         $metas = [];
         $keys = $this->getPostTypeMetaKeys();
@@ -458,11 +458,11 @@ trait PostTypeModel
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param Builder $builder
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      **/
-    public function scopeWherePublish($builder)
+    public function scopeWherePublish($builder): Builder
     {
         $builder->where('status', '=', 'publish');
 
@@ -470,12 +470,12 @@ trait PostTypeModel
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param Builder $builder
      * @param int $taxonomy
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      **/
-    public function scopeWhereTaxonomy($builder, $taxonomy)
+    public function scopeWhereTaxonomy($builder, $taxonomy): Builder
     {
         $builder->whereHas(
             'taxonomies',
@@ -488,12 +488,12 @@ trait PostTypeModel
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param Builder $builder
      * @param array $taxonomies
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function scopeWhereTaxonomyIn($builder, $taxonomies)
+    public function scopeWhereTaxonomyIn($builder, $taxonomies): Builder
     {
         $builder->whereHas(
             'taxonomies',
@@ -525,7 +525,7 @@ trait PostTypeModel
         return $postType->get($key);
     }
 
-    public function getPostTypeMetaKeys()
+    public function getPostTypeMetaKeys(): array
     {
         return array_keys($this->getPostType('metas'));
     }
@@ -545,7 +545,7 @@ trait PostTypeModel
         return $permalink->get($key);
     }
 
-    public function getTitle($words = null)
+    public function getTitle($words = null): string
     {
         if ($words > 0) {
             return apply_filters(
@@ -565,7 +565,7 @@ trait PostTypeModel
         );
     }
 
-    public function getContent()
+    public function getContent(): string
     {
         return apply_filters(
             $this->type . '.get_content',
@@ -573,7 +573,7 @@ trait PostTypeModel
         );
     }
 
-    public function getLink()
+    public function getLink(): bool|string
     {
         if ($this->type == 'pages') {
             return url()->to($this->slug);
@@ -587,12 +587,12 @@ trait PostTypeModel
         return url()->to($permalink . '/' . $this->slug);
     }
 
-    public function getUpdatedDate($format = JW_DATE_TIME)
+    public function getUpdatedDate($format = JW_DATE_TIME): string
     {
         return jw_date_format($this->updated_at, $format);
     }
 
-    public function getCreatedDate($format = JW_DATE_TIME)
+    public function getCreatedDate($format = JW_DATE_TIME): string
     {
         return jw_date_format($this->updated_at, $format);
     }

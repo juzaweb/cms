@@ -16,7 +16,7 @@ use Exception;
 class JuzawebApi
 {
     protected Curl $curl;
-    protected string $apiUrl = 'http://127.0.0.1:8000/api';
+    protected string $apiUrl = 'https://juzaweb.com/api';
     protected ?string $accessToken = null;
     protected ?string $expiresAt = null;
 

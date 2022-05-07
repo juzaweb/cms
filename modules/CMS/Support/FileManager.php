@@ -4,8 +4,6 @@ namespace Juzaweb\CMS\Support;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -18,7 +16,7 @@ use GuzzleHttp\Exception\RequestException;
 class FileManager
 {
     /**
-     * @var \Illuminate\Support\Facades\Storage
+     * @var Storage
      */
     protected $storage;
 
@@ -53,7 +51,7 @@ class FileManager
         string $type = 'image',
         int|null $folderId = null,
         int|null $userId = null
-    ) {
+    ): MediaFile {
         return (new self())
             ->withResource($file)
             ->setType($type)
@@ -149,8 +147,7 @@ class FileManager
         $uploadedFile = $this->makeUploadedFile();
 
         if (! $this->fileIsValid($uploadedFile)) {
-            unlink($uploadedFile->getRealPath());
-
+            $this->removeUploadedFile($uploadedFile);
             throw new FileManagerException($this->errors);
         }
 
@@ -180,16 +177,11 @@ class FileManager
                 'user_id' => $this->user_id ?: $jw_user->id,
             ]);
         } catch (\Exception $e) {
-            if ($this->resource_type == 'url') {
-                unlink($uploadedFile->getRealPath());
-            }
-
+            $this->removeUploadedFile($uploadedFile);
             throw $e;
         }
 
-        if ($this->resource_type == 'url') {
-            unlink($uploadedFile->getRealPath());
-        }
+        $this->removeUploadedFile($uploadedFile);
 
         event(new MediaWasUploaded($media));
 
@@ -215,7 +207,7 @@ class FileManager
 
     /**
      * Make Uploaded File
-     * @return \Illuminate\Http\UploadedFile
+     * @return UploadedFile
      */
     protected function makeUploadedFile(): UploadedFile
     {
@@ -228,16 +220,16 @@ class FileManager
 
     /**
      * Make Uploaded File By Path
-     * @return \Illuminate\Http\UploadedFile
-     * */
-    protected function makeUploadedFileByPath()
+     * @return UploadedFile
+     */
+    protected function makeUploadedFileByPath(): UploadedFile
     {
         return (new UploadedFile($this->resource, basename($this->resource)));
     }
 
     /**
      * Make Uploaded File By Url
-     * @return \Illuminate\Http\UploadedFile
+     * @return UploadedFile
      *
      * @throws \Exception
      */
@@ -254,19 +246,17 @@ class FileManager
         return (new UploadedFile($this->storage->path($tempName), $tempName));
     }
 
-    protected function makeFilename(UploadedFile $file)
+    protected function makeFilename(UploadedFile $file): string|null
     {
         $filename = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
-
         $filename = str_replace('.' . $extension, '', $filename);
         $filename = Str::slug(substr($filename, 0, 50));
-        $filename = $filename . '-'. Str::random(15) .'.' . $extension;
-
+        $filename = $filename . '-'. strtolower(Str::random(15)) .'.' . $extension;
         return $this->replaceInsecureSuffix($filename);
     }
 
-    protected function replaceInsecureSuffix($name): array|string|null
+    protected function replaceInsecureSuffix($name): string|null
     {
         return preg_replace("/\.php$/i", '', $name);
     }
@@ -323,7 +313,7 @@ class FileManager
         return true;
     }
 
-    protected function getContentFileUrl($url)
+    protected function getContentFileUrl($url): bool|string
     {
         try {
             $content = $this->client->get($url, [
@@ -341,5 +331,12 @@ class FileManager
     protected function errorMessage($key): array|string
     {
         return trans('cms::filemanager.error-' . $key);
+    }
+
+    protected function removeUploadedFile(UploadedFile $file): void
+    {
+        if (in_array($this->resource_type, ['url', 'path'])) {
+            unlink($file->getRealPath());
+        }
     }
 }

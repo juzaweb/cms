@@ -262,7 +262,7 @@ if (!function_exists('upload_url')) {
         }
 
         $storage = Storage::disk('public');
-        if ($storage->exists($path)) {
+        if ($storage->exists(jw_basepath($path))) {
             return $storage->url($path);
         }
 
@@ -730,7 +730,7 @@ function convert_linux_path(string $path): string
 function seo_string($string, $chars = 70)
 {
     $string = strip_tags($string);
-    $string = str_replace(["\n", "\t"], '', $string);
+    $string = str_replace(["\n", "\t"], ' ', $string);
     $string = html_entity_decode($string, ENT_HTML5);
     return sub_char($string, $chars);
 }
@@ -792,5 +792,12 @@ if (!function_exists('admin_url')) {
         }
 
         return url(config('juzaweb.admin_prefix'), $parameters, $secure);
+    }
+}
+
+if (!function_exists('jw_basepath')) {
+    function jw_basepath(string $path): string
+    {
+        return explode('?', $path)[0];
     }
 }

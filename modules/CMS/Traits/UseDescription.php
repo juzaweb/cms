@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 
 trait UseDescription
 {
-    public static function bootUseDescription()
+    public static function bootUseDescription(): void
     {
         static::saving(function ($model) {
             if (Schema::hasColumns($model->getTable(), ['description'])) {

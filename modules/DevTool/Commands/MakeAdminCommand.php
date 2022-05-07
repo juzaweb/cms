@@ -20,7 +20,7 @@ class MakeAdminCommand extends Command
 {
     protected $signature = 'juzacms:make-admin';
 
-    protected $user;
+    protected array $user;
 
     public function handle()
     {
