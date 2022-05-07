@@ -16,6 +16,6 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           username: ${{ secrets.SSH_USERNAME }}
-          port: 2234
+          port: ${{ secrets.SSH_POST }}
           script: |
             /var/www/webhooks/cms/deploy.sh
