@@ -24,7 +24,7 @@
 
                         <select name="bulk_actions" class="form-control select2-default" data-width="120px">
                             <option value="">{{ trans('cms::app.bulk_actions') }}</option>
-                            <option value="plugin">{{ trans('cms::app.update') }}</option>
+                            <option value="update">{{ trans('cms::app.update') }}</option>
                         </select>
 
                         <button type="submit" class="btn btn-primary px-3" id="apply-action-plugins">{{ trans('cms::app.apply') }}</button>
@@ -38,7 +38,8 @@
                         <tr>
                             <th data-field="state" data-width="3%" data-checkbox="true"></th>
                             <th data-field="plugin">{{ trans('cms::app.plugin') }}</th>
-                            <th data-field="version" data-width="15%">{{ trans('cms::app.version') }}</th>
+                            <th data-field="current_version" data-width="10%">{{ trans('cms::app.current_version') }}</th>
+                            <th data-field="new_version" data-width="10%">{{ trans('cms::app.new_version') }}</th>
                         </tr>
                     </thead>
                 </table>
@@ -56,7 +57,7 @@
 
                         <select name="bulk_actions" class="form-control select2-default" data-width="120px">
                             <option value="">{{ trans('cms::app.bulk_actions') }}</option>
-                            <option value="theme">{{ trans('cms::app.update') }}</option>
+                            <option value="update">{{ trans('cms::app.update') }}</option>
                         </select>
 
                         <button type="submit" class="btn btn-primary px-3" id="apply-action-themes">{{ trans('cms::app.apply') }}</button>
@@ -70,7 +71,8 @@
                         <tr>
                             <th data-field="state" data-width="3%" data-checkbox="true"></th>
                             <th data-field="theme">{{ trans('cms::app.theme') }}</th>
-                            <th data-field="version" data-width="15%">{{ trans('cms::app.version') }}</th>
+                            <th data-field="current_version" data-width="10%">{{ trans('cms::app.current_version') }}</th>
+                            <th data-field="new_version" data-width="10%">{{ trans('cms::app.new_version') }}</th>
                         </tr>
                     </thead>
                 </table>

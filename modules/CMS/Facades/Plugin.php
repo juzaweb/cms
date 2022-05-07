@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Facade;
  * @method string getVersion()
  * @method bool isEnabled()
  *
- * @see \Juzaweb\CMS\Support\Module
+ * @see \Juzaweb\CMS\Support\Plugin
  */
 class Plugin extends Facade
 {

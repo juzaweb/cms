@@ -446,4 +446,6 @@ return [
     'import' => 'Import',
     'install_successfully' => 'Install successfully',
     'reset_password' => 'Reset password',
+    'current_version' => 'Current version',
+    'new_version' => 'New version',
 ];

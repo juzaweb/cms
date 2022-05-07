@@ -133,7 +133,8 @@ class UpdateController extends BackendController
             $result[] = [
                 'id' => $plugin->get('name'),
                 'plugin' => $plugin->getDisplayName(),
-                'version' => $update[$plugin->get('name')]['version'],
+                'current_version' => $plugin->getVersion(),
+                'new_version' => $update[$plugin->get('name')]['version'],
             ];
         }
 
@@ -190,7 +191,8 @@ class UpdateController extends BackendController
             $result[] = [
                 'id' => $theme->get('name'),
                 'theme' => $theme->get('title'),
-                'version' => $update[$theme->get('name')]['version'],
+                'current_version' => $theme->get('version'),
+                'new_version' => $update[$theme->get('name')]['version'],
             ];
         }
 
