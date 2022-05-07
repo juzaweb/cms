@@ -8,6 +8,10 @@ use Prettus\Repository\Exceptions\RepositoryException;
 
 abstract class BaseRepositoryEloquent extends PackageBaseRepository
 {
+    protected array $filterAble = [];
+
+    protected array $searchAble = [];
+
     /**
      * Push Criteria for filter the query
      *

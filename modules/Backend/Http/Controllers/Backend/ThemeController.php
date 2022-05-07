@@ -86,6 +86,10 @@ class ThemeController extends BackendController
 
     public function install(): View
     {
+        if (!config('juzaweb.theme.enable_upload')) {
+            abort(403, 'Access deny.');
+        }
+
         $title = trans('cms::app.install');
 
         $this->addBreadcrumb(
@@ -103,6 +107,10 @@ class ThemeController extends BackendController
 
     public function update(UpdateRequest $request, ThemeUpdater $updater): JsonResponse
     {
+        if (!config('juzaweb.theme.enable_upload')) {
+            abort(403, 'Access deny.');
+        }
+
         $updater = $updater->find($request->input('theme'));
 
         try {
@@ -119,6 +127,10 @@ class ThemeController extends BackendController
 
     public function getDataThemeInstall(Request $request, JuzawebApi $api): object|array
     {
+        if (!config('juzaweb.theme.enable_upload')) {
+            return (object) [];
+        }
+
         $limit = $request->get('limit', 20);
         $page = $request->get('page', 1);
         $except = array_keys(Theme::all(true));

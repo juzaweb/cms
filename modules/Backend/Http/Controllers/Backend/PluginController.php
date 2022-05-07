@@ -37,6 +37,10 @@ class PluginController extends BackendController
 
     public function install(): View
     {
+        if (!config('juzaweb.plugin.enable_upload')) {
+            abort(403, 'Access deny.');
+        }
+
         $title = trans('cms::app.install');
 
         return view(

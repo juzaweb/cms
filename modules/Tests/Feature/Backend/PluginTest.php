@@ -55,6 +55,8 @@ class PluginTest extends TestCase
 
     public function testDeletePlugin()
     {
+        config()->set('juzaweb.plugin.enable_upload', true);
+
         $this->json(
             'POST',
             'admin-cp/plugins/bulk-actions',
