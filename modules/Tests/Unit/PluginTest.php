@@ -46,12 +46,13 @@ class PluginTest extends TestCase
             )
             ->all();
 
-        $this->assertTrue(count($notEnable) == 0);
+        $this->assertEmpty($notEnable);
     }
 
     public function testDisable()
     {
         $plugins = app('plugins')->all();
+
         foreach ($plugins as $plugin) {
             /**
              * @var Plugin $plugin
@@ -67,6 +68,6 @@ class PluginTest extends TestCase
         $this->printText("Check Enable DB");
         $dbPlugins = get_config('plugin_statuses', []);
         $dbPlugins = array_keys($dbPlugins);
-        $this->assertTrue(count($dbPlugins) == 0);
+        $this->assertEmpty($dbPlugins);
     }
 }
