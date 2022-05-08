@@ -5,6 +5,7 @@ $loader = require __DIR__.'/../vendor/autoload.php';
 $autoloadPsr4 = __DIR__ . '/../bootstrap/cache/plugin_autoload_psr4.php';
 if (file_exists($autoloadPsr4)) {
     $map = require $autoloadPsr4;
+    echo json_encode($map);
     foreach ($map as $namespace => $path) {
         $loader->addPsr4($namespace, $path);
     }
