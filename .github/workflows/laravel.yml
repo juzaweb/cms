@@ -42,6 +42,6 @@ jobs:
       - name: Execute tests Install
         run: php artisan test modules/Tests/InstallTest.php
       - name: Execute tests (Unit and Feature tests)
-        run: php artisan test
+        run: php artisan test --stop-on-failure
       - name: Execute tests Update
         run: php artisan test modules/Tests/UpdateTest.php
