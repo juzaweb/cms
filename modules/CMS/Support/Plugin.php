@@ -349,7 +349,7 @@ class Plugin
             ))
                 ->load($providers);
         } catch (\Throwable $e) {
-            $this->disable();
+            //$this->disable();
             throw $e;
         }
     }
