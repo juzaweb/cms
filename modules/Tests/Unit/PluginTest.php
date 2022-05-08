@@ -51,7 +51,7 @@ class PluginTest extends TestCase
 
     public function testDisable()
     {
-        $plugins = app('plugins')->all();
+        //$plugins = app('plugins')->all();
 
         /*foreach ($plugins as $plugin) {
 
