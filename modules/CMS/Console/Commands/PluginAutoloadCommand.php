@@ -17,7 +17,7 @@ class PluginAutoloadCommand extends Command
 {
     protected $signature = 'juzacms:plugin-autoload';
 
-    public function handle()
+    public function handle(): int
     {
         $fileList = glob(config('juzaweb.plugin.path') . '/*/composer.json');
         $vendorDir = base_path('plugins');
