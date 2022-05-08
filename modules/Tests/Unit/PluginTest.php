@@ -47,13 +47,14 @@ class PluginTest extends TestCase
             ->all();
 
         $this->assertEmpty($notEnable);
+
+        $psr4 = require __DIR__ . '/../../../bootstrap/cache/plugin_autoload_psr4.php';
+        $this->printText(json_encode($psr4));
     }
 
     public function testDisable()
     {
         $plugins = app('plugins')->all();
-        $psr4 = require __DIR__ . '/../../../bootstrap/cache/plugin_autoload_psr4.php';
-        $this->printText(json_encode($psr4));
 
         foreach ($plugins as $plugin) {
             /**
