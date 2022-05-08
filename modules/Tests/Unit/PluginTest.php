@@ -46,12 +46,15 @@ class PluginTest extends TestCase
             )
             ->all();
 
-        $this->assertTrue(count($notEnable) == 0);
+        $this->assertEmpty($notEnable);
     }
 
     public function testDisable()
     {
         $plugins = app('plugins')->all();
+        $psr4 = require __DIR__ . '/../../../bootstrap/cache/plugin_autoload_psr4.php';
+        $this->printText(json_encode($psr4));
+
         foreach ($plugins as $plugin) {
             /**
              * @var Plugin $plugin
@@ -67,6 +70,6 @@ class PluginTest extends TestCase
         $this->printText("Check Enable DB");
         $dbPlugins = get_config('plugin_statuses', []);
         $dbPlugins = array_keys($dbPlugins);
-        $this->assertTrue(count($dbPlugins) == 0);
+        $this->assertEmpty($dbPlugins);
     }
 }

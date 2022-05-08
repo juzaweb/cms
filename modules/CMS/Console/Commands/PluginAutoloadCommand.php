@@ -63,8 +63,8 @@ class PluginAutoloadCommand extends Command
         $psr4Content = str_replace('\'__VENDOR_DIR__', '$vendorDir . \'/', $psr4Content);
 
         $fileContent = "<?php \n\n";
-        $fileContent .= "\$vendorDir = dirname(dirname(dirname(__FILE__))) . '/plugins'; \n
-\$baseDir = dirname(dirname(dirname(__FILE__))); \n\n";
+        $fileContent .= "\$vendorDir = dirname(dirname(dirname(__FILE__))) . '/plugins';\n
+\$baseDir = dirname(dirname(dirname(__FILE__)));\n\n";
         $fileContent .= "return {$psr4Content};";
         $fileContent .= "\n";
         file_put_contents(base_path('bootstrap/cache/' . $filename), $fileContent);
