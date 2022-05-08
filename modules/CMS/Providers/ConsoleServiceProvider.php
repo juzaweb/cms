@@ -12,6 +12,7 @@ namespace Juzaweb\CMS\Providers;
 
 use Juzaweb\CMS\Console\Commands\ClearCacheCommand;
 use Juzaweb\CMS\Console\Commands\InstallCommand;
+use Juzaweb\CMS\Console\Commands\PluginAutoloadCommand;
 use Juzaweb\CMS\Console\Commands\SendMailCommand;
 use Juzaweb\CMS\Console\Commands\UpdateCommand;
 use Juzaweb\CMS\Support\ServiceProvider;
@@ -23,6 +24,7 @@ class ConsoleServiceProvider extends ServiceProvider
         UpdateCommand::class,
         SendMailCommand::class,
         ClearCacheCommand::class,
+        PluginAutoloadCommand::class
     ];
 
     public function register()

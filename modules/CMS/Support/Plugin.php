@@ -288,9 +288,9 @@ class Plugin
     public function register(): void
     {
         if (config('plugin.autoload')) {
-            $this->autoloadPSR4();
+            //$this->autoloadPSR4();
 
-            $this->registerAliases();
+            //$this->registerAliases();
 
             $this->registerProviders();
         }
