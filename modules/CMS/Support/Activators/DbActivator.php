@@ -131,9 +131,9 @@ class DbActivator implements ActivatorInterface
 
             if (isset($setting['autoload']['psr-4'])) {
                 $psr4 = $setting['autoload']['psr-4'];
-                $domain = $setting['extra']['juzaweb']['domain'];
-                $classMap = [];
+                $domain = $setting['extra']['juzaweb']['domain'] ?? '';
 
+                $classMap = [];
                 foreach ($psr4 as $key => $paths) {
                     if (!is_array($paths)) {
                         $paths = [$paths];
@@ -184,7 +184,7 @@ class DbActivator implements ActivatorInterface
      */
     public function getAutoloadInfo(Plugin $module): array
     {
-        return $this->modulesStatuses[$module->getName()] ?? null;
+        return $this->modulesStatuses[$module->getName()] ?? [];
     }
 
     /**

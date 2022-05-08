@@ -24,9 +24,19 @@ class UpdateCommand extends Command
             return self::SUCCESS;
         }
 
+        $this->info('Updating...');
         try {
-            $updater->update();
-        } catch (\Exception $e) {
+            $this->info('-- Fetch data update');
+            $updater->fetchData();
+            $this->info('-- Download update file');
+            $updater->downloadUpdateFile();
+            $this->info('-- Unzip file');
+            $updater->unzipFile();
+            $this->info('-- Update files and folders');
+            $updater->updateFileAndFolder();
+            $this->info('-- Finish');
+            $updater->finish();
+        } catch (\Throwable $e) {
             $updater->rollBack();
             throw $e;
         }

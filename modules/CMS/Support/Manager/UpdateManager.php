@@ -129,6 +129,7 @@ abstract class UpdateManager
         }
 
         File::deleteDirectory($this->storage->path($this->tmpFolder), true);
+        File::deleteDirectory($this->storage->path($this->tmpFolder));
 
         Artisan::call('optimize:clear');
 

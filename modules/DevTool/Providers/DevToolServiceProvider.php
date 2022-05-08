@@ -10,6 +10,8 @@
 
 namespace Juzaweb\DevTool\Providers;
 
+use Barryvdh\Debugbar\ServiceProvider as DebugbarServiceProvider;
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Database\Query\Builder;
 use Juzaweb\CMS\Providers\TelescopeServiceProvider;
 use Juzaweb\CMS\Support\ServiceProvider;
@@ -20,7 +22,19 @@ class DevToolServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->environment('local')) {
-            $this->app->register(TelescopeServiceProvider::class);
+            if (class_exists(IdeHelperServiceProvider::class)) {
+                $this->app->register(IdeHelperServiceProvider::class);
+            }
+
+            if (config('app.debug')) {
+                if (class_exists(DebugbarServiceProvider::class)) {
+                    $this->app->register(DebugbarServiceProvider::class);
+                }
+
+                if (class_exists(TelescopeServiceProvider::class)) {
+                    $this->app->register(TelescopeServiceProvider::class);
+                }
+            }
 
             Builder::macro(
                 'toRawSql',

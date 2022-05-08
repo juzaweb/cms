@@ -288,9 +288,9 @@ class Plugin
     public function register(): void
     {
         if (config('plugin.autoload')) {
-            $this->autoloadPSR4();
+            //$this->autoloadPSR4();
 
-            $this->registerAliases();
+            //$this->registerAliases();
 
             $this->registerProviders();
         }
@@ -349,7 +349,7 @@ class Plugin
             ))
                 ->load($providers);
         } catch (\Throwable $e) {
-            $this->disable();
+            //$this->disable();
             throw $e;
         }
     }

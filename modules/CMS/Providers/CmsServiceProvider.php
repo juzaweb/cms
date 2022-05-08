@@ -2,8 +2,6 @@
 
 namespace Juzaweb\CMS\Providers;
 
-use Barryvdh\Debugbar\ServiceProvider as DebugbarServiceProvider;
-use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -90,14 +88,6 @@ class CmsServiceProvider extends ServiceProvider
 
     protected function registerConfigs()
     {
-        if ($this->app->environment() !== 'production') {
-            $this->app->register(IdeHelperServiceProvider::class);
-
-            if (config('app.debug')) {
-                $this->app->register(DebugbarServiceProvider::class);
-            }
-        }
-
         $this->mergeConfigFrom(
             $this->basePath . '/config/juzaweb.php',
             'juzaweb'
