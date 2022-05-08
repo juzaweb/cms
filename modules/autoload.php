@@ -10,6 +10,8 @@ if (file_exists($autoloadPsr4)) {
     }
 }
 
+$loader->register(true);
+
 $autoloadFiles = __DIR__ . '/../bootstrap/cache/plugin_autoload_files.php';
 if (file_exists($autoloadFiles)) {
     $includeFiles = require $autoloadFiles;
