@@ -85,6 +85,17 @@ class CmsUpdater extends UpdateManager
         );
     }
 
+    public function getUploadPaths(): array
+    {
+        if (JW_PLUGIN_AUTOLOAD) {
+            return parent::getUploadPaths();
+        }
+
+        return [
+            'modules',
+        ];
+    }
+
     protected function getLocalPath(): string
     {
         return base_path();

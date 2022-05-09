@@ -143,14 +143,20 @@ abstract class UpdateManager
         //
     }
 
+    public function getUploadPaths(): array
+    {
+        return $this->updatePaths;
+    }
+
     protected function updateFolder(string $source, string $target): bool
     {
-        if (empty($this->updatePaths)) {
+        $updatePaths = $this->getUploadPaths();
+        if (empty($updatePaths)) {
             File::copyDirectory($source, $target);
             return true;
         }
 
-        foreach ($this->updatePaths as $path) {
+        foreach ($updatePaths as $path) {
             $sourcePath = str_replace('\\', '/', "{$source}/{$path}");
             $targetPath = str_replace('\\', '/', "{$target}/{$path}");
 
