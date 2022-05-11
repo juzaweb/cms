@@ -287,13 +287,7 @@ class Plugin
      */
     public function register(): void
     {
-        if (config('plugin.autoload')) {
-            //$this->autoloadPSR4();
-
-            //$this->registerAliases();
-
-            $this->registerProviders();
-        }
+        $this->registerProviders();
 
         $this->registerFiles();
 
@@ -334,7 +328,7 @@ class Plugin
     {
         $providers = $this->getExtraJuzaweb('providers', []);
 
-        if (config('plugin.autoload')) {
+        if (JW_PLUGIN_AUTOLOAD) {
             $providers = array_merge(
                 $this->getExtraLarevel('providers', []),
                 $providers
@@ -349,7 +343,7 @@ class Plugin
             ))
                 ->load($providers);
         } catch (\Throwable $e) {
-            //$this->disable();
+            $this->disable();
             throw $e;
         }
     }
@@ -493,9 +487,7 @@ class Plugin
         $this->fireEvent('enabling');
         $this->activator->enable($this);
         $this->flushCache();
-        if (config('plugin.autoload')) {
-            $this->runMigrate();
-        }
+        $this->runMigrate();
         $this->publishAssets();
         $this->fireEvent('enabled');
     }

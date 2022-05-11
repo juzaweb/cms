@@ -2,9 +2,11 @@
 
 $loader = require __DIR__.'/../vendor/autoload.php';
 
-if (!defined('JW_PLUGIN_AUTOLOAD')) {
-    define('JW_PLUGIN_AUTOLOAD', true);
+if (file_exists(__DIR__ . '/../define.php')) {
+    require __DIR__ . '/../define.php';
 }
+
+require __DIR__ . '/define.php';
 
 if (JW_PLUGIN_AUTOLOAD) {
     $autoloadPsr4 = __DIR__ . '/../bootstrap/cache/plugin_autoload_psr4.php';

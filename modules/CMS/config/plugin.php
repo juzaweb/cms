@@ -11,19 +11,11 @@
 use Juzaweb\CMS\Support\Activators\DbActivator;
 
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Autoload Plugin
-    |--------------------------------------------------------------------------
-    | Plugin namespace autoload if active, if false, you can run `composer require vendor/plugin` to enable plugin
-    */
-    'autoload' => env('AUTOLOAD_PLUGIN', true),
-    
     /**
      * Activator helper
      */
     'activator' => DbActivator::class,
-    
+
     'stubs' => [
         'enabled' => true,
         'files' => [
