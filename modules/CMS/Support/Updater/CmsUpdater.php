@@ -12,7 +12,8 @@ class CmsUpdater extends UpdateManager
     protected array $updatePaths = [
         'modules',
         'vendor',
-        'composer.json'
+        'composer.json',
+        'composer.lock',
     ];
 
     public function getCurrentVersion(): string
@@ -83,6 +84,17 @@ class CmsUpdater extends UpdateManager
                 'type' => 'assets',
             ]
         );
+    }
+
+    public function getUploadPaths(): array
+    {
+        if (JW_PLUGIN_AUTOLOAD) {
+            return parent::getUploadPaths();
+        }
+
+        return [
+            'modules',
+        ];
     }
 
     protected function getLocalPath(): string

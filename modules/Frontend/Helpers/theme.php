@@ -16,6 +16,7 @@ use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Menu;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Facades\ThemeConfig;
 use Juzaweb\CMS\Support\Theme\BackendMenuBuilder;
@@ -29,15 +30,14 @@ function body_class($class = '')
     return apply_filters('theme.body_class', $class);
 }
 
-function theme_assets(string $path, string $theme = null)
+function theme_assets(string $path, string $theme = null): ?string
 {
-    if (str_starts_with($path, 'jw-styles/')) {
-        return asset($path);
-    }
-
-    $path = str_replace('assets/', '', $path);
-
     return Theme::assets($path, $theme);
+}
+
+function plugin_assets(string $path, string $plugin = null): ?string
+{
+    return Plugin::assets($plugin, $path);
 }
 
 if (! function_exists('page_url')) {

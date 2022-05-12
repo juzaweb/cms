@@ -11,10 +11,12 @@
                 <div class="col-md-8 ">
                     <div class="card__post-carousel">
                         {% set break = false %}
-                        {% for index,item in items if not break %}
+                        {% for index,item in items %}
                             {% if index > 0 %}
                                 {% set break = true %}
                             {% endif %}
+
+                            {% if not break %}
 
                             {% set category = get_post_taxonomy(item, 'categories') %}
 
@@ -56,6 +58,9 @@
                                 </div>
                             </div>
                         </div>
+
+                            {% endif %}
+
                         {% endfor %}
                     </div>
                 </div>
@@ -144,15 +149,15 @@
                                     <div class="article__content">
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
-                    <span class="text-primary">
-                        {{ __('by') }} {{ item.author.name }}
-                    </span>,
+                                                <span class="text-primary">
+                                                    {{ __('by') }} {{ item.author.name }}
+                                                </span>,
                                             </li>
 
                                             <li class="list-inline-item">
-                    <span>
-                        {{ item.created_at }}
-                    </span>
+                                                <span>
+                                                    {{ item.created_at }}
+                                                </span>
                                             </li>
                                         </ul>
                                         <h5>

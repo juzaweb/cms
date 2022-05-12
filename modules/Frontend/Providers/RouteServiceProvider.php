@@ -23,9 +23,7 @@ class RouteServiceProvider extends BaseServiceProvider
 
     protected function mapAssetRoutes()
     {
-        Route::middleware('assets')
-            ->namespace($this->namespace)
-            ->group(__DIR__ . '/../routes/assets.php');
+        Route::group([], __DIR__ . '/../routes/assets.php');
     }
 
     protected function mapThemeRoutes()

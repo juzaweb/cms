@@ -8,13 +8,15 @@
  * @license    MIT
  */
 
-/*Route::get('jw-styles/themes/{theme}/{path}', 'Frontend\AssetController@assetsTheme')
-    ->where('theme', '[0-9a-z]+')
-    ->where('path', '[0-9a-z\.\/\-]+');
+use Juzaweb\Frontend\Http\Controllers\AssetController;
 
-Route::get('jw-styles/plugins/{plugin}/{path}', 'Frontend\AssetController@assetsPlugin')
+Route::get('jw-styles/themes/{theme}/{path}', [AssetController::class, 'assetTheme'])
     ->where('theme', '[0-9a-z]+')
-    ->where('path', '[0-9a-z\.\/\-]+');
+    ->where('path', '[0-9a-zA-Z\/\-\.]+');
 
-Route::get('storage/{path}', 'Frontend\AssetController@assetsStorage')
-    ->where('path', '[0-9a-z\.\/\-]+');*/
+Route::get('jw-styles/plugins/{plugin}/{path}', [AssetController::class, 'assetPlugin'])
+    ->where('theme', '[0-9a-z]+')
+    ->where('path', '[0-9a-zA-Z\/\-\.]+');
+
+Route::get('storage/{path}', [AssetController::class, 'assetStorage'])
+    ->where('path', '[0-9a-zA-Z\/\-\.]+');

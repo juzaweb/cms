@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Facade;
  * @method string getDomainName()
  * @method string getSettingUrl()
  * @method string getVersion()
+ * @method string getScreenshot()
  * @method bool isEnabled()
  *
  * @see \Juzaweb\CMS\Support\Plugin

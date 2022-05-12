@@ -287,13 +287,7 @@ class Plugin
      */
     public function register(): void
     {
-        if (config('plugin.autoload')) {
-            //$this->autoloadPSR4();
-
-            //$this->registerAliases();
-
-            $this->registerProviders();
-        }
+        $this->registerProviders();
 
         $this->registerFiles();
 
@@ -334,7 +328,7 @@ class Plugin
     {
         $providers = $this->getExtraJuzaweb('providers', []);
 
-        if (config('plugin.autoload')) {
+        if (JW_PLUGIN_AUTOLOAD) {
             $providers = array_merge(
                 $this->getExtraLarevel('providers', []),
                 $providers
@@ -349,7 +343,7 @@ class Plugin
             ))
                 ->load($providers);
         } catch (\Throwable $e) {
-            //$this->disable();
+            $this->disable();
             throw $e;
         }
     }
@@ -493,9 +487,7 @@ class Plugin
         $this->fireEvent('enabling');
         $this->activator->enable($this);
         $this->flushCache();
-        if (config('plugin.autoload')) {
-            $this->runMigrate();
-        }
+        $this->runMigrate();
         $this->publishAssets();
         $this->fireEvent('enabled');
     }
@@ -571,5 +563,38 @@ class Plugin
     public function getSettingUrl(): ?string
     {
         return $this->getExtraJuzaweb('setting_url');
+    }
+
+    public function assets(string $path = null, string $default = null): string
+    {
+        if (str_starts_with($path, 'jw-styles/')) {
+            return asset($path);
+        }
+
+        $path = str_replace('assets/', '', $path);
+
+        $path = $this->getPath("assets/public/{$path}");
+
+        if (file_exists($path)) {
+            return asset("jw-styles/plugins/{$this->name}/assets/{$path}");
+        }
+
+        if ($default) {
+            if (is_url($default)) {
+                return $default;
+            }
+
+            return asset($default);
+        }
+
+        return asset('jw-styles/juzaweb/images/thumb-default.png');
+    }
+
+    public function getScreenshot(): ?string
+    {
+        return $this->assets(
+            'images/screenshot.png',
+            'jw-styles/juzaweb/images/screenshot.svg'
+        );
     }
 }

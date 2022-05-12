@@ -30,7 +30,7 @@ jobs:
           coverage: none
       - uses: actions/checkout@v2
       - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
+        run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
       - name: Install Dependencies
         run: composer install
       - name: Generate key
