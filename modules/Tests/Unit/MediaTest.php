@@ -19,13 +19,13 @@ class MediaTest extends TestCase
 {
     public function testUploadByPath()
     {
-        Storage::put('app/tmps/test.txt', date('Y-m-d H:i:s'));
+        Storage::put('tmps/test.txt', date('Y-m-d H:i:s'));
 
-        $media = FileManager::addFile(Storage::path('app/tmps/test.txt'), 'file', null, User::first()->id);
+        $media = FileManager::addFile(Storage::path('tmps/test.txt'), 'file', null, User::first()->id);
 
         $this->assertNotEmpty($media->path);
 
-        $this->assertFileDoesNotExist(Storage::path('app/tmps/test.txt'));
+        $this->assertFileDoesNotExist(Storage::path('tmps/test.txt'));
     }
 
     public function testUploadByUrl()
