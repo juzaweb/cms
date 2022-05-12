@@ -11,7 +11,7 @@ use Juzaweb\CMS\Http\Controllers\Controller;
 
 class AssetController extends Controller
 {
-    public function assetsPlugin($plugin, $path): HttpResponse
+    public function assetPlugin($plugin, $path): HttpResponse
     {
         $path = str_replace('assets/', '', $path);
         $assetPath = plugin_path($plugin, 'src/resources/assets/public/' . $path);
@@ -19,7 +19,7 @@ class AssetController extends Controller
         return $this->responsePath($assetPath);
     }
 
-    public function assetsTheme($theme, $path): HttpResponse
+    public function assetTheme($theme, $path): HttpResponse
     {
         $path = str_replace('assets/', '', $path);
         $assetPath = Theme::getThemePath($theme) . '/assets/public/' . $path;
@@ -42,6 +42,25 @@ class AssetController extends Controller
         $response = Response::make($content);
         $response->header('Content-Type', $contentType);
         $response->header('Cache-Control', 'public');
+
+        return $response;
+    }
+
+    public function assetsStorage($path): HttpResponse
+    {
+        $path = Storage::disk('public')->path($path);
+
+        return $this->responsePath($path);
+    }
+
+    public function languageScript($lang): HttpResponse
+    {
+        Lang::setLocale($lang);
+
+        $langs = Lang::get('cms');
+        $content = 'var langs = JSON.parse(\'' . json_encode($langs) . '\');';
+        $response = Response::make($content);
+        $response->header('Content-Type', 'application/javascript');
 
         return $response;
     }
@@ -79,24 +98,5 @@ class AssetController extends Controller
         }
 
         return false;
-    }
-
-    public function assetsStorage($path): HttpResponse
-    {
-        $path = Storage::disk('public')->path($path);
-
-        return $this->responsePath($path);
-    }
-
-    public function languageScript($lang): HttpResponse
-    {
-        Lang::setLocale($lang);
-
-        $langs = Lang::get('cms');
-        $content = 'var langs = JSON.parse(\'' . json_encode($langs) . '\');';
-        $response = Response::make($content);
-        $response->header('Content-Type', 'application/javascript');
-
-        return $response;
     }
 }
