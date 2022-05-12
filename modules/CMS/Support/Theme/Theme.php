@@ -7,7 +7,6 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\HtmlString;
 use Illuminate\View\ViewFinderInterface;
 use Juzaweb\CMS\Contracts\ThemeContract;
 use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
@@ -127,7 +126,7 @@ class Theme implements ThemeContract
      *
      * @return false|Config
      */
-    public function getThemeInfo($theme): bool|Config
+    public function getThemeInfo(string $theme): bool|Config
     {
         $themePath = $this->getThemePath($theme);
         $themeConfigPath = $themePath . '/theme.json';
@@ -177,9 +176,9 @@ class Theme implements ThemeContract
      *
      * @param bool $collection
      *
-     * @return null
+     * @return bool|string|Config|null
      */
-    public function current($collection = false)
+    public function current(bool $collection = false): bool|string|Config|null
     {
         return ! $collection ? $this->activeTheme : $this->getThemeInfo($this->activeTheme);
     }
@@ -190,7 +189,7 @@ class Theme implements ThemeContract
      * @param boolean $assoc
      * @return array
      */
-    public function all(bool $assoc = false)
+    public function all(bool $assoc = false): array
     {
         $themeDirectories = File::directories($this->basePath);
         $themes = [];
@@ -231,6 +230,12 @@ class Theme implements ThemeContract
             $theme = $this->activeTheme;
         }
 
+        if (str_starts_with($path, 'jw-styles/')) {
+            return asset($path);
+        }
+
+        $path = str_replace('assets/', '', $path);
+
         return $this->assetsUrl($theme, $secure) . '/' . $path;
     }
 
@@ -238,11 +243,11 @@ class Theme implements ThemeContract
      * Find theme asset from theme directory.
      *
      * @param string $path
-     * @param string $theme
+     * @param string|null $theme
      *
      * @return string|false
      */
-    public function getFullPath($path, $theme = null): bool|string
+    public function getFullPath(string $path, string $theme = null): bool|string
     {
         $splitThemeAndPath = explode(':', $path);
 
@@ -282,20 +287,6 @@ class Theme implements ThemeContract
         return $fullPath;
     }
 
-    /**
-     * Get the current theme path to a versioned Mix file.
-     *
-     * @param string $path
-     * @param string $manifestDirectory
-     *
-     * @return HtmlString|string
-     * @throws \Exception
-     */
-    public function themeMix($path, $manifestDirectory = '')
-    {
-        return mix($this->getFullPath($path), $manifestDirectory);
-    }
-
     public function getScreenshot($theme): string
     {
         $path = $this->getThemePath($theme, 'assets/public/images/screenshot.png');
@@ -312,7 +303,7 @@ class Theme implements ThemeContract
         return $info->get('version', '0');
     }
 
-    public function getTemplates($theme, $template = null)
+    public function getTemplates(string $theme, string $template = null): array|null
     {
         if ($template) {
             return Arr::get($this->getRegister($theme), "templates.{$template}");
@@ -343,14 +334,10 @@ class Theme implements ThemeContract
      *
      * @return void
      */
-    protected function loadTheme($theme): void
+    protected function loadTheme(string $theme): void
     {
-        if (is_null($theme)) {
-            return;
-        }
-
         $themeInfo = $this->getThemeInfo($theme);
-        if (is_null($themeInfo)) {
+        if (!$themeInfo) {
             return;
         }
 

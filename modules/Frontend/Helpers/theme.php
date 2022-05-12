@@ -32,12 +32,6 @@ function body_class($class = '')
 
 function theme_assets(string $path, string $theme = null): ?string
 {
-    if (str_starts_with($path, 'jw-styles/')) {
-        return asset($path);
-    }
-
-    $path = str_replace('assets/', '', $path);
-
     return Theme::assets($path, $theme);
 }
 
