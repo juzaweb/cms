@@ -21,26 +21,26 @@ class Theme
      *
      * @var \Illuminate\Contracts\Foundation\Application
      */
-    protected $app;
+    protected \Illuminate\Contracts\Foundation\Application $app;
 
     /**
      * The plugin name.
      *
      * @var
      */
-    protected $name;
+    protected string $name;
 
     /**
      * The plugin path.
      *
      * @var string
      */
-    protected $path;
+    protected string $path;
 
     /**
      * @var Filesystem
      */
-    protected $files;
+    protected Filesystem $files;
 
     public function __construct($app, $name, $path)
     {
@@ -66,7 +66,7 @@ class Theme
      * @param string $path
      * @return string
      */
-    public function getPath($path = ''): string
+    public function getPath(string $path = ''): string
     {
         if (empty($path)) {
             return $this->path;
@@ -80,7 +80,7 @@ class Theme
      *
      * @return null|Config
      */
-    public function getInfo()
+    public function getInfo(): ?Config
     {
         $themeConfigPath = $this->path . '/theme.json';
         $themeChangelogPath = $this->path . '/changelog.yml';
@@ -109,11 +109,37 @@ class Theme
     /**
      * Get version theme
      *
-     * @return string|null
+     * @return string
      */
-    public function getVersion()
+    public function getVersion(): string
     {
-        return $this->get('version', 0);
+        return $this->get('version', '0');
+    }
+
+    public function asset(string $path, string $default = null): string
+    {
+        if (str_starts_with($path, 'jw-styles/')) {
+            return \asset($path);
+        }
+
+        $path = str_replace('assets/', '', $path);
+
+        $path = $this->getPath("assets/public/{$path}");
+
+        if (!file_exists($path)) {
+            if (is_url($default)) {
+                return $default;
+            }
+
+            return \asset($default);
+        }
+
+        return \asset("jw-styles/themes/{$this->name}/assets/{$path}");
+    }
+
+    public function getScreenshot(): string
+    {
+        return $this->asset('images/screenshot.svg');
     }
 
     /**
@@ -124,7 +150,7 @@ class Theme
      *
      * @return mixed
      */
-    public function get(string $key, $default = null)
+    public function get(string $key, $default = null): mixed
     {
         return $this->json()->get($key, $default);
     }
@@ -132,11 +158,11 @@ class Theme
     /**
      * Get json contents from the cache, setting as needed.
      *
-     * @param string $file
+     * @param string|null $file
      *
      * @return Json
      */
-    public function json($file = null): Json
+    public function json(string $file = null): Json
     {
         if ($file === null) {
             $file = 'theme.json';
@@ -145,17 +171,20 @@ class Theme
         return new Json($this->getPath() . '/' . $file, $this->files);
     }
 
-    public function activate()
+    public function activate(): void
     {
         $this->putCache();
 
-        Artisan::call('theme:publish', [
-            'theme' => $this->name,
-            'type' => 'assets',
-        ]);
+        Artisan::call(
+            'theme:publish',
+            [
+                'theme' => $this->name,
+                'type' => 'assets',
+            ]
+        );
     }
 
-    protected function putCache()
+    protected function putCache(): void
     {
         Cache::forever('current_theme_info', $this->getInfo());
 
