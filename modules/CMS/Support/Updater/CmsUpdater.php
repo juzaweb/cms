@@ -12,7 +12,8 @@ class CmsUpdater extends UpdateManager
     protected array $updatePaths = [
         'modules',
         'vendor',
-        'composer.json'
+        'composer.json',
+        'composer.lock',
     ];
 
     public function getCurrentVersion(): string
