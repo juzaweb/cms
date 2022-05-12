@@ -2,6 +2,8 @@
 
 namespace Juzaweb\Frontend\Http\Controllers;
 
+use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Juzaweb\CMS\Facades\Theme;
@@ -9,15 +11,22 @@ use Juzaweb\CMS\Http\Controllers\Controller;
 
 class AssetController extends Controller
 {
-    public function assetsPlugin($plugin, $path)
+    public function assetsPlugin($plugin, $path): HttpResponse
     {
         $path = str_replace('assets/', '', $path);
-        $assetPath = plugin_path($plugin, 'src/resources/assets/' . $path);
+        $assetPath = plugin_path($plugin, 'src/resources/assets/public/' . $path);
 
         return $this->responsePath($assetPath);
     }
 
-    protected function responsePath($path)
+    public function assetsTheme($theme, $path): HttpResponse
+    {
+        $path = str_replace('assets/', '', $path);
+        $assetPath = Theme::getThemePath($theme) . '/assets/public/' . $path;
+        return $this->responsePath($assetPath);
+    }
+
+    protected function responsePath($path): HttpResponse
     {
         $path = $this->parsePathSecurity($path);
         if (! file_exists($path)) {
@@ -30,19 +39,19 @@ class AssetController extends Controller
         }
 
         $content = file_get_contents($path);
-        $response = Response::make($content, 200);
+        $response = Response::make($content);
         $response->header('Content-Type', $contentType);
         $response->header('Cache-Control', 'public');
 
         return $response;
     }
 
-    protected function parsePathSecurity($path)
+    protected function parsePathSecurity($path): string
     {
-        return str_replace('..', '', $path);
+        return str_replace('.php', '', $path);
     }
 
-    protected function getStaticAssets($path)
+    protected function getStaticAssets($path): bool|string
     {
         $extension = pathinfo($path, PATHINFO_EXTENSION);
 
@@ -72,28 +81,20 @@ class AssetController extends Controller
         return false;
     }
 
-    public function assetsTheme($theme, $path)
-    {
-        $path = str_replace('assets/', '', $path);
-        $assetPath = Theme::getThemePath($theme) . '/assets/' . $path;
-
-        return $this->responsePath($assetPath);
-    }
-
-    public function assetsStorage($path)
+    public function assetsStorage($path): HttpResponse
     {
         $path = Storage::disk('public')->path($path);
 
         return $this->responsePath($path);
     }
 
-    public function languageScript($lang)
+    public function languageScript($lang): HttpResponse
     {
-        \Lang::setLocale($lang);
+        Lang::setLocale($lang);
 
-        $langs = \Lang::get('tad');
+        $langs = Lang::get('cms');
         $content = 'var langs = JSON.parse(\'' . json_encode($langs) . '\');';
-        $response = Response::make($content, 200);
+        $response = Response::make($content);
         $response->header('Content-Type', 'application/javascript');
 
         return $response;

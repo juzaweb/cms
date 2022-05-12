@@ -14,7 +14,7 @@
 |--------------------------------------------------------------------------
 | Plugin namespace autoload if active, if false, you can run `composer require vendor/plugin` to enable plugin
 */
-//define('JW_PLUGIN_AUTOLOAD', false);
+//define('JW_PLUGIN_AUTOLOAD', true);
 
 //define('JW_BASE_PATH', __DIR__);
 /**

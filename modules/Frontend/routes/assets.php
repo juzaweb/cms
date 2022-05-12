@@ -8,10 +8,12 @@
  * @license    MIT
  */
 
-/*Route::get('jw-styles/themes/{theme}/{path}', 'Frontend\AssetController@assetsTheme')
-    ->where('theme', '[0-9a-z]+')
-    ->where('path', '[0-9a-z\.\/\-]+');
+use Juzaweb\Frontend\Http\Controllers\AssetController;
 
+Route::get('themes/{theme}/{path}', [AssetController::class, 'assetsTheme'])
+    ->where('theme', '[0-9a-z]+')
+    ->where('path', '[0-9a-zA-Z\/\-\.]+');
+/*
 Route::get('jw-styles/plugins/{plugin}/{path}', 'Frontend\AssetController@assetsPlugin')
     ->where('theme', '[0-9a-z]+')
     ->where('path', '[0-9a-z\.\/\-]+');

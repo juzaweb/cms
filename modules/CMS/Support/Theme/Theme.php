@@ -136,13 +136,7 @@ class Theme implements ThemeContract
             $themeConfig = Config::load($themeConfigPath);
             $themeConfig['changelog'] = Config::load($themeChangelogPath)->all();
             $themeConfig['path'] = $themePath;
-            $screenshot = $themePath . '/assets/images/screenshot.png';
-
-            if (file_exists($screenshot)) {
-                $themeConfig['screenshot'] = theme_assets('images/screenshot.png', $theme);
-            } else {
-                $themeConfig['screenshot'] = asset('jw-styles/juzaweb/images/thumb-default.png');
-            }
+            $themeConfig['screenshot'] = $this->getScreenshot($theme);
 
             if ($themeConfig->has('name')) {
                 return $themeConfig;
@@ -155,12 +149,12 @@ class Theme implements ThemeContract
     /**
      * Returns current theme or particular theme information.
      *
-     * @param string $theme
-     * @param bool   $collection
+     * @param string|null $theme
+     * @param bool $collection
      *
      * @return array|null
      */
-    public function get($theme = null, $collection = false)
+    public function get(string $theme = null, bool $collection = false): ?array
     {
         if (is_null($theme) || ! $this->has($theme)) {
             if ($collection) {
@@ -303,9 +297,9 @@ class Theme implements ThemeContract
 
     public function getScreenshot($theme): string
     {
-        $path = $this->getThemePath($theme, 'assets/screenshot.png');
+        $path = $this->getThemePath($theme, 'assets/public/images/screenshot.png');
         if (file_exists($path)) {
-            return theme_assets('screenshot.png', $theme);
+            return theme_assets('images/screenshot.png', $theme);
         }
 
         return asset('jw-styles/juzaweb/images/screenshot.svg');
