@@ -7,6 +7,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\HtmlString;
 use Illuminate\View\ViewFinderInterface;
 use Juzaweb\CMS\Contracts\ThemeContract;
 use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
@@ -219,12 +220,12 @@ class Theme implements ThemeContract
      * Find asset file for theme asset.
      *
      * @param string $path
-     * @param string $theme
-     * @param null|bool $secure
+     * @param string|null $theme
+     * @param bool|null $secure
      *
      * @return string
      */
-    public function assets($path, $theme = null, $secure = null): string
+    public function assets(string $path, string $theme = null, bool $secure = null): string
     {
         if (empty($theme)) {
             $theme = $this->activeTheme;
@@ -287,7 +288,7 @@ class Theme implements ThemeContract
      * @param string $path
      * @param string $manifestDirectory
      *
-     * @return \Illuminate\Support\HtmlString|string
+     * @return HtmlString|string
      * @throws \Exception
      */
     public function themeMix($path, $manifestDirectory = '')

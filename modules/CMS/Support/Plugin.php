@@ -564,4 +564,37 @@ class Plugin
     {
         return $this->getExtraJuzaweb('setting_url');
     }
+
+    public function assets(string $path = null, string $default = null): string
+    {
+        if (str_starts_with($path, 'jw-styles/')) {
+            return asset($path);
+        }
+
+        $path = str_replace('assets/', '', $path);
+
+        $path = $this->getPath("assets/public/{$path}");
+
+        if (file_exists($path)) {
+            return asset("jw-styles/plugins/{$this->name}/assets/{$path}");
+        }
+
+        if ($default) {
+            if (is_url($default)) {
+                return $default;
+            }
+
+            return asset($default);
+        }
+
+        return asset('jw-styles/juzaweb/images/thumb-default.png');
+    }
+
+    public function getScreenshot(): ?string
+    {
+        return $this->assets(
+            'images/screenshot.png',
+            'jw-styles/juzaweb/images/screenshot.svg'
+        );
+    }
 }
