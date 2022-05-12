@@ -23,8 +23,7 @@ class RouteServiceProvider extends BaseServiceProvider
 
     protected function mapAssetRoutes()
     {
-        Route::prefix('jw-styles')
-            ->group(__DIR__ . '/../routes/assets.php');
+        Route::group([], __DIR__ . '/../routes/assets.php');
     }
 
     protected function mapThemeRoutes()

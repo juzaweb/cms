@@ -26,6 +26,25 @@ class AssetController extends Controller
         return $this->responsePath($assetPath);
     }
 
+    public function assetStorage($path): HttpResponse
+    {
+        $path = Storage::disk('public')->path($path);
+
+        return $this->responsePath($path);
+    }
+
+    public function languageScript($lang): HttpResponse
+    {
+        Lang::setLocale($lang);
+
+        $langs = Lang::get('cms');
+        $content = 'var langs = JSON.parse(\'' . json_encode($langs) . '\');';
+        $response = Response::make($content);
+        $response->header('Content-Type', 'application/javascript');
+
+        return $response;
+    }
+
     protected function responsePath($path): HttpResponse
     {
         $path = $this->parsePathSecurity($path);
@@ -42,25 +61,6 @@ class AssetController extends Controller
         $response = Response::make($content);
         $response->header('Content-Type', $contentType);
         $response->header('Cache-Control', 'public');
-
-        return $response;
-    }
-
-    public function assetsStorage($path): HttpResponse
-    {
-        $path = Storage::disk('public')->path($path);
-
-        return $this->responsePath($path);
-    }
-
-    public function languageScript($lang): HttpResponse
-    {
-        Lang::setLocale($lang);
-
-        $langs = Lang::get('cms');
-        $content = 'var langs = JSON.parse(\'' . json_encode($langs) . '\');';
-        $response = Response::make($content);
-        $response->header('Content-Type', 'application/javascript');
 
         return $response;
     }
