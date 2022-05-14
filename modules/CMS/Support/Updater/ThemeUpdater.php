@@ -81,6 +81,6 @@ class ThemeUpdater extends UpdateManager
     {
         //return config('juzaweb.theme.path').'/'.$this->name;
 
-        return base_path('update-test/theme');
+        return base_path('update-test/theme').'/'.$this->name;
     }
 }

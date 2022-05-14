@@ -12,6 +12,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
@@ -98,7 +99,7 @@ class UpdateController extends BackendController
         );
     }
 
-    public function updateStep(string $type, int $step): JsonResponse
+    public function updateStep(Request $request, string $type, int $step): JsonResponse
     {
         set_time_limit(0);
 
@@ -107,6 +108,24 @@ class UpdateController extends BackendController
         }
 
         $updater = $this->getUpdater($type);
+
+        if ($type == 'theme') {
+            $theme = $request->input('theme');
+            if (empty($theme)) {
+                throw new \Exception('Theme is required.');
+            }
+
+            $updater = $updater->find($theme);
+        }
+
+        if ($type == 'plugin') {
+            $plugin = $request->input('plugin');
+            if (empty($plugin)) {
+                throw new \Exception('Plugin is required.');
+            }
+
+            $updater = $updater->find($plugin);
+        }
 
         if ($step <= 0 || $step > $updater->getMaxStep()) {
             abort(404);
@@ -126,12 +145,14 @@ class UpdateController extends BackendController
             );
         }
 
+        $next = $step < $updater->getMaxStep();
+
         return response()->json(
             [
                 'status' => true,
                 'data' => [
-                    'message' => 'Done',
-                    'next_url' => $step < $updater->getMaxStep() ? route(
+                    'message' => $next ? 'Done' : trans('cms::app.updated_successfully'),
+                    'next_url' => $next ? route(
                         'admin.update.step',
                         [
                             $type,
@@ -270,9 +291,9 @@ class UpdateController extends BackendController
             case 'cms':
                 return app(CmsUpdater::class);
             case 'theme':
-                return app(PluginUpdater::class);
-            case 'plugin':
                 return app(ThemeUpdater::class);
+            case 'plugin':
+                return app(PluginUpdater::class);
         }
 
         throw new \Exception('Updater Not found.');

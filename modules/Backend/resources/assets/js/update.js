@@ -57,7 +57,14 @@ function jwCMSUpdate(
                     jwUpdateProcess(processElement, null, step * 17);
                 }
 
-                jwCMSUpdate(type, step+1, processElement, params);
+                jwCMSUpdate(
+                    type,
+                    step+1,
+                    processElement,
+                    params,
+                    successCallback,
+                    failCallback
+                );
             } else {
                 if (successCallback) {
                     successCallback(response);
@@ -102,10 +109,9 @@ $(document).on("turbolinks:load", function() {
             'theme',
             1,
             null,
-            {themes: [theme]},
+            {theme: theme},
             function (response) {
-                btn.prop("disabled", false);
-                btn.html(btnText);
+                btn.remove();
                 show_message(response);
             },
             function (response) {
