@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Noodlehaus\Config;
 
@@ -81,7 +81,7 @@ class PageController extends FrontendController
     {
         /* Get view by template */
         if ($template = $page->getMeta('template')) {
-            $templates = Theme::getTemplates($themeInfo->get('name'), $template);
+            $templates = ThemeLoader::getTemplates($themeInfo->get('name'), $template);
             $templateView = $templates['view'] ?? null;
 
             if ($templateView && view()->exists(theme_viewname($templateView))) {

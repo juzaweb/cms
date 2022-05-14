@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Support\Plugin;
 
 class LaravelModulesV6Migrator extends Command
@@ -16,7 +16,7 @@ class LaravelModulesV6Migrator extends Command
     public function handle()
     {
         $moduleStatuses = [];
-        /** @var PluginRepositoryInterface $modules */
+        /** @var LocalPluginRepositoryContract $modules */
         $modules = $this->laravel['plugins'];
 
         $modules = $modules->all();

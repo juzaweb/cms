@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Illuminate\Support\Collection;
 
 abstract class TranslationCommand extends Command
@@ -29,12 +29,12 @@ abstract class TranslationCommand extends Command
                 'path' => 'modules/Backend/resources/lang'
             ]
         );
-        
+
         $result = array_merge($result, $this->getLocalePlugins());
-        
+
         return collect($result);
     }
-    
+
     protected function getLocalePlugins()
     {
         $result = [];
@@ -51,14 +51,14 @@ abstract class TranslationCommand extends Command
                 ]
             );
         }
-        
+
         return $result;
     }
-    
+
     protected function getLocaleThemes()
     {
         $result = [];
-        $themes = Theme::all();
+        $themes = ThemeLoader::all();
         foreach ($themes as $theme) {
             $result['theme_' . $theme->get('name')] = collect(
                 [
@@ -71,22 +71,22 @@ abstract class TranslationCommand extends Command
                 ]
             );
         }
-        
+
         return $result;
     }
-    
+
     protected function originPath($key, $path = '')
     {
         $key = $this->parseVar($key);
         $basePath = base_path($key->get('path'));
-        
+
         if (empty($path)) {
             return $basePath;
         }
-        
+
         return $basePath . '/' . $path;
     }
-    
+
     /**
      * @param Collection|string $key
      * @return Collection
@@ -96,10 +96,10 @@ abstract class TranslationCommand extends Command
         if (is_a($key, Collection::class)) {
             return $key;
         }
-        
+
         return $this->getByKey($key);
     }
-    
+
     protected function getByKey(string $key)
     {
         return $this->allObjects()->get($key, []);

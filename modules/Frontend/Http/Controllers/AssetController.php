@@ -6,7 +6,7 @@ use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\Controller;
 
 class AssetController extends Controller
@@ -22,7 +22,7 @@ class AssetController extends Controller
     public function assetTheme($theme, $path): HttpResponse
     {
         $path = str_replace('assets/', '', $path);
-        $assetPath = Theme::getThemePath($theme) . '/assets/public/' . $path;
+        $assetPath = ThemeLoader::getThemePath($theme) . '/assets/public/' . $path;
         return $this->responsePath($assetPath);
     }
 

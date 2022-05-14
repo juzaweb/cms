@@ -3,9 +3,9 @@
 namespace Juzaweb\CMS\Providers;
 
 use Juzaweb\CMS\Contracts\ActivatorInterface;
-use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Exceptions\InvalidActivatorClass;
-use Juzaweb\CMS\Support\LaravelFileRepository;
+use Juzaweb\CMS\Support\LocalPluginRepository;
 use Juzaweb\CMS\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
@@ -34,17 +34,16 @@ class PluginServiceProvider extends ServiceProvider
      */
     public function provides(): array
     {
-        return [PluginRepositoryInterface::class, 'plugins'];
+        return [LocalPluginRepositoryContract::class, 'plugins'];
     }
 
     protected function registerServices()
     {
         $this->app->singleton(
-            PluginRepositoryInterface::class,
+            LocalPluginRepositoryContract::class,
             function ($app) {
                 $path = config('juzaweb.plugin.path');
-
-                return new LaravelFileRepository($app, $path);
+                return new LocalPluginRepository($app, $path);
             }
         );
 
@@ -60,7 +59,7 @@ class PluginServiceProvider extends ServiceProvider
             }
         );
 
-        $this->app->alias(PluginRepositoryInterface::class, 'plugins');
+        $this->app->alias(LocalPluginRepositoryContract::class, 'plugins');
     }
 
     /**

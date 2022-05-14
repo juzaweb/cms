@@ -13,7 +13,7 @@ namespace Juzaweb\Backend\Actions;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Support\Theme\CustomMenuBox;
 use Juzaweb\CMS\Version;
 use Juzaweb\Frontend\Http\Controllers\PageController;
@@ -227,7 +227,7 @@ class MenuAction extends Action
 
     public function addPostTypes()
     {
-        $templates = (array) Theme::getTemplates(jw_current_theme());
+        $templates = (array) ThemeLoader::getTemplates(jw_current_theme());
         $data = [
             'options' => ['' => trans('cms::app.choose_template')],
         ];

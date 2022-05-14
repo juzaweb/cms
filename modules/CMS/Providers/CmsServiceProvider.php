@@ -201,6 +201,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(PluginServiceProvider::class);
         $this->app->register(ConsoleServiceProvider::class);
         $this->app->register(DevToolServiceProvider::class);
+        $this->app->register(ThemeServiceProvider::class);
         $this->app->register(FrontendServiceProvider::class);
     }
 }

@@ -4,7 +4,7 @@ namespace Juzaweb\CMS\Support\Process;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Symfony\Component\Process\Process;
 
 class Installer
@@ -25,7 +25,7 @@ class Installer
 
     /**
      * The plugin repository instance.
-     * @var \Juzaweb\CMS\Contracts\PluginRepositoryInterface
+     * @var \Juzaweb\CMS\Contracts\LocalPluginRepositoryContract
      */
     protected $repository;
 
@@ -90,10 +90,10 @@ class Installer
 
     /**
      * Set the plugin repository instance.
-     * @param \Juzaweb\CMS\Contracts\PluginRepositoryInterface $repository
+     * @param \Juzaweb\CMS\Contracts\LocalPluginRepositoryContract $repository
      * @return $this
      */
-    public function setRepository(PluginRepositoryInterface $repository)
+    public function setRepository(LocalPluginRepositoryContract $repository)
     {
         $this->repository = $repository;
 

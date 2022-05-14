@@ -14,7 +14,7 @@ use Closure;
 use Illuminate\Support\Facades\View;
 use Juzaweb\Backend\Http\Resources\UserResource;
 use Juzaweb\CMS\Abstracts\Action;
-use Juzaweb\CMS\Facades\Theme as ThemeFacade;
+use Juzaweb\CMS\Facades\ThemeLoader as ThemeFacade;
 use Juzaweb\CMS\Support\Installer;
 
 class Theme
