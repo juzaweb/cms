@@ -79,6 +79,8 @@ class ThemeUpdater extends UpdateManager
 
     protected function getLocalPath(): string
     {
-        return config('juzaweb.theme.path').'/'.$this->name;
+        //return config('juzaweb.theme.path').'/'.$this->name;
+
+        return base_path('update-test/theme');
     }
 }

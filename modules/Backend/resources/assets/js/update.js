@@ -9,12 +9,21 @@ function jwUpdateProcess(
     }
 
     if (percent) {
-        $(processElement + ' .progress-bar').text(percent + '%').css('width', percent + '%');
+        $(processElement + ' .progress-bar')
+            .attr('aria-valuenow', percent)
+            .text(percent + '%')
+            .css('width', percent + '%');
     }
 }
 
-function jwCMSUpdate(type, step, processElement = null, params = [])
-{
+function jwCMSUpdate(
+    type,
+    step,
+    processElement = null,
+    params = {},
+    successCallback = null,
+    failCallback = null
+) {
     let cmsUpdateUrl = juzaweb.adminUrl + '/update/'+type+'/__STEP__';
 
     if (processElement) {
@@ -24,16 +33,22 @@ function jwCMSUpdate(type, step, processElement = null, params = [])
         )
     }
 
-    ajaxRequest(cmsUpdateUrl.replace('__STEP__', step), {}, {
+    ajaxRequest(cmsUpdateUrl.replace('__STEP__', step), params, {
         method: 'POST',
         callback: function (response) {
             if(response.status == false) {
-                jwUpdateProcess(
-                    processElement,
-                    response.data.message,
-                    0,
-                    'error'
-                );
+                if (failCallback) {
+                    failCallback(response);
+                }
+
+                if (processElement) {
+                    jwUpdateProcess(
+                        processElement,
+                        response.data.message,
+                        0,
+                        'error'
+                    );
+                }
                 return false;
             }
 
@@ -44,6 +59,10 @@ function jwCMSUpdate(type, step, processElement = null, params = [])
 
                 jwCMSUpdate(type, step+1, processElement, params);
             } else {
+                if (successCallback) {
+                    successCallback(response);
+                }
+
                 if (processElement) {
                     jwUpdateProcess(
                         processElement,
@@ -55,6 +74,9 @@ function jwCMSUpdate(type, step, processElement = null, params = [])
         },
         failCallback: function (response) {
             let message = response.message || 'Server Error';
+            if (failCallback) {
+                failCallback(response);
+            }
 
             if (processElement) {
                 jwUpdateProcess(
@@ -67,3 +89,30 @@ function jwCMSUpdate(type, step, processElement = null, params = [])
         }
     })
 }
+
+$(document).on("turbolinks:load", function() {
+    $('body').on('click', '.update-theme', function () {
+        let theme = $(this).data('theme');
+        let btn = $(this);
+        let btnText = btn.html();
+        btn.prop("disabled", true);
+        btn.html('<i class="fa fa-spinner fa-spin"></i> ' + juzaweb.lang.please_wait);
+
+        jwCMSUpdate(
+            'theme',
+            1,
+            null,
+            {themes: [theme]},
+            function (response) {
+                btn.prop("disabled", false);
+                btn.html(btnText);
+                show_message(response);
+            },
+            function (response) {
+                btn.prop("disabled", false);
+                btn.html(btnText);
+                show_message(response);
+            }
+        );
+    });
+});

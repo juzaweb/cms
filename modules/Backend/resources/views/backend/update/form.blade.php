@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <div id="update-process">
                         <div class="progress mb-3">
-                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
 
                         <ul class="process-text" style="list-style: unset;">
