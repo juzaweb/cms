@@ -61,6 +61,13 @@
 
             recursiveUpdate("{{ $type }}", themes, updateIndex);
             @endif
+
+            @if($type == 'plugin')
+            var plugins = @json($plugins);
+            var updateIndex = 0;
+
+            recursiveUpdate("{{ $type }}", plugins, updateIndex);
+            @endif
         });
     </script>
 @endsection
