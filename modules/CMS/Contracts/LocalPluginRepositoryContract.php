@@ -5,7 +5,7 @@ namespace Juzaweb\CMS\Contracts;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
 use Juzaweb\CMS\Support\Plugin;
 
-interface PluginRepositoryInterface
+interface LocalPluginRepositoryContract
 {
     /**
      * Get all plugins.

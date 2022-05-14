@@ -11,57 +11,57 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
-use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Exceptions\InvalidAssetPath;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
 use Juzaweb\CMS\Support\Process\Installer;
 use Juzaweb\CMS\Support\Process\Updater;
 
-class LocalPluginRepository implements PluginRepositoryInterface, Countable
+class LocalLocalPluginRepository implements LocalPluginRepositoryContract, Countable
 {
     use Macroable;
 
     /**
      * Application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Container
      */
-    protected $app;
+    protected Container $app;
 
     /**
      * The plugin path.
      *
      * @var string|null
      */
-    protected $path;
+    protected ?string $path;
 
     /**
      * The scanned paths.
      *
      * @var array
      */
-    protected $paths = [];
+    protected array $paths = [];
 
     /**
      * @var string
      */
-    protected $stubPath;
+    protected string $stubPath;
     /**
      * @var UrlGenerator
      */
-    private $url;
+    private UrlGenerator $url;
     /**
      * @var ConfigRepository
      */
-    private $config;
+    private ConfigRepository $config;
     /**
      * @var Filesystem
      */
-    private $files;
+    private Filesystem $files;
     /**
      * @var CacheManager
      */
-    private $cache;
+    private CacheManager $cache;
 
     /**
      * The constructor.
@@ -221,6 +221,7 @@ class LocalPluginRepository implements PluginRepositoryInterface, Countable
      * Get all plugins as collection instance.
      *
      * @return Collection
+     * @throws \Exception
      */
     public function toCollection(): Collection
     {
@@ -233,6 +234,7 @@ class LocalPluginRepository implements PluginRepositoryInterface, Countable
      * @param $status
      *
      * @return array
+     * @throws \Exception
      */
     public function getByStatus($status): array
     {
@@ -254,6 +256,7 @@ class LocalPluginRepository implements PluginRepositoryInterface, Countable
      * @param $name
      *
      * @return bool
+     * @throws \Exception
      */
     public function has($name): bool
     {
@@ -264,6 +267,7 @@ class LocalPluginRepository implements PluginRepositoryInterface, Countable
      * Get list of enabled plugins.
      *
      * @return array
+     * @throws \Exception
      */
     public function allEnabled(): array
     {
@@ -274,6 +278,7 @@ class LocalPluginRepository implements PluginRepositoryInterface, Countable
      * Get list of disabled plugins.
      *
      * @return array
+     * @throws \Exception
      */
     public function allDisabled(): array
     {
@@ -284,6 +289,7 @@ class LocalPluginRepository implements PluginRepositoryInterface, Countable
      * Get count from all plugins.
      *
      * @return int
+     * @throws \Exception
      */
     public function count(): int
     {

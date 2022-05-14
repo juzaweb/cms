@@ -8,7 +8,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
-use Juzaweb\CMS\Support\LocalPluginRepository;
+use Juzaweb\CMS\Support\LocalLocalPluginRepository;
 use Juzaweb\CMS\Support\Stub;
 
 class ModuleGenerator extends Generator
@@ -79,7 +79,7 @@ class ModuleGenerator extends Generator
     /**
      * The constructor.
      * @param $name
-     * @param LocalPluginRepository $module
+     * @param LocalLocalPluginRepository $module
      * @param Config     $config
      * @param Filesystem $filesystem
      * @param Console    $console
@@ -87,7 +87,7 @@ class ModuleGenerator extends Generator
      */
     public function __construct(
         $name,
-        LocalPluginRepository $module = null,
+        LocalLocalPluginRepository $module = null,
         Config $config = null,
         Filesystem $filesystem = null,
         Console $console = null,
