@@ -125,7 +125,7 @@ class ThemeController extends BackendController
 
             return $this->success(
                 [
-                    'redirect' => route('admin.update.process', ['theme']).'?'.$query,
+                    'window_redirect' => route('admin.update.process', ['theme']).'?'.$query,
                 ]
             );
         }

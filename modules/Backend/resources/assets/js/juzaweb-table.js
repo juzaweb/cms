@@ -167,9 +167,6 @@ class JuzawebTable {
                             return response;
                         }, 500, {
                             completeCallback: function (response) {
-                                btn.prop("disabled", false);
-                                btn.html(text);
-
                                 show_message(response);
 
                                 if (response.data.redirect) {
@@ -178,6 +175,16 @@ class JuzawebTable {
                                     }, 1000);
                                     return false;
                                 }
+
+                                if (response.data.window_redirect) {
+                                    setTimeout(function () {
+                                        window.location = response.data.window_redirect;
+                                    }, 1000);
+                                    return false;
+                                }
+
+                                btn.prop("disabled", false);
+                                btn.html(text);
 
                                 table.bootstrapTable('refresh');
 
@@ -194,9 +201,6 @@ class JuzawebTable {
                         '_token': token
                     }, {
                         callback: function (response) {
-                            btn.prop("disabled", false);
-                            btn.html(text);
-
                             if (response.status === true) {
                                 show_message(response);
 
@@ -206,6 +210,16 @@ class JuzawebTable {
                                     }, 1000);
                                     return false;
                                 }
+
+                                if (response.data.window_redirect) {
+                                    setTimeout(function () {
+                                        window.location = response.data.window_redirect;
+                                    }, 1000);
+                                    return false;
+                                }
+
+                                btn.prop("disabled", false);
+                                btn.html(text);
 
                                 table.bootstrapTable('refresh');
                                 $('select[name=bulk_actions]').val(null).trigger('change.select2');
