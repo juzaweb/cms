@@ -23,7 +23,9 @@ mix.combine(
         baseAsset + '/js/widget.js',
         baseAsset + '/js/media.js',
         baseAsset + '/js/menu.js',
+        baseAsset + '/js/update.js',
         baseAsset + '/js/plugin-install.js',
+        baseAsset + '/js/theme-install.js',
         baseAsset + '/js/load-select2.js',
         baseAsset + '/js/juzaweb-table.js',
         baseAsset + '/js/list-view.js',
@@ -31,7 +33,6 @@ mix.combine(
         baseAsset + '/js/taxonomy.js',
         baseAsset + '/js/customs.js',
         baseAsset + '/js/setting.js',
-        baseAsset + '/js/update.js',
         baseAsset + '/js/page.js',
     ],
     `${basePublish}/js/custom.min.js`

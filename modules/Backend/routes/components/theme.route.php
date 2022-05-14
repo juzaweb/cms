@@ -35,7 +35,6 @@ Route::group(
         Route::post('/activate', 'Backend\ThemeController@activate')->name('admin.themes.activate');
 
         Route::get('/install', 'Backend\ThemeController@install')->name('admin.theme.install');
-        Route::post('/update', 'Backend\ThemeController@update')->name('admin.theme.update');
         Route::get('/install/all', 'Backend\ThemeController@getDataThemeInstall')->name('admin.theme.install.all');
     }
 );

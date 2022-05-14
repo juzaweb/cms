@@ -96,29 +96,3 @@ function jwCMSUpdate(
         }
     })
 }
-
-$(document).on("turbolinks:load", function() {
-    $('body').on('click', '.update-theme', function () {
-        let theme = $(this).data('theme');
-        let btn = $(this);
-        let btnText = btn.html();
-        btn.prop("disabled", true);
-        btn.html('<i class="fa fa-spinner fa-spin"></i> ' + juzaweb.lang.please_wait);
-
-        jwCMSUpdate(
-            'theme',
-            1,
-            null,
-            {theme: theme},
-            function (response) {
-                btn.remove();
-                show_message(response);
-            },
-            function (response) {
-                btn.prop("disabled", false);
-                btn.html(btnText);
-                show_message(response);
-            }
-        );
-    });
-});

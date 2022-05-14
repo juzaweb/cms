@@ -165,26 +165,6 @@ class ThemeController extends BackendController
         );
     }
 
-    public function update(UpdateRequest $request, ThemeUpdater $updater): JsonResponse
-    {
-        if (!config('juzaweb.theme.enable_upload')) {
-            abort(403, 'Access deny.');
-        }
-
-        $updater = $updater->find($request->input('theme'));
-
-        try {
-            $updater->update();
-        } catch (\Exception $e) {
-            report($e);
-            return $this->error($e->getMessage());
-        }
-
-        return $this->success(
-            trans('cms::app.install_successfully')
-        );
-    }
-
     public function getDataThemeInstall(Request $request, JuzawebApi $api): object|array
     {
         if (!config('juzaweb.theme.enable_upload')) {
