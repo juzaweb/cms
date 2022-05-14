@@ -31,6 +31,7 @@ mix.combine(
         baseAsset + '/js/taxonomy.js',
         baseAsset + '/js/customs.js',
         baseAsset + '/js/setting.js',
+        baseAsset + '/js/update.js',
         baseAsset + '/js/page.js',
     ],
     `${basePublish}/js/custom.min.js`

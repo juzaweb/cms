@@ -12,7 +12,6 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
@@ -34,6 +33,10 @@ class UpdateController extends BackendController
 
     public function index(): View
     {
+        if (!config('juzaweb.plugin.enable_upload')) {
+            abort(403);
+        }
+
         $title = trans('cms::app.updates');
 
         return view(
@@ -58,7 +61,7 @@ class UpdateController extends BackendController
         return response()->json(
             [
                 'html' => view(
-                    'cms::backend.update.form',
+                    'cms::backend.update.components.cms_check',
                     compact(
                         'checkUpdate',
                         'versionAvailable'
@@ -68,7 +71,27 @@ class UpdateController extends BackendController
         );
     }
 
-    public function update(string $type, int $step): JsonResponse
+    public function update(string $type): View
+    {
+        if (!config('juzaweb.plugin.enable_upload')) {
+            abort(403);
+        }
+
+        $this->addBreadcrumb(
+            [
+                'url' => route('admin.update'),
+                'title' => trans('cms::app.updates')
+            ]
+        );
+
+        $title = trans('cms::update.process');
+
+        $updater = $this->getUpdater($type);
+
+        return view('cms::backend.update.form', compact('title', 'updater'));
+    }
+
+    public function updateStep(string $type, int $step): JsonResponse
     {
         set_time_limit(0);
 

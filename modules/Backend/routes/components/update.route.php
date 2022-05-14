@@ -13,11 +13,12 @@ Route::group(
     function () {
         Route::get('/', 'Backend\UpdateController@index')->name('admin.update');
         Route::get('check-update', 'Backend\UpdateController@checkUpdate')->name('admin.update.check');
+        Route::get('process/{type}', 'Backend\UpdateController@update')->name('admin.update.process');
 
         Route::get('get-plugins', 'Backend\UpdateController@pluginDatatable')->name('admin.update.plugins');
         Route::get('get-themes', 'Backend\UpdateController@themeDatatable')->name('admin.update.themes');
     }
 );
 
-Route::get('update/{type}/{step}', 'Backend\UpdateController@update')
+Route::post('update/{type}/{step}', 'Backend\UpdateController@updateStep')
     ->where('step', '[0-9]+')->name('admin.update.step');
