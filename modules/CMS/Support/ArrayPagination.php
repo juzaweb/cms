@@ -11,14 +11,14 @@ class ArrayPagination
     /**
      * @var Collection
      */
-    protected $items;
+    protected Collection $items;
 
-    public static function make($items)
+    public static function make(Collection|array $items): static
     {
         return new static($items);
     }
 
-    public function __construct($items)
+    public function __construct(Collection|array $items)
     {
         $this->items = $items instanceof Collection ? $items : Collection::make($items);
     }
@@ -31,7 +31,7 @@ class ArrayPagination
      * @param array $options
      * @return LengthAwarePaginator
      */
-    public function paginate($perPage = 5, $page = null, $options = [])
+    public function paginate(int $perPage = 5, ?int $page = null, array $options = []): LengthAwarePaginator
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
 
@@ -44,7 +44,7 @@ class ArrayPagination
         );
     }
 
-    public function where($key, $operator = null, $value = null)
+    public function where(string $key, $operator = null, $value = null): void
     {
         $this->items = $this->items->where($key, $operator, $value);
     }

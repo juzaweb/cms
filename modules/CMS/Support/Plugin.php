@@ -8,6 +8,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
 use Illuminate\Routing\Router;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
@@ -40,20 +41,27 @@ class Plugin
      * @var ActivatorInterface
      */
     protected ActivatorInterface $activator;
+
     protected Translator $lang;
+
     protected ViewFinderInterface $finder;
+
     /**
      * @var CacheManager
      */
     private CacheManager $cache;
+
     /**
      * @var Filesystem
      */
     private Filesystem $files;
+
     /**
      * @var Router
      */
     private Router $router;
+
+    private UrlGenerator $url;
 
     /**
      * The constructor.
@@ -74,6 +82,7 @@ class Plugin
         $this->router = $app['router'];
         $this->finder = $app['view']->getFinder();
         $this->lang = $app['translator'];
+        $this->url = $app['url'];
         $this->activator = $app[ActivatorInterface::class];
         $this->app = $app;
     }
@@ -104,7 +113,7 @@ class Plugin
     /**
      * Get json contents from the cache, setting as needed.
      *
-     * @param string $file
+     * @param string|null $file
      *
      * @return Json
      */
@@ -572,10 +581,10 @@ class Plugin
         return $this->getExtraJuzaweb('setting_url');
     }
 
-    public function assets(string $path = null, string $default = null): string
+    public function asset(string $path, string $default = null): string
     {
         if (str_starts_with($path, 'jw-styles/')) {
-            return asset($path);
+            return $this->url->asset($path);
         }
 
         $path = str_replace('assets/', '', $path);
@@ -583,7 +592,7 @@ class Plugin
         $path = $this->getPath("assets/public/{$path}");
 
         if (file_exists($path)) {
-            return asset("jw-styles/plugins/{$this->name}/assets/{$path}");
+            return $this->url->asset("jw-styles/plugins/{$this->name}/assets/{$path}");
         }
 
         if ($default) {
@@ -591,15 +600,15 @@ class Plugin
                 return $default;
             }
 
-            return asset($default);
+            return $this->url->asset($default);
         }
 
-        return asset('jw-styles/juzaweb/images/thumb-default.png');
+        return $this->url->asset('jw-styles/juzaweb/images/thumb-default.png');
     }
 
     public function getScreenshot(): ?string
     {
-        return $this->assets(
+        return $this->asset(
             'images/screenshot.png',
             'jw-styles/juzaweb/images/screenshot.svg'
         );

@@ -40,8 +40,7 @@ class ThemeController extends BackendController
     {
         $limit = $request->get('limit', 20);
         $activated = jw_current_theme();
-
-        $paginate = ArrayPagination::make(Theme::all(true));
+        $paginate = ArrayPagination::make(app('themes')->all(true));
         $paginate->where('name', '!=', $activated);
 
         $rows = $paginate->paginate($limit);

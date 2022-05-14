@@ -10,6 +10,7 @@ namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -44,11 +45,15 @@ class Theme
      */
     protected Filesystem $files;
 
+    private UrlGenerator $url;
+
     public function __construct($app, $path)
     {
         $this->app = $app;
         $this->path = $path;
         $this->files = $app['files'];
+        $this->url = $app['url'];
+        $this->name = $this->getName();
     }
 
     /**
@@ -94,8 +99,8 @@ class Theme
 
         if (file_exists($themeConfigPath)) {
             $themeConfig = ReadConfig::load($themeConfigPath)->all();
-
             $themeConfig['changelog'] = ReadConfig::load($themeChangelogPath)->all();
+            $themeConfig['screenshot'] = $this->getScreenshot();
 
             $themeConfig['path'] = $this->path;
 
@@ -128,27 +133,30 @@ class Theme
     public function asset(string $path, string $default = null): string
     {
         if (str_starts_with($path, 'jw-styles/')) {
-            return \asset($path);
+            return $this->url->asset($path);
         }
 
         $path = str_replace('assets/', '', $path);
 
-        $path = $this->getPath("assets/public/{$path}");
+        $fullPath = $this->getPath("assets/public/{$path}");
 
-        if (!file_exists($path)) {
+        if (!file_exists($fullPath)) {
             if (is_url($default)) {
                 return $default;
             }
 
-            return \asset($default);
+            return $this->url->asset($default);
         }
 
-        return \asset("jw-styles/themes/{$this->name}/assets/{$path}");
+        return $this->url->asset("jw-styles/themes/{$this->name}/assets/{$path}");
     }
 
     public function getScreenshot(): string
     {
-        return $this->asset('images/screenshot.svg');
+        return $this->asset(
+            'images/screenshot.png',
+            'jw-styles/juzaweb/images/screenshot.svg'
+        );
     }
 
     /**

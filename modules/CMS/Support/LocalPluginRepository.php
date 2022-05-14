@@ -496,7 +496,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     /**
      * Get module used for cli session.
      * @return string
-     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
+     * @throws ModuleNotFoundException
      */
     public function getUsedNow(): string
     {
@@ -566,9 +566,9 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * Enabling a specific module.
      * @param string $name
      * @return void
-     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
+     * @throws ModuleNotFoundException
      */
-    public function enable($name)
+    public function enable(string $name): void
     {
         $this->findOrFail($name)->enable();
     }
@@ -577,9 +577,9 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * Disabling a specific module.
      * @param string $name
      * @return void
-     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
+     * @throws ModuleNotFoundException
      */
-    public function disable($name)
+    public function disable(string $name): void
     {
         $this->findOrFail($name)->disable();
     }
@@ -587,7 +587,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     /**
      * @inheritDoc
      */
-    public function delete($name): bool
+    public function delete(string $name): bool
     {
         return $this->findOrFail($name)->delete();
     }
@@ -597,7 +597,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      *
      * @return string|null
      */
-    public function getStubPath()
+    public function getStubPath(): ?string
     {
         if ($this->stubPath !== null) {
             return $this->stubPath;
@@ -617,7 +617,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      *
      * @return $this
      */
-    public function setStubPath($stubPath)
+    public function setStubPath(string $stubPath): static
     {
         $this->stubPath = $stubPath;
 

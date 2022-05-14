@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="row mb-2">
+    <div class="row mb-3">
         <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="btn-group float-right">

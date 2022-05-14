@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 
@@ -40,9 +41,9 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
      * Get all theme information.
      *
      * @param bool $collection
-     * @return array
+     * @return array|Collection
      */
-    public function scan(bool $collection = false): array
+    public function scan(bool $collection = false): array|Collection
     {
         $themeDirectories = File::directories($this->basePath);
         $themes = [];
@@ -57,10 +58,10 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
                 continue;
             }
 
-            $themes[$name] = $collection ? $theme->getInfo() : $theme;
+            $themes[$name] = $collection ? $theme->getInfo()->toArray() : $theme;
         }
 
-        return $themes;
+        return $collection ? (new Collection($themes)): $themes;
     }
 
     public function find(string $name): ?Theme
@@ -74,7 +75,7 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         return null;
     }
 
-    public function all(bool $collection = false): array
+    public function all(bool $collection = false): array|Collection
     {
         return $this->scan($collection);
     }
