@@ -46,7 +46,7 @@ function jwCMSUpdate(
                         processElement,
                         response.data.message,
                         0,
-                        'error'
+                        'danger'
                     );
                 }
                 return false;
@@ -74,7 +74,8 @@ function jwCMSUpdate(
                     jwUpdateProcess(
                         processElement,
                         juzaweb.lang.update_process.done,
-                        100
+                        100,
+                        'success'
                     );
                 }
             }
@@ -90,9 +91,29 @@ function jwCMSUpdate(
                     processElement,
                     message,
                     step * 15,
-                    'error'
+                    'danger'
                 );
             }
         }
     })
+}
+
+function recursiveUpdate(type, items, updateIndex = 0)
+{
+    jwCMSUpdate(
+        type,
+        1,
+        '#'+type+'-'+ items[updateIndex] +'-update-process',
+        {theme: items[updateIndex]},
+        function (response) {
+            if (items[updateIndex+1]) {
+                recursiveUpdate(type, items, updateIndex + 1);
+            }
+        },
+        function (response) {
+            if (items[updateIndex+1]) {
+                recursiveUpdate(type, items, updateIndex + 1);
+            }
+        }
+    );
 }
