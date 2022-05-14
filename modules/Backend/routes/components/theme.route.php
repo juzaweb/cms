@@ -21,6 +21,7 @@ Route::group(
         Route::get('/', 'Backend\ThemeController@index')->name('admin.themes');
         Route::get('/get-data', 'Backend\ThemeController@getDataTheme')->name('admin.themes.get-data');
         Route::get('/require-plugins', 'Backend\RequirePluginController@index')->name('admin.themes.require-plugins');
+        Route::post('/bulk-actions', 'Backend\ThemeController@bulkActions')->name('admin.themes.bulk-actions');
 
         Route::get(
             '/require-plugins/get-data',

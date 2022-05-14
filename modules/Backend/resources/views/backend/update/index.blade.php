@@ -100,7 +100,7 @@
             table: "#themes-table",
             apply_button: "#apply-action-themes",
             url: "{{ route('admin.update.themes') }}",
-            action_url: "",
+            action_url: "{{ route('admin.themes.bulk-actions') }}",
             chunk_action: true
         });
 

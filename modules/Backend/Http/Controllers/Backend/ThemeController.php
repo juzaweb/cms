@@ -119,6 +119,17 @@ class ThemeController extends BackendController
         $action = $request->post('action');
         $ids = $request->post('ids');
 
+        if ($action == 'update') {
+            $query = ['themes' => $ids];
+            $query = http_build_query($query);
+
+            return $this->success(
+                [
+                    'redirect' => route('admin.update.process', ['theme']).'?'.$query,
+                ]
+            );
+        }
+
         foreach ($ids as $plugin) {
             try {
                 switch ($action) {

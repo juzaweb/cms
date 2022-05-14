@@ -26,7 +26,7 @@
 
     <script type="text/javascript">
         $(document).on("turbolinks:load", function() {
-            jwCMSUpdate('cms', 1, '#update-process');
+            //jwCMSUpdate('cms', 1, '#update-process');
         });
     </script>
 @endsection
