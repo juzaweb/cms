@@ -25,63 +25,8 @@
     </div>
 
     <script type="text/javascript">
-        var cmsUpdateUrl = "{{ route('admin.update.step', ['cms', '__STEP__']) }}";
-
-        function jwUpdateProcess(parentElement, message = null, percent = 0, status = 'primary')
-        {
-            if (message) {
-                $(`${parentElement} .process-text`).append(`<li class="text-${status}">${message}</li>`);
-            }
-
-            if (percent) {
-                $(`${parentElement} .progress-bar`).text(percent + '%').css('width', percent + '%');
-            }
-        }
-
-        function jwCMSUpdate(step)
-        {
-            jwUpdateProcess(
-                '#update-process',
-                juzaweb.lang.update_process['step'+step].before
-            )
-
-            ajaxRequest(cmsUpdateUrl.replace('__STEP__', step), {}, {
-                method: 'POST',
-                callback: function (response) {
-                    if(response.status == false) {
-                        jwUpdateProcess(
-                            '#update-process',
-                            response.data.message,
-                            0,
-                            'error'
-                        );
-                        return false;
-                    }
-
-                    if(response.data.next_url) {
-                        jwUpdateProcess('#update-process', null, step * 17);
-                        jwCMSUpdate(step+1);
-                    } else {
-                        jwUpdateProcess(
-                            '#update-process',
-                            juzaweb.lang.update_process.done,
-                            100
-                        );
-                    }
-                },
-                failCallback: function (response) {
-                    jwUpdateProcess(
-                        '#update-process',
-                        response.message,
-                        step * 15,
-                        'error'
-                    );
-                }
-            })
-        }
-
         $(document).on("turbolinks:load", function() {
-            jwCMSUpdate(1);
+            jwCMSUpdate('cms', 1, '#update-process');
         });
     </script>
 @endsection

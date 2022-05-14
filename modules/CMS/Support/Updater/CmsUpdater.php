@@ -37,6 +37,8 @@ class CmsUpdater extends UpdateManager
 
     public function afterFinish()
     {
+        Artisan::call('juzacms:cache-clear');
+
         Artisan::call('migrate', ['--force' => true]);
 
         Artisan::call(
