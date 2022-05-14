@@ -106,6 +106,17 @@ class PluginController extends BackendController
         $action = $request->post('action');
         $ids = $request->post('ids');
 
+        if ($action == 'update') {
+            $query = ['plugins' => $ids];
+            $query = http_build_query($query);
+
+            return $this->success(
+                [
+                    'window_redirect' => route('admin.update.process', ['plugin']).'?'.$query,
+                ]
+            );
+        }
+
         foreach ($ids as $plugin) {
             try {
                 switch ($action) {
@@ -128,14 +139,6 @@ class PluginController extends BackendController
                         break;
                     case 'deactivate':
                         Plugin::disable($plugin);
-                        break;
-                    case 'update':
-                        if (!config('juzaweb.plugin.enable_upload')) {
-                            throw new \Exception('Access deny.');
-                        }
-
-                        $helper = $updater->find($plugin);
-                        $helper->update();
                         break;
                 }
             } catch (\Throwable $e) {

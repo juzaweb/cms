@@ -92,16 +92,14 @@
             table: "#plugins-table",
             apply_button: "#apply-action-plugins",
             url: "{{ route('admin.update.plugins') }}",
-            action_url: "{{ route('admin.plugin.bulk-actions') }}",
-            chunk_action: true
+            action_url: "{{ route('admin.plugin.bulk-actions') }}"
         });
 
         var table2 = new JuzawebTable({
             table: "#themes-table",
             apply_button: "#apply-action-themes",
             url: "{{ route('admin.update.themes') }}",
-            action_url: "{{ route('admin.themes.bulk-actions') }}",
-            chunk_action: true
+            action_url: "{{ route('admin.themes.bulk-actions') }}"
         });
 
         ajaxRequest("{{ route('admin.update.check') }}", {}, {

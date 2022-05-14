@@ -72,7 +72,7 @@ class UpdateController extends BackendController
         );
     }
 
-    public function update(string $type): View
+    public function update(Request $request, string $type): View
     {
         if (!config('juzaweb.plugin.enable_upload')) {
             abort(403);
@@ -89,12 +89,18 @@ class UpdateController extends BackendController
 
         $updater = $this->getUpdater($type);
 
+        $themes = $request->input('themes', []);
+
+        $plugins = $request->input('plugins', []);
+
         return view(
             'cms::backend.update.form',
             compact(
                 'title',
                 'updater',
-                'type'
+                'type',
+                'themes',
+                'plugins'
             )
         );
     }
