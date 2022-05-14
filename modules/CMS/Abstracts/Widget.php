@@ -12,7 +12,7 @@ namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use TwigBridge\Facade\Twig;
 
 abstract class Widget
@@ -70,7 +70,7 @@ abstract class Widget
             $file = str_replace(['cms::', '.'], ["{$resourcePath}/", '/'], $form);
             $dataFile = $file . '.json';
         } else {
-            $dataFile = Theme::getThemePath(
+            $dataFile = ThemeLoader::getThemePath(
                 $this->theme,
                 "data/widgets/{$this->widgetKey}.json"
             );

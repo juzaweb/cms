@@ -25,7 +25,7 @@ class MigrateStatusCommand extends Command
     protected $description = 'Status for all plugin migrations';
 
     /**
-     * @var \Juzaweb\CMS\Contracts\PluginRepositoryInterface
+     * @var \Juzaweb\CMS\Contracts\LocalPluginRepositoryContract
      */
     protected $module;
 

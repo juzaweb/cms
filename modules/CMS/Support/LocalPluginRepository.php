@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Abstracts;
+namespace Juzaweb\CMS\Support;
 
 use Countable;
 use Illuminate\Cache\CacheManager;
@@ -8,70 +8,65 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
-use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Exceptions\InvalidAssetPath;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
-use Juzaweb\CMS\Support\Collection;
-use Juzaweb\CMS\Support\Json;
-use Juzaweb\CMS\Support\Plugin;
-use Juzaweb\CMS\Support\Process\Installer;
-use Juzaweb\CMS\Support\Process\Updater;
 
-abstract class FileRepository implements PluginRepositoryInterface, Countable
+class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
 {
     use Macroable;
 
     /**
      * Application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Container
      */
-    protected $app;
+    protected Container $app;
 
     /**
      * The plugin path.
      *
      * @var string|null
      */
-    protected $path;
+    protected ?string $path;
 
     /**
      * The scanned paths.
      *
      * @var array
      */
-    protected $paths = [];
+    protected array $paths = [];
 
     /**
      * @var string
      */
-    protected $stubPath;
+    protected string $stubPath;
     /**
      * @var UrlGenerator
      */
-    private $url;
+    private UrlGenerator $url;
     /**
      * @var ConfigRepository
      */
-    private $config;
+    private ConfigRepository $config;
     /**
      * @var Filesystem
      */
-    private $files;
+    private Filesystem $files;
     /**
      * @var CacheManager
      */
-    private $cache;
+    private CacheManager $cache;
 
     /**
      * The constructor.
      * @param Container $app
-     * @param string|null $path
+     * @param string $path
      */
-    public function __construct(Container $app, $path = null)
+    public function __construct(Container $app, string $path)
     {
         $this->app = $app;
         $this->path = $path;
@@ -88,7 +83,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      *
      * @return $this
      */
-    public function addLocation($path)
+    public function addLocation(string $path): static
     {
         $this->paths[] = $path;
 
@@ -125,59 +120,52 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     }
 
     /**
-     * Creates a new Plugin instance
-     *
-     * @param Container $app
-     * @param string $data
-     * @param string $path
-     * @return \Juzaweb\CMS\Support\Plugin
-     */
-    abstract protected function createModule(...$args): Plugin;
-
-    /**
      * Get & scan all plugins.
      *
-     * @return array
+     * @param bool $collection
+     * @return array|Collection
+     * @throws \Exception
      */
-    public function scan(): array
+    public function scan(bool $collection = false): array|Collection
     {
         $paths = $this->getScanPaths();
-
-        $modules = [];
-
-        foreach ($paths as $key => $path) {
+        $plugins = [];
+        foreach ($paths as $path) {
             $manifests = $this->getFiles()->glob("{$path}/composer.json");
-
             is_array($manifests) || $manifests = [];
 
             foreach ($manifests as $manifest) {
-                $info = Json::make($manifest)->getAttributes();
-                $name = Arr::get($info, 'name');
-                $visible = Arr::get($info, 'extra.juzaweb.visible', true);
-                if (!$visible) {
+                $plugin = $this->createPlugin(
+                    $this->app,
+                    dirname($manifest)
+                );
+
+                if (!$name = $plugin->getName()) {
                     continue;
                 }
 
-                $modules[$name] = $this->createModule(
-                    $this->app,
-                    $name,
-                    dirname($manifest)
-                );
+                if (!$plugin->isVisible()) {
+                    continue;
+                }
+
+                $plugins[$name] = $collection ? $plugin->getInfo()->toArray() : $plugin;
             }
         }
 
-        return $modules;
+        return $plugins;
     }
 
     /**
      * Get all plugins.
      *
-     * @return array
+     * @param bool $collection
+     * @return array|Collection
+     * @throws \Exception
      */
-    public function all(): array
+    public function all(bool $collection = false): array|Collection
     {
         if (! $this->config('cache.enabled')) {
-            return $this->scan();
+            return $this->scan($collection);
         }
 
         return $this->formatCached($this->getCached());
@@ -190,12 +178,12 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      *
      * @return array
      */
-    protected function formatCached($cached)
+    protected function formatCached(array $cached): array
     {
         $modules = [];
         foreach ($cached as $name => $module) {
             $path = $module['path'];
-            $modules[$name] = $this->createModule($this->app, $name, $path);
+            $modules[$name] = $this->createPlugin($this->app, $path);
         }
 
         return $modules;
@@ -220,11 +208,12 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     /**
      * Get all plugins as collection instance.
      *
-     * @return Collection
+     * @return PluginCollection
+     * @throws \Exception
      */
-    public function toCollection(): Collection
+    public function toCollection(): PluginCollection
     {
-        return new Collection($this->scan());
+        return new PluginCollection($this->scan());
     }
 
     /**
@@ -233,6 +222,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      * @param $status
      *
      * @return array
+     * @throws \Exception
      */
     public function getByStatus($status): array
     {
@@ -254,6 +244,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      * @param $name
      *
      * @return bool
+     * @throws \Exception
      */
     public function has($name): bool
     {
@@ -264,6 +255,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      * Get list of enabled plugins.
      *
      * @return array
+     * @throws \Exception
      */
     public function allEnabled(): array
     {
@@ -274,6 +266,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      * Get list of disabled plugins.
      *
      * @return array
+     * @throws \Exception
      */
     public function allDisabled(): array
     {
@@ -284,6 +277,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      * Get count from all plugins.
      *
      * @return int
+     * @throws \Exception
      */
     public function count(): int
     {
@@ -394,13 +388,13 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     /**
      * Find a specific module, if there return that, otherwise throw exception.
      *
-     * @param $name
+     * @param string $name
      *
      * @return Plugin
      *
      * @throws ModuleNotFoundException
      */
-    public function findOrFail($name)
+    public function findOrFail(string $name): Plugin
     {
         $module = $this->find($name);
 
@@ -414,23 +408,23 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     /**
      * Get all modules as laravel collection instance.
      *
-     * @param $status
+     * @param int $status
      *
-     * @return Collection
+     * @return PluginCollection
      */
-    public function collections($status = 1): Collection
+    public function collections(int $status = 1): PluginCollection
     {
-        return new Collection($this->getByStatus($status));
+        return new PluginCollection($this->getByStatus($status));
     }
 
     /**
      * Get module path for a specific module.
      *
-     * @param $module
+     * @param string $module
      *
      * @return string
      */
-    public function getModulePath($module)
+    public function getModulePath($module): string
     {
         try {
             return $this->findOrFail($module)->getPath() . '/';
@@ -504,7 +498,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     /**
      * Get module used for cli session.
      * @return string
-     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
+     * @throws ModuleNotFoundException
      */
     public function getUsedNow(): string
     {
@@ -574,9 +568,9 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      * Enabling a specific module.
      * @param string $name
      * @return void
-     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
+     * @throws ModuleNotFoundException
      */
-    public function enable($name)
+    public function enable(string $name): void
     {
         $this->findOrFail($name)->enable();
     }
@@ -585,9 +579,9 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      * Disabling a specific module.
      * @param string $name
      * @return void
-     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
+     * @throws ModuleNotFoundException
      */
-    public function disable($name)
+    public function disable(string $name): void
     {
         $this->findOrFail($name)->disable();
     }
@@ -595,36 +589,9 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     /**
      * @inheritDoc
      */
-    public function delete($name): bool
+    public function delete(string $name): bool
     {
         return $this->findOrFail($name)->delete();
-    }
-
-    /**
-     * Update dependencies for the specified module.
-     *
-     * @param string $module
-     */
-    public function update($module)
-    {
-        with(new Updater($this))->update($module);
-    }
-
-    /**
-     * Install the specified module.
-     *
-     * @param string $name
-     * @param string $version
-     * @param string $type
-     * @param bool   $subtree
-     *
-     * @return \Symfony\Component\Process\Process
-     */
-    public function install($name, $version = 'dev-master', $type = 'composer', $subtree = false)
-    {
-        $installer = new Installer($name, $version, $type, $subtree);
-
-        return $installer->run();
     }
 
     /**
@@ -632,7 +599,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      *
      * @return string|null
      */
-    public function getStubPath()
+    public function getStubPath(): ?string
     {
         if ($this->stubPath !== null) {
             return $this->stubPath;
@@ -652,10 +619,21 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      *
      * @return $this
      */
-    public function setStubPath($stubPath)
+    public function setStubPath(string $stubPath): static
     {
         $this->stubPath = $stubPath;
 
         return $this;
+    }
+
+    /**
+     * Creates a new Plugin instance
+     *
+     * @param mixed ...$args
+     * @return Plugin
+     */
+    protected function createPlugin(...$args): Plugin
+    {
+        return new Plugin(...$args);
     }
 }

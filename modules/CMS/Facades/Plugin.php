@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Facade;
  * @method string getScreenshot()
  * @method bool isEnabled()
  *
- * @see \Juzaweb\CMS\Support\Plugin
+ * @see \Juzaweb\CMS\Support\LocalPluginRepository
  */
 class Plugin extends Facade
 {
@@ -27,7 +27,7 @@ class Plugin extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return 'plugins';
     }

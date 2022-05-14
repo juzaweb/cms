@@ -38,7 +38,7 @@ class Json
     {
         $this->path = (string) $path;
         $this->filesystem = $filesystem ?: new Filesystem();
-        $this->attributes = Collection::make($this->getAttributes());
+        $this->attributes = PluginCollection::make($this->getAttributes());
     }
 
     /**
@@ -156,7 +156,7 @@ class Json
      */
     public function update(array $data)
     {
-        $this->attributes = new Collection(array_merge($this->attributes->toArray(), $data));
+        $this->attributes = new PluginCollection(array_merge($this->attributes->toArray(), $data));
 
         return $this->save();
     }

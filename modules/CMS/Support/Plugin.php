@@ -8,12 +8,17 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
 use Illuminate\Routing\Router;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\Translation\Translator;
+use Illuminate\View\ViewFinderInterface;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
+use Noodlehaus\Config as ReadConfig;
 
 class Plugin
 {
@@ -34,42 +39,54 @@ class Plugin
      * @var array of cached Json objects, keyed by filename
      */
     protected array $moduleJson = [];
+
     /**
      * @var ActivatorInterface
      */
     protected ActivatorInterface $activator;
-    protected \Illuminate\Translation\Translator $lang;
-    protected \Illuminate\View\ViewFinderInterface $finder;
+
+    protected Translator $lang;
+
+    protected ViewFinderInterface $finder;
+
     /**
      * @var CacheManager
      */
     private CacheManager $cache;
+
     /**
      * @var Filesystem
      */
     private Filesystem $files;
+
     /**
      * @var Router
      */
     private Router $router;
 
+    private UrlGenerator $url;
+
     /**
      * The constructor.
+     *
      * @param ApplicationContract $app
      * @param string $name
      * @param string $path
      */
-    public function __construct(ApplicationContract $app, string $name, string $path)
-    {
-        $this->name = $name;
+    public function __construct(
+        ApplicationContract $app,
+        string $path
+    ) {
         $this->path = $path;
         $this->cache = $app['cache'];
         $this->files = $app['files'];
         $this->router = $app['router'];
         $this->finder = $app['view']->getFinder();
         $this->lang = $app['translator'];
+        $this->url = $app['url'];
         $this->activator = $app[ActivatorInterface::class];
         $this->app = $app;
+        $this->name = $this->getName();
     }
 
     /**
@@ -98,7 +115,7 @@ class Plugin
     /**
      * Get json contents from the cache, setting as needed.
      *
-     * @param string $file
+     * @param string|null $file
      *
      * @return Json
      */
@@ -120,6 +137,7 @@ class Plugin
     /**
      * Get path.
      *
+     * @param string $path
      * @return string
      */
     public function getPath(string $path = ''): string
@@ -143,6 +161,23 @@ class Plugin
         $this->path = $path;
 
         return $this;
+    }
+
+    public function getInfo(bool $assoc = false): null|array|Collection
+    {
+        $configPath = $this->path . '/composer.json';
+
+        if (!file_exists($configPath)) {
+            return null;
+        }
+
+        $config = ReadConfig::load($configPath)->all();
+
+        $config['screenshot'] = $this->getScreenshot();
+
+        $config['path'] = $this->path;
+
+        return $assoc ? $config : new Collection($config);
     }
 
     /**
@@ -243,7 +278,7 @@ class Plugin
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->json()->get('name');
     }
 
     /**
@@ -251,7 +286,7 @@ class Plugin
      *
      * @param string $event
      */
-    protected function fireEvent($event): void
+    protected function fireEvent(string $event): void
     {
         $this->app['events']->dispatch(
             sprintf('plugin.%s.'.$event, $this->getLowerName()),
@@ -401,27 +436,6 @@ class Plugin
     }
 
     /**
-     * Register the files from this plugin.
-     */
-    protected function registerFiles(): void
-    {
-        $files = Arr::get($this->get('autoload', []), 'files', []);
-        foreach ($files as $file) {
-            include $this->path.'/'.$file;
-        }
-    }
-
-    /**
-     * Handle call __toString.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getStudlyName();
-    }
-
-    /**
      * Get name in studly case.
      *
      * @return string
@@ -492,17 +506,6 @@ class Plugin
         $this->fireEvent('enabled');
     }
 
-    protected function runMigrate(): void
-    {
-        Artisan::call(
-            'plugin:migrate',
-            [
-                'module' => $this->name,
-                '--force' => true,
-            ]
-        );
-    }
-
     public function publishAssets(): void
     {
         Artisan::call(
@@ -565,10 +568,10 @@ class Plugin
         return $this->getExtraJuzaweb('setting_url');
     }
 
-    public function assets(string $path = null, string $default = null): string
+    public function asset(string $path, string $default = null): string
     {
         if (str_starts_with($path, 'jw-styles/')) {
-            return asset($path);
+            return $this->url->asset($path);
         }
 
         $path = str_replace('assets/', '', $path);
@@ -576,7 +579,7 @@ class Plugin
         $path = $this->getPath("assets/public/{$path}");
 
         if (file_exists($path)) {
-            return asset("jw-styles/plugins/{$this->name}/assets/{$path}");
+            return $this->url->asset("jw-styles/plugins/{$this->name}/assets/{$path}");
         }
 
         if ($default) {
@@ -584,17 +587,54 @@ class Plugin
                 return $default;
             }
 
-            return asset($default);
+            return $this->url->asset($default);
         }
 
-        return asset('jw-styles/juzaweb/images/thumb-default.png');
+        return $this->url->asset('jw-styles/juzaweb/images/thumb-default.png');
     }
 
     public function getScreenshot(): ?string
     {
-        return $this->assets(
+        return $this->asset(
             'images/screenshot.png',
             'jw-styles/juzaweb/images/screenshot.svg'
         );
+    }
+
+    public function isVisible()
+    {
+        return (bool) $this->getExtraJuzaweb('visible', true);
+    }
+
+    /**
+     * Handle call __toString.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getStudlyName();
+    }
+
+    protected function runMigrate(): void
+    {
+        Artisan::call(
+            'plugin:migrate',
+            [
+                'module' => $this->name,
+                '--force' => true,
+            ]
+        );
+    }
+
+    /**
+     * Register the files from this plugin.
+     */
+    protected function registerFiles(): void
+    {
+        $files = Arr::get($this->get('autoload', []), 'files', []);
+        foreach ($files as $file) {
+            include $this->path.'/'.$file;
+        }
     }
 }

@@ -1,35 +1,34 @@
 <?php
+/**
+ * JUZAWEB CMS - The Best CMS for Laravel Project
+ *
+ * @package    juzaweb/juzacms
+ * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @link       https://juzaweb.com/cms
+ * @license    MIT
+ */
 
 namespace Juzaweb\CMS\Facades;
 
-use Illuminate\Support\Facades\Facade;
-use Juzaweb\CMS\Contracts\ThemeContract;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Facade as FacadeAlias;
+use Juzaweb\CMS\Support\LocalThemeRepository;
 
 /**
- * @method static set(string $theme)
- * @method static has(string $theme)
- * @method static getThemePath(string $theme = null, $path = '')
- * @method static \Illuminate\Support\Collection getThemeInfo(string $theme)
- * @method static getScreenshot(string $theme)
- * @method static get(string $theme)
- * @method static assets(string $path, $theme = null, $secure = null)
- * @method static publicPath(string $theme)
- * @method static getVersion(string $theme)
- * @method static array getRegister(string $theme)
- * @method static array getTemplates(string $theme, string $template = null)
- * @method static \Noodlehaus\Config[] all($assoc = false)
+ * @method static Theme|null find(string $name)
+ * @method static array|Collection all(bool $collection = false)
  *
- * @see \Juzaweb\CMS\Support\Theme\Theme
+ * @see LocalThemeRepository
  */
-class Theme extends Facade
+class Theme extends FacadeAlias
 {
     /**
      * Get the registered name of the component.
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
-        return ThemeContract::class;
+        return 'themes';
     }
 }

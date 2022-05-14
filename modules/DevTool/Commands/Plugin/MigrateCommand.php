@@ -25,7 +25,7 @@ class MigrateCommand extends Command
     protected $description = 'Migrate the migrations from the specified plugin or from all plugins.';
 
     /**
-     * @var \Juzaweb\CMS\Contracts\PluginRepositoryInterface
+     * @var \Juzaweb\CMS\Contracts\LocalPluginRepositoryContract
      */
     protected $module;
 

@@ -17,7 +17,7 @@ use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Menu;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Facades\ThemeConfig;
 use Juzaweb\CMS\Support\Theme\BackendMenuBuilder;
 use Juzaweb\CMS\Support\Theme\MenuBuilder;
@@ -32,7 +32,7 @@ function body_class($class = '')
 
 function theme_assets(string $path, string $theme = null): ?string
 {
-    return Theme::assets($path, $theme);
+    return ThemeLoader::assets($path, $theme);
 }
 
 function plugin_assets(string $path, string $plugin = null): ?string
@@ -56,7 +56,7 @@ if (! function_exists('page_url')) {
  */
 function theme_path(string $theme, string $path = ''): string
 {
-    return Theme::getThemePath($theme, $path);
+    return ThemeLoader::getThemePath($theme, $path);
 }
 
 if (! file_exists('jw_theme_info')) {
@@ -72,7 +72,7 @@ if (! file_exists('jw_theme_info')) {
             return jw_theme_info(jw_current_theme());
         }
 
-        return Theme::getThemeInfo($theme);
+        return ThemeLoader::getThemeInfo($theme);
     }
 }
 
@@ -102,7 +102,7 @@ if (! function_exists('jw_theme_config')) {
             $theme = jw_current_theme();
         }
 
-        return Theme::getThemeConfig($theme);
+        return ThemeLoader::getThemeConfig($theme);
     }
 }
 
@@ -368,7 +368,7 @@ if (! function_exists('dynamic_block')) {
 if (! function_exists('installed_themes')) {
     function installed_themes(): array
     {
-        $themes = Theme::all();
+        $themes = ThemeLoader::all();
 
         return array_keys($themes);
     }

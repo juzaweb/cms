@@ -2,18 +2,18 @@
 
 namespace Juzaweb\CMS\Support\Process;
 
-use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Contracts\RunableInterface;
 
 class Runner implements RunableInterface
 {
     /**
      * The plugin instance.
-     * @var PluginRepositoryInterface
+     * @var LocalPluginRepositoryContract
      */
     protected $module;
 
-    public function __construct(PluginRepositoryInterface $module)
+    public function __construct(LocalPluginRepositoryContract $module)
     {
         $this->module = $module;
     }

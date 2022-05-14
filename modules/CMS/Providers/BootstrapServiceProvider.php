@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Facades\ActionRegister;
 
 class BootstrapServiceProvider extends ServiceProvider
@@ -13,7 +13,7 @@ class BootstrapServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app[PluginRepositoryInterface::class]->boot();
+        $this->app[LocalPluginRepositoryContract::class]->boot();
 
         $this->booted(
             function () {
@@ -29,6 +29,6 @@ class BootstrapServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app[PluginRepositoryInterface::class]->register();
+        $this->app[LocalPluginRepositoryContract::class]->register();
     }
 }

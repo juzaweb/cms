@@ -8,25 +8,28 @@
 
 namespace Juzaweb\CMS\Support;
 
+use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
-use Noodlehaus\Config;
+use Noodlehaus\Config as ReadConfig;
 
 class Theme
 {
     /**
      * The laravel|lumen application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Container
      */
-    protected \Illuminate\Contracts\Foundation\Application $app;
+    protected Container $app;
 
     /**
      * The plugin name.
      *
-     * @var
+     * @var string $name
      */
     protected string $name;
 
@@ -42,22 +45,30 @@ class Theme
      */
     protected Filesystem $files;
 
-    public function __construct($app, $name, $path)
+    private UrlGenerator $url;
+
+    public function __construct($app, $path)
     {
         $this->app = $app;
-        $this->name = $name;
         $this->path = $path;
         $this->files = $app['files'];
+        $this->url = $app['url'];
+        $this->name = $this->getName();
     }
 
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
-        return $this->name;
+        return $this->get('name');
+    }
+
+    public function getLowerName(): ?string
+    {
+        return strtolower($this->getName());
     }
 
     /**
@@ -72,28 +83,34 @@ class Theme
             return $this->path;
         }
 
-        return $this->path . '/' . $path;
+        return "{$this->path}/{$path}";
     }
 
     /**
      * Get particular theme all information.
      *
-     * @return null|Config
+     * @param bool $assoc
+     * @return array|Collection|null
      */
-    public function getInfo(): ?Config
+    public function getInfo(bool $assoc = false): null|array|Collection
     {
-        $themeConfigPath = $this->path . '/theme.json';
-        $themeChangelogPath = $this->path . '/changelog.yml';
+        $configPath = $this->path . '/theme.json';
 
-        if (file_exists($themeConfigPath)) {
-            $themeConfig = Config::load($themeConfigPath);
-            $themeConfig['changelog'] = Config::load($themeChangelogPath)->all();
-            $themeConfig['path'] = $this->path;
+        $changelogPath = $this->path . '/changelog.yml';
 
-            return $themeConfig;
+        if (!file_exists($configPath)) {
+            return null;
         }
 
-        return null;
+        $config = ReadConfig::load($configPath)->all();
+
+        $config['changelog'] = ReadConfig::load($changelogPath)->all();
+
+        $config['screenshot'] = $this->getScreenshot();
+
+        $config['path'] = $this->path;
+
+        return $assoc ? $config : new Collection($config);
     }
 
     /**
@@ -119,27 +136,30 @@ class Theme
     public function asset(string $path, string $default = null): string
     {
         if (str_starts_with($path, 'jw-styles/')) {
-            return \asset($path);
+            return $this->url->asset($path);
         }
 
         $path = str_replace('assets/', '', $path);
 
-        $path = $this->getPath("assets/public/{$path}");
+        $fullPath = $this->getPath("assets/public/{$path}");
 
-        if (!file_exists($path)) {
+        if (!file_exists($fullPath)) {
             if (is_url($default)) {
                 return $default;
             }
 
-            return \asset($default);
+            return $this->url->asset($default);
         }
 
-        return \asset("jw-styles/themes/{$this->name}/assets/{$path}");
+        return $this->url->asset("jw-styles/themes/{$this->name}/assets/{$path}");
     }
 
     public function getScreenshot(): string
     {
-        return $this->asset('images/screenshot.svg');
+        return $this->asset(
+            'images/screenshot.png',
+            'jw-styles/juzaweb/images/screenshot.svg'
+        );
     }
 
     /**
@@ -168,7 +188,10 @@ class Theme
             $file = 'theme.json';
         }
 
-        return new Json($this->getPath() . '/' . $file, $this->files);
+        return new Json(
+            $this->getPath($file),
+            $this->files
+        );
     }
 
     public function activate(): void

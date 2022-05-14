@@ -27,7 +27,7 @@ class MigrateResetCommand extends Command
     protected $description = 'Reset the plugins migrations.';
 
     /**
-     * @var \Juzaweb\CMS\Contracts\PluginRepositoryInterface
+     * @var \Juzaweb\CMS\Contracts\LocalPluginRepositoryContract
      */
     protected $module;
 

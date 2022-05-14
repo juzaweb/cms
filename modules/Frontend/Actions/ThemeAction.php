@@ -13,7 +13,7 @@ namespace Juzaweb\Frontend\Actions;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Support\DefaultPageBlock;
 use Juzaweb\CMS\Support\DefaultWidget;
 use TwigBridge\Facade\Twig;
@@ -26,7 +26,7 @@ class ThemeAction extends Action
     public function __construct()
     {
         $this->currentTheme = jw_current_theme();
-        $this->register = Theme::getRegister($this->currentTheme);
+        $this->register = ThemeLoader::getRegister($this->currentTheme);
     }
 
     protected function getRegister($key, $default = [])
@@ -70,7 +70,7 @@ class ThemeAction extends Action
     public function styles()
     {
         $styles = $this->getRegister('styles');
-        $version = Theme::getVersion($this->currentTheme);
+        $version = ThemeLoader::getVersion($this->currentTheme);
 
         if ($styles) {
             foreach ($styles['js'] ?? [] as $index => $js) {
