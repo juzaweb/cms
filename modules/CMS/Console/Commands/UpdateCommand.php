@@ -32,6 +32,8 @@ class UpdateCommand extends Command
             $updater->downloadUpdateFile();
             $this->info('-- Unzip file');
             $updater->unzipFile();
+            $this->info('-- Backup old version');
+            $updater->backupOldVersion();
             $this->info('-- Update files and folders');
             $updater->updateFileAndFolder();
             $this->info('-- Finish');

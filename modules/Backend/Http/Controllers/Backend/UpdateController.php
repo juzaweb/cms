@@ -12,6 +12,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
@@ -71,30 +72,43 @@ class UpdateController extends BackendController
     {
         set_time_limit(0);
 
-        if ($step <= 0 || $step > 5) {
-            abort(404);
+        if (!config('juzaweb.plugin.enable_upload')) {
+            abort(403);
         }
 
         $updater = $this->getUpdater($type);
+
+        if ($step <= 0 || $step > $updater->getMaxStep()) {
+            abort(404);
+        }
 
         try {
             $updater->updateByStep($step);
         } catch (\Exception $e) {
             report($e);
-
-            return $this->error($e->getMessage());
+            return response()->json(
+                [
+                    'status' => false,
+                    'data' => [
+                        'message' => $e->getMessage()
+                    ]
+                ]
+            );
         }
 
-        return $this->success(
+        return response()->json(
             [
-                'message' => trans('cms::app.updated_successfully'),
-                'next_url' => $step < 5 ? route(
-                    'admin.update.step',
-                    [
-                        $type,
-                        $step + 1
-                    ]
-                ) : null,
+                'status' => true,
+                'data' => [
+                    'message' => 'Done',
+                    'next_url' => $step < $updater->getMaxStep() ? route(
+                        'admin.update.step',
+                        [
+                            $type,
+                            $step + 1
+                        ]
+                    ) : null,
+                ]
             ]
         );
     }

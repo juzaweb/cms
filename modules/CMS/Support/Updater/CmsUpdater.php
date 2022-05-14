@@ -104,6 +104,6 @@ class CmsUpdater extends UpdateManager
 
     protected function getLocalPath(): string
     {
-        return base_path();
+        return base_path('update-test');
     }
 }

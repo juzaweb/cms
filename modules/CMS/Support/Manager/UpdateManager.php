@@ -26,6 +26,7 @@ abstract class UpdateManager
     protected JuzawebApi $api;
     protected FilesystemAdapter $storage;
     protected array $updatePaths = [];
+    protected int $maxStep = 6;
 
     public function __construct(Curl $curl, JuzawebApi $api)
     {
@@ -45,15 +46,9 @@ abstract class UpdateManager
 
     public function update(): bool
     {
-        $this->updateByStep(1);
-
-        $this->updateByStep(2);
-
-        $this->updateByStep(3);
-
-        $this->updateByStep(4);
-
-        $this->updateByStep(5);
+        for ($i=1; $i<=$this->maxStep; $i++) {
+            $this->updateByStep($i);
+        }
 
         return true;
     }
@@ -71,9 +66,12 @@ abstract class UpdateManager
                 $this->unzipFile();
                 break;
             case 4:
-                $this->updateFileAndFolder();
+                $this->backupOldVersion();
                 break;
             case 5:
+                $this->updateFileAndFolder();
+                break;
+            case 6:
                 $this->finish();
         }
 
@@ -132,26 +130,39 @@ abstract class UpdateManager
         return true;
     }
 
-    public function updateFileAndFolder(): void
+    public function backupOldVersion(): void
     {
-        $this->setProcess('updating');
+        $this->setProcess('backup');
+
         $localFolder = $this->getLocalPath();
+
         $tmpFolder = $this->storage->path($this->getCacheData('tmpFolder'));
 
         if (!is_dir($localFolder)) {
             File::makeDirectory($localFolder, 0775, true);
         }
 
-        $this->setProcess('backup');
-        $zipFolders = File::directories("{$tmpFolder}/unzip");
-
         $this->updateFolder($localFolder, "{$tmpFolder}/backup");
 
-        $this->setProcess('move_folder');
+        $this->setProcess('backup_done');
+    }
+
+    public function updateFileAndFolder(): void
+    {
+        $this->setProcess('updating');
+
+        $localFolder = $this->getLocalPath();
+
+        $tmpFolder = $this->storage->path($this->getCacheData('tmpFolder'));
+
+        $zipFolders = File::directories("{$tmpFolder}/unzip");
+
         foreach ($zipFolders as $folder) {
             $this->updateFolder($folder, $localFolder);
             break;
         }
+
+        $this->setProcess('updated');
     }
 
     public function finish(): void
@@ -182,6 +193,11 @@ abstract class UpdateManager
     public function getUploadPaths(): array
     {
         return $this->updatePaths;
+    }
+
+    public function getMaxStep(): int
+    {
+        return $this->maxStep;
     }
 
     protected function updateFolder(string $source, string $target): bool
