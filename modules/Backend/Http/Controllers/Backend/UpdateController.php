@@ -15,8 +15,11 @@ use Illuminate\Http\JsonResponse;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
+use Juzaweb\CMS\Support\Manager\UpdateManager;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Updater\CmsUpdater;
+use Juzaweb\CMS\Support\Updater\PluginUpdater;
+use Juzaweb\CMS\Support\Updater\ThemeUpdater;
 use Juzaweb\CMS\Version;
 
 class UpdateController extends BackendController
@@ -30,6 +33,10 @@ class UpdateController extends BackendController
 
     public function index(): View
     {
+        if (!config('juzaweb.plugin.enable_upload')) {
+            abort(403);
+        }
+
         $title = trans('cms::app.updates');
 
         return view(
@@ -54,7 +61,7 @@ class UpdateController extends BackendController
         return response()->json(
             [
                 'html' => view(
-                    'cms::backend.update.form',
+                    'cms::backend.update.components.cms_check',
                     compact(
                         'checkUpdate',
                         'versionAvailable'
@@ -64,21 +71,74 @@ class UpdateController extends BackendController
         );
     }
 
-    public function update(CmsUpdater $updater): JsonResponse
+    public function update(string $type): View
+    {
+        if (!config('juzaweb.plugin.enable_upload')) {
+            abort(403);
+        }
+
+        $this->addBreadcrumb(
+            [
+                'url' => route('admin.update'),
+                'title' => trans('cms::app.updates')
+            ]
+        );
+
+        $title = trans('cms::app.updating');
+
+        $updater = $this->getUpdater($type);
+
+        return view(
+            'cms::backend.update.form',
+            compact(
+                'title',
+                'updater',
+                'type'
+            )
+        );
+    }
+
+    public function updateStep(string $type, int $step): JsonResponse
     {
         set_time_limit(0);
 
-        try {
-            $updater->update();
-        } catch (\Exception $e) {
-            report($e);
-
-            return $this->error($e->getMessage());
+        if (!config('juzaweb.plugin.enable_upload')) {
+            abort(403);
         }
 
-        return $this->success(
+        $updater = $this->getUpdater($type);
+
+        if ($step <= 0 || $step > $updater->getMaxStep()) {
+            abort(404);
+        }
+
+        try {
+            $updater->updateByStep($step);
+        } catch (\Exception $e) {
+            report($e);
+            return response()->json(
+                [
+                    'status' => false,
+                    'data' => [
+                        'message' => $e->getMessage()
+                    ]
+                ]
+            );
+        }
+
+        return response()->json(
             [
-                'message' => trans('cms::app.updated_successfully'),
+                'status' => true,
+                'data' => [
+                    'message' => 'Done',
+                    'next_url' => $step < $updater->getMaxStep() ? route(
+                        'admin.update.step',
+                        [
+                            $type,
+                            $step + 1
+                        ]
+                    ) : null,
+                ]
             ]
         );
     }
@@ -202,5 +262,19 @@ class UpdateController extends BackendController
                 'rows' => $result,
             ]
         );
+    }
+
+    protected function getUpdater(string $type): UpdateManager
+    {
+        switch ($type) {
+            case 'cms':
+                return app(CmsUpdater::class);
+            case 'theme':
+                return app(PluginUpdater::class);
+            case 'plugin':
+                return app(ThemeUpdater::class);
+        }
+
+        throw new \Exception('Updater Not found.');
     }
 }

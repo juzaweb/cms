@@ -27,11 +27,13 @@ class UpdateCommand extends Command
         $this->info('Updating...');
         try {
             $this->info('-- Fetch data update');
-            $updater->fetchData();
+            $updater->fetchDataUpdate();
             $this->info('-- Download update file');
             $updater->downloadUpdateFile();
             $this->info('-- Unzip file');
             $updater->unzipFile();
+            $this->info('-- Backup old version');
+            $updater->backupOldVersion();
             $this->info('-- Update files and folders');
             $updater->updateFileAndFolder();
             $this->info('-- Finish');
