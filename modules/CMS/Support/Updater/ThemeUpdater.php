@@ -42,7 +42,20 @@ class ThemeUpdater extends UpdateManager
         return $this;
     }
 
-    public function fetchData(): void
+    public function afterFinish(): void
+    {
+        if ($this->name == jw_current_theme()) {
+            Artisan::call(
+                'theme:publish',
+                [
+                    'theme' => $this->name,
+                    'type' => 'assets',
+                ]
+            );
+        }
+    }
+
+    protected function fetchData(): object
     {
         $uri = "themes/{$this->name}/update";
 
@@ -56,20 +69,12 @@ class ThemeUpdater extends UpdateManager
 
         $this->responseErrors($response);
 
-        $this->response = $response;
+        return $response;
     }
 
-    public function afterFinish(): void
+    protected function getCacheKey(): string
     {
-        if ($this->name == jw_current_theme()) {
-            Artisan::call(
-                'theme:publish',
-                [
-                    'theme' => $this->name,
-                    'type' => 'assets',
-                ]
-            );
-        }
+        return 'theme_' . $this->name;
     }
 
     protected function getLocalPath(): string

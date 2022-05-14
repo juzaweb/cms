@@ -42,7 +42,19 @@ class PluginUpdater extends UpdateManager
         return $module->getVersion();
     }
 
-    public function fetchData(): void
+    public function afterFinish(): void
+    {
+        /**
+         * @var Plugin $plugin
+         */
+        $plugin = app('plugins')->find($this->name);
+        if ($plugin->isEnabled()) {
+            $plugin->disable();
+            $plugin->enable();
+        }
+    }
+
+    protected function fetchData(): object
     {
         $uri = "plugins/{$this->name}/update";
 
@@ -57,19 +69,12 @@ class PluginUpdater extends UpdateManager
 
         $this->responseErrors($response);
 
-        $this->response = $response;
+        return $response;
     }
 
-    public function afterFinish(): void
+    protected function getCacheKey(): string
     {
-        /**
-         * @var Plugin $plugin
-         */
-        $plugin = app('plugins')->find($this->name);
-        if ($plugin->isEnabled()) {
-            $plugin->disable();
-            $plugin->enable();
-        }
+        return 'plugin_' . str_replace('/', '_', $this->name);
     }
 
     protected function getLocalPath(): string
