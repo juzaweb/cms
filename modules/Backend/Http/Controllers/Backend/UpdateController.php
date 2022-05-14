@@ -84,11 +84,18 @@ class UpdateController extends BackendController
             ]
         );
 
-        $title = trans('cms::update.process');
+        $title = trans('cms::app.updating');
 
         $updater = $this->getUpdater($type);
 
-        return view('cms::backend.update.form', compact('title', 'updater'));
+        return view(
+            'cms::backend.update.form',
+            compact(
+                'title',
+                'updater',
+                'type'
+            )
+        );
     }
 
     public function updateStep(string $type, int $step): JsonResponse
