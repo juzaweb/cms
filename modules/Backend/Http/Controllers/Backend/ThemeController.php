@@ -4,6 +4,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
@@ -109,6 +110,36 @@ class ThemeController extends BackendController
         return $this->success(
             [
                 'redirect' => route('admin.themes'),
+            ]
+        );
+    }
+
+    public function bulkActions(Request $request): JsonResponse|RedirectResponse
+    {
+        $action = $request->post('action');
+        $ids = $request->post('ids');
+
+        foreach ($ids as $plugin) {
+            try {
+                switch ($action) {
+                    case 'delete':
+                        break;
+                }
+            } catch (\Throwable $e) {
+                report($e);
+
+                return $this->error(
+                    [
+                        'message' => $e->getMessage(),
+                    ]
+                );
+            }
+        }
+
+        return $this->success(
+            [
+                'message' => trans('cms::app.successfully'),
+                'redirect' => route('admin.plugin'),
             ]
         );
     }

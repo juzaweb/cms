@@ -136,7 +136,6 @@ class PluginController extends BackendController
 
                         $helper = $updater->find($plugin);
                         $helper->update();
-                        CacheGroup::pull('plugin_update_keys');
                         break;
                 }
             } catch (\Throwable $e) {

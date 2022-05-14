@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
+use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Support\Manager\UpdateManager;
 use Juzaweb\CMS\Version;
 
@@ -44,6 +45,8 @@ class ThemeUpdater extends UpdateManager
 
     public function afterFinish(): void
     {
+        CacheGroup::pull('theme_update_keys');
+
         if ($this->name == jw_current_theme()) {
             Artisan::call(
                 'theme:publish',
