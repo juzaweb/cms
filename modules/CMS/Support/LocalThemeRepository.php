@@ -9,8 +9,9 @@
 namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Facades\File;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 
-class ThemeFileRepository
+class LocalThemeRepository implements LocalThemeRepositoryContract
 {
     /**
      * Application instance.
@@ -24,7 +25,7 @@ class ThemeFileRepository
      *
      * @var string|null
      */
-    protected $path;
+    protected ?string $path;
 
     public function __construct($app, $path)
     {
@@ -37,7 +38,7 @@ class ThemeFileRepository
      *
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         $themeDirectories = File::directories($this->path);
         $themes = [];
@@ -53,7 +54,7 @@ class ThemeFileRepository
         return $themes;
     }
 
-    public function find($theme)
+    public function find($theme): bool|Theme
     {
         $themePath = $this->path . '/' . $theme;
         if (! is_dir($themePath)) {

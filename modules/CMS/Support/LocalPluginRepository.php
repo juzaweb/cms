@@ -17,7 +17,7 @@ use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
 use Juzaweb\CMS\Support\Process\Installer;
 use Juzaweb\CMS\Support\Process\Updater;
 
-class LocalLocalPluginRepository implements LocalPluginRepositoryContract, Countable
+class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
 {
     use Macroable;
 
@@ -141,12 +141,9 @@ class LocalLocalPluginRepository implements LocalPluginRepositoryContract, Count
     public function scan(): array
     {
         $paths = $this->getScanPaths();
-
         $modules = [];
-
         foreach ($paths as $path) {
             $manifests = $this->getFiles()->glob("{$path}/composer.json");
-
             is_array($manifests) || $manifests = [];
 
             foreach ($manifests as $manifest) {

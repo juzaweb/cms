@@ -5,7 +5,7 @@ namespace Juzaweb\CMS\Providers;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Exceptions\InvalidActivatorClass;
-use Juzaweb\CMS\Support\LocalLocalPluginRepository;
+use Juzaweb\CMS\Support\LocalPluginRepository;
 use Juzaweb\CMS\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
@@ -43,7 +43,7 @@ class PluginServiceProvider extends ServiceProvider
             LocalPluginRepositoryContract::class,
             function ($app) {
                 $path = config('juzaweb.plugin.path');
-                return new LocalLocalPluginRepository($app, $path);
+                return new LocalPluginRepository($app, $path);
             }
         );
 
