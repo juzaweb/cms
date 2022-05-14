@@ -39,38 +39,44 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
     /**
      * Get all theme information.
      *
-     * @return \Illuminate\Support\Collection
+     * @param bool $collection
+     * @return array
      */
-    public function scan(): \Illuminate\Support\Collection
+    public function scan(bool $collection = false): array
     {
         $themeDirectories = File::directories($this->basePath);
         $themes = [];
 
-        foreach ($themeDirectories as $theme) {
-            $themeConfig = $this->createTheme(
+        foreach ($themeDirectories as $themePath) {
+            $theme = $this->createTheme(
                 $this->app,
-                "{$this->basePath}/{$theme}"
+                $themePath
             );
 
-            $themes[$themeConfig->get('name')] = $themeConfig;
+            if (!$name = $theme->getName()) {
+                continue;
+            }
+
+            $themes[$name] = $collection ? $theme->getInfo() : $theme;
         }
 
-        return new \Illuminate\Support\Collection($themes);
+        return $themes;
     }
 
-    public function find(string $theme): ?Theme
+    public function find(string $name): ?Theme
     {
-        $themePath = "{$this->basePath}/{$theme}";
-        if (! is_dir($themePath)) {
-            return null;
+        foreach ($this->all() as $theme) {
+            if ($theme->getLowerName() === strtolower($name)) {
+                return $theme;
+            }
         }
 
-        return $this->createTheme($this->app, $theme, $themePath);
+        return null;
     }
 
-    public function all(): \Illuminate\Support\Collection
+    public function all(bool $collection = false): array
     {
-        return $this->scan();
+        return $this->scan($collection);
     }
 
     /**

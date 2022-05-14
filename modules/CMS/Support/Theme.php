@@ -10,10 +10,11 @@ namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
-use Noodlehaus\Config;
+use Noodlehaus\Config as ReadConfig;
 
 class Theme
 {
@@ -60,6 +61,11 @@ class Theme
         return $this->get('name');
     }
 
+    public function getLowerName(): ?string
+    {
+        return strtolower($this->getName());
+    }
+
     /**
      * Get path.
      *
@@ -78,19 +84,22 @@ class Theme
     /**
      * Get particular theme all information.
      *
-     * @return null|Config
+     * @return null|Collection
      */
-    public function getInfo(): ?Config
+    public function getInfo(): ?Collection
     {
         $themeConfigPath = $this->path . '/theme.json';
+
         $themeChangelogPath = $this->path . '/changelog.yml';
 
         if (file_exists($themeConfigPath)) {
-            $themeConfig = Config::load($themeConfigPath);
-            $themeConfig['changelog'] = Config::load($themeChangelogPath)->all();
+            $themeConfig = ReadConfig::load($themeConfigPath)->all();
+
+            $themeConfig['changelog'] = ReadConfig::load($themeChangelogPath)->all();
+
             $themeConfig['path'] = $this->path;
 
-            return $themeConfig;
+            return new Collection($themeConfig);
         }
 
         return null;
@@ -169,7 +178,7 @@ class Theme
         }
 
         return new Json(
-            $this->getPath() . '/' . $file,
+            $this->getPath($file),
             $this->files
         );
     }

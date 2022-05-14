@@ -593,33 +593,6 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     }
 
     /**
-     * Update dependencies for the specified module.
-     *
-     * @param string $module
-     */
-    public function update($module)
-    {
-        with(new Updater($this))->update($module);
-    }
-
-    /**
-     * Install the specified module.
-     *
-     * @param string $name
-     * @param string $version
-     * @param string $type
-     * @param bool   $subtree
-     *
-     * @return \Symfony\Component\Process\Process
-     */
-    public function install($name, $version = 'dev-master', $type = 'composer', $subtree = false)
-    {
-        $installer = new Installer($name, $version, $type, $subtree);
-
-        return $installer->run();
-    }
-
-    /**
      * Get stub path.
      *
      * @return string|null
