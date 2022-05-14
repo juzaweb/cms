@@ -5,22 +5,29 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Http\Requests\Theme\UpdateRequest;
-use Juzaweb\Backend\Http\Resources\ThemeResource;
+use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Support\ArrayPagination;
 use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\CMS\Support\Updater\ThemeUpdater;
+use Juzaweb\CMS\Version;
 
 class ThemeController extends BackendController
 {
+    protected JuzawebApi $api;
+
+    public function __construct(JuzawebApi $api)
+    {
+        $this->api = $api;
+    }
+
     public function index(): View
     {
         $activated = jw_current_theme();
@@ -36,22 +43,45 @@ class ThemeController extends BackendController
         );
     }
 
-    public function getDataTheme(Request $request): AnonymousResourceCollection
+    public function getDataTheme(Request $request): JsonResponse
     {
         $limit = $request->get('limit', 20);
         $activated = jw_current_theme();
         $paginate = ArrayPagination::make(app('themes')->all(true));
         $paginate->where('name', '!=', $activated);
 
-        $rows = $paginate->paginate($limit);
+        $paginate = $paginate->paginate($limit);
+        $updates = $this->getDataUpdates($paginate->getCollection());
+
         $items = new Collection();
-        foreach ($rows->items() as $key => $row) {
-            $items->push((object) $row);
+        foreach ($paginate->items() as $theme) {
+            $theme['update'] = $updates->{$theme['name']}->update ?? false;
+
+            $items->push(
+                (object) [
+                    'update' => $theme['update'],
+                    'name' => $theme['name'],
+                    'content' => view(
+                        'cms::backend.theme.components.theme_item',
+                        ['theme' => (object) $theme]
+                    )->render(),
+                ]
+            );
         }
 
-        $rows->setCollection($items);
+        $paginate->setCollection($items);
 
-        return ThemeResource::collection($rows);
+        return response()->json(
+            [
+                'data' => $paginate->items(),
+                'meta' => [
+                    'totalPages' => $paginate->lastPage(),
+                    'limit' => $paginate->perPage(),
+                    'total' => $paginate->total(),
+                    'page' => $paginate->currentPage(),
+                ]
+            ]
+        );
     }
 
     /**
@@ -204,5 +234,46 @@ class ThemeController extends BackendController
             DB::rollBack();
             throw $e;
         }
+    }
+
+    protected function getDataUpdates(Collection $themes): ?object
+    {
+        if (!config('juzaweb.theme.enable_upload')) {
+            return (object) [];
+        }
+
+        $key = sha1($themes->toJson());
+        CacheGroup::add('theme_update_keys', $key);
+
+        return Cache::remember(
+            $key,
+            3600,
+            function () use ($themes) {
+                try {
+                    $response = $this->api->post(
+                        'themes/versions-available',
+                        [
+                            'themes' => $themes->map(
+                                function ($item) {
+                                    return [
+                                        'name' => $item['name'],
+                                        'current_version' => $item['version'] ?? '1.0',
+                                    ];
+                                }
+                            )->values()->toArray(),
+                            'cms_version' => Version::getVersion(),
+                        ]
+                    );
+
+                    if (empty($response->data)) {
+                        return (object) [];
+                    }
+
+                    return $response->data;
+                } catch (\Exception $e) {
+                    return (object) [];
+                }
+            }
+        );
     }
 }
