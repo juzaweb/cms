@@ -89,25 +89,28 @@ class Theme
     /**
      * Get particular theme all information.
      *
-     * @return null|Collection
+     * @param bool $assoc
+     * @return array|Collection|null
      */
-    public function getInfo(): ?Collection
+    public function getInfo(bool $assoc = false): null|array|Collection
     {
-        $themeConfigPath = $this->path . '/theme.json';
+        $configPath = $this->path . '/theme.json';
 
-        $themeChangelogPath = $this->path . '/changelog.yml';
+        $changelogPath = $this->path . '/changelog.yml';
 
-        if (file_exists($themeConfigPath)) {
-            $themeConfig = ReadConfig::load($themeConfigPath)->all();
-            $themeConfig['changelog'] = ReadConfig::load($themeChangelogPath)->all();
-            $themeConfig['screenshot'] = $this->getScreenshot();
-
-            $themeConfig['path'] = $this->path;
-
-            return new Collection($themeConfig);
+        if (!file_exists($configPath)) {
+            return null;
         }
 
-        return null;
+        $config = ReadConfig::load($configPath)->all();
+
+        $config['changelog'] = ReadConfig::load($changelogPath)->all();
+
+        $config['screenshot'] = $this->getScreenshot();
+
+        $config['path'] = $this->path;
+
+        return $assoc ? $config : new Collection($config);
     }
 
     /**

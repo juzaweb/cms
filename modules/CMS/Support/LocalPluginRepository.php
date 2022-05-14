@@ -9,13 +9,12 @@ use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Exceptions\InvalidAssetPath;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
-use Juzaweb\CMS\Support\Process\Installer;
-use Juzaweb\CMS\Support\Process\Updater;
 
 class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
 {
@@ -124,46 +123,50 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     /**
      * Get & scan all plugins.
      *
-     * @return array
+     * @param bool $collection
+     * @return array|Collection
      * @throws \Exception
      */
-    public function scan(): array
+    public function scan(bool $collection = false): array|Collection
     {
         $paths = $this->getScanPaths();
-        $modules = [];
+        $plugins = [];
         foreach ($paths as $path) {
             $manifests = $this->getFiles()->glob("{$path}/composer.json");
             is_array($manifests) || $manifests = [];
 
             foreach ($manifests as $manifest) {
-                $info = Json::make($manifest)->getAttributes();
-                $name = Arr::get($info, 'name');
-                $visible = Arr::get($info, 'extra.juzaweb.visible', true);
-                if (!$visible) {
+                $plugin = $this->createPlugin(
+                    $this->app,
+                    dirname($manifest)
+                );
+
+                if (!$name = $plugin->getName()) {
                     continue;
                 }
 
-                $modules[$name] = $this->createPlugin(
-                    $this->app,
-                    $name,
-                    dirname($manifest)
-                );
+                if (!$plugin->isVisible()) {
+                    continue;
+                }
+
+                $plugins[$name] = $collection ? $plugin->getInfo()->toArray() : $plugin;
             }
         }
 
-        return $modules;
+        return $plugins;
     }
 
     /**
      * Get all plugins.
      *
-     * @return array
+     * @param bool $collection
+     * @return array|Collection
      * @throws \Exception
      */
-    public function all(): array
+    public function all(bool $collection = false): array|Collection
     {
         if (! $this->config('cache.enabled')) {
-            return $this->scan();
+            return $this->scan($collection);
         }
 
         return $this->formatCached($this->getCached());
@@ -181,7 +184,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
         $modules = [];
         foreach ($cached as $name => $module) {
             $path = $module['path'];
-            $modules[$name] = $this->createPlugin($this->app, $name, $path);
+            $modules[$name] = $this->createPlugin($this->app, $path);
         }
 
         return $modules;
