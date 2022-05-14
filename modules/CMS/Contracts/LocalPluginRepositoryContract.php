@@ -31,7 +31,7 @@ interface LocalPluginRepositoryContract
     /**
      * Get plugins as plugins collection instance.
      *
-     * @return \Juzaweb\CMS\Support\Collection
+     * @return \Juzaweb\CMS\Support\PluginCollection
      */
     public function toCollection();
 

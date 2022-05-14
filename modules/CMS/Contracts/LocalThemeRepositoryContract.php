@@ -10,7 +10,14 @@
 
 namespace Juzaweb\CMS\Contracts;
 
+use Illuminate\Support\Collection;
+use Juzaweb\CMS\Support\Theme;
+
 interface LocalThemeRepositoryContract
 {
+    public function scan(): Collection;
 
+    public function find(string $theme): ?Theme;
+
+    public function all(): Collection;
 }

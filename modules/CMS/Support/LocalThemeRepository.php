@@ -1,13 +1,16 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: dtv
- * Date: 10/12/2021
- * Time: 8:48 PM
+ * JUZAWEB CMS - The Best CMS for Laravel Project
+ *
+ * @package    juzaweb/juzacms
+ * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @link       https://juzaweb.com/cms
+ * @license    MIT
  */
 
 namespace Juzaweb\CMS\Support;
 
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 
@@ -16,51 +19,68 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
     /**
      * Application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Container
      */
-    protected $app;
+    protected Container $app;
 
     /**
      * The plugin path.
      *
-     * @var string|null
+     * @var string
      */
-    protected ?string $path;
+    protected string $basePath;
 
-    public function __construct($app, $path)
+    public function __construct(Container $app, string $path)
     {
         $this->app = $app;
-        $this->path = $path;
+        $this->basePath = $path;
     }
 
     /**
      * Get all theme information.
      *
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
-    public function all(): array
+    public function scan(): \Illuminate\Support\Collection
     {
-        $themeDirectories = File::directories($this->path);
+        $themeDirectories = File::directories($this->basePath);
         $themes = [];
+
         foreach ($themeDirectories as $theme) {
-            $themeConfig = new Theme($this->app, basename($theme), $this->path .'/'. $theme);
-            if (empty($themeConfig)) {
-                continue;
-            }
+            $themeConfig = $this->createTheme(
+                $this->app,
+                "{$this->basePath}/{$theme}"
+            );
 
             $themes[$themeConfig->get('name')] = $themeConfig;
         }
 
-        return $themes;
+        return new \Illuminate\Support\Collection($themes);
     }
 
-    public function find($theme): bool|Theme
+    public function find(string $theme): ?Theme
     {
-        $themePath = $this->path . '/' . $theme;
+        $themePath = "{$this->basePath}/{$theme}";
         if (! is_dir($themePath)) {
-            return false;
+            return null;
         }
 
-        return new Theme($this->app, $theme, $themePath);
+        return $this->createTheme($this->app, $theme, $themePath);
+    }
+
+    public function all(): \Illuminate\Support\Collection
+    {
+        return $this->scan();
+    }
+
+    /**
+     * Creates a new Plugin instance
+     *
+     * @param mixed ...$args
+     * @return Theme
+     */
+    protected function createTheme(...$args): Theme
+    {
+        return new Theme(...$args);
     }
 }

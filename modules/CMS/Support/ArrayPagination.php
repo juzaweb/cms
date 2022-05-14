@@ -43,7 +43,7 @@ class ArrayPagination
             $options
         );
     }
-    
+
     public function where($key, $operator = null, $value = null)
     {
         $this->items = $this->items->where($key, $operator, $value);

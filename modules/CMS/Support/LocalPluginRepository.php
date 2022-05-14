@@ -66,9 +66,9 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     /**
      * The constructor.
      * @param Container $app
-     * @param string|null $path
+     * @param string $path
      */
-    public function __construct(Container $app, $path = null)
+    public function __construct(Container $app, string $path)
     {
         $this->app = $app;
         $this->path = $path;
@@ -122,17 +122,6 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     }
 
     /**
-     * Creates a new Plugin instance
-     *
-     * @param mixed ...$args
-     * @return Plugin
-     */
-    protected function createModule(...$args): Plugin
-    {
-        return new Plugin(...$args);
-    }
-
-    /**
      * Get & scan all plugins.
      *
      * @return array
@@ -154,7 +143,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
                     continue;
                 }
 
-                $modules[$name] = $this->createModule(
+                $modules[$name] = $this->createPlugin(
                     $this->app,
                     $name,
                     dirname($manifest)
@@ -192,7 +181,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
         $modules = [];
         foreach ($cached as $name => $module) {
             $path = $module['path'];
-            $modules[$name] = $this->createModule($this->app, $name, $path);
+            $modules[$name] = $this->createPlugin($this->app, $name, $path);
         }
 
         return $modules;
@@ -217,12 +206,12 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     /**
      * Get all plugins as collection instance.
      *
-     * @return Collection
+     * @return PluginCollection
      * @throws \Exception
      */
-    public function toCollection(): Collection
+    public function toCollection(): PluginCollection
     {
-        return new Collection($this->scan());
+        return new PluginCollection($this->scan());
     }
 
     /**
@@ -419,11 +408,11 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      *
      * @param int $status
      *
-     * @return Collection
+     * @return PluginCollection
      */
-    public function collections(int $status = 1): Collection
+    public function collections(int $status = 1): PluginCollection
     {
-        return new Collection($this->getByStatus($status));
+        return new PluginCollection($this->getByStatus($status));
     }
 
     /**
@@ -660,5 +649,16 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
         $this->stubPath = $stubPath;
 
         return $this;
+    }
+
+    /**
+     * Creates a new Plugin instance
+     *
+     * @param mixed ...$args
+     * @return Plugin
+     */
+    protected function createPlugin(...$args): Plugin
+    {
+        return new Plugin(...$args);
     }
 }

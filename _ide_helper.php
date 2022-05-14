@@ -19585,18 +19585,7 @@ namespace Illuminate\Routing {
 
 }
 
-namespace Juzaweb\CMS\Support {
 
-    /**
-     *
-     *
-     */
-    class Collection
-    {
-
-    }
-
-}
 
 namespace Illuminate\Database\Query {
 

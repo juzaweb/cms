@@ -8,6 +8,7 @@
 
 namespace Juzaweb\CMS\Support;
 
+use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -19,14 +20,14 @@ class Theme
     /**
      * The laravel|lumen application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var Container
      */
-    protected \Illuminate\Contracts\Foundation\Application $app;
+    protected Container $app;
 
     /**
      * The plugin name.
      *
-     * @var
+     * @var string $name
      */
     protected string $name;
 
@@ -42,10 +43,9 @@ class Theme
      */
     protected Filesystem $files;
 
-    public function __construct($app, $name, $path)
+    public function __construct($app, $path)
     {
         $this->app = $app;
-        $this->name = $name;
         $this->path = $path;
         $this->files = $app['files'];
     }
@@ -53,11 +53,11 @@ class Theme
     /**
      * Get name.
      *
-     * @return string
+     * @return ?string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
-        return $this->name;
+        return $this->get('name');
     }
 
     /**
@@ -72,7 +72,7 @@ class Theme
             return $this->path;
         }
 
-        return $this->path . '/' . $path;
+        return "{$this->path}/{$path}";
     }
 
     /**
@@ -168,7 +168,10 @@ class Theme
             $file = 'theme.json';
         }
 
-        return new Json($this->getPath() . '/' . $file, $this->files);
+        return new Json(
+            $this->getPath() . '/' . $file,
+            $this->files
+        );
     }
 
     public function activate(): void
