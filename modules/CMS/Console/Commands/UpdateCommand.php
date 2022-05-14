@@ -27,7 +27,7 @@ class UpdateCommand extends Command
         $this->info('Updating...');
         try {
             $this->info('-- Fetch data update');
-            $updater->fetchData();
+            $updater->fetchDataUpdate();
             $this->info('-- Download update file');
             $updater->downloadUpdateFile();
             $this->info('-- Unzip file');

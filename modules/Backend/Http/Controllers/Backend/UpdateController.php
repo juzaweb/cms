@@ -15,8 +15,11 @@ use Illuminate\Http\JsonResponse;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
+use Juzaweb\CMS\Support\Manager\UpdateManager;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Updater\CmsUpdater;
+use Juzaweb\CMS\Support\Updater\PluginUpdater;
+use Juzaweb\CMS\Support\Updater\ThemeUpdater;
 use Juzaweb\CMS\Version;
 
 class UpdateController extends BackendController
@@ -64,12 +67,18 @@ class UpdateController extends BackendController
         );
     }
 
-    public function update(CmsUpdater $updater): JsonResponse
+    public function update(string $type, int $step): JsonResponse
     {
         set_time_limit(0);
 
+        if ($step <= 0 || $step > 5) {
+            abort(404);
+        }
+
+        $updater = $this->getUpdater($type);
+
         try {
-            $updater->update();
+            $updater->updateByStep($step);
         } catch (\Exception $e) {
             report($e);
 
@@ -79,6 +88,13 @@ class UpdateController extends BackendController
         return $this->success(
             [
                 'message' => trans('cms::app.updated_successfully'),
+                'next_url' => $step < 5 ? route(
+                    'admin.update.step',
+                    [
+                        $type,
+                        $step + 1
+                    ]
+                ) : null,
             ]
         );
     }
@@ -202,5 +218,19 @@ class UpdateController extends BackendController
                 'rows' => $result,
             ]
         );
+    }
+
+    protected function getUpdater(string $type): UpdateManager
+    {
+        switch ($type) {
+            case 'cms':
+                return app(CmsUpdater::class);
+            case 'theme':
+                return app(PluginUpdater::class);
+            case 'plugin':
+                return app(ThemeUpdater::class);
+        }
+
+        throw new \Exception('Updater Not found.');
     }
 }
