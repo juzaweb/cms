@@ -11,7 +11,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class RequirePluginController extends BackendController
@@ -37,7 +37,7 @@ class RequirePluginController extends BackendController
 
     public function getData()
     {
-        $themeInfo = Theme::getThemeInfo(jw_current_theme());
+        $themeInfo = ThemeLoader::getThemeInfo(jw_current_theme());
         $require = $themeInfo->get('require', []);
         $result = [];
 
@@ -106,7 +106,7 @@ class RequirePluginController extends BackendController
                         );
                         continue;
                     }
-                    
+
                     $info->enable();
                 }
                 break;

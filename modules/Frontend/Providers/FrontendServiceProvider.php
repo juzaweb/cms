@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Frontend\Providers;
 
-use Juzaweb\CMS\Contracts\ThemeContract;
+use Juzaweb\CMS\Contracts\ThemeLoaderContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Support\ServiceProvider;

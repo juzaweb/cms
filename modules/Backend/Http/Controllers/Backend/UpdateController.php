@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\CMS\Support\Plugin;
@@ -148,12 +148,12 @@ class UpdateController extends BackendController
 
     public function themeDatatable(): JsonResponse
     {
-        $themes = Theme::all();
+        $themes = ThemeLoader::all();
         $data = [];
         foreach ($themes as $theme) {
             $data[] = [
                 'name' => $theme->get('name'),
-                'current_version' => Theme::getVersion($theme->get('name')),
+                'current_version' => ThemeLoader::getVersion($theme->get('name')),
             ];
         }
 

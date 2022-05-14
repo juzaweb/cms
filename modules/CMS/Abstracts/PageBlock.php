@@ -11,7 +11,7 @@
 namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\View\View;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use TwigBridge\Facade\Twig;
 
 abstract class PageBlock
@@ -37,7 +37,7 @@ abstract class PageBlock
 
     public function getData()
     {
-        $dataFile = Theme::getThemePath(
+        $dataFile = ThemeLoader::getThemePath(
             $this->theme,
             "data/blocks/{$this->data['key']}.json"
         );

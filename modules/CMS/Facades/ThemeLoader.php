@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Juzaweb\CMS\Contracts\ThemeContract;
+use Juzaweb\CMS\Contracts\ThemeLoaderContract;
 
 /**
  * @method static set(string $theme)
@@ -22,7 +22,7 @@ use Juzaweb\CMS\Contracts\ThemeContract;
  *
  * @see \Juzaweb\CMS\Support\Theme\Theme
  */
-class Theme extends Facade
+class ThemeLoader extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -31,6 +31,6 @@ class Theme extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return ThemeContract::class;
+        return ThemeLoaderContract::class;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Juzaweb\Backend\Listeners;
 
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Support\Installer;
 
 class OctaneListener

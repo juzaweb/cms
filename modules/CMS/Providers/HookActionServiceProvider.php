@@ -9,7 +9,7 @@
 namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\Facades\Blade;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Support\Installer;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\CMS\Contracts\EventyContract;

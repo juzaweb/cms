@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Http\Requests\Theme\UpdateRequest;
 use Juzaweb\Backend\Http\Resources\ThemeResource;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Support\ArrayPagination;
 use Juzaweb\CMS\Support\JuzawebApi;
@@ -24,7 +24,7 @@ class ThemeController extends BackendController
     public function index(): View
     {
         $activated = jw_current_theme();
-        $currentTheme = Theme::getThemeInfo($activated);
+        $currentTheme = ThemeLoader::getThemeInfo($activated);
 
         return view(
             'cms::backend.theme.index',
@@ -66,7 +66,7 @@ class ThemeController extends BackendController
         );
 
         $theme = $request->post('theme');
-        if (! Theme::has($theme)) {
+        if (! ThemeLoader::has($theme)) {
             return $this->error(
                 [
                     'message' => trans('cms::message.theme_not_found'),
@@ -132,7 +132,7 @@ class ThemeController extends BackendController
 
         $limit = $request->get('limit', 20);
         $page = $request->get('page', 1);
-        $except = array_keys(Theme::all(true));
+        $except = array_keys(ThemeLoader::all(true));
 
         return $api->get(
             'themes',
@@ -166,7 +166,7 @@ class ThemeController extends BackendController
                 ]
             );
 
-            $info = Theme::getThemeInfo($theme);
+            $info = ThemeLoader::getThemeInfo($theme);
 
             if ($require = $info->get('require')) {
                 $plugins = Plugin::all();

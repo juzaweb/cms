@@ -8,11 +8,11 @@ use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\View\ViewFinderInterface;
-use Juzaweb\CMS\Contracts\ThemeContract;
+use Juzaweb\CMS\Contracts\ThemeLoaderContract;
 use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
 use Noodlehaus\Config;
 
-class Theme implements ThemeContract
+class Theme implements ThemeLoaderContract
 {
     /**
      * Theme Root Path.

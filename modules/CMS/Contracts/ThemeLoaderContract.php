@@ -2,6 +2,6 @@
 
 namespace Juzaweb\CMS\Contracts;
 
-interface ThemeContract
+interface ThemeLoaderContract
 {
 }

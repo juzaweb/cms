@@ -3,7 +3,7 @@
 namespace Juzaweb\DevTool\Commands\Theme;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Contracts\ThemeContract;
+use Juzaweb\CMS\Contracts\ThemeLoaderContract;
 
 class ThemeListCommand extends Command
 {
@@ -28,7 +28,7 @@ class ThemeListCommand extends Command
      */
     public function handle()
     {
-        $themes = $this->laravel[ThemeContract::class]->all();
+        $themes = $this->laravel[ThemeLoaderContract::class]->all();
         $headers = ['Name', 'Author', 'Version', 'Parent'];
         $output = [];
         foreach ($themes as $theme) {

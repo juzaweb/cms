@@ -10,7 +10,7 @@
 
 namespace Juzaweb\CMS\Providers;
 
-use Juzaweb\CMS\Contracts\ThemeContract;
+use Juzaweb\CMS\Contracts\ThemeLoaderContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Support\ServiceProvider;
@@ -34,7 +34,7 @@ class ThemeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(
-            ThemeContract::class,
+            ThemeLoaderContract::class,
             function ($app) {
                 return new Theme($app, $app['view']->getFinder(), $app['config'], $app['translator']);
             }
