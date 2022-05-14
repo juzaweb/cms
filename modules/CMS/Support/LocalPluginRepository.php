@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Abstracts;
+namespace Juzaweb\CMS\Support;
 
 use Countable;
 use Illuminate\Cache\CacheManager;
@@ -14,13 +14,10 @@ use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Contracts\PluginRepositoryInterface;
 use Juzaweb\CMS\Exceptions\InvalidAssetPath;
 use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
-use Juzaweb\CMS\Support\Collection;
-use Juzaweb\CMS\Support\Json;
-use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Process\Installer;
 use Juzaweb\CMS\Support\Process\Updater;
 
-abstract class FileRepository implements PluginRepositoryInterface, Countable
+class LocalPluginRepository implements PluginRepositoryInterface, Countable
 {
     use Macroable;
 
@@ -88,7 +85,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      *
      * @return $this
      */
-    public function addLocation($path)
+    public function addLocation(string $path): static
     {
         $this->paths[] = $path;
 
@@ -127,17 +124,19 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     /**
      * Creates a new Plugin instance
      *
-     * @param Container $app
-     * @param string $data
-     * @param string $path
-     * @return \Juzaweb\CMS\Support\Plugin
+     * @param mixed ...$args
+     * @return Plugin
      */
-    abstract protected function createModule(...$args): Plugin;
+    protected function createModule(...$args): Plugin
+    {
+        return new Plugin(...$args);
+    }
 
     /**
      * Get & scan all plugins.
      *
      * @return array
+     * @throws \Exception
      */
     public function scan(): array
     {
@@ -145,7 +144,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
 
         $modules = [];
 
-        foreach ($paths as $key => $path) {
+        foreach ($paths as $path) {
             $manifests = $this->getFiles()->glob("{$path}/composer.json");
 
             is_array($manifests) || $manifests = [];
@@ -173,6 +172,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      * Get all plugins.
      *
      * @return array
+     * @throws \Exception
      */
     public function all(): array
     {
@@ -190,7 +190,7 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
      *
      * @return array
      */
-    protected function formatCached($cached)
+    protected function formatCached(array $cached): array
     {
         $modules = [];
         foreach ($cached as $name => $module) {
@@ -394,13 +394,13 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     /**
      * Find a specific module, if there return that, otherwise throw exception.
      *
-     * @param $name
+     * @param string $name
      *
      * @return Plugin
      *
      * @throws ModuleNotFoundException
      */
-    public function findOrFail($name)
+    public function findOrFail(string $name): Plugin
     {
         $module = $this->find($name);
 
@@ -414,11 +414,11 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     /**
      * Get all modules as laravel collection instance.
      *
-     * @param $status
+     * @param int $status
      *
      * @return Collection
      */
-    public function collections($status = 1): Collection
+    public function collections(int $status = 1): Collection
     {
         return new Collection($this->getByStatus($status));
     }
@@ -426,11 +426,11 @@ abstract class FileRepository implements PluginRepositoryInterface, Countable
     /**
      * Get module path for a specific module.
      *
-     * @param $module
+     * @param string $module
      *
      * @return string
      */
-    public function getModulePath($module)
+    public function getModulePath($module): string
     {
         try {
             return $this->findOrFail($module)->getPath() . '/';

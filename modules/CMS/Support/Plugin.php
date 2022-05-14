@@ -12,6 +12,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\Translation\Translator;
+use Illuminate\View\ViewFinderInterface;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 
@@ -38,8 +40,8 @@ class Plugin
      * @var ActivatorInterface
      */
     protected ActivatorInterface $activator;
-    protected \Illuminate\Translation\Translator $lang;
-    protected \Illuminate\View\ViewFinderInterface $finder;
+    protected Translator $lang;
+    protected ViewFinderInterface $finder;
     /**
      * @var CacheManager
      */
@@ -55,12 +57,16 @@ class Plugin
 
     /**
      * The constructor.
+     *
      * @param ApplicationContract $app
      * @param string $name
      * @param string $path
      */
-    public function __construct(ApplicationContract $app, string $name, string $path)
-    {
+    public function __construct(
+        ApplicationContract $app,
+        string $name,
+        string $path
+    ) {
         $this->name = $name;
         $this->path = $path;
         $this->cache = $app['cache'];
@@ -120,6 +126,7 @@ class Plugin
     /**
      * Get path.
      *
+     * @param string $path
      * @return string
      */
     public function getPath(string $path = ''): string
@@ -251,7 +258,7 @@ class Plugin
      *
      * @param string $event
      */
-    protected function fireEvent($event): void
+    protected function fireEvent(string $event): void
     {
         $this->app['events']->dispatch(
             sprintf('plugin.%s.'.$event, $this->getLowerName()),

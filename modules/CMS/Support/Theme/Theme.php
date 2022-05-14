@@ -108,7 +108,7 @@ class Theme implements ThemeContract
         return file_exists($themeConfigPath);
     }
 
-    public function getThemePath($theme, $path = ''): string
+    public function getPath($theme, $path = ''): string
     {
         $result = $this->basePath . '/' . $theme;
 
@@ -118,6 +118,13 @@ class Theme implements ThemeContract
 
         return $result . '/' . $path;
     }
+    /**
+     * @deprecated
+     */
+    public function getThemePath($theme, $path = ''): string
+    {
+        return $this->getPath($theme, $path);
+    }
 
     /**
      * Get particular theme all information.
@@ -126,9 +133,9 @@ class Theme implements ThemeContract
      *
      * @return false|Config
      */
-    public function getThemeInfo(string $theme): bool|Config
+    public function getInfo(string $theme): bool|Config
     {
-        $themePath = $this->getThemePath($theme);
+        $themePath = $this->getPath($theme);
         $themeConfigPath = $themePath . '/theme.json';
         $themeChangelogPath = $themePath . '/changelog.yml';
 
@@ -144,6 +151,14 @@ class Theme implements ThemeContract
         }
 
         return false;
+    }
+
+    /**
+     * @deprecated
+     */
+    public function getThemeInfo(string $theme): bool|Config
+    {
+        return $this->getInfo($theme);
     }
 
     /**

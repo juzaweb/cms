@@ -8,7 +8,8 @@ use Juzaweb\CMS\Contracts\ThemeContract;
 /**
  * @method static set(string $theme)
  * @method static has(string $theme)
- * @method static getThemePath(string $theme = null, $path = '')
+ * @method static getPath(string $theme = null, $path = '')
+ * @method static getInfo(string $theme): bool|Config
  * @method static \Illuminate\Support\Collection getThemeInfo(string $theme)
  * @method static getScreenshot(string $theme)
  * @method static get(string $theme)
