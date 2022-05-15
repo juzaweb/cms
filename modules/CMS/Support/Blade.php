@@ -5,7 +5,7 @@
  * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzaweb/juzacms
- * @license    MIT
+ * @license    GNU V2
  *
  * Created by JUZAWEB.
  * Date: 5/28/2021
