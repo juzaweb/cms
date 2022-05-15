@@ -32,7 +32,7 @@ class ThemeConfig
 
         $this->configs = $this->cache
             ->store('file')
-            ->rememberForever($this->cacheKey, function () {
+            ->rememberForever($this->getCacheKey(), function () {
                 return ConfigModel::where('theme', '=', $this->theme)
                     ->get([
                         'code',
@@ -70,8 +70,14 @@ class ThemeConfig
         ]);
 
         $this->configs[$key] = $value;
-        $this->cache->store('file')->forever($this->cacheKey, $this->configs);
+
+        $this->cache->store('file')->forever($this->getCacheKey(), $this->configs);
 
         return $config;
+    }
+
+    protected function getCacheKey()
+    {
+        return cache_prefix($this->cacheKey);
     }
 }

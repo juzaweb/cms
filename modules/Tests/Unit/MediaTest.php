@@ -21,7 +21,12 @@ class MediaTest extends TestCase
     {
         Storage::put('tmps/test.txt', date('Y-m-d H:i:s'));
 
-        $media = FileManager::addFile(Storage::path('tmps/test.txt'), 'file', null, User::first()->id);
+        $media = FileManager::addFile(
+            Storage::path('tmps/test.txt'),
+            'file',
+            null,
+            User::first()->id
+        );
 
         $this->assertNotEmpty($media->path);
 
