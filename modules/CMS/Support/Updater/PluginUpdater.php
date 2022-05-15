@@ -95,8 +95,14 @@ class PluginUpdater extends UpdateManager
             return $plugin->getPath();
         }
 
-        $folder = explode('/', $this->name)[1];
+        $folder = explode('/', $this->name);
 
-        return config('juzaweb.plugin.path').'/'.$folder;
+        $folderPath = config('juzaweb.plugin.path').'/'.$folder[1];
+
+        if (is_dir($folderPath)) {
+            $folderPath = config('juzaweb.plugin.path').'/'.$folder[0].'-'.$folder[1];
+        }
+
+        return $folderPath;
     }
 }
