@@ -41,7 +41,7 @@ class ThemeTest extends TestCase
         $theme->delete();
 
         $this->assertDirectoryDoesNotExist(
-            config('juzaweb.theme.path') . "/{$theme->getName()}"
+            config('juzaweb.theme.path') . "/gamxo"
         );
     }
 }
