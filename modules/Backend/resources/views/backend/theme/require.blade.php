@@ -47,8 +47,8 @@
         }
 
         var table = new JuzawebTable({
-            url: "{{ route('admin.themes.require-plugins.get-data') }}",
-            action_url: "{{ route('admin.themes.require-plugins.buld-actions') }}"
+            url: "{{ route('admin.themes.plugins.get-data') }}",
+            action_url: "{{ route('admin.plugin.bulk-actions') }}"
         });
     </script>
 @endsection

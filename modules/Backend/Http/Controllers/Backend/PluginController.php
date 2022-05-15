@@ -106,7 +106,7 @@ class PluginController extends BackendController
         $action = $request->post('action');
         $ids = $request->post('ids');
 
-        if ($action == 'update') {
+        if (in_array($action, ['update', 'install'])) {
             $query = ['plugins' => $ids];
             $query = http_build_query($query);
 

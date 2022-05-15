@@ -10,13 +10,12 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class RequirePluginController extends BackendController
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $this->addBreadcrumb(
             [
@@ -35,7 +34,7 @@ class RequirePluginController extends BackendController
         );
     }
 
-    public function getData()
+    public function getData(): \Illuminate\Http\JsonResponse
     {
         $themeInfo = ThemeLoader::getThemeInfo(jw_current_theme());
         $require = $themeInfo->get('require', []);
@@ -61,68 +60,6 @@ class RequirePluginController extends BackendController
             [
                 'total' => count($result),
                 'rows' => $result,
-            ]
-        );
-    }
-
-    public function bulkActions(Request $request)
-    {
-        $this->validate(
-            $request,
-            [
-                'ids' => 'array|required',
-                'action' => 'required',
-            ]
-        );
-
-        $ids = $request->post('ids');
-        $action = $request->post('action');
-
-        if ($action == 'install') {
-            $query = ['plugins' => $ids];
-            $query = http_build_query($query);
-
-            return $this->success(
-                [
-                    'window_redirect' => route('admin.update.process', ['plugin']).'?'.$query,
-                ]
-            );
-        }
-
-        $errors = [];
-
-        switch ($action) {
-            case 'activate':
-                foreach ($ids as $id) {
-                    $info = app('plugins')->find($id);
-                    if (empty($info)) {
-                        $errors[] = trans(
-                            'cms::app.plugin_name_not_found',
-                            [
-                                'name' => $id
-                            ]
-                        );
-                        continue;
-                    }
-
-                    $info->enable();
-                }
-                break;
-        }
-
-        remove_backend_message('require_plugins');
-
-        if ($errors) {
-            return $this->error(
-                [
-                    'message' => $errors[0],
-                ]
-            );
-        }
-
-        return $this->success(
-            [
-                'message' => trans('cms::app.successfully'),
             ]
         );
     }

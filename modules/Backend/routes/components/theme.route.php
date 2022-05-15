@@ -28,10 +28,6 @@ Route::group(
             'Backend\RequirePluginController@getData'
         )->name('admin.themes.require-plugins.get-data');
 
-        Route::post(
-            '/require-plugins/buld-actions',
-            'Backend\RequirePluginController@bulkActions'
-        )->name('admin.themes.require-plugins.buld-actions');
         Route::delete('/delete', 'Backend\ThemeController@delete')->name('admin.themes.delete');
         Route::post('/activate', 'Backend\ThemeController@activate')->name('admin.themes.activate');
 
