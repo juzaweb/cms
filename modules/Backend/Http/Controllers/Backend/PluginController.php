@@ -42,6 +42,13 @@ class PluginController extends BackendController
             abort(403, 'Access deny.');
         }
 
+        $this->addBreadcrumb(
+            [
+                'url' => route('admin.plugin'),
+                'title' => trans('cms::app.plugins')
+            ]
+        );
+
         $title = trans('cms::app.install');
 
         return view(
@@ -159,7 +166,7 @@ class PluginController extends BackendController
         return $this->success(
             [
                 'message' => trans('cms::app.successfully'),
-                'redirect' => route('admin.plugin'),
+                'window_redirect' => route('admin.plugin'),
             ]
         );
     }
