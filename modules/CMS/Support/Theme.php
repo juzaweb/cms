@@ -232,6 +232,6 @@ class Theme
 
     public function getPluginRequires(): array
     {
-        return $this->json()->get('require');
+        return $this->json()->get('require', []);
     }
 }

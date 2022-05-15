@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Http\Requests\Theme\UpdateRequest;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -105,9 +106,17 @@ class ThemeController extends BackendController
             );
         }
 
-        $theme->activate();
+        DB::beginTransaction();
+        try {
+            $theme->activate();
 
-        $this->addRequireThemeActive($theme);
+            $this->addRequireThemeActive($theme);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
 
         return $this->success(
             [
@@ -201,43 +210,37 @@ class ThemeController extends BackendController
 
     protected function addRequireThemeActive(\Juzaweb\CMS\Support\Theme $theme): void
     {
-        DB::beginTransaction();
-        try {
-            if ($require = $theme->getPluginRequires()) {
-                $plugins = Plugin::all();
-                $str = [];
-                foreach ($require as $plugin => $ver) {
-                    if (app('plugins')->has($plugin)) {
-                        if (app('plugins')->isEnabled($plugin)) {
-                            continue;
-                        }
-                    }
+        app(BackendMessageContract::class)->deleteGroup('require_plugins');
 
-                    if (!in_array($plugin, array_keys($plugins))) {
-                        $plugins[$plugin] = $plugin;
+        if ($require = $theme->getPluginRequires()) {
+            $plugins = Plugin::all();
+            $str = [];
+            foreach ($require as $plugin => $ver) {
+                if (app('plugins')->has($plugin)) {
+                    if (app('plugins')->isEnabled($plugin)) {
+                        continue;
                     }
-
-                    $str[] = "<strong>{$plugin}</strong>";
                 }
 
-                if ($str) {
-                    $this->addMessage(
-                        'require_plugins',
-                        trans(
-                            'cms::app.theme_require_plugins',
-                            [
-                                'plugins' => implode(', ', $str),
-                                'link' => route('admin.themes.require-plugins')
-                            ]
-                        )
-                    );
+                if (!in_array($plugin, array_keys($plugins))) {
+                    $plugins[$plugin] = $plugin;
                 }
+
+                $str[] = "<strong>{$plugin}</strong>";
             }
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
+            if ($str) {
+                $this->addMessage(
+                    'require_plugins',
+                    trans(
+                        'cms::app.theme_require_plugins',
+                        [
+                            'plugins' => implode(', ', $str),
+                            'link' => route('admin.themes.require-plugins')
+                        ]
+                    )
+                );
+            }
         }
     }
 
