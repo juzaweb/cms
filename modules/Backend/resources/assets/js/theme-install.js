@@ -72,4 +72,35 @@ $(document).on("turbolinks:load", function() {
             }
         });
     });
+
+    bodyElement.on('click', '.delete-theme', function () {
+        let theme = $(this).data('theme');
+        let btn = $(this);
+        let btnText = btn.html();
+
+        confirm_message(
+            juzaweb.lang.delete_theme_confirm,
+            function (result) {
+                if (!result) {
+                    return false;
+                }
+
+                btn.html('<i class="fa fa-spinner fa-spin"></i> ' + juzaweb.lang.please_wait);
+
+                ajaxRequest(juzaweb.adminUrl + '/themes/bulk-actions', {
+                    ids: [theme],
+                    action: 'delete'
+                }, {
+                    method: 'POST',
+                    callback: function (response) {
+                        show_message(response);
+                        btn.closest('.theme-list-item').remove();
+                    },
+                    failCallback: function(response) {
+                        show_message(response);
+                        btn.html(btnText);
+                    }
+                });
+        });
+    });
 });

@@ -98,29 +98,4 @@ $(document).on("turbolinks:load", function() {
             $(this).closest('.dd-item').remove();
         }
     );
-
-    $('#theme-list').on('click', '.delete-theme', function () {
-        let theme = $(this).data('theme');
-
-        confirm_message(
-            juzaweb.lang.delete_theme_confirm,
-            function (result) {
-                if (!result) {
-                    return false;
-                }
-
-                ajaxRequest(juzaweb.adminUrl +'/themes/delete', {
-                    'theme': theme,
-                }, {
-                    method: 'DELETE',
-                    callback: function (response) {
-                        if (response.status === false) {
-                            show_message(response);
-                        } else {
-                            window.location = juzaweb.adminUrl +'/themes';
-                        }
-                    }
-                });
-        });
-    });
 });
