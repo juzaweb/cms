@@ -94,7 +94,9 @@ $(document).on("turbolinks:load", function() {
                     method: 'POST',
                     callback: function (response) {
                         show_message(response);
-                        btn.closest('.theme-list-item').remove();
+                        if (response.status == true) {
+                            btn.closest('.theme-list-item').remove();
+                        }
                     },
                     failCallback: function(response) {
                         show_message(response);

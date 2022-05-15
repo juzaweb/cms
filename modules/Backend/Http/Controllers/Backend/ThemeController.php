@@ -128,7 +128,7 @@ class ThemeController extends BackendController
     public function bulkActions(Request $request): JsonResponse|RedirectResponse
     {
         $action = $request->post('action');
-        $ids = $request->post('ids');
+        $ids = $request->post('ids', []);
 
         if ($action == 'update') {
             $query = ['themes' => $ids];
