@@ -11,18 +11,18 @@ class UpdateTest extends TestCase
     {
         $this->authUserAdmin();
 
-        $version = Version::getVersion();
-
         $filePath = base_path('modules/CMS/Version.php');
 
         File::put(
             $filePath,
             str_replace(
-                $version,
+                Version::getVersion(),
                 'v2.0',
                 File::get($filePath)
             )
         );
+
+        $this->assertEquals(Version::getVersion(), 'v2.0');
 
         for ($i=1;$i<=6;$i++) {
             $this->printText("Test update step {$i}");
@@ -34,31 +34,27 @@ class UpdateTest extends TestCase
             $response->assertJson(['status' => true]);
         }
 
-        $version = Version::getVersion();
-
-        $this->assertNotEquals($version, 'v2.0');
+        $this->assertNotEquals(Version::getVersion(), 'v2.0');
     }
 
     public function testUpdateCommand()
     {
-        $version = Version::getVersion();
-
         $filePath = base_path('modules/CMS/Version.php');
 
         File::put(
             $filePath,
             str_replace(
-                $version,
+                Version::getVersion(),
                 'v2.0',
                 File::get($filePath)
             )
         );
 
+        $this->assertEquals(Version::getVersion(), 'v2.0');
+
         $this->artisan('juzacms:update')
             ->assertExitCode(0);
 
-        $version = Version::getVersion();
-
-        $this->assertNotEquals($version, 'v2.0');
+        $this->assertNotEquals(Version::getVersion(), 'v2.0');
     }
 }
