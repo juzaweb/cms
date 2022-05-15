@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Support\Plugin;
@@ -48,7 +49,8 @@ class PluginUpdater extends UpdateManager
     {
         CacheGroup::pull('plugin_update_keys');
 
-        Artisan::call('juzacms:plugin-autoload');
+        event(new DumpAutoloadPlugin());
+
         /**
          * @var Plugin $plugin
          */

@@ -167,7 +167,7 @@ class PluginController extends BackendController
         }
 
         if ($action == 'delete') {
-            event(new DumpAutoloadPlugin($action, $ids));
+            event(new DumpAutoloadPlugin());
         }
 
         event(new AfterPluginBulkAction($action, $ids));
