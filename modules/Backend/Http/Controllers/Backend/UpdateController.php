@@ -308,7 +308,7 @@ class UpdateController extends BackendController
         );
     }
 
-    protected function getUpdater(string $type): UpdateManager
+    protected function getUpdater(string $type): UpdateManager|PluginUpdater|ThemeUpdater
     {
         switch ($type) {
             case 'cms':

@@ -35,6 +35,10 @@ abstract class UpdateManager
         $this->storage = Storage::disk('tmp');
     }
 
+    abstract public function getVersionAvailable(): string;
+
+    abstract public function getCurrentVersion(): string;
+
     public function checkForUpdate(): bool
     {
         return version_compare(
