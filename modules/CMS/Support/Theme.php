@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Noodlehaus\Config as ReadConfig;
+use Juzaweb\CMS\Facades\Config;
 
 class Theme
 {
@@ -194,9 +195,22 @@ class Theme
         );
     }
 
+    public function isActive(): bool
+    {
+        return jw_current_theme() == $this->name;
+    }
+
     public function activate(): void
     {
-        $this->putCache();
+        Cache::pull(cache_prefix('jw_theme_configs'));
+
+        $status = [
+            'name' => $this->name,
+            'namespace' => 'Theme\\',
+            'path' => config('juzaweb.theme.path') .'/'.$this->name,
+        ];
+
+        Config::setConfig('theme_statuses', $status);
 
         Artisan::call(
             'theme:publish',
@@ -207,21 +221,17 @@ class Theme
         );
     }
 
-    protected function putCache(): void
+    public function delete(): bool
     {
-        Cache::forever('current_theme_info', $this->getInfo());
+        if ($this->isActive()) {
+            throw new \Exception('Can\'t delete activated theme');
+        }
 
-        $themeStatus = [
-            'name' => $this->name,
-            'namespace' => 'Theme\\',
-            'path' => $this->path .'/'. $this->name,
-        ];
+        return $this->json()->getFilesystem()->deleteDirectory($this->getPath());
+    }
 
-        $str = '<?php
-
-return ' . var_export($themeStatus, true) .';
-
-';
-        File::put(base_path('bootstrap/cache/theme_statuses.php'), $str);
+    public function getPluginRequires(): array
+    {
+        return $this->json()->get('require');
     }
 }

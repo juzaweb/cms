@@ -3,25 +3,27 @@ $(document).on("turbolinks:load", function() {
     bodyElement.on('click', '.install-plugin', function () {
         let plugin = $(this).data('plugin');
         let btn = $(this);
+        let btnText = btn.html();
         btn.prop("disabled", true);
+        btn.html('<i class="fa fa-spinner fa-spin"></i> ' + juzaweb.lang.please_wait);
 
-        ajaxRequest(juzaweb.adminUrl + '/plugins/bulk-actions', {
-            ids: [plugin],
-            action: 'update',
-        }, {
-            method: 'POST',
-            callback: function (response) {
-                show_message(response);
-                btn.html(`<i class="fa fa-check"></i> ${juzaweb.lang.activate}`);
+        jwCMSUpdate(
+            'plugin',
+            1,
+            null,
+            {plugin: plugin},
+            function (response) {
+                btn.html(juzaweb.lang.activate);
                 btn.removeClass('install-plugin');
                 btn.addClass('active-plugin');
                 btn.prop("disabled", false);
             },
-            failCallback: function(response) {
+            function(response) {
                 show_message(response);
                 btn.prop("disabled", false);
+                btn.html(btnText);
             }
-        });
+        );
     });
 
     bodyElement.on('click', '.active-plugin', function () {

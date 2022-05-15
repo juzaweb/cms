@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Http\Requests\Theme\UpdateRequest;
 use Juzaweb\CMS\Facades\CacheGroup;
+use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Support\ArrayPagination;
 use Juzaweb\CMS\Support\JuzawebApi;
-use Juzaweb\CMS\Support\Updater\ThemeUpdater;
 use Juzaweb\CMS\Version;
 
 class ThemeController extends BackendController
@@ -96,8 +96,8 @@ class ThemeController extends BackendController
             ]
         );
 
-        $theme = $request->post('theme');
-        if (! ThemeLoader::has($theme)) {
+        $name = $request->post('theme');
+        if (!$theme = Theme::find($name)) {
             return $this->error(
                 [
                     'message' => trans('cms::message.theme_not_found'),
@@ -105,7 +105,9 @@ class ThemeController extends BackendController
             );
         }
 
-        $this->setThemeActive($theme);
+        $theme->activate();
+
+        $this->addRequireThemeActive($theme);
 
         return $this->success(
             [
@@ -130,10 +132,11 @@ class ThemeController extends BackendController
             );
         }
 
-        foreach ($ids as $plugin) {
+        foreach ($ids as $name) {
             try {
                 switch ($action) {
                     case 'delete':
+                        Theme::delete($name);
                         break;
                 }
             } catch (\Throwable $e) {
@@ -196,31 +199,11 @@ class ThemeController extends BackendController
         );
     }
 
-    protected function setThemeActive($theme): void
+    protected function addRequireThemeActive(\Juzaweb\CMS\Support\Theme $theme): void
     {
         DB::beginTransaction();
         try {
-            Cache::pull(cache_prefix('jw_theme_configs'));
-
-            $themeStatus = [
-                'name' => $theme,
-                'namespace' => 'Theme\\',
-                'path' => config('juzaweb.theme.path') .'/'.$theme,
-            ];
-
-            set_config('theme_statuses', $themeStatus);
-
-            Artisan::call(
-                'theme:publish',
-                [
-                    'theme' => $theme,
-                    'type' => 'assets',
-                ]
-            );
-
-            $info = ThemeLoader::getThemeInfo($theme);
-
-            if ($require = $info->get('require')) {
+            if ($require = $theme->getPluginRequires()) {
                 $plugins = Plugin::all();
                 $str = [];
                 foreach ($require as $plugin => $ver) {
