@@ -3,7 +3,7 @@
 namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Console\Commands\Plugin\Module;
+use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Publishing\AssetPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -28,7 +28,7 @@ class PublishCommand extends Command
      */
     public function handle()
     {
-        if ($name = $this->argument('module')) {
+        if ($name = $this->argument('plugin')) {
             $this->publish($name);
             return;
         }
@@ -43,18 +43,18 @@ class PublishCommand extends Command
      */
     public function publish($name)
     {
-        if ($name instanceof Module) {
-            $module = $name;
+        if ($name instanceof Plugin) {
+            $plugin = $name;
         } else {
-            $module = $this->laravel['plugins']->findOrFail($name);
+            $plugin = $this->laravel['plugins']->findOrFail($name);
         }
 
-        with(new AssetPublisher($module))
+        with(new AssetPublisher($plugin))
             ->setRepository($this->laravel['plugins'])
             ->setConsole($this)
             ->publish();
 
-        $this->line("<info>Published</info>: {$module->getStudlyName()}");
+        $this->line("<info>Published</info>: {$plugin->getStudlyName()}");
     }
 
     /**
@@ -62,8 +62,8 @@ class PublishCommand extends Command
      */
     public function publishAll()
     {
-        foreach ($this->laravel['plugins']->allEnabled() as $module) {
-            $this->publish($module);
+        foreach ($this->laravel['plugins']->allEnabled() as $plugin) {
+            $this->publish($plugin);
         }
     }
 
@@ -75,7 +75,7 @@ class PublishCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
+            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 }

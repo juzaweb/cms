@@ -14,7 +14,7 @@ class AssetController extends Controller
     public function assetPlugin($plugin, $path): HttpResponse
     {
         $path = str_replace('assets/', '', $path);
-        $assetPath = plugin_path($plugin, 'src/resources/assets/public/' . $path);
+        $assetPath = plugin_path($plugin, 'assets/public/' . $path);
 
         return $this->responsePath($assetPath);
     }
