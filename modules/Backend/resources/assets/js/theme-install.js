@@ -42,7 +42,6 @@ $(document).on("turbolinks:load", function() {
                 btn.removeClass('install-theme');
                 btn.addClass('active-theme');
                 btn.prop("disabled", false);
-                btn.html(btnText);
             },
             function(response) {
                 show_message(response);
