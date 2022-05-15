@@ -43,6 +43,7 @@ class ThemeUpdateTest extends TestCase
         File::put($theme->getPath() . "/theme.json", $composer);
 
         $theme = Theme::find('default');
+        
         $this->assertEquals($theme->getVersion(), '1.0');
 
         $updater = app(ThemeUpdater::class)->find('default');
@@ -50,6 +51,7 @@ class ThemeUpdateTest extends TestCase
         $updater->update();
 
         $theme = Theme::find('default');
+
         $this->assertNotEquals($theme->getVersion(), '1.0');
     }
 }
