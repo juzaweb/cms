@@ -115,7 +115,7 @@ class ThemeController extends BackendController
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            return $this->error($e->getMessage());
         }
 
         return $this->success(
