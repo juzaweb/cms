@@ -1,4 +1,4 @@
 {
-    "/themes/gamxo/assets/public/css/main.css": "/themes/gamxo/assets/public/css/main.css",
-    "/themes/gamxo/assets/public/js/main.js": "/themes/gamxo/assets/public/js/main.js"
+    "/modules/Backend/resources/assets/public/css/custom.min.css": "/modules/Backend/resources/assets/public/css/custom.min.css",
+    "/modules/Backend/resources/assets/public/js/custom.min.js": "/modules/Backend/resources/assets/public/js/custom.min.js"
 }

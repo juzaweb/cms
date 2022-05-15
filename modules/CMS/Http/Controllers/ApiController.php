@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 
@@ -207,7 +208,7 @@ class ApiController extends Controller
         return $limit;
     }
 
-    protected function restSuccess($data, string $message = '', int $status = 200)
+    protected function restSuccess($data, string $message = '', int $status = 200): JsonResponse
     {
         $response = [
             'data' => $data,
@@ -217,7 +218,7 @@ class ApiController extends Controller
         return response()->json($response, $status);
     }
 
-    protected function restFail($errors, string $message = '', int $status = 422)
+    protected function restFail($errors, string $message = '', int $status = 422): JsonResponse
     {
         switch (true) {
             case $errors instanceof MessageBag:
@@ -245,7 +246,7 @@ class ApiController extends Controller
         return response()->json($response, $status);
     }
 
-    protected function restPaginate($paginate, string $message = '', int $status = 200)
+    protected function restPaginate($paginate, string $message = '', int $status = 200): JsonResponse
     {
         $currentPage = $paginate->currentPage();
         $lastPage = $paginate->lastPage();

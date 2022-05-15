@@ -2,7 +2,9 @@
 
 namespace Juzaweb\CMS\Support\Updater;
 
-use Juzaweb\CMS\Support\Manager\UpdateManager;
+use Illuminate\Support\Facades\Artisan;
+use Juzaweb\CMS\Abstracts\UpdateManager;
+use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Version;
 
@@ -42,7 +44,22 @@ class PluginUpdater extends UpdateManager
         return $module->getVersion();
     }
 
-    public function fetchData(): void
+    public function afterFinish(): void
+    {
+        CacheGroup::pull('plugin_update_keys');
+
+        Artisan::call('juzacms:plugin-autoload');
+        /**
+         * @var Plugin $plugin
+         */
+        $plugin = app('plugins')->find($this->name);
+        if ($plugin->isEnabled()) {
+            $plugin->disable();
+            $plugin->enable();
+        }
+    }
+
+    protected function fetchData(): object
     {
         $uri = "plugins/{$this->name}/update";
 
@@ -57,19 +74,12 @@ class PluginUpdater extends UpdateManager
 
         $this->responseErrors($response);
 
-        $this->response = $response;
+        return $response;
     }
 
-    public function afterFinish(): void
+    protected function getCacheKey(): string
     {
-        /**
-         * @var Plugin $plugin
-         */
-        $plugin = app('plugins')->find($this->name);
-        if ($plugin->isEnabled()) {
-            $plugin->disable();
-            $plugin->enable();
-        }
+        return 'plugin_' . str_replace('/', '_', $this->name);
     }
 
     protected function getLocalPath(): string

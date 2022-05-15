@@ -8,11 +8,12 @@
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Manager;
+namespace Juzaweb\CMS\Abstracts;
 
 use GuzzleHttp\Psr7\Utils;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -24,12 +25,8 @@ abstract class UpdateManager
     protected Curl $curl;
     protected JuzawebApi $api;
     protected FilesystemAdapter $storage;
-    protected object $response;
-    protected string $tmpFolder;
-    protected string $tmpFile;
-    protected string $tmpFilePath;
-    protected string $process;
     protected array $updatePaths = [];
+    protected int $maxStep = 6;
 
     public function __construct(Curl $curl, JuzawebApi $api)
     {
@@ -49,35 +46,69 @@ abstract class UpdateManager
 
     public function update(): bool
     {
-        $this->fetchData();
-        $this->downloadUpdateFile();
-        $this->unzipFile();
-        $this->updateFileAndFolder();
-        $this->finish();
+        for ($i=1; $i<=$this->maxStep; $i++) {
+            $this->updateByStep($i);
+        }
+
         return true;
+    }
+
+    public function updateByStep(int $step): bool
+    {
+        switch ($step) {
+            case 1:
+                $this->fetchDataUpdate();
+                break;
+            case 2:
+                $this->downloadUpdateFile();
+                break;
+            case 3:
+                $this->unzipFile();
+                break;
+            case 4:
+                $this->backupOldVersion();
+                break;
+            case 5:
+                $this->updateFileAndFolder();
+                break;
+            case 6:
+                $this->finish();
+        }
+
+        return true;
+    }
+
+    public function fetchDataUpdate(): void
+    {
+        $this->setCacheData('response', $this->fetchData());
     }
 
     public function downloadUpdateFile(): bool
     {
         $this->setProcess('downloading');
 
-        $this->tmpFolder = Str::lower(Str::random(10));
+        $tmpFolder = Str::lower(Str::random(10));
+        $this->setCacheData('tmpFolder', $tmpFolder);
+
         foreach (['zip', 'unzip', 'backup'] as $folder) {
-            if (!$this->storage->exists("{$this->tmpFolder}/{$folder}")) {
+            if (!$this->storage->exists("{$tmpFolder}/{$folder}")) {
                 File::makeDirectory(
-                    $this->storage->path("{$this->tmpFolder}/{$folder}"),
+                    $this->storage->path("{$tmpFolder}/{$folder}"),
                     0775,
                     true
                 );
             }
         }
 
-        $this->tmpFile = $this->tmpFolder.'/zip/'. Str::lower(Str::random(5)).'.zip';
-        $this->tmpFilePath = $this->storage->path($this->tmpFile);
+        $tmpFile = $tmpFolder.'/zip/'. Str::lower(Str::random(5)).'.zip';
+        $tmpFilePath = $this->storage->path($tmpFile);
 
-        if (!$this->downloadFile($this->response->data->link, $this->tmpFilePath)) {
+        if (!$this->downloadFile($this->getCacheData('response')->data->link, $tmpFilePath)) {
             return false;
         }
+
+        $this->setCacheData('tmpFile', $tmpFile);
+        $this->setCacheData('tmpFilePath', $tmpFilePath);
 
         $this->setProcess('downloaded');
         return true;
@@ -87,38 +118,51 @@ abstract class UpdateManager
     {
         $this->setProcess('unzip');
         $zip = new \ZipArchive();
-        $op = $zip->open($this->tmpFilePath);
+        $op = $zip->open($this->getCacheData('tmpFilePath'));
 
         if ($op !== true) {
             return false;
         }
 
-        $zip->extractTo($this->storage->path("{$this->tmpFolder}/unzip"));
+        $zip->extractTo($this->storage->path("{$this->getCacheData('tmpFolder')}/unzip"));
         $zip->close();
         $this->setProcess('unzip_success');
         return true;
     }
 
-    public function updateFileAndFolder(): void
+    public function backupOldVersion(): void
     {
-        $this->setProcess('updating');
+        $this->setProcess('backup');
+
         $localFolder = $this->getLocalPath();
-        $tmpFolder = $this->storage->path($this->tmpFolder);
+
+        $tmpFolder = $this->storage->path($this->getCacheData('tmpFolder'));
 
         if (!is_dir($localFolder)) {
             File::makeDirectory($localFolder, 0775, true);
         }
 
-        $this->setProcess('backup');
-        $zipFolders = File::directories("{$tmpFolder}/unzip");
-
         $this->updateFolder($localFolder, "{$tmpFolder}/backup");
 
-        $this->setProcess('move_folder');
+        $this->setProcess('backup_done');
+    }
+
+    public function updateFileAndFolder(): void
+    {
+        $this->setProcess('updating');
+
+        $localFolder = $this->getLocalPath();
+
+        $tmpFolder = $this->storage->path($this->getCacheData('tmpFolder'));
+
+        $zipFolders = File::directories("{$tmpFolder}/unzip");
+
         foreach ($zipFolders as $folder) {
             $this->updateFolder($folder, $localFolder);
             break;
         }
+
+        $this->setProcess('updated');
     }
 
     public function finish(): void
@@ -128,14 +172,17 @@ abstract class UpdateManager
             $this->beforeFinish();
         }
 
-        File::deleteDirectory($this->storage->path($this->tmpFolder), true);
-        File::deleteDirectory($this->storage->path($this->tmpFolder));
+        $tmpFolder = $this->getCacheData('tmpFolder');
+        File::deleteDirectory($this->storage->path($tmpFolder), true);
+        File::deleteDirectory($this->storage->path($tmpFolder));
 
         Artisan::call('optimize:clear');
 
         if (method_exists($this, 'afterFinish')) {
             $this->afterFinish();
         }
+
+        Cache::store('file')->pull($this->getCacheKey());
     }
 
     public function rollBack(): void
@@ -146,6 +193,11 @@ abstract class UpdateManager
     public function getUploadPaths(): array
     {
         return $this->updatePaths;
+    }
+
+    public function getMaxStep(): int
+    {
+        return $this->maxStep;
     }
 
     protected function updateFolder(string $source, string $target): bool
@@ -196,7 +248,20 @@ abstract class UpdateManager
 
     protected function setProcess(string $process): void
     {
-        $this->process = $process;
+        $this->setCacheData('process', $process);
+    }
+
+    protected function setCacheData(string $key, mixed $value): void
+    {
+        $data = Cache::store('file')->get($this->getCacheKey());
+        $data[$key] = $value;
+        Cache::store('file')->set($this->getCacheKey(), $data, 3600);
+    }
+
+    protected function getCacheData(string $key = null): mixed
+    {
+        $data = Cache::store('file')->get($this->getCacheKey());
+        return $data[$key] ?? null;
     }
 
     protected function responseErrors(object $response): void
@@ -207,4 +272,8 @@ abstract class UpdateManager
     }
 
     abstract protected function getLocalPath(): string;
+
+    abstract protected function getCacheKey(): string;
+
+    abstract protected function fetchData(): object;
 }

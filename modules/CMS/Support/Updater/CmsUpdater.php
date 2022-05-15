@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
-use Juzaweb\CMS\Support\Manager\UpdateManager;
+use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Version;
 
@@ -35,25 +35,13 @@ class CmsUpdater extends UpdateManager
         return get_version_by_tag($response->data->version);
     }
 
-    public function fetchData(): void
-    {
-        $uri = 'cms/update';
-
-        $response = $this->api->get(
-            $uri,
-            [
-                'current_version' => $this->getCurrentVersion(),
-            ]
-        );
-
-        $this->responseErrors($response);
-
-        $this->response = $response;
-    }
-
     public function afterFinish()
     {
+        Artisan::call('juzacms:cache-clear');
+
         Artisan::call('migrate', ['--force' => true]);
+
+        Artisan::call('juzacms:plugin-autoload');
 
         Artisan::call(
             'vendor:publish',
@@ -95,6 +83,27 @@ class CmsUpdater extends UpdateManager
         return [
             'modules',
         ];
+    }
+
+    protected function getCacheKey(): string
+    {
+        return 'cms_update';
+    }
+
+    protected function fetchData(): object
+    {
+        $uri = 'cms/update';
+
+        $response = $this->api->get(
+            $uri,
+            [
+                'current_version' => $this->getCurrentVersion(),
+            ]
+        );
+
+        $this->responseErrors($response);
+
+        return $response;
     }
 
     protected function getLocalPath(): string

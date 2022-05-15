@@ -8,7 +8,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
-use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Exceptions\PluginNotFoundException;
 use Juzaweb\CMS\Support\Plugin;
 
 class FileActivator implements ActivatorInterface
@@ -93,7 +93,7 @@ class FileActivator implements ActivatorInterface
 
     /**
      * @inheritDoc
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function enable(Plugin $module): void
     {
@@ -102,7 +102,7 @@ class FileActivator implements ActivatorInterface
 
     /**
      * @inheritDoc
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function disable(Plugin $module): void
     {
@@ -123,7 +123,7 @@ class FileActivator implements ActivatorInterface
 
     /**
      * @inheritDoc
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function setActive(Plugin $module, $active): void
     {
@@ -165,7 +165,7 @@ class FileActivator implements ActivatorInterface
 
                 $this->modulesStatuses[$name] = $classMap;
             } else {
-                throw new ModuleNotFoundException("Plugin [". $name . "] does not exists.");
+                throw new PluginNotFoundException("Plugin [". $name . "] does not exists.");
             }
         } else {
             unset($this->modulesStatuses[$name]);

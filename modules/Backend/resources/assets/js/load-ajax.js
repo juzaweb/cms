@@ -38,8 +38,7 @@ function ajaxRequest(url, data = null, options = {}) {
         }
     });
 
-    let response = jqxhr.responseJSON;
-    return response;
+    return jqxhr.responseJSON;
 }
 
 function replace_template( template, data ) {

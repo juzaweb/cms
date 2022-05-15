@@ -1,6 +1,6 @@
 <?php
 
-use Juzaweb\CMS\Facades\Facade;
+use Juzaweb\CMS\Facades\Facades;
 
 return [
     /**
@@ -116,6 +116,12 @@ return [
          * @see https://juzaweb.com/documentation/start/image-optimizer
          */
         'image-optimizer' => (bool) env('IMAGE_OPTIMIZER', false),
+
+        'svg_mimetypes' => [
+            ...Facades::defaultSVGMimetypes(),
+            //
+        ],
+
         /**
          * File type
          *
@@ -138,11 +144,8 @@ return [
             'image' => [
                 'max_size' => 5, // size in MB
                 'valid_mime' => [
-                    'image/jpeg',
-                    'image/pjpeg',
-                    'image/png',
-                    'image/gif',
-                    'image/svg+xml',
+                    ...Facades::defaultImageMimetypes(),
+                    //
                 ],
             ],
         ],
@@ -151,9 +154,8 @@ return [
     /**
      * Default database config
      */
-    'config' => Facade::defaultConfigs()->merge(
-        [
-            // ...
-        ]
-    )->toArray()
+    'config' => [
+        ...Facades::defaultConfigs(),
+        //
+    ]
 ];

@@ -2,7 +2,7 @@
 
 namespace Juzaweb\CMS\Contracts;
 
-use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Exceptions\PluginNotFoundException;
 use Juzaweb\CMS\Support\Plugin;
 
 interface LocalPluginRepositoryContract
@@ -92,7 +92,7 @@ interface LocalPluginRepositoryContract
      *
      * @param $name
      * @return array
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function findRequirements($name): array;
 
@@ -157,7 +157,7 @@ interface LocalPluginRepositoryContract
      * Delete a specific plugin.
      * @param string $module
      * @return bool
-     * @throws \Juzaweb\CMS\Exceptions\ModuleNotFoundException
+     * @throws \Juzaweb\CMS\Exceptions\PluginNotFoundException
      */
     public function delete(string $module): bool;
 
@@ -165,7 +165,7 @@ interface LocalPluginRepositoryContract
      * Determine whether the given plugin is activated.
      * @param string $name
      * @return bool
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function isEnabled(string $name): bool;
 
@@ -173,7 +173,7 @@ interface LocalPluginRepositoryContract
      * Determine whether the given plugin is not activated.
      * @param string $name
      * @return bool
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function isDisabled(string $name): bool;
 }

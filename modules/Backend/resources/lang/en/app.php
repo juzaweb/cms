@@ -448,4 +448,32 @@ return [
     'reset_password' => 'Reset password',
     'current_version' => 'Current version',
     'new_version' => 'New version',
+    'updating' => 'Updating...',
+    'update_process' => [
+        'step1' => [
+            'before' => 'Getting update data...',
+            'after' => 'Getted update data'
+        ],
+        'step2' => [
+            'before' => 'Download update file...',
+            'after' => 'Downloaded update file'
+        ],
+        'step3' => [
+            'before' => 'Backup old version...',
+            'after' => 'Backup old version success'
+        ],
+        'step4' => [
+            'before' => 'Unzip file...',
+            'after' => 'Unzip file success'
+        ],
+        'step5' => [
+            'before' => 'Update files and folders...',
+            'after' => 'Update files and folders success'
+        ],
+        'step6' => [
+            'before' => 'Update database...',
+            'after' => 'Update database success'
+        ],
+        'done' => 'Done!!'
+    ]
 ];
