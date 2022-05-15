@@ -77,23 +77,21 @@ class RequirePluginController extends BackendController
 
         $ids = $request->post('ids');
         $action = $request->post('action');
+
+        if ($action == 'install') {
+            $query = ['plugins' => $ids];
+            $query = http_build_query($query);
+
+            return $this->success(
+                [
+                    'window_redirect' => route('admin.update.process', ['plugin']).'?'.$query,
+                ]
+            );
+        }
+
         $errors = [];
 
         switch ($action) {
-            case 'install':
-                /*foreach ($ids as $id) {
-                    $info = app('plugins')->find($id);
-                    if (empty($info)) {
-                        $installer = new UpdateManager('plugin', $id);
-                        if (!$installer->update()) {
-                            $errors[] = trans(
-                                'cms::app.plugin_name_not_found', [
-                                    'name' => $id
-                                ]);
-                        }
-                    }
-                }*/
-                break;
             case 'activate':
                 foreach ($ids as $id) {
                     $info = app('plugins')->find($id);
