@@ -1,7 +1,7 @@
 <?php
 /**
- * @package    juzaweb/juzaweb
- * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @package    juzaweb/juzacms
+ * @author     The Anh Dang
  * @link       https://github.com/juzaweb/juzacms
  * @license    GNU V2
  */
@@ -9,8 +9,6 @@
 namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Support\Facades\Blade;
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Support\Installer;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\CMS\Contracts\EventyContract;
 use Juzaweb\CMS\Support\Hooks\Events;

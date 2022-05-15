@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Facade;
 use Juzaweb\CMS\Contracts\HookActionContract;
 
 /**
- * @method static addAdminMenu(string $menuTitle, $menuSlug, array $args)
- * @method static registerMenuItem(string $key, $componentClass)
- * @method static registerPostType(string $key, $args = [])
- * @method static registerTaxonomy(string $taxonomy, $objectType, $args = [])
- * @method static registerPermalink(string $key, array $args = [])
- * @method static addSettingForm($key, $args = [])
+ * @method static void addAdminMenu(string $menuTitle, $menuSlug, array $args)
+ * @method static void registerMenuItem(string $key, $componentClass)
+ * @method static void registerPostType(string $key, $args = [])
+ * @method static void registerTaxonomy(string $taxonomy, $objectType, $args = [])
+ * @method static void registerPermalink(string $key, array $args = [])
+ * @method static void addSettingForm($key, $args = [])
  * @method static mixed applyFilters($tag, $value, ...$args)
  * @method static void addFilter($tag, $callback, $priority = 20, $arguments = 1)
  * @method static void addAction($tag, $callback, $priority = 20, $arguments = 1)

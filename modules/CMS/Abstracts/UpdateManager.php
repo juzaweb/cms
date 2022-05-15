@@ -1,9 +1,9 @@
 <?php
 /**
- * JUZAWEB CMS - The Best CMS for Laravel Project
+ * JUZAWEB CMS - Laravel CMS for Your Project
  *
  * @package    juzaweb/juzacms
- * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
  */
@@ -34,6 +34,10 @@ abstract class UpdateManager
         $this->api = $api;
         $this->storage = Storage::disk('tmp');
     }
+
+    abstract public function getVersionAvailable(): string;
+
+    abstract public function getCurrentVersion(): string;
 
     public function checkForUpdate(): bool
     {

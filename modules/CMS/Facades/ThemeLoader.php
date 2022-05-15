@@ -6,16 +6,16 @@ use Illuminate\Support\Facades\Facade;
 use Juzaweb\CMS\Contracts\ThemeLoaderContract;
 
 /**
- * @method static set(string $theme)
- * @method static has(string $theme)
- * @method static getPath(string $theme = null, $path = '')
- * @method static getInfo(string $theme): bool|Config
+ * @method static void set(string $theme)
+ * @method static bool has(string $theme)
+ * @method static string getPath(string $theme = null, $path = '')
+ * @method static bool|Config getInfo(string $theme)
  * @method static \Illuminate\Support\Collection getThemeInfo(string $theme)
- * @method static getScreenshot(string $theme)
- * @method static get(string $theme)
- * @method static assets(string $path, $theme = null, $secure = null)
- * @method static publicPath(string $theme)
- * @method static getVersion(string $theme)
+ * @method static string getScreenshot(string $theme)
+ * @method static mixed get(string $theme)
+ * @method static string assets(string $path, $theme = null, $secure = null)
+ * @method static string publicPath(string $theme)
+ * @method static string getVersion(string $theme)
  * @method static array getRegister(string $theme)
  * @method static array getTemplates(string $theme, string $template = null)
  * @method static \Noodlehaus\Config[] all($assoc = false)
