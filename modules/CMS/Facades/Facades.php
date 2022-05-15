@@ -57,10 +57,8 @@ class Facades
 
     public static function defaultSVGMimetypes(): array
     {
-        return collect(
-            [
-                'image/svg+xml',
-            ]
-        );
+        return [
+            'image/svg+xml',
+        ];
     }
 }
