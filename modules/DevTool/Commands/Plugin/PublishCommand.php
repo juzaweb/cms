@@ -28,7 +28,7 @@ class PublishCommand extends Command
      */
     public function handle()
     {
-        if ($name = $this->argument('plugin')) {
+        if ($name = $this->argument('module')) {
             $this->publish($name);
             return;
         }
@@ -75,7 +75,7 @@ class PublishCommand extends Command
     protected function getArguments()
     {
         return [
-            ['plugin', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
+            ['module', InputArgument::OPTIONAL, 'The name of plugin will be used.'],
         ];
     }
 }
