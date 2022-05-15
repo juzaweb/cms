@@ -115,7 +115,8 @@ class ThemeController extends BackendController
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            throw $e;
+            report($e);
+            return $this->error($e->getMessage());
         }
 
         return $this->success(
@@ -128,7 +129,7 @@ class ThemeController extends BackendController
     public function bulkActions(Request $request): JsonResponse|RedirectResponse
     {
         $action = $request->post('action');
-        $ids = $request->post('ids');
+        $ids = $request->post('ids', []);
 
         if ($action == 'update') {
             $query = ['themes' => $ids];

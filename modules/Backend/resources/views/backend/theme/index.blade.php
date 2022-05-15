@@ -38,7 +38,7 @@
     </div>
 
     <template id="theme-template">
-        <div class="col-md-4">
+        <div class="col-md-4 theme-list-item">
             {content}
         </div>
     </template>

@@ -101,6 +101,13 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         return $this->scan($collection);
     }
 
+    public function delete(string $name): bool
+    {
+        $theme = $this->findOrFail($name);
+
+        return $theme->delete();
+    }
+
     /**
      * Creates a new Plugin instance
      *

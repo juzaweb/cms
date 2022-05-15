@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\URL;
 use Juzaweb\Backend\Http\Requests\Plugin\BulkActionRequest;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Facades\Plugin;
@@ -40,6 +41,13 @@ class PluginController extends BackendController
         if (!config('juzaweb.plugin.enable_upload')) {
             abort(403, 'Access deny.');
         }
+
+        $this->addBreadcrumb(
+            [
+                'url' => route('admin.plugin'),
+                'title' => trans('cms::app.plugins')
+            ]
+        );
 
         $title = trans('cms::app.install');
 
@@ -107,7 +115,11 @@ class PluginController extends BackendController
         $ids = $request->post('ids');
 
         if (in_array($action, ['update', 'install'])) {
-            $query = ['plugins' => $ids];
+            $query = [
+                'plugins' => $ids,
+                'action' => $action,
+                'referren' => URL::previous(),
+            ];
             $query = http_build_query($query);
 
             return $this->success(
@@ -154,7 +166,7 @@ class PluginController extends BackendController
         return $this->success(
             [
                 'message' => trans('cms::app.successfully'),
-                'redirect' => route('admin.plugin'),
+                'window_redirect' => route('admin.plugin'),
             ]
         );
     }
