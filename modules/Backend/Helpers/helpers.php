@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Facades\Config;
 use Juzaweb\CMS\Facades\Hook;
 use Juzaweb\CMS\Facades\HookAction;
@@ -537,38 +538,25 @@ if (!function_exists('get_version_by_tag')) {
 if (!function_exists('get_backend_message')) {
     function get_backend_message(): array
     {
-        return get_config('backend_messages', []);
+        return app(BackendMessageContract::class)->all();
     }
 }
 
 if (!function_exists('add_backend_message')) {
-    function add_backend_message($key, $messages = [], $status = 'success'): void
+    function add_backend_message($group, $messages = [], $status = 'success'): void
     {
-        if (!is_array($messages)) {
-            $messages = [$messages];
-        }
-
-        $data = get_backend_message();
-        foreach ($messages as $message) {
-            $id = Str::uuid()->toString();
-            $data[$id] = [
-                'id' => $id,
-                'key' => $key,
-                'status' => $status,
-                'message' => $message,
-            ];
-        }
-
-        set_config('backend_messages', $data);
+        app(BackendMessageContract::class)->add(
+            $group,
+            $messages,
+            $status
+        );
     }
 }
 
 if (!function_exists('remove_backend_message')) {
-    function remove_backend_message($key): void
+    function remove_backend_message($key): bool
     {
-        $data = collect(get_backend_message());
-        $data = $data->forget([$key])->all();
-        set_config('backend_messages', $data);
+        return app(BackendMessageContract::class)->delete($key);
     }
 }
 

@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Exceptions\InvalidAssetPath;
-use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Exceptions\PluginNotFoundException;
 
 class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
 {
@@ -392,7 +392,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      *
      * @return Plugin
      *
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function findOrFail(string $name): Plugin
     {
@@ -402,7 +402,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
             return $module;
         }
 
-        throw new ModuleNotFoundException("Plugin [{$name}] does not exist!");
+        throw new PluginNotFoundException("Plugin [{$name}] does not exist!");
     }
 
     /**
@@ -411,6 +411,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * @param int $status
      *
      * @return PluginCollection
+     * @throws \Exception
      */
     public function collections(int $status = 1): PluginCollection
     {
@@ -428,7 +429,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     {
         try {
             return $this->findOrFail($module)->getPath() . '/';
-        } catch (ModuleNotFoundException $e) {
+        } catch (PluginNotFoundException $e) {
             $name = Str::lower($module);
             $name = explode('/', $name)[1];
             return $this->getPath() . '/' . $name . '/';
@@ -476,7 +477,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      *
      * @param $name
      *
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function setUsed($name)
     {
@@ -498,7 +499,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     /**
      * Get module used for cli session.
      * @return string
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function getUsedNow(): string
     {
@@ -568,7 +569,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * Enabling a specific module.
      * @param string $name
      * @return void
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function enable(string $name): void
     {
@@ -579,7 +580,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * Disabling a specific module.
      * @param string $name
      * @return void
-     * @throws ModuleNotFoundException
+     * @throws PluginNotFoundException
      */
     public function disable(string $name): void
     {

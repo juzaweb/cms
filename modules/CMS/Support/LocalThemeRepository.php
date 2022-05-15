@@ -14,6 +14,7 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
 
 class LocalThemeRepository implements LocalThemeRepositoryContract
 {
@@ -73,6 +74,26 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         }
 
         return null;
+    }
+
+    /**
+     * Find a specific module, if there return that, otherwise throw exception.
+     *
+     * @param string $name
+     *
+     * @return Theme
+     *
+     * @throws ThemeNotFoundException
+     */
+    public function findOrFail(string $name): Theme
+    {
+        $theme = $this->find($name);
+
+        if ($theme !== null) {
+            return $theme;
+        }
+
+        throw new ThemeNotFoundException("Theme [{$name}] does not exist!");
     }
 
     public function all(bool $collection = false): array|Collection

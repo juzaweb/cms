@@ -8,17 +8,17 @@
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Manager;
+namespace Juzaweb\CMS\Abstracts;
 
 use GuzzleHttp\Psr7\Utils;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Curl;
 use Juzaweb\CMS\Support\JuzawebApi;
-use Illuminate\Support\Facades\Cache;
 
 abstract class UpdateManager
 {

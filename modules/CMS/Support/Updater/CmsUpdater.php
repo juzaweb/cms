@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
-use Juzaweb\CMS\Support\Manager\UpdateManager;
+use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Version;
 
@@ -40,6 +40,8 @@ class CmsUpdater extends UpdateManager
         Artisan::call('juzacms:cache-clear');
 
         Artisan::call('migrate', ['--force' => true]);
+
+        Artisan::call('juzacms:plugin-autoload');
 
         Artisan::call(
             'vendor:publish',

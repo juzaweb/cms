@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
 use Juzaweb\CMS\Contracts\ActionRegisterContract;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Contracts\CacheGroupContract;
 use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
@@ -23,6 +24,7 @@ use Juzaweb\CMS\Support\Config as DbConfig;
 use Juzaweb\CMS\Support\GlobalData;
 use Juzaweb\CMS\Support\HookAction;
 use Juzaweb\CMS\Support\MacroableModel;
+use Juzaweb\CMS\Support\Manager\BackendMessageManager;
 use Juzaweb\CMS\Support\Theme\ThemeConfig;
 use Juzaweb\CMS\Support\Validators\DomainValidator;
 use Juzaweb\CMS\Support\Validators\ModelExists;
@@ -188,6 +190,15 @@ class CmsServiceProvider extends ServiceProvider
                     $app['config'],
                     $app[ConfigContract::class],
                     $app['request']
+                );
+            }
+        );
+
+        $this->app->singleton(
+            BackendMessageContract::class,
+            function ($app) {
+                return new BackendMessageManager(
+                    $app[ConfigContract::class]
                 );
             }
         );

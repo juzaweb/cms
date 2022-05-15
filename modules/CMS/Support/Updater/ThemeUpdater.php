@@ -3,8 +3,8 @@
 namespace Juzaweb\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
+use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Facades\CacheGroup;
-use Juzaweb\CMS\Support\Manager\UpdateManager;
 use Juzaweb\CMS\Version;
 
 class ThemeUpdater extends UpdateManager
@@ -82,8 +82,6 @@ class ThemeUpdater extends UpdateManager
 
     protected function getLocalPath(): string
     {
-        //return config('juzaweb.theme.path').'/'.$this->name;
-
-        return base_path('update-test/theme').'/'.$this->name;
+        return config('juzaweb.theme.path').'/'.$this->name;
     }
 }

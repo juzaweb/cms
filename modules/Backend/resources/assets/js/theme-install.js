@@ -57,8 +57,9 @@ $(document).on("turbolinks:load", function() {
         let btn = $(this);
         btn.prop("disabled", true);
 
-        ajaxRequest(juzaweb.adminUrl + '/themes/activate', {
-            theme: theme
+        ajaxRequest(juzaweb.adminUrl + '/themes/bulk-actions', {
+            ids: [theme],
+            action: 'activate',
         }, {
             method: 'POST',
             callback: function (response) {

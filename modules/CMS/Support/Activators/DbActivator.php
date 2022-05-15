@@ -13,9 +13,10 @@ namespace Juzaweb\CMS\Support\Activators;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
-use Juzaweb\CMS\Exceptions\ModuleNotFoundException;
+use Juzaweb\CMS\Exceptions\PluginNotFoundException;
 use Juzaweb\CMS\Support\Plugin;
 
 class DbActivator implements ActivatorInterface
@@ -25,28 +26,28 @@ class DbActivator implements ActivatorInterface
      *
      * @var CacheManager
      */
-    private $cache;
+    private CacheManager $cache;
 
     /**
      * Laravel Filesystem instance
      *
      * @var Filesystem
      */
-    private $files;
+    private Filesystem $files;
 
     /**
      * Laravel config instance
      *
      * @var Config
      */
-    private $config;
+    private Config $config;
 
     /**
      * Array of plugins activation statuses
      *
      * @var array
      */
-    private $modulesStatuses;
+    private array $modulesStatuses;
 
     public function __construct(Container $app)
     {
@@ -60,8 +61,8 @@ class DbActivator implements ActivatorInterface
      * Enables a plugin
      *
      * @param Plugin $module
-     * @throws ModuleNotFoundException
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws PluginNotFoundException
+     * @throws FileNotFoundException
      */
     public function enable(Plugin $module): void
     {
@@ -72,8 +73,8 @@ class DbActivator implements ActivatorInterface
      * Disables a plugin
      *
      * @param Plugin $module
-     * @throws ModuleNotFoundException
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws PluginNotFoundException
+     * @throws FileNotFoundException
      */
     public function disable(Plugin $module): void
     {
@@ -102,8 +103,8 @@ class DbActivator implements ActivatorInterface
      *
      * @param Plugin $module
      * @param bool $active
-     * @throws ModuleNotFoundException
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws PluginNotFoundException
+     * @throws FileNotFoundException
      */
     public function setActive(Plugin $module, $active): void
     {
@@ -115,8 +116,8 @@ class DbActivator implements ActivatorInterface
      *
      * @param Plugin $module
      * @param bool $active
-     * @throws ModuleNotFoundException
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws PluginNotFoundException
+     * @throws FileNotFoundException
      */
     public function setActiveByName($module, $active): void
     {
@@ -154,7 +155,7 @@ class DbActivator implements ActivatorInterface
 
                 $this->modulesStatuses[$name] = $classMap;
             } else {
-                throw new ModuleNotFoundException(
+                throw new PluginNotFoundException(
                     "Plugin [". $name . "] does not exists."
                 );
             }
