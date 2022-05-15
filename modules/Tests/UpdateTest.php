@@ -3,7 +3,6 @@
 namespace Juzaweb\Tests;
 
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Version;
 
 class UpdateTest extends TestCase
 {
@@ -16,7 +15,7 @@ class UpdateTest extends TestCase
         File::put(
             $filePath,
             str_replace(
-                Version::getVersion(),
+                $this->getCMSVersion(),
                 'v2.0',
                 File::get($filePath)
             )
@@ -44,7 +43,7 @@ class UpdateTest extends TestCase
         File::put(
             $filePath,
             str_replace(
-                Version::getVersion(),
+                $this->getCMSVersion(),
                 'v2.0',
                 File::get($filePath)
             )
