@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    juzaweb/juzaweb
- * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @author     The Anh Dang
  * @link       https://github.com/juzaweb/juzacms
  * @license    GNU V2
  */

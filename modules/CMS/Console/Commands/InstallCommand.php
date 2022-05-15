@@ -3,7 +3,7 @@
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
  * @package    juzaweb/juzacms
- * @author     The Anh Dang <dangtheanh16@gmail.com>
+ * @author     The Anh Dang
  * @link       https://github.com/juzaweb/juzacms
  * @license    GNU V2
  */
