@@ -5,7 +5,7 @@
  * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
- * @license    MIT
+ * @license    GNU V2
  */
 
 Route::group(
@@ -20,5 +20,7 @@ Route::group(
     }
 );
 
+Route::post('update/success', 'Backend\UpdateController@updateSuccess')
+    ->name('admin.update.success');
 Route::post('update/{type}/{step}', 'Backend\UpdateController@updateStep')
     ->where('step', '[0-9]+')->name('admin.update.step');

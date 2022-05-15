@@ -21,7 +21,9 @@ if (JW_PLUGIN_AUTOLOAD) {
     if (file_exists($autoloadFiles)) {
         $includeFiles = require $autoloadFiles;
         foreach ($includeFiles as $file) {
-            require $file;
+            if (file_exists($file)) {
+                require $file;
+            }
         }
     }
 }

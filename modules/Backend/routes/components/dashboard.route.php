@@ -5,7 +5,7 @@
  * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzaweb/cms
- * @license    MIT
+ * @license    GNU V2
  */
 
 use Juzaweb\Backend\Http\Controllers\Backend\DashboardController;

@@ -2,10 +2,9 @@
 
 namespace Juzaweb\Backend\Listeners;
 
-use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\CMS\Support\Installer;
+use Illuminate\Support\Facades\Artisan;
 
-class OctaneListener
+class DumpAutoloadPluginListener
 {
     /**
      * Handle the event.
@@ -15,6 +14,6 @@ class OctaneListener
      */
     public function handle($event): void
     {
-        //
+        Artisan::call('juzacms:plugin-autoload');
     }
 }

@@ -5,7 +5,7 @@
  * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
- * @license    MIT
+ * @license    GNU V2
  */
 
 namespace Juzaweb\CMS\Support;
@@ -1013,269 +1013,268 @@ class HtmlDomNode
 
     protected function seek($selector, &$ret, $parent_cmd, $lowercase = false)
     {
-    global $debug_object;
-    if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
+        global $debug_object;
+        if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
 
-    list($tag, $id, $class, $attributes, $cmb) = $selector;
-    $nodes = array();
+        list($tag, $id, $class, $attributes, $cmb) = $selector;
+        $nodes = array();
 
-    if ($parent_cmd === ' ') { // Descendant Combinator
-        // Find parent closing tag if the current element doesn't have a closing
-        // tag (i.e. void element)
-        $end = (!empty($this->_[HDOM_INFO_END])) ? $this->_[HDOM_INFO_END] : 0;
-        if ($end == 0) {
-            $parent = $this->parent;
-            while (!isset($parent->_[HDOM_INFO_END]) && $parent !== null) {
-                $end -= 1;
-                $parent = $parent->parent;
+        if ($parent_cmd === ' ') { // Descendant Combinator
+            // Find parent closing tag if the current element doesn't have a closing
+            // tag (i.e. void element)
+            $end = (!empty($this->_[HDOM_INFO_END])) ? $this->_[HDOM_INFO_END] : 0;
+            if ($end == 0) {
+                $parent = $this->parent;
+                while (!isset($parent->_[HDOM_INFO_END]) && $parent !== null) {
+                    $end -= 1;
+                    $parent = $parent->parent;
+                }
+                $end += $parent->_[HDOM_INFO_END];
             }
-            $end += $parent->_[HDOM_INFO_END];
+
+            // Get list of target nodes
+            $nodes_start = $this->_[HDOM_INFO_BEGIN] + 1;
+            $nodes_count = $end - $nodes_start;
+            $nodes = array_slice($this->dom->nodes, $nodes_start, $nodes_count, true);
+        } elseif ($parent_cmd === '>') { // Child Combinator
+            $nodes = $this->children;
+        } elseif ($parent_cmd === '+'
+            && $this->parent
+            && in_array($this, $this->parent->children)) { // Next-Sibling Combinator
+            $index = array_search($this, $this->parent->children, true) + 1;
+            if ($index < count($this->parent->children))
+                $nodes[] = $this->parent->children[$index];
+        } elseif ($parent_cmd === '~'
+            && $this->parent
+            && in_array($this, $this->parent->children)) { // Subsequent Sibling Combinator
+            $index = array_search($this, $this->parent->children, true);
+            $nodes = array_slice($this->parent->children, $index);
         }
 
-        // Get list of target nodes
-        $nodes_start = $this->_[HDOM_INFO_BEGIN] + 1;
-        $nodes_count = $end - $nodes_start;
-        $nodes = array_slice($this->dom->nodes, $nodes_start, $nodes_count, true);
-    } elseif ($parent_cmd === '>') { // Child Combinator
-        $nodes = $this->children;
-    } elseif ($parent_cmd === '+'
-        && $this->parent
-        && in_array($this, $this->parent->children)) { // Next-Sibling Combinator
-        $index = array_search($this, $this->parent->children, true) + 1;
-        if ($index < count($this->parent->children))
-            $nodes[] = $this->parent->children[$index];
-    } elseif ($parent_cmd === '~'
-        && $this->parent
-        && in_array($this, $this->parent->children)) { // Subsequent Sibling Combinator
-        $index = array_search($this, $this->parent->children, true);
-        $nodes = array_slice($this->parent->children, $index);
-    }
+        // Go throgh each element starting at this element until the end tag
+        // Note: If this element is a void tag, any previous void element is
+        // skipped.
+        foreach($nodes as $node) {
+            $pass = true;
 
-    // Go throgh each element starting at this element until the end tag
-    // Note: If this element is a void tag, any previous void element is
-    // skipped.
-    foreach($nodes as $node) {
-        $pass = true;
-
-        // Skip root nodes
-        if(!$node->parent) {
-            $pass = false;
-        }
-
-        // Handle 'text' selector
-        if($pass && $tag === 'text' && $node->tag === 'text') {
-            $ret[array_search($node, $this->dom->nodes, true)] = 1;
-            unset($node);
-            continue;
-        }
-
-        // Skip if node isn't a child node (i.e. text nodes)
-        if($pass && !in_array($node, $node->parent->children, true)) {
-            $pass = false;
-        }
-
-        // Skip if tag doesn't match
-        if ($pass && $tag !== '' && $tag !== $node->tag && $tag !== '*') {
-            $pass = false;
-        }
-
-        // Skip if ID doesn't exist
-        if ($pass && $id !== '' && !isset($node->attr['id'])) {
-            $pass = false;
-        }
-
-        // Check if ID matches
-        if ($pass && $id !== '' && isset($node->attr['id'])) {
-            // Note: Only consider the first ID (as browsers do)
-            $node_id = explode(' ', trim($node->attr['id']))[0];
-
-            if($id !== $node_id) { $pass = false; }
-        }
-
-        // Check if all class(es) exist
-        if ($pass && $class !== '' && is_array($class) && !empty($class)) {
-            if (isset($node->attr['class'])) {
-                $node_classes = explode(' ', $node->attr['class']);
-
-                if ($lowercase) {
-                    $node_classes = array_map('strtolower', $node_classes);
-                }
-
-                foreach($class as $c) {
-                    if(!in_array($c, $node_classes)) {
-                        $pass = false;
-                        break;
-                    }
-                }
-            } else {
+            // Skip root nodes
+            if(!$node->parent) {
                 $pass = false;
             }
-        }
 
-        // Check attributes
-        if ($pass
-            && $attributes !== ''
-            && is_array($attributes)
-            && !empty($attributes)) {
-            foreach($attributes as $a) {
-                list (
-                    $att_name,
-                    $att_expr,
-                    $att_val,
-                    $att_inv,
-                    $att_case_sensitivity
-                    ) = $a;
+            // Handle 'text' selector
+            if($pass && $tag === 'text' && $node->tag === 'text') {
+                $ret[array_search($node, $this->dom->nodes, true)] = 1;
+                unset($node);
+                continue;
+            }
 
-                // Handle indexing attributes (i.e. "[2]")
-                /**
-                 * Note: This is not supported by the CSS Standard but adds
-                 * the ability to select items compatible to XPath (i.e.
-                 * the 3rd element within it's parent).
-                 *
-                 * Note: This doesn't conflict with the CSS Standard which
-                 * doesn't work on numeric attributes anyway.
-                 */
-                if (is_numeric($att_name)
-                    && $att_expr === ''
-                    && $att_val === '') {
-                    $count = 0;
+            // Skip if node isn't a child node (i.e. text nodes)
+            if($pass && !in_array($node, $node->parent->children, true)) {
+                $pass = false;
+            }
 
-                    // Find index of current element in parent
-                    foreach ($node->parent->children as $c) {
-                        if ($c->tag === $node->tag) ++$count;
-                        if ($c === $node) break;
+            // Skip if tag doesn't match
+            if ($pass && $tag !== '' && $tag !== $node->tag && $tag !== '*') {
+                $pass = false;
+            }
+
+            // Skip if ID doesn't exist
+            if ($pass && $id !== '' && !isset($node->attr['id'])) {
+                $pass = false;
+            }
+
+            // Check if ID matches
+            if ($pass && $id !== '' && isset($node->attr['id'])) {
+                // Note: Only consider the first ID (as browsers do)
+                $node_id = explode(' ', trim($node->attr['id']))[0];
+
+                if($id !== $node_id) { $pass = false; }
+            }
+
+            // Check if all class(es) exist
+            if ($pass && $class !== '' && is_array($class) && !empty($class)) {
+                if (isset($node->attr['class'])) {
+                    $node_classes = explode(' ', $node->attr['class']);
+
+                    if ($lowercase) {
+                        $node_classes = array_map('strtolower', $node_classes);
                     }
 
-                    // If this is the correct node, continue with next
-                    // attribute
-                    if ($count === (int)$att_name) continue;
-                }
-
-                // Check attribute availability
-                if ($att_inv) { // Attribute should NOT be set
-                    if (isset($node->attr[$att_name])) {
-                        $pass = false;
-                        break;
+                    foreach($class as $c) {
+                        if(!in_array($c, $node_classes)) {
+                            $pass = false;
+                            break;
+                        }
                     }
-                } else { // Attribute should be set
-                    // todo: "plaintext" is not a valid CSS selector!
-                    if ($att_name !== 'plaintext'
-                        && !isset($node->attr[$att_name])) {
-                        $pass = false;
-                        break;
-                    }
-                }
-
-                // Continue with next attribute if expression isn't defined
-                if ($att_expr === '') continue;
-
-                // If they have told us that this is a "plaintext"
-                // search then we want the plaintext of the node - right?
-                // todo "plaintext" is not a valid CSS selector!
-                if ($att_name === 'plaintext') {
-                    $nodeKeyValue = $node->text();
                 } else {
-                    $nodeKeyValue = $node->attr[$att_name];
-                }
-
-                if (is_object($debug_object)) {
-                    $debug_object->debug_log(2,
-                        'testing node: '
-                        . $node->tag
-                        . ' for attribute: '
-                        . $att_name
-                        . $att_expr
-                        . $att_val
-                        . ' where nodes value is: '
-                        . $nodeKeyValue
-                    );
-                }
-
-                // If lowercase is set, do a case insensitive test of
-                // the value of the selector.
-                if ($lowercase) {
-                    $check = $this->match(
-                        $att_expr,
-                        strtolower($att_val),
-                        strtolower($nodeKeyValue),
-                        $att_case_sensitivity
-                    );
-                } else {
-                    $check = $this->match(
-                        $att_expr,
-                        $att_val,
-                        $nodeKeyValue,
-                        $att_case_sensitivity
-                    );
-                }
-
-                if (is_object($debug_object)) {
-                    $debug_object->debug_log(2,
-                        'after match: '
-                        . ($check ? 'true' : 'false')
-                    );
-                }
-
-                if (!$check) {
                     $pass = false;
-                    break;
                 }
             }
-        }
 
-        // Found a match. Add to list and clear node
-        if ($pass) $ret[$node->_[HDOM_INFO_BEGIN]] = 1;
-        unset($node);
+            // Check attributes
+            if ($pass
+                && $attributes !== ''
+                && is_array($attributes)
+                && !empty($attributes)) {
+                foreach($attributes as $a) {
+                    list (
+                        $att_name,
+                        $att_expr,
+                        $att_val,
+                        $att_inv,
+                        $att_case_sensitivity
+                        ) = $a;
+
+                    // Handle indexing attributes (i.e. "[2]")
+                    /**
+                     * Note: This is not supported by the CSS Standard but adds
+                     * the ability to select items compatible to XPath (i.e.
+                     * the 3rd element within it's parent).
+                     *
+                     * Note: This doesn't conflict with the CSS Standard which
+                     * doesn't work on numeric attributes anyway.
+                     */
+                    if (is_numeric($att_name)
+                        && $att_expr === ''
+                        && $att_val === '') {
+                        $count = 0;
+
+                        // Find index of current element in parent
+                        foreach ($node->parent->children as $c) {
+                            if ($c->tag === $node->tag) ++$count;
+                            if ($c === $node) break;
+                        }
+
+                        // If this is the correct node, continue with next
+                        // attribute
+                        if ($count === (int)$att_name) continue;
+                    }
+
+                    // Check attribute availability
+                    if ($att_inv) { // Attribute should NOT be set
+                        if (isset($node->attr[$att_name])) {
+                            $pass = false;
+                            break;
+                        }
+                    } else { // Attribute should be set
+                        // todo: "plaintext" is not a valid CSS selector!
+                        if ($att_name !== 'plaintext'
+                            && !isset($node->attr[$att_name])) {
+                            $pass = false;
+                            break;
+                        }
+                    }
+
+                    // Continue with next attribute if expression isn't defined
+                    if ($att_expr === '') continue;
+
+                    // If they have told us that this is a "plaintext"
+                    // search then we want the plaintext of the node - right?
+                    // todo "plaintext" is not a valid CSS selector!
+                    if ($att_name === 'plaintext') {
+                        $nodeKeyValue = $node->text();
+                    } else {
+                        $nodeKeyValue = $node->attr[$att_name];
+                    }
+
+                    if (is_object($debug_object)) {
+                        $debug_object->debug_log(2,
+                            'testing node: '
+                            . $node->tag
+                            . ' for attribute: '
+                            . $att_name
+                            . $att_expr
+                            . $att_val
+                            . ' where nodes value is: '
+                            . $nodeKeyValue
+                        );
+                    }
+
+                    // If lowercase is set, do a case insensitive test of
+                    // the value of the selector.
+                    if ($lowercase) {
+                        $check = $this->match(
+                            $att_expr,
+                            strtolower($att_val),
+                            strtolower($nodeKeyValue),
+                            $att_case_sensitivity
+                        );
+                    } else {
+                        $check = $this->match(
+                            $att_expr,
+                            $att_val,
+                            $nodeKeyValue,
+                            $att_case_sensitivity
+                        );
+                    }
+
+                    if (is_object($debug_object)) {
+                        $debug_object->debug_log(2,
+                            'after match: '
+                            . ($check ? 'true' : 'false')
+                        );
+                    }
+
+                    if (!$check) {
+                        $pass = false;
+                        break;
+                    }
+                }
+            }
+
+            // Found a match. Add to list and clear node
+            if ($pass) $ret[$node->_[HDOM_INFO_BEGIN]] = 1;
+            unset($node);
+        }
+        // It's passed by reference so this is actually what this function returns.
+        if (is_object($debug_object)) {
+            $debug_object->debug_log(1, 'EXIT - ret: ', $ret);
+        }
     }
-    // It's passed by reference so this is actually what this function returns.
-    if (is_object($debug_object)) {
-        $debug_object->debug_log(1, 'EXIT - ret: ', $ret);
-    }
-}
 
     protected function match($exp, $pattern, $value, $case_sensitivity)
-{
-    global $debug_object;
-    if (is_object($debug_object)) {$debug_object->debug_log_entry(1);}
+    {
+        global $debug_object;
+        if (is_object($debug_object)) {$debug_object->debug_log_entry(1);}
 
-    if ($case_sensitivity === 'i') {
-        $pattern = strtolower($pattern);
-        $value = strtolower($value);
+        if ($case_sensitivity === 'i') {
+            $pattern = strtolower($pattern);
+            $value = strtolower($value);
+        }
+
+        switch ($exp) {
+            case '=':
+                return ($value === $pattern);
+            case '!=':
+                return ($value !== $pattern);
+            case '^=':
+                return preg_match('/^' . preg_quote($pattern, '/') . '/', $value);
+            case '$=':
+                return preg_match('/' . preg_quote($pattern, '/') . '$/', $value);
+            case '*=':
+                return preg_match('/' . preg_quote($pattern, '/') . '/', $value);
+            case '|=':
+                /**
+                 * [att|=val]
+                 *
+                 * Represents an element with the att attribute, its value
+                 * either being exactly "val" or beginning with "val"
+                 * immediately followed by "-" (U+002D).
+                 */
+                return strpos($value, $pattern) === 0;
+            case '~=':
+                /**
+                 * [att~=val]
+                 *
+                 * Represents an element with the att attribute whose value is a
+                 * whitespace-separated list of words, one of which is exactly
+                 * "val". If "val" contains whitespace, it will never represent
+                 * anything (since the words are separated by spaces). Also if
+                 * "val" is the empty string, it will never represent anything.
+                 */
+                return in_array($pattern, explode(' ', trim($value)), true);
+        }
+        return false;
     }
-
-    switch ($exp) {
-        case '=':
-            return ($value === $pattern);
-        case '!=':
-            return ($value !== $pattern);
-        case '^=':
-            return preg_match('/^' . preg_quote($pattern, '/') . '/', $value);
-        case '$=':
-            return preg_match('/' . preg_quote($pattern, '/') . '$/', $value);
-        case '*=':
-            return preg_match('/' . preg_quote($pattern, '/') . '/', $value);
-        case '|=':
-            /**
-             * [att|=val]
-             *
-             * Represents an element with the att attribute, its value
-             * either being exactly "val" or beginning with "val"
-             * immediately followed by "-" (U+002D).
-             */
-            return strpos($value, $pattern) === 0;
-        case '~=':
-            /**
-             * [att~=val]
-             *
-             * Represents an element with the att attribute whose value is a
-             * whitespace-separated list of words, one of which is exactly
-             * "val". If "val" contains whitespace, it will never represent
-             * anything (since the words are separated by spaces). Also if
-             * "val" is the empty string, it will never represent anything.
-             */
-            return in_array($pattern, explode(' ', trim($value)), true);
-    }
-    return false;
-}
-
 }

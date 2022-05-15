@@ -471,8 +471,8 @@ return [
             'after' => 'Update files and folders success'
         ],
         'step6' => [
-            'before' => 'Update database...',
-            'after' => 'Update database success'
+            'before' => 'Update data...',
+            'after' => 'Update data success'
         ],
         'done' => 'Done!!'
     ]

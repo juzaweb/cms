@@ -8,24 +8,23 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Events;
+namespace Juzaweb\Backend\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class EmailHook
+class AfterPluginBulkAction
 {
-    use Dispatchable;
-    use InteractsWithSockets;
-    use SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $hook;
-    public $args = [];
+    public string $action;
 
-    public function __construct($hook, $args = [])
+    public array $plugins;
+
+    public function __construct(string $action, array $plugins)
     {
-        $this->hook = $hook;
-        $this->args = $args;
+        $this->action = $action;
+        $this->plugins = $plugins;
     }
 }

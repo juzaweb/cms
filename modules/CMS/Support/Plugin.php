@@ -445,7 +445,6 @@ class Plugin
         $name = explode('/', $this->name);
         $author = Str::studly($name[0]);
         $module = Str::studly($name[1]);
-
         return $author.'/'.$module;
     }
 
@@ -490,7 +489,9 @@ class Plugin
      */
     public function setActive(bool $active): bool
     {
-        return $this->activator->setActive($this, $active);
+        $this->activator->setActive($this, $active);
+
+        return true;
     }
 
     /**

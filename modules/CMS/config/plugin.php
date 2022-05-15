@@ -5,7 +5,7 @@
  * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://juzaweb.com/cms
- * @license    MIT
+ * @license    GNU V2
  */
 
 use Juzaweb\CMS\Support\Activators\DbActivator;
@@ -70,9 +70,10 @@ return [
             'request' => ['path' => 'src/Http/Requests', 'generate' => false],
             'datatable' => ['path' => 'src/Http/Datatables', 'generate' => true],
             'provider' => ['path' => 'src/Providers', 'generate' => true],
-            'assets' => ['path' => 'src/resources/assets', 'generate' => true],
-            'assets_js' => ['path' => 'src/resources/assets/js', 'generate' => true],
-            'assets_css' => ['path' => 'src/resources/assets/css', 'generate' => true],
+            'assets' => ['path' => 'assets', 'generate' => true],
+            'assets_public' => ['path' => 'assets/public', 'generate' => true],
+            'assets_js' => ['path' => 'assets/styles/js', 'generate' => true],
+            'assets_css' => ['path' => 'assets/styles/css', 'generate' => true],
             'lang' => ['path' => 'src/resources/lang', 'generate' => true],
             'views' => ['path' => 'src/resources/views', 'generate' => true],
             'test' => ['path' => 'tests/Unit', 'generate' => true],

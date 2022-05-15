@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Support\Plugin;
@@ -48,7 +49,8 @@ class PluginUpdater extends UpdateManager
     {
         CacheGroup::pull('plugin_update_keys');
 
-        Artisan::call('juzacms:plugin-autoload');
+        event(new DumpAutoloadPlugin());
+
         /**
          * @var Plugin $plugin
          */
@@ -93,8 +95,14 @@ class PluginUpdater extends UpdateManager
             return $plugin->getPath();
         }
 
-        $folder = explode('/', $this->name)[1];
+        $folder = explode('/', $this->name);
 
-        return config('juzaweb.plugin.path').'/'.$folder;
+        $folderPath = config('juzaweb.plugin.path').'/'.$folder[1];
+
+        if (is_dir($folderPath)) {
+            $folderPath = config('juzaweb.plugin.path').'/'.$folder[0].'-'.$folder[1];
+        }
+
+        return $folderPath;
     }
 }

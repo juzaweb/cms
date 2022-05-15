@@ -42,7 +42,6 @@ $(document).on("turbolinks:load", function() {
                 btn.removeClass('install-theme');
                 btn.addClass('active-theme');
                 btn.prop("disabled", false);
-                btn.html(btnText);
             },
             function(response) {
                 show_message(response);
@@ -57,9 +56,8 @@ $(document).on("turbolinks:load", function() {
         let btn = $(this);
         btn.prop("disabled", true);
 
-        ajaxRequest(juzaweb.adminUrl + '/themes/bulk-actions', {
-            ids: [theme],
-            action: 'activate',
+        ajaxRequest(juzaweb.adminUrl + '/themes/activate', {
+            theme: theme
         }, {
             method: 'POST',
             callback: function (response) {
@@ -72,6 +70,39 @@ $(document).on("turbolinks:load", function() {
                 show_message(response);
                 btn.prop("disabled", false);
             }
+        });
+    });
+
+    bodyElement.on('click', '.delete-theme', function () {
+        let theme = $(this).data('theme');
+        let btn = $(this);
+        let btnText = btn.html();
+
+        confirm_message(
+            juzaweb.lang.delete_theme_confirm,
+            function (result) {
+                if (!result) {
+                    return false;
+                }
+
+                btn.html('<i class="fa fa-spinner fa-spin"></i> ' + juzaweb.lang.please_wait);
+
+                ajaxRequest(juzaweb.adminUrl + '/themes/bulk-actions', {
+                    ids: [theme],
+                    action: 'delete'
+                }, {
+                    method: 'POST',
+                    callback: function (response) {
+                        show_message(response);
+                        if (response.status == true) {
+                            btn.closest('.theme-list-item').remove();
+                        }
+                    },
+                    failCallback: function(response) {
+                        show_message(response);
+                        btn.html(btnText);
+                    }
+                });
         });
     });
 });

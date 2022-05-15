@@ -5,7 +5,7 @@
  * @package    juzaweb/juzacms
  * @author     The Anh Dang <dangtheanh16@gmail.com>
  * @link       https://github.com/juzaweb/juzacms
- * @license    MIT
+ * @license    GNU V2
  */
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
@@ -14,6 +14,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Juzaweb\CMS\Abstracts\UpdateManager;
+use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
@@ -87,10 +88,10 @@ class UpdateController extends BackendController
 
         $title = trans('cms::app.updating');
 
+        $action = $request->input('action', 'update');
+        $referren = $request->input('referren');
         $updater = $this->getUpdater($type);
-
         $themes = $request->input('themes', []);
-
         $plugins = $request->input('plugins', []);
 
         return view(
@@ -100,7 +101,9 @@ class UpdateController extends BackendController
                 'updater',
                 'type',
                 'themes',
-                'plugins'
+                'plugins',
+                'action',
+                'referren'
             )
         );
     }
@@ -287,6 +290,20 @@ class UpdateController extends BackendController
             [
                 'total' => count($result),
                 'rows' => $result,
+            ]
+        );
+    }
+
+    public function updateSuccess(Request $request)
+    {
+        app(BackendMessageContract::class)->deleteGroup('require_plugins');
+
+        return response()->json(
+            [
+                'status' => true,
+                'data' => [
+                    'message' => 'Done'
+                ]
             ]
         );
     }

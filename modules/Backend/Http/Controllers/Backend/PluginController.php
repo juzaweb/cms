@@ -7,6 +7,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\URL;
+use Juzaweb\Backend\Events\AfterPluginBulkAction;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\Backend\Http\Requests\Plugin\BulkActionRequest;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Facades\Plugin;
@@ -15,6 +18,7 @@ use Juzaweb\CMS\Support\ArrayPagination;
 use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\CMS\Support\Updater\PluginUpdater;
 use Juzaweb\CMS\Version;
+use Juzaweb\CMS\Support\Plugin as SupportPlugin;
 
 class PluginController extends BackendController
 {
@@ -41,6 +45,13 @@ class PluginController extends BackendController
             abort(403, 'Access deny.');
         }
 
+        $this->addBreadcrumb(
+            [
+                'url' => route('admin.plugin'),
+                'title' => trans('cms::app.plugins')
+            ]
+        );
+
         $title = trans('cms::app.install');
 
         return view(
@@ -64,7 +75,7 @@ class PluginController extends BackendController
         $results = [];
         foreach ($data as $plugin) {
             /**
-             * @var Plugin $plugin
+             * @var SupportPlugin $plugin
              */
             $results[] = [
                 'id' => $plugin->get('name'),
@@ -106,8 +117,12 @@ class PluginController extends BackendController
         $action = $request->post('action');
         $ids = $request->post('ids');
 
-        if ($action == 'update') {
-            $query = ['plugins' => $ids];
+        if (in_array($action, ['update', 'install'])) {
+            $query = [
+                'plugins' => $ids,
+                'action' => $action,
+                'referren' => URL::previous(),
+            ];
             $query = http_build_query($query);
 
             return $this->success(
@@ -151,10 +166,16 @@ class PluginController extends BackendController
             }
         }
 
+        if ($action == 'delete') {
+            event(new DumpAutoloadPlugin());
+        }
+
+        event(new AfterPluginBulkAction($action, $ids));
+
         return $this->success(
             [
                 'message' => trans('cms::app.successfully'),
-                'redirect' => route('admin.plugin'),
+                'window_redirect' => route('admin.plugin'),
             ]
         );
     }
