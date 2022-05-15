@@ -20,5 +20,7 @@ Route::group(
     }
 );
 
+Route::post('update/success', 'Backend\UpdateController@updateSuccess')
+    ->name('admin.update.success');
 Route::post('update/{type}/{step}', 'Backend\UpdateController@updateStep')
     ->where('step', '[0-9]+')->name('admin.update.step');

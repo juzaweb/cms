@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\URL;
 use Juzaweb\Backend\Http\Requests\Plugin\BulkActionRequest;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Facades\Plugin;
@@ -107,7 +108,11 @@ class PluginController extends BackendController
         $ids = $request->post('ids');
 
         if (in_array($action, ['update', 'install'])) {
-            $query = ['plugins' => $ids];
+            $query = [
+                'plugins' => $ids,
+                'action' => $action,
+                'referren' => URL::previous(),
+            ];
             $query = http_build_query($query);
 
             return $this->success(

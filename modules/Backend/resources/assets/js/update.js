@@ -98,21 +98,41 @@ function jwCMSUpdate(
     })
 }
 
-function recursiveUpdate(type, items, updateIndex = 0)
-{
+function recursiveUpdate(
+    type,
+    items,
+    updateIndex = 0,
+    successCallback = null,
+    failCallback = null
+) {
+    let params = {};
+    if (type == 'theme') {
+        params = {theme: items[updateIndex]};
+    } else {
+        params = {plugin: items[updateIndex]};
+    }
+
     jwCMSUpdate(
         type,
         1,
-        '#'+type+'-'+ items[updateIndex] +'-update-process',
-        {theme: items[updateIndex]},
+        '#'+type+'-'+ items[updateIndex].replace('/', '_') +'-update-process',
+        params,
         function (response) {
             if (items[updateIndex+1]) {
-                recursiveUpdate(type, items, updateIndex + 1);
+                recursiveUpdate(type, items, updateIndex + 1, successCallback, failCallback);
+            } else {
+                if (successCallback) {
+                    successCallback(response);
+                }
             }
         },
         function (response) {
+            if (failCallback) {
+                failCallback(response);
+            }
+
             if (items[updateIndex+1]) {
-                recursiveUpdate(type, items, updateIndex + 1);
+                recursiveUpdate(type, items, updateIndex + 1, successCallback, failCallback);
             }
         }
     );
