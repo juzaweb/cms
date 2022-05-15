@@ -9,6 +9,8 @@ class UpdateTest extends TestCase
 {
     public function testUpdateCms()
     {
+        $this->authUserAdmin();
+
         $version = Version::getVersion();
 
         $filePath = base_path('modules/CMS/Version.php');
