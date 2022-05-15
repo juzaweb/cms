@@ -24,7 +24,7 @@ trait RegisterHookAction
      *
      * @throws \Exception
      */
-    public function registerPostType($key, $args = [])
+    public function registerPostType(string $key, array $args = [])
     {
         if (empty($args['label'])) {
             throw new \Exception('Post type label is required.');
@@ -71,14 +71,14 @@ trait RegisterHookAction
             );
         }
 
-        $supports = $args->get('supports', []);
+        $supports = (array) $args->get('supports', []);
         if (in_array('category', $supports)) {
             $this->registerTaxonomy(
                 'categories',
                 $key,
                 [
                     'label' => trans('cms::app.categories'),
-                    'priority' => $args->get('priority') + 5,
+                    'priority' => intval($args->get('priority')) + 5,
                     'menu_position' => 4,
                     'show_in_menu' => $args->get('show_in_menu'),
                     'rewrite' => $args->get('taxonomy_rewrite'),
@@ -86,13 +86,13 @@ trait RegisterHookAction
             );
         }
 
-        if (in_array('tag', $args['supports'])) {
+        if (in_array('tag', (array) $args['supports'])) {
             $this->registerTaxonomy(
                 'tags',
                 $key,
                 [
                     'label' => trans('cms::app.tags'),
-                    'priority' => $args->get('priority') + 6,
+                    'priority' => intval($args->get('priority')) + 6,
                     'menu_position' => 15,
                     'menu_box' => false,
                     'show_in_menu' => $args->get('show_in_menu'),
@@ -122,7 +122,7 @@ trait RegisterHookAction
      */
     protected function registerMenuPostType($key, $args)
     {
-        $supports = $args->get('supports', []);
+        $supports = (array) $args->get('supports', []);
         $prefix = 'post-type.';
 
         $this->addAdminMenu(
@@ -307,7 +307,7 @@ trait RegisterHookAction
         GlobalData::set('permalinks.' . $key, new Collection($args));
     }
 
-    public function registerResource($key, $postType = null, $args = [])
+    public function registerResource(string $key, string $postType = null, array $args = [])
     {
         if (empty($args['label'])) {
             throw new \Exception('Post Resource Label is required.');
@@ -386,7 +386,7 @@ trait RegisterHookAction
         GlobalData::set('admin_pages.' . $key, $args);
     }
 
-    public function registerAdminAjax($key, $args = [])
+    public function registerAdminAjax(string $key, array $args = [])
     {
         $defaults = [
             'callback' => '',
@@ -414,7 +414,7 @@ trait RegisterHookAction
         }
     }
 
-    public function registerEmailHook($key, $args = [])
+    public function registerEmailHook(string $key, array $args = [])
     {
         $defaults = [
             'label' => '',
@@ -427,7 +427,7 @@ trait RegisterHookAction
         GlobalData::set('email_hooks.' . $key, new Collection($args));
     }
 
-    public function registerSidebar($key, $args = [])
+    public function registerSidebar(string $key, array $args = [])
     {
         $defaults = [
             'label' => '',

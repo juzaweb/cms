@@ -7,32 +7,52 @@ use Juzaweb\CMS\Version;
 
 class UpdateTest extends TestCase
 {
-    /*public function testUpdateCms()
+    public function testUpdateCms()
     {
-        $response = $this->post('admin-cp/updates', [
-            '_token' => csrf_token(),
-        ]);
+        $version = Version::getVersion();
 
-        $this->assertEquals(302, $response->getStatusCode());
-    }*/
-
-    /*public function testUpdateCommand()
-    {
-        $ver = Version::getVersion();
         $filePath = base_path('modules/CMS/Version.php');
+
         File::put(
             $filePath,
             str_replace(
-                $ver,
+                $version,
                 'v2.0',
                 File::get($filePath)
             )
         );
-        
+
+        for ($i=1;$i<=6;$i++) {
+            $response = $this->json('POST', "admin-cp/update/cms/{$i}");
+
+            $response->assertJson(['status' => true]);
+        }
+
+        $version = Version::getVersion();
+
+        $this->assertNotEquals($version, 'v2.0');
+    }
+
+    public function testUpdateCommand()
+    {
+        $version = Version::getVersion();
+
+        $filePath = base_path('modules/CMS/Version.php');
+
+        File::put(
+            $filePath,
+            str_replace(
+                $version,
+                'v2.0',
+                File::get($filePath)
+            )
+        );
+
         $this->artisan('juzacms:update')
             ->assertExitCode(0);
-    
-        $ver = Version::getVersion();
-        $this->assertTrue($ver != 'v2.0');
-    }*/
+
+        $version = Version::getVersion();
+
+        $this->assertNotEquals($version, 'v2.0');
+    }
 }
