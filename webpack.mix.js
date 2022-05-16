@@ -18,9 +18,9 @@ mix.options({
     }
 });
 
-require(`${backendWebpack}`);
+//require(`${backendWebpack}`);
 
-//require(`${modulePath}/mix.js`);
+require(`${modulePath}/mix.js`);
 //require(`${modulePath}/filemanage.mix.js`);
 //require(`${pluginPath}/ecommerce/src/resources/assets/mix.js`);
 //require(`${themePath}/gamxo/assets/mix.js`);
