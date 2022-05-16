@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\DB;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\MediaFolder;
-use Inertia\Inertia;
 
 class MediaController extends BackendController
 {
@@ -45,18 +44,15 @@ class MediaController extends BackendController
         $maxSize = config("juzaweb.filemanager.types.{$type}.max_size");
         $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
 
-        return Inertia::render(
-            'Media',
-            [
-                'fileTypes' => $this->getFileTypes(),
-                'folderId' => $folderId,
-                'mediaItems' => $mediaItems,
-                'title' => $title,
-                'mimeTypes' => $mimeTypes,
-                'type' => $type,
-                'maxSize' => $maxSize
-            ]
-        );
+        return view('cms::backend.media.index', [
+            'fileTypes' => $this->getFileTypes(),
+            'folderId' => $folderId,
+            'mediaItems' => $mediaItems,
+            'title' => $title,
+            'mimeTypes' => $mimeTypes,
+            'type' => $type,
+            'maxSize' => $maxSize,
+        ]);
     }
 
     public function addFolder(Request $request)

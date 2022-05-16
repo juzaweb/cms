@@ -68,6 +68,16 @@ class MenuAction extends Action
         }
 
         HookAction::addAdminMenu(
+            trans('cms::app.media'),
+            'media',
+            [
+                'icon' => 'fa fa-photo',
+                'position' => 2,
+                'turbolinks' => false,
+            ]
+        );
+
+        HookAction::addAdminMenu(
             trans('cms::app.appearance'),
             'appearance',
             [

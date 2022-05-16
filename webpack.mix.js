@@ -1,6 +1,6 @@
 const mix = require('laravel-mix');
 const modulePath = `${__dirname}/modules/Backend/resources/assets`;
-//const backendWebpack = `${__dirname}/modules/Backend/webpack.mix.js`;
+const backendWebpack = `${__dirname}/modules/Backend/webpack.mix.js`;
 const pluginPath = `${__dirname}/plugins`;
 const themePath = `${__dirname}/themes`;
 
