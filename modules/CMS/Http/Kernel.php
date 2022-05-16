@@ -22,7 +22,7 @@ class Kernel extends HttpKernel
         \Juzaweb\CMS\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
-    
+
     /**
      * The application's route middleware groups.
      *
@@ -39,27 +39,28 @@ class Kernel extends HttpKernel
             \Juzaweb\CMS\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Juzaweb\CMS\Http\Middleware\XFrameHeadersMiddleware::class,
+            \Juzaweb\CMS\Http\Middleware\HandleInertiaRequests::class,
             \Juzaweb\Backend\Http\Middleware\Installed::class,
         ],
-        
+
         'api' => [
             \Juzaweb\CMS\Http\Middleware\GlobalMiddleware::class,
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
-        
+
         'admin' => [
             'web',
             \Juzaweb\CMS\Http\Middleware\Admin::class,
         ],
-        
+
         'theme' => [
             'web',
             \Juzaweb\CMS\Http\Middleware\Theme::class,
         ],
     ];
-    
+
     /**
      * The application's route middleware.
      *
