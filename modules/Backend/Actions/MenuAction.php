@@ -73,7 +73,6 @@ class MenuAction extends Action
             [
                 'icon' => 'fa fa-photo',
                 'position' => 2,
-                'turbolinks' => false,
             ]
         );
 
