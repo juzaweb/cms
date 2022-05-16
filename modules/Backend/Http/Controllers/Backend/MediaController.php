@@ -44,7 +44,7 @@ class MediaController extends BackendController
 
         $maxSize = config("juzaweb.filemanager.types.{$type}.max_size");
         $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
-
+        
         return Inertia::render(
             'Media',
             [
