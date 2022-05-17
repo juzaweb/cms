@@ -90,3 +90,6 @@ View all documentation [https://juzaweb.com/documentation](https://juzaweb.com/d
 - Bootstrap 4
 - select2
 - font-awesome
+
+## Change Logs
+[https://juzaweb.com/documentation/changelog](https://juzaweb.com/documentation/changelog)

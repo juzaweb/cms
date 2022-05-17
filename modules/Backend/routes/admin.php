@@ -13,7 +13,7 @@ require __DIR__ . '/components/update.route.php';
 require __DIR__ . '/components/setting.route.php';
 require __DIR__ . '/components/user.route.php';
 require __DIR__ . '/components/filemanager.route.php';
-//require __DIR__ . '/components/media.route.php';
+require __DIR__ . '/components/media.route.php';
 require __DIR__ . '/components/post.route.php';
 require __DIR__ . '/components/page.route.php';
 require __DIR__ . '/components/theme.route.php';

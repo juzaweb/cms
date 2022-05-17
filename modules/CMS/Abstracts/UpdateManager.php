@@ -20,6 +20,10 @@ use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Curl;
 use Juzaweb\CMS\Support\JuzawebApi;
 
+/** 
+ * @method void beforeFinish()
+ * @method void afterFinish()
+*/
 abstract class UpdateManager
 {
     protected Curl $curl;
