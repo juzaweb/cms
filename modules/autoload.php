@@ -14,10 +14,10 @@ if (!file_exists(JW_BASE_PATH . '/.env')) {
         JW_BASE_PATH . '/.env',
         str_replace(
             [
-                'APP_KEY='
+                "APP_KEY=".PHP_EOL.'APP_DEBUG=true'
             ],
             [
-                'APP_KEY=base64:'.base64_encode(\Illuminate\Support\Str::random(32))
+                'APP_KEY=base64:'.base64_encode(\Illuminate\Support\Str::random(32)).PHP_EOL.'APP_DEBUG=true'
             ],
             file_get_contents(JW_BASE_PATH . '/.env')
         )
