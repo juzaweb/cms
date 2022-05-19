@@ -73,13 +73,9 @@ View all documentation [https://juzaweb.com/documentation](https://juzaweb.com/d
 - [ ] Per page paginate config
 - [ ] Api Support
 
-### Plugins
-#### Translation
-* [juzaweb/translation](https://github.com/juzaweb/translation)
-#### Notification
-* [juzaweb/notification](https://github.com/juzaweb/notification)
-#### Movie
-* [juzaweb/movie](https://github.com/juzaweb/movie)
+* [Translation](https://github.com/juzaweb/translation)
+* [Notification](https://github.com/juzaweb/notification)
+* [Movie](https://github.com/juzaweb/movie)
 
 ### Theme
 #### Default
