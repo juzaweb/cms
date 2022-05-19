@@ -16,6 +16,7 @@ use Illuminate\Database\Query\Builder;
 use Juzaweb\CMS\Providers\TelescopeServiceProvider;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\CMS\Support\Stub;
+use Laravel\Telescope\TelescopeApplicationServiceProvider;
 
 class DevToolServiceProvider extends ServiceProvider
 {
@@ -31,7 +32,10 @@ class DevToolServiceProvider extends ServiceProvider
                     $this->app->register(DebugbarServiceProvider::class);
                 }
 
-                if (class_exists(TelescopeServiceProvider::class)) {
+                if (
+                    class_exists(TelescopeApplicationServiceProvider::class)
+                    && class_exists(TelescopeServiceProvider::class)
+                ) {
                     $this->app->register(TelescopeServiceProvider::class);
                 }
             }
