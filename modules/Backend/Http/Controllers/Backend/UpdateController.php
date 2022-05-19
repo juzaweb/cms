@@ -13,6 +13,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Facades\ThemeLoader;
@@ -294,8 +295,10 @@ class UpdateController extends BackendController
         );
     }
 
-    public function updateSuccess(Request $request)
+    public function updateSuccess(Request $request): JsonResponse
     {
+        event(new DumpAutoloadPlugin());
+
         app(BackendMessageContract::class)->deleteGroup('require_plugins');
 
         return response()->json(

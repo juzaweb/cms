@@ -75,7 +75,30 @@
     <script type="text/javascript">
         $(document).on("turbolinks:load", function() {
             @if($type == 'cms')
-            jwCMSUpdate("{{ $type }}", 1, '#cms-update-process');
+            jwCMSUpdate(
+                "{{ $type }}",
+                1,
+                '#cms-update-process',
+                {},
+                function(response) {
+                    let referren = "{{ route('admin.update') }}";
+                    let params = {
+                        response: response,
+                        referren: referren,
+                        type: "{{ $type }}"
+                    };
+
+                    ajaxRequest("{{ route('admin.update.success') }}", params, {
+                        method: 'POST',
+                        callback: function (response) {
+                            window.location = referren;
+                        },
+                        failCallback: function (response) {
+                            show_message(response);
+                        }
+                    });
+                }
+            );
             @endif
 
             @if($type == 'theme')
@@ -83,8 +106,12 @@
             var updateIndex = 0;
 
             recursiveUpdate("{{ $type }}", themes, updateIndex, function(response) {
-                let referren = "{{ $referren ? $referren : route('admin.themes') }}";
-                let params = {response: response};
+                let referren = "{{ $referren ?: route('admin.themes') }}";
+                let params = {
+                    response: response,
+                    referren: referren,
+                    type: "{{ $type }}"
+                };
 
                 ajaxRequest("{{ route('admin.update.success') }}", params, {
                     method: 'POST',
@@ -103,8 +130,12 @@
             var updateIndex = 0;
 
             recursiveUpdate("{{ $type }}", plugins, updateIndex, function(response) {
-                let referren = "{{ $referren ? $referren : route('admin.plugin') }}";
-                let params = {response: response, referren: referren};
+                let referren = "{{ $referren ?: route('admin.plugin') }}";
+                let params = {
+                    response: response,
+                    referren: referren,
+                    type: "{{ $type }}"
+                };
 
                 ajaxRequest("{{ route('admin.update.success') }}", params, {
                     method: 'POST',
