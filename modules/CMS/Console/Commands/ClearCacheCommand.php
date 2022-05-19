@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
 
 class ClearCacheCommand extends Command
 {
-    protected $signature = 'juzacms:cache-clear';
+    protected $signature = 'juzacms:clear-cache';
 
     public function handle(): int
     {

@@ -6,10 +6,6 @@
  * @author     The Anh Dang
  * @link       https://github.com/juzaweb/juzacms
  * @license    GNU V2
- *
- * Created by JUZAWEB.
- * Date: 6/8/2021
- * Time: 8:08 PM
  */
 
 namespace Juzaweb\CMS\Traits;
@@ -67,6 +63,7 @@ trait PostTypeModel
                 'type',
                 'status',
                 'created_by',
+                'created_at',
                 'json_metas',
             ]
         )
