@@ -5,6 +5,7 @@ namespace Juzaweb\CMS\Support\Updater;
 use Illuminate\Support\Facades\Artisan;
 use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\CMS\Abstracts\UpdateManager;
+use Juzaweb\CMS\Console\Commands\ClearCacheCommand;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Version;
 
@@ -38,7 +39,7 @@ class CmsUpdater extends UpdateManager
 
     public function afterFinish()
     {
-        Artisan::call('juzacms:clear-cache');
+        Artisan::call(ClearCacheCommand::class);
 
         Artisan::call('migrate', ['--force' => true]);
 
