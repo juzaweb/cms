@@ -78,13 +78,19 @@
                 </ul>
                 <div class="main">
                     @if (session('message'))
-                        <p class="alert text-center">
+                        @php
+                        $message = session('message');
+                        if (is_string($message)) {
+                            $message = [
+                                'message' => $message,
+                                'status' => 'success'
+                            ];
+                        }
+                        @endphp
+
+                        <p class="alert alert-{{ $message['status'] == 'error' ? 'danger' : $message['status'] }} text-center">
                             <strong>
-                                @if(is_array(session('message')))
-                                    {{ session('message')['message'] }}
-                                @else
-                                    {{ session('message') }}
-                                @endif
+                                {{ session('message')['message'] }}
                             </strong>
                         </p>
                     @endif
