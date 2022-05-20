@@ -22,7 +22,7 @@ class MediaTest extends TestCase
         Storage::put('tmps/test.gif', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
 
         $media = FileManager::addFile(
-            Storage::path('tmps/test.txt'),
+            Storage::path('tmps/test.gif'),
             'file',
             null,
             User::first()->id
