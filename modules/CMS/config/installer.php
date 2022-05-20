@@ -29,7 +29,7 @@ return [
             'cURL',
             'fileinfo',
             'gd',
-            'imagick',
+            //'imagick',
             'zip',
         ],
         'apache' => [
