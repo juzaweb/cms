@@ -80,5 +80,6 @@ return [
     'folder-exists' => 'Folder exists',
 
 
-    'add-folder-successfully' => 'Add folder successfully',
+    'add-folder-successfully' => 'Add folder successfully.',
+    'message_extension_not_found' => ':name extension not found.',
 ];

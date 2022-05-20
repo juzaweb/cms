@@ -45,5 +45,5 @@ jobs:
         run: php artisan test --stop-on-failure
       - name: Execute tests Update
         run: php artisan test modules/Tests/UpdateTest.php
-      #- name: Execute tests after Update
-      #  run: php artisan test --stop-on-failure
+      - name: Execute tests after Update
+        run: php artisan test --stop-on-failure

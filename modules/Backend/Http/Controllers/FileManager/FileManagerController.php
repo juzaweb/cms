@@ -32,16 +32,20 @@ class FileManagerController extends Controller
     {
         $arr_errors = [];
 
-        if (! extension_loaded('gd') && ! extension_loaded('imagick')) {
-            array_push($arr_errors, trans('cms::filemanager.message_extension_not_found'));
+        if (! extension_loaded('gd')) {
+            $arr_errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'gd']);
+        }
+
+        if (! extension_loaded('imagick')) {
+            $arr_errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'imagick']);
         }
 
         if (! extension_loaded('exif')) {
-            array_push($arr_errors, 'EXIF extension not found.');
+            $arr_errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'exif']);
         }
 
         if (! extension_loaded('fileinfo')) {
-            array_push($arr_errors, 'Fileinfo extension not found.');
+            $arr_errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'fileinfo']);
         }
 
         return $arr_errors;
