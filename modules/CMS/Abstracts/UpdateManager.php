@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Curl;
 use Juzaweb\CMS\Support\JuzawebApi;
 
-/** 
+/**
  * @method void beforeFinish()
  * @method void afterFinish()
 */
@@ -142,7 +142,7 @@ abstract class UpdateManager
     {
         $this->setProcess('backup');
 
-        $localFolder = $this->getLocalPath();
+        $localFolder = $this->getBackupPath();
 
         $tmpFolder = $this->storage->path($this->getCacheData('tmpFolder'));
 
@@ -277,6 +277,11 @@ abstract class UpdateManager
         if (isset($response->errors) && is_array($response->errors)) {
             throw new \Exception($response->errors[0]->message);
         }
+    }
+
+    protected function getBackupPath(): string
+    {
+        return $this->getLocalPath();
     }
 
     abstract protected function getLocalPath(): string;

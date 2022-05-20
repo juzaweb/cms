@@ -108,6 +108,11 @@ class CmsUpdater extends UpdateManager
         return $response;
     }
 
+    protected function getBackupPath(): string
+    {
+        return base_path('modules');
+    }
+
     protected function getLocalPath(): string
     {
         return base_path();
