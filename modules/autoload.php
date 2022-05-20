@@ -1,12 +1,12 @@
 <?php
 
+require __DIR__ . '/define.php';
+
 $loader = require __DIR__.'/../vendor/autoload.php';
 
 if (file_exists(__DIR__ . '/../define.php')) {
     require __DIR__ . '/../define.php';
 }
-
-require __DIR__ . '/define.php';
 
 if (!file_exists(JW_BASE_PATH . '/.env')) {
     copy(JW_BASE_PATH . '/.env.example', JW_BASE_PATH . '/.env');
