@@ -90,7 +90,7 @@
 
                         <p class="alert alert-{{ $message['status'] == 'error' ? 'danger' : $message['status'] }} text-center">
                             <strong>
-                                {{ session('message')['message'] }}
+                                {{ $message['message'] }}
                             </strong>
                         </p>
                     @endif

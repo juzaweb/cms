@@ -28,6 +28,9 @@ return [
             'JSON',
             'cURL',
             'fileinfo',
+            'gd',
+            'imagick',
+            'zip',
         ],
         'apache' => [
             'mod_rewrite',
