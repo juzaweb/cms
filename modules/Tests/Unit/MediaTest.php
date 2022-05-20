@@ -40,5 +40,9 @@ class MediaTest extends TestCase
         $media = FileManager::addFile($img, 'image', null, User::first()->id);
 
         $this->assertNotEmpty($media->path);
+
+        $this->assertFileExists(
+            Storage::disk('public')->path($media->path)
+        );
     }
 }
