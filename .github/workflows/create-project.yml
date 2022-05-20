@@ -10,7 +10,7 @@ jobs:
         os: [ubuntu-latest]
         php: [8.0, 8.1]
         version: [^3.0, dev-master, dev-develop]
-        mysql: [5.7.33, 8.0.21]
+        mysql: [5.7.33, 5.7.37, 8.0.21]
     services:
       mysql:
         image: mysql:${{ matrix.mysql }}

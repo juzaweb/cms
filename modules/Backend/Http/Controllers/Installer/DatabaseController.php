@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Installer;
 
+use Illuminate\Http\RedirectResponse;
 use Juzaweb\CMS\Http\Controllers\Controller;
 use Juzaweb\CMS\Support\Manager\DatabaseManager;
 
@@ -10,7 +11,7 @@ class DatabaseController extends Controller
     /**
      * @var DatabaseManager
      */
-    private $databaseManager;
+    private DatabaseManager $databaseManager;
 
     /**
      * @param DatabaseManager $databaseManager
@@ -23,10 +24,10 @@ class DatabaseController extends Controller
     /**
      * Migrate and seed the database.
      *
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws \Exception|\Throwable
      */
-    public function database()
+    public function database(): RedirectResponse
     {
         $response = $this->databaseManager->run();
 

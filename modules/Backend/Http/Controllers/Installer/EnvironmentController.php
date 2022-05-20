@@ -13,23 +13,24 @@ use Juzaweb\CMS\Support\Manager\EnvironmentManager;
 
 class EnvironmentController extends Controller
 {
-    protected $environmentManager;
+    protected EnvironmentManager $environmentManager;
 
     public function __construct(EnvironmentManager $environmentManager)
     {
         $this->environmentManager = $environmentManager;
     }
 
-    public function environment()
+    public function environment(): \Illuminate\Contracts\View\View
     {
         $envConfig = $this->environmentManager->getEnvContent();
 
         return view('cms::installer.environment', compact('envConfig'));
     }
 
-    public function save(Request $request, Redirector $redirect)
+    public function save(Request $request, Redirector $redirect): \Illuminate\Http\RedirectResponse
     {
         $rules = [
+            'database_connection' => 'required|in:mysql,sqlite,pgsql,sqlsrv',
             'database_hostname' => 'required|string|max:150',
             'database_port' => 'required|numeric',
             'database_name' => 'required|string|max:150',
@@ -64,7 +65,7 @@ class EnvironmentController extends Controller
 
     private function checkDatabaseConnection(Request $request)
     {
-        $connection = 'mysql';
+        $connection = $request->input('database_connection');
 
         $settings = config("database.connections.{$connection}");
 
