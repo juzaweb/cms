@@ -77,9 +77,8 @@
                     <li class="step__divider"></li>
                 </ul>
                 <div class="main">
-                    @if (session('message'))
+                    @if ($message = session('message'))
                         @php
-                        $message = session('message');
                         if (is_string($message)) {
                             $message = [
                                 'message' => $message,
