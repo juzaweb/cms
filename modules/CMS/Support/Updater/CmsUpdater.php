@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Artisan;
 use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Console\Commands\ClearCacheCommand;
-use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Version;
 
 class CmsUpdater extends UpdateManager
@@ -52,28 +51,6 @@ class CmsUpdater extends UpdateManager
                 '--force' => true,
             ]
         );
-
-        /**
-         * @var Plugin[] $plugins
-         */
-        $plugins = app('plugins')->all();
-        foreach ($plugins as $plugin) {
-            if (!$plugin->isEnabled()) {
-                continue;
-            }
-
-            $plugin->disable();
-            $plugin->enable();
-        }
-
-        $theme = jw_current_theme();
-        Artisan::call(
-            'theme:publish',
-            [
-                'theme' => $theme,
-                'type' => 'assets',
-            ]
-        );
     }
 
     public function getUploadPaths(): array
@@ -106,11 +83,6 @@ class CmsUpdater extends UpdateManager
         $this->responseErrors($response);
 
         return $response;
-    }
-
-    protected function getBackupPath(): string
-    {
-        return base_path('modules');
     }
 
     protected function getLocalPath(): string

@@ -459,12 +459,12 @@ return [
             'after' => 'Downloaded update file'
         ],
         'step3' => [
-            'before' => 'Backup old version...',
-            'after' => 'Backup old version success'
-        ],
-        'step4' => [
             'before' => 'Unzip file...',
             'after' => 'Unzip file success'
+        ],
+        'step4' => [
+            'before' => 'Backup old version...',
+            'after' => 'Backup old version success'
         ],
         'step5' => [
             'before' => 'Update files and folders...',
