@@ -19,7 +19,7 @@ class MediaTest extends TestCase
 {
     public function testUploadByPath()
     {
-        Storage::put('tmps/test.gif', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+        Storage::put('tmps/test.gif', base64_decode('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='));
 
         $media = FileManager::addFile(
             Storage::path('tmps/test.gif'),
