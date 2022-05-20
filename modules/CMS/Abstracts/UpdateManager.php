@@ -170,6 +170,10 @@ abstract class UpdateManager
             break;
         }
 
+        if (method_exists($this, 'afterUpdateFileAndFolder')) {
+            $this->afterUpdateFileAndFolder();
+        }
+
         $this->setProcess('updated');
     }
 

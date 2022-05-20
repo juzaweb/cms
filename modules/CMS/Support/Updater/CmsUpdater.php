@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Support\Updater;
 
+use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\Artisan;
 use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\CMS\Abstracts\UpdateManager;
@@ -34,6 +35,12 @@ class CmsUpdater extends UpdateManager
         $this->responseErrors($response);
 
         return get_version_by_tag($response->data->version);
+    }
+
+    public function afterUpdateFileAndFolder()
+    {
+        $composer = app(Composer::class);
+        $composer->dumpAutoloads();
     }
 
     public function afterFinish()

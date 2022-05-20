@@ -21,7 +21,7 @@ class UpdateTest extends TestCase
             )
         );
 
-        $this->assertEquals($this->getCMSVersion(), 'v2.0');
+        $this->assertEquals('v2.0', $this->getCMSVersion());
 
         for ($i=1;$i<=6;$i++) {
             $this->printText("Test update step {$i}");
@@ -33,7 +33,7 @@ class UpdateTest extends TestCase
             $response->assertJson(['status' => true]);
         }
 
-        $this->assertNotEquals($this->getCMSVersion(), 'v2.0');
+        $this->assertNotEquals('v2.0', $this->getCMSVersion());
     }
 
     public function testUpdateCommand()
@@ -49,15 +49,15 @@ class UpdateTest extends TestCase
             )
         );
 
-        $this->assertEquals($this->getCMSVersion(), 'v2.0');
+        $this->assertEquals('v2.0', $this->getCMSVersion());
 
         $this->artisan('juzacms:update')
             ->assertExitCode(0);
 
-        $this->assertNotEquals($this->getCMSVersion(), 'v2.0');
+        $this->assertNotEquals('v2.0', $this->getCMSVersion());
     }
 
-    protected function getCMSVersion()
+    protected function getCMSVersion(): string
     {
         $file = File::get(base_path('modules/CMS/Version.php'));
         return explode("'", $file)[1];
