@@ -166,16 +166,18 @@ class FileManager
         }
 
         try {
-            $media = MediaFile::create([
-                'name' => $uploadedFile->getClientOriginalName(),
-                'type' => $this->type,
-                'mime_type' => $uploadedFile->getMimeType(),
-                'path' => $newPath,
-                'size' => $uploadedFile->getSize(),
-                'extension' => $uploadedFile->getClientOriginalExtension(),
-                'folder_id' => $this->folder_id,
-                'user_id' => $this->user_id ?: $jw_user->id,
-            ]);
+            $media = MediaFile::create(
+                [
+                    'name' => $uploadedFile->getClientOriginalName(),
+                    'type' => $this->type,
+                    'mime_type' => $uploadedFile->getMimeType(),
+                    'path' => $newPath,
+                    'size' => $uploadedFile->getSize(),
+                    'extension' => $uploadedFile->getClientOriginalExtension(),
+                    'folder_id' => $this->folder_id,
+                    'user_id' => $this->user_id ?: $jw_user->id,
+                ]
+            );
         } catch (\Exception $e) {
             $this->removeUploadedFile($uploadedFile);
             throw $e;
@@ -316,9 +318,12 @@ class FileManager
     protected function getContentFileUrl($url): bool|string
     {
         try {
-            $content = $this->client->get($url, [
-                'timeout' => 10
-            ])
+            $content = $this->client->get(
+                $url,
+                [
+                    'timeout' => 10
+                ]
+            )
                 ->getBody()
                 ->getContents();
         } catch (RequestException $e) {

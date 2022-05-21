@@ -14,14 +14,17 @@ class CSSMin
 {
     public static function minify($css, $options = [])
     {
-        $options = array_merge([
-            'compress' => true,
-            'removeCharsets' => true,
-            'currentDir' => null,
-            'docRoot' => $_SERVER['DOCUMENT_ROOT'],
-            'prependRelativePath' => null,
-            'symlinks' => [],
-        ], $options);
+        $options = array_merge(
+            [
+                'compress' => true,
+                'removeCharsets' => true,
+                'currentDir' => null,
+                'docRoot' => $_SERVER['DOCUMENT_ROOT'],
+                'prependRelativePath' => null,
+                'symlinks' => [],
+            ],
+            $options
+        );
 
         if ($options['removeCharsets']) {
             $css = preg_replace('/@charset[^;]+;\\s*/', '', $css);
