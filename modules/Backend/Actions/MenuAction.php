@@ -29,7 +29,7 @@ class MenuAction extends Action
     {
         $this->addAction(self::INIT_ACTION, [$this, 'addDatatableSearchFieldTypes']);
         $this->addAction(self::INIT_ACTION, [$this, 'addPostTypes']);
-        $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addBackendMenu']);
+        $this->addAction(self::BACKEND_INIT, [$this, 'addBackendMenu']);
         $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addSettingPage']);
         $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addAdminScripts'], 10);
         $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addAdminStyles'], 10);

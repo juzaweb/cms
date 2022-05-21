@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\CMS\Http\Middleware;
+namespace Juzaweb\Backend\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -39,7 +39,10 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         $user = $request->user();
-        
+        $adminPrefix = config('juzaweb.admin_prefix');
+        $adminUrl = url($adminPrefix);
+        $menuItems = $this->buildMenuItems($adminPrefix, $adminUrl);
+
         return array_merge(
             parent::share($request),
             [
@@ -57,7 +60,35 @@ class HandleInertiaRequests extends Middleware
                         'error' => $request->session()->get('error'),
                     ];
                 },
+                'adminPrefix' => $adminPrefix,
+                'adminUrl' => $adminUrl,
+                'menuItems' => $menuItems,
             ]
         );
+    }
+
+    protected function buildMenuItems(string $adminPrefix, string $adminUrl): array
+    {
+        $menuItems = [];
+        $items = MenuCollection::make(HookAction::getAdminMenu());
+        foreach ($items as $item) {
+            $menuItems[] = $this->buildMenuItem($adminPrefix, $adminUrl, $item);
+        }
+
+        return $menuItems;
+    }
+
+    protected function buildMenuItem(string $adminPrefix, string $adminUrl, $item): array
+    {
+        $submenu = is_array($item) ? $item : $item->toArray();
+        if ($submenu['children'] ?? []) {
+            $submenu['children'] = $this->buildMenuItem(
+                $adminPrefix,
+                $adminUrl,
+                array_values($submenu['children'])
+            );
+            $submenu['url'] = "/{$adminPrefix}/{$submenu['url']}";
+        }
+        return $submenu;
     }
 }

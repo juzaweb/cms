@@ -13,12 +13,13 @@ class MenuCollection
      * @param string $sortBy
      * @return MenuCollection[]
      */
-    public static function make($items, $sortBy = 'position')
+    public static function make($items, $sortBy = 'position', $assoc = false)
     {
         $results = [];
         $items = collect($items)->sortBy($sortBy);
         foreach ($items as $item) {
-            $results[] = new static($item);
+            $data = new static($item);
+            $results[] = $assoc ? $data->toArray() : $data;
         }
 
         return $results;
@@ -56,5 +57,10 @@ class MenuCollection
     public function getChildrens()
     {
         return static::make($this->item->get('children'));
+    }
+
+    public function toArray()
+    {
+        return $this->item->toArray();
     }
 }

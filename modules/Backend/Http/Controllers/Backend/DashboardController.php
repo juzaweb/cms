@@ -11,10 +11,35 @@ use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostView;
 use Juzaweb\CMS\Models\User;
+use Inertia\Inertia;
 
 class DashboardController extends BackendController
 {
     public function index()
+    {
+        do_action(Action::BACKEND_DASHBOARD_ACTION);
+
+        $title = trans('cms::app.dashboard');
+        $users = User::count();
+        $posts = Post::where('type', '=', 'posts')
+            ->count();
+        $pages = Post::where('type', '=', 'pages')
+            ->count();
+        $storage = format_size_units(MediaFile::sum('size'));
+
+        return Inertia::render(
+            'Dashboard',
+            [
+                'title' => $title,
+                'users' => $users,
+                'posts' => $posts,
+                'pages' => $pages,
+                'storage' => $storage,
+            ]
+        );
+    }
+
+    public function index2()
     {
         do_action(Action::BACKEND_DASHBOARD_ACTION);
 
