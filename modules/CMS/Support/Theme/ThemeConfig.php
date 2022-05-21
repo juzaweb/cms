@@ -32,17 +32,25 @@ class ThemeConfig
 
         $this->configs = $this->cache
             ->store('file')
-            ->rememberForever($this->getCacheKey(), function () {
-                return ConfigModel::where('theme', '=', $this->theme)
-                    ->get([
-                        'code',
-                        'value',
-                    ])->keyBy('code')
-                    ->map(function ($item) {
-                        return $item->value;
-                    })
-                    ->toArray();
-            });
+            ->rememberForever(
+                $this->getCacheKey(),
+                function () {
+                    return ConfigModel::where('theme', '=', $this->theme)
+                        ->get(
+                            [
+                                'code',
+                                'value',
+                            ]
+                        )
+                        ->keyBy('code')
+                        ->map(
+                            function ($item) {
+                                return $item->value;
+                            }
+                        )
+                        ->toArray();
+                }
+            );
     }
 
     public function getConfig($key, $default = null)
@@ -62,12 +70,15 @@ class ThemeConfig
             $value = json_encode($value);
         }
 
-        $config = ConfigModel::updateOrCreate([
-            'code' => $key,
-            'theme' => $this->theme,
-        ], [
-            'value' => $value,
-        ]);
+        $config = ConfigModel::updateOrCreate(
+            [
+                'code' => $key,
+                'theme' => $this->theme,
+            ],
+            [
+                'value' => $value,
+            ]
+        );
 
         $this->configs[$key] = $value;
 
