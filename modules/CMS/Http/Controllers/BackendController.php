@@ -16,6 +16,7 @@ namespace Juzaweb\CMS\Http\Controllers;
 
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Traits\ResponseMessage;
+use Inertia\Inertia;
 
 class BackendController extends Controller
 {
@@ -26,6 +27,20 @@ class BackendController extends Controller
         do_action(Action::BACKEND_CALL_ACTION, $method, $parameters);
 
         return parent::callAction($method, $parameters);
+    }
+
+    protected function bladeRender(string $view, array $params = [])
+    {
+        return Inertia::render(
+            'BladeRender',
+            [
+                'content' => view(
+                    $view,
+                    $params
+                )->renderSections()['content'],
+                'title' => $params['title'] ?? '',
+            ]
+        );
     }
 
     protected function addBreadcrumb(array $item, $name = 'admin')

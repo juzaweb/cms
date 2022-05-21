@@ -9,8 +9,6 @@
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
 
-    @do_action('juzaweb_header')
-
     <link href="{{ asset('jw-styles/juzaweb/css/app.css') }}" rel="stylesheet" />
     <script src="{{ asset('jw-styles/juzaweb/js/app.js') }}" defer></script>
 

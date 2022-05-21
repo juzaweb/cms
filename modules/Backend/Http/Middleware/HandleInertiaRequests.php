@@ -69,9 +69,15 @@ class HandleInertiaRequests extends Middleware
 
     protected function buildMenuItems(string $adminPrefix, string $adminUrl): array
     {
+        global $jw_user;
+
         $menuItems = [];
         $items = MenuCollection::make(HookAction::getAdminMenu());
         foreach ($items as $item) {
+            if ($item->get('key') != 'dashboard' && !$jw_user->can($item->get('key'))) {
+                continue;
+            }
+
             $menuItems[] = $this->buildMenuItem($adminPrefix, $adminUrl, $item);
         }
 
@@ -81,13 +87,21 @@ class HandleInertiaRequests extends Middleware
     protected function buildMenuItem(string $adminPrefix, string $adminUrl, $item): array
     {
         $submenu = is_array($item) ? $item : $item->toArray();
+        $url = ($submenu['url'] ?? '');
+        $submenu['url'] = $url == 'dashboard' ? "/{$adminPrefix}" : "/{$adminPrefix}/{$url}";
+
         if ($submenu['children'] ?? []) {
-            $submenu['children'] = $this->buildMenuItem(
-                $adminPrefix,
-                $adminUrl,
-                array_values($submenu['children'])
-            );
-            $submenu['url'] = "/{$adminPrefix}/{$submenu['url']}";
+            $children = [];
+
+            foreach ($submenu['children'] as $child) {
+                $children[] = $this->buildMenuItem(
+                    $adminPrefix,
+                    $adminUrl,
+                    $child
+                );
+            }
+
+            $submenu['children'] = $children;
         }
         return $submenu;
     }

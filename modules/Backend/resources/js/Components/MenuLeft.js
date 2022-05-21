@@ -22,7 +22,7 @@ export default function MenuLeft() {
                                         item.children.map((child, index) => {
                                             return (
                                                 <li key={child.key} className={"juzaweb__menuLeft__item juzaweb__menuLeft__item-"+child.slug}>
-                                                    <Link className={"juzaweb__menuLeft__item__link "+(child.active ? 'juzaweb__menuLeft__item--active' : '')} href={adminPrefix+'/'+child.url} >
+                                                    <Link className={"juzaweb__menuLeft__item__link "+(child.active ? 'juzaweb__menuLeft__item--active' : '')} href={child.url} >
 
                                                         <span className="juzaweb__menuLeft__item__title">{child.title}</span>
 
@@ -38,7 +38,7 @@ export default function MenuLeft() {
                     } else {
                         return (
                             <li key={item.key} className="juzaweb__menuLeft__item juzaweb__menuLeft__item-{{ $item->get('slug') }}">
-                                <Link className={"juzaweb__menuLeft__item__link "+(item.active ? 'juzaweb__menuLeft__item--active' : '')} href={adminPrefix+'/'+item.url} >
+                                <Link className={"juzaweb__menuLeft__item__link "+(item.active ? 'juzaweb__menuLeft__item--active' : '')} href={item.url} >
 
                                     <span className="juzaweb__menuLeft__item__title">{item.title}</span>
 

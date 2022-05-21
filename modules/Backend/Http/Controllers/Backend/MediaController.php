@@ -24,10 +24,12 @@ class MediaController extends BackendController
         $type = $request->get('type', 'image');
 
         if ($folderId) {
-            $this->addBreadcrumb([
-                'title' => $title,
-                'url' => route('admin.media.index'),
-            ]);
+            $this->addBreadcrumb(
+                [
+                    'title' => $title,
+                    'url' => route('admin.media.index'),
+                ]
+            );
 
             $folder = MediaFolder::find($folderId);
             $folder->load('parent');
@@ -44,15 +46,18 @@ class MediaController extends BackendController
         $maxSize = config("juzaweb.filemanager.types.{$type}.max_size");
         $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
 
-        return view('cms::backend.media.index', [
-            'fileTypes' => $this->getFileTypes(),
-            'folderId' => $folderId,
-            'mediaItems' => $mediaItems,
-            'title' => $title,
-            'mimeTypes' => $mimeTypes,
-            'type' => $type,
-            'maxSize' => $maxSize,
-        ]);
+        return $this->bladeRender(
+            'cms::backend.media.index',
+            [
+                'fileTypes' => $this->getFileTypes(),
+                'folderId' => $folderId,
+                'mediaItems' => $mediaItems,
+                'title' => $title,
+                'mimeTypes' => $mimeTypes,
+                'type' => $type,
+                'maxSize' => $maxSize,
+            ]
+        );
     }
 
     public function addFolder(Request $request)

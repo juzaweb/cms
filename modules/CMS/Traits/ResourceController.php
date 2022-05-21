@@ -26,7 +26,7 @@ trait ResourceController
             ...$params
         );
 
-        return view(
+        return $this->bladeRender(
             $this->viewPrefix . '.index',
             $this->getDataForIndex(...$params)
         );
@@ -51,7 +51,7 @@ trait ResourceController
 
         $model = $this->makeModel(...$params);
 
-        return view(
+        return $this->bladeRender(
             $this->viewPrefix . '.form',
             array_merge(
                 [
@@ -85,7 +85,7 @@ trait ResourceController
         $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
         $this->checkPermission('edit', $model, ...$params);
 
-        return view(
+        return $this->bladeRender(
             $this->viewPrefix . '.form',
             array_merge(
                 [

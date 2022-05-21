@@ -72,12 +72,6 @@
         </div>
     </div>
 
-
-
-@endsection
-
-@section('footer')
-
     @include('cms::backend.media.add_modal')
 
     @include('cms::backend.media.upload_modal')
@@ -118,5 +112,11 @@
             Turbolinks.visit("", {action: "replace"});
         }
     </script>
+
+@endsection
+
+@section('footer')
+
+
 
 @endsection
