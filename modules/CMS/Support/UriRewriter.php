@@ -46,7 +46,7 @@ class UriRewriter
         self::$_docRoot = self::_realpath(
             $docRoot ? $docRoot : $_SERVER['DOCUMENT_ROOT']
         );
-        self::$_currentDir = self::_realpath($currentDir);
+        self::$currentDir = self::_realpath($currentDir);
         self::$_symlinks = [];
 
         // normalize symlinks in order to map to link
@@ -58,7 +58,7 @@ class UriRewriter
         }
 
         self::$debugText .= "docRoot    : " . self::$_docRoot . "\n"
-            . "currentDir : " . self::$_currentDir . "\n";
+            . "currentDir : " . self::$currentDir . "\n";
         if (self::$_symlinks) {
             self::$debugText .= "symlinks : " . var_export(self::$_symlinks, 1) . "\n";
         }
@@ -232,7 +232,7 @@ class UriRewriter
      *
      * @var string
      */
-    private static $_currentDir = '';
+    private static $currentDir = '';
 
     /**
      * DOC_ROOT
@@ -302,7 +302,7 @@ class UriRewriter
         if (! preg_match('~^(/|[a-z]+\:)~', $uri)) {
             // URI is file-relative: rewrite depending on options
             if (self::$_prependPath === null) {
-                $uri = self::rewriteRelative($uri, self::$_currentDir, self::$_docRoot, self::$_symlinks);
+                $uri = self::rewriteRelative($uri, self::$currentDir, self::$_docRoot, self::$_symlinks);
             } else {
                 $uri = self::$_prependPath . $uri;
                 if ($uri[0] === '/') {

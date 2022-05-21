@@ -7,9 +7,9 @@ class RequirementsChecker
     /**
      * Minimum PHP Version Supported (Override is in installer.php config file).
      *
-     * @var _minPhpVersion
+     * @var minPhpVersion
      */
-    private $_minPhpVersion = '7.0.0';
+    private $minPhpVersion = '7.0.0';
 
     /**
      * Check for the server requirements.
@@ -107,10 +107,10 @@ class RequirementsChecker
     /**
      * Get minimum PHP version ID.
      *
-     * @return string _minPhpVersion
+     * @return string minPhpVersion
      */
     protected function getMinPhpVersion()
     {
-        return $this->_minPhpVersion;
+        return $this->minPhpVersion;
     }
 }

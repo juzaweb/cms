@@ -22,7 +22,7 @@ class ServiceProvider extends BaseServiceProvider
             include $filename;
             $classes = get_declared_classes();
             $class = end($classes);
-            
+
             $command = Request::server('argv', null);
             if (is_array($command)) {
                 $command = implode(' ', $command);

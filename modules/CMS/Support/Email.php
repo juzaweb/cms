@@ -101,13 +101,15 @@ class Email
         }
 
         foreach ($this->emails as $email) {
-            $emailList = EmailList::create([
-                'email' => $email,
-                'template_id' => $templateId,
-                'params' => $this->params,
-                'priority' => $this->priority,
-                'data' => $data,
-            ]);
+            $emailList = EmailList::create(
+                [
+                    'email' => $email,
+                    'template_id' => $templateId,
+                    'params' => $this->params,
+                    'priority' => $this->priority,
+                    'data' => $data,
+                ]
+            );
 
             $method = config('juzaweb.email.method');
             switch ($method) {
