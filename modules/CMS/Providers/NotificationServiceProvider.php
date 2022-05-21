@@ -2,7 +2,7 @@
 
 namespace Juzaweb\CMS\Providers;
 
-use Juzaweb\CMS\Commands\SendNotify;
+use Juzaweb\CMS\Console\Commands\SendNotifyCommand;
 use Juzaweb\CMS\Support\Notification;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\CMS\Support\Notifications\DatabaseNotification;
@@ -20,7 +20,7 @@ class NotificationServiceProvider extends ServiceProvider
     {
         $this->commands(
             [
-                SendNotify::class,
+                SendNotifyCommand::class,
             ]
         );
     }

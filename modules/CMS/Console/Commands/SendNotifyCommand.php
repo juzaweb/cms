@@ -1,12 +1,12 @@
 <?php
 
-namespace Juzaweb\CMS\Commands;
+namespace Juzaweb\CMS\Console\Commands;
 
 use Illuminate\Console\Command;
 use Juzaweb\Backend\Models\ManualNotification;
 use Juzaweb\CMS\Support\SendNotification;
 
-class SendNotify extends Command
+class SendNotifyCommand extends Command
 {
     protected $signature = 'notify:send';
 
