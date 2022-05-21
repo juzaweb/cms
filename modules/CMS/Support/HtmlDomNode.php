@@ -1,5 +1,4 @@
 <?php
-
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
@@ -549,7 +548,7 @@ class HtmlDomNode
         if (isset($this->attr[$name])) {
             return $this->convert_text($this->attr[$name]);
         }
-        
+
         switch ($name) {
             case 'outertext':
                 return $this->outertext();

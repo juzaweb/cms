@@ -22,7 +22,7 @@ class Notification
                 $items[$key] = [
                     'class' => $class
                 ];
-    
+
                 return $items;
             },
             $priority
