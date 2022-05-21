@@ -1,4 +1,5 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
@@ -125,7 +126,9 @@ class HtmlDomNode
     public function convert_text($text)
     {
         global $debug_object;
-        if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
+        if (is_object($debug_object)) {
+            $debug_object->debug_log_entry(1);
+        }
 
         $converted_text = $text;
 
@@ -177,21 +180,34 @@ class HtmlDomNode
         $c = 0; $b = 0;
         $bits = 0;
         $len = strlen($str);
-        for($i = 0; $i < $len; $i++) {
+        for ($i = 0; $i < $len; $i++) {
             $c = ord($str[$i]);
-            if($c > 128) {
-                if(($c >= 254)) { return false; }
-                elseif($c >= 252) { $bits = 6; }
-                elseif($c >= 248) { $bits = 5; }
-                elseif($c >= 240) { $bits = 4; }
-                elseif($c >= 224) { $bits = 3; }
-                elseif($c >= 192) { $bits = 2; }
-                else { return false; }
-                if(($i + $bits) > $len) { return false; }
-                while($bits > 1) {
+            if ($c > 128) {
+                if (($c >= 254)) {
+                    return false;
+                } elseif ($c >= 252) {
+                    $bits = 6;
+                } elseif ($c >= 248) {
+                    $bits = 5;
+                } elseif ($c >= 240) {
+                    $bits = 4;
+                } elseif ($c >= 224) {
+                    $bits = 3;
+                } elseif ($c >= 192) {
+                    $bits = 2;
+                } else {
+                    return false;
+                }
+
+                if (($i + $bits) > $len) {
+                    return false;
+                }
+                while ($bits > 1) {
                     $i++;
                     $b = ord($str[$i]);
-                    if($b < 128 || $b > 191) { return false; }
+                    if ($b < 128 || $b > 191) {
+                        return false;
+                    }
                     $bits--;
                 }
             }
@@ -324,8 +340,12 @@ class HtmlDomNode
                 $ret .= $key;
             } else {
                 switch ($this->_[HDOM_INFO_QUOTE][$i]) {
-                    case HDOM_QUOTE_DOUBLE: $quote = '"'; break;
-                    case HDOM_QUOTE_SINGLE: $quote = '\''; break;
+                    case HDOM_QUOTE_DOUBLE:
+                        $quote = '"';
+                        break;
+                    case HDOM_QUOTE_SINGLE:
+                        $quote = '\'';
+                        break;
                     default: $quote = '';
                 }
 
@@ -529,11 +549,16 @@ class HtmlDomNode
         if (isset($this->attr[$name])) {
             return $this->convert_text($this->attr[$name]);
         }
+        
         switch ($name) {
-            case 'outertext': return $this->outertext();
-            case 'innertext': return $this->innertext();
-            case 'plaintext': return $this->text();
-            case 'xmltext': return $this->xmltext();
+            case 'outertext':
+                return $this->outertext();
+            case 'innertext':
+                return $this->innertext();
+            case 'plaintext':
+                return $this->text();
+            case 'xmltext':
+                return $this->xmltext();
             default: return array_key_exists($name, $this->attr);
         }
     }
@@ -567,13 +592,20 @@ class HtmlDomNode
         }
 
         switch ($this->nodetype) {
-            case HDOM_TYPE_TEXT: return $this->dom->restoreNoise($this->_[HDOM_INFO_TEXT]);
-            case HDOM_TYPE_COMMENT: return '';
-            case HDOM_TYPE_UNKNOWN: return '';
+            case HDOM_TYPE_TEXT:
+                return $this->dom->restoreNoise($this->_[HDOM_INFO_TEXT]);
+            case HDOM_TYPE_COMMENT:
+                return '';
+            case HDOM_TYPE_UNKNOWN:
+                return '';
         }
 
-        if (strcasecmp($this->tag, 'script') === 0) { return ''; }
-        if (strcasecmp($this->tag, 'style') === 0) { return ''; }
+        if (strcasecmp($this->tag, 'script') === 0) {
+            return '';
+        }
+        if (strcasecmp($this->tag, 'style') === 0) {
+            return '';
+        }
 
         $ret = '';
 
@@ -728,149 +760,153 @@ class HtmlDomNode
         }
 
         // return nth-element or array
-        if (is_null($idx)) { return $found; }
-        elseif ($idx < 0) { $idx = count($found) + $idx; }
+        if (is_null($idx)) {
+            return $found;
+        } elseif ($idx < 0) {
+            $idx = count($found) + $idx;
+        }
+
         return (isset($found[$idx])) ? $found[$idx] : null;
     }
 
     protected function parse_selector($selector_string)
-{
-    global $debug_object;
-    if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
+    {
+        global $debug_object;
+        if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
 
-    /**
-     * Pattern of CSS selectors, modified from mootools (https://mootools.net/)
-     *
-     * Paperg: Add the colon to the attribute, so that it properly finds
-     * <tag attr:ibute="something" > like google does.
-     *
-     * Note: if you try to look at this attribute, you MUST use getAttribute
-     * since $dom->x:y will fail the php syntax check.
-     *
-     * Notice the \[ starting the attribute? and the @? following? This
-     * implies that an attribute can begin with an @ sign that is not
-     * captured. This implies that an html attribute specifier may start
-     * with an @ sign that is NOT captured by the expression. Farther study
-     * is required to determine of this should be documented or removed.
-     *
-     * Matches selectors in this order:
-     *
-     * [0] - full match
-     *
-     * [1] - tag name
-     *     ([\w:\*-]*)
-     *     Matches the tag name consisting of zero or more words, colons,
-     *     asterisks and hyphens.
-     *
-     * [2] - id name
-     *     (?:\#([\w-]+))
-     *     Optionally matches a id name, consisting of an "#" followed by
-     *     the id name (one or more words and hyphens).
-     *
-     * [3] - class names (including dots)
-     *     (?:\.([\w\.-]+))?
-     *     Optionally matches a list of classs, consisting of an "."
-     *     followed by the class name (one or more words and hyphens)
-     *     where multiple classes can be chained (i.e. ".foo.bar.baz")
-     *
-     * [4] - attributes
-     *     ((?:\[@?(?:!?[\w:-]+)(?:(?:[!*^$|~]?=)[\"']?(?:.*?)[\"']?)?(?:\s*?(?:[iIsS])?)?\])+)?
-     *     Optionally matches the attributes list
-     *
-     * [5] - separator
-     *     ([\/, >+~]+)
-     *     Matches the selector list separator
-     */
-    // phpcs:ignore Generic.Files.LineLength
-    $pattern = "/([\w:\*-]*)(?:\#([\w-]+))?(?:|\.([\w\.-]+))?((?:\[@?(?:!?[\w:-]+)(?:(?:[!*^$|~]?=)[\"']?(?:.*?)[\"']?)?(?:\s*?(?:[iIsS])?)?\])+)?([\/, >+~]+)/is";
+        /**
+         * Pattern of CSS selectors, modified from mootools (https://mootools.net/)
+         *
+         * Paperg: Add the colon to the attribute, so that it properly finds
+         * <tag attr:ibute="something" > like google does.
+         *
+         * Note: if you try to look at this attribute, you MUST use getAttribute
+         * since $dom->x:y will fail the php syntax check.
+         *
+         * Notice the \[ starting the attribute? and the @? following? This
+         * implies that an attribute can begin with an @ sign that is not
+         * captured. This implies that an html attribute specifier may start
+         * with an @ sign that is NOT captured by the expression. Farther study
+         * is required to determine of this should be documented or removed.
+         *
+         * Matches selectors in this order:
+         *
+         * [0] - full match
+         *
+         * [1] - tag name
+         *     ([\w:\*-]*)
+         *     Matches the tag name consisting of zero or more words, colons,
+         *     asterisks and hyphens.
+         *
+         * [2] - id name
+         *     (?:\#([\w-]+))
+         *     Optionally matches a id name, consisting of an "#" followed by
+         *     the id name (one or more words and hyphens).
+         *
+         * [3] - class names (including dots)
+         *     (?:\.([\w\.-]+))?
+         *     Optionally matches a list of classs, consisting of an "."
+         *     followed by the class name (one or more words and hyphens)
+         *     where multiple classes can be chained (i.e. ".foo.bar.baz")
+         *
+         * [4] - attributes
+         *     ((?:\[@?(?:!?[\w:-]+)(?:(?:[!*^$|~]?=)[\"']?(?:.*?)[\"']?)?(?:\s*?(?:[iIsS])?)?\])+)?
+         *     Optionally matches the attributes list
+         *
+         * [5] - separator
+         *     ([\/, >+~]+)
+         *     Matches the selector list separator
+         */
+        // phpcs:ignore Generic.Files.LineLength
+        $pattern = "/([\w:\*-]*)(?:\#([\w-]+))?(?:|\.([\w\.-]+))?((?:\[@?(?:!?[\w:-]+)(?:(?:[!*^$|~]?=)[\"']?(?:.*?)[\"']?)?(?:\s*?(?:[iIsS])?)?\])+)?([\/, >+~]+)/is";
 
-    preg_match_all(
-        $pattern,
-        trim($selector_string) . ' ', // Add final ' ' as pseudo separator
-        $matches,
-        PREG_SET_ORDER
-    );
+        preg_match_all(
+            $pattern,
+            trim($selector_string) . ' ', // Add final ' ' as pseudo separator
+            $matches,
+            PREG_SET_ORDER
+        );
 
-    if (is_object($debug_object)) {
-        $debug_object->debug_log(2, 'Matches Array: ', $matches);
-    }
-
-    $selectors = array();
-    $result = array();
-
-    foreach ($matches as $m) {
-        $m[0] = trim($m[0]);
-
-        // Skip NoOps
-        if ($m[0] === '' || $m[0] === '/' || $m[0] === '//') { continue; }
-
-        // Convert to lowercase
-        if ($this->dom->lowercase) {
-            $m[1] = strtolower($m[1]);
+        if (is_object($debug_object)) {
+            $debug_object->debug_log(2, 'Matches Array: ', $matches);
         }
 
-        // Extract classes
-        if ($m[3] !== '') { $m[3] = explode('.', $m[3]); }
+        $selectors = array();
+        $result = array();
 
-        /* Extract attributes (pattern based on the pattern above!)
+        foreach ($matches as $m) {
+            $m[0] = trim($m[0]);
 
-         * [0] - full match
-         * [1] - attribute name
-         * [2] - attribute expression
-         * [3] - attribute value
-         * [4] - case sensitivity
-         *
-         * Note: Attributes can be negated with a "!" prefix to their name
-         */
-        if($m[4] !== '') {
-            preg_match_all(
-                "/\[@?(!?[\w:-]+)(?:([!*^$|~]?=)[\"']?(.*?)[\"']?)?(?:\s+?([iIsS])?)?\]/is",
-                trim($m[4]),
-                $attributes,
-                PREG_SET_ORDER
-            );
+            // Skip NoOps
+            if ($m[0] === '' || $m[0] === '/' || $m[0] === '//') { continue; }
 
-            // Replace element by array
-            $m[4] = array();
+            // Convert to lowercase
+            if ($this->dom->lowercase) {
+                $m[1] = strtolower($m[1]);
+            }
 
-            foreach($attributes as $att) {
-                // Skip empty matches
-                if(trim($att[0]) === '') { continue; }
+            // Extract classes
+            if ($m[3] !== '') { $m[3] = explode('.', $m[3]); }
 
-                $inverted = (isset($att[1][0]) && $att[1][0] === '!');
-                $m[4][] = array(
-                    $inverted ? substr($att[1], 1) : $att[1], // Name
-                    (isset($att[2])) ? $att[2] : '', // Expression
-                    (isset($att[3])) ? $att[3] : '', // Value
-                    $inverted, // Inverted Flag
-                    (isset($att[4])) ? strtolower($att[4]) : '', // Case-Sensitivity
+            /* Extract attributes (pattern based on the pattern above!)
+
+            * [0] - full match
+            * [1] - attribute name
+            * [2] - attribute expression
+            * [3] - attribute value
+            * [4] - case sensitivity
+            *
+            * Note: Attributes can be negated with a "!" prefix to their name
+            */
+            if($m[4] !== '') {
+                preg_match_all(
+                    "/\[@?(!?[\w:-]+)(?:([!*^$|~]?=)[\"']?(.*?)[\"']?)?(?:\s+?([iIsS])?)?\]/is",
+                    trim($m[4]),
+                    $attributes,
+                    PREG_SET_ORDER
                 );
+
+                // Replace element by array
+                $m[4] = array();
+
+                foreach($attributes as $att) {
+                    // Skip empty matches
+                    if(trim($att[0]) === '') { continue; }
+
+                    $inverted = (isset($att[1][0]) && $att[1][0] === '!');
+                    $m[4][] = array(
+                        $inverted ? substr($att[1], 1) : $att[1], // Name
+                        (isset($att[2])) ? $att[2] : '', // Expression
+                        (isset($att[3])) ? $att[3] : '', // Value
+                        $inverted, // Inverted Flag
+                        (isset($att[4])) ? strtolower($att[4]) : '', // Case-Sensitivity
+                    );
+                }
+            }
+
+            // Sanitize Separator
+            if ($m[5] !== '' && trim($m[5]) === '') { // Descendant Separator
+                $m[5] = ' ';
+            } else { // Other Separator
+                $m[5] = trim($m[5]);
+            }
+
+            // Clear Separator if it's a Selector List
+            if ($is_list = ($m[5] === ',')) { $m[5] = ''; }
+
+            // Remove full match before adding to results
+            array_shift($m);
+            $result[] = $m;
+
+            if ($is_list) { // Selector List
+                $selectors[] = $result;
+                $result = array();
             }
         }
 
-        // Sanitize Separator
-        if ($m[5] !== '' && trim($m[5]) === '') { // Descendant Separator
-            $m[5] = ' ';
-        } else { // Other Separator
-            $m[5] = trim($m[5]);
-        }
-
-        // Clear Separator if it's a Selector List
-        if ($is_list = ($m[5] === ',')) { $m[5] = ''; }
-
-        // Remove full match before adding to results
-        array_shift($m);
-        $result[] = $m;
-
-        if ($is_list) { // Selector List
-            $selectors[] = $result;
-            $result = array();
-        }
+        if (count($result) > 0) { $selectors[] = $result; }
+        return $selectors;
     }
-
-    if (count($result) > 0) { $selectors[] = $result; }
-    return $selectors;
-}
 
     public function getElementsById($id, $idx = null)
     {
