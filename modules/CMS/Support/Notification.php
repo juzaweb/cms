@@ -2,17 +2,18 @@
 
 namespace Juzaweb\CMS\Support;
 
-use Juzaweb\Notification\Jobs\SendNotification as SendNotificationJob;
+use Juzaweb\CMS\Jobs\SendNotification as SendNotificationJob;
 use Juzaweb\Backend\Models\ManualNotification;
 use Illuminate\Foundation\Auth\User;
 
 class Notification
 {
-    protected $subject;
+    protected string $subject;
     protected $users;
-    protected $body;
-    protected $url;
-    protected $image;
+    protected ?string $body = null;
+    protected ?string $url = null;
+    protected ?string $image = null;
+    protected array $method = ['database'];
 
     public static function register($key, $class, $priority = 20)
     {
@@ -43,7 +44,7 @@ class Notification
         $userIds = [];
         if (is_numeric($users)) {
             $userIds[] = $users;
-        } elseif (is_array($users)) {
+        } elseif (is_array($users) || $users instanceof \Illuminate\Database\Eloquent\Collection) {
             foreach ($users as $user) {
                 if (is_numeric($user)) {
                     $userIds[] = $user;
@@ -75,9 +76,16 @@ class Notification
         return $this;
     }
 
-    public function setImage($image)
+    public function setImage($image): static
     {
         $this->image = $image;
+        return $this;
+    }
+
+    public function setMethod(array $methods): static
+    {
+        $this->method = $methods;
+
         return $this;
     }
 
@@ -86,6 +94,7 @@ class Notification
         $notification = ManualNotification::create(
             [
                 'users' => implode(',', $this->users),
+                'method' => implode(',', $this->method),
                 'data' => [
                     'subject' => $this->subject,
                     'body' => $this->body,
@@ -95,7 +104,7 @@ class Notification
             ]
         );
 
-        switch (config('mymo.notification.method')) {
+        switch (config('juzaweb.notification.method', 'sync')) {
             case 'sync':
                 (new SendNotification($notification))->send();
                 break;

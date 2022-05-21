@@ -22,7 +22,7 @@ class SendNotification
         $methods = explode(',', $this->notification->method);
 
         foreach ($notifyMethods as $key => $method) {
-            if (!config('notification.via.'. $key .'.enable')) {
+            if (!config('juzaweb.notification.via.'. $key .'.enable')) {
                 continue;
             }
 
