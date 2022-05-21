@@ -382,7 +382,7 @@ class MenuAction extends Action
 
     public function checkAndNotifyUpdate(): void
     {
-        $key = cache_prefix('check_update');
+        $key = cache_prefix('check_cms_update');
         if (Cache::store('file')->has($key)) {
             return;
         }
@@ -404,8 +404,10 @@ class MenuAction extends Action
             $notify->setUrl(route('admin.update'));
 
             $notify->send();
-        }
 
-        Cache::store('file')->put($key, 1, 3600);
+            Cache::store('file')->forever($key, 1);
+        } else {
+            Cache::store('file')->put($key, 1, 3600);
+        }
     }
 }
