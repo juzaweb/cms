@@ -58,12 +58,14 @@ class SendEmail
 
             return true;
         } catch (\Exception $e) {
-            $this->updateError([
-                'title' => 'Send mail exception',
-                'message' => $e->getMessage(),
-                'code' => $e->getCode(),
-                'line' => $e->getLine(),
-            ]);
+            $this->updateError(
+                [
+                    'title' => 'Send mail exception',
+                    'message' => $e->getMessage(),
+                    'code' => $e->getCode(),
+                    'line' => $e->getLine(),
+                ]
+            );
 
             if (config('app.debug')) {
                 throw $e;
@@ -96,10 +98,12 @@ class SendEmail
 
     protected function updateError(array $error = [])
     {
-        return $this->mail->update([
-            'error' => $error,
-            'status' => 'error',
-        ]);
+        return $this->mail->update(
+            [
+                'error' => $error,
+                'status' => 'error',
+            ]
+        );
     }
 
     /**

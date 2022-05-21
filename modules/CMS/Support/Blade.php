@@ -6,10 +6,6 @@
  * @author     The Anh Dang
  * @link       https://github.com/juzaweb/juzacms
  * @license    GNU V2
- *
- * Created by JUZAWEB.
- * Date: 5/28/2021
- * Time: 10:13 PM
  */
 
 namespace Juzaweb\CMS\Support;

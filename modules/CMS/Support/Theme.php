@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dtv
- * Date: 10/12/2021
- * Time: 8:31 PM
- */
 
 namespace Juzaweb\CMS\Support;
 

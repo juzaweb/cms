@@ -45,7 +45,8 @@ class Curl
     {
         $headers = array_merge(
             [
-                'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                .'Chrome/91.0.4472.124 Safari/537.36',
             ],
             $headers
         );
@@ -66,7 +67,8 @@ class Curl
         $data['curl'] = [
             //CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
             //CURLOPT_SSL_VERIFYHOST => 0,
-            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '.
+            'Chrome/91.0.4472.124 Safari/537.36',
             //CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_SSL_VERIFYPEER => false,
         ];
