@@ -5,18 +5,20 @@ const pluginPath = `${__dirname}/plugins`;
 const themePath = `${__dirname}/themes`;
 
 mix.disableNotifications();
-mix.options({
-    postCss: [
-        require('postcss-discard-comments') (
-            {
-                removeAll: true
-            }
-        )
-    ],
-    uglify: {
-        comments: false
+mix.options(
+    {
+        postCss: [
+            require('postcss-discard-comments') (
+                {
+                    removeAll: true
+                }
+            )
+        ],
+        uglify: {
+            comments: false
+        }
     }
-});
+);
 
 //require(`${backendWebpack}`);
 

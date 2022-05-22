@@ -6,6 +6,7 @@ mix.styles(
     [
         baseAsset + '/plugins/bootstrap/css/bootstrap.min.css',
         baseAsset + '/plugins/font-awesome/css/font-awesome.min.css',
+        baseAsset + '/css/mime-icons.min.css',
         baseAsset + '/plugins/cropper/css/cropper.min.css',
         baseAsset + '/plugins/dropzone/css/dropzone.css',
         baseAsset + '/css/lfm.css',

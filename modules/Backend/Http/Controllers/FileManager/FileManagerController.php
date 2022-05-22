@@ -8,9 +8,9 @@ use Juzaweb\CMS\Http\Controllers\Controller;
 
 class FileManagerController extends Controller
 {
-    protected static $success_response = 'OK';
+    protected static string $success_response = 'OK';
 
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Contracts\View\View
     {
         $type = $this->getType();
         $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
@@ -21,34 +21,33 @@ class FileManagerController extends Controller
             return abort(404);
         }
 
-        return view('cms::backend.filemanager.index', compact(
-            'mimeTypes',
-            'maxSize',
-            'multiChoose'
-        ));
+        return view(
+            'cms::backend.filemanager.index',
+            compact(
+                'mimeTypes',
+                'maxSize',
+                'multiChoose'
+            )
+        );
     }
 
-    public function getErrors()
+    public function getErrors(): array
     {
-        $arr_errors = [];
+        $errors = [];
 
-        if (! extension_loaded('gd')) {
-            $arr_errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'gd']);
-        }
-
-        if (! extension_loaded('imagick')) {
-            $arr_errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'imagick']);
+        if (! extension_loaded('gd') && ! extension_loaded('imagick')) {
+            $errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'gd']);
         }
 
         if (! extension_loaded('exif')) {
-            $arr_errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'exif']);
+            $errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'exif']);
         }
 
         if (! extension_loaded('fileinfo')) {
-            $arr_errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'fileinfo']);
+            $errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'fileinfo']);
         }
 
-        return $arr_errors;
+        return $errors;
     }
 
     public function error($error_type, $variables = [])
@@ -56,14 +55,14 @@ class FileManagerController extends Controller
         throw new \Exception(trans('cms::filemanager.error_' . $error_type, $variables));
     }
 
-    protected function getType()
+    protected function getType(): string
     {
         $type = strtolower(request()->get('type'));
 
         return Str::singular($type);
     }
 
-    protected function getPath($url)
+    protected function getPath($url): string
     {
         $explode = explode('uploads/', $url);
         if (isset($explode[1])) {
@@ -73,7 +72,7 @@ class FileManagerController extends Controller
         return $url;
     }
 
-    protected function isDirectory($file)
+    protected function isDirectory($file): bool
     {
         if (is_numeric($file)) {
             return true;

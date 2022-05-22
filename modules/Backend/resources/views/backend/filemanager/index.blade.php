@@ -10,7 +10,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ trans('cms::filemanager.title-page') }}</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}">
-
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css">--}}
     <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/filemanager.min.css') }}">
 
