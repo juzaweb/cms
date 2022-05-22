@@ -3,8 +3,10 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ route('admin.ajax', ['imports']) }}" method="post">
+            <form action="" method="post">
                 @csrf
+
+                <input type="hidden" name="type" value="blogger">
 
                 <div class="form-group form-url">
                     <label class="col-form-label" for="url">File</label>

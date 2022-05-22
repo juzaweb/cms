@@ -10,9 +10,9 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
+use Juzaweb\Backend\Http\Requests\Tool\ImportRequest;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\Backend\Jobs\ImportBlogger;
+use Juzaweb\CMS\Support\Imports\PostImportFromXml;
 
 class ImportController extends BackendController
 {
@@ -26,24 +26,22 @@ class ImportController extends BackendController
         );
     }
 
-    public function import(Request $request)
+    public function import(ImportRequest $request)
     {
-        $this->validate(
-            $request,
-            [
-                'file' => 'required'
-            ]
-        );
-
         global $jw_user;
 
         $file = $request->input('file');
 
-        dispatch(new ImportBlogger($file, $jw_user->id));
+        $type = $request->input('type');
+
+        $importer = app(PostImportFromXml::class)
+            ->setUserID($jw_user->id)
+            ->import($file, $type);
 
         return $this->success(
             [
-                'message' => 'Import in process'
+                'message' => 'Import in process',
+                'next' => $importer->getCacheInfo(),
             ]
         );
     }
