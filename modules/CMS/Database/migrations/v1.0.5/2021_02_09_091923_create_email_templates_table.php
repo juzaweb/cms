@@ -18,7 +18,7 @@ class CreateEmailTemplatesTable extends Migration
             $table->timestamps();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('email_templates');

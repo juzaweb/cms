@@ -87,9 +87,9 @@ class User extends Authenticatable
     use HasFactory;
     use HasRoles;
 
-    const STATUS_ACTIVE = 'active';
-    const STATUS_VERIFICATION = 'verification';
-    const STATUS_BANNED = 'banned';
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_VERIFICATION = 'verification';
+    public const STATUS_BANNED = 'banned';
 
     protected $fillable = [
         'name',

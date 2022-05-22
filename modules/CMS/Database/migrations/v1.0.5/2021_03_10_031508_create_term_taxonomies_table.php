@@ -19,7 +19,7 @@ class CreateTermTaxonomiesTable extends Migration
             ]);
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('term_taxonomies');

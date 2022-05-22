@@ -1,4 +1,5 @@
 <?php
+
 return [
     'nav-back' => 'Arrière',
     'nav-new' => 'Nouveau dossier',

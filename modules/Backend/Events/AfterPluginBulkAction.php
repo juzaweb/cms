@@ -16,7 +16,9 @@ use Illuminate\Queue\SerializesModels;
 
 class AfterPluginBulkAction
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public string $action;
 

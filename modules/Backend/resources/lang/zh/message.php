@@ -1,4 +1,5 @@
 <?php
+
 return [
     'theme_not_found' => '主题：找不到名称',
     'cant_delete_default_theme' => '无法删除默认主题',

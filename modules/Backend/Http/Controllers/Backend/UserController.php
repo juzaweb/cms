@@ -94,7 +94,7 @@ class UserController extends BackendController
 
         do_action('user.after_save', $data, $model);
     }
-    
+
     /**
      * After Save model
      *

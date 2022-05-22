@@ -15,12 +15,12 @@ class CreateConfigsTable extends Migration
             $table->text('value')->nullable();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('configs');
     }
-    
+
     private function _createConfig()
     {
         Config::setConfig('title', 'MyMo - TV Series & Movie Portal CMS');

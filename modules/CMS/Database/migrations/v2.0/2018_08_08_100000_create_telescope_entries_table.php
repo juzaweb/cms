@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
@@ -52,7 +53,7 @@ class CreateTelescopeEntriesTable extends Migration
                 $table->string('type', 20);
                 $table->longText('content');
                 $table->dateTime('created_at')->nullable();
-    
+
                 $table->unique('uuid');
                 $table->index('batch_id');
                 $table->index('family_hash');
@@ -66,10 +67,10 @@ class CreateTelescopeEntriesTable extends Migration
             function (Blueprint $table) {
                 $table->uuid('entry_uuid');
                 $table->string('tag');
-    
+
                 $table->index(['entry_uuid', 'tag']);
                 $table->index('tag');
-    
+
                 $table->foreign('entry_uuid')
                     ->references('uuid')
                     ->on('telescope_entries')

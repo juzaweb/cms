@@ -1,4 +1,5 @@
 <?php
+
 return [
     'theme_not_found' => 'Chủ đề: không tìm thấy tên',
     'cant_delete_default_theme' => 'Không thể xóa chủ đề mặc định',

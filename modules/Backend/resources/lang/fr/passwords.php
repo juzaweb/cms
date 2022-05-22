@@ -1,4 +1,5 @@
 <?php
+
 return [
     'password' => 'Les mots de passe doivent comporter au moins huit caractères et correspondre à la confirmation.',
     'reset' => 'Votre mot de passe a été réinitialisé!',

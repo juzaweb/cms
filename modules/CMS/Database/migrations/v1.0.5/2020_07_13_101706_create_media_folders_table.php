@@ -16,7 +16,7 @@ class CreateMediaFoldersTable extends Migration
             $table->timestamps();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('media_folders');

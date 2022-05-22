@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
@@ -23,7 +24,7 @@ class UpdateNotificationsTable extends Migration
             });
         }
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('notifications');

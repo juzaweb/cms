@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
@@ -24,7 +25,7 @@ class CreateSocialTokensTable extends Migration
                 $table->string('social_token', 200);
                 $table->string('social_refresh_token', 200);
                 $table->unique(['user_id', 'social_provider']);
-    
+
                 $table->foreign('user_id')
                     ->references('id')
                     ->on('users')

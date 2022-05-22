@@ -20,7 +20,7 @@ class UserController extends ApiController
     {
         //
     }
-    
+
     public function show(Request $request)
     {
         return new UserResource($request->user());

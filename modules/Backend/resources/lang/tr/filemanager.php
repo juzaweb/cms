@@ -1,4 +1,5 @@
 <?php
+
 return [
     'nav-back' => 'Geri',
     'nav-new' => 'Yeni dosya',

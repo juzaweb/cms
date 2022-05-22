@@ -44,7 +44,8 @@ class ModelExists implements Rule
     {
         $this->modelClass = $modelClass;
         $this->modelAttribute = $modelAttribute;
-        $this->closure = $closure ?? function () {};
+        $this->closure = $closure ?? function () {
+        };
     }
 
     public function passes($attribute, $value)

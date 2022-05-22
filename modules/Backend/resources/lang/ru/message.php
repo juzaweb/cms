@@ -1,4 +1,5 @@
 <?php
+
 return [
     'theme_not_found' => 'Тема: название не найдено',
     'cant_delete_default_theme' => 'Не могу удалить тему по умолчанию',

@@ -140,7 +140,8 @@ class HtmlDomNode
         }
 
         if (is_object($debug_object)) {
-            $debug_object->debug_log(3,
+            $debug_object->debug_log(
+                3,
                 'source charset: '
                 . $sourceCharset
                 . ' target charaset: '
@@ -174,9 +175,10 @@ class HtmlDomNode
         return $converted_text;
     }
 
-    static function is_utf8($str)
+    public static function is_utf8($str)
     {
-        $c = 0; $b = 0;
+        $c = 0;
+        $b = 0;
         $bits = 0;
         $len = strlen($str);
         for ($i = 0; $i < $len; $i++) {
@@ -330,7 +332,9 @@ class HtmlDomNode
             ++$i;
 
             // skip removed attribute
-            if ($val === null || $val === false) { continue; }
+            if ($val === null || $val === false) {
+                continue;
+            }
 
             $ret .= $this->_[HDOM_INFO_SPACE][$i][0];
 
@@ -364,7 +368,9 @@ class HtmlDomNode
 
     public function __unset($name)
     {
-        if (isset($this->attr[$name])) { unset($this->attr[$name]); }
+        if (isset($this->attr[$name])) {
+            unset($this->attr[$name]);
+        }
     }
 
     public function get_display_size()
@@ -426,7 +432,6 @@ class HtmlDomNode
                     }
                 }
             }
-
         }
 
         // Future enhancement:
@@ -470,7 +475,7 @@ class HtmlDomNode
         }
 
         if (is_array($class)) {
-            foreach($class as $c) {
+            foreach ($class as $c) {
                 if (isset($this->class)) {
                     if ($this->hasClass($c)) {
                         continue;
@@ -565,7 +570,9 @@ class HtmlDomNode
     public function __set($name, $value)
     {
         global $debug_object;
-        if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
+        if (is_object($debug_object)) {
+            $debug_object->debug_log_entry(1);
+        }
 
         switch ($name) {
             case 'outertext': return $this->_[HDOM_INFO_OUTER] = $value;
@@ -676,12 +683,11 @@ class HtmlDomNode
         $didx = array_search($node, $this->dom->nodes, true);
 
         if ($nidx !== false && $cidx !== false && $didx !== false) {
-
-            foreach($node->children as $child) {
+            foreach ($node->children as $child) {
                 $node->removeChild($child);
             }
 
-            foreach($node->nodes as $entity) {
+            foreach ($node->nodes as $entity) {
                 $enidx = array_search($entity, $node->nodes, true);
                 $edidx = array_search($entity, $node->dom->nodes, true);
 
@@ -696,7 +702,6 @@ class HtmlDomNode
             unset($this->dom->nodes[$didx]);
 
             $node->clear();
-
         }
     }
 
@@ -771,7 +776,9 @@ class HtmlDomNode
     protected function parse_selector($selector_string)
     {
         global $debug_object;
-        if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
+        if (is_object($debug_object)) {
+            $debug_object->debug_log_entry(1);
+        }
 
         /**
          * Pattern of CSS selectors, modified from mootools (https://mootools.net/)
@@ -837,7 +844,9 @@ class HtmlDomNode
             $m[0] = trim($m[0]);
 
             // Skip NoOps
-            if ($m[0] === '' || $m[0] === '/' || $m[0] === '//') { continue; }
+            if ($m[0] === '' || $m[0] === '/' || $m[0] === '//') {
+                continue;
+            }
 
             // Convert to lowercase
             if ($this->dom->lowercase) {
@@ -845,7 +854,9 @@ class HtmlDomNode
             }
 
             // Extract classes
-            if ($m[3] !== '') { $m[3] = explode('.', $m[3]); }
+            if ($m[3] !== '') {
+                $m[3] = explode('.', $m[3]);
+            }
 
             /* Extract attributes (pattern based on the pattern above!)
 
@@ -857,7 +868,7 @@ class HtmlDomNode
             *
             * Note: Attributes can be negated with a "!" prefix to their name
             */
-            if($m[4] !== '') {
+            if ($m[4] !== '') {
                 preg_match_all(
                     "/\[@?(!?[\w:-]+)(?:([!*^$|~]?=)[\"']?(.*?)[\"']?)?(?:\s+?([iIsS])?)?\]/is",
                     trim($m[4]),
@@ -868,9 +879,11 @@ class HtmlDomNode
                 // Replace element by array
                 $m[4] = array();
 
-                foreach($attributes as $att) {
+                foreach ($attributes as $att) {
                     // Skip empty matches
-                    if(trim($att[0]) === '') { continue; }
+                    if (trim($att[0]) === '') {
+                        continue;
+                    }
 
                     $inverted = (isset($att[1][0]) && $att[1][0] === '!');
                     $m[4][] = array(
@@ -891,7 +904,9 @@ class HtmlDomNode
             }
 
             // Clear Separator if it's a Selector List
-            if ($is_list = ($m[5] === ',')) { $m[5] = ''; }
+            if ($is_list = ($m[5] === ',')) {
+                $m[5] = '';
+            }
 
             // Remove full match before adding to results
             array_shift($m);
@@ -903,7 +918,9 @@ class HtmlDomNode
             }
         }
 
-        if (count($result) > 0) { $selectors[] = $result; }
+        if (count($result) > 0) {
+            $selectors[] = $result;
+        }
         return $selectors;
     }
 
@@ -1049,7 +1066,9 @@ class HtmlDomNode
     protected function seek($selector, &$ret, $parent_cmd, $lowercase = false)
     {
         global $debug_object;
-        if (is_object($debug_object)) { $debug_object->debug_log_entry(1); }
+        if (is_object($debug_object)) {
+            $debug_object->debug_log_entry(1);
+        }
 
         list($tag, $id, $class, $attributes, $cmb) = $selector;
         $nodes = array();
@@ -1077,8 +1096,9 @@ class HtmlDomNode
             && $this->parent
             && in_array($this, $this->parent->children)) { // Next-Sibling Combinator
             $index = array_search($this, $this->parent->children, true) + 1;
-            if ($index < count($this->parent->children))
+            if ($index < count($this->parent->children)) {
                 $nodes[] = $this->parent->children[$index];
+            }
         } elseif ($parent_cmd === '~'
             && $this->parent
             && in_array($this, $this->parent->children)) { // Subsequent Sibling Combinator
@@ -1089,23 +1109,23 @@ class HtmlDomNode
         // Go throgh each element starting at this element until the end tag
         // Note: If this element is a void tag, any previous void element is
         // skipped.
-        foreach($nodes as $node) {
+        foreach ($nodes as $node) {
             $pass = true;
 
             // Skip root nodes
-            if(!$node->parent) {
+            if (!$node->parent) {
                 $pass = false;
             }
 
             // Handle 'text' selector
-            if($pass && $tag === 'text' && $node->tag === 'text') {
+            if ($pass && $tag === 'text' && $node->tag === 'text') {
                 $ret[array_search($node, $this->dom->nodes, true)] = 1;
                 unset($node);
                 continue;
             }
 
             // Skip if node isn't a child node (i.e. text nodes)
-            if($pass && !in_array($node, $node->parent->children, true)) {
+            if ($pass && !in_array($node, $node->parent->children, true)) {
                 $pass = false;
             }
 
@@ -1124,7 +1144,9 @@ class HtmlDomNode
                 // Note: Only consider the first ID (as browsers do)
                 $node_id = explode(' ', trim($node->attr['id']))[0];
 
-                if($id !== $node_id) { $pass = false; }
+                if ($id !== $node_id) {
+                    $pass = false;
+                }
             }
 
             // Check if all class(es) exist
@@ -1136,8 +1158,8 @@ class HtmlDomNode
                         $node_classes = array_map('strtolower', $node_classes);
                     }
 
-                    foreach($class as $c) {
-                        if(!in_array($c, $node_classes)) {
+                    foreach ($class as $c) {
+                        if (!in_array($c, $node_classes)) {
                             $pass = false;
                             break;
                         }
@@ -1152,8 +1174,8 @@ class HtmlDomNode
                 && $attributes !== ''
                 && is_array($attributes)
                 && !empty($attributes)) {
-                foreach($attributes as $a) {
-                    list (
+                foreach ($attributes as $a) {
+                    list(
                         $att_name,
                         $att_expr,
                         $att_val,
@@ -1177,13 +1199,19 @@ class HtmlDomNode
 
                         // Find index of current element in parent
                         foreach ($node->parent->children as $c) {
-                            if ($c->tag === $node->tag) ++$count;
-                            if ($c === $node) break;
+                            if ($c->tag === $node->tag) {
+                                ++$count;
+                            }
+                            if ($c === $node) {
+                                break;
+                            }
                         }
 
                         // If this is the correct node, continue with next
                         // attribute
-                        if ($count === (int)$att_name) continue;
+                        if ($count === (int)$att_name) {
+                            continue;
+                        }
                     }
 
                     // Check attribute availability
@@ -1202,7 +1230,9 @@ class HtmlDomNode
                     }
 
                     // Continue with next attribute if expression isn't defined
-                    if ($att_expr === '') continue;
+                    if ($att_expr === '') {
+                        continue;
+                    }
 
                     // If they have told us that this is a "plaintext"
                     // search then we want the plaintext of the node - right?
@@ -1214,7 +1244,8 @@ class HtmlDomNode
                     }
 
                     if (is_object($debug_object)) {
-                        $debug_object->debug_log(2,
+                        $debug_object->debug_log(
+                            2,
                             'testing node: '
                             . $node->tag
                             . ' for attribute: '
@@ -1245,7 +1276,8 @@ class HtmlDomNode
                     }
 
                     if (is_object($debug_object)) {
-                        $debug_object->debug_log(2,
+                        $debug_object->debug_log(
+                            2,
                             'after match: '
                             . ($check ? 'true' : 'false')
                         );
@@ -1259,7 +1291,9 @@ class HtmlDomNode
             }
 
             // Found a match. Add to list and clear node
-            if ($pass) $ret[$node->_[HDOM_INFO_BEGIN]] = 1;
+            if ($pass) {
+                $ret[$node->_[HDOM_INFO_BEGIN]] = 1;
+            }
             unset($node);
         }
         // It's passed by reference so this is actually what this function returns.
@@ -1271,7 +1305,9 @@ class HtmlDomNode
     protected function match($exp, $pattern, $value, $case_sensitivity)
     {
         global $debug_object;
-        if (is_object($debug_object)) {$debug_object->debug_log_entry(1);}
+        if (is_object($debug_object)) {
+            $debug_object->debug_log_entry(1);
+        }
 
         if ($case_sensitivity === 'i') {
             $pattern = strtolower($pattern);

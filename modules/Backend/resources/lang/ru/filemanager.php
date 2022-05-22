@@ -1,4 +1,5 @@
 <?php
+
 return [
     'nav-back' => 'Назад',
     'nav-new' => 'Новая папка',

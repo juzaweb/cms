@@ -83,9 +83,10 @@ use Spatie\Feed\FeedItem;
  */
 class Post extends Model implements Feedable
 {
-    use PostTypeModel, HasFactory;
+    use PostTypeModel;
+    use HasFactory;
 
-    const STATUS_PUBLISH = 'publish';
+    public const STATUS_PUBLISH = 'publish';
 
     protected $table = 'posts';
 
