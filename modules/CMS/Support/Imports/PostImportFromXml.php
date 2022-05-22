@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Support\Imports;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Juzaweb\CMS\Support\Collections\BloggerCollection;
 use Illuminate\Support\Facades\Cache;
@@ -59,19 +60,19 @@ class PostImportFromXml
         return $this;
     }
 
-    public function setUserID($userId): static
+    public function setUserID(int $userId): static
     {
         $this->userId = $userId;
 
         return $this;
     }
 
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
 
-    protected function importItems($items)
+    protected function importItems($items): void
     {
         foreach ($items as $item) {
             $item = (array) $item;
@@ -112,7 +113,7 @@ class PostImportFromXml
         }
     }
 
-    protected function getCreateTaxonomies(array $categories)
+    protected function getCreateTaxonomies(array $categories): array
     {
         $taxonomies = [];
 
@@ -131,7 +132,7 @@ class PostImportFromXml
         return $taxonomies;
     }
 
-    protected function setCacheInfo(array $update)
+    protected function setCacheInfo(array $update): ?array
     {
         $info = $this->getCacheInfo([]);
 
@@ -147,22 +148,20 @@ class PostImportFromXml
         return Cache::store('file')->get($this->getCacheKey(), $default);
     }
 
-    protected function collection()
+    protected function collection(): bool|Collection
     {
-        switch ($this->type) {
-            case 'blogger':
-                return app(BloggerCollection::class)->getCollection($this->getFilePath());
-        }
-
-        return false;
+        return match ($this->type) {
+            'blogger' => app(BloggerCollection::class)->getCollection($this->getFilePath()),
+            default => false,
+        };
     }
 
-    protected function getCacheKey()
+    protected function getCacheKey(): string
     {
         return cache_prefix('imports_' . md5($this->file));
     }
 
-    protected function getFilePath()
+    protected function getFilePath(): string
     {
         return Storage::disk('public')->path($this->file);
     }
