@@ -20,20 +20,20 @@ use Symfony\Component\Finder\SplFileInfo;
 class TransFromEnglish extends TranslationCommand
 {
     protected $name = 'trans:generate-translate';
-    
+
     public function handle()
     {
         $this->transFromEnglish();
-        
+
         $this->transToFile();
-        
+
         return self::SUCCESS;
     }
-    
+
     protected function transFromEnglish()
     {
         $languages = ['vi', 'fr', 'tr', 'zh', 'ru', 'ko', 'ja'];
-    
+
         foreach ($languages as $language) {
             $trans = Translation::from('jw_translations AS a')
                 ->where('locale', '=', 'en')
@@ -51,19 +51,19 @@ class TransFromEnglish extends TranslationCommand
                     }
                 )
                 ->get();
-        
+
             foreach ($trans as $tran) {
                 $value = GoogleTranslate::translate(
                     'en',
                     $language,
                     $tran->value
                 );
-            
+
                 if (empty($value)) {
                     $this->error("Translate {$tran->value} fail");
                     die();
                 }
-            
+
                 $newTran = Translation::firstOrCreate(
                     [
                         'locale' => $language,
@@ -77,26 +77,26 @@ class TransFromEnglish extends TranslationCommand
                         'value' => $value
                     ]
                 );
-            
+
                 if ($newTran->wasRecentlyCreated) {
                     $this->info("Translated {$tran->value} to {$newTran->value}");
                 }
-            
+
                 sleep(1);
             }
         }
     }
-    
+
     protected function transToFile()
     {
         $objects = $this->allObjects();
         $languages = ['vi', 'fr', 'tr', 'zh', 'ru', 'ko', 'ja'];
-        
+
         foreach ($objects as $key => $object) {
             if ($key != 'core') {
                 continue;
             }
-            
+
             foreach ($languages as $language) {
                 $path = $object->get('path');
                 $enFiles = File::files("{$path}/en");
@@ -106,18 +106,18 @@ class TransFromEnglish extends TranslationCommand
                     }
                 )
                     ->toArray();
-                
+
                 if (!is_dir("{$path}/{$language}")) {
                     mkdir("{$path}/{$language}");
                 }
-                
+
                 foreach ($groups as $group) {
                     $current = [];
                     $fileLang = "{$path}/{$language}/{$group}.php";
                     if (file_exists($fileLang)) {
                         $current = include $fileLang;
                     }
-                    
+
                     $trans = Translation::where('locale', '=', $language)
                         ->where('namespace', '=', $object->get('namespace'))
                         ->where('group', '=', $group)
@@ -127,14 +127,14 @@ class TransFromEnglish extends TranslationCommand
                                 return [$item->key => $item->value];
                             }
                         )->toArray();
-                    
+
                     if (empty($trans)) {
                         continue;
                     }
-                    
+
                     $trans = $this->parseChildKeyArray($trans);
                     $trans = array_merge($trans, $current);
-                    
+
                     $str = '<?php' . PHP_EOL . 'return ' . $this->varExport($trans) . ';' . PHP_EOL;
                     File::put("{$path}/{$language}/{$group}.php", $str);
                 }
@@ -142,17 +142,17 @@ class TransFromEnglish extends TranslationCommand
         }
     }
 
-    protected function parseChildKeyArray(array $data)
+    protected function parseChildKeyArray(array $data): array
     {
         $result = [];
         foreach ($data as $key => $item) {
             Arr::set($result, $key, $item);
         }
-        
+
         return $result;
     }
-    
-    protected function varExport($expression)
+
+    protected function varExport($expression): string
     {
         $export = var_export($expression, true);
         $export = preg_replace("/^([ ]*)(.*)/m", '$1$1$2', $export);
@@ -162,7 +162,6 @@ class TransFromEnglish extends TranslationCommand
             [null, ']$1', ' => ['],
             $array
         );
-        $export = join(PHP_EOL, array_filter(["["] + $array));
-        return $export;
+        return join(PHP_EOL, array_filter(["["] + $array));
     }
 }

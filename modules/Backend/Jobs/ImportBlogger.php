@@ -82,7 +82,6 @@ class ImportBlogger implements ShouldQueue
 
         try {
             $thumb = (str_get_html($item['content']))->find('img', 0)->src;
-
             $thumb = FileManager::addFile(
                 $thumb,
                 'image',

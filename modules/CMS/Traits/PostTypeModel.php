@@ -44,15 +44,10 @@ trait PostTypeModel
     {
         $builder = self::with(
             [
-                'createdBy' => function ($q) {
-                    $q->cacheFor(3600);
-                },
-                'taxonomies' => function ($q) {
-                    $q->cacheFor(3600);
-                },
+                'createdBy',
+                'taxonomies',
             ]
-        )->cacheFor(3600)
-        ->select(
+        )->select(
             [
                 'id',
                 'title',
@@ -66,8 +61,7 @@ trait PostTypeModel
                 'created_at',
                 'json_metas',
             ]
-        )
-        ->wherePublish();
+        )->wherePublish();
 
         $builder = apply_filters('post.selectFrontendBuilder', $builder);
 
