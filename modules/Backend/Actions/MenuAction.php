@@ -388,7 +388,11 @@ class MenuAction extends Action
         }
 
         $updater = app(CmsUpdater::class);
-        if ($updater->checkForUpdate()) {
+
+        $currentVersion = $updater->getCurrentVersion();
+        $versionAvailable = $updater->getVersionAvailable();
+
+        if (version_compare($currentVersion, $versionAvailable, '>')) {
             $notify = new Notification();
 
             $notify->setUsers(
@@ -405,7 +409,7 @@ class MenuAction extends Action
 
             $notify->send();
 
-            Cache::store('file')->forever($key, 1);
+            Cache::store('file')->forever($key, $versionAvailable);
         } else {
             Cache::store('file')->put($key, 1, 3600);
         }

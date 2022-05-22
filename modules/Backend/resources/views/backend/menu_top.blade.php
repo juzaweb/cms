@@ -24,19 +24,20 @@
 
     @do_action('backend.menu_top')
 
-    <div class="juzaweb__topbar__actionsDropdown dropdown mr-4 d-none d-sm-block">
-        <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="0,15">
-            <i class="dropdown-toggle-icon fa fa-bell-o"></i>
-        </a>
-        @php
-            $total = count_unread_notifications();
+    @php
+        $total = count_unread_notifications();
 
-            $items = Auth::user()
-                ->unreadNotifications()
-                ->orderBy('id', 'DESC')
-                ->limit(5)
-                ->get(['id', 'data', 'created_at']);
-        @endphp
+        $items = Auth::user()
+            ->unreadNotifications()
+            ->orderBy('id', 'DESC')
+            ->limit(5)
+            ->get(['id', 'data', 'created_at']);
+    @endphp
+
+    <div class="juzaweb__topbar__actionsDropdown juzaweb__topbar__notify dropdown mr-4 d-none d-sm-block">
+        <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="0,15">
+            <i class="dropdown-toggle-icon fa fa-bell-o"></i> <span>{{ $total }}</span>
+        </a>
 
         <div class="juzaweb__topbar__actionsDropdownMenu dropdown-menu dropdown-menu-right" role="menu">
             <div style="width: 350px;">
