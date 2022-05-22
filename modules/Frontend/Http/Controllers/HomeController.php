@@ -28,7 +28,9 @@ class HomeController extends FrontendController
         $posts = Post::selectFrontendBuilder()
             ->whereType('posts')
             ->orderBy('id', 'DESC')
-            ->paginate(10);
+            ->paginate(
+                get_config('posts_per_page', 12)
+            );
 
         $page = PostResource::collection($posts)->response()->getData(true);
 

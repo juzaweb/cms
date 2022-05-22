@@ -24,7 +24,7 @@ class FeedController
             )
             ->wherePublish()
             ->latest()
-            ->limit(10)
+            ->limit(get_config('posts_per_rss', 10))
             ->get();
 
         return new Feed(
@@ -58,7 +58,7 @@ class FeedController
             ->wherePublish()
             ->whereTaxonomy($taxonomy->id)
             ->latest()
-            ->limit(10)
+            ->limit(get_config('posts_per_rss', 10))
             ->get();
 
         return new Feed(

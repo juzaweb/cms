@@ -78,6 +78,8 @@ class Facades
             'fb_app_id',
             'backend_messages',
             'socialites',
+            'posts_per_page',
+            'posts_per_rss',
         ];
     }
 
