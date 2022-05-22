@@ -18,13 +18,13 @@ class CreateLanguageLinesTable extends Migration
         Schema::create(
             'language_lines',
             function (Blueprint $table) {
-                    $table->id();
-                    $table->string('namespace', 50)->index();
-                    $table->string('group', 50)->index();
-                    $table->string('key', 150)->index();
-                    $table->text('text');
-                    $table->timestamps();
-                }
+                $table->id();
+                $table->string('namespace', 50)->index();
+                $table->string('group', 50)->index();
+                $table->string('key', 150)->index();
+                $table->text('text');
+                $table->timestamps();
+            }
         );
     }
 
