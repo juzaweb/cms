@@ -3,21 +3,20 @@
 namespace Juzaweb\CMS\Support\Collections;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
-class BloggerCollection
+class BloggerXMLCollection implements XMLCollectionInterface
 {
-    public function getCollection($filePath)
+    public function getCollection($filePath): Collection
     {
-        $xmlObject = simplexml_load_file($filePath);
-        $json = json_encode($xmlObject);
-        $data = json_decode($json, true);
+        $data = $this->readXMLFile($filePath);
         $result = [];
 
         $data = collect(Arr::get($data, 'entry', []))->filter(
             function ($item) {
                 return (strpos($item['id'], 'post-')
                     && $item['author']['name'] != 'Unknown'
-                    && strpos($item['category']['@attributes']['term'] ?? '', 'kind#comment') === false);
+                    && !str_contains($item['category']['@attributes']['term'] ?? '', 'kind#comment'));
             }
         )->reverse()->all();
 
@@ -28,7 +27,13 @@ class BloggerCollection
         return collect($result);
     }
 
-    protected function collectItemData($item)
+    protected function readXMLFile($filePath): array
+    {
+        $xmlObject = simplexml_load_file($filePath);
+        return json_decode(json_encode($xmlObject), true);
+    }
+
+    protected function collectItemData($item): array
     {
         $href = Arr::get($item, 'link')[count($item['link']) - 1]['@attributes']['href'];
         $slug = last(explode('/', $href));
@@ -39,6 +44,7 @@ class BloggerCollection
         $data['title'] = $item['title'];
         $data['content'] = $item['content'];
         $data['thumbnail'] = $thumb;
+        $data['type'] = 'posts';
         $data['slug'] = $slug;
 
         $categories = collect($item['category'])

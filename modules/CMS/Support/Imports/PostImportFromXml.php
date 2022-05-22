@@ -4,11 +4,12 @@ namespace Juzaweb\CMS\Support\Imports;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\CMS\Support\Collections\BloggerCollection;
+use Juzaweb\CMS\Support\Collections\BloggerXMLCollection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Support\Collections\WordpressXMLCollection;
 use Juzaweb\CMS\Support\FileManager;
 
 class PostImportFromXml
@@ -16,6 +17,8 @@ class PostImportFromXml
     protected string $file;
 
     protected string $type;
+
+    protected string $postStatus = 'publish';
 
     protected int $chunkSize = 50;
 
@@ -67,9 +70,21 @@ class PostImportFromXml
         return $this;
     }
 
+    public function setPostStatus(string $postStatus): static
+    {
+        $this->postStatus = $postStatus;
+
+        return $this;
+    }
+
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    public function getCacheInfo($default = null): ?array
+    {
+        return Cache::store('file')->get($this->getCacheKey(), $default);
     }
 
     protected function importItems($items): void
@@ -90,8 +105,7 @@ class PostImportFromXml
                     $item['thumbnail'] = null;
                 }
 
-                $item['type'] = 'posts';
-                $item['status'] = 'publish';
+                $item['status'] = $this->postStatus;
                 $item['created_by'] = $this->userId;
                 $item['updated_by'] = $this->userId;
 
@@ -143,15 +157,11 @@ class PostImportFromXml
         return $info;
     }
 
-    public function getCacheInfo($default = null): ?array
-    {
-        return Cache::store('file')->get($this->getCacheKey(), $default);
-    }
-
     protected function collection(): bool|Collection
     {
         return match ($this->type) {
-            'blogger' => app(BloggerCollection::class)->getCollection($this->getFilePath()),
+            'blogger' => app(BloggerXMLCollection::class)->getCollection($this->getFilePath()),
+            'wordpress' => app(WordpressXMLCollection::class)->getCollection($this->getFilePath()),
             default => false,
         };
     }

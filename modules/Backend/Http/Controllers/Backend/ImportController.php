@@ -16,7 +16,7 @@ use Juzaweb\CMS\Support\Imports\PostImportFromXml;
 
 class ImportController extends BackendController
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $title = trans('cms::app.import');
 
@@ -26,7 +26,7 @@ class ImportController extends BackendController
         );
     }
 
-    public function import(ImportRequest $request)
+    public function import(ImportRequest $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
         global $jw_user;
 

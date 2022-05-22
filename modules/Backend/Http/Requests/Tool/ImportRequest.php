@@ -6,11 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ImportRequest extends FormRequest
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             'file' => 'required|string',
-            'type' => 'required|in:blogger'
+            'type' => 'required|in:blogger,wordpress'
         ];
     }
 }
