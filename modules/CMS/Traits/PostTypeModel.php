@@ -61,8 +61,7 @@ trait PostTypeModel
                 'created_at',
                 'json_metas',
             ]
-        )
-        ->wherePublish();
+        )->wherePublish();
 
         $builder = apply_filters('post.selectFrontendBuilder', $builder);
 
