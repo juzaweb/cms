@@ -505,6 +505,15 @@ Form file management
     display: none;
 }
 
+.juzaweb__layout__header {
+    height: 44px;
+}
+
+.juzaweb__topbar {
+    min-height: 44px;
+    height: 44px;
+}
+
 .juzaweb__topbar .juzaweb__btn-top {
     position: absolute;
     right: 20px;
@@ -533,6 +542,17 @@ Form file management
 
 .dd-item .dd-nodrag {
     cursor: auto;
+}
+
+.juzaweb__topbar__notify .dropdown-toggle span {
+    font-size: 10px;
+    background: #419af9;
+    border-radius: 6px;
+    position: absolute;
+    width: 15px;
+    text-align: center;
+    color: white;
+    z-index: 999;
 }
 
 @media (max-width: 767px) {

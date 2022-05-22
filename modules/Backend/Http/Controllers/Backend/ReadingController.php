@@ -20,24 +20,33 @@ class ReadingController extends BackendController
     {
         $title = trans('cms::app.reading_settings');
 
-        return view('cms::backend.reading.index', compact(
-            'title'
-        ));
+        return view(
+            'cms::backend.reading.index',
+            compact(
+                'title'
+            )
+        );
     }
 
     public function save(Request $request)
     {
-        $request->validate([
-            'show_on_front' => 'required|string|in:posts,page',
-            'home_page' => 'required_if:show_on_front,page',
-            'post_page' => 'string|nullable',
-        ]);
+        $request->validate(
+            [
+                'show_on_front' => 'required|string|in:posts,page',
+                'home_page' => 'required_if:show_on_front,page',
+                'post_page' => 'string|nullable',
+            ]
+        );
 
-        $settings = $request->only([
-            'show_on_front',
-            'home_page',
-            'post_page',
-        ]);
+        $settings = $request->only(
+            [
+                'show_on_front',
+                'home_page',
+                'post_page',
+                'posts_per_page',
+                'posts_per_rss',
+            ]
+        );
 
         if (Arr::get($settings, 'show_on_front') == 'posts') {
             $settings['home_page'] = null;
@@ -48,8 +57,10 @@ class ReadingController extends BackendController
             set_config($key, $value);
         }
 
-        return $this->success([
-            'message' => trans('cms::app.save_successfully'),
-        ]);
+        return $this->success(
+            [
+                'message' => trans('cms::app.save_successfully'),
+            ]
+        );
     }
 }

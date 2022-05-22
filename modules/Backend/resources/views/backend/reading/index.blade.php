@@ -42,6 +42,26 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">
+                        {{ trans('Blog pages show at most') }}
+                    </label>
+
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="posts_per_page" value="{{ get_config('posts_per_page', 12) }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">
+                        {{ trans('Syndication feeds show the most recent') }}
+                    </label>
+
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="posts_per_rss" value="{{ get_config('posts_per_rss', 10) }}">
+                    </div>
+                </div>
+
                 <div class="mt-3">
                     <button type="submit" class="btn btn-success">
                         <i class="fa fa-save"></i> {{ trans('cms::app.save') }}

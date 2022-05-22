@@ -10,11 +10,15 @@
 
 namespace Juzaweb\Backend\Actions;
 
+use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Notification;
 use Juzaweb\CMS\Support\Theme\CustomMenuBox;
+use Juzaweb\CMS\Support\Updater\CmsUpdater;
 use Juzaweb\CMS\Version;
 use Juzaweb\Frontend\Http\Controllers\PageController;
 use Juzaweb\Frontend\Http\Controllers\PostController;
@@ -32,6 +36,7 @@ class MenuAction extends Action
         $this->addAction(self::INIT_ACTION, [$this, 'addMenuBoxs'], 50);
         $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addTaxonomiesForm']);
         $this->addAction(self::INIT_ACTION, [$this, 'registerEmailHooks']);
+        $this->addAction(self::BACKEND_INIT, [$this, 'checkAndNotifyUpdate']);
     }
 
     public function addBackendMenu()
@@ -373,5 +378,40 @@ class MenuAction extends Action
                 ],
             ]
         );
+    }
+
+    public function checkAndNotifyUpdate(): void
+    {
+        $key = cache_prefix('check_cms_update');
+        if (Cache::store('file')->has($key)) {
+            return;
+        }
+
+        $updater = app(CmsUpdater::class);
+
+        $currentVersion = $updater->getCurrentVersion();
+        $versionAvailable = $updater->getVersionAvailable();
+
+        if (version_compare($currentVersion, $versionAvailable, '>')) {
+            $notify = new Notification();
+
+            $notify->setUsers(
+                User::where('is_admin', 1)
+                    ->active()
+                    ->get()
+            );
+
+            $notify->setSubject('New Version CMS Available !');
+
+            $notify->setBody('CMS has a new version, update now!');
+
+            $notify->setUrl(route('admin.update'));
+
+            $notify->send();
+
+            Cache::store('file')->forever($key, $versionAvailable);
+        } else {
+            Cache::store('file')->put($key, 1, 3600);
+        }
     }
 }

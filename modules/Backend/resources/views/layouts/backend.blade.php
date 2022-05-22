@@ -68,6 +68,15 @@
                 <div class="mb-3"></div>
             @endif
 
+            @if ($version = cache()->store('file')->get(cache_prefix('check_cms_update')))
+            @if ($version != 1)
+            <div class="alert alert-warning w-50 ml-3">
+                <a href="https://juzaweb.com/documentation/changelog">JuzaCms {{ $version }}</a> {{ __('is available!') }} <a href="{{ route('admin.update') }}">{{ __('Please update now') }}</a>.
+            </div>
+            @endif
+
+            @endif
+
             <h4 class="font-weight-bold ml-3 text-capitalize">{{ $title }}</h4>
 
             <div class="juzaweb__utils__content">

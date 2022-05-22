@@ -23,6 +23,7 @@ use Juzaweb\CMS\Support\JuzawebApi;
 /**
  * @method void beforeFinish()
  * @method void afterFinish()
+ * @method void afterUpdateFileAndFolder()
 */
 abstract class UpdateManager
 {

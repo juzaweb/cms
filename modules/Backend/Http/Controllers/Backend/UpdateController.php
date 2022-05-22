@@ -13,6 +13,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
@@ -297,6 +298,12 @@ class UpdateController extends BackendController
 
     public function updateSuccess(Request $request): JsonResponse
     {
+        $type = $request->input('type');
+        if ($type == 'cms') {
+            $key = cache_prefix('check_cms_update');
+            Cache::store('file')->pull($key);
+        }
+
         event(new DumpAutoloadPlugin());
 
         app(BackendMessageContract::class)->deleteGroup('require_plugins');

@@ -20,11 +20,11 @@ class Admin
         }
 
         if (!has_permission()) {
-            return abort(403, 'You can not access this page.');
+            return abort(403, __('You can not access this page.'));
         }
-    
+
         do_action(Action::BACKEND_INIT, $request);
-        
+
         return $next($request);
     }
 }

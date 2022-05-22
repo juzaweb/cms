@@ -44,6 +44,31 @@ return [
         ],
     ],
 
+    'notification' => [
+        /**
+         * Method send notification
+         *
+         * Support: sync, queue, cron
+         * Default: sync
+         */
+        'method' => 'sync',
+
+        /**
+         * Send mail via
+         *
+         * Support: database, mail
+         */
+        'via' => [
+            'database' => [
+                'enable' => true,
+            ],
+            'mail' => [
+                'enable' => true,
+                'connection' => 'default',
+            ]
+        ]
+    ],
+
     'theme' => [
         /**
          * Enable upload themes
