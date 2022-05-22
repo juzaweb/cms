@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +26,7 @@ class CreatePostRatingsTable extends Migration
             }
         );
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('post_ratings');

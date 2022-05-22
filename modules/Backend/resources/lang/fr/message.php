@@ -1,4 +1,5 @@
 <?php
+
 return [
     'theme_not_found' => 'Thème : nom introuvable',
     'cant_delete_default_theme' => 'Impossible de supprimer le thème par défaut',

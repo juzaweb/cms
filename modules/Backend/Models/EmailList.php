@@ -58,10 +58,10 @@ class EmailList extends Model
         'error' => 'array',
     ];
 
-    const STATUS_SUCCESS = 'success';
-    const STATUS_PENDING = 'pending';
-    const STATUS_CANCEL = 'cancel';
-    const STATUS_ERROR = 'error';
+    public const STATUS_SUCCESS = 'success';
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_CANCEL = 'cancel';
+    public const STATUS_ERROR = 'error';
 
     public static function mapParams($string, $params = []): string
     {

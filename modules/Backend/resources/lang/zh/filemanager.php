@@ -1,4 +1,5 @@
 <?php
+
 return [
     'nav-back' => '后退',
     'nav-new' => '新建文件夹',

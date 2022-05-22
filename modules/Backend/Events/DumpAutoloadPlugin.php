@@ -16,7 +16,9 @@ use Illuminate\Queue\SerializesModels;
 
 class DumpAutoloadPlugin
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public function __construct()
     {

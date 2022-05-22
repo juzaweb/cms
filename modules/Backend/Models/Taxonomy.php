@@ -51,7 +51,8 @@ use Juzaweb\CMS\Models\Model;
  */
 class Taxonomy extends Model
 {
-    use TaxonomyModel, HasFactory;
+    use TaxonomyModel;
+    use HasFactory;
 
     protected $table = 'taxonomies';
 

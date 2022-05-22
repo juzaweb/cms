@@ -20,16 +20,17 @@ class CreateMediaFilesTable extends Migration
             $table->bigInteger('user_id')->index();
             $table->timestamps();
         });
-        
+
         //$this->_createFiles();
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('media_files');
     }
-    
-    private function _createFiles() {
+
+    private function _createFiles()
+    {
         DB::table('files')->insert([
             [
                 'name' => 'logo.png',

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'nav-back' => 'Mặt sau',
     'nav-new' => 'Thư mục mới',

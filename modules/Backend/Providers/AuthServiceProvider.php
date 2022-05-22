@@ -33,17 +33,17 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-    
+
         Gate::before(
             function ($user, $ability) {
                 if ($user->isAdmin()) {
                     return true;
                 }
-            
+
                 return null;
             }
         );
-    
+
         ResetPassword::createUrlUsing(
             function ($notifiable, $token) {
                 return config('app.frontend_url')

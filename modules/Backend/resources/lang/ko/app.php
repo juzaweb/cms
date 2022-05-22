@@ -1,4 +1,5 @@
 <?php
+
 return [
     'home' => '집',
     'widgets' => '위젯',

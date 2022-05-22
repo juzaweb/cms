@@ -1,4 +1,5 @@
 <?php
+
 return [
     'theme_not_found' => 'Tema :isim bulunamadı',
     'cant_delete_default_theme' => 'Varsayılan tema silinemiyor',

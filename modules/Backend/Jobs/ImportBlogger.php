@@ -25,10 +25,10 @@ use Juzaweb\CMS\Support\FileManager;
 
 class ImportBlogger implements ShouldQueue
 {
-    use Dispatchable,
-        InteractsWithQueue,
-        Queueable,
-        SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public $timeout = 3600;
 

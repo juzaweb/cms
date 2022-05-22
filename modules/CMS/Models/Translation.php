@@ -37,8 +37,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Translation extends Model
 {
-    const STATUS_SAVED = 0;
-    const STATUS_CHANGED = 1;
+    public const STATUS_SAVED = 0;
+    public const STATUS_CHANGED = 1;
 
     public $timestamps = false;
     protected $table = 'jw_translations';

@@ -5,6 +5,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace TwigBridge\Extension\Laravel;
 
 use Twig\Extension\AbstractExtension;
@@ -21,7 +22,7 @@ class Model extends AbstractExtension
     public function getNodeVisitors()
     {
         return [
-            new GetAttrAdjuster,
+            new GetAttrAdjuster(),
         ];
     }
 }

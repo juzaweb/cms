@@ -1,4 +1,5 @@
 <?php
+
 return [
     'home' => 'Дом',
     'widgets' => 'Виджеты',

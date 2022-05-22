@@ -62,7 +62,7 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
             $themes[$name] = $collection ? $theme->getInfo()->toArray() : $theme;
         }
 
-        return $collection ? (new Collection($themes)): $themes;
+        return $collection ? (new Collection($themes)) : $themes;
     }
 
     public function find(string $name): ?Theme

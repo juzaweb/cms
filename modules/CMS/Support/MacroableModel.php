@@ -26,7 +26,9 @@ class MacroableModel
     {
         $this->checkModelSubclass($model);
 
-        if (! isset($this->macros[$name])) $this->macros[$name] = [];
+        if (! isset($this->macros[$name])) {
+            $this->macros[$name] = [];
+        }
         $this->macros[$name][$model] = $closure;
         $this->syncMacros($name);
     }
@@ -56,7 +58,9 @@ class MacroableModel
 
     public function modelsThatImplement($name)
     {
-        if (! isset($this->macros[$name])) return [];
+        if (! isset($this->macros[$name])) {
+            return [];
+        }
         return array_keys($this->macros[$name]);
     }
 
@@ -82,7 +86,7 @@ class MacroableModel
     private function syncMacros($name)
     {
         $models = $this->macros[$name];
-        Builder::macro($name, function(...$args) use ($name, $models){
+        Builder::macro($name, function (...$args) use ($name, $models) {
             $class = get_class($this->getModel());
 
             if (! isset($models[$class])) {

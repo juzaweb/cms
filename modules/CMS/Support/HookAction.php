@@ -18,9 +18,9 @@ use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
 
 class HookAction
 {
-    use RegisterHookAction,
-        GetHookAction,
-        Macroable;
+    use RegisterHookAction;
+    use GetHookAction;
+    use Macroable;
 
     public function addAction($tag, $callback, $priority = 20, $arguments = 1): void
     {
