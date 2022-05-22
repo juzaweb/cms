@@ -34,9 +34,45 @@ class PostImportFromXml
         $this->type = $type;
 
         $data = $this->getCacheInfo();
+        $collection = $this->collection();
 
-        $items = $this->collection()->forPage($data['next_page'], $this->chunkSize);
+        if (empty($data)) {
+            $cacheData = [
+                'total' => $collection->count(),
+                'next_page' => 1,
+                'max_page' => $collection->chunk($this->chunkSize)->count()
+            ];
 
+            $data = $this->setCacheInfo($cacheData);
+        }
+
+        $items = $collection->forPage($data['next_page'], $this->chunkSize);
+
+        $this->importItems($items);
+
+        if ($data['next_page'] + 1 <= $data['max_page']) {
+            $this->setCacheInfo(['next_page' => $data['next_page'] + 1]);
+        } else {
+            Cache::store('file')->forget($this->getCacheKey());
+        }
+
+        return $this;
+    }
+
+    public function setUserID($userId): static
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    protected function importItems($items)
+    {
         foreach ($items as $item) {
             $item = (array) $item;
             DB::beginTransaction();
@@ -74,26 +110,6 @@ class PostImportFromXml
                 $this->errors[] = $e->getMessage();
             }
         }
-
-        if ($data['next_page'] + 1 <= $data['max_page']) {
-            $this->setCacheInfo(['next_page' => $data['next_page'] + 1]);
-        } else {
-            Cache::store('file')->pull($this->getCacheKey());
-        }
-
-        return $this;
-    }
-
-    public function setUserID($userId): static
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    public function getErrors()
-    {
-        return $this->errors;
     }
 
     protected function getCreateTaxonomies(array $categories)
@@ -115,34 +131,20 @@ class PostImportFromXml
         return $taxonomies;
     }
 
-    protected function setCacheInfo(array $data)
+    protected function setCacheInfo(array $update)
     {
-        $info = Cache::store('file')->get($this->getCacheKey(), []);
+        $info = $this->getCacheInfo([]);
 
-        $info = array_merge($info, $data);
+        $info = array_merge($info, $update);
 
         Cache::store('file')->forever($this->getCacheKey(), $info);
 
         return $info;
     }
 
-    public function getCacheInfo(): array
+    public function getCacheInfo($default = null): ?array
     {
-        if ($info = Cache::store('file')->get($this->getCacheKey())) {
-            return $info;
-        }
-
-        $collection = $this->collection();
-
-        $cacheData = [
-            'total' => $collection->count(),
-            'next_page' => 1,
-            'max_page' => $collection->chunk($this->chunkSize)->count()
-        ];
-
-        Cache::store('file')->forever($this->getCacheKey(), $cacheData);
-
-        return $cacheData;
+        return Cache::store('file')->get($this->getCacheKey(), $default);
     }
 
     protected function collection()
@@ -157,7 +159,7 @@ class PostImportFromXml
 
     protected function getCacheKey()
     {
-        return cache_prefix('import_' . md5($this->file));
+        return cache_prefix('imports_' . md5($this->file));
     }
 
     protected function getFilePath()

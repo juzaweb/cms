@@ -13,7 +13,6 @@ namespace Juzaweb\Backend\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Traits\ModelCache;
 
 /**
  * Juzaweb\Backend\Models\Resource
@@ -58,12 +57,6 @@ use Juzaweb\CMS\Traits\ModelCache;
  */
 class Resource extends Model
 {
-    use ModelCache;
-
-    public $cachePrefix = 'resources_';
-
-    public $cacheTags = ['resources_'];
-
     protected $table = 'resources';
 
     protected $fillable = [
@@ -99,7 +92,6 @@ class Resource extends Model
     public static function selectFrontendBuilder()
     {
         $builder = self::query()
-            ->cacheFor(3600)
             ->wherePublish();
 
         return $builder;
@@ -138,18 +130,23 @@ class Resource extends Model
                 $val = json_encode($val);
             }
 
-            $this->metas()->updateOrCreate([
-                'meta_key' => $key
-            ], [
-                'meta_value' => $val
-            ]);
+            $this->metas()->updateOrCreate(
+                [
+                    'meta_key' => $key
+                ],
+                [
+                    'meta_value' => $val
+                ]
+            );
 
             $metas[$key] = $val;
         }
 
-        $this->update([
-            'json_metas' => $metas
-        ]);
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
 
         $this->metas()
             ->whereNotIn('meta_key', array_keys($data))

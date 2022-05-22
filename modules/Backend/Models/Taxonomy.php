@@ -5,7 +5,6 @@ namespace Juzaweb\Backend\Models;
 use Juzaweb\CMS\Database\Factories\TaxonomyFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Juzaweb\CMS\Traits\ModelCache;
 use Juzaweb\CMS\Traits\TaxonomyModel;
 use Juzaweb\CMS\Models\Model;
 
@@ -52,11 +51,7 @@ use Juzaweb\CMS\Models\Model;
  */
 class Taxonomy extends Model
 {
-    use TaxonomyModel, HasFactory, ModelCache;
-
-    public $cachePrefix = 'taxonomies_';
-
-    public $cacheTags = ['taxonomies_'];
+    use TaxonomyModel, HasFactory;
 
     protected $table = 'taxonomies';
 
@@ -80,8 +75,7 @@ class Taxonomy extends Model
      */
     public static function selectFrontendBuilder()
     {
-        $builder = self::query()
-            ->cacheFor(3600);
+        $builder = self::query();
 
         return $builder;
     }

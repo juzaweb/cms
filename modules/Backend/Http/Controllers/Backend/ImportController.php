@@ -38,10 +38,12 @@ class ImportController extends BackendController
             ->setUserID($jw_user->id)
             ->import($file, $type);
 
+        $result = $importer->getCacheInfo();
+
         return $this->success(
             [
-                'message' => 'Import in process',
-                'next' => $importer->getCacheInfo(),
+                'message' => $result ? __('Import in process') : __('Import successfully'),
+                'next' => $result,
             ]
         );
     }
