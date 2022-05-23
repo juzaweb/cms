@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     var updateOutput = function(e) {
         var list = e.length ? e : $(e.target);
         if (window.JSON) {
@@ -169,7 +169,7 @@ $(document).on("turbolinks:load", function() {
             .closest('.tab-pane')
             .find('.box-tab-search-result');
         resultElement.html('');
-        
+
         if (search.length <= 0) {
             return false;
         }
@@ -199,7 +199,7 @@ $(document).on("turbolinks:load", function() {
 
         return false;
     });
-    
+
     $('#menu-container').on('keyup', '.menu-box-taxonomy-search', function () {
         let search = $(this).val();
         let key = $(this).data('key');
@@ -208,11 +208,11 @@ $(document).on("turbolinks:load", function() {
             .closest('.tab-pane')
             .find('.box-tab-search-result');
         resultElement.html('');
-        
+
         if (search.length <= 0) {
             return false;
         }
-        
+
         ajaxRequest(juzaweb.adminUrl +'/load-data/loadTaxonomies', {
             search: search,
             per_page: 5,
@@ -229,13 +229,13 @@ $(document).on("turbolinks:load", function() {
                         </label>
                     </div>`;
                 });
-                
+
                 resultElement.html(temps);
-                
+
                 return false;
             }
         });
-        
+
         return false;
     });
 });

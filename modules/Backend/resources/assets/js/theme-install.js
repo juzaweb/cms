@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     let bodyElement = $('body');
 
     bodyElement.on('click', '.update-theme', function () {

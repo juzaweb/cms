@@ -254,6 +254,6 @@ function initSelect2(parent = 'body')
     });
 }
 
-$(document).on("turbolinks:load", function() {
-    initSelect2('body');
-});
+// $(document).ready(function () {
+//     initSelect2('body');
+// });

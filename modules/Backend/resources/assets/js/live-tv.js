@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     $('.form-add-category').on('click', '.add-category', function () {
         let name = $("#categoryName").val();
         if (!name) {

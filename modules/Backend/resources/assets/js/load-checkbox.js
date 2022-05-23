@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     var item_template = '<li class="m-1" id="item-genre-{id}">\n' +
         '        <div class="custom-control custom-checkbox">\n' +
         '            <input type="checkbox" name="items[]" class="custom-control-input" id="genre-{id}" value="{id}">\n' +

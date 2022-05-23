@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
 
     $("body").on('click', '.custom-seo', function () {
         let item = $(this);
@@ -25,7 +25,7 @@ $(document).on("turbolinks:load", function() {
                 show_message(data);
                 return false;
             }
-            
+
             if (!$("#meta_title").val()) {
                 $("#meta_title").val(data.title);
             }

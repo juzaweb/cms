@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import MenuTop from './Components/MenuTop'
 import MenuLeft from './Components/MenuLeft'
 import { usePage, Head, Link } from '@inertiajs/inertia-react'
