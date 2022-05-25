@@ -22,12 +22,14 @@
         if (tab === 'editor') {
             tinymce.init({
                 selector: '#{{ $id }}',
+                relative_urls : true,
+                document_base_url : '{{ url('/storage') }}/',
                 height: 400,
                 plugins: [
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
                     "searchreplace wordcount visualblocks visualchars code fullscreen",
                     "insertdatetime media nonbreaking save table directionality",
-                    "emoticons template paste textpattern"
+                    "emoticons template paste textpattern bbcode"
                 ],
                 menu: {
                     file: { title: 'File', items: 'newdocument restoredraft | preview | print ' },
