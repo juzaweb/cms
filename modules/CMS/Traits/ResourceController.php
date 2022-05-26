@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 trait ResourceController
 {
@@ -51,8 +52,8 @@ trait ResourceController
 
         $model = $this->makeModel(...$params);
 
-        return $this->bladeRender(
-            $this->viewPrefix . '.form',
+        return Inertia::render(
+            'Form',
             array_merge(
                 [
                     'title' => trans('cms::app.add_new'),
@@ -85,8 +86,8 @@ trait ResourceController
         $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
         $this->checkPermission('edit', $model, ...$params);
 
-        return $this->bladeRender(
-            $this->viewPrefix . '.form',
+        return Inertia::render(
+            'Form',
             array_merge(
                 [
                     'title' => $model->{$model->getFieldName()},

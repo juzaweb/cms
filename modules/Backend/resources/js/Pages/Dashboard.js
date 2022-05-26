@@ -26,7 +26,7 @@ const Dashboard = () => {
                         <i className="fa fa-list font-size-50 mr-3"></i>
                         <div>
                             <div className="font-size-21 font-weight-bold">{juzaweb.lang.posts}</div>
-                            <div className="font-size-15">total: {analytics.posts}</div>
+                            <div className="font-size-15">{juzaweb.lang.total}: {analytics.posts}</div>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@ const Dashboard = () => {
                         <i className="fa fa-list font-size-50 mr-3"></i>
                         <div>
                             <div className="font-size-21 font-weight-bold">{juzaweb.lang.pages}</div>
-                            <div className="font-size-15">total: {analytics.pages}</div>
+                            <div className="font-size-15">{juzaweb.lang.total}: {analytics.pages}</div>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@ const Dashboard = () => {
                         <i className="fa fa-users font-size-50 mr-3"></i>
                         <div>
                             <div className="font-size-21 font-weight-bold">{juzaweb.lang.users}</div>
-                            <div className="font-size-15">total: {analytics.users}</div>
+                            <div className="font-size-15">{juzaweb.lang.total}: {analytics.users}</div>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ const Dashboard = () => {
                         <i className="fa fa-hdd-o font-size-50 mr-3"></i>
                         <div>
                             <div className="font-size-21 font-weight-bold">{juzaweb.lang.storage}</div>
-                            <div className="font-size-15">total: {analytics.storage}</div>
+                            <div className="font-size-15">{juzaweb.lang.total}: {analytics.storage}</div>
                         </div>
                     </div>
                 </div>
@@ -128,6 +128,6 @@ const Dashboard = () => {
   )
 }
 
-Dashboard.layout = page => <Layout children={page} title="Welcome" />
+Dashboard.layout = page => <Layout children={page} />
 
 export default Dashboard
