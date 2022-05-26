@@ -33,7 +33,7 @@ trait ResourceController
         );
     }
 
-    public function create(...$params)
+    public function create(Request $request, ...$params)
     {
         $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
@@ -52,19 +52,33 @@ trait ResourceController
 
         $model = $this->makeModel(...$params);
 
+        if ($request->get('g') == 'json') {
+            return response()->json(
+                [
+                    [
+                        'type' => 'text',
+                        'label' => trans('cms::app.title'),
+                    ],
+                    [
+                        'type' => 'textarea'
+                    ]
+                ]
+            );
+        }
+
         return Inertia::render(
-            'Form',
+            'Resources/Form',
             array_merge(
                 [
                     'title' => trans('cms::app.add_new'),
-                    'linkIndex' => action([static::class, 'index'], $params)
+                    'linkIndex' => action([static::class, 'index'], $params),
                 ],
                 $this->getDataForForm($model, ...$params)
             )
         );
     }
 
-    public function edit(...$params)
+    public function edit(Request $request, ...$params)
     {
         $indexRoute = str_replace(
             '.edit',
@@ -86,12 +100,33 @@ trait ResourceController
         $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
         $this->checkPermission('edit', $model, ...$params);
 
+        if ($request->get('g') == 'json') {
+            return response()->json(
+                [
+                    [
+                        'type' => 'text',
+                        'label' => trans('cms::app.title'),
+                        'value' => $model->name,
+                    ],
+                    [
+                        'type' => 'textarea',
+                        'value' => $model->email,
+                    ]
+                ]
+            );
+        }
+
         return Inertia::render(
-            'Form',
+            'Resources/Form',
             array_merge(
                 [
                     'title' => $model->{$model->getFieldName()},
-                    'linkIndex' => action([static::class, 'index'], $indexParams)
+                    'linkIndex' => action([static::class, 'index'], $indexParams),
+                    'fields' => [
+                        [
+                            'type' => 'text'
+                        ]
+                    ],
                 ],
                 $this->getDataForForm($model, ...$params)
             )

@@ -14,7 +14,7 @@ export const JW_Input = ({
   disabled = false,
 }: Partial<JW_InputProps>) => {
   return (
-    <React.Fragment>
+    <>
       <input
         className={cx([
           className,
@@ -29,6 +29,6 @@ export const JW_Input = ({
         checked={checked}
         disabled={disabled}
       />
-    </React.Fragment>
+    </>
   );
 };

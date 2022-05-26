@@ -1,11 +1,11 @@
 import React from 'react';
 import { JW_InputGroupProps } from '.';
 
-export const JW_InputLabelGroup = (props: Partial<JW_InputGroupProps>) => {
+export const JW_InputGroup = (props: Partial<JW_InputGroupProps>) => {
   const { idInput, onChange, labelValue, placeholder, value, inputName } =
     props;
   return (
-    <React.Fragment>
+    <>
       <div>
         <label
           htmlFor={idInput}
@@ -37,6 +37,6 @@ export const JW_InputLabelGroup = (props: Partial<JW_InputGroupProps>) => {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };

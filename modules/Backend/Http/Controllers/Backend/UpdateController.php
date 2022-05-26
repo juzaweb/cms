@@ -25,6 +25,7 @@ use Juzaweb\CMS\Support\Updater\CmsUpdater;
 use Juzaweb\CMS\Support\Updater\PluginUpdater;
 use Juzaweb\CMS\Support\Updater\ThemeUpdater;
 use Juzaweb\CMS\Version;
+use Inertia\Inertia;
 
 class UpdateController extends BackendController
 {
@@ -35,7 +36,7 @@ class UpdateController extends BackendController
         $this->api = $api;
     }
 
-    public function index(): View
+    public function index()
     {
         if (!config('juzaweb.plugin.enable_upload')) {
             abort(403);
@@ -43,8 +44,8 @@ class UpdateController extends BackendController
 
         $title = trans('cms::app.updates');
 
-        return view(
-            'cms::backend.update.index',
+        return Inertia::render(
+            'Update',
             compact(
                 'title'
             )
