@@ -38,7 +38,7 @@ class DashboardController extends BackendController
             ->count();
         $storage = format_size_units(MediaFile::sum('size'));
 
-        return $this->success(
+        return response()->json(
             [
                 'users' => $users,
                 'posts' => $posts,

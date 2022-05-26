@@ -18,6 +18,8 @@ Route::group(
     function () {
         Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
 
+        Route::get('/analytics', 'Backend\DashboardController@analyticsData');
+
         Route::get('/load-data/{func}', 'Backend\LoadDataController@loadData')->name('admin.load_data');
 
         Route::get(

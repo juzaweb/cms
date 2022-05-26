@@ -1,7 +1,21 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Layout from '../Layout'
 
 const Dashboard = () => {
+    const [analytics, setAnalytics] = useState({
+        posts: 0,
+        pages: 0,
+        users: 0,
+        storage: 0,
+    });
+
+    useEffect(() => {
+        axios.get('/admin-cp/analytics')
+        .then(res => {
+            setAnalytics(res.data)
+        });
+    }, []);
+
   return (
     <>
     <div className="row">
@@ -11,8 +25,8 @@ const Dashboard = () => {
                     <div className="d-flex flex-wrap align-items-center">
                         <i className="fa fa-list font-size-50 mr-3"></i>
                         <div>
-                            <div className="font-size-21 font-weight-bold">Posts</div>
-                            <div className="font-size-15">total: </div>
+                            <div className="font-size-21 font-weight-bold">{juzaweb.lang.posts}</div>
+                            <div className="font-size-15">total: {analytics.posts}</div>
                         </div>
                     </div>
                 </div>
@@ -25,8 +39,8 @@ const Dashboard = () => {
                     <div className="d-flex flex-wrap align-items-center">
                         <i className="fa fa-list font-size-50 mr-3"></i>
                         <div>
-                            <div className="font-size-21 font-weight-bold">pages</div>
-                            <div className="font-size-15">total: </div>
+                            <div className="font-size-21 font-weight-bold">{juzaweb.lang.pages}</div>
+                            <div className="font-size-15">total: {analytics.pages}</div>
                         </div>
                     </div>
                 </div>
@@ -39,8 +53,8 @@ const Dashboard = () => {
                     <div className="d-flex flex-wrap align-items-center">
                         <i className="fa fa-users font-size-50 mr-3"></i>
                         <div>
-                            <div className="font-size-21 font-weight-bold">Users</div>
-                            <div className="font-size-15">total: </div>
+                            <div className="font-size-21 font-weight-bold">{juzaweb.lang.users}</div>
+                            <div className="font-size-15">total: {analytics.users}</div>
                         </div>
                     </div>
                 </div>
@@ -53,8 +67,8 @@ const Dashboard = () => {
                     <div className="d-flex flex-wrap align-items-center">
                         <i className="fa fa-hdd-o font-size-50 mr-3"></i>
                         <div>
-                            <div className="font-size-21 font-weight-bold">storage</div>
-                            <div className="font-size-15">total: </div>
+                            <div className="font-size-21 font-weight-bold">{juzaweb.lang.storage}</div>
+                            <div className="font-size-15">total: {analytics.storage}</div>
                         </div>
                     </div>
                 </div>
