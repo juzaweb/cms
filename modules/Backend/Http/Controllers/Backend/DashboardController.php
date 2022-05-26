@@ -20,6 +20,17 @@ class DashboardController extends BackendController
         do_action(Action::BACKEND_DASHBOARD_ACTION);
 
         $title = trans('cms::app.dashboard');
+
+        return Inertia::render(
+            'Dashboard',
+            [
+                'title' => $title
+            ]
+        );
+    }
+
+    public function analyticsData()
+    {
         $users = User::count();
         $posts = Post::where('type', '=', 'posts')
             ->count();
@@ -27,39 +38,13 @@ class DashboardController extends BackendController
             ->count();
         $storage = format_size_units(MediaFile::sum('size'));
 
-        return Inertia::render(
-            'Dashboard',
+        return $this->success(
             [
-                'title' => $title,
                 'users' => $users,
                 'posts' => $posts,
                 'pages' => $pages,
                 'storage' => $storage,
             ]
-        );
-    }
-
-    public function index2()
-    {
-        do_action(Action::BACKEND_DASHBOARD_ACTION);
-
-        $title = trans('cms::app.dashboard');
-        $users = User::count();
-        $posts = Post::where('type', '=', 'posts')
-            ->count();
-        $pages = Post::where('type', '=', 'pages')
-            ->count();
-        $storage = format_size_units(MediaFile::sum('size'));
-
-        return view(
-            'cms::backend.dashboard',
-            compact(
-                'title',
-                'users',
-                'posts',
-                'pages',
-                'storage'
-            )
         );
     }
 

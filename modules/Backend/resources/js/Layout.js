@@ -1,6 +1,6 @@
-import React, { useEffect, useLayoutEffect } from 'react'
-import MenuTop from './Components/MenuTop'
-import MenuLeft from './Components/MenuLeft'
+import React from 'react'
+import MenuTop from './components/MenuTop'
+import MenuLeft from './components/MenuLeft'
 import { usePage, Head, Link } from '@inertiajs/inertia-react'
 
 export default function Layout({ children }) {

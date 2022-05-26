@@ -12,7 +12,11 @@ mix
   // prettier-ignore
   cssImport(),
   cssNesting(),
-  require('tailwindcss')('./modules/Backend/tailwind.config.js'),
+  //require('tailwindcss')('./modules/Backend/tailwind.config.js'),
 ])
 .version()
 .sourceMaps()
+.browserSync({
+    proxy: '127.0.0.1:8000',
+    open: false,
+})

@@ -7,7 +7,7 @@ const BladeRender = () => {
     const { content } = usePage().props;
 
     useEffect(() => {
-        initSelect2('body')
+        //initSelect2('body')
     }, [])
 
     return (

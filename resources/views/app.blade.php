@@ -11,12 +11,7 @@
 
     <link href="{{ asset('jw-styles/juzaweb/css/app.css') }}" rel="stylesheet"/>
 
-    <script src="{{ asset('jw-styles/juzaweb/js/vendor.js') }}"></script>
-    <script src="{{ asset('jw-styles/juzaweb/js/backend.min.js') }}"></script>
-    <script src="{{ asset('jw-styles/juzaweb/js/custom.min.js') }}"></script>
-
     <script src="{{ asset('jw-styles/juzaweb/js/app.js') }}" defer></script>
-
 
     @yield('header')
 
@@ -25,6 +20,10 @@
 <body class="juzaweb__menuLeft--dark juzaweb__topbar--fixed juzaweb__menuLeft--unfixed">
 
 @inertia
+
+@if (app()->isLocal())
+    <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
+@endif
 
 <template id="form-images-template">
     @component('cms::components.image-item', [
@@ -42,7 +41,7 @@
     @csrf
 </form>
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $.extend($.validator.messages, {
         required: "{{ trans('cms::app.this_field_is_required') }}",
     });
@@ -52,7 +51,7 @@
     $(".auth-logout").on('click', function () {
         $('.form-logout').submit();
     });
-</script>
+</script> --}}
 
 @do_action('juzaweb_footer')
 

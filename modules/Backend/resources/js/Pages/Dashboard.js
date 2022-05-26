@@ -4,57 +4,57 @@ import Layout from '../Layout'
 const Dashboard = () => {
   return (
     <>
-      {/* <div class="row">
-        <div class="col-md-3">
-            <div class="card border-0 bg-gray-2">
-                <div class="card-body">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <i class="fa fa-list font-size-50 mr-3"></i>
+    <div className="row">
+        <div className="col-md-3">
+            <div className="card border-0 bg-gray-2">
+                <div className="card-body">
+                    <div className="d-flex flex-wrap align-items-center">
+                        <i className="fa fa-list font-size-50 mr-3"></i>
                         <div>
-                            <div class="font-size-21 font-weight-bold">Posts</div>
-                            <div class="font-size-15">total: {{ number_format($posts) }}</div>
+                            <div className="font-size-21 font-weight-bold">Posts</div>
+                            <div className="font-size-15">total: </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card border-0 bg-info text-white">
-                <div class="card-body">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <i class="fa fa-list font-size-50 mr-3"></i>
+        <div className="col-md-3">
+            <div className="card border-0 bg-info text-white">
+                <div className="card-body">
+                    <div className="d-flex flex-wrap align-items-center">
+                        <i className="fa fa-list font-size-50 mr-3"></i>
                         <div>
-                            <div class="font-size-21 font-weight-bold">pages</div>
-                            <div class="font-size-15">total: {{ number_format($pages) }}</div>
+                            <div className="font-size-21 font-weight-bold">pages</div>
+                            <div className="font-size-15">total: </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-3">
-            <div class="card border-0 bg-success text-white">
-                <div class="card-body">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <i class="fa fa-users font-size-50 mr-3"></i>
+        <div className="col-lg-3">
+            <div className="card border-0 bg-success text-white">
+                <div className="card-body">
+                    <div className="d-flex flex-wrap align-items-center">
+                        <i className="fa fa-users font-size-50 mr-3"></i>
                         <div>
-                            <div class="font-size-21 font-weight-bold">{{ trans('cms::app.users') }}</div>
-                            <div class="font-size-15">{{ trans('cms::app.total') }}: {{ number_format($users) }}</div>
+                            <div className="font-size-21 font-weight-bold">Users</div>
+                            <div className="font-size-15">total: </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-3">
-            <div class="card border-0 bg-primary text-white">
-                <div class="card-body">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <i class="fa fa-hdd-o font-size-50 mr-3"></i>
+        <div className="col-lg-3">
+            <div className="card border-0 bg-primary text-white">
+                <div className="card-body">
+                    <div className="d-flex flex-wrap align-items-center">
+                        <i className="fa fa-hdd-o font-size-50 mr-3"></i>
                         <div>
-                            <div class="font-size-21 font-weight-bold">{{ trans('cms::app.storage') }}</div>
-                            <div class="font-size-15">{{ trans('cms::app.total') }}: {{ $storage }}</div>
+                            <div className="font-size-21 font-weight-bold">storage</div>
+                            <div className="font-size-15">total: </div>
                         </div>
                     </div>
                 </div>
@@ -62,21 +62,21 @@ const Dashboard = () => {
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div id="curve_chart" style="width: 100%; height: 300px"></div>
+    {/* <div className="row">
+        <div className="col-md-12">
+            <div id="curve_chart" style={'width': "100%", 'height': "300px"} ></div>
         </div>
-    </div>
+    </div> */}
 
-    <div class="row mt-3">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5>{{ trans('cms::app.new_users') }}</h5>
+    {/* <div className="row mt-3">
+        <div className="col-md-6">
+            <div className="card">
+                <div className="card-header">
+                    <h5>new_users</h5>
                 </div>
 
-                <div class="card-body">
-                    <table class="table" id="users-table">
+                <div className="card-body">
+                    <table className="table" id="users-table">
                         <thead>
                             <tr>
                                 <th data-formatter="index_formatter" data-width="5%">#</th>
@@ -89,14 +89,14 @@ const Dashboard = () => {
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
+        <div className="col-md-6">
+            <div className="card">
+                <div className="card-header">
                     <h5>{{ trans('cms::app.top_views') }}</h5>
                 </div>
 
-                <div class="card-body">
-                    <table class="table" id="posts-top-views">
+                <div className="card-body">
+                    <table className="table" id="posts-top-views">
                         <thead>
                             <tr>
                                 <th data-formatter="index_formatter" data-width="5%">#</th>

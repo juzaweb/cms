@@ -5,8 +5,6 @@ module.exports = {
     prefix: 'tw-',
     purge: [
         // prettier-ignore
-        './resources/**/*.blade.php',
-        './resources/**/*.js',
         './modules/Backend/resources/**/*.js',
         './modules/Backend/resources/**/*.blade.php',
     ],
