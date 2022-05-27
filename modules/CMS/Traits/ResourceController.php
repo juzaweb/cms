@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Juzaweb\Backend\Support\HTML\Col;
+use Juzaweb\Backend\Support\HTML\Row;
+use Juzaweb\Backend\Support\PageBuilder;
 
 trait ResourceController
 {
@@ -33,7 +36,7 @@ trait ResourceController
         );
     }
 
-    public function create(Request $request, ...$params)
+    public function create(Request $request, ...$params): \Illuminate\Http\JsonResponse|\Inertia\Response
     {
         $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
@@ -52,33 +55,43 @@ trait ResourceController
 
         $model = $this->makeModel(...$params);
 
-        if ($request->get('g') == 'json') {
-            return response()->json(
-                [
-                    [
-                        'type' => 'text',
-                        'label' => trans('cms::app.title'),
-                    ],
-                    [
-                        'type' => 'textarea'
-                    ]
-                ]
-            );
-        }
+        $page = new PageBuilder();
+
+        $page->addRow(
+            function (Row $row) {
+                $row->addCol(
+                    3,
+                    function (Col $col) {
+                        $col->addTextField('title', 'title');
+                        $col->addTextField('name', 'name');
+                        $col->addTextareaField('label', 'label');
+                    }
+                );
+
+                $row->addCol(
+                    9,
+                    function (Col $col) {
+                        $col->addTextField('title', 'title');
+                        $col->addTextField('name', 'name');
+                    }
+                );
+            }
+        );
 
         return Inertia::render(
-            'Resources/Form',
+            'PageBuilder',
             array_merge(
                 [
                     'title' => trans('cms::app.add_new'),
                     'linkIndex' => action([static::class, 'index'], $params),
+                    'fields' => $page->toArray()
                 ],
                 $this->getDataForForm($model, ...$params)
             )
         );
     }
 
-    public function edit(Request $request, ...$params)
+    public function edit(Request $request, ...$params): \Illuminate\Http\JsonResponse|\Inertia\Response
     {
         $indexRoute = str_replace(
             '.edit',
@@ -100,31 +113,21 @@ trait ResourceController
         $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
         $this->checkPermission('edit', $model, ...$params);
 
-        if ($request->get('g') == 'json') {
-            return response()->json(
-                [
-                    [
-                        'type' => 'text',
-                        'label' => trans('cms::app.title'),
-                        'value' => $model->name,
-                    ],
-                    [
-                        'type' => 'textarea',
-                        'value' => $model->email,
-                    ]
-                ]
-            );
-        }
-
         return Inertia::render(
-            'Resources/Form',
+            'PageBuilder',
             array_merge(
                 [
                     'title' => $model->{$model->getFieldName()},
                     'linkIndex' => action([static::class, 'index'], $indexParams),
                     'fields' => [
                         [
-                            'type' => 'text'
+                            'type' => 'text',
+                            'label' => trans('cms::app.title'),
+                            'value' => $model->name,
+                        ],
+                        [
+                            'type' => 'textarea',
+                            'value' => $model->email,
                         ]
                     ],
                 ],

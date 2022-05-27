@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import Layout from '../Layout'
+import Layout from '../layouts/Backend'
 import { usePage } from "@inertiajs/inertia-react";
 import Parser from 'html-react-parser';
 
