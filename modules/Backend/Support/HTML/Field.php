@@ -56,13 +56,13 @@ class Field extends ElementBuilder
     {
         $this->item['type'] = 'textarea';
 
-        $this->elements[] = $this->item;
+        $this->elements[$this->elementIndex] = $this->item;
     }
 
     public function editor(array $args = [])
     {
         $this->item['type'] = 'editor';
 
-        $this->elements[] = $this->item;
+        $this->elements[$this->elementIndex] = $this->item;
     }
 }
