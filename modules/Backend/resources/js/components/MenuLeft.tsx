@@ -5,7 +5,7 @@ import {Page, PageProps} from "@inertiajs/inertia";
 interface MenuLeftPageProps extends Page<PageProps>
 {
     props: {
-        menuItems?: Array<any>;
+        menuItems?: Array<any>; //Add Interface Object MenuItem
         adminPrefix?: string;
         errors: any;
     }
@@ -13,6 +13,7 @@ interface MenuLeftPageProps extends Page<PageProps>
 
 export default function MenuLeft() {
     const { menuItems, adminPrefix } = usePage<MenuLeftPageProps>().props
+    console.log(menuItems);
 
     return (
         <>
