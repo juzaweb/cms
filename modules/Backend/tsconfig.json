@@ -16,5 +16,8 @@
       "noEmit": false,
       "jsx": "react"
     },
-    "include": ["resources/js", "resources/js/**/*"]
+    "include": [
+        "resources/js",
+        "resources/js/**/*"
+    ]
 }

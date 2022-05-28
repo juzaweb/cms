@@ -52,6 +52,11 @@ class HandleInertiaRequests extends Middleware
                         'name' => $user->name,
                         'email' => $user->email,
                         'avatar' => $user->getAvatar(),
+                        'totalNotifications' => $user->unreadNotifications()->count(['id']),
+                        'notifications' => $user->unreadNotifications()
+                            ->orderBy('id', 'DESC')
+                            ->limit(5)
+                            ->get(['id', 'data', 'created_at'])
                     ] : null,
                 ] : null,
                 'flash' => function () use ($request) {

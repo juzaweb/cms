@@ -1,10 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import MenuTop from '../components/MenuTop'
 import MenuLeft from '../components/MenuLeft'
 import { usePage, Head, Link } from '@inertiajs/inertia-react'
+//import {addScriptJS} from "@/utils/common";
 
 export default function Backend({ children }) {
     const { title } = usePage().props
+
+    useEffect(() => {
+        //addScriptJS('/jw-styles/juzaweb/tinymce/tinymce.min.js')
+    }, [])
 
     return (
         <>

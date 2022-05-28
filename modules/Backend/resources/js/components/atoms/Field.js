@@ -1,9 +1,14 @@
 import React from 'react';
-import {JW_Input, JW_TextArea, JW_Editor} from "@/components/atoms";
-import {JW_Row} from '@/components/atoms/Row';
+import {
+    JW_Input,
+    JW_TextArea,
+    JW_Editor,
+    JW_Card,
+    JW_Row
+} from "@/components/atoms";
+
 import {JW_Col} from "@/components/atoms/Col";
 import {JW_Form} from "@/components/atoms/Form";
-import {JW_Card} from "@/components/atoms/Card";
 
 export const JW_Field = ({fields = []}) => {
     return (
@@ -14,7 +19,7 @@ export const JW_Field = ({fields = []}) => {
                         switch (item.type) {
                             case 'row':
                                 return (
-                                    <JW_Row key={index} children={item.children}/>
+                                    <JW_Row key={index} options={item.options} children={item.children}/>
                                 )
                             case 'col':
                                 return (

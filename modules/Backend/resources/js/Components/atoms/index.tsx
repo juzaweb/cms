@@ -1,7 +1,8 @@
 // export * from './links';
 // export * from './buttons';
 // export * from './blocks';
-// export * from './card';
+export * from './card';
+export * from './row';
 // export * from './col';
 // export * from './carousel';
 // export * from './form';
