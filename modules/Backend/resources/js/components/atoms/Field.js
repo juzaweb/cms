@@ -2,10 +2,11 @@ import React from 'react';
 import {
     JW_Input,
     JW_TextArea,
-    JW_Editor,
     JW_Card,
     JW_Row
 } from "@/components/atoms";
+
+import JW_Editor from '@/components/atoms/editor/Editor.atom'
 
 import {JW_Col} from "@/components/atoms/Col";
 import {JW_Form} from "@/components/atoms/Form";
