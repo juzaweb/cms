@@ -17,6 +17,7 @@ export * from './input';
 // export * from './section';
 // export * from './text';
 export * from './textArea';
+export * from './editor';
 // export * from './title';
 // export * from './progressBar';
 // export * from './wraps';

@@ -2,18 +2,7 @@ import React from 'react';
 import { JW_TextAreaProps } from '.';
 import cx from "classnames";
 
-export const JW_TextArea = ({
-  label,
-  name,
-  options = {
-      class: '',
-      id: '',
-      value: '',
-      placeholder: '',
-      onChange: null,
-      disabled: false
-  },
-}: Partial<JW_TextAreaProps>) => {
+export const JW_TextArea = ({label, name, options = {},}: Partial<JW_TextAreaProps>) => {
   return (
     <React.Fragment>
         <div className='form-group'>

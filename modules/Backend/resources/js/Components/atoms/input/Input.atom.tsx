@@ -3,15 +3,7 @@ import { JW_InputProps } from '.';
 import cx from 'classnames';
 
 export const JW_Input = ({label, name, options = {
-    type: 'text',
-    class: '',
-    id: '',
-    value: '',
-    placeholder: '',
-    onChange: null,
-    checked: false,
-    disabled: false,
-    autoComplete: 'off'
+    type: 'text'
 }}: Partial<JW_InputProps>) => {
   return (
     <React.Fragment>

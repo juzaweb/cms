@@ -1,5 +1,5 @@
 import React from 'react';
-import {JW_Input, JW_TextArea} from "@/components/atoms";
+import {JW_Input, JW_TextArea, JW_Editor} from "@/components/atoms";
 import {JW_Row} from '@/components/atoms/Row';
 import {JW_Col} from "@/components/atoms/Col";
 import {JW_Form} from "@/components/atoms/Form";
@@ -55,7 +55,12 @@ export const JW_Field = ({fields = []}) => {
                                 )
                             case 'editor':
                                 return (
-                                    <div>Case 2</div>
+                                    <JW_Editor
+                                        key={index}
+                                        label={item.label}
+                                        name={item.name}
+                                        options={item.options}
+                                    />
                                 )
                         }
                     })()

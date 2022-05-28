@@ -5,7 +5,7 @@ import {Page, PageProps} from "@inertiajs/inertia";
 interface MenuLeftPageProps extends Page<PageProps>
 {
     props: {
-        menuItems?: Array<any>; //Add Interface Object MenuItem
+        menuItems?: Array<any>;
         adminPrefix?: string;
         errors: any;
     }
@@ -47,7 +47,7 @@ export default function MenuLeft() {
                         )
                     } else {
                         return (
-                            <li key={item.key} className="juzaweb__menuLeft__item juzaweb__menuLeft__item-{{ $item->get('slug') }}">
+                            <li key={item.key} className={'juzaweb__menuLeft__item juzaweb__menuLeft__item-'+item.slug}>
                                 <Link className={"juzaweb__menuLeft__item__link "+(item.active ? 'juzaweb__menuLeft__item--active' : '')} href={item.url} >
 
                                     <span className="juzaweb__menuLeft__item__title">{item.title}</span>
