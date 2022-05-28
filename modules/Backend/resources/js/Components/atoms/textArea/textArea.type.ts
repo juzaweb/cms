@@ -1,9 +1,12 @@
 export type JW_TextAreaProps = {
-  className: string;
-  value: any;
-  onChange: any;
-  row: number;
-  col: number;
-  placeholder: string;
-  name: string;
+    label: string,
+    name: string,
+    options: {
+        class: string;
+        id: string;
+        value: string;
+        placeholder: string;
+        onChange: any;
+        disabled: boolean;
+    },
 };

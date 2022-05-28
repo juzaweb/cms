@@ -1,6 +1,5 @@
 import React from 'react';
-import {JW_Input} from "@/components/atoms/Input";
-import {JW_Textarea} from "@/components/atoms/Textarea";
+import {JW_Input, JW_TextArea} from "@/components/atoms";
 import {JW_Row} from '@/components/atoms/Row';
 import {JW_Col} from "@/components/atoms/Col";
 import {JW_Form} from "@/components/atoms/Form";
@@ -40,7 +39,7 @@ export const JW_Field = ({fields = []}) => {
                                 )
                             case 'textarea':
                                 return (
-                                    <JW_Textarea
+                                    <JW_TextArea
                                         key={index}
                                         label={item.label}
                                         name={item.name}
