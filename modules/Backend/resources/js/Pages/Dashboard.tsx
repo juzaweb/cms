@@ -26,8 +26,8 @@ const Dashboard = () => {
                     <div className="d-flex flex-wrap align-items-center">
                         <i className="fa fa-list font-size-50 mr-3"></i>
                         <div>
-                            {/* <div className="font-size-21 font-weight-bold">{juzaweb?.lang?.posts || 'Undefined'}</div>
-                            <div className="font-size-15">{juzaweb?.lang?.posts || 'Undefined'}: {analytics.posts}</div> */}
+                            <div className="font-size-21 font-weight-bold">{juzaweb?.lang?.posts || 'Post'}</div>
+                            <div className="font-size-15">{juzaweb?.lang?.total || 'Total'}: {analytics.posts}</div>
                         </div>
                     </div>
                 </div>
@@ -40,8 +40,8 @@ const Dashboard = () => {
                     <div className="d-flex flex-wrap align-items-center">
                         <i className="fa fa-list font-size-50 mr-3"></i>
                         <div>
-                            {/* <div className="font-size-21 font-weight-bold">{juzaweb?.lang?.pages || ''}</div>
-                            <div className="font-size-15">{juzaweb?.lang?.total || 0}: {analytics.pages}</div> */}
+                             <div className="font-size-21 font-weight-bold">{juzaweb?.lang?.pages || ''}</div>
+                            <div className="font-size-15">{juzaweb?.lang?.total || 0}: {analytics.pages}</div>
                         </div>
                     </div>
                 </div>
@@ -54,8 +54,8 @@ const Dashboard = () => {
                     <div className="d-flex flex-wrap align-items-center">
                         <i className="fa fa-users font-size-50 mr-3"></i>
                         <div>
-                            {/* <div className="font-size-21 font-weight-bold">{juzaweb.lang.users || 'Undefined'}</div>
-                            <div className="font-size-15">{juzaweb.lang.total || 'Undefined'}: {analytics.users}</div> */}
+                             <div className="font-size-21 font-weight-bold">{juzaweb.lang.users || ''}</div>
+                            <div className="font-size-15">{juzaweb.lang.total || '0'}: {analytics.users}</div>
                         </div>
                     </div>
                 </div>
@@ -68,8 +68,8 @@ const Dashboard = () => {
                     <div className="d-flex flex-wrap align-items-center">
                         <i className="fa fa-hdd-o font-size-50 mr-3"></i>
                         <div>
-                            {/* <div className="font-size-21 font-weight-bold">{juzaweb.lang.storage || 'Undefined'}</div>
-                            <div className="font-size-15">{juzaweb.lang.total || 'Undefined'}: {analytics.storage}</div> */}
+                             <div className="font-size-21 font-weight-bold">{juzaweb.lang.storage || ''}</div>
+                            <div className="font-size-15">{juzaweb.lang.total || '0'}: {analytics.storage}</div>
                         </div>
                     </div>
                 </div>

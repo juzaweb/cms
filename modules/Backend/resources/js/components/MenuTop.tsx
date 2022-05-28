@@ -18,7 +18,7 @@ export default function MenuTop() {
         <div className="juzaweb__topbar">
             <div className="mr-4">
                 <a href="/" className="mr-2" target="_blank">
-                    {/* <i className="dropdown-toggle-icon fa fa-home" title={juzaweb.lang.view_site}></i> {juzaweb.lang.view_site} */}
+                    <i className="dropdown-toggle-icon fa fa-home" title={juzaweb?.lang?.view_site}></i> {juzaweb?.lang?.view_site}
                 </a>
             </div>
 

@@ -13,7 +13,6 @@ interface MenuLeftPageProps extends Page<PageProps>
 
 export default function MenuLeft() {
     const { menuItems, adminPrefix } = usePage<MenuLeftPageProps>().props
-    console.log(menuItems);
 
     return (
         <>
