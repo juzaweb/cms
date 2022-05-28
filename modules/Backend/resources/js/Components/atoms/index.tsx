@@ -3,10 +3,10 @@
 // export * from './blocks';
 export * from './card';
 export * from './row';
-// export * from './col';
+export * from './col';
 // export * from './carousel';
-// export * from './form';
-// export * from './googleMaps';
+export * from './field';
+export * from './form';
 // export * from './grid';
 // export * from './icon';
 // export * from './iframe';
