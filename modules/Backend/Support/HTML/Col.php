@@ -21,4 +21,15 @@ class Col extends ElementBuilder
     {
         $this->item = ['type' => 'col', 'col' => $col];
     }
+
+    public function addCard($callback): static
+    {
+        $card = new Card();
+
+        $callback($card);
+
+        $this->item['children'][] = $card->toArray();
+
+        return $this;
+    }
 }

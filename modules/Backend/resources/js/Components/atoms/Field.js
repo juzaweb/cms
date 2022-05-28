@@ -4,6 +4,7 @@ import {JW_Textarea} from "@/components/atoms/Textarea";
 import {JW_Row} from '@/components/atoms/Row';
 import {JW_Col} from "@/components/atoms/Col";
 import {JW_Form} from "@/components/atoms/Form";
+import {JW_Card} from "@/components/atoms/Card";
 
 export const JW_Field = ({fields = []}) => {
     return (
@@ -41,8 +42,16 @@ export const JW_Field = ({fields = []}) => {
                                 return (
                                     <JW_Textarea
                                         key={index}
-                                        inputLabel={item.label}
-                                        inputName={item.name}
+                                        label={item.label}
+                                        name={item.name}
+                                    />
+                                )
+                            case 'card':
+                                return (
+                                    <JW_Card
+                                        key={index}
+                                        options={item.options}
+                                        children={item.children}
                                     />
                                 )
                             case 'editor':

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use Inertia\Response;
+use Juzaweb\Backend\Support\HTML\Card;
 use Juzaweb\Backend\Support\HTML\Col;
 use Juzaweb\Backend\Support\HTML\Row;
 use Juzaweb\Backend\Support\PageBuilder;
@@ -447,8 +448,12 @@ trait ResourceController
             function (Row $row) use ($model) {
                 $row->addCol8(
                     function (Col $col) use ($model) {
-                        $col->addField($model, 'title');
-                        $col->addField($model, 'name')->textarea();
+                        $col->addCard(
+                            function (Card $card) use ($model) {
+                                $card->addField($model, 'title');
+                                $card->addField($model, 'content')->editor();
+                            }
+                        );
                     }
                 );
 
@@ -477,7 +482,7 @@ trait ResourceController
      * @param array $attributes
      * @return Validator|array
      */
-    abstract protected function validator(array $attributes, ...$params): Validator|array;
+    abstract protected function validator(array $attributes, ...$params);
 
     /**
      * Get model resource
@@ -485,7 +490,7 @@ trait ResourceController
      * @param array $params
      * @return string // namespace model
      */
-    abstract protected function getModel(...$params): string;
+    abstract protected function getModel(...$params);
 
     /**
      * Get title resource
@@ -493,5 +498,5 @@ trait ResourceController
      * @param array $params
      * @return string
      */
-    abstract protected function getTitle(...$params): string;
+    abstract protected function getTitle(...$params);
 }

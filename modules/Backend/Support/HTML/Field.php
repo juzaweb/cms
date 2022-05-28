@@ -58,4 +58,11 @@ class Field extends ElementBuilder
 
         $this->elements[] = $this->item;
     }
+
+    public function editor(array $args = [])
+    {
+        $this->item['type'] = 'editor';
+
+        $this->elements[] = $this->item;
+    }
 }
