@@ -1,24 +1,25 @@
 import React from 'react';
 import cx from 'classnames';
 
-export const JW_Input = ({inputLabel, inputName, inputOptions = {}}) => {
+export const JW_Input = ({label, name, options = {}}) => {
     return (
         <>
             <div className='form-group'>
-                <label>{inputLabel}</label>
+                <label>{label}</label>
                 <input
                     className={cx([
-                        inputOptions.class,
+                        options.class,
                         'form-control',
                     ])}
-                    name={inputName}
-                    id={inputOptions.id}
-                    value={inputOptions.value}
-                    type={inputOptions.type || 'text'}
-                    placeholder={inputOptions.placeholder}
-                    onChange={inputOptions.onChange}
-                    checked={inputOptions.checked}
-                    disabled={inputOptions.disabled}
+                    name={name}
+                    id={options.id}
+                    value={options.value}
+                    type={options.type || 'text'}
+                    placeholder={options.placeholder}
+                    onChange={options.onChange}
+                    checked={options.checked}
+                    disabled={options.disabled}
+                    autoComplete={options.autoComplete || 'off'}
                 />
             </div>
         </>

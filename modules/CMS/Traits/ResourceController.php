@@ -10,19 +10,22 @@
 
 namespace Juzaweb\CMS\Traits;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Inertia\Response;
 use Juzaweb\Backend\Support\HTML\Col;
 use Juzaweb\Backend\Support\HTML\Row;
 use Juzaweb\Backend\Support\PageBuilder;
 
 trait ResourceController
 {
-    public function index(...$params)
+    public function index(...$params): Response
     {
         $this->checkPermission(
             'index',
@@ -36,7 +39,7 @@ trait ResourceController
         );
     }
 
-    public function create(Request $request, ...$params): \Illuminate\Http\JsonResponse|\Inertia\Response
+    public function create(Request $request, ...$params): JsonResponse|Response
     {
         $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
@@ -55,43 +58,18 @@ trait ResourceController
 
         $model = $this->makeModel(...$params);
 
-        $page = new PageBuilder();
-
-        $page->addRow(
-            function (Row $row) {
-                $row->addCol(
-                    3,
-                    function (Col $col) {
-                        $col->addTextField('title', 'title');
-                        $col->addTextField('name', 'name');
-                        $col->addTextareaField('label', 'label');
-                    }
-                );
-
-                $row->addCol(
-                    9,
-                    function (Col $col) {
-                        $col->addTextField('title', 'title');
-                        $col->addTextField('name', 'name');
-                    }
-                );
-            }
-        );
-
-        return Inertia::render(
-            'PageBuilder',
+        return $this->formPageBuilder($model)->render(
             array_merge(
                 [
                     'title' => trans('cms::app.add_new'),
-                    'linkIndex' => action([static::class, 'index'], $params),
-                    'fields' => $page->toArray()
+                    'linkIndex' => action([static::class, 'index'], $params)
                 ],
                 $this->getDataForForm($model, ...$params)
             )
         );
     }
 
-    public function edit(Request $request, ...$params): \Illuminate\Http\JsonResponse|\Inertia\Response
+    public function edit(Request $request, ...$params): JsonResponse|Response
     {
         $indexRoute = str_replace(
             '.edit',
@@ -136,7 +114,7 @@ trait ResourceController
         );
     }
 
-    public function store(Request $request, ...$params)
+    public function store(Request $request, ...$params): JsonResponse|RedirectResponse
     {
         $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
@@ -149,7 +127,6 @@ trait ResourceController
         $data = $this->parseDataForSave($request->all(), ...$params);
 
         DB::beginTransaction();
-
         try {
             $this->beforeStore($request);
             $model = $this->makeModel(...$params);
@@ -227,7 +204,7 @@ trait ResourceController
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
-        $limit = (int) $request->get('limit', 20);
+        $limit = (int)$request->get('limit', 20);
 
         $query = $table->query($request->all());
         $count = $query->count();
@@ -242,7 +219,7 @@ trait ResourceController
         foreach ($rows as $index => $row) {
             $columns['id'] = $row->id;
             foreach ($columns as $col => $column) {
-                if (! empty($column['formatter'])) {
+                if (!empty($column['formatter'])) {
                     $results[$index][$col] = $column['formatter'](
                         $row->{$col} ?? null,
                         $row,
@@ -372,7 +349,7 @@ trait ResourceController
     /**
      * Get data for form
      *
-     * @param  \Illuminate\Database\Eloquent\Model $model
+     * @param \Illuminate\Database\Eloquent\Model $model
      * @return array
      */
     protected function getDataForForm($model, ...$params)
@@ -459,6 +436,31 @@ trait ResourceController
     {
         $response = Gate::inspect($ability, $arguments);
         return $response->allowed();
+    }
+
+    protected function formPageBuilder($model): PageBuilder
+    {
+        $pageBuilder = new PageBuilder();
+
+        $pageBuilder->addRow(
+            function (Row $row) use ($model) {
+                $row->addCol8(
+                    function (Col $col) use ($model) {
+                        $col->addField($model, 'title');
+                        $col->addField($model, 'name')->textarea();
+                    }
+                );
+
+                $row->addCol4(
+                    function (Col $col) use ($model) {
+                        $col->addField($model, 'title')->textInput();
+                        $col->addField($model, 'name')->textInput();
+                    }
+                );
+            }
+        );
+
+        return $pageBuilder;
     }
 
     /**

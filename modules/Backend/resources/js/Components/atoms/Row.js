@@ -1,9 +1,9 @@
 import React from 'react';
 import { JW_Field } from '@/components/atoms/Field'
 
-export function JW_Row({children = []}) {
+export function JW_Row({options = {}, children = []}) {
     return (
-        <div className="row">
+        <div className='row'>
             <JW_Field fields={children} />
         </div>
     );

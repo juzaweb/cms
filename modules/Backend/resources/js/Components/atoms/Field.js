@@ -18,21 +18,22 @@ export const JW_Field = ({fields = []}) => {
                                 )
                             case 'col':
                                 return (
-                                    <JW_Col key={index} children={item.children}/>
+                                    <JW_Col key={index} options={item.options} children={item.children}/>
                                 )
                             case 'text':
                                 return (
                                     <JW_Input
                                         key={index}
-                                        inputLabel={item.label}
-                                        inputName={item.name}
+                                        label={item.label}
+                                        name={item.name}
+                                        options={item.options}
                                     />
                                 )
                             case 'form':
                                 return (
                                     <JW_Form
                                         key={index}
-                                        action={item.action || ''}
+                                        options={item.options}
                                         children={item.children}
                                     />
                                 )

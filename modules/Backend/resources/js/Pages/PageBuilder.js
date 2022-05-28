@@ -7,9 +7,7 @@ const PageBuilder = () => {
     const {fields} = usePage().props;
 
     return (
-        <>
-            <JW_Field fields={fields}></JW_Field>
-        </>
+        <JW_Field fields={fields}></JW_Field>
     )
 }
 

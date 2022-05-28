@@ -10,14 +10,15 @@
 
 namespace Juzaweb\Backend\Support\HTML;
 
-use Juzaweb\Backend\Support\HTML\Traits\InputElement;
+use Juzaweb\Backend\Support\HTML\Traits\HasOption;
+use Juzaweb\Backend\Support\HTML\Traits\UseInputElement;
 
 class Col extends ElementBuilder
 {
-    use InputElement;
+    use UseInputElement, HasOption;
 
-    public function __construct()
+    public function __construct(int $col = null)
     {
-        $this->item = ['type' => 'col'];
+        $this->item = ['type' => 'col', 'col' => $col];
     }
 }
