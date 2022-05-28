@@ -1,8 +1,18 @@
 import React, { useEffect } from 'react'
 import { usePage, Link } from '@inertiajs/inertia-react'
+import {Page, PageProps} from "@inertiajs/inertia";
+
+interface MenuLeftPageProps extends Page<PageProps>
+{
+    props: {
+        menuItems?: Array<any>;
+        adminPrefix?: string;
+        errors: any;
+    }
+}
 
 export default function MenuLeft() {
-    const { menuItems, adminPrefix } = usePage().props
+    const { menuItems, adminPrefix } = usePage<MenuLeftPageProps>().props
 
     return (
         <>

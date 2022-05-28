@@ -5,7 +5,7 @@ const cssNesting = require('postcss-nesting')
 const webpackConfig = require('./webpack.config')
 
 mix
-.js('./modules/Backend/resources/js/app.js', 'public/jw-styles/juzaweb/js')
+.ts('./modules/Backend/resources/js/app.js', 'public/jw-styles/juzaweb/js')
 .react({ runtimeOnly: (process.env.NODE_ENV || 'production') === 'production' })
 .webpackConfig(webpackConfig)
 .postCss('./modules/Backend/resources/css/app.css', 'public/jw-styles/juzaweb/css', [
@@ -20,3 +20,4 @@ mix
     proxy: '127.0.0.1:8000',
     open: false,
 })
+

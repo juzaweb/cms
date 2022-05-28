@@ -1,14 +1,24 @@
 import React, { useEffect } from 'react'
 import { usePage, Link } from '@inertiajs/inertia-react'
+import {Page, PageProps} from "@inertiajs/inertia";
+
+interface MenuTopPageProps extends Page<PageProps>
+{
+    props: {
+        auth: any;
+        juzaweb: any;
+        errors: any;
+    }
+}
 
 export default function MenuTop() {
-    const { auth } = usePage().props
+    const { auth, juzaweb } = usePage<MenuTopPageProps>().props
 
     return (
         <div className="juzaweb__topbar">
             <div className="mr-4">
                 <a href="/" className="mr-2" target="_blank">
-                    <i className="dropdown-toggle-icon fa fa-home" title={juzaweb.lang.view_site}></i> {juzaweb.lang.view_site}
+                    {/* <i className="dropdown-toggle-icon fa fa-home" title={juzaweb.lang.view_site}></i> {juzaweb.lang.view_site} */}
                 </a>
             </div>
 
@@ -65,7 +75,7 @@ export default function MenuTop() {
 
             <div className="dropdown">
                 <a href="" className="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="5,15">
-                    <img className="dropdown-toggle-avatar" src={auth.user.avatar} alt="User avatar" width="30" height="30"/>
+                    <img className="dropdown-toggle-avatar" src={auth?.user.avatar} alt="User avatar" width="30" height="30"/>
                 </a>
 
                 <div className="dropdown-menu dropdown-menu-right" role="menu">

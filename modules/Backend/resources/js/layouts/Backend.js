@@ -11,6 +11,7 @@ export default function Backend({ children }) {
         <Head>
             <title>{title}</title>
         </Head>
+
         <div className="juzaweb__layout juzaweb__layout--hasSider">
             <div className="juzaweb__menuLeft">
                 <div className="juzaweb__menuLeft__mobileTrigger"><span></span></div>

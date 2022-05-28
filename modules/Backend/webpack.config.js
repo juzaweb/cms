@@ -7,7 +7,7 @@ module.exports = {
         alias: {
         '@': path.resolve('./modules/Backend/resources/js'),
         },
-        extensions: ['.js', '.json'],
+        extensions: ['.js', '.json', '.ts', '.tsx'],
     },
     devServer: {
         allowedHosts: 'all',
