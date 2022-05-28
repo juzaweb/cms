@@ -22,6 +22,7 @@ use Inertia\Response;
 use Juzaweb\Backend\Support\HTML\Col;
 use Juzaweb\Backend\Support\HTML\Row;
 use Juzaweb\Backend\Support\PageBuilder;
+use Juzaweb\CMS\Abstracts\DataTable;
 
 trait ResourceController
 {
@@ -466,7 +467,7 @@ trait ResourceController
     /**
      * Get data table resource
      *
-     * @return \Juzaweb\CMS\Abstracts\DataTable
+     * @return DataTable
      */
     abstract protected function getDataTable(...$params);
 
@@ -476,7 +477,7 @@ trait ResourceController
      * @param array $attributes
      * @return Validator|array
      */
-    abstract protected function validator(array $attributes, ...$params);
+    abstract protected function validator(array $attributes, ...$params): Validator|array;
 
     /**
      * Get model resource
@@ -484,7 +485,7 @@ trait ResourceController
      * @param array $params
      * @return string // namespace model
      */
-    abstract protected function getModel(...$params);
+    abstract protected function getModel(...$params): string;
 
     /**
      * Get title resource
@@ -492,5 +493,5 @@ trait ResourceController
      * @param array $params
      * @return string
      */
-    abstract protected function getTitle(...$params);
+    abstract protected function getTitle(...$params): string;
 }
