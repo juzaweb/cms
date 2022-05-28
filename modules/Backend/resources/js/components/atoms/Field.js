@@ -3,10 +3,9 @@ import {
     JW_Input,
     JW_TextArea,
     JW_Card,
-    JW_Row
+    JW_Row,
+    JW_Editor
 } from "@/components/atoms";
-
-import JW_Editor from '@/components/atoms/editor/Editor.atom'
 
 import {JW_Col} from "@/components/atoms/Col";
 import {JW_Form} from "@/components/atoms/Form";

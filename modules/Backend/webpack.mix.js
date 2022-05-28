@@ -18,7 +18,6 @@ mix
 .sourceMaps()
 .browserSync({
     proxy: '127.0.0.1:8000',
-    open: false,
     files: [
         "modules/Backend/resources/**/*.js",
         "modules/Backend/resources/**/*.ts",

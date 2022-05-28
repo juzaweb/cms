@@ -1,9 +1,8 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import { JW_EditorProps } from '.';
-import cx from 'classnames';
 import { Editor } from '@tinymce/tinymce-react';
 
-export default function JW_Editor({label, name, options = {}}: Partial<JW_EditorProps>)  {
+export const JW_Editor = ({label, name, options = {}}: Partial<JW_EditorProps>) => {
     const editorRef = useRef(null);
 
     return (
@@ -14,6 +13,7 @@ export default function JW_Editor({label, name, options = {}}: Partial<JW_Editor
                 <Editor
                     onInit={(evt, editor) => editorRef.current = editor}
                     initialValue={options.value}
+                    textareaName={name}
                     init={{
                         height: 400,
                         plugins: [
@@ -58,9 +58,9 @@ export default function JW_Editor({label, name, options = {}}: Partial<JW_Editor
                             }
                         ],
                         file_picker_callback : function(callback, value, meta) {
-                            var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-                            var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
-                            var cmsURL = '/admin-cp/file-manager?editor=' + meta.fieldname;
+                            let x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                            let y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+                            let cmsURL = '/admin-cp/file-manager?editor=' + meta.fieldname;
 
                             if (meta.filetype == 'image') {
                                 cmsURL = cmsURL + "&type=image";
