@@ -21,7 +21,7 @@ class HTMLToBBCode
         return app(static::class)->convert($text);
     }
 
-    public function convert(string $text): null|string
+    public function convert(?string $text): null|string
     {
         $text = $this->noneReplace($text);
         $text = $this->replaceTabs($text);
@@ -131,7 +131,7 @@ class HTMLToBBCode
         return $text;
     }
 
-    protected function replaceIframe(string $text): null|string
+    protected function replaceIframe(?string $text): null|string
     {
         if (!$dom = $this->dom($text)) {
             return $text;
@@ -166,7 +166,7 @@ class HTMLToBBCode
         return $text;
     }
 
-    protected function replaceFonts(string $text): null|string
+    protected function replaceFonts(?string $text): null|string
     {
         if (!$dom = $this->dom($text)) {
             return $text;
@@ -234,7 +234,7 @@ class HTMLToBBCode
         return $text;
     }
 
-    protected function escUrl(string $url): null|string
+    protected function escUrl(?string $url): null|string
     {
         $url = trim($url);
         return str_replace(["\n", "\t", " "], '', $url);

@@ -19,7 +19,7 @@ class BBCodeToHTML
         return app(static::class)->convert($text, $alt);
     }
 
-    public function convert(string $text, string $alt = ''): string|null
+    public function convert(?string $text, string $alt = ''): string|null
     {
         $text = $this->replaceTabs($text, $alt);
         $text = trim($text);
@@ -27,7 +27,7 @@ class BBCodeToHTML
         return str_replace("<br><br>", "<br>", $text);
     }
 
-    protected function replaceTabs(string $text, string $title = ''): string|null
+    protected function replaceTabs(?string $text, string $title = ''): string|null
     {
         $imageUrl = Storage::disk('public')->url('/');
 
