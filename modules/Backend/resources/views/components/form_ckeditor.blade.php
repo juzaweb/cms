@@ -8,7 +8,7 @@
             <a class="nav-link @if(request()->query('e', 'editor') == 'html') active @endif" id="html-tab" href="?e=html">Html</a>
         </li>
     </ul>--}}
-    <textarea class="form-control" name="{{ $name }}" id="{{ $id }}" rows="5">{{ $value ?? '' }}</textarea>
+    <textarea class="form-control" name="{{ $name }}" id="{{ $id }}" rows="5">{{ \Juzaweb\CMS\Support\Converter\HTMLToBBCode::toBBCode($value ?? '') }}</textarea>
 </div>
 
 <script type="text/javascript">
@@ -22,12 +22,14 @@
         if (tab === 'editor') {
             tinymce.init({
                 selector: '#{{ $id }}',
+                relative_urls : true,
+                document_base_url : '{{ url('/storage') }}/',
                 height: 400,
                 plugins: [
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
                     "searchreplace wordcount visualblocks visualchars code fullscreen",
                     "insertdatetime media nonbreaking save table directionality",
-                    "emoticons template paste textpattern"
+                    "emoticons template paste textpattern bbcode"
                 ],
                 menu: {
                     file: { title: 'File', items: 'newdocument restoredraft | preview | print ' },
