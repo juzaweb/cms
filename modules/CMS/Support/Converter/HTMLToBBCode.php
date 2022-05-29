@@ -16,7 +16,7 @@ class HTMLToBBCode
 {
     protected array $noneReplace = [];
 
-    public static function toBBCode(string $text): null|string
+    public static function toBBCode(?string $text): null|string
     {
         return app(static::class)->convert($text);
     }

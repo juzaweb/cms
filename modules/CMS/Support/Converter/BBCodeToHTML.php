@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BBCodeToHTML
 {
-    public static function toHTML(string $text, string $alt = ''): string
+    public static function toHTML(?string $text, ?string $alt = null): string
     {
         return app(static::class)->convert($text, $alt);
     }
