@@ -8,7 +8,7 @@
             <a class="nav-link @if(request()->query('e', 'editor') == 'html') active @endif" id="html-tab" href="?e=html">Html</a>
         </li>
     </ul>--}}
-    <textarea class="form-control" name="{{ $name }}" id="{{ $id }}" rows="5">{{ $value ?? '' }}</textarea>
+    <textarea class="form-control" name="{{ $name }}" id="{{ $id }}" rows="5">{{ \Juzaweb\CMS\Support\Converter\HTMLToBBCode::toBBCode($value ?? '') }}</textarea>
 </div>
 
 <script type="text/javascript">
