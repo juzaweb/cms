@@ -19,7 +19,7 @@ class BBCodeToHTML
         return app(static::class)->convert($text, $alt);
     }
 
-    public function convert(?string $text, string $alt = ''): string|null
+    public function convert(?string $text, ?string $alt = ''): string|null
     {
         $text = $this->replaceTabs($text, $alt);
         $text = trim($text);
@@ -27,7 +27,7 @@ class BBCodeToHTML
         return str_replace("<br><br>", "<br>", $text);
     }
 
-    protected function replaceTabs(?string $text, string $title = ''): string|null
+    protected function replaceTabs(?string $text, ?string $alt = ''): string|null
     {
         $imageUrl = Storage::disk('public')->url('/');
 
@@ -79,8 +79,8 @@ class BBCodeToHTML
             '<span style="color:$1;">$2</span>',
             '<a href="$1" rel="nofollow" target="_blank">$1</a>',
             '<a href="$1" rel="nofollow" target="_blank">$2</a>',
-            '<img src="$1" alt="'. e($title) .'" />',
-            '<img src="'. $imageUrl .'$1" alt="'. e($title) .'" />',
+            '<img src="$1" alt="'. e($alt) .'" />',
+            '<img src="'. $imageUrl .'$1" alt="'. e($alt) .'" />',
             '<div class="embed-responsive">'.
             '<iframe src="$1" class="embed-responsive-item" allowfullscreen></iframe>'
             .'</div>',
