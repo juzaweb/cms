@@ -560,11 +560,9 @@ trait PostTypeModel
 
     public function getContent(): string
     {
-        $content = BBCodeToHTML::toHTML($this->content);
-
         return apply_filters(
             $this->type . '.get_content',
-            $content
+            $this->content
         );
     }
 

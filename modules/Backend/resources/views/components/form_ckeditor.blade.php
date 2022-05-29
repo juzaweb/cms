@@ -8,7 +8,7 @@
             <a class="nav-link @if(request()->query('e', 'editor') == 'html') active @endif" id="html-tab" href="?e=html">Html</a>
         </li>
     </ul>--}}
-    <textarea class="form-control" name="{{ $name }}" id="{{ $id }}" rows="5">{{ \Juzaweb\CMS\Support\Converter\HTMLToBBCode::toBBCode($value ?? '') }}</textarea>
+    <textarea class="form-control" name="{{ $name }}" id="{{ $id }}" rows="5">{{ $value ?? '' }}</textarea>
 </div>
 
 <script type="text/javascript">
@@ -29,7 +29,7 @@
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
                     "searchreplace wordcount visualblocks visualchars code fullscreen",
                     "insertdatetime media nonbreaking save table directionality",
-                    "emoticons template paste textpattern bbcode"
+                    "emoticons template paste textpattern"
                 ],
                 menu: {
                     file: { title: 'File', items: 'newdocument restoredraft | preview | print ' },

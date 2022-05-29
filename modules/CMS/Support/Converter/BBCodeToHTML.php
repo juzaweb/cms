@@ -57,7 +57,7 @@ class BBCodeToHTML
             '~\[size=(.*?)\](.*?)\[/size\]~s',
             '~\[color=(.*?)\](.*?)\[/color\]~s',
             '~\[url\](.*?)\[/url\]~s',
-            '~\[url=\"(.*?)\"\](.*?)\[/url\]~s',
+            '~\[url=(.*?)\](.*?)\[/url\]~s',
             '~\[img\]((https?)://.*?)\[/img\]~s',
             '~\[img\](.*?)\[/img\]~s',
             '~\[embed\](.*?)\[/embed\]~s',
