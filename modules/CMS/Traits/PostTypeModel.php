@@ -16,9 +16,11 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Comment;
+use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostMeta;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Support\Converter\BBCodeToHTML;
 
 /**
  * @method Builder wherePublish()
@@ -38,7 +40,7 @@ trait PostTypeModel
     /**
      * Create Builder for frontend
      *
-     * @return Builder|\Juzaweb\Backend\Models\Post
+     * @return Builder|Post
      */
     public static function selectFrontendBuilder()
     {
@@ -558,9 +560,11 @@ trait PostTypeModel
 
     public function getContent(): string
     {
+        $content = BBCodeToHTML::toHTML($this->content);
+
         return apply_filters(
             $this->type . '.get_content',
-            $this->content
+            $content
         );
     }
 
