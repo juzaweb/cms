@@ -128,6 +128,19 @@ class JuzawebTable {
 
                             if (response.status === true) {
                                 show_message(response);
+
+                                if (response.data.window_redirect) {
+                                    window.location = response.data.window_redirect;
+                                    return false;
+                                }
+
+                                if (response.data.redirect) {
+                                    setTimeout(function () {
+                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                    }, 1000);
+                                    return false;
+                                }
+
                                 table.bootstrapTable('refresh');
                                 $('select[name=bulk_actions]').val(null).trigger('change.select2');
                                 return false;
@@ -203,6 +216,11 @@ class JuzawebTable {
                         callback: function (response) {
                             if (response.status === true) {
                                 show_message(response);
+
+                                if (response.data.window_redirect) {
+                                    window.location = response.data.window_redirect;
+                                    return false;
+                                }
 
                                 if (response.data.redirect) {
                                     setTimeout(function () {
@@ -295,6 +313,20 @@ class JuzawebTable {
                                 'action': action
                             },
                             success: function (response) {
+                                if (response.data.window_redirect) {
+                                    show_message(response);
+                                    window.location = response.data.window_redirect;
+                                    return false;
+                                }
+
+                                if (response.data.redirect) {
+                                    show_message(response);
+                                    setTimeout(function () {
+                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                    }, 1000);
+                                    return false;
+                                }
+
                                 table.bootstrapTable('refresh');
                             }
                         });
@@ -312,6 +344,20 @@ class JuzawebTable {
                         'action': action
                     },
                     success: function (response) {
+                        if (response.data.window_redirect) {
+                            show_message(response);
+                            window.location = response.data.window_redirect;
+                            return false;
+                        }
+
+                        if (response.data.redirect) {
+                            show_message(response);
+                            setTimeout(function () {
+                                Turbolinks.visit(response.data.redirect, {action: "replace"});
+                            }, 1000);
+                            return false;
+                        }
+
                         table.bootstrapTable('refresh');
                     }
                 });
