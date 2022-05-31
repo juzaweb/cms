@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Juzaweb\CMS\Database\Factories\PostFactory;
 use Juzaweb\CMS\Models\Model;
-use Juzaweb\CMS\Traits\ModelCache;
 use Juzaweb\CMS\Traits\PostTypeModel;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
@@ -84,13 +83,10 @@ use Spatie\Feed\FeedItem;
  */
 class Post extends Model implements Feedable
 {
-    use PostTypeModel, HasFactory, ModelCache;
+    use PostTypeModel;
+    use HasFactory;
 
-    const STATUS_PUBLISH = 'publish';
-
-    public $cachePrefix = 'posts_';
-
-    public $cacheTags = ['posts_tags'];
+    public const STATUS_PUBLISH = 'publish';
 
     protected $table = 'posts';
 

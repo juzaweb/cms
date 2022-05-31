@@ -1,4 +1,5 @@
 <?php
+
 return [
     'home' => '家',
     'widgets' => '小部件',

@@ -25,7 +25,7 @@ class PostCollection extends ResourceCollection
         return $this->collection->map(
             function ($item) {
                 $taxonomies = TaxonomyResource::collection($item->taxonomies);
-                
+
                 return [
                     'id' => $item->id,
                     'title' => $item->getTitle(),

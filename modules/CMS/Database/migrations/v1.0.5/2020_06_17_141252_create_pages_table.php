@@ -34,19 +34,20 @@ class CreatePagesTable extends Migration
                 ->onDelete('cascade');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('page_metas');
         Schema::dropIfExists('pages');
     }
-    
-    private function _createPages() {
+
+    private function _createPages()
+    {
         $pages = [
             'Terms of Use',
             'Privacy Policy',
         ];
-        
+
         foreach ($pages as $page) {
             Page::create([
                 'name' => $page,

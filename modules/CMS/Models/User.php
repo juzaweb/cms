@@ -20,7 +20,6 @@ use Illuminate\Support\Arr;
 use Juzaweb\Backend\Models\PasswordReset;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Database\Factories\UserFactory;
-use Juzaweb\CMS\Traits\ModelCache;
 use Juzaweb\CMS\Traits\ResourceModel;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -86,12 +85,11 @@ class User extends Authenticatable
     use Notifiable;
     use ResourceModel;
     use HasFactory;
-    use ModelCache;
     use HasRoles;
 
-    const STATUS_ACTIVE = 'active';
-    const STATUS_VERIFICATION = 'verification';
-    const STATUS_BANNED = 'banned';
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_VERIFICATION = 'verification';
+    public const STATUS_BANNED = 'banned';
 
     protected $fillable = [
         'name',

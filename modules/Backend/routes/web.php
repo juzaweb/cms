@@ -25,19 +25,19 @@ Route::group(
     function () {
         Route::get('/', [WelcomeController::class, 'welcome'])->name('installer.welcome');
         Route::get('environment', [EnvironmentController::class, 'environment'])->name('installer.environment');
-        
+
         Route::post('environment', [EnvironmentController::class, 'save'])->name('installer.environment.save');
-        
+
         Route::get('requirements', [RequirementsController::class, 'requirements'])->name('installer.requirements');
-        
+
         Route::get('permissions', [PermissionsController::class, 'permissions'])->name('installer.permissions');
-        
+
         Route::get('database', [DatabaseController::class, 'database'])->name('installer.database');
-        
+
         Route::get('admin', [AdminController::class, 'index'])->name('installer.admin');
-        
+
         Route::post('admin', [AdminController::class, 'save'])->name('installer.admin.save');
-        
+
         Route::get('final', [FinalController::class, 'finish'])->name('installer.finish');
     }
 );

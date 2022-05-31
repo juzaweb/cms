@@ -17,11 +17,13 @@ trait UseDescription
 {
     public static function bootUseDescription(): void
     {
-        static::saving(function ($model) {
-            if (Schema::hasColumns($model->getTable(), ['description'])) {
-                $model->description = seo_string($model->content, 190);
+        static::saving(
+            function ($model) {
+                if (Schema::hasColumns($model->getTable(), ['description'])) {
+                    $model->description = seo_string($model->content, 190);
+                }
             }
-        });
+        );
     }
 
     public function getDescription($words = 24)

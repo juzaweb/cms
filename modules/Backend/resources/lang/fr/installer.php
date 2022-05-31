@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'Installateur JuzaCMS',
     'next' => 'L\'étape suivante',

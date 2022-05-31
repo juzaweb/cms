@@ -21,7 +21,7 @@ class CreateUserMetasTable extends Migration
                 ->onDelete('cascade');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('user_metas');

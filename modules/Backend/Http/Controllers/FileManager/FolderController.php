@@ -16,7 +16,7 @@ class FolderController extends FileManagerController
             ->get(['id', 'name']);
         $storage = MediaFile::sum('size');
         $total = disk_total_space(storage_path());
-        
+
         foreach ($folders as $folder) {
             $childrens[] = (object) [
                 'name' => $folder->name,

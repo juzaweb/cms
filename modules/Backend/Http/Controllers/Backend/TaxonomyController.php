@@ -143,27 +143,27 @@ class TaxonomyController extends BackendController
 
         return $data;
     }
-    
+
     protected function checkPermission($ability, $arguments = [], ...$params)
     {
         if (!is_array($arguments)) {
             $arguments = [$arguments];
         }
-        
+
         $arguments[] = $params[0];
         $arguments[] = $params[1];
         $this->authorize($ability, $arguments);
     }
-    
+
     protected function getPermission($ability, $arguments = [], ...$params)
     {
         if (!is_array($arguments)) {
             $arguments = [$arguments];
         }
-    
+
         $arguments[] = $params[0];
         $arguments[] = $params[1];
-        
+
         $response = Gate::inspect($ability, $arguments);
         return $response->allowed();
     }

@@ -8,6 +8,7 @@ use Juzaweb\Backend\Actions\EnqueueStyleAction;
 use Juzaweb\Backend\Actions\MenuAction;
 use Juzaweb\Backend\Actions\PermissionAction;
 use Juzaweb\Backend\Actions\SocialLoginAction;
+use Juzaweb\Backend\Actions\ToolAction;
 use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
 use Juzaweb\Backend\Commands\FindTransCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
@@ -60,7 +61,7 @@ class BackendServiceProvider extends ServiceProvider
                 EnqueueStyleAction::class,
                 PermissionAction::class,
                 SocialLoginAction::class,
-                //ToolAction::class
+                ToolAction::class
             ]
         );
 

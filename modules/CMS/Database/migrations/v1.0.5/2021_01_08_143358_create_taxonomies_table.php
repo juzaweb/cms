@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
@@ -22,7 +23,7 @@ class CreateTaxonomiesTable extends Migration
             $table->timestamps();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('taxonomies');

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'password' => 'Şifreler en az sekiz karakterden oluşmalı ve onayla eşleşmelidir.',
     'reset' => 'Şifreniz sıfırlandı!',

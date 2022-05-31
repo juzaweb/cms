@@ -175,7 +175,8 @@ class HtmlDom
     }
 
     protected function prepare(
-        $str, $lowercase = true,
+        $str,
+        $lowercase = true,
         $defaultBRText = DEFAULT_BR_TEXT,
         $defaultSpanText = DEFAULT_SPAN_TEXT
     ) {
@@ -347,7 +348,6 @@ class HtmlDom
                 // Current tag is a block tag, so it may close an ancestor
                 if (isset($this->optional_closing_tags[$parent_lower])
                     && isset($this->block_tags[$tag_lower])) {
-
                     $this->parent->_[HDOM_INFO_END] = 0;
                     $org_parent = $this->parent;
 
@@ -544,7 +544,9 @@ class HtmlDom
 
                 $name = $this->restoreNoise($name); // might be a noisy name
 
-                if ($this->lowercase) { $name = strtolower($name); }
+                if ($this->lowercase) {
+                    $name = strtolower($name);
+                }
 
                 if ($this->char === '=') { // attribute with value
                     $this->char = (++$this->pos < $this->size) ? $this->doc[$this->pos] : null; // next
@@ -696,8 +698,9 @@ class HtmlDom
     {
         $is_duplicate = isset($node->attr[$name]);
 
-        if (!$is_duplicate) // Copy whitespace between "=" and value
+        if (!$is_duplicate) { // Copy whitespace between "=" and value
             $space[2] = $this->copySkip($this->token_blank);
+        }
 
         switch ($this->char) {
             case '"':

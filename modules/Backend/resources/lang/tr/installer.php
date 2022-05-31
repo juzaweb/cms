@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'JuzaCMS Yükleyici',
     'next' => 'Sonraki adım',

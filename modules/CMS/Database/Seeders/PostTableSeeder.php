@@ -16,12 +16,12 @@ class PostTableSeeder extends Seeder
                     ->where('post_type', '=', 'posts')
                     ->inRandomOrder()
                     ->limit(3);
-        
+
                 $tags = Taxonomy::where('taxonomy', '=', 'tags')
                     ->where('post_type', '=', 'posts')
                     ->inRandomOrder()
                     ->limit(5);
-        
+
                 $item->syncTaxonomies(
                     [
                         'categories' => $categories->pluck('id')->toArray(),

@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Support\Facades\Schema;
@@ -22,7 +23,7 @@ class CreateCommentsTable extends Migration
             $table->timestamps();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('comments');

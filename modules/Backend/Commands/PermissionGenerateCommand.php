@@ -19,9 +19,9 @@ use Juzaweb\CMS\Facades\HookAction;
 class PermissionGenerateCommand extends Command
 {
     protected $signature = 'permission:generate';
-    protected $resourcePermissions = ['index', 'create', 'edit', 'delete'];
+    protected array $resourcePermissions = ['index', 'create', 'edit', 'delete'];
 
-    public function handle()
+    public function handle(): int
     {
         $this->resourceGenerate('users', 'User');
         $this->resourceGenerate('email_templates', 'Email Template');

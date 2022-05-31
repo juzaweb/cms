@@ -392,7 +392,7 @@ class MenuAction extends Action
         $currentVersion = $updater->getCurrentVersion();
         $versionAvailable = $updater->getVersionAvailable();
 
-        if (version_compare($currentVersion, $versionAvailable, '>')) {
+        if (version_compare($versionAvailable, $currentVersion, '>')) {
             $notify = new Notification();
 
             $notify->setUsers(

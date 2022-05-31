@@ -22,6 +22,8 @@
         if (tab === 'editor') {
             tinymce.init({
                 selector: '#{{ $id }}',
+                relative_urls : true,
+                document_base_url : '{{ url('/storage') }}/',
                 height: 400,
                 plugins: [
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",

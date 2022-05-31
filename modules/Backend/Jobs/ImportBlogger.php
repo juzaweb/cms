@@ -25,10 +25,10 @@ use Juzaweb\CMS\Support\FileManager;
 
 class ImportBlogger implements ShouldQueue
 {
-    use Dispatchable,
-        InteractsWithQueue,
-        Queueable,
-        SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public $timeout = 3600;
 
@@ -82,7 +82,6 @@ class ImportBlogger implements ShouldQueue
 
         try {
             $thumb = (str_get_html($item['content']))->find('img', 0)->src;
-
             $thumb = FileManager::addFile(
                 $thumb,
                 'image',

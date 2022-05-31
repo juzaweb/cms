@@ -22,7 +22,7 @@ class PostController extends ApiController
     {
         $query = Post::selectFrontendBuilder()
             ->where('type', '=', $type);
-        
+
         $limit = $this->getQueryLimit();
 
         $rows = $query->paginate($limit);

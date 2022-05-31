@@ -12,7 +12,7 @@ use Illuminate\Contracts\Foundation\Application;
 
 class FindTransManager
 {
-    const JSON_GROUP = '*';
+    public const JSON_GROUP = '*';
 
     /** @var \Illuminate\Contracts\Foundation\Application */
     protected $app;
@@ -415,8 +415,10 @@ class FindTransManager
     public function getLocales()
     {
         if (empty($this->locales)) {
-            $locales = array_merge([config('app.locale')],
-                Translation::groupBy('locale')->pluck('locale')->toArray());
+            $locales = array_merge(
+                [config('app.locale')],
+                Translation::groupBy('locale')->pluck('locale')->toArray()
+            );
             foreach ($this->files->directories($this->app->langPath()) as $localeDir) {
                 if (($name = $this->files->name($localeDir)) != 'vendor') {
                     $locales[] = $name;

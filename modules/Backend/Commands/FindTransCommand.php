@@ -71,7 +71,7 @@ class FindTransCommand extends TranslationCommand
             }
         }
     }
-    
+
     /**
      * Get all language trans
      *

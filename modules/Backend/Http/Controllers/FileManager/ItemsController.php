@@ -45,7 +45,7 @@ class ItemsController extends FileManagerController
                 'icon' => $file->type == 'image' ? 'fa-image' : 'fa-file',
                 'is_file' => true,
                 'path' => $file->path,
-                'is_image' => $file->type == 1 ? true : false,
+                'is_image' => $file->type == 1,
                 'name' => $file->name,
                 'thumb_url' => $file->type == 'image' ? $storage->url($file->path) : null,
                 'time' => strtotime($file->created_at),
@@ -81,7 +81,7 @@ class ItemsController extends FileManagerController
                 'root_folders' => array_map(
                     function ($type) use ($folder_types) {
                         $path = $this->lfm->dir($this->helper->getRootFolder($type));
-    
+
                         return (object) [
                             'name' => trans('cms::filemanager.title_' . $type),
                             'url' => $path->path('working_dir'),
@@ -129,8 +129,6 @@ class ItemsController extends FileManagerController
     private static function getCurrentPageFromRequest()
     {
         $currentPage = (int) request()->get('page', 1);
-        $currentPage = $currentPage < 1 ? 1 : $currentPage;
-
-        return $currentPage;
+        return max($currentPage, 1);
     }
 }

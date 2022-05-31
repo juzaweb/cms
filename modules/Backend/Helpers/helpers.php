@@ -1,8 +1,8 @@
 <?php
 
-require __DIR__.'/html_dom.php';
-require __DIR__.'/data_helpers.php';
-require __DIR__.'/plugin.php';
+require __DIR__ . '/html_dom.php';
+require __DIR__ . '/data_helpers.php';
+require __DIR__ . '/plugin.php';
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
@@ -107,9 +107,9 @@ if (!function_exists('generate_token')) {
     {
         $month = date('Y-m');
         $ip = get_client_ip();
-        $key = 'ADA&$sdss$#&%^23vx'.config('app.key');
+        $key = 'ADA&$sdss$#&%^23vx' . config('app.key');
 
-        return md5($key.$month.$key).md5($key.$ip.$string);
+        return md5($key . $month . $key) . md5($key . $ip . $string);
     }
 }
 
@@ -197,7 +197,7 @@ function user_avatar($user = null): string
 if (!function_exists('jw_breadcrumb')) {
     function jw_breadcrumb(string $name, array $addItems = []): \Illuminate\Contracts\View\View
     {
-        $items = apply_filters($name.'_breadcrumb', []);
+        $items = apply_filters($name . '_breadcrumb', []);
 
         if ($addItems) {
             foreach ($addItems as $addItem) {
@@ -415,7 +415,7 @@ if (!function_exists('jw_date_format')) {
 
         $timeFormat = get_config('time_format', 'g:i a');
 
-        return date($dateFormat.' '.$timeFormat, strtotime($date));
+        return date($dateFormat . ' ' . $timeFormat, strtotime($date));
     }
 }
 
@@ -690,15 +690,15 @@ if (!function_exists('remove_query_url')) {
 function format_size_units($bytes, $decimals = 2): string
 {
     if ($bytes >= 1073741824) {
-        $bytes = number_format($bytes / 1073741824, $decimals).' GB';
+        $bytes = number_format($bytes / 1073741824, $decimals) . ' GB';
     } elseif ($bytes >= 1048576) {
-        $bytes = number_format($bytes / 1048576, $decimals).' MB';
+        $bytes = number_format($bytes / 1048576, $decimals) . ' MB';
     } elseif ($bytes >= 1024) {
-        $bytes = number_format($bytes / 1024, $decimals).' KB';
+        $bytes = number_format($bytes / 1024, $decimals) . ' KB';
     } elseif ($bytes > 1) {
-        $bytes = $bytes.' bytes';
+        $bytes = $bytes . ' bytes';
     } elseif ($bytes == 1) {
-        $bytes = $bytes.' byte';
+        $bytes = $bytes . ' byte';
     } else {
         $bytes = '0 bytes';
     }
@@ -736,7 +736,7 @@ function jw_basename($name): string
 function parse_price_format($price): float
 {
     $price = str_replace(',', '', $price);
-    return (float) $price;
+    return (float)$price;
 }
 
 function get_full_url(string $url, string $baseUrl): string
@@ -746,10 +746,10 @@ function get_full_url(string $url, string $baseUrl): string
     }
 
     if (str_starts_with($url, '/')) {
-        return $baseUrl.$url;
+        return $baseUrl . $url;
     }
 
-    return $baseUrl.'/'.$url;
+    return $baseUrl . '/' . $url;
 }
 
 function sub_char($str, $n, $end = '...')
@@ -765,7 +765,7 @@ function sub_char($str, $n, $end = '...')
 
 function cache_prefix($name): string
 {
-    return config('juzaweb.cache_prefix').$name;
+    return config('juzaweb.cache_prefix') . $name;
 }
 
 if (!function_exists('admin_url')) {
@@ -773,7 +773,7 @@ if (!function_exists('admin_url')) {
     {
         if ($path) {
             return url(
-                config('juzaweb.admin_prefix').'/'.ltrim($path, '/'),
+                config('juzaweb.admin_prefix') . '/' . ltrim($path, '/'),
                 $parameters,
                 $secure
             );
@@ -787,5 +787,17 @@ if (!function_exists('jw_basepath')) {
     function jw_basepath(string $path): string
     {
         return explode('?', $path)[0];
+    }
+}
+
+if (!function_exists('remove_bbcode')) {
+    function remove_bbcode(string $text): ?string
+    {
+        $text = preg_replace('~\[img\](.*?)\[/img\]~s', '', $text);
+        $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
+        $text = preg_replace($pattern, ' ', $text);
+        $text = preg_replace('/\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|$!:,.;]*[A-Z0-9+&@#\/%=~_|$]/i', '', $text);
+        $text = str_replace(["\n", "\t"], '', $text);
+        return trim($text);
     }
 }

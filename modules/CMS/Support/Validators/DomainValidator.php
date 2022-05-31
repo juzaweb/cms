@@ -7,6 +7,7 @@
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
  */
+
 namespace Juzaweb\CMS\Support\Validators;
 
 class DomainValidator

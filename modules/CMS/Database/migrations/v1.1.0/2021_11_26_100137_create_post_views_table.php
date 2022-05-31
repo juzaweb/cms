@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +22,7 @@ class CreatePostViewsTable extends Migration
                 ->onDelete('cascade');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('post_views');

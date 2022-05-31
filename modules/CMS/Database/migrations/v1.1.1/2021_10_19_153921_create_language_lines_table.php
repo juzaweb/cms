@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
@@ -16,7 +17,7 @@ class CreateLanguageLinesTable extends Migration
     {
         Schema::create(
             'language_lines',
-                function (Blueprint $table) {
+            function (Blueprint $table) {
                 $table->id();
                 $table->string('namespace', 50)->index();
                 $table->string('group', 50)->index();
