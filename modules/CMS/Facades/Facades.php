@@ -10,6 +10,8 @@
 
 namespace Juzaweb\CMS\Facades;
 
+use Illuminate\Support\Collection;
+
 class Facades
 {
     public static function defaultServiceProviders(): array
@@ -126,10 +128,10 @@ class Facades
         ];
     }
 
-    public static function defaultTwigFacades(): array
+    public static function defaultTwigFacades(): Collection
     {
-        return [
+        return collect([
             'JWQuery' => JWQuery::class,
-        ];
+        ]);
     }
 }
