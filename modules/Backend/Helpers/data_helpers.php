@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Http\Resources\ResourceResource;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Taxonomy;
@@ -8,121 +7,21 @@ use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
+use Juzaweb\CMS\Facades\JWQuery;
 
-function get_posts($type, $options = [])
+function get_posts(string $type, array $options = [])
 {
-    $paginate = Arr::get($options, 'paginate');
-    $taxonomies = Arr::get($options, 'taxonomies');
-    $taxonomy = Arr::get($options, 'taxonomy');
-    $limit = Arr::get($options, 'limit');
-    $metas = Arr::get($options, 'metas');
-    $orderBy = Arr::get($options, 'order_by');
-
-    if ($paginate && $paginate > 30) {
-        $paginate = 12;
-    }
-
-    $query = Post::selectFrontendBuilder()
-        ->where('type', '=', $type);
-
-    if ($taxonomies) {
-        $query->whereTaxonomyIn($taxonomies);
-    }
-
-    if ($taxonomy) {
-        $query->whereTaxonomy($taxonomy);
-    }
-
-    if ($metas && is_array($metas)) {
-        foreach ($metas as $key => $meta) {
-            if (is_numeric($key) || empty($key)) {
-                continue;
-            }
-
-            $query->whereMeta($key, $meta);
-        }
-    }
-
-    if (empty($orderBy)) {
-        $orderBy = ['id' => 'DESC'];
-    }
-
-    foreach ($orderBy as $col => $val) {
-        if (!in_array($col, ['id', 'views'])) {
-            continue;
-        }
-
-        if (!in_array(strtoupper($val), ['DESC', 'ASC'])) {
-            continue;
-        }
-
-        $query->orderBy($col, $val);
-    }
-
-    if ($limit) {
-        if ($limit > 50) {
-            $limit = 10;
-        }
-
-        $query->limit($limit);
-    }
-
-    if ($paginate) {
-        $posts = $query->paginate($paginate);
-
-        return PostResource::collection($posts)
-            ->response()
-            ->getData(true);
-    }
-
-    $posts = $query->get();
-
-    return PostResource::collection($posts)
-        ->toArray(request());
+    return JWQuery::posts($type, $options);
 }
 
 function get_post_taxonomy($post, $taxonomy = null, $params = [])
 {
-    $taxonomies = collect($post['taxonomies'] ?? []);
-
-    if ($taxonomy) {
-        $taxonomies = $taxonomies->where('taxonomy', $taxonomy);
-    }
-
-    if (Arr::get($params, 'tree')) {
-        $taxonomies = $taxonomies->sortBy('level');
-    }
-
-    $taxonomy = $taxonomies->first();
-
-    if ($taxonomy) {
-        return $taxonomy;
-    }
-
-    return $taxonomy;
+    return JWQuery::postTaxonomy($post, $taxonomy, $params);
 }
 
 function get_post_taxonomies($post, $taxonomy = null, $params = [])
 {
-    $taxonomies = collect($post['taxonomies']);
-
-    if ($taxonomy) {
-        $taxonomies = $taxonomies->where('taxonomy', $taxonomy);
-    }
-
-    if ($parentId = Arr::get($params, 'parent_id')) {
-        $taxonomies = $taxonomies->where('parent_id', $parentId);
-    }
-
-    if (Arr::get($params, 'tree')) {
-        $taxonomies = $taxonomies->sortBy('level');
-    }
-
-    if ($limit = Arr::get($params, 'limit')) {
-        $taxonomies = $taxonomies->take($limit);
-    }
-
-    return $taxonomies->toArray();
+    return JWQuery::postTaxonomies($post, $taxonomy, $params);
 }
 
 function get_related_posts($post, $limit = 5, $taxonomy = null)
@@ -136,9 +35,12 @@ function get_related_posts($post, $limit = 5, $taxonomy = null)
         ->toArray();
 
     $posts = Post::selectFrontendBuilder()
-        ->whereHas('taxonomies', function (Builder $q) use ($ids) {
-            $q->whereIn("{$q->getModel()->getTable()}.id", $ids);
-        })
+        ->whereHas(
+            'taxonomies',
+            function (Builder $q) use ($ids) {
+                $q->whereIn("{$q->getModel()->getTable()}.id", $ids);
+            }
+        )
         ->where('id', '!=', $post['id'])
         ->orderBy('id', 'DESC')
         ->take($limit)
@@ -303,4 +205,27 @@ function get_total_resource($resource, $args = [])
     }
 
     return $query->count();
+}
+
+function get_page_url(string|int|Post $page): null|string
+{
+    if ($page instanceof Post) {
+        return $page->getLink();
+    }
+
+    if (is_numeric($page)) {
+        $data = Post::find($page, ['id', 'slug', 'type']);
+
+        if ($data) {
+            return $data->getLink();
+        }
+    }
+
+    $data = Post::findBySlug($page, ['id', 'slug', 'type']);
+
+    if ($data) {
+        return $data->getLink();
+    }
+
+    return null;
 }

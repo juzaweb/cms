@@ -3,8 +3,6 @@
 @section('content')
 
     <div id="media-container">
-
-
         <div class="row mb-2">
             <div class="col-md-8">
                 <form action="" method="get" class="form-inline">
@@ -43,37 +41,46 @@
 
         <div class="list-media mt-5">
             <ul class="media-list">
-                @foreach($mediaItems as $item)
+                @foreach($mediaFolders as $item)
                     <li class="media-item">
-                        <a @if($item->is_file) href="javascript:void(0)" @else href="{{ route('admin.media.folder', [$item->id]) }}" @endif>
+                        <a href="javascript:void(0)">
                             <div class="attachment-preview">
-                                <div class="thumbnail @if(empty($item->is_file)) media-folder @endif">
+                                <div class="thumbnail">
                                     <div class="centered">
-                                        @if($item->thumb)
-                                        <img src="{{ $item->thumb }}" alt="{{ $item->name }}">
+                                        @if($item->type == 'image')
+                                            <img src="{{ upload_url($item->path) }}" alt="{{ $item->name }}">
                                         @else
                                             <i class="fa {{ $item->icon }} fa-3x"></i>
                                         @endif
                                     </div>
                                 </div>
                             </div>
-                            {{--<div class="">
-                                <div class="text-dark text-uppercase font-weight-bold mr-auto">
-                                    {{ $item->name }}
+                        </a>
+                    </li>
+                @endforeach
+
+                @foreach($mediaFiles as $item)
+                    <li class="media-item">
+                        <a href="javascript:void(0)">
+                            <div class="attachment-preview">
+                                <div class="thumbnail">
+                                    <div class="centered">
+                                        @if($item->type == 'image')
+                                        <img src="{{ upload_url($item->path) }}" alt="{{ $item->name }}">
+                                        @else
+                                            <i class="fa {{ $item->icon }} fa-3x"></i>
+                                        @endif
+                                    </div>
                                 </div>
-                                --}}{{--<div class="text-gray-6">
-                                    <button class="btn btn-primary">Activate</button>
-                                </div>--}}{{--
-                            </div>--}}
+                            </div>
                         </a>
                     </li>
                 @endforeach
             </ul>
         </div>
+
+        {{ $mediaFiles->appends(request()->query())->links() }}
     </div>
-
-
-
 @endsection
 
 @section('footer')

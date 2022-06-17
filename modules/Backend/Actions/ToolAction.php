@@ -34,5 +34,16 @@ class ToolAction extends Action
                 ]
             ]
         );
+
+        HookAction::addAdminMenu(
+            'Log Viewer',
+            'log-viewer',
+            [
+                'icon' => 'fa fa-history',
+                'position' => 20,
+                'turbolinks' => false,
+                'parent' => 'tools'
+            ]
+        );
     }
 }

@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Juzaweb\CMS\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Juzaweb\CMS\Http\Middleware\XFrameHeadersMiddleware::class,
-            \Juzaweb\CMS\Http\Middleware\HandleInertiaRequests::class,
+            //\Juzaweb\CMS\Http\Middleware\HandleInertiaRequests::class,
             \Juzaweb\Backend\Http\Middleware\Installed::class,
         ],
 

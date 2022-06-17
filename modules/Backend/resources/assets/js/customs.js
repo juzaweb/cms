@@ -1,3 +1,19 @@
+function addStyleSubmenu(e) {
+    var t = e.find(".juzaweb__menuLeft__navigation"),
+        n = e.offset().top,
+        i = $(window).scrollTop(),
+        o = n - i - 30,
+        e = n + t.height() + 1,
+        n = 60 + e - $('.juzaweb__layout').height(),
+        i = $(window).height() + i - 50;
+
+    if ((n = o < (n = i < e - n ? e - i : n) ? o : n) > 1 && n > 40) {
+        t.css("margin-top", "-" + n + "px");
+    } else {
+        t.css("margin-top", "");
+    }
+}
+
 $(document).on("turbolinks:load", function() {
     let bodyElement = $('body');
 
@@ -46,4 +62,11 @@ $(document).on("turbolinks:load", function() {
             }
         });
     });
+
+    $(".juzaweb__menuLeft__submenu").on("mouseover", function () {
+            if (!$(this).hasClass('juzaweb__menuLeft__submenu--toggled')) {
+                addStyleSubmenu($(this));
+            }
+        }
+    );
 });

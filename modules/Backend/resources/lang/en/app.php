@@ -435,6 +435,7 @@ return [
     'client_secret' => 'Client secret',
     'redirect_url' => 'Redirect url',
     'social_login' => 'Social Login',
+    'update_successfully' => 'Update successfully',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',

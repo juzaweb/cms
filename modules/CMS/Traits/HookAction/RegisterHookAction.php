@@ -24,7 +24,7 @@ trait RegisterHookAction
      *
      * @throws \Exception
      */
-    public function registerPostType(string $key, array $args = [])
+    public function registerPostType(string $key, array $args = []): void
     {
         if (empty($args['label'])) {
             throw new \Exception('Post type label is required.');
@@ -120,7 +120,7 @@ trait RegisterHookAction
      * @param string $key
      * @param Collection $args
      */
-    protected function registerMenuPostType($key, $args)
+    protected function registerMenuPostType(string $key, Collection $args): void
     {
         $supports = (array) $args->get('supports', []);
         $prefix = 'post-type.';
@@ -173,7 +173,7 @@ trait RegisterHookAction
      * @param string $key
      * @param array $args
      */
-    public function registerMenuBox($key, $args = [])
+    public function registerMenuBox(string $key, array $args = []): void
     {
         $opts = [
             'title' => '',
@@ -522,5 +522,17 @@ trait RegisterHookAction
         ];
 
         GlobalData::set('theme_settings.' . $name, new Collection($args));
+    }
+
+    public function registerProfilePage(string $key, array $args = []): void
+    {
+        $default = [
+            'title' => '',
+            'url' => $key,
+        ];
+
+        $args = array_merge($default, $args);
+
+        GlobalData::set('profile_pages.' . $key, new Collection($args));
     }
 }

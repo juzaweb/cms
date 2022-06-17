@@ -1,7 +1,7 @@
 <div class="juzaweb__topbar">
     <div class="mr-4">
-        <a href="{{ url('/') }}" class="mr-2" target="_blank">
-            <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Visit website"></i> {{ trans('cms::app.view_site') }}
+        <a href="{{ url('/') }}" class="mr-2" target="_blank" title="{{ trans('cms::app.view_site') }}">
+            <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" data-original-title="Visit website"></i> {{ trans('cms::app.view_site') }}
         </a>
     </div>
 
@@ -34,7 +34,7 @@
             ->get(['id', 'data', 'created_at']);
     @endphp
 
-    <div class="juzaweb__topbar__actionsDropdown juzaweb__topbar__notify dropdown mr-4 d-none d-sm-block">
+    <div class="juzaweb__topbar__notify dropdown mr-4 d-none d-sm-block">
         <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="0,15">
             <i class="dropdown-toggle-icon fa fa-bell-o"></i> <span>{{ $total }}</span>
         </a>

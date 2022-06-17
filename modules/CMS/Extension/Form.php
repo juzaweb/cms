@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace TwigBridge\Extension\Laravel;
+namespace Juzaweb\CMS\Extension;
 
 use Collective\Html\FormBuilder;
 use Illuminate\Support\Str as IlluminateStr;

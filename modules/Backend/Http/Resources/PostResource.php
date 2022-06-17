@@ -20,7 +20,7 @@ class PostResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         $taxonomies = TaxonomyResource::collection($this->taxonomies)
             ->toArray($request);

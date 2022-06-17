@@ -22,8 +22,12 @@
         if (tab === 'editor') {
             tinymce.init({
                 selector: '#{{ $id }}',
-                relative_urls : true,
-                document_base_url : '{{ url('/storage') }}/',
+                convert_urls: true,
+                document_base_url: '{{ url('/storage') }}/',
+                urlconverter_callback: function(url, node, on_save, name) {
+                    url = url.replace("{{ url('/storage') }}/", '');
+                    return url;
+                },
                 height: 400,
                 plugins: [
                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
