@@ -14,7 +14,6 @@ class Globals extends AbstractExtension implements GlobalsInterface
 
     public function getGlobals(): array
     {
-        $globals = app('view')->getShared();
-        return $globals;
+        return app('view')->getShared();
     }
 }
