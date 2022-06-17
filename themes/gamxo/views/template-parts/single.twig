@@ -1,7 +1,7 @@
 {% extends 'cms::layouts.frontend' %}
 
 {% block content %}
-    {% set tags = get_post_taxonomies(post, 'tags', 5) %}
+    {% set tags = get_post_taxonomies(post, 'tags', {limit: 5}) %}
     <!--=====================================-->
     <section
             class="inner-page-banner bg-common"
