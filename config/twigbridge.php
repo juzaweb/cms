@@ -12,6 +12,9 @@
 /**
  * Configuration options for Twig.
  */
+
+use Juzaweb\CMS\Facades\Facades;
+
 return [
 
     'twig' => [
@@ -107,26 +110,7 @@ return [
         |
         */
         'enabled' => [
-            'TwigBridge\Extension\Laravel\Event',
-            'TwigBridge\Extension\Loader\Facades',
-            'TwigBridge\Extension\Loader\Filters',
-            'TwigBridge\Extension\Loader\Functions',
-            'TwigBridge\Extension\Loader\Globals',
-
-            'TwigBridge\Extension\Laravel\Auth',
-            'TwigBridge\Extension\Laravel\Config',
-            'TwigBridge\Extension\Laravel\Dump',
-            'TwigBridge\Extension\Laravel\Input',
-            'TwigBridge\Extension\Laravel\Session',
-            'TwigBridge\Extension\Laravel\Str',
-            'TwigBridge\Extension\Laravel\Translator',
-            'Juzaweb\CMS\Extension\Url',
-            'TwigBridge\Extension\Laravel\Model',
-            // 'TwigBridge\Extension\Laravel\Gate',
-
-            // 'TwigBridge\Extension\Laravel\Form',
-            // 'TwigBridge\Extension\Laravel\Html',
-            // 'TwigBridge\Extension\Laravel\Legacy\Facades',
+            ...Facades::defaultTwigBridgeEnabled(),
         ],
 
         /*
@@ -156,7 +140,10 @@ return [
         | in order to be marked as safe.
         |
         */
-        'facades' => [],
+        'facades' => [
+            ...Facades::defaultTwigFacades(),
+            //
+        ],
 
         /*
         |--------------------------------------------------------------------------
@@ -222,7 +209,7 @@ return [
         |
         */
         'filters' => [
-            'get' => 'data_get',
+            //'get' => 'data_get',
         ],
     ],
 ];
