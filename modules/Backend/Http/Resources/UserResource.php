@@ -26,6 +26,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'is_admin' => (bool) $this->is_admin,
+            'created_at' => jw_date_format($this->created_at),
             'avatar' => $this->getAvatar(),
         ];
     }

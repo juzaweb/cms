@@ -24,8 +24,14 @@ ul {
     text-transform: capitalize;
 }
 
+.juzaweb__menuLeft__item__link {
+    margin-top: unset;
+    padding: 0 10px 0 8px;
+}
+
 .juzaweb__menuLeft__navigation .juzaweb__menuLeft__navigation .juzaweb__menuLeft__item__link {
     text-transform: capitalize;
+    margin-top: 4px;
 }
 
 .col-form-label {
@@ -186,6 +192,10 @@ span.tag {
     padding: unset;
 }
 
+.juzaweb__menuLeft__item__icon {
+    right: 8px;
+}
+
 .juzaweb__menuLeft__navigation .juzaweb__menuLeft__navigation .juzaweb__menuLeft__item__link {
     height: 30px;
     line-height: 30px;
@@ -196,9 +206,17 @@ span.tag {
     font-size: 1rem;
 }
 
+.juzaweb__menuLeft__submenu>.juzaweb__menuLeft__item__link:after, .juzaweb__menuLeft__submenu>.juzaweb__menuLeft__item__link:before {
+    right: 35px;
+}
+
 .juzaweb__menuLeft__item__link {
     border-radius: 2px;
     text-transform: capitalize;
+}
+
+.juzaweb__menuLeft__logo__container {
+    padding: 0 1rem 0 1rem;
 }
 
 .juzaweb__menuLeft--dark .juzaweb__menuLeft {
@@ -217,11 +235,11 @@ span.tag {
 }
 
 .juzaweb__menuLeft__trigger {
-    width: 200px;
+    width: 180px;
 }
 
 .juzaweb__menuLeft__submenu ul.juzaweb__menuLeft__navigation {
-    margin-left: 200px;
+    margin-left: 180px;
     margin-top: -40px;
     position: absolute;
     color: #7575a3;
@@ -239,7 +257,7 @@ span.tag {
     background: #232135;
     width: unset;
     border-radius: unset;
-    padding: 0 0 0 15px;
+    padding: 0 0 0 8px;
 }
 
 .juzaweb__menuLeft__item--active {
@@ -449,10 +467,10 @@ Form file management
     transition: none;
     display: block;
     min-height: 100%;
-    flex: 0 0 200px;
-    max-width: 200px;
-    min-width: 200px;
-    width: 200px;
+    flex: 0 0 180px;
+    max-width: 180px;
+    min-width: 180px;
+    width: 180px;
 }
 
 .juzaweb__menuLeft__outer {
@@ -562,7 +580,7 @@ Form file management
         top: 0;
         height: 100%;
         /*transform: translate(-256px, 0);*/
-        transform: translate(-200px, 0);
+        transform: translate(-180px, 0);
         transition: transform 0.3s ease-in-out;
         z-index: 999;
     }

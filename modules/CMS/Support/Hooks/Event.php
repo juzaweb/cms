@@ -26,12 +26,14 @@ abstract class Event
      */
     public function listen($hook, $callback, $priority = 20, $arguments = 1)
     {
-        $this->listeners->push([
-            'hook' => $hook,
-            'callback' => $callback instanceof \Closure ? new HashedCallable($callback) : $callback,
-            'priority' => $priority,
-            'arguments' => $arguments,
-        ]);
+        $this->listeners->push(
+            [
+                'hook' => $hook,
+                'callback' => $callback instanceof \Closure ? new HashedCallable($callback) : $callback,
+                'priority' => $priority,
+                'arguments' => $arguments,
+            ]
+        );
 
         return $this;
     }
@@ -47,17 +49,21 @@ abstract class Event
     {
         if ($this->listeners) {
             $this->listeners->where('hook', $hook)
-                ->filter(function ($listener) use ($callback) {
-                    if ($callback instanceof \Closure) {
-                        return (new HashedCallable($callback))->is($listener['callback']);
-                    }
+                ->filter(
+                    function ($listener) use ($callback) {
+                        if ($callback instanceof \Closure) {
+                            return (new HashedCallable($callback))->is($listener['callback']);
+                        }
 
-                    return $callback === $listener['callback'];
-                })
+                        return $callback === $listener['callback'];
+                    }
+                )
                 ->where('priority', $priority)
-                ->each(function ($listener, $key) {
-                    $this->listeners->forget($key);
-                });
+                ->each(
+                    function ($listener, $key) {
+                        $this->listeners->forget($key);
+                    }
+                );
         }
     }
 
@@ -70,9 +76,12 @@ abstract class Event
     {
         if ($hook) {
             if ($this->listeners) {
-                $this->listeners->where('hook', $hook)->each(function ($listener, $key) {
-                    $this->listeners->forget($key);
-                });
+                $this->listeners->where('hook', $hook)
+                    ->each(
+                        function ($listener, $key) {
+                            $this->listeners->forget($key);
+                        }
+                    );
             }
         } else {
             // no hook was specified, so clear entire collection

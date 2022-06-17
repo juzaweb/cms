@@ -33,6 +33,7 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static void registerResource(string $key, $postType = null, $args = [])
  * @method static void registerConfig(array $keys)
  * @method static void registerThemeSetting($name, $label, $args = [])
+ * @method static void registerProfilePage(string $key, array $args = [])
  * @method static array getMenuBoxs(array $keys = [])
  * @method static \Illuminate\Support\Collection getMenuBox(string $key)
  * @method static \Illuminate\Support\Collection getPermalinks(string $key = null)
@@ -50,6 +51,7 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static \Illuminate\Support\Collection getAdminAjaxs($key = null)
  * @method static \Illuminate\Support\Collection getAdminPages($key = null)
  * @method static \Illuminate\Support\Collection getPackageModules($key = null)
+ * @method static \Illuminate\Support\Collection getProfilePages($key = null)
  * @method static \Illuminate\Support\Collection getThemeSettings($name = null)
  * @method static \Illuminate\Support\Collection getEnqueueScripts($inFooter = false)
  * @method static \Illuminate\Support\Collection getEnqueueStyles($inFooter = false)
@@ -63,7 +65,7 @@ class HookAction extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return HookActionContract::class;
     }

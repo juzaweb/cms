@@ -100,4 +100,36 @@ class Facades
             'image/svg+xml',
         ];
     }
+
+    public static function defaultTwigBridgeEnabled(): array
+    {
+        return [
+            'TwigBridge\Extension\Laravel\Event',
+            'TwigBridge\Extension\Loader\Facades',
+            'TwigBridge\Extension\Loader\Filters',
+            'TwigBridge\Extension\Loader\Functions',
+            'Juzaweb\CMS\Extension\Globals',
+
+            //'TwigBridge\Extension\Laravel\Session',
+            //'TwigBridge\Extension\Laravel\Model',
+            //'TwigBridge\Extension\Laravel\Gate',
+
+            //'TwigBridge\Extension\Laravel\Form',
+            //'TwigBridge\Extension\Laravel\Html',
+            //'TwigBridge\Extension\Laravel\Legacy\Facades',
+
+            'Juzaweb\CMS\Extension\Url',
+            'Juzaweb\CMS\Extension\Dump',
+            'Juzaweb\CMS\Extension\Input',
+            'Juzaweb\CMS\Extension\Translator',
+            'Juzaweb\CMS\Extension\Str',
+        ];
+    }
+
+    public static function defaultTwigFacades(): array
+    {
+        return [
+            'JWQuery' => JWQuery::class,
+        ];
+    }
 }

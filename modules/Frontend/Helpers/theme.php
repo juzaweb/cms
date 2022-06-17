@@ -281,7 +281,7 @@ if (! file_exists('get_menu_by_theme_location')) {
 }
 
 if (! function_exists('get_logo')) {
-    function get_logo($default = null)
+    function get_logo($default = null): ?string
     {
         return upload_url(
             get_config('logo'),

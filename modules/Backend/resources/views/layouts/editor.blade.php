@@ -77,8 +77,8 @@
         @endif
 
     <div class="juzaweb__layout">
-        <div class="juzaweb__layout__header">
-            <div class="juzaweb__topbar">
+        <div class="juzaweb__layout__header" style="height: 64px;">
+            <div class="juzaweb__topbar" style="height: 64px;">
                 <div>
                     <a href="{{ $linkIndex }}" class="mr-2">
                         <i class="fa fa-chevron-left fa-3x"></i>

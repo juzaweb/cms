@@ -12,6 +12,7 @@ use Juzaweb\CMS\Contracts\CacheGroupContract;
 use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\JWQueryContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Juzaweb\CMS\Contracts\OverwriteConfigContract;
 use Juzaweb\CMS\Contracts\ThemeConfigContract;
@@ -23,6 +24,7 @@ use Juzaweb\CMS\Support\CacheGroup;
 use Juzaweb\CMS\Support\Config as DbConfig;
 use Juzaweb\CMS\Support\GlobalData;
 use Juzaweb\CMS\Support\HookAction;
+use Juzaweb\CMS\Support\JWQuery;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Manager\BackendMessageManager;
 use Juzaweb\CMS\Support\Theme\ThemeConfig;
@@ -34,6 +36,7 @@ use Juzaweb\CMS\Support\XssCleaner;
 use Juzaweb\DevTool\Providers\DevToolServiceProvider;
 use Juzaweb\Frontend\Providers\FrontendServiceProvider;
 use TwigBridge\Facade\Twig;
+use Illuminate\Pagination\Paginator;
 
 class CmsServiceProvider extends ServiceProvider
 {
@@ -72,6 +75,8 @@ class CmsServiceProvider extends ServiceProvider
         Schema::defaultStringLength(150);
 
         Twig::addExtension(new Custom());
+
+        Paginator::useBootstrapFive();
 
         OverwriteConfig::init();
 
@@ -200,6 +205,13 @@ class CmsServiceProvider extends ServiceProvider
                 return new BackendMessageManager(
                     $app[ConfigContract::class]
                 );
+            }
+        );
+
+        $this->app->singleton(
+            JWQueryContract::class,
+            function ($app) {
+                return new JWQuery($app['db']);
             }
         );
     }

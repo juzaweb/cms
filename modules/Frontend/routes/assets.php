@@ -14,8 +14,9 @@ Route::get('jw-styles/themes/{theme}/{path}', [AssetController::class, 'assetThe
     ->where('theme', '[0-9a-z]+')
     ->where('path', '[0-9a-zA-Z\/\-\.]+');
 
-Route::get('jw-styles/plugins/{plugin}/{path}', [AssetController::class, 'assetPlugin'])
-    ->where('theme', '[0-9a-z]+')
+Route::get('jw-styles/plugins/{vendor}/{plugin}/{path}', [AssetController::class, 'assetPlugin'])
+    ->where('vendor', '[0-9a-z]+')
+    ->where('plugin', '[0-9a-z]+')
     ->where('path', '[0-9a-zA-Z\/\-\.]+');
 
 Route::get('storage/{path}', [AssetController::class, 'assetStorage'])

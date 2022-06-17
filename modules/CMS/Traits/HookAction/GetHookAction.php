@@ -14,7 +14,7 @@ trait GetHookAction
      * @param string|array $keys
      * @return array
      */
-    public function getMenuBoxs($keys = [])
+    public function getMenuBoxs(array $keys = []): array
     {
         $menuBoxs = GlobalData::get('menu_boxs');
 
@@ -35,11 +35,9 @@ trait GetHookAction
      * @param string|array $key
      * @return \Illuminate\Support\Collection|false
      */
-    public function getMenuBox($key)
+    public function getMenuBox($key): bool|Collection
     {
-        $menuBoxs = GlobalData::get('menu_boxs.' . $key);
-
-        return $menuBoxs;
+        return GlobalData::get('menu_boxs.' . $key);
     }
 
     /**
@@ -48,7 +46,7 @@ trait GetHookAction
      * @param string|null $postType
      * @return \Illuminate\Support\Collection
      * */
-    public function getPostTypes($postType = null)
+    public function getPostTypes($postType = null): Collection
     {
         if ($postType) {
             return GlobalData::get('post_types.' . $postType);
@@ -243,5 +241,14 @@ trait GetHookAction
         $scripts = new Collection(GlobalData::get('frontend_styles'));
 
         return $scripts->where('inFooter', $inFooter);
+    }
+
+    public function getProfilePages($key = null): Collection
+    {
+        if ($key) {
+            return Arr::get(GlobalData::get('profile_pages'), $key);
+        }
+
+        return new Collection(GlobalData::get('profile_pages'));
     }
 }

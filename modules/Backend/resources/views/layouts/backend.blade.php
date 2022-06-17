@@ -20,7 +20,7 @@
 
 </head>
 
-<body class="juzaweb__menuLeft--dark juzaweb__topbar--fixed juzaweb__menuLeft--unfixed">
+<body class="juzaweb__menuLeft--dark juzaweb__topbar--fixed juzaweb__menuLeft--unfixed juzaweb__menuLeft--shadow">
 <div class="juzaweb__layout juzaweb__layout--hasSider">
 
     <div class="juzaweb__menuLeft">
@@ -31,7 +31,7 @@
                 <a href="/{{ config('juzaweb.admin_prefix') }}">
                 <div class="juzaweb__menuLeft__logo">
                     <img src="{{ asset('jw-styles/juzaweb/images/logo.svg') }}" class="mr-2" alt="Juzaweb">
-                    <div class="juzaweb__menuLeft__logo__name">Juzaweb</div>
+                    <div class="juzaweb__menuLeft__logo__name">JuzaWeb</div>
                     <div class="juzaweb__menuLeft__logo__descr">Cms</div>
                 </div>
 

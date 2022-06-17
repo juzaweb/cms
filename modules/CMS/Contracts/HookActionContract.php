@@ -10,6 +10,11 @@
 
 namespace Juzaweb\CMS\Contracts;
 
+use Illuminate\Support\Collection;
+
 interface HookActionContract
 {
+    public function getMenuBoxs(array $keys = []): array;
+
+    public function getProfilePages($key = null): Collection;
 }
