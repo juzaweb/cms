@@ -130,8 +130,10 @@ class Facades
 
     public static function defaultTwigFacades(): Collection
     {
-        return collect([
-            'JWQuery' => JWQuery::class,
-        ]);
+        return collect(
+            [
+                'JWQuery' => JWQuery::class,
+            ]
+        );
     }
 }
