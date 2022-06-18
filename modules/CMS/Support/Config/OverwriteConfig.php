@@ -65,6 +65,10 @@ class OverwriteConfig implements OverwriteConfigContract
 
     protected function setupHttps(): void
     {
+        if ($proxyUrl = $this->config->get('app.proxy_url')) {
+            URL::forceRootUrl($proxyUrl);
+        }
+
         if ($proto = $this->request->headers->get('X-Forwarded-Proto')) {
             URL::forceScheme($proto);
         }

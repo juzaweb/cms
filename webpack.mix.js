@@ -20,16 +20,16 @@ mix.options(
     }
 );
 
-//require(`${backendWebpack}`);
-
 //require(`${modulePath}/mix.js`);
 //require(`${modulePath}/filemanage.mix.js`);
-//require(`${pluginPath}/ecommerce/src/resources/assets/mix.js`);
+//require(`${pluginPath}/ecommerce/assets/mix.js`);
 //require(`${themePath}/gamxo/assets/mix.js`);
 
 mix.browserSync({
     files: [
         'modules/**/*',
+        'plugins/**/*',
+        'themes/**/*',
         'config/*',
         'public/**/*',
         'resources/views/**/*',

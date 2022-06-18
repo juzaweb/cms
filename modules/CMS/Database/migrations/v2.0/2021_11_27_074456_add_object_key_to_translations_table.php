@@ -18,8 +18,8 @@ class AddObjectKeyToTranslationsTable extends Migration
         Schema::table(
             'jw_translations',
             function (Blueprint $table) {
-                $table->string('object_type', 50)->index();
-                $table->string('object_key', 50)->index();
+                $table->string('object_type', 50)->nullable()->index();
+                $table->string('object_key', 50)->nullable()->index();
             }
         );
     }
