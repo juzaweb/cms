@@ -45,9 +45,5 @@ mix.browserSync({
                 return snippet + match;
             }
         }
-    },
-    watchOptions: {
-        usePolling: true,
-        interval: 500,
     }
 });
