@@ -6,20 +6,22 @@ use Illuminate\Support\Str;
 
 trait UseSlug
 {
-    public static function bootUseSlug()
+    public static function bootUseSlug(): void
     {
-        static::saving(function ($model) {
-            if (empty($model->slug)) {
-                $model->slug = $model->generateSlug();
+        static::saving(
+            function ($model) {
+                if (empty($model->slug)) {
+                    $model->slug = $model->generateSlug();
+                }
             }
-        });
+        );
     }
 
-    public static function findBySlug($slug)
+    public static function findBySlug($slug, $column = [])
     {
         return self::query()
             ->where('slug', '=', $slug)
-            ->first();
+            ->first($column);
     }
 
     public static function findBySlugOrFail($slug)

@@ -9,7 +9,7 @@
  * @license    GNU V2
  */
 
-require __DIR__ . '/components/profile.php';
+require __DIR__ . '/components/profile.route.php';
 
 use Juzaweb\CMS\Support\Installer;
 use Juzaweb\CMS\Support\Route\Auth;
@@ -73,5 +73,6 @@ if (Installer::alreadyInstalled()) {
         ->where('slug', '^(?!admin\-cp|api\/).*$');
 
     Route::get('{slug}', [RouteController::class, 'index'])
-        ->where('slug', '^(?!admin\-cp|api\/).*$');
+        ->where('slug', '^(?!admin\-cp|api\/).*$')
+        ->name('post');
 }

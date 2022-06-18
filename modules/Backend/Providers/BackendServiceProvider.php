@@ -24,6 +24,9 @@ use Juzaweb\Backend\Observers\PostObserver;
 use Juzaweb\Backend\Observers\TaxonomyObserver;
 use Juzaweb\Backend\Repositories\CommentRepository;
 use Juzaweb\Backend\Repositories\CommentRepositoryEloquent;
+use Juzaweb\Backend\Repositories\MediaFileRepository;
+use Juzaweb\Backend\Repositories\MediaFileRepositoryEloquent;
+use Juzaweb\Backend\Repositories\MediaFolderRepository;
 use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\Backend\Repositories\PostRepositoryEloquent;
 use Juzaweb\Backend\Repositories\TaxonomyRepository;
@@ -42,7 +45,9 @@ class BackendServiceProvider extends ServiceProvider
         PostRepository::class => PostRepositoryEloquent::class,
         TaxonomyRepository::class => TaxonomyRepositoryEloquent::class,
         CommentRepository::class => CommentRepositoryEloquent::class,
-        UserRepository::class => UserRepositoryEloquent::class
+        UserRepository::class => UserRepositoryEloquent::class,
+        MediaFileRepository::class => MediaFileRepositoryEloquent::class,
+        MediaFolderRepository::class => MediaFileRepositoryEloquent::class
     ];
 
     public function boot()

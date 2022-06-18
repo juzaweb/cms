@@ -88,6 +88,7 @@ class Custom extends AbstractExtension
             new TwigFunction('get_total_resource', 'get_total_resource'),
             new TwigFunction('dd', 'dd'),
             new TwigFunction('__', '__'),
+            new TwigFunction('get_page_url', 'get_page_url'),
         ];
     }
 }

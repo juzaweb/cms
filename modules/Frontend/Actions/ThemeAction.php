@@ -48,6 +48,10 @@ class ThemeAction extends Action
         HookAction::addAction(Action::INIT_ACTION, [$this, 'settingFields']);
         HookAction::addAction(Action::FRONTEND_AFTER_BODY, [$this, 'addThemeHeader']);
         HookAction::addAction(Action::INIT_ACTION, [$this, 'templates']);
+        HookAction::addAction(
+            Action::FRONTEND_INIT,
+            [$this, 'addProfilePages']
+        );
     }
 
     public function postTypes()
@@ -230,5 +234,24 @@ class ThemeAction extends Action
         if (is_admin()) {
             echo e(view('cms::frontend.admin_bar'));
         }
+    }
+
+    public function addProfilePages()
+    {
+        HookAction::registerProfilePage(
+            'index',
+            [
+                'title' => trans('cms::app.profile'),
+                'url' => route('profile'),
+            ]
+        );
+
+        HookAction::registerProfilePage(
+            'change_password',
+            [
+                'title' => trans('cms::app.change_password'),
+                'url' => route('profile.change_password'),
+            ]
+        );
     }
 }

@@ -20,11 +20,11 @@ use Illuminate\Support\Str;
 
 abstract class DataTable
 {
-    protected $perPage = 10;
+    protected int $perPage = 10;
 
-    protected $sortName = 'id';
+    protected string $sortName = 'id';
 
-    protected $sortOder = 'desc';
+    protected string $sortOder = 'desc';
 
     protected $params = [];
 
@@ -32,7 +32,7 @@ abstract class DataTable
 
     protected $actionUrl;
 
-    public $currentUrl;
+    public string $currentUrl;
 
     /**
      * Columns datatable
@@ -138,17 +138,17 @@ abstract class DataTable
             ->render();
     }
 
-    public function setDataUrl(string $url)
+    public function setDataUrl(string $url): void
     {
         $this->dataUrl = $url;
     }
 
-    public function setActionUrl(string $url)
+    public function setActionUrl(string $url): void
     {
         $this->actionUrl = $url;
     }
 
-    public function setCurrentUrl(string $url)
+    public function setCurrentUrl(string $url): void
     {
         $this->currentUrl = $url;
     }

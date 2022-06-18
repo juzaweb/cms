@@ -25,6 +25,8 @@ class ClearCacheCommand extends Command
 
         Cache::store('file')->clear();
 
+        $this->info('Caches cleared successfully.');
+
         return self::SUCCESS;
     }
 }

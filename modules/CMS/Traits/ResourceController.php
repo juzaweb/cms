@@ -183,7 +183,7 @@ trait ResourceController
     public function datatable(Request $request, ...$params)
     {
         $table = $this->getDataTable(...$params);
-        $table->setCurrentUrl(action([static::class, 'index'], $params));
+        $table->setCurrentUrl(action([static::class, 'index'], $params, false));
 
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
@@ -348,7 +348,7 @@ trait ResourceController
         $dataTable = $this->getDataTable(...$params);
         $dataTable->setDataUrl(action([static::class, 'datatable'], $params));
         $dataTable->setActionUrl(action([static::class, 'bulkActions'], $params));
-        $dataTable->setCurrentUrl(action([static::class, 'index'], $params));
+        $dataTable->setCurrentUrl(action([static::class, 'index'], $params, false));
 
         $canCreate = $this->getPermission(
             'create',

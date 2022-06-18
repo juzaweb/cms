@@ -10,12 +10,14 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class RequirePluginController extends BackendController
 {
-    public function index(): \Illuminate\Contracts\View\View
+    public function index(): View
     {
         $this->addBreadcrumb(
             [
@@ -34,7 +36,7 @@ class RequirePluginController extends BackendController
         );
     }
 
-    public function getData(): \Illuminate\Http\JsonResponse
+    public function getData(): JsonResponse
     {
         $themeInfo = ThemeLoader::getThemeInfo(jw_current_theme());
         $require = $themeInfo->get('require', []);

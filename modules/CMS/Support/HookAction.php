@@ -11,12 +11,13 @@ namespace Juzaweb\CMS\Support;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
+use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Facades\GlobalData;
 use Juzaweb\CMS\Facades\Hook;
 use Juzaweb\CMS\Traits\HookAction\GetHookAction;
 use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
 
-class HookAction
+class HookAction implements HookActionContract
 {
     use RegisterHookAction;
     use GetHookAction;

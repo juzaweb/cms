@@ -74,24 +74,4 @@ abstract class BaseRepositoryEloquent extends PackageBaseRepository
 
         return $this->parserResult($model);
     }
-
-    /**
-     * Find data by field and value
-     *
-     * @param       $field
-     * @param       $value
-     * @param array $columns
-     *
-     * @return mixed
-     * @throws RepositoryException
-     */
-    public function findByField($field, $value = null, $columns = ['*']): mixed
-    {
-        $this->applyCriteria();
-        $this->applyScope();
-        $model = $this->model->where($field, '=', $value)->first($columns);
-        $this->resetModel();
-
-        return $this->parserResult($model);
-    }
 }

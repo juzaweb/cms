@@ -39,6 +39,34 @@ class FrontendController extends Controller
 
     protected function view($view, $params = [])
     {
+        if ($message = session('message')) {
+            $params['message'] = $message;
+        }
+
+        if ($status = session('status')) {
+            $params['status'] = $status;
+        }
+
+        foreach ($params as $key => $item) {
+            if (is_a($item, 'Illuminate\Support\ViewErrorBag')) {
+                continue;
+            }
+
+            if (!in_array(
+                gettype($item),
+                [
+                    'boolean',
+                    'integer',
+                    'string',
+                    'array',
+                    'double',
+                ]
+            )
+            ) {
+                unset($params[$key]);
+            }
+        }
+
         return Twig::render($view, $params);
     }
 }

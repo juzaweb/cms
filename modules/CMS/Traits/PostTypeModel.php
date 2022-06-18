@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -37,12 +38,7 @@ trait PostTypeModel
     use UseChangeBy;
     use UseDescription;
 
-    /**
-     * Create Builder for frontend
-     *
-     * @return Builder|Post
-     */
-    public static function selectFrontendBuilder()
+    public static function selectFrontendBuilder(): Builder
     {
         $builder = self::with(
             [
@@ -57,6 +53,8 @@ trait PostTypeModel
                 'thumbnail',
                 'slug',
                 'views',
+                'total_rating',
+                'total_comment',
                 'type',
                 'status',
                 'created_by',
@@ -65,9 +63,7 @@ trait PostTypeModel
             ]
         )->wherePublish();
 
-        $builder = apply_filters('post.selectFrontendBuilder', $builder);
-
-        return $builder;
+        return apply_filters('post.selectFrontendBuilder', $builder);
     }
 
     /**
@@ -75,7 +71,7 @@ trait PostTypeModel
      *
      * @return Builder
      */
-    public static function createFrontendBuilder()
+    public static function createFrontendBuilder(): Builder
     {
         $builder = self::with(
             [
@@ -85,12 +81,10 @@ trait PostTypeModel
         )
             ->wherePublish();
 
-        $builder = apply_filters('post.createFrontendBuilder', $builder);
-
-        return $builder;
+        return apply_filters('post.createFrontendBuilder', $builder);
     }
 
-    public static function getStatuses($type = 'posts')
+    public static function getStatuses($type = 'posts'): array
     {
         $statuses = [
             'publish' => trans('cms::app.publish'),
@@ -102,7 +96,7 @@ trait PostTypeModel
         return apply_filters($type . '.statuses', $statuses);
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'title' => trans('cms::app.title'),
@@ -114,13 +108,13 @@ trait PostTypeModel
         ];
     }
 
-    public function taxonomies()
+    public function taxonomies(): BelongsToMany
     {
         return $this->belongsToMany(Taxonomy::class, 'term_taxonomies', 'term_id', 'taxonomy_id')
             ->withPivot(['term_type']);
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comment::class, 'object_id', 'id');
     }
@@ -354,7 +348,7 @@ trait PostTypeModel
         string $taxonomy,
         array $attributes,
         string $postType = null
-    ) {
+    ): bool {
         if (!Arr::has($attributes, $taxonomy)) {
             return true;
         }
@@ -415,6 +409,42 @@ trait PostTypeModel
                 'json_metas' => $metas
             ]
         );
+    }
+
+    public function deleteMeta($key): bool
+    {
+        $this->metas()->where('meta_key', $key)->delete();
+
+        $metas = $this->getMetas();
+
+        unset($metas[$key]);
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+
+        return true;
+    }
+
+    public function deleteMetas(array $keys): bool
+    {
+        $this->metas()->whereIn('meta_key', $keys)->delete();
+
+        $metas = $this->getMetas();
+
+        foreach ($keys as $key) {
+            unset($metas[$key]);
+        }
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+
+        return true;
     }
 
     public function syncMetas(array $data = []): void
@@ -560,16 +590,26 @@ trait PostTypeModel
 
     public function getContent(): string
     {
+        $pattern = '/\<img(.*)src\=\"([0-9a-zA-Z\-\.\/]+)\"(.*)\>/';
+
+        $content = preg_replace_callback(
+            $pattern,
+            function ($matches) {
+                return '<img'.$matches[1].'src="'.upload_url($matches[2]).'"'.$matches[3].'>';
+            },
+            $this->content
+        );
+
         return apply_filters(
             $this->type . '.get_content',
-            $this->content
+            $content
         );
     }
 
     public function getLink(): bool|string
     {
         if ($this->type == 'pages') {
-            return url()->to($this->slug);
+            return route('post', [$this->slug], false);
         }
 
         $permalink = $this->getPermalink('base');
@@ -577,7 +617,7 @@ trait PostTypeModel
             return false;
         }
 
-        return url()->to($permalink . '/' . $this->slug);
+        return route('post', ["{$permalink}/{$this->slug}"], false);
     }
 
     public function getUpdatedDate($format = JW_DATE_TIME): string

@@ -30,7 +30,6 @@ class PageController extends FrontendController
          * @var Config $theme
          */
         $theme = jw_theme_info();
-        $view = $this->getViewPage($page, $theme);
 
         if (is_home()) {
             $config = get_configs(['title', 'description']);
@@ -49,6 +48,10 @@ class PageController extends FrontendController
                 'slug' => $slug,
             ];
         }
+
+        $params = apply_filters('theme.get_params_page', $params, $page);
+
+        $view = $this->getViewPage($page, $theme, $params);
 
         event(new PostViewed($page));
 
@@ -71,13 +74,7 @@ class PageController extends FrontendController
         );
     }
 
-    /**
-     * @param Post $page
-     * @param Config $themeInfo
-     *
-     * @return string
-     */
-    protected function getViewPage(Post $page, $themeInfo): string
+    protected function getViewPage(Post $page, $themeInfo, array $params = []): string
     {
         /* Get view by template */
         if ($template = $page->getMeta('template')) {
@@ -99,7 +96,7 @@ class PageController extends FrontendController
             }
         }
 
-        return apply_filters('theme.get_view_page', $view, $page);
+        return apply_filters('theme.get_view_page', $view, $page, $params);
     }
 
     public function detail(Request $request, $id)

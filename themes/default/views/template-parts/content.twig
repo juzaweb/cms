@@ -1,5 +1,5 @@
 <div class="article__entry">
-    {% set categories = get_post_taxonomies(post, 'categories', 1) %}
+    {% set categories = get_post_taxonomies(post, 'categories', {limit: 1}) %}
 
     <div class="article__image">
         <a href="{{ post.url }}">
