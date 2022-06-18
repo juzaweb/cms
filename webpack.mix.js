@@ -22,7 +22,32 @@ mix.options(
 
 //require(`${backendWebpack}`);
 
-require(`${modulePath}/mix.js`);
+//require(`${modulePath}/mix.js`);
 //require(`${modulePath}/filemanage.mix.js`);
 //require(`${pluginPath}/ecommerce/src/resources/assets/mix.js`);
 //require(`${themePath}/gamxo/assets/mix.js`);
+
+mix.browserSync({
+    files: [
+        'modules/**/*',
+        'config/*',
+        'public/**/*',
+        'resources/views/**/*',
+        'resources/lang/**/*',
+        'routes/**/*'
+    ],
+    proxy: process.env.APP_URL,
+    notify: false,
+    snippetOptions: {
+        rule: {
+            match: /<\/head>/i,
+            fn: function (snippet, match) {
+                return snippet + match;
+            }
+        }
+    },
+    watchOptions: {
+        usePolling: true,
+        interval: 500,
+    }
+});

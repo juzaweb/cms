@@ -73,5 +73,6 @@ if (Installer::alreadyInstalled()) {
         ->where('slug', '^(?!admin\-cp|api\/).*$');
 
     Route::get('{slug}', [RouteController::class, 'index'])
-        ->where('slug', '^(?!admin\-cp|api\/).*$');
+        ->where('slug', '^(?!admin\-cp|api\/).*$')
+        ->name('post');
 }

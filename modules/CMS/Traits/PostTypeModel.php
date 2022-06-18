@@ -609,7 +609,7 @@ trait PostTypeModel
     public function getLink(): bool|string
     {
         if ($this->type == 'pages') {
-            return url()->to($this->slug);
+            return route('post', [$this->slug], false);
         }
 
         $permalink = $this->getPermalink('base');
@@ -617,7 +617,7 @@ trait PostTypeModel
             return false;
         }
 
-        return url()->to($permalink . '/' . $this->slug);
+        return route('post', ["{$permalink}/{$this->slug}"], false);
     }
 
     public function getUpdatedDate($format = JW_DATE_TIME): string
