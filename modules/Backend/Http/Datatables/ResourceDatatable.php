@@ -70,11 +70,14 @@ class ResourceDatatable extends DataTable
                 'align' => 'center',
                 'sortable' => false,
                 'formatter' => function ($value, $row, $index) {
-                    return view('cms::components.datatable.resource_actions', [
-                        'row' => $row,
-                        'post_id' => $this->postId,
-                        'resourses' => $this->childs
-                    ])->render();
+                    return view(
+                        'cms::components.datatable.resource_actions',
+                        [
+                            'row' => $row,
+                            'post_id' => $this->postId,
+                            'resourses' => $this->childs
+                        ]
+                    )->render();
                 },
             ];
         }
@@ -107,10 +110,12 @@ class ResourceDatatable extends DataTable
         }
 
         if ($keyword = Arr::get($data, 'keyword')) {
-            $query->where(function (Builder $q) use ($keyword) {
-                $q->where('name', JW_SQL_LIKE, '%'.$keyword.'%');
-                $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
-            });
+            $query->where(
+                function (Builder $q) use ($keyword) {
+                    $q->where('name', JW_SQL_LIKE, '%'.$keyword.'%');
+                    $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
+                }
+            );
         }
 
         return $query;

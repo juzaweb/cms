@@ -19,6 +19,7 @@ use Juzaweb\CMS\Facades\HookAction;
 class PostTypeDataTable extends DataTable
 {
     protected $postType;
+
     protected $resourses;
 
     public function mount($postType)
@@ -59,9 +60,12 @@ class PostTypeDataTable extends DataTable
                 'width' => '10%',
                 'align' => 'center',
                 'formatter' => function ($value, $row, $index) {
-                    return view('cms::components.datatable.status', compact(
-                        'row'
-                    ))->render();
+                    return view(
+                        'cms::components.datatable.status',
+                        compact(
+                            'row'
+                        )
+                    )->render();
                 },
             ],
         ];
@@ -73,10 +77,13 @@ class PostTypeDataTable extends DataTable
                 'align' => 'center',
                 'sortable' => false,
                 'formatter' => function ($value, $row, $index) {
-                    return view('cms::components.datatable.actions', [
-                        'row' => $row,
-                        'resourses' => $this->resourses
-                    ])->render();
+                    return view(
+                        'cms::components.datatable.actions',
+                        [
+                            'row' => $row,
+                            'resourses' => $this->resourses
+                        ]
+                    )->render();
                 },
             ];
         }
@@ -86,9 +93,12 @@ class PostTypeDataTable extends DataTable
 
     public function actions()
     {
-        return array_merge($this->makeModel()->getStatuses(), [
-            'delete' => trans('cms::app.delete'),
-        ]);
+        return array_merge(
+            $this->makeModel()->getStatuses(),
+            [
+                'delete' => trans('cms::app.delete'),
+            ]
+        );
     }
 
     public function bulkActions($action, $ids)
@@ -179,22 +189,27 @@ class PostTypeDataTable extends DataTable
             $query->where('status', '!=', 'trash');
         }
 
-        $query->where(function (Builder $q) use ($keyword) {
-            $q->where('title', JW_SQL_LIKE, "%{$keyword}%");
-            $q->orWhere('description', JW_SQL_LIKE, "%{$keyword}%");
-        });
+        $query->where(
+            function (Builder $q) use ($keyword) {
+                $q->where('title', JW_SQL_LIKE, "%{$keyword}%");
+                $q->orWhere('description', JW_SQL_LIKE, "%{$keyword}%");
+            }
+        );
 
         return $query;
     }
 
     public function rowActionsFormatter($value, $row, $index)
     {
-        return view('cms::backend.items.datatable_item', [
-            'value' => $row->{$row->getFieldName()},
-            'row' => $row,
-            'actions' => $this->rowAction($row),
-            'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
-        ])
+        return view(
+            'cms::backend.items.datatable_item',
+            [
+                'value' => $row->{$row->getFieldName()},
+                'row' => $row,
+                'actions' => $this->rowAction($row),
+                'editUrl' => $this->currentUrl .'/'. $row->id . '/edit',
+            ]
+        )
             ->render();
     }
 
