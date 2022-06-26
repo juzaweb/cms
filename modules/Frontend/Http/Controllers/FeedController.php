@@ -4,11 +4,12 @@ namespace Juzaweb\Frontend\Http\Controllers;
 
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Http\Controllers\Controller;
 use Spatie\Feed\Feed;
 
-class FeedController
+class FeedController extends Controller
 {
-    public function index()
+    public function index(): Feed
     {
         $posts = Post::with(['createdBy'])
             ->select(
@@ -39,7 +40,7 @@ class FeedController
         );
     }
 
-    public function taxonomy($slug)
+    public function taxonomy($slug): Feed
     {
         $taxonomy = Taxonomy::findBySlugOrFail($slug);
 
