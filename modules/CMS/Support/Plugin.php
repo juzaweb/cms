@@ -324,7 +324,7 @@ class Plugin
     {
         $this->registerProviders();
 
-        $this->registerFiles();
+        //$this->registerFiles();
 
         $this->fireEvent('register');
     }

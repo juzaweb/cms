@@ -24,7 +24,7 @@ class FeedController extends Controller
                 ]
             )
             ->wherePublish()
-            ->latest()
+            ->orderBy('id', 'DESC')
             ->limit(get_config('posts_per_rss', 10))
             ->get();
 
@@ -66,11 +66,11 @@ class FeedController extends Controller
             (string) get_config('title'),
             $posts,
             request()->url(),
-            $feed['view'] ?? 'feed::atom',
+            'feed::atom',
             (string) get_config('description', ''),
-            $feed['language'] ?? 'en-US',
-            $feed['image'] ?? '',
-            $feed['format'] ?? 'atom'
+            'en-US',
+            '',
+            'atom'
         );
     }
 }
