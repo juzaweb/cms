@@ -37,9 +37,12 @@ class LogViewerController extends BackendController
     {
         $title = trans('cms::app.error_logs');
 
-        return view('cms::backend.logs.error.index', compact(
-            'title'
-        ));
+        return view(
+            'cms::backend.logs.error.index',
+            compact(
+                'title'
+            )
+        );
     }
 
     public function show($date)
@@ -50,12 +53,15 @@ class LogViewerController extends BackendController
         ]);
 
         $this->getLogOrFail($date);
-        $title = trans('cms::app.error_logs') .' '. $date;
+        $title = trans('cms::app.error_logs').' '.$date;
 
-        return view('cms::backend.logs.error.logs', compact(
-            'title',
-            'date'
-        ));
+        return view(
+            'cms::backend.logs.error.logs',
+            compact(
+                'title',
+                'date'
+            )
+        );
     }
 
     public function listLogs(Request $request)
@@ -91,7 +97,7 @@ class LogViewerController extends BackendController
     /**
      * Delete a log.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -107,8 +113,8 @@ class LogViewerController extends BackendController
     /**
      * Paginate logs.
      *
-     * @param  array                     $data
-     * @param  \Illuminate\Http\Request  $request
+     * @param array $data
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
@@ -130,7 +136,7 @@ class LogViewerController extends BackendController
     /**
      * Get a log or fail
      *
-     * @param  string  $date
+     * @param string $date
      *
      * @return \Arcanedev\LogViewer\Entities\Log|null
      */

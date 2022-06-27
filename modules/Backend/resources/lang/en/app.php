@@ -476,5 +476,6 @@ return [
             'after' => 'Update data success'
         ],
         'done' => 'Done!!'
-    ]
+    ],
+    'upload_theme' => 'Upload Theme'
 ];

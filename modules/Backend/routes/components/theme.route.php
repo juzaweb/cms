@@ -30,9 +30,14 @@ Route::group(
 
         Route::delete('/delete', 'Backend\ThemeController@delete')->name('admin.themes.delete');
         Route::post('/activate', 'Backend\ThemeController@activate')->name('admin.themes.activate');
+    }
+);
 
-        Route::get('/install', 'Backend\ThemeController@install')->name('admin.theme.install');
-        Route::get('/install/all', 'Backend\ThemeController@getDataThemeInstall')->name('admin.theme.install.all');
+Route::group(
+    ['prefix' => 'theme'],
+    function () {
+        Route::get('/install', 'Backend\ThemeInstallController@index')->name('admin.theme.install');
+        Route::get('/install/all', 'Backend\ThemeInstallController@getData')->name('admin.theme.install.all');
     }
 );
 

@@ -3,8 +3,28 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8"></div>
 
+        <div class="col-md-4 text-right">
+            <button type="button" class="btn btn-success">
+                {{ trans('cms::app.upload_theme') }}
+            </button>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <form action="{{ route('filemanager.upload') }}" role="form" id="uploadForm" name="uploadForm" method="post" class="dropzone" enctype="multipart/form-data">
+                <div class="form-group" id="attachment">
+                    <div class="controls text-center">
+                        <div class="input-group w-100">
+                            <a class="btn btn-primary w-100 text-white" id="upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            </form>
         </div>
     </div>
 
