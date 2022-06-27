@@ -34,10 +34,11 @@ Route::group(
 );
 
 Route::group(
-    ['prefix' => 'theme'],
+    ['prefix' => 'theme/install'],
     function () {
-        Route::get('/install', 'Backend\ThemeInstallController@index')->name('admin.theme.install');
-        Route::get('/install/all', 'Backend\ThemeInstallController@getData')->name('admin.theme.install.all');
+        Route::get('/', 'Backend\ThemeInstallController@index')->name('admin.theme.install');
+        Route::get('all', 'Backend\ThemeInstallController@getData')->name('admin.theme.install.all');
+        Route::post('upload', 'Backend\ThemeInstallController@upload')->name('admin.theme.install.upload');
     }
 );
 

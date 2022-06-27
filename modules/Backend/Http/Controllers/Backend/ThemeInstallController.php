@@ -15,6 +15,9 @@ use Illuminate\Http\Request;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
+use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class ThemeInstallController extends BackendController
 {
@@ -59,8 +62,33 @@ class ThemeInstallController extends BackendController
         );
     }
 
-    public function upload(Request $request)
+    public function upload(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
-        //
+        try {
+            $receiver = new FileReceiver('upload', $request, HandlerFactory::classFromRequest($request));
+            if ($receiver->isUploaded() === false) {
+                throw new UploadMissingFileException();
+            }
+
+            $save = $receiver->receive();
+            if ($save->isFinished()) {
+
+                // event
+                return $this->response([]);
+            }
+
+            $handler = $save->handler();
+
+            return response()->json(
+                [
+                    "done" => $handler->getPercentageDone(),
+                    'status' => true,
+                ]
+            );
+        } catch (\Exception $e) {
+            report($e);
+            $this->errors[] = $e->getMessage();
+            return $this->response($this->errors);
+        }
     }
 }

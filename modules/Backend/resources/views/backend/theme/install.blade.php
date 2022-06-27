@@ -14,7 +14,7 @@
 
     <div class="row mt-2">
         <div class="col-md-12">
-            <form action="{{ route('filemanager.upload') }}" role="form" id="uploadForm" name="uploadForm" method="post" class="dropzone" enctype="multipart/form-data">
+            <form action="{{ route('admin.theme.install.upload') }}" role="form" id="uploadForm" name="uploadForm" method="post" class="dropzone" enctype="multipart/form-data">
                 <div class="form-group" id="attachment">
                     <div class="controls text-center">
                         <div class="input-group w-100">

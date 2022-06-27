@@ -84,9 +84,6 @@ class ThemeController extends BackendController
         );
     }
 
-    /**
-     * @throws \Exception
-     */
     public function activate(Request $request): JsonResponse
     {
         $request->validate(
