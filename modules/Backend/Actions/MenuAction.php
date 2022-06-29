@@ -108,6 +108,7 @@ class MenuAction extends Action
                     'icon' => 'fa fa-paint-brush',
                     'position' => 1,
                     'parent' => 'appearance',
+                    'turbolinks' => false,
                 ]
             );
         }

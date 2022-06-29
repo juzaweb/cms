@@ -11,7 +11,11 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Juzaweb\Backend\Support\ThemeUploader;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\JuzawebApi;
@@ -62,7 +66,7 @@ class ThemeInstallController extends BackendController
         );
     }
 
-    public function upload(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+    public function upload(Request $request): JsonResponse|RedirectResponse
     {
         try {
             $receiver = new FileReceiver('upload', $request, HandlerFactory::classFromRequest($request));
@@ -72,9 +76,12 @@ class ThemeInstallController extends BackendController
 
             $save = $receiver->receive();
             if ($save->isFinished()) {
+                $file = $save->getFile();
+
+                app(ThemeUploader::class)->upload($file);
 
                 // event
-                return $this->response([]);
+                return $this->success(trans('cms::app.upload_successfull'));
             }
 
             $handler = $save->handler();
@@ -87,8 +94,7 @@ class ThemeInstallController extends BackendController
             );
         } catch (\Exception $e) {
             report($e);
-            $this->errors[] = $e->getMessage();
-            return $this->response($this->errors);
+            return $this->error($e->getMessage());
         }
     }
 }

@@ -477,5 +477,15 @@ return [
         ],
         'done' => 'Done!!'
     ],
-    'upload_theme' => 'Upload Theme'
+    'upload_theme' => 'Upload Theme',
+    'upload_successfull' => 'Upload successfull',
+    'theme_upload' => [
+        'error' => [
+            'mime_type' => '',
+            'extension' => '',
+            'file_required' => '',
+            'unzip' => '',
+            'exists' => '',
+        ],
+    ],
 ];
