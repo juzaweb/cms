@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static Plugin[] all()
+ * @method static Plugin|null find(string $name)
  * @method static delete(string $plugin)
  * @method static enable(string $plugin)
  * @method static disable(string $plugin)

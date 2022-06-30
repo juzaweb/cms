@@ -25,7 +25,7 @@ class PluginUploader
 
     protected string $tmpRootFolder;
 
-    protected array $themeInfo;
+    protected array $info;
 
     public function upload(UploadedFile $file): array
     {
@@ -39,13 +39,13 @@ class PluginUploader
 
         $this->findRootFolder();
 
-        $this->validateTheme();
+        $this->validateInfo();
 
         $this->copyToFolder();
 
         $this->removeTempFiles();
 
-        return $this->themeInfo;
+        return $this->info;
     }
 
     public function removeTempFiles(): bool
@@ -63,21 +63,21 @@ class PluginUploader
     {
         File::moveDirectory(
             $this->tmpRootFolder,
-            config('juzaweb.plugin.path') . '/' . $this->themeInfo['name']
+            config('juzaweb.plugin.path') . '/' . $this->info['name']
         );
 
         return true;
     }
 
-    protected function validateTheme(): bool
+    protected function validateInfo(): bool
     {
-        $theme = json_decode(
-            File::get("{$this->tmpRootFolder}/theme.json"),
+        $this->info = json_decode(
+            File::get("{$this->tmpRootFolder}/{$this->getIndexFile()}"),
             true
         );
 
         $validator = Validator::make(
-            $theme,
+            $this->info,
             [
                 'name' => 'bail|required|max:100',
                 'extra.juzaweb.name' => 'bail|required|max:100',
@@ -90,16 +90,16 @@ class PluginUploader
             $this->throwError(array_values($validator->errors()->messages())[0][0]);
         }
 
-        if (Plugin::find($theme['name']) || is_dir(theme_path($theme['name']))) {
+        $localFolder = $this->getLocalFolder();
+
+        if (Plugin::find($this->info['name']) || is_dir(config('juzaweb.plugin.path').'/'.$localFolder)) {
             $this->throwError(
                 trans(
-                    'cms::app.theme_upload.error.exists',
-                    ['name' => $theme['name']]
+                    'cms::app.plugin_upload.error.exists',
+                    ['name' => $this->info['name']]
                 )
             );
         }
-
-        $this->themeInfo = $theme;
 
         return true;
     }
@@ -107,11 +107,11 @@ class PluginUploader
     protected function uploadFileValidate(): bool
     {
         if ($this->file->getMimeType() != 'application/zip') {
-            $this->throwError(trans('cms::app.theme_upload.error.mime_type'));
+            $this->throwError(trans('cms::app.plugin_upload.error.mime_type'));
         }
 
         if ($this->file->extension() != 'zip') {
-            $this->throwError(trans('cms::app.theme_upload.error.extension'));
+            $this->throwError(trans('cms::app.plugin_upload.error.extension'));
         }
 
         return true;
@@ -119,7 +119,7 @@ class PluginUploader
 
     protected function findRootFolder(): bool
     {
-        if (File::exists("{$this->tmpFolder}/composer.json")) {
+        if (File::exists("{$this->tmpFolder}/{$this->getIndexFile()}")) {
             $this->tmpRootFolder = $this->tmpFolder;
             return true;
         }
@@ -127,7 +127,7 @@ class PluginUploader
         $directories = File::directories($this->tmpFolder);
 
         foreach ($directories as $dir) {
-            if (File::exists("{$dir}/theme.json")) {
+            if (File::exists("{$dir}/{$this->getIndexFile()}")) {
                 $this->tmpRootFolder = $dir;
                 return true;
             }
@@ -135,8 +135,8 @@ class PluginUploader
 
         $this->throwError(
             trans(
-                'cms::app.theme_upload.error.file_required',
-                ['name' => 'theme.json']
+                'cms::app.plugin_upload.error.file_required',
+                ['name' => $this->getIndexFile()]
             )
         );
     }
@@ -150,7 +150,7 @@ class PluginUploader
             return true;
         }
 
-        $this->throwError(trans('cms::app.theme_upload.error.unzip'));
+        $this->throwError(trans('cms::app.plugin_upload.error.unzip'));
     }
 
     protected function makeTmpFolder(): void
@@ -162,6 +162,16 @@ class PluginUploader
         if (!is_dir($this->tmpFolder)) {
             File::makeDirectory($this->tmpFolder, 0777, true);
         }
+    }
+
+    protected function getLocalFolder(): string
+    {
+        return explode('/', $this->info['name'])[1];
+    }
+
+    protected function getIndexFile(): string
+    {
+        return 'composer.json';
     }
 
     protected function throwError(string $message): void
