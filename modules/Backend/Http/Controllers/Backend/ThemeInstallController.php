@@ -14,6 +14,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Juzaweb\Backend\Events\AfterUploadTheme;
 use Juzaweb\Backend\Support\ThemeUploader;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -77,9 +78,10 @@ class ThemeInstallController extends BackendController
             if ($save->isFinished()) {
                 $file = $save->getFile();
 
-                app(ThemeUploader::class)->upload($file);
+                $theme = app(ThemeUploader::class)->upload($file);
 
-                // event
+                event(new AfterUploadTheme($theme));
+
                 return $this->success(trans('cms::app.upload_successfull'));
             }
 

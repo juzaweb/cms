@@ -27,7 +27,7 @@ class ThemeUploader
 
     protected array $themeInfo;
 
-    public function upload(UploadedFile $file): bool
+    public function upload(UploadedFile $file): array
     {
         $this->file = $file;
 
@@ -45,7 +45,7 @@ class ThemeUploader
 
         $this->removeTempFiles();
 
-        return true;
+        return $this->themeInfo;
     }
 
     public function removeTempFiles(): bool
