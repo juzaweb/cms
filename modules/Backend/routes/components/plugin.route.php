@@ -6,10 +6,6 @@
  * @author     The Anh Dang
  * @link       https://github.com/juzaweb/juzacms
  * @license    GNU V2
- *
- * Created by JUZAWEB.
- * Date: 5/29/2021
- * Time: 2:24 PM
  */
 
 Route::group(
@@ -24,12 +20,10 @@ Route::group(
 );
 
 Route::group(
-    ['prefix' => 'plugins/install'],
+    ['prefix' => 'plugin/install'],
     function () {
-        Route::get('/', 'Backend\PluginController@install')->name('admin.plugin.install');
+        Route::get('/', 'Backend\PluginInstallController@index')->name('admin.plugin.install');
 
-        Route::get('/all', 'Backend\PluginController@getDataPlugin')->name('admin.plugin.install.all');
-
-        Route::post('/update', 'Backend\PluginController@update')->name('admin.plugin.install.update');
+        Route::get('/all', 'Backend\PluginInstallController@getData')->name('admin.plugin.install.all');
     }
 );

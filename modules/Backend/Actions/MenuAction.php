@@ -105,7 +105,7 @@ class MenuAction extends Action
                 trans('cms::app.add_new'),
                 'theme.install',
                 [
-                    'icon' => 'fa fa-paint-brush',
+                    'icon' => 'fa fa-plus',
                     'position' => 1,
                     'parent' => 'appearance',
                     'turbolinks' => false,
@@ -161,6 +161,29 @@ class MenuAction extends Action
                 'position' => 50,
             ]
         );
+
+        HookAction::addAdminMenu(
+            trans('cms::app.plugins'),
+            'plugins',
+            [
+                'icon' => 'fa fa-plug',
+                'position' => 1,
+                'parent' => 'plugins',
+            ]
+        );
+
+        if (config('juzaweb.plugin.enable_upload')) {
+            HookAction::addAdminMenu(
+                trans('cms::app.add_new'),
+                'plugin.install',
+                [
+                    'icon' => 'fa fa-plus',
+                    'position' => 1,
+                    'parent' => 'plugins',
+                    'turbolinks' => false,
+                ]
+            );
+        }
 
         HookAction::addAdminMenu(
             trans('cms::app.users'),

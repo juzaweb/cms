@@ -39,27 +39,6 @@ class PluginController extends BackendController
         );
     }
 
-    public function install(): View
-    {
-        if (!config('juzaweb.plugin.enable_upload')) {
-            abort(403, 'Access deny.');
-        }
-
-        $this->addBreadcrumb(
-            [
-                'url' => route('admin.plugin'),
-                'title' => trans('cms::app.plugins')
-            ]
-        );
-
-        $title = trans('cms::app.install');
-
-        return view(
-            'cms::backend.plugin.install',
-            compact('title')
-        );
-    }
-
     public function getDataTable(Request $request): JsonResponse
     {
         $offset = $request->get('offset', 0);
@@ -92,22 +71,6 @@ class PluginController extends BackendController
             [
                 'total' => $total,
                 'rows' => $results,
-            ]
-        );
-    }
-
-    public function getDataPlugin(Request $request, JuzawebApi $api): object|array
-    {
-        $limit = $request->get('limit', 20);
-        $page = $request->get('page', 1);
-        $except = array_keys(Plugin::all());
-
-        return $api->get(
-            'plugins',
-            [
-                'limit' => $limit,
-                'page' => $page,
-                'except' => $except
             ]
         );
     }
