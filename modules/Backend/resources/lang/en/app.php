@@ -481,11 +481,11 @@ return [
     'upload_successfull' => 'Upload successfull',
     'theme_upload' => [
         'error' => [
-            'mime_type' => '',
-            'extension' => '',
-            'file_required' => '',
-            'unzip' => '',
-            'exists' => '',
+            'mime_type' => 'Invalid file mime type.',
+            'extension' => 'Invalid file extension.',
+            'file_required' => 'Unable to find :name file.',
+            'unzip' => 'Can\'t unzip file.',
+            'exists' => 'Theme :name already exist.',
         ],
     ],
 ];

@@ -14,7 +14,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Juzaweb\Backend\Support\ThemeUploader;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -69,7 +68,7 @@ class ThemeInstallController extends BackendController
     public function upload(Request $request): JsonResponse|RedirectResponse
     {
         try {
-            $receiver = new FileReceiver('upload', $request, HandlerFactory::classFromRequest($request));
+            $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
             if ($receiver->isUploaded() === false) {
                 throw new UploadMissingFileException();
             }
@@ -93,6 +92,10 @@ class ThemeInstallController extends BackendController
                 ]
             );
         } catch (\Exception $e) {
+            if (config('app.debug')) {
+                throw $e;
+            }
+
             report($e);
             return $this->error($e->getMessage());
         }

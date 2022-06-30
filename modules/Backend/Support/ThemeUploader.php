@@ -23,6 +23,8 @@ class ThemeUploader
 
     protected string $tmpFolder;
 
+    protected string $tmpRootFolder;
+
     protected array $themeInfo;
 
     public function upload(UploadedFile $file): bool
@@ -35,9 +37,13 @@ class ThemeUploader
 
         $this->unzipFile();
 
+        $this->findRootFolder();
+
         $this->validateTheme();
 
         $this->copyToFolder();
+
+        $this->removeTempFiles();
 
         return true;
     }
@@ -56,7 +62,7 @@ class ThemeUploader
     protected function copyToFolder(): bool
     {
         File::moveDirectory(
-            $this->tmpFolder,
+            $this->tmpRootFolder,
             config('juzaweb.theme.path') . '/' . $this->themeInfo['name']
         );
 
@@ -65,17 +71,8 @@ class ThemeUploader
 
     protected function validateTheme(): bool
     {
-        if (!File::exists("{$this->tmpFolder}/theme.json")) {
-            $this->throwError(
-                trans(
-                    'cms::app.theme_upload.error.file_required',
-                    ['name' => 'theme.json']
-                )
-            );
-        }
-
         $theme = json_decode(
-            File::get("{$this->tmpFolder}/theme.json"),
+            File::get("{$this->tmpRootFolder}/theme.json"),
             true
         );
 
@@ -93,7 +90,12 @@ class ThemeUploader
         }
 
         if (Theme::find($theme['name']) || is_dir(theme_path($theme['name']))) {
-            $this->throwError(trans('cms::app.theme_upload.error.exists'));
+            $this->throwError(
+                trans(
+                    'cms::app.theme_upload.error.exists',
+                    ['name' => $theme['name']]
+                )
+            );
         }
 
         $this->themeInfo = $theme;
@@ -112,6 +114,30 @@ class ThemeUploader
         }
 
         return true;
+    }
+
+    protected function findRootFolder(): bool
+    {
+        if (File::exists("{$this->tmpFolder}/theme.json")) {
+            $this->tmpRootFolder = $this->tmpFolder;
+            return true;
+        }
+
+        $directories = File::directories($this->tmpFolder);
+
+        foreach ($directories as $dir) {
+            if (File::exists("{$dir}/theme.json")) {
+                $this->tmpRootFolder = $dir;
+                return true;
+            }
+        }
+
+        $this->throwError(
+            trans(
+                'cms::app.theme_upload.error.file_required',
+                ['name' => 'theme.json']
+            )
+        );
     }
 
     protected function unzipFile(): bool
