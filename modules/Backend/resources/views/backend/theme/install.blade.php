@@ -71,8 +71,6 @@
                 dictDefaultMessage: "{{ trans('cms::filemanager.message-drop') }}",
                 init: function () {
                     this.on('success', function (file, response) {
-                        response = JSON.parse(response);
-
                         if(response.status == false) {
                             this.defaultOptions.error(file, response.data.message);
                         }

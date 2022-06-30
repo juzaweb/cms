@@ -94,10 +94,6 @@ class ThemeInstallController extends BackendController
                 ]
             );
         } catch (\Exception $e) {
-            if (config('app.debug')) {
-                throw $e;
-            }
-
             report($e);
             return $this->error($e->getMessage());
         }
