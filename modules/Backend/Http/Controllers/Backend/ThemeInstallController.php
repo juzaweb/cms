@@ -31,7 +31,7 @@ class ThemeInstallController extends BackendController
             abort(403, 'Access deny.');
         }
 
-        $title = trans('cms::app.install');
+        $title = trans('cms::app.add_new');
 
         $this->addBreadcrumb(
             [
