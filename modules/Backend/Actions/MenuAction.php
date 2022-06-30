@@ -100,6 +100,19 @@ class MenuAction extends Action
             ]
         );
 
+        if (config('juzaweb.plugin.enable_upload')) {
+            HookAction::addAdminMenu(
+                trans('cms::app.add_new'),
+                'theme.install',
+                [
+                    'icon' => 'fa fa-paint-brush',
+                    'position' => 1,
+                    'parent' => 'appearance',
+                    'turbolinks' => false,
+                ]
+            );
+        }
+
         HookAction::addAdminMenu(
             trans('cms::app.widgets'),
             'widgets',
