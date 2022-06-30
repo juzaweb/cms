@@ -478,6 +478,7 @@ return [
         'done' => 'Done!!'
     ],
     'upload_theme' => 'Upload Theme',
+    'upload_plugin' => 'Upload Plugin',
     'upload_successfull' => 'Upload successfull',
     'theme_upload' => [
         'error' => [

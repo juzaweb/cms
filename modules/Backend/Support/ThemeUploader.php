@@ -86,7 +86,7 @@ class ThemeUploader
         );
 
         if ($validator->fails()) {
-            $this->throwError($validator->errors()->messages()[0]);
+            $this->throwError(array_values($validator->errors()->messages())[0][0]);
         }
 
         if (Theme::find($theme['name']) || is_dir(theme_path($theme['name']))) {

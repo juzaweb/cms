@@ -87,7 +87,7 @@ class PluginUploader
         );
 
         if ($validator->fails()) {
-            $this->throwError($validator->errors()->messages()[0]);
+            $this->throwError(array_values($validator->errors()->messages())[0][0]);
         }
 
         if (Plugin::find($theme['name']) || is_dir(theme_path($theme['name']))) {

@@ -25,5 +25,7 @@ Route::group(
         Route::get('/', 'Backend\PluginInstallController@index')->name('admin.plugin.install');
 
         Route::get('/all', 'Backend\PluginInstallController@getData')->name('admin.plugin.install.all');
+
+        Route::post('/upload', 'Backend\PluginInstallController@upload')->name('admin.plugin.install.upload');
     }
 );
