@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\Plugin;
 
-class ThemeUploader
+class PluginUploader
 {
     protected UploadedFile $file;
 
@@ -25,7 +25,7 @@ class ThemeUploader
 
     protected string $tmpRootFolder;
 
-    protected array $themeInfo;
+    protected array $info;
 
     public function upload(UploadedFile $file): array
     {
@@ -39,13 +39,13 @@ class ThemeUploader
 
         $this->findRootFolder();
 
-        $this->validateTheme();
+        $this->validateInfo();
 
         $this->copyToFolder();
 
         $this->removeTempFiles();
 
-        return $this->themeInfo;
+        return $this->info;
     }
 
     public function removeTempFiles(): bool
@@ -61,27 +61,26 @@ class ThemeUploader
 
     protected function copyToFolder(): bool
     {
-        File::moveDirectory(
+        return File::moveDirectory(
             $this->tmpRootFolder,
-            config('juzaweb.theme.path') . '/' . $this->themeInfo['name']
+            config('juzaweb.plugin.path') . '/' . $this->getLocalFolder()
         );
-
-        return true;
     }
 
-    protected function validateTheme(): bool
+    protected function validateInfo(): bool
     {
-        $theme = json_decode(
-            File::get("{$this->tmpRootFolder}/theme.json"),
+        $this->info = json_decode(
+            File::get("{$this->tmpRootFolder}/{$this->getIndexFile()}"),
             true
         );
 
         $validator = Validator::make(
-            $theme,
+            $this->info,
             [
                 'name' => 'bail|required|max:100',
-                'title' => 'bail|required|max:100',
-                'version' => 'bail|required|max:50',
+                'extra.juzaweb.name' => 'bail|required|max:100',
+                'extra.juzaweb.version' => 'bail|required|max:50',
+                'extra.juzaweb.domain' => 'bail|required|max:50',
             ]
         );
 
@@ -89,16 +88,14 @@ class ThemeUploader
             $this->throwError(array_values($validator->errors()->messages())[0][0]);
         }
 
-        if (Theme::find($theme['name']) || is_dir(theme_path($theme['name']))) {
+        if (Plugin::find($this->info['name']) || is_dir(config('juzaweb.plugin.path').'/'.$this->getLocalFolder())) {
             $this->throwError(
                 trans(
-                    'cms::app.theme_upload.error.exists',
-                    ['name' => $theme['name']]
+                    'cms::app.plugin_upload.error.exists',
+                    ['name' => $this->info['name']]
                 )
             );
         }
-
-        $this->themeInfo = $theme;
 
         return true;
     }
@@ -106,11 +103,11 @@ class ThemeUploader
     protected function uploadFileValidate(): bool
     {
         if ($this->file->getMimeType() != 'application/zip') {
-            $this->throwError(trans('cms::app.theme_upload.error.mime_type'));
+            $this->throwError(trans('cms::app.plugin_upload.error.mime_type'));
         }
 
         if ($this->file->extension() != 'zip') {
-            $this->throwError(trans('cms::app.theme_upload.error.extension'));
+            $this->throwError(trans('cms::app.plugin_upload.error.extension'));
         }
 
         return true;
@@ -118,7 +115,7 @@ class ThemeUploader
 
     protected function findRootFolder(): bool
     {
-        if (File::exists("{$this->tmpFolder}/theme.json")) {
+        if (File::exists("{$this->tmpFolder}/{$this->getIndexFile()}")) {
             $this->tmpRootFolder = $this->tmpFolder;
             return true;
         }
@@ -126,7 +123,7 @@ class ThemeUploader
         $directories = File::directories($this->tmpFolder);
 
         foreach ($directories as $dir) {
-            if (File::exists("{$dir}/theme.json")) {
+            if (File::exists("{$dir}/{$this->getIndexFile()}")) {
                 $this->tmpRootFolder = $dir;
                 return true;
             }
@@ -134,8 +131,8 @@ class ThemeUploader
 
         $this->throwError(
             trans(
-                'cms::app.theme_upload.error.file_required',
-                ['name' => 'theme.json']
+                'cms::app.plugin_upload.error.file_required',
+                ['name' => $this->getIndexFile()]
             )
         );
     }
@@ -149,18 +146,28 @@ class ThemeUploader
             return true;
         }
 
-        $this->throwError(trans('cms::app.theme_upload.error.unzip'));
+        $this->throwError(trans('cms::app.plugin_upload.error.unzip'));
     }
 
     protected function makeTmpFolder(): void
     {
-        $folder = 'theme-' . Str::random(5);
+        $folder = 'plugin-' . Str::random(5);
 
         $this->tmpFolder = Storage::disk('tmp')->path($folder);
 
         if (!is_dir($this->tmpFolder)) {
             File::makeDirectory($this->tmpFolder, 0777, true);
         }
+    }
+
+    protected function getLocalFolder(): string
+    {
+        return explode('/', $this->info['name'])[1];
+    }
+
+    protected function getIndexFile(): string
+    {
+        return 'composer.json';
     }
 
     protected function throwError(string $message): void
