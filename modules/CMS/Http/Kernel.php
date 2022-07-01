@@ -59,6 +59,11 @@ class Kernel extends HttpKernel
             'web',
             \Juzaweb\CMS\Http\Middleware\Theme::class,
         ],
+
+        'master_admin' => [
+            'web',
+            \Juzaweb\Network\Http\Middleware\MasterAdmin::class
+        ],
     ];
 
     /**

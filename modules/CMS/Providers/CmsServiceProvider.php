@@ -35,6 +35,7 @@ use Juzaweb\CMS\Support\Validators\ReCaptcha;
 use Juzaweb\CMS\Support\XssCleaner;
 use Juzaweb\DevTool\Providers\DevToolServiceProvider;
 use Juzaweb\Frontend\Providers\FrontendServiceProvider;
+use Juzaweb\Network\Providers\NetworkServiceProvider;
 use TwigBridge\Facade\Twig;
 use Illuminate\Pagination\Paginator;
 
@@ -109,6 +110,11 @@ class CmsServiceProvider extends ServiceProvider
             $this->basePath . '/config/installer.php',
             'installer'
         );
+
+        $this->mergeConfigFrom(
+            $this->basePath . '/config/network.php',
+            'network'
+        );
     }
 
     protected function bootMigrations()
@@ -124,6 +130,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->publishes(
             [
                 $this->basePath . '/config/juzaweb.php' => base_path('config/juzaweb.php'),
+                $this->basePath . '/config/network.php' => base_path('config/network.php'),
                 $this->basePath . '/config/locales.php' => base_path('config/locales.php'),
             ],
             'cms_config'
@@ -227,5 +234,8 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(DevToolServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
         $this->app->register(FrontendServiceProvider::class);
+        if (config('network.enable')) {
+            $this->app->register(NetworkServiceProvider::class);
+        }
     }
 }
