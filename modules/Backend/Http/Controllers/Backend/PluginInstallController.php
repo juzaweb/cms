@@ -15,6 +15,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Events\AfterUploadPlugin;
+use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\Backend\Support\PluginUploader;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -75,6 +76,8 @@ class PluginInstallController extends BackendController
                 $file = $save->getFile();
 
                 $plugin = app(PluginUploader::class)->upload($file);
+
+                event(new DumpAutoloadPlugin());
 
                 event(new AfterUploadPlugin($plugin));
 

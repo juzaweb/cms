@@ -61,12 +61,10 @@ class PluginUploader
 
     protected function copyToFolder(): bool
     {
-        File::moveDirectory(
+        return File::moveDirectory(
             $this->tmpRootFolder,
-            config('juzaweb.plugin.path') . '/' . $this->info['name']
+            config('juzaweb.plugin.path') . '/' . $this->getLocalFolder()
         );
-
-        return true;
     }
 
     protected function validateInfo(): bool
@@ -90,9 +88,7 @@ class PluginUploader
             $this->throwError(array_values($validator->errors()->messages())[0][0]);
         }
 
-        $localFolder = $this->getLocalFolder();
-
-        if (Plugin::find($this->info['name']) || is_dir(config('juzaweb.plugin.path').'/'.$localFolder)) {
+        if (Plugin::find($this->info['name']) || is_dir(config('juzaweb.plugin.path').'/'.$this->getLocalFolder())) {
             $this->throwError(
                 trans(
                     'cms::app.plugin_upload.error.exists',
