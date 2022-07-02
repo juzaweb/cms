@@ -12,14 +12,14 @@ namespace Juzaweb\Network\Providers;
 
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\Network\Contracts\NetworkRegistionContract;
-use Juzaweb\Network\Facades\NetworkRegistion as NetworkRegistionFacade;
+use Juzaweb\Network\Facades\Network;
 use Juzaweb\Network\Support\NetworkRegistion;
 
 class NetworkServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        NetworkRegistionFacade::init();
+        Network::init();
     }
 
     public function register()
@@ -31,7 +31,8 @@ class NetworkServiceProvider extends ServiceProvider
                     $app,
                     $app['config'],
                     $app['request'],
-                    $app['cache']
+                    $app['cache'],
+                    $app['db']
                 );
             }
         );

@@ -15,8 +15,10 @@ use Juzaweb\Network\Contracts\NetworkRegistionContract;
 
 /**
  * @method static void init()
+ * @method static bool isRootSite($domain = null)
+ * @method static string getCurrentDomain()
  */
-class NetworkRegistion extends Facade
+class Network extends Facade
 {
     /**
      * Get the registered name of the component.

@@ -13,44 +13,113 @@ namespace Juzaweb\Network\Support;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
 use Juzaweb\Network\Contracts\NetworkRegistionContract;
+use Juzaweb\Network\Models\Site;
 
 class NetworkRegistion implements NetworkRegistionContract
 {
-    private Application $app;
+    protected Application $app;
 
-    private ConfigRepository $config;
+    protected ConfigRepository $config;
 
-    private CacheManager $cache;
+    protected CacheManager $cache;
 
-    private Request $request;
+    protected Request $request;
+
+    protected DatabaseManager $db;
 
     public function __construct(
         Application $app,
         ConfigRepository $config,
-        $request,
-        CacheManager $cache
+        Request $request,
+        CacheManager $cache,
+        DatabaseManager $db
     ) {
         $this->app = $app;
         $this->config = $config;
         $this->cache = $cache;
         $this->request = $request;
+        $this->db = $db;
     }
 
     public function init(): void
     {
-        if (!$this->app->runningInConsole()) {
+        if (! $this->app->runningInConsole()) {
             $this->setupSite();
         }
     }
 
-    protected function setupSite(): void
+    public function isRootSite($domain = null): bool
     {
-        $GLOBALS['jw_site'] = $site['site'];
+        $domain = $domain ?: $this->getCurrentDomain();
+
+        return $domain == $this->config->get('network.domain');
     }
 
-    private function setCachePrefix($prefix): void
+    public function getCurrentDomain(): string
+    {
+        return $this->request->getHttpHost();
+    }
+
+    protected function setupSite(): void
+    {
+        $currentSite = $this->getCurrentSite();
+
+        $site = $currentSite->site;
+
+        if (empty($site)) {
+            abort(404, 'Site not found.');
+        }
+
+        if ($site->status == Site::STATUS_BANNED) {
+            abort(403, 'Site has been banned.');
+        }
+
+        $GLOBALS['jw_site'] = $site;
+
+        if (!is_null($site->id)) {
+            $this->config->set('juzaweb.plugin.enable_upload', false);
+            $this->config->set('juzaweb.theme.enable_upload', false);
+        }
+
+        $this->setCachePrefix("jw_site_{$site->id}");
+    }
+
+    protected function getCurrentSite(): object
+    {
+        $domain = $this->getCurrentDomain();
+
+        if ($this->isRootSite($domain)) {
+            $site = (object) [
+                'id' => null,
+                'status' => Site::STATUS_ACTIVE,
+            ];
+
+            return (object) ['site' => $site];
+        }
+
+        $site = $this->db->table('sites')
+            ->where(
+                function ($q) use ($domain) {
+                    $q->where('domain', '=', $domain);
+                    $q->orWhereExists(
+                        function ($q2) use ($domain) {
+                            $q2->select(['id']);
+                            $q2->from('domain_mappings');
+                            $q2->whereColumn('domain_mappings.site_id', '=', 'sites.id');
+                            $q2->where('domain', '=', $domain);
+                        }
+                    );
+                }
+            )
+            ->first();
+
+        return (object) ['site' => $site];
+    }
+
+    protected function setCachePrefix($prefix): void
     {
         $this->config->set('cache.prefix', $prefix);
 
