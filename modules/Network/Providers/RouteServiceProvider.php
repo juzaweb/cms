@@ -10,7 +10,20 @@
 
 namespace Juzaweb\Network\Providers;
 
-class RouteServiceProvider
-{
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
+class RouteServiceProvider extends ServiceProvider
+{
+    public function map()
+    {
+        $this->mapMasterAdminRoutes();
+    }
+
+    protected function mapMasterAdminRoutes()
+    {
+        Route::middleware('master_admin')
+            ->prefix(config('juzaweb.admin_prefix').'/network')
+            ->group(__DIR__ . '/../routes/master_admin.php');
+    }
 }

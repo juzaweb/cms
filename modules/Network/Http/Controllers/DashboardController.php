@@ -12,17 +12,12 @@ namespace Juzaweb\Network\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 
-class SiteController extends Controller
+class DashboardController extends Controller
 {
     public function index(): View
     {
-        $title = trans('cms::app.network.sites');
+        $title = trans('cms::app.dashboard');
 
-        return view('network::site.index', compact('title'));
-    }
-
-    public function create()
-    {
-        //
+        return view('network::dashboard', compact('title'));
     }
 }

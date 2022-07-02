@@ -10,7 +10,19 @@
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
     <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
 
+    @php
+    $version = \Juzaweb\CMS\Version::getVersion();
+    @endphp
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/vendor.min.css') }}?v={{ $version }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/backend.min.css') }}?v={{ $version }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/custom.min.css') }}?v={{ $version }}">
+
     @include('cms::components.juzaweb_langs')
+
+    <script src="{{ asset('jw-styles/juzaweb/js/vendor.min.js') }}?v={{ $version }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/backend.min.js') }}?v={{ $version }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/custom.min.js') }}?v={{ $version }}"></script>
 
     @yield('header')
 </head>

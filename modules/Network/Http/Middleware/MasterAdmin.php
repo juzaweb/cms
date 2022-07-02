@@ -29,7 +29,7 @@ class MasterAdmin
         $user = Auth::user();
 
         if (! $user->isMasterAdmin()) {
-            abort(403);
+            abort(404);
         }
 
         return $next($request);

@@ -200,7 +200,7 @@ class User extends Authenticatable
     public function isMasterAdmin(): bool
     {
         if (config('network.enable')) {
-            if ($this->isAdmin() || Network::isRootSite()) {
+            if ($this->isAdmin() && Network::isRootSite()) {
                 return true;
             }
         }
