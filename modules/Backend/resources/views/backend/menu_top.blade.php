@@ -1,11 +1,11 @@
 <div class="juzaweb__topbar">
-    <div class="mr-4">
+    <div class="mr-3">
         <a href="{{ url('/') }}" class="mr-2" target="_blank" title="{{ trans('cms::app.view_site') }}">
             <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" data-original-title="Visit website"></i> {{ trans('cms::app.view_site') }}
         </a>
     </div>
 
-    <div class="mr-auto">
+    <div class="mr-3">
         <div class="dropdown mr-4 d-none d-sm-block">
             <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown">
                 <i class="fa fa-plus"></i>
@@ -22,20 +22,22 @@
         </div>
     </div>
 
-    <div class="mr-auto">
-        <div class="dropdown mr-4 d-none d-sm-block">
+    <div class="mr-3">
+        <div class="dropdown d-none d-sm-block">
             <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown">
                 <i class="fa fa-server"></i>
                 <span class="dropdown-toggle-text"> {{ trans('cms::app.network.network') }}</span>
             </a>
 
             <div class="dropdown-menu" role="menu">
-                <a class="dropdown-item" href="{{ route('admin.posts.create', ['posts']) }}">{{ trans('cms::app.post') }}</a>
+                <a class="dropdown-item" href="{{ route('admin.posts.create', ['posts']) }}">{{ trans('cms::app.network.sites') }}</a>
             </div>
         </div>
     </div>
 
     @do_action('backend.menu_top')
+
+    <div class="mr-auto"></div>
 
     @php
         $total = count_unread_notifications();

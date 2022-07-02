@@ -21,10 +21,10 @@ class NetworkAction extends Action
         $this->addAction(Action::BACKEND_INIT, [$this, 'registerMenus']);
 
         if (Network::isRootSite()) {
-            $this->addAction(
+            /*$this->addAction(
                 Action::BACKEND_INIT,
                 [$this, 'registerMasterAdminMenu']
-            );
+            );*/
         }
     }
 

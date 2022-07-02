@@ -53,7 +53,7 @@ class NetworkRegistion implements NetworkRegistionContract
         }
     }
 
-    public function getSite(): object
+    public function getCurrentSite(): object
     {
         return $this->site;
     }
@@ -74,7 +74,7 @@ class NetworkRegistion implements NetworkRegistionContract
 
     protected function setupSite(): void
     {
-        $currentSite = $this->getCurrentSite();
+        $currentSite = $this->getCurrentSiteInfo();
 
         $this->site = $currentSite->site;
 
@@ -113,36 +113,41 @@ class NetworkRegistion implements NetworkRegistionContract
         $GLOBALS['jw_site'] = $this->site;
     }
 
-    protected function getCurrentSite(): object
+    protected function getCurrentSiteInfo(): object
     {
         $domain = $this->getCurrentDomain();
 
-        if ($domain == $this->config->get('network.domain')) {
-            $site = (object) [
-                'id' => null,
-                'status' => Site::STATUS_ACTIVE,
-            ];
+        return $this->cache->rememberForever(
+            md5($domain),
+            function () use ($domain) {
+                if ($domain == $this->config->get('network.domain')) {
+                    $site = (object) [
+                        'id' => null,
+                        'status' => Site::STATUS_ACTIVE,
+                    ];
 
-            return (object) ['site' => $site];
-        }
-
-        $site = $this->db->table('network_sites')
-            ->where(
-                function ($q) use ($domain) {
-                    $q->where('domain', '=', $domain);
-                    $q->orWhereExists(
-                        function ($q2) use ($domain) {
-                            $q2->select(['id']);
-                            $q2->from('network_domain_mappings');
-                            $q2->whereColumn('network_domain_mappings.site_id', '=', 'network_sites.id');
-                            $q2->where('domain', '=', $domain);
-                        }
-                    );
+                    return (object) ['site' => $site];
                 }
-            )
-            ->first();
 
-        return (object) ['site' => $site];
+                $site = $this->db->table('network_sites')
+                    ->where(
+                        function ($q) use ($domain) {
+                            $q->where('domain', '=', $domain);
+                            $q->orWhereExists(
+                                function ($q2) use ($domain) {
+                                    $q2->select(['id']);
+                                    $q2->from('network_domain_mappings');
+                                    $q2->whereColumn('network_domain_mappings.site_id', '=', 'network_sites.id');
+                                    $q2->where('domain', '=', $domain);
+                                }
+                            );
+                        }
+                    )
+                    ->first();
+
+                return (object) ['site' => $site];
+            }
+        );
     }
 
     protected function setCachePrefix($prefix): void

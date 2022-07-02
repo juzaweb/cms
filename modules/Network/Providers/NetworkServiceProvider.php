@@ -29,6 +29,7 @@ class NetworkServiceProvider extends ServiceProvider
     public function register()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'network');
 
         $this->app->singleton(
             NetworkRegistionContract::class,

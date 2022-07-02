@@ -17,7 +17,7 @@ trait RootNetworkModel
     public function getConnectionName()
     {
         if (config('network.enable') && !Network::isRootSite()) {
-            return Network::getSite()->root_connection;
+            return Network::getCurrentSite()->root_connection;
         }
 
         return $this->connection;
