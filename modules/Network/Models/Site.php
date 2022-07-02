@@ -18,7 +18,7 @@ class Site extends Model
     const STATUS_VERIFICATION = 'verification';
     const STATUS_BANNED = 'banned';
 
-    protected $table = 'sites';
+    protected $table = 'network_sites';
 
     protected $fillable = [
         'domain'

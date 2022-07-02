@@ -10,9 +10,11 @@
 
 namespace Juzaweb\Network\Providers;
 
+use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\Network\Contracts\NetworkRegistionContract;
 use Juzaweb\Network\Facades\Network;
+use Juzaweb\Network\NetworkAction;
 use Juzaweb\Network\Support\NetworkRegistion;
 
 class NetworkServiceProvider extends ServiceProvider
@@ -20,6 +22,8 @@ class NetworkServiceProvider extends ServiceProvider
     public function boot()
     {
         Network::init();
+        
+        ActionRegister::register(NetworkAction::class);
     }
 
     public function register()

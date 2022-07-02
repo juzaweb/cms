@@ -82,6 +82,14 @@ class NetworkRegistion implements NetworkRegistionContract
         if (!is_null($site->id)) {
             $this->config->set('juzaweb.plugin.enable_upload', false);
             $this->config->set('juzaweb.theme.enable_upload', false);
+
+            $connection = $this->db->getDefaultConnection();
+            $prefix = $this->db->getTablePrefix() . "_site{$site->id}_";
+
+            $this->config->set(
+                "database.connections.{$connection}.prefix",
+                $prefix
+            );
         }
 
         $this->setCachePrefix("jw_site_{$site->id}");
@@ -100,15 +108,15 @@ class NetworkRegistion implements NetworkRegistionContract
             return (object) ['site' => $site];
         }
 
-        $site = $this->db->table('sites')
+        $site = $this->db->table('network_sites')
             ->where(
                 function ($q) use ($domain) {
                     $q->where('domain', '=', $domain);
                     $q->orWhereExists(
                         function ($q2) use ($domain) {
                             $q2->select(['id']);
-                            $q2->from('domain_mappings');
-                            $q2->whereColumn('domain_mappings.site_id', '=', 'sites.id');
+                            $q2->from('network_domain_mappings');
+                            $q2->whereColumn('network_domain_mappings.site_id', '=', 'network_sites.id');
                             $q2->where('domain', '=', $domain);
                         }
                     );
