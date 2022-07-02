@@ -5,12 +5,12 @@
 
         global $jw_user;
 
-        $adminPrefix = config('juzaweb.admin_prefix');
+        $adminPrefix = config('juzaweb.admin_prefix') . '/network';
         $adminUrl = url($adminPrefix);
         $currentUrl = url()->current();
         $segment3 = request()->segment(3);
         $segment2 = request()->segment(2);
-        $items = MenuCollection::make(HookAction::getAdminMenu());
+        $items = MenuCollection::make(HookAction::getMasterAdminMenu());
     @endphp
 
     @foreach($items as $item)
@@ -51,7 +51,10 @@
                     <span class="juzaweb__menuLeft__item__title">{{ $item->get('title') }}</span>
                 </span>
 
-                <ul class="juzaweb__menuLeft__navigation" @if($hasActive) style="display: block;" @endif>
+                <ul
+                    class="juzaweb__menuLeft__navigation"
+                    @if($hasActive) style="display: block;" @endif
+                >
                     {!! $strChild !!}
                 </ul>
             </li>

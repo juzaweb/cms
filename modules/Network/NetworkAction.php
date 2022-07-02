@@ -21,31 +21,30 @@ class NetworkAction extends Action
         $this->addAction(Action::BACKEND_INIT, [$this, 'registerMenus']);
 
         if (Network::isRootSite()) {
-            /*$this->addAction(
-                Action::BACKEND_INIT,
+            $this->addAction(
+                Action::NETWORK_INIT,
                 [$this, 'registerMasterAdminMenu']
-            );*/
+            );
         }
     }
 
     public function registerMasterAdminMenu(): void
     {
-        HookAction::addAdminMenu(
-            trans('cms::app.network.network'),
-            'sites',
+        HookAction::addMasterAdminMenu(
+            trans('cms::app.dashboard'),
+            'dashboard',
             [
                 'icon' => 'fa fa-globe',
-                'position' => 5,
+                'position' => 1,
             ]
         );
 
-        HookAction::addAdminMenu(
+        HookAction::addMasterAdminMenu(
             trans('cms::app.network.sites'),
             'sites',
             [
                 'icon' => 'fa fa-globe',
                 'position' => 10,
-                'parent' => 'sites'
             ]
         );
     }

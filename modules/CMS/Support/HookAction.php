@@ -109,6 +109,39 @@ class HookAction implements HookActionContract
         GlobalData::set('admin_menu', $adminMenu);
     }
 
+    public function addMasterAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
+    {
+        $adminMenu = GlobalData::get('master_admin_menu');
+
+        $opts = [
+            'title' => $menuTitle,
+            'key' => $menuSlug,
+            'slug' => str_replace('.', '-', $menuSlug),
+            'icon' => 'fa fa-list-ul',
+            'url' => str_replace('.', '/', $menuSlug),
+            'parent' => null,
+            'position' => 20,
+            'turbolinks' => true,
+        ];
+
+        $item = array_merge($opts, $args);
+        if ($item['parent']) {
+            $adminMenu[$item['parent']]['children'][$item['key']] = $item;
+        } else {
+            if (Arr::has($adminMenu, $item['key'])) {
+                if (Arr::has($adminMenu[$item['key']], 'children')) {
+                    $item['children'] = $adminMenu[$item['key']]['children'];
+                }
+
+                $adminMenu[$item['key']] = $item;
+            } else {
+                $adminMenu[$item['key']] = $item;
+            }
+        }
+
+        GlobalData::set('master_admin_menu', $adminMenu);
+    }
+
     public function enqueueScript(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void
     {
         if (!is_url($src)) {

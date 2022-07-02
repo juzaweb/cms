@@ -2,11 +2,13 @@
 
 namespace Juzaweb\CMS\Facades;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 use Juzaweb\CMS\Contracts\HookActionContract;
 
 /**
  * @method static void addAdminMenu(string $menuTitle, $menuSlug, array $args)
+ * @method static void addMasterAdminMenu(string $menuTitle, $menuSlug, array $args)
  * @method static void registerMenuItem(string $key, $componentClass)
  * @method static void registerPostType(string $key, $args = [])
  * @method static void registerTaxonomy(string $taxonomy, $objectType, $args = [])
@@ -35,26 +37,27 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static void registerThemeSetting($name, $label, $args = [])
  * @method static void registerProfilePage(string $key, array $args = [])
  * @method static array getMenuBoxs(array $keys = [])
- * @method static \Illuminate\Support\Collection getMenuBox(string $key)
- * @method static \Illuminate\Support\Collection getPermalinks(string $key = null)
- * @method static \Illuminate\Support\Collection getPostTypes($postType = null)
- * @method static \Illuminate\Support\Collection getTaxonomies($postType = null)
- * @method static \Illuminate\Support\Collection getEmailHooks($key = null)
- * @method static \Illuminate\Support\Collection getWidgets($key = null)
- * @method static \Illuminate\Support\Collection getPageBlocks($key = null)
- * @method static \Illuminate\Support\Collection getSidebars($key = null)
- * @method static \Illuminate\Support\Collection getThemeTemplates($key = null)
- * @method static \Illuminate\Support\Collection getEnqueueFrontendScripts($key = null)
- * @method static \Illuminate\Support\Collection getEnqueueFrontendStyles($key = null)
- * @method static \Illuminate\Support\Collection getFrontendAjaxs($key = null)
- * @method static \Illuminate\Support\Collection getResource($key = null)
- * @method static \Illuminate\Support\Collection getAdminAjaxs($key = null)
- * @method static \Illuminate\Support\Collection getAdminPages($key = null)
- * @method static \Illuminate\Support\Collection getPackageModules($key = null)
- * @method static \Illuminate\Support\Collection getProfilePages($key = null)
- * @method static \Illuminate\Support\Collection getThemeSettings($name = null)
- * @method static \Illuminate\Support\Collection getEnqueueScripts($inFooter = false)
- * @method static \Illuminate\Support\Collection getEnqueueStyles($inFooter = false)
+ * @method static array getMasterAdminMenu()
+ * @method static Collection getMenuBox(string $key)
+ * @method static Collection getPermalinks(string $key = null)
+ * @method static Collection getPostTypes($postType = null)
+ * @method static Collection getTaxonomies($postType = null)
+ * @method static Collection getEmailHooks($key = null)
+ * @method static Collection getWidgets($key = null)
+ * @method static Collection getPageBlocks($key = null)
+ * @method static Collection getSidebars($key = null)
+ * @method static Collection getThemeTemplates($key = null)
+ * @method static Collection getEnqueueFrontendScripts($key = null)
+ * @method static Collection getEnqueueFrontendStyles($key = null)
+ * @method static Collection getFrontendAjaxs($key = null)
+ * @method static Collection getResource($key = null)
+ * @method static Collection getAdminAjaxs($key = null)
+ * @method static Collection getAdminPages($key = null)
+ * @method static Collection getPackageModules($key = null)
+ * @method static Collection getProfilePages($key = null)
+ * @method static Collection getThemeSettings($name = null)
+ * @method static Collection getEnqueueScripts($inFooter = false)
+ * @method static Collection getEnqueueStyles($inFooter = false)
  *
  * @see \Juzaweb\CMS\Support\HookAction
  */

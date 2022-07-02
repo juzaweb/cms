@@ -10,19 +10,35 @@
 
 namespace Juzaweb\Network\Http\Controllers;
 
-use Illuminate\Contracts\View\View;
+use Juzaweb\CMS\Traits\ResourceController;
+use Juzaweb\Network\Http\Datatables\SiteDatatable;
+use Juzaweb\Network\Models\Site;
 
 class SiteController extends Controller
 {
-    public function index(): View
-    {
-        $title = trans('cms::app.network.sites');
+    use ResourceController;
 
-        return view('network::site.index', compact('title'));
+    protected string $viewPrefix = 'network::site';
+
+    protected function getDataTable(...$params)
+    {
+        return new SiteDatatable();
     }
 
-    public function create()
+    protected function validator(array $attributes, ...$params)
     {
-        //
+        return [
+            'domain' => 'required|max:50|min:4|regex:/(^[a-z0-9\-]+$)+/|unique:sites,domain,' . $attributes['id'],
+        ];
+    }
+
+    protected function getModel(...$params): string
+    {
+        return Site::class;
+    }
+
+    protected function getTitle(...$params): string
+    {
+        return trans('cms::app.network.sites');
     }
 }

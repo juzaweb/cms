@@ -12,6 +12,7 @@ namespace Juzaweb\Network\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Juzaweb\CMS\Abstracts\Action;
 
 class MasterAdmin
 {
@@ -31,6 +32,8 @@ class MasterAdmin
         if (! $user->isMasterAdmin()) {
             abort(404);
         }
+
+        do_action(Action::NETWORK_INIT, $request);
 
         return $next($request);
     }

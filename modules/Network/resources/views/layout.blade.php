@@ -53,7 +53,7 @@
             </div>
 
             <div class="juzaweb__menuLeft__scroll jw__customScroll">
-
+                @include('network::components.menu_left')
             </div>
         </div>
     </div>
@@ -61,11 +61,11 @@
 
     <div class="juzaweb__layout">
         <div class="juzaweb__layout__header">
-
+            @include('network::components.menu_top')
         </div>
 
         <div class="juzaweb__layout__content">
-            @if(!request()->is(config('juzaweb.admin_prefix')))
+            @if(!request()->is(config('juzaweb.admin_prefix').'/network'))
                 {{ jw_breadcrumb('admin', [
                         [
                             'title' => $title
@@ -81,7 +81,6 @@
                         <a href="https://juzaweb.com/documentation/changelog">JuzaCms {{ $version }}</a> {{ __('is available!') }} <a href="{{ route('admin.update') }}">{{ __('Please update now') }}</a>.
                     </div>
                 @endif
-
             @endif
 
             <h4 class="font-weight-bold ml-3 text-capitalize">{{ $title }}</h4>
