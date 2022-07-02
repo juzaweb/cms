@@ -84,12 +84,14 @@ class NetworkRegistion implements NetworkRegistionContract
             $this->config->set('juzaweb.theme.enable_upload', false);
 
             $connection = $this->db->getDefaultConnection();
-            $prefix = $this->db->getTablePrefix() . "_site{$site->id}_";
+            $prefix = $this->db->getTablePrefix() . "site{$site->id}_";
 
             $this->config->set(
                 "database.connections.{$connection}.prefix",
                 $prefix
             );
+
+            $this->db->setTablePrefix($prefix);
         }
 
         $this->setCachePrefix("jw_site_{$site->id}");

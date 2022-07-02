@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Juzaweb\Network\Models\Site;
 
 return new class extends Migration {
     /**
@@ -34,9 +35,14 @@ return new class extends Migration {
             function (Blueprint $table) {
                 $table->id();
                 $table->string('domain', 150)->unique();
-                $table->string('status', 15)->default('$value');
-                $table->unsignedBigInteger('db_id');
+                $table->string('status', 15)->default(Site::STATUS_VERIFICATION);
+                $table->unsignedBigInteger('db_id')->nullable();
                 $table->timestamps();
+
+                $table->foreign('db_id')
+                    ->references('id')
+                    ->on('network_databases')
+                    ->onDelete('set null');
             }
         );
     }
@@ -48,7 +54,7 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('network_databases');
         Schema::dropIfExists('network_sites');
+        Schema::dropIfExists('network_databases');
     }
 };

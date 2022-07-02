@@ -112,7 +112,7 @@ class User extends Authenticatable
 
     public $cachePrefix = 'users_';
 
-    public static function getAllStatus()
+    public static function getAllStatus(): array
     {
         return [
             User::STATUS_ACTIVE => trans('cms::app.active'),

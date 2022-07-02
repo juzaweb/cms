@@ -13,10 +13,17 @@ return new class extends Migration {
     public function up()
     {
         Schema::create(
-            'domain_mappings',
+            'network_domain_mappings',
             function (Blueprint $table) {
                 $table->id();
+                $table->string('domain', 50)->unique();
+                $table->unsignedBigInteger('site_id');
                 $table->timestamps();
+
+                $table->foreign('site_id')
+                    ->references('id')
+                    ->on('network_sites')
+                    ->onDelete('cascade');
             }
         );
     }
@@ -28,6 +35,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('domain_mappings');
+        Schema::dropIfExists('network_domain_mappings');
     }
 };

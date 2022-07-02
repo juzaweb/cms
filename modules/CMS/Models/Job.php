@@ -37,6 +37,7 @@ namespace Juzaweb\CMS\Models;
 class Job extends Model
 {
     protected $unserializedCommand;
+
     protected $table = 'jobs';
 
     public function getNameAttribute()

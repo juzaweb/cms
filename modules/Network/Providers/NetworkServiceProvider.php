@@ -22,12 +22,14 @@ class NetworkServiceProvider extends ServiceProvider
     public function boot()
     {
         Network::init();
-        
+
         ActionRegister::register(NetworkAction::class);
     }
 
     public function register()
     {
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
+
         $this->app->singleton(
             NetworkRegistionContract::class,
             function ($app) {
