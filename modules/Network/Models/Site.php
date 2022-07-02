@@ -11,9 +11,13 @@
 namespace Juzaweb\Network\Models;
 
 use Juzaweb\CMS\Models\Model;
+use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
+use Juzaweb\Network\Traits\RootNetworkModel;
 
-class Site extends Model
+class Site extends Model implements RootNetworkModelInterface
 {
+    use RootNetworkModel;
+
     const STATUS_ACTIVE = 'active';
     const STATUS_VERIFICATION = 'verification';
     const STATUS_BANNED = 'banned';

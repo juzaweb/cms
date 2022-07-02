@@ -30,6 +30,8 @@ class NetworkRegistion implements NetworkRegistionContract
 
     protected DatabaseManager $db;
 
+    protected object $site;
+
     public function __construct(
         Application $app,
         ConfigRepository $config,
@@ -51,9 +53,16 @@ class NetworkRegistion implements NetworkRegistionContract
         }
     }
 
+    public function getSite(): object
+    {
+        return $this->site;
+    }
+
     public function isRootSite($domain = null): bool
     {
-        $domain = $domain ?: $this->getCurrentDomain();
+        if (empty($domain)) {
+            return is_null($this->site->id);
+        }
 
         return $domain == $this->config->get('network.domain');
     }
@@ -67,41 +76,48 @@ class NetworkRegistion implements NetworkRegistionContract
     {
         $currentSite = $this->getCurrentSite();
 
-        $site = $currentSite->site;
+        $this->site = $currentSite->site;
 
-        if (empty($site)) {
+        if (empty($this->site)) {
             abort(404, 'Site not found.');
         }
 
-        if ($site->status == Site::STATUS_BANNED) {
+        if ($this->site->status == Site::STATUS_BANNED) {
             abort(403, 'Site has been banned.');
         }
 
-        $GLOBALS['jw_site'] = $site;
+        $connection = $this->db->getDefaultConnection();
 
-        if (!is_null($site->id)) {
+        if (!is_null($this->site->id)) {
             $this->config->set('juzaweb.plugin.enable_upload', false);
             $this->config->set('juzaweb.theme.enable_upload', false);
 
-            $connection = $this->db->getDefaultConnection();
-            $prefix = $this->db->getTablePrefix() . "site{$site->id}_";
+            $prefix = $this->db->getTablePrefix() . "site{$this->site->id}_";
+            $database = $this->config->get("database.connections.{$connection}");
+            $database['prefix'] = $prefix;
 
             $this->config->set(
-                "database.connections.{$connection}.prefix",
-                $prefix
+                'database.connections.subsite',
+                $database
             );
 
-            $this->db->setTablePrefix($prefix);
+            $this->config->set('database.default', 'subsite');
+
+            $this->db->purge('subsite');
+
+            $this->setCachePrefix("jw_site_{$this->site->id}");
         }
 
-        $this->setCachePrefix("jw_site_{$site->id}");
+        $this->site->root_connection = $connection;
+
+        $GLOBALS['jw_site'] = $this->site;
     }
 
     protected function getCurrentSite(): object
     {
         $domain = $this->getCurrentDomain();
 
-        if ($this->isRootSite($domain)) {
+        if ($domain == $this->config->get('network.domain')) {
             $site = (object) [
                 'id' => null,
                 'status' => Site::STATUS_ACTIVE,

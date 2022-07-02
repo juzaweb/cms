@@ -17,6 +17,7 @@ use Juzaweb\Network\Contracts\NetworkRegistionContract;
  * @method static void init()
  * @method static bool isRootSite($domain = null)
  * @method static string getCurrentDomain()
+ * @method static object getSite()
  */
 class Network extends Facade
 {
@@ -25,7 +26,7 @@ class Network extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return NetworkRegistionContract::class;
     }
