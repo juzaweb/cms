@@ -2,6 +2,8 @@ JUZACMS - Laravel CMS for Your Project
 =====================================
 
 ## About
+![https://buymeacoffee.com/juzaweb](https://i.imgur.com/TjRCjt7.png)
+
 - JuzaWeb CMS (JuzaCMS) is a Content Management System ([Laravel CMS](https://juzaweb.com)) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
 - Juza CMS was engineered to be easy — for both developers and users. Project develop by Juzaweb.
 - Demo site: 
@@ -97,3 +99,6 @@ Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
 
 ## Change Logs
 [https://juzaweb.com/documentation/changelog](https://juzaweb.com/documentation/changelog)
+
+## Buy me coffee
+![https://buymeacoffee.com/juzaweb](https://i.imgur.com/MAqboRu.png)
