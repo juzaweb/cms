@@ -55,11 +55,20 @@ class NetworkAction extends Action
         );
 
         HookAction::addMasterAdminMenu(
-            trans('cms::app.network.plugins'),
+            trans('cms::app.themes'),
+            'themes',
+            [
+                'icon' => 'fa fa-paint-brush',
+                'position' => 40,
+            ]
+        );
+
+        HookAction::addMasterAdminMenu(
+            trans('cms::app.plugins'),
             'plugins',
             [
-                'icon' => 'fa fa-plugin',
-                'position' => 10,
+                'icon' => 'fa fa-plug',
+                'position' => 45,
             ]
         );
     }

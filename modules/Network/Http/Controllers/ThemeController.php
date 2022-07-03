@@ -16,4 +16,14 @@ class ThemeController extends BackendController
             ]
         );
     }
+
+    public function install(): View
+    {
+        return view(
+            'network::theme.install',
+            [
+                'title' => trans('cms::app.install'),
+            ]
+        );
+    }
 }

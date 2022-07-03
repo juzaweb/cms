@@ -9,7 +9,9 @@
                     {{ $theme->title }}
                 </div>
                 <div class="text-gray-6">
+                    @if(!$network)
                     <button class="btn btn-primary active-theme" data-theme="{{ $theme->name }}"> {{ trans('cms::app.activate') }}</button>
+                    @endif
 
                     @if (config('juzaweb.theme.enable_upload') && $theme->update)
                     <button class="btn btn-success update-theme" data-theme="{{ $theme->name }}"> {{ trans('cms::app.update') }}</button>

@@ -1,4 +1,4 @@
-@extends('cms::layouts.backend')
+@extends('network::layout')
 
 @section('content')
 

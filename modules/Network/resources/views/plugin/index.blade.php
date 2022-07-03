@@ -6,7 +6,7 @@
         <div class="col-md-6">
             <div class="btn-group float-right">
                 @if(config('juzaweb.plugin.enable_upload'))
-                    <a href="{{ route('admin.plugin.install') }}" class="btn btn-success" data-turbolinks="false"><i class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
+                    <a href="{{ route('admin.network.plugin.install') }}" class="btn btn-success" data-turbolinks="false"><i class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
                 @endif
             </div>
         </div>

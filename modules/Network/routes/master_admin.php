@@ -18,5 +18,7 @@ Route::get('/', [DashboardController::class, 'index'])->name('admin.network.dash
 Route::jwResource('sites', SiteController::class, ['name' => 'network.sites']);
 
 Route::jwResource('themes', ThemeController::class, ['name' => 'network.themes']);
+Route::get('theme/install', [ThemeController::class, 'install'])->name('admin.network.theme.install');
 
 Route::jwResource('plugins', PluginController::class, ['name' => 'network.plugins']);
+Route::get('plugin/install', [PluginController::class, 'install'])->name('admin.network.plugin.install');
