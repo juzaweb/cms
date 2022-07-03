@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Network\Http\Datatables;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Abstracts\DataTable;
@@ -46,7 +46,7 @@ class SiteDatatable extends DataTable
         ];
     }
 
-    public function rowAction($row)
+    public function rowAction($row): array
     {
         $rows = parent::rowAction($row);
         $loginUrl = 'http://' . $row->domain;
@@ -71,13 +71,7 @@ class SiteDatatable extends DataTable
         return $rows;
     }
 
-    /**
-     * Query data datatable
-     *
-     * @param array $data
-     * @return Builder
-     */
-    public function query($data)
+    public function query($data): Builder
     {
         $query = Site::query();
         if ($keyword = Arr::get($data, 'keyword')) {
@@ -91,10 +85,10 @@ class SiteDatatable extends DataTable
         return $query;
     }
 
-    public function actions()
+    public function actions(): array
     {
         return [
-            //'delete' => trans('cms::app.delete'),
+            'delete' => trans('cms::app.delete'),
             'banned' => trans('cms::app.banned'),
             'active' => trans('cms::app.active'),
         ];
@@ -105,8 +99,7 @@ class SiteDatatable extends DataTable
         switch ($action) {
             case 'delete':
                 foreach ($ids as $id) {
-                    /*
-                    Site::destroy([$id]);*/
+                    Site::destroy([$id]);
                 }
 
                 break;

@@ -23,7 +23,7 @@ class ModelUnique implements Rule
     /**
      * @var string
      */
-    private $modelAttribute;
+    private string $modelAttribute;
 
     /**
      * @var callable
