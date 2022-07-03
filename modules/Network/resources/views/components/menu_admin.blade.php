@@ -13,11 +13,24 @@
             >
                 {{ trans('cms::app.dashboard') }}
             </a>
+
             <a
                 class="dropdown-item"
                 href="{{ route('admin.network.sites.index') }}"
                 data-turbolinks="false"
             >{{ trans('cms::app.network.sites') }}</a>
+
+            <a
+                class="dropdown-item"
+                href="{{ route('admin.network.themes.index') }}"
+                data-turbolinks="false"
+            >{{ trans('cms::app.themes') }}</a>
+
+            <a
+                class="dropdown-item"
+                href="{{ route('admin.network.plugins.index') }}"
+                data-turbolinks="false"
+            >{{ trans('cms::app.plugins') }}</a>
         </div>
     </div>
 </div>

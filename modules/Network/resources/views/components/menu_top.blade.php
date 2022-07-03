@@ -1,6 +1,6 @@
 <div class="juzaweb__topbar">
     <div class="mr-3">
-        <a href="{{ route('admin.dashboard') }}" class="mr-2" target="_blank" title="{{ trans('cms::app.view_site') }}">
+        <a href="{{ route('admin.dashboard') }}" class="mr-2" title="{{ trans('cms::app.dashboard') }}" data-turbolinks="false">
             <i class="dropdown-toggle-icon fa fa-dashboard" data-toggle="tooltip" data-placement="bottom" data-original-title="Visit website"></i> {{ trans('cms::app.admin') }}
         </a>
 
