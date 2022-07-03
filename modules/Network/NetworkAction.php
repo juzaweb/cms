@@ -53,6 +53,15 @@ class NetworkAction extends Action
                 'position' => 10,
             ]
         );
+
+        HookAction::addMasterAdminMenu(
+            trans('cms::app.network.plugins'),
+            'plugins',
+            [
+                'icon' => 'fa fa-plugin',
+                'position' => 10,
+            ]
+        );
     }
 
     public function registerMenus(): void

@@ -8,9 +8,15 @@
  * @license    MIT
  */
 
+use Juzaweb\Network\Http\Controllers\PluginController;
 use Juzaweb\Network\Http\Controllers\DashboardController;
 use Juzaweb\Network\Http\Controllers\SiteController;
+use Juzaweb\Network\Http\Controllers\ThemeController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('admin.network.dashboard');
 
 Route::jwResource('sites', SiteController::class, ['name' => 'network.sites']);
+
+Route::jwResource('themes', ThemeController::class, ['name' => 'network.themes']);
+
+Route::jwResource('plugins', PluginController::class, ['name' => 'network.plugins']);
