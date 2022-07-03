@@ -10,6 +10,8 @@
 
 namespace Juzaweb\Network\Http\Controllers;
 
+use Illuminate\Validation\Rule;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Traits\ResourceController;
 use Juzaweb\Network\Http\Datatables\SiteDatatable;
 use Juzaweb\Network\Models\Site;
@@ -22,15 +24,30 @@ class SiteController extends Controller
 
     protected string $viewPrefix = 'network::site';
 
-    protected function getDataTable(...$params)
+    protected function getDataTable(...$params): DataTable
     {
         return new SiteDatatable();
     }
 
-    protected function validator(array $attributes, ...$params)
+    protected function validator(array $attributes, ...$params): array
     {
+        $networkDomain = addslashes('.' . config('network.domain'));
+
         return [
-            'domain' => 'required|max:50|min:4|regex:/(^[a-z0-9\-]+$)+/|unique:sites,domain,' . $attributes['id'],
+            'domain' => [
+                'bail',
+                'required',
+                'max:50',
+                'min:4',
+                "regex:/(^[a-z0-9\-]+{$networkDomain}$)+/",
+                Rule::modelUnique(
+                    Site::class,
+                    'domain',
+                    function ($q) {
+                        $q->where('id', '!=', request()->route()->parameter('id'));
+                    }
+                )
+            ],
         ];
     }
 
