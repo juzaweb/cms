@@ -1,5 +1,9 @@
 <div class="juzaweb__topbar">
     <div class="mr-3">
+        <a href="{{ route('admin.dashboard') }}" class="mr-2" target="_blank" title="{{ trans('cms::app.view_site') }}">
+            <i class="dropdown-toggle-icon fa fa-dashboard" data-toggle="tooltip" data-placement="bottom" data-original-title="Visit website"></i> {{ trans('cms::app.admin') }}
+        </a>
+
         <a href="{{ url('/') }}" class="mr-2" target="_blank" title="{{ trans('cms::app.view_site') }}">
             <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" data-original-title="Visit website"></i> {{ trans('cms::app.view_site') }}
         </a>
@@ -35,7 +39,8 @@
                                 @else
                                     @foreach($items as $notify)
                                         <li class="jw__l8__item">
-                                            <a href="{{ @$notify->data['url'] }}" class="jw__l8__itemLink" data-turbolinks="false">
+                                            <a href="{{ @$notify->data['url'] }}" class="jw__l8__itemLink" data-turbolinks="false"
+                                            >
                                                 <div class="jw__l8__itemPic bg-success">
                                                     @if(empty($notify->data['image']))
                                                         <i class="fa fa-envelope-square"></i>
@@ -68,7 +73,11 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" role="menu">
-            <a class="dropdown-item" href="{{ route('admin.users.edit', [$jw_user->id]) }}">
+            <a
+                class="dropdown-item"
+                href="{{ route('admin.users.edit', [$jw_user->id]) }}"
+                data-turbolinks="false"
+            >
                 <i class="dropdown-icon fe fe-user"></i>
                 {{ trans('cms::app.profile') }}
             </a>

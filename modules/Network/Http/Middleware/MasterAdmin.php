@@ -33,6 +33,9 @@ class MasterAdmin
             abort(404);
         }
 
+        config()->set('juzaweb.plugin.enable_upload', true);
+        config()->set('juzaweb.theme.enable_upload', true);
+
         do_action(Action::NETWORK_INIT, $request);
 
         return $next($request);

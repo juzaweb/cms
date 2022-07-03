@@ -88,12 +88,12 @@ class NetworkRegistion implements NetworkRegistionContract
             abort(403, 'Site has been banned.');
         }
 
+        $this->config->set('juzaweb.plugin.enable_upload', false);
+        $this->config->set('juzaweb.theme.enable_upload', false);
+
         $connection = $this->db->getDefaultConnection();
 
         if (!is_null($this->site->id)) {
-            $this->config->set('juzaweb.plugin.enable_upload', false);
-            $this->config->set('juzaweb.theme.enable_upload', false);
-
             $prefix = $this->db->getTablePrefix() . "site{$this->site->id}_";
             $database = $this->config->get("database.connections.{$connection}");
             $database['prefix'] = $prefix;
