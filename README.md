@@ -101,4 +101,4 @@ Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
 [https://juzaweb.com/documentation/changelog](https://juzaweb.com/documentation/changelog)
 
 ## Buy me coffee
-![https://buymeacoffee.com/juzaweb](https://i.imgur.com/MAqboRu.png)
+[![Juzaweb Buy me coffee](https://i.imgur.com/MAqboRu.png)](https://buymeacoffee.com/juzaweb)
