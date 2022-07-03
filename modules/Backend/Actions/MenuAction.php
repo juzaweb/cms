@@ -100,6 +100,19 @@ class MenuAction extends Action
             ]
         );
 
+        if (config('juzaweb.plugin.enable_upload')) {
+            HookAction::addAdminMenu(
+                trans('cms::app.add_new'),
+                'theme.install',
+                [
+                    'icon' => 'fa fa-plus',
+                    'position' => 1,
+                    'parent' => 'appearance',
+                    'turbolinks' => false,
+                ]
+            );
+        }
+
         HookAction::addAdminMenu(
             trans('cms::app.widgets'),
             'widgets',
@@ -148,6 +161,29 @@ class MenuAction extends Action
                 'position' => 50,
             ]
         );
+
+        if (config('juzaweb.plugin.enable_upload')) {
+            HookAction::addAdminMenu(
+                trans('cms::app.plugins'),
+                'plugins',
+                [
+                    'icon' => 'fa fa-plug',
+                    'position' => 1,
+                    'parent' => 'plugins',
+                ]
+            );
+
+            HookAction::addAdminMenu(
+                trans('cms::app.add_new'),
+                'plugin.install',
+                [
+                    'icon' => 'fa fa-plus',
+                    'position' => 1,
+                    'parent' => 'plugins',
+                    'turbolinks' => false,
+                ]
+            );
+        }
 
         HookAction::addAdminMenu(
             trans('cms::app.users'),

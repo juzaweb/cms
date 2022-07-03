@@ -476,5 +476,31 @@ return [
             'after' => 'Update data success'
         ],
         'done' => 'Done!!'
+    ],
+    'upload_theme' => 'Upload Theme',
+    'upload_plugin' => 'Upload Plugin',
+    'upload_successfull' => 'Upload successfull',
+    'theme_upload' => [
+        'error' => [
+            'mime_type' => 'Invalid file mime type.',
+            'extension' => 'Invalid file extension.',
+            'file_required' => 'Unable to find :name file.',
+            'unzip' => 'Can\'t unzip file.',
+            'exists' => 'Theme :name already exist.',
+        ],
+    ],
+    'plugin_upload' => [
+        'error' => [
+            'mime_type' => 'Invalid file mime type.',
+            'extension' => 'Invalid file extension.',
+            'file_required' => 'Unable to find :name file.',
+            'unzip' => 'Can\'t unzip file.',
+            'exists' => 'Plugin :name already exist.',
+        ],
+    ],
+    'network' => [
+        'sites' => 'Sites',
+        'network' => 'Network',
+        'domain_mapping' => 'Domain Mapping',
     ]
 ];

@@ -7,10 +7,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Backend\Http\Requests\Theme\UpdateRequest;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Facades\Theme;
@@ -48,6 +46,8 @@ class ThemeController extends BackendController
     public function getDataTheme(Request $request): JsonResponse
     {
         $limit = $request->get('limit', 20);
+        $network = $request->get('network');
+
         $activated = jw_current_theme();
         $paginate = ArrayPagination::make(app('themes')->all(true));
         $paginate->where('name', '!=', $activated);
@@ -65,7 +65,10 @@ class ThemeController extends BackendController
                     'name' => $theme['name'],
                     'content' => view(
                         'cms::backend.theme.components.theme_item',
-                        ['theme' => (object) $theme]
+                        [
+                            'theme' => (object) $theme,
+                            'network' => $network
+                        ]
                     )->render(),
                 ]
             );
@@ -86,9 +89,6 @@ class ThemeController extends BackendController
         );
     }
 
-    /**
-     * @throws \Exception
-     */
     public function activate(Request $request): JsonResponse
     {
         $request->validate(
@@ -164,47 +164,6 @@ class ThemeController extends BackendController
             [
                 'message' => trans('cms::app.successfully'),
                 'redirect' => route('admin.plugin'),
-            ]
-        );
-    }
-
-    public function install(): View
-    {
-        if (!config('juzaweb.theme.enable_upload')) {
-            abort(403, 'Access deny.');
-        }
-
-        $title = trans('cms::app.install');
-
-        $this->addBreadcrumb(
-            [
-                'title' => trans('cms::app.themes'),
-                'url' => route('admin.themes')
-            ]
-        );
-
-        return view(
-            'cms::backend.theme.install',
-            compact('title')
-        );
-    }
-
-    public function getDataThemeInstall(Request $request, JuzawebApi $api): object|array
-    {
-        if (!config('juzaweb.theme.enable_upload')) {
-            return (object) [];
-        }
-
-        $limit = $request->get('limit', 20);
-        $page = $request->get('page', 1);
-        $except = array_keys(ThemeLoader::all(true));
-
-        return $api->get(
-            'themes',
-            [
-                'limit' => $limit,
-                'page' => $page,
-                'except' => $except
             ]
         );
     }

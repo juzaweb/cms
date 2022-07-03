@@ -5,8 +5,10 @@ namespace Juzaweb\Backend\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
-use TwigBridge\Facade\Twig;
 use Juzaweb\CMS\Models\Model;
+use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
+use Juzaweb\Network\Traits\RootNetworkModel;
+use TwigBridge\Facade\Twig;
 
 /**
  * Juzaweb\Backend\Models\EmailList
@@ -39,9 +41,12 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereSiteId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList WhereTemplate($code)
  */
-class EmailList extends Model
+class EmailList extends Model implements RootNetworkModelInterface
 {
+    use RootNetworkModel;
+
     protected $table = 'email_lists';
+
     protected $fillable = [
         'template_id',
         'email',

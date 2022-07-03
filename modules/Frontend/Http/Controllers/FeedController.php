@@ -4,11 +4,12 @@ namespace Juzaweb\Frontend\Http\Controllers;
 
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Http\Controllers\Controller;
 use Spatie\Feed\Feed;
 
-class FeedController
+class FeedController extends Controller
 {
-    public function index()
+    public function index(): Feed
     {
         $posts = Post::with(['createdBy'])
             ->select(
@@ -23,7 +24,7 @@ class FeedController
                 ]
             )
             ->wherePublish()
-            ->latest()
+            ->orderBy('id', 'DESC')
             ->limit(get_config('posts_per_rss', 10))
             ->get();
 
@@ -39,7 +40,7 @@ class FeedController
         );
     }
 
-    public function taxonomy($slug)
+    public function taxonomy($slug): Feed
     {
         $taxonomy = Taxonomy::findBySlugOrFail($slug);
 
@@ -65,11 +66,11 @@ class FeedController
             (string) get_config('title'),
             $posts,
             request()->url(),
-            $feed['view'] ?? 'feed::atom',
+            'feed::atom',
             (string) get_config('description', ''),
-            $feed['language'] ?? 'en-US',
-            $feed['image'] ?? '',
-            $feed['format'] ?? 'atom'
+            'en-US',
+            '',
+            'atom'
         );
     }
 }

@@ -14,7 +14,7 @@ trait GetHookAction
      * @param string|array $keys
      * @return array
      */
-    public function getMenuBoxs(array $keys = []): array
+    public function getMenuBoxs(string|array $keys = []): array
     {
         $menuBoxs = GlobalData::get('menu_boxs');
 
@@ -80,6 +80,11 @@ trait GetHookAction
     public function getAdminMenu()
     {
         return GlobalData::get('admin_menu');
+    }
+
+    public function getMasterAdminMenu()
+    {
+        return GlobalData::get('master_admin_menu');
     }
 
     public function getPermalinks($key = null)

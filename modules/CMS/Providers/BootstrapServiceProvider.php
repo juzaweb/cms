@@ -5,6 +5,7 @@ namespace Juzaweb\CMS\Providers;
 use Illuminate\Support\ServiceProvider;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Facades\ActionRegister;
+use Juzaweb\Frontend\Providers\RouteServiceProvider;
 
 class BootstrapServiceProvider extends ServiceProvider
 {
@@ -30,5 +31,7 @@ class BootstrapServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app[LocalPluginRepositoryContract::class]->register();
+
+        $this->app->register(RouteServiceProvider::class);
     }
 }
