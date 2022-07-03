@@ -49,6 +49,10 @@ class PluginInstallController extends BackendController
 
     public function getData(Request $request, JuzawebApi $api): object|array
     {
+        if (!config('juzaweb.plugin.enable_upload')) {
+            return (object) [];
+        }
+
         $limit = $request->get('limit', 20);
         $page = $request->get('page', 1);
         $except = array_keys(Plugin::all());
@@ -65,6 +69,10 @@ class PluginInstallController extends BackendController
 
     public function upload(Request $request): JsonResponse|RedirectResponse
     {
+        if (!config('juzaweb.plugin.enable_upload')) {
+            abort(403, 'Access deny.');
+        }
+
         try {
             $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
             if ($receiver->isUploaded() === false) {

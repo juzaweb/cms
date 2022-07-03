@@ -68,6 +68,10 @@ class ThemeInstallController extends BackendController
 
     public function upload(Request $request): JsonResponse|RedirectResponse
     {
+        if (!config('juzaweb.theme.enable_upload')) {
+            abort(403, 'Access deny.');
+        }
+
         try {
             $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
             if ($receiver->isUploaded() === false) {

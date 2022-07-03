@@ -61,14 +61,14 @@ class SiteController extends Controller
         return trans('cms::app.network.sites');
     }
 
-    protected function getDataForForm($model, ...$params)
+    protected function getDataForForm($model, ...$params): array
     {
         $data = $this->DataForForm($model, ...$params);
         $data['statuses'] = Site::getAllStatus();
         return $data;
     }
 
-    protected function beforeSave(&$data, &$model, ...$params)
+    protected function beforeSave(&$data, &$model, ...$params): void
     {
         //
     }
