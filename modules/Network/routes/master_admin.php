@@ -11,6 +11,6 @@
 use Juzaweb\Network\Http\Controllers\DashboardController;
 use Juzaweb\Network\Http\Controllers\SiteController;
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [DashboardController::class, 'index'])->name('admin.network.dashboard');
 
-Route::jwResource('sites', SiteController::class);
+Route::jwResource('sites', SiteController::class, ['name' => 'network.sites']);

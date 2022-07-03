@@ -16,7 +16,9 @@ use Juzaweb\Network\Models\Site;
 
 class SiteController extends Controller
 {
-    use ResourceController;
+    use ResourceController {
+        getDataForForm as DataForForm;
+    }
 
     protected string $viewPrefix = 'network::site';
 
@@ -40,5 +42,17 @@ class SiteController extends Controller
     protected function getTitle(...$params): string
     {
         return trans('cms::app.network.sites');
+    }
+
+    protected function getDataForForm($model, ...$params)
+    {
+        $data = $this->DataForForm($model, ...$params);
+        $data['statuses'] = Site::getAllStatus();
+        return $data;
+    }
+
+    protected function beforeSave(&$data, &$model, ...$params)
+    {
+        //
     }
 }

@@ -19,6 +19,7 @@ class NetworkAction extends Action
     public function handle()
     {
         $this->addAction(Action::BACKEND_INIT, [$this, 'registerMenus']);
+        $this->addAction('backend.menu_top', [$this, 'addMenuAdmin']);
 
         if (Network::isRootSite()) {
             $this->addAction(
@@ -28,13 +29,18 @@ class NetworkAction extends Action
         }
     }
 
+    public function addMenuAdmin(): void
+    {
+        echo e(view('network::components.menu_admin'));
+    }
+
     public function registerMasterAdminMenu(): void
     {
         HookAction::addMasterAdminMenu(
             trans('cms::app.dashboard'),
             'dashboard',
             [
-                'icon' => 'fa fa-globe',
+                'icon' => 'fa fa-dashboard',
                 'position' => 1,
             ]
         );

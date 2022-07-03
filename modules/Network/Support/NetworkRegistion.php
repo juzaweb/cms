@@ -50,6 +50,8 @@ class NetworkRegistion implements NetworkRegistionContract
     {
         if (! $this->app->runningInConsole()) {
             $this->setupSite();
+        } else {
+            $this->site = $this->getRootSite();
         }
     }
 
@@ -121,10 +123,7 @@ class NetworkRegistion implements NetworkRegistionContract
             md5($domain),
             function () use ($domain) {
                 if ($domain == $this->config->get('network.domain')) {
-                    $site = (object) [
-                        'id' => null,
-                        'status' => Site::STATUS_ACTIVE,
-                    ];
+                    $site = $this->getRootSite();
 
                     return (object) ['site' => $site];
                 }
@@ -148,6 +147,14 @@ class NetworkRegistion implements NetworkRegistionContract
                 return (object) ['site' => $site];
             }
         );
+    }
+
+    protected function getRootSite(): object
+    {
+        return (object) [
+            'id' => null,
+            'status' => Site::STATUS_ACTIVE,
+        ];
     }
 
     protected function setCachePrefix($prefix): void

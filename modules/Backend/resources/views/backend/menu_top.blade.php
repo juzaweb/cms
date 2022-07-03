@@ -22,19 +22,6 @@
         </div>
     </div>
 
-    <div class="mr-3">
-        <div class="dropdown d-none d-sm-block">
-            <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown">
-                <i class="fa fa-server"></i>
-                <span class="dropdown-toggle-text"> {{ trans('cms::app.network.network') }}</span>
-            </a>
-
-            <div class="dropdown-menu" role="menu">
-                <a class="dropdown-item" href="{{ route('admin.posts.create', ['posts']) }}">{{ trans('cms::app.network.sites') }}</a>
-            </div>
-        </div>
-    </div>
-
     @do_action('backend.menu_top')
 
     <div class="mr-auto"></div>
