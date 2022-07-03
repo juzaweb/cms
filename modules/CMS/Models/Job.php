@@ -10,6 +10,8 @@
 
 namespace Juzaweb\CMS\Models;
 
+use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
+
 /**
  * Juzaweb\CMS\Models\Job
  *
@@ -34,9 +36,10 @@ namespace Juzaweb\CMS\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereReservedAt($value)
  * @mixin \Eloquent
  */
-class Job extends Model
+class Job extends Model implements RootNetworkModelInterface
 {
     protected $unserializedCommand;
+
     protected $table = 'jobs';
 
     public function getNameAttribute()

@@ -18,12 +18,12 @@ class ModelUnique implements Rule
     /**
      * @var string
      */
-    private $modelClass;
+    private string $modelClass;
 
     /**
      * @var string
      */
-    private $modelAttribute;
+    private string $modelAttribute;
 
     /**
      * @var callable
@@ -69,11 +69,14 @@ class ModelUnique implements Rule
 
     public function message()
     {
-        return trans('validation.model_unique', [
-            'attribute' => $this->attribute,
-            'value' => $this->value,
-            'model' => class_basename($this->modelClass),
-            'model_attribute' => $this->modelAttribute,
-        ]);
+        return trans(
+            'validation.model_unique',
+            [
+                'attribute' => $this->attribute,
+                'value' => $this->value,
+                'model' => class_basename($this->modelClass),
+                'model_attribute' => $this->modelAttribute,
+            ]
+        );
     }
 }

@@ -497,5 +497,10 @@ return [
             'unzip' => 'Can\'t unzip file.',
             'exists' => 'Plugin :name already exist.',
         ],
+    ],
+    'network' => [
+        'sites' => 'Sites',
+        'network' => 'Network',
+        'domain_mapping' => 'Domain Mapping',
     ]
 ];

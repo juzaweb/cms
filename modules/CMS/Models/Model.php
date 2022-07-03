@@ -37,4 +37,9 @@ class Model extends EloquentModel
     {
         return [];
     }
+
+    public static function getTableName(): string
+    {
+        return app(static::class)->getTable();
+    }
 }

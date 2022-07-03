@@ -15,12 +15,15 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Models\PasswordReset;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Database\Factories\UserFactory;
 use Juzaweb\CMS\Traits\ResourceModel;
+use Juzaweb\Network\Facades\Network;
+use Juzaweb\Network\Traits\RootNetworkModel;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -74,7 +77,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User permission($permissions)
  * @method static Builder|User role($roles, $guard = null)
  * @property int|null $site_id
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static Builder|User whereSiteId($value)
@@ -86,6 +89,7 @@ class User extends Authenticatable
     use ResourceModel;
     use HasFactory;
     use HasRoles;
+    use RootNetworkModel;
 
     public const STATUS_ACTIVE = 'active';
     public const STATUS_VERIFICATION = 'verification';
@@ -108,11 +112,7 @@ class User extends Authenticatable
         'data' => 'array'
     ];
 
-    public $cacheTags = ['users_'];
-
-    public $cachePrefix = 'users_';
-
-    public static function getAllStatus()
+    public static function getAllStatus(): array
     {
         return [
             User::STATUS_ACTIVE => trans('cms::app.active'),
@@ -192,6 +192,17 @@ class User extends Authenticatable
 
         if ($permission) {
             return true;
+        }
+
+        return false;
+    }
+
+    public function isMasterAdmin(): bool
+    {
+        if (config('network.enable')) {
+            if ($this->isAdmin() && Network::isRootSite()) {
+                return true;
+            }
         }
 
         return false;

@@ -46,6 +46,8 @@ class ThemeController extends BackendController
     public function getDataTheme(Request $request): JsonResponse
     {
         $limit = $request->get('limit', 20);
+        $network = $request->get('network');
+
         $activated = jw_current_theme();
         $paginate = ArrayPagination::make(app('themes')->all(true));
         $paginate->where('name', '!=', $activated);
@@ -63,7 +65,10 @@ class ThemeController extends BackendController
                     'name' => $theme['name'],
                     'content' => view(
                         'cms::backend.theme.components.theme_item',
-                        ['theme' => (object) $theme]
+                        [
+                            'theme' => (object) $theme,
+                            'network' => $network
+                        ]
                     )->render(),
                 ]
             );

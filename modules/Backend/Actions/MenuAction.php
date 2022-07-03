@@ -162,17 +162,17 @@ class MenuAction extends Action
             ]
         );
 
-        HookAction::addAdminMenu(
-            trans('cms::app.plugins'),
-            'plugins',
-            [
-                'icon' => 'fa fa-plug',
-                'position' => 1,
-                'parent' => 'plugins',
-            ]
-        );
-
         if (config('juzaweb.plugin.enable_upload')) {
+            HookAction::addAdminMenu(
+                trans('cms::app.plugins'),
+                'plugins',
+                [
+                    'icon' => 'fa fa-plug',
+                    'position' => 1,
+                    'parent' => 'plugins',
+                ]
+            );
+
             HookAction::addAdminMenu(
                 trans('cms::app.add_new'),
                 'plugin.install',
