@@ -7,11 +7,11 @@ use GuzzleHttp\Exception\ClientException;
 
 class Curl
 {
-    protected $client;
+    protected Client $client;
 
-    public function __construct(Client $client)
+    public function __construct()
     {
-        $this->client = $client;
+        $this->client = new Client(['timeout' => 10]);
     }
 
     public function get($url, $params = [], $headers = [])

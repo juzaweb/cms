@@ -424,9 +424,14 @@ class MenuAction extends Action
         }
 
         $updater = app(CmsUpdater::class);
-
         $currentVersion = $updater->getCurrentVersion();
-        $versionAvailable = $updater->getVersionAvailable();
+
+        try {
+            $versionAvailable = $updater->getVersionAvailable();
+        } catch (\Exception $e) {
+            report($e);
+            $versionAvailable = $currentVersion;
+        }
 
         if (version_compare($versionAvailable, $currentVersion, '>')) {
             $notify = new Notification();
