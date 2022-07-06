@@ -36,6 +36,8 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static void registerConfig(array $keys)
  * @method static void registerThemeSetting($name, $label, $args = [])
  * @method static void registerProfilePage(string $key, array $args = [])
+ * @method static void registerPermission(string $key, array $args = [])
+ * @method static void registerResourcePermissions(string $resource, string $name)
  * @method static array getMenuBoxs(array $keys = [])
  * @method static array getMasterAdminMenu()
  * @method static Collection getMenuBox(string $key)

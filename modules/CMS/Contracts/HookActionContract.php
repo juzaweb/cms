@@ -31,4 +31,6 @@ interface HookActionContract
     public function getProfilePages($key = null): Collection;
 
     public function registerPermission(string $key, array $args = []): void;
+
+    public function registerResourcePermissions(string $resource, string $name): void;
 }

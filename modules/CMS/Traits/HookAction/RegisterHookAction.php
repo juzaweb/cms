@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Facades\GlobalData;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
 use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
@@ -17,6 +16,8 @@ use Juzaweb\Frontend\Http\Controllers\TaxonomyController;
 
 trait RegisterHookAction
 {
+    protected array $resourcePermissions = ['index', 'create', 'edit', 'delete'];
+
     /**
      * JUZAWEB CMS: Registers a post type.
      * @param string $key (Required) Post type key. Must not exceed 20 characters
@@ -53,7 +54,13 @@ trait RegisterHookAction
         $args['model_key'] = str_replace('\\', '_', $args['model']);
 
         $args = new Collection($args);
-        GlobalData::set('post_types.' . $args->get('key'), $args);
+
+        $this->globalData->set('post_types.' . $args->get('key'), $args);
+
+        $this->registerResourcePermissions(
+            "post-type.{$key}",
+            $args->get('label')
+        );
 
         if ($args->get('show_in_menu')) {
             $this->registerMenuPostType($key, $args);
@@ -134,7 +141,7 @@ trait RegisterHookAction
 
         $item = array_merge($opts, $args);
 
-        GlobalData::set('menu_boxs.' . $key, new Collection($item));
+        $this->globalData->set('menu_boxs.' . $key, new Collection($item));
     }
 
     /**
@@ -179,7 +186,7 @@ trait RegisterHookAction
 
             $argsCollection = new Collection(array_merge($opts, $args));
 
-            GlobalData::set('taxonomies.' . $objectType.'.'.$taxonomy, $argsCollection);
+            $this->globalData->set('taxonomies.' . $objectType.'.'.$taxonomy, $argsCollection);
 
             if ($argsCollection->get('show_in_menu')) {
                 $this->addAdminMenu(
@@ -253,7 +260,7 @@ trait RegisterHookAction
             )
         );
 
-        GlobalData::set('permalinks.' . $key, new Collection($args));
+        $this->globalData->set('permalinks.' . $key, new Collection($args));
     }
 
     public function registerResource(string $key, string $postType = null, array $args = [])
@@ -298,14 +305,14 @@ trait RegisterHookAction
 
         $args = new Collection($args);
 
-        GlobalData::set('resources.' . $args->get('key'), $args);
+        $this->globalData->set('resources.' . $args->get('key'), $args);
     }
 
     public function registerConfig(array $keys)
     {
-        $configs = GlobalData::get('configs');
+        $configs = $this->globalData->get('configs');
 
-        GlobalData::set('configs', array_merge($keys, $configs));
+        $this->globalData->set('configs', array_merge($keys, $configs));
     }
 
     public function registerAdminPage(string $key, array $args)
@@ -332,7 +339,7 @@ trait RegisterHookAction
             $args['menu']
         );
 
-        GlobalData::set('admin_pages.' . $key, $args);
+        $this->globalData->set('admin_pages.' . $key, $args);
     }
 
     public function registerAdminAjax(string $key, array $args = [])
@@ -345,13 +352,13 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('admin_ajaxs.' . $key, new Collection($args));
+        $this->globalData->set('admin_ajaxs.' . $key, new Collection($args));
     }
 
     public function registerNavMenus($locations = [])
     {
         foreach ($locations as $key => $location) {
-            GlobalData::set(
+            $this->globalData->set(
                 'nav_menus.' . $key,
                 new Collection(
                     [
@@ -373,7 +380,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('email_hooks.' . $key, new Collection($args));
+        $this->globalData->set('email_hooks.' . $key, new Collection($args));
     }
 
     public function registerSidebar(string $key, array $args = [])
@@ -388,7 +395,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('sidebars.' . $key, new Collection($args));
+        $this->globalData->set('sidebars.' . $key, new Collection($args));
     }
 
     public function registerWidget($key, $args = [])
@@ -402,7 +409,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('widgets.' . $key, new Collection($args));
+        $this->globalData->set('widgets.' . $key, new Collection($args));
     }
 
     public function registerPageBlock($key, $args = [])
@@ -416,7 +423,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('page_blocks.' . $key, new Collection($args));
+        $this->globalData->set('page_blocks.' . $key, new Collection($args));
     }
 
     public function registerFrontendAjax($key, $args = [])
@@ -432,7 +439,7 @@ trait RegisterHookAction
             throw new \Exception('Frontend Ajax callback option is required.');
         }
 
-        GlobalData::set('frontend_ajaxs.' . $key, new Collection($args));
+        $this->globalData->set('frontend_ajaxs.' . $key, new Collection($args));
     }
 
     public function registerThemeTemplate($key, $args = [])
@@ -445,7 +452,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('templates.' . $key, new Collection($args));
+        $this->globalData->set('templates.' . $key, new Collection($args));
     }
 
     public function registerPackageModule($key, $args = [])
@@ -459,7 +466,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('package_modules.' . $key, new Collection($args));
+        $this->globalData->set('package_modules.' . $key, new Collection($args));
     }
 
     public function registerThemeSetting($name, $label, $args = [])
@@ -470,7 +477,7 @@ trait RegisterHookAction
             'data' => $args
         ];
 
-        GlobalData::set('theme_settings.' . $name, new Collection($args));
+        $this->globalData->set('theme_settings.' . $name, new Collection($args));
     }
 
     public function registerProfilePage(string $key, array $args = []): void
@@ -482,19 +489,36 @@ trait RegisterHookAction
 
         $args = array_merge($default, $args);
 
-        GlobalData::set('profile_pages.' . $key, new Collection($args));
+        $this->globalData->set('profile_pages.' . $key, new Collection($args));
     }
 
     public function registerPermission(string $key, array $args = []): void
     {
         $default = [
-            'label' => '',
+            'name' => '',
             'key' => $key,
         ];
 
         $args = array_merge($default, $args);
 
         $this->globalData->set('permissions.' . $key, new Collection($args));
+    }
+
+    public function registerResourcePermissions(string $resource, string $name): void
+    {
+        foreach ($this->resourcePermissions as $permission) {
+            $label = $permission == 'index' ? trans('cms::app.permission_manager.view_list') : $permission;
+            $permission =  $permission == 'index' ? $resource : "{$resource}.{$permission}";
+
+            $this->registerPermission(
+                $permission,
+                [
+                    'name' => $permission,
+                    'group' => $resource,
+                    'description' => Str::ucfirst($label) . " {$name}",
+                ]
+            );
+        }
     }
 
     /**

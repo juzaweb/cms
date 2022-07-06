@@ -14,7 +14,6 @@ use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Contracts\EventyContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Facades\GlobalData;
 use Juzaweb\CMS\Traits\HookAction\GetHookAction;
 use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
 
@@ -91,7 +90,7 @@ class HookAction implements HookActionContract
      */
     public function addAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
     {
-        $adminMenu = GlobalData::get('admin_menu');
+        $adminMenu = $this->globalData->get('admin_menu');
 
         $opts = [
             'title' => $menuTitle,
@@ -124,7 +123,7 @@ class HookAction implements HookActionContract
 
     public function addMasterAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
     {
-        $adminMenu = GlobalData::get('master_admin_menu');
+        $adminMenu = $this->globalData->get('master_admin_menu');
 
         $opts = [
             'title' => $menuTitle,
