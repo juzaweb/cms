@@ -117,57 +117,6 @@ trait RegisterHookAction
     }
 
     /**
-     * @param string $key
-     * @param Collection $args
-     */
-    protected function registerMenuPostType(string $key, Collection $args): void
-    {
-        $supports = (array) $args->get('supports', []);
-        $prefix = 'post-type.';
-
-        $this->addAdminMenu(
-            $args->get('label'),
-            $prefix . $key,
-            [
-                'icon' => $args->get('menu_icon', 'fa fa-edit'),
-                'position' => $args->get('menu_position', 20),
-            ]
-        );
-
-        $this->addAdminMenu(
-            trans('cms::app.all') . ' '. $args->get('label'),
-            $prefix . $key,
-            [
-                'icon' => 'fa fa-list-ul',
-                'position' => 2,
-                'parent' => $prefix . $key,
-            ]
-        );
-
-        $this->addAdminMenu(
-            trans('cms::app.add_new'),
-            $prefix . $key . '.create',
-            [
-                'icon' => 'fa fa-plus',
-                'position' => 3,
-                'parent' => $prefix . $key,
-            ]
-        );
-
-        if (in_array('comment', $supports)) {
-            $this->addAdminMenu(
-                trans('cms::app.comments'),
-                $prefix . $args->get('singular') . '.comments',
-                [
-                    'icon' => 'fa fa-comments',
-                    'position' => 20,
-                    'parent' => $prefix . $key,
-                ]
-            );
-        }
-    }
-
-    /**
      * Register menu box
      *
      * @param string $key
@@ -534,5 +483,68 @@ trait RegisterHookAction
         $args = array_merge($default, $args);
 
         GlobalData::set('profile_pages.' . $key, new Collection($args));
+    }
+
+    public function registerPermission(string $key, array $args = []): void
+    {
+        $default = [
+            'label' => '',
+            'key' => $key,
+        ];
+
+        $args = array_merge($default, $args);
+
+        $this->globalData->set('permissions.' . $key, new Collection($args));
+    }
+
+    /**
+     * @param string $key
+     * @param Collection $args
+     */
+    protected function registerMenuPostType(string $key, Collection $args): void
+    {
+        $supports = (array) $args->get('supports', []);
+        $prefix = 'post-type.';
+
+        $this->addAdminMenu(
+            $args->get('label'),
+            $prefix . $key,
+            [
+                'icon' => $args->get('menu_icon', 'fa fa-edit'),
+                'position' => $args->get('menu_position', 20),
+            ]
+        );
+
+        $this->addAdminMenu(
+            trans('cms::app.all') . ' '. $args->get('label'),
+            $prefix . $key,
+            [
+                'icon' => 'fa fa-list-ul',
+                'position' => 2,
+                'parent' => $prefix . $key,
+            ]
+        );
+
+        $this->addAdminMenu(
+            trans('cms::app.add_new'),
+            $prefix . $key . '.create',
+            [
+                'icon' => 'fa fa-plus',
+                'position' => 3,
+                'parent' => $prefix . $key,
+            ]
+        );
+
+        if (in_array('comment', $supports)) {
+            $this->addAdminMenu(
+                trans('cms::app.comments'),
+                $prefix . $args->get('singular') . '.comments',
+                [
+                    'icon' => 'fa fa-comments',
+                    'position' => 20,
+                    'parent' => $prefix . $key,
+                ]
+            );
+        }
     }
 }

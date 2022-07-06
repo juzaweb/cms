@@ -2,7 +2,9 @@
 
 namespace Juzaweb\CMS\Support\Hooks;
 
-class Events
+use Juzaweb\CMS\Contracts\EventyContract;
+
+class Events implements EventyContract
 {
     /**
      * Holds all registered actions.

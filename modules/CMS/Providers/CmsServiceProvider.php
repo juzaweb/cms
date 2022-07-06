@@ -10,6 +10,7 @@ use Juzaweb\CMS\Contracts\ActionRegisterContract;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Contracts\CacheGroupContract;
 use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Contracts\EventyContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Contracts\JWQueryContract;
@@ -169,8 +170,11 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->app->singleton(
             HookActionContract::class,
-            function () {
-                return new HookAction();
+            function ($app) {
+                return new HookAction(
+                    $app[EventyContract::class],
+                    $app[GlobalDataContract::class]
+                );
             }
         );
 
