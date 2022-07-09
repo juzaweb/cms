@@ -26,11 +26,7 @@ class AddColumnsToRolesTable extends Migration
         Schema::table(
             'permissions',
             function (Blueprint $table) {
-                $table->unsignedBigInteger('group_id')->index();
                 $table->string('description', 200)->nullable();
-                $table->foreign('group_id')
-                    ->references('id')
-                    ->on('permission_groups');
             }
         );
     }

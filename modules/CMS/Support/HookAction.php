@@ -173,7 +173,7 @@ class HookAction implements HookActionContract
         );
     }
 
-    public function enqueueStyle(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
+    public function enqueueStyle(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void
     {
         if (!is_url($src)) {
             $src = asset($src);
@@ -192,8 +192,12 @@ class HookAction implements HookActionContract
         );
     }
 
-    public function enqueueFrontendScript(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
-    {
+    public function enqueueFrontendScript(
+        string $key,
+        string $src = '',
+        string $ver = '1.0',
+        bool $inFooter = false
+    ): void {
         if (!is_url($src)) {
             $src = theme_assets($src);
         }
@@ -211,8 +215,12 @@ class HookAction implements HookActionContract
         );
     }
 
-    public function enqueueFrontendStyle(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
-    {
+    public function enqueueFrontendStyle(
+        string $key,
+        string $src = '',
+        string $ver = '1.0',
+        bool $inFooter = false
+    ): void {
         if (!is_url($src)) {
             $src = theme_assets($src);
         }

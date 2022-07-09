@@ -2,11 +2,12 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Juzaweb\Backend\Models\Permission;
-use Juzaweb\Backend\Models\PermissionGroup;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -20,16 +21,16 @@ class RoleController extends BackendController
         afterSave as tAfterSave;
     }
 
-    protected $viewPrefix = 'cms::backend.role';
+    protected string $viewPrefix = 'cms::backend.role';
 
-    protected function getDataTable(...$params)
+    protected function getDataTable(...$params): DataTable
     {
         return new RoleDatatable();
     }
 
-    protected function validator(array $attributes, ...$params)
+    protected function validator(array $attributes, ...$params): \Illuminate\Contracts\Validation\Validator
     {
-        $validator = Validator::make(
+        return Validator::make(
             $attributes,
             [
                 'name' => 'required|string|max:100',
@@ -41,8 +42,6 @@ class RoleController extends BackendController
                 ],
             ]
         );
-
-        return $validator;
     }
 
     protected function afterSave($data, Role $model, ...$params)
@@ -51,33 +50,40 @@ class RoleController extends BackendController
         $model->syncPermissions($permissions);
     }
 
-    protected function getDataForForm($model, ...$params)
+    protected function getDataForForm($model, ...$params): array
     {
         $data = $this->DataForForm($model);
         $data['groups'] = $this->getPermissionGroups();
         return $data;
     }
 
-    protected function getModel(...$params)
+    protected function getModel(...$params): string
     {
         return Role::class;
     }
 
-    protected function getTitle(...$params)
+    protected function getTitle(...$params): string
     {
         return trans('cms::app.roles');
     }
 
-    protected function getPermissionGroups()
+    protected function getPermissionGroups(): \Illuminate\Support\Collection
     {
-        $plugins = array_keys(get_config('plugin_statuses', []));
-        $query = PermissionGroup::with(['permissions']);
-        $query->where(
-            function (Builder $q) use ($plugins) {
-                $q->whereNull('plugin');
-                $q->orWhereIn('plugin', $plugins);
+        do_action(Action::PERMISSION_INIT);
+
+        $permissions = HookAction::getPermissions();
+        $groups = HookAction::getPermissionGroups();
+
+        foreach ($permissions as $key => $item) {
+            if ($group = $item->get('group')) {
+                $group = $groups->get($group);
+                $pers = $group->get('permissions', []);
+                $pers[$key] = $item;
+                $group->put('permissions', $pers);
+                $groups[$group->get('key')] = $group;
             }
-        );
-        return $query->get();
+        }
+
+        return $groups;
     }
 }

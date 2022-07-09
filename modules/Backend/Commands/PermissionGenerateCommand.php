@@ -23,6 +23,7 @@ class PermissionGenerateCommand extends Command
 
     public function handle(): int
     {
+        return 0;
         $this->resourceGenerate('users', 'User');
         $this->resourceGenerate('email_templates', 'Email Template');
         $this->resourceGenerate('themes', 'Theme');

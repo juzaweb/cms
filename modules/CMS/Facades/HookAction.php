@@ -60,6 +60,8 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static Collection getThemeSettings($name = null)
  * @method static Collection getEnqueueScripts($inFooter = false)
  * @method static Collection getEnqueueStyles($inFooter = false)
+ * @method static Collection getPermissionGroups(string $key = null)
+ * @method static Collection getPermissions(string $key = null)
  *
  * @see \Juzaweb\CMS\Support\HookAction
  */

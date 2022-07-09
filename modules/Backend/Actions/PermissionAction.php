@@ -25,7 +25,7 @@ class PermissionAction extends Action
         );
 
         $this->addAction(
-            Action::BACKEND_INIT,
+            Action::PERMISSION_INIT,
             [$this, 'addPermissions']
         );
 

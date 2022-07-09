@@ -23,7 +23,7 @@ class HookActionServiceProvider extends ServiceProvider
         Blade::directive(
             'do_action',
             function ($expression) {
-                return "<?php app(EventyContract::class)->action({$expression}); ?>";
+                return "<?php app(\Juzaweb\CMS\Contracts\EventyContract::class)->action({$expression}); ?>";
             }
         );
 
@@ -33,7 +33,7 @@ class HookActionServiceProvider extends ServiceProvider
         Blade::directive(
             'apply_filters',
             function ($expression) {
-                return "<?php echo app(EventyContract::class)->filter({$expression}); ?>";
+                return "<?php echo app(\Juzaweb\CMS\Contracts\EventyContract::class)->filter({$expression}); ?>";
             }
         );
     }

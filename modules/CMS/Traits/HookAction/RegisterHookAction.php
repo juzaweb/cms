@@ -455,7 +455,7 @@ trait RegisterHookAction
         $this->globalData->set('templates.' . $key, new Collection($args));
     }
 
-    public function registerPackageModule($key, $args = [])
+    public function registerPackageModule(string $key, array $args = []): void
     {
         $defaults = [
             'key' => $key,
@@ -469,7 +469,7 @@ trait RegisterHookAction
         $this->globalData->set('package_modules.' . $key, new Collection($args));
     }
 
-    public function registerThemeSetting($name, $label, $args = [])
+    public function registerThemeSetting(string $name, string $label, array $args = []): void
     {
         $args = [
             'name' => $name,
@@ -492,16 +492,37 @@ trait RegisterHookAction
         $this->globalData->set('profile_pages.' . $key, new Collection($args));
     }
 
-    public function registerPermission(string $key, array $args = []): void
+    public function registerPermissionGroup(string $key, array $args = []): void
     {
-        $default = [
+        $key = str_replace(['.'], '__', $key);
+
+        $defaults = [
             'name' => '',
+            'description' => '',
             'key' => $key,
         ];
 
-        $args = array_merge($default, $args);
+        $args = array_merge($defaults, $args);
 
-        $this->globalData->set('permissions.' . $key, new Collection($args));
+        $this->globalData->set('permission_groups.' . $key, new Collection($args));
+    }
+
+    public function registerPermission(string $key, array $args = []): void
+    {
+        $arrKey = str_replace(['.'], '__', $key);
+
+        $defaults = [
+            'name' => $key,
+            'group' => '',
+            'description' => '',
+            'key' => $arrKey,
+        ];
+
+        $args = array_merge($defaults, $args);
+
+        $args['group'] = str_replace(['.'], '__', $args['group']);
+
+        $this->globalData->set('permissions.' . $arrKey, new Collection($args));
     }
 
     public function registerResourcePermissions(string $resource, string $name): void
@@ -509,6 +530,8 @@ trait RegisterHookAction
         foreach ($this->resourcePermissions as $permission) {
             $label = $permission == 'index' ? trans('cms::app.permission_manager.view_list') : $permission;
             $permission =  $permission == 'index' ? $resource : "{$resource}.{$permission}";
+
+            $this->registerPermissionGroup($resource, ['name' => $name]);
 
             $this->registerPermission(
                 $permission,

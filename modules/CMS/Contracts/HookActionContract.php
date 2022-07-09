@@ -28,9 +28,29 @@ interface HookActionContract
 
     public function getMenuBoxs(array $keys = []): array;
 
+    public function enqueueScript(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void;
+
+    public function enqueueStyle(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void;
+
+    public function enqueueFrontendScript(
+        string $key,
+        string $src = '',
+        string $ver = '1.0',
+        bool $inFooter = false
+    ): void;
+
+    public function enqueueFrontendStyle(
+        string $key,
+        string $src = '',
+        string $ver = '1.0',
+        bool $inFooter = false
+    ): void;
+
     public function getProfilePages($key = null): Collection;
 
     public function registerPermission(string $key, array $args = []): void;
 
     public function registerResourcePermissions(string $resource, string $name): void;
+
+    public function getPermissions(string $key = null): Collection;
 }

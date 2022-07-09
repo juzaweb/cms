@@ -4,7 +4,7 @@ JUZACMS - Laravel CMS for Your Project
 ## About
 ![https://buymeacoffee.com/juzaweb](https://i.imgur.com/TjRCjt7.png)
 
-- JuzaWeb CMS (JuzaCMS) is a Content Management System ([Laravel CMS](https://juzaweb.com)) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
+- JuzaWeb CMS is a Content Management System ([Laravel CMS](https://juzaweb.com)) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
 - Juza CMS was engineered to be easy — for both developers and users. Project develop by Juzaweb.
 - Demo site: 
     - Frontend: https://theme-default.juzaweb.com
@@ -42,7 +42,6 @@ Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
 ## Features
 - [x] Fully Ajax load page.
 - [x] File manager
-- [x] Chunk Upload File manager
 - [x] Post Type support
 - [x] Taxonomy support
 - [x] Email service
@@ -56,6 +55,9 @@ Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
 - [x] Added default theme
 - [x] Page block
 - [x] Permalinks
+- [x] Upload themes
+- [x] Upload plugins
+- [x] **Network (multisite) support**
 - [x] Social login
   - [x] Google
   - [x] Facebook
@@ -67,15 +69,14 @@ Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
   - [x] Policies
   - [ ] Check permisson button in views
 - [ ] Media manager admin page
-- [ ] Upload themes
 - [ ] Short Code
 - [ ] Add image from url
 - [ ] Quick edit
 - [ ] Response cache
 - [ ] Preview post
 - [ ] Activity logs
-- [ ] Per page paginate config
-- [ ] Api Support
+- [x] Per page paginate config
+- [ ] **Api Support**
 
 ## Plugins
 * [E-Commerce](https://github.com/juzaweb/ecommerce) (developing)

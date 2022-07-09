@@ -21,11 +21,11 @@ use Illuminate\Support\Arr;
 use Juzaweb\Backend\Models\PasswordReset;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Database\Factories\UserFactory;
+use Juzaweb\CMS\Traits\Permission\HasRoles;
 use Juzaweb\CMS\Traits\ResourceModel;
 use Juzaweb\Network\Facades\Network;
 use Juzaweb\Network\Traits\RootNetworkModel;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Juzaweb\CMS\Models\User
