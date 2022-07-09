@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
-use Juzaweb\CMS\Facades\GlobalData;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
 use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
@@ -17,6 +16,8 @@ use Juzaweb\Frontend\Http\Controllers\TaxonomyController;
 
 trait RegisterHookAction
 {
+    protected array $resourcePermissions = ['index', 'create', 'edit', 'delete'];
+
     /**
      * JUZAWEB CMS: Registers a post type.
      * @param string $key (Required) Post type key. Must not exceed 20 characters
@@ -53,7 +54,13 @@ trait RegisterHookAction
         $args['model_key'] = str_replace('\\', '_', $args['model']);
 
         $args = new Collection($args);
-        GlobalData::set('post_types.' . $args->get('key'), $args);
+
+        $this->globalData->set('post_types.' . $args->get('key'), $args);
+
+        $this->registerResourcePermissions(
+            "post-type.{$key}",
+            $args->get('label')
+        );
 
         if ($args->get('show_in_menu')) {
             $this->registerMenuPostType($key, $args);
@@ -117,57 +124,6 @@ trait RegisterHookAction
     }
 
     /**
-     * @param string $key
-     * @param Collection $args
-     */
-    protected function registerMenuPostType(string $key, Collection $args): void
-    {
-        $supports = (array) $args->get('supports', []);
-        $prefix = 'post-type.';
-
-        $this->addAdminMenu(
-            $args->get('label'),
-            $prefix . $key,
-            [
-                'icon' => $args->get('menu_icon', 'fa fa-edit'),
-                'position' => $args->get('menu_position', 20),
-            ]
-        );
-
-        $this->addAdminMenu(
-            trans('cms::app.all') . ' '. $args->get('label'),
-            $prefix . $key,
-            [
-                'icon' => 'fa fa-list-ul',
-                'position' => 2,
-                'parent' => $prefix . $key,
-            ]
-        );
-
-        $this->addAdminMenu(
-            trans('cms::app.add_new'),
-            $prefix . $key . '.create',
-            [
-                'icon' => 'fa fa-plus',
-                'position' => 3,
-                'parent' => $prefix . $key,
-            ]
-        );
-
-        if (in_array('comment', $supports)) {
-            $this->addAdminMenu(
-                trans('cms::app.comments'),
-                $prefix . $args->get('singular') . '.comments',
-                [
-                    'icon' => 'fa fa-comments',
-                    'position' => 20,
-                    'parent' => $prefix . $key,
-                ]
-            );
-        }
-    }
-
-    /**
      * Register menu box
      *
      * @param string $key
@@ -185,11 +141,11 @@ trait RegisterHookAction
 
         $item = array_merge($opts, $args);
 
-        GlobalData::set('menu_boxs.' . $key, new Collection($item));
+        $this->globalData->set('menu_boxs.' . $key, new Collection($item));
     }
 
     /**
-     * JUZAWEB CMS: Creates or modifies a taxonomy object.
+     * Creates or modifies a taxonomy object.
      * @param string $taxonomy (Required) Taxonomy key, must not exceed 32 characters.
      * @param array|string $objectType
      * @param array $args (Optional) Array of arguments for registering a post type.
@@ -197,7 +153,7 @@ trait RegisterHookAction
      *
      * @throws \Exception
      */
-    public function registerTaxonomy($taxonomy, $objectType, $args = [])
+    public function registerTaxonomy(string $taxonomy, array|string $objectType, array $args = []): void
     {
         $objectTypes = is_string($objectType) ? [$objectType] : $objectType;
 
@@ -230,7 +186,12 @@ trait RegisterHookAction
 
             $argsCollection = new Collection(array_merge($opts, $args));
 
-            GlobalData::set('taxonomies.' . $objectType.'.'.$taxonomy, $argsCollection);
+            $this->globalData->set('taxonomies.' . $objectType.'.'.$taxonomy, $argsCollection);
+
+            $this->registerResourcePermissions(
+                $menuSlug,
+                Str::ucfirst($type).' '.$argsCollection->get('label')
+            );
 
             if ($argsCollection->get('show_in_menu')) {
                 $this->addAdminMenu(
@@ -240,6 +201,12 @@ trait RegisterHookAction
                         'icon' => $argsCollection->get('menu_icon', 'fa fa-list'),
                         'parent' => $argsCollection->get('parent'),
                         'position' => $argsCollection->get('menu_position'),
+                        'permissions' => [
+                            "{$menuSlug}.index",
+                            "{$menuSlug}.create",
+                            "{$menuSlug}.edit",
+                            "{$menuSlug}.delete",
+                        ],
                     ]
                 );
             }
@@ -304,7 +271,7 @@ trait RegisterHookAction
             )
         );
 
-        GlobalData::set('permalinks.' . $key, new Collection($args));
+        $this->globalData->set('permalinks.' . $key, new Collection($args));
     }
 
     public function registerResource(string $key, string $postType = null, array $args = [])
@@ -349,14 +316,14 @@ trait RegisterHookAction
 
         $args = new Collection($args);
 
-        GlobalData::set('resources.' . $args->get('key'), $args);
+        $this->globalData->set('resources.' . $args->get('key'), $args);
     }
 
     public function registerConfig(array $keys)
     {
-        $configs = GlobalData::get('configs');
+        $configs = $this->globalData->get('configs');
 
-        GlobalData::set('configs', array_merge($keys, $configs));
+        $this->globalData->set('configs', array_merge($keys, $configs));
     }
 
     public function registerAdminPage(string $key, array $args)
@@ -383,7 +350,7 @@ trait RegisterHookAction
             $args['menu']
         );
 
-        GlobalData::set('admin_pages.' . $key, $args);
+        $this->globalData->set('admin_pages.' . $key, $args);
     }
 
     public function registerAdminAjax(string $key, array $args = [])
@@ -396,13 +363,13 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('admin_ajaxs.' . $key, new Collection($args));
+        $this->globalData->set('admin_ajaxs.' . $key, new Collection($args));
     }
 
     public function registerNavMenus($locations = [])
     {
         foreach ($locations as $key => $location) {
-            GlobalData::set(
+            $this->globalData->set(
                 'nav_menus.' . $key,
                 new Collection(
                     [
@@ -424,7 +391,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('email_hooks.' . $key, new Collection($args));
+        $this->globalData->set('email_hooks.' . $key, new Collection($args));
     }
 
     public function registerSidebar(string $key, array $args = [])
@@ -439,7 +406,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('sidebars.' . $key, new Collection($args));
+        $this->globalData->set('sidebars.' . $key, new Collection($args));
     }
 
     public function registerWidget($key, $args = [])
@@ -453,7 +420,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('widgets.' . $key, new Collection($args));
+        $this->globalData->set('widgets.' . $key, new Collection($args));
     }
 
     public function registerPageBlock($key, $args = [])
@@ -467,7 +434,7 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('page_blocks.' . $key, new Collection($args));
+        $this->globalData->set('page_blocks.' . $key, new Collection($args));
     }
 
     public function registerFrontendAjax($key, $args = [])
@@ -483,7 +450,7 @@ trait RegisterHookAction
             throw new \Exception('Frontend Ajax callback option is required.');
         }
 
-        GlobalData::set('frontend_ajaxs.' . $key, new Collection($args));
+        $this->globalData->set('frontend_ajaxs.' . $key, new Collection($args));
     }
 
     public function registerThemeTemplate($key, $args = [])
@@ -496,10 +463,10 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('templates.' . $key, new Collection($args));
+        $this->globalData->set('templates.' . $key, new Collection($args));
     }
 
-    public function registerPackageModule($key, $args = [])
+    public function registerPackageModule(string $key, array $args = []): void
     {
         $defaults = [
             'key' => $key,
@@ -510,10 +477,10 @@ trait RegisterHookAction
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('package_modules.' . $key, new Collection($args));
+        $this->globalData->set('package_modules.' . $key, new Collection($args));
     }
 
-    public function registerThemeSetting($name, $label, $args = [])
+    public function registerThemeSetting(string $name, string $label, array $args = []): void
     {
         $args = [
             'name' => $name,
@@ -521,7 +488,7 @@ trait RegisterHookAction
             'data' => $args
         ];
 
-        GlobalData::set('theme_settings.' . $name, new Collection($args));
+        $this->globalData->set('theme_settings.' . $name, new Collection($args));
     }
 
     public function registerProfilePage(string $key, array $args = []): void
@@ -533,6 +500,130 @@ trait RegisterHookAction
 
         $args = array_merge($default, $args);
 
-        GlobalData::set('profile_pages.' . $key, new Collection($args));
+        $this->globalData->set('profile_pages.' . $key, new Collection($args));
+    }
+
+    public function registerPermissionGroup(string $key, array $args = []): void
+    {
+        $key = str_replace(['.'], '__', $key);
+
+        $defaults = [
+            'name' => '',
+            'description' => '',
+            'key' => $key,
+        ];
+
+        $args = array_merge($defaults, $args);
+
+        $this->globalData->set('permission_groups.' . $key, new Collection($args));
+    }
+
+    public function registerPermission(string $key, array $args = []): void
+    {
+        $arrKey = str_replace(['.'], '__', $key);
+
+        $defaults = [
+            'name' => $key,
+            'group' => '',
+            'description' => '',
+            'key' => $arrKey,
+        ];
+
+        $args = array_merge($defaults, $args);
+
+        $args['group'] = str_replace(['.'], '__', $args['group']);
+
+        $this->globalData->set('permissions.' . $arrKey, new Collection($args));
+    }
+
+    public function registerResourcePermissions(string $resource, string $name): void
+    {
+        foreach ($this->resourcePermissions as $permission) {
+            $label = $permission == 'index' ? trans('cms::app.permission_manager.view_list') : $permission;
+            $permission = "{$resource}.{$permission}";
+
+            $this->registerPermissionGroup(
+                $resource,
+                [
+                    'name' => $resource,
+                    'description' => $name
+                ]
+            );
+
+            $this->registerPermission(
+                $permission,
+                [
+                    'name' => $permission,
+                    'group' => $resource,
+                    'description' => Str::ucfirst($label) . " {$name}",
+                ]
+            );
+        }
+    }
+
+    /**
+     * @param string $key
+     * @param Collection $args
+     */
+    protected function registerMenuPostType(string $key, Collection $args): void
+    {
+        $supports = (array) $args->get('supports', []);
+        $prefix = 'post-type.';
+
+        $this->addAdminMenu(
+            $args->get('label'),
+            $prefix . $key,
+            [
+                'icon' => $args->get('menu_icon', 'fa fa-edit'),
+                'position' => $args->get('menu_position', 20),
+                'permissions' => [
+                    "{$prefix}{$key}.index",
+                    "{$prefix}{$key}.create",
+                    "{$prefix}{$key}.edit",
+                    "{$prefix}{$key}.delete",
+                ]
+            ]
+        );
+
+        $this->addAdminMenu(
+            trans('cms::app.all') . ' '. $args->get('label'),
+            $prefix . $key,
+            [
+                'icon' => 'fa fa-list-ul',
+                'position' => 2,
+                'parent' => $prefix . $key,
+                'permissions' => [
+                    "{$prefix}{$key}.index",
+                    "{$prefix}{$key}.create",
+                    "{$prefix}{$key}.edit",
+                    "{$prefix}{$key}.delete",
+                ]
+            ]
+        );
+
+        $this->addAdminMenu(
+            trans('cms::app.add_new'),
+            $prefix . $key . '.create',
+            [
+                'icon' => 'fa fa-plus',
+                'position' => 3,
+                'parent' => $prefix . $key,
+                'permissions' => [
+                    "{$prefix}{$key}.create",
+                ]
+            ]
+        );
+
+        if (in_array('comment', $supports)) {
+            $this->addAdminMenu(
+                trans('cms::app.comments'),
+                $prefix . $args->get('singular') . '.comments',
+                [
+                    'icon' => 'fa fa-comments',
+                    'position' => 20,
+                    'parent' => $prefix . $key,
+                ]
+            );
+        }
     }
 }

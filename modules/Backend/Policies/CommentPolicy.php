@@ -12,7 +12,7 @@ class CommentPolicy
 
     public function index(User $user, $type): bool
     {
-        if (!$user->can("{$type}.comments")) {
+        if (!$user->can("{$type}.comments.index")) {
             return false;
         }
 

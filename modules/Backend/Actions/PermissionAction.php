@@ -20,8 +20,13 @@ class PermissionAction extends Action
     public function handle()
     {
         $this->addAction(
-            Action::BACKEND_CALL_ACTION,
+            Action::BACKEND_INIT,
             [$this, 'addAdminMenu']
+        );
+
+        $this->addAction(
+            Action::PERMISSION_INIT,
+            [$this, 'addPermissions']
         );
 
         $this->addAction(
@@ -64,6 +69,39 @@ class PermissionAction extends Action
                 'position' => 30,
                 'parent' => 'users',
             ]
+        );
+    }
+
+    public function addPermissions(): void
+    {
+        /*HookAction::registerResourcePermissions(
+            'media',
+            trans('cms::app.media')
+        );
+
+        HookAction::registerResourcePermissions(
+            'themes',
+            trans('cms::app.theme')
+        );*/
+
+        HookAction::registerResourcePermissions(
+            'users',
+            trans('cms::app.user')
+        );
+
+        HookAction::registerResourcePermissions(
+            'email_templates',
+            trans('cms::app.email_template')
+        );
+
+        /*HookAction::registerResourcePermissions(
+            'menus',
+            trans('cms::app.menu')
+        );*/
+
+        HookAction::registerResourcePermissions(
+            'roles',
+            trans('cms::app.role')
         );
     }
 }

@@ -327,7 +327,7 @@ class Theme implements ThemeLoaderContract
         return $this->getRegister($theme, 'templates');
     }
 
-    public function getRegister($theme, $key = null): string|array
+    public function getRegister($theme, $key = null): string|array|null
     {
         $path = $this->getThemePath($theme, 'register.json');
         if (file_exists($path)) {

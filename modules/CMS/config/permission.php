@@ -13,7 +13,7 @@ return [
          * `Spatie\Permission\Contracts\Permission` contract.
          */
 
-        'permission' => \Juzaweb\Backend\Models\Permission::class,
+        'permission' => \Juzaweb\CMS\Models\Permission::class,
 
         /*
          * When using the "HasRoles" trait from this package, we need to know which
@@ -24,7 +24,7 @@ return [
          * `Spatie\Permission\Contracts\Role` contract.
          */
 
-        'role' => \Juzaweb\Backend\Models\Role::class,
+        'role' => \Juzaweb\CMS\Models\Role::class,
 
     ],
 
@@ -76,6 +76,7 @@ return [
          * Change this if you want to name the related pivots other than defaults
          */
         'role_pivot_key' => null, //default 'role_id',
+
         'permission_pivot_key' => null, //default 'permission_id',
 
         /*
@@ -148,7 +149,7 @@ return [
          * The cache key used to store all permissions.
          */
 
-        'key' => 'spatie.permission.cache',
+        'key' => 'juzaweb.permission.cache',
 
         /*
          * You may optionally indicate a specific cache driver to use for permission and
@@ -156,6 +157,6 @@ return [
          * file. Using 'default' here means to use the `default` set in cache.php.
          */
 
-        'store' => 'file',
+        'store' => 'default',
     ],
 ];

@@ -256,4 +256,22 @@ trait GetHookAction
 
         return new Collection(GlobalData::get('profile_pages'));
     }
+
+    public function getPermissions(string $key = null): Collection
+    {
+        if ($key) {
+            return Arr::get(GlobalData::get('permissions'), $key);
+        }
+
+        return new Collection(GlobalData::get('permissions'));
+    }
+
+    public function getPermissionGroups(string $key = null): Collection
+    {
+        if ($key) {
+            return Arr::get(GlobalData::get('permission_groups'), $key);
+        }
+
+        return new Collection(GlobalData::get('permission_groups'));
+    }
 }

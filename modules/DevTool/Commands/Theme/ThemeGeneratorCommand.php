@@ -97,7 +97,6 @@ class ThemeGeneratorCommand extends Command
         }
 
         $this->createStubs($themeStubFiles, $createdThemePath);
-        $this->call('jw:import-themes');
 
         $this->info(ucfirst($this->theme['name']).' Theme Folder Successfully Generated !!!');
     }

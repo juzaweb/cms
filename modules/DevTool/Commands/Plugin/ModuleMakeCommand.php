@@ -43,8 +43,6 @@ class ModuleMakeCommand extends Command
                 ->setActive(! $this->option('disabled'))
                 ->generate();
         }
-
-        $this->call('jw:import-plugins');
     }
 
     /**
