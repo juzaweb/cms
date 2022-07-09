@@ -74,7 +74,7 @@ class PermissionAction extends Action
 
     public function addPermissions(): void
     {
-        HookAction::registerResourcePermissions(
+        /*HookAction::registerResourcePermissions(
             'media',
             trans('cms::app.media')
         );
@@ -82,7 +82,7 @@ class PermissionAction extends Action
         HookAction::registerResourcePermissions(
             'themes',
             trans('cms::app.theme')
-        );
+        );*/
 
         HookAction::registerResourcePermissions(
             'users',
@@ -94,10 +94,10 @@ class PermissionAction extends Action
             trans('cms::app.email_template')
         );
 
-        HookAction::registerResourcePermissions(
+        /*HookAction::registerResourcePermissions(
             'menus',
             trans('cms::app.menu')
-        );
+        );*/
 
         HookAction::registerResourcePermissions(
             'roles',
