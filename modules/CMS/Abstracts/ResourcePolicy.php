@@ -22,7 +22,7 @@ abstract class ResourcePolicy
 
     public function index(User $user)
     {
-        if (!$user->can($this->resourceType)) {
+        if (!$user->can("{$this->resourceType}.index")) {
             return false;
         }
 

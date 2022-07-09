@@ -145,7 +145,7 @@ trait RegisterHookAction
     }
 
     /**
-     * JUZAWEB CMS: Creates or modifies a taxonomy object.
+     * Creates or modifies a taxonomy object.
      * @param string $taxonomy (Required) Taxonomy key, must not exceed 32 characters.
      * @param array|string $objectType
      * @param array $args (Optional) Array of arguments for registering a post type.
@@ -153,7 +153,7 @@ trait RegisterHookAction
      *
      * @throws \Exception
      */
-    public function registerTaxonomy($taxonomy, $objectType, $args = [])
+    public function registerTaxonomy(string $taxonomy, array|string $objectType, array $args = []): void
     {
         $objectTypes = is_string($objectType) ? [$objectType] : $objectType;
 
@@ -188,6 +188,11 @@ trait RegisterHookAction
 
             $this->globalData->set('taxonomies.' . $objectType.'.'.$taxonomy, $argsCollection);
 
+            $this->registerResourcePermissions(
+                $menuSlug,
+                Str::ucfirst($type).' '.$argsCollection->get('label')
+            );
+
             if ($argsCollection->get('show_in_menu')) {
                 $this->addAdminMenu(
                     $argsCollection->get('label'),
@@ -196,6 +201,12 @@ trait RegisterHookAction
                         'icon' => $argsCollection->get('menu_icon', 'fa fa-list'),
                         'parent' => $argsCollection->get('parent'),
                         'position' => $argsCollection->get('menu_position'),
+                        'permissions' => [
+                            "{$menuSlug}.index",
+                            "{$menuSlug}.create",
+                            "{$menuSlug}.edit",
+                            "{$menuSlug}.delete",
+                        ],
                     ]
                 );
             }

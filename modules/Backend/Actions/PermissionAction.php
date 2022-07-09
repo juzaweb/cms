@@ -75,6 +75,11 @@ class PermissionAction extends Action
     public function addPermissions(): void
     {
         HookAction::registerResourcePermissions(
+            'media',
+            trans('cms::app.media')
+        );
+
+        HookAction::registerResourcePermissions(
             'themes',
             trans('cms::app.theme')
         );
