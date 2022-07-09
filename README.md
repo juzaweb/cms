@@ -23,6 +23,9 @@ JUZACMS - Laravel CMS for Your Project
 composer create-project --prefer-dist juzaweb/juzacms blog
 ```
 ### Install
+
+Config database in your `.env` file, and run:
+
 ```
 php artisan juzacms:install
 ```
