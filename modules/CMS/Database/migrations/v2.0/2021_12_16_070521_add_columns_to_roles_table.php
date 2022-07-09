@@ -48,9 +48,7 @@ class AddColumnsToRolesTable extends Migration
         Schema::table(
             'permissions',
             function (Blueprint $table) {
-                $prefix = DB::getTablePrefix();
-                $table->dropForeign("{$prefix}permissions_group_id_foreign");
-                $table->dropColumn(['group_id', 'description']);
+                $table->dropColumn(['description']);
             }
         );
     }
