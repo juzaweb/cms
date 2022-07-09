@@ -182,6 +182,12 @@ trait ResourceController
 
     public function datatable(Request $request, ...$params)
     {
+        $this->checkPermission(
+            'index',
+            $this->getModel(...$params),
+            ...$params
+        );
+
         $table = $this->getDataTable(...$params);
         $table->setCurrentUrl(action([static::class, 'index'], $params, false));
 
@@ -236,7 +242,20 @@ trait ResourceController
         $ids = $request->post('ids');
 
         $table = $this->getDataTable(...$params);
-        $table->bulkActions($action, $ids);
+        $results = [];
+
+        foreach ($ids as $id) {
+            $model = $this->makeModel(...$params)->find($id);
+            $permission = $action != 'delete' ? 'edit' : 'delete';
+
+            if (!$this->getPermission($permission, $model, ...$params)) {
+                continue;
+            }
+
+            $results[] = $id;
+        }
+
+        $table->bulkActions($action, $results);
 
         return $this->success(
             [
