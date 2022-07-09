@@ -2,9 +2,9 @@
 
 namespace Juzaweb\Backend\Repositories;
 
+use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
-use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class PostRepositoryEloquent.
@@ -13,13 +13,36 @@ use Prettus\Repository\Eloquent\BaseRepository;
  */
 class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepository
 {
-    /**
-     * Specify Model class name
-     *
-     * @return string
-     */
     public function model(): string
     {
         return Post::class;
+    }
+
+    public function createSelectFrontendBuilder(): Builder
+    {
+        $builder = self::with(
+            [
+                'createdBy',
+                'taxonomies',
+            ]
+        )->select(
+            [
+                'id',
+                'title',
+                'description',
+                'thumbnail',
+                'slug',
+                'views',
+                'total_rating',
+                'total_comment',
+                'type',
+                'status',
+                'created_by',
+                'created_at',
+                'json_metas',
+            ]
+        )->wherePublish();
+
+        return apply_filters('post.selectFrontendBuilder', $builder);
     }
 }

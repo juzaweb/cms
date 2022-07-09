@@ -79,6 +79,127 @@
                     }
                 ]
             }
+        },
+        "/api/post-type/{type}": {
+            "get": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Get list post type items",
+                "operationId": "v1.post-type.type.index",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/query_limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/query_keyword"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_list"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Create Post Type",
+                "operationId": "api.v1.post-type.type.store",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Title",
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "description": "content",
+                                        "type": "string"
+                                    },
+                                    "grecaptcha_token": {
+                                        "description": "(Optional) Token of Google Recaptcha V3",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/post-type/{type}/{id}": {
+            "get": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Get news data by slug",
+                "operationId": "v1.news.findBySlug",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/id_in_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/error_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -333,6 +454,14 @@
             }
         },
         "parameters": {
+            "id_in_path": {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
             "slug_in_path": {
                 "name": "slug",
                 "in": "path",
@@ -347,20 +476,6 @@
                 "required": true,
                 "schema": {
                     "type": "string"
-                }
-            },
-            "query_locale": {
-                "name": "locale",
-                "in": "query",
-                "description": "",
-                "required": true,
-                "schema": {
-                    "description": "",
-                    "type": "string",
-                    "enum": [
-                        "vi",
-                        "en"
-                    ]
                 }
             },
             "query_limit": {

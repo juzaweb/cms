@@ -13,6 +13,7 @@ namespace Juzaweb\CMS\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Info(
@@ -23,6 +24,13 @@ use Illuminate\Support\MessageBag;
  *          email="admin@juzaweb.com"
  *      )
  * ),
+ * @OA\Parameter(
+ *      parameter="id_in_path",
+ *      name="id",
+ *      in="path",
+ *      required=true,
+ *      @OA\Schema(type="string")
+ *  ),
  * @OA\Parameter(
  *      parameter="slug_in_path",
  *      name="slug",
@@ -36,14 +44,6 @@ use Illuminate\Support\MessageBag;
  *      in="path",
  *      required=true,
  *      @OA\Schema(type="string")
- *  ),
- *  @OA\Parameter(
- *      parameter="query_locale",
- *      name="locale",
- *      in="query",
- *      required=true,
- *      description="",
- *      @OA\Schema(type="string", enum={"vi","en"}, description="" )
  *  ),
  *  @OA\Parameter(
  *      parameter="query_limit",
