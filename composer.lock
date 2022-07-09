@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43d7d53df106deae2cc81130b2b71983",
+    "content-hash": "27f86c3811e3f0af6a3b11d23ef79c5f",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1867,16 +1867,16 @@
         },
         {
             "name": "juzaweb/packages",
-            "version": "v1.0.4",
+            "version": "v1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/packages.git",
-                "reference": "0adde3a1b93c0b1088c6b5f29febd7fb9cf3e05b"
+                "reference": "08581d9846c6fb0cbfcbd24b7cfd38ff15ea2464"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/packages/zipball/0adde3a1b93c0b1088c6b5f29febd7fb9cf3e05b",
-                "reference": "0adde3a1b93c0b1088c6b5f29febd7fb9cf3e05b",
+                "url": "https://api.github.com/repos/juzaweb/packages/zipball/08581d9846c6fb0cbfcbd24b7cfd38ff15ea2464",
+                "reference": "08581d9846c6fb0cbfcbd24b7cfd38ff15ea2464",
                 "shasum": ""
             },
             "require": {
@@ -1896,8 +1896,7 @@
                 "rennokki/laravel-eloquent-query-cache": "^3.1",
                 "spatie/image-optimizer": "^1.4",
                 "spatie/laravel-backup": "^8.1",
-                "spatie/laravel-feed": "^4.1",
-                "spatie/laravel-permission": "^5.5"
+                "spatie/laravel-feed": "^4.1"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -1907,9 +1906,9 @@
             "description": "Juzaweb CMS packages",
             "support": {
                 "issues": "https://github.com/juzaweb/packages/issues",
-                "source": "https://github.com/juzaweb/packages/tree/v1.0.4"
+                "source": "https://github.com/juzaweb/packages/tree/v1.1"
             },
-            "time": "2022-05-20T02:20:13+00:00"
+            "time": "2022-07-09T03:55:18+00:00"
         },
         {
             "name": "juzaweb/sitemap",
@@ -4640,88 +4639,6 @@
                 }
             ],
             "time": "2022-03-15T20:01:36+00:00"
-        },
-        {
-            "name": "spatie/laravel-permission",
-            "version": "5.5.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "cb86fd87b43fcfc493c3f2b1de6fad100c078146"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/cb86fd87b43fcfc493c3f2b1de6fad100c078146",
-                "reference": "cb86fd87b43fcfc493c3f2b1de6fad100c078146",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/auth": "^7.0|^8.0|^9.0",
-                "illuminate/container": "^7.0|^8.0|^9.0",
-                "illuminate/contracts": "^7.0|^8.0|^9.0",
-                "illuminate/database": "^7.0|^8.0|^9.0",
-                "php": "^7.3|^8.0|^8.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^5.0|^6.0|^7.0",
-                "phpunit/phpunit": "^9.4",
-                "predis/predis": "^1.1"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spatie\\Permission\\PermissionServiceProvider"
-                    ]
-                },
-                "branch-alias": {
-                    "dev-main": "5.x-dev",
-                    "dev-master": "5.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Spatie\\Permission\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Permission handling for Laravel 6.0 and up",
-            "homepage": "https://github.com/spatie/laravel-permission",
-            "keywords": [
-                "acl",
-                "laravel",
-                "permission",
-                "permissions",
-                "rbac",
-                "roles",
-                "security",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-permission/issues",
-                "source": "https://github.com/spatie/laravel-permission/tree/5.5.4"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-05-16T12:09:59+00:00"
         },
         {
             "name": "spatie/laravel-signal-aware-command",

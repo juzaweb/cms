@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Juzaweb\CMS\Contracts\Permission as PermissionContract;
 use Juzaweb\CMS\Exceptions\PermissionAlreadyExists;
-use Juzaweb\CMS\Exceptions\PermissionDoesNotExist;
 use Juzaweb\CMS\Support\Permission\Guard;
 use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
 use Juzaweb\CMS\Traits\Permission\HasRoles;
@@ -17,6 +16,8 @@ class Permission extends Model implements PermissionContract
 {
     use HasRoles;
     use RefreshesPermissionCache;
+
+    protected $table = 'permissions';
 
     protected $guarded = [];
 

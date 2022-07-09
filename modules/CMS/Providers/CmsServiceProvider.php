@@ -230,6 +230,7 @@ class CmsServiceProvider extends ServiceProvider
     protected function registerProviders()
     {
         $this->app->register(HookActionServiceProvider::class);
+        $this->app->register(PermissionServiceProvider::class);
         $this->app->register(PerformanceServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(PluginServiceProvider::class);

@@ -3,11 +3,12 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Juzaweb\Backend\Models\Permission;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\Permission;
 use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -23,6 +24,11 @@ class RoleController extends BackendController
 
     protected string $viewPrefix = 'cms::backend.role';
 
+    public function __construct()
+    {
+        do_action(Action::PERMISSION_INIT);
+    }
+
     protected function getDataTable(...$params): DataTable
     {
         return new RoleDatatable();
@@ -30,6 +36,10 @@ class RoleController extends BackendController
 
     protected function validator(array $attributes, ...$params): \Illuminate\Contracts\Validation\Validator
     {
+        $permissions = HookAction::getPermissions()
+            ->pluck('name')
+            ->toArray();
+
         return Validator::make(
             $attributes,
             [
@@ -38,7 +48,7 @@ class RoleController extends BackendController
                 'permissions' => 'nullable|array',
                 'permissions.*' => [
                     'nullable',
-                    Rule::modelExists(Permission::class, 'name')
+                    Rule::in($permissions)
                 ],
             ]
         );
@@ -47,6 +57,26 @@ class RoleController extends BackendController
     protected function afterSave($data, Role $model, ...$params)
     {
         $permissions = Arr::get($data, 'permissions', []);
+        $exists = Permission::whereIn('name', $permissions)
+            ->get(['name'])
+            ->pluck('name')
+            ->toArray();
+
+        $permissionData = HookAction::getPermissions()
+            ->whereIn(
+                'name',
+                collect($permissions)->whereNotIn('name', $exists)->toArray()
+            );
+
+        foreach ($permissionData as $item) {
+            Permission::create(
+                [
+                    'name' => $item['name'],
+                    'description' => $item['description'],
+                ]
+            );
+        }
+
         $model->syncPermissions($permissions);
     }
 
@@ -69,8 +99,6 @@ class RoleController extends BackendController
 
     protected function getPermissionGroups(): \Illuminate\Support\Collection
     {
-        do_action(Action::PERMISSION_INIT);
-
         $permissions = HookAction::getPermissions();
         $groups = HookAction::getPermissionGroups();
 
