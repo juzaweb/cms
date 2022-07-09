@@ -95,6 +95,7 @@ class HookAction implements HookActionContract
         $opts = [
             'title' => $menuTitle,
             'key' => $menuSlug,
+            'permissions' => ['admin'],
             'slug' => str_replace('.', '-', $menuSlug),
             'icon' => 'fa fa-list-ul',
             'url' => str_replace('.', '/', $menuSlug),

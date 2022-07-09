@@ -20,7 +20,7 @@ class PostPolicy
 
     public function index(User $user, $type)
     {
-        if (!$user->can("post-type.{$type}")) {
+        if (!$user->can("post-type.{$type}.index")) {
             return false;
         }
 

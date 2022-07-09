@@ -529,9 +529,15 @@ trait RegisterHookAction
     {
         foreach ($this->resourcePermissions as $permission) {
             $label = $permission == 'index' ? trans('cms::app.permission_manager.view_list') : $permission;
-            $permission =  $permission == 'index' ? $resource : "{$resource}.{$permission}";
+            $permission = "{$resource}.{$permission}";
 
-            $this->registerPermissionGroup($resource, ['name' => $name]);
+            $this->registerPermissionGroup(
+                $resource,
+                [
+                    'name' => $resource,
+                    'description' => $name
+                ]
+            );
 
             $this->registerPermission(
                 $permission,
@@ -559,6 +565,12 @@ trait RegisterHookAction
             [
                 'icon' => $args->get('menu_icon', 'fa fa-edit'),
                 'position' => $args->get('menu_position', 20),
+                'permissions' => [
+                    "{$prefix}{$key}.index",
+                    "{$prefix}{$key}.create",
+                    "{$prefix}{$key}.edit",
+                    "{$prefix}{$key}.delete",
+                ]
             ]
         );
 
@@ -569,6 +581,12 @@ trait RegisterHookAction
                 'icon' => 'fa fa-list-ul',
                 'position' => 2,
                 'parent' => $prefix . $key,
+                'permissions' => [
+                    "{$prefix}{$key}.index",
+                    "{$prefix}{$key}.create",
+                    "{$prefix}{$key}.edit",
+                    "{$prefix}{$key}.delete",
+                ]
             ]
         );
 
@@ -579,6 +597,9 @@ trait RegisterHookAction
                 'icon' => 'fa fa-plus',
                 'position' => 3,
                 'parent' => $prefix . $key,
+                'permissions' => [
+                    "{$prefix}{$key}.create",
+                ]
             ]
         );
 

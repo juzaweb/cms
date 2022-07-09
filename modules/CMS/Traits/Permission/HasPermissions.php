@@ -20,15 +20,17 @@ trait HasPermissions
     /** @var string */
     private $permissionClass;
 
-    public static function bootHasPermissions()
+    public static function bootHasPermissions(): void
     {
-        static::deleting(function ($model) {
-            if (method_exists($model, 'isForceDeleting') && ! $model->isForceDeleting()) {
-                return;
-            }
+        static::deleting(
+            function ($model) {
+                if (method_exists($model, 'isForceDeleting') && ! $model->isForceDeleting()) {
+                    return;
+                }
 
-            $model->permissions()->detach();
-        });
+                $model->permissions()->detach();
+            }
+        );
     }
 
     public function getPermissionClass()
@@ -72,24 +74,45 @@ trait HasPermissions
     {
         $permissions = $this->convertToPermissionModels($permissions);
 
-        $rolesWithPermissions = array_unique(array_reduce($permissions, function ($result, $permission) {
-            return array_merge($result, $permission->roles->all());
-        }, []));
+        $rolesWithPermissions = array_unique(
+            array_reduce(
+                $permissions,
+                function ($result, $permission) {
+                    return array_merge($result, $permission->roles->all());
+                },
+                []
+            )
+        );
 
-        return $query->where(function (Builder $query) use ($permissions, $rolesWithPermissions) {
-            $query->whereHas('permissions', function (Builder $subQuery) use ($permissions) {
-                $permissionClass = $this->getPermissionClass();
-                $key = (new $permissionClass())->getKeyName();
-                $subQuery->whereIn(config('permission.table_names.permissions').".$key", \array_column($permissions, $key));
-            });
-            if (count($rolesWithPermissions) > 0) {
-                $query->orWhereHas('roles', function (Builder $subQuery) use ($rolesWithPermissions) {
-                    $roleClass = $this->getRoleClass();
-                    $key = (new $roleClass())->getKeyName();
-                    $subQuery->whereIn(config('permission.table_names.roles').".$key", \array_column($rolesWithPermissions, $key));
-                });
+        return $query->where(
+            function (Builder $query) use ($permissions, $rolesWithPermissions) {
+                $query->whereHas(
+                    'permissions',
+                    function (Builder $subQuery) use ($permissions) {
+                        $permissionClass = $this->getPermissionClass();
+                        $key = (new $permissionClass())->getKeyName();
+                        $subQuery->whereIn(
+                            config('permission.table_names.permissions').".$key",
+                            \array_column($permissions, $key)
+                        );
+                    }
+                );
+
+                if (count($rolesWithPermissions) > 0) {
+                    $query->orWhereHas(
+                        'roles',
+                        function (Builder $subQuery) use ($rolesWithPermissions) {
+                            $roleClass = $this->getRoleClass();
+                            $key = (new $roleClass())->getKeyName();
+                            $subQuery->whereIn(
+                                config('permission.table_names.roles').".$key",
+                                \array_column($rolesWithPermissions, $key)
+                            );
+                        }
+                    );
+                }
             }
-        });
+        );
     }
 
     /**
@@ -104,14 +127,17 @@ trait HasPermissions
             $permissions = $permissions->all();
         }
 
-        return array_map(function ($permission) {
-            if ($permission instanceof Permission) {
-                return $permission;
-            }
-            $method = is_string($permission) ? 'findByName' : 'findById';
+        return array_map(
+            function ($permission) {
+                if ($permission instanceof Permission) {
+                    return $permission;
+                }
+                $method = is_string($permission) ? 'findByName' : 'findById';
 
-            return $this->getPermissionClass()->{$method}($permission, $this->getDefaultGuardName());
-        }, Arr::wrap($permissions));
+                return $this->getPermissionClass()->{$method}($permission, $this->getDefaultGuardName());
+            },
+            Arr::wrap($permissions)
+        );
     }
 
     /**
@@ -132,24 +158,24 @@ trait HasPermissions
         $permissionClass = $this->getPermissionClass();
 
         if (is_string($permission)) {
-            $permission = $permissionClass->findByName(
+            $permissionModel = $permissionClass->findByName(
                 $permission,
                 $guardName ?? $this->getDefaultGuardName()
             );
         }
 
         if (is_int($permission)) {
-            $permission = $permissionClass->findById(
+            $permissionModel = $permissionClass->findById(
                 $permission,
                 $guardName ?? $this->getDefaultGuardName()
             );
         }
 
-        if (! $permission instanceof Permission) {
+        if (! $permissionModel instanceof Permission) {
             return false;
         }
 
-        return $this->hasDirectPermission($permission) || $this->hasPermissionViaRole($permission);
+        return $this->hasDirectPermission($permissionModel) || $this->hasPermissionViaRole($permissionModel);
     }
 
     /**
@@ -294,9 +320,11 @@ trait HasPermissions
     public function getPermissionsViaRoles(): Collection
     {
         return $this->loadMissing('roles', 'roles.permissions')
-            ->roles->flatMap(function ($role) {
-                return $role->permissions;
-            })->sort()->values();
+            ->roles->flatMap(
+                function ($role) {
+                    return $role->permissions;
+                }
+            )->sort()->values();
     }
 
     /**
@@ -325,23 +353,26 @@ trait HasPermissions
     {
         $permissions = collect($permissions)
             ->flatten()
-            ->reduce(function ($array, $permission) {
-                if (empty($permission)) {
+            ->reduce(
+                function ($array, $permission) {
+                    if (empty($permission)) {
+                        return $array;
+                    }
+
+                    $permission = $this->getStoredPermission($permission);
+                    if (! $permission instanceof Permission) {
+                        return $array;
+                    }
+
+                    $this->ensureModelSharesGuard($permission);
+
+                    $array[$permission->getKey()] = PermissionRegistrar::$teams && ! is_a($this, Role::class) ?
+                        [PermissionRegistrar::$teamsKey => getPermissionsTeamId()] : [];
+
                     return $array;
-                }
-
-                $permission = $this->getStoredPermission($permission);
-                if (! $permission instanceof Permission) {
-                    return $array;
-                }
-
-                $this->ensureModelSharesGuard($permission);
-
-                $array[$permission->getKey()] = PermissionRegistrar::$teams && ! is_a($this, Role::class) ?
-                    [PermissionRegistrar::$teamsKey => getPermissionsTeamId()] : [];
-
-                return $array;
-            }, []);
+                },
+                []
+            );
 
         $model = $this->getModel();
 
@@ -426,9 +457,12 @@ trait HasPermissions
         }
 
         if (is_array($permissions)) {
-            $permissions = array_map(function ($permission) use ($permissionClass) {
-                return is_a($permission, get_class($permissionClass)) ? $permission->name : $permission;
-            }, $permissions);
+            $permissions = array_map(
+                function ($permission) use ($permissionClass) {
+                    return is_a($permission, get_class($permissionClass)) ? $permission->name : $permission;
+                },
+                $permissions
+            );
 
             return $permissionClass
                 ->whereIn('name', $permissions)

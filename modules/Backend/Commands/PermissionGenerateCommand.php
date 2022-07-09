@@ -11,26 +11,46 @@
 namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
-use Juzaweb\Backend\Models\Permission;
-use Juzaweb\Backend\Models\PermissionGroup;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Models\Permission;
 
 class PermissionGenerateCommand extends Command
 {
     protected $signature = 'permission:generate';
-    protected array $resourcePermissions = ['index', 'create', 'edit', 'delete'];
+
+    protected $description = 'Generate all permissions.';
 
     public function handle(): int
     {
-        return 0;
-        $this->resourceGenerate('users', 'User');
-        $this->resourceGenerate('email_templates', 'Email Template');
-        $this->resourceGenerate('themes', 'Theme');
-        $this->resourceGenerate('menus', 'Menu');
-        $this->resourceGenerate('roles', 'Role');
+        do_action(Action::PERMISSION_INIT);
 
-        $postTypes = HookAction::getPostTypes();
+        $permissions = HookAction::getPermissions();
+
+        $exists = Permission::whereIn(
+            'name',
+            $permissions->pluck('name')->toArray()
+        )
+            ->get(['name'])
+            ->pluck('name')
+            ->toArray();
+
+        $permissions = $permissions
+            ->whereIn(
+                'name',
+                $permissions->whereNotIn('name', $exists)->toArray()
+            );
+
+        foreach ($permissions as $item) {
+            Permission::create(
+                [
+                    'name' => $item['name'],
+                    'description' => $item['description'],
+                ]
+            );
+        }
+
+        /*$postTypes = HookAction::getPostTypes();
         foreach ($postTypes as $type => $postType) {
             $typeSingular = Str::singular($type);
             $this->resourceGenerate(
@@ -52,33 +72,8 @@ class PermissionGenerateCommand extends Command
                     $postType->get('label') . ' Comment'
                 );
             }
-        }
+        }*/
 
         return self::SUCCESS;
-    }
-
-    protected function resourceGenerate($resource, $name)
-    {
-        $this->info("-- Generate permission {$name}");
-
-        $permissions = $this->resourcePermissions;
-        foreach ($permissions as $permission) {
-            $group = PermissionGroup::firstOrCreate(
-                [
-                    'name' => $resource,
-                    'description' => $name,
-                ]
-            );
-
-            $label = $permission == 'index' ? 'View List' : $permission;
-            $permission =  $permission == 'index' ? $resource : "{$resource}.{$permission}";
-            Permission::firstOrCreate(
-                [
-                    'name' => $permission,
-                    'group_id' => $group->id,
-                    'description' => Str::ucfirst($label) . " {$name}",
-                ]
-            );
-        }
     }
 }

@@ -3,7 +3,6 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Abstracts\DataTable;
@@ -65,7 +64,13 @@ class RoleController extends BackendController
         $permissionData = HookAction::getPermissions()
             ->whereIn(
                 'name',
-                collect($permissions)->whereNotIn('name', $exists)->toArray()
+                collect($permissions)
+                    ->filter(
+                        function ($item) use ($exists) {
+                            return !in_array($item, $exists);
+                        }
+                    )
+                    ->toArray()
             );
 
         foreach ($permissionData as $item) {
