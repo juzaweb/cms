@@ -11,9 +11,9 @@ namespace Juzaweb\CMS\Support;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
+use Juzaweb\CMS\Contracts\EventyContract;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Facades\GlobalData;
-use Juzaweb\CMS\Facades\Hook;
 use Juzaweb\CMS\Traits\HookAction\GetHookAction;
 use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
 
@@ -23,19 +23,31 @@ class HookAction implements HookActionContract
     use GetHookAction;
     use Macroable;
 
+    protected EventyContract $hook;
+
+    protected GlobalDataContract $globalData;
+
+    public function __construct(
+        EventyContract $hook,
+        GlobalDataContract $globalData
+    ) {
+        $this->hook = $hook;
+        $this->globalData = $globalData;
+    }
+
     public function addAction($tag, $callback, $priority = 20, $arguments = 1): void
     {
-        Hook::addAction($tag, $callback, $priority, $arguments);
+        $this->hook->addAction($tag, $callback, $priority, $arguments);
     }
 
     public function addFilter($tag, $callback, $priority = 20, $arguments = 1): void
     {
-        Hook::addFilter($tag, $callback, $priority, $arguments);
+        $this->hook->addFilter($tag, $callback, $priority, $arguments);
     }
 
     public function applyFilters(string $tag, mixed $value, ...$args): mixed
     {
-        return Hook::filter($tag, $value, ...$args);
+        return $this->hook->filter($tag, $value, ...$args);
     }
 
     /**
@@ -56,7 +68,7 @@ class HookAction implements HookActionContract
 
         $args = array_merge($defaults, $args);
 
-        GlobalData::set('setting_forms.' . $key, new Collection($args));
+        $this->globalData->set('setting_forms.' . $key, new Collection($args));
     }
 
     /**
@@ -78,11 +90,12 @@ class HookAction implements HookActionContract
      */
     public function addAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
     {
-        $adminMenu = GlobalData::get('admin_menu');
+        $adminMenu = $this->globalData->get('admin_menu');
 
         $opts = [
             'title' => $menuTitle,
             'key' => $menuSlug,
+            'permissions' => ['admin'],
             'slug' => str_replace('.', '-', $menuSlug),
             'icon' => 'fa fa-list-ul',
             'url' => str_replace('.', '/', $menuSlug),
@@ -106,12 +119,12 @@ class HookAction implements HookActionContract
             }
         }
 
-        GlobalData::set('admin_menu', $adminMenu);
+        $this->globalData->set('admin_menu', $adminMenu);
     }
 
     public function addMasterAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
     {
-        $adminMenu = GlobalData::get('master_admin_menu');
+        $adminMenu = $this->globalData->get('master_admin_menu');
 
         $opts = [
             'title' => $menuTitle,
@@ -139,7 +152,7 @@ class HookAction implements HookActionContract
             }
         }
 
-        GlobalData::set('master_admin_menu', $adminMenu);
+        $this->globalData->set('master_admin_menu', $adminMenu);
     }
 
     public function enqueueScript(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void
@@ -148,7 +161,7 @@ class HookAction implements HookActionContract
             $src = asset($src);
         }
 
-        GlobalData::set(
+        $this->globalData->set(
             "scripts.{$key}",
             new Collection(
                 [
@@ -161,13 +174,13 @@ class HookAction implements HookActionContract
         );
     }
 
-    public function enqueueStyle(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
+    public function enqueueStyle(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void
     {
         if (!is_url($src)) {
             $src = asset($src);
         }
 
-        GlobalData::set(
+        $this->globalData->set(
             "styles.{$key}",
             new Collection(
                 [
@@ -180,13 +193,17 @@ class HookAction implements HookActionContract
         );
     }
 
-    public function enqueueFrontendScript(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
-    {
+    public function enqueueFrontendScript(
+        string $key,
+        string $src = '',
+        string $ver = '1.0',
+        bool $inFooter = false
+    ): void {
         if (!is_url($src)) {
             $src = theme_assets($src);
         }
 
-        GlobalData::set(
+        $this->globalData->set(
             "frontend_scripts.{$key}",
             new Collection(
                 [
@@ -199,13 +216,17 @@ class HookAction implements HookActionContract
         );
     }
 
-    public function enqueueFrontendStyle(string $key, string $src = '', string $ver = '1.0', $inFooter = false): void
-    {
+    public function enqueueFrontendStyle(
+        string $key,
+        string $src = '',
+        string $ver = '1.0',
+        bool $inFooter = false
+    ): void {
         if (!is_url($src)) {
             $src = theme_assets($src);
         }
 
-        GlobalData::set(
+        $this->globalData->set(
             "frontend_styles.{$key}",
             new Collection(
                 [

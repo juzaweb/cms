@@ -10,7 +10,7 @@
 
 namespace Juzaweb\Backend\Models;
 
-use Spatie\Permission\Models\Permission as BasePermission;
+use Juzaweb\CMS\Models\Permission as BasePermission;
 
 /**
  * Juzaweb\Backend\Models\Permission
@@ -20,8 +20,6 @@ use Spatie\Permission\Models\Permission as BasePermission;
  * @property string $guard_name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $group_id
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PermissionGroup[] $group
  * @property-read int|null $group_count
  * @property-read \Illuminate\Database\Eloquent\Collection|Permission[] $permissions
  * @property-read int|null $permissions_count
@@ -47,9 +45,4 @@ use Spatie\Permission\Models\Permission as BasePermission;
 class Permission extends BasePermission
 {
     protected $table = 'permissions';
-
-    public function group()
-    {
-        return $this->hasMany(PermissionGroup::class, 'group_id', 'id');
-    }
 }

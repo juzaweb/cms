@@ -42,6 +42,7 @@ abstract class Action
     public const DATATABLE_SEARCH_FIELD_TYPES_FILTER = 'datatable.search_field_types';
     public const FRONTEND_SEARCH_QUERY = 'frontend.search_query';
     public const FRONTEND_AFTER_BODY = 'theme.after_body';
+    public const PERMISSION_INIT = 'permission_init';
 
     abstract public function handle();
 

@@ -498,6 +498,9 @@ return [
             'exists' => 'Plugin :name already exist.',
         ],
     ],
+    'permission_manager' => [
+        'view_list' => 'View List'
+    ],
     'network' => [
         'sites' => 'Sites',
         'network' => 'Network',

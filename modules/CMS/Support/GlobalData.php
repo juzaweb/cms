@@ -3,10 +3,11 @@
 namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Arr;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
 
-class GlobalData
+class GlobalData implements GlobalDataContract
 {
-    protected $values = [];
+    protected array $values = [];
 
     public function set($key, $value)
     {
@@ -25,7 +26,7 @@ class GlobalData
         return Arr::get($this->values, $key, $default);
     }
 
-    public function all()
+    public function all(): array
     {
         return $this->values;
     }

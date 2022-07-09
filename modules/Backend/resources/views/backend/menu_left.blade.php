@@ -14,7 +14,7 @@
     @endphp
 
     @foreach($items as $item)
-        @if($item->get('key') != 'dashboard' && !$jw_user->can($item->get('key')))
+        @if($item->get('key') != 'dashboard' && !$jw_user->canAny($item->get('permissions', ['admin'])))
             @continue
         @endif
 
@@ -23,7 +23,7 @@
                 $strChild = '';
                 $hasActive = false;
                 foreach($item->getChildrens() as $child) {
-                    if(!$jw_user->can($child->get('key'))) {
+                    if(!$jw_user->canAny($child->get('permissions', ['admin']))) {
                         continue;
                     }
 

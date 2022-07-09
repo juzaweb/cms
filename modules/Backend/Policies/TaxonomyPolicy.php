@@ -12,7 +12,7 @@ class TaxonomyPolicy
 
     public function index(User $user, $type, $taxonomy)
     {
-        if (!$user->can("taxonomy.{$type}.{$taxonomy}")) {
+        if (!$user->can("taxonomy.{$type}.{$taxonomy}.index")) {
             return false;
         }
 
