@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\API\PostController;
+use Juzaweb\API\Http\Controllers\PostController;
 
 Route::group(
     [

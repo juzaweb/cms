@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\API\UserController;
+use Juzaweb\Api\Http\Controllers\UserController;
 
 Route::group(
     [

@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\API\Auth\LoginController;
+use Juzaweb\API\Http\Controllers\Auth\LoginController;
 
 Route::group(
     ['prefix' => 'auth'],

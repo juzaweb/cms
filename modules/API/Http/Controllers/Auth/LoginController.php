@@ -8,13 +8,14 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\API\Auth;
+namespace Juzaweb\API\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Http\Requests\API\Auth\LoginRequest;
 use Juzaweb\CMS\Http\Controllers\ApiController;
+use OpenApi\Annotations as OA;
 
 class LoginController extends ApiController
 {
@@ -57,7 +58,7 @@ class LoginController extends ApiController
         return $this->respondWithToken($token);
     }
 
-    public function refresh()
+    public function refresh(): JsonResponse
     {
         return $this->respondWithToken(Auth::guard('api')->refresh());
     }
@@ -89,7 +90,7 @@ class LoginController extends ApiController
                 'token_type' => 'Bearer',
                 //'expires_in' => Auth::guard('api')->factory()->getTTL() * 60,
             ],
-            'Successfully login'
+            'Successfully login.'
         );
     }
 }

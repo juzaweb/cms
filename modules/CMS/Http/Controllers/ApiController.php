@@ -198,9 +198,9 @@ class ApiController extends Controller
         }
     }
 
-    protected function getQueryLimit()
+    protected function getQueryLimit($request): int
     {
-        $limit = request()->get('limit', 10);
+        $limit = $request->get('limit', 10);
         if ($limit > 100) {
             return 10;
         }

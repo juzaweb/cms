@@ -175,6 +175,10 @@ return [
         ],
     ],
 
+    'api' => [
+        'enable' => env('JW_ALLOW_API', false)
+    ],
+
     /**
      * Default database config
      */

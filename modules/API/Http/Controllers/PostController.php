@@ -8,29 +8,29 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\API;
+namespace Juzaweb\API\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Http\Resources\PostCollection;
-use Juzaweb\CMS\Http\Controllers\ApiController;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class PostController extends ApiController
 {
-    public function index(Request $request, $type)
+    public function index(Request $request, $type): PostCollection
     {
         $query = Post::selectFrontendBuilder()
             ->where('type', '=', $type);
 
-        $limit = $this->getQueryLimit();
+        $limit = $this->getQueryLimit($request);
 
         $rows = $query->paginate($limit);
 
         return new PostCollection($rows);
     }
 
-    public function show(Request $request, $type, $id)
+    public function show(Request $request, $type, $id): PostResource
     {
         $post = Post::createFrontendBuilder()
             ->where('type', '=', $type)
