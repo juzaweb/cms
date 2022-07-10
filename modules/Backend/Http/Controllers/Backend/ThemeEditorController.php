@@ -16,9 +16,12 @@ class ThemeEditorController extends BackendController
         $currentTheme = jw_current_theme();
         $panels = $this->getDataCustomize($currentTheme);
 
-        return view('cms::backend.editor.index', [
-            'panels' => $panels,
-        ]);
+        return view(
+            'cms::backend.editor.index',
+            [
+                'panels' => $panels,
+            ]
+        );
     }
 
     public function save(Request $request)
@@ -36,25 +39,36 @@ class ThemeEditorController extends BackendController
             ThemeConfig::setConfig($key, $value);
         }
 
-        return $this->success([
-            'message' => trans('cms::app.saved_successfully'),
-        ]);
+        return $this->success(
+            [
+                'message' => trans('cms::app.saved_successfully'),
+            ]
+        );
     }
 
     protected function getDataCustomize($currentTheme)
     {
         $customize = new Customize();
-        $customize->addSection('site_identity', [
-            'title' => __("cms::app.site_identity"),
-            'priority' => 1,
-        ]);
+        $customize->addSection(
+            'site_identity',
+            [
+                'title' => __("cms::app.site_identity"),
+                'priority' => 1,
+            ]
+        );
 
-        $customize->addControl(new CustomizeControl($customize, 'site_identity', [
-            'label' => __('cms::app.site_identity'),
-            'section' => 'site_identity',
-            'settings' => 'site_identity',
-            'type' => 'site_identity',
-        ]));
+        $customize->addControl(
+            new CustomizeControl(
+                $customize,
+                'site_identity',
+                [
+                    'label' => __('cms::app.site_identity'),
+                    'section' => 'site_identity',
+                    'settings' => 'site_identity',
+                    'type' => 'site_identity',
+                ]
+            )
+        );
 
         $themePath = base_path("themes/{$currentTheme}/config/customize.php");
         if (file_exists($themePath)) {
