@@ -117,7 +117,7 @@
                     "Post Type"
                 ],
                 "summary": "Create Post Type",
-                "operationId": "api.v1.post-type.type.store",
+                "operationId": "api.post-type.type.store",
                 "parameters": [
                     {
                         "name": "type",
@@ -173,8 +173,8 @@
                 "tags": [
                     "Post Type"
                 ],
-                "summary": "Get news data by slug",
-                "operationId": "v1.news.findBySlug",
+                "summary": "Get post type data by id",
+                "operationId": "v1.post-type.type.show",
                 "parameters": [
                     {
                         "name": "type",
@@ -194,6 +194,105 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/error_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Update Post Type",
+                "operationId": "api.post-type.type.update",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Title",
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "description": "content",
+                                        "type": "string"
+                                    },
+                                    "grecaptcha_token": {
+                                        "description": "(Optional) Token of Google Recaptcha V3",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Delete Post Type",
+                "operationId": "api.post-type.type.destroy",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
                     },
                     "500": {
                         "$ref": "#/components/responses/error_500"

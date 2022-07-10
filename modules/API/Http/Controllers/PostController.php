@@ -71,8 +71,8 @@ class PostController extends ApiController
      * @OA\Get(
      *      path="/api/post-type/{type}/{id}",
      *      tags={"Post Type"},
-     *      summary="Get news data by slug",
-     *      operationId="v1.news.findBySlug",
+     *      summary="Get post type data by id",
+     *      operationId="v1.post-type.type.show",
      *      @OA\Parameter(
      *          name="type",
      *          in="path",
@@ -102,7 +102,7 @@ class PostController extends ApiController
      *      path="/api/post-type/{type}",
      *      tags={"Post Type"},
      *      summary="Create Post Type",
-     *      operationId="api.v1.post-type.type.store",
+     *      operationId="api.post-type.type.store",
      *      @OA\Parameter(
      *          name="type",
      *          in="path",
@@ -149,6 +149,53 @@ class PostController extends ApiController
             ->setStatusCode(201);
     }
 
+    /**
+     * @OA\Put(
+     *      path="/api/post-type/{type}/{id}",
+     *      tags={"Post Type"},
+     *      summary="Update Post Type",
+     *      operationId="api.post-type.type.update",
+     *      @OA\Parameter(
+     *          name="type",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(type="string")
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(type="string")
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  required={"title"},
+     *                  @OA\Property(
+     *                      property="title",
+     *                      type="string",
+     *                      description="Title"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="content",
+     *                      type="string",
+     *                      description="content"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="grecaptcha_token",
+     *                      type="string",
+     *                      description="(Optional) Token of Google Recaptcha V3"
+     *                  )
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(response=200, ref="#/components/responses/success_detail"),
+     *      @OA\Response(response=422, ref="#/components/responses/error_422"),
+     *      @OA\Response(response=500, ref="#/components/responses/error_500")
+     *  )
+     */
     public function update(UpdateRequest $request, $type, $id): PostResource
     {
         $post = $this->postRepository->find($id);
@@ -160,6 +207,29 @@ class PostController extends ApiController
         return new PostResource($model);
     }
 
+    /**
+     * @OA\Delete(
+     *      path="/api/post-type/{type}/{id}",
+     *      tags={"Post Type"},
+     *      summary="Delete Post Type",
+     *      operationId="api.post-type.type.destroy",
+     *      @OA\Parameter(
+     *          name="type",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(type="string")
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(type="string")
+     *      ),
+     *      @OA\Response(response=200, ref="#/components/responses/success_detail"),
+     *      @OA\Response(response=422, ref="#/components/responses/error_422"),
+     *      @OA\Response(response=500, ref="#/components/responses/error_500")
+     *  )
+     */
     public function destroy(Request $request, $type, $id): \Illuminate\Http\JsonResponse
     {
         $post = $this->postRepository->find($id);
