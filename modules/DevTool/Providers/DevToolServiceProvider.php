@@ -22,8 +22,7 @@ class DevToolServiceProvider extends ServiceProvider
     {
         if ($this->app->environment('local')) {
             if (config('app.debug')) {
-                if (
-                    class_exists(TelescopeApplicationServiceProvider::class)
+                if (class_exists(TelescopeApplicationServiceProvider::class)
                     && class_exists(TelescopeServiceProvider::class)
                 ) {
                     $this->app->register(TelescopeServiceProvider::class);

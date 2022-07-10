@@ -60,19 +60,22 @@ class DatatableMakeCommand extends GeneratorCommand
          */
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 
-        return array_merge([
-            'MODULENAME' => $module->getStudlyName(),
-            'NAMESPACE' => $module->getStudlyName(),
-            'DOMAIN_NAME' => $module->getDomainName(),
-            'CLASS_NAMESPACE' => $this->getClassNamespace($module),
-            'CLASS' => $this->getDatatableNameWithoutNamespace(),
-            'LOWER_NAME' => $module->getLowerName(),
-            'SNAKE_NAME' => $module->getSnakeName(),
-            'MODULE' => $this->getModuleName(),
-            'NAME' => $this->getModuleName(),
-            'STUDLY_NAME' => $module->getStudlyName(),
-            'MODULE_NAMESPACE' => $this->laravel['plugins']->config('namespace'),
-        ], $this->getDataModelStub());
+        return array_merge(
+            [
+                'MODULENAME' => $module->getStudlyName(),
+                'NAMESPACE' => $module->getStudlyName(),
+                'DOMAIN_NAME' => $module->getDomainName(),
+                'CLASS_NAMESPACE' => $this->getClassNamespace($module),
+                'CLASS' => $this->getDatatableNameWithoutNamespace(),
+                'LOWER_NAME' => $module->getLowerName(),
+                'SNAKE_NAME' => $module->getSnakeName(),
+                'MODULE' => $this->getModuleName(),
+                'NAME' => $this->getModuleName(),
+                'STUDLY_NAME' => $module->getStudlyName(),
+                'MODULE_NAMESPACE' => $this->laravel['plugins']->config('namespace'),
+            ],
+            $this->getDataModelStub()
+        );
     }
 
     /**
@@ -113,17 +116,26 @@ class DatatableMakeCommand extends GeneratorCommand
         if ($model = $this->option('model')) {
             $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 
-            $data['QUERY_TABLE'] = $this->stubRender('resource/datatable/query-model.stub', [
-                'MODEL_NAME' => $model,
-            ]);
+            $data['QUERY_TABLE'] = $this->stubRender(
+                'resource/datatable/query-model.stub',
+                [
+                    'MODEL_NAME' => $model,
+                ]
+            );
 
-            $data['USE_NAMESPACE'] = $this->stubRender('resource/datatable/use-namespaces.stub', [
-                'NAMESPACE' => str_replace('/', '\\', $module->getStudlyName()) . '\Models\\' . $model . ";\n",
-            ]);
+            $data['USE_NAMESPACE'] = $this->stubRender(
+                'resource/datatable/use-namespaces.stub',
+                [
+                    'NAMESPACE' => str_replace('/', '\\', $module->getStudlyName()) . '\Models\\' . $model . ";\n",
+                ]
+            );
 
-            $data['BULK_ACTIONS'] = $this->stubRender('resource/datatable/bulk-actions.stub', [
-                'MODEL_NAME' => $model,
-            ]);
+            $data['BULK_ACTIONS'] = $this->stubRender(
+                'resource/datatable/bulk-actions.stub',
+                [
+                    'MODEL_NAME' => $model,
+                ]
+            );
 
             $data['COLUMNS'] = $this->getDataColumns($module);
         }
@@ -136,12 +148,17 @@ class DatatableMakeCommand extends GeneratorCommand
         $result = '';
         $columns = explode(',', $this->option('columns'));
         $columns = collect($columns)
-            ->filter(function ($item) {
-                return ! in_array($item, [
-                    'description',
-                    'content',
-                ]);
-            })->toArray();
+            ->filter(
+                function ($item) {
+                    return ! in_array(
+                        $item,
+                        [
+                            'description',
+                            'content',
+                        ]
+                    );
+                }
+            )->toArray();
 
         foreach ($columns as $key => $column) {
             if (in_array($column, ['name', 'title', 'subject'])) {

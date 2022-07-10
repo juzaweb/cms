@@ -28,15 +28,20 @@ class MakeAdminCommand extends Command
         $this->user['email'] = $this->ask('Email?');
         $this->user['password'] = $this->ask('Password?');
 
-        $validator = Validator::make($this->user, [
-            'name' => 'required|max:150',
-            'email' => 'required|email|max:150',
-            'password' => 'required|max:32|min:6',
-        ], [], [
-            'name' => trans('cms::app.name'),
-            'email' => trans('cms::app.email'),
-            'password' => trans('cms::app.password'),
-        ]);
+        $validator = Validator::make(
+            $this->user,
+            [
+                'name' => 'required|max:150',
+                'email' => 'required|email|max:150',
+                'password' => 'required|max:32|min:6',
+            ],
+            [],
+            [
+                'name' => trans('cms::app.name'),
+                'email' => trans('cms::app.email'),
+                'password' => trans('cms::app.password'),
+            ]
+        );
 
         if ($validator->fails()) {
             $this->error($validator->errors()->messages()[0]);

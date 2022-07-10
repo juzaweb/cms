@@ -31,13 +31,16 @@ class TaxonomyController extends FrontendController
             ->response()
             ->getData(true);
 
-        $taxonomy = (new TaxonomyResource($taxonomy))->toArray(redirect());
+        $taxonomy = (new TaxonomyResource($taxonomy))->toArray(request());
 
-        return $this->view('theme::template-parts.' . $template, compact(
-            'title',
-            'taxonomy',
-            'page',
-            'template'
-        ));
+        return $this->view(
+            'theme::template-parts.' . $template,
+            compact(
+                'title',
+                'taxonomy',
+                'page',
+                'template'
+            )
+        );
     }
 }

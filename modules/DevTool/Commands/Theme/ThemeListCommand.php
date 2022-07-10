@@ -19,14 +19,14 @@ class ThemeListCommand extends Command
      *
      * @var string
      */
-    protected $description = 'List all available themes';
+    protected $description = 'List all available themes.';
 
     /**
      * Execute the console command.
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $themes = $this->laravel[ThemeLoaderContract::class]->all();
         $headers = ['Name', 'Author', 'Version', 'Parent'];

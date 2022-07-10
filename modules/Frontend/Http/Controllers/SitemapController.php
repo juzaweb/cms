@@ -10,7 +10,7 @@ use Juzaweb\CMS\Http\Controllers\Controller;
 
 class SitemapController extends Controller
 {
-    protected $per_page = 500;
+    protected int $per_page = 500;
 
     public function index()
     {
@@ -18,9 +18,11 @@ class SitemapController extends Controller
         $sitemap->setCache(cache_prefix("sitemap-index"), 3600);
 
         $taxonomies = HookAction::getTaxonomies()
-            ->mapWithKeys(function ($item, $key) {
-                return array_keys($item);
-            })
+            ->mapWithKeys(
+                function ($item, $key) {
+                    return array_keys($item);
+                }
+            )
             ->unique()
             ->values();
 
