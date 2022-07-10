@@ -5,6 +5,7 @@ namespace Juzaweb\CMS\Support;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -108,14 +109,26 @@ class Theme
         return $assoc ? $config : new Collection($config);
     }
 
-    /**
-     * Get plugin requirements.
-     *
-     * @return array
-     */
-    public function getRequires(): array
+    public function getConfigFields(): array
     {
-        return $this->get('require', []);
+        return $this->getRegister('configs', []);
+    }
+
+    public function getRegister($key = null, $default = null): string|array|null
+    {
+        $path = $this->getPath('register.json');
+
+        if (file_exists($path)) {
+            $data = json_decode(file_get_contents($path), true);
+
+            if ($key) {
+                return Arr::get($data, $key, $default);
+            }
+
+            return $data;
+        }
+
+        return $default;
     }
 
     /**

@@ -134,6 +134,16 @@ class MenuAction extends Action
         );
 
         HookAction::addAdminMenu(
+            trans('cms::app.setting'),
+            'theme.setting',
+            [
+                'icon' => 'fa fa-cogs',
+                'position' => 50,
+                'parent' => 'appearance',
+            ]
+        );
+
+        HookAction::addAdminMenu(
             trans('cms::app.reading'),
             'reading',
             [

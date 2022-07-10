@@ -86,7 +86,7 @@
                 <select name="language" id="language" class="form-control load-locales">
                     @if($locale = get_config('language'))
                         <option value="{{ $locale }}" selected>{{ config("locales.{$locale}.name") }}</option>
-                    @endif    
+                    @endif
                 </select>
             </div>
 
