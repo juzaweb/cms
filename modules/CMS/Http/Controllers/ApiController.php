@@ -12,7 +12,9 @@ namespace Juzaweb\CMS\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\MessageBag;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Info(
@@ -23,6 +25,13 @@ use Illuminate\Support\MessageBag;
  *          email="admin@juzaweb.com"
  *      )
  * ),
+ * @OA\Parameter(
+ *      parameter="id_in_path",
+ *      name="id",
+ *      in="path",
+ *      required=true,
+ *      @OA\Schema(type="string")
+ *  ),
  * @OA\Parameter(
  *      parameter="slug_in_path",
  *      name="slug",
@@ -36,14 +45,6 @@ use Illuminate\Support\MessageBag;
  *      in="path",
  *      required=true,
  *      @OA\Schema(type="string")
- *  ),
- *  @OA\Parameter(
- *      parameter="query_locale",
- *      name="locale",
- *      in="query",
- *      required=true,
- *      description="",
- *      @OA\Schema(type="string", enum={"vi","en"}, description="" )
  *  ),
  *  @OA\Parameter(
  *      parameter="query_limit",
@@ -198,9 +199,9 @@ class ApiController extends Controller
         }
     }
 
-    protected function getQueryLimit()
+    protected function getQueryLimit($request): int
     {
-        $limit = request()->get('limit', 10);
+        $limit = $request->get('limit', 10);
         if ($limit > 100) {
             return 10;
         }
@@ -269,5 +270,20 @@ class ApiController extends Controller
         ];
 
         return response()->json($response, $status);
+    }
+
+    protected function checkPermission(Request $request, $ability, $arguments = [])
+    {
+        $this->authorizeForUser(
+            $request->user('api'),
+            $ability,
+            $arguments
+        );
+    }
+
+    protected function hasPermission($ability, $arguments = []): bool
+    {
+        $response = Gate::inspect($ability, $arguments);
+        return $response->allowed();
     }
 }

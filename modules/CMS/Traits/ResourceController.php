@@ -248,7 +248,7 @@ trait ResourceController
             $model = $this->makeModel(...$params)->find($id);
             $permission = $action != 'delete' ? 'edit' : 'delete';
 
-            if (!$this->getPermission($permission, $model, ...$params)) {
+            if (!$this->hasPermission($permission, $model, ...$params)) {
                 continue;
             }
 
@@ -369,7 +369,7 @@ trait ResourceController
         $dataTable->setActionUrl(action([static::class, 'bulkActions'], $params));
         $dataTable->setCurrentUrl(action([static::class, 'index'], $params, false));
 
-        $canCreate = $this->getPermission(
+        $canCreate = $this->hasPermission(
             'create',
             $this->getModel(...$params),
             ...$params
@@ -435,7 +435,7 @@ trait ResourceController
         $this->authorize($ability, $arguments);
     }
 
-    protected function getPermission($ability, $arguments = [], ...$params)
+    protected function hasPermission($ability, $arguments = [], ...$params)
     {
         $response = Gate::inspect($ability, $arguments);
         return $response->allowed();

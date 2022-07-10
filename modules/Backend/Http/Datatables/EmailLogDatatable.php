@@ -19,7 +19,7 @@ use Juzaweb\CMS\Support\SendEmail;
 
 class EmailLogDatatable extends DataTable
 {
-    protected $sortName = 'updated_at';
+    protected string $sortName = 'updated_at';
 
     /**
      * Columns datatable
