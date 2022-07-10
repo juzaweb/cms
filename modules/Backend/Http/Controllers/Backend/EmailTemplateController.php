@@ -17,7 +17,7 @@ class EmailTemplateController extends BackendController
         getDataForForm as DataForForm;
     }
 
-    protected $viewPrefix = 'cms::backend.email_template';
+    protected string $viewPrefix = 'cms::backend.email_template';
 
     protected function getDataTable(...$params)
     {
@@ -28,34 +28,36 @@ class EmailTemplateController extends BackendController
     {
         $id = $attributes['id'] ?? null;
 
-        $validator = Validator::make(
+        return Validator::make(
             $attributes,
             [
                 'subject' => 'required',
                 'code' => [
                     'required',
                     'max:50',
-                    Rule::modelUnique(EmailTemplate::class, 'code', function (Builder $q) use ($id) {
-                        $q->where("{$q->getModel()->getTable()}.id", '!=', $id);
-                    }),
+                    Rule::modelUnique(
+                        EmailTemplate::class,
+                        'code',
+                        function (Builder $q) use ($id) {
+                            $q->where("{$q->getModel()->getTable()}.id", '!=', $id);
+                        }
+                    ),
                 ],
             ]
         );
-
-        return $validator;
     }
 
-    protected function getModel(...$params)
+    protected function getModel(...$params): string
     {
         return EmailTemplate::class;
     }
 
-    protected function getTitle(...$params)
+    protected function getTitle(...$params): string
     {
         return trans('cms::app.email_templates');
     }
 
-    protected function getDataForForm($model, ...$params)
+    protected function getDataForForm($model, ...$params): array
     {
         $data = $this->DataForForm($model);
         $data['emailHooks'] = HookAction::getEmailHooks();

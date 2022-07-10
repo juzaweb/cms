@@ -13,7 +13,6 @@ use Juzaweb\API\Http\Controllers\PostController;
 Route::group(
     [
         'prefix' => 'post-type',
-        'middleware' => 'auth:sanctum',
     ],
     function () {
         Route::apiResource(

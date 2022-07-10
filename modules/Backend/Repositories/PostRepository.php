@@ -13,4 +13,6 @@ use Juzaweb\CMS\Repositories\BaseRepository;
 interface PostRepository extends BaseRepository
 {
     public function createSelectFrontendBuilder(): Builder;
+
+    public function getStatuses($type = 'posts'): array;
 }

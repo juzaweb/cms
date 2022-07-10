@@ -15,8 +15,11 @@ use Juzaweb\API\Http\Requests\Post\StoreRequest;
 use Juzaweb\API\Http\Requests\Post\UpdateRequest;
 use Juzaweb\Backend\Http\Resources\PostCollection;
 use Juzaweb\Backend\Http\Resources\PostResource;
+use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
 use OpenApi\Annotations as OA;
 
 class PostController extends ApiController
@@ -48,6 +51,12 @@ class PostController extends ApiController
      */
     public function index(Request $request, $type): PostCollection
     {
+        $this->checkPermission($request, 'apiIndex', [Post::class, $type]);
+
+        $this->postRepository->pushCriteria(new SearchCriteria($request));
+
+        $this->postRepository->pushCriteria(new FilterCriteria($request));
+
         $query = $this->postRepository->createSelectFrontendBuilder()
             ->where('type', '=', $type);
 
@@ -82,6 +91,8 @@ class PostController extends ApiController
             ->where('type', '=', $type)
             ->where('id', '=', $id)
             ->firstOrFail();
+
+        $this->checkPermission($request, 'apiShow', [$model, $type]);
 
         return new PostResource($model);
     }
@@ -127,17 +138,36 @@ class PostController extends ApiController
      *      @OA\Response(response=500, ref="#/components/responses/error_500")
      *  )
      */
-    public function store(StoreRequest $request): PostResource
+    public function store(StoreRequest $request, $type): \Illuminate\Http\JsonResponse
     {
+        $this->checkPermission($request, 'apiCreate', [Post::class, $type]);
+
         $model = $this->postRepository->create($request->all());
+
+        return (new PostResource($model))
+            ->response($request)
+            ->setStatusCode(201);
+    }
+
+    public function update(UpdateRequest $request, $type, $id): PostResource
+    {
+        $post = $this->postRepository->find($id);
+
+        $this->checkPermission($request, 'apiEdit', [$post, $type]);
+
+        $model = $this->postRepository->update($request->all(), $id);
 
         return new PostResource($model);
     }
 
-    public function update(UpdateRequest $request, $id): PostResource
+    public function destroy(Request $request, $type, $id): \Illuminate\Http\JsonResponse
     {
-        $model = $this->postRepository->update($request->all(), $id);
+        $post = $this->postRepository->find($id);
 
-        return new PostResource($model);
+        $this->checkPermission($request, 'apiDelete', [$post, $type]);
+
+        $this->postRepository->delete($id);
+
+        return $this->restSuccess([], 'Delete successful.');
     }
 }

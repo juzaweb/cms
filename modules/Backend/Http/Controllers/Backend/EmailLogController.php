@@ -7,14 +7,17 @@ use Juzaweb\Backend\Http\Datatables\EmailLogDatatable;
 
 class EmailLogController extends BackendController
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $dataTable = new EmailLogDatatable();
         $title = trans('cms::app.email_logs');
 
-        return view('cms::backend.logs.email', compact(
-            'title',
-            'dataTable'
-        ));
+        return view(
+            'cms::backend.logs.email',
+            compact(
+                'title',
+                'dataTable'
+            )
+        );
     }
 }

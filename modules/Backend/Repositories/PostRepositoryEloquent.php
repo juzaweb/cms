@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 
-/**
- * Class PostRepositoryEloquent.
- *
- * @package namespace Juzaweb\Backend\Repositories;
- */
 class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepository
 {
+    protected array $searchAble = ['title', 'description'];
+
+    protected array $filterAble = ['status'];
+
     public function model(): string
     {
         return Post::class;
@@ -44,5 +43,17 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         )->wherePublish();
 
         return apply_filters('post.selectFrontendBuilder', $builder);
+    }
+
+    public function getStatuses($type = 'posts'): array
+    {
+        $statuses = [
+            Post::STATUS_PUBLISH => trans('cms::app.publish'),
+            Post::STATUS_PRIVATE => trans('cms::app.private'),
+            Post::STATUS_DRAFT => trans('cms::app.draft'),
+            Post::STATUS_TRASH => trans('cms::app.trash'),
+        ];
+
+        return apply_filters($type . '.statuses', $statuses);
     }
 }

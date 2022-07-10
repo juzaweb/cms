@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
@@ -124,7 +125,7 @@ trait PostTypeController
     /**
      * Get data for form
      *
-     * @param  \Illuminate\Database\Eloquent\Model $model
+     * @param  Model $model
      * @param $params
      * @return array
      *
@@ -183,12 +184,10 @@ trait PostTypeController
                 ->toArray();
         }
 
-        $attributes = apply_filters(
+        return apply_filters(
             "post_type.{$this->getPostType()}.parseDataForSave",
             $attributes
         );
-
-        return $attributes;
     }
 
     protected function checkPermission($ability, $arguments = [], ...$params)
@@ -196,14 +195,14 @@ trait PostTypeController
         $this->authorize($ability, [$arguments, $this->getPostType()]);
     }
 
-    protected function getPermission($ability, $arguments = [], ...$params)
+    protected function hasPermission($ability, $arguments = [], ...$params)
     {
         $response = Gate::inspect($ability, [$arguments, $this->getPostType()]);
         return $response->allowed();
     }
 
     /**
-     * @param Post|\Illuminate\Database\Eloquent\Model $model
+     * @param Post|Model $model
      * @return array|Collection
      */
     private function getTemplateData($model)
@@ -219,7 +218,7 @@ trait PostTypeController
     }
 
     /**
-     * @param Post|\Illuminate\Database\Eloquent\Model $model
+     * @param Post|Model $model
      * @return string
      */
     private function getTemplate($model)
@@ -232,7 +231,7 @@ trait PostTypeController
         return $template;
     }
 
-    private function getPostType()
+    private function getPostType(): ?string
     {
         if (empty($this->postType)) {
             return request()->segment(3);

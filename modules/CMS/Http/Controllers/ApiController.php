@@ -12,6 +12,7 @@ namespace Juzaweb\CMS\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\MessageBag;
 use OpenApi\Annotations as OA;
 
@@ -269,5 +270,20 @@ class ApiController extends Controller
         ];
 
         return response()->json($response, $status);
+    }
+
+    protected function checkPermission(Request $request, $ability, $arguments = [])
+    {
+        $this->authorizeForUser(
+            $request->user('api'),
+            $ability,
+            $arguments
+        );
+    }
+
+    protected function hasPermission($ability, $arguments = []): bool
+    {
+        $response = Gate::inspect($ability, $arguments);
+        return $response->allowed();
     }
 }

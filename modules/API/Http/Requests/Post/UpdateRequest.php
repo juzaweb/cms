@@ -10,8 +10,6 @@
 
 namespace Juzaweb\API\Http\Requests\Post;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 class UpdateRequest extends PostRequest
 {
     //
