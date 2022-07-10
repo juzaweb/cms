@@ -34,7 +34,7 @@ class SettingController extends BackendController
     public function save(Request $request): JsonResponse|RedirectResponse
     {
         $configs = $request->post('config', []);
-        $themeConfigs = $request->post('theme');
+        $themeConfigs = $request->post('theme', []);
 
         foreach ($configs as $name => $value) {
             set_config($name, $value);
