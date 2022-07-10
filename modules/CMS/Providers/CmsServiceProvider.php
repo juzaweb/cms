@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
+use Juzaweb\API\Providers\APIServiceProvider;
 use Juzaweb\CMS\Contracts\ActionRegisterContract;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Contracts\CacheGroupContract;
@@ -239,6 +240,11 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(DevToolServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
         $this->app->register(FrontendServiceProvider::class);
+
+        if (config('juzaweb.api.enable')) {
+            $this->app->register(APIServiceProvider::class);
+        }
+
         if (config('network.enable')) {
             $this->app->register(NetworkServiceProvider::class);
         }

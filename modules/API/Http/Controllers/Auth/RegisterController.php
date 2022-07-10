@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\API\Auth;
+namespace Juzaweb\API\Http\Controllers\Auth;
 
 use Juzaweb\CMS\Http\Controllers\ApiController;
 

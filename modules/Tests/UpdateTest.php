@@ -23,7 +23,7 @@ class UpdateTest extends TestCase
 
         $this->assertEquals('v2.0', $this->getCMSVersion());
 
-        for ($i=1;$i<=6;$i++) {
+        for ($i=1; $i<=6; $i++) {
             $this->printText("Test update step {$i}");
 
             $response = $this->json('POST', "admin-cp/update/cms/{$i}");
@@ -36,7 +36,7 @@ class UpdateTest extends TestCase
         $this->assertNotEquals('v2.0', $this->getCMSVersion());
     }
 
-    public function testUpdateCommand()
+    /*public function testUpdateCommand()
     {
         $filePath = base_path('modules/CMS/Version.php');
 
@@ -55,7 +55,7 @@ class UpdateTest extends TestCase
             ->assertExitCode(0);
 
         $this->assertNotEquals('v2.0', $this->getCMSVersion());
-    }
+    }*/
 
     protected function getCMSVersion(): string
     {

@@ -8,20 +8,19 @@
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\API\PostController;
+use Juzaweb\API\Http\Controllers\PostController;
 
 Route::group(
     [
-        'prefix' => 'post-types',
-        'middleware' => 'auth:sanctum',
+        'prefix' => 'post-type',
     ],
     function () {
         Route::apiResource(
-            '{types}',
+            '{type}',
             PostController::class,
             [
                 'parameters' => [
-                    '{types}' => 'id',
+                    '{type}' => 'id',
                 ],
                 'names' => 'post_type',
             ]

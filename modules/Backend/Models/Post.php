@@ -88,6 +88,9 @@ class Post extends Model implements Feedable
     use HasFactory;
 
     public const STATUS_PUBLISH = 'publish';
+    public const STATUS_PRIVATE = 'private';
+    public const STATUS_DRAFT = 'draft';
+    public const STATUS_TRASH = 'trash';
 
     protected $table = 'posts';
 

@@ -8,11 +8,11 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\API;
+namespace Juzaweb\API\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Juzaweb\CMS\Http\Controllers\ApiController;
 use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class UserController extends ApiController
 {

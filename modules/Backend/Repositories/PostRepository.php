@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Backend\Repositories;
 
+use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\CMS\Repositories\BaseRepository;
-use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
  * Interface PostRepository.
@@ -12,5 +12,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface PostRepository extends BaseRepository
 {
-    //
+    public function createSelectFrontendBuilder(): Builder;
+
+    public function getStatuses($type = 'posts'): array;
 }
