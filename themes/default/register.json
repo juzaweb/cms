@@ -68,5 +68,12 @@
         "primary": {
             "label": "Primary menu"
         }
-    }
+    },
+    "configs": [
+        {
+            "type": "image",
+            "name": "footer_logo",
+            "label": "Footer Logo"
+        }
+    ]
 }
