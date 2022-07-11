@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Facades\Facades;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class TaxonomyController extends FrontendController
@@ -15,6 +16,10 @@ class TaxonomyController extends FrontendController
         $taxSlug = $slug[1] ?? null;
         $taxonomy = Taxonomy::where('slug', $taxSlug)
             ->firstOrFail();
+
+        Facades::$isTaxonomyPage = true;
+
+        Facades::$taxonomy = $taxonomy;
 
         $title = $taxonomy->getName();
         $postType = $taxonomy->getPostType('model');

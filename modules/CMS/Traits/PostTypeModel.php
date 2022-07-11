@@ -12,16 +12,15 @@ namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Comment;
-use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostMeta;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Support\Converter\BBCodeToHTML;
 
 /**
  * @method Builder wherePublish()
@@ -40,7 +39,7 @@ trait PostTypeModel
 
     public static function selectFrontendBuilder(): Builder
     {
-        $builder = self::with(
+        $builder = static::with(
             [
                 'createdBy',
                 'taxonomies',
@@ -73,7 +72,7 @@ trait PostTypeModel
      */
     public static function createFrontendBuilder(): Builder
     {
-        $builder = self::with(
+        $builder = static::with(
             [
                 'createdBy',
                 'taxonomies',
@@ -98,38 +97,46 @@ trait PostTypeModel
 
     public function attributeLabels(): array
     {
-        return [
-            'title' => trans('cms::app.title'),
-            'content' => trans('cms::app.content'),
-            'status' => trans('cms::app.status'),
-            'slug' => trans('cms::app.slug'),
-            'thumbnail' => trans('cms::app.thumbnail'),
-            'views' => trans('cms::app.views'),
-        ];
+        return apply_filters(
+            "{$this->type}.attribute_labels",
+            [
+                'title' => trans('cms::app.title'),
+                'content' => trans('cms::app.content'),
+                'status' => trans('cms::app.status'),
+                'slug' => trans('cms::app.slug'),
+                'thumbnail' => trans('cms::app.thumbnail'),
+                'views' => trans('cms::app.views'),
+            ]
+        );
     }
 
     public function taxonomies(): BelongsToMany
     {
-        return $this->belongsToMany(Taxonomy::class, 'term_taxonomies', 'term_id', 'taxonomy_id')
+        return $this->belongsToMany(
+            Taxonomy::class,
+            'term_taxonomies',
+            'term_id',
+            'taxonomy_id'
+        )
             ->withPivot(['term_type']);
     }
 
-    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'object_id', 'id');
     }
 
-    public function metas()
+    public function metas(): HasMany
     {
         return $this->hasMany(PostMeta::class, 'post_id', 'id');
     }
 
-    public function getMeta($key, $default = null)
+    public function getMeta($key, $default = null): mixed
     {
         return $this->json_metas[$key] ?? $default;
     }
 
-    public function getMetas()
+    public function getMetas(): ?array
     {
         return $this->json_metas;
     }
@@ -140,7 +147,7 @@ trait PostTypeModel
      *
      * @return Builder
      */
-    public function scopeWhereFilter($builder, $params = [])
+    public function scopeWhereFilter($builder, $params = []): Builder
     {
         if ($keyword = Arr::get($params, 'q')) {
             $keyword = trim($keyword);
@@ -609,7 +616,7 @@ trait PostTypeModel
     public function getLink(): bool|string
     {
         if ($this->type == 'pages') {
-            return route('post', [$this->slug], false);
+            return route('post', [$this->slug]);
         }
 
         $permalink = $this->getPermalink('base');
@@ -617,7 +624,7 @@ trait PostTypeModel
             return false;
         }
 
-        return route('post', ["{$permalink}/{$this->slug}"], false);
+        return route('post', ["{$permalink}/{$this->slug}"]);
     }
 
     public function getUpdatedDate($format = JW_DATE_TIME): string
@@ -630,7 +637,7 @@ trait PostTypeModel
         return jw_date_format($this->updated_at, $format);
     }
 
-    public function getCreatedByName()
+    public function getCreatedByName(): string
     {
         if ($this->createdBy) {
             return $this->createdBy->name;
@@ -648,7 +655,7 @@ trait PostTypeModel
         return asset('jw-styles/juzaweb/images/avatar.png');
     }
 
-    public function getViews()
+    public function getViews(): int|string
     {
         if ($this->views < 1000) {
             return $this->views;
@@ -657,7 +664,7 @@ trait PostTypeModel
         return round($this->views / 1000, 1) . 'K';
     }
 
-    public function getTotalComments()
+    public function getTotalComments(): int
     {
         return $this->comments()->whereApproved()->count();
     }

@@ -117,11 +117,6 @@ class Post extends Model implements Feedable
         'json_taxonomies' => 'array',
     ];
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return Factory
-     */
     protected static function newFactory(): Factory
     {
         return PostFactory::new();

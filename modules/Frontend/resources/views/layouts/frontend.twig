@@ -3,6 +3,7 @@
 <head>
     {% set sitename = config('sitename') %}
     {% set icon = config('icon') %}
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,10 +28,10 @@
     {% endif %}
 
     {% if icon %}
-        <link rel="icon" href="{{ icon }}" />
+        <link rel="icon" href="{{ upload_url(icon) }}" />
     {% endif %}
 
-    <title>{{ title }}{% if sitename %} | {{ sitename }} {% endif %}</title>
+    <title>{{ apply_filters('frontend.head.title', title) }}{% if sitename %} | {{ sitename }} {% endif %}</title>
 
     {{ theme_header() }}
 
@@ -52,7 +53,11 @@
     {{ theme_footer() }}
 
     {% if auth %}
-    <form action="{{ url('logout') }}" method="post" style="display: none" class="form-logout">
+    <form action="{{ url('logout') }}"
+          method="post"
+          style="display: none"
+          class="form-logout"
+    >
         {{ csrf_field() }}
     </form>
     {% endif %}
