@@ -280,6 +280,8 @@ class MenuAction extends Action
             [
                 'name' => trans('cms::app.email_setting'),
                 'view' => 'cms::backend.email.setting',
+                'header' => false,
+                'footer' => false,
                 'priority' => 15,
             ]
         );

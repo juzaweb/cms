@@ -10,7 +10,7 @@ use Juzaweb\CMS\Models\Language;
 
 class SystemSettingController extends BackendController
 {
-    public function index($form = 'general')
+    public function index($form = 'general'): \Illuminate\Contracts\View\View
     {
         $forms = $this->getForms();
 
@@ -24,7 +24,7 @@ class SystemSettingController extends BackendController
         );
     }
 
-    public function save(Request $request)
+    public function save(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
         $locales = config('locales');
         $configs = $request->only(Config::configs());
@@ -55,7 +55,7 @@ class SystemSettingController extends BackendController
         );
     }
 
-    protected function getForms()
+    protected function getForms(): \Illuminate\Support\Collection
     {
         return collect(GlobalData::get('setting_forms'))->sortBy('priority');
     }

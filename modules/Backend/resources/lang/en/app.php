@@ -448,7 +448,7 @@ return [
     'current_version' => 'Current version',
     'new_version' => 'New version',
     'updating' => 'Updating...',
-    'custom_seo' => 'Custom seo',
+    'custom_seo' => 'Custom SEO',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
