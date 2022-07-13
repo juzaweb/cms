@@ -435,7 +435,6 @@ return [
     'client_secret' => 'Client secret',
     'redirect_url' => 'Redirect url',
     'social_login' => 'Social Login',
-    'update_successfully' => 'Update successfully',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',
@@ -445,11 +444,11 @@ return [
     ],
     'tools' => 'Tools',
     'import' => 'Import',
-    'install_successfully' => 'Install successfully',
     'reset_password' => 'Reset password',
     'current_version' => 'Current version',
     'new_version' => 'New version',
     'updating' => 'Updating...',
+    'custom_seo' => 'Custom seo',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
@@ -479,7 +478,6 @@ return [
     ],
     'upload_theme' => 'Upload Theme',
     'upload_plugin' => 'Upload Plugin',
-    'upload_successfull' => 'Upload successfull',
     'theme_upload' => [
         'error' => [
             'mime_type' => 'Invalid file mime type.',

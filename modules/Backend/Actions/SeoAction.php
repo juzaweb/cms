@@ -26,9 +26,25 @@ class SeoAction extends Action
         );
 
         $this->addAction(
-            Action::BACKEND_CALL_ACTION,
+            Action::BACKEND_INIT,
             [$this, 'addAjaxs']
         );
+
+        $this->addAction(Action::BACKEND_INIT, [$this, 'addMenu']);
+    }
+
+    public function addMenu()
+    {
+        /*HookAction::registerAdminPage(
+            'setting.seo',
+            [
+                'title' => trans('cms::app.seo_setting'),
+                'menu' => [
+                    'icon' => 'fa fa-line-chart',
+                    'parent' => 'setting'
+                ]
+            ]
+        );*/
     }
 
     public function addAjaxs()

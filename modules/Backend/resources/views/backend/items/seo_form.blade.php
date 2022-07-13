@@ -1,12 +1,12 @@
 <div class="card mt-3">
     <div class="card-header row">
         <div class="col-md-6">
-            <h4 class="card-title">{{ trans('jseo::content.custom_seo') }}</h4>
+            <h4 class="card-title">{{ trans('cms::app.custom_seo') }}</h4>
         </div>
 
         <div class="col-md-6 text-right">
             <a href="javascript:void(0)" class="custom-seo">
-                <i class="fa fa-edit"></i> {{ trans('jseo::content.custom_seo') }}
+                <i class="fa fa-edit"></i> {{ trans('cms::app.custom_seo') }}
             </a>
         </div>
     </div>
