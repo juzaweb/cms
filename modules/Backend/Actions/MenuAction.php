@@ -282,7 +282,7 @@ class MenuAction extends Action
                 'view' => 'cms::backend.email.setting',
                 'header' => false,
                 'footer' => false,
-                'priority' => 15,
+                'priority' => 50,
             ]
         );
     }

@@ -319,14 +319,14 @@ trait RegisterHookAction
         $this->globalData->set('resources.' . $args->get('key'), $args);
     }
 
-    public function registerConfig(array $keys)
+    public function registerConfig(array $keys): void
     {
         $configs = $this->globalData->get('configs');
 
         $this->globalData->set('configs', array_merge($keys, $configs));
     }
 
-    public function registerAdminPage(string $key, array $args)
+    public function registerAdminPage(string $key, array $args): void
     {
         if (empty($args['title'])) {
             throw new \Exception('Label Admin Page is required.');

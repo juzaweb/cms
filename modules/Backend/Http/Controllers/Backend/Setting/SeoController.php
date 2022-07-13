@@ -21,7 +21,7 @@ class SeoController extends BackendController
 
     public function save(SeoSettingRequest $request)
     {
-
+        //
     }
 
     public function getStringRaw(Request $request)

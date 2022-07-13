@@ -167,6 +167,12 @@ class Field
                     $data['name'],
                     Arr::get($data, 'data', [])
                 );
+            case 'checkbox':
+                return static::checkbox(
+                    $data['label'],
+                    $data['name'],
+                    Arr::get($data, 'data', [])
+                );
         }
 
         return '';

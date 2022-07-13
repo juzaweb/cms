@@ -29,13 +29,30 @@
                     </div>
                     @endif
                     <div class="card-body">
-                        @if(is_string($forms[$component]['view']))
-                            @if(view()->exists($forms[$component]['view']))
-                                @include($forms[$component]['view'])
+                        @if(isset($forms[$component]['view']))
+                            @if(is_string($forms[$component]['view']))
+                                @if(view()->exists($forms[$component]['view']))
+                                    @include($forms[$component]['view'])
+                                @endif
+                            @else
+                                {{ $forms[$component]['view'] }}
                             @endif
-                        @else
-                            {{ $forms[$component]['view'] }}
                         @endif
+
+                        @foreach($configs as $key => $config)
+                            @php
+                                $config['data'] = $config;
+                                if ($config['type'] == 'checkbox') {
+                                    $config['data']['checked'] = get_config($key) == ($config['data']['value'] ?? '');
+                                } else {
+                                    $config['data']['value'] = get_config($key);
+                                }
+
+                                $config['name'] = $key;
+                            @endphp
+
+                            {{ Field::fieldByType($config) }}
+                        @endforeach
                     </div>
 
                     @if($forms[$component]['footer'] ?? true)
@@ -46,11 +63,11 @@
                             <div class="col-md-6">
                                 <div class="btn-group float-right">
                                     <button type="submit" class="btn btn-success">
-                                        <i class="fa fa-save"></i> {{ trans('cms::app.save') }}
+                                         {{ trans('cms::app.save') }}
                                     </button>
 
                                     <button type="reset" class="btn btn-default">
-                                        <i class="fa fa-refresh"></i> {{ trans('cms::app.reset') }}
+                                         {{ trans('cms::app.reset') }}
                                     </button>
                                 </div>
                             </div>

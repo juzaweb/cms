@@ -43,7 +43,7 @@ class SocialLoginAction extends Action
                     'cms::backend.setting.system.form.social_login',
                     compact('socials', 'data')
                 ),
-                'priority' => 20
+                'priority' => 40
             ]
         );
     }

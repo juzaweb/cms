@@ -35,16 +35,25 @@ class SeoAction extends Action
 
     public function addMenu()
     {
-        /*HookAction::registerAdminPage(
-            'setting.seo',
+        HookAction::registerConfig(
             [
-                'title' => trans('cms::app.seo_setting'),
-                'menu' => [
-                    'icon' => 'fa fa-line-chart',
-                    'parent' => 'setting'
+                'jw_sitemap_enable' => [
+                    'type' => 'checkbox',
+                    'label' => trans('enable_sitemap'),
+                    'description' => 'Enable the XML sitemaps that Yoast SEO generates.
+ <a href="/sitemap.xml" target="_blank">See the XML sitemap</a>',
+                    'form' => 'seo'
                 ]
             ]
-        );*/
+        );
+
+        HookAction::addSettingForm(
+            'seo',
+            [
+                'name' => trans('cms::app.seo_setting'),
+                'priority' => 20,
+            ]
+        );
     }
 
     public function addAjaxs()
