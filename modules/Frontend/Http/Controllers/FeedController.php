@@ -11,6 +11,10 @@ class FeedController extends Controller
 {
     public function index(): Feed
     {
+        if (!get_config('jw_enable_post_feed', true)) {
+            abort(404);
+        }
+
         $posts = Post::with(['createdBy'])
             ->select(
                 [

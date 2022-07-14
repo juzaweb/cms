@@ -52,5 +52,9 @@ interface HookActionContract
 
     public function registerResourcePermissions(string $resource, string $name): void;
 
+    public function registerConfig(array|string $key, array $args = []): void;
+
     public function getPermissions(string $key = null): Collection;
+
+    public function getConfigs($key = null): Collection;
 }

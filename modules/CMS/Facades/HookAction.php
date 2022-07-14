@@ -33,7 +33,7 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static void registerAdminAjax(string $key, $args = [])
  * @method static void registerPackageModule(string $key, $args = [])
  * @method static void registerResource(string $key, $postType = null, $args = [])
- * @method static void registerConfig(array $keys)
+ * @method static void registerConfig(array|string $key, array $args = [])
  * @method static void registerThemeSetting($name, $label, $args = [])
  * @method static void registerProfilePage(string $key, array $args = [])
  * @method static void registerPermission(string $key, array $args = [])

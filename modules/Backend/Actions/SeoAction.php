@@ -35,15 +35,20 @@ class SeoAction extends Action
 
     public function addMenu()
     {
-        HookAction::registerConfig(
+        $this->hookAction->registerConfig(
             [
-                'jw_sitemap_enable' => [
+                'jw_enable_sitemap' => [
                     'type' => 'checkbox',
                     'label' => trans('enable_sitemap'),
                     'description' => 'Enable the XML sitemaps that Yoast SEO generates.
  <a href="/sitemap.xml" target="_blank">See the XML sitemap</a>',
                     'form' => 'seo'
-                ]
+                ],
+                'jw_enable_post_feed' => [
+                    'type' => 'checkbox',
+                    'label' => trans('enable_sitemap'),
+                    'form' => 'seo'
+                ],
             ]
         );
 

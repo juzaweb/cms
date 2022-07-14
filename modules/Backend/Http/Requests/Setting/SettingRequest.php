@@ -12,7 +12,7 @@ namespace Juzaweb\Backend\Http\Requests\Setting;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SeoSettingRequest extends FormRequest
+class SettingRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -39,12 +39,5 @@ class SeoSettingRequest extends FormRequest
         }
 
         $this->merge($input);
-    }
-
-    private function getCheckboxSettings(): array
-    {
-        return [
-            'jw_sitemap_enable',
-        ];
     }
 }

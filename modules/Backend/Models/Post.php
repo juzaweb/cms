@@ -185,7 +185,7 @@ class Post extends Model implements Feedable
         return FeedItem::create()
             ->id($this->id)
             ->title($this->title)
-            ->summary($this->description)
+            ->summary($this->description ?? '')
             ->updated($updated)
             ->link($this->getLink())
             ->authorName($name);

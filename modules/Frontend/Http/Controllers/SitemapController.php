@@ -12,6 +12,13 @@ class SitemapController extends Controller
 {
     protected int $per_page = 500;
 
+    public function __construct()
+    {
+        if (!get_config('jw_enable_sitemap', true)) {
+            abort(404);
+        }
+    }
+
     public function index()
     {
         $sitemap = App::make("sitemap");

@@ -319,11 +319,11 @@ trait RegisterHookAction
         $this->globalData->set('resources.' . $args->get('key'), $args);
     }
 
-    public function registerConfig(array $keys): void
+    public function registerConfig(array|string $key, array $args = []): void
     {
         $configs = $this->globalData->get('configs');
 
-        $this->globalData->set('configs', array_merge($keys, $configs));
+        $this->globalData->set('configs', array_merge($key, $configs));
     }
 
     public function registerAdminPage(string $key, array $args): void

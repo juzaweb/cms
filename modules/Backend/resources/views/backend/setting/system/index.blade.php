@@ -43,6 +43,7 @@
                             @php
                                 $config['data'] = $config;
                                 if ($config['type'] == 'checkbox') {
+                                    $config['data']['value'] = $config['data']['value'] ?? 1;
                                     $config['data']['checked'] = get_config($key) == ($config['data']['value'] ?? '');
                                 } else {
                                     $config['data']['value'] = get_config($key);

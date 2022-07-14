@@ -2,18 +2,33 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
-use Illuminate\Http\Request;
-use Juzaweb\CMS\Facades\GlobalData;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Juzaweb\Backend\Http\Requests\Setting\SettingRequest;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Models\Config;
 use Juzaweb\CMS\Models\Language;
 
 class SystemSettingController extends BackendController
 {
-    public function index($form = 'general'): \Illuminate\Contracts\View\View
+    protected GlobalDataContract $globalData;
+
+    protected HookActionContract $hookAction;
+
+    public function __construct(
+        GlobalDataContract $globalData,
+        HookActionContract $hookAction
+    ) {
+        $this->globalData = $globalData;
+        $this->hookAction = $hookAction;
+    }
+
+    public function index($form = 'general'): View
     {
         $forms = $this->getForms();
-        $configs = $this->getConfigs()->where('form', $form);
+        $configs = $this->hookAction->getConfigs()->where('form', $form);
 
         return view(
             'cms::backend.setting.system.index',
@@ -26,10 +41,10 @@ class SystemSettingController extends BackendController
         );
     }
 
-    public function save(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+    public function save(SettingRequest $request): JsonResponse|RedirectResponse
     {
         $locales = config('locales');
-        $configs = $request->only($this->getConfigs()->keys());
+        $configs = $request->only($this->hookAction->getConfigs()->keys()->toArray());
 
         foreach ($configs as $key => $config) {
             if ($request->has($key)) {
@@ -57,30 +72,9 @@ class SystemSettingController extends BackendController
         );
     }
 
-    protected function getConfigs(): \Illuminate\Support\Collection
-    {
-        $configs = config('juzaweb.config');
-        $configs = array_merge(GlobalData::get('configs'), $configs);
-        return collect($configs)->mapWithKeys(
-            function ($item, $key) {
-                if (is_int($key) && is_string($item)) {
-                    return [
-                        $item => [
-                            "type" => "text",
-                            "label" => trans("cms::config.{$item}")
-                        ]
-                    ];
-                }
-
-                return [
-                    $key => $item
-                ];
-            }
-        );
-    }
-
     protected function getForms(): \Illuminate\Support\Collection
     {
-        return collect(GlobalData::get('setting_forms'))->sortBy('priority');
+        return collect($this->globalData->get('setting_forms'))
+            ->sortBy('priority');
     }
 }
