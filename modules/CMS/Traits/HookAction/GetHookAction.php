@@ -96,6 +96,7 @@ trait GetHookAction
                     return [
                         $item => [
                             "type" => "text",
+                            "name" => $key,
                             "label" => trans("cms::config.{$item}")
                         ]
                     ];

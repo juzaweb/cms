@@ -503,5 +503,10 @@ return [
         'sites' => 'Sites',
         'network' => 'Network',
         'domain_mapping' => 'Domain Mapping',
+    ],
+    'seo' => [
+        'enable_sitemap' => 'Enable sitemap',
+        'enable_post_feed' => 'Enable post feed',
+        'enable_taxonomy_feed' => 'Enable taxonomy feed',
     ]
 ];

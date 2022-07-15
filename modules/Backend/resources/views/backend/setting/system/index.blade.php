@@ -11,72 +11,72 @@
         </div>
 
         <div class="col-md-9">
-            <form action="{{ route('admin.setting.save') }}" method="post" class="form-ajax">
-                <input type="hidden" name="form" value="general">
+            @if(isset($forms[$component]['view']))
+                @if(is_string($forms[$component]['view']))
+                    @if(view()->exists($forms[$component]['view']))
+                        @include($forms[$component]['view'])
+                    @endif
+                @else
+                    {{ $forms[$component]['view'] }}
+                @endif
+            @else
+                <form action="{{ route('admin.setting.save') }}" method="post" class="form-ajax">
+                    <input type="hidden" name="form" value="{{ $form }}">
 
-                <div class="card">
-                    @if($forms[$component]['header'] ?? true)
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6"></div>
-                            <div class="col-md-6">
-                                <div class="btn-group float-right">
-                                    <button type="submit" class="btn btn-success"> Save </button>
-                                    <button type="reset" class="btn btn-default"> Reset </button>
+                    <div class="card">
+                        @if($forms[$component]['header'] ?? true)
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <div class="btn-group float-right">
+                                            <button type="submit" class="btn btn-success"> {{ trans('cms::app.save') }} </button>
+                                            <button type="reset" class="btn btn-default"> {{ trans('cms::app.reset') }} </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    @endif
-                    <div class="card-body">
-                        @if(isset($forms[$component]['view']))
-                            @if(is_string($forms[$component]['view']))
-                                @if(view()->exists($forms[$component]['view']))
-                                    @include($forms[$component]['view'])
-                                @endif
-                            @else
-                                {{ $forms[$component]['view'] }}
-                            @endif
                         @endif
+                        <div class="card-body">
+                            @foreach($configs as $key => $config)
+                                @php
+                                    $config['data'] = $config;
+                                    if ($config['type'] == 'checkbox') {
+                                        $config['data']['value'] = $config['data']['value'] ?? 1;
+                                        $config['data']['checked'] = get_config($key, $config['data']['default'] ?? null) == ($config['data']['value'] ?? '');
+                                    } else {
+                                        $config['data']['value'] = get_config($key);
+                                    }
 
-                        @foreach($configs as $key => $config)
-                            @php
-                                $config['data'] = $config;
-                                if ($config['type'] == 'checkbox') {
-                                    $config['data']['value'] = $config['data']['value'] ?? 1;
-                                    $config['data']['checked'] = get_config($key) == ($config['data']['value'] ?? '');
-                                } else {
-                                    $config['data']['value'] = get_config($key);
-                                }
+                                    $config['name'] = $key;
+                                @endphp
 
-                                $config['name'] = $key;
-                            @endphp
+                                {{ Field::fieldByType($config) }}
+                            @endforeach
+                        </div>
 
-                            {{ Field::fieldByType($config) }}
-                        @endforeach
-                    </div>
+                        @if($forms[$component]['footer'] ?? true)
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-md-6"></div>
 
-                    @if($forms[$component]['footer'] ?? true)
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <div class="btn-group float-right">
+                                            <button type="submit" class="btn btn-success">
+                                                {{ trans('cms::app.save') }}
+                                            </button>
 
-                            <div class="col-md-6">
-                                <div class="btn-group float-right">
-                                    <button type="submit" class="btn btn-success">
-                                         {{ trans('cms::app.save') }}
-                                    </button>
-
-                                    <button type="reset" class="btn btn-default">
-                                         {{ trans('cms::app.reset') }}
-                                    </button>
+                                            <button type="reset" class="btn btn-default">
+                                                {{ trans('cms::app.reset') }}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
-                    @endif
-                </div>
-            </form>
+                </form>
+            @endif
         </div>
     </div>
 @endsection

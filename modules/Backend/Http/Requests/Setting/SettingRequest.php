@@ -11,16 +11,22 @@
 namespace Juzaweb\Backend\Http\Requests\Setting;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Juzaweb\CMS\Facades\HookAction;
 
 class SettingRequest extends FormRequest
 {
     public function rules(): array
     {
-        $checkboxs = $this->getCheckboxSettings();
+        $checkboxs = HookAction::getConfigs()
+            ->where('type', 'checkbox')
+            ->whereIn('name', array_keys($this->input()))
+            ->keys()
+            ->toArray();
+
         $rules = collect($checkboxs)->mapWithKeys(
             function ($item) {
                 return [
-                    $item => 'required|in:0,1'
+                    $item => 'nullable|in:1'
                 ];
             }
         )->toArray();
@@ -30,7 +36,11 @@ class SettingRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $checkboxs = $this->getCheckboxSettings();
+        $checkboxs = HookAction::getConfigs()
+            ->where('type', 'checkbox')
+            ->whereIn('name', array_keys($this->input()))
+            ->keys()
+            ->toArray();
         $input = [];
         foreach ($checkboxs as $checkbox) {
             if (!$this->has($checkbox)) {

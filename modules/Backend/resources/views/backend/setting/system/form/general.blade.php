@@ -19,8 +19,25 @@
         'H:i' => now()->format('H:i'),
     ]
 @endphp
+<form action="{{ route('admin.setting.save') }}" method="post" class="form-ajax">
+    <input type="hidden" name="form" value="{{ $form }}">
 
-<div class="row">
+<div class="card">
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="btn-group float-right">
+                    <button type="submit" class="btn btn-success"> {{ trans('cms::app.save') }} </button>
+                    <button type="reset" class="btn btn-default"> {{ trans('cms::app.reset') }} </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
     <div class="col-md-8">
         <h5>{{ trans('cms::app.general') }}</h5>
 
@@ -150,5 +167,25 @@
         </div>
     </div>
 </div>
+    </div>
 
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-md-6"></div>
 
+            <div class="col-md-6">
+                <div class="btn-group float-right">
+                    <button type="submit" class="btn btn-success">
+                        {{ trans('cms::app.save') }}
+                    </button>
+
+                    <button type="reset" class="btn btn-default">
+                        {{ trans('cms::app.reset') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
