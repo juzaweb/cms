@@ -83,7 +83,7 @@ class PluginTest extends TestCase
 
         File::copyDirectory($destination, $pluginPath);
 
-        $this->assertDirectoryExists(
+        $this->assertFileExists(
             $pluginPath . "/composer.json"
         );
     }
