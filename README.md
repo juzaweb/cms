@@ -62,6 +62,11 @@ Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
 - [x] Upload plugins
 - [x] Per page paginate config
 - [x] **Network (multisite) support**
+- [x] Backup setting
+- [x] Seo setting
+    - Sitemap
+    - seo content
+    - feed
 - [x] Social login
   - [x] Google
   - [x] Facebook

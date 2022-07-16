@@ -10,6 +10,8 @@
 
 namespace Juzaweb\Tests\Feature\Backend;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Juzaweb\Tests\TestCase;
 
 class PluginTest extends TestCase
@@ -57,18 +59,32 @@ class PluginTest extends TestCase
     {
         config()->set('juzaweb.plugin.enable_upload', true);
 
+        $pluginName = 'juzaweb/example';
+
+        $pluginPath = config('juzaweb.plugin.path') . "/example";
+
+        $destination = Storage::disk('local')->path("backups/example");
+
+        File::copyDirectory($pluginPath, $destination);
+
         $this->json(
             'POST',
             'admin-cp/plugins/bulk-actions',
             [
-                'ids' => ['juzaweb/example'],
+                'ids' => [$pluginName],
                 'action' => 'delete'
             ]
         )
             ->assertJson(['status' => true]);
 
         $this->assertFileDoesNotExist(
-            config('juzaweb.plugin.path') . '/juzaweb/example/composer.json'
+            $pluginPath . "/composer.json"
+        );
+
+        File::copyDirectory($destination, $pluginPath);
+
+        $this->assertDirectoryExists(
+            $pluginPath . "/composer.json"
         );
     }
 }
