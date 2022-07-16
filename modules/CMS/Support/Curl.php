@@ -11,7 +11,7 @@ class Curl
 
     public function __construct()
     {
-        $this->client = new Client(['timeout' => 10]);
+        $this->client = new Client(['timeout' => 60]);
     }
 
     public function get($url, $params = [], $headers = [])

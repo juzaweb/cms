@@ -13,6 +13,7 @@ class CmsUpdater extends UpdateManager
     protected array $updatePaths = [
         'modules',
         'vendor',
+        'bootstrap/cache/packages.php',
         'composer.json',
         'composer.lock',
     ];
