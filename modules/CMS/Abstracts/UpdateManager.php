@@ -234,7 +234,7 @@ abstract class UpdateManager
 
             if (is_file($sourcePath)) {
                 if (!File::isDirectory(dirname($targetPath))) {
-                    File::makeDirectory(dirname($targetPath), 777, true);
+                    File::makeDirectory(dirname($targetPath), 775, true);
                 }
 
                 File::copy($sourcePath, $targetPath);
