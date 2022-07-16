@@ -4,6 +4,7 @@ namespace Juzaweb\Backend\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
+use Juzaweb\Backend\Actions\BackupAction;
 use Juzaweb\Backend\Actions\EnqueueStyleAction;
 use Juzaweb\Backend\Actions\MenuAction;
 use Juzaweb\Backend\Actions\PermissionAction;
@@ -69,7 +70,8 @@ class BackendServiceProvider extends ServiceProvider
                 PermissionAction::class,
                 SocialLoginAction::class,
                 ToolAction::class,
-                SeoAction::class
+                SeoAction::class,
+                BackupAction::class
             ]
         );
 

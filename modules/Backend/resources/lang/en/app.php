@@ -514,5 +514,10 @@ return [
         'auto_ping_description' => 'Automatically ping search engines like Bing'.
             ' and Yandex whenever you publish, update or delete a post.',
         'bing_api_key' => 'Bing API Key',
+    ],
+    'backup' => [
+        'backup_setting' => 'Backup setting',
+        'enable_backup' => 'Enable Backup',
+        'backup_time' => 'Backup Time',
     ]
 ];
