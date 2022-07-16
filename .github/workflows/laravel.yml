@@ -38,12 +38,12 @@ jobs:
       - name: Clear Configuration
         run: php artisan config:clear
       - name: Directory Permissions
-        run: chmod -R 777 storage && chmod -R 777 bootstrap/cache
+        run: chmod -R 777 storage bootstrap/cache
       - name: Execute tests Install
         run: php artisan test modules/Tests/InstallTest.php
       - name: Execute tests (Unit and Feature tests)
         run: php artisan test --stop-on-failure
       - name: Execute tests Update
         run: php artisan test modules/Tests/UpdateTest.php
-      #- name: Execute tests after Update
-      #  run: php artisan test
+      - name: Execute tests after Update
+        run: php artisan test --stop-on-failure
