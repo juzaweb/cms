@@ -1530,75 +1530,6 @@
             "time": "2022-03-20T21:55:58+00:00"
         },
         {
-            "name": "inertiajs/inertia-laravel",
-            "version": "v0.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/inertiajs/inertia-laravel.git",
-                "reference": "ea8f8a5a377cfdc567820b6afd50767f1794c3df"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/ea8f8a5a377cfdc567820b6afd50767f1794c3df",
-                "reference": "ea8f8a5a377cfdc567820b6afd50767f1794c3df",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "laravel/framework": "^6.0|^7.0|^8.74|^9.0",
-                "php": "^7.2|~8.0.0|~8.1.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.3.3",
-                "orchestra/testbench": "^4.0|^5.0|^6.4|^7.0",
-                "phpunit/phpunit": "^8.0|^9.5.8",
-                "roave/security-advisories": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Inertia\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "./helpers.php"
-                ],
-                "psr-4": {
-                    "Inertia\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jonathan Reinink",
-                    "email": "jonathan@reinink.ca",
-                    "homepage": "https://reinink.ca"
-                }
-            ],
-            "description": "The Laravel adapter for Inertia.js.",
-            "keywords": [
-                "inertia",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/inertiajs/inertia-laravel/issues",
-                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.6.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/reinink",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-05-10T11:02:47+00:00"
-        },
-        {
             "name": "intervention/image",
             "version": "2.7.1",
             "source": {
@@ -1867,23 +1798,22 @@
         },
         {
             "name": "juzaweb/packages",
-            "version": "v1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/packages.git",
-                "reference": "08581d9846c6fb0cbfcbd24b7cfd38ff15ea2464"
+                "reference": "cc37df27e9301a2b70db123b5431d40ecbc117b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/packages/zipball/08581d9846c6fb0cbfcbd24b7cfd38ff15ea2464",
-                "reference": "08581d9846c6fb0cbfcbd24b7cfd38ff15ea2464",
+                "url": "https://api.github.com/repos/juzaweb/packages/zipball/cc37df27e9301a2b70db123b5431d40ecbc117b1",
+                "reference": "cc37df27e9301a2b70db123b5431d40ecbc117b1",
                 "shasum": ""
             },
             "require": {
                 "arcanedev/log-viewer": "^9.0",
                 "darkaonline/l5-swagger": "^8.3",
                 "doctrine/dbal": "^3.3",
-                "inertiajs/inertia-laravel": "^0.6.0",
                 "intervention/image": "^2.5",
                 "juzaweb/config": "^2.2",
                 "juzaweb/laravel-chunk-upload": "^1.5",
@@ -1893,7 +1823,6 @@
                 "php": "^8.0|^8.1",
                 "prettus/l5-repository": "^2.8",
                 "rcrowe/twigbridge": "^0.14",
-                "rennokki/laravel-eloquent-query-cache": "^3.1",
                 "spatie/image-optimizer": "^1.4",
                 "spatie/laravel-backup": "^8.1",
                 "spatie/laravel-feed": "^4.1"
@@ -1906,9 +1835,9 @@
             "description": "Juzaweb CMS packages",
             "support": {
                 "issues": "https://github.com/juzaweb/packages/issues",
-                "source": "https://github.com/juzaweb/packages/tree/v1.1"
+                "source": "https://github.com/juzaweb/packages/tree/v1.1.2"
             },
-            "time": "2022-07-09T03:55:18+00:00"
+            "time": "2022-07-14T15:12:56+00:00"
         },
         {
             "name": "juzaweb/sitemap",
@@ -4208,73 +4137,6 @@
                 "source": "https://github.com/rcrowe/TwigBridge/tree/v0.14.0"
             },
             "time": "2022-03-08T17:21:17+00:00"
-        },
-        {
-            "name": "rennokki/laravel-eloquent-query-cache",
-            "version": "3.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/renoki-co/laravel-eloquent-query-cache.git",
-                "reference": "00e73a7050bedca315c71bf433d0c283f8a73fbc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/renoki-co/laravel-eloquent-query-cache/zipball/00e73a7050bedca315c71bf433d0c283f8a73fbc",
-                "reference": "00e73a7050bedca315c71bf433d0c283f8a73fbc",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "^8.83|^9.0.1",
-                "illuminate/support": "^8.83|^9.0.1"
-            },
-            "require-dev": {
-                "chelout/laravel-relationship-events": "^1.5",
-                "laravel/legacy-factories": "^1.3",
-                "mockery/mockery": "^1.5",
-                "orchestra/database": "^6.28|^7.0",
-                "orchestra/testbench": "^6.28|^7.0",
-                "orchestra/testbench-core": "^6.28|^7.0",
-                "phpunit/phpunit": "^9.5.13"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Rennokki\\QueryCache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Alex Renoki",
-                    "email": "alex@renoki.org",
-                    "homepage": "https://github.com/rennokki",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Adding cache on your Laravel Eloquent queries' results is now a breeze.",
-            "homepage": "https://github.com/renoki-co/laravel-eloquent-query-cache",
-            "keywords": [
-                "caching",
-                "eloquent",
-                "laravel",
-                "query",
-                "remember",
-                "sql"
-            ],
-            "support": {
-                "issues": "https://github.com/renoki-co/laravel-eloquent-query-cache/issues",
-                "source": "https://github.com/renoki-co/laravel-eloquent-query-cache/tree/3.3.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/rennokki",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-02-12T19:37:00+00:00"
         },
         {
             "name": "spatie/db-dumper",
