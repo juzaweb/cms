@@ -20,5 +20,8 @@ return [
         'dont_have_an_account' => 'Already have an account?',
         'register_closed' => 'Registration has been closed.',
     ],
-
+    'already_exists' => ':name already exists',
+    'update_successfully' => 'Update successfully',
+    'install_successfully' => 'Install successfully',
+    'upload_successfull' => 'Upload successfull',
 ];

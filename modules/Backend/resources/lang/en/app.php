@@ -435,7 +435,6 @@ return [
     'client_secret' => 'Client secret',
     'redirect_url' => 'Redirect url',
     'social_login' => 'Social Login',
-    'update_successfully' => 'Update successfully',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',
@@ -445,11 +444,11 @@ return [
     ],
     'tools' => 'Tools',
     'import' => 'Import',
-    'install_successfully' => 'Install successfully',
     'reset_password' => 'Reset password',
     'current_version' => 'Current version',
     'new_version' => 'New version',
     'updating' => 'Updating...',
+    'custom_seo' => 'Custom SEO',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
@@ -479,7 +478,6 @@ return [
     ],
     'upload_theme' => 'Upload Theme',
     'upload_plugin' => 'Upload Plugin',
-    'upload_successfull' => 'Upload successfull',
     'theme_upload' => [
         'error' => [
             'mime_type' => 'Invalid file mime type.',
@@ -505,5 +503,21 @@ return [
         'sites' => 'Sites',
         'network' => 'Network',
         'domain_mapping' => 'Domain Mapping',
+    ],
+    'seo' => [
+        'enable_sitemap' => 'Enable sitemap',
+        'enable_sitemap_description' => 'Enable the XML sitemaps that Yoast SEO generates.
+ <a href="/sitemap.xml" target="_blank">See the XML sitemap</a>',
+        'enable_post_feed' => 'Enable post feed',
+        'enable_taxonomy_feed' => 'Enable taxonomy feed',
+        'enable_auto_ping' => 'IndexNow',
+        'auto_ping_description' => 'Automatically ping search engines like Bing'.
+            ' and Yandex whenever you publish, update or delete a post.',
+        'bing_api_key' => 'Bing API Key',
+    ],
+    'backup' => [
+        'backup_setting' => 'Backup setting',
+        'enable_backup' => 'Enable Backup',
+        'backup_time' => 'Backup Time',
     ]
 ];

@@ -89,7 +89,7 @@ class PluginInstallController extends BackendController
 
                 event(new AfterUploadPlugin($plugin));
 
-                return $this->success(trans('cms::app.upload_successfull'));
+                return $this->success(trans('cms::message.upload_successfull'));
             }
 
             $handler = $save->handler();

@@ -43,6 +43,18 @@ Route::group(
 );
 
 Route::group(
+    ['prefix' => 'theme/setting'],
+    function () {
+        Route::get(
+            '/',
+            'Backend\Appearance\SettingController@index'
+        );
+
+        Route::post('/', 'Backend\Appearance\SettingController@save');
+    }
+);
+
+Route::group(
     ['prefix' => 'reading'],
     function () {
         Route::get('/', 'Backend\ReadingController@index')->name('admin.reading');

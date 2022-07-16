@@ -4,11 +4,14 @@ namespace Juzaweb\Backend\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
+use Juzaweb\Backend\Actions\BackupAction;
 use Juzaweb\Backend\Actions\EnqueueStyleAction;
 use Juzaweb\Backend\Actions\MenuAction;
 use Juzaweb\Backend\Actions\PermissionAction;
+use Juzaweb\Backend\Actions\SeoAction;
 use Juzaweb\Backend\Actions\SocialLoginAction;
 use Juzaweb\Backend\Actions\ToolAction;
+use Juzaweb\Backend\Commands\AutoSubmitCommand;
 use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
 use Juzaweb\Backend\Commands\FindTransCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
@@ -66,7 +69,9 @@ class BackendServiceProvider extends ServiceProvider
                 EnqueueStyleAction::class,
                 PermissionAction::class,
                 SocialLoginAction::class,
-                ToolAction::class
+                ToolAction::class,
+                SeoAction::class,
+                BackupAction::class
             ]
         );
 
@@ -77,6 +82,7 @@ class BackendServiceProvider extends ServiceProvider
                 TransFromEnglish::class,
                 EmailTemplateGenerateCommand::class,
                 ThemePublishCommand::class,
+                AutoSubmitCommand::class,
             ]
         );
     }

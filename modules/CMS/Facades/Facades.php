@@ -11,9 +11,19 @@
 namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Collection;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
 
 class Facades
 {
+    public static bool $isPostPage = false;
+
+    public static bool $isTaxonomyPage = false;
+
+    public static Post $post;
+
+    public static Taxonomy $taxonomy;
+
     public static function defaultServiceProviders(): array
     {
         return [

@@ -62,7 +62,9 @@ class HookAction implements HookActionContract
         $defaults = [
             'name' => '',
             'key' => $key,
-            'view' => '',
+            'view' => null,
+            'header' => true,
+            'footer' => true,
             'priority' => 10,
         ];
 

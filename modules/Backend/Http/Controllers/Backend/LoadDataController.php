@@ -22,10 +22,12 @@ class LoadDataController extends BackendController
             return $this->{$func}($request);
         }
 
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Function not found',
-        ]);
+        return response()->json(
+            [
+                'status' => 'error',
+                'message' => 'Function not found',
+            ]
+        );
     }
 
     protected function generateSlug(Request $request)

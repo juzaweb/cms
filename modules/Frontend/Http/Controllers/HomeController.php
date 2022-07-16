@@ -49,8 +49,6 @@ class HomeController extends FrontendController
 
     protected function getViewPage()
     {
-        $view = 'theme::index';
-
-        return $view;
+        return 'theme::index';
     }
 }

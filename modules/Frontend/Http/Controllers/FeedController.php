@@ -11,6 +11,10 @@ class FeedController extends Controller
 {
     public function index(): Feed
     {
+        if (!get_config('jw_enable_post_feed', true)) {
+            abort(404);
+        }
+
         $posts = Post::with(['createdBy'])
             ->select(
                 [
@@ -42,6 +46,10 @@ class FeedController extends Controller
 
     public function taxonomy($slug): Feed
     {
+        if (!get_config('jw_enable_taxonomy_feed', true)) {
+            abort(404);
+        }
+
         $taxonomy = Taxonomy::findBySlugOrFail($slug);
 
         $posts = Post::with(['createdBy'])

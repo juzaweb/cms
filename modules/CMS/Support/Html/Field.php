@@ -84,11 +84,13 @@ class Field
         if ($value) {
             $opts = User::whereIn('id', $value)
                 ->get(['id', 'name'])
-                ->mapWithKeys(function ($item) {
-                    return [
-                        $item->id => $item->name
-                    ];
-                })
+                ->mapWithKeys(
+                    function ($item) {
+                        return [
+                            $item->id => $item->name
+                        ];
+                    }
+                )
                 ->toArray();
         }
 
@@ -167,6 +169,12 @@ class Field
                     $data['name'],
                     Arr::get($data, 'data', [])
                 );
+            case 'checkbox':
+                return static::checkbox(
+                    $data['label'],
+                    $data['name'],
+                    Arr::get($data, 'data', [])
+                );
         }
 
         return '';
@@ -180,7 +188,10 @@ class Field
             'id',
             'a'. Str::random(5) . '-' . $name
         );
+
         $options['id'] = Str::slug($options['id']);
+
+        $options['value'] = $options['value'] ?? $options['default'] ?? null;
 
         if ($label instanceof Model) {
             $options['value'] = Arr::get(

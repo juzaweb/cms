@@ -71,7 +71,7 @@ trait GetHookAction
         return $taxonomies;
     }
 
-    public function getSettingForms()
+    public function getSettingForms(): Collection
     {
         return collect(GlobalData::get('setting_forms'))
             ->sortBy('priority');
@@ -80,6 +80,36 @@ trait GetHookAction
     public function getAdminMenu()
     {
         return GlobalData::get('admin_menu');
+    }
+
+    public function getConfigs($key = null): Collection
+    {
+        $configs = config('juzaweb.config');
+        $configs = array_merge($this->globalData->get('configs'), $configs);
+        if ($key) {
+            $configs = [$configs[$key]];
+        }
+
+        return collect($configs)->mapWithKeys(
+            function ($item, $key) {
+                if (is_int($key) && is_string($item)) {
+                    return [
+                        $item => [
+                            'type' => 'text',
+                            'name' => $key,
+                            'label' => trans("cms::config.{$item}")
+                        ]
+                    ];
+                }
+
+                $item['name'] = $key;
+                $item['type'] = $item['type'] ?? 'text';
+
+                return [
+                    $key => $item
+                ];
+            }
+        );
     }
 
     public function getMasterAdminMenu()

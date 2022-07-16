@@ -28,7 +28,7 @@ class ThemeGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $themePath;
+    protected string $themePath;
 
     /**
      * Create Theme Info.
@@ -49,14 +49,8 @@ class ThemeGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $themeStubPath;
+    protected string $themeStubPath;
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     * @throws FileNotFoundException
-     */
     public function handle()
     {
         $this->themePath = config('juzaweb.theme.path');
@@ -66,17 +60,12 @@ class ThemeGeneratorCommand extends Command
         $this->init();
     }
 
-    protected function getThemeStubPath()
-    {
-        return JW_PACKAGE_PATH . '/stubs/theme';
-    }
-
     /**
      * Theme Initialize.
      *
      * @return void
      */
-    protected function init()
+    protected function init(): void
     {
         $createdThemePath = $this->themePath . '/' . $this->theme['name'];
 
@@ -106,7 +95,7 @@ class ThemeGeneratorCommand extends Command
      *
      * @return void
      */
-    public function generateThemeInfo()
+    public function generateThemeInfo(): void
     {
         $this->theme['title'] = Str::ucfirst($this->theme['name']);
         $this->theme['description'] = Str::ucfirst($this->theme['name']) . ' description';
@@ -122,7 +111,7 @@ class ThemeGeneratorCommand extends Command
      *
      * @return void
      */
-    protected function makeDir($directory)
+    protected function makeDir(string $directory): void
     {
         if (! File::isDirectory($directory)) {
             File::makeDirectory($directory, 0755, true);
@@ -198,8 +187,11 @@ class ThemeGeneratorCommand extends Command
             $this->theme['version'],
         ];
 
-        $replaceContents = str_replace($mainString, $replaceString, $contents);
+        return str_replace($mainString, $replaceString, $contents);
+    }
 
-        return $replaceContents;
+    protected function getThemeStubPath(): string
+    {
+        return __DIR__ . '/../../stubs/theme';
     }
 }

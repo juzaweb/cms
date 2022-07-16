@@ -33,7 +33,7 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static void registerAdminAjax(string $key, $args = [])
  * @method static void registerPackageModule(string $key, $args = [])
  * @method static void registerResource(string $key, $postType = null, $args = [])
- * @method static void registerConfig(array $keys)
+ * @method static void registerConfig(array|string $key, array $args = [])
  * @method static void registerThemeSetting($name, $label, $args = [])
  * @method static void registerProfilePage(string $key, array $args = [])
  * @method static void registerPermission(string $key, array $args = [])
@@ -62,6 +62,7 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static Collection getEnqueueStyles($inFooter = false)
  * @method static Collection getPermissionGroups(string $key = null)
  * @method static Collection getPermissions(string $key = null)
+ * @method static Collection getConfigs(string $key = null)
  *
  * @see \Juzaweb\CMS\Support\HookAction
  */

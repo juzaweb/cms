@@ -46,7 +46,7 @@ class ProfileController extends FrontendController
 
         return $this->success(
             [
-                'message' => trans('cms::app.update_successfully'),
+                'message' => trans('cms::message.update_successfully'),
             ]
         );
     }

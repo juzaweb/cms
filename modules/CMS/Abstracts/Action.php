@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Abstracts;
 
+use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Facades\Hook;
 
 abstract class Action
@@ -43,6 +44,13 @@ abstract class Action
     public const FRONTEND_SEARCH_QUERY = 'frontend.search_query';
     public const FRONTEND_AFTER_BODY = 'theme.after_body';
     public const PERMISSION_INIT = 'permission_init';
+
+    protected HookActionContract $hookAction;
+
+    public function __construct()
+    {
+        $this->hookAction = app(HookActionContract::class);
+    }
 
     abstract public function handle();
 

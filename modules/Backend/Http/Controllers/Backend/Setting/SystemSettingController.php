@@ -2,32 +2,50 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
-use Illuminate\Http\Request;
-use Juzaweb\CMS\Facades\GlobalData;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Juzaweb\Backend\Http\Requests\Setting\SettingRequest;
+use Juzaweb\CMS\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Models\Config;
 use Juzaweb\CMS\Models\Language;
 
 class SystemSettingController extends BackendController
 {
-    public function index($form = 'general')
+    protected GlobalDataContract $globalData;
+
+    protected HookActionContract $hookAction;
+
+    public function __construct(
+        GlobalDataContract $globalData,
+        HookActionContract $hookAction
+    ) {
+        $this->globalData = $globalData;
+        $this->hookAction = $hookAction;
+    }
+
+    public function index($form = 'general'): View
     {
         $forms = $this->getForms();
+        $configs = $this->hookAction->getConfigs()->where('form', $form);
+        $title = $forms[$form]['name'] ?? trans('cms::app.system_setting');
 
         return view(
             'cms::backend.setting.system.index',
             [
-                'title' => trans('cms::app.system_setting'),
+                'title' => $title,
                 'component' => $form,
                 'forms' => $forms,
+                'configs' => $configs
             ]
         );
     }
 
-    public function save(Request $request)
+    public function save(SettingRequest $request): JsonResponse|RedirectResponse
     {
         $locales = config('locales');
-        $configs = $request->only(Config::configs());
+        $configs = $request->only($this->hookAction->getConfigs()->keys()->toArray());
 
         foreach ($configs as $key => $config) {
             if ($request->has($key)) {
@@ -55,8 +73,9 @@ class SystemSettingController extends BackendController
         );
     }
 
-    protected function getForms()
+    protected function getForms(): \Illuminate\Support\Collection
     {
-        return collect(GlobalData::get('setting_forms'))->sortBy('priority');
+        return collect($this->globalData->get('setting_forms'))
+            ->sortBy('priority');
     }
 }

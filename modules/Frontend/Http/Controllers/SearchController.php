@@ -12,9 +12,12 @@ class SearchController extends FrontendController
     public function index(Request $request)
     {
         $keyword = $request->input('q');
-        $title = $keyword ? trans('cms::app.result_for_keyword', [
-            'name' => $keyword,
-        ]) : trans('cms::app.search_results');
+        $title = $keyword ? trans(
+            'cms::app.result_for_keyword',
+            [
+                'name' => $keyword,
+            ]
+        ) : trans('cms::app.search_results');
 
         $query = Post::selectFrontendBuilder()
             ->whereSearch($request->all());
@@ -24,11 +27,14 @@ class SearchController extends FrontendController
 
         $page = PostResource::collection($posts)->response()->getData(true);
 
-        return $this->view('theme::search', compact(
-            'page',
-            'title',
-            'keyword'
-        ));
+        return $this->view(
+            'theme::search',
+            compact(
+                'page',
+                'title',
+                'keyword'
+            )
+        );
     }
 
     public function ajaxSearch(Request $request)

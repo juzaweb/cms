@@ -86,7 +86,7 @@ class ThemeInstallController extends BackendController
 
                 event(new AfterUploadTheme($theme));
 
-                return $this->success(trans('cms::app.upload_successfull'));
+                return $this->success(trans('cms::message.upload_successfull'));
             }
 
             $handler = $save->handler();

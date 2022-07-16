@@ -36,9 +36,17 @@ class ContentRangeUploadHandlerTest extends TestCase
 
     public function testValidContentRangeFirstChunk()
     {
-        $request = Request::create('test', 'POST', [], [], [], [
-            'HTTP_CONTENT_RANGE' => 'bytes 0-100/1200',
-        ]);
+        $request = Request::create(
+            'test',
+            'POST',
+            [],
+            [],
+            [],
+            [
+                'HTTP_CONTENT_RANGE' => 'bytes 0-100/1200',
+            ]
+        );
+
         $file = UploadedFile::fake()->create('test');
 
         $contentRange = new ContentRangeUploadHandler($request, $file, new FileConfig());
@@ -53,9 +61,16 @@ class ContentRangeUploadHandlerTest extends TestCase
 
     public function testValidContentRangeNextChunk()
     {
-        $request = Request::create('test', 'POST', [], [], [], [
-            'HTTP_CONTENT_RANGE' => 'bytes 100-100/1200',
-        ]);
+        $request = Request::create(
+            'test',
+            'POST',
+            [],
+            [],
+            [],
+            [
+                'HTTP_CONTENT_RANGE' => 'bytes 100-100/1200',
+            ]
+        );
         $file = UploadedFile::fake();
 
         $contentRange = new ContentRangeUploadHandler($request, $file, new FileConfig());
@@ -71,9 +86,16 @@ class ContentRangeUploadHandlerTest extends TestCase
 
     public function testIsLastChunk()
     {
-        $request = Request::create('test', 'POST', [], [], [], [
-            'HTTP_CONTENT_RANGE' => 'bytes 1100-1199/1200',
-        ]);
+        $request = Request::create(
+            'test',
+            'POST',
+            [],
+            [],
+            [],
+            [
+                'HTTP_CONTENT_RANGE' => 'bytes 1100-1199/1200',
+            ]
+        );
         $file = UploadedFile::fake();
 
         $contentRange = new ContentRangeUploadHandler($request, $file, new FileConfig());
@@ -100,9 +122,16 @@ class ContentRangeUploadHandlerTest extends TestCase
      */
     public function testCanBeUsedForInvalidContentRangeFormat()
     {
-        $request = Request::create('test', 'POST', [], [], [], [
-            'HTTP_CONTENT_RANGE' => 'bytes ss-ss',
-        ]);
+        $request = Request::create(
+            'test',
+            'POST',
+            [],
+            [],
+            [],
+            [
+                'HTTP_CONTENT_RANGE' => 'bytes ss-ss',
+            ]
+        );
         $this->assertFalse(ContentRangeUploadHandler::canBeUsedForRequest($request));
     }
 
@@ -111,9 +140,16 @@ class ContentRangeUploadHandlerTest extends TestCase
      */
     public function testCanBeUsedForValidRange()
     {
-        $request = Request::create('test', 'POST', [], [], [], [
-            'HTTP_CONTENT_RANGE' => 'bytes 100-100/1000',
-        ]);
+        $request = Request::create(
+            'test',
+            'POST',
+            [],
+            [],
+            [],
+            [
+                'HTTP_CONTENT_RANGE' => 'bytes 100-100/1000',
+            ]
+        );
         $this->assertTrue(ContentRangeUploadHandler::canBeUsedForRequest($request));
     }
 
@@ -126,9 +162,16 @@ class ContentRangeUploadHandlerTest extends TestCase
         for ($i = 0; $i < 309; ++$i) {
             $maxFloat .= '0';
         }
-        $request = Request::create('test', 'POST', [], [], [], [
-            'HTTP_CONTENT_RANGE' => 'bytes 100-100/'.$maxFloat,
-        ]);
+        $request = Request::create(
+            'test',
+            'POST',
+            [],
+            [],
+            [],
+            [
+                'HTTP_CONTENT_RANGE' => 'bytes 100-100/'.$maxFloat,
+            ]
+        );
         $file = UploadedFile::fake();
 
         $this->expectException(ContentRangeValueToLargeException::class);
@@ -139,9 +182,17 @@ class ContentRangeUploadHandlerTest extends TestCase
 
     public function testMaxInt()
     {
-        $request = Request::create('test', 'POST', [], [], [], [
-            'HTTP_CONTENT_RANGE' => 'bytes 100-100/2147483648',
-        ]);
+        $request = Request::create(
+            'test',
+            'POST',
+            [],
+            [],
+            [],
+            [
+                'HTTP_CONTENT_RANGE' => 'bytes 100-100/2147483648',
+            ]
+        );
+
         $file = UploadedFile::fake();
 
         $contentRange = new ContentRangeUploadHandler($request, $file, new FileConfig());

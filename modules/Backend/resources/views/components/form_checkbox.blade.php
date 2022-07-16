@@ -12,12 +12,17 @@
             @if($disabled ?? false) disabled @endif
             @if($required ?? false) required @endif
             @if ($readonly ?? false) readonly @endif
-    @foreach ($data ?? [] as $key => $val)
-        {{ 'data-' . $key. '="'. $val .'"' }}
+            @foreach ($data ?? [] as $key => $val)
+                {{ 'data-' . $key. '="'. $val .'"' }}
             @endforeach
         >
 
         <span class="jw__utils__control__indicator"></span>
         {{ $label ?? $name }}
+
+        @if($description ?? false)
+        <br>
+        <small class="text-muted">{!! $description !!}</small>
+        @endif
     </label>
 </div>

@@ -17,6 +17,7 @@ use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\CMS\Facades\Facades;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 
@@ -62,6 +63,10 @@ class PostController extends FrontendController
         $postModel = $postType->get('model')::createFrontendBuilder()
             ->where('slug', $postSlug)
             ->firstOrFail();
+
+        Facades::$isPostPage = true;
+
+        Facades::$post = $postModel;
 
         event(new PostViewed($postModel));
 
