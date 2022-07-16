@@ -67,7 +67,6 @@ class SeoAction extends Action
                     'label' => trans('cms::app.seo.enable_auto_ping'),
                     'form' => 'seo',
                     'data' => [
-                        'default' => 1,
                         'description' => trans('cms::app.seo.auto_ping_description')
                     ]
                 ],

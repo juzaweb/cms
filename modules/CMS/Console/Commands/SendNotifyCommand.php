@@ -14,7 +14,7 @@ class SendNotifyCommand extends Command
 
     public function handle()
     {
-        if (config('notification.method') != 'cron') {
+        if (config('juzaweb.notification.method') != 'cron') {
             return;
         }
 

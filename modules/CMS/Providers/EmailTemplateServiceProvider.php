@@ -15,13 +15,6 @@ class EmailTemplateServiceProvider extends ServiceProvider
             ],
             'jw_email_config'
         );
-
-        $this->app->booted(
-            function () {
-                $schedule = $this->app->make(Schedule::class);
-                $schedule->command('email:send')->everyMinute();
-            }
-        );
     }
 
     public function register()

@@ -29,11 +29,12 @@ class SystemSettingController extends BackendController
     {
         $forms = $this->getForms();
         $configs = $this->hookAction->getConfigs()->where('form', $form);
+        $title = $forms[$form]['name'] ?? trans('cms::app.system_setting');
 
         return view(
             'cms::backend.setting.system.index',
             [
-                'title' => trans('cms::app.system_setting'),
+                'title' => $title,
                 'component' => $form,
                 'forms' => $forms,
                 'configs' => $configs

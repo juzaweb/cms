@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Providers;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Juzaweb\CMS\Console\Commands\ClearCacheCommand;
 use Juzaweb\CMS\Console\Commands\InstallCommand;
 use Juzaweb\CMS\Console\Commands\PluginAutoloadCommand;
@@ -26,6 +27,18 @@ class ConsoleServiceProvider extends ServiceProvider
         ClearCacheCommand::class,
         PluginAutoloadCommand::class
     ];
+
+    public function boot()
+    {
+        $this->app->booted(
+            function () {
+                $schedule = $this->app->make(Schedule::class);
+                if (get_config('jw_auto_ping')) {
+                    $schedule->command('juzacms:auto-submit')->daily();
+                }
+            }
+        );
+    }
 
     public function register()
     {

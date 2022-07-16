@@ -15,6 +15,10 @@ class AutoSubmitCommand extends Command
 
     public function handle(): int
     {
+        if (!get_config('jw_auto_ping')) {
+            return self::SUCCESS;
+        }
+
         $lastPing = get_config('jw_last_seo_ping');
         $yesterday = Carbon::now()->subDay()->format('Y-m-d H:i');
 
@@ -64,6 +68,10 @@ class AutoSubmitCommand extends Command
             ->orderBy('id', 'asc')
             ->limit(100)
             ->get();
+
+        if ($links->isEmpty()) {
+            return;
+        }
 
         $urls = $links->map(
             function ($item) {
