@@ -21,9 +21,12 @@
     {% if sitename %}
     <meta property="og:site_name" content="{{ sitename }}">
     {% endif %}
-    <link rel="alternate" type="application/atom+xml" title="{{ config('title') }} &raquo; Feed" href="/feed">
 
-    {% if taxonomy %}
+    {% if config('jw_enable_post_feed') %}
+    <link rel="alternate" type="application/atom+xml" title="{{ config('title') }} &raquo; Feed" href="/feed">
+    {% endif %}
+
+    {% if taxonomy and config('jw_enable_taxonomy_feed') %}
     <link rel="alternate" type="application/atom+xml" title="{{ name }} &raquo; Feed" href="/taxonomy/{{ taxonomy.slug }}/feed">
     {% endif %}
 

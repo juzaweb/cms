@@ -41,21 +41,39 @@ class SeoAction extends Action
                     'form' => 'seo',
                     'type' => 'checkbox',
                     'label' => trans('cms::app.seo.enable_sitemap'),
-                    'description' => 'Enable the XML sitemaps that Yoast SEO generates.
- <a href="/sitemap.xml" target="_blank">See the XML sitemap</a>',
-                    'default' => 1
+                    'data' => [
+                        'default' => 1,
+                        'description' => trans('cms::app.seo.enable_sitemap_description'),
+                    ]
                 ],
                 'jw_enable_post_feed' => [
                     'type' => 'checkbox',
                     'label' => trans('cms::app.seo.enable_post_feed'),
                     'form' => 'seo',
-                    'default' => 1
+                    'data' => [
+                        'default' => 1
+                    ]
                 ],
                 'jw_enable_taxonomy_feed' => [
                     'type' => 'checkbox',
                     'label' => trans('cms::app.seo.enable_taxonomy_feed'),
                     'form' => 'seo',
-                    'default' => 1
+                    'data' => [
+                        'default' => 1
+                    ]
+                ],
+                'jw_auto_ping' => [
+                    'type' => 'checkbox',
+                    'label' => trans('cms::app.seo.enable_auto_ping'),
+                    'form' => 'seo',
+                    'data' => [
+                        'default' => 1,
+                        'description' => trans('cms::app.seo.auto_ping_description')
+                    ]
+                ],
+                'jw_bing_api_key' => [
+                    'label' => trans('cms::app.seo.bing_api_key'),
+                    'form' => 'seo',
                 ]
             ]
         );

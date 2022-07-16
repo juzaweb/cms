@@ -95,12 +95,15 @@ trait GetHookAction
                 if (is_int($key) && is_string($item)) {
                     return [
                         $item => [
-                            "type" => "text",
-                            "name" => $key,
-                            "label" => trans("cms::config.{$item}")
+                            'type' => 'text',
+                            'name' => $key,
+                            'label' => trans("cms::config.{$item}")
                         ]
                     ];
                 }
+
+                $item['name'] = $key;
+                $item['type'] = $item['type'] ?? 'text';
 
                 return [
                     $key => $item

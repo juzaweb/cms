@@ -40,15 +40,12 @@
                         <div class="card-body">
                             @foreach($configs as $key => $config)
                                 @php
-                                    $config['data'] = $config;
                                     if ($config['type'] == 'checkbox') {
                                         $config['data']['value'] = $config['data']['value'] ?? 1;
-                                        $config['data']['checked'] = get_config($key, $config['data']['default'] ?? null) == ($config['data']['value'] ?? '');
+                                        $config['data']['checked'] = get_config($key, $config['data']['default'] ?? null) == ($config['data']['value'] ?? null);
                                     } else {
                                         $config['data']['value'] = get_config($key);
                                     }
-
-                                    $config['name'] = $key;
                                 @endphp
 
                                 {{ Field::fieldByType($config) }}
