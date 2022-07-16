@@ -191,8 +191,6 @@ class Field
 
         $options['id'] = Str::slug($options['id']);
 
-        $options['value'] = $options['value'] ?? $options['default'] ?? null;
-
         if ($label instanceof Model) {
             $options['value'] = Arr::get(
                 $options,
@@ -200,6 +198,8 @@ class Field
                 $label->getAttribute($name)
             );
             $options['label'] = $options['label'] ?? $label->attributeLabel($name);
+        } else {
+            $options['value'] = $options['value'] ?? $options['default'] ?? null;
         }
 
         if (is_string($label)) {

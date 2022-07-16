@@ -233,6 +233,10 @@ abstract class UpdateManager
             }
 
             if (is_file($sourcePath)) {
+                if (!File::isDirectory(dirname($targetPath))) {
+                    File::makeDirectory(dirname($targetPath), 0775, true);
+                }
+
                 File::copy($sourcePath, $targetPath);
             }
         }
