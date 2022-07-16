@@ -21,7 +21,7 @@
                 @endif
             @else
                 <form action="{{ route('admin.setting.save') }}" method="post" class="form-ajax">
-                    <input type="hidden" name="form" value="{{ $form }}">
+                    <input type="hidden" name="form" value="{{ $component }}">
 
                     <div class="card">
                         @if($forms[$component]['header'] ?? true)
@@ -50,6 +50,8 @@
 
                                 {{ Field::fieldByType($config) }}
                             @endforeach
+
+                            @do_action("setting_form_{$component}")
                         </div>
 
                         @if($forms[$component]['footer'] ?? true)

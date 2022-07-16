@@ -20,7 +20,7 @@
     ]
 @endphp
 <form action="{{ route('admin.setting.save') }}" method="post" class="form-ajax">
-    <input type="hidden" name="form" value="{{ $form }}">
+    <input type="hidden" name="form" value="{{ $component }}">
 
 <div class="card">
 
