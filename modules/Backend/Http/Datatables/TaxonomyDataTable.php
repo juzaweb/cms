@@ -11,6 +11,7 @@
 namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\Backend\Models\Taxonomy;
@@ -31,25 +32,40 @@ class TaxonomyDataTable extends DataTable
      */
     public function columns()
     {
-        return [
+        $columns = [
             'name' => [
                 'label' => trans('cms::app.name'),
                 'formatter' => [$this, 'rowActionsFormatter'],
-            ],
-            'total_post' => [
-                'label' => trans('cms::app.total_posts'),
-                'width' => '15%',
-                'align' => 'center',
-            ],
-            'created_at' => [
-                'label' => trans('cms::app.created_at'),
-                'width' => '15%',
+            ]
+        ];
+
+        if (in_array('hierarchical', Arr::get($this->taxonomy, 'supports', []))) {
+            $columns['parent'] = [
+                'label' => trans('cms::app.parent'),
+                'width' => '20%',
                 'align' => 'center',
                 'formatter' => function ($value, $row, $index) {
-                    return jw_date_format($row->created_at);
-                },
-            ],
+                    return $row->parent->name ?? '__';
+                }
+            ];
+        }
+
+        $columns['total_post'] = [
+            'label' => trans('cms::app.total_posts'),
+            'width' => '15%',
+            'align' => 'center',
         ];
+
+        $columns['created_at'] = [
+            'label' => trans('cms::app.created_at'),
+            'width' => '15%',
+            'align' => 'center',
+            'formatter' => function ($value, $row, $index) {
+                return jw_date_format($row->created_at);
+            },
+        ];
+
+        return $columns;
     }
 
     /**
@@ -63,7 +79,7 @@ class TaxonomyDataTable extends DataTable
         /**
          * @var Builder $query
          */
-        $query = $this->makeModel()->query();
+        $query = $this->makeModel()->query()->with('parent');
         $data['post_type'] = $this->taxonomy['post_type'];
         $data['taxonomy'] = $this->taxonomy['taxonomy'];
 
