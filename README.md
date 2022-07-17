@@ -64,9 +64,9 @@ Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
 - [x] **Network (multisite) support**
 - [x] Backup setting
 - [x] Seo setting
-    - Sitemap
-    - seo content
-    - feed
+  - Sitemap
+  - SEO content
+  - Feed
 - [x] Social login
   - [x] Google
   - [x] Facebook

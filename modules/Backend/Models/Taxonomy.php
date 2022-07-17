@@ -56,7 +56,7 @@ class Taxonomy extends Model
 
     protected $table = 'taxonomies';
 
-    protected $slugSource = 'name';
+    protected string $slugSource = 'name';
 
     protected $fillable = [
         'name',
