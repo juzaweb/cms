@@ -10,7 +10,7 @@
                     </button>
                     <div class="dropdown-menu bulk-actions-actions" role="menu" x-placement="bottom-start">
                         @foreach($actions as $key => $action)
-                            <a class="dropdown-item select-action action-{{$key}} @if($key == 'delete') text-danger @endif" href="javascript: void(0)" data-action="{{ $key }}">{{ is_array($action) ? $action['label'] : $action }}</a>
+                            <a class="dropdown-item select-action action-{{$key}} @if($key == 'delete') text-danger @endif" href="javascript:void(0)" data-action="{{ $key }}">{{ is_array($action) ? $action['label'] : $action }}</a>
                         @endforeach
                     </div>
                 </div>
