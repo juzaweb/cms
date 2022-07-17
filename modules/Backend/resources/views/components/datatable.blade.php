@@ -4,14 +4,23 @@
             <form method="post" class="form-inline">
                 @csrf
 
-                <select name="bulk_actions" class="form-control select2-default" data-width="120px">
+                <div class="dropdown d-inline-block mb-2 mr-2">
+                    <button type="button" class="btn btn-primary dropdown-toggle bulk-actions-button" data-toggle="dropdown" aria-expanded="false">
+                        {{ trans('cms::app.bulk_actions') }}
+                    </button>
+                    <div class="dropdown-menu bulk-actions-actions" role="menu" x-placement="bottom-start">
+                        @foreach($actions as $key => $action)
+                            <a class="dropdown-item select-action action-{{$key}} @if($key == 'delete') text-danger @endif" href="javascript: void(0)" data-action="{{ $key }}">{{ is_array($action) ? $action['label'] : $action }}</a>
+                        @endforeach
+                    </div>
+                </div>
+
+                {{--<select name="bulk_actions" class="form-control select2-default" data-width="120px">
                     <option value="">{{ trans('cms::app.bulk_actions') }}</option>
                     @foreach($actions as $key => $action)
                         <option value="{{ $key }}">{{ is_array($action) ? $action['label'] : $action }}</option>
                     @endforeach
-                </select>
-
-                <button type="submit" class="btn btn-primary px-3" id="apply-action">{{ trans('cms::app.apply') }}</button>
+                </select>--}}
             </form>
         </div>
     @endif

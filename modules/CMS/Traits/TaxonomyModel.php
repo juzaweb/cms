@@ -20,26 +20,28 @@ trait TaxonomyModel
     use UseThumbnail;
     use ResourceModel;
 
-    public static function bootTaxonomyModel()
+    public static function bootTaxonomyModel(): void
     {
-        static::saving(function ($model) {
-            $model->setAttribute('level', $model->getLevel());
-        });
+        static::saving(
+            function ($model) {
+                $model->setAttribute('level', $model->getLevel());
+            }
+        );
     }
 
-    public function parent()
+    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
-    public function children()
+    public function children(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
     public function posts($postType = null)
     {
-        $postType = $postType ? $postType : $this->getPostType('key');
+        $postType = $postType ?: $this->getPostType('key');
         $postModel = $this->getPostType('model');
 
         return $this->belongsToMany($postModel, 'term_taxonomies', 'taxonomy_id', 'term_id')
@@ -64,10 +66,12 @@ trait TaxonomyModel
         }
 
         if ($keyword = Arr::get($params, 'keyword')) {
-            $builder->where(function (Builder $q) use ($keyword) {
-                $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
-                $q->orWhere('description', JW_SQL_LIKE, '%'. $keyword .'%');
-            });
+            $builder->where(
+                function (Builder $q) use ($keyword) {
+                    $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
+                    $q->orWhere('description', JW_SQL_LIKE, '%'. $keyword .'%');
+                }
+            );
         }
 
         return $builder;
@@ -113,7 +117,7 @@ trait TaxonomyModel
         return $this->name;
     }
 
-    public function getLevel()
+    public function getLevel(): int
     {
         $level = 0;
         recursive_level_model($level, $this);

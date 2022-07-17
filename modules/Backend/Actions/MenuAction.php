@@ -12,6 +12,7 @@ namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\ThemeLoader;
@@ -360,7 +361,7 @@ class MenuAction extends Action
         $types = HookAction::getPostTypes();
         foreach ($types as $key => $type) {
             add_action(
-                'post_type.'.$key.'.form.right',
+                "post_type.{$key}.form.right",
                 function ($model) use ($key) {
                     echo view(
                         'cms::components.taxonomies',

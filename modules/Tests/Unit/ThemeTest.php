@@ -10,6 +10,8 @@
 
 namespace Juzaweb\Tests\Unit;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Juzaweb\CMS\Support\Theme;
 use Juzaweb\Tests\TestCase;
 
@@ -36,12 +38,26 @@ class ThemeTest extends TestCase
 
     public function testDelete()
     {
-        $theme = app('themes')->find('gamxo');
+        $themeName = 'gamxo';
+
+        $theme = app('themes')->find($themeName);
+
+        $themePath = config('juzaweb.theme.path') . "/{$themeName}";
+
+        $destination = Storage::disk('local')->path("backups/{$themeName}");
+
+        File::copyDirectory($themePath, $destination);
 
         $theme->delete();
 
         $this->assertDirectoryDoesNotExist(
-            config('juzaweb.theme.path') . "/gamxo"
+            $themePath
+        );
+
+        File::copyDirectory($destination, $themePath);
+
+        $this->assertDirectoryExists(
+            $themePath
         );
     }
 }
