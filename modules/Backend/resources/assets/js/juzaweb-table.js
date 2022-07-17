@@ -19,15 +19,18 @@ class JuzawebTable {
         this.method = (e.method) ? e.method : 'get';
         this.locale = (e.locale) ? e.locale : 'en-US';
         this.chunk_action = (e.chunk_action) ? e.chunk_action : false;
+        this.inputRow = "";
         this.init();
     }
 
     init() {
         let apply_button = $(this.apply_button);
         let btn_status = $(this.status_button);
+        let bulkActionButton = $('.bulk-actions-button');
 
         apply_button.prop('disabled', true);
         btn_status.prop('disabled', true);
+        bulkActionButton.prop('disabled', true);
 
         let table = $(this.table);
         let form_search = this.form_search;
@@ -68,6 +71,7 @@ class JuzawebTable {
         function action_button() {
             let tblSelection = !table.bootstrapTable('getSelections').length;
             apply_button.prop('disabled', tblSelection);
+            bulkActionButton.prop('disabled', tblSelection);
         }
 
         $(this.form_search).on('change', 'select, input', function (event) {
@@ -241,6 +245,161 @@ class JuzawebTable {
 
                                 table.bootstrapTable('refresh');
                                 $('select[name=bulk_actions]').val(null).trigger('change.select2');
+                                return false;
+                            } else {
+                                show_message(response);
+                                return false;
+                            }
+                        }
+                    });
+                }
+            }
+
+            return false;
+        });
+
+        $('.bulk-actions-actions').on('click', '.select-action', function () {
+            let btn = bulkActionButton;
+            let text = btn.html();
+            let action = $(this).data('action');
+            let form = $(this).closest('form');
+            let token = form.find('input[name=_token]').val();
+            let ids = $("input[name=btSelectItem]:checked").map(function(){return $(this).val();}).get();
+            bulkActionButton.dropdown('toggle');
+
+            if (!ids || !action) {
+                return false;
+            }
+
+            if (action == 'delete') {
+                confirm_message(remove_question, function (result) {
+                    if (!result) {
+                        return false;
+                    }
+
+                    btn.html(juzaweb.lang.please_wait);
+                    btn.prop("disabled", true);
+
+                    ajaxRequest(action_url, {
+                        'ids': ids,
+                        'action': action,
+                        '_token': token
+                    }, {
+                        callback: function (response) {
+                            btn.prop("disabled", false);
+                            btn.html(text);
+
+                            if (response.status === true) {
+                                show_message(response);
+
+                                if (response.data.window_redirect) {
+                                    window.location = response.data.window_redirect;
+                                    return false;
+                                }
+
+                                if (response.data.redirect) {
+                                    setTimeout(function () {
+                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                    }, 1000);
+                                    return false;
+                                }
+
+                                table.bootstrapTable('refresh');
+                                return false;
+                            } else {
+                                show_message(response);
+                                return false;
+                            }
+                        }
+                    });
+                });
+            } else {
+                btn.html(juzaweb.lang.please_wait);
+                btn.prop("disabled", true);
+
+                if (chunk_action) {
+                    let items = $("input[name=btSelectItem]:checked");
+                    setTimeout(function () {
+                        let response;
+                        process_each(items, function () {
+                            let id = $(this).val();
+                            $(this).hide();
+                            $(this).closest('label')
+                                .find('span')
+                                .html(`<i class="fa fa-spinner fa-spin"></i>`);
+
+                            response = ajaxRequest(action_url, {
+                                'ids': [id],
+                                'action': action,
+                                '_token': token
+                            }, {
+                                async: false,
+                                callback: function (response) {
+                                    return false;
+                                }
+                            });
+
+                            return response;
+                        }, 500, {
+                            completeCallback: function (response) {
+                                show_message(response);
+
+                                if (response.data.redirect) {
+                                    setTimeout(function () {
+                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                    }, 1000);
+                                    return false;
+                                }
+
+                                if (response.data.window_redirect) {
+                                    setTimeout(function () {
+                                        window.location = response.data.window_redirect;
+                                    }, 1000);
+                                    return false;
+                                }
+
+                                btn.prop("disabled", false);
+                                btn.html(text);
+
+                                table.bootstrapTable('refresh');
+                            }
+                        });
+
+                    }, 500);
+
+                } else {
+                    ajaxRequest(action_url, {
+                        'ids': ids,
+                        'action': action,
+                        '_token': token
+                    }, {
+                        callback: function (response) {
+                            if (response.status === true) {
+                                show_message(response);
+
+                                if (response.data.window_redirect) {
+                                    window.location = response.data.window_redirect;
+                                    return false;
+                                }
+
+                                if (response.data.redirect) {
+                                    setTimeout(function () {
+                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                    }, 1000);
+                                    return false;
+                                }
+
+                                if (response.data.window_redirect) {
+                                    setTimeout(function () {
+                                        window.location = response.data.window_redirect;
+                                    }, 1000);
+                                    return false;
+                                }
+
+                                btn.prop("disabled", false);
+                                btn.html(text);
+
+                                table.bootstrapTable('refresh');
                                 return false;
                             } else {
                                 show_message(response);

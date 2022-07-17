@@ -183,18 +183,14 @@ class PostTypeDataTable extends DataTable
          */
         $query = $this->makeModel()->with(['taxonomies']);
         $query->where('type', '=', $this->postType['key']);
-        $keyword = Arr::get($data, 'keyword');
+        $data['q'] = Arr::get($data, 'keyword');
+        $data['type'] = $this->postType['key'];
 
         if (empty($data['status'])) {
             $query->where('status', '!=', 'trash');
         }
 
-        $query->where(
-            function (Builder $q) use ($keyword) {
-                $q->where('title', JW_SQL_LIKE, "%{$keyword}%");
-                $q->orWhere('description', JW_SQL_LIKE, "%{$keyword}%");
-            }
-        );
+        $query->whereFilter($data);
 
         return $query;
     }
