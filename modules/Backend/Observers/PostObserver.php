@@ -10,13 +10,17 @@
 
 namespace Juzaweb\Backend\Observers;
 
+use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Models\Post;
 use Illuminate\Support\Facades\Cache;
 
 class PostObserver
 {
-    public function deleting(Post $post)
+    public function deleting(Post $post): void
     {
+        $post->taxonomies()
+            ->update(['total_post' => DB::raw('total_post - 1')]);
+
         $menuItems = $post->menuItems()->get(['menu_id']);
         $menus = $menuItems->map(
             function ($item) {
