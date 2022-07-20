@@ -12,15 +12,16 @@ namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Facades\HookAction;
 
 class PostTypeDataTable extends DataTable
 {
-    protected $postType;
+    protected array $postType;
 
-    protected $resourses;
+    protected ?Collection $resourses = null;
 
     public function mount($postType)
     {

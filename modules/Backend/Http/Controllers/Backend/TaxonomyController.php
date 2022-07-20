@@ -155,7 +155,7 @@ class TaxonomyController extends BackendController
         $this->authorize($ability, $arguments);
     }
 
-    protected function getPermission($ability, $arguments = [], ...$params)
+    protected function hasPermission($ability, $arguments = [], ...$params)
     {
         if (!is_array($arguments)) {
             $arguments = [$arguments];
