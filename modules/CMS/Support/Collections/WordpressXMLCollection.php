@@ -22,7 +22,7 @@ class WordpressXMLCollection implements XMLCollectionInterface
         foreach ($data->channel->item as $item) {
             $result[] = $this->collectItemData($item);
         }
-        dd($result);
+
         return collect($result);
     }
 

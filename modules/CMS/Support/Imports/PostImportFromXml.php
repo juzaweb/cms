@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Support\Imports;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Juzaweb\CMS\Support\Collections\BloggerXMLCollection;
@@ -38,6 +39,7 @@ class PostImportFromXml
         $this->type = $type;
 
         $data = $this->getCacheInfo();
+
         $collection = $this->collection();
 
         if (empty($data)) {
@@ -93,21 +95,22 @@ class PostImportFromXml
             $item = (array) $item;
             DB::beginTransaction();
             try {
-                if ($item['thumbnail'] && is_url($item['thumbnail'])) {
+                $thumbnail = Arr::get($item, 'thumbnail');
+
+                if (is_url($thumbnail)) {
                     $thumb = FileManager::addFile(
-                        $item['thumbnail'],
+                        $thumbnail,
                         'image',
                         null,
                         $this->userId
                     );
-                    $item['thumbnail'] = $thumb->path;
-                } else {
-                    $item['thumbnail'] = null;
+                    $thumbnail = $thumb->path;
                 }
 
                 $item['status'] = $this->postStatus;
                 $item['created_by'] = $this->userId;
                 $item['updated_by'] = $this->userId;
+                $item['thumbnail'] = $thumbnail;
 
                 $model = new Post();
                 $model->fill($item);
@@ -121,8 +124,8 @@ class PostImportFromXml
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();
-                report($e);
                 $this->errors[] = $e->getMessage();
+                report($e);
             }
         }
     }
@@ -132,9 +135,13 @@ class PostImportFromXml
         $taxonomies = [];
 
         foreach ($categories as $category) {
+            if (!is_array($category)) {
+                $category = ['name' => $category];
+            }
+
             $taxonomy = Taxonomy::firstOrCreate(
                 [
-                    'name' => $category,
+                    'name' => $category['name'],
                     'taxonomy' => 'categories',
                     'post_type' => 'posts'
                 ]
