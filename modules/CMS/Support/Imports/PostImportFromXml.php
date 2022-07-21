@@ -2,13 +2,15 @@
 
 namespace Juzaweb\CMS\Support\Imports;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\CMS\Support\Collections\BloggerCollection;
+use Juzaweb\CMS\Support\Collections\BloggerXMLCollection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Support\Collections\WordpressXMLCollection;
 use Juzaweb\CMS\Support\FileManager;
 
 class PostImportFromXml
@@ -16,6 +18,8 @@ class PostImportFromXml
     protected string $file;
 
     protected string $type;
+
+    protected string $postStatus = 'publish';
 
     protected int $chunkSize = 50;
 
@@ -35,6 +39,7 @@ class PostImportFromXml
         $this->type = $type;
 
         $data = $this->getCacheInfo();
+
         $collection = $this->collection();
 
         if (empty($data)) {
@@ -67,9 +72,21 @@ class PostImportFromXml
         return $this;
     }
 
+    public function setPostStatus(string $postStatus): static
+    {
+        $this->postStatus = $postStatus;
+
+        return $this;
+    }
+
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    public function getCacheInfo($default = null): ?array
+    {
+        return Cache::store('file')->get($this->getCacheKey(), $default);
     }
 
     protected function importItems($items): void
@@ -78,22 +95,22 @@ class PostImportFromXml
             $item = (array) $item;
             DB::beginTransaction();
             try {
-                if ($item['thumbnail'] && is_url($item['thumbnail'])) {
+                $thumbnail = Arr::get($item, 'thumbnail');
+
+                if (is_url($thumbnail)) {
                     $thumb = FileManager::addFile(
-                        $item['thumbnail'],
+                        $thumbnail,
                         'image',
                         null,
                         $this->userId
                     );
-                    $item['thumbnail'] = $thumb->path;
-                } else {
-                    $item['thumbnail'] = null;
+                    $thumbnail = $thumb->path;
                 }
 
-                $item['type'] = 'posts';
-                $item['status'] = 'publish';
+                $item['status'] = $this->postStatus;
                 $item['created_by'] = $this->userId;
                 $item['updated_by'] = $this->userId;
+                $item['thumbnail'] = $thumbnail;
 
                 $model = new Post();
                 $model->fill($item);
@@ -107,8 +124,8 @@ class PostImportFromXml
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();
-                report($e);
                 $this->errors[] = $e->getMessage();
+                report($e);
             }
         }
     }
@@ -118,9 +135,13 @@ class PostImportFromXml
         $taxonomies = [];
 
         foreach ($categories as $category) {
+            if (!is_array($category)) {
+                $category = ['name' => $category];
+            }
+
             $taxonomy = Taxonomy::firstOrCreate(
                 [
-                    'name' => $category,
+                    'name' => $category['name'],
                     'taxonomy' => 'categories',
                     'post_type' => 'posts'
                 ]
@@ -143,15 +164,11 @@ class PostImportFromXml
         return $info;
     }
 
-    public function getCacheInfo($default = null): ?array
-    {
-        return Cache::store('file')->get($this->getCacheKey(), $default);
-    }
-
     protected function collection(): bool|Collection
     {
         return match ($this->type) {
-            'blogger' => app(BloggerCollection::class)->getCollection($this->getFilePath()),
+            'blogger' => app(BloggerXMLCollection::class)->getCollection($this->getFilePath()),
+            'wordpress' => app(WordpressXMLCollection::class)->getCollection($this->getFilePath()),
             default => false,
         };
     }
