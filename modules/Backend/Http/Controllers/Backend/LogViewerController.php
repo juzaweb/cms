@@ -47,10 +47,12 @@ class LogViewerController extends BackendController
 
     public function show($date)
     {
-        $this->addBreadcrumb([
-            'title' => trans('cms::app.error_logs'),
-            'url' => action([static::class, 'index']),
-        ]);
+        $this->addBreadcrumb(
+            [
+                'title' => trans('cms::app.error_logs'),
+                'url' => action([static::class, 'index']),
+            ]
+        );
 
         $this->getLogOrFail($date);
         $title = trans('cms::app.error_logs').' '.$date;
@@ -70,16 +72,21 @@ class LogViewerController extends BackendController
         $rows = $this->paginate($stats->rows(), $request);
 
         foreach ($rows as $index => $row) {
-            $row['edit_url'] = route('admin.logs.error.date', [
-                $row['date'],
-            ]);
+            $row['edit_url'] = route(
+                'admin.logs.error.date',
+                [
+                    $row['date'],
+                ]
+            );
             $rows->put($index, $row);
         }
 
-        return response()->json([
-            'total' => count($stats->rows()),
-            'rows' => $rows->values(),
-        ]);
+        return response()->json(
+            [
+                'total' => count($stats->rows()),
+                'rows' => $rows->values(),
+            ]
+        );
     }
 
     public function listLogsDate(Request $request, $date)
@@ -88,10 +95,12 @@ class LogViewerController extends BackendController
         $log = $this->getLogOrFail($date);
         $entries = $log->entries($level)->paginate($this->perPage);
 
-        return response()->json([
-            'total' => $entries->total(),
-            'rows' => $entries->values(),
-        ]);
+        return response()->json(
+            [
+                'total' => $entries->total(),
+                'rows' => $entries->values(),
+            ]
+        );
     }
 
     /**
@@ -105,9 +114,11 @@ class LogViewerController extends BackendController
     {
         $date = $request->input('date');
 
-        return response()->json([
-            'result' => $this->logViewer->delete($date) ? 'success' : 'error',
-        ]);
+        return response()->json(
+            [
+                'result' => $this->logViewer->delete($date) ? 'success' : 'error',
+            ]
+        );
     }
 
     /**
