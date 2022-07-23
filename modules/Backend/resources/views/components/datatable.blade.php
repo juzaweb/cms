@@ -14,17 +14,13 @@
                         @endforeach
                     </div>
                 </div>
-
-                {{--<select name="bulk_actions" class="form-control select2-default" data-width="120px">
-                    <option value="">{{ trans('cms::app.bulk_actions') }}</option>
-                    @foreach($actions as $key => $action)
-                        <option value="{{ $key }}">{{ is_array($action) ? $action['label'] : $action }}</option>
-                    @endforeach
-                </select>--}}
             </form>
         </div>
     @endif
 
+    @php
+    $hasDetailFormater = collect($columns)->whereNotNull('detailFormater')->isNotEmpty();
+    @endphp
     <div class="col-md-8">
         <form method="get" class="form-inline" id="form-search">
             @foreach($searchFields as $name => $field)
@@ -44,7 +40,14 @@
 </div>
 
 <div class="table-responsive">
-    <table class="table jw-table" id="{{ $uniqueId }}">
+    <table
+        class="table jw-table"
+        id="{{ $uniqueId }}"
+        @if($hasDetailFormater)
+        data-detail-view="true"
+        data-detail-formatter="detailFormater"
+        @endif
+    >
         <thead>
             <tr>
                 <th data-width="3%" data-checkbox="true"></th>
@@ -54,6 +57,9 @@
                         data-align="{{ $column['align'] ?? 'left' }}"
                         data-field="{{ $key }}"
                         data-sortable="{{ $column['sortable'] ?? true }}"
+                        @if(in_array($key, $escapes))
+                            data-escape="true"
+                        @endif
                     >{{
                                 $column['label'] ?? strtoupper($key) }}
                     </th>
@@ -69,6 +75,13 @@
 @endphp
 
 <script type="text/javascript">
+    @if (!empty($hasDetailFormater))
+    function detailFormater(index, row)
+    {
+        return row.detailFormater;
+    }
+    @endif
+
     var table = new JuzawebTable({
         table: "#{{ $uniqueId }}",
         page_size: parseInt("{{ $perPage }}"),

@@ -218,6 +218,13 @@ trait ResourceController
                 } else {
                     $results[$index][$col] = $row->{$col};
                 }
+
+                if (!empty($column['detailFormater'])) {
+                    $results[$index]['detailFormater'] = $column['detailFormater'](
+                        $index,
+                        $row
+                    );
+                }
             }
         }
 

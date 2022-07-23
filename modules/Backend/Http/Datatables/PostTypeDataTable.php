@@ -37,17 +37,15 @@ class PostTypeDataTable extends DataTable
         }
     }
 
-    /**
-     * Columns datatable
-     *
-     * @return array
-     */
     public function columns(): array
     {
         $columns = [
             'title' => [
                 'label' => trans('cms::app.title'),
                 'formatter' => [$this, 'rowActionsFormatter'],
+                'detailFormater' => function ($index, $row) {
+                    return $this->titleDetailFormater($index, $row);
+                }
             ]
         ];
 
@@ -176,22 +174,18 @@ class PostTypeDataTable extends DataTable
     {
         $data = parent::rowAction($row);
 
-        $data['view'] = [
-            'label' => trans('cms::app.view'),
-            'url' => $row->getLink(),
-            'target' => '_blank',
-        ];
+        if (in_array($row->status, ['publish', 'private'])) {
+            $data['view'] = [
+                'label' => trans('cms::app.view'),
+                'url' => $row->getLink(),
+                'target' => '_blank',
+            ];
+        }
 
         return $data;
     }
 
-    /**
-     * Query data datatable
-     *
-     * @param array $data
-     * @return Builder
-     */
-    public function query($data)
+    public function query($data): Builder
     {
         /**
          * @var Builder $query
@@ -210,7 +204,7 @@ class PostTypeDataTable extends DataTable
         return $query;
     }
 
-    public function rowActionsFormatter($value, $row, $index)
+    public function rowActionsFormatter($value, $row, $index): string
     {
         return view(
             'cms::backend.items.datatable_item',
@@ -222,6 +216,14 @@ class PostTypeDataTable extends DataTable
             ]
         )
             ->render();
+    }
+
+    public function titleDetailFormater($index, $row): string
+    {
+        return view(
+            'cms::backend.items.quick_edit',
+            compact('index', 'row')
+        )->render();
     }
 
     protected function makeModel()
