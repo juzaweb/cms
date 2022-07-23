@@ -11,17 +11,45 @@
                 'options' => $row->getStatuses()
             ]) }}
         </div>
-    </div>
 
-    <div class="row">
-
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <br>
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-save"></i> {{ trans('cms::app.save') }}
             </button>
         </div>
+    </div>
+
+    <div class="row">
+        @foreach($postTypeTaxonomies as $key => $taxonomy)
+            <div class="col-md-6">
+                <div class="form-group form-taxonomy">
+                    <label class="col-form-label w-100">
+                        {{ $taxonomy->get('label') }}
+                    </label>
+
+                    @php
+                        $value = $row->taxonomies
+                            ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
+                            ->pluck('id')
+                            ->toArray();
+                        $items = $taxonomies->where('taxonomy', '=', $taxonomy->get('taxonomy'));
+                    @endphp
+
+                    <div class="show-taxonomies taxonomy-{{ $taxonomy->get('taxonomy') }}">
+                        <ul class="mt-2 p-0">
+                            @foreach($items as $item)
+                                @component('cms::components.form.taxonomy_item', [
+                                    'taxonomy' => $taxonomy,
+                                    'item' => $item,
+                                    'value' => $value
+                                ])
+                                @endcomponent
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 </form>

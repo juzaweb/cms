@@ -43,8 +43,8 @@ class PostTypeDataTable extends DataTable
             'title' => [
                 'label' => trans('cms::app.title'),
                 'formatter' => [$this, 'rowActionsFormatter'],
-                'detailFormater' => function ($index, $row) {
-                    return $this->titleDetailFormater($index, $row);
+                'detailFormater' => function ($index, $row, $taxonomies, $postTypeTaxonomies) {
+                    return $this->titleDetailFormater($index, $row, $taxonomies, $postTypeTaxonomies);
                 }
             ]
         ];
@@ -56,15 +56,18 @@ class PostTypeDataTable extends DataTable
                 'label' => $taxonomy->get('label'),
                 'width' => '15%',
                 'sortable' => false,
-                'formatter' => function ($value, $row, $index) {
-                    return $row->taxonomies->pluck('name')->join(', ');
+                'formatter' => function ($value, $row, $index) use ($key) {
+                    return $row->taxonomies
+                        ->where('taxonomy', '=', $key)
+                        ->pluck('name')
+                        ->join(', ');
                 }
             ];
         }
 
         $columns['created_at'] = [
             'label' => trans('cms::app.created_at'),
-            'width' => '15%',
+            'width' => '10%',
             'formatter' => function ($value, $row, $index) {
                 return jw_date_format($row->created_at);
             },
@@ -218,11 +221,11 @@ class PostTypeDataTable extends DataTable
             ->render();
     }
 
-    public function titleDetailFormater($index, $row): string
+    public function titleDetailFormater($index, $row, $taxonomies, $postTypeTaxonomies): string
     {
         return view(
             'cms::backend.items.quick_edit',
-            compact('index', 'row')
+            compact('index', 'row', 'taxonomies', 'postTypeTaxonomies')
         )->render();
     }
 

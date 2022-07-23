@@ -418,16 +418,9 @@ trait ResourceController
 
     protected function updateSuccessResponse($model, $request, ...$params)
     {
-        $editRoute = str_replace(
-            '.update',
-            '.edit',
-            Route::currentRouteName()
-        );
-
         return $this->success(
             [
                 'message' => trans('cms::app.updated_successfully'),
-                'redirect' => route($editRoute, $params),
             ]
         );
     }

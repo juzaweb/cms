@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 use Juzaweb\Backend\Events\AfterPostSave;
 use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 
@@ -29,9 +31,70 @@ trait PostTypeController
         ResourceController::getDataForForm as DataForForm;
     }
 
-    /**
-     * @return string
-     */
+    public function datatable(Request $request, ...$params)
+    {
+        $this->checkPermission(
+            'index',
+            $this->getModel(...$params),
+            ...$params
+        );
+
+        $table = $this->getDataTable(...$params);
+        $table->setCurrentUrl(action([static::class, 'index'], $params, false));
+
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'desc');
+        $offset = $request->get('offset', 0);
+        $limit = (int) $request->get('limit', 20);
+
+        $query = $table->query($request->all());
+        $count = $query->count();
+        $query->orderBy($sort, $order);
+        $query->offset($offset);
+        $query->limit($limit);
+        $rows = $query->get();
+
+        $results = [];
+        $columns = $table->columns();
+
+        $postType = $this->getPostType();
+        $taxonomies = Taxonomy::where('post_type', '=', $postType)
+            ->whereNull('parent_id')
+            ->get();
+        $postTypeTaxonomies = HookAction::getTaxonomies($postType);
+
+        foreach ($rows as $index => $row) {
+            $columns['id'] = $row->id;
+            foreach ($columns as $col => $column) {
+                if (! empty($column['formatter'])) {
+                    $results[$index][$col] = $column['formatter'](
+                        $row->{$col} ?? null,
+                        $row,
+                        $index
+                    );
+                } else {
+                    $results[$index][$col] = $row->{$col};
+                }
+
+                if (!empty($column['detailFormater'])) {
+                    $results[$index]['detailFormater'] = $column['detailFormater'](
+                        $index,
+                        $row,
+                        $taxonomies,
+                        $postTypeTaxonomies
+                    );
+                }
+            }
+        }
+
+        return response()->json(
+            [
+                'total' => $count,
+                'rows' => $results,
+            ]
+        );
+    }
+
     protected function getModel(...$params)
     {
         return Post::class;
