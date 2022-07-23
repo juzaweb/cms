@@ -37,38 +37,54 @@ class PostTypeDataTable extends DataTable
         }
     }
 
-    /**
-     * Columns datatable
-     *
-     * @return array
-     */
-    public function columns()
+    public function columns(): array
     {
         $columns = [
             'title' => [
                 'label' => trans('cms::app.title'),
                 'formatter' => [$this, 'rowActionsFormatter'],
-            ],
-            'created_at' => [
-                'label' => trans('cms::app.created_at'),
+                'detailFormater' => function ($index, $row, $taxonomies, $postTypeTaxonomies) {
+                    return $this->titleDetailFormater($index, $row, $taxonomies, $postTypeTaxonomies);
+                }
+            ]
+        ];
+
+        $taxonomies = HookAction::getTaxonomies($this->postType);
+
+        foreach ($taxonomies as $key => $taxonomy) {
+            $columns[$key] = [
+                'label' => $taxonomy->get('label'),
                 'width' => '15%',
-                'formatter' => function ($value, $row, $index) {
-                    return jw_date_format($row->created_at);
-                },
-            ],
-            'status' => [
-                'label' => trans('cms::app.status'),
-                'width' => '10%',
-                'align' => 'center',
-                'formatter' => function ($value, $row, $index) {
-                    return view(
-                        'cms::components.datatable.status',
-                        compact(
-                            'row'
-                        )
-                    )->render();
-                },
-            ],
+                'sortable' => false,
+                'formatter' => function ($value, $row, $index) use ($key) {
+                    return $row->taxonomies
+                        ->where('taxonomy', '=', $key)
+                        ->pluck('name')
+                        ->join(', ');
+                }
+            ];
+        }
+
+        $columns['created_at'] = [
+            'label' => trans('cms::app.created_at'),
+            'width' => '10%',
+            'formatter' => function ($value, $row, $index) {
+                return jw_date_format($row->created_at);
+            },
+        ];
+
+        $columns['status'] = [
+            'label' => trans('cms::app.status'),
+            'width' => '10%',
+            'align' => 'center',
+            'formatter' => function ($value, $row, $index) {
+                return view(
+                    'cms::components.datatable.status',
+                    compact(
+                        'row'
+                    )
+                )->render();
+            },
         ];
 
         if ($this->resourses) {
@@ -92,14 +108,13 @@ class PostTypeDataTable extends DataTable
         return $columns;
     }
 
-    public function actions()
+    public function actions(): array
     {
-        return array_merge(
-            $this->makeModel()->getStatuses(),
-            [
-                'delete' => trans('cms::app.delete'),
-            ]
-        );
+        $statuses = $this->makeModel()->getStatuses();
+
+        $statuses['delete'] = trans('cms::app.delete');
+
+        return $statuses;
     }
 
     public function bulkActions($action, $ids)
@@ -130,7 +145,7 @@ class PostTypeDataTable extends DataTable
         }
     }
 
-    public function searchFields()
+    public function searchFields(): array
     {
         $data = [
             'keyword' => [
@@ -158,26 +173,22 @@ class PostTypeDataTable extends DataTable
         return $data;
     }
 
-    public function rowAction($row)
+    public function rowAction($row): array
     {
         $data = parent::rowAction($row);
 
-        $data['view'] = [
-            'label' => trans('cms::app.view'),
-            'url' => $row->getLink(),
-            'target' => '_blank',
-        ];
+        if (in_array($row->status, ['publish', 'private'])) {
+            $data['view'] = [
+                'label' => trans('cms::app.view'),
+                'url' => $row->getLink(),
+                'target' => '_blank',
+            ];
+        }
 
         return $data;
     }
 
-    /**
-     * Query data datatable
-     *
-     * @param array $data
-     * @return Builder
-     */
-    public function query($data)
+    public function query($data): Builder
     {
         /**
          * @var Builder $query
@@ -196,7 +207,7 @@ class PostTypeDataTable extends DataTable
         return $query;
     }
 
-    public function rowActionsFormatter($value, $row, $index)
+    public function rowActionsFormatter($value, $row, $index): string
     {
         return view(
             'cms::backend.items.datatable_item',
@@ -208,6 +219,14 @@ class PostTypeDataTable extends DataTable
             ]
         )
             ->render();
+    }
+
+    public function titleDetailFormater($index, $row, $taxonomies, $postTypeTaxonomies): string
+    {
+        return view(
+            'cms::backend.items.quick_edit',
+            compact('index', 'row', 'taxonomies', 'postTypeTaxonomies')
+        )->render();
     }
 
     protected function makeModel()

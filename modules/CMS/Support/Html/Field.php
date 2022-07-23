@@ -116,68 +116,59 @@ class Field
     public static function fieldByType($data)
     {
         $type = Arr::get($data, 'type');
-        switch ($type) {
-            case 'text':
-                return static::text(
-                    $data['label'],
-                    $data['name'],
-                    Arr::get($data, 'data', [])
-                );
-            case 'editor':
-                return static::editor(
-                    $data['label'],
-                    $data['name'],
-                    Arr::get($data, 'data', [])
-                );
-            case 'textarea':
-                return static::textarea(
-                    $data['label'],
-                    $data['name'],
-                    Arr::get($data, 'data', [])
-                );
-            case 'select':
-                return static::select(
-                    $data['label'],
-                    $data['name'],
-                    Arr::get($data, 'data', [])
-                );
-            case 'taxonomy':
-                return static::selectTaxonomy(
-                    $data['label'],
-                    ($input['data']['multiple'] ?? false) ?
-                            "{$data['name']}[]"
-                                : $data['name'],
-                    Arr::get($data, 'data', [])
-                );
-            case 'resource':
-                return static::selectResource(
-                    $data['label'],
-                    ($input['data']['multiple'] ?? false) ?
-                        "{$data['name']}[]"
-                        : $data['name'],
-                    Arr::get($data, 'data', [])
-                );
-            case 'image':
-                return static::image(
-                    $data['label'],
-                    $data['name'],
-                    Arr::get($data, 'data', [])
-                );
-            case 'images':
-                return static::images(
-                    $data['label'],
-                    $data['name'],
-                    Arr::get($data, 'data', [])
-                );
-            case 'checkbox':
-                return static::checkbox(
-                    $data['label'],
-                    $data['name'],
-                    Arr::get($data, 'data', [])
-                );
-        }
 
-        return '';
+        return match ($type) {
+            'text' => static::text(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'editor' => static::editor(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'textarea' => static::textarea(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'select' => static::select(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'taxonomy' => static::selectTaxonomy(
+                $data['label'],
+                ($input['data']['multiple'] ?? false) ?
+                    "{$data['name']}[]"
+                    : $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'resource' => static::selectResource(
+                $data['label'],
+                ($input['data']['multiple'] ?? false) ?
+                    "{$data['name']}[]"
+                    : $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'image' => static::image(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'images' => static::images(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'checkbox' => static::checkbox(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            default => '',
+        };
     }
 
     public static function mapOptions($label, $name, $options = [])
