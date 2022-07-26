@@ -34,7 +34,9 @@ class PostController extends FrontendController
         $permalink = $this->getPermalinks($base);
         $postType = HookAction::getPostTypes($permalink->get('post_type'));
         $posts = $postType->get('model')::selectFrontendBuilder()
-            ->paginate(10);
+            ->paginate(get_config('posts_per_page', 12));
+
+        $posts->appends(request()->query());
 
         $page = PostResource::collection($posts)
             ->response()
@@ -87,7 +89,7 @@ class PostController extends FrontendController
             ->getData(true);
 
         $data = apply_filters(
-            "frontend.post_type.{$postType->get('key')}.detail.data",
+            "frontend.post_type.detail.data",
             compact(
                 'title',
                 'post',
@@ -98,13 +100,19 @@ class PostController extends FrontendController
             $postModel
         );
 
+        $data = apply_filters(
+            "frontend.post_type.{$postType->get('key')}.detail.data",
+            $data,
+            $postModel
+        );
+
         return $this->view(
             'theme::template-parts.' . $template,
             $data
         );
     }
 
-    public function comment(Request $request, $slug)
+    public function comment(Request $request, $slug): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
         if (Auth::check()) {
             $this->validate(

@@ -25,6 +25,8 @@ class ThemeAction extends Action
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->currentTheme = jw_current_theme();
         $this->register = ThemeLoader::getRegister($this->currentTheme);
     }
@@ -242,7 +244,6 @@ class ThemeAction extends Action
             'index',
             [
                 'title' => trans('cms::app.profile'),
-                'url' => route('profile'),
             ]
         );
 
@@ -250,7 +251,6 @@ class ThemeAction extends Action
             'change_password',
             [
                 'title' => trans('cms::app.change_password'),
-                'url' => route('profile.change_password'),
             ]
         );
     }

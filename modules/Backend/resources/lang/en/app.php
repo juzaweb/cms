@@ -101,6 +101,7 @@ return [
     'auto' => 'Auto',
     'registration' => 'Registration',
     'general' => 'General',
+    'download' => 'Download',
     'user_registration' => 'User Registration',
     'google_recaptcha' => 'Recaptcha',
     'google_recaptcha_key' => 'Recaptcha key',

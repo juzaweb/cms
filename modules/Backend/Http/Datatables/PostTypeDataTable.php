@@ -23,6 +23,8 @@ class PostTypeDataTable extends DataTable
 
     protected ?Collection $resourses = null;
 
+    protected ?Collection $taxonomies = null;
+
     public function mount($postType)
     {
         if (is_string($postType)) {
@@ -30,6 +32,8 @@ class PostTypeDataTable extends DataTable
         }
 
         $this->postType = $postType;
+        $this->taxonomies = HookAction::getTaxonomies($this->postType);
+
         $resourses = HookAction::getResource()
             ->where('post_type', $postType['key']);
         if ($resourses->isNotEmpty()) {
@@ -49,7 +53,7 @@ class PostTypeDataTable extends DataTable
             ]
         ];
 
-        $taxonomies = HookAction::getTaxonomies($this->postType);
+        $taxonomies = $this->taxonomies->take(3);
 
         foreach ($taxonomies as $key => $taxonomy) {
             $columns[$key] = [

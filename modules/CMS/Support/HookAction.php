@@ -1,8 +1,8 @@
 <?php
 /**
  * @package    juzaweb/juzacms
- * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @author     JuzaWeb Team
+ * @link       https://juzaweb.com
  * @license    GNU V2
  */
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package    juzaweb/juzacms
+ * @author     JuzaWeb Team
+ * @link       https://juzaweb.com
+ * @license    GNU V2
+ */
 
 namespace Juzaweb\CMS\Traits\HookAction;
 
@@ -493,9 +499,16 @@ trait RegisterHookAction
 
     public function registerProfilePage(string $key, array $args = []): void
     {
+        $slug = str_replace(['_'], ['-'], $key);
+
         $default = [
             'title' => '',
-            'url' => $key,
+            'key' => $key,
+            'slug' => $slug,
+            'url' => route(
+                'profile',
+                $key == 'index' ? null : '/'. $slug
+            ),
         ];
 
         $args = array_merge($default, $args);
