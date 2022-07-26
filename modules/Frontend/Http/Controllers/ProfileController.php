@@ -4,6 +4,8 @@ namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Juzaweb\CMS\Facades\HookAction;
@@ -15,12 +17,22 @@ class ProfileController extends FrontendController
 {
     public function index($slug = null)
     {
-        $title = trans('cms::app.profile');
+        $pages = HookAction::getProfilePages()->toArray();
 
-        $pages = apply_filters(
-            'theme.profile.pages',
-            HookAction::getProfilePages()->toArray()
-        );
+        $page = $pages[$slug ?? 'index'];
+
+        if (empty($page)) {
+            abort(404);
+        }
+
+        $title = $page['title'];
+
+        if ($callback = Arr::get($page, 'callback')) {
+            return app()->call(
+                "{$callback[0]}@{$callback[1]}",
+                ['page' => $page]
+            );
+        }
 
         return $this->view(
             'theme::profile.index',
@@ -67,8 +79,12 @@ class ProfileController extends FrontendController
 
     public function notification()
     {
+        global $jw_user;
+
         $title = trans('cms::app.profile');
-        $user = Auth::user();
+
+        $user = $jw_user;
+
         $notifications = $user->notifications->toArray();
 
         return $this->view(

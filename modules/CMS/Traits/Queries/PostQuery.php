@@ -76,6 +76,7 @@ trait PostQuery
 
         if ($paginate) {
             $posts = $query->paginate($paginate);
+            $posts->appends(request()->query());
 
             return PostResource::collection($posts)
                 ->response()

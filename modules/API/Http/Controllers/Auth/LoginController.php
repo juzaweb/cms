@@ -79,16 +79,16 @@ class LoginController extends ApiController
     {
         $request->user()->currentAccessToken()->delete();
 
-        return $this->restSuccess([], 'Successfully logged out');
+        return $this->restSuccess([], 'Successfully logged out.');
     }
 
     protected function respondWithToken($token): JsonResponse
     {
         return $this->restSuccess(
             [
-                'access_token' => $token->plainTextToken,
+                'access_token' => $token->accessToken,
                 'token_type' => 'Bearer',
-                //'expires_in' => Auth::guard('api')->factory()->getTTL() * 60,
+                'expires_at' => $token->token->expires_at,
             ],
             'Successfully login.'
         );

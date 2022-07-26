@@ -23,7 +23,7 @@ Route::group(
         Route::post('change-password', [ProfileController::class, 'doChangePassword']);
         Route::put('/', [ProfileController::class, 'update'])
             ->name('profile.update');
-        Route::get('/', [ProfileController::class, 'index'])
+        Route::get('/{slug?}', [ProfileController::class, 'index'])
             ->name('profile');
     }
 );
