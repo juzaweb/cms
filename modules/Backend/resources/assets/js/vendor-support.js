@@ -8,11 +8,11 @@ function toastr_message(message, status, title = null) {
     }
 }
 
-function confirm_message(question, callback) {
+function confirm_message(question, callback, title = '', type = 'warning') {
     Swal.fire({
-        title: '',
+        title: title,
         text: question,
-        type: 'warning',
+        type: type,
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',

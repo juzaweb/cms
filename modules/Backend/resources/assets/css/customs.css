@@ -601,6 +601,28 @@ Form file management
     border-top-right-radius: 0;
 }
 
+.jw__utils__control__indicator {
+    border-radius: 0;
+    background: #d0d8e3;
+}
+
+.jw-table .jw__utils__control {
+    margin-bottom: 0;
+}
+
+.jw-table .jw__utils__control__indicator {
+    margin-right: 0;
+    margin-bottom: 0;
+    height: 15px;
+    width: 15px;
+}
+
+.jw-table .jw__utils__control__checkbox .jw__utils__control__indicator:after {
+    top: 1px;
+    left: 5px;
+    width: 6px;
+}
+
 @media (max-width: 767px) {
     .juzaweb__menuLeft {
         position: fixed;
