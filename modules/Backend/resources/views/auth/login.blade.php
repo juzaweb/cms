@@ -30,14 +30,14 @@
                             @do_action('login_form')
 
                             <div class="form-group mb-4">
-                                <input type="email" name="email" class="form-control" placeholder="@lang('cms::app.email_address')" />
+                                <input type="email" name="email" class="form-control" placeholder="@lang('cms::app.email_address')" required />
                             </div>
 
                             <div class="form-group mb-4">
-                                <input type="password" name="password" class="form-control" placeholder="@lang('cms::app.password')" />
+                                <input type="password" name="password" class="form-control" placeholder="@lang('cms::app.password')" required />
                             </div>
 
-                            <button type="submit" class="btn btn-primary text-center w-100 mb-2" data-loading-text="@lang('cms::app.please_wait')"><i class="fa fa-sign-in"></i> @lang('cms::app.login')</button>
+                            <button type="submit" class="btn btn-primary text-center w-100 mb-2" data-loading-text="@lang('cms::app.please_wait')"><i class="fa fa-sign-in"></i> {{ trans('cms::app.login') }}</button>
 
                             <input type="checkbox" name="remember" value="1" checked> @lang('cms::app.remember_me')
                         </form>
