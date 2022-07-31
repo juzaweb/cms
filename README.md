@@ -92,13 +92,11 @@ Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
 
 ## Plugins
 * [E-Commerce](https://github.com/juzaweb/ecommerce) (developing)
-* [Translation](https://github.com/juzaweb/translation)
 * [Notification](https://github.com/juzaweb/notification)
 * [Movie](https://github.com/juzaweb/movie)
 * [Image Slider](https://github.com/juzaweb/image-slider)
 * [Ads Manager](https://github.com/juzaweb/ads-manager)
 * [Demo Site](https://github.com/juzaweb/demo-site)
-* [Crawler](https://github.com/juzaweb/crawler) (developing)
 
 ## Theme
 ### Default

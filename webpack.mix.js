@@ -20,21 +20,21 @@ mix.options(
     }
 );
 
-require(`${modulePath}/mix.js`);
+//require(`${modulePath}/mix.js`);
 //require(`${modulePath}/filemanage.mix.js`);
 //require(`${pluginPath}/ecommerce/assets/mix.js`);
 //require(`${themePath}/gamxo/assets/mix.js`);
 
-/*mix.browserSync({
+mix.browserSync({
     files: [
-        'modules/!**!/!*',
-        'plugins/!**!/!*',
-        'themes/!**!/!*',
-        'config/!*',
-        'public/!**!/!*',
-        'resources/views/!**!/!*',
-        'resources/lang/!**!/!*',
-        'routes/!**!/!*'
+        'modules/**/*',
+        'plugins/**/*',
+        'themes/**/*',
+        'config/*',
+        'public/**/*',
+        'resources/views/**/*',
+        'resources/lang/**/*',
+        'routes/**/*'
     ],
     proxy: process.env.APP_URL,
     notify: false,
@@ -46,4 +46,4 @@ require(`${modulePath}/mix.js`);
             }
         }
     }
-});*/
+});
