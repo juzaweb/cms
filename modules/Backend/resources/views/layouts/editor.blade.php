@@ -95,6 +95,8 @@
 
         <div class="juzaweb__layout__content">
             <div class="juzaweb__utils__content pt-3">
+                <div id="jquery-message"></div>
+
                 @yield('content')
             </div>
         </div>

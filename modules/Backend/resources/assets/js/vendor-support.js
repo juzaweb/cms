@@ -23,32 +23,67 @@ function confirm_message(question, callback) {
     });
 }
 
-function show_message(response) {
-    // Show response message
+function get_message_response(response)
+{
+    // Get response message
     if (response.data) {
         if (response.data.message) {
-            toastr_message(response.data.message, response.status);
+            return {
+                status: response.status,
+                message: response.data.message
+            };
         }
         return false;
     }
 
-    // Show message validate
+    // Get message validate
     if (response.responseJSON) {
         if (response.responseJSON.errors) {
             $.each(response.responseJSON.errors, function (index, msg) {
-                toastr_message(msg[0], false);
-                return false;
+                return {
+                    status: false,
+                    message: msg[0]
+                };
             });
         }
 
         else if (response.responseJSON.message) {
-            toastr_message(response.responseJSON.message, false);
-            return false;
+            return {
+                status: false,
+                message: response.responseJSON.message
+            };
         }
     }
 
-    // Show message errors
+    // Get message errors
     if (response.message) {
-        toastr_message(response.message.message, false);
+        return {
+            status: false,
+            message: response.message.message
+        };
     }
+}
+
+function show_message(response, append = false)
+{
+    let msg = get_message_response(response);
+
+    let msgHTML = `<div class="alert alert-${msg.status ? 'success' : 'danger' } jw-message">
+        <button type="button" class="close" data-dismiss="alert" aria-label="${juzaweb.lang.close}">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        ${msg.status ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' } ${msg.message}
+    </div>`;
+
+    if (append) {
+        $('#jquery-message').append(msgHTML);
+    } else {
+        $('#jquery-message').html(msgHTML);
+    }
+}
+
+function show_notify(response) {
+    let msg = get_message_response(response);
+    toastr_message(msg.message, msg.status);
 }
