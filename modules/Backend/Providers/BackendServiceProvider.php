@@ -116,13 +116,6 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/cms'),
-            ],
-            'cms_views'
-        );
-
-        $this->publishes(
-            [
                 __DIR__ . '/../resources/lang' => resource_path('lang/cms'),
             ],
             'cms_lang'

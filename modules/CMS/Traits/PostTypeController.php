@@ -95,7 +95,7 @@ trait PostTypeController
         );
     }
 
-    protected function getModel(...$params)
+    protected function getModel(...$params): string
     {
         return Post::class;
     }
@@ -160,7 +160,7 @@ trait PostTypeController
         return $validator;
     }
 
-    protected function getSetting()
+    protected function getSetting(): Collection
     {
         $postType = $this->getPostType();
         $setting = HookAction::getPostTypes($postType);
@@ -224,7 +224,7 @@ trait PostTypeController
         );
     }
 
-    protected function getDataForIndex(...$params)
+    protected function getDataForIndex(...$params): array
     {
         $data = $this->DataForIndex(...$params);
         $data['setting'] = $this->getSetting();
@@ -253,12 +253,12 @@ trait PostTypeController
         );
     }
 
-    protected function checkPermission($ability, $arguments = [], ...$params)
+    protected function checkPermission($ability, $arguments = [], ...$params): void
     {
         $this->authorize($ability, [$arguments, $this->getPostType()]);
     }
 
-    protected function hasPermission($ability, $arguments = [], ...$params)
+    protected function hasPermission($ability, $arguments = [], ...$params): bool
     {
         $response = Gate::inspect($ability, [$arguments, $this->getPostType()]);
         return $response->allowed();
@@ -268,7 +268,7 @@ trait PostTypeController
      * @param Post|Model $model
      * @return array|Collection
      */
-    private function getTemplateData($model)
+    private function getTemplateData($model): array|Collection
     {
         $template = $this->getTemplate($model);
 
@@ -276,15 +276,14 @@ trait PostTypeController
             return [];
         }
 
-        $data = HookAction::getThemeTemplates($template);
-        return $data;
+        return HookAction::getThemeTemplates($template);
     }
 
     /**
-     * @param Post|Model $model
+     * @param Model|Post $model
      * @return string
      */
-    private function getTemplate($model)
+    private function getTemplate(Model|Post $model): ?string
     {
         $template = request()->get('template');
         if (empty($template)) {

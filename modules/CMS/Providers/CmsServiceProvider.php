@@ -14,6 +14,7 @@ use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\EventyContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Contracts\JWQueryContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Juzaweb\CMS\Contracts\OverwriteConfigContract;
@@ -26,6 +27,7 @@ use Juzaweb\CMS\Support\CacheGroup;
 use Juzaweb\CMS\Support\Config as DbConfig;
 use Juzaweb\CMS\Support\GlobalData;
 use Juzaweb\CMS\Support\HookAction;
+use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\CMS\Support\JWQuery;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Manager\BackendMessageManager;
@@ -215,6 +217,15 @@ class CmsServiceProvider extends ServiceProvider
             BackendMessageContract::class,
             function ($app) {
                 return new BackendMessageManager(
+                    $app[ConfigContract::class]
+                );
+            }
+        );
+
+        $this->app->singleton(
+            JuzawebApiContract::class,
+            function ($app) {
+                return new JuzawebApi(
                     $app[ConfigContract::class]
                 );
             }

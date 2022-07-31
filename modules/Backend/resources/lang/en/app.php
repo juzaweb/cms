@@ -376,6 +376,7 @@ return [
     'result_for_keyword' => 'Result for keyword :name',
     'search_results' => 'Search results',
     'install' => 'Install',
+    'installing' => 'Installing...',
     'views' => 'Views',
     'version' => 'Version',
     'install_now' => 'Install Now',
@@ -451,6 +452,7 @@ return [
     'new_version' => 'New version',
     'updating' => 'Updating...',
     'custom_seo' => 'Custom SEO',
+    'buy' => 'Buy',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
@@ -521,5 +523,8 @@ return [
         'backup_setting' => 'Backup setting',
         'enable_backup' => 'Enable Backup',
         'backup_time' => 'Backup Time',
+    ],
+    'premium' => [
+        'activation_code' => 'Activation code',
     ]
 ];

@@ -200,7 +200,6 @@ class PostTypeDataTable extends DataTable
         $query = $this->makeModel()->with(['taxonomies']);
         $query->where('type', '=', $this->postType['key']);
         $data['q'] = Arr::get($data, 'keyword');
-        $data['type'] = $this->postType['key'];
 
         if (empty($data['status'])) {
             $query->where('status', '!=', 'trash');

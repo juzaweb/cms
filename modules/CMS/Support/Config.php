@@ -11,10 +11,11 @@
 namespace Juzaweb\CMS\Support;
 
 use Illuminate\Cache\CacheManager;
+use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Models\Config as ConfigModel;
 use Illuminate\Container\Container;
 
-class Config
+class Config implements ConfigContract
 {
     protected array $configs = [];
 
