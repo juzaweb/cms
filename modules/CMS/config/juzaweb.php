@@ -15,13 +15,19 @@ return [
      *
      * Default: juzaweb_
      */
-
     'cache_prefix' => 'juzaweb_',
 
     /**
      * Show logs in admin page
      */
     'logs_viewer' => true,
+
+    'translation' => [
+        /**
+         * Enable translation CMS/Plugins/Themes
+         */
+        'enable' => true
+    ],
 
     'email' => [
         /**
