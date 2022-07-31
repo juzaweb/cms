@@ -92,7 +92,7 @@
     <script>
         Dropzone.autoDiscover = false;
 
-        document.addEventListener("turbolinks:load", function () {
+        $(document).ready(function () {
             new Dropzone("#uploadForm", {
                 paramName: "upload",
                 uploadMultiple: false,

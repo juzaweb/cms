@@ -14,7 +14,7 @@ function addStyleSubmenu(e) {
     }
 }
 
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     let bodyElement = $('body');
 
     bodyElement.on('change', '.show_on_front-change', function () {

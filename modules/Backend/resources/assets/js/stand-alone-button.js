@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     $.fn.filemanager = function(type, options) {
         type = type || 'file';
 

@@ -49,7 +49,7 @@ $.fn.filemanager = function(type, options) {
     });
 };
 
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     $('body').on('click', '.file-manager', function () {
         let type = $(this).data('type') || 'image';
         let input = $(this).data('input');
@@ -111,12 +111,12 @@ $(document).on("turbolinks:load", function() {
         item.removeClass('previewing');
         item.find('.image-hidden').hide();
     });
-    
+
     $('body').on('click', '.add-image-images', function () {
         let prefix = juzaweb.adminPrefix + '/file-manager';
         let item = $(this).closest('.form-images');
         let inputName = item.find('.input-name').val();
-        
+
         juzawebFileManager({
             type: 'image',
             prefix: prefix,
@@ -124,7 +124,7 @@ $(document).on("turbolinks:load", function() {
         }, function (files) {
             let temp = document.getElementById('form-images-template').innerHTML;
             let str = "";
-            
+
             $.each(files, function (index, item) {
                 str += replace_template(temp, {
                     name: inputName,
@@ -132,11 +132,11 @@ $(document).on("turbolinks:load", function() {
                     path: item.path
                 });
             });
-            
+
             item.find('.images-list .image-item:last').before(str);
         });
     });
-    
+
     $('body').on('click', '.form-images .remove-image-item', function () {
         $(this).closest('.image-item').remove();
     });

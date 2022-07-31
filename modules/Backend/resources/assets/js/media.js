@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     $('#media-container').on('click', '.show-form-upload', function () {
         let form = $('.media-upload-form');
 

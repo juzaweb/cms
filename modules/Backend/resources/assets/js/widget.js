@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     $('.jw-widget-builder').nestable({
         noDragClass: 'dd-nodrag',
         maxDepth: 1,

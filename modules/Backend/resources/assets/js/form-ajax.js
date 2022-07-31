@@ -8,7 +8,7 @@
  * Date: 2021-03-12T21:04Z
  */
 
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     $('body').on('submit', '.form-ajax', function(event) {
         if (event.isDefaultPrevented()) {
             return false;
