@@ -577,11 +577,20 @@ Form file management
 
 .select2-container--default .select2-selection--single {
     border-radius: 0;
-    height: 2.5rem;
+    height: 2.4rem;
 }
 
 .select2.select2-container--focus .select2-selection{
     border-bottom-color: blueviolet;
+}
+
+.btn {
+    border-radius: 0;
+    padding: 0.375rem 0.8rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #444;
 }
 
 @media (max-width: 767px) {
