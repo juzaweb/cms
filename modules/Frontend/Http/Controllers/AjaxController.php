@@ -22,6 +22,7 @@ class AjaxController extends FrontendController
     public function ajax($key, Request $request)
     {
         $key = str_replace('/', '.', $key);
+
         $ajax = HookAction::getFrontendAjaxs($key);
 
         if (empty($ajax)) {
@@ -40,8 +41,9 @@ class AjaxController extends FrontendController
         }
 
         $callback = $ajax->get('callback');
-        if (is_string($callback[0])) {
-            return App::call([app($callback[0]), $callback[1]]);
+
+        if (is_array($callback)) {
+            return App::call("{$callback[0]}@{$callback[1]}");
         }
 
         return App::call($callback);

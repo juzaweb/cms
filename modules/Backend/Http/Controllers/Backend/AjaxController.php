@@ -20,6 +20,7 @@ class AjaxController extends BackendController
     public function handle(Request $request, $slug)
     {
         $ajax = HookAction::getAdminAjaxs($slug);
+
         if (empty($ajax)) {
             return abort(404);
         }
@@ -30,10 +31,10 @@ class AjaxController extends BackendController
 
         $callback = $ajax->get('callback');
 
-        if (is_string($callback[0])) {
-            return app($callback[0])->{$callback[1]}($request);
+        if (is_array($callback)) {
+            return App::call("{$callback[0]}@{$callback[1]}");
         }
 
-        return App::call($callback, [$request]);
+        return App::call($callback);
     }
 }

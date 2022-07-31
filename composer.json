@@ -23,7 +23,6 @@
         "guzzlehttp/guzzle": "^7.2",
         "juzaweb/packages": "^1.1",
         "laravel/framework": "^9.2",
-        "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.7"
     },
     "require-dev": {
