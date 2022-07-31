@@ -27,6 +27,8 @@
         <div class="juzaweb__layout juzaweb__layout--hasSider">
             <div class="juzaweb__menuLeft__backdrop"></div>
             <div class="juzaweb__layout">
+                <div id="jquery-message"></div>
+
                 @yield('content')
             </div>
         </div>

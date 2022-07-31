@@ -39,12 +39,16 @@ function get_message_response(response)
     // Get message validate
     if (response.responseJSON) {
         if (response.responseJSON.errors) {
+            let message = '';
             $.each(response.responseJSON.errors, function (index, msg) {
-                return {
-                    status: false,
-                    message: msg[0]
-                };
+                message = msg[0];
+                return false;
             });
+
+            return {
+                status: false,
+                message: message
+            };
         }
 
         else if (response.responseJSON.message) {
