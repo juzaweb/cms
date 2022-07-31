@@ -4,7 +4,7 @@
     <div class="row mb-3">
         <div class="col-md-12">
             <div class="btn-group float-right">
-                <a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#modal-add">{{ trans('cms::app.add_language') }}</a>
+                <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" data-target="#modal-add">{{ trans('cms::app.add_language') }}</a>
             </div>
         </div>
     </div>
