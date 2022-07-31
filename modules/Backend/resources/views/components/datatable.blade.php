@@ -1,4 +1,4 @@
-<div class="row mb-3">
+<div class="row">
     @if($actions)
         <div class="col-md-2">
             <form method="post" class="form-inline">
@@ -29,7 +29,7 @@
                         'name' => $name,
                         'field' => $field
                     ])
-                    }}
+                }}
             @endforeach
 
             <button type="submit" class="btn btn-primary mb-2">

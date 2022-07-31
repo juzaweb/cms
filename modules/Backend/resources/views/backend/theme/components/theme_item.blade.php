@@ -2,7 +2,7 @@
     <div class="height-200 d-flex flex-column jw__g13__head" style="background-image: url('{{ $theme->screenshot }}')">
     </div>
 
-    <div class="card card-borderless mb-0">
+    <div class="card card-bottom card-borderless mb-0">
         <div class="card-header border-bottom-0">
             <div class="d-flex">
                 <div class="text-dark text-uppercase font-weight-bold mr-auto">

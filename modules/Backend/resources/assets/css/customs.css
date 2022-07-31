@@ -509,12 +509,12 @@ Form file management
 }
 
 .juzaweb__layout__header {
-    height: 44px;
+    height: 54px;
 }
 
 .juzaweb__topbar {
-    min-height: 44px;
-    height: 44px;
+    min-height: 54px;
+    height: 54px;
 }
 
 .juzaweb__topbar .juzaweb__btn-top {
@@ -556,6 +556,32 @@ Form file management
     text-align: center;
     color: white;
     z-index: 999;
+}
+
+#form-search .select2.select2-container {
+    min-width: 150px !important;
+}
+
+.select2 .select2-selection--single {
+    border-color: #ced4da;
+}
+
+.form-control {
+    padding: 1rem 0.75rem;
+    border-radius: 0;
+}
+
+.form-control:focus {
+    border-bottom-color: blueviolet;
+}
+
+.select2-container--default .select2-selection--single {
+    border-radius: 0;
+    height: 2.5rem;
+}
+
+.select2.select2-container--focus .select2-selection{
+    border-bottom-color: blueviolet;
 }
 
 @media (max-width: 767px) {
