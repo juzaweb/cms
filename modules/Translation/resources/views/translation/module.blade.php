@@ -15,7 +15,8 @@
                 <table class="table juzaweb-table">
                     <thead>
                         <tr>
-                            <th data-width="5%" data-field="code">{{ trans('cms::app.language_code') }}</th>
+                            <th data-field="index" data-width="3%" data-formatter="index_formatter" data-align="center">#</th>
+                            <th data-width="10%" data-field="code">{{ trans('cms::app.language_code') }}</th>
                             <th data-field="name">{{ trans('cms::app.language') }}</th>
                             <th data-width="20%" data-formatter="actions_formatter">{{ trans('cms::app.actions') }}</th>
                         </tr>
@@ -55,8 +56,13 @@
     <script type="text/javascript">
         var linkLocale = "{{ route('admin.translations.locale', [$type, '__LOCALE__']) }}";
 
+        function index_formatter(value, row, index)
+        {
+            return (index + 1);
+        }
+
         function actions_formatter(value, row, index) {
-            return `<a href="${linkLocale.replace('__LOCALE__', row.code)}">${juzaweb.lang.translations}</a>`;
+            return `<a href="${linkLocale.replace('__LOCALE__', row.code)}" class="btn btn-info btn-sm"><i class="fa fa-language"></i> ${juzaweb.lang.translations}</a>`;
         }
 
         var table = new JuzawebTable({

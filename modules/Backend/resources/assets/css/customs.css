@@ -592,6 +592,15 @@ Form file management
     color: #444;
 }
 
+.modal-content {
+    border-radius: 0;
+}
+
+.modal-content .modal-header {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
 @media (max-width: 767px) {
     .juzaweb__menuLeft {
         position: fixed;
