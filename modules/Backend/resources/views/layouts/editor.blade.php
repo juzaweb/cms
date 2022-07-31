@@ -9,7 +9,7 @@
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
-    <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
     @if($gtag = config('app.site_gtag'))
         @php
@@ -77,8 +77,8 @@
         @endif
 
     <div class="juzaweb__layout">
-        <div class="juzaweb__layout__header" style="height: 64px;">
-            <div class="juzaweb__topbar" style="height: 64px;">
+        <div class="juzaweb__layout__header">
+            <div class="juzaweb__topbar">
                 <div>
                     <a href="{{ $linkIndex }}" class="mr-2">
                         <i class="fa fa-chevron-left fa-3x"></i>
@@ -94,9 +94,7 @@
         </div>
 
         <div class="juzaweb__layout__content">
-
-            <div class="juzaweb__utils__content">
-
+            <div class="juzaweb__utils__content pt-3">
                 @yield('content')
             </div>
         </div>
