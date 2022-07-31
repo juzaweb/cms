@@ -1,7 +1,7 @@
 @extends('cms::layouts.backend')
 
 @section('content')
-    <div class="row mb-2">
+    <div class="row mt-3">
         <div class="col-md-12">
             <div class="table-responsive mb-5">
                 <table class="table juzaweb-table table-hover">
