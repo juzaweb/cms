@@ -40,7 +40,8 @@
                     $strChild .= view('cms::backend.items.menu_left_item', [
                         'adminUrl' => $adminUrl,
                         'item' => $child,
-                        'active' => $active
+                        'active' => $active,
+                        'icon' => false
                     ])->render();
                 }
             @endphp

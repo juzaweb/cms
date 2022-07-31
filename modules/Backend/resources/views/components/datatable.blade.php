@@ -1,6 +1,6 @@
-<div class="row mb-3">
+<div class="row">
     @if($actions)
-        <div class="col-md-3">
+        <div class="col-md-2">
             <form method="post" class="form-inline">
                 @csrf
 
@@ -21,7 +21,7 @@
     @php
     $hasDetailFormater = collect($columns)->whereNotNull('detailFormater')->isNotEmpty();
     @endphp
-    <div class="col-md-9">
+    <div class="col-md-10">
         <form method="get" class="form-inline" id="form-search">
             @foreach($searchFields as $name => $field)
                 {{ $searchFieldTypes[$field['type']]['view']
@@ -29,7 +29,7 @@
                         'name' => $name,
                         'field' => $field
                     ])
-                    }}
+                }}
             @endforeach
 
             <button type="submit" class="btn btn-primary mb-2">

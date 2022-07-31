@@ -29,11 +29,6 @@ ul {
     padding: 0 10px 0 8px;
 }
 
-.juzaweb__menuLeft__navigation .juzaweb__menuLeft__navigation .juzaweb__menuLeft__item__link {
-    text-transform: capitalize;
-    margin-top: 4px;
-}
-
 .col-form-label {
     width: 100%;
     text-transform: capitalize;
@@ -196,20 +191,6 @@ span.tag {
     right: 8px;
 }
 
-.juzaweb__menuLeft__navigation .juzaweb__menuLeft__navigation .juzaweb__menuLeft__item__link {
-    height: 30px;
-    line-height: 30px;
-}
-
-.juzaweb__menuLeft__navigation .juzaweb__menuLeft__navigation .juzaweb__menuLeft__item__link .juzaweb__menuLeft__item__icon {
-    top: 9px;
-    font-size: 1rem;
-}
-
-.juzaweb__menuLeft__submenu>.juzaweb__menuLeft__item__link:after, .juzaweb__menuLeft__submenu>.juzaweb__menuLeft__item__link:before {
-    right: 35px;
-}
-
 .juzaweb__menuLeft__item__link {
     border-radius: 2px;
     text-transform: capitalize;
@@ -257,7 +238,7 @@ span.tag {
     background: #232135;
     width: unset;
     border-radius: unset;
-    padding: 0 0 0 8px;
+    padding: 0 0 8px 8px;
 }
 
 .juzaweb__menuLeft__item--active {
@@ -272,6 +253,10 @@ span.tag {
 
 .juzaweb__menuLeft__navigation .juzaweb__menuLeft__navigation .juzaweb__menuLeft__item__link {
     padding-left: 10px;
+    height: 30px;
+    line-height: 30px;
+    text-transform: capitalize;
+    margin-top: 3px;
 }
 
 .show-taxonomies {
@@ -524,12 +509,12 @@ Form file management
 }
 
 .juzaweb__layout__header {
-    height: 44px;
+    height: 54px;
 }
 
 .juzaweb__topbar {
-    min-height: 44px;
-    height: 44px;
+    min-height: 54px;
+    height: 54px;
 }
 
 .juzaweb__topbar .juzaweb__btn-top {
@@ -571,6 +556,40 @@ Form file management
     text-align: center;
     color: white;
     z-index: 999;
+}
+
+#form-search .select2.select2-container {
+    min-width: 150px !important;
+}
+
+.select2 .select2-selection--single {
+    border-color: #ced4da;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+.form-control:focus {
+    border-bottom-color: blueviolet;
+}
+
+.select2-container--default .select2-selection--single {
+    border-radius: 0;
+    height: 2.4rem;
+}
+
+.select2.select2-container--focus .select2-selection{
+    border-bottom-color: blueviolet;
+}
+
+.btn {
+    border-radius: 0;
+    padding: 0.375rem 0.8rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #444;
 }
 
 @media (max-width: 767px) {

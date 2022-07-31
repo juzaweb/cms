@@ -9,7 +9,7 @@
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
-    <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
     <script async src="https://www.gstatic.com/charts/loader.js"></script>
 
     @include('cms::components.juzaweb_langs')
@@ -100,6 +100,7 @@
                     <div class="alert alert-{{ session()->get('status') == 'error' ? 'danger' : 'success' }} jw-message">{{ session()->get('message') }}</div>
                 @endif
 
+                <div id="jquery-message"></div>
 
                 @yield('content')
             </div>

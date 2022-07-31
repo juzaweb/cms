@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
-    <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/vendor.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/backend.min.css') }}">

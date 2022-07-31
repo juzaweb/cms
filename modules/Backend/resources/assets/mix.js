@@ -10,6 +10,7 @@ mix.styles(
         baseAsset + '/css/menu.css',
         baseAsset + '/css/page.css',
         baseAsset + '/css/customs.css',
+        baseAsset + '/css/theme.css',
     ],
     `${basePublish}/css/custom.min.css`
 );

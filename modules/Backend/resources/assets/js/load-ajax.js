@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7,11 +7,11 @@ $(document).on("turbolinks:load", function() {
 
     $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
         if (jqxhr.status === 401) {
-            Turbolinks.visit('/');
+            window.location = "/";
         }
 
         if (jqxhr.status === 419) {
-            Turbolinks.visit(location.toString());
+            window.location = location.toString();
         }
     });
 });

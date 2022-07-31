@@ -92,7 +92,7 @@
     <script>
         Dropzone.autoDiscover = false;
 
-        document.addEventListener("turbolinks:load", function () {
+        $(document).ready(function () {
             new Dropzone("#uploadForm", {
                 paramName: "upload",
                 uploadMultiple: false,
@@ -104,7 +104,7 @@
                     var _this = this; // For the closure
                     this.on('success', function (file, response) {
                         if (response == 'OK') {
-                            Turbolinks.visit("", {action: "replace"});
+                            window.location = "";
                         }
                         else {
                             this.defaultOptions.error(file, response.join('\n'));
@@ -122,7 +122,7 @@
         });
 
         function add_folder_success(form) {
-            Turbolinks.visit("", {action: "replace"});
+            window.location = "";
         }
     </script>
 
