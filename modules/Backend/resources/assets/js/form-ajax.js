@@ -48,7 +48,7 @@ $(document).ready(function () {
 
             if (response.data.redirect) {
                 setTimeout(function () {
-                    Turbolinks.visit(response.data.redirect, {action: "replace"});
+                    window.location = response.data.redirect;
                 }, 1000);
                 return false;
             }

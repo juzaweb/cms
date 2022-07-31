@@ -140,7 +140,7 @@ class JuzawebTable {
 
                                 if (response.data.redirect) {
                                     setTimeout(function () {
-                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                        window.location = response.data.redirect;
                                     }, 1000);
                                     return false;
                                 }
@@ -188,7 +188,7 @@ class JuzawebTable {
 
                                 if (response.data.redirect) {
                                     setTimeout(function () {
-                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                        window.location = response.data.redirect;
                                     }, 1000);
                                     return false;
                                 }
@@ -228,7 +228,7 @@ class JuzawebTable {
 
                                 if (response.data.redirect) {
                                     setTimeout(function () {
-                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                        window.location = response.data.redirect;
                                     }, 1000);
                                     return false;
                                 }
@@ -299,7 +299,7 @@ class JuzawebTable {
 
                                 if (response.data.redirect) {
                                     setTimeout(function () {
-                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                        window.location = response.data.redirect;
                                     }, 1000);
                                     return false;
                                 }
@@ -346,7 +346,7 @@ class JuzawebTable {
 
                                 if (response.data.redirect) {
                                     setTimeout(function () {
-                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                        window.location = response.data.redirect;
                                     }, 1000);
                                     return false;
                                 }
@@ -384,7 +384,7 @@ class JuzawebTable {
 
                                 if (response.data.redirect) {
                                     setTimeout(function () {
-                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                        window.location = response.data.redirect;
                                     }, 1000);
                                     return false;
                                 }
@@ -481,7 +481,7 @@ class JuzawebTable {
                                 if (response.data.redirect) {
                                     show_message(response);
                                     setTimeout(function () {
-                                        Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                        window.location = response.data.redirect;
                                     }, 1000);
                                     return false;
                                 }
@@ -512,7 +512,7 @@ class JuzawebTable {
                         if (response.data.redirect) {
                             show_message(response);
                             setTimeout(function () {
-                                Turbolinks.visit(response.data.redirect, {action: "replace"});
+                                window.location = response.data.redirect;
                             }, 1000);
                             return false;
                         }

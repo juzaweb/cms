@@ -7,11 +7,11 @@ $(document).ready(function () {
 
     $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
         if (jqxhr.status === 401) {
-            Turbolinks.visit('/');
+            window.location = "/";
         }
 
         if (jqxhr.status === 419) {
-            Turbolinks.visit(location.toString());
+            window.location = location.toString();
         }
     });
 });

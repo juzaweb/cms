@@ -1,13 +1,13 @@
 $(document).ready(function () {
-
     let urlParams = new URLSearchParams(window.location.search);
     let template = urlParams.get('template');
+    let bodyElement = $('body');
 
     if (template) {
         $('select[name="meta[template]"]').val(template).trigger('change');
     }
 
-    $('body').on('click', '.show-form-block', function () {
+    bodyElement.on('click', '.show-form-block', function () {
         let form = $(this).closest('.dd-item').find('.form-block-edit');
         if (form.is(':hidden')) {
             form.show('slow');
@@ -16,11 +16,11 @@ $(document).ready(function () {
         }
     });
 
-    $('body').on('click', '.remove-form-block', function () {
+    bodyElement.on('click', '.remove-form-block', function () {
         $(this).closest('.dd-item').remove();
     });
 
-    $('body').on('change', 'select[name="meta[template]"]', function () {
+    bodyElement.on('change', 'select[name="meta[template]"]', function () {
         let template = $(this).val();
         if (!template) {
             return false;
@@ -28,11 +28,10 @@ $(document).ready(function () {
 
         let currentUrl = window.location.href;
         currentUrl = currentUrl.split("?")[0];
-
-        Turbolinks.visit(currentUrl + '?template=' + template, {action: "replace"});
+        window.location = currentUrl + '?template=' + template;
     });
 
-    $('body').on('click', '.add-block-data', function () {
+    bodyElement.on('click', '.add-block-data', function () {
         let block = $(this).data('block');
         let contentKey = $(this).data('content_key');
         let item = $(this);
@@ -48,5 +47,4 @@ $(document).ready(function () {
 
         initSelect2('#page-block-' + marker);
     });
-
 });
