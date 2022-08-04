@@ -91,3 +91,8 @@ function show_notify(response) {
     let msg = get_message_response(response);
     toastr_message(msg.message, msg.status);
 }
+
+function htmlspecialchars(str) {
+    str = String(str);
+    return str.replace('&', '&amp;').replace('"', '&quot;').replace("'", '&#039;').replace('<', '&lt;').replace('>', '&gt;');
+}

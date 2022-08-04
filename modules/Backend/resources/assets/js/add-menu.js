@@ -1,8 +1,8 @@
 $("#accordion").accordionjs();
 
-var itemTemplate = document.getElementById('menu-item').innerHTML;
-var updateOutput = function(e) {
-    var list   = e.length ? e : $(e.target),
+const itemTemplate = document.getElementById('menu-item').innerHTML;
+const updateOutput = function (e) {
+    let list = e.length ? e : $(e.target),
         output = list.data('output');
     if (window.JSON) {
         output.val(window.JSON.stringify(list.nestable('serialize')));
@@ -21,7 +21,7 @@ function buildItem(item) {
         children += "</ol>";
     }
 
-    let html = replace_template(itemTemplate, {
+    return replace_template(itemTemplate, {
         'id': item.id,
         'content': htmlspecialchars(item.content),
         'url': item.url,
@@ -30,8 +30,6 @@ function buildItem(item) {
         'object_type': item.object_type,
         'children': children,
     });
-
-    return html;
 }
 
 function buildMenu(dataJson) {
@@ -42,25 +40,23 @@ function buildMenu(dataJson) {
     return output;
 }
 
-var output = buildMenu(dataJson);
+const output = buildMenu(dataJson);
+const nestable = $('#nestable');
+const formMenu = $("#form-menu");
+
 $('#dd-empty-placeholder').html(output);
 
-$('#nestable').nestable({
+nestable.nestable({
     group: 1,
     includeContent: true,
     scroll: true,
     emptyClass: false,
 }).on('change', updateOutput);
 
-updateOutput($('#nestable').data('output', $('#nestable-output')));
+updateOutput(nestable.data('output', $('#nestable-output')));
 
 function getNewMenuId() {
     return $('.dd-item').length + 1;
-}
-
-function htmlspecialchars(str) {
-    str = String(str);
-    return str.replace('&', '&amp;').replace('"', '&quot;').replace("'", '&#039;').replace('<', '&lt;').replace('>', '&gt;');
 }
 
 $("#add-url").on('change', function () {
@@ -68,13 +64,13 @@ $("#add-url").on('change', function () {
     $('#add-title').val(text);
 });
 
-$("#form-menu").on('click', '.remove-menu-item', function () {
+formMenu.on('click', '.remove-menu-item', function () {
     let id = $(this).closest('li').data('id');
-    $('#nestable').nestable('remove', id);
-    updateOutput($('#nestable').data('output', $('#nestable-output')));
+    nestable.nestable('remove', id);
+    updateOutput(nestable.data('output', $('#nestable-output')));
 });
 
-$("#form-menu").on('click', '.edit-menu-item', function () {
+formMenu.on('click', '.edit-menu-item', function () {
     let item = $(this).closest('.dd-item');
     let id = item.data('id');
     let content = item.data('content');
@@ -84,11 +80,10 @@ $("#form-menu").on('click', '.edit-menu-item', function () {
     $("#id").val(id);
     $("#content").val(content);
     $("#url").val(url);
-    
+
     if (new_tab == 1) {
         $('#new_tab').prop('checked', true);
-    }
-    else {
+    } else {
         $('#new_tab').prop('checked', false);
     }
 
@@ -101,7 +96,7 @@ $("#modal-edit-menu").on('click', '.save-menu-item', function () {
     let content = $("#content").val();
     let url = $("#url").val();
     let new_tab = 0;
-    
+
     if ($('#new_tab').is(':checked')) {
         new_tab = 1;
     }
@@ -121,7 +116,7 @@ $("#modal-edit-menu").on('click', '.save-menu-item', function () {
 
 $(".load-menu").on('change', function () {
     let id = $(this).val();
-    window.location = "/admin-cp/menu/"+ id;
+    window.location = juzaweb.adminUrl + "/menu/" + id;
 });
 
 $('#accordion').on('submit', '.add-menu-item', function () {
@@ -140,10 +135,9 @@ $('#accordion').on('submit', '.add-menu-item', function () {
     }
 
     if (type !== "custom") {
-
         $.ajax({
             type: "POST",
-            url: "/admin-cp/menu/get-data",
+            url: "/" + juzaweb.adminPrefix + "/menu/get-data",
             dataType: 'json',
             data: formData,
             success: function (result) {
@@ -166,9 +160,7 @@ $('#accordion').on('submit', '.add-menu-item', function () {
                 btn.prop("disabled", false);
             }
         });
-    }
-    else {
-
+    } else {
         let title = $(this).find('input[name=title]').val();
         let url = $(this).find('input[name=url]').val();
 

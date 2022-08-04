@@ -17,11 +17,13 @@ class ProfileController extends BackendController
 {
     public function index(): \Illuminate\Contracts\View\View
     {
+        global $jw_user;
+
         $title = trans('cms::app.profile');
 
         return view(
             'cms::backend.profile.index',
-            compact('title')
+            compact('title', 'jw_user')
         );
     }
 

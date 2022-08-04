@@ -17,7 +17,7 @@ Route::jwResource('roles', RoleController::class);
 Route::group(
     ['prefix' => 'profile'],
     function () {
-        Route::get('/', [ProfileController::class, 'index']);
+        Route::get('/', [ProfileController::class, 'index'])->name('admin.profile');
         Route::put('/', [ProfileController::class, 'update']);
     }
 );

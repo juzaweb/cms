@@ -50,7 +50,7 @@
                             <hr>
                             <ul class="list-unstyled">
                                 @if($items->isEmpty())
-                                    <p>@lang('cms::app.no_notifications')</p>
+                                    <p>{{ trans('cms::app.no_notifications') }}</p>
                                 @else
                                     @foreach($items as $notify)
                                         <li class="jw__l8__item">
@@ -64,7 +64,7 @@
                                                 </div>
                                                 <div>
                                                     <div class="text-blue">{{ @$notify->data['subject'] }}</div>
-                                                    <div class="text-muted">{{ $notify->created_at ? $notify->created_at->diffForHumans() : '' }}</div>
+                                                    <div class="text-muted">{{ $notify->created_at?->diffForHumans() }}</div>
                                                 </div>
                                             </a>
                                         </li>
@@ -87,14 +87,14 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" role="menu">
-            <a class="dropdown-item" href="{{ route('admin.users.edit', [$jw_user->id]) }}">
-                <i class="dropdown-icon fe fe-user"></i>
+            <a class="dropdown-item" href="{{ route('admin.profile') }}">
+                <i class="dropdown-icon fa fa-user"></i>
                 {{ trans('cms::app.profile') }}
             </a>
 
             <div class="dropdown-divider"></div>
             <a href="javascript:void(0)" data-turbolinks="false" class="dropdown-item auth-logout">
-                <i class="dropdown-icon fe fe-log-out"></i> {{ trans('cms::app.logout') }}
+                <i class="dropdown-icon fa fa-sign-out"></i> {{ trans('cms::app.logout') }}
             </a>
         </div>
     </div>
