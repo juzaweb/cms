@@ -11,11 +11,14 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend\Profile;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Http\Datatables\NotificationDatatable;
 use Juzaweb\Backend\Http\Requests\User\ProfileUpdateRequest;
 use Juzaweb\Backend\Repositories\NotificationRepository;
 use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Models\Language;
 
 class ProfileController extends BackendController
 {
@@ -32,15 +35,35 @@ class ProfileController extends BackendController
 
         $title = trans('cms::app.profile');
 
+        $this->initLanguage();
+
         $dataTable = $this->getNotificationDataTable();
+
+        $countries = config('countries');
+
+        $languages = Language::get()
+            ->mapWithKeys(
+                function ($item) {
+                    return [
+                        $item->id => $item->name
+                    ];
+                }
+            )
+            ->toArray();
 
         return view(
             'cms::backend.profile.index',
-            compact('title', 'jw_user', 'dataTable')
+            compact(
+                'title',
+                'jw_user',
+                'dataTable',
+                'languages',
+                'countries'
+            )
         );
     }
 
-    public function notificationDatatable(Request $request): \Illuminate\Http\JsonResponse
+    public function notificationDatatable(Request $request): JsonResponse
     {
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
@@ -86,12 +109,12 @@ class ProfileController extends BackendController
     {
         $user = $request->user();
 
-        $user->update($request->only(['name', 'avatar']));
+        $user->update($request->only(['name', 'language']));
 
         //
     }
 
-    public function notification($id): View|\Illuminate\Http\RedirectResponse
+    public function notification($id): View|RedirectResponse
     {
         $notification = $this->notificationRepository->find($id);
 
@@ -104,6 +127,19 @@ class ProfileController extends BackendController
         return view(
             'cms::backend.profile.notification',
             compact('title', 'notification')
+        );
+    }
+
+    private function initLanguage(): void
+    {
+        Language::firstOrCreate(
+            [
+                'code' => 'en',
+            ],
+            [
+                'name' => 'English',
+                'default' => true
+            ]
         );
     }
 

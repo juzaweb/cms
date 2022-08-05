@@ -59,26 +59,42 @@
             <div class="card">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#notifications" data-toggle="tab">{{ trans('cms::app.notifications') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">{{ trans('cms::app.settings') }}</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">{{ trans('cms::app.settings') }}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#notifications" data-toggle="tab">{{ trans('cms::app.notifications') }}</a></li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="notifications">
-                            {{ $dataTable->render() }}
-                        </div>
-
-                        <div class="tab-pane" id="settings">
+                        <div class="tab-pane active" id="settings">
                             <form method="post" action="" class="form-horizontal">
+                                @csrf
 
-                                {{ Field::text($jw_user, 'name') }}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ Field::text($jw_user, 'name') }}
+                                    </div>
 
-                                {{ Field::text($jw_user, 'email', ['disabled' => true]) }}
+                                    <div class="col-md-6">
+                                        {{ Field::text($jw_user, 'email', ['disabled' => true]) }}
+                                    </div>
 
-                                {{ Field::text('birthday', 'metas[birthday]', ['value' => $jw_user->getMeta('birthday')]) }}
+                                    <div class="col-md-6">
+                                        {{ Field::select($jw_user, 'language', [
+                                            'options' => $languages
+                                        ]) }}
+                                    </div>
 
-                                {{ Field::text('country', 'metas[country]', ['value' => $jw_user->getMeta('country')]) }}
+                                    <div class="col-md-6">
+                                        {{ Field::text('birthday', 'metas[birthday]', ['value' => $jw_user->getMeta('birthday')]) }}
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        {{ Field::select('country', 'metas[country]', [
+                                            'value' => $jw_user->getMeta('country'),
+                                            'options' => $countries
+                                           ]) }}
+                                    </div>
+                                </div>
 
                                 <hr>
 
@@ -94,8 +110,8 @@
                             </form>
                         </div>
 
-                        <div class="tab-pane" id="timeline">
-
+                        <div class="tab-pane" id="notifications">
+                            {{ $dataTable->render() }}
                         </div>
                     </div>
                 </div>

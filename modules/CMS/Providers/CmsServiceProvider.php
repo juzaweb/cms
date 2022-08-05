@@ -112,6 +112,11 @@ class CmsServiceProvider extends ServiceProvider
         );
 
         $this->mergeConfigFrom(
+            $this->basePath . '/config/countries.php',
+            'countries'
+        );
+
+        $this->mergeConfigFrom(
             $this->basePath . '/config/installer.php',
             'installer'
         );

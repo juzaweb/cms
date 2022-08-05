@@ -18,13 +18,38 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => [
+                'bail',
                 'required',
                 'string',
                 'max:150'
             ],
-            'avatar' => 'nullable|string|max:150',
+            'avatar' => [
+                'nullable',
+                'string',
+                'max:150'
+            ],
             'password' => 'required|string|max:32|min:8|confirmed',
             'password_confirmation' => 'required|string|max:32|min:8',
+            'language' => [
+                'bail',
+                'nullable',
+                'string',
+                'max:5'
+            ],
+            'metas' => [
+                'bail',
+                'array'
+            ],
+            'metas.birthday' => [
+                'bail',
+                'nullable',
+                'string',
+            ],
+            'metas.country' => [
+                'bail',
+                'nullable',
+                'string',
+            ]
         ];
     }
 
