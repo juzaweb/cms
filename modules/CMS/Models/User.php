@@ -13,6 +13,7 @@ namespace Juzaweb\CMS\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -78,7 +79,7 @@ use Laravel\Passport\HasApiTokens;
  * @method static Builder|User role($roles, $guard = null)
  * @property int|null $site_id
  * @property-read DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection $tokens
  * @property-read int|null $tokens_count
  * @method static Builder|User whereSiteId($value)
  */
@@ -134,6 +135,21 @@ class User extends Authenticatable
     public function passwordReset(): HasOne
     {
         return $this->hasOne(PasswordReset::class, 'email', 'email');
+    }
+
+    public function metas(): HasMany
+    {
+        return $this->hasMany(UserMeta::class, 'user_id', 'id');
+    }
+
+    public function getMeta($key, $default = null): mixed
+    {
+        return $this->json_metas[$key] ?? $default;
+    }
+
+    public function getMetas(): ?array
+    {
+        return $this->json_metas;
     }
 
     /**

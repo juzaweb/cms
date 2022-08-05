@@ -34,6 +34,8 @@ abstract class DataTable
 
     protected array $escapes = [];
 
+    protected bool $searchable = true;
+
     public string $currentUrl;
 
     /**
@@ -157,6 +159,7 @@ abstract class DataTable
             'dataUrl' => $this->dataUrl,
             'actionUrl' => $this->actionUrl,
             'escapes' => $this->escapes,
+            'searchable' => $this->searchable,
             'searchFieldTypes' => $this->getSearchFieldTypes(),
             'table' => Crypt::encryptString(static::class),
         ];

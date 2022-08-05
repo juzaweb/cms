@@ -29,7 +29,7 @@ class CommentDatatable extends DataTable
      *
      * @return array
      */
-    public function columns()
+    public function columns(): array
     {
         return [
             'author' => [
@@ -90,16 +90,18 @@ class CommentDatatable extends DataTable
      * @param array $data
      * @return Builder
      */
-    public function query($data)
+    public function query($data): Builder
     {
         $query = Comment::query()->with(['user']);
         $query->where('object_type', '=', $this->postType);
 
         if ($keyword = Arr::get($data, 'keyword')) {
-            $query->where(function (Builder $q) use ($keyword) {
-                $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
-                $q->orWhere('content', JW_SQL_LIKE, '%'. $keyword .'%');
-            });
+            $query->where(
+                function (Builder $q) use ($keyword) {
+                    $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
+                    $q->orWhere('content', JW_SQL_LIKE, '%'. $keyword .'%');
+                }
+            );
         }
 
         if ($status = Arr::get($data, 'status')) {
@@ -109,7 +111,7 @@ class CommentDatatable extends DataTable
         return $query;
     }
 
-    public function actions()
+    public function actions(): array
     {
         $actions = [];
         $statuses = Comment::allStatuses();
@@ -119,8 +121,7 @@ class CommentDatatable extends DataTable
             ];
         }
 
-        $actions = array_merge($actions, parent::actions());
-        return $actions;
+        return array_merge($actions, parent::actions());
     }
 
     public function bulkActions($action, $ids)

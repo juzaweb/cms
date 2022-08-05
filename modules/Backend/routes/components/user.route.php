@@ -6,7 +6,8 @@
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\Backend\ProfileController;
+use Juzaweb\Backend\Http\Controllers\Backend\Profile\NotificationController;
+use Juzaweb\Backend\Http\Controllers\Backend\Profile\ProfileController;
 use Juzaweb\Backend\Http\Controllers\Backend\RoleController;
 use Juzaweb\Backend\Http\Controllers\Backend\UserController;
 
@@ -19,5 +20,8 @@ Route::group(
     function () {
         Route::get('/', [ProfileController::class, 'index'])->name('admin.profile');
         Route::put('/', [ProfileController::class, 'update']);
+        Route::get('notification-datatable', [ProfileController::class, 'notificationDatatable']);
+
+        Route::get('notification/{id}/detail', [ProfileController::class, 'index'])->name('admin.profile.notification');
     }
 );

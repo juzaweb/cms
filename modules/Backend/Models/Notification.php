@@ -3,12 +3,15 @@
 namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 /**
  * Juzaweb\Backend\Models\Notification
  *
  * @property int $id
  * @property string $type
+ * @property string $url
+ * @property string $subject
  * @property array $data
  * @property string|null $read_at
  * @property string $notifiable_type
@@ -46,4 +49,19 @@ class Notification extends Model
     public $casts = [
         'data' => 'array',
     ];
+
+    public $appends = [
+        'subject',
+        'url',
+    ];
+
+    public function getSubjectAttribute()
+    {
+        return Arr::get($this->data, 'subject');
+    }
+
+    public function getUrlAttribute()
+    {
+        return Arr::get($this->data, 'url');
+    }
 }

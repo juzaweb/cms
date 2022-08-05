@@ -30,6 +30,8 @@ use Juzaweb\Backend\Repositories\CommentRepositoryEloquent;
 use Juzaweb\Backend\Repositories\MediaFileRepository;
 use Juzaweb\Backend\Repositories\MediaFileRepositoryEloquent;
 use Juzaweb\Backend\Repositories\MediaFolderRepository;
+use Juzaweb\Backend\Repositories\NotificationRepository;
+use Juzaweb\Backend\Repositories\NotificationRepositoryEloquent;
 use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\Backend\Repositories\PostRepositoryEloquent;
 use Juzaweb\Backend\Repositories\TaxonomyRepository;
@@ -50,7 +52,8 @@ class BackendServiceProvider extends ServiceProvider
         CommentRepository::class => CommentRepositoryEloquent::class,
         UserRepository::class => UserRepositoryEloquent::class,
         MediaFileRepository::class => MediaFileRepositoryEloquent::class,
-        MediaFolderRepository::class => MediaFileRepositoryEloquent::class
+        MediaFolderRepository::class => MediaFileRepositoryEloquent::class,
+        NotificationRepository::class => NotificationRepositoryEloquent::class
     ];
 
     public function boot()

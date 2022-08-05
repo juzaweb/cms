@@ -438,6 +438,7 @@ return [
     'redirect_url' => 'Redirect url',
     'social_login' => 'Social Login',
     'quick_edit' => 'Quick edit',
+    'settings' => 'Settings',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',

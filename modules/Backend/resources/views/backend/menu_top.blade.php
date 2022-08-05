@@ -54,7 +54,7 @@
                                 @else
                                     @foreach($items as $notify)
                                         <li class="jw__l8__item">
-                                            <a href="{{ @$notify->data['url'] }}" class="jw__l8__itemLink" data-turbolinks="false">
+                                            <a href="{{ route('admin.profile.notification', [$notify->id]) }}" class="jw__l8__itemLink" data-turbolinks="false">
                                                 <div class="jw__l8__itemPic bg-success">
                                                     @if(empty($notify->data['image']))
                                                         <i class="fa fa-envelope-square"></i>

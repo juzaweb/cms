@@ -21,22 +21,25 @@
     @php
     $hasDetailFormater = collect($columns)->whereNotNull('detailFormater')->isNotEmpty();
     @endphp
-    <div class="col-md-10">
-        <form method="get" class="form-inline" id="form-search">
-            @foreach($searchFields as $name => $field)
-                {{ $searchFieldTypes[$field['type']]['view']
-                    ->with([
-                        'name' => $name,
-                        'field' => $field
-                    ])
-                }}
-            @endforeach
 
-            <button type="submit" class="btn btn-primary mb-2">
-                <i class="fa fa-search"></i> {{ trans('cms::app.search') }}
-            </button>
-        </form>
-    </div>
+    @if($searchable)
+        <div class="col-md-10">
+            <form method="get" class="form-inline" id="form-search">
+                @foreach($searchFields as $name => $field)
+                    {{ $searchFieldTypes[$field['type']]['view']
+                        ->with([
+                            'name' => $name,
+                            'field' => $field
+                        ])
+                    }}
+                @endforeach
+
+                <button type="submit" class="btn btn-primary mb-2">
+                    <i class="fa fa-search"></i> {{ trans('cms::app.search') }}
+                </button>
+            </form>
+        </div>
+    @endif
 </div>
 
 <div class="table-responsive">
@@ -82,12 +85,12 @@
     }
     @endif
 
-    var table = new JuzawebTable({
+    const table = new JuzawebTable({
         table: "#{{ $uniqueId }}",
         page_size: parseInt("{{ $perPage }}"),
         sort_name: "{{ $sortName }}",
         sort_order: "{{ $sortOder }}",
-        url: '{{ $dataUrl }}',
-        action_url: '{{ $actionUrl }}'
+        url: "{{ $dataUrl }}",
+        action_url: "{{ $actionUrl }}"
     });
 </script>
