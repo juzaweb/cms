@@ -35,6 +35,8 @@ use Illuminate\Support\Arr;
  */
 class Notification extends Model
 {
+    protected $keyType = 'string';
+
     protected $table = 'notifications';
 
     protected $fillable = [

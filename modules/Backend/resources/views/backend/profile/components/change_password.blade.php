@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('admin.profile.change-password') }}" class="form-ajax">
+<form method="post" action="{{ route('admin.profile.change-password') }}" class="form-ajax" data-success="changePasswordSuccess">
     <div class="row">
         <div class="col-md-6">
             {{ Field::text(trans('cms::app.current_password'), 'current_password', [
@@ -24,3 +24,10 @@
         </div>
     </div>
 </form>
+
+<script>
+    function changePasswordSuccess(form, response)
+    {
+        form.find('input').val('');
+    }
+</script>

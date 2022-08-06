@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md-8"></div>
 
         <div class="col-md-4 text-right">

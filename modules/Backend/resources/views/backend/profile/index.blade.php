@@ -59,19 +59,25 @@
             <div class="card">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">{{ trans('cms::app.settings') }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#notifications" data-toggle="tab">{{ trans('cms::app.notifications') }}</a></li>
+                        <li class="nav-item"><a class="nav-link @if(!isset($notification)) active @endif" href="#settings" data-toggle="tab">{{ trans('cms::app.settings') }}</a></li>
+                        <li class="nav-item"><a class="nav-link @if(isset($notification)) active @endif" href="#notifications" data-toggle="tab">{{ trans('cms::app.notifications') }}</a></li>
                         <li class="nav-item text-capitalize"><a class="nav-link" href="#change-password" data-toggle="tab">{{ trans('cms::app.change_password') }}</a></li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="settings">
+                        <div class="tab-pane @if(!isset($notification)) active @endif" id="settings">
                             @include('cms::backend.profile.components.info')
                         </div>
 
-                        <div class="tab-pane" id="notifications">
-                            {{ $dataTable->render() }}
+                        <div class="tab-pane @if(isset($notification)) active @endif" id="notifications">
+                            @if(isset($notification))
+                                <h3>{{ $notification->subject }}</h3>
+
+                                {!! $notification->data['body'] !!}
+                            @else
+                                {{ $dataTable->render() }}
+                            @endif
                         </div>
 
                         <div class="tab-pane" id="change-password">

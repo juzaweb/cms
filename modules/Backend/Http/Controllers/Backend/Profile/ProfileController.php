@@ -144,12 +144,20 @@ class ProfileController extends BackendController
         $user->setAttribute('password', Hash::make($password));
         $user->save();
 
-        return $this->success(trans('cms::message.change_password_successfully'));
+        return $this->success(
+            trans('cms::message.change_password_successfully')
+        );
     }
 
-    public function notification($id): View|RedirectResponse
+    public function notification($id): RedirectResponse|View
     {
+        global $jw_user;
+
         $notification = $this->notificationRepository->find($id);
+
+        if (empty($notification->read_at)) {
+            $notification->update(['read_at' => now()]);
+        }
 
         if ($notification->url) {
             return redirect()->to($notification->url);
@@ -157,9 +165,20 @@ class ProfileController extends BackendController
 
         $title = $notification->subject;
 
+        $this->addBreadcrumb(
+            [
+                'title' => trans('cms::app.profile'),
+                'url' => route('admin.profile')
+            ]
+        );
+
         return view(
-            'cms::backend.profile.notification',
-            compact('title', 'notification')
+            'cms::backend.profile.index',
+            compact(
+                'title',
+                'notification',
+                'jw_user'
+            )
         );
     }
 

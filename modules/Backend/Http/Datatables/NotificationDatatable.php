@@ -32,7 +32,7 @@ class NotificationDatatable extends DataTable
             'subject' => [
                 'label' => trans('cms::app.subject'),
                 'formatter' => function ($value, $row, $index) {
-                    return e(Arr::get($row->data, 'subject'));
+                    return '<a href="'. route('admin.profile.notification', [$row->id]) .'">'. e($row->subject) .'</a>';
                 },
             ],
             'created_at' => [

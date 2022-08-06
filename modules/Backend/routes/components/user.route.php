@@ -23,5 +23,7 @@ Route::group(
         Route::post('change-password', [ProfileController::class, 'changePassword'])
             ->name('admin.profile.change-password');
         Route::get('notification-datatable', [ProfileController::class, 'notificationDatatable']);
+
+        Route::get('notification/{id}', [ProfileController::class, 'notification'])->name('admin.profile.notification');
     }
 );
