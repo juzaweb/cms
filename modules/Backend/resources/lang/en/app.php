@@ -455,6 +455,7 @@ return [
     'updating' => 'Updating...',
     'custom_seo' => 'Custom SEO',
     'buy' => 'Buy',
+    'mark_as_viewed' => 'Mark as viewed',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',

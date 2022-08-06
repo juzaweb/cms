@@ -31,7 +31,10 @@ class NotificationDatatable extends DataTable
             'subject' => [
                 'label' => trans('cms::app.subject'),
                 'formatter' => function ($value, $row, $index) {
-                    return '<a href="'. route('admin.profile.notification', [$row->id]) .'">'. e($row->subject) .'</a>';
+                    $class = $row->read_at ? '': 'font-weight-bold';
+                    return '<a href="'. route('admin.profile.notification', [$row->id]) .'" class="'. $class .'">'.
+                        e($row->subject) .
+                        '</a>';
                 },
             ],
             'created_at' => [
@@ -44,12 +47,30 @@ class NotificationDatatable extends DataTable
         ];
     }
 
+    public function actions(): array
+    {
+        $actions = parent::actions();
+
+        $actions['viewed'] = trans('cms::app.mark_as_viewed');
+
+        return $actions;
+    }
+
     public function bulkActions($action, $ids)
     {
         switch ($action) {
             case 'delete':
                 foreach ($ids as $id) {
                     $this->notificationRepository->delete($id);
+                }
+                break;
+            case 'viewed':
+                foreach ($ids as $id) {
+                    $notify = $this->notificationRepository->find($id);
+                    
+                    if (empty($notify->read_at)) {
+                        $notify->update(['read_at' => now()]);
+                    }
                 }
                 break;
         }
