@@ -20,7 +20,7 @@ mix.options(
     }
 );
 
-//require(`${modulePath}/mix.js`);
+require(`${modulePath}/mix.js`);
 //require(`${modulePath}/filemanage.mix.js`);
 //require(`${pluginPath}/ecommerce/assets/mix.js`);
 //require(`${themePath}/gamxo/assets/mix.js`);

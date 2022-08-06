@@ -9,7 +9,7 @@ $(document).ready(function () {
     if ($('.load-checkbox-items').length) {
         $.ajax({
             type: 'GET',
-            url: '/admin-cp/load-data/loadGenres',
+            url: '/'+ juzaweb.adminPrefix +'/load-data/loadGenres',
             dataType: 'json',
             data: {}
         }).done(function(data) {

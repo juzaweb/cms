@@ -71,10 +71,10 @@
                     }
                 ],
                 file_picker_callback : function(callback, value, meta) {
-                    var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-                    var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+                    let x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                    let y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+                    let cmsURL = '/'+ juzaweb.adminPrefix +'/file-manager?editor=' + meta.fieldname;
 
-                    var cmsURL = '/admin-cp/file-manager?editor=' + meta.fieldname;
                     if (meta.filetype == 'image') {
                         cmsURL = cmsURL + "&type=image";
                     } else {
@@ -110,7 +110,6 @@
                                 'description': description,
                             }
                         }).done(function(data) {
-
                             if (data.status === false) {
                                 show_message(data);
                                 return false;
