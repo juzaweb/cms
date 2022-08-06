@@ -72,9 +72,21 @@
 
                         <div class="tab-pane @if(isset($notification)) active @endif" id="notifications">
                             @if(isset($notification))
-                                <h3>{{ $notification->subject }}</h3>
+                                <a href="{{ route('admin.profile') }}">
+                                    <i class="fa fa-hand-o-left"></i> {{ trans('cms::app.notifications') }}
+                                </a>
 
-                                {!! $notification->data['body'] !!}
+                                <div class="card mt-3">
+                                    <div class="card-header">
+                                        <h5 class="card-title">{{ $notification->subject }}</h5>
+                                        <span class="time"><i class="fa fa-clock"></i> {{ $notification->created_at?->diffForHumans() }}</span>
+                                    </div>
+
+                                    <div class="card-body">
+                                        {!! $notification->data['body'] !!}
+                                    </div>
+                                </div>
+
                             @else
                                 {{ $dataTable->render() }}
                             @endif
@@ -88,4 +100,15 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    <style>
+        .card .card-header .time {
+            right: 10px;
+            position: absolute;
+            top: 5px;
+            font-size: 12px;
+        }
+    </style>
 @endsection

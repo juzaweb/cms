@@ -66,48 +66,6 @@ class ProfileController extends BackendController
         );
     }
 
-    public function notificationDatatable(Request $request): JsonResponse
-    {
-        $sort = $request->get('sort', 'id');
-        $order = $request->get('order', 'desc');
-        $offset = $request->get('offset', 0);
-        $limit = (int) $request->get('limit', 20);
-
-        $table = $this->getNotificationDataTable();
-        $query = $table->query($request->all());
-        $query->orderBy($sort, $order);
-        $query->offset($offset);
-        $query->limit($limit);
-
-        $count = $query->count();
-        $rows = $query->get();
-
-        $results = [];
-        $columns = $table->columns();
-
-        foreach ($rows as $index => $row) {
-            $columns['id'] = $row->id;
-            foreach ($columns as $col => $column) {
-                if (! empty($column['formatter'])) {
-                    $results[$index][$col] = $column['formatter'](
-                        $row->{$col} ?? null,
-                        $row,
-                        $index
-                    );
-                } else {
-                    $results[$index][$col] = $row->{$col};
-                }
-            }
-        }
-
-        return response()->json(
-            [
-                'total' => $count,
-                'rows' => $results,
-            ]
-        );
-    }
-
     public function update(ProfileUpdateRequest $request): JsonResponse|RedirectResponse
     {
         $user = $request->user();
@@ -197,8 +155,6 @@ class ProfileController extends BackendController
 
     private function getNotificationDataTable()
     {
-        $dataTable = app(NotificationDatatable::class);
-        //$dataTable->setDataUrl(action([static::class, 'notificationDatatable']));
-        return $dataTable;
+        return app(NotificationDatatable::class);
     }
 }
