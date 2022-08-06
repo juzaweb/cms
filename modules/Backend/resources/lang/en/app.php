@@ -354,6 +354,7 @@ return [
     'user_name' => 'User name',
     'user_email' => 'User email',
     'verify_token' => 'Verify token',
+    'current_password' => 'Current password',
     'current_password_incorrect' => 'Current password incorrect',
     'update_now' => 'Update now',
     're_update' => 'Re-Update',

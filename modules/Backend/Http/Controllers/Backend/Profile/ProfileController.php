@@ -15,7 +15,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Juzaweb\Backend\Http\Datatables\NotificationDatatable;
+use Juzaweb\Backend\Http\Requests\User\ChangePasswordRequest;
 use Juzaweb\Backend\Http\Requests\User\ProfileUpdateRequest;
 use Juzaweb\Backend\Repositories\NotificationRepository;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -42,7 +44,7 @@ class ProfileController extends BackendController
 
         $countries = config('countries');
 
-        $languages = Language::get(['id', 'name'])
+        $languages = Language::get(['code', 'name'])
             ->mapWithKeys(
                 function ($item) {
                     return [
@@ -126,7 +128,23 @@ class ProfileController extends BackendController
             throw $e;
         }
 
-        return $this->success(trans('cms::app.updated_successfully'));
+        return $this->success(trans('cms::message.update_successfully'));
+    }
+
+    public function changePassword(ChangePasswordRequest $request): JsonResponse|RedirectResponse
+    {
+        $user = $request->user();
+        $current = $request->post('current_password');
+        $password = $request->post('password');
+
+        if (!Hash::check($current, $user->password)) {
+            return $this->error(trans('validation.current_password'));
+        }
+
+        $user->setAttribute('password', Hash::make($password));
+        $user->save();
+
+        return $this->success(trans('cms::message.change_password_successfully'));
     }
 
     public function notification($id): View|RedirectResponse

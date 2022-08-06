@@ -28,10 +28,8 @@ class ProfileUpdateRequest extends FormRequest
                 'string',
                 'max:150'
             ],
-            //'password' => 'required|string|max:32|min:8|confirmed',
-            //'password_confirmation' => 'required|string|max:32|min:8',
             'language' => [
-                'bail',
+                'required',
                 'nullable',
                 'string',
                 'max:5'
@@ -50,14 +48,6 @@ class ProfileUpdateRequest extends FormRequest
                 'nullable',
                 'string',
             ]
-        ];
-    }
-
-    public function attributes(): array
-    {
-        return [
-            'password' => trans('cms::app.password'),
-            'password_confirmation' => trans('cms::app.confirm_password'),
         ];
     }
 }

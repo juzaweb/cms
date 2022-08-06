@@ -20,8 +20,8 @@ Route::group(
     function () {
         Route::get('/', [ProfileController::class, 'index'])->name('admin.profile');
         Route::put('/', [ProfileController::class, 'update']);
+        Route::post('change-password', [ProfileController::class, 'changePassword'])
+            ->name('admin.profile.change-password');
         Route::get('notification-datatable', [ProfileController::class, 'notificationDatatable']);
-
-        Route::get('notification/{id}/detail', [ProfileController::class, 'index'])->name('admin.profile.notification');
     }
 );
