@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Validator;
 use Juzaweb\Backend\Events\AfterPostSave;
 use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 
@@ -29,10 +31,71 @@ trait PostTypeController
         ResourceController::getDataForForm as DataForForm;
     }
 
-    /**
-     * @return string
-     */
-    protected function getModel(...$params)
+    public function datatable(Request $request, ...$params)
+    {
+        $this->checkPermission(
+            'index',
+            $this->getModel(...$params),
+            ...$params
+        );
+
+        $table = $this->getDataTable(...$params);
+        $table->setCurrentUrl(action([static::class, 'index'], $params, false));
+
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'desc');
+        $offset = $request->get('offset', 0);
+        $limit = (int) $request->get('limit', 20);
+
+        $query = $table->query($request->all());
+        $count = $query->count();
+        $query->orderBy($sort, $order);
+        $query->offset($offset);
+        $query->limit($limit);
+        $rows = $query->get();
+
+        $results = [];
+        $columns = $table->columns();
+
+        $postType = $this->getPostType();
+        $taxonomies = Taxonomy::where('post_type', '=', $postType)
+            ->whereNull('parent_id')
+            ->get();
+        $postTypeTaxonomies = HookAction::getTaxonomies($postType);
+
+        foreach ($rows as $index => $row) {
+            $columns['id'] = $row->id;
+            foreach ($columns as $col => $column) {
+                if (! empty($column['formatter'])) {
+                    $results[$index][$col] = $column['formatter'](
+                        $row->{$col} ?? null,
+                        $row,
+                        $index
+                    );
+                } else {
+                    $results[$index][$col] = $row->{$col};
+                }
+
+                if (!empty($column['detailFormater'])) {
+                    $results[$index]['detailFormater'] = $column['detailFormater'](
+                        $index,
+                        $row,
+                        $taxonomies,
+                        $postTypeTaxonomies
+                    );
+                }
+            }
+        }
+
+        return response()->json(
+            [
+                'total' => $count,
+                'rows' => $results,
+            ]
+        );
+    }
+
+    protected function getModel(...$params): string
     {
         return Post::class;
     }
@@ -97,7 +160,7 @@ trait PostTypeController
         return $validator;
     }
 
-    protected function getSetting()
+    protected function getSetting(): Collection
     {
         $postType = $this->getPostType();
         $setting = HookAction::getPostTypes($postType);
@@ -161,7 +224,7 @@ trait PostTypeController
         );
     }
 
-    protected function getDataForIndex(...$params)
+    protected function getDataForIndex(...$params): array
     {
         $data = $this->DataForIndex(...$params);
         $data['setting'] = $this->getSetting();
@@ -190,12 +253,12 @@ trait PostTypeController
         );
     }
 
-    protected function checkPermission($ability, $arguments = [], ...$params)
+    protected function checkPermission($ability, $arguments = [], ...$params): void
     {
         $this->authorize($ability, [$arguments, $this->getPostType()]);
     }
 
-    protected function hasPermission($ability, $arguments = [], ...$params)
+    protected function hasPermission($ability, $arguments = [], ...$params): bool
     {
         $response = Gate::inspect($ability, [$arguments, $this->getPostType()]);
         return $response->allowed();
@@ -205,7 +268,7 @@ trait PostTypeController
      * @param Post|Model $model
      * @return array|Collection
      */
-    private function getTemplateData($model)
+    private function getTemplateData($model): array|Collection
     {
         $template = $this->getTemplate($model);
 
@@ -213,15 +276,14 @@ trait PostTypeController
             return [];
         }
 
-        $data = HookAction::getThemeTemplates($template);
-        return $data;
+        return HookAction::getThemeTemplates($template);
     }
 
     /**
-     * @param Post|Model $model
+     * @param Model|Post $model
      * @return string
      */
-    private function getTemplate($model)
+    private function getTemplate(Model|Post $model): ?string
     {
         $template = request()->get('template');
         if (empty($template)) {

@@ -1,8 +1,7 @@
 @extends('cms::layouts.backend')
 
 @section('content')
-
-    <div class="row mb-3">
+    <div class="row mb-4">
         <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="btn-group float-right">
@@ -15,12 +14,12 @@
 
     <div class="row" id="theme-list">
         @if($currentTheme)
-        <div class="col-md-4">
+        <div class="col-md-4 p-2 theme-list-item">
             <div class="card">
                 <div class="height-200 d-flex flex-column jw__g13__head" style="background-image: url('{{ $currentTheme->get('screenshot') }}')">
                 </div>
 
-                <div class="card card-borderless mb-0">
+                <div class="card card-bottom card-borderless mb-0">
                     <div class="card-header border-bottom-0">
                         <div class="d-flex">
                             <div class="text-dark text-uppercase font-weight-bold mr-auto">
@@ -38,7 +37,7 @@
     </div>
 
     <template id="theme-template">
-        <div class="col-md-4 theme-list-item">
+        <div class="col-md-4 p-2 theme-list-item">
             {content}
         </div>
     </template>

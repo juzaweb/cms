@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     var item_template = '<li class="m-1" id="item-genre-{id}">\n' +
         '        <div class="custom-control custom-checkbox">\n' +
         '            <input type="checkbox" name="items[]" class="custom-control-input" id="genre-{id}" value="{id}">\n' +
@@ -9,7 +9,7 @@ $(document).on("turbolinks:load", function() {
     if ($('.load-checkbox-items').length) {
         $.ajax({
             type: 'GET',
-            url: '/admin-cp/load-data/loadGenres',
+            url: '/'+ juzaweb.adminPrefix +'/load-data/loadGenres',
             dataType: 'json',
             data: {}
         }).done(function(data) {

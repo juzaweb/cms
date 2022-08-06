@@ -24,4 +24,5 @@ return [
     'update_successfully' => 'Update successfully',
     'install_successfully' => 'Install successfully',
     'upload_successfull' => 'Upload successfull',
+    'change_password_successfully' => 'Change password successfully.',
 ];

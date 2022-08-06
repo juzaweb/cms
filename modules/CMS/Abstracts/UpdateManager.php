@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Support\Curl;
-use Juzaweb\CMS\Support\JuzawebApi;
 
 /**
  * @method void beforeFinish()
@@ -28,12 +28,16 @@ use Juzaweb\CMS\Support\JuzawebApi;
 abstract class UpdateManager
 {
     protected Curl $curl;
-    protected JuzawebApi $api;
+
+    protected JuzawebApiContract $api;
+
     protected FilesystemAdapter $storage;
+
     protected array $updatePaths = [];
+
     protected int $maxStep = 6;
 
-    public function __construct(Curl $curl, JuzawebApi $api)
+    public function __construct(Curl $curl, JuzawebApiContract $api)
     {
         $this->curl = $curl;
         $this->api = $api;

@@ -10,6 +10,7 @@ mix.styles(
         baseAsset + '/css/menu.css',
         baseAsset + '/css/page.css',
         baseAsset + '/css/customs.css',
+        baseAsset + '/css/theme.css',
     ],
     `${basePublish}/css/custom.min.css`
 );
@@ -17,7 +18,7 @@ mix.styles(
 mix.combine(
     [
         baseAsset + '/js/load-ajax.js',
-        baseAsset + '/js/vendor-support.js',
+        baseAsset + '/js/helpers.js',
         baseAsset + '/js/custom-seo.js',
         baseAsset + '/js/filemanager.js',
         baseAsset + '/js/widget.js',

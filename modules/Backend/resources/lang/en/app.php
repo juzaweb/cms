@@ -101,6 +101,7 @@ return [
     'auto' => 'Auto',
     'registration' => 'Registration',
     'general' => 'General',
+    'download' => 'Download',
     'user_registration' => 'User Registration',
     'google_recaptcha' => 'Recaptcha',
     'google_recaptcha_key' => 'Recaptcha key',
@@ -353,6 +354,7 @@ return [
     'user_name' => 'User name',
     'user_email' => 'User email',
     'verify_token' => 'Verify token',
+    'current_password' => 'Current password',
     'current_password_incorrect' => 'Current password incorrect',
     'update_now' => 'Update now',
     're_update' => 'Re-Update',
@@ -375,6 +377,7 @@ return [
     'result_for_keyword' => 'Result for keyword :name',
     'search_results' => 'Search results',
     'install' => 'Install',
+    'installing' => 'Installing...',
     'views' => 'Views',
     'version' => 'Version',
     'install_now' => 'Install Now',
@@ -435,6 +438,8 @@ return [
     'client_secret' => 'Client secret',
     'redirect_url' => 'Redirect url',
     'social_login' => 'Social Login',
+    'quick_edit' => 'Quick edit',
+    'settings' => 'Settings',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',
@@ -449,6 +454,8 @@ return [
     'new_version' => 'New version',
     'updating' => 'Updating...',
     'custom_seo' => 'Custom SEO',
+    'buy' => 'Buy',
+    'mark_as_viewed' => 'Mark as viewed',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
@@ -519,5 +526,8 @@ return [
         'backup_setting' => 'Backup setting',
         'enable_backup' => 'Enable Backup',
         'backup_time' => 'Backup Time',
+    ],
+    'premium' => [
+        'activation_code' => 'Activation code',
     ]
 ];

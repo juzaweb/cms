@@ -57,18 +57,21 @@ trait GetHookAction
 
     public function getTaxonomies($postType = null)
     {
+        if (is_array($postType)) {
+            $postType = $postType['key'];
+        }
+
         $taxonomies = collect(GlobalData::get('taxonomies'));
 
         if (empty($taxonomies) || empty($postType)) {
             return $taxonomies;
         }
 
-        $taxonomies = collect($taxonomies[$postType] ?? []);
-        $taxonomies = $taxonomies ?
+        $taxonomies = collect($taxonomies->get($postType, []));
+
+        return $taxonomies ?
             $taxonomies->sortBy('menu_position')
             : [];
-
-        return $taxonomies;
     }
 
     public function getSettingForms(): Collection

@@ -62,7 +62,7 @@
 
         Dropzone.autoDiscover = false;
 
-        document.addEventListener("turbolinks:load", function () {
+        $(document).ready(function () {
             new Dropzone("#themeUploadForm", {
                 uploadMultiple: false,
                 parallelUploads: 5,

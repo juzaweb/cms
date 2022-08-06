@@ -13,9 +13,11 @@ namespace Juzaweb\Network\Providers;
 use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\Network\Contracts\NetworkRegistionContract;
+use Juzaweb\Network\Contracts\SiteManagerContract;
 use Juzaweb\Network\Facades\Network;
 use Juzaweb\Network\NetworkAction;
 use Juzaweb\Network\Support\NetworkRegistion;
+use Juzaweb\Network\Support\SiteManager;
 
 class NetworkServiceProvider extends ServiceProvider
 {
@@ -41,6 +43,15 @@ class NetworkServiceProvider extends ServiceProvider
                     $app['config'],
                     $app['request'],
                     $app['cache'],
+                    $app['db']
+                );
+            }
+        );
+
+        $this->app->singleton(
+            SiteManagerContract::class,
+            function ($app) {
+                return new SiteManager(
                     $app['db']
                 );
             }

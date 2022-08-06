@@ -32,6 +32,10 @@ abstract class DataTable
 
     protected $actionUrl;
 
+    protected array $escapes = [];
+
+    protected bool $searchable = true;
+
     public string $currentUrl;
 
     /**
@@ -61,28 +65,13 @@ abstract class DataTable
 
     public function render()
     {
-        $uniqueId = 'juzaweb_' . Str::random(10);
-        $searchFields = $this->searchFields();
         if (empty($this->currentUrl)) {
             $this->currentUrl = url()->current();
         }
 
         return view(
             'cms::components.datatable',
-            [
-                'columns' => $this->columns(),
-                'actions' => $this->actions(),
-                'uniqueId' => $uniqueId,
-                'params' => $this->params,
-                'searchFields' => $searchFields,
-                'perPage' => $this->perPage,
-                'sortName' => $this->sortName,
-                'sortOder' => $this->sortOder,
-                'dataUrl' => $this->dataUrl,
-                'actionUrl' => $this->actionUrl,
-                'searchFieldTypes' => $this->getSearchFieldTypes(),
-                'table' => Crypt::encryptString(static::class),
-            ]
+            $this->getDataRender()
         );
     }
 
@@ -151,6 +140,29 @@ abstract class DataTable
     public function setCurrentUrl(string $url): void
     {
         $this->currentUrl = $url;
+    }
+
+    protected function getDataRender(): array
+    {
+        $uniqueId = 'juzaweb_' . Str::random(10);
+        $searchFields = $this->searchFields();
+
+        return [
+            'columns' => $this->columns(),
+            'actions' => $this->actions(),
+            'uniqueId' => $uniqueId,
+            'params' => $this->params,
+            'searchFields' => $searchFields,
+            'perPage' => $this->perPage,
+            'sortName' => $this->sortName,
+            'sortOder' => $this->sortOder,
+            'dataUrl' => $this->dataUrl,
+            'actionUrl' => $this->actionUrl,
+            'escapes' => $this->escapes,
+            'searchable' => $this->searchable,
+            'searchFieldTypes' => $this->getSearchFieldTypes(),
+            'table' => Crypt::encryptString(static::class),
+        ];
     }
 
     private function paramsToArray($params)

@@ -8,7 +8,7 @@
  * Date: 2021-03-12T21:04Z
  */
 
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     $('body').on('submit', '.form-ajax', function(event) {
         if (event.isDefaultPrevented()) {
             return false;
@@ -48,7 +48,7 @@ $(document).on("turbolinks:load", function() {
 
             if (response.data.redirect) {
                 setTimeout(function () {
-                    Turbolinks.visit(response.data.redirect, {action: "replace"});
+                    window.location = response.data.redirect;
                 }, 1000);
                 return false;
             }

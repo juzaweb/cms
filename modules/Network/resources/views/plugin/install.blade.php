@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md-8"></div>
 
         <div class="col-md-4 text-right">
@@ -73,7 +73,7 @@
 
         Dropzone.autoDiscover = false;
 
-        document.addEventListener("turbolinks:load", function () {
+        $(document).ready(function () {
             new Dropzone("#pluginUploadForm", {
                 uploadMultiple: false,
                 parallelUploads: 5,

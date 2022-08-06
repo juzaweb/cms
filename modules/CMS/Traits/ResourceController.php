@@ -218,6 +218,13 @@ trait ResourceController
                 } else {
                     $results[$index][$col] = $row->{$col};
                 }
+
+                if (!empty($column['detailFormater'])) {
+                    $results[$index]['detailFormater'] = $column['detailFormater'](
+                        $index,
+                        $row
+                    );
+                }
             }
         }
 
@@ -411,16 +418,9 @@ trait ResourceController
 
     protected function updateSuccessResponse($model, $request, ...$params)
     {
-        $editRoute = str_replace(
-            '.update',
-            '.edit',
-            Route::currentRouteName()
-        );
-
         return $this->success(
             [
                 'message' => trans('cms::app.updated_successfully'),
-                'redirect' => route($editRoute, $params),
             ]
         );
     }

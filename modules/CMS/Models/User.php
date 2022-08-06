@@ -13,6 +13,7 @@ namespace Juzaweb\CMS\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -25,7 +26,7 @@ use Juzaweb\CMS\Traits\Permission\HasRoles;
 use Juzaweb\CMS\Traits\ResourceModel;
 use Juzaweb\Network\Facades\Network;
 use Juzaweb\Network\Traits\RootNetworkModel;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 
 /**
  * Juzaweb\CMS\Models\User
@@ -78,7 +79,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static Builder|User role($roles, $guard = null)
  * @property int|null $site_id
  * @property-read DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection $tokens
  * @property-read int|null $tokens_count
  * @method static Builder|User whereSiteId($value)
  */
@@ -102,6 +103,8 @@ class User extends Authenticatable
         'status',
         'verification_token',
         'data',
+        'json_metas',
+        'language'
     ];
 
     protected $hidden = [
@@ -109,7 +112,8 @@ class User extends Authenticatable
     ];
 
     public $casts = [
-        'data' => 'array'
+        'data' => 'array',
+        'json_metas' => 'array'
     ];
 
     public static function getAllStatus(): array
@@ -136,6 +140,79 @@ class User extends Authenticatable
         return $this->hasOne(PasswordReset::class, 'email', 'email');
     }
 
+    public function metas(): HasMany
+    {
+        return $this->hasMany(UserMeta::class, 'user_id', 'id');
+    }
+
+    public function getMeta($key, $default = null): mixed
+    {
+        return $this->json_metas[$key] ?? $default;
+    }
+
+    public function getMetas(): ?array
+    {
+        return $this->json_metas;
+    }
+
+    public function setMeta($key, $value): void
+    {
+        $metas = $this->getMetas();
+
+        $this->metas()->updateOrCreate(
+            [
+                'meta_key' => $key
+            ],
+            [
+                'meta_value' => is_array($value) ? json_encode($value) : $value
+            ]
+        );
+
+        $metas[$key] = $value;
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+    }
+
+    public function deleteMeta($key): bool
+    {
+        $this->metas()->where('meta_key', $key)->delete();
+
+        $metas = $this->getMetas();
+
+        unset($metas[$key]);
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+
+        return true;
+    }
+
+    public function deleteMetas(array $keys): bool
+    {
+        $this->metas()->whereIn('meta_key', $keys)->delete();
+
+        $metas = $this->getMetas();
+
+        foreach ($keys as $key) {
+            unset($metas[$key]);
+        }
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+
+        return true;
+    }
+
     /**
      * @param Builder $builder
      * @return Builder
@@ -153,20 +230,6 @@ class User extends Authenticatable
 
         return asset('jw-styles/juzaweb/images/avatar.png');
     }
-
-    /*public function subscription()
-    {
-        return $this->hasOne(
-            UserSubscription::class,
-            'user_id',
-            'id'
-        );
-    }
-
-    public function subscriptionHistories()
-    {
-        return $this->hasMany(SubscriptionHistory::class, 'user_id', 'id');
-    }*/
 
     public function isAdmin(): bool
     {

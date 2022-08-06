@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     $('.form-taxonomy').on('click', '.add-new', function () {
         let formAdd = $(this).closest('.form-taxonomy').find('.form-add');
         if (formAdd.is(':visible')) {

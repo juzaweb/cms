@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     let bodyElement = $('body');
     bodyElement.on('click', '.install-plugin', function () {
         let plugin = $(this).data('plugin');

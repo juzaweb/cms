@@ -14,6 +14,7 @@ use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\EventyContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Contracts\JWQueryContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Juzaweb\CMS\Contracts\OverwriteConfigContract;
@@ -26,6 +27,7 @@ use Juzaweb\CMS\Support\CacheGroup;
 use Juzaweb\CMS\Support\Config as DbConfig;
 use Juzaweb\CMS\Support\GlobalData;
 use Juzaweb\CMS\Support\HookAction;
+use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\CMS\Support\JWQuery;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Manager\BackendMessageManager;
@@ -38,6 +40,7 @@ use Juzaweb\CMS\Support\XssCleaner;
 use Juzaweb\DevTool\Providers\DevToolServiceProvider;
 use Juzaweb\Frontend\Providers\FrontendServiceProvider;
 use Juzaweb\Network\Providers\NetworkServiceProvider;
+use Juzaweb\Translation\Providers\TranslationServiceProvider;
 use TwigBridge\Facade\Twig;
 use Illuminate\Pagination\Paginator;
 
@@ -106,6 +109,11 @@ class CmsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             $this->basePath . '/config/locales.php',
             'locales'
+        );
+
+        $this->mergeConfigFrom(
+            $this->basePath . '/config/countries.php',
+            'countries'
         );
 
         $this->mergeConfigFrom(
@@ -221,6 +229,15 @@ class CmsServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
+            JuzawebApiContract::class,
+            function ($app) {
+                return new JuzawebApi(
+                    $app[ConfigContract::class]
+                );
+            }
+        );
+
+        $this->app->singleton(
             JWQueryContract::class,
             function ($app) {
                 return new JWQuery($app['db']);
@@ -240,6 +257,10 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(DevToolServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
         $this->app->register(FrontendServiceProvider::class);
+
+        if (config('juzaweb.translation.enable')) {
+            $this->app->register(TranslationServiceProvider::class);
+        }
 
         if (config('juzaweb.api.enable')) {
             $this->app->register(APIServiceProvider::class);

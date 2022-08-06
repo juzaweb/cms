@@ -1,0 +1,11 @@
+#theme-list .theme-list-item .card-bottom {
+    position: absolute;
+    background: rgb(255 255 255 / 88%);
+    width: 100%;
+    bottom: 0;
+    display: none;
+}
+
+#theme-list .theme-list-item:hover .card-bottom {
+    display: block;
+}

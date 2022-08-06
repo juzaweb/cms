@@ -73,7 +73,7 @@
     </div>
 
     <script type="text/javascript">
-        $(document).on("turbolinks:load", function() {
+        $(document).ready(function () {
             @if($type == 'cms')
             jwCMSUpdate(
                 "{{ $type }}",

@@ -16,15 +16,22 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Events\AfterUploadTheme;
 use Juzaweb\Backend\Support\ThemeUploader;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\JuzawebApi;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class ThemeInstallController extends BackendController
 {
+    protected JuzawebApiContract $api;
+
+    public function __construct(JuzawebApiContract $api)
+    {
+        $this->api = $api;
+    }
+
     public function index(): View
     {
         if (!config('juzaweb.theme.enable_upload')) {
@@ -46,17 +53,19 @@ class ThemeInstallController extends BackendController
         );
     }
 
-    public function getData(Request $request, JuzawebApi $api): object|array
+    public function getData(Request $request): object|array
     {
         if (!config('juzaweb.theme.enable_upload')) {
             return (object) [];
         }
 
         $limit = $request->get('limit', 20);
+
         $page = $request->get('page', 1);
+
         $except = array_keys(ThemeLoader::all(true));
 
-        return $api->get(
+        return $this->api->get(
             'themes',
             [
                 'limit' => $limit,

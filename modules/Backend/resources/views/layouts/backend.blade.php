@@ -9,7 +9,7 @@
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
-    <link href="https://fonts.googleapis.com/css?family=Mukta:400,700,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
     <script async src="https://www.gstatic.com/charts/loader.js"></script>
 
     @include('cms::components.juzaweb_langs')
@@ -59,11 +59,16 @@
 
         <div class="juzaweb__layout__content">
             @if(!request()->is(config('juzaweb.admin_prefix')))
-                {{ jw_breadcrumb('admin', [
-                        [
-                            'title' => $title
+                {{
+                    jw_breadcrumb(
+                        'admin',
+                         [
+                            [
+                                'title' => $title
+                            ]
                         ]
-                    ]) }}
+                    )
+                }}
             @else
                 <div class="mb-3"></div>
             @endif
@@ -71,7 +76,7 @@
             @if ($version = cache()->store('file')->get(cache_prefix('check_cms_update')))
             @if ($version != 1)
             <div class="alert alert-warning w-50 ml-3">
-                <a href="https://juzaweb.com/documentation/changelog">JuzaCms {{ $version }}</a> {{ __('is available!') }} <a href="{{ route('admin.update') }}">{{ __('Please update now') }}</a>.
+                <a href="https://juzaweb.com/documentation/changelog" target="_blank">JuzaWeb CMS {{ $version }}</a> {{ __('is available!') }} <a href="{{ route('admin.update') }}">{{ __('Please update now') }}</a>.
             </div>
             @endif
 
@@ -100,6 +105,7 @@
                     <div class="alert alert-{{ session()->get('status') == 'error' ? 'danger' : 'success' }} jw-message">{{ session()->get('message') }}</div>
                 @endif
 
+                <div id="jquery-message"></div>
 
                 @yield('content')
             </div>

@@ -1,6 +1,5 @@
 const mix = require('laravel-mix');
 const modulePath = `${__dirname}/modules/Backend/resources/assets`;
-const backendWebpack = `${__dirname}/modules/Backend/webpack.mix.js`;
 const pluginPath = `${__dirname}/plugins`;
 const themePath = `${__dirname}/themes`;
 
@@ -20,10 +19,12 @@ mix.options(
     }
 );
 
-//require(`${modulePath}/mix.js`);
-//require(`${modulePath}/filemanage.mix.js`);
-//require(`${pluginPath}/ecommerce/assets/mix.js`);
-//require(`${themePath}/gamxo/assets/mix.js`);
+if (process.env.npm_lifecycle_event === 'prod') {
+    //require(`${modulePath}/mix.js`);
+    //require(`${modulePath}/filemanage.mix.js`);
+    //require(`${pluginPath}/ecommerce/assets/mix.js`);
+    //require(`${themePath}/gamxo/assets/mix.js`);
+}
 
 mix.browserSync({
     files: [

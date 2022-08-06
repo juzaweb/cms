@@ -356,11 +356,7 @@ trait PostTypeModel
         array $attributes,
         string $postType = null
     ): bool {
-        if (!Arr::has($attributes, $taxonomy)) {
-            return true;
-        }
-
-        $postType = $postType ? $postType : $this->type;
+        $postType = $postType ?: $this->type;
         $data = Arr::get($attributes, $taxonomy, []);
 
         $detachIds = $this->taxonomies()

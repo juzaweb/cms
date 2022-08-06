@@ -2,7 +2,7 @@ function initSelect2(parent = 'body')
 {
     $(parent +' .select2').select2({
         allowClear: true,
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
         placeholder: function (params) {
             return {
@@ -14,12 +14,12 @@ function initSelect2(parent = 'body')
 
     $(parent +' .select2-default').select2({
         width: $(this).data('width') || '100%',
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
     });
 
     $(parent +' .load-taxonomies').select2({
         allowClear: true,
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
         placeholder: function(params) {
             return {
@@ -41,21 +41,20 @@ function initSelect2(parent = 'body')
                     }).get();
                 }
 
-                var query = {
+                return {
                     search: $.trim(params.term),
                     page: params.page,
                     explodes: explodes,
                     post_type: postType,
                     taxonomy: taxonomy
                 };
-                return query;
             }
         }
     });
 
     $(parent +' .load-users').select2({
         allowClear: true,
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
         placeholder: function (params) {
             return {
@@ -65,7 +64,7 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: '/admin-cp/load-data/loadUsers',
+            url: '/'+ juzaweb.adminPrefix +'/load-data/loadUsers',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
@@ -73,20 +72,18 @@ function initSelect2(parent = 'body')
                     explodes = $("." + explodes).map(function () {return $(this).val();}).get();
                 }
 
-                var query = {
+                return {
                     search: $.trim(params.term),
                     page: params.page,
                     explodes: explodes,
                 };
-
-                return query;
             }
         },
     });
 
     $(parent +' .load-menu').select2({
         allowClear: true,
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
         placeholder: function (params) {
             return {
@@ -96,7 +93,7 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: '/admin-cp/load-data/loadMenu',
+            url: '/'+ juzaweb.adminPrefix +'/load-data/loadMenu',
             dataType: 'json',
             data: function (params) {
                 let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
@@ -104,20 +101,18 @@ function initSelect2(parent = 'body')
                     explodes = $("." + explodes).map(function () {return $(this).val();}).get();
                 }
 
-                var query = {
+                return {
                     search: $.trim(params.term),
                     page: params.page,
                     explodes: explodes,
                 };
-
-                return query;
             }
         },
     });
 
     $(parent +' .load-pages').select2({
         allowClear: true,
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
         placeholder: function (params) {
             return {
@@ -127,22 +122,20 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: '/admin-cp/load-data/loadPages',
+            url: '/'+ juzaweb.adminPrefix +'/load-data/loadPages',
             dataType: 'json',
             data: function (params) {
-                var query = {
+                return {
                     search: $.trim(params.term),
                     page: params.page
                 };
-
-                return query;
             }
         },
     });
 
     $(parent +' .load-locales').select2({
         allowClear: true,
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
         placeholder: function (params) {
             return {
@@ -152,22 +145,20 @@ function initSelect2(parent = 'body')
         },
         ajax: {
             method: 'GET',
-            url: '/admin-cp/load-data/loadLocales',
+            url: '/'+ juzaweb.adminPrefix +'/load-data/loadLocales',
             dataType: 'json',
             data: function (params) {
-                var query = {
+                return {
                     search: $.trim(params.term),
                     page: params.page
                 };
-
-                return query;
             }
         },
     });
 
     $(parent +' .load-select2').select2({
         allowClear: true,
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
         placeholder: function (params) {
             return {
@@ -180,19 +171,17 @@ function initSelect2(parent = 'body')
             url: $(this).data('url') || '',
             dataType: 'json',
             data: function (params) {
-                var query = {
+                return {
                     search: $.trim(params.term),
                     page: params.page
                 };
-
-                return query;
             }
         },
     });
 
     $(parent +' .load-resources').select2({
         allowClear: true,
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
         placeholder: function(params) {
             return {
@@ -214,20 +203,19 @@ function initSelect2(parent = 'body')
                     }).get();
                 }
 
-                let query = {
+                return {
                     search: $.trim(params.term),
                     page: params.page,
                     explodes: explodes,
                     type: type
                 };
-                return query;
             }
         }
     });
 
     $(parent +' .load-subscription-objects').select2({
         allowClear: true,
-        dropdownAutoWidth: $(this).data('width') ? false : true,
+        dropdownAutoWidth: !$(this).data('width'),
         width: $(this).data('width') || '100%',
         placeholder: function(params) {
             return {
@@ -242,18 +230,16 @@ function initSelect2(parent = 'body')
             data: function (params) {
                 let module = $(this).data('module');
 
-                let query = {
+                return {
                     search: $.trim(params.term),
                     page: params.page,
                     module: module
                 };
-
-                return query;
             }
         }
     });
 }
 
-$(document).on("turbolinks:load", function() {
+$(document).ready(function () {
     initSelect2('body');
 });

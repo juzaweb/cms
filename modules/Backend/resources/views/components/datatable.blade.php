@@ -1,6 +1,6 @@
-<div class="row mb-3">
+<div class="row">
     @if($actions)
-        <div class="col-md-4">
+        <div class="col-md-2">
             <form method="post" class="form-inline">
                 @csrf
 
@@ -14,37 +14,43 @@
                         @endforeach
                     </div>
                 </div>
-
-                {{--<select name="bulk_actions" class="form-control select2-default" data-width="120px">
-                    <option value="">{{ trans('cms::app.bulk_actions') }}</option>
-                    @foreach($actions as $key => $action)
-                        <option value="{{ $key }}">{{ is_array($action) ? $action['label'] : $action }}</option>
-                    @endforeach
-                </select>--}}
             </form>
         </div>
     @endif
 
-    <div class="col-md-8">
-        <form method="get" class="form-inline" id="form-search">
-            @foreach($searchFields as $name => $field)
-                {{ $searchFieldTypes[$field['type']]['view']
-                    ->with([
-                        'name' => $name,
-                        'field' => $field
-                    ])
-                    }}
-            @endforeach
+    @php
+    $hasDetailFormater = collect($columns)->whereNotNull('detailFormater')->isNotEmpty();
+    @endphp
 
-            <button type="submit" class="btn btn-primary mb-2">
-                <i class="fa fa-search"></i> {{ trans('cms::app.search') }}
-            </button>
-        </form>
-    </div>
+    @if($searchable)
+        <div class="col-md-10">
+            <form method="get" class="form-inline" id="form-search">
+                @foreach($searchFields as $name => $field)
+                    {{ $searchFieldTypes[$field['type']]['view']
+                        ->with([
+                            'name' => $name,
+                            'field' => $field
+                        ])
+                    }}
+                @endforeach
+
+                <button type="submit" class="btn btn-primary mb-2">
+                    <i class="fa fa-search"></i> {{ trans('cms::app.search') }}
+                </button>
+            </form>
+        </div>
+    @endif
 </div>
 
 <div class="table-responsive">
-    <table class="table jw-table" id="{{ $uniqueId }}">
+    <table
+        class="table jw-table"
+        id="{{ $uniqueId }}"
+        @if($hasDetailFormater)
+        data-detail-view="true"
+        data-detail-formatter="detailFormater"
+        @endif
+    >
         <thead>
             <tr>
                 <th data-width="3%" data-checkbox="true"></th>
@@ -54,6 +60,9 @@
                         data-align="{{ $column['align'] ?? 'left' }}"
                         data-field="{{ $key }}"
                         data-sortable="{{ $column['sortable'] ?? true }}"
+                        @if(in_array($key, $escapes))
+                            data-escape="true"
+                        @endif
                     >{{
                                 $column['label'] ?? strtoupper($key) }}
                     </th>
@@ -64,17 +73,41 @@
 </div>
 
 @php
-    $dataUrl = $dataUrl ?: route('admin.datatable.get-data') .'?table='. urlencode($table) .'&data='. urlencode(json_encode($params)) .'&currentUrl='. url()->current();
-    $actionUrl = $actionUrl ?: route('admin.datatable.bulk-actions') .'?table='. urlencode($table) .'&data='. urlencode(json_encode($params)) .'&currentUrl='. url()->current();
+    if (!isset($dataUrl)) {
+        $data = [
+            'table' => $table,
+            'data' => json_encode($params),
+            'currentUrl' => url()->current()
+        ];
+
+        $dataUrl = route('admin.datatable.get-data') .'?'. http_build_query($data);
+    }
+
+    if (!isset($actionUrl)) {
+        $data = [
+            'table' => $table,
+            'data' => json_encode($params),
+            'currentUrl' => url()->current()
+        ];
+
+        $actionUrl = route('admin.datatable.bulk-actions') .'?'. http_build_query($data);
+    }
 @endphp
 
 <script type="text/javascript">
-    var table = new JuzawebTable({
+    @if (!empty($hasDetailFormater))
+    function detailFormater(index, row)
+    {
+        return row.detailFormater;
+    }
+    @endif
+
+    const table = new JuzawebTable({
         table: "#{{ $uniqueId }}",
         page_size: parseInt("{{ $perPage }}"),
         sort_name: "{{ $sortName }}",
         sort_order: "{{ $sortOder }}",
-        url: '{{ $dataUrl }}',
-        action_url: '{{ $actionUrl }}'
+        url: "{!!  $dataUrl !!}",
+        action_url: "{!! $actionUrl !!}"
     });
 </script>
