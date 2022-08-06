@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserMeta extends Model
 {
+    public $timestamps = false;
+
     protected $table = 'user_metas';
 
     protected $fillable = [

@@ -103,6 +103,7 @@ class User extends Authenticatable
         'status',
         'verification_token',
         'data',
+        'json_metas'
     ];
 
     protected $hidden = [
@@ -110,7 +111,8 @@ class User extends Authenticatable
     ];
 
     public $casts = [
-        'data' => 'array'
+        'data' => 'array',
+        'json_metas' => 'array'
     ];
 
     public static function getAllStatus(): array
@@ -152,6 +154,64 @@ class User extends Authenticatable
         return $this->json_metas;
     }
 
+    public function setMeta($key, $value): void
+    {
+        $metas = $this->getMetas();
+
+        $this->metas()->updateOrCreate(
+            [
+                'meta_key' => $key
+            ],
+            [
+                'meta_value' => is_array($value) ? json_encode($value) : $value
+            ]
+        );
+
+        $metas[$key] = $value;
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+    }
+
+    public function deleteMeta($key): bool
+    {
+        $this->metas()->where('meta_key', $key)->delete();
+
+        $metas = $this->getMetas();
+
+        unset($metas[$key]);
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+
+        return true;
+    }
+
+    public function deleteMetas(array $keys): bool
+    {
+        $this->metas()->whereIn('meta_key', $keys)->delete();
+
+        $metas = $this->getMetas();
+
+        foreach ($keys as $key) {
+            unset($metas[$key]);
+        }
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+
+        return true;
+    }
+
     /**
      * @param Builder $builder
      * @return Builder
@@ -169,20 +229,6 @@ class User extends Authenticatable
 
         return asset('jw-styles/juzaweb/images/avatar.png');
     }
-
-    /*public function subscription()
-    {
-        return $this->hasOne(
-            UserSubscription::class,
-            'user_id',
-            'id'
-        );
-    }
-
-    public function subscriptionHistories()
-    {
-        return $this->hasMany(SubscriptionHistory::class, 'user_id', 'id');
-    }*/
 
     public function isAdmin(): bool
     {

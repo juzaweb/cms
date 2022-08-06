@@ -28,8 +28,8 @@ class ProfileUpdateRequest extends FormRequest
                 'string',
                 'max:150'
             ],
-            'password' => 'required|string|max:32|min:8|confirmed',
-            'password_confirmation' => 'required|string|max:32|min:8',
+            //'password' => 'required|string|max:32|min:8|confirmed',
+            //'password_confirmation' => 'required|string|max:32|min:8',
             'language' => [
                 'bail',
                 'nullable',

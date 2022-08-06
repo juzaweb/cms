@@ -14,6 +14,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Http\Datatables\NotificationDatatable;
 use Juzaweb\Backend\Http\Requests\User\ProfileUpdateRequest;
 use Juzaweb\Backend\Repositories\NotificationRepository;
@@ -41,11 +42,11 @@ class ProfileController extends BackendController
 
         $countries = config('countries');
 
-        $languages = Language::get()
+        $languages = Language::get(['id', 'name'])
             ->mapWithKeys(
                 function ($item) {
                     return [
-                        $item->id => $item->name
+                        $item->code => $item->name
                     ];
                 }
             )
@@ -105,13 +106,27 @@ class ProfileController extends BackendController
         );
     }
 
-    public function update(ProfileUpdateRequest $request)
+    public function update(ProfileUpdateRequest $request): JsonResponse|RedirectResponse
     {
         $user = $request->user();
 
-        $user->update($request->only(['name', 'language']));
+        $metas = array_only($request->post('metas'), ['birthday', 'country']);
 
-        //
+        DB::beginTransaction();
+        try {
+            $user->update($request->only(['name', 'language']));
+
+            foreach ($metas as $key => $value) {
+                $user->setMeta($key, $value);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+
+        return $this->success(trans('cms::app.updated_successfully'));
     }
 
     public function notification($id): View|RedirectResponse
@@ -132,15 +147,15 @@ class ProfileController extends BackendController
 
     private function initLanguage(): void
     {
-        Language::firstOrCreate(
-            [
-                'code' => 'en',
-            ],
-            [
-                'name' => 'English',
-                'default' => true
-            ]
-        );
+        if (!Language::exists()) {
+            Language::create(
+                [
+                    'code' => 'en',
+                    'name' => 'English',
+                    'default' => true
+                ]
+            );
+        }
     }
 
     private function getNotificationDataTable()

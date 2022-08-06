@@ -61,57 +61,21 @@
                     <ul class="nav nav-pills">
                         <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">{{ trans('cms::app.settings') }}</a></li>
                         <li class="nav-item"><a class="nav-link" href="#notifications" data-toggle="tab">{{ trans('cms::app.notifications') }}</a></li>
+                        <li class="nav-item text-capitalize"><a class="nav-link" href="#change-password" data-toggle="tab">{{ trans('cms::app.change_password') }}</a></li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="settings">
-                            <form method="post" action="" class="form-horizontal">
-                                @csrf
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {{ Field::text($jw_user, 'name') }}
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        {{ Field::text($jw_user, 'email', ['disabled' => true]) }}
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        {{ Field::select($jw_user, 'language', [
-                                            'options' => $languages
-                                        ]) }}
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        {{ Field::text('birthday', 'metas[birthday]', ['value' => $jw_user->getMeta('birthday')]) }}
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        {{ Field::select('country', 'metas[country]', [
-                                            'value' => $jw_user->getMeta('country'),
-                                            'options' => $countries
-                                           ]) }}
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                {{ Field::text('password', 'password') }}
-
-                                {{ Field::text('password_confirmation', 'password_confirmation') }}
-
-                                <div class="form-group row">
-                                    <div class="offset-sm-2 col-sm-10">
-                                        <button type="submit" class="btn btn-success">{{ trans('cms::app.update') }}</button>
-                                    </div>
-                                </div>
-                            </form>
+                            @include('cms::backend.profile.components.info')
                         </div>
 
                         <div class="tab-pane" id="notifications">
                             {{ $dataTable->render() }}
+                        </div>
+
+                        <div class="tab-pane" id="change-password">
+                            @include('cms::backend.profile.components.change_password')
                         </div>
                     </div>
                 </div>
