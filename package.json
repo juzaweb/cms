@@ -10,14 +10,11 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "@babel/preset-react": "^7.16.7",
-        "axios": "^0.25",
         "browser-sync": "^2.27.10",
         "browser-sync-webpack-plugin": "^2.3.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.4.13",
-        "webpack-obfuscator": "^3.5.1"
+        "postcss": "^8.4.13"
     },
     "dependencies": {
         "postcss-import": "^14.1.0",

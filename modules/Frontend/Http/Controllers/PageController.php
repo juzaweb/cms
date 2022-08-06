@@ -15,7 +15,9 @@ class PageController extends FrontendController
     public function index(Request $request, ...$slug)
     {
         $pageSlug = $this->getPageSlug($slug);
-        $page = Post::findBySlugOrFail($pageSlug);
+        $page = Post::createFrontendBuilder()
+            ->where('slug', '=', $pageSlug)
+            ->firstOrFail();
         return $this->handlePage($request, $page, $slug);
     }
 
@@ -26,9 +28,6 @@ class PageController extends FrontendController
 
     protected function handlePage(Request $request, Post $page, array $slug = [])
     {
-        /**
-         * @var Config $theme
-         */
         $theme = jw_theme_info();
 
         if (is_home()) {
