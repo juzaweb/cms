@@ -73,8 +73,25 @@
 </div>
 
 @php
-    $dataUrl = $dataUrl ?: route('admin.datatable.get-data') .'?table='. urlencode($table) .'&data='. urlencode(json_encode($params)) .'&currentUrl='. url()->current();
-    $actionUrl = $actionUrl ?: route('admin.datatable.bulk-actions') .'?table='. urlencode($table) .'&data='. urlencode(json_encode($params)) .'&currentUrl='. url()->current();
+    if (!isset($dataUrl)) {
+        $data = [
+            'table' => $table,
+            'data' => json_encode($params),
+            'currentUrl' => url()->current()
+        ];
+
+        $dataUrl = route('admin.datatable.get-data') .'?'. http_build_query($data);
+    }
+
+    if (!isset($actionUrl)) {
+        $data = [
+            'table' => $table,
+            'data' => json_encode($params),
+            'currentUrl' => url()->current()
+        ];
+
+        $actionUrl = route('admin.datatable.bulk-actions') .'?'. http_build_query($data);
+    }
 @endphp
 
 <script type="text/javascript">
@@ -90,7 +107,7 @@
         page_size: parseInt("{{ $perPage }}"),
         sort_name: "{{ $sortName }}",
         sort_order: "{{ $sortOder }}",
-        url: "{{ $dataUrl }}",
-        action_url: "{{ $actionUrl }}"
+        url: "{!!  $dataUrl !!}",
+        action_url: "{!! $actionUrl !!}"
     });
 </script>

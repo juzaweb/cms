@@ -198,7 +198,7 @@ class ProfileController extends BackendController
     private function getNotificationDataTable()
     {
         $dataTable = app(NotificationDatatable::class);
-        $dataTable->setDataUrl(action([static::class, 'notificationDatatable']));
+        //$dataTable->setDataUrl(action([static::class, 'notificationDatatable']));
         return $dataTable;
     }
 }

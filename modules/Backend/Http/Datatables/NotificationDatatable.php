@@ -11,7 +11,6 @@
 namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
 use Juzaweb\Backend\Repositories\NotificationRepository;
 use Juzaweb\CMS\Abstracts\DataTable;
 
@@ -45,8 +44,29 @@ class NotificationDatatable extends DataTable
         ];
     }
 
+    public function bulkActions($action, $ids)
+    {
+        switch ($action) {
+            case 'delete':
+                foreach ($ids as $id) {
+                    $this->notificationRepository->delete($id);
+                }
+                break;
+        }
+    }
+
     public function query($data): Builder
     {
-        return $this->notificationRepository->query()->orderBy('id', 'desc');
+        global $jw_user;
+
+        $query = $this->notificationRepository->query();
+
+        $query->where('notifiable_type', '=', 'Juzaweb\CMS\Models\User');
+
+        $query->where('notifiable_id', '=', $jw_user->id);
+
+        $query->orderBy('id', 'desc');
+
+        return $query;
     }
 }
