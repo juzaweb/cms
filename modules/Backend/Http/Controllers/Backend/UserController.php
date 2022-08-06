@@ -5,8 +5,10 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\UserDataTable;
+use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
@@ -56,7 +58,7 @@ class UserController extends BackendController
      *
      * @return string
      */
-    protected function getModel(...$params)
+    protected function getModel(...$params): string
     {
         return User::class;
     }
@@ -66,7 +68,7 @@ class UserController extends BackendController
      *
      * @return string
      **/
-    protected function getTitle(...$params)
+    protected function getTitle(...$params): string
     {
         return trans('cms::app.users');
     }
@@ -99,8 +101,8 @@ class UserController extends BackendController
      * After Save model
      *
      * @param array $data
-     * @param \Juzaweb\CMS\Models\Model $model
-     * @throws \Illuminate\Validation\ValidationException
+     * @param Model $model
+     * @throws ValidationException
      */
     protected function beforeSave(&$data, &$model, ...$params)
     {

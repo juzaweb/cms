@@ -45,7 +45,7 @@ class Language extends Model
         'default' => 'bool'
     ];
 
-    public static function existsCode($code)
+    public static function existsCode($code): bool
     {
         return Language::whereCode($code)->exists();
     }
@@ -53,20 +53,24 @@ class Language extends Model
     public static function setDefault($code)
     {
         $language = Language::whereCode($code)->firstOrFail();
-        $language->update([
-            'default' => true
-        ]);
+        $language->update(
+            [
+                'default' => true
+            ]
+        );
 
         Language::where('code', '!=', $code)
             ->where('default', '=', true)
-            ->update([
-                'default' => false
-            ]);
+            ->update(
+                [
+                    'default' => false
+                ]
+            );
 
         set_config('language', $language->code);
     }
 
-    public function isDefault()
+    public function isDefault(): bool
     {
         return $this->default;
     }

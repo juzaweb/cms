@@ -354,6 +354,7 @@ return [
     'user_name' => 'User name',
     'user_email' => 'User email',
     'verify_token' => 'Verify token',
+    'current_password' => 'Current password',
     'current_password_incorrect' => 'Current password incorrect',
     'update_now' => 'Update now',
     're_update' => 'Re-Update',
@@ -438,6 +439,7 @@ return [
     'redirect_url' => 'Redirect url',
     'social_login' => 'Social Login',
     'quick_edit' => 'Quick edit',
+    'settings' => 'Settings',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',
