@@ -53,12 +53,12 @@ class SiteDatatable extends DataTable
         $random = Str::random(5);
         $string = $loginUrl .'/'. $random;
         $token = generate_token($string);
-        
+
         $data = [
             'token' => $token,
             'auth' => urldecode($string)
         ];
-        
+
         $loginUrl .= '/'. config('juzaweb.admin_prefix') .'/token-login?' . http_build_query($data);
 
         $rows['login'] = [
