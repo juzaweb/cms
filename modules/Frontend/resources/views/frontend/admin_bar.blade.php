@@ -35,10 +35,10 @@
                     <a class="ab-item" aria-haspopup="true" href="">{{ trans('cms::app.my_sites') }}</a>
                     <div class="ab-sub-wrapper">
                         <ul id="wp-admin-bar-blog-1-default" class="ab-submenu">
-                            <li id="wp-admin-bar-blog-1-d"><a class="ab-item" href="/admin-cp" data-turbolinks="false">{{ trans('cms::app.dashboard') }}</a>
+                            <li id="wp-admin-bar-blog-1-d"><a class="ab-item" href="{{ admin_url() }}" data-turbolinks="false">{{ trans('cms::app.dashboard') }}</a>
                             </li>
-                            <li id="wp-admin-bar-blog-1-n"><a class="ab-item" href="/admin-cp/post-type/posts/create" data-turbolinks="false">{{ trans('cms::app.new_post') }}</a></li>
-                            <li id="wp-admin-bar-blog-1-c"><a class="ab-item" href="/admin-cp/post-type/post/comments" data-turbolinks="false">{{ trans('cms::app.manage_comments') }}</a></li>
+                            <li id="wp-admin-bar-blog-1-n"><a class="ab-item" href="{{ admin_url('post-type/posts/create') }}" data-turbolinks="false">{{ trans('cms::app.new_post') }}</a></li>
+                            <li id="wp-admin-bar-blog-1-c"><a class="ab-item" href="{{ admin_url('post-type/post/comments') }}" data-turbolinks="false">{{ trans('cms::app.manage_comments') }}</a></li>
                         </ul>
                     </div>
                 </li>
@@ -50,13 +50,13 @@
 
                     <div class="ab-sub-wrapper">
                         <ul id="wp-admin-bar-new-content-default" class="ab-submenu">
-                            <li id="wp-admin-bar-new-post"><a class="ab-item" href="/admin-cp/post-type/posts/create" data-turbolinks="false">{{ trans('cms::app.post') }}</a>
+                            <li id="wp-admin-bar-new-post"><a class="ab-item" href="{{ admin_url('post-type/posts/create') }}" data-turbolinks="false">{{ trans('cms::app.post') }}</a>
                             </li>
 
-                            <li id="wp-admin-bar-new-page"><a class="ab-item" href="/admin-cp/post-type/pages/create" data-turbolinks="false">{{ trans('cms::app.page') }}</a>
+                            <li id="wp-admin-bar-new-page"><a class="ab-item" href="{{ admin_url('post-type/pages/create') }}" data-turbolinks="false">{{ trans('cms::app.page') }}</a>
                             </li>
 
-                            <li id="wp-admin-bar-new-user"><a class="ab-item" href="/admin-cp/users/create" data-turbolinks="false">{{ trans('cms::app.user') }}</a>
+                            <li id="wp-admin-bar-new-user"><a class="ab-item" href="{{ admin_url('users/create') }}" data-turbolinks="false">{{ trans('cms::app.user') }}</a>
                             </li>
                         </ul>
                     </div>
