@@ -10,6 +10,16 @@ return [
      */
     'admin_prefix' => env('ADMIN_PREFIX', 'admin-cp'),
 
+
+    'adminbar' => [
+        /**
+         * Show admin-bar in frontend
+         *
+         * Default: true
+         */
+        'enable' => (bool) env('ADMINBAR_ENDABLE', true),
+    ],
+
     /**
      * Cache prefix
      *
