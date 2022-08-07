@@ -3,40 +3,38 @@
 namespace Juzaweb\DevTool\Commands\Theme;
 
 use Illuminate\Support\Facades\File;
-use Juzaweb\CMS\Support\HtmlDom;
 
 class DownloadTemplateCommand extends DownloadTemplateCommandAbstract
 {
-    protected $signature = 'style:download';
+    protected $signature = 'html:download';
 
     protected array $data;
 
     public function handle()
     {
-        $this->sendAsks();
+        $this->sendBaseDataAsks();
 
-        $html = $this->curlGet($this->data['url']);
-
-        $domp = str_get_html($html);
-
-        $css = $this->downloadCss($domp);
-
-        $js = $this->downloadJs($domp);
-
-        $mix = "const mix = require('laravel-mix');
-
-mix.styles([
-    ". implode(",\n", $css) ."
-], 'themes/{$this->data['name']}/assets/public/css/main.css');
-
-mix.combine([
-    ". implode(",\n", $js) ."
-], 'themes/{$this->data['name']}/assets/public/js/main.js');";
-
-        File::put("themes/{$this->data['name']}/assets/mix.js", $mix);
+        $this->downloadFileAsks();
     }
 
-    protected function sendAsks()
+    protected function sendBaseDataAsks(): void
+    {
+        $this->data['name'] = $this->ask(
+            'Theme Name?',
+            $this->getDataDefault('name')
+        );
+
+        $this->setDataDefault('name', $this->data['name']);
+
+        $this->data['container'] = $this->ask(
+            'Theme Container?',
+            $this->getDataDefault('container', '.container-fluid')
+        );
+
+        $this->setDataDefault('container', $this->data['container']);
+    }
+
+    protected function downloadFileAsks(): void
     {
         $this->data['url'] = $this->ask(
             'Url Template?',
@@ -45,89 +43,32 @@ mix.combine([
 
         $this->setDataDefault('url', $this->data['url']);
 
-        $this->data['name'] = $this->ask(
-            'Theme Name?',
-            $this->getDataDefault('name')
+        $this->data['file'] = $this->ask(
+            'Theme File?',
+            $this->getDataDefault('file', 'index.twig')
         );
 
-        $this->setDataDefault('name', $this->data['name']);
-    }
+        $this->setDataDefault('file', $this->data['file']);
 
-    protected function downloadCss(HtmlDom $domp): array
-    {
-        $result = [];
-        foreach ($domp->find('link[rel="stylesheet"]') as $e) {
-            $href = $e->href;
-            $href = $this->parseHref($href);
+        $extension = pathinfo($this->data['file'], PATHINFO_EXTENSION);
 
-            if ($this->isExcludeDomain($href)) {
-                continue;
-            }
-
-            $name = explode('?', basename($href))[0];
-
-            $path = "themes/{$this->data['name']}/assets/styles/css/{$name}";
-
-            $this->downloadFile($href, base_path($path));
-
-            $result[] = "'{$path}'";
-
-            $this->info("-- Downloaded file {$path}");
-        }
-        return $result;
-    }
-
-    protected function downloadJs(HtmlDom $domp): array
-    {
-        $result = [];
-        foreach ($domp->find('script') as $e) {
-            $href = $e->src;
-            if (empty($href)) {
-                continue;
-            }
-
-            $href = $this->parseHref($href);
-
-            $this->info("-- Download file {$href}");
-
-            if ($this->isExcludeDomain($href)) {
-                continue;
-            }
-
-            $name = explode('?', basename($href))[0];
-
-            $path = "themes/{$this->data['name']}/assets/styles/js/{$name}";
-
-            try {
-                $this->downloadFile($href, base_path($path));
-                $result[] = "'{$path}'";
-                $this->info("-- Downloaded file {$path}");
-            } catch (\Exception $e) {
-                $this->warn("Download error: {$href}");
-            }
+        if ($extension != 'twig') {
+            $this->data['file'] = "{$this->data['file']}.twig";
         }
 
-        return $result;
-    }
+        $path = "themes/{$this->data['name']}/views/{$this->data['file']}";
 
-    protected function parseHref($href): mixed
-    {
-        if (str_starts_with($href, '//')) {
-            $href = 'https:' . $href;
-        }
+        $contents = $this->getFileContent($this->data['url']);
 
-        if (!is_url($href)) {
-            $baseUrl = explode('/', $this->data['url'])[0];
-            $baseUrl .= '://' . get_domain_by_url($this->data['url']);
+        $content = str_get_html($contents)->find($this->data['container'], 0)->outertext;
 
-            if (str_starts_with($href, '/')) {
-                $href = $baseUrl . trim($href);
-            } else {
-                $dir = dirname($this->data['url']);
-                $href = "{$dir}/" . trim($href);
-            }
-        }
+        File::put(
+            $path,
+            "{% extends 'cms::layouts.frontend' %}
 
-        return $href;
+                {% block content %}
+                    {$content}
+                {% endblock %}"
+        );
     }
 }

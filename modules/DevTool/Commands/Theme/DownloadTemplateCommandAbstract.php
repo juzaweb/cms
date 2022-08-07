@@ -28,11 +28,11 @@ abstract class DownloadTemplateCommandAbstract extends Command
         Cache::forever('html_download', $data);
     }
 
-    protected function getDataDefault(string $key): ?string
+    protected function getDataDefault(string $key, string $default = null): ?string
     {
         $data = Cache::get('html_download', []);
 
-        return Arr::get($data, $key);
+        return Arr::get($data, $key, $default);
     }
 
     protected function getFontExtensions(): array
@@ -62,6 +62,17 @@ abstract class DownloadTemplateCommandAbstract extends Command
                 'verify' => false
             ]
         );
+    }
+
+    protected function getFileContent(string $url): string
+    {
+        return $this->client->request(
+            'GET',
+            $url,
+            [
+                'verify' => false
+            ]
+        )->getBody()->getContents();
     }
 
     protected function curlGet(string $url): string
