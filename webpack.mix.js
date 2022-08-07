@@ -24,6 +24,7 @@ if (process.env.npm_lifecycle_event === 'prod') {
     //require(`${modulePath}/filemanage.mix.js`);
     //require(`${pluginPath}/ecommerce/assets/mix.js`);
     //require(`${themePath}/gamxo/assets/mix.js`);
+    require(`${themePath}/vtube/assets/mix.js`);
 }
 
 mix.browserSync({
