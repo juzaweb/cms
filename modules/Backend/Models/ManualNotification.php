@@ -32,7 +32,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ManualNotification extends Model
 {
+    const STATUS_PENDING = 2;
+    const STATUS_SUCCESS = 1;
+    const STATUS_ERROR = 0;
+
     protected $table = 'manual_notifications';
+
     protected $fillable = [
         'method',
         'users',

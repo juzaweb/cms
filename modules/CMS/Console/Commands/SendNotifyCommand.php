@@ -21,7 +21,7 @@ class SendNotifyCommand extends Command
         $count = 0;
         while ($count < $this->limit) {
             $notification = ManualNotification::withoutGlobalScopes()
-                ->where('status', '=', 2)
+                ->where('status', '=', ManualNotification::STATUS_PENDING)
                 ->first();
 
             if (empty($notification)) {
