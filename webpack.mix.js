@@ -19,12 +19,16 @@ mix.options(
     }
 );
 
-if (process.env.npm_lifecycle_event === 'prod') {
-    //require(`${modulePath}/mix.js`);
-    //require(`${modulePath}/filemanage.mix.js`);
-    //require(`${pluginPath}/ecommerce/assets/mix.js`);
-    //require(`${themePath}/gamxo/assets/mix.js`);
-    require(`${themePath}/vtube/assets/mix.js`);
+if (process.env.npm_config_cms) {
+    require(`${modulePath}/mix.js`);
+}
+
+if (process.env.npm_config_theme) {
+    require(`${themePath}/${process.env.npm_config_theme}/assets/mix.js`);
+}
+
+if (process.env.npm_config_plugin) {
+    require(`${pluginPath}/${process.env.npm_config_plugin}/assets/mix.js`);
 }
 
 mix.browserSync({

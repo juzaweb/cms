@@ -35,6 +35,17 @@ abstract class DownloadTemplateCommandAbstract extends Command
         return Arr::get($data, $key);
     }
 
+    protected function getFontExtensions(): array
+    {
+        return [
+            'eot',
+            'woff2',
+            'woff',
+            'ttf',
+            'svg'
+        ];
+    }
+
     protected function downloadFile(string $url, string $path)
     {
         $folder = dirname($path);
