@@ -27,11 +27,11 @@ class DownloadTemplateCommand extends DownloadTemplateCommandAbstract
 
 mix.styles([
     ". implode(",\n", $css) ."
-], 'themes/{$this->data['name']}/assets/css/main.css');
+], 'themes/{$this->data['name']}/assets/public/css/main.css');
 
 mix.combine([
     ". implode(",\n", $js) ."
-], 'themes/{$this->data['name']}/assets/js/main.js');";
+], 'themes/{$this->data['name']}/assets/public/js/main.js');";
 
         File::put("themes/{$this->data['name']}/assets/mix.js", $mix);
     }
