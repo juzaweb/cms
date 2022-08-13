@@ -19,7 +19,7 @@ mix.options(
     }
 );
 
-if (process.env.npm_config_cms) {
+if (process.env.npm_config_module) {
     require(`${modulePath}/mix.js`);
 }
 
