@@ -3,6 +3,7 @@
 namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
+use Juzaweb\CMS\Console\Commands\PluginAutoloadCommand;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Juzaweb\CMS\Support\Generators\ModuleGenerator;
 use Symfony\Component\Console\Input\InputArgument;
@@ -43,6 +44,8 @@ class ModuleMakeCommand extends Command
                 ->setActive(! $this->option('disabled'))
                 ->generate();
         }
+
+        $this->call(PluginAutoloadCommand::class);
     }
 
     /**
@@ -50,7 +53,7 @@ class ModuleMakeCommand extends Command
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['name', InputArgument::IS_ARRAY, 'The names of plugins will be created.'],

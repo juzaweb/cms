@@ -253,7 +253,7 @@ trait RegisterHookAction
      * @param array $args
      * @throws \Exception
      */
-    public function registerPermalink($key, $args = [])
+    public function registerPermalink(string $key, array $args = []): void
     {
         if (empty($args['label'])) {
             throw new \Exception('Permalink args label is required');
