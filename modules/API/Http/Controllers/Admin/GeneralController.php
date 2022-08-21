@@ -13,37 +13,45 @@ namespace Juzaweb\API\Http\Controllers\Admin;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Models\User;
+use OpenApi\Annotations as OA;
 
-class GeneralController extends ApiController
+class GeneralController extends AdminApiController
 {
-    public function callAction($method, $parameters)
-    {
-        do_action(Action::BACKEND_CALL_ACTION, $method, $parameters);
-
-        do_action(Action::BACKEND_INIT);
-
-        return parent::callAction($method, $parameters);
-    }
-
+    /**
+     * @OA\Get(
+     *      path="/api/admin/menus/admin-menu",
+     *      tags={"Admin / Menus"},
+     *      summary="Get admin menu items",
+     *      operationId="admin.menus.admin_menu",
+     *      @OA\Response(response=200, ref="#/components/responses/success_detail"),
+     *      @OA\Response(response=500, ref="#/components/responses/error_500")
+     *  )
+     */
     public function adminMenu(Request $request): JsonResponse
     {
-        $items = $this->mapMenuItems(HookAction::getAdminMenu());
+        $user = $request->user('api');
+
+        $items = $this->mapMenuItems(HookAction::getAdminMenu(), $user);
 
         return $this->restSuccess($items);
     }
 
-    private function mapMenuItems(array $items): array
+    private function mapMenuItems(array $items, User $user): array
     {
         return collect($items)
             ->sortBy('position')
             ->map(
-                function ($item, $key) {
+                function ($item, $key) use ($user) {
+                    if (!$user->canAny(Arr::get($item, 'permissions', ['admin']))) {
+                        return [];
+                    }
+
                     $data = $this->mapMenuItem($key, $item);
+
                     if ($children = Arr::get($item, 'children')) {
-                        $data['children'] = $this->mapMenuItems($children);
+                        $data['children'] = $this->mapMenuItems($children, $user);
                     }
 
                     return $data;

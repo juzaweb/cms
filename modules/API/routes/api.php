@@ -8,10 +8,12 @@
  * @license    GNU V2
  */
 
+use Juzaweb\API\Http\Middleware\Admin;
+
 Route::group(
     [
         'prefix' => 'admin',
-        'middleware' => ['auth:api', \Juzaweb\API\Http\Middleware\Admin::class],
+        'middleware' => ['auth:api', Admin::class],
     ],
     function () {
         require __DIR__ . '/admin/api.php';

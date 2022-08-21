@@ -8,5 +8,6 @@
  * @license    GNU V2
  */
 
+require __DIR__ . '/setting.php';
 require __DIR__ . '/general.php';
 require __DIR__ . '/post.php';

@@ -9,6 +9,23 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/admin/menus/admin-menu": {
+            "get": {
+                "tags": [
+                    "Admin / Menus"
+                ],
+                "summary": "Get admin menu items",
+                "operationId": "admin.menus.admin_menu",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
         "/api/admin/post-type/{type}": {
             "get": {
                 "tags": [
@@ -43,7 +60,7 @@
             },
             "post": {
                 "tags": [
-                    "Post Type"
+                    "Admin / Post Type"
                 ],
                 "summary": "Create Post Type",
                 "operationId": "admin.post-type.type.store",
@@ -100,7 +117,7 @@
         "/api/admin/post-type/{type}/{id}": {
             "get": {
                 "tags": [
-                    "Post Type"
+                    "Admin / Post Type"
                 ],
                 "summary": "Get post type data by id",
                 "operationId": "admin.post-type.type.show",
@@ -131,7 +148,7 @@
             },
             "put": {
                 "tags": [
-                    "Post Type"
+                    "Admin / Post Type"
                 ],
                 "summary": "Update Post Type",
                 "operationId": "admin.post-type.type.update",
@@ -194,7 +211,7 @@
             },
             "delete": {
                 "tags": [
-                    "Post Type"
+                    "Admin / Post Type"
                 ],
                 "summary": "Delete Post Type",
                 "operationId": "admin.post-type.type.destroy",
@@ -222,6 +239,23 @@
                     },
                     "422": {
                         "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/admin/setting/configs": {
+            "get": {
+                "tags": [
+                    "Admin / Setting"
+                ],
+                "summary": "Get admin configs",
+                "operationId": "admin.setting.configs",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
                     },
                     "500": {
                         "$ref": "#/components/responses/error_500"
@@ -663,14 +697,6 @@
                 "schema": {
                     "type": "string"
                 }
-            }
-        },
-        "securitySchemes": {
-            "sanctum": {
-                "type": "apiKey",
-                "description": "Enter token in format (Bearer :token)",
-                "name": "Authorization",
-                "in": "header"
             }
         }
     }

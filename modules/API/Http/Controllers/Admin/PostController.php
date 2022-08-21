@@ -63,6 +63,7 @@ class PostController extends ApiController
         $rows = $query->paginate(
             $limit,
             [
+                'id',
                 'title',
                 'status',
                 'views',
