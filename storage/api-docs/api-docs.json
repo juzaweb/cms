@@ -9,6 +9,226 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/admin/post-type/{type}": {
+            "get": {
+                "tags": [
+                    "Admin / Post Type"
+                ],
+                "summary": "Get list post type items",
+                "operationId": "admin.post-type.type.index",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/query_limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/query_keyword"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_list"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Create Post Type",
+                "operationId": "admin.post-type.type.store",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Title",
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "description": "content",
+                                        "type": "string"
+                                    },
+                                    "grecaptcha_token": {
+                                        "description": "(Optional) Token of Google Recaptcha V3",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/admin/post-type/{type}/{id}": {
+            "get": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Get post type data by id",
+                "operationId": "admin.post-type.type.show",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/id_in_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/error_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Update Post Type",
+                "operationId": "admin.post-type.type.update",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Title",
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "description": "content",
+                                        "type": "string"
+                                    },
+                                    "grecaptcha_token": {
+                                        "description": "(Optional) Token of Google Recaptcha V3",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Delete Post Type",
+                "operationId": "admin.post-type.type.destroy",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
         "/api/auth/login": {
             "post": {
                 "tags": [
@@ -111,61 +331,6 @@
                         "$ref": "#/components/responses/error_500"
                     }
                 }
-            },
-            "post": {
-                "tags": [
-                    "Post Type"
-                ],
-                "summary": "Create Post Type",
-                "operationId": "api.post-type.type.store",
-                "parameters": [
-                    {
-                        "name": "type",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "title"
-                                ],
-                                "properties": {
-                                    "title": {
-                                        "description": "Title",
-                                        "type": "string"
-                                    },
-                                    "content": {
-                                        "description": "content",
-                                        "type": "string"
-                                    },
-                                    "grecaptcha_token": {
-                                        "description": "(Optional) Token of Google Recaptcha V3",
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "$ref": "#/components/responses/success_detail"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/error_422"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/error_500"
-                    }
-                }
             }
         },
         "/api/post-type/{type}/{id}": {
@@ -194,105 +359,6 @@
                     },
                     "404": {
                         "$ref": "#/components/responses/error_404"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/error_500"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Post Type"
-                ],
-                "summary": "Update Post Type",
-                "operationId": "api.post-type.type.update",
-                "parameters": [
-                    {
-                        "name": "type",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "title"
-                                ],
-                                "properties": {
-                                    "title": {
-                                        "description": "Title",
-                                        "type": "string"
-                                    },
-                                    "content": {
-                                        "description": "content",
-                                        "type": "string"
-                                    },
-                                    "grecaptcha_token": {
-                                        "description": "(Optional) Token of Google Recaptcha V3",
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "$ref": "#/components/responses/success_detail"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/error_422"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/error_500"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Post Type"
-                ],
-                "summary": "Delete Post Type",
-                "operationId": "api.post-type.type.destroy",
-                "parameters": [
-                    {
-                        "name": "type",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref": "#/components/responses/success_detail"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/error_422"
                     },
                     "500": {
                         "$ref": "#/components/responses/error_500"

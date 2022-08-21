@@ -20,10 +20,9 @@ Route::group(
 Route::group(
     [
         'prefix' => 'auth',
-        'middleware' => 'auth:sanctum',
+        'middleware' => 'auth:api',
     ],
     function () {
         Route::post('logout', [LoginController::class, 'logout']);
-        Route::get('me', [LoginController::class, 'me']);
     }
 );

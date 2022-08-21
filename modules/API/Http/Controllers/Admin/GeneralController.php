@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\API\Http\Controllers;
+namespace Juzaweb\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

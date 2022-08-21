@@ -14,7 +14,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Http\Requests\API\Auth\LoginRequest;
+use Juzaweb\Backend\Http\Resources\UserResource;
 use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Models\User;
 use OpenApi\Annotations as OA;
 
 class LoginController extends ApiController
@@ -53,14 +55,19 @@ class LoginController extends ApiController
     {
         $request->authenticate();
 
-        $token = $request->user()->createToken('auth_token');
+        $user = $request->user();
 
-        return $this->respondWithToken($token);
+        $token = $user->createToken('auth_token');
+
+        return $this->respondWithToken($token, $user);
     }
 
     public function refresh(): JsonResponse
     {
-        return $this->respondWithToken(Auth::guard('api')->refresh());
+        return $this->respondWithToken(
+            Auth::guard('api')->refresh(),
+            Auth::guard('api')->user()
+        );
     }
 
     /**
@@ -82,13 +89,14 @@ class LoginController extends ApiController
         return $this->restSuccess([], 'Successfully logged out.');
     }
 
-    protected function respondWithToken($token): JsonResponse
+    protected function respondWithToken($token, User $user): JsonResponse
     {
         return $this->restSuccess(
             [
                 'access_token' => $token->accessToken,
                 'token_type' => 'Bearer',
                 'expires_at' => $token->token->expires_at,
+                'user' => new UserResource($user),
             ],
             'Successfully login.'
         );

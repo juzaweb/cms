@@ -28,6 +28,7 @@ class UserResource extends JsonResource
             'is_admin' => (bool) $this->is_admin,
             'created_at' => jw_date_format($this->created_at),
             'avatar' => $this->getAvatar(),
+            'role' => 'admin'
         ];
     }
 }
