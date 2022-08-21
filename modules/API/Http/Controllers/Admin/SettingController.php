@@ -10,6 +10,7 @@
 
 namespace Juzaweb\API\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Storage;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\ApiController;
 use OpenApi\Annotations as OA;
@@ -28,6 +29,10 @@ class SettingController extends ApiController
      */
     public function configs()
     {
-        dd(HookAction::getConfigs()->keys());
+        return response()->json(
+            [
+                'storage_url' => rtrim(Storage::disk('public')->url('/'), '/'),
+            ]
+        );
     }
 }

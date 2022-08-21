@@ -263,6 +263,31 @@
                 }
             }
         },
+        "/api/admin/users": {
+            "get": {
+                "tags": [
+                    "Admin / Users"
+                ],
+                "summary": "Get list users",
+                "operationId": "admin.user.index",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/query_limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/query_keyword"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_list"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
         "/api/auth/login": {
             "post": {
                 "tags": [

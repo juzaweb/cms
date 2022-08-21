@@ -47,7 +47,7 @@ class PostController extends ApiController
      */
     public function index(Request $request, $type): PostCollection
     {
-        $this->checkPermission($request, 'index', [Post::class, $type]);
+        $this->checkPermission($request, 'apiIndex', [Post::class, $type]);
 
         //$this->postRepository->pushCriteria(new SearchCriteria($request));
 
@@ -88,7 +88,7 @@ class PostController extends ApiController
             ->where('id', '=', $id)
             ->firstOrFail();
 
-        $this->checkPermission($request, 'show', [$model, $type]);
+        $this->checkPermission($request, 'apiShow', [$model, $type]);
 
         return new PostResource($model);
     }

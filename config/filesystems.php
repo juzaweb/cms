@@ -43,7 +43,7 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
-    
+
         'backup' => [
             'driver' => 'local',
             'root' => storage_path('app/backups'),
