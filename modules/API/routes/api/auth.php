@@ -14,6 +14,7 @@ Route::group(
     ['prefix' => 'auth'],
     function () {
         Route::post('login', [LoginController::class, 'login']);
+        Route::post('access-token', [LoginController::class, 'accessToken']);
     }
 );
 

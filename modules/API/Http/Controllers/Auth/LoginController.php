@@ -17,6 +17,7 @@ use Juzaweb\Backend\Http\Requests\API\Auth\LoginRequest;
 use Juzaweb\Backend\Http\Resources\UserResource;
 use Juzaweb\CMS\Http\Controllers\ApiController;
 use Juzaweb\CMS\Models\User;
+use Laravel\Passport\PersonalAccessTokenResult;
 use OpenApi\Annotations as OA;
 
 class LoginController extends ApiController
@@ -62,11 +63,17 @@ class LoginController extends ApiController
         return $this->respondWithToken($token, $user);
     }
 
-    public function refresh(): JsonResponse
+    public function accessToken(Request $request): JsonResponse
     {
+        $accessToken = $request->post('access_token');
+
+        $user = $request->user('api');
+
+        $token = $user->token();
+
         return $this->respondWithToken(
-            Auth::guard('api')->refresh(),
-            Auth::guard('api')->user()
+            new PersonalAccessTokenResult($accessToken, $token),
+            $user
         );
     }
 

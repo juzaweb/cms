@@ -10,8 +10,8 @@
 
 namespace Juzaweb\API\Http\Controllers\Admin;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
-use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\ApiController;
 use OpenApi\Annotations as OA;
 
@@ -27,11 +27,13 @@ class SettingController extends ApiController
      *      @OA\Response(response=500, ref="#/components/responses/error_500")
      *  )
      */
-    public function configs()
+    public function configs(): JsonResponse
     {
-        return response()->json(
+        $storageUrl = rtrim(Storage::disk('public')->url('/'), '/');
+
+        return $this->restSuccess(
             [
-                'storage_url' => rtrim(Storage::disk('public')->url('/'), '/'),
+                'storage_url' => $storageUrl,
             ]
         );
     }
