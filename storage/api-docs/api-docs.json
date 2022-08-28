@@ -286,6 +286,125 @@
                         "$ref": "#/components/responses/error_500"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Admin / Users"
+                ],
+                "summary": "Store user",
+                "operationId": "admin.user.store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "email": {
+                                        "description": "email",
+                                        "type": "string",
+                                        "example": "string@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/admin/users/{id}": {
+            "get": {
+                "tags": [
+                    "Admin / Users"
+                ],
+                "summary": "Get user by id",
+                "operationId": "admin.user.show",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id_in_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/error_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Admin / Users"
+                ],
+                "summary": "Update user",
+                "operationId": "admin.user.update",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
             }
         },
         "/api/auth/login": {
@@ -334,6 +453,50 @@
                 }
             }
         },
+        "/api/auth/access-token": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User validate access token",
+                "operationId": "api.auth.access_token",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "access_token"
+                                ],
+                                "properties": {
+                                    "access_token": {
+                                        "description": "Access token",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/auth/logout": {
             "post": {
                 "tags": [
@@ -357,6 +520,64 @@
                         "sanctum": []
                     }
                 ]
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User register",
+                "operationId": "api.auth.register",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "email": {
+                                        "description": "email",
+                                        "type": "string",
+                                        "example": "example@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "password_confirmation",
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
             }
         },
         "/api/post-type/{type}": {

@@ -11,7 +11,10 @@
 namespace Juzaweb\CMS\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Juzaweb\Backend\Events\RegisterSuccessful;
 use Juzaweb\CMS\Models\User;
 
 class RegisterRequest extends FormRequest
@@ -19,6 +22,11 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => [
+                'bail',
+                'required',
+                'min:5',
+            ],
             'email' => [
                 'bail',
                 'required',
@@ -34,5 +42,41 @@ class RegisterRequest extends FormRequest
                 'confirmed'
             ],
         ];
+    }
+
+    public function createUserFromRequest(): User
+    {
+        do_action('register.handle', $this);
+
+        $name = $this->post('name');
+        $email = $this->post('email');
+        $password = $this->post('password');
+
+        DB::beginTransaction();
+        try {
+            $user = new User();
+
+            $user->fill(
+                [
+                    'name' => $name,
+                    'email' => $email,
+                ]
+            );
+
+            $user->setAttribute('password', Hash::make($password));
+
+            $user->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+
+        event(new RegisterSuccessful($user));
+
+        do_action('register.success', $user);
+
+        return $user;
     }
 }

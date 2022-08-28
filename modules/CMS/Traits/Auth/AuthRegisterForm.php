@@ -47,38 +47,11 @@ trait AuthRegisterForm
 
     public function register(RegisterRequest $request): JsonResponse|RedirectResponse
     {
-        do_action('register.handle', $request);
-
         if (! get_config('user_registration', 1)) {
             return $this->error(trans('cms::message.register_form.register_closed'));
         }
 
-        // Create user
-        $name = $request->post('name');
-        $email = $request->post('email');
-        $password = $request->post('password');
-
-        DB::beginTransaction();
-        try {
-            $user = new User();
-            $user->fill(
-                [
-                    'name' => $name,
-                    'email' => $email,
-                ]
-            );
-            $user->setAttribute('password', Hash::make($password));
-            $user->save();
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
-        }
-
-        event(new RegisterSuccessful($user));
-
-        do_action('register.success', $user);
+        $request->createUserFromRequest();
 
         if (get_config('user_verification')) {
             return $this->success(
