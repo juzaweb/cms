@@ -16,6 +16,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
+use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Exceptions\PluginNotFoundException;
 use Juzaweb\CMS\Support\Plugin;
 
@@ -42,6 +43,8 @@ class DbActivator implements ActivatorInterface
      */
     private Config $config;
 
+    private ConfigContract $dbConfig;
+
     /**
      * Array of plugins activation statuses
      *
@@ -49,11 +52,14 @@ class DbActivator implements ActivatorInterface
      */
     private array $modulesStatuses;
 
-    public function __construct(Container $app)
-    {
+    public function __construct(
+        Container $app,
+        ConfigContract $dbConfig
+    ) {
         $this->cache = $app['cache'];
         $this->files = $app['files'];
         $this->config = $app['config'];
+        $this->dbConfig = $dbConfig;
         $this->modulesStatuses = $this->getModulesStatuses();
     }
 
@@ -205,7 +211,7 @@ class DbActivator implements ActivatorInterface
     public function getModulesStatuses(): array
     {
         try {
-            return get_config('plugin_statuses', []);
+            return $this->dbConfig->getConfig('plugin_statuses', []);
         } catch (\Exception $e) {
             return [];
         }

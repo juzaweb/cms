@@ -3,15 +3,15 @@ class JuzawebListView {
         this.url = e.url;
         this.list = (e.list) ? e.list : '.juzaweb-list';
         this.method = (e.method) ? e.method : 'get';
-        this.template = (e.template) ? e.template : null;
+        this.template = (e.template) ? e.template : '';
         this.sort_name = (e.sort_name) ? e.sort_name : 'id';
         this.sort_order = (e.sort_order) ? e.sort_order : 'desc';
         this.page_size = (e.page_size) ? e.page_size: 10;
         this.after_load_callback = (e.after_load_callback) ? e.after_load_callback: null;
-        this.item_formatter = (e.item_formatter) ? e.item_formatter : null;
         this.offset = 0;
         this.total = 0;
         this.page = 1;
+
         this.init();
     }
 
@@ -30,9 +30,8 @@ class JuzawebListView {
     }
 
     loadData() {
-        let template = this.template ? document.getElementById(this.template).innerHTML : null;
+        let template = document.getElementById(this.template).innerHTML;
         let result = $(this.list);
-        let itemFormatter = this.item_formatter;
 
         if (this.page > 1) {
             this.offset = (this.page * this.page_size) - this.page_size;
@@ -56,11 +55,7 @@ class JuzawebListView {
         let html = '';
         if (response.data.length > 0) {
             $.each(response.data, function (index, item) {
-                if (itemFormatter) {
-                    html = eval(itemFormatter)(index, item);
-                } else {
-                    html += replace_template(template, item);
-                }
+                html += replace_template(template, item)
             });
 
             result.append(html);

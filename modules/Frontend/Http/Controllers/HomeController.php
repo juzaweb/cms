@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Frontend\Http\Controllers;
 
+use HeadlessChromium\BrowserFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Juzaweb\Backend\Http\Resources\PostResource;
@@ -24,9 +25,10 @@ class HomeController extends FrontendController
     protected function handlePage($request)
     {
         $config = get_configs(['title', 'description']);
+
         $view = $this->getViewPage();
+
         $posts = Post::selectFrontendBuilder()
-            ->whereType('posts')
             ->orderBy('id', 'DESC')
             ->paginate(
                 get_config('posts_per_page', 12)

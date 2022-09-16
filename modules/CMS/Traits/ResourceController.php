@@ -132,6 +132,14 @@ trait ResourceController
             throw $e;
         }
 
+        if (method_exists($this, 'storeSuccess')) {
+            $this->storeSuccess($request, $model, ...$params);
+        }
+
+        if (method_exists($this, 'saveSuccess')) {
+            $this->saveSuccess($request, $model, ...$params);
+        }
+
         return $this->storeSuccessResponse(
             $model,
             $request,
@@ -171,6 +179,14 @@ trait ResourceController
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
+        }
+
+        if (method_exists($this, 'updateSuccess')) {
+            $this->updateSuccess($request, $model, ...$params);
+        }
+
+        if (method_exists($this, 'saveSuccess')) {
+            $this->saveSuccess($request, $model, ...$params);
         }
 
         return $this->updateSuccessResponse(

@@ -18,6 +18,7 @@ use Juzaweb\Network\Contracts\NetworkRegistionContract;
  * @method static bool isRootSite($domain = null)
  * @method static string getCurrentDomain()
  * @method static object getCurrentSite()
+ * @see \Juzaweb\Network\Support\NetworkRegistion
  */
 class Network extends Facade
 {

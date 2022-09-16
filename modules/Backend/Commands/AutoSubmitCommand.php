@@ -19,10 +19,7 @@ class AutoSubmitCommand extends Command
             return self::SUCCESS;
         }
 
-        $lastPing = get_config('jw_last_seo_ping');
-        $yesterday = Carbon::now()->subDay()->format('Y-m-d H:i');
-
-        if (empty($lastPing) || $lastPing <= $yesterday) {
+        if ($this->checkSubmitDate()) {
             set_config('jw_last_seo_ping', date('Y-m-d H:i'));
 
             try {
@@ -83,6 +80,8 @@ class AutoSubmitCommand extends Command
         ->pluck('url')
         ->toArray();
 
+        $url = config('app.url');
+
         $response = $this->client()->post(
             'https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=' . $apiKey,
             [
@@ -91,7 +90,7 @@ class AutoSubmitCommand extends Command
                     'Content-Type' => "application/json"
                 ],
                 'json' => [
-                    'siteUrl' => url('/'),
+                    'siteUrl' => $url,
                     'urlList' => $urls
                 ]
             ]
@@ -102,6 +101,15 @@ class AutoSubmitCommand extends Command
 
             set_config('jw_last_bing_submit_id', $links->last()->id);
         }
+    }
+
+    protected function checkSubmitDate(): bool
+    {
+        $lastPing = get_config('jw_last_seo_ping');
+
+        $yesterday = Carbon::now()->subDay()->format('Y-m-d H:i');
+
+        return empty($lastPing) || $lastPing <= $yesterday;
     }
 
     protected function getBingKey(): string

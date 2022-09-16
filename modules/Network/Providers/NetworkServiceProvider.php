@@ -10,20 +10,30 @@
 
 namespace Juzaweb\Network\Providers;
 
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\Artisan;
 use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Support\ServiceProvider;
+use Juzaweb\Network\Commands\ArtisanCommand;
+use Juzaweb\Network\Commands\MakeSiteCommand;
 use Juzaweb\Network\Contracts\NetworkRegistionContract;
+use Juzaweb\Network\Contracts\SiteCreaterContract;
 use Juzaweb\Network\Contracts\SiteManagerContract;
+use Juzaweb\Network\Contracts\SiteSetupContract;
 use Juzaweb\Network\Facades\Network;
 use Juzaweb\Network\NetworkAction;
 use Juzaweb\Network\Support\NetworkRegistion;
+use Juzaweb\Network\Support\SiteCreater;
 use Juzaweb\Network\Support\SiteManager;
+use Juzaweb\Network\Support\SiteSetup;
 
 class NetworkServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         Network::init();
+
+        $this->commands([MakeSiteCommand::class, ArtisanCommand::class]);
 
         ActionRegister::register(NetworkAction::class);
     }
@@ -33,7 +43,29 @@ class NetworkServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
+
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'network');
+
+        $this->app->singleton(
+            SiteSetupContract::class,
+            function ($app) {
+                return new SiteSetup(
+                    $app['config'],
+                    $app['db']
+                );
+            }
+        );
+
+        $this->app->singleton(
+            SiteCreaterContract::class,
+            function ($app) {
+                return new SiteCreater(
+                    $app['db'],
+                    $app['config'],
+                    $app[SiteSetupContract::class]
+                );
+            }
+        );
 
         $this->app->singleton(
             NetworkRegistionContract::class,
@@ -43,7 +75,9 @@ class NetworkServiceProvider extends ServiceProvider
                     $app['config'],
                     $app['request'],
                     $app['cache'],
-                    $app['db']
+                    $app['db'],
+                    $app[SiteSetupContract::class],
+                    $app[Kernel::class]
                 );
             }
         );
@@ -52,7 +86,8 @@ class NetworkServiceProvider extends ServiceProvider
             SiteManagerContract::class,
             function ($app) {
                 return new SiteManager(
-                    $app['db']
+                    $app['db'],
+                    $app[SiteCreaterContract::class]
                 );
             }
         );

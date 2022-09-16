@@ -10,7 +10,11 @@
 
 namespace Juzaweb\Network\Contracts;
 
+use Juzaweb\Network\Models\Site;
+
 interface SiteCreaterContract
 {
+    public function create(string $subdomain, array $args = []): Site;
 
+    public function setupSite(Site $site);
 }

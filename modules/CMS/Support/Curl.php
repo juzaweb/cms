@@ -11,7 +11,7 @@ class Curl
 
     public function __construct()
     {
-        $this->client = new Client(['timeout' => 30]);
+        $this->client = new Client(['timeout' => 60]);
     }
 
     public function get($url, $params = [], $headers = [])
@@ -73,7 +73,9 @@ class Curl
             CURLOPT_SSL_VERIFYPEER => false,
         ];
 
-        return $this->client->request($method, $url, $data);
+        $request = $this->client->request($method, $url, $data);
+
+        return $request;
     }
 
     public function exists($url)
@@ -87,7 +89,7 @@ class Curl
         }
     }
 
-    public function getClient(): Client
+    public function getClient()
     {
         return $this->client;
     }

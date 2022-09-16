@@ -77,6 +77,8 @@ class FrontendAction extends Action
         $googleAnalytics = get_config('google_analytics');
         $scripts = HookAction::getEnqueueFrontendScripts();
         $styles = HookAction::getEnqueueFrontendStyles();
+        $bingKey = get_config('bing_verify_key');
+        $googleKey = get_config('google_verify_key');
 
         echo e(
             view(
@@ -85,7 +87,9 @@ class FrontendAction extends Action
                     'fbAppId',
                     'googleAnalytics',
                     'scripts',
-                    'styles'
+                    'styles',
+                    'bingKey',
+                    'googleKey'
                 )
             )
         );

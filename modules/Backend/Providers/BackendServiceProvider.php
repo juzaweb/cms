@@ -92,6 +92,9 @@ class BackendServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cms');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
+
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(AuthServiceProvider::class);
         $this->registerRouteMacros();
@@ -114,8 +117,12 @@ class BackendServiceProvider extends ServiceProvider
 
     protected function bootPublishes()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cms');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
+        $this->publishes(
+            [
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/cms'),
+            ],
+            'cms_views'
+        );
 
         $this->publishes(
             [

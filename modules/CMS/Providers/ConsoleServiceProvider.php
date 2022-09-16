@@ -11,10 +11,12 @@
 namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Console\Scheduling\Schedule;
+use Juzaweb\CMS\Console\Commands\AutoClearSlotCommand;
 use Juzaweb\CMS\Console\Commands\ClearCacheCommand;
 use Juzaweb\CMS\Console\Commands\InstallCommand;
 use Juzaweb\CMS\Console\Commands\PluginAutoloadCommand;
 use Juzaweb\CMS\Console\Commands\SendMailCommand;
+use Juzaweb\CMS\Console\Commands\ShowSlotCommand;
 use Juzaweb\CMS\Console\Commands\UpdateCommand;
 use Juzaweb\CMS\Support\ServiceProvider;
 
@@ -25,7 +27,9 @@ class ConsoleServiceProvider extends ServiceProvider
         UpdateCommand::class,
         SendMailCommand::class,
         ClearCacheCommand::class,
-        PluginAutoloadCommand::class
+        PluginAutoloadCommand::class,
+        AutoClearSlotCommand::class,
+        ShowSlotCommand::class
     ];
 
     public function boot()
@@ -33,6 +37,8 @@ class ConsoleServiceProvider extends ServiceProvider
         $this->app->booted(
             function () {
                 $schedule = $this->app->make(Schedule::class);
+                $schedule->command(AutoClearSlotCommand::class)->hourly();
+
                 if (get_config('jw_auto_ping')) {
                     $schedule->command('juzacms:auto-submit')->daily();
                 }

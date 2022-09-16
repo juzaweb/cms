@@ -3,7 +3,6 @@
 namespace Juzaweb\CMS\Support\Updater;
 
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Str;
 use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Version;
@@ -15,8 +14,10 @@ class ThemeUpdater extends UpdateManager
     public function getVersionAvailable(): string
     {
         $uri = "themes/{$this->name}/version-available";
-
-        $data = $this->getDefaultApiParams();
+        $data = [
+            'cms_version' => Version::getVersion(),
+            'current_version' => $this->getCurrentVersion(),
+        ];
 
         $response = $this->api->get($uri, $data);
 
@@ -63,29 +64,15 @@ class ThemeUpdater extends UpdateManager
 
         $response = $this->api->get(
             $uri,
-            $this->getDefaultApiParams()
+            [
+                'current_version' => $this->getCurrentVersion(),
+                'cms_version' => Version::getVersion()
+            ]
         );
 
         $this->responseErrors($response);
 
         return $response;
-    }
-
-    protected function getDefaultApiParams(): array
-    {
-        $params = [
-            'cms_version' => Version::getVersion(),
-            'current_version' => $this->getCurrentVersion(),
-            'domain' => request()->getHttpHost(),
-        ];
-
-        $activationCodes = get_config('theme_activation_codes', []);
-
-        if (isset($activationCodes[Str::snake($this->name)])) {
-            $params['use_token'] = $activationCodes[Str::snake($this->name)]['token'] ?? null;
-        }
-
-        return $params;
     }
 
     protected function getCacheKey(): string

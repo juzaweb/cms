@@ -377,7 +377,6 @@ return [
     'result_for_keyword' => 'Result for keyword :name',
     'search_results' => 'Search results',
     'install' => 'Install',
-    'installing' => 'Installing...',
     'views' => 'Views',
     'version' => 'Version',
     'install_now' => 'Install Now',
@@ -521,13 +520,12 @@ return [
         'auto_ping_description' => 'Automatically ping search engines like Bing'.
             ' and Yandex whenever you publish, update or delete a post.',
         'bing_api_key' => 'Bing API Key',
+        'bing_verify_key' => 'Bing Verify Website Key',
+        'google_verify_key' => 'Google Verify Website Key',
     ],
     'backup' => [
         'backup_setting' => 'Backup setting',
         'enable_backup' => 'Enable Backup',
         'backup_time' => 'Backup Time',
-    ],
-    'premium' => [
-        'activation_code' => 'Activation code',
     ]
 ];

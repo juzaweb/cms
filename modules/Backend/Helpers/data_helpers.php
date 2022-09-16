@@ -207,8 +207,12 @@ function get_total_resource($resource, $args = [])
     return $query->count();
 }
 
-function get_page_url(string|int|Post $page): null|string
+function get_page_url(string|int|Post|null $page): null|string
 {
+    if (empty($page)) {
+        return null;
+    }
+
     if ($page instanceof Post) {
         return $page->getLink();
     }
@@ -223,9 +227,5 @@ function get_page_url(string|int|Post $page): null|string
 
     $data = Post::findBySlug($page, ['id', 'slug', 'type']);
 
-    if ($data) {
-        return $data->getLink();
-    }
-
-    return null;
+    return $data?->getLink();
 }
