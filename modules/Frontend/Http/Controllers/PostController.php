@@ -57,6 +57,7 @@ class PostController extends FrontendController
         $postSlug = $slug[1];
 
         $permalink = $this->getPermalinks($base);
+
         $postType = HookAction::getPostTypes($permalink->get('post_type'));
 
         /**

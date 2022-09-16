@@ -151,9 +151,10 @@ class FileManager
             throw new FileManagerException($this->errors);
         }
 
-        $filename = $this->makeFilename($uploadedFile);
+        $uploadFolder = $this->makeFolderUpload();
+        $filename = $this->makeFilename($uploadedFile, $uploadFolder);
         $newPath = $this->storage->putFileAs(
-            $this->makeFolderUpload(),
+            $uploadFolder,
             $uploadedFile,
             $filename
         );
@@ -238,23 +239,39 @@ class FileManager
     protected function makeUploadedFileByUrl(): UploadedFile
     {
         $content = $this->getContentFileUrl($this->resource);
+
         if (empty($content)) {
             throw new \Exception("Can't get file url: {$this->resource}");
         }
 
         $tempName = basename($this->resource);
+
         $this->storage->put($tempName, $content);
 
         return (new UploadedFile($this->storage->path($tempName), $tempName));
     }
 
-    protected function makeFilename(UploadedFile $file): string|null
+    protected function makeFilename(UploadedFile $file, string $uploadFolder): string|null
     {
         $filename = $file->getClientOriginalName();
+
         $extension = $file->getClientOriginalExtension();
-        $filename = str_replace('.' . $extension, '', $filename);
-        $filename = Str::slug(substr($filename, 0, 50));
-        $filename = $filename . '-'. strtolower(Str::random(15)) .'.' . $extension;
+
+        $name = str_replace('.' . $extension, '', $filename);
+
+        $name = Str::slug(substr($name, 0, 100));
+
+        $i = 0;
+        while (1) {
+            $filename = $name . ($i > 0 ? "-{$i}": '') .'.'. $extension;
+
+            if (!$this->storage->exists("{$uploadFolder}/{$filename}")) {
+                break;
+            }
+
+            $i++;
+        }
+
         return $this->replaceInsecureSuffix($filename);
     }
 

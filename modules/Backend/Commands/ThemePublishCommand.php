@@ -12,12 +12,9 @@ class ThemePublishCommand extends Command
 
     public function handle()
     {
-        $theme = (string) $this->argument('theme');
-        $type = (string) $this->argument('type');
+        $theme = $this->argument('theme') ?? jw_current_theme();
 
-        if (empty($theme)) {
-            $theme = jw_current_theme();
-        }
+        $type = (string) $this->argument('type');
 
         if (empty($type)) {
             $this->publishAssets($theme);

@@ -349,7 +349,8 @@ class HtmlDomNode
                     case HDOM_QUOTE_SINGLE:
                         $quote = '\'';
                         break;
-                    default: $quote = '';
+                    default:
+                        $quote = '';
                 }
 
                 $ret .= $key

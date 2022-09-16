@@ -11,6 +11,7 @@
 namespace Juzaweb\DevTool\Providers;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Juzaweb\CMS\Providers\TelescopeServiceProvider;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\CMS\Support\Stub;
@@ -30,6 +31,24 @@ class DevToolServiceProvider extends ServiceProvider
             }
 
             Builder::macro(
+                'toRawSql',
+                function () {
+                    return array_reduce(
+                        $this->getBindings(),
+                        function ($sql, $binding) {
+                            return preg_replace(
+                                '/\?/',
+                                is_numeric($binding) ? $binding : "'".$binding."'",
+                                $sql,
+                                1
+                            );
+                        },
+                        $this->toSql()
+                    );
+                }
+            );
+
+            EloquentBuilder::macro(
                 'toRawSql',
                 function () {
                     return array_reduce(

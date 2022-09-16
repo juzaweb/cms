@@ -81,11 +81,6 @@ class Config implements ConfigContract
             $this->configs
         );
 
-        $this->cache->store('file')->forever(
-            "dbconfig_{$key}",
-            $value
-        );
-
         return $config;
     }
 
