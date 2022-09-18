@@ -2,7 +2,7 @@
     {% set categories = get_post_taxonomies(post, 'categories', {limit: 1}) %}
 
     <div class="article__image">
-        <a href="{{ post.url }}">
+        <a href="{{ post.url }}" title="{{ post.title }}">
             <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="img-fluid">
         </a>
     </div>
@@ -29,7 +29,7 @@
         </ul>
 
         <h5>
-            <a href="{{ post.url }}">
+            <a href="{{ post.url }}" title="{{ post.title }}">
                 {{ post.title }}
             </a>
         </h5>
