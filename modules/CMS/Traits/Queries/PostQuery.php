@@ -16,12 +16,17 @@ use Juzaweb\Backend\Models\Post;
 
 trait PostQuery
 {
-    public function posts(string $type, array $options = []): array
+    public function posts(string $type = null, array $options = []): array
     {
-        $paginate = Arr::get($options, 'paginate');
         $taxonomies = Arr::get($options, 'taxonomies');
         $taxonomy = Arr::get($options, 'taxonomy');
+        $hasThumbnail = filter_var(
+            Arr::get($options, 'has_thumbnail', false),
+            FILTER_VALIDATE_BOOLEAN
+        );
+
         $limit = Arr::get($options, 'limit');
+        $paginate = Arr::get($options, 'paginate');
         $metas = Arr::get($options, 'metas');
         $orderBy = Arr::get($options, 'order_by');
 
@@ -29,8 +34,15 @@ trait PostQuery
             $paginate = 12;
         }
 
-        $query = Post::selectFrontendBuilder()
-            ->where('type', '=', $type);
+        $query = Post::selectFrontendBuilder();
+
+        if ($type) {
+            $query->where('type', '=', $type);
+        }
+
+        if ($hasThumbnail) {
+            $query->whereNotNull('thumbnail');
+        }
 
         if ($taxonomies) {
             $query->whereTaxonomyIn($taxonomies);
@@ -66,16 +78,9 @@ trait PostQuery
             $query->orderBy($col, $val);
         }
 
-        if ($limit) {
-            if ($limit > 50) {
-                $limit = 10;
-            }
-
-            $query->limit($limit);
-        }
-
         if ($paginate) {
             $posts = $query->paginate($paginate);
+
             $posts->appends(request()->query());
 
             return PostResource::collection($posts)
@@ -83,7 +88,11 @@ trait PostQuery
                 ->getData(true);
         }
 
-        $query->limit(10);
+        if (empty($limit) || $limit > 50) {
+            $limit = 10;
+        }
+
+        $query->limit($limit);
 
         $posts = $query->get();
 

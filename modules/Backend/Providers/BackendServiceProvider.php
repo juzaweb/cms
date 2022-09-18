@@ -12,6 +12,7 @@ use Juzaweb\Backend\Actions\SeoAction;
 use Juzaweb\Backend\Actions\SocialLoginAction;
 use Juzaweb\Backend\Actions\ToolAction;
 use Juzaweb\Backend\Commands\AutoSubmitCommand;
+use Juzaweb\Backend\Commands\AutoTagCommand;
 use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
 use Juzaweb\Backend\Commands\FindTransCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
@@ -86,6 +87,7 @@ class BackendServiceProvider extends ServiceProvider
                 EmailTemplateGenerateCommand::class,
                 ThemePublishCommand::class,
                 AutoSubmitCommand::class,
+                AutoTagCommand::class,
             ]
         );
     }

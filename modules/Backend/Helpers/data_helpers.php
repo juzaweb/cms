@@ -9,7 +9,7 @@ use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\CMS\Facades\JWQuery;
 
-function get_posts(string $type, array $options = [])
+function get_posts(string $type = null, array $options = []): array
 {
     return JWQuery::posts($type, $options);
 }
@@ -24,7 +24,7 @@ function get_post_taxonomies($post, $taxonomy = null, $params = [])
     return JWQuery::postTaxonomies($post, $taxonomy, $params);
 }
 
-function get_related_posts($post, $limit = 5, $taxonomy = null)
+function get_related_posts($post, $limit = 5, $taxonomy = null): array
 {
     if ($limit > 20) {
         $limit = 20;
@@ -73,7 +73,7 @@ function get_popular_posts($type = null, $post = null, $limit = 5, $options = []
         ->toArray(request());
 }
 
-function get_post_resources($resource, $options = [])
+function get_post_resources($resource, $options = []): array
 {
     $query = Resource::selectFrontendBuilder()
         ->where('type', '=', $resource);
