@@ -27,7 +27,7 @@ trait AuthRegisterForm
     public function index(): View
     {
         if (! get_config('user_registration', 1)) {
-            return abort(403, trans('cms::message.register-form.register-closed'));
+            return abort(403, trans('cms::message.register_form.register_closed'));
         }
 
         do_action('register.index');
@@ -50,7 +50,7 @@ trait AuthRegisterForm
         do_action('register.handle', $request);
 
         if (! get_config('user_registration', 1)) {
-            return $this->error(trans('cms::message.register-form.register-closed'));
+            return $this->error(trans('cms::message.register_form.register_closed'));
         }
 
         // Create user
