@@ -13,11 +13,11 @@
 
                         <form action="{{ route('admin.forgot_password') }}" method="post" class="mb-4 form-ajax">
                             <div class="form-group mb-4">
-                                <input type="text" name="email" class="form-control" placeholder="@lang('cms::app.email_address')" autocomplete="off"/>
+                                <input type="text" name="email" class="form-control" placeholder="{{ trans('cms::app.email_address') }}" autocomplete="off"/>
                             </div>
 
-                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="@lang('cms::app.please_wait')">
-                                <i class="fa fa-refresh"></i> @lang('cms::app.forgot_password')
+                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="{{ trans('cms::app.please_wait') }}">
+                                <i class="fa fa-refresh"></i> {{ trans('cms::app.forgot_password') }}
                             </button>
                         </form>
                     </div>

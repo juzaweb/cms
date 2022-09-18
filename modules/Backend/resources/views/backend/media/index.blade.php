@@ -27,7 +27,7 @@
                         <option value="mine">Mine</option>
                     </select>--}}
 
-                    <button type="submit" class="btn btn-primary ml-1">@lang('cms::app.search')</button>
+                    <button type="submit" class="btn btn-primary ml-1">{{ trans('cms::app.search') }}</button>
                 </form>
             </div>
 

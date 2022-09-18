@@ -3,7 +3,7 @@
         {{ $taxonomy->get('label') }}
         <span>
             <a href="javascript:void(0)" class="float-right add-new">
-                <i class="fa fa-plus"></i> @lang('cms::app.add_new')
+                <i class="fa fa-plus"></i> {{ trans('cms::app.add_new') }}
             </a>
         </span>
     </label>
@@ -41,7 +41,7 @@
 
         @if(in_array('hierarchical', $taxonomy->get('supports', [])))
             <div class="form-group mb-1">
-                <label class="col-form-label">@lang('cms::app.parent')</label>
+                <label class="col-form-label">{{ trans('cms::app.parent') }}</label>
                 <select type="text" class="form-control taxonomy-parent load-taxonomies" autocomplete="off"
                         data-post-type="{{ $taxonomy->get('post_type') }}"
                         data-taxonomy="{{ $taxonomy->get('taxonomy') }}">
@@ -56,7 +56,7 @@
             data-post_type="{{ $taxonomy->get('post_type') }}"
             data-taxonomy="{{ $taxonomy->get('taxonomy') }}"
         >
-            <i class="fa fa-plus-circle"></i> @lang('cms::app.add')
+            <i class="fa fa-plus-circle"></i> {{ trans('cms::app.add') }}
         </button>
     </div>
 </div>

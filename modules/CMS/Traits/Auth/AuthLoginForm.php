@@ -115,7 +115,7 @@ trait AuthLoginForm
         return redirect()->to('/');
     }
 
-    protected function getViewForm()
+    protected function getViewForm(): string
     {
         return 'cms::auth.login';
     }

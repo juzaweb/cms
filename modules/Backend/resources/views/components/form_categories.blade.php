@@ -19,16 +19,16 @@
 
     <div class="form-add">
         <div class="form-group">
-            <label class="col-form-label">@lang('tadcms::app.name') <abbr>*</abbr></label>
+            <label class="col-form-label">{{ trans('tadcms::app.name') }} <abbr>*</abbr></label>
             <input type="text" class="form-control" autocomplete="off">
         </div>
 
         <div class="form-group">
-            <label class="col-form-label">@lang('tadcms::app.parent')</label>
+            <label class="col-form-label">{{ trans('tadcms::app.parent') }}</label>
             <select type="text" class="form-control load-taxonomy" data-type="{{ $setting->get('type') }}" data-taxonomy="{{ $taxonomy }}">
             </select>
         </div>
 
-        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> @lang('tadcms::app.add')</button>
+        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> {{ trans('tadcms::app.add') }}</button>
     </div>
 </div>

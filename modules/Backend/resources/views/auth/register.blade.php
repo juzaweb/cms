@@ -30,20 +30,20 @@
                             @do_action('register_form')
 
                             <div class="form-group mb-4">
-                                <input type="text" name="name" class="form-control" placeholder="@lang('cms::app.full_name')" autocomplete="off"/>
+                                <input type="text" name="name" class="form-control" placeholder="{{ trans('cms::app.full_name') }}" autocomplete="off"/>
                             </div>
                             <div class="form-group mb-4">
-                                <input type="text" name="email" class="form-control" placeholder="@lang('cms::app.email_address')" autocomplete="off"/>
+                                <input type="text" name="email" class="form-control" placeholder="{{ trans('cms::app.email_address') }}" autocomplete="off"/>
                             </div>
                             <div class="form-group mb-4">
-                                <input type="password" name="password" class="form-control" placeholder="@lang('cms::app.password')" autocomplete="off"/>
+                                <input type="password" name="password" class="form-control" placeholder="{{ trans('cms::app.password') }}" autocomplete="off"/>
                             </div>
 
                             <div class="form-group mb-4">
-                                <input type="password" name="password_confirmation" class="form-control" placeholder="@lang('cms::app.password_confirmation')" autocomplete="off"/>
+                                <input type="password" name="password_confirmation" class="form-control" placeholder="{{ trans('cms::app.password_confirmation') }}" autocomplete="off"/>
                             </div>
 
-                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="@lang('cms::app.please_wait')">
+                            <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="{{ trans('cms::app.please_wait') }}">
                                 <strong>{{ __('Sign Up') }}</strong>
                             </button>
 

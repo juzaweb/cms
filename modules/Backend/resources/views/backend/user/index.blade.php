@@ -6,7 +6,7 @@
         <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="btn-group float-right">
-                <a href="{{ route('admin.users.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> @lang('cms::app.add_new')</a>
+                <a href="{{ route('admin.users.create') }}" class="btn btn-success"><i class="fa fa-plus-circle"></i> {{ trans('cms::app.add_new') }}</a>
             </div>
         </div>
     </div>

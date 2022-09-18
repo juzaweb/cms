@@ -24,12 +24,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="col-form-label" for="password">@lang('cms::app.password')</label>
+                            <label class="col-form-label" for="password">{{ trans('cms::app.password') }}</label>
                             <input type="password" name="password" class="form-control" id="password" autocomplete="off" @if(empty($model->id)) required @endif>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label" for="password_confirmation">@lang('cms::app.confirm_password')</label>
+                            <label class="col-form-label" for="password_confirmation">{{ trans('cms::app.confirm_password') }}</label>
                             <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" autocomplete="off" @if(empty($model->id)) required @endif>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="col-form-label" for="status">@lang('cms::app.status')</label>
+                            <label class="col-form-label" for="status">{{ trans('cms::app.status') }}</label>
                             <select name="status" id="status" class="form-control" required>
                                 @foreach($allStatus as $key => $name)
                                     <option value="{{ $key }}" @if($model->status == $key) selected @endif>{{ $name }}</option>

@@ -43,7 +43,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary mb-2">@lang('cms::app.search')</button>
+                <button type="submit" class="btn btn-primary mb-2">{{ trans('cms::app.search') }}</button>
             </form>
         </div>
     </div>

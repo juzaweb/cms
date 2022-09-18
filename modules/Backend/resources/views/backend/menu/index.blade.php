@@ -7,12 +7,12 @@
             <div class="col-md-6 form-select-menu">
                 <div class="alert-default">
                     @if($menu)
-                    @lang('cms::app.select_menu_to_edit'):
+                    {{ trans('cms::app.select_menu_to_edit') }}:
                     <select name="id" class="w-25 form-control load-menu">
                         <option value="{{ $menu->id }}" selected>{{ $menu->name }}</option>
                     </select>
 
-                    @lang('cms::app.or')
+                    {{ trans('cms::app.or') }}
                     @endif
 
                     <a href="javascript:void(0)" class="ml-1 btn-add-menu"><i class="fa fa-plus"></i> {{ trans('cms::app.create_new_menu') }}</a>

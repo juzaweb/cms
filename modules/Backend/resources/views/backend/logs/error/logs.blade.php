@@ -9,9 +9,9 @@
     >
         <thead>
             <tr>
-                <th data-field="datetime" data-width="5%" data-formatter="time_formatter">@lang('cms::app.time')</th>
-                <th data-width="5%" data-align="center" data-field="level" data-formatter="level_formatter">@lang('cms::app.level')</th>
-                <th data-field="header" data-formatter="header_formatter">@lang('cms::app.header')</th>
+                <th data-field="datetime" data-width="5%" data-formatter="time_formatter">{{ trans('cms::app.time') }}</th>
+                <th data-width="5%" data-align="center" data-field="level" data-formatter="level_formatter">{{ trans('cms::app.level') }}</th>
+                <th data-field="header" data-formatter="header_formatter">{{ trans('cms::app.header') }}</th>
             </tr>
         </thead>
     </table>
@@ -29,7 +29,7 @@
             }
             return `<span class="p-2 ${spanClass}">${value}</span>`;
         }
-        
+
         function header_formatter(value, row, index) {
             return `<div style="max-width: 780px;
     overflow: hidden;
@@ -41,7 +41,7 @@
         function content_formatter(value, row, index) {
             return `<code style="color: black;">${row.stack}</code>`;
         }
-        
+
         var table = new JuzawebTable({
             url: '{{ route('admin.logs.error.get-logs-date', [$date]) }}',
         });
