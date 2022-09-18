@@ -445,6 +445,7 @@ return [
         'twitter' => 'Login with Twitter',
         'linkedin' => 'Login with Linkedin',
         'github' => 'Login with Github',
+        'login_with' => 'Login with :name'
     ],
     'tools' => 'Tools',
     'import' => 'Import',

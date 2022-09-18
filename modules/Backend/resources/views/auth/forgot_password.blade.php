@@ -30,7 +30,7 @@
                 </div>
                 <div class="mt-auto pb-5 pt-5">
                     <div class="text-center">
-                        Copyright © {{ date('Y') }} {{ get_config('title') }} - Provided by JUZAWEB
+                        Copyright © {{ date('Y') }} {{ get_config('title') }} - Provided by Juzaweb
                     </div>
                 </div>
             </div>

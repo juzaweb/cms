@@ -28,10 +28,13 @@ trait AuthLoginForm
 
         do_action('recaptcha.init');
 
+        $socialites = get_config('socialites', []);
+
         return view(
             $this->getViewForm(),
             [
                 'title' => trans('cms::app.login'),
+                'socialites' => $socialites
             ]
         );
     }

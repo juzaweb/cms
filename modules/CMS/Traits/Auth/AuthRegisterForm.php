@@ -26,7 +26,7 @@ trait AuthRegisterForm
 
     public function index(): View
     {
-        if (! get_config('users_can_register', 1)) {
+        if (! get_config('user_registration', 1)) {
             return abort(403, trans('cms::message.register-form.register-closed'));
         }
 
@@ -34,10 +34,13 @@ trait AuthRegisterForm
 
         do_action('recaptcha.init');
 
+        $socialites = get_config('socialites', []);
+
         return view(
             $this->getViewForm(),
             [
                 'title' => trans('cms::app.sign_up'),
+                'socialites' => $socialites
             ]
         );
     }
@@ -46,7 +49,7 @@ trait AuthRegisterForm
     {
         do_action('register.handle', $request);
 
-        if (! get_config('users_can_register', 1)) {
+        if (! get_config('user_registration', 1)) {
             return $this->error(trans('cms::message.register-form.register-closed'));
         }
 

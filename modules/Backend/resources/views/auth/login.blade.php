@@ -45,6 +45,16 @@
                         <a href="{{ route('admin.forgot_password') }}" class="jw__utils__link font-size-16" data-turbolinks="false">
                             {{ trans('cms::app.forgot_password') }}
                         </a>
+
+                        <div class="social-login mt-3">
+                            @foreach($socialites as $key => $social)
+                                @continue(($social['enable'] ?? 0) != 1)
+
+                                <a class="btn btn-lg btn-{{ $key }} btn-block text-uppercase" href="{{ url("auth/{$key}/redirect") }}">
+                                    <i class="fa fa-{{ $key }} mr-2"></i> {{ trans('cms::app.socials.login_with', ['name' => ucfirst($key)]) }}
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
 
                     @if(get_config('user_registration'))
@@ -59,7 +69,7 @@
 
                 <div class="mt-auto pb-5 pt-5">
                     <div class="text-center">
-                        Copyright © {{ date('Y') }} {{ get_config('sitename') }} - Provided by JUZAWEB
+                        Copyright © {{ date('Y') }} {{ get_config('sitename') }} - Provided by Juzaweb
                     </div>
                 </div>
             </div>
