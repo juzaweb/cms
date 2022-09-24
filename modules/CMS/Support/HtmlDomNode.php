@@ -555,17 +555,13 @@ class HtmlDomNode
             return $this->convert_text($this->attr[$name]);
         }
 
-        switch ($name) {
-            case 'outertext':
-                return $this->outertext();
-            case 'innertext':
-                return $this->innertext();
-            case 'plaintext':
-                return $this->text();
-            case 'xmltext':
-                return $this->xmltext();
-            default: return array_key_exists($name, $this->attr);
-        }
+        return match ($name) {
+            'outertext' => $this->outertext(),
+            'innertext' => $this->innertext(),
+            'plaintext' => $this->text(),
+            'xmltext' => $this->xmltext(),
+            default => array_key_exists($name, $this->attr),
+        };
     }
 
     public function __set($name, $value)
@@ -576,7 +572,8 @@ class HtmlDomNode
         }
 
         switch ($name) {
-            case 'outertext': return $this->_[HDOM_INFO_OUTER] = $value;
+            case 'outertext':
+                return $this->_[HDOM_INFO_OUTER] = $value;
             case 'innertext':
                 if (isset($this->_[HDOM_INFO_TEXT])) {
                     return $this->_[HDOM_INFO_TEXT] = $value;
@@ -601,9 +598,8 @@ class HtmlDomNode
         switch ($this->nodetype) {
             case HDOM_TYPE_TEXT:
                 return $this->dom->restoreNoise($this->_[HDOM_INFO_TEXT]);
-            case HDOM_TYPE_COMMENT:
-                return '';
             case HDOM_TYPE_UNKNOWN:
+            case HDOM_TYPE_COMMENT:
                 return '';
         }
 

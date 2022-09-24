@@ -10,9 +10,9 @@ class PostController extends BackendController
 {
     use PostTypeController;
 
-    protected $viewPrefix = 'cms::backend.post';
+    protected string $viewPrefix = 'cms::backend.post';
 
-    protected function getModel()
+    protected function getModel(...$params)
     {
         return Post::class;
     }

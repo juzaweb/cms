@@ -12,6 +12,15 @@ namespace Juzaweb\CMS\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Juzaweb\CMS\Models\TableGroupTable
+ *
+ * @property-read \Juzaweb\CMS\Models\TableGroup|null $tableGroup
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable query()
+ * @mixin \Eloquent
+ */
 class TableGroupTable extends Model
 {
     protected $table = 'table_group_tables';

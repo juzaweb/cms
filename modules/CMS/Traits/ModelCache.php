@@ -10,11 +10,11 @@
 
 namespace Juzaweb\CMS\Traits;
 
-use Rennokki\QueryCache\Traits\QueryCacheable;
+//use Rennokki\QueryCache\Traits\QueryCacheable;
 
 trait ModelCache
 {
-    use QueryCacheable;
+    //use QueryCacheable;
 
     protected static $flushCacheOnUpdate = true;
 }

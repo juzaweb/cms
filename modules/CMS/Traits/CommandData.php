@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Storage;
 
 trait CommandData
 {
-    protected function getCommandData(string $key = null, mixed $default = null): mixed
-    {
-        $path = "command-datas/". md5($this->signature) .".json";
+    protected function getCommandData(
+        string $key = null,
+        mixed $default = null
+    ): mixed {
+        $path = "command-datas/". $this->getKeyCommandData() .".json";
 
         if (Storage::disk('local')->exists($path)) {
             $data = json_decode(Storage::disk('local')->get($path), true);
@@ -52,5 +54,14 @@ trait CommandData
             $path,
             json_encode($data)
         );
+    }
+
+    protected function getKeyCommandData()
+    {
+        if ($this->getName()) {
+            return md5($this->getName());
+        }
+
+        return md5($this->signature);
     }
 }

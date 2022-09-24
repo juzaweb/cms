@@ -82,6 +82,13 @@ use Laravel\Passport\HasApiTokens;
  * @property-read \Illuminate\Database\Eloquent\Collection $tokens
  * @property-read int|null $tokens_count
  * @method static Builder|User whereSiteId($value)
+ * @property array|null $json_metas
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read int|null $clients_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\CMS\Models\UserMeta[] $metas
+ * @property-read int|null $metas_count
+ * @property-read PasswordReset|null $passwordReset
+ * @method static Builder|User whereJsonMetas($value)
  */
 class User extends Authenticatable
 {

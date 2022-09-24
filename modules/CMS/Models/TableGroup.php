@@ -10,6 +10,14 @@
 
 namespace Juzaweb\CMS\Models;
 
+/**
+ * Juzaweb\CMS\Models\TableGroup
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroup newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroup newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroup query()
+ * @mixin \Eloquent
+ */
 class TableGroup extends Model
 {
     protected $table = 'table_groups';

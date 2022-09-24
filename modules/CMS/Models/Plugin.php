@@ -73,6 +73,14 @@ use Juzaweb\Backend\Models\Post;
  * @method static \Illuminate\Database\Eloquent\Builder|Plugin whereLocale($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereMetaIn($key, $values)
  * @method static \Illuminate\Database\Eloquent\Builder|Plugin whereSiteId($value)
+ * @property string|null $domain
+ * @property string|null $url
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $tags
+ * @property-read int|null $tags_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Plugin whereDomain($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Plugin whereUrl($value)
  */
 class Plugin extends Post
 {
