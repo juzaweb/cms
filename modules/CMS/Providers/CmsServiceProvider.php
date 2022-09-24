@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
 use Juzaweb\API\Providers\APIServiceProvider;
 use Juzaweb\Backend\Providers\BackendServiceProvider;
+use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\Backend\Repositories\TaxonomyRepository;
 use Juzaweb\CMS\Contracts\ActionRegisterContract;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
@@ -264,7 +265,9 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->singleton(
             PostCreatorContract::class,
             function ($app) {
-                return new PostCreator();
+                return new PostCreator(
+                    $app[PostRepository::class]
+                );
             }
         );
 

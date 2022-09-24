@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Support\Imports;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Repositories\TaxonomyRepository;
@@ -59,13 +60,16 @@ class PostImporter implements PostImporterContract
         foreach ($taxonomies as $key => $taxonomy) {
             if ($tax = Arr::get($data, $key)) {
                 $data[$key] = $this->getOrCreateTaxonomies($taxonomy, $tax);
+                if (empty($data[$key])) {
+                    unset($data[$key]);
+                }
             }
         }
 
         return $this->postCreator->create($data);
     }
 
-    protected function getOrCreateTaxonomies($taxonomy, array $data): array
+    protected function getOrCreateTaxonomies(Collection $taxonomy, array $data): array
     {
         $ids = [];
         $names = [];
@@ -77,22 +81,21 @@ class PostImporter implements PostImporterContract
                 continue;
             }
 
+            $result = [];
             if (is_string($item)) {
-                $names[] = [
-                    'name' => trim($item)
-                ];
-                continue;
+                $result['name'] = trim($item);
+            } else {
+                $result['name'] = trim($item['name']);
             }
 
-            $item['name'] = trim($item['name']);
-            $item['post_type'] = trim($item['post_type']);
-            $item['taxonomy'] = trim($item['taxonomy']);
-            $item['slug'] = isset($item['slug']) ? trim($item['slug']) : null;
+            $result['post_type'] = $taxonomy->get('post_type');
+            $result['taxonomy'] = $taxonomy->get('taxonomy');
+            $result['slug'] = isset($item['slug']) ? trim($item['slug']) : null;
 
-            if (Arr::get($item, 'slug')) {
-                $slugs[] = $item;
+            if (Arr::get($result, 'slug')) {
+                $slugs[] = $result;
             } else {
-                $names[] = $item;
+                $names[] = $result;
             }
         }
 
@@ -107,13 +110,13 @@ class PostImporter implements PostImporterContract
         );
     }
 
-    protected function createTaxonomiesFromSlugs($inserts, $taxonomy): array
+    protected function createTaxonomiesFromSlugs(array $inserts, Collection $taxonomy): array
     {
         $slugs = collect($inserts);
 
         $taxs = $this->taxonomyRepository->query()
-            ->whereIn('post_type', $taxonomy->post_type)
-            ->whereIn('taxonomy', $taxonomy->taxonomy)
+            ->where('post_type', '=', $taxonomy->get('post_type'))
+            ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
             ->whereIn('slug', $slugs->pluck('slug')->toArray())
             ->get(['id', 'slug'])
             ->keyBy('slug');
@@ -133,13 +136,13 @@ class PostImporter implements PostImporterContract
         return array_merge($taxs->pluck('id')->toArray(), $ids);
     }
 
-    protected function createTaxonomiesFromNames($inserts, $taxonomy): array
+    protected function createTaxonomiesFromNames(array $inserts, Collection $taxonomy): array
     {
         $names = collect($inserts);
 
         $taxs = $this->taxonomyRepository->query()
-            ->whereIn('post_type', $taxonomy->post_type)
-            ->whereIn('taxonomy', $taxonomy->taxonomy)
+            ->where('post_type', '=', $taxonomy->get('post_type'))
+            ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
             ->whereIn('name', $names->pluck('name')->toArray())
             ->get(['id', 'name'])
             ->keyBy('name');
