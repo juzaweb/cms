@@ -284,29 +284,26 @@ class FileManager
     {
         if (empty($file)) {
             $this->errors[] = $this->errorMessage('file-empty');
-
             return false;
         }
 
         if (! $file instanceof UploadedFile) {
             $this->errors[] = $this->errorMessage('instance');
-
             return false;
         }
 
         if ($file->getError() != UPLOAD_ERR_OK) {
             $msg = 'File failed to upload. Error code: ' . $file->getError();
             $this->errors[] = $msg;
-
             return false;
         }
 
         $mimetype = $file->getMimeType();
+
         $config = config('juzaweb.filemanager.types.' . $this->type);
 
         if (empty($config)) {
             $this->errors[] = $this->errorMessage('not-supported');
-
             return false;
         }
 
@@ -317,14 +314,12 @@ class FileManager
         $validMimetypes = $config['valid_mime'] ?? [];
         if (in_array($mimetype, $validMimetypes) === false) {
             $this->errors[] = $this->errorMessage('mime').$mimetype;
-
             return false;
         }
 
         if ($max_size > 0) {
             if ($file_size > ($max_size * 1024 * 1024)) {
                 $this->errors[] = $this->errorMessage('size');
-
                 return false;
             }
         }

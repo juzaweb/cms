@@ -8,10 +8,13 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
 use Juzaweb\API\Providers\APIServiceProvider;
 use Juzaweb\Backend\Providers\BackendServiceProvider;
+use Juzaweb\Backend\Repositories\TaxonomyRepository;
 use Juzaweb\CMS\Contracts\ActionRegisterContract;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Contracts\CacheGroupContract;
 use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Contracts\PostCreatorContract;
+use Juzaweb\CMS\Contracts\PostImporterContract;
 use Juzaweb\CMS\Contracts\TableGroupContract;
 use Juzaweb\CMS\Contracts\EventyContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
@@ -27,10 +30,11 @@ use Juzaweb\CMS\Facades\OverwriteConfig;
 use Juzaweb\CMS\Support\ActionRegister;
 use Juzaweb\CMS\Support\CacheGroup;
 use Juzaweb\CMS\Support\Config as DbConfig;
+use Juzaweb\CMS\Support\Creators\PostCreator;
 use Juzaweb\CMS\Support\DatabaseTableGroup;
-use Juzaweb\CMS\Support\TableGroup;
 use Juzaweb\CMS\Support\GlobalData;
 use Juzaweb\CMS\Support\HookAction;
+use Juzaweb\CMS\Support\Imports\PostImporter;
 use Juzaweb\CMS\Support\JWQuery;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Manager\BackendMessageManager;
@@ -254,6 +258,24 @@ class CmsServiceProvider extends ServiceProvider
             JWQueryContract::class,
             function ($app) {
                 return new JWQuery($app['db']);
+            }
+        );
+
+        $this->app->singleton(
+            PostCreatorContract::class,
+            function ($app) {
+                return new PostCreator();
+            }
+        );
+
+        $this->app->singleton(
+            PostImporterContract::class,
+            function ($app) {
+                return new PostImporter(
+                    $app[PostCreatorContract::class],
+                    $app[HookActionContract::class],
+                    $app[TaxonomyRepository::class]
+                );
             }
         );
     }

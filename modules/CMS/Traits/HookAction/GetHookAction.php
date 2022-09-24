@@ -55,7 +55,7 @@ trait GetHookAction
         return collect(GlobalData::get('post_types'));
     }
 
-    public function getTaxonomies($postType = null)
+    public function getTaxonomies($postType = null): Collection
     {
         if (is_array($postType)) {
             $postType = $postType['key'];
@@ -71,7 +71,7 @@ trait GetHookAction
 
         return $taxonomies ?
             $taxonomies->sortBy('menu_position')
-            : [];
+            : new Collection([]);
     }
 
     public function getSettingForms(): Collection
@@ -217,7 +217,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('resources'));
     }
 
-    public function getAdminPages($key = null)
+    public function getAdminPages($key = null): Collection|string|array|null
     {
         if ($key) {
             return Arr::get(GlobalData::get('admin_pages'), $key);

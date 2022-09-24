@@ -65,4 +65,6 @@ interface HookActionContract
     public function getPermissions(string $key = null): Collection;
 
     public function getConfigs($key = null): Collection;
+
+    public function getTaxonomies($postType = null): Collection;
 }

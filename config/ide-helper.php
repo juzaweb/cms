@@ -128,8 +128,8 @@ return [
     */
 
     'model_locations' => [
-        'modules',
-        'plugins'
+        'modules/*/Models',
+        'plugins/*/src/Models'
     ],
 
     /*
