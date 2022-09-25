@@ -44,7 +44,7 @@ use Juzaweb\CMS\Support\Theme\ThemeConfig;
 use Juzaweb\CMS\Support\Validators\DomainValidator;
 use Juzaweb\CMS\Support\Validators\ModelExists;
 use Juzaweb\CMS\Support\Validators\ModelUnique;
-use Juzaweb\CMS\Support\Validators\ReCaptcha;
+use Juzaweb\CMS\Support\Validators\ReCaptchaValidator;
 use Juzaweb\CMS\Support\XssCleaner;
 use Juzaweb\DevTool\Providers\DevToolServiceProvider;
 use Juzaweb\Frontend\Providers\FrontendServiceProvider;
@@ -63,8 +63,15 @@ class CmsServiceProvider extends ServiceProvider
         $this->bootMigrations();
         $this->bootPublishes();
 
-        Validator::extend('recaptcha', [ReCaptcha::class, 'validate']);
-        Validator::extend('domain', [DomainValidator::class, 'validate']);
+        Validator::extend(
+            'recaptcha',
+            [ReCaptchaValidator::class, 'validate']
+        );
+
+        Validator::extend(
+            'domain',
+            [DomainValidator::class, 'validate']
+        );
 
         Rule::macro(
             'modelExists',
