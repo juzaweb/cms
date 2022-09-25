@@ -12,9 +12,11 @@ namespace Juzaweb\API\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Http\Requests\API\Auth\LoginRequest;
+use Juzaweb\Backend\Http\Resources\UserResource;
 use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Models\User;
+use Laravel\Passport\PersonalAccessTokenResult;
 use OpenApi\Annotations as OA;
 
 class LoginController extends ApiController
@@ -53,14 +55,50 @@ class LoginController extends ApiController
     {
         $request->authenticate();
 
-        $token = $request->user()->createToken('auth_token');
+        $user = $request->user();
 
-        return $this->respondWithToken($token);
+        $token = $user->createToken('auth_token');
+
+        return $this->respondWithToken($token, $user);
     }
 
-    public function refresh(): JsonResponse
+    /**
+     * @OA\Post(
+     *      path="/api/auth/access-token",
+     *      tags={"Auth"},
+     *      summary="User validate access token",
+     *      security={{"sanctum":{}}},
+     *      operationId="api.auth.access_token",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  required={"access_token"},
+     *                  @OA\Property(property="access_token",
+     *                      type="string",
+     *                      description="Access token"
+     *                  )
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(response=201, ref="#/components/responses/success_detail"),
+     *      @OA\Response(response=422, ref="#/components/responses/error_422"),
+     *      @OA\Response(response=500, ref="#/components/responses/error_500")
+     *  )
+     */
+    public function accessToken(Request $request): JsonResponse
     {
-        return $this->respondWithToken(Auth::guard('api')->refresh());
+        $accessToken = $request->post('access_token');
+
+        $user = $request->user('api');
+
+        $token = $user->token();
+
+        return $this->respondWithToken(
+            new PersonalAccessTokenResult($accessToken, $token),
+            $user
+        );
     }
 
     /**
@@ -77,18 +115,19 @@ class LoginController extends ApiController
      */
     public function logout(Request $request): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
+        $request->user('api')->token()->delete();
 
         return $this->restSuccess([], 'Successfully logged out.');
     }
 
-    protected function respondWithToken($token): JsonResponse
+    protected function respondWithToken($token, User $user): JsonResponse
     {
         return $this->restSuccess(
             [
                 'access_token' => $token->accessToken,
                 'token_type' => 'Bearer',
                 'expires_at' => $token->token->expires_at,
+                'user' => new UserResource($user),
             ],
             'Successfully login.'
         );

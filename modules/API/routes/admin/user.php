@@ -8,14 +8,11 @@
  * @license    GNU V2
  */
 
-use Juzaweb\Api\Http\Controllers\UserController;
+use Juzaweb\API\Http\Controllers\Admin\UserController;
 
 Route::group(
-    [
-        'prefix' => 'profile',
-        'middleware' => 'auth:api',
-    ],
+    [],
     function () {
-        Route::get('/', [UserController::class, 'profile']);
+        Route::apiResource('users', UserController::class)->names('admin.user');
     }
 );

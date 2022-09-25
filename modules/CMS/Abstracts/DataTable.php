@@ -15,6 +15,7 @@
 namespace Juzaweb\CMS\Abstracts;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
@@ -36,7 +37,7 @@ abstract class DataTable
 
     protected bool $searchable = true;
 
-    public string $currentUrl;
+    public ?string $currentUrl;
 
     /**
      * Columns datatable
@@ -140,6 +141,34 @@ abstract class DataTable
     public function setCurrentUrl(string $url): void
     {
         $this->currentUrl = $url;
+    }
+
+    public function toArray(): array
+    {
+        $searchFields = $this->searchFields();
+        $columns = collect($this->columns())->map(
+            function ($item, $key) {
+                $item['key'] = $key;
+                $item['sortable'] = Arr::get($item, 'sortable', true);
+                return $item;
+            }
+        )->values();
+
+        return [
+            'columns' => $columns,
+            'actions' => $this->actions(),
+            'params' => $this->params,
+            'searchFields' => $searchFields,
+            'perPage' => $this->perPage,
+            'sortName' => $this->sortName,
+            'sortOder' => $this->sortOder,
+            'dataUrl' => $this->dataUrl,
+            'actionUrl' => $this->actionUrl,
+            'escapes' => $this->escapes,
+            'searchable' => $this->searchable,
+            'searchFieldTypes' => $this->getSearchFieldTypes(),
+            'table' => Crypt::encryptString(static::class),
+        ];
     }
 
     protected function getDataRender(): array

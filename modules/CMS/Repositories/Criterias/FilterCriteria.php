@@ -26,11 +26,11 @@ class FilterCriteria implements CriteriaInterface
      * @return mixed
      * @throws \Exception
      */
-    public function apply($model, RepositoryInterface $repository): mixed
+    public function apply($model, RepositoryInterface $repository)
     {
         $fields = $repository->getFieldFilterable();
 
-        return $model->where(
+        $model->where(
             function ($query) use ($fields) {
                 $isFirstField = true;
 
@@ -60,6 +60,8 @@ class FilterCriteria implements CriteriaInterface
                 }
             }
         );
+
+        return $model;
     }
 
     protected function getValueRequest(string $field, string $condition): mixed

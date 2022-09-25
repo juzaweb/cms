@@ -22,7 +22,7 @@ class UserDataTable extends DataTable
      *
      * @return array
      */
-    public function columns()
+    public function columns(): array
     {
         return [
             'name' => [
@@ -68,10 +68,12 @@ class UserDataTable extends DataTable
         $query = User::query();
 
         if ($keyword = Arr::get($data, 'keyword')) {
-            $query->where(function (Builder $q) use ($keyword) {
-                $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
-                $q->orWhere('email', JW_SQL_LIKE, '%'. $keyword .'%');
-            });
+            $query->where(
+                function (Builder $q) use ($keyword) {
+                    $q->where('name', JW_SQL_LIKE, '%'. $keyword .'%');
+                    $q->orWhere('email', JW_SQL_LIKE, '%'. $keyword .'%');
+                }
+            );
         }
 
         if ($status = Arr::get($data, 'status')) {

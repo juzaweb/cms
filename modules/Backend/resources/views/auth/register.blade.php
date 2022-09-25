@@ -32,9 +32,11 @@
                             <div class="form-group mb-4">
                                 <input type="text" name="name" class="form-control" placeholder="{{ trans('cms::app.full_name') }}" autocomplete="off"/>
                             </div>
+
                             <div class="form-group mb-4">
                                 <input type="text" name="email" class="form-control" placeholder="{{ trans('cms::app.email_address') }}" autocomplete="off"/>
                             </div>
+
                             <div class="form-group mb-4">
                                 <input type="password" name="password" class="form-control" placeholder="{{ trans('cms::app.password') }}" autocomplete="off"/>
                             </div>

@@ -20,7 +20,7 @@ class UserController extends BackendController
         afterSave as tAfterSave;
     }
 
-    protected $viewPrefix = 'cms::backend.user';
+    protected string $viewPrefix = 'cms::backend.user';
 
     /**
      * Validator for store and update

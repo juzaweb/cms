@@ -16,12 +16,7 @@ use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class UserController extends ApiController
 {
-    public function index(Request $request)
-    {
-        //
-    }
-
-    public function show(Request $request)
+    public function profile(Request $request): UserResource
     {
         return new UserResource($request->user());
     }
