@@ -15,4 +15,6 @@ use Juzaweb\Backend\Models\Post;
 interface PostManagerContract
 {
     public function create(array $data, array $options = []): Post;
+
+    public function update(array $data, int $id, array $options = []): Post;
 }

@@ -301,14 +301,7 @@ trait PostTypeModel
         return $taxonomies;
     }
 
-    /**
-     * Get Related Posts
-     *
-     * @param int $limit
-     * @param string $taxonomy
-     * @return Collection
-     */
-    public function getRelatedPosts($limit = 5, $taxonomy = null)
+    public function getRelatedPosts(int $limit = 5, string $taxonomy = null): Collection
     {
         $ids = $this->getTaxonomies($taxonomy)->pluck('id')->toArray();
 
@@ -327,7 +320,7 @@ trait PostTypeModel
      * @param array $attributes
      * @throws \Exception
      */
-    public function syncTaxonomies(array $attributes)
+    public function syncTaxonomies(array $attributes): void
     {
         if (empty($this->type)) {
             throw new \Exception('Cannot find Type in post.');

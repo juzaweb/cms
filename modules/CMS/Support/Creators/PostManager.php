@@ -36,4 +36,17 @@ class PostManager implements PostManagerContract
 
         return $model;
     }
+
+    public function update(array $data, int $id, array $options = []): Post
+    {
+        $model = $this->postRepository->update($data, $id);
+
+        $model->syncTaxonomies($data);
+
+        if ($meta = Arr::get($data, 'meta', [])) {
+            $model->syncMetas($meta);
+        }
+
+        return $model;
+    }
 }

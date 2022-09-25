@@ -17,14 +17,14 @@ trait UseSlug
         );
     }
 
-    public static function findBySlug($slug, $column = [])
+    public static function findBySlug($slug, $column = []): self
     {
         return self::query()
             ->where('slug', '=', $slug)
             ->first($column);
     }
 
-    public static function findBySlugOrFail($slug)
+    public static function findBySlugOrFail($slug): self
     {
         return self::query()
             ->where('slug', '=', $slug)
@@ -34,31 +34,41 @@ trait UseSlug
     public function getDisplayName()
     {
         if (empty($this->fieldName)) {
-            return $this->name ? $this->name : $this->title;
+            return $this->name ?: $this->title;
         }
 
         return $this->{$this->fieldName};
     }
 
-    public function generateSlug($string = null)
+    public function generateSlug($string = null): string
     {
         if (empty($string)) {
-            $string = $this->getDisplayName();
+            if ($slug = request()->input('slug')) {
+                $string = $slug;
+            } elseif (isset($this->slug)) {
+                $string = $this->slug;
+            } else {
+                $string = $this->getDisplayName();
+            }
         }
 
-        $slug = substr($string, 0, 70);
-        $slug = Str::slug($slug);
+        $baseSlug = substr($string, 0, 70);
+        $baseSlug = Str::slug($baseSlug);
 
-        $row = self::where('id', '!=', $this->id)
-            ->where('slug', 'like', $slug . '%')
-            ->orderBy('slug', 'DESC')
-            ->first(['slug']);
+        $i = 1;
+        $slug = $baseSlug;
+        do {
+            $row = self::where('id', '!=', $this->id)
+                ->where('slug', '=', $slug)
+                ->orderBy('slug', 'DESC')
+                ->first(['slug']);
 
-        if ($row) {
-            $split = explode('-', $row->slug);
-            $last = (int) $split[count($split) - 1];
-            $slug = $slug . '-' . ($last + 1);
-        }
+            if ($row) {
+                $slug = $baseSlug . '-' . $i;
+            }
+
+            $i++;
+        } while ($row);
 
         $this->slug = $slug;
 
