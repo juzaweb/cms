@@ -13,9 +13,9 @@ namespace Juzaweb\CMS\Support\Creators;
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Repositories\PostRepository;
-use Juzaweb\CMS\Contracts\PostCreatorContract;
+use Juzaweb\CMS\Contracts\PostManagerContract;
 
-class PostCreator implements PostCreatorContract
+class PostManager implements PostManagerContract
 {
     protected PostRepository $postRepository;
 

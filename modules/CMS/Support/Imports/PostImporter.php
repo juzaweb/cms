@@ -16,21 +16,21 @@ use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Repositories\TaxonomyRepository;
 use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Contracts\PostCreatorContract;
+use Juzaweb\CMS\Contracts\PostManagerContract;
 use Juzaweb\CMS\Contracts\PostImporterContract;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\FileManager;
 
 class PostImporter implements PostImporterContract
 {
-    protected PostCreatorContract $postCreator;
+    protected PostManagerContract $postCreator;
 
     protected HookActionContract $hookAction;
 
     protected TaxonomyRepository $taxonomyRepository;
 
     public function __construct(
-        PostCreatorContract $postCreator,
+        PostManagerContract $postCreator,
         HookActionContract $hookAction,
         TaxonomyRepository $taxonomyRepository
     ) {

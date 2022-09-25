@@ -12,7 +12,7 @@ namespace Juzaweb\CMS\Contracts;
 
 use Juzaweb\Backend\Models\Post;
 
-interface PostCreatorContract
+interface PostManagerContract
 {
     public function create(array $data, array $options = []): Post;
 }
