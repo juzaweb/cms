@@ -141,6 +141,10 @@ return [
          */
         'deny_iframe' => true,
 
+        'query_cache' => [
+            'enable' => true,
+            'driver' => env('QUERY_CACHE_DRIVER', 'file'),
+        ]
     ],
 
     /**

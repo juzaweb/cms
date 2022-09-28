@@ -23,6 +23,8 @@ use Juzaweb\Backend\Models\PasswordReset;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Database\Factories\UserFactory;
 use Juzaweb\CMS\Traits\Permission\HasRoles;
+use Juzaweb\CMS\Traits\PostTypeModel;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Juzaweb\CMS\Traits\ResourceModel;
 use Juzaweb\Network\Facades\Network;
 use Juzaweb\Network\Traits\RootNetworkModel;
@@ -92,16 +94,23 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens;
-    use Notifiable;
-    use ResourceModel;
-    use HasFactory;
-    use HasRoles;
-    use RootNetworkModel;
+    protected static bool $flushCacheOnUpdate = true;
 
     public const STATUS_ACTIVE = 'active';
     public const STATUS_VERIFICATION = 'verification';
     public const STATUS_BANNED = 'banned';
+
+    use HasApiTokens,
+        Notifiable,
+        ResourceModel,
+        HasFactory,
+        HasRoles,
+        RootNetworkModel,
+        QueryCacheable;
+
+    public string $cachePrefix = 'users_';
+
+    protected $table = 'users';
 
     protected $fillable = [
         'name',
@@ -300,5 +309,12 @@ class User extends Authenticatable
     public function attributeLabels(): array
     {
         return [];
+    }
+
+    protected function getCacheBaseTags(): array
+    {
+        return [
+            'users',
+        ];
     }
 }

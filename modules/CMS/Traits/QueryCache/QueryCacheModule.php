@@ -4,6 +4,7 @@ namespace Juzaweb\CMS\Traits\QueryCache;
 
 use BadMethodCallException;
 use DateTime;
+use Illuminate\Cache\CacheManager;
 
 trait QueryCacheModule
 {
@@ -44,7 +45,7 @@ trait QueryCacheModule
      *
      * @var string
      */
-    protected $cachePrefix = 'leqc';
+    protected $cachePrefix = 'jw_query';
 
     /**
      * Specify if the key that should be used when caching the query
@@ -115,6 +116,7 @@ trait QueryCacheModule
     public function getCacheKey(string $method = 'get', string $id = null, string $appends = null): string
     {
         $key = $this->generateCacheKey($method, $id, $appends);
+
         $prefix = $this->getCachePrefix();
 
         return "{$prefix}:{$key}";
@@ -187,7 +189,7 @@ trait QueryCacheModule
     /**
      * Flush the cache for a specific tag.
      *
-     * @param  string  $tag
+     * @param string $tag
      * @return bool
      */
     public function flushQueryCacheWithTag(string $tag): bool
@@ -197,7 +199,8 @@ trait QueryCacheModule
         try {
             return $cache->tags($tag)->flush();
         } catch (BadMethodCallException $e) {
-            return $cache->flush();
+            dd('a');
+            return true;
         }
     }
 
@@ -205,13 +208,12 @@ trait QueryCacheModule
      * Indicate that the query results should be cached.
      *
      * @param  \DateTime|int|null  $time
-     * @return \Rennokki\QueryCache\Traits\QueryCacheModule
+     * @return QueryCacheModule
      */
     public function cacheFor($time)
     {
         $this->cacheFor = $time;
         $this->avoidCache = $time === null;
-
         return $this;
     }
 
@@ -253,7 +255,7 @@ trait QueryCacheModule
      * Set the cache prefix.
      *
      * @param  string  $prefix
-     * @return \Rennokki\QueryCache\Traits\QueryCacheModule
+     * @return QueryCacheModule
      */
     public function cachePrefix(string $prefix)
     {
@@ -266,7 +268,7 @@ trait QueryCacheModule
      * Attach tags to the cache.
      *
      * @param  array  $cacheTags
-     * @return \Rennokki\QueryCache\Traits\QueryCacheModule
+     * @return QueryCacheModule
      */
     public function cacheTags(array $cacheTags = [])
     {
@@ -279,7 +281,7 @@ trait QueryCacheModule
      * Append tags to the cache.
      *
      * @param  array  $cacheTags
-     * @return \Rennokki\QueryCache\Traits\QueryCacheModule
+     * @return QueryCacheModule
      */
     public function appendCacheTags(array $cacheTags = [])
     {
@@ -292,7 +294,7 @@ trait QueryCacheModule
      * Use a specific cache driver.
      *
      * @param  string  $cacheDriver
-     * @return \Rennokki\QueryCache\Traits\QueryCacheModule
+     * @return QueryCacheModule
      */
     public function cacheDriver(string $cacheDriver)
     {
@@ -306,7 +308,7 @@ trait QueryCacheModule
      * that will be present on all cached queries.
      *
      * @param  array  $tags
-     * @return \Rennokki\QueryCache\Traits\QueryCacheModule
+     * @return QueryCacheModule
      */
     public function cacheBaseTags(array $tags = [])
     {
@@ -319,7 +321,7 @@ trait QueryCacheModule
      * Use a plain key instead of a hashed one in the cache driver.
      *
      * @param  bool  $usePlainKey
-     * @return \Rennokki\QueryCache\Traits\QueryCacheModule
+     * @return QueryCacheModule
      */
     public function withPlainKey(bool $usePlainKey = true)
     {
@@ -331,17 +333,26 @@ trait QueryCacheModule
     /**
      * Get the cache driver.
      *
-     * @return \Illuminate\Cache\CacheManager
+     * @return CacheManager
      */
     public function getCacheDriver()
     {
-        return app('cache')->driver($this->cacheDriver);
+        if ($this->cacheDriver) {
+            return app('cache')->driver($this->cacheDriver);
+        }
+
+        return app('cache')->driver(
+            config(
+                'juzaweb.performance.query_cache.driver',
+                'file'
+            )
+        );
     }
 
     /**
      * Get the cache object with tags assigned, if applicable.
      *
-     * @return \Illuminate\Cache\CacheManager
+     * @return CacheManager
      */
     public function getCache()
     {
@@ -383,9 +394,9 @@ trait QueryCacheModule
     /**
      * Get the cache time attribute.
      *
-     * @return int|\DateTime
+     * @return null|int|\DateTime
      */
-    public function getCacheFor()
+    public function getCacheFor(): null|DateTime|int
     {
         return $this->cacheFor;
     }
@@ -395,7 +406,7 @@ trait QueryCacheModule
      *
      * @return array|null
      */
-    public function getCacheTags()
+    public function getCacheTags(): ?array
     {
         return $this->cacheTags;
     }
@@ -405,7 +416,7 @@ trait QueryCacheModule
      *
      * @return array|null
      */
-    public function getCacheBaseTags()
+    public function getCacheBaseTags(): ?array
     {
         return $this->cacheBaseTags;
     }
@@ -417,6 +428,6 @@ trait QueryCacheModule
      */
     public function getCachePrefix(): string
     {
-        return $this->cachePrefix;
+        return cache_prefix($this->cachePrefix);
     }
 }

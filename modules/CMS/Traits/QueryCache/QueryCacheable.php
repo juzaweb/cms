@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Traits\QueryCache;
 
+use Illuminate\Database\Eloquent\Collection;
 use Juzaweb\CMS\Observers\FlushQueryCacheObserver;
 use Juzaweb\CMS\Support\Query\Builder;
 
@@ -64,11 +65,13 @@ trait QueryCacheable
      * which tags to invalidate.
      *
      * @param  string|null  $relation
-     * @param  \Illuminate\Database\Eloquent\Collection|null  $pivotedModels
+     * @param  Collection|null  $pivotedModels
      * @return array
      */
-    public function getCacheTagsToInvalidateOnUpdate($relation = null, $pivotedModels = null): array
-    {
+    public function getCacheTagsToInvalidateOnUpdate(
+        ?string $relation = null,
+        Collection|null $pivotedModels = null
+    ): array {
         return $this->getCacheBaseTags();
     }
 

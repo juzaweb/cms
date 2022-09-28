@@ -41,26 +41,32 @@ trait PostTypeModel
     {
         $builder = static::with(
             [
-                'createdBy',
-                'taxonomies',
+                'createdBy' => function ($q) {
+                    $q->cacheFor(3600);
+                },
+                'taxonomies' => function ($q) {
+                    $q->cacheFor(3600);
+                },
             ]
-        )->select(
-            [
-                'id',
-                'title',
-                'description',
-                'thumbnail',
-                'slug',
-                'views',
-                'total_rating',
-                'total_comment',
-                'type',
-                'status',
-                'created_by',
-                'created_at',
-                'json_metas',
-            ]
-        )->wherePublish();
+        )
+            ->cacheFor(3600)
+            ->select(
+                [
+                    'id',
+                    'title',
+                    'description',
+                    'thumbnail',
+                    'slug',
+                    'views',
+                    'total_rating',
+                    'total_comment',
+                    'type',
+                    'status',
+                    'created_by',
+                    'created_at',
+                    'json_metas',
+                ]
+            )->wherePublish();
 
         return apply_filters('post.selectFrontendBuilder', $builder);
     }
@@ -74,10 +80,15 @@ trait PostTypeModel
     {
         $builder = static::with(
             [
-                'createdBy',
-                'taxonomies',
+                'createdBy' => function ($q) {
+                    $q->cacheFor(3600);
+                },
+                'taxonomies' => function ($q) {
+                    $q->cacheFor(3600);
+                },
             ]
         )
+            ->cacheFor(3600)
             ->wherePublish();
 
         return apply_filters('post.createFrontendBuilder', $builder);
