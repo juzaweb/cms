@@ -8,6 +8,7 @@ use Juzaweb\CMS\Contracts\CacheGroupContract;
 /**
  * @method static void add(string $group, string $key, int|null $ttl = null)
  * @method static array get(string $group)
+ * @method static self driver(?string $driver)
  * @method static void pull(string $group)
  * @see \Juzaweb\CMS\Support\CacheGroup
  */

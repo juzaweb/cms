@@ -5,6 +5,7 @@ namespace Juzaweb\CMS\Traits\QueryCache;
 use BadMethodCallException;
 use DateTime;
 use Illuminate\Cache\CacheManager;
+use Juzaweb\CMS\Facades\CacheGroup;
 
 trait QueryCacheModule
 {
@@ -62,6 +63,8 @@ trait QueryCacheModule
      */
     protected $avoidCache = true;
 
+    protected string $defaultGroupKey = 'query_groups';
+
     /**
      * Get the cache from the current query.
      *
@@ -78,7 +81,13 @@ trait QueryCacheModule
 
         $key = $this->getCacheKey($method);
         $cache = $this->getCache();
-        $callback = $this->getQueryCacheCallback($method, $columns, $id);
+        $callback = $this->getQueryCacheCallback(
+            $method,
+            $columns,
+            $id,
+            $key
+        );
+
         $time = $this->getCacheFor();
 
         if ($time instanceof DateTime || $time > 0) {
@@ -91,15 +100,27 @@ trait QueryCacheModule
     /**
      * Get the query cache callback.
      *
-     * @param  string  $method
-     * @param  array|string  $columns
-     * @param  string|null  $id
+     * @param string $method
+     * @param array|string $columns
+     * @param string|null $id
+     * @param string|null $key
      * @return \Closure
      */
-    public function getQueryCacheCallback(string $method = 'get', $columns = ['*'], string $id = null)
-    {
-        return function () use ($method, $columns) {
+    public function getQueryCacheCallback(
+        string $method = 'get',
+        $columns = ['*'],
+        ?string $id = null,
+        ?string $key = null
+    ): \Closure {
+        return function () use ($method, $columns, $key) {
             $this->avoidCache = true;
+
+            if ($key) {
+                CacheGroup::add(
+                    $this->getCacheGroupKey(),
+                    $key
+                );
+            }
 
             return $this->{$method}($columns);
         };
@@ -172,6 +193,9 @@ trait QueryCacheModule
         $cache = $this->getCacheDriver();
 
         if (! method_exists($cache, 'tags')) {
+            CacheGroup::driver($this->getCacheDriverName())
+                ->pull($this->getCacheGroupKey());
+
             return false;
         }
 
@@ -199,7 +223,7 @@ trait QueryCacheModule
         try {
             return $cache->tags($tag)->flush();
         } catch (BadMethodCallException $e) {
-            dd('a');
+            CacheGroup::pull($this->getCacheGroupKey());
             return true;
         }
     }
@@ -337,15 +361,18 @@ trait QueryCacheModule
      */
     public function getCacheDriver()
     {
+        return app('cache')->driver($this->getCacheDriverName());
+    }
+
+    public function getCacheDriverName()
+    {
         if ($this->cacheDriver) {
-            return app('cache')->driver($this->cacheDriver);
+            return $this->cacheDriver;
         }
 
-        return app('cache')->driver(
-            config(
-                'juzaweb.performance.query_cache.driver',
-                'file'
-            )
+        return config(
+            'juzaweb.performance.query_cache.driver',
+            'file'
         );
     }
 
@@ -429,5 +456,10 @@ trait QueryCacheModule
     public function getCachePrefix(): string
     {
         return cache_prefix($this->cachePrefix);
+    }
+
+    public function getCacheGroupKey(): string
+    {
+        return $this->getCachePrefix(). $this->defaultGroupKey;
     }
 }
