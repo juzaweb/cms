@@ -46,5 +46,7 @@ class CacheGroup
         foreach ($keys as $key) {
             $this->cache->store($this->store)->pull($key);
         }
+
+        $this->cache->store($this->store)->pull($group);
     }
 }
