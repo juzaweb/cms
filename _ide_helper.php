@@ -18536,26 +18536,7 @@
 
 
 
-    namespace Illuminate\Database\Query {
-            /**
-     *
-     *
-     */
-        class Builder {
-                    /**
-         *
-         *
-         * @see \Juzaweb\DevTool\Providers\DevToolServiceProvider::boot()
-         * @static
-         */
-        public static function toRawSql()
-        {
-                        return \Illuminate\Database\Query\Builder::toRawSql();
-        }
 
-    }
-
-}
 
     namespace Illuminate\Validation {
             /**
