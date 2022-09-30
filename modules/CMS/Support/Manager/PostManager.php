@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\CMS\Support\Creators;
+namespace Juzaweb\CMS\Support\Manager;
 
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Models\Post;

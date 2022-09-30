@@ -634,7 +634,8 @@ class HtmlDomNode
                 }
             }
         }
-        return htmlspecialchars_decode($ret, ENT_QUOTES);
+
+        return preg_replace('/\s+/', ' ', $ret);
     }
 
     public function xmltext()
@@ -658,12 +659,14 @@ class HtmlDomNode
     public function __isset($name)
     {
         switch ($name) {
-            case 'outertext': return true;
-            case 'innertext': return true;
-            case 'plaintext': return true;
+            case 'innertext':
+            case 'plaintext':
+            case 'outertext':
+                return true;
         }
+
         //no value attr: nowrap, checked selected...
-        return (array_key_exists($name, $this->attr)) ? true : isset($this->attr[$name]);
+        return array_key_exists($name, $this->attr) || isset($this->attr[$name]);
     }
 
     public function remove()
