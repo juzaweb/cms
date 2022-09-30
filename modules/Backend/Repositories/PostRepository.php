@@ -13,9 +13,9 @@ use Juzaweb\CMS\Repositories\BaseRepository;
  */
 interface PostRepository extends BaseRepository
 {
-    public function create(array $attributes): Post;
+    public function create(array $attributes);
 
-    public function update(array $attributes, $id): Post;
+    public function update(array $attributes, $id);
 
     public function createSelectFrontendBuilder(): Builder;
 

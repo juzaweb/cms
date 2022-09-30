@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Traits\Queries;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
@@ -95,6 +96,56 @@ trait PostQuery
         $query->limit($limit);
 
         $posts = $query->get();
+
+        return PostResource::collection($posts)
+            ->toArray(request());
+    }
+
+    public function relatedPosts(array $post, int $limit = 5, string $taxonomy = null): array
+    {
+        if ($limit > 20) {
+            $limit = 20;
+        }
+
+        $ids = collect(get_post_taxonomies($post, $taxonomy))
+            ->pluck('id')
+            ->toArray();
+
+        $posts = Post::selectFrontendBuilder()
+            ->whereHas(
+                'taxonomies',
+                function (Builder $q) use ($ids) {
+                    $q->whereIn("{$q->getModel()->getTable()}.id", $ids);
+                }
+            )
+            ->where('id', '!=', $post['id'])
+            ->orderBy('id', 'DESC')
+            ->take($limit)
+            ->get();
+
+        return PostResource::collection($posts)
+            ->toArray(request());
+    }
+
+    public function popularPosts($type = null, $post = null, $limit = 5, $options = [])
+    {
+        if ($limit > 20) {
+            $limit = 20;
+        }
+
+        $query = Post::selectFrontendBuilder();
+
+        if ($post) {
+            $query->where('id', '!=', Arr::get($post, 'id'));
+        }
+
+        if ($type) {
+            $query->where('type', '=', $type);
+        }
+
+        $query->orderBy('views', 'DESC');
+
+        $posts = $query->take($limit)->get();
 
         return PostResource::collection($posts)
             ->toArray(request());

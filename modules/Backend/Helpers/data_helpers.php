@@ -3,7 +3,6 @@
 use Juzaweb\Backend\Http\Resources\ResourceResource;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Taxonomy;
-use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
@@ -26,28 +25,7 @@ function get_post_taxonomies($post, $taxonomy = null, $params = [])
 
 function get_related_posts($post, $limit = 5, $taxonomy = null): array
 {
-    if ($limit > 20) {
-        $limit = 20;
-    }
-
-    $ids = collect(get_post_taxonomies($post, $taxonomy))
-        ->pluck('id')
-        ->toArray();
-
-    $posts = Post::selectFrontendBuilder()
-        ->whereHas(
-            'taxonomies',
-            function (Builder $q) use ($ids) {
-                $q->whereIn("{$q->getModel()->getTable()}.id", $ids);
-            }
-        )
-        ->where('id', '!=', $post['id'])
-        ->orderBy('id', 'DESC')
-        ->take($limit)
-        ->get();
-
-    return PostResource::collection($posts)
-        ->toArray(request());
+    return JWQuery::relatedPosts($post, $limit, $taxonomy);
 }
 
 function get_popular_posts($type = null, $post = null, $limit = 5, $options = [])
@@ -67,6 +45,7 @@ function get_popular_posts($type = null, $post = null, $limit = 5, $options = []
     }
 
     $query->orderBy('views', 'DESC');
+
     $posts = $query->take($limit)->get();
 
     return PostResource::collection($posts)
