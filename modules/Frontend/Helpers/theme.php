@@ -254,14 +254,14 @@ if (! function_exists('set_theme_config')) {
 }
 
 if (! function_exists('get_theme_config')) {
-    function get_theme_config($key, $default = null)
+    function get_theme_config($key, $default = null): null|array|string
     {
         return ThemeConfig::getConfig($key, $default);
     }
 }
 
 if (! function_exists('get_theme_mod')) {
-    function get_theme_mod($key, $default = null)
+    function get_theme_mod($key, $default = null): array|string
     {
         return ThemeConfig::getConfig($key, $default);
     }

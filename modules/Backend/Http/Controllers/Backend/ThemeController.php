@@ -31,6 +31,7 @@ class ThemeController extends BackendController
     public function index(): View
     {
         $activated = jw_current_theme();
+
         $currentTheme = ThemeLoader::getThemeInfo($activated);
 
         return view(

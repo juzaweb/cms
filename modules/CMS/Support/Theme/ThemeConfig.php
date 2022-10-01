@@ -18,7 +18,7 @@ class ThemeConfig
 {
     protected $configs;
     protected $theme;
-    protected $cacheKey = 'jw_theme_configs_';
+    protected string $cacheKey = 'jw_theme_configs';
 
     /**
      * @var CacheManager
@@ -87,7 +87,7 @@ class ThemeConfig
         return $config;
     }
 
-    protected function getCacheKey()
+    protected function getCacheKey(): string
     {
         return cache_prefix($this->cacheKey);
     }
