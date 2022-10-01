@@ -69,14 +69,18 @@ function get_post_resources($resource, $options = []): array
         $query->where('parent_id', '=', $parentId);
     }
 
+    if ($orderBys = Arr::get($options, 'order_by')) {
+        foreach ($orderBys as $column => $direction) {
+            $query->orderBy($column, $direction);
+        }
+    }
+
     $limit = Arr::get($options, 'limit', 10);
     if ($limit > 100) {
         $limit = 10;
     }
 
-    $data = $query
-        ->orderBy('display_order', 'ASC')
-        ->limit($limit)
+    $data = $query->limit($limit)
         ->get();
 
     return ResourceResource::collection($data)

@@ -134,6 +134,11 @@ class Post extends Model implements Feedable
         return PostFactory::new();
     }
 
+    public function resources(): HasMany
+    {
+        return $this->hasMany(Resource::class, 'post_id', 'id');
+    }
+
     public function categories(): BelongsToMany
     {
         return $this->taxonomies()
