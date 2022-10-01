@@ -136,7 +136,7 @@ function get_taxonomy($taxonomy, $args = [])
         ->toArray(request());
 }
 
-function get_taxonomies($args = [])
+function get_taxonomies($args = []): array
 {
     $query = Taxonomy::selectFrontendBuilder();
     $type = Arr::get($args, 'type');
