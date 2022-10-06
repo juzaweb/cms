@@ -33,7 +33,7 @@ trait GetHookAction
      * Get registed menu box
      *
      * @param string|array $key
-     * @return \Illuminate\Support\Collection|false
+     * @return Collection|false
      */
     public function getMenuBox($key): bool|Collection
     {
@@ -44,12 +44,14 @@ trait GetHookAction
      * Get post type setting
      *
      * @param string|null $postType
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      * */
-    public function getPostTypes($postType = null): Collection
+    public function getPostTypes(string $postType = null): Collection
     {
         if ($postType) {
-            return GlobalData::get('post_types.' . $postType);
+            $data = GlobalData::get('post_types.' . $postType);
+
+            return is_array($data) ? collect($data) : $data;
         }
 
         return collect(GlobalData::get('post_types'));

@@ -534,6 +534,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * @param string $asset
      * @return string
      * @throws InvalidAssetPath
+     * @deprecated
      */
     public function asset($asset): string
     {
@@ -545,6 +546,13 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
         $baseUrl = str_replace(public_path() . DIRECTORY_SEPARATOR, '', $this->getAssetsPath());
 
         $url = $this->url->asset($baseUrl . "/{$name}/" . $url);
+
+        return str_replace(['http://', 'https://'], '//', $url);
+    }
+
+    public function assets(string $name, string $path = null): string
+    {
+        $url = $this->url->asset("jw-styles/plugins/{$name}/" . $path);
 
         return str_replace(['http://', 'https://'], '//', $url);
     }

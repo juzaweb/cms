@@ -67,4 +67,6 @@ interface HookActionContract
     public function getConfigs($key = null): Collection;
 
     public function getTaxonomies($postType = null): Collection;
+
+    public function addMetaPostTypes(string $postType, array $metas): void;
 }

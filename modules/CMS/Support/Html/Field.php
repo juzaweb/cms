@@ -25,6 +25,13 @@ class Field
         return view('cms::components.form_input', $options);
     }
 
+    public static function hidden($label, $name, $options = [])
+    {
+        $options = static::mapOptions($label, $name, $options);
+
+        return view('cms::components.form_input', $options);
+    }
+
     public static function textarea($label, $name, $options = [])
     {
         $options = static::mapOptions($label, $name, $options);

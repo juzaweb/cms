@@ -120,9 +120,11 @@ trait PostTypeController
                 )->toArray();
         }
 
-        $meta = Arr::get($data, 'meta', []);
+        if (Arr::has($data, 'meta')) {
+            $meta = Arr::get($data, 'meta', []);
 
-        $model->syncMetas($meta);
+            $model->syncMetas($meta);
+        }
 
         do_action('post_types.after_save', $model, $data);
         do_action("post_type.{$this->getPostType()}.after_save", $model, $data);
