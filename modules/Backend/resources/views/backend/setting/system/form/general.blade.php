@@ -46,7 +46,7 @@
         ]) }}
 
         <div class="form-group">
-            <label class="col-form-label" for="description">@lang('cms::app.tagline')</label>
+            <label class="col-form-label" for="description">{{ trans('cms::app.tagline') }}</label>
             <textarea class="form-control" name="description" id="description" rows="4">{{ get_config('description') }}</textarea>
             <p class="description">{{ trans('cms::app.site_description_note') }}</p>
         </div>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="language">@lang('cms::app.site_language')</label>
+            <label class="col-form-label" for="language">{{ trans('cms::app.site_language') }}</label>
             <select name="language" id="language" class="form-control load-locales">
                 @if($locale = get_config('language'))
                     <option value="{{ $locale }}" selected>{{ config("locales.{$locale}.name") }}</option>
@@ -90,7 +90,7 @@
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="date_format">@lang('cms::app.date_format')</label>
+            <label class="col-form-label" for="date_format">{{ trans('cms::app.date_format') }}</label>
             <fieldset>
                 @foreach($dateFormats as $key => $item)
                     <label class="mb-2">
@@ -115,7 +115,7 @@
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="time_format">@lang('cms::app.time_format')</label>
+            <label class="col-form-label" for="time_format">{{ trans('cms::app.time_format') }}</label>
             <fieldset>
                 @foreach($timeFormats as $key => $item)
                     <label><input type="radio" name="time_format" value="{{ $key }}" @if($key == $timeFormat) checked="checked" @endif> <span class="date-time-text format-i18n mr-2">{{ $item }}</span><code>{{ $key }}</code></label><br>
@@ -139,30 +139,30 @@
         <h5>{{ trans('cms::app.analytics') }}</h5>
 
         <div class="form-group">
-            <label class="col-form-label" for="fb_app_id">@lang('cms::app.fb_app_id')</label>
+            <label class="col-form-label" for="fb_app_id">{{ trans('cms::app.fb_app_id') }}</label>
             <input type="text" name="fb_app_id" class="form-control" id="fb_app_id" value="{{ get_config('fb_app_id') }}" autocomplete="off">
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="google_analytics">@lang('cms::app.google_analytics_id')</label>
+            <label class="col-form-label" for="google_analytics">{{ trans('cms::app.google_analytics_id') }}</label>
             <input type="text" name="google_analytics" class="form-control" id="google_analytics" value="{{ get_config('google_analytics') }}" autocomplete="off">
         </div>
 
         <h5>{{ trans('cms::app.registration') }}</h5>
 
         <div class="form-group">
-            <label class="col-form-label" for="user_registration">@lang('cms::app.user_registration')</label>
+            <label class="col-form-label" for="user_registration">{{ trans('cms::app.user_registration') }}</label>
             <select name="user_registration" id="user_registration" class="form-control">
-                <option value="1" @if($registration == 1) selected @endif>@lang('cms::app.enabled')</option>
-                <option value="0" @if($registration == 0) selected @endif>@lang('cms::app.disabled')</option>
+                <option value="1" @if($registration == 1) selected @endif>{{ trans('cms::app.enabled') }}</option>
+                <option value="0" @if($registration == 0) selected @endif>{{ trans('cms::app.disabled') }}</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label class="col-form-label" for="user_verification">@lang('cms::app.user_e_mail_verification')</label>
+            <label class="col-form-label" for="user_verification">{{ trans('cms::app.user_e_mail_verification') }}</label>
             <select name="user_verification" id="user_verification" class="form-control">
-                <option value="1" @if($verification == 1) selected @endif>@lang('cms::app.enabled')</option>
-                <option value="0" @if($verification == 0) selected @endif>@lang('cms::app.disabled')</option>
+                <option value="1" @if($verification == 1) selected @endif>{{ trans('cms::app.enabled') }}</option>
+                <option value="0" @if($verification == 0) selected @endif>{{ trans('cms::app.disabled') }}</option>
             </select>
         </div>
     </div>

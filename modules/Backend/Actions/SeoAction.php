@@ -73,6 +73,14 @@ class SeoAction extends Action
                 'jw_bing_api_key' => [
                     'label' => trans('cms::app.seo.bing_api_key'),
                     'form' => 'seo',
+                ],
+                'bing_verify_key' => [
+                    'label' => trans('cms::app.seo.bing_verify_key'),
+                    'form' => 'seo',
+                ],
+                'google_verify_key' => [
+                    'label' => trans('cms::app.seo.google_verify_key'),
+                    'form' => 'seo',
                 ]
             ]
         );

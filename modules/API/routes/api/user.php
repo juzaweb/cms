@@ -12,10 +12,10 @@ use Juzaweb\Api\Http\Controllers\UserController;
 
 Route::group(
     [
-        'prefix' => 'user',
-        'middleware' => 'auth:sanctum',
+        'prefix' => 'profile',
+        'middleware' => 'auth:api',
     ],
     function () {
-        Route::apiResource('/', UserController::class);
+        Route::get('/', [UserController::class, 'profile']);
     }
 );

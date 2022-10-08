@@ -2,6 +2,7 @@
 <html lang="{{ get_locale() }}">
 <head>
     {% set sitename = config('sitename') %}
+
     {% set icon = config('icon') %}
 
     <meta charset="UTF-8">
@@ -42,7 +43,7 @@
 
 </head>
 
-<body class="{{ body_class(post ? 'single-post': '') }}">
+<body class="{{ body_class(post ? 'single-post single-post-'~ post.type : '') }} {{ bodyClass|default('') }}">
     {{ theme_after_body() }}
 
     {% include('theme::header') %}

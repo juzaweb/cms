@@ -10,18 +10,24 @@
 
 namespace Juzaweb\CMS\Traits\Queries;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
 
 trait PostQuery
 {
-    public function posts(string $type, array $options = []): array
+    public function posts(string $type = null, array $options = []): array
     {
-        $paginate = Arr::get($options, 'paginate');
         $taxonomies = Arr::get($options, 'taxonomies');
         $taxonomy = Arr::get($options, 'taxonomy');
+        $hasThumbnail = filter_var(
+            Arr::get($options, 'has_thumbnail', false),
+            FILTER_VALIDATE_BOOLEAN
+        );
+
         $limit = Arr::get($options, 'limit');
+        $paginate = Arr::get($options, 'paginate');
         $metas = Arr::get($options, 'metas');
         $orderBy = Arr::get($options, 'order_by');
 
@@ -29,8 +35,15 @@ trait PostQuery
             $paginate = 12;
         }
 
-        $query = Post::selectFrontendBuilder()
-            ->where('type', '=', $type);
+        $query = Post::selectFrontendBuilder();
+
+        if ($type) {
+            $query->where('type', '=', $type);
+        }
+
+        if ($hasThumbnail) {
+            $query->whereNotNull('thumbnail');
+        }
 
         if ($taxonomies) {
             $query->whereTaxonomyIn($taxonomies);
@@ -66,16 +79,9 @@ trait PostQuery
             $query->orderBy($col, $val);
         }
 
-        if ($limit) {
-            if ($limit > 50) {
-                $limit = 10;
-            }
-
-            $query->limit($limit);
-        }
-
         if ($paginate) {
             $posts = $query->paginate($paginate);
+
             $posts->appends(request()->query());
 
             return PostResource::collection($posts)
@@ -83,9 +89,63 @@ trait PostQuery
                 ->getData(true);
         }
 
-        $query->limit(10);
+        if (empty($limit) || $limit > 50) {
+            $limit = 10;
+        }
+
+        $query->limit($limit);
 
         $posts = $query->get();
+
+        return PostResource::collection($posts)
+            ->toArray(request());
+    }
+
+    public function relatedPosts(array $post, int $limit = 5, string $taxonomy = null): array
+    {
+        if ($limit > 20) {
+            $limit = 20;
+        }
+
+        $ids = collect(get_post_taxonomies($post, $taxonomy))
+            ->pluck('id')
+            ->toArray();
+
+        $posts = Post::selectFrontendBuilder()
+            ->whereHas(
+                'taxonomies',
+                function (Builder $q) use ($ids) {
+                    $q->whereIn("{$q->getModel()->getTable()}.id", $ids);
+                }
+            )
+            ->where('id', '!=', $post['id'])
+            ->orderBy('id', 'DESC')
+            ->take($limit)
+            ->get();
+
+        return PostResource::collection($posts)
+            ->toArray(request());
+    }
+
+    public function popularPosts($type = null, $post = null, $limit = 5, $options = [])
+    {
+        if ($limit > 20) {
+            $limit = 20;
+        }
+
+        $query = Post::selectFrontendBuilder();
+
+        if ($post) {
+            $query->where('id', '!=', Arr::get($post, 'id'));
+        }
+
+        if ($type) {
+            $query->where('type', '=', $type);
+        }
+
+        $query->orderBy('views', 'DESC');
+
+        $posts = $query->take($limit)->get();
 
         return PostResource::collection($posts)
             ->toArray(request());

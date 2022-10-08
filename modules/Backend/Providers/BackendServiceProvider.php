@@ -12,6 +12,7 @@ use Juzaweb\Backend\Actions\SeoAction;
 use Juzaweb\Backend\Actions\SocialLoginAction;
 use Juzaweb\Backend\Actions\ToolAction;
 use Juzaweb\Backend\Commands\AutoSubmitCommand;
+use Juzaweb\Backend\Commands\AutoTagCommand;
 use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
 use Juzaweb\Backend\Commands\FindTransCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
@@ -86,12 +87,16 @@ class BackendServiceProvider extends ServiceProvider
                 EmailTemplateGenerateCommand::class,
                 ThemePublishCommand::class,
                 AutoSubmitCommand::class,
+                AutoTagCommand::class,
             ]
         );
     }
 
     public function register()
     {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cms');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
+
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(AuthServiceProvider::class);
         $this->registerRouteMacros();
@@ -114,8 +119,12 @@ class BackendServiceProvider extends ServiceProvider
 
     protected function bootPublishes()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cms');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
+        $this->publishes(
+            [
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/cms'),
+            ],
+            'cms_views'
+        );
 
         $this->publishes(
             [

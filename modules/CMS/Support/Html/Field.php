@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Support\Html;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,13 @@ use Juzaweb\CMS\Models\User;
 class Field
 {
     public static function text($label, $name, $options = [])
+    {
+        $options = static::mapOptions($label, $name, $options);
+
+        return view('cms::components.form_input', $options);
+    }
+
+    public static function hidden($label, $name, $options = [])
     {
         $options = static::mapOptions($label, $name, $options);
 
@@ -58,6 +66,13 @@ class Field
         $options = static::mapOptions($label, $name, $options);
 
         return view('cms::components.form_ckeditor', $options);
+    }
+
+    public static function selectPost($label, $name, $options = []): View
+    {
+        $options = static::mapOptions($label, $name, $options);
+
+        return view('cms::components.form_select_post', $options);
     }
 
     public static function selectTaxonomy($label, $name, $options = [])
@@ -136,6 +151,13 @@ class Field
             'select' => static::select(
                 $data['label'],
                 $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'post' => static::selectPost(
+                $data['label'],
+                ($input['data']['multiple'] ?? false) ?
+                    "{$data['name']}[]"
+                    : $data['name'],
                 Arr::get($data, 'data', [])
             ),
             'taxonomy' => static::selectTaxonomy(

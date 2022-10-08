@@ -34,7 +34,7 @@
         function themeItemFormatter(index, row)
         {
             let installBtn = `<button class="btn btn-primary install-theme" data-theme="${row.name}"> ${juzaweb.lang.install}</button>`;
-
+            console.log(row.is_purchased);
             if(row.is_paid && !row.is_purchased) {
                 installBtn = `<button class="btn btn-success buy-theme" data-theme="${row.name}"> ${juzaweb.lang.buy} (${row.price})</button>`;
             }

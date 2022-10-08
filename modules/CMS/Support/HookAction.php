@@ -240,4 +240,19 @@ class HookAction implements HookActionContract
             )
         );
     }
+
+    public function addMetaPostTypes(string $postType, array $metas): void
+    {
+        $postTypeData = $this->getPostTypes($postType);
+
+        if ($postTypeData->isEmpty()) {
+            throw new \Exception("Post type [{$postType}] does not exists.");
+        }
+
+        $metas = array_merge($postTypeData->get('metas', []), $metas);
+
+        $postTypeData->put('metas', $metas);
+
+        $this->registerPostType($postType, $postTypeData->toArray());
+    }
 }

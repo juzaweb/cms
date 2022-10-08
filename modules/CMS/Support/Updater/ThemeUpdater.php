@@ -15,8 +15,10 @@ class ThemeUpdater extends UpdateManager
     public function getVersionAvailable(): string
     {
         $uri = "themes/{$this->name}/version-available";
-
-        $data = $this->getDefaultApiParams();
+        $data = [
+            'cms_version' => Version::getVersion(),
+            'current_version' => $this->getCurrentVersion(),
+        ];
 
         $response = $this->api->get($uri, $data);
 

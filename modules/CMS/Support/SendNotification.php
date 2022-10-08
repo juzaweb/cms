@@ -3,14 +3,15 @@
 namespace Juzaweb\CMS\Support;
 
 use Illuminate\Support\Facades\DB;
+use Juzaweb\Backend\Models\ManualNotification;
 
 class SendNotification
 {
-    protected $notification;
+    protected ManualNotification $notification;
 
     /**
-     * @param \Juzaweb\Backend\Models\ManualNotification $notification
-     * */
+     * @param ManualNotification $notification
+     */
     public function __construct($notification)
     {
         $this->notification = $notification;
@@ -36,7 +37,7 @@ class SendNotification
 
                 $this->notification->update(
                     [
-                        'status' => 1,
+                        'status' => ManualNotification::STATUS_SUCCESS,
                         'error' => null,
                     ]
                 );
@@ -47,7 +48,7 @@ class SendNotification
 
                 $this->notification->update(
                     [
-                        'status' => 0,
+                        'status' => ManualNotification::STATUS_ERROR,
                         'error' => $exception->getMessage(),
                     ]
                 );

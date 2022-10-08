@@ -1,12 +1,11 @@
 <?php
-
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTelescopeEntriesTable extends Migration
+return new class extends Migration
 {
     /**
      * The database schema.
@@ -23,16 +22,6 @@ class CreateTelescopeEntriesTable extends Migration
     public function __construct()
     {
         $this->schema = Schema::connection($this->getConnection());
-    }
-
-    /**
-     * Get the migration connection name.
-     *
-     * @return string|null
-     */
-    public function getConnection()
-    {
-        return config('telescope.storage.database.connection');
     }
 
     /**
@@ -97,4 +86,4 @@ class CreateTelescopeEntriesTable extends Migration
         $this->schema->dropIfExists('telescope_entries');
         $this->schema->dropIfExists('telescope_monitoring');
     }
-}
+};

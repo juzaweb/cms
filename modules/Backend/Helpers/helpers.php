@@ -3,6 +3,7 @@
 require __DIR__ . '/html_dom.php';
 require __DIR__ . '/data_helpers.php';
 require __DIR__ . '/plugin.php';
+require __DIR__ . '/url_helpers.php';
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
+use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Facades\Config;
 use Juzaweb\CMS\Facades\Hook;
 use Juzaweb\CMS\Facades\HookAction;
@@ -56,7 +58,7 @@ if (!function_exists('get_config')) {
     function get_config(string $key, mixed $default = null): array|string|null
     {
         try {
-            return Config::getConfig($key, $default);
+            return app(ConfigContract::class)->getConfig($key, $default);
         } catch (\Exception $e) {
             return $default;
         }
@@ -138,23 +140,6 @@ if (!function_exists('sub_words')) {
     }
 }
 
-if (!function_exists('is_url')) {
-    /**
-     * Return true if string is a url
-     *
-     * @param string|null $url
-     * @return bool
-     */
-    function is_url(?string $url): bool
-    {
-        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-            return false;
-        }
-
-        return true;
-    }
-}
-
 if (!function_exists('count_unread_notifications')) {
     /**
      * Count number unread notifications
@@ -226,17 +211,6 @@ if (!function_exists('combine_pivot')) {
 
         // Combine and return filler pivot array with data
         return array_combine($entities, $filler);
-    }
-}
-
-if (!function_exists('path_url')) {
-    function path_url(string $url): string
-    {
-        if (!is_url($url)) {
-            return $url;
-        }
-
-        return parse_url($url)['path'];
     }
 }
 
@@ -739,19 +713,6 @@ function parse_price_format($price): float
     return (float)$price;
 }
 
-function get_full_url(string $url, string $baseUrl): string
-{
-    if (is_url($url)) {
-        return $url;
-    }
-
-    if (str_starts_with($url, '/')) {
-        return $baseUrl . $url;
-    }
-
-    return $baseUrl . '/' . $url;
-}
-
 function sub_char($str, $n, $end = '...')
 {
     if (strlen($str) < $n) {
@@ -800,4 +761,36 @@ if (!function_exists('remove_bbcode')) {
         $text = str_replace(["\n", "\t"], '', $text);
         return trim($text);
     }
+}
+
+if (!function_exists('get_domain_by_url')) {
+    function get_domain_by_url(string $url): string|bool
+    {
+        if (str_starts_with($url, 'https://')
+            || str_starts_with($url, 'http://')
+            || str_starts_with($url, '//')
+        ) {
+            $domain = explode('/', $url)[2];
+            return explode('?', $domain)[0];
+        }
+
+        return false;
+    }
+}
+
+function number_human_format($number): string
+{
+    if ($number < 1000000) {
+        return number_format($number);
+    }
+
+    if ($number < 1000000000) {
+        return number_format($number / 1000000, 2) . ' M';
+    }
+
+    if ($number < 1000000000000) {
+        return number_format($number / 1000000000, 2) . ' B';
+    }
+
+    return number_format($number / 1000000000000, 2) . ' T';
 }

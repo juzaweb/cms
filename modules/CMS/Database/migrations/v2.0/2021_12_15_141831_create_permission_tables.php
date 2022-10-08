@@ -1,5 +1,4 @@
 <?php
-
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
@@ -8,8 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Juzaweb\CMS\Support\Permission\PermissionRegistrar;
 
-class CreatePermissionTables extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -37,31 +35,37 @@ class CreatePermissionTables extends Migration
 
         Schema::create(
             $tableNames['permissions'],
-            function (Blueprint $table) {
+            function (Blueprint $table) use ($tbprefix) {
                 $table->bigIncrements('id');
                 $table->string('name', 100);       // For MySQL 8.0 use string('name', 125);
                 $table->string('guard_name', 100); // For MySQL 8.0 use string('guard_name', 125);
                 $table->timestamps();
 
-                $table->unique(['name', 'guard_name'], 'permissions_name_guard_unique');
+                $table->unique(['name', 'guard_name'], "{$tbprefix}permissions_name_guard_unique");
             }
         );
 
         Schema::create(
             $tableNames['roles'],
-            function (Blueprint $table) use ($teams, $columnNames) {
+            function (Blueprint $table) use ($teams, $columnNames, $tbprefix) {
                 $table->bigIncrements('id');
                 if ($teams || config('permission.testing')) { // permission.testing is a fix for sqlite testing
                     $table->unsignedBigInteger($columnNames['team_foreign_key'])->nullable();
-                    $table->index($columnNames['team_foreign_key'], 'roles_team_foreign_key_index');
+                    $table->index($columnNames['team_foreign_key'], "{$tbprefix}roles_team_foreign_key_index");
                 }
                 $table->string('name', 100);       // For MySQL 8.0 use string('name', 125);
                 $table->string('guard_name', 100); // For MySQL 8.0 use string('guard_name', 125);
                 $table->timestamps();
                 if ($teams || config('permission.testing')) {
-                    $table->unique([$columnNames['team_foreign_key'], 'name', 'guard_name'], 'roles_name_guard_unique');
+                    $table->unique(
+                        [$columnNames['team_foreign_key'], 'name', 'guard_name'],
+                        "{$tbprefix}roles_name_guard_unique"
+                    );
                 } else {
-                    $table->unique(['name', 'guard_name'], 'roles_name_guard_unique');
+                    $table->unique(
+                        ['name', 'guard_name'],
+                        "{$tbprefix}roles_name_guard_unique"
+                    );
                 }
             }
         );
@@ -81,30 +85,31 @@ class CreatePermissionTables extends Migration
                 $table->index(
                     [$columnNames['model_morph_key'],
                         'model_type'],
-                    $tbprefix . 'has_permissions_model_id_model_type_index'
+                    "{$tbprefix}has_permissions_model_id_model_type_index"
                 );
 
                 $table->foreign(PermissionRegistrar::$pivotPermission)
                     ->references('id')
                     ->on($tableNames['permissions'])
                     ->onDelete('cascade');
+
                 if ($teams) {
                     $table->unsignedBigInteger($columnNames['team_foreign_key']);
                     $table->index(
                         $columnNames['team_foreign_key'],
-                        $tbprefix . 'has_permissions_team_foreign_key_index'
+                        "{$tbprefix}has_permissions_team_foreign_key_index"
                     );
 
                     $table->primary(
                         [$columnNames['team_foreign_key'],
                             PermissionRegistrar::$pivotPermission,
                             $columnNames['model_morph_key'], 'model_type'],
-                        $tbprefix . 'has_permissions_permission_model_type_primary'
+                        "{$tbprefix}has_permissions_permission_model_type_primary"
                     );
                 } else {
                     $table->primary(
                         [PermissionRegistrar::$pivotPermission, $columnNames['model_morph_key'], 'model_type'],
-                        $tbprefix . 'has_permissions_permission_model_type_primary'
+                        "{$tbprefix}has_permissions_permission_model_type_primary"
                     );
                 }
             }
@@ -185,7 +190,7 @@ class CreatePermissionTables extends Migration
 
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
-            ->forget(config('permission.cache.key'));
+            ->forget(cache_prefix(config('permission.cache.key')));
     }
 
     /**
@@ -210,4 +215,4 @@ class CreatePermissionTables extends Migration
         Schema::drop($tableNames['roles']);
         Schema::drop($tableNames['permissions']);
     }
-}
+};

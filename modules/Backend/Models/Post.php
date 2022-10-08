@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Juzaweb\CMS\Database\Factories\PostFactory;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\PostTypeModel;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 
@@ -81,11 +82,22 @@ use Spatie\Feed\FeedItem;
  * @property string|null $locale
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereLocale($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereSiteId($value)
+ * @property string|null $domain
+ * @property string|null $url
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Taxonomy[] $tags
+ * @property-read int|null $tags_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereDomain($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUrl($value)
  */
 class Post extends Model implements Feedable
 {
-    use PostTypeModel;
-    use HasFactory;
+    protected static bool $flushCacheOnUpdate = true;
+
+    use PostTypeModel, HasFactory, QueryCacheable;
+
+    public string $cachePrefix = 'posts_';
 
     public const STATUS_PUBLISH = 'publish';
     public const STATUS_PRIVATE = 'private';
@@ -120,6 +132,11 @@ class Post extends Model implements Feedable
     protected static function newFactory(): Factory
     {
         return PostFactory::new();
+    }
+
+    public function resources(): HasMany
+    {
+        return $this->hasMany(Resource::class, 'post_id', 'id');
     }
 
     public function categories(): BelongsToMany
@@ -160,6 +177,13 @@ class Post extends Model implements Feedable
     public function getTotalRating(): int
     {
         return $this->postRatings()->count(['id']);
+    }
+
+    protected function getCacheBaseTags(): array
+    {
+        return [
+            'posts',
+        ];
     }
 
     public function getStarRating(): float|int

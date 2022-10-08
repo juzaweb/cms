@@ -95,7 +95,7 @@ trait PostTypeController
         );
     }
 
-    protected function getModel(...$params): string
+    protected function getModel(...$params)
     {
         return Post::class;
     }
@@ -120,9 +120,11 @@ trait PostTypeController
                 )->toArray();
         }
 
-        $meta = Arr::get($data, 'meta', []);
+        if (Arr::has($data, 'meta')) {
+            $meta = Arr::get($data, 'meta', []);
 
-        $model->syncMetas($meta);
+            $model->syncMetas($meta);
+        }
 
         do_action('post_types.after_save', $model, $data);
         do_action("post_type.{$this->getPostType()}.after_save", $model, $data);
@@ -160,7 +162,7 @@ trait PostTypeController
         return $validator;
     }
 
-    protected function getSetting(): Collection
+    protected function getSetting()
     {
         $postType = $this->getPostType();
         $setting = HookAction::getPostTypes($postType);
@@ -224,7 +226,7 @@ trait PostTypeController
         );
     }
 
-    protected function getDataForIndex(...$params): array
+    protected function getDataForIndex(...$params)
     {
         $data = $this->DataForIndex(...$params);
         $data['setting'] = $this->getSetting();
@@ -253,12 +255,12 @@ trait PostTypeController
         );
     }
 
-    protected function checkPermission($ability, $arguments = [], ...$params): void
+    protected function checkPermission($ability, $arguments = [], ...$params)
     {
         $this->authorize($ability, [$arguments, $this->getPostType()]);
     }
 
-    protected function hasPermission($ability, $arguments = [], ...$params): bool
+    protected function hasPermission($ability, $arguments = [], ...$params)
     {
         $response = Gate::inspect($ability, [$arguments, $this->getPostType()]);
         return $response->allowed();
@@ -268,7 +270,7 @@ trait PostTypeController
      * @param Post|Model $model
      * @return array|Collection
      */
-    private function getTemplateData($model): array|Collection
+    private function getTemplateData($model)
     {
         $template = $this->getTemplate($model);
 
@@ -276,14 +278,15 @@ trait PostTypeController
             return [];
         }
 
-        return HookAction::getThemeTemplates($template);
+        $data = HookAction::getThemeTemplates($template);
+        return $data;
     }
 
     /**
-     * @param Model|Post $model
+     * @param Post|Model $model
      * @return string
      */
-    private function getTemplate(Model|Post $model): ?string
+    private function getTemplate($model)
     {
         $template = request()->get('template');
         if (empty($template)) {

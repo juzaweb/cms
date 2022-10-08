@@ -151,9 +151,10 @@ class FileManager
             throw new FileManagerException($this->errors);
         }
 
-        $filename = $this->makeFilename($uploadedFile);
+        $uploadFolder = $this->makeFolderUpload();
+        $filename = $this->makeFilename($uploadedFile, $uploadFolder);
         $newPath = $this->storage->putFileAs(
-            $this->makeFolderUpload(),
+            $uploadFolder,
             $uploadedFile,
             $filename
         );
@@ -238,23 +239,39 @@ class FileManager
     protected function makeUploadedFileByUrl(): UploadedFile
     {
         $content = $this->getContentFileUrl($this->resource);
+
         if (empty($content)) {
             throw new \Exception("Can't get file url: {$this->resource}");
         }
 
         $tempName = basename($this->resource);
+
         $this->storage->put($tempName, $content);
 
         return (new UploadedFile($this->storage->path($tempName), $tempName));
     }
 
-    protected function makeFilename(UploadedFile $file): string|null
+    protected function makeFilename(UploadedFile $file, string $uploadFolder): string|null
     {
         $filename = $file->getClientOriginalName();
+
         $extension = $file->getClientOriginalExtension();
-        $filename = str_replace('.' . $extension, '', $filename);
-        $filename = Str::slug(substr($filename, 0, 50));
-        $filename = $filename . '-'. strtolower(Str::random(15)) .'.' . $extension;
+
+        $name = str_replace('.' . $extension, '', $filename);
+
+        $name = Str::slug(substr($name, 0, 100));
+
+        $i = 0;
+        while (1) {
+            $filename = $name . ($i > 0 ? "-{$i}": '') .'.'. $extension;
+
+            if (!$this->storage->exists("{$uploadFolder}/{$filename}")) {
+                break;
+            }
+
+            $i++;
+        }
+
         return $this->replaceInsecureSuffix($filename);
     }
 
@@ -267,29 +284,26 @@ class FileManager
     {
         if (empty($file)) {
             $this->errors[] = $this->errorMessage('file-empty');
-
             return false;
         }
 
         if (! $file instanceof UploadedFile) {
             $this->errors[] = $this->errorMessage('instance');
-
             return false;
         }
 
         if ($file->getError() != UPLOAD_ERR_OK) {
             $msg = 'File failed to upload. Error code: ' . $file->getError();
             $this->errors[] = $msg;
-
             return false;
         }
 
         $mimetype = $file->getMimeType();
+
         $config = config('juzaweb.filemanager.types.' . $this->type);
 
         if (empty($config)) {
             $this->errors[] = $this->errorMessage('not-supported');
-
             return false;
         }
 
@@ -300,14 +314,12 @@ class FileManager
         $validMimetypes = $config['valid_mime'] ?? [];
         if (in_array($mimetype, $validMimetypes) === false) {
             $this->errors[] = $this->errorMessage('mime').$mimetype;
-
             return false;
         }
 
         if ($max_size > 0) {
             if ($file_size > ($max_size * 1024 * 1024)) {
                 $this->errors[] = $this->errorMessage('size');
-
                 return false;
             }
         }

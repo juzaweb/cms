@@ -4,7 +4,7 @@
     </label>
 
     <input
-        type="{{ $type ?? 'text' }}"
+        type="text"
         name="{{ $name }}"
         class="form-control {{ $class ?? '' }}"
         id="{{ $id ?? $name }}"
@@ -15,7 +15,7 @@
         @if($required ?? false) required @endif
         @if ($readonly ?? false) readonly @endif
         @foreach ($data ?? [] as $key => $val)
-            data-{{ $key }}="{{ $val }}"
+            {{ 'data-' . $key. '="'. $val .'"' }}
         @endforeach
     >
 </div>

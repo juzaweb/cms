@@ -15,16 +15,16 @@ use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\ArrayPagination;
-use Juzaweb\CMS\Support\JuzawebApi;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Support\Updater\PluginUpdater;
 use Juzaweb\CMS\Version;
 use Juzaweb\CMS\Support\Plugin as SupportPlugin;
 
 class PluginController extends BackendController
 {
-    protected JuzawebApi $api;
+    protected JuzawebApiContract $api;
 
-    public function __construct(JuzawebApi $api)
+    public function __construct(JuzawebApiContract $api)
     {
         $this->api = $api;
     }

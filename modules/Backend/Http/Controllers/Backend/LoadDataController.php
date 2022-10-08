@@ -16,7 +16,7 @@ use Juzaweb\CMS\Support\ArrayPagination;
 
 class LoadDataController extends BackendController
 {
-    public function loadData($func, Request $request)
+    public function loadData($func, Request $request): \Illuminate\Http\JsonResponse
     {
         if (method_exists($this, $func)) {
             return $this->{$func}($request);
@@ -30,7 +30,7 @@ class LoadDataController extends BackendController
         );
     }
 
-    protected function generateSlug(Request $request)
+    protected function generateSlug(Request $request): \Illuminate\Http\JsonResponse
     {
         $title = Str::words($request->input('title'), 15);
 
@@ -210,6 +210,44 @@ class LoadDataController extends BackendController
         }
 
         $paginate = $query->paginate(10);
+        $data['results'] = $query->get();
+
+        if ($paginate->nextPageUrl()) {
+            $data['pagination'] = ['more' => true];
+        }
+
+        return response()->json($data);
+    }
+
+    protected function loadPosts(Request $request)
+    {
+        $type = $request->get('type');
+        $search = $request->get('search');
+        $explodes = $request->get('explodes');
+
+        $query = Post::query();
+
+        $query->select(
+            [
+                'id',
+                'title as text',
+            ]
+        );
+
+        if ($type) {
+            $query->where('type', '=', $type);
+        }
+
+        if ($search) {
+            $query->where('title', JW_SQL_LIKE, '%'. $search .'%');
+        }
+
+        if ($explodes) {
+            $query->whereNotIn('id', $explodes);
+        }
+
+        $paginate = $query->paginate(10);
+
         $data['results'] = $query->get();
 
         if ($paginate->nextPageUrl()) {

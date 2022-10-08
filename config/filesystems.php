@@ -39,16 +39,16 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => '/storage',
+            'url' => env('APP_STORAGE_URL', '/storage'),
             'visibility' => 'public',
             'throw' => false,
         ],
-    
+
         'backup' => [
             'driver' => 'local',
             'root' => storage_path('app/backups'),
         ],
-    
+
         'tmp' => [
             'driver' => 'local',
             'root' => storage_path('app/tmps'),

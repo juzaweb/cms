@@ -3,13 +3,12 @@
 use Juzaweb\Backend\Http\Resources\ResourceResource;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Taxonomy;
-use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\CMS\Facades\JWQuery;
 
-function get_posts(string $type, array $options = [])
+function get_posts(string $type = null, array $options = []): array
 {
     return JWQuery::posts($type, $options);
 }
@@ -24,30 +23,9 @@ function get_post_taxonomies($post, $taxonomy = null, $params = [])
     return JWQuery::postTaxonomies($post, $taxonomy, $params);
 }
 
-function get_related_posts($post, $limit = 5, $taxonomy = null)
+function get_related_posts($post, $limit = 5, $taxonomy = null): array
 {
-    if ($limit > 20) {
-        $limit = 20;
-    }
-
-    $ids = collect(get_post_taxonomies($post, $taxonomy))
-        ->pluck('id')
-        ->toArray();
-
-    $posts = Post::selectFrontendBuilder()
-        ->whereHas(
-            'taxonomies',
-            function (Builder $q) use ($ids) {
-                $q->whereIn("{$q->getModel()->getTable()}.id", $ids);
-            }
-        )
-        ->where('id', '!=', $post['id'])
-        ->orderBy('id', 'DESC')
-        ->take($limit)
-        ->get();
-
-    return PostResource::collection($posts)
-        ->toArray(request());
+    return JWQuery::relatedPosts($post, $limit, $taxonomy);
 }
 
 function get_popular_posts($type = null, $post = null, $limit = 5, $options = [])
@@ -67,13 +45,14 @@ function get_popular_posts($type = null, $post = null, $limit = 5, $options = []
     }
 
     $query->orderBy('views', 'DESC');
+
     $posts = $query->take($limit)->get();
 
     return PostResource::collection($posts)
         ->toArray(request());
 }
 
-function get_post_resources($resource, $options = [])
+function get_post_resources($resource, $options = []): array
 {
     $query = Resource::selectFrontendBuilder()
         ->where('type', '=', $resource);
@@ -90,14 +69,18 @@ function get_post_resources($resource, $options = [])
         $query->where('parent_id', '=', $parentId);
     }
 
+    if ($orderBys = Arr::get($options, 'order_by')) {
+        foreach ($orderBys as $column => $direction) {
+            $query->orderBy($column, $direction);
+        }
+    }
+
     $limit = Arr::get($options, 'limit', 10);
     if ($limit > 100) {
         $limit = 10;
     }
 
-    $data = $query
-        ->orderBy('display_order', 'ASC')
-        ->limit($limit)
+    $data = $query->limit($limit)
         ->get();
 
     return ResourceResource::collection($data)
@@ -157,7 +140,7 @@ function get_taxonomy($taxonomy, $args = [])
         ->toArray(request());
 }
 
-function get_taxonomies($args = [])
+function get_taxonomies($args = []): array
 {
     $query = Taxonomy::selectFrontendBuilder();
     $type = Arr::get($args, 'type');
@@ -207,8 +190,12 @@ function get_total_resource($resource, $args = [])
     return $query->count();
 }
 
-function get_page_url(string|int|Post $page): null|string
+function get_page_url(string|int|Post|null $page): null|string
 {
+    if (empty($page)) {
+        return null;
+    }
+
     if ($page instanceof Post) {
         return $page->getLink();
     }
@@ -223,9 +210,5 @@ function get_page_url(string|int|Post $page): null|string
 
     $data = Post::findBySlug($page, ['id', 'slug', 'type']);
 
-    if ($data) {
-        return $data->getLink();
-    }
-
-    return null;
+    return $data?->getLink();
 }

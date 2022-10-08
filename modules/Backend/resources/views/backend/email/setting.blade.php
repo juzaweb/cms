@@ -1,6 +1,6 @@
 <div class="row mt-3">
     <div class="col-md-7">
-        <h5>@lang('cms::app.setting')</h5>
+        <h5>{{ trans('cms::app.setting') }}</h5>
 
         @php
         $config = get_config('email');
@@ -67,7 +67,7 @@
 
             <div class="mt-3">
                 <button type="submit" class="btn btn-success">
-                    <i class="fa fa-save"></i> @lang('cms::app.save')
+                    <i class="fa fa-save"></i> {{ trans('cms::app.save') }}
                 </button>
             </div>
         @endcomponent
@@ -75,7 +75,7 @@
     </div>
 
     <div class="col-md-5">
-        <h5>@lang('cms::app.send_email_test')</h5>
+        <h5>{{ trans('cms::app.send_email_test') }}</h5>
 
         @component('cms::components.form', [
             'method' => 'post',
@@ -89,7 +89,7 @@
 
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-send"></i>
-                @lang('cms::app.send_email_test')
+                {{ trans('cms::app.send_email_test') }}
             </button>
         @endcomponent
     </div>

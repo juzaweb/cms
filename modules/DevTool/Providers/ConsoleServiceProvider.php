@@ -85,6 +85,9 @@ class ConsoleServiceProvider extends ServiceProvider
         DatatableMakeCommand::class,
         JuzawebResouceMakeCommand::class,
         MakeAdminCommand::class,
+        \Juzaweb\DevTool\Commands\Theme\GenerateDataThemeCommand::class,
+        \Juzaweb\DevTool\Commands\Theme\DownloadStyleCommand::class,
+        \Juzaweb\DevTool\Commands\Theme\DownloadTemplateCommand::class
     ];
 
     /**

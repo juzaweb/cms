@@ -2,9 +2,12 @@
 
 namespace Juzaweb\Backend\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Juzaweb\CMS\Database\Factories\TaxonomyFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Juzaweb\CMS\Traits\TaxonomyModel;
 use Juzaweb\CMS\Models\Model;
 
@@ -51,8 +54,9 @@ use Juzaweb\CMS\Models\Model;
  */
 class Taxonomy extends Model
 {
-    use TaxonomyModel;
-    use HasFactory;
+    protected static bool $flushCacheOnUpdate = true;
+
+    use TaxonomyModel, HasFactory, QueryCacheable;
 
     protected $table = 'taxonomies';
 
@@ -69,29 +73,29 @@ class Taxonomy extends Model
         'total_post',
     ];
 
+    public string $cachePrefix = 'taxonomies_';
+
     /**
      * Create Builder for frontend
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\Resource
+     * @return Builder
      */
-    public static function selectFrontendBuilder()
+    public static function selectFrontendBuilder(): Builder
     {
-        $builder = self::query();
-
-        return $builder;
+        return self::query();
     }
 
     /**
      * Create a new factory instance for the model.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     protected static function newFactory()
     {
         return TaxonomyFactory::new();
     }
 
-    public function menuItems()
+    public function menuItems(): HasMany
     {
         return $this->hasMany(
             MenuItem::class,
@@ -103,5 +107,12 @@ class Taxonomy extends Model
                 '=',
                 'Juzaweb\\Models\\Taxonomy'
             );
+    }
+
+    protected function getCacheBaseTags(): array
+    {
+        return [
+            'taxonomies',
+        ];
     }
 }

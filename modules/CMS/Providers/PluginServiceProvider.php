@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Providers;
 
 use Juzaweb\CMS\Contracts\ActivatorInterface;
+use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Exceptions\InvalidActivatorClass;
 use Juzaweb\CMS\Support\LocalPluginRepository;
@@ -55,7 +56,7 @@ class PluginServiceProvider extends ServiceProvider
                     throw InvalidActivatorClass::missingConfig();
                 }
 
-                return new $class($app);
+                return new $class($app, $app[ConfigContract::class]);
             }
         );
 

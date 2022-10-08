@@ -10,17 +10,29 @@
 
 namespace Juzaweb\Network\Support;
 
+use Illuminate\Database\ConnectionResolverInterface;
+use Juzaweb\Network\Contracts\NetworkSiteContract;
+use Juzaweb\Network\Contracts\SiteCreaterContract;
 use Juzaweb\Network\Contracts\SiteManagerContract;
 use Juzaweb\Network\Models\Site;
 
 class SiteManager implements SiteManagerContract
 {
-    public function __construct($db)
-    {
-        //
+    protected ConnectionResolverInterface $db;
+
+    protected SiteCreaterContract $siteCreater;
+
+    public function __construct(
+        ConnectionResolverInterface $db,
+        SiteCreaterContract $siteCreater
+    ) {
+
+        $this->db = $db;
+
+        $this->siteCreater = $siteCreater;
     }
 
-    public function find(string|int|Site $site)
+    public function find(string|int|Site $site): ?NetworkSiteContract
     {
         if (is_numeric($site)) {
             $site = Site::find($site);
@@ -37,8 +49,20 @@ class SiteManager implements SiteManagerContract
         return $this->createSite($site);
     }
 
-    private function createSite(Site $site)
+    public function create(string $subdomain, array $args = []): NetworkSiteContract
     {
-        //
+        $site = $this->siteCreater->create($subdomain, $args);
+
+        return $this->createSite($site);
+    }
+
+    public function getCreater(): SiteCreaterContract
+    {
+        return $this->siteCreater;
+    }
+
+    private function createSite(Site $site): NetworkSiteContract
+    {
+        return new NetworkSite($site);
     }
 }

@@ -60,6 +60,8 @@
         </div>
     </div>
 
+    @do_action('backend.dashboard.statis')
+
     <div class="row">
         <div class="col-md-12">
             <div id="curve_chart" style="width: 100%; height: 300px"></div>

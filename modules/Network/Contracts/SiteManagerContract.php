@@ -14,5 +14,9 @@ use Juzaweb\Network\Models\Site;
 
 interface SiteManagerContract
 {
-    public function find(string|int|Site $site);
+    public function find(string|int|Site $site): ?NetworkSiteContract;
+
+    public function create(string $subdomain, array $args = []): NetworkSiteContract;
+
+    public function getCreater(): SiteCreaterContract;
 }

@@ -349,7 +349,8 @@ class HtmlDomNode
                     case HDOM_QUOTE_SINGLE:
                         $quote = '\'';
                         break;
-                    default: $quote = '';
+                    default:
+                        $quote = '';
                 }
 
                 $ret .= $key
@@ -554,17 +555,13 @@ class HtmlDomNode
             return $this->convert_text($this->attr[$name]);
         }
 
-        switch ($name) {
-            case 'outertext':
-                return $this->outertext();
-            case 'innertext':
-                return $this->innertext();
-            case 'plaintext':
-                return $this->text();
-            case 'xmltext':
-                return $this->xmltext();
-            default: return array_key_exists($name, $this->attr);
-        }
+        return match ($name) {
+            'outertext' => $this->outertext(),
+            'innertext' => $this->innertext(),
+            'plaintext' => $this->text(),
+            'xmltext' => $this->xmltext(),
+            default => array_key_exists($name, $this->attr),
+        };
     }
 
     public function __set($name, $value)
@@ -575,7 +572,8 @@ class HtmlDomNode
         }
 
         switch ($name) {
-            case 'outertext': return $this->_[HDOM_INFO_OUTER] = $value;
+            case 'outertext':
+                return $this->_[HDOM_INFO_OUTER] = $value;
             case 'innertext':
                 if (isset($this->_[HDOM_INFO_TEXT])) {
                     return $this->_[HDOM_INFO_TEXT] = $value;
@@ -600,9 +598,8 @@ class HtmlDomNode
         switch ($this->nodetype) {
             case HDOM_TYPE_TEXT:
                 return $this->dom->restoreNoise($this->_[HDOM_INFO_TEXT]);
-            case HDOM_TYPE_COMMENT:
-                return '';
             case HDOM_TYPE_UNKNOWN:
+            case HDOM_TYPE_COMMENT:
                 return '';
         }
 
@@ -637,7 +634,8 @@ class HtmlDomNode
                 }
             }
         }
-        return htmlspecialchars_decode($ret, ENT_QUOTES);
+
+        return preg_replace('/\s+/', ' ', $ret);
     }
 
     public function xmltext()
@@ -661,12 +659,14 @@ class HtmlDomNode
     public function __isset($name)
     {
         switch ($name) {
-            case 'outertext': return true;
-            case 'innertext': return true;
-            case 'plaintext': return true;
+            case 'innertext':
+            case 'plaintext':
+            case 'outertext':
+                return true;
         }
+
         //no value attr: nowrap, checked selected...
-        return (array_key_exists($name, $this->attr)) ? true : isset($this->attr[$name]);
+        return array_key_exists($name, $this->attr) || isset($this->attr[$name]);
     }
 
     public function remove()

@@ -39,6 +39,7 @@ class Custom extends AbstractExtension
     {
         return [
             new TwigFunction('config', 'get_config'),
+            new TwigFunction('theme_config', 'get_theme_config'),
             new TwigFunction('get_template_part', 'get_template_part'),
             new TwigFunction('text_field', 'Field::text'),
             new TwigFunction('textarea_field', 'Field::textarea'),
@@ -90,6 +91,7 @@ class Custom extends AbstractExtension
             new TwigFunction('__', '__'),
             new TwigFunction('get_page_url', 'get_page_url'),
             new TwigFunction('apply_filters', 'apply_filters'),
+            new TwigFunction('plugin_asset', 'plugin_assets'),
         ];
     }
 }

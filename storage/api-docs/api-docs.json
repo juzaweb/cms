@@ -9,45 +9,16 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/auth/login": {
-            "post": {
+        "/api/admin/menus/admin-menu": {
+            "get": {
                 "tags": [
-                    "Auth"
+                    "Admin / Menus"
                 ],
-                "summary": "User login",
-                "operationId": "api.auth.login",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "description": "email",
-                                        "type": "string",
-                                        "example": "string@gmail.com"
-                                    },
-                                    "password": {
-                                        "description": "password",
-                                        "type": "string",
-                                        "example": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
+                "summary": "Get admin menu items",
+                "operationId": "admin.menus.admin_menu",
                 "responses": {
-                    "201": {
+                    "200": {
                         "$ref": "#/components/responses/success_detail"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/error_422"
                     },
                     "500": {
                         "$ref": "#/components/responses/error_500"
@@ -55,38 +26,13 @@
                 }
             }
         },
-        "/api/auth/logout": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "User logout",
-                "operationId": "api.auth.logout",
-                "responses": {
-                    "201": {
-                        "$ref": "#/components/responses/success_detail"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/error_422"
-                    },
-                    "500": {
-                        "$ref": "#/components/responses/error_500"
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
-        "/api/post-type/{type}": {
+        "/api/admin/post-type/{type}": {
             "get": {
                 "tags": [
-                    "Post Type"
+                    "Admin / Post Type"
                 ],
                 "summary": "Get list post type items",
-                "operationId": "v1.post-type.type.index",
+                "operationId": "admin.post-type.type.index",
                 "parameters": [
                     {
                         "name": "type",
@@ -114,10 +60,10 @@
             },
             "post": {
                 "tags": [
-                    "Post Type"
+                    "Admin / Post Type"
                 ],
                 "summary": "Create Post Type",
-                "operationId": "api.post-type.type.store",
+                "operationId": "admin.post-type.type.store",
                 "parameters": [
                     {
                         "name": "type",
@@ -168,13 +114,13 @@
                 }
             }
         },
-        "/api/post-type/{type}/{id}": {
+        "/api/admin/post-type/{type}/{id}": {
             "get": {
                 "tags": [
-                    "Post Type"
+                    "Admin / Post Type"
                 ],
                 "summary": "Get post type data by id",
-                "operationId": "v1.post-type.type.show",
+                "operationId": "admin.post-type.type.show",
                 "parameters": [
                     {
                         "name": "type",
@@ -202,10 +148,10 @@
             },
             "put": {
                 "tags": [
-                    "Post Type"
+                    "Admin / Post Type"
                 ],
                 "summary": "Update Post Type",
-                "operationId": "api.post-type.type.update",
+                "operationId": "admin.post-type.type.update",
                 "parameters": [
                     {
                         "name": "type",
@@ -265,10 +211,10 @@
             },
             "delete": {
                 "tags": [
-                    "Post Type"
+                    "Admin / Post Type"
                 ],
                 "summary": "Delete Post Type",
-                "operationId": "api.post-type.type.destroy",
+                "operationId": "admin.post-type.type.destroy",
                 "parameters": [
                     {
                         "name": "type",
@@ -293,6 +239,406 @@
                     },
                     "422": {
                         "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/admin/setting/configs": {
+            "get": {
+                "tags": [
+                    "Admin / Setting"
+                ],
+                "summary": "Get admin configs",
+                "operationId": "admin.setting.configs",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/admin/users": {
+            "get": {
+                "tags": [
+                    "Admin / Users"
+                ],
+                "summary": "Get list users",
+                "operationId": "admin.user.index",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/query_limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/query_keyword"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_list"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Admin / Users"
+                ],
+                "summary": "Store user",
+                "operationId": "admin.user.store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "email": {
+                                        "description": "email",
+                                        "type": "string",
+                                        "example": "string@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/admin/users/{id}": {
+            "get": {
+                "tags": [
+                    "Admin / Users"
+                ],
+                "summary": "Get user by id",
+                "operationId": "admin.user.show",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id_in_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/error_404"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Admin / Users"
+                ],
+                "summary": "Update user",
+                "operationId": "admin.user.update",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User login",
+                "operationId": "api.auth.login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "email",
+                                        "type": "string",
+                                        "example": "string@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/auth/access-token": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User validate access token",
+                "operationId": "api.auth.access_token",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "access_token"
+                                ],
+                                "properties": {
+                                    "access_token": {
+                                        "description": "Access token",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User logout",
+                "operationId": "api.auth.logout",
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User register",
+                "operationId": "api.auth.register",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "email": {
+                                        "description": "email",
+                                        "type": "string",
+                                        "example": "example@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "password_confirmation",
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/error_422"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/post-type/{type}": {
+            "get": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Get list post type items",
+                "operationId": "v1.post-type.type.index",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/query_limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/query_keyword"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_list"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/error_500"
+                    }
+                }
+            }
+        },
+        "/api/post-type/{type}/{id}": {
+            "get": {
+                "tags": [
+                    "Post Type"
+                ],
+                "summary": "Get post type data by id",
+                "operationId": "v1.post-type.type.show",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#/components/parameters/id_in_path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/success_detail"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/error_404"
                     },
                     "500": {
                         "$ref": "#/components/responses/error_500"
@@ -597,14 +943,6 @@
                 "schema": {
                     "type": "string"
                 }
-            }
-        },
-        "securitySchemes": {
-            "sanctum": {
-                "type": "apiKey",
-                "description": "Enter token in format (Bearer :token)",
-                "name": "Authorization",
-                "in": "header"
             }
         }
     }

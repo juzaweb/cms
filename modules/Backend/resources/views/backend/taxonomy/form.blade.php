@@ -20,7 +20,7 @@
 
                 @if(in_array('hierarchical', $setting->get('supports', [])))
                 <div class="form-group">
-                    <label class="col-form-label" for="parent_id">@lang('cms::app.parent')</label>
+                    <label class="col-form-label" for="parent_id">{{ trans('cms::app.parent') }}</label>
                     <select name="parent_id" id="parent_id" class="form-control load-taxonomies" data-post-type="{{ $setting->get('post_type') }}" data-taxonomy="{{ $setting->get('taxonomy') }}" data-placeholder="{{ trans('cms::app.parent') }}" data-explodes="{{ $model->id }}">
                         @if($model->parent)
                             <option value="{{ $model->parent->id }}" selected>{{ $model->parent->name }}</option>

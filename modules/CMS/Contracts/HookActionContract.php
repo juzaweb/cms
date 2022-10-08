@@ -18,6 +18,14 @@ interface HookActionContract
 
     public function addFilter($tag, $callback, $priority = 20, $arguments = 1): void;
 
+    public function registerPostType(string $key, array $args = []): void;
+
+    public function registerTaxonomy(string $taxonomy, array|string $objectType, array $args = []): void;
+
+    public function registerMenuBox(string $key, array $args = []): void;
+
+    public function registerPermalink(string $key, array $args = []): void;
+
     public function addSettingForm(string $key, array $args = []): void;
 
     public function addAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void;
@@ -57,4 +65,8 @@ interface HookActionContract
     public function getPermissions(string $key = null): Collection;
 
     public function getConfigs($key = null): Collection;
+
+    public function getTaxonomies($postType = null): Collection;
+
+    public function addMetaPostTypes(string $postType, array $metas): void;
 }

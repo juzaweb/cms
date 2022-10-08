@@ -1,3 +1,7 @@
+@if(request()->get('page'))
+    <meta name="robots" content="noindex,follow">
+@endif
+
 @foreach($styles as $style)
     <link rel="stylesheet" type="text/css" href="{{ $style->get('src') }}?v={{ $style->get('ver') }}"
           id="{{ $style->get('key') }}">
@@ -28,4 +32,12 @@
 @if($fbAppId)
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&autoLogAppEvents=1&version=v8.0&appId={{ $fbAppId }}" nonce="ozkqznFT"></script>
+@endif
+
+@if($bingKey)
+<meta name="msvalidate.01" content="{{ $bingKey }}" />
+@endif
+
+@if($googleKey)
+    <meta name="google-site-verification" content="{{ $googleKey }}" />
 @endif

@@ -133,6 +133,29 @@ function initSelect2(parent = 'body')
         },
     });
 
+    $(parent +' .load-posts').select2({
+        allowClear: true,
+        dropdownAutoWidth: !$(this).data('width'),
+        width: $(this).data('width') || '100%',
+        placeholder: function (params) {
+            return {
+                id: null,
+                text: params.placeholder,
+            }
+        },
+        ajax: {
+            method: 'GET',
+            url: '/'+ juzaweb.adminPrefix +'/load-data/loadPosts',
+            dataType: 'json',
+            data: function (params) {
+                return {
+                    search: $.trim(params.term),
+                    page: params.page
+                };
+            }
+        },
+    });
+
     $(parent +' .load-locales').select2({
         allowClear: true,
         dropdownAutoWidth: !$(this).data('width'),
@@ -148,9 +171,13 @@ function initSelect2(parent = 'body')
             url: '/'+ juzaweb.adminPrefix +'/load-data/loadLocales',
             dataType: 'json',
             data: function (params) {
+                let type = $(this).data('type') ? $(this).data('type') : null;
+                let explodes = $(this).data('explodes') ? $(this).data('explodes') : null;
                 return {
                     search: $.trim(params.term),
-                    page: params.page
+                    page: params.page,
+                    type: type,
+                    explodes: explodes
                 };
             }
         },

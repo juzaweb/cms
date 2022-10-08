@@ -23,8 +23,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> @lang('cms::app.close')</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('cms::app.add_folder')</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> {{ trans('cms::app.close') }}</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> {{ trans('cms::app.add_folder') }}</button>
                 </div>
             </div>
         </form>

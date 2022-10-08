@@ -10,11 +10,19 @@ class CacheGroup
     use Macroable;
 
     protected CacheManager $cache;
+
     protected string $store = 'file';
 
     public function __construct($cache)
     {
         $this->cache = $cache;
+    }
+
+    public function driver(string $driver = 'file'): self
+    {
+        $this->store = $driver;
+
+        return $this;
     }
 
     public function add(
@@ -38,5 +46,7 @@ class CacheGroup
         foreach ($keys as $key) {
             $this->cache->store($this->store)->pull($key);
         }
+
+        $this->cache->store($this->store)->pull($group);
     }
 }

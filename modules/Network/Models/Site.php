@@ -14,6 +14,26 @@ use Juzaweb\CMS\Models\Model;
 use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
 use Juzaweb\Network\Traits\RootNetworkModel;
 
+/**
+ * Juzaweb\Network\Models\Site
+ *
+ * @property int $id
+ * @property string $domain
+ * @property string $status
+ * @property int|null $db_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Site newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Site newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Site query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Site whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Site whereDbId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Site whereDomain($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Site whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Site whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Site whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Site extends Model implements RootNetworkModelInterface
 {
     use RootNetworkModel;

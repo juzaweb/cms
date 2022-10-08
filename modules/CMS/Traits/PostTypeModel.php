@@ -41,26 +41,32 @@ trait PostTypeModel
     {
         $builder = static::with(
             [
-                'createdBy',
-                'taxonomies',
+                'createdBy' => function ($q) {
+                    $q->cacheFor(3600);
+                },
+                'taxonomies' => function ($q) {
+                    $q->cacheFor(3600);
+                },
             ]
-        )->select(
-            [
-                'id',
-                'title',
-                'description',
-                'thumbnail',
-                'slug',
-                'views',
-                'total_rating',
-                'total_comment',
-                'type',
-                'status',
-                'created_by',
-                'created_at',
-                'json_metas',
-            ]
-        )->wherePublish();
+        )
+            ->cacheFor(3600)
+            ->select(
+                [
+                    'id',
+                    'title',
+                    'description',
+                    'thumbnail',
+                    'slug',
+                    'views',
+                    'total_rating',
+                    'total_comment',
+                    'type',
+                    'status',
+                    'created_by',
+                    'created_at',
+                    'json_metas',
+                ]
+            )->wherePublish();
 
         return apply_filters('post.selectFrontendBuilder', $builder);
     }
@@ -74,10 +80,15 @@ trait PostTypeModel
     {
         $builder = static::with(
             [
-                'createdBy',
-                'taxonomies',
+                'createdBy' => function ($q) {
+                    $q->cacheFor(3600);
+                },
+                'taxonomies' => function ($q) {
+                    $q->cacheFor(3600);
+                },
             ]
         )
+            ->cacheFor(3600)
             ->wherePublish();
 
         return apply_filters('post.createFrontendBuilder', $builder);
@@ -301,14 +312,7 @@ trait PostTypeModel
         return $taxonomies;
     }
 
-    /**
-     * Get Related Posts
-     *
-     * @param int $limit
-     * @param string $taxonomy
-     * @return Collection
-     */
-    public function getRelatedPosts($limit = 5, $taxonomy = null)
+    public function getRelatedPosts(int $limit = 5, string $taxonomy = null): Collection
     {
         $ids = $this->getTaxonomies($taxonomy)->pluck('id')->toArray();
 
@@ -327,7 +331,7 @@ trait PostTypeModel
      * @param array $attributes
      * @throws \Exception
      */
-    public function syncTaxonomies(array $attributes)
+    public function syncTaxonomies(array $attributes): void
     {
         if (empty($this->type)) {
             throw new \Exception('Cannot find Type in post.');

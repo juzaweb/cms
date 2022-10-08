@@ -33,7 +33,7 @@ trait GetHookAction
      * Get registed menu box
      *
      * @param string|array $key
-     * @return \Illuminate\Support\Collection|false
+     * @return Collection|false
      */
     public function getMenuBox($key): bool|Collection
     {
@@ -44,18 +44,20 @@ trait GetHookAction
      * Get post type setting
      *
      * @param string|null $postType
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      * */
-    public function getPostTypes($postType = null): Collection
+    public function getPostTypes(string $postType = null): Collection
     {
         if ($postType) {
-            return GlobalData::get('post_types.' . $postType);
+            $data = GlobalData::get('post_types.' . $postType);
+
+            return is_array($data) ? collect($data) : $data;
         }
 
         return collect(GlobalData::get('post_types'));
     }
 
-    public function getTaxonomies($postType = null)
+    public function getTaxonomies($postType = null): Collection
     {
         if (is_array($postType)) {
             $postType = $postType['key'];
@@ -71,7 +73,7 @@ trait GetHookAction
 
         return $taxonomies ?
             $taxonomies->sortBy('menu_position')
-            : [];
+            : new Collection([]);
     }
 
     public function getSettingForms(): Collection
@@ -217,7 +219,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('resources'));
     }
 
-    public function getAdminPages($key = null)
+    public function getAdminPages($key = null): Collection|string|array|null
     {
         if ($key) {
             return Arr::get(GlobalData::get('admin_pages'), $key);

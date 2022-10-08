@@ -25,13 +25,6 @@ use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class ThemeInstallController extends BackendController
 {
-    protected JuzawebApiContract $api;
-
-    public function __construct(JuzawebApiContract $api)
-    {
-        $this->api = $api;
-    }
-
     public function index(): View
     {
         if (!config('juzaweb.theme.enable_upload')) {
@@ -53,19 +46,17 @@ class ThemeInstallController extends BackendController
         );
     }
 
-    public function getData(Request $request): object|array
+    public function getData(Request $request, JuzawebApiContract $api): object|array
     {
         if (!config('juzaweb.theme.enable_upload')) {
             return (object) [];
         }
 
         $limit = $request->get('limit', 20);
-
         $page = $request->get('page', 1);
-
         $except = array_keys(ThemeLoader::all(true));
 
-        return $this->api->get(
+        return $api->get(
             'themes',
             [
                 'limit' => $limit,

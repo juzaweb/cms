@@ -5,7 +5,7 @@
     @endphp
     @foreach($tabs as $key => $tab)
     <li class="nav-item">
-        <a href="#{{ $key }}-tab" class="nav-link @if($index == 0) active @endif" id="{{ $key }}-label" data-toggle="tab" role="tab" data-turbolinks="false">{{ $tab['label'] ?? trans('cms::app.' . $key) }}</a>
+        <a href="#{{ $key }}-tab" class="nav-link @if($index == 0) active @endif" id="{{ $key }}-label" data-toggle="tab" role="tab" data-turbolinks="false">{{ $tab['label'] ?? $tab }}</a>
 
         @php
             $index ++;

@@ -21,6 +21,7 @@ use TwigBridge\Facade\Twig;
 class ThemeAction extends Action
 {
     protected string $currentTheme;
+
     protected array $register = [];
 
     public function __construct()
@@ -48,7 +49,11 @@ class ThemeAction extends Action
         HookAction::addAction(Action::FRONTEND_CALL_ACTION, [$this, 'appendHeader']);
         HookAction::addAction(Action::BLOCKS_INIT, [$this, 'blocks']);
         HookAction::addAction(Action::INIT_ACTION, [$this, 'settingFields']);
-        HookAction::addAction(Action::FRONTEND_AFTER_BODY, [$this, 'addThemeHeader']);
+
+        if (config('juzaweb.adminbar.enable')) {
+            HookAction::addAction(Action::FRONTEND_AFTER_BODY, [$this, 'addThemeHeader']);
+        }
+
         HookAction::addAction(Action::INIT_ACTION, [$this, 'templates']);
         HookAction::addAction(
             Action::FRONTEND_INIT,

@@ -13,6 +13,7 @@ namespace Juzaweb\Network\Http\Controllers;
 use Illuminate\Validation\Rule;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Traits\ResourceController;
+use Juzaweb\Network\Contracts\SiteManagerContract;
 use Juzaweb\Network\Http\Datatables\SiteDatatable;
 use Juzaweb\Network\Models\Site;
 
@@ -22,7 +23,14 @@ class SiteController extends Controller
         getDataForForm as DataForForm;
     }
 
+    protected SiteManagerContract $siteManager;
+
     protected string $viewPrefix = 'network::site';
+
+    public function __construct(SiteManagerContract $siteManager)
+    {
+        $this->siteManager = $siteManager;
+    }
 
     protected function getDataTable(...$params): DataTable
     {
@@ -31,15 +39,13 @@ class SiteController extends Controller
 
     protected function validator(array $attributes, ...$params): array
     {
-        $networkDomain = addslashes('.' . config('network.domain'));
-
         return [
             'domain' => [
                 'bail',
                 'required',
                 'max:50',
                 'min:4',
-                "regex:/(^[a-z0-9\-]+{$networkDomain}$)+/",
+                "regex:/(^[a-z0-9\-]+)/",
                 Rule::modelUnique(
                     Site::class,
                     'domain',
@@ -68,8 +74,8 @@ class SiteController extends Controller
         return $data;
     }
 
-    protected function beforeSave(&$data, &$model, ...$params): void
+    protected function storeSuccess($request, $model, ...$params): void
     {
-        //
+        $this->siteManager->getCreater()->setupSite($model);
     }
 }

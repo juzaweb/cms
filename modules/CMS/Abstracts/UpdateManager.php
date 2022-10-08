@@ -28,13 +28,9 @@ use Juzaweb\CMS\Support\Curl;
 abstract class UpdateManager
 {
     protected Curl $curl;
-
     protected JuzawebApiContract $api;
-
     protected FilesystemAdapter $storage;
-
     protected array $updatePaths = [];
-
     protected int $maxStep = 6;
 
     public function __construct(Curl $curl, JuzawebApiContract $api)

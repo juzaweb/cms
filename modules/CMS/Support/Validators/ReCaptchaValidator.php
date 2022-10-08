@@ -4,7 +4,7 @@ namespace Juzaweb\CMS\Support\Validators;
 
 use GuzzleHttp\Client;
 
-class ReCaptcha
+class ReCaptchaValidator
 {
     public function validate($attribute, $value, $parameters, $validator)
     {

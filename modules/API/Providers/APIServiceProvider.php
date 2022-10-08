@@ -33,7 +33,7 @@ class APIServiceProvider extends ServiceProvider
             'api',
             function (Request $request) {
                 return Limit::perMinute(60)
-                    ->by($request->user()?->id ?: $request->ip());
+                    ->by($request->user()?->id ?: get_client_ip());
             }
         );
     }

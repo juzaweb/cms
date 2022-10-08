@@ -7,7 +7,7 @@
             <form method="get" class="form-inline" id="form-search">
 
                 <div class="form-group mb-2 mr-1">
-                    <label for="search" class="sr-only">@lang('cms::app.search')</label>
+                    <label for="search" class="sr-only">{{ trans('cms::app.search') }}</label>
                     <input name="search" type="text" id="search" class="form-control" placeholder="{{ trans('cms::app.search') }}" autocomplete="off">
                 </div>
 
@@ -22,13 +22,13 @@
             <thead>
                 <tr>
                     <th data-width="3%" data-field="state" data-checkbox="true"></th>
-                    <th data-field="date">@lang('cms::app.date')</th>
-                    <th data-width="10%" data-align="center" data-field="all">@lang('cms::app.content')</th>
-                    <th data-width="10%" data-align="center" data-field="emergency">@lang('cms::app.emergency')</th>
-                    <th data-width="10%" data-align="center" data-field="error">@lang('cms::app.error')</th>
-                    <th data-width="10%" data-align="center" data-field="info">@lang('cms::app.info')</th>
-                    <th data-width="10%" data-align="center" data-field="warning">@lang('cms::app.warning')</th>
-                    <th data-width="10%" data-align="center" data-field="notice">@lang('cms::app.notice')</th>
+                    <th data-field="date">{{ trans('cms::app.date') }}</th>
+                    <th data-width="10%" data-align="center" data-field="all">{{ trans('cms::app.content') }}</th>
+                    <th data-width="10%" data-align="center" data-field="emergency">{{ trans('cms::app.emergency') }}</th>
+                    <th data-width="10%" data-align="center" data-field="error">{{ trans('cms::app.error') }}</th>
+                    <th data-width="10%" data-align="center" data-field="info">{{ trans('cms::app.info') }}</th>
+                    <th data-width="10%" data-align="center" data-field="warning">{{ trans('cms::app.warning') }}</th>
+                    <th data-width="10%" data-align="center" data-field="notice">{{ trans('cms::app.notice') }}</th>
                     <th data-width="15%" data-align="center" data-formatter="action_formatter">{{ trans('cms::app.actions') }}</th>
                 </tr>
             </thead>

@@ -2,11 +2,15 @@
 
 namespace Juzaweb\CMS\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rule;
 use Juzaweb\API\Providers\APIServiceProvider;
+use Juzaweb\Backend\Providers\BackendServiceProvider;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\Backend\Repositories\TaxonomyRepository;
 use Juzaweb\CMS\Contracts\ActionRegisterContract;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Contracts\CacheGroupContract;
@@ -18,6 +22,10 @@ use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Contracts\JWQueryContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Juzaweb\CMS\Contracts\OverwriteConfigContract;
+use Juzaweb\CMS\Contracts\PostImporterContract;
+use Juzaweb\CMS\Contracts\PostManagerContract;
+use Juzaweb\CMS\Contracts\StorageDataContract;
+use Juzaweb\CMS\Contracts\TableGroupContract;
 use Juzaweb\CMS\Contracts\ThemeConfigContract;
 use Juzaweb\CMS\Contracts\XssCleanerContract;
 use Juzaweb\CMS\Extension\Custom;
@@ -25,24 +33,28 @@ use Juzaweb\CMS\Facades\OverwriteConfig;
 use Juzaweb\CMS\Support\ActionRegister;
 use Juzaweb\CMS\Support\CacheGroup;
 use Juzaweb\CMS\Support\Config as DbConfig;
+use Juzaweb\CMS\Support\DatabaseTableGroup;
 use Juzaweb\CMS\Support\GlobalData;
 use Juzaweb\CMS\Support\HookAction;
+use Juzaweb\CMS\Support\Imports\PostImporter;
 use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\CMS\Support\JWQuery;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Manager\BackendMessageManager;
+use Juzaweb\CMS\Support\Manager\PostManager;
+use Juzaweb\CMS\Support\StorageData;
 use Juzaweb\CMS\Support\Theme\ThemeConfig;
 use Juzaweb\CMS\Support\Validators\DomainValidator;
 use Juzaweb\CMS\Support\Validators\ModelExists;
 use Juzaweb\CMS\Support\Validators\ModelUnique;
-use Juzaweb\CMS\Support\Validators\ReCaptcha;
+use Juzaweb\CMS\Support\Validators\ReCaptchaValidator;
 use Juzaweb\CMS\Support\XssCleaner;
 use Juzaweb\DevTool\Providers\DevToolServiceProvider;
 use Juzaweb\Frontend\Providers\FrontendServiceProvider;
 use Juzaweb\Network\Providers\NetworkServiceProvider;
 use Juzaweb\Translation\Providers\TranslationServiceProvider;
+use Laravel\Passport\Passport;
 use TwigBridge\Facade\Twig;
-use Illuminate\Pagination\Paginator;
 
 class CmsServiceProvider extends ServiceProvider
 {
@@ -53,8 +65,15 @@ class CmsServiceProvider extends ServiceProvider
         $this->bootMigrations();
         $this->bootPublishes();
 
-        Validator::extend('recaptcha', [ReCaptcha::class, 'validate']);
-        Validator::extend('domain', [DomainValidator::class, 'validate']);
+        Validator::extend(
+            'recaptcha',
+            [ReCaptchaValidator::class, 'validate']
+        );
+
+        Validator::extend(
+            'domain',
+            [DomainValidator::class, 'validate']
+        );
 
         Rule::macro(
             'modelExists',
@@ -97,6 +116,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->registerSingleton();
         $this->registerConfigs();
         $this->registerProviders();
+        Passport::ignoreMigrations();
     }
 
     protected function registerConfigs()
@@ -220,6 +240,22 @@ class CmsServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(
+            StorageDataContract::class,
+            function () {
+                return new StorageData();
+            }
+        );
+
+        $this->app->singleton(
+            TableGroupContract::class,
+            function ($app) {
+                return new DatabaseTableGroup(
+                    $app['migrator']
+                );
+            }
+        );
+
+        $this->app->singleton(
             BackendMessageContract::class,
             function ($app) {
                 return new BackendMessageManager(
@@ -243,10 +279,34 @@ class CmsServiceProvider extends ServiceProvider
                 return new JWQuery($app['db']);
             }
         );
+
+        $this->app->singleton(
+            PostManagerContract::class,
+            function ($app) {
+                return new PostManager(
+                    $app[PostRepository::class]
+                );
+            }
+        );
+
+        $this->app->singleton(
+            PostImporterContract::class,
+            function ($app) {
+                return new PostImporter(
+                    $app[PostManagerContract::class],
+                    $app[HookActionContract::class],
+                    $app[TaxonomyRepository::class]
+                );
+            }
+        );
     }
 
     protected function registerProviders()
     {
+        if (config('network.enable')) {
+            $this->app->register(NetworkServiceProvider::class);
+        }
+
         $this->app->register(HookActionServiceProvider::class);
         $this->app->register(PermissionServiceProvider::class);
         $this->app->register(PerformanceServiceProvider::class);
@@ -256,6 +316,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(NotificationServiceProvider::class);
         $this->app->register(DevToolServiceProvider::class);
         $this->app->register(ThemeServiceProvider::class);
+        $this->app->register(BackendServiceProvider::class);
         $this->app->register(FrontendServiceProvider::class);
 
         if (config('juzaweb.translation.enable')) {
@@ -264,10 +325,6 @@ class CmsServiceProvider extends ServiceProvider
 
         if (config('juzaweb.api.enable')) {
             $this->app->register(APIServiceProvider::class);
-        }
-
-        if (config('network.enable')) {
-            $this->app->register(NetworkServiceProvider::class);
         }
     }
 }

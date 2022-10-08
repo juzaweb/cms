@@ -12,11 +12,11 @@
 
                         <form action="{{ route('admin.reset_password', [$email, $token]) }}" method="post" class="mb-4 form-ajax">
                             <div class="form-group mb-4">
-                                <input type="password" name="password" class="form-control" placeholder="@lang('cms::app.password')" autocomplete="off" required />
+                                <input type="password" name="password" class="form-control" placeholder="{{ trans('cms::app.password') }}" autocomplete="off" required />
                             </div>
 
                             <div class="form-group mb-4">
-                                <input type="password" name="password_confirmation" class="form-control" placeholder="@lang('cms::app.password_confirmation')" autocomplete="off" required />
+                                <input type="password" name="password_confirmation" class="form-control" placeholder="{{ trans('cms::app.password_confirmation') }}" autocomplete="off" required />
                             </div>
 
                             <button type="submit" class="btn btn-primary text-center w-100" data-loading-text="{{ trans('cms::app.please_wait') }}">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="mt-auto pb-5 pt-5">
                     <div class="text-center">
-                        Copyright © {{ date('Y') }} {{ get_config('sitename') }} - Provided by JUZAWEB
+                        Copyright © {{ date('Y') }} {{ get_config('sitename') }} - Provided by Juzaweb
                     </div>
                 </div>
             </div>

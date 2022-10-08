@@ -7,9 +7,9 @@ JUZACMS - Laravel CMS for Your Project
 - JuzaWeb CMS is a Content Management System ([Laravel CMS](https://juzaweb.com)) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
 - Juza CMS was engineered to be easy — for both developers and users. Project develop by Juzaweb.
 - Demo Site: 
-    - Frontend: https://theme-default.juzaweb.com
+    - Frontend: https://cms.juzaweb.com
     - Admin: 
-        - https://theme-default.juzaweb.com/admin-cp 
+        - https://cms.juzaweb.com/admin-cp 
         - User/Pass: demo@juzaweb.com / demo@juzaweb.com
 
 ## Requirements

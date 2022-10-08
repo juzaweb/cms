@@ -12,8 +12,8 @@
 
                     <div class="col-md-6">
                         <div class="btn-group float-right">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> @lang('cms::app.save')</button>
-                            <a href="{{ route('admin.setting.email_templates') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> @lang('cms::app.cancel')</a>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> {{ trans('cms::app.save') }}</button>
+                            <a href="{{ route('admin.setting.email_templates') }}" class="btn btn-warning"><i class="fa fa-times-circle"></i> {{ trans('cms::app.cancel') }}</a>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="col-md-12">
 
                         <div class="form-group">
-                            <label class="col-form-label" for="content">@lang('cms::app.content')</label>
+                            <label class="col-form-label" for="content">{{ trans('cms::app.content') }}</label>
                             <textarea class="form-control" name="content" id="content" rows="6">{{ $model->code }}</textarea>
                         </div>
 
