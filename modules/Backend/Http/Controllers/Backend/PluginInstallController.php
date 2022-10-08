@@ -17,9 +17,9 @@ use Illuminate\Http\Request;
 use Juzaweb\Backend\Events\AfterUploadPlugin;
 use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\Backend\Support\PluginUploader;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\JuzawebApi;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
@@ -47,7 +47,7 @@ class PluginInstallController extends BackendController
         );
     }
 
-    public function getData(Request $request, JuzawebApi $api): object|array
+    public function getData(Request $request, JuzawebApiContract $api): object|array
     {
         if (!config('juzaweb.plugin.enable_upload')) {
             return (object) [];

@@ -10,20 +10,20 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Support\ArrayPagination;
-use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\CMS\Version;
 
 class ThemeController extends BackendController
 {
-    protected JuzawebApi $api;
+    protected JuzawebApiContract $api;
 
-    public function __construct(JuzawebApi $api)
+    public function __construct(JuzawebApiContract $api)
     {
         $this->api = $api;
     }

@@ -16,9 +16,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Events\AfterUploadTheme;
 use Juzaweb\Backend\Support\ThemeUploader;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\JuzawebApi;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
@@ -46,7 +46,7 @@ class ThemeInstallController extends BackendController
         );
     }
 
-    public function getData(Request $request, JuzawebApi $api): object|array
+    public function getData(Request $request, JuzawebApiContract $api): object|array
     {
         if (!config('juzaweb.theme.enable_upload')) {
             return (object) [];
