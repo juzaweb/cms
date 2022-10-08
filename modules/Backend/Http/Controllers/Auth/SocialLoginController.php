@@ -35,50 +35,10 @@ class SocialLoginController extends FrontendController
     {
         $authUser = $this->getProvider($method)->user();
 
-        $userToken = SocialToken::where('social_provider', '=', $method)
-            ->where('social_id', '=', $authUser->id)
-            ->first();
-
         $register = false;
         DB::beginTransaction();
         try {
-            if ($userToken) {
-                $user = $userToken->user;
-
-                $userToken->update(
-                    [
-                        'social_token' => $authUser->token,
-                        'social_refresh_token' => $authUser->refreshToken,
-                    ]
-                );
-            } else {
-                $register = true;
-
-                $password = Str::random();
-
-                $user = new User();
-
-                $user->fill(
-                    [
-                        'name' => $authUser->name,
-                        'email' => $authUser->email,
-                    ]
-                );
-
-                $user->setAttribute('password', Hash::make($password));
-
-                $user->save();
-
-                SocialToken::create(
-                    [
-                        'user_id' => $user->id,
-                        'social_id' => $authUser->id,
-                        'social_provider' => $method,
-                        'social_token' => $authUser->token,
-                        'social_refresh_token' => $authUser->refreshToken,
-                    ]
-                );
-            }
+            $user = $this->updateOrCreateUser($authUser, $method, $register);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -93,6 +53,66 @@ class SocialLoginController extends FrontendController
         Auth::login($user, true);
 
         return redirect()->to('/');
+    }
+
+    protected function updateOrCreateUser($authUser, string $method, &$register)
+    {
+        $userToken = SocialToken::where('social_provider', '=', $method)
+            ->where('social_id', '=', $authUser->id)
+            ->first();
+
+        if ($userToken) {
+            $userToken->update(
+                [
+                    'social_token' => $authUser->token,
+                    'social_refresh_token' => $authUser->refreshToken,
+                ]
+            );
+
+            return $userToken->user;
+        }
+
+        $password = Str::random();
+
+        $user = User::whereEmail($authUser->email)->first();
+        if ($user) {
+            $this->updateSocialToken($user, $authUser, $method);
+
+            return $user;
+        }
+
+        $register = true;
+
+        $user = new User();
+
+        $user->fill(
+            [
+                'name' => $authUser->name,
+                'email' => $authUser->email,
+            ]
+        );
+
+        $user->setAttribute('password', Hash::make($password));
+
+        $user->save();
+
+        $this->updateSocialToken($user, $authUser, $method);
+
+        return $user;
+    }
+
+    protected function updateSocialToken($user, $authUser, $method): SocialToken
+    {
+        return $user->socialTokens()->updateOrCreate(
+            [
+                'social_id' => $authUser->id,
+                'social_provider' => $method,
+            ],
+            [
+                'social_token' => $authUser->token,
+                'social_refresh_token' => $authUser->refreshToken,
+            ]
+        );
     }
 
     /**

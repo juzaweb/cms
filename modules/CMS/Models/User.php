@@ -20,10 +20,10 @@ use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Models\PasswordReset;
+use Juzaweb\Backend\Models\SocialToken;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Database\Factories\UserFactory;
 use Juzaweb\CMS\Traits\Permission\HasRoles;
-use Juzaweb\CMS\Traits\PostTypeModel;
 use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Juzaweb\CMS\Traits\ResourceModel;
 use Juzaweb\Network\Facades\Network;
@@ -159,6 +159,11 @@ class User extends Authenticatable
     public function metas(): HasMany
     {
         return $this->hasMany(UserMeta::class, 'user_id', 'id');
+    }
+
+    public function socialTokens(): HasMany
+    {
+        return $this->hasMany(SocialToken::class, 'user_id', 'id');
     }
 
     public function getMeta($key, $default = null): mixed
