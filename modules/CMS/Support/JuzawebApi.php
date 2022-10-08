@@ -22,7 +22,7 @@ class JuzawebApi implements JuzawebApiContract
 
     protected ConfigContract $config;
 
-    protected string $apiUrl = 'http://juzaweb.local/api';
+    protected string $apiUrl = 'https://juzaweb.com/api';
 
     protected ?string $accessToken = null;
 

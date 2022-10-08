@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\CMS\Abstracts\UpdateManager;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Updater\CmsUpdater;
 use Juzaweb\CMS\Support\Updater\PluginUpdater;
@@ -28,9 +28,9 @@ use Juzaweb\CMS\Version;
 
 class UpdateController extends BackendController
 {
-    protected JuzawebApi $api;
+    protected JuzawebApiContract $api;
 
-    public function __construct(JuzawebApi $api)
+    public function __construct(JuzawebApiContract $api)
     {
         $this->api = $api;
     }
