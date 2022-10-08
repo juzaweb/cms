@@ -1,13 +1,11 @@
 <?php
-
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSocialTokensTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -22,8 +20,8 @@ class CreateSocialTokensTable extends Migration
                 $table->unsignedBigInteger('user_id')->index();
                 $table->string('social_provider', 10)->index();
                 $table->string('social_id', 100)->index();
-                $table->string('social_token', 200);
-                $table->string('social_refresh_token', 200);
+                $table->string('social_token', 500);
+                $table->string('social_refresh_token', 500)->nullable();
                 $table->unique(['user_id', 'social_provider']);
 
                 $table->foreign('user_id')
@@ -43,4 +41,4 @@ class CreateSocialTokensTable extends Migration
     {
         Schema::dropIfExists('social_tokens');
     }
-}
+};

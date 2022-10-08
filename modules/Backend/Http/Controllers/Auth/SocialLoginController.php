@@ -4,11 +4,15 @@ namespace Juzaweb\Backend\Http\Controllers\Auth;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Juzaweb\Backend\Events\RegisterSuccessful;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Backend\Models\SocialToken;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\FacebookProvider;
 use Laravel\Socialite\Two\GoogleProvider;
 use Laravel\Socialite\Two\GithubProvider;
@@ -31,9 +35,11 @@ class SocialLoginController extends FrontendController
     {
         $authUser = $this->getProvider($method)->user();
 
-        $userToken = SocialToken::where('social_id', '=', $authUser->id)
+        $userToken = SocialToken::where('social_provider', '=', $method)
+            ->where('social_id', '=', $authUser->id)
             ->first();
 
+        $register = false;
         DB::beginTransaction();
         try {
             if ($userToken) {
@@ -46,17 +52,28 @@ class SocialLoginController extends FrontendController
                     ]
                 );
             } else {
-                $user = User::create(
+                $register = true;
+
+                $password = Str::random();
+
+                $user = new User();
+
+                $user->fill(
                     [
                         'name' => $authUser->name,
                         'email' => $authUser->email,
                     ]
                 );
 
+                $user->setAttribute('password', Hash::make($password));
+
+                $user->save();
+
                 SocialToken::create(
                     [
                         'user_id' => $user->id,
                         'social_id' => $authUser->id,
+                        'social_provider' => $method,
                         'social_token' => $authUser->token,
                         'social_refresh_token' => $authUser->refreshToken,
                     ]
@@ -69,7 +86,11 @@ class SocialLoginController extends FrontendController
             throw $e;
         }
 
-        Auth::login($user);
+        if ($register) {
+            event(new RegisterSuccessful($user));
+        }
+
+        Auth::login($user, true);
 
         return redirect()->to('/');
     }
@@ -78,12 +99,11 @@ class SocialLoginController extends FrontendController
      * Create an instance of the specified driver.
      *
      * @param string $method
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return AbstractProvider
      */
-    protected function getProvider($method)
+    protected function getProvider(string $method): AbstractProvider
     {
         $config = $this->getConfig($method);
-        $provider = null;
 
         switch ($method) {
             case 'facebook':
@@ -113,7 +133,7 @@ class SocialLoginController extends FrontendController
         );
     }
 
-    protected function getConfig($method)
+    protected function getConfig($method): array
     {
         $config = Arr::get(get_config('socialites', []), $method);
 
@@ -128,7 +148,7 @@ class SocialLoginController extends FrontendController
             'client_id' => $config['client_id'],
             'client_secret' => $config['client_secret'],
             'redirect' => route(
-                'auth.socialites.redirect',
+                'auth.socialites.callback',
                 [$method]
             ),
         ];

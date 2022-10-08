@@ -246,7 +246,7 @@ class HookAction implements HookActionContract
         $postTypeData = $this->getPostTypes($postType);
 
         if ($postTypeData->isEmpty()) {
-            throw new \Exception("Post type [{$postType}] does not exists.");
+            return;
         }
 
         $metas = array_merge($postTypeData->get('metas', []), $metas);
