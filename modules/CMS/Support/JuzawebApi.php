@@ -12,23 +12,27 @@ namespace Juzaweb\CMS\Support;
 
 use GuzzleHttp\Exception\ClientException;
 use Exception;
+use Illuminate\Support\Str;
 use Juzaweb\CMS\Contracts\ConfigContract;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 
-class JuzawebApi
+class JuzawebApi implements JuzawebApiContract
 {
     protected Curl $curl;
 
     protected ConfigContract $config;
 
-    protected string $apiUrl = 'https://juzaweb.com/api';
+    protected string $apiUrl = 'http://juzaweb.local/api';
 
     protected ?string $accessToken = null;
 
     protected ?string $expiresAt = null;
 
-    public function __construct(Curl $curl)
+    public function __construct(ConfigContract $config)
     {
-        $this->curl = $curl;
+        $this->curl = app(Curl::class);
+
+        $this->config = $config;
     }
 
     public function login(string $email, string $password): bool
@@ -42,29 +46,69 @@ class JuzawebApi
             ]
         );
 
-        if (empty($response->access_token)) {
+        if (empty($response->data->access_token)) {
             return false;
         }
 
-        $this->accessToken = $response->access_token;
-        $this->expiresAt = now()->addSeconds($response->expires_in)
-            ->format('Y-m-d H:i:s');
+        $this->setAccessToken($response->data->access_token);
+
+        $this->expiresAt = date('Y-m-d H:i:s', strtotime($response->data->expires_at));
         return true;
     }
 
-    public function get(string $uri, array $params = []): object|array
+    public function checkActivationCode(string $module, string $name, string $code): object
     {
-        return $this->callApi('GET', $uri, $params);
+        return $this->post(
+            "modules/{$module}/activation-code",
+            [
+                'name' => $name,
+                'code' => $code,
+                'domain' => request()->getHttpHost()
+            ]
+        );
     }
 
-    public function post(string $uri, array $params = []): object|array
+    public function getActivationCodes(string $module, string $name): object
     {
-        return $this->callApi('POST', $uri, $params);
+        return $this->get(
+            "modules/activation-codes",
+            [
+                'name' => $name,
+                'type' => Str::plural($module),
+                'domain' => request()->getHttpHost()
+            ]
+        );
     }
 
-    public function put(string $uri, array $params = []): object|array
+    public function setAccessToken(string $accessToken): void
     {
-        return $this->callApi('PUT', $uri, $params);
+        $this->config->setConfig('juzaweb_access_token', $accessToken);
+
+        $this->accessToken = $accessToken;
+    }
+
+    public function getAccessToken(): ?string
+    {
+        if (isset($this->accessToken)) {
+            return $this->accessToken;
+        }
+
+        return $this->config->getConfig('juzaweb_access_token');
+    }
+
+    public function get(string $uri, array $params = [], array $headers = []): object|array
+    {
+        return $this->callApi('GET', $uri, $params, $headers);
+    }
+
+    public function post(string $uri, array $params = [], array $headers = []): object|array
+    {
+        return $this->callApi('POST', $uri, $params, $headers);
+    }
+
+    public function put(string $uri, array $params = [], array $headers = []): object|array
+    {
+        return $this->callApi('PUT', $uri, $params, $headers);
     }
 
     public function getResponse($uri, $params = []): object|array
@@ -92,8 +136,8 @@ class JuzawebApi
     ): object|array {
         $url = $this->apiUrl.'/'.$uri;
 
-        if ($this->accessToken) {
-            $headers['Authorization'] = 'Bearer '.$this->accessToken;
+        if ($accessToken = $this->getAccessToken()) {
+            $headers['Authorization'] = "Bearer {$accessToken}";
         }
 
         $response = $this->callApiGetData(

@@ -86,7 +86,7 @@ return [
             'jobs' => ['path' => 'src/Jobs', 'generate' => false],
             'emails' => ['path' => 'src/Emails', 'generate' => false],
             'notifications' => ['path' => 'src/Notifications', 'generate' => false],
-            'resource' => ['path' => 'src/Transformers', 'generate' => false],
+            'resource' => ['path' => 'src/Http/Resources', 'generate' => false],
         ],
     ],
 

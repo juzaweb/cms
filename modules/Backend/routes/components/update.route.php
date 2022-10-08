@@ -24,3 +24,23 @@ Route::post('update/success', 'Backend\UpdateController@updateSuccess')
     ->name('admin.update.success');
 Route::post('update/{type}/{step}', 'Backend\UpdateController@updateStep')
     ->where('step', '[0-9]+')->name('admin.update.step');
+
+Route::post(
+    'module/login-juzaweb',
+    'Backend\Module\BuyModuleController@loginJuzaWeb'
+)
+    ->name('admin.module.login-juzaweb');
+
+Route::get(
+    'module/{module}/buy-modal',
+    'Backend\Module\BuyModuleController@buyModal'
+)
+    ->name('admin.module.buy-modal')
+    ->where('module', '[a-z]+');
+
+Route::post(
+    'module/{module}/activation-code',
+    'Backend\Module\BuyModuleController@activateByCode'
+)
+    ->name('admin.module.activation-code')
+    ->where('module', '[a-z]+');

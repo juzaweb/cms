@@ -53,11 +53,43 @@
     </template>
 
     <script>
+        function themeItemFormatter(index, row)
+        {
+            let installBtn = `<button class="btn btn-primary install-theme" data-theme="${row.name}"> ${juzaweb.lang.install}</button>`;
+            console.log(row.is_purchased);
+            if(row.is_paid && !row.is_purchased) {
+                installBtn = `<button class="btn btn-success buy-theme" data-theme="${row.name}"> ${juzaweb.lang.buy} (${row.price})</button>`;
+            }
+
+            return `<div class="col-md-4">
+                <div class="card">
+                    <div
+                        class="height-200 d-flex flex-column jw__g13__head"
+                        style="background-image: url('${row.screenshot}')">
+                    </div>
+
+                    <div class="card card-borderless mb-0">
+                        <div class="card-header border-bottom-0">
+                            <div class="d-flex">
+                                <div class="text-dark text-uppercase font-weight-bold mr-auto">
+                                    ${row.title}
+                                </div>
+                                <div class="text-gray-6">
+                                    ${installBtn}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
         var listView = new JuzawebListView({
             url: "{{ route('admin.theme.install.all') }}",
             list: "#theme-list",
             template: "theme-template",
             page_size: 9,
+            item_formatter: "themeItemFormatter"
         });
 
         Dropzone.autoDiscover = false;
