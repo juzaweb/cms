@@ -35,9 +35,9 @@ class InstallCommand extends Command
         }
 
         $this->info('Check file update');
-        
+
         $updater = $updater->find($name);
-        
+
         $check = $updater->checkForUpdate();
 
         if ($check) {

@@ -42,6 +42,7 @@ use Juzaweb\DevTool\Commands\Theme\DownloadTemplateCommand;
 use Juzaweb\DevTool\Commands\Theme\GenerateDataThemeCommand;
 use Juzaweb\DevTool\Commands\Theme\ThemeGeneratorCommand;
 use Juzaweb\DevTool\Commands\Theme\ThemeListCommand;
+use Juzaweb\DevTool\Commands\Theme\ThemeUpdateCommand;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -93,6 +94,7 @@ class ConsoleServiceProvider extends ServiceProvider
         DownloadStyleCommand::class,
         DownloadTemplateCommand::class,
         UpdateCommand::class,
+        ThemeUpdateCommand::class,
     ];
 
     /**
