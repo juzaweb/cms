@@ -228,6 +228,7 @@ class Plugin
 
         if (file_exists($apiRouter)) {
             $this->router->middleware('api')
+                ->prefix('api')
                 ->as('api.')
                 ->group($apiRouter);
         }
