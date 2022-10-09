@@ -282,19 +282,6 @@ class Plugin
     }
 
     /**
-     * Register the plugin event.
-     *
-     * @param string $event
-     */
-    protected function fireEvent(string $event): void
-    {
-        $this->app['events']->dispatch(
-            sprintf('plugin.%s.'.$event, $this->getLowerName()),
-            [$this]
-        );
-    }
-
-    /**
      * Get name in lower case.
      *
      * @return string
@@ -327,21 +314,6 @@ class Plugin
         //$this->registerFiles();
 
         $this->fireEvent('register');
-    }
-
-    protected function autoloadPSR4(): void
-    {
-        $loadmaps = $this->activator->getAutoloadInfo($this);
-        $loader = new ClassLoader();
-
-        foreach ($loadmaps as $loadmap) {
-            if (empty($loadmap['namespace']) || empty($loadmap['path'])) {
-                continue;
-            }
-
-            $loader->setPsr4($loadmap['namespace'], [$loadmap['path']]);
-        }
-        $loader->register(true);
     }
 
     /**
@@ -602,7 +574,7 @@ class Plugin
         );
     }
 
-    public function isVisible()
+    public function isVisible(): bool
     {
         return (bool) $this->getExtraJuzaweb('visible', true);
     }
@@ -615,6 +587,34 @@ class Plugin
     public function __toString()
     {
         return $this->getStudlyName();
+    }
+
+    /**
+     * Register the plugin event.
+     *
+     * @param string $event
+     */
+    protected function fireEvent(string $event): void
+    {
+        $this->app['events']->dispatch(
+            sprintf('plugin.%s.'.$event, $this->getLowerName()),
+            [$this]
+        );
+    }
+
+    protected function autoloadPSR4(): void
+    {
+        $loadmaps = $this->activator->getAutoloadInfo($this);
+        $loader = new ClassLoader();
+
+        foreach ($loadmaps as $loadmap) {
+            if (empty($loadmap['namespace']) || empty($loadmap['path'])) {
+                continue;
+            }
+
+            $loader->setPsr4($loadmap['namespace'], [$loadmap['path']]);
+        }
+        $loader->register(true);
     }
 
     protected function runMigrate(): void
