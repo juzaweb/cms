@@ -40,7 +40,6 @@ mix.browserSync({
         'public/**/*',
         'resources/views/**/*',
         'resources/lang/**/*',
-        'routes/**/*'
     ],
     proxy: process.env.APP_URL,
     notify: false,
