@@ -95,7 +95,7 @@ class UpdateCommand extends Command
     public function getOptions(): array
     {
         return [
-            ['force', 'f', InputOption::VALUE_NONE, 'Force the operation to run update.', false],
+            ['force', 'f', InputOption::VALUE_OPTIONAL, 'Force the operation to run update.', false],
         ];
     }
 }
