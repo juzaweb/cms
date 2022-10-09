@@ -153,6 +153,33 @@ class Resource extends Model
             ->delete();
     }
 
+    public function getMetas(): ?array
+    {
+        return $this->json_metas;
+    }
+
+    public function setMeta($key, $value): void
+    {
+        $metas = $this->getMetas();
+
+        $this->metas()->updateOrCreate(
+            [
+                'meta_key' => $key
+            ],
+            [
+                'meta_value' => is_array($value) ? json_encode($value) : $value
+            ]
+        );
+
+        $metas[$key] = $value;
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+    }
+
     public function getMeta($key, $default = null)
     {
         return Arr::get($this->json_metas, $key, $default);

@@ -176,13 +176,8 @@ return [
             'file'  => [
                 'max_size' => 50, // size in MB
                 'valid_mime' => [
-                    'image/jpeg',
-                    'image/pjpeg',
-                    'image/png',
-                    'image/gif',
-                    'image/svg+xml',
-                    'application/pdf',
-                    'text/xml',
+                    ...Facades::defaultFileMimetypes(),
+                    //
                 ],
             ],
             'image' => [

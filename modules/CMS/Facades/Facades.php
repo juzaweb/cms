@@ -105,6 +105,21 @@ class Facades
         ];
     }
 
+    public static function defaultFileMimetypes(): array
+    {
+        return [
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/gif',
+            'image/svg+xml',
+            'application/pdf',
+            'text/xml',
+            'video/mp4',
+            'audio/mp3'
+        ];
+    }
+
     public static function defaultSVGMimetypes(): array
     {
         return [
