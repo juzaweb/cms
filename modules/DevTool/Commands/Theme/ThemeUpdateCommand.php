@@ -14,6 +14,7 @@ use Illuminate\Console\Command;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Support\Updater\ThemeUpdater;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class ThemeUpdateCommand extends Command
 {
@@ -48,32 +49,42 @@ class ThemeUpdateCommand extends Command
 
         $check = $updater->checkForUpdate();
 
-        if ($check) {
-            $this->info('Fetch Data');
-            $updater->fetchDataUpdate();
+        $force = $this->option('force');
 
-            $this->info('Download File');
-            $updater->downloadUpdateFile();
-
-            $this->info('Unzip File');
-            $updater->unzipFile();
-
-            $this->info('Move to folder');
-            $updater->updateFileAndFolder();
-
-            $this->info('Update database');
-            $updater->finish();
-
-            $this->info('Plugin updated successful.');
-        } else {
-            $this->error("Plugin [{$name}] no new version available.");
+        if (empty($check) && !$force) {
+            $this->warn("Plugin [{$name}] no new version available.");
+            return;
         }
+
+        $this->info('Fetch Data');
+        $updater->fetchDataUpdate();
+
+        $this->info('Download File');
+        $updater->downloadUpdateFile();
+
+        $this->info('Unzip File');
+        $updater->unzipFile();
+
+        $this->info('Move to folder');
+        $updater->updateFileAndFolder();
+
+        $this->info('Update database');
+        $updater->finish();
+
+        $this->info('Plugin updated successful.');
     }
 
     protected function getArguments(): array
     {
         return [
             ['theme', InputArgument::OPTIONAL, 'The name of theme will be updated.'],
+        ];
+    }
+
+    public function getOptions(): array
+    {
+        return [
+            ['force', 'f', InputOption::VALUE_NONE, 'Force the operation to run update.', false],
         ];
     }
 }

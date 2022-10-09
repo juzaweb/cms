@@ -7,6 +7,7 @@ use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Updater\PluginUpdater;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class UpdateCommand extends Command
 {
@@ -35,7 +36,6 @@ class UpdateCommand extends Command
 
         if ($name) {
             $this->updateModule($name);
-
             return;
         }
 
@@ -55,26 +55,29 @@ class UpdateCommand extends Command
 
         $check = $updater->checkForUpdate();
 
-        if ($check) {
-            $this->info('Fetch Data');
-            $updater->fetchDataUpdate();
+        $force = $this->option('force');
 
-            $this->info('Download File');
-            $updater->downloadUpdateFile();
-
-            $this->info('Unzip File');
-            $updater->unzipFile();
-
-            $this->info('Move to folder');
-            $updater->updateFileAndFolder();
-
-            $this->info('Update database');
-            $updater->finish();
-
-            $this->info('Plugin updated successful.');
-        } else {
+        if (empty($check) && !$force) {
             $this->error("Plugin [{$name}] no new version available.");
+            return;
         }
+
+        $this->info('Fetch Data');
+        $updater->fetchDataUpdate();
+
+        $this->info('Download File');
+        $updater->downloadUpdateFile();
+
+        $this->info('Unzip File');
+        $updater->unzipFile();
+
+        $this->info('Move to folder');
+        $updater->updateFileAndFolder();
+
+        $this->info('Update database');
+        $updater->finish();
+
+        $this->info('Plugin updated successful.');
     }
 
     /**
@@ -86,6 +89,13 @@ class UpdateCommand extends Command
     {
         return [
             ['module', InputArgument::OPTIONAL, 'The name of plugin will be updated.'],
+        ];
+    }
+
+    public function getOptions(): array
+    {
+        return [
+            ['force', 'f', InputOption::VALUE_NONE, 'Force the operation to run update.', false],
         ];
     }
 }
