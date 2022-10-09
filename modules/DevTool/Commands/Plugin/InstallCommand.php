@@ -35,11 +35,14 @@ class InstallCommand extends Command
         }
 
         $this->info('Check file update');
+
+        $updater = $updater->find($name);
+
         $check = $updater->checkForUpdate();
 
         if ($check) {
             $this->info('Fetch Data');
-            $updater->fetchData();
+            $updater->fetchDataUpdate();
 
             $this->info('Download File');
             $updater->downloadUpdateFile();
@@ -64,7 +67,7 @@ class InstallCommand extends Command
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of plugin will be installed.'],

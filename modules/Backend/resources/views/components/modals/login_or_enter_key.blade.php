@@ -32,14 +32,14 @@
                         @endif
 
                         <div class="text-right">
-                            <a href="https://juzaweb.com/{{ $module }}/{{ $name }}" target="_blank" class="btn btn-success btn-sm">Buy {{ $moduleName }}</a>
+                            <a href="https://juzaweb.com/product/{{ $name }}-{{ $module }}" target="_blank" class="btn btn-success btn-sm">Buy {{ $moduleName }}</a>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="enter-key" role="tabpanel" aria-labelledby="enter-key-tab">
                         @include('cms::components.modals.tabs.enter_key_tab')
 
                         <div class="text-right">
-                            <a href="https://juzaweb.com/{{ $module }}/{{ $name }}" target="_blank" class="btn btn-success btn-sm">Buy {{ $moduleName }}</a>
+                            <a href="https://juzaweb.com/product/{{ $name }}-{{ $module }}" target="_blank" class="btn btn-success btn-sm">Buy {{ $moduleName }}</a>
                         </div>
                     </div>
                 </div>

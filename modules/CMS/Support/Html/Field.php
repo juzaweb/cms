@@ -128,6 +128,20 @@ class Field
         return view('cms::components.form_images', $options);
     }
 
+    public static function uploadUrl($label, $name, $options = [])
+    {
+        $options = static::mapOptions($label, $name, $options);
+
+        return view('cms::components.form_upload_url', $options);
+    }
+
+    public static function security($label, $name, $options = [])
+    {
+        $options = static::mapOptions($label, $name, $options);
+
+        return view('cms::components.form_security', $options);
+    }
+
     public static function fieldByType($data)
     {
         $type = Arr::get($data, 'type');
@@ -185,6 +199,16 @@ class Field
                 Arr::get($data, 'data', [])
             ),
             'checkbox' => static::checkbox(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'upload_url' => static::uploadUrl(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'security' => static::security(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])

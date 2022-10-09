@@ -34,10 +34,15 @@ use Juzaweb\DevTool\Commands\Plugin\RuleMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\SeedCommand;
 use Juzaweb\DevTool\Commands\Plugin\SeedMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\TestMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\UpdateCommand;
 use Juzaweb\DevTool\Commands\Resource\DatatableMakeCommand;
 use Juzaweb\DevTool\Commands\Resource\JuzawebResouceMakeCommand;
+use Juzaweb\DevTool\Commands\Theme\DownloadStyleCommand;
+use Juzaweb\DevTool\Commands\Theme\DownloadTemplateCommand;
+use Juzaweb\DevTool\Commands\Theme\GenerateDataThemeCommand;
 use Juzaweb\DevTool\Commands\Theme\ThemeGeneratorCommand;
 use Juzaweb\DevTool\Commands\Theme\ThemeListCommand;
+use Juzaweb\DevTool\Commands\Theme\ThemeUpdateCommand;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -85,9 +90,11 @@ class ConsoleServiceProvider extends ServiceProvider
         DatatableMakeCommand::class,
         JuzawebResouceMakeCommand::class,
         MakeAdminCommand::class,
-        \Juzaweb\DevTool\Commands\Theme\GenerateDataThemeCommand::class,
-        \Juzaweb\DevTool\Commands\Theme\DownloadStyleCommand::class,
-        \Juzaweb\DevTool\Commands\Theme\DownloadTemplateCommand::class
+        GenerateDataThemeCommand::class,
+        DownloadStyleCommand::class,
+        DownloadTemplateCommand::class,
+        UpdateCommand::class,
+        ThemeUpdateCommand::class,
     ];
 
     /**
