@@ -4,7 +4,6 @@ namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Juzaweb\CMS\Support\FileManager;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
@@ -30,9 +29,13 @@ class UploadController extends FileManagerController
 
             $save = $receiver->receive();
             if ($save->isFinished()) {
-                FileManager::addFile($save->getFile(), $this->getType(), $folderId);
+                FileManager::addFile(
+                    $save->getFile(),
+                    $this->getType(),
+                    $folderId
+                );
                 // event
-                return $this->response($this->errors);
+                return $this->responseUpload($this->errors);
             }
 
             $handler = $save->handler();
@@ -44,15 +47,15 @@ class UploadController extends FileManagerController
                 ]
             );
         } catch (\Exception $e) {
-            Log::error($e);
+            report($e);
             $this->errors[] = $e->getMessage();
-            return $this->response($this->errors);
+            return $this->responseUpload($this->errors);
         }
     }
 
-    protected function response($error_bag): JsonResponse
+    protected function responseUpload($error): JsonResponse
     {
-        $response = count($error_bag) > 0 ? $error_bag : parent::$success_response;
+        $response = count($error) > 0 ? $error : parent::$success_response;
 
         return response()->json($response);
     }

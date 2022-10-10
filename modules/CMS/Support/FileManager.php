@@ -299,6 +299,7 @@ class FileManager
         }
 
         $mimetype = $file->getMimeType();
+        $extension = $file->getClientOriginalExtension();
 
         $config = config('juzaweb.filemanager.types.' . $this->type);
 
@@ -312,16 +313,21 @@ class FileManager
         $file_size = $file->getSize();
 
         $validMimetypes = $config['valid_mime'] ?? [];
+        $extensions = $config['extensions'] ?? [];
+
         if (in_array($mimetype, $validMimetypes) === false) {
             $this->errors[] = $this->errorMessage('mime').$mimetype;
             return false;
         }
 
-        if ($max_size > 0) {
-            if ($file_size > ($max_size * 1024 * 1024)) {
-                $this->errors[] = $this->errorMessage('size');
-                return false;
-            }
+        if ($extensions && !in_array($extension, $extensions)) {
+            $this->errors[] = $this->errorMessage('extension').$mimetype;
+            return false;
+        }
+
+        if ($max_size > 0 && $file_size > ($max_size * 1024 * 1024)) {
+            $this->errors[] = $this->errorMessage('size');
+            return false;
         }
 
         return true;
@@ -352,8 +358,6 @@ class FileManager
 
     protected function removeUploadedFile(UploadedFile $file): void
     {
-        if (in_array($this->resource_type, ['url', 'path'])) {
-            unlink($file->getRealPath());
-        }
+        unlink($file->getRealPath());
     }
 }
