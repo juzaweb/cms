@@ -57,6 +57,6 @@ class UploadController extends FileManagerController
     {
         $response = count($error) > 0 ? $error : parent::$success_response;
 
-        return response()->json($response);
+        return response()->json($response, $error ? 422 : 200);
     }
 }
