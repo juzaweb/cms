@@ -150,6 +150,8 @@ class MediaController extends BackendController
             $query->where('type', '=', $sQuery->get('type'));
         }
 
+        $query->orderBy('id', 'DESC');
+
         return $query->paginate(40);
     }
 

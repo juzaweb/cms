@@ -49,15 +49,15 @@ class FolderController extends FileManagerController
         $parent_id = request()->input('working_dir');
 
         if ($folder_name === null || $folder_name == '') {
-            return $this->error('folder-name');
+            return $this->throwError('folder-name');
         }
 
         if (MediaFolder::folderExists($folder_name, $parent_id)) {
-            return $this->error('folder-exist');
+            return $this->throwError('folder-exist');
         }
 
         if (preg_match('/[^\w-]/i', $folder_name)) {
-            return $this->error('folder-alnum');
+            return $this->throwError('folder-alnum');
         }
 
         DB::beginTransaction();

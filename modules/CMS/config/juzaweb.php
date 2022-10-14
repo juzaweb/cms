@@ -179,11 +179,19 @@ return [
                     ...Facades::defaultFileMimetypes(),
                     //
                 ],
+                'extensions' => [
+                    ...Facades::defaultFileExtensions(),
+                    //
+                ],
             ],
             'image' => [
                 'max_size' => 5, // size in MB
                 'valid_mime' => [
                     ...Facades::defaultImageMimetypes(),
+                    //
+                ],
+                'extensions' => [
+                    ...Facades::defaultImageExtensions(),
                     //
                 ],
             ],

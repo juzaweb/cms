@@ -2,15 +2,16 @@
 
 namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Http\Controllers\Controller;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 
-class FileManagerController extends Controller
+class FileManagerController extends BackendController
 {
     protected static string $success_response = 'OK';
 
-    public function index(Request $request): \Illuminate\Contracts\View\View
+    public function index(Request $request): View
     {
         $type = $this->getType();
         $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
@@ -50,9 +51,9 @@ class FileManagerController extends Controller
         return $errors;
     }
 
-    public function error($error_type, $variables = [])
+    public function throwError($type, $variables = [])
     {
-        throw new \Exception(trans('cms::filemanager.error_' . $error_type, $variables));
+        throw new \Exception(trans('cms::filemanager.error_' . $type, $variables));
     }
 
     protected function getType(): string
