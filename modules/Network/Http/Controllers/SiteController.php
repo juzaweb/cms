@@ -12,12 +12,13 @@ namespace Juzaweb\Network\Http\Controllers;
 
 use Illuminate\Validation\Rule;
 use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Traits\ResourceController;
 use Juzaweb\Network\Contracts\SiteManagerContract;
 use Juzaweb\Network\Http\Datatables\SiteDatatable;
 use Juzaweb\Network\Models\Site;
 
-class SiteController extends Controller
+class SiteController extends BackendController
 {
     use ResourceController {
         getDataForForm as DataForForm;
