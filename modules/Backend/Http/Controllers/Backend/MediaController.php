@@ -17,8 +17,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Backend\Http\Resources\MediaFileCollection;
-use Juzaweb\Backend\Http\Resources\MediaFolderCollection;
+use Juzaweb\Backend\Events\AddFolderSuccess;
+use Juzaweb\Backend\Http\Requests\Media\AddFolderRequest;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\MediaFolder;
@@ -45,9 +45,7 @@ class MediaController extends BackendController
         }
 
         $query = collect(request()->query());
-
         $mediaFolders = $this->getDirectories($query, $folderId);
-
         $mediaFiles = $this->getFiles($query, $folderId);
 
         $maxSize = config("juzaweb.filemanager.types.{$type}.max_size");
@@ -71,41 +69,18 @@ class MediaController extends BackendController
         );
     }
 
-    public function addFolder(Request $request): JsonResponse|RedirectResponse
+    public function addFolder(AddFolderRequest $request): JsonResponse|RedirectResponse
     {
-        $request->validate(
-            [
-                'name' => 'required|string|max:150',
-                'folder_id' => 'nullable|exists:media_folders,id',
-            ],
-            [],
-            [
-                'name' => trans('cms::filemanager.folder-name'),
-                'folder_id' => trans('cms::filemanager.parent'),
-            ]
-        );
-
-        $name = $request->post('name');
-        $parentId = $request->post('folder_id');
-
-        if (MediaFolder::folderExists($name, $parentId)) {
-            return $this->error(
-                [
-                    'message' => trans('cms::filemanager.folder-exists'),
-                ]
-            );
-        }
-
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-            MediaFolder::create($request->all());
+            $folder = MediaFolder::create($request->all());
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
             throw $e;
         }
 
-        // event
+        event(new AddFolderSuccess($folder));
 
         return $this->success(
             trans('cms::filemanager.add-folder-successfully')

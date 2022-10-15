@@ -43,15 +43,11 @@
             <ul class="media-list">
                 @foreach($mediaFolders as $item)
                     <li class="media-item">
-                        <a href="javascript:void(0)">
+                        <a href="{{ route('admin.media.folder', [$item->id]) }}" title="{{ $item->name }}">
                             <div class="attachment-preview">
-                                <div class="thumbnail">
+                                <div class="thumbnail media-folder">
                                     <div class="centered">
-                                        @if($item->type == 'image')
-                                            <img src="{{ upload_url($item->path) }}" alt="{{ $item->name }}">
-                                        @else
-                                            <i class="fa {{ $item->icon }} fa-3x"></i>
-                                        @endif
+                                        <img src="{{ asset('jw-styles/juzaweb/images/folder.png') }}" alt="{{ $item->name }}">
                                     </div>
                                 </div>
                             </div>
@@ -105,8 +101,7 @@
                     this.on('success', function (file, response) {
                         if (response == 'OK') {
                             window.location = "";
-                        }
-                        else {
+                        } else {
                             this.defaultOptions.error(file, response.join('\n'));
                         }
                     });
