@@ -10,8 +10,10 @@
 
 namespace Juzaweb\Backend\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\Network\Traits\RootNetworkModel;
 
 /**
  * Juzaweb\Backend\Models\SocialToken
@@ -38,12 +40,14 @@ use Juzaweb\CMS\Models\User;
  */
 class SocialToken extends Model
 {
+    use RootNetworkModel;
+
     public $timestamps = false;
 
     protected $table = 'social_tokens';
     protected $guarded = ['id'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
