@@ -25,7 +25,7 @@ class TaxonomyController extends FrontendController
         $postType = $taxonomy->getPostType('model');
         $posts = $postType::selectFrontendBuilder()
             ->whereTaxonomy($taxonomy->id)
-            ->paginate();
+            ->paginate(get_config('posts_per_page', 12));
 
         $template = get_name_template_part(
             Str::singular($taxonomy->post_type),
