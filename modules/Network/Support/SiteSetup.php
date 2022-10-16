@@ -39,11 +39,11 @@ class SiteSetup implements SiteSetupContract
 
     public function setupConfig(object $site): void
     {
-        $this->config->set('juzaweb.plugin.enable_upload', false);
-
-        $this->config->set('juzaweb.theme.enable_upload', false);
-
         if ($site->id) {
+            $this->config->set('juzaweb.plugin.enable_upload', false);
+
+            $this->config->set('juzaweb.theme.enable_upload', false);
+
             $this->setCachePrefix("jw_site_{$site->id}");
         }
     }

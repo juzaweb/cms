@@ -20,7 +20,9 @@
                     <option value="">{{ trans('cms::app.bulk_actions') }}</option>
                     <option value="activate">{{ trans('cms::app.activate') }}</option>
                     <option value="deactivate">{{ trans('cms::app.deactivate') }}</option>
+                    @if(config('juzaweb.plugin.enable_upload'))
                     <option value="delete">{{ trans('cms::app.delete') }}</option>
+                    @endif
                 </select>
 
                 <button type="submit" class="btn btn-primary px-2 mb-2" id="apply-action">{{ trans('cms::app.apply') }}</button>
@@ -74,7 +76,7 @@
                 str += `<li class="list-inline-item"><a href="javascript:void(0)" class="jw-table-row action-item" data-id="${row.id}" data-action="activate">${juzaweb.lang.activate}</a></li>`;
             }
 
-            if (row.setting) {
+            if (row.setting && row.status == 'active') {
                 str += `<li class="list-inline-item"><a href="${juzaweb.adminUrl +'/'+row.setting}" class="jw-table-row">${juzaweb.lang.setting}</a></li>`;
             }
 
@@ -82,9 +84,9 @@
             if (row.update) {
                 str += `<li class="list-inline-item"><a href="javascript:void(0)" class="jw-table-row action-item" data-id="${row.id}" data-action="update">${juzaweb.lang.update}</a></li>`;
             }
-            @endif
 
             str += `<li class="list-inline-item"><a href="javascript:void(0)" class="jw-table-row text-danger action-item" data-id="${row.id}" data-action="delete">${juzaweb.lang.delete}</a></li>`;
+            @endif
             str += `</ul>`;
             return str;
         }
