@@ -61,7 +61,7 @@ class SiteDatatable extends DataTable
 
         $rows['view'] = [
             'label' => trans('cms::app.view_site'),
-            'url' => "//{$row->domain}.{$networkDomain}",
+            'url' => "http://{$row->domain}.{$networkDomain}",
             'target' => '_blank',
         ];
 

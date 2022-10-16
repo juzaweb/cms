@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Network\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
 use Juzaweb\Network\Traits\RootNetworkModel;
@@ -60,9 +61,19 @@ class Site extends Model implements RootNetworkModelInterface
         ];
     }
 
-    public function domainMappings()
+    public function domainMappings(): HasMany
     {
         return $this->hasMany(DomainMapping::class, 'site_id', 'id');
+    }
+
+    public function getFullDomain(): string
+    {
+        return $this->domain .'.'. config('network.domain');
+    }
+
+    public function getSiteUrl(string $path = null): string
+    {
+        return 'http://' . $this->getFullDomain() . '/'. ltrim($path, '/');
     }
 
     public function getFieldName(): string

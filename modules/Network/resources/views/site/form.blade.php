@@ -31,12 +31,17 @@
                         <tbody>
                         @foreach($mappingDomains as $index => $mappingDomain)
                             <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $mappingDomain->domain }}</td>
+                                <td class="w-5">{{ $index + 1 }}</td>
+                                <td>
+                                    <a target="_blank" href="http://{{ $mappingDomain->domain }}">
+                                        {{ $mappingDomain->domain }}
+                                    </a>
+                                </td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)"
                                        class="text-danger delete-mapping-domain"
                                        data-id="{{ $mappingDomain->id }}"
+                                       title="{{ __('Delete domain') }}"
                                     >
                                         <i class="fa fa-trash"></i>
                                     </a>

@@ -27,8 +27,8 @@ class NetworkSite implements NetworkSiteContract
     public function getLoginUrl(User $user): string
     {
         $random = Str::random(5);
-        $loginUrl = '//' . $this->site->domain .'.'. config('network.domain').'/'. config('juzaweb.admin_prefix');
-        $string = $loginUrl .'/'. $random;
+        $loginUrl = $this->getUrl(config('juzaweb.admin_prefix'));
+        $string = "{$loginUrl}/{$random}";
         $token = generate_token($string);
         $user = encrypt(json_encode(['id' => $user->id]));
 
@@ -39,5 +39,10 @@ class NetworkSite implements NetworkSiteContract
         ];
 
         return $loginUrl.'/token-login?' . http_build_query($data);
+    }
+
+    public function getUrl(string $path = null): string
+    {
+        return $this->site->getSiteUrl($path);
     }
 }
