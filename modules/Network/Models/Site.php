@@ -60,6 +60,11 @@ class Site extends Model implements RootNetworkModelInterface
         ];
     }
 
+    public function domainMappings()
+    {
+        return $this->hasMany(DomainMapping::class, 'site_id', 'id');
+    }
+
     public function getFieldName(): string
     {
         return 'domain';

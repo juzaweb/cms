@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Network\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Traits\ResourceController;
 use Juzaweb\Network\Contracts\SiteManagerContract;
 use Juzaweb\Network\Http\Datatables\SiteDatatable;
+use Juzaweb\Network\Http\Requests\AddMappingDomainRequest;
 use Juzaweb\Network\Models\Site;
 
 class SiteController extends BackendController
@@ -31,22 +33,37 @@ class SiteController extends BackendController
 
     protected string $viewPrefix = 'network::site';
 
-    public function __construct(SiteManagerContract $siteManager)
-    {
+    public function __construct(
+        SiteManagerContract $siteManager
+    ) {
         $this->siteManager = $siteManager;
     }
 
     public function loginToken(Request $request): RedirectResponse
     {
-        $user = app(SiteManagerContract::class)->validateLoginUrl($request->all());
+        $user = $this->siteManager->validateLoginUrl($request->all());
 
         if (empty($user)) {
-            abort(404);
+            abort(403, 'Login Token invalid');
         }
 
         Auth::login($user);
 
         return redirect()->route('admin.dashboard');
+    }
+
+    public function addMappingDomain(AddMappingDomainRequest $request, $id): JsonResponse|RedirectResponse
+    {
+        $site = Site::findOrFail($id);
+
+        $site->domainMappings()->create($request->all());
+
+        return $this->success(
+            [
+                'message' => __('Add Mapping Domain success'),
+                'redirect' => route('admin.network.sites.edit', [$id])
+            ]
+        );
     }
 
     protected function getDataTable(...$params): DataTable
@@ -88,6 +105,7 @@ class SiteController extends BackendController
     {
         $data = $this->DataForForm($model, ...$params);
         $data['statuses'] = Site::getAllStatus();
+        $data['mappingMomains'] = $model->domainMappings()->get();
         return $data;
     }
 

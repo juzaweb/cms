@@ -15,6 +15,8 @@ use Juzaweb\Network\Http\Controllers\ThemeController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('admin.network.dashboard');
 
+Route::post('sites/{id}/add-mapping-domain', [SiteController::class, 'addMappingDomain'])
+    ->name('network.sites.add-mapping-domain');
 Route::jwResource('sites', SiteController::class, ['name' => 'network.sites']);
 
 Route::jwResource('themes', ThemeController::class, ['name' => 'network.themes']);
