@@ -65,7 +65,7 @@ class SiteManager implements SiteManagerContract
         return $this->find($site)->getLoginUrl($user);
     }
 
-    public function validateLoginUrl(array $data): bool|User
+    public function validateLoginUrl(array $data): null|bool|User
     {
         $token = Arr::get($data, 'token');
         $auth = Arr::get($data, 'auth');
@@ -79,7 +79,7 @@ class SiteManager implements SiteManagerContract
             return false;
         }
 
-        return User::findOrFail($user->id);
+        return User::find($user->id);
     }
 
     public function getCreater(): SiteCreaterContract

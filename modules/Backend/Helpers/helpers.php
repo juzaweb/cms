@@ -110,8 +110,7 @@ if (!function_exists('generate_token')) {
         $month = date('Y-m');
         $ip = get_client_ip();
         $key = 'ADA&$sdss$#&%^23vx' . config('app.key');
-
-        return md5($key . $month . $key) . md5($key . $ip . $string);
+        return sha1($key . $month . $key . $ip . $string);
     }
 }
 
