@@ -10,9 +10,12 @@
 
 namespace Juzaweb\Network\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Traits\ResourceController;
 use Juzaweb\Network\Contracts\SiteManagerContract;
 use Juzaweb\Network\Http\Datatables\SiteDatatable;
@@ -31,6 +34,19 @@ class SiteController extends BackendController
     public function __construct(SiteManagerContract $siteManager)
     {
         $this->siteManager = $siteManager;
+    }
+
+    public function loginToken(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $user = app(SiteManagerContract::class)->validateLoginUrl($request->all());
+
+        if (empty($user)) {
+            abort(404);
+        }
+
+        Auth::loginUsingId($user->id);
+
+        return redirect()->route('admin.dashboard');
     }
 
     protected function getDataTable(...$params): DataTable

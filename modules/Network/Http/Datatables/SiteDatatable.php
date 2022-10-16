@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\Network\Contracts\SiteManagerContract;
 use Juzaweb\Network\Models\Site;
 
 class SiteDatatable extends DataTable
@@ -23,7 +24,7 @@ class SiteDatatable extends DataTable
      *
      * @return array
      */
-    public function columns()
+    public function columns(): array
     {
         return [
             'domain' => [
@@ -49,17 +50,8 @@ class SiteDatatable extends DataTable
     public function rowAction($row): array
     {
         $rows = parent::rowAction($row);
-        $loginUrl = 'http://' . $row->domain;
-        $random = Str::random(5);
-        $string = $loginUrl .'/'. $random;
-        $token = generate_token($string);
-
-        $data = [
-            'token' => $token,
-            'auth' => urldecode($string)
-        ];
-
-        $loginUrl .= '/'. config('juzaweb.admin_prefix') .'/token-login?' . http_build_query($data);
+        $networkDomain = config('network.domain');
+        $loginUrl = app(SiteManagerContract::class)->getLoginUrl($row);
 
         $rows['login'] = [
             'label' => 'Login',
@@ -69,7 +61,7 @@ class SiteDatatable extends DataTable
 
         $rows['view'] = [
             'label' => trans('cms::app.view_site'),
-            'url' => 'http://' . $row->domain,
+            'url' => "//{$row->domain}.{$networkDomain}",
             'target' => '_blank',
         ];
 
