@@ -40,6 +40,11 @@
                             'value' => $data[$social]['client_secret'] ?? ''
                         ]) }}
 
+                        {{ Field::text(trans('cms::app.callback_url'), "socialites[{$social}][redirect_url]", [
+                            'disabled' => true,
+                            'value' => route('auth.socialites.callback', [$social])
+                        ]) }}
+
                         {{ Field::text(trans('cms::app.redirect_url'), "socialites[{$social}][redirect_url]", [
                             'disabled' => true,
                             'value' => route('auth.socialites.redirect', [$social])

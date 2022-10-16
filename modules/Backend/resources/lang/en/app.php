@@ -436,6 +436,7 @@ return [
     'client_id' => 'Client id',
     'client_secret' => 'Client secret',
     'redirect_url' => 'Redirect url',
+    'callback_url' => 'Callback url',
     'social_login' => 'Social Login',
     'quick_edit' => 'Quick edit',
     'settings' => 'Settings',
