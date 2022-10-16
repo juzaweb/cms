@@ -4,7 +4,7 @@
     </label>
 
     <input
-        type="text"
+        type="{{ $type ?? 'text' }}"
         name="{{ $name }}"
         class="form-control {{ $class ?? '' }}"
         id="{{ $id ?? $name }}"

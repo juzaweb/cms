@@ -17,7 +17,11 @@
                     <button class="btn btn-success update-theme" data-theme="{{ $theme->name }}"> {{ trans('cms::app.update') }}</button>
                     @endif
 
-                    <a href="javascript:void(0)" class="delete-theme text-danger" data-theme="{{ $theme->name }}">{{ trans('cms::app.delete') }}</a>
+                    @if(config('juzaweb.theme.enable_upload'))
+                        <a href="javascript:void(0)" class="delete-theme text-danger" data-theme="{{ $theme->name }}">
+                            {{ trans('cms::app.delete') }}
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

@@ -173,7 +173,7 @@ return [
          * Default: file, image
          */
         'types' => [
-            'file'  => [
+            'file' => [
                 'max_size' => 50, // size in MB
                 'valid_mime' => [
                     ...Facades::defaultFileMimetypes(),

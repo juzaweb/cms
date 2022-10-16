@@ -17,6 +17,7 @@ class RouteServiceProvider extends ServiceProvider
 {
     public function map()
     {
+        $this->mapWebRoutes();
         $this->mapMasterAdminRoutes();
     }
 
@@ -25,5 +26,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('master_admin')
             ->prefix(config('juzaweb.admin_prefix').'/network')
             ->group(__DIR__ . '/../routes/master_admin.php');
+    }
+
+    protected function mapWebRoutes()
+    {
+        Route::middleware('web')
+            ->group(__DIR__ . '/../routes/web.php');
     }
 }

@@ -94,8 +94,6 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    protected static bool $flushCacheOnUpdate = true;
-
     public const STATUS_ACTIVE = 'active';
     public const STATUS_VERIFICATION = 'verification';
     public const STATUS_BANNED = 'banned';

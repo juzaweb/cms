@@ -32,12 +32,17 @@
                             'checked' => $data[$social]['enable'] ?? false
                         ]) }}
 
-                        {{ Field::text(trans('cms::app.client_id'), "socialites[{$social}][client_id]", [
+                        {{ Field::security(trans('cms::app.client_id'), "socialites[{$social}][client_id]", [
                             'value' => $data[$social]['client_id'] ?? ''
                         ]) }}
 
-                        {{ Field::text(trans('cms::app.client_secret'), "socialites[{$social}][client_secret]", [
+                        {{ Field::security(trans('cms::app.client_secret'), "socialites[{$social}][client_secret]", [
                             'value' => $data[$social]['client_secret'] ?? ''
+                        ]) }}
+
+                        {{ Field::text(trans('cms::app.callback_url'), "socialites[{$social}][redirect_url]", [
+                            'disabled' => true,
+                            'value' => route('auth.socialites.callback', [$social])
                         ]) }}
 
                         {{ Field::text(trans('cms::app.redirect_url'), "socialites[{$social}][redirect_url]", [

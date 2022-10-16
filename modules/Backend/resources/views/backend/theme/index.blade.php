@@ -44,7 +44,7 @@
 
     <script>
         setTimeout(function () {
-            var listView = new JuzawebListView({
+            const listView = new JuzawebListView({
                 url: "{{ route('admin.themes.get-data') }}",
                 list: "#theme-list",
                 template: "theme-template",
@@ -80,12 +80,10 @@
                 }
 
                 window.location = "";
-
                 return false;
             }).fail(function(response) {
                 btn.find('i').attr('class', icon);
                 btn.prop("disabled", false);
-
                 show_message(response);
                 return false;
             });

@@ -16,7 +16,7 @@ return new class extends Migration {
             'network_domain_mappings',
             function (Blueprint $table) {
                 $table->id();
-                $table->string('domain', 50)->unique();
+                $table->string('domain', 100)->unique();
                 $table->unsignedBigInteger('site_id');
                 $table->timestamps();
 

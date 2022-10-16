@@ -28,7 +28,9 @@ trait QueryCacheable
      */
     public static function bootQueryCacheable()
     {
-        if (isset(static::$flushCacheOnUpdate) && static::$flushCacheOnUpdate) {
+        $flushCacheOnUpdate = !isset(static::$flushCacheOnUpdate) || static::$flushCacheOnUpdate;
+
+        if ($flushCacheOnUpdate) {
             static::observe(
                 static::getFlushQueryCacheObserver()
             );

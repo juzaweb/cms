@@ -21,7 +21,9 @@ use Juzaweb\Network\Contracts\SiteCreaterContract;
 use Juzaweb\Network\Contracts\SiteManagerContract;
 use Juzaweb\Network\Contracts\SiteSetupContract;
 use Juzaweb\Network\Facades\Network;
+use Juzaweb\Network\Models\Site;
 use Juzaweb\Network\NetworkAction;
+use Juzaweb\Network\Observers\SiteModelObserver;
 use Juzaweb\Network\Support\NetworkRegistion;
 use Juzaweb\Network\Support\SiteCreater;
 use Juzaweb\Network\Support\SiteManager;
@@ -35,6 +37,8 @@ class NetworkServiceProvider extends ServiceProvider
 
         $this->commands([MakeSiteCommand::class, ArtisanCommand::class]);
 
+        Site::observe([SiteModelObserver::class]);
+
         ActionRegister::register(NetworkAction::class);
     }
 
@@ -42,7 +46,7 @@ class NetworkServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
 
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
+        //$this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'network');
 
