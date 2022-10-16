@@ -5,4 +5,4 @@ use Juzaweb\Network\Http\Controllers\SiteController;
 Route::get(
     'admin-cp/token-login',
     [SiteController::class, 'loginToken']
-)->name('site.create');
+)->name('network.sites.login-with-token');

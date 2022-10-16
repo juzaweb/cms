@@ -31,17 +31,18 @@ class SiteController extends BackendController
 
     protected string $viewPrefix = 'network::site';
 
-    public function __construct(SiteManagerContract $siteManager)
-    {
+    public function __construct(
+        SiteManagerContract $siteManager
+    ) {
         $this->siteManager = $siteManager;
     }
 
     public function loginToken(Request $request): RedirectResponse
     {
-        $user = app(SiteManagerContract::class)->validateLoginUrl($request->all());
+        $user = $this->siteManager->validateLoginUrl($request->all());
 
         if (empty($user)) {
-            abort(404);
+            abort(403, 'Login Token invalid');
         }
 
         Auth::login($user);
@@ -88,6 +89,7 @@ class SiteController extends BackendController
     {
         $data = $this->DataForForm($model, ...$params);
         $data['statuses'] = Site::getAllStatus();
+        $data['mappingDomains'] = $model->domainMappings()->get();
         return $data;
     }
 
