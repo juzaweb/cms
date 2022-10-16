@@ -50,7 +50,9 @@ $.fn.filemanager = function(type, options) {
 };
 
 $(document).ready(function () {
-    $('body').on('click', '.file-manager', function () {
+    const bodyElement = $('body');
+
+    bodyElement.on('click', '.file-manager', function () {
         let type = $(this).data('type') || 'image';
         let input = $(this).data('input');
         let preview = $(this).data('preview');
@@ -80,7 +82,7 @@ $(document).ready(function () {
         });
     });
 
-    $('body').on('click', '.form-image', function () {
+    bodyElement.on('click', '.form-image', function () {
         let item = $(this);
         let targetInput = item.find('.input-path');
         let targetPreview = item.find('.dropify-render');
@@ -100,7 +102,7 @@ $(document).ready(function () {
         });
     });
 
-    $('body').on('click', '.form-image .image-clear', function () {
+    bodyElement.on('click', '.form-image .image-clear', function () {
         let item = $(this).closest('.form-image');
         let targetInput = item.find('.input-path');
         let targetPreview = item.find('.dropify-render');
@@ -112,7 +114,7 @@ $(document).ready(function () {
         item.find('.image-hidden').hide();
     });
 
-    $('body').on('click', '.add-image-images', function () {
+    bodyElement.on('click', '.add-image-images', function () {
         let prefix = juzaweb.adminPrefix + '/file-manager';
         let item = $(this).closest('.form-images');
         let inputName = item.find('.input-name').val();
@@ -137,7 +139,7 @@ $(document).ready(function () {
         });
     });
 
-    $('body').on('click', '.form-images .remove-image-item', function () {
+    bodyElement.on('click', '.form-images .remove-image-item', function () {
         $(this).closest('.image-item').remove();
     });
 });

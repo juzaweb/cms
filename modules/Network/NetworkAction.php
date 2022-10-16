@@ -18,7 +18,7 @@ class NetworkAction extends Action
 {
     public function handle()
     {
-        $this->addAction(Action::BACKEND_INIT, [$this, 'registerMenus']);
+        //$this->addAction(Action::BACKEND_INIT, [$this, 'registerMenus']);
 
         if (Network::isRootSite()) {
             $this->addAction('backend.menu_top', [$this, 'addMenuAdmin']);

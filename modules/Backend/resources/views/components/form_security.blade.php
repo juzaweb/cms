@@ -1,7 +1,9 @@
 <div class="form-group">
     @php
         $originValue = $value ?? $default ?? '';
-        $value = substr($originValue, 0, 3).str_repeat('*',strlen($originValue)-7).substr($originValue, -4);
+        if ($originValue) {
+            $value = substr($originValue, 0, 3).str_repeat('*',strlen($originValue)-7).substr($originValue, -4);
+        }
     @endphp
     <label class="col-form-label" for="{{ $id  ?? $name }}">
         {{ $label ?? $name }} @if($required ?? false) <abbr>*</abbr> @endif
