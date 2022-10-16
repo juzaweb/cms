@@ -14,6 +14,7 @@ use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
+use Juzaweb\CMS\Facades\Config as DbConfig;
 use Juzaweb\Network\Contracts\SiteCreaterContract;
 use Juzaweb\Network\Contracts\SiteSetupContract;
 use Juzaweb\Network\Models\Site;
@@ -50,6 +51,8 @@ class SiteCreater implements SiteCreaterContract
 
         $this->setupSite($site);
 
+        $this->makeDefaultConfigs();
+
         return $site;
     }
 
@@ -64,6 +67,19 @@ class SiteCreater implements SiteCreaterContract
         if (in_array("Error", str_split($artisanOutput, 5))) {
             throw new \Exception($artisanOutput);
         }
+    }
+
+    protected function makeDefaultConfigs(): void
+    {
+        DbConfig::setConfig('title', 'JuzaCMS - Laravel CMS for Your Project');
+        DbConfig::setConfig(
+            'description',
+            'Juzacms is a Content Management System (CMS)'
+            . ' and web platform whose sole purpose is to make your development workflow simple again.'
+        );
+        DbConfig::setConfig('author_name', 'Juzaweb Team');
+        DbConfig::setConfig('user_registration', 1);
+        DbConfig::setConfig('user_verification', 0);
     }
 
     protected function parseDataSite(array $args): array

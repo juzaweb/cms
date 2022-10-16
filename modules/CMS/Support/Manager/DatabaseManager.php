@@ -7,10 +7,7 @@ use Illuminate\Database\SQLiteConnection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Juzaweb\CMS\Facades\Config as DbConfig;
-use Juzaweb\Backend\Models\EmailTemplate;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseManager
@@ -49,7 +46,7 @@ class DatabaseManager
     /**
      * Run the migration and call the seeder.
      *
-     * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
+     * @param BufferedOutput $outputLog
      * @return array
      */
     private function migrate(BufferedOutput $outputLog): array
@@ -68,7 +65,7 @@ class DatabaseManager
      *
      * @param string $message
      * @param string $status
-     * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
+     * @param BufferedOutput $outputLog
      * @return array
      */
     private function response($message, $status, BufferedOutput $outputLog): array
@@ -83,7 +80,7 @@ class DatabaseManager
     /**
      * Check database type. If SQLite, then create the database file.
      *
-     * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
+     * @param BufferedOutput $outputLog
      */
     private function sqlite(BufferedOutput $outputLog): void
     {
