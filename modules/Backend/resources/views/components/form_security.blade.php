@@ -2,7 +2,11 @@
     @php
         $originValue = $value ?? $default ?? '';
         if ($originValue) {
-            $value = substr($originValue, 0, 3).str_repeat('*',strlen($originValue)-7).substr($originValue, -4);
+            if (strlen($originValue) < 7) {
+                $value = str_repeat('*', strlen($originValue));
+            } else {
+                $value = str_repeat('*', strlen($originValue) - 4).substr($originValue, -4);
+            }
         }
     @endphp
     <label class="col-form-label" for="{{ $id  ?? $name }}">

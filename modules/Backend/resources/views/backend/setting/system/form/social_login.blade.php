@@ -32,11 +32,11 @@
                             'checked' => $data[$social]['enable'] ?? false
                         ]) }}
 
-                        {{ Field::text(trans('cms::app.client_id'), "socialites[{$social}][client_id]", [
+                        {{ Field::security(trans('cms::app.client_id'), "socialites[{$social}][client_id]", [
                             'value' => $data[$social]['client_id'] ?? ''
                         ]) }}
 
-                        {{ Field::text(trans('cms::app.client_secret'), "socialites[{$social}][client_secret]", [
+                        {{ Field::security(trans('cms::app.client_secret'), "socialites[{$social}][client_secret]", [
                             'value' => $data[$social]['client_secret'] ?? ''
                         ]) }}
 

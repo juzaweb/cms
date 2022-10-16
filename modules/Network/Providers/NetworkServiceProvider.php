@@ -38,7 +38,7 @@ class NetworkServiceProvider extends ServiceProvider
         $this->commands([MakeSiteCommand::class, ArtisanCommand::class]);
 
         Site::observe([SiteModelObserver::class]);
-        
+
         ActionRegister::register(NetworkAction::class);
     }
 
