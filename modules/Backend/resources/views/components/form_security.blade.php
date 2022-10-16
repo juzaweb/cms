@@ -9,18 +9,27 @@
         {{ $label ?? $name }} @if($required ?? false) <abbr>*</abbr> @endif
     </label>
 
-    <input
-        type="text"
-        name="{{ $name }}"
-        class="form-control {{ $class ?? '' }}"
-        id="{{ $id ?? $name }}"
-        autocomplete="off"
-        placeholder="{{ $value }}"
-        @if($disabled ?? false) disabled @endif
-        @if($required ?? false) required @endif
-        @if ($readonly ?? false) readonly @endif
-    @foreach ($data ?? [] as $key => $val)
-        {{ 'data-' . $key. '="'. $val .'"' }}
-        @endforeach
-    >
+    <div class="input-group">
+        <input
+            type="text"
+            name="{{ $name }}"
+            class="form-control {{ $class ?? '' }}"
+            id="{{ $id ?? $name }}"
+            autocomplete="off"
+            value="{{ $value }}"
+            @if($value) disabled @endif
+            @if($disabled ?? false) disabled @endif
+            @if($required ?? false) required @endif
+            @if ($readonly ?? false) readonly @endif
+        @foreach ($data ?? [] as $key => $val)
+            {{ 'data-' . $key. '="'. $val .'"' }}
+            @endforeach
+        >
+
+        @if($value)
+            <div class="input-group-append">
+                <a href="javascript:void(0)" class="input-group-text" onclick="$(this).closest('.input-group').find('.form-control').prop('disabled', false).val(null).focus()"><i class="fa fa-edit"></i></a>
+            </div>
+        @endif
+    </div>
 </div>
