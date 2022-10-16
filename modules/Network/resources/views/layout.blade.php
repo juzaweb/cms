@@ -98,6 +98,8 @@
                         <div class="alert alert-{{ session()->get('status') == 'error' ? 'danger' : 'success' }} jw-message">{{ session()->get('message') }}</div>
                     @endif
 
+                    <div id="jquery-message"></div>
+
                     @yield('content')
 
                 </div>

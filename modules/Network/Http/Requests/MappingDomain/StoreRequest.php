@@ -8,13 +8,13 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Network\Http\Requests;
+namespace Juzaweb\Network\Http\Requests\MappingDomain;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Juzaweb\Network\Models\DomainMapping;
 
-class AddMappingDomainRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     public function rules(): array
     {

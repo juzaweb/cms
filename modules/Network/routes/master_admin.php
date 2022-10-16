@@ -8,6 +8,7 @@
  * @license    MIT
  */
 
+use Juzaweb\Network\Http\Controllers\MappingDomainController;
 use Juzaweb\Network\Http\Controllers\PluginController;
 use Juzaweb\Network\Http\Controllers\DashboardController;
 use Juzaweb\Network\Http\Controllers\SiteController;
@@ -15,8 +16,10 @@ use Juzaweb\Network\Http\Controllers\ThemeController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('admin.network.dashboard');
 
-Route::post('sites/{id}/add-mapping-domain', [SiteController::class, 'addMappingDomain'])
-    ->name('network.sites.add-mapping-domain');
+Route::post('sites/{id}/add-mapping-domain', [MappingDomainController::class, 'store'])
+    ->name('network.mapping-domains.store');
+Route::delete('sites/{site_id}/{id}/destroy', [MappingDomainController::class, 'destroy'])
+    ->name('network.mapping-domains.destroy');
 Route::jwResource('sites', SiteController::class, ['name' => 'network.sites']);
 
 Route::jwResource('themes', ThemeController::class, ['name' => 'network.themes']);
