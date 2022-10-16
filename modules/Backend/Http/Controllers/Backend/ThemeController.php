@@ -22,10 +22,14 @@ use Juzaweb\CMS\Version;
 class ThemeController extends BackendController
 {
     protected JuzawebApiContract $api;
+    protected BackendMessageContract $message;
 
-    public function __construct(JuzawebApiContract $api)
-    {
+    public function __construct(
+        JuzawebApiContract $api,
+        BackendMessageContract $message
+    ) {
         $this->api = $api;
+        $this->message = $message;
     }
 
     public function index(): View
@@ -110,9 +114,7 @@ class ThemeController extends BackendController
         DB::beginTransaction();
         try {
             $theme->activate();
-
             $this->addRequireThemeActive($theme);
-
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -129,6 +131,10 @@ class ThemeController extends BackendController
 
     public function bulkActions(Request $request): JsonResponse|RedirectResponse
     {
+        if (!config('juzaweb.theme.enable_upload')) {
+            abort(403);
+        }
+
         $action = $request->post('action');
         $ids = $request->post('ids', []);
 
@@ -164,14 +170,14 @@ class ThemeController extends BackendController
         return $this->success(
             [
                 'message' => trans('cms::app.successfully'),
-                'redirect' => route('admin.plugin'),
+                'redirect' => route('admin.themes'),
             ]
         );
     }
 
     protected function addRequireThemeActive(\Juzaweb\CMS\Support\Theme $theme): void
     {
-        app(BackendMessageContract::class)->deleteGroup('require_plugins');
+        $this->message->deleteGroup('require_plugins');
 
         if ($require = $theme->getPluginRequires()) {
             $plugins = Plugin::all();
