@@ -443,7 +443,7 @@ trait RegisterHookAction
         $this->globalData->set('page_blocks.' . $key, new Collection($args));
     }
 
-    public function registerFrontendAjax($key, $args = [])
+    public function registerFrontendAjax($key, $args = []): void
     {
         $defaults = [
             'auth' => false,
@@ -459,7 +459,7 @@ trait RegisterHookAction
         $this->globalData->set('frontend_ajaxs.' . $key, new Collection($args));
     }
 
-    public function registerThemeTemplate($key, $args = [])
+    public function registerThemeTemplate($key, $args = []): void
     {
         $defaults = [
             'key' => $key,

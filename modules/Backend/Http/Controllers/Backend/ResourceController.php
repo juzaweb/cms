@@ -79,12 +79,10 @@ class ResourceController extends BackendController
             $attributes['parent_id'] = $params[2] ?? null;
         }
 
-        $attributes = apply_filters(
+        return apply_filters(
             "resource.{$attributes['type']}.parseDataForSave",
             $attributes
         );
-
-        return $attributes;
     }
 
     protected function getDataForForm($model, ...$params)
