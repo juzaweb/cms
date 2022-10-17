@@ -309,4 +309,10 @@ trait GetHookAction
 
         return new Collection(GlobalData::get('permission_groups'));
     }
+
+    public function getResourceManagements(string $key = null): Collection
+    {
+        return $key ? Arr::get(GlobalData::get('resource_managements'), $key) :
+            new Collection(GlobalData::get('resource_managements'));
+    }
 }

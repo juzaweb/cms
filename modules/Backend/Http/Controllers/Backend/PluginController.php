@@ -75,7 +75,7 @@ class PluginController extends BackendController
         );
     }
 
-    public function bulkActions(BulkActionRequest $request, PluginUpdater $updater): JsonResponse
+    public function bulkActions(BulkActionRequest $request): JsonResponse
     {
         $action = $request->post('action');
         $ids = $request->post('ids');

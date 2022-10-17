@@ -11,6 +11,7 @@
 use Juzaweb\Backend\Http\Controllers\Backend\ResourceController;
 use Juzaweb\Backend\Http\Controllers\Backend\ChildResourceController;
 use Juzaweb\Backend\Http\Controllers\Backend\PostResourceController;
+use Juzaweb\Backend\Http\Controllers\Backend\ResourceManagementController;
 
 Route::jwResource(
     'resources/{type}-{post}',
@@ -33,5 +34,13 @@ Route::jwResource(
     'Backend\ResourceController',
     [
         'name' => 'resource'
+    ]
+);
+
+Route::jwResource(
+    'management/{type}',
+    ResourceManagementController::class,
+    [
+        'name' => 'management'
     ]
 );

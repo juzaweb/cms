@@ -25,7 +25,7 @@ trait RegisterHookAction
     protected array $resourcePermissions = ['index', 'create', 'edit', 'delete'];
 
     /**
-     * JUZAWEB CMS: Registers a post type.
+     * Registers a post type.
      * @param string $key (Required) Post type key. Must not exceed 20 characters
      * @param array $args Array of arguments for registering a post type.
      *
@@ -359,7 +359,7 @@ trait RegisterHookAction
         $this->globalData->set('admin_pages.' . $key, $args);
     }
 
-    public function registerAdminAjax(string $key, array $args = [])
+    public function registerAdminAjax(string $key, array $args = []): void
     {
         $defaults = [
             'callback' => '',
@@ -372,7 +372,7 @@ trait RegisterHookAction
         $this->globalData->set('admin_ajaxs.' . $key, new Collection($args));
     }
 
-    public function registerNavMenus($locations = [])
+    public function registerNavMenus($locations = []): void
     {
         foreach ($locations as $key => $location) {
             $this->globalData->set(
@@ -387,7 +387,7 @@ trait RegisterHookAction
         }
     }
 
-    public function registerEmailHook(string $key, array $args = [])
+    public function registerEmailHook(string $key, array $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -400,7 +400,7 @@ trait RegisterHookAction
         $this->globalData->set('email_hooks.' . $key, new Collection($args));
     }
 
-    public function registerSidebar(string $key, array $args = [])
+    public function registerSidebar(string $key, array $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -415,7 +415,7 @@ trait RegisterHookAction
         $this->globalData->set('sidebars.' . $key, new Collection($args));
     }
 
-    public function registerWidget($key, $args = [])
+    public function registerWidget($key, $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -429,7 +429,7 @@ trait RegisterHookAction
         $this->globalData->set('widgets.' . $key, new Collection($args));
     }
 
-    public function registerPageBlock($key, $args = [])
+    public function registerPageBlock($key, $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -572,6 +572,34 @@ trait RegisterHookAction
                 ]
             );
         }
+    }
+
+    public function registerResourceManagement(string $key, array $args = [])
+    {
+        $defaults = [
+            'key' => $key,
+            'repository' => null,
+            'label' => '',
+            'description' => '',
+            'priority' => 20,
+            'menu' => [],
+            'supports' => [],
+            'metas' => [],
+        ];
+
+        $args = array_merge($defaults, $args);
+
+        $this->registerAdminPage(
+            "management.{$key}",
+            [
+                'title' => $args['label'],
+                'menu' => $args['menu']
+            ]
+        );
+
+        $args = new Collection($args);
+
+        $this->globalData->set("resource_managements.{$key}", $args);
     }
 
     /**
