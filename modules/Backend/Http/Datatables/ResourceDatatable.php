@@ -82,12 +82,10 @@ class ResourceDatatable extends DataTable
             ];
         }
 
-        $columns = apply_filters(
+        return apply_filters(
             "resource_{$this->type}_datatable_columns",
             $columns
         );
-
-        return $columns;
     }
 
     /**

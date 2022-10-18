@@ -4,25 +4,21 @@
     @component('cms::components.form_resource', [
         'model' => $model,
     ])
+        @php
+            $collection = collect_metas($setting->get('fields'));
+            $sidebars = $collection->where('sidebar', true)->toArray();
+        @endphp
 
         <div class="row">
-            <div class="col-md-8">
-                {{ Field::text($model, 'name', [
-                    'required' => true,
-                ]) }}
-
-                {{ Field::textarea($model, 'description') }}
-
+            <div class="col-md-{{ $sidebars ? '8' : '12' }}">
                 @php
-                    $metas = collect_metas($setting->get('metas'))
-                                ->where('sidebar', false)
-                                ->toArray();
+                    $metas = $collection->where('sidebar', false)->toArray();
                 @endphp
 
                 @foreach($metas as $name => $meta)
                     @php
-                        $meta['name'] = "meta[{$name}]";
-                        $meta['data']['value'] = $model->getMeta($name);
+                        $meta['name'] = $name;
+                        $meta['value'] = Arr::get($meta, 'value', $model->{$name});
                     @endphp
 
                     {{ Field::fieldByType($meta) }}
@@ -31,26 +27,12 @@
                 @do_action("resource_management.{$setting->get('key')}.form_left", $model)
             </div>
 
+            @if($sidebars)
             <div class="col-md-4">
-                {{ Field::select($model, 'status', [
-                    'options' => $model->getStatuses()
-                ]) }}
-
-                {{ Field::text($model, 'display_order', [
-                    'required' => true,
-                    'default' => 1
-                ]) }}
-
-                @php
-                    $metas = collect_metas($setting->get('metas'))
-                                ->where('sidebar', true)
-                                ->toArray();
-                @endphp
-
-                @foreach($metas as $name => $meta)
+                @foreach($sidebars as $name => $meta)
                     @php
-                        $meta['name'] = "meta[{$name}]";
-                        $meta['data']['value'] = $model->getMeta($name);
+                    $meta['name'] = $name;
+                    $meta['value'] = Arr::get($meta, 'value', $model->{$name});
                     @endphp
 
                     {{ Field::fieldByType($meta) }}
@@ -58,6 +40,7 @@
 
                 @do_action("resource_management.{$setting->get('key')}.form_right", $model)
             </div>
+            @endif
         </div>
     @endcomponent
 

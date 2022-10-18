@@ -12,12 +12,14 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Validator;
+use Juzaweb\Backend\Http\Datatables\ResourceManagementDatatable;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Repositories\BaseRepository;
@@ -40,12 +42,18 @@ class ResourceManagementController extends BackendController
         $this->checkPermission('index', $this->getModel($key), $key);
 
         $setting = $this->getSetting($key);
-
         $title = $setting->get('label');
+        $linkCreate = action([static::class, 'create'], [$key]);
+        $dataTable = $this->getDataTable($key);
 
         return view(
             'cms::backend.resource_management.index',
-            compact('setting', 'title')
+            compact(
+                'setting',
+                'title',
+                'linkCreate',
+                'dataTable'
+            )
         );
     }
 
@@ -60,14 +68,19 @@ class ResourceManagementController extends BackendController
             ]
         );
 
+        $title = trans('cms::app.add_new');
+        $linkIndex = action([static::class, 'index'], [$key]);
         $model = $this->getRepository($key)->makeModel();
+        $setting = $this->getSetting($key);
 
         return view(
             'cms::backend.resource_management.form',
-            [
-                'title' => trans('cms::app.add_new'),
-                'linkIndex' => action([static::class, 'index'], [$key])
-            ]
+            compact(
+                'title',
+                'linkIndex',
+                'model',
+                'setting'
+            )
         );
     }
 
@@ -84,29 +97,24 @@ class ResourceManagementController extends BackendController
 
         $this->checkPermission('edit', $model, $key);
 
+        $title = $model->{$model->getFieldName()};
+        $linkIndex = action([static::class, 'index'], [$key]);
+
         return view(
             'cms::backend.resource_management.form',
-            [
-                'title' => $model->{$model->getFieldName()},
-                'linkIndex' => action([static::class, 'index'], [$key])
-            ]
+            compact('title', 'linkIndex', 'model')
         );
     }
 
-    public function store(Request $request, string $key)
+    public function store(Request $request, string $key): JsonResponse|RedirectResponse
     {
-        $this->checkPermission('create', $this->getModel($key), $key);
+        //$this->checkPermission('create', $this->getModel($key), $key);
 
-        $validator = $this->validator($request->all(), $key);
-        if (is_array($validator)) {
-            $validator = Validator::make($request->all(), $validator);
-        }
-
-        $validator->validate();
+        //$validator = Validator::make($request->all(), $validator);
+        //$validator->validate();
         $data = $request->all();
 
         DB::beginTransaction();
-
         try {
             $model = $this->getRepository($key)->getModel();
             $slug = $request->input('slug');
@@ -123,25 +131,21 @@ class ResourceManagementController extends BackendController
             throw $e;
         }
 
-        return $this->storeSuccessResponse(
-            $model,
-            $request,
-            $key
+        return $this->success(
+            [
+                'message' => trans('cms::app.created_successfully'),
+                'redirect' => action([static::class, 'index'], [$key]),
+            ]
         );
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $key, $id)
     {
-        $validator = $this->validator($request->all(), $key);
-        if (is_array($validator)) {
-            $validator = Validator::make($request->all(), $validator);
-        }
+        //$validator = Validator::make($request->all(), $validator);
+        //$validator->validate();
 
-        $validator->validate();
-        $data = $this->parseDataForSave($request->all(), $key);
+        $model = $this->getRepository($key)->find($id);
 
-        $model = $this->makeModel($key)
-            ->findOrFail($this->getPathId($params));
         $this->checkPermission('edit', $model, $key);
 
         DB::beginTransaction();
@@ -174,7 +178,7 @@ class ResourceManagementController extends BackendController
         );
     }
 
-    public function datatable(Request $request, string $key)
+    public function datatable(Request $request, string $key): JsonResponse
     {
         $this->checkPermission(
             'index',
@@ -183,7 +187,7 @@ class ResourceManagementController extends BackendController
         );
 
         $table = $this->getDataTable($key);
-        $table->setCurrentUrl(action([static::class, 'index'], $params, false));
+        $table->setCurrentUrl(action([static::class, 'index'], [$key], false));
 
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
@@ -230,7 +234,7 @@ class ResourceManagementController extends BackendController
         );
     }
 
-    public function bulkActions(Request $request, string $key)
+    public function bulkActions(Request $request, string $key): JsonResponse|RedirectResponse
     {
         $request->validate(
             [
@@ -263,6 +267,11 @@ class ResourceManagementController extends BackendController
                 'message' => trans('cms::app.successfully'),
             ]
         );
+    }
+
+    protected function getDataTable(string $key): DataTable
+    {
+        return app(ResourceManagementDatatable::class);
     }
 
     protected function checkPermission($ability, $arguments, $key)
