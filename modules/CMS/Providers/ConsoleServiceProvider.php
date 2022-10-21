@@ -13,6 +13,7 @@ namespace Juzaweb\CMS\Providers;
 use Illuminate\Console\Scheduling\Schedule;
 use Juzaweb\CMS\Console\Commands\AutoClearSlotCommand;
 use Juzaweb\CMS\Console\Commands\ClearCacheCommand;
+use Juzaweb\CMS\Console\Commands\ClearCacheExpiredCommand;
 use Juzaweb\CMS\Console\Commands\InstallCommand;
 use Juzaweb\CMS\Console\Commands\PluginAutoloadCommand;
 use Juzaweb\CMS\Console\Commands\SendMailCommand;
@@ -29,7 +30,8 @@ class ConsoleServiceProvider extends ServiceProvider
         ClearCacheCommand::class,
         PluginAutoloadCommand::class,
         AutoClearSlotCommand::class,
-        ShowSlotCommand::class
+        ShowSlotCommand::class,
+        ClearCacheExpiredCommand::class,
     ];
 
     public function boot()

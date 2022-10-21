@@ -15,9 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->command('email:send')->everyMinute();
         $schedule->command('notify:send')->everyMinute();
+        $schedule->command('juza:clear-cache-expired')->hourly();
     }
 
     /**

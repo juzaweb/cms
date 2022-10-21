@@ -39,7 +39,7 @@ class ResourceManagementController extends BackendController
 
     public function index(string $key): Factory|View
     {
-        $this->checkPermission('index', $this->getModel($key), $key);
+        $this->checkPermission('index', $this->getModel($key));
 
         $setting = $this->getSetting($key);
         $title = $setting->get('label');
@@ -99,16 +99,17 @@ class ResourceManagementController extends BackendController
 
         $title = $model->{$model->getFieldName()};
         $linkIndex = action([static::class, 'index'], [$key]);
+        $setting = $this->getSetting($key);
 
         return view(
             'cms::backend.resource_management.form',
-            compact('title', 'linkIndex', 'model')
+            compact('title', 'linkIndex', 'model', 'setting')
         );
     }
 
     public function store(Request $request, string $key): JsonResponse|RedirectResponse
     {
-        //$this->checkPermission('create', $this->getModel($key), $key);
+        $this->checkPermission('create', $this->getModel($key), $key);
 
         //$validator = Validator::make($request->all(), $validator);
         //$validator->validate();
@@ -144,6 +145,7 @@ class ResourceManagementController extends BackendController
         //$validator = Validator::make($request->all(), $validator);
         //$validator->validate();
 
+        $data = $request->all();
         $model = $this->getRepository($key)->find($id);
 
         $this->checkPermission('edit', $model, $key);
@@ -163,18 +165,10 @@ class ResourceManagementController extends BackendController
             throw $e;
         }
 
-        if (method_exists($this, 'updateSuccess')) {
-            $this->updateSuccess($request, $model, $key);
-        }
-
-        if (method_exists($this, 'saveSuccess')) {
-            $this->saveSuccess($request, $model, $key);
-        }
-
-        return $this->updateSuccessResponse(
-            $model,
-            $request,
-            $key
+        return $this->success(
+            [
+                'message' => trans('cms::app.updated_successfully'),
+            ]
         );
     }
 
@@ -182,8 +176,7 @@ class ResourceManagementController extends BackendController
     {
         $this->checkPermission(
             'index',
-            $this->getModel($key),
-            $key
+            $this->getModel($key)
         );
 
         $table = $this->getDataTable($key);
@@ -271,15 +264,17 @@ class ResourceManagementController extends BackendController
 
     protected function getDataTable(string $key): DataTable
     {
-        return app(ResourceManagementDatatable::class);
+        $table = new ResourceManagementDatatable($this->getRepository($key));
+        $table->setDataUrl(action([static::class, 'datatable'], [$key]));
+        return $table;
     }
 
-    protected function checkPermission($ability, $arguments, $key)
+    protected function checkPermission($ability, $arguments)
     {
         $this->authorize($ability, $arguments);
     }
 
-    protected function hasPermission($ability, $arguments, $key): bool
+    protected function hasPermission($ability, $arguments): bool
     {
         $response = Gate::inspect($ability, $arguments);
 

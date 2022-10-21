@@ -11,16 +11,16 @@
 namespace Juzaweb\Backend\Http\Datatables;
 
 use Illuminate\Support\Facades\DB;
-use Juzaweb\AdsManager\Repositories\AdsRepository;
 use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Repositories\BaseRepository;
 
 class ResourceManagementDatatable extends DataTable
 {
-    protected AdsRepository $adsRepository;
+    protected BaseRepository $repository;
 
-    public function __construct(AdsRepository $adsRepository)
+    public function __construct(BaseRepository $repository)
     {
-        $this->adsRepository = $adsRepository;
+        $this->repository = $repository;
     }
 
     public function columns()
@@ -43,7 +43,7 @@ class ResourceManagementDatatable extends DataTable
 
     public function query($data)
     {
-        $query = $this->adsRepository->query();
+        $query = $this->repository->query();
 
         return $query;
     }
@@ -54,7 +54,7 @@ class ResourceManagementDatatable extends DataTable
             DB::beginTransaction();
             try {
                 if ($action == 'delete') {
-                    $this->adsRepository->delete($id);
+                    $this->repository->delete($id);
                 }
 
                 DB::commit();

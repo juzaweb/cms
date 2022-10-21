@@ -18,7 +18,7 @@
                 @foreach($metas as $name => $meta)
                     @php
                         $meta['name'] = $name;
-                        $meta['value'] = Arr::get($meta, 'value', $model->{$name});
+                        $meta['data']['value'] = Arr::get($meta, 'value', $model->{$name});
                     @endphp
 
                     {{ Field::fieldByType($meta) }}
@@ -32,7 +32,7 @@
                 @foreach($sidebars as $name => $meta)
                     @php
                     $meta['name'] = $name;
-                    $meta['value'] = Arr::get($meta, 'value', $model->{$name});
+                    $meta['data']['value'] = Arr::get($meta, 'value', $model->{$name});
                     @endphp
 
                     {{ Field::fieldByType($meta) }}

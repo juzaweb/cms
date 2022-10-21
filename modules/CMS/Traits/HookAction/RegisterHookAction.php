@@ -574,7 +574,7 @@ trait RegisterHookAction
         }
     }
 
-    public function registerResourceManagement(string $key, array $args = [])
+    public function registerResourceManagement(string $key, array|string $args = null): void
     {
         $defaults = [
             'key' => $key,
@@ -583,21 +583,24 @@ trait RegisterHookAction
             'description' => '',
             'priority' => 20,
             'menu' => [],
-            'supports' => [],
-            'metas' => [],
+            'fields' => [],
+            'permission_name' => "management_{$key}",
         ];
 
-        $args = array_merge($defaults, $args);
+        $args = new Collection(array_merge($defaults, $args));
 
         $this->registerAdminPage(
             "management.{$key}",
             [
-                'title' => $args['label'],
-                'menu' => $args['menu']
+                'title' => $args->get('label'),
+                'menu' => $args->get('menu', [])
             ]
         );
 
-        $args = new Collection($args);
+        $this->registerResourcePermissions(
+            $args->get('permission_name'),
+            $args->get('label')
+        );
 
         $this->globalData->set("resource_managements.{$key}", $args);
     }
