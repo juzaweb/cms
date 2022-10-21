@@ -38,6 +38,10 @@ class ClearCacheExpiredCommand extends Command
 
     public function handle()
     {
+        if (config('cache.default') == 'file') {
+            return;
+        }
+
         $this->deleteExpiredFiles();
         $this->deleteEmptyFolders();
         $this->showResults();
@@ -106,7 +110,7 @@ class ClearCacheExpiredCommand extends Command
 
     private function formatBytes($size): string
     {
-        $unit = ['Byte','KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+        $unit = ['Byte','KB','MB','GB','TB','PB','EB','ZB','YB'];
 
         for ($i = 0; $size >= 1024 && $i < count($unit)-1; $i++) {
             $size /= 1024;
