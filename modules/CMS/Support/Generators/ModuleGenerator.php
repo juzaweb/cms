@@ -372,6 +372,7 @@ class ModuleGenerator extends Generator
 
             $this->filesystem->put($path, $this->getStubContents($stub));
 
+            $path = realpath($path);
             $this->console->info("Created : {$path}");
         }
     }
@@ -382,29 +383,38 @@ class ModuleGenerator extends Generator
     public function generateResources()
     {
         if (GenerateConfigReader::read('seeder')->generate() === true) {
-            $this->console->call('plugin:make-seed', [
-                'name' => $this->getStudlyName(),
-                'module' => $this->getName(),
-                '--master' => true,
-            ]);
+            $this->console->call(
+                'plugin:make-seed',
+                [
+                    'name' => $this->getStudlyName(),
+                    'module' => $this->getName(),
+                    '--master' => true,
+                ]
+            );
         }
 
         if (GenerateConfigReader::read('provider')->generate() === true) {
-            $this->console->call('plugin:make-provider', [
-                'name' => $this->getStudlyName() . 'ServiceProvider',
-                'module' => $this->getName(),
-                '--master' => true,
-            ]);
+            $this->console->call(
+                'plugin:make-provider',
+                [
+                    'name' => $this->getStudlyName() . 'ServiceProvider',
+                    'module' => $this->getName(),
+                    '--master' => true,
+                ]
+            );
             /*$this->console->call('plugin:route-provider', [
                 'module' => $this->getName(),
             ]);*/
         }
 
         if (GenerateConfigReader::read('controller')->generate() === true) {
-            $this->console->call('plugin:make-controller', [
-                'controller' => $this->getStudlyName() . 'Controller',
-                'module' => $this->getName(),
-            ]);
+            $this->console->call(
+                'plugin:make-controller',
+                [
+                    'controller' => $this->getStudlyName() . 'Controller',
+                    'module' => $this->getName(),
+                ]
+            );
         }
     }
 

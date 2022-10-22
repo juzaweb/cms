@@ -1,15 +1,18 @@
 {
     "name": "juzaweb/example",
-    "description": "",
+    "description": "This is Example plugin for Juzaweb CMS",
     "extra": {
-        "juzaweb": {
-            "name": "Example",
-            "domain": "juex",
-            "cms_min": "3.0",
-            "version": "1.0",
+        "laravel": {
             "providers": [
                 "Juzaweb\\Example\\Providers\\ExampleServiceProvider"
-            ]
+            ],
+            "aliases": {}
+        },
+        "juzaweb": {
+            "name": "Example Plugin",
+            "domain": "exam",
+            "cms_min": "3.2",
+            "version": "1.0"
         }
     },
     "autoload": {
