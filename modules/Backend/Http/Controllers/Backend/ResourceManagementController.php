@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -59,7 +60,7 @@ class ResourceManagementController extends BackendController
 
     public function create(string $key): Factory|View
     {
-        $this->checkPermission('create', $this->getModel($key), $key);
+        $this->checkPermission('create', [$this->getModel($key), $key]);
 
         $this->addBreadcrumb(
             [
@@ -95,7 +96,7 @@ class ResourceManagementController extends BackendController
 
         $model = $this->getRepository($key)->find($id);
 
-        $this->checkPermission('edit', $model, $key);
+        $this->checkPermission('edit', [$model, $key]);
 
         $title = $model->{$model->getFieldName()};
         $linkIndex = action([static::class, 'index'], [$key]);
@@ -109,7 +110,7 @@ class ResourceManagementController extends BackendController
 
     public function store(Request $request, string $key): JsonResponse|RedirectResponse
     {
-        $this->checkPermission('create', $this->getModel($key), $key);
+        $this->checkPermission('create', [$this->getModel($key), $key]);
 
         //$validator = Validator::make($request->all(), $validator);
         //$validator->validate();
@@ -127,7 +128,7 @@ class ResourceManagementController extends BackendController
             $model->fill($data);
             $model->save();
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             throw $e;
         }
@@ -140,7 +141,7 @@ class ResourceManagementController extends BackendController
         );
     }
 
-    public function update(Request $request, $key, $id)
+    public function update(Request $request, $key, $id): JsonResponse|RedirectResponse
     {
         //$validator = Validator::make($request->all(), $validator);
         //$validator->validate();
@@ -148,7 +149,7 @@ class ResourceManagementController extends BackendController
         $data = $request->all();
         $model = $this->getRepository($key)->find($id);
 
-        $this->checkPermission('edit', $model, $key);
+        $this->checkPermission('edit', [$model, $key]);
 
         DB::beginTransaction();
         try {
@@ -160,7 +161,7 @@ class ResourceManagementController extends BackendController
             $model->fill($data);
             $model->save();
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             throw $e;
         }
@@ -243,10 +244,10 @@ class ResourceManagementController extends BackendController
         $results = [];
 
         foreach ($ids as $id) {
-            $model = $this->makeModel($key)->find($id);
+            $model = $this->getRepository($key)->find($id);
             $permission = $action != 'delete' ? 'edit' : 'delete';
 
-            if (!$this->hasPermission($permission, $model, $key)) {
+            if (!$this->hasPermission($permission, [$model, $key])) {
                 continue;
             }
 
@@ -266,6 +267,7 @@ class ResourceManagementController extends BackendController
     {
         $table = new ResourceManagementDatatable($this->getRepository($key));
         $table->setDataUrl(action([static::class, 'datatable'], [$key]));
+        $table->setActionUrl(action([static::class, 'bulkActions'], [$key]));
         return $table;
     }
 

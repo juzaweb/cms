@@ -23,7 +23,7 @@ class ResourceManagementDatatable extends DataTable
         $this->repository = $repository;
     }
 
-    public function columns()
+    public function columns(): array
     {
         return [
             'name' => [
@@ -41,7 +41,7 @@ class ResourceManagementDatatable extends DataTable
         ];
     }
 
-    public function query($data)
+    public function query($data): \Illuminate\Database\Eloquent\Builder
     {
         $query = $this->repository->query();
 
