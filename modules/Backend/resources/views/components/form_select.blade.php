@@ -1,5 +1,7 @@
 <div class="form-group">
-    <label class="col-form-label" for="{{ $id ?? $name }}">{{ $label ?? $name }}</label>
+    <label class="col-form-label" for="{{ $id ?? $name }}">
+        {{ $label ?? $name }} @if($required ?? false) <abbr>*</abbr> @endif
+    </label>
     <select
         name="{{ ($multiple ?? false) ? "{$name}[]" : $name }}"
         id="{{ $id ?? $name }}"
@@ -7,6 +9,7 @@
         {{ ($multiple ?? false) ? 'multiple' : '' }}
         {{ ($disabled ?? false) ? 'disabled' : '' }}
         {{ ($readonly ?? false) ? 'readonly' : '' }}
+        @if($required ?? false) required @endif
         @foreach($data ?? [] as $key => $val)
             data-{{ $key }}="{{ $val }}"
         @endforeach

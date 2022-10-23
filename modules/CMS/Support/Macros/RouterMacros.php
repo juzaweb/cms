@@ -24,7 +24,8 @@ class RouterMacros
             $this->get($uri, "{$controller}@index")->name($routeName .'.index')->where($where);
             $this->get($uri . '/create', $controller . '@create')->name($routeName . '.create');
             $this->get("{$uri}/datatable", $controller . '@datatable')->name($routeName . '.datatable');
-            $this->get($uri . '/{id}/edit', $controller . '@edit')->name($routeName . '.edit')->where('id', '[0-9]+');
+            $this->get($uri . '/{id}/edit', $controller . '@edit')->name($routeName . '.edit')
+                ->where('id', '[0-9a-z\-]+');
             $this->get($uri . '/load-data', $controller . '@getDataForSelect')->name($routeName . '.load-data');
             $this->post($uri, $controller . '@store')->name($routeName . '.store');
             $this->post("{$uri}/bulk-action", "{$controller}@bulkActions")->name($routeName . '.bulk_action');
