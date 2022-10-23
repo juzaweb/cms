@@ -219,7 +219,7 @@ class Field implements FieldContract
         };
     }
 
-    public function mapOptions(string|Model $label, ?string $name, ?array $options = [])
+    public function mapOptions(string|Model $label, ?string $name, ?array $options = []): ?array
     {
         $options['name'] = $name;
         $options['id'] = Arr::get(
