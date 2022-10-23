@@ -13,6 +13,7 @@ namespace Juzaweb\CMS\Support\Registers;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Juzaweb\Backend\Models\Resource;
+use Juzaweb\CMS\Abstracts\BackendResource;
 use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
 
 class ResourceRegister
@@ -29,9 +30,20 @@ class ResourceRegister
 
     public function make(string $key, ?string $postType = null, ?array $args = []): static
     {
-        $this->key = $key;
-        $this->postType = $postType;
-        $this->args = $args;
+        if (class_exists($key)) {
+            /**
+             * @var BackendResource $resource
+             */
+            $resource = app($key);
+
+            $this->key = $resource->getKey();
+            $this->postType = $resource->getPostType();
+            $this->args = $resource->toArray();
+        } else {
+            $this->key = $key;
+            $this->postType = $postType;
+            $this->args = $args;
+        }
         return $this;
     }
 

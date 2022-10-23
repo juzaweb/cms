@@ -25,8 +25,8 @@ class ResourceController extends BackendController
     }
 
     protected string $viewPrefix = 'cms::backend.resource';
-
     protected Collection $setting;
+    protected Collection $postType;
 
     protected function afterSave($data, $model, ...$params)
     {
@@ -115,6 +115,12 @@ class ResourceController extends BackendController
 
     protected function getPostType($type): Collection
     {
-        return HookAction::getPostTypes($type);
+        if (isset($this->postType)) {
+            return $this->postType;
+        }
+
+        $this->postType = HookAction::getPostTypes($type);
+
+        return $this->postType;
     }
 }

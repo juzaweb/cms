@@ -97,12 +97,7 @@ class ResourceDatatable extends DataTable
      */
     public function query($data): Builder
     {
-        if ($repository = $this->getSetting($this->type)->get('repository')) {
-            $query = app($repository)->query();
-        } else {
-            $query = Resource::query();
-            $query->where('type', '=', $this->type);
-        }
+        $query = $this->getQuery();
 
         if ($this->postId) {
             $query->where('post_id', '=', $this->postId);
@@ -116,7 +111,7 @@ class ResourceDatatable extends DataTable
             $query->where(
                 function (Builder $q) use ($keyword) {
                     $q->where('name', JW_SQL_LIKE, '%'.$keyword.'%');
-                    $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
+                    //$q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
                 }
             );
         }
@@ -126,7 +121,7 @@ class ResourceDatatable extends DataTable
 
     public function bulkActions($action, $ids)
     {
-        $rows = Resource::whereIn('id', $ids)->get();
+        $rows = $this->getQuery()->whereIn('id', $ids)->get();
         foreach ($rows as $row) {
             DB::beginTransaction();
             try {
@@ -155,5 +150,17 @@ class ResourceDatatable extends DataTable
         $this->setting = HookAction::getResource($type);
 
         return $this->setting;
+    }
+
+    protected function getQuery(): Builder
+    {
+        if ($repository = $this->getSetting($this->type)->get('repository')) {
+            $query = app($repository)->query();
+        } else {
+            $query = Resource::query();
+            $query->where('type', '=', $this->type);
+        }
+
+        return $query;
     }
 }
