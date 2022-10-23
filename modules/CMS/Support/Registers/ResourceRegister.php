@@ -64,18 +64,12 @@ class ResourceRegister
                 'parent' => null,
                 'position' => 20,
             ],
-            Arr::get($menu, 'menu', [])
+            $menu
         );
 
         $menuKey = "resources.{$this->key}";
 
-        $this->hookAction->registerAdminPage(
-            $menuKey,
-            [
-                'title' => $this->args['label'],
-                'menu' => $menu
-            ]
-        );
+        $this->hookAction->addAdminMenu($this->args['label'], $menuKey, $menu);
     }
 
     protected function registerResourceWithPost(): Collection
@@ -84,6 +78,7 @@ class ResourceRegister
             [
                 'key' => $this->key,
                 'model' => Resource::class,
+                'custom_resource' => false,
                 'label' => $this->args['label'],
                 'label_action' => $this->args['label'],
                 'description' => '',

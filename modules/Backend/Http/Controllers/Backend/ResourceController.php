@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Support\Collection;
 use Juzaweb\Backend\Http\Datatables\ResourceDatatable;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\CMS\Abstracts\DataTable;
@@ -25,9 +26,13 @@ class ResourceController extends BackendController
 
     protected string $viewPrefix = 'cms::backend.resource';
 
+    protected Collection $setting;
+
     protected function afterSave($data, $model, ...$params)
     {
-        $model->syncMetas($data['meta'] ?? []);
+        if (method_exists($model, 'syncMetas')) {
+            $model->syncMetas($data['meta'] ?? []);
+        }
     }
 
     protected function getDataTable(...$params): DataTable
@@ -43,6 +48,11 @@ class ResourceController extends BackendController
 
     protected function validator(array $attributes, ...$params): array
     {
+        $validator = $this->getSetting(...$params)->get('validator');
+        if ($validator) {
+            return $validator;
+        }
+
         return [
             'name' => 'required',
             'display_order' => 'required|integer|min:1',
@@ -51,6 +61,10 @@ class ResourceController extends BackendController
 
     protected function getModel(...$params): string
     {
+        if ($repository = $this->getSetting(...$params)->get('repository')) {
+            return app($repository)->model();
+        }
+
         return Resource::class;
     }
 
@@ -59,9 +73,15 @@ class ResourceController extends BackendController
         return $this->getSetting($params[0])->get('label');
     }
 
-    protected function getSetting(...$params): \Illuminate\Support\Collection
+    protected function getSetting(...$params): Collection
     {
-        return HookAction::getResource($params[0]);
+        if (isset($this->setting)) {
+            return $this->setting;
+        }
+
+        $this->setting = HookAction::getResource($params[0]);
+
+        return $this->setting;
     }
 
     protected function parseDataForSave(array $attributes, ...$params)
@@ -93,7 +113,7 @@ class ResourceController extends BackendController
         return $data;
     }
 
-    protected function getPostType($type): \Illuminate\Support\Collection
+    protected function getPostType($type): Collection
     {
         return HookAction::getPostTypes($type);
     }
