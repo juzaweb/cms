@@ -59,7 +59,7 @@ class ResourceController extends BackendController
         return $this->getSetting($params[0])->get('label');
     }
 
-    protected function getSetting(...$params)
+    protected function getSetting(...$params): \Illuminate\Support\Collection
     {
         return HookAction::getResource($params[0]);
     }
@@ -86,14 +86,14 @@ class ResourceController extends BackendController
         );
     }
 
-    protected function getDataForForm($model, ...$params)
+    protected function getDataForForm($model, ...$params): array
     {
         $data = $this->DataForForm($model, ...$params);
         $data['setting'] = $this->getSetting(...$params);
         return $data;
     }
 
-    protected function getPostType($type)
+    protected function getPostType($type): \Illuminate\Support\Collection
     {
         return HookAction::getPostTypes($type);
     }

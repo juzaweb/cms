@@ -10,6 +10,9 @@
 
 namespace Juzaweb\CMS\Traits;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -18,7 +21,7 @@ use Illuminate\Support\Facades\Validator;
 
 trait ResourceController
 {
-    public function index(...$params)
+    public function index(...$params): View
     {
         $this->checkPermission(
             'index',
@@ -32,7 +35,7 @@ trait ResourceController
         );
     }
 
-    public function create(...$params)
+    public function create(...$params): View
     {
         $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
@@ -63,7 +66,7 @@ trait ResourceController
         );
     }
 
-    public function edit(...$params)
+    public function edit(...$params): View
     {
         $indexRoute = str_replace(
             '.edit',
@@ -97,7 +100,7 @@ trait ResourceController
         );
     }
 
-    public function store(Request $request, ...$params)
+    public function store(Request $request, ...$params): JsonResponse|RedirectResponse
     {
         $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
@@ -147,7 +150,7 @@ trait ResourceController
         );
     }
 
-    public function update(Request $request, ...$params)
+    public function update(Request $request, ...$params): JsonResponse|RedirectResponse
     {
         $validator = $this->validator($request->all(), ...$params);
         if (is_array($validator)) {
@@ -196,7 +199,7 @@ trait ResourceController
         );
     }
 
-    public function datatable(Request $request, ...$params)
+    public function datatable(Request $request, ...$params): JsonResponse
     {
         $this->checkPermission(
             'index',
@@ -252,7 +255,7 @@ trait ResourceController
         );
     }
 
-    public function bulkActions(Request $request, ...$params)
+    public function bulkActions(Request $request, ...$params): JsonResponse|RedirectResponse
     {
         $request->validate(
             [

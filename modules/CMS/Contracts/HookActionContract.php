@@ -22,6 +22,8 @@ interface HookActionContract
 
     public function registerTaxonomy(string $taxonomy, array|string $objectType, array $args = []): void;
 
+    public function registerResource(string $key, ?string $postType = null, ?array $args = []): void;
+
     public function registerMenuBox(string $key, array $args = []): void;
 
     public function registerPermalink(string $key, array $args = []): void;

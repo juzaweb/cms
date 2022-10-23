@@ -8,7 +8,7 @@ use Juzaweb\Backend\Http\Controllers\Backend\CommentController;
 
 class RouterMacros
 {
-    public function jwResource()
+    public function jwResource(): \Closure
     {
         return function ($uri, $controller, $options = []) {
             if (! empty($options['name'])) {
@@ -22,14 +22,18 @@ class RouterMacros
             $routeName = 'admin.' . $routeName;
 
             $this->get($uri, "{$controller}@index")->name($routeName .'.index')->where($where);
-            $this->get($uri . '/create', $controller . '@create')->name($routeName . '.create');
-            $this->get("{$uri}/datatable", $controller . '@datatable')->name($routeName . '.datatable');
+            $this->get($uri . '/create', $controller . '@create')->name($routeName . '.create')->where($where);
+            $this->get("{$uri}/datatable", $controller . '@datatable')->name($routeName . '.datatable')->where($where);
             $this->get($uri . '/{id}/edit', $controller . '@edit')->name($routeName . '.edit')
-                ->where('id', '[0-9a-z\-]+');
-            $this->get($uri . '/load-data', $controller . '@getDataForSelect')->name($routeName . '.load-data');
-            $this->post($uri, $controller . '@store')->name($routeName . '.store');
-            $this->post("{$uri}/bulk-action", "{$controller}@bulkActions")->name($routeName . '.bulk_action');
-            $this->put($uri . '/{id}', $controller . '@update')->name($routeName . '.update');
+                ->where('id', '[0-9a-z\-]+')->where($where);
+            $this->get($uri . '/load-data', $controller . '@getDataForSelect')
+                ->name($routeName . '.load-data')
+                ->where($where);
+            $this->post($uri, $controller . '@store')->name($routeName . '.store')->where($where);
+            $this->post("{$uri}/bulk-action", "{$controller}@bulkActions")
+                ->name($routeName . '.bulk_action')
+                ->where($where);
+            $this->put($uri . '/{id}', $controller . '@update')->name($routeName . '.update')->where($where);
         };
     }
 

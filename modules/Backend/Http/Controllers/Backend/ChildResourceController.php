@@ -10,13 +10,14 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Facades\HookAction;
 
 class ChildResourceController extends ResourceController
 {
-    public function index(...$params)
+    public function index(...$params): View
     {
         $type = $params[0];
         $postId = $params[1];
@@ -58,7 +59,7 @@ class ChildResourceController extends ResourceController
         );
     }
 
-    public function create(...$params)
+    public function create(...$params): View
     {
         $this->authorize('create', $this->getModel(...$params));
 
@@ -123,7 +124,7 @@ class ChildResourceController extends ResourceController
         );
     }
 
-    public function edit(...$params)
+    public function edit(...$params): View
     {
         $type = $params[0];
         $postId = $params[1];
