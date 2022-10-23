@@ -75,7 +75,7 @@ class Resource extends Model
         'json_metas' => 'array'
     ];
 
-    public static function getStatuses()
+    public static function getStatuses(): array
     {
         return [
             'publish' => trans('cms::app.publish'),
@@ -87,37 +87,34 @@ class Resource extends Model
     /**
      * Create Builder for frontend
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Juzaweb\Backend\Models\Resource
+     * @return Builder
      */
-    public static function selectFrontendBuilder()
+    public static function selectFrontendBuilder(): Builder
     {
-        $builder = self::query()
-            ->wherePublish();
-
-        return $builder;
+        return self::query()->wherePublish();
     }
 
-    public function post()
+    public function post(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Post::class, 'post_id', 'id');
     }
 
-    public function metas()
+    public function metas(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ResourceMeta::class, 'resource_id', 'id');
     }
 
-    public function parent()
+    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Resource::class, 'parent_id', 'id');
     }
 
-    public function children()
+    public function children(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Resource::class, 'parent_id', 'id');
     }
 
-    public function scopeWherePublish(Builder $builder)
+    public function scopeWherePublish(Builder $builder): Builder
     {
         return $builder->where('status', '=', 'publish');
     }
@@ -180,12 +177,12 @@ class Resource extends Model
         );
     }
 
-    public function getMeta($key, $default = null)
+    public function getMeta($key, $default = null): string|array|null
     {
         return Arr::get($this->json_metas, $key, $default);
     }
 
-    public function getFieldName()
+    public function getFieldName(): string
     {
         return 'name';
     }
