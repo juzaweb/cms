@@ -15,6 +15,7 @@ use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Registers\ResourceRegister;
 use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
 use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
 use Juzaweb\Frontend\Http\Controllers\PostController;
@@ -280,49 +281,13 @@ trait RegisterHookAction
         $this->globalData->set('permalinks.' . $key, new Collection($args));
     }
 
-    public function registerResource(string $key, string $postType = null, array $args = [])
+    public function registerResource(string $key, ?string $postType = null, ?array $args = []): void
     {
-        if (empty($args['label'])) {
-            throw new \Exception('Post Resource Label is required.');
-        }
+        $register = new ResourceRegister($this);
 
-        if (empty($postType)) {
-            if ($menu = Arr::get($args, 'menu', [])) {
-                $menu = array_merge(
-                    [
-                        'icon' => 'fa fa-list-ul',
-                        'parent' => null,
-                        'position' => 20,
-                    ],
-                    Arr::get($args, 'menu', [])
-                );
+        $data = $register->make($key, $postType, $args);
 
-                $menuKey = "resources.{$key}";
-
-                $this->addAdminMenu($args['label'], $menuKey, $menu);
-            }
-        }
-
-        unset($args['menu']);
-
-        $args = array_merge(
-            [
-                'key' => $key,
-                'model' => Resource::class,
-                'label' => '',
-                'label_action' => $args['label'],
-                'description' => '',
-                'post_type' => $postType,
-                'priority' => 20,
-                'supports' => [],
-                'metas' => [],
-            ],
-            $args
-        );
-
-        $args = new Collection($args);
-
-        $this->globalData->set('resources.' . $args->get('key'), $args);
+        $this->globalData->set('resources.' . $data->getKey(), $data->args());
     }
 
     public function registerConfig(array|string $key, array $args = []): void
@@ -574,7 +539,7 @@ trait RegisterHookAction
         }
     }
 
-    public function registerResourceManagement(string $key, array|string $args = null): void
+    public function registerResourceManagement2(string $key, array|string $args = null): void
     {
         $defaults = [
             'key' => $key,

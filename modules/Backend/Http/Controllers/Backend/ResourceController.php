@@ -12,6 +12,7 @@ namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Juzaweb\Backend\Http\Datatables\ResourceDatatable;
 use Juzaweb\Backend\Models\Resource;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Traits\ResourceController as ResourceControllerTrait;
@@ -22,14 +23,14 @@ class ResourceController extends BackendController
         getDataForForm as DataForForm;
     }
 
-    protected $viewPrefix = 'cms::backend.resource';
+    protected string $viewPrefix = 'cms::backend.resource';
 
     protected function afterSave($data, $model, ...$params)
     {
         $model->syncMetas($data['meta'] ?? []);
     }
 
-    protected function getDataTable(...$params)
+    protected function getDataTable(...$params): DataTable
     {
         $dataTable = new ResourceDatatable();
         $dataTable->mountData(
@@ -40,7 +41,7 @@ class ResourceController extends BackendController
         return $dataTable;
     }
 
-    protected function validator(array $attributes, ...$params)
+    protected function validator(array $attributes, ...$params): array
     {
         return [
             'name' => 'required',
@@ -48,12 +49,12 @@ class ResourceController extends BackendController
         ];
     }
 
-    protected function getModel(...$params)
+    protected function getModel(...$params): string
     {
         return Resource::class;
     }
 
-    protected function getTitle(...$params)
+    protected function getTitle(...$params): string
     {
         return $this->getSetting($params[0])->get('label');
     }
