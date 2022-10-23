@@ -16,6 +16,7 @@ use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Contracts\CacheGroupContract;
 use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\EventyContract;
+use Juzaweb\CMS\Contracts\Field;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Contracts\JuzawebApiContract;
@@ -36,6 +37,7 @@ use Juzaweb\CMS\Support\Config as DbConfig;
 use Juzaweb\CMS\Support\DatabaseTableGroup;
 use Juzaweb\CMS\Support\GlobalData;
 use Juzaweb\CMS\Support\HookAction;
+use Juzaweb\CMS\Support\Html\Field as HtmlField;
 use Juzaweb\CMS\Support\Imports\PostImporter;
 use Juzaweb\CMS\Support\JuzawebApi;
 use Juzaweb\CMS\Support\JWQuery;
@@ -297,6 +299,13 @@ class CmsServiceProvider extends ServiceProvider
                     $app[HookActionContract::class],
                     $app[TaxonomyRepository::class]
                 );
+            }
+        );
+
+        $this->app->singleton(
+            Field::class,
+            function ($app) {
+                return new HtmlField();
             }
         );
     }
