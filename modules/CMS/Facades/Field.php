@@ -13,6 +13,9 @@ namespace Juzaweb\CMS\Facades;
 use Illuminate\Support\Facades\Facade;
 use Juzaweb\CMS\Contracts\Field as FieldContract;
 
+/**
+ * @method static render($metas, $model, $collection = false)
+*/
 class Field extends Facade
 {
     /**

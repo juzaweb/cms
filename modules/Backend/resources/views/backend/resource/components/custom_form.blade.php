@@ -9,58 +9,42 @@
             $metas = $collection->where('sidebar', false)->toArray();
         @endphp
 
-        @foreach($metas as $name => $meta)
-            @php
-                $meta['name'] = $name;
-                $meta['data']['value'] = Arr::get($meta, 'value', $model->{$name});
-            @endphp
-
-            {{ Field::fieldByType($meta) }}
-        @endforeach
+        {{ Field::render($metas, $model, true) }}
 
         @php
             $metas = collect_metas($setting->get('metas'))
                         ->where('sidebar', false)
+                        ->map(
+                            function ($item, $name) use ($model) {
+                                $item['name'] = "meta[{$name}]";
+                                $item['data']['value'] = $model->getMeta($name);
+                            }
+                        )
                         ->toArray();
         @endphp
 
-        @foreach($metas as $name => $meta)
-            @php
-                $meta['name'] = "meta[{$name}]";
-                $meta['data']['value'] = $model->getMeta($name);
-            @endphp
-
-            {{ Field::fieldByType($meta) }}
-        @endforeach
+        {{ Field::render($metas, $model, true) }}
 
         @do_action("resource.{$setting->get('key')}.form_left", $model)
     </div>
 
     @if($sidebars)
     <div class="col-md-4">
-        @foreach($sidebars as $name => $meta)
-            @php
-                $meta['name'] = $name;
-                $meta['data']['value'] = Arr::get($meta, 'value', $model->{$name});
-            @endphp
-
-            {{ Field::fieldByType($meta) }}
-        @endforeach
+        {{ Field::render($sidebars, $model, true) }}
 
         @php
             $metas = collect_metas($setting->get('metas'))
                         ->where('sidebar', true)
+                        ->map(
+                            function ($item, $name) use ($model) {
+                                $item['name'] = "meta[{$name}]";
+                                $item['data']['value'] = $model->getMeta($name);
+                            }
+                        )
                         ->toArray();
         @endphp
 
-        @foreach($metas as $name => $meta)
-            @php
-                $meta['name'] = "meta[{$name}]";
-                $meta['data']['value'] = $model->getMeta($name);
-            @endphp
-
-            {{ Field::fieldByType($meta) }}
-        @endforeach
+        {{ Field::render($metas, $model, true) }}
 
         @do_action("resource.{$setting->get('key')}.form_right", $model)
     </div>

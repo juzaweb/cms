@@ -13,135 +13,61 @@ namespace Juzaweb\CMS\Support\Html;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Contracts\Field as FieldContract;
+use Juzaweb\CMS\Support\Html\Traits\InputField;
 
 class Field implements FieldContract
 {
-    public function text(string|Model $label, ?string $name, ?array $options = []): Factory|View
+    use InputField;
+
+    public function render(array $fields, array|Model $values = [], bool $collection = false): View|Factory
     {
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_input', $options);
-    }
-
-    public function hidden(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_input', $options);
-    }
-
-    public function textarea(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_textarea', $options);
-    }
-
-    public function select(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_select', $options);
-    }
-
-    public function checkbox(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options['value'] = Arr::get($options, 'value', 1);
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_checkbox', $options);
-    }
-
-    public function slug(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_slug', $options);
-    }
-
-    public function editor(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_ckeditor', $options);
-    }
-
-    public function selectPost(string|Model $label, ?string $name, ?array $options = []): View
-    {
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_select_post', $options);
-    }
-
-    public function selectTaxonomy(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_select_taxonomy', $options);
-    }
-
-    public function selectResource(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options = $this->mapOptions($label, $name, $options);
-
-        return view('cms::components.form_select_resource', $options);
-    }
-
-    public function selectUser(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options = $this->mapOptions($label, $name, $options);
-        $value = $options['value'] ?? [];
-        $value = !is_array($value) ? [$value] : $value;
-
-        $opts = [];
-        if ($value) {
-            $opts = User::whereIn('id', $value)
-                ->get(['id', 'name'])
-                ->mapWithKeys(
-                    function ($item) {
-                        return [
-                            $item->id => $item->name
-                        ];
-                    }
-                )
-                ->toArray();
+        if (!$collection) {
+            $fields = $this->collect($fields)->toArray();
         }
 
-        $options['options'] = $opts;
-        $options['value'] = $value;
-        return view('cms::components.form_select_user', $options);
+        return view('cms::components.render_fields', compact('fields', 'values'));
     }
 
-    public function image(string|Model $label, ?string $name, ?array $options = []): Factory|View
+    public function row(array $options, array|Model $values = []): View|Factory
     {
-        $options = $this->mapOptions($label, $name, $options);
+        $options = new Collection($options);
 
-        return view('cms::components.form_image', $options);
+        return view('cms::components.form_row', compact('options', 'values'));
     }
 
-    public function images(string|Model $label, ?string $name, ?array $options = []): Factory|View
+    public function col(array $options, array|Model $values = []): View|Factory
     {
-        $options = $this->mapOptions($label, $name, $options);
+        $options = new Collection($options);
 
-        return view('cms::components.form_images', $options);
+        return view('cms::components.form_col', compact('options', 'values'));
     }
 
-    public function uploadUrl(string|Model $label, ?string $name, ?array $options = []): Factory|View
+    public function collect(array $fields): Collection
     {
-        $options = $this->mapOptions($label, $name, $options);
+        return (new Collection($fields))
+            ->mapWithKeys(
+                function ($item, $key) {
+                    $default = [
+                        'type' => 'text',
+                        'sidebar' => false,
+                        'visible' => true,
+                    ];
 
-        return view('cms::components.form_upload_url', $options);
-    }
+                    if (is_array($item)) {
+                        $default['label'] = trans("cms::app.{$key}");
 
-    public function security(string|Model $label, ?string $name, ?array $options = []): Factory|View
-    {
-        $options = $this->mapOptions($label, $name, $options);
+                        return [$key => array_merge($default, $item)];
+                    } else {
+                        $default['label'] = trans("cms::app.{$item}");
 
-        return view('cms::components.form_security', $options);
+                        return [$item => $default];
+                    }
+                }
+            );
     }
 
     public function fieldByType(array $data): View|Factory|string
