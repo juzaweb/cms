@@ -11,6 +11,7 @@ JUZACMS - Laravel CMS for Your Project
     - Admin: 
         - https://cms.juzaweb.com/admin-cp 
         - User/Pass: demo@juzaweb.com / demo@juzaweb.com
+- Video Tutorial: https://www.youtube.com/channel/UCo6Dz9HjjBOJpgWsxkln0-A/videos
 
 ## Requirements
 - The modules package requires:
