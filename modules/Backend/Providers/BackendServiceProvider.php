@@ -26,8 +26,6 @@ use Juzaweb\Backend\Observers\CommentObserver;
 use Juzaweb\Backend\Observers\MenuObserver;
 use Juzaweb\Backend\Observers\PostObserver;
 use Juzaweb\Backend\Observers\TaxonomyObserver;
-use Juzaweb\Backend\Repositories\AdsRepository;
-use Juzaweb\Backend\Repositories\AdsRepositoryEloquent;
 use Juzaweb\Backend\Repositories\MediaFileRepository;
 use Juzaweb\Backend\Repositories\MediaFileRepositoryEloquent;
 use Juzaweb\Backend\Repositories\MediaFolderRepository;
@@ -41,7 +39,7 @@ use Juzaweb\Backend\Repositories\UserRepository;
 use Juzaweb\Backend\Repositories\UserRepositoryEloquent;
 use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Http\Middleware\Admin;
-use Juzaweb\CMS\Support\Html\Field;
+use Juzaweb\CMS\Facades\Field;
 use Juzaweb\CMS\Support\Macros\RouterMacros;
 use Juzaweb\CMS\Support\ServiceProvider;
 
@@ -50,7 +48,6 @@ class BackendServiceProvider extends ServiceProvider
     public array $bindings = [
         PostRepository::class => PostRepositoryEloquent::class,
         TaxonomyRepository::class => TaxonomyRepositoryEloquent::class,
-        AdsRepository::class => AdsRepositoryEloquent::class,
         UserRepository::class => UserRepositoryEloquent::class,
         MediaFileRepository::class => MediaFileRepositoryEloquent::class,
         MediaFolderRepository::class => MediaFileRepositoryEloquent::class,
