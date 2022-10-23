@@ -27,28 +27,28 @@ class Field implements FieldContract
         return view('cms::components.form_input', $options);
     }
 
-    public function hidden($label, $name, $options = []): Factory|View
+    public function hidden(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_input', $options);
     }
 
-    public function textarea($label, $name, $options = []): Factory|View
+    public function textarea(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_textarea', $options);
     }
 
-    public function select($label, $name, $options = []): Factory|View
+    public function select(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_select', $options);
     }
 
-    public function checkbox($label, $name, $options = []): Factory|View
+    public function checkbox(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options['value'] = Arr::get($options, 'value', 1);
         $options = $this->mapOptions($label, $name, $options);
@@ -56,42 +56,42 @@ class Field implements FieldContract
         return view('cms::components.form_checkbox', $options);
     }
 
-    public function slug($label, $name, $options = []): Factory|View
+    public function slug(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_slug', $options);
     }
 
-    public function editor($label, $name, $options = []): Factory|View
+    public function editor(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_ckeditor', $options);
     }
 
-    public function selectPost($label, $name, $options = []): View
+    public function selectPost(string|Model $label, ?string $name, ?array $options = []): View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_select_post', $options);
     }
 
-    public function selectTaxonomy($label, $name, $options = []): Factory|View
+    public function selectTaxonomy(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_select_taxonomy', $options);
     }
 
-    public function selectResource($label, $name, $options = []): Factory|View
+    public function selectResource(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_select_resource', $options);
     }
 
-    public function selectUser($label, $name, $options = []): Factory|View
+    public function selectUser(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
         $value = $options['value'] ?? [];
@@ -116,35 +116,35 @@ class Field implements FieldContract
         return view('cms::components.form_select_user', $options);
     }
 
-    public function image($label, $name, $options = []): Factory|View
+    public function image(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_image', $options);
     }
 
-    public function images($label, $name, $options = []): Factory|View
+    public function images(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_images', $options);
     }
 
-    public function uploadUrl($label, $name, $options = []): Factory|View
+    public function uploadUrl(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_upload_url', $options);
     }
 
-    public function security($label, $name, $options = []): Factory|View
+    public function security(string|Model $label, ?string $name, ?array $options = []): Factory|View
     {
         $options = $this->mapOptions($label, $name, $options);
 
         return view('cms::components.form_security', $options);
     }
 
-    public function fieldByType($data): View|Factory|string
+    public function fieldByType(array $data): View|Factory|string
     {
         $type = Arr::get($data, 'type');
 
@@ -219,7 +219,7 @@ class Field implements FieldContract
         };
     }
 
-    public function mapOptions($label, $name, $options = [])
+    public function mapOptions(string|Model $label, ?string $name, ?array $options = [])
     {
         $options['name'] = $name;
         $options['id'] = Arr::get(
