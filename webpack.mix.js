@@ -21,14 +21,17 @@ mix.options(
 
 if (process.env.npm_config_module) {
     require(`${modulePath}/mix.js`);
+    return;
 }
 
 if (process.env.npm_config_theme) {
     require(`${themePath}/${process.env.npm_config_theme}/assets/mix.js`);
+    return;
 }
 
 if (process.env.npm_config_plugin) {
     require(`${pluginPath}/${process.env.npm_config_plugin}/assets/mix.js`);
+    return;
 }
 
 mix.browserSync({

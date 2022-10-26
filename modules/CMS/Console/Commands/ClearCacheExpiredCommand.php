@@ -38,10 +38,6 @@ class ClearCacheExpiredCommand extends Command
 
     public function handle()
     {
-        if (config('cache.default') == 'file') {
-            return;
-        }
-
         $this->deleteExpiredFiles();
         $this->deleteEmptyFolders();
         $this->showResults();

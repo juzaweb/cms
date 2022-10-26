@@ -76,10 +76,21 @@ class Theme
     public function getPath(string $path = ''): string
     {
         if (empty($path)) {
-            return $this->path;
+            return realpath($this->path);
         }
 
-        return "{$this->path}/{$path}";
+        return realpath("{$this->path}/{$path}");
+    }
+
+    public function getContents(string $path): ?string
+    {
+        $path = $this->getPath('register.json');
+
+        if (!file_exists($path)) {
+            throw new \Exception('File does not exists.');
+        }
+
+        return File::get($path);
     }
 
     /**
