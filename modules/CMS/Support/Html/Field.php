@@ -141,6 +141,11 @@ class Field implements FieldContract
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
+            'filter_posts' => $this->filterPosts(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
             default => '',
         };
     }

@@ -141,4 +141,11 @@ trait InputField
 
         return view('cms::components.form_security', $options);
     }
+
+    public function filterPosts(string|Model $label, ?string $name, ?array $options = []): Factory|View
+    {
+        $options = $this->mapOptions($label, $name, $options);
+
+        return view('cms::components.form.filter_posts', compact('name', 'options'));
+    }
 }

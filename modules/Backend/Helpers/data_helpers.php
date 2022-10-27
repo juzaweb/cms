@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Juzaweb\Backend\Http\Resources\ResourceResource;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Taxonomy;
@@ -11,6 +12,15 @@ use Juzaweb\CMS\Facades\JWQuery;
 function get_posts(string $type = null, array $options = []): array
 {
     return JWQuery::posts($type, $options);
+}
+
+function get_posts_by_filter(?array $options): array
+{
+    if ($sortBy = Arr::get($options, 'sort_by')) {
+        $options['order_by'] = [$sortBy => Arr::get($options, 'sort_order', 'asc')];
+    }
+
+    return JWQuery::posts($options['type'] ?? 'posts', $options);
 }
 
 function get_post_taxonomy($post, $taxonomy = null, $params = [])
