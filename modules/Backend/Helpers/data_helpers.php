@@ -38,7 +38,7 @@ function get_related_posts($post, $limit = 5, $taxonomy = null): array
     return JWQuery::relatedPosts($post, $limit, $taxonomy);
 }
 
-function get_popular_posts($type = null, $post = null, $limit = 5, $options = [])
+function get_popular_posts($type = null, $post = null, $limit = 5, $options = []): array
 {
     if ($limit > 20) {
         $limit = 20;
@@ -58,8 +58,7 @@ function get_popular_posts($type = null, $post = null, $limit = 5, $options = []
 
     $posts = $query->take($limit)->get();
 
-    return PostResource::collection($posts)
-        ->toArray(request());
+    return PostResource::collection($posts)->toArray(request());
 }
 
 function get_post_resources($resource, $options = []): array
@@ -85,44 +84,50 @@ function get_post_resources($resource, $options = []): array
         }
     }
 
-    $limit = Arr::get($options, 'limit', 10);
-    if ($limit > 100) {
-        $limit = 10;
+    if ($paginate = Arr::get($options, 'paginate')) {
+        if ($paginate > 100) {
+            $paginate = 10;
+        }
+
+        $data = $query->paginate($paginate);
+    } else {
+        $limit = Arr::get($options, 'limit', 10);
+        if ($limit > 100) {
+            $limit = 10;
+        }
+
+        $data = $query->limit($limit)->get();
     }
 
-    $data = $query->limit($limit)
-        ->get();
-
-    return ResourceResource::collection($data)
-        ->toArray(request());
+    return ResourceResource::collection($data)->toArray(request());
 }
 
-function get_post_resource($resource, $id)
+function get_post_resource($resource, $id): ?array
 {
     $query = Resource::selectFrontendBuilder()
         ->where('type', '=', $resource)
         ->where('id', '=', $id);
     $data = $query->first();
-
-    if (empty($data)) {
-        return $data;
-    }
-
-    return (new ResourceResource($data))->toArray(request());
+    return $data ? (new ResourceResource($data))->toArray(request()) : null;
 }
 
-function get_previous_post($post)
+function get_next_resource(string $type, ?array $resource): ?array
+{
+    $query = Resource::selectFrontendBuilder()
+        ->where('type', '=', $type)
+        ->where('id', '>', Arr::get($resource, 'id'));
+    $data = $query->first();
+    return $data ? (new ResourceResource($data))->toArray(request()) : null;
+}
+
+function get_previous_post(?array $currentPost): ?array
 {
     $post = Post::selectFrontendBuilder()
-        ->where('id', '<', Arr::get($post, 'id', 0))
+        ->where('id', '<', Arr::get($currentPost, 'id'))
         ->orderBy('id', 'DESC')
         ->first();
 
-    if (empty($post)) {
-        return null;
-    }
-
-    return (new PostResource($post))->toArray(request());
+    return $post ? (new PostResource($post))->toArray(request()) : null;
 }
 
 function get_next_post($post)
@@ -188,7 +193,7 @@ function get_taxonomies($args = []): array
         ->toArray(request());
 }
 
-function get_total_resource($resource, $args = [])
+function get_total_resource($resource, $args = []): int
 {
     $query = Resource::selectFrontendBuilder()
         ->where('type', '=', $resource);

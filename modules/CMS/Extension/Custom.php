@@ -93,6 +93,7 @@ class Custom extends AbstractExtension
             new TwigFunction('apply_filters', 'apply_filters'),
             new TwigFunction('plugin_asset', 'plugin_assets'),
             new TwigFunction('get_posts_by_filter', 'get_posts_by_filter'),
+            new TwigFunction('get_next_resource', 'get_next_resource'),
         ];
     }
 }
