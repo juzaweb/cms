@@ -23,22 +23,14 @@ use Juzaweb\CMS\Support\FileManager;
 
 class PostImporter implements PostImporterContract
 {
-    protected PostManagerContract $postCreator;
-
-    protected HookActionContract $hookAction;
-
-    protected TaxonomyRepository $taxonomyRepository;
+    protected int $createdBy;
+    protected bool $importContentImages = false;
 
     public function __construct(
-        PostManagerContract $postCreator,
-        HookActionContract $hookAction,
-        TaxonomyRepository $taxonomyRepository
+        protected PostManagerContract $postCreator,
+        protected HookActionContract $hookAction,
+        protected TaxonomyRepository $taxonomyRepository
     ) {
-        $this->postCreator = $postCreator;
-
-        $this->hookAction = $hookAction;
-
-        $this->taxonomyRepository = $taxonomyRepository;
     }
 
     public function import(array $data, array $options = []): Post
@@ -155,7 +147,6 @@ class PostImporter implements PostImporterContract
             )->map(
                 function ($item) {
                     $item['name'] = trim($item['name']);
-                    $item['slug'] = Str::slug($item['name']);
                     return $item;
                 }
             );
@@ -180,18 +171,13 @@ class PostImporter implements PostImporterContract
 
         $urls = [];
         foreach ($imgs as $e) {
-            $url = $e->src;
-            if (empty($url)) {
-                $url = $e->{'data-src'};
-            }
-
+            $url = $e->src ?? $e->{'data-src'};
             if ($url) {
                 $urls[] = $url;
             }
         }
 
         $urls = array_unique($urls);
-
         foreach ($urls as $url) {
             $image = $this->addMediaFromUrl(trim($url), 'image', $options);
 

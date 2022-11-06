@@ -12,6 +12,9 @@ namespace Juzaweb\CMS\Contracts;
 
 use Juzaweb\Backend\Models\Post;
 
+/**
+ * @see \Juzaweb\CMS\Support\Imports\PostImporter
+ */
 interface PostImporterContract
 {
     public function import(array $data, array $options = []): Post;
