@@ -148,9 +148,11 @@ function initSelect2(parent = 'body')
             url: '/'+ juzaweb.adminPrefix +'/load-data/loadPosts',
             dataType: 'json',
             data: function (params) {
+                let type = $(this).data('type') ? $(this).data('type') : null;
                 return {
                     search: $.trim(params.term),
-                    page: params.page
+                    page: params.page,
+                    type: type,
                 };
             }
         },

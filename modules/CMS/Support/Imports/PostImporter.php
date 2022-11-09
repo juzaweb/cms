@@ -24,7 +24,8 @@ use Juzaweb\CMS\Support\FileManager;
 class PostImporter implements PostImporterContract
 {
     protected int $createdBy;
-    protected bool $importContentImages = false;
+    protected bool $downloadThumbnai = true;
+    protected bool $downloadContentImages = true;
 
     public function __construct(
         protected PostManagerContract $postCreator,
@@ -39,11 +40,11 @@ class PostImporter implements PostImporterContract
             throw new \Exception('Post type is required for import.');
         }
 
-        if ($thumbnail = Arr::get($data, 'thumbnail')) {
+        if ($this->getDownloadThumbnail() && $thumbnail = Arr::get($data, 'thumbnail')) {
             $data['thumbnail'] = $this->addMediaFromUrl($thumbnail, 'image', $options);
         }
 
-        if (Arr::get($options, 'import_content_images', true)) {
+        if ($this->getDownloadContentImages()) {
             $data['content'] = $this->saveContentImages($data['content'], $options);
         }
 
@@ -59,6 +60,30 @@ class PostImporter implements PostImporterContract
         }
 
         return $this->postCreator->create($data);
+    }
+
+    public function setDownloadThumbnail(bool $downloadThumbnai): static
+    {
+        $this->downloadThumbnai = $downloadThumbnai;
+
+        return $this;
+    }
+
+    public function getDownloadThumbnail(): bool
+    {
+        return $this->downloadThumbnai;
+    }
+
+    public function setDownloadContentImages(bool $download): static
+    {
+        $this->downloadContentImages = $download;
+
+        return $this;
+    }
+
+    public function getDownloadContentImages(): bool
+    {
+        return $this->downloadContentImages;
     }
 
     protected function getOrCreateTaxonomies(Collection $taxonomy, array $data): array

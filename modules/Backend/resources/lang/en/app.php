@@ -446,6 +446,7 @@ return [
     'taxonomies' => 'Taxonomies',
     'sort_by' => 'Sort by',
     'sort_order' => 'Sort order',
+    'view_post' => 'View post',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',

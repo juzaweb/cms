@@ -17,5 +17,13 @@ use Juzaweb\Backend\Models\Post;
  */
 interface PostImporterContract
 {
+    public function setDownloadThumbnail(bool $downloadThumbnai): static;
+
+    public function getDownloadThumbnail(): bool;
+
+    public function setDownloadContentImages(bool $download): static;
+
+    public function getDownloadContentImages(): bool;
+
     public function import(array $data, array $options = []): Post;
 }

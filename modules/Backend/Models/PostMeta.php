@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Juzaweb\CMS\Models\Model;
 
 /**
@@ -40,7 +41,7 @@ class PostMeta extends Model
         'post_id',
     ];
 
-    public function post()
+    public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class, 'post_id', 'id');
     }
