@@ -11,6 +11,8 @@
 namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Models\Model;
 
@@ -94,22 +96,22 @@ class Resource extends Model
         return self::query()->wherePublish();
     }
 
-    public function post(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class, 'post_id', 'id');
     }
 
-    public function metas(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function metas(): HasMany
     {
         return $this->hasMany(ResourceMeta::class, 'resource_id', 'id');
     }
 
-    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(Resource::class, 'parent_id', 'id');
     }
 
-    public function children(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function children(): HasMany
     {
         return $this->hasMany(Resource::class, 'parent_id', 'id');
     }

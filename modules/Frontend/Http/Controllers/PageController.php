@@ -8,17 +8,25 @@ use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
-use Noodlehaus\Config;
 
 class PageController extends FrontendController
 {
     public function index(Request $request, ...$slug)
     {
         $pageSlug = $this->getPageSlug($slug);
+
         $page = Post::createFrontendBuilder()
             ->where('slug', '=', $pageSlug)
             ->firstOrFail();
+
         return $this->handlePage($request, $page, $slug);
+    }
+
+    public function detail(Request $request, $id)
+    {
+        $page = Post::createFrontendBuilder()->findOrFail($id);
+
+        return $this->handlePage($request, $page);
     }
 
     protected function getPageSlug($slug)
@@ -96,12 +104,5 @@ class PageController extends FrontendController
         }
 
         return apply_filters('theme.get_view_page', $view, $page, $params);
-    }
-
-    public function detail(Request $request, $id)
-    {
-        $page = Post::findOrFail($id);
-
-        return $this->handlePage($request, $page);
     }
 }

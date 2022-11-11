@@ -195,8 +195,7 @@ function get_taxonomies($args = []): array
 
 function get_total_resource($resource, $args = []): int
 {
-    $query = Resource::selectFrontendBuilder()
-        ->where('type', '=', $resource);
+    $query = Resource::selectFrontendBuilder()->where('type', '=', $resource);
 
     if ($postId = Arr::get($args, 'post_id')) {
         $query->where('post_id', $postId);
@@ -216,14 +215,16 @@ function get_page_url(string|int|Post|null $page): null|string
     }
 
     if (is_numeric($page)) {
-        $data = Post::find($page, ['id', 'slug', 'type']);
+        $data = Post::cacheFor(3600)->find($page, ['id', 'slug', 'type']);
 
         if ($data) {
             return $data->getLink();
         }
     }
 
-    $data = Post::findBySlug($page, ['id', 'slug', 'type']);
+    $data = Post::cacheFor(3600)
+        ->where('slug', '=', $page)
+        ->first(['id', 'slug', 'type']);
 
     return $data?->getLink();
 }

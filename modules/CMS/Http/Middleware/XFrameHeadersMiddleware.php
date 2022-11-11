@@ -17,8 +17,7 @@ class XFrameHeadersMiddleware
     public function handle($request, Closure $next)
     {
         if (Installer::alreadyInstalled()) {
-            $user = auth()->user();
-            $GLOBALS['jw_user'] = $user;
+            $GLOBALS['jw_user'] = auth()->user();
         }
 
         /**
