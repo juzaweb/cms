@@ -41,7 +41,7 @@ use Spatie\Feed\FeedItem;
  * @property-read int|null $menu_items_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostMeta[] $metas
  * @property-read int|null $metas_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostRating[] $postRatings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostRating[] $ratings
  * @property-read int|null $post_ratings_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostView[] $postViews
  * @property-read int|null $post_views_count
@@ -169,14 +169,19 @@ class Post extends Model implements Feedable
         return $this->hasMany(PostView::class, 'post_id', 'id');
     }
 
-    public function postRatings(): HasMany
+    public function ratings(): HasMany
     {
         return $this->hasMany(PostRating::class, 'post_id', 'id');
     }
 
+    public function likes(): HasMany
+    {
+        return $this->hasMany(PostLike::class, 'post_id', 'id');
+    }
+
     public function getTotalRating(): int
     {
-        return $this->postRatings()->count(['id']);
+        return $this->ratings()->count(['id']);
     }
 
     protected function getCacheBaseTags(): array
@@ -188,7 +193,7 @@ class Post extends Model implements Feedable
 
     public function getStarRating(): float|int
     {
-        $total = $this->postRatings()->sum('star');
+        $total = $this->ratings()->sum('star');
         $count = $this->getTotalRating();
 
         if ($count <= 0) {

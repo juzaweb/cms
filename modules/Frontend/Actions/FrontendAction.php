@@ -10,65 +10,46 @@
 
 namespace Juzaweb\Frontend\Actions;
 
-use Illuminate\Http\Request;
-use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\PostRating;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\Frontend\Http\Controllers\AjaxController;
 
 class FrontendAction extends Action
 {
     public function handle()
     {
         $this->addAction(self::FRONTEND_HEADER_ACTION, [$this, 'addFrontendHeader']);
-        HookAction::registerFrontendAjax(
-            'rating',
-            [
-                'callback' => [app(FrontendAction::class), 'rating'],
-                'method' => 'post',
-            ]
-        );
+        $this->addAction(Action::FRONTEND_INIT, [$this, 'addFrontendAjax']);
     }
 
-    public function rating(Request $request)
+    public function addFrontendAjax()
     {
-        $post = $request->post('post_id');
-        $post = Post::createFrontendBuilder()
-            ->where('id', '=', $post)
-            ->firstOrFail();
+        $theme = Theme::find(jw_current_theme());
+        if (!$support = $theme->getRegister('support', [])) {
+            return;
+        }
 
-        $star = $request->post('star');
-
-        if (empty($star)) {
-            return response()->json(
+        if (in_array('like', $support)) {
+            $this->hookAction->registerFrontendAjax(
+                'like',
                 [
-                    'status' => 'error',
+                    'callback' => [AjaxController::class, 'like'],
+                    'method' => 'post',
+                    'auth' => true,
                 ]
             );
         }
 
-        $clientIp = get_client_ip();
-
-        PostRating::updateOrCreate(
-            [
-                'post_id' => $post->id,
-                'client_ip' => $clientIp,
-            ],
-            [
-                'star' => $star
-            ]
-        );
-
-        $rating = $post->getStarRating();
-
-        $post->update(
-            [
-                'rating' => $rating,
-                'total_rating' => $post->getTotalRating()
-            ]
-        );
-
-        return $rating;
+        if (in_array('rating', $support)) {
+            $this->hookAction->registerFrontendAjax(
+                'rating',
+                [
+                    'callback' => [AjaxController::class, 'rating'],
+                    'method' => 'post',
+                ]
+            );
+        }
     }
 
     public function addFrontendHeader()
