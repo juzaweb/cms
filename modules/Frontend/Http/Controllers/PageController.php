@@ -89,7 +89,7 @@ class PageController extends FrontendController
         if ($template = $page->getMeta('template')) {
             if ($data = $this->getThemeRegister("templates.{$template}.data")) {
                 foreach ($data as $key => $item) {
-                    $params['page'][$key] = $this->getPageCustomData($item);
+                    $params['page'][$key] = $this->getPageCustomData($item, $params);
                 }
             }
         }
@@ -97,7 +97,7 @@ class PageController extends FrontendController
         return $params;
     }
 
-    protected function getPageCustomData(array $item)
+    protected function getPageCustomData(array $item, array $params)
     {
         global $jw_user;
 
@@ -120,6 +120,22 @@ class PageController extends FrontendController
                     ->appends(request()->query());
 
                 return PostResource::collection($paginate)->response()->getData(true);
+            case 'popular_posts':
+                return get_popular_posts(
+                    $item['post_type'] ?? null,
+                    $params['post'],
+                    $item['limit'] ?? 5
+                );
+            case 'related_posts':
+                return get_related_posts(
+                    $params['post'],
+                    $item['limit'] ?? 5,
+                    $item['taxonomy'] ?? null
+                );
+            case 'previous_post':
+                return get_previous_post($params['post']);
+            case 'next_post':
+                return get_next_post($params['post']);
         }
 
         return null;
@@ -150,7 +166,7 @@ class PageController extends FrontendController
         return apply_filters('theme.get_view_page', $view, $page, $params);
     }
 
-    protected function getThemeRegister(string $key = null): array
+    protected function getThemeRegister(string $key = null): ?array
     {
         if (!isset($this->themeRegister)) {
             $this->themeRegister = ThemeLoader::getRegister(jw_current_theme());
