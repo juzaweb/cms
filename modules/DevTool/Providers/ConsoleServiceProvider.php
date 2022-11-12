@@ -3,6 +3,7 @@
 namespace Juzaweb\DevTool\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Juzaweb\DevTool\Commands\CacheSizeCommand;
 use Juzaweb\DevTool\Commands\MakeAdminCommand;
 use Juzaweb\DevTool\Commands\Plugin\ActionMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\CommandMakeCommand;
@@ -97,6 +98,7 @@ class ConsoleServiceProvider extends ServiceProvider
         UpdateCommand::class,
         ThemeUpdateCommand::class,
         MakeBlockCommand::class,
+        CacheSizeCommand::class,
     ];
 
     /**
