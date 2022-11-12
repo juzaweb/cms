@@ -12,44 +12,12 @@ namespace Juzaweb\Frontend\Actions;
 
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\Theme;
-use Juzaweb\Frontend\Http\Controllers\AjaxController;
 
 class FrontendAction extends Action
 {
     public function handle()
     {
         $this->addAction(self::FRONTEND_HEADER_ACTION, [$this, 'addFrontendHeader']);
-        $this->addAction(Action::FRONTEND_INIT, [$this, 'addFrontendAjax']);
-    }
-
-    public function addFrontendAjax()
-    {
-        $theme = Theme::find(jw_current_theme());
-        if (!$support = $theme->getRegister('support', [])) {
-            return;
-        }
-
-        if (in_array('like', $support)) {
-            $this->hookAction->registerFrontendAjax(
-                'like',
-                [
-                    'callback' => [AjaxController::class, 'like'],
-                    'method' => 'post',
-                    'auth' => true,
-                ]
-            );
-        }
-
-        if (in_array('rating', $support)) {
-            $this->hookAction->registerFrontendAjax(
-                'rating',
-                [
-                    'callback' => [AjaxController::class, 'rating'],
-                    'method' => 'post',
-                ]
-            );
-        }
     }
 
     public function addFrontendHeader()

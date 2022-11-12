@@ -3,6 +3,7 @@
 namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
@@ -11,6 +12,8 @@ use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class PageController extends FrontendController
 {
+    protected array $themeRegister;
+
     public function index(Request $request, ...$slug)
     {
         $pageSlug = $this->getPageSlug($slug);
@@ -37,27 +40,9 @@ class PageController extends FrontendController
     protected function handlePage(Request $request, Post $page, array $slug = [])
     {
         $theme = jw_theme_info();
-
-        if (is_home()) {
-            $config = get_configs(['title', 'description']);
-
-            $params = [
-                'post' => (new PostResource($page))->toArray($request),
-                'title' => $config['title'],
-                'description' => $config['description'],
-                'slug' => $slug,
-            ];
-        } else {
-            $params = [
-                'post' => (new PostResource($page))->toArray($request),
-                'title' => $page->title,
-                'description' => $page->description,
-                'slug' => $slug,
-            ];
-        }
+        $params = $this->getPageParams($page, $slug, $request);
 
         $params = apply_filters('theme.get_params_page', $params, $page);
-
         $view = $this->getViewPage($page, $theme, $params);
 
         event(new PostViewed($page));
@@ -81,12 +66,71 @@ class PageController extends FrontendController
         );
     }
 
+    protected function getPageParams($page, $slug, $request): array
+    {
+        if (is_home()) {
+            $config = get_configs(['title', 'description']);
+
+            $params = [
+                'post' => (new PostResource($page))->toArray($request),
+                'title' => $config['title'],
+                'description' => $config['description'],
+                'slug' => $slug,
+            ];
+        } else {
+            $params = [
+                'post' => (new PostResource($page))->toArray($request),
+                'title' => $page->title,
+                'description' => $page->description,
+                'slug' => $slug,
+            ];
+        }
+
+        if ($template = $page->getMeta('template')) {
+            if ($data = $this->getThemeRegister("templates.{$template}.data")) {
+                foreach ($data as $key => $item) {
+                    $params['page'][$key] = $this->getPageCustomData($item);
+                }
+            }
+        }
+
+        return $params;
+    }
+
+    protected function getPageCustomData(array $item)
+    {
+        global $jw_user;
+
+        switch ($item['type']) {
+            case 'post_liked':
+                $query = Post::createFrontendBuilder();
+
+                if (isset($item['post_type'])) {
+                    $query->where('type', '=', $item['post_type']);
+                }
+
+                $query->whereHas(
+                    'likes',
+                    function ($q) use ($jw_user, $item) {
+                        $q->where("{$q->getModel()->getTable()}.user_id", '=', $jw_user->id);
+                    }
+                );
+
+                $paginate = $query->paginate(get_config('posts_per_page', 12))
+                    ->appends(request()->query());
+
+                return PostResource::collection($paginate)->response()->getData(true);
+        }
+
+        return null;
+    }
+
     protected function getViewPage(Post $page, $themeInfo, array $params = []): string
     {
         /* Get view by template */
         if ($template = $page->getMeta('template')) {
             $templates = ThemeLoader::getTemplates($themeInfo->get('name'), $template);
-            $templateView = $templates['view'] ?? null;
+            $templateView = Arr::get($templates, 'view', "theme::templates.{$template}");
 
             if ($templateView && view()->exists(theme_viewname($templateView))) {
                 $view = $templateView;
@@ -104,5 +148,18 @@ class PageController extends FrontendController
         }
 
         return apply_filters('theme.get_view_page', $view, $page, $params);
+    }
+
+    protected function getThemeRegister(string $key = null): array
+    {
+        if (!isset($this->themeRegister)) {
+            $this->themeRegister = ThemeLoader::getRegister(jw_current_theme());
+        }
+
+        if ($key) {
+            return Arr::get($this->themeRegister, $key);
+        }
+
+        return $this->themeRegister;
     }
 }

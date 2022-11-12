@@ -184,13 +184,6 @@ class Post extends Model implements Feedable
         return $this->ratings()->count(['id']);
     }
 
-    protected function getCacheBaseTags(): array
-    {
-        return [
-            'posts',
-        ];
-    }
-
     public function getStarRating(): float|int
     {
         $total = $this->ratings()->sum('star');
@@ -218,5 +211,12 @@ class Post extends Model implements Feedable
             ->updated($updated)
             ->link($this->getLink())
             ->authorName($name);
+    }
+
+    protected function getCacheBaseTags(): array
+    {
+        return [
+            'posts',
+        ];
     }
 }

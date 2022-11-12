@@ -13,9 +13,11 @@ namespace Juzaweb\Frontend\Actions;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Support\DefaultPageBlock;
 use Juzaweb\CMS\Support\DefaultWidget;
+use Juzaweb\Frontend\Http\Controllers\AjaxController;
 use TwigBridge\Facade\Twig;
 
 class ThemeAction extends Action
@@ -30,11 +32,6 @@ class ThemeAction extends Action
 
         $this->currentTheme = jw_current_theme();
         $this->register = ThemeLoader::getRegister($this->currentTheme);
-    }
-
-    protected function getRegister($key, $default = [])
-    {
-        return Arr::get($this->register, $key, $default);
     }
 
     public function handle()
@@ -59,6 +56,8 @@ class ThemeAction extends Action
             Action::FRONTEND_INIT,
             [$this, 'addProfilePages']
         );
+
+        $this->addAction(Action::FRONTEND_INIT, [$this, 'addFrontendAjax']);
     }
 
     public function postTypes()
@@ -258,5 +257,47 @@ class ThemeAction extends Action
                 'title' => trans('cms::app.change_password'),
             ]
         );
+    }
+
+    public function addFrontendAjax()
+    {
+        if (!$support = $this->getRegister('support', [])) {
+            return;
+        }
+
+        if (in_array('like', $support)) {
+            $this->hookAction->registerFrontendAjax(
+                'like',
+                [
+                    'callback' => [AjaxController::class, 'like'],
+                    'method' => 'post',
+                    'auth' => true,
+                ]
+            );
+
+            $this->hookAction->registerFrontendAjax(
+                'unlike',
+                [
+                    'callback' => [AjaxController::class, 'unlike'],
+                    'method' => 'post',
+                    'auth' => true,
+                ]
+            );
+        }
+
+        if (in_array('rating', $support)) {
+            $this->hookAction->registerFrontendAjax(
+                'rating',
+                [
+                    'callback' => [AjaxController::class, 'rating'],
+                    'method' => 'post',
+                ]
+            );
+        }
+    }
+
+    protected function getRegister($key, $default = [])
+    {
+        return Arr::get($this->register, $key, $default);
     }
 }

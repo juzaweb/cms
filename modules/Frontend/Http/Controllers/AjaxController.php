@@ -86,7 +86,7 @@ class AjaxController extends FrontendController
         global $jw_user;
 
         $post = Post::wherePublish()
-            ->where('id', '=', $request->input('post_id'))
+            ->where(['id' => $request->input('post_id')])
             ->firstOrFail();
 
         $post->likes()->firstOrCreate(
@@ -106,7 +106,7 @@ class AjaxController extends FrontendController
         global $jw_user;
 
         $post = Post::wherePublish()
-            ->where('id', '=', $request->input('post_id'))
+            ->where(['id' => $request->input('post_id')])
             ->firstOrFail();
 
         $post->likes()->where(['user_id' => $jw_user->id])->first()?->delete();
