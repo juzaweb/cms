@@ -51,10 +51,6 @@ trait PostTypeController
         $limit = (int) $request->get('limit', 20);
 
         $query = $table->query($request->all());
-        if (collect($columns)->filter(fn ($item) => isset($item['detailFormater']))->all()) {
-            $query->with(['taxonomies']);
-        }
-
         $count = $query->count();
         $query->orderBy($sort, $order);
         $query->offset($offset);
@@ -62,11 +58,16 @@ trait PostTypeController
         $rows = $query->get();
 
         $results = [];
-
         $postType = $this->getPostType();
-        $taxonomies = Taxonomy::where('post_type', '=', $postType)
+        $taxonomies = Taxonomy::with(
+            [
+                'children.children'
+            ]
+        )
+            ->where('post_type', '=', $postType)
             ->whereNull('parent_id')
             ->get();
+
         $postTypeTaxonomies = HookAction::getTaxonomies($postType);
 
         foreach ($rows as $index => $row) {

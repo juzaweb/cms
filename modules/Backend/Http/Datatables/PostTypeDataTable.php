@@ -56,7 +56,7 @@ class PostTypeDataTable extends DataTable
         $taxonomies = $this->taxonomies->take(3);
 
         foreach ($taxonomies as $key => $taxonomy) {
-            $columns[$key] = [
+            $columns["tax_{$key}"] = [
                 'label' => $taxonomy->get('label'),
                 'width' => '15%',
                 'sortable' => false,
@@ -198,7 +198,7 @@ class PostTypeDataTable extends DataTable
          * @var Builder $query
          */
         $query = $this->makeModel()->with(['taxonomies']);
-        $query->where('type', '=', $this->postType['key']);
+        $query->where(['type' => $this->postType['key']]);
         $data['q'] = Arr::get($data, 'keyword');
         $data['type'] = $this->postType['key'];
 

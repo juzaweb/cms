@@ -147,9 +147,10 @@ if (!function_exists('count_unread_notifications')) {
      */
     function count_unread_notifications(): int
     {
-        $user = Auth::user();
-        if (method_exists($user, 'unreadNotifications')) {
-            return $user->unreadNotifications()->count(['id']);
+        global $jw_user;
+
+        if (method_exists($jw_user, 'unreadNotifications')) {
+            return $jw_user->unreadNotifications()->cacheFor(3600)->count(['id']);
         }
 
         return 0;

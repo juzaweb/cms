@@ -15,10 +15,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
+use Juzaweb\Backend\Models\Notification;
 use Juzaweb\Backend\Models\PasswordReset;
 use Juzaweb\Backend\Models\SocialToken;
 use Juzaweb\CMS\Abstracts\Action;
@@ -147,6 +149,11 @@ class User extends Authenticatable
     protected static function newFactory(): Factory
     {
         return UserFactory::new();
+    }
+
+    public function notifications(): MorphMany
+    {
+        return $this->morphMany(Notification::class, 'notifiable')->latest();
     }
 
     public function passwordReset(): HasOne

@@ -11,6 +11,8 @@
 namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Facades\HookAction;
 
@@ -34,12 +36,17 @@ trait TaxonomyModel
         return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
-    public function children(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
-    public function posts($postType = null)
+    public function recursiveChildren(): HasMany
+    {
+        return $this->children()->with('recursiveChildren');
+    }
+
+    public function posts($postType = null): BelongsToMany
     {
         $postType = $postType ?: $this->getPostType('key');
         $postModel = $this->getPostType('model');
