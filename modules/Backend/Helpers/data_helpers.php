@@ -14,7 +14,7 @@ function get_posts(string $type = null, array $options = []): array
     return JWQuery::posts($type, $options);
 }
 
-function get_posts_by_filter(?array $options): array
+function get_posts_by_filter(?array $options): ?array
 {
     if ($sortBy = Arr::get($options, 'sort_by')) {
         $options['order_by'] = [$sortBy => Arr::get($options, 'sort_order', 'asc')];
@@ -23,7 +23,7 @@ function get_posts_by_filter(?array $options): array
     return JWQuery::posts($options['type'] ?? 'posts', $options);
 }
 
-function get_post_taxonomy($post, $taxonomy = null, $params = [])
+function get_post_taxonomy($post, $taxonomy = null, $params = []): ?array
 {
     return JWQuery::postTaxonomy($post, $taxonomy, $params);
 }
@@ -33,7 +33,7 @@ function get_post_taxonomies($post, $taxonomy = null, $params = [])
     return JWQuery::postTaxonomies($post, $taxonomy, $params);
 }
 
-function get_related_posts($post, $limit = 5, $taxonomy = null): array
+function get_related_posts($post, $limit = 5, $taxonomy = null): ?array
 {
     return JWQuery::relatedPosts($post, $limit, $taxonomy);
 }
@@ -130,7 +130,7 @@ function get_previous_post(?array $currentPost): ?array
     return $post ? (new PostResource($post))->toArray(request()) : null;
 }
 
-function get_next_post($post)
+function get_next_post($post): ?array
 {
     $post = Post::selectFrontendBuilder()
         ->where('id', '>', Arr::get($post, 'id', 0))
@@ -144,7 +144,7 @@ function get_next_post($post)
     return (new PostResource($post))->toArray(request());
 }
 
-function get_taxonomy($taxonomy, $args = [])
+function get_taxonomy($taxonomy, $args = []): array
 {
     if (empty($taxonomy)) {
         return [];
