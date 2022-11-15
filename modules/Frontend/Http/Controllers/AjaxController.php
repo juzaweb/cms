@@ -10,12 +10,18 @@
 
 namespace Juzaweb\Frontend\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\PostRating;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Juzaweb\Frontend\Http\Requests\LikeRequest;
+use Juzaweb\Frontend\Http\Requests\RatingRequest;
 
 class AjaxController extends FrontendController
 {
@@ -45,5 +51,66 @@ class AjaxController extends FrontendController
         }
 
         return App::call($callback);
+    }
+
+    public function rating(RatingRequest $request)
+    {
+        $post = Post::wherePublish()
+            ->where('id', '=', $request->post('post_id'))
+            ->firstOrFail();
+
+        $clientIp = get_client_ip();
+        PostRating::updateOrCreate(
+            [
+                'post_id' => $post->id,
+                'client_ip' => $clientIp,
+            ],
+            [
+                'star' => $request->post('star')
+            ]
+        );
+
+        $rating = $post->getStarRating();
+        $post->update(
+            [
+                'rating' => $rating,
+                'total_rating' => $post->getTotalRating()
+            ]
+        );
+
+        return $rating;
+    }
+
+    public function like(LikeRequest $request): JsonResponse|RedirectResponse
+    {
+        global $jw_user;
+
+        $post = Post::wherePublish()
+            ->where(['id' => $request->input('post_id')])
+            ->firstOrFail();
+
+        $post->likes()->firstOrCreate(
+            [
+                'user_id' => $jw_user->id,
+            ],
+            [
+                'client_ip' => get_client_ip()
+            ]
+        );
+
+        return $this->success('Like success.');
+    }
+
+    public function unlike(LikeRequest $request): JsonResponse|RedirectResponse
+    {
+        global $jw_user;
+
+        $post = Post::wherePublish()
+            ->where(['id' => $request->input('post_id')])
+            ->firstOrFail();
+
+        $post->likes()->where(['user_id' => $jw_user->id])->first()?->delete();
+
+        return $this->success('Unlike success.');
     }
 }

@@ -31,6 +31,7 @@
 
         $items = Auth::user()
             ->unreadNotifications()
+            ->cacheFor(3600)
             ->orderBy('id', 'DESC')
             ->limit(5)
             ->get(['id', 'data', 'created_at']);

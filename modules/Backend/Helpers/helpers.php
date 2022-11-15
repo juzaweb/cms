@@ -147,9 +147,10 @@ if (!function_exists('count_unread_notifications')) {
      */
     function count_unread_notifications(): int
     {
-        $user = Auth::user();
-        if (method_exists($user, 'unreadNotifications')) {
-            return $user->unreadNotifications()->count(['id']);
+        global $jw_user;
+
+        if (method_exists($jw_user, 'unreadNotifications')) {
+            return $jw_user->unreadNotifications()->cacheFor(3600)->count(['id']);
         }
 
         return 0;
@@ -588,26 +589,7 @@ if (!function_exists('has_permission')) {
 if (!function_exists('collect_metas')) {
     function collect_metas(array $metas): Collection
     {
-        return collect($metas)
-            ->mapWithKeys(
-                function ($item, $key) {
-                    $default = [
-                        'type' => 'text',
-                        'sidebar' => false,
-                        'visible' => true,
-                    ];
-
-                    if (is_array($item)) {
-                        $default['label'] = trans("cms::app.{$key}");
-
-                        return [$key => array_merge($default, $item)];
-                    } else {
-                        $default['label'] = trans("cms::app.{$item}");
-
-                        return [$item => $default];
-                    }
-                }
-            );
+        return \Juzaweb\CMS\Facades\Field::collect($metas);
     }
 }
 

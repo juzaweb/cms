@@ -75,7 +75,7 @@ class PluginController extends BackendController
         );
     }
 
-    public function bulkActions(BulkActionRequest $request, PluginUpdater $updater): JsonResponse
+    public function bulkActions(BulkActionRequest $request): JsonResponse
     {
         $action = $request->post('action');
         $ids = $request->post('ids');
@@ -95,6 +95,10 @@ class PluginController extends BackendController
             );
         }
 
+        if ($ids) {
+            event(new DumpAutoloadPlugin());
+        }
+
         foreach ($ids as $plugin) {
             try {
                 switch ($action) {
@@ -103,7 +107,7 @@ class PluginController extends BackendController
                             throw new \Exception('Access deny.');
                         }
                         /**
-                         * @var \Juzaweb\CMS\Support\Plugin $module
+                         * @var SupportPlugin $module
                          */
                         $module = app('plugins')->find($plugin);
                         if ($module->isEnabled()) {
@@ -127,10 +131,6 @@ class PluginController extends BackendController
                     ]
                 );
             }
-        }
-
-        if ($action == 'delete') {
-            event(new DumpAutoloadPlugin());
         }
 
         event(new AfterPluginBulkAction($action, $ids));

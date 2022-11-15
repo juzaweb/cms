@@ -119,10 +119,10 @@ if (! function_exists('get_name_template_part')) {
      *
      * @param string $type // Singular of post
      * @param string $slug
-     * @param string $name
+     * @param ?string $name
      * @return string
      */
-    function get_name_template_part($type, $slug, $name = null): string
+    function get_name_template_part(string $type, string $slug, ?string $name = null): string
     {
         $name = (string) $name;
 

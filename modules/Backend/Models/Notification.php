@@ -2,8 +2,9 @@
 
 namespace Juzaweb\Backend\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Arr;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
  * Juzaweb\Backend\Models\Notification
@@ -33,11 +34,12 @@ use Illuminate\Support\Arr;
  * @property int|null $site_id
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereSiteId($value)
  */
-class Notification extends Model
+class Notification extends DatabaseNotification
 {
-    protected $keyType = 'string';
+    use QueryCacheable;
 
-    protected $table = 'notifications';
+    public string $cachePrefix = 'notifications_';
+    protected static bool $flushCacheOnUpdate = true;
 
     protected $fillable = [
         'id',
@@ -46,10 +48,6 @@ class Notification extends Model
         'read_at',
         'notifiable_type',
         'notifiable_id',
-    ];
-
-    public $casts = [
-        'data' => 'array',
     ];
 
     public $appends = [
@@ -65,5 +63,12 @@ class Notification extends Model
     public function getUrlAttribute()
     {
         return Arr::get($this->data, 'url');
+    }
+
+    protected function getCacheBaseTags(): array
+    {
+        return [
+            'notifications',
+        ];
     }
 }

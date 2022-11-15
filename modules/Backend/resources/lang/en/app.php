@@ -440,6 +440,13 @@ return [
     'social_login' => 'Social Login',
     'quick_edit' => 'Quick edit',
     'settings' => 'Settings',
+    'post_type' => 'Post Type',
+    'post_types' => 'Post Types',
+    'taxonomy' => 'Taxonomy',
+    'taxonomies' => 'Taxonomies',
+    'sort_by' => 'Sort by',
+    'sort_order' => 'Sort order',
+    'view_post' => 'View post',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',

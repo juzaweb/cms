@@ -5,19 +5,13 @@ namespace Juzaweb\CMS\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static Plugin[] all()
- * @method static Plugin|null find(string $name)
+ * @method static \Juzaweb\CMS\Support\Plugin[] all()
+ * @method static \Juzaweb\CMS\Support\Plugin|null find(string $name)
  * @method static delete(string $plugin)
  * @method static enable(string $plugin)
  * @method static disable(string $plugin)
  * @method static getPath(string $path = '')
- * @method get(string $key, $default = null)
- * @method string getDisplayName()
- * @method string getDomainName()
- * @method string getSettingUrl()
- * @method string getVersion()
- * @method string getScreenshot()
- * @method bool isEnabled()
+ * @method static bool isEnabled(string $name)
  *
  * @see \Juzaweb\CMS\Support\LocalPluginRepository
  */

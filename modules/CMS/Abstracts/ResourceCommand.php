@@ -31,23 +31,29 @@ abstract class ResourceCommand extends Command
 
     protected function makeModel($table, $model)
     {
-        $this->call('plugin:make-model', [
-            'model' => $model,
-            'module' => $this->getModuleName(),
-            '--table' => $table,
-            '--stub' => 'resource/model.stub',
-            '--fillable' => implode(',', $this->columns),
-        ]);
+        $this->call(
+            'plugin:make-model',
+            [
+                'model' => $model,
+                'module' => $this->getModuleName(),
+                '--table' => $table,
+                '--stub' => 'resource/model.stub',
+                '--fillable' => implode(',', $this->columns),
+            ]
+        );
     }
 
     protected function makeDataTable($model)
     {
-        $this->call('plugin:make-datatable', [
-            'name' => $model,
-            'module' => $this->getModuleName(),
-            '--model' => $model,
-            '--columns' => implode(',', $this->columns),
-        ]);
+        $this->call(
+            'plugin:make-datatable',
+            [
+                'name' => $model,
+                'module' => $this->getModuleName(),
+                '--model' => $model,
+                '--columns' => implode(',', $this->columns),
+            ]
+        );
     }
 
     protected function makeController($table, $model)
@@ -55,16 +61,19 @@ abstract class ResourceCommand extends Command
         $file = $model . 'Controller.php';
         $path = $this->getDestinationControllerFilePath($file);
 
-        $contents = $this->stubRender('resource/controller.stub', [
-            'CLASS_NAMESPACE' => $this->module->getNamespace() . 'Http\Controllers\Backend',
-            'DATATABLE' => $model . 'Datatable',
-            'MODEL_NAME' => $model,
-            'MODULE_NAMESPACE' => $this->module->getNamespace(),
-            'CLASS' => $model . 'Controller',
-            'TABLE_NAME' => $table,
-            'VIEW_NAME' => Str::singular($table),
-            'MODULE_DOMAIN' => $this->module->getDomainName(),
-        ]);
+        $contents = $this->stubRender(
+            'resource/controller.stub',
+            [
+                'CLASS_NAMESPACE' => $this->module->getNamespace() . 'Http\Controllers\Backend',
+                'DATATABLE' => $model . 'Datatable',
+                'MODEL_NAME' => $model,
+                'MODULE_NAMESPACE' => $this->module->getNamespace(),
+                'CLASS' => $model . 'Controller',
+                'TABLE_NAME' => $table,
+                'VIEW_NAME' => Str::singular($table),
+                'MODULE_DOMAIN' => $this->module->getDomainName(),
+            ]
+        );
 
         $this->makeFile($path, $contents);
     }
@@ -73,9 +82,12 @@ abstract class ResourceCommand extends Command
     {
         $singular = Str::singular($table);
         $path = convert_linux_path($this->getDestinationViewsFilePath($singular, 'index.blade.php'));
-        $contents = $this->stubRender('resource/views/index.stub', [
-            'ROUTE_NAME' => $table,
-        ]);
+        $contents = $this->stubRender(
+            'resource/views/index.stub',
+            [
+                'ROUTE_NAME' => $table,
+            ]
+        );
 
         $this->makeFile($path, $contents);
 
@@ -84,16 +96,19 @@ abstract class ResourceCommand extends Command
 
         $path = convert_linux_path($this->getDestinationViewsFilePath($singular, 'form.blade.php'));
 
-        $contents = $this->stubRender('resource/views/'. $stubFile, [
-            'ROUTE_NAME' => $table,
-            'FORM_COL1' => $this->getViewsFormCol1(),
-            'FORM_COL2' => $this->getViewsFormCol2(),
-        ]);
+        $contents = $this->stubRender(
+            'resource/views/'. $stubFile,
+            [
+                'ROUTE_NAME' => $table,
+                'FORM_COL1' => $this->getViewsFormCol1(),
+                'FORM_COL2' => $this->getViewsFormCol2(),
+            ]
+        );
 
         $this->makeFile($path, $contents);
     }
 
-    protected function getDestinationControllerFilePath($file)
+    protected function getDestinationControllerFilePath($file): string
     {
         $controllerPath = $this->module->getPath() .'/'.
             GenerateConfigReader::read('controller')->getPath() .
@@ -106,7 +121,7 @@ abstract class ResourceCommand extends Command
         return $controllerPath . '/' . $file;
     }
 
-    protected function getDestinationViewsFilePath($table, $file)
+    protected function getDestinationViewsFilePath($table, $file): string
     {
         $viewPath = $this->module->getPath() .'/'.
             GenerateConfigReader::read('views')->getPath() .
@@ -119,13 +134,12 @@ abstract class ResourceCommand extends Command
         return $viewPath . '/' . $file;
     }
 
-    protected function getViewsFormCol1()
+    protected function getViewsFormCol1(): string
     {
         $str = '';
         $columns = collect($this->columns)
-            ->filter(function ($item) {
-                return ! in_array($item, $this->getColumnsViewsFormCol2());
-            })->toArray();
+            ->filter(fn ($item) => !in_array($item, $this->getColumnsViewsFormCol2()))
+            ->toArray();
 
         $index = 0;
         foreach ($columns as $column) {
@@ -144,13 +158,12 @@ abstract class ResourceCommand extends Command
         return $str;
     }
 
-    protected function getViewsFormCol2()
+    protected function getViewsFormCol2(): string
     {
         $str = '';
         $columns = collect($this->columns)
-            ->filter(function ($item) {
-                return in_array($item, $this->getColumnsViewsFormCol2());
-            })->toArray();
+            ->filter(fn ($item) => in_array($item, $this->getColumnsViewsFormCol2()))
+            ->toArray();
 
         $index = 0;
         foreach ($columns as $column) {
@@ -169,7 +182,7 @@ abstract class ResourceCommand extends Command
         return $str;
     }
 
-    protected function getColumnsViewsFormCol2()
+    protected function getColumnsViewsFormCol2(): array
     {
         return [
             'status',
@@ -177,7 +190,7 @@ abstract class ResourceCommand extends Command
         ];
     }
 
-    protected function getColumnViewsStubPath($column)
+    protected function getColumnViewsStubPath($column): string
     {
         $stubPath = JW_PACKAGE_PATH . '/stubs/plugin/';
         $columnStub = 'resource/views/columns/' . $column . '.stub';

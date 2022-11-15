@@ -63,7 +63,7 @@ abstract class Widget
         return Twig::render($view, $params);
     }
 
-    public function getJsonForm()
+    public function getJsonForm(): array|\Illuminate\Support\Collection
     {
         if ($form = Arr::get($this->data, 'form')) {
             $resourcePath = base_path('packages/backend/src/resources');
@@ -80,7 +80,6 @@ abstract class Widget
             return [];
         }
 
-        $data = collect(json_decode(file_get_contents($dataFile), true));
-        return $data;
+        return collect(json_decode(file_get_contents($dataFile), true));
     }
 }

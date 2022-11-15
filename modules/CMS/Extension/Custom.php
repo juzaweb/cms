@@ -19,23 +19,12 @@ use Twig\Extension\AbstractExtension;
  */
 class Custom extends AbstractExtension
 {
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'App_Extension_Laravel_Custom';
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('config', 'get_config'),
@@ -92,6 +81,9 @@ class Custom extends AbstractExtension
             new TwigFunction('get_page_url', 'get_page_url'),
             new TwigFunction('apply_filters', 'apply_filters'),
             new TwigFunction('plugin_asset', 'plugin_assets'),
+            new TwigFunction('get_posts_by_filter', 'get_posts_by_filter'),
+            new TwigFunction('get_next_resource', 'get_next_resource'),
+            new TwigFunction('do_action', 'do_action'),
         ];
     }
 }

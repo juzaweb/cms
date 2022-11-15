@@ -10,205 +10,138 @@
 
 namespace Juzaweb\CMS\Support\Html;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Contracts\Field as FieldContract;
+use Juzaweb\CMS\Support\Html\Traits\InputField;
 
-class Field
+class Field implements FieldContract
 {
-    public static function text($label, $name, $options = [])
+    use InputField;
+
+    public function render(array $fields, array|Model $values = [], bool $collection = false): View|Factory
     {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_input', $options);
-    }
-
-    public static function hidden($label, $name, $options = [])
-    {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_input', $options);
-    }
-
-    public static function textarea($label, $name, $options = [])
-    {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_textarea', $options);
-    }
-
-    public static function select($label, $name, $options = [])
-    {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_select', $options);
-    }
-
-    public static function checkbox($label, $name, $options = [])
-    {
-        $options['value'] = Arr::get($options, 'value', 1);
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_checkbox', $options);
-    }
-
-    public static function slug($label, $name, $options = [])
-    {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_slug', $options);
-    }
-
-    public static function editor($label, $name, $options = [])
-    {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_ckeditor', $options);
-    }
-
-    public static function selectPost($label, $name, $options = []): View
-    {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_select_post', $options);
-    }
-
-    public static function selectTaxonomy($label, $name, $options = [])
-    {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_select_taxonomy', $options);
-    }
-
-    public static function selectResource($label, $name, $options = [])
-    {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_select_resource', $options);
-    }
-
-    public static function selectUser($label, $name, $options = [])
-    {
-        $options = static::mapOptions($label, $name, $options);
-        $value = $options['value'] ?? [];
-        $value = !is_array($value) ? [$value] : $value;
-
-        $opts = [];
-        if ($value) {
-            $opts = User::whereIn('id', $value)
-                ->get(['id', 'name'])
-                ->mapWithKeys(
-                    function ($item) {
-                        return [
-                            $item->id => $item->name
-                        ];
-                    }
-                )
-                ->toArray();
+        if (!$collection) {
+            $fields = $this->collect($fields)->toArray();
         }
 
-        $options['options'] = $opts;
-        $options['value'] = $value;
-        return view('cms::components.form_select_user', $options);
+        return view('cms::components.render_fields', compact('fields', 'values'));
     }
 
-    public static function image($label, $name, $options = [])
+    public function row(array $options, array|Model $values = []): View|Factory
     {
-        $options = static::mapOptions($label, $name, $options);
+        $options = new Collection($options);
 
-        return view('cms::components.form_image', $options);
+        return view('cms::components.form_row', compact('options', 'values'));
     }
 
-    public static function images($label, $name, $options = [])
+    public function col(array $options, array|Model $values = []): View|Factory
     {
-        $options = static::mapOptions($label, $name, $options);
+        $options = new Collection($options);
 
-        return view('cms::components.form_images', $options);
+        return view('cms::components.form_col', compact('options', 'values'));
     }
 
-    public static function uploadUrl($label, $name, $options = [])
+    public function collect(array $fields): Collection
     {
-        $options = static::mapOptions($label, $name, $options);
+        return (new Collection($fields))
+            ->mapWithKeys(
+                function ($item, $key) {
+                    $default = [
+                        'type' => 'text',
+                        'sidebar' => false,
+                        'visible' => true,
+                    ];
 
-        return view('cms::components.form_upload_url', $options);
+                    if (is_array($item)) {
+                        $default['label'] = trans("cms::app.{$key}");
+
+                        return [$key => array_merge($default, $item)];
+                    } else {
+                        $default['label'] = trans("cms::app.{$item}");
+
+                        return [$item => $default];
+                    }
+                }
+            );
     }
 
-    public static function security($label, $name, $options = [])
-    {
-        $options = static::mapOptions($label, $name, $options);
-
-        return view('cms::components.form_security', $options);
-    }
-
-    public static function fieldByType($data)
+    public function fieldByType(array $data): View|Factory|string
     {
         $type = Arr::get($data, 'type');
 
         return match ($type) {
-            'text' => static::text(
+            'text' => $this->text(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'editor' => static::editor(
+            'editor' => $this->editor(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'textarea' => static::textarea(
+            'textarea' => $this->textarea(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'select' => static::select(
+            'select' => $this->select(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'post' => static::selectPost(
+            'post' => $this->selectPost(
                 $data['label'],
                 ($input['data']['multiple'] ?? false) ?
                     "{$data['name']}[]"
                     : $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'taxonomy' => static::selectTaxonomy(
+            'taxonomy' => $this->selectTaxonomy(
                 $data['label'],
                 ($input['data']['multiple'] ?? false) ?
                     "{$data['name']}[]"
                     : $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'resource' => static::selectResource(
+            'resource' => $this->selectResource(
                 $data['label'],
                 ($input['data']['multiple'] ?? false) ?
                     "{$data['name']}[]"
                     : $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'image' => static::image(
+            'image' => $this->image(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'images' => static::images(
+            'images' => $this->images(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'checkbox' => static::checkbox(
+            'checkbox' => $this->checkbox(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'upload_url' => static::uploadUrl(
+            'upload_url' => $this->uploadUrl(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])
             ),
-            'security' => static::security(
+            'security' => $this->security(
+                $data['label'],
+                $data['name'],
+                Arr::get($data, 'data', [])
+            ),
+            'filter_posts' => $this->filterPosts(
                 $data['label'],
                 $data['name'],
                 Arr::get($data, 'data', [])
@@ -217,7 +150,7 @@ class Field
         };
     }
 
-    public static function mapOptions($label, $name, $options = [])
+    public function mapOptions(string|Model $label, ?string $name, ?array $options = []): ?array
     {
         $options['name'] = $name;
         $options['id'] = Arr::get(

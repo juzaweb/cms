@@ -13,25 +13,27 @@ use Juzaweb\Backend\Http\Controllers\Backend\ChildResourceController;
 use Juzaweb\Backend\Http\Controllers\Backend\PostResourceController;
 
 Route::jwResource(
-    'resources/{type}-{post}',
-    'Backend\PostResourceController',
+    'resources/{type}/{post}',
+    PostResourceController::class,
     [
-        'name' => 'post_resource'
+        'name' => 'post_resource',
+        'where' => ['post' => '[0-9]+'],
     ]
 );
 
 Route::jwResource(
-    'resources/{type}-{post}/parent/{parent}',
-    'Backend\ChildResourceController',
+    'resources/{type}/{post}/parent/{parent}',
+    ChildResourceController::class,
     [
-        'name' => 'child_resource'
+        'name' => 'child_resource',
+        'where' => ['post' => '[0-9]+', 'parent' => '[0-9]+'],
     ]
 );
 
 Route::jwResource(
     'resources/{type}',
-    'Backend\ResourceController',
+    ResourceController::class,
     [
-        'name' => 'resource'
+        'name' => 'resource',
     ]
 );

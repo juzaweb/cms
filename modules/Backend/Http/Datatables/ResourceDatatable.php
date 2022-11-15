@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Http\Datatables;
 
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -19,19 +20,19 @@ use Juzaweb\CMS\Facades\HookAction;
 
 class ResourceDatatable extends DataTable
 {
-    protected $postId;
+    protected ?int $postId;
+    protected string $type;
+    protected ?int $parentId;
+    protected Collection $setting;
+    protected ?Collection $childs;
 
-    protected $type;
-
-    protected $childs;
-
-    public function mount($type, $postId)
+    public function mount($type, $postId, $parentId = null)
     {
         $this->type = $type;
         $this->postId = $postId;
+        $this->parentId = $parentId;
 
-        $childs = HookAction::getResource()
-            ->where('parent', $type);
+        $childs = $this->getSetting()->where('parent', $type);
         if ($childs->isNotEmpty()) {
             $this->childs = $childs;
         }
@@ -42,7 +43,7 @@ class ResourceDatatable extends DataTable
      *
      * @return array
      */
-    public function columns()
+    public function columns(): array
     {
         $columns = [
             'name' => [
@@ -63,7 +64,7 @@ class ResourceDatatable extends DataTable
             ],
         ];
 
-        if ($this->childs) {
+        if (isset($this->childs)) {
             $columns['actions'] = [
                 'label' => trans('cms::app.actions'),
                 'width' => '15%',
@@ -82,12 +83,10 @@ class ResourceDatatable extends DataTable
             ];
         }
 
-        $columns = apply_filters(
+        return apply_filters(
             "resource_{$this->type}_datatable_columns",
             $columns
         );
-
-        return $columns;
     }
 
     /**
@@ -96,10 +95,9 @@ class ResourceDatatable extends DataTable
      * @param array $data
      * @return Builder
      */
-    public function query($data)
+    public function query($data): Builder
     {
-        $query = Resource::query();
-        $query->where('type', '=', $this->type);
+        $query = $this->getQuery();
 
         if ($this->postId) {
             $query->where('post_id', '=', $this->postId);
@@ -113,7 +111,7 @@ class ResourceDatatable extends DataTable
             $query->where(
                 function (Builder $q) use ($keyword) {
                     $q->where('name', JW_SQL_LIKE, '%'.$keyword.'%');
-                    $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
+                    //$q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
                 }
             );
         }
@@ -123,7 +121,7 @@ class ResourceDatatable extends DataTable
 
     public function bulkActions($action, $ids)
     {
-        $rows = Resource::whereIn('id', $ids)->get();
+        $rows = $this->getQuery()->whereIn('id', $ids)->get();
         foreach ($rows as $row) {
             DB::beginTransaction();
             try {
@@ -137,5 +135,32 @@ class ResourceDatatable extends DataTable
                 throw $e;
             }
         }
+    }
+
+    protected function getSetting(?string $type = null): ?Collection
+    {
+        if (empty($type)) {
+            return HookAction::getResource();
+        }
+
+        if (isset($this->setting)) {
+            return $this->setting;
+        }
+
+        $this->setting = HookAction::getResource($type);
+
+        return $this->setting;
+    }
+
+    protected function getQuery(): Builder
+    {
+        if ($repository = $this->getSetting($this->type)->get('repository')) {
+            $query = app($repository)->query();
+        } else {
+            $query = Resource::query();
+            $query->where('type', '=', $this->type);
+        }
+
+        return $query;
     }
 }

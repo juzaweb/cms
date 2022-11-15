@@ -47,22 +47,20 @@ class PostTypeDataTable extends DataTable
             'title' => [
                 'label' => trans('cms::app.title'),
                 'formatter' => [$this, 'rowActionsFormatter'],
-                'detailFormater' => function ($index, $row, $taxonomies, $postTypeTaxonomies) {
-                    return $this->titleDetailFormater($index, $row, $taxonomies, $postTypeTaxonomies);
-                }
             ]
         ];
 
         $taxonomies = $this->taxonomies->take(3);
 
         foreach ($taxonomies as $key => $taxonomy) {
-            $columns[$key] = [
+            $columns["tax_{$key}"] = [
                 'label' => $taxonomy->get('label'),
                 'width' => '15%',
                 'sortable' => false,
                 'formatter' => function ($value, $row, $index) use ($key) {
                     return $row->taxonomies
                         ->where('taxonomy', '=', $key)
+                        ->take(5)
                         ->pluck('name')
                         ->join(', ');
                 }
@@ -198,7 +196,7 @@ class PostTypeDataTable extends DataTable
          * @var Builder $query
          */
         $query = $this->makeModel()->with(['taxonomies']);
-        $query->where('type', '=', $this->postType['key']);
+        $query->where(['type' => $this->postType['key']]);
         $data['q'] = Arr::get($data, 'keyword');
         $data['type'] = $this->postType['key'];
 

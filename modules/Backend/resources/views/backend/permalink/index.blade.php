@@ -21,7 +21,7 @@
                             </div>
                             <input type="text" name="permalink[{{ $key }}][base]" class="form-control" id="{{ $key }}-base" value="{{ $permalink->get('base') }}">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">/{slug}/</span>
+                                <span class="input-group-text">/{slug}</span>
                             </div>
                         </div>
                     </div>

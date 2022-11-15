@@ -67,13 +67,16 @@ class ModelExists implements Rule
             ->exists();
     }
 
-    public function message()
+    public function message(): string
     {
-        return trans('validation.model_exists', [
-            'attribute' => $this->attribute,
-            'value' => $this->value,
-            'model' => class_basename($this->modelClass),
-            'model_attribute' => $this->modelAttribute,
-        ]);
+        return trans(
+            'validation.model_exists',
+            [
+                'attribute' => $this->attribute,
+                'value' => $this->value,
+                'model' => class_basename($this->modelClass),
+                'model_attribute' => $this->modelAttribute,
+            ]
+        );
     }
 }

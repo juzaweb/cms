@@ -11,7 +11,7 @@ use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class TaxonomyController extends FrontendController
 {
-    public function index(...$slug)
+    public function index(...$slug): string
     {
         $taxSlug = $slug[1] ?? null;
         $taxonomy = Taxonomy::where('slug', $taxSlug)
@@ -32,6 +32,17 @@ class TaxonomyController extends FrontendController
             'taxonomy'
         );
 
+        $viewName = apply_filters(
+            'taxonomy.get_view_name',
+            "theme::template-parts.{$template}",
+            $taxonomy,
+            $template
+        );
+
+        if (!view()->exists(theme_viewname($viewName))) {
+            $viewName = 'theme::index';
+        }
+
         $page = PostResource::collection($posts)
             ->response()
             ->getData(true);
@@ -39,7 +50,7 @@ class TaxonomyController extends FrontendController
         $taxonomy = (new TaxonomyResource($taxonomy))->toArray(request());
 
         return $this->view(
-            'theme::template-parts.' . $template,
+            $viewName,
             compact(
                 'title',
                 'taxonomy',

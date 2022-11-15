@@ -219,6 +219,7 @@ class Plugin
         $name = $this->getName();
         $adminRouter = $this->getPath() . '/src/routes/admin.php';
         $apiRouter = $this->getPath() . '/src/routes/api.php';
+        $themeRouter = $this->getPath() . '/src/routes/theme.php';
 
         if (file_exists($adminRouter)) {
             $this->router->middleware('admin')
@@ -231,6 +232,11 @@ class Plugin
                 ->prefix('api')
                 ->as('api.')
                 ->group($apiRouter);
+        }
+
+        if (file_exists($themeRouter)) {
+            $this->router->middleware('theme')
+                ->group($themeRouter);
         }
 
         $viewPath = $this->getPath() . '/src/resources/views';

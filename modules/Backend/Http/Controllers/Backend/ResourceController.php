@@ -10,8 +10,10 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Support\Collection;
 use Juzaweb\Backend\Http\Datatables\ResourceDatatable;
 use Juzaweb\Backend\Models\Resource;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Traits\ResourceController as ResourceControllerTrait;
@@ -22,14 +24,18 @@ class ResourceController extends BackendController
         getDataForForm as DataForForm;
     }
 
-    protected $viewPrefix = 'cms::backend.resource';
+    protected string $viewPrefix = 'cms::backend.resource';
+    protected Collection $setting;
+    protected Collection $postType;
 
     protected function afterSave($data, $model, ...$params)
     {
-        $model->syncMetas($data['meta'] ?? []);
+        if (method_exists($model, 'syncMetas')) {
+            $model->syncMetas($data['meta'] ?? []);
+        }
     }
 
-    protected function getDataTable(...$params)
+    protected function getDataTable(...$params): DataTable
     {
         $dataTable = new ResourceDatatable();
         $dataTable->mountData(
@@ -40,27 +46,42 @@ class ResourceController extends BackendController
         return $dataTable;
     }
 
-    protected function validator(array $attributes, ...$params)
+    protected function validator(array $attributes, ...$params): array
     {
+        $validator = $this->getSetting(...$params)->get('validator');
+        if ($validator) {
+            return $validator;
+        }
+
         return [
             'name' => 'required',
             'display_order' => 'required|integer|min:1',
         ];
     }
 
-    protected function getModel(...$params)
+    protected function getModel(...$params): string
     {
+        if ($repository = $this->getSetting(...$params)->get('repository')) {
+            return app($repository)->model();
+        }
+
         return Resource::class;
     }
 
-    protected function getTitle(...$params)
+    protected function getTitle(...$params): string
     {
         return $this->getSetting($params[0])->get('label');
     }
 
-    protected function getSetting(...$params)
+    protected function getSetting(...$params): Collection
     {
-        return HookAction::getResource($params[0]);
+        if (isset($this->setting)) {
+            return $this->setting;
+        }
+
+        $this->setting = HookAction::getResource($params[0]);
+
+        return $this->setting;
     }
 
     protected function parseDataForSave(array $attributes, ...$params)
@@ -79,23 +100,27 @@ class ResourceController extends BackendController
             $attributes['parent_id'] = $params[2] ?? null;
         }
 
-        $attributes = apply_filters(
+        return apply_filters(
             "resource.{$attributes['type']}.parseDataForSave",
             $attributes
         );
-
-        return $attributes;
     }
 
-    protected function getDataForForm($model, ...$params)
+    protected function getDataForForm($model, ...$params): array
     {
         $data = $this->DataForForm($model, ...$params);
         $data['setting'] = $this->getSetting(...$params);
         return $data;
     }
 
-    protected function getPostType($type)
+    protected function getPostType($type): Collection
     {
-        return HookAction::getPostTypes($type);
+        if (isset($this->postType)) {
+            return $this->postType;
+        }
+
+        $this->postType = HookAction::getPostTypes($type);
+
+        return $this->postType;
     }
 }

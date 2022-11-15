@@ -3,8 +3,7 @@
 @endif
 
 @foreach($styles as $style)
-    <link rel="stylesheet" type="text/css" href="{{ $style->get('src') }}?v={{ $style->get('ver') }}"
-          id="{{ $style->get('key') }}">
+    <link rel="stylesheet" type="text/css" href="{{ $style->get('src') }}?v={{ $style->get('ver') }}" id="{{ $style->get('key') }}">
 @endforeach
 
 @foreach($scripts as $script)
@@ -19,14 +18,13 @@
 
 @if($googleAnalytics)
     <script async src="https://www.googletagmanager.com/gtag/js"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    gtag('config', '{{ $googleAnalytics }}');
-
-</script>
+        gtag('config', '{{ $googleAnalytics }}');
+    </script>
 @endif
 
 @if($fbAppId)

@@ -3,6 +3,7 @@
 namespace Juzaweb\DevTool\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Juzaweb\DevTool\Commands\CacheSizeCommand;
 use Juzaweb\DevTool\Commands\MakeAdminCommand;
 use Juzaweb\DevTool\Commands\Plugin\ActionMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\CommandMakeCommand;
@@ -40,6 +41,7 @@ use Juzaweb\DevTool\Commands\Resource\JuzawebResouceMakeCommand;
 use Juzaweb\DevTool\Commands\Theme\DownloadStyleCommand;
 use Juzaweb\DevTool\Commands\Theme\DownloadTemplateCommand;
 use Juzaweb\DevTool\Commands\Theme\GenerateDataThemeCommand;
+use Juzaweb\DevTool\Commands\Theme\MakeBlockCommand;
 use Juzaweb\DevTool\Commands\Theme\ThemeGeneratorCommand;
 use Juzaweb\DevTool\Commands\Theme\ThemeListCommand;
 use Juzaweb\DevTool\Commands\Theme\ThemeUpdateCommand;
@@ -95,6 +97,8 @@ class ConsoleServiceProvider extends ServiceProvider
         DownloadTemplateCommand::class,
         UpdateCommand::class,
         ThemeUpdateCommand::class,
+        MakeBlockCommand::class,
+        CacheSizeCommand::class,
     ];
 
     /**

@@ -10,7 +10,7 @@ use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
  *
  * @package namespace Juzaweb\Backend\Repositories;
  */
-class CommentRepositoryEloquent extends BaseRepositoryEloquent implements CommentRepository
+class AdsRepositoryEloquent extends BaseRepositoryEloquent implements AdsRepository
 {
     /**
      * Specify Model class name

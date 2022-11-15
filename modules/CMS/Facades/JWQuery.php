@@ -15,8 +15,10 @@ use Juzaweb\CMS\Contracts\JWQueryContract;
 
 /**
  * @method static array posts(string $type, array $options = [])
+ * @method static array postTaxonomy($post, $taxonomy, $params)
  *
  * @see \Juzaweb\CMS\Support\JWQuery
+ * @see \Juzaweb\CMS\Traits\Queries\PostQuery
  */
 class JWQuery extends Facade
 {

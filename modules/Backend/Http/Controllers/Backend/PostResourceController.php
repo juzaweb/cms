@@ -10,12 +10,13 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
 use Juzaweb\Backend\Models\Post;
 
 class PostResourceController extends ResourceController
 {
-    public function index(...$params)
+    public function index(...$params): View
     {
         $type = $params[0];
         $postId = $params[1];
@@ -31,12 +32,12 @@ class PostResourceController extends ResourceController
         );
 
         return view(
-            $this->viewPrefix . '.index',
+            "{$this->viewPrefix}.index",
             $this->getDataForIndex($type, $postId)
         );
     }
 
-    public function create(...$params)
+    public function create(...$params): View
     {
         $this->authorize('create', $this->getModel(...$params));
 
@@ -69,7 +70,7 @@ class PostResourceController extends ResourceController
         $model = $this->makeModel($type, $postId);
 
         return view(
-            $this->viewPrefix . '.form',
+            "{$this->viewPrefix}.form",
             array_merge(
                 [
                     'title' => trans('cms::app.add_new'),
@@ -79,7 +80,7 @@ class PostResourceController extends ResourceController
         );
     }
 
-    public function edit(...$params)
+    public function edit(...$params): View
     {
         $type = $params[0];
         $postId = $params[1];

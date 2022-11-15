@@ -19,9 +19,10 @@ use Illuminate\Support\Facades\Validator;
 use Juzaweb\Backend\Events\AfterPostSave;
 use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 trait PostTypeController
 {
@@ -41,6 +42,7 @@ trait PostTypeController
 
         $table = $this->getDataTable(...$params);
         $table->setCurrentUrl(action([static::class, 'index'], $params, false));
+        $columns = $table->columns();
 
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
@@ -55,12 +57,7 @@ trait PostTypeController
         $rows = $query->get();
 
         $results = [];
-        $columns = $table->columns();
-
         $postType = $this->getPostType();
-        $taxonomies = Taxonomy::where('post_type', '=', $postType)
-            ->whereNull('parent_id')
-            ->get();
         $postTypeTaxonomies = HookAction::getTaxonomies($postType);
 
         foreach ($rows as $index => $row) {
@@ -74,15 +71,6 @@ trait PostTypeController
                     );
                 } else {
                     $results[$index][$col] = $row->{$col};
-                }
-
-                if (!empty($column['detailFormater'])) {
-                    $results[$index]['detailFormater'] = $column['detailFormater'](
-                        $index,
-                        $row,
-                        $taxonomies,
-                        $postTypeTaxonomies
-                    );
                 }
             }
         }
@@ -157,9 +145,7 @@ trait PostTypeController
             $rules[$key] = 'nullable|array|max:10';
         }
 
-        $validator = Validator::make($attributes, $rules);
-
-        return $validator;
+        return Validator::make($attributes, $rules);
     }
 
     protected function getSetting()
@@ -190,11 +176,12 @@ trait PostTypeController
     /**
      * Get data for form
      *
-     * @param  Model $model
-     * @param $params
+     * @param Model $model
+     * @param mixed ...$params
      * @return array
      *
-     * @throws \Exception
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     protected function getDataForForm($model, ...$params)
     {
@@ -226,6 +213,11 @@ trait PostTypeController
         );
     }
 
+    /**
+     * @param ...$params
+     * @return array
+     * @throws \Exception
+     */
     protected function getDataForIndex(...$params)
     {
         $data = $this->DataForIndex(...$params);
@@ -266,9 +258,23 @@ trait PostTypeController
         return $response->allowed();
     }
 
+    protected function updateSuccessResponse($model, $request, ...$params)
+    {
+        $message = trans('cms::app.updated_successfully')
+            .' <a href="'. $model->getLink() .'" target="_blank">'. trans('cms::app.view_post') .'</a>';
+
+        return $this->success(
+            [
+                'message' => $message,
+            ]
+        );
+    }
+
     /**
      * @param Post|Model $model
      * @return array|Collection
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     private function getTemplateData($model)
     {
@@ -278,13 +284,14 @@ trait PostTypeController
             return [];
         }
 
-        $data = HookAction::getThemeTemplates($template);
-        return $data;
+        return HookAction::getThemeTemplates($template);
     }
 
     /**
      * @param Post|Model $model
      * @return string
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     private function getTemplate($model)
     {
@@ -296,6 +303,11 @@ trait PostTypeController
         return $template;
     }
 
+    /**
+     * Get post type name
+     *
+     * @return string|null
+     */
     private function getPostType(): ?string
     {
         if (empty($this->postType)) {

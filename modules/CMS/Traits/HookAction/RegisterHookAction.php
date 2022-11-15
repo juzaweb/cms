@@ -15,6 +15,7 @@ use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\Registers\ResourceRegister;
 use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
 use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
 use Juzaweb\Frontend\Http\Controllers\PostController;
@@ -25,7 +26,7 @@ trait RegisterHookAction
     protected array $resourcePermissions = ['index', 'create', 'edit', 'delete'];
 
     /**
-     * JUZAWEB CMS: Registers a post type.
+     * Registers a post type.
      * @param string $key (Required) Post type key. Must not exceed 20 characters
      * @param array $args Array of arguments for registering a post type.
      *
@@ -280,49 +281,13 @@ trait RegisterHookAction
         $this->globalData->set('permalinks.' . $key, new Collection($args));
     }
 
-    public function registerResource(string $key, string $postType = null, array $args = [])
+    public function registerResource(string $key, ?string $postType = null, ?array $args = []): void
     {
-        if (empty($args['label'])) {
-            throw new \Exception('Post Resource Label is required.');
-        }
+        $register = new ResourceRegister($this);
 
-        if (empty($postType)) {
-            if ($menu = Arr::get($args, 'menu', [])) {
-                $menu = array_merge(
-                    [
-                        'icon' => 'fa fa-list-ul',
-                        'parent' => null,
-                        'position' => 20,
-                    ],
-                    Arr::get($args, 'menu', [])
-                );
+        $data = $register->make($key, $postType, $args);
 
-                $menuKey = "resources.{$key}";
-
-                $this->addAdminMenu($args['label'], $menuKey, $menu);
-            }
-        }
-
-        unset($args['menu']);
-
-        $args = array_merge(
-            [
-                'key' => $key,
-                'model' => Resource::class,
-                'label' => '',
-                'label_action' => $args['label'],
-                'description' => '',
-                'post_type' => $postType,
-                'priority' => 20,
-                'supports' => [],
-                'metas' => [],
-            ],
-            $args
-        );
-
-        $args = new Collection($args);
-
-        $this->globalData->set('resources.' . $args->get('key'), $args);
+        $this->globalData->set('resources.' . $data->getKey(), $data->args());
     }
 
     public function registerConfig(array|string $key, array $args = []): void
@@ -359,7 +324,7 @@ trait RegisterHookAction
         $this->globalData->set('admin_pages.' . $key, $args);
     }
 
-    public function registerAdminAjax(string $key, array $args = [])
+    public function registerAdminAjax(string $key, array $args = []): void
     {
         $defaults = [
             'callback' => '',
@@ -372,7 +337,7 @@ trait RegisterHookAction
         $this->globalData->set('admin_ajaxs.' . $key, new Collection($args));
     }
 
-    public function registerNavMenus($locations = [])
+    public function registerNavMenus($locations = []): void
     {
         foreach ($locations as $key => $location) {
             $this->globalData->set(
@@ -387,7 +352,7 @@ trait RegisterHookAction
         }
     }
 
-    public function registerEmailHook(string $key, array $args = [])
+    public function registerEmailHook(string $key, array $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -400,7 +365,7 @@ trait RegisterHookAction
         $this->globalData->set('email_hooks.' . $key, new Collection($args));
     }
 
-    public function registerSidebar(string $key, array $args = [])
+    public function registerSidebar(string $key, array $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -415,7 +380,7 @@ trait RegisterHookAction
         $this->globalData->set('sidebars.' . $key, new Collection($args));
     }
 
-    public function registerWidget($key, $args = [])
+    public function registerWidget($key, $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -429,7 +394,7 @@ trait RegisterHookAction
         $this->globalData->set('widgets.' . $key, new Collection($args));
     }
 
-    public function registerPageBlock($key, $args = [])
+    public function registerPageBlock($key, $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -443,7 +408,7 @@ trait RegisterHookAction
         $this->globalData->set('page_blocks.' . $key, new Collection($args));
     }
 
-    public function registerFrontendAjax($key, $args = [])
+    public function registerFrontendAjax($key, $args = []): void
     {
         $defaults = [
             'auth' => false,
@@ -459,7 +424,7 @@ trait RegisterHookAction
         $this->globalData->set('frontend_ajaxs.' . $key, new Collection($args));
     }
 
-    public function registerThemeTemplate($key, $args = [])
+    public function registerThemeTemplate($key, $args = []): void
     {
         $defaults = [
             'key' => $key,
@@ -572,6 +537,37 @@ trait RegisterHookAction
                 ]
             );
         }
+    }
+
+    public function registerResourceManagement2(string $key, array|string $args = null): void
+    {
+        $defaults = [
+            'key' => $key,
+            'repository' => null,
+            'label' => '',
+            'description' => '',
+            'priority' => 20,
+            'menu' => [],
+            'fields' => [],
+            'permission_name' => "management_{$key}",
+        ];
+
+        $args = new Collection(array_merge($defaults, $args));
+
+        $this->registerAdminPage(
+            "management.{$key}",
+            [
+                'title' => $args->get('label'),
+                'menu' => $args->get('menu', [])
+            ]
+        );
+
+        $this->registerResourcePermissions(
+            $args->get('permission_name'),
+            $args->get('label')
+        );
+
+        $this->globalData->set("resource_managements.{$key}", $args);
     }
 
     /**

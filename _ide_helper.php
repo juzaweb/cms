@@ -18376,16 +18376,7 @@
 
 }
 
-    namespace Juzaweb\CMS\Support\Html {
-            /**
-     *
-     *
-     */
-        class Field {
 
-    }
-
-}
 
     namespace Illuminate\Http {
             /**
@@ -22313,7 +22304,7 @@ namespace  {
             class Twig extends \TwigBridge\Facade\Twig {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class Signal extends \Spatie\SignalAwareCommand\Facades\Signal {}
-            class Field extends \Juzaweb\CMS\Support\Html\Field {}
+            class Field extends \Juzaweb\CMS\Facades\Field {}
 
 }
 
