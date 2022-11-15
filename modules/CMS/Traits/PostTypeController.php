@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Validator;
 use Juzaweb\Backend\Events\AfterPostSave;
 use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Psr\Container\ContainerExceptionInterface;
@@ -59,15 +58,6 @@ trait PostTypeController
 
         $results = [];
         $postType = $this->getPostType();
-        $taxonomies = Taxonomy::with(
-            [
-                'children.children'
-            ]
-        )
-            ->where('post_type', '=', $postType)
-            ->whereNull('parent_id')
-            ->get();
-
         $postTypeTaxonomies = HookAction::getTaxonomies($postType);
 
         foreach ($rows as $index => $row) {
@@ -81,15 +71,6 @@ trait PostTypeController
                     );
                 } else {
                     $results[$index][$col] = $row->{$col};
-                }
-
-                if (!empty($column['detailFormater'])) {
-                    $results[$index]['detailFormater'] = $column['detailFormater'](
-                        $index,
-                        $row,
-                        $taxonomies,
-                        $postTypeTaxonomies
-                    );
                 }
             }
         }
@@ -164,9 +145,7 @@ trait PostTypeController
             $rules[$key] = 'nullable|array|max:10';
         }
 
-        $validator = Validator::make($attributes, $rules);
-
-        return $validator;
+        return Validator::make($attributes, $rules);
     }
 
     protected function getSetting()

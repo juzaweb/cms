@@ -47,9 +47,6 @@ class PostTypeDataTable extends DataTable
             'title' => [
                 'label' => trans('cms::app.title'),
                 'formatter' => [$this, 'rowActionsFormatter'],
-                'detailFormater' => function ($index, $row, $taxonomies, $postTypeTaxonomies) {
-                    return $this->titleDetailFormater($index, $row, $taxonomies, $postTypeTaxonomies);
-                }
             ]
         ];
 
@@ -63,6 +60,7 @@ class PostTypeDataTable extends DataTable
                 'formatter' => function ($value, $row, $index) use ($key) {
                     return $row->taxonomies
                         ->where('taxonomy', '=', $key)
+                        ->take(5)
                         ->pluck('name')
                         ->join(', ');
                 }
