@@ -6,6 +6,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Juzaweb\Backend\Actions\BackupAction;
 use Juzaweb\Backend\Actions\EnqueueStyleAction;
+use Juzaweb\Backend\Actions\MediaAction;
 use Juzaweb\Backend\Actions\MenuAction;
 use Juzaweb\Backend\Actions\PermissionAction;
 use Juzaweb\Backend\Actions\SeoAction;
@@ -72,7 +73,8 @@ class BackendServiceProvider extends ServiceProvider
                 SocialLoginAction::class,
                 ToolAction::class,
                 SeoAction::class,
-                BackupAction::class
+                BackupAction::class,
+                MediaAction::class,
             ]
         );
 

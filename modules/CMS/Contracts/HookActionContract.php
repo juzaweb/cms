@@ -28,6 +28,10 @@ interface HookActionContract
 
     public function registerPermalink(string $key, array $args = []): void;
 
+    /**
+     * @param string $key
+     * @param array $args [string $name]
+     */
     public function addSettingForm(string $key, array $args = []): void;
 
     public function addAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void;

@@ -18,6 +18,7 @@ use Juzaweb\CMS\Contracts\Field as FieldContract;
  * @method static render($metas, $model, $collection = false)
  * @method static select(string|Model $label, ?string $name, ?array $options = [])
  * @method static text(string|Model $label, ?string $name, ?array $options = [])
+ * @method static image(string|Model $label, ?string $name, ?array $options = [])
  * @see \Juzaweb\CMS\Support\Html\Field
 */
 class Field extends Facade

@@ -1,5 +1,6 @@
 <?php
 
+use Juzaweb\Backend\Http\Controllers\Backend\Setting\MediaController;
 use Juzaweb\Backend\Http\Controllers\Backend\Setting\SystemSettingController;
 
 Route::group(
@@ -10,3 +11,5 @@ Route::group(
         Route::post('/save', [SystemSettingController::class, 'save'])->name('admin.setting.save');
     }
 );
+
+Route::get('/options-media', [MediaController::class, 'index'])->name('admin.setting.media');
