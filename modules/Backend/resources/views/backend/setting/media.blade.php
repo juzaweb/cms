@@ -4,7 +4,7 @@
     <div class="row mt-4 mb-3">
         <div class="col-md-12">
             <form action="{{ route('admin.setting.save') }}" method="post" class="form-ajax">
-                <h5 class="card-title">{{ trans('Thumbnail Defaults') }}</h5>
+                <h5 class="card-title">{{ trans('cms::app.thumbnail_defaults') }}</h5>
 
                 @foreach($postTypes as $key => $postType)
                     {{ Field::image(

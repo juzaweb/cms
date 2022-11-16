@@ -627,6 +627,26 @@ trait PostTypeModel
         return route('post', ["{$permalink}/{$this->slug}"]);
     }
 
+    public function getThumbnail($thumb = true)
+    {
+        if (empty($this->thumbnail)) {
+            $thumbnailDefault = get_config('thumbnail_defaults', [])[$this->type] ?? null;
+            if ($thumbnailDefault) {
+                return upload_url($thumbnailDefault);
+            }
+        }
+
+        if ($this->resize) {
+            if ($thumb) {
+                return upload_url($this->thumbnail);
+            }
+
+            return upload_url(str_replace('thumbs/', '', $this->thumbnail));
+        }
+
+        return upload_url($this->thumbnail);
+    }
+
     public function getUpdatedDate($format = JW_DATE_TIME): string
     {
         return jw_date_format($this->updated_at, $format);

@@ -537,5 +537,7 @@ return [
         'backup_setting' => 'Backup setting',
         'enable_backup' => 'Enable Backup',
         'backup_time' => 'Backup Time',
-    ]
+    ],
+    'media_settings' => 'Media Settings',
+    'thumbnail_defaults' => 'Thumbnail Defaults'
 ];

@@ -25,7 +25,7 @@ class MediaAction extends Action
         $this->hookAction->registerAdminPage(
             'options-media',
             [
-                'title' => trans('Media'),
+                'title' => trans('cms::app.media'),
                 'menu' => [
                     'icon' => 'fa fa-list',
                     'position' => 30,
