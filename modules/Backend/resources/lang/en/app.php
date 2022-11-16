@@ -22,6 +22,7 @@ return [
     'add_language' => 'Add language',
     'delete' => 'Delete',
     'save' => 'Save',
+    'save_change' => 'Save change',
     'cancel' => 'Cancel',
     'choose_image' => 'Choose image',
     'avatar' => 'Avatar',
