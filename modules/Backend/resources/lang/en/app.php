@@ -538,6 +538,14 @@ return [
         'enable_backup' => 'Enable Backup',
         'backup_time' => 'Backup Time',
     ],
-    'media_settings' => 'Media Settings',
-    'thumbnail_defaults' => 'Thumbnail Defaults'
+    'media_setting' => [
+        'title' => 'Media Settings',
+        'auto_resize_thumbnail' => 'Auto resize thumbnail (Optimize page speed)',
+        'thumbnail_defaults' => 'Thumbnail Defaults',
+        'thumbnail_size' => 'Thumbnail size',
+        'max_width' => 'Max Width',
+        'max_height' => 'Max Height',
+        'thumbnail_default' => 'Thumbnail default',
+        'thumbnail_settings' => 'Thumbnail settings',
+    ],
 ];

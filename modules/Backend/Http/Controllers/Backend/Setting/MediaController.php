@@ -17,7 +17,7 @@ class MediaController extends BackendController
 {
     public function index(): \Illuminate\Contracts\View\View
     {
-        $title = trans('cms::app.media_settings');
+        $title = trans('cms::app.media_setting.title');
         $postTypes = HookAction::getPostTypes();
         $thumbnailDefaults = get_config('thumbnail_defaults', []);
 
