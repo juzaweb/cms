@@ -12,7 +12,6 @@ namespace Juzaweb\CMS\Traits\Queries;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Post;
 

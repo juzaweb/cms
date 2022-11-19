@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-wrap flex-column align-items-center">
                         <div class="juzaweb__utils__avatar juzaweb__utils__avatar--size64 mb-3">
-                            <img src="{{ $jw_user->getAvatar() }}" alt="Mary Stanform">
+                            <img src="{{ $jw_user->getAvatar() }}" alt="{{ $jw_user->name }}" class="w-100">
                         </div>
                         <div class="text-center">
                             <div class="text-dark font-weight-bold font-size-18">{{ $jw_user->name }}</div>

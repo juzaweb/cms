@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\UserDataTable;
 use Juzaweb\CMS\Models\Model;
@@ -26,9 +27,10 @@ class UserController extends BackendController
      * Validator for store and update
      *
      * @param array $attributes
-     * @return \Illuminate\Support\Facades\Validator|array
+     * @param mixed ...$params
+     * @return array
      */
-    protected function validator(array $attributes, ...$params)
+    protected function validator(array $attributes, ...$params): array
     {
         $allStatus = array_keys(User::getAllStatus());
 
@@ -56,6 +58,7 @@ class UserController extends BackendController
     /**
      * Get model resource
      *
+     * @param mixed ...$params
      * @return string
      */
     protected function getModel(...$params): string
@@ -66,8 +69,9 @@ class UserController extends BackendController
     /**
      * Get title resource
      *
+     * @param mixed ...$params
      * @return string
-     **/
+     */
     protected function getTitle(...$params): string
     {
         return trans('cms::app.users');
@@ -76,14 +80,15 @@ class UserController extends BackendController
     /**
      * Get data table resource
      *
-     * @return \Juzaweb\CMS\Abstracts\DataTable
+     * @param mixed ...$params
+     * @return UserDataTable|DataTable
      */
-    protected function getDataTable(...$params)
+    protected function getDataTable(...$params): UserDataTable|DataTable
     {
         return new UserDataTable();
     }
 
-    protected function getDataForForm($model, ...$params)
+    protected function getDataForForm($model, ...$params): array
     {
         $data = $this->DataForForm($model);
         $data['allStatus'] = User::getAllStatus();
