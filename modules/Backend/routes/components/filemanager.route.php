@@ -23,6 +23,8 @@ Route::group(
 
         Route::any('/upload', 'FileManager\UploadController@upload')->name('filemanager.upload');
 
+        Route::any('/import', 'FileManager\UploadController@import')->name('filemanager.import');
+
         Route::get('/jsonitems', 'FileManager\ItemsController@getItems');
 
         /*Route::get('/move', 'ItemsController@move');

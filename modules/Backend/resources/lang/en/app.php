@@ -548,4 +548,9 @@ return [
         'thumbnail_default' => 'Thumbnail default',
         'thumbnail_settings' => 'Thumbnail settings',
     ],
+    'file_manager' => [
+        'upload_from_url' => 'Upload from url',
+        'download_to_server' => 'Download file to server',
+        'upload_file' => 'Upload file'
+    ]
 ];

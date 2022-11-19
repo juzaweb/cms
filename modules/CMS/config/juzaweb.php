@@ -155,6 +155,12 @@ return [
          * FileSystem disk
          */
         'disk' => 'public',
+
+        /**
+         * Enable upload from url
+         */
+        'upload_from_url' => (bool) env('UPLOAD_FROM_URL', true),
+
         /**
          * Optimizer image after upload
          *

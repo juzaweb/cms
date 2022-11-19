@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Support;
 
+use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
@@ -31,9 +32,16 @@ class FileManager
 
     protected $client;
 
+    protected bool $downloadFileUrlToServer = true;
+
     protected string $type = 'image';
 
     protected array $errors = [];
+
+    public static function make($file): static
+    {
+        return (new self())->withResource($file);
+    }
 
     /**
      * Add file
@@ -45,7 +53,7 @@ class FileManager
      *
      * @return MediaFile
      * @throws FileManagerException
-     * @throws \Exception
+     * @throws Exception
      */
     public static function addFile(
         $file,
@@ -73,7 +81,7 @@ class FileManager
      * @param $resource
      * @return $this
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function withResource($resource): static
     {
@@ -92,7 +100,7 @@ class FileManager
         }
 
         if (empty($this->resource_type)) {
-            throw new \Exception('Resource type unsupported.');
+            throw new Exception('Resource type unsupported.');
         }
 
         return $this;
@@ -135,18 +143,56 @@ class FileManager
         return $this;
     }
 
+    public function setDownloadFileUrlToServer(bool $downloadFileUrlToServer): static
+    {
+        $this->downloadFileUrlToServer = $downloadFileUrlToServer;
+
+        return $this;
+    }
+
     /**
      * @return MediaFile
      *
      * @throws FileManagerException
-     * @throws \Exception
+     * @throws Exception
      */
     public function save(): MediaFile
     {
         global $jw_user;
 
-        $uploadedFile = $this->makeUploadedFile();
+        if ($this->resource_type != 'url' || $this->downloadFileUrlToServer) {
+            $media = $this->uploadUploadedFile();
+        } else {
+            $headers = get_headers($this->resource, true);
+            $fileSize = $headers['Content-Length'] ?? 0;
+            $fileMime = $headers['Content-Type'] ?? null;
+            $fileName = jw_basename($this->resource);
+            $extension = explode('.', $fileName)[count(explode('.', $fileName)) - 1];
 
+            $media = MediaFile::create(
+                [
+                    'name' => $fileName,
+                    'type' => $this->type,
+                    'mime_type' => $fileMime,
+                    'path' => $this->resource,
+                    'size' => $fileSize,
+                    'extension' => $extension,
+                    'folder_id' => $this->folder_id,
+                    'user_id' => $this->user_id ?: $jw_user->id,
+                ]
+            );
+        }
+
+        event(new MediaWasUploaded($media));
+
+        return $media;
+    }
+
+    protected function uploadUploadedFile(): MediaFile
+    {
+        global $jw_user;
+
+        $uploadedFile = $this->makeUploadedFile();
         if (! $this->fileIsValid($uploadedFile)) {
             $this->removeUploadedFile($uploadedFile);
             throw new FileManagerException($this->errors);
@@ -167,23 +213,6 @@ class FileManager
             }
         }
 
-        $img = Image::make($this->storage->path($newPath));
-        $img->resize(
-            150,
-            null,
-            function ($constraint) {
-                $constraint->aspectRatio();
-            }
-        );
-        $img->save(
-            get_media_image_with_size(
-                $newPath,
-                '150xauto',
-                'path'
-            ),
-            100
-        );
-
         try {
             $media = MediaFile::create(
                 [
@@ -197,16 +226,38 @@ class FileManager
                     'user_id' => $this->user_id ?: $jw_user->id,
                 ]
             );
-        } catch (\Exception $e) {
+
+            if ($media->isImage()) {
+                $this->makeThumbImage($newPath);
+            }
+        } catch (Exception $e) {
             $this->removeUploadedFile($uploadedFile);
             throw $e;
         }
 
         $this->removeUploadedFile($uploadedFile);
 
-        event(new MediaWasUploaded($media));
-
         return $media;
+    }
+
+    protected function makeThumbImage(string $path): void
+    {
+        $img = Image::make($this->storage->path($path));
+        $img->resize(
+            150,
+            null,
+            function ($constraint) {
+                $constraint->aspectRatio();
+            }
+        );
+        $img->save(
+            get_media_image_with_size(
+                $path,
+                '150xauto',
+                'path'
+            ),
+            100
+        );
     }
 
     protected function getImageMimetype()
@@ -217,18 +268,17 @@ class FileManager
     protected function makeFolderUpload(): string
     {
         $folderPath = date('Y/m/d');
-
         // Make Directory if not exists
         if (! $this->storage->exists($folderPath)) {
             File::makeDirectory($this->storage->path($folderPath), 0775, true);
         }
-
         return $folderPath;
     }
 
     /**
      * Make Uploaded File
      * @return UploadedFile
+     * @throws Exception
      */
     protected function makeUploadedFile(): UploadedFile
     {
@@ -252,14 +302,14 @@ class FileManager
      * Make Uploaded File By Url
      * @return UploadedFile
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function makeUploadedFileByUrl(): UploadedFile
     {
         $content = $this->getContentFileUrl($this->resource);
 
         if (empty($content)) {
-            throw new \Exception("Can't get file url: {$this->resource}");
+            throw new Exception("Can't get file url: {$this->resource}");
         }
 
         $tempName = basename($this->resource);
@@ -282,11 +332,9 @@ class FileManager
         $i = 0;
         while (1) {
             $filename = $name . ($i > 0 ? "-{$i}": '') .'.'. $extension;
-
             if (!$this->storage->exists("{$uploadFolder}/{$filename}")) {
                 break;
             }
-
             $i++;
         }
 
@@ -320,7 +368,6 @@ class FileManager
         $extension = $file->getClientOriginalExtension();
 
         $config = config('juzaweb.filemanager.types.' . $this->type);
-
         if (empty($config)) {
             $this->errors[] = $this->errorMessage('not-supported');
             return false;

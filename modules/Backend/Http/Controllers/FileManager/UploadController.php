@@ -3,7 +3,11 @@
 namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Juzaweb\Backend\Events\UploadFileSuccess;
+use Juzaweb\Backend\Http\Requests\FileManager\ImportRequest;
 use Juzaweb\CMS\Support\FileManager;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
@@ -16,7 +20,6 @@ class UploadController extends FileManagerController
     public function upload(Request $request): JsonResponse
     {
         $folderId = $request->input('working_dir');
-
         if (empty($folderId)) {
             $folderId = null;
         }
@@ -29,12 +32,14 @@ class UploadController extends FileManagerController
 
             $save = $receiver->receive();
             if ($save->isFinished()) {
-                FileManager::addFile(
+                $file = FileManager::addFile(
                     $save->getFile(),
                     $this->getType(),
                     $folderId
                 );
-                // event
+
+                event(new UploadFileSuccess($file));
+
                 return $this->responseUpload($this->errors);
             }
 
@@ -51,6 +56,36 @@ class UploadController extends FileManagerController
             $this->errors[] = $e->getMessage();
             return $this->responseUpload($this->errors);
         }
+    }
+
+    public function import(ImportRequest $request): JsonResponse|RedirectResponse
+    {
+        if (!config('juzaweb.filemanager.upload_from_url')) {
+            abort(403);
+        }
+
+        $folderId = $request->input('working_dir');
+        $download = (bool) $request->input('download');
+
+        if (empty($folderId)) {
+            $folderId = null;
+        }
+
+        DB::beginTransaction();
+        try {
+            $file = FileManager::make($request->input('url'));
+            $file->setType($this->getType());
+            $file->setFolder($folderId);
+            $file->setDownloadFileUrlToServer($download);
+            $file->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            report($e);
+            return $this->error($e->getMessage());
+        }
+
+        return $this->success(trans('message.upload_successfull'));
     }
 
     protected function responseUpload($error): JsonResponse

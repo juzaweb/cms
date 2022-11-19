@@ -30,6 +30,7 @@ use Juzaweb\Backend\Observers\TaxonomyObserver;
 use Juzaweb\Backend\Repositories\MediaFileRepository;
 use Juzaweb\Backend\Repositories\MediaFileRepositoryEloquent;
 use Juzaweb\Backend\Repositories\MediaFolderRepository;
+use Juzaweb\Backend\Repositories\MediaFolderRepositoryEloquent;
 use Juzaweb\Backend\Repositories\NotificationRepository;
 use Juzaweb\Backend\Repositories\NotificationRepositoryEloquent;
 use Juzaweb\Backend\Repositories\PostRepository;
@@ -51,7 +52,7 @@ class BackendServiceProvider extends ServiceProvider
         TaxonomyRepository::class => TaxonomyRepositoryEloquent::class,
         UserRepository::class => UserRepositoryEloquent::class,
         MediaFileRepository::class => MediaFileRepositoryEloquent::class,
-        MediaFolderRepository::class => MediaFileRepositoryEloquent::class,
+        MediaFolderRepository::class => MediaFolderRepositoryEloquent::class,
         NotificationRepository::class => NotificationRepositoryEloquent::class
     ];
 

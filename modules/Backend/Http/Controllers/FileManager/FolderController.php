@@ -36,7 +36,7 @@ class FolderController extends FileManagerController
                             'name' => 'Root',
                             'url' => '',
                             'children' => $childrens,
-                            'has_next' => $childrens ? true : false,
+                            'has_next' => (bool) $childrens,
                         ],
                     ],
                 ]
@@ -48,7 +48,7 @@ class FolderController extends FileManagerController
         $folder_name = request()->input('name');
         $parent_id = request()->input('working_dir');
 
-        if ($folder_name === null || $folder_name == '') {
+        if (empty($folder_name)) {
             return $this->throwError('folder-name');
         }
 
