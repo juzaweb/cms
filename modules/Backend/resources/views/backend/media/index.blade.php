@@ -62,9 +62,9 @@
                                 <div class="thumbnail">
                                     <div class="centered">
                                         @if($item->type == 'image')
-                                        <img src="{{ upload_url($item->path) }}" alt="{{ $item->name }}">
+                                            <img src="{{ upload_url($item->path, null, '150xauto') }}" alt="{{ $item->name }}">
                                         @else
-                                            <i class="fa {{ $item->icon }} fa-3x"></i>
+                                            <img src="{{ asset('jw-styles/juzaweb/images/file.png') }}" alt="{{ $item->name }}">
                                         @endif
                                     </div>
                                 </div>
@@ -80,7 +80,6 @@
 @endsection
 
 @section('footer')
-
     @include('cms::backend.media.add_modal')
 
     @include('cms::backend.media.upload_modal')
@@ -97,7 +96,6 @@
                 clickable: '#upload-button',
                 dictDefaultMessage: "{{ trans('cms::filemanager.message-drop') }}",
                 init: function () {
-                    var _this = this; // For the closure
                     this.on('success', function (file, response) {
                         if (response == 'OK') {
                             window.location = "";

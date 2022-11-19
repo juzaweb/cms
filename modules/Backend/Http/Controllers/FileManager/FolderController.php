@@ -8,7 +8,7 @@ use Juzaweb\Backend\Models\MediaFolder;
 
 class FolderController extends FileManagerController
 {
-    public function getFolders()
+    public function getFolders(): \Illuminate\Contracts\View\View
     {
         $childrens = [];
         $folders = MediaFolder::whereNull('folder_id')
@@ -36,19 +36,19 @@ class FolderController extends FileManagerController
                             'name' => 'Root',
                             'url' => '',
                             'children' => $childrens,
-                            'has_next' => $childrens ? true : false,
+                            'has_next' => (bool) $childrens,
                         ],
                     ],
                 ]
             );
     }
 
-    public function addfolder()
+    public function addfolder(): string
     {
         $folder_name = request()->input('name');
         $parent_id = request()->input('working_dir');
 
-        if ($folder_name === null || $folder_name == '') {
+        if (empty($folder_name)) {
             return $this->throwError('folder-name');
         }
 

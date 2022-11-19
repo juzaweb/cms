@@ -18,7 +18,7 @@ class ResizeThumbnailPostListener
 {
     public function handle(AfterPostSave $event): void
     {
-        if (empty($event->post->thumbnail)) {
+        if (empty($event->post->thumbnail) || is_url($event->post->thumbnail)) {
             return;
         }
 

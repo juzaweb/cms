@@ -19,12 +19,20 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Events\AddFolderSuccess;
 use Juzaweb\Backend\Http\Requests\Media\AddFolderRequest;
+use Juzaweb\Backend\Repositories\MediaFileRepository;
+use Juzaweb\Backend\Repositories\MediaFolderRepository;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\MediaFolder;
 
 class MediaController extends BackendController
 {
+    public function __construct(
+        protected MediaFileRepository $fileRepository,
+        protected MediaFolderRepository $folderRepository
+    ) {
+    }
+
     public function index(Request $request, $folderId = null): View
     {
         $title = trans('cms::app.media');
@@ -38,7 +46,7 @@ class MediaController extends BackendController
                 ]
             );
 
-            $folder = MediaFolder::find($folderId);
+            $folder = $this->folderRepository->find($folderId);
             $folder->load('parent');
             $this->addBreadcrumbFolder($folder);
             $title = $folder->name;
@@ -46,7 +54,7 @@ class MediaController extends BackendController
 
         $query = collect(request()->query());
         $mediaFolders = $this->getDirectories($query, $folderId);
-        $mediaFiles = $this->getFiles($query, $folderId);
+        $mediaFiles = $this->getFiles($query, 40 - $mediaFolders->count(), $folderId);
 
         $maxSize = config("juzaweb.filemanager.types.{$type}.max_size");
         $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
@@ -114,10 +122,11 @@ class MediaController extends BackendController
      * Get files in folder
      *
      * @param Collection $sQuery
+     * @param int $limit
      * @param int|null $folderId
      * @return LengthAwarePaginator
      */
-    protected function getFiles(Collection $sQuery, ?int $folderId): LengthAwarePaginator
+    protected function getFiles(Collection $sQuery, int $limit = 40, ?int $folderId = null): LengthAwarePaginator
     {
         $query = MediaFile::whereFolderId($folderId);
 
@@ -127,7 +136,7 @@ class MediaController extends BackendController
 
         $query->orderBy('id', 'DESC');
 
-        return $query->paginate(40);
+        return $query->paginate($limit);
     }
 
     /**

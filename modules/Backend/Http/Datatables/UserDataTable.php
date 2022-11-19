@@ -25,6 +25,13 @@ class UserDataTable extends DataTable
     public function columns(): array
     {
         return [
+            'avatar' => [
+                'label' => trans('cms::app.avatar'),
+                'width' => '5%',
+                'formatter' => function ($value, $row, $index) {
+                    return '<img src="'. $row->getAvatar('150x150') .'" class="w-100"/>';
+                },
+            ],
             'name' => [
                 'label' => trans('cms::app.name'),
                 'formatter' => [$this, 'rowActionsFormatter'],
