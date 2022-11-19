@@ -11,6 +11,8 @@
 namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -20,6 +22,7 @@ use Juzaweb\Backend\Events\AfterPostSave;
 use Juzaweb\Backend\Http\Datatables\PostTypeDataTable;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Facades\HookAction;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -32,7 +35,13 @@ trait PostTypeController
         ResourceController::getDataForForm as DataForForm;
     }
 
-    public function datatable(Request $request, ...$params)
+    /**
+     * @param Request $request
+     * @param ...$params
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function datatable(Request $request, ...$params): JsonResponse
     {
         $this->checkPermission(
             'index',
@@ -57,9 +66,6 @@ trait PostTypeController
         $rows = $query->get();
 
         $results = [];
-        $postType = $this->getPostType();
-        $postTypeTaxonomies = HookAction::getTaxonomies($postType);
-
         foreach ($rows as $index => $row) {
             $columns['id'] = $row->id;
             foreach ($columns as $col => $column) {
@@ -83,7 +89,11 @@ trait PostTypeController
         );
     }
 
-    protected function getModel(...$params)
+    /**
+     * @param ...$params
+     * @return string
+     */
+    protected function getModel(...$params): string
     {
         return Post::class;
     }
@@ -91,10 +101,11 @@ trait PostTypeController
     /**
      * @param array $data
      * @param Post $model
+     * @param mixed ...$params
      * @return void
      * @throws \Exception
      */
-    protected function afterSave($data, $model, ...$params)
+    protected function afterSave($data, $model, ...$params): void
     {
         $this->traitAfterSave($data, $model, ...$params);
         $model->syncTaxonomies($data);
@@ -110,8 +121,7 @@ trait PostTypeController
 
         if (Arr::has($data, 'meta')) {
             $meta = Arr::get($data, 'meta', []);
-
-            $model->syncMetas($meta);
+            $model->syncMetasWithoutDetaching($meta);
         }
 
         do_action('post_types.after_save', $model, $data);
@@ -121,15 +131,16 @@ trait PostTypeController
     }
 
     /**
+     * @param mixed ...$params
      * @return string
      * @throws \Exception
      */
-    protected function getTitle(...$params)
+    protected function getTitle(...$params): string
     {
         return $this->getSetting()->get('label');
     }
 
-    protected function validator(array $attributes, ...$params)
+    protected function validator(array $attributes, ...$params): \Illuminate\Validation\Validator
     {
         $taxonomies = HookAction::getTaxonomies($this->getPostType());
         $keys = $taxonomies->keys()->toArray();
@@ -148,7 +159,7 @@ trait PostTypeController
         return Validator::make($attributes, $rules);
     }
 
-    protected function getSetting()
+    protected function getSetting(): Collection
     {
         $postType = $this->getPostType();
         $setting = HookAction::getPostTypes($postType);
@@ -163,10 +174,11 @@ trait PostTypeController
     /**
      * Get data table resource
      *
-     * @return \Juzaweb\CMS\Abstracts\DataTable
+     * @param mixed ...$params
+     * @return PostTypeDataTable|DataTable
      * @throws \Exception
      */
-    protected function getDataTable(...$params)
+    protected function getDataTable(...$params): PostTypeDataTable|DataTable
     {
         $dataTable = new PostTypeDataTable();
         $dataTable->mountData($this->getSetting()->toArray());
@@ -183,7 +195,7 @@ trait PostTypeController
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    protected function getDataForForm($model, ...$params)
+    protected function getDataForForm($model, ...$params): array
     {
         do_action(Action::BLOCKS_INIT);
 
@@ -192,11 +204,9 @@ trait PostTypeController
         $templateData = $this->getTemplateData($model);
 
         $editor = 'cms::backend.post.components.editor';
-
         if (Arr::get($templateData, 'blocks', [])) {
             $editor = 'cms::backend.page-block.block';
         }
-
         $data['editor'] = $editor;
 
         return apply_filters(
@@ -218,7 +228,7 @@ trait PostTypeController
      * @return array
      * @throws \Exception
      */
-    protected function getDataForIndex(...$params)
+    protected function getDataForIndex(...$params): array
     {
         $data = $this->DataForIndex(...$params);
         $data['setting'] = $this->getSetting();
@@ -247,18 +257,18 @@ trait PostTypeController
         );
     }
 
-    protected function checkPermission($ability, $arguments = [], ...$params)
+    protected function checkPermission($ability, $arguments = [], ...$params): void
     {
         $this->authorize($ability, [$arguments, $this->getPostType()]);
     }
 
-    protected function hasPermission($ability, $arguments = [], ...$params)
+    protected function hasPermission($ability, $arguments = [], ...$params): bool
     {
         $response = Gate::inspect($ability, [$arguments, $this->getPostType()]);
         return $response->allowed();
     }
 
-    protected function updateSuccessResponse($model, $request, ...$params)
+    protected function updateSuccessResponse($model, $request, ...$params): JsonResponse|RedirectResponse
     {
         $message = trans('cms::app.updated_successfully')
             .' <a href="'. $model->getLink() .'" target="_blank">'. trans('cms::app.view_post') .'</a>';
@@ -271,12 +281,12 @@ trait PostTypeController
     }
 
     /**
-     * @param Post|Model $model
+     * @param Model|Post $model
      * @return array|Collection
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    private function getTemplateData($model)
+    private function getTemplateData(Model|Post $model): array|Collection
     {
         $template = $this->getTemplate($model);
 
@@ -288,12 +298,12 @@ trait PostTypeController
     }
 
     /**
-     * @param Post|Model $model
+     * @param Model|Post $model
      * @return string
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    private function getTemplate($model)
+    private function getTemplate(Model|Post $model): ?string
     {
         $template = request()->get('template');
         if (empty($template)) {

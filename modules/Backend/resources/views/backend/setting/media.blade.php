@@ -10,7 +10,7 @@
                     <h5>{{ $postType->get('label') }}</h5>
                     <label>{{ trans('cms::app.media_setting.thumbnail_size') }}</label>
                     @php
-                    $thumbnailSize = get_thumbnail_size($key, $thumbnailSizes);
+                    $thumbnailSize = get_thumbnail_size($key, $thumbnailSizes ?? []);
                     @endphp
                     <div class="row">
                         <div class="col-md-6">

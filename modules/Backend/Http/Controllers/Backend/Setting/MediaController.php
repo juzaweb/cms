@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
+use Illuminate\Contracts\View\View;
 use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
@@ -19,7 +20,7 @@ class MediaController extends BackendController
     {
     }
 
-    public function index(): \Illuminate\Contracts\View\View
+    public function index(): View
     {
         $title = trans('cms::app.media_setting.title');
         $postTypes = $this->hookAction->getPostTypes();
