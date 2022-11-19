@@ -23,15 +23,14 @@ class PostResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $taxonomies = TaxonomyResource::collection($this->taxonomies)
-            ->toArray($request);
+        $taxonomies = TaxonomyResource::collection($this->taxonomies)->toArray($request);
 
         return [
             'id' => $this->id,
             'title' => $this->getTitle(),
             'description' => $this->description,
             'content' => $this->getContent(),
-            'thumbnail' => $this->getThumbnail(),
+            'thumbnail' => $this->getThumbnail(false),
             'url' => $this->getLink(),
             'views' => $this->getViews(),
             'type' => $this->type,

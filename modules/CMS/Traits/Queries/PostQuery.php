@@ -13,6 +13,7 @@ namespace Juzaweb\CMS\Traits\Queries;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Http\Resources\PostResource;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Post;
 
 trait PostQuery
@@ -84,7 +85,7 @@ trait PostQuery
 
             $posts->appends(request()->query());
 
-            return PostResource::collection($posts)
+            return PostResourceCollection::make($posts)
                 ->response()
                 ->getData(true);
         }
@@ -97,8 +98,7 @@ trait PostQuery
 
         $posts = $query->get();
 
-        return PostResource::collection($posts)
-            ->toArray(request());
+        return PostResourceCollection::make($posts)->toArray(request());
     }
 
     public function relatedPosts(array $post, int $limit = 5, string $taxonomy = null): array
@@ -123,8 +123,7 @@ trait PostQuery
             ->take($limit)
             ->get();
 
-        return PostResource::collection($posts)
-            ->toArray(request());
+        return PostResourceCollection::make($posts)->toArray(request());
     }
 
     public function popularPosts($type = null, $post = null, $limit = 5, $options = [])
@@ -147,8 +146,7 @@ trait PostQuery
 
         $posts = $query->take($limit)->get();
 
-        return PostResource::collection($posts)
-            ->toArray(request());
+        return PostResourceCollection::make($posts)->toArray(request());
     }
 
     public function postTaxonomy(

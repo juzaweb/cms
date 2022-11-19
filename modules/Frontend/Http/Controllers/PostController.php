@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Http\Resources\PostResource;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Facades\Facades;
@@ -38,7 +39,7 @@ class PostController extends FrontendController
 
         $posts->appends(request()->query());
 
-        $page = PostResource::collection($posts)
+        $page = PostResourceCollection::make($posts)
             ->response()
             ->getData(true);
 

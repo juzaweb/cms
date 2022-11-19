@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Arr;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Http\Resources\ResourceResource;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Taxonomy;
@@ -58,7 +59,7 @@ function get_popular_posts($type = null, $post = null, $limit = 5, $options = []
 
     $posts = $query->take($limit)->get();
 
-    return PostResource::collection($posts)->toArray(request());
+    return PostResourceCollection::make($posts)->toArray(request());
 }
 
 function get_post_resources($resource, $options = []): array

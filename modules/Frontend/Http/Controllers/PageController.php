@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\PostResource;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
@@ -119,7 +120,7 @@ class PageController extends FrontendController
                 $paginate = $query->paginate(get_config('posts_per_page', 12))
                     ->appends(request()->query());
 
-                return PostResource::collection($paginate)->response()->getData(true);
+                return PostResourceCollection::make($paginate)->response()->getData(true);
             case 'popular_posts':
                 return get_popular_posts(
                     $item['post_type'] ?? null,
