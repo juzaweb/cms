@@ -653,7 +653,7 @@ trait PostTypeModel
         return route('post', ["{$permalink}/{$this->slug}"]);
     }
 
-    public function getThumbnail($thumb = true): string
+    public function getThumbnail(string|bool $thumb = true): string
     {
         if (empty($this->thumbnail)) {
             $thumbnailDefault = get_config('thumbnail_defaults', [])[$this->type] ?? null;
@@ -662,12 +662,12 @@ trait PostTypeModel
             }
         }
 
-        if ($this->resize) {
-            if ($thumb) {
-                return upload_url($this->thumbnail);
-            }
+        if ($thumb && is_bool($thumb) && ($size = get_thumbnail_size($this->type))) {
+            return upload_url($this->thumbnail, null, "{$size['width']}x{$size['height']}");
+        }
 
-            return upload_url(str_replace('thumbs/', '', $this->thumbnail));
+        if ($thumb && is_string($thumb)) {
+            return upload_url($this->thumbnail, null, $thumb);
         }
 
         return upload_url($this->thumbnail);

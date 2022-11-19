@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Traits;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -39,7 +40,7 @@ trait PostTypeController
      * @param Request $request
      * @param ...$params
      * @return JsonResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function datatable(Request $request, ...$params): JsonResponse
     {
@@ -103,7 +104,7 @@ trait PostTypeController
      * @param Post $model
      * @param mixed ...$params
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     protected function afterSave($data, $model, ...$params): void
     {
@@ -133,7 +134,7 @@ trait PostTypeController
     /**
      * @param mixed ...$params
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getTitle(...$params): string
     {
@@ -165,7 +166,7 @@ trait PostTypeController
         $setting = HookAction::getPostTypes($postType);
 
         if (empty($setting)) {
-            throw new \Exception('Post type does not exists.');
+            throw new Exception('Post type does not exists.');
         }
 
         return $setting;
@@ -176,7 +177,7 @@ trait PostTypeController
      *
      * @param mixed ...$params
      * @return PostTypeDataTable|DataTable
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getDataTable(...$params): PostTypeDataTable|DataTable
     {
@@ -226,7 +227,7 @@ trait PostTypeController
     /**
      * @param ...$params
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getDataForIndex(...$params): array
     {
