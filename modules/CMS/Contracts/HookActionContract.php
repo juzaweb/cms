@@ -38,6 +38,8 @@ interface HookActionContract
 
     public function addMasterAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void;
 
+    public function addThumbnailSizes(string $postType, string|array $size): void;
+
     public function applyFilters(string $tag, mixed $value, ...$args): mixed;
 
     public function getMenuBoxs(array $keys = []): array;
@@ -81,4 +83,8 @@ interface HookActionContract
     public function getTaxonomies($postType = null): Collection;
 
     public function addMetaPostTypes(string $postType, array $metas): void;
+
+    public function getThumbnailSizes($postType = null): Collection;
+
+    public function getPostTypes(string $postType = null): Collection;
 }

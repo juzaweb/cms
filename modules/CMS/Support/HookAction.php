@@ -157,6 +157,21 @@ class HookAction implements HookActionContract
         $this->globalData->set('master_admin_menu', $adminMenu);
     }
 
+    public function addThumbnailSizes(string $postType, string|array $size): void
+    {
+        if (!is_array($size)) {
+            $size = [$size];
+        }
+
+        $currentSizes = $this->globalData->get("thumbnail_sizes.{$postType}", []);
+        foreach ($size as $item) {
+            list($width, $height) = explode('x', $item);
+            $currentSizes[$item] = compact('width', 'height');
+        }
+
+        $this->globalData->set("thumbnail_sizes.{$postType}", new Collection($currentSizes));
+    }
+
     public function enqueueScript(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void
     {
         if (!is_url($src)) {

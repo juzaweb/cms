@@ -515,3 +515,18 @@ function share_url($social, $url, $text = null): string
         default => '',
     };
 }
+
+if (! function_exists('get_thumbnail_size')) {
+    function get_thumbnail_size(string $postType, ?array $thumbnailSizes = null): array
+    {
+        $thumbnailSizes = $thumbnailSizes ?: HookAction::getThumbnailSizes()->toArray();
+        $width = get_theme_config("thumbnail_sizes")[$postType]['width']
+            ?? $thumbnailSizes[$postType][array_key_first($thumbnailSizes[$postType] ?? [])]['width']
+            ?? '241';
+        $height = get_theme_config("thumbnail_sizes")[$postType]['height']
+            ?? $thumbnailSizes[$postType][array_key_first($thumbnailSizes[$postType] ?? [])]['height']
+            ?? '241';
+
+        return compact('width', 'height');
+    }
+}

@@ -48,7 +48,7 @@ Route::group(
         Route::get(
             '/',
             'Backend\Appearance\SettingController@index'
-        );
+        )->name('admin.theme.setting');
 
         Route::post('/', 'Backend\Appearance\SettingController@save');
     }
