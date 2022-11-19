@@ -40,7 +40,7 @@ class ResizeThumbnailPostListener
                 "{$size['width']}x{$size['height']}",
                 'path'
             ),
-            90
+            100
         );
     }
 }
