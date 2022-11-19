@@ -313,20 +313,19 @@ class FileManager
         }
 
         $tempName = basename($this->resource);
+        if (empty(File::extension($tempName))) {
+            throw new Exception("Can't get file extension: {$this->resource}");
+        }
 
         $this->storage->put($tempName, $content);
-
         return (new UploadedFile($this->storage->path($tempName), $tempName));
     }
 
     protected function makeFilename(UploadedFile $file, string $uploadFolder): string|null
     {
         $filename = $file->getClientOriginalName();
-
         $extension = $file->getClientOriginalExtension();
-
         $name = str_replace('.' . $extension, '', $filename);
-
         $name = Str::slug(substr($name, 0, 100));
 
         $i = 0;

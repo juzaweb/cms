@@ -85,7 +85,7 @@ class UploadController extends FileManagerController
             return $this->error($e->getMessage());
         }
 
-        return $this->success(trans('message.upload_successfull'));
+        return $this->success(trans('cms::message.upload_successfull'));
     }
 
     protected function responseUpload($error): JsonResponse

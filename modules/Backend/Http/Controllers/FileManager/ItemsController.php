@@ -8,7 +8,7 @@ use Juzaweb\Backend\Models\MediaFolder;
 
 class ItemsController extends FileManagerController
 {
-    public function getItems()
+    public function getItems(): array
     {
         $file_type = $this->getType();
         $currentPage = self::getCurrentPageFromRequest();
@@ -25,7 +25,6 @@ class ItemsController extends FileManagerController
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
 
-        $storage = Storage::disk(config('juzaweb.filemanager.disk'));
         $items = [];
         foreach ($folders as $folder) {
             $items[] = [
@@ -47,9 +46,9 @@ class ItemsController extends FileManagerController
                 'path' => $file->path,
                 'is_image' => $file->type == 1,
                 'name' => $file->name,
-                'thumb_url' => $file->type == 'image' ? $storage->url($file->path) : null,
+                'thumb_url' => $file->type == 'image' ? upload_url($file->path) : null,
                 'time' => strtotime($file->created_at),
-                'url' => $storage->url($file->path),
+                'url' => upload_url($file->path),
             ];
         }
 

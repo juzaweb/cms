@@ -35,7 +35,6 @@ class FileManagerController extends BackendController
     public function getErrors(): array
     {
         $errors = [];
-
         if (! extension_loaded('gd') && ! extension_loaded('imagick')) {
             $errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'gd']);
         }
