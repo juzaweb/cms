@@ -46,7 +46,7 @@ class MediaController extends BackendController
 
         $query = collect(request()->query());
         $mediaFolders = $this->getDirectories($query, $folderId);
-        $mediaFiles = $this->getFiles($query, $folderId);
+        $mediaFiles = $this->getFiles($query, 40 - $mediaFolders->count(), $folderId);
 
         $maxSize = config("juzaweb.filemanager.types.{$type}.max_size");
         $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
@@ -114,10 +114,11 @@ class MediaController extends BackendController
      * Get files in folder
      *
      * @param Collection $sQuery
+     * @param int $limit
      * @param int|null $folderId
      * @return LengthAwarePaginator
      */
-    protected function getFiles(Collection $sQuery, ?int $folderId): LengthAwarePaginator
+    protected function getFiles(Collection $sQuery, int $limit = 40, ?int $folderId = null): LengthAwarePaginator
     {
         $query = MediaFile::whereFolderId($folderId);
 
@@ -127,7 +128,7 @@ class MediaController extends BackendController
 
         $query->orderBy('id', 'DESC');
 
-        return $query->paginate(40);
+        return $query->paginate($limit);
     }
 
     /**

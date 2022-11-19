@@ -7,6 +7,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Juzaweb\Backend\Events\MediaWasUploaded;
 use Juzaweb\CMS\Exceptions\FileManagerException;
 use Juzaweb\Backend\Models\MediaFile;
@@ -165,6 +166,23 @@ class FileManager
                 $optimizerChain->optimize($this->storage->path($newPath));
             }
         }
+
+        $img = Image::make($this->storage->path($newPath));
+        $img->resize(
+            150,
+            null,
+            function ($constraint) {
+                $constraint->aspectRatio();
+            }
+        );
+        $img->save(
+            get_media_image_with_size(
+                $newPath,
+                '150xauto',
+                'path'
+            ),
+            100
+        );
 
         try {
             $media = MediaFile::create(

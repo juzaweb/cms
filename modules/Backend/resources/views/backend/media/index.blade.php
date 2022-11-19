@@ -62,7 +62,7 @@
                                 <div class="thumbnail">
                                     <div class="centered">
                                         @if($item->type == 'image')
-                                        <img src="{{ upload_url($item->path) }}" alt="{{ $item->name }}">
+                                        <img src="{{ upload_url($item->path, null, '150xauto') }}" alt="{{ $item->name }}">
                                         @else
                                             <i class="fa {{ $item->icon }} fa-3x"></i>
                                         @endif
