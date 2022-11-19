@@ -24,7 +24,7 @@ class PostResourceCollection extends ResourceCollection
                     'id' => $item->id,
                     'title' => $item->getTitle(),
                     'description' => $item->description,
-                    'thumbnail' => $item->getThumbnail(),
+                    'thumbnail' => $item->getThumbnail(true),
                     'url' => $item->getLink(),
                     'views' => $item->getViews(),
                     'type' => $item->type,
