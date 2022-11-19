@@ -515,3 +515,49 @@ function share_url($social, $url, $text = null): string
         default => '',
     };
 }
+
+if (! function_exists('get_thumbnail_size')) {
+    /**
+     * Get thumbnail size
+     *
+     * @param string $postType
+     * @param array|null $thumbnailSizes
+     * @return array{width: string,height:string}
+     */
+    function get_thumbnail_size(string $postType, ?array $thumbnailSizes = null): array
+    {
+        $thumbnailSizes = $thumbnailSizes ?: HookAction::getThumbnailSizes()->toArray();
+        $width = get_theme_config("thumbnail_sizes")[$postType]['width']
+            ?? $thumbnailSizes[$postType][array_key_first($thumbnailSizes[$postType] ?? [])]['width']
+            ?? '241';
+        $height = get_theme_config("thumbnail_sizes")[$postType]['height']
+            ?? $thumbnailSizes[$postType][array_key_first($thumbnailSizes[$postType] ?? [])]['height']
+            ?? '241';
+
+        return compact('width', 'height');
+    }
+}
+
+if (! function_exists('get_media_image_with_size')) {
+    function get_media_image_with_size(string $path, string $size, string $type = 'url'): ?string
+    {
+        $filename = File::name($path);
+        $path = str_replace($filename, "{$filename}_{$size}", $path);
+
+        return \Illuminate\Support\Facades\Storage::disk(
+            config('juzaweb.filemanager.disk')
+        )->{$type}($path);
+    }
+}
+
+if (! function_exists('has_media_image_size')) {
+    function has_media_image_size(string $path, string $size): bool
+    {
+        $filename = File::name($path);
+        $path = str_replace($filename, "{$filename}_{$size}", $path);
+
+        return \Illuminate\Support\Facades\Storage::disk(
+            config('juzaweb.filemanager.disk')
+        )->exists($path);
+    }
+}

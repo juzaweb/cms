@@ -316,4 +316,13 @@ trait GetHookAction
         return $key ? Arr::get(GlobalData::get('resource_managements'), $key) :
             new Collection(GlobalData::get('resource_managements'));
     }
+
+    public function getThumbnailSizes($postType = null): Collection
+    {
+        if ($postType) {
+            return Arr::get($this->globalData->get('thumbnail_sizes'), $postType);
+        }
+
+        return new Collection($this->globalData->get('thumbnail_sizes'));
+    }
 }

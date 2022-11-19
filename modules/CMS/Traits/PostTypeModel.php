@@ -227,11 +227,11 @@ trait PostTypeModel
     /**
      * @param Builder $builder
      * @param string $key
-     * @param string $value
+     * @param string|array|int $value
      *
      * @return Builder
      */
-    public function scopeWhereMeta($builder, $key, $value)
+    public function scopeWhereMeta(Builder $builder, string $key, string|array|int $value): Builder
     {
         return $builder->whereHas(
             'metas',
@@ -269,32 +269,30 @@ trait PostTypeModel
      *
      * @return Builder
      */
-    public function scopeWhereSearch($builder, $params)
+    public function scopeWhereSearch(Builder $builder, array $params): Builder
     {
         $builder->whereFilter($params);
 
-        $builder = apply_filters(
+        return apply_filters(
             'frontend.search_query',
             $builder,
             $params
         );
-
-        return $builder;
     }
 
     /**
      * Get taxonomies by taxonomy
      *
-     * @param string $taxonomy
-     * @param int $limit
+     * @param string|null $taxonomy
+     * @param int|null $limit
      * @param bool $tree
      * @return Collection
      */
     public function getTaxonomies(
-        $taxonomy = null,
-        $limit = null,
-        $tree = false
-    ) {
+        string $taxonomy = null,
+        ?int $limit = null,
+        bool $tree = false
+    ): Collection {
         $taxonomies = $this->taxonomies;
 
         if ($taxonomy) {
@@ -378,8 +376,7 @@ trait PostTypeModel
                     [
                         'term_type' => $postType,
                     ]
-                ),
-                ['term_type' => $postType]
+                )
             );
 
         $taxonomies = Taxonomy::where('taxonomy', '=', $taxonomy)
@@ -487,12 +484,41 @@ trait PostTypeModel
             ->delete();
     }
 
+    public function syncMetasWithoutDetaching(array $data = []): void
+    {
+        $metas = $this->json_metas;
+        $keys = $this->getPostTypeMetaKeys();
+
+        foreach ($data as $key => $val) {
+            if (!in_array($key, $keys)) {
+                continue;
+            }
+
+            $this->metas()->updateOrCreate(
+                [
+                    'meta_key' => $key
+                ],
+                [
+                    'meta_value' => is_array($val) ? json_encode($val) : $val
+                ]
+            );
+
+            $metas[$key] = $val;
+        }
+
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
+    }
+
     /**
      * @param Builder $builder
      *
      * @return Builder
      **/
-    public function scopeWherePublish($builder): Builder
+    public function scopeWherePublish(Builder $builder): Builder
     {
         $builder->where('status', '=', 'publish');
 
@@ -505,7 +531,7 @@ trait PostTypeModel
      *
      * @return Builder
      **/
-    public function scopeWhereTaxonomy($builder, $taxonomy): Builder
+    public function scopeWhereTaxonomy(Builder $builder, int $taxonomy): Builder
     {
         $builder->whereHas(
             'taxonomies',
@@ -523,7 +549,7 @@ trait PostTypeModel
      *
      * @return Builder
      */
-    public function scopeWhereTaxonomyIn($builder, $taxonomies): Builder
+    public function scopeWhereTaxonomyIn(Builder $builder, array $taxonomies): Builder
     {
         $builder->whereHas(
             'taxonomies',
@@ -627,7 +653,7 @@ trait PostTypeModel
         return route('post', ["{$permalink}/{$this->slug}"]);
     }
 
-    public function getThumbnail($thumb = true)
+    public function getThumbnail(string|bool $thumb = true): string
     {
         if (empty($this->thumbnail)) {
             $thumbnailDefault = get_config('thumbnail_defaults', [])[$this->type] ?? null;
@@ -636,12 +662,12 @@ trait PostTypeModel
             }
         }
 
-        if ($this->resize) {
-            if ($thumb) {
-                return upload_url($this->thumbnail);
-            }
+        if ($thumb && is_bool($thumb) && ($size = get_thumbnail_size($this->type))) {
+            return upload_url($this->thumbnail, null, "{$size['width']}x{$size['height']}");
+        }
 
-            return upload_url(str_replace('thumbs/', '', $this->thumbnail));
+        if ($thumb && is_string($thumb)) {
+            return upload_url($this->thumbnail, null, $thumb);
         }
 
         return upload_url($this->thumbnail);
@@ -666,7 +692,7 @@ trait PostTypeModel
         return 'Admin';
     }
 
-    public function getCreatedByAvatar()
+    public function getCreatedByAvatar(): string
     {
         if ($this->createdBy) {
             return $this->createdBy->getAvatar();

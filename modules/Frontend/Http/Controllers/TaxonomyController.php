@@ -4,6 +4,7 @@ namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Resources\PostResource;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Facades\Facades;
@@ -43,7 +44,7 @@ class TaxonomyController extends FrontendController
             $viewName = 'theme::index';
         }
 
-        $page = PostResource::collection($posts)
+        $page = PostResourceCollection::make($posts)
             ->response()
             ->getData(true);
 

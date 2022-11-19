@@ -5,6 +5,7 @@ namespace Juzaweb\Frontend\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Http\Resources\PostResource;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 
@@ -24,7 +25,7 @@ class SearchController extends FrontendController
         $posts = $query->paginate(12);
         $posts->appends($request->query());
 
-        $page = PostResource::collection($posts)->response()->getData(true);
+        $page = PostResourceCollection::make($posts)->response()->getData(true);
         $template = 'search';
 
         $viewName = apply_filters('search.get_view_name', "theme::search");

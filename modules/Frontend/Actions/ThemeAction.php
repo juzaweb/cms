@@ -29,7 +29,6 @@ class ThemeAction extends Action
     public function __construct()
     {
         parent::__construct();
-
         $this->currentTheme = jw_current_theme();
         $this->register = ThemeLoader::getRegister($this->currentTheme);
     }
@@ -64,7 +63,12 @@ class ThemeAction extends Action
     {
         $types = $this->getRegister('post_types');
         foreach ($types as $key => $type) {
-            HookAction::registerPostType($key, $type);
+            $this->hookAction->registerPostType($key, $type);
+        }
+
+        $thumbnailSizes = $this->getRegister('thumbnail_sizes');
+        foreach ($thumbnailSizes as $postType => $size) {
+            $this->hookAction->addThumbnailSizes($postType, $size);
         }
     }
 

@@ -220,9 +220,10 @@ if (!function_exists('upload_url')) {
      *
      * @param string|null $path
      * @param string|null $default Default path if file not exists
+     * @param string|null $size
      * @return string
      */
-    function upload_url(?string $path, ?string $default = null): string
+    function upload_url(?string $path, ?string $default = null, ?string $size = null): string
     {
         if (is_url($path)) {
             return $path;
@@ -237,6 +238,15 @@ if (!function_exists('upload_url')) {
         }
 
         $storage = Storage::disk('public');
+        if ($size) {
+            $filename = File::name($path);
+            $pathSize = str_replace($filename, "{$filename}_{$size}", $path);
+
+            if ($storage->exists(jw_basepath($pathSize))) {
+                return $storage->url($pathSize);
+            }
+        }
+
         if ($storage->exists(jw_basepath($path))) {
             return $storage->url($path);
         }

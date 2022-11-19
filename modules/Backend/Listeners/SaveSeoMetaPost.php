@@ -8,10 +8,9 @@ use Juzaweb\Backend\Models\SeoMeta;
 
 class SaveSeoMetaPost
 {
-    public function handle(AfterPostSave $event)
+    public function handle(AfterPostSave $event): void
     {
         $data = $event->data;
-
         $title = Arr::get($data, 'meta_title');
         $description = Arr::get($data, 'meta_description');
 

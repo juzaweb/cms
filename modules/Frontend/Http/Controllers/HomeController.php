@@ -5,7 +5,7 @@ namespace Juzaweb\Frontend\Http\Controllers;
 use HeadlessChromium\BrowserFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Juzaweb\Backend\Http\Resources\PostResource;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 
@@ -34,7 +34,7 @@ class HomeController extends FrontendController
                 get_config('posts_per_page', 12)
             );
 
-        $page = PostResource::collection($posts)->response()->getData(true);
+        $page = PostResourceCollection::make($posts)->response()->getData(true);
 
         $params = [
             'title' => $config['title'],
