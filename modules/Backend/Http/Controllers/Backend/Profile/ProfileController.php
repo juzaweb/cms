@@ -13,7 +13,6 @@ namespace Juzaweb\Backend\Http\Controllers\Backend\Profile;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Juzaweb\Backend\Http\Datatables\NotificationDatatable;
@@ -74,7 +73,7 @@ class ProfileController extends BackendController
 
         DB::beginTransaction();
         try {
-            $user->update($request->only(['name', 'language']));
+            $user->update($request->only(['name', 'language', 'avatar']));
 
             foreach ($metas as $key => $value) {
                 $user->setMeta($key, $value);
