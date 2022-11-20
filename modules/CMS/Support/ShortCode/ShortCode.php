@@ -1,8 +1,9 @@
 <?php namespace Juzaweb\CMS\Support\ShortCode;
 
+use Juzaweb\CMS\Contracts\ShortCode as ShortCodeContract;
 use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
 
-class ShortCode
+class ShortCode implements ShortCodeContract
 {
     /**
      * Shortcode compiler

@@ -8,7 +8,7 @@ use Juzaweb\Tests\TestCase;
 
 class ShortCodeTest extends TestCase
 {
-    protected ShortCode $shortcode;
+    protected ShortCodeContract $shortcode;
 
     public function setUp(): void
     {
