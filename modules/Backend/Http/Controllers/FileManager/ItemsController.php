@@ -2,28 +2,33 @@
 
 namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\MediaFolder;
 
 class ItemsController extends FileManagerController
 {
-    public function getItems(): array
+    public function getItems(Request $request): array
     {
         $file_type = $this->getType();
         $currentPage = self::getCurrentPageFromRequest();
         $perPage = 15;
 
-        $working_dir = request()->get('working_dir');
+        $working_dir = $request->get('working_dir');
+        $folders = collect([]);
+        if ($currentPage == 1) {
+            $folders = MediaFolder::where('folder_id', '=', $working_dir)
+                ->where('type', '=', $file_type)
+                ->orderBy('name', 'ASC')
+                ->get(['id', 'name']);
+        }
 
-        $folders = MediaFolder::where('folder_id', '=', $working_dir)
+        $query = MediaFile::where('folder_id', '=', $working_dir)
             ->where('type', '=', $file_type)
-            ->orderBy('name', 'ASC')
-            ->get(['id', 'name']);
-        $files = MediaFile::where('folder_id', '=', $working_dir)
-            ->where('type', '=', $file_type)
-            ->orderBy('id', 'DESC')
-            ->paginate($perPage);
+            ->orderBy('id', 'DESC');
+
+        $totalFiles = $query->count(['id']);
+        $files = $query->paginate($perPage - $folders->count());
 
         $items = [];
         foreach ($folders as $folder) {
@@ -56,7 +61,7 @@ class ItemsController extends FileManagerController
             'items' => $items,
             'paginator' => [
                 'current_page' => $currentPage,
-                'total' => count($items),
+                'total' => $totalFiles + $folders->count(),
                 'per_page' => $perPage,
             ],
             'display' => 'grid',

@@ -53,9 +53,12 @@ class MediaController extends BackendController
         }
 
         $query = collect(request()->query());
-        $mediaFolders = $this->getDirectories($query, $folderId);
-        $mediaFiles = $this->getFiles($query, 40 - $mediaFolders->count(), $folderId);
+        $mediaFolders = collect([]);
+        if ($request->input('page', 1) == 1) {
+            $mediaFolders = $this->getDirectories($query, $folderId);
+        }
 
+        $mediaFiles = $this->getFiles($query, 40 - $mediaFolders->count(), $folderId);
         $maxSize = config("juzaweb.filemanager.types.{$type}.max_size");
         $mimeTypes = config("juzaweb.filemanager.types.{$type}.valid_mime");
         if (empty($mimeTypes)) {
