@@ -21,6 +21,7 @@ use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\PostMeta;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\ShortCode;
 
 /**
  * @method Builder wherePublish()
@@ -632,6 +633,10 @@ trait PostTypeModel
             },
             $this->content
         );
+
+        if ($this->type == 'pages') {
+            $content = ShortCode::compile($content);
+        }
 
         return apply_filters(
             $this->type . '.get_content',

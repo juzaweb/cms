@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static static register(string $name, callable|string $callback)
+ * @method static string compile(string $value)
  * @see \Juzaweb\CMS\Support\ShortCode\ShortCode
  */
 class ShortCode extends Facade

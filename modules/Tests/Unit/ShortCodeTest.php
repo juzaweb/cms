@@ -2,7 +2,8 @@
 
 namespace Juzaweb\Tests\Unit;
 
-use Juzaweb\CMS\Contracts\ShortCode;
+use Juzaweb\CMS\Contracts\ShortCode as ShortCodeContract;
+use Juzaweb\CMS\Support\ShortCode\ShortCode;
 use Juzaweb\Tests\TestCase;
 
 class ShortCodeTest extends TestCase
@@ -11,12 +12,12 @@ class ShortCodeTest extends TestCase
     {
         parent::setUp();
 
-        $this->shortcode = app()->make(ShortCode::class);
+        $this->shortcode = app()->make(ShortCodeContract::class);
     }
 
     public function testInstance()
     {
-        $this->assertInstanceOf(\Juzaweb\CMS\Support\ShortCode\ShortCode::class, $this->shortcode);
+        $this->assertInstanceOf(ShortCode::class, $this->shortcode);
     }
 
     public function testRegistrationAndCompileShortcode()
