@@ -15,10 +15,10 @@ class ShortCodeTest extends TestCase
         $this->shortcode = app()->make(ShortCodeContract::class);
     }
 
-    public function testInstance()
+    /*public function testInstance()
     {
         $this->assertInstanceOf(ShortCode::class, $this->shortcode);
-    }
+    }*/
 
     public function testRegistrationAndCompileShortcode()
     {
