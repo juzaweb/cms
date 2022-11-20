@@ -67,7 +67,7 @@ class ShortCode
      *
      * @return string
      */
-    public function compile($value): string
+    public function compile(string $value): string
     {
         // Always enable when we call the compile method directly
         $this->enable();
