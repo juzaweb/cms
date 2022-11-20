@@ -25,6 +25,8 @@ use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Juzaweb\CMS\Contracts\OverwriteConfigContract;
 use Juzaweb\CMS\Contracts\PostImporterContract;
 use Juzaweb\CMS\Contracts\PostManagerContract;
+use Juzaweb\CMS\Contracts\ShortCode as ShortCodeContract;
+use Juzaweb\CMS\Contracts\ShortCodeCompiler as ShortCodeCompilerContract;
 use Juzaweb\CMS\Contracts\StorageDataContract;
 use Juzaweb\CMS\Contracts\TableGroupContract;
 use Juzaweb\CMS\Contracts\ThemeConfigContract;
@@ -44,6 +46,8 @@ use Juzaweb\CMS\Support\JWQuery;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Manager\BackendMessageManager;
 use Juzaweb\CMS\Support\Manager\PostManager;
+use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
+use Juzaweb\CMS\Support\ShortCode\ShortCode;
 use Juzaweb\CMS\Support\StorageData;
 use Juzaweb\CMS\Support\Theme\ThemeConfig;
 use Juzaweb\CMS\Support\Validators\DomainValidator;
@@ -308,6 +312,20 @@ class CmsServiceProvider extends ServiceProvider
                 return new HtmlField();
             }
         );
+
+        $this->app->singleton(
+            ShortCodeCompilerContract::class,
+            function ($app) {
+                return new ShortCodeCompiler();
+            }
+        );
+
+        $this->app->singleton(
+            ShortCodeContract::class,
+            function ($app) {
+                return new ShortCode($app[ShortCodeCompilerContract::class]);
+            }
+        );
     }
 
     protected function registerProviders()
@@ -327,6 +345,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(ThemeServiceProvider::class);
         $this->app->register(BackendServiceProvider::class);
         $this->app->register(FrontendServiceProvider::class);
+        $this->app->register(ShortCodeServiceProvider::class);
 
         if (config('juzaweb.translation.enable')) {
             $this->app->register(TranslationServiceProvider::class);
