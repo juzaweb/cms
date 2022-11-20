@@ -37,7 +37,7 @@ class ShortCodeCompiler
      */
     protected array $data = [];
 
-    protected mixed $viewData;
+    protected mixed $viewData = null;
 
     /**
      * Enable
