@@ -92,7 +92,7 @@
                                                     @endif
                                                 </div>
                                                 <div>
-                                                    <div class="text-blue">{{ $notify->subject }}</div>
+                                                    <div class="text-blue">{{ $notify->data['subject'] ?? '' }}</div>
                                                     <div class="text-muted">{{ $notify->created_at?->diffForHumans() }}</div>
                                                 </div>
                                             </a>
