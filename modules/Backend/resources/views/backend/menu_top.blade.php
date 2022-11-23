@@ -1,4 +1,7 @@
 <div class="juzaweb__topbar">
+    @php
+        global $jw_user;
+    @endphp
     <div class="mr-3">
         <a href="{{ url('/') }}" class="mr-2" target="_blank" title="{{ trans('cms::app.view_site') }}">
             <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" data-original-title="Visit website"></i> {{ trans('cms::app.view_site') }}
@@ -25,6 +28,24 @@
     @do_action('backend.menu_top')
 
     <div class="mr-auto"></div>
+
+    <div class="dropdown mr-4 d-none d-sm-block">
+        <a href="javascript:void(0)" class="dropdown-toggle text-nowrap" data-toggle="dropdown" data-offset="5,15" aria-expanded="false">
+            <span class="dropdown-toggle-text">EN</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" role="menu">
+            @php
+            $langs = \Juzaweb\CMS\Models\Language::cacheFor(3600)->get();
+            $current = $jw_user->language ?? $langs->where('default', true)->first()->code ?? 'en'
+            @endphp
+
+            @foreach($langs as $lang)
+            <a class="dropdown-item " href="{{ url()->current() }}?locale={{ $lang->code }}">
+                <span class="text-uppercase font-size-12 mr-1">{{ $lang->code }}</span>
+                {{ $lang->name }}</a>
+            @endforeach
+        </div>
+    </div>
 
     @php
         $total = count_unread_notifications();
@@ -79,9 +100,6 @@
         </div>
     </div>
 
-    @php
-        global $jw_user;
-    @endphp
     <div class="dropdown">
         <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="5,15">
             <img class="dropdown-toggle-avatar" src="{{ $jw_user->getAvatar() }}" alt="User avatar" width="30" height="30"/>

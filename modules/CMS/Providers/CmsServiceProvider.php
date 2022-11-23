@@ -240,7 +240,8 @@ class CmsServiceProvider extends ServiceProvider
                 return new DbConfig\OverwriteConfig(
                     $app['config'],
                     $app[ConfigContract::class],
-                    $app['request']
+                    $app['request'],
+                    $app['translator']
                 );
             }
         );
