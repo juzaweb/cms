@@ -10,6 +10,8 @@
 
 namespace Juzaweb\CMS\Models;
 
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
+
 /**
  * Juzaweb\CMS\Models\Language
  *
@@ -34,6 +36,9 @@ namespace Juzaweb\CMS\Models;
  */
 class Language extends Model
 {
+    use QueryCacheable;
+    public string $cachePrefix = 'languages_';
+
     protected $table = 'languages';
     protected $fillable = [
         'code',
@@ -73,5 +78,12 @@ class Language extends Model
     public function isDefault(): bool
     {
         return $this->default;
+    }
+
+    protected function getCacheBaseTags(): array
+    {
+        return [
+            'languages',
+        ];
     }
 }
