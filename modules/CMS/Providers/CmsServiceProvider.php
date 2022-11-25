@@ -21,6 +21,8 @@ use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Contracts\JWQueryContract;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Juzaweb\CMS\Contracts\OverwriteConfigContract;
 use Juzaweb\CMS\Contracts\PostImporterContract;
@@ -333,7 +335,10 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->singleton(
             TranslationManagerContract::class,
             function ($app) {
-                return new TranslationManager();
+                return new TranslationManager(
+                    $app[LocalPluginRepositoryContract::class],
+                    $app[LocalThemeRepositoryContract::class]
+                );
             }
         );
     }

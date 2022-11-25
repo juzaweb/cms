@@ -11,6 +11,7 @@ use Juzaweb\DevTool\Commands\Plugin\ControllerMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\DisableCommand;
 use Juzaweb\DevTool\Commands\Plugin\EnableCommand;
 use Juzaweb\DevTool\Commands\Plugin\EventMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\ImportTranslationCommand;
 use Juzaweb\DevTool\Commands\Plugin\InstallCommand as PluginInstallCommand;
 use Juzaweb\DevTool\Commands\Plugin\JobMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\LaravelModulesV6Migrator;
@@ -99,6 +100,7 @@ class ConsoleServiceProvider extends ServiceProvider
         ThemeUpdateCommand::class,
         MakeBlockCommand::class,
         CacheSizeCommand::class,
+        ImportTranslationCommand::class,
     ];
 
     /**

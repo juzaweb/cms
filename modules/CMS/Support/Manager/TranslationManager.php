@@ -13,55 +13,108 @@ namespace Juzaweb\CMS\Support\Manager;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
 use Juzaweb\CMS\Models\Translation;
-use Juzaweb\CMS\Support\LocalThemeRepository;
 
 class TranslationManager implements TranslationManagerContract
 {
     public function __construct(
         protected LocalPluginRepositoryContract $pluginRepository,
-        protected LocalThemeRepository $themeRepository
+        protected LocalThemeRepositoryContract $themeRepository
     ) {
     }
 
-    public function import(string $name, string $module = 'cms')
+    public function import(string $module, string $name = null): int
     {
-        $locales = $this->getLocalLocales($name, $module);
-        foreach ($locales as $locale) {
-            $result = $this->getLocalTranslates($name, $module, $locale['code']);
+        $module = $this->find($module, $name);
+        $locales = $this->getLocalLocales($module, $name);
 
+        $total = 0;
+        foreach ($locales as $locale) {
+            $result = $this->getLocalTranslates($module, $name, $locale['code']);
             foreach ($result as $item) {
                 Translation::firstOrCreate(
                     [
                         'locale' => $locale['code'],
                         'group' => $item['group'],
-                        'namespace' => $object->get('namespace'),
+                        'namespace' => $module->get('namespace'),
                         'key' => $item['key'],
-                        'object_type' => $object->get('type'),
-                        'object_key' => $object->get('key'),
+                        'object_type' => $module->get('type'),
+                        'object_key' => $module->get('key'),
                     ],
                     [
                         'value' => $item['value']
                     ]
                 );
             }
+
+            $total += count($result);
+        }
+
+        return $total;
+    }
+
+    public function export(string $module = 'cms', string $name = null)
+    {
+        //
+    }
+
+    public function translate(string $source, string $target, string $module = 'cms', string $name = null)
+    {
+        //
+    }
+
+    public function find(string|Collection $module, string $name = null): Collection
+    {
+        if ($module instanceof Collection) {
+            return $module;
+        }
+
+        switch ($module) {
+            case 'plugin':
+                $plugin = $this->pluginRepository->find($name);
+                return new Collection(
+                    [
+                        'title' => $plugin->getDisplayName(),
+                        'name' => $plugin->get('name'),
+                        'key' => namespace_snakename($plugin->get('name')),
+                        'namespace' => $plugin->getDomainName(),
+                        'type' => 'plugin',
+                        'lang_path' => $plugin->getPath('src/resources/lang'),
+                        'view_path' => $plugin->getPath('src/resources/views'),
+                    ]
+                );
+            case 'theme':
+                $theme = $this->themeRepository->find($name);
+                return new Collection(
+                    [
+                        'title' => $theme->get('title'),
+                        'name' => $theme->get('name'),
+                        'key' => 'theme_' . $theme->get('name'),
+                        'namespace' => '*',
+                        'type' => 'theme',
+                        'lang_path' => null,
+                        'view_path' => $theme->getPath('views'),
+                    ]
+                );
+            default:
+                return new Collection(
+                    [
+                        'title' => 'CMS',
+                        'key' => 'core',
+                        'namespace' => 'cms',
+                        'type' => 'cms',
+                        'lang_path' => base_path('modules/Backend/resources/lang'),
+                        'view_path' => base_path('modules/Backend/resources/views'),
+                    ]
+                );
         }
     }
 
-    public function export(string $name, string $module = 'cms')
+    protected function getLocalLocales(string $module = 'cms', string $name = null): array
     {
-        //
-    }
-
-    public function translate(string $source, string $target, string $name, string $module = 'cms')
-    {
-        //
-    }
-
-    protected function getLocalLocales(string $name, string $module = 'cms'): array
-    {
-        $folderPath = $this->getModuleData($module, $name)->get('path');
+        $folderPath = $this->find($module, $name)->get('lang_path');
         if (!is_dir($folderPath)) {
             return [];
         }
@@ -76,43 +129,17 @@ class TranslationManager implements TranslationManagerContract
             ->toArray();
     }
 
-    protected function getModuleData(string $module, string $name = null): Collection
-    {
-        switch ($module) {
-            case 'plugin':
-                $plugin = $this->pluginRepository->find($name);
-                return new Collection(
-                    [
-                        'title' => $plugin->getDisplayName(),
-                        'key' => namespace_snakename($plugin->get('name')),
-                        'namespace' => $plugin->getDomainName(),
-                        'type' => 'plugin',
-                        'path' => $plugin->getPath('src/resources/lang')
-                    ]
-                );
-            case 'theme':
-                return new Collection(
-                    [
-                        'title' => $plugin->getDisplayName(),
-                        'key' => namespace_snakename($plugin->get('name')),
-                        'namespace' => '*',
-                        'type' => 'theme',
-                        'path' => $plugin->getPath('src/resources/lang')
-                    ]
-                );
-        }
-    }
-
     /**
      * Get all language trans
      *
-     * @param string $name
      * @param string $module
+     * @param string|null $name
+     * @param string $locale
      * @return array
      */
-    protected function getLocalTranslates(string $name, string $module = 'cms')
+    protected function getLocalTranslates(string $module = 'cms', string $name = null, string $locale = 'en'): array
     {
-        $files = File::files($this->originPath($key, $locale));
+        $files = File::files($this->find($module, $name)->get('lang_path') . "/{$locale}");
         $files = collect($files)
             ->filter(fn ($item) => $item->getExtension() == 'php')
             ->values()
