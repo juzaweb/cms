@@ -112,7 +112,7 @@ class TranslationManager implements TranslationManagerContract
         }
     }
 
-    protected function getLocalLocales(string $module = 'cms', string $name = null): array
+    protected function getLocalLocales(string|Collection $module = 'cms', string $name = null): array
     {
         $folderPath = $this->find($module, $name)->get('lang_path');
         if (!is_dir($folderPath)) {
@@ -132,13 +132,16 @@ class TranslationManager implements TranslationManagerContract
     /**
      * Get all language trans
      *
-     * @param string $module
+     * @param string|Collection $module
      * @param string|null $name
      * @param string $locale
      * @return array
      */
-    protected function getLocalTranslates(string $module = 'cms', string $name = null, string $locale = 'en'): array
-    {
+    protected function getLocalTranslates(
+        string|Collection $module = 'cms',
+        string $name = null,
+        string $locale = 'en'
+    ): array {
         $files = File::files($this->find($module, $name)->get('lang_path') . "/{$locale}");
         $files = collect($files)
             ->filter(fn ($item) => $item->getExtension() == 'php')

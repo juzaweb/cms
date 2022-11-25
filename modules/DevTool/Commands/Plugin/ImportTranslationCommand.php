@@ -19,8 +19,8 @@ class ImportTranslationCommand extends Command
 
     public function handle(): int
     {
-        $import = app(TranslationManager::class)->import('cms');
-        
+        $import = app(TranslationManager::class)->import('plugin', 'juzaweb/movie');
+
         $this->info("Import success {$import} language text.");
 
         return self::SUCCESS;
