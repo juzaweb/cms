@@ -94,7 +94,7 @@ class TranslationManager implements TranslationManagerContract
                         'key' => 'theme_' . $theme->get('name'),
                         'namespace' => '*',
                         'type' => 'theme',
-                        'lang_path' => null,
+                        'lang_path' => base_path('lang'),
                         'view_path' => $theme->getPath('views'),
                     ]
                 );
