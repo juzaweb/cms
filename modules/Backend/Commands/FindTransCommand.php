@@ -2,7 +2,6 @@
 
 namespace Juzaweb\Backend\Commands;
 
-use Illuminate\Console\Command;
 use Juzaweb\CMS\Support\Manager\FindTransManager;
 use Juzaweb\CMS\Models\Translation;
 use Illuminate\Support\Collection;

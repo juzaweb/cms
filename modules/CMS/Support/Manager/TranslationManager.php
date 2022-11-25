@@ -12,161 +12,109 @@ namespace Juzaweb\CMS\Support\Manager;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
-use Juzaweb\CMS\Facades\Plugin;
-use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Models\Translation;
-use Symfony\Component\Finder\SplFileInfo;
+use Juzaweb\CMS\Support\LocalThemeRepository;
 
 class TranslationManager implements TranslationManagerContract
 {
-    public function importFormFiles()
-    {
-        $this->importTranslateFiles();
-
-        $themes = $this->getLocaleThemes();
-        foreach ($themes as $theme) {
-            $this->manager->findTranslations(
-                base_path("themes/{$theme->get('name')}"),
-                $theme->get('key'),
-                $theme->get('type')
-            );
-        }
+    public function __construct(
+        protected LocalPluginRepositoryContract $pluginRepository,
+        protected LocalThemeRepository $themeRepository
+    ) {
     }
 
-    protected function allObjects(): Collection
+    public function import(string $name, string $module = 'cms')
     {
-        $result = [];
-        $result['core'] = collect(
-            [
-                'title' => 'Core Juzaweb',
-                'key' => 'core',
-                'type' => 'core',
-                'namespace' => 'cms',
-                'path' => 'modules/Backend/resources/lang'
-            ]
-        );
+        $locales = $this->getLocalLocales($name, $module);
+        foreach ($locales as $locale) {
+            $result = $this->getLocalTranslates($name, $module, $locale['code']);
 
-        return collect(array_merge($result, $this->getLocalePlugins()));
-    }
-
-    protected function getLocalePlugins(): array
-    {
-        $result = [];
-        $plugins = Plugin::all();
-        foreach ($plugins as $plugin) {
-            $snakeName = namespace_snakename($plugin->get('name'));
-            $result[$snakeName] = collect(
-                [
-                    'title' => $plugin->getDisplayName(),
-                    'key' => $snakeName,
-                    'namespace' => $plugin->getDomainName(),
-                    'type' => 'plugin',
-                    'path' => 'plugins/' . $plugin->get('name') . '/src/resources/lang'
-                ]
-            );
-        }
-
-        return $result;
-    }
-
-    protected function getLocaleThemes(): array
-    {
-        $result = [];
-        $themes = ThemeLoader::all();
-        foreach ($themes as $theme) {
-            $result['theme_' . $theme->get('name')] = collect(
-                [
-                    'title' => $theme->get('title'),
-                    'key' => 'theme_' . $theme->get('name'),
-                    'name' => $theme->get('name'),
-                    'type' => 'theme',
-                    'namespace' => '*',
-                    'path' => null,
-                ]
-            );
-        }
-
-        return $result;
-    }
-
-    protected function originPath($key, $path = ''): string
-    {
-        $key = $this->parseVar($key);
-        $basePath = base_path($key->get('path'));
-
-        if (empty($path)) {
-            return $basePath;
-        }
-
-        return $basePath . '/' . $path;
-    }
-
-    /**
-     * @param Collection|string $key
-     * @return string|Collection
-     */
-    protected function parseVar(Collection|string $key): string|Collection
-    {
-        if (is_a($key, Collection::class)) {
-            return $key;
-        }
-
-        return $this->getByKey($key);
-    }
-
-    protected function getByKey(string $key)
-    {
-        return $this->allObjects()->get($key, []);
-    }
-
-    protected function importTranslateFiles()
-    {
-        $objects = $this->allObjects();
-        foreach ($objects as $key => $object) {
-            $locales = $this->allLanguageOrigin($key);
-            foreach ($locales as $locale) {
-                $result = $this->getAllTrans(
-                    $object->get('key'),
-                    $locale['code']
+            foreach ($result as $item) {
+                Translation::firstOrCreate(
+                    [
+                        'locale' => $locale['code'],
+                        'group' => $item['group'],
+                        'namespace' => $object->get('namespace'),
+                        'key' => $item['key'],
+                        'object_type' => $object->get('type'),
+                        'object_key' => $object->get('key'),
+                    ],
+                    [
+                        'value' => $item['value']
+                    ]
                 );
-
-                foreach ($result as $item) {
-                    Translation::firstOrCreate(
-                        [
-                            'locale' => $locale['code'],
-                            'group' => $item['group'],
-                            'namespace' => $object->get('namespace'),
-                            'key' => $item['key'],
-                            'object_type' => $object->get('type'),
-                            'object_key' => $object->get('key'),
-                        ],
-                        [
-                            'value' => $item['value']
-                        ]
-                    );
-                }
             }
+        }
+    }
+
+    public function export(string $name, string $module = 'cms')
+    {
+        //
+    }
+
+    public function translate(string $source, string $target, string $name, string $module = 'cms')
+    {
+        //
+    }
+
+    protected function getLocalLocales(string $name, string $module = 'cms'): array
+    {
+        $folderPath = $this->getModuleData($module, $name)->get('path');
+        if (!is_dir($folderPath)) {
+            return [];
+        }
+
+        $folders = collect(File::directories($folderPath))
+            ->map(fn ($item) => basename($item))
+            ->values()
+            ->toArray();
+
+        return collect(config('locales'))
+            ->whereIn('code', $folders)
+            ->toArray();
+    }
+
+    protected function getModuleData(string $module, string $name = null): Collection
+    {
+        switch ($module) {
+            case 'plugin':
+                $plugin = $this->pluginRepository->find($name);
+                return new Collection(
+                    [
+                        'title' => $plugin->getDisplayName(),
+                        'key' => namespace_snakename($plugin->get('name')),
+                        'namespace' => $plugin->getDomainName(),
+                        'type' => 'plugin',
+                        'path' => $plugin->getPath('src/resources/lang')
+                    ]
+                );
+            case 'theme':
+                return new Collection(
+                    [
+                        'title' => $plugin->getDisplayName(),
+                        'key' => namespace_snakename($plugin->get('name')),
+                        'namespace' => '*',
+                        'type' => 'theme',
+                        'path' => $plugin->getPath('src/resources/lang')
+                    ]
+                );
         }
     }
 
     /**
      * Get all language trans
      *
-     * @param string|Collection $key
-     * @param string $locale
+     * @param string $name
+     * @param string $module
      * @return array
      */
-    protected function getAllTrans(string|Collection $key, string $locale): array
+    protected function getLocalTranslates(string $name, string $module = 'cms')
     {
-        $key = $this->parseVar($key);
         $files = File::files($this->originPath($key, $locale));
         $files = collect($files)
-            ->filter(
-                function (SplFileInfo $item) {
-                    return $item->getExtension() == 'php';
-                }
-            )
+            ->filter(fn ($item) => $item->getExtension() == 'php')
             ->values()
             ->toArray();
 
@@ -178,30 +126,6 @@ class TranslationManager implements TranslationManagerContract
         }
 
         return $result;
-    }
-
-    /**
-     * Get all language from data plugin/theme/core
-     *
-     * @param Collection|string $key
-     * @return array
-     */
-    protected function allLanguageOrigin(Collection|string $key): array
-    {
-        $folderPath = $this->originPath($key);
-        if (!is_dir($folderPath)) {
-            return [];
-        }
-
-        $folders = File::directories($folderPath);
-        $folders = collect($folders)
-            ->map(fn ($item) => basename($item))
-            ->values()
-            ->toArray();
-
-        return collect(config('locales'))
-            ->whereIn('code', $folders)
-            ->toArray();
     }
 
     protected function mapGroupKeys(array $lang, $group, &$result, $keyPrefix = '')
