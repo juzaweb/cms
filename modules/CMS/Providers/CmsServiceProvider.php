@@ -30,6 +30,7 @@ use Juzaweb\CMS\Contracts\ShortCodeCompiler as ShortCodeCompilerContract;
 use Juzaweb\CMS\Contracts\StorageDataContract;
 use Juzaweb\CMS\Contracts\TableGroupContract;
 use Juzaweb\CMS\Contracts\ThemeConfigContract;
+use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
 use Juzaweb\CMS\Contracts\XssCleanerContract;
 use Juzaweb\CMS\Extension\Custom;
 use Juzaweb\CMS\Facades\OverwriteConfig;
@@ -46,6 +47,7 @@ use Juzaweb\CMS\Support\JWQuery;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Manager\BackendMessageManager;
 use Juzaweb\CMS\Support\Manager\PostManager;
+use Juzaweb\CMS\Support\Manager\TranslationManager;
 use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
 use Juzaweb\CMS\Support\ShortCode\ShortCode;
 use Juzaweb\CMS\Support\StorageData;
@@ -325,6 +327,13 @@ class CmsServiceProvider extends ServiceProvider
             ShortCodeContract::class,
             function ($app) {
                 return new ShortCode($app[ShortCodeCompilerContract::class]);
+            }
+        );
+
+        $this->app->singleton(
+            TranslationManagerContract::class,
+            function ($app) {
+                return new TranslationManager();
             }
         );
     }

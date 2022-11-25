@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Commands;
 
+use Illuminate\Console\Command;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
@@ -20,70 +21,76 @@ use Symfony\Component\Finder\SplFileInfo;
 class TransFromEnglish extends TranslationCommand
 {
     protected $name = 'trans:generate-translate';
+    private array $targetDefaults = ['vi', 'fr', 'tr', 'zh', 'ru', 'ko', 'ja'];
 
-    public function handle()
+    public function handle(): int
     {
-        $this->transFromEnglish();
+        $this->translateDefaults();
 
-        $this->transToFile();
+        if ($this->option('g')) {
+            $this->transToFile();
+        }
 
         return self::SUCCESS;
     }
 
-    protected function transFromEnglish()
+    protected function translateDefaults()
     {
-        $languages = ['vi', 'fr', 'tr', 'zh', 'ru', 'ko', 'ja'];
+        foreach ($this->targetDefaults as $language) {
+            $this->translationWithGoogle('en', $language);
+        }
+    }
 
-        foreach ($languages as $language) {
-            $trans = Translation::from('jw_translations AS a')
-                ->where('locale', '=', 'en')
-                ->where('namespace', '=', 'cms')
-                ->whereNotExists(
-                    function (Builder $q) use ($language) {
-                        $q->select(['id'])
-                            ->from('jw_translations AS b')
-                            ->where('locale', '=', $language)
-                            ->whereColumn('a.group', '=', 'b.group')
-                            ->whereColumn('a.namespace', '=', 'b.namespace')
-                            ->whereColumn('a.key', '=', 'b.key')
-                            ->whereColumn('a.object_type', '=', 'b.object_type')
-                            ->whereColumn('a.object_key', '=', 'b.object_key');
-                    }
-                )
-                ->get();
-
-            foreach ($trans as $tran) {
-                $value = GoogleTranslate::translate(
-                    'en',
-                    $language,
-                    $tran->value
-                );
-
-                if (empty($value)) {
-                    $this->error("Translate {$tran->value} fail");
-                    die();
+    protected function translationWithGoogle($source, $target)
+    {
+        $trans = Translation::from('jw_translations AS a')
+            ->where('locale', '=', 'en')
+            ->where('namespace', '=', 'cms')
+            ->whereNotExists(
+                function (Builder $q) use ($target) {
+                    $q->select(['id'])
+                        ->from('jw_translations AS b')
+                        ->where('locale', '=', $target)
+                        ->whereColumn('a.group', '=', 'b.group')
+                        ->whereColumn('a.namespace', '=', 'b.namespace')
+                        ->whereColumn('a.key', '=', 'b.key')
+                        ->whereColumn('a.object_type', '=', 'b.object_type')
+                        ->whereColumn('a.object_key', '=', 'b.object_key');
                 }
+            )
+            ->get();
 
-                $newTran = Translation::firstOrCreate(
-                    [
-                        'locale' => $language,
-                        'group' => $tran->group,
-                        'namespace' => $tran->namespace,
-                        'key' => $tran->key,
-                        'object_type' => $tran->object_type,
-                        'object_key' => $tran->object_key,
-                    ],
-                    [
-                        'value' => $value
-                    ]
-                );
+        foreach ($trans as $tran) {
+            $value = GoogleTranslate::translate(
+                $source,
+                $target,
+                $tran->value
+            );
 
-                if ($newTran->wasRecentlyCreated) {
-                    $this->info("Translated {$tran->value} to {$newTran->value}");
-                }
-
-                sleep(1);
+            if (empty($value)) {
+                $this->error("Translate {$tran->value} fail");
+                die();
             }
+
+            $newTran = Translation::firstOrCreate(
+                [
+                    'locale' => $target,
+                    'group' => $tran->group,
+                    'namespace' => $tran->namespace,
+                    'key' => $tran->key,
+                    'object_type' => $tran->object_type,
+                    'object_key' => $tran->object_key,
+                ],
+                [
+                    'value' => $value
+                ]
+            );
+
+            if ($newTran->wasRecentlyCreated) {
+                $this->info("Translated {$tran->value} to {$newTran->value}");
+            }
+
+            sleep(1);
         }
     }
 
@@ -163,5 +170,10 @@ class TransFromEnglish extends TranslationCommand
             $array
         );
         return join(PHP_EOL, array_filter(["["] + $array));
+    }
+
+    protected function getArguments(): array
+    {
+        return [];
     }
 }

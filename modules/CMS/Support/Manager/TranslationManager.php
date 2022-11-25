@@ -1,28 +1,26 @@
 <?php
+/**
+ * JUZAWEB CMS - The Best CMS for Laravel Project
+ *
+ * @package    juzaweb/juzacms
+ * @author     Juzaweb Team <admin@juzaweb.com>
+ * @link       https://juzaweb.com
+ * @license    MIT
+ */
 
-namespace Juzaweb\Backend\Commands;
+namespace Juzaweb\CMS\Support\Manager;
 
-use Illuminate\Console\Command;
-use Juzaweb\CMS\Support\Manager\FindTransManager;
-use Juzaweb\CMS\Models\Translation;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Models\Translation;
 use Symfony\Component\Finder\SplFileInfo;
 
-class FindTransCommand extends TranslationCommand
+class TranslationManager implements TranslationManagerContract
 {
-    protected $signature = 'trans:import';
-
-    /** @var FindTransManager $manager */
-    protected FindTransManager $manager;
-
-    public function __construct(FindTransManager $manager)
-    {
-        $this->manager = $manager;
-        parent::__construct();
-    }
-
-    public function handle(): int
+    public function importFormFiles()
     {
         $this->importTranslateFiles();
 
@@ -33,11 +31,93 @@ class FindTransCommand extends TranslationCommand
                 $theme->get('key'),
                 $theme->get('type')
             );
+        }
+    }
 
-            $this->info("Import successful: {$theme->get('type')}: {$theme->get('key')} - en");
+    protected function allObjects(): Collection
+    {
+        $result = [];
+        $result['core'] = collect(
+            [
+                'title' => 'Core Juzaweb',
+                'key' => 'core',
+                'type' => 'core',
+                'namespace' => 'cms',
+                'path' => 'modules/Backend/resources/lang'
+            ]
+        );
+
+        return collect(array_merge($result, $this->getLocalePlugins()));
+    }
+
+    protected function getLocalePlugins(): array
+    {
+        $result = [];
+        $plugins = Plugin::all();
+        foreach ($plugins as $plugin) {
+            $snakeName = namespace_snakename($plugin->get('name'));
+            $result[$snakeName] = collect(
+                [
+                    'title' => $plugin->getDisplayName(),
+                    'key' => $snakeName,
+                    'namespace' => $plugin->getDomainName(),
+                    'type' => 'plugin',
+                    'path' => 'plugins/' . $plugin->get('name') . '/src/resources/lang'
+                ]
+            );
         }
 
-        return static::SUCCESS;
+        return $result;
+    }
+
+    protected function getLocaleThemes(): array
+    {
+        $result = [];
+        $themes = ThemeLoader::all();
+        foreach ($themes as $theme) {
+            $result['theme_' . $theme->get('name')] = collect(
+                [
+                    'title' => $theme->get('title'),
+                    'key' => 'theme_' . $theme->get('name'),
+                    'name' => $theme->get('name'),
+                    'type' => 'theme',
+                    'namespace' => '*',
+                    'path' => null,
+                ]
+            );
+        }
+
+        return $result;
+    }
+
+    protected function originPath($key, $path = ''): string
+    {
+        $key = $this->parseVar($key);
+        $basePath = base_path($key->get('path'));
+
+        if (empty($path)) {
+            return $basePath;
+        }
+
+        return $basePath . '/' . $path;
+    }
+
+    /**
+     * @param Collection|string $key
+     * @return string|Collection
+     */
+    protected function parseVar(Collection|string $key): string|Collection
+    {
+        if (is_a($key, Collection::class)) {
+            return $key;
+        }
+
+        return $this->getByKey($key);
+    }
+
+    protected function getByKey(string $key)
+    {
+        return $this->allObjects()->get($key, []);
     }
 
     protected function importTranslateFiles()
@@ -66,8 +146,6 @@ class FindTransCommand extends TranslationCommand
                         ]
                     );
                 }
-
-                $this->info("Import successful {$object->get('type')}: {$object->get('key')} - {$locale['code']}");
             }
         }
     }
@@ -75,16 +153,13 @@ class FindTransCommand extends TranslationCommand
     /**
      * Get all language trans
      *
-     * @param Collection|string $key
+     * @param string|Collection $key
      * @param string $locale
      * @return array
      */
-    protected function getAllTrans($key, $locale)
+    protected function getAllTrans(string|Collection $key, string $locale): array
     {
         $key = $this->parseVar($key);
-        /**
-         * @var SplFileInfo[] $files
-         */
         $files = File::files($this->originPath($key, $locale));
         $files = collect($files)
             ->filter(
@@ -111,21 +186,16 @@ class FindTransCommand extends TranslationCommand
      * @param Collection|string $key
      * @return array
      */
-    protected function allLanguageOrigin($key): array
+    protected function allLanguageOrigin(Collection|string $key): array
     {
         $folderPath = $this->originPath($key);
-
         if (!is_dir($folderPath)) {
             return [];
         }
 
         $folders = File::directories($folderPath);
         $folders = collect($folders)
-            ->map(
-                function ($item) {
-                    return basename($item);
-                }
-            )
+            ->map(fn ($item) => basename($item))
             ->values()
             ->toArray();
 
