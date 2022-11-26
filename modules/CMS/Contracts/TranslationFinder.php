@@ -15,5 +15,5 @@ namespace Juzaweb\CMS\Contracts;
  */
 interface TranslationFinder
 {
-    public function find(string $path): array;
+    public function find(string $path, string $locale = 'en'): array;
 }

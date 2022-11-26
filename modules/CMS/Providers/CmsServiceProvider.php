@@ -334,7 +334,12 @@ class CmsServiceProvider extends ServiceProvider
             }
         );
 
-        $this->app->singleton(TranslationFinderContract::class, TranslationFinder::class);
+        $this->app->singleton(
+            TranslationFinderContract::class,
+            function ($app) {
+                return new TranslationFinder();
+            }
+        );
 
         $this->app->singleton(
             TranslationManagerContract::class,

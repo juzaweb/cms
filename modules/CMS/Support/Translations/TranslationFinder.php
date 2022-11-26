@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Support\Translations;
 
+use Illuminate\Contracts\Translation\Translator as TranslatorContract;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Contracts\TranslationFinder as TranslationFinderContract;
 use Symfony\Component\Finder\Finder;
@@ -17,7 +18,11 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class TranslationFinder implements TranslationFinderContract
 {
-    public function find(string $path): array
+    public function __construct()
+    {
+    }
+
+    public function find(string $path, string $locale = 'en'): array
     {
         $groupKeys = [];
         $stringKeys = [];
@@ -35,16 +40,16 @@ class TranslationFinder implements TranslationFinderContract
         ];
 
         $groupPattern =                          // See https://regex101.com/r/WEJqdL/6
-            "[^\w|>]".                          // Must not have an alphanum or _ or > before real method
-            '('.implode('|', $functions).')'.  // Must start with one of the functions
-            "\(".                               // Match opening parenthesis
-            "[\'\"]".                           // Match " or '
-            '('.                                // Start a new group to match:
-            '[a-zA-Z0-9_-]+'.               // Must start with group
-            "([.](?! )[^\1)]+)+".             // Be followed by one or more items/keys
-            ')'.                                // Close group
-            "[\'\"]".                           // Closing quote
-            "[\),]";                            // Close parentheses or new parameter
+            "[^\w|>]" .                          // Must not have an alphanum or _ or > before real method
+            '(' . implode('|', $functions) . ')' .  // Must start with one of the functions
+            "\(" .                               // Match opening parenthesis
+            "[\'\"]" .                           // Match " or '
+            '(' .                                // Start a new group to match:
+            '[\/a-zA-Z0-9\_\-\:]+' .                 // Must start with group
+            "([.](?! )[^\1)]+)+" .               // Be followed by one or more items/keys
+            ')' .                                // Close group
+            "[\'\"]" .                           // Closing quote
+            "[\),]";                             // Close parentheses or new parameter
 
         $stringPattern = "[^\w]".                                     // Must not have an alphanum before real method
             '('.implode('|', $functions).')'.             // Must start with one of the functions
@@ -67,7 +72,7 @@ class TranslationFinder implements TranslationFinderContract
         /** @var SplFileInfo $file */
         foreach ($finder as $file) {
             // Search the current file for the pattern
-            if (preg_match_all("/$groupPattern/siU", $file->getContents(), $matches)) {
+            if (preg_match_all("/{$groupPattern}/siU", $file->getContents(), $matches)) {
                 // Get all matches
                 foreach ($matches[2] as $key) {
                     $groupKeys[] = $key;
@@ -76,7 +81,7 @@ class TranslationFinder implements TranslationFinderContract
 
             if (preg_match_all("/$stringPattern/siU", $file->getContents(), $matches)) {
                 foreach ($matches['string'] as $key) {
-                    if (preg_match("/(^[a-zA-Z0-9_-]+([.][^\1)\ ]+)+$)/siU", $key, $groupMatches)) {
+                    if (preg_match("/(^[\/a-zA-Z0-9_-]+([.][^\1)\ ]+)+$)/siU", $key, $groupMatches)) {
                         // group{.group}.key format, already in $groupKeys but also matched here
                         // do nothing, it has to be treated as a group
                         continue;
@@ -93,26 +98,39 @@ class TranslationFinder implements TranslationFinderContract
                 }
             }
         }
-        // Remove duplicates
 
+        // Remove duplicates
         $groupKeys = array_unique($groupKeys);
         $stringKeys = array_unique($stringKeys);
 
+        $results = [];
         // Add the translations to the database, if not existing.
-        /*foreach ($groupKeys as $key) {
+        foreach ($groupKeys as $key) {
             // Split the group and item
             list($group, $item) = explode('.', $key, 2);
-            $this->missingKey($namespace, $group, $item);
-        }*/
+            $namespace = '*';
+            if (Str::contains($key, '::')) {
+                $namespace = explode('::', $key)[0];
+                $group = str_replace("{$namespace}::", '', $group);
+            }
 
-        $results = [];
+            $value = Str::ucfirst(str_replace(["{$namespace}::", "{$group}.", '.', '_'], ['', '', ' ', ' '], $key));
+            $results[] = [
+                'namespace' => $namespace,
+                'locale' => $locale,
+                'group' => $group,
+                'key' => $item,
+                'value' => $value,
+            ];
+        }
+
         foreach ($stringKeys as $key) {
             $namespace = '*';
             $group = '*';
 
             $results[] = [
                 'namespace' => $namespace,
-                'locale' => 'en',
+                'locale' => $locale,
                 'group' => $group,
                 'key' => $key,
                 'value' => $key,

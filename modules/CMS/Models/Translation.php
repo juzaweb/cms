@@ -47,12 +47,12 @@ class Translation extends Model
         'id'
     ];
 
-    public function scopeOfTranslatedGroup(Builder $query, $group)
+    public function scopeOfTranslatedGroup(Builder $query, $group): Builder
     {
         return $query->where('group', $group)->whereNotNull('value');
     }
 
-    public function scopeOrderByGroupKeys(Builder $query, $ordered)
+    public function scopeOrderByGroupKeys(Builder $query, $ordered): Builder
     {
         if ($ordered) {
             $query->orderBy('group')->orderBy('key');
@@ -61,7 +61,7 @@ class Translation extends Model
         return $query;
     }
 
-    public function scopeSelectDistinctGroup(Builder $query)
+    public function scopeSelectDistinctGroup(Builder $query): Builder
     {
         switch (DB::getDriverName()) {
             case 'mysql':

@@ -17,6 +17,7 @@ use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\TranslationFinder;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
 use Juzaweb\CMS\Models\Translation;
+use Spatie\TranslationLoader\LanguageLine;
 
 class TranslationManager implements TranslationManagerContract
 {
@@ -36,45 +37,32 @@ class TranslationManager implements TranslationManagerContract
         foreach ($locales as $locale) {
             $result = $this->getLocalTranslates($module, $name, $locale['code']);
             foreach ($result as $item) {
-                Translation::firstOrCreate(
-                    [
-                        'locale' => $locale['code'],
-                        'group' => $item['group'],
-                        'namespace' => $module->get('namespace'),
-                        'key' => $item['key'],
-                        'object_type' => $module->get('type'),
-                        'object_key' => $module->get('key'),
-                    ],
-                    [
-                        'value' => $item['value']
-                    ]
+                $model = $this->importLanguageLine(
+                    array_merge(
+                        $item,
+                        [
+                            'namespace' => $module->get('namespace'),
+                            'locale' => $locale['code'],
+                        ]
+                    )
                 );
-            }
 
-            $total += count($result);
+                if ($model->wasRecentlyCreated) {
+                    $total += 1;
+                }
+            }
         }
 
-        if ($module->get('type') == 'theme') {
-            $result = $this->translationFinder->find(
-                $module->get('view_path')
-            );
+        /* Import missing key */
+        $result = $this->translationFinder->find(
+            $module->get('view_path')
+        );
 
-            foreach ($result as $item) {
-                Translation::firstOrCreate(
-                    [
-                        'locale' => $item['locale'],
-                        'group' => $item['group'],
-                        'namespace' => $item['namespace'],
-                        'key' => $item['key'],
-                        'object_type' => $module->get('type'),
-                        'object_key' => $module->get('key'),
-                    ],
-                    [
-                        'value' => $item['value']
-                    ]
-                );
+        foreach ($result as $item) {
+            $model = $this->importLanguageLine($item);
 
-                $total += count($result);
+            if ($model->wasRecentlyCreated) {
+                $total += 1;
             }
         }
 
@@ -104,7 +92,6 @@ class TranslationManager implements TranslationManagerContract
                     [
                         'title' => $plugin->getDisplayName(),
                         'name' => $plugin->get('name'),
-                        'key' => namespace_snakename($plugin->get('name')),
                         'namespace' => $plugin->getDomainName(),
                         'type' => 'plugin',
                         'lang_path' => $plugin->getPath('src/resources/lang'),
@@ -117,7 +104,6 @@ class TranslationManager implements TranslationManagerContract
                     [
                         'title' => $theme->get('title'),
                         'name' => $theme->get('name'),
-                        'key' => 'theme_' . $theme->get('name'),
                         'namespace' => '*',
                         'type' => 'theme',
                         'lang_path' => $theme->getPath('lang'),
@@ -128,7 +114,6 @@ class TranslationManager implements TranslationManagerContract
                 return new Collection(
                     [
                         'title' => 'CMS',
-                        'key' => 'core',
                         'namespace' => 'cms',
                         'type' => 'cms',
                         'lang_path' => base_path('modules/Backend/resources/lang'),
@@ -198,5 +183,25 @@ class TranslationManager implements TranslationManagerContract
                 ];
             }
         }
+    }
+
+    private function importLanguageLine(array $data): LanguageLine
+    {
+        $locale = trim($data['locale']);
+
+        $model = LanguageLine::firstOrNew(
+            [
+                'group' => $data['group'],
+                'namespace' => $data['namespace'],
+                'key' => $data['key'],
+            ]
+        );
+
+        if (!isset($model->text[$locale])) {
+            $model->setTranslation($locale, $data['value']);
+            $model->save();
+        }
+
+        return $model;
     }
 }
