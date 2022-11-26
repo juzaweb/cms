@@ -42,7 +42,7 @@ class TransFromEnglish extends TranslationCommand
     protected function translationWithGoogle($source, $target)
     {
         $trans = Translation::from('jw_translations AS a')
-            ->where('locale', '=', 'en')
+            ->where('locale', '=', $source)
             ->where('namespace', '=', 'cms')
             ->whereNotExists(
                 function (Builder $q) use ($target) {

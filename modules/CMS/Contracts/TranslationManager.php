@@ -10,6 +10,8 @@
 
 namespace Juzaweb\CMS\Contracts;
 
+use Illuminate\Support\Collection;
+
 /**
  * @see \Juzaweb\CMS\Support\Manager\TranslationManager
  */
@@ -19,4 +21,8 @@ interface TranslationManager
      * @see \Juzaweb\CMS\Support\Manager\TranslationManager::import()
      */
     public function import(string $module, string $name = null): int;
+
+    public function importLocalTranslations(string|Collection $module, string $name = null): int;
+
+    public function importMissingKeys(string|Collection $module, string $name = null): int;
 }

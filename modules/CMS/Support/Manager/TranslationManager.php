@@ -10,13 +10,14 @@
 
 namespace Juzaweb\CMS\Support\Manager;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\TranslationFinder;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
-use Spatie\TranslationLoader\LanguageLine;
+use Juzaweb\CMS\Models\Translation;
 
 class TranslationManager implements TranslationManagerContract
 {
@@ -30,13 +31,19 @@ class TranslationManager implements TranslationManagerContract
     public function import(string $module, string $name = null): int
     {
         $module = $this->find($module, $name);
-        $locales = $this->getLocalLocales($module, $name);
 
+        return $this->importLocalTranslations($module, $name)
+            + $this->importMissingKeys($module, $name);
+    }
+
+    public function importLocalTranslations(string|Collection $module, string $name = null): int
+    {
+        $locales = $this->getLocalLocales($module, $name);
         $total = 0;
         foreach ($locales as $locale) {
             $result = $this->getLocalTranslates($module, $name, $locale['code']);
             foreach ($result as $item) {
-                $model = $this->importLanguageLine(
+                $model = $this->importTranslationLine(
                     array_merge(
                         $item,
                         [
@@ -54,15 +61,21 @@ class TranslationManager implements TranslationManagerContract
             }
         }
 
-        /* Import missing key */
-        $result = $this->translationFinder->find(
+        return $total;
+    }
+
+    public function importMissingKeys(string|Collection $module, string $name = null): int
+    {
+        $module = $this->find($module, $name);
+        $results = $this->translationFinder->find(
             $module->get('src_path')
         );
 
-        foreach ($result as $item) {
+        $total = 0;
+        foreach ($results as $item) {
             $item['object_type'] = $module->get('type');
             $item['object_key'] = $module->get('key');
-            $model = $this->importLanguageLine($item);
+            $model = $this->importTranslationLine($item);
 
             if ($model->wasRecentlyCreated) {
                 $total += 1;
@@ -91,6 +104,10 @@ class TranslationManager implements TranslationManagerContract
         switch ($module) {
             case 'plugin':
                 $plugin = $this->pluginRepository->find($name);
+                if (empty($plugin)) {
+                    throw new \Exception("Plugin {$name} not found");
+                }
+
                 return new Collection(
                     [
                         'key' => $plugin->getSnakeName(),
@@ -191,25 +208,11 @@ class TranslationManager implements TranslationManagerContract
         }
     }
 
-    private function importLanguageLine(array $data): LanguageLine
+    private function importTranslationLine(array $data): Translation
     {
-        $locale = trim($data['locale']);
-
-        $model = LanguageLine::firstOrNew(
-            [
-                'group' => $data['group'],
-                'namespace' => $data['namespace'],
-                'key' => $data['key'],
-                'object_type' => $data['object_type'],
-                'object_key' => $data['object_key'],
-            ]
+        return Translation::firstOrCreate(
+            Arr::only($data, ['locale', 'group', 'namespace', 'key', 'object_type', 'object_key']),
+            Arr::only($data, ['value'])
         );
-
-        if (!isset($model->text[$locale])) {
-            $model->setTranslation($locale, $data['value']);
-            $model->save();
-        }
-
-        return $model;
     }
 }

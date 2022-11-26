@@ -12,6 +12,7 @@ namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
 use Juzaweb\CMS\Contracts\TranslationManager;
+use Symfony\Component\Console\Input\InputArgument;
 
 class ImportTranslationCommand extends Command
 {
@@ -19,10 +20,19 @@ class ImportTranslationCommand extends Command
 
     public function handle(): int
     {
-        $import = app(TranslationManager::class)->import('theme', 'mymo');
+        $plugin = $this->argument('plugin');
+
+        $import = app(TranslationManager::class)->import('plugin', $plugin);
 
         $this->info("Import success {$import} language text.");
 
         return self::SUCCESS;
+    }
+
+    protected function getArguments(): array
+    {
+        return [
+            ['plugin', InputArgument::REQUIRED, 'The name of plugin will be import.'],
+        ];
     }
 }
