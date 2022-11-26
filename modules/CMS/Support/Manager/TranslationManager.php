@@ -16,7 +16,6 @@ use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\TranslationFinder;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
-use Juzaweb\CMS\Models\Translation;
 use Spatie\TranslationLoader\LanguageLine;
 
 class TranslationManager implements TranslationManagerContract
@@ -55,7 +54,7 @@ class TranslationManager implements TranslationManagerContract
 
         /* Import missing key */
         $result = $this->translationFinder->find(
-            $module->get('view_path')
+            $module->get('src_path')
         );
 
         foreach ($result as $item) {
@@ -95,7 +94,7 @@ class TranslationManager implements TranslationManagerContract
                         'namespace' => $plugin->getDomainName(),
                         'type' => 'plugin',
                         'lang_path' => $plugin->getPath('src/resources/lang'),
-                        'view_path' => $plugin->getPath('src/resources/views'),
+                        'src_path' => $plugin->getPath('src'),
                     ]
                 );
             case 'theme':
@@ -107,7 +106,7 @@ class TranslationManager implements TranslationManagerContract
                         'namespace' => '*',
                         'type' => 'theme',
                         'lang_path' => $theme->getPath('lang'),
-                        'view_path' => $theme->getPath('views'),
+                        'src_path' => $theme->getPath('views'),
                     ]
                 );
             default:
@@ -117,7 +116,7 @@ class TranslationManager implements TranslationManagerContract
                         'namespace' => 'cms',
                         'type' => 'cms',
                         'lang_path' => base_path('modules/Backend/resources/lang'),
-                        'view_path' => base_path('modules/Backend/resources/views'),
+                        'view_path' => base_path('modules'),
                     ]
                 );
         }
@@ -173,8 +172,8 @@ class TranslationManager implements TranslationManagerContract
     {
         foreach ($lang as $key => $item) {
             if (is_array($item)) {
-                $keyPrefix .= "{$key}.";
-                $this->mapGroupKeys($item, $group, $result, $keyPrefix);
+                $prefix = "{$keyPrefix}{$key}.";
+                $this->mapGroupKeys($item, $group, $result, $prefix);
             } else {
                 $result[] = [
                     'key' => $keyPrefix . $key,
