@@ -11,12 +11,9 @@
 namespace Juzaweb\CMS\Contracts;
 
 /**
- * @see \Juzaweb\CMS\Support\Manager\TranslationManager
+ * @see \Juzaweb\CMS\Support\Translations\TranslationFinder
  */
-interface TranslationManager
+interface TranslationFinder
 {
-    /**
-     * @see \Juzaweb\CMS\Support\Manager\TranslationManager::import()
-     */
-    public function import(string $module, string $name = null): int;
+    public function find(string $path): array;
 }

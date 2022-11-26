@@ -14,6 +14,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Contracts\TranslationFinder;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
 use Juzaweb\CMS\Models\Translation;
 
@@ -21,7 +22,8 @@ class TranslationManager implements TranslationManagerContract
 {
     public function __construct(
         protected LocalPluginRepositoryContract $pluginRepository,
-        protected LocalThemeRepositoryContract $themeRepository
+        protected LocalThemeRepositoryContract $themeRepository,
+        protected TranslationFinder $translationFinder
     ) {
     }
 
@@ -50,6 +52,30 @@ class TranslationManager implements TranslationManagerContract
             }
 
             $total += count($result);
+        }
+
+        if ($module->get('type') == 'theme') {
+            $result = $this->translationFinder->find(
+                $module->get('view_path')
+            );
+
+            foreach ($result as $item) {
+                Translation::firstOrCreate(
+                    [
+                        'locale' => $item['locale'],
+                        'group' => $item['group'],
+                        'namespace' => $item['namespace'],
+                        'key' => $item['key'],
+                        'object_type' => $module->get('type'),
+                        'object_key' => $module->get('key'),
+                    ],
+                    [
+                        'value' => $item['value']
+                    ]
+                );
+
+                $total += count($result);
+            }
         }
 
         return $total;
@@ -94,7 +120,7 @@ class TranslationManager implements TranslationManagerContract
                         'key' => 'theme_' . $theme->get('name'),
                         'namespace' => '*',
                         'type' => 'theme',
-                        'lang_path' => base_path('lang'),
+                        'lang_path' => $theme->getPath('lang'),
                         'view_path' => $theme->getPath('views'),
                     ]
                 );

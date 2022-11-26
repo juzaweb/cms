@@ -27,9 +27,7 @@ class TransFromEnglish extends TranslationCommand
     {
         $this->translateDefaults();
 
-        if ($this->option('g')) {
-            $this->transToFile();
-        }
+        $this->transToFile();
 
         return self::SUCCESS;
     }

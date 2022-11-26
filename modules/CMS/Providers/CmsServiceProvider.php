@@ -32,6 +32,7 @@ use Juzaweb\CMS\Contracts\ShortCodeCompiler as ShortCodeCompilerContract;
 use Juzaweb\CMS\Contracts\StorageDataContract;
 use Juzaweb\CMS\Contracts\TableGroupContract;
 use Juzaweb\CMS\Contracts\ThemeConfigContract;
+use Juzaweb\CMS\Contracts\TranslationFinder as TranslationFinderContract;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
 use Juzaweb\CMS\Contracts\XssCleanerContract;
 use Juzaweb\CMS\Extension\Custom;
@@ -54,6 +55,7 @@ use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
 use Juzaweb\CMS\Support\ShortCode\ShortCode;
 use Juzaweb\CMS\Support\StorageData;
 use Juzaweb\CMS\Support\Theme\ThemeConfig;
+use Juzaweb\CMS\Support\Translations\TranslationFinder;
 use Juzaweb\CMS\Support\Validators\DomainValidator;
 use Juzaweb\CMS\Support\Validators\ModelExists;
 use Juzaweb\CMS\Support\Validators\ModelUnique;
@@ -332,12 +334,15 @@ class CmsServiceProvider extends ServiceProvider
             }
         );
 
+        $this->app->singleton(TranslationFinderContract::class, TranslationFinder::class);
+
         $this->app->singleton(
             TranslationManagerContract::class,
             function ($app) {
                 return new TranslationManager(
                     $app[LocalPluginRepositoryContract::class],
-                    $app[LocalThemeRepositoryContract::class]
+                    $app[LocalThemeRepositoryContract::class],
+                    $app[TranslationFinderContract::class]
                 );
             }
         );
