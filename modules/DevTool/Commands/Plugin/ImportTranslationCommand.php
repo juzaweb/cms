@@ -19,7 +19,7 @@ class ImportTranslationCommand extends Command
 
     public function handle(): int
     {
-        $import = app(TranslationManager::class)->import('plugin', 'juzaweb/ecommerce');
+        $import = app(TranslationManager::class)->import('theme', 'mymo');
 
         $this->info("Import success {$import} language text.");
 

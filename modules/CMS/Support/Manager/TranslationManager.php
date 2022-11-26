@@ -42,6 +42,8 @@ class TranslationManager implements TranslationManagerContract
                         [
                             'namespace' => $module->get('namespace'),
                             'locale' => $locale['code'],
+                            'object_type' => $module->get('type'),
+                            'object_key' => $module->get('key'),
                         ]
                     )
                 );
@@ -58,6 +60,8 @@ class TranslationManager implements TranslationManagerContract
         );
 
         foreach ($result as $item) {
+            $item['object_type'] = $module->get('type');
+            $item['object_key'] = $module->get('key');
             $model = $this->importLanguageLine($item);
 
             if ($model->wasRecentlyCreated) {
@@ -89,6 +93,7 @@ class TranslationManager implements TranslationManagerContract
                 $plugin = $this->pluginRepository->find($name);
                 return new Collection(
                     [
+                        'key' => $plugin->getSnakeName(),
                         'title' => $plugin->getDisplayName(),
                         'name' => $plugin->get('name'),
                         'namespace' => $plugin->getDomainName(),
@@ -101,6 +106,7 @@ class TranslationManager implements TranslationManagerContract
                 $theme = $this->themeRepository->find($name);
                 return new Collection(
                     [
+                        'key' => 'theme_' . $theme->get('name'),
                         'title' => $theme->get('title'),
                         'name' => $theme->get('name'),
                         'namespace' => '*',
@@ -112,6 +118,7 @@ class TranslationManager implements TranslationManagerContract
             default:
                 return new Collection(
                     [
+                        'key' => 'core',
                         'title' => 'CMS',
                         'namespace' => 'cms',
                         'type' => 'cms',
@@ -193,6 +200,8 @@ class TranslationManager implements TranslationManagerContract
                 'group' => $data['group'],
                 'namespace' => $data['namespace'],
                 'key' => $data['key'],
+                'object_type' => $data['object_type'],
+                'object_key' => $data['object_key'],
             ]
         );
 
