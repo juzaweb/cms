@@ -18,7 +18,7 @@ use Juzaweb\Backend\Models\Taxonomy;
 
 class AutoTagCommand extends Command
 {
-    protected $signature = 'juzacms:auto-tags';
+    protected $signature = 'juza:auto-tags';
 
     protected array $tagsByType;
 

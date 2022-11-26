@@ -121,6 +121,10 @@ class TranslationManager implements TranslationManagerContract
                 );
             case 'theme':
                 $theme = $this->themeRepository->find($name);
+                if (empty($theme)) {
+                    throw new \Exception("Theme {$name} not found");
+                }
+
                 return new Collection(
                     [
                         'key' => 'theme_' . $theme->get('name'),
@@ -170,6 +174,7 @@ class TranslationManager implements TranslationManagerContract
      * @param string|null $name
      * @param string $locale
      * @return array
+     * @throws \Exception
      */
     protected function getLocalTranslates(
         string|Collection $module = 'cms',
