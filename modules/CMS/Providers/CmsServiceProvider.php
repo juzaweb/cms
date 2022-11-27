@@ -18,6 +18,7 @@ use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\EventyContract;
 use Juzaweb\CMS\Contracts\Field;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Contracts\JWQueryContract;
@@ -42,6 +43,7 @@ use Juzaweb\CMS\Support\CacheGroup;
 use Juzaweb\CMS\Support\Config as DbConfig;
 use Juzaweb\CMS\Support\DatabaseTableGroup;
 use Juzaweb\CMS\Support\GlobalData;
+use Juzaweb\CMS\Support\GoogleTranslate;
 use Juzaweb\CMS\Support\HookAction;
 use Juzaweb\CMS\Support\Html\Field as HtmlField;
 use Juzaweb\CMS\Support\Imports\PostImporter;
@@ -350,6 +352,11 @@ class CmsServiceProvider extends ServiceProvider
                     $app[TranslationFinderContract::class]
                 );
             }
+        );
+
+        $this->app->singleton(
+            GoogleTranslateContract::class,
+            fn ($app) => new GoogleTranslate()
         );
     }
 

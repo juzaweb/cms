@@ -8,7 +8,7 @@ use Juzaweb\CMS\Facades\ThemeLoader;
 
 class ImportTranslationCommand extends TranslationCommand
 {
-    protected $signature = 'juza:import-translation';
+    protected $signature = 'juza:import-translations';
 
     public function handle(): int
     {
@@ -24,7 +24,7 @@ class ImportTranslationCommand extends TranslationCommand
 
         $themes = ThemeLoader::all();
         foreach ($themes as $theme) {
-            $import = app(TranslationManager::class)->import('plugin', $theme->get('name'));
+            $import = app(TranslationManager::class)->import('theme', $theme->get('name'));
 
             $this->info("Imported {$import} from {$theme->get('name')}");
         }
