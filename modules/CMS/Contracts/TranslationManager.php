@@ -25,4 +25,6 @@ interface TranslationManager
     public function importLocalTranslations(string|Collection $module, string $name = null): int;
 
     public function importMissingKeys(string|Collection $module, string $name = null): int;
+
+    public function translate(string $source, string $target, string $module = 'cms', string $name = 'core'): array;
 }

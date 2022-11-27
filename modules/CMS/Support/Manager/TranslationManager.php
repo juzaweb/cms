@@ -93,12 +93,14 @@ class TranslationManager implements TranslationManagerContract
         //
     }
 
-    public function translate(string $source, string $target, string $module = 'cms', string $name = 'core'): int
+    public function translate(string $source, string $target, string $module = 'cms', string $name = 'core'): array
     {
+        $module = $this->find($module, $name);
+
         $trans = Translation::from('jw_translations AS a')
             ->where('locale', '=', $source)
-            ->where('object_type', '=', $module)
-            ->where('object_key', '=', $name)
+            ->where('object_type', '=', $module->get('type'))
+            ->where('object_key', '=', $module->get('key'))
             ->whereNotExists(
                 function (Builder $q) use ($target) {
                     $q->select(['id'])
@@ -114,6 +116,7 @@ class TranslationManager implements TranslationManagerContract
             ->get();
 
         $total = 0;
+        $errors = [];
         foreach ($trans as $tran) {
             $value = $this->googleTranslate->translate(
                 $source,
@@ -122,7 +125,7 @@ class TranslationManager implements TranslationManagerContract
             );
 
             if (empty($value)) {
-                $this->error("Translate {$tran->value} fail");
+                $errors[] = "Translate {$tran->value} fail";
                 continue;
             }
 
@@ -147,7 +150,7 @@ class TranslationManager implements TranslationManagerContract
             sleep(2);
         }
 
-        return $total;
+        return ['total' => $total, 'errors' => $errors];
     }
 
     public function find(string|Collection $module, string $name = null): Collection
