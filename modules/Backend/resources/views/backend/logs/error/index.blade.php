@@ -42,7 +42,7 @@
             return str;
         }
 
-        var table = new JuzawebTable({
+        const table = new JuzawebTable({
             url: '{{ route('admin.logs.error.get-logs') }}',
         });
     </script>

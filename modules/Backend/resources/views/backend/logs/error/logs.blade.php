@@ -1,50 +1,430 @@
 @extends('cms::layouts.backend')
 
+@section('header')
+    <style>
+        .main-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background-color: #E8EAF6;
+        }
+
+        .main-footer p {
+            margin-bottom: 0;
+        }
+
+        .main-footer .fa.fa-heart {
+            color: #C62828;
+        }
+
+        .page-header {
+            border-bottom: 1px solid #8a8a8a;
+        }
+
+        /*
+         * Navbar
+         */
+
+        .navbar-brand {
+            padding: .75rem 1rem;
+            font-size: 1rem;
+        }
+
+        .navbar-nav .nav-link {
+            padding-right: .5rem;
+            padding-left: .5rem;
+        }
+
+        /*
+         * Boxes
+         */
+
+        .box {
+            display: block;
+            padding: 0;
+            min-height: 70px;
+            background: #fff;
+            width: 100%;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            border-radius: .25rem;
+        }
+
+        .box > .box-icon > i,
+        .box .box-content .box-text,
+        .box .box-content .box-number {
+            color: #FFF;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .box > .box-icon {
+            border-radius: 2px 0 0 2px;
+            display: block;
+            float: left;
+            height: 70px; width: 70px;
+            text-align: center;
+            font-size: 40px;
+            line-height: 70px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .box .box-content {
+            padding: 5px 10px;
+            margin-left: 70px;
+        }
+
+        .box .box-content .box-text {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 600;
+        }
+
+        .box .box-content .box-number {
+            display: block;
+        }
+
+        .box .box-content .progress {
+            background: rgba(0,0,0,0.2);
+            margin: 5px -10px 5px -10px;
+        }
+
+        .box .box-content .progress .progress-bar {
+            background-color: #FFF;
+        }
+
+        /*
+         * Log Menu
+         */
+
+        .log-menu .list-group-item.disabled {
+            cursor: not-allowed;
+        }
+
+        .log-menu .list-group-item.disabled .level-name {
+            color: #D1D1D1;
+        }
+
+        /*
+         * Log Entry
+         */
+
+        .stack-content {
+            color: #AE0E0E;
+            font-family: consolas, Menlo, Courier, monospace;
+            white-space: pre-line;
+            font-size: .8rem;
+        }
+
+        /*
+         * Colors: Badge & Infobox
+         */
+
+        .badge.badge-env,
+        .badge.badge-level-all,
+        .badge.badge-level-emergency,
+        .badge.badge-level-alert,
+        .badge.badge-level-critical,
+        .badge.badge-level-error,
+        .badge.badge-level-warning,
+        .badge.badge-level-notice,
+        .badge.badge-level-info,
+        .badge.badge-level-debug,
+        .badge.empty {
+            color: #FFF;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .badge.badge-level-all,
+        .box.level-all {
+            background-color: {{ log_styler()->color('all') }};
+        }
+
+        .badge.badge-level-emergency,
+        .box.level-emergency {
+            background-color: {{ log_styler()->color('emergency') }};
+        }
+
+        .badge.badge-level-alert,
+        .box.level-alert  {
+            background-color: {{ log_styler()->color('alert') }};
+        }
+
+        .badge.badge-level-critical,
+        .box.level-critical {
+            background-color: {{ log_styler()->color('critical') }};
+        }
+
+        .badge.badge-level-error,
+        .box.level-error {
+            background-color: {{ log_styler()->color('error') }};
+        }
+
+        .badge.badge-level-warning,
+        .box.level-warning {
+            background-color: {{ log_styler()->color('warning') }};
+        }
+
+        .badge.badge-level-notice,
+        .box.level-notice {
+            background-color: {{ log_styler()->color('notice') }};
+        }
+
+        .badge.badge-level-info,
+        .box.level-info {
+            background-color: {{ log_styler()->color('info') }};
+        }
+
+        .badge.badge-level-debug,
+        .box.level-debug {
+            background-color: {{ log_styler()->color('debug') }};
+        }
+
+        .badge.empty,
+        .box.empty {
+            background-color: {{ log_styler()->color('empty') }};
+        }
+
+        .badge.badge-env {
+            background-color: #6A1B9A;
+        }
+
+        #entries {
+            overflow-wrap: anywhere;
+        }
+    </style>
+@endsection
+
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            {{-- Log Details --}}
+            <div class="card mb-4">
+                <div class="card-header">
+                    @lang('Log info'):
+                    <div class="group-btns pull-right">
+                        <a href="{{ route('admin.logs.error.download', [$log->date]) }}" class="btn btn-sm btn-success">
+                            <i class="fa fa-download"></i> {{ trans('Download') }}
+                        </a>
+                        <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-toggle="modal">
+                            <i class="fa fa-trash-o"></i> {{ trans('Delete') }}
+                        </a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-condensed mb-0">
+                        <tbody>
+                        <tr>
+                            <td>@lang('File path') :</td>
+                            <td colspan="7">{{ $log->getPath() }}</td>
+                        </tr>
+                        <tr>
+                            <td>@lang('Log entries') :</td>
+                            <td>
+                                <span class="badge badge-primary">{{ $entries->total() }}</span>
+                            </td>
+                            <td>{{ trans('Size') }} :</td>
+                            <td>
+                                <span class="badge badge-primary">{{ $log->size() }}</span>
+                            </td>
+                            <td>@lang('Created at') :</td>
+                            <td>
+                                <span class="badge badge-primary">{{ $log->createdAt() }}</span>
+                            </td>
+                            <td>@lang('Updated at') :</td>
+                            <td>
+                                <span class="badge badge-primary">{{ $log->updatedAt() }}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    {{-- Search --}}
+                    <form action="{{ route('admin.logs.error.search', [$log->date, $level]) }}" method="GET">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input id="query" name="query" class="form-control" value="{{ $query }}" placeholder="@lang('Type here to search')" autocomplete="off">
+                                <div class="input-group-append">
+                                    @unless (is_null($query))
+                                        <a href="{{ route('admin.logs.error.show', [$log->date]) }}" class="btn btn-secondary">
+                                            (@lang(':count results', ['count' => $entries->count()])) <i class="fa fa-fw fa-times"></i>
+                                        </a>
+                                    @endunless
+                                    <button id="search-btn" class="btn btn-primary">
+                                        <span class="fa fa-fw fa-search"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-    <table class="table juzaweb-table"
-           data-detail-view="true"
-           data-detail-formatter="content_formatter"
-           data-detail-view-by-click="true"
-    >
-        <thead>
-            <tr>
-                <th data-field="datetime" data-width="5%" data-formatter="time_formatter">{{ trans('cms::app.time') }}</th>
-                <th data-width="5%" data-align="center" data-field="level" data-formatter="level_formatter">{{ trans('cms::app.level') }}</th>
-                <th data-field="header" data-formatter="header_formatter">{{ trans('cms::app.header') }}</th>
-            </tr>
-        </thead>
-    </table>
+            {{-- Log Entries --}}
+            <div class="card mb-4">
+                @if ($entries->hasPages())
+                    <div class="card-header">
+                        <span class="badge badge-info float-right">
+                            {{ __('Page :current of :last', ['current' => $entries->currentPage(), 'last' => $entries->lastPage()]) }}
+                        </span>
+                    </div>
+                @endif
 
-    <script type="text/javascript">
-        function time_formatter(value, row, index) {
-            return value.split(' ')[1] ?? '';
-        }
+                <div class="table-responsive">
+                    <table id="entries" class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>{{ trans('ENV') }}</th>
+                                <th style="width: 120px;">{{ trans('Level') }}</th>
+                                <th style="width: 65px;">{{ trans('Time') }}</th>
+                                <th>{{ trans('Header') }}</th>
+                                <th class="text-right">{{ trans('Actions') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($entries as $key => $entry)
+                            <tr>
+                                <td>
+                                    <span class="badge badge-env">{{ $entry->env }}</span>
+                                </td>
+                                <td>
+                                        <span class="badge badge-level-{{ $entry->level }}">
+                                            {!! $entry->level() !!}
+                                        </span>
+                                </td>
+                                <td>
+                                        <span class="badge badge-secondary">
+                                            {{ $entry->datetime->format('H:i:s') }}
+                                        </span>
+                                </td>
+                                <td>
+                                    {{ $entry->header }}
+                                </td>
+                                <td class="text-right">
+                                    @if ($entry->hasStack())
+                                        <a class="btn btn-sm btn-light" role="button" data-toggle="collapse"
+                                           href="#log-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
+                                            <i class="fa fa-toggle-on"></i> {{ trans('Stack') }}
+                                        </a>
+                                    @endif
 
-        function level_formatter(value, row, index) {
-            let spanClass = 'badge badge-info';
-            switch (value) {
-                case 'error':
-                    spanClass = 'badge badge-danger';
-            }
-            return `<span class="p-2 ${spanClass}">${value}</span>`;
-        }
+                                    @if ($entry->hasContext())
+                                        <a class="btn btn-sm btn-light" role="button" data-toggle="collapse"
+                                           href="#log-context-{{ $key }}" aria-expanded="false" aria-controls="log-context-{{ $key }}">
+                                            <i class="fa fa-toggle-on"></i> {{ trans('Context') }}
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @if ($entry->hasStack() || $entry->hasContext())
+                                <tr>
+                                    <td colspan="5" class="stack py-0">
+                                        @if ($entry->hasStack())
+                                            <div class="stack-content collapse" id="log-stack-{{ $key }}">
+                                                {!! $entry->stack() !!}
+                                            </div>
+                                        @endif
 
-        function header_formatter(value, row, index) {
-            return `<div style="max-width: 780px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: center;">${value}</div>`;
-        }
+                                        @if ($entry->hasContext())
+                                            <div class="stack-content collapse" id="log-context-{{ $key }}">
+                                                <pre>{{ $entry->context() }}</pre>
+                                            </div>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endif
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <span class="badge badge-secondary">@lang('The list of logs is empty!')</span>
+                                </td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-        function content_formatter(value, row, index) {
-            return `<code style="color: black;">${row.stack}</code>`;
-        }
+            {!! $entries->appends(compact('query'))->render() !!}
+        </div>
+    </div>
 
-        var table = new JuzawebTable({
-            url: '{{ route('admin.logs.error.get-logs-date', [$date]) }}',
+    <div id="delete-log-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form method="POST" id="delete-log-form" action="{{ route('admin.logs.error.delete') }}">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="date" value="{{ $log->date }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@lang('Delete log file')</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>@lang('Are you sure you want to delete this log file: :date ?', ['date' => $log->date])</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary mr-auto" data-dismiss="modal">{{ trans('Cancel') }}</button>
+                        <button type="submit" class="btn btn-sm btn-danger" data-loading-text="{{ trans('Loading') }}&hellip;">{{ trans('Delete') }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            let deleteLogModal = $('div#delete-log-modal'),
+                deleteLogForm  = $('form#delete-log-form'),
+                submitBtn      = deleteLogForm.find('button[type=submit]');
+
+            deleteLogForm.on('submit', function(event) {
+                event.preventDefault();
+                submitBtn.button('loading');
+
+                $.ajax({
+                    url:      $(this).attr('action'),
+                    type:     $(this).attr('method'),
+                    dataType: 'json',
+                    data:     $(this).serialize(),
+                    success: function(data) {
+                        submitBtn.button('reset');
+                        if (data.result === 'success') {
+                            deleteLogModal.modal('hide');
+                            location.replace("{{ route('admin.logs.error.index') }}");
+                        }
+                        else {
+                            alert('OOPS ! This is a lack of coffee exception !')
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        alert('AJAX ERROR ! Check the console !');
+                        console.error(errorThrown);
+                        submitBtn.button('reset');
+                    }
+                });
+
+                return false;
+            });
+
+            @unless (empty(log_styler()->toHighlight()))
+            @php
+                $htmlHighlight = join('|', log_styler()->toHighlight());
+            @endphp
+
+            $('.stack-content').each(function() {
+                var $this = $(this);
+                var html = $this.html().trim()
+                    .replace(/({!! $htmlHighlight !!})/gm, '<strong>$1</strong>');
+
+                $this.html(html);
+            });
+            @endunless
         });
     </script>
-
 @endsection
