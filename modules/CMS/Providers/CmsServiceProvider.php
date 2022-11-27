@@ -349,14 +349,15 @@ class CmsServiceProvider extends ServiceProvider
                 return new TranslationManager(
                     $app[LocalPluginRepositoryContract::class],
                     $app[LocalThemeRepositoryContract::class],
-                    $app[TranslationFinderContract::class]
+                    $app[TranslationFinderContract::class],
+                    $app[GoogleTranslateContract::class]
                 );
             }
         );
 
         $this->app->singleton(
             GoogleTranslateContract::class,
-            fn ($app) => new GoogleTranslate()
+            fn ($app) => new GoogleTranslate($app[\Illuminate\Contracts\Filesystem\Factory::class])
         );
     }
 

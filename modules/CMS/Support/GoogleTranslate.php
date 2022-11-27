@@ -5,10 +5,15 @@ namespace Juzaweb\CMS\Support;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Juzaweb\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
 
 class GoogleTranslate implements GoogleTranslateContract
 {
+    public function __construct(protected Filesystem $storage)
+    {
+    }
+
     /**
      * Retrieves the translation of a text
      *
@@ -24,7 +29,17 @@ class GoogleTranslate implements GoogleTranslateContract
      */
     public function translate(string $source, string $target, string $text): string
     {
-        // Request translation
+        if ($lock = $this->getDisk()->get('lock-translate.txt')) {
+            if ($lock < now()->subHours(2)->format('Y-m-d H:i:s')) {
+                throw new Exception(
+                    'Translate locked: Google detected unusual traffic from your computer network,'
+                    .' try again later (2 - 48 hours)'
+                );
+            }
+
+            $this->getDisk()->delete('lock-translate.txt');
+        }
+
         $response = self::requestTranslation($source, $target, $text);
 
         return self::getSentencesFromJSON($response);
@@ -84,11 +99,12 @@ class GoogleTranslate implements GoogleTranslateContract
         $sentences = "";
 
         if (!$sentencesArray) {
+            $this->getDisk()->put('lock-translate.txt', now()->format('Y-m-d H:i:s'));
+
             throw new Exception(
                 'Google detected unusual traffic from your computer network,'
                     .' try again later (2 - 48 hours)'
             );
-            \Storage::disk('local')->put('lock-translate.txt', $error);
         }
 
         if (!isset($sentencesArray["sentences"])) {
@@ -100,6 +116,11 @@ class GoogleTranslate implements GoogleTranslateContract
         }
 
         return $sentences;
+    }
+
+    protected function getDisk(): \Illuminate\Contracts\Filesystem\Filesystem
+    {
+        return $this->storage->disk('local');
     }
 
     protected function getClient(): Client

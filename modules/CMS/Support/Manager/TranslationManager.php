@@ -129,7 +129,7 @@ class TranslationManager implements TranslationManagerContract
                 continue;
             }
 
-            $newTran = Translation::firstOrCreate(
+            $newTran = $this->importTranslationLine(
                 [
                     'locale' => $target,
                     'group' => $tran->group,
@@ -137,8 +137,6 @@ class TranslationManager implements TranslationManagerContract
                     'key' => $tran->key,
                     'object_type' => $tran->object_type,
                     'object_key' => $tran->object_key,
-                ],
-                [
                     'value' => $value
                 ]
             );

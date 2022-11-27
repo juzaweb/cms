@@ -10,6 +10,9 @@
 
 namespace Juzaweb\CMS\Contracts;
 
+/**
+ * @see \Juzaweb\CMS\Support\GoogleTranslate
+ */
 interface GoogleTranslate
 {
     public function translate(string $source, string $target, string $text): string;
