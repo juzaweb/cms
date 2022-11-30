@@ -2,6 +2,8 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -125,7 +127,8 @@ class DashboardController extends BackendController
                     $day = $minDay->addDay();
                     $result[] = [
                         $day->format('Y-m-d'),
-                        (int) $this->countViewByDay($day->format('Y-m-d'))
+                        $this->countViewByDay($day->format('Y-m-d')),
+                        $this->countUserByDay($day->format('Y-m-d')),
                     ];
                 }
 
@@ -136,7 +139,7 @@ class DashboardController extends BackendController
         return response()->json($result);
     }
 
-    public function removeMessage(Request $request)
+    public function removeMessage(Request $request): JsonResponse|RedirectResponse
     {
         $request->validate(
             [
@@ -157,9 +160,13 @@ class DashboardController extends BackendController
         );
     }
 
-    protected function countViewByDay($day)
+    protected function countViewByDay(string $day): int
     {
-        return PostView::where('day', '=', $day)
-            ->sum('views');
+        return PostView::where('day', '=', $day)->sum('views');
+    }
+
+    protected function countUserByDay(string $day): int
+    {
+        return User::whereDay('created_at', '=', $day)->count('id');
     }
 }

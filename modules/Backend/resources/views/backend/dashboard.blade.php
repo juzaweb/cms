@@ -124,21 +124,30 @@
 
             jsonData = JSON.parse(jsonData);
             let labels = [];
-            let data = [];
+            let views = [];
+            let users = [];
+
             $.each(jsonData, function (index, item) {
                 labels.push(item[0]);
-                data.push(item[1]);
-            })
+                views.push(item[1]);
+                users.push(item[2]);
+            });
 
             new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
-                    datasets: [{
-                        label: 'Page Views',
-                        data: data,
-                        borderWidth: 1
-                    }]
+                    datasets: [
+                        {
+                            label: 'Page Views',
+                            data: views,
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'New Users',
+                            data: users,
+                            borderWidth: 1
+                        }]
                 },
                 options: {
                     scales: {
@@ -157,7 +166,7 @@
         }
 
         function subject_formatter(value, row, index) {
-            return '<a href="'+ row.url +'" data-turbolinks="false">'+ value +'</a>';
+            return '<a href="'+ row.url +'">'+ value +'</a>';
         }
 
         const table1 = new JuzawebTable({
