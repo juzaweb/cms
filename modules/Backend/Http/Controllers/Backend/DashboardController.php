@@ -118,18 +118,13 @@ class DashboardController extends BackendController
             3600,
             function () {
                 $result = [];
-                $result[] = [
-                    trans('cms::app.day'),
-                    trans('cms::app.views')
-                ];
-
                 $today = Carbon::today();
                 $minDay = $today->subDays(7);
 
                 for ($i = 1; $i <= 7; $i++) {
                     $day = $minDay->addDay();
                     $result[] = [
-                        (string) $day->format('Y-m-d'),
+                        $day->format('Y-m-d'),
                         (int) $this->countViewByDay($day->format('Y-m-d'))
                     ];
                 }
