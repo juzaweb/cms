@@ -64,7 +64,7 @@ class LogViewerController extends BackendController
         $entries = $log->entries($level)->paginate($this->perPage);
 
         return view(
-            'cms::backend.logs.error.logs',
+            'cms::backend.logs.error.show',
             compact(
                 'title',
                 'date',
@@ -153,7 +153,7 @@ class LogViewerController extends BackendController
             ->paginate($this->perPage);
 
         return view(
-            'cms::backend.logs.error.logs',
+            'cms::backend.logs.error.show',
             compact('title', 'level', 'log', 'query', 'levels', 'entries')
         );
     }
