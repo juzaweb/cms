@@ -208,7 +208,7 @@
                         <a href="{{ route('admin.logs.error.download', [$log->date]) }}" class="btn btn-sm btn-success">
                             <i class="fa fa-download"></i> {{ trans('Download') }}
                         </a>
-                        <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-toggle="modal">
+                        <a href="javascript:void(0)" class="btn btn-sm btn-danger" id="delete-log">
                             <i class="fa fa-trash-o"></i> {{ trans('Delete') }}
                         </a>
                     </div>
@@ -352,62 +352,41 @@
         </div>
     </div>
 
-    <div id="delete-log-modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <form method="POST" id="delete-log-form" action="{{ route('admin.logs.error.delete') }}">
-                <input type="hidden" name="_method" value="DELETE">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="date" value="{{ $log->date }}">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">@lang('Delete log file')</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>@lang('Are you sure you want to delete this log file: :date ?', ['date' => $log->date])</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary mr-auto" data-dismiss="modal">{{ trans('Cancel') }}</button>
-                        <button type="submit" class="btn btn-sm btn-danger" data-loading-text="{{ trans('Loading') }}&hellip;">{{ trans('Delete') }}</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
         $(function () {
-            let deleteLogModal = $('div#delete-log-modal'),
-                deleteLogForm  = $('form#delete-log-form'),
-                submitBtn      = deleteLogForm.find('button[type=submit]');
+            let btnDelete = $('#delete-log');
 
-            deleteLogForm.on('submit', function(event) {
-                event.preventDefault();
-                submitBtn.button('loading');
+            btnDelete.on('click', function() {
+                confirm_message(
+                    "{{ trans('Are you sure you want to delete this log file: :date ?', ['date' => $log->date]) }}",
+                    function (result) {
+                        if (!result) {
+                            return false;
+                        }
 
-                $.ajax({
-                    url:      $(this).attr('action'),
-                    type:     $(this).attr('method'),
-                    dataType: 'json',
-                    data:     $(this).serialize(),
-                    success: function(data) {
-                        submitBtn.button('reset');
-                        if (data.result === 'success') {
-                            deleteLogModal.modal('hide');
-                            location.replace("{{ route('admin.logs.error.index') }}");
-                        }
-                        else {
-                            alert('OOPS ! This is a lack of coffee exception !')
-                        }
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        alert('AJAX ERROR ! Check the console !');
-                        console.error(errorThrown);
-                        submitBtn.button('reset');
+                        $.ajax({
+                            url: "{{ route('admin.logs.error.delete') }}",
+                            type: 'DELETE',
+                            dataType: 'json',
+                            data: {
+                                date: '{{ $log->date }}'
+                            },
+                            success: function(data) {
+                                if (data.result === 'success') {
+                                    location.replace("{{ route('admin.logs.error.index') }}");
+                                } else {
+                                    alert('OOPS ! This is a lack of coffee exception !')
+                                }
+                            },
+                            error: function(xhr, textStatus, errorThrown) {
+                                alert('AJAX ERROR ! Check the console !');
+                                console.error(errorThrown);
+                            }
+                        });
+
+                        return false;
                     }
-                });
+                );
 
                 return false;
             });
