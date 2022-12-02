@@ -16,6 +16,7 @@
     "require": {
         "php": "^8.0|^8.1",
         "ext-curl": "*",
+        "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
@@ -23,8 +24,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "juzaweb/packages": "^1.1",
         "laravel/framework": "^9.2",
-        "laravel/tinker": "^2.7",
-        "ext-fileinfo": "*"
+        "laravel/tinker": "^2.7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

@@ -2,6 +2,8 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -14,7 +16,7 @@ use Juzaweb\CMS\Models\User;
 
 class DashboardController extends BackendController
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         do_action(Action::BACKEND_DASHBOARD_ACTION);
 
@@ -38,7 +40,7 @@ class DashboardController extends BackendController
         );
     }
 
-    public function getDataUser(Request $request)
+    public function getDataUser(Request $request): JsonResponse
     {
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
@@ -71,7 +73,7 @@ class DashboardController extends BackendController
         );
     }
 
-    public function getDataTopViews(Request $request)
+    public function getDataTopViews(Request $request): JsonResponse
     {
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
@@ -111,26 +113,22 @@ class DashboardController extends BackendController
         return response()->json($result);
     }
 
-    public function viewsChart()
+    public function viewsChart(): JsonResponse
     {
         $result = Cache::store('file')->remember(
             cache_prefix('views_chart'),
             3600,
             function () {
                 $result = [];
-                $result[] = [
-                    trans('cms::app.day'),
-                    trans('cms::app.views')
-                ];
-
                 $today = Carbon::today();
                 $minDay = $today->subDays(7);
 
                 for ($i = 1; $i <= 7; $i++) {
                     $day = $minDay->addDay();
                     $result[] = [
-                        (string) $day->format('Y-m-d'),
-                        (int) $this->countViewByDay($day->format('Y-m-d'))
+                        $day->format('Y-m-d'),
+                        $this->countViewByDay($day->format('Y-m-d')),
+                        $this->countUserByDay($day->format('Y-m-d')),
                     ];
                 }
 
@@ -141,7 +139,7 @@ class DashboardController extends BackendController
         return response()->json($result);
     }
 
-    public function removeMessage(Request $request)
+    public function removeMessage(Request $request): JsonResponse|RedirectResponse
     {
         $request->validate(
             [
@@ -162,9 +160,13 @@ class DashboardController extends BackendController
         );
     }
 
-    protected function countViewByDay($day)
+    protected function countViewByDay(string $day): int
     {
-        return PostView::where('day', '=', $day)
-            ->sum('views');
+        return PostView::where('day', '=', $day)->sum('views');
+    }
+
+    protected function countUserByDay(string $day): int
+    {
+        return User::whereDay('created_at', '=', $day)->count('id');
     }
 }
