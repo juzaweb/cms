@@ -16,7 +16,7 @@ use Juzaweb\CMS\Models\User;
 
 class DashboardController extends BackendController
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         do_action(Action::BACKEND_DASHBOARD_ACTION);
 
@@ -40,7 +40,7 @@ class DashboardController extends BackendController
         );
     }
 
-    public function getDataUser(Request $request)
+    public function getDataUser(Request $request): JsonResponse
     {
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
@@ -73,7 +73,7 @@ class DashboardController extends BackendController
         );
     }
 
-    public function getDataTopViews(Request $request)
+    public function getDataTopViews(Request $request): JsonResponse
     {
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
@@ -113,7 +113,7 @@ class DashboardController extends BackendController
         return response()->json($result);
     }
 
-    public function viewsChart()
+    public function viewsChart(): JsonResponse
     {
         $result = Cache::store('file')->remember(
             cache_prefix('views_chart'),

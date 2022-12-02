@@ -16,7 +16,7 @@ use Juzaweb\Backend\Http\Controllers\Backend\AjaxController;
 Route::group(
     ['prefix' => '/'],
     function () {
-        Route::get('/', 'Backend\DashboardController@index')->name('admin.dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
         Route::get('/load-data/{func}', 'Backend\LoadDataController@loadData')->name('admin.load_data');
 
@@ -33,7 +33,7 @@ Route::group(
 
         Route::get(
             '/dashboard/views-chart',
-            'Backend\DashboardController@viewsChart'
+            [DashboardController::class, 'viewsChart']
         )->name('admin.dashboard.views_chart');
 
         Route::get(
@@ -49,7 +49,7 @@ Route::group(
 
         Route::post(
             '/remove-message',
-            'Backend\DashboardController@removeMessage'
+            [DashboardController::class, 'removeMessage']
         )->name('admin.dashboard.remove-message');
     }
 );
