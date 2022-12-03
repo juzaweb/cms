@@ -545,6 +545,7 @@ trait RegisterHookAction
             'key' => $key,
             'subject' => '',
             'body' => '',
+            'params' => [],
         ];
 
         $args = array_merge($defaults, $args);
