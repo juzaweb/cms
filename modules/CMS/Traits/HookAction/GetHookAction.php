@@ -276,7 +276,7 @@ trait GetHookAction
         return $scripts->where('inFooter', $inFooter);
     }
 
-    public function getEnqueueFrontendStyles($inFooter = false)
+    public function getEnqueueFrontendStyles($inFooter = false): Collection
     {
         $scripts = new Collection(GlobalData::get('frontend_styles'));
 
@@ -324,5 +324,14 @@ trait GetHookAction
         }
 
         return new Collection($this->globalData->get('thumbnail_sizes'));
+    }
+
+    public function getEmailTemplates(string $key = null): Collection
+    {
+        if ($key) {
+            return Arr::get(GlobalData::get('email_templates'), $key);
+        }
+
+        return new Collection(GlobalData::get('email_templates'));
     }
 }

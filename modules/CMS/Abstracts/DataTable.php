@@ -14,12 +14,15 @@
 
 namespace Juzaweb\CMS\Abstracts;
 
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
-abstract class DataTable
+abstract class DataTable implements Arrayable
 {
     protected int $perPage = 10;
 
@@ -27,17 +30,22 @@ abstract class DataTable
 
     protected string $sortOder = 'desc';
 
-    protected $params = [];
+    protected array $params = [];
 
-    protected $dataUrl;
+    protected ?string $dataUrl = null;
 
-    protected $actionUrl;
+    protected ?string $actionUrl = null;
 
     protected array $escapes = [];
 
     protected bool $searchable = true;
 
-    public ?string $currentUrl;
+    public ?string $currentUrl = null;
+
+    public static function make(): static
+    {
+        return app(static::class);
+    }
 
     /**
      * Columns datatable
@@ -52,7 +60,24 @@ abstract class DataTable
      * @param array $data
      * @return Builder
      */
-    abstract public function query($data);
+    abstract public function query(array $data);
+
+    public function getData(Request $request): array
+    {
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'desc');
+        $offset = $request->get('offset', 0);
+        $limit = (int) $request->get('limit', 20);
+
+        $query = $this->query($request->all());
+        $count = $query->count();
+        $query->orderBy($sort, $order);
+        $query->offset($offset);
+        $query->limit($limit);
+        $rows = $query->get();
+
+        return [$count, $rows];
+    }
 
     public function mountData(...$params)
     {
@@ -64,7 +89,7 @@ abstract class DataTable
         $this->params = $params;
     }
 
-    public function render()
+    public function render(): View
     {
         if (empty($this->currentUrl)) {
             $this->currentUrl = url()->current();
@@ -76,7 +101,7 @@ abstract class DataTable
         );
     }
 
-    public function actions()
+    public function actions(): array
     {
         return [
             'delete' => trans('cms::app.delete'),
@@ -88,7 +113,7 @@ abstract class DataTable
         //
     }
 
-    public function searchFields()
+    public function searchFields(): array
     {
         return [
             'keyword' => [
@@ -114,7 +139,7 @@ abstract class DataTable
         ];
     }
 
-    public function rowActionsFormatter($value, $row, $index)
+    public function rowActionsFormatter($value, $row, $index): string
     {
         return view(
             'cms::backend.items.datatable_item',

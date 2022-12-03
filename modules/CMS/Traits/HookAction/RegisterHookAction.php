@@ -539,35 +539,19 @@ trait RegisterHookAction
         }
     }
 
-    public function registerResourceManagement2(string $key, array|string $args = null): void
+    public function registerEmailTemplate(string $key, array $args = []): void
     {
         $defaults = [
-            'key' => $key,
-            'repository' => null,
-            'label' => '',
-            'description' => '',
-            'priority' => 20,
-            'menu' => [],
-            'fields' => [],
-            'permission_name' => "management_{$key}",
+            'code' => $key,
+            'subject' => '',
+            'body' => '',
+            'params' => [],
+            'email_hook' => null,
         ];
 
-        $args = new Collection(array_merge($defaults, $args));
+        $args = array_merge($defaults, $args);
 
-        $this->registerAdminPage(
-            "management.{$key}",
-            [
-                'title' => $args->get('label'),
-                'menu' => $args->get('menu', [])
-            ]
-        );
-
-        $this->registerResourcePermissions(
-            $args->get('permission_name'),
-            $args->get('label')
-        );
-
-        $this->globalData->set("resource_managements.{$key}", $args);
+        $this->globalData->set('email_templates.' . $key, new Collection($args));
     }
 
     /**

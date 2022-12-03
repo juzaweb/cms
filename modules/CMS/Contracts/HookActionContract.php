@@ -84,7 +84,11 @@ interface HookActionContract
 
     public function addMetaPostTypes(string $postType, array $metas): void;
 
+    public function registerEmailTemplate(string $key, array $args = []): void;
+
     public function getThumbnailSizes($postType = null): Collection;
 
     public function getPostTypes(string $postType = null): Collection;
+
+    public function getEmailTemplates(string $key = null): Collection;
 }

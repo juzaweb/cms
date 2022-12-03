@@ -8,17 +8,17 @@ use Juzaweb\Backend\Models\EmailTemplate;
 
 class Email
 {
-    protected $emails;
-    protected $template;
-    protected $params = [];
-    protected $priority = 1;
-    protected $subject;
-    protected $body;
+    protected array $emails;
+    protected string $template;
+    protected array $params = [];
+    protected int $priority = 1;
+    protected string $subject;
+    protected string $body;
 
     /**
      * Make email service
      * */
-    public static function make()
+    public static function make(): Email
     {
         return new Email();
     }
@@ -29,7 +29,7 @@ class Email
      * @param string $templateCode
      * @return $this
      * */
-    public function withTemplate(string $templateCode)
+    public function withTemplate(string $templateCode): static
     {
         $this->template = $templateCode;
 
@@ -39,10 +39,10 @@ class Email
     /**
      * Set emails will send
      *
-     * @param string|array $emails
+     * @param array|string $emails
      * @return $this
-     * */
-    public function setEmails($emails)
+     */
+    public function setEmails(array|string $emails): static
     {
         if (is_array($emails)) {
             $this->emails = array_unique($emails);
@@ -58,45 +58,45 @@ class Email
      *
      * @param array $params
      * @return $this
-     * */
-    public function setParams(array $params)
+     */
+    public function setParams(array $params): static
     {
         $this->params = $params;
 
         return $this;
     }
 
-    public function setPriority(int $priority)
+    public function setPriority(int $priority): static
     {
         $this->priority = $priority;
 
         return $this;
     }
 
-    public function setSubject($subject)
+    public function setSubject($subject): static
     {
         $this->subject = $subject;
 
         return $this;
     }
 
-    public function setBody($body)
+    public function setBody($body): static
     {
         $this->body = $body;
 
         return $this;
     }
 
-    public function send()
+    public function send(): bool
     {
         $templateId = $this->validate();
         $data = [];
 
-        if ($this->subject) {
+        if (isset($this->subject)) {
             $data['subject'] = $this->subject;
         }
 
-        if ($this->body) {
+        if (isset($this->body)) {
             $data['body'] = $this->body;
         }
 
@@ -105,6 +105,7 @@ class Email
                 [
                     'email' => $email,
                     'template_id' => $templateId,
+                    'template_code' => $this->template,
                     'params' => $this->params,
                     'priority' => $this->priority,
                     'data' => $data,
@@ -125,7 +126,7 @@ class Email
         return true;
     }
 
-    protected function validate()
+    protected function validate(): ?int
     {
         if (empty($this->template)) {
             return null;
@@ -133,7 +134,7 @@ class Email
 
         $template = EmailTemplate::where(['code' => $this->template])->first(['id']);
         if (empty($template)) {
-            throw new \Exception("Email template [{$this->template}] does not exist.");
+            return null;
         }
 
         return $template->id;

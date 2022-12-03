@@ -1,25 +1,27 @@
 <?php
 /**
- * JUZAWEB CMS - Laravel CMS for Your Project
+ * JUZAWEB CMS - The Best CMS for Laravel Project
  *
  * @package    juzaweb/juzacms
- * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
- * @license    GNU V2
+ * @author     Juzaweb Team <admin@juzaweb.com>
+ * @link       https://juzaweb.com
+ * @license    MIT
  */
 
-namespace Juzaweb\Backend\Commands;
+namespace Juzaweb\Backend\Actions;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Abstracts\Action;
 
-class EmailTemplateGenerateCommand extends Command
+class EmailAction extends Action
 {
-    protected $signature = 'mail:generate-template';
+    public function handle()
+    {
+        $this->addAction(Action::INIT_ACTION, [$this, 'addEmailTemplates']);
+    }
 
-    public function handle(): int
+    public function addEmailTemplates()
     {
         $basePath = base_path('modules/Backend/resources/data/mail_templates');
         $files = File::files($basePath);
@@ -32,20 +34,14 @@ class EmailTemplateGenerateCommand extends Command
             $code = $file->getFilenameWithoutExtension();
             $data = json_decode(File::get($file->getRealPath()), true);
 
-            EmailTemplate::firstOrCreate(
-                [
-                    'code' => $code,
-                ],
+            $this->hookAction->registerEmailTemplate(
+                $code,
                 [
                     'subject' => Arr::get($data, 'subject'),
-                    'body' => File::get("{$basePath}/{$code}.twig"),
+                    'body' => "cms::email.{$code}",
                     'params' => Arr::get($data, 'params'),
                 ]
             );
-
-            $this->info("Created email template: {$code}");
         }
-
-        return self::SUCCESS;
     }
 }
