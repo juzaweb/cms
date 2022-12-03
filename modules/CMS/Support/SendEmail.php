@@ -2,7 +2,7 @@
 
 namespace Juzaweb\CMS\Support;
 
-use Illuminate\Support\Facades\Log;
+use Exception;
 use Illuminate\Support\Facades\Mail;
 use Juzaweb\Backend\Models\EmailList;
 
@@ -19,7 +19,7 @@ class SendEmail
      * Send email by row email_lists table
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function send(): bool
     {
@@ -57,7 +57,7 @@ class SendEmail
             $this->updateStatus('success', $subject, $body);
 
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->updateError(
                 [
                     'title' => 'Send mail exception',
@@ -70,7 +70,7 @@ class SendEmail
             if (config('app.debug')) {
                 throw $e;
             }
-            Log::error($e);
+            report($e);
             return false;
         }
     }
@@ -79,24 +79,22 @@ class SendEmail
         string $status,
         $subject = null,
         $body = null
-    ) {
+    ): bool {
         $update = [
             'status' => $status
         ];
 
         if ($subject && $body) {
             $data = $this->mail->data;
-
             $data['subject'] = $subject;
             $data['body'] = $body;
-
             $update['data'] = $data;
         }
 
         return $this->mail->update($update);
     }
 
-    protected function updateError(array $error = [])
+    protected function updateError(array $error = []): bool
     {
         return $this->mail->update(
             [
@@ -111,7 +109,7 @@ class SendEmail
      *
      * @return bool|array
      */
-    protected function validate()
+    protected function validate(): bool|array
     {
         return true;
     }

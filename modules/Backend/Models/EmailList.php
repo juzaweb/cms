@@ -5,6 +5,8 @@ namespace Juzaweb\Backend\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
+use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\Network\Interfaces\RootNetworkModelInterface;
 use Juzaweb\Network\Traits\RootNetworkModel;
@@ -16,6 +18,7 @@ use TwigBridge\Facade\Twig;
  * @property int $id
  * @property string $email
  * @property int|null $template_id
+ * @property string|null $template_code
  * @property array|null $params
  * @property string $status pending => processing => (success || error)
  * @property int $priority
@@ -40,7 +43,6 @@ use TwigBridge\Facade\Twig;
  * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereSiteId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList WhereTemplate($code)
- * @method static Builder|EmailList whereTemplate(string $code)
  */
 class EmailList extends Model implements RootNetworkModelInterface
 {
@@ -50,6 +52,7 @@ class EmailList extends Model implements RootNetworkModelInterface
 
     protected $fillable = [
         'template_id',
+        'template_code',
         'email',
         'priority',
         'params',
@@ -103,8 +106,15 @@ class EmailList extends Model implements RootNetworkModelInterface
     public function getBody(): string
     {
         $body = Arr::get($this->data, 'body');
+
         if (empty($body)) {
-            $body = $this->template->body;
+            if ($this->template) {
+                $body = $this->template->body;
+            } else {
+                $template = app(HookActionContract::class)
+                    ->getEmailTemplates($this->template_code);
+                $body = File::get(view($template->get('body'))->getPath());
+            }
         }
 
         return static::mapParams($body, $this->params);

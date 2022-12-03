@@ -130,10 +130,10 @@ class EmailTemplateDataTable extends DataTable
         }
 
         $query = $this->query($request->all());
-        $count = $query->count();
+        $count = $query->count() + $rows->count();
         $query->orderBy($sort, $order);
         $query->offset($offset);
-        $query->limit($limit);
+        $query->limit($limit - $rows->count());
         $rows = $rows->merge($query->get());
 
         return [$count, $rows];

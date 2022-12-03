@@ -32,7 +32,7 @@ class EmailTemplateController extends BackendController
             ->firstOrNew();
         if ($model->id === null) {
             $template = app(HookActionContract::class)->getEmailTemplates($code);
-            $template->put('body', File::get(view($template->get('body'), $params)->getPath()));
+            $template->put('body', File::get(view($template->get('body'))->getPath()));
             $model->fill($template->toArray());
         }
         return $model;
