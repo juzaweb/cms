@@ -92,11 +92,11 @@ class Email
         $templateId = $this->validate();
         $data = [];
 
-        if ($this->subject) {
+        if (isset($this->subject)) {
             $data['subject'] = $this->subject;
         }
 
-        if ($this->body) {
+        if (isset($this->body)) {
             $data['body'] = $this->body;
         }
 
