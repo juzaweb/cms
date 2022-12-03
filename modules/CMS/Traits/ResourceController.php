@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Abstracts\DataTable;
-use Juzaweb\CMS\Models\Model;
+use Illuminate\Database\Eloquent\Model;
 
 trait ResourceController
 {

@@ -11,7 +11,7 @@ use Juzaweb\Backend\Models\EmailTemplate;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Models\Model;
+use Illuminate\Database\Eloquent\Model;
 use Juzaweb\CMS\Traits\ResourceController;
 
 class EmailTemplateController extends BackendController
