@@ -13,25 +13,28 @@ use Juzaweb\CMS\Traits\ResourceController;
 
 class EmailTemplateController extends BackendController
 {
+    protected string $editKey = 'code';
+
     use ResourceController {
         getDataForForm as DataForForm;
     }
 
     protected string $viewPrefix = 'cms::backend.email_template';
 
-    protected function getDataTable(...$params)
+    protected function getDataTable(...$params): EmailTemplateDataTable
     {
         return new EmailTemplateDataTable();
     }
 
-    protected function validator(array $attributes, ...$params)
+    protected function validator(array $attributes, ...$params): \Illuminate\Contracts\Validation\Validator
     {
         $id = $attributes['id'] ?? null;
 
         return Validator::make(
             $attributes,
             [
-                'subject' => 'required',
+                'subject' => ['required'],
+                'body' => ['required'],
                 'code' => [
                     'required',
                     'max:50',

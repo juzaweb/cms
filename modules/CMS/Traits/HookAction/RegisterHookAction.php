@@ -542,10 +542,11 @@ trait RegisterHookAction
     public function registerEmailTemplate(string $key, array $args = []): void
     {
         $defaults = [
-            'key' => $key,
+            'code' => $key,
             'subject' => '',
             'body' => '',
             'params' => [],
+            'email_hook' => null,
         ];
 
         $args = array_merge($defaults, $args);

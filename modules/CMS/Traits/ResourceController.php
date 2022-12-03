@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
+use Juzaweb\CMS\Abstracts\DataTable;
 
 trait ResourceController
 {
@@ -85,7 +86,9 @@ trait ResourceController
             ]
         );
 
-        $model = $this->makeModel(...$indexParams)->findOrFail($this->getPathId($params));
+        $model = $this->makeModel(...$indexParams)
+            ->where($this->editKey ?? 'id', $this->getPathId($params))
+            ->firstOrFail();
         $this->checkPermission('edit', $model, ...$params);
 
         return view(
@@ -161,7 +164,8 @@ trait ResourceController
         $data = $this->parseDataForSave($request->all(), ...$params);
 
         $model = $this->makeModel(...$params)
-            ->findOrFail($this->getPathId($params));
+            ->where($this->editKey ?? 'id', $this->getPathId($params))
+            ->firstOrFail();
         $this->checkPermission('edit', $model, ...$params);
 
         DB::beginTransaction();
@@ -209,18 +213,7 @@ trait ResourceController
 
         $table = $this->getDataTable(...$params);
         $table->setCurrentUrl(action([static::class, 'index'], $params, false));
-
-        $sort = $request->get('sort', 'id');
-        $order = $request->get('order', 'desc');
-        $offset = $request->get('offset', 0);
-        $limit = (int) $request->get('limit', 20);
-
-        $query = $table->query($request->all());
-        $count = $query->count();
-        $query->orderBy($sort, $order);
-        $query->offset($offset);
-        $query->limit($limit);
-        $rows = $query->get();
+        list($count, $rows) = $table->getData($request);
 
         $results = [];
         $columns = $table->columns();
@@ -290,7 +283,7 @@ trait ResourceController
         );
     }
 
-    public function getDataForSelect(Request $request, ...$params)
+    public function getDataForSelect(Request $request, ...$params): JsonResponse
     {
         $queries = $request->query();
         $exceptIds = $request->get('except_ids');
@@ -463,7 +456,7 @@ trait ResourceController
     /**
      * Get data table resource
      *
-     * @return \Juzaweb\CMS\Abstracts\DataTable
+     * @return DataTable
      */
     abstract protected function getDataTable(...$params);
 
@@ -471,6 +464,7 @@ trait ResourceController
      * Validator for store and update
      *
      * @param array $attributes
+     * @param mixed ...$params
      * @return Validator|array
      */
     abstract protected function validator(array $attributes, ...$params);

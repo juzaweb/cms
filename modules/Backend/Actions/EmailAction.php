@@ -12,7 +12,6 @@ namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Juzaweb\Backend\Models\EmailTemplate;
 use Juzaweb\CMS\Abstracts\Action;
 
 class EmailAction extends Action
@@ -39,7 +38,7 @@ class EmailAction extends Action
                 $code,
                 [
                     'subject' => Arr::get($data, 'subject'),
-                    'body' => File::get("{$basePath}/{$code}.twig"),
+                    'body' => "cms::email.{$code}",
                     'params' => Arr::get($data, 'params'),
                 ]
             );

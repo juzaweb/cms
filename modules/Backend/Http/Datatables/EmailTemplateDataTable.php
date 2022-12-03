@@ -10,10 +10,13 @@
 
 namespace Juzaweb\Backend\Http\Datatables;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\Backend\Models\EmailTemplate;
+use Juzaweb\CMS\Contracts\HookActionContract;
 
 class EmailTemplateDataTable extends DataTable
 {
@@ -22,7 +25,7 @@ class EmailTemplateDataTable extends DataTable
      *
      * @return array
      */
-    public function columns()
+    public function columns(): array
     {
         return [
             'subject' => [
@@ -44,24 +47,95 @@ class EmailTemplateDataTable extends DataTable
         ];
     }
 
+    public function rowActionsFormatter($value, $row, $index): string
+    {
+        return view(
+            'cms::backend.items.datatable_item',
+            [
+                'value' => $value,
+                'row' => $row,
+                'actions' => $this->rowAction($row),
+                'editUrl' => $this->currentUrl .'/'. $row->code . '/edit',
+            ]
+        )->render();
+    }
+
+    public function rowAction($row): array
+    {
+        return [
+            'edit' => [
+                'label' => trans('cms::app.edit'),
+                'url' => $this->currentUrl .'/'. $row->code . '/edit',
+            ],
+            'delete' => [
+                'label' => trans('cms::app.delete'),
+                'class' => 'text-danger',
+                'action' => 'delete',
+            ],
+        ];
+    }
+
     /**
      * Query data datatable
      *
      * @param array $data
      * @return Builder
      */
-    public function query($data)
+    public function query(array $data): Builder
     {
         $query = EmailTemplate::query();
 
         if ($keyword = Arr::get($data, 'keyword')) {
-            $query->where(function (Builder $q) use ($keyword) {
-                $q->orWhere('code', JW_SQL_LIKE, '%'. $keyword .'%');
-                $q->orWhere('subject', JW_SQL_LIKE, '%'. $keyword .'%');
-            });
+            $query->where(
+                function (Builder $q) use ($keyword) {
+                    $q->orWhere('code', JW_SQL_LIKE, '%'. $keyword .'%');
+                    $q->orWhere('subject', JW_SQL_LIKE, '%'. $keyword .'%');
+                }
+            );
         }
 
         return $query;
+    }
+
+    public function getData(Request $request): array
+    {
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'desc');
+        $offset = $request->get('offset', 0);
+        $limit = (int) $request->get('limit', 20);
+        $page = round(($offset + $limit) / $limit);
+
+        $rows = new Collection();
+        if ($page == 1) {
+            $templates = app(HookActionContract::class)->getEmailTemplates();
+            $exists = EmailTemplate::whereIn('code', $templates->pluck('code')->toArray())
+                ->get(['code'])
+                ->pluck('code')
+                ->toArray();
+            foreach ($templates as $template) {
+                if (!in_array($template->get('key'), $exists)) {
+                    $rows->push(
+                        (object) array_merge(
+                            $template->toArray(),
+                            [
+                                'id' => $template->get('code'),
+                                'created_at' => now(),
+                                'updated_at' => now(),
+                            ]
+                        )
+                    );
+                }
+            }
+        }
+
+        $query = $this->query($request->all());
+        $count = $query->count();
+        $query->orderBy($sort, $order);
+        $query->offset($offset);
+        $query->limit($limit);
+        $rows = $rows->merge($query->get());
+
+        return [$count, $rows];
     }
 
     public function bulkActions($action, $ids)
@@ -69,7 +143,6 @@ class EmailTemplateDataTable extends DataTable
         switch ($action) {
             case 'delete':
                 EmailTemplate::destroy($ids);
-
                 break;
         }
     }

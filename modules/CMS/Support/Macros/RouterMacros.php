@@ -25,7 +25,7 @@ class RouterMacros
             $this->get($uri . '/create', $controller . '@create')->name($routeName . '.create')->where($where);
             $this->get("{$uri}/datatable", $controller . '@datatable')->name($routeName . '.datatable')->where($where);
             $this->get($uri . '/{id}/edit', $controller . '@edit')->name($routeName . '.edit')
-                ->where('id', '[0-9a-z\-]+')->where($where);
+                ->where($where);
             $this->get($uri . '/load-data', $controller . '@getDataForSelect')
                 ->name($routeName . '.load-data')
                 ->where($where);
