@@ -42,12 +42,17 @@ abstract class DataTable implements Arrayable
 
     public ?string $currentUrl;
 
+    public static function make(): static
+    {
+        return app(static::class);
+    }
+
     /**
      * Columns datatable
      *
      * @return array
      */
-    abstract public function columns(): array;
+    abstract public function columns();
 
     /**
      * Query data datatable
@@ -55,7 +60,7 @@ abstract class DataTable implements Arrayable
      * @param array $data
      * @return Builder
      */
-    abstract public function query(array $data): Builder;
+    abstract public function query(array $data);
 
     public function getData(Request $request): array
     {
@@ -119,7 +124,7 @@ abstract class DataTable implements Arrayable
         ];
     }
 
-    public function rowAction($row): array
+    public function rowAction($row)
     {
         return [
             'edit' => [

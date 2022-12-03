@@ -112,8 +112,9 @@ class EmailTemplateDataTable extends DataTable
                 ->get(['code'])
                 ->pluck('code')
                 ->toArray();
+
             foreach ($templates as $template) {
-                if (!in_array($template->get('key'), $exists)) {
+                if (!in_array($template->get('code'), $exists)) {
                     $rows->push(
                         (object) array_merge(
                             $template->toArray(),

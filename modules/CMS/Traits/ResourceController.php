@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Abstracts\DataTable;
+use Juzaweb\CMS\Models\Model;
 
 trait ResourceController
 {
@@ -86,9 +87,7 @@ trait ResourceController
             ]
         );
 
-        $model = $this->makeModel(...$indexParams)
-            ->where($this->editKey ?? 'id', $this->getPathId($params))
-            ->firstOrFail();
+        $model = $this->getDetailModel($this->makeModel(...$indexParams), ...$params);
         $this->checkPermission('edit', $model, ...$params);
 
         return view(
@@ -163,9 +162,7 @@ trait ResourceController
         $validator->validate();
         $data = $this->parseDataForSave($request->all(), ...$params);
 
-        $model = $this->makeModel(...$params)
-            ->where($this->editKey ?? 'id', $this->getPathId($params))
-            ->firstOrFail();
+        $model = $this->getDetailModel($this->makeModel(...$params), ...$params);
         $this->checkPermission('edit', $model, ...$params);
 
         DB::beginTransaction();
@@ -315,6 +312,13 @@ trait ResourceController
         }
 
         return response()->json($data);
+    }
+
+    protected function getDetailModel(Model $model, ...$params): Model
+    {
+        return $model
+            ->where($this->editKey ?? 'id', $this->getPathId($params))
+            ->firstOrFail();
     }
 
     protected function beforeStore(Request $request, ...$params)

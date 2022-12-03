@@ -2,11 +2,9 @@
 
 @section('content')
     @component('cms::components.form_resource', [
-            'action' => $model->id ? route('admin.email-template.update', [$model->id]) : route('admin.email-template.store'),
-            'method' => $model->id ? 'put' : 'post'
+            'action' => $model->code ? route('admin.email-template.update', [$model->code]) : route('admin.email-template.store'),
+            'method' => $model->code ? 'put' : 'post'
         ])
-
-        <input type="hidden" name="id" value="{{ $model->id }}">
 
         <div class="row">
             <div class="col-md-8">
