@@ -32,15 +32,15 @@ abstract class DataTable implements Arrayable
 
     protected array $params = [];
 
-    protected string $dataUrl;
+    protected ?string $dataUrl = null;
 
-    protected string $actionUrl;
+    protected ?string $actionUrl = null;
 
     protected array $escapes = [];
 
     protected bool $searchable = true;
 
-    public ?string $currentUrl;
+    public ?string $currentUrl = null;
 
     public static function make(): static
     {

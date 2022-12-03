@@ -97,7 +97,13 @@ class EmailList extends Model implements RootNetworkModelInterface
     {
         $subject = Arr::get($this->data, 'subject');
         if (empty($subject)) {
-            $subject = $this->template->subject;
+            if ($this->template) {
+                $subject = $this->template->subject;
+            } else {
+                $template = app(HookActionContract::class)
+                    ->getEmailTemplates($this->template_code);
+                $subject = $template->get('subject');
+            }
         }
 
         return static::mapParams($subject, $this->params);
