@@ -8,24 +8,38 @@
  * @license    GNU V2
  */
 
+use Juzaweb\Backend\Http\Controllers\Backend\Plugin\EditorController;
+use Juzaweb\Backend\Http\Controllers\Backend\Plugin\PluginController;
+use Juzaweb\Backend\Http\Controllers\Backend\Plugin\PluginInstallController;
+
 Route::group(
     ['prefix' => 'plugins'],
     function () {
-        Route::get('/', 'Backend\PluginController@index')->name('admin.plugin');
-
-        Route::get('/get-data', 'Backend\PluginController@getDataTable')->name('admin.plugin.get-data');
-
-        Route::post('/bulk-actions', 'Backend\PluginController@bulkActions')->name('admin.plugin.bulk-actions');
+        Route::get('/', [PluginController::class, 'index'])->name('admin.plugin');
+        Route::get('/get-data', [PluginController::class, 'getDataTable'])->name('admin.plugin.get-data');
+        Route::post('/bulk-actions', [PluginController::class, 'bulkActions'])->name('admin.plugin.bulk-actions');
     }
 );
 
 Route::group(
     ['prefix' => 'plugin/install'],
     function () {
-        Route::get('/', 'Backend\PluginInstallController@index')->name('admin.plugin.install');
+        Route::get('/', [PluginInstallController::class, 'index'])
+            ->name('admin.plugin.install');
+        Route::get('/all', [PluginInstallController::class, 'getData'])
+            ->name('admin.plugin.install.all');
+        Route::post('/upload', [PluginInstallController::class, 'upload'])
+            ->name('admin.plugin.install.upload');
+    }
+);
 
-        Route::get('/all', 'Backend\PluginInstallController@getData')->name('admin.plugin.install.all');
-
-        Route::post('/upload', 'Backend\PluginInstallController@upload')->name('admin.plugin.install.upload');
+Route::group(
+    ['prefix' => 'plugin/editor'],
+    function () {
+        Route::get('/{plugin?}', [EditorController::class, 'index'])->name('admin.plugin.editor');
+        Route::get('/{plugin}/content', [EditorController::class, 'getFileContent'])
+            ->name('admin.plugin.editor.content');
+        Route::put('/{plugin}', [EditorController::class, 'save'])
+            ->name('admin.plugin.editor.save');
     }
 );

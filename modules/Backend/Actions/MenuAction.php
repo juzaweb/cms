@@ -201,7 +201,18 @@ class MenuAction extends Action
                     'icon' => 'fa fa-plus',
                     'position' => 1,
                     'parent' => 'plugins',
-                    'turbolinks' => false,
+                ]
+            );
+
+            HookAction::registerAdminPage(
+                'plugin.editor',
+                [
+                    'title' => trans('cms::app.editor'),
+                    'menu' => [
+                        'icon' => 'fa fa-plus',
+                        'position' => 99,
+                        'parent' => 'plugins',
+                    ]
                 ]
             );
         }
