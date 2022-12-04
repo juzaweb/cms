@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    $('#media-container').on('click', '.show-form-upload', function () {
+    let mediaContainer = $('#media-container');
+    mediaContainer.on('click', '.show-form-upload', function () {
         let form = $('.media-upload-form');
 
         if (form.is(':hidden')) {

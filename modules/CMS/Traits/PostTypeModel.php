@@ -18,6 +18,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Comment;
+use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostMeta;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Facades\HookAction;
@@ -70,6 +71,24 @@ trait PostTypeModel
             )->wherePublish();
 
         return apply_filters('post.selectFrontendBuilder', $builder);
+    }
+
+    public static function createFrontendDetailBuilder(): Builder
+    {
+        $builder = static::with(
+            [
+                'createdBy' => function ($q) {
+                    $q->cacheFor(3600);
+                },
+                'taxonomies' => function ($q) {
+                    $q->cacheFor(3600);
+                },
+            ]
+        )
+            ->cacheFor(3600)
+            ->whereIn('status', [Post::STATUS_PUBLISH, Post::STATUS_PRIVATE]);
+
+        return apply_filters('post.createFrontendBuilder', $builder);
     }
 
     /**
