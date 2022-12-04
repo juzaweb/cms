@@ -24,6 +24,9 @@ function loadFileEditor(file) {
                     oldModel.dispose();
                 }
 
+                let newUrl = themeEditUrl.replace('__THEME__', currentTheme)
+                    + "?file=" + file;
+                window.history.pushState({},"", newUrl);
                 $('.loading.editor').fadeOut({ duration: 200 });
             }
         }
@@ -39,7 +42,8 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.is-file', function () {
-        loadFileEditor($(this).data('path'));
+        file = $(this).data('path');
+        loadFileEditor(file);
         return false;
     });
 
@@ -49,12 +53,26 @@ $(document).ready(function() {
         loadFileEditor(file);
 
         $('#save-change').on('click', function () {
+            let btn = $(this);
+            let icon = btn.find('i').attr('class');
+
+            btn.find('i').attr('class', 'fa fa-spinner fa-spin');
+            btn.prop("disabled", true);
+
             ajaxRequest(saveUrl, {
                 content: editor.getValue(),
                 file: file,
             }, {
+                method: 'PUT',
                 callback: function (response) {
                     show_message(response);
+
+                    btn.find('i').attr('class', icon);
+                    btn.prop("disabled", false);
+                },
+                failCallback: function (response) {
+                    btn.find('i').attr('class', icon);
+                    btn.prop("disabled", false);
                 }
             });
         });

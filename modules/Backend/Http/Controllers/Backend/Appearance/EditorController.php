@@ -15,15 +15,16 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Juzaweb\Backend\Http\Requests\Theme\EditorRequest;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use TwigBridge\Facade\Twig;
 
 class EditorController extends BackendController
 {
-    protected array $supportExtensions = ['twig', 'js', 'css', 'json'];
+    protected array $editSupportExtensions = ['twig'];
 
     public function __construct(protected LocalThemeRepositoryContract $themeRepository)
     {
@@ -35,7 +36,7 @@ class EditorController extends BackendController
         $theme = $theme ?: jw_current_theme();
         $themePath = $this->themeRepository->find($theme)->getPath();
         $themes = $this->themeRepository->all();
-        $directories = $this->getThemeTree($themePath, convert_linux_path($themePath));
+        $directories = $this->getThemeTree("{$themePath}/views", convert_linux_path($themePath));
 
         $file = $this->getCurrentFile($request);
         $path = Crypt::decryptString($file);
@@ -55,7 +56,7 @@ class EditorController extends BackendController
         );
     }
 
-    public function getFileContent(Request $request, string $theme = null): JsonResponse
+    public function getFileContent(Request $request, string $theme): JsonResponse
     {
         $this->validate(
             $request,
@@ -64,55 +65,37 @@ class EditorController extends BackendController
             ]
         );
 
-        $theme = $theme ?: jw_current_theme();
         $file = Crypt::decryptString($request->get('file'));
         $file = str_replace('..', '', $file);
-        $themePath = $this->themeRepository->find($theme)->getPath();
+        $repository = $this->themeRepository->find($theme);
 
-        /*$content = ThemeEditor::where('path', $file)->first(['content']);
-
-        if (empty($content)) {
-            if (!file_exists($themePath.'/'.$file)) {
-                return abort(404);
-            }
-
-            $content = File::get($themePath.'/'.$file);
-        } else {
-            $content = $content->content;
-        }*/
-
-        if (!file_exists("{$themePath}/{$file}")) {
+        if (!$repository->fileExists($file)) {
             return abort(404);
         }
 
-        $content = File::get("{$themePath}/{$file}");
         return response()->json(
             [
-                'content' => $content,
+                'content' => $repository->getContents($file),
                 'language' => $this->getLanguageFile($file),
             ]
         );
     }
 
-    public function save(Request $request, string $theme): JsonResponse|RedirectResponse
+    public function save(EditorRequest $request, string $theme): JsonResponse|RedirectResponse
     {
-        $this->validate(
-            $request,
-            [
-                'file' => 'required',
-                'content' => 'required|string|max:10000',
-            ]
-        );
-
         $file = Crypt::decryptString($request->input('file'));
-        $content = $request->input('content');
+        $contents = $request->input('content');
+        $repository = $this->themeRepository->find($theme);
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
 
-        if (!in_array(pathinfo($file, PATHINFO_EXTENSION), $this->supportExtensions)) {
-            return abort(404);
+        if (!in_array($extension, $this->editSupportExtensions)) {
+            return $this->error("Unable to edit file {$extension}");
         }
 
+        /* Test render theme */
         try {
-            $temp = Twig::createTemplate($content, 'test');
+            ThemeLoader::set($theme);
+            $temp = Twig::createTemplate($contents, 'test');
             $temp->render();
         } catch (\Exception $e) {
             report($e);
@@ -123,25 +106,16 @@ class EditorController extends BackendController
             );
         }
 
-        $viewName = $this->getViewName($file);
-        DB::beginTransaction();
-        try {
-            ThemeEditor::updateOrCreate(
-                [
-                    'theme' => jw_current_theme(),
-                    'path' => $file,
-                ],
-                [
-                    'content' => $content,
-                    'view_name' => $viewName,
-                ]
+        $filePath = str_replace('views/', '', $file);
+        if (!is_dir(dirname($repository->getViewPublicPath($filePath)))) {
+            File::makeDirectory(
+                dirname($repository->getViewPublicPath($filePath)),
+                0664,
+                true
             );
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
         }
+
+        File::put($repository->getViewPublicPath($filePath), $contents);
 
         return $this->success(
             [
@@ -178,10 +152,6 @@ class EditorController extends BackendController
 
         $files = File::files($folder);
         foreach ($files as $file) {
-            if (!in_array($file->getExtension(), $this->supportExtensions)) {
-                continue;
-            }
-
             $path = str_replace(
                 $sourcePath.'/',
                 '',

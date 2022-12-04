@@ -3,6 +3,7 @@
 @section('header')
     <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/code-editor.min.css') }}" />
     <script>
+        const currentTheme = "{{ $theme }}";
         const themeEditUrl = "{{ route('admin.theme.editor', ['__THEME__']) }}";
         const loadFileUrl = "{{ route('admin.theme.editor.content', [$theme]) }}";
         const saveUrl = "{{ route('admin.theme.editor.save', [$theme]) }}";
