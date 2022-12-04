@@ -1,6 +1,6 @@
 @if(isset($item['children']))
 <li class="treeview-animated-items">
-    <a class="closed">
+    <a href="javascript:void(0)" class="closed">
         <i class="fa fa-angle-right"></i>
         <span>
             @if($item['type'] == 'dir')
@@ -15,6 +15,7 @@
         @foreach($item['children'] as $directory)
             @component('cms::backend.appearance.editor.components.tree_item', [
                 'item' => $directory,
+                'theme' => $theme
             ])
             @endcomponent
         @endforeach
@@ -22,8 +23,11 @@
 </li>
 @else
 <li>
-    <div class="treeview-animated-element">
-
+    <a
+        href="{{ route('admin.theme.editor', [$theme]) .'?file='. $item['path'] }}"
+        class="treeview-animated-element is-file"
+        data-path="{{ $item['path'] }}"
+    >
         @if($item['type'] == 'dir')
             <i class="fa fa-folder ic-w mx-1"></i>
         @else
@@ -31,6 +35,6 @@
         @endif
 
         {{ $item['name'] }}
-    </div>
+    </a>
 </li>
 @endif

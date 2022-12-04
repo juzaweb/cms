@@ -98,6 +98,10 @@ Route::group(
 Route::group(
     ['prefix' => 'theme/editor'],
     function () {
-        Route::get('/', [EditorController::class, 'index'])->name('admin.editor');
+        Route::get('/{theme?}', [EditorController::class, 'index'])->name('admin.theme.editor');
+        Route::get('/{theme}/content', [EditorController::class, 'getFileContent'])
+            ->name('admin.theme.editor.content');
+        Route::put('/{theme}', [EditorController::class, 'save'])
+            ->name('admin.theme.editor.save');
     }
 );

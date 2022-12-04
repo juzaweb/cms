@@ -11,13 +11,13 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use TwigBridge\Facade\Twig;
 
@@ -25,22 +25,21 @@ class EditorController extends BackendController
 {
     protected array $supportExtensions = ['twig', 'js', 'css', 'json'];
 
-    public function index(Request $request): View
+    public function __construct(protected LocalThemeRepositoryContract $themeRepository)
+    {
+    }
+
+    public function index(Request $request, string $theme = null): View
     {
         $title = trans('cms::app.theme_editor');
-        $themePath = Theme::find(jw_current_theme())->getPath();
-        $directories = $this->getThemeTree(
-            $themePath,
-            convert_linux_path($themePath)
-        );
+        $theme = $theme ?: jw_current_theme();
+        $themePath = $this->themeRepository->find($theme)->getPath();
+        $themes = $this->themeRepository->all();
+        $directories = $this->getThemeTree($themePath, convert_linux_path($themePath));
 
-        $file = $request->get(
-            'file',
-            Crypt::encryptString('views/index.twig')
-        );
-
+        $file = $this->getCurrentFile($request);
         $path = Crypt::decryptString($file);
-        if (!file_exists($themePath.'/'.$path)) {
+        if (!file_exists("{$themePath}/{$path}")) {
             return abort(404);
         }
 
@@ -49,12 +48,14 @@ class EditorController extends BackendController
             compact(
                 'title',
                 'directories',
-                'file'
+                'file',
+                'theme',
+                'themes'
             )
         );
     }
 
-    public function getFileContent(Request $request): \Illuminate\Http\JsonResponse
+    public function getFileContent(Request $request, string $theme = null): JsonResponse
     {
         $this->validate(
             $request,
@@ -63,11 +64,12 @@ class EditorController extends BackendController
             ]
         );
 
+        $theme = $theme ?: jw_current_theme();
         $file = Crypt::decryptString($request->get('file'));
         $file = str_replace('..', '', $file);
-        $themePath = Theme::getThemePath(jw_current_theme());
+        $themePath = $this->themeRepository->find($theme)->getPath();
 
-        $content = ThemeEditor::where('path', $file)->first(['content']);
+        /*$content = ThemeEditor::where('path', $file)->first(['content']);
 
         if (empty($content)) {
             if (!file_exists($themePath.'/'.$file)) {
@@ -77,17 +79,22 @@ class EditorController extends BackendController
             $content = File::get($themePath.'/'.$file);
         } else {
             $content = $content->content;
+        }*/
+
+        if (!file_exists("{$themePath}/{$file}")) {
+            return abort(404);
         }
 
+        $content = File::get("{$themePath}/{$file}");
         return response()->json(
             [
                 'content' => $content,
-                'language' => pathinfo($file, PATHINFO_EXTENSION),
+                'language' => $this->getLanguageFile($file),
             ]
         );
     }
 
-    public function save(Request $request)
+    public function save(Request $request, string $theme): JsonResponse|RedirectResponse
     {
         $this->validate(
             $request,
@@ -108,8 +115,7 @@ class EditorController extends BackendController
             $temp = Twig::createTemplate($content, 'test');
             $temp->render();
         } catch (\Exception $e) {
-            Log::error($e);
-
+            report($e);
             return $this->error(
                 [
                     'message' => $e->getMessage(),
@@ -118,9 +124,6 @@ class EditorController extends BackendController
         }
 
         $viewName = $this->getViewName($file);
-
-        global $site;
-
         DB::beginTransaction();
         try {
             ThemeEditor::updateOrCreate(
@@ -133,10 +136,6 @@ class EditorController extends BackendController
                     'view_name' => $viewName,
                 ]
             );
-
-            if ($viewName) {
-                Cache::store('file')->pull("template_{$viewName}".$site->id);
-            }
 
             DB::commit();
         } catch (\Exception $e) {
@@ -151,7 +150,7 @@ class EditorController extends BackendController
         );
     }
 
-    protected function getViewName($file)
+    protected function getViewName($file): ?string
     {
         $extension = pathinfo($file, PATHINFO_EXTENSION);
         if ($extension != 'twig') {
@@ -165,7 +164,7 @@ class EditorController extends BackendController
         return 'theme::'.$view;
     }
 
-    protected function getThemeTree($folder, $sourcePath)
+    protected function getThemeTree($folder, $sourcePath): array
     {
         $result = [];
         $directories = File::directories($folder);
@@ -197,5 +196,23 @@ class EditorController extends BackendController
         }
 
         return $result;
+    }
+
+    protected function getLanguageFile(string $file): string
+    {
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+        return match ($extension) {
+            'js' => 'javascript',
+            default => $extension,
+        };
+    }
+
+    protected function getCurrentFile(Request $request): string
+    {
+        return $request->get(
+            'file',
+            Crypt::encryptString('views/index.twig')
+        );
     }
 }

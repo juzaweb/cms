@@ -3,8 +3,9 @@
 @section('header')
     <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/code-editor.min.css') }}" />
     <script>
-        const loadFileUrl = "";
-        const saveUrl = "";
+        const themeEditUrl = "{{ route('admin.theme.editor', ['__THEME__']) }}";
+        const loadFileUrl = "{{ route('admin.theme.editor.content', [$theme]) }}";
+        const saveUrl = "{{ route('admin.theme.editor.save', [$theme]) }}";
         const monacoFolder = "{{ asset('jw-styles/juzaweb/monaco-editor/min/vs') }}";
         let file = "{{ $file }}";
     </script>
@@ -18,8 +19,14 @@
         </div>
 
         <div class="col-md-3">
-            <select id="change-theme" class="form-control">
-                <option value=""></option>
+            <button type="button" class="btn btn-success" id="save-change">
+                <i class="fa fa-save"></i> {{ trans('cms::app.save_change') }}
+            </button>
+
+            <select id="change-theme" class="form-control mt-2">
+                @foreach($themes as $name => $info)
+                    <option value="{{ $name }}" @if($name == $theme) selected @endif>{{ $info->get('title') }}</option>
+                @endforeach
             </select>
 
             <div class="treeview-animated mt-2 w-20 border">
@@ -29,20 +36,11 @@
                     @foreach($directories as $directory)
                         @component('cms::backend.appearance.editor.components.tree_item', [
                             'item' => $directory,
+                            'theme' => $theme
                         ])
                         @endcomponent
                     @endforeach
                 </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-3 mb-3">
-        <div class="col-md-6">
-            <div class="btn-group">
-                <button type="submit" class="btn btn-success px-5">
-                    <i class="fa fa-save"></i> {{ trans('cms::app.save_change') }}
-                </button>
             </div>
         </div>
     </div>

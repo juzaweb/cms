@@ -1,10 +1,13 @@
 let editor = null;
 
 function loadFileEditor(file) {
+    $('.loading.editor').show();
+
     ajaxRequest(
-        loadFileUrl + "?file={{ $file }}",
+        loadFileUrl + "?file="+ file,
         {},
         {
+            method: 'GET',
             callback: function (data) {
                 if (!editor) {
                     $('#editor').empty();
@@ -20,6 +23,8 @@ function loadFileEditor(file) {
                 if (oldModel) {
                     oldModel.dispose();
                 }
+
+                $('.loading.editor').fadeOut({ duration: 200 });
             }
         }
     );
@@ -28,15 +33,25 @@ function loadFileEditor(file) {
 $(document).ready(function() {
     $('.treeview-animated').mdbTreeview();
 
+    $(document).on('change', '#change-theme', function () {
+        window.location = themeEditUrl.replace('__THEME__', $(this).val());
+        return false;
+    });
+
+    $(document).on('click', '.is-file', function () {
+        loadFileEditor($(this).data('path'));
+        return false;
+    });
+
     require.config({ paths: { vs: monacoFolder } });
 
     require(['vs/editor/editor.main'], function () {
-        loadFileEditor(file)
+        loadFileEditor(file);
 
         $('#save-change').on('click', function () {
             ajaxRequest(saveUrl, {
                 content: editor.getValue(),
-                file: file
+                file: file,
             }, {
                 callback: function (response) {
                     show_message(response);
