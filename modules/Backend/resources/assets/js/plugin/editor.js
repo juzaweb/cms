@@ -4,7 +4,7 @@ function loadFileEditor(file) {
     $('.loading.editor').show();
 
     ajaxRequest(
-        loadFileUrl + "?file="+ file,
+        loadFileUrl + "&file="+ file,
         {},
         {
             method: 'GET',
@@ -28,8 +28,7 @@ function loadFileEditor(file) {
                     oldModel.dispose();
                 }
 
-                let newUrl = themeEditUrl.replace('__THEME__', currentTheme)
-                    + "?file=" + file;
+                let newUrl = pluginEditUrl.replace('__PLUGIN__', currentPlugin) + "&file=" + file;
                 window.history.pushState({},"", newUrl);
                 $('.loading.editor').fadeOut({ duration: 200 });
             }
@@ -40,8 +39,8 @@ function loadFileEditor(file) {
 $(document).ready(function() {
     $('.treeview-animated').mdbTreeview();
 
-    $(document).on('change', '#change-theme', function () {
-        window.location = themeEditUrl.replace('__THEME__', $(this).val());
+    $(document).on('change', '#change-plugin', function () {
+        window.location = pluginEditUrl.replace('__PLUGIN__', $(this).val());
         return false;
     });
 
@@ -65,6 +64,7 @@ $(document).ready(function() {
 
             ajaxRequest(saveUrl, {
                 content: editor.getValue(),
+                plugin: currentPlugin,
                 file: file,
             }, {
                 method: 'PUT',

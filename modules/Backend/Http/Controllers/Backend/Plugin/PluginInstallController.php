@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Plugin;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;

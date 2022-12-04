@@ -12,7 +12,8 @@
                     'label' => trans('cms::app.code'),
                     'name' => 'code',
                     'value' => $model->code,
-                    'required' => true
+                    'required' => true,
+                    'readonly' => $model->code ? true : false
                 ])
                 @endcomponent
 
@@ -24,9 +25,10 @@
                 ])
                 @endcomponent
 
-                @component('cms::components.form_textarea', [
+                @component('cms::components.form_ckeditor', [
                     'label' => trans('cms::app.body'),
                     'name' => 'body',
+                    'id' => 'body',
                     'value' => $model->body
                 ])
                 @endcomponent

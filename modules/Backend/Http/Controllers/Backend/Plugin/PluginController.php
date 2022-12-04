@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Plugin;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -11,14 +11,13 @@ use Illuminate\Support\Facades\URL;
 use Juzaweb\Backend\Events\AfterPluginBulkAction;
 use Juzaweb\Backend\Events\DumpAutoloadPlugin;
 use Juzaweb\Backend\Http\Requests\Plugin\BulkActionRequest;
+use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Facades\CacheGroup;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\ArrayPagination;
-use Juzaweb\CMS\Contracts\JuzawebApiContract;
-use Juzaweb\CMS\Support\Updater\PluginUpdater;
-use Juzaweb\CMS\Version;
 use Juzaweb\CMS\Support\Plugin as SupportPlugin;
+use Juzaweb\CMS\Version;
 
 class PluginController extends BackendController
 {

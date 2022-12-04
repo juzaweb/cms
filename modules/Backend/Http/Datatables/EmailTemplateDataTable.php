@@ -28,13 +28,13 @@ class EmailTemplateDataTable extends DataTable
     public function columns(): array
     {
         return [
-            'subject' => [
-                'label' => trans('cms::app.subject'),
+            'code' => [
+                'label' => trans('cms::app.email'),
                 'formatter' => [$this, 'rowActionsFormatter'],
             ],
-            'code' => [
-                'label' => trans('cms::app.code'),
-                'width' => '15%',
+            'subject' => [
+                'label' => trans('cms::app.subject'),
+                'width' => '30%',
             ],
             'created_at' => [
                 'label' => trans('cms::app.created_at'),

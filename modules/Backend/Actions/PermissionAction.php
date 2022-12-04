@@ -66,8 +66,8 @@ class PermissionAction extends Action
             'roles',
             [
                 'icon' => 'fa fa-users',
-                'position' => 30,
-                'parent' => 'users',
+                'position' => 45,
+                'parent' => 'managements',
             ]
         );
     }

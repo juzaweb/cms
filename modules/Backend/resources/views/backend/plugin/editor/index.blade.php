@@ -3,14 +3,14 @@
 @section('header')
     <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/code-editor.min.css') }}" />
     <script>
-        const currentTheme = "{{ $theme }}";
-        const themeEditUrl = "{{ route('admin.theme.editor', ['__THEME__']) }}";
-        const loadFileUrl = "{{ route('admin.theme.editor.content', [$theme]) }}";
-        const saveUrl = "{{ route('admin.theme.editor.save', [$theme]) }}";
+        const currentPlugin = "{{ $plugin }}";
+        const pluginEditUrl = "{{ route('admin.plugin.editor') }}?plugin=__PLUGIN__";
+        const loadFileUrl = "{{ route('admin.plugin.editor.content') }}?plugin={{ $plugin }}";
+        const saveUrl = "{{ route('admin.plugin.editor.save') }}";
         const monacoFolder = "{{ asset('jw-styles/juzaweb/monaco-editor/min/vs') }}";
         let file = "{{ $file }}";
     </script>
-    <script src="{{ asset('jw-styles/juzaweb/js/theme-editor.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/plugin-editor.min.js') }}"></script>
 @endsection
 
 @section('content')
@@ -24,9 +24,9 @@
                 <i class="fa fa-save"></i> {{ trans('cms::app.save_change') }}
             </button>
 
-            <select id="change-theme" class="form-control mt-2">
-                @foreach($themes as $name => $info)
-                    <option value="{{ $name }}" @if($name == $theme) selected @endif>{{ $info->get('title') }}</option>
+            <select id="change-plugin" class="form-control mt-2">
+                @foreach($plugins as $name => $info)
+                    <option value="{{ $name }}" @if($name == $plugin) selected @endif>{{ $info->get('name') }}</option>
                 @endforeach
             </select>
 
@@ -35,9 +35,9 @@
                 <hr>
                 <ul class="treeview-animated-list mb-3">
                     @foreach($directories as $directory)
-                        @component('cms::backend.appearance.editor.components.tree_item', [
+                        @component('cms::backend.plugin.editor.components.tree_item', [
                             'item' => $directory,
-                            'theme' => $theme
+                            'plugin' => $plugin
                         ])
                         @endcomponent
                     @endforeach
