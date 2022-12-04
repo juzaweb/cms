@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Facade;
 use Juzaweb\CMS\Contracts\Field as FieldContract;
 
 /**
+ * @method static fieldByType($fields)
  * @method static render($metas, $model, $collection = false)
  * @method static select(string|Model $label, ?string $name, ?array $options = [])
  * @method static text(string|Model $label, ?string $name, ?array $options = [])

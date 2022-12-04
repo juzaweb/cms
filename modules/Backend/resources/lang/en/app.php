@@ -450,6 +450,7 @@ return [
     'sort_by' => 'Sort by',
     'sort_order' => 'Sort order',
     'view_post' => 'View post',
+    'custom' => 'Custom',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',
@@ -554,5 +555,11 @@ return [
         'upload_from_url' => 'Upload from url',
         'download_to_server' => 'Download file to server',
         'upload_file' => 'Upload file',
+    ],
+    'general_settings' => [
+        'custom_time_format' => 'Custom time format',
+        'custom_date_format' => 'Custom date format',
+        'time_formatting_documentation' => 'Documentation on date and time formatting',
+        'enter_a_custom_date' => 'enter a custom date format in the following field',
     ]
 ];

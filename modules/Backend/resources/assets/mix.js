@@ -3,21 +3,21 @@ const mix = require('laravel-mix');
 const baseAsset = 'modules/Backend/resources/assets';
 const basePublish = baseAsset + '/public';
 
-// mix.combine(
-//      [
-//          'modules/Backend/resources/assets/vendors/mdb.min.js',
-//          'modules/Backend/resources/assets/public/monaco-editor/min/vs/loader.js',
-//          'modules/Backend/resources/assets/js/appearance/editor.js',
-//      ],
-//     `${basePublish}/js/code-editor.min.js`
-// );
-//
-// mix.styles(
-//     [
-//         'modules/Backend/resources/assets/css/appearance/editor.css',
-//     ],
-//     `${basePublish}/css/code-editor.min.css`
-// );
+mix.combine(
+     [
+         'modules/Backend/resources/assets/vendors/mdb.min.js',
+         'modules/Backend/resources/assets/public/monaco-editor/min/vs/loader.js',
+         'modules/Backend/resources/assets/js/appearance/editor.js',
+     ],
+    `${basePublish}/js/code-editor.min.js`
+);
+
+mix.styles(
+    [
+        'modules/Backend/resources/assets/css/appearance/editor.css',
+    ],
+    `${basePublish}/css/code-editor.min.css`
+);
 
 mix.styles(
     [
