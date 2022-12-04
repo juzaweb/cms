@@ -207,40 +207,20 @@ class MenuAction extends Action
         }
 
         HookAction::addAdminMenu(
-            trans('cms::app.users'),
-            'users',
-            [
-                'icon' => 'fa fa-user-circle-o',
-                'position' => 60,
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.all_users'),
-            'users',
-            [
-                'icon' => 'fa fa-user-circle-o',
-                'position' => 1,
-                'parent' => 'users',
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.add_new'),
-            'users.create',
-            [
-                'icon' => 'fa fa-plus',
-                'position' => 1,
-                'parent' => 'users',
-            ]
-        );
-
-        HookAction::addAdminMenu(
             trans('cms::app.setting'),
             'setting',
             [
                 'icon' => 'fa fa-cogs',
                 'position' => 70,
+            ]
+        );
+
+        HookAction::addAdminMenu(
+            trans('cms::app.managements'),
+            'managements',
+            [
+                'icon' => 'fa fa-cogs',
+                'position' => 75,
             ]
         );
 
@@ -255,12 +235,22 @@ class MenuAction extends Action
         );
 
         HookAction::addAdminMenu(
+            trans('cms::app.users'),
+            'users',
+            [
+                'icon' => 'fa fa-user-circle-o',
+                'position' => 40,
+                'parent' => 'managements',
+            ]
+        );
+
+        HookAction::addAdminMenu(
             trans('cms::app.email_templates'),
             'email-template',
             [
                 'icon' => 'fa fa-envelope',
                 'position' => 50,
-                'parent' => 'setting',
+                'parent' => 'managements',
             ]
         );
 
@@ -270,7 +260,7 @@ class MenuAction extends Action
             [
                 'icon' => 'fa fa-cogs',
                 'position' => 51,
-                'parent' => 'setting',
+                'parent' => 'managements',
             ]
         );
     }

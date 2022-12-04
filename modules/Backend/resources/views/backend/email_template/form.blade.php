@@ -24,9 +24,10 @@
                 ])
                 @endcomponent
 
-                @component('cms::components.form_textarea', [
+                @component('cms::components.form_ckeditor', [
                     'label' => trans('cms::app.body'),
                     'name' => 'body',
+                    'id' => 'body',
                     'value' => $model->body
                 ])
                 @endcomponent

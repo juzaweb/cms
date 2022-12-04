@@ -451,6 +451,9 @@ return [
     'sort_order' => 'Sort order',
     'view_post' => 'View post',
     'custom' => 'Custom',
+    'managements' => 'Managements',
+    'upload_theme' => 'Upload Theme',
+    'upload_plugin' => 'Upload Plugin',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',
@@ -495,8 +498,6 @@ return [
         ],
         'done' => 'Done!!'
     ],
-    'upload_theme' => 'Upload Theme',
-    'upload_plugin' => 'Upload Plugin',
     'theme_upload' => [
         'error' => [
             'mime_type' => 'Invalid file mime type.',
@@ -561,5 +562,5 @@ return [
         'custom_date_format' => 'Custom date format',
         'time_formatting_documentation' => 'Documentation on date and time formatting',
         'enter_a_custom_date' => 'enter a custom date format in the following field',
-    ]
+    ],
 ];
