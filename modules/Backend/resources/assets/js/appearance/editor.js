@@ -11,9 +11,13 @@ function loadFileEditor(file) {
             callback: function (data) {
                 if (!editor) {
                     $('#editor').empty();
-                    editor = monaco.editor.create(document.getElementById('editor'), {
-                        model: null
-                    });
+                    editor = monaco.editor.create(
+                        document.getElementById('editor'),
+                        {
+                            model: null,
+                            theme: 'vs-dark',
+                        }
+                    );
                 }
 
                 let oldModel = editor.getModel();
