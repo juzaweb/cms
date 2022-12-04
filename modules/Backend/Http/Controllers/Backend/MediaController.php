@@ -21,6 +21,7 @@ use Juzaweb\Backend\Events\AddFolderSuccess;
 use Juzaweb\Backend\Http\Requests\Media\AddFolderRequest;
 use Juzaweb\Backend\Repositories\MediaFileRepository;
 use Juzaweb\Backend\Repositories\MediaFolderRepository;
+use Juzaweb\CMS\Facades\Facades;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\MediaFolder;
@@ -134,7 +135,8 @@ class MediaController extends BackendController
         $query = MediaFile::whereFolderId($folderId);
 
         if ($sQuery->get('type')) {
-            $query->where('type', '=', $sQuery->get('type'));
+            $extensions = $this->getTypeExtensions($sQuery->get('type'));
+            $query->whereIn('extension', $extensions);
         }
 
         $query->orderBy('id', 'DESC');
@@ -154,5 +156,18 @@ class MediaController extends BackendController
         $query = MediaFolder::whereFolderId($folderId);
 
         return $query->get();
+    }
+
+    protected function getTypeExtensions(string $type)
+    {
+        $extensions = config("juzaweb.filemanager.types.{$type}.extensions");
+        if (empty($extensions)) {
+            $extensions = match ($type) {
+                'file' => Facades::defaultFileExtensions(),
+                'image' => Facades::defaultImageExtensions(),
+            };
+        }
+
+        return $extensions;
     }
 }
