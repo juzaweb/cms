@@ -110,7 +110,7 @@ class EditorController extends BackendController
         if (!is_dir(dirname($repository->getViewPublicPath($filePath)))) {
             File::makeDirectory(
                 dirname($repository->getViewPublicPath($filePath)),
-                0664,
+                0775,
                 true
             );
         }
