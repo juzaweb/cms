@@ -12,7 +12,8 @@
                     'label' => trans('cms::app.code'),
                     'name' => 'code',
                     'value' => $model->code,
-                    'required' => true
+                    'required' => true,
+                    'readonly' => $model->code ? true : false
                 ])
                 @endcomponent
 
