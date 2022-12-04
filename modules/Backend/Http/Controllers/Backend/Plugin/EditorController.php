@@ -28,14 +28,14 @@ class EditorController extends BackendController
     {
     }
 
-    public function index(Request $request, string $plugin = null): View
+    public function index(Request $request): View
     {
         $title = trans('cms::app.plugin_editor');
-        $plugin = $plugin ?: 'juzaweb/example';
+        $plugin = $request->query('plugin', 'juzaweb/example');
         $repository = $this->pluginRepository->find($plugin);
         $plugins = $this->pluginRepository->all();
-        $pluginPath = $repository->getPath();
-        $directories = $this->getTree($pluginPath, convert_linux_path($pluginPath));
+        $pluginPath = convert_linux_path($repository->getPath());
+        $directories = $this->getTree($pluginPath, $pluginPath);
 
         $file = $this->getCurrentFile($request);
         $path = Crypt::decryptString($file);
@@ -55,15 +55,17 @@ class EditorController extends BackendController
         );
     }
 
-    public function getFileContent(Request $request, string $plugin): JsonResponse
+    public function getFileContent(Request $request): JsonResponse
     {
         $this->validate(
             $request,
             [
                 'file' => 'required',
+                'plugin' => 'required'
             ]
         );
 
+        $plugin = $request->query('plugin', 'juzaweb/example');
         $file = Crypt::decryptString($request->get('file'));
         $file = str_replace('..', '', $file);
         $repository = $this->pluginRepository->find($plugin);
@@ -80,24 +82,27 @@ class EditorController extends BackendController
         );
     }
 
-    public function save(EditorRequest $request, string $plugin): JsonResponse|RedirectResponse
+    public function save(EditorRequest $request): JsonResponse|RedirectResponse
     {
+        $plugin = $request->input('plugin', 'juzaweb/example');
         $file = Crypt::decryptString($request->input('file'));
         $contents = $request->input('content');
         $repository = $this->pluginRepository->find($plugin);
         $extension = pathinfo($file, PATHINFO_EXTENSION);
 
         if (!in_array($extension, $this->editSupportExtensions)) {
-            return $this->error("Unable to edit file {$extension}");
+            return $this->error("Unable to edit file {$extension}.");
         }
 
-        File::makeDirectory(
-            dirname($repository->getViewPublicPath($file)),
-            0775,
-            true
-        );
+        if (!is_dir(dirname($repository->getPath($file)))) {
+            File::makeDirectory(
+                dirname($repository->getPath($file)),
+                0775,
+                true
+            );
+        }
 
-        File::put($repository->getViewPublicPath($file), $contents);
+        File::put($repository->getPath($file), $contents);
 
         return $this->success(
             [
@@ -120,7 +125,11 @@ class EditorController extends BackendController
 
         $files = File::files($folder);
         foreach ($files as $file) {
-            $path = str_replace("{$sourcePath}/", '', convert_linux_path($file->getRealPath()));
+            $path = str_replace(
+                convert_linux_path(realpath($sourcePath)) . '/',
+                '',
+                convert_linux_path($file->getRealPath())
+            );
 
             $result[] = [
                 'type' => 'file',

@@ -3,13 +3,14 @@
 @section('header')
     <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/code-editor.min.css') }}" />
     <script>
-        const pluginEditUrl = "{{ route('admin.plugin.editor', ['__THEME__']) }}";
-        const loadFileUrl = "{{ route('admin.plugin.editor.content', [$plugin]) }}";
-        const saveUrl = "{{ route('admin.plugin.editor.save', [$plugin]) }}";
+        const currentPlugin = "{{ $plugin }}";
+        const pluginEditUrl = "{{ route('admin.plugin.editor') }}?plugin=__PLUGIN__";
+        const loadFileUrl = "{{ route('admin.plugin.editor.content') }}?plugin={{ $plugin }}";
+        const saveUrl = "{{ route('admin.plugin.editor.save') }}";
         const monacoFolder = "{{ asset('jw-styles/juzaweb/monaco-editor/min/vs') }}";
         let file = "{{ $file }}";
     </script>
-    <script src="{{ asset('jw-styles/juzaweb/js/code-editor.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/plugin-editor.min.js') }}"></script>
 @endsection
 
 @section('content')

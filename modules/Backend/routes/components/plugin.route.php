@@ -36,10 +36,11 @@ Route::group(
 Route::group(
     ['prefix' => 'plugin/editor'],
     function () {
-        Route::get('/{plugin?}', [EditorController::class, 'index'])->name('admin.plugin.editor');
-        Route::get('/{plugin}/content', [EditorController::class, 'getFileContent'])
+        Route::get('/', [EditorController::class, 'index'])
+            ->name('admin.plugin.editor');
+        Route::get('/content', [EditorController::class, 'getFileContent'])
             ->name('admin.plugin.editor.content');
-        Route::put('/{plugin}', [EditorController::class, 'save'])
+        Route::put('/', [EditorController::class, 'save'])
             ->name('admin.plugin.editor.save');
     }
 );

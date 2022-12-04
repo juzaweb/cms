@@ -5,8 +5,6 @@
         <span>
             @if($item['type'] == 'dir')
                 <i class="fa fa-folder ic-w mx-1"></i>
-            @else
-                <i class="fa fa-file-o ic-w mx-1"></i>
             @endif
             {{ $item['name'] }}
         </span>
@@ -30,8 +28,6 @@
     >
         @if($item['type'] == 'dir')
             <i class="fa fa-folder ic-w mx-1"></i>
-        @else
-            <i class="fa fa-file-o ic-w mx-1"></i>
         @endif
 
         {{ $item['name'] }}

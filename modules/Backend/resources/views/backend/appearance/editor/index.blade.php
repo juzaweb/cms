@@ -10,7 +10,7 @@
         const monacoFolder = "{{ asset('jw-styles/juzaweb/monaco-editor/min/vs') }}";
         let file = "{{ $file }}";
     </script>
-    <script src="{{ asset('jw-styles/juzaweb/js/code-editor.min.js') }}"></script>
+    <script src="{{ asset('jw-styles/juzaweb/js/theme-editor.min.js') }}"></script>
 @endsection
 
 @section('content')
