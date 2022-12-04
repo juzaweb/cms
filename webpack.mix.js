@@ -37,14 +37,10 @@ if (process.env.npm_config_plugin) {
 mix.browserSync({
     files: [
         'modules/**/*.blade.php',
-        'modules/**/*.js',
-        'modules/**/*.css',
         'plugins/**/*.blade.php',
-        'plugins/**/*.js',
-        'plugins/**/*.css',
+        'public/**/*.js',
+        'public/**/*.css',
         'themes/**/*.twig',
-        'themes/**/*.js',
-        'themes/**/*.css',
         'resources/views/**/*.blade.php',
     ],
     proxy: process.env.APP_URL,

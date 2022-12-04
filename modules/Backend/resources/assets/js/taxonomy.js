@@ -40,11 +40,11 @@ $(document).ready(function () {
         });
     });
 
-    $('body').on('click', '.remove-tag-item', function () {
+    $(document).on('click', '.remove-tag-item', function () {
         $(this).closest('.tag').remove();
     });
 
-    $('body').on('click', '.form-add-taxonomy button', function () {
+    $(document).on('click', '.form-add-taxonomy button', function () {
         let btn = $(this);
         let taxForm = btn.closest('.form-add');
         let name = taxForm.find('.taxonomy-name').val();
@@ -68,7 +68,6 @@ $(document).ready(function () {
                 taxonomy: taxonomy,
             }
         }).done(function(response) {
-
             btn.find('i').attr('class', icon);
             btn.prop("disabled", false);
 
@@ -77,21 +76,43 @@ $(document).ready(function () {
                 return false;
             }
 
-            btn.closest('.form-taxonomy')
-                .find('.show-tags')
-                .append(response.data.html);
+            let addForm = btn.closest('.form-taxonomy').find('.show-tags');
+            if (addForm.length) {
+                addForm.append(response.data.html);
+            } else {
+                let res = response.data.item;
+                let htmlItem = `<li class="m-1" id="item-category-${res.id}">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="${res.taxonomy}[]" class="custom-control-input" id="${res.taxonomy}-${res.id}" value="${res.id}" checked>
+                        <label class="custom-control-label" for="${res.taxonomy}-${res.id}">${res.name}</label>
+                    </div>
+                </li>`;
+
+                if (parent) {
+                    addForm = btn.closest('.form-taxonomy').find('.show-taxonomies ul #item-category-'+res.parent_id+' ul:first');
+                    if (addForm.length) {
+                        addForm.append(htmlItem);
+                    } else {
+                        htmlItem = '<ul class="mt-2 p-0">'+htmlItem+'</ul>';
+                        btn.closest('.form-taxonomy').find('.show-taxonomies ul #item-category-'+res.parent_id)
+                            .append(htmlItem);
+                    }
+                } else {
+                    btn.closest('.form-taxonomy')
+                        .find('.show-taxonomies ul:first')
+                        .append(htmlItem);
+                }
+            }
 
             taxForm.find('.taxonomy-name').val('');
             if (parent) {
-                taxForm.find('.taxonomy-parent').val(null)
-                    .trigger('change.select2');
+                taxForm.find('.taxonomy-parent').val(null).trigger('change.select2');
             }
 
             return false;
         }).fail(function(response) {
             btn.find('i').attr('class', icon);
             btn.prop("disabled", false);
-
             show_message(response);
             return false;
         });

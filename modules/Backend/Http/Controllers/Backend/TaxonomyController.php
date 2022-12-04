@@ -2,9 +2,11 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Facades\GlobalData;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -20,9 +22,9 @@ class TaxonomyController extends BackendController
         store as TraitStore;
     }
 
-    protected $viewPrefix = 'cms::backend.taxonomy';
+    protected string $viewPrefix = 'cms::backend.taxonomy';
 
-    protected function getDataTable(...$params)
+    protected function getDataTable(...$params): TaxonomyDataTable
     {
         $postType = $params[0];
         $taxonomy = $params[1];
@@ -32,31 +34,41 @@ class TaxonomyController extends BackendController
         return $dataTable;
     }
 
-    public function storeSuccessResponse($model, $request, ...$params)
+    public function storeSuccessResponse($model, $request, ...$params): JsonResponse|RedirectResponse
     {
-        $postType = $params[0];
         $taxonomy = $params[1];
 
-        return $this->success([
-            'message' => trans('cms::app.successfully'),
-            'html' => view('cms::components.tag-item', [
+        return $this->success(
+            [
+                'message' => trans('cms::app.successfully'),
                 'item' => $model,
-                'name' => $taxonomy,
-            ])->render(),
-        ]);
+                'html' => view(
+                    'cms::components.tag-item',
+                    [
+                        'item' => $model,
+                        'name' => $taxonomy,
+                    ]
+                )->render(),
+            ]
+        );
     }
 
-    public function getTagComponent(Request $request, $postType, $taxonomy)
+    public function getTagComponent(Request $request, $postType, $taxonomy): JsonResponse|RedirectResponse
     {
         $item = Taxonomy::findOrFail($request->input('id'));
 
-        return $this->response([
-            'html' => view('cms::components.tag-item', [
-                'item' => $item,
-                'name' => $taxonomy,
-            ])
-                ->render(),
-        ], true);
+        return $this->response(
+            [
+                'html' => view(
+                    'cms::components.tag-item',
+                    [
+                        'item' => $item,
+                        'name' => $taxonomy,
+                    ]
+                )->render(),
+            ],
+            true
+        );
     }
 
     /**
@@ -65,7 +77,7 @@ class TaxonomyController extends BackendController
      * @param string $postType
      * @return string
      */
-    protected function getPostType($postType)
+    protected function getPostType(string $postType): string
     {
         return Str::plural($postType);
     }
@@ -73,10 +85,11 @@ class TaxonomyController extends BackendController
     /**
      * Get taxonomy setting
      *
+     * @param $postType
      * @param string $taxonomy
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
-    protected function getSetting($postType, $taxonomy)
+    protected function getSetting($postType, string $taxonomy): Collection
     {
         $taxonomies = GlobalData::get('taxonomies');
 
@@ -87,9 +100,10 @@ class TaxonomyController extends BackendController
      * Validator for store and update
      *
      * @param array $attributes
-     * @return Validator|array
+     * @param mixed ...$params
+     * @return array
      */
-    protected function validator(array $attributes, ...$params)
+    protected function validator(array $attributes, ...$params): array
     {
         return [
             'name' => 'required',
@@ -101,7 +115,7 @@ class TaxonomyController extends BackendController
      *
      * @return string // namespace model
      */
-    protected function getModel(...$params)
+    protected function getModel(...$params): string
     {
         return Taxonomy::class;
     }
@@ -109,9 +123,10 @@ class TaxonomyController extends BackendController
     /**
      * Get title resource
      *
+     * @param mixed ...$params
      * @return string
      */
-    protected function getTitle(...$params)
+    protected function getTitle(...$params): string
     {
         $postType = $params[0];
         $taxonomy = $params[1];
@@ -121,7 +136,7 @@ class TaxonomyController extends BackendController
         return $setting->get('label');
     }
 
-    protected function getDataForIndex(...$params)
+    protected function getDataForIndex(...$params): array
     {
         $postType = $params[0];
         $taxonomy = $params[1];
@@ -132,7 +147,7 @@ class TaxonomyController extends BackendController
         return $data;
     }
 
-    protected function getDataForForm($model, ...$params)
+    protected function getDataForForm($model, ...$params): array
     {
         $postType = $params[0];
         $taxonomy = $params[1];
@@ -155,7 +170,7 @@ class TaxonomyController extends BackendController
         $this->authorize($ability, $arguments);
     }
 
-    protected function hasPermission($ability, $arguments = [], ...$params)
+    protected function hasPermission($ability, $arguments = [], ...$params): bool
     {
         if (!is_array($arguments)) {
             $arguments = [$arguments];
