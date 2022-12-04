@@ -289,6 +289,8 @@ return [
     'all_type' => 'All type',
     'search_by_name' => 'Search by name',
     'folder_name' => 'Folder name',
+    'folder' => 'Folder',
+    'folders' => 'Folders',
     'add_folder' => 'Add Folder',
     'media' => 'Media',
     'upload' => 'Upload',
@@ -551,6 +553,6 @@ return [
     'file_manager' => [
         'upload_from_url' => 'Upload from url',
         'download_to_server' => 'Download file to server',
-        'upload_file' => 'Upload file'
+        'upload_file' => 'Upload file',
     ]
 ];

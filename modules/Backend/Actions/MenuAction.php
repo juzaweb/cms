@@ -12,7 +12,6 @@ namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\ThemeLoader;
@@ -101,7 +100,7 @@ class MenuAction extends Action
             ]
         );
 
-        if (config('juzaweb.plugin.enable_upload')) {
+        if (config('juzaweb.theme.enable_upload')) {
             HookAction::addAdminMenu(
                 trans('cms::app.add_new'),
                 'theme.install',
@@ -109,7 +108,18 @@ class MenuAction extends Action
                     'icon' => 'fa fa-plus',
                     'position' => 1,
                     'parent' => 'appearance',
-                    'turbolinks' => false,
+                ]
+            );
+
+            HookAction::registerAdminPage(
+                'theme.editor',
+                [
+                    'title' => trans('cms::app.editor'),
+                    'menu' => [
+                        'icon' => 'fa fa-plus',
+                        'position' => 99,
+                        'parent' => 'appearance',
+                    ]
                 ]
             );
         }
@@ -290,7 +300,7 @@ class MenuAction extends Action
 
     public function addPostTypes()
     {
-        $templates = (array) ThemeLoader::getTemplates(jw_current_theme());
+        $templates = ThemeLoader::getTemplates(jw_current_theme());
         $data = [
             'options' => ['' => trans('cms::app.choose_template')],
         ];
@@ -448,21 +458,15 @@ class MenuAction extends Action
 
         if (version_compare($versionAvailable, $currentVersion, '>')) {
             $notify = new Notification();
-
             $notify->setUsers(
                 User::where('is_admin', 1)
                     ->active()
                     ->get()
             );
-
             $notify->setSubject('New Version CMS Available !');
-
             $notify->setBody('CMS has a new version, update now!');
-
             $notify->setUrl(route('admin.update'));
-
             $notify->send();
-
             Cache::store('file')->forever($key, $versionAvailable);
         } else {
             Cache::store('file')->put($key, 1, 3600);
