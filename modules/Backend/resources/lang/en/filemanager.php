@@ -18,6 +18,7 @@ return [
     'menu-crop' => 'Crop',
     'menu-move' => 'Move',
     'menu-multiple' => 'Multi-selection',
+    'folder-name' => 'Folder name',
 
     'title-page' => 'File Manager',
     'title-panel' => 'Laravel FileManager',
@@ -30,7 +31,6 @@ return [
     'title-type' => 'Type',
     'title-modified' => 'Modified',
     'title-action' => 'Action',
-
     'type-folder' => 'Folder',
 
     'message-empty' => 'Folder is empty.',
@@ -79,7 +79,6 @@ return [
     'resize-new-height' => 'Height:',
     'resize-new-width' => 'Width:',
     'folder-exists' => 'Folder exists',
-
 
     'add-folder-successfully' => 'Add folder successfully.',
     'message_extension_not_found' => ':name extension not found.',

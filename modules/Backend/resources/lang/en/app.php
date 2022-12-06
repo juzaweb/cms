@@ -472,6 +472,9 @@ return [
     'custom_seo' => 'Custom SEO',
     'buy' => 'Buy',
     'mark_as_viewed' => 'Mark as viewed',
+    'extension' => 'Extension',
+    'path' => 'Path',
+    'last_updated' => 'Last updated',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',

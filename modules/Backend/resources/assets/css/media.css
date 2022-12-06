@@ -95,3 +95,11 @@
     line-clamp: 1;
     -webkit-box-orient: vertical;
 }
+
+#media-detail-modal .modal-title {
+    overflow: hidden;
+}
+
+#media-detail-modal .preview-image {
+    max-width: 100%;
+}

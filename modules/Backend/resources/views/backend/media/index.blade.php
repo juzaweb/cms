@@ -1,7 +1,6 @@
 @extends('cms::layouts.backend')
 
 @section('content')
-
     <div id="media-container">
         <div class="row mb-2">
             <div class="col-md-8">
@@ -60,6 +59,45 @@
 @endsection
 
 @section('footer')
+    <template id="media-detail-modal-template">
+        <div class="modal fade" id="media-detail-modal" tabindex="-1" role="dialog" aria-labelledby="media-detail-modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="media-detail-modal-title">{name}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="{url}" alt="" class="preview-image">
+                            </div>
+
+                            <div class="col-md-6">
+                                {{ Field::text(trans('cms::app.name'), 'name', ['value' => '{name}']) }}
+
+                                {{ Field::text(trans('cms::app.extension'), 'extention', ['value' => '{extension}', 'disabled' => true]) }}
+
+                                {{ Field::text(trans('cms::app.url'), 'url', ['value' => '{url}', 'disabled' => true]) }}
+
+                                {{ Field::text(trans('cms::app.last_updated'), 'updated_at', ['value' => '{updated}', 'disabled' => true]) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </template>
+
     @include('cms::backend.media.components.add_modal')
 
     @include('cms::backend.media.components.upload_modal')
@@ -98,5 +136,4 @@
             window.location = "";
         }
     </script>
-
 @endsection

@@ -37,7 +37,7 @@ class MediaController extends BackendController
     public function index(Request $request, $folderId = null): View
     {
         $title = trans('cms::app.media');
-        $type = $request->get('type', 'image');
+        $type = $request->get('type');
 
         if ($folderId) {
             $this->addBreadcrumb(
@@ -96,6 +96,19 @@ class MediaController extends BackendController
 
         return $this->success(
             trans('cms::filemanager.add-folder-successfully')
+        );
+    }
+
+    public function getFileInfo(int $id): JsonResponse
+    {
+        $file = $this->fileRepository->find($id);
+        $file->url = upload_url($file->path);
+        $file->updated = jw_date_format($file->updated_at);
+
+        return response()->json(
+            [
+                'file' => $file
+            ]
         );
     }
 

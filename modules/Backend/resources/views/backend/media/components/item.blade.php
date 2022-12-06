@@ -1,5 +1,5 @@
 <li class="media-item" title="{{ $item->name }}">
-    <a href="{{ $item instanceof \Juzaweb\Backend\Models\MediaFolder ? route('admin.media.folder', [$item->id]) : 'javascript:void(0)' }}" class="media-item-info">
+    <a href="{{ $item instanceof \Juzaweb\Backend\Models\MediaFolder ? route('admin.media.folder', [$item->id]) : 'javascript:void(0)' }}" class="media-item-info @if($item instanceof \Juzaweb\Backend\Models\MediaFile) media-file-item @endif" data-id="{{ $item->id }}">
         <div class="attachment-preview">
             <div class="thumbnail">
                 <div class="centered">

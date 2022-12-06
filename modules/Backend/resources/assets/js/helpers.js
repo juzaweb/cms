@@ -96,3 +96,13 @@ function htmlspecialchars(str) {
     str = String(str);
     return str.replace('&', '&amp;').replace('"', '&quot;').replace("'", '&#039;').replace('<', '&lt;').replace('>', '&gt;');
 }
+
+function toggle_global_loading(status, timeout = 500) {
+    if (status) {
+        $("#admin-overlay").fadeIn(300);
+    } else {
+        setTimeout(function(){
+            $("#admin-overlay").fadeOut(300);
+        }, timeout);
+    }
+}
