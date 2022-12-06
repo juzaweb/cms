@@ -42,47 +42,27 @@
         <div class="list-media mt-5">
             <ul class="media-list">
                 @foreach($mediaFolders as $item)
-                    <li class="media-item">
-                        <a href="{{ route('admin.media.folder', [$item->id]) }}" title="{{ $item->name }}">
-                            <div class="attachment-preview">
-                                <div class="thumbnail media-folder">
-                                    <div class="centered">
-                                        <img src="{{ asset('jw-styles/juzaweb/images/folder.png') }}" alt="{{ $item->name }}">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                    @component('cms::backend.media.components.item', ['item' => $item])
+                    @endcomponent
                 @endforeach
 
                 @foreach($mediaFiles as $item)
-                    <li class="media-item">
-                        <a href="javascript:void(0)">
-                            <div class="attachment-preview">
-                                <div class="thumbnail">
-                                    <div class="centered">
-                                        @if($item->type == 'image')
-                                            <img src="{{ upload_url($item->path, null, '150xauto') }}" alt="{{ $item->name }}">
-                                        @else
-                                            <img src="{{ asset('jw-styles/juzaweb/images/file.png') }}" alt="{{ $item->name }}">
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                    @component('cms::backend.media.components.item', ['item' => $item])
+                    @endcomponent
                 @endforeach
             </ul>
         </div>
 
-        {{ $mediaFiles->appends(request()->query())->links() }}
+        <div class="mt-3">
+            {{ $mediaFiles->appends(request()->query())->links() }}
+        </div>
     </div>
 @endsection
 
 @section('footer')
-    @include('cms::backend.media.add_modal')
+    @include('cms::backend.media.components.add_modal')
 
-    @include('cms::backend.media.upload_modal')
+    @include('cms::backend.media.components.upload_modal')
 
     <script>
         Dropzone.autoDiscover = false;

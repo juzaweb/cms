@@ -23,6 +23,7 @@
     -ms-user-select: none;
     user-select: none;
     box-sizing: border-box;
+    height: 160px;
 }
 
 .media-list .media-item .attachment-preview {
@@ -75,8 +76,22 @@
     transform: translate(-50%,-50%);
     top: 0;
     left: 0;
+    max-width: 100%;
 }
 
-.media-list .media-item .thumbnail.media-folder img {
-    width: 100%;
+.media-list .media-item .media-name {
+    background: #bdbdbd;
+    cursor: pointer;
+    border: 2px solid #bdbdbd;
+    border-top: none;
+    color: #0f0f10;
+}
+
+.media-list .media-item .media-name span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
