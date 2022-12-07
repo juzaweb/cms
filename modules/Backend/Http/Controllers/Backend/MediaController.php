@@ -19,6 +19,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Events\AddFolderSuccess;
 use Juzaweb\Backend\Http\Requests\Media\AddFolderRequest;
+use Juzaweb\Backend\Http\Requests\Media\UpdateRequest;
 use Juzaweb\Backend\Repositories\MediaFileRepository;
 use Juzaweb\Backend\Repositories\MediaFolderRepository;
 use Juzaweb\CMS\Facades\Facades;
@@ -81,6 +82,26 @@ class MediaController extends BackendController
         );
     }
 
+    public function update(UpdateRequest $request, $id): JsonResponse|RedirectResponse
+    {
+        if ($request->input('is_file')) {
+            $model = $this->fileRepository->find($id);
+        } else {
+            $model = $this->folderRepository->find($id);
+        }
+
+        DB::beginTransaction();
+        try {
+            $model->update($request->only(['name']));
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+
+        return $this->success(trans('cms::app.updated_successfully'));
+    }
+
     public function addFolder(AddFolderRequest $request): JsonResponse|RedirectResponse
     {
         DB::beginTransaction();
@@ -96,19 +117,6 @@ class MediaController extends BackendController
 
         return $this->success(
             trans('cms::filemanager.add-folder-successfully')
-        );
-    }
-
-    public function getFileInfo(int $id): JsonResponse
-    {
-        $file = $this->fileRepository->find($id);
-        $file->url = upload_url($file->path);
-        $file->updated = jw_date_format($file->updated_at);
-
-        return response()->json(
-            [
-                'file' => $file
-            ]
         );
     }
 

@@ -5,6 +5,7 @@
         $arr['url'] = get_full_url(upload_url($item->path), url('/'));
         $arr['updated'] = jw_date_format($item->updated_at);
         $arr['size'] = format_size_units($item->size);
+        $arr['is_file'] = $item instanceof \Juzaweb\Backend\Models\MediaFile ? 1 : 0;
         @endphp
         <textarea class="d-none item-info">@json($arr)</textarea>
         <div class="attachment-preview">

@@ -6,7 +6,7 @@ Route::group(
     ['prefix' => 'media'],
     function (): void {
         Route::get('/', [MediaController::class, 'index'])->name('admin.media.index');
-        Route::get('/file/{id}', [MediaController::class, 'getFileInfo'])->name('admin.media.file');
+        Route::put('/{id}', [MediaController::class, 'update'])->name('admin.media.update');
 
         Route::get(
             '/folder/{folder}',

@@ -75,12 +75,25 @@
             <img src="{url}" alt="" class="preview-image">
         </div>
 
-        {{ Field::text(trans('cms::app.name'), 'name', ['value' => '{name}']) }}
+        <div class="mt-2 mb-3">
+            <a href="">{{ trans('cms::app.download') }}</a>
+            <a href="javascript:void(0)" class="text-danger delete-file" data-id="{id}">{{ trans('cms::app.delete') }}</a>
+        </div>
 
-        {{ Field::text(trans('cms::app.url'), 'url', ['value' => '{url}', 'disabled' => true]) }}
+        <form
+            action="{{ str_replace('__ID__', '{id}', route('admin.media.update', ['__ID__'])) }}"
+            method="post"
+            class="form-ajax"
+        >
+            @method('put')
+            <input type="hidden" name="is_file" value="{is_file}">
 
-        <table class="table">
-            <tbody>
+            {{ Field::text(trans('cms::app.name'), 'name', ['value' => '{name}']) }}
+
+            {{ Field::text(trans('cms::app.url'), 'url', ['value' => '{url}', 'disabled' => true]) }}
+
+            <table class="table">
+                <tbody>
                 <tr>
                     <td>{{ trans('cms::app.extension') }}</td>
                     <td>{extension}</td>
@@ -94,8 +107,12 @@
                     <td>{{ trans('cms::app.last_updated') }}</td>
                     <td>{updated}</td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-primary mb-2">{{ trans('cms::app.save') }}</button>
+        </form>
+
     </template>
 
     @include('cms::backend.media.components.add_modal')

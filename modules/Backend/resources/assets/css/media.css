@@ -119,6 +119,7 @@
 #preview-file .box-image {
     text-align: center;
     margin-bottom: 10px;
+    height: 250px;
 }
 
 #preview-file .box-image .preview-image {
