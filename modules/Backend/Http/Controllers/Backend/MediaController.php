@@ -103,15 +103,35 @@ class MediaController extends BackendController
         return $this->success(trans('cms::app.updated_successfully'));
     }
 
-    public function download($id)
+    public function download($id): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         $model = $this->fileRepository->find($id);
         $storage = Storage::disk(config('juzaweb.filemanager.disk'));
         if (!$storage->exists($model->path)) {
             abort(404, 'File not exists.');
         }
-        
+
         return response()->download($storage->path($model->path));
+    }
+
+    public function destroy(Request $request, $id): JsonResponse|RedirectResponse
+    {
+        if ($request->input('is_file')) {
+            $model = $this->fileRepository->find($id);
+        } else {
+            $model = $this->folderRepository->find($id);
+        }
+
+        DB::beginTransaction();
+        try {
+            $model->delete();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+
+        return $this->success(trans('cms::app.deleted_successfully'));
     }
 
     public function addFolder(AddFolderRequest $request): JsonResponse|RedirectResponse

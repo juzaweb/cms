@@ -84,6 +84,8 @@
                 href="javascript:void(0)"
                 class="text-danger delete-file"
                 data-id="{id}"
+                data-is_file="{is_file}"
+                data-name="{name}"
             >{{ trans('cms::app.delete') }}</a>
         </div>
 
