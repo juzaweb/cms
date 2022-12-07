@@ -42,6 +42,13 @@ $(document).ready(function () {
                         callback: function (response) {
                             toggle_global_loading(false);
                             show_notify(response);
+
+                            setTimeout(
+                                function () {
+                                    window.location = "";
+                                },
+                                500
+                            );
                         },
                         failCallback: function (response) {
                             toggle_global_loading(false);
