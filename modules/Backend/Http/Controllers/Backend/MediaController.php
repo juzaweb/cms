@@ -17,6 +17,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Juzaweb\Backend\Events\AddFolderSuccess;
 use Juzaweb\Backend\Http\Requests\Media\AddFolderRequest;
 use Juzaweb\Backend\Http\Requests\Media\UpdateRequest;
@@ -100,6 +101,17 @@ class MediaController extends BackendController
         }
 
         return $this->success(trans('cms::app.updated_successfully'));
+    }
+
+    public function download($id)
+    {
+        $model = $this->fileRepository->find($id);
+        $storage = Storage::disk(config('juzaweb.filemanager.disk'));
+        if (!$storage->exists($model->path)) {
+            abort(404, 'File not exists.');
+        }
+        
+        return response()->download($storage->path($model->path));
     }
 
     public function addFolder(AddFolderRequest $request): JsonResponse|RedirectResponse

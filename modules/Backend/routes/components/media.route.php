@@ -7,6 +7,7 @@ Route::group(
     function (): void {
         Route::get('/', [MediaController::class, 'index'])->name('admin.media.index');
         Route::put('/{id}', [MediaController::class, 'update'])->name('admin.media.update');
+        Route::get('/{id}/download', [MediaController::class, 'download'])->name('admin.media.download');
 
         Route::get(
             '/folder/{folder}',

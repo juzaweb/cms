@@ -76,8 +76,15 @@
         </div>
 
         <div class="mt-2 mb-3">
-            <a href="">{{ trans('cms::app.download') }}</a>
-            <a href="javascript:void(0)" class="text-danger delete-file" data-id="{id}">{{ trans('cms::app.delete') }}</a>
+            <a href="{{ str_replace('__ID__', '{id}', route('admin.media.download', ['__ID__'])) }}">
+                {{ trans('cms::app.download') }}
+            </a>
+
+            <a
+                href="javascript:void(0)"
+                class="text-danger delete-file"
+                data-id="{id}"
+            >{{ trans('cms::app.delete') }}</a>
         </div>
 
         <form
