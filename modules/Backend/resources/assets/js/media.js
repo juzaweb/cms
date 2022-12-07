@@ -11,26 +11,10 @@ $(document).ready(function () {
     });
 
     mediaContainer.on('click', '.media-file-item', function () {
-        toggle_global_loading(true);
+        let temp = document.getElementById('media-detail-template').innerHTML;
+        let info = JSON.parse($(this).find('.item-info').val());
 
-        let id = $(this).data('id');
-        ajaxRequest(
-            juzaweb.adminUrl + '/media/file/'+ id,
-            null,
-            {
-                method: 'GET',
-                callback: function (response) {
-                    let temp = document.getElementById('media-detail-modal-template').innerHTML;
-                    temp = replace_template(temp, response.file);
-                    $('#show-modal').empty().html(temp);
-                    $('#show-modal .modal').modal();
-                    toggle_global_loading(false);
-                },
-                failCallback: function (response) {
-                    show_notify(response);
-                    toggle_global_loading(false);
-                }
-            }
-        );
+        temp = replace_template(temp, info);
+        $('#preview-file').html(temp);
     });
 });

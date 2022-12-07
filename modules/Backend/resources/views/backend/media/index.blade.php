@@ -38,64 +38,64 @@
             </div>
         </div>
 
-        <div class="list-media mt-5">
-            <ul class="media-list">
-                @foreach($mediaFolders as $item)
-                    @component('cms::backend.media.components.item', ['item' => $item])
-                    @endcomponent
-                @endforeach
+        <div class="row mt-5">
+            <div class="col-md-9">
+                <div class="list-media">
+                    <ul class="media-list">
+                        @foreach($mediaFolders as $item)
+                            @component('cms::backend.media.components.item', ['item' => $item])
+                            @endcomponent
+                        @endforeach
 
-                @foreach($mediaFiles as $item)
-                    @component('cms::backend.media.components.item', ['item' => $item])
-                    @endcomponent
-                @endforeach
-            </ul>
-        </div>
+                        @foreach($mediaFiles as $item)
+                            @component('cms::backend.media.components.item', ['item' => $item])
+                            @endcomponent
+                        @endforeach
+                    </ul>
+                </div>
 
-        <div class="mt-3">
-            {{ $mediaFiles->appends(request()->query())->links() }}
+                <div class="mt-3">
+                    {{ $mediaFiles->appends(request()->query())->links() }}
+                </div>
+            </div>
+
+            <div class="col-md-3" id="preview-file">
+                <div class="preview">
+                    <i class="fa fa-file-image-o"></i>
+                </div>
+                <p class="text-center">{{ trans('cms::app.media_setting.click_file_to_view_info') }}</p>
+            </div>
         </div>
     </div>
 @endsection
 
 @section('footer')
-    <template id="media-detail-modal-template">
-        <div class="modal fade" id="media-detail-modal" tabindex="-1" role="dialog" aria-labelledby="media-detail-modal-title" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="media-detail-modal-title">{name}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <img src="{url}" alt="" class="preview-image">
-                            </div>
-
-                            <div class="col-md-6">
-                                {{ Field::text(trans('cms::app.name'), 'name', ['value' => '{name}']) }}
-
-                                {{ Field::text(trans('cms::app.extension'), 'extention', ['value' => '{extension}', 'disabled' => true]) }}
-
-                                {{ Field::text(trans('cms::app.url'), 'url', ['value' => '{url}', 'disabled' => true]) }}
-
-                                {{ Field::text(trans('cms::app.last_updated'), 'updated_at', ['value' => '{updated}', 'disabled' => true]) }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-
-                </div>
-            </div>
+    <template id="media-detail-template">
+        <div class="box-image">
+            <img src="{url}" alt="" class="preview-image">
         </div>
+
+        {{ Field::text(trans('cms::app.name'), 'name', ['value' => '{name}']) }}
+
+        {{ Field::text(trans('cms::app.url'), 'url', ['value' => '{url}', 'disabled' => true]) }}
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>{{ trans('cms::app.extension') }}</td>
+                    <td>{extension}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ trans('cms::app.size') }}</td>
+                    <td>{size}</td>
+                </tr>
+                <tr>
+                    <td>{{ trans('cms::app.last_updated') }}</td>
+                    <td>{updated}</td>
+                </tr>
+            </tbody>
+        </table>
     </template>
 
     @include('cms::backend.media.components.add_modal')

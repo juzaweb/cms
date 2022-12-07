@@ -475,6 +475,7 @@ return [
     'extension' => 'Extension',
     'path' => 'Path',
     'last_updated' => 'Last updated',
+    'size' => 'Size',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
@@ -555,6 +556,7 @@ return [
         'max_height' => 'Max Height',
         'thumbnail_default' => 'Thumbnail default',
         'thumbnail_settings' => 'Thumbnail settings',
+        'click_file_to_view_info' => 'Click file to view info.',
     ],
     'file_manager' => [
         'upload_from_url' => 'Upload from url',

@@ -1,15 +1,19 @@
+.list-media {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
 .media-list {
     position: static;
     right: 0;
     bottom: 0;
-    overflow: auto;
     outline: 0;
     margin: 0;
     padding: 0;
 }
 
 .media-list .media-item {
-    width: 12.5%;
+    width: 16%;
     position: relative;
     float: left;
     padding: 8px;
@@ -23,7 +27,7 @@
     -ms-user-select: none;
     user-select: none;
     box-sizing: border-box;
-    height: 160px;
+    height: 150px;
 }
 
 .media-list .media-item .attachment-preview {
@@ -101,5 +105,23 @@
 }
 
 #media-detail-modal .preview-image {
+    max-width: 100%;
+}
+
+#preview-file .preview {
+    text-align: center;
+    font-size: 80px;
+    padding: 20px 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#preview-file .box-image {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#preview-file .box-image .preview-image {
+    max-height: 250px;
     max-width: 100%;
 }
