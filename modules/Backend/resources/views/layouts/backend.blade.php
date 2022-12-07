@@ -19,8 +19,13 @@
     @yield('header')
 
 </head>
+<body class="juzaweb__menuLeft--dark juzaweb__menuLeft--unfixed juzaweb__menuLeft--shadow">
+<div id="admin-overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
 
-<body class="juzaweb__menuLeft--dark juzaweb__topbar--fixed juzaweb__menuLeft--unfixed juzaweb__menuLeft--shadow">
 <div class="juzaweb__layout juzaweb__layout--hasSider">
 
     <div class="juzaweb__menuLeft">

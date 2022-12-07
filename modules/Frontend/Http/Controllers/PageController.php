@@ -19,7 +19,7 @@ class PageController extends FrontendController
     {
         $pageSlug = $this->getPageSlug($slug);
 
-        $page = Post::createFrontendBuilder()
+        $page = Post::createFrontendDetailBuilder()
             ->where('slug', '=', $pageSlug)
             ->firstOrFail();
 
@@ -28,7 +28,7 @@ class PageController extends FrontendController
 
     public function detail(Request $request, $id)
     {
-        $page = Post::createFrontendBuilder()->findOrFail($id);
+        $page = Post::createFrontendDetailBuilder()->findOrFail($id);
 
         return $this->handlePage($request, $page);
     }

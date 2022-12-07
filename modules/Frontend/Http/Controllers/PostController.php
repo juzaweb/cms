@@ -58,13 +58,12 @@ class PostController extends FrontendController
         $postSlug = $slug[1];
 
         $permalink = $this->getPermalinks($base);
-
         $postType = HookAction::getPostTypes($permalink->get('post_type'));
 
         /**
          * @var Post $postModel
          */
-        $postModel = $postType->get('model')::createFrontendBuilder()
+        $postModel = $postType->get('model')::createFrontendDetailBuilder()
             ->where('slug', $postSlug)
             ->firstOrFail();
 
