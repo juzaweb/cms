@@ -9,8 +9,8 @@
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"/>
-    <script async src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap"/>
+
 
     @include('cms::components.juzaweb_langs')
 
@@ -19,8 +19,13 @@
     @yield('header')
 
 </head>
+<body class="juzaweb__menuLeft--dark juzaweb__menuLeft--unfixed juzaweb__menuLeft--shadow">
+<div id="admin-overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
 
-<body class="juzaweb__menuLeft--dark juzaweb__topbar--fixed juzaweb__menuLeft--unfixed juzaweb__menuLeft--shadow">
 <div class="juzaweb__layout juzaweb__layout--hasSider">
 
     <div class="juzaweb__menuLeft">
@@ -30,7 +35,7 @@
             <div class="juzaweb__menuLeft__logo__container">
                 <a href="/{{ config('juzaweb.admin_prefix') }}">
                 <div class="juzaweb__menuLeft__logo">
-                    <img src="{{ asset('jw-styles/juzaweb/images/logo.svg') }}" class="mr-2" alt="Juzaweb">
+                    <img src="{{ asset('jw-styles/juzaweb/images/logo.svg') }}" class="mr-1" alt="Juzaweb">
                     <div class="juzaweb__menuLeft__logo__name">JuzaWeb</div>
                     <div class="juzaweb__menuLeft__logo__descr">Cms</div>
                 </div>

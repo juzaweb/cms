@@ -9,31 +9,7 @@
 
     <title>{{ $title ?? '' }}</title>
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-
-    @if($gtag = config('app.site_gtag'))
-        @php
-            $domain = request()->getHost();
-        @endphp
-
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gtag }}"></script>
-
-        <script>
-            window.dataLayer=window.dataLayer||[];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-
-            gtag('js',new Date());
-            gtag('config','{{ $gtag }}', {
-                @if($domain != config('app.domain'))
-                'linker': {
-                    'domains': ['juzaweb.com']
-                }
-                @endif
-            });
-        </script>
-    @endif
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap">
 
     @include('cms::components.juzaweb_langs')
 

@@ -21,8 +21,8 @@ class EmailTemplateGenerateCommand extends Command
 
     public function handle(): int
     {
-        $basePath = 'modules/Backend/resources/data/mail_templates';
-        $files = File::files(base_path($basePath));
+        $basePath = base_path('modules/Backend/resources/data/mail_templates');
+        $files = File::files($basePath);
 
         foreach ($files as $file) {
             if ($file->getExtension() != 'json') {

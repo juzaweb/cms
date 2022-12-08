@@ -5,12 +5,14 @@ namespace Juzaweb\Backend\Http\Controllers\FileManager;
 use Illuminate\Http\Request;
 use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\MediaFolder;
+use Juzaweb\CMS\Facades\Facades;
 
 class ItemsController extends FileManagerController
 {
     public function getItems(Request $request): array
     {
-        $file_type = $this->getType();
+        $type = $this->getType();
+        $extensions = $this->getTypeExtensions($type);
         $currentPage = self::getCurrentPageFromRequest();
         $perPage = 15;
 
@@ -18,13 +20,12 @@ class ItemsController extends FileManagerController
         $folders = collect([]);
         if ($currentPage == 1) {
             $folders = MediaFolder::where('folder_id', '=', $working_dir)
-                ->where('type', '=', $file_type)
                 ->orderBy('name', 'ASC')
                 ->get(['id', 'name']);
         }
 
         $query = MediaFile::where('folder_id', '=', $working_dir)
-            ->where('type', '=', $file_type)
+            ->whereIn('extension', $extensions)
             ->orderBy('id', 'DESC');
 
         $totalFiles = $query->count(['id']);
@@ -128,6 +129,19 @@ class ItemsController extends FileManagerController
         };
 
         return parent::$success_response;
+    }
+
+    protected function getTypeExtensions(string $type)
+    {
+        $extensions = config("juzaweb.filemanager.types.{$type}.extensions");
+        if (empty($extensions)) {
+            $extensions = match ($type) {
+                'file' => Facades::defaultFileExtensions(),
+                'image' => Facades::defaultImageExtensions(),
+            };
+        }
+
+        return $extensions;
     }
 
     private static function getCurrentPageFromRequest()

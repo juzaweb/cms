@@ -2,13 +2,13 @@
 
 return [
     'home' => 'Nhà',
-    'widgets' => 'Vật dụng',
+    'widgets' => 'Widgets',
     'dashboard' => 'Bảng điều khiển',
-    'key' => 'Chìa khóa',
-    'code' => 'Mã số',
+    'key' => 'Khóa',
+    'code' => 'Mã',
     'name' => 'Tên',
     'email' => 'E-mail',
-    'permission' => 'Sự cho phép',
+    'permission' => 'Quyền',
     'thumbnail' => 'Hình nhỏ',
     'description' => 'Sự miêu tả',
     'content' => 'Các nội dung',

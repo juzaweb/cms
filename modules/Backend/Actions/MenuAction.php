@@ -12,7 +12,6 @@ namespace Juzaweb\Backend\Actions;
 
 use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\ThemeLoader;
@@ -101,7 +100,7 @@ class MenuAction extends Action
             ]
         );
 
-        if (config('juzaweb.plugin.enable_upload')) {
+        if (config('juzaweb.theme.enable_upload')) {
             HookAction::addAdminMenu(
                 trans('cms::app.add_new'),
                 'theme.install',
@@ -109,7 +108,18 @@ class MenuAction extends Action
                     'icon' => 'fa fa-plus',
                     'position' => 1,
                     'parent' => 'appearance',
-                    'turbolinks' => false,
+                ]
+            );
+
+            HookAction::registerAdminPage(
+                'theme.editor',
+                [
+                    'title' => trans('cms::app.editor'),
+                    'menu' => [
+                        'icon' => 'fa fa-plus',
+                        'position' => 99,
+                        'parent' => 'appearance',
+                    ]
                 ]
             );
         }
@@ -191,39 +201,21 @@ class MenuAction extends Action
                     'icon' => 'fa fa-plus',
                     'position' => 1,
                     'parent' => 'plugins',
-                    'turbolinks' => false,
+                ]
+            );
+
+            HookAction::registerAdminPage(
+                'plugin.editor',
+                [
+                    'title' => trans('cms::app.editor'),
+                    'menu' => [
+                        'icon' => 'fa fa-plus',
+                        'position' => 99,
+                        'parent' => 'plugins',
+                    ]
                 ]
             );
         }
-
-        HookAction::addAdminMenu(
-            trans('cms::app.users'),
-            'users',
-            [
-                'icon' => 'fa fa-user-circle-o',
-                'position' => 60,
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.all_users'),
-            'users',
-            [
-                'icon' => 'fa fa-user-circle-o',
-                'position' => 1,
-                'parent' => 'users',
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            trans('cms::app.add_new'),
-            'users.create',
-            [
-                'icon' => 'fa fa-plus',
-                'position' => 1,
-                'parent' => 'users',
-            ]
-        );
 
         HookAction::addAdminMenu(
             trans('cms::app.setting'),
@@ -231,6 +223,15 @@ class MenuAction extends Action
             [
                 'icon' => 'fa fa-cogs',
                 'position' => 70,
+            ]
+        );
+
+        HookAction::addAdminMenu(
+            trans('cms::app.managements'),
+            'managements',
+            [
+                'icon' => 'fa fa-cogs',
+                'position' => 75,
             ]
         );
 
@@ -245,12 +246,22 @@ class MenuAction extends Action
         );
 
         HookAction::addAdminMenu(
+            trans('cms::app.users'),
+            'users',
+            [
+                'icon' => 'fa fa-user-circle-o',
+                'position' => 40,
+                'parent' => 'managements',
+            ]
+        );
+
+        HookAction::addAdminMenu(
             trans('cms::app.email_templates'),
             'email-template',
             [
                 'icon' => 'fa fa-envelope',
                 'position' => 50,
-                'parent' => 'setting',
+                'parent' => 'managements',
             ]
         );
 
@@ -260,7 +271,7 @@ class MenuAction extends Action
             [
                 'icon' => 'fa fa-cogs',
                 'position' => 51,
-                'parent' => 'setting',
+                'parent' => 'managements',
             ]
         );
     }
@@ -290,7 +301,7 @@ class MenuAction extends Action
 
     public function addPostTypes()
     {
-        $templates = (array) ThemeLoader::getTemplates(jw_current_theme());
+        $templates = ThemeLoader::getTemplates(jw_current_theme());
         $data = [
             'options' => ['' => trans('cms::app.choose_template')],
         ];
@@ -448,21 +459,15 @@ class MenuAction extends Action
 
         if (version_compare($versionAvailable, $currentVersion, '>')) {
             $notify = new Notification();
-
             $notify->setUsers(
                 User::where('is_admin', 1)
                     ->active()
                     ->get()
             );
-
             $notify->setSubject('New Version CMS Available !');
-
             $notify->setBody('CMS has a new version, update now!');
-
             $notify->setUrl(route('admin.update'));
-
             $notify->send();
-
             Cache::store('file')->forever($key, $versionAvailable);
         } else {
             Cache::store('file')->put($key, 1, 3600);

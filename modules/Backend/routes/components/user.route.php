@@ -6,7 +6,6 @@
  * @license    GNU V2
  */
 
-use Juzaweb\Backend\Http\Controllers\Backend\Profile\NotificationController;
 use Juzaweb\Backend\Http\Controllers\Backend\Profile\ProfileController;
 use Juzaweb\Backend\Http\Controllers\Backend\RoleController;
 use Juzaweb\Backend\Http\Controllers\Backend\UserController;

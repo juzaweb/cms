@@ -11,29 +11,31 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Arcanedev\LogViewer\Contracts\LogViewer;
+use Arcanedev\LogViewer\Entities\Log;
+use Arcanedev\LogViewer\Entities\LogEntry;
+use Arcanedev\LogViewer\Entities\LogEntryCollection;
+use Arcanedev\LogViewer\Exceptions\FilesystemException;
 use Arcanedev\LogViewer\Exceptions\LogNotFoundException;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class LogViewerController extends BackendController
 {
-    protected $perPage = 10;
+    protected int $perPage = 10;
 
-    /**
-     * The log viewer instance
-     *
-     * @var \Arcanedev\LogViewer\Contracts\LogViewer
-     */
-    protected $logViewer;
+    protected string $showRoute = 'admin.logs.error.show';
 
-    public function __construct(LogViewer $logViewer)
+    public function __construct(protected LogViewer $logViewer)
     {
-        $this->logViewer = $logViewer;
     }
 
-    public function index()
+    public function index(): View
     {
         $title = trans('cms::app.error_logs');
 
@@ -45,7 +47,7 @@ class LogViewerController extends BackendController
         );
     }
 
-    public function show($date)
+    public function show(Request $request, string $date): View
     {
         $this->addBreadcrumb(
             [
@@ -54,26 +56,35 @@ class LogViewerController extends BackendController
             ]
         );
 
-        $this->getLogOrFail($date);
+        $level = 'all';
         $title = trans('cms::app.error_logs').' '.$date;
+        $log = $this->getLogOrFail($date);
+        $query = $request->get('query');
+        $levels = $this->logViewer->levelsNames();
+        $entries = $log->entries($level)->paginate($this->perPage);
 
         return view(
-            'cms::backend.logs.error.logs',
+            'cms::backend.logs.error.show',
             compact(
                 'title',
-                'date'
+                'date',
+                'level',
+                'log',
+                'query',
+                'levels',
+                'entries'
             )
         );
     }
 
-    public function listLogs(Request $request)
+    public function listLogs(Request $request): JsonResponse
     {
         $stats = $this->logViewer->statsTable();
         $rows = $this->paginate($stats->rows(), $request);
 
         foreach ($rows as $index => $row) {
             $row['edit_url'] = route(
-                'admin.logs.error.date',
+                'admin.logs.error.show',
                 [
                     $row['date'],
                 ]
@@ -89,28 +100,73 @@ class LogViewerController extends BackendController
         );
     }
 
-    public function listLogsDate(Request $request, $date)
+    /**
+     * Show the log with the search query.
+     *
+     * @param Request $request
+     * @param string $date
+     * @param string $level
+     *
+     * @return RedirectResponse|View
+     */
+    public function search(Request $request, string $date, string $level = 'all'): RedirectResponse|View
     {
-        $level = 'all';
-        $log = $this->getLogOrFail($date);
-        $entries = $log->entries($level)->paginate($this->perPage);
-
-        return response()->json(
+        $this->addBreadcrumb(
             [
-                'total' => $entries->total(),
-                'rows' => $entries->values(),
+                'title' => trans('cms::app.error_logs'),
+                'url' => action([static::class, 'index']),
             ]
+        );
+
+        $title = trans('cms::app.error_logs').' '.$date;
+        $query = $request->get('query');
+        if (is_null($query)) {
+            return redirect()->route($this->showRoute, [$date]);
+        }
+
+        $log = $this->getLogOrFail($date);
+        $levels = $this->logViewer->levelsNames();
+        $needles = array_map(
+            function ($needle) {
+                return Str::lower($needle);
+            },
+            array_filter(explode(' ', $query))
+        );
+
+        $entries = $log->entries($level)
+            ->unless(
+                empty($needles),
+                function (LogEntryCollection $entries) use ($needles) {
+                    return $entries->filter(
+                        function (LogEntry $entry) use ($needles) {
+                            foreach ([$entry->header, $entry->stack, $entry->context()] as $subject) {
+                                if (Str::containsAll(Str::lower($subject), $needles)) {
+                                    return true;
+                                }
+                            }
+
+                            return false;
+                        }
+                    );
+                }
+            )
+            ->paginate($this->perPage);
+
+        return view(
+            'cms::backend.logs.error.show',
+            compact('title', 'level', 'log', 'query', 'levels', 'entries')
         );
     }
 
     /**
      * Delete a log.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
+     * @throws FilesystemException
      */
-    public function delete(Request $request)
+    public function delete(Request $request): JsonResponse
     {
         $date = $request->input('date');
 
@@ -121,15 +177,20 @@ class LogViewerController extends BackendController
         );
     }
 
+    public function download($date): \Symfony\Component\HttpFoundation\BinaryFileResponse
+    {
+        return $this->logViewer->download($date);
+    }
+
     /**
      * Paginate logs.
      *
      * @param array $data
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    protected function paginate(array $data, Request $request)
+    protected function paginate(array $data, Request $request): LengthAwarePaginator
     {
         $data = new Collection($data);
         $page = $request->get('page', 1);
@@ -149,9 +210,9 @@ class LogViewerController extends BackendController
      *
      * @param string $date
      *
-     * @return \Arcanedev\LogViewer\Entities\Log|null
+     * @return Log|null
      */
-    protected function getLogOrFail($date)
+    protected function getLogOrFail(string $date): ?Log
     {
         $log = null;
 

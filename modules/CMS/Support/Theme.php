@@ -82,15 +82,28 @@ class Theme
         return realpath($this->path) . "/{$path}";
     }
 
+    public function fileExists(string $path): bool
+    {
+        return file_exists($this->getPath($path));
+    }
+
     public function getContents(string $path): ?string
     {
-        $path = $this->getPath('register.json');
-
-        if (!file_exists($path)) {
+        if (!$this->fileExists($path)) {
             throw new \Exception('File does not exists.');
         }
 
-        return File::get($path);
+        return File::get($this->getPath($path));
+    }
+
+    public function getViewPublicPath(string $path = null): string
+    {
+        return resource_path('views/themes/' . $this->name) .'/'. ltrim($path, '/');
+    }
+
+    public function getLangPublicPath(string $path = null): string
+    {
+        return resource_path('lang/themes/' . $this->name) .'/'. ltrim($path, '/');
     }
 
     /**

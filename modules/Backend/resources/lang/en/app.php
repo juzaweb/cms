@@ -289,6 +289,8 @@ return [
     'all_type' => 'All type',
     'search_by_name' => 'Search by name',
     'folder_name' => 'Folder name',
+    'folder' => 'Folder',
+    'folders' => 'Folders',
     'add_folder' => 'Add Folder',
     'media' => 'Media',
     'upload' => 'Upload',
@@ -448,6 +450,11 @@ return [
     'sort_by' => 'Sort by',
     'sort_order' => 'Sort order',
     'view_post' => 'View post',
+    'custom' => 'Custom',
+    'managements' => 'Managements',
+    'upload_theme' => 'Upload Theme',
+    'upload_plugin' => 'Upload Plugin',
+    'plugin_editor' => 'Plugin Editor',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',
@@ -465,6 +472,10 @@ return [
     'custom_seo' => 'Custom SEO',
     'buy' => 'Buy',
     'mark_as_viewed' => 'Mark as viewed',
+    'extension' => 'Extension',
+    'path' => 'Path',
+    'last_updated' => 'Last updated',
+    'size' => 'Size',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
@@ -492,8 +503,6 @@ return [
         ],
         'done' => 'Done!!'
     ],
-    'upload_theme' => 'Upload Theme',
-    'upload_plugin' => 'Upload Plugin',
     'theme_upload' => [
         'error' => [
             'mime_type' => 'Invalid file mime type.',
@@ -547,10 +556,17 @@ return [
         'max_height' => 'Max Height',
         'thumbnail_default' => 'Thumbnail default',
         'thumbnail_settings' => 'Thumbnail settings',
+        'click_file_to_view_info' => 'Click file to view info.',
     ],
     'file_manager' => [
         'upload_from_url' => 'Upload from url',
         'download_to_server' => 'Download file to server',
-        'upload_file' => 'Upload file'
-    ]
+        'upload_file' => 'Upload file',
+    ],
+    'general_settings' => [
+        'custom_time_format' => 'Custom time format',
+        'custom_date_format' => 'Custom date format',
+        'time_formatting_documentation' => 'Documentation on date and time formatting',
+        'enter_a_custom_date' => 'enter a custom date format in the following field',
+    ],
 ];

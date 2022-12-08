@@ -1,15 +1,19 @@
+.list-media {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
 .media-list {
     position: static;
     right: 0;
     bottom: 0;
-    overflow: auto;
     outline: 0;
     margin: 0;
     padding: 0;
 }
 
 .media-list .media-item {
-    width: 12.5%;
+    width: 16%;
     position: relative;
     float: left;
     padding: 8px;
@@ -23,6 +27,7 @@
     -ms-user-select: none;
     user-select: none;
     box-sizing: border-box;
+    height: 150px;
 }
 
 .media-list .media-item .attachment-preview {
@@ -75,8 +80,49 @@
     transform: translate(-50%,-50%);
     top: 0;
     left: 0;
+    max-width: 100%;
 }
 
-.media-list .media-item .thumbnail.media-folder img {
-    width: 100%;
+.media-list .media-item .media-name {
+    background: #bdbdbd;
+    cursor: pointer;
+    border: 2px solid #bdbdbd;
+    border-top: none;
+    color: #0f0f10;
+}
+
+.media-list .media-item .media-name span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+#media-detail-modal .modal-title {
+    overflow: hidden;
+}
+
+#media-detail-modal .preview-image {
+    max-width: 100%;
+}
+
+#preview-file .preview {
+    text-align: center;
+    font-size: 80px;
+    padding: 20px 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#preview-file .box-image {
+    text-align: center;
+    margin-bottom: 10px;
+    height: 250px;
+}
+
+#preview-file .box-image .preview-image {
+    max-height: 250px;
+    max-width: 100%;
 }

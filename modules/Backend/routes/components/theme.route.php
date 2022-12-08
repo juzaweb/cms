@@ -9,6 +9,7 @@
  * Github: https://juzaweb.com/cms
  */
 
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\EditorController;
 use Juzaweb\Backend\Http\Controllers\Backend\ThemeController;
 use Juzaweb\Backend\Http\Controllers\Backend\RequirePluginController;
 use Juzaweb\Backend\Http\Controllers\Backend\ReadingController;
@@ -91,5 +92,16 @@ Route::group(
         Route::get('/get-item', 'Backend\WidgetController@getWidgetItem')->name('admin.widget.get-item');
         Route::put('/{key}', 'Backend\WidgetController@update')->name('admin.widget.update');
         Route::get('/form/{key}', 'Backend\WidgetController@getWidgetForm')->name('admin.widget.get-form');
+    }
+);
+
+Route::group(
+    ['prefix' => 'theme/editor'],
+    function () {
+        Route::get('/{theme?}', [EditorController::class, 'index'])->name('admin.theme.editor');
+        Route::get('/{theme}/content', [EditorController::class, 'getFileContent'])
+            ->name('admin.theme.editor.content');
+        Route::put('/{theme}', [EditorController::class, 'save'])
+            ->name('admin.theme.editor.save');
     }
 );
