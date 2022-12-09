@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Providers;
 
+use Illuminate\Support\Facades\Lang;
 use Juzaweb\CMS\Contracts\ThemeLoaderContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Facades\ActionRegister;
