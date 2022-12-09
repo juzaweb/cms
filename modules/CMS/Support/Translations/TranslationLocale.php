@@ -101,6 +101,7 @@ class TranslationLocale
                 foreach ($lang as $key => $item) {
                     $result[] = [
                         'key' => $key,
+                        'group' => '*',
                         'value' => $item,
                         'trans' => $trans[$key] ?? $item,
                     ];
@@ -171,14 +172,16 @@ class TranslationLocale
         return $folders;
     }
 
-    protected function mapGroupKeys(array $lang, $group, $trans, &$result): void
+    protected function mapGroupKeys(array $lang, $group, $trans, &$result, $keyPrefix = ''): void
     {
         foreach ($lang as $key => $item) {
             if (is_array($item)) {
-                $this->mapGroupKeys($item, "{$group}.{$key}", $trans, $result);
+                $prefix = "{$keyPrefix}{$key}.";
+                $this->mapGroupKeys($item, $group, $trans, $result, $prefix);
             } else {
                 $result[] = [
-                    'key' => "{$group}.{$key}",
+                    'key' => "{$keyPrefix}{$key}",
+                    'group' => $group,
                     'value' => $item,
                     'trans' => $trans[$key] ?? $item,
                 ];

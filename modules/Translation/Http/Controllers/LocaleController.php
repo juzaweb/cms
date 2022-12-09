@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\TranslationManager;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\ArrayPagination;
+use Spatie\TranslationLoader\LanguageLine;
 
 class LocaleController extends BackendController
 {
@@ -61,54 +62,18 @@ class LocaleController extends BackendController
 
     public function save(Request $request, $type, $locale): JsonResponse|RedirectResponse
     {
-        $data = $this->translationManager->modules()->get($type);
-        $keys = explode('.', $request->post('key'));
+        $module = $this->translationManager->modules()->get($type);
+        $group = $request->post('group');
         $value = $request->post('value');
 
-        $file = $keys[0] . '.php';
-        unset($keys[0]);
+        $model = LanguageLine::firstOrNew([
+            'namespace' => $module->get('namespace'),
+            'group' => $group,
+            'key' => $request->post('key'),
+        ]);
 
-        $lang = [];
-        $folderPath = $data['publish_path'] . '/' . $locale;
-        $filePath = $folderPath . '/' . $file;
-
-        if (!is_dir($folderPath)) {
-            try {
-                File::makeDirectory($folderPath, 0775, true);
-            } catch (\Throwable $e) {
-                return $this->error(
-                    [
-                        'message' => $e->getMessage(),
-                    ]
-                );
-            }
-        }
-
-        if (file_exists($filePath)) {
-            $lang = require($filePath);
-        }
-
-        $keys = collect($keys)->values()->toArray();
-        $lang = $this->setKeyLang($keys, $value, $lang);
-
-        $strArr = $this->varExportShort($lang) . ";";
-        $fileContent = "<?php \n";
-        $fileContent .= "return $strArr \n";
-        $fileContent .= "\n";
-
-        try {
-            File::put($filePath, $fileContent);
-
-            /*if (function_exists('opcache_reset')) {
-                opcache_reset();
-            }*/
-        } catch (\Throwable $e) {
-            return $this->error(
-                [
-                    'message' => $e->getMessage(),
-                ]
-            );
-        }
+        $model->setTranslation($locale, $value);
+        $model->save();
 
         return $this->success(
             [

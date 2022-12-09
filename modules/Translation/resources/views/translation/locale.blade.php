@@ -21,7 +21,7 @@
                     <thead>
                         <tr>
                             <th data-field="index" data-width="3%" data-formatter="index_formatter" data-align="center">#</th>
-                            <th data-field="value" data-width="35%">{{ trans('cms::app.origin') }}</th>
+                            <th data-field="value" data-width="35%" data-formatter="origin_formatter">{{ trans('cms::app.origin') }}</th>
                             <th data-formatter="translate_formatter">{{ trans('cms::app.your_value') }}</th>
                         </tr>
                     </thead>
@@ -35,8 +35,12 @@
             return (index + 1);
         }
 
+        function origin_formatter(value, row, index) {
+            return `<span title="${row.key}">${row.value}</span>`;
+        }
+
         function translate_formatter(value, row, index) {
-            return `<input class="form-control trans-input" value="${row.trans}" data-key="${row.key}">`;
+            return `<input class="form-control trans-input" value="${row.trans}" data-key="${row.key}" data-group="${row.group}">`;
         }
 
         let table = new JuzawebTable({
@@ -45,6 +49,7 @@
 
         $(document).on('change', '.trans-input', function () {
             let key = $(this).data('key');
+            let group = $(this).data('group');
             let value = $(this).val();
 
             $.ajax({
@@ -53,7 +58,8 @@
                 dataType: 'json',
                 data: {
                     'key': key,
-                    'value': value
+                    'value': value,
+                    'group': group,
                 }
             }).done(function(response) {
 
