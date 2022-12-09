@@ -63,19 +63,15 @@ class Translation extends Model
 
     public function scopeSelectDistinctGroup(Builder $query): Builder
     {
-        switch (DB::getDriverName()) {
-            case 'mysql':
-                $select = 'DISTINCT `group`';
-                break;
-            default:
-                $select = 'DISTINCT "group"';
-                break;
-        }
+        $select = match (DB::getDriverName()) {
+            'mysql' => 'DISTINCT `group`',
+            default => 'DISTINCT "group"',
+        };
 
         return $query->select(DB::raw($select));
     }
 
-    public function scopeWhereActive(Builder $builder)
+    public function scopeWhereActive(Builder $builder): Builder
     {
         return $builder->where('status', '=', 1);
     }

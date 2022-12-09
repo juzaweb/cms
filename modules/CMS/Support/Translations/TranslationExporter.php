@@ -14,7 +14,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Models\Translation;
-use Symfony\Component\Finder\SplFileInfo;
 
 class TranslationExporter
 {
@@ -27,30 +26,64 @@ class TranslationExporter
 
     public function run(): int
     {
-        $path = $this->module->get('lang_path');
-        $enFiles = File::files("{$path}/en");
-        $groups = collect($enFiles)->map(fn (SplFileInfo $file) => $file->getFilenameWithoutExtension())->toArray();
-
-        if (!is_dir("{$path}/{$this->language}")) {
-            mkdir("{$path}/{$this->language}");
+        if (isset($this->language)) {
+            return $this->exportLanguage($this->language);
         }
 
+        $languages = Translation::where(
+            [
+                'object_type' => $this->module->get('type'),
+                'object_key' => $this->module->get('key'),
+            ]
+        )->groupBy('locale')
+            ->get(['locale'])
+            ->pluck('locale')
+            ->toArray();
+
+        $total = 0;
+        foreach ($languages as $language) {
+            $total += $this->exportLanguage($language);
+        }
+
+        return $total;
+    }
+
+    public function setLanguage(string $language): static
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    protected function exportLanguage(string $language): int
+    {
+        $path = $this->module->get('lang_path');
+        $groups = $this->getModuleGroups();
+
+        if (!is_dir("{$path}/{$language}")) {
+            mkdir("{$path}/{$language}");
+        }
+
+        $total = 0;
         foreach ($groups as $group) {
             $current = [];
-            $fileLang = "{$path}/{$this->language}/{$group}.php";
+            $fileLang = "{$path}/{$language}/{$group}.php";
             if (file_exists($fileLang)) {
                 $current = include $fileLang;
             }
 
-            $trans = Translation::where('locale', '=', $this->language)
+            $trans = Translation::where(
+                [
+                    'object_type' => $this->module->get('type'),
+                    'object_key' => $this->module->get('key'),
+                ]
+            )
+                ->where('locale', '=', $language)
                 ->where('namespace', '=', $this->module->get('namespace'))
                 ->where('group', '=', $group)
                 ->get()
-                ->mapWithKeys(
-                    function ($item) {
-                        return [$item->key => $item->value];
-                    }
-                )->toArray();
+                ->mapWithKeys(fn ($item) => [$item->key => $item->value])
+                ->toArray();
 
             if (empty($trans)) {
                 continue;
@@ -60,8 +93,27 @@ class TranslationExporter
             $trans = array_merge($trans, $current);
 
             $str = '<?php' . PHP_EOL . 'return ' . $this->varExport($trans) . ';' . PHP_EOL;
-            File::put("{$path}/{$this->language}/{$group}.php", $str);
+            File::put("{$path}/{$language}/{$group}.php", $str);
+            $total += 1;
         }
+
+        return $total;
+    }
+
+    protected function getModuleGroups(): array
+    {
+        $query = Translation::where(
+            [
+                'object_type' => $this->module->get('type'),
+                'object_key' => $this->module->get('key'),
+            ]
+        )->groupBy('group');
+
+        if ($this->module->get('type') != 'theme') {
+            $query->where('group', '!=', '*');
+        }
+
+        return $query->get(['group'])->pluck('group')->toArray();
     }
 
     protected function parseChildKeyArray(array $data): array

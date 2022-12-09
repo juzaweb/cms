@@ -34,7 +34,9 @@ class TranslationManager implements TranslationManagerContract
 
     public function export(string $module = 'cms', string $name = null): TranslationExporter
     {
-        //
+        $module = $this->find($module, $name);
+
+        return $this->createTranslationExporter($module);
     }
 
     public function import(string $module, string $name = null): TranslationImporter
@@ -116,6 +118,11 @@ class TranslationManager implements TranslationManagerContract
             Arr::only($data, ['locale', 'group', 'namespace', 'key', 'object_type', 'object_key']),
             Arr::only($data, ['value'])
         );
+    }
+
+    protected function createTranslationExporter(Collection $module): TranslationExporter
+    {
+        return new TranslationExporter($module);
     }
 
     protected function createTranslationTranslate(Collection $module): TranslationTranslate
