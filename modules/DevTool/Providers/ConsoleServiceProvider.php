@@ -11,7 +11,6 @@ use Juzaweb\DevTool\Commands\Plugin\ControllerMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\DisableCommand;
 use Juzaweb\DevTool\Commands\Plugin\EnableCommand;
 use Juzaweb\DevTool\Commands\Plugin\EventMakeCommand;
-use Juzaweb\DevTool\Commands\Plugin\ExportTranslationCommand;
 use Juzaweb\DevTool\Commands\Plugin\TranslateViaGoogleCommand;
 use Juzaweb\DevTool\Commands\Plugin\ImportTranslationCommand;
 use Juzaweb\DevTool\Commands\Plugin\InstallCommand as PluginInstallCommand;
@@ -104,7 +103,8 @@ class ConsoleServiceProvider extends ServiceProvider
         CacheSizeCommand::class,
         ImportTranslationCommand::class,
         TranslateViaGoogleCommand::class,
-        ExportTranslationCommand::class,
+        \Juzaweb\DevTool\Commands\Plugin\ExportTranslationCommand::class,
+        \Juzaweb\DevTool\Commands\Theme\ExportTranslationCommand::class,
     ];
 
     /**

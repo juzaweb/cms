@@ -68,48 +68,86 @@ class TranslationExporter
         $path = $this->module->get('lang_path');
         $groups = $this->getModuleGroups();
 
-        if (!is_dir("{$path}/{$language}")) {
-            mkdir("{$path}/{$language}");
-        }
-
         $total = 0;
         foreach ($groups as $group) {
-            $current = [];
-            $fileLang = "{$path}/{$language}/{$group}.php";
-            if (file_exists($fileLang)) {
-                $current = include $fileLang;
-            }
-
-            $trans = Translation::where(
-                [
-                    'object_type' => $this->module->get('type'),
-                    'object_key' => $this->module->get('key'),
-                ]
-            )
-                ->where('locale', '=', $language)
-                ->where('namespace', '=', $this->module->get('namespace'))
-                ->where('group', '=', $group)
-                ->get()
-                ->mapWithKeys(fn ($item) => [$item->key => $item->value])
-                ->toArray();
-
+            $trans = $this->getTranslationByGroup($group, $language);
             if (empty($trans)) {
                 continue;
             }
 
-            $trans = $this->parseChildKeyArray($trans);
-            if ($this->force) {
-                $trans = array_merge_recursive($trans, $current);
+            if ($group == '*') {
+                if (!is_dir($path)) {
+                    mkdir($path, 0777, true);
+                }
+
+                $this->exportFileJson($trans, $path, $language, $group);
             } else {
-                $trans = array_merge_recursive($current, $trans);
+                if (!is_dir("{$path}/{$language}")) {
+                    mkdir("{$path}/{$language}", 0777, true);
+                }
+
+                $this->exportFilePHP($trans, $path, $language, $group);
             }
 
-            $str = '<?php' . PHP_EOL . 'return ' . $this->varExport($trans) . ';' . PHP_EOL;
-            File::put("{$path}/{$language}/{$group}.php", $str);
             $total += 1;
         }
 
         return $total;
+    }
+
+    protected function exportFileJson(array $trans, string $path, string $language, string $group): void
+    {
+        $current = [];
+        $fileLang = "{$path}/{$language}.json";
+        if (file_exists($fileLang)) {
+            $current = json_decode(File::get($fileLang), true);
+        }
+
+        if ($this->force) {
+            $trans = array_merge($current, $trans);
+        } else {
+            $trans = array_merge($trans, $current);
+        }
+
+        File::put(
+            "{$path}/{$language}.json",
+            json_encode($trans, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+        );
+    }
+
+    protected function exportFilePHP(array $trans, string $path, string $language, string $group): void
+    {
+        $current = [];
+        $fileLang = "{$path}/{$language}/{$group}.php";
+        if (file_exists($fileLang)) {
+            $current = include $fileLang;
+        }
+
+        $trans = $this->parseChildKeyArray($trans);
+        if ($this->force) {
+            $trans = array_merge_recursive($current, $trans);
+        } else {
+            $trans = array_merge_recursive($trans, $current);
+        }
+
+        $str = '<?php' . PHP_EOL . 'return ' . $this->varExport($trans) . ';' . PHP_EOL;
+        File::put("{$path}/{$language}/{$group}.php", $str);
+    }
+
+    protected function getTranslationByGroup(string $group, string $language): array
+    {
+        return Translation::where(
+            [
+                'object_type' => $this->module->get('type'),
+                'object_key' => $this->module->get('key'),
+            ]
+        )
+            ->where('locale', '=', $language)
+            ->where('namespace', '=', $this->module->get('namespace'))
+            ->where('group', '=', $group)
+            ->get()
+            ->mapWithKeys(fn ($item) => [$item->key => $item->value])
+            ->toArray();
     }
 
     protected function getModuleGroups(): array
