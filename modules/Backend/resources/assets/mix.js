@@ -51,7 +51,7 @@ mix.combine(
         baseAsset + '/js/menu.js',
         baseAsset + '/js/update.js',
         baseAsset + '/js/plugin-install.js',
-        baseAsset + '/js/theme-install.js',
+        baseAsset + '/js/appearance/theme-install.js',
         baseAsset + '/js/load-select2.js',
         baseAsset + '/js/juzaweb-table.js',
         baseAsset + '/js/list-view.js',

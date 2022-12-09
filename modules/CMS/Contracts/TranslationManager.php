@@ -10,9 +10,11 @@
 
 namespace Juzaweb\CMS\Contracts;
 
+use Illuminate\Support\Collection;
 use Juzaweb\CMS\Models\Translation;
 use Juzaweb\CMS\Support\Translations\TranslationExporter;
 use Juzaweb\CMS\Support\Translations\TranslationImporter;
+use Juzaweb\CMS\Support\Translations\TranslationLocale;
 use Juzaweb\CMS\Support\Translations\TranslationTranslate;
 
 /**
@@ -33,6 +35,10 @@ interface TranslationManager
     ): TranslationTranslate;
 
     public function export(string $module = 'cms', string $name = null): TranslationExporter;
+
+    public function locale(string|Collection $module, string $name = null): TranslationLocale;
+
+    public function modules(): Collection;
 
     /**
      * @see \Juzaweb\CMS\Support\Manager\TranslationManager::importTranslationLine()

@@ -33,8 +33,8 @@ class Admin
 
         global $jw_user;
 
-        if ($request->has('locale')) {
-            $jw_user->update(['language' => $request->query('locale')]);
+        if ($locale = $request->query('locale')) {
+            $jw_user->update(['language' => $locale]);
         }
 
         if ($jw_user->language != get_config('language', 'en')) {

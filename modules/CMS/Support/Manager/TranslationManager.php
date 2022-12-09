@@ -17,9 +17,12 @@ use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\TranslationFinder;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
+use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Models\Translation;
 use Juzaweb\CMS\Support\Translations\TranslationExporter;
 use Juzaweb\CMS\Support\Translations\TranslationImporter;
+use Juzaweb\CMS\Support\Translations\TranslationLocale;
 use Juzaweb\CMS\Support\Translations\TranslationTranslate;
 
 class TranslationManager implements TranslationManagerContract
@@ -57,6 +60,13 @@ class TranslationManager implements TranslationManagerContract
         return $this->createTranslationTranslate($module)->setSource($source)->setTarget($target);
     }
 
+    public function locale(string|Collection $module, string $name = null): TranslationLocale
+    {
+        $module = $this->find($module, $name);
+
+        return $this->createTranslationLocale($module);
+    }
+
     public function find(string|Collection $module, string $name = null): Collection
     {
         if ($module instanceof Collection) {
@@ -79,6 +89,7 @@ class TranslationManager implements TranslationManagerContract
                         'type' => 'plugin',
                         'lang_path' => $plugin->getPath('src/resources/lang'),
                         'src_path' => $plugin->getPath('src'),
+                        'publish_path' => resource_path("lang/plugins/{$name}"),
                     ]
                 );
             case 'theme':
@@ -96,9 +107,10 @@ class TranslationManager implements TranslationManagerContract
                         'type' => 'theme',
                         'lang_path' => $theme->getPath('lang'),
                         'src_path' => $theme->getPath('views'),
+                        'publish_path' => resource_path("lang/themes/{$name}"),
                     ]
                 );
-            default:
+            case 'cms':
                 return new Collection(
                     [
                         'key' => 'core',
@@ -107,9 +119,30 @@ class TranslationManager implements TranslationManagerContract
                         'type' => 'cms',
                         'lang_path' => base_path('modules/Backend/resources/lang'),
                         'src_path' => base_path('modules'),
+                        'publish_path' => resource_path('lang/vendor/cms'),
                     ]
                 );
         }
+
+        throw new \Exception('Module not found');
+    }
+
+    public function modules(): Collection
+    {
+        $result['core'] = $this->find('cms');
+        $themes = ThemeLoader::all();
+        foreach ($themes as $theme) {
+            $info = $this->find('theme', $theme->get('name'));
+            $result[$info->get('key')] = $info;
+        }
+
+        $plugins = Plugin::all();
+        foreach ($plugins as $plugin) {
+            $info = $this->find('plugin', $plugin->get('name'));
+            $result[$info->get('key')] = $info;
+        }
+
+        return collect($result);
     }
 
     public function importTranslationLine(array $data, bool $force = false): Translation
@@ -125,6 +158,11 @@ class TranslationManager implements TranslationManagerContract
             Arr::only($data, ['locale', 'group', 'namespace', 'key', 'object_type', 'object_key']),
             Arr::only($data, ['value'])
         );
+    }
+
+    protected function createTranslationLocale(Collection $module): TranslationLocale
+    {
+        return new TranslationLocale($module);
     }
 
     protected function createTranslationExporter(Collection $module): TranslationExporter

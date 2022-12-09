@@ -10,14 +10,20 @@
 
 namespace Juzaweb\Translation\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Juzaweb\CMS\Contracts\TranslationManager;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\ArrayPagination;
-use Juzaweb\Translation\Facades\Locale;
 
 class TranslationController extends BackendController
 {
-    public function index(): \Illuminate\Contracts\View\View
+    public function __construct(protected TranslationManager $translationManager)
+    {
+    }
+
+    public function index(): View
     {
         return view(
             'translation::translation.index',
@@ -27,22 +33,18 @@ class TranslationController extends BackendController
         );
     }
 
-    public function getDataTable(Request $request): \Illuminate\Http\JsonResponse
+    public function getDataTable(Request $request): JsonResponse
     {
         $search = $request->get('search');
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 10);
         $page = $offset <= 0 ? 1 : (round($offset / $limit)) + 1;
 
-        $result = Locale::all();
-
+        $result = $this->translationManager->modules();
         if ($search) {
-            $result = collect($result)
-                ->filter(
-                    function ($item) use ($search) {
-                        return (str_contains($item['title'], $search));
-                    }
-                );
+            $result = $result->filter(
+                fn ($item) => str_contains(strtolower($item['title']), strtolower($search))
+            );
         }
 
         $total = count($result);

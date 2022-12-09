@@ -10,18 +10,26 @@
 
 namespace Juzaweb\Translation\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Juzaweb\Translation\Facades\Locale;
+use Juzaweb\CMS\Contracts\TranslationManager;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\ArrayPagination;
+use Spatie\TranslationLoader\LanguageLine;
 
 class LocaleController extends BackendController
 {
-    public function index($type, $locale)
+    public function __construct(protected TranslationManager $translationManager)
     {
-        $data = Locale::getByKey($type);
-        $language = config('locales.'.$locale.'.name');
+    }
+
+    public function index($type, $locale): View
+    {
+        $data = $this->translationManager->modules()->get($type);
+        $language = config("locales.{$locale}.name");
 
         if (empty($data)) {
             return abort(404);
@@ -52,56 +60,20 @@ class LocaleController extends BackendController
         );
     }
 
-    public function save(Request $request, $type, $locale)
+    public function save(Request $request, $type, $locale): JsonResponse|RedirectResponse
     {
-        $data = Locale::getByKey($type);
-        $keys = explode('.', $request->post('key'));
+        $module = $this->translationManager->modules()->get($type);
+        $group = $request->post('group');
         $value = $request->post('value');
 
-        $file = $keys[0] . '.php';
-        unset($keys[0]);
+        $model = LanguageLine::firstOrNew([
+            'namespace' => $module->get('namespace'),
+            'group' => $group,
+            'key' => $request->post('key'),
+        ]);
 
-        $lang = [];
-        $folderPath = $data['publish_path'] . '/' . $locale;
-        $filePath = $folderPath . '/' . $file;
-
-        if (!is_dir($folderPath)) {
-            try {
-                File::makeDirectory($folderPath, 0775, true);
-            } catch (\Throwable $e) {
-                return $this->error(
-                    [
-                        'message' => $e->getMessage(),
-                    ]
-                );
-            }
-        }
-
-        if (file_exists($filePath)) {
-            $lang = require($filePath);
-        }
-
-        $keys = collect($keys)->values()->toArray();
-        $lang = $this->setKeyLang($keys, $value, $lang);
-
-        $strArr = $this->varExportShort($lang) . ";";
-        $fileContent = "<?php \n";
-        $fileContent .= "return $strArr \n";
-        $fileContent .= "\n";
-
-        try {
-            File::put($filePath, $fileContent);
-
-            /*if (function_exists('opcache_reset')) {
-                opcache_reset();
-            }*/
-        } catch (\Throwable $e) {
-            return $this->error(
-                [
-                    'message' => $e->getMessage(),
-                ]
-            );
-        }
+        $model->setTranslation($locale, $value);
+        $model->save();
 
         return $this->success(
             [
@@ -110,22 +82,23 @@ class LocaleController extends BackendController
         );
     }
 
-    public function getDataTable(Request $request, $type, $locale)
+    public function getDataTable(Request $request, $type, $locale): JsonResponse
     {
-        $search = $request->get('search');
+        $search = strtolower($request->get('search'));
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 10);
         $page = $offset <= 0 ? 1 : (round($offset / $limit)) + 1;
 
-        $result = Locale::getAllTrans($type, $locale);
+        $data = $this->translationManager->modules()->get($type);
+        $result = $this->translationManager->locale($data)->translationLines($locale);
 
         if ($search) {
             $result = collect($result)
                 ->filter(
                     function ($item) use ($search) {
                         return (
-                            str_contains($item['key'], $search) ||
-                            str_contains($item['value'], $search)
+                            str_contains(strtolower($item['key']), $search) ||
+                            str_contains(strtolower($item['value']), $search)
                         );
                     }
                 );
@@ -134,48 +107,23 @@ class LocaleController extends BackendController
         $total = count($result);
         $items = ArrayPagination::make($result)->paginate($limit, $page)->values();
 
+        $langs = LanguageLine::where(['namespace' => $data->get('namespace')])
+            ->whereIn('key', $items->pluck('key')->toArray())
+            ->get(['key', 'text'])
+            ->keyBy('key');
+
+        $items = $items->map(
+            function ($item) use ($langs, $locale) {
+                $item['trans'] = $langs->get($item['key'])->text[$locale] ?? $item['trans'];
+                return $item;
+            }
+        );
+
         return response()->json(
             [
                 'total' => $total,
                 'rows' => $items,
             ]
-        );
-    }
-
-    protected function setKeyLang($keys, $value, $lang)
-    {
-        foreach ($keys as $index => $key) {
-            if (isset($keys[$index + 1])) {
-                unset($keys[$index]);
-                $keys = collect($keys)->values()->toArray();
-                $lang[$key] = $this->setKeyLang($keys, $value, $lang[$key] ?? []);
-
-                return $lang;
-            } else {
-                $lang[$key] = $value;
-            }
-        }
-
-        return $lang;
-    }
-
-    protected function varExportShort($var)
-    {
-        $output = json_decode(
-            str_replace(
-                ['(', ')'],
-                ['&#40', '&#41'],
-                json_encode($var)
-            ),
-            true
-        );
-
-        $output = var_export($output, true);
-
-        return str_replace(
-            ['array (', ')', '&#40', '&#41'],
-            ['[',']','(',')'],
-            $output
         );
     }
 }
