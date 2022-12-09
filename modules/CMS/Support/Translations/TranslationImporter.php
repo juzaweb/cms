@@ -24,7 +24,7 @@ class TranslationImporter
     ) {
     }
 
-    public function import(): int
+    public function run(): int
     {
         return $this->importLocalTranslations() + $this->importMissingKeys();
     }

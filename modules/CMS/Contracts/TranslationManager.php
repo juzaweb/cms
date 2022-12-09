@@ -12,6 +12,7 @@ namespace Juzaweb\CMS\Contracts;
 
 use Juzaweb\CMS\Models\Translation;
 use Juzaweb\CMS\Support\Translations\TranslationImporter;
+use Juzaweb\CMS\Support\Translations\TranslationTranslate;
 
 /**
  * @see \Juzaweb\CMS\Support\Manager\TranslationManager
@@ -23,7 +24,12 @@ interface TranslationManager
      */
     public function import(string $module, string $name = null): TranslationImporter;
 
-    public function translate(string $source, string $target, string $module = 'cms', string $name = 'core'): array;
+    public function translate(
+        string $source,
+        string $target,
+        string $module = 'cms',
+        string $name = 'core'
+    ): TranslationTranslate;
 
     public function importTranslationLine(array $data): Translation;
 }

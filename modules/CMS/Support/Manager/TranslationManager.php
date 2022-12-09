@@ -10,7 +10,6 @@
 
 namespace Juzaweb\CMS\Support\Manager;
 
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Juzaweb\CMS\Contracts\GoogleTranslate;
@@ -20,6 +19,7 @@ use Juzaweb\CMS\Contracts\TranslationFinder;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
 use Juzaweb\CMS\Models\Translation;
 use Juzaweb\CMS\Support\Translations\TranslationImporter;
+use Juzaweb\CMS\Support\Translations\TranslationTranslate;
 
 class TranslationManager implements TranslationManagerContract
 {
@@ -43,62 +43,15 @@ class TranslationManager implements TranslationManagerContract
         return $this->createTranslationImporter($module);
     }
 
-    public function translate(string $source, string $target, string $module = 'cms', string $name = 'core'): array
-    {
+    public function translate(
+        string $source,
+        string $target,
+        string $module = 'cms',
+        string $name = 'core'
+    ): TranslationTranslate {
         $module = $this->find($module, $name);
 
-        $trans = Translation::from('jw_translations AS a')
-            ->where('locale', '=', $source)
-            ->where('object_type', '=', $module->get('type'))
-            ->where('object_key', '=', $module->get('key'))
-            ->whereNotExists(
-                function (Builder $q) use ($target) {
-                    $q->select(['id'])
-                        ->from('jw_translations AS b')
-                        ->where('locale', '=', $target)
-                        ->whereColumn('a.group', '=', 'b.group')
-                        ->whereColumn('a.namespace', '=', 'b.namespace')
-                        ->whereColumn('a.key', '=', 'b.key')
-                        ->whereColumn('a.object_type', '=', 'b.object_type')
-                        ->whereColumn('a.object_key', '=', 'b.object_key');
-                }
-            )
-            ->get();
-
-        $total = 0;
-        $errors = [];
-        foreach ($trans as $tran) {
-            $value = $this->googleTranslate->translate(
-                $source,
-                $target,
-                $tran->value
-            );
-
-            if (empty($value)) {
-                $errors[] = "Translate {$tran->value} fail";
-                continue;
-            }
-
-            $newTran = $this->importTranslationLine(
-                [
-                    'locale' => $target,
-                    'group' => $tran->group,
-                    'namespace' => $tran->namespace,
-                    'key' => $tran->key,
-                    'object_type' => $tran->object_type,
-                    'object_key' => $tran->object_key,
-                    'value' => $value
-                ]
-            );
-
-            if ($newTran->wasRecentlyCreated) {
-                $total += 1;
-            }
-
-            sleep(2);
-        }
-
-        return ['total' => $total, 'errors' => $errors];
+        return $this->createTranslationTranslate($module)->setSource($source)->setTarget($target);
     }
 
     public function find(string|Collection $module, string $name = null): Collection
@@ -161,6 +114,15 @@ class TranslationManager implements TranslationManagerContract
         return Translation::firstOrCreate(
             Arr::only($data, ['locale', 'group', 'namespace', 'key', 'object_type', 'object_key']),
             Arr::only($data, ['value'])
+        );
+    }
+
+    protected function createTranslationTranslate(Collection $module): TranslationTranslate
+    {
+        return new TranslationTranslate(
+            $module,
+            $this->googleTranslate,
+            $this
         );
     }
 
