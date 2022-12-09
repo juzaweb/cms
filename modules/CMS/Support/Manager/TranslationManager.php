@@ -112,8 +112,15 @@ class TranslationManager implements TranslationManagerContract
         }
     }
 
-    public function importTranslationLine(array $data): Translation
+    public function importTranslationLine(array $data, bool $force = false): Translation
     {
+        if ($force) {
+            return Translation::updateOrCreate(
+                Arr::only($data, ['locale', 'group', 'namespace', 'key', 'object_type', 'object_key']),
+                Arr::only($data, ['value'])
+            );
+        }
+
         return Translation::firstOrCreate(
             Arr::only($data, ['locale', 'group', 'namespace', 'key', 'object_type', 'object_key']),
             Arr::only($data, ['value'])

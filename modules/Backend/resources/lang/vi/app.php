@@ -1,5 +1,4 @@
 <?php
-
 return [
     'home' => 'Nhà',
     'widgets' => 'Widgets',
@@ -316,16 +315,15 @@ return [
     'select' => 'Chọn: tên',
     'select_all' => 'Chọn tất cả',
     'reading_settings' => 'Đọc cài đặt',
-    'permalink_description' => 'Nếu muốn, bạn có thể nhập cấu trúc tùy chỉnh cho URL danh mục và thẻ của mình tại đây. '
-        .'Ví dụ: sử dụng chủ đề làm cơ sở danh mục của bạn sẽ làm cho danh mục của bạn liên kết như: '
-        .'url / chủ đề / chưa phân loại /. '
-        .'Nếu bạn để trống các giá trị này, các giá trị mặc định sẽ được sử dụng.',
+    'permalink_description' => 'Nếu muốn, bạn có thể nhập cấu trúc tùy chỉnh cho URL danh mục và thẻ của mình tại đây.'
+        .' Ví dụ: sử dụng chủ đề làm cơ sở danh mục của bạn sẽ làm cho danh mục của bạn liên kết như:'
+        .' url / chủ đề / chưa phân loại /. Nếu bạn để trống các giá trị này, các giá trị mặc định sẽ được sử dụng.',
     'your_homepage_displays' => 'Trang chủ của bạn hiển thị',
     'your_latest_posts' => 'Bài viết mới nhất của bạn',
     'a_static_page' => 'Một trang tĩnh (chọn bên dưới)',
     'site_description_note' => 'Trong một vài từ, hãy giải thích nội dung của trang web này.',
-    'timezone_description' => 'Chọn một thành phố trong cùng múi giờ với bạn hoặc'
-        .' chênh lệch múi giờ UTC (Giờ phối hợp quốc tế).',
+    'timezone_description' => 'Chọn một thành phố trong cùng múi giờ với bạn hoặc chênh lệch múi giờ UTC'
+        .' (Giờ phối hợp quốc tế).',
     'universal_time_is' => 'Giờ quốc tế là',
     'date_format' => 'Định dạng ngày tháng',
     'time_format' => 'Định dạng thời gian',
@@ -348,7 +346,9 @@ return [
     'email_hook' => 'Móc email',
     'logged_success' => 'Ghi nhật ký thành công',
     'registered_success' => 'Đã đăng ký thành công',
-    'registered_success_verify' => 'Đã đăng ký thành công! Vui lòng nhấp vào liên kết trong email của bạn để xác minh tài khoản của bạn. Vui lòng kiểm tra hộp thư rác nếu bạn không thấy nó trong hộp thư đến của mình',
+    'registered_success_verify' => 'Đã đăng ký thành công! Vui lòng nhấp vào liên kết trong email'
+        .' của bạn để xác minh tài khoản của bạn.'
+        .' Vui lòng kiểm tra hộp thư rác nếu bạn không thấy nó trong hộp thư đến của mình',
     'user_name' => 'Tên tài khoản',
     'user_email' => 'Email người dùng',
     'verify_token' => 'Xác minh mã thông báo',
@@ -441,4 +441,126 @@ return [
         'tools' => 'Công cụ',
         'import' => 'Nhập khẩu',
     ],
+    'save_change' => 'Lưu thay đổi',
+    'download' => 'Tải xuống',
+    'current_password' => 'Mật khẩu hiện tại',
+    'callback_url' => 'Gọi lại URL',
+    'quick_edit' => 'chỉnh sửa nhanh',
+    'settings' => 'Cài đặt',
+    'post_type' => 'Loại thư',
+    'post_types' => 'Loại bài đăng',
+    'taxonomy' => 'phân loại',
+    'taxonomies' => 'phân loại',
+    'sort_by' => 'Sắp xếp theo',
+    'sort_order' => 'Thứ tự sắp xếp',
+    'view_post' => 'xem bài đăng',
+    'tools' => 'Công cụ',
+    'import' => 'Nhập khẩu',
+    'reset_password' => 'Đặt lại mật khẩu',
+    'current_version' => 'Phiên bản hiện tại',
+    'new_version' => 'Phiên bản mới',
+    'updating' => 'Đang cập nhật...',
+    'custom_seo' => 'SEO tùy chỉnh',
+    'buy' => 'Mua',
+    'mark_as_viewed' => 'Đánh dấu là đã xem',
+    'update_process' => [
+        'step1' => [
+            'before' => 'Nhận dữ liệu cập nhật...',
+            'after' => 'Đã nhận được dữ liệu cập nhật',
+        ],
+        'step2' => [
+            'before' => 'Tải xuống tệp cập nhật...',
+            'after' => 'Đã tải xuống tệp cập nhật',
+        ],
+        'step3' => [
+            'before' => 'Giải nén tập tin...',
+            'after' => 'Giải nén file thành công',
+        ],
+        'step4' => [
+            'before' => 'Sao lưu phiên bản cũ...',
+            'after' => 'Sao lưu phiên bản cũ thành công',
+        ],
+        'step5' => [
+            'before' => 'Cập nhật tập tin và thư mục...',
+            'after' => 'Cập nhật tệp và thư mục thành công',
+        ],
+        'step6' => [
+            'before' => 'Cập nhật dữ liệu...',
+            'after' => 'Cập nhật dữ liệu thành công',
+        ],
+        'done' => 'Xong!!',
+    ],
+    'upload_theme' => 'Tải lên chủ đề',
+    'upload_plugin' => 'Tải lên plugin',
+    'theme_upload' => [
+        'error' => [
+            'mime_type' => 'Loại tệp mime không hợp lệ.',
+            'extension' => 'Tiện ích mở rộng tệp không hợp lệ.',
+            'file_required' => 'Không thể tìm thấy :tên tập tin.',
+            'unzip' => 'Không thể giải nén tập tin.',
+            'exists' => 'Chủ đề: tên đã tồn tại.',
+        ],
+    ],
+    'plugin_upload' => [
+        'error' => [
+            'mime_type' => 'Loại tệp mime không hợp lệ.',
+            'extension' => 'Tiện ích mở rộng tệp không hợp lệ.',
+            'file_required' => 'Không thể tìm thấy :tên tập tin.',
+            'unzip' => 'Không thể giải nén tập tin.',
+            'exists' => 'Plugin :name đã tồn tại.',
+        ],
+    ],
+    'permission_manager' => [
+        'view_list' => 'Danh sách xem',
+    ],
+    'network' => [
+        'sites' => 'trang web',
+        'network' => 'Mạng',
+        'domain_mapping' => 'Ánh xạ tên miền',
+    ],
+    'seo' => [
+        'enable_sitemap' => 'Bật sơ đồ trang web',
+        'enable_sitemap_description' => 'Kích hoạt các sơ đồ trang web XML mà Yoast SEO tạo ra.
+  <a href="/sitemap.xml" target="_blank">Xem sơ đồ trang web XML</a>',
+        'enable_post_feed' => 'Bật nguồn cấp dữ liệu bài đăng',
+        'enable_taxonomy_feed' => 'Bật nguồn cấp dữ liệu phân loại',
+        'enable_auto_ping' => 'Lập chỉ mụcBây giờ',
+        'auto_ping_description' => 'Tự động ping các công cụ tìm kiếm như Bing và Yandex'
+            .' bất cứ khi nào bạn xuất bản, cập nhật hoặc xóa bài đăng.',
+        'bing_api_key' => 'Khóa API Bing',
+        'bing_verify_key' => 'Bing Xác minh khóa trang web',
+        'google_verify_key' => 'Khóa trang web xác minh của Google',
+    ],
+    'backup' => [
+        'backup_setting' => 'Cài đặt sao lưu',
+        'enable_backup' => 'Bật sao lưu',
+        'backup_time' => 'Thời gian sao lưu',
+    ],
+    'media_setting' => [
+        'title' => 'Cài đặt phương tiện',
+        'auto_resize_thumbnail' => 'Tự động thay đổi kích thước hình thu nhỏ (Tối ưu hóa tốc độ trang)',
+        'thumbnail_defaults' => 'Mặc định hình thu nhỏ',
+        'thumbnail_size' => 'Kích thước thu nhỏ',
+        'max_width' => 'Chiều rộng tối đa',
+        'max_height' => 'Chiều cao tối đa',
+        'thumbnail_default' => 'Hình thu nhỏ mặc định',
+        'thumbnail_settings' => 'cài đặt hình thu nhỏ',
+    ],
+    'file_manager' => [
+        'upload_from_url' => 'Tải lên từ url',
+        'download_to_server' => 'Tải tập tin lên máy chủ',
+        'upload_file' => 'Cập nhật dử liệu',
+    ],
+    'movies_title' => 'tiêu đề phim',
+    'movies_keywords' => 'từ khóa phim',
+    'movies_description' => 'mô tả phim',
+    'tv_series_title' => 'tiêu đề phim truyền hình',
+    'tv_series_keywords' => 'Từ khóa phim truyền hình',
+    'tv_series_description' => 'mô tả phim truyền hình',
+    '{$key}' => '{$key}',
+    '{$fieldName}' => '{$fieldName}',
+    'premium' => [
+        'activation_code' => 'Mã kích hoạt cao cấp',
+    ],
+    '{$item}' => '{$item}',
 ];

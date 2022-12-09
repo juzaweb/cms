@@ -18,6 +18,7 @@ use Juzaweb\CMS\Models\Translation;
 class TranslationExporter
 {
     protected string $language;
+    protected bool $force = false;
 
     public function __construct(
         protected Collection $module
@@ -51,6 +52,13 @@ class TranslationExporter
     public function setLanguage(string $language): static
     {
         $this->language = $language;
+
+        return $this;
+    }
+
+    public function setForce(bool $force): static
+    {
+        $this->force = $force;
 
         return $this;
     }
@@ -90,7 +98,11 @@ class TranslationExporter
             }
 
             $trans = $this->parseChildKeyArray($trans);
-            $trans = array_merge($trans, $current);
+            if ($this->force) {
+                $trans = array_merge_recursive($trans, $current);
+            } else {
+                $trans = array_merge_recursive($current, $trans);
+            }
 
             $str = '<?php' . PHP_EOL . 'return ' . $this->varExport($trans) . ';' . PHP_EOL;
             File::put("{$path}/{$language}/{$group}.php", $str);
