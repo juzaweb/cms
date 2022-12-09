@@ -107,47 +107,23 @@ class LocaleController extends BackendController
         $total = count($result);
         $items = ArrayPagination::make($result)->paginate($limit, $page)->values();
 
+        $langs = LanguageLine::where(['namespace' => $data->get('namespace')])
+            ->whereIn('key', $items->pluck('key')->toArray())
+            ->get(['key', 'text'])
+            ->keyBy('key');
+
+        $items = $items->map(
+            function ($item) use ($langs, $locale) {
+                $item['trans'] = $langs->get($item['key'])->text[$locale] ?? $item['trans'];
+                return $item;
+            }
+        );
+
         return response()->json(
             [
                 'total' => $total,
                 'rows' => $items,
             ]
-        );
-    }
-
-    protected function setKeyLang($keys, $value, $lang)
-    {
-        foreach ($keys as $index => $key) {
-            if (isset($keys[$index + 1])) {
-                unset($keys[$index]);
-                $keys = collect($keys)->values()->toArray();
-                $lang[$key] = $this->setKeyLang($keys, $value, $lang[$key] ?? []);
-                return $lang;
-            } else {
-                $lang[$key] = $value;
-            }
-        }
-
-        return $lang;
-    }
-
-    protected function varExportShort($var)
-    {
-        $output = json_decode(
-            str_replace(
-                ['(', ')'],
-                ['&#40', '&#41'],
-                json_encode($var)
-            ),
-            true
-        );
-
-        $output = var_export($output, true);
-
-        return str_replace(
-            ['array (', ')', '&#40', '&#41'],
-            ['[',']','(',')'],
-            $output
         );
     }
 }
