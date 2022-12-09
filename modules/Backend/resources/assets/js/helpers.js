@@ -97,7 +97,7 @@ function htmlspecialchars(str) {
     return str.replace('&', '&amp;').replace('"', '&quot;').replace("'", '&#039;').replace('<', '&lt;').replace('>', '&gt;');
 }
 
-function toggle_global_loading(status, timeout = 500) {
+function toggle_global_loading(status, timeout = 300) {
     if (status) {
         $("#admin-overlay").fadeIn(300);
     } else {

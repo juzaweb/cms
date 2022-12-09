@@ -55,6 +55,7 @@ class ModuleController extends BackendController
 
         try {
             File::makeDirectory($publishPath, 0755, true);
+            File::put("{$publishPath}/.gitkeep", '');
         } catch (\Throwable $e) {
             return $this->error(
                 [
