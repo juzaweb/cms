@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Support\Translations;
 
+use Closure;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\TranslationManager;
@@ -17,6 +18,8 @@ use Juzaweb\CMS\Contracts\TranslationFinder;
 
 class TranslationImporter
 {
+    protected Closure $progressCallback;
+
     public function __construct(
         protected Collection $module,
         protected TranslationFinder $translationFinder,
@@ -48,6 +51,10 @@ class TranslationImporter
                     )
                 );
 
+                if (isset($this->progressCallback)) {
+                    call_user_func($this->progressCallback, $model);
+                }
+
                 if ($model->wasRecentlyCreated) {
                     $total += 1;
                 }
@@ -69,12 +76,23 @@ class TranslationImporter
             $item['object_key'] = $this->module->get('key');
             $model = $this->translationManager->importTranslationLine($item);
 
+            if (isset($this->progressCallback)) {
+                call_user_func($this->progressCallback, $model);
+            }
+
             if ($model->wasRecentlyCreated) {
                 $total += 1;
             }
         }
 
         return $total;
+    }
+
+    public function progressCallback(Closure $progressCallback): static
+    {
+        $this->progressCallback = $progressCallback;
+
+        return $this;
     }
 
     protected function getLocalLocales(): array

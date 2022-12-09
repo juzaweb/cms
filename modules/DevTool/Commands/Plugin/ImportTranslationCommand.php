@@ -22,9 +22,16 @@ class ImportTranslationCommand extends Command
     {
         $plugin = $this->argument('plugin');
 
-        $import = app(TranslationManager::class)->import('plugin', $plugin);
+        $importer = app(TranslationManager::class)->import('plugin', $plugin);
+        $importer->progressCallback(
+            function ($model) {
+                $this->info("--> Import translation key {$model->key}");
+            }
+        );
 
-        $this->info("Import success {$import} language text.");
+        $total = $importer->run();
+
+        $this->info("Import success {$total} language text.");
 
         return self::SUCCESS;
     }

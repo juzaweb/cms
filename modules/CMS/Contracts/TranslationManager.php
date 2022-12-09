@@ -31,5 +31,8 @@ interface TranslationManager
         string $name = 'core'
     ): TranslationTranslate;
 
+    /**
+     * @see \Juzaweb\CMS\Support\Manager\TranslationManager::importTranslationLine()
+     */
     public function importTranslationLine(array $data): Translation;
 }
