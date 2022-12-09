@@ -47,12 +47,12 @@ class Translation extends Model
         'id'
     ];
 
-    public function scopeOfTranslatedGroup(Builder $query, $group)
+    public function scopeOfTranslatedGroup(Builder $query, $group): Builder
     {
         return $query->where('group', $group)->whereNotNull('value');
     }
 
-    public function scopeOrderByGroupKeys(Builder $query, $ordered)
+    public function scopeOrderByGroupKeys(Builder $query, $ordered): Builder
     {
         if ($ordered) {
             $query->orderBy('group')->orderBy('key');
@@ -61,21 +61,17 @@ class Translation extends Model
         return $query;
     }
 
-    public function scopeSelectDistinctGroup(Builder $query)
+    public function scopeSelectDistinctGroup(Builder $query): Builder
     {
-        switch (DB::getDriverName()) {
-            case 'mysql':
-                $select = 'DISTINCT `group`';
-                break;
-            default:
-                $select = 'DISTINCT "group"';
-                break;
-        }
+        $select = match (DB::getDriverName()) {
+            'mysql' => 'DISTINCT `group`',
+            default => 'DISTINCT "group"',
+        };
 
         return $query->select(DB::raw($select));
     }
 
-    public function scopeWhereActive(Builder $builder)
+    public function scopeWhereActive(Builder $builder): Builder
     {
         return $builder->where('status', '=', 1);
     }

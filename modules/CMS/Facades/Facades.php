@@ -50,6 +50,7 @@ class Facades
             \Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
             \Illuminate\Session\SessionServiceProvider::class,
             \Spatie\TranslationLoader\TranslationServiceProvider::class,
+            //\Illuminate\Translation\TranslationServiceProvider::class,
             \Illuminate\Validation\ValidationServiceProvider::class,
             \Illuminate\View\ViewServiceProvider::class,
 

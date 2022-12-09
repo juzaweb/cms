@@ -474,7 +474,7 @@ return [
     'mark_as_viewed' => 'Mark as viewed',
     'extension' => 'Extension',
     'path' => 'Path',
-    'last_updated' => 'Last updated',
+    'last_update' => 'Last update',
     'size' => 'Size',
     'update_process' => [
         'step1' => [

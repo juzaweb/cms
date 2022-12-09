@@ -79,7 +79,7 @@ class Theme
             return realpath($this->path);
         }
 
-        return realpath("{$this->path}/{$path}");
+        return realpath($this->path) . "/{$path}";
     }
 
     public function fileExists(string $path): bool

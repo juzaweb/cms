@@ -18,9 +18,12 @@ use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Contracts\EventyContract;
 use Juzaweb\CMS\Contracts\Field;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
+use Juzaweb\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Contracts\JWQueryContract;
+use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Juzaweb\CMS\Contracts\OverwriteConfigContract;
 use Juzaweb\CMS\Contracts\PostImporterContract;
@@ -30,6 +33,8 @@ use Juzaweb\CMS\Contracts\ShortCodeCompiler as ShortCodeCompilerContract;
 use Juzaweb\CMS\Contracts\StorageDataContract;
 use Juzaweb\CMS\Contracts\TableGroupContract;
 use Juzaweb\CMS\Contracts\ThemeConfigContract;
+use Juzaweb\CMS\Contracts\TranslationFinder as TranslationFinderContract;
+use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
 use Juzaweb\CMS\Contracts\XssCleanerContract;
 use Juzaweb\CMS\Extension\Custom;
 use Juzaweb\CMS\Facades\OverwriteConfig;
@@ -38,6 +43,7 @@ use Juzaweb\CMS\Support\CacheGroup;
 use Juzaweb\CMS\Support\Config as DbConfig;
 use Juzaweb\CMS\Support\DatabaseTableGroup;
 use Juzaweb\CMS\Support\GlobalData;
+use Juzaweb\CMS\Support\GoogleTranslate;
 use Juzaweb\CMS\Support\HookAction;
 use Juzaweb\CMS\Support\Html\Field as HtmlField;
 use Juzaweb\CMS\Support\Imports\PostImporter;
@@ -46,10 +52,12 @@ use Juzaweb\CMS\Support\JWQuery;
 use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Manager\BackendMessageManager;
 use Juzaweb\CMS\Support\Manager\PostManager;
+use Juzaweb\CMS\Support\Manager\TranslationManager;
 use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
 use Juzaweb\CMS\Support\ShortCode\ShortCode;
 use Juzaweb\CMS\Support\StorageData;
 use Juzaweb\CMS\Support\Theme\ThemeConfig;
+use Juzaweb\CMS\Support\Translations\TranslationFinder;
 use Juzaweb\CMS\Support\Validators\DomainValidator;
 use Juzaweb\CMS\Support\Validators\ModelExists;
 use Juzaweb\CMS\Support\Validators\ModelUnique;
@@ -326,6 +334,30 @@ class CmsServiceProvider extends ServiceProvider
             function ($app) {
                 return new ShortCode($app[ShortCodeCompilerContract::class]);
             }
+        );
+
+        $this->app->singleton(
+            TranslationFinderContract::class,
+            function ($app) {
+                return new TranslationFinder();
+            }
+        );
+
+        $this->app->singleton(
+            TranslationManagerContract::class,
+            function ($app) {
+                return new TranslationManager(
+                    $app[LocalPluginRepositoryContract::class],
+                    $app[LocalThemeRepositoryContract::class],
+                    $app[TranslationFinderContract::class],
+                    $app[GoogleTranslateContract::class]
+                );
+            }
+        );
+
+        $this->app->singleton(
+            GoogleTranslateContract::class,
+            fn ($app) => new GoogleTranslate($app[\Illuminate\Contracts\Filesystem\Factory::class])
         );
     }
 

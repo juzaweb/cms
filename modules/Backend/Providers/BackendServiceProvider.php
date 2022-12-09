@@ -16,7 +16,7 @@ use Juzaweb\Backend\Actions\ToolAction;
 use Juzaweb\Backend\Commands\AutoSubmitCommand;
 use Juzaweb\Backend\Commands\AutoTagCommand;
 use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
-use Juzaweb\Backend\Commands\FindTransCommand;
+use Juzaweb\Backend\Commands\ImportTranslationCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Commands\ThemePublishCommand;
 use Juzaweb\Backend\Commands\TransFromEnglish;
@@ -84,7 +84,7 @@ class BackendServiceProvider extends ServiceProvider
         $this->commands(
             [
                 PermissionGenerateCommand::class,
-                FindTransCommand::class,
+                ImportTranslationCommand::class,
                 TransFromEnglish::class,
                 EmailTemplateGenerateCommand::class,
                 ThemePublishCommand::class,
