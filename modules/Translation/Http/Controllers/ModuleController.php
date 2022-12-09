@@ -14,12 +14,18 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Juzaweb\CMS\Contracts\TranslationManager;
 use Juzaweb\CMS\Support\ArrayPagination;
 use Juzaweb\Translation\Facades\Locale;
 use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\Translation\Http\Requests\AddLanguageRequest;
 
 class ModuleController extends BackendController
 {
+    public function __construct(protected TranslationManager $translationManager)
+    {
+    }
+
     public function index($type): View
     {
         $this->addBreadcrumb(
@@ -29,7 +35,7 @@ class ModuleController extends BackendController
             ]
         );
 
-        $data = Locale::getByKey($type);
+        $data = $this->translationManager->modules()->get($type);
 
         return view(
             'translation::translation.module',
@@ -40,29 +46,18 @@ class ModuleController extends BackendController
         );
     }
 
-    public function add(Request $request, $type): JsonResponse
+    public function add(AddLanguageRequest $request, $type): JsonResponse
     {
+        $languages = $this->translationManager->locale($this->translationManager->modules()->get($type))->languages();
         $locale = $request->post('locale');
-        $publishPath = Locale::publishPath($type, $locale);
 
-        if (is_dir($publishPath)) {
-            return $this->error(
-                [
-                    'message' => trans('cms::app.language_already_exist')
-                ]
-            );
+        if ($languages->get($locale)) {
+            return $this->error(trans('cms::app.language_already_exist'));
         }
 
-        try {
-            File::makeDirectory($publishPath, 0755, true);
-            File::put("{$publishPath}/.gitkeep", '');
-        } catch (\Throwable $e) {
-            return $this->error(
-                [
-                    'message' => $e->getMessage()
-                ]
-            );
-        }
+        $customs = get_config('custom_languages', []);
+        $customs[$type][] = $locale;
+        set_config('custom_languages', $customs);
 
         return $this->success(
             [
@@ -77,8 +72,7 @@ class ModuleController extends BackendController
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 10);
         $page = $offset <= 0 ? 1 : (round($offset / $limit)) + 1;
-
-        $result = Locale::allLanguage($type);
+        $result = $this->translationManager->locale($this->translationManager->modules()->get($type))->languages();
 
         if ($search) {
             $result = collect($result)->filter(

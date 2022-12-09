@@ -16,12 +16,13 @@ $(document).ready(function () {
 
         event.preventDefault();
 
-        var form = $(this);
-        var formData = new FormData(form[0]);
-        var btnsubmit = form.find("button[type=submit]");
-        var currentIcon = btnsubmit.find('i').attr('class');
-        var currentText = btnsubmit.html();
-        var submitSuccess = form.data('success');
+        let form = $(this);
+        let formData = new FormData(form[0]);
+        let btnsubmit = form.find("button[type=submit]");
+        let currentIcon = btnsubmit.find('i').attr('class');
+        let currentText = btnsubmit.html();
+        let submitSuccess = form.data('success');
+        let notify = form.data('notify') || false;
 
         btnsubmit.find('i').attr('class', 'fa fa-spinner fa-spin');
         btnsubmit.prop("disabled", true);
@@ -39,8 +40,11 @@ $(document).ready(function () {
             contentType: false,
             processData: false
         }).done(function(response) {
-
-            show_message(response);
+            if (notify) {
+                show_notify(response);
+            } else {
+                show_message(response);
+            }
 
             if (submitSuccess) {
                 eval(submitSuccess)(form, response);
@@ -73,7 +77,11 @@ $(document).ready(function () {
                 btnsubmit.html(currentText);
             }
 
-            show_message(response);
+            if (notify) {
+                show_notify(response);
+            } else {
+                show_message(response);
+            }
             return false;
         });
     });
