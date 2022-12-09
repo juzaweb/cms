@@ -10,7 +10,6 @@
 
 namespace Juzaweb\CMS\Support\Translations;
 
-use Illuminate\Contracts\Translation\Translator as TranslatorContract;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Contracts\TranslationFinder as TranslationFinderContract;
 use Symfony\Component\Finder\Finder;

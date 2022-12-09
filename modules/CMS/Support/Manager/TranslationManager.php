@@ -13,13 +13,13 @@ namespace Juzaweb\CMS\Support\Manager;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\GoogleTranslate;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\TranslationFinder;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
 use Juzaweb\CMS\Models\Translation;
+use Juzaweb\CMS\Support\Translations\TranslationImporter;
 
 class TranslationManager implements TranslationManagerContract
 {
@@ -31,66 +31,16 @@ class TranslationManager implements TranslationManagerContract
     ) {
     }
 
-    public function import(string $module, string $name = null): int
-    {
-        $module = $this->find($module, $name);
-
-        return $this->importLocalTranslations($module, $name)
-            + $this->importMissingKeys($module, $name);
-    }
-
-    public function importLocalTranslations(string|Collection $module, string $name = null): int
-    {
-        $locales = $this->getLocalLocales($module, $name);
-        $total = 0;
-        foreach ($locales as $locale) {
-            $result = $this->getLocalTranslates($module, $name, $locale['code']);
-            foreach ($result as $item) {
-                $model = $this->importTranslationLine(
-                    array_merge(
-                        $item,
-                        [
-                            'namespace' => $module->get('namespace'),
-                            'locale' => $locale['code'],
-                            'object_type' => $module->get('type'),
-                            'object_key' => $module->get('key'),
-                        ]
-                    )
-                );
-
-                if ($model->wasRecentlyCreated) {
-                    $total += 1;
-                }
-            }
-        }
-
-        return $total;
-    }
-
-    public function importMissingKeys(string|Collection $module, string $name = null): int
-    {
-        $module = $this->find($module, $name);
-        $results = $this->translationFinder->find(
-            $module->get('src_path')
-        );
-
-        $total = 0;
-        foreach ($results as $item) {
-            $item['object_type'] = $module->get('type');
-            $item['object_key'] = $module->get('key');
-            $model = $this->importTranslationLine($item);
-
-            if ($model->wasRecentlyCreated) {
-                $total += 1;
-            }
-        }
-
-        return $total;
-    }
-
     public function export(string $module = 'cms', string $name = null)
     {
         //
+    }
+
+    public function import(string $module, string $name = null): TranslationImporter
+    {
+        $module = $this->find($module, $name);
+
+        return $this->createTranslationImporter($module);
     }
 
     public function translate(string $source, string $target, string $module = 'cms', string $name = 'core'): array
@@ -206,74 +156,20 @@ class TranslationManager implements TranslationManagerContract
         }
     }
 
-    protected function getLocalLocales(string|Collection $module = 'cms', string $name = null): array
-    {
-        $folderPath = $this->find($module, $name)->get('lang_path');
-        if (!is_dir($folderPath)) {
-            return [];
-        }
-
-        $folders = collect(File::directories($folderPath))
-            ->map(fn ($item) => basename($item))
-            ->values()
-            ->toArray();
-
-        return collect(config('locales'))
-            ->whereIn('code', $folders)
-            ->toArray();
-    }
-
-    /**
-     * Get all language trans
-     *
-     * @param string|Collection $module
-     * @param string|null $name
-     * @param string $locale
-     * @return array
-     * @throws \Exception
-     */
-    protected function getLocalTranslates(
-        string|Collection $module = 'cms',
-        string $name = null,
-        string $locale = 'en'
-    ): array {
-        $files = File::files($this->find($module, $name)->get('lang_path') . "/{$locale}");
-        $files = collect($files)
-            ->filter(fn ($item) => $item->getExtension() == 'php')
-            ->values()
-            ->toArray();
-
-        $result = [];
-        foreach ($files as $file) {
-            $lang = require($file->getRealPath());
-            $group = str_replace('.php', '', $file->getFilename());
-            $this->mapGroupKeys($lang, $group, $result);
-        }
-
-        return $result;
-    }
-
-    protected function mapGroupKeys(array $lang, $group, &$result, $keyPrefix = '')
-    {
-        foreach ($lang as $key => $item) {
-            if (is_array($item)) {
-                $prefix = "{$keyPrefix}{$key}.";
-                $this->mapGroupKeys($item, $group, $result, $prefix);
-            } else {
-                $result[] = [
-                    'key' => $keyPrefix . $key,
-                    'value' => $item,
-                    'group' => $group
-                ];
-            }
-        }
-    }
-
-    private function importTranslationLine(array $data): Translation
+    public function importTranslationLine(array $data): Translation
     {
         return Translation::firstOrCreate(
             Arr::only($data, ['locale', 'group', 'namespace', 'key', 'object_type', 'object_key']),
             Arr::only($data, ['value'])
+        );
+    }
+
+    protected function createTranslationImporter(Collection $module): TranslationImporter
+    {
+        return new TranslationImporter(
+            $module,
+            $this->translationFinder,
+            $this
         );
     }
 }

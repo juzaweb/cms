@@ -113,7 +113,7 @@
                     <td>{size}</td>
                 </tr>
                 <tr>
-                    <td>{{ trans('cms::app.last_updated') }}</td>
+                    <td>{{ trans('cms::app.last_update') }}</td>
                     <td>{updated}</td>
                 </tr>
                 </tbody>
