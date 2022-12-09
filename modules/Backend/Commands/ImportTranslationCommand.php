@@ -13,7 +13,7 @@ class ImportTranslationCommand extends TranslationCommand
 
     public function handle(): int
     {
-        $import = app(TranslationManager::class)->import('cms');
+        $import = app(TranslationManager::class)->import('cms')->run();
         $this->info("Imported {$import} rows from core");
 
         $plugins = Plugin::all();
@@ -30,7 +30,9 @@ class ImportTranslationCommand extends TranslationCommand
 
         $themes = ThemeLoader::all();
         foreach ($themes as $theme) {
-            $import = app(TranslationManager::class)->import('theme', $theme->get('name'));
+            $import = app(TranslationManager::class)
+                ->import('theme', $theme->get('name'))
+                ->run();
 
             $this->info("Imported {$import} from {$theme->get('name')}");
         }
