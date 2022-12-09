@@ -10,6 +10,8 @@
 
 namespace Juzaweb\Translation\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Juzaweb\Translation\Facades\Locale;
@@ -18,7 +20,7 @@ use Juzaweb\CMS\Support\ArrayPagination;
 
 class LocaleController extends BackendController
 {
-    public function index($type, $locale)
+    public function index($type, $locale): \Illuminate\Contracts\View\View
     {
         $data = Locale::getByKey($type);
         $language = config('locales.'.$locale.'.name');
@@ -52,7 +54,7 @@ class LocaleController extends BackendController
         );
     }
 
-    public function save(Request $request, $type, $locale)
+    public function save(Request $request, $type, $locale): JsonResponse|RedirectResponse
     {
         $data = Locale::getByKey($type);
         $keys = explode('.', $request->post('key'));
@@ -110,9 +112,9 @@ class LocaleController extends BackendController
         );
     }
 
-    public function getDataTable(Request $request, $type, $locale)
+    public function getDataTable(Request $request, $type, $locale): JsonResponse
     {
-        $search = $request->get('search');
+        $search = strtolower($request->get('search'));
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 10);
         $page = $offset <= 0 ? 1 : (round($offset / $limit)) + 1;
@@ -124,8 +126,8 @@ class LocaleController extends BackendController
                 ->filter(
                     function ($item) use ($search) {
                         return (
-                            str_contains($item['key'], $search) ||
-                            str_contains($item['value'], $search)
+                            str_contains(strtolower($item['key']), $search) ||
+                            str_contains(strtolower($item['value']), $search)
                         );
                     }
                 );
@@ -149,7 +151,6 @@ class LocaleController extends BackendController
                 unset($keys[$index]);
                 $keys = collect($keys)->values()->toArray();
                 $lang[$key] = $this->setKeyLang($keys, $value, $lang[$key] ?? []);
-
                 return $lang;
             } else {
                 $lang[$key] = $value;

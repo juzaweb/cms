@@ -8,7 +8,7 @@
                     <form method="get" class="form-inline" id="form-search">
                         <div class="form-group mb-2 mr-1">
                             <label for="search" class="sr-only">@lang('cms::app.search')</label>
-                            <input name="search" type="text" id="search" class="form-control" placeholder="@lang('cms::app.search')" autocomplete="off">
+                            <input name="search" type="text" id="search" class="form-control" placeholder="{{ trans('cms::app.search') }}" autocomplete="off">
                         </div>
 
                         <button type="submit" class="btn btn-primary mb-2">@lang('cms::app.search')</button>
@@ -31,8 +31,7 @@
     </div>
 
     <script type="text/javascript">
-        function index_formatter(value, row, index)
-        {
+        function index_formatter(value, row, index) {
             return (index + 1);
         }
 
@@ -40,11 +39,11 @@
             return `<input class="form-control trans-input" value="${row.trans}" data-key="${row.key}">`;
         }
 
-        var table = new JuzawebTable({
+        let table = new JuzawebTable({
             url: '{{ route('admin.translations.locale.get-data', [$type, $locale]) }}',
         });
 
-        $('body').on('change', '.trans-input', function () {
+        $(document).on('change', '.trans-input', function () {
             let key = $(this).data('key');
             let value = $(this).val();
 
