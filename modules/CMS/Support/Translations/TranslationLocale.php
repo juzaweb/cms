@@ -36,15 +36,13 @@ class TranslationLocale
     /**
      * Get all language trans
      *
-     * @param Collection|string $key
      * @param string $locale
-     * @return array
+     * @return Collection
      * @throws FileNotFoundException
      */
-    public function getAllTrans(Collection|string $key, string $locale): array
+    public function translationLines(string $locale): Collection
     {
-        $key = $this->parseVar($key);
-        $enPath = $this->originPath($key, 'en');
+        $enPath = $this->module->get('lang_path') . '/en';
         $result = [];
 
         if (is_dir($enPath)) {
@@ -57,8 +55,14 @@ class TranslationLocale
             foreach ($files as $file) {
                 $trans = [];
                 $lang = require($file->getRealPath());
-                $langPublish = $this->publishPath($key, $locale.'/'.$file->getFilename());
+                if ($locale != 'en') {
+                    $localePath = $this->module->get('lang_path') . "/{$locale}/{$file->getFilename()}";
+                    if (file_exists($localePath)) {
+                        $lang = array_merge($lang, require($localePath));
+                    }
+                }
 
+                $langPublish = $this->module->get('publish_path') . '/'. $locale.'/'.$file->getFilename();
                 if (file_exists($langPublish)) {
                     $langPublish = require($langPublish);
                     foreach ($langPublish as $langKey => $langVal) {
@@ -71,16 +75,22 @@ class TranslationLocale
             }
         }
 
-        if ($key->get('type') == 'theme') {
-            $jsonPath = $this->originPath($key);
-            $files = collect(File::files($jsonPath))
+        if ($this->module->get('type') == 'theme') {
+            $files = collect(File::files($this->module->get('lang_path')))
                 ->filter(fn (SplFileInfo $item) => $item->getExtension() == 'json')
                 ->values();
+
             foreach ($files as $file) {
                 $trans = [];
                 $lang = json_decode(File::get($file->getRealPath()), true);
-                $langPublish = $this->publishPath($key, $file->getFilename());
+                if ($locale != 'en') {
+                    $localePath = $this->module->get('lang_path') . "/{$file->getFilename()}";
+                    if (file_exists($localePath)) {
+                        $lang = array_merge($lang, json_decode(File::get($localePath), true));
+                    }
+                }
 
+                $langPublish = $this->module->get('publish_path') .'/'. $file->getFilename();
                 if (file_exists($langPublish)) {
                     $langPublish = json_decode(File::get($langPublish), true);
                     foreach ($langPublish as $langKey => $langVal) {
@@ -98,7 +108,7 @@ class TranslationLocale
             }
         }
 
-        return $result;
+        return new Collection($result);
     }
 
     /**
@@ -159,5 +169,20 @@ class TranslationLocale
         }
 
         return $folders;
+    }
+
+    protected function mapGroupKeys(array $lang, $group, $trans, &$result): void
+    {
+        foreach ($lang as $key => $item) {
+            if (is_array($item)) {
+                $this->mapGroupKeys($item, "{$group}.{$key}", $trans, $result);
+            } else {
+                $result[] = [
+                    'key' => "{$group}.{$key}",
+                    'value' => $item,
+                    'trans' => $trans[$key] ?? $item,
+                ];
+            }
+        }
     }
 }

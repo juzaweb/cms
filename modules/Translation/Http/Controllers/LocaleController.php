@@ -10,20 +10,25 @@
 
 namespace Juzaweb\Translation\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Juzaweb\Translation\Facades\Locale;
+use Juzaweb\CMS\Contracts\TranslationManager;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\ArrayPagination;
 
 class LocaleController extends BackendController
 {
-    public function index($type, $locale): \Illuminate\Contracts\View\View
+    public function __construct(protected TranslationManager $translationManager)
     {
-        $data = Locale::getByKey($type);
-        $language = config('locales.'.$locale.'.name');
+    }
+
+    public function index($type, $locale): View
+    {
+        $data = $this->translationManager->modules()->get($type);
+        $language = config("locales.{$locale}.name");
 
         if (empty($data)) {
             return abort(404);
@@ -56,7 +61,7 @@ class LocaleController extends BackendController
 
     public function save(Request $request, $type, $locale): JsonResponse|RedirectResponse
     {
-        $data = Locale::getByKey($type);
+        $data = $this->translationManager->modules()->get($type);
         $keys = explode('.', $request->post('key'));
         $value = $request->post('value');
 
@@ -119,7 +124,8 @@ class LocaleController extends BackendController
         $limit = $request->get('limit', 10);
         $page = $offset <= 0 ? 1 : (round($offset / $limit)) + 1;
 
-        $result = Locale::getAllTrans($type, $locale);
+        $data = $this->translationManager->modules()->get($type);
+        $result = $this->translationManager->locale($data)->translationLines($locale);
 
         if ($search) {
             $result = collect($result)

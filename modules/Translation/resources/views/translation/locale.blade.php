@@ -21,8 +21,8 @@
                     <thead>
                         <tr>
                             <th data-field="index" data-width="3%" data-formatter="index_formatter" data-align="center">#</th>
-                            <th data-field="value" data-width="25%" data-sortable="true">{{ trans('cms::app.origin') }}</th>
-                            <th data-width="25%" data-sortable="true" data-formatter="translate_formatter">{{ trans('cms::app.your_value') }}</th>
+                            <th data-field="value" data-width="35%">{{ trans('cms::app.origin') }}</th>
+                            <th data-formatter="translate_formatter">{{ trans('cms::app.your_value') }}</th>
                         </tr>
                     </thead>
                 </table>
