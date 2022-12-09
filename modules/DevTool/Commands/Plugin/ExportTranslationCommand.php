@@ -11,31 +11,14 @@
 namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Contracts\TranslationManager;
 use Symfony\Component\Console\Input\InputArgument;
 
-class ImportTranslationCommand extends Command
+class ExportTranslationCommand extends Command
 {
-    protected $name = 'plugin:import-translation';
+    protected $name = 'plugin:export-translation';
 
     public function handle(): int
     {
-        $importer = app(TranslationManager::class)
-            ->import(
-                'plugin',
-                $this->argument('plugin')
-            );
-
-        $importer->progressCallback(
-            function ($model) {
-                $this->info("--> Import translation key {$model->key}");
-            }
-        );
-
-        $total = $importer->run();
-
-        $this->info("Import success {$total} language text.");
-
         return self::SUCCESS;
     }
 

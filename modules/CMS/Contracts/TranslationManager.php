@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Contracts;
 
 use Juzaweb\CMS\Models\Translation;
+use Juzaweb\CMS\Support\Translations\TranslationExporter;
 use Juzaweb\CMS\Support\Translations\TranslationImporter;
 use Juzaweb\CMS\Support\Translations\TranslationTranslate;
 
@@ -30,6 +31,8 @@ interface TranslationManager
         string $module = 'cms',
         string $name = 'core'
     ): TranslationTranslate;
+
+    public function export(string $module = 'cms', string $name = null): TranslationExporter;
 
     /**
      * @see \Juzaweb\CMS\Support\Manager\TranslationManager::importTranslationLine()

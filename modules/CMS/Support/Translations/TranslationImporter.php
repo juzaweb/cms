@@ -70,6 +70,10 @@ class TranslationImporter
             $this->module->get('src_path')
         );
 
+        if ($this->module->get('type') != 'cms') {
+            $results = collect($results)->filter(fn ($item) => $item['namespace'] != 'cms')->toArray();
+        }
+
         $total = 0;
         foreach ($results as $item) {
             $item['object_type'] = $this->module->get('type');

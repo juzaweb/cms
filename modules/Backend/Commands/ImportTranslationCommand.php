@@ -5,6 +5,7 @@ namespace Juzaweb\Backend\Commands;
 use Juzaweb\CMS\Contracts\TranslationManager;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\DevTool\Commands\Plugin\ImportTranslationCommand as PluginImportTranslationCommand;
 
 class ImportTranslationCommand extends TranslationCommand
 {
@@ -17,9 +18,14 @@ class ImportTranslationCommand extends TranslationCommand
 
         $plugins = Plugin::all();
         foreach ($plugins as $plugin) {
-            $import = app(TranslationManager::class)->import('plugin', $plugin->get('name'));
+            $this->info("Import translations {$plugin->getName()} plugin");
 
-            $this->info("Imported {$import} rows from {$plugin->getName()} plugin");
+            $this->call(
+                PluginImportTranslationCommand::class,
+                [
+                    'plugin' => $plugin->getName()
+                ]
+            );
         }
 
         $themes = ThemeLoader::all();

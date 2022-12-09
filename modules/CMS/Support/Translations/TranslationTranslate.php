@@ -22,6 +22,7 @@ class TranslationTranslate
     protected string $source;
     protected string $target;
     protected array $errors = [];
+    protected int $progressSleep = 1;
     protected Closure $progressCallback;
     protected Collection $translationLines;
 
@@ -70,7 +71,7 @@ class TranslationTranslate
                 $total += 1;
             }
 
-            sleep(2);
+            sleep($this->progressSleep);
         }
 
         return $total;

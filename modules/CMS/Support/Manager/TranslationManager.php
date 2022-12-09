@@ -18,6 +18,7 @@ use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\TranslationFinder;
 use Juzaweb\CMS\Contracts\TranslationManager as TranslationManagerContract;
 use Juzaweb\CMS\Models\Translation;
+use Juzaweb\CMS\Support\Translations\TranslationExporter;
 use Juzaweb\CMS\Support\Translations\TranslationImporter;
 use Juzaweb\CMS\Support\Translations\TranslationTranslate;
 
@@ -31,7 +32,7 @@ class TranslationManager implements TranslationManagerContract
     ) {
     }
 
-    public function export(string $module = 'cms', string $name = null)
+    public function export(string $module = 'cms', string $name = null): TranslationExporter
     {
         //
     }

@@ -10,7 +10,6 @@
 
 namespace Juzaweb\Backend\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
@@ -21,6 +20,7 @@ use Symfony\Component\Finder\SplFileInfo;
 class TransFromEnglish extends TranslationCommand
 {
     protected $name = 'trans:generate-translate';
+
     private array $targetDefaults = ['vi', 'fr', 'tr', 'zh', 'ru', 'ko', 'ja'];
 
     public function handle(): int
