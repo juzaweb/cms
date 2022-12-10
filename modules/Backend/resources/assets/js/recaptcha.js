@@ -45,3 +45,24 @@ function loadRecapchaAndSubmit(callback) {
             console.err(err);
         });
 }
+
+function recapchaRenderTokenToForm(form) {
+    if (typeof grecaptcha === 'undefined') {
+        return true;
+    }
+
+
+
+    loadRecapchaAndSubmit(
+        function (token) {
+            let e = document.createElement('input');
+            e.name = "g-recaptcha-response";
+            e.value = token;
+            e.type = 'hidden';
+            form.appendChild(e);
+            form.submit();
+        }
+    );
+
+    return false;
+}

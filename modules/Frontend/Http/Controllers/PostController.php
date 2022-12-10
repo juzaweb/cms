@@ -10,6 +10,8 @@
 
 namespace Juzaweb\Frontend\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Events\PostViewed;
@@ -21,6 +23,7 @@ use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Facades\Facades;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Juzaweb\Frontend\Http\Requests\CommentRequest;
 
 class PostController extends FrontendController
 {
@@ -113,26 +116,8 @@ class PostController extends FrontendController
         );
     }
 
-    public function comment(Request $request, $slug): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+    public function comment(CommentRequest $request, $slug): JsonResponse|RedirectResponse
     {
-        if (Auth::check()) {
-            $this->validate(
-                $request,
-                [
-                    'content' => 'required|max:300',
-                ]
-            );
-        } else {
-            $this->validate(
-                $request,
-                [
-                    'name' => 'required|max:100',
-                    'email' => 'required|email|max:100',
-                    'content' => 'required|max:300',
-                ]
-            );
-        }
-
         $base = explode('/', $slug)[0];
         $slug = explode('/', $slug)[1];
 
@@ -162,10 +147,6 @@ class PostController extends FrontendController
 
         do_action('post_type.comment.saved', $comment, $post);
 
-        return $this->success(
-            [
-                'message' => __('Successful comment. Your comment will be displayed once approved.'),
-            ]
-        );
+        return $this->success(trans('cms::app.comment_success'));
     }
 }

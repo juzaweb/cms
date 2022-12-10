@@ -111,6 +111,7 @@ return [
     'report_copyright' => 'Report copyright',
     'comment_able' => 'Comment able',
     'comment_type' => 'Comment type',
+    'comment_success' => 'Successful comment. Your comment will be displayed once approved.',
     'comments_per_page' => 'Comments per page',
     'facebook_app_id' => 'Facebook App ID',
     'facebook_comments' => 'Facebook comments',

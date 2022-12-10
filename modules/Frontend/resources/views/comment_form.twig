@@ -1,11 +1,4 @@
-{% if message %}
-    <div class="alert alert-{{ errors ? 'danger' : 'success' }} success">
-        {{ message }}
-    </div>
-{% endif %}
-
-<form action="" method="post" class="comment-form" id="comment-form">
-
+<form action="" method="post" class="comment-form" id="comment-form" onsubmit="return recapchaRenderTokenToForm(this)">
     {{ csrf_field() }}
 
     <p class="comment-notes">
