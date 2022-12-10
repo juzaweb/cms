@@ -2,26 +2,37 @@
 
 namespace Juzaweb\CMS\Support;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+
 class MenuCollection
 {
-    protected $item;
+    protected Collection $item;
 
     /**
      * Make menu Collection
      *
      * @param array $items
      * @param string $sortBy
-     * @return MenuCollection[]
+     * @return Collection
      */
-    public static function make($items, $sortBy = 'position')
+    public static function make(array $items, string $sortBy = 'position'): Collection
     {
         $results = [];
         $items = collect($items)->sortBy($sortBy);
         foreach ($items as $item) {
-            $results[] = new static($item);
+            if ($children = Arr::get($item, 'children')) {
+                $item['permissions'] = array_merge(
+                    collect($children)->pluck('permissions')->unique()->toArray(),
+                    $item['permissions'] ?? []
+                );
+            }
+
+            $item = new static($item);
+            $results[] = $item;
         }
 
-        return $results;
+        return new Collection($results);
     }
 
     public function __construct($item)
@@ -29,7 +40,7 @@ class MenuCollection
         $this->item = collect($item);
     }
 
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         if ($this->item->has('children')) {
             return count($this->item->get('children')) > 0;
@@ -43,7 +54,7 @@ class MenuCollection
         return $this->item->get($key, $default);
     }
 
-    public function getUrl()
+    public function getUrl(): string
     {
         $url = $this->get('url');
         if ($url == 'dashboard') {
@@ -53,7 +64,7 @@ class MenuCollection
         return '/' . $url;
     }
 
-    public function getChildrens()
+    public function getChildrens(): array|Collection
     {
         return static::make($this->item->get('children'));
     }

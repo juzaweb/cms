@@ -34,8 +34,12 @@ class ThemeController extends BackendController
 
     public function index(): View
     {
-        $activated = jw_current_theme();
+        global $jw_user;
+        if (!$jw_user->can('themes.index')) {
+            abort(403);
+        }
 
+        $activated = jw_current_theme();
         $currentTheme = ThemeLoader::getThemeInfo($activated);
 
         return view(
@@ -50,6 +54,11 @@ class ThemeController extends BackendController
 
     public function getDataTheme(Request $request): JsonResponse
     {
+        global $jw_user;
+        if (!$jw_user->can('themes.index')) {
+            abort(403);
+        }
+
         $limit = $request->get('limit', 20);
         $network = $request->get('network');
 
@@ -96,6 +105,11 @@ class ThemeController extends BackendController
 
     public function activate(Request $request): JsonResponse
     {
+        global $jw_user;
+        if (!$jw_user->can('themes.edit')) {
+            abort(403);
+        }
+
         $request->validate(
             [
                 'theme' => 'required',
@@ -132,6 +146,11 @@ class ThemeController extends BackendController
     public function bulkActions(Request $request): JsonResponse|RedirectResponse
     {
         if (!config('juzaweb.theme.enable_upload')) {
+            abort(403);
+        }
+
+        global $jw_user;
+        if (!$jw_user->can('themes.edit')) {
             abort(403);
         }
 

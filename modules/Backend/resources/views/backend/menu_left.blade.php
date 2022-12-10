@@ -4,7 +4,6 @@
         use Juzaweb\CMS\Support\MenuCollection;
 
         global $jw_user;
-
         $adminPrefix = config('juzaweb.admin_prefix');
         $adminUrl = url($adminPrefix);
         $currentUrl = url()->current();

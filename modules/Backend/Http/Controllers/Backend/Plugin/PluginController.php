@@ -28,8 +28,13 @@ class PluginController extends BackendController
         $this->api = $api;
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
+        global $jw_user;
+        if (!$jw_user->can('plugins.index')) {
+            abort(403);
+        }
+
         return view(
             'cms::backend.plugin.index',
             [
@@ -40,6 +45,11 @@ class PluginController extends BackendController
 
     public function getDataTable(Request $request): JsonResponse
     {
+        global $jw_user;
+        if (!$jw_user->can('plugins.index')) {
+            abort(403);
+        }
+
         $offset = $request->get('offset', 0);
         $limit = $request->get('limit', 20);
 
@@ -76,6 +86,11 @@ class PluginController extends BackendController
 
     public function bulkActions(BulkActionRequest $request): JsonResponse
     {
+        global $jw_user;
+        if (!$jw_user->can('plugins.edit')) {
+            abort(403);
+        }
+
         $action = $request->post('action');
         $ids = $request->post('ids');
 
