@@ -18,6 +18,12 @@
 
     <script src="{{ asset('jw-styles/juzaweb/js/vendor.min.js') }}"></script>
     <script src="{{ asset('jw-styles/juzaweb/js/backend.min.js') }}"></script>
+
+    @if(get_config('captcha'))
+        <script>const recaptchaSiteKey = "{{ get_config("google_captcha.site_key") }}";</script>
+        <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaLoadCallback&render=explicit" async defer></script>
+    @endif
+
     <script src="{{ asset('jw-styles/juzaweb/js/custom.min.js') }}"></script>
 
     @yield('header')
@@ -30,6 +36,10 @@
                 <div id="jquery-message"></div>
 
                 @yield('content')
+
+                @if(get_config('captcha'))
+                <div id="recaptcha-render"></div>
+                @endif
             </div>
         </div>
     </body>

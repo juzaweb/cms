@@ -13,7 +13,7 @@ class ReCaptchaValidator
             'https://www.google.com/recaptcha/api/siteverify',
             ['form_params' =>
                 [
-                    'secret' => get_config('google_recaptcha_secret'),
+                    'secret' => get_config('google_captcha.secret_key'),
                     'response' => $value,
                 ],
             ]

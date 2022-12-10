@@ -26,7 +26,7 @@
         }
 
         function actions_formatter(value, row, index) {
-            return `<a href="${linkModule.replace('__KEY__', row.key)}" class="btn btn-info btn-sm"><i class="fa fa-language"></i> ${juzaweb.lang.translations}</a>`;
+            return `<a href="${linkModule.replace('__KEY__', row.key)}" class="btn btn-info btn-sm"><i class="fa fa-language"></i> ${juzaweb.lang.translate}</a>`;
         }
 
         let table = new JuzawebTable({

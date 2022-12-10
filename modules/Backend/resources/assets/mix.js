@@ -43,6 +43,7 @@ mix.styles(
 mix.combine(
     [
         baseAsset + '/js/load-ajax.js',
+        baseAsset + '/js/recaptcha.js',
         baseAsset + '/js/helpers.js',
         baseAsset + '/js/custom-seo.js',
         baseAsset + '/js/filemanager.js',

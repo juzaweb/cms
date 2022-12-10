@@ -476,6 +476,7 @@ return [
     'path' => 'Path',
     'last_update' => 'Last update',
     'size' => 'Size',
+    'captcha' => 'Captcha',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
@@ -569,4 +570,9 @@ return [
         'time_formatting_documentation' => 'Documentation on date and time formatting',
         'enter_a_custom_date' => 'enter a custom date format in the following field',
     ],
+    'google_captcha' => [
+        'site_key' => 'Site Key',
+        'secret_key' => 'Secret Key',
+        'google_captcha_v2_invisible' => 'Google Captcha V2 (invisible)',
+    ]
 ];

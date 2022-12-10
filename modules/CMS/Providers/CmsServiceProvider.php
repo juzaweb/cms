@@ -58,10 +58,8 @@ use Juzaweb\CMS\Support\ShortCode\ShortCode;
 use Juzaweb\CMS\Support\StorageData;
 use Juzaweb\CMS\Support\Theme\ThemeConfig;
 use Juzaweb\CMS\Support\Translations\TranslationFinder;
-use Juzaweb\CMS\Support\Validators\DomainValidator;
 use Juzaweb\CMS\Support\Validators\ModelExists;
 use Juzaweb\CMS\Support\Validators\ModelUnique;
-use Juzaweb\CMS\Support\Validators\ReCaptchaValidator;
 use Juzaweb\CMS\Support\XssCleaner;
 use Juzaweb\DevTool\Providers\DevToolServiceProvider;
 use Juzaweb\Frontend\Providers\FrontendServiceProvider;
@@ -81,12 +79,12 @@ class CmsServiceProvider extends ServiceProvider
 
         Validator::extend(
             'recaptcha',
-            [ReCaptchaValidator::class, 'validate']
+            '\Juzaweb\CMS\Support\Validators\ReCaptchaValidator@validate'
         );
 
         Validator::extend(
             'domain',
-            [DomainValidator::class, 'validate']
+            '\Juzaweb\CMS\Support\Validators\DomainValidator@validate'
         );
 
         Rule::macro(
