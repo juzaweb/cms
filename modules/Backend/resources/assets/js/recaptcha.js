@@ -51,8 +51,6 @@ function recapchaRenderTokenToForm(form) {
         return true;
     }
 
-
-
     loadRecapchaAndSubmit(
         function (token) {
             let e = document.createElement('input');
@@ -60,7 +58,7 @@ function recapchaRenderTokenToForm(form) {
             e.value = token;
             e.type = 'hidden';
             form.appendChild(e);
-            form.submit();
+            HTMLFormElement.prototype.submit.call(form);
         }
     );
 
