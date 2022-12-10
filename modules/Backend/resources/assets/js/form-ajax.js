@@ -9,9 +9,7 @@
  */
 
 $(document).ready(function () {
-    function sendRequestFormAjax(form, data, btnsubmit, captchaToken = null) {
-        let currentIcon = btnsubmit.find('i').attr('class');
-        let currentText = btnsubmit.html();
+    function sendRequestFormAjax(form, data, btnsubmit, currentText, currentIcon, captchaToken = null) {
         let submitSuccess = form.data('success');
         let notify = form.data('notify') || false;
 
@@ -84,6 +82,8 @@ $(document).ready(function () {
         let form = $(this);
         let formData = new FormData(form[0]);
         let btnsubmit = form.find("button[type=submit]");
+        let currentText = btnsubmit.html();
+        let currentIcon = btnsubmit.find('i').attr('class');
 
         btnsubmit.find('i').attr('class', 'fa fa-spinner fa-spin');
         btnsubmit.prop("disabled", true);
@@ -99,6 +99,8 @@ $(document).ready(function () {
                         form,
                         formData,
                         btnsubmit,
+                        currentText,
+                        currentIcon,
                         token
                     );
                 }
@@ -109,7 +111,9 @@ $(document).ready(function () {
         sendRequestFormAjax(
             form,
             formData,
-            btnsubmit
+            btnsubmit,
+            currentText,
+            currentIcon
         );
     });
 

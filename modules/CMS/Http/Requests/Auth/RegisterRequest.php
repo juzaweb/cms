@@ -21,7 +21,7 @@ class RegisterRequest extends FormRequest
 {
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => [
                 'bail',
                 'required',
@@ -42,6 +42,12 @@ class RegisterRequest extends FormRequest
                 'confirmed'
             ],
         ];
+
+        if (get_config('captcha')) {
+            $rules['g-recaptcha-response'] = 'bail|required|recaptcha';
+        }
+
+        return $rules;
     }
 
     public function createUserFromRequest(): User

@@ -5,11 +5,20 @@
         <div class="juzaweb__utils__content">
             <div class="juzaweb__auth__authContainer">
                 <div class="juzaweb__auth__containerInner">
+                    <div class="text-center mb-5">
+                        @if($logo = get_config('logo'))
+                            <img src="{{ upload_url(get_config('logo')) }}" alt="{{ get_config('title', 'JUZAWEB') }}">
+                        @else
+                            <h1 class="mb-5 px-3">
+                                <strong>{{ trans('cms::message.login_form.welcome', ['name' => get_config('title', 'JUZAWEB')]) }}</strong>
+                            </h1>
+                        @endif
+                    </div>
+
                     <div class="card juzaweb__auth__boxContainer">
                         <div class="text-dark font-size-24 mb-4">
                             <strong>{{ trans('cms::app.forgot_password') }}</strong>
                         </div>
-
 
                         <form action="{{ route('admin.forgot_password') }}" method="post" class="mb-4 form-ajax">
                             <div class="form-group mb-4">
