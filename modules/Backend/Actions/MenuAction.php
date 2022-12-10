@@ -97,6 +97,12 @@ class MenuAction extends Action
                 'icon' => 'fa fa-paint-brush',
                 'position' => 1,
                 'parent' => 'appearance',
+                'permissions' => [
+                    'themes.index',
+                    'themes.edit',
+                    'themes.create',
+                    'themes.delete',
+                ],
             ]
         );
 
@@ -108,6 +114,9 @@ class MenuAction extends Action
                     'icon' => 'fa fa-plus',
                     'position' => 1,
                     'parent' => 'appearance',
+                    'permissions' => [
+                        'themes.create',
+                    ],
                 ]
             );
 
@@ -119,6 +128,9 @@ class MenuAction extends Action
                         'icon' => 'fa fa-plus',
                         'position' => 99,
                         'parent' => 'appearance',
+                        'permissions' => [
+                            'themes.edit',
+                        ],
                     ]
                 ]
             );
@@ -191,6 +203,12 @@ class MenuAction extends Action
                     'icon' => 'fa fa-plug',
                     'position' => 1,
                     'parent' => 'plugins',
+                    'permissions' => [
+                        'plugins.index',
+                        'plugins.edit',
+                        'plugins.create',
+                        'plugins.delete',
+                    ],
                 ]
             );
 
@@ -201,6 +219,9 @@ class MenuAction extends Action
                     'icon' => 'fa fa-plus',
                     'position' => 1,
                     'parent' => 'plugins',
+                    'permissions' => [
+                        'plugins.create',
+                    ],
                 ]
             );
 
@@ -212,6 +233,9 @@ class MenuAction extends Action
                         'icon' => 'fa fa-plus',
                         'position' => 99,
                         'parent' => 'plugins',
+                        'permissions' => [
+                            'plugins.edit',
+                        ],
                     ]
                 ]
             );
@@ -252,6 +276,12 @@ class MenuAction extends Action
                 'icon' => 'fa fa-user-circle-o',
                 'position' => 40,
                 'parent' => 'managements',
+                'permissions' => [
+                    'users.index',
+                    'users.edit',
+                    'users.create',
+                    'users.delete',
+                ],
             ]
         );
 
@@ -262,6 +292,12 @@ class MenuAction extends Action
                 'icon' => 'fa fa-envelope',
                 'position' => 50,
                 'parent' => 'managements',
+                'permissions' => [
+                    'email_templates.index',
+                    'email_templates.edit',
+                    'email_templates.create',
+                    'email_templates.delete',
+                ],
             ]
         );
 

@@ -105,6 +105,8 @@ class ConsoleServiceProvider extends ServiceProvider
         TranslateViaGoogleCommand::class,
         \Juzaweb\DevTool\Commands\Plugin\ExportTranslationCommand::class,
         \Juzaweb\DevTool\Commands\Theme\ExportTranslationCommand::class,
+        \Juzaweb\DevTool\Commands\Theme\ImportTranslationCommand::class,
+        \Juzaweb\DevTool\Commands\Theme\TranslateViaGoogleCommand::class,
     ];
 
     /**

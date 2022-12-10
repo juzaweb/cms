@@ -10,6 +10,7 @@ mix.styles(
 mix.combine(
     [
         `${__dirname}/styles/js/index.js`,
+        'modules/Backend/resources/assets/js/recaptcha.js',
     ],
     `${__dirname}/public/js/index.min.js`
 );

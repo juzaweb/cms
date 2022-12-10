@@ -38,7 +38,7 @@
                 @yield('content')
 
                 @if(get_config('captcha'))
-                <div id="recaptcha-render"></div>
+                <div id="recaptcha-render" style="display: none;"></div>
                 @endif
             </div>
         </div>

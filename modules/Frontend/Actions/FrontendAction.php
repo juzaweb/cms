@@ -18,6 +18,7 @@ class FrontendAction extends Action
     public function handle()
     {
         $this->addAction(self::FRONTEND_HEADER_ACTION, [$this, 'addFrontendHeader']);
+        $this->addAction(self::FRONTEND_FOOTER_ACTION, [$this, 'addFrontendFooter']);
     }
 
     public function addFrontendHeader()
@@ -44,27 +45,8 @@ class FrontendAction extends Action
         );
     }
 
-    public function addRecaptchaForm()
+    public function addFrontendFooter()
     {
-        $this->addAction('auth_form', [$this, 'recaptchaRender']);
-    }
-
-    public function recaptchaRender()
-    {
-        $recaptcha = get_configs(
-            [
-                'google_recaptcha',
-                'google_recaptcha_key',
-            ]
-        );
-
-        if ($recaptcha['google_recaptcha'] == 1) {
-            echo view(
-                'cms::components.frontend.recaptcha',
-                compact(
-                    'recaptcha'
-                )
-            );
-        }
+        echo e(view('cms::items.frontend_footer'));
     }
 }

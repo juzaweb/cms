@@ -6,6 +6,11 @@
     <link rel="stylesheet" type="text/css" href="{{ $style->get('src') }}?v={{ $style->get('ver') }}" id="{{ $style->get('key') }}">
 @endforeach
 
+@if(get_config('captcha'))
+    <script>const recaptchaSiteKey = "{{ get_config("google_captcha.site_key") }}";</script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaLoadCallback&render=explicit" async defer></script>
+@endif
+
 @foreach($scripts as $script)
     <script src="{{ $script->get('src') }}?v={{ $script->get('ver') }}" id="{{ $script->get('key') }}"></script>
 @endforeach
