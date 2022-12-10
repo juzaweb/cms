@@ -62,7 +62,6 @@
                     'group': group,
                 }
             }).done(function(response) {
-
                 if (response.status === false) {
                     show_message(response);
                     return false;

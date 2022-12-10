@@ -137,6 +137,8 @@ class Facades
             'socialites',
             'posts_per_page',
             'posts_per_rss',
+            'captcha',
+            'google_captcha',
         ];
     }
 

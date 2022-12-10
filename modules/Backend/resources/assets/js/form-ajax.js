@@ -9,34 +9,22 @@
  */
 
 $(document).ready(function () {
-    $('body').on('submit', '.form-ajax', function(event) {
-        if (event.isDefaultPrevented()) {
-            return false;
-        }
-
-        event.preventDefault();
-
-        let form = $(this);
-        let formData = new FormData(form[0]);
-        let btnsubmit = form.find("button[type=submit]");
+    function sendRequestFormAjax(form, data, btnsubmit, captchaToken = null) {
         let currentIcon = btnsubmit.find('i').attr('class');
         let currentText = btnsubmit.html();
         let submitSuccess = form.data('success');
         let notify = form.data('notify') || false;
 
-        btnsubmit.find('i').attr('class', 'fa fa-spinner fa-spin');
-        btnsubmit.prop("disabled", true);
-
-        if (btnsubmit.data('loading-text')) {
-            btnsubmit.html('<i class="fa fa-spinner fa-spin"></i> ' + btnsubmit.data('loading-text'));
+        if (captchaToken) {
+            data.append('g-recaptcha-response', captchaToken);
         }
 
         $.ajax({
             type: form.attr('method'),
             url: form.attr('action'),
             dataType: 'json',
-            data: formData,
-            cache:false,
+            data: data,
+            cache: false,
             contentType: false,
             processData: false
         }).done(function(response) {
@@ -84,9 +72,48 @@ $(document).ready(function () {
             }
             return false;
         });
+    }
+
+    $(document).on('submit', '.form-ajax', function(event) {
+        if (event.isDefaultPrevented()) {
+            return false;
+        }
+
+        event.preventDefault();
+
+        let form = $(this);
+        let formData = new FormData(form[0]);
+        let btnsubmit = form.find("button[type=submit]");
+
+        btnsubmit.find('i').attr('class', 'fa fa-spinner fa-spin');
+        btnsubmit.prop("disabled", true);
+
+        if (btnsubmit.data('loading-text')) {
+            btnsubmit.html('<i class="fa fa-spinner fa-spin"></i> ' + btnsubmit.data('loading-text'));
+        }
+
+        if (typeof grecaptcha !== 'undefined') {
+            loadRecapchaAndSubmit(
+                function (token) {
+                    sendRequestFormAjax(
+                        form,
+                        formData,
+                        btnsubmit,
+                        token
+                    );
+                }
+            );
+            return false;
+        }
+
+        sendRequestFormAjax(
+            form,
+            formData,
+            btnsubmit
+        );
     });
 
-    $('body').on('click', '.load-modal', function(event) {
+    $(document).on('click', '.load-modal', function(event) {
         if (event.isDefaultPrevented()) {
             return false;
         }
@@ -144,11 +171,11 @@ $(document).ready(function () {
         });
     });
 
-    $("body").on('keypress', '.is-number', function () {
+    $(document).on('keypress', '.is-number', function () {
         return validate_isNumberKey(this);
     });
 
-    $("body").on('keyup', '.number-format', function () {
+    $(document).on('keyup', '.number-format', function () {
         return validate_FormatNumber(this);
     });
 

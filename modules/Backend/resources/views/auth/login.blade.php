@@ -25,7 +25,7 @@
                             <strong>{{ trans('cms::message.login_form.header') }}</strong>
                         </div>
 
-                        <form action="" method="post" class="mb-4 form-ajax" data-success="login_success">
+                        <form action="" method="post" class="mb-4 form-ajax">
 
                             @do_action('login_form')
 
@@ -74,14 +74,6 @@
                 </div>
             </div>
 
-            <script type="text/javascript">
-                function login_success(form, response) {
-                    if (response.data.redirect) {
-                        window.location = response.data.redirect;
-                    }
-                    return false;
-                }
-            </script>
         </div>
     </div>
 @endsection

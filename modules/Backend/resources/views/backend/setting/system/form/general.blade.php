@@ -5,6 +5,7 @@
     $sitetimezone = get_config('timezone', 'UTC');
     $dateFormat = get_config('date_format', 'F j, Y');
     $timeFormat = get_config('time_format', 'g:i a');
+    $captcha = get_config('captcha');
 
     $dateFormats = [
         'F j, Y' => now()->format('F j, Y'),
@@ -71,7 +72,7 @@
 
         <div class="form-group">
             <label class="col-form-label" for="timezone">{{ trans('cms::app.timezone') }}</label>
-            <select name="timezone" class="form-control select2">
+            <select name="timezone" id="timezone" class="form-control select2">
                 @foreach($timezones as $timezone)
                     <option value="{{ $timezone }}" @if($sitetimezone == $timezone) selected @endif>{{ $timezone }}</option>
                 @endforeach
@@ -179,6 +180,32 @@
                 <option value="0" @if($verification == 0) selected @endif>{{ trans('cms::app.disabled') }}</option>
             </select>
         </div>
+
+        <h5>{{ trans('cms::app.captcha') }}</h5>
+        <div class="form-group">
+            <label class="col-form-label" for="captcha">{{ trans('cms::app.captcha') }}</label>
+            <select name="captcha" id="captcha" class="form-control">
+                <option value="">{{ trans('cms::app.captcha') }}</option>
+                <option value="google_captcha_v2_invisible" @if($captcha == 'google_captcha_v2_invisible') selected @endif>{{ trans('cms::app.google_captcha.google_captcha_v2_invisible') }}</option>
+            </select>
+        </div>
+
+        {{ Field::text(
+            trans('cms::app.google_captcha.site_key'),
+            'google_captcha[site_key]',
+            [
+                'value' => get_config('google_captcha')['site_key'] ?? ''
+            ]
+        ) }}
+
+        {{ Field::text(
+            trans('cms::app.google_captcha.secret_key'),
+            'google_captcha[secret_key]',
+            [
+                'value' => get_config('google_captcha')['secret_key'] ?? ''
+            ]
+        ) }}
+
     </div>
 </div>
     </div>

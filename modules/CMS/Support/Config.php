@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Support;
 
 use Illuminate\Cache\CacheManager;
+use Illuminate\Support\Arr;
 use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Models\Config as ConfigModel;
 use Illuminate\Container\Container;
@@ -52,9 +53,14 @@ class Config implements ConfigContract
 
     public function getConfig($key, $default = null): mixed
     {
-        $value = $this->configs[$key] ?? $default;
+        $configKeys = explode('.', $key);
+        $value = $this->configs[$configKeys[0]] ?? $default;
         if (is_json($value)) {
-            return json_decode($value, true);
+            $value = json_decode($value, true);
+            if (count($configKeys) > 1) {
+                unset($configKeys[0]);
+                $value = Arr::get($value, implode('.', $configKeys), $default);
+            }
         }
 
         return $value;
