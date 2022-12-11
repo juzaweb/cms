@@ -3,18 +3,21 @@
 namespace Juzaweb\API\Support\Swagger;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Collection;
 
 class SwaggerMethod implements Arrayable
 {
     protected array $tags = [];
     protected ?string $summary = null;
     protected string $operationId;
-    protected array $parameters = [];
-    protected array $responses = [];
+    protected Collection $parameters;
+    protected Collection $responses;
     protected array $requestBody = [];
     
     public function __construct(protected string $method, protected string $path)
     {
+        $this->parameters = new Collection();
+        $this->responses = new Collection();
     }
     
     public function operationId(string $operationId): static
@@ -53,14 +56,32 @@ class SwaggerMethod implements Arrayable
         return $this;
     }
     
+    public function parameter(string $name, array $args = [])
+    {
+        $this->parameters->put(
+            $name,
+            $args
+        );
+    }
+    
     public function toArray(): array
     {
         return [
             'tags' => $this->tags,
             'summary' => $this->summary,
             'operationId' => $this->getOperationId(),
-            'parameters' => $this->parameters,
-            'responses' => $this->responses,
+            'parameters' => $this->parameters->map(
+                function ($item, $name) {
+                    $item['name'] = $name;
+                    return $item;
+                }
+            )->values(),
+            'responses' => $this->responses->map(
+                function ($item, $name) {
+                    $item['name'] = $name;
+                    return $item;
+                }
+            )->values(),
         ];
     }
 }

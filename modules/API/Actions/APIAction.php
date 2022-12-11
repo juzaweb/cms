@@ -13,7 +13,6 @@ namespace Juzaweb\API\Actions;
 use Juzaweb\API\Support\Swagger\SwaggerDocument;
 use Juzaweb\API\Support\Swagger\SwaggerMethod;
 use Juzaweb\API\Support\Swagger\SwaggerPath;
-use Juzaweb\API\Support\Swagger\SwaggerVersion;
 use Juzaweb\CMS\Abstracts\Action;
 
 class APIAction extends Action
@@ -43,9 +42,21 @@ class APIAction extends Action
                     $path->addMethod(
                         'get',
                         function (SwaggerMethod $method) use ($key, $postType) {
-                            $method->operationId("post-type.{$key}.index");
+                            $method->operationId("admin.post-type.{$key}.index");
                             $method->summary("Get list {$key} items");
                             $method->tags(['Post Type']);
+                            $method->parameter(
+                                'keyword',
+                                [
+                                    '$ref' => '#/components/parameters/query_keyword',
+                                ]
+                            );
+                            $method->parameter(
+                                'limit',
+                                [
+                                    '$ref' => '#/components/parameters/query_limit',
+                                ]
+                            );
                             return $method;
                         }
                     );
