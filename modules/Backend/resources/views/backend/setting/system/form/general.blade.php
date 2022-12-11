@@ -185,7 +185,7 @@
         <div class="form-group">
             <label class="col-form-label" for="captcha">{{ trans('cms::app.captcha') }}</label>
             <select name="captcha" id="captcha" class="form-control">
-                <option value="">{{ trans('cms::app.captcha') }}</option>
+                <option value="">{{ trans('cms::app.disabled') }}</option>
                 <option value="google_captcha_v2_invisible" @if($captcha == 'google_captcha_v2_invisible') selected @endif>{{ trans('cms::app.google_captcha.google_captcha_v2_invisible') }}</option>
             </select>
         </div>

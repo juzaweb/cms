@@ -88,7 +88,7 @@ trait PostTypeModel
             ->cacheFor(3600)
             ->whereIn('status', [Post::STATUS_PUBLISH, Post::STATUS_PRIVATE]);
 
-        return apply_filters('post.createFrontendBuilder', $builder);
+        return apply_filters('post.createFrontendDetailBuilder', $builder);
     }
 
     /**

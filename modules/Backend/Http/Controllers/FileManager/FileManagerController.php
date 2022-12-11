@@ -19,7 +19,7 @@ class FileManagerController extends BackendController
         $multiChoose = $request->get('multichoose', 0);
 
         if (empty($mimeTypes)) {
-            return abort(404);
+            abort(404);
         }
 
         return view(

@@ -139,7 +139,7 @@ return [
          *
          * Default: true
          */
-        'deny_iframe' => true,
+        'deny_iframe' => (bool) env('JW_DENY_IFRAME', true),
 
         'query_cache' => [
             'enable' => true,

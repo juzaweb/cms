@@ -3,9 +3,8 @@
 namespace Juzaweb\CMS\Http\Middleware;
 
 use Illuminate\Http\Request;
-use Inertia\Middleware;
-
-class HandleInertiaRequests extends Middleware
+//use Inertia\Middleware;
+class HandleInertiaRequests //extends Middleware
 {
     /**
      * The root template that's loaded on the first page visit.
