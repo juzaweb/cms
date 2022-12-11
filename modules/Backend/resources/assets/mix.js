@@ -40,6 +40,13 @@ mix.styles(
     `${basePublish}/css/custom.min.css`
 );
 
+mix.styles(
+    [
+        'modules/Backend/resources/assets/css/swagger.css',
+    ],
+    `${basePublish}/css/swagger.min.css`
+);
+
 mix.combine(
     [
         baseAsset + '/js/load-ajax.js',

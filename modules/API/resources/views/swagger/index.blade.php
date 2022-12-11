@@ -6,30 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{{ l5_swagger_asset('default', 'swagger-ui.css') }}">
     <link rel="icon" type="image/png" href="{{ l5_swagger_asset('default', 'favicon-32x32.png') }}" sizes="32x32"/>
     <link rel="icon" type="image/png" href="{{ l5_swagger_asset('default', 'favicon-16x16.png') }}" sizes="16x16"/>
-    <style>
-
-    html
-    {
-        box-sizing: border-box;
-        overflow: -moz-scrollbars-vertical;
-        overflow-y: scroll;
-    }
-    *,
-    *:before,
-    *:after
-    {
-        box-sizing: inherit;
-    }
-
-    body {
-      margin:0;
-      background: #fafafa;
-    }
-
-    #swagger-ui {
-        margin-bottom: 50px;
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ asset('jw-styles/juzaweb/css/swagger.min.css') }}">
 </head>
 <body>
 <div id="swagger-ui"></div>

@@ -11,7 +11,7 @@ Route::group(
         Route::get('/', [SwaggerController::class, 'index']);
         Route::get('/asset/{asset}', [SwaggerAssetController::class, 'index'])
             ->name('l5-swagger.default.asset');
-        Route::get('/api/oauth2-callback', [SwaggerController::class, 'oauth2Callback'])
+        Route::get('/oauth2-callback', [SwaggerController::class, 'oauth2Callback'])
             ->name('l5-swagger.default.oauth2_callback');
     }
 );
