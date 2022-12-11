@@ -21,12 +21,14 @@ class APIServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
     }
-
+    
     public function register()
     {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'api');
+        
         $this->app->register(RouteServiceProvider::class);
     }
-
+    
     protected function configureRateLimiting(): void
     {
         RateLimiter::for(

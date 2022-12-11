@@ -7,6 +7,10 @@
         {
             "namespace": "translation",
             "path": "modules/Translation/resources/views"
+        },
+        {
+            "namespace": "api",
+            "path": "modules/API/resources/views"
         }
     ]
 }
