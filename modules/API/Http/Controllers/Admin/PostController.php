@@ -56,8 +56,7 @@ class PostController extends ApiController
 
         //$this->postRepository->pushCriteria(FilterCriteria::class);
 
-        $query = $this->postRepository->query()
-            ->where('type', '=', $type);
+        $query = $this->postRepository->query()->where('type', '=', $type);
 
         $limit = $this->getQueryLimit($request);
 

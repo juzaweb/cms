@@ -8,7 +8,7 @@ use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 /**
  * Class UserRepositoryEloquent.
  *
- * @package namespace Juzaweb\Backend\Repositories;
+ * @property User $model
  */
 class UserRepositoryEloquent extends BaseRepositoryEloquent implements UserRepository
 {

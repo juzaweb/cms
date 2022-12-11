@@ -5,11 +5,15 @@
  * @package    juzaweb/juzacms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
- * @license    MIT
+ * @license    GNU General Public License v2.0
  */
 
-return [
-    'enable' => env('JW_ALLOW_MULTISITE', false),
+namespace Juzaweb\API\Support\Swagger;
 
-    'domain' => env('JW_NETWORK_ROOT_DOMAIN')
-];
+class SwaggerParameter
+{
+    public function __construct(string $name)
+    {
+        //
+    }
+}

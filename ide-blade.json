@@ -1,0 +1,16 @@
+{
+    "namespaces": [
+        {
+            "namespace": "cms",
+            "path": "modules/Backend/resources/views"
+        },
+        {
+            "namespace": "translation",
+            "path": "modules/Translation/resources/views"
+        },
+        {
+            "namespace": "api",
+            "path": "modules/API/resources/views"
+        }
+    ]
+}

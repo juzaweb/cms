@@ -19,6 +19,7 @@ abstract class Action
     public const BACKEND_INIT = 'backend.init';
     public const NETWORK_INIT = 'backend.init';
     public const FRONTEND_INIT = 'frontend.init';
+    public const API_DOCUMENT_INIT = 'api.document_init';
     public const BACKEND_CALL_ACTION = 'backend.call_action';
     public const FRONTEND_CALL_ACTION = 'frontend.call_action';
     public const FRONTEND_HEADER_ACTION = 'theme.header';
@@ -39,31 +40,31 @@ abstract class Action
     public const BACKEND_USER_AFTER_SAVE = 'user.after_save';
     public const BEFORE_PERMISSION_ADMIN = 'before.permission.admin';
     public const AFTER_PERMISSION_ADMIN = 'after.permission.admin';
-
+    
     public const DATATABLE_SEARCH_FIELD_TYPES_FILTER = 'datatable.search_field_types';
     public const FRONTEND_SEARCH_QUERY = 'frontend.search_query';
     public const FRONTEND_AFTER_BODY = 'theme.after_body';
     public const PERMISSION_INIT = 'permission_init';
-
+    
     protected HookActionContract $hookAction;
-
+    
     public function __construct()
     {
         $this->hookAction = app(HookActionContract::class);
     }
-
+    
     abstract public function handle();
-
+    
     protected function addAction($tag, $callback, $priority = 20, $arguments = 1): void
     {
         Hook::addAction($tag, $callback, $priority, $arguments);
     }
-
+    
     protected function addFilter($tag, $callback, $priority = 20, $arguments = 1): void
     {
         Hook::addFilter($tag, $callback, $priority, $arguments);
     }
-
+    
     protected function applyFilters($tag, $value, ...$args): mixed
     {
         return Hook::filter($tag, $value, ...$args);

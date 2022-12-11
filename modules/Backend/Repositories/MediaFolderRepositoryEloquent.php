@@ -8,7 +8,7 @@ use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 /**
  * Class MediaFolderRepositoryEloquent.
  *
- * @package namespace Juzaweb\Backend\Repositories;
+ * @property MediaFolder $model
  */
 class MediaFolderRepositoryEloquent extends BaseRepositoryEloquent implements MediaFolderRepository
 {

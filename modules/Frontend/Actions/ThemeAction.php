@@ -13,7 +13,6 @@ namespace Juzaweb\Frontend\Actions;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Support\DefaultPageBlock;
 use Juzaweb\CMS\Support\DefaultWidget;
@@ -265,7 +264,7 @@ class ThemeAction extends Action
 
     public function addFrontendAjax()
     {
-        if (!$support = $this->getRegister('support', [])) {
+        if (!$support = $this->getRegister('support')) {
             return;
         }
 

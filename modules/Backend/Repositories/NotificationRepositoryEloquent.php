@@ -8,7 +8,7 @@ use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 /**
  * Class NotificationRepositoryRepositoryEloquent.
  *
- * @package namespace Juzaweb\Backend\Repositories;
+ * @property Notification $model
  */
 class NotificationRepositoryEloquent extends BaseRepositoryEloquent implements NotificationRepository
 {

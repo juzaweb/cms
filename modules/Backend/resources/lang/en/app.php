@@ -393,8 +393,8 @@ return [
     'activate_plugins' => 'Activate plugins',
     'require_plugins' => 'Require plugins',
     'theme_require_plugins' => 'This theme required the following plugins:'
-        . ' :plugins'
-        . ' <a href=":link"><strong>Activate plugins</strong></a>',
+        .' :plugins'
+        .' <a href=":link"><strong>Activate plugins</strong></a>',
     'plugin_not_found' => 'Plugin not found',
     'plugin_name_not_found' => 'Plugin :name not found',
     'delete_theme_confirm' => 'Are you sure you want to delete this theme?',
@@ -427,6 +427,8 @@ return [
     'has_ssl' => 'Has ssl',
     'add_block' => 'Add block',
     'documentation' => 'Documentation',
+    'api_documentation' => 'API Documentation',
+    'api_docs' => 'API Docs',
     'images' => 'Images',
     'config' => 'Config',
     'notes' => 'Notes',
@@ -462,7 +464,7 @@ return [
         'twitter' => 'Login with Twitter',
         'linkedin' => 'Login with Linkedin',
         'github' => 'Login with Github',
-        'login_with' => 'Login with :name'
+        'login_with' => 'Login with :name',
     ],
     'tools' => 'Tools',
     'import' => 'Import',
@@ -481,29 +483,29 @@ return [
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
-            'after' => 'Getted update data'
+            'after' => 'Getted update data',
         ],
         'step2' => [
             'before' => 'Download update file...',
-            'after' => 'Downloaded update file'
+            'after' => 'Downloaded update file',
         ],
         'step3' => [
             'before' => 'Unzip file...',
-            'after' => 'Unzip file success'
+            'after' => 'Unzip file success',
         ],
         'step4' => [
             'before' => 'Backup old version...',
-            'after' => 'Backup old version success'
+            'after' => 'Backup old version success',
         ],
         'step5' => [
             'before' => 'Update files and folders...',
-            'after' => 'Update files and folders success'
+            'after' => 'Update files and folders success',
         ],
         'step6' => [
             'before' => 'Update data...',
-            'after' => 'Update data success'
+            'after' => 'Update data success',
         ],
-        'done' => 'Done!!'
+        'done' => 'Done!!',
     ],
     'theme_upload' => [
         'error' => [
@@ -524,7 +526,7 @@ return [
         ],
     ],
     'permission_manager' => [
-        'view_list' => 'View List'
+        'view_list' => 'View List',
     ],
     'network' => [
         'sites' => 'Sites',
@@ -575,5 +577,5 @@ return [
         'site_key' => 'Site Key',
         'secret_key' => 'Secret Key',
         'google_captcha_v2_invisible' => 'Google Captcha V2 (invisible)',
-    ]
+    ],
 ];

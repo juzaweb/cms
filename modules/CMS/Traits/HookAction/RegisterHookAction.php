@@ -8,11 +8,12 @@
 
 namespace Juzaweb\CMS\Traits\HookAction;
 
-use Illuminate\Support\Arr;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use JetBrains\PhpStorm\ArrayShape;
+use Juzaweb\API\Support\Swagger\SwaggerDocument;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Resource;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\Registers\ResourceRegister;
@@ -24,20 +25,21 @@ use Juzaweb\Frontend\Http\Controllers\TaxonomyController;
 trait RegisterHookAction
 {
     protected array $resourcePermissions = ['index', 'create', 'edit', 'delete'];
-
+    
     /**
      * Registers a post type.
-     * @param string $key (Required) Post type key. Must not exceed 20 characters
-     * @param array $args Array of arguments for registering a post type.
      *
-     * @throws \Exception
+     * @param  string  $key  (Required) Post type key. Must not exceed 20 characters
+     * @param  array  $args  Array of arguments for registering a post type.
+     *
+     * @throws Exception
      */
     public function registerPostType(string $key, array $args = []): void
     {
         if (empty($args['label'])) {
-            throw new \Exception('Post type label is required.');
+            throw new Exception('Post type label is required.');
         }
-
+        
         $args = array_merge(
             [
                 'model' => Post::class,
@@ -55,27 +57,27 @@ trait RegisterHookAction
             ],
             $args
         );
-
+        
         $args['key'] = $key;
         $args['singular'] = Str::singular($key);
         $args['model_key'] = str_replace('\\', '_', $args['model']);
-
+        
         $args = new Collection($args);
-
-        $this->globalData->set('post_types.' . $args->get('key'), $args);
-
+        
+        $this->globalData->set('post_types.'.$args->get('key'), $args);
+        
         $this->registerResourcePermissions(
             "post-type.{$key}",
             $args->get('label')
         );
-
+        
         if ($args->get('show_in_menu')) {
             $this->registerMenuPostType($key, $args);
         }
-
+        
         if ($args->get('menu_box')) {
             $this->registerMenuBox(
-                'post_type_' . $key,
+                'post_type_'.$key,
                 [
                     'title' => $args->get('label'),
                     'group' => 'post_type',
@@ -84,7 +86,7 @@ trait RegisterHookAction
                 ]
             );
         }
-
+        
         $supports = (array) $args->get('supports', []);
         if (in_array('category', $supports)) {
             $this->registerTaxonomy(
@@ -99,7 +101,7 @@ trait RegisterHookAction
                 ]
             );
         }
-
+        
         if (in_array('tag', (array) $args['supports'])) {
             $this->registerTaxonomy(
                 'tags',
@@ -115,7 +117,7 @@ trait RegisterHookAction
                 ]
             );
         }
-
+        
         if ($args->get('rewrite')) {
             $this->registerPermalink(
                 $key,
@@ -129,12 +131,12 @@ trait RegisterHookAction
             );
         }
     }
-
+    
     /**
      * Register menu box
      *
-     * @param string $key
-     * @param array $args
+     * @param  string  $key
+     * @param  array  $args
      */
     public function registerMenuBox(string $key, array $args = []): void
     {
@@ -145,34 +147,35 @@ trait RegisterHookAction
             'menu_box' => '',
             'priority' => 20,
         ];
-
+        
         $item = array_merge($opts, $args);
-
-        $this->globalData->set('menu_boxs.' . $key, new Collection($item));
+        
+        $this->globalData->set('menu_boxs.'.$key, new Collection($item));
     }
-
+    
     /**
      * Creates or modifies a taxonomy object.
-     * @param string $taxonomy (Required) Taxonomy key, must not exceed 32 characters.
-     * @param array|string $objectType
-     * @param array $args (Optional) Array of arguments for registering a post type.
+     *
+     * @param  string  $taxonomy  (Required) Taxonomy key, must not exceed 32 characters.
+     * @param  array|string  $objectType
+     * @param  array  $args  (Optional) Array of arguments for registering a post type.
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function registerTaxonomy(string $taxonomy, array|string $objectType, array $args = []): void
     {
         $objectTypes = is_string($objectType) ? [$objectType] : $objectType;
-
+        
         foreach ($objectTypes as $objectType) {
             $type = Str::singular($objectType);
-            $menuSlug = 'taxonomy.' . $type . '.' . $taxonomy;
-
+            $menuSlug = 'taxonomy.'.$type.'.'.$taxonomy;
+            
             $opts = [
-                'label_type' => ucfirst($type) .' '. $args['label'],
+                'label_type' => ucfirst($type).' '.$args['label'],
                 'priority' => 20,
                 'hierarchical' => false,
-                'parent' => 'post-type.' . $objectType,
+                'parent' => 'post-type.'.$objectType,
                 'menu_slug' => $menuSlug,
                 'menu_position' => 20,
                 'model' => Taxonomy::class,
@@ -184,22 +187,22 @@ trait RegisterHookAction
                     'hierarchical',
                 ],
             ];
-
+            
             $args['type'] = $type;
             $args['post_type'] = $objectType;
             $args['taxonomy'] = $taxonomy;
             $args['singular'] = Str::singular($taxonomy);
-            $args['key'] = $type . '_' . $taxonomy;
-
+            $args['key'] = $type.'_'.$taxonomy;
+            
             $argsCollection = new Collection(array_merge($opts, $args));
-
-            $this->globalData->set('taxonomies.' . $objectType.'.'.$taxonomy, $argsCollection);
-
+            
+            $this->globalData->set('taxonomies.'.$objectType.'.'.$taxonomy, $argsCollection);
+            
             $this->registerResourcePermissions(
                 $menuSlug,
                 Str::ucfirst($type).' '.$argsCollection->get('label')
             );
-
+            
             if ($argsCollection->get('show_in_menu')) {
                 $this->addAdminMenu(
                     $argsCollection->get('label'),
@@ -217,7 +220,7 @@ trait RegisterHookAction
                     ]
                 );
             }
-
+            
             if ($argsCollection->get('rewrite')) {
                 $this->registerPermalink(
                     $argsCollection->get('taxonomy'),
@@ -229,10 +232,10 @@ trait RegisterHookAction
                     ]
                 );
             }
-
+            
             if ($argsCollection->get('menu_box')) {
                 $this->registerMenuBox(
-                    $objectType . '_' . $taxonomy,
+                    $objectType.'_'.$taxonomy,
                     [
                         'title' => $argsCollection->get('label'),
                         'group' => 'taxonomy',
@@ -246,24 +249,24 @@ trait RegisterHookAction
             }
         }
     }
-
+    
     /**
      * Registers menu item in menu builder.
      *
-     * @param string $key
-     * @param array $args
-     * @throws \Exception
+     * @param  string  $key
+     * @param  array  $args
+     * @throws Exception
      */
     public function registerPermalink(string $key, array $args = []): void
     {
         if (empty($args['label'])) {
-            throw new \Exception('Permalink args label is required');
+            throw new Exception('Permalink args label is required');
         }
-
+        
         if (empty($args['base'])) {
-            throw new \Exception('Permalink args default_base is required');
+            throw new Exception('Permalink args default_base is required');
         }
-
+        
         $args = new Collection(
             array_merge(
                 [
@@ -277,53 +280,53 @@ trait RegisterHookAction
                 $args
             )
         );
-
-        $this->globalData->set('permalinks.' . $key, new Collection($args));
+        
+        $this->globalData->set('permalinks.'.$key, new Collection($args));
     }
-
+    
     public function registerResource(string $key, ?string $postType = null, ?array $args = []): void
     {
         $register = new ResourceRegister($this);
-
+        
         $data = $register->make($key, $postType, $args);
-
-        $this->globalData->set('resources.' . $data->getKey(), $data->args());
+        
+        $this->globalData->set('resources.'.$data->getKey(), $data->args());
     }
-
+    
     public function registerConfig(array|string $key, array $args = []): void
     {
         $configs = $this->globalData->get('configs');
-
+        
         $this->globalData->set('configs', array_merge($key, $configs));
     }
-
-    public function registerAdminPage(string $key, array $args): void
+    
+    public function registerAdminPage(string $key, #[ArrayShape()] array $args): void
     {
         if (empty($args['title'])) {
-            throw new \Exception('Label Admin Page is required.');
+            throw new Exception('Label Admin Page is required.');
         }
-
+        
         $defaults = [
             'key' => $key,
             'title' => '',
             'menu' => [
                 'icon' => 'fa fa-list',
                 'position' => 30,
-            ]
+            ],
         ];
-
+        
         $args = array_merge($defaults, $args);
         $args = new Collection($args);
-
+        
         $this->addAdminMenu(
             $args['title'],
             $key,
             $args['menu']
         );
-
-        $this->globalData->set('admin_pages.' . $key, $args);
+        
+        $this->globalData->set('admin_pages.'.$key, $args);
     }
-
+    
     public function registerAdminAjax(string $key, array $args = []): void
     {
         $defaults = [
@@ -331,17 +334,17 @@ trait RegisterHookAction
             'method' => 'GET',
             'key' => $key,
         ];
-
+        
         $args = array_merge($defaults, $args);
-
-        $this->globalData->set('admin_ajaxs.' . $key, new Collection($args));
+        
+        $this->globalData->set('admin_ajaxs.'.$key, new Collection($args));
     }
-
+    
     public function registerNavMenus($locations = []): void
     {
         foreach ($locations as $key => $location) {
             $this->globalData->set(
-                'nav_menus.' . $key,
+                'nav_menus.'.$key,
                 new Collection(
                     [
                         'key' => $key,
@@ -351,7 +354,7 @@ trait RegisterHookAction
             );
         }
     }
-
+    
     public function registerEmailHook(string $key, array $args = []): void
     {
         $defaults = [
@@ -359,12 +362,12 @@ trait RegisterHookAction
             'key' => $key,
             'params' => [],
         ];
-
+        
         $args = array_merge($defaults, $args);
-
-        $this->globalData->set('email_hooks.' . $key, new Collection($args));
+        
+        $this->globalData->set('email_hooks.'.$key, new Collection($args));
     }
-
+    
     public function registerSidebar(string $key, array $args = []): void
     {
         $defaults = [
@@ -374,12 +377,12 @@ trait RegisterHookAction
             'before_widget' => '',
             'after_widget' => '',
         ];
-
+        
         $args = array_merge($defaults, $args);
-
-        $this->globalData->set('sidebars.' . $key, new Collection($args));
+        
+        $this->globalData->set('sidebars.'.$key, new Collection($args));
     }
-
+    
     public function registerWidget($key, $args = []): void
     {
         $defaults = [
@@ -388,12 +391,12 @@ trait RegisterHookAction
             'key' => $key,
             'widget' => '',
         ];
-
+        
         $args = array_merge($defaults, $args);
-
-        $this->globalData->set('widgets.' . $key, new Collection($args));
+        
+        $this->globalData->set('widgets.'.$key, new Collection($args));
     }
-
+    
     public function registerPageBlock($key, $args = []): void
     {
         $defaults = [
@@ -402,28 +405,28 @@ trait RegisterHookAction
             'key' => $key,
             'block' => '',
         ];
-
+        
         $args = array_merge($defaults, $args);
-
-        $this->globalData->set('page_blocks.' . $key, new Collection($args));
+        
+        $this->globalData->set('page_blocks.'.$key, new Collection($args));
     }
-
+    
     public function registerFrontendAjax($key, $args = []): void
     {
         $defaults = [
             'auth' => false,
             'key' => $key,
         ];
-
+        
         $args = array_merge($defaults, $args);
-
+        
         if (empty($args['callback'])) {
-            throw new \Exception('Frontend Ajax callback option is required.');
+            throw new Exception('Frontend Ajax callback option is required.');
         }
-
-        $this->globalData->set('frontend_ajaxs.' . $key, new Collection($args));
+        
+        $this->globalData->set('frontend_ajaxs.'.$key, new Collection($args));
     }
-
+    
     public function registerThemeTemplate($key, $args = []): void
     {
         $defaults = [
@@ -431,12 +434,12 @@ trait RegisterHookAction
             'name' => '',
             'view' => '',
         ];
-
+        
         $args = array_merge($defaults, $args);
-
-        $this->globalData->set('templates.' . $key, new Collection($args));
+        
+        $this->globalData->set('templates.'.$key, new Collection($args));
     }
-
+    
     public function registerPackageModule(string $key, array $args = []): void
     {
         $defaults = [
@@ -445,100 +448,100 @@ trait RegisterHookAction
             'model' => User::class,
             'configs' => [],
         ];
-
+        
         $args = array_merge($defaults, $args);
-
-        $this->globalData->set('package_modules.' . $key, new Collection($args));
+        
+        $this->globalData->set('package_modules.'.$key, new Collection($args));
     }
-
+    
     public function registerThemeSetting(string $name, string $label, array $args = []): void
     {
         $args = [
             'name' => $name,
             'label' => $label,
-            'data' => $args
+            'data' => $args,
         ];
-
-        $this->globalData->set('theme_settings.' . $name, new Collection($args));
+        
+        $this->globalData->set('theme_settings.'.$name, new Collection($args));
     }
-
+    
     public function registerProfilePage(string $key, array $args = []): void
     {
         $slug = str_replace(['_'], ['-'], $key);
-
+        
         $default = [
             'title' => '',
             'key' => $key,
             'slug' => $slug,
             'url' => route(
                 'profile',
-                $key == 'index' ? null : '/'. $slug
+                $key == 'index' ? null : '/'.$slug
             ),
         ];
-
+        
         $args = array_merge($default, $args);
-
-        $this->globalData->set('profile_pages.' . $key, new Collection($args));
+        
+        $this->globalData->set('profile_pages.'.$key, new Collection($args));
     }
-
+    
     public function registerPermissionGroup(string $key, array $args = []): void
     {
         $key = str_replace(['.'], '__', $key);
-
+        
         $defaults = [
             'name' => '',
             'description' => '',
             'key' => $key,
         ];
-
+        
         $args = array_merge($defaults, $args);
-
-        $this->globalData->set('permission_groups.' . $key, new Collection($args));
+        
+        $this->globalData->set('permission_groups.'.$key, new Collection($args));
     }
-
+    
     public function registerPermission(string $key, array $args = []): void
     {
         $arrKey = str_replace(['.'], '__', $key);
-
+        
         $defaults = [
             'name' => $key,
             'group' => '',
             'description' => '',
             'key' => $arrKey,
         ];
-
+        
         $args = array_merge($defaults, $args);
-
+        
         $args['group'] = str_replace(['.'], '__', $args['group']);
-
-        $this->globalData->set('permissions.' . $arrKey, new Collection($args));
+        
+        $this->globalData->set('permissions.'.$arrKey, new Collection($args));
     }
-
+    
     public function registerResourcePermissions(string $resource, string $name): void
     {
         foreach ($this->resourcePermissions as $permission) {
             $label = $permission == 'index' ? trans('cms::app.permission_manager.view_list') : $permission;
             $permission = "{$resource}.{$permission}";
-
+            
             $this->registerPermissionGroup(
                 $resource,
                 [
                     'name' => $resource,
-                    'description' => $name
+                    'description' => $name,
                 ]
             );
-
+            
             $this->registerPermission(
                 $permission,
                 [
                     'name' => $permission,
                     'group' => $resource,
-                    'description' => Str::ucfirst($label) . " {$name}",
+                    'description' => Str::ucfirst($label)." {$name}",
                 ]
             );
         }
     }
-
+    
     public function registerEmailTemplate(string $key, array $args = []): void
     {
         $defaults = [
@@ -548,24 +551,44 @@ trait RegisterHookAction
             'params' => [],
             'email_hook' => null,
         ];
-
+        
         $args = array_merge($defaults, $args);
-
-        $this->globalData->set('email_templates.' . $key, new Collection($args));
+        
+        $this->globalData->set('email_templates.'.$key, new Collection($args));
     }
-
+    
+    public function registerAPIDocument(string|SwaggerDocument $key, array $args = []): void
+    {
+        if ($key instanceof SwaggerDocument) {
+            $args = $key->toArray();
+            $key = $key->getName();
+        }
+        
+        $this->globalData->set("api_documents.{$key}", new Collection($args));
+    }
+    
+    public function registerAPIDocumentPath(string|SwaggerDocument $key, array $args = []): void
+    {
+        if ($key instanceof SwaggerDocument) {
+            $args = $key->toArray();
+            $key = $key->getName();
+        }
+        
+        $this->globalData->set("api_documents.{$key}", new Collection($args));
+    }
+    
     /**
-     * @param string $key
-     * @param Collection $args
+     * @param  string  $key
+     * @param  Collection  $args
      */
     protected function registerMenuPostType(string $key, Collection $args): void
     {
         $supports = (array) $args->get('supports', []);
         $prefix = 'post-type.';
-
+        
         $this->addAdminMenu(
             $args->get('label'),
-            $prefix . $key,
+            $prefix.$key,
             [
                 'icon' => $args->get('menu_icon', 'fa fa-edit'),
                 'position' => $args->get('menu_position', 20),
@@ -574,47 +597,47 @@ trait RegisterHookAction
                     "{$prefix}{$key}.create",
                     "{$prefix}{$key}.edit",
                     "{$prefix}{$key}.delete",
-                ]
+                ],
             ]
         );
-
+        
         $this->addAdminMenu(
-            trans('cms::app.all') . ' '. $args->get('label'),
-            $prefix . $key,
+            trans('cms::app.all').' '.$args->get('label'),
+            $prefix.$key,
             [
                 'icon' => 'fa fa-list-ul',
                 'position' => 2,
-                'parent' => $prefix . $key,
+                'parent' => $prefix.$key,
                 'permissions' => [
                     "{$prefix}{$key}.index",
                     "{$prefix}{$key}.create",
                     "{$prefix}{$key}.edit",
                     "{$prefix}{$key}.delete",
-                ]
+                ],
             ]
         );
-
+        
         $this->addAdminMenu(
             trans('cms::app.add_new'),
-            $prefix . $key . '.create',
+            $prefix.$key.'.create',
             [
                 'icon' => 'fa fa-plus',
                 'position' => 3,
-                'parent' => $prefix . $key,
+                'parent' => $prefix.$key,
                 'permissions' => [
                     "{$prefix}{$key}.create",
-                ]
+                ],
             ]
         );
-
+        
         if (in_array('comment', $supports)) {
             $this->addAdminMenu(
                 trans('cms::app.comments'),
-                $prefix . $args->get('singular') . '.comments',
+                $prefix.$args->get('singular').'.comments',
                 [
                     'icon' => 'fa fa-comments',
                     'position' => 20,
-                    'parent' => $prefix . $key,
+                    'parent' => $prefix.$key,
                 ]
             );
         }

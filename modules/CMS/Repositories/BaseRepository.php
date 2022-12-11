@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
-use Prettus\Repository\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 
 /**
  * Interface BaseRepository.

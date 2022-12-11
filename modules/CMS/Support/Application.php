@@ -16,6 +16,10 @@ class Application extends BaseApplication
 {
     public function getNamespace()
     {
-        return 'Juzaweb/CMS';
+        if (! is_null($this->namespace)) {
+            return $this->namespace;
+        }
+    
+        return $this->namespace = 'Juzaweb\\Backend\\';
     }
 }

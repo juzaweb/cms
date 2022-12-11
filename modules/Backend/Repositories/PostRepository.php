@@ -18,6 +18,8 @@ interface PostRepository extends BaseRepository
     public function update(array $attributes, $id);
 
     public function createSelectFrontendBuilder(): Builder;
-
-    public function getStatuses($type = 'posts'): array;
+    
+    public function createFrontendDetailBuilder(): Builder;
+    
+    public function getStatuses(string $type = 'posts'): array;
 }
