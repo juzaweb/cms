@@ -6,18 +6,21 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Facades\Response as ResponseFacade;
+use Illuminate\Support\Str;
+use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use L5Swagger\Exceptions\L5SwaggerException;
-use L5Swagger\GeneratorFactory;
 
 class SwaggerController extends BackendController
 {
-    public function __construct(protected GeneratorFactory $generatorFactory)
+    public function __construct(protected HookAction $hookAction)
     {
-        $this->generatorFactory = $generatorFactory;
+        do_action(Action::API_DOCUMENT_INIT);
     }
     
     /**
@@ -28,7 +31,17 @@ class SwaggerController extends BackendController
      */
     public function index(Request $request): Response
     {
-        $urls = [];
+        do_action(Action::API_DOCUMENT_INIT);
+        
+        $urls = $this->hookAction->getAPIDocuments()->map(
+            function ($item, $name) {
+                return [
+                    'name' => Arr::get($item, 'info.title', Str::ucfirst($name)),
+                    'url' => route('admin.api.documentation.json', [$name]),
+                ];
+            }
+        )->values()->toArray();
+        
         $useAbsolutePath = config('l5-swagger.documentations.default.paths.use_absolute_path');
         
         return ResponseFacade::make(

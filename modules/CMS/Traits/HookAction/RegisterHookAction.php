@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
+use Juzaweb\API\Support\Swagger\SwaggerDocument;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Models\User;
@@ -554,6 +555,26 @@ trait RegisterHookAction
         $args = array_merge($defaults, $args);
         
         $this->globalData->set('email_templates.'.$key, new Collection($args));
+    }
+    
+    public function registerAPIDocument(string|SwaggerDocument $key, array $args = []): void
+    {
+        if ($key instanceof SwaggerDocument) {
+            $args = $key->toArray();
+            $key = $key->getName();
+        }
+        
+        $this->globalData->set("api_documents.{$key}", new Collection($args));
+    }
+    
+    public function registerAPIDocumentPath(string|SwaggerDocument $key, array $args = []): void
+    {
+        if ($key instanceof SwaggerDocument) {
+            $args = $key->toArray();
+            $key = $key->getName();
+        }
+        
+        $this->globalData->set("api_documents.{$key}", new Collection($args));
     }
     
     /**

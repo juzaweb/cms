@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Contracts;
 
 use Illuminate\Support\Collection;
+use Juzaweb\API\Support\Swagger\SwaggerVersion;
 
 /**
  * @see \Juzaweb\CMS\Support\HookAction
@@ -95,7 +96,7 @@ interface HookActionContract
     
     public function getPostTypes(string $postType = null): Collection;
     
-    public function getEmailTemplates(string $key = null): Collection;
+    public function getEmailTemplates(string $key = null): ?Collection;
     
     /**
      * Register Admin Page
@@ -105,4 +106,8 @@ interface HookActionContract
      * @return void
      */
     public function registerAdminPage(string $key, array $args): void;
+    
+    public function getAPIDocuments(string $key = null): ?Collection;
+    
+    public function getDataByKey(string $dataKey, string $key = null): ?Collection;
 }

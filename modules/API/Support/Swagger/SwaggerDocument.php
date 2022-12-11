@@ -3,16 +3,21 @@
 namespace Juzaweb\API\Support\Swagger;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
-class SwaggerVersion implements Arrayable
+class SwaggerDocument implements Arrayable
 {
     protected Collection $paths;
     
-    public function __construct(protected string $version)
+    public function __construct(protected string $name, protected array $args = [])
     {
         $this->paths = new Collection();
-        $this->version = $version;
+    }
+    
+    public function getName(): string
+    {
+        return $this->name;
     }
     
     public function addPath(string $path, callable $callback): static
@@ -25,13 +30,13 @@ class SwaggerVersion implements Arrayable
         return $this;
     }
     
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            "openapi" => "3.0.0",
+            "openapi" => Arr::get($this->args, 'openapi', '3.0.0'),
             "info" => [
-                "title" => "",
-                "version" => "v1",
+                "title" => Arr::get($this->args, 'title', $this->name),
+                "version" => Arr::get($this->args, 'version', 'v1'),
             ],
             'paths' => $this->paths
                 ->map(
