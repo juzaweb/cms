@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6f9cd854cebd604233485398b24b338",
+    "content-hash": "cb59401ecf3cb76d62c1ecd077a8f175",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1926,16 +1926,16 @@
         },
         {
             "name": "juzaweb/packages",
-            "version": "v1.1.3",
+            "version": "v1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/packages.git",
-                "reference": "e1ce11d1233c5719a81fa5d4aa3a6959ef641ea0"
+                "reference": "b81e4194c685798bded57ce8edcf72f9326eeb1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/packages/zipball/e1ce11d1233c5719a81fa5d4aa3a6959ef641ea0",
-                "reference": "e1ce11d1233c5719a81fa5d4aa3a6959ef641ea0",
+                "url": "https://api.github.com/repos/juzaweb/packages/zipball/b81e4194c685798bded57ce8edcf72f9326eeb1d",
+                "reference": "b81e4194c685798bded57ce8edcf72f9326eeb1d",
                 "shasum": ""
             },
             "require": {
@@ -1950,7 +1950,6 @@
                 "laravel/passport": "^10.4",
                 "laravel/socialite": "^5.5",
                 "php": "^8.0|^8.1",
-                "prettus/l5-repository": "^2.8",
                 "rcrowe/twigbridge": "^0.14",
                 "spatie/image-optimizer": "^1.4",
                 "spatie/laravel-backup": "^8.1",
@@ -1964,9 +1963,9 @@
             "description": "Juzaweb CMS packages",
             "support": {
                 "issues": "https://github.com/juzaweb/packages/issues",
-                "source": "https://github.com/juzaweb/packages/tree/v1.1.3"
+                "source": "https://github.com/juzaweb/packages/tree/v1.2"
             },
-            "time": "2022-07-31T04:42:32+00:00"
+            "time": "2022-12-11T01:59:56+00:00"
         },
         {
             "name": "juzaweb/sitemap",
@@ -4179,129 +4178,6 @@
                 }
             ],
             "time": "2022-04-04T05:15:45+00:00"
-        },
-        {
-            "name": "prettus/l5-repository",
-            "version": "2.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/andersao/l5-repository.git",
-                "reference": "bdaf12dcf1fcc2637ccbe06999f789a9ff522fea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/andersao/l5-repository/zipball/bdaf12dcf1fcc2637ccbe06999f789a9ff522fea",
-                "reference": "bdaf12dcf1fcc2637ccbe06999f789a9ff522fea",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/config": "~5.0|~6.0|~7.0|^8.0|^9.0",
-                "illuminate/console": "~5.0|~6.0|~7.0|^8.0|^9.0",
-                "illuminate/database": "~5.0|~6.0|~7.0|^8.0|^9.0",
-                "illuminate/filesystem": "~5.0|~6.0|~7.0|^8.0|^9.0",
-                "illuminate/http": "~5.0|~6.0|~7.0|^8.0|^9.0",
-                "illuminate/pagination": "~5.0|~6.0|~7.0|^8.0|^9.0",
-                "illuminate/support": "~5.0|~6.0|~7.0|^8.0|^9.0",
-                "illuminate/validation": "~5.0|~6.0|~7.0|^8.0|^9.0",
-                "prettus/laravel-validation": "~1.1|~1.2|~1.3|~1.4"
-            },
-            "suggest": {
-                "league/fractal": "Required to use the Fractal Presenter (0.12.*).",
-                "prettus/laravel-validation": "Required to provide easy validation with the repository (1.1.*)",
-                "robclancy/presenter": "Required to use the Presenter Model (1.3.*)"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Prettus\\Repository\\Providers\\RepositoryServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Prettus\\Repository\\": "src/Prettus/Repository/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anderson Andrade",
-                    "email": "contato@andersonandra.de",
-                    "homepage": "http://andersonandra.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel 5|6|7|8|9 - Repositories to  the database layer",
-            "homepage": "http://andersao.github.io/l5-repository",
-            "keywords": [
-                "cache",
-                "eloquent",
-                "laravel",
-                "model",
-                "repository"
-            ],
-            "support": {
-                "docs": "http://andersao.github.io/l5-repository",
-                "email": "contato@andersonandra.de",
-                "issues": "https://github.com/andersao/l5-repository/issues",
-                "source": "https://github.com/andersao/l5-repository",
-                "wiki": "https://github.com/andersao/l5-repository"
-            },
-            "time": "2022-02-21T11:19:35+00:00"
-        },
-        {
-            "name": "prettus/laravel-validation",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/andersao/laravel-validator.git",
-                "reference": "45d6b64e35d966aa0866d6f5fd22ecbb33ea41d9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/andersao/laravel-validator/zipball/45d6b64e35d966aa0866d6f5fd22ecbb33ea41d9",
-                "reference": "45d6b64e35d966aa0866d6f5fd22ecbb33ea41d9",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.4|^6.0|^7.0|^8.0|^9.0",
-                "illuminate/validation": "~5.4|^6.0|^7.0|^8.0|^9.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Prettus\\Validator\\": "src/Prettus/Validator/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Anderson Andrade",
-                    "email": "contato@andersonandra.de",
-                    "homepage": "http://andersonandra.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel Validation Service",
-            "homepage": "http://andersao.github.io/laravel-validation",
-            "keywords": [
-                "laravel",
-                "service",
-                "validation"
-            ],
-            "support": {
-                "docs": "http://andersao.github.io/laravel-validation",
-                "email": "contato@andersonandra.de",
-                "issues": "https://github.com/andersao/laravel-validation/issues",
-                "source": "https://github.com/andersao/laravel-validation",
-                "wiki": "https://github.com/andersao/laravel-validation"
-            },
-            "time": "2022-02-21T11:18:30+00:00"
         },
         {
             "name": "psr/cache",
@@ -11538,7 +11414,8 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
-        "ext-zip": "*"
+        "ext-zip": "*",
+        "ext-openssl": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
