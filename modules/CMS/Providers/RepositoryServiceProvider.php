@@ -18,8 +18,7 @@ class RepositoryServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $defer = false;
-    
+    protected bool $defer = false;
     
     /**
      *
@@ -34,8 +33,6 @@ class RepositoryServiceProvider extends ServiceProvider
         );
         
         $this->mergeConfigFrom(__DIR__.'/../config/repository.php', 'repository');
-        
-        $this->loadTranslationsFrom(__DIR__.'/../../../resources/lang', 'repository');
     }
     
     
