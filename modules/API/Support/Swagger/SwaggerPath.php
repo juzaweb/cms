@@ -29,13 +29,13 @@ class SwaggerPath implements Arrayable
         return $this->methods->get($method);
     }
     
-    public function toArray()
+    public function toArray(): array
     {
         return $this->methods->toArray();
     }
     
     protected function createSwaggerMethod(string $method): SwaggerMethod
     {
-        return new SwaggerMethod($method);
+        return new SwaggerMethod($method, $this->path);
     }
 }

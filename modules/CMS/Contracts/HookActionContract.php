@@ -11,6 +11,7 @@
 namespace Juzaweb\CMS\Contracts;
 
 use Illuminate\Support\Collection;
+use Juzaweb\API\Support\Swagger\SwaggerDocument;
 use Juzaweb\API\Support\Swagger\SwaggerVersion;
 
 /**
@@ -107,7 +108,7 @@ interface HookActionContract
      */
     public function registerAdminPage(string $key, array $args): void;
     
-    public function getAPIDocuments(string $key = null): ?Collection;
+    public function getAPIDocuments(string $key = null): null|Collection|SwaggerDocument;
     
     public function getDataByKey(string $dataKey, string $key = null): ?Collection;
 }

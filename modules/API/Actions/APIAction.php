@@ -11,6 +11,8 @@
 namespace Juzaweb\API\Actions;
 
 use Juzaweb\API\Support\Swagger\SwaggerDocument;
+use Juzaweb\API\Support\Swagger\SwaggerMethod;
+use Juzaweb\API\Support\Swagger\SwaggerPath;
 use Juzaweb\API\Support\Swagger\SwaggerVersion;
 use Juzaweb\CMS\Abstracts\Action;
 
@@ -24,12 +26,33 @@ class APIAction extends Action
     
     public function addDocumentation()
     {
+        $postTypes = $this->hookAction->getPostTypes();
+        $taxonomies = $this->hookAction->getTaxonomies();
+        
         $apiAdmin = new SwaggerDocument(
             'admin',
             [
                 'title' => 'Admin',
             ]
         );
+        
+        foreach ($postTypes as $key => $postType) {
+            $apiAdmin->addPath(
+                "post-type/{$key}",
+                function (SwaggerPath $path) use ($key, $postType) {
+                    $path->addMethod(
+                        'get',
+                        function (SwaggerMethod $method) use ($key, $postType) {
+                            $method->operationId("post-type.{$key}.index");
+                            $method->summary("Get list {$key} items");
+                            $method->tags(['Post Type']);
+                            return $method;
+                        }
+                    );
+                    return $path;
+                }
+            );
+        }
         
         $this->hookAction->registerAPIDocument($apiAdmin);
     }

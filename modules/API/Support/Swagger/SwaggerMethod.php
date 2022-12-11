@@ -13,7 +13,7 @@ class SwaggerMethod implements Arrayable
     protected array $responses = [];
     protected array $requestBody = [];
     
-    public function __construct(protected string $method)
+    public function __construct(protected string $method, protected string $path)
     {
     }
     
@@ -30,7 +30,7 @@ class SwaggerMethod implements Arrayable
             return $this->operationId;
         }
         
-        $this->operationId = "api.{$this->version}.".str_replace('/', '.', $this->path);
+        $this->operationId = "api.".str_replace('/', '.', $this->path);
         
         return $this->operationId;
     }

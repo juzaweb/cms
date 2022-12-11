@@ -33,7 +33,7 @@ class SwaggerDocument implements Arrayable
     public function toArray(): array
     {
         return [
-            "openapi" => Arr::get($this->args, 'openapi', '3.0.0'),
+            "openapi" => Arr::get($this->args, 'openapi', '3.0.3'),
             "info" => [
                 "title" => Arr::get($this->args, 'title', $this->name),
                 "version" => Arr::get($this->args, 'version', 'v1'),
