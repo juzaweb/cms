@@ -56,11 +56,23 @@ class SwaggerMethod implements Arrayable
         return $this;
     }
     
-    public function parameter(string $name, array $args = [])
+    public function parameter(string $name, array $args = []): static
     {
         $this->parameters->put(
             $name,
             $args
+        );
+        
+        return $this;
+    }
+    
+    public function parameterRef(string $ref): static
+    {
+        return $this->parameter(
+            $ref,
+            [
+                '$ref' => "#/components/parameters/{$ref}",
+            ]
         );
     }
     

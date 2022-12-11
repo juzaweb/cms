@@ -5,14 +5,45 @@ namespace Juzaweb\API\Support\Swagger;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Juzaweb\API\Support\Documentation\APISwaggerDocument;
 
 class SwaggerDocument implements Arrayable
 {
+    protected string $prefix;
+    protected string $title;
+    protected string $openapi = '3.0.3';
+    protected string $version = 'v1';
     protected Collection $paths;
     
-    public function __construct(protected string $name, protected array $args = [])
+    public static function make(string $name): static
+    {
+        return new static($name);
+    }
+    
+    public function __construct(protected string $name)
     {
         $this->paths = new Collection();
+        $this->title = Str::ucfirst($this->name);
+    }
+    
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
+        
+        return $this;
+    }
+    
+    public function setPrefix(string $prefix): static
+    {
+        $this->prefix = $prefix;
+        
+        return $this;
+    }
+    
+    public function getPrefix(): string
+    {
+        return $this->prefix;
     }
     
     public function getName(): string
@@ -20,12 +51,25 @@ class SwaggerDocument implements Arrayable
         return $this->name;
     }
     
-    public function addPath(string $path, callable $callback): static
+    public function path(string $path, callable $callback): static
     {
+        $base = $this->prefix ? "/api/{$this->getPrefix()}/" : '/api/';
+        
         $this->paths->put(
-            '/api/'.trim($path, '/'),
+            $base . trim($path, '/'),
             $callback(new SwaggerPath($path))
         );
+        
+        return $this;
+    }
+    
+    public function append(string|APISwaggerDocument $document): static
+    {
+        if (is_string($document)) {
+            $document = app($document);
+        }
+        
+        $document->handle($this);
         
         return $this;
     }
@@ -33,10 +77,10 @@ class SwaggerDocument implements Arrayable
     public function toArray(): array
     {
         return [
-            "openapi" => Arr::get($this->args, 'openapi', '3.0.3'),
+            "openapi" => $this->openapi,
             "info" => [
-                "title" => Arr::get($this->args, 'title', $this->name),
-                "version" => Arr::get($this->args, 'version', 'v1'),
+                "title" => $this->title,
+                "version" => $this->version,
             ],
             'paths' => $this->paths
                 ->map(
