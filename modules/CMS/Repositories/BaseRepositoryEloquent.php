@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Repositories;
 
 use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
-use Juzaweb\CMS\Support\Repository\Eloquent\BaseRepository as PackageBaseRepository;
+use Juzaweb\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
 use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
 
 abstract class BaseRepositoryEloquent extends PackageBaseRepository
@@ -17,7 +17,7 @@ abstract class BaseRepositoryEloquent extends PackageBaseRepository
      *
      * @param $criteria
      *
-     * @return \Juzaweb\CMS\Support\Repository\Eloquent\BaseRepository
+     * @return \Juzaweb\CMS\Repositories\Eloquent\BaseRepository
      * @throws \Juzaweb\CMS\Repositories\Exceptions\RepositoryException
      */
     public function pushCriteria($criteria): PackageBaseRepository
