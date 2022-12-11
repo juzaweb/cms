@@ -70,23 +70,23 @@ use TwigBridge\Facade\Twig;
 
 class CmsServiceProvider extends ServiceProvider
 {
-    protected string $basePath = __DIR__ . '/..';
-
+    protected string $basePath = __DIR__.'/..';
+    
     public function boot()
     {
         $this->bootMigrations();
         $this->bootPublishes();
-
+        
         Validator::extend(
             'recaptcha',
             '\Juzaweb\CMS\Support\Validators\ReCaptchaValidator@validate'
         );
-
+        
         Validator::extend(
             'domain',
             '\Juzaweb\CMS\Support\Validators\DomainValidator@validate'
         );
-
+        
         Rule::macro(
             'modelExists',
             function (
@@ -97,7 +97,7 @@ class CmsServiceProvider extends ServiceProvider
                 return new ModelExists($modelClass, $modelAttribute, $callback);
             }
         );
-
+        
         Rule::macro(
             'modelUnique',
             function (
@@ -108,21 +108,21 @@ class CmsServiceProvider extends ServiceProvider
                 return new ModelUnique($modelClass, $modelAttribute, $callback);
             }
         );
-
+        
         Schema::defaultStringLength(150);
-
+        
         Twig::addExtension(new Custom());
-
+        
         Paginator::useBootstrapFive();
-
+        
         OverwriteConfig::init();
-
+        
         /*$this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
             $schedule->command('juzacms:update')->everyMinute();
         });*/
     }
-
+    
     public function register()
     {
         $this->registerSingleton();
@@ -130,55 +130,54 @@ class CmsServiceProvider extends ServiceProvider
         $this->registerProviders();
         Passport::ignoreMigrations();
     }
-
+    
     protected function registerConfigs()
     {
         $this->mergeConfigFrom(
-            $this->basePath . '/config/juzaweb.php',
+            $this->basePath.'/config/juzaweb.php',
             'juzaweb'
         );
-
+        
         $this->mergeConfigFrom(
-            $this->basePath . '/config/locales.php',
+            $this->basePath.'/config/locales.php',
             'locales'
         );
-
+        
         $this->mergeConfigFrom(
-            $this->basePath . '/config/countries.php',
+            $this->basePath.'/config/countries.php',
             'countries'
         );
-
+        
         $this->mergeConfigFrom(
-            $this->basePath . '/config/installer.php',
+            $this->basePath.'/config/installer.php',
             'installer'
         );
-
+        
         $this->mergeConfigFrom(
-            $this->basePath . '/config/network.php',
+            $this->basePath.'/config/network.php',
             'network'
         );
     }
-
+    
     protected function bootMigrations()
     {
-        $mainPath = $this->basePath . '/Database/migrations';
-        $directories = glob($mainPath . '/*', GLOB_ONLYDIR);
+        $mainPath = $this->basePath.'/Database/migrations';
+        $directories = glob($mainPath.'/*', GLOB_ONLYDIR);
         $paths = array_merge([$mainPath], $directories);
         $this->loadMigrationsFrom($paths);
     }
-
+    
     protected function bootPublishes()
     {
         $this->publishes(
             [
-                $this->basePath . '/config/juzaweb.php' => base_path('config/juzaweb.php'),
-                $this->basePath . '/config/network.php' => base_path('config/network.php'),
-                $this->basePath . '/config/locales.php' => base_path('config/locales.php'),
+                $this->basePath.'/config/juzaweb.php' => base_path('config/juzaweb.php'),
+                $this->basePath.'/config/network.php' => base_path('config/network.php'),
             ],
             'cms_config'
         );
     }
-
+    
     protected function registerSingleton()
     {
         $this->app->singleton(
@@ -187,28 +186,28 @@ class CmsServiceProvider extends ServiceProvider
                 return new MacroableModel();
             }
         );
-
+        
         $this->app->singleton(
             ActionRegisterContract::class,
             function ($app) {
                 return new ActionRegister($app);
             }
         );
-
+        
         $this->app->singleton(
             ConfigContract::class,
             function ($app) {
                 return new DbConfig($app, $app['cache']);
             }
         );
-
+        
         $this->app->singleton(
             ThemeConfigContract::class,
             function ($app) {
                 return new ThemeConfig($app, jw_current_theme());
             }
         );
-
+        
         $this->app->singleton(
             HookActionContract::class,
             function ($app) {
@@ -218,28 +217,28 @@ class CmsServiceProvider extends ServiceProvider
                 );
             }
         );
-
+        
         $this->app->singleton(
             GlobalDataContract::class,
             function () {
                 return new GlobalData();
             }
         );
-
+        
         $this->app->singleton(
             XssCleanerContract::class,
             function () {
                 return new XssCleaner();
             }
         );
-
+        
         $this->app->singleton(
             CacheGroupContract::class,
             function ($app) {
                 return new CacheGroup($app['cache']);
             }
         );
-
+        
         $this->app->singleton(
             OverwriteConfigContract::class,
             function ($app) {
@@ -251,14 +250,14 @@ class CmsServiceProvider extends ServiceProvider
                 );
             }
         );
-
+        
         $this->app->singleton(
             StorageDataContract::class,
             function () {
                 return new StorageData();
             }
         );
-
+        
         $this->app->singleton(
             TableGroupContract::class,
             function ($app) {
@@ -267,7 +266,7 @@ class CmsServiceProvider extends ServiceProvider
                 );
             }
         );
-
+        
         $this->app->singleton(
             BackendMessageContract::class,
             function ($app) {
@@ -276,7 +275,7 @@ class CmsServiceProvider extends ServiceProvider
                 );
             }
         );
-
+        
         $this->app->singleton(
             JuzawebApiContract::class,
             function ($app) {
@@ -285,14 +284,14 @@ class CmsServiceProvider extends ServiceProvider
                 );
             }
         );
-
+        
         $this->app->singleton(
             JWQueryContract::class,
             function ($app) {
                 return new JWQuery($app['db']);
             }
         );
-
+        
         $this->app->singleton(
             PostManagerContract::class,
             function ($app) {
@@ -301,7 +300,7 @@ class CmsServiceProvider extends ServiceProvider
                 );
             }
         );
-
+        
         $this->app->singleton(
             PostImporterContract::class,
             function ($app) {
@@ -312,35 +311,35 @@ class CmsServiceProvider extends ServiceProvider
                 );
             }
         );
-
+        
         $this->app->singleton(
             Field::class,
             function ($app) {
                 return new HtmlField();
             }
         );
-
+        
         $this->app->singleton(
             ShortCodeCompilerContract::class,
             function ($app) {
                 return new ShortCodeCompiler();
             }
         );
-
+        
         $this->app->singleton(
             ShortCodeContract::class,
             function ($app) {
                 return new ShortCode($app[ShortCodeCompilerContract::class]);
             }
         );
-
+        
         $this->app->singleton(
             TranslationFinderContract::class,
             function ($app) {
                 return new TranslationFinder();
             }
         );
-
+        
         $this->app->singleton(
             TranslationManagerContract::class,
             function ($app) {
@@ -352,19 +351,20 @@ class CmsServiceProvider extends ServiceProvider
                 );
             }
         );
-
+        
         $this->app->singleton(
             GoogleTranslateContract::class,
             fn ($app) => new GoogleTranslate($app[\Illuminate\Contracts\Filesystem\Factory::class])
         );
     }
-
+    
     protected function registerProviders()
     {
+        $this->app->register(RepositoryServiceProvider::class);
         if (config('network.enable')) {
             $this->app->register(NetworkServiceProvider::class);
         }
-
+        
         $this->app->register(HookActionServiceProvider::class);
         $this->app->register(PermissionServiceProvider::class);
         $this->app->register(PerformanceServiceProvider::class);
@@ -377,11 +377,11 @@ class CmsServiceProvider extends ServiceProvider
         $this->app->register(BackendServiceProvider::class);
         $this->app->register(FrontendServiceProvider::class);
         $this->app->register(ShortCodeServiceProvider::class);
-
+        
         if (config('juzaweb.translation.enable')) {
             $this->app->register(TranslationServiceProvider::class);
         }
-
+        
         if (config('juzaweb.api.enable')) {
             $this->app->register(APIServiceProvider::class);
         }
