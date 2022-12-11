@@ -24,9 +24,12 @@
       margin:0;
       background: #fafafa;
     }
+
+    #swagger-ui {
+        margin-bottom: 50px;
+    }
     </style>
 </head>
-
 <body>
 <div id="swagger-ui"></div>
 
@@ -37,7 +40,7 @@
         // Build a system
         const ui = SwaggerUIBundle({
             dom_id: '#swagger-ui',
-            url: "{!! $urlToDocs !!}",
+            urls: [{"name": "Admin", "url": "{!! $urlToDocs !!}"}],
             operationsSorter: {!! isset($operationsSorter) ? '"' . $operationsSorter . '"' : 'null' !!},
             configUrl: {!! isset($configUrl) ? '"' . $configUrl . '"' : 'null' !!},
             validatorUrl: {!! isset($validatorUrl) ? '"' . $validatorUrl . '"' : 'null' !!},
