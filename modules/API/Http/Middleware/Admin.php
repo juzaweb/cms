@@ -18,16 +18,16 @@ class Admin
 {
     public function handle($request, Closure $next)
     {
-        if (! $user = Auth::guard('api')->user()) {
-            return abort(403, __('You can not access this page.'));
+        if (!$user = Auth::guard('api')->user()) {
+            abort(403, __('You can not access this page.'));
         }
-
+        
         if (!has_permission($user)) {
-            return abort(403, __('You can not access this page.'));
+            abort(403, __('You can not access this page.'));
         }
-
+        
         do_action(Action::BACKEND_INIT, $request);
-
+        
         return $next($request);
     }
 }

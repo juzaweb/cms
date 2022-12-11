@@ -16,19 +16,19 @@
  * adding trailing commas in the last line of an array, etc.
  */
 
-$finder = PhpCsFixer\Finder::create()
+$finder = \PhpCsFixer\Finder::create()
     ->exclude('node_modules')
     ->exclude('vendor')
     ->in(__DIR__);
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR2' => true,
-        'array_syntax' => [ 'syntax' => 'short' ],
-        'binary_operator_spaces' => [ 'align_equals' => false, 'align_double_arrow' => false ],
+        'array_syntax' => ['syntax' => 'short'],
+        'binary_operator_spaces' => ['align_equals' => false, 'align_double_arrow' => false],
         'cast_spaces' => true,
         'combine_consecutive_unsets' => true,
-        'concat_space' => [ 'spacing' => 'one' ],
+        'concat_space' => ['spacing' => 'one'],
         'linebreak_after_opening_tag' => true,
         'no_blank_lines_after_class_opening' => true,
         'no_blank_lines_after_phpdoc' => true,

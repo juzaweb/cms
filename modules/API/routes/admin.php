@@ -2,10 +2,12 @@
 
 use Juzaweb\API\Http\Controllers\Documentation\SwaggerAssetController;
 use Juzaweb\API\Http\Controllers\Documentation\SwaggerController;
+use Juzaweb\API\Http\Middleware\SwaggerApiDocumentation;
 
 Route::group(
     [
         'prefix' => 'api/documentation',
+        'middleware' => SwaggerApiDocumentation::class,
     ],
     function () {
         Route::get('/', [SwaggerController::class, 'index']);
