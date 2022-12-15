@@ -88,12 +88,25 @@ class SwaggerMethod implements Arrayable
                     return $item;
                 }
             )->values(),
-            'responses' => $this->responses->map(
-                function ($item, $name) {
-                    $item['name'] = $name;
-                    return $item;
-                }
-            )->values(),
+            'responses' => $this->getResponseWithDefaults(),
         ];
+    }
+    
+    protected function getResponseWithDefaults(): Collection
+    {
+        if ($this->responses->isNotEmpty()) {
+            return $this->responses;
+        }
+        
+        return new Collection(
+            [
+                200 => [
+                    '$ref' => '#/components/responses/success_detail',
+                ],
+                500 => [
+                    '$ref' => '#/components/responses/error_500',
+                ],
+            ]
+        );
     }
 }

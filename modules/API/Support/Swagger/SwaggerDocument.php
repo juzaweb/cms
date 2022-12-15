@@ -53,7 +53,7 @@ class SwaggerDocument implements Arrayable
     
     public function path(string $path, callable $callback): static
     {
-        $base = $this->prefix ? "/api/{$this->getPrefix()}/" : '/api/';
+        $base = isset($this->prefix) ? "/api/{$this->getPrefix()}/" : '/api/';
         
         $this->paths->put(
             $base . trim($path, '/'),

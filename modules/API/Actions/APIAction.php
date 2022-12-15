@@ -10,6 +10,7 @@
 
 namespace Juzaweb\API\Actions;
 
+use Juzaweb\API\Support\Documentation\PostTypeAdminSwaggerDocument;
 use Juzaweb\API\Support\Documentation\PostTypeSwaggerDocument;
 use Juzaweb\API\Support\Swagger\SwaggerDocument;
 use Juzaweb\CMS\Abstracts\Action;
@@ -19,15 +20,23 @@ class APIAction extends Action
     public function handle()
     {
         $this->addAction(Action::BACKEND_INIT, [$this, 'addAdminMenu']);
-        $this->addAction(Action::API_DOCUMENT_INIT, [$this, 'addDocumentation'], 1);
+        $this->addAction(Action::API_DOCUMENT_INIT, [$this, 'addAPIDocumentation'], 1);
     }
     
-    public function addDocumentation()
+    public function addAPIDocumentation()
+    {
+        $apiAdmin = SwaggerDocument::make('frontend');
+        $apiAdmin->setTitle('Frontend');
+        $apiAdmin->append(PostTypeSwaggerDocument::class);
+        $this->hookAction->registerAPIDocument($apiAdmin);
+    }
+    
+    public function addAdminDocumentation()
     {
         $apiAdmin = SwaggerDocument::make('admin');
         $apiAdmin->setTitle('Admin');
         $apiAdmin->setPrefix('admin');
-        $apiAdmin->append(PostTypeSwaggerDocument::class);
+        $apiAdmin->append(PostTypeAdminSwaggerDocument::class);
         $this->hookAction->registerAPIDocument($apiAdmin);
     }
     

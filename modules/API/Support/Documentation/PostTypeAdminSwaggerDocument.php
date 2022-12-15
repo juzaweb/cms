@@ -16,7 +16,7 @@ use Juzaweb\API\Support\Swagger\SwaggerMethod;
 use Juzaweb\API\Support\Swagger\SwaggerPath;
 use Juzaweb\CMS\Contracts\HookActionContract;
 
-class PostTypeSwaggerDocument implements APISwaggerDocument
+class PostTypeAdminSwaggerDocument implements APISwaggerDocument
 {
     public function __construct(protected HookActionContract $hookAction)
     {
@@ -55,6 +55,15 @@ class PostTypeSwaggerDocument implements APISwaggerDocument
                         return $method;
                     }
                 );
+                $path->method(
+                    'post',
+                    function (SwaggerMethod $method) use ($key, $postType) {
+                        $method->operationId("admin.post-type.{$key}.store");
+                        $method->summary("Create a {$key}");
+                        $method->tags([$postType->get('label')]);
+                        return $method;
+                    }
+                );
                 return $path;
             }
         );
@@ -66,6 +75,26 @@ class PostTypeSwaggerDocument implements APISwaggerDocument
                     function (SwaggerMethod $method) use ($key, $postType) {
                         $method->operationId("admin.post-type.{$key}.show");
                         $method->summary("Get {$key} item");
+                        $method->tags([$postType->get('label')]);
+                        $method->parameterRef('path_slug');
+                        return $method;
+                    }
+                );
+                $path->method(
+                    'put',
+                    function (SwaggerMethod $method) use ($key, $postType) {
+                        $method->operationId("admin.post-type.{$key}.update");
+                        $method->summary("Update {$key} item");
+                        $method->tags([$postType->get('label')]);
+                        $method->parameterRef('path_slug');
+                        return $method;
+                    }
+                );
+                $path->method(
+                    'delete',
+                    function (SwaggerMethod $method) use ($key, $postType) {
+                        $method->operationId("admin.post-type.{$key}.destroy");
+                        $method->summary("Delete {$key} item");
                         $method->tags([$postType->get('label')]);
                         $method->parameterRef('path_slug');
                         return $method;
@@ -92,6 +121,15 @@ class PostTypeSwaggerDocument implements APISwaggerDocument
                         return $method;
                     }
                 );
+                $path->method(
+                    'post',
+                    function (SwaggerMethod $method) use ($key, $taxonomy, $postType) {
+                        $method->operationId("admin.post-type.{$key}.store");
+                        $method->summary("Create a {$key}");
+                        $method->tags([$taxonomy->get('label_type')]);
+                        return $method;
+                    }
+                );
                 return $path;
             }
         );
@@ -103,6 +141,26 @@ class PostTypeSwaggerDocument implements APISwaggerDocument
                     function (SwaggerMethod $method) use ($key, $taxonomy, $postType) {
                         $method->operationId("admin.post-type.{$key}.show");
                         $method->summary("Get {$key} item");
+                        $method->tags([$taxonomy->get('label_type')]);
+                        $method->parameterRef('path_slug');
+                        return $method;
+                    }
+                );
+                $path->method(
+                    'put',
+                    function (SwaggerMethod $method) use ($key, $taxonomy, $postType) {
+                        $method->operationId("admin.post-type.{$key}.update");
+                        $method->summary("Update {$key} item");
+                        $method->tags([$taxonomy->get('label_type')]);
+                        $method->parameterRef('path_slug');
+                        return $method;
+                    }
+                );
+                $path->method(
+                    'delete',
+                    function (SwaggerMethod $method) use ($key, $taxonomy, $postType) {
+                        $method->operationId("admin.post-type.{$key}.destroy");
+                        $method->summary("Delete {$postType->get('key')} {$taxonomy->get('singular')} item");
                         $method->tags([$taxonomy->get('label_type')]);
                         $method->parameterRef('path_slug');
                         return $method;

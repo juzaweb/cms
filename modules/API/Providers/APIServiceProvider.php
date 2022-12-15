@@ -21,8 +21,6 @@ class APIServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->configureRateLimiting();
-        
         ActionRegister::register(
             [
                 APIAction::class,
@@ -35,16 +33,5 @@ class APIServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'api');
         
         $this->app->register(RouteServiceProvider::class);
-    }
-    
-    protected function configureRateLimiting(): void
-    {
-        RateLimiter::for(
-            'api',
-            function (Request $request) {
-                return Limit::perMinute(60)
-                    ->by($request->user()?->id ?: get_client_ip());
-            }
-        );
     }
 }
