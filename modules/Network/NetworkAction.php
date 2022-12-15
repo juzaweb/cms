@@ -72,6 +72,16 @@ class NetworkAction extends Action
                 'position' => 45,
             ]
         );
+    
+        HookAction::addAdminMenu(
+            'Log Viewer',
+            'log-viewer',
+            [
+                'icon' => 'fa fa-history',
+                'position' => 99,
+                'turbolinks' => false,
+            ]
+        );
     }
 
     public function registerMenus(): void
