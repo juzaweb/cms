@@ -28,7 +28,7 @@ class PostTypeAdminSwaggerDocument implements APISwaggerDocument
         
         foreach ($postTypes as $key => $postType) {
             $this->addPathPostType($key, $postType, $document);
-    
+            
             $taxonomies = $this->hookAction->getTaxonomies($key);
             
             foreach ($taxonomies as $tkey => $taxonomy) {

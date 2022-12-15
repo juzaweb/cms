@@ -20,7 +20,9 @@ class APIAction extends Action
     public function handle()
     {
         $this->addAction(Action::BACKEND_INIT, [$this, 'addAdminMenu']);
-        $this->addAction(Action::API_DOCUMENT_INIT, [$this, 'addAPIDocumentation'], 1);
+        if (config('juzaweb.api.frontend.enable')) {
+            $this->addAction(Action::API_DOCUMENT_INIT, [$this, 'addAPIDocumentation'], 1);
+        }
     }
     
     public function addAPIDocumentation()
