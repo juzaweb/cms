@@ -206,7 +206,10 @@ return [
 
     'api' => [
         'enable' => env('JW_ALLOW_API', false),
-        
+    
+        /**
+         * Frontend API configs
+         */
         'frontend' => [
             'enable' => env('JW_ALLOW_FRONTEND_API', env('JW_ALLOW_API', false)),
         ]

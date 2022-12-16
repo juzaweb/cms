@@ -12,7 +12,7 @@ namespace Juzaweb\API\Support\Documentation;
 
 use Juzaweb\API\Support\Swagger\SwaggerDocument;
 
-interface APISwaggerDocument
+interface APISwaggerDocumentation
 {
     public function handle(SwaggerDocument $document): SwaggerDocument;
 }

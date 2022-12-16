@@ -5,7 +5,7 @@ namespace Juzaweb\API\Support\Swagger;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Juzaweb\API\Support\Documentation\APISwaggerDocument;
+use Juzaweb\API\Support\Documentation\APISwaggerDocumentation;
 
 class SwaggerDocument implements Arrayable
 {
@@ -62,7 +62,7 @@ class SwaggerDocument implements Arrayable
         return $this;
     }
     
-    public function append(string|APISwaggerDocument $document): static
+    public function append(string|APISwaggerDocumentation $document): static
     {
         if (is_string($document)) {
             $document = app($document);

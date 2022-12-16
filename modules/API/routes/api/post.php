@@ -20,7 +20,7 @@ Route::group(
             PostController::class,
             [
                 'parameters' => [
-                    '{type}' => 'id',
+                    '{type}' => 'slug',
                 ],
                 'names' => 'post_type',
             ]

@@ -12,12 +12,21 @@ class SwaggerMethod implements Arrayable
     protected string $operationId;
     protected Collection $parameters;
     protected Collection $responses;
-    protected array $requestBody = [];
+    protected Collection $requestBody;
     
     public function __construct(protected string $method, protected string $path)
     {
         $this->parameters = new Collection();
-        $this->responses = new Collection();
+        $this->responses = new Collection(
+            [
+                200 => [
+                    '$ref' => '#/components/responses/success_detail',
+                ],
+                500 => [
+                    '$ref' => '#/components/responses/error_500',
+                ],
+            ]
+        );
     }
     
     public function operationId(string $operationId): static
@@ -76,9 +85,39 @@ class SwaggerMethod implements Arrayable
         );
     }
     
+    public function removeResponse(string $code)
+    {
+        return $this->responses->pull($code);
+    }
+    
+    public function response(string $code, array $args = []): static
+    {
+        $this->responses->put(
+            $code,
+            $args
+        );
+        
+        return $this;
+    }
+    
+    public function responseRef(string $code, string $ref): static
+    {
+        return $this->response(
+            $code,
+            [
+                '$ref' => "#/components/responses/{$ref}",
+            ]
+        );
+    }
+    
+    public function setRequestBody(array $data)
+    {
+        $this->requestBody = new Collection($data);
+    }
+    
     public function toArray(): array
     {
-        return [
+        $data = [
             'tags' => $this->tags,
             'summary' => $this->summary,
             'operationId' => $this->getOperationId(),
@@ -88,25 +127,13 @@ class SwaggerMethod implements Arrayable
                     return $item;
                 }
             )->values(),
-            'responses' => $this->getResponseWithDefaults(),
+            'responses' => $this->responses,
         ];
-    }
-    
-    protected function getResponseWithDefaults(): Collection
-    {
-        if ($this->responses->isNotEmpty()) {
-            return $this->responses;
+        
+        if (isset($this->requestBody)) {
+            $data['requestBody'] = $this->requestBody;
         }
         
-        return new Collection(
-            [
-                200 => [
-                    '$ref' => '#/components/responses/success_detail',
-                ],
-                500 => [
-                    '$ref' => '#/components/responses/error_500',
-                ],
-            ]
-        );
+        return $data;
     }
 }
