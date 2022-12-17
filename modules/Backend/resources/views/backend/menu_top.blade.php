@@ -29,8 +29,16 @@
 
     <div class="mr-auto"></div>
     @php
-        $langs = \Juzaweb\CMS\Models\Language::cacheFor(3600)->get();
-        $current = $jw_user->language ?? $langs->where('default', true)->first()->code ?? 'en';
+        $langs = \Illuminate\Support\Facades\Cache::remember(
+            'top_menu_languages',
+            3600,
+            function () {
+                return app(\Juzaweb\CMS\Support\Manager\TranslationManager::class)->locale('cms')
+                    ->languages();
+            }
+        );
+
+        $current = $jw_user->language ?? get_config('language', 'en');
     @endphp
     <div class="dropdown mr-4 d-none d-sm-block">
         <a href="javascript:void(0)"
@@ -43,13 +51,13 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" role="menu">
             @foreach($langs as $lang)
-                @if($current == $lang->code)
+                @if($current == $lang['code'])
                     @continue
                 @endif
 
-            <a class="dropdown-item " href="{{ url()->current() }}?locale={{ $lang->code }}">
-                <span class="text-uppercase font-size-12 mr-1">{{ $lang->code }}</span>
-                {{ $lang->name }}</a>
+            <a class="dropdown-item " href="{{ url()->current() }}?locale={{ $lang['code'] }}">
+                <span class="text-uppercase font-size-12 mr-1">{{ $lang['code'] }}</span>
+                {{ $lang['name'] }}</a>
             @endforeach
         </div>
     </div>
