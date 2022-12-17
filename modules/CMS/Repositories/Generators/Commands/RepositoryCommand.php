@@ -9,7 +9,7 @@ use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
 use Juzaweb\CMS\Repositories\Generators\MigrationGenerator;
 use Juzaweb\CMS\Repositories\Generators\ModelGenerator;
 use Juzaweb\CMS\Repositories\Generators\RepositoryEloquentGenerator;
-use Juzaweb\CMS\Support\Repository\Generators\RepositoryInterfaceGenerator;
+use Juzaweb\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

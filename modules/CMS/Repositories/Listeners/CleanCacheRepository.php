@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 use Juzaweb\CMS\Repositories\Helpers\CacheKeys;
-use Juzaweb\CMS\Support\Repository\Events\RepositoryEventBase;
+use Juzaweb\CMS\Repositories\Events\RepositoryEventBase;
 
 /**
  * Class CleanCacheRepository

@@ -4,7 +4,7 @@ namespace Juzaweb\CMS\Repositories\Presenter;
 
 use Exception;
 use Juzaweb\CMS\Repositories\Transformer\ModelTransformer;
-use Juzaweb\CMS\Support\Repository\Presenter\FractalPresenter;
+use Juzaweb\CMS\Repositories\Presenter\FractalPresenter;
 
 /**
  * Class ModelFractalPresenter

@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Repositories\Generators;
 
 use Juzaweb\CMS\Repositories\Generators\Generator;
-use Juzaweb\CMS\Support\Repository\Generators\TransformerGenerator;
+use Juzaweb\CMS\Repositories\Generators\TransformerGenerator;
 
 /**
  * Class PresenterGenerator

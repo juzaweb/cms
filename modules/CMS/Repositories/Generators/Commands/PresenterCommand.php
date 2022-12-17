@@ -4,8 +4,8 @@ namespace Juzaweb\CMS\Repositories\Generators\Commands;
 
 use Illuminate\Console\Command;
 use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
-use Juzaweb\CMS\Support\Repository\Generators\PresenterGenerator;
-use Juzaweb\CMS\Support\Repository\Generators\TransformerGenerator;
+use Juzaweb\CMS\Repositories\Generators\PresenterGenerator;
+use Juzaweb\CMS\Repositories\Generators\TransformerGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
