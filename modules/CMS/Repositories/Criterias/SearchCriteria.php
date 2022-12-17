@@ -4,17 +4,16 @@ namespace Juzaweb\CMS\Repositories\Criterias;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Juzaweb\CMS\Interfaces\Repositories\WithAppendSearch;
+use Juzaweb\CMS\Repositories\Abstracts\Criteria;
 use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
 use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 
-class SearchCriteria implements CriteriaInterface
+class SearchCriteria extends Criteria implements CriteriaInterface
 {
-    protected Request $request;
-    
-    public function __construct(Request $request)
+    public function __construct(protected array $queries)
     {
-        $this->request = $request;
     }
     
     /**
@@ -23,26 +22,29 @@ class SearchCriteria implements CriteriaInterface
      * @param  Builder|Model  $model
      * @param  RepositoryInterface  $repository
      *
-     * @return mixed
+     * @return Builder|Model
      * @throws \Exception
      */
-    public function apply($model, RepositoryInterface $repository): mixed
+    public function apply($model, RepositoryInterface $repository): Builder|Model
     {
+        if (!method_exists($repository, 'getFieldSearchable')) {
+            return $model;
+        }
+        
         $connection = config('database.default');
         $driver = config("database.connections.{$connection}.driver");
         
         $fields = $repository->getFieldSearchable();
-        $keyword = $this->request->input('q');
-        $input = $this->request->input();
+        $keyword = Arr::get($this->queries, 'q');
         $condition = $driver == 'pgsql' ? 'ilike' : 'like';
         
-        if (empty($value)) {
+        if (empty($keyword)) {
             return $model;
         }
         
         $tbl = $model->getModel()->getTable();
         return $model->where(
-            function ($query) use ($fields, $keyword, $tbl, $input, $repository, $condition) {
+            function ($query) use ($fields, $keyword, $tbl, $repository, $condition) {
                 $isFirstField = true;
                 $value = "%{$keyword}%";
             
@@ -58,14 +60,14 @@ class SearchCriteria implements CriteriaInterface
                 if ($repository instanceof WithAppendSearch) {
                     if ($isFirstField) {
                         $query->where(
-                            function ($q) use ($repository, $keyword, $input) {
-                                return $repository->appendCustomSearch($q, $keyword, $input);
+                            function ($q) use ($repository, $keyword) {
+                                return $repository->appendCustomSearch($q, $keyword, $this->queries);
                             }
                         );
                     } else {
                         $query->orWhere(
-                            function ($q) use ($repository, $keyword, $input) {
-                                return $repository->appendCustomSearch($q, $keyword, $input);
+                            function ($q) use ($repository, $keyword) {
+                                return $repository->appendCustomSearch($q, $keyword, $this->queries);
                             }
                         );
                     }

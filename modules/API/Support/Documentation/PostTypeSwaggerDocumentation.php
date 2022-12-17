@@ -87,7 +87,7 @@ class PostTypeSwaggerDocumentation implements APISwaggerDocumentation
                     function (SwaggerMethod $method) use ($key, $taxonomy, $postType) {
                         $method->operationId("post-type.{$key}.index");
                         $method->summary("Get list {$key} items");
-                        $method->tags([$taxonomy->get('label_type')]);
+                        $method->tags([$postType->get('label')]);
                         $method->parameterRef('query_keyword');
                         $method->parameterRef('query_limit');
                         $method->responseRef(200, 'success_list');
@@ -105,7 +105,7 @@ class PostTypeSwaggerDocumentation implements APISwaggerDocumentation
                     function (SwaggerMethod $method) use ($key, $taxonomy, $postType) {
                         $method->operationId("post-type.{$key}.show");
                         $method->summary("Get {$key} item");
-                        $method->tags([$taxonomy->get('label_type')]);
+                        $method->tags([$postType->get('label')]);
                         $method->parameterRef('path_slug');
                         return $method;
                     }

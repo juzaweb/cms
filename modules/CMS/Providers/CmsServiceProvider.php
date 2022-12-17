@@ -396,7 +396,7 @@ class CmsServiceProvider extends ServiceProvider
         RateLimiter::for(
             'api',
             function (Request $request) {
-                return Limit::perMinute(60)
+                return Limit::perMinute(120)
                     ->by($request->user()?->id ?: get_client_ip());
             }
         );

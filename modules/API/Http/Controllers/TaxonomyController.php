@@ -11,8 +11,14 @@
 namespace Juzaweb\API\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Repositories\TaxonomyRepository;
 use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
 
 class TaxonomyController extends ApiController
 {
@@ -20,13 +26,36 @@ class TaxonomyController extends ApiController
     {
     }
     
-    public function index(Request $request)
+    public function index(Request $request, string $type, string $taxonomy): AnonymousResourceCollection
     {
-        //
+        $queries = $request->all();
+        $queries['post_type'] = $type;
+        $queries['taxonomy'] = $taxonomy;
+        
+        $this->taxonomyRepository->pushCriterias(
+            [
+                SearchCriteria::make($queries),
+                SortCriteria::make($queries),
+                FilterCriteria::make($queries),
+            ]
+        );
+        
+        $paginate = $this->taxonomyRepository->frontendListPaginate($this->getQueryLimit($request));
+        
+        return TaxonomyResource::collection($paginate);
     }
     
-    public function show()
+    public function show(Request $request, string $type, string $taxonomy, string $slug):
+    JsonResource
     {
-        //
+        $queries = $request->all();
+        $queries['post_type'] = $type;
+        $queries['taxonomy'] = $taxonomy;
+    
+        $this->taxonomyRepository->pushCriteria(FilterCriteria::make($queries));
+        
+        $data = $this->taxonomyRepository->frontendDetail($slug);
+    
+        return TaxonomyResource::make($data);
     }
 }

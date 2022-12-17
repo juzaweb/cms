@@ -12,17 +12,15 @@ namespace Juzaweb\CMS\Repositories\Criterias;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Juzaweb\CMS\Repositories\Abstracts\Criteria;
 use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
 use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 
-class SortCriteria implements CriteriaInterface
+class SortCriteria extends Criteria implements CriteriaInterface
 {
-    protected Request $request;
-    
-    public function __construct(Request $request)
+    public function __construct(protected array $queries)
     {
-        $this->request = $request;
     }
     
     /**
@@ -31,27 +29,36 @@ class SortCriteria implements CriteriaInterface
      * @param Builder|Model     $model
      * @param RepositoryInterface $repository
      *
-     * @return mixed
+     * @return Builder|Model
      * @throws \Exception
      */
-    public function apply($model, RepositoryInterface $repository)
+    public function apply($model, RepositoryInterface $repository): Builder|Model
     {
+        if (!method_exists($repository, 'getFieldSortable')) {
+            return $model;
+        }
+        
         $fields = $repository->getFieldSortable();
         $tbl = $model->getModel()->getTable();
-        $sortBy = $this->request->input('sort_by');
-        $sortOrder = $this->request->input('sort_order', 'ASC');
+        $sortBy = Arr::get($this->queries, 'sort_by');
+        $sortOrder = Arr::get($this->queries, 'sort_order', 'ASC');
+        
         if (!in_array(strtoupper($sortOrder), ['ASC', 'DESC'])) {
             $sortOrder = 'ASC';
         }
         
         if ($sortBy && in_array($sortBy, $fields)) {
-            $model = $model->orderBy("{$tbl}.{$sortBy}", $sortOrder);
-        } else {
-            $defaults = $repository->getSortableDefaults();
-            if ($defaults) {
-                foreach ($defaults as $col => $order) {
-                    $model = $model->orderBy("{$tbl}.{$col}", $order);
-                }
+            return $model->orderBy("{$tbl}.{$sortBy}", $sortOrder);
+        }
+    
+        if (!method_exists($repository, 'getSortableDefaults')) {
+            return $model;
+        }
+        
+        $defaults = $repository->getSortableDefaults();
+        if ($defaults) {
+            foreach ($defaults as $col => $order) {
+                $model->orderBy("{$tbl}.{$col}", $order);
             }
         }
         

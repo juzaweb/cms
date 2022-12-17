@@ -4,17 +4,16 @@ namespace Juzaweb\CMS\Repositories\Criterias;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Juzaweb\CMS\Interfaces\Repositories\WithAppendFilter;
+use Juzaweb\CMS\Repositories\Abstracts\Criteria;
 use Juzaweb\CMS\Repositories\Contracts\CriteriaInterface;
 use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 
-class FilterCriteria implements CriteriaInterface
+class FilterCriteria extends Criteria implements CriteriaInterface
 {
-    protected Request $request;
-    
-    public function __construct(Request $request)
+    public function __construct(protected array $queries)
     {
-        $this->request = $request;
     }
     
     /**
@@ -23,24 +22,26 @@ class FilterCriteria implements CriteriaInterface
      * @param  Builder|Model  $model
      * @param  RepositoryInterface  $repository
      *
-     * @return mixed
+     * @return Builder|Model
      * @throws \Exception
      */
-    public function apply($model, RepositoryInterface $repository)
+    public function apply($model, RepositoryInterface $repository): Builder|Model
     {
+        if (!method_exists($repository, 'getFieldFilterable')) {
+            return $model;
+        }
+        
         $fields = $repository->getFieldFilterable();
         
-        $input = $this->request->query();
-        
         return $model->where(
-            function ($query) use ($fields, $input, $repository) {
+            function ($query) use ($fields, $repository) {
                 foreach ($fields as $field => $condition) {
                     if (is_numeric($field)) {
                         $field = $condition;
                         $condition = "=";
                     }
                     
-                    if (!$this->request->has($field)) {
+                    if (!Arr::has($this->queries, $field)) {
                         continue;
                     }
                     
@@ -67,7 +68,7 @@ class FilterCriteria implements CriteriaInterface
                 }
                 
                 if ($repository instanceof WithAppendFilter) {
-                    $query = $repository->appendCustomFilter($query, $input);
+                    $repository->appendCustomFilter($query, $this->queries);
                 }
             }
         );
@@ -75,7 +76,7 @@ class FilterCriteria implements CriteriaInterface
     
     protected function getValueRequest(string $field, string $condition): mixed
     {
-        $search = $this->request->input($field);
+        $search = Arr::get($this->queries, $field);
         $value = null;
         
         if (!is_null($search) && !in_array($condition, ['in', 'between'])) {

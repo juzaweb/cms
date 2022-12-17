@@ -46,7 +46,7 @@ trait ArtisanCommandTrait
             }
         }
 
-        return   implode(' ', $args) . ' '
+        return implode(' ', $args) . ' '
             .implode(' ', $opts). ' '
             .implode(' ', $flags);
     }

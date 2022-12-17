@@ -13,7 +13,6 @@ use Prettus\Repository\Contracts\ValidatorException;
  */
 interface RepositoryInterface
 {
-    
     /**
      * Retrieve data array for populate field select
      *
@@ -259,13 +258,6 @@ interface RepositoryInterface
      * @return $this
      */
     public function resetScope();
-    
-    /**
-     * Get Searchable Fields
-     *
-     * @return array
-     */
-    public function getFieldsSearchable();
     
     /**
      * Set Presenter
