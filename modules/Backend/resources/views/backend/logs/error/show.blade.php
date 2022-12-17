@@ -225,7 +225,7 @@
 
                                         @if ($entry->hasContext())
                                             <div class="stack-content collapse" id="log-context-{{ $key }}">
-                                                <pre>{{ $entry->context() }}</pre>
+                                                {{ $entry->context() }}
                                             </div>
                                         @endif
                                     </td>

@@ -8,31 +8,36 @@ use Juzaweb\Backend\Models\ManualNotification;
 class SendNotification
 {
     protected ManualNotification $notification;
+    
+    public static function make(ManualNotification $notification): static
+    {
+        return new static($notification);
+    }
 
     /**
-     * @param ManualNotification $notification
+     * @param  ManualNotification  $notification
      */
-    public function __construct($notification)
+    public function __construct(ManualNotification $notification)
     {
         $this->notification = $notification;
     }
 
-    public function send()
+    public function send(): bool
     {
         $notifyMethods = $this->getMethods();
         $methods = explode(',', $this->notification->method);
 
         foreach ($notifyMethods as $key => $method) {
-            if (!config('juzaweb.notification.via.'. $key .'.enable')) {
+            if (!config("juzaweb.notification.via.{$key}.enable")) {
                 continue;
             }
 
             if (!in_array($key, $methods)) {
                 continue;
             }
-
+    
+            DB::beginTransaction();
             try {
-                DB::beginTransaction();
                 (new $method['class']($this->notification))->handle();
 
                 $this->notification->update(
@@ -45,7 +50,8 @@ class SendNotification
                 DB::commit();
             } catch (\Exception $exception) {
                 DB::rollBack();
-
+                report($exception);
+                
                 $this->notification->update(
                     [
                         'status' => ManualNotification::STATUS_ERROR,
