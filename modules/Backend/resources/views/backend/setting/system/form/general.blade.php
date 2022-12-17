@@ -198,7 +198,7 @@
             ]
         ) }}
 
-        {{ Field::text(
+        {{ Field::security(
             trans('cms::app.google_captcha.secret_key'),
             'google_captcha[secret_key]',
             [

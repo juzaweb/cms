@@ -25,8 +25,14 @@ class BackupAction extends Action
             [
                 'jw_backup_enable' => [
                     'form' => 'backup',
-                    'type' => 'checkbox',
+                    'type' => 'select',
                     'label' => trans('cms::app.backup.enable_backup'),
+                    'data' => [
+                        'options' => [
+                            0 => trans('cms::app.disabled'),
+                            1 => trans('cms::app.enabled'),
+                        ]
+                    ]
                 ],
                 'jw_backup_time' => [
                     'form' => 'backup',
