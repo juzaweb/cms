@@ -11,9 +11,9 @@ use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
  */
 class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepository
 {
-    protected array $searchAble = ['title', 'description'];
+    protected array $searchableFields = ['title', 'description'];
     
-    protected array $filterAble = ['status'];
+    protected array $filterableFields = ['status'];
     
     public function model(): string
     {

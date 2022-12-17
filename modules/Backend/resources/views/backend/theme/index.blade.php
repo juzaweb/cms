@@ -44,12 +44,17 @@
     </template>
 
     <script>
+        toggle_global_loading(true);
+
         setTimeout(function () {
             const listView = new JuzawebListView({
                 url: "{{ route('admin.themes.get-data') }}",
                 list: "#theme-list",
                 template: "theme-template",
                 page_size: 9,
+                after_load_callback: function () {
+                    toggle_global_loading(false);
+                }
             });
         }, 300)
     </script>

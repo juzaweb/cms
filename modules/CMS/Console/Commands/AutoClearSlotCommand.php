@@ -25,6 +25,10 @@ class AutoClearSlotCommand extends Command
     public function handle(): int
     {
         $storage = Storage::disk('local');
+        
+        if (!File::isDirectory($storage->path('command-slots'))) {
+            return self::SUCCESS;
+        }
 
         $files = File::files($storage->path('command-slots'));
 

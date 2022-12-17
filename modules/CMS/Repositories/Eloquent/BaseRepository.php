@@ -14,6 +14,7 @@ use Juzaweb\CMS\Repositories\Contracts\Presentable;
 use Juzaweb\CMS\Repositories\Contracts\PresenterInterface;
 use Juzaweb\CMS\Repositories\Contracts\RepositoryCriteriaInterface;
 use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
 use Juzaweb\CMS\Repositories\Events\RepositoryEntityCreated;
 use Juzaweb\CMS\Repositories\Events\RepositoryEntityCreating;
 use Juzaweb\CMS\Repositories\Events\RepositoryEntityDeleted;
@@ -44,11 +45,6 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      * @var Model
      */
     protected $model;
-    
-    /**
-     * @var array
-     */
-    protected $fieldSearchable = [];
     
     /**
      * @var PresenterInterface
@@ -242,16 +238,6 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         }
         
         return null;
-    }
-    
-    /**
-     * Get Searchable Fields
-     *
-     * @return array
-     */
-    public function getFieldsSearchable()
-    {
-        return $this->fieldSearchable;
     }
     
     /**
@@ -916,20 +902,36 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     /**
      * Push Criteria for filter the query
      *
-     * @param $criteria
+     * @param  string|CriteriaInterface  $criteria
      *
-     * @return $this
-     * @throws \Juzaweb\CMS\Repositories\Exceptions\RepositoryException
+     * @return PackageBaseRepository
      */
-    public function pushCriteria($criteria)
+    public function pushCriteria(string|CriteriaInterface $criteria): PackageBaseRepository
     {
         if (is_string($criteria)) {
-            $criteria = new $criteria;
+            $criteria = app($criteria);
         }
-        if (!$criteria instanceof CriteriaInterface) {
-            throw new RepositoryException("Class ".get_class($criteria)." must be an instance of Prettus\\Repository\\Contracts\\CriteriaInterface");
-        }
+        
         $this->criteria->push($criteria);
+        
+        return $this;
+    }
+    
+    /**
+     * Push Criteria for filter the query
+     *
+     * @param  array|string $criterias
+     * @return static
+     */
+    public function pushCriterias(array|string $criterias): PackageBaseRepository
+    {
+        if (is_string($criterias)) {
+            $criterias = [$criterias];
+        }
+        
+        foreach ($criterias as $criteria) {
+            $this->pushCriteria($criteria);
+        }
         
         return $this;
     }
@@ -1212,13 +1214,15 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     {
         if ($this->presenter instanceof PresenterInterface) {
             if ($result instanceof Collection || $result instanceof LengthAwarePaginator) {
-                $result->each(function ($model) {
-                    if ($model instanceof Presentable) {
-                        $model->setPresenter($this->presenter);
+                $result->each(
+                    function ($model) {
+                        if ($model instanceof Presentable) {
+                            $model->setPresenter($this->presenter);
+                        }
+        
+                        return $model;
                     }
-                    
-                    return $model;
-                });
+                );
             } else {
                 if ($result instanceof Presentable) {
                     $result = $result->setPresenter($this->presenter);

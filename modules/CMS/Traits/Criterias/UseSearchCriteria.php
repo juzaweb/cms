@@ -3,12 +3,12 @@
 namespace Juzaweb\CMS\Traits\Criterias;
 
 /**
- * @property array $searchAble
+ * @property array $searchableFields
  */
 trait UseSearchCriteria
 {
     public function getFieldSearchable(): array
     {
-        return $this->searchAble;
+        return $this->searchableFields;
     }
 }

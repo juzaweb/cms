@@ -15,15 +15,7 @@ Route::group(
         'prefix' => 'post-type',
     ],
     function () {
-        Route::apiResource(
-            '{type}',
-            PostController::class,
-            [
-                'parameters' => [
-                    '{type}' => 'id',
-                ],
-                'names' => 'post_type',
-            ]
-        );
+        Route::get('{type}', [PostController::class, 'index']);
+        Route::get('{type}/{slug}', [PostController::class, 'show']);
     }
 );

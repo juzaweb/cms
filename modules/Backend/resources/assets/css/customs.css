@@ -587,7 +587,6 @@ Form file management
     width: 15px;
     text-align: center;
     color: white;
-    z-index: 999;
 }
 
 #form-search .select2.select2-container {

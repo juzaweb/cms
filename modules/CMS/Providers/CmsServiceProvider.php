@@ -2,7 +2,10 @@
 
 namespace Juzaweb\CMS\Providers;
 
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -76,6 +79,7 @@ class CmsServiceProvider extends ServiceProvider
     {
         $this->bootMigrations();
         $this->bootPublishes();
+        $this->configureRateLimiting();
         
         Validator::extend(
             'recaptcha',
@@ -385,5 +389,16 @@ class CmsServiceProvider extends ServiceProvider
         if (config('juzaweb.api.enable')) {
             $this->app->register(APIServiceProvider::class);
         }
+    }
+    
+    protected function configureRateLimiting(): void
+    {
+        RateLimiter::for(
+            'api',
+            function (Request $request) {
+                return Limit::perMinute(120)
+                    ->by($request->user()?->id ?: get_client_ip());
+            }
+        );
     }
 }

@@ -14,7 +14,7 @@ class SwaggerPath implements Arrayable
         $this->methods = new Collection();
     }
     
-    public function addMethod(string $method, callable $callback): static
+    public function method(string $method, callable $callback): static
     {
         $this->methods->put(
             $method,

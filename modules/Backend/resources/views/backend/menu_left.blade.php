@@ -9,7 +9,7 @@
         $currentUrl = url()->current();
         $segment3 = request()->segment(3);
         $segment2 = request()->segment(2);
-        $items = MenuCollection::make(HookAction::getAdminMenu());
+        $items = MenuCollection::make(apply_filters('get_admin_menu', HookAction::getAdminMenu()));
     @endphp
 
     @foreach($items as $item)

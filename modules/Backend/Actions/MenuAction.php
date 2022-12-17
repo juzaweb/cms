@@ -301,15 +301,17 @@ class MenuAction extends Action
             ]
         );
 
-        HookAction::addAdminMenu(
-            trans('cms::app.email_logs'),
-            'logs.email',
-            [
-                'icon' => 'fa fa-cogs',
-                'position' => 51,
-                'parent' => 'managements',
-            ]
-        );
+        if (!config('network.enable')) {
+            HookAction::addAdminMenu(
+                trans('cms::app.email_logs'),
+                'logs.email',
+                [
+                    'icon' => 'fa fa-cogs',
+                    'position' => 51,
+                    'parent' => 'managements',
+                ]
+            );
+        }
     }
 
     public function addSettingPage()

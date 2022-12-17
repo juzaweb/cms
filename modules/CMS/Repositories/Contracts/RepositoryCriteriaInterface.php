@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Repositories\Contracts;
 
 use Illuminate\Support\Collection;
+use Juzaweb\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
 
 /**
  * Interface RepositoryCriteriaInterface
@@ -12,7 +13,7 @@ use Illuminate\Support\Collection;
  */
 interface RepositoryCriteriaInterface
 {
-    
+    public function pushCriteria(string|CriteriaInterface $criteria): PackageBaseRepository;
     /**
      * Push Criteria for filter the query
      *
@@ -20,7 +21,7 @@ interface RepositoryCriteriaInterface
      *
      * @return $this
      */
-    public function pushCriteria($criteria);
+    public function pushCriterias(array|string $criterias): PackageBaseRepository;
     
     /**
      * Pop Criteria

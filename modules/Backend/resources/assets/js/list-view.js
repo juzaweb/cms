@@ -37,9 +37,7 @@ class JuzawebListView {
         if (this.page > 1) {
             this.offset = (this.page * this.page_size) - this.page_size;
         }
-
-        toggle_global_loading(true);
-
+        
         let jqxhr = $.ajax({
             type: this.method,
             url: this.url,
@@ -71,7 +69,5 @@ class JuzawebListView {
         if (this.after_load_callback) {
             eval(this.after_load_callback)();
         }
-
-        toggle_global_loading(false);
     }
 }
