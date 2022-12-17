@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 class SwaggerMethod implements Arrayable
 {
     protected array $tags = [];
-    protected ?string $summary = null;
+    protected string $summary;
     protected string $operationId;
     protected Collection $parameters;
     protected Collection $responses;
@@ -119,7 +119,6 @@ class SwaggerMethod implements Arrayable
     {
         $data = [
             'tags' => $this->tags,
-            'summary' => $this->summary,
             'operationId' => $this->getOperationId(),
             'parameters' => $this->parameters->map(
                 function ($item, $name) {
@@ -129,6 +128,10 @@ class SwaggerMethod implements Arrayable
             )->values(),
             'responses' => $this->responses,
         ];
+        
+        if (isset($this->summary)) {
+            $data['summary'] = $this->summary;
+        }
         
         if (isset($this->requestBody)) {
             $data['requestBody'] = $this->requestBody;

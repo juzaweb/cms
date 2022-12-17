@@ -30,10 +30,10 @@ class FilterCriteria implements CriteriaInterface
     {
         $fields = $repository->getFieldFilterable();
         
-        $model->where(
-            function ($query) use ($fields) {
-                $isFirstField = true;
-                
+        $input = $this->request->query();
+        
+        return $model->where(
+            function ($query) use ($fields, $input, $repository) {
                 foreach ($fields as $field => $condition) {
                     if (is_numeric($field)) {
                         $field = $condition;
@@ -44,24 +44,33 @@ class FilterCriteria implements CriteriaInterface
                         continue;
                     }
                     
-                    $condition = trim(strtolower($condition));
-                    $value = $this->getValueRequest($field, $condition);
-                    
-                    if (is_null($value)) {
-                        continue;
-                    }
-                    
-                    if ($isFirstField) {
-                        $query->where($field, $condition, $value);
-                        $isFirstField = false;
+                    if (is_array($condition)) {
+                        $column = key($condition);
+                        $condition = $condition[$column];
+                        $value = $this->getValueRequest($field, $condition);
                     } else {
-                        $query->orWhere($field, $condition, $value);
+                        $condition = trim(strtolower($condition));
+                        $value = $this->getValueRequest($field, $condition);
+                        $column = $field;
                     }
+                    
+                    switch ($condition) {
+                        case 'in':
+                            $query->whereIn($column, $value);
+                            break;
+                        case 'between':
+                            $query->whereBetween($column, $value[0], $value[1]);
+                            break;
+                        default:
+                            $query->where($column, $condition, $value);
+                    }
+                }
+                
+                if ($repository instanceof WithAppendFilter) {
+                    $query = $repository->appendCustomFilter($query, $input);
                 }
             }
         );
-        
-        return $model;
     }
     
     protected function getValueRequest(string $field, string $condition): mixed

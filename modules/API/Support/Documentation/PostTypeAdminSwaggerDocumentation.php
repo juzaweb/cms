@@ -52,6 +52,7 @@ class PostTypeAdminSwaggerDocumentation implements APISwaggerDocumentation
                         $method->tags([$postType->get('label')]);
                         $method->parameterRef('query_keyword');
                         $method->parameterRef('query_limit');
+                        $method->responseRef(200, 'success_list');
                         return $method;
                     }
                 );

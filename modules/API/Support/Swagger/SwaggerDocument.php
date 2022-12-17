@@ -376,6 +376,11 @@ class SwaggerDocument implements Arrayable
                         "schema" => [
                             "type" => "string"
                         ]
+                    ],
+                    "body_recapcha" => [
+                        "name" => "g-recaptcha-response",
+                        'description' => '(Optional) Token of Google Recaptcha V2',
+                        'type' => 'string',
                     ]
                 ]
             ]

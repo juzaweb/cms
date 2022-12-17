@@ -32,24 +32,42 @@ class SearchCriteria implements CriteriaInterface
         $driver = config("database.connections.{$connection}.driver");
         
         $fields = $repository->getFieldSearchable();
-        $value = $this->request->input('q');
+        $keyword = $this->request->input('q');
+        $input = $this->request->input();
         $condition = $driver == 'pgsql' ? 'ilike' : 'like';
         
         if (empty($value)) {
             return $model;
         }
         
+        $tbl = $model->getModel()->getTable();
         return $model->where(
-            function ($query) use ($fields, $condition, $value) {
+            function ($query) use ($fields, $keyword, $tbl, $input, $repository, $condition) {
                 $isFirstField = true;
-                $value = "%{$value}%";
-                
+                $value = "%{$keyword}%";
+            
                 foreach ($fields as $field) {
                     if ($isFirstField) {
-                        $query->where($field, $condition, $value);
+                        $query->where("{$tbl}.{$field}", $condition, $value);
                         $isFirstField = false;
                     } else {
-                        $query->orWhere($field, $condition, $value);
+                        $query->orWhere("{$tbl}.{$field}", $condition, $value);
+                    }
+                }
+            
+                if ($repository instanceof WithAppendSearch) {
+                    if ($isFirstField) {
+                        $query->where(
+                            function ($q) use ($repository, $keyword, $input) {
+                                return $repository->appendCustomSearch($q, $keyword, $input);
+                            }
+                        );
+                    } else {
+                        $query->orWhere(
+                            function ($q) use ($repository, $keyword, $input) {
+                                return $repository->appendCustomSearch($q, $keyword, $input);
+                            }
+                        );
                     }
                 }
             }

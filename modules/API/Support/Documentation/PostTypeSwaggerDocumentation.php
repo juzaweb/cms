@@ -52,6 +52,7 @@ class PostTypeSwaggerDocumentation implements APISwaggerDocumentation
                         $method->tags([$postType->get('label')]);
                         $method->parameterRef('query_keyword');
                         $method->parameterRef('query_limit');
+                        $method->responseRef(200, 'success_list');
                         return $method;
                     }
                 );
@@ -89,6 +90,7 @@ class PostTypeSwaggerDocumentation implements APISwaggerDocumentation
                         $method->tags([$taxonomy->get('label_type')]);
                         $method->parameterRef('query_keyword');
                         $method->parameterRef('query_limit');
+                        $method->responseRef(200, 'success_list');
                         return $method;
                     }
                 );

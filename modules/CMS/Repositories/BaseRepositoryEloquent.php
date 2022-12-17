@@ -8,9 +8,9 @@ use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
 
 abstract class BaseRepositoryEloquent extends PackageBaseRepository
 {
-    protected array $filterAble = [];
+    protected array $filterableFields = [];
     
-    protected array $searchAble = [];
+    protected array $searchableFields = [];
     
     /**
      * Push Criteria for filter the query
