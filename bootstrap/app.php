@@ -15,7 +15,7 @@ $app = new \Juzaweb\CMS\Support\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
-$app->useAppPath('modules/CMS');
+$app->useAppPath('modules/Backend');
 
 /*
 |--------------------------------------------------------------------------

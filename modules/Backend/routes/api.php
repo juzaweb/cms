@@ -7,6 +7,3 @@
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
  */
-
-require __DIR__ . '/api/auth.php';
-require __DIR__ . '/api/post.php';

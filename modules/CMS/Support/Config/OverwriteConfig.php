@@ -11,19 +11,20 @@ use Illuminate\Http\Request;
 class OverwriteConfig implements OverwriteConfigContract
 {
     private ConfigRepository $config;
-
     private DbConfig $dbConfig;
-
     private Request $request;
+    private $locale;
 
     public function __construct(
         ConfigRepository $config,
         DbConfig $dbConfig,
-        Request $request
+        Request $request,
+        $locale
     ) {
         $this->config = $config;
         $this->dbConfig = $dbConfig;
         $this->request = $request;
+        $this->locale = $locale;
     }
 
     public function init(): void
@@ -43,6 +44,7 @@ class OverwriteConfig implements OverwriteConfigContract
         date_default_timezone_set($timezone);
 
         $this->config->set('app.locale', $language);
+        $this->locale->setLocale($language);
 
         if ($mail) {
             $this->config->set(

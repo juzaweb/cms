@@ -1,5 +1,6 @@
 <div class="card">
-    <div class="height-200 d-flex flex-column jw__g13__head" style="background-image: url('{{ $theme->screenshot }}')">
+    <div class="height-200 d-flex flex-column jw__g13__head">
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $theme->screenshot }}" alt="{{ $theme->title }}" class="lazyload w-100 h-100">
     </div>
 
     <div class="card card-bottom card-borderless mb-0">

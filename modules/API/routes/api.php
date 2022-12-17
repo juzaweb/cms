@@ -16,10 +16,13 @@ Route::group(
         'middleware' => ['auth:api', Admin::class],
     ],
     function () {
-        require __DIR__ . '/admin/api.php';
+        //require __DIR__.'/api/admin/api.php';
     }
 );
 
-require __DIR__ . '/api/auth.php';
-require __DIR__ . '/api/post.php';
-require __DIR__ . '/api/user.php';
+if (config('juzaweb.api.frontend.enable')) {
+    require __DIR__.'/api/auth.php';
+    require __DIR__.'/api/post.php';
+    require __DIR__.'/api/taxonomy.php';
+    require __DIR__.'/api/user.php';
+}

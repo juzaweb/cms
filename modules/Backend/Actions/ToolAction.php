@@ -11,7 +11,7 @@ class ToolAction extends Action
     {
         $this->addAction(Action::BACKEND_INIT, [$this, 'addAdminMenu']);
     }
-
+    
     public function addAdminMenu()
     {
         HookAction::addAdminMenu(
@@ -19,10 +19,10 @@ class ToolAction extends Action
             'tools',
             [
                 'icon' => 'fa fa-cogs',
-                'position' => 91,
+                'position' => 99,
             ]
         );
-
+        
         HookAction::registerAdminPage(
             'imports',
             [
@@ -31,19 +31,21 @@ class ToolAction extends Action
                     'icon' => 'fa fa-cogs',
                     'position' => 1,
                     'parent' => 'tools',
+                ],
+            ]
+        );
+    
+        if (!config('network.enable')) {
+            HookAction::addAdminMenu(
+                'Log Viewer',
+                'log-viewer',
+                [
+                    'icon' => 'fa fa-history',
+                    'position' => 20,
+                    'turbolinks' => false,
+                    'parent' => 'tools',
                 ]
-            ]
-        );
-
-        HookAction::addAdminMenu(
-            'Log Viewer',
-            'log-viewer',
-            [
-                'icon' => 'fa fa-history',
-                'position' => 20,
-                'turbolinks' => false,
-                'parent' => 'tools'
-            ]
-        );
+            );
+        }
     }
 }

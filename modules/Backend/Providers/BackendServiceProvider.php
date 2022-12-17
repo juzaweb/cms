@@ -5,7 +5,9 @@ namespace Juzaweb\Backend\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Juzaweb\Backend\Actions\BackupAction;
+use Juzaweb\Backend\Actions\EmailAction;
 use Juzaweb\Backend\Actions\EnqueueStyleAction;
+use Juzaweb\Backend\Actions\MediaAction;
 use Juzaweb\Backend\Actions\MenuAction;
 use Juzaweb\Backend\Actions\PermissionAction;
 use Juzaweb\Backend\Actions\SeoAction;
@@ -14,7 +16,7 @@ use Juzaweb\Backend\Actions\ToolAction;
 use Juzaweb\Backend\Commands\AutoSubmitCommand;
 use Juzaweb\Backend\Commands\AutoTagCommand;
 use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
-use Juzaweb\Backend\Commands\FindTransCommand;
+use Juzaweb\Backend\Commands\ImportTranslationCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Commands\ThemePublishCommand;
 use Juzaweb\Backend\Commands\TransFromEnglish;
@@ -29,6 +31,7 @@ use Juzaweb\Backend\Observers\TaxonomyObserver;
 use Juzaweb\Backend\Repositories\MediaFileRepository;
 use Juzaweb\Backend\Repositories\MediaFileRepositoryEloquent;
 use Juzaweb\Backend\Repositories\MediaFolderRepository;
+use Juzaweb\Backend\Repositories\MediaFolderRepositoryEloquent;
 use Juzaweb\Backend\Repositories\NotificationRepository;
 use Juzaweb\Backend\Repositories\NotificationRepositoryEloquent;
 use Juzaweb\Backend\Repositories\PostRepository;
@@ -50,7 +53,7 @@ class BackendServiceProvider extends ServiceProvider
         TaxonomyRepository::class => TaxonomyRepositoryEloquent::class,
         UserRepository::class => UserRepositoryEloquent::class,
         MediaFileRepository::class => MediaFileRepositoryEloquent::class,
-        MediaFolderRepository::class => MediaFileRepositoryEloquent::class,
+        MediaFolderRepository::class => MediaFolderRepositoryEloquent::class,
         NotificationRepository::class => NotificationRepositoryEloquent::class
     ];
 
@@ -72,14 +75,16 @@ class BackendServiceProvider extends ServiceProvider
                 SocialLoginAction::class,
                 ToolAction::class,
                 SeoAction::class,
-                BackupAction::class
+                BackupAction::class,
+                MediaAction::class,
+                EmailAction::class,
             ]
         );
 
         $this->commands(
             [
                 PermissionGenerateCommand::class,
-                FindTransCommand::class,
+                ImportTranslationCommand::class,
                 TransFromEnglish::class,
                 EmailTemplateGenerateCommand::class,
                 ThemePublishCommand::class,

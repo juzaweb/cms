@@ -1,5 +1,4 @@
 <?php
-
 return [
     'password' => 'Mật khẩu phải có ít nhất tám ký tự và khớp với xác nhận.',
     'reset' => 'Mật khẩu của bạn đã được thiết lập lại!',

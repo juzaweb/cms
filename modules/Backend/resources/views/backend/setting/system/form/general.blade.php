@@ -5,6 +5,7 @@
     $sitetimezone = get_config('timezone', 'UTC');
     $dateFormat = get_config('date_format', 'F j, Y');
     $timeFormat = get_config('time_format', 'g:i a');
+    $captcha = get_config('captcha');
 
     $dateFormats = [
         'F j, Y' => now()->format('F j, Y'),
@@ -71,7 +72,7 @@
 
         <div class="form-group">
             <label class="col-form-label" for="timezone">{{ trans('cms::app.timezone') }}</label>
-            <select name="timezone" class="form-control select2">
+            <select name="timezone" id="timezone" class="form-control select2">
                 @foreach($timezones as $timezone)
                     <option value="{{ $timezone }}" @if($sitetimezone == $timezone) selected @endif>{{ $timezone }}</option>
                 @endforeach
@@ -99,18 +100,20 @@
                     </label><br>
                 @endforeach
 
-                {{--<label>
+                <label>
                     <input type="radio" name="date_format" id="date_format_custom_radio" value="custom">
-                    <span class="date-time-text date-time-custom-text">Custom:<span class="screen-reader-text"> enter a custom date format in the following field</span></span>
+                    <span class="date-time-text date-time-custom-text">{{ trans('cms::app.custom') }}:
+                        <span class="screen-reader-text ml-1"> {{ trans('cms::app.general_settings.enter_a_custom_date') }}</span>
+                    </span>
                 </label>
 
-                <label for="date_format_custom" class="screen-reader-text">Custom date format:</label>
-                <input type="text" name="date_format_custom" id="date_format_custom" value="F j, Y" class="form-control w-25">
+                <label for="date_format_custom" class="screen-reader-text">{{ trans('cms::app.general_settings.custom_date_format') }}:</label>
+                <input type="text" name="date_format_custom" id="date_format_custom" value="{{ get_config('date_format_custom', 'F j, Y') }}" class="form-control w-25">
                 <br>
-
-                <p><strong>Preview:</strong>
-                    <span class="example">September 2, 2021</span><span class="spinner"></span>
-                </p>--}}
+                    {{--
+                    <p><strong>Preview:</strong>
+                        <span class="example">September 2, 2021</span><span class="spinner"></span>
+                    </p>--}}
             </fieldset>
         </div>
 
@@ -118,17 +121,29 @@
             <label class="col-form-label" for="time_format">{{ trans('cms::app.time_format') }}</label>
             <fieldset>
                 @foreach($timeFormats as $key => $item)
-                    <label><input type="radio" name="time_format" value="{{ $key }}" @if($key == $timeFormat) checked="checked" @endif> <span class="date-time-text format-i18n mr-2">{{ $item }}</span><code>{{ $key }}</code></label><br>
+                    <label>
+                        <input type="radio" name="time_format" value="{{ $key }}" @if($key == $timeFormat) checked="checked" @endif />
+                        <span class="date-time-text format-i18n mr-2">{{ $item }}</span>
+                        <code>{{ $key }}</code>
+                    </label>
+                    <br />
                 @endforeach
 
-                {{--<label for="time_format_custom" class="screen-reader-text">Custom time format:</label>
-                <input type="text" name="time_format_custom" id="time_format_custom" value="g:i a" class="form-control w-25">
-                <br>
+                    <label class="screen-reader-text">
+                        <input type="radio" name="time_format" value="custom" @if($timeFormat == 'custom') checked="checked" @endif />
+                        {{ trans('cms::app.general_settings.custom_time_format') }}:
+                    </label>
 
-                <p><strong>Preview:</strong> <span class="example">6:47 am</span><span class="spinner"></span>
+                    <input type="text" name="time_format_custom" id="time_format_custom" value="{{ get_config('time_format_custom', 'g:i a') }}" class="form-control w-25"/>
+
+                    <br />
+
+                {{--<p>
+                    <strong>Preview:</strong>
+                    <span class="example">6:47 am</span><span class="spinner"></span>
                 </p>--}}
 
-                <p class="date-time-doc"><a href="https://wordpress.org/support/article/formatting-date-and-time/" target="_blank" rel="nofollow">Documentation on date and time formatting</a>.</p>
+                <p class="date-time-doc"><a href="https://wordpress.org/support/article/formatting-date-and-time/" target="_blank" rel="nofollow">{{ trans('cms::app.general_settings.time_formatting_documentation') }}</a>.</p>
 
             </fieldset>
         </div>
@@ -165,6 +180,32 @@
                 <option value="0" @if($verification == 0) selected @endif>{{ trans('cms::app.disabled') }}</option>
             </select>
         </div>
+
+        <h5>{{ trans('cms::app.captcha') }}</h5>
+        <div class="form-group">
+            <label class="col-form-label" for="captcha">{{ trans('cms::app.captcha') }}</label>
+            <select name="captcha" id="captcha" class="form-control">
+                <option value="">{{ trans('cms::app.disabled') }}</option>
+                <option value="google_captcha_v2_invisible" @if($captcha == 'google_captcha_v2_invisible') selected @endif>{{ trans('cms::app.google_captcha.google_captcha_v2_invisible') }}</option>
+            </select>
+        </div>
+
+        {{ Field::text(
+            trans('cms::app.google_captcha.site_key'),
+            'google_captcha[site_key]',
+            [
+                'value' => get_config('google_captcha')['site_key'] ?? ''
+            ]
+        ) }}
+
+        {{ Field::security(
+            trans('cms::app.google_captcha.secret_key'),
+            'google_captcha[secret_key]',
+            [
+                'value' => get_config('google_captcha')['secret_key'] ?? ''
+            ]
+        ) }}
+
     </div>
 </div>
     </div>

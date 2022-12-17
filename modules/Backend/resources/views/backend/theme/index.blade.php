@@ -16,7 +16,8 @@
         @if($currentTheme)
         <div class="col-md-4 p-2 theme-list-item">
             <div class="card">
-                <div class="height-200 d-flex flex-column jw__g13__head" style="background-image: url('{{ $currentTheme->get('screenshot') }}')">
+                <div class="height-200 d-flex flex-column jw__g13__head">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ $currentTheme->get('screenshot') }}" alt="{{ $currentTheme->get('title') }}" class="lazyload w-100 h-100">
                 </div>
 
                 <div class="card card-bottom card-borderless mb-0">
@@ -43,12 +44,17 @@
     </template>
 
     <script>
+        toggle_global_loading(true);
+
         setTimeout(function () {
             const listView = new JuzawebListView({
                 url: "{{ route('admin.themes.get-data') }}",
                 list: "#theme-list",
                 template: "theme-template",
                 page_size: 9,
+                after_load_callback: function () {
+                    toggle_global_loading(false);
+                }
             });
         }, 300)
     </script>
@@ -70,7 +76,6 @@
                     theme: theme
                 }
             }).done(function(response) {
-
                 btn.find('i').attr('class', icon);
                 btn.prop("disabled", false);
 

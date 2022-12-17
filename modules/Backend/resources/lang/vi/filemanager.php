@@ -1,5 +1,4 @@
 <?php
-
 return [
     'nav-back' => 'Mặt sau',
     'nav-new' => 'Thư mục mới',
@@ -72,4 +71,8 @@ return [
     'resize-new-width' => 'Chiều rộng:',
     'folder-exists' => 'Thư mục tồn tại',
     'add-folder-successfully' => 'Thêm thư mục thành công',
+    'error-extension' => 'Tiện ích mở rộng không mong muốn:',
+    'message_extension_not_found' => ':không tìm thấy phần mở rộng tên.',
+    'folder-name' => 'Tên thư mục',
+    'parent' => 'Cha mẹ',
 ];

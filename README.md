@@ -2,7 +2,11 @@ JUZACMS - Laravel CMS for Your Project
 =====================================
 
 ## About
-![https://buymeacoffee.com/juzaweb](https://i.imgur.com/TjRCjt7.png)
+![https://buymeacoffee.com/juzaweb](https://i.imgur.com/toObY8s.png)
+[![Total Downloads](https://img.shields.io/packagist/dt/juzaweb/juzacms.svg?style=social)](https://packagist.org/packages/juzaweb/juzacms)
+[![GitHub Repo stars](https://img.shields.io/github/stars/juzaweb/juzacms?style=social)](https://github.com/juzaweb/juzacms)
+[![GitHub followers](https://img.shields.io/github/followers/juzaweb?style=social)](github.com/juzaweb)
+[![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@juzaweb)
 
 - JuzaWeb CMS is a Content Management System ([Laravel CMS](https://juzaweb.com)) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
 - Juza CMS was engineered to be easy — for both developers and users. Project develop by Juzaweb.
@@ -11,7 +15,7 @@ JUZACMS - Laravel CMS for Your Project
     - Admin: 
         - https://cms.juzaweb.com/admin-cp 
         - User/Pass: demo@juzaweb.com / demo@juzaweb.com
-- Video Tutorial: https://www.youtube.com/channel/UCo6Dz9HjjBOJpgWsxkln0-A/videos
+- Video Tutorial: https://www.youtube.com/@juzaweb/videos
 
 ## Requirements
 - The modules package requires:

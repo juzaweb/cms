@@ -248,10 +248,10 @@ class User extends Authenticatable
         return $builder->where('status', '=', User::STATUS_ACTIVE);
     }
 
-    public function getAvatar(): string
+    public function getAvatar(string $size = null): string
     {
         if ($this->avatar) {
-            return upload_url($this->avatar);
+            return upload_url($this->avatar, null, $size);
         }
 
         return asset('jw-styles/juzaweb/images/avatar.png');

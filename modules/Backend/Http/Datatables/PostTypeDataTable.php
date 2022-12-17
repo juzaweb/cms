@@ -43,14 +43,24 @@ class PostTypeDataTable extends DataTable
 
     public function columns(): array
     {
-        $columns = [
-            'title' => [
-                'label' => trans('cms::app.title'),
-                'formatter' => [$this, 'rowActionsFormatter'],
-            ]
+        if ($this->postType['key'] != 'pages') {
+            $columns['thumbnail'] = [
+                'label' => trans('cms::app.thumbnail'),
+                'width' => '5%',
+                'sortable' => false,
+                'formatter' => function ($value, $row, $index) {
+                    return '<img class="lazyload w-100" data-src="'. $row->getThumbnail('150xauto') .'"'
+                        .' src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>';
+                },
+            ];
+        }
+
+        $columns['title'] = [
+            'label' => trans('cms::app.title'),
+            'formatter' => [$this, 'rowActionsFormatter'],
         ];
 
-        $taxonomies = $this->taxonomies->take(3);
+        $taxonomies = $this->taxonomies->where('taxonomy', '!=', 'tags')->take(3);
 
         foreach ($taxonomies as $key => $taxonomy) {
             $columns["tax_{$key}"] = [

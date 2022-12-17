@@ -9,38 +9,28 @@
  */
 
 $(document).ready(function () {
-    $('body').on('submit', '.form-ajax', function(event) {
-        if (event.isDefaultPrevented()) {
-            return false;
-        }
+    function sendRequestFormAjax(form, data, btnsubmit, currentText, currentIcon, captchaToken = null) {
+        let submitSuccess = form.data('success');
+        let notify = form.data('notify') || false;
 
-        event.preventDefault();
-
-        var form = $(this);
-        var formData = new FormData(form[0]);
-        var btnsubmit = form.find("button[type=submit]");
-        var currentIcon = btnsubmit.find('i').attr('class');
-        var currentText = btnsubmit.html();
-        var submitSuccess = form.data('success');
-
-        btnsubmit.find('i').attr('class', 'fa fa-spinner fa-spin');
-        btnsubmit.prop("disabled", true);
-
-        if (btnsubmit.data('loading-text')) {
-            btnsubmit.html('<i class="fa fa-spinner fa-spin"></i> ' + btnsubmit.data('loading-text'));
+        if (captchaToken) {
+            data.append('g-recaptcha-response', captchaToken);
         }
 
         $.ajax({
             type: form.attr('method'),
             url: form.attr('action'),
             dataType: 'json',
-            data: formData,
-            cache:false,
+            data: data,
+            cache: false,
             contentType: false,
             processData: false
         }).done(function(response) {
-
-            show_message(response);
+            if (notify) {
+                show_notify(response);
+            } else {
+                show_message(response);
+            }
 
             if (submitSuccess) {
                 eval(submitSuccess)(form, response);
@@ -73,12 +63,61 @@ $(document).ready(function () {
                 btnsubmit.html(currentText);
             }
 
-            show_message(response);
+            if (notify) {
+                show_notify(response);
+            } else {
+                show_message(response);
+            }
             return false;
         });
+    }
+
+    $(document).on('submit', '.form-ajax', function(event) {
+        if (event.isDefaultPrevented()) {
+            return false;
+        }
+
+        event.preventDefault();
+
+        let form = $(this);
+        let formData = new FormData(form[0]);
+        let btnsubmit = form.find("button[type=submit]");
+        let currentText = btnsubmit.html();
+        let currentIcon = btnsubmit.find('i').attr('class');
+
+        btnsubmit.find('i').attr('class', 'fa fa-spinner fa-spin');
+        btnsubmit.prop("disabled", true);
+
+        if (btnsubmit.data('loading-text')) {
+            btnsubmit.html('<i class="fa fa-spinner fa-spin"></i> ' + btnsubmit.data('loading-text'));
+        }
+
+        if (typeof grecaptcha !== 'undefined') {
+            loadRecapchaAndSubmit(
+                function (token) {
+                    sendRequestFormAjax(
+                        form,
+                        formData,
+                        btnsubmit,
+                        currentText,
+                        currentIcon,
+                        token
+                    );
+                }
+            );
+            return false;
+        }
+
+        sendRequestFormAjax(
+            form,
+            formData,
+            btnsubmit,
+            currentText,
+            currentIcon
+        );
     });
 
-    $('body').on('click', '.load-modal', function(event) {
+    $(document).on('click', '.load-modal', function(event) {
         if (event.isDefaultPrevented()) {
             return false;
         }
@@ -136,11 +175,11 @@ $(document).ready(function () {
         });
     });
 
-    $("body").on('keypress', '.is-number', function () {
+    $(document).on('keypress', '.is-number', function () {
         return validate_isNumberKey(this);
     });
 
-    $("body").on('keyup', '.number-format', function () {
+    $(document).on('keyup', '.number-format', function () {
         return validate_FormatNumber(this);
     });
 

@@ -21,17 +21,7 @@ class DatatableController extends BackendController
     public function getData(Request $request): JsonResponse
     {
         $table = $this->getTable($request);
-        $sort = $request->get('sort', 'id');
-        $order = $request->get('order', 'desc');
-        $offset = $request->get('offset', 0);
-        $limit = (int) $request->get('limit', 20);
-
-        $query = $table->query($request->all());
-        $count = $query->count();
-        $query->orderBy($sort, $order);
-        $query->offset($offset);
-        $query->limit($limit);
-        $rows = $query->get();
+        list($count, $rows) = $table->getData($request);
 
         $results = [];
         $columns = $table->columns();

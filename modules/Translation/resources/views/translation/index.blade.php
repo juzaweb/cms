@@ -19,19 +19,19 @@
     </div>
 
     <script type="text/javascript">
-        var linkModule = "{{ route('admin.translations.type', ['__KEY__']) }}";
+        let linkModule = "{{ route('admin.translations.type', ['__KEY__']) }}";
 
-        function index_formatter(value, row, index)
-        {
+        function index_formatter(value, row, index) {
             return (index + 1);
         }
 
         function actions_formatter(value, row, index) {
-            return `<a href="${linkModule.replace('__KEY__', row.key)}" class="btn btn-info btn-sm"><i class="fa fa-language"></i> ${juzaweb.lang.translations}</a>`;
+            return `<a href="${linkModule.replace('__KEY__', row.key)}" class="btn btn-info btn-sm"><i class="fa fa-language"></i> ${juzaweb.lang.translate}</a>`;
         }
 
-        var table = new JuzawebTable({
+        let table = new JuzawebTable({
             url: '{{ route('admin.translations.get-data') }}',
+            search: true,
         });
     </script>
 @endsection

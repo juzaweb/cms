@@ -3,7 +3,8 @@
 namespace Juzaweb\CMS\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
-use Prettus\Repository\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Repositories\Contracts\RepositoryCriteriaInterface;
+use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
 
 /**
  * Interface BaseRepository.
@@ -11,7 +12,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  * @method Builder query()
  * @package namespace Juzaweb\Backend\Repositories;
  */
-interface BaseRepository extends RepositoryInterface
+interface BaseRepository extends RepositoryInterface, RepositoryCriteriaInterface
 {
     //
 }

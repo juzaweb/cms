@@ -1,0 +1,16 @@
+#editor {
+    width: 100%;
+    height: 450px;
+}
+
+.treeview-animated-list .treeview-animated-items a {
+    font-size: 18px;
+}
+
+.treeview-animated-list .treeview-animated-items a.folder-item {
+    cursor: pointer;
+}
+
+.treeview-animated ul {
+    padding: 0 0 0 15px;
+}

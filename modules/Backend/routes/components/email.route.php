@@ -18,8 +18,3 @@ Route::group(
 );
 
 Route::jwResource('email-template', 'Backend\EmailTemplateController');
-
-Route::get(
-    'logs/email',
-    'Backend\EmailLogController@index'
-)->name('admin.logs.email');

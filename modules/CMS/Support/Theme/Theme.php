@@ -376,7 +376,7 @@ class Theme implements ThemeLoaderContract
         }
 
         if (is_dir($viewPublishPath)) {
-            $this->finder->addNamespace($namespace, $viewPath);
+            $this->finder->prependNamespace($namespace, $viewPublishPath);
         }
 
         $this->lang->addNamespace($namespace, $langPath);

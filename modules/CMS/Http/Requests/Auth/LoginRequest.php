@@ -21,8 +21,8 @@ class LoginRequest extends FormRequest
             'password' => 'bail|required|min:6|max:32',
         ];
 
-        if (get_config('google_recaptcha')) {
-            $rules['recaptcha'] = 'bail|required|recaptcha';
+        if (get_config('captcha')) {
+            $rules['g-recaptcha-response'] = 'bail|required|recaptcha';
         }
 
         return $rules;

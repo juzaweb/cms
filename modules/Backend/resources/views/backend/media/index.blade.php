@@ -1,7 +1,6 @@
 @extends('cms::layouts.backend')
 
 @section('content')
-
     <div id="media-container">
         <div class="row mb-2">
             <div class="col-md-8">
@@ -39,51 +38,95 @@
             </div>
         </div>
 
-        <div class="list-media mt-5">
-            <ul class="media-list">
-                @foreach($mediaFolders as $item)
-                    <li class="media-item">
-                        <a href="{{ route('admin.media.folder', [$item->id]) }}" title="{{ $item->name }}">
-                            <div class="attachment-preview">
-                                <div class="thumbnail media-folder">
-                                    <div class="centered">
-                                        <img src="{{ asset('jw-styles/juzaweb/images/folder.png') }}" alt="{{ $item->name }}">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                @endforeach
+        <div class="row mt-5">
+            <div class="col-md-9">
+                <div class="list-media">
+                    <ul class="media-list">
+                        @foreach($mediaFolders as $item)
+                            @component('cms::backend.media.components.item', ['item' => $item])
+                            @endcomponent
+                        @endforeach
 
-                @foreach($mediaFiles as $item)
-                    <li class="media-item">
-                        <a href="javascript:void(0)">
-                            <div class="attachment-preview">
-                                <div class="thumbnail">
-                                    <div class="centered">
-                                        @if($item->type == 'image')
-                                        <img src="{{ upload_url($item->path) }}" alt="{{ $item->name }}">
-                                        @else
-                                            <i class="fa {{ $item->icon }} fa-3x"></i>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
+                        @foreach($mediaFiles as $item)
+                            @component('cms::backend.media.components.item', ['item' => $item])
+                            @endcomponent
+                        @endforeach
+                    </ul>
+                </div>
+
+                <div class="mt-3">
+                    {{ $mediaFiles->appends(request()->query())->links() }}
+                </div>
+            </div>
+
+            <div class="col-md-3" id="preview-file">
+                <div class="preview">
+                    <i class="fa fa-file-image-o"></i>
+                </div>
+                <p class="text-center">{{ trans('cms::app.media_setting.click_file_to_view_info') }}</p>
+            </div>
         </div>
-
-        {{ $mediaFiles->appends(request()->query())->links() }}
     </div>
 @endsection
 
 @section('footer')
+    <template id="media-detail-template">
+        <div class="box-image">
+            <img src="{url}" alt="" class="preview-image">
+        </div>
 
-    @include('cms::backend.media.add_modal')
+        <div class="mt-2 mb-3">
+            <a href="{{ str_replace('__ID__', '{id}', route('admin.media.download', ['__ID__'])) }}">
+                {{ trans('cms::app.download') }}
+            </a>
 
-    @include('cms::backend.media.upload_modal')
+            <a
+                href="javascript:void(0)"
+                class="text-danger delete-file"
+                data-id="{id}"
+                data-is_file="{is_file}"
+                data-name="{name}"
+            >{{ trans('cms::app.delete') }}</a>
+        </div>
+
+        <form
+            action="{{ str_replace('__ID__', '{id}', route('admin.media.update', ['__ID__'])) }}"
+            method="post"
+            class="form-ajax"
+        >
+            @method('put')
+            <input type="hidden" name="is_file" value="{is_file}">
+
+            {{ Field::text(trans('cms::app.name'), 'name', ['value' => '{name}']) }}
+
+            {{ Field::text(trans('cms::app.url'), 'url', ['value' => '{url}', 'disabled' => true]) }}
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>{{ trans('cms::app.extension') }}</td>
+                    <td>{extension}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ trans('cms::app.size') }}</td>
+                    <td>{size}</td>
+                </tr>
+                <tr>
+                    <td>{{ trans('cms::app.last_update') }}</td>
+                    <td>{updated}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-primary mb-2">{{ trans('cms::app.save') }}</button>
+        </form>
+
+    </template>
+
+    @include('cms::backend.media.components.add_modal')
+
+    @include('cms::backend.media.components.upload_modal')
 
     <script>
         Dropzone.autoDiscover = false;
@@ -97,7 +140,6 @@
                 clickable: '#upload-button',
                 dictDefaultMessage: "{{ trans('cms::filemanager.message-drop') }}",
                 init: function () {
-                    var _this = this; // For the closure
                     this.on('success', function (file, response) {
                         if (response == 'OK') {
                             window.location = "";
@@ -120,5 +162,4 @@
             window.location = "";
         }
     </script>
-
 @endsection

@@ -12,6 +12,7 @@ use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Translation\Translator;
@@ -579,6 +580,20 @@ class Plugin
             'images/screenshot.png',
             'jw-styles/juzaweb/images/screenshot.svg'
         );
+    }
+
+    public function fileExists(string $path = null): bool
+    {
+        return file_exists($this->getPath($path));
+    }
+
+    public function getContents(string $path): ?string
+    {
+        if (!$this->fileExists($path)) {
+            throw new \Exception("File {$path} not found.");
+        }
+
+        return File::get($this->getPath($path));
     }
 
     public function isVisible(): bool

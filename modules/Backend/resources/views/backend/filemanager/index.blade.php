@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="#333844">
-    <meta name="msapplication-navbutton-color" content="#333844">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#333844">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ trans('cms::filemanager.title-page') }}</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}">
-    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css">--}}
-    <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/filemanager.min.css') }}">
-
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="theme-color" content="#333844">
+        <meta name="msapplication-navbutton-color" content="#333844">
+        <meta name="apple-mobile-web-app-status-bar-style" content="#333844">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>{{ trans('cms::filemanager.title-page') }}</title>
+        <link rel="shortcut icon" type="image/png" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}">
+        {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css">--}}
+        <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/filemanager.min.css') }}">
+    </head>
 <body>
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark" id="nav">
@@ -105,26 +104,63 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">{{ trans('cms::filemanager.title-upload') }}</h4>
+                <h5 class="modal-title" id="myModalLabel">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active text-capitalize" id="upload-tab" data-toggle="tab" href="#upload-form" role="tab" aria-controls="upload-form" aria-selected="true">{{ trans(('cms::app.upload_media')) }}</a>
+                        </li>
+                        @if(config('juzaweb.filemanager.upload_from_url'))
+                            <li class="nav-item">
+                                <a class="nav-link text-capitalize" id="import-tab" data-toggle="tab" href="#import-form" role="tab" aria-controls="import-form" aria-selected="false">{{ trans('cms::app.file_manager.upload_from_url') }}</a>
+                            </li>
+                        @endif
+                    </ul>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aia-hidden="true">&times;</span></button>
+                    <span aia-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('filemanager.upload') }}" role='form' id='uploadForm' name='uploadForm' method='post' enctype='multipart/form-data' class="dropzone">
-                    <div class="form-group" id="attachment">
-                        <div class="controls text-center">
-                            <div class="input-group w-100">
-                                <a class="btn btn-primary w-100 text-white" id="upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="upload-form" role="tabpanel" aria-labelledby="upload-tab">
+                        <form action="{{ route('filemanager.upload') }}" role='form' id='uploadForm' name='uploadForm' method='post' enctype='multipart/form-data' class="dropzone">
+                            <div class="form-group" id="attachment">
+                                <div class="controls text-center">
+                                    <div class="input-group w-100">
+                                        <a class="btn btn-primary w-100 text-white" id="upload-button">{{ trans('cms::filemanager.message-choose') }}</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <input type='hidden' name='working_dir' class='working_dir'>
+                            <input type='hidden' name='type' class='type' value='{{ request("type") }}'>
+                            <input type='hidden' name='_token' value='{{ csrf_token() }}'>
+                        </form>
                     </div>
-                    <input type='hidden' name='working_dir' id='working_dir'>
-                    <input type='hidden' name='type' id='type' value='{{ request("type") }}'>
-                    <input type='hidden' name='_token' value='{{ csrf_token() }}'>
-                </form>
+
+                    <div class="tab-pane fade" id="import-form" role="tabpanel" aria-labelledby="import-tab">
+                        <form action="{{ route('filemanager.import') }}" role="form" method="post" id="import-url">
+
+                            {{ Field::text(trans('cms::app.url'), 'url', ['required' => true]) }}
+
+                            <div class="form-check">
+                                <input type="checkbox" name="download" class="form-check-input" value="1" id="download-checkbox" checked>
+                                <label class="form-check-label" for="download-checkbox">{{ trans('cms::app.file_manager.download_to_server') }}</label>
+                            </div>
+
+                            <input type="hidden" name="working_dir" class='working_dir'>
+                            <input type="hidden" name="type" class="type" value="{{ request("type") }}">
+
+                            <button type="submit" class="btn btn-success mt-2">
+                                <i class="fa fa-cloud-upload"></i> {{ trans('cms::app.file_manager.upload_file') }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">{{ trans('cms::filemanager.btn-close') }}</button>
+                <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">
+                    {{ trans('cms::filemanager.btn-close') }}
+                </button>
             </div>
         </div>
     </div>
@@ -236,7 +272,7 @@
         },
     ];
 
-    var sortings = [
+    const sortings = [
         {
             by: 'alphabetic',
             icon: 'sort-alpha-down',
@@ -249,7 +285,7 @@
         }
     ];
 
-    var multi_selection_enabled = @if($multiChoose == 1) true @else false @endif;
+    let multi_selection_enabled = @if($multiChoose == 1) true @else false @endif;
 </script>
 <script src="{{ asset('jw-styles/juzaweb/js/filemanager.min.js') }}?v={{ \Juzaweb\CMS\Version::getVersion() }}"></script>
 
@@ -262,7 +298,6 @@
         clickable: '#upload-button',
         dictDefaultMessage: lang['message-drop'],
         init: function () {
-            var _this = this; // For the closure
             this.on('success', function (file, response) {
                 loadFolders();
             });

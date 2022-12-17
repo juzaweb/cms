@@ -5,7 +5,9 @@
         <div class="col-md-12">
             <div class="alert alert-success">
                 <p>{{ __('You are using Juzaweb CMS Version') }}: {{ \Juzaweb\CMS\Version::getVersion() }}</p>
-                <p>{{ __('View CMS') }} <a href="https://github.com/juzaweb/juzacms/releases" target="_blank">{{ __('change logs here') }}</a></p>
+                <p>
+                    <a href="https://github.com/juzaweb/juzacms/releases" target="_blank">{{ __('View change logs here') }}</a>. <a href="https://juzaweb.com/documentation/start/update" target="_blank">{{ __('View update guide here') }}</a>
+                </p>
             </div>
 
             <div id="update-form">

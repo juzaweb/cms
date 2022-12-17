@@ -1,4 +1,7 @@
 <div class="juzaweb__topbar">
+    @php
+        global $jw_user;
+    @endphp
     <div class="mr-3">
         <a href="{{ url('/') }}" class="mr-2" target="_blank" title="{{ trans('cms::app.view_site') }}">
             <i class="dropdown-toggle-icon fa fa-home" data-toggle="tooltip" data-placement="bottom" data-original-title="Visit website"></i> {{ trans('cms::app.view_site') }}
@@ -25,6 +28,39 @@
     @do_action('backend.menu_top')
 
     <div class="mr-auto"></div>
+    @php
+        $langs = \Illuminate\Support\Facades\Cache::remember(
+            'top_menu_languages',
+            3600,
+            function () {
+                return app(\Juzaweb\CMS\Support\Manager\TranslationManager::class)->locale('cms')
+                    ->languages();
+            }
+        );
+
+        $current = $jw_user->language ?? get_config('language', 'en');
+    @endphp
+    <div class="dropdown mr-4 d-none d-sm-block">
+        <a href="javascript:void(0)"
+           class="dropdown-toggle text-nowrap"
+           data-toggle="dropdown"
+           data-offset="5,15"
+           aria-expanded="false"
+        >
+            <span class="dropdown-toggle-text text-uppercase">{{ $current }}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" role="menu">
+            @foreach($langs as $lang)
+                @if($current == $lang['code'])
+                    @continue
+                @endif
+
+            <a class="dropdown-item " href="{{ url()->current() }}?locale={{ $lang['code'] }}">
+                <span class="text-uppercase font-size-12 mr-1">{{ $lang['code'] }}</span>
+                {{ $lang['name'] }}</a>
+            @endforeach
+        </div>
+    </div>
 
     @php
         $total = count_unread_notifications();
@@ -64,7 +100,7 @@
                                                     @endif
                                                 </div>
                                                 <div>
-                                                    <div class="text-blue">{{ $notify->subject }}</div>
+                                                    <div class="text-blue">{{ $notify->data['subject'] ?? '' }}</div>
                                                     <div class="text-muted">{{ $notify->created_at?->diffForHumans() }}</div>
                                                 </div>
                                             </a>
@@ -79,9 +115,6 @@
         </div>
     </div>
 
-    @php
-        global $jw_user;
-    @endphp
     <div class="dropdown">
         <a href="" class="dropdown-toggle text-nowrap" data-toggle="dropdown" aria-expanded="false" data-offset="5,15">
             <img class="dropdown-toggle-avatar" src="{{ $jw_user->getAvatar() }}" alt="User avatar" width="30" height="30"/>

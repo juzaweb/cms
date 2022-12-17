@@ -102,7 +102,8 @@ $(document).ready(function () {
         });
     });
 
-    bodyElement.on('click', '.form-image .image-clear', function () {
+    bodyElement.on('click', '.form-image .image-clear', function (e) {
+        e.stopPropagation();
         let item = $(this).closest('.form-image');
         let targetInput = item.find('.input-path');
         let targetPreview = item.find('.dropify-render');

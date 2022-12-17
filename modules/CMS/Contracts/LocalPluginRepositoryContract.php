@@ -83,7 +83,7 @@ interface LocalPluginRepositoryContract
      * Find a specific plugin.
      *
      * @param $name
-     * @return Module|null
+     * @return Plugin|null
      */
     public function find(string $name);
 

@@ -16,12 +16,14 @@
     "require": {
         "php": "^8.0|^8.1",
         "ext-curl": "*",
+        "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
         "ext-zip": "*",
+        "ext-openssl": "*",
         "guzzlehttp/guzzle": "^7.2",
-        "juzaweb/packages": "^1.1",
+        "juzaweb/packages": "^1.2",
         "laravel/framework": "^9.2",
         "laravel/tinker": "^2.7"
     },

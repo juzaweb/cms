@@ -66,8 +66,8 @@ class PermissionAction extends Action
             'roles',
             [
                 'icon' => 'fa fa-users',
-                'position' => 30,
-                'parent' => 'users',
+                'position' => 45,
+                'parent' => 'managements',
             ]
         );
     }
@@ -78,11 +78,17 @@ class PermissionAction extends Action
             'media',
             trans('cms::app.media')
         );
+        */
 
         HookAction::registerResourcePermissions(
             'themes',
             trans('cms::app.theme')
-        );*/
+        );
+
+        HookAction::registerResourcePermissions(
+            'plugins',
+            trans('cms::app.plugin')
+        );
 
         HookAction::registerResourcePermissions(
             'users',

@@ -10,6 +10,38 @@ ul {
     color: red;
 }
 
+#admin-overlay {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height:100%;
+    display: none;
+    background: rgba(0,0,0,0.5);
+}
+
+#admin-overlay .cv-spinner {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#admin-overlay .cv-spinner .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px #ddd solid;
+    border-top: 4px #2e93e6 solid;
+    border-radius: 50%;
+    animation: sp-anime 0.8s infinite linear;
+}
+
+@keyframes sp-anime {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 #holder, #holder-poster {
     padding: 5px;
     border: 1px solid #ccc;
@@ -555,7 +587,6 @@ Form file management
     width: 15px;
     text-align: center;
     color: white;
-    z-index: 999;
 }
 
 #form-search .select2.select2-container {

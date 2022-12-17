@@ -3,12 +3,12 @@
 namespace Juzaweb\CMS\Traits\Criterias;
 
 /**
- * @property array $filterAble
+ * @property array $filterableFields
  */
 trait UseFilterCriteria
 {
     public function getFieldFilterable(): array
     {
-        return $this->filterAble;
+        return $this->filterableFields ?? [];
     }
 }

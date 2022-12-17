@@ -22,6 +22,7 @@ return [
     'add_language' => 'Add language',
     'delete' => 'Delete',
     'save' => 'Save',
+    'save_change' => 'Save change',
     'cancel' => 'Cancel',
     'choose_image' => 'Choose image',
     'avatar' => 'Avatar',
@@ -110,6 +111,7 @@ return [
     'report_copyright' => 'Report copyright',
     'comment_able' => 'Comment able',
     'comment_type' => 'Comment type',
+    'comment_success' => 'Successful comment. Your comment will be displayed once approved.',
     'comments_per_page' => 'Comments per page',
     'facebook_app_id' => 'Facebook App ID',
     'facebook_comments' => 'Facebook comments',
@@ -288,6 +290,8 @@ return [
     'all_type' => 'All type',
     'search_by_name' => 'Search by name',
     'folder_name' => 'Folder name',
+    'folder' => 'Folder',
+    'folders' => 'Folders',
     'add_folder' => 'Add Folder',
     'media' => 'Media',
     'upload' => 'Upload',
@@ -389,8 +393,8 @@ return [
     'activate_plugins' => 'Activate plugins',
     'require_plugins' => 'Require plugins',
     'theme_require_plugins' => 'This theme required the following plugins:'
-        . ' :plugins'
-        . ' <a href=":link"><strong>Activate plugins</strong></a>',
+        .' :plugins'
+        .' <a href=":link"><strong>Activate plugins</strong></a>',
     'plugin_not_found' => 'Plugin not found',
     'plugin_name_not_found' => 'Plugin :name not found',
     'delete_theme_confirm' => 'Are you sure you want to delete this theme?',
@@ -423,6 +427,8 @@ return [
     'has_ssl' => 'Has ssl',
     'add_block' => 'Add block',
     'documentation' => 'Documentation',
+    'api_documentation' => 'API Documentation',
+    'api_docs' => 'API Docs',
     'images' => 'Images',
     'config' => 'Config',
     'notes' => 'Notes',
@@ -447,13 +453,18 @@ return [
     'sort_by' => 'Sort by',
     'sort_order' => 'Sort order',
     'view_post' => 'View post',
+    'custom' => 'Custom',
+    'managements' => 'Managements',
+    'upload_theme' => 'Upload Theme',
+    'upload_plugin' => 'Upload Plugin',
+    'plugin_editor' => 'Plugin Editor',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',
         'twitter' => 'Login with Twitter',
         'linkedin' => 'Login with Linkedin',
         'github' => 'Login with Github',
-        'login_with' => 'Login with :name'
+        'login_with' => 'Login with :name',
     ],
     'tools' => 'Tools',
     'import' => 'Import',
@@ -464,35 +475,38 @@ return [
     'custom_seo' => 'Custom SEO',
     'buy' => 'Buy',
     'mark_as_viewed' => 'Mark as viewed',
+    'extension' => 'Extension',
+    'path' => 'Path',
+    'last_update' => 'Last update',
+    'size' => 'Size',
+    'captcha' => 'Captcha',
     'update_process' => [
         'step1' => [
             'before' => 'Getting update data...',
-            'after' => 'Getted update data'
+            'after' => 'Getted update data',
         ],
         'step2' => [
             'before' => 'Download update file...',
-            'after' => 'Downloaded update file'
+            'after' => 'Downloaded update file',
         ],
         'step3' => [
             'before' => 'Unzip file...',
-            'after' => 'Unzip file success'
+            'after' => 'Unzip file success',
         ],
         'step4' => [
             'before' => 'Backup old version...',
-            'after' => 'Backup old version success'
+            'after' => 'Backup old version success',
         ],
         'step5' => [
             'before' => 'Update files and folders...',
-            'after' => 'Update files and folders success'
+            'after' => 'Update files and folders success',
         ],
         'step6' => [
             'before' => 'Update data...',
-            'after' => 'Update data success'
+            'after' => 'Update data success',
         ],
-        'done' => 'Done!!'
+        'done' => 'Done!!',
     ],
-    'upload_theme' => 'Upload Theme',
-    'upload_plugin' => 'Upload Plugin',
     'theme_upload' => [
         'error' => [
             'mime_type' => 'Invalid file mime type.',
@@ -512,7 +526,7 @@ return [
         ],
     ],
     'permission_manager' => [
-        'view_list' => 'View List'
+        'view_list' => 'View List',
     ],
     'network' => [
         'sites' => 'Sites',
@@ -536,5 +550,32 @@ return [
         'backup_setting' => 'Backup setting',
         'enable_backup' => 'Enable Backup',
         'backup_time' => 'Backup Time',
-    ]
+    ],
+    'media_setting' => [
+        'title' => 'Media Settings',
+        'auto_resize_thumbnail' => 'Auto resize thumbnail (Optimize page speed)',
+        'thumbnail_defaults' => 'Thumbnail Defaults',
+        'thumbnail_size' => 'Thumbnail size',
+        'max_width' => 'Max Width',
+        'max_height' => 'Max Height',
+        'thumbnail_default' => 'Thumbnail default',
+        'thumbnail_settings' => 'Thumbnail settings',
+        'click_file_to_view_info' => 'Click file to view info.',
+    ],
+    'file_manager' => [
+        'upload_from_url' => 'Upload from url',
+        'download_to_server' => 'Download file to server',
+        'upload_file' => 'Upload file',
+    ],
+    'general_settings' => [
+        'custom_time_format' => 'Custom time format',
+        'custom_date_format' => 'Custom date format',
+        'time_formatting_documentation' => 'Documentation on date and time formatting',
+        'enter_a_custom_date' => 'enter a custom date format in the following field',
+    ],
+    'google_captcha' => [
+        'site_key' => 'Site Key',
+        'secret_key' => 'Secret Key',
+        'google_captcha_v2_invisible' => 'Google Captcha V2 (invisible)',
+    ],
 ];

@@ -50,6 +50,7 @@ class Facades
             \Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
             \Illuminate\Session\SessionServiceProvider::class,
             \Spatie\TranslationLoader\TranslationServiceProvider::class,
+            //\Illuminate\Translation\TranslationServiceProvider::class,
             \Illuminate\Validation\ValidationServiceProvider::class,
             \Illuminate\View\ViewServiceProvider::class,
 
@@ -128,12 +129,16 @@ class Facades
             'language',
             'timezone',
             'date_format',
+            'date_format_custom',
             'time_format',
+            'time_format_custom',
             'fb_app_id',
             'backend_messages',
             'socialites',
             'posts_per_page',
             'posts_per_rss',
+            'captcha',
+            'google_captcha',
         ];
     }
 

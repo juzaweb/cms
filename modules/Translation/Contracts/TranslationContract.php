@@ -32,5 +32,5 @@ interface TranslationContract
 
     public function originPath(Collection|string $key, string $path = ''): string;
 
-    public function publishPath($key, $path = ''): string;
+    public function publishPath(Collection|string $key, $path = ''): string;
 }

@@ -64,7 +64,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div id="curve_chart" style="width: 100%; height: 300px"></div>
+            <canvas id="curve_chart" style="width: 100%; height: 300px"></canvas>
         </div>
     </div>
 
@@ -115,38 +115,49 @@
 
     <script type="text/javascript">
         setTimeout(function () {
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawChart);
-        }, 200);
-
-        function drawChart() {
-            var jsonData = $.ajax({
+            const ctx = document.getElementById('curve_chart');
+            let jsonData = $.ajax({
                 url: "{{ route('admin.dashboard.views_chart') }}",
                 dataType: "json",
                 async: false
             }).responseText;
+
             jsonData = JSON.parse(jsonData);
+            let labels = [];
+            let views = [];
+            let users = [];
 
-            var data = google.visualization.arrayToDataTable(jsonData);
+            $.each(jsonData, function (index, item) {
+                labels.push(item[0]);
+                views.push(item[1]);
+                users.push(item[2]);
+            });
 
-            var options = {
-                title: "{{ trans('cms::app.chart_post_views_this_week') }}",
-                curveType: 'function',
-                legend: { position: 'bottom' },
-                vAxis: {
-                    minValue:0,
-                    viewWindow: {
-                        min: 0
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Page Views',
+                            data: views,
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'New Users',
+                            data: users,
+                            borderWidth: 1
+                        }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            };
-
-            var chart = new google.visualization.LineChart(
-                document.getElementById('curve_chart')
-            );
-
-            chart.draw(data, options);
-        }
+            });
+        }, 200);
     </script>
 
     <script type="text/javascript">
@@ -155,16 +166,16 @@
         }
 
         function subject_formatter(value, row, index) {
-            return '<a href="'+ row.url +'" data-turbolinks="false">'+ value +'</a>';
+            return '<a href="'+ row.url +'">'+ value +'</a>';
         }
 
-        var table1 = new JuzawebTable({
+        const table1 = new JuzawebTable({
             table: '#users-table',
             page_size: 5,
             url: '{{ route('admin.dashboard.users') }}',
         });
 
-        var table2 = new JuzawebTable({
+        const table2 = new JuzawebTable({
             table: '#posts-top-views',
             page_size: 5,
             url: '{{ route('admin.dashboard.top_views') }}',

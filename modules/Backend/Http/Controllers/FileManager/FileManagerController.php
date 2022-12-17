@@ -19,7 +19,7 @@ class FileManagerController extends BackendController
         $multiChoose = $request->get('multichoose', 0);
 
         if (empty($mimeTypes)) {
-            return abort(404);
+            abort(404);
         }
 
         return view(
@@ -35,7 +35,6 @@ class FileManagerController extends BackendController
     public function getErrors(): array
     {
         $errors = [];
-
         if (! extension_loaded('gd') && ! extension_loaded('imagick')) {
             $errors[] = trans('cms::filemanager.message_extension_not_found', ['name' => 'gd']);
         }

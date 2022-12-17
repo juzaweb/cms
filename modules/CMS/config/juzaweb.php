@@ -139,7 +139,7 @@ return [
          *
          * Default: true
          */
-        'deny_iframe' => true,
+        'deny_iframe' => (bool) env('JW_DENY_IFRAME', true),
 
         'query_cache' => [
             'enable' => true,
@@ -155,6 +155,12 @@ return [
          * FileSystem disk
          */
         'disk' => 'public',
+
+        /**
+         * Enable upload from url
+         */
+        'upload_from_url' => (bool) env('UPLOAD_FROM_URL', true),
+
         /**
          * Optimizer image after upload
          *
@@ -199,7 +205,14 @@ return [
     ],
 
     'api' => [
-        'enable' => env('JW_ALLOW_API', false)
+        'enable' => env('JW_ALLOW_API', false),
+    
+        /**
+         * Frontend API configs
+         */
+        'frontend' => [
+            'enable' => env('JW_ALLOW_FRONTEND_API', env('JW_ALLOW_API', false)),
+        ]
     ],
 
     /**

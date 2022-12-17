@@ -21,9 +21,9 @@ class AfterPostSave
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $post;
+    public Post $post;
 
-    public $data;
+    public array $data;
 
     public function __construct(Post $post, array $data)
     {

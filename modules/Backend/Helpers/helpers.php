@@ -220,9 +220,10 @@ if (!function_exists('upload_url')) {
      *
      * @param string|null $path
      * @param string|null $default Default path if file not exists
+     * @param string|null $size
      * @return string
      */
-    function upload_url(?string $path, ?string $default = null): string
+    function upload_url(?string $path, ?string $default = null, ?string $size = null): string
     {
         if (is_url($path)) {
             return $path;
@@ -237,6 +238,15 @@ if (!function_exists('upload_url')) {
         }
 
         $storage = Storage::disk('public');
+        if ($size) {
+            $filename = File::name($path);
+            $pathSize = str_replace($filename, "{$filename}_{$size}", $path);
+
+            if ($storage->exists(jw_basepath($pathSize))) {
+                return $storage->url($pathSize);
+            }
+        }
+
         if ($storage->exists(jw_basepath($path))) {
             return $storage->url($path);
         }
@@ -318,7 +328,7 @@ if (!function_exists('apply_filters')) {
      * @param mixed ...$args Additional parameters to pass to the callback functions.
      * @return mixed The filtered value after all hooked functions are applied to it.
      */
-    function apply_filters($tag, $value, ...$args)
+    function apply_filters($tag, $value, ...$args): mixed
     {
         return Hook::filter($tag, $value, ...$args);
     }
@@ -383,11 +393,18 @@ if (!function_exists('jw_date_format')) {
         }
 
         $dateFormat = get_config('date_format', 'F j, Y');
+        if ($dateFormat == 'custom') {
+            $dateFormat = get_config('date_format_custom', 'F j, Y');
+        }
+
         if ($format == JW_DATE) {
             return date($dateFormat, $date);
         }
 
         $timeFormat = get_config('time_format', 'g:i a');
+        if ($timeFormat == 'custom') {
+            $timeFormat = get_config('time_format_custom', 'g:i a');
+        }
 
         return date($dateFormat . ' ' . $timeFormat, strtotime($date));
     }
@@ -616,7 +633,9 @@ if (!function_exists('get_vimeo_id')) {
         $regs = [];
         $id = '';
         if (preg_match(
-            '%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im',
+            '%^https?:\/\/(?:www\.|player\.)?vimeo.com\/'
+            .'(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)'
+            .'(\d+)(?:$|\/|\?)(?:[?]?.*)$%im',
             $url,
             $regs
         )

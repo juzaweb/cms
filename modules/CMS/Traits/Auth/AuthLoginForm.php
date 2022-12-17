@@ -95,7 +95,7 @@ trait AuthLoginForm
             return $this->success(
                 [
                     'message' => trans('cms::app.login_successfully'),
-                    'redirect' => $user->isAdmin() ? route('admin.dashboard') : '/',
+                    'redirect' => $user->hasPermission() ? route('admin.dashboard') : '/',
                 ]
             );
         }

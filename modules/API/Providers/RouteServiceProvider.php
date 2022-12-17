@@ -17,14 +17,22 @@ class RouteServiceProvider extends ServiceProvider
 {
     public function map()
     {
+        $this->mapAdminRoutes();
         $this->mapApiRoutes();
     }
-
+    
     protected function mapApiRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')
             ->as('api.')
-            ->group(__DIR__ . '/../routes/api.php');
+            ->group(__DIR__.'/../routes/api.php');
+    }
+    
+    protected function mapAdminRoutes(): void
+    {
+        Route::prefix(config('juzaweb.admin_prefix'))
+            ->middleware('admin')
+            ->group(__DIR__.'/../routes/admin.php');
     }
 }

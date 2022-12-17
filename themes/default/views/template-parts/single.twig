@@ -150,6 +150,22 @@
                     <!-- end tags-->
 
                     <!-- comment -->
+                    {% if errors.any() %}
+                        <div class="alert alert-danger">
+                            <ul class="list-group">
+                                {% for error in errors.all() %}
+                                    <li class="list-group-item">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    {% if status == 'success' %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+
                     <!-- Comment  -->
                     <div id="comments" class="comments-area">
                         {{ comment_template(post, 'theme::components.comments') }}

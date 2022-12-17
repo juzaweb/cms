@@ -2,30 +2,35 @@
 
 namespace Juzaweb\Backend\Http\Controllers\FileManager;
 
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use Juzaweb\Backend\Models\MediaFile;
 use Juzaweb\Backend\Models\MediaFolder;
+use Juzaweb\CMS\Facades\Facades;
 
 class ItemsController extends FileManagerController
 {
-    public function getItems()
+    public function getItems(Request $request): array
     {
-        $file_type = $this->getType();
+        $type = $this->getType();
+        $extensions = $this->getTypeExtensions($type);
         $currentPage = self::getCurrentPageFromRequest();
         $perPage = 15;
 
-        $working_dir = request()->get('working_dir');
+        $working_dir = $request->get('working_dir');
+        $folders = collect([]);
+        if ($currentPage == 1) {
+            $folders = MediaFolder::where('folder_id', '=', $working_dir)
+                ->orderBy('name', 'ASC')
+                ->get(['id', 'name']);
+        }
 
-        $folders = MediaFolder::where('folder_id', '=', $working_dir)
-            ->where('type', '=', $file_type)
-            ->orderBy('name', 'ASC')
-            ->get(['id', 'name']);
-        $files = MediaFile::where('folder_id', '=', $working_dir)
-            ->where('type', '=', $file_type)
-            ->orderBy('id', 'DESC')
-            ->paginate($perPage);
+        $query = MediaFile::where('folder_id', '=', $working_dir)
+            ->whereIn('extension', $extensions)
+            ->orderBy('id', 'DESC');
 
-        $storage = Storage::disk(config('juzaweb.filemanager.disk'));
+        $totalFiles = $query->count(['id']);
+        $files = $query->paginate($perPage - $folders->count());
+
         $items = [];
         foreach ($folders as $folder) {
             $items[] = [
@@ -47,9 +52,9 @@ class ItemsController extends FileManagerController
                 'path' => $file->path,
                 'is_image' => $file->type == 1,
                 'name' => $file->name,
-                'thumb_url' => $file->type == 'image' ? $storage->url($file->path) : null,
+                'thumb_url' => $file->type == 'image' ? upload_url($file->path) : null,
                 'time' => strtotime($file->created_at),
-                'url' => $storage->url($file->path),
+                'url' => upload_url($file->path),
             ];
         }
 
@@ -57,7 +62,7 @@ class ItemsController extends FileManagerController
             'items' => $items,
             'paginator' => [
                 'current_page' => $currentPage,
-                'total' => count($items),
+                'total' => $totalFiles + $folders->count(),
                 'per_page' => $perPage,
             ],
             'display' => 'grid',
@@ -124,6 +129,19 @@ class ItemsController extends FileManagerController
         };
 
         return parent::$success_response;
+    }
+
+    protected function getTypeExtensions(string $type)
+    {
+        $extensions = config("juzaweb.filemanager.types.{$type}.extensions");
+        if (empty($extensions)) {
+            $extensions = match ($type) {
+                'file' => Facades::defaultFileExtensions(),
+                'image' => Facades::defaultImageExtensions(),
+            };
+        }
+
+        return $extensions;
     }
 
     private static function getCurrentPageFromRequest()

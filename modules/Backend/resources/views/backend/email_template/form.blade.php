@@ -2,11 +2,9 @@
 
 @section('content')
     @component('cms::components.form_resource', [
-            'action' => $model->id ? route('admin.email-template.update', [$model->id]) : route('admin.email-template.store'),
-            'method' => $model->id ? 'put' : 'post'
+            'action' => $model->code ? route('admin.email-template.update', [$model->code]) : route('admin.email-template.store'),
+            'method' => $model->code ? 'put' : 'post'
         ])
-
-        <input type="hidden" name="id" value="{{ $model->id }}">
 
         <div class="row">
             <div class="col-md-8">
@@ -14,7 +12,8 @@
                     'label' => trans('cms::app.code'),
                     'name' => 'code',
                     'value' => $model->code,
-                    'required' => true
+                    'required' => true,
+                    'readonly' => $model->code ? true : false
                 ])
                 @endcomponent
 
@@ -26,9 +25,10 @@
                 ])
                 @endcomponent
 
-                @component('cms::components.form_textarea', [
+                @component('cms::components.form_ckeditor', [
                     'label' => trans('cms::app.body'),
                     'name' => 'body',
+                    'id' => 'body',
                     'value' => $model->body
                 ])
                 @endcomponent

@@ -37,7 +37,7 @@ class JuzawebListView {
         if (this.page > 1) {
             this.offset = (this.page * this.page_size) - this.page_size;
         }
-
+        
         let jqxhr = $.ajax({
             type: this.method,
             url: this.url,

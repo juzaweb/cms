@@ -13,7 +13,6 @@ namespace Juzaweb\Frontend\Actions;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Support\DefaultPageBlock;
 use Juzaweb\CMS\Support\DefaultWidget;
@@ -29,7 +28,6 @@ class ThemeAction extends Action
     public function __construct()
     {
         parent::__construct();
-
         $this->currentTheme = jw_current_theme();
         $this->register = ThemeLoader::getRegister($this->currentTheme);
     }
@@ -64,7 +62,12 @@ class ThemeAction extends Action
     {
         $types = $this->getRegister('post_types');
         foreach ($types as $key => $type) {
-            HookAction::registerPostType($key, $type);
+            $this->hookAction->registerPostType($key, $type);
+        }
+
+        $thumbnailSizes = $this->getRegister('thumbnail_sizes');
+        foreach ($thumbnailSizes as $postType => $size) {
+            $this->hookAction->addThumbnailSizes($postType, $size);
         }
     }
 
@@ -261,7 +264,7 @@ class ThemeAction extends Action
 
     public function addFrontendAjax()
     {
-        if (!$support = $this->getRegister('support', [])) {
+        if (!$support = $this->getRegister('support')) {
             return;
         }
 
