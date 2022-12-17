@@ -65,8 +65,12 @@ class SwaggerMethod implements Arrayable
         return $this;
     }
     
-    public function parameter(string $name, array $args = []): static
+    public function parameter(string $name, array $args = [], bool $ref = false): static
     {
+        if (!$ref) {
+            $args['name'] = $name;
+        }
+        
         $this->parameters->put(
             $name,
             $args
@@ -81,7 +85,8 @@ class SwaggerMethod implements Arrayable
             $ref,
             [
                 '$ref' => "#/components/parameters/{$ref}",
-            ]
+            ],
+            true
         );
     }
     
@@ -120,12 +125,7 @@ class SwaggerMethod implements Arrayable
         $data = [
             'tags' => $this->tags,
             'operationId' => $this->getOperationId(),
-            'parameters' => $this->parameters->map(
-                function ($item, $name) {
-                    $item['name'] = $name;
-                    return $item;
-                }
-            )->values(),
+            'parameters' => $this->parameters->values(),
             'responses' => $this->responses,
         ];
         
