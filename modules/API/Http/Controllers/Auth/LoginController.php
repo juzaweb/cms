@@ -12,7 +12,7 @@ namespace Juzaweb\API\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Juzaweb\Backend\Http\Requests\API\Auth\LoginRequest;
+use Juzaweb\API\Http\Requests\Auth\LoginRequest;
 use Juzaweb\Backend\Http\Resources\UserResource;
 use Juzaweb\CMS\Http\Controllers\ApiController;
 use Juzaweb\CMS\Models\User;
