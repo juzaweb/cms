@@ -4,7 +4,7 @@ namespace Juzaweb\CMS\Repositories\Generators;
 
 use Juzaweb\CMS\Repositories\Generators\Generator;
 use Juzaweb\CMS\Repositories\Generators\RepositoryEloquentGenerator;
-use Juzaweb\CMS\Support\Repository\Generators\RepositoryInterfaceGenerator;
+use Juzaweb\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
 
 /**
  * Class BindingsGenerator

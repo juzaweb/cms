@@ -5,7 +5,7 @@ namespace Juzaweb\CMS\Repositories\Generators;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Repositories\Generators\Generator;
 use Juzaweb\CMS\Repositories\Generators\ValidatorGenerator;
-use Juzaweb\CMS\Support\Repository\Generators\RepositoryInterfaceGenerator;
+use Juzaweb\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
 
 /**
  * Class ControllerGenerator

@@ -3,7 +3,7 @@
 namespace Juzaweb\CMS\Repositories\Events;
 
 use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
-use Juzaweb\CMS\Support\Repository\Events\RepositoryEventBase;
+use Juzaweb\CMS\Repositories\Events\RepositoryEventBase;
 
 /**
  * Class RepositoryEntityCreated

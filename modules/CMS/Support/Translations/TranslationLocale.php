@@ -13,7 +13,6 @@ namespace Juzaweb\CMS\Support\Translations;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use Spatie\TranslationLoader\LanguageLine;
 use Symfony\Component\Finder\SplFileInfo;
 
 class TranslationLocale

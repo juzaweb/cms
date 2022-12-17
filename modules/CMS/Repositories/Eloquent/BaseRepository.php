@@ -22,7 +22,7 @@ use Juzaweb\CMS\Repositories\Events\RepositoryEntityUpdated;
 use Juzaweb\CMS\Repositories\Events\RepositoryEntityUpdating;
 use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
 use Juzaweb\CMS\Repositories\Traits\ComparesVersionsTrait;
-use Juzaweb\CMS\Support\Repository\Events\RepositoryEntityDeleting;
+use Juzaweb\CMS\Repositories\Events\RepositoryEntityDeleting;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
