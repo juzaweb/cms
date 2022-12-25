@@ -40,7 +40,7 @@ class ResourceMeta extends Model
         'resource_id',
     ];
 
-    public function resource()
+    public function resource(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Resource::class, 'resource_id', 'id');
     }

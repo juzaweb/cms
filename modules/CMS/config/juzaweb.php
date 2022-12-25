@@ -30,13 +30,13 @@ return [
     /**
      * Show logs in admin page
      */
-    'logs_viewer' => true,
+    'logs_viewer' => env('JW_LOGS_VIEWER', true),
 
     'translation' => [
         /**
          * Enable translation CMS/Plugins/Themes
          */
-        'enable' => true
+        'enable' => env('JW_ENABLE_TRANSLATE', true)
     ],
 
     'email' => [
@@ -46,7 +46,7 @@ return [
          * Support: sync, queue, cron
          * Default: sync
          */
-        'method' => env('EMAIL_METHOD', 'sync'),
+        'method' => env('JW_MAIL_METHOD', 'sync'),
 
         'default' => [
             'driver' => env('MAIL_MAILER'),
@@ -67,7 +67,7 @@ return [
          * Support: sync, queue, cron
          * Default: sync
          */
-        'method' => 'sync',
+        'method' => env('JW_NOTIFICATION_METHOD', 'sync'),
 
         /**
          * Send mail via
@@ -142,8 +142,19 @@ return [
         'deny_iframe' => (bool) env('JW_DENY_IFRAME', true),
 
         'query_cache' => [
-            'enable' => true,
-            'driver' => env('QUERY_CACHE_DRIVER', 'file'),
+            /**
+             * Enable query cache (Only frontend)
+             *
+             * Default: true
+             */
+            'enable' => env('JW_QUERY_CACHE', true),
+    
+            /**
+             * Query cache driver
+             *
+             * Default: file
+             */
+            'driver' => env('JW_QUERY_CACHE_DRIVER', 'file'),
         ]
     ],
 
@@ -153,11 +164,15 @@ return [
     'filemanager' => [
         /**
          * FileSystem disk
+         *
+         * Default: public
          */
         'disk' => 'public',
 
         /**
          * Enable upload from url
+         *
+         * Default: true
          */
         'upload_from_url' => (bool) env('UPLOAD_FROM_URL', true),
 
@@ -180,7 +195,12 @@ return [
          */
         'types' => [
             'file'  => [
-                'max_size' => 50, // size in MB
+                /**
+                 * Max file size upload
+                 *
+                 * Default: 50 (MB)
+                 */
+                'max_size' => env('JW_MEDIA_FILE_MAX_SIZE', 50),
                 'valid_mime' => [
                     ...Facades::defaultFileMimetypes(),
                     //
@@ -191,7 +211,12 @@ return [
                 ],
             ],
             'image' => [
-                'max_size' => 5, // size in MB
+                /**
+                 * Max image size upload
+                 *
+                 * Default: 5 (MB)
+                 */
+                'max_size' => env('JW_MEDIA_IMAGE_MAX_SIZE', 5),
                 'valid_mime' => [
                     ...Facades::defaultImageMimetypes(),
                     //

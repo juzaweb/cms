@@ -556,7 +556,7 @@ if (!function_exists('is_admin')) {
      * @param User|null $user
      * @return bool
      */
-    function is_admin($user = null): bool
+    function is_admin(?User $user = null): bool
     {
         if (empty($user)) {
             /**

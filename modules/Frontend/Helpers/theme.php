@@ -35,6 +35,16 @@ function theme_assets(string $path, string $theme = null): ?string
     return ThemeLoader::assets($path, $theme);
 }
 
+function theme_asset(string $path, string $theme = null): ?string
+{
+    return ThemeLoader::assets($path, $theme);
+}
+
+function plugin_asset(string $path, string $plugin = null): ?string
+{
+    return Plugin::assets($plugin, $path);
+}
+
 function plugin_assets(string $path, string $plugin = null): ?string
 {
     return Plugin::assets($plugin, $path);
