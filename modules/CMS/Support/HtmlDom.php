@@ -12,7 +12,7 @@ namespace Juzaweb\CMS\Support;
 
 class HtmlDom
 {
-    public $root = null;
+    public ?HtmlDomNode $root = null;
     public $nodes = array();
     public $callback = null;
     public $lowercase = false;
@@ -128,8 +128,6 @@ class HtmlDom
         $defaultSpanText = DEFAULT_SPAN_TEXT,
         $options = 0
     ) {
-        global $debug_object;
-
         // prepare
         $this->prepare($str, $lowercase, $defaultBRText, $defaultSpanText);
 

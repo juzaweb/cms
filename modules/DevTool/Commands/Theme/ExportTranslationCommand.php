@@ -35,8 +35,8 @@ class ExportTranslationCommand extends Command
     protected function getArguments(): array
     {
         return [
-            ['theme', InputArgument::REQUIRED, 'The name of theme will be import.'],
-            ['language', InputArgument::OPTIONAL, 'The name of theme will be import.'],
+            ['theme', InputArgument::REQUIRED, 'The name of theme will be export.'],
+            ['language', InputArgument::OPTIONAL, 'The name of theme will be export.'],
         ];
     }
 }

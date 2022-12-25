@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\UseSlug;
 
 /**
  * Juzaweb\Backend\Models\Resource
@@ -53,12 +54,14 @@ use Juzaweb\CMS\Models\Model;
  * @method static Builder|Resource whereThumbnail($value)
  * @method static Builder|Resource whereType($value)
  * @method static Builder|Resource whereUpdatedAt($value)
+ * @method static Builder|Resource whereMeta($key, $value)
+ * @method static Builder|Resource orWhereMeta($key, $value)
  * @mixin \Eloquent
- * @property int|null $site_id
- * @method static Builder|Resource whereSiteId($value)
  */
 class Resource extends Model
 {
+    use UseSlug;
+    
     protected $table = 'resources';
 
     protected $fillable = [
@@ -71,10 +74,11 @@ class Resource extends Model
         'json_metas',
         'parent_id',
         'display_order',
+        'slug',
     ];
 
     protected $casts = [
-        'json_metas' => 'array'
+        'json_metas' => 'array',
     ];
 
     public static function getStatuses(): array
@@ -120,6 +124,22 @@ class Resource extends Model
     {
         return $builder->where('status', '=', 'publish');
     }
+    
+    public function scopeWhereMeta(Builder $builder, $key, $value = null): Builder
+    {
+        return $builder->whereHas(
+            'metas',
+            fn ($q) => $q->where('meta_key', $key)->where('meta_value', $value)
+        );
+    }
+    
+    public function scopeOrWhereMeta(Builder $builder, $key, $value = null): Builder
+    {
+        return $builder->orWhereHas(
+            'metas',
+            fn ($q) => $q->where('meta_key', $key)->where('meta_value', $value)
+        );
+    }
 
     public function syncMetas(array $data = [])
     {
@@ -150,6 +170,33 @@ class Resource extends Model
         $this->metas()
             ->whereNotIn('meta_key', array_keys($data))
             ->delete();
+    }
+    
+    public function syncMetasWithoutDetaching(array $data = [])
+    {
+        $metas = $this->json_metas;
+        foreach ($data as $key => $val) {
+            if (is_array($val)) {
+                $val = json_encode($val);
+            }
+        
+            $this->metas()->updateOrCreate(
+                [
+                    'meta_key' => $key
+                ],
+                [
+                    'meta_value' => $val
+                ]
+            );
+        
+            $metas[$key] = $val;
+        }
+    
+        $this->update(
+            [
+                'json_metas' => $metas
+            ]
+        );
     }
 
     public function getMetas(): ?array

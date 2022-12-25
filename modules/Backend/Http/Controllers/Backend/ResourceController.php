@@ -30,8 +30,8 @@ class ResourceController extends BackendController
 
     protected function afterSave($data, $model, ...$params)
     {
-        if (method_exists($model, 'syncMetas')) {
-            $model->syncMetas($data['meta'] ?? []);
+        if (method_exists($model, 'syncMetasWithoutDetaching')) {
+            $model->syncMetasWithoutDetaching($data['meta'] ?? []);
         }
     }
 
