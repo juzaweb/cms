@@ -126,7 +126,7 @@ class PostController extends FrontendController
 
     public function comment(CommentRequest $request, ...$slug): JsonResponse|RedirectResponse
     {
-        $base = explode('/', $slug)[0];
+        $base = $slug[0];
         $slug = $this->getPostSlug($slug);
 
         $permalink = $this->getPermalinks($base);
