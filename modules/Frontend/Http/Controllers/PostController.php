@@ -124,8 +124,9 @@ class PostController extends FrontendController
         );
     }
 
-    public function comment(CommentRequest $request, ...$slug): JsonResponse|RedirectResponse
+    public function comment(CommentRequest $request, $slug): JsonResponse|RedirectResponse
     {
+        $slug = explode('/', $slug);
         $base = $slug[0];
         $slug = $this->getPostSlug($slug);
 
