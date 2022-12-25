@@ -167,6 +167,6 @@ class DashboardController extends BackendController
 
     protected function countUserByDay(string $day): int
     {
-        return User::whereDay('created_at', '=', $day)->count('id');
+        return User::whereDate('created_at', '=', $day)->count('id');
     }
 }

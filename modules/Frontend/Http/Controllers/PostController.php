@@ -12,7 +12,6 @@ namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\CommentResource;
@@ -57,11 +56,20 @@ class PostController extends FrontendController
 
     public function detail(...$slug)
     {
+        do_action("frontend.post_type.detail", $slug);
+        
         $base = $slug[0];
-        $postSlug = $slug[1];
-
+        $postSlug = $this->getPostSlug($slug);
         $permalink = $this->getPermalinks($base);
+        
         $postType = HookAction::getPostTypes($permalink->get('post_type'));
+    
+        do_action(
+            "frontend.post_type.{$permalink->get('post_type')}.detail",
+            $slug,
+            $postSlug,
+            $permalink
+        );
 
         /**
          * @var Post $postModel
@@ -69,7 +77,7 @@ class PostController extends FrontendController
         $postModel = $postType->get('model')::createFrontendDetailBuilder()
             ->where('slug', $postSlug)
             ->firstOrFail();
-
+        
         Facades::$isPostPage = true;
 
         Facades::$post = $postModel;
@@ -116,10 +124,10 @@ class PostController extends FrontendController
         );
     }
 
-    public function comment(CommentRequest $request, $slug): JsonResponse|RedirectResponse
+    public function comment(CommentRequest $request, ...$slug): JsonResponse|RedirectResponse
     {
         $base = explode('/', $slug)[0];
-        $slug = explode('/', $slug)[1];
+        $slug = $this->getPostSlug($slug);
 
         $permalink = $this->getPermalinks($base);
         $postType = HookAction::getPostTypes($permalink->get('post_type'));
@@ -148,5 +156,12 @@ class PostController extends FrontendController
         do_action('post_type.comment.saved', $comment, $post);
 
         return $this->success(trans('cms::app.comment_success'));
+    }
+    
+    private function getPostSlug(array $slug): string
+    {
+        unset($slug[0]);
+        
+        return implode('/', $slug);
     }
 }

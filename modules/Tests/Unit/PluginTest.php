@@ -39,11 +39,7 @@ class PluginTest extends TestCase
         $dbPlugins = get_config('plugin_statuses', []);
         $dbPlugins = array_keys($dbPlugins);
         $notEnable = collect(array_keys($plugins))
-            ->filter(
-                function ($item) use ($dbPlugins) {
-                    return !in_array($item, $dbPlugins);
-                }
-            )
+            ->filter(fn ($item) => !in_array($item, $dbPlugins))
             ->all();
 
         $this->assertEmpty($notEnable);
