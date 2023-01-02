@@ -93,6 +93,8 @@ use Laravel\Passport\HasApiTokens;
  * @property-read int|null $metas_count
  * @property-read PasswordReset|null $passwordReset
  * @method static Builder|User whereJsonMetas($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|SocialToken[] $socialTokens
+ * @property-read int|null $social_tokens_count
  */
 class User extends Authenticatable
 {

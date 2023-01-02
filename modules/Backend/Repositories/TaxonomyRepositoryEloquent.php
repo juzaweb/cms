@@ -6,7 +6,6 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
-use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
 use Juzaweb\CMS\Traits\Criterias\UseFilterCriteria;
 use Juzaweb\CMS\Traits\Criterias\UseSearchCriteria;
 use Juzaweb\CMS\Traits\Criterias\UseSortableCriteria;
@@ -30,7 +29,12 @@ class TaxonomyRepositoryEloquent extends BaseRepositoryEloquent implements Taxon
         'taxonomy',
     ];
     
-    public function frontendDetail(string $slug): Taxonomy
+    public function findBySlug(string $slug): null|Taxonomy
+    {
+        return $this->model->newQuery()->where('slug', $slug)->firstOrFail();
+    }
+    
+    public function frontendDetail(string $slug): ?Taxonomy
     {
         $this->applyCriteria();
         $this->applyScope();
@@ -43,11 +47,6 @@ class TaxonomyRepositoryEloquent extends BaseRepositoryEloquent implements Taxon
         return $this->parserResult($result);
     }
     
-    /**
-     * @param  int  $limit
-     * @return LengthAwarePaginator
-     * @throws RepositoryException
-     */
     public function frontendListPaginate(int $limit): LengthAwarePaginator
     {
         $this->applyCriteria();

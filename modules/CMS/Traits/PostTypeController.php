@@ -300,7 +300,6 @@ trait PostTypeController
 
     /**
      * @param Model|Post $model
-     * @return string
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */

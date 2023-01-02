@@ -41,6 +41,7 @@ use Juzaweb\CMS\Models\Permission as BasePermission;
  * @mixin \Eloquent
  * @property string|null $description
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereDescription($value)
+ * @property int $group_id
  */
 class Permission extends BasePermission
 {

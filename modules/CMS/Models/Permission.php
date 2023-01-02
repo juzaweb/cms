@@ -39,6 +39,8 @@ use Juzaweb\CMS\Traits\Permission\RefreshesPermissionCache;
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $group_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereGroupId($value)
  */
 class Permission extends Model implements PermissionContract
 {

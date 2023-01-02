@@ -90,6 +90,11 @@ use Spatie\Feed\FeedItem;
  * @property-read int|null $tags_count
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereDomain($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUrl($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\PostLike[] $likes
+ * @property-read int|null $likes_count
+ * @property-read int|null $ratings_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Resource[] $resources
+ * @property-read int|null $resources_count
  */
 class Post extends Model implements Feedable
 {

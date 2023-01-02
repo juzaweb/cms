@@ -33,6 +33,11 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
  * @mixin \Eloquent
  * @property int|null $site_id
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereSiteId($value)
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $notifiable
+ * @method static \Illuminate\Notifications\DatabaseNotificationCollection|static[] all($columns = ['*'])
+ * @method static \Illuminate\Notifications\DatabaseNotificationCollection|static[] get($columns = ['*'])
+ * @method static Builder|DatabaseNotification read()
+ * @method static Builder|DatabaseNotification unread()
  */
 class Notification extends DatabaseNotification
 {

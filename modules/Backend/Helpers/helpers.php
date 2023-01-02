@@ -228,16 +228,16 @@ if (!function_exists('upload_url')) {
         if (is_url($path)) {
             return $path;
         }
-
-        if (empty($path)) {
+    
+        $storage = Storage::disk('public');
+        if (empty($path) || !$storage->exists(jw_basepath($path))) {
             if ($default) {
                 return $default;
             }
 
             return asset('jw-styles/juzaweb/images/thumb-default.png');
         }
-
-        $storage = Storage::disk('public');
+        
         if ($size) {
             $filename = File::name($path);
             $pathSize = str_replace($filename, "{$filename}_{$size}", $path);
@@ -245,17 +245,13 @@ if (!function_exists('upload_url')) {
             if ($storage->exists(jw_basepath($pathSize))) {
                 return $storage->url($pathSize);
             }
+    
+            if (config('juzaweb.filemanager.image_resizer')) {
+                return asset("jw-styles/images/resize/{$size}/{$path}");
+            }
         }
-
-        if ($storage->exists(jw_basepath($path))) {
-            return $storage->url($path);
-        }
-
-        if ($default) {
-            return $default;
-        }
-
-        return asset('jw-styles/juzaweb/images/thumb-default.png');
+    
+        return $storage->url($path);
     }
 }
 

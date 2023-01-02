@@ -57,6 +57,10 @@ use Juzaweb\CMS\Traits\UseSlug;
  * @method static Builder|Resource whereMeta($key, $value)
  * @method static Builder|Resource orWhereMeta($key, $value)
  * @mixin \Eloquent
+ * @property int|null $site_id
+ * @property string|null $slug
+ * @method static Builder|Resource whereSiteId($value)
+ * @method static Builder|Resource whereSlug($value)
  */
 class Resource extends Model
 {
