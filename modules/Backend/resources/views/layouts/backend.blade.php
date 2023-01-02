@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="turbolinks-cache-control" content="no-cache">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? '' }}</title>
@@ -34,17 +33,16 @@
         <div class="juzaweb__menuLeft__outer">
             <div class="juzaweb__menuLeft__logo__container">
                 <a href="/{{ config('juzaweb.admin_prefix') }}">
-                <div class="juzaweb__menuLeft__logo">
-                    <img src="{{ asset('jw-styles/juzaweb/images/logo.svg') }}" class="mr-1" alt="Juzaweb">
-                    <div class="juzaweb__menuLeft__logo__name">JuzaWeb</div>
-                    <div class="juzaweb__menuLeft__logo__descr">Cms</div>
-                </div>
-
+                    <div class="juzaweb__menuLeft__logo">
+                        <img src="{{ asset('jw-styles/juzaweb/images/logo.svg') }}" class="mr-1" alt="Juzaweb">
+                        <div class="juzaweb__menuLeft__logo__name">JuzaWeb</div>
+                        <div class="juzaweb__menuLeft__logo__descr">Cms</div>
+                    </div>
                 </a>
                 {{--<div class="juzaweb__menuLeft__logo">
                     <div class="juzaweb__menuLeft__logo__name">
                         <a href="/{{ config('juzaweb.admin_prefix') }}">
-                            <img src="{{ asset('jw-styles/juzaweb/images/logo.png') }}" alt="">
+                            <img src="{{ asset('jw-styles/juzaweb/images/logo.png') }}" class="w-100" alt="Juzaweb Logo">
                         </a>
                     </div>
                 </div>--}}

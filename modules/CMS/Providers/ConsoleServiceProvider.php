@@ -19,6 +19,7 @@ use Juzaweb\CMS\Console\Commands\PluginAutoloadCommand;
 use Juzaweb\CMS\Console\Commands\SendMailCommand;
 use Juzaweb\CMS\Console\Commands\ShowSlotCommand;
 use Juzaweb\CMS\Console\Commands\UpdateCommand;
+use Juzaweb\CMS\Console\Commands\VersionCommand;
 use Juzaweb\CMS\Support\ServiceProvider;
 
 class ConsoleServiceProvider extends ServiceProvider
@@ -32,6 +33,7 @@ class ConsoleServiceProvider extends ServiceProvider
         AutoClearSlotCommand::class,
         ShowSlotCommand::class,
         ClearCacheExpiredCommand::class,
+        VersionCommand::class
     ];
 
     public function boot()

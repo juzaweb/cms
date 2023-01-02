@@ -2,8 +2,10 @@
 
 namespace Juzaweb\Backend\Repositories;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 
 /**
@@ -20,18 +22,44 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         return Post::class;
     }
     
-    public function createSelectFrontendBuilder(): Builder
+    public function findBySlug(string $slug): null|Post
     {
-        $builder = $this->model->newQuery()->with(
-            [
-                'createdBy' => function ($q) {
-                    $q->cacheFor(3600);
-                },
-                'taxonomies' => function ($q) {
-                    $q->cacheFor(3600);
-                },
-            ]
-        )
+        $result = $this->createFrontendDetailBuilder()->where(['slug' => $slug])->firstOrFail();
+    
+        return $this->parserResult($result);
+    }
+    
+    public function frontendListPaginate(int $limit): LengthAwarePaginator
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+        
+        $result = $this->createSelectFrontendBuilder()->paginate($limit);
+        
+        $this->resetModel();
+        $this->resetScope();
+        
+        return $this->parserResult($result);
+    }
+    
+    public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy): LengthAwarePaginator
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+        
+        $result = $this->createSelectFrontendBuilder()
+            ->whereTaxonomy($taxonomy)
+            ->paginate($limit);
+        
+        $this->resetModel();
+        $this->resetScope();
+        
+        return $this->parserResult($result);
+    }
+    
+    public function createSelectFrontendBuilder(): Builder|Taxonomy
+    {
+        $builder = $this->model->newQuery()->with($this->withFrontendDefaults())
             ->cacheFor(3600)
             ->select(
                 [
@@ -57,20 +85,23 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
     
     public function createFrontendDetailBuilder(): Builder
     {
-        $builder = $this->model->newQuery()->with(
-            [
-                'createdBy' => function ($q) {
-                    $q->cacheFor(3600);
-                },
-                'taxonomies' => function ($q) {
-                    $q->cacheFor(3600);
-                },
-            ]
-        )
+        $builder = $this->model->newQuery()->with($this->withFrontendDefaults())
             ->cacheFor(3600)
             ->whereIn('status', [Post::STATUS_PUBLISH, Post::STATUS_PRIVATE]);
         
         return apply_filters('post.createFrontendDetailBuilder', $builder);
+    }
+    
+    public function withFrontendDefaults(): array
+    {
+        return [
+            'createdBy' => function ($q) {
+                $q->cacheFor(3600);
+            },
+            'taxonomies' => function ($q) {
+                $q->cacheFor(3600);
+            },
+        ];
     }
     
     public function getStatuses(string $type = 'posts'): array

@@ -155,7 +155,7 @@ return [
              * Default: file
              */
             'driver' => env('JW_QUERY_CACHE_DRIVER', 'file'),
-        ]
+        ],
     ],
 
     /**
@@ -187,6 +187,13 @@ return [
             ...Facades::defaultSVGMimetypes(),
             //
         ],
+        
+        /**
+         * Server Side Image Resizer
+         *
+         * Default: true
+         */
+        'image_resizer' => env('JW_IMAGE_RESIZER', true),
 
         /**
          * File type
