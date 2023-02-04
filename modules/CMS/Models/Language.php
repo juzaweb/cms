@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
@@ -74,7 +75,14 @@ class Language extends Model
 
         set_config('language', $language->code);
     }
-
+    
+    public static function languages(): Collection
+    {
+        return Language::cacheFor(config('juzaweb.performance.query_cache.lifetime'))
+            ->all()
+            ->keyBy('code');
+    }
+    
     public function isDefault(): bool
     {
         return $this->default;

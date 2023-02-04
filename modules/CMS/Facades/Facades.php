@@ -107,37 +107,88 @@ class Facades
     public static function defaultConfigs(): array
     {
         return [
-            'title',
-            'description',
-            'banner',
-            'logo',
-            'icon',
-            'banner',
-            'sitename',
-            'user_registration',
+            'title' => [
+                'show_api' => true,
+            ],
+            'description' => [
+                'show_api' => true,
+            ],
+            'banner' => [
+                'show_api' => true,
+            ],
+            'logo' => [
+                'show_api' => true,
+            ],
+            'icon' => [
+                'show_api' => true,
+            ],
+            'sitename' => [
+                'show_api' => true,
+            ],
+            'user_registration' => [
+                'show_api' => true,
+            ],
             'user_verification',
-            'comment_able',
-            'comment_type',
-            'comments_per_page',
+            'comment_able' => [
+                'show_api' => true,
+            ],
+            'comment_type' => [
+                'show_api' => true,
+            ],
+            'comments_per_page' => [
+                'show_api' => true,
+            ],
             'comments_approval',
-            'author_name',
-            'facebook',
-            'twitter',
-            'pinterest',
-            'youtube',
-            'google_analytics',
-            'language',
-            'timezone',
-            'date_format',
-            'date_format_custom',
-            'time_format',
-            'time_format_custom',
-            'fb_app_id',
+            'author_name' => [
+                'show_api' => true,
+            ],
+            'facebook' => [
+                'show_api' => true,
+            ],
+            'twitter' => [
+                'show_api' => true,
+            ],
+            'pinterest' => [
+                'show_api' => true,
+            ],
+            'youtube' => [
+                'show_api' => true,
+            ],
+            'google_analytics' => [
+                'show_api' => true,
+            ],
+            'language' => [
+                'show_api' => true,
+            ],
+            'timezone' => [
+                'show_api' => true,
+            ],
+            'date_format' => [
+                'show_api' => true,
+            ],
+            'date_format_custom' => [
+                'show_api' => true,
+            ],
+            'time_format' => [
+                'show_api' => true,
+            ],
+            'time_format_custom' => [
+                'show_api' => true,
+            ],
+            'fb_app_id' => [
+                'show_api' => true,
+            ],
             'backend_messages',
             'socialites',
-            'posts_per_page',
-            'posts_per_rss',
-            'captcha',
+            'posts_per_page' => [
+                'show_api' => true,
+            ],
+            'posts_per_rss' => [
+                'show_api' => true,
+            ],
+            'captcha' => [
+                'show_api' => true,
+            ],
             'google_captcha',
         ];
     }

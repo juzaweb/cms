@@ -273,8 +273,8 @@ trait RegisterHookAction
                     'label' => '',
                     'base' => '',
                     'key' => $key,
-                    'callback' => '',
-                    'post_type' => '',
+                    'callback' => null,
+                    'post_type' => null,
                     'position' => 20,
                 ],
                 $args
@@ -462,7 +462,7 @@ trait RegisterHookAction
             'data' => $args,
         ];
         
-        $this->globalData->set('theme_settings.'.$name, new Collection($args));
+        $this->globalData->set("theme_settings.{$name}", new Collection($args));
     }
     
     public function registerProfilePage(string $key, array $args = []): void

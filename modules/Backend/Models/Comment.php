@@ -51,18 +51,19 @@ class Comment extends Model
         'website',
         'content',
         'status',
+        'object_id',
         'object_type',
         'user_id',
     ];
 
     protected $touches = ['post'];
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function post()
+    public function post(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Post::class, 'object_id', 'id');
     }

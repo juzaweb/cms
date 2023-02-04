@@ -15,35 +15,34 @@ use Juzaweb\Backend\Http\Resources\PostCollection;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Http\Controllers\ApiController;
+use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
 
 class PostController extends ApiController
 {
-    protected PostRepository $postRepository;
-
-    public function __construct(PostRepository $postRepository)
+    public function __construct(protected PostRepository $postRepository)
     {
-        $this->postRepository = $postRepository;
     }
     
     public function index(Request $request, $type): PostCollection
     {
-        //$this->postRepository->pushCriteria(new SearchCriteria($request));
-
-        //$this->postRepository->pushCriteria(new FilterCriteria($request));
-
-        $query = $this->postRepository->createSelectFrontendBuilder()
-            ->where('type', '=', $type);
-
+        $queries = $request->query();
+        $queries['type'] = $type;
+        $this->postRepository->pushCriteria(new SearchCriteria($queries));
+        $this->postRepository->pushCriteria(new FilterCriteria($queries));
+        $this->postRepository->pushCriteria(new SortCriteria($queries));
+    
         $limit = $this->getQueryLimit($request);
-
-        $rows = $query->paginate($limit);
-
+    
+        $rows = $this->postRepository->frontendListPaginate($limit);
+        
         return new PostCollection($rows);
     }
     
-    public function show(Request $request, $type, $slug): PostResource
+    public function show($type, $slug): PostResource
     {
-        $model = $this->postRepository->createSelectFrontendBuilder()
+        $model = $this->postRepository->createFrontendDetailBuilder()
             ->where('type', '=', $type)
             ->where('slug', '=', $slug)
             ->firstOrFail();

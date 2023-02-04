@@ -4,9 +4,9 @@ use Juzaweb\API\Http\Controllers\Admin\GeneralController;
 
 Route::group(
     [
-        'prefix' => 'menus',
+        //'prefix' => 'menus',
     ],
     function () {
-        Route::get('admin-menu', [GeneralController::class, 'adminMenu']);
+        Route::get('menu-left', [GeneralController::class, 'adminMenu']);
     }
 );

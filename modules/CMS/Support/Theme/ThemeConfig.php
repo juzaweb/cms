@@ -11,19 +11,21 @@
 namespace Juzaweb\CMS\Support\Theme;
 
 use Illuminate\Cache\CacheManager;
+use Juzaweb\CMS\Contracts\ThemeConfigContract;
 use Juzaweb\CMS\Models\ThemeConfig as ConfigModel;
 use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Model;
 
-class ThemeConfig
+class ThemeConfig implements ThemeConfigContract
 {
-    protected $configs;
-    protected $theme;
+    protected array $configs;
+    protected string $theme;
     protected string $cacheKey = 'jw_theme_configs';
 
     /**
      * @var CacheManager
      */
-    protected $cache;
+    protected CacheManager $cache;
 
     public function __construct(Container $app, $theme)
     {
@@ -53,17 +55,27 @@ class ThemeConfig
             );
     }
 
-    public function getConfig($key, $default = null)
+    public function getConfig(string $key, string|array $default = null): null|string|array
     {
         $value = $this->configs[$key] ?? $default;
+        
         if (is_json($value)) {
             return json_decode($value, true);
         }
 
         return $value;
     }
+    
+    public function getConfigs(array $keys, string|array $default = null): array
+    {
+        $configs = [];
+        foreach ($keys as $key) {
+            $configs[$key] = $this->getConfig($key, $default);
+        }
+        return $configs;
+    }
 
-    public function setConfig($key, $value = null)
+    public function setConfig(string $key, string|array $value = null): Model|ConfigModel
     {
         if (is_array($value)) {
             $value = array_merge(get_config($key, []), $value);
@@ -89,6 +101,6 @@ class ThemeConfig
 
     protected function getCacheKey(): string
     {
-        return cache_prefix($this->cacheKey);
+        return cache_prefix("{$this->cacheKey}_{$this->theme}");
     }
 }
