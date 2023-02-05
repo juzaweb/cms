@@ -14,17 +14,17 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 
 /**
- * @method \Illuminate\Database\Eloquent\Builder whereFilter(array $params)
+ * @method Builder whereFilter(array $params)
  */
 trait ResourceModel
 {
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param  Builder  $builder
      * @param array $params
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function scopeWhereFilter($builder, $params = [])
+    public function scopeWhereFilter($builder, $params = []): Builder
     {
         if (empty($this->searchFields)) {
             $this->searchFields = [$this->getFieldName()];
@@ -54,5 +54,14 @@ trait ResourceModel
         }
 
         return 'name';
+    }
+    
+    public static function getStatuses(): array
+    {
+        return [
+            'publish' => trans('cms::app.publish'),
+            'draft' => trans('cms::app.draft'),
+            'trash' => trans('cms::app.trash'),
+        ];
     }
 }
