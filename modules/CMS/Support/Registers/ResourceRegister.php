@@ -94,6 +94,7 @@ class ResourceRegister
                 'label' => $this->args['label'],
                 'label_action' => $this->args['label'],
                 'description' => '',
+                'repository' => null,
                 'post_type' => $this->postType,
                 'priority' => 20,
                 'supports' => [],

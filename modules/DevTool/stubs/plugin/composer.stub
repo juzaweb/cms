@@ -5,13 +5,12 @@
         "laravel": {
             "providers": [
                 "$MODULE_NAMESPACE$\\$PROVIDER_NAMESPACE$\\$MODULE_NAME$ServiceProvider"
-            ],
-            "aliases": {}
+            ]
         },
         "juzaweb": {
             "name": "$LOWER_NAME$",
             "domain": "$MODULE_DOMAIN$",
-            "cms_min": "1.0.9",
+            "cms_min": "3.3",
             "version": "1.0"
         }
     },
