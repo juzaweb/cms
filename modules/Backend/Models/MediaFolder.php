@@ -2,6 +2,8 @@
 
 namespace Juzaweb\Backend\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Juzaweb\CMS\Models\Model;
 
 /**
@@ -40,22 +42,22 @@ class MediaFolder extends Model
         'type',
     ];
 
-    public function files()
+    public function files(): HasMany
     {
         return $this->hasMany(MediaFile::class, 'folder_id', 'id');
     }
 
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(MediaFolder::class, 'folder_id', 'id');
     }
 
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(MediaFolder::class, 'folder_id', 'id');
     }
 
-    public function deleteFolder()
+    public function deleteFolder(): ?bool
     {
         foreach ($this->children as $child) {
             $child->deleteFolder();
@@ -68,7 +70,7 @@ class MediaFolder extends Model
         return $this->delete();
     }
 
-    public static function folderExists($name, $parentId)
+    public static function folderExists($name, $parentId): bool
     {
         return self::where('name', '=', $name)
             ->where('folder_id', '=', $parentId)

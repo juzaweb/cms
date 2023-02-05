@@ -9,6 +9,8 @@
  */
 
 return [
+    'route_prefix' => null,
+    
     'stubs' => [
         'files' => [
             'index' => 'views/index.twig',
@@ -30,5 +32,5 @@ return [
             'views/template-parts' => 'views/template-parts',
             'views/templates' => 'views/templates'
         ],
-    ]
+    ],
 ];

@@ -13,6 +13,7 @@ namespace Juzaweb\Backend\Models;
 use Illuminate\Support\Collection;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
  * Juzaweb\Backend\Models\MenuItem
@@ -56,7 +57,11 @@ use Juzaweb\CMS\Models\Model;
  */
 class MenuItem extends Model
 {
+    use QueryCacheable;
+    
     public $timestamps = false;
+    
+    public string $cachePrefix = 'menu_items_';
 
     protected $table = 'menu_items';
 
@@ -75,12 +80,12 @@ class MenuItem extends Model
         'num_order',
     ];
 
-    public function menu()
+    public function menu(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Menu::class, 'menu_id', 'id');
     }
 
-    public function taxonomy()
+    public function taxonomy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Taxonomy::class, 'model_id', 'id')->where(
             'model_class',
@@ -89,7 +94,7 @@ class MenuItem extends Model
         );
     }
 
-    public function post()
+    public function post(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Taxonomy::class, 'model_id', 'id')->where(
             'model_class',
@@ -97,19 +102,45 @@ class MenuItem extends Model
             'Juzaweb\\Models\\Post'
         );
     }
+    
+    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(static::class, 'parent_id', 'id');
+    }
+    
+    public function children(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(static::class, 'parent_id', 'id');
+    }
+    
+    public function recursiveChildren(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->children()->with(
+            [
+                'recursiveChildren' => fn ($q) => $q->cacheFor(
+                    config('juzaweb.performance.query_cache.lifetime')
+                )
+            ]
+        );
+    }
 
     /**
      * @return Collection
      */
-    public function menuBox()
+    public function menuBox(): Collection
     {
-        $register = HookAction::getMenuBox($this->box_key);
-
-        return $register;
+        return HookAction::getMenuBox($this->box_key);
     }
 
-    public function isActive()
+    public function isActive(): bool
     {
         return request()->url() == $this->link;
+    }
+    
+    protected function getCacheBaseTags(): array
+    {
+        return [
+            'menu_items',
+        ];
     }
 }

@@ -101,6 +101,7 @@ trait GetHookAction
                     return [
                         $item => [
                             'type' => 'text',
+                            'show_api' => false,
                             'name' => $key,
                             'label' => trans("cms::config.{$item}"),
                         ],
@@ -108,7 +109,8 @@ trait GetHookAction
                 }
                 
                 $item['name'] = $key;
-                $item['type'] = $item['type'] ?? 'text';
+                $item['type'] = Arr::get($item, 'type', 'text');
+                $item['show_api'] = Arr::get($item, 'show_api', false);
                 
                 return [
                     $key => $item,
@@ -141,9 +143,7 @@ trait GetHookAction
         }
         
         if ($key) {
-            $permalink = Arr::get($permalinks, $key);
-            
-            return $permalink;
+            return Arr::get($permalinks, $key);
         }
         
         return $permalinks;

@@ -15,7 +15,7 @@ use Juzaweb\CMS\Http\Controllers\ApiController;
 
 class AdminApiController extends ApiController
 {
-    public function callAction($method, $parameters)
+    public function callAction($method, $parameters): \Symfony\Component\HttpFoundation\Response
     {
         do_action(Action::BACKEND_CALL_ACTION, $method, $parameters);
 

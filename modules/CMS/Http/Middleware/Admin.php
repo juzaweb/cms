@@ -33,7 +33,7 @@ class Admin
         
         global $jw_user;
         
-        if ($locale = $request->query('locale')) {
+        if ($locale = $request->query('hl')) {
             $jw_user->update(['language' => $locale]);
         }
         

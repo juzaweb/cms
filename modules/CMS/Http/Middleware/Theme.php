@@ -42,7 +42,7 @@ class Theme
                 ThemeFacade::set($currentTheme);
             }
         }
-
+        
         do_action(Action::FRONTEND_INIT, $request);
 
         return $next($request);

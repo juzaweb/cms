@@ -117,7 +117,7 @@ class PostController extends FrontendController
         );
 
         return $this->view(
-            'theme::template-parts.' . $template,
+            "theme::template-parts.{$template}",
             $data
         );
     }

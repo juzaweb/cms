@@ -155,6 +155,13 @@ return [
              * Default: file
              */
             'driver' => env('JW_QUERY_CACHE_DRIVER', 'file'),
+    
+            /**
+             * Query cache lifetime
+             *
+             * Default: 3600 (1 hour)
+             */
+            'lifetime' => env('JW_QUERY_CACHE_LIFETIME', 3600),
         ],
     ],
 

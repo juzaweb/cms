@@ -663,10 +663,10 @@ trait PostTypeModel
         );
     }
 
-    public function getLink(): bool|string
+    public function getLink($absolute = false): bool|string
     {
         if ($this->type == 'pages') {
-            return route('post', [$this->slug]);
+            return route('post', [$this->slug], $absolute);
         }
 
         $permalink = $this->getPermalink('base');
@@ -674,7 +674,7 @@ trait PostTypeModel
             return false;
         }
 
-        return route('post', ["{$permalink}/{$this->slug}"]);
+        return route('post', ["{$permalink}/{$this->slug}"], $absolute);
     }
 
     public function getThumbnail(string|bool $thumb = true): string

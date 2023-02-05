@@ -7,15 +7,21 @@ use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
+use Juzaweb\CMS\Traits\Criterias\UseFilterCriteria;
+use Juzaweb\CMS\Traits\Criterias\UseSearchCriteria;
+use Juzaweb\CMS\Traits\Criterias\UseSortableCriteria;
 
 /**
  * @property Post $model
  */
 class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepository
 {
-    protected array $searchableFields = ['title', 'description'];
+    use UseSearchCriteria, UseFilterCriteria, UseSortableCriteria;
     
-    protected array $filterableFields = ['status'];
+    protected array $searchableFields = ['title', 'description'];
+    protected array $filterableFields = ['status', 'type'];
+    protected array $sortableFields = ['id', 'status', 'title', 'views'];
+    protected array $sortableDefaults = ['id' => 'DESC'];
     
     public function model(): string
     {

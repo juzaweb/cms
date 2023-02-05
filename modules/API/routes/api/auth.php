@@ -16,7 +16,6 @@ Route::group(
     function () {
         Route::post('login', [LoginController::class, 'login']);
         Route::post('register', [RegisterController::class, 'register']);
-        Route::post('access-token', [LoginController::class, 'accessToken']);
     }
 );
 
@@ -27,5 +26,6 @@ Route::group(
     ],
     function () {
         Route::post('logout', [LoginController::class, 'logout']);
+        Route::get('profile', [LoginController::class, 'profile']);
     }
 );

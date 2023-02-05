@@ -21,7 +21,7 @@ class GeneralController extends AdminApiController
 {
     /**
      * @OA\Get(
-     *      path="/api/admin/menus/admin-menu",
+     *      path="/api/admin/menu-left",
      *      tags={"Admin / Menus"},
      *      summary="Get admin menu items",
      *      operationId="admin.menus.admin_menu",
