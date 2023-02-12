@@ -128,7 +128,9 @@ class Facades
             'user_registration' => [
                 'show_api' => true,
             ],
-            'user_verification',
+            'user_verification' => [
+                'show_api' => true,
+            ],
             'comment_able' => [
                 'show_api' => true,
             ],
@@ -138,7 +140,9 @@ class Facades
             'comments_per_page' => [
                 'show_api' => true,
             ],
-            'comments_approval',
+            'comments_approval' => [
+                'show_api' => true,
+            ],
             'author_name' => [
                 'show_api' => true,
             ],
@@ -178,8 +182,12 @@ class Facades
             'fb_app_id' => [
                 'show_api' => true,
             ],
-            'backend_messages',
-            'socialites',
+            'backend_messages' => [
+                'show_api' => false,
+            ],
+            'socialites' => [
+                'show_api' => false,
+            ],
             'posts_per_page' => [
                 'show_api' => true,
             ],
@@ -189,7 +197,9 @@ class Facades
             'captcha' => [
                 'show_api' => true,
             ],
-            'google_captcha',
+            'google_captcha' => [
+                'show_api' => false,
+            ],
         ];
     }
 

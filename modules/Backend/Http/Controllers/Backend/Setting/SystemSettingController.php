@@ -25,7 +25,7 @@ class SystemSettingController extends BackendController
         $this->hookAction = $hookAction;
     }
 
-    public function index($form = 'general'): View
+    public function index($page, $form = 'general'): View
     {
         $forms = $this->getForms();
         $configs = $this->hookAction->getConfigs()->where('form', $form);
@@ -37,16 +37,17 @@ class SystemSettingController extends BackendController
                 'title' => $title,
                 'component' => $form,
                 'forms' => $forms,
-                'configs' => $configs
+                'configs' => $configs,
+                'page' => $page,
             ]
         );
     }
 
-    public function save(SettingRequest $request): JsonResponse|RedirectResponse
+    public function save(SettingRequest $request, $page): JsonResponse|RedirectResponse
     {
         $locales = config('locales');
         $configs = $request->only($this->hookAction->getConfigs()->keys()->toArray());
-
+        
         foreach ($configs as $key => $config) {
             if ($request->has($key)) {
                 set_config($key, $config);

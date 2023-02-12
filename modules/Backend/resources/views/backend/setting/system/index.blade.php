@@ -5,7 +5,8 @@
         <div class="col-md-3">
             <div class="list-group">
                 @foreach($forms as $key => $form)
-                <a class="list-group-item @if($key == $component) active @endif" href="{{ route('admin.setting.form', [$key]) }}">{{ $form->get('name') }}</a>
+                <a class="list-group-item @if($key == $component) active @endif"
+                   href="{{ route('admin.setting.form', [$page, $key]) }}">{{ $form->get('name') }}</a>
                 @endforeach
             </div>
         </div>
@@ -20,7 +21,7 @@
                     {{ $forms[$component]['view'] }}
                 @endif
             @else
-                <form action="{{ route('admin.setting.save') }}" method="post" class="form-ajax">
+                <form action="{{ route('admin.setting.save', [$page]) }}" method="post" class="form-ajax">
                     <input type="hidden" name="form" value="{{ $component }}">
 
                     <div class="card">

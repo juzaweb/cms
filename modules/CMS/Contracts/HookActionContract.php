@@ -124,4 +124,6 @@ interface HookActionContract
      * @return void
      */
     public function registerEmailHook(string $key, array $args = []): void;
+
+    public function registerSettingPage(string $key, array $args = []): void;
 }

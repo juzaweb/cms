@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('admin.setting.save') }}" class="form-ajax">
+<form method="post" action="{{ route('admin.setting.save', [$page]) }}" class="form-ajax">
     <input type="hidden" name="form" value="recaptcha">
 
     <div class="row mt-3">
