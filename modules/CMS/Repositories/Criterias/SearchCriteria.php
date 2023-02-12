@@ -18,7 +18,7 @@ class SearchCriteria extends Criteria implements CriteriaInterface
             $this->queries = request()->all();
         }
     }
-    
+
     /**
      * Apply criteria in query repository
      *
@@ -33,24 +33,24 @@ class SearchCriteria extends Criteria implements CriteriaInterface
         if (!method_exists($repository, 'getFieldSearchable')) {
             return $model;
         }
-        
+
         $connection = config('database.default');
         $driver = config("database.connections.{$connection}.driver");
-        
+
         $fields = $repository->getFieldSearchable();
-        $keyword = Arr::get($this->queries, 'q');
+        $keyword = Arr::get($this->queries, 'q', Arr::get($this->queries, 'keyword'));
         $condition = $driver == 'pgsql' ? 'ilike' : 'like';
-        
+
         if (empty($keyword)) {
             return $model;
         }
-        
+
         $tbl = $model->getModel()->getTable();
         return $model->where(
             function ($query) use ($fields, $keyword, $tbl, $repository, $condition) {
                 $isFirstField = true;
                 $value = "%{$keyword}%";
-            
+
                 foreach ($fields as $field) {
                     if ($isFirstField) {
                         $query->where("{$tbl}.{$field}", $condition, $value);
@@ -59,7 +59,7 @@ class SearchCriteria extends Criteria implements CriteriaInterface
                         $query->orWhere("{$tbl}.{$field}", $condition, $value);
                     }
                 }
-            
+
                 if ($repository instanceof WithAppendSearch) {
                     if ($isFirstField) {
                         $query->where(

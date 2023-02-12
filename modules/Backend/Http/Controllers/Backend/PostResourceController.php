@@ -31,6 +31,13 @@ class PostResourceController extends ResourceController
             ]
         );
 
+        $this->addBreadcrumb(
+            [
+                'title' => $post->title,
+                'url' => route('admin.posts.edit', [$post->type, $post->id]),
+            ]
+        );
+
         return view(
             "{$this->viewPrefix}.index",
             $this->getDataForIndex($type, $postId)
@@ -51,6 +58,13 @@ class PostResourceController extends ResourceController
             [
                 'title' => $postType->get('label'),
                 'url' => route('admin.posts.index', [$post->type]),
+            ]
+        );
+
+        $this->addBreadcrumb(
+            [
+                'title' => $post->title,
+                'url' => route('admin.posts.edit', [$post->type, $post->id]),
             ]
         );
 

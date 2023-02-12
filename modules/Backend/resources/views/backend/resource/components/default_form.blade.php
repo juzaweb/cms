@@ -25,9 +25,11 @@
     </div>
 
     <div class="col-md-4">
+        @if(method_exists($model, 'getStatuses'))
         {{ Field::select($model, 'status', [
             'options' => $model->getStatuses()
         ]) }}
+        @endif
 
         {{ Field::text($model, 'display_order', [
             'required' => true,

@@ -25,36 +25,39 @@ class CommentController extends ApiController
 {
     public function __construct(
         protected CommentRepository $commentRepository,
-        protected PostRepository $postRepository
+        protected PostRepository    $postRepository
     ) {
     }
-    
+
     public function index(Request $request, $type, $slug): AnonymousResourceCollection
     {
         //$this->postRepository->pushCriteria(new SearchCriteria($request));
-        
+
         //$this->postRepository->pushCriteria(new FilterCriteria($request));
-        
+
         $post = $this->postRepository->findBySlug($slug);
-        
+
         if ($post->type != $type) {
             abort(403);
         }
-        
+
         $result = $this->commentRepository->getFrontendPostComments(
             $post,
             $this->getQueryLimit($request)
         );
-        
+
         return CommentResource::collection($result);
     }
-    
+
+    /**
+     * @throws \Throwable
+     */
     public function store(CommentRequest $request, $type, $slug): \Illuminate\Http\JsonResponse
     {
         $post = $this->postRepository->findBySlug($slug);
-    
+
         $postType = HookAction::getPostTypes($type);
-    
+
         if (!in_array('comment', $postType->get('supports', []))) {
             return $this->restFail(
                 [
@@ -66,7 +69,7 @@ class CommentController extends ApiController
                 __('Comments is not supported.')
             );
         }
-    
+
         DB::beginTransaction();
         try {
             $data = $request->all();
@@ -78,9 +81,9 @@ class CommentController extends ApiController
             DB::rollBack();
             throw $e;
         }
-    
+
         do_action('post_type.comment.saved', $comment, $post);
-        
+
         return $this->restSuccess(null, trans('cms::app.comment_success'));
     }
 }

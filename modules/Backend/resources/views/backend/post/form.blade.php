@@ -47,9 +47,11 @@
                 {{ Field::fieldByType($meta) }}
             @endforeach
 
-            @do_action('post_types.form.left', $model)
+            {{ Field::render($setting->get('fields', []), $model) }}
 
-            @do_action('post_type.'. $postType .'.form.left', $model)
+                @do_action('post_type.'. $postType .'.form.left', $model)
+
+                @do_action('post_types.form.left', $model)
         </div>
 
         <div class="col-md-3">

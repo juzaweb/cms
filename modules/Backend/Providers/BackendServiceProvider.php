@@ -40,6 +40,8 @@ use Juzaweb\Backend\Repositories\NotificationRepository;
 use Juzaweb\Backend\Repositories\NotificationRepositoryEloquent;
 use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\Backend\Repositories\PostRepositoryEloquent;
+use Juzaweb\Backend\Repositories\ResourceRepository;
+use Juzaweb\Backend\Repositories\ResourceRepositoryEloquent;
 use Juzaweb\Backend\Repositories\TaxonomyRepository;
 use Juzaweb\Backend\Repositories\TaxonomyRepositoryEloquent;
 use Juzaweb\Backend\Repositories\UserRepository;
@@ -61,6 +63,7 @@ class BackendServiceProvider extends ServiceProvider
         NotificationRepository::class => NotificationRepositoryEloquent::class,
         CommentRepository::class => CommentRepositoryEloquent::class,
         MenuRepository::class => MenuRepositoryEloquent::class,
+        ResourceRepository::class => ResourceRepositoryEloquent::class,
     ];
 
     public function boot()

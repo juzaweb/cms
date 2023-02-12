@@ -5,7 +5,7 @@
         'model' => $model,
     ])
 
-        @if($setting->get('custom_resource'))
+        @if($setting->get('fields'))
             @include('cms::backend.resource.components.custom_form')
         @else
             @include('cms::backend.resource.components.default_form')
