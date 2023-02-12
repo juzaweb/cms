@@ -27,7 +27,7 @@ class SystemSettingController extends BackendController
 
     public function index($page, $form = 'general'): View
     {
-        $forms = $this->getForms();
+        $forms = $this->getForms($page);
         $configs = $this->hookAction->getConfigs()->where('form', $form);
         $title = $forms[$form]['name'] ?? trans('cms::app.system_setting');
 
@@ -43,11 +43,11 @@ class SystemSettingController extends BackendController
         );
     }
 
-    public function save(SettingRequest $request, $page): JsonResponse|RedirectResponse
+    public function save(SettingRequest $request): JsonResponse|RedirectResponse
     {
         $locales = config('locales');
         $configs = $request->only($this->hookAction->getConfigs()->keys()->toArray());
-        
+
         foreach ($configs as $key => $config) {
             if ($request->has($key)) {
                 set_config($key, $config);
@@ -74,9 +74,10 @@ class SystemSettingController extends BackendController
         );
     }
 
-    protected function getForms(): \Illuminate\Support\Collection
+    protected function getForms(string $page): \Illuminate\Support\Collection
     {
         return collect($this->globalData->get('setting_forms'))
+            ->where('page', $page)
             ->sortBy('priority');
     }
 }

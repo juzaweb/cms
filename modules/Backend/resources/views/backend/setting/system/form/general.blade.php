@@ -20,7 +20,7 @@
         'H:i' => now()->format('H:i'),
     ]
 @endphp
-<form action="{{ route('admin.setting.save', [$page]) }}" method="post" class="form-ajax">
+<form action="{{ route('admin.setting.save') }}" method="post" class="form-ajax">
     <input type="hidden" name="form" value="{{ $component }}">
 
 <div class="card">
