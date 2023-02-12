@@ -34,8 +34,7 @@ class PostTypeDataTable extends DataTable
         $this->postType = $postType;
         $this->taxonomies = HookAction::getTaxonomies($this->postType);
 
-        $resourses = HookAction::getResource()
-            ->where('post_type', $postType['key']);
+        $resourses = HookAction::getResource()->where('post_type', $postType['key'])->whereNull('parent');
         if ($resourses->isNotEmpty()) {
             $this->resourses = $resourses;
         }
