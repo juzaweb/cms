@@ -258,7 +258,11 @@ return [
      * Default database config
      */
     'config' => [
-        ...Facades::defaultConfigs(),
-        //
+        array_merge(
+            Facades::defaultConfigs(),
+            [
+                //
+            ]
+        ),
     ]
 ];

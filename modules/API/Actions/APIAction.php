@@ -25,7 +25,7 @@ class APIAction extends Action
             $this->addAction(Action::API_DOCUMENT_INIT, [$this, 'addAPIDocumentation'], 1);
         }
     }
-    
+
     public function addAPIDocumentation()
     {
         $document = SwaggerDocument::make('frontend');
@@ -34,7 +34,7 @@ class APIAction extends Action
         $document->append(PostTypeSwaggerDocumentation::class);
         $this->hookAction->registerAPIDocument($document);
     }
-    
+
     public function addAdminDocumentation()
     {
         $apiAdmin = SwaggerDocument::make('admin');
@@ -43,7 +43,7 @@ class APIAction extends Action
         $apiAdmin->append(PostTypeAdminSwaggerDocumentation::class);
         $this->hookAction->registerAPIDocument($apiAdmin);
     }
-    
+
     public function addAdminMenu()
     {
         $this->hookAction->registerAdminPage(

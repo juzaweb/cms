@@ -385,6 +385,9 @@ trait ResourceController
         ];
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function getDataForIndex(...$params)
     {
         $dataTable = $this->getDataTable(...$params);
@@ -398,12 +401,18 @@ trait ResourceController
             ...$params
         );
 
-        return [
+        $data = [
             'title' => $this->getTitle(...$params),
             'dataTable' => $dataTable,
             'canCreate' => $canCreate,
             'linkCreate' => action([static::class, 'create'], $params),
         ];
+
+        if (method_exists($this, 'getSetting')) {
+            $data['setting'] = $this->getSetting(...$params);
+        }
+
+        return $data;
     }
 
     protected function getPathIdIndex($params)

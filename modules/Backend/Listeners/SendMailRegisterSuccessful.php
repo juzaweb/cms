@@ -51,18 +51,18 @@ class SendMailRegisterSuccessful
                     ]
                 )
             );
+        } else {
+            event(
+                new EmailHook(
+                    'register_success',
+                    [
+                        'params' => [
+                            'name' => $event->user->name,
+                            'email' => $event->user->email,
+                        ],
+                    ]
+                )
+            );
         }
-
-        event(
-            new EmailHook(
-                'register_success',
-                [
-                    'params' => [
-                        'name' => $event->user->name,
-                        'email' => $event->user->email,
-                    ],
-                ]
-            )
-        );
     }
 }

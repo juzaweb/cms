@@ -167,9 +167,18 @@ class Field implements FieldContract
                 'value',
                 $label->getAttribute($name)
             );
+
+            if (is_callable($options['value'])) {
+                $options['value'] = call_user_func($options['value'], ...[$label, $name, $options]);
+            }
+
             $options['label'] = $options['label'] ?? $label->attributeLabel($name);
         } else {
             $options['value'] = $options['value'] ?? $options['default'] ?? null;
+
+            if (is_callable($options['value'])) {
+                $options['value'] = call_user_func($options['value'], ...[$label, $name, $options]);
+            }
         }
 
         if (is_string($label)) {

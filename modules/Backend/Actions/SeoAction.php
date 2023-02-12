@@ -22,7 +22,8 @@ class SeoAction extends Action
     {
         $this->addAction(
             Action::POSTS_FORM_LEFT_ACTION,
-            [$this, 'addFormSeo']
+            [$this, 'addFormSeo'],
+            999
         );
 
         $this->addAction(

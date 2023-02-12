@@ -458,6 +458,7 @@ return [
     'upload_theme' => 'Upload Theme',
     'upload_plugin' => 'Upload Plugin',
     'plugin_editor' => 'Plugin Editor',
+    'module' => 'Module',
     'socials' => [
         'facebook' => 'Login with Facebook',
         'google' => 'Login with Google',

@@ -122,20 +122,24 @@ class ResourceDatatable extends DataTable
 
         return $query;
     }
-    
+
     public function getData(Request $request): array
     {
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'desc');
         $offset = $request->get('offset', 0);
         $limit = (int) $request->get('limit', 20);
-        
+
         if ($repository = $this->getSetting($this->type)->get('repository')) {
             /**
              * @var \Juzaweb\CMS\Repositories\BaseRepository $repository
              */
             $repository = app($repository);
             $queries = $request->query();
+            if ($this->postId) {
+                $queries['post_id'] = $this->postId;
+            }
+
             $repository->pushCriteria(new SearchCriteria($queries));
             $repository->pushCriteria(new FilterCriteria($queries));
             $repository->pushCriteria(new SortCriteria($queries));
@@ -151,7 +155,7 @@ class ResourceDatatable extends DataTable
             $query->limit($limit);
             $rows = $query->get();
         }
-        
+
         return [$count, $rows];
     }
 
