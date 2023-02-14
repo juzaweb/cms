@@ -66,6 +66,7 @@ class HookAction implements HookActionContract
             'header' => true,
             'footer' => true,
             'priority' => 10,
+            'page' => 'system',
         ];
 
         $args = array_merge($defaults, $args);

@@ -582,9 +582,19 @@ trait RegisterHookAction
         $defaults = [
             'key' => $key,
             'label' => '',
+            'menu' => [
+                'icon' => 'fa fa-cogs',
+                'parent' => 'setting',
+            ]
         ];
 
         $args = array_merge($defaults, $args);
+
+        $this->addAdminMenu(
+            $args['label'],
+            "setting.{$key}",
+            $args['menu']
+        );
 
         $this->globalData->set('setting_pages.'.$key, new Collection($args));
     }
