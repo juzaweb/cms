@@ -5,7 +5,7 @@ namespace Juzaweb\CMS\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static \Juzaweb\CMS\Support\Plugin[] all()
+ * @method static \Juzaweb\CMS\Support\Plugin[] all(bool $collection = false)
  * @method static \Juzaweb\CMS\Support\Plugin|null find(string $name)
  * @method static delete(string $plugin)
  * @method static enable(string $plugin)
