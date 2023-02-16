@@ -473,47 +473,16 @@ trait PostTypeModel
 
     public function syncMetas(array $data = []): void
     {
-        $metas = [];
-        $keys = $this->getPostTypeMetaKeys();
+        $this->syncMetasWithoutDetaching($data);
 
-        foreach ($data as $key => $val) {
-            if (!in_array($key, $keys)) {
-                continue;
-            }
-
-            $this->metas()->updateOrCreate(
-                [
-                    'meta_key' => $key
-                ],
-                [
-                    'meta_value' => is_array($val) ? json_encode($val) : $val
-                ]
-            );
-
-            $metas[$key] = $val;
-        }
-
-        $this->update(
-            [
-                'json_metas' => $metas
-            ]
-        );
-
-        $this->metas()
-            ->whereNotIn('meta_key', array_keys($data))
-            ->delete();
+        $this->metas()->whereNotIn('meta_key', array_keys($data))->delete();
     }
 
     public function syncMetasWithoutDetaching(array $data = []): void
     {
         $metas = $this->json_metas;
-        $keys = $this->getPostTypeMetaKeys();
 
         foreach ($data as $key => $val) {
-            if (!in_array($key, $keys)) {
-                continue;
-            }
-
             $this->metas()->updateOrCreate(
                 [
                     'meta_key' => $key
@@ -663,10 +632,10 @@ trait PostTypeModel
         );
     }
 
-    public function getLink(): bool|string
+    public function getLink($absolute = false): bool|string
     {
         if ($this->type == 'pages') {
-            return route('post', [$this->slug]);
+            return route('post', [$this->slug], $absolute);
         }
 
         $permalink = $this->getPermalink('base');
@@ -674,7 +643,7 @@ trait PostTypeModel
             return false;
         }
 
-        return route('post', ["{$permalink}/{$this->slug}"]);
+        return route('post', ["{$permalink}/{$this->slug}"], $absolute);
     }
 
     public function getThumbnail(string|bool $thumb = true): string

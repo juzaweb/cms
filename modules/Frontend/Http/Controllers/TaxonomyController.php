@@ -2,31 +2,39 @@
 
 namespace Juzaweb\Frontend\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
-use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Repositories\PostRepository;
+use Juzaweb\Backend\Repositories\TaxonomyRepository;
 use Juzaweb\CMS\Facades\Facades;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class TaxonomyController extends FrontendController
 {
+    public function __construct(
+        protected PostRepository $postRepository,
+        protected TaxonomyRepository $taxonomyRepository
+    ) {
+    }
+    
     public function index(...$slug): string
     {
-        $taxSlug = $slug[1] ?? null;
-        $taxonomy = Taxonomy::where('slug', $taxSlug)
-            ->firstOrFail();
+        $taxSlug = Arr::get($slug, 1);
+        
+        $taxonomy = $this->taxonomyRepository->findBySlug($taxSlug);
 
         Facades::$isTaxonomyPage = true;
 
         Facades::$taxonomy = $taxonomy;
 
         $title = $taxonomy->getName();
-        $postType = $taxonomy->getPostType('model');
-        $posts = $postType::selectFrontendBuilder()
-            ->whereTaxonomy($taxonomy->id)
-            ->paginate(get_config('posts_per_page', 12));
+        
+        $posts = $this->postRepository->frontendListByTaxonomyPaginate(
+            get_config('posts_per_page', 12),
+            $taxonomy->id
+        );
 
         $template = get_name_template_part(
             Str::singular($taxonomy->post_type),

@@ -17,6 +17,14 @@ namespace Juzaweb\CMS\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroup newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroup query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property string $table
+ * @property int $total_rows
+ * @property array $migrations
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroup whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroup whereMigrations($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroup whereTable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroup whereTotalRows($value)
  */
 class TableGroup extends Model
 {

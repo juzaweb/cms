@@ -17,6 +17,7 @@ namespace Juzaweb\Backend\Models;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
  * Juzaweb\Backend\Models\Menu
@@ -42,18 +43,22 @@ use Juzaweb\CMS\Models\Model;
  */
 class Menu extends Model
 {
+    use QueryCacheable;
+    
+    public string $cachePrefix = 'menus_';
+    
     protected $table = 'menus';
-
+    
     protected $fillable = [
         'name',
     ];
-
-    public function items()
+    
+    public function items(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(MenuItem::class, 'menu_id', 'id');
     }
-
-    public function syncItems(array $items, $parentId = null)
+    
+    public function syncItems(array $items, $parentId = null): array
     {
         $order = 1;
         $result = [];
@@ -63,22 +68,22 @@ class Menu extends Model
                 $this->saveItem($item, $order, $parentId)
             );
         }
-
+        
         $this->items()
             ->whereNotIn('id', $result)
             ->delete();
-
+        
         return $result;
     }
-
-    public function saveItem(array $item, &$order, $parentId = null)
+    
+    public function saveItem(array $item, &$order, $parentId = null): array
     {
         $result = [];
         $menuBox = HookAction::getMenuBox($item['box_key']);
         if (empty($menuBox)) {
             return $result;
         }
-
+        
         $menuBox = $menuBox->get('menu_box');
         $data = $menuBox->getData($item);
         $data['parent_id'] = $parentId;
@@ -86,14 +91,17 @@ class Menu extends Model
         $data['num_order'] = $order;
         $data['box_key'] = $item['box_key'];
         $data['target'] = $item['target'] ?? '_self';
-
-        $model = $this->items()->updateOrCreate([
-            'id' => $item['id'] ?? null,
-        ], $data);
-
+        
+        $model = $this->items()->updateOrCreate(
+            [
+                'id' => $item['id'] ?? null,
+            ],
+            $data
+        );
+        
         $order++;
         $result[$model->id] = $model->id;
-
+        
         if ($children = Arr::get($item, 'children')) {
             foreach ($children as $child) {
                 $result = array_merge(
@@ -102,7 +110,20 @@ class Menu extends Model
                 );
             }
         }
-
+        
         return $result;
+    }
+    
+    public function getLocation(): ?string
+    {
+        $locations = get_theme_config('nav_location');
+        return array_search($this->id, $locations) ?: null;
+    }
+    
+    protected function getCacheBaseTags(): array
+    {
+        return [
+            'menus',
+        ];
     }
 }

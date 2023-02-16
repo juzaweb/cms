@@ -29,6 +29,7 @@ class RouteServiceProvider extends BaseServiceProvider
     protected function mapThemeRoutes()
     {
         Route::middleware('theme')
+            ->prefix(config('theme.route_prefix'))
             ->group(__DIR__ . '/../routes/theme.php');
     }
 }

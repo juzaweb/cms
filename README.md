@@ -5,11 +5,11 @@ JUZACMS - Laravel CMS for Your Project
 ![https://buymeacoffee.com/juzaweb](https://i.imgur.com/toObY8s.png)
 [![Total Downloads](https://img.shields.io/packagist/dt/juzaweb/juzacms.svg?style=social)](https://packagist.org/packages/juzaweb/juzacms)
 [![GitHub Repo stars](https://img.shields.io/github/stars/juzaweb/juzacms?style=social)](https://github.com/juzaweb/juzacms)
-[![GitHub followers](https://img.shields.io/github/followers/juzaweb?style=social)](github.com/juzaweb)
+[![GitHub followers](https://img.shields.io/github/followers/juzaweb?style=social)](https://github.com/juzaweb)
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@juzaweb)
 
-- JuzaWeb CMS is a Content Management System ([Laravel CMS](https://juzaweb.com)) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
-- Juza CMS was engineered to be easy — for both developers and users. Project develop by Juzaweb.
+- [JuzaWeb CMS](https://juzaweb.com) is a Content Management System ([Laravel CMS](https://juzaweb.com)) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
+- JuzaWeb CMS was engineered to be easy — for both developers and users. Project develop by Juzaweb.
 - Demo Site: 
     - Frontend: https://cms.juzaweb.com
     - Admin: 
@@ -34,14 +34,9 @@ Config database in your `.env` file, and run:
 ```
 php artisan juzacms:install
 ```
-- Publish config
-```
-php artisan vendor:publish --tag=cms_config
-```
 
 ## Documentation
-View all documentation [https://juzaweb.com/documentation](https://juzaweb.com/documentation)
-Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
+View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cms/start/installation)
 
 ## Contributing
 - Contributions are welcome, and are accepted via pull requests. Please review these guidelines before submitting any pull requests.
@@ -115,6 +110,3 @@ Github: [https://github.com/juzaweb/docs](https://github.com/juzaweb/docs)
 
 ## Change Logs
 [https://juzaweb.com/documentation/changelog](https://juzaweb.com/documentation/changelog)
-
-## Buy me coffee
-[![Juzaweb Buy me coffee](https://i.imgur.com/MAqboRu.png)](https://buymeacoffee.com/juzaweb)

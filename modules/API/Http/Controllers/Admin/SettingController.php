@@ -12,11 +12,16 @@ namespace Juzaweb\API\Http\Controllers\Admin;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
+use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Http\Controllers\ApiController;
 use OpenApi\Annotations as OA;
 
 class SettingController extends ApiController
 {
+    public function __construct(protected ConfigContract $config)
+    {
+    }
+    
     /**
      * @OA\Get(
      *      path="/api/admin/setting/configs",
@@ -34,6 +39,7 @@ class SettingController extends ApiController
         return $this->restSuccess(
             [
                 'storage_url' => $storageUrl,
+                'general' => $this->config->all(),
             ]
         );
     }

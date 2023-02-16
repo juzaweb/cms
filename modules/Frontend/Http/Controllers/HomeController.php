@@ -2,7 +2,6 @@
 
 namespace Juzaweb\Frontend\Http\Controllers;
 
-use HeadlessChromium\BrowserFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;

@@ -25,7 +25,7 @@ use Juzaweb\Frontend\Http\Controllers\TaxonomyController;
 trait RegisterHookAction
 {
     protected array $resourcePermissions = ['index', 'create', 'edit', 'delete'];
-    
+
     /**
      * Registers a post type.
      *
@@ -39,7 +39,7 @@ trait RegisterHookAction
         if (empty($args['label'])) {
             throw new Exception('Post type label is required.');
         }
-        
+
         $args = array_merge(
             [
                 'model' => Post::class,
@@ -57,24 +57,24 @@ trait RegisterHookAction
             ],
             $args
         );
-        
+
         $args['key'] = $key;
         $args['singular'] = Str::singular($key);
         $args['model_key'] = str_replace('\\', '_', $args['model']);
-        
+
         $args = new Collection($args);
-        
+
         $this->globalData->set('post_types.'.$args->get('key'), $args);
-        
+
         $this->registerResourcePermissions(
             "post-type.{$key}",
             $args->get('label')
         );
-        
+
         if ($args->get('show_in_menu')) {
             $this->registerMenuPostType($key, $args);
         }
-        
+
         if ($args->get('menu_box')) {
             $this->registerMenuBox(
                 'post_type_'.$key,
@@ -86,7 +86,7 @@ trait RegisterHookAction
                 ]
             );
         }
-        
+
         $supports = (array) $args->get('supports', []);
         if (in_array('category', $supports)) {
             $this->registerTaxonomy(
@@ -101,7 +101,7 @@ trait RegisterHookAction
                 ]
             );
         }
-        
+
         if (in_array('tag', (array) $args['supports'])) {
             $this->registerTaxonomy(
                 'tags',
@@ -117,7 +117,7 @@ trait RegisterHookAction
                 ]
             );
         }
-        
+
         if ($args->get('rewrite')) {
             $this->registerPermalink(
                 $key,
@@ -131,7 +131,7 @@ trait RegisterHookAction
             );
         }
     }
-    
+
     /**
      * Register menu box
      *
@@ -147,12 +147,12 @@ trait RegisterHookAction
             'menu_box' => '',
             'priority' => 20,
         ];
-        
+
         $item = array_merge($opts, $args);
-        
+
         $this->globalData->set('menu_boxs.'.$key, new Collection($item));
     }
-    
+
     /**
      * Creates or modifies a taxonomy object.
      *
@@ -166,11 +166,11 @@ trait RegisterHookAction
     public function registerTaxonomy(string $taxonomy, array|string $objectType, array $args = []): void
     {
         $objectTypes = is_string($objectType) ? [$objectType] : $objectType;
-        
+
         foreach ($objectTypes as $objectType) {
             $type = Str::singular($objectType);
             $menuSlug = 'taxonomy.'.$type.'.'.$taxonomy;
-            
+
             $opts = [
                 'label_type' => ucfirst($type).' '.$args['label'],
                 'priority' => 20,
@@ -187,22 +187,22 @@ trait RegisterHookAction
                     'hierarchical',
                 ],
             ];
-            
+
             $args['type'] = $type;
             $args['post_type'] = $objectType;
             $args['taxonomy'] = $taxonomy;
             $args['singular'] = Str::singular($taxonomy);
             $args['key'] = $type.'_'.$taxonomy;
-            
+
             $argsCollection = new Collection(array_merge($opts, $args));
-            
+
             $this->globalData->set('taxonomies.'.$objectType.'.'.$taxonomy, $argsCollection);
-            
+
             $this->registerResourcePermissions(
                 $menuSlug,
                 Str::ucfirst($type).' '.$argsCollection->get('label')
             );
-            
+
             if ($argsCollection->get('show_in_menu')) {
                 $this->addAdminMenu(
                     $argsCollection->get('label'),
@@ -220,7 +220,7 @@ trait RegisterHookAction
                     ]
                 );
             }
-            
+
             if ($argsCollection->get('rewrite')) {
                 $this->registerPermalink(
                     $argsCollection->get('taxonomy'),
@@ -232,7 +232,7 @@ trait RegisterHookAction
                     ]
                 );
             }
-            
+
             if ($argsCollection->get('menu_box')) {
                 $this->registerMenuBox(
                     $objectType.'_'.$taxonomy,
@@ -249,7 +249,7 @@ trait RegisterHookAction
             }
         }
     }
-    
+
     /**
      * Registers menu item in menu builder.
      *
@@ -262,50 +262,50 @@ trait RegisterHookAction
         if (empty($args['label'])) {
             throw new Exception('Permalink args label is required');
         }
-        
+
         if (empty($args['base'])) {
             throw new Exception('Permalink args default_base is required');
         }
-        
+
         $args = new Collection(
             array_merge(
                 [
                     'label' => '',
                     'base' => '',
                     'key' => $key,
-                    'callback' => '',
-                    'post_type' => '',
+                    'callback' => null,
+                    'post_type' => null,
                     'position' => 20,
                 ],
                 $args
             )
         );
-        
+
         $this->globalData->set('permalinks.'.$key, new Collection($args));
     }
-    
+
     public function registerResource(string $key, ?string $postType = null, ?array $args = []): void
     {
         $register = new ResourceRegister($this);
-        
+
         $data = $register->make($key, $postType, $args);
-        
+
         $this->globalData->set('resources.'.$data->getKey(), $data->args());
     }
-    
+
     public function registerConfig(array|string $key, array $args = []): void
     {
         $configs = $this->globalData->get('configs');
-        
+
         $this->globalData->set('configs', array_merge($key, $configs));
     }
-    
+
     public function registerAdminPage(string $key, #[ArrayShape()] array $args): void
     {
         if (empty($args['title'])) {
             throw new Exception('Label Admin Page is required.');
         }
-        
+
         $defaults = [
             'key' => $key,
             'title' => '',
@@ -314,19 +314,19 @@ trait RegisterHookAction
                 'position' => 30,
             ],
         ];
-        
+
         $args = array_merge($defaults, $args);
         $args = new Collection($args);
-        
+
         $this->addAdminMenu(
             $args['title'],
             $key,
             $args['menu']
         );
-        
+
         $this->globalData->set('admin_pages.'.$key, $args);
     }
-    
+
     public function registerAdminAjax(string $key, array $args = []): void
     {
         $defaults = [
@@ -334,12 +334,12 @@ trait RegisterHookAction
             'method' => 'GET',
             'key' => $key,
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $this->globalData->set('admin_ajaxs.'.$key, new Collection($args));
     }
-    
+
     public function registerNavMenus($locations = []): void
     {
         foreach ($locations as $key => $location) {
@@ -354,7 +354,7 @@ trait RegisterHookAction
             );
         }
     }
-    
+
     public function registerEmailHook(string $key, array $args = []): void
     {
         $defaults = [
@@ -362,12 +362,12 @@ trait RegisterHookAction
             'key' => $key,
             'params' => [],
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $this->globalData->set('email_hooks.'.$key, new Collection($args));
     }
-    
+
     public function registerSidebar(string $key, array $args = []): void
     {
         $defaults = [
@@ -377,12 +377,12 @@ trait RegisterHookAction
             'before_widget' => '',
             'after_widget' => '',
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $this->globalData->set('sidebars.'.$key, new Collection($args));
     }
-    
+
     public function registerWidget($key, $args = []): void
     {
         $defaults = [
@@ -391,12 +391,12 @@ trait RegisterHookAction
             'key' => $key,
             'widget' => '',
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $this->globalData->set('widgets.'.$key, new Collection($args));
     }
-    
+
     public function registerPageBlock($key, $args = []): void
     {
         $defaults = [
@@ -405,28 +405,28 @@ trait RegisterHookAction
             'key' => $key,
             'block' => '',
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $this->globalData->set('page_blocks.'.$key, new Collection($args));
     }
-    
+
     public function registerFrontendAjax($key, $args = []): void
     {
         $defaults = [
             'auth' => false,
             'key' => $key,
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         if (empty($args['callback'])) {
             throw new Exception('Frontend Ajax callback option is required.');
         }
-        
+
         $this->globalData->set('frontend_ajaxs.'.$key, new Collection($args));
     }
-    
+
     public function registerThemeTemplate($key, $args = []): void
     {
         $defaults = [
@@ -434,12 +434,12 @@ trait RegisterHookAction
             'name' => '',
             'view' => '',
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $this->globalData->set('templates.'.$key, new Collection($args));
     }
-    
+
     public function registerPackageModule(string $key, array $args = []): void
     {
         $defaults = [
@@ -448,12 +448,12 @@ trait RegisterHookAction
             'model' => User::class,
             'configs' => [],
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $this->globalData->set('package_modules.'.$key, new Collection($args));
     }
-    
+
     public function registerThemeSetting(string $name, string $label, array $args = []): void
     {
         $args = [
@@ -461,14 +461,14 @@ trait RegisterHookAction
             'label' => $label,
             'data' => $args,
         ];
-        
-        $this->globalData->set('theme_settings.'.$name, new Collection($args));
+
+        $this->globalData->set("theme_settings.{$name}", new Collection($args));
     }
-    
+
     public function registerProfilePage(string $key, array $args = []): void
     {
         $slug = str_replace(['_'], ['-'], $key);
-        
+
         $default = [
             'title' => '',
             'key' => $key,
@@ -478,51 +478,51 @@ trait RegisterHookAction
                 $key == 'index' ? null : '/'.$slug
             ),
         ];
-        
+
         $args = array_merge($default, $args);
-        
+
         $this->globalData->set('profile_pages.'.$key, new Collection($args));
     }
-    
+
     public function registerPermissionGroup(string $key, array $args = []): void
     {
         $key = str_replace(['.'], '__', $key);
-        
+
         $defaults = [
             'name' => '',
             'description' => '',
             'key' => $key,
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $this->globalData->set('permission_groups.'.$key, new Collection($args));
     }
-    
+
     public function registerPermission(string $key, array $args = []): void
     {
         $arrKey = str_replace(['.'], '__', $key);
-        
+
         $defaults = [
             'name' => $key,
             'group' => '',
             'description' => '',
             'key' => $arrKey,
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $args['group'] = str_replace(['.'], '__', $args['group']);
-        
+
         $this->globalData->set('permissions.'.$arrKey, new Collection($args));
     }
-    
+
     public function registerResourcePermissions(string $resource, string $name): void
     {
         foreach ($this->resourcePermissions as $permission) {
             $label = $permission == 'index' ? trans('cms::app.permission_manager.view_list') : $permission;
             $permission = "{$resource}.{$permission}";
-            
+
             $this->registerPermissionGroup(
                 $resource,
                 [
@@ -530,7 +530,7 @@ trait RegisterHookAction
                     'description' => $name,
                 ]
             );
-            
+
             $this->registerPermission(
                 $permission,
                 [
@@ -541,7 +541,7 @@ trait RegisterHookAction
             );
         }
     }
-    
+
     public function registerEmailTemplate(string $key, array $args = []): void
     {
         $defaults = [
@@ -551,32 +551,54 @@ trait RegisterHookAction
             'params' => [],
             'email_hook' => null,
         ];
-        
+
         $args = array_merge($defaults, $args);
-        
+
         $this->globalData->set('email_templates.'.$key, new Collection($args));
     }
-    
+
     public function registerAPIDocument(string|SwaggerDocument $key, array $args = []): void
     {
         if ($key instanceof SwaggerDocument) {
             $args = $key->toArray();
             $key = $key->getName();
         }
-        
+
         $this->globalData->set("api_documents.{$key}", new Collection($args));
     }
-    
+
     public function registerAPIDocumentPath(string|SwaggerDocument $key, array $args = []): void
     {
         if ($key instanceof SwaggerDocument) {
             $args = $key->toArray();
             $key = $key->getName();
         }
-        
+
         $this->globalData->set("api_documents.{$key}", new Collection($args));
     }
-    
+
+    public function registerSettingPage(string $key, array $args = []): void
+    {
+        $defaults = [
+            'key' => $key,
+            'label' => '',
+            'menu' => [
+                'icon' => 'fa fa-cogs',
+                'parent' => 'setting',
+            ]
+        ];
+
+        $args = array_merge($defaults, $args);
+
+        $this->addAdminMenu(
+            $args['label'],
+            "setting.{$key}",
+            $args['menu']
+        );
+
+        $this->globalData->set('setting_pages.'.$key, new Collection($args));
+    }
+
     /**
      * @param  string  $key
      * @param  Collection  $args
@@ -585,7 +607,7 @@ trait RegisterHookAction
     {
         $supports = (array) $args->get('supports', []);
         $prefix = 'post-type.';
-        
+
         $this->addAdminMenu(
             $args->get('label'),
             $prefix.$key,
@@ -600,7 +622,7 @@ trait RegisterHookAction
                 ],
             ]
         );
-        
+
         $this->addAdminMenu(
             trans('cms::app.all').' '.$args->get('label'),
             $prefix.$key,
@@ -616,7 +638,7 @@ trait RegisterHookAction
                 ],
             ]
         );
-        
+
         $this->addAdminMenu(
             trans('cms::app.add_new'),
             $prefix.$key.'.create',
@@ -629,7 +651,7 @@ trait RegisterHookAction
                 ],
             ]
         );
-        
+
         if (in_array('comment', $supports)) {
             $this->addAdminMenu(
                 trans('cms::app.comments'),

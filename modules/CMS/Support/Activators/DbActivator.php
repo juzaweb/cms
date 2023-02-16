@@ -187,9 +187,9 @@ class DbActivator implements ActivatorInterface
      * Get plugin info load
      *
      * @param  Plugin $module
-     * @return array
+     * @return ?array
      */
-    public function getAutoloadInfo(Plugin $module): array
+    public function getAutoloadInfo(Plugin $module): ?array
     {
         return $this->modulesStatuses[$module->getName()] ?? [];
     }

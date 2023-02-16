@@ -51,6 +51,8 @@ use Juzaweb\CMS\Models\Model;
  * @mixin \Eloquent
  * @property int|null $site_id
  * @method static Builder|Taxonomy whereSiteId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|Taxonomy[] $recursiveChildren
+ * @property-read int|null $recursive_children_count
  */
 class Taxonomy extends Model
 {
@@ -90,7 +92,7 @@ class Taxonomy extends Model
      *
      * @return Factory
      */
-    protected static function newFactory()
+    protected static function newFactory(): Factory
     {
         return TaxonomyFactory::new();
     }

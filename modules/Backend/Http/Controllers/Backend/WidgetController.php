@@ -22,79 +22,97 @@ class WidgetController extends BackendController
     {
         do_action(Action::WIDGETS_INIT);
     }
-
-    public function index()
+    
+    public function index(): \Illuminate\Contracts\View\View
     {
         $title = trans('cms::app.widgets');
         $widgets = HookAction::getWidgets();
         $sidebars = HookAction::getSidebars();
-
-        return view('cms::backend.widget.index', compact(
-            'title',
-            'widgets',
-            'sidebars'
-        ));
+        
+        return view(
+            'cms::backend.widget.index',
+            compact(
+                'title',
+                'widgets',
+                'sidebars'
+            )
+        );
     }
-
-    public function update(Request $request, $key)
+    
+    public function update(Request $request, $key): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
         $content = collect($request->input('content', []))
             ->keyBy('key');
-
+        
         foreach ($content as $wkey => $widget) {
             $widgetData = HookAction::getWidgets($widget['widget']);
             $data = $widgetData['widget']->update($widget);
             $content->put($wkey, $data);
         }
-
-        set_theme_config('sidebar_' . $key, $content->toArray());
-
-        return $this->success([
-            'message' => trans('cms::app.save_successfully'),
-        ]);
+        
+        set_theme_config('sidebar_'.$key, $content->toArray());
+        
+        return $this->success(
+            [
+                'message' => trans('cms::app.save_successfully'),
+            ]
+        );
     }
-
+    
     public function getWidgetItem(Request $request)
     {
-        $this->validate($request, [
-            'widget' => 'required',
-            'sidebars' => 'required|array',
-        ]);
-
+        $this->validate(
+            $request,
+            [
+                'widget' => 'required',
+                'sidebars' => 'required|array',
+            ]
+        );
+        
         $widget = $request->get('widget');
         $sidebars = $request->get('sidebars');
-
+        
         $widgetData = HookAction::getWidgets($widget);
         $results = [];
         foreach ($sidebars as $sidebar) {
             $key = Str::random(10);
             $results[$sidebar] = [
                 'key' => $key,
-                'html' => view('cms::backend.widget.components.sidebar_widget_item', [
-                    'widget' => $widgetData,
-                    'sidebar' => $sidebar,
-                    'key' => $key,
-                ])->render()
+                'html' => view(
+                    'cms::backend.widget.components.sidebar_widget_item',
+                    [
+                        'widget' => $widgetData,
+                        'sidebar' => $sidebar,
+                        'key' => $key,
+                    ]
+                )->render(),
             ];
         }
-
-        return response()->json([
-            'widget' => $widget,
-            'items' => $results,
-        ]);
+        
+        return response()->json(
+            [
+                'widget' => $widget,
+                'items' => $results,
+            ]
+        );
     }
-
+    
     public function getWidgetForm($key)
     {
         $widget = HookAction::getWidgets($key);
         $key = Str::random(10);
-
-        return response()->json([
+        
+        return response()->json(
+            [
             'key' => $key,
-            'html' => view('cms::backend.post.components.page_block_item', compact(
-                'widget',
-                'key'
-            ))->render()
-        ]);
+            'html' => view(
+                'cms::backend.post.components.page_block_item',
+                compact(
+                    'widget',
+                    'key'
+                )
+            )->render(),
+            ]
+        );
     }
 }

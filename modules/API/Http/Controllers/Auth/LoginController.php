@@ -12,7 +12,7 @@ namespace Juzaweb\API\Http\Controllers\Auth;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Juzaweb\Backend\Http\Requests\API\Auth\LoginRequest;
+use Juzaweb\API\Http\Requests\Auth\LoginRequest;
 use Juzaweb\Backend\Http\Resources\UserResource;
 use Juzaweb\CMS\Http\Controllers\ApiController;
 use Juzaweb\CMS\Models\User;
@@ -31,42 +31,15 @@ class LoginController extends ApiController
 
         return $this->respondWithToken($token, $user);
     }
-
-    /**
-     * @OA\Post(
-     *      path="/api/auth/access-token",
-     *      tags={"Auth"},
-     *      summary="User validate access token",
-     *      security={{"sanctum":{}}},
-     *      operationId="api.auth.access_token",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\MediaType(
-     *              mediaType="multipart/form-data",
-     *              @OA\Schema(
-     *                  required={"access_token"},
-     *                  @OA\Property(property="access_token",
-     *                      type="string",
-     *                      description="Access token"
-     *                  )
-     *              )
-     *          )
-     *      ),
-     *      @OA\Response(response=201, ref="#/components/responses/success_detail"),
-     *      @OA\Response(response=422, ref="#/components/responses/error_422"),
-     *      @OA\Response(response=500, ref="#/components/responses/error_500")
-     *  )
-     */
-    public function accessToken(Request $request): JsonResponse
+    
+    public function profile(Request $request): JsonResponse
     {
-        $accessToken = $request->post('access_token');
-
         $user = $request->user('api');
-
+        
         $token = $user->token();
-
+        
         return $this->respondWithToken(
-            new PersonalAccessTokenResult($accessToken, $token),
+            new PersonalAccessTokenResult($request->bearerToken(), $token),
             $user
         );
     }

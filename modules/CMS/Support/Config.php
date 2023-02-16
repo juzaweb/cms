@@ -12,6 +12,7 @@ namespace Juzaweb\CMS\Support;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Juzaweb\CMS\Contracts\ConfigContract;
 use Juzaweb\CMS\Models\Config as ConfigModel;
 use Illuminate\Container\Container;
@@ -51,7 +52,7 @@ class Config implements ConfigContract
         }
     }
 
-    public function getConfig($key, $default = null): mixed
+    public function getConfig(string $key, string|array $default = null): null|string|array
     {
         $configKeys = explode('.', $key);
         $value = $this->configs[$configKeys[0]] ?? $default;
@@ -66,7 +67,7 @@ class Config implements ConfigContract
         return $value;
     }
 
-    public function setConfig($key, $value = null): ConfigModel
+    public function setConfig(string $key, string|array $value = null): ConfigModel
     {
         if (is_array($value)) {
             $value = json_encode($value);
@@ -88,6 +89,29 @@ class Config implements ConfigContract
         );
 
         return $config;
+    }
+    
+    public function getConfigs(array $keys, mixed $default = null): array
+    {
+        $data = [];
+        foreach ($keys as $key) {
+            $data[$key] = $this->getConfig($key, $default);
+        }
+        
+        return $data;
+    }
+    
+    public function all(): Collection
+    {
+        return collect($this->configs)->map(
+            function ($value) {
+                if (is_json($value)) {
+                    return json_decode($value, true);
+                }
+        
+                return $value;
+            }
+        );
     }
 
     protected function getCacheKey(): string

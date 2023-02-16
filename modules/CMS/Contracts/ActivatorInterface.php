@@ -57,9 +57,9 @@ interface ActivatorInterface
      * Get plugin info load
      *
      * @param  Plugin $module
-     * @return array
+     * @return ?array
      */
-    public function getAutoloadInfo(Plugin $module): array;
+    public function getAutoloadInfo(Plugin $module): ?array;
 
     /**
      * Deletes any plugin activation statuses created by this class.

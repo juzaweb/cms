@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Http\Datatables;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
+use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
 
 class ResourceDatatable extends DataTable
 {
@@ -117,6 +121,42 @@ class ResourceDatatable extends DataTable
         }
 
         return $query;
+    }
+
+    public function getData(Request $request): array
+    {
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'desc');
+        $offset = $request->get('offset', 0);
+        $limit = (int) $request->get('limit', 20);
+
+        if ($repository = $this->getSetting($this->type)->get('repository')) {
+            /**
+             * @var \Juzaweb\CMS\Repositories\BaseRepository $repository
+             */
+            $repository = app($repository);
+            $queries = $request->query();
+            if ($this->postId) {
+                $queries['post_id'] = $this->postId;
+            }
+
+            $repository->pushCriteria(new SearchCriteria($queries));
+            $repository->pushCriteria(new FilterCriteria($queries));
+            $repository->pushCriteria(new SortCriteria($queries));
+            $page = $offset <= 0 ? 1 : (round($offset / $limit)) + 1;
+            $results = $repository->adminPaginate($limit, $page);
+            $count = $results->total();
+            $rows = $results->items();
+        } else {
+            $query = $this->query($request->all());
+            $count = $query->count();
+            $query->orderBy($sort, $order);
+            $query->offset($offset);
+            $query->limit($limit);
+            $rows = $query->get();
+        }
+
+        return [$count, $rows];
     }
 
     public function bulkActions($action, $ids)

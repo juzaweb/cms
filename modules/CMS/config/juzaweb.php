@@ -148,14 +148,21 @@ return [
              * Default: true
              */
             'enable' => env('JW_QUERY_CACHE', true),
-    
+
             /**
              * Query cache driver
              *
              * Default: file
              */
             'driver' => env('JW_QUERY_CACHE_DRIVER', 'file'),
-        ]
+
+            /**
+             * Query cache lifetime
+             *
+             * Default: 3600 (1 hour)
+             */
+            'lifetime' => env('JW_QUERY_CACHE_LIFETIME', 3600),
+        ],
     ],
 
     /**
@@ -187,6 +194,13 @@ return [
             ...Facades::defaultSVGMimetypes(),
             //
         ],
+
+        /**
+         * Server Side Image Resizer
+         *
+         * Default: true
+         */
+        'image_resizer' => env('JW_IMAGE_RESIZER', true),
 
         /**
          * File type
@@ -231,7 +245,7 @@ return [
 
     'api' => [
         'enable' => env('JW_ALLOW_API', false),
-    
+
         /**
          * Frontend API configs
          */
@@ -243,8 +257,10 @@ return [
     /**
      * Default database config
      */
-    'config' => [
-        ...Facades::defaultConfigs(),
-        //
-    ]
+    'config' => array_merge(
+        Facades::defaultConfigs(),
+        [
+            //
+        ]
+    ),
 ];

@@ -55,7 +55,7 @@
                     @continue
                 @endif
 
-            <a class="dropdown-item " href="{{ url()->current() }}?locale={{ $lang['code'] }}">
+            <a class="dropdown-item " href="{{ url()->current() }}?hl={{ $lang['code'] }}">
                 <span class="text-uppercase font-size-12 mr-1">{{ $lang['code'] }}</span>
                 {{ $lang['name'] }}</a>
             @endforeach

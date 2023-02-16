@@ -5,7 +5,8 @@
         <div class="col-md-3">
             <div class="list-group">
                 @foreach($forms as $key => $form)
-                <a class="list-group-item @if($key == $component) active @endif" href="{{ route('admin.setting.form', [$key]) }}">{{ $form->get('name') }}</a>
+                <a class="list-group-item @if($key == $component) active @endif"
+                   href="{{ route('admin.setting.form', [$page, $key]) }}">{{ $form->get('name') }}</a>
                 @endforeach
             </div>
         </div>

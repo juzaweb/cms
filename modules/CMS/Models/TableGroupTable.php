@@ -20,6 +20,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property string $table
+ * @property string $real_table
+ * @property int $table_group_id
+ * @property int $total_rows
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable whereRealTable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable whereTable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable whereTableGroupId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TableGroupTable whereTotalRows($value)
  */
 class TableGroupTable extends Model
 {

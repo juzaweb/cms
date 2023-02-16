@@ -22,6 +22,8 @@ use Juzaweb\CMS\Support\Translations\TranslationTranslate;
  */
 interface TranslationManager
 {
+    public function find(string|Collection $module, string $name = null): Collection;
+    
     /**
      * @see \Juzaweb\CMS\Support\Manager\TranslationManager::import()
      */

@@ -25,9 +25,9 @@ class SystemSettingController extends BackendController
         $this->hookAction = $hookAction;
     }
 
-    public function index($form = 'general'): View
+    public function index($page, $form = 'general'): View
     {
-        $forms = $this->getForms();
+        $forms = $this->getForms($page);
         $configs = $this->hookAction->getConfigs()->where('form', $form);
         $title = $forms[$form]['name'] ?? trans('cms::app.system_setting');
 
@@ -37,7 +37,8 @@ class SystemSettingController extends BackendController
                 'title' => $title,
                 'component' => $form,
                 'forms' => $forms,
-                'configs' => $configs
+                'configs' => $configs,
+                'page' => $page,
             ]
         );
     }
@@ -73,9 +74,10 @@ class SystemSettingController extends BackendController
         );
     }
 
-    protected function getForms(): \Illuminate\Support\Collection
+    protected function getForms(string $page): \Illuminate\Support\Collection
     {
         return collect($this->globalData->get('setting_forms'))
+            ->where('page', $page)
             ->sortBy('priority');
     }
 }

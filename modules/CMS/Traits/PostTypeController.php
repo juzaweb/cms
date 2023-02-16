@@ -241,17 +241,6 @@ trait PostTypeController
         $setting = $this->getSetting();
         $attributes['type'] = $setting->get('key');
 
-        if (!empty($attributes['meta'])) {
-            $metas = array_keys((array) $setting->get('metas'));
-            $attributes['meta'] = collect($attributes['meta'])
-                ->filter(
-                    function ($val, $key) use ($metas) {
-                        return in_array($key, $metas);
-                    }
-                )
-                ->toArray();
-        }
-
         return apply_filters(
             "post_type.{$this->getPostType()}.parseDataForSave",
             $attributes
@@ -300,7 +289,6 @@ trait PostTypeController
 
     /**
      * @param Model|Post $model
-     * @return string
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */

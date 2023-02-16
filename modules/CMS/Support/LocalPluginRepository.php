@@ -152,7 +152,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
             }
         }
 
-        return $plugins;
+        return $collection ? collect($plugins) : $plugins;
     }
 
     /**

@@ -26,7 +26,7 @@ trait QueryCacheable
      *
      * @return void
      */
-    public static function bootQueryCacheable()
+    public static function bootQueryCacheable(): void
     {
         $flushCacheOnUpdate = !isset(static::$flushCacheOnUpdate) || static::$flushCacheOnUpdate;
 
@@ -44,7 +44,7 @@ trait QueryCacheable
      *
      * @return string
      */
-    protected static function getFlushQueryCacheObserver()
+    protected static function getFlushQueryCacheObserver(): string
     {
         return FlushQueryCacheObserver::class;
     }
@@ -77,10 +77,7 @@ trait QueryCacheable
         return $this->getCacheBaseTags();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function newBaseQueryBuilder()
+    protected function newBaseQueryBuilder(): Builder
     {
         $connection = $this->getConnection();
 

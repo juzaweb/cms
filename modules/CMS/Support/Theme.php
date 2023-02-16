@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
@@ -87,6 +88,10 @@ class Theme
         return file_exists($this->getPath($path));
     }
 
+    /**
+     * @throws FileNotFoundException
+     * @throws \Exception
+     */
     public function getContents(string $path): ?string
     {
         if (!$this->fileExists($path)) {

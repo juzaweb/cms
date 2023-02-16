@@ -13,7 +13,9 @@ namespace Juzaweb\Network\Contracts;
 interface NetworkRegistionContract
 {
     public function init(): void;
-
+    
+    public function getCurrentSiteId(): ?int;
+    
     public function getCurrentSite(): object;
 
     public function isRootSite($domain = null): bool;

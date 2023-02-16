@@ -12,6 +12,7 @@ namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\CommentResource;
@@ -19,6 +20,7 @@ use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Facades\Facades;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
@@ -26,6 +28,10 @@ use Juzaweb\Frontend\Http\Requests\CommentRequest;
 
 class PostController extends FrontendController
 {
+    public function __construct(protected PostRepository $postRepository)
+    {
+    }
+    
     public function index(...$slug)
     {
         if (count($slug) > 1) {
@@ -33,11 +39,7 @@ class PostController extends FrontendController
         }
 
         $title = get_config('title');
-        $base = $slug[0];
-        $permalink = $this->getPermalinks($base);
-        $postType = HookAction::getPostTypes($permalink->get('post_type'));
-        $posts = $postType->get('model')::selectFrontendBuilder()
-            ->paginate(get_config('posts_per_page', 12));
+        $posts = $this->postRepository->frontendListPaginate(get_config('posts_per_page', 12));
 
         $posts->appends(request()->query());
 
@@ -58,7 +60,7 @@ class PostController extends FrontendController
     {
         do_action("frontend.post_type.detail", $slug);
         
-        $base = $slug[0];
+        $base = Arr::get($slug, 0);
         $postSlug = $this->getPostSlug($slug);
         $permalink = $this->getPermalinks($base);
         
@@ -74,9 +76,7 @@ class PostController extends FrontendController
         /**
          * @var Post $postModel
          */
-        $postModel = $postType->get('model')::createFrontendDetailBuilder()
-            ->where('slug', $postSlug)
-            ->firstOrFail();
+        $postModel = $this->postRepository->findBySlug($postSlug);
         
         Facades::$isPostPage = true;
 
@@ -92,13 +92,11 @@ class PostController extends FrontendController
         $post = (new PostResource($postModel))->toArray(request());
 
         $rows = Comment::with(['user'])
-            ->where('object_id', '=', $post['id'])
+            ->where(['object_id' => $post['id']])
             ->whereApproved()
             ->paginate(10);
 
-        $comments = CommentResource::collection($rows)
-            ->response()
-            ->getData(true);
+        $comments = CommentResource::collection($rows)->response()->getData(true);
 
         $data = apply_filters(
             "frontend.post_type.detail.data",
@@ -119,7 +117,7 @@ class PostController extends FrontendController
         );
 
         return $this->view(
-            'theme::template-parts.' . $template,
+            "theme::template-parts.{$template}",
             $data
         );
     }
@@ -127,7 +125,7 @@ class PostController extends FrontendController
     public function comment(CommentRequest $request, $slug): JsonResponse|RedirectResponse
     {
         $slug = explode('/', $slug);
-        $base = $slug[0];
+        $base = Arr::get($slug, 0);
         $slug = $this->getPostSlug($slug);
 
         $permalink = $this->getPermalinks($base);
@@ -140,14 +138,8 @@ class PostController extends FrontendController
                 ]
             );
         }
-
-        /**
-         * @var Post $post
-         */
-        $post = $postType->get('model')::createFrontendBuilder()
-            ->where('slug', '=', $slug)
-            ->firstOrFail();
-
+        
+        $post = $this->postRepository->findBySlug($slug);
         $data = $request->all();
         $data['object_type'] = $permalink->get('post_type');
         $data['user_id'] = Auth::id();

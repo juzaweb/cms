@@ -34,6 +34,8 @@ use Juzaweb\Network\Traits\RootNetworkModel;
  * @method static \Illuminate\Database\Eloquent\Builder|Site whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Site whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Network\Models\DomainMapping[] $domainMappings
+ * @property-read int|null $domain_mappings_count
  */
 class Site extends Model implements RootNetworkModelInterface
 {

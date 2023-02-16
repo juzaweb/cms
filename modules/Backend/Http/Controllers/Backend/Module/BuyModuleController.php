@@ -16,14 +16,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Requests\Module\ActivateByCodeRequest;
 use Juzaweb\Backend\Http\Requests\Module\LoginJuzaWebRequest;
-use Juzaweb\CMS\Contracts\JuzawebApiContract;
+use Juzaweb\CMS\Contracts\JuzawebApiContract as JuzawebApi;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class BuyModuleController extends BackendController
 {
-    protected JuzawebApiContract $api;
+    protected JuzawebApi $api;
 
-    public function __construct(JuzawebApiContract $api)
+    public function __construct(JuzawebApi $api)
     {
         $this->api = $api;
     }
@@ -57,7 +57,6 @@ class BuyModuleController extends BackendController
     public function activateByCode(ActivateByCodeRequest $request, $module): JsonResponse|RedirectResponse
     {
         $name = $request->input('module');
-
         $code = $request->input('key');
 
         try {
@@ -76,7 +75,9 @@ class BuyModuleController extends BackendController
 
         $activationCodes[Str::snake($name)] = [
             'code' => $code,
-            'token' => $response->data->token
+            'token' => $response->data->token,
+            'certificate' => $response->data->certificate,
+            'hash' => sha1($code),
         ];
 
         set_config("{$module}_activation_codes", $activationCodes);
@@ -87,7 +88,6 @@ class BuyModuleController extends BackendController
     public function loginJuzaWeb(LoginJuzaWebRequest $request): JsonResponse|RedirectResponse
     {
         $email = $request->post('email');
-
         $password = $request->post('password');
 
         try {
@@ -132,8 +132,7 @@ class BuyModuleController extends BackendController
 
     protected function getModuleName(string $module, string $name): string
     {
-        $module = $module == 'theme' ? trans('cms::app.theme') :
-            trans('cms::app.plugin');
+        $module = $module == 'theme' ? trans('cms::app.theme') : trans('cms::app.plugin');
         return ucfirst($name) .' ' . $module;
     }
 }

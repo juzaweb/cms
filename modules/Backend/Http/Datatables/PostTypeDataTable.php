@@ -34,8 +34,7 @@ class PostTypeDataTable extends DataTable
         $this->postType = $postType;
         $this->taxonomies = HookAction::getTaxonomies($this->postType);
 
-        $resourses = HookAction::getResource()
-            ->where('post_type', $postType['key']);
+        $resourses = HookAction::getResource()->where('post_type', $postType['key'])->whereNull('parent');
         if ($resourses->isNotEmpty()) {
             $this->resourses = $resourses;
         }
@@ -43,6 +42,24 @@ class PostTypeDataTable extends DataTable
 
     public function columns(): array
     {
+        if ($this->resourses) {
+            $columns['actions'] = [
+                'label' => trans('cms::app.actions'),
+                'width' => '10%',
+                'align' => 'center',
+                'sortable' => false,
+                'formatter' => function ($value, $row, $index) {
+                    return view(
+                        'cms::components.datatable.actions',
+                        [
+                            'row' => $row,
+                            'resourses' => $this->resourses
+                        ]
+                    )->render();
+                },
+            ];
+        }
+
         if ($this->postType['key'] != 'pages') {
             $columns['thumbnail'] = [
                 'label' => trans('cms::app.thumbnail'),
@@ -98,24 +115,6 @@ class PostTypeDataTable extends DataTable
                 )->render();
             },
         ];
-
-        if ($this->resourses) {
-            $columns['actions'] = [
-                'label' => trans('cms::app.actions'),
-                'width' => '15%',
-                'align' => 'center',
-                'sortable' => false,
-                'formatter' => function ($value, $row, $index) {
-                    return view(
-                        'cms::components.datatable.actions',
-                        [
-                            'row' => $row,
-                            'resourses' => $this->resourses
-                        ]
-                    )->render();
-                },
-            ];
-        }
 
         return $columns;
     }

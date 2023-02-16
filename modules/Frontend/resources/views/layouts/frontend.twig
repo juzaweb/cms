@@ -19,7 +19,7 @@
     {% set fbAppId = config('fb_app_id') %}
 
     {% if image %}
-        <meta property="og:image" content="{{ upload_url(image) }}" />
+    <meta property="og:image" content="{{ upload_url(image) }}" />
     {% endif %}
     {% if sitename %}
     <meta property="og:site_name" content="{{ sitename }}"/>
@@ -27,6 +27,7 @@
     {% if fbAppId %}
     <meta property="fb:app_id" content="{{ fbAppId }}"/>
     {% endif %}
+    <link rel="canonical" href="{{ url().current() }}" />
     {% if config('jw_enable_post_feed') %}
     <link rel="alternate" type="application/atom+xml" title="{{ config('title') }} &raquo; Feed" href="/feed">
     {% endif %}
@@ -34,7 +35,7 @@
     <link rel="alternate" type="application/atom+xml" title="{{ name }} &raquo; Feed" href="/taxonomy/{{ taxonomy.slug }}/feed">
     {% endif %}
     {% if icon %}
-        <link rel="icon" href="{{ upload_url(icon) }}" />
+    <link rel="icon" href="{{ upload_url(icon) }}" />
     {% endif %}
     <title>{{ apply_filters('frontend.head.title', title) }}{% if sitename %} | {{ sitename }}{% endif %}</title>
 

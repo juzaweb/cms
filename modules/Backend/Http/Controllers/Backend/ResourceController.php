@@ -37,6 +37,17 @@ class ResourceController extends BackendController
 
     protected function getDataTable(...$params): DataTable
     {
+        if ($dataTable = $this->getSetting(...$params)->get('datatable')) {
+            $dataTable = app($dataTable);
+            $dataTable->mountData(
+                $params[0],
+                $params[1] ?? null,
+                $params[2] ?? null
+            );
+    
+            return $dataTable;
+        }
+        
         $dataTable = new ResourceDatatable();
         $dataTable->mountData(
             $params[0],

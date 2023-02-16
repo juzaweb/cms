@@ -64,8 +64,7 @@ function get_popular_posts($type = null, $post = null, $limit = 5, $options = []
 
 function get_post_resources($resource, $options = []): array
 {
-    $query = Resource::selectFrontendBuilder()
-        ->where('type', '=', $resource);
+    $query = Resource::selectFrontendBuilder()->where('type', '=', $resource);
 
     if ($id = Arr::get($options, 'id')) {
         $query->where('id', '=', $id);

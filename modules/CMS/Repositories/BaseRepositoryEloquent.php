@@ -7,8 +7,9 @@ use Juzaweb\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
 abstract class BaseRepositoryEloquent extends PackageBaseRepository
 {
     protected array $filterableFields = [];
-    
     protected array $searchableFields = [];
+    protected array $sortableFields = [];
+    protected array $sortableDefaults = [];
     
     public function updateOrCreate(array $attributes, array $values = []): mixed
     {
