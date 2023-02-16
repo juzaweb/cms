@@ -43,7 +43,6 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
 [https://github.com/juzaweb/juzacms/blob/master/CONTRIBUTING.md](https://github.com/juzaweb/juzacms/blob/master/CONTRIBUTING.md)
 
 ## Features
-- [x] Fully Ajax load page.
 - [x] File manager
 - [x] Post Type support
 - [x] Taxonomy support
@@ -77,14 +76,14 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
   - [x] Check permisson menu
   - [x] Policies
   - [ ] Check permisson button in views
-- [ ] Media manager admin page
+- [x] Media manager admin page
 - [ ] Short Code
-- [ ] Add image from url
+- [x] Add image from url
 - [ ] Quick edit
 - [ ] Preview post
 - [ ] Activity logs
 - [ ] **Api Support**
-  - [ ] Auth api
+  - [x] Auth api
   - [x] Post Type api
   - [ ] Taxonomy api
   - [ ] User api
