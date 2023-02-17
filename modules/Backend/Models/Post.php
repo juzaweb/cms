@@ -10,6 +10,7 @@ use Juzaweb\CMS\Database\Factories\PostFactory;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\PostTypeModel;
 use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
+use Juzaweb\CMS\Traits\UseUUIDColumn;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 
@@ -100,7 +101,7 @@ class Post extends Model implements Feedable
 {
     protected static bool $flushCacheOnUpdate = true;
 
-    use PostTypeModel, HasFactory, QueryCacheable;
+    use PostTypeModel, HasFactory, QueryCacheable, UseUUIDColumn;
 
     public string $cachePrefix = 'posts_';
 

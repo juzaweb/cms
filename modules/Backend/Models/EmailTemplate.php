@@ -4,6 +4,7 @@ namespace Juzaweb\Backend\Models;
 
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\ResourceModel;
+use Juzaweb\CMS\Traits\UseUUIDColumn;
 
 /**
  * Juzaweb\Backend\Models\EmailTemplate
@@ -36,7 +37,7 @@ use Juzaweb\CMS\Traits\ResourceModel;
  */
 class EmailTemplate extends Model
 {
-    use ResourceModel;
+    use ResourceModel, UseUUIDColumn;
 
     protected string $fieldName = 'subject';
     protected $table = 'email_templates';
