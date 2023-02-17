@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Traits\UseSlug;
+use Juzaweb\CMS\Traits\UseUUIDColumn;
 
 /**
  * Juzaweb\Backend\Models\Resource
@@ -64,8 +65,8 @@ use Juzaweb\CMS\Traits\UseSlug;
  */
 class Resource extends Model
 {
-    use UseSlug;
-    
+    use UseSlug, UseUUIDColumn;
+
     protected $table = 'resources';
 
     protected $fillable = [
@@ -128,7 +129,7 @@ class Resource extends Model
     {
         return $builder->where('status', '=', 'publish');
     }
-    
+
     public function scopeWhereMeta(Builder $builder, $key, $value = null): Builder
     {
         return $builder->whereHas(
@@ -136,7 +137,7 @@ class Resource extends Model
             fn ($q) => $q->where('meta_key', $key)->where('meta_value', $value)
         );
     }
-    
+
     public function scopeOrWhereMeta(Builder $builder, $key, $value = null): Builder
     {
         return $builder->orWhereHas(
@@ -175,7 +176,7 @@ class Resource extends Model
             ->whereNotIn('meta_key', array_keys($data))
             ->delete();
     }
-    
+
     public function syncMetasWithoutDetaching(array $data = [])
     {
         $metas = $this->json_metas;
@@ -183,7 +184,7 @@ class Resource extends Model
             if (is_array($val)) {
                 $val = json_encode($val);
             }
-        
+
             $this->metas()->updateOrCreate(
                 [
                     'meta_key' => $key
@@ -192,10 +193,10 @@ class Resource extends Model
                     'meta_value' => $val
                 ]
             );
-        
+
             $metas[$key] = $val;
         }
-    
+
         $this->update(
             [
                 'json_metas' => $metas

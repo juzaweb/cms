@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 use Juzaweb\CMS\Traits\TaxonomyModel;
 use Juzaweb\CMS\Models\Model;
+use Juzaweb\CMS\Traits\UseUUIDColumn;
 
 /**
  * Juzaweb\Backend\Models\Taxonomy
@@ -58,7 +59,7 @@ class Taxonomy extends Model
 {
     protected static bool $flushCacheOnUpdate = true;
 
-    use TaxonomyModel, HasFactory, QueryCacheable;
+    use TaxonomyModel, HasFactory, QueryCacheable, UseUUIDColumn;
 
     protected $table = 'taxonomies';
 
