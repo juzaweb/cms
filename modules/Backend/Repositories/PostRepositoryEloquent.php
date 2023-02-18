@@ -52,14 +52,14 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         return $this->parserResult($result);
     }
 
-    public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy): LengthAwarePaginator
+    public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy, ?int $page = null): LengthAwarePaginator
     {
         $this->applyCriteria();
         $this->applyScope();
 
         $result = $this->createSelectFrontendBuilder()
             ->whereTaxonomy($taxonomy)
-            ->paginate($limit);
+            ->paginate($limit, [], 'page', $page);
 
         $this->resetModel();
         $this->resetScope();

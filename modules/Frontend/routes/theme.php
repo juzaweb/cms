@@ -1,5 +1,4 @@
 <?php
-
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
@@ -47,12 +46,12 @@ Route::get('feed', [FeedController::class, 'index'])->name('feed');
 Route::get('taxonomy/{taxonomy}/feed', [FeedController::class, 'taxonomy'])->name('feed.taxonomy');
 
 Route::match(
-    ['get', 'post'],
+    ['get', 'post', 'put'],
     'ajax/{slug}',
     [AjaxController::class, 'ajax']
 )
     ->name('ajax')
-    ->where('slug', '[a-z\-\/]+');
+    ->where('slug', '[a-z0-9\-\/]+');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

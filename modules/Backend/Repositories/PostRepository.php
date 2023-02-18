@@ -22,7 +22,7 @@ interface PostRepository extends BaseRepository
 
     public function findBySlug(string $slug, $fail = true): null|Post;
 
-    public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy): LengthAwarePaginator;
+    public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy, ?int $page = null): LengthAwarePaginator;
 
     /**
      * @param  int  $limit
