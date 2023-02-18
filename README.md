@@ -8,8 +8,8 @@ JUZACMS - Laravel CMS for Your Project
 [![GitHub followers](https://img.shields.io/github/followers/juzaweb?style=social)](https://github.com/juzaweb)
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@juzaweb)
 
-- [JuzaWeb CMS](https://juzaweb.com) is a Content Management System ([Laravel CMS](https://juzaweb.com)) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
-- JuzaWeb CMS was engineered to be easy — for both developers and users. Project develop by Juzaweb.
+- [JuzaWeb CMS](https://juzaweb.com) is a Content Management System (CMS) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again. 
+- JuzaWeb CMS is a [Laravel CMS](https://juzaweb.com) was engineered to be easy — for both developers and users. Project develop by Juzaweb Team.
 - Demo Site: 
     - Frontend: https://cms.juzaweb.com
     - Admin: 
@@ -97,7 +97,7 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
 * [Ads Manager](https://github.com/juzaweb/ads-manager)
 * [Demo Site](https://github.com/juzaweb/demo-site)
 
-## Theme
+## Include Themes
 ### Default
 ### Gamxo
 
@@ -109,3 +109,6 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
 
 ## Change Logs
 [https://juzaweb.com/documentation/changelog](https://juzaweb.com/documentation/changelog)
+
+## Buy me coffee
+[![Juzaweb Buy me coffee](https://i.imgur.com/MAqboRu.png)](https://buymeacoffee.com/juzaweb)

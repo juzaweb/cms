@@ -31,7 +31,7 @@ class PostController extends FrontendController
     public function __construct(protected PostRepository $postRepository)
     {
     }
-    
+
     public function index(...$slug)
     {
         if (count($slug) > 1) {
@@ -59,13 +59,13 @@ class PostController extends FrontendController
     public function detail(...$slug)
     {
         do_action("frontend.post_type.detail", $slug);
-        
+
         $base = Arr::get($slug, 0);
         $postSlug = $this->getPostSlug($slug);
         $permalink = $this->getPermalinks($base);
-        
+
         $postType = HookAction::getPostTypes($permalink->get('post_type'));
-    
+
         do_action(
             "frontend.post_type.{$permalink->get('post_type')}.detail",
             $slug,
@@ -76,8 +76,11 @@ class PostController extends FrontendController
         /**
          * @var Post $postModel
          */
-        $postModel = $this->postRepository->findBySlug($postSlug);
-        
+        $postModel = $this->postRepository->findBySlug($postSlug, false);
+        if (empty($postModel) && count($slug) > 2) {
+            $postModel = $this->postRepository->findBySlug($slug[1]);
+        }
+
         Facades::$isPostPage = true;
 
         Facades::$post = $postModel;
@@ -92,6 +95,7 @@ class PostController extends FrontendController
         $post = (new PostResource($postModel))->toArray(request());
 
         $rows = Comment::with(['user'])
+            ->cacheFor(config('juzaweb.performance.query_cache.lifetime'))
             ->where(['object_id' => $post['id']])
             ->whereApproved()
             ->paginate(10);
@@ -138,7 +142,7 @@ class PostController extends FrontendController
                 ]
             );
         }
-        
+
         $post = $this->postRepository->findBySlug($slug);
         $data = $request->all();
         $data['object_type'] = $permalink->get('post_type');
@@ -150,11 +154,11 @@ class PostController extends FrontendController
 
         return $this->success(trans('cms::app.comment_success'));
     }
-    
+
     private function getPostSlug(array $slug): string
     {
         unset($slug[0]);
-        
+
         return implode('/', $slug);
     }
 }

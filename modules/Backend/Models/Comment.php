@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 
 /**
  * Juzaweb\Backend\Models\Comment
@@ -44,7 +45,12 @@ use Juzaweb\CMS\Models\User;
  */
 class Comment extends Model
 {
+    use QueryCacheable;
+
+    public string $cachePrefix = 'comments_';
+
     protected $table = 'comments';
+
     protected $fillable = [
         'email',
         'name',
@@ -115,5 +121,12 @@ class Comment extends Model
                 'trash' => trans('cms::app.trash'),
             ]
         );
+    }
+
+    protected function getCacheBaseTags(): array
+    {
+        return [
+            'comments',
+        ];
     }
 }

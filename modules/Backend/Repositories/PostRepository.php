@@ -19,21 +19,21 @@ interface PostRepository extends BaseRepository
     public function create(array $attributes);
 
     public function update(array $attributes, $id);
-    
-    public function findBySlug(string $slug): null|Post;
-    
+
+    public function findBySlug(string $slug, $fail = true): null|Post;
+
     public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy): LengthAwarePaginator;
-    
+
     /**
      * @param  int  $limit
      * @return LengthAwarePaginator
      * @throws RepositoryException
      */
     public function frontendListPaginate(int $limit): LengthAwarePaginator;
-    
+
     public function createSelectFrontendBuilder(): Builder|Taxonomy;
-    
+
     public function createFrontendDetailBuilder(): Builder;
-    
+
     public function getStatuses(string $type = 'posts'): array;
 }

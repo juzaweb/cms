@@ -17,52 +17,56 @@ use Juzaweb\CMS\Traits\Criterias\UseSortableCriteria;
 class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepository
 {
     use UseSearchCriteria, UseFilterCriteria, UseSortableCriteria;
-    
+
     protected array $searchableFields = ['title', 'description'];
     protected array $filterableFields = ['status', 'type'];
     protected array $sortableFields = ['id', 'status', 'title', 'views'];
     protected array $sortableDefaults = ['id' => 'DESC'];
-    
+
     public function model(): string
     {
         return Post::class;
     }
-    
-    public function findBySlug(string $slug): null|Post
+
+    public function findBySlug(string $slug, $fail = true): null|Post
     {
-        $result = $this->createFrontendDetailBuilder()->where(['slug' => $slug])->firstOrFail();
-    
+        if ($fail) {
+            $result = $this->createFrontendDetailBuilder()->where(['slug' => $slug])->firstOrFail();
+        } else {
+            $result = $this->createFrontendDetailBuilder()->where(['slug' => $slug])->first();
+        }
+
         return $this->parserResult($result);
     }
-    
+
     public function frontendListPaginate(int $limit): LengthAwarePaginator
     {
         $this->applyCriteria();
         $this->applyScope();
-        
+
         $result = $this->createSelectFrontendBuilder()->paginate($limit);
-        
+
         $this->resetModel();
         $this->resetScope();
-        
+
         return $this->parserResult($result);
     }
-    
+
     public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy): LengthAwarePaginator
     {
         $this->applyCriteria();
         $this->applyScope();
-        
+
         $result = $this->createSelectFrontendBuilder()
             ->whereTaxonomy($taxonomy)
             ->paginate($limit);
-        
+
         $this->resetModel();
         $this->resetScope();
-        
+
         return $this->parserResult($result);
     }
-    
+
     public function createSelectFrontendBuilder(): Builder|Taxonomy
     {
         $builder = $this->model->newQuery()->with($this->withFrontendDefaults())
@@ -85,19 +89,19 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
                 ]
             )
             ->wherePublish();
-        
+
         return apply_filters('post.selectFrontendBuilder', $builder);
     }
-    
+
     public function createFrontendDetailBuilder(): Builder
     {
         $builder = $this->model->newQuery()->with($this->withFrontendDefaults())
-            ->cacheFor(3600)
+            ->cacheFor(config('juzaweb.performance.query_cache.lifetime', 3600))
             ->whereIn('status', [Post::STATUS_PUBLISH, Post::STATUS_PRIVATE]);
-        
+
         return apply_filters('post.createFrontendDetailBuilder', $builder);
     }
-    
+
     public function withFrontendDefaults(): array
     {
         return [
@@ -109,7 +113,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
             },
         ];
     }
-    
+
     public function getStatuses(string $type = 'posts'): array
     {
         $statuses = [
@@ -118,7 +122,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
             Post::STATUS_DRAFT => trans('cms::app.draft'),
             Post::STATUS_TRASH => trans('cms::app.trash'),
         ];
-        
+
         return apply_filters($type.'.statuses', $statuses);
     }
 }
