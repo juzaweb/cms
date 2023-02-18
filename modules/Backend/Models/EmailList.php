@@ -42,9 +42,8 @@ use TwigBridge\Facade\Twig;
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereUpdatedAt($value)
  * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereSiteId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|EmailList WhereTemplate($code)
+ * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereTemplate($code)
  * @property int|null $site_id
- * @method static Builder|EmailList whereTemplate(string $code)
  * @method static Builder|EmailList whereTemplateCode($value)
  */
 class EmailList extends Model implements RootNetworkModelInterface
