@@ -200,7 +200,7 @@ return [
          *
          * Default: true
          */
-        'image_resizer' => env('JW_IMAGE_RESIZER', true),
+        'image_resizer' => env('JW_IMAGE_RESIZER', false),
 
         /**
          * File type
@@ -231,6 +231,7 @@ return [
                  * Default: 5 (MB)
                  */
                 'max_size' => env('JW_MEDIA_IMAGE_MAX_SIZE', 5),
+
                 'valid_mime' => [
                     ...Facades::defaultImageMimetypes(),
                     //

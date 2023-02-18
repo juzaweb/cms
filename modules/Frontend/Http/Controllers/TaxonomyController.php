@@ -18,11 +18,17 @@ class TaxonomyController extends FrontendController
         protected TaxonomyRepository $taxonomyRepository
     ) {
     }
-    
+
     public function index(...$slug): string
     {
         $taxSlug = Arr::get($slug, 1);
-        
+        $currentPage = Arr::get($slug, count($slug) - 1);
+        if (str_contains($currentPage, 'page-')) {
+            $currentPage = (int) str_replace('page-', '', $currentPage);
+        } else {
+            $currentPage = null;
+        }
+
         $taxonomy = $this->taxonomyRepository->findBySlug($taxSlug);
 
         Facades::$isTaxonomyPage = true;
@@ -30,10 +36,11 @@ class TaxonomyController extends FrontendController
         Facades::$taxonomy = $taxonomy;
 
         $title = $taxonomy->getName();
-        
+
         $posts = $this->postRepository->frontendListByTaxonomyPaginate(
             get_config('posts_per_page', 12),
-            $taxonomy->id
+            $taxonomy->id,
+            $currentPage
         );
 
         $template = get_name_template_part(
