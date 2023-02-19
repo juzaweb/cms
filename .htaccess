@@ -10,7 +10,7 @@
     ## You may need to uncomment the following line for some hosting environments,
     ## if you have installed to a subdirectory, enter the name here also.
     ##
-    # RewriteBase /
+    RewriteBase /
 
     ##
     ## Uncomment following lines to force HTTPS.
@@ -55,7 +55,7 @@
     ##
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^jw-styles/juzaweb/(.*|$) /public/jw-styles/juzaweb/$1 [NC,L]
-    RewriteRule ^storage/(.*|$) /public/storage/$1 [NC,L]
+    RewriteRule ^storage/(.*|$) /storage/app/public/$1 [NC,L]
     RewriteRule ^ index.php [L]
 
 </IfModule>
