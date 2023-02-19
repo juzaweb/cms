@@ -101,6 +101,7 @@ class PostController extends FrontendController
             ->paginate(10);
 
         $comments = CommentResource::collection($rows)->response()->getData(true);
+        $image = $postModel->thumbnail ? upload_url($postModel->thumbnail) : null;
 
         $data = apply_filters(
             "frontend.post_type.detail.data",
@@ -109,7 +110,8 @@ class PostController extends FrontendController
                 'post',
                 'description',
                 'comments',
-                'slug'
+                'slug',
+                'image'
             ),
             $postModel
         );
