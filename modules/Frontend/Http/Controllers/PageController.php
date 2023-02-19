@@ -67,8 +67,16 @@ class PageController extends FrontendController
         );
     }
 
-    protected function getPageParams($page, $slug, $request): array
+    /**
+     * @param Post $page
+     * @param array $slug
+     * @param $request
+     * @return array
+     */
+    protected function getPageParams(Post $page, array $slug, $request): array
     {
+        $image = $page->thumbnail ? upload_url($page->thumbnail) : null;
+
         if (is_home()) {
             $config = get_configs(['title', 'description']);
 
@@ -77,6 +85,7 @@ class PageController extends FrontendController
                 'title' => $config['title'],
                 'description' => $config['description'],
                 'slug' => $slug,
+                'image' => $image,
             ];
         } else {
             $params = [
@@ -84,6 +93,7 @@ class PageController extends FrontendController
                 'title' => $page->title,
                 'description' => $page->description,
                 'slug' => $slug,
+                'image' => $image,
             ];
         }
 
@@ -95,7 +105,17 @@ class PageController extends FrontendController
             }
         }
 
-        return $params;
+        $data = apply_filters(
+            "frontend.post_type.detail.data",
+            $params,
+            $page
+        );
+
+        return apply_filters(
+            "frontend.post_type.pages.detail.data",
+            $data,
+            $page
+        );
     }
 
     protected function getPageCustomData(array $item, array $params)

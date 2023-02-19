@@ -64,6 +64,8 @@ class Custom extends AbstractExtension
             new TwigFunction('json_encode', 'json_encode'),
             new TwigFunction('md5', 'md5'),
             new TwigFunction('is_home', 'is_home'),
+            new TwigFunction('is_admin', 'is_admin'),
+            new TwigFunction('has_permission', 'has_permission'),
             new TwigFunction('get_next_post', 'get_next_post'),
             new TwigFunction('get_taxonomy', 'get_taxonomy'),
             new TwigFunction('get_taxonomies', 'get_taxonomies'),
