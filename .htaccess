@@ -1,4 +1,61 @@
 <IfModule mod_rewrite.c>
-   RewriteEngine On
-   RewriteRule ^(.*)$ public/$1 [L]
+
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+
+    ##
+    ## You may need to uncomment the following line for some hosting environments,
+    ## if you have installed to a subdirectory, enter the name here also.
+    ##
+    # RewriteBase /
+
+    ##
+    ## Uncomment following lines to force HTTPS.
+    ##
+    # RewriteCond %{HTTPS} off
+    # RewriteRule (.*) https://%{SERVER_NAME}/$1 [L,R=301]
+
+    ##
+    ## Blocked folders
+    ##
+    RewriteRule ^bootstrap/.* index.php [L,NC]
+    RewriteRule ^config/.* index.php [L,NC]
+    RewriteRule ^vendor/.* index.php [L,NC]
+    RewriteRule ^storage/app/.* index.php [L,NC]
+    RewriteRule ^storage/logs/.* index.php [L,NC]
+    RewriteRule ^storage/framework/.* index.php [L,NC]
+    RewriteRule ^modules/.* index.php [L,NC]
+    RewriteRule ^themes/.* index.php [L,NC]
+    RewriteRule ^plugins/.* index.php [L,NC]
+
+    ##
+    ## Allowed folders
+    ##
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_FILENAME} !/.well-known/*
+    #RewriteCond %{REQUEST_FILENAME} !/storage/app/public/.*
+    #RewriteCond %{REQUEST_FILENAME} !/themes/.*/(assets|resources)/.*
+    #RewriteCond %{REQUEST_FILENAME} !/plugins/.*/(assets|resources)/.*
+    #RewriteCond %{REQUEST_FILENAME} !/plugins/.*/(assets|resources)/.*
+    #RewriteCond %{REQUEST_FILENAME} !/public/jw-styles/.*/(juzaweb|themes|plugins)/.*
+    RewriteRule !^index.php index.php [L,NC]
+
+    ##
+    ## Block all PHP files, except index
+    ##
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_FILENAME} \.php$
+    RewriteRule !^index.php index.php [L,NC]
+
+    ##
+    ## Standard routes
+    ##
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^jw-styles/juzaweb/(.*|$) /public/jw-styles/juzaweb/$1 [NC,L]
+    RewriteRule ^storage/(.*|$) /public/storage/$1 [NC,L]
+    RewriteRule ^ index.php [L]
+
 </IfModule>

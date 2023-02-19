@@ -39,7 +39,7 @@ class MediaController extends BackendController
     public function index(Request $request, $folderId = null): View
     {
         $title = trans('cms::app.media');
-        $type = $request->get('type');
+        $type = $request->get('type', 'file');
 
         if ($folderId) {
             $this->addBreadcrumb(
