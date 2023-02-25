@@ -19,9 +19,7 @@ use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
 
 class HookAction implements HookActionContract
 {
-    use RegisterHookAction;
-    use GetHookAction;
-    use Macroable;
+    use RegisterHookAction, GetHookAction, Macroable;
 
     protected EventyContract $hook;
 

@@ -14,11 +14,23 @@ use Juzaweb\CMS\Abstracts\Action;
 
 class BackupAction extends Action
 {
-    public function handle()
+    /**
+     * Handle the action execution
+     *
+     * @return void
+     */
+    public function handle(): void
     {
         $this->addAction(Action::BACKEND_INIT, [$this, 'addConfigs']);
     }
 
+    /**
+     * Add backup configurations
+     *
+     * This method adds configurations to enable and set up time for backup.
+     *
+     * @return void
+     */
     public function addConfigs(): void
     {
         $this->hookAction->registerConfig(

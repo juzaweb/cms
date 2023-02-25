@@ -54,6 +54,8 @@ use Juzaweb\CMS\Traits\UseUUIDColumn;
  * @method static Builder|Taxonomy whereSiteId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|Taxonomy[] $recursiveChildren
  * @property-read int|null $recursive_children_count
+ * @property string|null $uuid
+ * @method static Builder|Taxonomy whereUuid($value)
  */
 class Taxonomy extends Model
 {

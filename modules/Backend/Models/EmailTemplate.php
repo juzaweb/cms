@@ -34,6 +34,8 @@ use Juzaweb\CMS\Traits\UseUUIDColumn;
  * @mixin \Eloquent
  * @property int|null $site_id
  * @method static \Illuminate\Database\Eloquent\Builder|EmailTemplate whereSiteId($value)
+ * @property string|null $uuid
+ * @method static \Illuminate\Database\Eloquent\Builder|EmailTemplate whereUuid($value)
  */
 class EmailTemplate extends Model
 {
