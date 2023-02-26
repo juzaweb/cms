@@ -54,4 +54,4 @@ Route::group(
     }
 );
 
-Route::any('/ajax/{slug}', 'Backend\AjaxController@handle')->name('admin.ajax');
+Route::any('/ajax/{slug}', 'Backend\AjaxController@handle')->name('admin.ajax')->where('slug', '[a-z0-9\-\/]+');

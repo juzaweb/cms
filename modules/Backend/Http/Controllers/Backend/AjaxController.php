@@ -11,6 +11,7 @@
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -19,13 +20,16 @@ class AjaxController extends BackendController
 {
     public function handle(Request $request, $slug)
     {
-        $ajax = HookAction::getAdminAjaxs($slug);
-        if (empty($ajax)) {
-            return abort(404);
+        $key = str_replace('/', '.', $slug);
+
+        $ajax = HookAction::getAdminAjaxs($key);
+
+        if (empty($ajax) || !$ajax instanceof Collection) {
+            return response('Ajax function not found.', 404);
         }
 
         if ($request->method() != strtoupper($ajax->get('method'))) {
-            return abort(403);
+            return response('Method is not supported.', 403);
         }
 
         $callback = $ajax->get('callback');

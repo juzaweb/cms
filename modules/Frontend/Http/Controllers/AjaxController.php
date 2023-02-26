@@ -39,8 +39,7 @@ class AjaxController extends FrontendController
         }
 
         if ($method = $ajax->get('method')) {
-            $method = Str::upper($method);
-            if ($request->method() != $method) {
+            if ($request->method() != Str::upper($method)) {
                 return response('Method is not supported.', 403);
             }
         }

@@ -90,10 +90,10 @@ trait GetHookAction
     public function getConfigs($key = null): Collection
     {
         $globals = collect(config('juzaweb.config'))
-            ->mapWithKeys(fn($item, $key) => $this->mapConfigFields($item, $key));
+            ->mapWithKeys(fn ($item, $key) => $this->mapConfigFields($item, $key));
 
         $configs = collect($this->globalData->get('configs'))
-            ->mapWithKeys(fn($item, $key) => $this->mapConfigFields($item, $key))
+            ->mapWithKeys(fn ($item, $key) => $this->mapConfigFields($item, $key))
             ->merge($globals);
 
         if ($key) {
@@ -181,9 +181,7 @@ trait GetHookAction
             return false;
         }
 
-        $data = new Collection(GlobalData::get('frontend_ajaxs'));
-
-        return $data;
+        return new Collection(GlobalData::get('frontend_ajaxs'));
     }
 
     public function getThemeTemplates($key = null)
@@ -207,7 +205,13 @@ trait GetHookAction
     public function getAdminPages($key = null): Collection|string|array|null
     {
         if ($key) {
-            return Arr::get(GlobalData::get('admin_pages'), $key);
+            $data = Arr::get(GlobalData::get('admin_pages'), $key);
+
+            if ($data) {
+                return $data;
+            }
+
+            return null;
         }
 
         return new Collection(GlobalData::get('admin_pages'));
@@ -240,21 +244,21 @@ trait GetHookAction
         return new Collection(GlobalData::get('theme_settings'));
     }
 
-    public function getEnqueueScripts($inFooter = false)
+    public function getEnqueueScripts($inFooter = false): Collection
     {
         $scripts = new Collection(GlobalData::get('scripts'));
 
         return $scripts->where('inFooter', $inFooter);
     }
 
-    public function getEnqueueStyles($inFooter = false)
+    public function getEnqueueStyles($inFooter = false): Collection
     {
         $scripts = new Collection(GlobalData::get('styles'));
 
         return $scripts->where('inFooter', $inFooter);
     }
 
-    public function getEnqueueFrontendScripts($inFooter = false)
+    public function getEnqueueFrontendScripts($inFooter = false): Collection
     {
         $scripts = new Collection(GlobalData::get('frontend_scripts'));
 
@@ -331,7 +335,7 @@ trait GetHookAction
             : new Collection($this->globalData->get($data));
     }
 
-    protected function mapConfigFields($item, $key)
+    protected function mapConfigFields($item, $key): array
     {
         if (is_int($key) && is_string($item)) {
             return [

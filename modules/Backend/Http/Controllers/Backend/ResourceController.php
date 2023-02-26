@@ -28,6 +28,17 @@ class ResourceController extends BackendController
     protected Collection $setting;
     protected Collection $postType;
 
+    public function callAction($method, $parameters)
+    {
+        $params = array_values($parameters);
+
+        if (!$this->getSetting(...$params)->get('menu')) {
+            abort(404);
+        }
+
+        return parent::callAction($method, $parameters);
+    }
+
     protected function afterSave($data, $model, ...$params)
     {
         if (method_exists($model, 'syncMetasWithoutDetaching')) {
@@ -44,10 +55,10 @@ class ResourceController extends BackendController
                 $params[1] ?? null,
                 $params[2] ?? null
             );
-    
+
             return $dataTable;
         }
-        
+
         $dataTable = new ResourceDatatable();
         $dataTable->mountData(
             $params[0],

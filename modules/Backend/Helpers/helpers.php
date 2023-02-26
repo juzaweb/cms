@@ -228,7 +228,7 @@ if (!function_exists('upload_url')) {
         if (is_url($path)) {
             return $path;
         }
-    
+
         $storage = Storage::disk('public');
         if (empty($path) || !$storage->exists(jw_basepath($path))) {
             if ($default) {
@@ -237,7 +237,7 @@ if (!function_exists('upload_url')) {
 
             return asset('jw-styles/juzaweb/images/thumb-default.png');
         }
-        
+
         if ($size) {
             $filename = File::name($path);
             $pathSize = str_replace($filename, "{$filename}_{$size}", $path);
@@ -245,12 +245,12 @@ if (!function_exists('upload_url')) {
             if ($storage->exists(jw_basepath($pathSize))) {
                 return $storage->url($pathSize);
             }
-    
+
             if (config('juzaweb.filemanager.image_resizer')) {
                 return asset("jw-styles/images/resize/{$size}/{$path}");
             }
         }
-    
+
         return $storage->url($path);
     }
 }
@@ -789,4 +789,17 @@ function number_human_format($number): string
     }
 
     return number_format($number / 1000000000000, 2) . ' T';
+}
+
+if (!function_exists('action_replace')) {
+    function action_replace(string $action, $replaces = []): string
+    {
+        if (preg_match_all("/\{([0-9a-z]+)\}/", $action, $matches)) {
+            foreach ($matches[1] as $i => $varname) {
+                $action = str_replace($matches[0][$i], sprintf('%s', $replaces[$varname]), $action);
+            }
+        }
+
+        return $action;
+    }
 }
