@@ -165,11 +165,12 @@ interface HookActionContract
     public function getEmailTemplates(string $key = null): ?Collection;
 
     /**
-     * Register Admin Page
+     * Registers an admin page.
      *
-     * @param string $key
-     * @param array $args
-     * @return void
+     * @param string $key The key that identifies the admin page.
+     * @param array $args The arguments to pass with the page registration.
+     * This must include a 'title' key as a minimum.
+     * @throws Exception when Label Admin Page is required.
      */
     public function registerAdminPage(string $key, array $args): void;
 
@@ -186,5 +187,21 @@ interface HookActionContract
 
     public function registerSettingPage(string $key, array $args = []): void;
 
+    /**
+     * Registers an admin ajax request.
+     *
+     * @param string $key The key used to identify the AJAX request.
+     * @param array $args Optional. An array of arguments for registering the AJAX request. Default empty.
+     * - callback: A callable to fire when the request is received.
+     * - method: The HTTP method to use for the AJAX request (Default: GET).
+     * - key: Used to identify the AJAX request (Default: $key).
+     */
     public function registerAdminAjax(string $key, array $args = []): void;
+
+    /**
+     * Register navigation menu locations.
+     *
+     * @param array $locations An associative array of the navigation menu locations to add.
+     */
+    public function registerNavMenus($locations = []): void;
 }

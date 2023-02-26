@@ -107,6 +107,7 @@ class ConsoleServiceProvider extends ServiceProvider
         \Juzaweb\DevTool\Commands\Theme\ExportTranslationCommand::class,
         \Juzaweb\DevTool\Commands\Theme\ImportTranslationCommand::class,
         \Juzaweb\DevTool\Commands\Theme\TranslateViaGoogleCommand::class,
+        \Juzaweb\DevTool\Commands\FindFillableColumnCommand::class,
     ];
 
     /**
