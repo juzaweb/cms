@@ -630,8 +630,8 @@ if (!function_exists('get_vimeo_id')) {
         $id = '';
         if (preg_match(
             '%^https?:\/\/(?:www\.|player\.)?vimeo.com\/'
-            .'(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)'
-            .'(\d+)(?:$|\/|\?)(?:[?]?.*)$%im',
+            . '(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)'
+            . '(\d+)(?:$|\/|\?)(?:[?]?.*)$%im',
             $url,
             $regs
         )
