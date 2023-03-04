@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Support;
 
 use Countable;
+use Exception;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
@@ -124,7 +125,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      *
      * @param bool $collection
      * @return array|Collection
-     * @throws \Exception
+     * @throws Exception
      */
     public function scan(bool $collection = false): array|Collection
     {
@@ -160,7 +161,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      *
      * @param bool $collection
      * @return array|Collection
-     * @throws \Exception
+     * @throws Exception
      */
     public function all(bool $collection = false): array|Collection
     {
@@ -209,7 +210,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * Get all plugins as collection instance.
      *
      * @return PluginCollection
-     * @throws \Exception
+     * @throws Exception
      */
     public function toCollection(): PluginCollection
     {
@@ -222,7 +223,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * @param $status
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getByStatus($status): array
     {
@@ -244,7 +245,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * @param $name
      *
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function has($name): bool
     {
@@ -255,7 +256,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * Get list of enabled plugins.
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function allEnabled(): array
     {
@@ -266,7 +267,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * Get list of disabled plugins.
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function allDisabled(): array
     {
@@ -277,7 +278,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * Get count from all plugins.
      *
      * @return int
-     * @throws \Exception
+     * @throws Exception
      */
     public function count(): int
     {
@@ -290,6 +291,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * @param string $direction
      *
      * @return array
+     * @throws Exception
      */
     public function getOrdered($direction = 'asc'): array
     {
@@ -411,7 +413,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
      * @param int $status
      *
      * @return PluginCollection
-     * @throws \Exception
+     * @throws Exception
      */
     public function collections(int $status = 1): PluginCollection
     {
@@ -499,7 +501,7 @@ class LocalPluginRepository implements LocalPluginRepositoryContract, Countable
     /**
      * Get module used for cli session.
      * @return string
-     * @throws PluginNotFoundException
+     * @throws PluginNotFoundException|\Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function getUsedNow(): string
     {

@@ -387,6 +387,13 @@ trait RegisterHookAction
             'key' => $key,
         ];
 
+        /*preg_match_all("/\{([a-z0-9\_]+)\}/", $key, $matches);
+
+        if (!empty($matches[1])) {
+            $defaults['params'] = $matches[1];
+            $defaults['key'] = preg_replace("/\.\{([a-z0-9\_]+)\}/", '', $defaults['key']);
+        }*/
+
         $args = array_merge($defaults, $args);
 
         if (empty($args['callback'])) {
