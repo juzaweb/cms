@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Traits;
 
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -236,11 +237,17 @@ trait ResourceController
             $columns['id'] = $row->id;
             foreach ($columns as $col => $column) {
                 if (! empty($column['formatter'])) {
-                    $results[$index][$col] = $column['formatter'](
+                    $formatter = $column['formatter'](
                         $row->{$col} ?? null,
                         $row,
                         $index
                     );
+
+                    if ($formatter instanceof Renderable) {
+                        $formatter = $formatter->render();
+                    }
+
+                    $results[$index][$col] = $formatter;
                 } else {
                     $results[$index][$col] = $row->{$col};
                 }

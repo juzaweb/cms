@@ -89,11 +89,11 @@ class TaxonomyController extends BackendController
      * @param string $taxonomy
      * @return Collection
      */
-    protected function getSetting($postType, string $taxonomy): Collection
+    protected function getSetting(...$params): Collection
     {
         $taxonomies = GlobalData::get('taxonomies');
 
-        return $taxonomies[$this->getPostType($postType)][$taxonomy] ?? collect([]);
+        return $taxonomies[$this->getPostType($params[0])][$params[1]] ?? collect([]);
     }
 
     /**
@@ -149,13 +149,9 @@ class TaxonomyController extends BackendController
 
     protected function getDataForForm($model, ...$params): array
     {
-        $postType = $params[0];
-        $taxonomy = $params[1];
-
-        $data = $this->DataForForm($model, $taxonomy);
-        $data['taxonomy'] = $taxonomy;
-        $data['setting'] = $this->getSetting($postType, $taxonomy);
-
+        $data = $this->DataForForm($model, ...$params);
+        $data['taxonomy'] = $params[1];
+        $data['setting'] = $this->getSetting(...$params);
         return $data;
     }
 

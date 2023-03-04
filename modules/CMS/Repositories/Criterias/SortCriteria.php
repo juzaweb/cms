@@ -25,7 +25,7 @@ class SortCriteria extends Criteria implements CriteriaInterface
             $this->queries = request()->all();
         }
     }
-    
+
     /**
      * Apply criteria in query repository
      *
@@ -40,31 +40,29 @@ class SortCriteria extends Criteria implements CriteriaInterface
         if (!method_exists($repository, 'getFieldSortable')) {
             return $model;
         }
-        
+
         $fields = $repository->getFieldSortable();
         $tbl = $model->getModel()->getTable();
         $sortBy = Arr::get($this->queries, 'sort_by');
         $sortOrder = Arr::get($this->queries, 'sort_order', 'ASC');
-        
+
         if (!in_array(strtoupper($sortOrder), ['ASC', 'DESC'])) {
             $sortOrder = 'ASC';
         }
-        
+
         if ($sortBy && in_array($sortBy, $fields)) {
             return $model->orderBy("{$tbl}.{$sortBy}", $sortOrder);
         }
-    
+
         if (!method_exists($repository, 'getSortableDefaults')) {
             return $model;
         }
-        
+
         $defaults = $repository->getSortableDefaults();
-        if ($defaults) {
-            foreach ($defaults as $col => $order) {
-                $model->orderBy("{$tbl}.{$col}", $order);
-            }
+        foreach ($defaults as $col => $order) {
+            $model->orderBy("{$tbl}.{$col}", $order);
         }
-        
+
         return $model;
     }
 }

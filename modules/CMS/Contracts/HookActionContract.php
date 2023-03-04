@@ -204,4 +204,6 @@ interface HookActionContract
      * @param array $locations An associative array of the navigation menu locations to add.
      */
     public function registerNavMenus($locations = []): void;
+
+    public function registerFrontendAjax($key, $args = []): void;
 }
