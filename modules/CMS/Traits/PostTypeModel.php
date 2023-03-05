@@ -632,7 +632,7 @@ trait PostTypeModel
         );
     }
 
-    public function getLink($absolute = false): bool|string
+    public function getLink($absolute = true): bool|string
     {
         if ($this->type == 'pages') {
             return route('post', [$this->slug], $absolute);
