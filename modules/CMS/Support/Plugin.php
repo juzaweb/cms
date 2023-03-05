@@ -302,6 +302,7 @@ class Plugin
 
         $adminRouter = $this->getPath() . '/src/routes/admin.php';
         $apiRouter = $this->getPath() . '/src/routes/api.php';
+        $webhookRouter = $this->getPath() . '/src/routes/webhook.php';
         $themeRouter = $this->getPath() . '/src/routes/theme.php';
 
         if (file_exists($adminRouter)) {
@@ -315,6 +316,10 @@ class Plugin
                 ->prefix('api')
                 ->as('api.')
                 ->group($apiRouter);
+        }
+
+        if (file_exists($webhookRouter)) {
+            $this->router->prefix('webhook')->as('webhook.')->group($webhookRouter);
         }
 
         if (file_exists($themeRouter)) {
