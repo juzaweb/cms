@@ -27,7 +27,7 @@ class ForgotPasswordRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'email.exists' => trans('cms::app.email_does_not_exists'),

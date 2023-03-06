@@ -14,65 +14,101 @@ class SwaggerDocument implements Arrayable
     protected string $openapi = '3.0.3';
     protected string $version = 'v1';
     protected Collection $paths;
-    
+
+    /**
+     * Create a new instance of the current class.
+     *
+     * @param string $name The name to assign to the instance.
+     *
+     * @return static The newly created instance.
+     */
     public static function make(string $name): static
     {
         return new static($name);
     }
-    
+
     public function __construct(protected string $name)
     {
         $this->paths = new Collection();
         $this->title = Str::ucfirst($this->name);
     }
-    
+
+    /**
+     * Set the title of the Swagger documentation.
+     *
+     * @param  string  $title
+     * @return $this
+     */
     public function setTitle(string $title): static
     {
         $this->title = $title;
-        
+
         return $this;
     }
-    
+
+    /**
+     * Set the prefix for the Swagger API paths.
+     *
+     * @param  string  $prefix
+     * @return $this
+     */
     public function setPrefix(string $prefix): static
     {
         $this->prefix = $prefix;
-        
+
         return $this;
     }
-    
+
+    /**
+     * Get the current prefix for the Swagger API paths.
+     *
+     * @return string
+     */
     public function getPrefix(): string
     {
         return $this->prefix;
     }
-    
+
+    /**
+     * Get the name of this instance of the Swagger documentation.
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
-    
+
+    /**
+     * Add a new path to the Swagger documentation.
+     *
+     * @param  string    $path
+     * @param  callable  $callback
+     * @return $this
+     */
     public function path(string $path, callable $callback): static
     {
         $base = isset($this->prefix) ? "/api/{$this->getPrefix()}/" : '/api/';
-        
+
         $this->paths->put(
             $base . trim($path, '/'),
             $callback(new SwaggerPath($path))
         );
-        
+
         return $this;
     }
-    
+
     public function append(string|APISwaggerDocumentation $document): static
     {
         if (is_string($document)) {
             $document = app($document);
         }
-        
+
         $document->handle($this);
-        
+
         return $this;
     }
-    
+
     public function toArray(): array
     {
         return [

@@ -309,7 +309,7 @@ trait RegisterHookAction
         $this->globalData->set('admin_ajaxs.' . $key, new Collection($args));
     }
 
-    public function registerNavMenus($locations = []): void
+    public function registerNavMenus(array $locations = []): void
     {
         foreach ($locations as $key => $location) {
             $this->globalData->set(
@@ -352,7 +352,7 @@ trait RegisterHookAction
         $this->globalData->set('sidebars.' . $key, new Collection($args));
     }
 
-    public function registerWidget($key, $args = []): void
+    public function registerWidget(string $key, array $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -366,7 +366,7 @@ trait RegisterHookAction
         $this->globalData->set('widgets.' . $key, new Collection($args));
     }
 
-    public function registerPageBlock($key, $args = []): void
+    public function registerPageBlock(string $key, array $args = []): void
     {
         $defaults = [
             'label' => '',
@@ -380,7 +380,7 @@ trait RegisterHookAction
         $this->globalData->set('page_blocks.' . $key, new Collection($args));
     }
 
-    public function registerFrontendAjax($key, $args = []): void
+    public function registerFrontendAjax(string $key, array $args = []): void
     {
         $defaults = [
             'auth' => false,
@@ -403,7 +403,7 @@ trait RegisterHookAction
         $this->globalData->set('frontend_ajaxs.' . $key, new Collection($args));
     }
 
-    public function registerThemeTemplate($key, $args = []): void
+    public function registerThemeTemplate(string $key, array $args = []): void
     {
         $defaults = [
             'key' => $key,
