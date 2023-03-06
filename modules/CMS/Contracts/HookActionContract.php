@@ -21,8 +21,28 @@ use Juzaweb\API\Support\Swagger\SwaggerDocument;
  */
 interface HookActionContract
 {
+    /**
+     * Add an action to the hook manager.
+     *
+     * @param string   $tag        The name of the action.
+     * @param callable $callback   The callback function to execute when the action is called.
+     * @param int      $priority   (Optional) The priority of the action. Default is 20.
+     * @param int      $arguments  (Optional) The number of arguments the callback accepts. Default is 1.
+     *
+     * @return void
+     */
     public function addAction($tag, $callback, $priority = 20, $arguments = 1): void;
 
+    /**
+     * Add a new filter to the hook system.
+     *
+     * @param string $tag The tag name of the filter.
+     * @param callable $callback The callback function to execute when the filter is applied.
+     * @param int $priority The priority of the filter. Default is 20.
+     * @param int $arguments The number of arguments accepted by the filter. Default is 1.
+     *
+     * @return void
+     */
     public function addFilter($tag, $callback, $priority = 20, $arguments = 1): void;
 
     /**
@@ -160,9 +180,23 @@ interface HookActionContract
      */
     public function addThumbnailSizes(string $postType, string|array $size): void;
 
+    /**
+     * Applies all of the callbacks attached to the given tag and returns the filtered value.
+     *
+     * @param string $tag The unique identifier for the filter.
+     * @param mixed $value The initial value to be filtered.
+     * @param mixed ...$args Optional additional arguments passed to the filter.
+     * @return mixed The filtered value.
+     */
     public function applyFilters(string $tag, mixed $value, ...$args): mixed;
 
-    public function getMenuBoxs(array $keys = []): array;
+    /**
+     * Retrieve an array of menu boxes from global data, optionally filtered by keys.
+     *
+     * @param string|array $keys An optional list of keys to filter. If string, filters by that one key.
+     * @return array The array of all menu boxes if no keys are specified, or an array of the filtered menu boxes.
+     */
+    public function getMenuBoxs(string|array $keys = []): array;
 
     /**
      * Registers a script to be enqueued.
@@ -263,6 +297,13 @@ interface HookActionContract
      */
     public function registerConfig(array|string $key, array $args = []): void;
 
+    /**
+     * Returns a collection of permissions, with optional filtering by key.
+     *
+     * @param string|null $key The key to filter permissions by. Default: null
+     *
+     * @return \Illuminate\Support\Collection A collection of permissions.
+     */
     public function getPermissions(?string $key = null): Collection;
 
     /**
