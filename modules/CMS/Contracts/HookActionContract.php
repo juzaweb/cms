@@ -181,7 +181,7 @@ interface HookActionContract
     public function addThumbnailSizes(string $postType, string|array $size): void;
 
     /**
-     * Applies all of the callbacks attached to the given tag and returns the filtered value.
+     * Applies all the callbacks attached to the given tag and returns the filtered value.
      *
      * @param string $tag The unique identifier for the filter.
      * @param mixed $value The initial value to be filtered.
@@ -302,7 +302,7 @@ interface HookActionContract
      *
      * @param string|null $key The key to filter permissions by. Default: null
      *
-     * @return \Illuminate\Support\Collection A collection of permissions.
+     * @return Collection A collection of permissions.
      */
     public function getPermissions(?string $key = null): Collection;
 
@@ -511,34 +511,50 @@ interface HookActionContract
      *
      * @param string|null $key The permalink key to get (optional).
      *
-     * @return array|Collection If a key is provided, returns specific permalink collection.
+     * @return array|Collection|null If a key is provided, returns specific permalink collection.
      * Returns array of all permalinks otherwise.
      */
-    public function getPermalinks(?string $key = null): array|Collection;
+    public function getPermalinks(?string $key = null): array|Collection|null;
 
     /**
      * Get the collection of email hooks or a specific email hook.
      *
      * @param string|null $key Optional. The unique key of an email hook. Default null.
      *
-     * @return Collection Returns a collection of all email hooks or a specific email hook.
+     * @return Collection|null Returns a collection of all email hooks or a specific email hook.
      */
-    public function getEmailHooks(?string $key = null): Collection;
+    public function getEmailHooks(?string $key = null): ?Collection;
 
     /**
      * Get all registered widgets or retrieve specific widget by key.
      *
      * @param string|null $key Key of the specific widget to retrieve
-     * @return Collection The collection of all registered widgets or collection with the widget's data
+     * @return Collection|null The collection of all registered widgets or collection with the widget's data
      * if a $key parameter is provided
      */
-    public function getWidgets(?string $key = null): Collection;
+    public function getWidgets(?string $key = null): ?Collection;
 
     /**
      * Get the page blocks for the given key.
      *
      * @param string|null $key The key to use as an index in the page_blocks global data array.
-     * @return Collection Returns an instance of Collection containing the page blocks.
+     * @return Collection|null Returns an instance of Collection containing the page blocks.
      */
-    public function getPageBlocks(?string $key = null): Collection;
+    public function getPageBlocks(?string $key = null): ?Collection;
+
+    /**
+     * Get Frontend Ajaxs collection or a specific key's data.
+     *
+     * @param  string|null  $key
+     * @return Collection|bool
+     */
+    public function getFrontendAjaxs(string $key = null): Collection|bool;
+
+    /**
+     * Get theme templates.
+     *
+     * @param  string|null  $key
+     * @return Collection|null
+     */
+    public function getThemeTemplates(string $key = null): ?Collection;
 }

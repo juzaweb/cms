@@ -127,7 +127,7 @@ trait GetHookAction
         return $permalinks;
     }
 
-    public function getEmailHooks(?string $key = null): Collection
+    public function getEmailHooks(?string $key = null): ?Collection
     {
         if ($key) {
             return GlobalData::get('email_hooks.'.$key);
@@ -136,7 +136,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('email_hooks'));
     }
 
-    public function getWidgets(?string $key = null): Collection
+    public function getWidgets(?string $key = null): ?Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('widgets'), $key);
@@ -145,7 +145,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('widgets'));
     }
 
-    public function getPageBlocks(?string $key = null)
+    public function getPageBlocks(?string $key = null): ?Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('page_blocks'), $key);
@@ -154,7 +154,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('page_blocks'));
     }
 
-    public function getSidebars($key = null)
+    public function getSidebars($key = null): ?Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('sidebars'), $key);
@@ -163,7 +163,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('sidebars'));
     }
 
-    public function getFrontendAjaxs($key = null)
+    public function getFrontendAjaxs(string $key = null): Collection|bool
     {
         if ($key) {
             $data = Arr::get(GlobalData::get('frontend_ajaxs'), $key);
@@ -178,7 +178,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('frontend_ajaxs'));
     }
 
-    public function getThemeTemplates($key = null)
+    public function getThemeTemplates(string $key = null): ?Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('templates'), $key);
