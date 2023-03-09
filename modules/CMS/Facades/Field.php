@@ -10,14 +10,17 @@
 
 namespace Juzaweb\CMS\Facades;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Facade;
 use Juzaweb\CMS\Contracts\Field as FieldContract;
 
 /**
  * @method static fieldByType($fields)
- * @method static render($metas, $model, $collection = false)
+ * @method static View|Factory render(array $fields, array|Model $values = [], bool $collection = false)
  * @method static select(string|Model $label, ?string $name, ?array $options = [])
+ * @method static textarea(string|Model $label, ?string $name, ?array $options = [])
  * @method static images(string|Model $label, ?string $name, ?array $options = [])
  * @method static security(string|Model $label, ?string $name, ?array $options = [])
  * @method static text(string|Model $label, ?string $name, ?array $options = [])

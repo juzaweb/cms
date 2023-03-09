@@ -19,9 +19,7 @@ use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
 
 class HookAction implements HookActionContract
 {
-    use RegisterHookAction;
-    use GetHookAction;
-    use Macroable;
+    use RegisterHookAction, GetHookAction, Macroable;
 
     protected EventyContract $hook;
 
@@ -50,13 +48,6 @@ class HookAction implements HookActionContract
         return $this->hook->filter($tag, $value, ...$args);
     }
 
-    /**
-     * Add setting form
-     * @param string $key
-     * @param array $args
-     *      - name : Name form setting
-     *      - view : View form setting
-     */
     public function addSettingForm(string $key, array $args = []): void
     {
         $defaults = [
@@ -69,28 +60,14 @@ class HookAction implements HookActionContract
             'page' => 'system',
         ];
 
+        // Merge the provided arguments with the default values.
         $args = array_merge($defaults, $args);
 
+        // Set the setting form data in the global data collection using the provided key.
+        // Uses a new Collection instance created from the merged arguments.
         $this->globalData->set('setting_forms.' . $key, new Collection($args));
     }
 
-    /**
-     * Add a top-level menu page.
-     *
-     * This function takes a capability which will be used to determine whether
-     * or not a page is included in the menu.
-     *
-     * The function which is hooked in to handle the output of the page must check
-     * that the user has the required capability as well.
-     *
-     * @param string $menuTitle The trans key to be used for the menu.
-     * @param string $menuSlug The url name to refer to this menu by. not include admin-cp
-     * @param array $args
-     * - string $icon Url icon or fa icon fonts
-     * - string $parent The parent of menu. Default null
-     * - int $position The position in the menu order this item should appear.
-     * @return void.
-     */
     public function addAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
     {
         $adminMenu = $this->globalData->get('admin_menu');

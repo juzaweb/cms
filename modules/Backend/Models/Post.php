@@ -96,6 +96,8 @@ use Spatie\Feed\FeedItem;
  * @property-read int|null $ratings_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Juzaweb\Backend\Models\Resource[] $resources
  * @property-read int|null $resources_count
+ * @property string|null $uuid
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUuid($value)
  */
 class Post extends Model implements Feedable
 {

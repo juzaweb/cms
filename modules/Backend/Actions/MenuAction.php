@@ -31,8 +31,8 @@ class MenuAction extends Action
         $this->addAction(self::INIT_ACTION, [$this, 'addPostTypes']);
         $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addBackendMenu']);
         $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addSettingPage']);
-        $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addAdminScripts'], 10);
-        $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addAdminStyles'], 10);
+        $this->addAction(self::BACKEND_INIT, [$this, 'addAdminScripts'], 10);
+        $this->addAction(self::BACKEND_INIT, [$this, 'addAdminStyles'], 10);
         $this->addAction(self::INIT_ACTION, [$this, 'addMenuBoxs'], 50);
         $this->addAction(self::BACKEND_CALL_ACTION, [$this, 'addTaxonomiesForm']);
         $this->addAction(self::INIT_ACTION, [$this, 'registerEmailHooks']);

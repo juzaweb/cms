@@ -18,28 +18,28 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class BindingsCommand extends Command
 {
-    
+
     /**
      * The name of command.
      *
      * @var string
      */
     protected $name = 'make:bindings';
-    
+
     /**
      * The description of command.
      *
      * @var string
      */
     protected $description = 'Add repository bindings to service provider.';
-    
+
     /**
      * The type of class being generated.
      *
      * @var string
      */
     protected $type = 'Bindings';
-    
+
     /**
      * Execute the command.
      *
@@ -50,7 +50,7 @@ class BindingsCommand extends Command
     {
         $this->laravel->call([$this, 'fire'], func_get_args());
     }
-    
+
     /**
      * Execute the command.
      *
@@ -59,32 +59,42 @@ class BindingsCommand extends Command
     public function fire()
     {
         try {
-            $bindingGenerator = new BindingsGenerator([
+            $bindingGenerator = new BindingsGenerator(
+                [
                 'name' => $this->argument('name'),
                 'force' => $this->option('force'),
-            ]);
+                ]
+            );
             // generate repository service provider
             if (!file_exists($bindingGenerator->getPath())) {
-                $this->call('make:provider', [
+                $this->call(
+                    'make:provider',
+                    [
                     'name' => $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()),
-                ]);
+                    ]
+                );
                 // placeholder to mark the place in file where to prepend repository bindings
                 $provider = File::get($bindingGenerator->getPath());
-                File::put($bindingGenerator->getPath(), vsprintf(str_replace('//', '%s', $provider), [
-                    '//',
-                    $bindingGenerator->bindPlaceholder,
-                ]));
+                File::put(
+                    $bindingGenerator->getPath(),
+                    vsprintf(
+                        str_replace('//', '%s', $provider),
+                        [
+                        '//',
+                        $bindingGenerator->bindPlaceholder,
+                        ]
+                    )
+                );
             }
             $bindingGenerator->run();
-            $this->info($this->type.' created successfully.');
+            $this->info($this->type . ' created successfully.');
         } catch (FileAlreadyExistsException $e) {
-            $this->error($this->type.' already exists!');
-            
+            $this->error($this->type . ' already exists!');
             return false;
         }
     }
-    
-    
+
+
     /**
      * The array of command arguments.
      *
@@ -101,8 +111,8 @@ class BindingsCommand extends Command
             ],
         ];
     }
-    
-    
+
+
     /**
      * The array of command options.
      *

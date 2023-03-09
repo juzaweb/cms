@@ -2,7 +2,7 @@
     @php
         $href = $style->get('src') .'?v='. $style->get('ver');
     @endphp
-    <link rel="stylesheet" type="text/css" href="{{ $href }}" id="{{ $style->get('key') }}">
+    <link rel="stylesheet" type="text/css" href="{{ $href }}" id="css-{{ $style->get('key') }}">
 @endforeach
 
 @foreach ($scripts as $script)
@@ -10,5 +10,6 @@
         $href = $script->get('src') .'?v='. $script->get('ver');
     @endphp
 
-    <script src="{{ $href }}" id="{{ $script->get('key') }}"></script>
+    <script src="{{ $href }}" id="js-{{ $script->get('key') }}"></script>
 @endforeach
+

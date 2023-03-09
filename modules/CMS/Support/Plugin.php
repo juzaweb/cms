@@ -218,27 +218,6 @@ class Plugin
     {
         $domain = $this->getDomainName();
         $name = $this->getName();
-        $adminRouter = $this->getPath() . '/src/routes/admin.php';
-        $apiRouter = $this->getPath() . '/src/routes/api.php';
-        $themeRouter = $this->getPath() . '/src/routes/theme.php';
-
-        if (file_exists($adminRouter)) {
-            $this->router->middleware('admin')
-                ->prefix(config('juzaweb.admin_prefix'))
-                ->group($adminRouter);
-        }
-
-        if (file_exists($apiRouter)) {
-            $this->router->middleware('api')
-                ->prefix('api')
-                ->as('api.')
-                ->group($apiRouter);
-        }
-
-        if (file_exists($themeRouter)) {
-            $this->router->middleware('theme')
-                ->group($themeRouter);
-        }
 
         $viewPath = $this->getPath() . '/src/resources/views';
         $langPath = $this->getPath() . '/src/resources/lang';
@@ -320,6 +299,32 @@ class Plugin
         $this->registerProviders();
 
         //$this->registerFiles();
+
+        $adminRouter = $this->getPath() . '/src/routes/admin.php';
+        $apiRouter = $this->getPath() . '/src/routes/api.php';
+        $webhookRouter = $this->getPath() . '/src/routes/webhook.php';
+        $themeRouter = $this->getPath() . '/src/routes/theme.php';
+
+        if (file_exists($adminRouter)) {
+            $this->router->middleware('admin')
+                ->prefix(config('juzaweb.admin_prefix'))
+                ->group($adminRouter);
+        }
+
+        if (file_exists($apiRouter)) {
+            $this->router->middleware('api')
+                ->prefix('api')
+                ->as('api.')
+                ->group($apiRouter);
+        }
+
+        if (file_exists($webhookRouter)) {
+            $this->router->prefix('webhook')->as('webhook.')->group($webhookRouter);
+        }
+
+        if (file_exists($themeRouter)) {
+            $this->router->middleware('theme')->group($themeRouter);
+        }
 
         $this->fireEvent('register');
     }

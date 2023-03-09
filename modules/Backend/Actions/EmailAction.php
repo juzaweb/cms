@@ -21,6 +21,11 @@ class EmailAction extends Action
         $this->addAction(Action::INIT_ACTION, [$this, 'addEmailTemplates']);
     }
 
+    /**
+     * Add Email templates.
+     *
+     * Loops through a directory and adds all the email templates we've configured to the CMS
+     */
     public function addEmailTemplates()
     {
         $basePath = base_path('modules/Backend/resources/data/mail_templates');

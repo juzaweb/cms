@@ -36,6 +36,8 @@ if (process.env.npm_config_plugin) {
 
 mix.browserSync({
     files: [
+        'modules/Backend/Http/Controllers/*.php',
+        'modules/Frontend/Http/Controllers/*.php',
         'modules/**/*.blade.php',
         'plugins/**/*.blade.php',
         'public/**/*.js',

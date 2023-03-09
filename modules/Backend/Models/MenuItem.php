@@ -54,6 +54,11 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereNumOrder($value)
  * @property-read \Juzaweb\Backend\Models\Taxonomy|null $post
  * @property-read \Juzaweb\Backend\Models\Taxonomy|null $taxonomy
+ * @property-read \Illuminate\Database\Eloquent\Collection|MenuItem[] $children
+ * @property-read int|null $children_count
+ * @property-read MenuItem|null $parent
+ * @property-read \Illuminate\Database\Eloquent\Collection|MenuItem[] $recursiveChildren
+ * @property-read int|null $recursive_children_count
  */
 class MenuItem extends Model
 {

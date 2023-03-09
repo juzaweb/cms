@@ -115,7 +115,7 @@
                     </a>
                     <br />
                     <p class="mb-0">
-                        Copyright © {{ date('Y') }} {{ get_config('title') }} - Provided by Juzaweb
+                        Copyright © 2020 {{ get_config('title') }} - Provided by Juzaweb
                     </p>
                 </div>
             </div>

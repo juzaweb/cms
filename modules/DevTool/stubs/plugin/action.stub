@@ -11,7 +11,7 @@ class $CLASS$ extends Action
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         //
     }

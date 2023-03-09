@@ -41,6 +41,8 @@ use Juzaweb\CMS\Traits\UseUUIDColumn;
  * @mixin \Eloquent
  * @property int|null $site_id
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereSiteId($value)
+ * @property string|null $uuid
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUuid($value)
  */
 class Menu extends Model
 {

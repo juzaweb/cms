@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Repositories\BaseRepository;
 use Juzaweb\CMS\Repositories\Criterias\FilterCriteria;
 use Juzaweb\CMS\Repositories\Criterias\SearchCriteria;
 use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
@@ -132,14 +133,15 @@ class ResourceDatatable extends DataTable
 
         if ($repository = $this->getSetting($this->type)->get('repository')) {
             /**
-             * @var \Juzaweb\CMS\Repositories\BaseRepository $repository
+             * @var BaseRepository $repository
              */
             $repository = app($repository);
             $queries = $request->query();
             if ($this->postId) {
                 $queries['post_id'] = $this->postId;
             }
-
+            $queries['sort_by'] = $queries['sort'];
+            $queries['sort_order'] = $queries['order'];
             $repository->pushCriteria(new SearchCriteria($queries));
             $repository->pushCriteria(new FilterCriteria($queries));
             $repository->pushCriteria(new SortCriteria($queries));

@@ -13,10 +13,10 @@ namespace Juzaweb\CMS\Traits\Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\PasswordReset;
+use Juzaweb\CMS\Http\Requests\Auth\ForgotPasswordRequest;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Support\Email;
 use Juzaweb\CMS\Traits\ResponseMessage;
@@ -37,18 +37,9 @@ trait AuthForgotPassword
         );
     }
 
-    public function forgotPassword(Request $request): JsonResponse|RedirectResponse
+    public function forgotPassword(ForgotPasswordRequest $request): JsonResponse|RedirectResponse
     {
         do_action('forgot-password.handle', $request);
-
-        $request->validate(
-            [
-                'email' => 'required|email|exists:users,email',
-            ],
-            [
-                'email.exists' => trans('cms::app.email_does_not_exists')
-            ]
-        );
 
         $email = $request->post('email');
         $user = User::whereEmail($email)

@@ -62,6 +62,8 @@ use Juzaweb\CMS\Traits\UseUUIDColumn;
  * @property string|null $slug
  * @method static Builder|Resource whereSiteId($value)
  * @method static Builder|Resource whereSlug($value)
+ * @property string|null $uuid
+ * @method static Builder|Resource whereUuid($value)
  */
 class Resource extends Model
 {

@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Traits;
 
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -21,6 +22,9 @@ use Illuminate\Support\Facades\Validator;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method void getBreadcrumbPrefix(...$params)
+ */
 trait ResourceController
 {
     public function index(...$params): View
@@ -31,8 +35,12 @@ trait ResourceController
             ...$params
         );
 
+        if (method_exists($this, 'getBreadcrumbPrefix')) {
+            $this->getBreadcrumbPrefix(...$params);
+        }
+
         return view(
-            $this->viewPrefix . '.index',
+            "{$this->viewPrefix}.index",
             $this->getDataForIndex(...$params)
         );
     }
@@ -47,6 +55,10 @@ trait ResourceController
             Route::currentRouteName()
         );
 
+        if (method_exists($this, 'getBreadcrumbPrefix')) {
+            $this->getBreadcrumbPrefix(...$params);
+        }
+
         $this->addBreadcrumb(
             [
                 'title' => $this->getTitle(...$params),
@@ -57,7 +69,7 @@ trait ResourceController
         $model = $this->makeModel(...$params);
 
         return view(
-            $this->viewPrefix . '.form',
+            "{$this->viewPrefix}.form",
             array_merge(
                 [
                     'title' => trans('cms::app.add_new'),
@@ -79,6 +91,10 @@ trait ResourceController
         $indexParams = $params;
         unset($indexParams[$this->getPathIdIndex($indexParams)]);
         $indexParams = collect($indexParams)->values()->toArray();
+
+        if (method_exists($this, 'getBreadcrumbPrefix')) {
+            $this->getBreadcrumbPrefix(...$params);
+        }
 
         $this->addBreadcrumb(
             [
@@ -117,7 +133,7 @@ trait ResourceController
         DB::beginTransaction();
 
         try {
-            $this->beforeStore($request);
+            $this->beforeStore($request, ...$params);
             $model = $this->makeModel(...$params);
             $slug = $request->input('slug');
 
@@ -125,8 +141,10 @@ trait ResourceController
                 $data['slug'] = $model->generateSlug($slug);
             }
 
-            $model->fill($data);
             $this->beforeSave($data, $model, ...$params);
+
+            $model->fill($data);
+
             $model->save();
 
             $this->afterStore($request, $model, ...$params);
@@ -219,11 +237,17 @@ trait ResourceController
             $columns['id'] = $row->id;
             foreach ($columns as $col => $column) {
                 if (! empty($column['formatter'])) {
-                    $results[$index][$col] = $column['formatter'](
+                    $formatter = $column['formatter'](
                         $row->{$col} ?? null,
                         $row,
                         $index
                     );
+
+                    if ($formatter instanceof Renderable) {
+                        $formatter = $formatter->render();
+                    }
+
+                    $results[$index][$col] = $formatter;
                 } else {
                     $results[$index][$col] = $row->{$col};
                 }
@@ -380,9 +404,15 @@ trait ResourceController
      */
     protected function getDataForForm($model, ...$params)
     {
-        return [
+        $data = [
             'model' => $model
         ];
+
+        if (method_exists($this, 'getSetting')) {
+            $data['setting'] = $this->getSetting(...$params);
+        }
+
+        return $data;
     }
 
     /**

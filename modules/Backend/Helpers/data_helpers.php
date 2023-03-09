@@ -39,6 +39,17 @@ function get_related_posts($post, $limit = 5, $taxonomy = null): ?array
     return JWQuery::relatedPosts($post, $limit, $taxonomy);
 }
 
+/**
+ * Get the most popular posts.
+ *
+ *
+ * @param null $type The type of post to retrieve.
+ * @param array|null $post An optional post array to exclude from the results.
+ * @param int $limit The maximum number of posts to return. Defaults to 5.
+ * @param array $options Optional options for retrieving posts.
+ *
+ * @return array An array of the most popular posts.
+ */
 function get_popular_posts($type = null, $post = null, $limit = 5, $options = []): array
 {
     if ($limit > 20) {
@@ -62,7 +73,21 @@ function get_popular_posts($type = null, $post = null, $limit = 5, $options = []
     return PostResourceCollection::make($posts)->toArray(request());
 }
 
-function get_post_resources($resource, $options = []): array
+/**
+ * Retrieve post resources from database.
+ *
+ * @param string $resource Resource type to query.
+ * @param array $options Options for sorting, limiting, and paginating the query.
+ * - id: Resource id.
+ * - post_id: Post id.
+ * - parent_id: Parent resource id.
+ * - order_by: Array containing column name and direction to sort by.
+ * - paginate: Number of records to paginate.
+ * - limit: Limit records returned in the query.
+ *
+ * @return array Collection of post resources.
+ */
+function get_post_resources(string $resource, array $options = []): array
 {
     $query = Resource::selectFrontendBuilder()->where('type', '=', $resource);
 
@@ -102,7 +127,15 @@ function get_post_resources($resource, $options = []): array
     return ResourceResource::collection($data)->toArray(request());
 }
 
-function get_post_resource($resource, $id): ?array
+/**
+ * Get a single post resource.
+ *
+ * @param string $resource The name of the resource to get.
+ * @param int $id The id of the post to get.
+ *
+ * @return array|null An array of the resource data, or null if not found.
+ */
+function get_post_resource(string $resource, int $id): ?array
 {
     $query = Resource::selectFrontendBuilder()
         ->where('type', '=', $resource)
@@ -111,6 +144,14 @@ function get_post_resource($resource, $id): ?array
     return $data ? (new ResourceResource($data))->toArray(request()) : null;
 }
 
+/**
+ * Return the next resource of a given type.
+ *
+ * @param string $type The type of resource to get next.
+ * @param array|null $resource The current resource which may be used to get the next one.
+ *
+ * @return array|null The next resource or null if none exists.
+ */
 function get_next_resource(string $type, ?array $resource): ?array
 {
     $query = Resource::selectFrontendBuilder()
@@ -120,6 +161,13 @@ function get_next_resource(string $type, ?array $resource): ?array
     return $data ? (new ResourceResource($data))->toArray(request()) : null;
 }
 
+/**
+ * Retrieves the previous post from the database in relation to the current post.
+ *
+ * @param array|null $currentPost The current Post array for comparison.
+ *
+ * @return array|null The previous Post as an array or null if not found.
+ */
 function get_previous_post(?array $currentPost): ?array
 {
     $post = Post::selectFrontendBuilder()
@@ -130,6 +178,13 @@ function get_previous_post(?array $currentPost): ?array
     return $post ? (new PostResource($post))->toArray(request()) : null;
 }
 
+/**
+ * Get the next post from the database by ID.
+ *
+ * @param array $post The post object.
+ *
+ * @return array|null An array containing the details of the next post, if one exists. Otherwise, null.
+ */
 function get_next_post($post): ?array
 {
     $post = Post::selectFrontendBuilder()

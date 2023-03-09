@@ -40,12 +40,6 @@ trait GetHookAction
         return GlobalData::get('menu_boxs.'.$key);
     }
 
-    /**
-     * Get post type setting
-     *
-     * @param  string|null  $postType
-     * @return Collection
-     * */
     public function getPostTypes(string $postType = null): Collection
     {
         if ($postType) {
@@ -57,7 +51,7 @@ trait GetHookAction
         return collect(GlobalData::get('post_types'));
     }
 
-    public function getTaxonomies($postType = null): Collection
+    public function getTaxonomies(string|array|null $postType = null): Collection
     {
         if (is_array($postType)) {
             $postType = $postType['key'];
@@ -87,13 +81,13 @@ trait GetHookAction
         return GlobalData::get('admin_menu');
     }
 
-    public function getConfigs($key = null): Collection
+    public function getConfigs(string|null $key = null): Collection
     {
         $globals = collect(config('juzaweb.config'))
-            ->mapWithKeys(fn($item, $key) => $this->mapConfigFields($item, $key));
+            ->mapWithKeys(fn ($item, $key) => $this->mapConfigFields($item, $key));
 
         $configs = collect($this->globalData->get('configs'))
-            ->mapWithKeys(fn($item, $key) => $this->mapConfigFields($item, $key))
+            ->mapWithKeys(fn ($item, $key) => $this->mapConfigFields($item, $key))
             ->merge($globals);
 
         if ($key) {
@@ -108,7 +102,7 @@ trait GetHookAction
         return GlobalData::get('master_admin_menu');
     }
 
-    public function getPermalinks($key = null)
+    public function getPermalinks(?string $key = null): array|Collection
     {
         $data = get_config('permalinks', []);
         $permalinks = GlobalData::get('permalinks');
@@ -133,7 +127,7 @@ trait GetHookAction
         return $permalinks;
     }
 
-    public function getEmailHooks($key = null)
+    public function getEmailHooks(?string $key = null): ?Collection
     {
         if ($key) {
             return GlobalData::get('email_hooks.'.$key);
@@ -142,7 +136,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('email_hooks'));
     }
 
-    public function getWidgets($key = null)
+    public function getWidgets(?string $key = null): ?Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('widgets'), $key);
@@ -151,7 +145,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('widgets'));
     }
 
-    public function getPageBlocks($key = null)
+    public function getPageBlocks(?string $key = null): ?Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('page_blocks'), $key);
@@ -160,7 +154,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('page_blocks'));
     }
 
-    public function getSidebars($key = null)
+    public function getSidebars($key = null): ?Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('sidebars'), $key);
@@ -169,7 +163,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('sidebars'));
     }
 
-    public function getFrontendAjaxs($key = null)
+    public function getFrontendAjaxs(string $key = null): Collection|bool
     {
         if ($key) {
             $data = Arr::get(GlobalData::get('frontend_ajaxs'), $key);
@@ -181,12 +175,10 @@ trait GetHookAction
             return false;
         }
 
-        $data = new Collection(GlobalData::get('frontend_ajaxs'));
-
-        return $data;
+        return new Collection(GlobalData::get('frontend_ajaxs'));
     }
 
-    public function getThemeTemplates($key = null)
+    public function getThemeTemplates(string $key = null): ?Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('templates'), $key);
@@ -207,7 +199,13 @@ trait GetHookAction
     public function getAdminPages($key = null): Collection|string|array|null
     {
         if ($key) {
-            return Arr::get(GlobalData::get('admin_pages'), $key);
+            $data = Arr::get(GlobalData::get('admin_pages'), $key);
+
+            if ($data) {
+                return $data;
+            }
+
+            return null;
         }
 
         return new Collection(GlobalData::get('admin_pages'));
@@ -240,21 +238,21 @@ trait GetHookAction
         return new Collection(GlobalData::get('theme_settings'));
     }
 
-    public function getEnqueueScripts($inFooter = false)
+    public function getEnqueueScripts($inFooter = false): Collection
     {
         $scripts = new Collection(GlobalData::get('scripts'));
 
         return $scripts->where('inFooter', $inFooter);
     }
 
-    public function getEnqueueStyles($inFooter = false)
+    public function getEnqueueStyles($inFooter = false): Collection
     {
         $scripts = new Collection(GlobalData::get('styles'));
 
         return $scripts->where('inFooter', $inFooter);
     }
 
-    public function getEnqueueFrontendScripts($inFooter = false)
+    public function getEnqueueFrontendScripts($inFooter = false): Collection
     {
         $scripts = new Collection(GlobalData::get('frontend_scripts'));
 
@@ -277,7 +275,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('profile_pages'));
     }
 
-    public function getPermissions(string $key = null): Collection
+    public function getPermissions(?string $key = null): Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('permissions'), $key);
@@ -286,7 +284,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('permissions'));
     }
 
-    public function getPermissionGroups(string $key = null): Collection
+    public function getPermissionGroups(?string $key = null): Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('permission_groups'), $key);
@@ -295,14 +293,13 @@ trait GetHookAction
         return new Collection(GlobalData::get('permission_groups'));
     }
 
-    public function getResourceManagements(string $key = null): Collection
+    public function getResourceManagements(?string $key = null): Collection
     {
-        //dd(GlobalData::get('resource_managements'));
         return $key ? Arr::get(GlobalData::get('resource_managements'), $key) :
             new Collection(GlobalData::get('resource_managements'));
     }
 
-    public function getThumbnailSizes($postType = null): Collection
+    public function getThumbnailSizes(?string $postType = null): Collection
     {
         if ($postType) {
             return Arr::get($this->globalData->get('thumbnail_sizes'), $postType);
@@ -311,7 +308,7 @@ trait GetHookAction
         return new Collection($this->globalData->get('thumbnail_sizes'));
     }
 
-    public function getEmailTemplates(string $key = null): ?Collection
+    public function getEmailTemplates(?string $key = null): ?Collection
     {
         if ($key) {
             return Arr::get(GlobalData::get('email_templates'), $key);
@@ -320,7 +317,7 @@ trait GetHookAction
         return new Collection(GlobalData::get('email_templates'));
     }
 
-    public function getAPIDocuments(string $key = null): ?Collection
+    public function getAPIDocuments(?string $key = null): ?Collection
     {
         return $this->getDataByKey('api_documents', $key);
     }
@@ -331,7 +328,7 @@ trait GetHookAction
             : new Collection($this->globalData->get($data));
     }
 
-    protected function mapConfigFields($item, $key)
+    protected function mapConfigFields($item, $key): array
     {
         if (is_int($key) && is_string($item)) {
             return [
