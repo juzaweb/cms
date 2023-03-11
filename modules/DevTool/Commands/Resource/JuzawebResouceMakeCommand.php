@@ -22,7 +22,7 @@ class JuzawebResouceMakeCommand extends ResourceCommand
      *
      * @var string
      */
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     /**
      * The console command name.
@@ -37,23 +37,27 @@ class JuzawebResouceMakeCommand extends ResourceCommand
 
         $table = $this->argument('name');
 
-        if (! Schema::hasTable($table)) {
+        if (!Schema::hasTable($table)) {
             $this->error("Table [{$table}] does not exist. Please create table.");
             exit(1);
         }
 
         $this->columns = collect(Schema::getColumnListing($table))
-            ->filter(function ($item) {
-                return ! in_array($item, [
-                    'id',
-                    'created_at',
-                    'updated_at',
-                    'created_by',
-                    'updated_by',
-                ]);
-            })->toArray();
+            ->filter(
+                fn($item) => !in_array(
+                    $item,
+                    [
+                        'id',
+                        'created_at',
+                        'updated_at',
+                        'created_by',
+                        'updated_by',
+                    ]
+                )
+            )->toArray();
 
         $model = Str::studly($table);
+
         $singular = Str::singular($model);
 
         $this->makeModel($table, $singular);
@@ -65,14 +69,14 @@ class JuzawebResouceMakeCommand extends ResourceCommand
         $this->makeViews($table);
 
         $routePath = $this->module->getPath() . '/src/routes/admin.php';
+
         $this->info('Add resource route ' . $routePath);
 
         $content = "Route::jwResource('{$table}', 'Backend\\{$singular}Controller');";
-        file_put_contents(
-            $routePath,
-            PHP_EOL.$content.PHP_EOL,
-            FILE_APPEND | LOCK_EX
-        );
+
+        //file_put_contents($routePath, PHP_EOL . $content . PHP_EOL, FILE_APPEND | LOCK_EX);
+
+        $this->info("Add to your route: {$content}");
     }
 
     /**
@@ -80,7 +84,7 @@ class JuzawebResouceMakeCommand extends ResourceCommand
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the table.'],

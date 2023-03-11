@@ -96,14 +96,14 @@ return [
     |
     */
 
-    'write_eloquent_model_mixins' => false,
+    'write_eloquent_model_mixins' => true,
 
     /*
     |--------------------------------------------------------------------------
     | Helper files to include
     |--------------------------------------------------------------------------
     |
-    | Include helper files. By default not included, but can be toggled with the
+    | Include helper files. By default, not included, but can be toggled with the
     | -- helpers (-H) option. Extra helper files can be included.
     |
     */
@@ -280,7 +280,7 @@ return [
     | or there is an import (use className) of a given class
     |
     */
-    'force_fqn' => false,
+    'force_fqn' => true,
 
     /*
     |--------------------------------------------------------------------------

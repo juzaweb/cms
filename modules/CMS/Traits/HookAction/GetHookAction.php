@@ -8,12 +8,6 @@ use Juzaweb\CMS\Facades\GlobalData;
 
 trait GetHookAction
 {
-    /**
-     * Get registed menu box
-     *
-     * @param  string|array  $keys
-     * @return array
-     */
     public function getMenuBoxs(string|array $keys = []): array
     {
         $menuBoxs = GlobalData::get('menu_boxs');
@@ -29,12 +23,6 @@ trait GetHookAction
         return $menuBoxs;
     }
 
-    /**
-     * Get registed menu box
-     *
-     * @param  string|array  $key
-     * @return Collection|false
-     */
     public function getMenuBox($key): bool|Collection
     {
         return GlobalData::get('menu_boxs.'.$key);
@@ -72,8 +60,7 @@ trait GetHookAction
 
     public function getSettingForms(): Collection
     {
-        return collect(GlobalData::get('setting_forms'))
-            ->sortBy('priority');
+        return collect(GlobalData::get('setting_forms'))->sortBy('priority');
     }
 
     public function getAdminMenu()

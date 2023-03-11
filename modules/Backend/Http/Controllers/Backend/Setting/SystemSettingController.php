@@ -28,6 +28,10 @@ class SystemSettingController extends BackendController
     public function index($page, $form = 'general'): View
     {
         $forms = $this->getForms($page);
+        if (!isset($forms[$form])) {
+            $form = $forms->first()->get('key');
+        }
+
         $configs = $this->hookAction->getConfigs()->where('form', $form);
         $title = $forms[$form]['name'] ?? trans('cms::app.system_setting');
 
