@@ -16,9 +16,9 @@ use Juzaweb\CMS\Version;
 class VersionCommand extends Command
 {
     protected $name = 'juza:version';
-    
+
     public function handle()
     {
-        $this->info(Version::getVersion());
+        echo Version::getVersion();
     }
 }

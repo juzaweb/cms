@@ -49,24 +49,7 @@ trait AuthForgotPassword
         $passwordReset = PasswordReset::whereEmail($email)->first();
         if ($passwordReset) {
             if ($passwordReset->created_at < now()->subHour()) {
-                Email::make()
-                    ->withTemplate('forgot_password')
-                    ->setEmails([$request->post('email')])
-                    ->setParams(
-                        [
-                            'name' => $user->name,
-                            'email' => $email,
-                            'token' => $passwordReset->token,
-                            'url' => route(
-                                'reset_password',
-                                [
-                                    'email' => $email,
-                                    'token' => $passwordReset->token,
-                                ]
-                            ),
-                        ]
-                    )
-                    ->send();
+                $this->sendPasswordResetEmail($email, $user, $passwordReset->token);
             }
 
             return $this->success(
@@ -80,6 +63,7 @@ trait AuthForgotPassword
         DB::beginTransaction();
         try {
             $resetToken = Str::random(32);
+
             PasswordReset::create(
                 [
                     'email' => $email,
@@ -87,24 +71,7 @@ trait AuthForgotPassword
                 ]
             );
 
-            Email::make()
-                ->withTemplate('forgot_password')
-                ->setEmails([$request->post('email')])
-                ->setParams(
-                    [
-                        'name' => $user->name,
-                        'email' => $email,
-                        'token' => $resetToken,
-                        'url' => route(
-                            'reset_password',
-                            [
-                                'email' => $email,
-                                'token' => $resetToken,
-                            ]
-                        ),
-                    ]
-                )
-                ->send();
+            $this->sendPasswordResetEmail($email, $user, $resetToken);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -118,6 +85,28 @@ trait AuthForgotPassword
                 'redirect' => route('forgot_password')
             ]
         );
+    }
+
+    protected function sendPasswordResetEmail($email, $user, $resetToken): void
+    {
+        Email::make()
+            ->withTemplate('forgot_password')
+            ->setEmails([$email])
+            ->setParams(
+                [
+                    'name' => $user->name,
+                    'email' => $email,
+                    'token' => $resetToken,
+                    'url' => route(
+                        'reset_password',
+                        [
+                            'email' => $email,
+                            'token' => $resetToken,
+                        ]
+                    ),
+                ]
+            )
+            ->send();
     }
 
     protected function getViewForm(): string
