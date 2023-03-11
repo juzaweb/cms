@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="row">
+        @if($forms->count() > 1)
         <div class="col-md-3">
             <div class="list-group">
                 @foreach($forms as $key => $form)
@@ -10,8 +11,9 @@
                 @endforeach
             </div>
         </div>
+        @endif
 
-        <div class="col-md-9">
+        <div class="col-md-{{ $forms->count() > 1 ? 9 : 12 }}">
             @if(isset($forms[$component]['view']))
                 @if(is_string($forms[$component]['view']))
                     @if(view()->exists($forms[$component]['view']))
