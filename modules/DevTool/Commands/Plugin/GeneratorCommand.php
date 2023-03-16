@@ -40,6 +40,10 @@ abstract class GeneratorCommand extends Command
             $path = realpath($path);
             $this->error("File : {$path} already exists.");
         }
+
+        if (method_exists($this, 'afterHandle')) {
+            $this->afterHandle();
+        }
     }
 
     /**

@@ -60,7 +60,7 @@ class ModuleMakeCommand extends Command
         ];
     }
 
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [
             ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain plugin (without some resources).'],

@@ -44,7 +44,7 @@ class CommandMakeCommand extends GeneratorCommand
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the command.'],
@@ -57,7 +57,7 @@ class CommandMakeCommand extends GeneratorCommand
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [
             ['command', null, InputOption::VALUE_OPTIONAL, 'The terminal command that should be assigned.', null],
@@ -65,31 +65,36 @@ class CommandMakeCommand extends GeneratorCommand
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    protected function getTemplateContents()
+    protected function getTemplateContents(): string
     {
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 
-        return (new Stub('/command.stub', [
-            'COMMAND_NAME' => $this->getCommandName(),
-            'NAMESPACE' => $this->getClassNamespace($module),
-            'CLASS' => $this->getClass(),
-        ]))->render();
+        return (
+            new Stub(
+                '/command.stub',
+                [
+                    'COMMAND_NAME' => $this->getCommandName(),
+                    'NAMESPACE' => $this->getClassNamespace($module),
+                    'CLASS' => $this->getClass(),
+                ]
+            )
+        )->render();
     }
 
     /**
      * @return string
      */
-    private function getCommandName()
+    private function getCommandName(): string
     {
         return $this->option('command') ?: 'command:name';
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    protected function getDestinationFilePath()
+    protected function getDestinationFilePath(): string
     {
         $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
 
@@ -101,7 +106,7 @@ class CommandMakeCommand extends GeneratorCommand
     /**
      * @return string
      */
-    private function getFileName()
+    private function getFileName(): string
     {
         return Str::studly($this->argument('name'));
     }

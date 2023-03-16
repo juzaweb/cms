@@ -1,0 +1,15 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Juzaweb\CMS\Repositories\BaseRepository;
+
+/**
+ * Interface $CLASS$.
+ *
+ * @package namespace $CLASS_NAMESPACE$;
+ */
+interface $CLASS$ extends BaseRepository
+{
+    //
+}
