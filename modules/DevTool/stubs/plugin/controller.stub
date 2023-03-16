@@ -10,8 +10,11 @@ class $CLASS$ extends BackendController
     {
         //
 
-        return view('$DOMAIN_NAME$::index', [
-            'title' => 'Title Page',
-        ]);
+        return view(
+            '$DOMAIN_NAME$::index',
+            [
+                'title' => 'Title Page',
+            ]
+        );
     }
 }
