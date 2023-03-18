@@ -89,7 +89,7 @@ trait GetHookAction
         return GlobalData::get('master_admin_menu');
     }
 
-    public function getPermalinks(?string $key = null): array|Collection
+    public function getPermalinks(?string $key = null): array|Collection|null
     {
         $data = get_config('permalinks', []);
         $permalinks = GlobalData::get('permalinks');

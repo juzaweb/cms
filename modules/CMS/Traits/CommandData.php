@@ -10,19 +10,22 @@
 
 namespace Juzaweb\CMS\Traits;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 trait CommandData
 {
+    protected Filesystem $disk;
+
     protected function getCommandData(
         string $key = null,
         mixed $default = null
     ): mixed {
-        $path = "command-datas/". $this->getKeyCommandData() .".json";
+        $path = $this->getCommandDataPath();
 
-        if (Storage::disk('local')->exists($path)) {
-            $data = json_decode(Storage::disk('local')->get($path), true);
+        if ($this->storageDisk()->exists($path)) {
+            $data = json_decode($this->storageDisk()->get($path), true);
             if ($key) {
                 return Arr::get($data, $key, $default);
             }
@@ -39,9 +42,9 @@ trait CommandData
 
     protected function setCommandData(array|string $key, mixed $value = null): bool
     {
-        $path = "command-datas/". md5($this->signature) .".json";
+        $path = $this->getCommandDataPath();
         if (is_array($key)) {
-            return (bool) Storage::disk('local')->put(
+            return $this->storageDisk()->put(
                 $path,
                 json_encode($key)
             );
@@ -50,18 +53,32 @@ trait CommandData
         $data = $this->getCommandData();
         $data[$key] = $value;
 
-        return (bool) Storage::disk('local')->put(
+        return $this->storageDisk()->put(
             $path,
             json_encode($data)
         );
     }
 
-    protected function getKeyCommandData()
+    protected function getCommandDataKey(): string
     {
         if ($this->getName()) {
             return md5($this->getName());
         }
 
         return md5($this->signature);
+    }
+
+    protected function getCommandDataPath(): string
+    {
+        return "command-datas/". $this->getCommandDataKey() .".json";
+    }
+
+    protected function storageDisk(): Filesystem
+    {
+        if (isset($this->disk)) {
+            return $this->disk;
+        }
+
+        return $this->disk = Storage::disk('local');
     }
 }
