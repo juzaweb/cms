@@ -1,3 +1,26 @@
+### v3.3.7 
+* :+1: Find fillable columns in table command
+* :+1: Support index hosting
+* :+1: Update version
+* :+1: Webhook route support
+* :bug: Fix forgot password request
+* :bug: Fix hook resource
+* :bug: Fix load route theme
+* :bug: Fix show current version command
+* :bug: Fix show field view
+* :bug: Fix show og image page
+* :bug: Fix show og image post
+* :bug: Fix show setting form
+* :bug: Fix sort datatable
+* :bug: Fix taxonomy form
+* :memo: Update docs for Hook Action
+* :memo: Update docs function
+* Merge branch 'develop'
+* Merge pull request #308 from juzaweb/bugfix/fix-show-og-image
+* Merge pull request #309 from juzaweb/develop
+* Merge pull request #310 from juzaweb/feature/support-install-hosting
+* Merge pull request #311 from juzaweb/develop
+
 ### v3.3.2 - v3.3.4
 * Fix login recaptcha API
 * Assets routes
@@ -97,7 +120,7 @@
 * Delete release
 * Fix check permission
 * Fix update count post
-* Import post from Wordpress
+* Import post from WordPress
 * Quick edit
 * Fix issue #212
 

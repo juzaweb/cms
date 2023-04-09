@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
 use Juzaweb\CMS\Support\LocalPluginRepository;
+use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Stub;
 
 class ModuleGenerator extends Generator
@@ -79,11 +80,11 @@ class ModuleGenerator extends Generator
     /**
      * The constructor.
      * @param $name
-     * @param LocalPluginRepository $module
-     * @param Config     $config
-     * @param Filesystem $filesystem
-     * @param Console    $console
-     * @param ActivatorInterface $activator
+     * @param LocalPluginRepository|null $module
+     * @param Config|null $config
+     * @param Filesystem|null $filesystem
+     * @param Console|null $console
+     * @param ActivatorInterface|null $activator
      */
     public function __construct(
         $name,
@@ -108,7 +109,7 @@ class ModuleGenerator extends Generator
      *
      * @return $this
      */
-    public function setPlain($plain)
+    public function setPlain($plain): static
     {
         $this->plain = $plain;
 
@@ -122,7 +123,7 @@ class ModuleGenerator extends Generator
      *
      * @return $this
      */
-    public function setActive(bool $active)
+    public function setActive(bool $active): static
     {
         $this->isActive = $active;
 
@@ -130,16 +131,16 @@ class ModuleGenerator extends Generator
     }
 
     /**
-     * Get the name of plugin will created. By default in studly case.
+     * Get the name of plugin will create. By default, in studly case.
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return Str::lower($this->name);
     }
 
-    public function getStudlyName()
+    public function getStudlyName(): string
     {
         $name = explode('/', $this->name);
         $name = $name[1] ?? $name[0];
@@ -157,7 +158,7 @@ class ModuleGenerator extends Generator
      *
      * @return Config
      */
-    public function getConfig()
+    public function getConfig(): ?Config
     {
         return $this->config;
     }
@@ -169,7 +170,7 @@ class ModuleGenerator extends Generator
      *
      * @return $this
      */
-    public function setConfig($config)
+    public function setConfig($config): static
     {
         $this->config = $config;
 
@@ -183,7 +184,7 @@ class ModuleGenerator extends Generator
      *
      * @return $this
      */
-    public function setActivator(ActivatorInterface $activator)
+    public function setActivator(ActivatorInterface $activator): static
     {
         $this->activator = $activator;
 
@@ -195,7 +196,7 @@ class ModuleGenerator extends Generator
      *
      * @return Filesystem
      */
-    public function getFilesystem()
+    public function getFilesystem(): ?Filesystem
     {
         return $this->filesystem;
     }
@@ -207,7 +208,7 @@ class ModuleGenerator extends Generator
      *
      * @return $this
      */
-    public function setFilesystem($filesystem)
+    public function setFilesystem($filesystem): static
     {
         $this->filesystem = $filesystem;
 
@@ -219,7 +220,7 @@ class ModuleGenerator extends Generator
      *
      * @return Console
      */
-    public function getConsole()
+    public function getConsole(): ?Console
     {
         return $this->console;
     }
@@ -231,7 +232,7 @@ class ModuleGenerator extends Generator
      *
      * @return $this
      */
-    public function setConsole($console)
+    public function setConsole($console): static
     {
         $this->console = $console;
 
@@ -241,9 +242,9 @@ class ModuleGenerator extends Generator
     /**
      * Get the plugin instance.
      *
-     * @return \Juzaweb\CMS\Support\Plugin
+     * @return LocalPluginRepository|Plugin|null
      */
-    public function getModule()
+    public function getModule(): LocalPluginRepository|\Juzaweb\CMS\Support\Plugin|null
     {
         return $this->module;
     }
@@ -255,7 +256,7 @@ class ModuleGenerator extends Generator
      *
      * @return $this
      */
-    public function setModule($module)
+    public function setModule($module): static
     {
         $this->module = $module;
 
@@ -267,17 +268,17 @@ class ModuleGenerator extends Generator
      *
      * @return array
      */
-    public function getFolders()
+    public function getFolders(): array
     {
         return $this->module->config('paths.generator');
     }
 
     /**
-     * Get the list of files will created.
+     * Get the list of files will create.
      *
      * @return array
      */
-    public function getFiles()
+    public function getFiles(): array
     {
         return $this->module->config('stubs.files');
     }
@@ -289,7 +290,7 @@ class ModuleGenerator extends Generator
      *
      * @return $this
      */
-    public function setForce($force)
+    public function setForce($force): static
     {
         $this->force = $force;
 
@@ -343,6 +344,10 @@ class ModuleGenerator extends Generator
             }
 
             $path = $this->module->getModulePath($this->getName()) . $folder->getPath();
+
+            if ($this->filesystem->isDirectory($path)) {
+                continue;
+            }
 
             $this->filesystem->makeDirectory($path, 0755, true);
         }
@@ -505,15 +510,11 @@ class ModuleGenerator extends Generator
     private function cleanModuleJsonFile()
     {
         $path = $this->module->getModulePath($this->getName()) . 'config.json';
-
         $content = $this->filesystem->get($path);
         $namespace = $this->getModuleNamespaceReplacement();
         $studlyName = $this->getStudlyNameReplacement();
-
         $provider = '"' . $namespace . '\\\\' . $studlyName . '\\\\Providers\\\\' . $studlyName . 'ServiceProvider"';
-
         $content = str_replace($provider, '', $content);
-
         $this->filesystem->put($path, $content);
     }
 
@@ -522,7 +523,7 @@ class ModuleGenerator extends Generator
      *
      * @return string
      */
-    protected function getLowerNameReplacement()
+    protected function getLowerNameReplacement(): string
     {
         return strtolower($this->getName());
     }
@@ -532,7 +533,7 @@ class ModuleGenerator extends Generator
      *
      * @return string
      */
-    protected function getStudlyNameReplacement()
+    protected function getStudlyNameReplacement(): string
     {
         return $this->getName();
     }
@@ -542,7 +543,7 @@ class ModuleGenerator extends Generator
      *
      * @return string
      */
-    protected function getSnakeNameReplacement()
+    protected function getSnakeNameReplacement(): string
     {
         return strtolower($this->getSnakeName());
     }
@@ -552,12 +553,11 @@ class ModuleGenerator extends Generator
      *
      * @return string
      */
-    protected function getVendorReplacement()
+    protected function getVendorReplacement(): string
     {
         $name = explode('/', $this->getName());
-        $name = $name[0];
 
-        return $name;
+        return $name[0];
     }
 
     /**
@@ -565,12 +565,13 @@ class ModuleGenerator extends Generator
      *
      * @return string
      */
-    protected function getModuleNamespaceReplacement()
+    protected function getModuleNamespaceReplacement(): string
     {
         $name = $this->getName();
         $namespace = ucwords(str_replace('/', ' ', $name));
         $namespace = str_replace(' ', '\\', $namespace);
-
+        $namespace = ucwords(str_replace('-', ' ', $namespace));
+        $namespace = str_replace(' ', '', $namespace);
         return str_replace('\\', '\\\\', $namespace);
     }
 
@@ -579,12 +580,10 @@ class ModuleGenerator extends Generator
      *
      * @return string
      */
-    protected function getModuleNameReplacement()
+    protected function getModuleNameReplacement(): string
     {
         $name = explode('\\', $this->getModuleNamespaceReplacement());
-        $name = $name[count($name) - 1];
-
-        return $name;
+        return $name[count($name) - 1];
     }
 
     /**
@@ -592,12 +591,10 @@ class ModuleGenerator extends Generator
      *
      * @return string
      */
-    protected function getAuthorNameReplacement()
+    protected function getAuthorNameReplacement(): string
     {
         $name = explode('/', $this->getName());
-        $name = ucfirst($name[0]);
-
-        return $name;
+        return ucfirst($name[0]);
     }
 
     /**
@@ -605,7 +602,7 @@ class ModuleGenerator extends Generator
      *
      * @return string
      */
-    protected function getAuthorEmailReplacement()
+    protected function getAuthorEmailReplacement(): string
     {
         return 'example@gmail.com';
     }
@@ -615,7 +612,7 @@ class ModuleGenerator extends Generator
         return 'Providers';
     }
 
-    protected function getModuleDomainReplacement()
+    protected function getModuleDomainReplacement(): string
     {
         $name = explode('/', $this->getName());
         $author = $name[0];

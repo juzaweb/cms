@@ -2,11 +2,11 @@
 
 namespace Juzaweb\CMS\Support;
 
-use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use Juzaweb\CMS\Contracts\GoogleTranslate as GoogleTranslateContract;
+use Juzaweb\CMS\Exceptions\GoogleTranslateException;
 
 class GoogleTranslate implements GoogleTranslateContract
 {
@@ -25,13 +25,13 @@ class GoogleTranslate implements GoogleTranslateContract
      *            Text that you want to translate
      *
      * @return string a simple string with the translation of the text in the target language
-     * @throws Exception|GuzzleException
+     * @throws GoogleTranslateException|GuzzleException
      */
     public function translate(string $source, string $target, string $text): string
     {
         if ($lock = $this->getDisk()->get('lock-translate.txt')) {
             if ($lock < now()->subHours(2)->format('Y-m-d H:i:s')) {
-                throw new Exception(
+                throw new GoogleTranslateException(
                     'Translate locked: Google detected unusual traffic from your computer network,'
                     .' try again later (2 - 48 hours)'
                 );
@@ -56,14 +56,14 @@ class GoogleTranslate implements GoogleTranslateContract
      *            Text to translate taken from the 'translate' function
      *
      * @return string The response of the translation service in JSON format
-     * @throws Exception|GuzzleException
+     * @throws GoogleTranslateException|GuzzleException
      *@internal
      *
      */
     protected function requestTranslation(string $source, string $target, string $text): string
     {
         if (strlen($text) >= 5000) {
-            throw new Exception("Maximum number of characters exceeded: 5000");
+            throw new GoogleTranslateException("Maximum number of characters exceeded: 5000");
         }
 
         $url = "https://translate.google.com/translate_a/single"
@@ -91,7 +91,7 @@ class GoogleTranslate implements GoogleTranslateContract
      *            The JSON object returned by the request function
      *
      * @return string A single string with the translation
-     * @throws Exception
+     * @throws GoogleTranslateException
      */
     protected function getSentencesFromJSON(string $json): string
     {
@@ -101,7 +101,7 @@ class GoogleTranslate implements GoogleTranslateContract
         if (!$sentencesArray) {
             $this->getDisk()->put('lock-translate.txt', now()->format('Y-m-d H:i:s'));
 
-            throw new Exception(
+            throw new GoogleTranslateException(
                 'Google detected unusual traffic from your computer network,'
                     .' try again later (2 - 48 hours)'
             );
