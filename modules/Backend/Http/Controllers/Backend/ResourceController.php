@@ -28,7 +28,7 @@ class ResourceController extends BackendController
     protected Collection $setting;
     protected Collection $postType;
 
-    public function callAction($method, $parameters)
+    /*public function callAction($method, $parameters)
     {
         $params = array_values($parameters);
 
@@ -37,7 +37,7 @@ class ResourceController extends BackendController
         }
 
         return parent::callAction($method, $parameters);
-    }
+    }*/
 
     protected function afterSave($data, $model, ...$params)
     {
