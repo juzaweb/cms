@@ -37,17 +37,15 @@ class PostObserver
         }
     }
 
-    public function updating(Post $post)
+    public function updating(Post $post): void
     {
         $menuItems = $post->menuItems()->get(['menu_id']);
-        $menus = $menuItems->map(
-            function ($item) {
-                return $item->menu_id;
-            }
-        )->toArray();
+        $menus = $menuItems->map(fn($item) => $item->menu_id)->toArray();
 
         foreach ($menus as $menu) {
             Cache::store('file')->pull(cache_prefix("menu_items_menu_{$menu}"));
         }
+
+        Cache::store('file')->pull("post_type.get_content.{$post->id}");
     }
 }

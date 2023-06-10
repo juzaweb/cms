@@ -3,13 +3,8 @@
 @endif
 
 @foreach($styles as $style)
-    <link rel="stylesheet" type="text/css" href="{{ $style->get('src') }}?v={{ $style->get('ver') }}" id="{{ $style->get('key') }}">
+    <link rel="stylesheet" type="text/css" href="{{ $style->get('src') }}{{ str_contains($style->get('src'), '?') ? '&v=' : '?v=' }}{{ $style->get('ver') }}" id="{{ $style->get('key') }}">
 @endforeach
-
-@if(get_config('captcha'))
-    <script>const recaptchaSiteKey = "{{ get_config("google_captcha.site_key") }}";</script>
-    <script src="https://www.google.com/recaptcha/api.js?onload=recaptchaLoadCallback&render=explicit" async defer></script>
-@endif
 
 @foreach($scripts as $script)
     <script src="{{ $script->get('src') }}?v={{ $script->get('ver') }}" id="{{ $script->get('key') }}"></script>
@@ -22,7 +17,7 @@
 </script>
 
 @if($googleAnalytics)
-    <script async src="https://www.googletagmanager.com/gtag/js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ $googleAnalytics }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}

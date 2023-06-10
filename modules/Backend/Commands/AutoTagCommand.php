@@ -11,83 +11,50 @@
 namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Carbon;
+use Juzaweb\Backend\Jobs\AutoTagJob;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
 
 class AutoTagCommand extends Command
 {
-    protected $signature = 'juza:auto-tags';
-
-    protected array $tagsByType;
+    protected $name = 'juza:auto-tags';
 
     protected int $postLimit = 500;
 
     public function handle(): int
     {
-        $tags = Taxonomy::where('taxonomy', '=', 'tags')
-            ->limit(50)
-            ->orderBy('id', 'DESC')
-            ->get();
+        $lastDate = get_config('seo_last_update_tag_date', '2000-01-01 00:00:00');
+        $chunkSize = 100;
 
-        if ($tags->isEmpty()) {
-            return self::SUCCESS;
-        }
+        $job = 1;
+        $maxId = $this->getPostBuilder($lastDate)->skip($this->postLimit)->take(1)->value('id');
 
-        $lastId = get_config('seo_last_update_tag', 0);
+        $this->getPostBuilder($lastDate)
+            ->when($maxId, fn($q) => $q->where('id', '<', $maxId))
+            ->chunkById(
+                $chunkSize,
+                function ($rows) use (&$lastDate, &$job, $chunkSize) {
+                    AutoTagJob::dispatch($lastDate, $chunkSize)
+                        ->delay(Carbon::now()->addSeconds($job * 305));
 
-        $posts = Post::where('status', '=', Post::STATUS_PUBLISH)
-            ->where('id', '>', $lastId)
-            ->where(
-                function (Builder $q) use ($tags) {
-                    $q->whereRaw('1=0');
-                    foreach ($tags as $tag) {
-                        $q->orWhere('title', 'like', "%{$tag->name}%");
-                        $q->orWhere('description', 'like', "%{$tag->name}%");
-                    }
+                    $lastDate = $rows->last()->updated_at->format('Y-m-d H:i:s');
+                    $job ++;
+
+                    $this->info("Adding tags to post id ". $rows->last()->id);
                 }
-            )
-            ->orderBy('id', 'ASC')
-            ->limit($this->postLimit)
-            ->get();
+            );
 
-        foreach ($posts as $post) {
-            $tagIds = [];
-
-            $postTags = $this->getTagByType($post->type, $tags);
-            foreach ($postTags as $tag) {
-                if ($this->hasTag($tag, $post)) {
-                    $tagIds[$tag->id] = ['term_type' => $post->type];
-                }
-            }
-
-            $post->tags()->syncWithoutDetaching($tagIds);
-
-            $this->info("Add tags {$post->id}");
-        }
-
-        if ($posts->isNotEmpty()) {
-            set_config('seo_last_update_tag', $posts->last()->id);
-        }
+        set_config('seo_last_update_tag_date', $lastDate);
 
         return self::SUCCESS;
     }
 
-    private function getTagByType(string $type, Collection $tags)
+    private function getPostBuilder(string $lastDate): \Illuminate\Database\Eloquent\Builder
     {
-        if (isset($this->tagsByType[$type])) {
-            return $this->tagsByType[$type];
-        }
-
-        $this->tagsByType[$type] = $tags->where('post_type', '=', $type);
-
-        return $this->tagsByType[$type];
-    }
-
-    private function hasTag(Taxonomy $tag, Post $post): bool
-    {
-        return mb_stripos(mb_strtolower($post->title), mb_strtolower($tag->name)) !== false
-            || mb_stripos(mb_strtolower($post->description), mb_strtolower($tag->name)) !== false;
+        return Post::with([])->select(['id', 'updated_at'])
+            ->where('status', '=', Post::STATUS_PUBLISH)
+            ->where('updated_at', '>', $lastDate)
+            ->whereDoesntHave('taxonomies', fn($q) => $q->where('taxonomy', 'tags'))
+            ->orderBy('updated_at', 'ASC');
     }
 }

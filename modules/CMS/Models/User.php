@@ -122,7 +122,8 @@ class User extends Authenticatable
         'verification_token',
         'data',
         'json_metas',
-        'language'
+        'language',
+        'is_fake',
     ];
 
     protected $hidden = [

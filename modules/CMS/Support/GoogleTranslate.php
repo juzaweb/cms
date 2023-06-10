@@ -10,8 +10,19 @@ use Juzaweb\CMS\Exceptions\GoogleTranslateException;
 
 class GoogleTranslate implements GoogleTranslateContract
 {
+    protected Client $client;
+
+    protected string|array|null $proxy = null;
+
     public function __construct(protected Filesystem $storage)
     {
+    }
+
+    public function withProxy(string|array $proxy): static
+    {
+        $this->proxy = $proxy;
+
+        return $this;
     }
 
     /**
@@ -25,7 +36,8 @@ class GoogleTranslate implements GoogleTranslateContract
      *            Text that you want to translate
      *
      * @return string a simple string with the translation of the text in the target language
-     * @throws GoogleTranslateException|GuzzleException
+     * @throws GoogleTranslateException
+     * @throws GuzzleException
      */
     public function translate(string $source, string $target, string $text): string
     {
@@ -40,9 +52,9 @@ class GoogleTranslate implements GoogleTranslateContract
             $this->getDisk()->delete('lock-translate.txt');
         }
 
-        $response = self::requestTranslation($source, $target, $text);
+        $response = $this->requestTranslation($source, $target, $text);
 
-        return self::getSentencesFromJSON($response);
+        return $this->getSentencesFromJSON($response);
     }
 
     /**
@@ -125,18 +137,26 @@ class GoogleTranslate implements GoogleTranslateContract
 
     protected function getClient(): Client
     {
-        return new Client(
-            [
-                'headers' => [
-                    'User-Agent' => 'AndroidTranslate/5.3.0.RC02.130475354-53000263 5.1 phone TRANSLATE_OPM5_TEST_1',
-                ],
-                'curl' => [
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => 'UTF-8',
-                    CURLOPT_SSL_VERIFYPEER => false,
-                    CURLOPT_SSL_VERIFYHOST => false,
-                ]
+        if (isset($this->client)) {
+            return $this->client;
+        }
+
+        $options = [
+            'headers' => [
+                'User-Agent' => 'AndroidTranslate/5.3.0.RC02.130475354-53000263 5.1 phone TRANSLATE_OPM5_TEST_1',
+            ],
+            'curl' => [
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => 'UTF-8',
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => false,
             ]
-        );
+        ];
+
+        if ($this->proxy) {
+            $options['proxy'] = $this->proxy;
+        }
+
+        return $this->client = new Client($options);
     }
 }

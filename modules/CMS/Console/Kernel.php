@@ -18,10 +18,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('email:send')->everyMinute();
         $schedule->command('notify:send')->everyMinute();
-
-        if (config('cache.default') != 'file') {
-            $schedule->command(ClearCacheExpiredCommand::class)->hourly();
-        }
+        $schedule->command(ClearCacheExpiredCommand::class)->hourlyAt('2');
     }
 
     /**

@@ -32,10 +32,10 @@ trait UseMetaSeo
     {
         $string = strip_tags($string);
         if ($string) {
-            return $this->generateString($string, 55, 320);
+            return $this->generateString($string, 55, 300);
         }
 
-        return $this->generateString($this->content ?: $this->description, 55, 320);
+        return $this->generateString($this->content ?: $this->description, 55, 300);
     }
 
     protected function generateString($string, $words, $max_length)

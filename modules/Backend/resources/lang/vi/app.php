@@ -371,7 +371,7 @@ return [
     'datetime' => 'Ngày giờ',
     'time' => 'Thời gian',
     'upload_media' => 'Tải lên phương tiện',
-    'result_for_keyword' => 'Kết quả cho từ khóa: tên',
+    'result_for_keyword' => 'Kết quả cho từ khóa: :name',
     'search_results' => 'Kết quả tìm kiếm',
     'install' => 'Cài đặt',
     'views' => 'Lượt xem',
@@ -520,7 +520,7 @@ return [
     ],
     'seo' => [
         'enable_sitemap' => 'Bật sơ đồ trang web',
-        'enable_sitemap_description' => 'Kích hoạt các sơ đồ trang web XML mà Yoast SEO tạo ra.
+        'enable_sitemap_description' => 'Kích hoạt các sơ đồ trang web XML.
   <a href="/sitemap.xml" target="_blank">Xem sơ đồ trang web XML</a>',
         'enable_post_feed' => 'Bật nguồn cấp dữ liệu bài đăng',
         'enable_taxonomy_feed' => 'Bật nguồn cấp dữ liệu phân loại',

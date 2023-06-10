@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ClearCacheExpiredCommand extends Command
 {
-    protected $signature = 'juza:clear-cache-expired';
-
-    protected $description = 'Remove all expired cache file/folder';
+    protected $signature = 'juzacms:clear-cache-expired';
+    protected $description = 'Remove all expired cache files and folders';
 
     private int $expiredFileCount = 0;
     private int $expiredFileSize = 0;
@@ -30,20 +29,20 @@ class ClearCacheExpiredCommand extends Command
 
         $cacheDisk = [
             'driver' => 'local',
-            'root' => config('cache.stores.file.path')
+            'root' => config('cache.stores.file.path'),
         ];
 
         config(['filesystems.disks.fcache' => $cacheDisk]);
     }
 
-    public function handle()
+    public function handle(): void
     {
         $this->deleteExpiredFiles();
         $this->deleteEmptyFolders();
         $this->showResults();
     }
 
-    private function deleteExpiredFiles()
+    private function deleteExpiredFiles(): void
     {
         $files = Storage::disk('fcache')->allFiles();
         $this->output->progressStart(count($files));
@@ -62,21 +61,26 @@ class ClearCacheExpiredCommand extends Command
             $expire = substr($contents, 0, 10);
 
             // See if we have expired
-            if (time() >= $expire) {
-                // Delete the file
-                $this->expiredFileSize += Storage::disk('fcache')->size($cachefile);
-                Storage::disk('fcache')->delete($cachefile);
-                $this->expiredFileCount++;
-            } else {
-                $this->activeFileCount++;
-                $this->activeFileSize += Storage::disk('fcache')->size($cachefile);
+            try {
+                if (time() >= $expire) {
+                    // Delete the file
+                    $this->expiredFileSize += Storage::disk('fcache')->size($cachefile);
+                    Storage::disk('fcache')->delete($cachefile);
+                    $this->expiredFileCount++;
+                } else {
+                    $this->activeFileCount++;
+                    $this->activeFileSize += Storage::disk('fcache')->size($cachefile);
+                }
+            }  catch (\Throwable $e) {
+                // File is deleted
             }
+
             $this->output->progressAdvance();
         }
         $this->output->progressFinish();
     }
 
-    private function deleteEmptyFolders()
+    private function deleteEmptyFolders(): void
     {
         $directories = Storage::disk('fcache')->allDirectories();
         $dirCount = count($directories);
@@ -88,7 +92,7 @@ class ClearCacheExpiredCommand extends Command
         }
     }
 
-    public function showResults()
+    public function showResults(): void
     {
         $expiredFileSize = $this->formatBytes($this->expiredFileSize);
         $activeFileSize = $this->formatBytes($this->activeFileSize);

@@ -65,9 +65,10 @@ class PostTypeDataTable extends DataTable
                 'label' => trans('cms::app.thumbnail'),
                 'width' => '5%',
                 'sortable' => false,
+                'align' => 'center',
                 'formatter' => function ($value, $row, $index) {
-                    return '<img class="lazyload w-100" data-src="'. $row->getThumbnail('150xauto') .'"'
-                        .' src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>';
+                    return $row->thumbnail ? '<img class="lazyload w-100" data-src="'. $row->getThumbnail('150x150') .'"'
+                        .' src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>' : '_';
                 },
             ];
         }
@@ -77,7 +78,7 @@ class PostTypeDataTable extends DataTable
             'formatter' => [$this, 'rowActionsFormatter'],
         ];
 
-        $taxonomies = $this->taxonomies->where('taxonomy', '!=', 'tags')->take(3);
+        $taxonomies = $this->taxonomies->take(3);
 
         foreach ($taxonomies as $key => $taxonomy) {
             $columns["tax_{$key}"] = [

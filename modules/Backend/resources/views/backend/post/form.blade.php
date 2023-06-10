@@ -32,6 +32,7 @@
             @endcomponent
 
             @php
+                /** @var \Illuminate\Support\Collection $setting */
                 $metas = collect_metas($setting->get('metas'))
                             ->where('sidebar', false)
                             ->where('visible', true)

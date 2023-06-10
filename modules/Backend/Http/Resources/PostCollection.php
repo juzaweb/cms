@@ -31,6 +31,8 @@ class PostCollection extends ResourceCollection
                     'title' => $item->getTitle(),
                     'description' => $item->description,
                     'thumbnail' => $item->getThumbnail(),
+                    'origin_thumbnail' => $item->thumbnail,
+                    'thumbnail_without_resize' => $item->getThumbnail(false),
                     'url' => $item->getLink(),
                     'views' => $item->getViews(),
                     'type' => $item->type,

@@ -18,13 +18,21 @@ class PostResourceCollection extends ResourceCollection
     {
         return $this->collection->map(
             function ($item) use ($request) {
-                $taxonomies = TaxonomyResource::collection($item->taxonomies)->toArray($request);
+                $taxonomies = collect($item->json_taxonomies)->map(
+                    function ($tax) {
+                        unset($tax['total_post']);
+                        $tax['url'] = url(parse_url($tax['url'])['path']);
+                        return $tax;
+                    }
+                );
 
                 return [
                     'id' => $item->id,
+                    'uuid' => $item->uuid,
                     'title' => $item->getTitle(),
                     'description' => $item->description,
                     'thumbnail' => $item->getThumbnail(true),
+                    'origin_thumbnail' => $item->thumbnail,
                     'url' => $item->getLink(),
                     'views' => $item->getViews(),
                     'type' => $item->type,
@@ -39,8 +47,9 @@ class PostResourceCollection extends ResourceCollection
                         'avatar' => $item->getCreatedByAvatar(),
                     ],
                     'created_at' => jw_date_format($item->created_at),
+                    'humans_created_at' => $item->created_at?->diffForHumans(),
                     'updated_at' => jw_date_format($item->updated_at),
-                    'taxonomies' => $taxonomies
+                    'taxonomies' => $taxonomies,
                 ];
             }
         )->toArray();

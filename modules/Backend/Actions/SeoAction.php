@@ -63,17 +63,53 @@ class SeoAction extends Action
                         'default' => 1
                     ]
                 ],
-                'jw_auto_ping' => [
-                    'type' => 'checkbox',
-                    'label' => trans('cms::app.seo.enable_auto_ping'),
+                'jw_auto_ping_google_sitemap' => [
+                    'type' => 'select',
+                    'label' => trans('cms::app.seo.auto_ping_google_sitemap'),
                     'form' => 'seo',
                     'data' => [
-                        'description' => trans('cms::app.seo.auto_ping_description')
+                        'options' => [
+                            0 => trans('cms::app.disabled'),
+                            1 => trans('cms::app.enable')
+                        ]
+                    ]
+                ],
+                'jw_auto_submit_url_google' => [
+                    'type' => 'select',
+                    'label' => trans('cms::app.seo.auto_submit_url_google'),
+                    'form' => 'seo',
+                    'data' => [
+                        'options' => [
+                            0 => trans('cms::app.disabled'),
+                            1 => trans('cms::app.enable')
+                        ]
+                    ]
+                ],
+                'jw_auto_submit_url_bing' => [
+                    'type' => 'select',
+                    'label' => trans('cms::app.seo.auto_submit_url_bing'),
+                    'form' => 'seo',
+                    'data' => [
+                        'options' => [
+                            0 => trans('cms::app.disabled'),
+                            1 => trans('cms::app.enable')
+                        ]
                     ]
                 ],
                 'jw_bing_api_key' => [
                     'label' => trans('cms::app.seo.bing_api_key'),
                     'form' => 'seo',
+                ],
+                'jw_auto_add_tags_to_posts' => [
+                    'type' => 'select',
+                    'label' => trans('cms::app.seo.auto_add_tags_to_posts'),
+                    'form' => 'seo',
+                    'data' => [
+                        'options' => [
+                            0 => trans('cms::app.disabled'),
+                            1 => trans('cms::app.enable')
+                        ]
+                    ]
                 ],
                 'bing_verify_key' => [
                     'label' => trans('cms::app.seo.bing_verify_key'),
@@ -82,7 +118,7 @@ class SeoAction extends Action
                 'google_verify_key' => [
                     'label' => trans('cms::app.seo.google_verify_key'),
                     'form' => 'seo',
-                ]
+                ],
             ]
         );
 

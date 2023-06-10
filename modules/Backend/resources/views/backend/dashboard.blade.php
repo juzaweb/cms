@@ -52,7 +52,7 @@
                         <i class="fa fa-hdd-o font-size-50 mr-3"></i>
                         <div>
                             <div class="font-size-21 font-weight-bold">{{ trans('cms::app.storage') }}</div>
-                            <div class="font-size-15">{{ trans('cms::app.total') }}: {{ $storage }}</div>
+                            <div class="font-size-15">{{ trans('cms::app.total') }}/Free: {{ $storage }}/{{ $diskFree }}</div>
                         </div>
                     </div>
                 </div>

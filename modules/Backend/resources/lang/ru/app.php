@@ -367,7 +367,7 @@ return [
     'datetime' => 'Дата время',
     'time' => 'Время',
     'upload_media' => 'Загрузить медиа',
-    'result_for_keyword' => 'Результат по ключевому слову: имя',
+    'result_for_keyword' => 'Результат по ключевому слову: :name',
     'search_results' => 'Результаты поиска',
     'install' => 'Установить',
     'views' => 'Взгляды',

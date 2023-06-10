@@ -253,7 +253,7 @@ class FileManager
         $img->save(
             get_media_image_with_size(
                 $path,
-                '150xauto',
+                '150x150',
                 'path'
             ),
             100
@@ -422,6 +422,8 @@ class FileManager
 
     protected function removeUploadedFile(UploadedFile $file): void
     {
-        unlink($file->getRealPath());
+        if ($this->resource_type != 'uploaded') {
+            unlink($file->getRealPath());
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Juzaweb\CMS\Support\Imports;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Repositories\TaxonomyRepository;
 use Juzaweb\CMS\Contracts\HookActionContract;
@@ -23,7 +23,7 @@ use Juzaweb\CMS\Support\FileManager;
 
 class PostImporter implements PostImporterContract
 {
-    protected int $createdBy;
+    protected ?int $createdBy = null;
     protected bool $downloadThumbnai = true;
     protected bool $downloadContentImages = true;
 
@@ -59,7 +59,25 @@ class PostImporter implements PostImporterContract
             }
         }
 
-        return $this->postCreator->create($data);
+        $post = $this->postCreator->create($data);
+        if ($createdBy = $this->getCreatedBy()) {
+            $post->setAttribute('created_by', $createdBy);
+            $post->save();
+        }
+
+        return $post;
+    }
+
+    public function setCreatedBy(int $createdBy): static
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?int
+    {
+        return $this->createdBy;
     }
 
     public function setDownloadThumbnail(bool $downloadThumbnai): static
@@ -105,6 +123,10 @@ class PostImporter implements PostImporterContract
                 $result['name'] = trim($item['name']);
             }
 
+            if (empty($result['name'])) {
+                continue;
+            }
+
             $result['post_type'] = $taxonomy->get('post_type');
             $result['taxonomy'] = $taxonomy->get('taxonomy');
             $result['slug'] = isset($item['slug']) ? trim($item['slug']) : null;
@@ -116,15 +138,21 @@ class PostImporter implements PostImporterContract
             }
         }
 
-        $ids = array_merge(
-            $ids,
-            $this->createTaxonomiesFromNames($names, $taxonomy)
-        );
+        if ($names) {
+            $ids = array_merge(
+                $ids,
+                $this->createTaxonomiesFromNames($names, $taxonomy)
+            );
+        }
 
-        return array_merge(
-            $ids,
-            $this->createTaxonomiesFromSlugs($slugs, $taxonomy)
-        );
+        if ($slugs) {
+            $ids = array_merge(
+                $ids,
+                $this->createTaxonomiesFromSlugs($slugs, $taxonomy)
+            );
+        }
+
+        return $ids;
     }
 
     protected function createTaxonomiesFromSlugs(array $inserts, Collection $taxonomy): array
@@ -132,25 +160,32 @@ class PostImporter implements PostImporterContract
         $slugs = collect($inserts);
 
         $taxs = $this->taxonomyRepository->query()
-            ->where('post_type', '=', $taxonomy->get('post_type'))
-            ->where('taxonomy', '=', $taxonomy->get('taxonomy'))
             ->whereIn('slug', $slugs->pluck('slug')->toArray())
-            ->get(['id', 'slug'])
+            ->get(['id', 'slug', 'taxonomy', 'post_type'])
             ->keyBy('slug');
 
         $slugs = $slugs
-            ->filter(
-                function ($item) use ($taxs) {
-                    return !$taxs->get($item['slug']);
-                }
-            );
+            ->filter(fn($item) => !$taxs->get($item['slug']))
+            ->unique('slug')
+            ->values();
 
         $ids = [];
         foreach ($slugs as $slug) {
             $ids[] = $this->taxonomyRepository->create($slug)->id;
         }
 
-        return array_merge($taxs->pluck('id')->toArray(), $ids);
+        $existIds = $taxs->where('taxonomy', '=', $taxonomy->get('taxonomy'))
+            ->when(
+                $taxonomy->get('taxonomy') != 'tags',
+                fn($collection, $value) => $collection->where('post_type', '=', $taxonomy->get('post_type'))
+            )
+            ->pluck('id')
+            ->toArray();
+
+        return array_merge(
+            $existIds,
+            $ids
+        );
     }
 
     protected function createTaxonomiesFromNames(array $inserts, Collection $taxonomy): array
@@ -174,7 +209,9 @@ class PostImporter implements PostImporterContract
                     $item['name'] = trim($item['name']);
                     return $item;
                 }
-            );
+            )
+            ->unique('name')
+            ->values();
 
         $ids = [];
         foreach ($names as $name) {
