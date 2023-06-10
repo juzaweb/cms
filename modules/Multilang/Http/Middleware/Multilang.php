@@ -5,6 +5,7 @@ namespace Juzaweb\Multilang\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 use Juzaweb\CMS\Models\Language;
@@ -53,6 +54,7 @@ class Multilang
 
     protected function getLocaleByRequest(Request $request, string $type)
     {
+        // Exclude bots
         if (str_contains(strtolower($request->userAgent()), 'bot')) {
             return false;
         }
@@ -70,15 +72,14 @@ class Multilang
                 return $acceptLanguage;
             }
 
-            $this->setLocaleSession('vi');
-            return 'vi';
+            $this->setLocaleSession($acceptLanguage);
+            return $acceptLanguage;
         }
 
         if ($type == 'domain') {
             $domains = get_config('mlla_subdomain');
-            $domain = $domains[$request->getHost()] ?? null;
 
-            if ($domain) {
+            if ($domain = Arr::get($domains, $request->getHost())) {
                 return $domain['language'];
             }
         }
