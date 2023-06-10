@@ -86,7 +86,7 @@ class PostTest extends TestCase
         }
     }
 
-    protected function updateTest($key, $postType)
+    protected function updateTest($key, $postType): void
     {
         if ($post = $this->makerData($postType)) {
             $model = app($postType->get('model'))->first(['id']);
