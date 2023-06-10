@@ -52,7 +52,7 @@ trait UseSlug
             }
         }
 
-        $baseSlug = sub_char($string, 70, '');
+        $baseSlug = Str::substr($string, 0, 70);
         $baseSlug = Str::slug($baseSlug);
 
         $i = 1;
@@ -71,6 +71,7 @@ trait UseSlug
         } while ($row);
 
         $this->slug = $slug;
+
 
         return $slug;
     }

@@ -28,8 +28,7 @@ class PostTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::where('is_admin', '=', 1)
-            ->first();
+        $this->user = User::where('is_admin', '=', 1)->first();
 
         Auth::loginUsingId($this->user->id);
 
@@ -47,14 +46,14 @@ class PostTest extends TestCase
         }
     }
 
-    protected function indexTest($key)
+    protected function indexTest($key): void
     {
         $response = $this->get("/admin-cp/post-type/{$key}");
 
         $response->assertStatus(200);
     }
 
-    protected function createTest($key, $postType)
+    protected function createTest($key, $postType): void
     {
         $index = "/admin-cp/post-type/{$key}/create";
         $response = $this->get($index);
