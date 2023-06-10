@@ -229,6 +229,10 @@ if (!function_exists('upload_url')) {
             return $path;
         }
 
+        if (str_starts_with($path, '/')) {
+            return url($path);
+        }
+
         $storage = Storage::disk('public');
         if (empty($path) || !$storage->exists(jw_basepath($path))) {
             if ($default) {
@@ -690,6 +694,7 @@ function seo_string($string, $chars = 70)
     $string = strip_tags($string);
     $string = str_replace(["\n", "\t"], ' ', $string);
     $string = html_entity_decode($string, ENT_HTML5);
+    $string = str_replace(["{", "}", '\\', '/', '-', '_', '"', "'"], '', $string);
     return sub_char($string, $chars);
 }
 
