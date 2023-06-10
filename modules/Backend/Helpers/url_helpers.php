@@ -157,3 +157,14 @@ function abs_url(string $url, string $base): string
 
     return build_url($url_parts);
 }
+
+if (!function_exists('is_domain')) {
+    function is_domain(string $value): bool
+    {
+        return (bool) preg_match(
+            '/^(?:[a-z0-9](?:[a-z0-9-æøå]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$/isu',
+            $value
+        );
+    }
+}
+

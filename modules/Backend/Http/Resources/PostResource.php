@@ -23,7 +23,13 @@ class PostResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $taxonomies = TaxonomyResource::collection($this->resource->taxonomies)->toArray($request);
+        $taxonomies = collect($this->resource->json_taxonomies)->map(
+            function ($tax) {
+                unset($tax['total_post']);
+                $tax['url'] = url(parse_url($tax['url'])['path']);
+                return $tax;
+            }
+        );
 
         return [
             'id' => $this->resource->id,
@@ -31,6 +37,8 @@ class PostResource extends JsonResource
             'description' => $this->resource->description,
             'content' => $this->resource->getContent(),
             'thumbnail' => $this->resource->getThumbnail(false),
+            'origin_thumbnail' => $this->resource->thumbnail,
+            'thumbnail_without_resize' => $this->resource->getThumbnail(false),
             'url' => $this->resource->getLink(),
             'views' => $this->resource->getViews(),
             'type' => $this->resource->type,
@@ -46,7 +54,7 @@ class PostResource extends JsonResource
             ],
             'created_at' => jw_date_format($this->resource->created_at),
             'updated_at' => jw_date_format($this->resource->updated_at),
-            'taxonomies' => $taxonomies
+            'taxonomies' => $taxonomies,
         ];
     }
 }

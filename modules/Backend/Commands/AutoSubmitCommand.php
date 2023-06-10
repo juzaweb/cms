@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Backend\Commands;
 
+use Google\Service\Indexing;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -15,20 +16,35 @@ class AutoSubmitCommand extends Command
 
     public function handle(): int
     {
-        if (!get_config('jw_auto_ping')) {
+        /*if (!$this->checkSubmitDate()) {
             return self::SUCCESS;
-        }
+        }*/
 
-        if ($this->checkSubmitDate()) {
-            set_config('jw_last_seo_ping', date('Y-m-d H:i'));
+        //set_config('jw_last_seo_ping', date('Y-m-d H:i'));
 
+        if (get_config('jw_auto_ping_google_sitemap')) {
             try {
                 $this->pingSiteMapGoogle();
             } catch (\Exception $e) {
                 report($e);
                 $this->error($e->getMessage());
             }
+        }
 
+        if (get_config('jw_auto_submit_url_google')) {
+            try {
+                for ($i = 1;$i <= 2; $i++) {
+                    $this->submitUrlGoogle();
+
+                    sleep(5);
+                }
+            } catch (\Exception $e) {
+                report($e);
+                $this->error($e->getMessage());
+            }
+        }
+
+        if (get_config('jw_auto_submit_url_bing')) {
             try {
                 $this->submitUrlBing();
             } catch (\Exception $e) {
@@ -51,6 +67,44 @@ class AutoSubmitCommand extends Command
         }
     }
 
+    protected function submitUrlGoogle()
+    {
+        $lastDate = get_config('jw_last_google_submit_date', '2000-01-01 00:00:00');
+        $links = Post::wherePublish()
+            ->where('updated_at', '>', $lastDate)
+            ->orderBy('updated_at', 'asc')
+            ->limit(100)
+            ->get();
+
+        if ($links->isEmpty()) {
+            return;
+        }
+
+        $lastUpdatedAt = $links->last()->updated_at->format('Y-m-d H:i:s');
+
+        $client = new \Google\Client();
+        $client->setAuthConfig(storage_path('services/service_account.json'));
+        $client->addScope('https://www.googleapis.com/auth/indexing');
+        $client->setUseBatch(true);
+
+        $service = new Indexing($client);
+        $batch = $service->createBatch();
+
+        foreach ($links as $link) {
+            $this->info("=> Submiting url: ". $link->getLink(true));
+            $url = new Indexing\UrlNotification();
+            $url->setUrl($link->getLink(true));
+            $url->setType('URL_UPDATED');
+            $batch->add($service->urlNotifications->publish($url));
+        }
+
+        $batch->execute();
+
+        set_config('jw_last_google_submit_date', $lastUpdatedAt);
+
+        $this->info('Submit urls to Google successfull.');
+    }
+
     protected function submitUrlBing(): void
     {
         $apiKey = $this->getBingKey();
@@ -58,11 +112,11 @@ class AutoSubmitCommand extends Command
             return;
         }
 
-        $lastId = get_config('jw_last_bing_submit_id', 0);
+        $lastDate = get_config('jw_last_bing_submit_date', '2000-01-01 00:00:00');
 
         $links = Post::wherePublish()
-            ->where('id', '>', $lastId)
-            ->orderBy('id', 'asc')
+            ->where('updated_at', '>', $lastDate)
+            ->orderBy('updated_at', 'asc')
             ->limit(100)
             ->get();
 
@@ -97,9 +151,9 @@ class AutoSubmitCommand extends Command
         );
 
         if ($response->getStatusCode() == 200) {
-            $this->info('Submit url Bing successfull.');
+            $this->info('Submit urls to Bing successfull.');
 
-            set_config('jw_last_bing_submit_id', $links->last()->id);
+            set_config('jw_last_bing_submit_date', $links->last()->updated_at->format('Y-m-d H:i:s'));
         }
     }
 

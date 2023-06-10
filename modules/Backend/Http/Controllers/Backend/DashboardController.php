@@ -23,11 +23,18 @@ class DashboardController extends BackendController
 
         $title = trans('cms::app.dashboard');
         $users = User::count();
-        $posts = Post::where('type', '=', 'posts')
+        $posts = Post::where('type', '!=', 'pages')
+            ->wherePublish()
             ->count();
         $pages = Post::where('type', '=', 'pages')
+            ->wherePublish()
             ->count();
         $storage = format_size_units(MediaFile::sum('size'));
+        $diskFree = Cache::store('file')->remember(
+            cache_prefix('storage_free_disk'),
+            3600,
+            fn() => format_size_units(disk_free_space('/')),
+        );
 
         return view(
             'cms::backend.dashboard',
@@ -36,7 +43,8 @@ class DashboardController extends BackendController
                 'users',
                 'posts',
                 'pages',
-                'storage'
+                'storage',
+                'diskFree'
             )
         );
     }

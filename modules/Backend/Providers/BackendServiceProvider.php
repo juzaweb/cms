@@ -17,7 +17,9 @@ use Juzaweb\Backend\Commands\AutoSubmitCommand;
 use Juzaweb\Backend\Commands\AutoTagCommand;
 use Juzaweb\Backend\Commands\EmailTemplateGenerateCommand;
 use Juzaweb\Backend\Commands\ImportTranslationCommand;
+use Juzaweb\Backend\Commands\OptimizeTagCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
+use Juzaweb\Backend\Commands\PingFeedCommand;
 use Juzaweb\Backend\Commands\ThemePublishCommand;
 use Juzaweb\Backend\Commands\TransFromEnglish;
 use Juzaweb\Backend\Models\Comment;
@@ -99,6 +101,8 @@ class BackendServiceProvider extends ServiceProvider
                 ThemePublishCommand::class,
                 AutoSubmitCommand::class,
                 AutoTagCommand::class,
+                OptimizeTagCommand::class,
+                PingFeedCommand::class,
             ]
         );
     }

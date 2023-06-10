@@ -126,6 +126,7 @@ class Post extends Model implements Feedable
         'json_taxonomies',
         'rating',
         'total_rating',
+        'locale',
     ];
 
     protected $searchFields = [
@@ -215,7 +216,7 @@ class Post extends Model implements Feedable
         return FeedItem::create()
             ->id($this->id)
             ->title($this->title)
-            ->summary($this->description ?? '')
+            ->summary(seo_string($this->content, 500) ?? '')
             ->updated($updated)
             ->link($this->getLink())
             ->authorName($name);

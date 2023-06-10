@@ -89,6 +89,11 @@ class Facades
                     'root' => storage_path('app/tmps'),
                 ],
 
+                'protected' => [
+                    'driver' => 'local',
+                    'root' => storage_path('app/protected'),
+                ],
+
                 's3' => [
                     'driver' => 's3',
                     'key' => env('AWS_ACCESS_KEY_ID'),

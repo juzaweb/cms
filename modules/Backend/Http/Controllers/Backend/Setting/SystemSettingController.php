@@ -54,6 +54,10 @@ class SystemSettingController extends BackendController
 
         foreach ($configs as $key => $config) {
             if ($request->has($key)) {
+                if ($key == 'google_captcha' && empty($config['secret_key'])) {
+                    continue;
+                }
+
                 set_config($key, $config);
 
                 if ($key == 'language') {

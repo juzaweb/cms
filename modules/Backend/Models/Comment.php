@@ -47,6 +47,8 @@ class Comment extends Model
 {
     use QueryCacheable;
 
+    const STATUS_APPROVED = 'approved';
+
     public string $cachePrefix = 'comments_';
 
     protected $table = 'comments';

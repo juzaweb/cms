@@ -81,6 +81,8 @@ class PostController extends FrontendController
             $postModel = $this->postRepository->findBySlug($slug[1]);
         }
 
+        abort_unless($postModel, 404);
+
         Facades::$isPostPage = true;
 
         Facades::$post = $postModel;

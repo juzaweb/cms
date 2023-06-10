@@ -31,7 +31,7 @@
             <h5>{{ trans('cms::app.preview') }}</h5>
             <div class="review-title">{{ seo_string($data->meta_title ?? $model->title, 70) }}</div>
             <div class="review-url">{{ url('/post') }}/<span>{{ $model->slug }}</span></div>
-            <div class="review-description">{{ seo_string($data->meta_description ?? $model->description, 320) }}</div>
+            <div class="review-description">{{ seo_string($data->meta_description ?? $model->description, 300) }}</div>
         </div>
     </div>
 </div>

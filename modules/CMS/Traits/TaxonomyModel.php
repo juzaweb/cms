@@ -36,6 +36,11 @@ trait TaxonomyModel
         return $this->belongsTo(self::class, 'parent_id', 'id');
     }
 
+    public function recursiveParents(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->parent()->with('recursiveParents');
+    }
+
     public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id', 'id');

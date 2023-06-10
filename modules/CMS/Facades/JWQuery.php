@@ -16,6 +16,8 @@ use Juzaweb\CMS\Contracts\JWQueryContract;
 /**
  * @method static array posts(string $type, array $options = [])
  * @method static array postTaxonomy($post, $taxonomy, $params)
+ * @method static array postTaxonomies($post, $taxonomy, $params)
+ * @method static array relatedPosts($post, $taxonomy, $params)
  *
  * @see \Juzaweb\CMS\Support\JWQuery
  * @see \Juzaweb\CMS\Traits\Queries\PostQuery

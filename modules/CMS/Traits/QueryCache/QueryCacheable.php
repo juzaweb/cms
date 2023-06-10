@@ -28,13 +28,23 @@ trait QueryCacheable
      */
     public static function bootQueryCacheable(): void
     {
-        $flushCacheOnUpdate = !isset(static::$flushCacheOnUpdate) || static::$flushCacheOnUpdate;
+        $flushCacheOnUpdate = static::getFlushCacheOnUpdate();
 
         if ($flushCacheOnUpdate) {
             static::observe(
                 static::getFlushQueryCacheObserver()
             );
         }
+    }
+
+    public static function getFlushCacheOnUpdate(): bool
+    {
+        return !isset(static::$flushCacheOnUpdate) || static::$flushCacheOnUpdate;
+    }
+
+    public static function setFlushCacheOnUpdate(bool $flushCacheOnUpdate): void
+    {
+        static::$flushCacheOnUpdate = $flushCacheOnUpdate;
     }
 
     /**
@@ -58,7 +68,7 @@ trait QueryCacheable
     protected function getCacheBaseTags(): array
     {
         return [
-            (string) static::class,
+            (string)static::class,
         ];
     }
 
@@ -66,14 +76,15 @@ trait QueryCacheable
      * When invalidating automatically on update, you can specify
      * which tags to invalidate.
      *
-     * @param  string|null  $relation
-     * @param  Collection|null  $pivotedModels
+     * @param string|null $relation
+     * @param Collection|null $pivotedModels
      * @return array
      */
     public function getCacheTagsToInvalidateOnUpdate(
-        ?string $relation = null,
+        ?string         $relation = null,
         Collection|null $pivotedModels = null
-    ): array {
+    ): array
+    {
         return $this->getCacheBaseTags();
     }
 

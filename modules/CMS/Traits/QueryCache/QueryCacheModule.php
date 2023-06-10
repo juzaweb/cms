@@ -118,7 +118,8 @@ trait QueryCacheModule
             if ($key) {
                 CacheGroup::add(
                     $this->getCacheGroupKey(),
-                    $key
+                    $key,
+                    86400
                 );
             }
 
@@ -193,8 +194,7 @@ trait QueryCacheModule
         $cache = $this->getCacheDriver();
 
         if (! method_exists($cache, 'tags')) {
-            CacheGroup::driver($this->getCacheDriverName())
-                ->pull($this->getCacheGroupKey());
+            CacheGroup::driver($this->getCacheDriverName())->pull($this->getCacheGroupKey());
 
             return false;
         }

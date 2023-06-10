@@ -130,7 +130,6 @@ class HtmlDomNode
         }
 
         $converted_text = $text;
-
         $sourceCharset = '';
         $targetCharset = '';
 
@@ -165,6 +164,7 @@ class HtmlDomNode
         if ($targetCharset === 'UTF-8') {
             if (substr($converted_text, 0, 3) === "\xef\xbb\xbf") {
                 $converted_text = substr($converted_text, 3);
+
             }
 
             if (substr($converted_text, -3) === "\xef\xbb\xbf") {

@@ -17,7 +17,7 @@ class Handler extends ExceptionHandler
     protected $levels = [
         //
     ];
-    
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -26,7 +26,7 @@ class Handler extends ExceptionHandler
     protected $dontReport = [
         //
     ];
-    
+
     /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
-    
+
     /**
      * Register the exception handling callbacks for the application.
      *
@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
             }
         );
     }
-    
+
     /**
      * Render an exception into an HTTP response.
      *
@@ -66,7 +66,7 @@ class Handler extends ExceptionHandler
             if ($request->is(config('juzaweb.admin_prefix').'/*')) {
                 return response()->view('cms::404', [], 404);
             }
-            
+
             if (view()->exists(theme_viewname('theme::404'))) {
                 return response()->view(
                     theme_viewname('theme::404'),
@@ -74,22 +74,21 @@ class Handler extends ExceptionHandler
                     404
                 );
             }
-            
+
             return response()->view(
                 'cms::404',
                 [],
                 404
             );
         }
-        
+
         return parent::render($request, $exception);
     }
-    
+
     protected function is404Exception($exception)
     {
-        return match ($exception) {
-            $exception instanceof NotFoundHttpException => true,
-            $exception instanceof ModelNotFoundException => true,
+        return match (true) {
+            $exception instanceof NotFoundHttpException, $exception instanceof ModelNotFoundException => true,
             default => false,
         };
     }

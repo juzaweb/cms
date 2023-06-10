@@ -10,8 +10,10 @@
 
 namespace Juzaweb\Frontend\Actions;
 
+use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\ThemeLoader;
 
 class FrontendAction extends Action
 {
@@ -19,6 +21,7 @@ class FrontendAction extends Action
     {
         $this->addAction(self::FRONTEND_HEADER_ACTION, [$this, 'addFrontendHeader']);
         $this->addAction(self::FRONTEND_FOOTER_ACTION, [$this, 'addFrontendFooter']);
+        //$this->addAction('theme.after_body', [$this, 'addThemeBody']);
     }
 
     public function addFrontendHeader()
@@ -47,6 +50,28 @@ class FrontendAction extends Action
 
     public function addFrontendFooter()
     {
-        echo e(view('cms::items.frontend_footer'));
+        $scripts = HookAction::getEnqueueFrontendScripts(true);
+        $styles = HookAction::getEnqueueFrontendStyles(true);
+
+        echo e(view('cms::items.frontend_footer', compact('scripts', 'styles')));
+    }
+
+    public function addThemeBody()
+    {
+        $str = '';
+        $theme = jw_current_theme();
+        $styles = ThemeLoader::getRegister($theme)['styles'] ?? [];
+
+        foreach ($styles['css'] ?? [] as $css) {
+            if (is_url($css)) {
+                continue;
+            }
+
+            $str .= File::get(public_path("jw-styles/themes/{$theme}/{$css}"));
+        }
+
+        if ($str) {
+            echo '<style>'.$str.'</style>';
+        }
     }
 }

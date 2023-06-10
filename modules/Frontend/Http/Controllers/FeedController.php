@@ -20,7 +20,7 @@ class FeedController extends Controller
                 [
                     'id',
                     'title',
-                    'description',
+                    'content',
                     'updated_at',
                     'slug',
                     'type',
@@ -57,7 +57,7 @@ class FeedController extends Controller
                 [
                     'id',
                     'title',
-                    'description',
+                    'content',
                     'updated_at',
                     'slug',
                     'type',

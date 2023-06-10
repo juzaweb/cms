@@ -28,11 +28,16 @@ trait PostQuery
 
         $limit = Arr::get($options, 'limit');
         $paginate = Arr::get($options, 'paginate');
+        $simplePaginate = Arr::get($options, 'simple_paginate');
         $metas = Arr::get($options, 'metas');
         $orderBy = Arr::get($options, 'order_by');
 
         if ($paginate && $paginate > 30) {
             $paginate = 12;
+        }
+
+        if ($simplePaginate && $simplePaginate > 30) {
+            $simplePaginate = 12;
         }
 
         $query = Post::selectFrontendBuilder();
@@ -89,6 +94,16 @@ trait PostQuery
                 ->getData(true);
         }
 
+        if ($simplePaginate) {
+            $posts = $query->simplePaginate($simplePaginate);
+
+            $posts->appends(request()->query());
+
+            return PostResourceCollection::make($posts)
+                ->response()
+                ->getData(true);
+        }
+
         if (empty($limit) || $limit > 50) {
             $limit = 10;
         }
@@ -106,11 +121,12 @@ trait PostQuery
             $limit = 20;
         }
 
-        $ids = collect(get_post_taxonomies($post, $taxonomy))
+        $ids = collect($this->postTaxonomies($post, $taxonomy))
             ->pluck('id')
             ->toArray();
 
         $posts = Post::selectFrontendBuilder()
+            ->where('type', $post['type'])
             ->whereHas(
                 'taxonomies',
                 function (Builder $q) use ($ids) {
@@ -125,7 +141,7 @@ trait PostQuery
         return PostResourceCollection::make($posts)->toArray(request());
     }
 
-    public function popularPosts($type = null, $post = null, $limit = 5, $options = [])
+    public function popularPosts($type = null, $post = null, $limit = 5, $options = []): array
     {
         if ($limit > 20) {
             $limit = 20;

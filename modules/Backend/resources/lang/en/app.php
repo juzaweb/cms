@@ -475,6 +475,7 @@ return [
     'updating' => 'Updating...',
     'custom_seo' => 'Custom SEO',
     'buy' => 'Buy',
+    'locale' => 'Locale',
     'mark_as_viewed' => 'Mark as viewed',
     'extension' => 'Extension',
     'path' => 'Path',
@@ -536,7 +537,7 @@ return [
     ],
     'seo' => [
         'enable_sitemap' => 'Enable sitemap',
-        'enable_sitemap_description' => 'Enable the XML sitemaps that Yoast SEO generates.
+        'enable_sitemap_description' => 'Enable the XML sitemaps.
  <a href="/sitemap.xml" target="_blank">See the XML sitemap</a>',
         'enable_post_feed' => 'Enable post feed',
         'enable_taxonomy_feed' => 'Enable taxonomy feed',
@@ -546,6 +547,10 @@ return [
         'bing_api_key' => 'Bing API Key',
         'bing_verify_key' => 'Bing Verify Website Key',
         'google_verify_key' => 'Google Verify Website Key',
+        'auto_ping_google_sitemap' => 'Auto ping google sitemap',
+        'auto_submit_url_google' => 'Auto submit url to Google',
+        'auto_submit_url_bing' => 'Auto submit url to Bing',
+        'auto_add_tags_to_posts' => 'Auto add tags to posts',
     ],
     'backup' => [
         'backup_setting' => 'Backup setting',

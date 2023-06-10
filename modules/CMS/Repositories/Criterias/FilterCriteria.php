@@ -18,7 +18,7 @@ class FilterCriteria extends Criteria implements CriteriaInterface
             $this->queries = request()->all();
         }
     }
-    
+
     /**
      * Apply criteria in query repository
      *
@@ -33,9 +33,9 @@ class FilterCriteria extends Criteria implements CriteriaInterface
         if (!method_exists($repository, 'getFieldFilterable')) {
             return $model;
         }
-        
+
         $fields = $repository->getFieldFilterable();
-        
+
         return $model->where(
             function ($query) use ($fields, $repository) {
                 foreach ($fields as $field => $condition) {
@@ -43,11 +43,11 @@ class FilterCriteria extends Criteria implements CriteriaInterface
                         $field = $condition;
                         $condition = "=";
                     }
-                    
+
                     if (!Arr::has($this->queries, $field)) {
                         continue;
                     }
-                    
+
                     if (is_array($condition)) {
                         $column = key($condition);
                         $condition = $condition[$column];
@@ -57,7 +57,11 @@ class FilterCriteria extends Criteria implements CriteriaInterface
                         $value = $this->getValueRequest($field, $condition);
                         $column = $field;
                     }
-                    
+
+                    if (is_null($value)) {
+                        continue;
+                    }
+
                     switch ($condition) {
                         case 'in':
                             $query->whereIn($column, $value);
@@ -69,37 +73,37 @@ class FilterCriteria extends Criteria implements CriteriaInterface
                             $query->where($column, $condition, $value);
                     }
                 }
-                
+
                 if ($repository instanceof WithAppendFilter) {
                     $repository->appendCustomFilter($query, $this->queries);
                 }
             }
         );
     }
-    
+
     protected function getValueRequest(string $field, string $condition): mixed
     {
         $search = Arr::get($this->queries, $field);
         $value = null;
-        
+
         if (!is_null($search) && !in_array($condition, ['in', 'between'])) {
             $value = ($condition == "like" || $condition == "ilike") ? "%{$search}%" : $search;
         }
-        
+
         if ($condition == 'in') {
             $value = explode(',', $value);
             if (trim($value[0]) === "" || $field == $value[0]) {
                 $value = null;
             }
         }
-        
+
         if ($condition == 'between') {
             $value = explode(',', $value);
             if (count($value) < 2) {
                 $value = null;
             }
         }
-        
+
         return $value;
     }
 }

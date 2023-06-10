@@ -123,7 +123,7 @@ class HtmlDom
     public function load(
         $str,
         $lowercase = true,
-        $stripRN = true,
+        $stripRN = false,
         $defaultBRText = DEFAULT_BR_TEXT,
         $defaultSpanText = DEFAULT_SPAN_TEXT,
         $options = 0
@@ -933,7 +933,7 @@ class HtmlDom
     {
         switch ($name) {
             case 'outertext':
-                return $this->root->innertext();
+                return $this->root->outertext();
             case 'innertext':
                 return $this->root->innertext();
             case 'plaintext':

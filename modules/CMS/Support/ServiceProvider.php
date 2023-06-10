@@ -13,6 +13,7 @@ namespace Juzaweb\CMS\Support;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Juzaweb\CMS\Contracts\ActionRegisterContract;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -31,5 +32,14 @@ class ServiceProvider extends BaseServiceProvider
                 }
             }
         }
+    }
+
+    protected function registerHookActions(array|string $actions)
+    {
+        if (is_string($actions)) {
+            $actions = [$actions];
+        }
+
+        $this->app[ActionRegisterContract::class]->register($actions);
     }
 }

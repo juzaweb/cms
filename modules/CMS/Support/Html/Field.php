@@ -165,7 +165,7 @@ class Field implements FieldContract
             $options['value'] = Arr::get(
                 $options,
                 'value',
-                $label->getAttribute($name)
+                $label->getAttribute($name) ?? $options['default'] ?? null
             );
 
             if (is_callable($options['value'])) {
@@ -176,7 +176,7 @@ class Field implements FieldContract
         } else {
             $options['value'] = $options['value'] ?? $options['default'] ?? null;
 
-            if (is_callable($options['value'])) {
+            if (!is_string($options['value']) && is_callable($options['value'])) {
                 $options['value'] = call_user_func($options['value'], ...[$label, $name, $options]);
             }
         }
