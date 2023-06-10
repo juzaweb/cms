@@ -69,8 +69,9 @@ class PostTest extends TestCase
             $data = $post;
             unset($data['slug']);
 
-            $response = $this->post($create, $post);
-            $response->assertStatus(302);
+            $this->json('POST', $create, $post)
+                ->assertStatus(200)
+                ->assertJson(['status' => true]);
 
             $slug = substr($post['title'], 0, 70);
             $slug = Str::slug($slug);
@@ -79,7 +80,7 @@ class PostTest extends TestCase
                 'posts',
                 [
                     'slug' => $slug,
-                    'type' => $post['type']
+                    'type' => $key,
                 ]
             );
         }
