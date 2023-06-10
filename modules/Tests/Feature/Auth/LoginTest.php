@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Tests\Feature\Auth;
 
+use Illuminate\Support\Facades\Hash;
 use Juzaweb\CMS\Models\User;
 use Juzaweb\Tests\TestCase;
 
@@ -22,7 +23,7 @@ class LoginTest extends TestCase
 
     public function testLogin()
     {
-        $user = User::factory()->create(['password' => '12345678']);
+        $user = User::factory()->create(['password' => Hash::make('12345678')]);
 
         $this->json(
             'POST',
