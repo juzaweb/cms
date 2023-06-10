@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'domain' => env('TELESCOPE_DOMAIN', false),
+    'domain' => env('TELESCOPE_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -62,7 +62,7 @@ return [
     |
     */
 
-    'enabled' => env('TELESCOPE_ENABLED', true),
+    'enabled' => env('TELESCOPE_ENABLED', false),
 
     /*
     |--------------------------------------------------------------------------
