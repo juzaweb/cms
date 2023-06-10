@@ -47,7 +47,7 @@ return new class extends Migration
                 $table->index('batch_id');
                 $table->index('family_hash');
                 $table->index('created_at');
-                $table->index(['type', 'should_display_on_index']);
+                $table->index(['type', 'should_display_on_index'], 'telescope_should_display_on_index');
             }
         );
 
