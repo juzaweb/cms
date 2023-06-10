@@ -55,13 +55,13 @@ class ConsoleServiceProvider extends ServiceProvider
                     $time = get_config('jw_backup_time', 'daily');
                     switch ($time) {
                         case 'weekly':
-                            $schedule->command('backup:run', ['--only-db'])->weekly();
+                            $schedule->command('backup:run')->weekly();
                             break;
                         case 'monthly':
-                            $schedule->command('backup:run', ['--only-db'])->monthly();
+                            $schedule->command('backup:run')->monthly();
                             break;
                         default:
-                            $schedule->command('backup:run', ['--only-db'])->daily();
+                            $schedule->command('backup:run')->daily();
                     }
                 }
             }

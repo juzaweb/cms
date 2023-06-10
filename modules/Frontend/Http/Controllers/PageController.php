@@ -44,7 +44,7 @@ class PageController extends FrontendController
         /* Redirect home page */
         if (get_config('show_on_front') && $page->id == get_config('home_page')) {
             if (Route::getCurrentRoute()->getName() != 'home') {
-                return redirect()->route('home');
+                return redirect()->route('home', [], 301);
             }
         }
 

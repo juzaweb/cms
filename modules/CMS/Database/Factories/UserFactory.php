@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'password' => Hash::make(Str::random(10)),
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
-            'is_admin' => 0
+            'is_admin' => 0,
         ];
     }
 }

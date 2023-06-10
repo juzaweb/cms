@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Multilang\Providers;
 
+use Illuminate\Routing\Router;
 use Juzaweb\Multilang\Http\Middleware\Multilang;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\Multilang\MultilangAction;
@@ -10,7 +11,7 @@ class MultilangServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        /** @var \Illuminate\Routing\Router $router */
+        /** @var Router $router */
         $router = $this->app['router'];
         $router->pushMiddlewareToGroup('theme', Multilang::class);
 

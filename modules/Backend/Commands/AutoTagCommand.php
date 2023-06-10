@@ -12,10 +12,8 @@ namespace Juzaweb\Backend\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 use Juzaweb\Backend\Jobs\AutoTagJob;
 use Juzaweb\Backend\Models\Post;
-use Juzaweb\Backend\Models\Taxonomy;
 
 class AutoTagCommand extends Command
 {

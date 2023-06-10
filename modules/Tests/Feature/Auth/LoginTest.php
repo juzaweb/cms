@@ -22,7 +22,7 @@ class LoginTest extends TestCase
 
     public function testLogin()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['password' => '12345678']);
 
         $this->json(
             'POST',

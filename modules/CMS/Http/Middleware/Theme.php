@@ -21,8 +21,6 @@ class Theme
 {
     public function handle($request, Closure $next)
     {
-        abort(403);
-
         View::composer(
             '*',
             function ($view) {

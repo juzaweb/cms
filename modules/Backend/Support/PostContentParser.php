@@ -33,8 +33,7 @@ class PostContentParser
             foreach ($domp->find('img') as $e) {
                 $content = str_replace(
                     $e->outertext(),
-                    '<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                    data-src="'.upload_url($e->src).'" alt="'. addslashes($this->post->title) .'"
+                    '<img src="'.upload_url($e->src).'" alt="'. addslashes($this->post->title) .'"
                     class="lazyload"
                     loading="lazy">',
                     $content
