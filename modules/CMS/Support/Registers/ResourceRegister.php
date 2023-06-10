@@ -13,7 +13,6 @@ namespace Juzaweb\CMS\Support\Registers;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Juzaweb\Backend\Models\Resource;
-use Juzaweb\Backend\Repositories\ResourceRepository;
 use Juzaweb\CMS\Abstracts\BackendResource;
 use Juzaweb\CMS\Contracts\HookActionContract as HookAction;
 

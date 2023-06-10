@@ -5,9 +5,9 @@
             $meta['data']['value'] = Arr::get($meta, 'value');
         } else {
             if (is_array($values)) {
-                $meta['data']['value'] = $values[$name] ?? null;
+                $meta['data']['value'] = $values[$meta['name']] ?? null;
             } else {
-                $meta['data']['value'] = $values->{$name} ?? null;
+                $meta['data']['value'] = $values->{$meta['name']} ?? null;
             }
         }
     @endphp

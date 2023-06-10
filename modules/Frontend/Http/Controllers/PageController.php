@@ -4,6 +4,7 @@ namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Route;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
@@ -40,6 +41,13 @@ class PageController extends FrontendController
 
     protected function handlePage(Request $request, Post $page, array $slug = [])
     {
+        /* Redirect home page */
+        if (get_config('show_on_front') && $page->id == get_config('home_page')) {
+            if (Route::getCurrentRoute()->getName() != 'home') {
+                return redirect()->route('home');
+            }
+        }
+
         $theme = jw_theme_info();
         $params = $this->getPageParams($page, $slug, $request);
 

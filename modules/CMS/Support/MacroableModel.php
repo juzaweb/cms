@@ -12,17 +12,18 @@ namespace Juzaweb\CMS\Support;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Juzaweb\CMS\Contracts\MacroableModelContract;
 
-class MacroableModel
+class MacroableModel implements MacroableModelContract
 {
-    private $macros = [];
+    private array $macros = [];
 
-    public function getAllMacros()
+    public function getAllMacros(): array
     {
         return $this->macros;
     }
 
-    public function addMacro(String $model, String $name, \Closure $closure)
+    public function addMacro(string $model, string $name, \Closure $closure): void
     {
         $this->checkModelSubclass($model);
 
@@ -33,7 +34,7 @@ class MacroableModel
         $this->syncMacros($name);
     }
 
-    public function removeMacro($model, String $name)
+    public function removeMacro($model, string $name): bool
     {
         $this->checkModelSubclass($model);
 
@@ -50,13 +51,13 @@ class MacroableModel
         return false;
     }
 
-    public function modelHasMacro($model, $name)
+    public function modelHasMacro($model, $name): bool
     {
         $this->checkModelSubclass($model);
         return (isset($this->macros[$name]) && isset($this->macros[$name][$model]));
     }
 
-    public function modelsThatImplement($name)
+    public function modelsThatImplement($name): array
     {
         if (! isset($this->macros[$name])) {
             return [];
@@ -64,7 +65,7 @@ class MacroableModel
         return array_keys($this->macros[$name]);
     }
 
-    public function macrosForModel($model)
+    public function macrosForModel($model): array
     {
         $this->checkModelSubclass($model);
 
@@ -83,7 +84,7 @@ class MacroableModel
         return $macros;
     }
 
-    private function syncMacros($name)
+    private function syncMacros($name): void
     {
         $models = $this->macros[$name];
         Builder::macro($name, function (...$args) use ($name, $models) {
@@ -98,7 +99,7 @@ class MacroableModel
         });
     }
 
-    private function checkModelSubclass(String $model)
+    private function checkModelSubclass(string $model): void
     {
         if (! is_subclass_of($model, Model::class)) {
             throw new \InvalidArgumentException('$model must be a subclass of Illuminate\\Database\\Eloquent\\Model');

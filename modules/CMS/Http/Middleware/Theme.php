@@ -21,6 +21,8 @@ class Theme
 {
     public function handle($request, Closure $next)
     {
+        abort(403);
+
         View::composer(
             '*',
             function ($view) {
@@ -42,7 +44,7 @@ class Theme
                 ThemeFacade::set($currentTheme);
             }
         }
-        
+
         do_action(Action::FRONTEND_INIT, $request);
 
         return $next($request);

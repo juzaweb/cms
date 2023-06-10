@@ -226,7 +226,7 @@ if (!function_exists('upload_url')) {
     function upload_url(?string $path, ?string $default = null, ?string $size = null): string
     {
         if (is_url($path)) {
-            return $path;
+            return apply_filters('get_upload_url', $path, $path, $default, $size);
         }
 
         if (str_starts_with($path, '/')) {
@@ -255,7 +255,7 @@ if (!function_exists('upload_url')) {
             }
         }
 
-        return $storage->url($path);
+        return apply_filters('get_upload_url', $storage->url($path), $path, $default, $size);
     }
 }
 
@@ -694,7 +694,6 @@ function seo_string($string, $chars = 70)
     $string = strip_tags($string);
     $string = str_replace(["\n", "\t"], ' ', $string);
     $string = html_entity_decode($string, ENT_HTML5);
-    $string = str_replace(["{", "}", '\\', '/', '-', '_', '"', "'"], '', $string);
     return sub_char($string, $chars);
 }
 
@@ -765,13 +764,19 @@ if (!function_exists('remove_bbcode')) {
 }
 
 if (!function_exists('get_domain_by_url')) {
-    function get_domain_by_url(string $url): string|bool
+    function get_domain_by_url(string $url, bool $noneWWW = false): string|bool
     {
         if (str_starts_with($url, 'https://')
             || str_starts_with($url, 'http://')
             || str_starts_with($url, '//')
         ) {
             $domain = explode('/', $url)[2];
+            if ($noneWWW) {
+                if (str_starts_with($domain, 'www.')) {
+                    $domain = str_replace('www.', '', $domain);
+                }
+            }
+
             return explode('?', $domain)[0];
         }
 

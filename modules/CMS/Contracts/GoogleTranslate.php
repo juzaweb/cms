@@ -16,4 +16,6 @@ namespace Juzaweb\CMS\Contracts;
 interface GoogleTranslate
 {
     public function translate(string $source, string $target, string $text): string;
+
+    public function withProxy(string|array $proxy): static;
 }

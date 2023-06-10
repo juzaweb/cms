@@ -24,7 +24,7 @@ class PostController extends ApiController
     public function __construct(protected PostRepository $postRepository)
     {
     }
-    
+
     public function index(Request $request, $type): PostCollection
     {
         $queries = $request->query();
@@ -32,14 +32,14 @@ class PostController extends ApiController
         $this->postRepository->pushCriteria(new SearchCriteria($queries));
         $this->postRepository->pushCriteria(new FilterCriteria($queries));
         $this->postRepository->pushCriteria(new SortCriteria($queries));
-    
+
         $limit = $this->getQueryLimit($request);
-    
+
         $rows = $this->postRepository->frontendListPaginate($limit);
-        
+
         return new PostCollection($rows);
     }
-    
+
     public function show($type, $slug): PostResource
     {
         $model = $this->postRepository->createFrontendDetailBuilder()
@@ -48,5 +48,29 @@ class PostController extends ApiController
             ->firstOrFail();
 
         return new PostResource($model);
+    }
+
+    public function related(Request $request, $type, $slug): PostCollection
+    {
+        $model = $this->postRepository->createFrontendDetailBuilder()
+            ->where('type', '=', $type)
+            ->where('slug', '=', $slug)
+            ->firstOrFail();
+
+        $queries = $request->query();
+        $queries['type'] = $type;
+
+        $this->postRepository->pushCriteria(new SearchCriteria($queries));
+        $this->postRepository->pushCriteria(new FilterCriteria($queries));
+        $this->postRepository->pushCriteria(new SortCriteria($queries));
+
+        $limit = $this->getQueryLimit($request);
+
+        $rows = $this->postRepository->frontendListByTaxonomyPaginate(
+            $limit,
+            collect($model->json_taxonomies)->pluck('id')->toArray()
+        );
+
+        return new PostCollection($rows);
     }
 }

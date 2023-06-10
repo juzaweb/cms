@@ -12,4 +12,15 @@ namespace Juzaweb\CMS\Contracts;
 
 interface MacroableModelContract
 {
+    public function getAllMacros(): array;
+
+    public function addMacro(string $model, string $name, \Closure $closure): void;
+
+    public function removeMacro($model, string $name): bool;
+
+    public function modelHasMacro($model, $name): bool;
+
+    public function modelsThatImplement($name): array;
+
+    public function macrosForModel($model): array;
 }

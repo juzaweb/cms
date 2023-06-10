@@ -18,6 +18,7 @@ Route::group(
     function () {
         Route::get('{type}', [PostController::class, 'index']);
         Route::get('{type}/{slug}', [PostController::class, 'show']);
+        Route::get('{type}/{slug}/related', [PostController::class, 'related']);
         Route::get('{type}/{slug}/comments', [CommentController::class, 'index']);
         Route::post('{type}/{slug}/comments', [CommentController::class, 'store']);
     }

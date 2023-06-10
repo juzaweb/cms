@@ -29,6 +29,8 @@ class TaxonomyController extends FrontendController
             $currentPage = null;
         }
 
+        abort_unless($taxSlug, 404);
+
         $taxonomy = $this->taxonomyRepository->findBySlug($taxSlug);
 
         Facades::$isTaxonomyPage = true;

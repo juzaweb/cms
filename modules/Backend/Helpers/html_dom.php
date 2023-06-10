@@ -35,7 +35,7 @@ function file_get_html(
     $lowercase = true,
     $forceTagsClosed = true,
     $target_charset = DEFAULT_TARGET_CHARSET,
-    $stripRN = true,
+    $stripRN = false,
     $defaultBRText = DEFAULT_BR_TEXT,
     $defaultSpanText = DEFAULT_SPAN_TEXT
 ) {
@@ -82,7 +82,7 @@ function str_get_html(
     $lowercase = true,
     $forceTagsClosed = true,
     $target_charset = DEFAULT_TARGET_CHARSET,
-    $stripRN = true,
+    $stripRN = false,
     $defaultBRText = DEFAULT_BR_TEXT,
     $defaultSpanText = DEFAULT_SPAN_TEXT
 ) {

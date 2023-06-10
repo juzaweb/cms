@@ -21,7 +21,7 @@ class SeoController extends BackendController
         return response()->json(
             [
                 'title' => seo_string($title, 70),
-                'description' => seo_string($description, 320),
+                'description' => seo_string($description, 300),
                 'slug' => Str::slug(seo_string($slug, 70)),
             ]
         );

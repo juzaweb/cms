@@ -17,6 +17,10 @@ use Juzaweb\Backend\Models\Post;
  */
 interface PostImporterContract
 {
+    public function setCreatedBy(int $createdBy): static;
+
+    public function getCreatedBy(): ?int;
+
     public function setDownloadThumbnail(bool $downloadThumbnai): static;
 
     public function getDownloadThumbnail(): bool;

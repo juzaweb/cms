@@ -15,12 +15,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostMeta;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\Backend\Support\PostContentParser;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\ShortCode;
 
@@ -45,16 +47,14 @@ trait PostTypeModel
             [
                 'createdBy' => function ($q) {
                     $q->cacheFor(3600);
-                },
-                'taxonomies' => function ($q) {
-                    $q->cacheFor(3600);
-                },
+                }
             ]
         )
             ->cacheFor(3600)
             ->select(
                 [
                     'id',
+                    'uuid',
                     'title',
                     'description',
                     'thumbnail',
@@ -67,6 +67,7 @@ trait PostTypeModel
                     'created_by',
                     'created_at',
                     'json_metas',
+                    'json_taxonomies',
                 ]
             )->wherePublish();
 
@@ -78,9 +79,6 @@ trait PostTypeModel
         $builder = static::with(
             [
                 'createdBy' => function ($q) {
-                    $q->cacheFor(3600);
-                },
-                'taxonomies' => function ($q) {
                     $q->cacheFor(3600);
                 },
             ]
@@ -101,9 +99,6 @@ trait PostTypeModel
         $builder = static::with(
             [
                 'createdBy' => function ($q) {
-                    $q->cacheFor(3600);
-                },
-                'taxonomies' => function ($q) {
                     $q->cacheFor(3600);
                 },
             ]
@@ -182,10 +177,14 @@ trait PostTypeModel
     {
         if ($keyword = Arr::get($params, 'q')) {
             $keyword = trim($keyword);
+            $connection = config('database.default');
+            $driver = config("database.connections.{$connection}.driver");
+            $condition = $driver == 'pgsql' ? 'ilike' : 'like';
+
             $builder->where(
-                function (Builder $q) use ($keyword) {
-                    $q->where('title', JW_SQL_LIKE, '%'.$keyword.'%');
-                    $q->orWhere('description', JW_SQL_LIKE, '%'.$keyword.'%');
+                function (Builder $q) use ($keyword, $condition) {
+                    $q->where('title', $condition, '%'.$keyword.'%');
+                    $q->orWhere('description', $condition, '%'.$keyword.'%');
                 }
             );
         }
@@ -379,7 +378,7 @@ trait PostTypeModel
         string $postType = null
     ): bool {
         $postType = $postType ?: $this->type;
-        $data = Arr::get($attributes, $taxonomy, []);
+        $data = (array) Arr::get($attributes, $taxonomy, []);
 
         $detachIds = $this->taxonomies()
             ->where('taxonomy', '=', $taxonomy)
@@ -612,15 +611,16 @@ trait PostTypeModel
 
     public function getContent(): string
     {
-        $pattern = '/\<img(.*)src\=\"([0-9a-zA-Z\-\.\/]+)\"(.*)\>/';
-
-        $content = preg_replace_callback(
-            $pattern,
-            function ($matches) {
-                return '<img'.$matches[1].'src="'.upload_url($matches[2]).'"'.$matches[3].'>';
-            },
-            $this->content
-        );
+        $content = $this->content ?? '';
+        if ($content) {
+            $content = Cache::store('file')->remember(
+                "post_type.get_content.{$this->id}",
+                3600,
+                function () {
+                    return PostContentParser::make($this)->parse();
+                }
+            );
+        }
 
         if ($this->type == 'pages') {
             $content = ShortCode::compile($content);

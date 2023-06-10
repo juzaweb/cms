@@ -3,45 +3,34 @@
 namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Facades\HookAction;
-use Juzaweb\CMS\Http\Controllers\Controller;
+use Juzaweb\Frontend\Http\Controllers\Abstracts\BaseSitemapController;
 
-class SitemapController extends Controller
+class SitemapController extends BaseSitemapController
 {
-    protected int $per_page = 500;
-
-    public function __construct()
-    {
-        if (!get_config('jw_enable_sitemap', true)) {
-            abort(404);
-        }
-    }
-
     public function index()
     {
         $sitemap = App::make("sitemap");
         $sitemap->setCache(cache_prefix("sitemap-index"), 3600);
 
         $taxonomies = HookAction::getTaxonomies()
-            ->mapWithKeys(
-                function ($item, $key) {
-                    return array_keys($item);
-                }
-            )
+            ->mapWithKeys(fn($item) => array_keys($item))
             ->unique()
             ->values();
 
         $types = HookAction::getPostTypes();
-
         $sitemap->addSitemap(route('sitemap.pages'));
 
         foreach ($taxonomies as $taxonomy) {
-            $items = Taxonomy::where('taxonomy', '=', $taxonomy)
-                ->count(['id']);
+            $items = $this->totalTaxonomy($taxonomy);
 
-            $total = ceil($items / $this->per_page);
+            $total = ceil($items / $this->perPage);
+            if ($total > $this->limitTaxonomyPage) {
+                $total = $this->limitTaxonomyPage;
+            }
 
             for ($page = 1; $page <= $total; $page++) {
                 $sitemap->addSitemap(route('sitemap.taxonomies', [$taxonomy, $page]));
@@ -49,11 +38,12 @@ class SitemapController extends Controller
         }
 
         foreach ($types as $key => $type) {
-            $items = Post::wherePublish()
-                ->where('type', '=', $key)
-                ->count(['id']);
+            $items = $this->totalPost($key);
+            $total = ceil($items / $this->perPage);
 
-            $total = ceil($items / $this->per_page);
+            if ($total > $this->limitPostPage) {
+                $total = $this->limitPostPage;
+            }
 
             for ($page = 1; $page <= $total; $page++) {
                 $sitemap->addSitemap(route('sitemap.posts', [$key, $page]));
@@ -74,16 +64,20 @@ class SitemapController extends Controller
     public function sitemapPost($type, $page)
     {
         $sitemap = App::make("sitemap");
-        $sitemap->setCache(cache_prefix("sitemap-{$type}"), 3600);
-        $items = Post::wherePublish()
-            ->where('type', '=', $type)
-            ->orderBy('id', 'DESC')
-            ->paginate(
-                $this->per_page,
-                ['updated_at', 'slug', 'type'],
-                'page',
-                $page
-            );
+        $sitemap->setCache(cache_prefix("sitemap-{$type}-{$page}"), 3600);
+        $items = Cache::store('file')->remember(
+            "sitemap_post_{$type}_{$page}",
+            3600,
+            fn() => Post::wherePublish()
+                ->where('type', '=', $type)
+                ->orderBy('id', 'DESC')
+                ->paginate(
+                    $this->perPage,
+                    ['updated_at', 'slug', 'type'],
+                    'page',
+                    $page
+                )
+        );
 
         foreach ($items as $item) {
             $sitemap->add($item->getLink(), $item->updated_at, '0.8', 'daily');
@@ -95,13 +89,18 @@ class SitemapController extends Controller
     public function sitemapTaxonomy($taxonomy, $page)
     {
         $sitemap = App::make("sitemap");
-        $sitemap->setCache(cache_prefix("sitemap-taxonomy-{$taxonomy}"), 3600);
-        $items = Taxonomy::where('taxonomy', '=', $taxonomy)
-            ->paginate(
-                $this->per_page,
-                ['updated_at', 'slug', 'taxonomy', 'post_type'],
-                'page',
-                $page
+        $sitemap->setCache(cache_prefix("sitemap-taxonomy-{$taxonomy}-{$page}"), 3600);
+        $items = Cache::store('file')->remember(
+            "sitemap_post_{$taxonomy}_{$page}",
+            3600,
+            fn() => Taxonomy::where('taxonomy', '=', $taxonomy)
+                ->where('total_post', '>', 0)
+                ->paginate(
+                    $this->perPage,
+                    ['updated_at', 'slug', 'taxonomy', 'post_type'],
+                    'page',
+                    $page
+                )
             );
 
         foreach ($items as $item) {

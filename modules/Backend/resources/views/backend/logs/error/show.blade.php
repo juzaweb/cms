@@ -86,9 +86,9 @@
             background-color: #6A1B9A;
         }
 
-        #entries {
+        /*#entries {
             overflow-wrap: anywhere;
-        }
+        }*/
     </style>
 @endsection
 

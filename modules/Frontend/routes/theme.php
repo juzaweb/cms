@@ -19,6 +19,7 @@ use Juzaweb\Frontend\Http\Controllers\PostController;
 use Juzaweb\Frontend\Http\Controllers\RouteController;
 use Juzaweb\Frontend\Http\Controllers\SearchController;
 use Juzaweb\Frontend\Http\Controllers\SitemapController;
+use Juzaweb\Frontend\Http\Controllers\PostSitemapController;
 
 Auth::routes();
 
@@ -26,6 +27,11 @@ Route::get(
     'sitemap.xml',
     [SitemapController::class, 'index']
 )->name('sitemap.index');
+
+Route::get(
+    'sitemap-{type}-{page}.xml',
+    [PostSitemapController::class, 'index']
+)->name('sitemap.post_type.index');
 
 Route::get(
     'sitemap/pages.xml',

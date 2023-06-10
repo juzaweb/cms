@@ -367,7 +367,7 @@ return [
     'datetime' => 'tarih saat',
     'time' => 'Zaman',
     'upload_media' => 'Medya yükle',
-    'result_for_keyword' => 'Anahtar kelime için sonuç: isim',
+    'result_for_keyword' => 'Anahtar kelime için sonuç: :name',
     'search_results' => 'Arama Sonuçları',
     'install' => 'Düzenlemek',
     'views' => 'Görüntüleme',

@@ -15,7 +15,7 @@
                         <img src="{{ asset('jw-styles/juzaweb/images/folder.png') }}" alt="{{ $item->name }}">
                     @else
                         @if($item->type == 'image')
-                            <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ upload_url($item->path, null, '150xauto') }}" alt="{{ $item->name }}">
+                            <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ upload_url($item->path, null, '150x150') }}" alt="{{ $item->name }}">
                         @else
                             <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ asset('jw-styles/juzaweb/images/file.png') }}" alt="{{ $item->name }}">
                         @endif

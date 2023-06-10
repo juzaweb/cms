@@ -192,7 +192,8 @@ class HookAction implements HookActionContract
         string $key,
         string $src = '',
         string $ver = '1.0',
-        bool $inFooter = false
+        bool $inFooter = false,
+        array $options = []
     ): void {
         if (!is_url($src)) {
             $src = theme_assets($src);
@@ -206,6 +207,7 @@ class HookAction implements HookActionContract
                     'src' => $src,
                     'ver' => $ver,
                     'inFooter' => $inFooter,
+                    'options' => $options,
                 ]
             )
         );

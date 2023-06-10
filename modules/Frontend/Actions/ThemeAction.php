@@ -86,12 +86,33 @@ class ThemeAction extends Action
         $version = ThemeLoader::getVersion($this->currentTheme);
 
         if ($styles) {
-            foreach ($styles['js'] ?? [] as $index => $js) {
-                HookAction::enqueueFrontendScript('main-' . $index, $js, $version);
+            $index = 0;
+            foreach ($styles['js'] ?? [] as $key => $js) {
+                $inFooter = false;
+                $options = [];
+                if (is_array($js)) {
+                    $inFooter = Arr::get($js, 'footer', false);
+                    $options = $js;
+                    $js = $key;
+                }
+
+                HookAction::enqueueFrontendScript('js-main-' . $index, $js, $version, $inFooter, $options);
+                $index++;
             }
 
-            foreach ($styles['css'] ?? [] as $index => $css) {
-                HookAction::enqueueFrontendStyle('main-' . $index, $css, $version);
+            $index = 0;
+            foreach ($styles['css'] ?? [] as $key => $css) {
+                /*if (!is_url($css)) {
+                    continue;
+                }*/
+                $inFooter = false;
+                if (is_array($css)) {
+                    $inFooter = Arr::get($css, 'footer', false);
+                    $css = $key;
+                }
+
+                HookAction::enqueueFrontendStyle('css-main-' . $index, $css, $version, $inFooter);
+                $index++;
             }
         }
     }

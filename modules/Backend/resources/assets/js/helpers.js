@@ -71,6 +71,9 @@ function get_message_response(response)
 function show_message(response, append = false)
 {
     let msg = get_message_response(response);
+    if (!msg) {
+        return;
+    }
 
     let msgHTML = `<div class="alert alert-${msg.status ? 'success' : 'danger' } jw-message">
         <button type="button" class="close" data-dismiss="alert" aria-label="${juzaweb.lang.close}">

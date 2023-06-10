@@ -10,13 +10,14 @@
 
 namespace Juzaweb\Backend\Listeners;
 
+use Illuminate\Support\Facades\DB;
 use Juzaweb\Backend\Events\PostViewed;
 use Illuminate\Session\Store;
 use Juzaweb\Backend\Models\PostView;
 
 class CountViewPost
 {
-    private $session;
+    private Store $session;
 
     public function __construct(Store $session)
     {
@@ -26,11 +27,12 @@ class CountViewPost
     /**
      * @param PostViewed $event
      */
-    public function handle(PostViewed $event)
+    public function handle(PostViewed $event): void
     {
         if (!$this->isPostViewed($event->post)) {
-            $event->post->increment('views');
-            $event->post->save();
+            DB::table('posts')
+                ->where(['id' => $event->post->id])
+                ->update(['views' => DB::raw('views + 1')]);
 
             $model = PostView::firstOrNew(
                 [
@@ -46,14 +48,14 @@ class CountViewPost
         }
     }
 
-    private function isPostViewed($post)
+    private function isPostViewed($post): bool
     {
         $viewed = $this->session->get('viewed_posts', []);
 
         return array_key_exists($post->id, $viewed);
     }
 
-    private function storePost($post)
+    private function storePost($post): void
     {
         $key = 'viewed_posts.' . $post->id;
 

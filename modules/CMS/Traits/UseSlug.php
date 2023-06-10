@@ -17,7 +17,7 @@ trait UseSlug
         );
     }
 
-    public static function findBySlug($slug, $column = []): self
+    public static function findBySlug($slug, $column = ['*']): ?self
     {
         return self::query()
             ->where('slug', '=', $slug)

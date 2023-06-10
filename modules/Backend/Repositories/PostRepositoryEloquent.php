@@ -19,7 +19,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
     use UseSearchCriteria, UseFilterCriteria, UseSortableCriteria;
 
     protected array $searchableFields = ['title', 'description'];
-    protected array $filterableFields = ['status', 'type'];
+    protected array $filterableFields = ['status', 'type', 'locale'];
     protected array $sortableFields = ['id', 'status', 'title', 'views'];
     protected array $sortableDefaults = ['id' => 'DESC'];
 
@@ -39,6 +39,17 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         return $this->parserResult($result);
     }
 
+    public function findByUuid(string $uuid, $fail = true): null|Post
+    {
+        if ($fail) {
+            $result = $this->createFrontendDetailBuilder()->where(['uuid' => $uuid])->firstOrFail();
+        } else {
+            $result = $this->createFrontendDetailBuilder()->where(['uuid' => $uuid])->first();
+        }
+
+        return $this->parserResult($result);
+    }
+
     public function frontendListPaginate(int $limit): LengthAwarePaginator
     {
         $this->applyCriteria();
@@ -52,13 +63,13 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         return $this->parserResult($result);
     }
 
-    public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy, ?int $page = null): LengthAwarePaginator
+    public function frontendListByTaxonomyPaginate(int $limit, int|array $taxonomy, ?int $page = null): LengthAwarePaginator
     {
         $this->applyCriteria();
         $this->applyScope();
 
         $result = $this->createSelectFrontendBuilder()
-            ->whereTaxonomy($taxonomy)
+            ->when(is_int($taxonomy), fn($q) => $q->whereTaxonomy($taxonomy), fn($q) => $q->whereTaxonomyIn($taxonomy))
             ->paginate($limit, [], 'page', $page);
 
         $this->resetModel();
@@ -74,6 +85,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
             ->select(
                 [
                     'id',
+                    'uuid',
                     'title',
                     'description',
                     'thumbnail',
@@ -86,6 +98,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
                     'created_by',
                     'created_at',
                     'json_metas',
+                    'json_taxonomies',
                 ]
             )
             ->wherePublish();
@@ -95,7 +108,13 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
 
     public function createFrontendDetailBuilder(): Builder
     {
-        $builder = $this->model->newQuery()->with($this->withFrontendDefaults())
+        $with = $this->withFrontendDefaults();
+        /*$with['taxonomies'] = function ($q) {
+            $q->cacheFor(3600);
+            $q->limit(10);
+        };*/
+
+        $builder = $this->model->newQuery()->with($with)
             ->cacheFor(config('juzaweb.performance.query_cache.lifetime', 3600))
             ->whereIn('status', [Post::STATUS_PUBLISH, Post::STATUS_PRIVATE]);
 
@@ -106,9 +125,6 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
     {
         return [
             'createdBy' => function ($q) {
-                $q->cacheFor(3600);
-            },
-            'taxonomies' => function ($q) {
                 $q->cacheFor(3600);
             },
         ];

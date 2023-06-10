@@ -9,5 +9,6 @@ Route::group(
     function () {
         Route::get('/', [TaxonomyController::class, 'index']);
         Route::get('/{slug}', [TaxonomyController::class, 'show']);
+        Route::get('/{slug}/posts', [TaxonomyController::class, 'posts']);
     }
 );

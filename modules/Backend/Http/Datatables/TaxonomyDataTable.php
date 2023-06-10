@@ -80,8 +80,11 @@ class TaxonomyDataTable extends DataTable
          * @var Builder $query
          */
         $query = $this->makeModel()->query()->with('parent');
-        $data['post_type'] = $this->taxonomy['post_type'];
         $data['taxonomy'] = $this->taxonomy['taxonomy'];
+
+        if ($this->taxonomy['taxonomy'] != 'tags') {
+            $data['post_type'] = $this->taxonomy['post_type'];
+        }
 
         $query->whereFilter($data);
 

@@ -11,6 +11,8 @@
 namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Console\Scheduling\Schedule;
+use Juzaweb\Backend\Commands\AutoSubmitCommand;
+use Juzaweb\Backend\Commands\AutoTagCommand;
 use Juzaweb\CMS\Console\Commands\AutoClearSlotCommand;
 use Juzaweb\CMS\Console\Commands\ClearCacheCommand;
 use Juzaweb\CMS\Console\Commands\ClearCacheExpiredCommand;
@@ -36,15 +38,16 @@ class ConsoleServiceProvider extends ServiceProvider
         VersionCommand::class
     ];
 
-    public function boot()
+    public function boot(): void
     {
         $this->app->booted(
             function () {
                 $schedule = $this->app->make(Schedule::class);
                 $schedule->command(AutoClearSlotCommand::class)->hourly();
+                $schedule->command(AutoSubmitCommand::class)->daily();
 
-                if (get_config('jw_auto_ping')) {
-                    $schedule->command('juzacms:auto-submit')->daily();
+                if (get_config('jw_auto_add_tags_to_posts')) {
+                    $schedule->command(AutoTagCommand::class)->dailyAt('03:16');
                 }
 
                 if (get_config('jw_backup_enable')) {
@@ -52,20 +55,20 @@ class ConsoleServiceProvider extends ServiceProvider
                     $time = get_config('jw_backup_time', 'daily');
                     switch ($time) {
                         case 'weekly':
-                            $schedule->command('backup:run')->weekly();
+                            $schedule->command('backup:run', ['--only-db'])->weekly();
                             break;
                         case 'monthly':
-                            $schedule->command('backup:run')->monthly();
+                            $schedule->command('backup:run', ['--only-db'])->monthly();
                             break;
                         default:
-                            $schedule->command('backup:run')->daily();
+                            $schedule->command('backup:run', ['--only-db'])->daily();
                     }
                 }
             }
         );
     }
 
-    public function register()
+    public function register(): void
     {
         $this->commands($this->commands);
     }
