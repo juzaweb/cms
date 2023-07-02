@@ -4,9 +4,12 @@ namespace Juzaweb\Frontend\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\Backend\Repositories\UserRepository;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\Frontend\Http\Requests\ChangePasswordRequest;
@@ -14,23 +17,20 @@ use Juzaweb\Frontend\Http\Requests\UpdateProfileRequest;
 
 class ProfileController extends FrontendController
 {
+    public function __construct(protected UserRepository $userRepository)
+    {
+    }
+
     public function index($slug = null)
     {
         $pages = HookAction::getProfilePages()->toArray();
-
         $page = $pages[$slug ?? 'index'];
 
-        if (empty($page)) {
-            abort(404);
-        }
+        abort_unless($page, 404);
 
         $title = $page['title'];
-
         if ($callback = Arr::get($page, 'callback')) {
-            return app()->call(
-                "{$callback[0]}@{$callback[1]}",
-                ['page' => $page]
-            );
+            return app()->call("{$callback[0]}@{$callback[1]}", ['page' => $page]);
         }
 
         return $this->view(
@@ -45,15 +45,21 @@ class ProfileController extends FrontendController
 
     public function update(UpdateProfileRequest $request): JsonResponse|RedirectResponse
     {
-        $user = Auth::user();
+        $user = $request->user();
 
-        $update = $request->only(['name']);
+        DB::transaction(
+            function () use ($user, $request) {
+                $update = $request->only(['name']);
 
-        if ($password = $request->input('password')) {
-            $update['password'] = Hash::make($password);
-        }
+                if ($password = $request->input('password')) {
+                    $update['password'] = Hash::make($password);
+                }
 
-        $user->update($update);
+                $this->userRepository->update($update, $user->id);
+
+                do_action('theme.profile.update', $user, $request->all());
+            }
+        );
 
         return $this->success(
             [
@@ -62,10 +68,10 @@ class ProfileController extends FrontendController
         );
     }
 
-    public function changePassword()
+    public function changePassword(Request $request)
     {
         $title = trans('cms::app.change_password');
-        $user = Auth::user();
+        $user = UserResource::make($request->user())->toArray($request);
 
         return $this->view(
             'theme::profile.change_password',
@@ -100,7 +106,7 @@ class ProfileController extends FrontendController
     {
         $currentPassword = $request->post('current_password');
         $password = $request->post('password');
-        $user = Auth::user();
+        $user = $request->user();
 
         if (!Hash::check($currentPassword, $user->password)) {
             return response()->json(
@@ -111,11 +117,7 @@ class ProfileController extends FrontendController
             );
         }
 
-        $user->update(
-            [
-                'password' => Hash::make($password),
-            ]
-        );
+        DB::transaction(fn() => $user->update(['password' => Hash::make($password)]));
 
         return $this->success(
             [

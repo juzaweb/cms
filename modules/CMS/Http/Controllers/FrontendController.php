@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Http\Controllers;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Traits\ResponseMessage;
@@ -11,7 +12,7 @@ class FrontendController extends Controller
 {
     use ResponseMessage;
 
-    public function callAction($method, $parameters)
+    public function callAction($method, $parameters): \Symfony\Component\HttpFoundation\Response|string
     {
         /**
          * Action after call action frontend
@@ -39,6 +40,13 @@ class FrontendController extends Controller
 
     protected function view($view, $params = [])
     {
+        $params = $this->parseParamsFronend($params);
+
+        return apply_filters('theme.render_view', Twig::render($view, $params));
+    }
+
+    protected function parseParamsFronend(array $params): array
+    {
         if ($message = session('message')) {
             $params['message'] = $message;
         }
@@ -50,6 +58,11 @@ class FrontendController extends Controller
         foreach ($params as $key => $item) {
             if (is_a($item, 'Illuminate\Support\ViewErrorBag')) {
                 continue;
+            }
+
+            if ($item instanceof Arrayable) {
+                $item = $item->toArray();
+                $params[$key] = $item;
             }
 
             if (!in_array(
@@ -67,6 +80,6 @@ class FrontendController extends Controller
             }
         }
 
-        return Twig::render($view, $params);
+        return $params;
     }
 }

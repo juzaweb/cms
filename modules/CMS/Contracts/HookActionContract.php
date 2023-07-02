@@ -476,6 +476,7 @@ interface HookActionContract
      * @option bool    'auth'   Whether the callback must be authenticated. Default is false.
      * @required string 'callback' The callback function invoked when request matched the route.
      * @option string 'key'    Alternative key name (replacing the key parameter above).
+     * @option string 'method'    Method allowed (default: get).
      *
      * @throws Exception Throws exception if callback option is not provided.
      */

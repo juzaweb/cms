@@ -12,9 +12,9 @@
 namespace Juzaweb\CMS\Extension;
 
 use Illuminate\Support\Str as IlluminateStr;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use Twig\Extension\AbstractExtension;
 
 /**
  * Access Laravels string class in your Twig templates.
@@ -66,7 +66,7 @@ class Str extends AbstractExtension
                 'str_*',
                 function ($name) {
                     $arguments = array_slice(func_get_args(), 1);
-                    $name      = IlluminateStr::camel($name);
+                    $name = IlluminateStr::camel($name);
 
                     return call_user_func_array([$this->callback, $name], $arguments);
                 }
@@ -87,7 +87,7 @@ class Str extends AbstractExtension
                 'str_*',
                 function ($name) {
                     $arguments = array_slice(func_get_args(), 1);
-                    $name      = IlluminateStr::camel($name);
+                    $name = IlluminateStr::camel($name);
 
                     return call_user_func_array([$this->callback, $name], $arguments);
                 }

@@ -584,4 +584,8 @@ return [
         'secret_key' => 'Secret Key',
         'google_captcha_v2_invisible' => 'Google Captcha V2 (invisible)',
     ],
+    'email_hooks' => 'Email Hooks',
+    'to_users' => 'To Users',
+    'to_sender' => 'To Sender',
+    'to_sender_description' => 'If selected, this email will be sent to the person submitting the form',
 ];

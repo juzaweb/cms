@@ -11,8 +11,10 @@
 namespace Juzaweb\Backend\Listeners;
 
 use Illuminate\Support\Str;
+use Juzaweb\Backend\Models\EmailTemplate;
 use Juzaweb\CMS\Events\EmailHook;
 use Juzaweb\Backend\Events\RegisterSuccessful;
+use Juzaweb\CMS\Support\Email;
 
 class SendMailRegisterSuccessful
 {
@@ -33,6 +35,25 @@ class SendMailRegisterSuccessful
                     'verification_token' => $verifyToken,
                 ]
             );
+
+            $hook = EmailTemplate::where(['code' => 'verification', 'email_hook' => 'register_success'])->first();
+            if (empty($hook)) {
+                Email::make()
+                    ->setEmails($event->user->email)
+                    ->withTemplate('verification')
+                    ->setParams(
+                        [
+                            'name' => $event->user->name,
+                            'email' => $event->user->email,
+                            'verifyToken' => $verifyToken,
+                            'verifyUrl' => route(
+                                'verification',
+                                [$event->user->email, $verifyToken]
+                            ),
+                        ]
+                    )
+                    ->send();
+            }
 
             event(
                 new EmailHook(

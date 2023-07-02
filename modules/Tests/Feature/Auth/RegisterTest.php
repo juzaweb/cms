@@ -63,25 +63,25 @@ class RegisterTest extends TestCase
 
         $this->assertDatabaseHas('users', ['email' => $email, 'status' => 'verification']);
 
-        /*$template = EmailTemplate::whereCode('verification')->first();
+        //$template = EmailTemplate::whereCode('verification')->first();
 
         $this->assertDatabaseHas(
             'email_lists',
             [
                 'email' => $email,
-                'template_id' => $template->id
+                'template_code' => 'verification'
             ]
         );
 
         $token = EmailList::with(['template'])
             ->whereEmail($email)
-            ->where('template_id', '=', $template->id)
+            ->where('template_code', '=', 'verification')
             ->first();
 
         $this->get("admin-cp/verification/{$email}/{$token->params['verifyToken']}")
             ->assertStatus(302)
             ->assertRedirect(route('login'));
 
-        $token->delete();*/
+        $token->delete();
     }
 }

@@ -25,7 +25,7 @@ use Juzaweb\Frontend\Http\Controllers\PostController;
 
 class MenuAction extends Action
 {
-    public function handle()
+    public function handle(): void
     {
         $this->addAction(self::INIT_ACTION, [$this, 'addDatatableSearchFieldTypes']);
         $this->addAction(self::INIT_ACTION, [$this, 'addPostTypes']);
@@ -39,7 +39,7 @@ class MenuAction extends Action
         $this->addAction(self::BACKEND_INIT, [$this, 'checkAndNotifyUpdate']);
     }
 
-    public function addBackendMenu()
+    public function addBackendMenu(): void
     {
         HookAction::addAdminMenu(
             trans('cms::app.dashboard'),
@@ -314,7 +314,7 @@ class MenuAction extends Action
         }
     }
 
-    public function addSettingPage()
+    public function addSettingPage(): void
     {
         HookAction::addSettingForm(
             'general',
@@ -337,7 +337,7 @@ class MenuAction extends Action
         );
     }
 
-    public function addPostTypes()
+    public function addPostTypes(): void
     {
         $templates = ThemeLoader::getTemplates(jw_current_theme());
         $data = [
@@ -393,7 +393,7 @@ class MenuAction extends Action
         );
     }
 
-    public function addMenuBoxs()
+    public function addMenuBoxs(): void
     {
         HookAction::registerMenuBox(
             'custom_url',
@@ -405,7 +405,7 @@ class MenuAction extends Action
         );
     }
 
-    public function addTaxonomiesForm()
+    public function addTaxonomiesForm(): void
     {
         $types = HookAction::getPostTypes();
         foreach ($types as $key => $type) {
@@ -424,7 +424,7 @@ class MenuAction extends Action
         }
     }
 
-    public function addAdminScripts()
+    public function addAdminScripts(): void
     {
         $ver = Version::getVersion();
         HookAction::enqueueScript('core-vendor', 'jw-styles/juzaweb/js/vendor.min.js', $ver);
@@ -433,7 +433,7 @@ class MenuAction extends Action
         HookAction::enqueueScript('core-custom', 'jw-styles/juzaweb/js/custom.min.js', $ver);
     }
 
-    public function addAdminStyles()
+    public function addAdminStyles(): void
     {
         $ver = Version::getVersion();
         HookAction::enqueueStyle('core-vendor', 'jw-styles/juzaweb/css/vendor.min.css', $ver);
@@ -441,7 +441,7 @@ class MenuAction extends Action
         HookAction::enqueueStyle('core-custom', 'jw-styles/juzaweb/css/custom.min.css', $ver);
     }
 
-    public function addDatatableSearchFieldTypes()
+    public function addDatatableSearchFieldTypes(): void
     {
         $this->addFilter(
             Action::DATATABLE_SEARCH_FIELD_TYPES_FILTER,
@@ -463,7 +463,7 @@ class MenuAction extends Action
         );
     }
 
-    public function registerEmailHooks()
+    public function registerEmailHooks(): void
     {
         HookAction::registerEmailHook(
             'register_success',

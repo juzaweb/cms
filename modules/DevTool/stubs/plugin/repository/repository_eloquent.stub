@@ -2,15 +2,10 @@
 
 namespace $CLASS_NAMESPACE$;
 
-use $MODULE_NAMESPACE$\Models\$CLASS$;
+use $MODULE_NAMESPACE$\Models\$MODEL_NAME$;
 use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 
-/**
- * Class $CLASS$.
- *
- * @package namespace $CLASS_NAMESPACE$;
- */
-class $CLASS$Eloquent extends BaseRepositoryEloquent implements CommentRepository
+class $CLASS$Eloquent extends BaseRepositoryEloquent implements $CLASS$
 {
     /**
      * Specify Model class name
@@ -19,6 +14,6 @@ class $CLASS$Eloquent extends BaseRepositoryEloquent implements CommentRepositor
      */
     public function model(): string
     {
-        return $CLASS$::class;
+        return $MODEL_NAME$::class;
     }
 }

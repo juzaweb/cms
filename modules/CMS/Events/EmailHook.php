@@ -20,8 +20,8 @@ class EmailHook
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $hook;
-    public $args = [];
+    public string $hook;
+    public array $args = [];
 
     public function __construct($hook, $args = [])
     {

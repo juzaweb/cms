@@ -9,6 +9,7 @@ use Juzaweb\CMS\Contracts\ThemeLoaderContract;
  * @method static void set(string $theme)
  * @method static bool has(string $theme)
  * @method static string getPath(string $theme = null, $path = '')
+ * @method static string getThemePath(string $theme = null, $path = '')
  * @method static bool|Config getInfo(string $theme)
  * @method static \Illuminate\Support\Collection getThemeInfo(string $theme)
  * @method static string getScreenshot(string $theme)

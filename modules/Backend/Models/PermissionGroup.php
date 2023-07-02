@@ -22,9 +22,9 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionGroup whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionGroup wherePlugin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionGroup whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string|null $description
  * @method static \Illuminate\Database\Eloquent\Builder|PermissionGroup whereDescription($value)
+ * @mixin \Eloquent
  */
 class PermissionGroup extends Model
 {

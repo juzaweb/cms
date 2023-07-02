@@ -49,13 +49,14 @@ use Juzaweb\CMS\Traits\UseUUIDColumn;
  * @method static Builder|Taxonomy whereThumbnail($value)
  * @method static Builder|Taxonomy whereTotalPost($value)
  * @method static Builder|Taxonomy whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int|null $site_id
  * @method static Builder|Taxonomy whereSiteId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|Taxonomy[] $recursiveChildren
  * @property-read int|null $recursive_children_count
  * @property string|null $uuid
  * @method static Builder|Taxonomy whereUuid($value)
+ * @property-read Taxonomy|null $recursiveParents
+ * @mixin \Eloquent
  */
 class Taxonomy extends Model
 {

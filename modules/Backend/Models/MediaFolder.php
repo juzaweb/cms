@@ -29,9 +29,9 @@ use Juzaweb\CMS\Models\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|MediaFolder whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MediaFolder whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MediaFolder whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int|null $site_id
  * @method static \Illuminate\Database\Eloquent\Builder|MediaFolder whereSiteId($value)
+ * @mixin \Eloquent
  */
 class MediaFolder extends Model
 {

@@ -10,9 +10,16 @@
 
 namespace Juzaweb\CMS\Facades;
 
-use Juzaweb\CMS\Contracts\MacroableModelContract;
 use Illuminate\Support\Facades\Facade;
+use Juzaweb\CMS\Contracts\MacroableModelContract;
 
+/**
+ * @method static void addMacro(string $model, string $name, \Closure $closure)
+ * @method static bool removeMacro($model, string $name)
+ * @method static bool modelHasMacro($model, $name)
+ * @method static array modelsThatImplement($name)
+ * @method static array macrosForModel($model)
+ */
 class MacroableModel extends Facade
 {
     protected static function getFacadeAccessor(): string

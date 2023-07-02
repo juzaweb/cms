@@ -42,7 +42,6 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereTarget($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereType($value)
- * @mixin \Eloquent
  * @property string $group
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereGroup($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereMenuKey($value)
@@ -59,6 +58,7 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
  * @property-read MenuItem|null $parent
  * @property-read \Illuminate\Database\Eloquent\Collection|MenuItem[] $recursiveChildren
  * @property-read int|null $recursive_children_count
+ * @mixin \Eloquent
  */
 class MenuItem extends Model
 {

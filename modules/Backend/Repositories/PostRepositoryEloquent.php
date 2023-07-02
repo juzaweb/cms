@@ -19,16 +19,11 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
     use UseSearchCriteria, UseFilterCriteria, UseSortableCriteria;
 
     protected array $searchableFields = ['title', 'description'];
-    protected array $filterableFields = ['status', 'type', 'locale'];
+    protected array $filterableFields = ['status', 'type', 'locale', 'created_by', 'id'];
     protected array $sortableFields = ['id', 'status', 'title', 'views'];
     protected array $sortableDefaults = ['id' => 'DESC'];
 
-    public function model(): string
-    {
-        return Post::class;
-    }
-
-    public function findBySlug(string $slug, $fail = true): null|Post
+    public function findBySlug(string $slug, bool $fail = true): null|Post
     {
         if ($fail) {
             $result = $this->createFrontendDetailBuilder()->where(['slug' => $slug])->firstOrFail();
@@ -39,13 +34,18 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         return $this->parserResult($result);
     }
 
-    public function findByUuid(string $uuid, $fail = true): null|Post
+    public function findByUuid(string $uuid, array $columns = ['*'], bool $fail = true): null|Post
     {
+        $this->applyCriteria();
+        $this->applyScope();
+
         if ($fail) {
-            $result = $this->createFrontendDetailBuilder()->where(['uuid' => $uuid])->firstOrFail();
+            $result = $this->model->where(['uuid' => $uuid])->firstOrFail();
         } else {
-            $result = $this->createFrontendDetailBuilder()->where(['uuid' => $uuid])->first();
+            $result = $this->model->where(['uuid' => $uuid])->first();
         }
+
+        $this->resetModel();
 
         return $this->parserResult($result);
     }
@@ -58,12 +58,12 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         $result = $this->createSelectFrontendBuilder()->paginate($limit);
 
         $this->resetModel();
-        $this->resetScope();
 
         return $this->parserResult($result);
     }
 
-    public function frontendListByTaxonomyPaginate(int $limit, int|array $taxonomy, ?int $page = null): LengthAwarePaginator
+    public function frontendListByTaxonomyPaginate(int $limit, int|array $taxonomy, ?int $page = null)
+    : LengthAwarePaginator
     {
         $this->applyCriteria();
         $this->applyScope();
@@ -139,6 +139,11 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
             Post::STATUS_TRASH => trans('cms::app.trash'),
         ];
 
-        return apply_filters($type.'.statuses', $statuses);
+        return apply_filters($type . '.statuses', $statuses);
+    }
+
+    public function model(): string
+    {
+        return Post::class;
     }
 }

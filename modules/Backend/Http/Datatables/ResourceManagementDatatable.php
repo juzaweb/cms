@@ -10,6 +10,7 @@
 
 namespace Juzaweb\Backend\Http\Datatables;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\CMS\Abstracts\DataTable;
 use Juzaweb\CMS\Repositories\BaseRepository;
@@ -41,11 +42,9 @@ class ResourceManagementDatatable extends DataTable
         ];
     }
 
-    public function query($data): \Illuminate\Database\Eloquent\Builder
+    public function query($data): Builder
     {
-        $query = $this->repository->query();
-
-        return $query;
+        return $this->repository->query();
     }
 
     public function bulkActions($action, $ids)

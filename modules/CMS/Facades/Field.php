@@ -20,10 +20,12 @@ use Juzaweb\CMS\Contracts\Field as FieldContract;
  * @method static fieldByType($fields)
  * @method static View|Factory render(array $fields, array|Model $values = [], bool $collection = false)
  * @method static select(string|Model $label, ?string $name, ?array $options = [])
+ * @method static selectUser(string|Model $label, ?string $name, ?array $options = [])
  * @method static textarea(string|Model $label, ?string $name, ?array $options = [])
  * @method static images(string|Model $label, ?string $name, ?array $options = [])
  * @method static security(string|Model $label, ?string $name, ?array $options = [])
  * @method static text(string|Model $label, ?string $name, ?array $options = [])
+ * @method static editor(string|Model $label, ?string $name, ?array $options = [])
  * @method static image(string|Model $label, ?string $name, ?array $options = [])
  * @method static checkbox(string|Model $label, ?string $name, ?array $options = [])
  * @see \Juzaweb\CMS\Support\Html\Field

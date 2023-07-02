@@ -77,7 +77,6 @@ use Spatie\Feed\FeedItem;
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereViews($value)
- * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereMetaIn($key, $values)
  * @property int|null $site_id
  * @property string|null $locale
@@ -98,6 +97,7 @@ use Spatie\Feed\FeedItem;
  * @property-read int|null $resources_count
  * @property string|null $uuid
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUuid($value)
+ * @mixin \Eloquent
  */
 class Post extends Model implements Feedable
 {

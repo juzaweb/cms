@@ -40,11 +40,11 @@ use TwigBridge\Facade\Twig;
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereTemplateId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereUpdatedAt($value)
- * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereSiteId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|EmailList whereTemplate($code)
  * @property int|null $site_id
  * @method static Builder|EmailList whereTemplateCode($value)
+ * @mixin \Eloquent
  */
 class EmailList extends Model implements RootNetworkModelInterface
 {
@@ -119,8 +119,7 @@ class EmailList extends Model implements RootNetworkModelInterface
             if ($this->template) {
                 $body = $this->template->body;
             } else {
-                $template = app(HookActionContract::class)
-                    ->getEmailTemplates($this->template_code);
+                $template = app(HookActionContract::class)->getEmailTemplates($this->template_code);
                 $body = File::get(view($template->get('body'))->getPath());
             }
         }

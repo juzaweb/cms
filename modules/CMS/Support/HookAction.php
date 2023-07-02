@@ -8,18 +8,19 @@
 
 namespace Juzaweb\CMS\Support;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 use Juzaweb\CMS\Contracts\EventyContract;
 use Juzaweb\CMS\Contracts\GlobalDataContract;
 use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Support\HookActions\Traits\MenuHookAction;
+use Juzaweb\CMS\Support\HookActions\Traits\StyleHookAction;
 use Juzaweb\CMS\Traits\HookAction\GetHookAction;
 use Juzaweb\CMS\Traits\HookAction\RegisterHookAction;
 
 class HookAction implements HookActionContract
 {
-    use RegisterHookAction, GetHookAction, Macroable;
+    use Macroable, RegisterHookAction, GetHookAction, MenuHookAction, StyleHookAction;
 
     protected EventyContract $hook;
 
@@ -68,73 +69,6 @@ class HookAction implements HookActionContract
         $this->globalData->set('setting_forms.' . $key, new Collection($args));
     }
 
-    public function addAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
-    {
-        $adminMenu = $this->globalData->get('admin_menu');
-
-        $opts = [
-            'title' => $menuTitle,
-            'key' => $menuSlug,
-            'permissions' => ['admin'],
-            'slug' => str_replace('.', '-', $menuSlug),
-            'icon' => 'fa fa-list-ul',
-            'url' => str_replace('.', '/', $menuSlug),
-            'parent' => null,
-            'position' => 20,
-            'turbolinks' => true,
-        ];
-
-        $item = array_merge($opts, $args);
-        if ($item['parent']) {
-            $adminMenu[$item['parent']]['children'][$item['key']] = $item;
-        } else {
-            if (Arr::has($adminMenu, $item['key'])) {
-                if (Arr::has($adminMenu[$item['key']], 'children')) {
-                    $item['children'] = $adminMenu[$item['key']]['children'];
-                }
-
-                $adminMenu[$item['key']] = $item;
-            } else {
-                $adminMenu[$item['key']] = $item;
-            }
-        }
-
-        $this->globalData->set('admin_menu', $adminMenu);
-    }
-
-    public function addMasterAdminMenu(string $menuTitle, string $menuSlug, array $args = []): void
-    {
-        $adminMenu = $this->globalData->get('master_admin_menu');
-
-        $opts = [
-            'title' => $menuTitle,
-            'key' => $menuSlug,
-            'slug' => str_replace('.', '-', $menuSlug),
-            'icon' => 'fa fa-list-ul',
-            'url' => str_replace('.', '/', $menuSlug),
-            'parent' => null,
-            'position' => 20,
-            'turbolinks' => true,
-        ];
-
-        $item = array_merge($opts, $args);
-        if ($item['parent']) {
-            $adminMenu[$item['parent']]['children'][$item['key']] = $item;
-        } else {
-            if (Arr::has($adminMenu, $item['key'])) {
-                if (Arr::has($adminMenu[$item['key']], 'children')) {
-                    $item['children'] = $adminMenu[$item['key']]['children'];
-                }
-
-                $adminMenu[$item['key']] = $item;
-            } else {
-                $adminMenu[$item['key']] = $item;
-            }
-        }
-
-        $this->globalData->set('master_admin_menu', $adminMenu);
-    }
-
     public function addThumbnailSizes(string $postType, string|array $size): void
     {
         if (!is_array($size)) {
@@ -148,92 +82,6 @@ class HookAction implements HookActionContract
         }
 
         $this->globalData->set("thumbnail_sizes.{$postType}", new Collection($currentSizes));
-    }
-
-    public function enqueueScript(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void
-    {
-        if (!is_url($src)) {
-            $src = asset($src);
-        }
-
-        $this->globalData->set(
-            "scripts.{$key}",
-            new Collection(
-                [
-                    'key' => $key,
-                    'src' => $src,
-                    'ver' => $ver,
-                    'inFooter' => $inFooter,
-                ]
-            )
-        );
-    }
-
-    public function enqueueStyle(string $key, string $src = '', string $ver = '1.0', bool $inFooter = false): void
-    {
-        if (!is_url($src)) {
-            $src = asset($src);
-        }
-
-        $this->globalData->set(
-            "styles.{$key}",
-            new Collection(
-                [
-                    'key' => $key,
-                    'src' => $src,
-                    'ver' => $ver,
-                    'inFooter' => $inFooter,
-                ]
-            )
-        );
-    }
-
-    public function enqueueFrontendScript(
-        string $key,
-        string $src = '',
-        string $ver = '1.0',
-        bool $inFooter = false,
-        array $options = []
-    ): void {
-        if (!is_url($src)) {
-            $src = theme_assets($src);
-        }
-
-        $this->globalData->set(
-            "frontend_scripts.{$key}",
-            new Collection(
-                [
-                    'key' => $key,
-                    'src' => $src,
-                    'ver' => $ver,
-                    'inFooter' => $inFooter,
-                    'options' => $options,
-                ]
-            )
-        );
-    }
-
-    public function enqueueFrontendStyle(
-        string $key,
-        string $src = '',
-        string $ver = '1.0',
-        bool $inFooter = false
-    ): void {
-        if (!is_url($src)) {
-            $src = theme_assets($src);
-        }
-
-        $this->globalData->set(
-            "frontend_styles.{$key}",
-            new Collection(
-                [
-                    'key' => $key,
-                    'src' => $src,
-                    'ver' => $ver,
-                    'inFooter' => $inFooter,
-                ]
-            )
-        );
     }
 
     public function addMetaPostTypes(string $postType, array $metas): void

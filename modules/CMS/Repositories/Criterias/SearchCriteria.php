@@ -31,7 +31,8 @@ class SearchCriteria extends Criteria implements CriteriaInterface
     public function apply($model, RepositoryInterface $repository): Builder|Model
     {
         if (!method_exists($repository, 'getFieldSearchable')) {
-            return $model;
+            // To query builder
+            return $model->whereRaw('1=1');
         }
 
         $connection = config('database.default');
@@ -42,7 +43,8 @@ class SearchCriteria extends Criteria implements CriteriaInterface
         $condition = $driver == 'pgsql' ? 'ilike' : 'like';
 
         if (empty($keyword)) {
-            return $model;
+            // To query builder
+            return $model->whereRaw('1=1');
         }
 
         $tbl = $model->getModel()->getTable();
