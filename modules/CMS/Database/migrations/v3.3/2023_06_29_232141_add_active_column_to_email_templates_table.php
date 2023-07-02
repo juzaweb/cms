@@ -32,7 +32,7 @@ return new class extends Migration {
         Schema::table(
             'email_templates',
             function (Blueprint $table) {
-                $table->dropColumn(['active', 'to_sender', 'to_emails', 'to_users']);
+                $table->dropColumn(['active', 'to_sender', 'to_emails']);
             }
         );
     }
