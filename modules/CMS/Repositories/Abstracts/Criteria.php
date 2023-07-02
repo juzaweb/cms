@@ -10,10 +10,14 @@
 
 namespace Juzaweb\CMS\Repositories\Abstracts;
 
+use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
+
 abstract class Criteria
 {
-    public static function make(array $queries): static
+    public static function make(...$params): static
     {
-        return new static($queries);
+        return new static(...$params);
     }
+
+    abstract public function apply($model, RepositoryInterface $repository);
 }

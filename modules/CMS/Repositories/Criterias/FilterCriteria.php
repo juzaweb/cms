@@ -62,7 +62,7 @@ class FilterCriteria extends Criteria implements CriteriaInterface
                         continue;
                     }
 
-                    if (is_array($value)) {
+                    if (is_array($value) && $condition == '=') {
                         $condition = 'in';
                     }
 

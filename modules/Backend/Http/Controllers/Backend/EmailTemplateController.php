@@ -9,29 +9,29 @@ use Illuminate\Validation\Rule;
 use Juzaweb\Backend\Http\Datatables\EmailTemplateDataTable;
 use Juzaweb\Backend\Models\EmailTemplate;
 use Juzaweb\CMS\Contracts\HookActionContract;
-use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Illuminate\Database\Eloquent\Model;
 use Juzaweb\CMS\Traits\ResourceController;
 
 class EmailTemplateController extends BackendController
 {
+    use ResourceController;
+
     protected string $editKey = 'code';
 
-    use ResourceController {
-        getDataForForm as DataForForm;
-    }
-
     protected string $viewPrefix = 'cms::backend.email_template';
+
+    public function __construct(protected HookActionContract $hookAction)
+    {
+    }
 
     protected function getDetailModel(Model $model, ...$params): Model
     {
         $code = $this->getPathId($params);
-        $model = $model
-            ->where($this->editKey ?? 'id', $this->getPathId($params))
-            ->firstOrNew();
+        $model = $model->where($this->editKey ?? 'id', $this->getPathId($params))->firstOrNew();
+
         if ($model->id === null) {
-            $template = app(HookActionContract::class)->getEmailTemplates($code);
+            $template = $this->hookAction->getEmailTemplates($code);
             $template->put('body', File::get(view($template->get('body'))->getPath()));
             $model->fill($template->toArray());
         }
@@ -76,12 +76,5 @@ class EmailTemplateController extends BackendController
     protected function getTitle(...$params): string
     {
         return trans('cms::app.email_templates');
-    }
-
-    protected function getDataForForm($model, ...$params): array
-    {
-        $data = $this->DataForForm($model);
-        $data['emailHooks'] = HookAction::getEmailHooks();
-        return $data;
     }
 }

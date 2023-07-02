@@ -57,13 +57,13 @@ use Juzaweb\CMS\Traits\UseUUIDColumn;
  * @method static Builder|Resource whereUpdatedAt($value)
  * @method static Builder|Resource whereMeta($key, $value)
  * @method static Builder|Resource orWhereMeta($key, $value)
- * @mixin \Eloquent
  * @property int|null $site_id
  * @property string|null $slug
  * @method static Builder|Resource whereSiteId($value)
  * @method static Builder|Resource whereSlug($value)
  * @property string|null $uuid
  * @method static Builder|Resource whereUuid($value)
+ * @mixin \Eloquent
  */
 class Resource extends Model
 {

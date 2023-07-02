@@ -10,9 +10,6 @@
 
 namespace Juzaweb\CMS\Interfaces\Repositories;
 
-/**
- * @deprecated
- */
 interface WithAppendFilter
 {
     public function appendCustomFilter($builder, $input);

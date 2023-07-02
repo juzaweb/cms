@@ -77,9 +77,20 @@ class NetworkAction extends Action
             'Log Viewer',
             'log-viewer',
             [
+                'parent' => 'tools',
                 'icon' => 'fa fa-history',
                 'position' => 99,
                 'turbolinks' => false,
+            ]
+        );
+
+        HookAction::addAdminMenu(
+            trans('cms::app.email_logs'),
+            'logs.email',
+            [
+                'icon' => 'fa fa-cogs',
+                'position' => 51,
+                'parent' => 'managements',
             ]
         );
     }

@@ -19,26 +19,62 @@ use Juzaweb\CMS\Repositories\Interfaces\SortableInterface;
  */
 interface PostRepository extends BaseRepository, FilterableInterface, SearchableInterface, SortableInterface
 {
+    /**
+     * @param array $attributes
+     * @return Post
+     */
     public function create(array $attributes);
 
+    /**
+     * @param array $attributes
+     * @param $id
+     * @return Post
+     */
     public function update(array $attributes, $id);
 
-    public function findBySlug(string $slug, $fail = true): null|Post;
+    /**
+     * @param string $slug
+     * @param bool $fail
+     * @return Post|null
+     */
+    public function findBySlug(string $slug, bool $fail = true): null|Post;
 
-    public function findByUuid(string $uuid, $fail = true): null|Post;
+    /**
+     * @param string $uuid
+     * @param array $columns
+     * @param bool $fail
+     * @return Post|null
+     */
+    public function findByUuid(string $uuid, array $columns = ['*'], bool $fail = true): null|Post;
 
+    /**
+     * @param int $limit
+     * @param int $taxonomy
+     * @param int|null $page
+     * @return LengthAwarePaginator
+     */
     public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy, ?int $page = null): LengthAwarePaginator;
 
     /**
-     * @param  int  $limit
+     * @param int $limit
      * @return LengthAwarePaginator
      * @throws RepositoryException
      */
     public function frontendListPaginate(int $limit): LengthAwarePaginator;
 
+    /**
+     * @return Builder|Taxonomy
+     */
     public function createSelectFrontendBuilder(): Builder|Taxonomy;
 
+    /**
+     * @return Builder
+     */
     public function createFrontendDetailBuilder(): Builder;
 
+    /**
+     * @param string $type
+     * @return array
+     */
     public function getStatuses(string $type = 'posts'): array;
 }

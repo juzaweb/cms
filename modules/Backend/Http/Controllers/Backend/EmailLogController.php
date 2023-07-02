@@ -2,12 +2,13 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Contracts\View\View;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\Backend\Http\Datatables\EmailLogDatatable;
 
 class EmailLogController extends BackendController
 {
-    public function index(): \Illuminate\Contracts\View\View
+    public function index(): View
     {
         $dataTable = new EmailLogDatatable();
         $title = trans('cms::app.email_logs');

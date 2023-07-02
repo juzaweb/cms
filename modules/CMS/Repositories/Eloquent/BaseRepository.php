@@ -14,17 +14,17 @@ use Juzaweb\CMS\Repositories\Contracts\Presentable;
 use Juzaweb\CMS\Repositories\Contracts\PresenterInterface;
 use Juzaweb\CMS\Repositories\Contracts\RepositoryCriteriaInterface;
 use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
+use Juzaweb\CMS\Repositories\Contracts\ValidatorInterface;
 use Juzaweb\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
 use Juzaweb\CMS\Repositories\Events\RepositoryEntityCreated;
 use Juzaweb\CMS\Repositories\Events\RepositoryEntityCreating;
 use Juzaweb\CMS\Repositories\Events\RepositoryEntityDeleted;
+use Juzaweb\CMS\Repositories\Events\RepositoryEntityDeleting;
 use Juzaweb\CMS\Repositories\Events\RepositoryEntityUpdated;
 use Juzaweb\CMS\Repositories\Events\RepositoryEntityUpdating;
 use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
-use Juzaweb\CMS\Repositories\Traits\ComparesVersionsTrait;
-use Juzaweb\CMS\Repositories\Events\RepositoryEntityDeleting;
-use Juzaweb\CMS\Repositories\Contracts\ValidatorInterface;
 use Juzaweb\CMS\Repositories\Exceptions\ValidatorException;
+use Juzaweb\CMS\Repositories\Traits\ComparesVersionsTrait;
 
 /**
  * Class BaseRepository
@@ -188,7 +188,9 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         $model = $this->app->make($this->model());
 
         if (!$model instanceof Model) {
-            throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+            throw new RepositoryException(
+                "Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model"
+            );
         }
 
         return $this->model = $model;
@@ -208,7 +210,9 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
             $this->presenter = is_string($presenter) ? $this->app->make($presenter) : $presenter;
 
             if (!$this->presenter instanceof PresenterInterface) {
-                throw new RepositoryException("Class {$presenter} must be an instance of Prettus\\Repository\\Contracts\\PresenterInterface");
+                throw new RepositoryException(
+                    "Class {$presenter} must be an instance of PresenterInterface"
+                );
             }
 
             return $this->presenter;

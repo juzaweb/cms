@@ -53,21 +53,13 @@ class RegisterRequest extends FormRequest
     public function createUserFromRequest(): User
     {
         do_action('register.handle', $this);
-
-        $name = $this->post('name');
-        $email = $this->post('email');
         $password = $this->post('password');
 
         DB::beginTransaction();
         try {
             $user = new User();
 
-            $user->fill(
-                [
-                    'name' => $name,
-                    'email' => $email,
-                ]
-            );
+            $user->fill($this->safe()->only(['name', 'email']));
 
             $user->setAttribute('password', Hash::make($password));
 

@@ -44,6 +44,34 @@ class SortCriteria extends Criteria implements CriteriaInterface
         $fields = $repository->getFieldSortable();
         $tbl = $model->getModel()->getTable();
         $sortBy = Arr::get($this->queries, 'sort_by');
+
+        if ($sortBy) {
+            return $this->sortByQueryString($model, $repository, $sortBy, $fields, $tbl);
+        }
+
+        $hasSort = false;
+        foreach ($this->queries as $col => $value) {
+            if (!in_array($col, $fields)) {
+                continue;
+            }
+
+            if (!in_array(strtoupper($value), ['ASC', 'DESC'])) {
+                $value = 'ASC';
+            }
+
+            $model->orderBy("{$tbl}.{$col}", $value);
+            $hasSort = true;
+        }
+
+        if ($hasSort) {
+            return $model;
+        }
+
+        return $this->sortByDefault($model, $repository, $tbl);
+    }
+
+    protected function sortByQueryString($model, RepositoryInterface $repository, $sortBy, $fields, $tbl): Builder|Model
+    {
         $sortOrder = Arr::get($this->queries, 'sort_order', 'ASC');
 
         if (!in_array(strtoupper($sortOrder), ['ASC', 'DESC'])) {
@@ -54,6 +82,11 @@ class SortCriteria extends Criteria implements CriteriaInterface
             return $model->orderBy("{$tbl}.{$sortBy}", $sortOrder);
         }
 
+        return $this->sortByDefault($model, $repository, $tbl);
+    }
+
+    protected function sortByDefault($model, $repository, $tbl)
+    {
         if (!method_exists($repository, 'getSortableDefaults')) {
             return $model;
         }

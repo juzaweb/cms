@@ -16,9 +16,31 @@ use Juzaweb\CMS\Abstracts\Action;
 
 class EmailAction extends Action
 {
-    public function handle()
+    public function handle(): void
     {
         $this->addAction(Action::INIT_ACTION, [$this, 'addEmailTemplates']);
+        $this->addAction(Action::BACKEND_INIT, [$this, 'addPages']);
+    }
+
+    public function addPages(): void
+    {
+        $this->hookAction->registerAdminPage(
+            'email-hooks',
+            [
+                'title' => trans('cms::app.email_hooks'),
+                'menu' => [
+                    'icon' => 'fa fa-envelope',
+                    'position' => 60,
+                    'parent' => 'managements',
+                    'permissions' => [
+                        'email_hooks.index',
+                        'email_hooks.edit',
+                        'email_hooks.create',
+                        'email_hooks.delete',
+                    ],
+                ]
+            ]
+        );
     }
 
     /**
@@ -26,7 +48,7 @@ class EmailAction extends Action
      *
      * Loops through a directory and adds all the email templates we've configured to the CMS
      */
-    public function addEmailTemplates()
+    public function addEmailTemplates(): void
     {
         $basePath = base_path('modules/Backend/resources/data/mail_templates');
         $files = File::files($basePath);

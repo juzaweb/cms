@@ -8,6 +8,8 @@
  * @license    GNU V2
  */
 
+use Juzaweb\Backend\Http\Controllers\Backend\Email\EmailHookController;
+
 Route::group(
     ['prefix' => 'email'],
     function () {
@@ -18,3 +20,4 @@ Route::group(
 );
 
 Route::jwResource('email-template', 'Backend\EmailTemplateController');
+Route::jwResource('email-hooks', EmailHookController::class);

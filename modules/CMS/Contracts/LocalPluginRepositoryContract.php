@@ -176,4 +176,6 @@ interface LocalPluginRepositoryContract
      * @throws PluginNotFoundException
      */
     public function isDisabled(string $name): bool;
+
+    public function has($name): bool;
 }

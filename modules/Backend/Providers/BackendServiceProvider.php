@@ -20,6 +20,7 @@ use Juzaweb\Backend\Commands\ImportTranslationCommand;
 use Juzaweb\Backend\Commands\OptimizeTagCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Commands\PingFeedCommand;
+use Juzaweb\Backend\Commands\Post\GeneratePostUUIDCommand;
 use Juzaweb\Backend\Commands\ThemePublishCommand;
 use Juzaweb\Backend\Commands\TransFromEnglish;
 use Juzaweb\Backend\Models\Comment;
@@ -32,6 +33,8 @@ use Juzaweb\Backend\Observers\PostObserver;
 use Juzaweb\Backend\Observers\TaxonomyObserver;
 use Juzaweb\Backend\Repositories\CommentRepository;
 use Juzaweb\Backend\Repositories\CommentRepositoryEloquent;
+use Juzaweb\Backend\Repositories\Email\EmailTemplateRepository;
+use Juzaweb\Backend\Repositories\Email\EmailTemplateRepositoryEloquent;
 use Juzaweb\Backend\Repositories\MediaFileRepository;
 use Juzaweb\Backend\Repositories\MediaFileRepositoryEloquent;
 use Juzaweb\Backend\Repositories\MediaFolderRepository;
@@ -66,9 +69,10 @@ class BackendServiceProvider extends ServiceProvider
         CommentRepository::class => CommentRepositoryEloquent::class,
         MenuRepository::class => MenuRepositoryEloquent::class,
         ResourceRepository::class => ResourceRepositoryEloquent::class,
+        EmailTemplateRepository::class => EmailTemplateRepositoryEloquent::class,
     ];
 
-    public function boot()
+    public function boot(): void
     {
         $this->bootMiddlewares();
         $this->bootPublishes();
@@ -103,11 +107,12 @@ class BackendServiceProvider extends ServiceProvider
                 AutoTagCommand::class,
                 OptimizeTagCommand::class,
                 PingFeedCommand::class,
+                GeneratePostUUIDCommand::class,
             ]
         );
     }
 
-    public function register()
+    public function register(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'cms');
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'cms');
@@ -123,7 +128,7 @@ class BackendServiceProvider extends ServiceProvider
         );
     }
 
-    protected function bootMiddlewares()
+    protected function bootMiddlewares(): void
     {
         /**
          * @var Router $router
@@ -132,7 +137,7 @@ class BackendServiceProvider extends ServiceProvider
         $router->aliasMiddleware('admin', Admin::class);
     }
 
-    protected function bootPublishes()
+    protected function bootPublishes(): void
     {
         $this->publishes(
             [
@@ -156,7 +161,7 @@ class BackendServiceProvider extends ServiceProvider
         );
     }
 
-    protected function registerRouteMacros()
+    protected function registerRouteMacros(): void
     {
         Router::mixin(new RouterMacros());
     }

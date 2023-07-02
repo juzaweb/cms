@@ -10,6 +10,8 @@
 
 namespace Juzaweb\Backend\Http\Controllers\Backend;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\CMS\Http\Controllers\BackendController;
@@ -17,7 +19,7 @@ use Juzaweb\CMS\Support\Email;
 
 class EmailController extends BackendController
 {
-    public function save(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+    public function save(Request $request): JsonResponse|RedirectResponse
     {
         $email = $request->only(
             [
@@ -42,7 +44,7 @@ class EmailController extends BackendController
         );
     }
 
-    public function sendTestMail(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+    public function sendTestMail(Request $request): JsonResponse|RedirectResponse
     {
         $request->validate(
             [

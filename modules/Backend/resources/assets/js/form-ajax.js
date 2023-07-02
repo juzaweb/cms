@@ -9,6 +9,18 @@
  */
 
 $(document).ready(function () {
+    function sendMessageByResponse(response, notify = false) {
+        if (notify) {
+            if (typeof show_notify !== 'undefined' && typeof show_notify === 'function') {
+                show_notify(response);
+            }
+        } else {
+            if (typeof show_message !== 'undefined' && typeof show_message === 'function') {
+                show_message(response);
+            }
+        }
+    }
+
     function sendRequestFormAjax(form, data, btnsubmit, currentText, currentIcon, captchaToken = null) {
         let submitSuccess = form.data('success');
         let notify = form.data('notify') || false;
@@ -26,11 +38,7 @@ $(document).ready(function () {
             contentType: false,
             processData: false
         }).done(function(response) {
-            if (notify) {
-                show_notify(response);
-            } else {
-                show_message(response);
-            }
+            sendMessageByResponse(response, notify);
 
             if (submitSuccess) {
                 eval(submitSuccess)(form, response);
@@ -63,11 +71,7 @@ $(document).ready(function () {
                 btnsubmit.html(currentText);
             }
 
-            if (notify) {
-                show_notify(response);
-            } else {
-                show_message(response);
-            }
+            sendMessageByResponse(response, notify);
             return false;
         });
     }

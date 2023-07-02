@@ -33,7 +33,7 @@ class AutoSubmitCommand extends Command
 
         if (get_config('jw_auto_submit_url_google')) {
             try {
-                for ($i = 1;$i <= 2; $i++) {
+                for ($i = 1; $i <= 2; $i++) {
                     $this->submitUrlGoogle();
 
                     sleep(5);
@@ -67,7 +67,7 @@ class AutoSubmitCommand extends Command
         }
     }
 
-    protected function submitUrlGoogle()
+    protected function submitUrlGoogle(): void
     {
         $lastDate = get_config('jw_last_google_submit_date', '2000-01-01 00:00:00');
         $links = Post::wherePublish()

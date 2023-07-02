@@ -17,7 +17,9 @@ use Juzaweb\CMS\Contracts\ActionRegisterContract;
 
 class ServiceProvider extends BaseServiceProvider
 {
-    protected function loadSeedsFrom($path)
+    public array $bindings = [];
+
+    protected function loadSeedsFrom($path): void
     {
         foreach (glob("{$path}/*.php") as $filename) {
             include $filename;
@@ -34,7 +36,7 @@ class ServiceProvider extends BaseServiceProvider
         }
     }
 
-    protected function registerHookActions(array|string $actions)
+    protected function registerHookActions(array|string $actions): void
     {
         if (is_string($actions)) {
             $actions = [$actions];
