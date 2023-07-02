@@ -8,13 +8,16 @@ use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Repositories\BaseRepository;
 use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
+use Juzaweb\CMS\Repositories\Interfaces\FilterableInterface;
+use Juzaweb\CMS\Repositories\Interfaces\SearchableInterface;
+use Juzaweb\CMS\Repositories\Interfaces\SortableInterface;
 
 /**
  * Interface PostRepository.
  *
  * @package namespace Juzaweb\Backend\Repositories;
  */
-interface PostRepository extends BaseRepository
+interface PostRepository extends BaseRepository, FilterableInterface, SearchableInterface, SortableInterface
 {
     public function create(array $attributes);
 
@@ -22,7 +25,7 @@ interface PostRepository extends BaseRepository
 
     public function findBySlug(string $slug, $fail = true): null|Post;
 
-    public function findByUuid(string $slug, $fail = true): null|Post;
+    public function findByUuid(string $uuid, $fail = true): null|Post;
 
     public function frontendListByTaxonomyPaginate(int $limit, int $taxonomy, ?int $page = null): LengthAwarePaginator;
 

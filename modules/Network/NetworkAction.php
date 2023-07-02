@@ -16,7 +16,7 @@ use Juzaweb\Network\Facades\Network;
 
 class NetworkAction extends Action
 {
-    public function handle()
+    public function handle(): void
     {
         //$this->addAction(Action::BACKEND_INIT, [$this, 'registerMenus']);
 
@@ -72,7 +72,7 @@ class NetworkAction extends Action
                 'position' => 45,
             ]
         );
-    
+
         HookAction::addAdminMenu(
             'Log Viewer',
             'log-viewer',

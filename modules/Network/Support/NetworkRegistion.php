@@ -109,7 +109,7 @@ class NetworkRegistion implements NetworkRegistionContract
     {
         return $this->request->getHttpHost();
     }
-    
+
     public function getCurrentSiteId(): ?int
     {
         return $this->getCurrentSite()->id;

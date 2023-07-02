@@ -62,6 +62,10 @@ class FilterCriteria extends Criteria implements CriteriaInterface
                         continue;
                     }
 
+                    if (is_array($value)) {
+                        $condition = 'in';
+                    }
+
                     switch ($condition) {
                         case 'in':
                             $query->whereIn($column, $value);

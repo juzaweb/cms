@@ -10,6 +10,9 @@
 
 namespace Juzaweb\CMS\Interfaces\Repositories;
 
+/**
+ * @deprecated
+ */
 interface WithAppendSearch
 {
     public function appendCustomSearch($builder, $keyword, $input);
