@@ -38,10 +38,10 @@ use Juzaweb\CMS\Models\Permission as BasePermission;
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string|null $description
  * @method static \Illuminate\Database\Eloquent\Builder|Permission whereDescription($value)
  * @property int $group_id
+ * @mixin \Eloquent
  */
 class Permission extends BasePermission
 {

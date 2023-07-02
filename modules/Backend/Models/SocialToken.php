@@ -34,9 +34,9 @@ use Juzaweb\Network\Traits\RootNetworkModel;
  * @method static \Illuminate\Database\Eloquent\Builder|SocialToken whereSocialRefreshToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialToken whereSocialToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialToken whereUserId($value)
- * @mixin \Eloquent
  * @property int|null $site_id
  * @method static \Illuminate\Database\Eloquent\Builder|SocialToken whereSiteId($value)
+ * @mixin \Eloquent
  */
 class SocialToken extends Model
 {

@@ -11,7 +11,6 @@
 namespace Juzaweb\Network\Providers;
 
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Support\Facades\Artisan;
 use Juzaweb\CMS\Facades\ActionRegister;
 use Juzaweb\CMS\Support\ServiceProvider;
 use Juzaweb\Network\Commands\ArtisanCommand;
@@ -31,7 +30,7 @@ use Juzaweb\Network\Support\SiteSetup;
 
 class NetworkServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         Network::init();
 
@@ -42,7 +41,7 @@ class NetworkServiceProvider extends ServiceProvider
         ActionRegister::register(NetworkAction::class);
     }
 
-    public function register()
+    public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
 

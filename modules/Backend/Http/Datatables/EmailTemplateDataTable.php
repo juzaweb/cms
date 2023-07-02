@@ -31,10 +31,10 @@ class EmailTemplateDataTable extends DataTable
             'code' => [
                 'label' => trans('cms::app.email'),
                 'formatter' => [$this, 'rowActionsFormatter'],
+                'width' => '30%',
             ],
             'subject' => [
                 'label' => trans('cms::app.subject'),
-                'width' => '30%',
             ],
             'created_at' => [
                 'label' => trans('cms::app.created_at'),
@@ -75,12 +75,6 @@ class EmailTemplateDataTable extends DataTable
         ];
     }
 
-    /**
-     * Query data datatable
-     *
-     * @param array $data
-     * @return Builder
-     */
     public function query(array $data): Builder
     {
         $query = EmailTemplate::query();
@@ -139,7 +133,7 @@ class EmailTemplateDataTable extends DataTable
         return [$count, $rows];
     }
 
-    public function bulkActions($action, $ids)
+    public function bulkActions($action, $ids): void
     {
         switch ($action) {
             case 'delete':

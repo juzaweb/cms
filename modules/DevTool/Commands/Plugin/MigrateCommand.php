@@ -32,9 +32,9 @@ class MigrateCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
-    public function handle(): mixed
+    public function handle(): void
     {
         $this->module = $this->laravel['plugins'];
 
@@ -43,7 +43,9 @@ class MigrateCommand extends Command
         if ($name) {
             $module = $this->module->findOrFail($name);
 
-            return $this->migrate($module);
+            $this->migrate($module);
+
+            return;
         }
 
         foreach ($this->module->getOrdered($this->option('direction')) as $module) {
@@ -58,7 +60,7 @@ class MigrateCommand extends Command
      *
      * @param Plugin $module
      */
-    protected function migrate(Plugin $module)
+    protected function migrate(Plugin $module): void
     {
         $path = str_replace(base_path(), '', (new Migrator($module, $this->getLaravel()))->getPath());
 

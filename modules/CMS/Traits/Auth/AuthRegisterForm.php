@@ -27,7 +27,7 @@ trait AuthRegisterForm
     public function index(): View
     {
         if (! get_config('user_registration', 1)) {
-            return abort(403, trans('cms::message.register_form.register_closed'));
+            abort(403, trans('cms::message.register_form.register_closed'));
         }
 
         do_action('register.index');
@@ -74,28 +74,24 @@ trait AuthRegisterForm
     {
         $user = User::whereEmail($email)
             ->where('verification_token', '=', $token)
-            ->first();
+            ->firstOrFail();
 
-        if ($user) {
-            DB::beginTransaction();
-            try {
-                $user->update(
-                    [
-                        'status' => 'active',
-                        'verification_token' => null,
-                    ]
-                );
+        DB::beginTransaction();
+        try {
+            $user->update(
+                [
+                    'status' => 'active',
+                    'verification_token' => null,
+                ]
+            );
 
-                DB::commit();
-            } catch (\Exception $exception) {
-                DB::rollBack();
-                throw $exception;
-            }
-
-            return redirect()->route('login');
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw $exception;
         }
 
-        return abort(404);
+        return redirect()->route('login');
     }
 
     protected function getViewForm(): string

@@ -64,6 +64,7 @@ use Juzaweb\CMS\Contracts\HookActionContract;
  * @method static Collection getPermissions(string $key = null)
  * @method static Collection getConfigs(string $key = null)
  * @method static Collection getThumbnailSizes(string $postType = null)
+ * @method static void addMetaPostTypes(string $postType, array $metas)
  *
  * @see \Juzaweb\CMS\Support\HookAction
  */

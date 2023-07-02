@@ -16,6 +16,7 @@ use Juzaweb\API\Support\Swagger\SwaggerDocument;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Models\User;
+use Juzaweb\CMS\Support\HookActions\Traits\ThemeHookAction;
 use Juzaweb\CMS\Support\Registers\ResourceRegister;
 use Juzaweb\CMS\Support\Theme\PostTypeMenuBox;
 use Juzaweb\CMS\Support\Theme\TaxonomyMenuBox;
@@ -24,6 +25,8 @@ use Juzaweb\Frontend\Http\Controllers\TaxonomyController;
 
 trait RegisterHookAction
 {
+    use ThemeHookAction;
+
     protected array $resourcePermissions = ['index', 'create', 'edit', 'delete'];
 
     public function registerPostType(string $key, array $args = []): void
@@ -309,21 +312,6 @@ trait RegisterHookAction
         $this->globalData->set('admin_ajaxs.' . $key, new Collection($args));
     }
 
-    public function registerNavMenus(array $locations = []): void
-    {
-        foreach ($locations as $key => $location) {
-            $this->globalData->set(
-                'nav_menus.' . $key,
-                new Collection(
-                    [
-                        'key' => $key,
-                        'location' => $location,
-                    ]
-                )
-            );
-        }
-    }
-
     public function registerEmailHook(string $key, array $args = []): void
     {
         $defaults = [
@@ -380,42 +368,6 @@ trait RegisterHookAction
         $this->globalData->set('page_blocks.' . $key, new Collection($args));
     }
 
-    public function registerFrontendAjax(string $key, array $args = []): void
-    {
-        $defaults = [
-            'auth' => false,
-            'key' => $key,
-        ];
-
-        /*preg_match_all("/\{([a-z0-9\_]+)\}/", $key, $matches);
-
-        if (!empty($matches[1])) {
-            $defaults['params'] = $matches[1];
-            $defaults['key'] = preg_replace("/\.\{([a-z0-9\_]+)\}/", '', $defaults['key']);
-        }*/
-
-        $args = array_merge($defaults, $args);
-
-        if (empty($args['callback'])) {
-            throw new Exception('Frontend Ajax callback option is required.');
-        }
-
-        $this->globalData->set('frontend_ajaxs.' . $key, new Collection($args));
-    }
-
-    public function registerThemeTemplate(string $key, array $args = []): void
-    {
-        $defaults = [
-            'key' => $key,
-            'name' => '',
-            'view' => '',
-        ];
-
-        $args = array_merge($defaults, $args);
-
-        $this->globalData->set('templates.' . $key, new Collection($args));
-    }
-
     public function registerPackageModule(string $key, array $args = []): void
     {
         $defaults = [
@@ -428,36 +380,6 @@ trait RegisterHookAction
         $args = array_merge($defaults, $args);
 
         $this->globalData->set('package_modules.' . $key, new Collection($args));
-    }
-
-    public function registerThemeSetting(string $name, string $label, array $args = []): void
-    {
-        $args = [
-            'name' => $name,
-            'label' => $label,
-            'data' => $args,
-        ];
-
-        $this->globalData->set("theme_settings.{$name}", new Collection($args));
-    }
-
-    public function registerProfilePage(string $key, array $args = []): void
-    {
-        $slug = str_replace(['_'], ['-'], $key);
-
-        $default = [
-            'title' => '',
-            'key' => $key,
-            'slug' => $slug,
-            'url' => route(
-                'profile',
-                $key == 'index' ? null : '/' . $slug
-            ),
-        ];
-
-        $args = array_merge($default, $args);
-
-        $this->globalData->set('profile_pages.' . $key, new Collection($args));
     }
 
     public function registerPermissionGroup(string $key, array $args = []): void

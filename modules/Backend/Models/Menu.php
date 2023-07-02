@@ -38,11 +38,11 @@ use Juzaweb\CMS\Traits\UseUUIDColumn;
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int|null $site_id
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereSiteId($value)
  * @property string|null $uuid
  * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUuid($value)
+ * @mixin \Eloquent
  */
 class Menu extends Model
 {

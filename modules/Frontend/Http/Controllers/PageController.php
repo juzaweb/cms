@@ -20,6 +20,9 @@ class PageController extends FrontendController
     {
         $pageSlug = $this->getPageSlug($slug);
 
+        /**
+         * @var Post $page
+         */
         $page = Post::createFrontendDetailBuilder()
             ->where('slug', '=', $pageSlug)
             ->firstOrFail();
@@ -29,9 +32,16 @@ class PageController extends FrontendController
 
     public function detail(Request $request, $id)
     {
-        $page = Post::createFrontendDetailBuilder()->findOrFail($id);
+        if (!$id instanceof Post) {
+            /**
+             * @var Post $page
+             */
+            $page = Post::createFrontendDetailBuilder()->findOrFail($page);
 
-        return $this->handlePage($request, $page);
+            return $this->handlePage($request, $page);
+        }
+
+        return $this->handlePage($request, $id);
     }
 
     protected function getPageSlug($slug)
@@ -187,7 +197,7 @@ class PageController extends FrontendController
             $template = get_name_template_part('page', 'single');
             $view = 'theme::template-parts.' . $template;
 
-            if (! view()->exists(theme_viewname($view))) {
+            if (!view()->exists(theme_viewname($view))) {
                 $view = 'theme::template-parts.single';
             }
         }

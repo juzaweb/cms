@@ -23,9 +23,9 @@ class Theme
     {
         View::composer(
             '*',
-            function ($view) {
+            function ($view) use ($request) {
                 global $jw_user;
-                $user = $jw_user ? (new UserResource($jw_user))->toArray(request()) : null;
+                $user = $jw_user ? UserResource::make($jw_user)->toArray($request) : null;
 
                 $view->with('user', $user);
                 $view->with('is_admin', $user ? $user['is_admin'] : false);

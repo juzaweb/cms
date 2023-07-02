@@ -86,6 +86,7 @@ class Custom extends AbstractExtension
             new TwigFunction('get_posts_by_filter', 'get_posts_by_filter'),
             new TwigFunction('get_next_resource', 'get_next_resource'),
             new TwigFunction('do_action', 'do_action'),
+            new TwigFunction('strip_tags', 'strip_tags'),
         ];
     }
 }
