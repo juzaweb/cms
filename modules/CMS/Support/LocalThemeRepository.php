@@ -125,7 +125,7 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
             case 'twig':
                 $params = $this->parseParamsFronend($params);
 
-                return apply_filters('theme.render_view', Twig::render($view, $params));
+                return apply_filters('theme.render_view', Twig::display($view, $params));
             default:
                 return apply_filters('theme.render_view', view($view, $params));
         }
