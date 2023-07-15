@@ -17,7 +17,7 @@ class FrontendController extends Controller
 
     protected string $template;
 
-    public function callAction($method, $parameters): Response|string|View
+    public function callAction($method, $parameters): Response|string|View|\Inertia\Response
     {
         $this->template = Theme::currentTheme()->getTemplate();
 
@@ -45,7 +45,7 @@ class FrontendController extends Controller
         return collect(HookAction::getPermalinks());
     }
 
-    protected function view($view, $params = []): Factory|ViewContract|string
+    protected function view($view, $params = []): Factory|ViewContract|string|\Inertia\Response
     {
         return Theme::render($view, $params);
     }

@@ -15,6 +15,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\Theme\ThemeRender;
 use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
@@ -123,7 +124,7 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         return $theme->delete();
     }
 
-    public function render(string $view, array $params = [], ?string $theme = null): Factory|View|string
+    public function render(string $view, array $params = [], ?string $theme = null): Factory|View|string|Response
     {
         $theme = $theme ? $this->findOrFail($theme) : $this->currentTheme();
 
