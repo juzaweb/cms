@@ -10,9 +10,12 @@
 
 namespace Juzaweb\Frontend\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\CommentResource;
@@ -32,7 +35,7 @@ class PostController extends FrontendController
     {
     }
 
-    public function index(...$slug)
+    public function index(...$slug): View|Factory|string
     {
         if (count($slug) > 1) {
             return $this->detail(...$slug);
@@ -43,28 +46,24 @@ class PostController extends FrontendController
 
         $posts->appends(request()->query());
 
-        $page = PostResourceCollection::make($posts)
-            ->response()
-            ->getData(true);
+        if ($this->template == 'twig') {
+            $page = PostResourceCollection::make($posts)
+                ->response()
+                ->getData(true);
 
-        return $this->view(
-            'theme::index',
-            compact(
-                'page',
-                'title'
-            )
-        );
+            return $this->view('theme::index', compact('page', 'title'));
+        }
+
+        return $this->view('theme::index', compact('posts', 'title'));
     }
 
-    public function detail(...$slug)
+    public function detail(...$slug): View|Factory|string
     {
         do_action("frontend.post_type.detail", $slug);
 
         $base = Arr::get($slug, 0);
         $postSlug = $this->getPostSlug($slug);
         $permalink = $this->getPermalinks($base);
-
-        $postType = HookAction::getPostTypes($permalink->get('post_type'));
 
         do_action(
             "frontend.post_type.{$permalink->get('post_type')}.detail",
@@ -73,60 +72,30 @@ class PostController extends FrontendController
             $permalink
         );
 
-        /**
-         * @var Post $postModel
-         */
-        $postModel = $this->postRepository->findBySlug($postSlug, false);
-        if (empty($postModel) && count($slug) > 2) {
-            $postModel = $this->postRepository->findBySlug($slug[1]);
+        $post = $this->postRepository->findBySlug($postSlug, false);
+        if (empty($post) && count($slug) > 2) {
+            $post = $this->postRepository->findBySlug($slug[1]);
         }
 
-        abort_unless($postModel, 404);
+        abort_unless(isset($post), 404);
 
         Facades::$isPostPage = true;
 
-        Facades::$post = $postModel;
+        Facades::$post = $post;
 
-        event(new PostViewed($postModel));
+        event(new PostViewed($post));
 
-        $title = $postModel->getTitle();
-        $description = $postModel->description;
-        $type = $postModel->getPostType('singular');
+        $type = $post->getPostType('singular');
+
         $template = get_name_template_part($type, 'single');
 
-        $post = (new PostResource($postModel))->toArray(request());
+        //$post = (new PostResource($post))->toArray(request());
 
-        $rows = Comment::with(['user'])
-            ->cacheFor(config('juzaweb.performance.query_cache.lifetime'))
-            ->where(['object_id' => $post['id']])
-            ->whereApproved()
-            ->paginate(10);
-
-        $comments = CommentResource::collection($rows)->response()->getData(true);
-        $image = $postModel->thumbnail ? upload_url($postModel->thumbnail) : null;
-
-        $data = apply_filters(
-            "frontend.post_type.detail.data",
-            compact(
-                'title',
-                'post',
-                'description',
-                'comments',
-                'slug',
-                'image'
-            ),
-            $postModel
-        );
-
-        $data = apply_filters(
-            "frontend.post_type.{$postType->get('key')}.detail.data",
-            $data,
-            $postModel
-        );
+        //$comments = CommentResource::collection($rows)->response()->getData(true);
 
         return $this->view(
             "theme::template-parts.{$template}",
-            $data
+            $this->getParamDetail($post, $slug, $permalink)
         );
     }
 
@@ -148,7 +117,7 @@ class PostController extends FrontendController
         }
 
         $post = $this->postRepository->findBySlug($slug);
-        $data = $request->all();
+        $data = $request->safe()->toArray();
         $data['object_type'] = $permalink->get('post_type');
         $data['user_id'] = Auth::id();
 
@@ -157,6 +126,39 @@ class PostController extends FrontendController
         do_action('post_type.comment.saved', $comment, $post);
 
         return $this->success(trans('cms::app.comment_success'));
+    }
+
+    private function getParamDetail(Post $post, array $slug, Collection $permalink): array
+    {
+        $title = $post->getTitle();
+        $description = $post->description;
+        $image = $post->thumbnail ? upload_url($post->thumbnail) : null;
+        $postType = HookAction::getPostTypes($permalink->get('post_type'));
+
+        $comments = Comment::with(['user'])
+            ->cacheFor(config('juzaweb.performance.query_cache.lifetime'))
+            ->where(['object_id' => $post['id']])
+            ->whereApproved()
+            ->paginate(10);
+
+        $data = apply_filters(
+            "frontend.post_type.detail.data",
+            compact(
+                'title',
+                'post',
+                'description',
+                'comments',
+                'slug',
+                'image'
+            ),
+            $post
+        );
+
+        return apply_filters(
+            "frontend.post_type.{$postType->get('key')}.detail.data",
+            $data,
+            $post
+        );
     }
 
     private function getPostSlug(array $slug): string

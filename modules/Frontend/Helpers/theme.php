@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Menu;
 use Juzaweb\Backend\Models\Post;
@@ -401,31 +400,22 @@ if (!function_exists('comment_template')) {
      *
      * @param  $post
      * @param  string|null  $view
-     * @return void
+     * @return ViewContract|Factory|string
      */
-    function comment_template($post, string $view = null): void
+    function comment_template($post, string $view = null): ViewContract|Factory|string
     {
         if (empty($view)) {
             $view = 'cms::items.frontend_comment';
         }
 
-        $rows = Comment::with(['user'])
+        $comments = Comment::with(['user'])
             ->where('object_id', '=', $post['id'])
             ->whereApproved()
             ->paginate(10);
 
-        $comments = CommentResource::collection($rows)
-            ->response()
-            ->getData(true);
-        $total = $rows->total();
+        $total = $comments->total();
 
-        Twig::display(
-            $view,
-            compact(
-                'comments',
-                'total'
-            )
-        );
+        return view_render($view, compact('comments', 'total'));
     }
 }
 

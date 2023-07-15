@@ -25,6 +25,8 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
  * @property Carbon|null $updated_at
  * @property-read \Juzaweb\Backend\Models\Post $post
  * @property-read User|null $user
+ * @method static Builder|Comment with(array $with)
+ * @method static Builder|Comment query()
  * @method Builder|Comment newModelQuery()
  * @method Builder|Comment newQuery()
  * @method Builder|Comment query()

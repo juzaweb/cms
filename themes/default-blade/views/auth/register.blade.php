@@ -1,6 +1,6 @@
-{% extends 'cms::layouts.frontend' %}
+@extends('cms::layouts.frontend-blade')
 
-{% block content %}
+@section('content')
     <!-- register -->
     <section class="wrap__section">
         <div class="container">
@@ -71,4 +71,4 @@
         </div>
     </section>
     <!-- end register -->
-{% endblock %}
+@endsection

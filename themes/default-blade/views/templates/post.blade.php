@@ -1,6 +1,6 @@
-{% extends 'cms::layouts.frontend' %}
+@extends('cms::layouts.frontend-blade')
 
-{% block content %}
+@section('content')
     <div class="page-title lb single-wrapper">
         <div class="container">
             <div class="row">
@@ -17,11 +17,11 @@
             </div><!-- end row -->
         </div><!-- end container -->
     </div><!-- end page-title -->
-    
+
     <section class="section">
         <div class="container">
             <div class="row">
-    
+
                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-wrapper">
                         <div class="blog-grid-system">
@@ -32,9 +32,9 @@
                             </div>
                         </div><!-- end blog-grid-system -->
                     </div><!-- end page-wrapper -->
-    
+
                     <hr class="invis3">
-    
+
                     <div class="row">
                         <div class="col-md-12">
                             <nav aria-label="Page navigation">
@@ -43,11 +43,11 @@
                         </div><!-- end col -->
                     </div><!-- end row -->
                 </div>
-    
+
                 <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-    
+
                     @page_data('sidebar')
-    
+
                     <div class="sidebar">
 
                         <div class="widget">
@@ -232,9 +232,9 @@
                         </div><!-- end widget -->
                     </div><!-- end sidebar -->
                 </div><!-- end col -->
-    
+
         </div><!-- end row -->
         </div><!-- end container -->
     </section>
 
-{% endblock %}
+@endsection

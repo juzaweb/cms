@@ -12,13 +12,13 @@ namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Contracts\Theme\ThemeRender;
 use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
-use TwigBridge\Facade\Twig;
+use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 
 class LocalThemeRepository implements LocalThemeRepositoryContract
 {
@@ -35,6 +35,8 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
      * @var string
      */
     protected string $basePath;
+
+    protected Theme $currentTheme;
 
     public function __construct(Container $app, string $path)
     {
@@ -102,7 +104,11 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
 
     public function currentTheme(): Theme
     {
-        return $this->findOrFail(jw_current_theme());
+        if (isset($this->currentTheme)) {
+            return $this->currentTheme;
+        }
+
+        return $this->currentTheme = $this->findOrFail(jw_current_theme());
     }
 
     public function all(bool $collection = false): array|Collection
@@ -121,52 +127,19 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
     {
         $theme = $theme ? $this->findOrFail($theme) : $this->currentTheme();
 
-        switch ($theme->getTemplate()) {
-            case 'twig':
-                $params = $this->parseParamsFronend($params);
-
-                return apply_filters('theme.render_view', Twig::display($view, $params));
-            default:
-                return apply_filters('theme.render_view', view($view, $params));
-        }
+        return $this->createThemeRender($theme)->render($view, $params);
     }
 
-    protected function parseParamsFronend(array $params): array
+    public function parseParam(mixed $param, ?string $theme = null): mixed
     {
-        if ($message = session('message')) {
-            $params['message'] = $message;
-        }
+        $theme = $theme ? $this->findOrFail($theme) : $this->currentTheme();
 
-        if ($status = session('status')) {
-            $params['status'] = $status;
-        }
+        return $this->createThemeRender($theme)->parseParam($param);
+    }
 
-        foreach ($params as $key => $item) {
-            if (is_a($item, 'Illuminate\Support\ViewErrorBag')) {
-                continue;
-            }
-
-            if ($item instanceof Arrayable) {
-                $item = $item->toArray();
-                $params[$key] = $item;
-            }
-
-            if (!in_array(
-                gettype($item),
-                [
-                    'boolean',
-                    'integer',
-                    'string',
-                    'array',
-                    'double',
-                ]
-            )
-            ) {
-                unset($params[$key]);
-            }
-        }
-
-        return $params;
+    protected function createThemeRender(ThemeInterface $theme): ThemeRender
+    {
+        return $this->app->make(ThemeRender::class, ['theme' => $theme]);
     }
 
     /**
