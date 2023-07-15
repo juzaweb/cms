@@ -24,6 +24,7 @@ use Juzaweb\CMS\Support\Theme as ThemeSupport;
  * @method static void delete(string $name)
  * @method static Factory|View|string render(string $view, array $params = [], ?string $theme = null)
  * @method static array|Collection all(bool $collection = false)
+ * @method static mixed parseParam(mixed $param)
  *
  * @see LocalThemeRepository
  */

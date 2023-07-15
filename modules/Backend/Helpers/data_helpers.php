@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Http\Resources\ResourceResource;
 use Juzaweb\Backend\Http\Resources\TaxonomyResource;
@@ -9,6 +10,7 @@ use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Resource;
 use Juzaweb\CMS\Facades\JWQuery;
+use Juzaweb\CMS\Facades\Theme;
 
 function get_posts(string $type = null, array $options = []): array
 {
@@ -213,15 +215,13 @@ if (!function_exists('get_next_post')) {
     }
 }
 
-function get_taxonomy($taxonomy, $args = []): array
+function get_taxonomy($taxonomy, $args = []): mixed
 {
     if (empty($taxonomy)) {
         return [];
     }
 
-    $tax = Taxonomy::find($taxonomy);
-    return (new TaxonomyResource($tax))
-        ->toArray(request());
+    return Theme::parseParam(Taxonomy::find($taxonomy));
 }
 
 function get_taxonomies($args = []): array
@@ -256,10 +256,9 @@ function get_taxonomies($args = []): array
         $query->whereIn('id', $inIds);
     }
 
-    $data = $query->limit($limit)->get();
+    $taxonomies = $query->limit($limit)->get();
 
-    return TaxonomyResource::collection($data)
-        ->toArray(request());
+    return Theme::parseParam($taxonomies);
 }
 
 function get_total_resource($resource, $args = []): int

@@ -12,7 +12,6 @@ namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
@@ -36,6 +35,8 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
      * @var string
      */
     protected string $basePath;
+
+    protected Theme $currentTheme;
 
     public function __construct(Container $app, string $path)
     {
@@ -103,7 +104,11 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
 
     public function currentTheme(): Theme
     {
-        return $this->findOrFail(jw_current_theme());
+        if (isset($this->currentTheme)) {
+            return $this->currentTheme;
+        }
+
+        return $this->currentTheme = $this->findOrFail(jw_current_theme());
     }
 
     public function all(bool $collection = false): array|Collection
@@ -123,6 +128,13 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         $theme = $theme ? $this->findOrFail($theme) : $this->currentTheme();
 
         return $this->createThemeRender($theme)->render($view, $params);
+    }
+
+    public function parseParam(mixed $param, ?string $theme = null): mixed
+    {
+        $theme = $theme ? $this->findOrFail($theme) : $this->currentTheme();
+
+        return $this->createThemeRender($theme)->parseParam($param);
     }
 
     protected function createThemeRender(ThemeInterface $theme): ThemeRender
