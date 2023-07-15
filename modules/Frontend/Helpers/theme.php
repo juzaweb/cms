@@ -429,9 +429,11 @@ if (!function_exists('comment_template')) {
     }
 }
 
-function theme_header(): void
-{
-    do_action('theme.header');
+if (!function_exists('theme_header')) {
+    function theme_header(): void
+    {
+        do_action('theme.header');
+    }
 }
 
 function theme_footer(): void
@@ -457,33 +459,39 @@ function theme_action($action): void
     }
 }
 
-/**
- * Loads a template part into a template.
- *
- * @param  array|Post  $post
- * @param  string  $slug
- * @param  string|null  $name
- * @param  array  $args
- * @return Factory|View
- */
-function get_template_part(array|Post $post, string $slug, ?string $name = null, array $args = []): Factory|View
-{
-    do_action("get_template_part_{$slug}", $post, $slug, $name, $args);
+if (!function_exists('get_template_part')) {
+    /**
+     * Loads a template part into a template.
+     *
+     * @param  array|Post  $post
+     * @param  string  $slug
+     * @param  string|null  $name
+     * @param  array  $args
+     * @return Factory|View|string
+     */
+    function get_template_part(
+        array|Post $post,
+        string $slug,
+        ?string $name = null,
+        array $args = []
+    ): Factory|View|string {
+        do_action("get_template_part_{$slug}", $post, $slug, $name, $args);
 
-    $type = $post ? Str::singular($post['type']) : 'none';
+        $type = $post ? Str::singular($post['type']) : 'none';
 
-    $template = get_name_template_part($type, $slug, $name);
+        $template = get_name_template_part($type, $slug, $name);
 
-    return view_render('theme::template-parts.'.$template, compact('post'));
+        return view_render("theme::template-parts.{$template}", compact('post'));
+    }
 }
 
-function paginate_links($data, $view = null, $params = [])
+function paginate_links($data, $view = null, $params = []): ViewContract|Factory|string
 {
     if (empty($view)) {
         $view = 'cms::pagination';
     }
 
-    return Twig::display($view, compact('data', 'params'));
+    return view_render($view, compact('data', 'params'));
 }
 
 function theme_viewname($name)
@@ -491,14 +499,9 @@ function theme_viewname($name)
     return $name;
 }
 
-function comment_form($post, $view = 'cms::comment_form')
+function comment_form($post, $view = 'cms::comment_form'): ViewContract|Factory|string
 {
-    return Twig::display(
-        $view,
-        compact(
-            'post'
-        )
-    );
+    return view_render($view, compact('post'));
 }
 
 function get_locale(): string
