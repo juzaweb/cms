@@ -237,4 +237,4 @@
         </div><!-- end container -->
     </section>
 
-{% endblock %}
+@endsection

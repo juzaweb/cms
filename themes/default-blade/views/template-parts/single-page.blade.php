@@ -16,7 +16,7 @@
                         </li>
 
                         <li class="breadcrumbs__item breadcrumbs__item--current">
-                            {{ post.title }}
+                            {{ $post->title }}
                         </li>
 
                     </ul>
@@ -28,7 +28,7 @@
                     <div class="wrap__article-detail">
                         <div class="wrap__article-detail-title">
                             <h1>
-                                {{ post.title }}
+                                {{ $post->title }}
                             </h1>
                         </div>
                         <hr>
@@ -36,7 +36,7 @@
                         <div class="wrap__article-detail-content">
                             <div class="total-views">
                                 <div class="total-views-read">
-                                    {{ post.views }}
+                                    {{ $post->views }}
                                     <span>
                                         {{ __('views') }}
                                     </span>
@@ -75,7 +75,7 @@
                                 </ul>
                             </div>
 
-                            {{ post.content|raw }}
+                            {{ $post->getContent() }}
                         </div>
                     </div>
                     <!-- end content article detail -->

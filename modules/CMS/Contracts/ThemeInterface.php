@@ -8,6 +8,9 @@
 
 namespace Juzaweb\CMS\Contracts;
 
+/**
+ * @deprecated
+ */
 interface ThemeInterface
 {
 }

@@ -105,4 +105,4 @@
         </div>
     </section>
 
-{% endblock %}
+@endsection

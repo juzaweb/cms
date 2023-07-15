@@ -71,4 +71,4 @@
         </div>
     </section>
     <!-- end register -->
-{% endblock %}
+@endsection

@@ -34,10 +34,10 @@
                     <div class="wrap__article-detail">
                         <div class="wrap__article-detail-title">
                             <h1>
-                                {{ post.title }}
+                                {{ $post->title }}
                             </h1>
                             <h3>
-                                {{ post.description }}
+                                {{ $post->description }}
                             </h3>
                         </div>
                         <hr>
@@ -54,13 +54,13 @@
                                         {{ __('by') }}
                                     </span>
                                     <a href="#">
-                                        {{ post.author.name }},
+                                        {{ $post->author.name }},
                                     </a>
                                 </li>
 
                                 <li class="list-inline-item">
                                     <span class="text-dark text-capitalize ml-1">
-                                        {{ post.created_at }}
+                                        {{ $post->created_at }}
                                     </span>
                                 </li>
 
@@ -80,14 +80,14 @@
 
                         <div class="wrap__article-detail-image mt-4">
                             <figure>
-                                <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="img-fluid">
+                                <img src="{{ $post->thumbnail }}" alt="{{ $post->title }}" class="img-fluid">
                             </figure>
                         </div>
 
                         <div class="wrap__article-detail-content">
                             <div class="total-views">
                                 <div class="total-views-read">
-                                    {{ post.views }}
+                                    {{ $post->views }}
                                     <span>
                                         {{ __('views') }}
                                     </span>
@@ -126,7 +126,7 @@
                                 </ul>
                             </div>
 
-                            {{ post.content|raw }}
+                            {{ $post->content|raw }}
                         </div>
                     </div>
                     <!-- end content article detail -->
@@ -185,7 +185,7 @@
 
                             {% if previousPost %}
                             <div class="single_navigation-prev">
-                                <a href="{{ previousPost.url }}">
+                                <a href="{{ previous$post->url }}">
                                     <span>{{ __('previous post') }}</span>
                                     {{ previousPost.title }}
                                 </a>

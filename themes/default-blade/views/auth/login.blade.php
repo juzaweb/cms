@@ -61,4 +61,4 @@
         </div>
     </section>
     <!-- end login -->
-{% endblock %}
+@endsection

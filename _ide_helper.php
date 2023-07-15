@@ -22075,5 +22075,4 @@ namespace {
     class Field extends \Juzaweb\CMS\Facades\Field
     {
     }
-
 }
