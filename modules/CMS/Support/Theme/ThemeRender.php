@@ -10,6 +10,7 @@
 
 namespace Juzaweb\CMS\Support\Theme;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -18,8 +19,10 @@ use Illuminate\Http\Request;
 use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
+use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Contracts\Theme\ThemeRender as ThemeRenderContract;
 use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 use TwigBridge\Facade\Twig;
@@ -64,11 +67,15 @@ class ThemeRender implements ThemeRenderContract
                 $params[$key] = PostResource::make($item)->toArray(request());
             }
 
+            if ($item instanceof Taxonomy) {
+                $params[$key] = TaxonomyResource::make($item)->toArray(request());
+            }
+
             if ($item instanceof Comment) {
                 $params[$key] = CommentResource::make($item)->toArray(request());
             }
 
-            if ($item instanceof EloquentCollection) {
+            if ($item instanceof EloquentCollection || $item instanceof LengthAwarePaginator) {
                 $params[$key] = $this->parseParamEloquentCollectionForTwig($item);
             }
 
@@ -103,6 +110,10 @@ class ThemeRender implements ThemeRenderContract
 
         if ($collection->first() instanceof Post) {
             return PostResourceCollection::make($collection)->response()->getData(true);
+        }
+
+        if ($collection->first() instanceof Comment) {
+            return CommentResource::collection($collection)->response()->getData(true);
         }
 
         return $collection->toArray();

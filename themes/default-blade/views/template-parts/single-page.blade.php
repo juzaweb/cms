@@ -1,7 +1,11 @@
 @extends('cms::layouts.frontend-blade')
 
 @section('content')
-
+    @php
+    /**
+    * @var \Juzaweb\Backend\Models\Post $post
+    */
+    @endphp
     <section class="pb-80">
         <div class="container">
             <div class="row">
@@ -36,7 +40,7 @@
                         <div class="wrap__article-detail-content">
                             <div class="total-views">
                                 <div class="total-views-read">
-                                    {{ $post->views }}
+                                    {{ $post->getViews() }}
                                     <span>
                                         {{ __('views') }}
                                     </span>
@@ -45,28 +49,32 @@
                                 <ul class="list-inline">
                                     <span class="share">{{ __('share on') }}:</span>
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o facebook" href="https://www.facebook.com/sharer.php?u={{ url().current() }}">
+                                        <a class="btn btn-social-o facebook"
+                                           href="https://www.facebook.com/sharer.php?u={{ url()->current() }}">
                                             <i class="fa fa-facebook-f"></i>
                                             <span>facebook</span>
                                         </a>
                                     </li>
 
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o twitter" href="https://twitter.com/intent/tweet?url={{ url().current() }}&text={{ title }}">
+                                        <a class="btn btn-social-o twitter"
+                                           href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $title }}">
                                             <i class="fa fa-twitter"></i>
                                             <span>twitter</span>
                                         </a>
                                     </li>
 
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o telegram" href="https://t.me/share/url?url={{ url().current() }}&text={{ title }}">
+                                        <a class="btn btn-social-o telegram"
+                                           href="https://t.me/share/url?url={{ url()->current() }}&text={{ $title }}">
                                             <i class="fa fa-telegram"></i>
                                             <span>telegram</span>
                                         </a>
                                     </li>
 
                                     <li class="list-inline-item">
-                                        <a class="btn btn-linkedin-o linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{ url().current() }}">
+                                        <a class="btn btn-linkedin-o linkedin"
+                                           href="https://www.linkedin.com/sharing/share-offsite/?url={{ url()->current() }}">
                                             <i class="fa fa-linkedin"></i>
                                             <span>linkedin</span>
                                         </a>
@@ -75,7 +83,7 @@
                                 </ul>
                             </div>
 
-                            {{ $post->getContent() }}
+                            {!! $post->getContent() !!}
                         </div>
                     </div>
                     <!-- end content article detail -->

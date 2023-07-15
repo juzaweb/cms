@@ -14,5 +14,10 @@ use Juzaweb\CMS\Repositories\Contracts\RepositoryInterface;
  */
 interface BaseRepository extends RepositoryInterface, RepositoryCriteriaInterface
 {
-    //
+    /**
+     * @return Builder
+     */
+    public function getQuery(): Builder;
+
+    public function resetModel();
 }
