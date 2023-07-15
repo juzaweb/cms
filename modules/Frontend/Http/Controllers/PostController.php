@@ -117,7 +117,7 @@ class PostController extends FrontendController
         }
 
         $post = $this->postRepository->findBySlug($slug);
-        $data = $request->safe();
+        $data = $request->safe()->toArray();
         $data['object_type'] = $permalink->get('post_type');
         $data['user_id'] = Auth::id();
 
