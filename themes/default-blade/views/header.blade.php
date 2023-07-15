@@ -2,7 +2,7 @@
     <div class="h-100 d-flex align-items-center justify-content-center">
         <ul class="list-unstyled">
             <li>
-                <img src="{{ asset('images/loading.png') }}" alt="{{ __('Loading') }}" height="100" />
+                <img src="{{ theme_asset('images/loading.png') }}" alt="{{ __('Loading') }}" height="100" />
             </li>
 
             <li>
@@ -43,11 +43,11 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
 
-                    {{  jw_nav_menu({
+                    {{--{{  jw_nav_menu({
                         'container_before': '<ul class="navbar-nav mr-auto">',
                         'container_after': '</ul>',
                         'theme_location': 'primary'
-                    }) }}
+                    }) }}--}}
 
                     <!-- Search bar.// -->
                     <ul class="navbar-nav ">
@@ -66,7 +66,7 @@
 
                                     <div class="row no-gutters mt-3">
                                         <div class="col">
-                                            <input class="form-control border-secondary border-right-0 rounded-0" type="search" value="" placeholder="Search " name="q" id="example-search-input4" autocomplete="off">
+                                            <input class="form-control border-secondary border-right-0 rounded-0" type="search" value="" placeholder="Search " name="q" id="example-search-input4" autocomplete="off"/>
                                         </div>
 
                                         <div class="col-auto">
@@ -96,7 +96,7 @@
                         <div class="row no-gutters">
                             <div class="col">
                                 <input class="form-control border-secondary border-right-0 rounded-0" value=""
-                                       placeholder="Search">
+                                       placeholder="Search"/>
                             </div>
                             <div class="col-auto">
                                 <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right">
@@ -112,12 +112,12 @@
                 <div class="modal-body">
                     <nav class="list-group list-group-flush">
 
-                        {{  jw_nav_menu({
+                        {{--{{  jw_nav_menu({
                             'container_before': '<ul class="navbar-nav">',
                             'container_after': '</ul>',
                             'theme_location': 'primary',
                             'item_view': 'theme::components.menu_mobile_item',
-                        }) }}
+                        }) }}--}}
 
                     </nav>
                 </div>

@@ -8,7 +8,6 @@
  * @license    GNU V2
  */
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Support\Arr;
@@ -346,7 +345,7 @@ if (!function_exists('jw_get_widgets_sidebar')) {
 }
 
 if (!function_exists('dynamic_sidebar')) {
-    function dynamic_sidebar($key): Factory|ViewContract|string|Application
+    function dynamic_sidebar($key): Factory|ViewContract|string
     {
         $sidebar = HookAction::getSidebars($key);
         if (empty($sidebar)) {
@@ -366,7 +365,7 @@ if (!function_exists('dynamic_sidebar')) {
 }
 
 if (!function_exists('dynamic_block')) {
-    function dynamic_block($post, $key): ViewContract|Factory|Application
+    function dynamic_block($post, $key): ViewContract|Factory
     {
         $data = $post['metas']['block_content'][$key] ?? [];
         $keys = collect($data)->pluck('block')->toArray();

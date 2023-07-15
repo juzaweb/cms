@@ -58,11 +58,11 @@
 <body class="{{ body_class($post ? 'single-post single-post-'. $post->type : '') }} {{ $bodyClass ?? '' }}">
     @do_action('theme.after_body')
 
-    {% include('theme::header') %}
+    @include('theme::header')
 
     @yield('content')
 
-    {% include('theme::footer') %}
+    @include('theme::footer')
 
     @do_action('juzaweb_footer')
 
