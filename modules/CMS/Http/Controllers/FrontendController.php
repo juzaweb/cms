@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Http\Controllers;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\View\View;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\Theme;
@@ -14,8 +15,12 @@ class FrontendController extends Controller
 {
     use ResponseMessage;
 
-    public function callAction($method, $parameters): Response|string|\Illuminate\View\View
+    protected string $template;
+
+    public function callAction($method, $parameters): Response|string|View
     {
+        $this->template = Theme::currentTheme()->getTemplate();
+
         /**
          * Action after call action frontend
          * Add action to this hook add_action('frontend.call_action', $callback)
@@ -42,9 +47,7 @@ class FrontendController extends Controller
 
     protected function view($view, $params = [])
     {
-        $template = Theme::currentTheme()->getTemplate();
-
-        switch ($template) {
+        switch ($this->template) {
             case 'twig':
                 $params = $this->parseParamsFronend($params);
 

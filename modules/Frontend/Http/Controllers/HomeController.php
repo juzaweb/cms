@@ -20,10 +20,10 @@ class HomeController extends FrontendController
         do_action('theme.home.index');
 
         if ($pageId = jw_home_page()) {
-            $page = $this->postRepository->withFilters(['id' => $pageId])->first();
+            $page = $this->postRepository->scopeQuery(fn($q) => $q->where(['id' => $pageId]))->first();
 
             if ($page) {
-                return App::call(PageController::class.'@detail', ['id' => $page]);
+                return App::call([PageController::class, 'detail'], ['id' => $page]);
             }
         }
 
@@ -32,24 +32,30 @@ class HomeController extends FrontendController
 
     protected function handlePage(Request $request)
     {
-        $config = get_configs(['title', 'description', 'banner']);
+        $params = $this->getParamsForTemplate();
 
-        $view = $this->getViewPage();
+        return apply_filters('theme.page.home.handle', $this->view($this->getViewPage(), $params), $params);
+    }
 
+    protected function getParamsForTemplate(): array
+    {
         $posts = Post::selectFrontendBuilder()
             ->orderBy('id', 'DESC')
             ->paginate(get_config('posts_per_page', 12));
 
-        $page = PostResourceCollection::make($posts)->response()->getData(true);
+        $params = get_configs(['title', 'description', 'banner']);
 
-        $params = $config;
-        $params['page'] = $page;
+        if ($this->template == 'twig') {
+            $page = PostResourceCollection::make($posts)->response()->getData(true);
 
-        return apply_filters(
-            'theme.page.home.handle',
-            $this->view($view, $params),
-            $params
-        );
+            $params['page'] = $page;
+
+            return $params;
+        }
+
+        $params['posts'] = $posts;
+
+        return $params;
     }
 
     protected function getViewPage(): string
