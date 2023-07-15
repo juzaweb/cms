@@ -1,4 +1,4 @@
-@extends('cms::layouts.frontend')
+@extends('cms::layouts.frontend-blade')
 
 @section('content')
     <section>

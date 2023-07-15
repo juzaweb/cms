@@ -1,6 +1,6 @@
-{% extends 'cms::layouts.frontend' %}
+@extends('cms::layouts.frontend-blade')
 
-{% block content %}
+@section('content')
 
     <section class="pb-80">
         <div class="container">
@@ -91,4 +91,4 @@
         </div>
     </section>
 
-{% endblock %}
+@endsection

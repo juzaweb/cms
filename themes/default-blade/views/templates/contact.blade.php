@@ -1,6 +1,6 @@
-{% extends 'cms::layouts.frontend' %}
+@extends('cms::layouts.frontend-blade')
 
-{% block content %}
+@section('content')
     <!-- Breadcrumb  -->
     <section>
         <div class="container">

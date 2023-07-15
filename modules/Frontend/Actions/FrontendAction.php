@@ -17,14 +17,14 @@ use Juzaweb\CMS\Facades\ThemeLoader;
 
 class FrontendAction extends Action
 {
-    public function handle()
+    public function handle(): void
     {
         $this->addAction(self::FRONTEND_HEADER_ACTION, [$this, 'addFrontendHeader']);
         $this->addAction(self::FRONTEND_FOOTER_ACTION, [$this, 'addFrontendFooter']);
         //$this->addAction('theme.after_body', [$this, 'addThemeBody']);
     }
 
-    public function addFrontendHeader()
+    public function addFrontendHeader(): void
     {
         $fbAppId = get_config('fb_app_id');
         $googleAnalytics = get_config('google_analytics');
@@ -48,7 +48,7 @@ class FrontendAction extends Action
         );
     }
 
-    public function addFrontendFooter()
+    public function addFrontendFooter(): void
     {
         $scripts = HookAction::getEnqueueFrontendScripts(true);
         $styles = HookAction::getEnqueueFrontendStyles(true);
@@ -56,7 +56,7 @@ class FrontendAction extends Action
         echo e(view('cms::items.frontend_footer', compact('scripts', 'styles')));
     }
 
-    public function addThemeBody()
+    public function addThemeBody(): void
     {
         $str = '';
         $theme = jw_current_theme();

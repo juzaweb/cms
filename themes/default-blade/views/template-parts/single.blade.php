@@ -1,6 +1,6 @@
-{% extends 'cms::layouts.frontend' %}
+@extends('cms::layouts.frontend-blade')
 
-{% block content %}
+@section('content')
     {% set tags = get_post_taxonomies(post, 'tags', {limit: 5}) %}
     {% set categories = get_post_taxonomies(post, 'categories') %}
     {% set cat = categories[0] %}
@@ -261,4 +261,4 @@
         </div>
     </section>
 
-{% endblock %}
+@endsection

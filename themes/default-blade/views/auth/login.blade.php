@@ -1,6 +1,6 @@
-{% extends 'cms::layouts.frontend' %}
+@extends('cms::layouts.frontend-blade')
 
-{% block content %}
+@section('content')
     <!-- login -->
     <section class="wrap__section">
         <div class="container">

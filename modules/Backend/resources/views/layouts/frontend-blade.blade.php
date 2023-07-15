@@ -51,7 +51,7 @@
 
     <title>{{ apply_filters('frontend.head.title', $title) }}@if($sitename) | {{ $sitename }}@endif</title>
 
-    @do_action('juzaweb_header')
+    @do_action('theme.header')
 
     @yield('header')
 </head>
@@ -65,7 +65,7 @@
 
     @include('theme::footer')
 
-    @do_action('juzaweb_footer')
+    @do_action('theme.footer')
 
     @yield('footer')
 

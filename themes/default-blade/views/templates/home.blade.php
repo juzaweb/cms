@@ -1,6 +1,6 @@
-{% extends 'cms::layouts.frontend' %}
+@extends('cms::layouts.frontend-blade')
 
-{% block content %}
+@section('content')
 
     {% if input_get('page') is empty %}
         {{ dynamic_block(post, 'content') }}
