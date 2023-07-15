@@ -48,7 +48,7 @@ function theme_assets(string $path, string $theme = null): ?string
 
 function theme_asset(string $path, string $theme = null): ?string
 {
-    return ThemeLoader::assets($path, $theme);
+    return theme_assets($path, $theme);
 }
 
 function plugin_asset(string $path, string $plugin = null): ?string

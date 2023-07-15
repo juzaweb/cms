@@ -22,7 +22,6 @@
 </div>
 <!-- End loading -->
 
-
 <!-- header -->
 <header class="bg-light">
     <!-- navbar -->

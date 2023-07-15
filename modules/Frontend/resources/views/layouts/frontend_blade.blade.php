@@ -19,11 +19,11 @@
     <link href="//www.gstatic.com" rel="dns-prefetch"/>
     <link href="//www.googletagmanager.com" rel="dns-prefetch"/>
 
-    @php $sitename = config('sitename') @endphp
-    @php $icon = config('icon') @endphp
-    @php $fbAppId = config('fb_app_id') @endphp
+    @php $sitename = get_config('sitename') @endphp
+    @php $icon = get_config('icon') @endphp
+    @php $fbAppId = get_config('fb_app_id') @endphp
 
-    @if($image)
+    @if($image ?? null)
     <meta property="og:image" content="{{ upload_url($image) }}" />
     @endif
 
@@ -37,17 +37,18 @@
 
     <link rel="canonical" href="{{ url()->current() }}" />
 
-    @if(config('jw_enable_post_feed', 1))
-    <link rel="alternate" type="application/atom+xml" title="{{ config('title') }} &raquo; Feed" href="{{ url('feed') }}">
+    @if(get_config('jw_enable_post_feed', 1))
+    <link rel="alternate" type="application/atom+xml" title="{{ get_config('title') }} &raquo; Feed" href="{{ url('feed') }}">
     @endif
 
-    @if($taxonomy && get_config('jw_enable_taxonomy_feed', 1))
+    @if($taxonomy ?? null && get_config('jw_enable_taxonomy_feed', 1))
     <link rel="alternate" type="application/atom+xml" title="{{ $name }} &raquo; Feed" href="{{ url('taxonomy/'. $taxonomy->slug .'/feed') }}">
     @endif
 
     @if($icon)
     <link rel="icon" href="{{ upload_url($icon) }}" />
     @endif
+
     <title>{{ apply_filters('frontend.head.title', $title) }}@if($sitename) | {{ $sitename }}@endif</title>
 
     @do_action('juzaweb_header')

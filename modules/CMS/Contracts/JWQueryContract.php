@@ -18,9 +18,9 @@ interface JWQueryContract
 
     public function queryRow(string $table, array $args = []): object|null;
 
-    public function postTaxonomies(array $post, string $taxonomy = null, array $params = []): array;
+    public function postTaxonomies(array|object $post, string $taxonomy = null, array $params = []): array;
 
-    public function relatedPosts(array $post, int $limit = 5, string $taxonomy = null): array;
+    public function relatedPosts(array|object $post, int $limit = 5, string $taxonomy = null): array;
 
-    public function postTaxonomy(array $post, string $taxonomy = null, array $params = []): mixed;
+    public function postTaxonomy(array|object $post, string $taxonomy = null, array $params = []): mixed;
 }

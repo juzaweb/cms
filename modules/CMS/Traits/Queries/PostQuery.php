@@ -115,7 +115,7 @@ trait PostQuery
         return PostResourceCollection::make($posts)->toArray(request());
     }
 
-    public function relatedPosts(array $post, int $limit = 5, string $taxonomy = null): array
+    public function relatedPosts(array|object $post, int $limit = 5, string $taxonomy = null): array
     {
         if ($limit > 20) {
             $limit = 20;
@@ -141,8 +141,12 @@ trait PostQuery
         return PostResourceCollection::make($posts)->toArray(request());
     }
 
-    public function popularPosts($type = null, $post = null, $limit = 5, $options = []): array
-    {
+    public function popularPosts(
+        ?string $type = null,
+        null|array|object $post = null,
+        int $limit = 5,
+        array $options = []
+    ): array {
         if ($limit > 20) {
             $limit = 20;
         }
@@ -164,11 +168,8 @@ trait PostQuery
         return PostResourceCollection::make($posts)->toArray(request());
     }
 
-    public function postTaxonomy(
-        array $post,
-        string $taxonomy = null,
-        array $params = []
-    ): mixed {
+    public function postTaxonomy(array|object $post, string $taxonomy = null, array $params = []): mixed
+    {
         $taxonomies = collect($post['taxonomies'] ?? []);
 
         if ($taxonomy) {
@@ -182,11 +183,8 @@ trait PostQuery
         return $taxonomies->first();
     }
 
-    public function postTaxonomies(
-        array $post,
-        string $taxonomy = null,
-        array $params = []
-    ): array {
+    public function postTaxonomies(array|object $post, ?string $taxonomy = null, array $params = []): array
+    {
         $taxonomies = collect($post['taxonomies']);
 
         if ($taxonomy) {
