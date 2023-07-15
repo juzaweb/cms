@@ -1,0 +1,19 @@
+{
+    "form": [
+        {
+            "type": "text",
+            "name": "title",
+            "label": "Title"
+        },
+        {
+            "type": "text",
+            "name": "banner",
+            "label": "Banner"
+        },
+        {
+            "type": "text",
+            "name": "link",
+            "label": "Link"
+        }
+    ]
+}

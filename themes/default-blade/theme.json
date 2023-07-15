@@ -1,0 +1,8 @@
+{
+    "name": "default-blade",
+    "title": "Default Theme with blade template",
+    "description": "Default Theme with blade template",
+    "author": "The Anh",
+    "version": "1.0",
+    "template": "blade"
+}

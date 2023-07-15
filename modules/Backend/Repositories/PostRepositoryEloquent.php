@@ -19,7 +19,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
     use UseSearchCriteria, UseFilterCriteria, UseSortableCriteria;
 
     protected array $searchableFields = ['title', 'description'];
-    protected array $filterableFields = ['status', 'type', 'locale', 'created_by', 'id'];
+    protected array $filterableFields = ['status', 'type', 'locale', 'created_by'];
     protected array $sortableFields = ['id', 'status', 'title', 'views'];
     protected array $sortableDefaults = ['id' => 'DESC'];
 

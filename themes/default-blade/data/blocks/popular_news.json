@@ -1,0 +1,12 @@
+{
+    "form": [
+        {
+            "type": "taxonomy",
+            "name": "taxonomy",
+            "label": "Category",
+            "data": {
+                "post_type": "posts"
+            }
+        }
+    ]
+}

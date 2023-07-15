@@ -1,0 +1,185 @@
+<!-- Popular news -->
+<section>
+    {% set items = get_posts('posts', {
+        'taxonomy': data.taxonomy,
+        'limit': 10
+    }) %}
+    <!-- Popular news  header-->
+    <div class="popular__news-header">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-md-8 ">
+                    <div class="card__post-carousel">
+                        {% set break = false %}
+                        {% for index,item in items %}
+                            {% if index > 0 %}
+                                {% set break = true %}
+                            {% endif %}
+
+                            {% if not break %}
+
+                            {% set category = get_post_taxonomy(item, 'categories') %}
+
+                        <div class="item">
+                            <!-- Post Article -->
+                            <div class="card__post">
+                                <div class="card__post__body">
+                                    <a href="{{ item.url }}">
+                                        <img src="{{ item.thumbnail }}" class="img-fluid" alt="{{ item.title }}">
+                                    </a>
+                                    <div class="card__post__content bg__post-cover">
+                                        {% if category %}
+                                        <div class="card__post__category">
+                                            {{ category.name }}
+                                        </div>
+                                        {% endif %}
+                                        <div class="card__post__title">
+                                            <h2>
+                                                <a href="{{ item.url }}">
+                                                    {{ item.title }}
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div class="card__post__author-info">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <a href="#">
+                                                        {{ __('by') }} {{ item.author.name }}
+                                                    </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                        <span>
+                            {{ item.created_at }}
+                        </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                            {% endif %}
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="popular__news-right">
+                        {% set continue = false %}
+                        {% for index,item in items %}
+                            {% if index < 2 or index > 3 %}
+                                {% set continue = true %}
+                            {% endif %}
+
+                            {% if not continue %}
+                                {% set category = get_post_taxonomy(item, 'categories') %}
+                            <!-- Post Article -->
+                            <div class="card__post ">
+                                <div class="card__post__body card__post__transition">
+                                    <a href="{{ item.url }}">
+                                        <img src="{{ item.thumbnail }}" class="img-fluid" alt="">
+                                    </a>
+                                    <div class="card__post__content bg__post-cover">
+                                        {% if category %}
+                                            <div class="card__post__category">
+                                                {{ category.name }}
+                                            </div>
+                                        {% endif %}
+                                        <div class="card__post__title">
+                                            <h5>
+                                                <a href="{{ item.url }}">
+                                                    {{ item.title }}
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="card__post__author-info">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <a href="{{ item.url }}">
+                                                        {{ __('by') }} {{ item.author.name }}
+                                                    </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                            <span>
+                                {{ item.created_at }}
+                            </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {% endif %}
+
+                            {% if continue %}
+                                {% set continue = false %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Popular news header-->
+    <!-- Popular news carousel -->
+    <div class="popular__news-header-carousel">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="top__news__slider">
+                        {% set continue = false %}
+                        {% for index,item in items %}
+                            {% if index < 4  %}
+                                {% set continue = true %}
+                            {% endif %}
+
+                            {% if not continue %}
+                            {% set category = get_post_taxonomy(item, 'categories') %}
+
+                            <div class="item">
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="{{ item.url }}">
+                                            <img src="{{ item.thumbnail }}" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    {{ __('by') }} {{ item.author.name }}
+                                                </span>,
+                                            </li>
+
+                                            <li class="list-inline-item">
+                                                <span>
+                                                    {{ item.created_at }}
+                                                </span>
+                                            </li>
+                                        </ul>
+                                        <h5>
+                                            <a href="{{ item.url }}">
+                                                {{ item.title }}
+                                            </a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            {% if continue %}
+                                {% set continue = false %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Popular news carousel -->
+</section>
+<!-- End Popular news -->
