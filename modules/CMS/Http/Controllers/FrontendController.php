@@ -47,6 +47,6 @@ class FrontendController extends Controller
 
     protected function view($view, $params = []): Factory|ViewContract|string
     {
-        return view_render($view, $params);
+        return Theme::render($view, $params);
     }
 }
