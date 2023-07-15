@@ -39,9 +39,9 @@ class HomeController extends FrontendController
 
     protected function getParamsForTemplate(): array
     {
-        $posts = Post::selectFrontendBuilder()
-            ->orderBy('id', 'DESC')
-            ->paginate(get_config('posts_per_page', 12));
+        $posts = $this->postRepository
+            ->withSorts(['id' => 'DESC'])
+            ->frontendListPaginate(get_config('posts_per_page', 12));
 
         $params = get_configs(['title', 'description', 'banner']);
 

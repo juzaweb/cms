@@ -23,34 +23,40 @@
     @php $icon = config('icon') @endphp
     @php $fbAppId = config('fb_app_id') @endphp
 
-    {% if image %}
+    @if($image)
     <meta property="og:image" content="{{ upload_url($image) }}" />
-    {% endif %}
-    {% if sitename %}
+    @endif
+
+    @if($sitename)
     <meta property="og:site_name" content="{{ $sitename }}"/>
-    {% endif %}
-    {% if fbAppId %}
-    <meta property="fb:app_id" content="{{ fbAppId }}"/>
-    {% endif %}
-    <link rel="canonical" href="{{ url().current() }}" />
-    {% if config('jw_enable_post_feed', 1) %}
+    @endif
+
+    @if($fbAppId)
+    <meta property="fb:app_id" content="{{ $fbAppId }}"/>
+    @endif
+
+    <link rel="canonical" href="{{ url()->current() }}" />
+
+    @if(config('jw_enable_post_feed', 1))
     <link rel="alternate" type="application/atom+xml" title="{{ config('title') }} &raquo; Feed" href="{{ url('feed') }}">
-    {% endif %}
-    {% if taxonomy and config('jw_enable_taxonomy_feed', 1) %}
-    <link rel="alternate" type="application/atom+xml" title="{{ name }} &raquo; Feed" href="{{ url('taxonomy/'~ taxonomy.slug ~'/feed') }}">
-    {% endif %}
-    {% if icon %}
-    <link rel="icon" href="{{ upload_url(icon) }}" />
-    {% endif %}
-    <title>{{ apply_filters('frontend.head.title', title) }}{% if sitename %} | {{ sitename }}{% endif %}</title>
+    @endif
+
+    @if($taxonomy && get_config('jw_enable_taxonomy_feed', 1))
+    <link rel="alternate" type="application/atom+xml" title="{{ $name }} &raquo; Feed" href="{{ url('taxonomy/'. $taxonomy->slug .'/feed') }}">
+    @endif
+
+    @if($icon)
+    <link rel="icon" href="{{ upload_url($icon) }}" />
+    @endif
+    <title>{{ apply_filters('frontend.head.title', $title) }}@if($sitename) | {{ $sitename }}@endif</title>
 
     @do_action('juzaweb_header')
 
     @yield('header')
 </head>
 
-<body class="{{ body_class(post ? 'single-post single-post-'~ post.type : '') }} {{ bodyClass|default('') }}">
-    {{ theme_after_body() }}
+<body class="{{ body_class($post ? 'single-post single-post-'. $post->type : '') }} {{ $bodyClass ?? '' }}">
+    @do_action('theme.after_body')
 
     {% include('theme::header') %}
 
@@ -62,7 +68,7 @@
 
     @yield('footer')
 
-    {% if auth %}
+    @if($auth)
     <form action="{{ url('logout') }}"
           method="post"
           style="display: none"
@@ -70,6 +76,6 @@
     >
         {{ csrf_field() }}
     </form>
-    {% endif %}
+    @endif
 </body>
 </html>
