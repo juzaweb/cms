@@ -96,6 +96,11 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         throw new ThemeNotFoundException("Theme [{$name}] does not exist!");
     }
 
+    public function currentTheme(): Theme
+    {
+        return $this->findOrFail(jw_current_theme());
+    }
+
     public function all(bool $collection = false): array|Collection
     {
         return $this->scan($collection);

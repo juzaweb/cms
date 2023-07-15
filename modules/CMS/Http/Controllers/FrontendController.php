@@ -5,14 +5,16 @@ namespace Juzaweb\CMS\Http\Controllers;
 use Illuminate\Contracts\Support\Arrayable;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
+use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Traits\ResponseMessage;
+use Symfony\Component\HttpFoundation\Response;
 use TwigBridge\Facade\Twig;
 
 class FrontendController extends Controller
 {
     use ResponseMessage;
 
-    public function callAction($method, $parameters): \Symfony\Component\HttpFoundation\Response|string
+    public function callAction($method, $parameters): Response|string|\Illuminate\View\View
     {
         /**
          * Action after call action frontend
@@ -27,7 +29,7 @@ class FrontendController extends Controller
         return parent::callAction($method, $parameters);
     }
 
-    protected function getPermalinks($base = null): mixed
+    protected function getPermalinks($base = null)
     {
         if ($base) {
             return collect(HookAction::getPermalinks())
@@ -40,9 +42,16 @@ class FrontendController extends Controller
 
     protected function view($view, $params = [])
     {
-        $params = $this->parseParamsFronend($params);
+        $template = Theme::currentTheme()->getTemplate();
 
-        return apply_filters('theme.render_view', Twig::render($view, $params));
+        switch ($template) {
+            case 'twig':
+                $params = $this->parseParamsFronend($params);
+
+                return apply_filters('theme.render_view', Twig::render($view, $params));
+            default:
+                return apply_filters('theme.render_view', view($view, $params));
+        }
     }
 
     protected function parseParamsFronend(array $params): array

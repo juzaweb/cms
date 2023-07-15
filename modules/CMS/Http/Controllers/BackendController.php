@@ -28,7 +28,7 @@ class BackendController extends Controller
         return parent::callAction($method, $parameters);
     }
 
-    protected function addBreadcrumb(array $item, $name = 'admin')
+    protected function addBreadcrumb(array $item, $name = 'admin'): void
     {
         add_filters(
             $name . '_breadcrumb',
@@ -44,7 +44,7 @@ class BackendController extends Controller
         string $key,
         string|array $message,
         string $type = 'warning'
-    ) {
+    ): void {
         $message = is_string($message) ? [$message] : $message;
 
         add_backend_message(

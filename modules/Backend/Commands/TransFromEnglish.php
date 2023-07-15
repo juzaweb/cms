@@ -34,14 +34,14 @@ class TransFromEnglish extends TranslationCommand
         return self::SUCCESS;
     }
 
-    protected function exportTranslation(string $language)
+    protected function exportTranslation(string $language): void
     {
         $exporter = app(TranslationManager::class)->export();
         $exporter->setLanguage($language);
         $exporter->run();
     }
 
-    protected function executeTranslation(string $language)
+    protected function executeTranslation(string $language): void
     {
         $translate = app(TranslationManager::class)->translate($this->source, $language);
 

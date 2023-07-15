@@ -11,10 +11,11 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 use Noodlehaus\Config as ReadConfig;
 use Juzaweb\CMS\Facades\Config;
 
-class Theme
+class Theme implements ThemeInterface
 {
     /**
      * The laravel|lumen application instance.
@@ -42,7 +43,11 @@ class Theme
      */
     protected Filesystem $files;
 
-    private UrlGenerator $url;
+    protected UrlGenerator $url;
+
+    protected array $register;
+
+    protected array $themeInfo;
 
     public function __construct($app, $path)
     {
@@ -88,6 +93,11 @@ class Theme
         return file_exists($this->getPath($path));
     }
 
+    public function getTemplate(): string
+    {
+        return $this->getInfo()->get('template', 'twig');
+    }
+
     /**
      * @throws FileNotFoundException
      * @throws \Exception
@@ -119,6 +129,10 @@ class Theme
      */
     public function getInfo(bool $assoc = false): null|array|Collection
     {
+        if (isset($this->themeInfo)) {
+            return $assoc ? $this->themeInfo : new Collection($this->themeInfo);
+        }
+
         $configPath = $this->path . '/theme.json';
 
         $changelogPath = $this->path . '/changelog.yml';
@@ -135,7 +149,9 @@ class Theme
 
         $config['path'] = $this->path;
 
-        return $assoc ? $config : new Collection($config);
+        $this->themeInfo = $config;
+
+        return $assoc ? $this->themeInfo : new Collection($this->themeInfo);
     }
 
     public function getConfigFields(): array
@@ -147,17 +163,17 @@ class Theme
     {
         $path = $this->getPath('register.json');
 
-        if (file_exists($path)) {
-            $data = json_decode(file_get_contents($path), true);
-
-            if ($key) {
-                return Arr::get($data, $key, $default);
-            }
-
-            return $data;
+        if (!isset($this->register) && file_exists($path)) {
+            $this->register = json_decode(file_get_contents($path), true);
+        } else {
+            $this->register = [];
         }
 
-        return $default;
+        if ($key) {
+            return Arr::get($this->register, $key, $default);
+        }
+
+        return $this->register;
     }
 
     /**

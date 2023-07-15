@@ -17,6 +17,7 @@ use Juzaweb\CMS\Support\Theme as ThemeSupport;
 
 /**
  * @method static ThemeSupport|null find(string $name)
+ * @method static ThemeSupport currentTheme()
  * @method static void activate(string $name)
  * @method static void delete(string $name)
  * @method static array|Collection all(bool $collection = false)
