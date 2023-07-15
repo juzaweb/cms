@@ -16,4 +16,8 @@ use Illuminate\Contracts\View\View;
 interface ThemeRender
 {
     public function render(string $view, array $params = []): Factory|View|string;
+
+    public function parseParams(array $params): array;
+
+    public function parseParam($param): mixed;
 }

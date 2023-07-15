@@ -29,7 +29,7 @@ function get_post_taxonomy($post, $taxonomy = null, $params = []): ?array
     return JWQuery::postTaxonomy($post, $taxonomy, $params);
 }
 
-function get_post_taxonomies($post, $taxonomy = null, $params = [])
+function get_post_taxonomies($post, $taxonomy = null, $params = []): ?array
 {
     return JWQuery::postTaxonomies($post, $taxonomy, $params);
 }
@@ -43,14 +43,14 @@ function get_related_posts($post, $limit = 5, $taxonomy = null): ?array
  * Get the most popular posts.
  *
  *
- * @param null $type The type of post to retrieve.
- * @param array|null $post An optional post array to exclude from the results.
- * @param int $limit The maximum number of posts to return. Defaults to 5.
- * @param array $options Optional options for retrieving posts.
+ * @param  string|null  $type The type of post to retrieve.
+ * @param  array|null  $post An optional post array to exclude from the results.
+ * @param  int  $limit The maximum number of posts to return. Defaults to 5.
+ * @param  array  $options Optional options for retrieving posts.
  *
  * @return array An array of the most popular posts.
  */
-function get_popular_posts($type = null, $post = null, $limit = 5, $options = []): array
+function get_popular_posts(string $type = null, array $post = null, int $limit = 5, array $options = []): array
 {
     if ($limit > 20) {
         $limit = 20;
@@ -161,42 +161,56 @@ function get_next_resource(string $type, ?array $resource): ?array
     return $data ? (new ResourceResource($data))->toArray(request()) : null;
 }
 
-/**
- * Retrieves the previous post from the database in relation to the current post.
- *
- * @param array|null $currentPost The current Post array for comparison.
- *
- * @return array|null The previous Post as an array or null if not found.
- */
-function get_previous_post(?array $currentPost): ?array
-{
-    $post = Post::selectFrontendBuilder()
-        ->where('id', '<', Arr::get($currentPost, 'id'))
-        ->orderBy('id', 'DESC')
-        ->first();
+if (!function_exists('get_previous_post')) {
+    /**
+     * Retrieves the previous post from the database in relation to the current post.
+     *
+     * @param  array|Post|null  $currentPost  The current Post array for comparison.
+     *
+     * @return array|null The previous Post as an array or null if not found.
+     */
+    function get_previous_post(array|null|Post $currentPost): ?array
+    {
+        if (empty($post)) {
+            return [];
+        }
 
-    return $post ? (new PostResource($post))->toArray(request()) : null;
+        if (is_array($currentPost)) {
+            $postId = Arr::get($currentPost, 'id');
+        } else {
+            $postId = $currentPost->id;
+        }
+
+        $post = Post::selectFrontendBuilder()
+            ->where('id', '<', $postId)
+            ->orderBy('id', 'DESC')
+            ->first();
+
+        return $post ? (new PostResource($post))->toArray(request()) : [];
+    }
 }
 
-/**
- * Get the next post from the database by ID.
- *
- * @param array $post The post object.
- *
- * @return array|null An array containing the details of the next post, if one exists. Otherwise, null.
- */
-function get_next_post($post): ?array
-{
-    $post = Post::selectFrontendBuilder()
-        ->where('id', '>', Arr::get($post, 'id', 0))
-        ->orderBy('id', 'ASC')
-        ->first();
+if (!function_exists('get_next_post')) {
+    /**
+     * Get the next post from the database by ID.
+     *
+     * @param  array|null  $post  The post object.
+     *
+     * @return array|null An array containing the details of the next post, if one exists. Otherwise, null.
+     */
+    function get_next_post(null|array $post): ?array
+    {
+        $post = Post::selectFrontendBuilder()
+            ->where('id', '>', Arr::get($post, 'id', 0))
+            ->orderBy('id', 'ASC')
+            ->first();
 
-    if (empty($post)) {
-        return null;
+        if (empty($post)) {
+            return null;
+        }
+
+        return (new PostResource($post))->toArray(request());
     }
-
-    return (new PostResource($post))->toArray(request());
 }
 
 function get_taxonomy($taxonomy, $args = []): array

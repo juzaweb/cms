@@ -6,7 +6,7 @@
         {{ dynamic_block(post, 'content') }}
     {% endif %}
 
-    {% set items = get_posts('posts', {
+    @php $items = get_posts('posts', {
         'taxonomy': data.taxonomy,
         'paginate': 10
     }) %}
@@ -24,7 +24,7 @@
                             <div class="wrapp__list__article-responsive">
                                 {% for item in items.data %}
 
-                                    {% set category = get_post_taxonomy(item, 'categories') %}
+                                    @php $category = get_post_taxonomy(item, 'categories') %}
 
                                 <!-- Post Article List -->
                                 <div class="card__post card__post-list card__post__transition mt-30">

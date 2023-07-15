@@ -1,10 +1,17 @@
 @extends('cms::layouts.frontend-blade')
 
 @section('content')
-    {% set tags = get_post_taxonomies(post, 'tags', {limit: 5}) %}
-    {% set categories = get_post_taxonomies(post, 'categories') %}
-    {% set cat = categories[0] %}
-    {% set related = get_related_posts(post, 5, 'categories') %}
+    @php
+        /**
+        * @var \Juzaweb\Backend\Models\Post $post
+        */
+    @endphp
+
+    @php $tags = get_post_taxonomies($post, 'tags', ['limit' => 5]) @endphp
+    @php $categories = get_post_taxonomies($post, 'categories') @endphp
+
+    @php $cat = $categories[0] ?? null @endphp
+    @php $related = get_related_posts($post, 5, 'categories') @endphp
 
     <section class="pb-80">
         <div class="container">
@@ -19,11 +26,11 @@
                             </a>
                         </li>
 
-                        {% if cat %}
+                        @if($cat)
                         <li class="breadcrumbs__item breadcrumbs__item--current">
-                            {{ cat.name }}
+                            {{ $cat->name }}
                         </li>
-                        {% endif %}
+                        @endif
 
                     </ul>
                     <!-- end breadcrumb -->
@@ -43,18 +50,18 @@
                         <hr>
                         <div class="wrap__article-detail-info">
                             <ul class="list-inline">
-                                {#<li class="list-inline-item">
+                                {{--<li class="list-inline-item">
                                     <figure class="image-profile">
                                         <img src="images/placeholder/logo.jpg" alt="">
                                     </figure>
-                                </li>#}
+                                </li>--}}
 
                                 <li class="list-inline-item">
                                     <span>
                                         {{ __('by') }}
                                     </span>
                                     <a href="#">
-                                        {{ $post->author.name }},
+                                        {{ $post->createdBy->name }},
                                     </a>
                                 </li>
 
@@ -68,11 +75,11 @@
                                     <span class="text-dark text-capitalize">
                                         {{ __('in') }}
                                     </span>
-                                    {% for category in categories %}
-                                    <a href="{{ category.url }}">
-                                        {{ category.name }}
+                                    @foreach($categories as $category)
+                                    <a href="{{ $category->url }}">
+                                        {{ $category->name }}
                                     </a>
-                                    {% endfor %}
+                                    @endforeach
                                 </li>
 
                             </ul>
@@ -80,14 +87,14 @@
 
                         <div class="wrap__article-detail-image mt-4">
                             <figure>
-                                <img src="{{ $post->thumbnail }}" alt="{{ $post->title }}" class="img-fluid">
+                                <img src="{{ $post->getThumbnail(false) }}" alt="{{ $post->title }}" class="img-fluid">
                             </figure>
                         </div>
 
                         <div class="wrap__article-detail-content">
                             <div class="total-views">
                                 <div class="total-views-read">
-                                    {{ $post->views }}
+                                    {{ $post->getViews() }}
                                     <span>
                                         {{ __('views') }}
                                     </span>
@@ -96,28 +103,32 @@
                                 <ul class="list-inline">
                                     <span class="share">{{ __('share on') }}:</span>
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o facebook" href="https://www.facebook.com/sharer.php?u={{ url().current() }}">
+                                        <a class="btn btn-social-o facebook"
+                                           href="https://www.facebook.com/sharer.php?u={{ url()->current() }}">
                                             <i class="fa fa-facebook-f"></i>
                                             <span>facebook</span>
                                         </a>
                                     </li>
 
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o twitter" href="https://twitter.com/intent/tweet?url={{ url().current() }}&text={{ title }}">
+                                        <a class="btn btn-social-o twitter"
+                                           href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $title }}">
                                             <i class="fa fa-twitter"></i>
                                             <span>twitter</span>
                                         </a>
                                     </li>
 
                                     <li class="list-inline-item">
-                                        <a class="btn btn-social-o telegram" href="https://t.me/share/url?url={{ url().current() }}&text={{ title }}">
+                                        <a class="btn btn-social-o telegram"
+                                           href="https://t.me/share/url?url={{ url()->current() }}&text={{ $title }}">
                                             <i class="fa fa-telegram"></i>
                                             <span>telegram</span>
                                         </a>
                                     </li>
 
                                     <li class="list-inline-item">
-                                        <a class="btn btn-linkedin-o linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{ url().current() }}">
+                                        <a class="btn btn-linkedin-o linkedin"
+                                           href="https://www.linkedin.com/sharing/share-offsite/?url={{ url()->current() }}">
                                             <i class="fa fa-linkedin"></i>
                                             <span>linkedin</span>
                                         </a>
@@ -126,7 +137,7 @@
                                 </ul>
                             </div>
 
-                            {{ $post->content|raw }}
+                            {{ $post->content }}
                         </div>
                     </div>
                     <!-- end content article detail -->
@@ -138,13 +149,13 @@
                                 <i class="fa fa-tags"></i>
                             </li>
 
-                            {% for tag in tags %}
-                            <li class="list-inline-item">
-                                <a href="{{ tag.url }}">
-                                    #{{ tag.name }}
-                                </a>
-                            </li>
-                            {% endfor %}
+                            @foreach($tags as $tag)
+                                <li class="list-inline-item">
+                                    <a href="{{ $tag->url }}">
+                                        #{{ $tag->name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <!-- end tags-->
@@ -168,54 +179,55 @@
 
                     <!-- Comment  -->
                     <div id="comments" class="comments-area">
-                        {{ comment_template(post, 'theme::components.comments') }}
+                        {{ comment_template($post, 'theme::components.comments') }}
 
                         <div class="comment-respond">
                             <h3 class="comment-reply-title">{{ __('Leave a Reply') }}</h3>
-                            {{ comment_form(post) }}
+                            {{ comment_form($post) }}
                         </div>
-
                     </div>
+
                     <!-- Comment -->
                     <!-- end comment -->
 
                     <div class="row">
                         <div class="col-md-6">
-                            {% set previousPost = get_previous_post(post) %}
+                            @php $previousPost = get_previous_post($post) @endphp
 
-                            {% if previousPost %}
+                            @if($previousPost)
                             <div class="single_navigation-prev">
-                                <a href="{{ previous$post->url }}">
+                                <a href="{{ $previousPost->url }}">
                                     <span>{{ __('previous post') }}</span>
-                                    {{ previousPost.title }}
+                                    {{ $previousPost->title }}
                                 </a>
                             </div>
-                            {% endif %}
+                            @endif
                         </div>
 
                         <div class="col-md-6">
-                            {% set nextPost = get_next_post(post) %}
+                            @php $nextPost = get_next_post($post) @endphp
 
-                            {% if nextPost %}
+                            @if($nextPost)
                             <div class="single_navigation-next text-left text-md-right">
-                                <a href="{{ nextPost.url }}">
+                                <a href="{{ $nextPost->url }}">
                                     <span>{{ __('next post') }}</span>
-                                    {{ nextPost.title }}
+                                    {{ $nextPost->title }}
                                 </a>
                             </div>
-                            {% endif %}
+                            @endif
                         </div>
                     </div>
 
                     <div class="clearfix"></div>
-                {% if related %}
+
+                    @if($related)
                     <div class="related-article">
                         <h4>
                             {{ __('you may also like') }}
                         </h4>
 
                         <div class="article__entry-carousel-three">
-                            {% for item in related %}
+                            @foreach($related as $item)
                             <div class="item">
                                 <div class="article__entry">
                                     <div class="article__image">
@@ -230,9 +242,9 @@
                                                 <span class="text-primary">
                                                     {{ __('by') }} {{ item.author.name }}
                                                 </span>
-                                                                            </li>
+                                            </li>
 
-                                                                            <li class="list-inline-item">
+                                            <li class="list-inline-item">
                                                 <span class="text-dark text-capitalize">
                                                     {{ item.created_at }}
                                                 </span>
@@ -246,10 +258,10 @@
                                     </div>
                                 </div>
                             </div>
-                            {% endfor %}
+                            @endforeach
                         </div>
                     </div>
-                {% endif %}
+                    @endif
                 </div>
 
                 <div class="col-md-4">

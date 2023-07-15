@@ -38,71 +38,88 @@ class ThemeRender implements ThemeRenderContract
 
     public function render(string $view, array $params = []): Factory|View|string
     {
+        $params = $this->parseParams($params);
+
+        return match ($this->theme->getTemplate()) {
+            'twig' => apply_filters('theme.render_view', Twig::display($view, $params)),
+            default => apply_filters('theme.render_view', view($view, $params)),
+        };
+    }
+
+    public function parseParams(array $params): array
+    {
+        foreach ($params as $key => $item) {
+            $params[$key] = $this->parseParam($item);
+        }
+
         switch ($this->theme->getTemplate()) {
             case 'twig':
-                $params = $this->parseParamsForTwig($params);
+                if ($message = session('message')) {
+                    $params['message'] = $message;
+                }
 
-                return apply_filters('theme.render_view', Twig::display($view, $params));
+                if ($status = session('status')) {
+                    $params['status'] = $status;
+                }
+
+                return $params;
             default:
-                return apply_filters('theme.render_view', view($view, $params));
+                return $params;
         }
     }
 
-    protected function parseParamsForTwig(array $params): array
+    public function parseParam($param): mixed
     {
-        if ($message = session('message')) {
-            $params['message'] = $message;
-        }
-
-        if ($status = session('status')) {
-            $params['status'] = $status;
-        }
-
-        foreach ($params as $key => $item) {
-            if (is_a($item, 'Illuminate\Support\ViewErrorBag')) {
-                continue;
-            }
-
-            if ($item instanceof Post) {
-                $params[$key] = PostResource::make($item)->toArray(request());
-            }
-
-            if ($item instanceof Taxonomy) {
-                $params[$key] = TaxonomyResource::make($item)->toArray(request());
-            }
-
-            if ($item instanceof Comment) {
-                $params[$key] = CommentResource::make($item)->toArray(request());
-            }
-
-            if ($item instanceof EloquentCollection || $item instanceof LengthAwarePaginator) {
-                $params[$key] = $this->parseParamEloquentCollectionForTwig($item);
-            }
-
-            if ($item instanceof Arrayable) {
-                $item = $item->toArray();
-                $params[$key] = $item;
-            }
-
-            if (!in_array(
-                gettype($item),
-                [
-                    'boolean',
-                    'integer',
-                    'string',
-                    'array',
-                    'double',
-                ]
-            )
-            ) {
-                unset($params[$key]);
-            }
-        }
-
-        return $params;
+        return match ($this->theme->getTemplate()) {
+            'twig' => $this->parseParamForTwig($param),
+            default => $param,
+        };
     }
 
-    protected function parseParamEloquentCollectionForTwig(EloquentCollection $collection): array
+    protected function parseParamForTwig($param)
+    {
+        if (is_a($param, 'Illuminate\Support\ViewErrorBag')) {
+            return $param;
+        }
+
+        if ($param instanceof Post) {
+            return PostResource::make($param)->toArray($this->request);
+        }
+
+        if ($param instanceof Taxonomy) {
+            return TaxonomyResource::make($param)->toArray($this->request);
+        }
+
+        if ($param instanceof Comment) {
+            return CommentResource::make($param)->toArray($this->request);
+        }
+
+        if ($param instanceof EloquentCollection || $param instanceof LengthAwarePaginator) {
+            return $this->parseParamEloquentCollectionForTwig($param);
+        }
+
+        if ($param instanceof Arrayable) {
+            return $param->toArray();
+        }
+
+        if (!in_array(
+            gettype($param),
+            [
+                'boolean',
+                'integer',
+                'string',
+                'array',
+                'double',
+            ]
+        )
+        ) {
+            return null;
+        }
+
+        return $param;
+    }
+
+    protected function parseParamEloquentCollectionForTwig(EloquentCollection|LengthAwarePaginator $collection): array
     {
         if ($collection->isEmpty()) {
             return $collection->toArray();
