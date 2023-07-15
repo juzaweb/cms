@@ -3,8 +3,9 @@
 namespace Juzaweb\CMS\Http\Middleware;
 
 use Illuminate\Http\Request;
-//use Inertia\Middleware;
-class HandleInertiaRequests //extends Middleware
+use Inertia\Middleware;
+
+class HandleInertiaRequests extends Middleware
 {
     /**
      * The root template that's loaded on the first page visit.
@@ -12,7 +13,7 @@ class HandleInertiaRequests //extends Middleware
      * @see https://inertiajs.com/server-side-setup#root-template
      * @var string
      */
-    protected $rootView = 'app';
+    protected $rootView = 'cms::layouts.frontend-inertia';
 
     /**
      * Determines the current asset version.
@@ -35,22 +36,16 @@ class HandleInertiaRequests //extends Middleware
      */
     public function share(Request $request)
     {
-        return array_merge(parent::share($request), [
-            'auth' => function () use ($request) {
-                return [
-                    'user' => $request->user() ? [
-                        'id' => $request->user()->id,
-                        'name' => $request->user()->name,
-                        'email' => $request->user()->email,
-                    ] : null,
-                ];
-            },
-            'flash' => function () use ($request) {
-                return [
-                    'success' => $request->session()->get('success'),
-                    'error' => $request->session()->get('error'),
-                ];
-            },
-        ]);
+        return array_merge(
+            parent::share($request),
+            [
+                'flash' => function () use ($request) {
+                    return [
+                        'success' => $request->session()->get('success'),
+                        'error' => $request->session()->get('error'),
+                    ];
+                },
+            ]
+        );
     }
 }

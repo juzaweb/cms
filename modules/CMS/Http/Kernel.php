@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Juzaweb\CMS\Http\Middleware\HandleInertiaRequests;
 
 class Kernel extends HttpKernel
 {
@@ -57,6 +58,7 @@ class Kernel extends HttpKernel
 
         'theme' => [
             'web',
+            HandleInertiaRequests::class,
             \Juzaweb\CMS\Http\Middleware\Theme::class,
         ],
 
