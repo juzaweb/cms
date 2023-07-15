@@ -1,10 +1,7 @@
 <?php
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
-use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Http\Resources\ResourceResource;
-use Juzaweb\Backend\Http\Resources\TaxonomyResource;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Models\Post;
@@ -72,7 +69,7 @@ function get_popular_posts(string $type = null, array $post = null, int $limit =
 
     $posts = $query->take($limit)->get();
 
-    return PostResourceCollection::make($posts)->toArray(request());
+    return Theme::parseParam($posts);
 }
 
 /**
@@ -169,9 +166,9 @@ if (!function_exists('get_previous_post')) {
      *
      * @param  array|Post|null  $currentPost  The current Post array for comparison.
      *
-     * @return array|null The previous Post as an array or null if not found.
+     * @return array|Post|null The previous Post as an array or null if not found.
      */
-    function get_previous_post(array|null|Post $currentPost): ?array
+    function get_previous_post(array|null|Post $currentPost): array|null|Post
     {
         if (empty($post)) {
             return [];
@@ -188,7 +185,7 @@ if (!function_exists('get_previous_post')) {
             ->orderBy('id', 'DESC')
             ->first();
 
-        return $post ? (new PostResource($post))->toArray(request()) : [];
+        return Theme::parseParam($post);
     }
 }
 
