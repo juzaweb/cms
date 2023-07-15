@@ -198,9 +198,9 @@ if (!function_exists('get_next_post')) {
      *
      * @param  array|null  $post  The post object.
      *
-     * @return array|null An array containing the details of the next post, if one exists. Otherwise, null.
+     * @return array|Post|null An array containing the details of the next post, if one exists. Otherwise, null.
      */
-    function get_next_post(null|array $post): ?array
+    function get_next_post(null|array $post): mixed
     {
         $post = Post::selectFrontendBuilder()
             ->where('id', '>', Arr::get($post, 'id', 0))
@@ -211,10 +211,17 @@ if (!function_exists('get_next_post')) {
             return null;
         }
 
-        return (new PostResource($post))->toArray(request());
+        return Theme::parseParam($post);
     }
 }
 
+/**
+ * Get taxonomy
+ *
+* @param $taxonomy
+* @param $args
+* @return array|Post|null
+ */
 function get_taxonomy($taxonomy, $args = []): mixed
 {
     if (empty($taxonomy)) {
