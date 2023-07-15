@@ -9,7 +9,7 @@
                         <h4 class="border_section">{{ $title }}</h4>
 
                         <div class="row">
-                            @foreach($page as $post)
+                            @foreach($posts as $post)
                                 <div class="col-md-6">
                                     {{ get_template_part($post, 'content') }}
                                 </div>

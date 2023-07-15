@@ -8,26 +8,38 @@
  * @license    GNU V2
  */
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Menu;
+use Juzaweb\Backend\Models\Post;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Facades\ThemeConfig;
 use Juzaweb\CMS\Support\Theme\BackendMenuBuilder;
 use Juzaweb\CMS\Support\Theme\MenuBuilder;
 use TwigBridge\Facade\Twig;
 
-function body_class($class = '')
+function body_class($class = ''): string
 {
-    $class = trim('jw-theme jw-theme-body ' . $class);
+    $class = trim('jw-theme jw-theme-body '.$class);
 
     return apply_filters('theme.body_class', $class);
+}
+
+function view_render(string $view, array $params = [], ?string $theme = null): ViewContract|Factory|string
+{
+    return Theme::render($view, $params, $theme);
 }
 
 function theme_assets(string $path, string $theme = null): ?string
@@ -50,7 +62,7 @@ function plugin_assets(string $path, string $plugin = null): ?string
     return Plugin::assets($plugin, $path);
 }
 
-if (! function_exists('page_url')) {
+if (!function_exists('page_url')) {
     function page_url($slug): string
     {
         return url()->to($slug);
@@ -60,8 +72,8 @@ if (! function_exists('page_url')) {
 /**
  * Get particular theme all information.
  *
- * @param string $theme
- * @param string $path
+ * @param  string  $theme
+ * @param  string  $path
  * @return string
  */
 function theme_path(string $theme, string $path = ''): string
@@ -69,11 +81,11 @@ function theme_path(string $theme, string $path = ''): string
     return ThemeLoader::getThemePath($theme, $path);
 }
 
-if (! file_exists('jw_theme_info')) {
+if (!file_exists('jw_theme_info')) {
     /**
      * Get particular theme all information.
      *
-     * @param string|null $theme
+     * @param  string|null  $theme
      * @return null|\Noodlehaus\Config|Collection
      */
     function jw_theme_info(string $theme = null): Collection|\Noodlehaus\Config|null
@@ -86,7 +98,7 @@ if (! file_exists('jw_theme_info')) {
     }
 }
 
-if (! function_exists('jw_current_theme')) {
+if (!function_exists('jw_current_theme')) {
     /**
      * Get current active theme
      *
@@ -99,11 +111,11 @@ if (! function_exists('jw_current_theme')) {
     }
 }
 
-if (! function_exists('jw_theme_config')) {
+if (!function_exists('jw_theme_config')) {
     /**
      * Get particular theme all information.
      *
-     * @param string|null $theme
+     * @param  string|null  $theme
      * @return Collection
      */
     function jw_theme_config(string $theme = null): Collection
@@ -116,25 +128,25 @@ if (! function_exists('jw_theme_config')) {
     }
 }
 
-if (! function_exists('jw_home_page')) {
+if (!function_exists('jw_home_page')) {
     function jw_home_page()
     {
         return apply_filters('get_home_page', get_config('home_page'));
     }
 }
 
-if (! function_exists('get_name_template_part')) {
+if (!function_exists('get_name_template_part')) {
     /**
      * Get template part name.
      *
-     * @param string $type // Singular of post
-     * @param string $slug
-     * @param ?string $name
+     * @param  string  $type  // Singular of post
+     * @param  string  $slug
+     * @param ?string  $name
      * @return string
      */
     function get_name_template_part(string $type, string $slug, ?string $name = null): string
     {
-        $name = (string) $name;
+        $name = (string)$name;
 
         if ($name !== '') {
             $template = "{$slug}-{$name}";
@@ -154,11 +166,11 @@ if (! function_exists('get_name_template_part')) {
     }
 }
 
-if (! function_exists('jw_menu_items')) {
+if (!function_exists('jw_menu_items')) {
     /**
      * Get menu item in menu
      *
-     * @param Menu $menu
+     * @param  Menu  $menu
      * @return Collection
      */
     function jw_menu_items(Menu $menu): Collection
@@ -169,14 +181,14 @@ if (! function_exists('jw_menu_items')) {
     }
 }
 
-if (! function_exists('jw_page_menu')) {
+if (!function_exists('jw_page_menu')) {
     function jw_page_menu(?array $args): string
     {
         return trans('cms::app.menu_not_found');
     }
 }
 
-if (! function_exists('jw_nav_menu')) {
+if (!function_exists('jw_nav_menu')) {
     function jw_nav_menu(?array $args = [])
     {
         $defaults = [
@@ -217,7 +229,7 @@ if (! function_exists('jw_nav_menu')) {
     }
 }
 
-if (! function_exists('jw_nav_backend_menu')) {
+if (!function_exists('jw_nav_backend_menu')) {
     function jw_nav_backend_menu($args = [])
     {
         $defaults = [
@@ -256,28 +268,28 @@ if (! function_exists('jw_nav_backend_menu')) {
     }
 }
 
-if (! function_exists('set_theme_config')) {
+if (!function_exists('set_theme_config')) {
     function set_theme_config($key, $value)
     {
         return ThemeConfig::setConfig($key, $value);
     }
 }
 
-if (! function_exists('get_theme_config')) {
+if (!function_exists('get_theme_config')) {
     function get_theme_config($key, $default = null): null|array|string
     {
         return ThemeConfig::getConfig($key, $default);
     }
 }
 
-if (! function_exists('get_theme_mod')) {
+if (!function_exists('get_theme_mod')) {
     function get_theme_mod($key, $default = null): array|string
     {
         return ThemeConfig::getConfig($key, $default);
     }
 }
 
-if (! file_exists('get_menu_by_theme_location')) {
+if (!file_exists('get_menu_by_theme_location')) {
     function get_menu_by_theme_location($location)
     {
         $locations = get_theme_config('nav_location');
@@ -290,7 +302,7 @@ if (! file_exists('get_menu_by_theme_location')) {
     }
 }
 
-if (! function_exists('get_logo')) {
+if (!function_exists('get_logo')) {
     function get_logo($default = null): ?string
     {
         return upload_url(
@@ -300,7 +312,7 @@ if (! function_exists('get_logo')) {
     }
 }
 
-if (! function_exists('get_icon')) {
+if (!function_exists('get_icon')) {
     function get_icon($default = null): string
     {
         return upload_url(
@@ -310,31 +322,31 @@ if (! function_exists('get_icon')) {
     }
 }
 
-if (! function_exists('is_home')) {
+if (!function_exists('is_home')) {
     function is_home(): bool
     {
         return Route::currentRouteName() == 'home';
     }
 }
 
-if (! function_exists('jw_get_sidebar')) {
+if (!function_exists('jw_get_sidebar')) {
     function jw_get_sidebar($key): Collection
     {
         return HookAction::getSidebars($key);
     }
 }
 
-if (! function_exists('jw_get_widgets_sidebar')) {
+if (!function_exists('jw_get_widgets_sidebar')) {
     function jw_get_widgets_sidebar($key): Collection
     {
-        $content = get_theme_config('sidebar_' . $key, []);
+        $content = get_theme_config('sidebar_'.$key, []);
 
         return collect($content);
     }
 }
 
-if (! function_exists('dynamic_sidebar')) {
-    function dynamic_sidebar($key)
+if (!function_exists('dynamic_sidebar')) {
+    function dynamic_sidebar($key): Factory|ViewContract|string|Application
     {
         $sidebar = HookAction::getSidebars($key);
         if (empty($sidebar)) {
@@ -353,8 +365,8 @@ if (! function_exists('dynamic_sidebar')) {
     }
 }
 
-if (! function_exists('dynamic_block')) {
-    function dynamic_block($post, $key)
+if (!function_exists('dynamic_block')) {
+    function dynamic_block($post, $key): ViewContract|Factory|Application
     {
         $data = $post['metas']['block_content'][$key] ?? [];
         $keys = collect($data)->pluck('block')->toArray();
@@ -375,7 +387,7 @@ if (! function_exists('dynamic_block')) {
     }
 }
 
-if (! function_exists('installed_themes')) {
+if (!function_exists('installed_themes')) {
     function installed_themes(): array
     {
         $themes = ThemeLoader::all();
@@ -384,12 +396,12 @@ if (! function_exists('installed_themes')) {
     }
 }
 
-if (! function_exists('comment_template')) {
+if (!function_exists('comment_template')) {
     /**
      * Show comments frontend
      *
-     * @param \Juzaweb\CMS\Traits\PostTypeModel $post
-     * @param string|null $view
+     * @param  $post
+     * @param  string|null  $view
      * @return void
      */
     function comment_template($post, string $view = null): void
@@ -449,27 +461,21 @@ function theme_action($action): void
 /**
  * Loads a template part into a template.
  *
- * @param array $post
- * @param string $slug
- * @param string $name
- * @param array $args
- * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+ * @param  array|Post  $post
+ * @param  string  $slug
+ * @param  string|null  $name
+ * @param  array  $args
+ * @return Factory|View
  */
-function get_template_part($post, $slug, $name = null, $args = [])
+function get_template_part(array|Post $post, string $slug, ?string $name = null, array $args = []): Factory|View
 {
     do_action("get_template_part_{$slug}", $post, $slug, $name, $args);
 
-    $post = (array) $post;
-    $name = (string) $name;
     $type = $post ? Str::singular($post['type']) : 'none';
+
     $template = get_name_template_part($type, $slug, $name);
 
-    return Twig::display(
-        'theme::template-parts.'. $template,
-        [
-            'post' => $post,
-        ]
-    );
+    return view_render('theme::template-parts.'.$template, compact('post'));
 }
 
 function paginate_links($data, $view = null, $params = [])
@@ -478,12 +484,7 @@ function paginate_links($data, $view = null, $params = [])
         $view = 'cms::pagination';
     }
 
-    return Twig::display(
-        $view,
-        [
-            'data' => $data
-        ]
-    );
+    return Twig::display($view, compact('data', 'params'));
 }
 
 function theme_viewname($name)
@@ -526,12 +527,12 @@ function share_url($social, $url, $text = null): string
     };
 }
 
-if (! function_exists('get_thumbnail_size')) {
+if (!function_exists('get_thumbnail_size')) {
     /**
      * Get thumbnail size
      *
-     * @param string $postType
-     * @param array|null $thumbnailSizes
+     * @param  string  $postType
+     * @param  array|null  $thumbnailSizes
      * @return array{width: string,height:string}
      */
     function get_thumbnail_size(string $postType, ?array $thumbnailSizes = null): array
@@ -548,26 +549,24 @@ if (! function_exists('get_thumbnail_size')) {
     }
 }
 
-if (! function_exists('get_media_image_with_size')) {
+if (!function_exists('get_media_image_with_size')) {
     function get_media_image_with_size(string $path, string $size, string $type = 'url'): ?string
     {
         $filename = File::name($path);
+
         $path = str_replace($filename, "{$filename}_{$size}", $path);
 
-        return \Illuminate\Support\Facades\Storage::disk(
-            config('juzaweb.filemanager.disk')
-        )->{$type}($path);
+        return Storage::disk(config('juzaweb.filemanager.disk'))->{$type}($path);
     }
 }
 
-if (! function_exists('has_media_image_size')) {
+if (!function_exists('has_media_image_size')) {
     function has_media_image_size(string $path, string $size): bool
     {
         $filename = File::name($path);
+
         $path = str_replace($filename, "{$filename}_{$size}", $path);
 
-        return \Illuminate\Support\Facades\Storage::disk(
-            config('juzaweb.filemanager.disk')
-        )->exists($path);
+        return Storage::disk(config('juzaweb.filemanager.disk'))->exists($path);
     }
 }

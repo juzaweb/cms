@@ -2,14 +2,14 @@
 
 namespace Juzaweb\CMS\Http\Controllers;
 
-use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\View\View;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\Theme;
 use Juzaweb\CMS\Traits\ResponseMessage;
 use Symfony\Component\HttpFoundation\Response;
-use TwigBridge\Facade\Twig;
 
 class FrontendController extends Controller
 {
@@ -45,53 +45,8 @@ class FrontendController extends Controller
         return collect(HookAction::getPermalinks());
     }
 
-    protected function view($view, $params = [])
+    protected function view($view, $params = []): Factory|ViewContract|string
     {
-        switch ($this->template) {
-            case 'twig':
-                $params = $this->parseParamsFronend($params);
-
-                return apply_filters('theme.render_view', Twig::render($view, $params));
-            default:
-                return apply_filters('theme.render_view', view($view, $params));
-        }
-    }
-
-    protected function parseParamsFronend(array $params): array
-    {
-        if ($message = session('message')) {
-            $params['message'] = $message;
-        }
-
-        if ($status = session('status')) {
-            $params['status'] = $status;
-        }
-
-        foreach ($params as $key => $item) {
-            if (is_a($item, 'Illuminate\Support\ViewErrorBag')) {
-                continue;
-            }
-
-            if ($item instanceof Arrayable) {
-                $item = $item->toArray();
-                $params[$key] = $item;
-            }
-
-            if (!in_array(
-                gettype($item),
-                [
-                    'boolean',
-                    'integer',
-                    'string',
-                    'array',
-                    'double',
-                ]
-            )
-            ) {
-                unset($params[$key]);
-            }
-        }
-
-        return $params;
+        return view_render($view, $params);
     }
 }
