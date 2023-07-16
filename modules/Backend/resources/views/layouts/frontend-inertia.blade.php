@@ -9,9 +9,10 @@
     <link href="//www.gstatic.com" rel="dns-prefetch"/>
     <link href="//www.googletagmanager.com" rel="dns-prefetch"/>
 
-    @do_action('theme.header')
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
+    <script src="{{ mix('/js/app.js') }}" defer></script>
 
-    @yield('header')
+    @do_action('theme.header')
 
     @inertiaHead
 </head>
