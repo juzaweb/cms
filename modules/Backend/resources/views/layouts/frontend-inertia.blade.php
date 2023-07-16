@@ -10,7 +10,7 @@
     <link href="//www.googletagmanager.com" rel="dns-prefetch"/>
 
 {{--    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" />--}}
-    <script src="{{ asset('assets/js/app.js') }}" defer></script>
+{{--    <script src="{{ theme_assets('assets/js/app.js') }}" defer></script>--}}
 
     @do_action('theme.header')
 

@@ -23,9 +23,9 @@ return [
 
         'enabled' => true,
 
-        'url' => 'http://127.0.0.1:13714',
+        'url' => 'http://127.0.0.1:13714/render',
 
-        // 'bundle' => base_path('bootstrap/ssr/ssr.mjs'),
+        //'bundle' => base_path('public/jw-styles/themes/default-inertia/assets/js/ssr.js'),
 
     ],
 

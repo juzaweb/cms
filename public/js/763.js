@@ -1,0 +1,1 @@
+"use strict";exports.id=763,exports.ids=[763],exports.modules={763:(e,r,s)=>{s.r(r),s.d(r,{default:()=>d});var t=s(997);function d(){return(0,t.jsx)(t.Fragment,{children:(0,t.jsx)("h1",{children:"Welcome"})})}}};

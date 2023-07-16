@@ -1,13 +1,15 @@
 const path = require('path')
 const mix = require('laravel-mix')
 const nodeExternals = require('webpack-node-externals');
+const webpackConfig = require('./webpack.config')
 
 mix
     .options({manifest: false})
-    .ts('themes/default-inertia/assets/styles/js/ssr.js', 'public/jw-styles/themes/default-inertia/assets/js')
+    .js('resources/js/ssr.js', 'public/js')
     .react()
-    //.alias({'@': path.resolve('resources/js')})
+    .alias({'@': path.resolve('resources/js')})
     .webpackConfig({
+        //...webpackConfig,
         target: 'node',
         externals: [nodeExternals()],
     });
