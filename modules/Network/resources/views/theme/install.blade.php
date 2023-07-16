@@ -33,7 +33,8 @@
     <template id="theme-template">
         <div class="col-md-4">
             <div class="card">
-                <div class="height-200 d-flex flex-column jw__g13__head" style="background-image: url('{screenshot}')">
+                <div class="height-200 d-flex flex-column jw__g13__head" style="background-repeat: no-repeat;
+    background-size: 395px 200px;background-image: url('{screenshot}')">
                 </div>
 
                 <div class="card card-borderless mb-0">
@@ -62,7 +63,7 @@
 
         Dropzone.autoDiscover = false;
 
-        $(document).ready(function () {
+        $(function() {
             new Dropzone("#themeUploadForm", {
                 uploadMultiple: false,
                 parallelUploads: 5,

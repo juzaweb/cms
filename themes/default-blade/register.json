@@ -1,0 +1,79 @@
+{
+    "styles": {
+        "js": [
+            "assets/js/index.min.js"
+        ],
+        "css": [
+            "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,400&display=swap",
+            "assets/css/styles.min.css"
+        ]
+    },
+    "templates": {
+        "home": {
+            "label": "Home",
+            "view": "theme::templates.home",
+            "blocks": {
+                "content": {
+                    "label": "Content"
+                }
+            }
+        },
+        "contact": {
+            "label": "Contact",
+            "view": "theme::templates.contact"
+        }
+    },
+    "sidebars": {
+        "sidebar": {
+            "label": "Sidebar"
+        },
+        "footer_column_1": {
+            "label": "Footer column 1"
+        },
+        "footer_column_2": {
+            "label": "Footer column 2"
+        },
+        "footer_column_3": {
+            "label": "Footer column 3"
+        },
+        "footer_column_4": {
+            "label": "Footer column 4"
+        }
+    },
+    "widgets": {
+        "banner": {
+            "label": "Banner",
+            "description": "Banner sidebar",
+            "view": "theme::widgets.banner.show"
+        },
+        "popular": {
+            "label": "Popular",
+            "description": "Popular posts",
+            "view": "theme::widgets.popular.show"
+        }
+    },
+    "blocks": {
+        "news_slider": {
+            "label": "Post slider",
+            "description": "Posts slider carousel",
+            "view": "theme::widgets.news_slider.show"
+        },
+        "popular_news": {
+            "label": "Popular news",
+            "description": "Popular news",
+            "view": "theme::widgets.popular_news.show"
+        }
+    },
+    "nav_menus": {
+        "primary": {
+            "label": "Primary menu"
+        }
+    },
+    "configs": [
+        {
+            "type": "image",
+            "name": "footer_logo",
+            "label": "Footer Logo"
+        }
+    ]
+}

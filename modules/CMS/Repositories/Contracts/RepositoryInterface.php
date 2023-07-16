@@ -15,11 +15,6 @@ use Juzaweb\CMS\Repositories\Contracts\ValidatorException;
 interface RepositoryInterface
 {
     /**
-     * @return Builder
-     */
-    public function getQuery(): Builder;
-
-    /**
      * Retrieve first data of repository
      *
      * @param array $columns

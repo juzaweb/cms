@@ -140,9 +140,11 @@ return [
         | in order to be marked as safe.
         |
         */
-        'facades' => Facades::defaultTwigFacades()->merge([
-            //
-        ])->toArray(),
+        'facades' => Facades::defaultTwigFacades()->merge(
+            [
+                //
+            ]
+        )->toArray(),
 
         /*
         |--------------------------------------------------------------------------

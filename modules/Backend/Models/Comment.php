@@ -3,6 +3,7 @@
 namespace Juzaweb\Backend\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Models\Model;
 use Juzaweb\CMS\Models\User;
@@ -20,27 +21,29 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
  * @property int $object_id Post type ID
  * @property string $object_type Post type
  * @property string $status
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read \Juzaweb\Backend\Models\Post $post
  * @property-read User|null $user
- * @method static Builder|Comment newModelQuery()
- * @method static Builder|Comment newQuery()
+ * @method static Builder|Comment with(array $with)
  * @method static Builder|Comment query()
- * @method static Builder|Comment whereApproved()
- * @method static Builder|Comment whereContent($value)
- * @method static Builder|Comment whereCreatedAt($value)
- * @method static Builder|Comment whereEmail($value)
- * @method static Builder|Comment whereId($value)
- * @method static Builder|Comment whereName($value)
- * @method static Builder|Comment whereObjectId($value)
- * @method static Builder|Comment whereObjectType($value)
- * @method static Builder|Comment whereStatus($value)
- * @method static Builder|Comment whereUpdatedAt($value)
- * @method static Builder|Comment whereUserId($value)
- * @method static Builder|Comment whereWebsite($value)
+ * @method Builder|Comment newModelQuery()
+ * @method Builder|Comment newQuery()
+ * @method Builder|Comment query()
+ * @method Builder|Comment whereApproved()
+ * @method Builder|Comment whereContent($value)
+ * @method Builder|Comment whereCreatedAt($value)
+ * @method Builder|Comment whereEmail($value)
+ * @method Builder|Comment whereId($value)
+ * @method Builder|Comment whereName($value)
+ * @method Builder|Comment whereObjectId($value)
+ * @method Builder|Comment whereObjectType($value)
+ * @method Builder|Comment whereStatus($value)
+ * @method Builder|Comment whereUpdatedAt($value)
+ * @method Builder|Comment whereUserId($value)
+ * @method Builder|Comment whereWebsite($value)
  * @property int|null $site_id
- * @method static Builder|Comment whereSiteId($value)
+ * @method Builder|Comment whereSiteId($value)
  * @mixin \Eloquent
  */
 class Comment extends Model

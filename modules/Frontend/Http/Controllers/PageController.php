@@ -9,12 +9,17 @@ use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 
 class PageController extends FrontendController
 {
     protected array $themeRegister;
+
+    public function __construct(protected PostRepository $postRepository)
+    {
+    }
 
     public function index(Request $request, ...$slug)
     {
@@ -23,9 +28,11 @@ class PageController extends FrontendController
         /**
          * @var Post $page
          */
-        $page = Post::createFrontendDetailBuilder()
+        /*$page = Post::createFrontendDetailBuilder()
             ->where('slug', '=', $pageSlug)
-            ->firstOrFail();
+            ->firstOrFail();*/
+
+        $page = $this->postRepository->findBySlug($pageSlug);
 
         return $this->handlePage($request, $page, $slug);
     }
@@ -36,7 +43,7 @@ class PageController extends FrontendController
             /**
              * @var Post $page
              */
-            $page = Post::createFrontendDetailBuilder()->findOrFail($page);
+            $page = $this->postRepository->createFrontendDetailBuilder()->find($page);
 
             return $this->handlePage($request, $page);
         }
@@ -86,8 +93,8 @@ class PageController extends FrontendController
     }
 
     /**
-     * @param Post $page
-     * @param array $slug
+     * @param  Post  $page
+     * @param  array  $slug
      * @param $request
      * @return array
      */
@@ -99,7 +106,7 @@ class PageController extends FrontendController
             $config = get_configs(['title', 'description']);
 
             $params = [
-                'post' => (new PostResource($page))->toArray($request),
+                'post' => $page,
                 'title' => $config['title'],
                 'description' => $config['description'],
                 'slug' => $slug,
@@ -107,7 +114,7 @@ class PageController extends FrontendController
             ];
         } else {
             $params = [
-                'post' => (new PostResource($page))->toArray($request),
+                'post' => $page,
                 'title' => $page->title,
                 'description' => $page->description,
                 'slug' => $slug,
@@ -142,7 +149,8 @@ class PageController extends FrontendController
 
         switch ($item['type']) {
             case 'post_liked':
-                $query = Post::createFrontendBuilder();
+                //$query = Post::createFrontendBuilder();
+                $query = $this->postRepository->createSelectFrontendBuilder();
 
                 if (isset($item['post_type'])) {
                     $query->where('type', '=', $item['post_type']);
@@ -158,13 +166,11 @@ class PageController extends FrontendController
                 $paginate = $query->paginate(get_config('posts_per_page', 12))
                     ->appends(request()->query());
 
+                $this->postRepository->resetModel();
+
                 return PostResourceCollection::make($paginate)->response()->getData(true);
             case 'popular_posts':
-                return get_popular_posts(
-                    $item['post_type'] ?? null,
-                    $params['post'],
-                    $item['limit'] ?? 5
-                );
+                return get_popular_posts(Arr::get($item, 'post_type'), $params['post'], Arr::get($item, 'limit', 5));
             case 'related_posts':
                 return get_related_posts(
                     $params['post'],
@@ -195,7 +201,7 @@ class PageController extends FrontendController
         /* Get view default of theme */
         if (empty($view)) {
             $template = get_name_template_part('page', 'single');
-            $view = 'theme::template-parts.' . $template;
+            $view = 'theme::template-parts.'.$template;
 
             if (!view()->exists(theme_viewname($view))) {
                 $view = 'theme::template-parts.single';

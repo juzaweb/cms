@@ -11,10 +11,15 @@
 namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\CMS\Contracts\Theme\ThemeRender;
 use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
+use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 
 class LocalThemeRepository implements LocalThemeRepositoryContract
 {
@@ -31,6 +36,8 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
      * @var string
      */
     protected string $basePath;
+
+    protected Theme $currentTheme;
 
     public function __construct(Container $app, string $path)
     {
@@ -96,6 +103,15 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         throw new ThemeNotFoundException("Theme [{$name}] does not exist!");
     }
 
+    public function currentTheme(): Theme
+    {
+        if (isset($this->currentTheme)) {
+            return $this->currentTheme;
+        }
+
+        return $this->currentTheme = $this->findOrFail(jw_current_theme());
+    }
+
     public function all(bool $collection = false): array|Collection
     {
         return $this->scan($collection);
@@ -106,6 +122,25 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         $theme = $this->findOrFail($name);
 
         return $theme->delete();
+    }
+
+    public function render(string $view, array $params = [], ?string $theme = null): Factory|View|string|Response
+    {
+        $theme = $theme ? $this->findOrFail($theme) : $this->currentTheme();
+
+        return $this->createThemeRender($theme)->render($view, $params);
+    }
+
+    public function parseParam(mixed $param, ?string $theme = null): mixed
+    {
+        $theme = $theme ? $this->findOrFail($theme) : $this->currentTheme();
+
+        return $this->createThemeRender($theme)->parseParam($param);
+    }
+
+    protected function createThemeRender(ThemeInterface $theme): ThemeRender
+    {
+        return $this->app->make(ThemeRender::class, ['theme' => $theme]);
     }
 
     /**
