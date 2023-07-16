@@ -1,13 +1,13 @@
 import { Head } from '@inertiajs/react'
 
-export default function index({ posts }) {
+export default function index({ posts }: {posts: any}) {
     return (
         <>
             <Head title="Welcome" />
             <h1>Welcome</h1>
 
-            {posts.map((item) => {
-                return (<p>{item.title}</p>)
+            {posts.data.map((item: any) => {
+                return <p key={item.id}>{item.title}</p>
             })}
         </>
     )

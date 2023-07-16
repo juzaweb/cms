@@ -6,10 +6,7 @@ createServer(page =>
     createInertiaApp({
         page,
         render: ReactDOMServer.renderToString,
-        resolve: name => {
-            const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-            return pages[`./Pages/${name}.jsx`]
-        },
+        resolve: name => import(`./pages/${name}`),
         setup: ({ App, props }) => <App {...props} />,
     }),
 )
