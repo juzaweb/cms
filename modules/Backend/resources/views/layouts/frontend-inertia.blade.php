@@ -9,8 +9,8 @@
     <link href="//www.gstatic.com" rel="dns-prefetch"/>
     <link href="//www.googletagmanager.com" rel="dns-prefetch"/>
 
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
-    <script src="{{ mix('/js/app.js') }}" defer></script>
+{{--    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" />--}}
+    <script src="{{ asset('assets/js/app.js') }}" defer></script>
 
     @do_action('theme.header')
 

@@ -1,11 +1,14 @@
 import { Head } from '@inertiajs/react'
 
-export default function index() {
+export default function index({ posts }) {
     return (
         <>
             <Head title="Welcome" />
             <h1>Welcome</h1>
-            <p>welcome to your first Inertia app!</p>
+
+            {posts.map((item) => {
+                return (<p>{item.title}</p>)
+            })}
         </>
     )
 }

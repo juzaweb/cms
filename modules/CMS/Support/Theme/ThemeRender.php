@@ -16,6 +16,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Http\Resources\PostResource;
@@ -43,7 +44,7 @@ class ThemeRender implements ThemeRenderContract
 
         return match ($this->theme->getTemplate()) {
             'twig' => apply_filters('theme.render_view', Twig::display($view, $params)),
-            'inertia' => apply_filters('theme.render_view', Inertia::render($view, $params)),
+            'inertia' => apply_filters('theme.render_view', $this->inertiaRender($view, $params)),
             default => apply_filters('theme.render_view', view($view, $params)),
         };
     }
@@ -76,6 +77,13 @@ class ThemeRender implements ThemeRenderContract
             'twig' => $this->parseParamForTwig($param),
             default => $param,
         };
+    }
+
+    protected function inertiaRender(string $view, array $params = []): \Inertia\Response
+    {
+        $view = Str::replace('theme::', '', $view);
+
+        return Inertia::render($view, $params);
     }
 
     protected function parseParamForTwig($param)
