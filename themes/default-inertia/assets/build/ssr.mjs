@@ -11,12 +11,11 @@ async function resolvePageComponent(path, pages) {
   }
   return typeof page === "function" ? page() : page;
 }
-const appName = "Juzaweb";
 createServer(
   (page) => createInertiaApp({
     page,
     render: ReactDOMServer.renderToString,
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => `${title}`,
     resolve: (name) => resolvePageComponent(`./pages/${name}.tsx`, /* @__PURE__ */ Object.assign({ "./pages/index.tsx": () => import("./assets/index-78a3ff34.mjs") })),
     setup: ({ App, props }) => {
       return /* @__PURE__ */ jsx(App, { ...props });
