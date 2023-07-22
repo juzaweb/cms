@@ -9,7 +9,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "build": "vite build",
+        "build": "npm run theme-build",
+        "theme-build": "vite build",
         "ssr:build": "vite build && vite build --ssr",
         "ssr:preview": "npm run ssr:build && node bootstrap/ssr/ssr.mjs"
     },

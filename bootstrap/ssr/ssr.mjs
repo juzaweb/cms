@@ -11,11 +11,7 @@ async function resolvePageComponent(path, pages) {
   }
   return typeof page === "function" ? page() : page;
 }
-<<<<<<< HEAD
 const appName = "Juzaweb";
-=======
-const appName = {}.VITE_APP_NAME || "Laravel";
->>>>>>> master
 createServer(
   (page) => createInertiaApp({
     page,

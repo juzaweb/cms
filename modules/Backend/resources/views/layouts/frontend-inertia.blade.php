@@ -15,7 +15,7 @@
     @do_action('theme.header')
 
     @viteReactRefresh
-    @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+    @vite(['themes/default-inertia/vite.tsx', "themes/default-inertia/views/{$page['component']}.tsx"])
 
     @inertiaHead
 

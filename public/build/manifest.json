@@ -1,18 +1,18 @@
 {
-  "resources/js/app.tsx": {
-    "dynamicImports": [
-      "resources/js/pages/index.tsx"
-    ],
-    "file": "assets/app-0bef402f.js",
-    "isEntry": true,
-    "src": "resources/js/app.tsx"
-  },
-  "resources/js/pages/index.tsx": {
-    "file": "assets/index-83d0f894.js",
+  "themes/default-inertia/views/index.tsx": {
+    "file": "assets/index-048c029c.js",
     "imports": [
-      "resources/js/app.tsx"
+      "themes/default-inertia/vite.tsx"
     ],
     "isDynamicEntry": true,
-    "src": "resources/js/pages/index.tsx"
+    "src": "themes/default-inertia/views/index.tsx"
+  },
+  "themes/default-inertia/vite.tsx": {
+    "dynamicImports": [
+      "themes/default-inertia/views/index.tsx"
+    ],
+    "file": "assets/vite-e7e010da.js",
+    "isEntry": true,
+    "src": "themes/default-inertia/vite.tsx"
   }
 }
