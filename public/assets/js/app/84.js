@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[84],{84:(e,t,n)=>{n.r(t),n.d(t,{default:()=>c});var r=n(893),s=n(640);function c(e){var t=e.posts;return(0,r.jsxs)(r.Fragment,{children:[(0,r.jsx)(s.Fb,{title:"Welcome"}),(0,r.jsx)("h1",{children:"Welcome"}),t.data.map((function(e){return(0,r.jsx)("p",{children:e.title},e.id)}))]})}}}]);

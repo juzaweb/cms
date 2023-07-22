@@ -10,7 +10,7 @@
         "prod": "npm run production",
         "production": "mix --production",
         "build": "npm run theme-build",
-        "theme-build": "vite build",
+        "theme-build": "vite build --config themes/$npm_config_theme/vite.config.js",
         "ssr:build": "vite build && vite build --ssr",
         "ssr:preview": "npm run ssr:build && node bootstrap/ssr/ssr.mjs"
     },
