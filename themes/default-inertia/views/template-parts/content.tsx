@@ -12,11 +12,13 @@ export default function Content({ post }: {post: Post}) {
             </div>
 
             <div className="article__content">
-                {/*@foreach($categories as $category)
-                <div className="article__category">
-                    {{$category->name}}
-                </div>
-                @endforeach*/}
+                {post.taxonomies?.map((taxonomy) => {
+                    return (
+                        <div className="article__category">
+                            {taxonomy.name}
+                        </div>
+                    )
+                })}
 
                 <ul className="list-inline">
                     <li className="list-inline-item">
