@@ -15,7 +15,8 @@
     @do_action('theme.header')
 
     @viteReactRefresh
-    @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+
+    @vite(["themes/{$page['props']['current_theme']}/app.tsx", "themes/{$page['props']['current_theme']}/views/{$page['component']}.tsx"], "jw-styles/themes/{$page['props']['current_theme']}/build")
 
     @inertiaHead
 
@@ -58,11 +59,7 @@
 <body class="{{ $bodyClass ?? '' }}">
 @do_action('theme.after_body')
 
-@include('theme::header')
-
 @inertia
-
-@include('theme::footer')
 
 @do_action('theme.footer')
 

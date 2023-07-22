@@ -9,9 +9,15 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "build": "vite build",
-        "ssr:build": "vite build && vite build --ssr",
-        "ssr:preview": "npm run ssr:build && node bootstrap/ssr/ssr.mjs"
+        "ssr:preview": "npm run theme:ssr-build && node bootstrap/ssr/ssr.mjs",
+        "theme:dev": "npm run theme:run-dev",
+        "theme:run-dev": "vite --config themes/$npm_config_theme/vite.config.js",
+        "theme:build": "npm run theme:run-build",
+        "theme:run-build": "vite build --config themes/$npm_config_theme/vite.config.js",
+        "theme:ssr-build": "npm run theme:run-ssr-build",
+        "theme:run-ssr-build": "vite build --config themes/$npm_config_theme/vite.config.js && vite build --ssr --config themes/$npm_config_theme/vite.config.js --outDir themes/$npm_config_theme/assets/ssr",
+        "theme:ssr-preview": "npm run theme:run-ssr-preview",
+        "theme:run-ssr-preview": "npm run theme:ssr-build && node themes/$npm_config_theme/assets/ssr/ssr.mjs"
     },
     "devDependencies": {
         "@types/react": "^18.2.15",
