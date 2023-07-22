@@ -59,11 +59,7 @@
 <body class="{{ $bodyClass ?? '' }}">
 @do_action('theme.after_body')
 
-@include('theme::header')
-
 @inertia
-
-@include('theme::footer')
 
 @do_action('theme.footer')
 
