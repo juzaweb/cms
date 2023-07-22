@@ -10,14 +10,15 @@
       "themes/default-inertia/views/header.tsx",
       "themes/default-inertia/views/index.tsx",
       "themes/default-inertia/views/layouts/main.tsx",
-      "themes/default-inertia/views/search.tsx"
+      "themes/default-inertia/views/search.tsx",
+      "themes/default-inertia/views/template-parts/content.tsx"
     ],
-    "file": "assets/app-6642c8bb.js",
+    "file": "assets/app-00a0e6b0.js",
     "isEntry": true,
     "src": "themes/default-inertia/app.tsx"
   },
   "themes/default-inertia/views/footer.tsx": {
-    "file": "assets/footer-a111da1b.js",
+    "file": "assets/footer-3d5acf8b.js",
     "imports": [
       "themes/default-inertia/app.tsx"
     ],
@@ -25,7 +26,7 @@
     "src": "themes/default-inertia/views/footer.tsx"
   },
   "themes/default-inertia/views/header.tsx": {
-    "file": "assets/header-7c43f846.js",
+    "file": "assets/header-d7f04e73.js",
     "imports": [
       "themes/default-inertia/app.tsx"
     ],
@@ -33,10 +34,11 @@
     "src": "themes/default-inertia/views/header.tsx"
   },
   "themes/default-inertia/views/index.tsx": {
-    "file": "assets/index-2ef9c2b7.js",
+    "file": "assets/index-5c8edf69.js",
     "imports": [
       "themes/default-inertia/app.tsx",
       "themes/default-inertia/views/layouts/main.tsx",
+      "themes/default-inertia/views/template-parts/content.tsx",
       "themes/default-inertia/views/header.tsx",
       "themes/default-inertia/views/footer.tsx"
     ],
@@ -44,7 +46,7 @@
     "src": "themes/default-inertia/views/index.tsx"
   },
   "themes/default-inertia/views/layouts/main.tsx": {
-    "file": "assets/main-20206876.js",
+    "file": "assets/main-5ddc271f.js",
     "imports": [
       "themes/default-inertia/app.tsx",
       "themes/default-inertia/views/header.tsx",
@@ -54,11 +56,19 @@
     "src": "themes/default-inertia/views/layouts/main.tsx"
   },
   "themes/default-inertia/views/search.tsx": {
-    "file": "assets/search-b4b3b438.js",
+    "file": "assets/search-6473f913.js",
     "imports": [
       "themes/default-inertia/app.tsx"
     ],
     "isDynamicEntry": true,
     "src": "themes/default-inertia/views/search.tsx"
+  },
+  "themes/default-inertia/views/template-parts/content.tsx": {
+    "file": "assets/content-96bf5e66.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/content.tsx"
   }
 }
