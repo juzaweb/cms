@@ -74,7 +74,7 @@ class ThemeRender implements ThemeRenderContract
     public function parseParam($param): mixed
     {
         return match ($this->theme->getTemplate()) {
-            'twig' => $this->parseParamForTwig($param),
+            'twig', 'inertia' => $this->parseParamToArray($param),
             default => $param,
         };
     }
@@ -82,11 +82,11 @@ class ThemeRender implements ThemeRenderContract
     protected function inertiaRender(string $view, array $params = []): \Inertia\Response
     {
         $view = Str::replace('theme::', '', $view);
-
+        $view = Str::replace('.', '/', $view);
         return Inertia::render($view, $params);
     }
 
-    protected function parseParamForTwig($param)
+    protected function parseParamToArray($param)
     {
         if (is_a($param, 'Illuminate\Support\ViewErrorBag')) {
             return $param;
@@ -105,7 +105,7 @@ class ThemeRender implements ThemeRenderContract
         }
 
         if ($param instanceof EloquentCollection || $param instanceof LengthAwarePaginator) {
-            return $this->parseParamEloquentCollectionForTwig($param);
+            return $this->parseParamEloquentCollectionToArray($param);
         }
 
         if ($param instanceof Arrayable) {
@@ -129,7 +129,7 @@ class ThemeRender implements ThemeRenderContract
         return $param;
     }
 
-    protected function parseParamEloquentCollectionForTwig(EloquentCollection|LengthAwarePaginator $collection): array
+    protected function parseParamEloquentCollectionToArray(EloquentCollection|LengthAwarePaginator $collection): array
     {
         if ($collection->isEmpty()) {
             return $collection->toArray();

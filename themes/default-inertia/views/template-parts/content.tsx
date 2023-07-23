@@ -1,5 +1,5 @@
 import {__} from '@/helpers/functions'
-import {Post} from "../../../../resources/js/types/posts";
+import {Post} from "@/types/posts";
 import {Link} from "@inertiajs/react";
 
 export default function Content({ post }: {post: Post}) {
