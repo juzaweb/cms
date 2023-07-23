@@ -1,6 +1,7 @@
 import {__} from "@/helpers/functions";
+import OptionItem from "@/pages/customizer/components/option-item";
 
-export default function Index() {
+export default function Index({ panels }) {
     return (
         <>
             <div id="theme-editor-sidebar">
@@ -8,15 +9,12 @@ export default function Index() {
                     <header className="te-top-bar">
                         <div className="te-top-bar__list">
                             <div className="te-top-bar__item te-top-bar__item--fill">
-                                <button className="ui-button btn--plain te-panel__header-action"
-                                        onClick="window.location='{{ route('admin.themes') }}'">
-
+                                <button className="ui-button btn--plain te-panel__header-action" onClick="window.location='{{ route('admin.themes') }}'">
                                     <svg
                                         className="next-icon next-icon--size-20 next-icon--rotate-180 te-panel__header-action-icon">
                                         <use xmlnsXlink="http://www.w3.org/1999/xlink"
                                              xlinkHref="#next-chevron"></use>
                                     </svg>
-
                                 </button>
 
                                 <h2 className="ui-heading theme-editor__heading text-uppercase">
@@ -35,7 +33,7 @@ export default function Index() {
                             <div className="ui-stack-item ui-stack-item--fill">
                                 <section className="next-card theme-editor__card">
                                     <ul className="theme-editor-action-list theme-editor-action-list--divided theme-editor-action-list--rounded">
-
+                                        {panels.map((item) => <OptionItem item={item} key={item.key}></OptionItem>)}
                                     </ul>
                                 </section>
                             </div>

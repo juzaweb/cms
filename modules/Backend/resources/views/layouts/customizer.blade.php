@@ -1,7 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
-    <link rel="shortcut icon" href="{{ asset('jw-styles/juzaweb/images/brand/favicon.ico') }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>{{ trans('cms::app.customize_theme') }}</title>
@@ -11,6 +10,7 @@
 
     @include('cms::components.juzaweb_langs')
 
+    <link rel="shortcut icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('jw-styles/juzaweb/css/theme-editor.css') }}">
     <!--[if lt IE 9]>
     <script src="{{ asset('jw-styles/juzaweb/js/html5shiv.min.js') }}"></script>

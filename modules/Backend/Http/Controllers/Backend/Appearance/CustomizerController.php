@@ -24,7 +24,7 @@ class CustomizerController extends BackendController
 
         $currentTheme = jw_current_theme();
 
-        $panels = $this->getDataCustomize($currentTheme);
+        $panels = $this->getDataCustomize($currentTheme)->values();
 
         return $this->view(
             'cms::backend.customizer.index',
