@@ -20,4 +20,9 @@ export default defineConfig({
             '@': '/resources/js',
         },
     },
+    experimental: {
+        renderBuiltUrl(filename, { hostId, hostType, type }) {
+            return '/jw-styles/themes/default-inertia/build/' + filename
+        }
+    }
 });

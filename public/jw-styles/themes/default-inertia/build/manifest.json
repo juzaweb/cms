@@ -1,4 +1,7 @@
 {
+  "_functions-503419f4.js": {
+    "file": "assets/functions-503419f4.js"
+  },
   "themes/default-inertia/app.css": {
     "file": "assets/app-651fa515.css",
     "isEntry": true,
@@ -6,18 +9,63 @@
   },
   "themes/default-inertia/app.tsx": {
     "dynamicImports": [
+      "themes/default-inertia/views/auth/login.tsx",
+      "themes/default-inertia/views/auth/register.tsx",
+      "themes/default-inertia/views/components/comments.tsx",
+      "themes/default-inertia/views/components/menu_item.tsx",
       "themes/default-inertia/views/footer.tsx",
       "themes/default-inertia/views/header.tsx",
       "themes/default-inertia/views/index.tsx",
       "themes/default-inertia/views/layouts/main.tsx",
-      "themes/default-inertia/views/search.tsx"
+      "themes/default-inertia/views/search.tsx",
+      "themes/default-inertia/views/template-parts/components/related.tsx",
+      "themes/default-inertia/views/template-parts/content.tsx",
+      "themes/default-inertia/views/template-parts/single-page.tsx",
+      "themes/default-inertia/views/template-parts/single.tsx",
+      "themes/default-inertia/views/template-parts/taxonomy.tsx",
+      "themes/default-inertia/views/templates/home.tsx"
     ],
-    "file": "assets/app-6642c8bb.js",
+    "file": "assets/app-ea8d944e.js",
     "isEntry": true,
     "src": "themes/default-inertia/app.tsx"
   },
+  "themes/default-inertia/views/auth/login.tsx": {
+    "file": "assets/login-7e8b8a75.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/auth/login.tsx"
+  },
+  "themes/default-inertia/views/auth/register.tsx": {
+    "file": "assets/register-62072e4f.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/auth/register.tsx"
+  },
+  "themes/default-inertia/views/components/comments.tsx": {
+    "file": "assets/comments-cbe5efbd.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/components/comments.tsx"
+  },
+  "themes/default-inertia/views/components/menu_item.tsx": {
+    "file": "assets/menu_item-a362933f.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/components/menu_item.tsx"
+  },
   "themes/default-inertia/views/footer.tsx": {
-    "file": "assets/footer-a111da1b.js",
+    "file": "assets/footer-226275df.js",
     "imports": [
       "themes/default-inertia/app.tsx"
     ],
@@ -25,7 +73,7 @@
     "src": "themes/default-inertia/views/footer.tsx"
   },
   "themes/default-inertia/views/header.tsx": {
-    "file": "assets/header-7c43f846.js",
+    "file": "assets/header-d1048141.js",
     "imports": [
       "themes/default-inertia/app.tsx"
     ],
@@ -33,18 +81,20 @@
     "src": "themes/default-inertia/views/header.tsx"
   },
   "themes/default-inertia/views/index.tsx": {
-    "file": "assets/index-2ef9c2b7.js",
+    "file": "assets/index-f0cead88.js",
     "imports": [
       "themes/default-inertia/app.tsx",
       "themes/default-inertia/views/layouts/main.tsx",
+      "themes/default-inertia/views/template-parts/content.tsx",
       "themes/default-inertia/views/header.tsx",
-      "themes/default-inertia/views/footer.tsx"
+      "themes/default-inertia/views/footer.tsx",
+      "_functions-503419f4.js"
     ],
     "isDynamicEntry": true,
     "src": "themes/default-inertia/views/index.tsx"
   },
   "themes/default-inertia/views/layouts/main.tsx": {
-    "file": "assets/main-20206876.js",
+    "file": "assets/main-a22fc464.js",
     "imports": [
       "themes/default-inertia/app.tsx",
       "themes/default-inertia/views/header.tsx",
@@ -54,11 +104,65 @@
     "src": "themes/default-inertia/views/layouts/main.tsx"
   },
   "themes/default-inertia/views/search.tsx": {
-    "file": "assets/search-b4b3b438.js",
+    "file": "assets/search-749a27bf.js",
     "imports": [
       "themes/default-inertia/app.tsx"
     ],
     "isDynamicEntry": true,
     "src": "themes/default-inertia/views/search.tsx"
+  },
+  "themes/default-inertia/views/template-parts/components/related.tsx": {
+    "file": "assets/related-887a962e.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/components/related.tsx"
+  },
+  "themes/default-inertia/views/template-parts/content.tsx": {
+    "file": "assets/content-c9f3b053.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/content.tsx"
+  },
+  "themes/default-inertia/views/template-parts/single-page.tsx": {
+    "file": "assets/single-page-a754fa64.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/single-page.tsx"
+  },
+  "themes/default-inertia/views/template-parts/single.tsx": {
+    "file": "assets/single-3ea9f313.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/single.tsx"
+  },
+  "themes/default-inertia/views/template-parts/taxonomy.tsx": {
+    "file": "assets/taxonomy-1dbd2efe.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/taxonomy.tsx"
+  },
+  "themes/default-inertia/views/templates/home.tsx": {
+    "file": "assets/home-59accfca.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/templates/home.tsx"
   }
 }

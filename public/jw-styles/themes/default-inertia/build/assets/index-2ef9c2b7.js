@@ -1,1 +1,0 @@
-import{j as n,a as r,b as t}from"./app-6642c8bb.js";import o from"./main-20206876.js";import"./header-7c43f846.js";import"./footer-a111da1b.js";function m({title:e,description:i}){return n(o,{children:[r(t,{children:r("title",{children:e})}),r("h1",{children:"Welcome"}),r("p",{children:i})]})}export{m as default};
