@@ -1,18 +1,64 @@
 {
+  "themes/default-inertia/app.css": {
+    "file": "assets/app-651fa515.css",
+    "isEntry": true,
+    "src": "themes/default-inertia/app.css"
+  },
   "themes/default-inertia/app.tsx": {
     "dynamicImports": [
-      "themes/default-inertia/views/index.tsx"
+      "themes/default-inertia/views/footer.tsx",
+      "themes/default-inertia/views/header.tsx",
+      "themes/default-inertia/views/index.tsx",
+      "themes/default-inertia/views/layouts/main.tsx",
+      "themes/default-inertia/views/search.tsx"
     ],
-    "file": "assets/app-67c86501.js",
+    "file": "assets/app-6642c8bb.js",
     "isEntry": true,
     "src": "themes/default-inertia/app.tsx"
   },
-  "themes/default-inertia/views/index.tsx": {
-    "file": "assets/index-31d2d5ce.js",
+  "themes/default-inertia/views/footer.tsx": {
+    "file": "assets/footer-a111da1b.js",
     "imports": [
       "themes/default-inertia/app.tsx"
     ],
     "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/footer.tsx"
+  },
+  "themes/default-inertia/views/header.tsx": {
+    "file": "assets/header-7c43f846.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/header.tsx"
+  },
+  "themes/default-inertia/views/index.tsx": {
+    "file": "assets/index-2ef9c2b7.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "themes/default-inertia/views/layouts/main.tsx",
+      "themes/default-inertia/views/header.tsx",
+      "themes/default-inertia/views/footer.tsx"
+    ],
+    "isDynamicEntry": true,
     "src": "themes/default-inertia/views/index.tsx"
+  },
+  "themes/default-inertia/views/layouts/main.tsx": {
+    "file": "assets/main-20206876.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "themes/default-inertia/views/header.tsx",
+      "themes/default-inertia/views/footer.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/layouts/main.tsx"
+  },
+  "themes/default-inertia/views/search.tsx": {
+    "file": "assets/search-b4b3b438.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/search.tsx"
   }
 }

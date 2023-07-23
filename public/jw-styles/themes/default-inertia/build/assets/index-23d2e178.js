@@ -1,0 +1,1 @@
+import{j as i,a as e,b as t}from"./app-6cd78cf4.js";import n from"./main-83c6cb83.js";import"./header-b2ed46b6.js";function c({title:r}){return i(n,{children:[e(t,{children:e("title",{children:r})}),e("h1",{children:"Welcome"}),e("p",{children:"welcome to your first Inertia app!"})]})}export{c as default};

@@ -1,11 +1,11 @@
 export default function Header() {
     return (
         <>
-            <div className="loading-container">
+            {/*<div className="loading-container">
                 <div className="h-100 d-flex align-items-center justify-content-center">
                     <ul className="list-unstyled">
                         <li>
-                            <img src="/images/loading.png" alt="{ __('Loading') }}" height="100"/>
+                            <img src={ '/jw-styles/themes/default-inertia/assets/images/loading.png' } alt="{ __('Loading') }}" height="100"/>
                         </li>
 
                         <li>
@@ -18,21 +18,23 @@ export default function Header() {
                             </div>
                         </li>
                         <li>
-                            {/*<p>{{__('Loading')}}</p>*/}
+                            <p>{{__('Loading')}}</p>
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div>*/}
 
             <header className="bg-light">
                 <div className="navigation-wrap navigation-shadow bg-white">
                     <nav className="navbar navbar-hover navbar-expand-lg navbar-soft">
                         <div className="container">
+
                             <div className="offcanvas-header">
                                 <div data-toggle="modal" data-target="#modal_aside_right" className="btn-md">
                                     <span className="navbar-toggler-icon"></span>
                                 </div>
                             </div>
+
                             <figure className="mb-0 mx-auto">
                                 <a href="/">
                                     <img src="{{ get_logo() }}" alt="{{ config('title') }}" className="img-fluid logo"/>
@@ -61,7 +63,7 @@ export default function Header() {
                                                         <div className="col">
                                                             <input
                                                                 className="form-control border-secondary border-right-0 rounded-0"
-                                                                type="search" value="" placeholder="Search " name="q"
+                                                                type="search" placeholder="Search " name="q"
                                                                 id="example-search-input4" autoComplete="off"/>
                                                         </div>
 
@@ -83,14 +85,14 @@ export default function Header() {
                     </nav>
                 </div>
 
-                <div id="modal_aside_right" className="modal fixed-left fade" tabIndex="-1" role="dialog">
+                <div id="modal_aside_right" className="modal fixed-left fade" tabIndex={-1} role="dialog">
                     <div className="modal-dialog modal-dialog-aside" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <div className="widget__form-search-bar  ">
                                     <div className="row no-gutters">
                                         <div className="col">
-                                            <input className="form-control border-secondary border-right-0 rounded-0" value=""
+                                            <input className="form-control border-secondary border-right-0 rounded-0"
                                                    placeholder="Search"/>
                                         </div>
                                         <div className="col-auto">

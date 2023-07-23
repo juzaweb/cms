@@ -17,9 +17,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Response;
 use Juzaweb\Backend\Events\PostViewed;
-use Juzaweb\Backend\Http\Resources\CommentResource;
-use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Post;
@@ -35,7 +34,7 @@ class PostController extends FrontendController
     {
     }
 
-    public function index(...$slug): View|Factory|string
+    public function index(...$slug): View|Factory|string|Response
     {
         if (count($slug) > 1) {
             return $this->detail(...$slug);
@@ -57,7 +56,7 @@ class PostController extends FrontendController
         return $this->view('theme::index', compact('posts', 'title'));
     }
 
-    public function detail(...$slug): View|Factory|string
+    public function detail(...$slug): View|Factory|string|Response
     {
         do_action("frontend.post_type.detail", $slug);
 
