@@ -11,16 +11,12 @@
 
 use Juzaweb\Backend\Http\Controllers\Backend\Appearance\EditorController;
 use Juzaweb\Backend\Http\Controllers\Backend\ThemeController;
-use Juzaweb\Backend\Http\Controllers\Backend\RequirePluginController;
-use Juzaweb\Backend\Http\Controllers\Backend\ReadingController;
-use Juzaweb\Backend\Http\Controllers\Backend\WidgetController;
-use Juzaweb\Backend\Http\Controllers\Backend\MenuController;
 
 Route::group(
     ['prefix' => 'themes'],
     function () {
-        Route::get('/', 'Backend\ThemeController@index')->name('admin.themes');
-        Route::get('/get-data', 'Backend\ThemeController@getDataTheme')->name('admin.themes.get-data');
+        Route::get('/', [ThemeController::class, 'index'])->name('admin.themes');
+        Route::get('/get-data', [ThemeController::class, 'getDataTheme'])->name('admin.themes.get-data');
         Route::get('/require-plugins', 'Backend\RequirePluginController@index')->name('admin.themes.require-plugins');
         Route::post('/bulk-actions', 'Backend\ThemeController@bulkActions')->name('admin.themes.bulk-actions');
 
