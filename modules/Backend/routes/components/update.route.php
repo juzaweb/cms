@@ -8,21 +8,23 @@
  * @license    GNU V2
  */
 
+use Juzaweb\Backend\Http\Controllers\Backend\UpdateController;
+
 Route::group(
     ['prefix' => 'updates'],
     function () {
-        Route::get('/', 'Backend\UpdateController@index')->name('admin.update');
-        Route::get('check-update', 'Backend\UpdateController@checkUpdate')->name('admin.update.check');
-        Route::get('process/{type}', 'Backend\UpdateController@update')->name('admin.update.process');
+        Route::get('/', [UpdateController::class, 'index'])->name('admin.update');
+        Route::get('check-update', [UpdateController::class, 'checkUpdate'])->name('admin.update.check');
+        Route::get('process/{type}', [UpdateController::class, 'update'])->name('admin.update.process');
 
-        Route::get('get-plugins', 'Backend\UpdateController@pluginDatatable')->name('admin.update.plugins');
-        Route::get('get-themes', 'Backend\UpdateController@themeDatatable')->name('admin.update.themes');
+        Route::get('get-plugins', [UpdateController::class, 'pluginDatatable'])->name('admin.update.plugins');
+        Route::get('get-themes', [UpdateController::class, 'themeDatatable'])->name('admin.update.themes');
     }
 );
 
-Route::post('update/success', 'Backend\UpdateController@updateSuccess')
+Route::post('update/success', [UpdateController::class, 'updateSuccess'])
     ->name('admin.update.success');
-Route::post('update/{type}/{step}', 'Backend\UpdateController@updateStep')
+Route::post('update/{type}/{step}', [UpdateController::class, 'updateStep'])
     ->where('step', '[0-9]+')->name('admin.update.step');
 
 Route::post(
