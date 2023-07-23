@@ -7,9 +7,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $page['props']['title'] ?? '' }}</title>
-    <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap"/>
 
+    <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}"/>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap"/>
 
     @include('cms::components.juzaweb_langs')
 

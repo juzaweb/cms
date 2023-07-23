@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
 use Illuminate\Http\Request;
 use Juzaweb\CMS\Abstracts\Action;

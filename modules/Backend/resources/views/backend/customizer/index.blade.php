@@ -81,7 +81,7 @@
     </div>
 
 
-    @include('cms::backend.editor.preview_page')
+    @include('cms::backend.customizer.preview_page')
 
     <div class="theme-editor__spinner" component="UI.Spinner">
         <div class="next-spinner">
@@ -91,7 +91,7 @@
 
 </main>
 
-@include('cms::backend.editor.components.global_icon')
+@include('cms::backend.customizer.components.global_icon')
 
 <div>
     <div class="section-footer">

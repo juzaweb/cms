@@ -9,14 +9,15 @@
  * Github: https://juzaweb.com/cms
  */
 
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\CustomizerController;
 use Juzaweb\Backend\Http\Controllers\Backend\Appearance\EditorController;
 use Juzaweb\Backend\Http\Controllers\Backend\Appearance\RequirePluginController;
 use Juzaweb\Backend\Http\Controllers\Backend\Appearance\SettingController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\ThemeController;
 use Juzaweb\Backend\Http\Controllers\Backend\Appearance\ThemeInstallController;
 use Juzaweb\Backend\Http\Controllers\Backend\MenuController;
 use Juzaweb\Backend\Http\Controllers\Backend\Setting\PermalinkController;
 use Juzaweb\Backend\Http\Controllers\Backend\Setting\ReadingController;
-use Juzaweb\Backend\Http\Controllers\Backend\ThemeController;
 use Juzaweb\Backend\Http\Controllers\Backend\WidgetController;
 
 Route::group(
@@ -49,6 +50,14 @@ Route::group(
     function () {
         Route::get('/', [SettingController::class, 'index'])->name('admin.theme.setting');
         Route::post('/', [SettingController::class, 'save']);
+    }
+);
+
+Route::group(
+    ['prefix' => 'theme/customizer'],
+    function () {
+        Route::get('/', [CustomizerController::class, 'index'])->name('admin.theme.customizer');
+        Route::post('/', [CustomizerController::class, 'save']);
     }
 );
 

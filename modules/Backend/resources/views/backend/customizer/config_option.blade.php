@@ -4,7 +4,7 @@
             <section class="next-card theme-editor__card">
                 <ul class="theme-editor-action-list theme-editor-action-list--divided theme-editor-action-list--rounded">
                     @foreach($panels as $key => $panel)
-                        @component('cms::backend.editor.components.action_item', [
+                        @component('cms::backend.customizer.components.action_item', [
                             'title' => $panel->get('title'),
                             'key' => $key,
                             'id' => 'panel-' . $key,

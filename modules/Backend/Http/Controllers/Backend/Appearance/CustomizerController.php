@@ -1,30 +1,40 @@
 <?php
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Inertia\Inertia;
+use Inertia\Response;
 use Juzaweb\CMS\Facades\ThemeConfig;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\Theme\Customize;
 use Juzaweb\CMS\Support\Theme\CustomizeControl;
 
-class ThemeEditorController extends BackendController
+class CustomizerController extends BackendController
 {
-    public function index()
-    {
-        $currentTheme = jw_current_theme();
-        $panels = $this->getDataCustomize($currentTheme);
+    protected string $template = 'inertia';
 
-        return view(
-            'cms::backend.editor.index',
+    public function index(): View|Response
+    {
+        Inertia::setRootView('cms::layouts.customizer');
+
+        $currentTheme = jw_current_theme();
+
+        $panels = $this->getDataCustomize($currentTheme)->values();
+
+        return $this->view(
+            'cms::backend.customizer.index',
             [
                 'panels' => $panels,
             ]
         );
     }
 
-    public function save(Request $request)
+    public function save(Request $request): JsonResponse|RedirectResponse
     {
         $settings = $request->post('setting', []);
         if ($settings) {
@@ -46,7 +56,7 @@ class ThemeEditorController extends BackendController
         );
     }
 
-    protected function getDataCustomize($currentTheme)
+    protected function getDataCustomize($currentTheme): Collection
     {
         $customize = new Customize();
         $customize->addSection(
