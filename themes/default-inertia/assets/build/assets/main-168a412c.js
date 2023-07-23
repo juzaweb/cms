@@ -1,1 +1,0 @@
-import{a,F as t,j as r}from"./app-379a85f4.js";import e from"./header-cadac301.js";import m from"./footer-b59bd481.js";function f({children:o}){return a(t,{children:[r(e,{}),o,r(m,{})]})}export{f as default};

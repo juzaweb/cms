@@ -46,9 +46,8 @@ class ThemePublishCommand extends Command
         $buildFolder = ThemeLoader::getThemePath($theme).'/assets/build';
         $publicBuildFolder = ThemeLoader::publicPath($theme).'/build';
 
-        if (!File::isDirectory($publicBuildFolder)) {
-            File::makeDirectory($publicBuildFolder, 0755, true, true);
-        }
+        File::deleteDirectory($publicBuildFolder, true);
+        File::makeDirectory($publicBuildFolder, 0755, true, true);
 
         File::copyDirectory($buildFolder, $publicBuildFolder);
     }
