@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Inertia\Response;
 use Juzaweb\CMS\Contracts\BackendMessageContract;
 use Juzaweb\CMS\Contracts\JuzawebApiContract;
 use Juzaweb\CMS\Facades\CacheGroup;
-use Juzaweb\CMS\Facades\Theme;
-use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Facades\Plugin;
+use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Facades\ThemeLoader;
+use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\ArrayPagination;
 use Juzaweb\CMS\Version;
 
@@ -24,17 +25,18 @@ class ThemeController extends BackendController
     protected JuzawebApiContract $api;
     protected BackendMessageContract $message;
 
-    public function __construct(
-        JuzawebApiContract $api,
-        BackendMessageContract $message
-    ) {
+    //protected string $template = 'inertia';
+
+    public function __construct(JuzawebApiContract $api, BackendMessageContract $message)
+    {
         $this->api = $api;
         $this->message = $message;
     }
 
-    public function index(): View
+    public function index(): View|Response
     {
         global $jw_user;
+
         if (!$jw_user->can('themes.index')) {
             abort(403);
         }
@@ -42,7 +44,7 @@ class ThemeController extends BackendController
         $activated = jw_current_theme();
         $currentTheme = ThemeLoader::getThemeInfo($activated);
 
-        return view(
+        return $this->view(
             'cms::backend.theme.index',
             [
                 'title' => trans('cms::app.themes'),

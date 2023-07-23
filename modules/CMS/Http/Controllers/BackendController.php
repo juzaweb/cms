@@ -17,6 +17,7 @@ namespace Juzaweb\CMS\Http\Controllers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Inertia\Response;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Traits\ResponseMessage;
 
@@ -36,7 +37,7 @@ class BackendController extends Controller
         return parent::callAction($method, $parameters);
     }
 
-    protected function view(?string $view = null, array $data = []): View|\Inertia\Response
+    protected function view(?string $view = null, array $data = []): View|Response
     {
         return match ($this->template) {
             'inertia' => $this->inertiaViewRender($view, $data),
@@ -44,9 +45,10 @@ class BackendController extends Controller
         };
     }
 
-    protected function inertiaViewRender(?string $view = null, array $data = []): \Inertia\Response
+    protected function inertiaViewRender(?string $view = null, array $data = []): Response
     {
         $view = Str::replace('cms::backend.', '', $view);
+        $view = Str::replace('.', '/', $view);
         return Inertia::render($view, $data);
     }
 

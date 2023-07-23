@@ -54,6 +54,7 @@ class Kernel extends HttpKernel
         'admin' => [
             'web',
             \Juzaweb\CMS\Http\Middleware\Admin::class,
+            \Juzaweb\Backend\Http\Middleware\HandleInertiaRequests::class,
         ],
 
         'theme' => [

@@ -4,6 +4,7 @@ namespace Juzaweb\CMS\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use Juzaweb\CMS\Contracts\ThemeLoaderContract;
+use Noodlehaus\Config;
 
 /**
  * @method static void set(string $theme)
@@ -11,7 +12,7 @@ use Juzaweb\CMS\Contracts\ThemeLoaderContract;
  * @method static string getPath(string $theme = null, $path = '')
  * @method static string getThemePath(string $theme = null, $path = '')
  * @method static bool|Config getInfo(string $theme)
- * @method static \Illuminate\Support\Collection getThemeInfo(string $theme)
+ * @method static bool|Config getThemeInfo(string $theme)
  * @method static string getScreenshot(string $theme)
  * @method static mixed get(string $theme)
  * @method static string assets(string $path, $theme = null, $secure = null)

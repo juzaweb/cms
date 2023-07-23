@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $page['pr'] ?? '' }}</title>
+    <title>{{ $page['props']['title'] ?? '' }}</title>
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap"/>
 
@@ -17,7 +17,7 @@
 
     @viteReactRefresh
 
-    @vite(["resources/js/app.tsx", "resources/css/app.css", "resources/pages/{$page['component']}.tsx"])
+    @vite(["resources/js/app.tsx", "resources/css/app.css", "resources/js/pages/{$page['component']}.tsx"])
 
     @inertiaHead
 </head>
@@ -63,7 +63,7 @@
                         'admin',
                          [
                             [
-                                'title' => $title
+                                'title' => $page['props']['title'] ?? '',
                             ]
                         ]
                     )
@@ -72,7 +72,7 @@
                 <div class="mb-3"></div>
             @endif
 
-            <h4 class="font-weight-bold ml-3 text-capitalize">{{ $title }}</h4>
+            <h4 class="font-weight-bold ml-3 text-capitalize">{{ $page['props']['title'] ?? '' }}</h4>
 
             <div class="juzaweb__utils__content">
 
