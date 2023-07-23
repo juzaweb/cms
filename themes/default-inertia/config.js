@@ -14,6 +14,7 @@ export default defineConfig({
     ],
     build: {
         outDir: path.resolve(__dirname, 'assets/build'),
+        modulePreload: false, // if true, assets duplicate load error
     },
     resolve: {
         alias: {
