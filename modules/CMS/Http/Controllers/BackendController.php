@@ -14,12 +14,20 @@
 
 namespace Juzaweb\CMS\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\CMS\Traits\ResponseMessage;
 
 class BackendController extends Controller
 {
     use ResponseMessage;
+
+    /**
+     * @var string $template Support blade,inertia
+     */
+    protected string $template = 'blade';
 
     public function callAction($method, $parameters)
     {
@@ -28,10 +36,24 @@ class BackendController extends Controller
         return parent::callAction($method, $parameters);
     }
 
+    protected function view(?string $view = null, array $data = []): View|\Inertia\Response
+    {
+        return match ($this->template) {
+            'inertia' => $this->inertiaViewRender($view, $data),
+            default => view($view, $data),
+        };
+    }
+
+    protected function inertiaViewRender(?string $view = null, array $data = []): \Inertia\Response
+    {
+        $view = Str::replace('cms::backend.', '', $view);
+        return Inertia::render($view, $data);
+    }
+
     protected function addBreadcrumb(array $item, $name = 'admin'): void
     {
         add_filters(
-            $name . '_breadcrumb',
+            $name.'_breadcrumb',
             function ($items) use ($item) {
                 $items[] = $item;
 
