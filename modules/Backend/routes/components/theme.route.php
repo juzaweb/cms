@@ -10,84 +10,83 @@
  */
 
 use Juzaweb\Backend\Http\Controllers\Backend\Appearance\EditorController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\RequirePluginController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\SettingController;
+use Juzaweb\Backend\Http\Controllers\Backend\Appearance\ThemeInstallController;
+use Juzaweb\Backend\Http\Controllers\Backend\MenuController;
+use Juzaweb\Backend\Http\Controllers\Backend\Setting\PermalinkController;
+use Juzaweb\Backend\Http\Controllers\Backend\Setting\ReadingController;
 use Juzaweb\Backend\Http\Controllers\Backend\ThemeController;
+use Juzaweb\Backend\Http\Controllers\Backend\WidgetController;
 
 Route::group(
     ['prefix' => 'themes'],
     function () {
         Route::get('/', [ThemeController::class, 'index'])->name('admin.themes');
         Route::get('/get-data', [ThemeController::class, 'getDataTheme'])->name('admin.themes.get-data');
-        Route::get('/require-plugins', 'Backend\RequirePluginController@index')->name('admin.themes.require-plugins');
-        Route::post('/bulk-actions', 'Backend\ThemeController@bulkActions')->name('admin.themes.bulk-actions');
+        Route::post('/bulk-actions', [ThemeController::class, 'bulkActions'])->name('admin.themes.bulk-actions');
 
-        Route::get(
-            '/require-plugins/get-data',
-            'Backend\RequirePluginController@getData'
-        )->name('admin.themes.require-plugins.get-data');
+        Route::get('/require-plugins', [RequirePluginController::class, 'index'])->name('admin.themes.require-plugins');
+        Route::get('/require-plugins/get-data', [RequirePluginController::class, 'getData'])
+            ->name('admin.themes.require-plugins.get-data');
 
-        Route::delete('/delete', 'Backend\ThemeController@delete')->name('admin.themes.delete');
-        Route::post('/activate', 'Backend\ThemeController@activate')->name('admin.themes.activate');
+        //Route::delete('/delete', [ThemeController::class, 'delete'])->name('admin.themes.delete');
+        Route::post('/activate', [ThemeController::class, 'activate'])->name('admin.themes.activate');
     }
 );
 
 Route::group(
     ['prefix' => 'theme/install'],
     function () {
-        Route::get('/', 'Backend\ThemeInstallController@index')->name('admin.theme.install');
-        Route::get('all', 'Backend\ThemeInstallController@getData')->name('admin.theme.install.all');
-        Route::post('upload', 'Backend\ThemeInstallController@upload')->name('admin.theme.install.upload');
+        Route::get('/', [ThemeInstallController::class, 'index'])->name('admin.theme.install');
+        Route::get('all', [ThemeInstallController::class, 'getData'])->name('admin.theme.install.all');
+        Route::post('upload', [ThemeInstallController::class, 'upload'])->name('admin.theme.install.upload');
     }
 );
 
 Route::group(
     ['prefix' => 'theme/setting'],
     function () {
-        Route::get(
-            '/',
-            'Backend\Appearance\SettingController@index'
-        )->name('admin.theme.setting');
-
-        Route::post('/', 'Backend\Appearance\SettingController@save');
+        Route::get('/', [SettingController::class, 'index'])->name('admin.theme.setting');
+        Route::post('/', [SettingController::class, 'save']);
     }
 );
 
 Route::group(
     ['prefix' => 'reading'],
     function () {
-        Route::get('/', 'Backend\ReadingController@index')->name('admin.reading');
-
-        Route::post('/save', 'Backend\ReadingController@save')->name('admin.reading.save');
+        Route::get('/', [ReadingController::class, 'index'])->name('admin.reading');
+        Route::post('/save', [ReadingController::class, 'save'])->name('admin.reading.save');
     }
 );
 
 Route::group(
     ['prefix' => 'permalinks'],
     function () {
-        Route::get('/', 'Backend\PermalinkController@index')->name('admin.permalink');
-
-        Route::post('/save', 'Backend\PermalinkController@save')->name('admin.permalink.save');
+        Route::get('/', [PermalinkController::class, 'index'])->name('admin.permalink');
+        Route::post('/save', [PermalinkController::class, 'save'])->name('admin.permalink.save');
     }
 );
 
 Route::group(
     ['prefix' => 'menus'],
     function () {
-        Route::get('/', 'Backend\MenuController@index')->name('admin.menu');
-        Route::get('/{id}', 'Backend\MenuController@index')->name('admin.menu.id');
-        Route::post('/store', 'Backend\MenuController@store')->name('admin.menu.store');
-        Route::put('/{id}', 'Backend\MenuController@update')->name('admin.menu.update');
-        Route::delete('/{id}', 'Backend\MenuController@destroy')->name('admin.menu.destroy');
-        Route::post('/add-item', 'Backend\MenuController@addItem')->name('admin.menu.add-item');
+        Route::get('/', [MenuController::class, 'index'])->name('admin.menu');
+        Route::get('/{id}', [MenuController::class, 'index'])->name('admin.menu.id');
+        Route::post('/store', [MenuController::class, 'store'])->name('admin.menu.store');
+        Route::put('/{id}', [MenuController::class, 'update'])->name('admin.menu.update');
+        Route::delete('/{id}', [MenuController::class, 'destroy'])->name('admin.menu.destroy');
+        Route::post('/add-item', [MenuController::class, 'addItem'])->name('admin.menu.add-item');
     }
 );
 
 Route::group(
     ['prefix' => 'widgets'],
     function () {
-        Route::get('/', 'Backend\WidgetController@index')->name('admin.widget');
-        Route::get('/get-item', 'Backend\WidgetController@getWidgetItem')->name('admin.widget.get-item');
-        Route::put('/{key}', 'Backend\WidgetController@update')->name('admin.widget.update');
-        Route::get('/form/{key}', 'Backend\WidgetController@getWidgetForm')->name('admin.widget.get-form');
+        Route::get('/', [WidgetController::class, 'index'])->name('admin.widget');
+        Route::get('/get-item', [WidgetController::class, 'getWidgetItem'])->name('admin.widget.get-item');
+        Route::put('/{key}', [WidgetController::class, 'update'])->name('admin.widget.update');
+        Route::get('/form/{key}', [WidgetController::class, 'getWidgetForm'])->name('admin.widget.get-form');
     }
 );
 

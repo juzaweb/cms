@@ -63,7 +63,7 @@
             </div>`;
         }
 
-        var listView = new JuzawebListView({
+        const listView = new JuzawebListView({
             url: "{{ route('admin.theme.install.all') }}",
             list: "#theme-list",
             page_size: 9,

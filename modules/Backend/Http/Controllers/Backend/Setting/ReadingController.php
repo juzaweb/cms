@@ -8,10 +8,12 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Setting;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
+use Juzaweb\Backend\Http\Requests\Setting\ReadingSettingRequest;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class ReadingController extends BackendController
@@ -28,16 +30,8 @@ class ReadingController extends BackendController
         );
     }
 
-    public function save(Request $request)
+    public function save(ReadingSettingRequest $request): JsonResponse|RedirectResponse
     {
-        $request->validate(
-            [
-                'show_on_front' => 'required|string|in:posts,page',
-                'home_page' => 'required_if:show_on_front,page',
-                'post_page' => 'string|nullable',
-            ]
-        );
-
         $settings = $request->only(
             [
                 'show_on_front',

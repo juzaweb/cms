@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\Backend\Http\Controllers\Backend;
+namespace Juzaweb\Backend\Http\Controllers\Backend\Appearance;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -40,10 +40,7 @@ class ThemeInstallController extends BackendController
             ]
         );
 
-        return view(
-            'cms::backend.theme.install',
-            compact('title')
-        );
+        return $this->view('cms::backend.theme.install', compact('title'));
     }
 
     public function getData(Request $request, JuzawebApiContract $api): object|array
