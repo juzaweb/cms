@@ -1,4 +1,7 @@
+import {usePage} from "@inertiajs/react";
+
 export default function Footer() {
+    const { config } = usePage().props;
     return (
         <>
             <section className="wrapper__section p-0">
@@ -29,7 +32,7 @@ export default function Footer() {
                                     <div className="row">
                                         <div className="col-md-4">
                                             <figure className="image-logo">
-                                                <img src="{{ get_logo() }}" alt="" className="logo-footer"/>
+                                                <img src={config.logo} alt="" className="logo-footer"/>
                                             </figure>
                                         </div>
 
@@ -84,7 +87,7 @@ export default function Footer() {
                                                 <li className="list-inline-item">
                                                     <span>
                                                         Copyright © 2021
-                                                        <a href="#"></a>
+                                                        <a href="#">{config.title}</a>
                                                     </span>
                                                 </li>
                                             </ul>

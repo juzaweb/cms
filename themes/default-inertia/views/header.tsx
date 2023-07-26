@@ -1,4 +1,10 @@
+import {url} from "@/helpers/functions";
+import {Link} from "@inertiajs/react";
+import {usePage} from "@inertiajs/react";
+
 export default function Header() {
+    const { config } = usePage().props;
+
     return (
         <>
             {/*<div className="loading-container">
@@ -36,14 +42,12 @@ export default function Header() {
                             </div>
 
                             <figure className="mb-0 mx-auto">
-                                <a href="/">
-                                    <img src="{{ get_logo() }}" alt="{{ config('title') }}" className="img-fluid logo"/>
-                                </a>
+                                <Link href={"/"}>
+                                    <img src={config.logo} alt={config.title} className="img-fluid logo"/>
+                                </Link>
                             </figure>
 
                             <div className="collapse navbar-collapse justify-content-between" id="main_nav99">
-
-
 
                                 <ul className="navbar-nav ">
                                     <li className="nav-item search hidden-xs hidden-sm ">
@@ -56,7 +60,8 @@ export default function Header() {
                                 <div className="top-search navigation-shadow">
                                     <div className="container">
                                         <div className="input-group ">
-                                            <form action="{{ url('search') }}">
+                                            <form action={ url('search') } >
+
                                                 <input type="hidden" name="type" value="posts"/>
 
                                                     <div className="row no-gutters mt-3">
@@ -108,8 +113,6 @@ export default function Header() {
                             </div>
                             <div className="modal-body">
                                 <nav className="list-group list-group-flush">
-
-
 
                                 </nav>
                             </div>

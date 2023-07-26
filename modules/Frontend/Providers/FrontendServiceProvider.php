@@ -19,9 +19,9 @@ class FrontendServiceProvider extends ServiceProvider
         //
     }
 
-    public function register()
+    public function register(): void
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'cms');
+        //$this->loadViewsFrom(__DIR__.'/../resources/views', 'cms');
         //$this->app->register(RouteServiceProvider::class);
 
         $this->mergeConfigFrom(__DIR__.'/../config/theme.php', 'theme');

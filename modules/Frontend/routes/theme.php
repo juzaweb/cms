@@ -23,20 +23,11 @@ use Juzaweb\Frontend\Http\Controllers\PostSitemapController;
 
 Auth::routes();
 
-Route::get(
-    'sitemap.xml',
-    [SitemapController::class, 'index']
-)->name('sitemap.index');
+Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
 
-Route::get(
-    'sitemap-{type}-{page}.xml',
-    [PostSitemapController::class, 'index']
-)->name('sitemap.post_type.index');
+Route::get('sitemap-{type}-{page}.xml', [PostSitemapController::class, 'index'])->name('sitemap.post_type.index');
 
-Route::get(
-    'sitemap/pages.xml',
-    [SitemapController::class, 'pages']
-)->name('sitemap.pages');
+Route::get('sitemap/pages.xml', [SitemapController::class, 'pages'])->name('sitemap.pages');
 
 Route::get(
     'sitemap/{type}/page-{page}.xml',
