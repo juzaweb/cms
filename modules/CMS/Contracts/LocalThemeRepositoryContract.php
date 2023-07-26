@@ -14,8 +14,12 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Inertia\Response;
+use Juzaweb\CMS\Support\LocalThemeRepository;
 use Juzaweb\CMS\Support\Theme;
 
+/**
+* @see LocalThemeRepository
+ */
 interface LocalThemeRepositoryContract
 {
     public function scan(bool $collection = false): array|Collection;
