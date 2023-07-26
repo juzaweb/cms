@@ -1,41 +1,45 @@
 import {__, url} from "@/helpers/functions";
 import {Post} from "@/types/posts";
-import {Link} from "@inertiajs/react";
+import {Link, Head} from "@inertiajs/react";
+import Main from "../layouts/main";
+import React from "react";
 
+export default function Single({ post, title }: {post: Post}) {
 
-export default function Single({ post }: {post: Post}) {
     return (
-        <section className="pb-80">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
+        <Main>
 
-                        <ul className="breadcrumbs bg-light mb-4">
-                            <li className="breadcrumbs__item">
-                                <Link href={ url('/') } className="breadcrumbs__url">
-                                    <i className="fa fa-home"></i> {__('Home')}
-                                </Link>
-                            </li>
+            <section className="pb-80">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
 
-                            {/*@if($cat)
+                            <ul className="breadcrumbs bg-light mb-4">
+                                <li className="breadcrumbs__item">
+                                    <Link href={ url('/') } className="breadcrumbs__url">
+                                        <i className="fa fa-home"></i> {__('Home')}
+                                    </Link>
+                                </li>
+
+                                {/*@if($cat)
                             <li className="breadcrumbs__item breadcrumbs__item--current">
                                 {{$cat->name}}
                             </li>
                             @endif*/}
 
-                        </ul>
-                    </div>
-                    <div className="col-md-8">
-                        <div className="wrap__article-detail">
-                            <div className="wrap__article-detail-title">
-                                <h1>
-                                    {post.title}
-                                </h1>
-                                <h3>
-                                    {post.description}
-                                </h3>
-                            </div>
-                            <hr />
+                            </ul>
+                        </div>
+                        <div className="col-md-8">
+                            <div className="wrap__article-detail">
+                                <div className="wrap__article-detail-title">
+                                    <h1>
+                                        {post.title}
+                                    </h1>
+                                    <h3>
+                                        {post.description}
+                                    </h3>
+                                </div>
+                                <hr />
                                 <div className="wrap__article-detail-info">
                                     <ul className="list-inline">
                                         {/*<li class="list-inline-item">
@@ -81,8 +85,8 @@ export default function Single({ post }: {post: Post}) {
                                 </div>
 
                                 <div className="wrap__article-detail-content">
-                                        <div className="total-views">
-                                            <div className="total-views-read">{post.views}<span>
+                                    <div className="total-views">
+                                        <div className="total-views-read">{post.views}<span>
                                             {__('views')}
                                             </span>
                                         </div>
@@ -126,25 +130,25 @@ export default function Single({ post }: {post: Post}) {
 
                                     {post.content}
                                 </div>
-                        </div>
+                            </div>
 
-                        <div className="blog-tags">
-                            <ul className="list-inline">
-                                <li className="list-inline-item">
-                                    <i className="fa fa-tags"></i>
-                                </li>
+                            <div className="blog-tags">
+                                <ul className="list-inline">
+                                    <li className="list-inline-item">
+                                        <i className="fa fa-tags"></i>
+                                    </li>
 
-                                {/*@foreach($tags as $tag)
+                                    {/*@foreach($tags as $tag)
                                 <li className="list-inline-item">
                                     <a href="{{ $tag->url }}">
                                         #{$tag->name}
                                     </a>
                                 </li>
                                 @endforeach*/}
-                            </ul>
-                        </div>
+                                </ul>
+                            </div>
 
-                        {/*{% if errors.any() %}
+                            {/*{% if errors.any() %}
                         <div className="alert alert-danger">
                             <ul className="list-group">
                                 {% for error in errors.all() %}
@@ -171,7 +175,7 @@ export default function Single({ post }: {post: Post}) {
 
 
 
-                        {/*<div className="row">
+                            {/*<div className="row">
                             <div className="col-md-6">
                                 @php $previousPost = get_previous_post($post) @endphp
 
@@ -199,18 +203,19 @@ export default function Single({ post }: {post: Post}) {
                             </div>
                         </div>*/}
 
-                        <div className="clearfix"></div>
+                            <div className="clearfix"></div>
 
 
-                    </div>
+                        </div>
 
-                    <div className="col-md-4">
-                        <div className="sticky-top">
-                            {/*{{dynamic_sidebar('sidebar')}}*/}
+                        <div className="col-md-4">
+                            <div className="sticky-top">
+                                {/*{{dynamic_sidebar('sidebar')}}*/}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </Main>
     )
 }
