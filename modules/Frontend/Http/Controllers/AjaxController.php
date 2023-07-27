@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostRating;
 use Juzaweb\Backend\Repositories\PostRepository;
@@ -60,15 +61,14 @@ class AjaxController extends FrontendController
 
     public function rating(RatingRequest $request): float|int
     {
-        $post = Post::wherePublish()
-            ->where('id', '=', $request->post('post_id'))
-            ->firstOrFail();
+        $post = $this->postRepository->find($request->input('post_id'));
 
-        $clientIp = get_client_ip();
+        abort_unless($post->isPublish(), 404);
+
         PostRating::updateOrCreate(
             [
                 'post_id' => $post->id,
-                'client_ip' => $clientIp,
+                'client_ip' => get_client_ip(),
             ],
             [
                 'star' => $request->post('star')
@@ -76,6 +76,7 @@ class AjaxController extends FrontendController
         );
 
         $rating = $post->getStarRating();
+
         $post->update(
             [
                 'rating' => $rating,
@@ -88,15 +89,13 @@ class AjaxController extends FrontendController
 
     public function like(LikeRequest $request): JsonResponse|RedirectResponse
     {
-        global $jw_user;
+        $post = $this->postRepository->find($request->input('post_id'));
 
-        $post = Post::wherePublish()
-            ->where(['id' => $request->input('post_id')])
-            ->firstOrFail();
+        abort_unless($post->isPublish(), 404);
 
         $post->likes()->firstOrCreate(
             [
-                'user_id' => $jw_user->id,
+                'user_id' => $request->user()->id,
             ],
             [
                 'client_ip' => get_client_ip()
@@ -108,13 +107,11 @@ class AjaxController extends FrontendController
 
     public function unlike(LikeRequest $request): JsonResponse|RedirectResponse
     {
-        global $jw_user;
+        $post = $this->postRepository->find($request->input('post_id'));
 
-        $post = Post::wherePublish()
-            ->where(['id' => $request->input('post_id')])
-            ->firstOrFail();
+        abort_unless($post->isPublish(), 404);
 
-        $post->likes()->where(['user_id' => $jw_user->id])->first()?->delete();
+        $post->likes()->where(['user_id' => $request->user()->id])->first()?->delete();
 
         return $this->success('Unlike success.');
     }
@@ -137,7 +134,7 @@ class AjaxController extends FrontendController
 
         return response()->json(
             [
-                'data' => $posts,
+                'data' => PostResourceCollection::make($posts),
             ]
         );
     }

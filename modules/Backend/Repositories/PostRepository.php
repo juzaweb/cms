@@ -16,6 +16,7 @@ use Juzaweb\CMS\Repositories\Interfaces\SortableInterface;
 /**
  * Interface PostRepository.
  *
+ * @method Post find($id, $columns = ['*'])
  * @package namespace Juzaweb\Backend\Repositories;
  */
 interface PostRepository extends BaseRepository, FilterableInterface, SearchableInterface, SortableInterface

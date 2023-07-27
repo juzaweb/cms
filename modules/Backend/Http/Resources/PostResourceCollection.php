@@ -17,7 +17,7 @@ class PostResourceCollection extends ResourceCollection
     public function toArray($request): array
     {
         return $this->collection->map(
-            function ($item) use ($request) {
+            function ($item) {
                 $taxonomies = collect($item->json_taxonomies)->map(
                     function ($tax) {
                         unset($tax['total_post']);

@@ -188,6 +188,11 @@ class Post extends Model implements Feedable
         return $this->hasMany(PostLike::class, 'post_id', 'id');
     }
 
+    public function isPublish(): bool
+    {
+        return $this->status === self::STATUS_PUBLISH;
+    }
+
     public function getTotalRating(): int
     {
         return $this->ratings()->count(['id']);
