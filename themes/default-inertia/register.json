@@ -66,5 +66,6 @@
             "name": "footer_logo",
             "label": "Footer Logo"
         }
-    ]
+    ],
+    "support": ["related_posts_ajax"]
 }

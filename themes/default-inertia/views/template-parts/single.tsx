@@ -3,12 +3,12 @@ import {Post} from "@/types/posts";
 import {Link, Head} from "@inertiajs/react";
 import Main from "../layouts/main";
 import React from "react";
+import Related from "./components/related";
 
-export default function Single({ post, title }: {post: Post}) {
+export default function Single({ post, canonical }: {post: Post, canonical?: string}) {
 
     return (
         <Main>
-
             <section className="pb-80">
                 <div className="container">
                     <div className="row">
@@ -95,7 +95,7 @@ export default function Single({ post, title }: {post: Post}) {
                                             <span className="share">{__('share on')}:</span>
                                             <li className="list-inline-item">
                                                 <a className="btn btn-social-o facebook"
-                                                   href="https://www.facebook.com/sharer.php?u={{ url()->current() }}">
+                                                   href={`https://www.facebook.com/sharer/sharer.php?u=${canonical}&t=${post.title}`}>
                                                     <i className="fa fa-facebook-f"></i>
                                                     <span>facebook</span>
                                                 </a>
@@ -103,7 +103,7 @@ export default function Single({ post, title }: {post: Post}) {
 
                                             <li className="list-inline-item">
                                                 <a className="btn btn-social-o twitter"
-                                                   href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $title }}">
+                                                   href={`https://twitter.com/intent/tweet?url=${canonical}&text=${post.title}`}>
                                                     <i className="fa fa-twitter"></i>
                                                     <span>twitter</span>
                                                 </a>
@@ -111,7 +111,7 @@ export default function Single({ post, title }: {post: Post}) {
 
                                             <li className="list-inline-item">
                                                 <a className="btn btn-social-o telegram"
-                                                   href="https://t.me/share/url?url={{ url()->current() }}&text={{ $title }}">
+                                                   href={`https://t.me/share/url?url=${canonical}&text=${post.title}`}>
                                                     <i className="fa fa-telegram"></i>
                                                     <span>telegram</span>
                                                 </a>
@@ -119,7 +119,7 @@ export default function Single({ post, title }: {post: Post}) {
 
                                             <li className="list-inline-item">
                                                 <a className="btn btn-linkedin-o linkedin"
-                                                   href="https://www.linkedin.com/sharing/share-offsite/?url={{ url()->current() }}">
+                                                   href={`https://www.linkedin.com/shareArticle?url=${canonical}&mini=true`}>
                                                     <i className="fa fa-linkedin"></i>
                                                     <span>linkedin</span>
                                                 </a>
@@ -205,7 +205,7 @@ export default function Single({ post, title }: {post: Post}) {
 
                             <div className="clearfix"></div>
 
-
+                            <Related post={post} />
                         </div>
 
                         <div className="col-md-4">

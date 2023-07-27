@@ -266,7 +266,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function addProfilePages()
+    public function addProfilePages(): void
     {
         HookAction::registerProfilePage(
             'index',
@@ -283,13 +283,13 @@ class ThemeAction extends Action
         );
     }
 
-    public function addFrontendAjax()
+    public function addFrontendAjax(): void
     {
         if (!$support = $this->getRegister('support')) {
             return;
         }
 
-        if (in_array('like', $support)) {
+        if (in_array('like', $support, true)) {
             $this->hookAction->registerFrontendAjax(
                 'like',
                 [
@@ -309,12 +309,21 @@ class ThemeAction extends Action
             );
         }
 
-        if (in_array('rating', $support)) {
+        if (in_array('rating', $support, true)) {
             $this->hookAction->registerFrontendAjax(
                 'rating',
                 [
                     'callback' => [AjaxController::class, 'rating'],
                     'method' => 'post',
+                ]
+            );
+        }
+
+        if (in_array('related_posts_ajax', $support, true)) {
+            $this->hookAction->registerFrontendAjax(
+                'related-posts',
+                [
+                    'callback' => [AjaxController::class, 'relatedPosts'],
                 ]
             );
         }

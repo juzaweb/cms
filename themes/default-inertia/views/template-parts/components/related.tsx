@@ -1,8 +1,18 @@
 import {__} from "@/helpers/functions";
 import {Link} from "@inertiajs/react";
 import {Post} from "@/types/posts";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-export default function Related({items}: {items: Array<Post>}) {
+export default function Related({ post }: {post: Post}) {
+    const {items, setItems} = useState<Post[]>([]);
+
+    useEffect(() => {
+        axios.get('/ajax/related-posts?post_slug='+ post.slug).then(({data}) => {
+            setItems(data);
+        });
+    }, [post.slug])
+
     return (
         <div className="related-article">
             <h4>
@@ -10,7 +20,7 @@ export default function Related({items}: {items: Array<Post>}) {
             </h4>
 
             <div className="article__entry-carousel-three">
-                {items.map((item) => (
+                {items && items.map((item) => (
                     <div className="item">
                         <div className="article__entry">
                             <div className="article__image">
@@ -22,15 +32,15 @@ export default function Related({items}: {items: Array<Post>}) {
                             <div className="article__content">
                                 <ul className="list-inline">
                                     <li className="list-inline-item">
-                                    <span className="text-primary">
-                                        {__('by')} {item.author?.name}
-                                    </span>
+                                        <span className="text-primary">
+                                            {__('by')} {item.author?.name}
+                                        </span>
                                     </li>
 
                                     <li className="list-inline-item">
-                                    <span className="text-dark text-capitalize">
-                                        {item.created_at}
-                                    </span>
+                                        <span className="text-dark text-capitalize">
+                                            {item.created_at}
+                                        </span>
                                     </li>
                                 </ul>
                                 <h5>

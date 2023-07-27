@@ -1,4 +1,4 @@
-import {usePage} from "@inertiajs/react";
+import {Link, usePage} from "@inertiajs/react";
 
 export default function Footer() {
     const { config } = usePage().props;
@@ -87,7 +87,7 @@ export default function Footer() {
                                                 <li className="list-inline-item">
                                                     <span>
                                                         Copyright © 2021
-                                                        <a href="#">{config.title}</a>
+                                                        <Link href="/">{config.title}</Link>
                                                     </span>
                                                 </li>
                                             </ul>

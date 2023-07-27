@@ -14,7 +14,7 @@
         "theme:dev": "npm run theme:run-dev",
         "theme:run-dev": "vite --config themes/$npm_config_theme/config.js",
         "theme:build": "npm run theme:run-build",
-        "theme:run-build": "vite build --config themes/$npm_config_theme/config.js",
+        "theme:run-build": "vite build --config themes/$npm_config_theme/config.js && php artisan theme:publish $npm_config_theme",
         "theme:ssr-build": "npm run theme:run-ssr-build",
         "theme:run-ssr-build": "vite build --config themes/$npm_config_theme/config.js && vite build --ssr --config themes/$npm_config_theme/config.js --outDir themes/$npm_config_theme/assets/ssr && php artisan theme:publish $npm_config_theme",
         "theme:ssr-preview": "npm run theme:run-ssr-preview",
