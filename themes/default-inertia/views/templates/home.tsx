@@ -1,20 +1,20 @@
 import {__} from "@/helpers/functions";
+import Main from "../layouts/main";
 
 export default function () {
-
-
     return (
-        <section className="pt-0">
-            <div className="mt-4">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8">
+        <Main>
+            <section className="pt-0">
+                <div className="mt-4">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-8">
 
-                            <aside className="wrapper__list__article">
-                                <h4 className="border_section">{__('Latest')}</h4>
+                                <aside className="wrapper__list__article">
+                                    <h4 className="border_section">{__('Latest')}</h4>
 
-                                <div className="wrapp__list__article-responsive">
-                                    {/*{% for item in items.data %}
+                                    <div className="wrapp__list__article-responsive">
+                                        {/*{% for item in items.data %}
 
                                     @php $category = get_post_taxonomy(item, 'categories') %}
 
@@ -71,30 +71,31 @@ export default function () {
                                         </div>
                                     </div>
                                     {% endfor %}*/}
-                                </div>
-                            </aside>
-                        </div>
-
-                        <div className="col-md-4">
-                            <div className="sticky-top">
-                                {/*{{dynamic_sidebar('sidebar')}}*/}
+                                    </div>
+                                </aside>
                             </div>
-                        </div>
 
-                        <div className="mx-auto">
-                            <div className="pagination-area">
-                                <div className="pagination wow fadeIn animated" data-wow-duration="2s"
-                                     data-wow-delay="0.5s"
-                                     style="visibility: visible; animation-duration: 2s; animation-delay: 0.5s; animation-name: fadeIn;">
-                                    {/*{{paginate_links(items, 'theme::components.pagination')}}*/}
+                            <div className="col-md-4">
+                                <div className="sticky-top">
+                                    {/*{{dynamic_sidebar('sidebar')}}*/}
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="clearfix"></div>
+                            <div className="mx-auto">
+                                <div className="pagination-area">
+                                    <div className="pagination wow fadeIn animated" data-wow-duration="2s"
+                                         data-wow-delay="0.5s"
+                                         style="visibility: visible; animation-duration: 2s; animation-delay: 0.5s; animation-name: fadeIn;">
+                                        {/*{{paginate_links(items, 'theme::components.pagination')}}*/}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="clearfix"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </Main>
     );
 }

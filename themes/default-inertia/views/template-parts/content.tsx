@@ -1,18 +1,18 @@
 import {__} from '@/helpers/functions'
-import {Post} from "@/types/posts";
+import {Post, Taxonomy} from "@/types/posts";
 import {Link} from "@inertiajs/react";
 
 export default function Content({ post }: {post: Post}) {
     return (
         <div className="article__entry">
             <div className="article__image">
-                <a href={ post.url } title={ post.title }>
+                <Link href={ post.url } title={ post.title }>
                     <img src={ post.thumbnail } alt={ post.title } className="img-fluid" />
-                </a>
+                </Link>
             </div>
 
             <div className="article__content">
-                {post.taxonomies?.map((taxonomy) => {
+                {post.taxonomies?.map((taxonomy: Taxonomy) => {
                     return (
                         <div className="article__category">
                             {taxonomy.name}

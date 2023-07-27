@@ -4,6 +4,7 @@ namespace Juzaweb\Backend\Repositories;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
 use Juzaweb\CMS\Repositories\BaseRepository;
@@ -71,6 +72,13 @@ interface PostRepository extends BaseRepository, FilterableInterface, Searchable
      * @return Builder
      */
     public function createFrontendDetailBuilder(): Builder;
+
+    public function getRelatedPosts(
+        Post $post,
+        string $taxonomy = 'categories',
+        int $limit = 10,
+        array $columns = ['*']
+    ): Collection|array;
 
     /**
      * @param string $type

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostRating;
+use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
 use Juzaweb\Frontend\Http\Requests\LikeRequest;
@@ -25,6 +26,11 @@ use Juzaweb\Frontend\Http\Requests\RatingRequest;
 
 class AjaxController extends FrontendController
 {
+    public function __construct(protected PostRepository $postRepository)
+    {
+        //
+    }
+
     public function ajax($key, Request $request)
     {
         $key = str_replace('/', '.', $key);
@@ -52,7 +58,7 @@ class AjaxController extends FrontendController
         return App::call($callback);
     }
 
-    public function rating(RatingRequest $request)
+    public function rating(RatingRequest $request): float|int
     {
         $post = Post::wherePublish()
             ->where('id', '=', $request->post('post_id'))
@@ -111,5 +117,28 @@ class AjaxController extends FrontendController
         $post->likes()->where(['user_id' => $jw_user->id])->first()?->delete();
 
         return $this->success('Unlike success.');
+    }
+
+    public function relatedPosts(Request $request): JsonResponse
+    {
+        $post = $this->postRepository->findBySlug($request->input('post_slug'), false);
+        $limit = $request->input('limit', 10);
+        $taxonomy = $request->input('taxonomy', 'categories');
+
+        if ($limit > 100) {
+            $limit = 100;
+        }
+
+        if ($post === null) {
+            return response()->json(['data' => []]);
+        }
+
+        $posts = $this->postRepository->getRelatedPosts($post, $taxonomy, $limit);
+
+        return response()->json(
+            [
+                'data' => $posts,
+            ]
+        );
     }
 }

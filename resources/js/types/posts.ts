@@ -1,19 +1,19 @@
-export type Taxonomy = {
-    id: string
-    name: string
-    slug: string
-    taxonomy: string
-    thumbnail: string
-    total_post: string
-    level: Number
+export interface Taxonomy {
+    id: string,
+    name: string,
+    slug: string,
+    taxonomy: string,
+    thumbnail: string,
+    total_post: string,
+    level: Number,
 }
 
-export type PostMeta = {
+export interface PostMeta {
     meta_key: string
     meta_value?: string
 }
 
-export type Post = {
+export interface Post {
     id: string
     title: string
     slug: string
@@ -37,7 +37,7 @@ export type Post = {
     }
 }
 
-export type Comment = {
+export interface Comment {
     id: string
     name: string
     content?: string
