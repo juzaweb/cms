@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Repositories\BaseRepositoryEloquent;
 use Juzaweb\CMS\Repositories\Criterias\SortCriteria;
 use Juzaweb\CMS\Traits\Criterias\UseFilterCriteria;
@@ -196,6 +197,21 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
             ->whereTaxonomyIn($taxonomies)
             ->limit($limit)
             ->get($columns);
+
+        $this->resetModel();
+
+        return $this->parserResult($results);
+    }
+
+    public function getLikedPosts(User $user, int $limit = 10, array $columns = ['*']): LengthAwarePaginator|array
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+
+        $results = $this->createSelectFrontendBuilder()->whereHas(
+            'likes',
+            fn ($q) => $q->where("{$q->getModel()->getTable()}.user_id", '=', $user->id)
+        )->paginate($limit, $columns);
 
         $this->resetModel();
 

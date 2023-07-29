@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\Taxonomy;
+use Juzaweb\CMS\Models\User;
 use Juzaweb\CMS\Repositories\BaseRepository;
 use Juzaweb\CMS\Repositories\Exceptions\RepositoryException;
 use Juzaweb\CMS\Repositories\Interfaces\FilterableInterface;
@@ -118,6 +119,8 @@ interface PostRepository extends BaseRepository, FilterableInterface, Searchable
         int $limit = 10,
         array $columns = ['*']
     ): Collection|array;
+
+    public function getLikedPosts(User $user, int $limit = 10, array $columns = ['*']): LengthAwarePaginator|array;
 
     /**
      * Retrieves the statuses for a given type.

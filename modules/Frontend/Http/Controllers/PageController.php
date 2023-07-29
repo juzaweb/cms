@@ -126,11 +126,11 @@ class PageController extends FrontendController
             ];
         }
 
-        if ($template = $page->getMeta('template')) {
-            if ($data = $this->getThemeRegister("templates.{$template}.data")) {
-                foreach ($data as $key => $item) {
-                    $params['page'][$key] = $this->getPageCustomData($item, $params);
-                }
+        if (($template = $page->getMeta('template'))
+            && $data = $this->getThemeRegister("templates.{$template}.data")
+        ) {
+            foreach ($data as $key => $item) {
+                $params['page'][$key] = $this->getPageCustomData($item, $params);
             }
         }
 
@@ -151,43 +151,28 @@ class PageController extends FrontendController
     {
         global $jw_user;
 
-        switch ($item['type']) {
-            case 'post_liked':
-                //$query = Post::createFrontendBuilder();
-                $query = $this->postRepository->createSelectFrontendBuilder();
-
-                if (isset($item['post_type'])) {
-                    $query->where('type', '=', $item['post_type']);
-                }
-
-                $query->whereHas(
-                    'likes',
-                    function ($q) use ($jw_user, $item) {
-                        $q->where("{$q->getModel()->getTable()}.user_id", '=', $jw_user->id);
-                    }
-                );
-
-                $paginate = $query->paginate(get_config('posts_per_page', 12))
-                    ->appends(request()?->query());
-
-                $this->postRepository->resetModel();
-
-                return PostResourceCollection::make($paginate)->response()->getData(true);
-            case 'popular_posts':
-                return get_popular_posts(Arr::get($item, 'post_type'), $params['post'], Arr::get($item, 'limit', 5));
-            case 'related_posts':
-                return get_related_posts(
-                    $params['post'],
-                    $item['limit'] ?? 5,
-                    $item['taxonomy'] ?? null
-                );
-            case 'previous_post':
-                return get_previous_post($params['post']);
-            case 'next_post':
-                return get_next_post($params['post']);
-        }
-
-        return null;
+        return match ($item['type']) {
+            'post_liked' => $this->postRepository
+                ->scopeQuery(
+                    fn($query) => $query
+                        ->when(isset($item['post_type']), fn($q) => $q->where('type', '=', $item['post_type']))
+                )
+                ->getLikedPosts($jw_user, get_config('posts_per_page', 12))
+                ->appends(request()?->query()),
+            'popular_posts' => get_popular_posts(
+                Arr::get($item, 'post_type'),
+                $params['post'],
+                Arr::get($item, 'limit', 5)
+            ),
+            'related_posts' => get_related_posts(
+                $params['post'],
+                $item['limit'] ?? 5,
+                $item['taxonomy'] ?? null
+            ),
+            'previous_post' => get_previous_post($params['post']),
+            'next_post' => get_next_post($params['post']),
+            default => null,
+        };
     }
 
     protected function getViewPage(Post $page, $themeInfo, array $params = []): string
