@@ -37,6 +37,13 @@ class BackendController extends Controller
         return parent::callAction($method, $parameters);
     }
 
+    /**
+     * A description of the entire PHP function.
+     *
+     * @param string|null $view The name of the view to render. Defaults to null.
+     * @param array $data An associative array of data to pass to the view. Defaults to an empty array.
+     * @return View|Response Returns an instance of the View or Response class.
+     */
     protected function view(?string $view = null, array $data = []): View|Response
     {
         return match ($this->template) {
@@ -45,6 +52,13 @@ class BackendController extends Controller
         };
     }
 
+    /**
+     * Renders an Inertia view with optional data.
+     *
+     * @param ?string $view The name of the view to render. If null, the default view will be used.
+     * @param array $data Optional data to pass to the view.
+     * @return Response The rendered Inertia view.
+     */
     protected function inertiaViewRender(?string $view = null, array $data = []): Response
     {
         $view = Str::replace('cms::backend.', '', $view);
@@ -52,6 +66,14 @@ class BackendController extends Controller
         return Inertia::render($view, $data);
     }
 
+    /**
+     * Adds a breadcrumb item to the specified breadcrumb list.
+     *
+     * @param array $item The breadcrumb item to be added.
+     * @param string $name The name of the breadcrumb list. Default is 'admin'.
+     * @throws Exception If there is an error adding the breadcrumb item.
+     * @return void
+     */
     protected function addBreadcrumb(array $item, $name = 'admin'): void
     {
         add_filters(
@@ -64,6 +86,15 @@ class BackendController extends Controller
         );
     }
 
+    /**
+     * Adds a message to the backend message system.
+     *
+     * @param string $key The key for the message.
+     * @param string|array $message The message or an array of messages.
+     * @param string $type The type of the message (default: 'warning').
+     * @throws Exception If an error occurs while adding the message.
+     * @return void
+     */
     protected function addMessage(
         string $key,
         string|array $message,

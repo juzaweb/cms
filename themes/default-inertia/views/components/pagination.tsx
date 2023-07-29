@@ -1,6 +1,6 @@
 import {Link} from "@inertiajs/react";
 
-export default function Pagination({ data }) {
+export default function Pagination({ data }:{data: any}) {
     return (
         data.meta.last_page > 1 && (
             data.meta.links.map(

@@ -2,19 +2,19 @@ import {__} from "@/helpers/functions";
 import {CommentPaginate} from "@/types/posts";
 import {Link} from "@inertiajs/react";
 
-export default function Comments({comments}: {comments: CommentPaginate}) {
-    return (
+export default function Comments({comments}: {comments?: CommentPaginate}) {
+    return comments && (
         <>
-            <h3 className="comments-title">{comments.meta.total} {__('Comments')}:</h3>
+            <h3 className="comments-title">{comments.meta.total.toString()} {__('Comments')}:</h3>
 
             <ol className="comment-list">
                 {comments.data.map((comment) => {
                     return (
-                        <li className="comment">
+                        <li className="comment" key={comment.id}>
                             <aside className="comment-body">
                                 <div className="comment-meta">
                                     <div className="comment-author vcard">
-                                        <img src={ comment.avatar } className="avatar" alt="image"/>
+                                        <img src={ comment?.avatar } className="avatar" alt="image"/>
                                             <b className="fn">{comment.name}</b>
                                             <span className="says">{__('says')}:</span>
                                     </div>

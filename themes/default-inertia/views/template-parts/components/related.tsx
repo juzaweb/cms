@@ -1,15 +1,15 @@
-import {__} from "@/helpers/functions";
-import {Link} from "@inertiajs/react";
-import {Post} from "@/types/posts";
-import {useEffect, useState} from "react";
-import axios from "axios";
+import { __ } from "@/helpers/functions";
+import { Link } from "@inertiajs/react";
+import { Post } from "@/types/posts";
+import { useEffect, useState } from "react";
+import { getRelatedPosts } from "@/helpers/fetch";
 
-export default function Related({ post }: {post: Post}) {
+export default function Related({ post }: { post: Post }) {
     const [items, setItems] = useState<Post[]>([]);
 
     useEffect(() => {
-        axios.get('/ajax/related-posts?post_slug='+ post.slug).then((res) => {
-            setItems(res.data.data);
+        getRelatedPosts(post).then((res) => {
+            setItems(res.data.data)
         });
     }, [post.slug])
 

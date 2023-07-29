@@ -9,7 +9,7 @@ export default function SinglePage({post}: { post: Post }) {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                            
+
                             <ul className="breadcrumbs bg-light mb-4">
                                 <li className="breadcrumbs__item">
                                     <Link href={url('/')} className="breadcrumbs__url">
@@ -37,7 +37,7 @@ export default function SinglePage({post}: { post: Post }) {
                                 <div className="wrap__article-detail-content">
                                     <div className="total-views">
                                         <div className="total-views-read">
-                                            {post.views}
+                                            {post.views.toString()}
                                             <span>
                                                     {__('views')}
                                                 </span>

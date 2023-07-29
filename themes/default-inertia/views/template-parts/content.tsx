@@ -3,7 +3,7 @@ import {Post, Taxonomy} from "@/types/posts";
 import {Link} from "@inertiajs/react";
 
 export default function Content({ post }: {post: Post}) {
-    const categories : Array<Taxonomy> = post.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'categories');
+    const categories : null|Array<Taxonomy> = post.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'categories') || null;
 
     return (
         <div className="article__entry">

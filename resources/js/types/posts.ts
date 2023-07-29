@@ -41,6 +41,7 @@ export interface Post {
 export interface Comment {
     id: string
     name: string
+    avatar?: string
     content?: string
     created_at?: string
 }

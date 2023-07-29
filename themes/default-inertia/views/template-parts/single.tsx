@@ -1,28 +1,12 @@
 import {__, url} from "@/helpers/functions";
 import {Post, Taxonomy, CommentPaginate} from "@/types/posts";
-import {Link, Head} from "@inertiajs/react";
+import {Link} from "@inertiajs/react";
 import Main from "../layouts/main";
-import React, {useState} from "react";
-import Comments from "../components/comments";
-import axios from "axios";
+import CommentForm from "./components/comment-form";
 
-export default function Single({ post, canonical, comments, guest }: {post: Post, canonical?: string, comments?: CommentPaginate, guest: boolean}) {
-    const categories = post.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'categories');
-    const tags: Array<Taxonomy> = post.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'tags');
-    const [message, setMessage] = useState<{status: string, message: string}>(null);
-
-    const handleComment = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        //document.getElementById('submit').setAttribute('disabled', 'disabled');
-
-        axios.post('', {content: e.target['content'].value}).then((res) => {
-            e.target['content'].value = '';
-            setMessage({status: res.data.status, message: res.data.data.message});
-        });
-
-        return false;
-    }
+export default function Single({ post, canonical, comments }: {post: Post, canonical?: string, comments?: CommentPaginate, guest: boolean}) {
+    const categories = post?.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'categories');
+    const tags: null|Array<Taxonomy> = post.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'tags') || null;
 
     return (
         <Main>
@@ -104,7 +88,7 @@ export default function Single({ post, canonical, comments, guest }: {post: Post
 
                                 <div className="wrap__article-detail-content">
                                     <div className="total-views">
-                                        <div className="total-views-read">{post.views}<span>
+                                        <div className="total-views-read">{post.views.toString()}<span>
                                             {__('views')}
                                             </span>
                                         </div>
@@ -156,7 +140,7 @@ export default function Single({ post, canonical, comments, guest }: {post: Post
                                         <i className="fa fa-tags"></i>
                                     </li>
 
-                                    {tags.map((item: Taxonomy) => (
+                                    {tags && tags.map((item: Taxonomy) => (
                                         <li className="list-inline-item" key={item.id}>
                                             <Link href={item.url}>
                                                 {item.name}
@@ -167,64 +151,7 @@ export default function Single({ post, canonical, comments, guest }: {post: Post
                             </div>
 
 
-                        <div id="comments" className="comments-area">
-                            <Comments comments={comments} />
-
-                            <div className="comment-respond">
-                                <h3 className="comment-reply-title">{__('Leave a Reply')}</h3>
-
-                                {message ? (message.status ?
-                                        <div className="alert alert-success">{message.message}</div> :
-                                        <div className="alert alert-danger">{message.message}</div>
-                                ) : ''}
-
-                                <form onSubmit={handleComment} method="post" className="comment-form" id="comment-form">
-                                    <p className="comment-notes">
-                                        <span id="email-notes">{__('Your email address will not be published.')}</span>
-                                        {__('Required fields are marked')}
-                                        <span className="required">*</span>
-                                    </p>
-
-                                    <p className="comment-form-comment">
-                                        <label htmlFor="content">{__('Comment')}
-                                            <span className="required">*</span>
-                                        </label>
-                                        <textarea name="content"
-                                                  id="content"
-                                                  cols="45"
-                                                  rows="5"
-                                                  maxLength="65525"
-                                                  required="required"></textarea>
-                                    </p>
-
-                                    {guest ? (
-                                        <>
-                                            <p className="comment-form-author">
-                                                <label htmlFor="author">{__('Name')} <span
-                                                    className="required">*</span></label>
-                                                <input type="text" id="author" name="name" required="required"/>
-                                            </p>
-
-                                            <p className="comment-form-email">
-                                                <label htmlFor="email">{__('Email')} <span
-                                                    className="required">*</span></label>
-                                                <input type="email" id="email" name="email" required="required"/>
-                                            </p>
-
-                                            <p className="comment-form-url">
-                                                <label htmlFor="website">{__('Website')}</label>
-                                                <input type="text" id="website" name="website"/>
-                                            </p>
-                                        </>
-                                    ) : ''}
-
-                                    <p className="form-submit">
-                                        <input type="submit" name="submit" id="submit" className="submit"
-                                               value={ __('Post Comment') }/>
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
+                            <CommentForm post={post} comments={comments}></CommentForm>
 
                             {/*<div className="row">
                             <div className="col-md-6">
