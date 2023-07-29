@@ -35,6 +35,11 @@ abstract class PageBlock
      */
     abstract public function show($data);
 
+    /**
+     * Retrieves the data from a JSON file.
+     *
+     * @return Illuminate\Support\Collection The data retrieved from the JSON file.
+     */
     public function getData()
     {
         $dataFile = ThemeLoader::getThemePath(
@@ -50,6 +55,13 @@ abstract class PageBlock
         return $data;
     }
 
+    /**
+     * Renders a Twig view with the given parameters.
+     *
+     * @param string $view The name of the Twig view to render.
+     * @param array $params An associative array of parameters to pass to the view
+     * @return string The rendered Twig view.
+     */
     protected function view($view, $params = [])
     {
         return Twig::render($view, $params);

@@ -1,7 +1,7 @@
 import Main from "./layouts/main";
 import Content from "./template-parts/content";
 
-export default function Index({ title, posts }: {title: string, posts: any}) {
+export default function Index({ title, page }: {title: string, page: any}) {
     return (
         <Main>
             <section>
@@ -12,7 +12,7 @@ export default function Index({ title, posts }: {title: string, posts: any}) {
                                 <h4 className="border_section">{title}</h4>
 
                                 <div className="row">
-                                    {posts.data.map((post: any) => {
+                                    {page.data.map((post: any) => {
                                         return (
                                             <div className="col-md-6" key={post.id}>
                                                 <Content post={post} />

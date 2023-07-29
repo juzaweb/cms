@@ -5,6 +5,7 @@ namespace Juzaweb\CMS\Database\Factories;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Juzaweb\CMS\Models\User;
 
 class PostFactory extends Factory
 {
@@ -20,20 +21,21 @@ class PostFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $title = $this->faker->sentence(10);
+        $users = User::active()->inRandomOrder()->limit(10)->get()->pluck('id')->toArray();
 
         return [
             'title' => $title,
-            'content' => $this->faker->sentence(500),
+            'content' => $this->faker->paragraph(10),
             'status' => 'publish',
             'type' => 'posts',
             'slug' => Str::slug($title),
-            //'created_at' => $this->faker->dateTime(),
-            //'updated_at' => $this->faker->dateTime(),
-            'created_by' => 1,
-            'updated_by' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'created_by' => $users[array_rand($users)],
+            'updated_by' => $users[array_rand($users)],
         ];
     }
 }

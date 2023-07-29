@@ -20,6 +20,13 @@ abstract class ResourcePolicy
 
     protected string $resourceType;
 
+    /**
+     * Check if the user is authorized to view the index page of the resource.
+     *
+     * @param User $user The user to check authorization for.
+     *
+     * @return bool True if the user is authorized, false otherwise.
+     */
     public function index(User $user)
     {
         if (!$user->can("{$this->resourceType}.index")) {
@@ -29,6 +36,14 @@ abstract class ResourcePolicy
         return true;
     }
 
+    /**
+     * Check if the user is authorized to edit the resource.
+     *
+     * @param User  $user  The user to check authorization for.
+     * @param Model $model The model representing the resource.
+     *
+     * @return bool True if the user is authorized, false otherwise.
+     */
     public function edit(User $user, Model $model)
     {
         if (!$user->can("{$this->resourceType}.edit")) {
@@ -38,6 +53,13 @@ abstract class ResourcePolicy
         return true;
     }
 
+    /**
+     * Check if the user is authorized to create a new resource.
+     *
+     * @param User $user The user to check authorization for.
+     *
+     * @return bool True if the user is authorized, false otherwise.
+     */
     public function create(User $user)
     {
         if (!$user->can("{$this->resourceType}.create")) {
@@ -47,6 +69,14 @@ abstract class ResourcePolicy
         return true;
     }
 
+    /**
+     * Check if the user is authorized to delete the resource.
+     *
+     * @param User  $user  The user to check authorization for.
+     * @param Model $model The model representing the resource.
+     *
+     * @return bool True if the user is authorized, false otherwise.
+     */
     public function delete(User $user, Model $model)
     {
         if (!$user->can("{$this->resourceType}.delete")) {

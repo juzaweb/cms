@@ -20,7 +20,7 @@ class TaxonomyFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $name = $this->faker->name;
         $taxonomies = ['categories', 'tags'];
@@ -39,8 +39,8 @@ class TaxonomyFactory extends Factory
             'taxonomy' => $taxonomy,
             'parent_id' => $parentId,
             'post_type' => 'posts',
-            'created_at' => $this->faker->dateTime(),
-            'updated_at' => $this->faker->dateTime(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

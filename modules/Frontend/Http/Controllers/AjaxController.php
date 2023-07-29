@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
-use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Models\PostRating;
 use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Facades\HookAction;
