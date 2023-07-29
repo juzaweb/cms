@@ -34,10 +34,37 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
 
     public function frontendFind(int|string $id, array $columns = ['*']): ?Post
     {
-        return $this->createFrontendDetailBuilder()->find($id, $columns);
+        $this->applyCriteria();
+        $this->applyScope();
+
+        $result = $this->createFrontendDetailBuilder()->where(['id' => $id])->first($columns);
+
+        $this->resetModel();
+
+        return $this->parserResult($result);
     }
 
-    public function findBySlug(string $slug, bool $fail = true, array $columns = ['*']): null|Post
+    public function findBySlug(string $slug, bool $fail = true, array $columns = ['*'], bool $frontend = true): ?Post
+    {
+        if ($frontend) {
+            return $this->frontendFindBySlug($slug, $fail, $columns);
+        }
+
+        $this->applyCriteria();
+        $this->applyScope();
+
+        if ($fail) {
+            $result = $this->model->where(['slug' => $slug])->firstOrFail($columns);
+        } else {
+            $result = $this->model->where(['slug' => $slug])->first($columns);
+        }
+
+        $this->resetModel();
+
+        return $this->parserResult($result);
+    }
+
+    public function frontendFindBySlug(string $slug, bool $fail = true, array $columns = ['*']): null|Post
     {
         $this->applyCriteria();
         $this->applyScope();
