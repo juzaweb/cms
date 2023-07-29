@@ -19,6 +19,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Response;
 use Juzaweb\Backend\Events\PostViewed;
+use Juzaweb\Backend\Http\Resources\CommentResource;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Post;
@@ -43,7 +44,7 @@ class PostController extends FrontendController
         $title = get_config('title');
         $posts = $this->postRepository->frontendListPaginate(get_config('posts_per_page', 12));
 
-        $posts->appends(request()->query());
+        $posts->appends(request()?->query());
 
         if ($this->template === 'twig') {
             $page = PostResourceCollection::make($posts)
@@ -72,7 +73,7 @@ class PostController extends FrontendController
         );
 
         $post = $this->postRepository->findBySlug($postSlug, false);
-        if (empty($post) && count($slug) > 2) {
+        if ($post === null && count($slug) > 2) {
             $post = $this->postRepository->findBySlug($slug[1]);
         }
 
@@ -89,8 +90,6 @@ class PostController extends FrontendController
         $template = get_name_template_part($type, 'single');
 
         //$post = (new PostResource($post))->toArray(request());
-
-        //$comments = CommentResource::collection($rows)->response()->getData(true);
 
         return $this->view(
             "theme::template-parts.{$template}",

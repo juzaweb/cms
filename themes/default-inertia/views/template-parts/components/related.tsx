@@ -5,11 +5,11 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 
 export default function Related({ post }: {post: Post}) {
-    const {items, setItems} = useState<Post[]>([]);
+    const [items, setItems] = useState<Post[]>([]);
 
     useEffect(() => {
-        axios.get('/ajax/related-posts?post_slug='+ post.slug).then(({data}) => {
-            setItems(data);
+        axios.get('/ajax/related-posts?post_slug='+ post.slug).then((res) => {
+            setItems(res.data.data);
         });
     }, [post.slug])
 
@@ -20,12 +20,12 @@ export default function Related({ post }: {post: Post}) {
             </h4>
 
             <div className="article__entry-carousel-three">
-                {items && items.map((item) => (
-                    <div className="item">
+                {items.map((item: Post) => (
+                    <div className="item" key={item.id}>
                         <div className="article__entry">
                             <div className="article__image">
                                 <Link href={item.url}>
-                                    <img src={item.thumbnail} alt={item.title} className="img-fluid"/>
+                                    <img src={item.thumbnail} alt={item.title} className="img-fluid" />
                                 </Link>
                             </div>
 

@@ -3,6 +3,8 @@ import {Post, Taxonomy} from "@/types/posts";
 import {Link} from "@inertiajs/react";
 
 export default function Content({ post }: {post: Post}) {
+    const categories : Array<Taxonomy> = post.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'categories');
+
     return (
         <div className="article__entry">
             <div className="article__image">
@@ -12,7 +14,7 @@ export default function Content({ post }: {post: Post}) {
             </div>
 
             <div className="article__content">
-                {post.taxonomies?.map((taxonomy: Taxonomy) => {
+                {categories?.map((taxonomy: Taxonomy) => {
                     return (
                         <div className="article__category">
                             {taxonomy.name}

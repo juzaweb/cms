@@ -1,7 +1,8 @@
 import {__} from "@/helpers/functions";
-import {Comment} from "@/types/posts";
+import {CommentPaginate} from "@/types/posts";
+import {Link} from "@inertiajs/react";
 
-export default function ({comments}: {comments: {data: Array<Comment>}}) {
+export default function Comments({comments}: {comments: CommentPaginate}) {
     return (
         <>
             <h3 className="comments-title">{comments.meta.total} {__('Comments')}:</h3>
@@ -30,9 +31,9 @@ export default function ({comments}: {comments: {data: Array<Comment>}}) {
                                 </div>
 
                                 <div className="reply">
-                                    <a href={`?reply=${comment.id}#comment-form`} className="comment-reply-link">
+                                    <Link href={`?reply=${comment.id}#comment-form`} className="comment-reply-link">
                                         {__('Reply')}
-                                    </a>
+                                    </Link>
                                 </div>
                             </aside>
                         </li>

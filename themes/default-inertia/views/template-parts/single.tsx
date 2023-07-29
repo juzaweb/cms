@@ -1,11 +1,28 @@
 import {__, url} from "@/helpers/functions";
-import {Post} from "@/types/posts";
+import {Post, Taxonomy, CommentPaginate} from "@/types/posts";
 import {Link, Head} from "@inertiajs/react";
 import Main from "../layouts/main";
-import React from "react";
-import Related from "./components/related";
+import React, {useState} from "react";
+import Comments from "../components/comments";
+import axios from "axios";
 
-export default function Single({ post, canonical }: {post: Post, canonical?: string}) {
+export default function Single({ post, canonical, comments, guest }: {post: Post, canonical?: string, comments?: CommentPaginate, guest: boolean}) {
+    const categories = post.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'categories');
+    const tags: Array<Taxonomy> = post.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'tags');
+    const [message, setMessage] = useState<{status: string, message: string}>(null);
+
+    const handleComment = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        //document.getElementById('submit').setAttribute('disabled', 'disabled');
+
+        axios.post('', {content: e.target['content'].value}).then((res) => {
+            e.target['content'].value = '';
+            setMessage({status: res.data.status, message: res.data.data.message});
+        });
+
+        return false;
+    }
 
     return (
         <Main>
@@ -49,29 +66,30 @@ export default function Single({ post, canonical }: {post: Post, canonical?: str
                                             </li>*/}
 
                                         <li className="list-inline-item">
-                                    <span>
-                                        {__('by')}
-                                    </span>
+                                            <span>
+                                                {__('by')}
+                                            </span>
                                             <a href="#">
                                                 {post.author?.name},
                                             </a>
                                         </li>
 
                                         <li className="list-inline-item">
-                                    <span className="text-dark text-capitalize ml-1">
-                                        {post.created_at}
-                                    </span>
+                                            <span className="text-dark text-capitalize ml-1">
+                                                {post.created_at}
+                                            </span>
                                         </li>
 
                                         <li className="list-inline-item">
-                                            <span className="text-dark text-capitalize">
-                                                {__('in')}
+                                            <span className="text-dark text-capitalize ml-1 mr-1">
+                                                {__('in') }
                                             </span>
-                                            {/*@foreach($categories as $category)
-                                            <a href="{{ $category->url }}">
-                                                {$category->name}
-                                            </a>
-                                            @endforeach*/}
+
+                                            {categories?.map((item: Taxonomy) => (
+                                                <Link href={item.url} key={item.id}>
+                                                    {item.name}
+                                                </Link>
+                                            ))}
                                         </li>
 
                                     </ul>
@@ -128,7 +146,7 @@ export default function Single({ post, canonical }: {post: Post, canonical?: str
                                         </ul>
                                     </div>
 
-                                    {post.content}
+                                    <div dangerouslySetInnerHTML={{__html: post?.content || ''}}></div>
                                 </div>
                             </div>
 
@@ -138,42 +156,75 @@ export default function Single({ post, canonical }: {post: Post, canonical?: str
                                         <i className="fa fa-tags"></i>
                                     </li>
 
-                                    {/*@foreach($tags as $tag)
-                                <li className="list-inline-item">
-                                    <a href="{{ $tag->url }}">
-                                        #{$tag->name}
-                                    </a>
-                                </li>
-                                @endforeach*/}
+                                    {tags.map((item: Taxonomy) => (
+                                        <li className="list-inline-item" key={item.id}>
+                                            <Link href={item.url}>
+                                                {item.name}
+                                            </Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
 
-                            {/*{% if errors.any() %}
-                        <div className="alert alert-danger">
-                            <ul className="list-group">
-                                {% for error in errors.all() %}
-                                <li className="list-group-item">{{error}}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        {% endif %}
-
-                        {% if status == 'success' %}
-                        <div className="alert alert-success">
-                            {{message}}
-                        </div>
-                        {% endif %}
 
                         <div id="comments" className="comments-area">
-                            {{comment_template($post, 'theme::components.comments')}}
+                            <Comments comments={comments} />
 
                             <div className="comment-respond">
-                                <h3 className="comment-reply-title">{{__('Leave a Reply')}}</h3>
-                                {{comment_form($post)}}
+                                <h3 className="comment-reply-title">{__('Leave a Reply')}</h3>
+
+                                {message ? (message.status ?
+                                        <div className="alert alert-success">{message.message}</div> :
+                                        <div className="alert alert-danger">{message.message}</div>
+                                ) : ''}
+
+                                <form onSubmit={handleComment} method="post" className="comment-form" id="comment-form">
+                                    <p className="comment-notes">
+                                        <span id="email-notes">{__('Your email address will not be published.')}</span>
+                                        {__('Required fields are marked')}
+                                        <span className="required">*</span>
+                                    </p>
+
+                                    <p className="comment-form-comment">
+                                        <label htmlFor="content">{__('Comment')}
+                                            <span className="required">*</span>
+                                        </label>
+                                        <textarea name="content"
+                                                  id="content"
+                                                  cols="45"
+                                                  rows="5"
+                                                  maxLength="65525"
+                                                  required="required"></textarea>
+                                    </p>
+
+                                    {guest ? (
+                                        <>
+                                            <p className="comment-form-author">
+                                                <label htmlFor="author">{__('Name')} <span
+                                                    className="required">*</span></label>
+                                                <input type="text" id="author" name="name" required="required"/>
+                                            </p>
+
+                                            <p className="comment-form-email">
+                                                <label htmlFor="email">{__('Email')} <span
+                                                    className="required">*</span></label>
+                                                <input type="email" id="email" name="email" required="required"/>
+                                            </p>
+
+                                            <p className="comment-form-url">
+                                                <label htmlFor="website">{__('Website')}</label>
+                                                <input type="text" id="website" name="website"/>
+                                            </p>
+                                        </>
+                                    ) : ''}
+
+                                    <p className="form-submit">
+                                        <input type="submit" name="submit" id="submit" className="submit"
+                                               value={ __('Post Comment') }/>
+                                    </p>
+                                </form>
                             </div>
-                        </div>*/}
-
-
+                        </div>
 
                             {/*<div className="row">
                             <div className="col-md-6">
@@ -205,7 +256,7 @@ export default function Single({ post, canonical }: {post: Post, canonical?: str
 
                             <div className="clearfix"></div>
 
-                            <Related post={post} />
+                            {/*<Related post={post} />*/}
                         </div>
 
                         <div className="col-md-4">

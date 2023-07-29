@@ -16,6 +16,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Juzaweb\Backend\Http\Resources\CommentResource;
@@ -88,7 +89,7 @@ class ThemeRender implements ThemeRenderContract
 
     protected function parseParamToArray($param)
     {
-        if (is_a($param, 'Illuminate\Support\ViewErrorBag')) {
+        if ($param instanceof \Illuminate\Support\ViewErrorBag) {
             return $param;
         }
 
@@ -132,7 +133,7 @@ class ThemeRender implements ThemeRenderContract
     protected function parseParamEloquentCollectionToArray(EloquentCollection|LengthAwarePaginator $collection): array
     {
         if ($collection->isEmpty()) {
-            return $collection->toArray();
+            return ResourceCollection::make($collection)->response()->getData(true);
         }
 
         if ($collection->first() instanceof Post) {
