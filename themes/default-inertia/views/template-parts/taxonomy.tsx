@@ -1,9 +1,11 @@
 import {__} from "@/helpers/functions";
-import {Taxonomy} from "@/types/posts";
+import {PostPaginate, Taxonomy} from "@/types/posts";
 import Main from "../layouts/main";
 import {Link} from "@inertiajs/react";
+import Pagination from "../components/pagination";
+import Content from "./content";
 
-export default function ({ taxonomy }: {taxonomy: Taxonomy}) {
+export default function ({ taxonomy, page }: {taxonomy: Taxonomy, page: PostPaginate}) {
     return (
         <Main>
             <section>
@@ -31,11 +33,13 @@ export default function ({ taxonomy }: {taxonomy: Taxonomy}) {
                                 <h4 className="border_section">{taxonomy.name}</h4>
 
                                 <div className="row">
-                                    {/*@foreach($posts as $post)
-                                <div className="col-md-6">
-                                    {{get_template_part($post, 'content')}}
-                                </div>
-                                @endforeach*/}
+                                {page.data.map((post: any) => {
+                                        return (
+                                            <div className="col-md-6" key={post.id}>
+                                                <Content post={post} />
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </aside>
 
@@ -51,8 +55,8 @@ export default function ({ taxonomy }: {taxonomy: Taxonomy}) {
 
                     <div className="pagination-area">
                         <div className="pagination wow fadeIn animated" data-wow-duration="2s" data-wow-delay="0.5s"
-                             style="visibility: visible; animation-duration: 2s; animation-delay: 0.5s; animation-name: fadeIn;">
-                            {/*{{$posts->links('theme::components.pagination')}}*/}
+                             style={{visibility: 'visible', animationDuration: '2s', animationDelay: '0.5s', animationName: 'fadeIn'}}>
+                           <Pagination data={page}></Pagination>
                         </div>
                     </div>
                 </div>

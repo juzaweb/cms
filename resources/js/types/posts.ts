@@ -1,4 +1,5 @@
 export interface Taxonomy {
+    url: any;
     id: string,
     name: string,
     slug: string,
@@ -40,6 +41,50 @@ export interface Post {
 export interface Comment {
     id: string
     name: string
+    avatar?: string
     content?: string
     created_at?: string
+}
+
+export interface CommentMeta {
+    meta_key: string
+    meta_value?: string
+}
+
+export interface PostPaginate {
+    meta: {
+        current_page: Number
+        from: Number
+        last_page: Number
+        path: string
+        per_page: Number
+        to: Number
+        total: Number
+        links: {
+            first: string
+            last: string
+            next?: string
+            prev?: string
+        }
+    }
+    data: Array<Post>
+}
+
+export interface CommentPaginate {
+    meta: {
+        current_page: Number
+        from: Number
+        last_page: Number
+        path: string
+        per_page: Number
+        to: Number
+        total: Number
+        links: {
+            first: string
+            last: string
+            next?: string
+            prev?: string
+        }
+    }
+    data: Array<Comment>
 }

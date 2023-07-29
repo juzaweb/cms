@@ -28,7 +28,8 @@ class PostFactory extends Factory
 
         return [
             'title' => $title,
-            'content' => $this->faker->paragraph(10),
+            'content' => $this->randomContent(),
+            'thumbnail' => $this->randomThumbnail(),
             'status' => 'publish',
             'type' => 'posts',
             'slug' => Str::slug($title),
@@ -37,5 +38,42 @@ class PostFactory extends Factory
             'created_by' => $users[array_rand($users)],
             'updated_by' => $users[array_rand($users)],
         ];
+    }
+
+    protected function randomThumbnail($width = 640, $height = 480): string
+    {
+        $date = date('Y/m/d');
+        $imageFolder = storage_path("app/public/". $date);
+
+        if (!is_dir($imageFolder)) {
+            if (!mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $imageFolder));
+            }
+        }
+
+        $thumbnail = $this->faker->image(
+            $imageFolder,
+            $width,
+            $height,
+            null,
+            false,
+            false,
+            "{$width}x{$height}",
+            true
+        );
+
+        return $date . "/{$thumbnail}";
+    }
+
+    protected function randomContent(): string
+    {
+        $paragraphs = $this->faker->paragraphs(random_int(10, 50));
+
+        $content = '';
+        foreach ($paragraphs as $para) {
+            $content .= "<p>{$para}</p>";
+        }
+
+        return $content;
     }
 }

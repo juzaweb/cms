@@ -1,12 +1,19 @@
-import {__, url} from "@/helpers/functions";
+import { __, url } from "@/helpers/functions";
 
 export default function Login() {
+
+    const handleLogin = (e: React.FormEvent) => {
+        e.isDefaultPrevented();
+
+
+    }
+
     return (
         <section className="wrap__section">
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="card mx-auto" style="max-width: 380px;">
+                        <div className="card mx-auto" style={{ maxWidth: "300px" }}>
                             <div className="card-body">
                                 <h4 className="card-title mb-4">{__('Sign in')}</h4>
 
@@ -20,7 +27,7 @@ export default function Login() {
                                 </div>
                                 {% endif %}*/}
 
-                                <form action="" method="post">
+                                <form onSubmit={handleLogin} method="post">
 
                                     {/*<a href="#" class="btn btn-facebook btn-block mb-2 text-white"> <i class="fa fa-facebook"></i> &nbsp; Sign
                                         in
@@ -30,13 +37,13 @@ export default function Login() {
                                         Google</a>*/}
 
                                     <div className="form-group">
-                                        <input name="email" className="form-control" placeholder={ __('Email') }
-                                               type="text"/>
+                                        <input name="email" className="form-control" placeholder={__('Email')}
+                                            type="text" />
                                     </div>
 
                                     <div className="form-group">
                                         <input name="password" className="form-control"
-                                               placeholder={ __('Password') } type="password"/>
+                                            placeholder={__('Password')} type="password" />
                                     </div>
 
                                     <div className="form-group">
@@ -44,7 +51,7 @@ export default function Login() {
                                             {__('Forgot password?')}
                                         </a>
                                         <label className="float-left custom-control custom-checkbox"> <input
-                                            name="remember" type="checkbox" className="custom-control-input" checked=""/>
+                                            name="remember" type="checkbox" className="custom-control-input" checked={true} />
                                             <span className="custom-control-label"> {__('Remember')} </span>
                                         </label>
                                     </div>
@@ -57,7 +64,7 @@ export default function Login() {
                         </div>
 
                         <p className="text-center mt-4">{__('Don\'t have account?')} <a
-                            href={ url('register') }>{__('Sign up')}</a></p>
+                            href={url('register')}>{__('Sign up')}</a></p>
                     </div>
                 </div>
             </div>

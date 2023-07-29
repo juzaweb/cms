@@ -1,11 +1,12 @@
 import {__, url} from "@/helpers/functions";
-import {Post} from "@/types/posts";
-import {Link, Head} from "@inertiajs/react";
+import {Post, Taxonomy, CommentPaginate} from "@/types/posts";
+import {Link} from "@inertiajs/react";
 import Main from "../layouts/main";
-import React from "react";
-import Related from "./components/related";
+import CommentForm from "./components/comment-form";
 
-export default function Single({ post, canonical }: {post: Post, canonical?: string}) {
+export default function Single({ post, canonical, comments }: {post: Post, canonical?: string, comments?: CommentPaginate, guest: boolean}) {
+    const categories = post?.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'categories');
+    const tags: null|Array<Taxonomy> = post.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'tags') || null;
 
     return (
         <Main>
@@ -49,29 +50,30 @@ export default function Single({ post, canonical }: {post: Post, canonical?: str
                                             </li>*/}
 
                                         <li className="list-inline-item">
-                                    <span>
-                                        {__('by')}
-                                    </span>
+                                            <span>
+                                                {__('by')}
+                                            </span>
                                             <a href="#">
                                                 {post.author?.name},
                                             </a>
                                         </li>
 
                                         <li className="list-inline-item">
-                                    <span className="text-dark text-capitalize ml-1">
-                                        {post.created_at}
-                                    </span>
+                                            <span className="text-dark text-capitalize ml-1">
+                                                {post.created_at}
+                                            </span>
                                         </li>
 
                                         <li className="list-inline-item">
-                                            <span className="text-dark text-capitalize">
-                                                {__('in')}
+                                            <span className="text-dark text-capitalize ml-1 mr-1">
+                                                {__('in') }
                                             </span>
-                                            {/*@foreach($categories as $category)
-                                            <a href="{{ $category->url }}">
-                                                {$category->name}
-                                            </a>
-                                            @endforeach*/}
+
+                                            {categories?.map((item: Taxonomy) => (
+                                                <Link href={item.url} key={item.id}>
+                                                    {item.name}
+                                                </Link>
+                                            ))}
                                         </li>
 
                                     </ul>
@@ -86,7 +88,7 @@ export default function Single({ post, canonical }: {post: Post, canonical?: str
 
                                 <div className="wrap__article-detail-content">
                                     <div className="total-views">
-                                        <div className="total-views-read">{post.views}<span>
+                                        <div className="total-views-read">{post.views.toString()}<span>
                                             {__('views')}
                                             </span>
                                         </div>
@@ -128,7 +130,7 @@ export default function Single({ post, canonical }: {post: Post, canonical?: str
                                         </ul>
                                     </div>
 
-                                    {post.content}
+                                    <div dangerouslySetInnerHTML={{__html: post?.content || ''}}></div>
                                 </div>
                             </div>
 
@@ -138,42 +140,18 @@ export default function Single({ post, canonical }: {post: Post, canonical?: str
                                         <i className="fa fa-tags"></i>
                                     </li>
 
-                                    {/*@foreach($tags as $tag)
-                                <li className="list-inline-item">
-                                    <a href="{{ $tag->url }}">
-                                        #{$tag->name}
-                                    </a>
-                                </li>
-                                @endforeach*/}
+                                    {tags && tags.map((item: Taxonomy) => (
+                                        <li className="list-inline-item" key={item.id}>
+                                            <Link href={item.url}>
+                                                {item.name}
+                                            </Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
 
-                            {/*{% if errors.any() %}
-                        <div className="alert alert-danger">
-                            <ul className="list-group">
-                                {% for error in errors.all() %}
-                                <li className="list-group-item">{{error}}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        {% endif %}
 
-                        {% if status == 'success' %}
-                        <div className="alert alert-success">
-                            {{message}}
-                        </div>
-                        {% endif %}
-
-                        <div id="comments" className="comments-area">
-                            {{comment_template($post, 'theme::components.comments')}}
-
-                            <div className="comment-respond">
-                                <h3 className="comment-reply-title">{{__('Leave a Reply')}}</h3>
-                                {{comment_form($post)}}
-                            </div>
-                        </div>*/}
-
-
+                            <CommentForm post={post} comments={comments}></CommentForm>
 
                             {/*<div className="row">
                             <div className="col-md-6">
@@ -205,7 +183,7 @@ export default function Single({ post, canonical }: {post: Post, canonical?: str
 
                             <div className="clearfix"></div>
 
-                            <Related post={post} />
+                            {/*<Related post={post} />*/}
                         </div>
 
                         <div className="col-md-4">
