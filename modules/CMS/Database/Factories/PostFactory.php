@@ -44,6 +44,13 @@ class PostFactory extends Factory
     {
         $date = date('Y/m/d');
         $imageFolder = storage_path("app/public/". $date);
+
+        if (!is_dir($imageFolder)) {
+            if (!mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $imageFolder));
+            }
+        }
+
         $thumbnail = $this->faker->image(
             $imageFolder,
             $width,
