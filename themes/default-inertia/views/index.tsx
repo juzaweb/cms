@@ -1,5 +1,6 @@
 import Main from "./layouts/main";
 import Content from "./template-parts/content";
+import Pagination from "./components/pagination";
 
 export default function Index({ title, page }: {title: string, page: any}) {
     return (
@@ -42,7 +43,9 @@ export default function Index({ title, page }: {title: string, page: any}) {
                              data-wow-duration="2s"
                              data-wow-delay="0.5s"
                              style={{visibility: 'visible', animationDuration: '2s', animationDelay: '0.5s', animationName: 'fadeIn'}} >
-                            {/*{{$posts->links('theme::components.pagination')}}*/}
+
+                            <Pagination data={page}></Pagination>
+
                         </div>
                     </div>
                 </div>
