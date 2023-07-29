@@ -29,6 +29,14 @@ abstract class ResourceCommand extends Command
      */
     protected $columns;
 
+    /**
+     * Generates a model using the given table and model names.
+     *
+     * @param string $table The name of the table to generate the model for.
+     * @param string $model The name of the model to generate.
+     * @throws Exception If an error occurs during the model generation.
+     * @return void
+     */
     protected function makeModel($table, $model)
     {
         $this->call(
@@ -43,6 +51,13 @@ abstract class ResourceCommand extends Command
         );
     }
 
+    /**
+     * Generates a data table for a given model.
+     *
+     * @param string $model The name of the model.
+     * @throws \Exception If an error occurs while generating the data table.
+     * @return void
+     */
     protected function makeDataTable($model)
     {
         $this->call(
@@ -56,6 +71,14 @@ abstract class ResourceCommand extends Command
         );
     }
 
+    /**
+     * Generates the controller file for a given table and model.
+     *
+     * @param string $table The name of the table.
+     * @param string $model The name of the model.
+     * @throws Exception If an error occurs while generating the file.
+     * @return void
+     */
     protected function makeController($table, $model)
     {
         $file = $model . 'Controller.php';
@@ -78,6 +101,12 @@ abstract class ResourceCommand extends Command
         $this->makeFile($path, $contents);
     }
 
+    /**
+     * Generates views for a given table.
+     *
+     * @param string $table The name of the table.
+     * @return void
+     */
     protected function makeViews($table)
     {
         $singular = Str::singular($table);
@@ -108,6 +137,12 @@ abstract class ResourceCommand extends Command
         $this->makeFile($path, $contents);
     }
 
+    /**
+     * Returns the file path of the destination controller for the given file.
+     *
+     * @param mixed $file The file for which the destination controller file path is needed.
+     * @return string The file path of the destination controller.
+     */
     protected function getDestinationControllerFilePath($file): string
     {
         $controllerPath = $this->module->getPath() .'/'.
@@ -121,6 +156,13 @@ abstract class ResourceCommand extends Command
         return $controllerPath . '/' . $file;
     }
 
+    /**
+     * Retrieves the file path for the destination views of a given table and file.
+     *
+     * @param mixed $table The name of the table.
+     * @param mixed $file The name of the file.
+     * @return string The file path for the destination views.
+     */
     protected function getDestinationViewsFilePath($table, $file): string
     {
         $viewPath = $this->module->getPath() .'/'.
@@ -134,6 +176,16 @@ abstract class ResourceCommand extends Command
         return $viewPath . '/' . $file;
     }
 
+    /**
+     * Retrieves the views for column 1.
+     *
+     * This function filters the list of columns and retrieves the views
+     * for column 1. It excludes any columns that are present in the
+     * views for column 2. The views are rendered using a stub template
+     * and the resulting strings are concatenated and returned.
+     *
+     * @return string The concatenated views for column 1.
+     */
     protected function getViewsFormCol1(): string
     {
         $str = '';
@@ -158,6 +210,11 @@ abstract class ResourceCommand extends Command
         return $str;
     }
 
+    /**
+     * Retrieves the views for column 2.
+     *
+     * @return string The concatenated views for column 2.
+     */
     protected function getViewsFormCol2(): string
     {
         $str = '';
@@ -182,6 +239,11 @@ abstract class ResourceCommand extends Command
         return $str;
     }
 
+    /**
+     * Retrieves the columns to be displayed in the second column of the views form.
+     *
+     * @return array The array of column names.
+     */
     protected function getColumnsViewsFormCol2(): array
     {
         return [
@@ -190,6 +252,12 @@ abstract class ResourceCommand extends Command
         ];
     }
 
+    /**
+     * Retrieves the path to the stub file for a given column view.
+     *
+     * @param string $column The name of the column.
+     * @return string The path to the stub file.
+     */
     protected function getColumnViewsStubPath($column): string
     {
         $stubPath = JW_PACKAGE_PATH . '/stubs/plugin/';

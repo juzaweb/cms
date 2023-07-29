@@ -24,22 +24,67 @@ use Illuminate\Support\Str;
 
 abstract class DataTable implements Arrayable
 {
+    /**
+     * Number of items per page.
+     *
+     * @var int
+     */
     protected int $perPage = 10;
 
+    /**
+     * Name of the attribute used for sorting.
+     *
+     * @var string
+     */
     protected string $sortName = 'id';
 
+    /**
+     * Sorting order (asc or desc).
+     *
+     * @var string
+     */
     protected string $sortOder = 'desc';
 
+    /**
+     * Additional parameters.
+     *
+     * @var array
+     */
     protected array $params = [];
 
+    /**
+     * URL for fetching data.
+     *
+     * @var string|null
+     */
     protected ?string $dataUrl = null;
 
+    /**
+     * URL for performing actions.
+     *
+     * @var string|null
+     */
     protected ?string $actionUrl = null;
 
+     /**
+     * Array of characters to escape.
+     *
+     * @var array
+     */
     protected array $escapes = [];
 
+    /**
+     * Flag indicating whether searching is enabled.
+     *
+     * @var bool
+     */
     protected bool $searchable = true;
 
+    /**
+     * Current URL.
+     *
+     * @var string|null
+     */
     public ?string $currentUrl = null;
 
     public static function make(): static
@@ -62,6 +107,12 @@ abstract class DataTable implements Arrayable
      */
     abstract public function query(array $data);
 
+    /**
+     * Retrieves data based on the given request parameters.
+     *
+     * @param Request $request The request object containing the parameters for data retrieval.
+     * @return array The retrieved data in the form of an array with two elements: the total count and the rows.
+     */
     public function getData(Request $request): array
     {
         $sort = $request->get('sort', 'id');
@@ -79,6 +130,12 @@ abstract class DataTable implements Arrayable
         return [$count, $rows];
     }
 
+    /**
+     * Mounts the data by converting the parameters to an array and calling the mount method if it exists.
+     *
+     * @param mixed ...$params The parameters to be mounted.
+     * @return void
+     */
     public function mountData(...$params)
     {
         $params = $this->paramsToArray($params);
@@ -108,11 +165,24 @@ abstract class DataTable implements Arrayable
         ];
     }
 
+    /**
+     * A description of the entire PHP function.
+     *
+     * @param datatype $action description
+     * @param datatype $ids description
+     * @throws Some_Exception_Class description of exception
+     * @return Some_Return_Value
+     */
     public function bulkActions($action, $ids)
     {
         //
     }
 
+    /**
+     * Retrieves the fields used for searching.
+     *
+     * @return array The search fields.
+     */
     public function searchFields(): array
     {
         return [
@@ -124,6 +194,12 @@ abstract class DataTable implements Arrayable
         ];
     }
 
+    /**
+     * Generate an array of actions for a given row.
+     *
+     * @param mixed $row The row for which actions are generated.
+     * @return array The array of actions for the given row.
+     */
     public function rowAction($row)
     {
         return [
@@ -196,6 +272,11 @@ abstract class DataTable implements Arrayable
         ];
     }
 
+    /**
+     * Retrieves the data to be rendered.
+     *
+     * @return array Returns an array containing the data to be rendered.
+     */
     protected function getDataRender(): array
     {
         $uniqueId = 'juzaweb_' . Str::random(10);

@@ -45,7 +45,7 @@ class PostController extends FrontendController
 
         $posts->appends(request()->query());
 
-        if ($this->template == 'twig') {
+        if ($this->template === 'twig') {
             $page = PostResourceCollection::make($posts)
                 ->response()
                 ->getData(true);

@@ -51,7 +51,7 @@ class SortCriteria extends Criteria implements CriteriaInterface
 
         $hasSort = false;
         foreach ($this->queries as $col => $value) {
-            if (!in_array($col, $fields)) {
+            if (!in_array($col, $fields, true)) {
                 continue;
             }
 
@@ -59,7 +59,7 @@ class SortCriteria extends Criteria implements CriteriaInterface
                 $value = 'ASC';
             }
 
-            $model->orderBy("{$tbl}.{$col}", $value);
+            $model = $model->orderBy("{$tbl}.{$col}", $value);
             $hasSort = true;
         }
 
@@ -93,7 +93,7 @@ class SortCriteria extends Criteria implements CriteriaInterface
 
         $defaults = $repository->getSortableDefaults();
         foreach ($defaults as $col => $order) {
-            $model->orderBy("{$tbl}.{$col}", $order);
+            $model = $model->orderBy("{$tbl}.{$col}", $order);
         }
 
         return $model;
