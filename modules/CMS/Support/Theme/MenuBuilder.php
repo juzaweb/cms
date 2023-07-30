@@ -10,12 +10,13 @@
 
 namespace Juzaweb\CMS\Support\Theme;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 use Juzaweb\Backend\Http\Resources\MenuItemResource;
 use Juzaweb\Backend\Models\MenuItem;
 use Juzaweb\CMS\Facades\HookAction;
 
-class MenuBuilder
+class MenuBuilder implements Arrayable
 {
     protected Collection|array $items;
     protected array $args;
@@ -49,6 +50,7 @@ class MenuBuilder
     protected function buildMenu($items)
     {
         $items = $this->buildItems($items);
+
         return $this->args['item_view']->render(
             [
                 'items' => $items
@@ -103,5 +105,10 @@ class MenuBuilder
         }
 
         return [];
+    }
+
+    public function toArray(): array
+    {
+        return $this->buildItems($this->items());
     }
 }

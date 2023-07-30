@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Juzaweb\Backend\Http\Resources\UserResource;
 use Juzaweb\Backend\Models\Menu;
+use Juzaweb\CMS\Support\Theme\MenuBuilder;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -62,8 +63,13 @@ class HandleInertiaRequests extends Middleware
 
         $user = $jw_user ? UserResource::make($jw_user)->toArray($request) : null;
 
+        $primaryMenuItems = [];
         $menu = get_menu_by_theme_location('primary');
-        $menu = Menu::find($menu);
+        if ($menu && $menu = Menu::find($menu)) {
+            $items = jw_menu_items($menu);
+            $menuBuilder = new MenuBuilder($items);
+            $primaryMenuItems = $menuBuilder->toArray();
+        }
 
         return apply_filters(
             'theme.inertia.frontend_params',
@@ -74,6 +80,7 @@ class HandleInertiaRequests extends Middleware
                 'is_admin' => $user ? $user['is_admin'] : false,
                 'auth' => (bool) $user,
                 'guest' => ! $user,
+                'menu_items' => $primaryMenuItems,
             ]
         );
     }
