@@ -13,6 +13,7 @@ namespace Juzaweb\CMS\Contracts;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * @see \Juzaweb\CMS\Support\Html\Field
