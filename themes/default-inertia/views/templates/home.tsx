@@ -3,6 +3,7 @@ import Main from "../layouts/main";
 import Pagination from "../components/pagination";
 import {useState} from "react";
 import {Post, PostPaginate} from "@/types/posts";
+import DynamicSidebar from "../components/dynamic-sidebar";
 
 export default function () {
     const [posts, setPosts] = useState<PostPaginate|null>(null);
@@ -80,7 +81,7 @@ export default function () {
 
                             <div className="col-md-4">
                                 <div className="sticky-top">
-                                    {/*{{dynamic_sidebar('sidebar')}}*/}
+                                    <DynamicSidebar />
                                 </div>
                             </div>
 

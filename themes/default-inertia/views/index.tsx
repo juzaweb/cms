@@ -1,6 +1,7 @@
 import Main from "./layouts/main";
 import Content from "./template-parts/content";
 import Pagination from "./components/pagination";
+import DynamicSidebar from "./components/dynamic-sidebar";
 
 export default function Index({ title, page }: {title: string, page: any}) {
     return (
@@ -31,7 +32,7 @@ export default function Index({ title, page }: {title: string, page: any}) {
 
                         <div className="col-md-4">
                             <div className="sidebar-sticky">
-                                {/*{{dynamic_sidebar('sidebar')}}*/}
+                                <DynamicSidebar />
                             </div>
                         </div>
 

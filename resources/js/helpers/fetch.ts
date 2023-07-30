@@ -71,7 +71,7 @@ export async function login(email:string, password:string, remember:boolean = tr
 }
 
 export async function getSidebar(name: string) {
-    const res = await axios.get(`/auth/sidebar?sidebar=${name}`);
+    const res = await axios.get(`/ajax/sidebar?sidebar=${name}`);
 
     return res;
 }

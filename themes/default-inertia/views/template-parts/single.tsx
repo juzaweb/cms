@@ -3,6 +3,7 @@ import {Post, Taxonomy, CommentPaginate} from "@/types/posts";
 import {Link} from "@inertiajs/react";
 import Main from "../layouts/main";
 import CommentForm from "./components/comment-form";
+import DynamicSidebar from "../components/dynamic-sidebar";
 
 export default function Single({ post, canonical, comments }: {post: Post, canonical?: string, comments?: CommentPaginate, guest: boolean}) {
     const categories = post?.taxonomies?.filter((item: Taxonomy) => item.taxonomy === 'categories');
@@ -188,7 +189,7 @@ export default function Single({ post, canonical, comments }: {post: Post, canon
 
                         <div className="col-md-4">
                             <div className="sticky-top">
-                                {/*{{dynamic_sidebar('sidebar')}}*/}
+                                <DynamicSidebar />
                             </div>
                         </div>
                     </div>
