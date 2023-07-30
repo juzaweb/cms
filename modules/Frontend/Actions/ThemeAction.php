@@ -37,7 +37,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function handle()
+    public function handle(): void
     {
         HookAction::addAction(Action::INIT_ACTION, [$this, 'postTypes']);
         HookAction::addAction(Action::INIT_ACTION, [$this, 'resources']);
@@ -63,7 +63,7 @@ class ThemeAction extends Action
         $this->addAction(Action::FRONTEND_INIT, [$this, 'addFrontendAjax']);
     }
 
-    public function postTypes()
+    public function postTypes(): void
     {
         $types = $this->getRegister('post_types');
         foreach ($types as $key => $type) {
@@ -76,7 +76,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function resources()
+    public function resources(): void
     {
         $resources = $this->getRegister('resources');
         foreach ($resources as $key => $resource) {
@@ -85,7 +85,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function styles()
+    public function styles(): void
     {
         $styles = $this->getRegister('styles');
         $version = ThemeLoader::getVersion($this->currentTheme);
@@ -122,7 +122,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function sidebars()
+    public function sidebars(): void
     {
         $sidebars = $this->getRegister('sidebars');
         foreach ($sidebars as $key => $sidebar) {
@@ -130,7 +130,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function widgets()
+    public function widgets(): void
     {
         $widgets = $this->getRegister('widgets');
         $keys = array_keys($widgets);
@@ -182,7 +182,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function blocks()
+    public function blocks(): void
     {
         $blocks = $this->getRegister('blocks');
         $theme = jw_current_theme();
@@ -201,7 +201,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function templates()
+    public function templates(): void
     {
         $templates = $this->getRegister('templates');
 
@@ -213,7 +213,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function settingFields()
+    public function settingFields(): void
     {
         $fields = $this->getRegister('setting_fields');
 
@@ -226,7 +226,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function navMenus()
+    public function navMenus(): void
     {
         $items = $this->getRegister('nav_menus');
         foreach ($items as $key => $item) {
@@ -238,7 +238,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function addBodyClass()
+    public function addBodyClass(): void
     {
         $bodyClass = $this->getRegister('body_class');
         if ($bodyClass) {
@@ -251,7 +251,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function appendHeader()
+    public function appendHeader(): void
     {
         $append = $this->getRegister('append_header');
         if ($append) {
@@ -264,7 +264,7 @@ class ThemeAction extends Action
         }
     }
 
-    public function addThemeHeader()
+    public function addThemeHeader(): void
     {
         if (is_admin()) {
             echo e(view('cms::frontend.admin_bar'));
@@ -338,6 +338,13 @@ class ThemeAction extends Action
             'menu',
             [
                 'callback' => [AjaxController::class, 'getMenuItems'],
+            ]
+        );
+
+        $this->hookAction->registerFrontendAjax(
+            'sidebar',
+            [
+                'callback' => [AjaxController::class, 'sidebar'],
             ]
         );
     }
