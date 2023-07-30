@@ -18,16 +18,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\PostRating;
+use Juzaweb\Backend\Repositories\MenuRepository;
 use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Support\Theme\MenuBuilder;
 use Juzaweb\Frontend\Http\Requests\LikeRequest;
 use Juzaweb\Frontend\Http\Requests\RatingRequest;
 
 class AjaxController extends FrontendController
 {
-    public function __construct(protected PostRepository $postRepository)
-    {
+    public function __construct(
+        protected PostRepository $postRepository,
+        protected MenuRepository $menuRepository
+    ) {
         //
     }
 
@@ -134,6 +138,25 @@ class AjaxController extends FrontendController
         return response()->json(
             [
                 'data' => PostResourceCollection::make($posts),
+            ]
+        );
+    }
+
+    public function getMenuItems(Request $request): JsonResponse
+    {
+        $location = $request->input('location');
+
+        $menu = $this->menuRepository->getFrontendDetailByLocation($location);
+
+        if ($menu === null) {
+            return response()->json(['items' => []]);
+        }
+
+        $items = jw_menu_items($menu);
+
+        return response()->json(
+            [
+                'items' => (new MenuBuilder($items))->toArray(),
             ]
         );
     }

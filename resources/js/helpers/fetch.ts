@@ -27,14 +27,31 @@ export interface RelatedPostOptions {
     limit: number
 }
 
+export interface MenuOptions {
+    location: string
+}
+
 /**
- * Retrieves related posts based on the provided post slug.
+ * Retrieves related posts for a given post.
  *
- * @param {Post} post - The post object containing the slug.
- * @return {Promise<AxiosResponse>} The response from the AJAX call to retrieve related posts.
+ * @param {Post} post - The post object for which to retrieve related posts.
+ * @param {RelatedPostOptions} [options] - The options for retrieving related posts. Default is {limit: 10}.
+ * @returns {Promise<any>} - A promise that resolves to the response containing the related posts.
  */
 export async function getRelatedPosts(post: Post, options: RelatedPostOptions = {limit: 10}) {
     const res = await axios.get('/ajax/related-posts?post_slug='+ post.slug);
+
+    return res;
+}
+
+/**
+ * Retrieves the menu for the specified location.
+ *
+ * @param {MenuOptions} options - The options for retrieving the menu.
+ * @return {Promise<any>} A Promise that resolves to the menu data.
+ */
+export async function getMenu(options: MenuOptions) {
+    const res = await axios.get('/ajax/menu?location='+ options.location);
 
     return res;
 }

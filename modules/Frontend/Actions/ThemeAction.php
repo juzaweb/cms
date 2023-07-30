@@ -12,6 +12,7 @@ namespace Juzaweb\Frontend\Actions;
 
 use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\Action;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Support\DefaultPageBlock;
@@ -25,11 +26,15 @@ class ThemeAction extends Action
 
     protected array $register = [];
 
-    public function __construct()
+    public function __construct(protected LocalThemeRepositoryContract $themeRepository)
     {
         parent::__construct();
         $this->currentTheme = jw_current_theme();
         $this->register = ThemeLoader::getRegister($this->currentTheme);
+
+        if ($this->themeRepository->currentTheme()->getTemplate() == 'inertia') {
+            $this->addFrontendAjaxForInertiaTemplate();
+        }
     }
 
     public function handle()
@@ -318,15 +323,23 @@ class ThemeAction extends Action
                 ]
             );
         }
+    }
 
-        if (in_array('related_posts_ajax', $support, true)) {
-            $this->hookAction->registerFrontendAjax(
-                'related-posts',
-                [
-                    'callback' => [AjaxController::class, 'relatedPosts'],
-                ]
-            );
-        }
+    public function addFrontendAjaxForInertiaTemplate(): void
+    {
+        $this->hookAction->registerFrontendAjax(
+            'related-posts',
+            [
+                'callback' => [AjaxController::class, 'relatedPosts'],
+            ]
+        );
+
+        $this->hookAction->registerFrontendAjax(
+            'menu',
+            [
+                'callback' => [AjaxController::class, 'getMenuItems'],
+            ]
+        );
     }
 
     protected function getRegister($key, $default = [])
