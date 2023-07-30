@@ -8,10 +8,10 @@ import { postComment } from "@/helpers/fetch";
 export default function CommentForm({ post, comments }: { post: Post, comments?: CommentPaginate }) {
     const [message, setMessage] = useState<null | { status: boolean, message: string }>(null);
     const { guest } = usePage().props;
-    const [content, setContent] = useState('');
-    const [name, setName] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [website, setWebsite] = useState(null);
+    const [content, setContent] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [website, setWebsite] = useState<string>('');
 
     const handleComment = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -24,7 +24,7 @@ export default function CommentForm({ post, comments }: { post: Post, comments?:
             setTimeout(() => setMessage(null), 3000);
         }).catch((err) => {
             console.log(err)
-            //setMessage({ status: false, message: err.response.data.message });
+            setMessage({ status: false, message: err.response.data.message });
         });
 
         return false;
@@ -67,20 +67,39 @@ export default function CommentForm({ post, comments }: { post: Post, comments?:
                     {guest ? (
                         <>
                             <p className="comment-form-author">
-                                <label htmlFor="author">{__('Name')} <span
+                                <label htmlFor="name">{__('Name')} <span
                                     className="required">*</span></label>
-                                <input type="text" id="author" name="name" required={true} value={name} />
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required={true}
+                                    value={name}
+                                    onChange={(e) => setName(e.currentTarget.value)}
+                                />
                             </p>
 
                             <p className="comment-form-email">
                                 <label htmlFor="email">{__('Email')} <span
                                     className="required">*</span></label>
-                                <input type="email" id="email" name="email" required={true} value={email} />
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required={true}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.currentTarget.value)} />
                             </p>
 
                             <p className="comment-form-url">
                                 <label htmlFor="website">{__('Website')}</label>
-                                <input type="text" id="website" name="website" value={website} />
+                                <input
+                                    type="text"
+                                    id="website"
+                                    name="website"
+                                    value={website}
+                                    onChange={(e) => setWebsite(e.currentTarget.value)}
+                                />
                             </p>
                         </>
                     ) : ''}

@@ -177,5 +177,13 @@ interface LocalPluginRepositoryContract
      */
     public function isDisabled(string $name): bool;
 
+    /**
+     * Determine whether the given plugin exist.
+     *
+     * @param $name
+     *
+     * @return bool
+     * @throws Exception
+     */
     public function has($name): bool;
 }

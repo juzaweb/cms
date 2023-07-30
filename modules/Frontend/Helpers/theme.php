@@ -222,8 +222,8 @@ if (!function_exists('jw_nav_menu')) {
         }
 
         $items = jw_menu_items($menu);
-        $builder = new MenuBuilder($items, $args);
-        return $builder->render();
+
+        return (new MenuBuilder($items, $args))->render();
     }
 }
 
@@ -260,9 +260,7 @@ if (!function_exists('jw_nav_backend_menu')) {
         }
 
         $items = jw_menu_items($menu);
-        $builder = new BackendMenuBuilder($items, $args);
-
-        return $builder->render();
+        return (new BackendMenuBuilder($items, $args))->render();
     }
 }
 

@@ -17,20 +17,20 @@ use Juzaweb\CMS\Facades\HookAction;
 
 class MenuBuilder
 {
-    protected $items;
-    protected $args;
+    protected Collection|array $items;
+    protected array $args;
 
     /**
-     * @param MenuItem[]|Collection $items
-     * @param array $args
+     * @param  Collection|MenuItem[]  $items
+     * @param  array  $args
      */
-    public function __construct($items, $args = [])
+    public function __construct(array|Collection $items, array $args = [])
     {
         $this->items = $items;
         $this->args = $args;
     }
 
-    public function render()
+    public function render(): string
     {
         $str = $this->args['container_before'];
         $items = $this->items();
@@ -49,12 +49,14 @@ class MenuBuilder
     protected function buildMenu($items)
     {
         $items = $this->buildItems($items);
-        return $this->args['item_view']->render([
-            'items' => $items
-        ]);
+        return $this->args['item_view']->render(
+            [
+                'items' => $items
+            ]
+        );
     }
 
-    protected function buildItems($items)
+    protected function buildItems($items): array
     {
         $result = [];
         $request = request();
@@ -81,9 +83,10 @@ class MenuBuilder
         $groups = $items->groupBy('box_key')->keys()->toArray();
 
         $menuBoxs = HookAction::getMenuBoxs($groups);
-        $menuBoxs = array_map(function ($item) {
-            return $item->get('menu_box');
-        }, $menuBoxs);
+        $menuBoxs = array_map(
+            fn ($item) => $item->get('menu_box'),
+            $menuBoxs
+        );
 
         foreach ($groups as $group) {
             if (empty($menuBoxs[$group])) {
