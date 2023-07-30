@@ -1,11 +1,24 @@
+import { login } from "@/helpers/fetch";
 import { __, url } from "@/helpers/functions";
+import { Link } from "@inertiajs/react";
+import { useState } from "react";
 
 export default function Login() {
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [remember, setRemember] = useState<boolean>(true);
+    const [message, setMessage] = useState<{status: boolean, message: string}|null>(null);
 
     const handleLogin = (e: React.FormEvent) => {
         e.isDefaultPrevented();
 
-
+        login(email, password, remember).then((res) => {
+            if (res.data.status) {
+                window.location.href = url("/");
+            }
+        }).catch((err) => {
+            setMessage({ status: false, message: err.response.data.message });
+        });
     }
 
     return (
@@ -17,15 +30,7 @@ export default function Login() {
                             <div className="card-body">
                                 <h4 className="card-title mb-4">{__('Sign in')}</h4>
 
-                                {/*{% if errors %}
-                                <div className="alert alert-danger">
-                                    <ul>
-                                        {% for error in errors %}
-                                        <li>{{error}}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                                {% endif %}*/}
+                                {message && <div className="alert alert-danger">{message.message}</div>}
 
                                 <form onSubmit={handleLogin} method="post">
 
@@ -38,20 +43,26 @@ export default function Login() {
 
                                     <div className="form-group">
                                         <input name="email" className="form-control" placeholder={__('Email')}
-                                            type="text" />
+                                            type="text" onChange={(e) => setEmail(e.target.value)} />
                                     </div>
 
                                     <div className="form-group">
                                         <input name="password" className="form-control"
-                                            placeholder={__('Password')} type="password" />
+                                            placeholder={__('Password')} type="password" onChange={(e) => setPassword(e.target.value)} />
                                     </div>
 
                                     <div className="form-group">
-                                        <a href="#" className="float-right">
+                                        <Link href={'forgot-password'} className="float-right">
                                             {__('Forgot password?')}
-                                        </a>
-                                        <label className="float-left custom-control custom-checkbox"> <input
-                                            name="remember" type="checkbox" className="custom-control-input" checked={true} />
+                                        </Link>
+                                        <label className="float-left custom-control custom-checkbox">
+                                        <input
+                                            name="remember"
+                                            type="checkbox"
+                                            className="custom-control-input"
+                                            checked={true}
+                                            onChange={(e) => setRemember(e.target.checked)}
+                                        />
                                             <span className="custom-control-label"> {__('Remember')} </span>
                                         </label>
                                     </div>

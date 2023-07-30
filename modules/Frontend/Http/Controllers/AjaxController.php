@@ -160,4 +160,17 @@ class AjaxController extends FrontendController
             ]
         );
     }
+
+    public function sidebar(Request $request): JsonResponse
+    {
+        $sidebar = $request->input('sidebar');
+
+        $config = get_theme_config("sidebar_{$sidebar}", []);
+
+        return response()->json(
+            [
+                'config' => array_values($config),
+            ]
+        );
+    }
 }

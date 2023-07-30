@@ -55,3 +55,23 @@ export async function getMenu(options: MenuOptions) {
 
     return res;
 }
+
+/**
+ * Logs in a user with the given email and password.
+ *
+ * @param {string} email - The user's email address.
+ * @param {string} password - The user's password.
+ * @param {boolean} remember - (optional) Indicates if the user wants to be remembered.
+ * @return {Promise<any>} A promise that resolves to the server response.
+ */
+export async function login(email:string, password:string, remember:boolean = true) {
+    const res = await axios.post('/auth/login', { email: email, password: password, remember: remember ? 1 : 0 });
+
+    return res;
+}
+
+export async function getSidebar(name: string) {
+    const res = await axios.get(`/auth/sidebar?sidebar=${name}`);
+
+    return res;
+}
