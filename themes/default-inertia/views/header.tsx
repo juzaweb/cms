@@ -1,6 +1,7 @@
 import {url} from "@/helpers/functions";
 import {Link} from "@inertiajs/react";
 import {usePage} from "@inertiajs/react";
+import PrimaryMenu from "./components/primary-menu";
 
 export default function Header() {
     const { config } = usePage().props;
@@ -48,6 +49,8 @@ export default function Header() {
                             </figure>
 
                             <div className="collapse navbar-collapse justify-content-between" id="main_nav99">
+
+                                <PrimaryMenu />
 
                                 <ul className="navbar-nav ">
                                     <li className="nav-item search hidden-xs hidden-sm ">

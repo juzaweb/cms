@@ -16,14 +16,14 @@ use Juzaweb\CMS\Facades\HookAction;
 
 class BackendMenuBuilder
 {
-    protected $items;
-    protected $args;
+    protected Collection|array $items;
+    protected array $args;
 
     /**
-     * @param MenuItem[]|Collection $items
-     * @param array $args
+     * @param  Collection|MenuItem[]  $items
+     * @param  array  $args
      */
-    public function __construct($items, $args = [])
+    public function __construct(array|Collection $items, array $args = [])
     {
         $this->items = $items;
         $this->args = $args;
@@ -35,9 +35,10 @@ class BackendMenuBuilder
         $groups = $items->groupBy('box_key')->keys()->toArray();
 
         $menuBoxs = HookAction::getMenuBoxs($groups);
-        $menuBoxs = array_map(function ($item) {
-            return $item->get('menu_box');
-        }, $menuBoxs);
+        $menuBoxs = array_map(
+            fn ($item) => $item->get('menu_box'),
+            $menuBoxs
+        );
 
         foreach ($groups as $group) {
             if (empty($menuBoxs[$group])) {
@@ -73,19 +74,19 @@ class BackendMenuBuilder
     /**
      * Build menu item by view
      *
-     * @param Collection $item
-     * @param boolean $twig
+     * @param  Collection  $item
      * @return string
-     * @throws \Throwable
      */
     public function buildItem($item)
     {
         $children = $this->items($item->id);
 
-        return $this->args['item_view']->with([
+        return $this->args['item_view']->with(
+            [
             'item' => $item,
             'children' => $children,
             'builder' => $this,
-        ])->render();
+            ]
+        )->render();
     }
 }

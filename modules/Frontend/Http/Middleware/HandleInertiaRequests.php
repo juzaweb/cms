@@ -4,6 +4,9 @@ namespace Juzaweb\Frontend\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Juzaweb\Backend\Http\Resources\UserResource;
+use Juzaweb\Backend\Models\Menu;
+use Juzaweb\CMS\Support\Theme\MenuBuilder;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -46,21 +49,38 @@ class HandleInertiaRequests extends Middleware
                     ];
                 },
             ],
-            $this->getFrontendParams()
+            $this->getFrontendParams($request)
         );
     }
 
-    protected function getFrontendParams(): array
+    protected function getFrontendParams(Request $request): array
     {
+        global $jw_user;
+
         $configs = get_configs(['title', 'description', 'icon', 'banner', 'logo']);
 
         $configs['logo'] = upload_url($configs['logo']);
+
+        $user = $jw_user ? UserResource::make($jw_user)->toArray($request) : null;
+
+        $primaryMenuItems = [];
+        $menu = get_menu_by_theme_location('primary');
+        if ($menu && $menu = Menu::find($menu)) {
+            $items = jw_menu_items($menu);
+            $menuBuilder = new MenuBuilder($items);
+            $primaryMenuItems = $menuBuilder->toArray();
+        }
 
         return apply_filters(
             'theme.inertia.frontend_params',
             [
                 'current_theme' => jw_current_theme(),
                 'config' => $configs,
+                'user' => $user,
+                'is_admin' => $user ? $user['is_admin'] : false,
+                'auth' => (bool) $user,
+                'guest' => ! $user,
+                'menu_items' => $primaryMenuItems,
             ]
         );
     }
