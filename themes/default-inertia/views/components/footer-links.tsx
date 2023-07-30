@@ -1,10 +1,11 @@
 import { getMenu } from "@/helpers/fetch";
+import { MenuItem } from "@/types/menu";
 import {Link, usePage} from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
 export default function FooterLinks() {
-    const {config} = usePage().props;
-    const [menus, setMenus] = useState([]);
+    const { config } = usePage<{ config: {title: string}}>().props;
+    const [menus, setMenus] = useState<Array<MenuItem>>([]);
 
     useEffect(() => {
         getMenu({location: 'footer_links'}).then(res => {
@@ -28,8 +29,6 @@ export default function FooterLinks() {
                     </li>
                 )
             })}
-
-
         </ul>
     )
 }

@@ -14,6 +14,7 @@
 
 namespace Juzaweb\CMS\Http\Controllers;
 
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -61,8 +62,13 @@ class BackendController extends Controller
      */
     protected function inertiaViewRender(?string $view = null, array $data = []): Response
     {
+        // Remove backend blade prifix
         $view = Str::replace('cms::backend.', '', $view);
+
+        // Replate . to /
         $view = Str::replace('.', '/', $view);
+
+        // Render Inertia view
         return Inertia::render($view, $data);
     }
 
@@ -70,11 +76,11 @@ class BackendController extends Controller
      * Adds a breadcrumb item to the specified breadcrumb list.
      *
      * @param array $item The breadcrumb item to be added.
-     * @param string $name The name of the breadcrumb list. Default is 'admin'.
-     * @throws Exception If there is an error adding the breadcrumb item.
+     * @param string  $name The name of the breadcrumb list. Default is 'admin'.
      * @return void
+     *@throws Exception If there is an error adding the breadcrumb item.
      */
-    protected function addBreadcrumb(array $item, $name = 'admin'): void
+    protected function addBreadcrumb(array $item, string $name = 'admin'): void
     {
         add_filters(
             $name.'_breadcrumb',

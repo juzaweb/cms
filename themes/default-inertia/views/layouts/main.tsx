@@ -2,9 +2,10 @@ import React from "react";
 import Header from "../header";
 import Footer from "../footer";
 import {usePage, Head} from "@inertiajs/react";
+import { BasePageProps } from "@/types/config";
 
 export default function Main({children}: {children: React.ReactNode}) {
-    const {title, description, canonical}: {title: string, description: string, canonical?: string} = usePage().props;
+    const {title, description, canonical} = usePage<any>().props;
 
     return (
         <>

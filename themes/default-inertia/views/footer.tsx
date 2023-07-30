@@ -1,8 +1,9 @@
 import {Link, usePage} from "@inertiajs/react";
 import FooterLinks from "./components/footer-links";
+import { Config } from "@/types/config";
 
 export default function Footer() {
-    const { config }: {config: any} = usePage().props;
+    const { config } = usePage<{config: Config}>().props;
 
     return (
         <>
