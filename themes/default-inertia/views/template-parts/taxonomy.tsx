@@ -4,6 +4,7 @@ import Main from "../layouts/main";
 import {Link} from "@inertiajs/react";
 import Pagination from "../components/pagination";
 import Content from "./content";
+import DynamicSidebar from "../components/dynamic-sidebar";
 
 export default function ({ taxonomy, page }: {taxonomy: Taxonomy, page: PostPaginate}) {
     return (
@@ -46,7 +47,7 @@ export default function ({ taxonomy, page }: {taxonomy: Taxonomy, page: PostPagi
                         </div>
                         <div className="col-md-4">
                             <div className="sidebar-sticky">
-                                {/*{{dynamic_sidebar('sidebar')}}*/}
+                                <DynamicSidebar />
                             </div>
                         </div>
 

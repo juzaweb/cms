@@ -1,6 +1,7 @@
 import {Post} from "@/types/posts";
 import {__, url} from "@/helpers/functions";
 import {Link} from "@inertiajs/react";
+import DynamicSidebar from "../components/dynamic-sidebar";
 
 export default function SinglePage({post}: { post: Post }) {
     return (
@@ -88,7 +89,7 @@ export default function SinglePage({post}: { post: Post }) {
 
                         <div className="col-md-4">
                             <div className="sticky-top">
-                                {/*{{dynamic_sidebar('sidebar')}}*/}
+                                <DynamicSidebar />
                             </div>
                         </div>
                     </div>
