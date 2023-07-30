@@ -21,25 +21,29 @@ class MenuRepositoryEloquent extends BaseRepositoryEloquent implements MenuRepos
     {
         return Menu::class;
     }
-    
+
     public function getFrontendDetail(int $menu): Menu
     {
         $result = $this->model->newQuery()
             ->cacheFor(config('juzaweb.performance.query_cache.lifetime'))
             ->where(['id' => $menu])
             ->firstOrFail();
-    
+
         return $this->parserResult($result);
     }
-    
-    public function getFrontendDetailByLocation(string $location): Menu
+
+    public function getFrontendDetailByLocation(string $location): ?Menu
     {
         $menu = get_menu_by_theme_location($location);
+        if (empty($menu)) {
+            return null;
+        }
+
         $result = $this->model->newQuery()
             ->cacheFor(config('juzaweb.performance.query_cache.lifetime'))
             ->where(['id' => $menu])
-            ->firstOrFail();
-        
+            ->first();
+
         return $this->parserResult($result);
     }
 }

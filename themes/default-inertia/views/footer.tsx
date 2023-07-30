@@ -1,7 +1,9 @@
 import {Link, usePage} from "@inertiajs/react";
+import FooterLinks from "./components/footer-links";
 
 export default function Footer() {
-    const { config } = usePage().props;
+    const { config }: {config: any} = usePage().props;
+
     return (
         <>
             <section className="wrapper__section p-0">
@@ -83,14 +85,7 @@ export default function Footer() {
                                     <div className="col-md-12">
                                         <div className="border-top-1 bg__footer-bottom-section">
 
-                                            <ul className="list-inline">
-                                                <li className="list-inline-item">
-                                                    <span>
-                                                        Copyright © 2021
-                                                        <Link href="/">{config.title}</Link>
-                                                    </span>
-                                                </li>
-                                            </ul>
+                                        <FooterLinks></FooterLinks>
 
                                         </div>
 

@@ -19,11 +19,13 @@ class MenuController extends ApiController
     public function __construct(protected MenuRepository $menuRepository)
     {
     }
-    
+
     public function show(string $location): MenuResource
     {
         $menu = $this->menuRepository->getFrontendDetailByLocation($location);
-        
+
+        abort_if($menu === null, 404);
+
         return MenuResource::make($menu);
     }
 }

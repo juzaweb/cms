@@ -13,6 +13,6 @@ use Juzaweb\CMS\Repositories\BaseRepository;
 interface MenuRepository extends BaseRepository
 {
     public function getFrontendDetail(int $menu): Menu;
-    
-    public function getFrontendDetailByLocation(string $location): Menu;
+
+    public function getFrontendDetailByLocation(string $location): ?Menu;
 }
