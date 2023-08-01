@@ -4,7 +4,6 @@ namespace Juzaweb\CMS\Repositories\Generators\Commands;
 
 use File;
 use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
 use Juzaweb\CMS\Repositories\Generators\BindingsGenerator;
 use Juzaweb\CMS\Repositories\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputArgument;
@@ -61,8 +60,8 @@ class BindingsCommand extends Command
         try {
             $bindingGenerator = new BindingsGenerator(
                 [
-                'name' => $this->argument('name'),
-                'force' => $this->option('force'),
+                    'name' => $this->argument('name'),
+                    'force' => $this->option('force'),
                 ]
             );
             // generate repository service provider
@@ -70,7 +69,7 @@ class BindingsCommand extends Command
                 $this->call(
                     'make:provider',
                     [
-                    'name' => $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()),
+                        'name' => $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()),
                     ]
                 );
                 // placeholder to mark the place in file where to prepend repository bindings
@@ -80,16 +79,16 @@ class BindingsCommand extends Command
                     vsprintf(
                         str_replace('//', '%s', $provider),
                         [
-                        '//',
-                        $bindingGenerator->bindPlaceholder,
+                            '//',
+                            $bindingGenerator->bindPlaceholder,
                         ]
                     )
                 );
             }
             $bindingGenerator->run();
-            $this->info($this->type . ' created successfully.');
+            $this->info($this->type.' created successfully.');
         } catch (FileAlreadyExistsException $e) {
-            $this->error($this->type . ' already exists!');
+            $this->error($this->type.' already exists!');
             return false;
         }
     }

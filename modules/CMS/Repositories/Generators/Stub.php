@@ -28,7 +28,7 @@ class Stub
      * @var array
      */
     protected $replaces = [];
-    
+
     /**
      * The contructor.
      *
@@ -40,7 +40,7 @@ class Stub
         $this->path = $path;
         $this->replaces = $replaces;
     }
-    
+
     /**
      * Create new self instance.
      *
@@ -53,7 +53,7 @@ class Stub
     {
         return new static($path, $replaces);
     }
-    
+
     /**
      * Set base path.
      *
@@ -65,7 +65,7 @@ class Stub
     {
         static::$basePath = $path;
     }
-    
+
     /**
      * Set replacements array.
      *
@@ -76,10 +76,10 @@ class Stub
     public function replace(array $replaces = [])
     {
         $this->replaces = $replaces;
-        
+
         return $this;
     }
-    
+
     /**
      * Get replacements.
      *
@@ -89,7 +89,7 @@ class Stub
     {
         return $this->replaces;
     }
-    
+
     /**
      * Handle magic method __toString.
      *
@@ -99,7 +99,7 @@ class Stub
     {
         return $this->render();
     }
-    
+
     /**
      * Get stub contents.
      *
@@ -109,7 +109,7 @@ class Stub
     {
         return $this->getContents();
     }
-    
+
     /**
      * Get stub contents.
      *
@@ -121,10 +121,10 @@ class Stub
         foreach ($this->replaces as $search => $replace) {
             $contents = str_replace('$'.strtoupper($search).'$', $replace, $contents);
         }
-        
+
         return $contents;
     }
-    
+
     /**
      * Get stub path.
      *
@@ -134,7 +134,7 @@ class Stub
     {
         return static::$basePath.$this->path;
     }
-    
+
     /**
      * Set stub path.
      *
@@ -145,7 +145,7 @@ class Stub
     public function setPath($path)
     {
         $this->path = $path;
-        
+
         return $this;
     }
 }

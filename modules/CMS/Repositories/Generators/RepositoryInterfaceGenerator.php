@@ -13,14 +13,14 @@ use Juzaweb\CMS\Repositories\Generators\Migrations\SchemaParser;
  */
 class RepositoryInterfaceGenerator extends Generator
 {
-    
+
     /**
      * Get stub name.
      *
      * @var string
      */
     protected $stub = 'repository/interface';
-    
+
     /**
      * Get root namespace.
      *
@@ -30,7 +30,7 @@ class RepositoryInterfaceGenerator extends Generator
     {
         return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
-    
+
     /**
      * Get generator path config node.
      *
@@ -40,7 +40,7 @@ class RepositoryInterfaceGenerator extends Generator
     {
         return 'interfaces';
     }
-    
+
     /**
      * Get destination path for generated file.
      *
@@ -53,7 +53,7 @@ class RepositoryInterfaceGenerator extends Generator
             true
         ).'/'.$this->getName().'Repository.php';
     }
-    
+
     /**
      * Get base path of destination file.
      *
@@ -63,7 +63,7 @@ class RepositoryInterfaceGenerator extends Generator
     {
         return config('repository.generator.basePath', app()->path());
     }
-    
+
     /**
      * Get array replacements.
      *
@@ -71,11 +71,14 @@ class RepositoryInterfaceGenerator extends Generator
      */
     public function getReplacements()
     {
-        return array_merge(parent::getReplacements(), [
+        return array_merge(
+            parent::getReplacements(),
+            [
             'fillable' => $this->getFillable(),
-        ]);
+            ]
+        );
     }
-    
+
     /**
      * Get the fillable attributes.
      *
@@ -87,14 +90,14 @@ class RepositoryInterfaceGenerator extends Generator
             return '[]';
         }
         $results = '['.PHP_EOL;
-        
+
         foreach ($this->getSchemaParser()->toArray() as $column => $value) {
             $results .= "\t\t'{$column}',".PHP_EOL;
         }
-        
+
         return $results."\t".']';
     }
-    
+
     /**
      * Get schema parser.
      *

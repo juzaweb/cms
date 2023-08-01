@@ -2,8 +2,6 @@
 
 namespace Juzaweb\CMS\Repositories\Events;
 
-use Juzaweb\CMS\Repositories\Events\RepositoryEventBase;
-
 /**
  * Class RepositoryEntityDeleted
  *
