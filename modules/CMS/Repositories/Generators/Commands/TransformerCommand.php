@@ -17,28 +17,28 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class TransformerCommand extends Command
 {
-    
+
     /**
      * The name of command.
      *
      * @var string
      */
     protected $name = 'make:transformer';
-    
+
     /**
      * The description of command.
      *
      * @var string
      */
     protected $description = 'Create a new transformer.';
-    
+
     /**
      * The type of class being generated.
      *
      * @var string
      */
     protected $type = 'Transformer';
-    
+
     /**
      * Execute the command.
      *
@@ -49,7 +49,7 @@ class TransformerCommand extends Command
     {
         $this->laravel->call([$this, 'fire'], func_get_args());
     }
-    
+
     /**
      * Execute the command.
      *
@@ -58,19 +58,21 @@ class TransformerCommand extends Command
     public function fire()
     {
         try {
-            (new TransformerGenerator([
+            (new TransformerGenerator(
+                [
                 'name' => $this->argument('name'),
                 'force' => $this->option('force'),
-            ]))->run();
+                ]
+            ))->run();
             $this->info("Transformer created successfully.");
         } catch (FileAlreadyExistsException $e) {
             $this->error($this->type.' already exists!');
-            
+
             return false;
         }
     }
-    
-    
+
+
     /**
      * The array of command arguments.
      *
@@ -87,7 +89,7 @@ class TransformerCommand extends Command
             ],
         ];
     }
-    
+
     /**
      * The array of command options.
      *

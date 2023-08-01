@@ -19,8 +19,8 @@ class CacheCriteria implements CriteriaInterface
     /**
      * Apply criteria in query repository
      *
-     * @param Builder|Model     $model
-     * @param RepositoryInterface $repository
+     * @param  Builder|Model  $model
+     * @param  RepositoryInterface  $repository
      *
      * @return Builder
      * @throws \Exception

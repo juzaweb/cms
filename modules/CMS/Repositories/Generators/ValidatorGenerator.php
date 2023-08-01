@@ -14,14 +14,14 @@ use Juzaweb\CMS\Repositories\Generators\Migrations\SchemaParser;
  */
 class ValidatorGenerator extends Generator
 {
-    
+
     /**
      * Get stub name.
      *
      * @var string
      */
     protected $stub = 'validator/validator';
-    
+
     /**
      * Get root namespace.
      *
@@ -31,7 +31,7 @@ class ValidatorGenerator extends Generator
     {
         return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
-    
+
     /**
      * Get generator path config node.
      *
@@ -41,7 +41,7 @@ class ValidatorGenerator extends Generator
     {
         return 'validators';
     }
-    
+
     /**
      * Get destination path for generated file.
      *
@@ -54,7 +54,7 @@ class ValidatorGenerator extends Generator
             true
         ).'/'.$this->getName().'Validator.php';
     }
-    
+
     /**
      * Get base path of destination file.
      *
@@ -64,7 +64,7 @@ class ValidatorGenerator extends Generator
     {
         return config('repository.generator.basePath', app()->path());
     }
-    
+
     /**
      * Get array replacements.
      *
@@ -72,11 +72,14 @@ class ValidatorGenerator extends Generator
      */
     public function getReplacements()
     {
-        return array_merge(parent::getReplacements(), [
+        return array_merge(
+            parent::getReplacements(),
+            [
             'rules' => $this->getRules(),
-        ]);
+            ]
+        );
     }
-    
+
     /**
      * Get the rules.
      *
@@ -88,14 +91,14 @@ class ValidatorGenerator extends Generator
             return '[]';
         }
         $results = '['.PHP_EOL;
-        
+
         foreach ($this->getSchemaParser()->toArray() as $column => $value) {
             $results .= "\t\t'{$column}'\t=>'\t{$value}',".PHP_EOL;
         }
-        
+
         return $results."\t".']';
     }
-    
+
     /**
      * Get schema parser.
      *

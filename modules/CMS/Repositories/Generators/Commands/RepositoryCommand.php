@@ -21,34 +21,34 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class RepositoryCommand extends Command
 {
-    
+
     /**
      * The name of command.
      *
      * @var string
      */
     protected $name = 'make:repository';
-    
+
     /**
      * The description of command.
      *
      * @var string
      */
     protected $description = 'Create a new repository.';
-    
+
     /**
      * The type of class being generated.
      *
      * @var string
      */
     protected $type = 'Repository';
-    
+
     /**
      * @var Collection
      */
     protected $generators = null;
-    
-    
+
+
     /**
      * Execute the command.
      *
@@ -59,7 +59,7 @@ class RepositoryCommand extends Command
     {
         $this->laravel->call([$this, 'fire'], func_get_args());
     }
-    
+
     /**
      * Execute the command.
      *
@@ -68,42 +68,42 @@ class RepositoryCommand extends Command
     public function fire()
     {
         $this->generators = new Collection();
-        
+
         $migrationGenerator = new MigrationGenerator([
             'name' => 'create_'.Str::snake(Str::plural($this->argument('name'))).'_table',
             'fields' => $this->option('fillable'),
             'force' => $this->option('force'),
         ]);
-        
+
         if (!$this->option('skip-migration')) {
             $this->generators->push($migrationGenerator);
         }
-        
+
         $modelGenerator = new ModelGenerator([
             'name' => $this->argument('name'),
             'fillable' => $this->option('fillable'),
             'force' => $this->option('force'),
         ]);
-        
+
         if (!$this->option('skip-model')) {
             $this->generators->push($modelGenerator);
         }
-        
+
         $this->generators->push(new RepositoryInterfaceGenerator([
             'name' => $this->argument('name'),
             'force' => $this->option('force'),
         ]));
-        
+
         foreach ($this->generators as $generator) {
             $generator->run();
         }
-        
+
         $model = $modelGenerator->getRootNamespace().'\\'.$modelGenerator->getName();
         $model = str_replace([
             "\\",
             '/',
         ], '\\', $model);
-        
+
         try {
             (new RepositoryEloquentGenerator([
                 'name' => $this->argument('name'),
@@ -115,12 +115,12 @@ class RepositoryCommand extends Command
             $this->info("Repository created successfully.");
         } catch (FileAlreadyExistsException $e) {
             $this->error($this->type.' already exists!');
-            
+
             return false;
         }
     }
-    
-    
+
+
     /**
      * The array of command arguments.
      *
@@ -137,8 +137,8 @@ class RepositoryCommand extends Command
             ],
         ];
     }
-    
-    
+
+
     /**
      * The array of command options.
      *

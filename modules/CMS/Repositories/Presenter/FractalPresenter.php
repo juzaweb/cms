@@ -26,22 +26,22 @@ abstract class FractalPresenter implements PresenterInterface
      * @var string
      */
     protected $resourceKeyItem = null;
-    
+
     /**
      * @var string
      */
     protected $resourceKeyCollection = null;
-    
+
     /**
      * @var \League\Fractal\Manager
      */
     protected $fractal = null;
-    
+
     /**
      * @var \League\Fractal\Resource\Collection
      */
     protected $resource = null;
-    
+
     /**
      * @throws Exception
      */
@@ -50,26 +50,26 @@ abstract class FractalPresenter implements PresenterInterface
         if (!class_exists('League\Fractal\Manager')) {
             throw new Exception(trans('repository::packages.league_fractal_required'));
         }
-        
+
         $this->fractal = new Manager();
         $this->parseIncludes();
         $this->setupSerializer();
     }
-    
+
     /**
      * @return $this
      */
     protected function setupSerializer()
     {
         $serializer = $this->serializer();
-        
+
         if ($serializer instanceof SerializerAbstract) {
             $this->fractal->setSerializer(new $serializer());
         }
-        
+
         return $this;
     }
-    
+
     /**
      * @return $this
      */
@@ -77,14 +77,14 @@ abstract class FractalPresenter implements PresenterInterface
     {
         $request = app('Illuminate\Http\Request');
         $paramIncludes = config('repository.fractal.params.include', 'include');
-        
+
         if ($request->has($paramIncludes)) {
             $this->fractal->parseIncludes($request->get($paramIncludes));
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Get Serializer
      *
@@ -93,17 +93,17 @@ abstract class FractalPresenter implements PresenterInterface
     public function serializer()
     {
         $serializer = config('repository.fractal.serializer', 'League\\Fractal\\Serializer\\DataArraySerializer');
-        
+
         return new $serializer();
     }
-    
+
     /**
      * Transformer
      *
      * @return \League\Fractal\TransformerAbstract
      */
     abstract public function getTransformer();
-    
+
     /**
      * Prepare data to present
      *
@@ -117,7 +117,7 @@ abstract class FractalPresenter implements PresenterInterface
         if (!class_exists('League\Fractal\Manager')) {
             throw new Exception(trans('repository::packages.league_fractal_required'));
         }
-        
+
         if ($data instanceof EloquentCollection) {
             $this->resource = $this->transformCollection($data);
         } elseif ($data instanceof AbstractPaginator) {
@@ -125,10 +125,10 @@ abstract class FractalPresenter implements PresenterInterface
         } else {
             $this->resource = $this->transformItem($data);
         }
-        
+
         return $this->fractal->createData($this->resource)->toArray();
     }
-    
+
     /**
      * @param $data
      *
@@ -138,7 +138,7 @@ abstract class FractalPresenter implements PresenterInterface
     {
         return new Item($data, $this->getTransformer(), $this->resourceKeyItem);
     }
-    
+
     /**
      * @param $data
      *
@@ -148,7 +148,7 @@ abstract class FractalPresenter implements PresenterInterface
     {
         return new Collection($data, $this->getTransformer(), $this->resourceKeyCollection);
     }
-    
+
     /**
      * @param  AbstractPaginator|LengthAwarePaginator|Paginator  $paginator
      *
@@ -159,7 +159,7 @@ abstract class FractalPresenter implements PresenterInterface
         $collection = $paginator->getCollection();
         $resource = new Collection($collection, $this->getTransformer(), $this->resourceKeyCollection);
         $resource->setPaginator(new IlluminatePaginatorAdapter($paginator));
-        
+
         return $resource;
     }
 }

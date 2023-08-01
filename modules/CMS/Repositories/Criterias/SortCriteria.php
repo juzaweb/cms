@@ -29,8 +29,8 @@ class SortCriteria extends Criteria implements CriteriaInterface
     /**
      * Apply criteria in query repository
      *
-     * @param Builder|Model     $model
-     * @param RepositoryInterface $repository
+     * @param  Builder|Model  $model
+     * @param  RepositoryInterface  $repository
      *
      * @return Builder|Model
      * @throws \Exception

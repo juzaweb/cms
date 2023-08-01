@@ -10,9 +10,9 @@
 
 namespace Juzaweb\CMS\Repositories\Abstracts;
 
-use Juzaweb\CMS\Repositories\Exceptions\ValidatorException;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Support\MessageBag;
+use Juzaweb\CMS\Repositories\Exceptions\ValidatorException;
 
 abstract class Validator
 {

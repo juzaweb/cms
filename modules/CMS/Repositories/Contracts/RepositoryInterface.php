@@ -3,7 +3,6 @@
 namespace Juzaweb\CMS\Repositories\Contracts;
 
 use closure;
-use Illuminate\Database\Eloquent\Builder;
 use Juzaweb\CMS\Repositories\Contracts\ValidatorException;
 
 /**
@@ -17,7 +16,7 @@ interface RepositoryInterface
     /**
      * Retrieve first data of repository
      *
-     * @param array $columns
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -26,8 +25,8 @@ interface RepositoryInterface
     /**
      * Retrieve data array for populate field select
      *
-     * @param string $column
-     * @param string|null $key
+     * @param  string  $column
+     * @param  string|null  $key
      *
      * @return \Illuminate\Support\Collection|array
      */
@@ -37,8 +36,8 @@ interface RepositoryInterface
      * Retrieve data array for populate field select
      * Compatible with Laravel 5.3
      *
-     * @param string $column
-     * @param string|null $key
+     * @param  string  $column
+     * @param  string|null  $key
      *
      * @return \Illuminate\Support\Collection|array
      */
@@ -50,7 +49,7 @@ interface RepositoryInterface
      * @param $id
      * @param $relation
      * @param $attributes
-     * @param bool $detaching
+     * @param  bool  $detaching
      * @return mixed
      */
     public function sync($id, $relation, $attributes, $detaching = true);
@@ -68,7 +67,7 @@ interface RepositoryInterface
     /**
      * Retrieve all data of repository
      *
-     * @param array $columns
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -77,8 +76,8 @@ interface RepositoryInterface
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param null $limit
-     * @param array $columns
+     * @param  null  $limit
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -87,8 +86,8 @@ interface RepositoryInterface
     /**
      * Retrieve all data of repository, simple paginated
      *
-     * @param null $limit
-     * @param array $columns
+     * @param  null  $limit
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -98,7 +97,7 @@ interface RepositoryInterface
      * Find data by id
      *
      * @param       $id
-     * @param array $columns
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -109,7 +108,7 @@ interface RepositoryInterface
      *
      * @param       $field
      * @param       $value
-     * @param array $columns
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -118,8 +117,8 @@ interface RepositoryInterface
     /**
      * Find data by multiple fields
      *
-     * @param array $where
-     * @param array $columns
+     * @param  array  $where
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -129,8 +128,8 @@ interface RepositoryInterface
      * Find data by multiple values in one field
      *
      * @param       $field
-     * @param array $values
-     * @param array $columns
+     * @param  array  $values
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -140,8 +139,8 @@ interface RepositoryInterface
      * Find data by excluding multiple values in one field
      *
      * @param       $field
-     * @param array $values
-     * @param array $columns
+     * @param  array  $values
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -151,8 +150,8 @@ interface RepositoryInterface
      * Find data by between values in one field
      *
      * @param       $field
-     * @param array $values
-     * @param array $columns
+     * @param  array  $values
+     * @param  array  $columns
      *
      * @return mixed
      */
@@ -161,7 +160,7 @@ interface RepositoryInterface
     /**
      * Save a new entity in repository
      *
-     * @param array $attributes
+     * @param  array  $attributes
      *
      * @return mixed
      */
@@ -170,7 +169,7 @@ interface RepositoryInterface
     /**
      * Update a entity in repository by id
      *
-     * @param array $attributes
+     * @param  array  $attributes
      * @param       $id
      *
      * @return mixed
@@ -180,8 +179,8 @@ interface RepositoryInterface
     /**
      * Update or Create an entity in repository
      *
-     * @param array $attributes
-     * @param array $values
+     * @param  array  $attributes
+     * @param  array  $values
      *
      * @return mixed
      * @throws ValidatorException
@@ -201,8 +200,8 @@ interface RepositoryInterface
     /**
      * Order collection by a given column
      *
-     * @param string $column
-     * @param string $direction
+     * @param  string  $column
+     * @param  string  $direction
      *
      * @return $this
      */
@@ -220,8 +219,8 @@ interface RepositoryInterface
     /**
      * Load relation with closure
      *
-     * @param string $relation
-     * @param closure $closure
+     * @param  string  $relation
+     * @param  closure  $closure
      *
      * @return $this
      */
@@ -230,7 +229,7 @@ interface RepositoryInterface
     /**
      * Add subselect queries to count the relations.
      *
-     * @param mixed $relations
+     * @param  mixed  $relations
      * @return $this
      */
     public function withCount($relations);
@@ -238,7 +237,7 @@ interface RepositoryInterface
     /**
      * Set hidden fields
      *
-     * @param array $fields
+     * @param  array  $fields
      *
      * @return $this
      */
@@ -247,7 +246,7 @@ interface RepositoryInterface
     /**
      * Set visible fields
      *
-     * @param array $fields
+     * @param  array  $fields
      *
      * @return $this
      */
@@ -256,7 +255,7 @@ interface RepositoryInterface
     /**
      * Query Scope
      *
-     * @param \Closure $scope
+     * @param  \Closure  $scope
      *
      * @return $this
      */
@@ -281,7 +280,7 @@ interface RepositoryInterface
     /**
      * Skip Presenter Wrapper
      *
-     * @param bool $status
+     * @param  bool  $status
      *
      * @return $this
      */
@@ -290,7 +289,7 @@ interface RepositoryInterface
     /**
      * Retrieve first data of repository, or return new Entity
      *
-     * @param array $attributes
+     * @param  array  $attributes
      *
      * @return mixed
      */
@@ -299,7 +298,7 @@ interface RepositoryInterface
     /**
      * Retrieve first data of repository, or create new Entity
      *
-     * @param array $attributes
+     * @param  array  $attributes
      *
      * @return mixed
      */
@@ -328,8 +327,8 @@ interface RepositoryInterface
     /**
      * Trigger method calls to the model
      *
-     * @param string $method
-     * @param array $arguments
+     * @param  string  $method
+     * @param  array  $arguments
      *
      * @return mixed
      */

@@ -16,7 +16,7 @@ interface Presentable
      * @return mixed
      */
     public function setPresenter(PresenterInterface $presenter);
-    
+
     /**
      * @return mixed
      */

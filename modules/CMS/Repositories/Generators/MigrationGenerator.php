@@ -2,8 +2,6 @@
 
 namespace Juzaweb\CMS\Repositories\Generators;
 
-use Juzaweb\CMS\Repositories\Generators\Generator;
-use Juzaweb\CMS\Repositories\Generators\Stub;
 use Juzaweb\CMS\Repositories\Generators\Migrations\NameParser;
 use Juzaweb\CMS\Repositories\Generators\Migrations\SchemaParser;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -16,15 +14,15 @@ use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
  */
 class MigrationGenerator extends Generator
 {
-    
+
     /**
      * Get stub name.
      *
      * @var string
      */
     protected $stub = 'migration/plain';
-    
-    
+
+
     /**
      * Get base path of destination file.
      *
@@ -34,8 +32,8 @@ class MigrationGenerator extends Generator
     {
         return base_path().'/database/migrations/';
     }
-    
-    
+
+
     /**
      * Get destination path for generated file.
      *
@@ -45,8 +43,8 @@ class MigrationGenerator extends Generator
     {
         return $this->getBasePath().$this->getFileName().'.php';
     }
-    
-    
+
+
     /**
      * Get generator path config node.
      *
@@ -56,8 +54,8 @@ class MigrationGenerator extends Generator
     {
         return '';
     }
-    
-    
+
+
     /**
      * Get root namespace.
      *
@@ -67,8 +65,8 @@ class MigrationGenerator extends Generator
     {
         return '';
     }
-    
-    
+
+
     /**
      * Get migration name.
      *
@@ -78,8 +76,8 @@ class MigrationGenerator extends Generator
     {
         return strtolower($this->name);
     }
-    
-    
+
+
     /**
      * Get file name.
      *
@@ -89,8 +87,8 @@ class MigrationGenerator extends Generator
     {
         return date('Y_m_d_His_').$this->getMigrationName();
     }
-    
-    
+
+
     /**
      * Get schema parser.
      *
@@ -100,8 +98,8 @@ class MigrationGenerator extends Generator
     {
         return new SchemaParser($this->fields);
     }
-    
-    
+
+
     /**
      * Get name parser.
      *
@@ -111,8 +109,8 @@ class MigrationGenerator extends Generator
     {
         return new NameParser($this->name);
     }
-    
-    
+
+
     /**
      * Get stub templates.
      *
@@ -121,7 +119,7 @@ class MigrationGenerator extends Generator
     public function getStub()
     {
         $parser = $this->getNameParser();
-        
+
         $action = $parser->getAction();
         switch ($action) {
             case 'add':
@@ -136,7 +134,7 @@ class MigrationGenerator extends Generator
                     'fields_down' => $this->getSchemaParser()->down(),
                 ];
                 break;
-            
+
             case 'delete':
             case 'remove':
             case 'alter':
@@ -158,15 +156,15 @@ class MigrationGenerator extends Generator
                 break;
         }
         $path = config('repository.generator.stubsOverridePath', __DIR__);
-        
+
         if (!file_exists($path."/Stubs/migration/{$file}.stub")) {
             $path = __DIR__;
         }
-        
+
         if (!file_exists($path."/Stubs/migration/{$file}.stub")) {
             throw new FileNotFoundException($path."/Stubs/migration/{$file}.stub");
         }
-        
+
         return Stub::create($path."/Stubs/migration/{$file}.stub", $replacements);
     }
 }
