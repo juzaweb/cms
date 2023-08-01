@@ -256,7 +256,7 @@ abstract class DataTable implements Arrayable
         )->values();
 
         return [
-            'columns' => $columns->toArray(),
+            'columns' => $columns,
             'actions' => $this->actions(),
             'params' => $this->params,
             'searchFields' => $searchFields,
