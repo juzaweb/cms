@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Juzaweb\Backend\Events\PostViewed;
-use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Post;
 use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Facades\ThemeLoader;

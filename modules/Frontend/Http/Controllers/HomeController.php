@@ -21,7 +21,7 @@ class HomeController extends FrontendController
             $page = $this->postRepository->scopeQuery(fn($q) => $q->where(['id' => $pageId]))->first();
 
             if ($page) {
-                return App::call([PageController::class, 'detail'], ['id' => $page]);
+                return App::call(PageController::class .'@detail', ['id' => $page]);
             }
         }
 
