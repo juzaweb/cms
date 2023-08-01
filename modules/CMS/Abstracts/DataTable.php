@@ -135,6 +135,7 @@ abstract class DataTable implements Arrayable
      *
      * @param mixed ...$params The parameters to be mounted.
      * @return void
+     * @throws \Exception
      */
     public function mountData(...$params)
     {
@@ -168,10 +169,8 @@ abstract class DataTable implements Arrayable
     /**
      * A description of the entire PHP function.
      *
-     * @param datatype $action description
-     * @param datatype $ids description
-     * @throws Some_Exception_Class description of exception
-     * @return Some_Return_Value
+     * @param string $action description
+     * @param array $ids description
      */
     public function bulkActions($action, $ids)
     {
@@ -251,12 +250,13 @@ abstract class DataTable implements Arrayable
             function ($item, $key) {
                 $item['key'] = $key;
                 $item['sortable'] = Arr::get($item, 'sortable', true);
+                unset($item['formatter']);
                 return $item;
             }
         )->values();
 
         return [
-            'columns' => $columns,
+            'columns' => $columns->toArray(),
             'actions' => $this->actions(),
             'params' => $this->params,
             'searchFields' => $searchFields,

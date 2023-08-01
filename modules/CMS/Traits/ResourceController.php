@@ -12,6 +12,7 @@ namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,15 +20,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Response;
 use Juzaweb\CMS\Abstracts\DataTable;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method void getBreadcrumbPrefix(...$params)
  */
 trait ResourceController
 {
-    public function index(...$params): View
+    public function index(...$params): View|Response
     {
         $this->checkPermission(
             'index',
@@ -39,13 +40,13 @@ trait ResourceController
             $this->getBreadcrumbPrefix(...$params);
         }
 
-        return view(
+        return $this->view(
             "{$this->viewPrefix}.index",
             $this->getDataForIndex(...$params)
         );
     }
 
-    public function create(...$params): View
+    public function create(...$params): View|Response
     {
         $this->checkPermission('create', $this->getModel(...$params), ...$params);
 
@@ -68,7 +69,7 @@ trait ResourceController
 
         $model = $this->makeModel(...$params);
 
-        return view(
+        return $this->view(
             "{$this->viewPrefix}.form",
             array_merge(
                 [
@@ -80,7 +81,7 @@ trait ResourceController
         );
     }
 
-    public function edit(...$params): View
+    public function edit(...$params): View|Response
     {
         $indexRoute = str_replace(
             '.edit',
@@ -106,8 +107,8 @@ trait ResourceController
         $model = $this->getDetailModel($this->makeModel(...$indexParams), ...$params);
         $this->checkPermission('edit', $model, ...$params);
 
-        return view(
-            $this->viewPrefix . '.form',
+        return $this->view(
+            $this->viewPrefix.'.form',
             array_merge(
                 [
                     'title' => $model->{$model->getFieldName()},
@@ -236,7 +237,7 @@ trait ResourceController
         foreach ($rows as $index => $row) {
             $columns['id'] = $row->id;
             foreach ($columns as $col => $column) {
-                if (! empty($column['formatter'])) {
+                if (!empty($column['formatter'])) {
                     $formatter = $column['formatter'](
                         $row->{$col} ?? null,
                         $row,
@@ -319,7 +320,7 @@ trait ResourceController
         $query->select(
             [
                 'id',
-                $model->getFieldName() . ' AS text',
+                $model->getFieldName().' AS text',
             ]
         );
 
@@ -373,9 +374,9 @@ trait ResourceController
     /**
      * After Save model
      *
-     * @param array $data
-     * @param \Juzaweb\CMS\Models\Model $model
-     * @param mixed $params
+     * @param  array  $data
+     * @param  \Juzaweb\CMS\Models\Model  $model
+     * @param  mixed  $params
      */
     protected function afterSave($data, $model, ...$params)
     {
@@ -399,8 +400,9 @@ trait ResourceController
     /**
      * Get data for form
      *
-     * @param  \Illuminate\Database\Eloquent\Model $model
+     * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return array
+     * @throws \Exception
      */
     protected function getDataForForm($model, ...$params)
     {
@@ -506,8 +508,8 @@ trait ResourceController
     /**
      * Validator for store and update
      *
-     * @param array $attributes
-     * @param mixed ...$params
+     * @param  array  $attributes
+     * @param  mixed  ...$params
      * @return Validator|array
      */
     abstract protected function validator(array $attributes, ...$params);
@@ -515,7 +517,7 @@ trait ResourceController
     /**
      * Get model resource
      *
-     * @param array $params
+     * @param  array  $params
      * @return string // namespace model
      */
     abstract protected function getModel(...$params);
@@ -523,7 +525,7 @@ trait ResourceController
     /**
      * Get title resource
      *
-     * @param array $params
+     * @param  array  $params
      * @return string
      */
     abstract protected function getTitle(...$params);
