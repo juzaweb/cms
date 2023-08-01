@@ -245,7 +245,13 @@ abstract class DataTable implements Arrayable
 
     public function toArray(): array
     {
-        $searchFields = $this->searchFields();
+        $searchFields = collect($this->searchFields())->map(
+            function ($item, $key) {
+                $item['key'] = $key;
+                return $item;
+            }
+        )->values();
+
         $columns = collect($this->columns())->map(
             function ($item, $key) {
                 $item['key'] = $key;
@@ -255,9 +261,17 @@ abstract class DataTable implements Arrayable
             }
         )->values();
 
+        $actions = collect($this->actions())->map(
+            function ($label, $key) {
+                $item['key'] = $key;
+                $item['label'] = $label;
+                return $item;
+            }
+        )->values();
+
         return [
             'columns' => $columns,
-            'actions' => $this->actions(),
+            'actions' => $actions,
             'params' => $this->params,
             'searchFields' => $searchFields,
             'perPage' => $this->perPage,
