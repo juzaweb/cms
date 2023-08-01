@@ -235,7 +235,9 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
             $this->validator = is_string($validator) ? $this->app->make($validator) : $validator;
 
             if (!$this->validator instanceof ValidatorInterface) {
-                throw new RepositoryException("Class {$validator} must be an instance of Prettus\\Validator\\Contracts\\ValidatorInterface");
+                throw new RepositoryException(
+                    "Class {$validator} must be an instance of Prettus\\Validator\\Contracts\\ValidatorInterface"
+                );
             }
 
             return $this->validator;
@@ -321,7 +323,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     /**
      * Retrieve all data of repository
      *
-     * @param array $columns
+     * @param  array  $columns
      *
      * @return mixed
      * @throws RepositoryException
@@ -469,6 +471,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      * @param  string  $method
      *
      * @return mixed
+     * @throws RepositoryException
      */
     public function paginate($limit = null, $columns = ['*'], $method = "paginate")
     {
@@ -626,7 +629,10 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
             // to make sure data type are same because validator may need to use
             // this data to compare with data that fetch from database.
             if ($this->versionCompare($this->app->version(), "5.2.*", ">")) {
-                $attributes = $this->model->newInstance()->forceFill($attributes)->makeVisible($this->model->getHidden())->toArray();
+                $attributes = $this->model->newInstance()
+                    ->forceFill($attributes)
+                    ->makeVisible($this->model->getHidden())
+                    ->toArray();
             } else {
                 $model = $this->model->newInstance()->forceFill($attributes);
                 $model->makeVisible($this->model->getHidden());
@@ -925,7 +931,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     /**
      * Push Criteria for filter the query
      *
-     * @param  array|string $criterias
+     * @param  array|string  $criterias
      * @return static
      */
     public function pushCriterias(array|string $criterias): PackageBaseRepository
@@ -950,17 +956,19 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     public function popCriteria($criteria)
     {
-        $this->criteria = $this->criteria->reject(function ($item) use ($criteria) {
-            if (is_object($item) && is_string($criteria)) {
-                return get_class($item) === $criteria;
-            }
+        $this->criteria = $this->criteria->reject(
+            function ($item) use ($criteria) {
+                if (is_object($item) && is_string($criteria)) {
+                    return get_class($item) === $criteria;
+                }
 
-            if (is_string($item) && is_object($criteria)) {
-                return $item === get_class($criteria);
-            }
+                if (is_string($item) && is_object($criteria)) {
+                    return $item === get_class($criteria);
+                }
 
-            return get_class($item) === get_class($criteria);
-        });
+                return get_class($item) === get_class($criteria);
+            }
+        );
 
         return $this;
     }

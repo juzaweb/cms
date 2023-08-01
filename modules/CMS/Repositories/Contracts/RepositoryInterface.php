@@ -306,6 +306,16 @@ interface RepositoryInterface
     public function firstOrCreate(array $attributes = []);
 
     /**
+     * Count results of repository
+     *
+     * @param  array  $where
+     * @param  string  $columns
+     *
+     * @return int
+     */
+    public function count(array $where = [], $columns = '*');
+
+    /**
      * Trigger static method calls to the model
      *
      * @param $method
