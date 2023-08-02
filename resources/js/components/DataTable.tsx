@@ -1,52 +1,50 @@
-import {DatatableProps} from "@/types/datatable";
+import {DatatableColumn, DatatableProps, DatatableSearchField} from "@/types/datatable";
 import {__} from "@/helpers/functions";
+import BulkActions from "@/components/datatable/bulk-actions";
+import Search from "@/components/datatable/search";
 
 export default function DataTable({config}: { config: DatatableProps }) {
     return (
         <>
             <div className="row">
-                <>
-                    {config.actions.length > 0 && (
-                        <div className="col-md-2">
-                            <form method="post" className="form-inline">
-                                <div className="dropdown d-inline-block mb-2 mr-2">
-                                    <button
-                                        type="button"
-                                        className="btn btn-primary dropdown-toggle bulk-actions-button"
-                                        data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        {__('cms::app.bulk_actions')}
-                                    </button>
-                                    <div className="dropdown-menu bulk-actions-actions"
-                                         role="menu"
-                                         x-placement="bottom-start"
-                                    >
-                                        {config.actions.map((action, index) => (
-                                            <a className={`dropdown-item select-action action-${action.key}` + (action.key == 'delete' ? ' text-danger' : '')} href="#" data-action={action.key} key={action.key}>{action.label}</a>
-                                        ))}
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    )}
+                <BulkActions config={config} />
 
-                    {config.searchable && (
-                        <div className="col-md-10">
-                            <form method="get" className="form-inline" id="form-search">
-                                {config.searchFields.map((field, index) => (
-                                    <input type="text" name={field.type}
-                                           className="form-control mb-2 mr-2"
-                                           placeholder={__('cms::app.search')}
-                                           key={index}/>
-                                ))}
+                <Search config={config} />
+            </div>
 
-                                <button type="submit" className="btn btn-primary mb-2">
-                                    <i className="fa fa-search"></i> {__('cms::app.search')}
-                                </button>
-                            </form>
-                        </div>
-                    )}
-                </>
+            <div className="table-responsive">
+                <table
+                    className="table jw-table"
+                    id={config.uniqueId}
+                >
+                    <thead>
+                        <tr>
+                            <th data-width="3%" data-checkbox="true">
+                                <input type="checkbox" className={'jw-checkbox'} value={'all'} />
+                            </th>
+                            {config.columns.map((column: DatatableColumn, index: number) => (
+                                <th
+                                    key={index}
+                                    data-width={column.width || 'auto'}
+                                    data-align={column.align || 'left'}
+                                    data-field={column.key}
+                                    data-sortable={column.sortable || true}
+                                >{ column.label }
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="checkbox" className={'jw-checkbox'} value={'all'} />
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </>
     );
