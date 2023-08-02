@@ -1,9 +1,18 @@
-import {DatatableColumn, DatatableProps, DatatableSearchField} from "@/types/datatable";
-import {__} from "@/helpers/functions";
+import {DatatableColumn, DatatableProps} from "@/types/datatable";
 import BulkActions from "@/components/datatable/bulk-actions";
 import Search from "@/components/datatable/search";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function DataTable({config}: { config: DatatableProps }) {
+    const [data, setData] = useState<{rows: Array<any>, total: number}>();
+
+    useEffect(() => {
+        axios.get(config.dataUrl).then((res) => {
+            setData(res.data);
+        });
+    }, [config])
+
     return (
         <>
             <div className="row">
@@ -35,14 +44,20 @@ export default function DataTable({config}: { config: DatatableProps }) {
                         </tr>
                     </thead>
                     <tbody>
+                    {data && data.rows.map((row: any, index: number) => (
                         <tr>
                             <td>
-                                <input type="checkbox" className={'jw-checkbox'} value={'all'} />
+                                <input type="checkbox" name={'ids[]'} className={'jw-checkbox'} value={row.id} />
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            {config.columns.map((column: DatatableColumn, index: number) => (
+                                <td
+                                    key={index}
+                                >{ row[column.key] }
+                                </td>
+                            ))}
                         </tr>
+                    ))}
+
                     </tbody>
                 </table>
             </div>

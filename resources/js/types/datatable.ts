@@ -18,6 +18,7 @@ export interface DatatableSearchField {
 
 export interface DatatableProps {
     actionUrl: string
+    dataUrl: string
     uniqueId: string
     actions: Array<DatatableAction>
     columns: Array<DatatableColumn>
