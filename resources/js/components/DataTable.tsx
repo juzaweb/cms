@@ -6,6 +6,7 @@ import axios from "axios";
 
 export default function DataTable({config}: { config: DatatableProps }) {
     const [data, setData] = useState<{rows: Array<any>, total: number}>();
+    const [checkedAll, setCheckedAll] = useState<boolean>(false);
 
     useEffect(() => {
         axios.get(config.dataUrl).then((res) => {
@@ -29,7 +30,12 @@ export default function DataTable({config}: { config: DatatableProps }) {
                     <thead>
                         <tr>
                             <th data-width="3%" data-checkbox="true">
-                                <input type="checkbox" className={'jw-checkbox'} value={'all'} />
+                                <input
+                                    type="checkbox"
+                                    className={'jw-checkbox'}
+                                    value={'all'}
+                                    onChange={() => setCheckedAll(this.checkedAll)}
+                                />
                             </th>
                             {config.columns.map((column: DatatableColumn, index: number) => (
                                 <th
@@ -44,20 +50,25 @@ export default function DataTable({config}: { config: DatatableProps }) {
                         </tr>
                     </thead>
                     <tbody>
-                    {data && data.rows.map((row: any, index: number) => (
-                        <tr>
-                            <td>
-                                <input type="checkbox" name={'ids[]'} className={'jw-checkbox'} value={row.id} />
-                            </td>
-                            {config.columns.map((column: DatatableColumn, index: number) => (
-                                <td
-                                    key={index}
-                                >{ row[column.key] }
+                        {data && data.rows.map((row: any, index: number) => (
+                            <tr>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        name={'ids[]'}
+                                        className={'jw-checkbox'} value={row.id}
+                                        checked={checkedAll}
+                                    />
                                 </td>
-                            ))}
-                        </tr>
-                    ))}
-
+                                {config.columns.map((column: DatatableColumn, index: number) => (
+                                    <td
+                                        key={index}
+                                    >
+                                        { row[column.key] }
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

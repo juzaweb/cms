@@ -147,6 +147,11 @@ abstract class DataTable implements Arrayable
         $this->params = $params;
     }
 
+    /**
+     * Renders the view for the PHP function.
+     *
+     * @return View
+     */
     public function render(): View
     {
         if (empty($this->currentUrl)) {
@@ -159,6 +164,11 @@ abstract class DataTable implements Arrayable
         );
     }
 
+    /**
+     * Returns an array of actions.
+     *
+     * @return array Returns an array of actions.
+     */
     public function actions(): array
     {
         return [
@@ -214,6 +224,14 @@ abstract class DataTable implements Arrayable
         ];
     }
 
+    /**
+     * Generates a formatted row action for the given value, row, and index.
+     *
+     * @param mixed $value The value for the row action.
+     * @param mixed $row The row object.
+     * @param int $index The index of the row.
+     * @return string The HTML rendered output of the row action.
+     */
     public function rowActionsFormatter($value, $row, $index): string
     {
         return view(
@@ -228,21 +246,45 @@ abstract class DataTable implements Arrayable
             ->render();
     }
 
+    /**
+     * Sets the data URL for the object.
+     *
+     * @param string $url The URL to set as the data URL.
+     * @throws \Exception
+     * @return void
+     */
     public function setDataUrl(string $url): void
     {
         $this->dataUrl = $url;
     }
 
+    /**
+     * Sets the action URL for the function.
+     *
+     * @param string $url The URL to set as the action URL.
+     * @return void
+     */
     public function setActionUrl(string $url): void
     {
         $this->actionUrl = $url;
     }
 
+    /**
+     * Set the current URL.
+     *
+     * @param string $url The URL to set as the current URL.
+     * @return void
+     */
     public function setCurrentUrl(string $url): void
     {
         $this->currentUrl = $url;
     }
 
+    /**
+     * Converts the object to an array.
+     *
+     * @return array The converted array.
+     */
     public function toArray(): array
     {
         $searchFields = collect($this->searchFields())->map(
@@ -283,6 +325,7 @@ abstract class DataTable implements Arrayable
             'searchable' => $this->searchable,
             'searchFieldTypes' => $this->getSearchFieldTypes(),
             'table' => Crypt::encryptString(static::class),
+            'uniqueId' => $this->getUniqueId(),
         ];
     }
 
@@ -293,7 +336,7 @@ abstract class DataTable implements Arrayable
      */
     protected function getDataRender(): array
     {
-        $uniqueId = 'juzaweb_' . Str::random(10);
+        $uniqueId = $this->getUniqueId();
         $searchFields = $this->searchFields();
 
         return [
@@ -314,7 +357,24 @@ abstract class DataTable implements Arrayable
         ];
     }
 
-    private function paramsToArray($params)
+    /**
+     * Generate a unique ID.
+     *
+     * @return string The unique ID generated.
+     */
+    protected function getUniqueId(): string
+    {
+        return 'juzaweb_' . Str::random(10);
+    }
+
+    /**
+     * Convert the given parameters into an array.
+     *
+     * @param mixed $params The parameters to convert.
+     * @throws \RuntimeException If the parameters contain unsupported types.
+     * @return mixed The converted parameters as an array.
+     */
+    protected function paramsToArray($params)
     {
         foreach ($params as $key => $var) {
             if (is_null($var)) {
@@ -322,14 +382,19 @@ abstract class DataTable implements Arrayable
             }
 
             if (! in_array(gettype($var), ['string', 'array', 'integer'])) {
-                throw new \Exception('Mount data can\'t support. Only supported string, array, integer');
+                throw new \RuntimeException('Mount data can\'t support. Only supported string, array, integer');
             }
         }
 
         return $params;
     }
 
-    private function getSearchFieldTypes()
+    /**
+     * Retrieves the search field types.
+     *
+     * @return array An array of search field types.
+     */
+    protected function getSearchFieldTypes()
     {
         return apply_filters(Action::DATATABLE_SEARCH_FIELD_TYPES_FILTER, []);
     }
