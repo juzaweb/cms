@@ -27,14 +27,16 @@ class ThemeServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Lang::addJsonPath(ThemeLoader::getPath(jw_current_theme(), 'lang'));
+        if (config('theme.enable')) {
+            Lang::addJsonPath(ThemeLoader::getPath(jw_current_theme(), 'lang'));
 
-        ActionRegister::register(
-            [
-                ThemeAction::class,
-                FrontendAction::class,
-            ]
-        );
+            ActionRegister::register(
+                [
+                    ThemeAction::class,
+                    FrontendAction::class,
+                ]
+            );
+        }
     }
 
     public function register(): void

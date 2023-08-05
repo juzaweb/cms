@@ -9,8 +9,10 @@
  */
 
 return [
+    'enable' => env('JW_FRONTEND_ENABLE', true),
+
     'route_prefix' => null,
-    
+
     'stubs' => [
         'files' => [
             'index' => 'views/index.twig',

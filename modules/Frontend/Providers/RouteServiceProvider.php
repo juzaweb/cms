@@ -15,18 +15,18 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends BaseServiceProvider
 {
-    public function map()
+    public function map(): void
     {
         $this->mapAssetRoutes();
         $this->mapThemeRoutes();
     }
 
-    protected function mapAssetRoutes()
+    protected function mapAssetRoutes(): void
     {
         Route::group([], __DIR__ . '/../routes/assets.php');
     }
 
-    protected function mapThemeRoutes()
+    protected function mapThemeRoutes(): void
     {
         Route::middleware('theme')
             ->prefix(config('theme.route_prefix'))

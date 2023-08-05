@@ -15,7 +15,7 @@ use Juzaweb\CMS\Support\ServiceProvider;
 
 class FrontendServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $currentTheme = $this->app[LocalThemeRepositoryContract::class]->currentTheme();
 
