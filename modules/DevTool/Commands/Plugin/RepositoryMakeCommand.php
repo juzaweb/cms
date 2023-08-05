@@ -36,7 +36,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected $description = 'Generate new restful repository for the specified plugin.';
 
-    protected function afterHandle()
+    protected function afterHandle(): void
     {
         $path = str_replace('\\', '/', $this->getDestinationFileEloquentPath());
 

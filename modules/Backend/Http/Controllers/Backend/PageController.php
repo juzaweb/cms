@@ -16,22 +16,22 @@ class PageController extends BackendController
     public function callAction($method, $parameters): Response|View
     {
         $this->page = $this->findPageOrFail();
-        
+
         return parent::callAction($method, $parameters);
     }
 
     protected function findPageOrFail(): Collection
     {
         $page = HookAction::getAdminPages($this->getPageSlug());
-        
-        if (empty($page)) {
+
+        if ($page === null) {
             abort(404);
         }
 
         if (is_array($page)) {
             $page = $this->recursiveGetPage($page);
         }
-        
+
         return $page;
     }
 

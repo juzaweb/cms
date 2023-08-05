@@ -4,7 +4,7 @@
  *
  * @package    juzaweb/juzacms
  * @author     The Anh Dang
- * @link       https://juzaweb.com/cms
+ * @link       https://juzaweb.com
  * @license    GNU V2
  */
 
@@ -102,6 +102,17 @@ abstract class ResourceCommand extends Command
         );
 
         $this->makeFile($path, $contents);
+    }
+
+    protected function makeRepository(string $model): void
+    {
+        $this->call(
+            'plugin:make-repository',
+            [
+                'repository' => $model,
+                'module' => $this->getModuleName(),
+            ]
+        );
     }
 
     /**
