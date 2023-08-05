@@ -38,11 +38,12 @@ class EditorController extends BackendController
         $themes = $this->themeRepository->all();
         $directories = $this->getThemeTree("{$themePath}/views", convert_linux_path($themePath));
 
-        $file = $this->getCurrentFile($request);
-        $path = Crypt::decryptString($file);
-        if (!file_exists("{$themePath}/{$path}")) {
-            return abort(404);
-        }
+        $file = $this->getCurrentFile($request, $themePath);
+        //$path = Crypt::decryptString($file);
+
+        /*if (!file_exists("{$themePath}/{$path}")) {
+            abort(404, "Cannot find file {$path}");
+        }*/
 
         return view(
             'cms::backend.appearance.editor.index',
@@ -178,11 +179,27 @@ class EditorController extends BackendController
         };
     }
 
-    protected function getCurrentFile(Request $request): string
+    protected function getCurrentFile(Request $request, string $themePath): string
     {
         return $request->get(
             'file',
-            Crypt::encryptString('views/index.twig')
+            Crypt::encryptString($this->findIndexFile($themePath))
         );
+    }
+
+    protected function findIndexFile(string $themePath): ?string
+    {
+        // Twig theme
+        if (File::exists("{$themePath}/views/index.twig")) {
+            return 'views/index.twig';
+        }
+
+        // Blade theme
+        if (File::exists("{$themePath}/views/index.blade.php")) {
+            return 'views/index.blade.php';
+        }
+
+        // Inertia theme
+        return 'views/index.tsx';
     }
 }
