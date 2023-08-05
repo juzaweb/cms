@@ -2,8 +2,8 @@
 
 namespace $CLASS_NAMESPACE$;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Arr;
 use Juzaweb\CMS\Abstracts\DataTable;
 $USE_NAMESPACE$
 class $CLASS$ extends DataTable
@@ -13,7 +13,7 @@ class $CLASS$ extends DataTable
      *
      * @return array
      */
-    public function columns()
+    public function columns(): array
     {
         return [
             $COLUMNS$
@@ -31,15 +31,16 @@ class $CLASS$ extends DataTable
     /**
      * Query data datatable
      *
-     * @param array $data
+     * @param  array  $data
      * @return Builder
+     * @throws BindingResolutionException
      */
-    public function query($data)
+    public function query(array $data): Builder
     {
         $QUERY_TABLE$
     }
 
-    public function bulkActions($action, $ids)
+    public function bulkActions($action, $ids): void
     {
         $BULK_ACTIONS$
     }

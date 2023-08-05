@@ -19,7 +19,7 @@ class ModelMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $argumentName = 'model';
+    protected string $argumentName = 'model';
 
     /**
      * The console command name.

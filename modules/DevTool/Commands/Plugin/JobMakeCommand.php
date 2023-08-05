@@ -28,7 +28,7 @@ class JobMakeCommand extends GeneratorCommand
      */
     protected $description = 'Create a new job class for the specified plugin';
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     public function getDefaultNamespace(): string
     {
@@ -69,10 +69,13 @@ class JobMakeCommand extends GeneratorCommand
     {
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
 
-        return (new Stub($this->getStubName(), [
-            'NAMESPACE' => $this->getClassNamespace($module),
-            'CLASS' => $this->getClass(),
-        ]))->render();
+        return (new Stub(
+            $this->getStubName(),
+            [
+                'NAMESPACE' => $this->getClassNamespace($module),
+                'CLASS' => $this->getClass(),
+            ]
+        ))->render();
     }
 
     /**
@@ -98,7 +101,7 @@ class JobMakeCommand extends GeneratorCommand
 
         $jobPath = GenerateConfigReader::read('jobs');
 
-        return $path . $jobPath->getPath() . '/' . $this->getFileName() . '.php';
+        return $path.$jobPath->getPath().'/'.$this->getFileName().'.php';
     }
 
     /**

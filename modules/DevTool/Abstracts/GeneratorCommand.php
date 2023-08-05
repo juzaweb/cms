@@ -13,7 +13,7 @@ abstract class GeneratorCommand extends Command
      *
      * @var string
      */
-    protected $argumentName = '';
+    protected string $argumentName = '';
 
     /**
      * Execute the console command.

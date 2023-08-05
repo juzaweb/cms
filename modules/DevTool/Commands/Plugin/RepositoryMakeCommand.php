@@ -19,7 +19,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $argumentName = 'repository';
+    protected string $argumentName = 'repository';
 
     /**
      * The console command name.

@@ -20,7 +20,7 @@ class ControllerMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $argumentName = 'controller';
+    protected string $argumentName = 'controller';
 
     /**
      * The console command name.

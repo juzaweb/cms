@@ -13,7 +13,7 @@ class RouteProviderMakeCommand extends GeneratorCommand
 {
     use ModuleCommandTrait;
 
-    protected $argumentName = 'module';
+    protected string $argumentName = 'module';
 
     /**
      * The command name.

@@ -14,7 +14,7 @@ class ResourceMakeCommand extends GeneratorCommand
 {
     use ModuleCommandTrait;
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
     protected $name = 'plugin:make-resource';
     protected $description = 'Create a new resource class for the specified plugin.';
 

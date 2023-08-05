@@ -80,7 +80,7 @@ class ConsoleServiceProvider extends ServiceProvider
         Theme\ThemeGeneratorCommand::class,
         Theme\ThemeListCommand::class,
         ActionMakeCommand::class,
-        Resource\DatatableMakeCommand::class,
+        Plugin\DatatableMakeCommand::class,
         Resource\JuzawebResouceMakeCommand::class,
         MakeAdminCommand::class,
         Theme\GenerateDataThemeCommand::class,

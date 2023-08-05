@@ -68,7 +68,7 @@ abstract class ResourceCommand extends Command
             [
                 'name' => $model,
                 'module' => $this->getModuleName(),
-                '--model' => $model,
+                '--repository' => "{$model}Repository",
                 '--columns' => implode(',', $this->columns),
             ]
         );

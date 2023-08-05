@@ -14,7 +14,7 @@ class TestMakeCommand extends GeneratorCommand
 {
     use ModuleCommandTrait;
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
     protected $name = 'plugin:make-test';
     protected $description = 'Create a new test class for the specified plugin.';
 

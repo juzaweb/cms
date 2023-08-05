@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Commands\Resource;
+namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
@@ -29,7 +29,7 @@ class DatatableMakeCommand extends GeneratorCommand
      */
     protected $name = 'plugin:make-datatable';
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     /**
      * The console command description.
@@ -48,12 +48,12 @@ class DatatableMakeCommand extends GeneratorCommand
      *
      * @return string
      */
-    protected function getTemplateContents()
+    protected function getTemplateContents(): string
     {
         return (new Stub('/resource/datatable.stub', $this->getDataStub()))->render();
     }
 
-    protected function getDataStub()
+    protected function getDataStub(): array
     {
         /**
          * @var \Juzaweb\CMS\Support\Plugin $module
@@ -81,15 +81,15 @@ class DatatableMakeCommand extends GeneratorCommand
     /**
      * @return array|string
      */
-    protected function getDatatableNameWithoutNamespace()
+    protected function getDatatableNameWithoutNamespace(): array|string
     {
         return class_basename($this->getDatatableName());
     }
 
     /**
-     * @return array|string
+     * @return string
      */
-    protected function getDatatableName()
+    protected function getDatatableName(): string
     {
         $name = Str::studly($this->argument('name'));
 
@@ -100,7 +100,7 @@ class DatatableMakeCommand extends GeneratorCommand
         return $name;
     }
 
-    protected function getDataModelStub()
+    protected function getDataModelStub(): array
     {
         $data = [
             'QUERY_TABLE' => '// Query handle',
@@ -126,7 +126,7 @@ class DatatableMakeCommand extends GeneratorCommand
             $data['USE_NAMESPACE'] = $this->stubRender(
                 'resource/datatable/use-namespaces.stub',
                 [
-                    'NAMESPACE' => str_replace('/', '\\', $module->getStudlyName()) . '\Models\\' . $model . ";\n",
+                    'NAMESPACE' => str_replace('/', '\\', $module->getStudlyName()).'\Models\\'.$model.";\n",
                 ]
             );
 
@@ -140,17 +140,49 @@ class DatatableMakeCommand extends GeneratorCommand
             $data['COLUMNS'] = $this->getDataColumns($module);
         }
 
+        if ($repository = $this->option('repository')) {
+            $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
+
+            $data['QUERY_TABLE'] = 'return app()->make('.$repository.'::class)
+            ->pushCriteria(new SearchCriteria($data))
+            ->pushCriteria(new FilterCriteria($data))
+            ->pushCriteria(new SortCriteria($data))
+            ->getQuery();';
+
+            $data['USE_NAMESPACE'] = $this->stubRender(
+                'resource/datatable/use-namespaces-repository.stub',
+                [
+                    'NAMESPACE' => str_replace(
+                        '/',
+                        '\\',
+                        $module->getStudlyName()
+                    ).'\Repositories\\'.$repository.";",
+                ]
+            );
+
+            $data['BULK_ACTIONS'] = trim(
+                $this->stubRender(
+                    'resource/datatable/bulk-actions-repository.stub',
+                    [
+                    'MODEL_NAME' => $repository,
+                    ]
+                )
+            );
+
+            $data['COLUMNS'] = $this->getDataColumns($module);
+        }
+
         return $data;
     }
 
-    protected function getDataColumns($module)
+    protected function getDataColumns($module): string
     {
         $result = '';
         $columns = explode(',', $this->option('columns'));
         $columns = collect($columns)
             ->filter(
                 function ($item) {
-                    return ! in_array(
+                    return !in_array(
                         $item,
                         [
                             'description',
@@ -165,8 +197,8 @@ class DatatableMakeCommand extends GeneratorCommand
                 $result = $this->stubRender(
                     'resource/datatable/action-column.stub',
                     [
-                    'MODULE_DOMAIN' => $module->getDomainName(),
-                    'COLUMN' => $column,
+                        'MODULE_DOMAIN' => $module->getDomainName(),
+                        'COLUMN' => $column,
                     ]
                 );
 
@@ -182,24 +214,24 @@ class DatatableMakeCommand extends GeneratorCommand
         }
 
         foreach ($columns as $column) {
-            $result .= "\n\t\t\t" . $this->stubRender(
+            $result .= "\n            ".$this->stubRender(
                 $this->getColumnStubPath($column),
                 [
-                    'MODULE_DOMAIN' => $module->getDomainName(),
-                    'COLUMN' => $column,
-                ]
+                        'MODULE_DOMAIN' => $module->getDomainName(),
+                        'COLUMN' => $column,
+                    ]
             );
         }
 
         return $result;
     }
 
-    protected function getColumnStubPath($column)
+    protected function getColumnStubPath($column): string
     {
-        $stubPath = JW_PACKAGE_PATH . '/stubs/plugin/';
-        $columnStub = 'resource/datatable/columns/' . $column . '.stub';
+        $stubPath = JW_PACKAGE_PATH.'/stubs/plugin/';
+        $columnStub = 'resource/datatable/columns/'.$column.'.stub';
 
-        if (file_exists($stubPath . '/' . $columnStub)) {
+        if (file_exists($stubPath.'/'.$columnStub)) {
             return $columnStub;
         }
 
@@ -211,12 +243,12 @@ class DatatableMakeCommand extends GeneratorCommand
      *
      * @return string
      */
-    protected function getDestinationFilePath()
+    protected function getDestinationFilePath(): string
     {
         $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
         $datatablePath = GenerateConfigReader::read('datatable');
 
-        return $path . $datatablePath->getPath() . '/' . $this->getDatatableName() . '.php';
+        return $path.$datatablePath->getPath().'/'.$this->getDatatableName().'.php';
     }
 
     /**
@@ -224,7 +256,7 @@ class DatatableMakeCommand extends GeneratorCommand
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the datatable class.'],
@@ -237,10 +269,11 @@ class DatatableMakeCommand extends GeneratorCommand
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [
             ['model', null, InputOption::VALUE_OPTIONAL, 'The model for query.', null],
+            ['repository', null, InputOption::VALUE_OPTIONAL, 'The repository for query.', null],
             ['columns', null, InputOption::VALUE_OPTIONAL, 'The columns for table.', null],
         ];
     }

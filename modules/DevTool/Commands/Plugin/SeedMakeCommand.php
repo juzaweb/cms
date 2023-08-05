@@ -16,7 +16,7 @@ class SeedMakeCommand extends GeneratorCommand
     use ModuleCommandTrait;
     use CanClearModulesCache;
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     /**
      * The console command name.

@@ -15,7 +15,7 @@ class ListenerMakeCommand extends GeneratorCommand
 {
     use ModuleCommandTrait;
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     /**
      * The console command name.

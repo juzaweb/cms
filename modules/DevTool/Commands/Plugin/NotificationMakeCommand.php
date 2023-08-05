@@ -20,7 +20,7 @@ final class NotificationMakeCommand extends GeneratorCommand
      */
     protected $name = 'plugin:make-notification';
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     /**
      * The console command description.

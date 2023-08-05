@@ -27,7 +27,7 @@ class MailMakeCommand extends GeneratorCommand
      */
     protected $description = 'Create a new email class for the specified plugin';
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     public function getDefaultNamespace(): string
     {
