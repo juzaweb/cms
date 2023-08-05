@@ -42,7 +42,13 @@ jobs:
       - name: Execute tests Install
         run: php artisan test modules/Tests/InstallTest.php
       - name: Execute tests (Unit and Feature tests)
-        run: php artisan test --stop-on-failure
+        run: php artisan test
+      - name: Execute tests disabled frontend
+        run:
+          php artisan test modules/Tests/Feature/Auth
+          php artisan test modules/Tests/Feature/Backend
+        env:
+          JW_FRONTEND_ENABLE: false
       - name: Execute tests Update
         run: php artisan test modules/Tests/UpdateTest.php
       - name: Execute tests after Update
