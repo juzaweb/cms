@@ -20,7 +20,6 @@ use Juzaweb\Backend\Http\Requests\Theme\EditorRequest;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 use TwigBridge\Facade\Twig;
 
 class EditorController extends BackendController
