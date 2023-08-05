@@ -20,6 +20,7 @@ use Juzaweb\Backend\Http\Requests\Theme\EditorRequest;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Facades\ThemeLoader;
 use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 use TwigBridge\Facade\Twig;
 
 class EditorController extends BackendController
@@ -34,7 +35,7 @@ class EditorController extends BackendController
     {
         $title = trans('cms::app.theme_editor');
         $theme = $theme ?: jw_current_theme();
-        $themePath = $this->themeRepository->find($theme)->getPath();
+        $themePath = $this->themeRepository->find($theme)?->getPath();
         $themes = $this->themeRepository->all();
         $directories = $this->getThemeTree("{$themePath}/views", convert_linux_path($themePath));
 
@@ -70,6 +71,8 @@ class EditorController extends BackendController
         $file = str_replace('..', '', $file);
         $repository = $this->themeRepository->find($theme);
 
+        throw_if($repository === null, new \RuntimeException('Theme not found'));
+
         if (!$repository->fileExists($file)) {
             return abort(404);
         }
@@ -85,9 +88,11 @@ class EditorController extends BackendController
     public function save(EditorRequest $request, string $theme): JsonResponse|RedirectResponse
     {
         $file = Crypt::decryptString($request->input('file'));
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
         $contents = $request->input('content');
         $repository = $this->themeRepository->find($theme);
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+        throw_if($repository === null, new \RuntimeException('Theme not found'));
 
         if (!in_array($extension, $this->editSupportExtensions)) {
             return $this->error("Unable to edit file {$extension}");
