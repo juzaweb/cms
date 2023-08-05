@@ -10,6 +10,7 @@
 
 namespace Juzaweb\DevTool\Commands\Resource;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Juzaweb\DevTool\Abstracts\CRUD\ResourceCommand;
@@ -60,9 +61,9 @@ class CRUDMakeCommand extends ResourceCommand
 
         $this->info('Add resource route '.$routePath);
 
-        $content = "Route::jwResource('{$table}', 'Backend\\{$model}Controller');";
+        $content = "Route::jwResource('{$this->getTableNameNonePrefix($table)}', {$model}Controller::class);";
 
-        //file_put_contents($routePath, PHP_EOL . $content . PHP_EOL, FILE_APPEND | LOCK_EX);
+        File::append($routePath, PHP_EOL . $content . PHP_EOL);
 
         $this->info("Add to your route: {$content}");
     }
@@ -86,11 +87,16 @@ class CRUDMakeCommand extends ResourceCommand
 
     protected function getModelNameByTable(string $table): string
     {
+        $model = $this->getTableNameNonePrefix($table);
+
+        return Str::studly(Str::singular($model));
+    }
+
+    protected function getTableNameNonePrefix(string $table): string
+    {
         $domain = $this->module->getDomainName();
 
-        $model = Str::studly(Str::replace("{$domain}_", '', $table));
-
-        return Str::singular($model);
+        return Str::replace("{$domain}_", '', $table);
     }
 
     /**
