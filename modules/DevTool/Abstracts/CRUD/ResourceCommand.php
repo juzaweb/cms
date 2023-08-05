@@ -8,36 +8,39 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\CMS\Abstracts;
+namespace Juzaweb\DevTool\Abstracts\CRUD;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
+use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
 
 abstract class ResourceCommand extends Command
 {
     use ModuleCommandTrait;
+
     /**
-     * @var \Juzaweb\CMS\Support\Plugin
+     * @var Plugin
      */
-    protected $module;
+    protected Plugin $module;
 
     /**
      * @var array
      */
-    protected $columns;
+    protected array $columns;
 
     /**
      * Generates a model using the given table and model names.
      *
-     * @param string $table The name of the table to generate the model for.
-     * @param string $model The name of the model to generate.
-     * @throws Exception If an error occurs during the model generation.
+     * @param  string  $table  The name of the table to generate the model for.
+     * @param  string  $model  The name of the model to generate.
      * @return void
+     * @throws Exception If an error occurs during the model generation.
      */
-    protected function makeModel($table, $model)
+    protected function makeModel(string $table, string $model): void
     {
         $this->call(
             'plugin:make-model',
@@ -54,11 +57,11 @@ abstract class ResourceCommand extends Command
     /**
      * Generates a data table for a given model.
      *
-     * @param string $model The name of the model.
-     * @throws \Exception If an error occurs while generating the data table.
+     * @param  string  $model  The name of the model.
      * @return void
+     * @throws Exception If an error occurs while generating the data table.
      */
-    protected function makeDataTable($model)
+    protected function makeDataTable(string $model): void
     {
         $this->call(
             'plugin:make-datatable',
@@ -74,24 +77,24 @@ abstract class ResourceCommand extends Command
     /**
      * Generates the controller file for a given table and model.
      *
-     * @param string $table The name of the table.
-     * @param string $model The name of the model.
-     * @throws Exception If an error occurs while generating the file.
+     * @param  string  $table  The name of the table.
+     * @param  string  $model  The name of the model.
      * @return void
+     * @throws Exception If an error occurs while generating the file.
      */
-    protected function makeController($table, $model)
+    protected function makeController(string $table, string $model): void
     {
-        $file = $model . 'Controller.php';
+        $file = $model.'Controller.php';
         $path = $this->getDestinationControllerFilePath($file);
 
         $contents = $this->stubRender(
             'resource/controller.stub',
             [
-                'CLASS_NAMESPACE' => $this->module->getNamespace() . 'Http\Controllers\Backend',
-                'DATATABLE' => $model . 'Datatable',
+                'CLASS_NAMESPACE' => $this->module->getNamespace().'Http\Controllers\Backend',
+                'DATATABLE' => $model.'Datatable',
                 'MODEL_NAME' => $model,
                 'MODULE_NAMESPACE' => $this->module->getNamespace(),
-                'CLASS' => $model . 'Controller',
+                'CLASS' => $model.'Controller',
                 'TABLE_NAME' => $table,
                 'VIEW_NAME' => Str::singular($table),
                 'MODULE_DOMAIN' => $this->module->getDomainName(),
@@ -104,10 +107,10 @@ abstract class ResourceCommand extends Command
     /**
      * Generates views for a given table.
      *
-     * @param string $table The name of the table.
+     * @param  string  $table  The name of the table.
      * @return void
      */
-    protected function makeViews($table)
+    protected function makeViews(string $table): void
     {
         $singular = Str::singular($table);
         $path = convert_linux_path($this->getDestinationViewsFilePath($singular, 'index.blade.php'));
@@ -126,7 +129,7 @@ abstract class ResourceCommand extends Command
         $path = convert_linux_path($this->getDestinationViewsFilePath($singular, 'form.blade.php'));
 
         $contents = $this->stubRender(
-            'resource/views/'. $stubFile,
+            'resource/views/'.$stubFile,
             [
                 'ROUTE_NAME' => $table,
                 'FORM_COL1' => $this->getViewsFormCol1(),
@@ -140,40 +143,40 @@ abstract class ResourceCommand extends Command
     /**
      * Returns the file path of the destination controller for the given file.
      *
-     * @param mixed $file The file for which the destination controller file path is needed.
+     * @param  mixed  $file  The file for which the destination controller file path is needed.
      * @return string The file path of the destination controller.
      */
-    protected function getDestinationControllerFilePath($file): string
+    protected function getDestinationControllerFilePath(mixed $file): string
     {
-        $controllerPath = $this->module->getPath() .'/'.
-            GenerateConfigReader::read('controller')->getPath() .
+        $controllerPath = $this->module->getPath().'/'.
+            GenerateConfigReader::read('controller')->getPath().
             '/Backend/';
 
-        if (! is_dir($controllerPath)) {
+        if (!is_dir($controllerPath)) {
             File::makeDirectory($controllerPath, 0775, true);
         }
 
-        return $controllerPath . '/' . $file;
+        return $controllerPath.'/'.$file;
     }
 
     /**
      * Retrieves the file path for the destination views of a given table and file.
      *
-     * @param mixed $table The name of the table.
-     * @param mixed $file The name of the file.
+     * @param  string  $table  The name of the table.
+     * @param  string  $file  The name of the file.
      * @return string The file path for the destination views.
      */
-    protected function getDestinationViewsFilePath($table, $file): string
+    protected function getDestinationViewsFilePath(string $table, string $file): string
     {
-        $viewPath = $this->module->getPath() .'/'.
-            GenerateConfigReader::read('views')->getPath() .
-            '/backend/' . $table;
+        $viewPath = $this->module->getPath().'/'.
+            GenerateConfigReader::read('views')->getPath().
+            '/backend/'.$table;
 
-        if (! is_dir($viewPath)) {
+        if (!is_dir($viewPath)) {
             File::makeDirectory($viewPath, 0775, true);
         }
 
-        return $viewPath . '/' . $file;
+        return $viewPath.'/'.$file;
     }
 
     /**
@@ -190,18 +193,18 @@ abstract class ResourceCommand extends Command
     {
         $str = '';
         $columns = collect($this->columns)
-            ->filter(fn ($item) => !in_array($item, $this->getColumnsViewsFormCol2()))
+            ->filter(fn($item) => !in_array($item, $this->getColumnsViewsFormCol2()))
             ->toArray();
 
         $index = 0;
         foreach ($columns as $column) {
             $prefix = $index != 0 ? "\n\n\t\t\t" : "";
-            $str .= $prefix . $this->stubRender(
+            $str .= $prefix.$this->stubRender(
                 $this->getColumnViewsStubPath($column),
                 [
-                    'COLUMN' => $column,
-                    'MODULE_DOMAIN' => $this->module->getDomainName(),
-                ]
+                        'COLUMN' => $column,
+                        'MODULE_DOMAIN' => $this->module->getDomainName(),
+                    ]
             );
 
             $index++;
@@ -219,18 +222,18 @@ abstract class ResourceCommand extends Command
     {
         $str = '';
         $columns = collect($this->columns)
-            ->filter(fn ($item) => in_array($item, $this->getColumnsViewsFormCol2()))
+            ->filter(fn($item) => in_array($item, $this->getColumnsViewsFormCol2()))
             ->toArray();
 
         $index = 0;
         foreach ($columns as $column) {
             $prefix = $index != 0 ? "\n\n\t\t\t" : "";
-            $str .= $prefix . $this->stubRender(
+            $str .= $prefix.$this->stubRender(
                 $this->getColumnViewsStubPath($column),
                 [
-                    'COLUMN' => $column,
-                    'MODULE_DOMAIN' => $this->module->getDomainName(),
-                ]
+                        'COLUMN' => $column,
+                        'MODULE_DOMAIN' => $this->module->getDomainName(),
+                    ]
             );
 
             $index++;
@@ -255,15 +258,15 @@ abstract class ResourceCommand extends Command
     /**
      * Retrieves the path to the stub file for a given column view.
      *
-     * @param string $column The name of the column.
+     * @param  string  $column  The name of the column.
      * @return string The path to the stub file.
      */
-    protected function getColumnViewsStubPath($column): string
+    protected function getColumnViewsStubPath(string $column): string
     {
-        $stubPath = JW_PACKAGE_PATH . '/stubs/plugin/';
-        $columnStub = 'resource/views/columns/' . $column . '.stub';
+        $stubPath = JW_PACKAGE_PATH.'/stubs/plugin/';
+        $columnStub = 'resource/views/columns/'.$column.'.stub';
 
-        if (file_exists($stubPath . '/' . $columnStub)) {
+        if (file_exists($stubPath.'/'.$columnStub)) {
             return $columnStub;
         }
 
