@@ -234,9 +234,9 @@ abstract class ResourceCommand extends Command
             $str .= $prefix.$this->stubRender(
                 $this->getColumnViewsStubPath($column),
                 [
-                        'COLUMN' => $column,
-                        'MODULE_DOMAIN' => $this->module->getDomainName(),
-                    ]
+                    'COLUMN' => $column,
+                    'MODULE_DOMAIN' => $this->module->getDomainName(),
+                ]
             );
 
             $index++;

@@ -1,1 +1,1 @@
-{{ Field::text($model, '$COLUMN$') }}
+{{ Field::text($model, '$COLUMN$', ['label' => trans('$MODULE_DOMAIN$::content.$COLUMN$')]) }}

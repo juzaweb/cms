@@ -1,3 +1,4 @@
 {{ Field::select($model, 'status', [
-    'options' => []
+    'options' => [],
+    'label' => trans('$MODULE_DOMAIN$::content.$COLUMN$')
 ]) }}
