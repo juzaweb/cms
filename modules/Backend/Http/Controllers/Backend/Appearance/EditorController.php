@@ -24,7 +24,7 @@ use TwigBridge\Facade\Twig;
 
 class EditorController extends BackendController
 {
-    protected array $editSupportExtensions = ['twig'];
+    protected array $editSupportExtensions = ['twig', 'blade.php', 'tsx'];
 
     public function __construct(protected LocalThemeRepositoryContract $themeRepository)
     {
@@ -132,9 +132,7 @@ class EditorController extends BackendController
             return null;
         }
 
-        $view = str_replace('views/', '', $file);
-        $view = str_replace('.twig', '', $view);
-        $view = str_replace('/', '.', $view);
+        $view = str_replace(array('views/', '.twig', '/'), array('', '', '.'), $file);
 
         return 'theme::'.$view;
     }
