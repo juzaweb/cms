@@ -12,7 +12,7 @@ use Juzaweb\CMS\Support\Route\Auth;
 
 Auth::routes();
 
-if (config('theme.enable')) {
+if (config('juzaweb.frontend.enable')) {
     require __DIR__ . '/components/profile.route.php';
 
     require __DIR__ . '/components/sitemap.route.php';
