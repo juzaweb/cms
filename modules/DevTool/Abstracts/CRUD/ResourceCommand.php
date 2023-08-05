@@ -96,7 +96,7 @@ abstract class ResourceCommand extends Command
                 'MODULE_NAMESPACE' => $this->module->getNamespace(),
                 'CLASS' => $model.'Controller',
                 'TABLE_NAME' => $table,
-                'VIEW_NAME' => Str::singular($table),
+                'VIEW_NAME' => Str::singular(Str::lower(Str::snake($model))),
                 'MODULE_DOMAIN' => $this->module->getDomainName(),
             ]
         );

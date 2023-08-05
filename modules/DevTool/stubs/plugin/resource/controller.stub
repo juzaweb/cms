@@ -38,6 +38,6 @@ class $CLASS$ extends PageController
 
     protected function getTitle(...$params): string
     {
-        return trans('$MODULE_DOMAIN$::content.$TABLE_NAME$');
+        return trans('$MODULE_DOMAIN$::content.$VIEW_NAME$');
     }
 }
