@@ -45,10 +45,10 @@ class ModelMakeCommand extends GeneratorCommand
     /**
      * Create the migration file with the given model if migration flag was used
      */
-    private function handleOptionalMigrationOption()
+    private function handleOptionalMigrationOption(): void
     {
         if ($this->option('migration') === true) {
-            $migrationName = 'create_' . $this->createMigrationName() . '_table';
+            $migrationName = 'create_'.$this->createMigrationName().'_table';
             $this->call('plugin:make-migration', ['name' => $migrationName, 'module' => $this->argument('module')]);
         }
     }
@@ -59,14 +59,14 @@ class ModelMakeCommand extends GeneratorCommand
      * Product: products
      * @return string
      */
-    private function createMigrationName()
+    private function createMigrationName(): string
     {
         $pieces = preg_split('/(?=[A-Z])/', $this->argument('model'), -1, PREG_SPLIT_NO_EMPTY);
 
         $string = '';
         foreach ($pieces as $i => $piece) {
             if ($i + 1 < count($pieces)) {
-                $string .= strtolower($piece) . '_';
+                $string .= strtolower($piece).'_';
             } else {
                 $string .= Str::plural(strtolower($piece));
             }
@@ -119,29 +119,32 @@ class ModelMakeCommand extends GeneratorCommand
     protected function getTemplateContents()
     {
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
-        if (! $table = $this->option('table')) {
+        if (!$table = $this->option('table')) {
             $table = $this->createMigrationName();
         }
 
-        $table = $module->getDomainName() .'_' . $table;
+        $table = $module->getDomainName().'_'.$table;
 
-        return (new Stub($this->getStubPath(), [
-            'NAME' => $this->getModelName(),
-            'TABLE' => $table,
-            'FILLABLE' => $this->getFillable(),
-            'NAMESPACE' => $this->getClassNamespace($module),
-            'CLASS' => $this->getClass(),
-            'LOWER_NAME' => $module->getLowerName(),
-            'MODULE' => $this->getModuleName(),
-            'STUDLY_NAME' => $module->getStudlyName(),
-            'MODULE_NAMESPACE' => $this->laravel['plugins']->config('namespace'),
-        ]))->render();
+        return (new Stub(
+            $this->getStubPath(),
+            [
+                'NAME' => $this->getModelName(),
+                'TABLE' => $table,
+                'FILLABLE' => $this->getFillable(),
+                'NAMESPACE' => $this->getClassNamespace($module),
+                'CLASS' => $this->getClass(),
+                'LOWER_NAME' => $module->getLowerName(),
+                'MODULE' => $this->getModuleName(),
+                'STUDLY_NAME' => $module->getStudlyName(),
+                'MODULE_NAMESPACE' => $this->laravel['plugins']->config('namespace'),
+            ]
+        ))->render();
     }
 
-    protected function getStubPath()
+    protected function getStubPath(): string
     {
         if ($stub = $this->option('stub')) {
-            return '/' . $stub;
+            return '/'.$stub;
         }
 
         return '/model.stub';
@@ -162,7 +165,7 @@ class ModelMakeCommand extends GeneratorCommand
     {
         $fillable = $this->option('fillable');
 
-        if (! is_null($fillable)) {
+        if (!is_null($fillable)) {
             $arrays = explode(',', $fillable);
 
             return json_encode($arrays);
@@ -180,6 +183,6 @@ class ModelMakeCommand extends GeneratorCommand
 
         $modelPath = GenerateConfigReader::read('model');
 
-        return $path . $modelPath->getPath() . '/' . $this->getModelName() . '.php';
+        return $path.$modelPath->getPath().'/'.$this->getModelName().'.php';
     }
 }

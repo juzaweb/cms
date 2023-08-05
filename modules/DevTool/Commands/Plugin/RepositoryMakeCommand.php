@@ -77,7 +77,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected function getRepositoryName(): array|string
     {
-        $repository = Str::studly($this->argument('repository'));
+        $repository = $this->getModelName();
 
         if (Str::contains(strtolower($repository), 'repository') === false) {
             $repository .= 'Repository';
@@ -86,9 +86,14 @@ class RepositoryMakeCommand extends GeneratorCommand
         return $repository;
     }
 
+    protected function getModelName(): string
+    {
+        return Str::studly($this->argument('repository'));
+    }
+
     public function getDefaultNamespace(): string
     {
-        return 'Http/Repositorys';
+        return 'Repositories';
     }
 
     /**
@@ -127,14 +132,15 @@ class RepositoryMakeCommand extends GeneratorCommand
             'MODULE' => $this->getModuleName(),
             'NAME' => $this->getModuleName(),
             'STUDLY_NAME' => $module->getStudlyName(),
-            'MODULE_NAMESPACE' => $this->laravel['plugins']->config('namespace'),
+            'MODULE_NAMESPACE' => $this->getModuleNamespace($module),
+            'MODEL_NAME' => $this->argument('repository'),
         ];
     }
 
     /**
      * @return array|string
      */
-    private function getRepositoryNameWithoutNamespace(): array|string
+    protected function getRepositoryNameWithoutNamespace(): array|string
     {
         return class_basename($this->getRepositoryName());
     }

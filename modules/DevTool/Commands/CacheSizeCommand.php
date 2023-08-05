@@ -17,7 +17,7 @@ class CacheSizeCommand extends Command
 {
     protected $name = 'juza:cache-size';
 
-    public function handle()
+    public function handle(): void
     {
         $fileSize = 0;
         foreach (File::allFiles(storage_path('framework/cache')) as $file) {

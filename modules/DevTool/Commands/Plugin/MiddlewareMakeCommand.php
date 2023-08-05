@@ -38,7 +38,9 @@ class MiddlewareMakeCommand extends GeneratorCommand
     {
         $module = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.filter.namespace') ?: $module->config('paths.generator.filter.path', 'Http/Middleware');
+        return $module->config('paths.generator.filter.namespace')
+            ?:
+            $module->config('paths.generator.filter.path', 'Http/Middleware');
     }
 
     /**

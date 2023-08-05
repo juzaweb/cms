@@ -62,6 +62,8 @@ class CRUDMakeCommand extends ResourceCommand
 
         $this->makeModel($table, $singular);
 
+        $this->makeRepository($singular);
+
         $this->makeDataTable($singular);
 
         $this->makeController($table, $singular);
