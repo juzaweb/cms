@@ -24,7 +24,7 @@ use TwigBridge\Facade\Twig;
 
 class EditorController extends BackendController
 {
-    protected array $editSupportExtensions = ['twig'];
+    protected array $editSupportExtensions = ['twig', 'blade.php', 'tsx'];
 
     public function __construct(protected LocalThemeRepositoryContract $themeRepository)
     {
@@ -34,15 +34,16 @@ class EditorController extends BackendController
     {
         $title = trans('cms::app.theme_editor');
         $theme = $theme ?: jw_current_theme();
-        $themePath = $this->themeRepository->find($theme)->getPath();
+        $themePath = $this->themeRepository->find($theme)?->getPath();
         $themes = $this->themeRepository->all();
         $directories = $this->getThemeTree("{$themePath}/views", convert_linux_path($themePath));
 
-        $file = $this->getCurrentFile($request);
-        $path = Crypt::decryptString($file);
-        if (!file_exists("{$themePath}/{$path}")) {
-            return abort(404);
-        }
+        $file = $this->getCurrentFile($request, $themePath);
+        //$path = Crypt::decryptString($file);
+
+        /*if (!file_exists("{$themePath}/{$path}")) {
+            abort(404, "Cannot find file {$path}");
+        }*/
 
         return view(
             'cms::backend.appearance.editor.index',
@@ -69,6 +70,8 @@ class EditorController extends BackendController
         $file = str_replace('..', '', $file);
         $repository = $this->themeRepository->find($theme);
 
+        throw_if($repository === null, new \RuntimeException('Theme not found'));
+
         if (!$repository->fileExists($file)) {
             return abort(404);
         }
@@ -84,9 +87,11 @@ class EditorController extends BackendController
     public function save(EditorRequest $request, string $theme): JsonResponse|RedirectResponse
     {
         $file = Crypt::decryptString($request->input('file'));
+        $extension = pathinfo($file, PATHINFO_EXTENSION);
         $contents = $request->input('content');
         $repository = $this->themeRepository->find($theme);
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+        throw_if($repository === null, new \RuntimeException('Theme not found'));
 
         if (!in_array($extension, $this->editSupportExtensions)) {
             return $this->error("Unable to edit file {$extension}");
@@ -131,9 +136,7 @@ class EditorController extends BackendController
             return null;
         }
 
-        $view = str_replace('views/', '', $file);
-        $view = str_replace('.twig', '', $view);
-        $view = str_replace('/', '.', $view);
+        $view = str_replace(array('views/', '.twig', '/'), array('', '', '.'), $file);
 
         return 'theme::'.$view;
     }
@@ -178,11 +181,27 @@ class EditorController extends BackendController
         };
     }
 
-    protected function getCurrentFile(Request $request): string
+    protected function getCurrentFile(Request $request, string $themePath): string
     {
         return $request->get(
             'file',
-            Crypt::encryptString('views/index.twig')
+            Crypt::encryptString($this->findIndexFile($themePath))
         );
+    }
+
+    protected function findIndexFile(string $themePath): ?string
+    {
+        // Twig theme
+        if (File::exists("{$themePath}/views/index.twig")) {
+            return 'views/index.twig';
+        }
+
+        // Blade theme
+        if (File::exists("{$themePath}/views/index.blade.php")) {
+            return 'views/index.blade.php';
+        }
+
+        // Inertia theme
+        return 'views/index.tsx';
     }
 }
