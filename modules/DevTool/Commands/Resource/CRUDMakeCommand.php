@@ -10,7 +10,6 @@
 
 namespace Juzaweb\DevTool\Commands\Resource;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Juzaweb\CMS\Abstracts\Action;
@@ -57,6 +56,8 @@ class CRUDMakeCommand extends ResourceCommand
         $this->makeController($table, $model);
 
         $this->makeViews(Str::lower($model));
+
+        $this->addLanguageTranslate();
 
         $routePath = $this->module->getPath().'/src/routes/admin.php';
 

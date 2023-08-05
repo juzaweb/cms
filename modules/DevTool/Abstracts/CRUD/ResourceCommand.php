@@ -151,6 +151,27 @@ abstract class ResourceCommand extends Command
         $this->makeFile($path, $contents);
     }
 
+    protected function addLanguageTranslate(): void
+    {
+        $path = $this->module->getPath('src/resources/lang/en/content.php');
+        $langs = [];
+        if (File::exists($path)) {
+            $langs = include $path;
+        }
+
+        foreach ($this->columns as $column) {
+            if (isset($langs[$column])) {
+                continue;
+            }
+
+            $langs[$column] = Str::ucfirst(Str::replace('_', ' ', $column));
+        }
+
+        $string = '<?php' . PHP_EOL . PHP_EOL . 'return ' . $this->varExport($langs) . ';' . PHP_EOL;
+
+        File::put($path, $string);
+    }
+
     /**
      * Returns the file path of the destination controller for the given file.
      *
@@ -282,5 +303,18 @@ abstract class ResourceCommand extends Command
         }
 
         return 'resource/views/default-column.stub';
+    }
+
+    protected function varExport($expression): string
+    {
+        $export = var_export($expression, true);
+        $export = preg_replace("/^([ ]*)(.*)/m", '$1$1$2', $export);
+        $array = preg_split("/\r\n|\n|\r/", $export);
+        $array = preg_replace(
+            ["/\s*array\s\($/", "/\)(,)?$/", "/\s=>\s$/"],
+            [null, ']$1', ' => ['],
+            $array
+        );
+        return implode(PHP_EOL, array_filter(["["] + $array));
     }
 }
