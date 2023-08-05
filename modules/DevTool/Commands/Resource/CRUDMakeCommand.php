@@ -13,6 +13,7 @@ namespace Juzaweb\DevTool\Commands\Resource;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use Juzaweb\CMS\Abstracts\Action;
 use Juzaweb\DevTool\Abstracts\CRUD\ResourceCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -61,11 +62,26 @@ class CRUDMakeCommand extends ResourceCommand
 
         $this->info('Add resource route '.$routePath);
 
-        $content = "Route::jwResource('{$this->getTableNameNonePrefix($table)}', {$model}Controller::class);";
+        $tableName = $this->getTableNameNonePrefix($table);
+        $content = "Route::jwResource('{$tableName}', {$model}Controller::class);";
 
-        File::append($routePath, PHP_EOL . $content . PHP_EOL);
+        //File::append($routePath, PHP_EOL . $content . PHP_EOL);
 
-        $this->info("Add to your route: {$content}");
+        $this->info("Generated CRUD for {$table} successfully.");
+
+        $info = "Add to your route:\n\n";
+        $info .= "use {$this->module->getNamespace()}Http\Controllers\Backend\{$model}Controller;\n";
+        $info .= $content . "\n\n";
+
+        $info .= "And add to hook ". Action::BACKEND_INIT . " in your action:\n\n";
+        $info .= "\$this->hookAction->registerAdminPage(
+            '{$tableName}',
+            [
+                'title' => '". Str::ucfirst($tableName) ."',
+            ]
+        );";
+
+        $this->comment($info);
     }
 
     protected function getTableColumns(string $table): array
