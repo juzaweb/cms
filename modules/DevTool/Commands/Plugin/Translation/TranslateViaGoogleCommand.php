@@ -8,7 +8,7 @@
  * @license    MIT
  */
 
-namespace Juzaweb\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin\Translation;
 
 use Illuminate\Console\Command;
 use Juzaweb\CMS\Contracts\TranslationManager;

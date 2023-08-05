@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Juzaweb\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin\Migration;
 
 use Illuminate\Console\Command;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;

@@ -8,7 +8,7 @@ use Juzaweb\CMS\Support\Migrations\NameParser;
 use Juzaweb\CMS\Support\Migrations\SchemaParser;
 use Juzaweb\CMS\Support\Stub;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
-use Juzaweb\DevTool\Commands\Plugin\GeneratorCommand;
+use Juzaweb\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -33,7 +33,7 @@ class MigrationMakeCommand extends GeneratorCommand
     /**
      * Run the command.
      */
-    public function handle()
+    public function handle(): void
     {
         parent::handle();
 

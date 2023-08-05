@@ -3,12 +3,11 @@
 namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Exceptions\FileAlreadyExistException;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
-use Juzaweb\CMS\Support\Generators\FileGenerator;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Stub;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 class RepositoryMakeCommand extends GeneratorCommand

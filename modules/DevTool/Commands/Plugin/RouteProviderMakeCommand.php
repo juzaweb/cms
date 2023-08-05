@@ -5,6 +5,7 @@ namespace Juzaweb\DevTool\Commands\Plugin;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
 use Juzaweb\CMS\Support\Stub;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 

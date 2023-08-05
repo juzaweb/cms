@@ -1,27 +1,27 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Commands\Plugin\Publish;
 
 use Illuminate\Console\Command;
-use Juzaweb\CMS\Support\Plugin;
-use Juzaweb\CMS\Support\Publishing\AssetPublisher;
+use Juzaweb\CMS\Console\Commands\Plugin\Module;
+use Juzaweb\CMS\Support\Publishing\LangPublisher;
 use Symfony\Component\Console\Input\InputArgument;
 
-class PublishCommand extends Command
+class PublishTranslationCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'plugin:publish';
+    protected $name = 'plugin:publish-translation';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Publish a plugin\'s assets to the application';
+    protected $description = 'Publish a plugin\'s translations to the application';
 
     /**
      * Execute the console command.
@@ -30,6 +30,7 @@ class PublishCommand extends Command
     {
         if ($name = $this->argument('module')) {
             $this->publish($name);
+
             return;
         }
 
@@ -43,18 +44,18 @@ class PublishCommand extends Command
      */
     public function publish($name)
     {
-        if ($name instanceof Plugin) {
-            $plugin = $name;
+        if ($name instanceof Module) {
+            $module = $name;
         } else {
-            $plugin = $this->laravel['plugins']->findOrFail($name);
+            $module = $this->laravel['plugins']->findOrFail($name);
         }
 
-        with(new AssetPublisher($plugin))
+        with(new LangPublisher($module))
             ->setRepository($this->laravel['plugins'])
             ->setConsole($this)
             ->publish();
 
-        $this->line("<info>Published</info>: {$plugin->getStudlyName()}");
+        $this->line("<info>Published</info>: {$module->getStudlyName()}");
     }
 
     /**
@@ -62,8 +63,8 @@ class PublishCommand extends Command
      */
     public function publishAll()
     {
-        foreach ($this->laravel['plugins']->allEnabled() as $plugin) {
-            $this->publish($plugin);
+        foreach ($this->laravel['plugins']->allEnabled() as $module) {
+            $this->publish($module);
         }
     }
 

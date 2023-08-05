@@ -1,6 +1,6 @@
 <?php
 
-namespace Juzaweb\DevTool\Commands\Plugin;
+namespace Juzaweb\DevTool\Abstracts;
 
 use Illuminate\Console\Command;
 use Juzaweb\CMS\Exceptions\FileAlreadyExistException;
@@ -18,7 +18,7 @@ abstract class GeneratorCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $path = str_replace('\\', '/', $this->getDestinationFilePath());
 
@@ -45,6 +45,8 @@ abstract class GeneratorCommand extends Command
             $this->afterHandle();
         }
     }
+
+    abstract public function getModuleName(): string;
 
     /**
      * Get the destination file path.
@@ -108,8 +110,6 @@ abstract class GeneratorCommand extends Command
 
     public function getDomainName()
     {
-        $module = $this->laravel['plugins']->find($this->getModuleName());
-
-        return $module->getExtraJuzaweb('domain');
+        return $this->laravel['plugins']->find($this->getModuleName())->getExtraJuzaweb('domain');
     }
 }

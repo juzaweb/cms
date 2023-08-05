@@ -13,13 +13,12 @@ use Juzaweb\DevTool\Commands\Plugin\ControllerMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\DisableCommand;
 use Juzaweb\DevTool\Commands\Plugin\EnableCommand;
 use Juzaweb\DevTool\Commands\Plugin\EventMakeCommand;
-use Juzaweb\DevTool\Commands\Plugin\ImportTranslationCommand;
 use Juzaweb\DevTool\Commands\Plugin\InstallCommand as PluginInstallCommand;
 use Juzaweb\DevTool\Commands\Plugin\JobMakeCommand;
-use Juzaweb\DevTool\Commands\Plugin\LaravelModulesV6Migrator;
 use Juzaweb\DevTool\Commands\Plugin\ListCommand;
 use Juzaweb\DevTool\Commands\Plugin\ListenerMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\MiddlewareMakeCommand;
+use Juzaweb\DevTool\Commands\Plugin\Migration\LaravelModulesV6Migrator;
 use Juzaweb\DevTool\Commands\Plugin\Migration\MigrateCommand;
 use Juzaweb\DevTool\Commands\Plugin\Migration\MigrateRefreshCommand;
 use Juzaweb\DevTool\Commands\Plugin\Migration\MigrateResetCommand;
@@ -30,13 +29,14 @@ use Juzaweb\DevTool\Commands\Plugin\ModelMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\ModuleDeleteCommand;
 use Juzaweb\DevTool\Commands\Plugin\ModuleMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\ProviderMakeCommand;
-use Juzaweb\DevTool\Commands\Plugin\PublishCommand;
+use Juzaweb\DevTool\Commands\Plugin\Publish\PublishCommand;
 use Juzaweb\DevTool\Commands\Plugin\RequestMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\ResourceMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\RouteProviderMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\RuleMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\SeedCommand;
-use Juzaweb\DevTool\Commands\Plugin\TranslateViaGoogleCommand;
+use Juzaweb\DevTool\Commands\Plugin\Translation\ImportTranslationCommand;
+use Juzaweb\DevTool\Commands\Plugin\Translation\TranslateViaGoogleCommand;
 use Juzaweb\DevTool\Commands\Resource;
 use Juzaweb\DevTool\Commands\Theme;
 
@@ -92,7 +92,7 @@ class ConsoleServiceProvider extends ServiceProvider
         CacheSizeCommand::class,
         ImportTranslationCommand::class,
         TranslateViaGoogleCommand::class,
-        Plugin\ExportTranslationCommand::class,
+        Plugin\Translation\ExportTranslationCommand::class,
         Plugin\RepositoryMakeCommand::class,
         Theme\ExportTranslationCommand::class,
         Theme\ImportTranslationCommand::class,

@@ -24,7 +24,7 @@ class DumpCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->info('Generating optimized autoload plugins.');
 
