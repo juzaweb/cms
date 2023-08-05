@@ -120,10 +120,8 @@ class ModelMakeCommand extends GeneratorCommand
     {
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
         if (!$table = $this->option('table')) {
-            $table = $this->createMigrationName();
+            $table = $module->getDomainName().'_'.$this->createMigrationName();
         }
-
-        $table = $module->getDomainName().'_'.$table;
 
         return (new Stub(
             $this->getStubPath(),
@@ -168,16 +166,13 @@ class ModelMakeCommand extends GeneratorCommand
         if (!is_null($fillable)) {
             $arrays = explode(',', $fillable);
 
-            return json_encode($arrays);
+            return json_encode($arrays, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
         }
 
         return '[]';
     }
 
-    /**
-     * @return mixed
-     */
-    protected function getDestinationFilePath()
+    protected function getDestinationFilePath(): string
     {
         $path = $this->laravel['plugins']->getModulePath($this->getModuleName());
 

@@ -10,5 +10,6 @@ class $CLASS$ extends Model
     use ResourceModel;
 
     protected $table = '$TABLE$';
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $fillable = $FILLABLE$;
 }
