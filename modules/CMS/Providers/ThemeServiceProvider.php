@@ -27,14 +27,9 @@ class ThemeServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Lang::addJsonPath(ThemeLoader::getPath(jw_current_theme(), 'lang'));
-
-        ActionRegister::register(
-            [
-                ThemeAction::class,
-                FrontendAction::class,
-            ]
-        );
+        if (config('juzaweb.frontend.enable')) {
+            $this->registerTheme();
+        }
     }
 
     public function register(): void
@@ -57,5 +52,17 @@ class ThemeServiceProvider extends ServiceProvider
         $this->app->bind(ThemeRenderContract::class, ThemeRender::class);
 
         $this->app->alias(LocalThemeRepositoryContract::class, 'themes');
+    }
+
+    protected function registerTheme(): void
+    {
+        Lang::addJsonPath(ThemeLoader::getPath(jw_current_theme(), 'lang'));
+
+        ActionRegister::register(
+            [
+                ThemeAction::class,
+                FrontendAction::class,
+            ]
+        );
     }
 }

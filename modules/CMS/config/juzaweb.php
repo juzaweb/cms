@@ -20,6 +20,10 @@ return [
         'enable' => (bool) env('ADMINBAR_ENDABLE', true),
     ],
 
+    'frontend' => [
+        'enable' => env('JW_FRONTEND_ENABLE', true),
+    ],
+
     /**
      * Cache prefix
      *

@@ -32,6 +32,7 @@ class BootstrapServiceProvider extends ServiceProvider
     {
         $this->app[LocalPluginRepositoryContract::class]->register();
 
+        // Register frontend routes after load plugins
         $this->app->register(RouteServiceProvider::class);
     }
 }

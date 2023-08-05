@@ -8,67 +8,18 @@
  * @license    GNU V2
  */
 
-require __DIR__ . '/components/profile.route.php';
-
-use Juzaweb\CMS\Support\Installer;
 use Juzaweb\CMS\Support\Route\Auth;
-use Juzaweb\Frontend\Http\Controllers\AjaxController;
-use Juzaweb\Frontend\Http\Controllers\FeedController;
-use Juzaweb\Frontend\Http\Controllers\HomeController;
-use Juzaweb\Frontend\Http\Controllers\PostController;
-use Juzaweb\Frontend\Http\Controllers\RouteController;
-use Juzaweb\Frontend\Http\Controllers\SearchController;
-use Juzaweb\Frontend\Http\Controllers\SitemapController;
-use Juzaweb\Frontend\Http\Controllers\PostSitemapController;
 
 Auth::routes();
 
-Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
+if (config('juzaweb.frontend.enable')) {
+    require __DIR__ . '/components/profile.route.php';
 
-Route::get('sitemap-{type}-{page}.xml', [PostSitemapController::class, 'index'])->name('sitemap.post_type.index');
+    require __DIR__ . '/components/sitemap.route.php';
 
-Route::get('sitemap/pages.xml', [SitemapController::class, 'pages'])->name('sitemap.pages');
+    require __DIR__ . '/components/feed.route.php';
 
-Route::get(
-    'sitemap/{type}/page-{page}.xml',
-    [SitemapController::class, 'sitemapPost']
-)->name('sitemap.posts');
-
-Route::get(
-    'sitemap/taxonomy/{type}/page-{page}.xml',
-    [SitemapController::class, 'sitemapTaxonomy']
-)->name('sitemap.taxonomies');
-
-Route::get('feed', [FeedController::class, 'index'])->name('feed');
-Route::get('taxonomy/{taxonomy}/feed', [FeedController::class, 'taxonomy'])->name('feed.taxonomy');
-
-Route::match(
-    ['get', 'post', 'put'],
-    'ajax/{slug}',
-    [AjaxController::class, 'ajax']
-)
-    ->name('ajax')
-    ->where('slug', '[a-z0-9\-\/]+');
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::match(['get', 'post'], 'search', [SearchController::class, 'index'])->name('search');
-
-Route::match(
-    ['get', 'post'],
-    'search/ajax',
-    [SearchController::class, 'ajaxSearch']
-)->name('ajax.search');
-
-if (Installer::alreadyInstalled()) {
-    Route::post(
-        '{slug}',
-        [PostController::class, 'comment']
-    )
-        ->name('comment')
-        ->where('slug', '^(?!admin\-cp|api\/).*$');
-
-    Route::get('{slug}', [RouteController::class, 'index'])
-        ->where('slug', '^(?!admin\-cp|api\/).*$')
-        ->name('post');
+    require __DIR__ . '/components/page.route.php';
+} else {
+    Route::get('/', fn() => redirect(config('juzaweb.admin_prefix')));
 }
