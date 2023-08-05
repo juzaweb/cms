@@ -42,7 +42,34 @@ class CRUDMakeCommand extends ResourceCommand
             exit(1);
         }
 
-        $this->columns = collect(Schema::getColumnListing($table))
+        $this->columns = $this->getTableColumns($table);
+
+        $model = $this->getModelNameByTable($table);
+
+        $this->makeModel($table, $model);
+
+        $this->makeRepository($model);
+
+        $this->makeDataTable($model);
+
+        $this->makeController($table, $model);
+
+        $this->makeViews(Str::lower($model));
+
+        $routePath = $this->module->getPath().'/src/routes/admin.php';
+
+        $this->info('Add resource route '.$routePath);
+
+        $content = "Route::jwResource('{$table}', 'Backend\\{$model}Controller');";
+
+        //file_put_contents($routePath, PHP_EOL . $content . PHP_EOL, FILE_APPEND | LOCK_EX);
+
+        $this->info("Add to your route: {$content}");
+    }
+
+    protected function getTableColumns(string $table): array
+    {
+        return collect(Schema::getColumnListing($table))
             ->filter(
                 fn($item) => !in_array(
                     $item,
@@ -55,30 +82,15 @@ class CRUDMakeCommand extends ResourceCommand
                     ]
                 )
             )->toArray();
+    }
 
-        $model = Str::studly($table);
+    protected function getModelNameByTable(string $table): string
+    {
+        $domain = $this->module->getDomainName();
 
-        $singular = Str::singular($model);
+        $model = Str::studly(Str::replace("{$domain}_", '', $table));
 
-        $this->makeModel($table, $singular);
-
-        $this->makeRepository($singular);
-
-        $this->makeDataTable($singular);
-
-        $this->makeController($table, $singular);
-
-        $this->makeViews($table);
-
-        $routePath = $this->module->getPath().'/src/routes/admin.php';
-
-        $this->info('Add resource route '.$routePath);
-
-        $content = "Route::jwResource('{$table}', 'Backend\\{$singular}Controller');";
-
-        //file_put_contents($routePath, PHP_EOL . $content . PHP_EOL, FILE_APPEND | LOCK_EX);
-
-        $this->info("Add to your route: {$content}");
+        return Str::singular($model);
     }
 
     /**
