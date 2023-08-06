@@ -4,6 +4,8 @@ import axios from "axios";
 import {__, admin_url} from "@/helpers/functions";
 import OptionHandle from "@/pages/dev-tool/components/option-handle";
 import {Plugin} from "@/types/plugins";
+import MenuHandle from "@/pages/dev-tool/components/menu-handle";
+import {ModuleData} from "@/pages/dev-tool/types/module";
 
 export interface IndexProps {
     title: string
@@ -11,21 +13,12 @@ export interface IndexProps {
     plugins: Array<Plugin>
 }
 
-export interface ToolOption {
-    key: string
-    label: string
-}
-
 export default function Index({ themes, plugins }: IndexProps) {
     const [module, setModule] = useState<Theme|Plugin>();
     const [selectedOption, setSelectedOption] = useState<string>('');
     const [moduleType, setModuleType] = useState<string>();
 
-    const [moduleData, setModuleData] = useState<{
-        configs: {
-            options: Array<ToolOption>
-        }
-    }>();
+    const [moduleData, setModuleData] = useState<ModuleData>();
 
     useEffect(() => {
         if (module && moduleType) {
@@ -80,7 +73,15 @@ export default function Index({ themes, plugins }: IndexProps) {
                 </div>
             </div>
 
-            {module && moduleType && <OptionHandle module={module} moduleType={moduleType} selectedOption={selectedOption}/> }
+            <div className="row">
+                <div className="col-md-4">
+                    {module && moduleType && moduleData && <MenuHandle module={module} moduleType={moduleType} moduleData={moduleData}></MenuHandle>}
+                </div>
+
+                <div className="col-md-8">
+                    {module && moduleType && selectedOption && <OptionHandle module={module} moduleType={moduleType} selectedOption={selectedOption}/> }
+                </div>
+            </div>
         </>
     );
 }

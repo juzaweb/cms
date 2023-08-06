@@ -15,6 +15,11 @@ return [
             'make-custom-post-type' => [
                 'label' => 'Make Custom Post Type',
             ]
+        ],
+        'menus' => [
+            'post-types' => [
+                'label' => 'Post Types',
+            ]
         ]
     ]
 ];
