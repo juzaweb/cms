@@ -17,7 +17,10 @@ return [
             ],
             'make-custom-taxonomy' => [
                 'label' => 'Make Custom Taxonomy',
-            ]
+            ],
+            'make-crud' => [
+                'label' => 'Make CRUD',
+            ],
         ],
         'menus' => [
             'post-types' => [

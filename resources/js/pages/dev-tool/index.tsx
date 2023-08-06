@@ -4,7 +4,6 @@ import axios from "axios";
 import {__, admin_url} from "@/helpers/functions";
 import OptionHandle from "@/pages/dev-tool/components/option-handle";
 import {Plugin} from "@/types/plugins";
-import MenuHandle from "@/pages/dev-tool/components/menu-handle";
 import {ModuleData} from "@/pages/dev-tool/types/module";
 
 export interface IndexProps {
@@ -54,14 +53,14 @@ export default function Index({ themes, plugins }: IndexProps) {
                         <option value="">{__('--- Select Module ---')}</option>
                         <optgroup label={__('Themes')}></optgroup>
                         {themes.map((theme: any) => (
-                            <option value={theme.name} key={theme.name} data-type={'themes'}>{theme.title}</option>
+                            <option value={theme.name} key={theme.name} data-type={'themes'}>{theme.title} ({theme.name})</option>
                         ))}
                         <optgroup label={__('Plugins')}></optgroup>
                         {plugins.map((plugin: any) => (
                             <option value={plugin.name}
                                     key={plugin.name}
                                     data-type={'plugins'}
-                            >{plugin.extra?.juzaweb?.name || plugin.name}</option>
+                            >{plugin.extra?.juzaweb?.name || plugin.name} ({plugin.name})</option>
                         ))}
                     </select>
                 </div>
