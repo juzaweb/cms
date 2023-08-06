@@ -3,12 +3,3 @@ export interface Theme {
     title: string
     description: string
 }
-
-export interface Plugin {
-    name: string
-    extra: {
-        juzaweb?: {
-            name?: string
-        }
-    };
-}

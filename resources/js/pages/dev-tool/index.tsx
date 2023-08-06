@@ -1,7 +1,9 @@
-import {Plugin, Theme} from "@/types/themes";
+import {Theme} from "@/types/themes";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {__, admin_url} from "@/helpers/functions";
+import OptionHandle from "@/pages/dev-tool/components/option-handle";
+import {Plugin} from "@/types/plugins";
 
 export interface IndexProps {
     title: string
@@ -15,7 +17,7 @@ export interface ToolOption {
 }
 
 export default function Index({ themes, plugins }: IndexProps) {
-    const [module, setModule] = useState<string>();
+    const [module, setModule] = useState<Theme|Plugin>();
     const [selectedOption, setSelectedOption] = useState<string>('');
     const [moduleType, setModuleType] = useState<string>();
 
@@ -27,7 +29,7 @@ export default function Index({ themes, plugins }: IndexProps) {
 
     useEffect(() => {
         if (module && moduleType) {
-            axios.get(admin_url(`dev-tools/module?module=${module}&type=${moduleType}`)).then(({data}) => {
+            axios.get(admin_url(`dev-tools/module?module=${module.name}&type=${moduleType}`)).then(({data}) => {
                 setModuleData(data);
             });
         }
@@ -77,6 +79,8 @@ export default function Index({ themes, plugins }: IndexProps) {
                     </select>
                 </div>
             </div>
+
+            {module && moduleType && <OptionHandle module={module} moduleType={moduleType} selectedOption={selectedOption}/> }
         </>
     );
 }

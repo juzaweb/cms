@@ -1,8 +1,9 @@
-import {Theme, Plugin} from "@/types/themes";
+import {Theme} from "@/types/themes"
+import {Plugin} from "@/types/plugins"
 
-export default function OptionHandle({ module }: { module: Theme|Plugin }) {
+export default function OptionHandle({module, moduleType, selectedOption}: { module: Theme | Plugin, moduleType: string, selectedOption?: string }) {
     return (
-        <div>
+        <div className={'row'}>
 
         </div>
     );
