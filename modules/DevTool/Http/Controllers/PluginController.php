@@ -12,6 +12,7 @@ namespace Juzaweb\DevTool\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -35,7 +36,7 @@ class PluginController extends BackendController
         //
     }
 
-    public function makePostType(PostTypeRequest $request, string $vendor, string $name): JsonResponse
+    public function makePostType(PostTypeRequest $request, string $vendor, string $name): JsonResponse|RedirectResponse
     {
         $plugin = $this->pluginRepository->find("{$vendor}/{$name}");
 

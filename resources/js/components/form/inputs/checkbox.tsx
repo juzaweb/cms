@@ -4,6 +4,7 @@ export interface CheckboxProps {
     label?: string;
     class?: string;
     value?: string;
+    checked?: boolean;
     required?: boolean;
 }
 
@@ -17,7 +18,9 @@ export default function Checkbox(props: CheckboxProps = {required: false, class:
                     className={`form-control ${props.class || ''}`}
                     id={props.id}
                     value={props.value || '1'}
-                    autoComplete="off" />
+                    autoComplete="off"
+                    defaultChecked={props.checked || false}
+                />
 
                 <span className="jw__utils__control__indicator"></span>
 
