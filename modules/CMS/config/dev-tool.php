@@ -21,6 +21,9 @@ return [
             'make-crud' => [
                 'label' => 'Make CRUD',
             ],
+            'make-migration' => [
+                'label' => 'Make Migration',
+            ],
         ],
         'menus' => [
             'post-types' => [

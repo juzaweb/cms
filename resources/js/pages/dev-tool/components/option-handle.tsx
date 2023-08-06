@@ -3,6 +3,7 @@ import {Plugin} from "@/types/plugins";
 import MakeCustomPostType from "@/pages/dev-tool/components/plugins/make-custom-post-type";
 import MakeCustomTaxonomy from "@/pages/dev-tool/components/plugins/make-custom-taxonomy";
 import MakeCRUD from "@/pages/dev-tool/components/plugins/make-crud";
+import MakeMigration from "@/pages/dev-tool/components/plugins/make-migration";
 
 export default function OptionHandle({module, moduleType, selectedOption}: { module: Theme | Plugin, moduleType: string, selectedOption: string }) {
 
@@ -13,6 +14,8 @@ export default function OptionHandle({module, moduleType, selectedOption}: { mod
             return <MakeCustomTaxonomy module={module}/>
         case 'make-crud':
             return <MakeCRUD module={module}/>
+        case 'make-migration':
+            return <MakeMigration module={module}/>
         default: return null;
     }
 }

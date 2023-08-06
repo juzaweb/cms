@@ -19,17 +19,23 @@ export default function Index({ themes, plugins }: IndexProps) {
     const [moduleData, setModuleData] = useState<ModuleData>();
 
     useEffect(() => {
+        if (localStorage.getItem('current_module')?.toString()) {
+            let currentModule = localStorage.getItem('current_module')?.toString();
+            setModule(plugins.find((plugin: Plugin) => plugin.name === currentModule));
+        }
+
         if (module && moduleType) {
             axios.get(admin_url(`dev-tools/module?module=${module.name}&type=${moduleType}`)).then(({data}) => {
                 setModuleData(data);
             });
         }
-    }, [module, moduleType])
+    }, [module, moduleType]);
 
     const handleModuleChange = (e: any) => {
         let type = e.target.options[e.target.selectedIndex].getAttribute('data-type')?.toString() || '';
         let value = e.target.value;
         setSelectedOption('');
+        localStorage.setItem('current_module', value);
 
         if (value) {
             setModuleType(type);
@@ -49,7 +55,10 @@ export default function Index({ themes, plugins }: IndexProps) {
         <>
             <div className={'row'}>
                 <div className={'col-md-4'}>
-                    <select className={'form-control'} onChange={handleModuleChange}>
+                    <select
+                        className={'form-control'}
+                        onChange={handleModuleChange}
+                    >
                         <option value="">{__('--- Select Module ---')}</option>
                         <optgroup label={__('Themes')}></optgroup>
                         {themes.map((theme: any) => (

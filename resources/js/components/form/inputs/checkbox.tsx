@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface CheckboxProps {
     name?: string;
     id?: string;
@@ -6,6 +8,7 @@ export interface CheckboxProps {
     value?: string;
     checked?: boolean;
     required?: boolean;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Checkbox(props: CheckboxProps = {required: false, class: ''}) {
@@ -20,6 +23,7 @@ export default function Checkbox(props: CheckboxProps = {required: false, class:
                     value={props.value || '1'}
                     autoComplete="off"
                     defaultChecked={props.checked || false}
+                    onChange={props.onChange}
                 />
 
                 <span className="jw__utils__control__indicator"></span>
