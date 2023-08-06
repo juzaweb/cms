@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\DevTool\Http\Requests\PostTypeRequest;
 
 class PluginController extends BackendController
@@ -38,23 +39,49 @@ class PluginController extends BackendController
 
     public function makePostType(PostTypeRequest $request, string $vendor, string $name): JsonResponse|RedirectResponse
     {
-        $plugin = $this->pluginRepository->find("{$vendor}/{$name}");
-
-        throw_if($plugin === null, new \Exception('Plugin not found'));
+        $plugin = $this->findPlugin($vendor, $name);
 
         $key = Str::plural(Str::slug($request->input('key')));
-        $register = '[]';
-
-        if (File::exists($plugin->getPath('register.json'))) {
-            $register = File::get($plugin->getPath('register.json'));
-        }
-
-        $register = json_decode($register, true, 512, JSON_THROW_ON_ERROR);
+        $register = $this->getPluginRegister($plugin);
 
         $register['post_types'][$key] = $request->all();
 
         File::put($plugin->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
 
         return $this->success(['message' => 'Post type created successfully.']);
+    }
+
+    public function makeTaxonomy(Request $request, string $vendor, string $name): JsonResponse|RedirectResponse
+    {
+        $plugin = $this->findPlugin($vendor, $name);
+
+        $key = Str::plural(Str::slug($request->input('key')));
+        $register = $this->getPluginRegister($plugin);
+
+        $register['taxonomies'][$key] = $request->all();
+
+        File::put($plugin->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+
+        return $this->success(['message' => 'Taxonomy created successfully.']);
+    }
+
+    protected function getPluginRegister(Plugin $plugin): array
+    {
+        $register = '[]';
+
+        if (File::exists($plugin->getPath('register.json'))) {
+            $register = File::get($plugin->getPath('register.json'));
+        }
+
+        return json_decode($register, true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    protected function findPlugin(string $vendor, string $name): Plugin
+    {
+        $plugin = $this->pluginRepository->find("{$vendor}/{$name}");
+
+        throw_if($plugin === null, new \Exception('Plugin not found'));
+
+        return $plugin;
     }
 }

@@ -13,6 +13,8 @@ export interface SelectProps {
 }
 
 export default function Select(props: SelectProps) {
+    let name = props.name ? (props.multiple ?  props.name + '[]' : props.name): undefined;
+
     return (
         <div className="form-group">
             <label className="col-form-label" htmlFor={props.id}>
@@ -23,7 +25,7 @@ export default function Select(props: SelectProps) {
             </label>
 
             <select
-                name={props.name}
+                name={name}
                 id={props.id}
                 className={`form-control ${props.class || 'select2-default' }`}
                 multiple={props.multiple}

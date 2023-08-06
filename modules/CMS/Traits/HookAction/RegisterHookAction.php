@@ -55,6 +55,7 @@ trait RegisterHookAction
 
         $args['key'] = $key;
         $args['singular'] = Str::singular($key);
+        $args['supports'] = array_merge($args['support'], $args['supports'] ?? []);
         $args['model_key'] = str_replace('\\', '_', $args['model']);
 
         $args = new Collection($args);
@@ -166,12 +167,13 @@ trait RegisterHookAction
                 'show_in_menu' => true,
                 'menu_box' => true,
                 'rewrite' => true,
-                'supports' => [
+                'support' => [
                     'hierarchical',
                 ],
             ];
 
             $args['type'] = $type;
+            $args['supports'] = array_merge($opts['support'], $args['supports'] ?? []);
             $args['post_type'] = $objectType;
             $args['taxonomy'] = $taxonomy;
             $args['singular'] = Str::singular($taxonomy);
@@ -507,7 +509,11 @@ trait RegisterHookAction
      */
     protected function registerMenuPostType(string $key, Collection $args): void
     {
-        $supports = (array)$args->get('supports', []);
+        $supports = (array) $args->get('support', []);
+        if (empty($supports)) {
+            $supports = (array) $args->get('supports', []);
+        }
+
         $prefix = 'post-type.';
 
         $this->addAdminMenu(

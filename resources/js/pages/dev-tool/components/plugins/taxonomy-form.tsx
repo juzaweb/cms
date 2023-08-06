@@ -14,8 +14,12 @@ export default function TaxonomyForm({buttonLoading}: { buttonLoading: boolean }
                 <Select name={'post_types'} label={'Post Types'} required={true} multiple={true} options={
                     [
                         {
-                            label: 'Post',
-                            data: 'post',
+                            label: 'Posts',
+                            data: 'posts',
+                        },
+                        {
+                            label: 'Pages',
+                            data: 'pages',
                         }
                     ]
                 }/>
@@ -24,6 +28,8 @@ export default function TaxonomyForm({buttonLoading}: { buttonLoading: boolean }
             </div>
 
             <div className="col-md-3">
+
+                <Checkbox name={'support[]'} label={'Has Thumbnail'} value={'thumbnail'}/>
 
                 <Checkbox name={'show_in_menu'} label={'Show In Menu'} checked={true}/>
 

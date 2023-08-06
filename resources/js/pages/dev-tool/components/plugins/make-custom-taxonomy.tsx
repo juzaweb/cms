@@ -19,7 +19,7 @@ export default function MakeCustomTaxonomy({ module }: { module: Theme | Plugin 
         setButtonLoading(true);
 
         axios.post(
-            admin_url('dev-tools/plugin/' + module.name + '/make-post-type'),
+            admin_url('dev-tools/plugin/' + module.name + '/make-taxonomy'),
             formData,
             {
                 headers: {
