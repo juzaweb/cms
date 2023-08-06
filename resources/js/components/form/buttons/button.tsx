@@ -16,7 +16,9 @@ export default function Button(props: ButtonProps) {
             className={`btn ${props.class || 'btn-primary'}`}
             disabled={props.loading}
         >
-            {props.loading ? <i className="fa fa-spinner fa-spin"></i> + __('Please wait...') : props.label}
+            {props.loading ? (<>
+                <i className="fa fa-spinner fa-spin"></i> {__('Please wait...')}
+            </>) : props.label}
         </button>
     );
 }

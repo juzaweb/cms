@@ -5,11 +5,15 @@ import Textarea from "@/components/form/inputs/textarea";
 import Checkbox from "@/components/form/inputs/checkbox";
 import Button from "@/components/form/buttons/button";
 import axios from "axios";
-import {admin_url} from "@/helpers/functions";
+import {admin_url, message_in_response} from "@/helpers/functions";
 import {useState} from "react";
 
 export default function MakeCustomPostType({ module }: { module: Theme | Plugin }) {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
+    const [message, setMessage] = useState<{
+        status: boolean,
+        message: string
+    }>();
 
     const handleMakeCustomPostType = (e: any ) => {
         e.preventDefault();
@@ -27,10 +31,23 @@ export default function MakeCustomPostType({ module }: { module: Theme | Plugin 
             }
         )
             .then((response) => {
+                let result = message_in_response(response);
                 setButtonLoading(false);
-                if (response.data.status === true) {
+                setMessage(result);
+                if (result?.status === true) {
                     e.target.reset();
                 }
+
+                setTimeout(() => {
+                    setMessage(undefined);
+                }, 2000);
+            })
+            .catch((error) => {
+                setMessage(message_in_response(error));
+                setButtonLoading(false);
+                setTimeout(() => {
+                    setMessage(undefined);
+                }, 2000);
             });
 
         return false;
@@ -40,6 +57,12 @@ export default function MakeCustomPostType({ module }: { module: Theme | Plugin 
         <div className="row">
             <div className="col-md-12">
                 <h5>Make Custom Post Type</h5>
+
+                {message && (
+                    <div className={`alert alert-${message.status ? 'success' : 'danger' } jw-message`}>
+                        {message.message}
+                    </div>
+                )}
 
                 <form method={'POST'} onSubmit={handleMakeCustomPostType}>
 
