@@ -1,7 +1,7 @@
 import {getSidebar} from "@/helpers/fetch";
 
 export function __(key: string, args = {}): string {
-    return key;
+    return juzaweb.lang[key.replace('cms::app.', '')];
 }
 
 export function url(uri: string): string {

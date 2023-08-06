@@ -24,10 +24,11 @@ class TaxonomyController extends BackendController
 
     protected string $viewPrefix = 'cms::backend.taxonomy';
 
+    //protected string $template = 'inertia';
+
     protected function getDataTable(...$params): TaxonomyDataTable
     {
-        $postType = $params[0];
-        $taxonomy = $params[1];
+        [$postType, $taxonomy] = $params;
         $setting = $this->getSetting($postType, $taxonomy);
         $dataTable = new TaxonomyDataTable();
         $dataTable->mountData($setting->toArray());
