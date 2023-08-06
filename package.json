@@ -80,6 +80,7 @@
         "react-bootstrap-table-next": "^4.0.3",
         "react-day-picker": "^8.8.0",
         "react-dom": "^18.2.0",
+        "react-select": "^5.7.4",
         "tailwind-merge": "^1.13.2",
         "tailwindcss": "^3.0.24",
         "tailwindcss-animate": "^1.0.6",

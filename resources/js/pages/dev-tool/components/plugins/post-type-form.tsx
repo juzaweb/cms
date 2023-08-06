@@ -7,13 +7,13 @@ export default function PostTypeForm({ buttonLoading }: { buttonLoading: boolean
     return (
         <div className={'row'}>
             <div className="col-md-9">
-                <Input name="key" label={'Post Type'} required={true} />
+                <Input name="key" label={'Tag'} required={true} />
 
                 <Input name="label" label={'Label'} required={true} />
 
                 <Textarea name="description" label={'Description'} rows={3} />
 
-                <Button label={'Make Post Type'} type={'submit'} loading={buttonLoading} />
+                <Button label={'Make Post Type'} type={'submit'} loading={buttonLoading}  />
             </div>
 
             <div className="col-md-3">

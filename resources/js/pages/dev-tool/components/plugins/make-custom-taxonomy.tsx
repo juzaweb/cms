@@ -3,9 +3,9 @@ import {Theme} from "@/types/themes";
 import axios from "axios";
 import {admin_url, message_in_response} from "@/helpers/functions";
 import {useState} from "react";
-import PostTypeForm from "@/pages/dev-tool/components/plugins/post-type-form";
+import TaxonomyForm from "@/pages/dev-tool/components/plugins/taxonomy-form";
 
-export default function MakeCustomPostType({ module }: { module: Theme | Plugin }) {
+export default function MakeCustomTaxonomy({ module }: { module: Theme | Plugin }) {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<{
         status: boolean,
@@ -53,7 +53,7 @@ export default function MakeCustomPostType({ module }: { module: Theme | Plugin 
     return (
         <div className="row">
             <div className="col-md-12">
-                <h5>Make Custom Post Type</h5>
+                <h5>Make Custom Taxonomy</h5>
 
                 {message && (
                     <div className={`alert alert-${message.status ? 'success' : 'danger' } jw-message`}>
@@ -63,7 +63,7 @@ export default function MakeCustomPostType({ module }: { module: Theme | Plugin 
 
                 <form method={'POST'} onSubmit={handleMakeCustomPostType}>
 
-                    <PostTypeForm buttonLoading={buttonLoading} />
+                    <TaxonomyForm buttonLoading={buttonLoading} />
 
                 </form>
             </div>
