@@ -12,7 +12,7 @@ export interface InputProps {
 export default function Input(props: InputProps = {type: 'text', required: false, class: ''}) {
     return (
         <div className="form-group">
-            <label className="col-form-label" htmlFor={props.id || props.name}>
+            <label className="col-form-label" htmlFor={props.id}>
                 { props.label || props.name }
                 {props.required ? (
                     <abbr>*</abbr>

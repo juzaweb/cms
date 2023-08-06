@@ -32,7 +32,7 @@ trait RegisterHookAction
     public function registerPostType(string $key, array $args = []): void
     {
         if (empty($args['label'])) {
-            throw new Exception('Post type label is required.');
+            throw new \RuntimeException('Post type label is required.');
         }
 
         $args = array_merge(
