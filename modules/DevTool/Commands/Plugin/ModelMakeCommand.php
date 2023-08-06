@@ -90,7 +90,7 @@ class ModelMakeCommand extends GeneratorCommand
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['model', InputArgument::REQUIRED, 'The name of model will be created.'],
@@ -103,7 +103,7 @@ class ModelMakeCommand extends GeneratorCommand
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [
             ['fillable', null, InputOption::VALUE_OPTIONAL, 'The fillable attributes.', null],
@@ -114,9 +114,10 @@ class ModelMakeCommand extends GeneratorCommand
     }
 
     /**
-     * @return mixed
+     * @return string
+     * @throws \JsonException
      */
-    protected function getTemplateContents()
+    protected function getTemplateContents(): string
     {
         $module = $this->laravel['plugins']->findOrFail($this->getModuleName());
         if (!$table = $this->option('table')) {
@@ -149,24 +150,25 @@ class ModelMakeCommand extends GeneratorCommand
     }
 
     /**
-     * @return mixed|string
+     * @return string
      */
-    private function getModelName()
+    private function getModelName(): string
     {
         return Str::studly($this->argument('model'));
     }
 
     /**
      * @return string
+     * @throws \JsonException
      */
-    private function getFillable()
+    private function getFillable(): string
     {
         $fillable = $this->option('fillable');
 
         if (!is_null($fillable)) {
             $arrays = explode(',', $fillable);
 
-            return json_encode($arrays, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
+            return Str::replace('"',  "'", json_encode($arrays, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
         }
 
         return '[]';
