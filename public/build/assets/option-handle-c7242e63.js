@@ -1,0 +1,1 @@
+import{j as e}from"./app-172eccbe.js";import r from"./make-custom-post-type-c24044f2.js";import"./functions-3a6386bd.js";import"./post-type-form-f7b9acee.js";function i({module:t,moduleType:m,selectedOption:o}){switch(o){case"make-custom-post-type":return e(r,{module:t});default:return null}}export{i as default};

@@ -14,6 +14,9 @@ return [
         'options' => [
             'make-custom-post-type' => [
                 'label' => 'Make Custom Post Type',
+            ],
+            'make-custom-taxonomy' => [
+                'label' => 'Make Custom Taxonomy',
             ]
         ],
         'menus' => [

@@ -4,8 +4,8 @@ import {ModuleData} from "@/pages/dev-tool/types/module";
 
 export default function MenuHandle({module, moduleType, moduleData}: { module: Theme | Plugin, moduleType: string, moduleData: ModuleData }) {
     return (
-        <div>
-
-        </div>
+        <ul className="list-group">
+            <li className="list-group-item active">Post Types</li>
+        </ul>
     );
 }

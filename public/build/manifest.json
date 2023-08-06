@@ -1,6 +1,6 @@
 {
-  "_functions-c0e1ba54.js": {
-    "file": "assets/functions-c0e1ba54.js"
+  "_functions-3a6386bd.js": {
+    "file": "assets/functions-3a6386bd.js"
   },
   "resources/css/app.css": {
     "file": "assets/app-4ed993c7.js",
@@ -16,6 +16,7 @@
       "resources/js/pages/dev-tool/components/menu-handle.tsx",
       "resources/js/pages/dev-tool/components/option-handle.tsx",
       "resources/js/pages/dev-tool/components/plugins/make-custom-post-type.tsx",
+      "resources/js/pages/dev-tool/components/plugins/post-type-form.tsx",
       "resources/js/pages/dev-tool/index.tsx",
       "resources/js/pages/dev-tool/plugin/index.tsx",
       "resources/js/pages/index.tsx",
@@ -23,12 +24,12 @@
       "resources/js/pages/theme/index.tsx",
       "resources/js/pages/theme/install.tsx"
     ],
-    "file": "assets/app-4f183300.js",
+    "file": "assets/app-172eccbe.js",
     "isEntry": true,
     "src": "resources/js/app.tsx"
   },
   "resources/js/pages/blade-render.tsx": {
-    "file": "assets/blade-render-6b50fa44.js",
+    "file": "assets/blade-render-cf566a43.js",
     "imports": [
       "resources/js/app.tsx"
     ],
@@ -36,7 +37,7 @@
     "src": "resources/js/pages/blade-render.tsx"
   },
   "resources/js/pages/customizer/components/option-item.tsx": {
-    "file": "assets/option-item-10ce3cbb.js",
+    "file": "assets/option-item-eae73617.js",
     "imports": [
       "resources/js/app.tsx"
     ],
@@ -44,26 +45,26 @@
     "src": "resources/js/pages/customizer/components/option-item.tsx"
   },
   "resources/js/pages/customizer/index.tsx": {
-    "file": "assets/index-3552cc3a.js",
+    "file": "assets/index-3012a95c.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-c0e1ba54.js",
+      "_functions-3a6386bd.js",
       "resources/js/pages/customizer/components/option-item.tsx"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/customizer/index.tsx"
   },
   "resources/js/pages/dashboard/dashboard.tsx": {
-    "file": "assets/dashboard-9bcd3d34.js",
+    "file": "assets/dashboard-c3235531.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-c0e1ba54.js"
+      "_functions-3a6386bd.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/dashboard/dashboard.tsx"
   },
   "resources/js/pages/dev-tool/components/menu-handle.tsx": {
-    "file": "assets/menu-handle-c10d4b38.js",
+    "file": "assets/menu-handle-d255be94.js",
     "imports": [
       "resources/js/app.tsx"
     ],
@@ -71,36 +72,50 @@
     "src": "resources/js/pages/dev-tool/components/menu-handle.tsx"
   },
   "resources/js/pages/dev-tool/components/option-handle.tsx": {
-    "file": "assets/option-handle-ebc675f9.js",
+    "file": "assets/option-handle-c7242e63.js",
     "imports": [
       "resources/js/app.tsx",
-      "resources/js/pages/dev-tool/components/plugins/make-custom-post-type.tsx"
+      "resources/js/pages/dev-tool/components/plugins/make-custom-post-type.tsx",
+      "_functions-3a6386bd.js",
+      "resources/js/pages/dev-tool/components/plugins/post-type-form.tsx"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/dev-tool/components/option-handle.tsx"
   },
   "resources/js/pages/dev-tool/components/plugins/make-custom-post-type.tsx": {
-    "file": "assets/make-custom-post-type-341cfc65.js",
+    "file": "assets/make-custom-post-type-c24044f2.js",
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_functions-3a6386bd.js",
+      "resources/js/pages/dev-tool/components/plugins/post-type-form.tsx"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/dev-tool/components/plugins/make-custom-post-type.tsx"
   },
-  "resources/js/pages/dev-tool/index.tsx": {
-    "file": "assets/index-7569e27c.js",
+  "resources/js/pages/dev-tool/components/plugins/post-type-form.tsx": {
+    "file": "assets/post-type-form-f7b9acee.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-c0e1ba54.js",
+      "_functions-3a6386bd.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/pages/dev-tool/components/plugins/post-type-form.tsx"
+  },
+  "resources/js/pages/dev-tool/index.tsx": {
+    "file": "assets/index-534e201c.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_functions-3a6386bd.js",
       "resources/js/pages/dev-tool/components/option-handle.tsx",
       "resources/js/pages/dev-tool/components/menu-handle.tsx",
-      "resources/js/pages/dev-tool/components/plugins/make-custom-post-type.tsx"
+      "resources/js/pages/dev-tool/components/plugins/make-custom-post-type.tsx",
+      "resources/js/pages/dev-tool/components/plugins/post-type-form.tsx"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/dev-tool/index.tsx"
   },
   "resources/js/pages/dev-tool/plugin/index.tsx": {
-    "file": "assets/index-038ef283.js",
+    "file": "assets/index-fbc47913.js",
     "imports": [
       "resources/js/app.tsx"
     ],
@@ -108,7 +123,7 @@
     "src": "resources/js/pages/dev-tool/plugin/index.tsx"
   },
   "resources/js/pages/index.tsx": {
-    "file": "assets/index-24a514ea.js",
+    "file": "assets/index-b5204fe9.js",
     "imports": [
       "resources/js/app.tsx"
     ],
@@ -116,28 +131,28 @@
     "src": "resources/js/pages/index.tsx"
   },
   "resources/js/pages/taxonomy/index.tsx": {
-    "file": "assets/index-7d1beef5.js",
+    "file": "assets/index-591ef467.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-c0e1ba54.js"
+      "_functions-3a6386bd.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/taxonomy/index.tsx"
   },
   "resources/js/pages/theme/index.tsx": {
-    "file": "assets/index-690b5f2d.js",
+    "file": "assets/index-86e5bbc5.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-c0e1ba54.js"
+      "_functions-3a6386bd.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/theme/index.tsx"
   },
   "resources/js/pages/theme/install.tsx": {
-    "file": "assets/install-f34fd5e0.js",
+    "file": "assets/install-f962b31e.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-c0e1ba54.js"
+      "_functions-3a6386bd.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/theme/install.tsx"
