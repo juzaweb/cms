@@ -17,7 +17,6 @@ export default function Index({ themes, plugins }: IndexProps) {
     const [module, setModule] = useState<Theme|Plugin>();
     const [selectedOption, setSelectedOption] = useState<string>('');
     const [moduleType, setModuleType] = useState<string>();
-
     const [moduleData, setModuleData] = useState<ModuleData>();
 
     useEffect(() => {
@@ -34,8 +33,12 @@ export default function Index({ themes, plugins }: IndexProps) {
         setSelectedOption('');
 
         if (value) {
-            setModule(e.target.value);
             setModuleType(type);
+            if (type === 'plugins') {
+                setModule(plugins.find((plugin: Plugin) => plugin.name === value));
+            } else {
+                setModule(themes.find((theme: Theme) => theme.name === value));
+            }
         } else {
             setModule(undefined);
             setModuleType(undefined);

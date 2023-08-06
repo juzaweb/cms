@@ -3,12 +3,21 @@ import {Theme} from "@/types/themes";
 import Input from "@/components/form/inputs/input";
 import Textarea from "@/components/form/inputs/textarea";
 import Checkbox from "@/components/form/inputs/checkbox";
-import Button from "@/components/form/inputs/button";
+import Button from "@/components/form/buttons/button";
+import axios from "axios";
+import {admin_url} from "@/helpers/functions";
 
 export default function MakeCustomPostType({ module }: { module: Theme | Plugin }) {
 
-    const handleMakeCustomPostType = () => {
-        console.log('make custom post type');
+    const handleMakeCustomPostType = (e: any ) => {
+        e.preventDefault();
+
+        let formData = new FormData(e.target);
+
+
+        axios.post(admin_url('dev-tools/plugin/' + module.name + '/make-post-type'), formData);
+
+        return false;
     }
 
     return (
@@ -23,11 +32,13 @@ export default function MakeCustomPostType({ module }: { module: Theme | Plugin 
 
                     <Textarea name="description" label={'Description'} rows={4} />
 
-                    <Checkbox name={'support[category]'} label={'Support Category'}/>
+                    <Checkbox name={'support[]'} label={'Has Comments'} value={'comment'} />
 
-                    <Checkbox name={'support[tag]'} label={'Support Tag'}/>
+                    <Checkbox name={'support[]'} label={'Has Category'} value={'category'} />
 
-                    <Button label={'Save'} type={'submit'} />
+                    <Checkbox name={'support[]'} label={'Has Tag'} value={'tag'}/>
+
+                    <Button label={'Make Post Type'} type={'submit'} />
 
                 </form>
             </div>

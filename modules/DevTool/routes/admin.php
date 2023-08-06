@@ -14,3 +14,4 @@ use Juzaweb\DevTool\Http\Controllers\PluginController;
 Route::get('dev-tools', [DevToolController::class, 'index'])->name('admin.dev-tool');
 Route::get('dev-tools/module', [DevToolController::class, 'getModuleData']);
 Route::get('dev-tools/plugin/{vendor}/{name}', [PluginController::class, 'index']);
+Route::post('dev-tools/plugin/{vendor}/{name}/make-post-type', [PluginController::class, 'makePostType']);

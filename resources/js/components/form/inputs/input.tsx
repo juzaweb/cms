@@ -22,11 +22,13 @@ export default function Input(props: InputProps = {type: 'text', required: false
             <input
                 type={props.type}
                 name={props.name}
-                className={`form-control ${props.class}`}
+                className={`form-control ${props.class || ''}`}
                 id={props.id}
                 value={props.value}
                 autoComplete="off"
-                placeholder={props.placeholder} />
+                placeholder={props.placeholder}
+                required={props.required}
+            />
         </div>
     );
 }

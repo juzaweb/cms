@@ -47,7 +47,7 @@ trait RegisterHookAction
                 'menu_position' => 20,
                 'callback' => PostController::class,
                 'menu_icon' => 'fa fa-list-alt',
-                'supports' => [],
+                'support' => [],
                 'metas' => [],
             ],
             $args
@@ -82,7 +82,11 @@ trait RegisterHookAction
             );
         }
 
-        $supports = (array)$args->get('supports', []);
+        $supports = (array) $args->get('support', []);
+        if (empty($supports)) {
+            $supports = (array) $args->get('supports', []);
+        }
+
         if (in_array('category', $supports)) {
             $this->registerTaxonomy(
                 'categories',
@@ -97,7 +101,7 @@ trait RegisterHookAction
             );
         }
 
-        if (in_array('tag', (array)$args['supports'])) {
+        if (in_array('tag', $supports)) {
             $this->registerTaxonomy(
                 'tags',
                 $key,
