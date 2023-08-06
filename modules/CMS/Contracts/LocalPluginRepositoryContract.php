@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Contracts;
 
+use Illuminate\Support\Collection;
 use Juzaweb\CMS\Exceptions\PluginNotFoundException;
 use Juzaweb\CMS\Support\Plugin;
 
@@ -10,9 +11,10 @@ interface LocalPluginRepositoryContract
     /**
      * Get all plugins.
      *
-     * @return mixed
+     * @param  bool  $collection
+     * @return array|Collection
      */
-    public function all();
+    public function all(bool $collection = false): array|Collection;
 
     /**
      * Get cached plugins.

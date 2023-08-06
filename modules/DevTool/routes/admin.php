@@ -11,3 +11,4 @@
 use Juzaweb\DevTool\Http\Controllers\DevToolController;
 
 Route::get('dev-tools', [DevToolController::class, 'index'])->name('admin.dev-tool');
+Route::get('dev-tools/module', [DevToolController::class, 'getModuleData']);

@@ -1,7 +1,12 @@
 import {getSidebar} from "@/helpers/fetch";
 
 export function __(key: string, args = {}): string {
-    return juzaweb.lang[key.replace('cms::app.', '')];
+    let lang = juzaweb.lang[key.replace('cms::app.', '')];
+    if (lang) {
+        return lang;
+    }
+
+    return key;
 }
 
 export function url(uri: string): string {
@@ -10,6 +15,10 @@ export function url(uri: string): string {
 
 export function upload_url(path: string): string {
     return path;
+}
+
+export function admin_url(path: string): string {
+    return '/admin-cp/' + path;
 }
 
 // pending

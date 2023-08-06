@@ -823,6 +823,6 @@ if (!function_exists('is_dev_tool_enable')) {
             return true;
         }
 
-        return config('juzaweb.dev_tool_enable');
+        return config('dev-tool.enable');
     }
 }
