@@ -268,4 +268,7 @@ return [
             //
         ]
     ),
+
+    // Enable dev tool in production
+    'dev_tool_enable' => env('JW_DEV_TOOL_ENABLE', false),
 ];

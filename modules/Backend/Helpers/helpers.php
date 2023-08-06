@@ -784,21 +784,23 @@ if (!function_exists('get_domain_by_url')) {
     }
 }
 
-function number_human_format($number): string
-{
-    if ($number < 1000000) {
-        return number_format($number);
-    }
+if (!function_exists('number_human_format')) {
+    function number_human_format(int $number): string
+    {
+        if ($number < 1000000) {
+            return number_format($number);
+        }
 
-    if ($number < 1000000000) {
-        return number_format($number / 1000000, 2) . ' M';
-    }
+        if ($number < 1000000000) {
+            return number_format($number / 1000000, 2) . ' M';
+        }
 
-    if ($number < 1000000000000) {
-        return number_format($number / 1000000000, 2) . ' B';
-    }
+        if ($number < 1000000000000) {
+            return number_format($number / 1000000000, 2) . ' B';
+        }
 
-    return number_format($number / 1000000000000, 2) . ' T';
+        return number_format($number / 1000000000000, 2) . ' T';
+    }
 }
 
 if (!function_exists('action_replace')) {
@@ -811,5 +813,16 @@ if (!function_exists('action_replace')) {
         }
 
         return $action;
+    }
+}
+
+if (!function_exists('is_dev_tool_enable')) {
+    function is_dev_tool_enable(): bool
+    {
+        if (config('app.debug') && app()->environment() !== 'production') {
+            return true;
+        }
+
+        return config('juzaweb.dev_tool_enable');
     }
 }
