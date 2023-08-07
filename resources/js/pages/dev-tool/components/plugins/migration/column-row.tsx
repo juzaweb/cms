@@ -1,6 +1,18 @@
 import {Column} from "@/pages/dev-tool/components/plugins/make-migration";
+import Select from "react-select";
+import {useEffect} from "react";
+
+const options = [
+    { value: '', label: '----' },
+    { value: 'posts', label: 'Posts' },
+    { value: 'pages', label: 'Pages' }
+]
 
 export default function ({column}: {column: Column}) {
+    // useEffect(() => {
+    //
+    // }, []);
+
     return (
         <tr>
             <td>
@@ -29,10 +41,7 @@ export default function ({column}: {column: Column}) {
                 <input type="checkbox" className={''} name={'index[]'} value={'1'}/>
             </td>
             <td>
-                <select className={'form-control'} name={'foreign[]'}>
-                    <option value="">----</option>
-                    <option value="posts">posts</option>
-                </select>
+                <Select name={'foreign[]'} options={options}></Select>
             </td>
         </tr>
     );
