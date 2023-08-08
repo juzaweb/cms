@@ -37,7 +37,14 @@ class PluginController extends BackendController
 
     public function index(Request $request, string $vendor, string $name): View|Response
     {
-        //
+        $plugin = $this->findPlugin($vendor, $name);
+
+        $title = $plugin->getName();
+
+        return $this->view(
+            'cms::backend.dev-tool.plugin.index',
+            compact('plugin', 'title')
+        );
     }
 
     public function makePostType(PostTypeRequest $request, string $vendor, string $name): JsonResponse|RedirectResponse

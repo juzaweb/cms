@@ -32,16 +32,22 @@ class DevToolController extends BackendController
     public function index(): View|Response
     {
         $title = __('Dev Tool');
-        $themes = $this->themeRepository->all(true)->values();
-        $plugins = $this->pluginRepository->all(true)->values();
 
         return $this->view(
             'dev-tool/index',
-            compact('title', 'themes', 'plugins')
+            compact('title')
         );
     }
 
-    public function getModuleData(Request $request): JsonResponse
+    public function getModules(): JsonResponse
+    {
+        $themes = $this->themeRepository->all(true)->values();
+        $plugins = $this->pluginRepository->all(true)->values();
+
+        return response()->json(compact('themes', 'plugins'));
+    }
+
+    public function getModule(Request $request): JsonResponse
     {
         $module = $request->input('module');
         $type = $request->input('type');
