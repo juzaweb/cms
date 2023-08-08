@@ -20,6 +20,11 @@
 
     @vite(["resources/js/app.tsx", "resources/css/app.css", "resources/js/pages/{$page['component']}.tsx"])
 
+    @php
+        $__inertiaSsrDispatched = true;
+        $__inertiaSsrResponse = null;
+    @endphp
+
     @inertiaHead
 </head>
 <body class="juzaweb__menuLeft--dark juzaweb__menuLeft--unfixed juzaweb__menuLeft--shadow">
