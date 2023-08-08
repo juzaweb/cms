@@ -13,12 +13,12 @@ use Juzaweb\CMS\Repositories\Contracts\PresenterInterface;
  */
 trait PresentableTrait
 {
-    
+
     /**
      * @var PresenterInterface
      */
     protected $presenter = null;
-    
+
     /**
      * @param  \Juzaweb\CMS\Repositories\Contracts\PresenterInterface  $presenter
      *
@@ -27,10 +27,10 @@ trait PresentableTrait
     public function setPresenter(PresenterInterface $presenter)
     {
         $this->presenter = $presenter;
-        
+
         return $this;
     }
-    
+
     /**
      * @param      $key
      * @param  null  $default
@@ -41,13 +41,13 @@ trait PresentableTrait
     {
         if ($this->hasPresenter()) {
             $data = $this->presenter()['data'];
-            
+
             return Arr::get($data, $key, $default);
         }
-        
+
         return $default;
     }
-    
+
     /**
      * @return bool
      */
@@ -55,7 +55,7 @@ trait PresentableTrait
     {
         return isset($this->presenter) && $this->presenter instanceof PresenterInterface;
     }
-    
+
     /**
      * @return $this|mixed
      */
@@ -64,7 +64,7 @@ trait PresentableTrait
         if ($this->hasPresenter()) {
             return $this->presenter->present($this);
         }
-        
+
         return $this;
     }
 }

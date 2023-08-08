@@ -19,7 +19,7 @@ class TaxonomyController extends FrontendController
     ) {
     }
 
-    public function index(...$slug): string
+    public function index(...$slug): string|\Inertia\Response
     {
         $taxSlug = Arr::get($slug, 1);
         $currentPage = Arr::get($slug, count($slug) - 1);
@@ -32,6 +32,8 @@ class TaxonomyController extends FrontendController
         abort_unless($taxSlug, 404);
 
         $taxonomy = $this->taxonomyRepository->findBySlug($taxSlug);
+
+        abort_if($taxonomy === null, 404);
 
         Facades::$isTaxonomyPage = true;
 
@@ -61,11 +63,9 @@ class TaxonomyController extends FrontendController
             $viewName = 'theme::index';
         }
 
-        $page = PostResourceCollection::make($posts)
-            ->response()
-            ->getData(true);
+        $page = PostResourceCollection::make($posts)->response()->getData(true);
 
-        $taxonomy = (new TaxonomyResource($taxonomy))->toArray(request());
+        //$taxonomy = (new TaxonomyResource($taxonomy))->toArray(request());
 
         return $this->view(
             $viewName,

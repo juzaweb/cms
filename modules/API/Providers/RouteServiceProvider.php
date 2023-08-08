@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    MIT
@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminRoutes();
         $this->mapApiRoutes();
     }
-    
+
     protected function mapApiRoutes(): void
     {
         Route::prefix('api')
@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('api.')
             ->group(__DIR__.'/../routes/api.php');
     }
-    
+
     protected function mapAdminRoutes(): void
     {
         Route::prefix(config('juzaweb.admin_prefix'))

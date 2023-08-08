@@ -138,7 +138,7 @@ class MenuController extends BackendController
             $model->syncItems($items);
 
             if ($location = $request->post('location', [])) {
-                $locationConfig = [];
+                $locationConfig = get_theme_config('nav_location');
                 foreach ($location as $item) {
                     $locationConfig[$item] = $model->id;
                 }

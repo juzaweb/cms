@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -16,15 +16,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Juzaweb\Backend\Models\Post;
+use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\PostRating;
+use Juzaweb\Backend\Repositories\MenuRepository;
+use Juzaweb\Backend\Repositories\PostRepository;
 use Juzaweb\CMS\Facades\HookAction;
 use Juzaweb\CMS\Http\Controllers\FrontendController;
+use Juzaweb\CMS\Support\Theme\MenuBuilder;
 use Juzaweb\Frontend\Http\Requests\LikeRequest;
 use Juzaweb\Frontend\Http\Requests\RatingRequest;
 
 class AjaxController extends FrontendController
 {
+    public function __construct(
+        protected PostRepository $postRepository,
+        protected MenuRepository $menuRepository
+    ) {
+        //
+    }
+
     public function ajax($key, Request $request)
     {
         $key = str_replace('/', '.', $key);
@@ -52,17 +62,16 @@ class AjaxController extends FrontendController
         return App::call($callback);
     }
 
-    public function rating(RatingRequest $request)
+    public function rating(RatingRequest $request): float|int
     {
-        $post = Post::wherePublish()
-            ->where('id', '=', $request->post('post_id'))
-            ->firstOrFail();
+        $post = $this->postRepository->find($request->input('post_id'));
 
-        $clientIp = get_client_ip();
+        abort_unless($post->isPublish(), 404);
+
         PostRating::updateOrCreate(
             [
                 'post_id' => $post->id,
-                'client_ip' => $clientIp,
+                'client_ip' => get_client_ip(),
             ],
             [
                 'star' => $request->post('star')
@@ -70,6 +79,7 @@ class AjaxController extends FrontendController
         );
 
         $rating = $post->getStarRating();
+
         $post->update(
             [
                 'rating' => $rating,
@@ -82,15 +92,13 @@ class AjaxController extends FrontendController
 
     public function like(LikeRequest $request): JsonResponse|RedirectResponse
     {
-        global $jw_user;
+        $post = $this->postRepository->find($request->input('post_id'));
 
-        $post = Post::wherePublish()
-            ->where(['id' => $request->input('post_id')])
-            ->firstOrFail();
+        abort_unless($post->isPublish(), 404);
 
         $post->likes()->firstOrCreate(
             [
-                'user_id' => $jw_user->id,
+                'user_id' => $request->user()->id,
             ],
             [
                 'client_ip' => get_client_ip()
@@ -102,14 +110,67 @@ class AjaxController extends FrontendController
 
     public function unlike(LikeRequest $request): JsonResponse|RedirectResponse
     {
-        global $jw_user;
+        $post = $this->postRepository->find($request->input('post_id'));
 
-        $post = Post::wherePublish()
-            ->where(['id' => $request->input('post_id')])
-            ->firstOrFail();
+        abort_unless($post->isPublish(), 404);
 
-        $post->likes()->where(['user_id' => $jw_user->id])->first()?->delete();
+        $post->likes()->where(['user_id' => $request->user()->id])->first()?->delete();
 
         return $this->success('Unlike success.');
+    }
+
+    public function relatedPosts(Request $request): JsonResponse
+    {
+        $post = $this->postRepository->findBySlug($request->input('post_slug'), false);
+        $limit = $request->input('limit', 10);
+        $taxonomy = $request->input('taxonomy', 'categories');
+
+        if ($limit > 100) {
+            $limit = 100;
+        }
+
+        if ($post === null) {
+            return response()->json(['data' => []]);
+        }
+
+        $posts = $this->postRepository->getRelatedPosts($post, $taxonomy, $limit);
+
+        return response()->json(
+            [
+                'data' => PostResourceCollection::make($posts),
+            ]
+        );
+    }
+
+    public function getMenuItems(Request $request): JsonResponse
+    {
+        $location = $request->input('location');
+
+        $menu = $this->menuRepository->getFrontendDetailByLocation($location);
+
+        if ($menu === null) {
+            return response()->json(['items' => []]);
+        }
+
+        $items = jw_menu_items($menu);
+
+        return response()->json(
+            [
+                'items' => (new MenuBuilder($items))->toArray(),
+            ]
+        );
+    }
+
+    public function sidebar(Request $request): JsonResponse
+    {
+        $sidebar = $request->input('sidebar');
+
+        $config = get_theme_config("sidebar_{$sidebar}", []);
+
+        return response()->json(
+            [
+                'config' => array_values($config),
+            ]
+        );
     }
 }

@@ -1,0 +1,7 @@
+switch ($action) {
+            case 'delete':
+                foreach ($ids as $id) {
+                    app($MODEL_NAME$::class)->delete($id);
+                }
+                break;
+        }

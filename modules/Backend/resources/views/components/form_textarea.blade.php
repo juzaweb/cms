@@ -5,6 +5,7 @@
         name="{{ $name }}"
         id="{{ $id ?? $name }}"
         rows="{{ $rows ?? 3 }}"
+        placeholder="{{ $placeholder ?? '' }}"
         @if($disabled ?? false) disabled @endif
     >{{ $value ?? '' }}</textarea>
 </div>

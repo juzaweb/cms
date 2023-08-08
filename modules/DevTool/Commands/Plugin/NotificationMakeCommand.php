@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
 use Juzaweb\CMS\Support\Stub;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 final class NotificationMakeCommand extends GeneratorCommand
@@ -19,7 +20,7 @@ final class NotificationMakeCommand extends GeneratorCommand
      */
     protected $name = 'plugin:make-notification';
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     /**
      * The console command description.

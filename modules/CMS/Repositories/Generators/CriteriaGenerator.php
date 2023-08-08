@@ -18,7 +18,7 @@ class CriteriaGenerator extends Generator
      * @var string
      */
     protected $stub = 'criteria/criteria';
-    
+
     /**
      * Get root namespace.
      *
@@ -28,7 +28,7 @@ class CriteriaGenerator extends Generator
     {
         return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
-    
+
     /**
      * Get generator path config node.
      *
@@ -38,7 +38,7 @@ class CriteriaGenerator extends Generator
     {
         return 'criteria';
     }
-    
+
     /**
      * Get destination path for generated file.
      *
@@ -51,7 +51,7 @@ class CriteriaGenerator extends Generator
             true
         ).'/'.$this->getName().'Criteria.php';
     }
-    
+
     /**
      * Get base path of destination file.
      *

@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -22,7 +22,7 @@ class MakeAdminCommand extends Command
 
     protected array $user;
 
-    public function handle()
+    public function handle(): void
     {
         $this->user['name'] = $this->ask('Full Name?');
         $this->user['email'] = $this->ask('Email?');

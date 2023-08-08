@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
 use Juzaweb\CMS\Support\Stub;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 class MailMakeCommand extends GeneratorCommand
@@ -26,7 +27,7 @@ class MailMakeCommand extends GeneratorCommand
      */
     protected $description = 'Create a new email class for the specified plugin';
 
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     public function getDefaultNamespace(): string
     {

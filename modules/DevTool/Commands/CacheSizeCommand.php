@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    MIT
@@ -17,7 +17,7 @@ class CacheSizeCommand extends Command
 {
     protected $name = 'juza:cache-size';
 
-    public function handle()
+    public function handle(): void
     {
         $fileSize = 0;
         foreach (File::allFiles(storage_path('framework/cache')) as $file) {

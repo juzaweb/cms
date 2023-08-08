@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
 use Juzaweb\CMS\Support\Stub;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 class MiddlewareMakeCommand extends GeneratorCommand
@@ -17,7 +18,7 @@ class MiddlewareMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $argumentName = 'name';
+    protected string $argumentName = 'name';
 
     /**
      * The console command name.
@@ -37,7 +38,9 @@ class MiddlewareMakeCommand extends GeneratorCommand
     {
         $module = $this->laravel['plugins'];
 
-        return $module->config('paths.generator.filter.namespace') ?: $module->config('paths.generator.filter.path', 'Http/Middleware');
+        return $module->config('paths.generator.filter.namespace')
+            ?:
+            $module->config('paths.generator.filter.path', 'Http/Middleware');
     }
 
     /**

@@ -23,9 +23,9 @@ return [
 
         'enabled' => true,
 
-        'url' => 'http://127.0.0.1:13714/render',
+        'url' => 'http://127.0.0.1:13714',
 
-        //'bundle' => base_path('public/jw-styles/themes/default-inertia/assets/js/ssr.js'),
+        //'bundle' => base_path('themes/default-inertia/assets/ssr/ssr.mjs'),
 
     ],
 
@@ -46,9 +46,8 @@ return [
         'ensure_pages_exist' => true,
 
         'page_paths' => [
-
             resource_path('js/pages'),
-
+            base_path('themes/default-inertia/views'),
         ],
 
         'page_extensions' => [

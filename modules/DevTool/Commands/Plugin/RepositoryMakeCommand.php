@@ -3,12 +3,11 @@
 namespace Juzaweb\DevTool\Commands\Plugin;
 
 use Illuminate\Support\Str;
-use Juzaweb\CMS\Exceptions\FileAlreadyExistException;
 use Juzaweb\CMS\Support\Config\GenerateConfigReader;
-use Juzaweb\CMS\Support\Generators\FileGenerator;
 use Juzaweb\CMS\Support\Plugin;
 use Juzaweb\CMS\Support\Stub;
 use Juzaweb\CMS\Traits\ModuleCommandTrait;
+use Juzaweb\DevTool\Abstracts\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 class RepositoryMakeCommand extends GeneratorCommand
@@ -20,7 +19,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $argumentName = 'repository';
+    protected string $argumentName = 'repository';
 
     /**
      * The console command name.
@@ -36,7 +35,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected $description = 'Generate new restful repository for the specified plugin.';
 
-    protected function afterHandle()
+    protected function afterHandle(): void
     {
         $path = str_replace('\\', '/', $this->getDestinationFileEloquentPath());
 
@@ -78,7 +77,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected function getRepositoryName(): array|string
     {
-        $repository = Str::studly($this->argument('repository'));
+        $repository = $this->getModelName();
 
         if (Str::contains(strtolower($repository), 'repository') === false) {
             $repository .= 'Repository';
@@ -87,9 +86,14 @@ class RepositoryMakeCommand extends GeneratorCommand
         return $repository;
     }
 
+    protected function getModelName(): string
+    {
+        return Str::studly($this->argument('repository'));
+    }
+
     public function getDefaultNamespace(): string
     {
-        return 'Http/Repositorys';
+        return 'Repositories';
     }
 
     /**
@@ -128,14 +132,15 @@ class RepositoryMakeCommand extends GeneratorCommand
             'MODULE' => $this->getModuleName(),
             'NAME' => $this->getModuleName(),
             'STUDLY_NAME' => $module->getStudlyName(),
-            'MODULE_NAMESPACE' => $this->laravel['plugins']->config('namespace'),
+            'MODULE_NAMESPACE' => $this->getModuleNamespace($module),
+            'MODEL_NAME' => $this->argument('repository'),
         ];
     }
 
     /**
      * @return array|string
      */
-    private function getRepositoryNameWithoutNamespace(): array|string
+    protected function getRepositoryNameWithoutNamespace(): array|string
     {
         return class_basename($this->getRepositoryName());
     }

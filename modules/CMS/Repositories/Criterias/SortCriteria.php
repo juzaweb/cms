@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    GNU General Public License v2.0
@@ -29,8 +29,8 @@ class SortCriteria extends Criteria implements CriteriaInterface
     /**
      * Apply criteria in query repository
      *
-     * @param Builder|Model     $model
-     * @param RepositoryInterface $repository
+     * @param  Builder|Model  $model
+     * @param  RepositoryInterface  $repository
      *
      * @return Builder|Model
      * @throws \Exception
@@ -51,7 +51,7 @@ class SortCriteria extends Criteria implements CriteriaInterface
 
         $hasSort = false;
         foreach ($this->queries as $col => $value) {
-            if (!in_array($col, $fields)) {
+            if (!in_array($col, $fields, true)) {
                 continue;
             }
 
@@ -59,7 +59,7 @@ class SortCriteria extends Criteria implements CriteriaInterface
                 $value = 'ASC';
             }
 
-            $model->orderBy("{$tbl}.{$col}", $value);
+            $model = $model->orderBy("{$tbl}.{$col}", $value);
             $hasSort = true;
         }
 
@@ -93,7 +93,7 @@ class SortCriteria extends Criteria implements CriteriaInterface
 
         $defaults = $repository->getSortableDefaults();
         foreach ($defaults as $col => $order) {
-            $model->orderBy("{$tbl}.{$col}", $order);
+            $model = $model->orderBy("{$tbl}.{$col}", $order);
         }
 
         return $model;

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     JuzaWeb Team
  * @link       https://juzaweb.com
  * @license    GNU V2
@@ -34,21 +34,62 @@ class HookAction implements HookActionContract
         $this->globalData = $globalData;
     }
 
+     /**
+     * Adds an action to the hook system.
+     *
+     * @param string $tag The tag name of the action.
+     * @param callable $callback The callback function to be executed when the action is triggered.
+     * @param int $priority The priority of the action. Default is 20.
+     * @param int $arguments The number of arguments the callback function accepts. Default is 1.
+     * @return void
+     */
     public function addAction($tag, $callback, $priority = 20, $arguments = 1): void
     {
         $this->hook->addAction($tag, $callback, $priority, $arguments);
     }
 
+     /**
+     * Adds a filter to the specified tag.
+     *
+     * @param string $tag The name of the tag to add the filter to.
+     * @param callable $callback The callback function to be called when the filter is applied.
+     * @param int $priority The priority of the filter. Default is 20.
+     * @param int $arguments The number of arguments that the callback function accepts. Default is 1.
+     * @throws Exception If there is an error adding the filter.
+     * @return void
+     */
     public function addFilter($tag, $callback, $priority = 20, $arguments = 1): void
     {
         $this->hook->addFilter($tag, $callback, $priority, $arguments);
     }
 
+     /**
+     * Apply filters to a given value using a specified tag.
+     *
+     * @param string $tag The tag to apply filters to.
+     * @param mixed $value The value to apply filters to.
+     * @param mixed ...$args Additional arguments to pass to the filters.
+     * @return mixed The filtered value.
+     */
     public function applyFilters(string $tag, mixed $value, ...$args): mixed
     {
         return $this->hook->filter($tag, $value, ...$args);
     }
 
+     /**
+     * Add a setting form to the system.
+     *
+     * @param string $key The unique identifier for the setting form.
+     * @param array $args An array of optional arguments for the setting form.
+     *                    - name: The name of the setting form.
+     *                    - key: The key of the setting form.
+     *                    - view: The view for the setting form.
+     *                    - header: Whether to show the header of the setting form.
+     *                    - footer: Whether to show the footer of the setting form.
+     *                    - priority: The priority of the setting form.
+     *                    - page: The page to display the setting form on.
+     * @return void
+     */
     public function addSettingForm(string $key, array $args = []): void
     {
         $defaults = [
@@ -69,6 +110,14 @@ class HookAction implements HookActionContract
         $this->globalData->set('setting_forms.' . $key, new Collection($args));
     }
 
+     /**
+     * Adds thumbnail sizes to a specific post type.
+     *
+     * @param string $postType The post type to add thumbnail sizes to.
+     * @param string|array $size The size(s) to add. Can be a string or an array of strings.
+     * @throws \Exception If the size parameter is not an array.
+     * @return void
+     */
     public function addThumbnailSizes(string $postType, string|array $size): void
     {
         if (!is_array($size)) {

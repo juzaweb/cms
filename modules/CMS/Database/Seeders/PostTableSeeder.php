@@ -8,7 +8,7 @@ use Juzaweb\Backend\Models\Taxonomy;
 
 class PostTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         Post::factory(20)->create()->each(
             function ($item) {
@@ -25,7 +25,7 @@ class PostTableSeeder extends Seeder
                 $item->syncTaxonomies(
                     [
                         'categories' => $categories->pluck('id')->toArray(),
-                        'tags' => $tags->pluck('id')->toArray()
+                        'tags' => $tags->pluck('id')->toArray(),
                     ]
                 );
             }

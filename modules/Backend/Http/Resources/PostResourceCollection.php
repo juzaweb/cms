@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    MIT
@@ -17,7 +17,7 @@ class PostResourceCollection extends ResourceCollection
     public function toArray($request): array
     {
         return $this->collection->map(
-            function ($item) use ($request) {
+            function ($item) {
                 $taxonomies = collect($item->json_taxonomies)->map(
                     function ($tax) {
                         unset($tax['total_post']);

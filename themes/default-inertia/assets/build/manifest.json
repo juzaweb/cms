@@ -1,0 +1,245 @@
+{
+  "_fetch-b062eefd.js": {
+    "file": "assets/fetch-b062eefd.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ]
+  },
+  "_functions-503419f4.js": {
+    "file": "assets/functions-503419f4.js"
+  },
+  "themes/default-inertia/app.css": {
+    "file": "assets/app-651fa515.css",
+    "isEntry": true,
+    "src": "themes/default-inertia/app.css"
+  },
+  "themes/default-inertia/app.tsx": {
+    "dynamicImports": [
+      "themes/default-inertia/views/auth/login.tsx",
+      "themes/default-inertia/views/auth/register.tsx",
+      "themes/default-inertia/views/components/menu_item.tsx",
+      "themes/default-inertia/views/components/menu_mobile_item.tsx",
+      "themes/default-inertia/views/components/pagination.tsx",
+      "themes/default-inertia/views/components/primary-menu.tsx",
+      "themes/default-inertia/views/footer.tsx",
+      "themes/default-inertia/views/header.tsx",
+      "themes/default-inertia/views/index.tsx",
+      "themes/default-inertia/views/layouts/main.tsx",
+      "themes/default-inertia/views/search.tsx",
+      "themes/default-inertia/views/template-parts/components/comment-form.tsx",
+      "themes/default-inertia/views/template-parts/components/comments.tsx",
+      "themes/default-inertia/views/template-parts/components/related.tsx",
+      "themes/default-inertia/views/template-parts/content.tsx",
+      "themes/default-inertia/views/template-parts/single-page.tsx",
+      "themes/default-inertia/views/template-parts/single.tsx",
+      "themes/default-inertia/views/template-parts/taxonomy.tsx",
+      "themes/default-inertia/views/templates/home.tsx"
+    ],
+    "file": "assets/app-13cc16b3.js",
+    "isEntry": true,
+    "src": "themes/default-inertia/app.tsx"
+  },
+  "themes/default-inertia/views/auth/login.tsx": {
+    "file": "assets/login-56d3207b.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/auth/login.tsx"
+  },
+  "themes/default-inertia/views/auth/register.tsx": {
+    "file": "assets/register-a0f31001.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/auth/register.tsx"
+  },
+  "themes/default-inertia/views/components/menu_item.tsx": {
+    "file": "assets/menu_item-a66a5f3c.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/components/menu_item.tsx"
+  },
+  "themes/default-inertia/views/components/menu_mobile_item.tsx": {
+    "file": "assets/menu_mobile_item-1ac90da0.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/components/menu_mobile_item.tsx"
+  },
+  "themes/default-inertia/views/components/pagination.tsx": {
+    "file": "assets/pagination-d2202422.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/components/pagination.tsx"
+  },
+  "themes/default-inertia/views/components/primary-menu.tsx": {
+    "file": "assets/primary-menu-139672a4.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "themes/default-inertia/views/components/menu_item.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/components/primary-menu.tsx"
+  },
+  "themes/default-inertia/views/footer.tsx": {
+    "file": "assets/footer-7b42e382.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/footer.tsx"
+  },
+  "themes/default-inertia/views/header.tsx": {
+    "file": "assets/header-16ec2555.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js",
+      "themes/default-inertia/views/components/primary-menu.tsx",
+      "themes/default-inertia/views/components/menu_item.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/header.tsx"
+  },
+  "themes/default-inertia/views/index.tsx": {
+    "file": "assets/index-3d7c7f63.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "themes/default-inertia/views/layouts/main.tsx",
+      "themes/default-inertia/views/template-parts/content.tsx",
+      "themes/default-inertia/views/components/pagination.tsx",
+      "themes/default-inertia/views/header.tsx",
+      "_functions-503419f4.js",
+      "themes/default-inertia/views/components/primary-menu.tsx",
+      "themes/default-inertia/views/components/menu_item.tsx",
+      "themes/default-inertia/views/footer.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/index.tsx"
+  },
+  "themes/default-inertia/views/layouts/main.tsx": {
+    "file": "assets/main-c1f7e2e7.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "themes/default-inertia/views/header.tsx",
+      "themes/default-inertia/views/footer.tsx",
+      "_functions-503419f4.js",
+      "themes/default-inertia/views/components/primary-menu.tsx",
+      "themes/default-inertia/views/components/menu_item.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/layouts/main.tsx"
+  },
+  "themes/default-inertia/views/search.tsx": {
+    "file": "assets/search-800ca6a0.js",
+    "imports": [
+      "themes/default-inertia/app.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/search.tsx"
+  },
+  "themes/default-inertia/views/template-parts/components/comment-form.tsx": {
+    "file": "assets/comment-form-3e0d0928.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "themes/default-inertia/views/template-parts/components/comments.tsx",
+      "_functions-503419f4.js",
+      "_fetch-b062eefd.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/components/comment-form.tsx"
+  },
+  "themes/default-inertia/views/template-parts/components/comments.tsx": {
+    "file": "assets/comments-ecfef8a9.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/components/comments.tsx"
+  },
+  "themes/default-inertia/views/template-parts/components/related.tsx": {
+    "file": "assets/related-a9269332.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js",
+      "_fetch-b062eefd.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/components/related.tsx"
+  },
+  "themes/default-inertia/views/template-parts/content.tsx": {
+    "file": "assets/content-3e9bb392.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/content.tsx"
+  },
+  "themes/default-inertia/views/template-parts/single-page.tsx": {
+    "file": "assets/single-page-902d456c.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/single-page.tsx"
+  },
+  "themes/default-inertia/views/template-parts/single.tsx": {
+    "file": "assets/single-2171162d.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js",
+      "themes/default-inertia/views/layouts/main.tsx",
+      "themes/default-inertia/views/template-parts/components/comment-form.tsx",
+      "themes/default-inertia/views/header.tsx",
+      "themes/default-inertia/views/components/primary-menu.tsx",
+      "themes/default-inertia/views/components/menu_item.tsx",
+      "themes/default-inertia/views/footer.tsx",
+      "themes/default-inertia/views/template-parts/components/comments.tsx",
+      "_fetch-b062eefd.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/single.tsx"
+  },
+  "themes/default-inertia/views/template-parts/taxonomy.tsx": {
+    "file": "assets/taxonomy-a793688b.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js",
+      "themes/default-inertia/views/layouts/main.tsx",
+      "themes/default-inertia/views/components/pagination.tsx",
+      "themes/default-inertia/views/template-parts/content.tsx",
+      "themes/default-inertia/views/header.tsx",
+      "themes/default-inertia/views/components/primary-menu.tsx",
+      "themes/default-inertia/views/components/menu_item.tsx",
+      "themes/default-inertia/views/footer.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/template-parts/taxonomy.tsx"
+  },
+  "themes/default-inertia/views/templates/home.tsx": {
+    "file": "assets/home-83d8c3be.js",
+    "imports": [
+      "themes/default-inertia/app.tsx",
+      "_functions-503419f4.js",
+      "themes/default-inertia/views/layouts/main.tsx",
+      "themes/default-inertia/views/components/pagination.tsx",
+      "themes/default-inertia/views/header.tsx",
+      "themes/default-inertia/views/components/primary-menu.tsx",
+      "themes/default-inertia/views/components/menu_item.tsx",
+      "themes/default-inertia/views/footer.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "themes/default-inertia/views/templates/home.tsx"
+  }
+}

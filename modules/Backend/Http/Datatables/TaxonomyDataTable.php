@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -25,12 +25,7 @@ class TaxonomyDataTable extends DataTable
         $this->taxonomy = $taxonomy;
     }
 
-    /**
-     * Columns datatable
-     *
-     * @return array
-     */
-    public function columns()
+    public function columns(): array
     {
         $columns = [
             'name' => [
@@ -91,7 +86,7 @@ class TaxonomyDataTable extends DataTable
         return $query;
     }
 
-    public function rowAction($row)
+    public function rowAction($row): array
     {
         $data = parent::rowAction($row);
 
@@ -104,7 +99,7 @@ class TaxonomyDataTable extends DataTable
         return $data;
     }
 
-    public function bulkActions($action, $ids)
+    public function bulkActions($action, $ids): void
     {
         foreach ($ids as $id) {
             DB::beginTransaction();

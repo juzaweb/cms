@@ -26,7 +26,9 @@
 
             <select id="change-theme" class="form-control mt-2">
                 @foreach($themes as $name => $info)
-                    <option value="{{ $name }}" @if($name == $theme) selected @endif>{{ $info->get('title') }}</option>
+                    <option value="{{ $name }}" @if($name == $theme) selected @endif>
+                        {{ $info->get('title') }}
+                    </option>
                 @endforeach
             </select>
 

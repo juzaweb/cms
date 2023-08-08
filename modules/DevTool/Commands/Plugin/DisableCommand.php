@@ -25,7 +25,7 @@ class DisableCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         /** @var Plugin $module */
         $module = $this->laravel['plugins']->findOrFail($this->argument('module'));

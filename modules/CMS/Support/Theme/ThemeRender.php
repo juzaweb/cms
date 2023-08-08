@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com
  * @license    GNU V2
@@ -16,6 +16,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Juzaweb\Backend\Http\Resources\CommentResource;
@@ -74,7 +75,7 @@ class ThemeRender implements ThemeRenderContract
     public function parseParam($param): mixed
     {
         return match ($this->theme->getTemplate()) {
-            'twig' => $this->parseParamForTwig($param),
+            'twig', 'inertia' => $this->parseParamToArray($param),
             default => $param,
         };
     }
@@ -82,13 +83,13 @@ class ThemeRender implements ThemeRenderContract
     protected function inertiaRender(string $view, array $params = []): \Inertia\Response
     {
         $view = Str::replace('theme::', '', $view);
-
+        $view = Str::replace('.', '/', $view);
         return Inertia::render($view, $params);
     }
 
-    protected function parseParamForTwig($param)
+    protected function parseParamToArray($param)
     {
-        if (is_a($param, 'Illuminate\Support\ViewErrorBag')) {
+        if ($param instanceof \Illuminate\Support\ViewErrorBag) {
             return $param;
         }
 
@@ -105,7 +106,7 @@ class ThemeRender implements ThemeRenderContract
         }
 
         if ($param instanceof EloquentCollection || $param instanceof LengthAwarePaginator) {
-            return $this->parseParamEloquentCollectionForTwig($param);
+            return $this->parseParamEloquentCollectionToArray($param);
         }
 
         if ($param instanceof Arrayable) {
@@ -129,10 +130,10 @@ class ThemeRender implements ThemeRenderContract
         return $param;
     }
 
-    protected function parseParamEloquentCollectionForTwig(EloquentCollection|LengthAwarePaginator $collection): array
+    protected function parseParamEloquentCollectionToArray(EloquentCollection|LengthAwarePaginator $collection): array
     {
         if ($collection->isEmpty()) {
-            return $collection->toArray();
+            return ResourceCollection::make($collection)->response()->getData(true);
         }
 
         if ($collection->first() instanceof Post) {

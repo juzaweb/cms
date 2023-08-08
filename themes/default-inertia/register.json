@@ -58,6 +58,9 @@
     "nav_menus": {
         "primary": {
             "label": "Primary menu"
+        },
+        "footer_links": {
+            "label": "Footer links menu"
         }
     },
     "configs": [

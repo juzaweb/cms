@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -14,10 +14,10 @@ use Illuminate\Support\Collection;
 
 class Customize
 {
-    protected $panels;
-    protected $settings;
-    protected $sessions;
-    protected $controls;
+    protected Collection $panels;
+    protected Collection $settings;
+    protected Collection $sessions;
+    protected Collection $controls;
 
     public function __construct()
     {
@@ -27,16 +27,18 @@ class Customize
         $this->controls = new Collection([]);
     }
 
-    public function addPanel($key, $args = [])
+    public function addPanel($key, $args = []): void
     {
+        $args['key'] = $key;
+
         $this->panels->put($key, new Collection($args));
     }
 
     /**
-     * @param string $key
+     * @param  string|null  $key
      * @return Collection
      */
-    public function getPanel($key = null)
+    public function getPanel(string $key = null): Collection
     {
         if (empty($key)) {
             return $this->panels;
@@ -45,13 +47,15 @@ class Customize
         return $this->panels->get($key);
     }
 
-    public function removePanel($key)
+    public function removePanel($key): void
     {
         $this->panels->forget($key);
     }
 
-    public function addSection($key, $args = [])
+    public function addSection($key, $args = []): void
     {
+        $args['key'] = $key;
+
         $this->sessions->put($key, new Collection($args));
     }
 
@@ -64,13 +68,15 @@ class Customize
         return $this->sessions->get($key);
     }
 
-    public function removeSection($key)
+    public function removeSection($key): void
     {
         $this->sessions->forget($key);
     }
 
-    public function addSetting($key, $args = [])
+    public function addSetting($key, $args = []): void
     {
+        $args['key'] = $key;
+
         $this->settings->put($key, new Collection($args));
     }
 
@@ -83,15 +89,16 @@ class Customize
         return $this->settings->get($key);
     }
 
-    public function removeSetting($key)
+    public function removeSetting($key): void
     {
         $this->settings->forget($key);
     }
 
-    public function addControl($control)
+    public function addControl($control): void
     {
         $key = $control->getKey();
         $args = $control->getArgs();
+        $args['key'] = $key;
         $args->put('control', $control);
 
         $this->controls->put($key, $args);
@@ -106,7 +113,7 @@ class Customize
         return $this->controls->get($key);
     }
 
-    public function removeControl($key)
+    public function removeControl($key): void
     {
         $this->controls->forget($key);
     }

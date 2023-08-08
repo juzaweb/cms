@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -58,14 +58,14 @@ class ThemeConfig implements ThemeConfigContract
     public function getConfig(string $key, string|array $default = null): null|string|array
     {
         $value = $this->configs[$key] ?? $default;
-        
+
         if (is_json($value)) {
             return json_decode($value, true);
         }
 
         return $value;
     }
-    
+
     public function getConfigs(array $keys, string|array $default = null): array
     {
         $configs = [];

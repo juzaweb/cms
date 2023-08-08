@@ -12,7 +12,7 @@ use Illuminate\Support\ServiceProvider;
  */
 class EventServiceProvider extends ServiceProvider
 {
-    
+
     /**
      * The event handler mappings for the application.
      *
@@ -29,7 +29,7 @@ class EventServiceProvider extends ServiceProvider
             'Juzaweb\CMS\Repositories\Listeners\CleanCacheRepository',
         ],
     ];
-    
+
     /**
      * Register the application's event listeners.
      *
@@ -38,14 +38,14 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         $events = app('events');
-        
+
         foreach ($this->listen as $event => $listeners) {
             foreach ($listeners as $listener) {
                 $events->listen($event, $listener);
             }
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -53,7 +53,7 @@ class EventServiceProvider extends ServiceProvider
     {
         //
     }
-    
+
     /**
      * Get the events and handlers.
      *

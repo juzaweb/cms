@@ -14,6 +14,7 @@ use Juzaweb\CMS\Repositories\Eloquent\BaseRepository as PackageBaseRepository;
 interface RepositoryCriteriaInterface
 {
     public function pushCriteria(string|CriteriaInterface $criteria): PackageBaseRepository;
+
     /**
      * Push Criteria for filter the query
      *
@@ -22,7 +23,7 @@ interface RepositoryCriteriaInterface
      * @return $this
      */
     public function pushCriterias(array|string $criterias): PackageBaseRepository;
-    
+
     /**
      * Pop Criteria
      *
@@ -31,14 +32,14 @@ interface RepositoryCriteriaInterface
      * @return $this
      */
     public function popCriteria($criteria);
-    
+
     /**
      * Get Collection of Criteria
      *
      * @return Collection
      */
     public function getCriteria();
-    
+
     /**
      * Find data by Criteria
      *
@@ -47,7 +48,7 @@ interface RepositoryCriteriaInterface
      * @return mixed
      */
     public function getByCriteria(CriteriaInterface $criteria);
-    
+
     /**
      * Skip Criteria
      *
@@ -56,7 +57,7 @@ interface RepositoryCriteriaInterface
      * @return $this
      */
     public function skipCriteria($status = true);
-    
+
     /**
      * Reset all Criterias
      *

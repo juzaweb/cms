@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -17,9 +17,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Response;
 use Juzaweb\Backend\Events\PostViewed;
 use Juzaweb\Backend\Http\Resources\CommentResource;
-use Juzaweb\Backend\Http\Resources\PostResource;
 use Juzaweb\Backend\Http\Resources\PostResourceCollection;
 use Juzaweb\Backend\Models\Comment;
 use Juzaweb\Backend\Models\Post;
@@ -35,7 +35,7 @@ class PostController extends FrontendController
     {
     }
 
-    public function index(...$slug): View|Factory|string
+    public function index(...$slug): View|Factory|string|Response
     {
         if (count($slug) > 1) {
             return $this->detail(...$slug);
@@ -44,9 +44,9 @@ class PostController extends FrontendController
         $title = get_config('title');
         $posts = $this->postRepository->frontendListPaginate(get_config('posts_per_page', 12));
 
-        $posts->appends(request()->query());
+        $posts->appends(request()?->query());
 
-        if ($this->template == 'twig') {
+        if ($this->template === 'twig') {
             $page = PostResourceCollection::make($posts)
                 ->response()
                 ->getData(true);
@@ -57,7 +57,7 @@ class PostController extends FrontendController
         return $this->view('theme::index', compact('posts', 'title'));
     }
 
-    public function detail(...$slug): View|Factory|string
+    public function detail(...$slug): View|Factory|string|Response
     {
         do_action("frontend.post_type.detail", $slug);
 
@@ -73,7 +73,7 @@ class PostController extends FrontendController
         );
 
         $post = $this->postRepository->findBySlug($postSlug, false);
-        if (empty($post) && count($slug) > 2) {
+        if ($post === null && count($slug) > 2) {
             $post = $this->postRepository->findBySlug($slug[1]);
         }
 
@@ -90,8 +90,6 @@ class PostController extends FrontendController
         $template = get_name_template_part($type, 'single');
 
         //$post = (new PostResource($post))->toArray(request());
-
-        //$comments = CommentResource::collection($rows)->response()->getData(true);
 
         return $this->view(
             "theme::template-parts.{$template}",

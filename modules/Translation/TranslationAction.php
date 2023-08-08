@@ -7,12 +7,12 @@ use Juzaweb\CMS\Facades\HookAction;
 
 class TranslationAction extends Action
 {
-    public function handle()
+    public function handle(): void
     {
         $this->addAction(Action::BACKEND_INIT, [$this, 'addBackendMenu']);
     }
 
-    public function addBackendMenu()
+    public function addBackendMenu(): void
     {
         HookAction::registerAdminPage(
             'translations',

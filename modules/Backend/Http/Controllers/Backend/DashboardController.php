@@ -36,7 +36,7 @@ class DashboardController extends BackendController
             fn() => format_size_units(disk_free_space('/')),
         );
 
-        return view(
+        return $this->view(
             'cms::backend.dashboard',
             compact(
                 'title',

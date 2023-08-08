@@ -16,29 +16,29 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class ValidatorCommand extends Command
 {
-    
+
     /**
      * The name of command.
      *
      * @var string
      */
     protected $name = 'make:validator';
-    
+
     /**
      * The description of command.
      *
      * @var string
      */
     protected $description = 'Create a new validator.';
-    
+
     /**
      * The type of class being generated.
      *
      * @var string
      */
     protected $type = 'Validator';
-    
-    
+
+
     /**
      * Execute the command.
      *
@@ -49,7 +49,7 @@ class ValidatorCommand extends Command
     {
         $this->laravel->call([$this, 'fire'], func_get_args());
     }
-    
+
     /**
      * Execute the command.
      *
@@ -58,20 +58,22 @@ class ValidatorCommand extends Command
     public function fire()
     {
         try {
-            (new ValidatorGenerator([
+            (new ValidatorGenerator(
+                [
                 'name' => $this->argument('name'),
                 'rules' => $this->option('rules'),
                 'force' => $this->option('force'),
-            ]))->run();
+                ]
+            ))->run();
             $this->info("Validator created successfully.");
         } catch (FileAlreadyExistsException $e) {
             $this->error($this->type.' already exists!');
-            
+
             return false;
         }
     }
-    
-    
+
+
     /**
      * The array of command arguments.
      *
@@ -88,8 +90,8 @@ class ValidatorCommand extends Command
             ],
         ];
     }
-    
-    
+
+
     /**
      * The array of command options.
      *

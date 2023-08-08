@@ -5,7 +5,7 @@ namespace Juzaweb\Backend\Commands;
 use Juzaweb\CMS\Contracts\TranslationManager;
 use Juzaweb\CMS\Facades\Plugin;
 use Juzaweb\CMS\Facades\ThemeLoader;
-use Juzaweb\DevTool\Commands\Plugin\ImportTranslationCommand as PluginImportTranslationCommand;
+use Juzaweb\DevTool\Commands\Plugin\Translation\ImportTranslationCommand as PluginImportTranslationCommand;
 
 class ImportTranslationCommand extends TranslationCommand
 {

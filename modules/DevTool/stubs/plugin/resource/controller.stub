@@ -4,12 +4,13 @@ namespace $CLASS_NAMESPACE$;
 
 use Juzaweb\CMS\Traits\ResourceController;
 use Illuminate\Support\Facades\Validator;
-use Juzaweb\CMS\Http\Controllers\BackendController;
+use Juzaweb\Backend\Http\Controllers\Backend\PageController;
 use Juzaweb\CMS\Abstracts\DataTable;
 use $MODULE_NAMESPACE$Http\Datatables\$DATATABLE$;
 use $MODULE_NAMESPACE$Models\$MODEL_NAME$;
+use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 
-class $CLASS$ extends BackendController
+class $CLASS$ extends PageController
 {
     use ResourceController;
 
@@ -20,7 +21,7 @@ class $CLASS$ extends BackendController
         return new $DATATABLE$();
     }
 
-    protected function validator(array $attributes, ...$params): \Illuminate\Contracts\Validation\Validator
+    protected function validator(array $attributes, ...$params): ValidatorContract
     {
         return Validator::make(
             $attributes,
@@ -37,6 +38,6 @@ class $CLASS$ extends BackendController
 
     protected function getTitle(...$params): string
     {
-        return trans('$MODULE_DOMAIN$::content.$TABLE_NAME$');
+        return trans('$MODULE_DOMAIN$::content.$VIEW_NAME$');
     }
 }

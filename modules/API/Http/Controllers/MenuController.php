@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    GNU General Public License v2.0
@@ -19,11 +19,13 @@ class MenuController extends ApiController
     public function __construct(protected MenuRepository $menuRepository)
     {
     }
-    
+
     public function show(string $location): MenuResource
     {
         $menu = $this->menuRepository->getFrontendDetailByLocation($location);
-        
+
+        abort_if($menu === null, 404);
+
         return MenuResource::make($menu);
     }
 }

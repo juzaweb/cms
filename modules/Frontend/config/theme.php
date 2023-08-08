@@ -2,15 +2,17 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
  */
 
 return [
+    'enable' => env('JW_FRONTEND_ENABLE', true),
+
     'route_prefix' => null,
-    
+
     'stubs' => [
         'files' => [
             'index' => 'views/index.twig',

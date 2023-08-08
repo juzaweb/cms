@@ -14,14 +14,14 @@ use Juzaweb\CMS\Repositories\Generators\Migrations\SchemaParser;
  */
 class RepositoryEloquentGenerator extends Generator
 {
-    
+
     /**
      * Get stub name.
      *
      * @var string
      */
     protected $stub = 'repository/eloquent';
-    
+
     /**
      * Get root namespace.
      *
@@ -31,7 +31,7 @@ class RepositoryEloquentGenerator extends Generator
     {
         return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
-    
+
     /**
      * Get generator path config node.
      *
@@ -41,7 +41,7 @@ class RepositoryEloquentGenerator extends Generator
     {
         return 'repositories';
     }
-    
+
     /**
      * Get destination path for generated file.
      *
@@ -54,7 +54,7 @@ class RepositoryEloquentGenerator extends Generator
             true
         ).'/'.$this->getName().'RepositoryEloquent.php';
     }
-    
+
     /**
      * Get base path of destination file.
      *
@@ -64,7 +64,7 @@ class RepositoryEloquentGenerator extends Generator
     {
         return config('repository.generator.basePath', app()->path());
     }
-    
+
     /**
      * Get array replacements.
      *
@@ -73,20 +73,27 @@ class RepositoryEloquentGenerator extends Generator
     public function getReplacements()
     {
         $repository = parent::getRootNamespace().parent::getConfigGeneratorClassPath('interfaces').'\\'.$this->name.'Repository;';
-        $repository = str_replace([
+        $repository = str_replace(
+            [
             "\\",
             '/',
-        ], '\\', $repository);
-        
-        return array_merge(parent::getReplacements(), [
+            ],
+            '\\',
+            $repository
+        );
+
+        return array_merge(
+            parent::getReplacements(),
+            [
             'fillable' => $this->getFillable(),
             'use_validator' => $this->getValidatorUse(),
             'validator' => $this->getValidatorMethod(),
             'repository' => $repository,
             'model' => isset($this->options['model']) ? $this->options['model'] : '',
-        ]);
+            ]
+        );
     }
-    
+
     /**
      * Get the fillable attributes.
      *
@@ -98,14 +105,14 @@ class RepositoryEloquentGenerator extends Generator
             return '[]';
         }
         $results = '['.PHP_EOL;
-        
+
         foreach ($this->getSchemaParser()->toArray() as $column => $value) {
             $results .= "\t\t'{$column}',".PHP_EOL;
         }
-        
+
         return $results."\t".']';
     }
-    
+
     /**
      * Get schema parser.
      *
@@ -115,40 +122,46 @@ class RepositoryEloquentGenerator extends Generator
     {
         return new SchemaParser($this->fillable);
     }
-    
+
     public function getValidatorUse()
     {
         $validator = $this->getValidator();
-        
+
         return "use {$validator};";
     }
-    
-    
+
+
     public function getValidator()
     {
-        $validatorGenerator = new ValidatorGenerator([
+        $validatorGenerator = new ValidatorGenerator(
+            [
             'name' => $this->name,
             'rules' => $this->rules,
             'force' => $this->force,
-        ]);
-        
+            ]
+        );
+
         $validator = $validatorGenerator->getRootNamespace().'\\'.$validatorGenerator->getName();
-        
-        return str_replace([
+
+        return str_replace(
+            [
                 "\\",
                 '/',
-            ], '\\', $validator).'Validator';
+            ],
+            '\\',
+            $validator
+        ).'Validator';
     }
-    
-    
+
+
     public function getValidatorMethod()
     {
         if ($this->validator != 'yes') {
             return '';
         }
-        
+
         $class = $this->getClass();
-        
+
         return '/**'.PHP_EOL.'    * Specify Validator class name'.PHP_EOL.'    *'.PHP_EOL.'    * @return mixed'.PHP_EOL.'    */'.PHP_EOL.'    public function validator()'.PHP_EOL.'    {'.PHP_EOL.PHP_EOL.'        return '.$class.'Validator::class;'.PHP_EOL.'    }'.PHP_EOL;
     }
 }

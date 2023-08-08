@@ -19,7 +19,7 @@ class PresenterGenerator extends Generator
      * @var string
      */
     protected $stub = 'presenter/presenter';
-    
+
     /**
      * Get root namespace.
      *
@@ -29,7 +29,7 @@ class PresenterGenerator extends Generator
     {
         return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
-    
+
     /**
      * Get generator path config node.
      *
@@ -39,7 +39,7 @@ class PresenterGenerator extends Generator
     {
         return 'presenters';
     }
-    
+
     /**
      * Get array replacements.
      *
@@ -47,21 +47,30 @@ class PresenterGenerator extends Generator
      */
     public function getReplacements()
     {
-        $transformerGenerator = new TransformerGenerator([
+        $transformerGenerator = new TransformerGenerator(
+            [
             'name' => $this->name,
-        ]);
+            ]
+        );
         $transformer = $transformerGenerator->getRootNamespace().'\\'.$transformerGenerator->getName().'Transformer';
-        $transformer = str_replace([
+        $transformer = str_replace(
+            [
             "\\",
             '/',
-        ], '\\', $transformer);
+            ],
+            '\\',
+            $transformer
+        );
         echo $transformer;
-        
-        return array_merge(parent::getReplacements(), [
+
+        return array_merge(
+            parent::getReplacements(),
+            [
             'transformer' => $transformer,
-        ]);
+            ]
+        );
     }
-    
+
     /**
      * Get destination path for generated file.
      *
@@ -74,7 +83,7 @@ class PresenterGenerator extends Generator
             true
         ).'/'.$this->getName().'Presenter.php';
     }
-    
+
     /**
      * Get base path of destination file.
      *

@@ -14,7 +14,7 @@ use Juzaweb\CMS\Repositories\Generators\RepositoryInterfaceGenerator;
  */
 class BindingsGenerator extends Generator
 {
-    
+
     /**
      * The placeholder for repository bindings
      *
@@ -27,22 +27,25 @@ class BindingsGenerator extends Generator
      * @var string
      */
     protected $stub = 'bindings/bindings';
-    
+
     public function run()
     {
-        
-        
+
+
         // Add entity repository binding to the repository service provider
         $provider = \File::get($this->getPath());
         $repositoryInterface = '\\'.$this->getRepository()."::class";
         $repositoryEloquent = '\\'.$this->getEloquentRepository()."::class";
-        \File::put($this->getPath(), str_replace(
-            $this->bindPlaceholder,
-            "\$this->app->bind({$repositoryInterface}, $repositoryEloquent);".PHP_EOL.'        '.$this->bindPlaceholder,
-            $provider
-        ));
+        \File::put(
+            $this->getPath(),
+            str_replace(
+                $this->bindPlaceholder,
+                "\$this->app->bind({$repositoryInterface}, $repositoryEloquent);".PHP_EOL.'        '.$this->bindPlaceholder,
+                $provider
+            )
+        );
     }
-    
+
     /**
      * Get destination path for generated file.
      *
@@ -55,7 +58,7 @@ class BindingsGenerator extends Generator
             true
         ).'.php';
     }
-    
+
     /**
      * Get base path of destination file.
      *
@@ -65,7 +68,7 @@ class BindingsGenerator extends Generator
     {
         return config('repository.generator.basePath', app()->path());
     }
-    
+
     /**
      * Get generator path config node.
      *
@@ -75,7 +78,7 @@ class BindingsGenerator extends Generator
     {
         return 'provider';
     }
-    
+
     /**
      * Gets repository full class name
      *
@@ -83,18 +86,24 @@ class BindingsGenerator extends Generator
      */
     public function getRepository()
     {
-        $repositoryGenerator = new RepositoryInterfaceGenerator([
+        $repositoryGenerator = new RepositoryInterfaceGenerator(
+            [
             'name' => $this->name,
-        ]);
-        
+            ]
+        );
+
         $repository = $repositoryGenerator->getRootNamespace().'\\'.$repositoryGenerator->getName();
-        
-        return str_replace([
+
+        return str_replace(
+            [
                 "\\",
                 '/',
-            ], '\\', $repository).'Repository';
+            ],
+            '\\',
+            $repository
+        ).'Repository';
     }
-    
+
     /**
      * Gets eloquent repository full class name
      *
@@ -102,18 +111,24 @@ class BindingsGenerator extends Generator
      */
     public function getEloquentRepository()
     {
-        $repositoryGenerator = new RepositoryEloquentGenerator([
+        $repositoryGenerator = new RepositoryEloquentGenerator(
+            [
             'name' => $this->name,
-        ]);
-        
+            ]
+        );
+
         $repository = $repositoryGenerator->getRootNamespace().'\\'.$repositoryGenerator->getName();
-        
-        return str_replace([
+
+        return str_replace(
+            [
                 "\\",
                 '/',
-            ], '\\', $repository).'RepositoryEloquent';
+            ],
+            '\\',
+            $repository
+        ).'RepositoryEloquent';
     }
-    
+
     /**
      * Get root namespace.
      *
@@ -123,7 +138,7 @@ class BindingsGenerator extends Generator
     {
         return parent::getRootNamespace().parent::getConfigGeneratorClassPath($this->getPathConfigNode());
     }
-    
+
     /**
      * Get array replacements.
      *
@@ -131,10 +146,13 @@ class BindingsGenerator extends Generator
      */
     public function getReplacements()
     {
-        return array_merge(parent::getReplacements(), [
+        return array_merge(
+            parent::getReplacements(),
+            [
             'repository' => $this->getRepository(),
             'eloquent' => $this->getEloquentRepository(),
             'placeholder' => $this->bindPlaceholder,
-        ]);
+            ]
+        );
     }
 }

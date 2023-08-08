@@ -3,8 +3,8 @@ JUZACMS - Laravel CMS for Your Project
 
 ## About
 ![https://buymeacoffee.com/juzaweb](https://i.imgur.com/toObY8s.png)
-[![Total Downloads](https://img.shields.io/packagist/dt/juzaweb/juzacms.svg?style=social)](https://packagist.org/packages/juzaweb/juzacms)
-[![GitHub Repo stars](https://img.shields.io/github/stars/juzaweb/juzacms?style=social)](https://github.com/juzaweb/juzacms)
+[![Total Downloads](https://img.shields.io/packagist/dt/juzaweb/juzacms.svg?style=social)](https://packagist.org/packages/juzaweb/cms)
+[![GitHub Repo stars](https://img.shields.io/github/stars/juzaweb/cms?style=social)](https://github.com/juzaweb/cms)
 [![GitHub followers](https://img.shields.io/github/followers/juzaweb?style=social)](https://github.com/juzaweb)
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@juzaweb)
 
@@ -25,7 +25,7 @@ JUZACMS - Laravel CMS for Your Project
 ## Install
 ### Create project with composer
 ```
-composer create-project --prefer-dist juzaweb/juzacms blog
+composer create-project --prefer-dist juzaweb/cms blog
 ```
 ### Install
 
@@ -40,7 +40,7 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
 
 ## Contributing
 - Contributions are welcome, and are accepted via pull requests. Please review these guidelines before submitting any pull requests.
-[https://github.com/juzaweb/juzacms/blob/master/CONTRIBUTING.md](https://github.com/juzaweb/juzacms/blob/master/CONTRIBUTING.md)
+[https://github.com/juzaweb/cms/blob/master/CONTRIBUTING.md](https://github.com/juzaweb/cms/blob/master/CONTRIBUTING.md)
 
 ## Features
 - [x] File manager

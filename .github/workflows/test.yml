@@ -1,0 +1,55 @@
+name: Run phpunit test suite
+
+on: [push, pull_request]
+
+jobs:
+  laravel-tests:
+    runs-on: ${{ matrix.os }}
+    services:
+      mysql:
+        image: mysql:8.0.21
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: cms_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.0, 8.1]
+    name: PHP${{ matrix.php }} - ${{ matrix.os }}
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+      - uses: actions/checkout@v2
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
+      - name: Install Dependencies
+        run: composer install
+      - name: Generate key
+        run: php artisan key:generate
+      - name: Clear Configuration
+        run: php artisan config:clear
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+      - name: Execute tests Install
+        run: php artisan test modules/Tests/InstallTest.php
+      - name: Execute tests (Unit and Feature tests)
+        run: php artisan test
+      - name: Execute tests disabled frontend
+        run:
+          php artisan test modules/Tests/Feature/Auth
+          php artisan test modules/Tests/Feature/Backend
+        env:
+          JW_FRONTEND_ENABLE: false
+      - name: Execute tests Update
+        run: php artisan test modules/Tests/UpdateTest.php
+      - name: Execute tests after Update
+        run: php artisan test

@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    GNU General Public License v2.0
@@ -21,24 +21,24 @@ class PostTypeSwaggerDocumentation implements APISwaggerDocumentation
     public function __construct(protected HookActionContract $hookAction)
     {
     }
-    
+
     public function handle(SwaggerDocument $document): SwaggerDocument
     {
         $postTypes = $this->hookAction->getPostTypes();
-        
+
         foreach ($postTypes as $key => $postType) {
             $this->addPathPostType($key, $postType, $document);
-    
+
             $taxonomies = $this->hookAction->getTaxonomies($key);
-            
+
             foreach ($taxonomies as $tkey => $taxonomy) {
                 $this->addPathTaxonomy($tkey, $taxonomy, $postType, $document);
             }
         }
-        
+
         return $document;
     }
-    
+
     private function addPathPostType(string $key, Collection $postType, $document)
     {
         $document->path(
@@ -76,7 +76,7 @@ class PostTypeSwaggerDocumentation implements APISwaggerDocumentation
             }
         );
     }
-    
+
     private function addPathTaxonomy(string $key, Collection $taxonomy, Collection $postType, $document)
     {
         $document->path(
