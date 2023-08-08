@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -19,7 +19,7 @@ class Application extends BaseApplication
         if (! is_null($this->namespace)) {
             return $this->namespace;
         }
-    
+
         return $this->namespace = 'Juzaweb\\Backend\\';
     }
 }

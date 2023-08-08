@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    MIT
@@ -27,11 +27,11 @@ class APIServiceProvider extends ServiceProvider
             ]
         );
     }
-    
+
     public function register()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'api');
-        
+
         $this->app->register(RouteServiceProvider::class);
     }
 }

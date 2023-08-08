@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    GNU General Public License v2.0
@@ -21,15 +21,15 @@ class SwaggerDocumentController extends BackendController
     {
         do_action(Action::API_DOCUMENT_INIT);
     }
-    
+
     public function index(string $document): JsonResponse
     {
         $documentation = $this->hookAction->getAPIDocuments($document);
-        
+
         if (empty($documentation)) {
             abort(404);
         }
-        
+
         return response()->json(
             $documentation,
             200,

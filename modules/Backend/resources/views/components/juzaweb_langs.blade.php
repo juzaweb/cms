@@ -20,7 +20,7 @@ $themes = \Juzaweb\CMS\Facades\Theme::all(true)->map(
     /**
      * JUZAWEB CMS - THE BEST CMS FOR LARAVEL PROJECT
      *
-     * @package    juzaweb/juzacms
+     * @package    juzaweb/cms
      * @link       https://juzaweb.com
      * @license    GNU V2
      */

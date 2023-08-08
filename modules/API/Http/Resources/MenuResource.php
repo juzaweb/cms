@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    GNU General Public License v2.0
@@ -27,7 +27,7 @@ class MenuResource extends JsonResource
                 )
             ]
         );
-        
+
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,

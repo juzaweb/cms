@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -63,9 +63,9 @@ use Juzaweb\CMS\Traits\QueryCache\QueryCacheable;
 class MenuItem extends Model
 {
     use QueryCacheable;
-    
+
     public $timestamps = false;
-    
+
     public string $cachePrefix = 'menu_items_';
 
     protected $table = 'menu_items';
@@ -107,17 +107,17 @@ class MenuItem extends Model
             'Juzaweb\\Models\\Post'
         );
     }
-    
+
     public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(static::class, 'parent_id', 'id');
     }
-    
+
     public function children(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(static::class, 'parent_id', 'id');
     }
-    
+
     public function recursiveChildren(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->children()->with(
@@ -141,7 +141,7 @@ class MenuItem extends Model
     {
         return request()->url() == $this->link;
     }
-    
+
     protected function getCacheBaseTags(): array
     {
         return [

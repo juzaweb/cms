@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -90,17 +90,17 @@ class Config implements ConfigContract
 
         return $config;
     }
-    
+
     public function getConfigs(array $keys, mixed $default = null): array
     {
         $data = [];
         foreach ($keys as $key) {
             $data[$key] = $this->getConfig($key, $default);
         }
-        
+
         return $data;
     }
-    
+
     public function all(): Collection
     {
         return collect($this->configs)->map(
@@ -108,7 +108,7 @@ class Config implements ConfigContract
                 if (is_json($value)) {
                     return json_decode($value, true);
                 }
-        
+
                 return $value;
             }
         );

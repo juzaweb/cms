@@ -31,7 +31,7 @@ jobs:
           coverage: none
       - uses: actions/checkout@v2
       - name: Install Dependencies
-        run: composer create-project --prefer-dist juzaweb/juzacms blog ${{ matrix.version }}
+        run: composer create-project --prefer-dist juzaweb/cms blog ${{ matrix.version }}
       - name: Copy .env
         working-directory: blog
         run: rm .env && cp .env.testing.example .env
