@@ -3,7 +3,7 @@ JUZACMS - Laravel CMS for Your Project
 
 ## About
 ![https://buymeacoffee.com/juzaweb](https://i.imgur.com/toObY8s.png)
-[![Total Downloads](https://img.shields.io/packagist/dt/juzaweb/cms.svg?style=social)](https://packagist.org/packages/juzaweb/cms)
+[![Total Downloads](https://img.shields.io/packagist/dt/juzaweb/juzacms.svg?style=social)](https://packagist.org/packages/juzaweb/cms)
 [![GitHub Repo stars](https://img.shields.io/github/stars/juzaweb/cms?style=social)](https://github.com/juzaweb/cms)
 [![GitHub followers](https://img.shields.io/github/followers/juzaweb?style=social)](https://github.com/juzaweb)
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@juzaweb)
