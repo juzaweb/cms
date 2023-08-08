@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -75,14 +75,14 @@ class Language extends Model
 
         set_config('language', $language->code);
     }
-    
+
     public static function languages(): Collection
     {
         return Language::cacheFor(config('juzaweb.performance.query_cache.lifetime'))
             ->all()
             ->keyBy('code');
     }
-    
+
     public function isDefault(): bool
     {
         return $this->default;

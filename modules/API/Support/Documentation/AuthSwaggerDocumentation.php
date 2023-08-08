@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    GNU General Public License v2.0
@@ -60,11 +60,11 @@ class AuthSwaggerDocumentation implements APISwaggerDocumentation
                         return $method;
                     }
                 );
-                
+
                 return $path;
             }
         );
-        
+
         $document->path(
             'auth/register',
             function (SwaggerPath $path) {
@@ -121,11 +121,11 @@ class AuthSwaggerDocumentation implements APISwaggerDocumentation
                         return $method;
                     }
                 );
-    
+
                 return $path;
             }
         );
-        
+
         return $document;
     }
 }

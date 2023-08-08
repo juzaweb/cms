@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     JuzaWeb Team
  * @link       https://juzaweb.com
  * @license    GNU V2

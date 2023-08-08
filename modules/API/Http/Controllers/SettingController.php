@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    GNU General Public License v2.0
@@ -25,7 +25,7 @@ class SettingController extends ApiController
         protected ConfigContract $configContract
     ) {
     }
-    
+
     public function index(): \Illuminate\Http\JsonResponse
     {
         $showApiKeys = $this->hookAction->getConfigs()->where('show_api', true)->keys()->toArray();
@@ -39,7 +39,7 @@ class SettingController extends ApiController
                 );
             }
         );
-        
+
         /*$taxonomies = $this->hookAction->getTaxonomies()->map(
             function ($item) {
                 dd($item);
@@ -49,7 +49,7 @@ class SettingController extends ApiController
                 );
             }
         );*/
-        
+
         $permalinks = collect($this->hookAction->getPermalinks())->keyBy('base')->map(
             function ($item) {
                 return Arr::only(
@@ -58,12 +58,12 @@ class SettingController extends ApiController
                 );
             }
         );
-        
+
         $register = Arr::only(
             Theme::find(jw_current_theme())->getRegister(),
             ['templates', 'sidebars', 'widgets', 'blocks', 'nav_menus']
         );
-        
+
         return $this->restSuccess(
             [
                 'general' => $configs,

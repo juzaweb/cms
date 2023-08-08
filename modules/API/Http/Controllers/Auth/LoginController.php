@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://juzaweb.com/cms
  * @license    GNU V2
@@ -31,13 +31,13 @@ class LoginController extends ApiController
 
         return $this->respondWithToken($token, $user);
     }
-    
+
     public function profile(Request $request): JsonResponse
     {
         $user = $request->user('api');
-        
+
         $token = $user->token();
-        
+
         return $this->respondWithToken(
             new PersonalAccessTokenResult($request->bearerToken(), $token),
             $user

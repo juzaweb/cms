@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    MIT
@@ -67,7 +67,7 @@ class NotificationDatatable extends DataTable
             case 'viewed':
                 foreach ($ids as $id) {
                     $notify = $this->notificationRepository->find($id);
-                    
+
                     if (empty($notify->read_at)) {
                         $notify->update(['read_at' => now()]);
                     }

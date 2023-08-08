@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - The Best CMS for Laravel Project
  *
- * @package    juzaweb/juzacms
+ * @package    juzaweb/cms
  * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://juzaweb.com
  * @license    MIT
@@ -21,7 +21,7 @@ class SettingController extends ApiController
     public function __construct(protected ConfigContract $config)
     {
     }
-    
+
     /**
      * @OA\Get(
      *      path="/api/admin/setting/configs",
