@@ -14,8 +14,9 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Inertia\Response;
+use Juzaweb\CMS\Exceptions\ThemeNotFoundException;
+use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 use Juzaweb\CMS\Support\LocalThemeRepository;
-use Juzaweb\CMS\Support\Theme;
 
 /**
 * @see LocalThemeRepository
@@ -34,20 +35,20 @@ interface LocalThemeRepositoryContract
      * Find a theme by name.
      *
      * @param string $name The name of the theme to find.
-     * @return Theme|null The theme object if found, null otherwise.
+     * @return ThemeInterface|null The theme object if found, null otherwise.
      */
-    public function find(string $name): ?Theme;
+    public function find(string $name): ?ThemeInterface;
 
     /**
      * Find a specific module, if there return that, otherwise throw exception.
      *
      * @param string $name
      *
-     * @return Theme
+     * @return ThemeInterface
      *
      * @throws ThemeNotFoundException
      */
-    public function findOrFail(string $name): Theme;
+    public function findOrFail(string $name): ThemeInterface;
 
      /**
      * Retrieves all items from the collection.
@@ -60,9 +61,9 @@ interface LocalThemeRepositoryContract
     /**
      * Retrieves the current theme.
      *
-     * @return Theme The current theme.
+     * @return ThemeInterface The current theme.
      */
-    public function currentTheme(): Theme;
+    public function currentTheme(): ThemeInterface;
 
     /**
      * Deletes a theme by name.

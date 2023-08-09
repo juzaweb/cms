@@ -10,6 +10,7 @@
 
 use Juzaweb\DevTool\Http\Controllers\DevToolController;
 use Juzaweb\DevTool\Http\Controllers\PluginController;
+use Juzaweb\DevTool\Http\Controllers\ThemeController;
 
 Route::group(
     ['prefix' => 'dev-tools'],
@@ -27,5 +28,14 @@ Route::group(
         Route::post('make-post-type', [PluginController::class, 'makePostType']);
         Route::post('make-taxonomy', [PluginController::class, 'makeTaxonomy']);
         Route::post('make-crud', [PluginController::class, 'makeCRUD']);
+    }
+);
+
+Route::group(
+    ['prefix' => 'dev-tools/themes/{name}'],
+    function () {
+        Route::get('/', [ThemeController::class, 'index']);
+        Route::post('make-post-type', [ThemeController::class, 'makePostType']);
+        Route::post('make-taxonomy', [ThemeController::class, 'makeTaxonomy']);
     }
 );
