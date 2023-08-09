@@ -75,13 +75,14 @@ export default function TopOptions({moduleSelected}: { moduleSelected?: string }
         </div>
 
         <div className="col-md-4">
-            <select className={'form-control'} onChange={(e) => setSelectedOption(e.target.value)}>
-                <option value="" selected={selectedOption == ''}>{__('--- Options ---')}</option>
+            <select className={'form-control'}
+                    value={selectedOption}
+                    onChange={(e) => setSelectedOption(e.target.value)}>
+                <option value="">{__('--- Options ---')}</option>
                 {configs && configs.options.map((item) => (
                     <option
                         value={item.key}
                         key={item.key}
-                        selected={selectedOption == item.key}
                     >
                         {__(item.label)}
                     </option>

@@ -49,13 +49,24 @@ class ThemeController extends BackendController
         $configs = $this->getThemeConfigs();
 
         return $this->view(
-            'cms::backend.dev-tool.theme.post-type',
+            'cms::backend.dev-tool.theme.make-custom-post-type',
             compact('theme', 'title', 'configs')
         );
     }
 
     protected function getThemeConfigs(): array
     {
-        return [];
+        $configs = config("dev-tool.themes", []);
+
+        $convertToArray = function (array $item, string $key) {
+            $item['key'] = $key;
+            return $item;
+        };
+
+        $configs['options'] = collect($configs['options'])
+            ->map($convertToArray)
+            ->values();
+
+        return $configs;
     }
 }
