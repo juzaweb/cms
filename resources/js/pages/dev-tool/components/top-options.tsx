@@ -3,16 +3,14 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Theme} from "@/types/themes";
 import {Plugin} from "@/types/plugins";
-import {ModuleData} from "@/pages/dev-tool/types/module";
+import {Configs} from "@/pages/dev-tool/types/module";
 import {router, usePage} from "@inertiajs/react";
 
 export default function TopOptions({moduleSelected}: { moduleSelected?: string }) {
-    const {url} = usePage().props;
+    const {url, configs} = usePage<{ url: string, configs: Configs }>().props;
     const [module, setModule] = useState<Theme|Plugin>();
-    const [moduleType, setModuleType] = useState<string>();
     const [themes, setThemes] = useState<Array<Theme>>();
     const [plugins, setPlugins] = useState<Array<Plugin>>();
-    const [moduleData, setModuleData] = useState<ModuleData>();
     const [selectedOption, setSelectedOption] = useState<string>('');
 
     useEffect(() => {
@@ -21,14 +19,6 @@ export default function TopOptions({moduleSelected}: { moduleSelected?: string }
             setPlugins(res.data.plugins);
         });
     }, [url]);
-
-    useEffect(() => {
-        if (module && moduleType) {
-            axios.get(admin_url(`dev-tools/module?module=${module.name}&type=${moduleType}`)).then((res) => {
-                setModuleData(res.data);
-            });
-        }
-    }, [module, moduleType]);
 
     const handleModuleChange = (e: any) => {
         let type = e.target.options[e.target.selectedIndex].getAttribute('data-type')?.toString() || '';
@@ -41,7 +31,7 @@ export default function TopOptions({moduleSelected}: { moduleSelected?: string }
             {replace: true}
         );
 
-        // if (value) {
+        // if (plugins && themes && value) {
         //     setModuleType(type);
         //     if (type === 'plugins') {
         //         setModule(plugins.find((plugin: Plugin) => plugin.name === value));
@@ -87,7 +77,7 @@ export default function TopOptions({moduleSelected}: { moduleSelected?: string }
         <div className="col-md-4">
             <select className={'form-control'} onChange={(e) => setSelectedOption(e.target.value)}>
                 <option value="" selected={selectedOption == ''}>{__('--- Options ---')}</option>
-                {moduleData && moduleData.configs.options.map((item) => (
+                {configs && configs.options.map((item) => (
                     <option
                         value={item.key}
                         key={item.key}

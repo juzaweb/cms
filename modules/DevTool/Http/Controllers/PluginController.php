@@ -39,16 +39,35 @@ class PluginController extends BackendController
     {
         $plugin = $this->findPlugin($vendor, $name);
 
-        $title = $plugin->getName();
+        $title = "Dev tool for plugin: {$plugin->getName()}";
+
+        $configs = $this->getPluginConfigs();
 
         return $this->view(
             'cms::backend.dev-tool.plugin.index',
-            compact('plugin', 'title')
+            compact('plugin', 'title', 'configs')
         );
     }
 
-    public function makePostType(PostTypeRequest $request, string $vendor, string $name): JsonResponse|RedirectResponse
+    public function makePostType(Request $request, string $vendor, string $name): View|Response
     {
+        $plugin = $this->findPlugin($vendor, $name);
+
+        $title = "Dev tool for plugin: {$plugin->getName()}";
+
+        $configs = $this->getPluginConfigs();
+
+        return $this->view(
+            'cms::backend.dev-tool.plugin.index',
+            compact('plugin', 'title', 'configs')
+        );
+    }
+
+    public function handleMakePostType(
+        PostTypeRequest $request,
+        string $vendor,
+        string $name
+    ): JsonResponse|RedirectResponse {
         $plugin = $this->findPlugin($vendor, $name);
 
         $key = Str::plural(Str::slug($request->input('key')));
@@ -113,6 +132,22 @@ class PluginController extends BackendController
                 'output' => $outputBuffer->fetch(),
             ]
         );
+    }
+
+    protected function getPluginConfigs()
+    {
+        $configs = config("dev-tool.plugins", []);
+
+        $convertToArray = function (array $item, string $key) {
+            $item['key'] = $key;
+            return $item;
+        };
+
+        $configs['options'] = collect($configs['options'])
+            ->map($convertToArray)
+            ->values();
+
+        return $configs;
     }
 
     protected function writeRegisterFile(Plugin $plugin, array $register): bool

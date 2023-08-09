@@ -1,4 +1,5 @@
 import TopOptions from "@/pages/dev-tool/components/top-options";
+import Admin from "@/layouts/admin";
 
 export interface IndexProps {
     title: string
@@ -7,7 +8,7 @@ export interface IndexProps {
 export default function Index() {
 
     return (
-        <>
+        <Admin>
             <TopOptions />
 
             <div className="row mt-3">
@@ -19,6 +20,6 @@ export default function Index() {
                     {module && moduleType && selectedOption && <OptionHandle module={module} moduleType={moduleType} selectedOption={selectedOption}/> }
                 </div>*/}
             </div>
-        </>
+        </Admin>
     );
 }

@@ -8,3 +8,7 @@ export interface ModuleData {
         options: Array<ToolOption>
     }
 }
+
+export interface Configs {
+    options: Array<ToolOption>
+}

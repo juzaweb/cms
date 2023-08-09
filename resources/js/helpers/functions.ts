@@ -1,10 +1,10 @@
 import {getSidebar} from "@/helpers/fetch";
 
 export function __(key: string, args = {}): string {
-    let lang = juzaweb.lang[key.replace('cms::app.', '')];
-    if (lang) {
-        return lang;
-    }
+    // let lang = juzaweb.lang[key.replace('cms::app.', '')];
+    // if (lang) {
+    //     return lang;
+    // }
 
     return key;
 }
@@ -22,6 +22,7 @@ export function admin_url(path: string): string {
 }
 
 export function message_in_response(response: any): { status: boolean, message: string } | undefined {
+    // CMS json data
     if (response?.data) {
         if (response.data.message) {
             return {
@@ -31,6 +32,7 @@ export function message_in_response(response: any): { status: boolean, message: 
         }
     }
 
+    // CMS response
     if (response?.data?.data) {
         if (response.data.data.message) {
             return {
