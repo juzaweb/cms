@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Http\Controllers\BackendController;
-use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 
 class ThemeController extends BackendController
 {
@@ -29,7 +28,7 @@ class ThemeController extends BackendController
 
     public function index(Request $request, string $name): View|Response
     {
-        $theme = $this->findTheme($name);
+        $theme = $this->themeRepository->findOrFail($name);
 
         $title = "Dev tool for theme: {$theme->getName()}";
 
@@ -41,9 +40,9 @@ class ThemeController extends BackendController
         );
     }
 
-    public function makePostType(Request $request, string $name)
+    public function makePostType(Request $request, string $name): View|Response
     {
-        $theme = $this->findTheme($vendor, $name);
+        $theme = $this->themeRepository->findOrFail($name);
 
         $title = "Dev tool for theme: {$theme->getName()}";
 
@@ -53,11 +52,6 @@ class ThemeController extends BackendController
             'cms::backend.dev-tool.theme.post-type',
             compact('theme', 'title', 'configs')
         );
-    }
-
-    protected function findTheme(string $name): ThemeInterface
-    {
-        return $this->themeRepository->find($name);
     }
 
     protected function getThemeConfigs(): array
