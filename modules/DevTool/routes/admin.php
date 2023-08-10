@@ -10,6 +10,7 @@
 
 use Juzaweb\DevTool\Http\Controllers\DevToolController;
 use Juzaweb\DevTool\Http\Controllers\PluginController;
+use Juzaweb\DevTool\Http\Controllers\PostTypes\ThemePostTypeController;
 use Juzaweb\DevTool\Http\Controllers\ThemeController;
 
 Route::group(
@@ -35,7 +36,13 @@ Route::group(
     ['prefix' => 'dev-tools/themes/{name}'],
     function () {
         Route::get('/', [ThemeController::class, 'index']);
-        Route::post('make-post-type', [ThemeController::class, 'makePostType']);
+    }
+);
+
+Route::group(
+    ['prefix' => 'dev-tools/themes/{name}/post-types'],
+    function () {
+        Route::resource('/', ThemePostTypeController::class);
         Route::post('make-taxonomy', [ThemeController::class, 'makeTaxonomy']);
     }
 );

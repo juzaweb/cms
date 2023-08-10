@@ -6,10 +6,10 @@ return [
 
     'themes' => [
         'options' => [
-            'make-custom-post-type' => [
+            'post-types/create' => [
                 'label' => 'Make Custom Post Type',
             ],
-            'make-custom-taxonomy' => [
+            'taxonomies/create' => [
                 'label' => 'Make Custom Taxonomy',
             ],
         ]

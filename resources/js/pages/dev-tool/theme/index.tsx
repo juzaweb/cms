@@ -6,7 +6,7 @@ export default function Index({ theme }: { theme: Theme }) {
     return (
         <Admin>
 
-            <TopOptions moduleSelected={theme.name} />
+            <TopOptions moduleSelected={theme.name} moduleType={'themes'} />
 
 
         </Admin>

@@ -4,8 +4,9 @@ import {admin_url, message_in_response} from "@/helpers/functions";
 import {useState} from "react";
 import PostTypeForm from "@/pages/dev-tool/components/plugins/post-type-form";
 import Admin from "@/layouts/admin";
+import TopOptions from "@/pages/dev-tool/components/top-options";
 
-export default function MakeCustomPostType({ theme }: { theme: Theme }) {
+export default function Create({ theme }: { theme: Theme }) {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<{
         status: boolean,
@@ -19,7 +20,7 @@ export default function MakeCustomPostType({ theme }: { theme: Theme }) {
         setButtonLoading(true);
 
         axios.post(
-            admin_url('dev-tools/themes/' + module.name + '/make-post-type'),
+            admin_url('dev-tools/themes/' + theme.name + '/make-post-type'),
             formData
         )
             .then((response) => {
@@ -47,6 +48,8 @@ export default function MakeCustomPostType({ theme }: { theme: Theme }) {
 
     return (
         <Admin>
+            <TopOptions moduleSelected={theme.name} moduleType={'themes'} />
+
             <div className="row">
                 <div className="col-md-12">
                     <h5>Make Custom Post Type</h5>

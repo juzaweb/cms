@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Http\Controllers;
+namespace Juzaweb\DevTool\Http\Controllers\PostTypes;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
-class ThemeController extends BackendController
+class ThemePostTypeController extends BackendController
 {
     protected string $template = 'inertia';
 
@@ -26,7 +26,7 @@ class ThemeController extends BackendController
         //
     }
 
-    public function index(Request $request, string $name): View|Response
+    public function create(Request $request, string $name): View|Response
     {
         $theme = $this->themeRepository->findOrFail($name);
 
@@ -35,7 +35,7 @@ class ThemeController extends BackendController
         $configs = $this->getThemeConfigs();
 
         return $this->view(
-            'cms::backend.dev-tool.theme.index',
+            'cms::backend.dev-tool.theme.post-type.create',
             compact('theme', 'title', 'configs')
         );
     }

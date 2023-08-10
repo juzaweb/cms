@@ -4,6 +4,7 @@ import axios from "axios";
 import {admin_url, message_in_response} from "@/helpers/functions";
 import {useState} from "react";
 import TaxonomyForm from "@/pages/dev-tool/components/plugins/taxonomy-form";
+import Admin from "@/layouts/admin";
 
 export default function MakeCustomTaxonomy({ module }: { module: Theme | Plugin }) {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
@@ -51,22 +52,24 @@ export default function MakeCustomTaxonomy({ module }: { module: Theme | Plugin 
     }
 
     return (
-        <div className="row">
-            <div className="col-md-12">
-                <h5>Make Custom Taxonomy</h5>
+        <Admin>
+            <div className="row">
+                <div className="col-md-12">
+                    <h5>Make Custom Taxonomy</h5>
 
-                {message && (
-                    <div className={`alert alert-${message.status ? 'success' : 'danger' } jw-message`}>
-                        {message.message}
-                    </div>
-                )}
+                    {message && (
+                        <div className={`alert alert-${message.status ? 'success' : 'danger' } jw-message`}>
+                            {message.message}
+                        </div>
+                    )}
 
-                <form method={'POST'} onSubmit={handleMakeCustomPostType}>
+                    <form method={'POST'} onSubmit={handleMakeCustomPostType}>
 
-                    <TaxonomyForm buttonLoading={buttonLoading} />
+                        <TaxonomyForm buttonLoading={buttonLoading} />
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </Admin>
     );
 }

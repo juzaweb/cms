@@ -6,9 +6,8 @@ import {Plugin} from "@/types/plugins";
 import {Configs} from "@/pages/dev-tool/types/module";
 import {router, usePage} from "@inertiajs/react";
 
-export default function TopOptions({moduleSelected}: { moduleSelected?: string }) {
+export default function TopOptions({moduleSelected, moduleType}: { moduleSelected?: string, moduleType?: string }) {
     const {url, configs} = usePage<{ url: string, configs: Configs }>().props;
-    const [module, setModule] = useState<Theme|Plugin>();
     const [themes, setThemes] = useState<Array<Theme>>();
     const [plugins, setPlugins] = useState<Array<Plugin>>();
     const [selectedOption, setSelectedOption] = useState<string>('');
@@ -26,23 +25,17 @@ export default function TopOptions({moduleSelected}: { moduleSelected?: string }
         setSelectedOption('');
         localStorage.setItem('current_module', value);
 
-        router.visit(
-            admin_url(`dev-tools/${type}/${value}`),
-            {replace: true}
-        );
+        router.visit(admin_url(`dev-tools/${type}/${value}`), {replace: true});
+    }
 
-        // if (plugins && themes && value) {
-        //     setModuleType(type);
-        //     if (type === 'plugins') {
-        //         setModule(plugins.find((plugin: Plugin) => plugin.name === value));
-        //     } else {
-        //         setModule(themes.find((theme: Theme) => theme.name === value));
-        //     }
-        // } else {
-        //     setModule(undefined);
-        //     setModuleType(undefined);
-        //     setModuleData(undefined);
-        // }
+    const handleOptionChange = (e: any) => {
+        e.preventDefault();
+
+        setSelectedOption(e.target.value);
+
+        localStorage.setItem('current_option', e.target.value);
+
+        router.visit(admin_url(`dev-tools/${moduleType}/${moduleSelected}/${e.target.value}`),)
     }
 
     return <div className={'row'}>
@@ -77,7 +70,7 @@ export default function TopOptions({moduleSelected}: { moduleSelected?: string }
         <div className="col-md-4">
             <select className={'form-control'}
                     value={selectedOption}
-                    onChange={(e) => setSelectedOption(e.target.value)}>
+                    onChange={handleOptionChange}>
                 <option value="">{__('--- Options ---')}</option>
                 {configs && configs.options.map((item) => (
                     <option
