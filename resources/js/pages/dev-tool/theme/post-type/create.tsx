@@ -48,7 +48,11 @@ export default function Create({ theme }: { theme: Theme }) {
 
     return (
         <Admin>
-            <TopOptions moduleSelected={theme.name} moduleType={'themes'} />
+            <TopOptions
+                moduleSelected={theme.name}
+                moduleType={'themes'}
+                selectedOption={'post-types/create'}
+            />
 
             <div className="row">
                 <div className="col-md-12">

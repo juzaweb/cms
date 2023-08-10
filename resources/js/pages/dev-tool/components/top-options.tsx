@@ -6,11 +6,19 @@ import {Plugin} from "@/types/plugins";
 import {Configs} from "@/pages/dev-tool/types/module";
 import {router, usePage} from "@inertiajs/react";
 
-export default function TopOptions({moduleSelected, moduleType}: { moduleSelected?: string, moduleType?: string }) {
+export default function TopOptions(
+    {
+        moduleSelected,
+        moduleType,
+        selectedOption
+    }: {
+        moduleSelected?: string,
+        moduleType?: string,
+        selectedOption?: string
+    }) {
     const {url, configs} = usePage<{ url: string, configs: Configs }>().props;
     const [themes, setThemes] = useState<Array<Theme>>();
     const [plugins, setPlugins] = useState<Array<Plugin>>();
-    const [selectedOption, setSelectedOption] = useState<string>('');
 
     useEffect(() => {
         axios.get(admin_url(`dev-tools/modules`)).then((res) => {
@@ -22,7 +30,6 @@ export default function TopOptions({moduleSelected, moduleType}: { moduleSelecte
     const handleModuleChange = (e: any) => {
         let type = e.target.options[e.target.selectedIndex].getAttribute('data-type')?.toString() || '';
         let value = e.target.value;
-        setSelectedOption('');
         localStorage.setItem('current_module', value);
 
         router.visit(admin_url(`dev-tools/${type}/${value}`), {replace: true});
@@ -30,8 +37,6 @@ export default function TopOptions({moduleSelected, moduleType}: { moduleSelecte
 
     const handleOptionChange = (e: any) => {
         e.preventDefault();
-
-        setSelectedOption(e.target.value);
 
         localStorage.setItem('current_option', e.target.value);
 
