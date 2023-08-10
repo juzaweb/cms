@@ -11,6 +11,7 @@
 use Juzaweb\DevTool\Http\Controllers\DevToolController;
 use Juzaweb\DevTool\Http\Controllers\PluginController;
 use Juzaweb\DevTool\Http\Controllers\PostTypes\ThemePostTypeController;
+use Juzaweb\DevTool\Http\Controllers\PostTypes\ThemeTaxonomyController;
 use Juzaweb\DevTool\Http\Controllers\ThemeController;
 
 Route::group(
@@ -43,6 +44,12 @@ Route::group(
     ['prefix' => 'dev-tools/themes/{name}/post-types'],
     function () {
         Route::resource('/', ThemePostTypeController::class);
-        Route::post('make-taxonomy', [ThemeController::class, 'makeTaxonomy']);
+    }
+);
+
+Route::group(
+    ['prefix' => 'dev-tools/themes/{name}/taxonomies'],
+    function () {
+        Route::resource('/', ThemeTaxonomyController::class);
     }
 );

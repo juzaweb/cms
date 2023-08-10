@@ -43,7 +43,7 @@ export default function TopOptions(
         router.visit(admin_url(`dev-tools/${moduleType}/${moduleSelected}/${e.target.value}`),)
     }
 
-    return <div className={'row'}>
+    return <div className={'row mb-3'}>
         <div className={'col-md-4'}>
             <select
                 className={'form-control'}

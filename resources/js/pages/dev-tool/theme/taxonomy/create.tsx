@@ -1,12 +1,12 @@
-import {Plugin} from "@/types/plugins";
 import {Theme} from "@/types/themes";
 import axios from "axios";
 import {admin_url, message_in_response} from "@/helpers/functions";
 import {useState} from "react";
 import TaxonomyForm from "@/pages/dev-tool/components/plugins/taxonomy-form";
 import Admin from "@/layouts/admin";
+import TopOptions from "@/pages/dev-tool/components/top-options";
 
-export default function MakeCustomTaxonomy({ module }: { module: Theme | Plugin }) {
+export default function Create({ theme }: { theme: Theme }) {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<{
         status: boolean,
@@ -20,7 +20,7 @@ export default function MakeCustomTaxonomy({ module }: { module: Theme | Plugin 
         setButtonLoading(true);
 
         axios.post(
-            admin_url('dev-tools/plugin/' + module.name + '/make-taxonomy'),
+            admin_url('dev-tools/themes/' + theme.name + '/taxonomies'),
             formData,
             {
                 headers: {
@@ -53,6 +53,12 @@ export default function MakeCustomTaxonomy({ module }: { module: Theme | Plugin 
 
     return (
         <Admin>
+            <TopOptions
+                moduleSelected={theme.name}
+                moduleType={'themes'}
+                selectedOption={'taxonomies/create'}
+            />
+
             <div className="row">
                 <div className="col-md-12">
                     <h5>Make Custom Taxonomy</h5>

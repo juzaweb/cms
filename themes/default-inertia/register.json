@@ -69,5 +69,16 @@
             "name": "footer_logo",
             "label": "Footer Logo"
         }
-    ]
+    ],
+    "taxonomies": {
+        "custom-taxonomies": {
+            "key": "Custom Taxonomy",
+            "label": "Custom Taxonomy",
+            "post_types": [
+                "pages"
+            ],
+            "show_in_menu": 1,
+            "menu_position": "20"
+        }
+    }
 }

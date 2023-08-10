@@ -47,7 +47,7 @@ trait GetHookAction
 
         $taxonomies = collect(GlobalData::get('taxonomies'));
 
-        if (empty($taxonomies) || empty($postType)) {
+        if ($taxonomies === null || empty($postType)) {
             return $taxonomies;
         }
 

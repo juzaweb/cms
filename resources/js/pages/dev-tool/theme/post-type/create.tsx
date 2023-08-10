@@ -54,7 +54,7 @@ export default function Create({ theme }: { theme: Theme }) {
                 selectedOption={'post-types/create'}
             />
 
-            <div className="row mt-3">
+            <div className="row">
                 <div className="col-md-12">
                     <h5>Make Custom Post Type</h5>
 
