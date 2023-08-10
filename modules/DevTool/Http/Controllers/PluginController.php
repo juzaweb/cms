@@ -158,17 +158,6 @@ class PluginController extends BackendController
         );
     }
 
-    protected function getPluginRegister(Plugin $plugin): array
-    {
-        $register = '[]';
-
-        if (File::exists($plugin->getPath('register.json'))) {
-            $register = File::get($plugin->getPath('register.json'));
-        }
-
-        return json_decode($register, true, 512, JSON_THROW_ON_ERROR);
-    }
-
     protected function findPlugin(string $vendor, string $name): Plugin
     {
         $plugin = $this->pluginRepository->find("{$vendor}/{$name}");

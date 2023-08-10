@@ -20,7 +20,7 @@ export default function Create({ theme }: { theme: Theme }) {
         setButtonLoading(true);
 
         axios.post(
-            admin_url('dev-tools/themes/' + theme.name + '/make-post-type'),
+            admin_url(`dev-tools/themes/${theme.name}/post-types`),
             formData
         )
             .then((response) => {
@@ -54,7 +54,7 @@ export default function Create({ theme }: { theme: Theme }) {
                 selectedOption={'post-types/create'}
             />
 
-            <div className="row">
+            <div className="row mt-3">
                 <div className="col-md-12">
                     <h5>Make Custom Post Type</h5>
 

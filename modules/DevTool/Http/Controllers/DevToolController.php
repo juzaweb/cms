@@ -16,9 +16,8 @@ use Illuminate\Http\Request;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Http\Controllers\BackendController;
 
-class DevToolController extends BackendController
+class DevToolController extends Controller
 {
     protected string $template = 'inertia';
 
@@ -49,7 +48,7 @@ class DevToolController extends BackendController
 
     public function getModule(Request $request): JsonResponse
     {
-        $module = $request->input('module');
+        //$module = $request->input('module');
         $type = $request->input('type');
 
         $configs = config("dev-tool.{$type}");
