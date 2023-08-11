@@ -14,45 +14,50 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
-use Juzaweb\CMS\Http\Controllers\BackendController;
 
-class ThemeController extends BackendController
+class ThemeController extends Controller
 {
-    protected string $template = 'inertia';
-
     public function __construct(
         protected LocalThemeRepositoryContract $themeRepository
     ) {
         //
     }
 
-    public function index(Request $request, string $name): View|Response
+    public function index(Request $request): View|Response
     {
+        $title = "Dev tool for themes";
+
+        $configs = $this->getConfigs('themes');
+
+        return $this->view(
+            'cms::backend.dev-tool.theme.index',
+            compact('title', 'configs')
+        );
+    }
+
+    public function edit(Request $request, string $name): View|Response
+    {
+        die;
         $theme = $this->themeRepository->findOrFail($name);
 
         $title = "Dev tool for theme: {$theme->getName()}";
 
-        $configs = $this->getThemeConfigs();
+        $configs = $this->getConfigs('themes');
 
         return $this->view(
-            'cms::backend.dev-tool.theme.index',
+            'cms::backend.dev-tool.theme.edit',
             compact('theme', 'title', 'configs')
         );
     }
 
-    protected function getThemeConfigs(): array
+    public function create()
     {
-        $configs = config("dev-tool.themes", []);
+        $title = "Make new themes";
+        $configs = $this->getConfigs('themes');
 
-        $convertToArray = function (array $item, string $key) {
-            $item['key'] = $key;
-            return $item;
-        };
-
-        $configs['options'] = collect($configs['options'])
-            ->map($convertToArray)
-            ->values();
-
-        return $configs;
+        return $this->view(
+            'cms::backend.dev-tool.theme.create',
+            compact('configs', 'title')
+        );
     }
 }

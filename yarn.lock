@@ -1440,29 +1440,6 @@
     nprogress "^0.2.0"
     qs "^6.9.0"
 
-"@inertiajs/inertia-react@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@inertiajs/inertia-react/-/inertia-react-0.8.1.tgz#730e1f592086c8e97e21e3f4ed639cb952bcfd77"
-  integrity sha512-9Uu7t4EA9FrcREwWnOU/qW5i4hYFt+uFn5cqP6RGJo8lJS4u8t6Q9358oHuQUKbFEbaIjUu7aslCL3/Istctlg==
-  dependencies:
-    lodash.isequal "^4.5.0"
-
-"@inertiajs/inertia@^0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@inertiajs/inertia/-/inertia-0.11.1.tgz#f324f09a03e1dd944404bd09935c0141a4b3a85d"
-  integrity sha512-btmV53c54oW4Z9XF0YyTdIUnM7ue0ONy3/KJOz6J1C5CYIwimiKfDMpz8ZbGJuxS+SPdOlNsqj2ZhlHslpJRZg==
-  dependencies:
-    axios "^0.21.1"
-    deepmerge "^4.0.0"
-    qs "^6.9.0"
-
-"@inertiajs/progress@^0.2.7":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@inertiajs/progress/-/progress-0.2.7.tgz#b42ac849b6f227fe8a45a91d663719c5bd362131"
-  integrity sha512-zxadfLlBPIUvTE9g5k71V/Ayzo8P9kEp4hV4UKywCC2kURufxV7bycbZqU1GeMCFGDT+VRrjXNl676Pwwa1HoQ==
-  dependencies:
-    nprogress "^0.2.0"
-
 "@inertiajs/react@^1.0.9":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@inertiajs/react/-/react-1.0.9.tgz#ca707cbf5c4315be3419a8b2fd2fa4e9d1062847"
@@ -1470,11 +1447,6 @@
   dependencies:
     "@inertiajs/core" "1.0.9"
     lodash.isequal "^4.5.0"
-
-"@inertiajs/server@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@inertiajs/server/-/server-0.1.0.tgz#bc48738b1c1c1f806bee6c9e9ea827cd03521e16"
-  integrity sha512-Ab1DqaRgW53nZq3sPN1AitHPJ1UoHiTRLbdGGgrswO6HhTYu6m7aewY80+YtiL1VEWGJfOumeNPqhnY+3/414w==
 
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
@@ -2841,7 +2813,7 @@ autoprefixer@^10.4.12:
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
 
-axios@0.21.4, axios@^0.21.1:
+axios@0.21.4:
   version "0.21.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==

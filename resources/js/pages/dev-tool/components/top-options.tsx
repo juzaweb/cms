@@ -4,7 +4,7 @@ import axios from "axios";
 import {Theme} from "@/types/themes";
 import {Plugin} from "@/types/plugins";
 import {Configs} from "@/pages/dev-tool/types/module";
-import {router, usePage} from "@inertiajs/react";
+import {Link, router, usePage} from "@inertiajs/react";
 
 export default function TopOptions(
     {
@@ -87,5 +87,22 @@ export default function TopOptions(
                 ))}
             </select>
         </div>
-    </div>;
+
+        <div className="col-md-4">
+            <div className="dropdown">
+                <button className="btn btn-info dropdown-toggle"
+                        type="button"
+                        id="dropdownMakeButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                >
+                    Make
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMakeButton">
+                    <Link className="dropdown-item" href={admin_url(`dev-tools/themes/create`)}>{__('Make New Theme')}</Link>
+                </div>
+            </div>
+        </div>
+    </div>
 }

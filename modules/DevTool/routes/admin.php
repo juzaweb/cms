@@ -34,9 +34,10 @@ Route::group(
 );
 
 Route::group(
-    ['prefix' => 'dev-tools/themes/{name}'],
+    ['prefix' => 'dev-tools/themes'],
     function () {
-        Route::get('/', [ThemeController::class, 'index']);
+        Route::resource('/', ThemeController::class)
+            ->only(['index', 'edit', 'create', 'destroy']);
     }
 );
 

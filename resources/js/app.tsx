@@ -9,7 +9,7 @@ axios.interceptors.request.use((config) => {
 });
 
 createInertiaApp({
-    title: (title) => `${title}`,
+    title: (title) => title,
     resolve: (name) => resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob('./pages/**/*.tsx')),
     setup({ el, App, props }) {
         const root = createRoot(el);
