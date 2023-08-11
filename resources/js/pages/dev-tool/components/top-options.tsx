@@ -97,7 +97,7 @@ export default function TopOptions(
                         aria-haspopup="true"
                         aria-expanded="false"
                 >
-                    Make
+                    New Module
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMakeButton">
                     <Link className="dropdown-item" href={admin_url(`dev-tools/themes/create`)}>{__('Make New Theme')}</Link>

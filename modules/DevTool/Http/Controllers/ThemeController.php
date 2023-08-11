@@ -11,9 +11,14 @@
 namespace Juzaweb\DevTool\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\DevTool\Http\Requests\Theme\StoreRequest;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class ThemeController extends Controller
 {
@@ -50,7 +55,7 @@ class ThemeController extends Controller
         );
     }
 
-    public function create()
+    public function create(): View|Response
     {
         $title = "Make new themes";
         $configs = $this->getConfigs('themes');
@@ -58,6 +63,34 @@ class ThemeController extends Controller
         return $this->view(
             'cms::backend.dev-tool.theme.create',
             compact('configs', 'title')
+        );
+    }
+
+    public function store(StoreRequest $request): JsonResponse|RedirectResponse
+    {
+        $outputBuffer = new BufferedOutput();
+
+        try {
+            Artisan::call(
+                'theme:make',
+                [
+                    'name' => $request->input('name'),
+                    'title' => $request->input('title'),
+                    'description' => $request->input('description'),
+                    'author' => $request->input('author'),
+                    'version' => $request->input('version'),
+                ],
+                $outputBuffer
+            );
+        } catch (\Throwable $e) {
+            return $this->error($e->getMessage());
+        }
+
+        return $this->success(
+            [
+                'message' => 'New theme created successfully!',
+                'output' => $outputBuffer->fetch(),
+            ]
         );
     }
 }

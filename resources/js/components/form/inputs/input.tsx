@@ -7,6 +7,7 @@ export interface InputProps {
     class?: string;
     placeholder?: string;
     required?: boolean;
+    description?: string;
 }
 
 export default function Input(props: InputProps = {type: 'text', required: false, class: ''}) {
@@ -29,6 +30,10 @@ export default function Input(props: InputProps = {type: 'text', required: false
                 placeholder={props.placeholder}
                 required={props.required}
             />
+
+            {props.description && (
+                <small className="form-text text-muted">{props.description}</small>
+            )}
         </div>
     );
 }

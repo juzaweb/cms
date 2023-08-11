@@ -7,6 +7,7 @@ export interface TextareaProps {
     placeholder?: string;
     required?: boolean;
     rows?: number;
+    description?: string;
 }
 
 const TextareaDefaults: TextareaProps = {
@@ -30,7 +31,13 @@ export default function Textarea(props: TextareaProps) {
                 id={props.id}
                 autoComplete="off"
                 rows={props.rows}
-                placeholder={props.placeholder}>{props.value}</textarea>
+                placeholder={props.placeholder}
+                defaultValue={props.value}
+            ></textarea>
+
+            {props.description && (
+                <small className="form-text text-muted">{props.description}</small>
+            )}
         </div>
     );
 }

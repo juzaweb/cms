@@ -13,7 +13,7 @@ export default function Button(props: ButtonProps) {
         <button
             type={props.type || 'button'}
             id={props.id}
-            className={`btn ${props.class || 'btn-primary'}`}
+            className={`btn btn-primary ${props.class}`}
             disabled={props.loading}
         >
             {/*{props.loading ? (<>

@@ -4,6 +4,8 @@ import {useState} from "react";
 import Button from "@/components/form/buttons/button";
 import Input from "@/components/form/inputs/input";
 import Textarea from "@/components/form/inputs/textarea";
+import axios from "axios";
+import {admin_url} from "@/helpers/functions";
 
 export default function Create() {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
@@ -11,10 +13,18 @@ export default function Create() {
         status: boolean,
         message: string
     }>();
+    const [outputBuffer, setOutputBuffer] = useState<string>();
 
     const handleMakeTheme = (e: any ) => {
         e.preventDefault();
 
+        setButtonLoading(true);
+
+        axios.post(admin_url(`/dev-tools/themes`), {}).then((res) => {
+            setButtonLoading(false);
+            setMessage(res.data);
+            setOutputBuffer(res.data.data.output);
+        });
     }
 
     return (
@@ -32,19 +42,44 @@ export default function Create() {
                         </div>
                     )}
 
+                    {outputBuffer && (
+                        <pre>{outputBuffer}</pre>
+                    )}
+
                     <form method={'POST'} onSubmit={handleMakeTheme}>
 
-                        <Input name="name" label={'Name'} required={true}/>
+                        <Input
+                            name="name"
+                            label={'Name'}
+                            required={true}
+                            description={'Theme name must be unique, only characters a-z 0-9 and -.'}
+                        />
 
-                        <Input name="title" label={'Title'} required={true}/>
+                        <Input
+                            name="title"
+                            label={'Title'}
+                            required={true}
+                            description={'Title display for the theme.'}
+                        />
 
-                        <Textarea name="description" label={'Description'} rows={3} />
+                        <Textarea
+                            name="description"
+                            label={'Description'}
+                            rows={3}
+                            description={'Some description for your theme.'}
+                        />
 
-                        <Input name="author" label={'Author'}/>
+                        <div className="row">
+                            <div className="col-md-3">
+                                <Input name="author" label={'Author'} required={true}/>
+                            </div>
 
-                        <Input name="version" label={'Version'} required={true} value={'1.0'}/>
+                            <div className="col-md-3">
+                                <Input name="version" label={'Version'} required={true} value={'1.0'}/>
+                            </div>
+                        </div>
 
-                        <Button label={'Create Theme'} type={'submit'} loading={buttonLoading}/>
+                        <Button label={'Create Theme'} type={'submit'} class={'mt-3'} loading={buttonLoading}/>
 
                     </form>
                 </div>
