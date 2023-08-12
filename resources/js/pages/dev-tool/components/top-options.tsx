@@ -32,7 +32,7 @@ export default function TopOptions(
         let value = e.target.value;
         localStorage.setItem('current_module', value);
 
-        router.visit(admin_url(`dev-tools/${type}/${value}`), {replace: true});
+        router.visit(admin_url(`dev-tools/${type}/${value}/edit`), {replace: true});
     }
 
     const handleOptionChange = (e: any) => {

@@ -16,7 +16,7 @@ class ThemeGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $name = 'theme:make {name}';
+    protected $name = 'theme:make';
 
     /**
      * The console command description.
@@ -104,7 +104,7 @@ class ThemeGeneratorCommand extends Command
         $this->theme['description'] = $this->option('description')
             ?? Str::ucfirst($this->theme['name']).' description';
         $this->theme['author'] = $this->option('author');
-        $this->theme['version'] = $this->option('version');
+        $this->theme['version'] = $this->option('ver');
         $this->theme['parent'] = '';
     }
 
@@ -214,7 +214,7 @@ class ThemeGeneratorCommand extends Command
             ['title', null, InputOption::VALUE_OPTIONAL, 'Theme Title'],
             ['description', null, InputOption::VALUE_OPTIONAL, 'Theme Description'],
             ['author', null, InputOption::VALUE_OPTIONAL, 'Theme Author', 'Author Name'],
-            ['version', null, InputOption::VALUE_OPTIONAL, 'Theme Version', '1.0'],
+            ['ver', null, InputOption::VALUE_OPTIONAL, 'Theme Version', '1.0'],
         ];
     }
 }

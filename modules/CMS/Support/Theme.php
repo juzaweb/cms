@@ -136,7 +136,7 @@ class Theme implements ThemeInterface, Arrayable
 
         $configPath = $this->path . '/theme.json';
 
-        $changelogPath = $this->path . '/changelog.yml';
+        // $changelogPath = $this->path . '/changelog.yml';
 
         $config = [];
 
@@ -144,7 +144,7 @@ class Theme implements ThemeInterface, Arrayable
             $config = ReadConfig::load($configPath)->all();
         }
 
-        $config['changelog'] = ReadConfig::load($changelogPath)->all();
+        // $config['changelog'] = ReadConfig::load($changelogPath)->all();
 
         $config['screenshot'] = $this->getScreenshot();
 

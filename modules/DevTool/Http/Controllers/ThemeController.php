@@ -42,7 +42,6 @@ class ThemeController extends Controller
 
     public function edit(Request $request, string $name): View|Response
     {
-        die;
         $theme = $this->themeRepository->findOrFail($name);
 
         $title = "Dev tool for theme: {$theme->getName()}";
@@ -58,11 +57,10 @@ class ThemeController extends Controller
     public function create(): View|Response
     {
         $title = "Make new themes";
-        $configs = $this->getConfigs('themes');
 
         return $this->view(
             'cms::backend.dev-tool.theme.create',
-            compact('configs', 'title')
+            compact('title')
         );
     }
 
@@ -75,10 +73,10 @@ class ThemeController extends Controller
                 'theme:make',
                 [
                     'name' => $request->input('name'),
-                    'title' => $request->input('title'),
-                    'description' => $request->input('description'),
-                    'author' => $request->input('author'),
-                    'version' => $request->input('version'),
+                    '--title' => $request->input('title'),
+                    '--description' => $request->input('description'),
+                    '--author' => $request->input('author'),
+                    '--ver' => $request->input('version'),
                 ],
                 $outputBuffer
             );

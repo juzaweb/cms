@@ -21,7 +21,8 @@ export function admin_url(path: string): string {
     return '/admin-cp/' + path;
 }
 
-export function message_in_response(response: any): { status: boolean, message: string } | undefined {
+export function message_in_response(response: any): { status: boolean, message: string, errors?: Array<string> } | undefined {
+    console.log(response?.response);
     // CMS json data
     if (response?.data) {
         if (response.data.message) {
@@ -38,6 +39,24 @@ export function message_in_response(response: any): { status: boolean, message: 
             return {
                 status: response.data.status,
                 message: response.data.data.message
+            };
+        }
+    }
+
+
+    // Get message validate error axios
+    if (response?.response) {
+        if (response.response.data.errors) {
+            let message = '';
+            $.each(response.response.data.errors, function (index, msg) {
+                message = msg[0];
+                return false;
+            });
+
+            return {
+                status: false,
+                message: message,
+                errors: response.response.data.errors
             };
         }
     }

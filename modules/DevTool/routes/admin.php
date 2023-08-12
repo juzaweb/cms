@@ -36,8 +36,15 @@ Route::group(
 Route::group(
     ['prefix' => 'dev-tools/themes'],
     function () {
-        Route::resource('/', ThemeController::class)
-            ->only(['index', 'edit', 'create', 'destroy']);
+        // Route::resource('/', ThemeController::class)
+        //     ->only(['index', 'edit', 'create', 'destroy']);
+
+        Route::get('/', [ThemeController::class, 'index']);
+        Route::get('create', [ThemeController::class, 'create']);
+        Route::post('/', [ThemeController::class, 'store']);
+        Route::get('{name}/edit', [ThemeController::class, 'edit']);
+        Route::put('{name}', [ThemeController::class, 'update']);
+        Route::delete('{name}', [ThemeController::class, 'destroy']);
     }
 );
 

@@ -5,7 +5,7 @@ import Button from "@/components/form/buttons/button";
 import Input from "@/components/form/inputs/input";
 import Textarea from "@/components/form/inputs/textarea";
 import axios from "axios";
-import {admin_url} from "@/helpers/functions";
+import {admin_url, message_in_response} from "@/helpers/functions";
 
 export default function Create() {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
@@ -15,15 +15,23 @@ export default function Create() {
     }>();
     const [outputBuffer, setOutputBuffer] = useState<string>();
 
-    const handleMakeTheme = (e: any ) => {
+    const handleMakeTheme = (e: any) => {
         e.preventDefault();
 
         setButtonLoading(true);
 
-        axios.post(admin_url(`/dev-tools/themes`), {}).then((res) => {
+        setOutputBuffer(undefined);
+        setMessage(undefined);
+
+        let formData: FormData = new FormData(e.target);
+
+        axios.post(admin_url(`dev-tools/themes`), formData).then((res) => {
             setButtonLoading(false);
-            setMessage(res.data);
+            setMessage(message_in_response(res));
             setOutputBuffer(res.data.data.output);
+        }).catch((err) => {
+            setButtonLoading(false);
+            setMessage(message_in_response(err));
         });
     }
 
@@ -37,7 +45,7 @@ export default function Create() {
                 <div className="col-md-12">
 
                     {message && (
-                        <div className={`alert alert-${message.status ? 'success' : 'danger' } jw-message`}>
+                        <div className={`alert alert-${message.status ? 'success' : 'danger'} jw-message`}>
                             {message.message}
                         </div>
                     )}
