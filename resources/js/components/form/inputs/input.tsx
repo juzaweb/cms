@@ -8,6 +8,7 @@ export interface InputProps {
     placeholder?: string;
     required?: boolean;
     description?: string;
+    onBlur?: (e: any) => void;
 }
 
 export default function Input(props: InputProps = {type: 'text', required: false, class: ''}) {
@@ -29,6 +30,7 @@ export default function Input(props: InputProps = {type: 'text', required: false
                 autoComplete="off"
                 placeholder={props.placeholder}
                 required={props.required}
+                onBlur={props.onBlur}
             />
 
             {props.description && (

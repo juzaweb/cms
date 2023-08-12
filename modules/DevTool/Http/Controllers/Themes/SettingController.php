@@ -11,6 +11,8 @@
 namespace Juzaweb\DevTool\Http\Controllers\Themes;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -40,7 +42,7 @@ class SettingController extends Controller
         );
     }
 
-    public function update(Request $request, string $themeName)
+    public function update(Request $request, string $themeName): JsonResponse|RedirectResponse
     {
         $theme = $this->themeRepository->findOrFail($themeName);
 

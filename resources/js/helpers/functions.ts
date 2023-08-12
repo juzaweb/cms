@@ -22,9 +22,14 @@ export function admin_url(path: string): string {
 }
 
 export function convert_to_label_field(str: string): string {
+    str = str.replace('-', '_');
     return str.split('_').map((word: string) => {
         return word.charAt(0).toUpperCase() + word.slice(1);
     }).join(' ');
+}
+
+export function convert_to_slug(str: string): string {
+    return str.toLowerCase().replace(/[^a-z0-9\-]/ig, '-');
 }
 
 export function convert_to_name_field(str: string): string {
