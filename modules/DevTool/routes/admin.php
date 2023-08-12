@@ -56,7 +56,9 @@ Route::group(
 Route::group(
     ['prefix' => 'dev-tools/themes/{name}/taxonomies'],
     function () {
-        Route::resource('/', Themes\TaxonomyController::class);
+        // Route::resource('/', Themes\TaxonomyController::class);
+        Route::get('create', [Themes\TaxonomyController::class, 'create']);
+        Route::post('/', [Themes\TaxonomyController::class, 'store']);
     }
 );
 
