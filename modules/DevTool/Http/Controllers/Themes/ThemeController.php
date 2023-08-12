@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Http\Controllers;
+namespace Juzaweb\DevTool\Http\Controllers\Themes;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
+use Juzaweb\DevTool\Http\Controllers\Controller;
 use Juzaweb\DevTool\Http\Requests\Theme\StoreRequest;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -92,7 +93,7 @@ class ThemeController extends Controller
 
         return $this->success(
             [
-                'message' => 'New theme created successfully!',
+                'message' => "Theme {$name} created successfully!",
                 'output' => $outputBuffer->fetch(),
             ]
         );

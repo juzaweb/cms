@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Http\Controllers\PostTypes;
+namespace Juzaweb\DevTool\Http\Controllers\Themes;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -22,7 +22,7 @@ use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\DevTool\Http\Controllers\Controller;
 use Juzaweb\DevTool\Http\Requests\PostTypeRequest;
 
-class ThemePostTypeController extends Controller
+class PostTypeController extends Controller
 {
     public function __construct(
         protected LocalThemeRepositoryContract $themeRepository,

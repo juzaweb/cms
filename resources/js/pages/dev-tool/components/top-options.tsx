@@ -30,17 +30,30 @@ export default function TopOptions(
     const handleModuleChange = (e: any) => {
         let type = e.target.options[e.target.selectedIndex].getAttribute('data-type')?.toString() || '';
         let value = e.target.value;
+
         localStorage.setItem('current_module', value);
 
-        router.visit(admin_url(`dev-tools/${type}/${value}/edit`), {replace: true});
+        if (value) {
+            router.visit(
+                admin_url(`dev-tools/${type}/${value}/edit`),
+                {replace: true}
+            );
+        }
     }
 
     const handleOptionChange = (e: any) => {
         e.preventDefault();
 
-        localStorage.setItem('current_option', e.target.value);
+        let selected = e.target.value;
 
-        router.visit(admin_url(`dev-tools/${moduleType}/${moduleSelected}/${e.target.value}`),)
+        localStorage.setItem('current_option', selected);
+
+        if (selected) {
+            router.visit(
+                admin_url(`dev-tools/${moduleType}/${moduleSelected}/${e.target.value}`),
+                {replace: true}
+            );
+        }
     }
 
     return <div className={'row mb-3'}>
@@ -74,7 +87,7 @@ export default function TopOptions(
 
         <div className="col-md-4">
             <select className={'form-control'}
-                    value={selectedOption}
+                    defaultValue={selectedOption}
                     onChange={handleOptionChange}>
                 <option value="">{__('--- Options ---')}</option>
                 {configs && configs.options.map((item) => (
@@ -100,7 +113,8 @@ export default function TopOptions(
                     New Module
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMakeButton">
-                    <Link className="dropdown-item" href={admin_url(`dev-tools/themes/create`)}>{__('Make New Theme')}</Link>
+                    <Link className="dropdown-item"
+                          href={admin_url(`dev-tools/themes/create`)}>{__('Make New Theme')}</Link>
                 </div>
             </div>
         </div>

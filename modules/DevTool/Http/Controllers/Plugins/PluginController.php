@@ -8,7 +8,7 @@
  * @license    GNU V2
  */
 
-namespace Juzaweb\DevTool\Http\Controllers;
+namespace Juzaweb\DevTool\Http\Controllers\Plugins;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -20,15 +20,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
-use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Support\Plugin;
+use Juzaweb\DevTool\Http\Controllers\Controller;
 use Juzaweb\DevTool\Http\Requests\PostTypeRequest;
 use Symfony\Component\Console\Output\BufferedOutput;
 
-class PluginController extends BackendController
+class PluginController extends Controller
 {
-    protected string $template = 'inertia';
-
     public function __construct(
         protected LocalPluginRepositoryContract $pluginRepository
     ) {

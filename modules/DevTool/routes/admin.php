@@ -9,10 +9,10 @@
  */
 
 use Juzaweb\DevTool\Http\Controllers\DevToolController;
-use Juzaweb\DevTool\Http\Controllers\PluginController;
-use Juzaweb\DevTool\Http\Controllers\PostTypes\ThemePostTypeController;
-use Juzaweb\DevTool\Http\Controllers\PostTypes\ThemeTaxonomyController;
-use Juzaweb\DevTool\Http\Controllers\ThemeController;
+use Juzaweb\DevTool\Http\Controllers\Plugins\PluginController;
+use Juzaweb\DevTool\Http\Controllers\Themes\PostTypeController;
+use Juzaweb\DevTool\Http\Controllers\Themes\TaxonomyController;
+use Juzaweb\DevTool\Http\Controllers\Themes\ThemeController;
 
 Route::group(
     ['prefix' => 'dev-tools'],
@@ -51,13 +51,13 @@ Route::group(
 Route::group(
     ['prefix' => 'dev-tools/themes/{name}/post-types'],
     function () {
-        Route::resource('/', ThemePostTypeController::class);
+        Route::resource('/', PostTypeController::class);
     }
 );
 
 Route::group(
     ['prefix' => 'dev-tools/themes/{name}/taxonomies'],
     function () {
-        Route::resource('/', ThemeTaxonomyController::class);
+        Route::resource('/', TaxonomyController::class);
     }
 );
