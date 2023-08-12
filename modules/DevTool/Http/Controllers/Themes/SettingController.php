@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
+use Juzaweb\CMS\Models\ThemeConfig;
 use Juzaweb\DevTool\Http\Controllers\Controller;
 
 class SettingController extends Controller
@@ -63,14 +64,27 @@ class SettingController extends Controller
 
     protected function getSettingFields(ThemeInterface $theme): array
     {
-        return collect($theme->getRegister('configs'))
+        $collection = collect($theme->getRegister('configs'))
             ->map(
                 function ($item, $key) {
                     if (!is_numeric($key)) {
                         $item['name'] = $key;
                     }
+
+                    return $item;
+                }
+            );
+
+        $settings = ThemeConfig::where('theme', $theme->getName())
+            ->whereIn('code', $collection->pluck('name')->toArray())
+            ->get()
+            ->keyBy('code');
+
+        return $collection
+            ->map(
+                function ($item) use ($settings) {
                     // Cannot be edit name filed added
-                    $item['nameReadonly'] = true;
+                    $item['nameReadonly'] = $settings->has($item['name']);
                     return $item;
                 }
             )

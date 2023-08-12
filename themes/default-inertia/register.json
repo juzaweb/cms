@@ -71,6 +71,10 @@
         "test_config_2": {
             "label": "Test Config 2",
             "type": "textarea"
+        },
+        "cxvxcv": {
+            "label": "Cxvxcv",
+            "type": "text"
         }
     },
     "taxonomies": {
