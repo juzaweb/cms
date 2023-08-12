@@ -7,6 +7,7 @@ export interface Theme {
 export interface PageTempate {
     name: string
     label: string
+    view: string
     blocks?: Array<{
         name: string
         label: string

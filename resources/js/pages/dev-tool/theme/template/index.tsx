@@ -20,10 +20,12 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
         message: string
     }>();
     const [labels, setLabels] = useState<Array<string>>([]);
+    const [views, setViews] = useState<Array<string>>([]);
 
     const settingDefaults: SettingField = {
         name: '',
         label: '',
+        view: '',
     }
 
     const handleAddSetting = (e: any) => {
@@ -47,6 +49,7 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
         // Set label to the input
         e.target.value = name;
         setLabels({...labels, [index]: label});
+        setViews({...views, [index]: `theme::templates.${name}`});
 
         if (!customeSettings[index+1]) {
             setCustomSettings([...customeSettings, settingDefaults]);
@@ -98,6 +101,7 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
                                 <tr>
                                     <th style={{width: '20%'}}>Template</th>
                                     <th style={{width: '25%'}}>Lable</th>
+                                    <th style={{width: '20%'}}>View</th>
                                     <th>Blocks</th>
                                     <th>Actions</th>
                                 </tr>
@@ -127,6 +131,15 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
                                         </td>
 
                                         <td>
+                                            <input
+                                                type="text"
+                                                className={'form-control'}
+                                                name={`settings[${index}][view]`}
+                                                defaultValue={views[index] || setting.view}
+                                            />
+                                        </td>
+
+                                        <td>
                                             <BlockItem setting={setting} index={index} />
                                         </td>
 
@@ -137,8 +150,6 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
                                                 <i className={'fa fa-trash'}></i> {__('Remove')}
                                             </a>
                                         </td>
-
-
                                     </tr>
 
                                 </>

@@ -24,6 +24,10 @@
         "contact": {
             "label": "Contact",
             "view": "theme::templates.contact"
+        },
+        "game": {
+            "label": "Game",
+            "view": "theme::templates.game"
         }
     },
     "sidebars": {
