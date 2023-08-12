@@ -21,6 +21,16 @@ export function admin_url(path: string): string {
     return '/admin-cp/' + path;
 }
 
+export function convert_to_label_field(str: string): string {
+    return str.split('_').map((word: string) => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+}
+
+export function convert_to_name_field(str: string): string {
+    return str.toLowerCase().replace(/[^a-z0-9\-]/ig, '_');
+}
+
 export function message_in_response(response: any): { status: boolean, message: string, errors?: Array<string> } | undefined {
     // console.log(response);
     // CMS json data

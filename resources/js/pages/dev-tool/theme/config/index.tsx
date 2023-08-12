@@ -2,9 +2,9 @@ import Admin from "@/layouts/admin";
 import TopOptions from "@/pages/dev-tool/components/top-options";
 import {Theme} from "@/types/themes";
 import Button from "@/components/form/buttons/button";
-import {InputField} from "@/types/fields";
+import {InputField, InputFieldTypes} from "@/types/fields";
 import {useState} from "react";
-import {__, admin_url, message_in_response} from "@/helpers/functions";
+import {__, admin_url, convert_to_label_field, convert_to_name_field, message_in_response} from "@/helpers/functions";
 import SuccessButton from "@/components/form/buttons/success-button";
 import axios from "axios";
 
@@ -41,15 +41,12 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
             return;
         }
 
-        let name = e.target.value;
         // Format name to be [a-z0-9\-]
-        e.target.value = name.toLowerCase().replace(/[^a-z0-9\-]/ig, '_');
-
-        let label = name.split('_').map((word: string) => {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        }).join(' ');
+        let name = convert_to_name_field(e.target.value);
+        let label = convert_to_label_field(name);
 
         // Set label to the input
+        e.target.value = name;
         setLabels({...labels, [index]: label});
     }
 
@@ -132,6 +129,9 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
                                             className={'form-control'}
                                             defaultValue={setting.type}
                                         >
+                                            {Object.keys(InputFieldTypes).map((type, index) => (
+                                                <option key={index} value={type}>{InputFieldTypes[type]}</option>
+                                            ))}
                                             <option value="text">Text</option>
                                             <option value="textarea">Textarea</option>
                                             <option value="number">Number</option>
