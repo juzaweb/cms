@@ -4,9 +4,9 @@ export interface ButtonProps {
     label?: string
     class?: string
     loading?: boolean
-    onClick?: any
     disabled?: boolean
     color?: string
+    onClick?: (e: any) => void
 }
 
 export default function Button(props: ButtonProps) {

@@ -67,3 +67,11 @@ Route::group(
         Route::put('/', [Themes\SettingController::class, 'update']);
     }
 );
+
+Route::group(
+    ['prefix' => 'dev-tools/themes/{name}/templates'],
+    function () {
+        Route::get('/', [Themes\TemplateController::class, 'index']);
+        Route::put('/', [Themes\TemplateController::class, 'update']);
+    }
+);

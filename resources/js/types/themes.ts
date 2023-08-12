@@ -3,3 +3,12 @@ export interface Theme {
     title: string
     description: string
 }
+
+export interface PageTempate {
+    name: string
+    label: string
+    blocks?: Array<{
+        name: string
+        label: string
+    }>
+}

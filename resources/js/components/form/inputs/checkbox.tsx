@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import {indexOf} from "lodash";
 
 export interface CheckboxProps {
     name?: string;
@@ -11,19 +12,38 @@ export interface CheckboxProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function Checkbox(props: CheckboxProps = {required: false, class: ''}) {
+export default function Checkbox(props: CheckboxProps) {
+    const [defaultValue, setDefaultValue] = useState<string|number|undefined>(props.value || (props.checked ? 1 : 0));
+    const isBoolValue = indexOf([0, 1, '0', '1'], defaultValue) !== -1;
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (props.onChange) {
+            props.onChange(e);
+        }
+
+        if (e.target.checked) {
+            setDefaultValue(1);
+        } else {
+            setDefaultValue(0);
+        }
+    }
+
     return (
         <div className="form-group">
             <label className="jw__utils__control jw__utils__control__checkbox" htmlFor={props.id}>
+                {isBoolValue && (
+                    <input type="hidden" name={props.name} defaultValue={defaultValue} />
+                )}
+
                 <input
                     type="checkbox"
-                    name={props.name}
                     className={`form-control ${props.class || ''}`}
+                    name={isBoolValue ? undefined : props.name}
                     id={props.id}
-                    value={props.value || '1'}
+                    defaultValue={defaultValue}
                     autoComplete="off"
                     defaultChecked={props.checked || false}
-                    onChange={props.onChange}
+                    onChange={handleChange}
                 />
 
                 <span className="jw__utils__control__indicator"></span>

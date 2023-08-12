@@ -15,6 +15,9 @@ return [
             'settings' => [
                 'label' => 'Make Theme Setting',
             ],
+            'templates' => [
+                'label' => 'Make Page Template',
+            ],
         ]
     ],
 
