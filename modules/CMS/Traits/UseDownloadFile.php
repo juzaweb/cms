@@ -4,6 +4,9 @@ namespace Juzaweb\CMS\Traits;
 
 use Illuminate\Support\Str;
 
+/**
+ * @deprecated
+ */
 trait UseDownloadFile
 {
     protected function downloadFileUrl($url, $filename)
@@ -29,7 +32,7 @@ trait UseDownloadFile
             return false;
         }
 
-        while (! feof($handle)) {
+        while (!feof($handle)) {
             $buffer = fread($handle, 1048576);
             file_put_contents($filename, $buffer, FILE_APPEND);
             @ob_flush();
@@ -37,7 +40,7 @@ trait UseDownloadFile
 
             $cnt += strlen($buffer);
 
-            echo "Chunk download: " . round($cnt / 1048576, 2) . " MB \n";
+            echo "Chunk download: ".round($cnt / 1048576, 2)." MB \n";
         }
 
         $status = fclose($handle);
@@ -74,7 +77,7 @@ trait UseDownloadFile
 
     protected function generateFileName($url)
     {
-        return Str::random(10) .'_'. date('H-i-s') . '.' . $this->getFileExtension($url);
+        return Str::random(10).'_'.date('H-i-s').'.'.$this->getFileExtension($url);
     }
 
     protected function getFileExtension($url)

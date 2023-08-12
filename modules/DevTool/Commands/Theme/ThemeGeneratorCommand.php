@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class ThemeGeneratorCommand extends Command
 {
@@ -14,7 +16,7 @@ class ThemeGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'theme:make {name}';
+    protected $name = 'theme:make';
 
     /**
      * The console command description.
@@ -35,14 +37,14 @@ class ThemeGeneratorCommand extends Command
      *
      * @var array
      */
-    protected $theme;
+    protected array $theme;
 
     /**
      * Created Theme Structure.
      *
      * @var array
      */
-    protected $themeFolders;
+    protected array $themeFolders;
 
     /**
      * Theme Stubs.
@@ -51,7 +53,7 @@ class ThemeGeneratorCommand extends Command
      */
     protected string $themeStubPath;
 
-    public function handle()
+    public function handle(): void
     {
         $this->themePath = config('juzaweb.theme.path');
         $this->themeFolders = config('theme.stubs.folders');
@@ -64,13 +66,14 @@ class ThemeGeneratorCommand extends Command
      * Theme Initialize.
      *
      * @return void
+     * @throws FileNotFoundException
      */
     protected function init(): void
     {
-        $createdThemePath = $this->themePath . '/' . $this->theme['name'];
+        $createdThemePath = $this->themePath.'/'.$this->theme['name'];
 
         if (File::isDirectory($createdThemePath)) {
-            $this->error('Sorry Boss '. ucfirst($this->theme['name']) .' Theme Folder Already Exist !!!');
+            $this->error('Sorry Boss '.ucfirst($this->theme['name']).' Theme Folder Already Exist !!!');
             exit();
         }
 
@@ -78,7 +81,7 @@ class ThemeGeneratorCommand extends Command
 
         $themeStubFiles = config('theme.stubs.files');
         $themeStubFiles['theme'] = 'theme.json';
-        $themeStubFiles['changelog'] = 'changelog.yml';
+        $themeStubFiles['changelog'] = 'changelog.md';
         $this->makeDir($createdThemePath);
 
         foreach ($this->themeFolders as $key => $folder) {
@@ -97,23 +100,24 @@ class ThemeGeneratorCommand extends Command
      */
     public function generateThemeInfo(): void
     {
-        $this->theme['title'] = Str::ucfirst($this->theme['name']);
-        $this->theme['description'] = Str::ucfirst($this->theme['name']) . ' description';
-        $this->theme['author'] = 'Author Name';
-        $this->theme['version'] = '1.0';
+        $this->theme['title'] = $this->option('title') ?? Str::ucfirst($this->theme['name']);
+        $this->theme['description'] = $this->option('description')
+            ?? Str::ucfirst($this->theme['name']).' description';
+        $this->theme['author'] = $this->option('author');
+        $this->theme['version'] = $this->option('ver');
         $this->theme['parent'] = '';
     }
 
     /**
      * Make directory.
      *
-     * @param string $directory
+     * @param  string  $directory
      *
      * @return void
      */
     protected function makeDir(string $directory): void
     {
-        if (! File::isDirectory($directory)) {
+        if (!File::isDirectory($directory)) {
             File::makeDirectory($directory, 0755, true);
         }
     }
@@ -121,20 +125,21 @@ class ThemeGeneratorCommand extends Command
     /**
      * Create theme stubs.
      *
-     * @param array $themeStubFiles
-     * @param string $createdThemePath
+     * @param  array  $themeStubFiles
+     * @param  string  $createdThemePath
+     * @throws FileNotFoundException
      */
-    public function createStubs($themeStubFiles, $createdThemePath)
+    public function createStubs($themeStubFiles, $createdThemePath): void
     {
         foreach ($themeStubFiles as $filename => $storePath) {
             if ($filename == 'changelog') {
-                $filename = 'changelog' . pathinfo($storePath, PATHINFO_EXTENSION);
+                $filename = 'changelog'.pathinfo($storePath, PATHINFO_EXTENSION);
             } elseif ($filename == 'theme') {
                 $filename = pathinfo($storePath, PATHINFO_EXTENSION);
             } elseif ($filename == 'css' || $filename == 'js') {
                 $this->theme[$filename] = ltrim(
                     $storePath,
-                    rtrim('assets', '/') . '/'
+                    rtrim('assets', '/').'/'
                 );
             }
 
@@ -146,12 +151,13 @@ class ThemeGeneratorCommand extends Command
     /**
      * Make file.
      *
-     * @param string $file
-     * @param string $storePath
+     * @param  string  $file
+     * @param  string  $storePath
      *
      * @return void
+     * @throws FileNotFoundException
      */
-    protected function makeFile($file, $storePath)
+    protected function makeFile($file, $storePath): void
     {
         if (File::exists($file)) {
             $content = $this->replaceStubs(File::get($file));
@@ -162,11 +168,11 @@ class ThemeGeneratorCommand extends Command
     /**
      * Replace Stub string.
      *
-     * @param string $contents
+     * @param  string  $contents
      *
      * @return string
      */
-    protected function replaceStubs($contents)
+    protected function replaceStubs($contents): string
     {
         $mainString = [
             '[NAME]',
@@ -192,6 +198,23 @@ class ThemeGeneratorCommand extends Command
 
     protected function getThemeStubPath(): string
     {
-        return __DIR__ . '/../../stubs/theme';
+        return __DIR__.'/../../stubs/theme';
+    }
+
+    protected function getArguments(): array
+    {
+        return [
+            ['name', InputArgument::REQUIRED, 'Theme Name'],
+        ];
+    }
+
+    protected function getOptions(): array
+    {
+        return [
+            ['title', null, InputOption::VALUE_OPTIONAL, 'Theme Title'],
+            ['description', null, InputOption::VALUE_OPTIONAL, 'Theme Description'],
+            ['author', null, InputOption::VALUE_OPTIONAL, 'Theme Author', 'Author Name'],
+            ['ver', null, InputOption::VALUE_OPTIONAL, 'Theme Version', '1.0'],
+        ];
     }
 }

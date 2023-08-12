@@ -4,6 +4,7 @@ namespace Juzaweb\CMS\Support;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
@@ -15,7 +16,7 @@ use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
 use Noodlehaus\Config as ReadConfig;
 use Juzaweb\CMS\Facades\Config;
 
-class Theme implements ThemeInterface
+class Theme implements ThemeInterface, Arrayable
 {
     /**
      * The laravel|lumen application instance.
@@ -125,9 +126,9 @@ class Theme implements ThemeInterface
      * Get particular theme all information.
      *
      * @param bool $assoc
-     * @return array|Collection|null
+     * @return array|Collection
      */
-    public function getInfo(bool $assoc = false): null|array|Collection
+    public function getInfo(bool $assoc = false): array|Collection
     {
         if (isset($this->themeInfo)) {
             return $assoc ? $this->themeInfo : new Collection($this->themeInfo);
@@ -135,15 +136,15 @@ class Theme implements ThemeInterface
 
         $configPath = $this->path . '/theme.json';
 
-        $changelogPath = $this->path . '/changelog.yml';
+        // $changelogPath = $this->path . '/changelog.yml';
 
-        if (!file_exists($configPath)) {
-            return null;
+        $config = [];
+
+        if (file_exists($configPath)) {
+            $config = ReadConfig::load($configPath)->all();
         }
 
-        $config = ReadConfig::load($configPath)->all();
-
-        $config['changelog'] = ReadConfig::load($changelogPath)->all();
+        // $config['changelog'] = ReadConfig::load($changelogPath)->all();
 
         $config['screenshot'] = $this->getScreenshot();
 
@@ -163,10 +164,8 @@ class Theme implements ThemeInterface
     {
         $path = $this->getPath('register.json');
 
-        if (!isset($this->register) && file_exists($path)) {
-            $this->register = json_decode(file_get_contents($path), true);
-        } else {
-            $this->register = [];
+        if (!isset($this->register) && File::exists($path)) {
+            $this->register = json_decode(File::get($path), true, 512, JSON_THROW_ON_ERROR);
         }
 
         if ($key) {
@@ -285,5 +284,10 @@ class Theme implements ThemeInterface
     public function getPluginRequires(): array
     {
         return $this->json()->get('require', []);
+    }
+
+    public function toArray(): array
+    {
+        return $this->getInfo()->toArray();
     }
 }

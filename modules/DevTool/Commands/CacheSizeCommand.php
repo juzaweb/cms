@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\File;
 
 class CacheSizeCommand extends Command
 {
-    protected $name = 'juza:cache-size';
+    protected $name = 'cache:size';
 
     public function handle(): void
     {

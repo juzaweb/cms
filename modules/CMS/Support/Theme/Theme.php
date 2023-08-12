@@ -137,11 +137,11 @@ class Theme implements ThemeLoaderContract
     {
         $themePath = $this->getPath($theme);
         $themeConfigPath = $themePath . '/theme.json';
-        $themeChangelogPath = $themePath . '/changelog.yml';
+        // $themeChangelogPath = $themePath . '/changelog.yml';
 
         if (file_exists($themeConfigPath)) {
             $themeConfig = Config::load($themeConfigPath);
-            $themeConfig['changelog'] = Config::load($themeChangelogPath)->all();
+            // $themeConfig['changelog'] = Config::load($themeChangelogPath)->all();
             $themeConfig['path'] = $themePath;
             $themeConfig['screenshot'] = $this->getScreenshot($theme);
 

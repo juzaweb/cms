@@ -18,13 +18,6 @@ use Juzaweb\DevTool\Commands\Plugin\JobMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\ListCommand;
 use Juzaweb\DevTool\Commands\Plugin\ListenerMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\MiddlewareMakeCommand;
-use Juzaweb\DevTool\Commands\Plugin\Migration\LaravelModulesV6Migrator;
-use Juzaweb\DevTool\Commands\Plugin\Migration\MigrateCommand;
-use Juzaweb\DevTool\Commands\Plugin\Migration\MigrateRefreshCommand;
-use Juzaweb\DevTool\Commands\Plugin\Migration\MigrateResetCommand;
-use Juzaweb\DevTool\Commands\Plugin\Migration\MigrateRollbackCommand;
-use Juzaweb\DevTool\Commands\Plugin\Migration\MigrateStatusCommand;
-use Juzaweb\DevTool\Commands\Plugin\Migration\MigrationMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\ModelMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\ModuleDeleteCommand;
 use Juzaweb\DevTool\Commands\Plugin\ModuleMakeCommand;
@@ -35,8 +28,6 @@ use Juzaweb\DevTool\Commands\Plugin\ResourceMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\RouteProviderMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\RuleMakeCommand;
 use Juzaweb\DevTool\Commands\Plugin\SeedCommand;
-use Juzaweb\DevTool\Commands\Plugin\Translation\ImportTranslationCommand;
-use Juzaweb\DevTool\Commands\Plugin\Translation\TranslateViaGoogleCommand;
 use Juzaweb\DevTool\Commands\Resource;
 use Juzaweb\DevTool\Commands\Theme;
 
@@ -65,18 +56,17 @@ class ConsoleServiceProvider extends ServiceProvider
         //PolicyMakeCommand::class,
         RequestMakeCommand::class,
         RuleMakeCommand::class,
-        MigrateCommand::class,
-        MigrateRefreshCommand::class,
-        MigrateResetCommand::class,
-        MigrateRollbackCommand::class,
-        MigrateStatusCommand::class,
-        MigrationMakeCommand::class,
+        Plugin\Migration\MigrateCommand::class,
+        Plugin\Migration\MigrateRefreshCommand::class,
+        Plugin\Migration\MigrateResetCommand::class,
+        Plugin\Migration\MigrateRollbackCommand::class,
+        Plugin\Migration\MigrateStatusCommand::class,
+        Plugin\Migration\MigrationMakeCommand::class,
         ModelMakeCommand::class,
         SeedCommand::class,
         Plugin\SeedMakeCommand::class,
         ResourceMakeCommand::class,
         Plugin\TestMakeCommand::class,
-        LaravelModulesV6Migrator::class,
         Theme\ThemeGeneratorCommand::class,
         Theme\ThemeListCommand::class,
         ActionMakeCommand::class,
@@ -90,8 +80,8 @@ class ConsoleServiceProvider extends ServiceProvider
         Theme\ThemeUpdateCommand::class,
         Theme\MakeBlockCommand::class,
         CacheSizeCommand::class,
-        ImportTranslationCommand::class,
-        TranslateViaGoogleCommand::class,
+        Plugin\Translation\ImportTranslationCommand::class,
+        Plugin\Translation\TranslateViaGoogleCommand::class,
         Plugin\Translation\ExportTranslationCommand::class,
         Plugin\RepositoryMakeCommand::class,
         Theme\ExportTranslationCommand::class,
@@ -107,6 +97,12 @@ class ConsoleServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->commands($this->commands);
+
+        // Register UI & router dev-tools
+        if (is_dev_tool_enable()) {
+            $this->app->register(UIServiceProvider::class);
+            $this->app->register(RouteServiceProvider::class);
+        }
     }
 
     /**

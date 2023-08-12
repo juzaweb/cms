@@ -63,11 +63,21 @@
             "label": "Footer links menu"
         }
     },
-    "configs": [
-        {
-            "type": "image",
-            "name": "footer_logo",
-            "label": "Footer Logo"
+    "configs": {
+        "footer_logo": {
+            "label": "Footer Logo",
+            "type": "image"
         }
-    ]
+    },
+    "taxonomies": {
+        "custom-taxonomies": {
+            "key": "Custom Taxonomy",
+            "label": "Custom Taxonomy",
+            "post_types": [
+                "pages"
+            ],
+            "show_in_menu": 1,
+            "menu_position": "20"
+        }
+    }
 }

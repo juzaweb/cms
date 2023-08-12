@@ -4,6 +4,7 @@ namespace Juzaweb\CMS\Support;
 
 use Composer\Autoload\ClassLoader;
 use Illuminate\Cache\CacheManager;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
@@ -21,7 +22,7 @@ use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 use Noodlehaus\Config as ReadConfig;
 
-class Plugin
+class Plugin implements Arrayable
 {
     use Macroable;
 
@@ -164,15 +165,15 @@ class Plugin
         return $this;
     }
 
-    public function getInfo(bool $assoc = false): null|array|Collection
+    public function getInfo(bool $assoc = false): array|Collection
     {
         $configPath = $this->path . '/composer.json';
 
-        if (!file_exists($configPath)) {
-            return null;
-        }
+        $config = [];
 
-        $config = ReadConfig::load($configPath)->all();
+        if (file_exists($configPath)) {
+            $config = ReadConfig::load($configPath)->all();
+        }
 
         $config['screenshot'] = $this->getScreenshot();
 
@@ -604,6 +605,11 @@ class Plugin
     public function isVisible(): bool
     {
         return (bool) $this->getExtraJuzaweb('visible', true);
+    }
+
+    public function toArray(): array
+    {
+        return $this->getInfo()->toArray();
     }
 
     /**

@@ -41,7 +41,7 @@ class InstallCommand extends Command
         }
 
         $this->info('-- Create user admin');
-        $this->call('juzacms:make-admin');
+        $this->call('cms:make-admin');
 
         $this->info('-- Update installed');
         $fileManager->update();
