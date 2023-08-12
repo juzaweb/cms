@@ -48,7 +48,28 @@ class SettingController extends Controller
 
         $register = $this->getThemeRegister($theme);
 
-        $register['configs'] = collect($request->input('settings'))
+        $settings = $this->collectInputData($request->input('settings', []));
+
+        // Merge current data
+        foreach ($settings as $key => $item) {
+            $register['configs'][$key] = array_merge($register['configs'][$key] ?? [], $item);
+        }
+
+        // Delete unused
+        foreach ($register['configs'] as $key => $item) {
+            if (!isset($settings[$key])) {
+                unset($register['configs'][$key]);
+            }
+        }
+
+        File::put($theme->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+
+        return $this->success('Theme Settings updated.');
+    }
+
+    protected function collectInputData(array $settings): array
+    {
+        return collect($settings)
             ->mapWithKeys(
                 function ($item) {
                     $name = Str::slug($item['name'], '_');
@@ -58,10 +79,6 @@ class SettingController extends Controller
             )
             ->filter(fn ($item, $key) => !empty($key))
             ->toArray();
-
-        File::put($theme->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
-
-        return $this->success('Theme Settings updated.');
     }
 
     protected function getSettingFields(ThemeInterface $theme): array
