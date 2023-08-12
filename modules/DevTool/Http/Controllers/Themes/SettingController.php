@@ -12,6 +12,8 @@ namespace Juzaweb\DevTool\Http\Controllers\Themes;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
@@ -41,15 +43,34 @@ class SettingController extends Controller
     {
         $theme = $this->themeRepository->findOrFail($themeName);
 
+        $register = $this->getThemeRegister($theme);
 
+        $register['configs'] = collect($request->input('settings'))
+            ->mapWithKeys(
+                function ($item) {
+                    $name = Str::slug($item['name'], '_');
+                    unset($item['name']);
+                    return [$name => $item];
+                }
+            )
+            ->filter(fn ($item, $key) => !empty($key))
+            ->toArray();
+
+        File::put($theme->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+
+        return $this->success('Theme Settings updated.');
     }
 
     protected function getSettingFields(ThemeInterface $theme): array
     {
-        return collect($theme->getRegister('setting_fields'))
+        return collect($theme->getRegister('configs'))
             ->map(
                 function ($item, $key) {
-                    $item['key'] = $key;
+                    if (!is_numeric($key)) {
+                        $item['name'] = $key;
+                    }
+                    // Cannot be edit name filed added
+                    $item['nameReadonly'] = true;
                     return $item;
                 }
             )

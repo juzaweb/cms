@@ -224,9 +224,13 @@ class ThemeAction extends Action
 
     public function settingFields(): void
     {
-        $fields = $this->getRegister('setting_fields');
+        $fields = $this->getRegister('configs');
 
         foreach ($fields as $key => $field) {
+            if (is_numeric($key)) {
+                $key = $field['name'];
+            }
+
             HookAction::registerThemeSetting(
                 $key,
                 Arr::get($field, 'label'),

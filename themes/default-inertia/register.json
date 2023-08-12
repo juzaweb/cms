@@ -63,13 +63,16 @@
             "label": "Footer links menu"
         }
     },
-    "configs": [
-        {
-            "type": "image",
-            "name": "footer_logo",
-            "label": "Footer Logo"
+    "configs": {
+        "footer_logo": {
+            "label": "Footer Logo",
+            "type": "image"
+        },
+        "test_config_2": {
+            "label": "Test Config 2",
+            "type": "textarea"
         }
-    ],
+    },
     "taxonomies": {
         "custom-taxonomies": {
             "key": "Custom Taxonomy",

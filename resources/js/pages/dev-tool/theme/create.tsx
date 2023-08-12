@@ -27,7 +27,6 @@ export default function Create() {
 
         axios.post(admin_url(`dev-tools/themes`), formData).then((res) => {
             let result = message_in_response(res);
-
             setButtonLoading(false);
             setMessage(result);
             setOutputBuffer(res.data.data.output);

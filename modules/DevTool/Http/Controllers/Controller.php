@@ -21,13 +21,7 @@ class Controller extends BackendController
 
     protected function getThemeRegister(ThemeInterface $theme): array
     {
-        $register = '[]';
-
-        if (File::exists($theme->getPath('register.json'))) {
-            $register = File::get($theme->getPath('register.json'));
-        }
-
-        return json_decode($register, true, 512, JSON_THROW_ON_ERROR);
+        return $theme->getRegister();
     }
 
     protected function getPluginRegister(Plugin $plugin): array

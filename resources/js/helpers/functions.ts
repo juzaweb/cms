@@ -22,7 +22,7 @@ export function admin_url(path: string): string {
 }
 
 export function message_in_response(response: any): { status: boolean, message: string, errors?: Array<string> } | undefined {
-    console.log(response?.response);
+    // console.log(response);
     // CMS json data
     if (response?.data) {
         if (response.data.message) {
@@ -58,6 +58,11 @@ export function message_in_response(response: any): { status: boolean, message: 
                 message: message,
                 errors: response.response.data.errors
             };
+        }
+
+        return {
+            status: false,
+            message: response.response.data.message
         }
     }
 

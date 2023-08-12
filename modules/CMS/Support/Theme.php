@@ -166,8 +166,6 @@ class Theme implements ThemeInterface, Arrayable
 
         if (!isset($this->register) && File::exists($path)) {
             $this->register = json_decode(File::get($path), true, 512, JSON_THROW_ON_ERROR);
-        } else {
-            $this->register = [];
         }
 
         if ($key) {
