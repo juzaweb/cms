@@ -96,7 +96,7 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
                         <table className={'table table-hover'}>
                             <thead>
                                 <tr>
-                                    <th>Config</th>
+                                    <th style={{width: '20%'}}>Config</th>
                                     <th>Lable</th>
                                     <th>Type</th>
                                     <th>Actions</th>
