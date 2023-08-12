@@ -10,9 +10,7 @@
 
 use Juzaweb\DevTool\Http\Controllers\DevToolController;
 use Juzaweb\DevTool\Http\Controllers\Plugins\PluginController;
-use Juzaweb\DevTool\Http\Controllers\Themes\PostTypeController;
-use Juzaweb\DevTool\Http\Controllers\Themes\TaxonomyController;
-use Juzaweb\DevTool\Http\Controllers\Themes\ThemeController;
+use Juzaweb\DevTool\Http\Controllers\Themes;
 
 Route::group(
     ['prefix' => 'dev-tools'],
@@ -39,25 +37,33 @@ Route::group(
         // Route::resource('/', ThemeController::class)
         //     ->only(['index', 'edit', 'create', 'destroy']);
 
-        Route::get('/', [ThemeController::class, 'index']);
-        Route::get('create', [ThemeController::class, 'create']);
-        Route::post('/', [ThemeController::class, 'store']);
-        Route::get('{name}/edit', [ThemeController::class, 'edit']);
-        Route::put('{name}', [ThemeController::class, 'update']);
-        Route::delete('{name}', [ThemeController::class, 'destroy']);
+        Route::get('/', [Themes\ThemeController::class, 'index']);
+        Route::get('create', [Themes\ThemeController::class, 'create']);
+        Route::post('/', [Themes\ThemeController::class, 'store']);
+        Route::get('{name}/edit', [Themes\ThemeController::class, 'edit']);
+        Route::put('{name}', [Themes\ThemeController::class, 'update']);
+        Route::delete('{name}', [Themes\ThemeController::class, 'destroy']);
     }
 );
 
 Route::group(
     ['prefix' => 'dev-tools/themes/{name}/post-types'],
     function () {
-        Route::resource('/', PostTypeController::class);
+        Route::resource('/', Themes\PostTypeController::class);
     }
 );
 
 Route::group(
     ['prefix' => 'dev-tools/themes/{name}/taxonomies'],
     function () {
-        Route::resource('/', TaxonomyController::class);
+        Route::resource('/', Themes\TaxonomyController::class);
+    }
+);
+
+Route::group(
+    ['prefix' => 'dev-tools/themes/{name}/settings'],
+    function () {
+        Route::get('/', [Themes\SettingController::class, 'index']);
+        Route::put('/', [Themes\SettingController::class, 'update']);
     }
 );

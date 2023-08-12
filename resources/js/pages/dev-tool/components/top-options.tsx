@@ -10,11 +10,11 @@ export default function TopOptions(
     {
         moduleSelected,
         moduleType,
-        selectedOption
+        optionSelected
     }: {
         moduleSelected?: string,
         moduleType?: string,
-        selectedOption?: string
+        optionSelected?: string
     }) {
     const {url, configs} = usePage<{ url: string, configs: Configs }>().props;
     const [themes, setThemes] = useState<Array<Theme>>();
@@ -87,7 +87,7 @@ export default function TopOptions(
 
         <div className="col-md-4">
             <select className={'form-control'}
-                    defaultValue={selectedOption}
+                    defaultValue={optionSelected}
                     onChange={handleOptionChange}>
                 <option value="">{__('--- Options ---')}</option>
                 {configs && configs.options.map((item) => (

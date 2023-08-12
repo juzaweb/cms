@@ -1,11 +1,12 @@
-import {__} from "@/helpers/functions";
-
 export interface ButtonProps {
     id?: string
     type?: 'button' | 'submit' | 'reset'
     label?: string
     class?: string
     loading?: boolean
+    onClick?: any
+    disabled?: boolean
+    color?: string
 }
 
 export default function Button(props: ButtonProps) {
@@ -13,8 +14,9 @@ export default function Button(props: ButtonProps) {
         <button
             type={props.type || 'button'}
             id={props.id}
-            className={`btn btn-primary ${props.class}`}
-            disabled={props.loading}
+            className={`btn btn-${props.color || 'primary'} ${props.class || ''}`}
+            disabled={props.disabled || props.loading}
+            onClick={props.onClick}
         >
             {/*{props.loading ? (<>
                 <i className="fa fa-spinner fa-spin"></i> {__('Please wait...')}

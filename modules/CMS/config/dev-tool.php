@@ -12,8 +12,8 @@ return [
             'taxonomies/create' => [
                 'label' => 'Make Custom Taxonomy',
             ],
-            'config/create' => [
-                'label' => 'Make Theme Config',
+            'settings' => [
+                'label' => 'Make Theme Setting',
             ],
         ]
     ],

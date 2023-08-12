@@ -164,8 +164,8 @@ class Theme implements ThemeInterface, Arrayable
     {
         $path = $this->getPath('register.json');
 
-        if (!isset($this->register) && file_exists($path)) {
-            $this->register = json_decode(file_get_contents($path), true);
+        if (!isset($this->register) && File::exists($path)) {
+            $this->register = json_decode(File::get($path), true, 512, JSON_THROW_ON_ERROR);
         } else {
             $this->register = [];
         }

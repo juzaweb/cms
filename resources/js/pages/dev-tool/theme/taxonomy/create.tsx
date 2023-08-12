@@ -56,7 +56,7 @@ export default function Create({ theme }: { theme: Theme }) {
             <TopOptions
                 moduleSelected={theme.name}
                 moduleType={'themes'}
-                selectedOption={'taxonomies/create'}
+                optionSelected={'taxonomies/create'}
             />
 
             <div className="row">

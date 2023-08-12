@@ -51,7 +51,7 @@ export default function Create({ theme }: { theme: Theme }) {
             <TopOptions
                 moduleSelected={theme.name}
                 moduleType={'themes'}
-                selectedOption={'post-types/create'}
+                optionSelected={'post-types/create'}
             />
 
             <div className="row">
