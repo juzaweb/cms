@@ -119,9 +119,7 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
 
     public function delete(string $name): bool
     {
-        $theme = $this->findOrFail($name);
-
-        return $theme->delete();
+        return $this->findOrFail($name)->delete();
     }
 
     public function render(string $view, array $params = [], ?string $theme = null): Factory|View|string|Response
@@ -136,6 +134,11 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         $theme = $theme ? $this->findOrFail($theme) : $this->currentTheme();
 
         return $this->createThemeRender($theme)->parseParam($param);
+    }
+
+    public function exists(string $name): bool
+    {
+        return $this->find($name) !== null;
     }
 
     protected function createThemeRender(ThemeInterface $theme): ThemeRender

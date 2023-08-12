@@ -15,6 +15,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
 use Inertia\Response;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\DevTool\Http\Requests\Theme\StoreRequest;
@@ -66,13 +67,18 @@ class ThemeController extends Controller
 
     public function store(StoreRequest $request): JsonResponse|RedirectResponse
     {
+        $name = Str::slug($request->input('name'));
+        if ($this->themeRepository->exists($name)) {
+            return $this->error("Theme {$name} already exists!");
+        }
+
         $outputBuffer = new BufferedOutput();
 
         try {
             Artisan::call(
                 'theme:make',
                 [
-                    'name' => $request->input('name'),
+                    'name' => $name,
                     '--title' => $request->input('title'),
                     '--description' => $request->input('description'),
                     '--author' => $request->input('author'),
