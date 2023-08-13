@@ -1,4 +1,5 @@
 import {getSidebar} from "@/helpers/fetch";
+import axios, {AxiosRequestConfig} from "axios";
 
 export function __(key: string, args = {}): string {
     // let lang = juzaweb.lang[key.replace('cms::app.', '')];
@@ -19,6 +20,16 @@ export function upload_url(path: string): string {
 
 export function admin_url(path: string): string {
     return '/admin-cp/' + path;
+}
+
+export async function post_request(
+    url: string,
+    data: any,
+    config?: AxiosRequestConfig)
+{
+    let response = await axios.post(url, data, config);
+    console.log(response.data);
+    return message_in_response(response.data);
 }
 
 export function convert_to_label_field(str: string): string {

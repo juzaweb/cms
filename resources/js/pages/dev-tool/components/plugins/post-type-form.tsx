@@ -42,8 +42,6 @@ export default function PostTypeForm({ buttonLoading }: { buttonLoading: boolean
 
                 <Checkbox name={'support[]'} label={'Has Tag'} value={'tag'}/>
 
-                <Checkbox name={'show_in_menu'} label={'Show In Menu'} checked={true} />
-
                 <Input name="menu_position" label={'Menu Position'} type={'number'} value={'20'} />
             </div>
         </div>

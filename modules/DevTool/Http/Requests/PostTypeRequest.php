@@ -19,7 +19,7 @@ class PostTypeRequest extends FormRequest
         return [
             'key' => ['required', 'string'],
             'label' => ['required', 'string'],
-            'show_in_menu' => ['nullable', 'numeric', 'in:0,1'],
+            'menu_position' => ['required', 'numeric', 'min:1'],
             'description' => ['nullable', 'string', 'max:250'],
             'support' => ['nullable', 'array'],
         ];
@@ -27,6 +27,6 @@ class PostTypeRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $this->merge(['show_in_menu' => (int) $this->input('show_in_menu', 0)]);
+        $this->merge(['menu_position' => (int) $this->input('menu_position', 0)]);
     }
 }

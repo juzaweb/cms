@@ -39,7 +39,7 @@ class PostTypeController extends Controller
         $configs = $this->getConfigs('plugins');
 
         return $this->view(
-            'cms::backend.dev-tool.plugin.index',
+            'cms::backend.dev-tool.plugin.post-type.index',
             compact('plugin', 'title', 'configs')
         );
     }

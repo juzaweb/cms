@@ -19,6 +19,8 @@ export default function TopOptions(
     const {url, configs} = usePage<{ url: string, configs: Configs }>().props;
     const [themes, setThemes] = useState<Array<Theme>>();
     const [plugins, setPlugins] = useState<Array<Plugin>>();
+    const [customModuleSelected, setCustomModuleSelected] = useState(moduleSelected);
+    const [moduleTypeSelected, setModuleTypeSelected] = useState(moduleType);
 
     useEffect(() => {
         axios.get(admin_url(`dev-tools/modules`)).then((res) => {
@@ -32,6 +34,9 @@ export default function TopOptions(
         let value = e.target.value;
 
         localStorage.setItem('current_module', value);
+
+        setModuleTypeSelected(type);
+        setCustomModuleSelected(value);
 
         // if (value) {
         //     router.visit(
@@ -48,76 +53,79 @@ export default function TopOptions(
 
         localStorage.setItem('current_option', selected);
 
-        if (selected) {
+        if (moduleTypeSelected && selected) {
             router.visit(
-                admin_url(`dev-tools/${moduleType}/${moduleSelected}/${e.target.value}`),
+                admin_url(`dev-tools/${moduleTypeSelected}/${customModuleSelected}/${selected}`),
                 {replace: true}
             );
         }
     }
 
-    return <div className={'row mb-3'}>
-        <div className={'col-md-4'}>
-            <select
-                className={'form-control'}
-                onChange={handleModuleChange}
-                defaultValue={moduleSelected}
-            >
-                <option value="">{__('--- Select Module ---')}</option>
-                <optgroup label={__('Themes')}></optgroup>
-                {themes && themes.map((theme: any) => (
-                    <option
-                        value={theme.name}
-                        key={theme.name}
-                        data-type={'themes'}
-                    >
-                        {theme.title} ({theme.name})
-                    </option>
-                ))}
-                <optgroup label={__('Plugins')}></optgroup>
-                {plugins && plugins.map((plugin: any) => (
-                    <option value={plugin.name}
-                            key={plugin.name}
-                            data-type={'plugins'}
-                            className={'dropdown-item'}
-                    >{plugin.extra?.juzaweb?.name || plugin.name} ({plugin.name})</option>
-                ))}
-            </select>
-        </div>
-
-        <div className="col-md-4">
-            <select className={'form-control'}
-                    defaultValue={optionSelected}
-                    onChange={handleOptionChange}>
-                <option value="">{__('--- Options ---')}</option>
-                {configs && configs.options.map((item) => (
-                    <option
-                        value={item.key}
-                        key={item.key}
-                    >
-                        {__(item.label)}
-                    </option>
-                ))}
-            </select>
-        </div>
-
-        <div className="col-md-4">
-            <div className="dropdown">
-                <button className="btn btn-info dropdown-toggle"
-                        type="button"
-                        id="dropdownMakeButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
+    return (
+        <div className={'row mb-3'}>
+            <div className={'col-md-4'}>
+                <select
+                    className={'form-control'}
+                    onChange={handleModuleChange}
+                    value={customModuleSelected}
                 >
-                    New Module
-                </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMakeButton">
-                    <Link className="dropdown-item"
-                          href={admin_url(`dev-tools/themes/create`)}
-                    >{__('Make New Theme')}</Link>
+                    <option value="">{__('--- Select Module ---')}</option>
+                    <optgroup label={__('Themes')}></optgroup>
+                    {themes && themes.map((theme: any) => (
+                        <option
+                            value={theme.name}
+                            key={theme.name}
+                            data-type={'themes'}
+                        >
+                            {theme.title} ({theme.name})
+                        </option>
+                    ))}
+                    <optgroup label={__('Plugins')}></optgroup>
+                    {plugins && plugins.map((plugin: any) => (
+                        <option value={plugin.name}
+                                key={plugin.name}
+                                data-type={'plugins'}
+                                className={'dropdown-item'}
+                        >{plugin.extra?.juzaweb?.name || plugin.name} ({plugin.name})</option>
+                    ))}
+                </select>
+            </div>
+
+            <div className="col-md-4">
+                <select className={'form-control'}
+                        defaultValue={optionSelected}
+                        onChange={handleOptionChange}
+                >
+                    <option value="">{__('--- Options ---')}</option>
+                    {configs && configs.options.map((item) => (
+                        <option
+                            value={item.key}
+                            key={item.key}
+                        >
+                            {__(item.label)}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            <div className="col-md-4">
+                <div className="dropdown">
+                    <button className="btn btn-info dropdown-toggle"
+                            type="button"
+                            id="dropdownMakeButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                    >
+                        New Module
+                    </button>
+                    <div className="dropdown-menu" aria-labelledby="dropdownMakeButton">
+                        <Link className="dropdown-item"
+                              href={admin_url(`dev-tools/themes/create`)}
+                        >{__('Make New Theme')}</Link>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    )
 }
