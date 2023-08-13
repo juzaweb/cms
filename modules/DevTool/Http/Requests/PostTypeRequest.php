@@ -21,7 +21,7 @@ class PostTypeRequest extends FormRequest
             'label' => ['required', 'string'],
             'menu_position' => ['required', 'numeric', 'min:1'],
             'description' => ['nullable', 'string', 'max:250'],
-            'support' => ['nullable', 'array'],
+            'supports' => ['nullable', 'array'],
         ];
     }
 

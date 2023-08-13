@@ -21,7 +21,7 @@ class TaxonomyRequest extends FormRequest
             'label' => ['required', 'string'],
             'menu_position' => ['required', 'numeric', 'min:1'],
             'description' => ['nullable', 'string', 'max:250'],
-            'support' => ['nullable', 'array'],
+            'supports' => ['nullable', 'array'],
         ];
     }
 
@@ -30,7 +30,7 @@ class TaxonomyRequest extends FormRequest
         $this->merge(
             [
                 'menu_position' => (int) $this->input('menu_position', 0),
-                'support' => (array) $this->input('support', []),
+                'supports' => (array) $this->input('supports', []),
             ]
         );
     }

@@ -44,9 +44,9 @@ export default function TaxonomyForm({buttonLoading, postTypes}: { buttonLoading
 
             <div className="col-md-3">
 
-                <Checkbox name={'support[]'} label={'Has Thumbnail'} value={'thumbnail'}/>
+                <Checkbox name={'supports[]'} label={'Has Thumbnail'} value={'thumbnail'}/>
 
-                <Checkbox name={'support[]'} label={'Hierarchical'} value={'hierarchical'}/>
+                <Checkbox name={'supports[]'} label={'Hierarchical'} value={'hierarchical'}/>
 
                 <Input name="menu_position" label={'Menu Position'} type={'number'} value={'20'}/>
             </div>
