@@ -6,7 +6,7 @@ import TopOptions from "@/pages/dev-tool/components/top-options";
 import axios from "axios";
 import TaxonomyForm from "@/pages/dev-tool/components/plugins/taxonomy-form";
 
-export default function Index({ plugin }: { plugin: Plugin }) {
+export default function Index({ plugin, postTypes }: { plugin: Plugin, postTypes: Array<any> }) {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<{
         status: boolean,
@@ -67,7 +67,7 @@ export default function Index({ plugin }: { plugin: Plugin }) {
 
                     <form method={'POST'} onSubmit={handleMakeCustomPostType}>
 
-                        <TaxonomyForm buttonLoading={buttonLoading} />
+                        <TaxonomyForm buttonLoading={buttonLoading} postTypes={postTypes} />
 
                     </form>
                 </div>

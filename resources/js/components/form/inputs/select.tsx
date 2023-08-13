@@ -1,3 +1,5 @@
+import * as Select2 from 'react-select';
+
 export interface SelectProps {
     name?: string;
     id?: string;
@@ -9,8 +11,10 @@ export interface SelectProps {
     multiple?: boolean;
     disabled?: boolean;
     readonly?: boolean;
-    options?: Array<{ label: string; data: string }>;
+    options?: Array<{ label: string; value: string }>;
 }
+
+const SelectElement = Select2.default;
 
 export default function Select(props: SelectProps) {
     let name = props.name ? (props.multiple ?  props.name + '[]' : props.name): undefined;
@@ -24,16 +28,13 @@ export default function Select(props: SelectProps) {
                 ) : ''}
             </label>
 
-            <select
+            <SelectElement
                 name={name}
                 id={props.id}
-                className={`form-control ${props.class || 'select2-default' }`}
-                multiple={props.multiple}
-            >
-                {props.options?.map(({ label, data }) => (
-                    <option value={data}>{label}</option>
-                ))}
-            </select>
+                className={props.class}
+                isMulti={props.multiple}
+                options={props.options}
+            />
         </div>
     );
 }

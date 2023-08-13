@@ -19,6 +19,7 @@ use Inertia\Response;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\DevTool\Http\Controllers\Controller;
+use Juzaweb\DevTool\Http\Requests\TaxonomyRequest;
 
 class TaxonomyController extends Controller
 {
@@ -32,18 +33,18 @@ class TaxonomyController extends Controller
     public function index(Request $request, string $vendor, string $name): View|Response
     {
         $plugin = $this->pluginRepository->findOrFail("{$vendor}/{$name}");
-
         $title = "Dev tool for plugin: {$plugin->getName()}";
 
         $configs = $this->getConfigs('plugins');
+        $postTypes = $this->hookAction->getPostTypes()->values();
 
         return $this->view(
             'cms::backend.dev-tool.plugin.taxonomy.index',
-            compact('plugin', 'title', 'configs')
+            compact('plugin', 'title', 'configs', 'postTypes')
         );
     }
 
-    public function store(Request $request, string $vendor, string $name): JsonResponse|RedirectResponse
+    public function store(TaxonomyRequest $request, string $vendor, string $name): JsonResponse|RedirectResponse
     {
         $plugin = $this->pluginRepository->findOrFail("{$vendor}/{$name}");
         $key = Str::plural(Str::slug($request->input('key')));
