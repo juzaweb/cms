@@ -49,7 +49,8 @@ Route::group(
 Route::group(
     ['prefix' => 'dev-tools/themes/{name}/post-types'],
     function () {
-        Route::resource('/', Themes\PostTypeController::class);
+        Route::get('/', [Themes\PostTypeController::class, 'index']);
+        Route::put('/', [Themes\PostTypeController::class, 'update']);
     }
 );
 

@@ -6,14 +6,14 @@ return [
 
     'themes' => [
         'options' => [
-            'post-types/create' => [
-                'label' => 'Make Custom Post Type',
+            'post-types' => [
+                'label' => 'Custom Post Types',
             ],
             'taxonomies/create' => [
                 'label' => 'Make Custom Taxonomy',
             ],
             'settings' => [
-                'label' => 'Make Theme Setting',
+                'label' => 'Settings',
             ],
             'templates' => [
                 'label' => 'Page Templates',

@@ -31,17 +31,16 @@ class PostTypeController extends Controller
         //
     }
 
-    public function create(Request $request, string $name): View|Response
+    public function index(Request $request, string $name): View|Response
     {
         $theme = $this->themeRepository->findOrFail($name);
-
-        $title = "Dev tool for theme: {$theme->getName()}";
-
+        $title = "Custom Post Types for theme: {$theme->getName()}";
         $configs = $this->getConfigs('themes');
+        $postTypes = $this->hookAction->getPostTypes()->values();
 
         return $this->view(
-            'cms::backend.dev-tool.theme.post-type.create',
-            compact('theme', 'title', 'configs')
+            'cms::backend.dev-tool.theme.post-type.index',
+            compact('theme', 'title', 'configs', 'postTypes')
         );
     }
 
