@@ -16,7 +16,10 @@
 
     @viteReactRefresh
 
-    @vite(["resources/js/app.tsx", "resources/css/app.css", "resources/js/pages/{$page['component']}.tsx"])
+    @vite(
+        ["resources/js/app.tsx", "resources/css/app.css", "resources/js/pages/{$page['component']}.tsx"],
+        'jw-styles/juzaweb/build'
+    )
 
     @php
         $__inertiaSsrDispatched = true;
