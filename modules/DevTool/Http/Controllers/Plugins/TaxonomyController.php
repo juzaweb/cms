@@ -19,9 +19,8 @@ use Inertia\Response;
 use Juzaweb\CMS\Contracts\HookActionContract;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\DevTool\Http\Controllers\Controller;
-use Juzaweb\DevTool\Http\Requests\PostTypeRequest;
 
-class PostTypeController extends Controller
+class TaxonomyController extends Controller
 {
     public function __construct(
         protected LocalPluginRepositoryContract $pluginRepository,
@@ -39,29 +38,28 @@ class PostTypeController extends Controller
         $configs = $this->getConfigs('plugins');
 
         return $this->view(
-            'cms::backend.dev-tool.plugin.post-type.index',
+            'cms::backend.dev-tool.plugin.taxonomy.index',
             compact('plugin', 'title', 'configs')
         );
     }
 
-    public function store(
-        PostTypeRequest $request,
-        string $vendor,
-        string $name
-    ): JsonResponse|RedirectResponse {
+    public function store(Request $request, string $vendor, string $name): JsonResponse|RedirectResponse
+    {
         $plugin = $this->pluginRepository->findOrFail("{$vendor}/{$name}");
         $key = Str::plural(Str::slug($request->input('key')));
 
-        if ($this->hookAction->getPostTypes($key)->isNotEmpty()) {
-            return $this->error('Post type already exists.');
+        if ($this->hookAction->getTaxonomies($key)->isNotEmpty()) {
+            return $this->error("Taxonomy {$key} already exists.");
         }
 
         $register = $this->getPluginRegister($plugin);
-
-        $register['post_types'][$key] = array_merge($register['post_types'][$key] ?? [], $request->all());
+        $register['taxonomies'][$key] = array_merge(
+            $register['taxonomies'][$key] ?? [],
+            $request->except(['key'])
+        );
 
         $this->writeRegisterFile($plugin, $register);
 
-        return $this->success(['message' => 'Post type created successfully.']);
+        return $this->success(['message' => 'Taxonomy created successfully.']);
     }
 }

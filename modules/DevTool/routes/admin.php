@@ -39,6 +39,14 @@ Route::group(
 );
 
 Route::group(
+    ['prefix' => 'dev-tools/plugins/{vendor}/{name}/taxonomies'],
+    function () {
+        Route::get('/', [Plugins\TaxonomyController::class, 'index']);
+        Route::post('/', [Plugins\TaxonomyController::class, 'store']);
+    }
+);
+
+Route::group(
     ['prefix' => 'dev-tools/themes'],
     function () {
         // Route::resource('/', ThemeController::class)

@@ -55,7 +55,7 @@ class PostTypeController extends Controller
 
         $register = $this->getThemeRegister($theme);
 
-        $register['post_types'][$key] = $request->all();
+        $register['post_types'][$key] = array_merge($register['post_types'][$key] ?? [], $request->all());
 
         File::put($theme->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
 

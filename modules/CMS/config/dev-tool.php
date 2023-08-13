@@ -27,14 +27,14 @@ return [
                 'label' => 'Custom Post Types',
             ],
             'taxonomies' => [
-                'label' => 'Custom Taxonomy',
+                'label' => 'Custom Taxonomies',
             ],
             'make-crud' => [
                 'label' => 'Make CRUD',
             ],
-            'make-migration' => [
-                'label' => 'Make Migration',
-            ],
+            // 'make-migration' => [
+            //     'label' => 'Make Migration',
+            // ],
         ],
     ]
 ];

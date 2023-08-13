@@ -56,7 +56,10 @@ class TaxonomyController extends Controller
 
         $register = $this->getThemeRegister($theme);
 
-        $register['taxonomies'][$key] = $request->all();
+        $register['taxonomies'][$key] = array_merge(
+            $register['taxonomies'][$key] ?? [],
+            $request->except(['key'])
+        );
 
         File::put($theme->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
 

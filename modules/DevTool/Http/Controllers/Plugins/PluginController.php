@@ -47,19 +47,7 @@ class PluginController extends Controller
         );
     }
 
-    public function makeTaxonomy(Request $request, string $vendor, string $name): JsonResponse|RedirectResponse
-    {
-        $plugin = $this->findPlugin($vendor, $name);
 
-        $key = Str::plural(Str::slug($request->input('key')));
-        $register = $this->getPluginRegister($plugin);
-
-        $register['taxonomies'][$key] = $request->all();
-
-        File::put($plugin->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
-
-        return $this->success(['message' => 'Taxonomy created successfully.']);
-    }
 
     public function makeCRUD(Request $request, string $vendor, string $name): JsonResponse|RedirectResponse
     {
@@ -98,14 +86,6 @@ class PluginController extends Controller
                 'message' => 'CRUD created successfully.',
                 'output' => $outputBuffer->fetch(),
             ]
-        );
-    }
-
-    protected function writeRegisterFile(Plugin $plugin, array $register): bool
-    {
-        return File::put(
-            $plugin->getPath('register.json'),
-            json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT)
         );
     }
 
