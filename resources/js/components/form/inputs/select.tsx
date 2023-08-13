@@ -74,7 +74,7 @@ export default function Select(props: SelectProps) {
                 options={props.options}
                 onChange={props.onChange}
                 placeholder={props.placeholder}
-                value={value}
+                value={value || ''}
                 isClearable={true}
                 isDisabled={props.disabled}
                 //components={{Option: OptionWrapper({'data': props.value})}}

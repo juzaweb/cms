@@ -6,7 +6,7 @@ import TaxonomyForm from "@/pages/dev-tool/components/plugins/taxonomy-form";
 import Admin from "@/layouts/admin";
 import TopOptions from "@/pages/dev-tool/components/top-options";
 
-export default function Create({ theme }: { theme: Theme }) {
+export default function Create({ theme, postTypes }: { theme: Theme, postTypes: Array<any> }) {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
     const [message, setMessage] = useState<{
         status: boolean,
@@ -54,7 +54,7 @@ export default function Create({ theme }: { theme: Theme }) {
     return (
         <Admin>
             <TopOptions
-                moduleSelected={theme.name}
+                moduleSelected={`themes/${theme.name}`}
                 moduleType={'themes'}
                 optionSelected={'taxonomies/create'}
             />
@@ -71,7 +71,7 @@ export default function Create({ theme }: { theme: Theme }) {
 
                     <form method={'POST'} onSubmit={handleMakeCustomPostType}>
 
-                        <TaxonomyForm buttonLoading={buttonLoading} />
+                        <TaxonomyForm buttonLoading={buttonLoading} postTypes={postTypes} />
 
                     </form>
                 </div>

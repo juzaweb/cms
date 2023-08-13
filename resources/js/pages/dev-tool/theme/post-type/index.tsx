@@ -48,7 +48,7 @@ export default function Index({ theme, postTypes }: { theme: Theme, postTypes: A
     return (
         <Admin>
             <TopOptions
-                moduleSelected={theme.name}
+                moduleSelected={`themes/${theme.name}`}
                 moduleType={'themes'}
                 optionSelected={'post-types'}
             />
