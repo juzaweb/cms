@@ -34,14 +34,14 @@ class TaxonomyController extends Controller
     public function create(Request $request, string $name): View|Response
     {
         $theme = $this->themeRepository->findOrFail($name);
-
         $title = "Dev tool for theme: {$theme->getName()}";
 
         $configs = $this->getConfigs('themes');
+        $postTypes = $this->hookAction->getPostTypes()->values();
 
         return $this->view(
             'cms::backend.dev-tool.theme.taxonomy.create',
-            compact('theme', 'title', 'configs')
+            compact('theme', 'title', 'configs', 'postTypes')
         );
     }
 
@@ -56,7 +56,10 @@ class TaxonomyController extends Controller
 
         $register = $this->getThemeRegister($theme);
 
-        $register['taxonomies'][$key] = $request->all();
+        $register['taxonomies'][$key] = array_merge(
+            $register['taxonomies'][$key] ?? [],
+            $request->except(['key'])
+        );
 
         File::put($theme->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
 

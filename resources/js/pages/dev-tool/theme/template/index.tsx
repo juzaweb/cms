@@ -83,7 +83,7 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
         <Admin>
             <TopOptions
                 moduleType={'themes'}
-                moduleSelected={theme.name}
+                moduleSelected={`themes/${theme.name}`}
                 optionSelected={'templates'}
             />
 

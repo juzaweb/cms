@@ -1,0 +1,1 @@
+import{j as e}from"./app-2d01f232.js";function o({module:l,moduleType:a,moduleData:s}){return e("ul",{className:"list-group",children:e("li",{className:"list-group-item active",children:"Post Types"})})}export{o as default};

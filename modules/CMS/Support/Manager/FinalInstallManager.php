@@ -44,10 +44,9 @@ class FinalInstallManager
     private function publishVendorAssets(BufferedOutput $outputLog): void
     {
         Artisan::call(
-            'vendor:publish',
+            'cms:publish',
             [
-                '--tag' => 'cms_assets',
-                '--force' => true,
+                'type' => 'assets',
             ],
             $outputLog
         );

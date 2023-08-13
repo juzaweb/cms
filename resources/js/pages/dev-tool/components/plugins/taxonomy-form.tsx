@@ -5,7 +5,7 @@ import Select from "@/components/form/inputs/select";
 import {convert_to_label_field, convert_to_slug} from "@/helpers/functions";
 import {useState} from "react";
 
-export default function TaxonomyForm({buttonLoading}: { buttonLoading: boolean }) {
+export default function TaxonomyForm({buttonLoading, postTypes}: { buttonLoading: boolean, postTypes: Array<any> }) {
     const [label, setLabel] = useState('');
 
     const generateLabelByName = (e: any) => {
@@ -31,16 +31,12 @@ export default function TaxonomyForm({buttonLoading}: { buttonLoading: boolean }
                 <Input name="label" label={'Label'} required={true} value={label}/>
 
                 <Select name={'post_types'} label={'Post Types'} required={true} multiple={true} options={
-                    [
-                        {
-                            label: 'Posts',
-                            data: 'posts',
-                        },
-                        {
-                            label: 'Pages',
-                            data: 'pages',
+                    postTypes.map((postType: any) => {
+                        return {
+                            label: postType.label,
+                            value: postType.key
                         }
-                    ]
+                    })
                 }/>
 
                 <Button label={'Make Post Type'} type={'submit'} loading={buttonLoading}/>
@@ -48,11 +44,9 @@ export default function TaxonomyForm({buttonLoading}: { buttonLoading: boolean }
 
             <div className="col-md-3">
 
-                <Checkbox name={'support[]'} label={'Has Thumbnail'} value={'thumbnail'}/>
+                <Checkbox name={'supports[]'} label={'Has Thumbnail'} value={'thumbnail'}/>
 
-                <Checkbox name={'support[]'} label={'Hierarchical'} value={'hierarchical'}/>
-
-                <Checkbox name={'show_in_menu'} label={'Show In Menu'} checked={true}/>
+                <Checkbox name={'supports[]'} label={'Hierarchical'} value={'hierarchical'}/>
 
                 <Input name="menu_position" label={'Menu Position'} type={'number'} value={'20'}/>
             </div>

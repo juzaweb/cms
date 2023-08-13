@@ -36,11 +36,11 @@ export default function PostTypeForm({ buttonLoading }: { buttonLoading: boolean
             </div>
 
             <div className="col-md-3">
-                <Checkbox name={'support[]'} label={'Has Comments'} value={'comment'} />
+                <Checkbox name={'supports[]'} label={'Has Comments'} value={'comment'} />
 
-                <Checkbox name={'support[]'} label={'Has Category'} value={'category'} />
+                <Checkbox name={'supports[]'} label={'Has Category'} value={'category'} />
 
-                <Checkbox name={'support[]'} label={'Has Tag'} value={'tag'}/>
+                <Checkbox name={'supports[]'} label={'Has Tag'} value={'tag'}/>
 
                 <Input name="menu_position" label={'Menu Position'} type={'number'} value={'20'} />
             </div>

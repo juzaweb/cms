@@ -51,10 +51,9 @@ class CmsUpdater extends UpdateManager
         event(new DumpAutoloadPlugin());
 
         Artisan::call(
-            'vendor:publish',
+            'cms:publish',
             [
-                '--tag' => 'cms_assets',
-                '--force' => true,
+                'type' => 'assets',
             ]
         );
     }

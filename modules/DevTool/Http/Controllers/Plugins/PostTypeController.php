@@ -58,7 +58,7 @@ class PostTypeController extends Controller
 
         $register = $this->getPluginRegister($plugin);
 
-        $register['post_types'][$key] = $request->all();
+        $register['post_types'][$key] = array_merge($register['post_types'][$key] ?? [], $request->all());
 
         $this->writeRegisterFile($plugin, $register);
 

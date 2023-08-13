@@ -21,6 +21,7 @@ use Juzaweb\Backend\Commands\OptimizeTagCommand;
 use Juzaweb\Backend\Commands\PermissionGenerateCommand;
 use Juzaweb\Backend\Commands\PingFeedCommand;
 use Juzaweb\Backend\Commands\Post\GeneratePostUUIDCommand;
+use Juzaweb\Backend\Commands\Publish\CMSPublishCommand;
 use Juzaweb\Backend\Commands\ThemePublishCommand;
 use Juzaweb\Backend\Commands\TransFromEnglish;
 use Juzaweb\Backend\Models\Comment;
@@ -108,6 +109,7 @@ class BackendServiceProvider extends ServiceProvider
                 OptimizeTagCommand::class,
                 PingFeedCommand::class,
                 GeneratePostUUIDCommand::class,
+                CMSPublishCommand::class,
             ]
         );
     }
