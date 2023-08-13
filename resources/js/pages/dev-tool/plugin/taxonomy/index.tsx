@@ -50,7 +50,7 @@ export default function Index({ plugin, postTypes }: { plugin: Plugin, postTypes
     return (
         <Admin>
             <TopOptions
-                moduleSelected={plugin.name}
+                moduleSelected={`plugins/${plugin.name}`}
                 moduleType={'plugins'}
                 optionSelected={'taxonomies'}
             />

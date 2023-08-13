@@ -5,6 +5,7 @@ import {Theme} from "@/types/themes";
 import {Plugin} from "@/types/plugins";
 import {Configs} from "@/pages/dev-tool/types/module";
 import {Link, router, usePage} from "@inertiajs/react";
+import Select from "@/components/form/inputs/select";
 
 export default function TopOptions(
     {
@@ -21,6 +22,8 @@ export default function TopOptions(
     const [plugins, setPlugins] = useState<Array<Plugin>>();
     const [customModuleSelected, setCustomModuleSelected] = useState(moduleSelected);
     const [moduleTypeSelected, setModuleTypeSelected] = useState(moduleType);
+    const [customOptionSelected, setCustomOptionSelected] = useState(optionSelected);
+    const [customConfigs, setCustomConfigs] = useState(configs);
 
     useEffect(() => {
         axios.get(admin_url(`dev-tools/modules`)).then((res) => {
@@ -29,42 +32,80 @@ export default function TopOptions(
         });
     }, [url]);
 
-    const handleModuleChange = (e: any) => {
-        let type = e.target.options[e.target.selectedIndex].getAttribute('data-type')?.toString() || '';
-        let value = e.target.value;
+    const handleModuleChange = (val: any) => {
+        if (!val) {
+            return;
+        }
+
+        let values = val.value.split('/');
+        let type = values[0];
+        let value = values.slice(1);
 
         localStorage.setItem('current_module', value);
 
-        setModuleTypeSelected(type);
-        setCustomModuleSelected(value);
+        axios.get(admin_url(`dev-tools/module?type=${type}&module=${value}`)).then((res) => {
+            setCustomConfigs(res.data.configs);
+        })
 
-        // if (value) {
-        //     router.visit(
-        //         admin_url(`dev-tools/${type}/${value}/edit`),
-        //         {replace: true}
-        //     );
-        // }
+        setModuleTypeSelected(type);
+        setCustomModuleSelected(val.value);
+        setCustomOptionSelected(undefined);
     }
 
-    const handleOptionChange = (e: any) => {
-        e.preventDefault();
+    const handleOptionChange = (val: any) => {
+        if (!val) {
+            return;
+        }
 
-        let selected = e.target.value;
-
+        let selected = val.value;
         localStorage.setItem('current_option', selected);
 
         if (moduleTypeSelected && selected) {
             router.visit(
-                admin_url(`dev-tools/${moduleTypeSelected}/${customModuleSelected}/${selected}`),
+                admin_url(`dev-tools/${customModuleSelected}/${selected}`),
                 {replace: true}
             );
         }
     }
 
+    const modules: Array<any> = [
+        {
+            label: 'Themes',
+            options: themes?.map((theme: Theme) => (
+                {
+                    label: theme.title,
+                    value: `themes/${theme.name}`,
+                }
+            )),
+        },
+        {
+            label: 'Plugins',
+            options: plugins?.map((plugin: Plugin) => (
+                {
+                    label: plugin.extra?.juzaweb?.name || plugin.name,
+                    value: `plugins/${plugin.name}`,
+                }
+            )),
+        }
+    ];
+
+    const options: Array<any> = customConfigs?.options.map((item) => ({
+        label: item.label,
+        value: item.key
+    }));
+
     return (
         <div className={'row mb-3'}>
             <div className={'col-md-4'}>
-                <select
+                <Select
+                    name={'module'}
+                    placeholder={'Select Module'}
+                    value={customModuleSelected}
+                    onChange={handleModuleChange}
+                    options={modules}
+                />
+
+                {/*<select
                     className={'form-control'}
                     onChange={handleModuleChange}
                     value={customModuleSelected}
@@ -88,16 +129,23 @@ export default function TopOptions(
                                 className={'dropdown-item'}
                         >{plugin.extra?.juzaweb?.name || plugin.name} ({plugin.name})</option>
                     ))}
-                </select>
+                </select>*/}
             </div>
 
             <div className="col-md-4">
-                <select className={'form-control'}
-                        defaultValue={optionSelected}
+                <Select
+                    placeholder={'Options'}
+                    options={options}
+                    value={customOptionSelected}
+                    onChange={handleOptionChange}
+                />
+
+                {/*<select className={'form-control'}
+                        value={customOptionSelected}
                         onChange={handleOptionChange}
                 >
                     <option value="">{__('--- Options ---')}</option>
-                    {configs && configs.options.map((item) => (
+                    {customConfigs && customConfigs.options.map((item) => (
                         <option
                             value={item.key}
                             key={item.key}
@@ -105,7 +153,7 @@ export default function TopOptions(
                             {__(item.label)}
                         </option>
                     ))}
-                </select>
+                </select>*/}
             </div>
 
             <div className="col-md-4">
