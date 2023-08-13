@@ -13,7 +13,7 @@ namespace Juzaweb\DevTool\Http\Controllers;
 use Illuminate\Support\Facades\File;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 use Juzaweb\CMS\Interfaces\Theme\ThemeInterface;
-use Juzaweb\CMS\Support\Plugin;
+use Juzaweb\CMS\Interfaces\Theme\PluginInterface as Plugin;
 
 class Controller extends BackendController
 {
@@ -49,5 +49,13 @@ class Controller extends BackendController
             ->values();
 
         return $configs;
+    }
+
+    protected function writeRegisterFile(Plugin|ThemeInterface $module, array $register): bool
+    {
+        return File::put(
+            $module->getPath('register.json'),
+            json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT)
+        );
     }
 }

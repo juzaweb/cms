@@ -4,7 +4,6 @@ namespace Juzaweb\CMS\Support;
 
 use Composer\Autoload\ClassLoader;
 use Illuminate\Cache\CacheManager;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
@@ -20,9 +19,10 @@ use Illuminate\Translation\Translator;
 use Illuminate\View\ViewFinderInterface;
 use Juzaweb\CMS\Contracts\ActivatorInterface;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
+use Juzaweb\CMS\Interfaces\Theme\PluginInterface;
 use Noodlehaus\Config as ReadConfig;
 
-class Plugin implements Arrayable
+class Plugin implements PluginInterface
 {
     use Macroable;
 

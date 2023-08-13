@@ -33,12 +33,12 @@ export default function TopOptions(
 
         localStorage.setItem('current_module', value);
 
-        if (value) {
-            router.visit(
-                admin_url(`dev-tools/${type}/${value}/edit`),
-                {replace: true}
-            );
-        }
+        // if (value) {
+        //     router.visit(
+        //         admin_url(`dev-tools/${type}/${value}/edit`),
+        //         {replace: true}
+        //     );
+        // }
     }
 
     const handleOptionChange = (e: any) => {
@@ -61,7 +61,7 @@ export default function TopOptions(
             <select
                 className={'form-control'}
                 onChange={handleModuleChange}
-                value={moduleSelected}
+                defaultValue={moduleSelected}
             >
                 <option value="">{__('--- Select Module ---')}</option>
                 <optgroup label={__('Themes')}></optgroup>
@@ -114,7 +114,8 @@ export default function TopOptions(
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMakeButton">
                     <Link className="dropdown-item"
-                          href={admin_url(`dev-tools/themes/create`)}>{__('Make New Theme')}</Link>
+                          href={admin_url(`dev-tools/themes/create`)}
+                    >{__('Make New Theme')}</Link>
                 </div>
             </div>
         </div>

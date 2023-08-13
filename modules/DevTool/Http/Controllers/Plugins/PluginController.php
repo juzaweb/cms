@@ -47,37 +47,6 @@ class PluginController extends Controller
         );
     }
 
-    public function makePostType(Request $request, string $vendor, string $name): View|Response
-    {
-        $plugin = $this->findPlugin($vendor, $name);
-
-        $title = "Dev tool for plugin: {$plugin->getName()}";
-
-        $configs = $this->getPluginConfigs();
-
-        return $this->view(
-            'cms::backend.dev-tool.plugin.index',
-            compact('plugin', 'title', 'configs')
-        );
-    }
-
-    public function handleMakePostType(
-        PostTypeRequest $request,
-        string $vendor,
-        string $name
-    ): JsonResponse|RedirectResponse {
-        $plugin = $this->findPlugin($vendor, $name);
-
-        $key = Str::plural(Str::slug($request->input('key')));
-        $register = $this->getPluginRegister($plugin);
-
-        $register['post_types'][$key] = $request->all();
-
-        File::put($plugin->getPath('register.json'), json_encode($register, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
-
-        return $this->success(['message' => 'Post type created successfully.']);
-    }
-
     public function makeTaxonomy(Request $request, string $vendor, string $name): JsonResponse|RedirectResponse
     {
         $plugin = $this->findPlugin($vendor, $name);
@@ -130,22 +99,6 @@ class PluginController extends Controller
                 'output' => $outputBuffer->fetch(),
             ]
         );
-    }
-
-    protected function getPluginConfigs()
-    {
-        $configs = config("dev-tool.plugins", []);
-
-        $convertToArray = function (array $item, string $key) {
-            $item['key'] = $key;
-            return $item;
-        };
-
-        $configs['options'] = collect($configs['options'])
-            ->map($convertToArray)
-            ->values();
-
-        return $configs;
     }
 
     protected function writeRegisterFile(Plugin $plugin, array $register): bool

@@ -23,11 +23,11 @@ return [
 
     'plugins' => [
         'options' => [
-            'make-custom-post-type' => [
-                'label' => 'Make Custom Post Type',
+            'post-types' => [
+                'label' => 'Custom Post Types',
             ],
-            'make-custom-taxonomy' => [
-                'label' => 'Make Custom Taxonomy',
+            'taxonomies' => [
+                'label' => 'Custom Taxonomy',
             ],
             'make-crud' => [
                 'label' => 'Make CRUD',
@@ -36,10 +36,5 @@ return [
                 'label' => 'Make Migration',
             ],
         ],
-        'menus' => [
-            'post-types' => [
-                'label' => 'Post Types',
-            ]
-        ]
     ]
 ];

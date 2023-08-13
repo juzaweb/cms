@@ -9,7 +9,7 @@
  */
 
 use Juzaweb\DevTool\Http\Controllers\DevToolController;
-use Juzaweb\DevTool\Http\Controllers\Plugins\PluginController;
+use Juzaweb\DevTool\Http\Controllers\Plugins;
 use Juzaweb\DevTool\Http\Controllers\Themes;
 
 Route::group(
@@ -24,10 +24,17 @@ Route::group(
 Route::group(
     ['prefix' => 'dev-tools/plugins/{vendor}/{name}'],
     function () {
-        Route::get('/', [PluginController::class, 'index']);
-        Route::post('make-post-type', [PluginController::class, 'makePostType']);
-        Route::post('make-taxonomy', [PluginController::class, 'makeTaxonomy']);
-        Route::post('make-crud', [PluginController::class, 'makeCRUD']);
+        Route::get('/', [Plugins\PluginController::class, 'index']);
+        Route::post('make-taxonomy', [Plugins\PluginController::class, 'makeTaxonomy']);
+        Route::post('make-crud', [Plugins\PluginController::class, 'makeCRUD']);
+    }
+);
+
+Route::group(
+    ['prefix' => 'dev-tools/plugins/{vendor}/{name}/post-types'],
+    function () {
+        Route::get('/', [Plugins\PostTypeController::class, 'index']);
+        Route::post('/', [Plugins\PostTypeController::class, 'store']);
     }
 );
 

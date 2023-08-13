@@ -1,6 +1,12 @@
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import axios from "axios";
+
+axios.interceptors.request.use((config) => {
+    config.headers['Content-Type'] = 'application/json';
+    return config;
+});
 
 createInertiaApp({
     title: (title) => `${title}`,
