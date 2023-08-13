@@ -1,5 +1,5 @@
 import {__, admin_url} from "@/helpers/functions";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {Theme} from "@/types/themes";
 import {Plugin} from "@/types/plugins";
@@ -8,15 +8,12 @@ import {Link, router, usePage} from "@inertiajs/react";
 import Select from "@/components/form/inputs/select";
 
 export default function TopOptions(
-    {
-        moduleSelected,
-        moduleType,
-        optionSelected
-    }: {
+    {moduleSelected, moduleType, optionSelected}: {
         moduleSelected?: string,
         moduleType?: string,
         optionSelected?: string
-    }) {
+    })
+{
     const {url, configs} = usePage<{ url: string, configs: Configs }>().props;
     const [themes, setThemes] = useState<Array<Theme>>();
     const [plugins, setPlugins] = useState<Array<Plugin>>();
@@ -34,6 +31,7 @@ export default function TopOptions(
 
     const handleModuleChange = (val: any) => {
         if (!val) {
+            setCustomModuleSelected(undefined);
             return;
         }
 
@@ -54,10 +52,16 @@ export default function TopOptions(
 
     const handleOptionChange = (val: any) => {
         if (!val) {
+            setCustomOptionSelected(undefined);
             return;
         }
 
         let selected = val.value;
+
+        if (selected === customOptionSelected) {
+            return;
+        }
+
         localStorage.setItem('current_option', selected);
 
         if (moduleTypeSelected && selected) {
@@ -97,13 +101,16 @@ export default function TopOptions(
     return (
         <div className={'row mb-3'}>
             <div className={'col-md-4'}>
-                <Select
-                    name={'module'}
-                    placeholder={'Select Module'}
-                    value={customModuleSelected}
-                    onChange={handleModuleChange}
-                    options={modules}
-                />
+
+                {(themes || plugins) && (
+                    <Select
+                        name={'module'}
+                        placeholder={'Select Module'}
+                        value={customModuleSelected}
+                        onChange={handleModuleChange}
+                        options={modules}
+                    />
+                )}
 
                 {/*<select
                     className={'form-control'}

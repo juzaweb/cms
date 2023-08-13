@@ -1,4 +1,5 @@
 import * as Select2 from 'react-select';
+import {Ref} from "react";
 
 export interface SelectProps {
     name?: string;
@@ -13,7 +14,8 @@ export interface SelectProps {
     disabled?: boolean;
     readonly?: boolean;
     options?: Array<{ label: string; value: string; options?: Array<{ label: string; value: string }> }>;
-    onChange?: (e: any) => void;
+    onChange?: (newValue: any, actionMeta: any) => void;
+    ref?: any;
 }
 
 const SelectElement = Select2.default;
@@ -38,22 +40,28 @@ const SelectElement = Select2.default;
 //     >{props.data.label}</Select2.components.Option>
 // );
 
-export default function Select(props: SelectProps) {
-    let name = props.name ? (props.multiple ? props.name + '[]' : props.name) : undefined;
-    let value = undefined;
-
-    if (props.value) {
-        value = props.options?.find(
+const convertValue = (options?: Array<any>, value?: any) => {
+    if (value) {
+        let find = options?.find(
             (c) => (
-                c.value === props.value
-                || (c?.options ? c.options?.find((o) => o.value === props.value) : false)
+                c.value === value
+                || (c?.options ? c.options?.find((o: any) => o.value === value) : false)
             )
         );
 
-        if (value?.options) {
-            value = value.options.find((o) => o.value === props.value);
+        if (find?.options) {
+            find = find.options.find((o: any) => o.value === value);
         }
+
+        return find;
     }
+
+    return value;
+}
+
+export default function Select(props: SelectProps) {
+    const name = props.name ? (props.multiple ? props.name + '[]' : props.name) : undefined;
+    const value = convertValue(props.options, props.value);
 
     return (
         <div className="form-group">
@@ -77,6 +85,7 @@ export default function Select(props: SelectProps) {
                 value={value || ''}
                 isClearable={true}
                 isDisabled={props.disabled}
+                ref={props.ref}
                 //components={{Option: OptionWrapper({'data': props.value})}}
             />
         </div>

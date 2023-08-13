@@ -25,7 +25,6 @@ Route::group(
     ['prefix' => 'dev-tools/plugins/{vendor}/{name}'],
     function () {
         Route::get('/', [Plugins\PluginController::class, 'index']);
-        Route::post('make-taxonomy', [Plugins\PluginController::class, 'makeTaxonomy']);
         Route::post('make-crud', [Plugins\PluginController::class, 'makeCRUD']);
     }
 );
@@ -43,6 +42,14 @@ Route::group(
     function () {
         Route::get('/', [Plugins\TaxonomyController::class, 'index']);
         Route::post('/', [Plugins\TaxonomyController::class, 'store']);
+    }
+);
+
+Route::group(
+    ['prefix' => 'dev-tools/plugins/{vendor}/{name}/crud'],
+    function () {
+        Route::get('/', [Plugins\CRUDController::class, 'index']);
+        Route::post('/', [Plugins\CRUDController::class, 'store']);
     }
 );
 

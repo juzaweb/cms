@@ -29,7 +29,7 @@ return [
             'taxonomies' => [
                 'label' => 'Custom Taxonomies',
             ],
-            'make-crud' => [
+            'crud' => [
                 'label' => 'Make CRUD',
             ],
             // 'make-migration' => [
