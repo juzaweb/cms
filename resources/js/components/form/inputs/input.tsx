@@ -34,7 +34,7 @@ export default function Input(props: InputProps = {type: 'text', required: false
             />
 
             {props.description && (
-                <small className="form-text text-muted">{props.description}</small>
+                <small className="form-text text-muted" dangerouslySetInnerHTML={{__html: props.description}}></small>
             )}
         </div>
     );

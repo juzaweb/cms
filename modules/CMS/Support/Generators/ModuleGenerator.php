@@ -15,67 +15,79 @@ use Juzaweb\CMS\Support\Stub;
 class ModuleGenerator extends Generator
 {
     /**
-     * The plugin name will created.
+     * The plugin name will create.
      *
      * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * The laravel config instance.
      *
-     * @var Config
+     * @var ?Config
      */
-    protected $config;
+    protected ?Config $config;
 
     /**
      * The laravel filesystem instance.
      *
-     * @var Filesystem
+     * @var ?Filesystem
      */
-    protected $filesystem;
+    protected ?Filesystem $filesystem;
 
     /**
      * The laravel console instance.
      *
-     * @var Console
+     * @var ?Console
      */
-    protected $console;
+    protected ?Console $console;
 
     /**
      * The activator instance
      *
-     * @var ActivatorInterface
+     * @var ?ActivatorInterface
      */
-    protected $activator;
+    protected ?ActivatorInterface $activator;
 
     /**
      * The plugin instance.
      *
-     * @var \Juzaweb\CMS\Support\Plugin
+     * @var \Juzaweb\CMS\Support\Plugin|LocalPluginRepository|null
      */
-    protected $module;
+    protected Plugin|null|LocalPluginRepository $module;
 
     /**
      * Force status.
      *
      * @var bool
      */
-    protected $force = false;
+    protected bool $force = false;
 
     /**
      * Generate a plain plugin.
      *
      * @var bool
      */
-    protected $plain = false;
+    protected bool $plain = false;
 
     /**
      * Enables the plugin.
      *
      * @var bool
      */
-    protected $isActive = false;
+    protected bool $isActive = false;
+
+    protected ?string $title;
+
+    protected ?string $description;
+
+    protected ?string $author;
+
+    protected ?string $domain;
+
+    protected ?string $version;
+
+    protected ?string $cmsMinVersion;
 
     /**
      * The constructor.
@@ -130,6 +142,48 @@ class ModuleGenerator extends Generator
         return $this;
     }
 
+    public function setTitle(?string $title): static
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function setAuthor(?string $author): static
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function setDomain(?string $domain): static
+    {
+        $this->domain = $domain;
+
+        return $this;
+    }
+
+    public function setVersion(?string $version): static
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
+    public function setCmsMinVersion(?string $cmsMinVersion): static
+    {
+        $this->cmsMinVersion = $cmsMinVersion;
+
+        return $this;
+    }
+
     /**
      * Get the name of plugin will create. By default, in studly case.
      *
@@ -166,15 +220,45 @@ class ModuleGenerator extends Generator
     /**
      * Set the laravel config instance.
      *
-     * @param Config $config
+     * @param  Config  $config
      *
      * @return $this
      */
-    public function setConfig($config): static
+    public function setConfig(Config $config): static
     {
         $this->config = $config;
 
         return $this;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title ?? $this->getStudlyName();
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description ?? '';
+    }
+
+    public function getAuthor(): string
+    {
+        return $this->author ?? '';
+    }
+
+    public function getDomain(): string
+    {
+        return $this->domain ?? $this->generateDomain();
+    }
+
+    public function getVersion(): string
+    {
+        return $this->version ?? '1.0';
+    }
+
+    public function getCmsMinVersion(): string
+    {
+        return $this->cmsMinVersion ?? '3.3';
     }
 
     /**
@@ -300,7 +384,7 @@ class ModuleGenerator extends Generator
     /**
      * Generate the plugin.
      */
-    public function generate()
+    public function generate(): void
     {
         $name = $this->getName();
 
@@ -326,7 +410,7 @@ class ModuleGenerator extends Generator
             $this->cleanModuleJsonFile();
         }*/
 
-        //$this->activator->setActiveByName($name, $this->isActive);
+        $this->activator->setActiveByName($name, $this->isActive);
 
         $this->console->info("Plugin [{$name}] created successfully.");
     }
@@ -334,7 +418,7 @@ class ModuleGenerator extends Generator
     /**
      * Generate the folders.
      */
-    public function generateFolders()
+    public function generateFolders(): void
     {
         foreach ($this->getFolders() as $key => $folder) {
             $folder = GenerateConfigReader::read($key);
@@ -350,6 +434,8 @@ class ModuleGenerator extends Generator
             }
 
             $this->filesystem->makeDirectory($path, 0755, true);
+
+            $this->generateGitKeep($path);
         }
     }
 
@@ -358,7 +444,7 @@ class ModuleGenerator extends Generator
      *
      * @param string $path
      */
-    public function generateGitKeep($path)
+    public function generateGitKeep($path): void
     {
         $this->filesystem->put($path . '/.gitkeep', '');
     }
@@ -366,7 +452,7 @@ class ModuleGenerator extends Generator
     /**
      * Generate the files.
      */
-    public function generateFiles()
+    public function generateFiles(): void
     {
         foreach ($this->getFiles() as $stub => $file) {
             $path = $this->module->getModulePath($this->getName()) . $file;
@@ -385,7 +471,7 @@ class ModuleGenerator extends Generator
     /**
      * Generate some resources.
      */
-    public function generateResources()
+    public function generateResources(): void
     {
         if (GenerateConfigReader::read('seeder')->generate() === true) {
             $this->console->call(
@@ -424,27 +510,27 @@ class ModuleGenerator extends Generator
     }
 
     /**
+     * get the list for the replacements.
+     */
+    public function getReplacements()
+    {
+        return $this->module->config('stubs.replacements');
+    }
+
+    /**
      * Get the contents of the specified stub file by given stub name.
      *
      * @param $stub
      *
      * @return string
      */
-    protected function getStubContents($stub)
+    protected function getStubContents($stub): string
     {
         return (new Stub(
             '/' . $stub . '.stub',
             $this->getReplacement($stub)
         )
         )->render();
-    }
-
-    /**
-     * get the list for the replacements.
-     */
-    public function getReplacements()
-    {
-        return $this->module->config('stubs.replacements');
     }
 
     /**
@@ -614,9 +700,37 @@ class ModuleGenerator extends Generator
 
     protected function getModuleDomainReplacement(): string
     {
-        $name = explode('/', $this->getName());
-        $author = $name[0];
-        $plugin = $name[1];
+        return $this->getDomain();
+    }
+
+    protected function getTitleReplacement(): string
+    {
+        return $this->getTitle();
+    }
+
+    protected function getDescriptionReplacement(): string
+    {
+        return $this->getDescription();
+    }
+
+    protected function getAuthorReplacement(): string
+    {
+        return $this->getAuthor();
+    }
+
+    protected function getVersionReplacement(): string
+    {
+        return $this->getVersion();
+    }
+
+    protected function getCmsMinVersionReplacement(): string
+    {
+        return $this->getCmsMinVersion();
+    }
+
+    protected function generateDomain(): string
+    {
+        [$author, $plugin] = explode('/', $this->getName());
 
         return substr($author, 0, 2) . substr($plugin, 0, 2);
     }

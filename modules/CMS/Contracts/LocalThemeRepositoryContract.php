@@ -65,7 +65,7 @@ interface LocalThemeRepositoryContract
      */
     public function currentTheme(): ThemeInterface;
 
-    public function exists(string $name): bool;
+    public function has(string $name): bool;
 
     /**
      * Deletes a theme by name.
