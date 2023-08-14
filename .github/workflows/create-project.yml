@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, centos-laster]
+        os: [ubuntu-latest]
         php: [8.0, 8.1]
         version: [^3.3, dev-master, dev-develop]
         mysql: [5.7.33, 5.7.37, 8.0.21]
