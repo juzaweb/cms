@@ -116,7 +116,7 @@ class CmsServiceProvider extends ServiceProvider
         );
 
         // Prevent lazy loading in local environment
-        Model::preventLazyLoading(!$this->app->isProduction());
+        //Model::preventLazyLoading(!$this->app->isProduction());
 
         Schema::defaultStringLength(150);
 
