@@ -2,8 +2,9 @@ name: Run Create project test suite
 
 on:
   push:
+    branches:
   schedule:
-      - cron:  '0 * * * *'
+    - cron:  '0 * * * *'
 
 jobs:
   laravel-tests:
@@ -14,6 +15,7 @@ jobs:
         php: [8.0, 8.1]
         version: [^3.3, dev-master, dev-develop]
         mysql: [5.7.33, 5.7.37, 8.0.21]
+        withenv: [production, local]
     services:
       mysql:
         image: mysql:${{ matrix.mysql }}
@@ -50,9 +52,15 @@ jobs:
       - name: Execute tests Install
         working-directory: blog
         run: php artisan test modules/Tests/InstallTest.php
+        env:
+          APP_ENV: ${{ matrix.withenv }}
       - name: Execute tests (Unit and Feature tests)
         working-directory: blog
         run: php artisan test
+        env:
+          APP_ENV: ${{ matrix.withenv }}
       - name: Execute tests Update
         working-directory: blog
         run: php artisan test modules/Tests/UpdateTest.php
+        env:
+          APP_ENV: ${{ matrix.withenv }}
