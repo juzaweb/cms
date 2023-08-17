@@ -1,11 +1,11 @@
 {
     "styles": {
         "js": [
-            "assets\/js\/index.min.js"
+            "assets/js/index.min.js"
         ],
         "css": [
-            "https:\/\/fonts.googleapis.com\/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,400&display=swap",
-            "assets\/css\/styles.min.css"
+            "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,400&display=swap",
+            "assets/css/styles.min.css"
         ]
     },
     "templates": {
@@ -15,19 +15,12 @@
             "blocks": {
                 "content": {
                     "label": "Content"
-                },
-                "foot": {
-                    "label": "Foot"
                 }
             }
         },
         "contact": {
             "label": "Contact",
             "view": "theme::templates.contact"
-        },
-        "game": {
-            "label": "Game",
-            "view": "theme::templates.game"
         }
     },
     "sidebars": {
@@ -76,10 +69,11 @@
             "label": "Primary menu"
         }
     },
-    "configs": {
-        "footer_logo": {
-            "label": "Footer Logo",
-            "type": "image"
+    "configs": [
+        {
+            "type": "image",
+            "name": "footer_logo",
+            "label": "Footer Logo"
         }
-    }
+    ]
 }
