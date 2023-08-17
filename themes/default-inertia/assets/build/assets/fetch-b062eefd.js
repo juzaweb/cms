@@ -1,1 +1,0 @@
-import{b as a}from"./app-13cc16b3.js";async function p(s,t,o,e,r){return await a.post(s.url,{content:t,name:o,email:e,website:r})}async function u(s,t={limit:10}){return await a.get("/ajax/related-posts?post_slug="+s.slug)}export{u as g,p};

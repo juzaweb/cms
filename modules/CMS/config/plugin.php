@@ -44,7 +44,11 @@ return [
                 'MODULE_NAME',
                 'MODULE_NAMESPACE',
                 'PROVIDER_NAMESPACE',
-                'MODULE_DOMAIN'
+                'MODULE_DOMAIN',
+                'TITLE',
+                'DESCRIPTION',
+                'VERSION',
+                'CMS_MIN_VERSION',
             ],
         ]
     ],

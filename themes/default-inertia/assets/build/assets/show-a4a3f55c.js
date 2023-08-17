@@ -1,1 +1,0 @@
-import{a,j as r}from"./app-64d736f9.js";import{a as i}from"./functions-9df32527.js";function n({data:e}){return a("aside",{className:"wrapper__list__article",children:[r("h4",{className:"border_section",children:e.title}),r("a",{href:e.link,target:"_blank",children:r("figure",{children:r("img",{src:i(e.banner),alt:"",className:"img-fluid"})})})]})}export{n as default};
