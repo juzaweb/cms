@@ -40,6 +40,7 @@ class ThemeAction extends Action
     public function handle(): void
     {
         HookAction::addAction(Action::INIT_ACTION, [$this, 'postTypes']);
+        HookAction::addAction(Action::INIT_ACTION, [$this, 'taxonomies']);
         HookAction::addAction(Action::INIT_ACTION, [$this, 'resources']);
         HookAction::addAction(Action::FRONTEND_CALL_ACTION, [$this, 'styles']);
         HookAction::addAction(Action::INIT_ACTION, [$this, 'sidebars']);
@@ -73,6 +74,14 @@ class ThemeAction extends Action
         $thumbnailSizes = $this->getRegister('thumbnail_sizes');
         foreach ($thumbnailSizes as $postType => $size) {
             $this->hookAction->addThumbnailSizes($postType, $size);
+        }
+    }
+
+    public function taxonomies(): void
+    {
+        $types = $this->getRegister('taxonomies');
+        foreach ($types as $key => $type) {
+            $this->hookAction->registerTaxonomy($key, $type['post_types'], $type);
         }
     }
 
@@ -215,9 +224,13 @@ class ThemeAction extends Action
 
     public function settingFields(): void
     {
-        $fields = $this->getRegister('setting_fields');
+        $fields = $this->getRegister('configs');
 
         foreach ($fields as $key => $field) {
+            if (is_numeric($key)) {
+                $key = $field['name'];
+            }
+
             HookAction::registerThemeSetting(
                 $key,
                 Arr::get($field, 'label'),

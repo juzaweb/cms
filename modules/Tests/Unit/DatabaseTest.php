@@ -34,7 +34,7 @@ class DatabaseTest extends TestCase
 
     public function testMakeAdmin()
     {
-        $this->artisan('juzacms:make-admin')
+        $this->artisan('cms:make-admin')
             ->expectsQuestion('Full Name?', 'Taylor Otwell')
             ->expectsQuestion('Email?', 'admin@admin.com')
             ->expectsQuestion('Password?', 'admin@admin.com')

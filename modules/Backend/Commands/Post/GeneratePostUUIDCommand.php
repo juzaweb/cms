@@ -15,7 +15,7 @@ use Juzaweb\Backend\Models\Post;
 
 class GeneratePostUUIDCommand extends Command
 {
-    protected $name = 'juzacms:generate-posts-uuid-missing';
+    protected $name = 'posts:generate-uuid-missing';
 
     protected $description = 'Generate post uuid missing command.';
 

@@ -1,9 +1,0 @@
-{
-    "form": [
-        {
-            "type": "text",
-            "name": "title",
-            "label": "Title"
-        }
-    ]
-}

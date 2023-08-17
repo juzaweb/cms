@@ -32,7 +32,7 @@ trait RegisterHookAction
     public function registerPostType(string $key, array $args = []): void
     {
         if (empty($args['label'])) {
-            throw new Exception('Post type label is required.');
+            throw new \RuntimeException('Post type label is required.');
         }
 
         $args = array_merge(
@@ -82,7 +82,8 @@ trait RegisterHookAction
             );
         }
 
-        $supports = (array)$args->get('supports', []);
+        $supports = $args->get('supports', []);
+
         if (in_array('category', $supports)) {
             $this->registerTaxonomy(
                 'categories',
@@ -97,7 +98,7 @@ trait RegisterHookAction
             );
         }
 
-        if (in_array('tag', (array)$args['supports'])) {
+        if (in_array('tag', $supports)) {
             $this->registerTaxonomy(
                 'tags',
                 $key,
@@ -503,7 +504,8 @@ trait RegisterHookAction
      */
     protected function registerMenuPostType(string $key, Collection $args): void
     {
-        $supports = (array)$args->get('supports', []);
+        $supports = (array) $args->get('supports', []);
+
         $prefix = 'post-type.';
 
         $this->addAdminMenu(

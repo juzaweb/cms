@@ -1,0 +1,1 @@
+import{j as n}from"./app-2d01f232.js";function l(t){return n("button",{type:t.type||"button",id:t.id,className:`btn btn-${t.color||"primary"} ${t.class||""}`,disabled:t.disabled||t.loading,onClick:t.onClick,children:t.label})}export{l as B};

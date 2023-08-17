@@ -18,7 +18,7 @@ use Juzaweb\CMS\Models\User;
 
 class MakeAdminCommand extends Command
 {
-    protected $signature = 'juzacms:make-admin';
+    protected $signature = 'cms:make-admin';
 
     protected array $user;
 

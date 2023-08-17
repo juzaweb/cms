@@ -1,1 +1,0 @@
-import{q as m,j as e}from"./app-13cc16b3.js";import t from"./menu_item-a66a5f3c.js";function o(){const{menu_items:r}=m().props;return e("ul",{className:"navbar-nav mr-auto",children:r&&e(t,{items:r})})}export{o as default};

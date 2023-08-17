@@ -14,16 +14,31 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Juzaweb\CMS\Facades\Theme;
+use Juzaweb\CMS\Contracts\HookActionContract;
+use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Http\Controllers\BackendController;
 
 class SettingController extends BackendController
 {
+    public function __construct(
+        protected LocalThemeRepositoryContract $themeRepository,
+        protected HookActionContract $hookAction
+    ) {
+        //
+    }
+
     public function index(): View
     {
+        $fnParseToField = function ($item) {
+            $item['type'] = $item['data']['type'] ?? 'text';
+            return $item;
+        };
+
         $title = trans('cms::app.setting');
-        $theme = Theme::find(jw_current_theme());
-        $configs = $theme->getConfigFields();
+        $configs = $this->hookAction->getThemeSettings()
+            ->map($fnParseToField)
+            ->values()
+            ->toArray();
 
         return view(
             'cms::backend.appearance.setting.index',

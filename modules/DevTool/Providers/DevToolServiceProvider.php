@@ -91,6 +91,8 @@ class DevToolServiceProvider extends ServiceProvider
         $this->setupStubPath();
 
         $this->app->register(ConsoleServiceProvider::class);
+
+        $this->mergeConfigFrom(__DIR__ . '/../../CMS/config/dev-tool.php', 'dev-tool');
     }
 
     /**

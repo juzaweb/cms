@@ -6,8 +6,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $page['props']['title'] ?? '' }}</title>
-
     <link rel="icon" href="{{ asset('jw-styles/juzaweb/images/favicon.ico') }}"/>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,400i,700&display=swap"/>
@@ -18,7 +16,15 @@
 
     @viteReactRefresh
 
-    @vite(["resources/js/app.tsx", "resources/css/app.css", "resources/js/pages/{$page['component']}.tsx"])
+    @vite(
+        ["resources/js/app.tsx", "resources/css/app.css", "resources/js/pages/{$page['component']}.tsx"],
+        'jw-styles/juzaweb/build'
+    )
+
+    @php
+        $__inertiaSsrDispatched = true;
+        $__inertiaSsrResponse = null;
+    @endphp
 
     @inertiaHead
 </head>
@@ -73,36 +79,9 @@
                 <div class="mb-3"></div>
             @endif
 
-            <h4 class="font-weight-bold ml-3 text-capitalize">{{ $page['props']['title'] ?? '' }}</h4>
-
-            <div class="juzaweb__utils__content">
-
-                @do_action('backend_message')
-
-                @php
-                    $messages = get_backend_message();
-                @endphp
-
-                @foreach($messages as $message)
-                    <div
-                        class="alert alert-{{ $message['status'] == 'error' ? 'danger' : $message['status'] }} jw-message">
-                        <button type="button" class="close close-message" data-dismiss="alert" aria-label="Close"
-                                data-id="{{ $message['id'] }}">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        {!! e_html($message['message']) !!}
-                    </div>
-                @endforeach
-
-                @if(session()->has('message'))
-                    <div
-                        class="alert alert-{{ session()->get('status') == 'error' ? 'danger' : 'success' }} jw-message">{{ session()->get('message') }}</div>
-                @endif
-
-                <div id="jquery-message"></div>
-
                 @inertia
-            </div>
+
+
         </div>
 
         <div class="juzaweb__layout__footer">
