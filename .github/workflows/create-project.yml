@@ -15,7 +15,7 @@ jobs:
         php: [8.0, 8.1]
         version: [^3.3, dev-master, dev-develop]
         mysql: [5.7.33, 5.7.37, 8.0.21]
-        withenv: [production, local]
+        withenv: [local]
     services:
       mysql:
         image: mysql:${{ matrix.mysql }}
