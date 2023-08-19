@@ -26,7 +26,7 @@ class CMSPublishCommand extends Command
         };
 
         if ($tag == 'cms_assets') {
-            File::deleteDirectory(base_path('public/jw-styles/juzaweb'), true);
+            File::deleteDirectory(base_path('public/jw-styles/juzaweb/build'), true);
         }
 
         $this->call(

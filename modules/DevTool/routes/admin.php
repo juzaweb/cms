@@ -25,6 +25,7 @@ Route::group(
     ['prefix' => 'dev-tools/plugins'],
     function () {
         Route::get('/create', [Plugins\PluginController::class, 'create']);
+        Route::post('/', [Plugins\PluginController::class, 'store']);
     }
 );
 

@@ -410,9 +410,11 @@ class ModuleGenerator extends Generator
             $this->cleanModuleJsonFile();
         }*/
 
+        $this->console->info("Plugin [{$name}] created successfully.");
+
         $this->activator->setActiveByName($name, $this->isActive);
 
-        $this->console->info("Plugin [{$name}] created successfully.");
+        $this->console->info("Plugin [{$name}] is actived.");
     }
 
     /**

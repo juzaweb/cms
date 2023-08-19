@@ -18,10 +18,9 @@ export default function Button(props: ButtonProps) {
             disabled={props.disabled || props.loading}
             onClick={props.onClick}
         >
-            {/*{props.loading ? (<>
-                <i className="fa fa-spinner fa-spin"></i> {__('Please wait...')}
-            </>) : props.label}*/}
-            {props.label}
+            {props.loading ? (<>
+                <i className="fa fa-spinner fa-spin"></i> {props.label}
+            </>) : props.label}
         </button>
     );
 }

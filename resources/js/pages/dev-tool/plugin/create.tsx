@@ -5,7 +5,7 @@ import Button from "@/components/form/buttons/button";
 import Input from "@/components/form/inputs/input";
 import Textarea from "@/components/form/inputs/textarea";
 import axios from "axios";
-import {admin_url, message_in_response} from "@/helpers/functions";
+import {admin_url, convert_to_label_field, convert_to_name_field, message_in_response} from "@/helpers/functions";
 
 export default function Create() {
     const [buttonLoading, setButtonLoading] = useState<boolean>(false);
@@ -14,6 +14,23 @@ export default function Create() {
         message: string
     }>();
     const [outputBuffer, setOutputBuffer] = useState<string>();
+    const [label, setLabel] = useState<string>();
+    const [domain, setDomain] = useState<string>();
+
+    const generateLabelByName = (e: any) => {
+        // If the input label is not empty, return
+        if (e.target.value === '') {
+            return;
+        }
+
+        // Format name to be [a-z0-9\-]
+        let name = convert_to_name_field(e.target.value);
+        let label = convert_to_label_field(name);
+
+        // Set label to the input
+        setLabel(label);
+        setDomain(name);
+    }
 
     const handleMakePlugin = (e: any) => {
         e.preventDefault();
@@ -68,6 +85,7 @@ export default function Create() {
                                     label={'Name'}
                                     required={true}
                                     description={'Plugin name must be unique, format: <b>vendor/plugin-name</b>.'}
+                                    onBlur={generateLabelByName}
                                 />
                             </div>
 
@@ -77,6 +95,7 @@ export default function Create() {
                                     label={'Title'}
                                     required={true}
                                     description={'Title display for the plugin.'}
+                                    value={label}
                                 />
                             </div>
                         </div>
@@ -90,7 +109,12 @@ export default function Create() {
 
                         <div className="row">
                             <div className="col-md-3">
-                                <Input name="domain" label={'Domain'} required />
+                                <Input
+                                    name="domain"
+                                    label={'Domain'}
+                                    required
+                                    value={domain}
+                                />
                             </div>
 
                             <div className="col-md-3">

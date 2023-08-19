@@ -57,7 +57,7 @@ class PluginController extends Controller
 
     public function store(Request $request): JsonResponse|RedirectResponse
     {
-        $name = Str::slug($request->input('name'));
+        $name = $request->input('name');
         if ($this->pluginRepository->has($name)) {
             return $this->error("Plugin {$name} already exists!");
         }
@@ -68,15 +68,17 @@ class PluginController extends Controller
             Artisan::call(
                 'plugin:make',
                 [
-                    'name' => $name,
+                    'name' => [$name],
                     '--title' => $request->input('title'),
                     '--description' => $request->input('description'),
                     '--domain' => $request->input('domain'),
                     '--author' => $request->input('author'),
                     '--ver' => $request->input('version'),
-                ]
+                ],
+                $outputBuffer
             );
         } catch (\Throwable $th) {
+            report($th);
             return $this->error($th->getMessage());
         }
 
