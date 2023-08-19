@@ -9,8 +9,6 @@ on:
 jobs:
   laravel-tests:
     runs-on: ${{ matrix.os }}
-    env:
-      APP_ENV: ${{ matrix.withenv }}
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -27,7 +25,7 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    name: PHP${{ matrix.php }} - ${{ matrix.version }} - ${{ matrix.mysql }} - ${{ matrix.withenv }}
+    name: PHP${{ matrix.php }} - ${{ matrix.version }} - ${{ matrix.mysql }}
 
     steps:
       - name: Setup PHP
