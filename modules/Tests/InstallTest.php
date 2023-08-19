@@ -15,7 +15,7 @@ use Juzaweb\CMS\Support\Installer;
 
 class InstallTest extends TestCase
 {
-    public function testInstallCommand()
+    public function testInstallCommand(): void
     {
         $this->resetTestData();
 
@@ -25,14 +25,14 @@ class InstallTest extends TestCase
             ->expectsQuestion('Password?', '12345678')
             ->assertExitCode(0);
 
-        $this->assertTrue(file_exists(Installer::installedPath()));
+        $this->assertFileExists(Installer::installedPath());
 
         $this->assertDatabaseHas('users', ['email' => 'demo@gmail.com', 'is_admin' => 1]);
     }
 
-    protected function resetTestData()
+    protected function resetTestData(): void
     {
-        $this->artisan('migrate:reset')
+        $this->artisan('migrate:reset', ['--force' => true])
             ->assertExitCode(0);
 
         if (file_exists(Installer::installedPath())) {
