@@ -15,13 +15,13 @@ use Juzaweb\Tests\TestCase;
 
 class DatabaseTest extends TestCase
 {
-    public function testMigration()
+    public function testMigration(): void
     {
         $this->artisan('migrate:refresh')
             ->assertExitCode(0);
     }
 
-    public function testSeed()
+    public function testSeed(): void
     {
         $this->artisan(
             'db:seed',
@@ -32,7 +32,7 @@ class DatabaseTest extends TestCase
             ->assertExitCode(0);
     }
 
-    public function testMakeAdmin()
+    public function testMakeAdmin(): void
     {
         $this->artisan('cms:make-admin')
             ->expectsQuestion('Full Name?', 'Taylor Otwell')
@@ -41,7 +41,7 @@ class DatabaseTest extends TestCase
             ->assertExitCode(0);
     }
 
-    public function testMakeEmailTemplate()
+    public function testMakeEmailTemplate(): void
     {
         $this->artisan('mail:generate-template')
             ->assertExitCode(0);

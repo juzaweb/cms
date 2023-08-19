@@ -2,7 +2,7 @@
 
 return [
     // Enable dev tool in production
-    'enable' => env('JW_DEV_TOOL_ENABLE', false),
+    'enable' => (bool) env('JW_DEV_TOOL_ENABLE', false),
 
     'themes' => [
         'options' => [

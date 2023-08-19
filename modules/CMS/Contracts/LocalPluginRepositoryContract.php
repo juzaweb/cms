@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Contracts;
 
+use Exception;
 use Illuminate\Support\Collection;
 use Juzaweb\CMS\Exceptions\PluginNotFoundException;
 use Juzaweb\CMS\Support\Plugin;

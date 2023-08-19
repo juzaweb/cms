@@ -42,6 +42,11 @@ class ModuleMakeCommand extends Command
                 ->setForce($this->option('force'))
                 ->setPlain($this->option('plain'))
                 ->setActive(! $this->option('disabled'))
+                ->setTitle($this->option('title'))
+                ->setDescription($this->option('description'))
+                ->setAuthor($this->option('author'))
+                ->setDomain($this->option('domain'))
+                ->setVersion($this->option('ver'))
                 ->generate();
         }
 
@@ -66,6 +71,11 @@ class ModuleMakeCommand extends Command
             ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain plugin (without some resources).'],
             ['disabled', 'd', InputOption::VALUE_NONE, 'Do not enable the plugin at creation.'],
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when the plugin already exists.'],
+            ['title', null, InputOption::VALUE_OPTIONAL, 'The title of the plugin.'],
+            ['description', null, InputOption::VALUE_OPTIONAL, 'The description of the plugin.'],
+            ['author', null, InputOption::VALUE_OPTIONAL, 'The author of the plugin.'],
+            ['domain', null, InputOption::VALUE_OPTIONAL, 'The domain of the plugin.'],
+            ['ver', null, InputOption::VALUE_OPTIONAL, 'The version of the plugin.'],
         ];
     }
 }

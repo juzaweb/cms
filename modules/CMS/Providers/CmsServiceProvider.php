@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\RateLimiter;
@@ -113,6 +114,9 @@ class CmsServiceProvider extends ServiceProvider
                 return new ModelUnique($modelClass, $modelAttribute, $callback);
             }
         );
+
+        // Prevent lazy loading in local environment
+        //Model::preventLazyLoading(!$this->app->isProduction());
 
         Schema::defaultStringLength(150);
 
