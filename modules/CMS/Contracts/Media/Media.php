@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Contracts\Media;
 
+use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Juzaweb\CMS\Support\Media\Disk;
 
@@ -17,4 +18,6 @@ interface Media
     public function tmp(): Disk;
 
     public function createFromFilesystem(string $name, Filesystem $filesystem): Disk;
+
+    public function getFactory(): Factory;
 }

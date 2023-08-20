@@ -42,4 +42,9 @@ class Media implements MediaContract
     {
         return new Disk($name, $this->filesystem);
     }
+
+    public function getFactory(): Factory
+    {
+        return $this->filesystem;
+    }
 }
