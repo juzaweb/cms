@@ -2,7 +2,7 @@
 
 namespace Juzaweb\CMS\Contracts\Media;
 
-use Juzaweb\CMS\Interfaces\Media\FileInterface;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Juzaweb\CMS\Support\Media\Disk;
 
 /**
@@ -16,9 +16,5 @@ interface Media
 
     public function tmp(): Disk;
 
-    /**
-     * @param string $token
-     * @return bool|FileInterface
-     */
-    public function verifyDownloadToken(string $token);
+    public function createFromFilesystem(string $name, Filesystem $filesystem): Disk;
 }

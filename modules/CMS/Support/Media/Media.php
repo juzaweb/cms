@@ -3,8 +3,8 @@
 namespace Juzaweb\CMS\Support\Media;
 
 use Illuminate\Contracts\Filesystem\Factory;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Crypt;
 use Juzaweb\CMS\Contracts\Media\Media as MediaContract;
 
 class Media implements MediaContract
@@ -33,23 +33,9 @@ class Media implements MediaContract
         return $this->disk('tmp');
     }
 
-    public function verifyDownloadToken(string $token)
+    public function createFromFilesystem(string $name, Filesystem $filesystem): Disk
     {
-        $data = json_decode(Crypt::decryptString(urldecode($token)), true);
-
-        try {
-            if (sha1($data['path']) !== $data['hash']) {
-                return false;
-            }
-
-            if ($data['time'] + $data['livetime'] < time()) {
-                return false;
-            }
-        } catch (\Throwable $e) {
-            return false;
-        }
-
-        return $this->disk($data['disk'])->createFile($data['path']);
+        return (new Disk($name, $this->filesystem))->setFileSystem($filesystem);
     }
 
     public function disk(string $name): Disk

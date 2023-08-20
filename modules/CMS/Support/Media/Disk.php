@@ -3,7 +3,9 @@
 namespace Juzaweb\CMS\Support\Media;
 
 use Illuminate\Contracts\Filesystem\Factory;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Facades\File as FileFacade;
 use Juzaweb\CMS\Contracts\Media\Disk as DiskContract;
 use Juzaweb\CMS\Interfaces\Media\FileInterface;
 use Juzaweb\CMS\Interfaces\Media\FolderInterface;
@@ -14,7 +16,7 @@ class Disk implements DiskContract
     protected Factory $filesystemFactory;
     protected Filesystem $filesystem;
 
-    public function __construct(string $name, $filesystemFactory)
+    public function __construct(string $name, Factory $filesystemFactory)
     {
         $this->name = $name;
         $this->filesystemFactory = $filesystemFactory;
@@ -22,18 +24,9 @@ class Disk implements DiskContract
 
     public function upload(string $source, string $name): FileInterface
     {
-        $this->uploadWithoutSaveDatabase($source, $name);
-
-        $this->filesystem()->put($source, $name);
-
-        return $this->createFile($name);
-    }
-
-    public function uploadWithoutSaveDatabase(string $source, string $name): FileInterface
-    {
         $resource = fopen($source, 'rb+');
 
-        $this->filesystem()->writeStream($name, $resource);
+        $this->filesystem()->writeStream($name, $resource, ['mimetype' => FileFacade::mimeType($source)]);
 
         fclose($resource);
 
@@ -45,11 +38,6 @@ class Disk implements DiskContract
         return $this->findFile($path)?->delete();
     }
 
-    public function downloadUrl(string $path, int $livetime = 3600): string
-    {
-        return $this->findFile($path)?->downloadUrl($livetime);
-    }
-
     /**
      * @param string $path
      * @return null|FileInterface
@@ -59,7 +47,17 @@ class Disk implements DiskContract
         if ($this->fileMissing($path)) {
             return null;
         }
+
         return $this->createFile($path);
+    }
+
+    public function findFileOrFail(string $path): FileInterface
+    {
+        if ($file = $this->findFile($path)) {
+            return $file;
+        }
+
+        throw new FileNotFoundException($path);
     }
 
     public function fileExists(string $path): bool
@@ -85,6 +83,15 @@ class Disk implements DiskContract
         return new Folder($path, $this->filesystem());
     }
 
+    public function findFolderOrFail(string $path): FolderInterface
+    {
+        if ($folder = $this->findFolder($path)) {
+            return $folder;
+        }
+
+        throw new FileNotFoundException($path);
+    }
+
     public function isDirectory(string $path): bool
     {
         if ($this->filesystem()->exists($path)) {
@@ -100,12 +107,12 @@ class Disk implements DiskContract
 
     public function path(string $path): string
     {
-        return $this->findFile($path)->path();
+        return $this->findFileOrFail($path)->path();
     }
 
     public function fullPath(string $path): string
     {
-        return $this->findFile($path)->fullPath();
+        return $this->findFileOrFail($path)->fullPath();
     }
 
     public function getName(): string
@@ -115,15 +122,18 @@ class Disk implements DiskContract
 
     public function filesystem(): Filesystem
     {
-        if (isset($this->filesystem)) {
-            return $this->filesystem;
-        }
-
-        return $this->filesystem = $this->filesystemFactory->disk($this->name);
+        return $this->filesystem ?? ($this->filesystem = $this->filesystemFactory->disk($this->name));
     }
 
     public function createFile(string $path): FileInterface
     {
         return new File($path, $this);
+    }
+
+    public function setFileSystem(Filesystem $filesystem): static
+    {
+        $this->filesystem = $filesystem;
+
+        return $this;
     }
 }

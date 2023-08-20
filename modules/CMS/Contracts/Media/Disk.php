@@ -23,8 +23,6 @@ interface Disk
 
     public function deleteFile(string $path): bool;
 
-    public function downloadUrl(string $path, int $livetime = 3600): string;
-
     public function fileExists(string $path): bool;
 
     public function findFolder(string $path): ?FolderInterface;
@@ -34,4 +32,6 @@ interface Disk
      * @return null|FileInterface
      */
     public function findFile(string $path): ?FileInterface;
+
+    public function setFileSystem(Filesystem $filesystem): static;
 }

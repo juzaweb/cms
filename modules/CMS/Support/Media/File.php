@@ -3,10 +3,10 @@
 namespace Juzaweb\CMS\Support\Media;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\Facades\Image;
 use Juzaweb\CMS\Contracts\Media\Disk as DiskContract;
 use Juzaweb\CMS\Interfaces\Media\FileInterface;
+use League\Flysystem\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use GuzzleHttp\Client;
 
@@ -50,24 +50,23 @@ class File implements FileInterface
         return $this->filesystem()->size($this->path);
     }
 
+    public function get(): string
+    {
+        return $this->filesystem()->get($this->path);
+    }
+
+    public function getMetadata(): array
+    {
+        if (method_exists($this->getAdapter(), 'getMetadata')) {
+            return $this->getAdapter()->getMetadata($this->path);
+        }
+
+        return [];
+    }
+
     public function delete(): bool
     {
         return $this->disk->filesystem()->delete($this->path);
-    }
-
-    public function downloadUrl(int $livetime = 3600): string
-    {
-        $data = json_encode(
-            [
-                'path' => $this->path,
-                'hash' => sha1($this->path),
-                'time' => time(),
-                'livetime' => $livetime,
-                'disk' => $this->disk->getName(),
-            ]
-        );
-
-        return route('media.download_url', [urldecode(Crypt::encryptString($data))]);
     }
 
     public function download(?string $name = null, ?array $headers = []): StreamedResponse
@@ -157,6 +156,11 @@ class File implements FileInterface
     public function canVisible(): bool
     {
         return $this->filesystem()->getVisibility($this->path) === 'public';
+    }
+
+    public function getAdapter(): FilesystemAdapter
+    {
+        return $this->filesystem()->getAdapter();
     }
 
     protected function filesystem(): Filesystem

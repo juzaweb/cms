@@ -2,6 +2,7 @@
 
 namespace Juzaweb\CMS\Interfaces\Media;
 
+use League\Flysystem\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 interface FileInterface
@@ -12,8 +13,6 @@ interface FileInterface
 
     public function delete(): bool;
 
-    public function downloadUrl(int $livetime = 3600): string;
-
     public function mimeType(): string;
 
     public function isImage(): bool;
@@ -23,4 +22,10 @@ interface FileInterface
     public function stream(): StreamedResponse;
 
     public function canVisible(): bool;
+
+    public function get(): string;
+
+    public function getMetadata(): array;
+
+    public function getAdapter(): FilesystemAdapter;
 }
