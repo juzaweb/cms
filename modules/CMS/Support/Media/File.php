@@ -55,6 +55,11 @@ class File implements FileInterface
         return $this->filesystem()->get($this->path);
     }
 
+    public function id(): string
+    {
+        return $this->getMetadata()['id'] ?? $this->path;
+    }
+
     public function getMetadata(): array
     {
         if (method_exists($this->getAdapter(), 'getMetadata')) {

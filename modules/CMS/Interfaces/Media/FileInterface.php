@@ -13,6 +13,8 @@ interface FileInterface
 
     public function delete(): bool;
 
+    public function id(): string;
+
     public function mimeType(): string;
 
     public function isImage(): bool;
