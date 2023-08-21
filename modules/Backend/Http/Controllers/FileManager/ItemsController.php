@@ -17,7 +17,7 @@ class ItemsController extends FileManagerController
         $perPage = 15;
 
         $workingDir = $request->get('working_dir');
-        $disk = $request->get('disk', config('juzaweb.filemanager.disk'));
+        $disk = $request->get('disk') ?? config('juzaweb.filemanager.disk');
 
         $folders = collect([]);
         if ($currentPage == 1) {
