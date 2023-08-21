@@ -115,6 +115,11 @@ class Disk implements DiskContract
         return $this->findFileOrFail($path)->fullPath();
     }
 
+    public function get(string $path): string
+    {
+        return $this->findFileOrFail($path)->get();
+    }
+
     public function getName(): string
     {
         return $this->name;

@@ -15,6 +15,8 @@ interface Disk
 
     public function fullPath(string $path): string;
 
+    public function get(string $path): string;
+
     public function getName(): string;
 
     public function filesystem(): Filesystem;
@@ -27,11 +29,15 @@ interface Disk
 
     public function findFolder(string $path): ?FolderInterface;
 
+    public function findFolderOrFail(string $path): FolderInterface;
+
     /**
      * @param  string  $path
      * @return null|FileInterface
      */
     public function findFile(string $path): ?FileInterface;
+
+    public function findFileOrFail(string $path): FileInterface;
 
     public function setFileSystem(Filesystem $filesystem): static;
 }
