@@ -22,15 +22,18 @@ class Disk implements DiskContract
         $this->filesystemFactory = $filesystemFactory;
     }
 
-    public function upload(string $source, string $name): FileInterface
+    public function upload(string $path, string $name): FileInterface
     {
-        $resource = fopen($source, 'rb+');
-
-        $this->filesystem()->writeStream($name, $resource, ['mimetype' => FileFacade::mimeType($source)]);
-
-        fclose($resource);
+        $this->filesystem()->writeStream($name, fopen($path, 'rb+'), ['mimetype' => FileFacade::mimeType($path)]);
 
         return $this->createFile($name);
+    }
+
+    public function put(string $path, string $contents): FileInterface
+    {
+        $this->filesystem()->put($path, $contents);
+
+        return $this->createFile($path);
     }
 
     public function deleteFile(string $path): bool

@@ -7,6 +7,7 @@ use Intervention\Image\Facades\Image;
 use Juzaweb\CMS\Contracts\Media\Disk as DiskContract;
 use Juzaweb\CMS\Interfaces\Media\FileInterface;
 use League\Flysystem\FilesystemAdapter;
+use League\Flysystem\StorageAttributes;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use GuzzleHttp\Client;
 
@@ -57,10 +58,21 @@ class File implements FileInterface
 
     public function id(): string
     {
-        return $this->getMetadata()['id'] ?? $this->path;
+        $metas = $this->getMetadata();
+
+        if (is_array($metas)) {
+            return $metas['id'] ?? $this->path;
+        }
+
+        if ($metas instanceof StorageAttributes) {
+            $data = $metas->jsonSerialize();
+            return $data['extra_metadata']['id'] ?? $this->path;
+        }
+
+        return $this->path;
     }
 
-    public function getMetadata(): array
+    public function getMetadata(): array|StorageAttributes
     {
         if (method_exists($this->getAdapter(), 'getMetadata')) {
             return $this->getAdapter()->getMetadata($this->path);

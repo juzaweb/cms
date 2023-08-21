@@ -3,6 +3,7 @@
 namespace Juzaweb\CMS\Interfaces\Media;
 
 use League\Flysystem\FilesystemAdapter;
+use League\Flysystem\StorageAttributes;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 interface FileInterface
@@ -27,7 +28,7 @@ interface FileInterface
 
     public function get(): string;
 
-    public function getMetadata(): array;
+    public function getMetadata(): array|StorageAttributes;
 
     public function getAdapter(): FilesystemAdapter;
 }
