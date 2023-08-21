@@ -15,7 +15,15 @@ return new class extends Migration {
         Schema::table(
             'media_files',
             function (Blueprint $table) {
-                $table->string('disk')->default('public');
+                $table->string('disk', 50)->default('public')->index();
+                $table->json('metadata')->nullable();
+            }
+        );
+
+        Schema::table(
+            'media_folders',
+            function (Blueprint $table) {
+                $table->string('disk', 50)->default('public')->index();
             }
         );
     }
@@ -29,6 +37,13 @@ return new class extends Migration {
     {
         Schema::table(
             'media_files',
+            function (Blueprint $table) {
+                $table->dropColumn(['disk', 'metadata']);
+            }
+        );
+
+        Schema::table(
+            'media_folders',
             function (Blueprint $table) {
                 $table->dropColumn(['disk']);
             }

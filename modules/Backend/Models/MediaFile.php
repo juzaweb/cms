@@ -49,6 +49,12 @@ class MediaFile extends Model
         'folder_id',
         'type',
         'size',
+        'disk',
+        'metadata',
+    ];
+
+    protected $casts = [
+        'metadata' => 'array',
     ];
 
     public function delete()

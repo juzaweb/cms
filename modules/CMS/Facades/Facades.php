@@ -241,7 +241,8 @@ class Facades
             'pdf',
             'xml',
             'mp4',
-            'mp3'
+            'mp3',
+            'json',
         ];
     }
 
@@ -256,7 +257,10 @@ class Facades
             'application/pdf',
             'text/xml',
             'video/mp4',
-            'audio/mp3'
+            'audio/mp3',
+            'application/zip',
+            'application/x-zip-compressed',
+            'application/json',
         ];
     }
 

@@ -16,15 +16,19 @@ class ItemsController extends FileManagerController
         $currentPage = self::getCurrentPageFromRequest();
         $perPage = 15;
 
-        $working_dir = $request->get('working_dir');
+        $workingDir = $request->get('working_dir');
+        $disk = $request->get('disk', config('juzaweb.filemanager.disk'));
+
         $folders = collect([]);
         if ($currentPage == 1) {
-            $folders = MediaFolder::where('folder_id', '=', $working_dir)
+            $folders = MediaFolder::where('folder_id', '=', $workingDir)
+                ->where('disk', '=', $disk)
                 ->orderBy('name', 'ASC')
                 ->get(['id', 'name']);
         }
 
-        $query = MediaFile::where('folder_id', '=', $working_dir)
+        $query = MediaFile::where('folder_id', '=', $workingDir)
+            ->where('disk', '=', $disk)
             ->whereIn('extension', $extensions)
             ->orderBy('id', 'DESC');
 
@@ -50,7 +54,7 @@ class ItemsController extends FileManagerController
                 'icon' => $file->type == 'image' ? 'fa-image' : 'fa-file',
                 'is_file' => true,
                 'path' => $file->path,
-                'is_image' => $file->type == 1,
+                'is_image' => $file->type == 'image',
                 'name' => $file->name,
                 'thumb_url' => $file->type == 'image' ? upload_url($file->path) : null,
                 'time' => strtotime($file->created_at),
@@ -66,7 +70,7 @@ class ItemsController extends FileManagerController
                 'per_page' => $perPage,
             ],
             'display' => 'grid',
-            'working_dir' => $working_dir,
+            'working_dir' => $workingDir,
         ];
     }
 
