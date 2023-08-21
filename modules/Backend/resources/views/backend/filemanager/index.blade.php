@@ -133,7 +133,7 @@
                             </div>
                             <input type='hidden' name='working_dir' class='working_dir'>
                             <input type='hidden' name='type' class='type' value='{{ request("type") }}'>
-                            <input type='hidden' name='disk' class='type' value='{{ request()->get('disk') }}'>
+                            <input type='hidden' name='disk' class='disk' value='{{ request()->get('disk') }}'>
                             <input type='hidden' name='_token' value='{{ csrf_token() }}'>
                         </form>
                     </div>
@@ -150,7 +150,7 @@
 
                             <input type="hidden" name="working_dir" class='working_dir'>
                             <input type="hidden" name="type" class="type" value="{{ request("type") }}">
-                            <input type='hidden' name='disk' class='type' value='{{ request()->get('disk') }}'>
+                            <input type='hidden' name='disk' value='{{ request()->get('disk') }}'>
 
                             <button type="submit" class="btn btn-success mt-2">
                                 <i class="fa fa-cloud-upload"></i> {{ trans('cms::app.file_manager.upload_file') }}
