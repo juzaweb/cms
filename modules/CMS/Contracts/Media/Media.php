@@ -17,6 +17,8 @@ interface Media
 
     public function tmp(): Disk;
 
+    public function disk(string $name): Disk;
+
     public function createFromFilesystem(string $name, Filesystem $filesystem): Disk;
 
     public function getFactory(): Factory;
