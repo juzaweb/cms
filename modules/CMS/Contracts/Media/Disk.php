@@ -21,9 +21,9 @@ interface Disk
 
     public function filesystem(): Filesystem;
 
-    public function upload(string $path, string $name): FileInterface;
+    public function upload(string $path, string $name, array $options = []): FileInterface;
 
-    public function put(string $path, string $contents): FileInterface;
+    public function put(string $path, string $contents, array $options = []): FileInterface;
 
     public function deleteFile(string $path): bool;
 

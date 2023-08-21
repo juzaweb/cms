@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File as FileFacade;
 use Juzaweb\CMS\Contracts\Media\Disk as DiskContract;
 use Juzaweb\CMS\Interfaces\Media\FileInterface;
 use Juzaweb\CMS\Interfaces\Media\FolderInterface;
+use League\MimeTypeDetection\FinfoMimeTypeDetector;
 
 class Disk implements DiskContract
 {
@@ -22,16 +23,25 @@ class Disk implements DiskContract
         $this->filesystemFactory = $filesystemFactory;
     }
 
-    public function upload(string $path, string $name): FileInterface
+    public function upload(string $path, string $name, array $options = []): FileInterface
     {
-        $this->filesystem()->writeStream($name, fopen($path, 'rb+'), ['mimetype' => FileFacade::mimeType($path)]);
+        if (!isset($options['mimetype'])) {
+            $options['mimetype'] = FileFacade::mimeType($path);
+        }
+
+        $this->filesystem()->put($name, fopen($path, 'r+'), $options);
 
         return $this->createFile($name);
     }
 
-    public function put(string $path, string $contents): FileInterface
+    public function put(string $path, string $contents, array $options = []): FileInterface
     {
-        $this->filesystem()->put($path, $contents);
+        if (!isset($options['mimetype'])) {
+            $detector = new FinfoMimeTypeDetector();
+            $options['mimetype'] = $detector->detectMimeTypeFromBuffer($contents);
+        }
+
+        $this->filesystem()->put($path, $contents, $options);
 
         return $this->createFile($path);
     }
