@@ -236,7 +236,7 @@ class FileManager
                     'extension' => $uploadedFile->getClientOriginalExtension(),
                     'folder_id' => $this->folder_id,
                     'user_id' => $this->user_id ?: $jw_user->id,
-                    'disk' => $this->disk,
+                    'disk' => $this->disk ?? config('juzaweb.filemanager.disk'),
                 ]
             );
 
