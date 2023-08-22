@@ -324,16 +324,16 @@ class Theme implements ThemeLoaderContract
             return Arr::get($this->getRegister($theme), "templates.{$template}");
         }
 
-        return $this->getRegister($theme, 'templates');
+        return $this->getRegister($theme, 'templates', []);
     }
 
-    public function getRegister($theme, $key = null): string|array|null
+    public function getRegister($theme, $key = null, $default = null): string|array|null
     {
         $path = $this->getThemePath($theme, 'register.json');
         if (file_exists($path)) {
-            $data = json_decode(file_get_contents($path), true);
+            $data = json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
             if ($key) {
-                return Arr::get($data, $key);
+                return Arr::get($data, $key, $default);
             }
 
             return $data;

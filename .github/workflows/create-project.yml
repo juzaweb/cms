@@ -10,6 +10,7 @@ jobs:
   laravel-tests:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         php: [8.0, 8.1]

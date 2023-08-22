@@ -20,6 +20,12 @@ class UploadController extends FileManagerController
     public function upload(Request $request): JsonResponse
     {
         $folderId = $request->input('working_dir');
+        $disk = $request->input('disk') ?? config('juzaweb.filemanager.disk');
+
+        if (!in_array($disk, ['public', 'protected'])) {
+            return $this->responseUpload([trans('cms::message.invalid_disk') ]);
+        }
+
         if (empty($folderId)) {
             $folderId = null;
         }
@@ -35,7 +41,9 @@ class UploadController extends FileManagerController
                 $file = FileManager::addFile(
                     $save->getFile(),
                     $this->getType(),
-                    $folderId
+                    $folderId,
+                    null,
+                    $disk
                 );
 
                 event(new UploadFileSuccess($file));
@@ -66,9 +74,14 @@ class UploadController extends FileManagerController
 
         $folderId = $request->input('working_dir');
         $download = (bool) $request->input('download');
+        $disk = $request->input('disk') ?? config('juzaweb.filemanager.disk');
 
         if (empty($folderId)) {
             $folderId = null;
+        }
+
+        if (!in_array($disk, ['public', 'protected'])) {
+            return $this->responseUpload([trans('cms::message.invalid_disk') ]);
         }
 
         DB::beginTransaction();
@@ -77,6 +90,7 @@ class UploadController extends FileManagerController
             $file->setType($this->getType());
             $file->setFolder($folderId);
             $file->setDownloadFileUrlToServer($download);
+            $file->setDisk($disk);
             $file->save();
             DB::commit();
         } catch (\Exception $e) {

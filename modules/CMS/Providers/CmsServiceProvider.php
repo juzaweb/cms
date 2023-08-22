@@ -29,6 +29,7 @@ use Juzaweb\CMS\Contracts\JWQueryContract;
 use Juzaweb\CMS\Contracts\LocalPluginRepositoryContract;
 use Juzaweb\CMS\Contracts\LocalThemeRepositoryContract;
 use Juzaweb\CMS\Contracts\MacroableModelContract;
+use Juzaweb\CMS\Contracts\Media\Media as MediaContract;
 use Juzaweb\CMS\Contracts\OverwriteConfigContract;
 use Juzaweb\CMS\Contracts\PostImporterContract;
 use Juzaweb\CMS\Contracts\PostManagerContract;
@@ -57,6 +58,7 @@ use Juzaweb\CMS\Support\MacroableModel;
 use Juzaweb\CMS\Support\Manager\BackendMessageManager;
 use Juzaweb\CMS\Support\Manager\PostManager;
 use Juzaweb\CMS\Support\Manager\TranslationManager;
+use Juzaweb\CMS\Support\Media\Media;
 use Juzaweb\CMS\Support\ShortCode\Compilers\ShortCodeCompiler;
 use Juzaweb\CMS\Support\ShortCode\ShortCode;
 use Juzaweb\CMS\Support\StorageData;
@@ -341,6 +343,8 @@ class CmsServiceProvider extends ServiceProvider
                 return new ShortCode($app[ShortCodeCompilerContract::class]);
             }
         );
+
+        $this->app->singleton(MediaContract::class, Media::class);
 
         $this->app->singleton(
             TranslationFinderContract::class,
