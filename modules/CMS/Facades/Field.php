@@ -21,6 +21,7 @@ use Juzaweb\CMS\Contracts\Field as FieldContract;
  * @method static View|Factory render(array $fields, array|Model $values = [], bool $collection = false)
  * @method static select(string|Model $label, ?string $name, ?array $options = [])
  * @method static selectUser(string|Model $label, ?string $name, ?array $options = [])
+ * @method static selectTaxonomy(string|Model $label, ?string $name, ?array $options = [])
  * @method static textarea(string|Model $label, ?string $name, ?array $options = [])
  * @method static images(string|Model $label, ?string $name, ?array $options = [])
  * @method static security(string|Model $label, ?string $name, ?array $options = [])

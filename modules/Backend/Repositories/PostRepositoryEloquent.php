@@ -189,7 +189,7 @@ class PostRepositoryEloquent extends BaseRepositoryEloquent implements PostRepos
         $this->applyScope();
 
         $taxonomies = collect($post->json_taxonomies)
-            ->when($taxonomy, fn($q) => $q->where('taxonomy', $taxonomy))
+            ->when($taxonomy, fn ($q) => $q->where('taxonomy', $taxonomy))
             ->pluck('id')
             ->toArray();
 
