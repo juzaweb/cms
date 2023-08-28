@@ -1,5 +1,6 @@
 {
     "name": "juzaweb/example",
+    "type": "juzaweb-plugin",
     "description": "This is Example plugin for Juzaweb CMS",
     "extra": {
         "laravel": {

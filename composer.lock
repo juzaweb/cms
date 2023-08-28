@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65269f6ad15ceb0440a295cada14eae0",
+    "content-hash": "d9c7731e36a53592226108bdb4cc8577",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -9902,6 +9902,52 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "juzaweb/dev-tool",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/juzaweb/dev-tool.git",
+                "reference": "e4e61f49500d0e6843ae3a11c00e46b0b375c289"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/juzaweb/dev-tool/zipball/e4e61f49500d0e6843ae3a11c00e46b0b375c289",
+                "reference": "e4e61f49500d0e6843ae3a11c00e46b0b375c289",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0|^8.1"
+            },
+            "require-dev": {
+                "juzaweb/modules": "dev-latest",
+                "roave/security-advisories": "dev-latest"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Juzaweb\\DevTool\\Providers\\DevToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\DevTool\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "description": "Develop Tool for Juzaweb CMS",
+            "support": {
+                "issues": "https://github.com/juzaweb/dev-tool/issues",
+                "source": "https://github.com/juzaweb/dev-tool/tree/master"
+            },
+            "time": "2023-08-28T15:15:43+00:00"
         },
         {
             "name": "laravel/sail",

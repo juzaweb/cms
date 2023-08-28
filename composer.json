@@ -1,6 +1,7 @@
 {
     "name": "juzaweb/cms",
     "type": "project",
+    "homepage": "https://juzaweb.com",
     "description": "Juzaweb CMS is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb",
     "keywords": [
         "framework",
@@ -15,15 +16,18 @@
     "license": "GPL-2.0",
     "require": {
         "php": "^8.0|^8.1",
+        "composer/installers": "^2.2",
         "guzzlehttp/guzzle": "^7.2",
-        "juzaweb/modules": "*",
+        "juzaweb/modules": "^1.0",
         "laravel/framework": "^9.2",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "oomphinc/composer-installers-extender": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.1",
         "fakerphp/faker": "^1.9.1",
+        "juzaweb/dev-tool": "^1.0",
         "laravel/sail": "^1.0.1",
         "laravel/telescope": "^4.7",
         "mockery/mockery": "^1.4.4",
@@ -50,6 +54,11 @@
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "installer-types": ["juzaweb-plugin", "juzaweb-theme"],
+        "installer-paths": {
+            "plugins/{$name}/": ["type:juzaweb-plugin"],
+            "themes/{$name}/": ["type:juzaweb-theme"]
         }
     },
     "config": {
@@ -61,6 +70,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "homepage": "https://juzaweb.com"
+    "prefer-stable": true
 }
