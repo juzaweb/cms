@@ -18,7 +18,7 @@
         "php": "^8.0|^8.1",
         "composer/installers": "^2.2",
         "guzzlehttp/guzzle": "^7.2",
-        "juzaweb/modules": "^1.0",
+        "juzaweb/modules": "*",
         "laravel/framework": "^9.2",
         "laravel/tinker": "^2.7",
         "oomphinc/composer-installers-extender": "^2.0"
@@ -27,7 +27,7 @@
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.1",
         "fakerphp/faker": "^1.9.1",
-        "juzaweb/dev-tool": "^1.0",
+        "juzaweb/dev-tool": "*",
         "laravel/sail": "^1.0.1",
         "laravel/telescope": "^4.7",
         "mockery/mockery": "^1.4.4",
@@ -66,9 +66,17 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "composer/installers": true,
+            "oomphinc/composer-installers-extender": true
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./plugins/*"
+        }
+    ]
 }
