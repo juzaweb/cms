@@ -111,32 +111,6 @@ export default function TopOptions(
                         options={modules}
                     />
                 )}
-
-                {/*<select
-                    className={'form-control'}
-                    onChange={handleModuleChange}
-                    value={customModuleSelected}
-                >
-                    <option value="">{__('--- Select Module ---')}</option>
-                    <optgroup label={__('Themes')}></optgroup>
-                    {themes && themes.map((theme: any) => (
-                        <option
-                            value={theme.name}
-                            key={theme.name}
-                            data-type={'themes'}
-                        >
-                            {theme.title} ({theme.name})
-                        </option>
-                    ))}
-                    <optgroup label={__('Plugins')}></optgroup>
-                    {plugins && plugins.map((plugin: any) => (
-                        <option value={plugin.name}
-                                key={plugin.name}
-                                data-type={'plugins'}
-                                className={'dropdown-item'}
-                        >{plugin.extra?.juzaweb?.name || plugin.name} ({plugin.name})</option>
-                    ))}
-                </select>*/}
             </div>
 
             <div className="col-md-4">
@@ -146,21 +120,6 @@ export default function TopOptions(
                     value={customOptionSelected}
                     onChange={handleOptionChange}
                 />
-
-                {/*<select className={'form-control'}
-                        value={customOptionSelected}
-                        onChange={handleOptionChange}
-                >
-                    <option value="">{__('--- Options ---')}</option>
-                    {customConfigs && customConfigs.options.map((item) => (
-                        <option
-                            value={item.key}
-                            key={item.key}
-                        >
-                            {__(item.label)}
-                        </option>
-                    ))}
-                </select>*/}
             </div>
 
             <div className="col-md-4">
@@ -178,6 +137,9 @@ export default function TopOptions(
                         <Link className="dropdown-item"
                               href={admin_url(`dev-tools/themes/create`)}
                         >{__('Make New Theme')}</Link>
+                        <Link className="dropdown-item"
+                              href={admin_url(`dev-tools/plugins/create`)}
+                        >{__('Make New Plugin')}</Link>
                     </div>
                 </div>
             </div>

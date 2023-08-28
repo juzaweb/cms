@@ -22,10 +22,17 @@ Route::group(
 );
 
 Route::group(
+    ['prefix' => 'dev-tools/plugins'],
+    function () {
+        Route::get('/create', [Plugins\PluginController::class, 'create']);
+        Route::post('/', [Plugins\PluginController::class, 'store']);
+    }
+);
+
+Route::group(
     ['prefix' => 'dev-tools/plugins/{vendor}/{name}'],
     function () {
         Route::get('/', [Plugins\PluginController::class, 'index']);
-        Route::post('make-crud', [Plugins\PluginController::class, 'makeCRUD']);
     }
 );
 

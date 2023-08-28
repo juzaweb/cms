@@ -132,10 +132,6 @@ export default function Index({ theme, settings }: { theme: Theme, settings: Arr
                                             {Object.keys(InputFieldTypes).map((type, index) => (
                                                 <option key={index} value={type}>{InputFieldTypes[type]}</option>
                                             ))}
-                                            <option value="text">Text</option>
-                                            <option value="textarea">Textarea</option>
-                                            <option value="number">Number</option>
-                                            <option value="image">Image</option>
                                         </select>
                                     </td>
 

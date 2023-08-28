@@ -1,5 +1,6 @@
 let juzawebFileManager = function (options, cb) {
     let type = options.type || 'image';
+    let disk = options.disk || null;
     let routePrefix = options.prefix;
     let multichoose = options.multichoose || false;
 
@@ -17,7 +18,7 @@ let juzawebFileManager = function (options, cb) {
     let left = (width - w) / 2 / systemZoom + dualScreenLeft;
     let top = (height - h) / 2 / systemZoom + dualScreenTop;
 
-    window.open(routePrefix + '?type=' + type + (multichoose ? '&multichoose=1' : ''), 'File Manager', 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
+    window.open(routePrefix + '?type=' + type + (multichoose ? '&multichoose=1' : '') + (disk ? '&disk=' + disk : ''), 'File Manager', 'scrollbars=yes, width=' + w / systemZoom + ', height=' + h / systemZoom + ', top=' + top + ', left=' + left);
     window.SetUrl = cb;
 };
 
@@ -49,7 +50,7 @@ $.fn.filemanager = function(type, options) {
     });
 };
 
-$(document).ready(function () {
+$(function () {
     const bodyElement = $('body');
 
     bodyElement.on('click', '.file-manager', function () {
@@ -58,10 +59,12 @@ $(document).ready(function () {
         let preview = $(this).data('preview');
         let name = $(this).data('name');
         let prefix = juzaweb.adminPrefix + '/file-manager';
+        let disk = $(this).data('disk');
 
         juzawebFileManager({
             type: type,
-            prefix: prefix
+            prefix: prefix,
+            disk: disk
         }, function (files) {
             let file = files[0];
 

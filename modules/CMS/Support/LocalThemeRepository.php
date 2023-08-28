@@ -136,7 +136,7 @@ class LocalThemeRepository implements LocalThemeRepositoryContract
         return $this->createThemeRender($theme)->parseParam($param);
     }
 
-    public function exists(string $name): bool
+    public function has(string $name): bool
     {
         return $this->find($name) !== null;
     }

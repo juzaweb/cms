@@ -69,7 +69,7 @@ class ThemeController extends Controller
     public function store(StoreRequest $request): JsonResponse|RedirectResponse
     {
         $name = Str::slug($request->input('name'));
-        if ($this->themeRepository->exists($name)) {
+        if ($this->themeRepository->has($name)) {
             return $this->error("Theme {$name} already exists!");
         }
 

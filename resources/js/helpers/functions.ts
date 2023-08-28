@@ -44,7 +44,7 @@ export function convert_to_slug(str: string): string {
 }
 
 export function convert_to_name_field(str: string): string {
-    return str.toLowerCase().replace(/[^a-z0-9\-]/ig, '_');
+    return str.toLowerCase().replace(/[^a-z0-9_]/ig, '_');
 }
 
 export function message_in_response(response: any): { status: boolean, message: string, errors?: Array<string> } | undefined {

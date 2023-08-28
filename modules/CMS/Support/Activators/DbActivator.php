@@ -72,7 +72,7 @@ class DbActivator implements ActivatorInterface
      */
     public function enable(Plugin $module): void
     {
-        $this->setActiveByName($module, true);
+        $this->setActiveByName($module->getName(), true);
     }
 
     /**
@@ -84,7 +84,7 @@ class DbActivator implements ActivatorInterface
      */
     public function disable(Plugin $module): void
     {
-        $this->setActiveByName($module, false);
+        $this->setActiveByName($module->getName(), false);
     }
 
     /**
@@ -120,53 +120,54 @@ class DbActivator implements ActivatorInterface
     /**
      * Sets a plugin status by its name
      *
-     * @param Plugin $module
+     * @param string $module
      * @param bool $active
      * @throws PluginNotFoundException
      * @throws FileNotFoundException
      */
     public function setActiveByName($module, $active): void
     {
-        $name = $module->getName();
         if ($active) {
-            $pluginPath = $module->getPath();
-            $pluginFile = $pluginPath . '/composer.json';
-            $setting = @json_decode(
-                $this->files->get($pluginFile),
-                true
-            );
+            // $pluginPath = $module->getPath();
+            // $pluginFile = $pluginPath . '/composer.json';
+            // $setting = @json_decode(
+            //     $this->files->get($pluginFile),
+            //     true
+            // );
 
-            if (isset($setting['autoload']['psr-4'])) {
-                $psr4 = $setting['autoload']['psr-4'];
-                $domain = $setting['extra']['juzaweb']['domain'] ?? '';
+            // if (isset($setting['autoload']['psr-4'])) {
+            //     $psr4 = $setting['autoload']['psr-4'];
+            //     $domain = $setting['extra']['juzaweb']['domain'] ?? '';
+            //
+            //     $classMap = [];
+            //     foreach ($psr4 as $key => $paths) {
+            //         if (!is_array($paths)) {
+            //             $paths = [$paths];
+            //         }
+            //
+            //         foreach ($paths as $path) {
+            //             if ($path[strlen($path) - 1] == '/') {
+            //                 $path = rtrim($path, '/');
+            //             }
+            //
+            //             $classMap[] = [
+            //                 'namespace' => $key,
+            //                 'path' => $pluginPath . '/' . $path,
+            //                 'domain' => $domain,
+            //             ];
+            //         }
+            //     }
+            //
+            //     $this->modulesStatuses[$name] = $classMap;
+            // } else {
+            //     throw new PluginNotFoundException(
+            //         "Plugin [". $name . "] does not exists."
+            //     );
+            // }
 
-                $classMap = [];
-                foreach ($psr4 as $key => $paths) {
-                    if (!is_array($paths)) {
-                        $paths = [$paths];
-                    }
-
-                    foreach ($paths as $path) {
-                        if ($path[strlen($path) - 1] == '/') {
-                            $path = rtrim($path, '/');
-                        }
-
-                        $classMap[] = [
-                            'namespace' => $key,
-                            'path' => $pluginPath . '/' . $path,
-                            'domain' => $domain,
-                        ];
-                    }
-                }
-
-                $this->modulesStatuses[$name] = $classMap;
-            } else {
-                throw new PluginNotFoundException(
-                    "Plugin [". $name . "] does not exists."
-                );
-            }
+            $this->modulesStatuses[$module] = $module;
         } else {
-            unset($this->modulesStatuses[$name]);
+            unset($this->modulesStatuses[$module]);
         }
 
         $this->writeData();

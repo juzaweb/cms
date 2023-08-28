@@ -4,6 +4,8 @@ namespace Juzaweb\CMS\Support;
 
 use Exception;
 use GuzzleHttp\Client;
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -38,6 +40,8 @@ class FileManager
 
     protected array $errors = [];
 
+    protected ?string $disk = null;
+
     public static function make($file): static
     {
         return (new self())->withResource($file);
@@ -47,31 +51,31 @@ class FileManager
      * Add file
      *
      * @param $file
-     * @param string $type
-     * @param int|null $folderId
-     * @param int|null $userId
-     *
+     * @param  string  $type
+     * @param  int|null  $folderId
+     * @param  int|null  $userId
+     * @param  string|null  $disk
      * @return MediaFile
      * @throws FileManagerException
-     * @throws Exception
      */
     public static function addFile(
         $file,
         string $type = 'image',
         int|null $folderId = null,
-        int|null $userId = null
+        int|null $userId = null,
+        ?string $disk = null
     ): MediaFile {
         return (new self())
             ->withResource($file)
             ->setType($type)
             ->setFolder($folderId)
             ->setUserId($userId)
+            ->setDisk($disk)
             ->save();
     }
 
     public function __construct()
     {
-        $this->storage = Storage::disk(config('juzaweb.filemanager.disk'));
         $this->client = new Client();
     }
 
@@ -143,6 +147,13 @@ class FileManager
         return $this;
     }
 
+    public function setDisk(?string $disk): static
+    {
+        $this->disk = $disk;
+
+        return $this;
+    }
+
     public function setDownloadFileUrlToServer(bool $downloadFileUrlToServer): static
     {
         $this->downloadFileUrlToServer = $downloadFileUrlToServer;
@@ -179,6 +190,7 @@ class FileManager
                     'extension' => $extension,
                     'folder_id' => $this->folder_id,
                     'user_id' => $this->user_id ?: $jw_user->id,
+                    'disk' => $this->disk,
                 ]
             );
         }
@@ -200,7 +212,7 @@ class FileManager
 
         $uploadFolder = $this->makeFolderUpload();
         $filename = $this->makeFilename($uploadedFile, $uploadFolder);
-        $newPath = $this->storage->putFileAs(
+        $newPath = $this->getStorage()->putFileAs(
             $uploadFolder,
             $uploadedFile,
             $filename
@@ -209,7 +221,7 @@ class FileManager
         if (config('juzaweb.filemanager.image-optimizer')) {
             if (in_array($uploadedFile->getMimeType(), $this->getImageMimetype())) {
                 $optimizerChain = OptimizerChainFactory::create();
-                $optimizerChain->optimize($this->storage->path($newPath));
+                $optimizerChain->optimize($this->getStorage()->path($newPath));
             }
         }
 
@@ -224,6 +236,7 @@ class FileManager
                     'extension' => $uploadedFile->getClientOriginalExtension(),
                     'folder_id' => $this->folder_id,
                     'user_id' => $this->user_id ?: $jw_user->id,
+                    'disk' => $this->disk ?? config('juzaweb.filemanager.disk'),
                 ]
             );
 
@@ -242,7 +255,7 @@ class FileManager
 
     protected function makeThumbImage(string $path): void
     {
-        $img = Image::make($this->storage->path($path));
+        $img = Image::make($this->getStorage()->path($path));
         $img->resize(
             150,
             null,
@@ -269,8 +282,8 @@ class FileManager
     {
         $folderPath = date('Y/m/d');
         // Make Directory if not exists
-        if (! $this->storage->exists($folderPath)) {
-            File::makeDirectory($this->storage->path($folderPath), 0775, true);
+        if (! $this->getStorage()->exists($folderPath)) {
+            File::makeDirectory($this->getStorage()->path($folderPath), 0775, true);
         }
         return $folderPath;
     }
@@ -317,8 +330,8 @@ class FileManager
             throw new Exception("Can't get file extension: {$this->resource}");
         }
 
-        $this->storage->put($tempName, $content);
-        return (new UploadedFile($this->storage->path($tempName), $tempName));
+        $this->getStorage()->put($tempName, $content);
+        return (new UploadedFile($this->getStorage()->path($tempName), $tempName));
     }
 
     protected function makeFilename(UploadedFile $file, string $uploadFolder): string|null
@@ -331,7 +344,7 @@ class FileManager
         $i = 0;
         while (1) {
             $filename = $name . ($i > 0 ? "-{$i}": '') .'.'. $extension;
-            if (!$this->storage->exists("{$uploadFolder}/{$filename}")) {
+            if (!$this->getStorage()->exists("{$uploadFolder}/{$filename}")) {
                 break;
             }
             $i++;
@@ -425,5 +438,16 @@ class FileManager
         if ($this->resource_type != 'uploaded') {
             unlink($file->getRealPath());
         }
+    }
+
+    protected function getStorage(): Filesystem|Storage|FilesystemAdapter
+    {
+        if (isset($this->storage)) {
+            return $this->storage;
+        }
+
+        $this->storage = Storage::disk($this->disk ?? config('juzaweb.filemanager.disk'));
+
+        return $this->storage;
     }
 }
