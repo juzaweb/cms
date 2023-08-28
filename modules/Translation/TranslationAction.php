@@ -21,6 +21,7 @@ class TranslationAction extends Action
                 'menu' => [
                     'icon' => 'fa fa-language',
                     'position' => 90,
+                    'parent' => 'tools',
                 ],
             ]
         );

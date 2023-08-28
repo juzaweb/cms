@@ -22,7 +22,7 @@ class UploadController extends FileManagerController
         $folderId = $request->input('working_dir');
         $disk = $request->input('disk') ?? config('juzaweb.filemanager.disk');
 
-        if (!in_array($disk, ['public', 'protected'])) {
+        if (!in_array($disk, ['public', 'protected', 'tmp'])) {
             return $this->responseUpload([trans('cms::message.invalid_disk') ]);
         }
 
@@ -80,7 +80,7 @@ class UploadController extends FileManagerController
             $folderId = null;
         }
 
-        if (!in_array($disk, ['public', 'protected'])) {
+        if (!in_array($disk, ['public', 'protected', 'tmp'])) {
             return $this->responseUpload([trans('cms::message.invalid_disk') ]);
         }
 

@@ -71,7 +71,7 @@ class CRUDMakeCommand extends ResourceCommand
         $this->info("Generated CRUD for {$table} successfully.");
 
         $info = "Add to your route:\n\n";
-        $info .= "use {$this->module->getNamespace()}Http\Controllers\Backend\{$model}Controller;\n";
+        $info .= "use {$this->module->getNamespace()}Http\Controllers\Backend\\{$model}Controller;\n";
         $info .= $content . "\n\n";
 
         $info .= "And add to hook ". Action::BACKEND_INIT . " in your action:\n\n";
@@ -89,7 +89,7 @@ class CRUDMakeCommand extends ResourceCommand
     {
         return collect(Schema::getColumnListing($table))
             ->filter(
-                fn($item) => !in_array(
+                fn ($item) => !in_array(
                     $item,
                     [
                         'id',

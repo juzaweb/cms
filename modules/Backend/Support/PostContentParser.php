@@ -53,20 +53,21 @@ class PostContentParser
             }
         }
 
-        $tags = $this->post->taxonomies->where('taxonomy', 'tags')->mapWithKeys(
-            fn($item) => [$item->getLink() => "{$item->name}"]
-        );
-
-        foreach ($tags as $link => $tag) {
-            $pattern = "/<.*?>(*SKIP)(*FAIL)|". preg_quote(" {$tag} ") ."/ui";
-            $content = preg_replace_callback(
-                $pattern,
-                function ($matches) use ($link) {
-                    return' <a href="'. $link .'">'. trim($matches[0]) .'</a> ';
-                },
-                $content
-            );
-        }
+        // Auto add tag link
+        // $tags = $this->post->taxonomies->where('taxonomy', 'tags')->mapWithKeys(
+        //     fn ($item) => [$item->getLink() => $item->name]
+        // );
+        //
+        // foreach ($tags as $link => $tag) {
+        /*    $pattern = "/<.*?>(*SKIP)(*FAIL)|". preg_quote(" {$tag} ") ."/ui";*/
+        //     $content = preg_replace_callback(
+        //         $pattern,
+        //         function ($matches) use ($link) {
+        //             return' <a href="'. $link .'">'. trim($matches[0]) .'</a> ';
+        //         },
+        //         $content
+        //     );
+        // }
 
         $id = 1;
         foreach ($this->noneReplaces as $replace) {

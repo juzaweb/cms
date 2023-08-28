@@ -16,11 +16,11 @@ use Juzaweb\CMS\Http\Controllers\Controller;
 class AssetController extends Controller
 {
     private int $cacheAge = 86400;
-    
+
     public function __construct(protected TranslationManager $translationManager)
     {
     }
-    
+
     public function assetPlugin($vendor, $plugin, $path): HttpResponse
     {
         $path = str_replace('assets/', '', $path);
@@ -34,26 +34,26 @@ class AssetController extends Controller
         $assetPath = ThemeLoader::getPath($theme, 'assets/public/' . $path);
         return $this->responseWithPath($assetPath);
     }
-    
+
     public function assetStorage(string $path): HttpResponse
     {
         $path = Storage::disk('public')->path($path);
-        
+
         return $this->responseWithPath($path);
     }
-    
+
     public function proxyImage(string $method, string $size, string $path)
     {
         $path = Storage::disk('public')->path($path);
         if (!file_exists($path)) {
             $path = public_path('jw-styles/juzaweb/images/thumb-default.png');
         }
-        
+
         list($width, $height) = explode('x', $size);
         $width = $width == 'auto' ? null : $width;
         $height = $height == 'auto' ? null : $height;
         $aspectRatio = empty($width) || empty($height) ? fn($constraint) => $constraint->aspectRatio() : null;
-        
+
         $img = match ($method) {
             'fit', 'crop' => Image::cache(
                 fn(ImageCache $image) => $image->make($path)->{$method}(
@@ -73,7 +73,7 @@ class AssetController extends Controller
                 true
             ),
         };
-        
+
         return $img->response()
             ->header('accept-ranges', 'bytes')
             ->setCache(['public' => true, 'max_age' => $this->cacheAge, 's_maxage' => $this->cacheAge]);
@@ -82,9 +82,9 @@ class AssetController extends Controller
     public function languageScript($lang): HttpResponse
     {
         Lang::setLocale($lang);
-    
+
         $cacheFile = 'cache/lang-js.js';
-        
+
         if (Storage::fileExists($cacheFile) && !config('app.debug')) {
             $path = Storage::path($cacheFile);
             $content = File::get($path);
@@ -95,7 +95,7 @@ class AssetController extends Controller
             Storage::put($cacheFile, $content);
             $length = Storage::size($cacheFile);
         }
-        
+
         $response = Response::make($content);
         $response->header('Content-Type', 'application/javascript');
         $response->header('accept-ranges', 'bytes');
@@ -152,7 +152,7 @@ class AssetController extends Controller
             'tif' => 'image/tif',
             'tiff' => 'image/tiff',
         ];
-    
+
         return $assets[$extension] ?? 'text/plain';
     }
 }

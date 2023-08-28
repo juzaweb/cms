@@ -60,20 +60,20 @@ class CRUDController extends Controller
             $outputBuffer
         );
 
-        if ($request->input('make_menu', 0)) {
-            $register = $this->getPluginRegister($plugin);
-            $label = $request->input('label', Str::ucfirst(Str::replace('_', ' ', $table)));
-
-            $register['admin_pages'] = [
-                'title' => $label,
-                'menu' => [
-                    'icon' => 'fa fa-list',
-                    'position' => $request->input('menu_position', 30),
-                ],
-            ];
-
-            $this->writeRegisterFile($plugin, $register);
-        }
+        // if ($request->input('make_menu', 0)) {
+        //     $register = $this->getPluginRegister($plugin);
+        //     $label = $request->input('label', Str::ucfirst(Str::replace('_', ' ', $table)));
+        //
+        //     $register['admin_pages'] = [
+        //         'title' => $label,
+        //         'menu' => [
+        //             'icon' => 'fa fa-list',
+        //             'position' => $request->input('menu_position', 30),
+        //         ],
+        //     ];
+        //
+        //     $this->writeRegisterFile($plugin, $register);
+        // }
 
         return $this->success(
             [
