@@ -12,10 +12,11 @@
         "juzaweb",
         "juzacms"
     ],
-    "license": "MIT",
+    "license": "GPL-2.0",
     "require": {
         "php": "^8.0|^8.1",
         "guzzlehttp/guzzle": "^7.2",
+        "juzaweb/modules": "*",
         "laravel/framework": "^9.2",
         "laravel/tinker": "^2.7"
     },
@@ -60,5 +61,6 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "homepage": "https://juzaweb.com"
 }
