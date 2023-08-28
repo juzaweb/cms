@@ -16,4 +16,5 @@ yarn-error.log
 /.vscode
 /.php-cs-fixer.cache
 /.deploy.yml
-/public/jw-styles/juzaweb/build
+/composer-local.json
+/composer-local.lock
