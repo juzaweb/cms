@@ -44,10 +44,7 @@
     "autoload": {
         "psr-4": {
             "Juzaweb\\": "modules/"
-        },
-        "files": [
-            "modules/CMS/Helpers/helpers.php"
-        ]
+        }
     },
     "scripts": {
         "post-autoload-dump": [
