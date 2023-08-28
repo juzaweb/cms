@@ -1,1 +1,0 @@
-{{ Field::editor($model, 'content', ['label' => trans('$MODULE_DOMAIN$::content.content')]) }}

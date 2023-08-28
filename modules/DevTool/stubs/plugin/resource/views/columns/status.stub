@@ -1,4 +1,0 @@
-{{ Field::select($model, 'status', [
-    'options' => [],
-    'label' => trans('$MODULE_DOMAIN$::content.$COLUMN$')
-]) }}

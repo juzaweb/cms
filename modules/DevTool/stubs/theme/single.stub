@@ -1,5 +1,0 @@
-{% extends 'cms::layouts.frontend' %}
-
-{% block content %}
-
-{% endblock %}

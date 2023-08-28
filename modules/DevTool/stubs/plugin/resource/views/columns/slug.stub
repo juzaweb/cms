@@ -1,1 +1,0 @@
-{{ Field::slug($model, 'slug', ['label' => trans('$MODULE_DOMAIN$::content.$COLUMN$')]) }}
