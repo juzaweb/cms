@@ -21993,7 +21993,7 @@ namespace {
     }
 
     /**
-    * @method static jwResource(string $uri, string $controller)
+    * @method static jwResource(string $uri, string $controller, array $ontions = [])
      */
     class Route extends \Illuminate\Support\Facades\Route
     {

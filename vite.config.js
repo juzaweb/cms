@@ -6,17 +6,17 @@ import path from "path";
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/js/app.tsx', 'resources/css/app.css'],
+            input: ['vendor/juzaweb/modules/resources/js/app.tsx', 'vendor/juzaweb/modules/resources/css/app.css'],
             refresh: true,
         }),
         react(),
     ],
     build: {
-        outDir: path.resolve(__dirname, 'modules/Backend/resources/assets/public/build'),
+        outDir: path.resolve(__dirname, 'vendor/juzaweb/modules/assets/public/build'),
     },
     resolve: {
         alias: {
-            '@': '/resources/js',
+            '@': '/vendor/juzaweb/modules/resources/js',
         },
     },
     experimental: {
