@@ -9,11 +9,6 @@ import $ from "jquery";
 import 'bootstrap';
 import Chart from 'chart.js/auto';
 
-axios.interceptors.request.use((config) => {
-    config.headers['Content-Type'] = 'application/json';
-    return config;
-});
-
 declare global {
     interface Window {
         jQuery: typeof jQuery;
@@ -26,6 +21,12 @@ declare global {
 window.$ = window.jQuery = $;
 window.Popper = Popper;
 window.Chart = Chart;
+
+// Config axios
+axios.interceptors.request.use((config) => {
+    config.headers['Content-Type'] = 'application/json';
+    return config;
+});
 
 createInertiaApp({
     title: (title) => title,
