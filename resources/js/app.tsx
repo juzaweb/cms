@@ -6,7 +6,7 @@ import axios from "axios";
 // import jQuery from '@types/jquery';
 // import Popper from "popper.js";
 // import $ from "jquery";
-// import 'bootstrap';
+import 'bootstrap';
 // import Chart from 'chart.js/auto';
 //
 // declare global {
