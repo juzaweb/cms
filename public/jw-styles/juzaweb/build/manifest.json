@@ -1,65 +1,65 @@
 {
-  "_admin-9624bce5.js": {
-    "file": "assets/admin-9624bce5.js",
+  "_admin-2d44163f.js": {
+    "file": "assets/admin-2d44163f.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js"
+      "_functions-d3bf7647.js"
     ]
   },
-  "_button-ca2430d2.js": {
-    "file": "assets/button-ca2430d2.js",
+  "_button-e1bfbb31.js": {
+    "file": "assets/button-e1bfbb31.js",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_checkbox-bf30ee33.js": {
-    "file": "assets/checkbox-bf30ee33.js",
+  "_checkbox-2a6db5a0.js": {
+    "file": "assets/checkbox-2a6db5a0.js",
     "imports": [
       "resources/js/app.tsx",
-      "_lodash-3e72c2e1.js"
+      "_lodash-3f4feb41.js"
     ]
   },
-  "_functions-78bccbca.js": {
-    "file": "assets/functions-78bccbca.js",
+  "_functions-d3bf7647.js": {
+    "file": "assets/functions-d3bf7647.js",
     "imports": [
       "resources/js/app.tsx",
-      "_lodash-3e72c2e1.js"
+      "_lodash-3f4feb41.js"
     ]
   },
-  "_input-73232dad.js": {
-    "file": "assets/input-73232dad.js",
+  "_input-6e5778ee.js": {
+    "file": "assets/input-6e5778ee.js",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_lodash-3e72c2e1.js": {
-    "file": "assets/lodash-3e72c2e1.js",
+  "_lodash-3f4feb41.js": {
+    "file": "assets/lodash-3f4feb41.js",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_react-select.esm-79e6e74f.js": {
-    "file": "assets/react-select.esm-79e6e74f.js",
+  "_react-select.esm-c8b53ce1.js": {
+    "file": "assets/react-select.esm-c8b53ce1.js",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_select-e8ce3c3f.js": {
-    "file": "assets/select-e8ce3c3f.js",
+  "_select-dcf51221.js": {
+    "file": "assets/select-dcf51221.js",
     "imports": [
       "resources/js/app.tsx",
-      "_react-select.esm-79e6e74f.js"
+      "_react-select.esm-c8b53ce1.js"
     ]
   },
-  "_success-button-2a25f5b9.js": {
-    "file": "assets/success-button-2a25f5b9.js",
+  "_success-button-1c0068cf.js": {
+    "file": "assets/success-button-1c0068cf.js",
     "imports": [
       "resources/js/app.tsx",
-      "_button-ca2430d2.js"
+      "_button-e1bfbb31.js"
     ]
   },
-  "_textarea-609c61b9.js": {
-    "file": "assets/textarea-609c61b9.js",
+  "_textarea-4cda13cf.js": {
+    "file": "assets/textarea-4cda13cf.js",
     "imports": [
       "resources/js/app.tsx"
     ]
@@ -85,7 +85,7 @@
     "src": "node_modules/font-awesome/fonts/fontawesome-webfont.woff2"
   },
   "plugins/example/src/resources/js/pages/index.tsx": {
-    "file": "assets/index-39e73e3a.js",
+    "file": "assets/index-ba13dd7e.js",
     "imports": [
       "resources/js/app.tsx"
     ],
@@ -96,6 +96,7 @@
     "dynamicImports": [
       "plugins/example/src/resources/js/pages/index.tsx",
       "vendor/juzaweb/modules/resources/js/pages/blade-render.tsx",
+      "vendor/juzaweb/modules/resources/js/pages/builder.tsx",
       "vendor/juzaweb/modules/resources/js/pages/customizer/components/option-item.tsx",
       "vendor/juzaweb/modules/resources/js/pages/customizer/index.tsx",
       "vendor/juzaweb/modules/resources/js/pages/dashboard.tsx",
@@ -123,7 +124,7 @@
       "vendor/juzaweb/modules/resources/js/pages/theme/index.tsx",
       "vendor/juzaweb/modules/resources/js/pages/theme/install.tsx"
     ],
-    "file": "assets/app-32f004ae.js",
+    "file": "assets/app-9f256a6d.js",
     "isEntry": true,
     "src": "resources/js/app.tsx"
   },
@@ -133,15 +134,26 @@
     "src": "vendor/juzaweb/modules/resources/css/app.scss"
   },
   "vendor/juzaweb/modules/resources/js/pages/blade-render.tsx": {
-    "file": "assets/blade-render-33a12496.js",
+    "file": "assets/blade-render-761a9979.js",
     "imports": [
       "resources/js/app.tsx"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/blade-render.tsx"
   },
+  "vendor/juzaweb/modules/resources/js/pages/builder.tsx": {
+    "file": "assets/builder-11cde9a1.js",
+    "imports": [
+      "resources/js/app.tsx",
+      "_admin-2d44163f.js",
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "vendor/juzaweb/modules/resources/js/pages/builder.tsx"
+  },
   "vendor/juzaweb/modules/resources/js/pages/customizer/components/option-item.tsx": {
-    "file": "assets/option-item-b9c28aba.js",
+    "file": "assets/option-item-d297562f.js",
     "imports": [
       "resources/js/app.tsx"
     ],
@@ -149,28 +161,29 @@
     "src": "vendor/juzaweb/modules/resources/js/pages/customizer/components/option-item.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/customizer/index.tsx": {
-    "file": "assets/index-c3de33cb.js",
+    "file": "assets/index-1690a345.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
+      "_functions-d3bf7647.js",
       "vendor/juzaweb/modules/resources/js/pages/customizer/components/option-item.tsx",
-      "_lodash-3e72c2e1.js"
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/customizer/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dashboard.tsx": {
-    "file": "assets/dashboard-37ea92a6.js",
+    "file": "assets/dashboard-6b7353d6.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js"
+      "_functions-d3bf7647.js",
+      "_admin-2d44163f.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dashboard.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/menu-handle.tsx": {
-    "file": "assets/menu-handle-123ddf50.js",
+    "file": "assets/menu-handle-3bedf331.js",
     "imports": [
       "resources/js/app.tsx"
     ],
@@ -178,283 +191,283 @@
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/menu-handle.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/migration/column-row.tsx": {
-    "file": "assets/column-row-ab19393c.js",
+    "file": "assets/column-row-2a2d2560.js",
     "imports": [
       "resources/js/app.tsx",
-      "_react-select.esm-79e6e74f.js"
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/migration/column-row.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/post-type-form.tsx": {
-    "file": "assets/post-type-form-17a2510f.js",
+    "file": "assets/post-type-form-cab9f739.js",
     "imports": [
       "resources/js/app.tsx",
-      "_input-73232dad.js",
-      "_textarea-609c61b9.js",
-      "_checkbox-bf30ee33.js",
-      "_button-ca2430d2.js",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js"
+      "_input-6e5778ee.js",
+      "_textarea-4cda13cf.js",
+      "_checkbox-2a6db5a0.js",
+      "_button-e1bfbb31.js",
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/post-type-form.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/taxonomy-form.tsx": {
-    "file": "assets/taxonomy-form-4a327cb0.js",
+    "file": "assets/taxonomy-form-29c7ff8a.js",
     "imports": [
       "resources/js/app.tsx",
-      "_input-73232dad.js",
-      "_checkbox-bf30ee33.js",
-      "_button-ca2430d2.js",
-      "_select-e8ce3c3f.js",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js",
-      "_react-select.esm-79e6e74f.js"
+      "_input-6e5778ee.js",
+      "_checkbox-2a6db5a0.js",
+      "_button-e1bfbb31.js",
+      "_select-dcf51221.js",
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js",
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/taxonomy-form.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx": {
-    "file": "assets/top-options-0bb5500d.js",
+    "file": "assets/top-options-e2881696.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
-      "_select-e8ce3c3f.js",
-      "_lodash-3e72c2e1.js",
-      "_react-select.esm-79e6e74f.js"
+      "_functions-d3bf7647.js",
+      "_select-dcf51221.js",
+      "_lodash-3f4feb41.js",
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/index.tsx": {
-    "file": "assets/index-5997bd8c.js",
+    "file": "assets/index-79b9ce14.js",
     "imports": [
       "resources/js/app.tsx",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_admin-9624bce5.js",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js"
+      "_admin-2d44163f.js",
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/create.tsx": {
-    "file": "assets/create-45e0513c.js",
+    "file": "assets/create-b4b583d8.js",
     "imports": [
       "resources/js/app.tsx",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_admin-9624bce5.js",
-      "_button-ca2430d2.js",
-      "_input-73232dad.js",
-      "_textarea-609c61b9.js",
-      "_functions-78bccbca.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js",
-      "_lodash-3e72c2e1.js"
+      "_admin-2d44163f.js",
+      "_button-e1bfbb31.js",
+      "_input-6e5778ee.js",
+      "_textarea-4cda13cf.js",
+      "_functions-d3bf7647.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/create.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/crud/index.tsx": {
-    "file": "assets/index-2ad7e0fa.js",
+    "file": "assets/index-27cb5512.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
-      "_input-73232dad.js",
-      "_button-ca2430d2.js",
-      "_checkbox-bf30ee33.js",
-      "_admin-9624bce5.js",
+      "_functions-d3bf7647.js",
+      "_input-6e5778ee.js",
+      "_button-e1bfbb31.js",
+      "_checkbox-2a6db5a0.js",
+      "_admin-2d44163f.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_lodash-3e72c2e1.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js"
+      "_lodash-3f4feb41.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/crud/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/index.tsx": {
-    "file": "assets/index-6696adc9.js",
+    "file": "assets/index-32bb6d77.js",
     "imports": [
       "resources/js/app.tsx",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_admin-9624bce5.js",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js"
+      "_admin-2d44163f.js",
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/make-migration.tsx": {
-    "file": "assets/make-migration-b5d3aade.js",
+    "file": "assets/make-migration-f40cea6d.js",
     "imports": [
       "resources/js/app.tsx",
-      "_button-ca2430d2.js",
+      "_button-e1bfbb31.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/migration/column-row.tsx",
-      "_checkbox-bf30ee33.js",
-      "_react-select.esm-79e6e74f.js",
-      "_lodash-3e72c2e1.js"
+      "_checkbox-2a6db5a0.js",
+      "_react-select.esm-c8b53ce1.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/make-migration.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/post-type/index.tsx": {
-    "file": "assets/index-80bb2888.js",
+    "file": "assets/index-9c7ca556.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
+      "_functions-d3bf7647.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/post-type-form.tsx",
-      "_admin-9624bce5.js",
+      "_admin-2d44163f.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_lodash-3e72c2e1.js",
-      "_input-73232dad.js",
-      "_textarea-609c61b9.js",
-      "_checkbox-bf30ee33.js",
-      "_button-ca2430d2.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js"
+      "_lodash-3f4feb41.js",
+      "_input-6e5778ee.js",
+      "_textarea-4cda13cf.js",
+      "_checkbox-2a6db5a0.js",
+      "_button-e1bfbb31.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/post-type/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/taxonomy/index.tsx": {
-    "file": "assets/index-47f4574d.js",
+    "file": "assets/index-d7dcac67.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
-      "_admin-9624bce5.js",
+      "_functions-d3bf7647.js",
+      "_admin-2d44163f.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/taxonomy-form.tsx",
-      "_lodash-3e72c2e1.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js",
-      "_input-73232dad.js",
-      "_checkbox-bf30ee33.js",
-      "_button-ca2430d2.js"
+      "_lodash-3f4feb41.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js",
+      "_input-6e5778ee.js",
+      "_checkbox-2a6db5a0.js",
+      "_button-e1bfbb31.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/plugin/taxonomy/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/config/index.tsx": {
-    "file": "assets/index-0368abcc.js",
+    "file": "assets/index-759cd4e2.js",
     "imports": [
       "resources/js/app.tsx",
-      "_admin-9624bce5.js",
+      "_admin-2d44163f.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_button-ca2430d2.js",
-      "_functions-78bccbca.js",
-      "_success-button-2a25f5b9.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js",
-      "_lodash-3e72c2e1.js"
+      "_button-e1bfbb31.js",
+      "_functions-d3bf7647.js",
+      "_success-button-1c0068cf.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/config/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/create.tsx": {
-    "file": "assets/create-38afd281.js",
+    "file": "assets/create-a915a311.js",
     "imports": [
       "resources/js/app.tsx",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_admin-9624bce5.js",
-      "_button-ca2430d2.js",
-      "_input-73232dad.js",
-      "_textarea-609c61b9.js",
-      "_functions-78bccbca.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js",
-      "_lodash-3e72c2e1.js"
+      "_admin-2d44163f.js",
+      "_button-e1bfbb31.js",
+      "_input-6e5778ee.js",
+      "_textarea-4cda13cf.js",
+      "_functions-d3bf7647.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/create.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/edit.tsx": {
-    "file": "assets/edit-d366a1fd.js",
+    "file": "assets/edit-02dbb20c.js",
     "imports": [
       "resources/js/app.tsx",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_admin-9624bce5.js",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js"
+      "_admin-2d44163f.js",
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/edit.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/post-type/index.tsx": {
-    "file": "assets/index-8f8ae344.js",
+    "file": "assets/index-a47dc5f5.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
+      "_functions-d3bf7647.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/post-type-form.tsx",
-      "_admin-9624bce5.js",
+      "_admin-2d44163f.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_lodash-3e72c2e1.js",
-      "_input-73232dad.js",
-      "_textarea-609c61b9.js",
-      "_checkbox-bf30ee33.js",
-      "_button-ca2430d2.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js"
+      "_lodash-3f4feb41.js",
+      "_input-6e5778ee.js",
+      "_textarea-4cda13cf.js",
+      "_checkbox-2a6db5a0.js",
+      "_button-e1bfbb31.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/post-type/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/taxonomy/create.tsx": {
-    "file": "assets/create-104e3c80.js",
+    "file": "assets/create-865ace3c.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
+      "_functions-d3bf7647.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/plugins/taxonomy-form.tsx",
-      "_admin-9624bce5.js",
+      "_admin-2d44163f.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_lodash-3e72c2e1.js",
-      "_input-73232dad.js",
-      "_checkbox-bf30ee33.js",
-      "_button-ca2430d2.js",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js"
+      "_lodash-3f4feb41.js",
+      "_input-6e5778ee.js",
+      "_checkbox-2a6db5a0.js",
+      "_button-e1bfbb31.js",
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/taxonomy/create.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/template/components/block-item.tsx": {
-    "file": "assets/block-item-cfeaebbf.js",
+    "file": "assets/block-item-fb0c7c50.js",
     "imports": [
       "resources/js/app.tsx",
-      "_input-73232dad.js",
-      "_button-ca2430d2.js",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js"
+      "_input-6e5778ee.js",
+      "_button-e1bfbb31.js",
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/template/components/block-item.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/template/index.tsx": {
-    "file": "assets/index-562de1c9.js",
+    "file": "assets/index-9747bde4.js",
     "imports": [
       "resources/js/app.tsx",
-      "_admin-9624bce5.js",
+      "_admin-2d44163f.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/components/top-options.tsx",
-      "_button-ca2430d2.js",
-      "_functions-78bccbca.js",
-      "_success-button-2a25f5b9.js",
+      "_button-e1bfbb31.js",
+      "_functions-d3bf7647.js",
+      "_success-button-1c0068cf.js",
       "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/template/components/block-item.tsx",
-      "_select-e8ce3c3f.js",
-      "_react-select.esm-79e6e74f.js",
-      "_lodash-3e72c2e1.js",
-      "_input-73232dad.js"
+      "_select-dcf51221.js",
+      "_react-select.esm-c8b53ce1.js",
+      "_lodash-3f4feb41.js",
+      "_input-6e5778ee.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/dev-tool/theme/template/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/index.tsx": {
-    "file": "assets/index-b551d865.js",
+    "file": "assets/index-69907e49.js",
     "imports": [
       "resources/js/app.tsx"
     ],
@@ -462,31 +475,31 @@
     "src": "vendor/juzaweb/modules/resources/js/pages/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/taxonomy/index.tsx": {
-    "file": "assets/index-27198f80.js",
+    "file": "assets/index-fa99ff08.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js"
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/taxonomy/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/theme/index.tsx": {
-    "file": "assets/index-388d1272.js",
+    "file": "assets/index-2e43fbe8.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js"
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/theme/index.tsx"
   },
   "vendor/juzaweb/modules/resources/js/pages/theme/install.tsx": {
-    "file": "assets/install-43d5c597.js",
+    "file": "assets/install-590b3a7a.js",
     "imports": [
       "resources/js/app.tsx",
-      "_functions-78bccbca.js",
-      "_lodash-3e72c2e1.js"
+      "_functions-d3bf7647.js",
+      "_lodash-3f4feb41.js"
     ],
     "isDynamicEntry": true,
     "src": "vendor/juzaweb/modules/resources/js/pages/theme/install.tsx"
