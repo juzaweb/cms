@@ -6,22 +6,33 @@ import path from "path";
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['vendor/juzaweb/modules/resources/js/app.tsx', 'vendor/juzaweb/modules/resources/css/app.css'],
+            input: ['resources/js/app.tsx', 'vendor/juzaweb/modules/resources/css/app.css'],
             refresh: true,
         }),
         react(),
     ],
     build: {
-        outDir: path.resolve(__dirname, 'vendor/juzaweb/modules/assets/public/build'),
+        outDir: path.resolve(__dirname, 'public/jw-styles/juzaweb/build'),
     },
     resolve: {
+        preserveSymlinks: true,
         alias: {
-            '@': '/vendor/juzaweb/modules/resources/js',
+            '@': path.resolve(__dirname + '/vendor/juzaweb/modules/resources/js'),
+            '@plugins': path.resolve(__dirname + '/plugins'),
         },
     },
     experimental: {
         renderBuiltUrl(filename, { hostId, hostType, type }) {
-            return '/jw-styles/juzaweb/build/' + filename
+            // if (type === 'public') {
+            //     return 'https://www.domain.com/' + filename
+            // }
+            // else if (path.extname(hostId) === '.js') {
+            //     return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+            // }
+            // else {
+            //     return 'https://cdn.domain.com/assets/' + filename
+            // }
+            return `/jw-styles/juzaweb/build/${filename}`
         }
     }
 });

@@ -16,7 +16,8 @@
         "jsx": "react-jsx",
         "incremental": true,
         "paths": {
-            "@/*": ["vendor/juzaweb/modules/resources/js/*"]
+            "@/*": ["vendor/juzaweb/modules/resources/js/*"],
+            "@plugins/*": ["plugins/*"]
         }
     },
     "include": ["**/*.ts", "**/*.tsx"],

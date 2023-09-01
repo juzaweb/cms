@@ -11,7 +11,7 @@
         "production": "mix --production",
         "cms:build": "npm run cms:run-build",
         "cms:dev": "vite",
-        "cms:run-build": "vite build && php artisan cms:publish assets",
+        "cms:run-build": "vite build",
         "theme:dev": "npm run theme:run-dev",
         "theme:run-dev": "vite --config themes/$npm_config_theme/config.js",
         "theme:build": "npm run theme:run-build",
