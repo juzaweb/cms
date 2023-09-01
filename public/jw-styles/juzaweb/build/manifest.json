@@ -128,7 +128,7 @@
     "src": "resources/js/app.tsx"
   },
   "vendor/juzaweb/modules/resources/css/app.scss": {
-    "file": "assets/app-f0432d59.css",
+    "file": "assets/app-c29047c7.css",
     "isEntry": true,
     "src": "vendor/juzaweb/modules/resources/css/app.scss"
   },
