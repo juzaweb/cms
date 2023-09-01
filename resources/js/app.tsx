@@ -3,24 +3,24 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import axios from "axios";
 // For old js
-import jQuery from '@types/jquery';
-import Popper from "popper.js";
-import $ from "jquery";
-import 'bootstrap';
-import Chart from 'chart.js/auto';
-
-declare global {
-    interface Window {
-        jQuery: typeof jQuery;
-        $: typeof jQuery;
-        Chart: typeof Chart;
-        Popper: typeof Popper;
-    }
-}
-
-window.$ = window.jQuery = $;
-window.Popper = Popper;
-window.Chart = Chart;
+// import jQuery from '@types/jquery';
+// import Popper from "popper.js";
+// import $ from "jquery";
+// import 'bootstrap';
+// import Chart from 'chart.js/auto';
+//
+// declare global {
+//     interface Window {
+//         jQuery: typeof jQuery;
+//         $: typeof jQuery;
+//         Chart: typeof Chart;
+//         Popper: typeof Popper;
+//     }
+// }
+//
+// window.$ = window.jQuery = $;
+// window.Popper = Popper;
+// window.Chart = Chart;
 
 // Config axios
 axios.interceptors.request.use((config) => {
