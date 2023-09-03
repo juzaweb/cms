@@ -56,6 +56,8 @@
     "dependencies": {
         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
         "@babel/preset-react": "^7.22.5",
+        "@ckeditor/ckeditor5-build-classic": "^39.0.1",
+        "@ckeditor/ckeditor5-react": "^6.1.0",
         "@inertiajs/react": "^1.0.9",
         "@radix-ui/react-alert-dialog": "^1.0.4",
         "@radix-ui/react-avatar": "^1.0.3",
