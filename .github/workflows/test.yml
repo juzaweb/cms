@@ -41,6 +41,8 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Execute tests Install
         run: php artisan test vendor/juzaweb/modules/Tests/InstallTest.php
+      - name: Install example plugin to test
+        run: composer require juzaweb/example
       - name: Execute tests (Unit and Feature tests)
         run: php artisan test
       - name: Execute tests disabled frontend
