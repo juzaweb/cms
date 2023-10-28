@@ -14,7 +14,7 @@
     <arg value="wsv"/>
     <arg name="extensions" value="php"/>
 
-    <!--<rule ref="PEAR">
+    <rule ref="PEAR">
         <exclude name="Generic.Commenting"/>
         <exclude name="Squiz.Commenting"/>
         <exclude name="PEAR.Commenting"/>
@@ -26,8 +26,8 @@
         <exclude name="PEAR.Files.IncludingFile.BracketsNotRequired"/>
         <exclude name="PEAR.NamingConventions.ValidFunctionName.FunctionNoCapital"/>
         <exclude name="PEAR.NamingConventions.ValidFunctionName.FunctionNameInvalid"/>
-        &lt;!&ndash;<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>&ndash;&gt;
-    </rule>-->
+        <!--<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>-->
+    </rule>
     <rule ref="PSR2">
 
     </rule>
