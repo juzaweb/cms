@@ -16,5 +16,3 @@ yarn-error.log
 /.vscode
 /.php-cs-fixer.cache
 /.deploy.yml
-/composer-local.json
-/composer-local.lock
