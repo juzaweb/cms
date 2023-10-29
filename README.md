@@ -90,7 +90,6 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
   - [ ] Media api
 
 ## Plugins
-* [E-Commerce](https://github.com/juzaweb/ecommerce) (developing)
 * [Notification](https://github.com/juzaweb/notification)
 * [Movie](https://github.com/juzaweb/movie)
 * [Image Slider](https://github.com/juzaweb/image-slider)
