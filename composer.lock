@@ -2341,16 +2341,16 @@
         },
         {
             "name": "juzaweb/dev-tool",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/dev-tool.git",
-                "reference": "f31ccc318381465e04df920590c910cde6d31d2b"
+                "reference": "7752c838eac183becd4a4fa2ca191b9d6bd63237"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/dev-tool/zipball/f31ccc318381465e04df920590c910cde6d31d2b",
-                "reference": "f31ccc318381465e04df920590c910cde6d31d2b",
+                "url": "https://api.github.com/repos/juzaweb/dev-tool/zipball/7752c838eac183becd4a4fa2ca191b9d6bd63237",
+                "reference": "7752c838eac183becd4a4fa2ca191b9d6bd63237",
                 "shasum": ""
             },
             "require": {
@@ -2381,9 +2381,9 @@
             "homepage": "https://juzaweb.com",
             "support": {
                 "issues": "https://github.com/juzaweb/dev-tool/issues",
-                "source": "https://github.com/juzaweb/dev-tool/tree/1.0"
+                "source": "https://github.com/juzaweb/dev-tool/tree/1.0.1"
             },
-            "time": "2023-09-05T15:21:39+00:00"
+            "time": "2023-11-04T05:52:11+00:00"
         },
         {
             "name": "juzaweb/laravel-chunk-upload",
@@ -2509,16 +2509,16 @@
         },
         {
             "name": "juzaweb/modules",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/modules.git",
-                "reference": "aa5faf1f153ba029a38c342b5e956bdd5b9bd490"
+                "reference": "4f9eeb239cd92f02360100fe7442ed895f7efc72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/modules/zipball/aa5faf1f153ba029a38c342b5e956bdd5b9bd490",
-                "reference": "aa5faf1f153ba029a38c342b5e956bdd5b9bd490",
+                "url": "https://api.github.com/repos/juzaweb/modules/zipball/4f9eeb239cd92f02360100fe7442ed895f7efc72",
+                "reference": "4f9eeb239cd92f02360100fe7442ed895f7efc72",
                 "shasum": ""
             },
             "require": {
@@ -2578,9 +2578,9 @@
             "homepage": "https://juzaweb.com",
             "support": {
                 "issues": "https://github.com/juzaweb/modules/issues",
-                "source": "https://github.com/juzaweb/modules/tree/1.0.1"
+                "source": "https://github.com/juzaweb/modules/tree/1.0.3"
             },
-            "time": "2023-10-28T14:59:27+00:00"
+            "time": "2023-11-04T16:15:10+00:00"
         },
         {
             "name": "juzaweb/sitemap",
