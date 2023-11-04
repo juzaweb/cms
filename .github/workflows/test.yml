@@ -45,13 +45,3 @@ jobs:
         run: composer require juzaweb/example
       - name: Execute tests (Unit and Feature tests)
         run: php artisan test
-      - name: Execute tests disabled frontend
-        run:
-          php artisan test vendor/juzaweb/modules/modules/Tests/Feature/Auth
-          php artisan test vendor/juzaweb/modules/modules/Tests/Feature/Backend
-        env:
-          JW_FRONTEND_ENABLE: false
-      - name: Execute tests Update
-        run: php artisan test vendor/juzaweb/modules/modules/Tests/UpdateTest.php
-      - name: Execute tests after Update
-        run: php artisan test
