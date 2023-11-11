@@ -1,6 +1,7 @@
 {
     "name": "juzaweb/cms",
     "type": "project",
+    "homepage": "https://juzaweb.com",
     "description": "Juzaweb CMS is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb",
     "keywords": [
         "framework",
@@ -12,23 +13,16 @@
         "juzaweb",
         "juzacms"
     ],
-    "license": "MIT",
+    "license": "GPL-2.0",
     "require": {
         "php": "^8.0|^8.1",
-        "ext-curl": "*",
-        "ext-fileinfo": "*",
-        "ext-json": "*",
-        "ext-openssl": "*",
-        "ext-pdo": "*",
-        "ext-simplexml": "*",
-        "ext-zip": "*",
+        "composer/installers": "^2.2",
         "guzzlehttp/guzzle": "^7.2",
-        "inertiajs/inertia-laravel": "^0.6.9",
-        "intervention/imagecache": "^2.5",
-        "juzaweb/packages": "^1.2",
-        "laravel/breeze": "^1.14",
+        "juzaweb/dev-tool": "^1.0",
+        "juzaweb/modules": "^1.0",
         "laravel/framework": "^9.2",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "oomphinc/composer-installers-extender": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -39,39 +33,32 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
+        "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^1.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Juzaweb\\": "modules/"
-        },
-        "files": [
-            "modules/CMS/Helpers/helpers.php"
-        ]
     },
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan juzacms:plugin-autoload"
+            "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan juzacms:plugin-autoload"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi",
-            "@php artisan juzacms:plugin-autoload"
-        ],
-        "phpcs": "phpcs --standard=.phpcs.xml",
-        "php-cs-fixer": "php-cs-fixer --config=./.php-cs-fixer.dist.php"
+            "@php artisan key:generate --ansi"
+        ]
     },
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "installer-types": ["juzaweb-plugin", "juzaweb-theme"],
+        "installer-paths": {
+            "plugins/{$name}/": ["type:juzaweb-plugin"],
+            "themes/{$name}/": ["type:juzaweb-theme"]
         }
     },
     "config": {
@@ -79,9 +66,21 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "composer/installers": true,
+            "oomphinc/composer-installers-extender": true
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./plugins/*"
+        },
+        {
+            "type": "path",
+            "url": "./themes/*"
+        }
+    ]
 }
