@@ -14,7 +14,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         php: [8.0, 8.1]
-        version: [^3.3, dev-master, dev-develop]
+        version: [^3.3, dev-master]
         mysql: [5.7.33, 5.7.37, 8.0.21]
         withenv: [local]
     services:
