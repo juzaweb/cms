@@ -72,15 +72,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./plugins/*"
-        },
-        {
-            "type": "path",
-            "url": "./themes/*"
-        }
-    ]
+    "prefer-stable": true
 }
