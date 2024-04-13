@@ -2468,16 +2468,16 @@
         },
         {
             "name": "juzaweb/modules",
-            "version": "1.0.27",
+            "version": "1.0.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/modules.git",
-                "reference": "07aed94a417ec50012625a8e58c659596290e069"
+                "reference": "f1326caa21008b311a661b32c9212331f293f8e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/modules/zipball/07aed94a417ec50012625a8e58c659596290e069",
-                "reference": "07aed94a417ec50012625a8e58c659596290e069",
+                "url": "https://api.github.com/repos/juzaweb/modules/zipball/f1326caa21008b311a661b32c9212331f293f8e7",
+                "reference": "f1326caa21008b311a661b32c9212331f293f8e7",
                 "shasum": ""
             },
             "require": {
@@ -2518,8 +2518,11 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Juzaweb\\CMS\\Providers\\CmsServiceProvider"
+                        "Juzaweb\\CMS\\Providers\\CMSServiceProvider"
                     ]
+                },
+                "juzaweb": {
+                    "name": "Juzaweb CMS"
                 }
             },
             "autoload": {
@@ -2538,9 +2541,9 @@
             "homepage": "https://juzaweb.com",
             "support": {
                 "issues": "https://github.com/juzaweb/modules/issues",
-                "source": "https://github.com/juzaweb/modules/tree/1.0.27"
+                "source": "https://github.com/juzaweb/modules/tree/1.0.29"
             },
-            "time": "2024-03-23T07:49:30+00:00"
+            "time": "2024-04-13T07:51:22+00:00"
         },
         {
             "name": "juzaweb/sitemap",
