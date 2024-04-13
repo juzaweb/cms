@@ -22,7 +22,9 @@ jobs:
         image: mysql:${{ matrix.mysql }}
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: cms_test
+          MYSQL_DATABASE: laravel
+          MYSQL_USER: laravel
+          MYSQL_PASSWORD: laravel
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -38,9 +40,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install Dependencies
         run: composer create-project --prefer-dist juzaweb/cms blog ${{ matrix.version }}
-      - name: Copy .env
-        working-directory: blog
-        run: rm .env && cp .env.testing.example .env
       - name: Generate key
         working-directory: blog
         run: php artisan key:generate
