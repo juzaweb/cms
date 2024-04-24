@@ -17,6 +17,12 @@ JUZACMS - Laravel CMS for Your Project
         - User/Pass: demo@juzaweb.com / demo@juzaweb.com
 - Video Tutorial: https://www.youtube.com/@juzaweb/videos
 
+## V4 Process
+- [x] Convert modules to packages
+- [x] Compile plugin react with vite
+- [x] Install/Update plugin with composer
+- [ ] Documentations
+
 ## Requirements
 - The modules package requires:
     - PHP 8.0 or higher
@@ -85,8 +91,8 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
 - [ ] **Api Support**
   - [x] Auth api
   - [x] Post Type api
-  - [ ] Taxonomy api
-  - [ ] User api
+  - [x] Taxonomy api
+  - [x] User api
   - [ ] Media api
 
 ## Plugins
