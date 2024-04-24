@@ -51,5 +51,9 @@ return (new PhpCsFixer\Config())
         'method_argument_space' => ['ensure_fully_multiline' => false],
         'no_break_comment' => false,
         'blank_line_before_statement' => true,
+        'function_declaration' => [
+            'closure_fn_spacing' => 'none',
+            'closure_function_spacing' => 'one',
+        ],
     ])
     ->setFinder($finder);

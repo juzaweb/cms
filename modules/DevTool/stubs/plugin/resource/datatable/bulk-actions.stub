@@ -1,5 +1,0 @@
-switch ($action) {
-            case 'delete':
-            $MODEL_NAME$::destroy($ids);
-            break;
-        }

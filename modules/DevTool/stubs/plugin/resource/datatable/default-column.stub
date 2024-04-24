@@ -1,3 +1,0 @@
-'$COLUMN$' => [
-                'label' => trans('$MODULE_DOMAIN$::content.$COLUMN$'),
-            ],

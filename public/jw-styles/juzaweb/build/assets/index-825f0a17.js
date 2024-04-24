@@ -1,0 +1,1 @@
+import{j as o}from"./app-b7841ba0.js";import m from"./top-options-89f57717.js";import{A as t}from"./admin-5493fc77.js";import"./functions-29bc5ae0.js";import"./lodash-47596753.js";import"./select-953a0574.js";import"./react-select.esm-6ed90d4b.js";function s({plugin:r}){return o(t,{children:o(m,{moduleSelected:r.name})})}export{s as default};

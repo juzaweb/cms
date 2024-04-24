@@ -1,3 +1,5 @@
 *
 !public/
+!protected/
+!tmps/
 !.gitignore

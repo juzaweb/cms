@@ -1,1 +1,0 @@
-import{j as o}from"./app-ef304d51.js";import t from"./top-options-bef41953.js";import{A as e}from"./admin-f3d73062.js";import"./functions-7b46e371.js";import"./select-1bdea25d.js";import"./react-select.esm-d2671163.js";function a({theme:m}){return o(e,{children:o(t,{moduleSelected:m.name,moduleType:"themes"})})}export{a as default};

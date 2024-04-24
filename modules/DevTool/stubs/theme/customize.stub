@@ -1,8 +1,0 @@
-<?php
-
-/**
- * @var \Juzaweb\CMS\Support\Theme\Customize $customize
- */
-
-use Juzaweb\CMS\Support\Theme\CustomizeControl;
-
