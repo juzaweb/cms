@@ -17,10 +17,12 @@ JUZACMS - Laravel CMS for Your Project
         - User/Pass: demo@juzaweb.com / demo@juzaweb.com
 - Video Tutorial: https://www.youtube.com/@juzaweb/videos
 
-## V4 Process
+## V4 Processing
 - [x] Convert modules to packages
 - [x] Compile plugin react with vite
 - [x] Install/Update plugin with composer
+- [ ] Move translation to plugin
+- [ ] Multisite using multiple database
 - [ ] Documentations
 
 ## Requirements
@@ -83,7 +85,7 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
   - [x] Policies
   - [ ] Check permisson button in views
 - [x] Media manager admin page
-- [ ] Short Code
+- [x] Short Code
 - [x] Add image from url
 - [ ] Quick edit
 - [ ] Preview post
