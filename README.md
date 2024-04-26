@@ -49,7 +49,7 @@ composer create-project --prefer-dist juzaweb/cms blog
 Config database in your `.env` file, and run:
 
 ```
-php artisan cms:install
+php artisan juzacms:install
 ```
 
 ## Documentation
