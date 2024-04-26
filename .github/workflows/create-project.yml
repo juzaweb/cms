@@ -52,6 +52,9 @@ jobs:
       - name: Execute tests Install
         working-directory: blog
         run: php artisan test vendor/juzaweb/modules/modules/Tests/InstallTest.php
+      - name: Install example plugin to test
+        run: composer require juzaweb/example
+        working-directory: blog
       - name: Execute tests (Unit and Feature tests)
         working-directory: blog
         run: php artisan test
