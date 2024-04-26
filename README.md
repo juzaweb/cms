@@ -22,10 +22,14 @@ JUZACMS - Laravel CMS for Your Project
 - [x] Compile plugin react with vite
 - [x] Install/Update plugin with composer
 - [x] Rename namespace CMS command
-- [x] Shortcode
+- [x] Shortcode support
 - [x] Move Backup to plugin
+- [ ] Hook Action helpers
+- [ ] Install/Update Command
+- [ ] Install/Update Plugin Command
+- [ ] Install/Update Theme Command
 - [ ] Simplify controllers
-- [ ] Move Seo plugin
+- [ ] Move Seo to plugin
 - [ ] Move translation to plugin
 - [ ] Multisite using multiple database
 - [ ] Documentations
@@ -45,7 +49,7 @@ composer create-project --prefer-dist juzaweb/cms blog
 Config database in your `.env` file, and run:
 
 ```
-php artisan juzacms:install
+php artisan cms:install
 ```
 
 ## Documentation
