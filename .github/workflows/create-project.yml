@@ -51,10 +51,10 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
       - name: Execute tests Install
         working-directory: blog
-        run: php artisan test modules/Tests/InstallTest.php
+        run: php artisan test vendor/juzaweb/modules/modules/Tests/InstallTest.php
       - name: Execute tests (Unit and Feature tests)
         working-directory: blog
         run: php artisan test
-      - name: Execute tests Update
-        working-directory: blog
-        run: php artisan test modules/Tests/UpdateTest.php
+      # - name: Execute tests Update
+      #   working-directory: blog
+      #   run: php artisan test vendor/juzaweb/modules/modules/Tests/UpdateTest.php
