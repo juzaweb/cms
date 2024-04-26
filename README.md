@@ -21,6 +21,11 @@ JUZACMS - Laravel CMS for Your Project
 - [x] Convert modules to packages
 - [x] Compile plugin react with vite
 - [x] Install/Update plugin with composer
+- [x] Rename namespace CMS command
+- [x] Shortcode
+- [x] Move Backup to plugin
+- [ ] Simplify controllers
+- [ ] Move Seo plugin
 - [ ] Move translation to plugin
 - [ ] Multisite using multiple database
 - [ ] Documentations
