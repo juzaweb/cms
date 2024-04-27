@@ -2300,16 +2300,16 @@
         },
         {
             "name": "juzaweb/dev-tool",
-            "version": "1.0.5",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/dev-tool.git",
-                "reference": "45fc33fad8fd402fe0ecc9186cb7766a121a4f54"
+                "reference": "f06d77db3054c21e8026704229e41c05817474cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/dev-tool/zipball/45fc33fad8fd402fe0ecc9186cb7766a121a4f54",
-                "reference": "45fc33fad8fd402fe0ecc9186cb7766a121a4f54",
+                "url": "https://api.github.com/repos/juzaweb/dev-tool/zipball/f06d77db3054c21e8026704229e41c05817474cf",
+                "reference": "f06d77db3054c21e8026704229e41c05817474cf",
                 "shasum": ""
             },
             "require": {
@@ -2340,9 +2340,9 @@
             "homepage": "https://juzaweb.com",
             "support": {
                 "issues": "https://github.com/juzaweb/dev-tool/issues",
-                "source": "https://github.com/juzaweb/dev-tool/tree/1.0.5"
+                "source": "https://github.com/juzaweb/dev-tool/tree/1.0.7"
             },
-            "time": "2024-03-10T15:06:50+00:00"
+            "time": "2024-04-14T08:10:42+00:00"
         },
         {
             "name": "juzaweb/laravel-chunk-upload",
@@ -2468,16 +2468,16 @@
         },
         {
             "name": "juzaweb/modules",
-            "version": "1.0.29",
+            "version": "1.0.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/juzaweb/modules.git",
-                "reference": "f1326caa21008b311a661b32c9212331f293f8e7"
+                "reference": "091c98388da7480982839f50574bb3ea0eb95992"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/juzaweb/modules/zipball/f1326caa21008b311a661b32c9212331f293f8e7",
-                "reference": "f1326caa21008b311a661b32c9212331f293f8e7",
+                "url": "https://api.github.com/repos/juzaweb/modules/zipball/091c98388da7480982839f50574bb3ea0eb95992",
+                "reference": "091c98388da7480982839f50574bb3ea0eb95992",
                 "shasum": ""
             },
             "require": {
@@ -2541,9 +2541,9 @@
             "homepage": "https://juzaweb.com",
             "support": {
                 "issues": "https://github.com/juzaweb/modules/issues",
-                "source": "https://github.com/juzaweb/modules/tree/1.0.29"
+                "source": "https://github.com/juzaweb/modules/tree/1.0.33"
             },
-            "time": "2024-04-13T07:51:22+00:00"
+            "time": "2024-04-26T12:46:13+00:00"
         },
         {
             "name": "juzaweb/sitemap",
@@ -5156,16 +5156,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.33",
+            "version": "3.0.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "33fa69b2514a61138dd48e7a49f99445711e0ad0"
+                "reference": "cfa2013d0f68c062055180dd4328cc8b9d1f30b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/33fa69b2514a61138dd48e7a49f99445711e0ad0",
-                "reference": "33fa69b2514a61138dd48e7a49f99445711e0ad0",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/cfa2013d0f68c062055180dd4328cc8b9d1f30b8",
+                "reference": "cfa2013d0f68c062055180dd4328cc8b9d1f30b8",
                 "shasum": ""
             },
             "require": {
@@ -5246,7 +5246,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.33"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.37"
             },
             "funding": [
                 {
@@ -5262,7 +5262,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-21T14:00:39+00:00"
+            "time": "2024-03-03T02:14:58+00:00"
         },
         {
             "name": "psr/cache",
@@ -12963,5 +12963,5 @@
         "php": "^8.0|^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
