@@ -1,4 +1,4 @@
-JUZACMS - Laravel CMS for Your Project
+JUZAWEB CMS - Laravel CMS for Your Project
 =====================================
 
 ## About
@@ -29,8 +29,11 @@ JUZACMS - Laravel CMS for Your Project
 - [ ] Install/Update Plugin Command
 - [ ] Install/Update Theme Command
 - [ ] Simplify controllers
-- [ ] Move Seo to plugin
-- [ ] Move translation to plugin
+- [x] Move Seo to plugin
+- [x] Move translation to plugin
+- [ ] Notification channels support e-mail with custom template
+- [ ] Move Installer to package
+- [ ] Using Juzaweb-sdk for call remote Modules
 - [ ] Multisite using multiple database
 - [ ] Documentations
 
