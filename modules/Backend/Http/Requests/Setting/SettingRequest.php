@@ -12,6 +12,7 @@ namespace Juzaweb\Backend\Http\Requests\Setting;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Juzaweb\CMS\Facades\HookAction;
+use Illuminate\Validation\Rule;
 
 class SettingRequest extends FormRequest
 {
@@ -30,6 +31,11 @@ class SettingRequest extends FormRequest
                 ];
             }
         )->toArray();
+
+        $rules['timezone'] = [
+            'nullable',
+            Rule::in(timezone_identifiers_list()),
+        ];
 
         return $rules;
     }
