@@ -131,3 +131,6 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
 
 ## Buy me coffee
 [![Juzaweb Buy me coffee](https://i.imgur.com/MAqboRu.png)](https://buymeacoffee.com/juzaweb)
+
+> [!NOTE]
+> If you need a more professional CMS, dedicated to API, try [Larabiz](https://larabiz.com/)
