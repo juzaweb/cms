@@ -1,7 +1,8 @@
 {
     "name": "juzaweb/cms",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "homepage": "https://juzaweb.com",
+    "description": "Juzaweb CMS is a Content Management System (CMS) developed based on Laravel Framework and web platform whose sole purpose is to make your development workflow simple again. Project develop by Juzaweb",
     "keywords": [
         "framework",
         "laravel",
