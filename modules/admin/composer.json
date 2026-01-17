@@ -1,0 +1,20 @@
+{
+    "name": "juzaweb/admin",
+    "description": "Juzaweb CMS Admin",
+    "keywords": [],
+    "license": "MIT",
+    "homepage": "https://juzaweb.com",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Modules\\Admin\\": "src/",
+            "Juzaweb\\Modules\\Admin\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "sort-packages": true
+    }
+}

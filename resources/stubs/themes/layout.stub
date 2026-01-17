@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @include('admin::components.theme-head')
+
+    <title>@yield('title'){{ setting('sitename') ? ' - ' . setting('sitename') : '' }}</title>
+
+    <x-theme-js-var view-page="{{ $viewPage ?? '' }}" />
+
+    @yield('head')
+</head>
+
+<body class="juzaweb-theme @yield('body-classes')">
+    @yield('content')
+
+    <form
+        action="{{ url('logout') }}"
+        method="post"
+        style="display: none"
+        class="form-logout"
+    >
+        @csrf
+    </form>
+
+    <x-theme-init/>
+
+    @yield('scripts')
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Illuminate\Http\Request;
+use Juzaweb\Modules\Admin\Http\Controllers\AdminController;
+
+class $CLASS$ extends AdminController
+{
+    public function index()
+    {
+        return view('$LOWER_NAME$::index');
+    }
+}

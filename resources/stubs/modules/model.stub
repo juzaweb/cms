@@ -1,0 +1,15 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Juzaweb\Modules\Admin\Models\Model;
+use Juzaweb\Modules\Admin\Traits\HasAPI;
+
+class $CLASS$ extends Model
+{
+    use HasAPI;
+
+    protected $table = '$TABLE$';
+
+    protected $fillable = $FILLABLE$;
+}

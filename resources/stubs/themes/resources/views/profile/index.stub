@@ -1,0 +1,42 @@
+@extends('[NAME]::layouts.main')
+
+@section('title', __('[NAME]::translation.profile'))
+
+@section('head')
+    <link rel="stylesheet" href="{{ mix('css/profile.min.css', 'themes/[NAME]') }}">
+@endsection
+
+@section('content')
+    <div class="container mt-5 mb-5">
+        <div class="row" id="wrapper">
+            @include('[NAME]::profile.components.sidebar')
+
+            <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
+                <h3 class="section-title">
+                    <span>{{ __('[NAME]::translation.profile') }}</span>
+                </h3>
+
+                <section>
+                    <form action="" method="post" class="form-ajax">
+                        {{ Field::text(__('[NAME]::translation.name'), 'name', ['value' => $user->name]) }}
+
+                        {{ Field::text(__('[NAME]::translation.email'), 'email', ['disabled' => true, 'value' => $user->email]) }}
+
+                        <hr>
+
+                        {{ Field::password(__('[NAME]::translation.password'), 'password', ['placeholder' => __('[NAME]::translation.new_password')]) }}
+
+                        {{ Field::password(__('[NAME]::translation.confirm_password'), 'password_confirmation', ['placeholder' => __('[NAME]::translation.confirm_new_password')]) }}
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> {{ __('[NAME]::translation.update_profile') }}
+                        </button>
+                    </form>
+                </section>
+
+                <div class="clearfix"></div>
+            </main>
+
+        </div>
+    </div>
+@endsection

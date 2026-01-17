@@ -1,0 +1,81 @@
+<?php
+/**
+ * JUZAWEB CMS - Laravel CMS for Your Project
+ *
+ * @package    larabizcom/larabiz
+ * @author     The Anh Dang
+ * @link       https://cms.juzaweb.com
+ */
+
+namespace $CLASS_NAMESPACE$;
+
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Juzaweb\Modules\Admin\Http\Controllers\APIController;
+use $REQUEST_NAMESPACE$;
+use $BULK_REQUEST_NAMESPACE$;
+use $REPOSITORY_NAMESPACE$;
+
+class $CLASS$ extends APIController
+{
+    public function __construct(
+        protected $REPOSITORY_CLASS$ $$REPOSITORY_NAME$
+    ) {
+    }
+
+    public function index(Request $request): JsonResponse
+    {
+        $models = $this->$REPOSITORY_NAME$->api($request->all())->paginate($this->getQueryLimit($request));
+
+        return $this->restSuccess($models);
+    }
+
+    public function store($REQUEST_NAME$ $request): JsonResponse
+    {
+        DB::transaction(fn () => $this->$REPOSITORY_NAME$->create($request->safe()->all()));
+
+        return $this->restSuccess([], '$SINGULAR_TITLE$ created successfully');
+    }
+
+    public function show(string $id): JsonResponse
+    {
+        $model = $this->$REPOSITORY_NAME$->api()->find($id);
+
+        abort_if($model === null, 404, __('$SINGULAR_TITLE$ not found'));
+
+        return $this->restSuccess($model);
+    }
+
+    public function update($REQUEST_NAME$ $request, string $id): JsonResponse
+    {
+        $model = $this->$REPOSITORY_NAME$->api()->find($id);
+
+        abort_if($model === null, 404, __('$SINGULAR_TITLE$ not found'));
+
+        DB::transaction(fn () => $model->update($request->safe()->all()));
+
+        return $this->restSuccess($model, '$SINGULAR_TITLE$ updated successfully');
+    }
+
+    public function destroy(string $id): JsonResponse
+    {
+        $model = $this->$REPOSITORY_NAME$->api()->find($id);
+
+        abort_if($model === null, 404, __('$SINGULAR_TITLE$ not found'));
+
+        $model->delete();
+
+        return $this->restSuccess([], '$SINGULAR_TITLE$ deleted successfully');
+    }
+
+    public function bulk($BULK_REQUEST_NAME$ $request): JsonResponse
+    {
+        $action = $request->post('action');
+        $ids = $request->post('ids');
+
+        DB::transaction(fn () => $this->$REPOSITORY_NAME$->bulk($action, $ids));
+
+        return $this->restSuccess([], '$TITLE$ updated successfully');
+    }
+}

@@ -1,0 +1,35 @@
+<?php
+/**
+ * JUZAWEB CMS - Laravel CMS for Your Project
+ *
+ * @package    juzaweb/cms
+ * @author     The Anh Dang
+ * @link       https://cms.juzaweb.com
+ * @license    GNU V2
+ */
+
+namespace Juzaweb\Themes\[NAMESPACE_SHORT]\Providers;
+
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use Juzaweb\Modules\Admin\Facades\Locale;
+
+class RouteServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        $this->routes(
+            function () {
+                $adminPrefix = $this->app['config']->get('core.admin_prefix');
+
+                Route::middleware(['admin'])
+                    ->prefix("{$adminPrefix}/{websiteId}")
+                    ->group(__DIR__ . '/../routes/admin.php');
+
+                Route::middleware(['theme'])
+                    ->prefix(Locale::setLocale())
+                    ->group(__DIR__ . '/../routes/web.php');
+            }
+        );
+    }
+}

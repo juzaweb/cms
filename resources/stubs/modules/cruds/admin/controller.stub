@@ -1,0 +1,125 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Juzaweb\Modules\Admin\Facades\Breadcrumb;
+use Juzaweb\Modules\Admin\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\DB;
+use $MODEL_NAMESPACE$;
+use $REQUEST_NAMESPACE$;
+use $BULK_REQUEST_NAMESPACE$;
+use $DATATABLE_NAMESPACE$;
+
+class $CLASS$ extends AdminController
+{
+    public function index($DATATABLE_CLASS$ $dataTable, string $websiteId)
+    {
+        Breadcrumb::add(__('$TITLE$'));
+
+        $createUrl = action([static::class, 'create'], [$websiteId]);
+
+        return $dataTable->render(
+            '$RESOURCE_NAMESPCAE$::$KEBAB_SINGULAR_TITLE$.index',
+            compact('createUrl')
+        );
+    }
+
+    public function create(string $websiteId)
+    {
+        Breadcrumb::add(__('$TITLE$'), admin_url('$URL_PREFIX$'));
+
+        Breadcrumb::add(__('Create $SINGULAR_TITLE$'));
+
+        $backUrl = action([static::class, 'index'], [$websiteId]);
+
+        return view(
+            '$RESOURCE_NAMESPCAE$::$KEBAB_SINGULAR_TITLE$.form',
+            [
+                'model' => new $MODEL_CLASS$(),
+                'action' => action([static::class, 'store'], [$websiteId]),
+                'backUrl' => $backUrl,
+            ]
+        );
+    }
+
+    public function edit(string $websiteId, string $id)
+    {
+        Breadcrumb::add(__('$TITLE$'), admin_url('$URL_PREFIX$'));
+
+        Breadcrumb::add(__('Create $TITLE$'));
+
+        $model = $MODEL_CLASS$::findOrFail($id);
+        $backUrl = action([static::class, 'index'], [$websiteId]);
+
+        return view(
+            '$RESOURCE_NAMESPCAE$::$KEBAB_SINGULAR_TITLE$.form',
+            [
+                'action' => action([static::class, 'update'], [$websiteId, $id]),
+                'model' => $model,
+                'backUrl' => $backUrl,
+            ]
+        );
+    }
+
+    public function store($MODEL_CLASS$Request $request, string $websiteId)
+    {
+        $model = DB::transaction(
+            function () use ($request) {
+                $data = $request->validated();
+
+                return $MODEL_CLASS$::create($data);
+            }
+        );
+
+        return $this->success([
+            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'message' => __('$MODEL_CLASS$ :name created successfully', ['name' => $model->name]),
+        ]);
+    }
+
+    public function update($MODEL_CLASS$Request $request, string $websiteId, string $id)
+    {
+        $model = $MODEL_CLASS$::findOrFail($id);
+
+        $model = DB::transaction(
+            function () use ($request, $model) {
+                $data = $request->validated();
+
+                $model->update($data);
+
+                return $model;
+            }
+        );
+
+        return $this->success([
+            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'message' => __('$MODEL_CLASS$ :name updated successfully', ['name' => $model->name]),
+        ]);
+    }
+
+    public function bulk($MODEL_CLASS$ActionsRequest $request, string $websiteId)
+    {
+        $action = $request->input('action');
+        $ids = $request->input('ids', []);
+
+        $models = $MODEL_CLASS$::whereIn('id', $ids)->get();
+
+        foreach ($models as $model) {
+            if ($action === 'activate') {
+                $model->update(['active' => true]);
+            }
+
+            if ($action === 'deactivate') {
+                $model->update(['active' => false]);
+            }
+
+            if ($action === 'delete') {
+                $model->delete();
+            }
+        }
+
+        return $this->success([
+            'message' => __('Bulk action performed successfully'),
+        ]);
+    }
+}

@@ -1,5 +1,4 @@
 *
+!private/
 !public/
-!protected/
-!tmps/
 !.gitignore

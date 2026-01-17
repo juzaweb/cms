@@ -1,0 +1,16 @@
+{
+    "name": "$VENDOR$/$LOWER_NAME$",
+    "type": "juzaweb-module",
+    "description": "$STUDLY_NAME$ Module",
+    "authors": [
+        {
+            "name": "$AUTHOR_NAME$",
+            "email": "$AUTHOR_EMAIL$"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Modules\\$STUDLY_NAME$\\": "src/"
+        }
+    }
+}

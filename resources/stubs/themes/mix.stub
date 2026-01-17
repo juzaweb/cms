@@ -1,0 +1,22 @@
+const mix = require('laravel-mix');
+require('laravel-mix-merge-manifest');
+
+mix.disableNotifications();
+mix.version();
+
+mix.options({
+    postCss: [
+        require('postcss-discard-comments') ({removeAll: true})
+    ],
+    terser: {extractComments: false}
+});
+
+mix.setPublicPath(`public/themes/[NAMESPACE_SHORT]`);
+
+mix.styles([
+    //
+], 'public/themes/[NAMESPACE_SHORT]/css/main.min.css');
+
+mix.combine([
+    //
+], 'public/themes/[NAMESPACE_SHORT]/js/main.min.js');

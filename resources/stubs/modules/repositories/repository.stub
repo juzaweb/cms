@@ -1,0 +1,26 @@
+<?php
+/**
+ * JUZAWEB CMS - Laravel CMS for Your Project
+ *
+ * @package    juzaweb/cms
+ * @author     The Anh Dang
+ * @link       https://cms.juzaweb.com
+ */
+
+namespace $CLASS_NAMESPACE$;
+
+use App\Repositories\Repository;
+use $MODEL_NAMESPACE$;
+
+/**
+ * @mixin $MODEL_CLASS$
+ */
+interface $CLASS$ extends Repository
+{
+    /**
+     * Get model class name.
+     *
+     * @return string
+     */
+    public function model(): string;
+}

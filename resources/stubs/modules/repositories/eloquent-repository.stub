@@ -1,0 +1,24 @@
+<?php
+/**
+ * JUZAWEB CMS - Laravel CMS for Your Project
+ *
+ * @package    juzaweb/cms
+ * @author     The Anh Dang
+ * @link       https://cms.juzaweb.com
+ */
+
+namespace $CLASS_NAMESPACE$;
+
+use App\Repositories\EloquentRepository;
+use App\Repositories\Traits\HasBulkActions;
+use $MODEL_NAMESPACE$;
+
+class $CLASS$ extends EloquentRepository implements $REPOSITORY_NAME$
+{
+    use HasBulkActions;
+
+    public function model(): string
+    {
+        return $MODEL_CLASS$::class;
+    }
+}

@@ -1,0 +1,30 @@
+<?php
+
+namespace Juzaweb\Themes\[NAMESPACE_SHORT]\Providers;
+
+use Juzaweb\Modules\Admin\Providers\ServiceProvider;
+
+class ThemeServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        //
+    }
+
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        $this->app->register(RouteServiceProvider::class);
+
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', '[NAME]');
+
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
+
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', '[NAME]');
+    }
+}

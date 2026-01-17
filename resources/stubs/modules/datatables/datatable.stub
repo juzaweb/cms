@@ -1,0 +1,41 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Illuminate\Database\Eloquent\Model;
+use Juzaweb\Modules\Admin\DataTables\Action;
+use Juzaweb\Modules\Admin\DataTables\BulkAction;
+use Juzaweb\Modules\Admin\DataTables\Column;
+use Juzaweb\Modules\Admin\DataTables\DataTable;
+use Illuminate\Database\Eloquent\Builder;
+use $MODULE_NAMESPACE$\$NAMESPACE$\Models\$MODEL_NAME$;
+
+class $CLASS$ extends DataTable
+{
+    protected string $actionUrl = '$URL_PREFIX$/bulk';
+
+    public function query($MODEL_NAME$ $model): Builder
+    {
+        return $model->newQuery();
+    }
+
+    public function getColumns(): array
+    {
+        return $COLUMNS$;
+    }
+
+    public function actions(Model $model): array
+    {
+        return [
+            Action::edit(admin_url("$URL_PREFIX$/{$model->id}/edit"))->can('$URL_PREFIX$.edit'),
+            Action::delete()->can('$URL_PREFIX$.delete'),
+        ];
+    }
+
+    public function bulkActions(): array
+    {
+        return [
+            BulkAction::delete()->can('$URL_PREFIX$.delete'),
+        ];
+    }
+}

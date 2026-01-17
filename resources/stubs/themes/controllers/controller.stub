@@ -1,0 +1,18 @@
+<?php
+/**
+ * JUZAWEB CMS - Laravel CMS for Your Project
+ *
+ * @package    juzaweb/cms
+ * @author     The Anh Dang
+ * @link       https://cms.juzaweb.com
+ * @license    GNU V2
+ */
+
+namespace Juzaweb\Themes\$NAMESPACE_SHORT$\Http\Controllers;
+
+use Juzaweb\Modules\Admin\Http\Controllers\ThemeController;
+
+class $CLASS$ extends ThemeController
+{
+    //
+}

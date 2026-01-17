@@ -1,0 +1,17 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Juzaweb\Modules\Admin\Rules\AllExist;
+
+class $CLASS$ extends FormRequest
+{
+    public function rules()
+    {
+        return [
+            'action' => ['required'],
+            'ids' => ['required', 'array', 'min:1', new AllExist('$TABLE$', 'id')],
+        ];
+    }
+}

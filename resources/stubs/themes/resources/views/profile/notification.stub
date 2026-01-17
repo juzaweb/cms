@@ -1,0 +1,35 @@
+@extends('[NAME]::layouts.main')
+
+@section('title', __('[NAME]::translation.notification'))
+
+@section('head')
+    <link rel="stylesheet" href="{{ mix('css/profile.min.css', 'themes/[NAME]') }}">
+@endsection
+
+@section('content')
+    <div class="container mt-5">
+        <div class="row" id="wrapper">
+            @include('[NAME]::profile.components.sidebar')
+
+            <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
+                <h3 class="section-title">
+                    <span>{{ __('[NAME]::translation.notification') }}</span>
+                </h3>
+
+                {{ $dataTable->table() }}
+
+                <div class="clearfix"></div>
+            </main>
+
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+
+    <link href="https://cdn.datatables.net/v/bs4/dt-2.3.2/datatables.min.css" rel="stylesheet" integrity="sha384-fE7frHQNLGzNl8eKcpGtCoE9nL3u5ijqXo8qfQhibuVrrUk9S+YNzm15kj8XPkJr" crossorigin="anonymous">
+
+    <script src="https://cdn.datatables.net/v/bs4/dt-2.3.2/datatables.min.js" integrity="sha384-XCm0OMKqt/5lsXFDSL+83p4zx4Mb5SwKLZQzOW96xQUOaqaIl4x8j5ntyRAfyQl9" crossorigin="anonymous"></script>
+
+    {{ $dataTable->scripts() }}
+@endsection

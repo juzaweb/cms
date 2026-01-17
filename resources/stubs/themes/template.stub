@@ -1,0 +1,5 @@
+@extends('$THEME_NAME$::layouts.main')
+
+@section('content')
+
+@endsection

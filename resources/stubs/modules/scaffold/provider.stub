@@ -1,0 +1,65 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Juzaweb\Modules\Admin\Providers\ServiceProvider;
+use Illuminate\Support\Facades\File;
+
+class $CLASS$ extends ServiceProvider
+{
+    public function boot(): void
+    {
+        //
+
+        $this->booted(
+            function () {
+                $this->registerMenus();
+            }
+        );
+    }
+
+    public function register(): void
+    {
+        $this->registerTranslations();
+        $this->registerConfig();
+        $this->registerViews();
+        $this->loadMigrationsFrom(__DIR__ . '/../../$MIGRATIONS_PATH$');
+        $this->app->register(RouteServiceProvider::class);
+    }
+
+    protected function registerMenus(): void
+    {
+        if (File::missing(storage_path('app/installed'))) {
+            return;
+        }
+
+        //
+    }
+
+    protected function registerConfig(): void
+    {
+        $this->publishes([
+            __DIR__ . '/../$PATH_CONFIG$/config.php' => config_path('$KEBAB_SINGULAR_TITLE$.php'),
+        ], '$KEBAB_SINGULAR_TITLE$-config');
+        $this->mergeConfigFrom(__DIR__ . '/../$PATH_CONFIG$/config.php', '$KEBAB_SINGULAR_TITLE$');
+    }
+
+    protected function registerTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', '$KEBAB_SINGULAR_TITLE$');
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../resources/lang');
+    }
+
+    protected function registerViews(): void
+    {
+        $viewPath = resource_path('views/modules/$KEBAB_SINGULAR_TITLE$');
+
+        $sourcePath = __DIR__ . '/../$PATH_VIEWS$';
+
+        $this->publishes([
+            $sourcePath => $viewPath
+        ], ['views', '$KEBAB_SINGULAR_TITLE$-module-views']);
+
+        $this->loadViewsFrom($sourcePath, '$KEBAB_SINGULAR_TITLE$');
+    }
+}

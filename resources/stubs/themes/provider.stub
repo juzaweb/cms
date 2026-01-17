@@ -1,0 +1,17 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Juzaweb\Modules\Admin\Providers\ServiceProvider;
+
+class $CLASS$ extends ServiceProvider
+{
+    public function boot()
+    {
+    }
+
+    public function register()
+    {
+        //
+    }
+}

@@ -1,0 +1,16 @@
+<?php
+
+return [
+    'profile_updated_successfully' => 'Update profile successfully',
+    'profile' => 'Profile',
+    'profile_settings' => 'Profile Settings',
+    'name' => 'Name',
+    'email' => 'Email',
+    'password' => 'Password',
+    'new_password' => 'New Password',
+    'confirm_password' => 'Confirm Password',
+    'current_password' => 'Current Password',
+    'notification' => 'Notification',
+    'notifications' => 'Notifications',
+    'logout' => 'Logout',
+];

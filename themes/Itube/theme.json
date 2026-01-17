@@ -1,0 +1,14 @@
+{
+    "name": "itube",
+    "title": "Itube - Video Sharing & Streaming Platform",
+    "description": "A professional video streaming theme optimized for high performance, featuring video galleries, user uploads, and a YouTube-like experience.",
+    "author": "The Anh",
+    "version": "1.0",
+    "providers": [
+        "Juzaweb\\Themes\\Itube\\Providers\\ThemeServiceProvider"
+    ],
+    "require": [
+        "VideoSharing",
+        "Contact"
+    ]
+}
