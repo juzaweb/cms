@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4630ebb714df8be93976d9de082bfdd5",
+    "content-hash": "f76f703ec5fe44b1826951b986830e11",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -2667,10 +2667,16 @@
         {
             "name": "juzaweb/core",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/juzaweb/core.git",
+                "reference": "511718649bb66ba5da81becd788f6c3c837f7be9"
+            },
             "dist": {
-                "type": "path",
-                "url": "packages/core",
-                "reference": "ff0842eee81d469b965ba55e785b9b1309e2e394"
+                "type": "zip",
+                "url": "https://api.github.com/repos/juzaweb/core/zipball/511718649bb66ba5da81becd788f6c3c837f7be9",
+                "reference": "511718649bb66ba5da81becd788f6c3c837f7be9",
+                "shasum": ""
             },
             "require": {
                 "astrotomic/laravel-translatable": "^11.13",
@@ -2695,67 +2701,50 @@
                 "yajra/laravel-datatables": "^11.0"
             },
             "require-dev": {
+                "laravel/pint": "^1.13",
                 "orchestra/testbench": "^9.14",
                 "phpunit/phpunit": "^11.0.1"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Juzaweb\\Modules\\Core\\Providers\\CoreServiceProvider"
-                    ],
                     "aliases": {
+                        "Chart": "Juzaweb\\Modules\\Core\\Facades\\Chart",
                         "Field": "Juzaweb\\Modules\\Core\\Facades\\Field",
-                        "Module": "Juzaweb\\Modules\\Core\\Facades\\Module",
                         "Theme": "Juzaweb\\Modules\\Core\\Facades\\Theme",
+                        "Module": "Juzaweb\\Modules\\Core\\Facades\\Module",
                         "Widget": "Juzaweb\\Modules\\Core\\Facades\\Widget",
                         "Sidebar": "Juzaweb\\Modules\\Core\\Facades\\Sidebar",
-                        "PageTemplate": "Juzaweb\\Modules\\Core\\Facades\\PageTemplate",
                         "PageBlock": "Juzaweb\\Modules\\Core\\Facades\\PageBlock",
-                        "Chart": "Juzaweb\\Modules\\Core\\Facades\\Chart"
-                    }
+                        "PageTemplate": "Juzaweb\\Modules\\Core\\Facades\\PageTemplate"
+                    },
+                    "providers": [
+                        "Juzaweb\\Modules\\Core\\Providers\\CoreServiceProvider"
+                    ]
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Juzaweb\\Modules\\Core\\Tests\\": "tests/",
-                    "Juzaweb\\Modules\\Core\\": "src/",
-                    "Juzaweb\\Modules\\Core\\Database\\Factories\\": "database/factories/"
-                },
                 "files": [
                     "helpers/helpers.php"
-                ]
-            },
-            "autoload-dev": {
+                ],
                 "psr-4": {
-                    "App\\": "workbench/app/",
-                    "Database\\Factories\\": "workbench/database/factories/",
-                    "Database\\Seeders\\": "workbench/database/seeders/"
+                    "Juzaweb\\Modules\\Core\\": "src/",
+                    "Juzaweb\\Modules\\Core\\Tests\\": "tests/",
+                    "Juzaweb\\Modules\\Core\\Database\\Factories\\": "database/factories/"
                 }
             },
-            "scripts": {
-                "clear": [
-                    "@php vendor/bin/testbench package:purge-skeleton --ansi"
-                ],
-                "prepare": [
-                    "@php vendor/bin/testbench package:discover --ansi"
-                ],
-                "build": [
-                    "@php vendor/bin/testbench workbench:build --ansi"
-                ],
-                "serve": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "@php vendor/bin/testbench serve --ansi"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Juzaweb CMS Core",
             "homepage": "https://juzaweb.com",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/juzaweb/core/issues",
+                "source": "https://github.com/juzaweb/core/tree/master"
+            },
+            "time": "2026-01-17T11:12:29+00:00"
         },
         {
             "name": "juzaweb/hooks",
@@ -2868,14 +2857,28 @@
         {
             "name": "juzaweb/installer",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/juzaweb/installer.git",
+                "reference": "b580926f77c9dfb2965fcae6d8896bd2d59561f4"
+            },
             "dist": {
-                "type": "path",
-                "url": "packages/installer",
-                "reference": "bd8f47f253a44dad870064910ba3cbe0660c92e5"
+                "type": "zip",
+                "url": "https://api.github.com/repos/juzaweb/installer/zipball/b580926f77c9dfb2965fcae6d8896bd2d59561f4",
+                "reference": "b580926f77c9dfb2965fcae6d8896bd2d59561f4",
+                "shasum": ""
             },
             "require": {
+                "illuminate/support": "^11.0",
                 "php": "^8.2"
             },
+            "require-dev": {
+                "juzaweb/core": "dev-master",
+                "laravel/pint": "^1.13",
+                "orchestra/testbench": "^9.0",
+                "phpunit/phpunit": "^11.0"
+            },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -2885,21 +2888,28 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Juzaweb\\Installer\\": "src/"
-                },
                 "files": [
                     "helpers/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Juzaweb\\Installer\\": "src/"
+                }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Juzaweb CMS installer",
             "homepage": "https://cms.juzaweb.com",
-            "transport-options": {
-                "relative": true
-            }
+            "keywords": [
+                "installer",
+                "juzaweb cms"
+            ],
+            "support": {
+                "issues": "https://github.com/juzaweb/installer/issues",
+                "source": "https://github.com/juzaweb/installer/tree/master"
+            },
+            "time": "2026-01-17T10:06:09+00:00"
         },
         {
             "name": "juzaweb/laravel-query-cache",

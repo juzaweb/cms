@@ -1,0 +1,287 @@
+#post-body .separator {
+    text-align: center;
+}
+
+.widget>h2 {
+    color: #fff;
+    font-size: 12px;
+    line-height: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    background: #1f2024;
+    display: block;
+    height: 40px;
+    margin: 0 0 20px;
+    position: relative;
+    width: 100%;
+}
+
+#post-body {
+    text-align: justify;
+}
+
+.ad-wrapper img {
+    max-width: 100%;
+    height: auto;
+}
+
+.comments {
+    max-width: 700px;
+    background: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-family: Arial, sans-serif;
+}
+
+.comments .title {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.comment-form {
+    margin-bottom: 2rem;
+}
+
+.comment-form h4 {
+    margin-bottom: 0.8rem;
+}
+
+/* Form layout */
+.form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.form-group.half {
+    flex: 1 1 48%;
+}
+
+.comment-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: #444;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    border-color: #888;
+    outline: none;
+}
+
+.comment-form button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.comment-form button:hover {
+    background: #555;
+}
+
+/* Comment List */
+.comments-list {
+    margin-top: 1rem;
+}
+
+.comment-item {
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.comment-body {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Replies (Child comments) */
+.comment-children {
+    margin-left: 2rem;
+    margin-top: 0.8rem;
+    border-left: 2px solid #ddd;
+    padding-left: 1rem;
+}
+
+.comment-form input,
+.comment-form textarea {
+    box-sizing: border-box;
+    display: block;
+}
+
+/* nhóm 2 input cùng hàng */
+.form-row {
+    display: flex !important;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.form-group {
+    flex: 1 1 50%;
+    min-width: 0; /* ngăn overflow */
+}
+
+.comment-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.comment-form button {
+    margin-top: 10px;
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background: #555;
+}
+
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+    .form-group {
+        flex: 1 1 100%;
+    }
+}
+
+/* Language Selector */
+.language-selector {
+    position: relative;
+    float: right;
+    display: block;
+    margin-right: 20px;
+}
+
+.language-selector .widget > .widget-title {
+    display: none;
+}
+
+.language-selector ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.language-selector ul > li {
+    float: left;
+    display: inline-block;
+    position: relative;
+}
+
+.language-selector .language-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 34px;
+    padding: 0 10px;
+    transition: color .17s;
+    cursor: pointer;
+}
+
+.language-selector .language-toggle:hover {
+    color: #1f2024;
+}
+
+.language-selector .language-toggle i {
+    font-size: 14px;
+}
+
+.language-selector .language-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 1500;
+    margin-top: 5px;
+}
+
+.language-selector .language-dropdown.open .language-menu {
+    display: block;
+}
+
+.language-selector .language-menu li {
+    float: none;
+    display: block;
+}
+
+.language-selector .language-menu li a {
+    display: block;
+    padding: 8px 15px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color .17s;
+}
+
+.language-selector .language-menu li a:hover {
+    background-color: #f5f5f5;
+}
+
+.language-selector .language-menu li.active a {
+    background-color: #1f2024;
+    color: #fff;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .language-selector {
+        float: none;
+        margin: 10px 0;
+    }
+}
