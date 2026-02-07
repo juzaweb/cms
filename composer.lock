@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6ae412e68e4ac20c8f57ccb63ee2026",
+    "content-hash": "c9430fdc4012f4bc9f160ffc7d2ba53a",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -2613,8 +2613,8 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "modules/admin",
-                "reference": "981141cd7c893df433e394515f8ee450a3ebbd90"
+                "url": "./modules/admin",
+                "reference": "ad1ed005b1307fea7b067b8e9a65993d9d82e3d1"
             },
             "require": {
                 "php": "^8.2"
@@ -2632,7 +2632,6 @@
             "description": "Juzaweb CMS Admin",
             "homepage": "https://juzaweb.com",
             "transport-options": {
-                "symlink": true,
                 "relative": true
             }
         },

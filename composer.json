@@ -105,6 +105,10 @@
     "prefer-stable": true,
     "repositories": [
         {
+            "type": "path",
+            "url": "./modules/admin"
+        },
+        {
             "type": "composer",
             "url": "https://juzaweb.com/api/repositories"
         }
