@@ -18,7 +18,6 @@
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-fileinfo": "*",
-        "ext-imagick": "*",
         "ext-json": "*",
         "ext-libxml": "*",
         "ext-openssl": "*",
