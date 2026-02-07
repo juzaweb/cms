@@ -8,14 +8,16 @@ JUZAWEB CMS - Laravel CMS for Your Project
 [![GitHub followers](https://img.shields.io/github/followers/juzaweb?style=social)](https://github.com/juzaweb)
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@juzaweb)
 
-- [JuzaWeb CMS](https://juzaweb.com/cms) is a Content Management System (CMS) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again.
-- JuzaWeb CMS is a [Laravel CMS](https://juzaweb.com/cms) was engineered to be easy — for both developers and users. Project develop by Juzaweb Team.
-- Demo Site:
-    - Frontend: https://cms.juzaweb.com
-    - Admin:
-        - https://cms.juzaweb.com/admin-cp
-        - User/Pass: demo@juzaweb.com / demo@juzaweb.com
-- Video Tutorial: https://www.youtube.com/@juzaweb/videos
+- [Juzaweb CMS](https://juzaweb.com/cms) is a Content Management System (CMS) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again.
+- Juzaweb CMS is a [Laravel CMS](https://juzaweb.com/cms) was engineered to be easy — for both developers and users. Project develop by Juzaweb Team.
+
+## Documentation
+
+You'll find the documentation on https://juzaweb.com/documentation/juzaweb/core/5.x.
+
+Find yourself stuck using the CMS? Found a bug? Do you have general questions or suggestions for improving the CMS? Feel free to [create an issue on GitHub](https://github.com/juzaweb/cms/issues), we'll try to address it as soon as possible.
+
+Video Tutorial: https://www.youtube.com/@juzaweb/videos
 
 ## V4 Processing
 - [x] Convert modules to packages
@@ -39,8 +41,8 @@ JUZAWEB CMS - Laravel CMS for Your Project
 
 ## Requirements
 - The modules package requires:
-    - PHP 8.0 or higher
-    - MySql 5.7 or higher
+    - PHP 8.2 or higher
+    - MySql 8.0 or higher
 
 ## Install
 ### Create project with composer
@@ -56,7 +58,7 @@ php artisan juzacms:install
 ```
 
 ## Documentation
-View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/juzaweb/cms/5.x)
+View all [Juzaweb CMS documentation](https://juzaweb.com/documentation/juzaweb/cms/5.x)
 
 ## Contributing
 - Contributions are welcome, and are accepted via pull requests. Please review these guidelines before submitting any pull requests.
