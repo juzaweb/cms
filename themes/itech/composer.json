@@ -1,0 +1,33 @@
+{
+    "name": "juzaweb/itech",
+    "type": "juzaweb-theme",
+    "description": "Juzaweb CMS theme Itech",
+    "keywords": [],
+    "license": "MIT",
+    "homepage": "https://juzaweb.com",
+    "require": {
+        "php": "^8.2",
+        "juzaweb/ads-manager": "dev-master",
+        "juzaweb/blog": "dev-master",
+        "juzaweb/core": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Themes\\Itech\\": "src/",
+            "Juzaweb\\Themes\\Itech\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "sort-packages": true
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Juzaweb\\Themes\\Itech\\Tests\\": "tests/"
+        }
+    }
+}

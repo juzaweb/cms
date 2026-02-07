@@ -30,6 +30,7 @@
         "juzaweb/admin": "@dev",
         "juzaweb/blog": "dev-master",
         "juzaweb/core": "dev-master",
+        "juzaweb/itech": "dev-master",
         "juzaweb/installer": "dev-master",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",

@@ -1,0 +1,31 @@
+{
+    "name": "juzaweb/blog",
+    "description": "Juzaweb CMS Blog module",
+    "type": "juzaweb-module",
+    "keywords": [],
+    "license": "MIT",
+    "homepage": "https://cms.juzaweb.com",
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "juzaweb/core": "dev-master",
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\Modules\\Blog\\": "src/",
+            "Juzaweb\\Modules\\Blog\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Juzaweb\\Modules\\Blog\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "sort-packages": true
+    }
+}
