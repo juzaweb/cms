@@ -9,26 +9,9 @@
 
 namespace Juzaweb\Modules\Admin\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Notifications\Notifiable;
-use Juzaweb\Modules\Core\Models\Model;
-use Juzaweb\Modules\Core\Notifications\Traits\Subscriptable;
+use Juzaweb\Modules\Core\Models\Guest as CoreGuest;
 
-class Guest extends Model
+class Guest extends CoreGuest
 {
-    use HasUuids, Notifiable, Subscriptable;
-
-    protected $table = 'guests';
-
-    protected $fillable = [
-        'ipv4',
-        'ipv6',
-        'user_agent',
-        'name',
-        'email',
-    ];
-
-    protected $casts = [
-        'data' => 'array',
-    ];
+    //
 }
