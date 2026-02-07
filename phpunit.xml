@@ -6,12 +6,10 @@
 >
     <testsuites>
         <testsuite name="Unit">
-            <directory>modules/Admin/Tests/Unit</directory>
+            <directory>tests/Unit</directory>
         </testsuite>
         <testsuite name="Feature">
-            <directory>modules/Admin/Tests/Feature</directory>
-            <directory>themes/Itech/Tests/Feature</directory>
-            <directory>themes/Igame/Tests/Feature</directory>
+            <directory>tests/Feature</directory>
         </testsuite>
     </testsuites>
     <source>
