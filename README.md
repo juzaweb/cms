@@ -8,8 +8,8 @@ JUZAWEB CMS - Laravel CMS for Your Project
 [![GitHub followers](https://img.shields.io/github/followers/juzaweb?style=social)](https://github.com/juzaweb)
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCo6Dz9HjjBOJpgWsxkln0-A?style=social)](https://www.youtube.com/@juzaweb)
 
-- [JuzaWeb CMS](https://juzaweb.com) is a Content Management System (CMS) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again.
-- JuzaWeb CMS is a [Laravel CMS](https://juzaweb.com) was engineered to be easy — for both developers and users. Project develop by Juzaweb Team.
+- [JuzaWeb CMS](https://juzaweb.com/cms) is a Content Management System (CMS) like WordPress developed based on Laravel Framework 9 and web platform whose sole purpose is to make your development workflow simple again.
+- JuzaWeb CMS is a [Laravel CMS](https://juzaweb.com/cms) was engineered to be easy — for both developers and users. Project develop by Juzaweb Team.
 - Demo Site:
     - Frontend: https://cms.juzaweb.com
     - Admin:
@@ -56,7 +56,7 @@ php artisan juzacms:install
 ```
 
 ## Documentation
-View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cms/start/installation)
+View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/juzaweb/cms/5.x)
 
 ## Contributing
 - Contributions are welcome, and are accepted via pull requests. Please review these guidelines before submitting any pull requests.
@@ -109,25 +109,11 @@ View all [JuzaWeb CMS documentation](https://juzaweb.com/documentation/plugin/cm
   - [x] User api
   - [ ] Media api
 
-## Plugins
-* [Notification](https://github.com/juzaweb/notification)
-* [Movie](https://github.com/juzaweb/movie)
-* [Image Slider](https://github.com/juzaweb/image-slider)
-* [Ads Manager](https://github.com/juzaweb/ads-manager)
-* [Demo Site](https://github.com/juzaweb/demo-site)
-
-## Include Themes
-### Default
-### Gamxo
-
 ## Backend Javascript libraries
 - Jquery
 - Bootstrap 4
 - select2
 - font-awesome
-
-## Change Logs
-[https://juzaweb.com/documentation/changelog](https://juzaweb.com/documentation/changelog)
 
 ## Buy me coffee
 [![Juzaweb Buy me coffee](https://i.imgur.com/MAqboRu.png)](https://buymeacoffee.com/juzaweb)
