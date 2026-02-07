@@ -74,6 +74,14 @@ return [
             'visibility' => 'public',
             'url' => env('S3_CLOUD_URL'),
             'proxy_url' => env('S3_CLOUD_PROXY_URL'),
+            /**
+             * If enabled, media files will be served through a route in the application
+             * instead of directly from the cloud storage URL. This can be useful for
+             * handling access control, logging, or modifying the response.
+             *
+             * Default route: /media/{path}
+             */
+            'stream_route' => (bool) env('S3_CLOUD_STREAM_ROUTE', false),
         ],
 
         'private' => [
