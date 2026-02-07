@@ -32,6 +32,9 @@ jobs:
       run: |
         php artisan migrate
         touch storage/app/installed
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       env:
         DB_CONNECTION: sqlite
