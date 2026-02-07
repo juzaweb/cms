@@ -30,8 +30,8 @@
         "juzaweb/admin": "@dev",
         "juzaweb/blog": "dev-master",
         "juzaweb/core": "dev-master",
-        "juzaweb/itech": "dev-master",
         "juzaweb/installer": "dev-master",
+        "juzaweb/itech": "dev-master",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
@@ -117,6 +117,10 @@
             "options": {
                 "symlink": true
             }
+        },
+        {
+            "type": "composer",
+            "url": "https://juzaweb.com/api/repositories"
         }
     ]
 }
