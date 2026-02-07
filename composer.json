@@ -105,20 +105,6 @@
     "prefer-stable": true,
     "repositories": [
         {
-            "type": "path",
-            "url": "modules/*",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "themes/*",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
             "type": "composer",
             "url": "https://juzaweb.com/api/repositories"
         }
