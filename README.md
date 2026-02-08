@@ -1,4 +1,4 @@
-JUZAWEB CMS - Laravel CMS for Your Project
+Juzaweb CMS - Laravel CMS for Your Project
 =====================================
 
 ## About
@@ -43,40 +43,28 @@ php artisan juzaweb:install
 
 ## Features
 - [x] File manager
-- [x] Post Type support
-- [x] Taxonomy support
-- [x] Email service
-- [x] Email templates
-- [x] Email Log
 - [x] Plugins
 - [x] Themes
 - [x] Theme Widgets
 - [x] Menu builder by post type
 - [x] Logs view
-- [x] Added default theme
 - [x] Page block
-- [x] Permalinks
-- [x] Upload themes
-- [x] Upload plugins
-- [x] Per page paginate config
-- [x] **Network (multisite) support**
-- [x] Backup setting
-- [x] Seo setting
-  - Sitemap
-  - SEO content
-  - Feed
+- [ ] Upload themes
+- [ ] Upload plugins
+- [ ] **Network (multisite) support**
+- [ ] Backup setting
 - [x] Social login
   - [x] Google
   - [x] Facebook
   - [x] Tweater
   - [x] Github
   - [x] Instagram
-- [x] User Permission
-  - [x] Check permisson menu
-  - [x] Policies
+- [ ] User Permission
+  - [ ] Check permisson menu
+  - [ ] Policies
   - [ ] Check permisson button in views
 - [x] Media manager admin page
-- [x] Short Code
+- [ ] Short Code
 - [x] Add image from url
 - [ ] Quick edit
 - [ ] Preview post
