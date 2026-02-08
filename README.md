@@ -19,26 +19,6 @@ Find yourself stuck using the CMS? Found a bug? Do you have general questions or
 
 Video Tutorial: https://www.youtube.com/@juzaweb/videos
 
-## V4 Processing
-- [x] Convert modules to packages
-- [x] Compile plugin react with vite
-- [x] Install/Update plugin with composer
-- [x] Rename namespace CMS command
-- [x] Shortcode support
-- [x] Move Backup to plugin
-- [ ] Hook Action helpers
-- [ ] Install/Update Command
-- [ ] Install/Update Plugin Command
-- [ ] Install/Update Theme Command
-- [ ] Simplify controllers
-- [x] Move Seo to plugin
-- [x] Move translation to plugin
-- [ ] Notification channels support e-mail with custom template
-- [ ] Move Installer to package
-- [ ] Using Juzaweb-sdk for call remote Modules
-- [ ] Multisite using multiple database
-- [ ] Documentations
-
 ## Requirements
 - The modules package requires:
     - PHP 8.2 or higher
