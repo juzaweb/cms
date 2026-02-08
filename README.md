@@ -54,11 +54,8 @@ composer create-project --prefer-dist juzaweb/cms blog
 Config database in your `.env` file, and run:
 
 ```
-php artisan juzacms:install
+php artisan juzaweb:install
 ```
-
-## Documentation
-View all [Juzaweb CMS documentation](https://juzaweb.com/documentation/juzaweb/cms/5.x)
 
 ## Contributing
 - Contributions are welcome, and are accepted via pull requests. Please review these guidelines before submitting any pull requests.
@@ -105,11 +102,6 @@ View all [Juzaweb CMS documentation](https://juzaweb.com/documentation/juzaweb/c
 - [ ] Preview post
 - [ ] Activity logs
 - [ ] **Api Support**
-  - [x] Auth api
-  - [x] Post Type api
-  - [x] Taxonomy api
-  - [x] User api
-  - [ ] Media api
 
 ## Backend Javascript libraries
 - Jquery
