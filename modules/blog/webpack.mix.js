@@ -1,0 +1,1 @@
+require(`${__dirname}/assets/webpack.mix.js`);

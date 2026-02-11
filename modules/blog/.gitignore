@@ -1,7 +1,6 @@
-vendor/
-.phpunit.cache/
-phpunit.xml.bak
-.phpunit.result.cache
-storage/
+/vendor
+.phpunit.cache
 composer.lock
-node_modules/
+/node_modules
+.vscode
+.idea

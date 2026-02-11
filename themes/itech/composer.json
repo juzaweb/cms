@@ -7,9 +7,9 @@
     "homepage": "https://juzaweb.com",
     "require": {
         "php": "^8.2",
-        "juzaweb/ads-manager": "dev-master",
-        "juzaweb/blog": "dev-master",
-        "juzaweb/core": "dev-master"
+        "juzaweb/ads-manager": "^2.0",
+        "juzaweb/blog": "^1.0",
+        "juzaweb/core": "^5.0"
     },
     "autoload": {
         "psr-4": {

@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const path = require('path');
 require('laravel-mix-merge-manifest');
 
 mix.disableNotifications();
@@ -6,9 +7,9 @@ mix.version();
 
 mix.options({
     postCss: [
-        require('postcss-discard-comments') ({removeAll: true})
+        require('postcss-discard-comments')({ removeAll: true })
     ],
-    terser: {extractComments: false}
+    terser: { extractComments: false }
 });
 
 const baseAsset = path.relative(process.cwd(), __dirname);

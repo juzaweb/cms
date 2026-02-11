@@ -6,5 +6,9 @@
     "version": "1.0",
     "providers": [
         "Juzaweb\\Themes\\Itech\\Providers\\ThemeServiceProvider"
+    ],
+    "require": [
+        "Blog",
+        "AdManagement"
     ]
 }

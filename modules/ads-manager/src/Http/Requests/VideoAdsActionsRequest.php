@@ -11,7 +11,8 @@ namespace Juzaweb\Modules\AdsManagement\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Rules\AllExist;
+use Juzaweb\Modules\Core\Rules\AllExist;
+use Juzaweb\Modules\AdsManagement\Models\VideoAds;
 
 class VideoAdsActionsRequest extends FormRequest
 {

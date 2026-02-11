@@ -1,3 +1,21 @@
+### v1.0.1 
+* docs: improve README.md and fix composer dependencies
+* docs: improve README.md with detailed instructions
+* Replace AdsManager with AdManagement in theme.json
+* Add providers and require sections to theme.json
+* Update view name for page display
+* build: setup Node.js and Laravel Mix for front-end asset compilation.
+* Fix improper output encoding in comment list
+* perf: eager load and cache tags on post show page
+* Add rate limiting to comment submission route
+* Fix improper output encoding in comment list
+* Add tests for routes in src/routes/web.php and update test configuration.
+* truck: Update composer.lock
+* Add juzaweb/core and juzaweb/blog to requirements
+* Remove Unit test suite from phpunit.xml
+* Add tests for theme settings and GitHub Actions workflow
+* Add tests for theme settings routes
+
 ### v1.0.0 
 * Add mix-manifest.json for versioned asset management
 * Init tests for package

@@ -3,11 +3,13 @@
 namespace Juzaweb\Modules\AdsManagement\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Juzaweb\Modules\AdsManagement\Database\Factories\VideoAdsFactory;
 use Juzaweb\Modules\Core\Models\Model;
 
 class VideoAds extends Model
 {
-    use HasUuids;
+    use HasUuids, HasFactory;
 
     protected $table = 'video_ads';
 
@@ -31,6 +33,16 @@ class VideoAds extends Model
         'click' => 'integer',
         'offset' => 'integer',
     ];
+
+    protected static function newFactory(): VideoAdsFactory
+    {
+        return VideoAdsFactory::new();
+    }
+
+    public function bulkActions(): array
+    {
+        return ['delete', 'activate', 'deactivate'];
+    }
 
     public static function getFieldName(): string
     {
