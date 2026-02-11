@@ -52,7 +52,7 @@ php artisan juzaweb:install
 - [ ] Upload themes
 - [ ] Upload plugins
 - [ ] **Network (multisite) support**
-- [ ] Backup setting
+- [x] Multisite languages
 - [x] Social login
   - [x] Google
   - [x] Facebook
