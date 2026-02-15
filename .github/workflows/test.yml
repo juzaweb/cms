@@ -37,7 +37,6 @@ jobs:
       run: |
         php artisan migrate
         touch storage/app/installed
-        php artisan theme:publish itech
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
