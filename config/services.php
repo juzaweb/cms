@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'juzaweb' => [
+        'key' => env('JUZAWEB_API_KEY'),
+    ],
+
 ];
