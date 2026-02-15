@@ -31,7 +31,6 @@
         "juzaweb/blog": "^1.0",
         "juzaweb/core": "^5.0",
         "juzaweb/installer": "^1.0",
-        "juzaweb/itech": "^1.0",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
