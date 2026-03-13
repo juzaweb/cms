@@ -1,5 +1,0 @@
-@extends('[NAME]::layouts.main')
-
-@section('content')
-
-@endsection

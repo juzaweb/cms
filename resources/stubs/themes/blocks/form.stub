@@ -1,2 +1,0 @@
-
-{{ Field::text(__('Label'), "{$name}[label]", ['value' => data_get($data, 'label')]) }}

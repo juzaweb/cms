@@ -1,9 +1,0 @@
-{
-    "versions": {
-        "[VERSION]": {
-            "changed": [
-                "Initial release"
-            ]
-        }
-    }
-}
