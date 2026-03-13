@@ -34,7 +34,8 @@
         "laravel/framework": "^11.31",
         "laravel/passport": "*",
         "laravel/tinker": "^2.9",
-        "opcodesio/log-viewer": "^3.21"
+        "opcodesio/log-viewer": "^3.21",
+        "symfony/cache": "^6.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
