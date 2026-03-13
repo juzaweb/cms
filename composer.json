@@ -28,6 +28,7 @@
         "composer/installers": "^2.3",
         "firebase/php-jwt": "^6.0",
         "juzaweb/admin": "@dev",
+        "juzaweb/blog": "^1.0",
         "juzaweb/core": "^5.0",
         "juzaweb/installer": "^1.0",
         "laravel/framework": "^11.31",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "decbc2e6e6cc7a26d8f9d0466319d09e",
+    "content-hash": "856af694da09f63bc8f8aac06b9596ce",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -2701,6 +2701,49 @@
             "transport-options": {
                 "relative": true
             }
+        },
+        {
+            "name": "juzaweb/blog",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/juzaweb/blog.git",
+                "reference": "737352eab2ff7eb2c2ec2d6da9d4f65cabbb4bdb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/juzaweb/blog/zipball/737352eab2ff7eb2c2ec2d6da9d4f65cabbb4bdb",
+                "reference": "737352eab2ff7eb2c2ec2d6da9d4f65cabbb4bdb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "juzaweb/core": "^5.0",
+                "juzaweb/dev-tool": "dev-master",
+                "laravel/framework": "^11.0",
+                "orchestra/testbench": "^8.0|^9.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "juzaweb-module",
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\Modules\\Blog\\": "src/",
+                    "Juzaweb\\Modules\\Blog\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Juzaweb CMS Blog module",
+            "homepage": "https://juzaweb.com/cms",
+            "support": {
+                "issues": "https://github.com/juzaweb/blog/issues",
+                "source": "https://github.com/juzaweb/blog/tree/1.0.1"
+            },
+            "time": "2026-03-01T04:43:17+00:00"
         },
         {
             "name": "juzaweb/core",
