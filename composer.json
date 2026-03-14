@@ -32,7 +32,7 @@
         "juzaweb/core": "^5.0",
         "juzaweb/installer": "^1.0",
         "laravel/framework": "^11.31",
-        "laravel/passport": "*",
+        "laravel/passport": "^13.6",
         "laravel/tinker": "^2.9",
         "opcodesio/log-viewer": "^3.21",
         "symfony/cache": "^6.0"
