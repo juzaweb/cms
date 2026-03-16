@@ -8,6 +8,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(
         function (Middleware $middleware) {
             $middleware->alias([
+                'auth' => \Juzaweb\Modules\Core\Http\Middleware\Authenticate::class,
                 'verified' => \Juzaweb\Modules\Core\Http\Middleware\EnsureEmailIsVerified::class,
                 'captcha' => \Juzaweb\Modules\Core\Http\Middleware\Captcha::class,
                 'signed' => \Juzaweb\Modules\Core\Http\Middleware\ValidateSignature::class,
