@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-const JW_BASE_PATH = __DIR__ . '/..';
+const JW_BASE_PATH = __DIR__.'/..';
 
 // Determine if the application is in maintenance mode...
 if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {

@@ -1,6 +1,9 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use Juzaweb\Modules\Admin\Providers\AdminServiceProvider;
+
 return [
-    \Juzaweb\Modules\Admin\Providers\AdminServiceProvider::class,
-    \App\Providers\AppServiceProvider::class,
+    AdminServiceProvider::class,
+    AppServiceProvider::class,
 ];

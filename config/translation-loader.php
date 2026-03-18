@@ -1,5 +1,9 @@
 <?php
 
+use Juzaweb\Modules\Core\Translations\Models\LanguageLine;
+use Spatie\TranslationLoader\TranslationLoaderManager;
+use Spatie\TranslationLoader\TranslationLoaders\Db;
+
 return [
 
     /*
@@ -7,18 +11,18 @@ return [
      * the Spatie\TranslationLoader\TranslationLoaders\TranslationLoader-interface.
      */
     'translation_loaders' => [
-        Spatie\TranslationLoader\TranslationLoaders\Db::class,
+        Db::class,
     ],
 
     /*
      * This is the model used by the Db Translation loader. You can put any model here
      * that extends Spatie\TranslationLoader\LanguageLine.
      */
-    'model' => \Juzaweb\Modules\Core\Translations\Models\LanguageLine::class,
+    'model' => LanguageLine::class,
 
     /*
      * This is the translation manager which overrides the default Laravel `translation.loader`
      */
-    'translation_manager' => Spatie\TranslationLoader\TranslationLoaderManager::class,
+    'translation_manager' => TranslationLoaderManager::class,
 
 ];

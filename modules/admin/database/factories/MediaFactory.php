@@ -20,11 +20,11 @@ class MediaFactory extends Factory
      */
     public function definition(): array
     {
-        $filename = $this->faker->uuid() . '.jpg';
+        $filename = $this->faker->uuid().'.jpg';
 
         return [
             'name' => $filename,
-            'path' => 'tests/' . $filename,
+            'path' => 'tests/'.$filename,
             'mime_type' => 'image/jpeg',
             'size' => 102400, // 100KB
             'type' => 'file',

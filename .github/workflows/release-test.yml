@@ -19,6 +19,10 @@ jobs:
         php-version: ${{ matrix.php-version }}
     - name: Create Project
       run: composer create-project --prefer-dist juzaweb/cms blog
+    - name: Run Pint
+      working-directory: ./blog
+      run: vendor/bin/pint --test
+
     - name: Copy .env
       working-directory: ./blog
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
