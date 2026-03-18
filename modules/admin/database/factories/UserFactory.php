@@ -3,19 +3,20 @@
 namespace Juzaweb\Modules\Admin\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Juzaweb\Modules\Admin\Models\User;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Juzaweb\Modules\Admin\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string<\Illuminate\Database\Eloquent\Model>
+     * @var class-string<Model>
      */
     protected $model = User::class;
 
