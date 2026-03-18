@@ -1,5 +1,8 @@
 <?php
 
+use Juzaweb\Modules\Admin\Models\User;
+use Juzaweb\Modules\Core\Models\UserSocialConnection;
+
 return [
 
     /*
@@ -62,8 +65,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', \Juzaweb\Modules\Admin\Models\User::class),
-            'social_connection_model' => \Juzaweb\Modules\Core\Models\UserSocialConnection::class,
+            'model' => env('AUTH_MODEL', User::class),
+            'social_connection_model' => UserSocialConnection::class,
         ],
     ],
 

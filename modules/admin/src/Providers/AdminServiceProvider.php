@@ -1,10 +1,12 @@
 <?php
+
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/cms
  * @author     The Anh Dang
+ *
  * @link       https://cms.juzaweb.com
+ *
  * @license    GNU V2
  */
 
@@ -39,10 +41,10 @@ class AdminServiceProvider extends BaseAdminServiceProvider
     {
         $viewPath = resource_path('views/modules/admin');
 
-        $sourcePath = __DIR__ . '/../resources/views';
+        $sourcePath = __DIR__.'/../resources/views';
 
         $this->publishes([
-            $sourcePath => $viewPath
+            $sourcePath => $viewPath,
         ], ['views', 'admin-module-views']);
 
         $this->loadViewsFrom($sourcePath, 'admin');
