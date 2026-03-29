@@ -43,6 +43,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'juzaweb',
+            'provider' => 'users',
+        ],
     ],
 
     /*

@@ -49,6 +49,9 @@ return [
                 'annotations' => [
                     base_path('vendor/juzaweb/core/src'),
                     base_path('vendor/juzaweb/api/src'),
+                    base_path('vendor/juzaweb/contact/src'),
+                    base_path('modules/admin/src'),
+                    base_path('modules/image-proxy/src'),
                 ],
             ],
         ],
@@ -58,12 +61,12 @@ return [
             /*
              * Route for accessing parsed swagger annotations.
              */
-            'docs' => 'docs',
+            'docs' => 'api/docs',
 
             /*
              * Route for Oauth2 authentication callback.
              */
-            'oauth2_callback' => 'api/oauth2-callback',
+            'oauth2_callback' => 'callback',
 
             /*
              * Middleware allows to prevent unexpected access to API documentation
@@ -219,6 +222,28 @@ return [
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
                 */
+
+                'bearerAuth' => [ // Unique name of security
+                    'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'description' => 'Laravel passport oauth2 security.',
+                    'in' => 'header',
+                    'scheme' => 'https',
+                    'flows' => [
+                        'authorizationCode' => [
+                            'authorizationUrl' => config('app.url').'/oauth/authorize',
+                            'tokenUrl' => config('app.url').'/oauth/token',
+                            'refreshUrl' => config('app.url').'/oauth/token/refresh',
+                            'scopes' => [],
+                        ],
+                    ],
+                ],
+
+                'apiKey' => [ // Unique name of security
+                    'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'description' => 'A short description for security scheme',
+                    'name' => 'x-api-key', // The name of the header or query parameter to be used.
+                    'in' => 'header', // The location of the API key. Valid values are "query" or "header".
+                ],
             ],
             'security' => [
                 /*
