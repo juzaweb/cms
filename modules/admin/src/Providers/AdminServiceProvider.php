@@ -14,8 +14,10 @@ namespace Juzaweb\Modules\Admin\Providers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
+use Juzaweb\Modules\Admin\Models\Client;
 use Juzaweb\Modules\Admin\Models\User;
 use Juzaweb\Modules\Core\Providers\AdminServiceProvider as BaseAdminServiceProvider;
+use Laravel\Passport\Passport;
 
 class AdminServiceProvider extends BaseAdminServiceProvider
 {
@@ -28,6 +30,8 @@ class AdminServiceProvider extends BaseAdminServiceProvider
         Gate::define('viewLogViewer', function (?User $user) {
             return $user && $user->isSuperAdmin();
         });
+
+        Passport::useClientModel(Client::class);
     }
 
     public function register(): void
