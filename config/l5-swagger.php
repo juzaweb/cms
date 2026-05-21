@@ -49,9 +49,7 @@ return [
                 'annotations' => [
                     base_path('vendor/juzaweb/core/src'),
                     base_path('vendor/juzaweb/api/src'),
-                    base_path('vendor/juzaweb/contact/src'),
                     base_path('modules/admin/src'),
-                    base_path('modules/image-proxy/src'),
                 ],
             ],
         ],
